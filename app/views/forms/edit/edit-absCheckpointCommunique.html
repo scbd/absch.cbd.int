@@ -17,13 +17,14 @@
                 <i class="fa fa-spinner fa-spin"></i> Loading...
             </div>-->
 
+
             <div ng-show="!isLoading() && status!='hidden'">
-                <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="false" />
+                <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="false"></div>
 
                 <div km-document-validation ng-model="validationReport"></div>
                 <form class="editForm" name="editForm" style="margin-top:10px">
                     <div ng-show="tab=='edit'" km-tab="edit">
-                        <legend name="formInfo" style="display:none"></legend>
+                        <!--<legend name="formInfo" style="display:none"></legend>-->
                         <section>
                             <legend name="generalInfo">General information</legend>
                             <div class="row">
@@ -40,8 +41,8 @@
                                 <div class="col-xs-12">
                                     <div class="control-group">
                                         <div class="km-control-group" name="title" required caption="Title of this checkpoint communique">
+                                            <div class="help-info">This field serves as the title of the record, therefore it should be distinct and help to easily identify the record in the ABS Clearing-House.</div>
                                             <div km-textbox-ml ng-model="document.title" rows="1" placeholder="Title of this checkpoint communique" locales="document.header.languages"></div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -54,7 +55,8 @@
                                 <div class="col-xs-12">
                                     <div class="control-group">
                                         <div class="km-control-group" name="checkpoint" required caption="Checkpoint/s that collected or received the information">
-                                            
+                                            <div class="help-info"> In this field you can select from the existing ABS-CH records, the record of the checkpoint/s that collected or received the information.</div>
+
                                              <div document-selector ng-model="document.checkpointSelected"
                                                                question="checkpointSelected"
                                                                government="document.government"
@@ -71,6 +73,7 @@
 
                         <section>
                             <legend name="certificate">Details of the internationally recognized certificate of compliance</legend>
+                           
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="panel panel-default">
@@ -80,8 +83,8 @@
                                             </span>
                                         </div>
                                         <div class="panel-body panel-body-confidential" ng-class="{'disable':document.permitNotAvailable}">
-                                            <div class="km-control-group" style="margin-bottom:20px;" name="permit" required caption="Links to internationally recognized certificates of compliance (IRCC) that relate to this communiqué">
-                                                
+                                            <div class="km-control-group" style="margin-bottom:20px;" name="permit" required caption="Links to internationally recognized certificate(s) of compliance (IRCC) that relate to this communiqué">
+                                                  <div class="help-info">Here, the reference of the IRCC is to be included if a user of a genetic resource presented an IRCC to the checkpoint. Use the different filters or the unique identifier in the text field to search for the existing relevant IRCC. If the IRCC is not available you need to select the option “This information is not available” and the grey box below will be enabled.</div>
                                                 <div document-selector ng-model="document.permit"
                                                                         question="permit"
                                                                         schema="absPermit"
@@ -93,16 +96,18 @@
                                                 <!--<div existing-permit ng-model="document.permit" ng-disabled="isPermitNotAvailable()">-->
                                                 </div>
                                             </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            <br>
 
                             <div class="clearfix"></div>
+                            
                             <div ng-class="{'disable':!isPermitNotAvailable(), 'bg-white':isPermitNotAvailable() }" class="well no-shadow" style="padding-top:0;padding-bottom:0;">
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <h3>Information to be collected or received when the internationally recognized certificate of compliance is not available.</h3>
+                                        <h3>This section is required when the internationally recognized certificate of compliance is not available.</h3>
                                     </div>
                                 </div>
 
@@ -111,6 +116,7 @@
                                     <div class="col-xs-12">
                                         <div class="control-group">
                                             <div class="km-control-group" name="originCountries" required caption="Source of the genetic resource">
+                                                <div class="help-info">Select the country/ies which is /are the source of the genetic resource. The country/ies selected will be the ones receiving the CPC issued from the information registered.</div>
                                                 <div km-select required name="originCountries" ng-model="document.originCountries" multiple items="options.countries()" placeholder="Please select a country..."></div>
                                             </div>
                                         </div>
@@ -124,12 +130,12 @@
                                         <div class="km-control-group" name="subjectMatter" required caption="Subject-matter or genetic resources relevant to the information collected or received">
                                             <div class="help-block">Please provide details on the subject-matter or genetic resources relevant to the information collected or received by the checkpoint. This could include biota at any taxonomic rank, which may carry a taxonomic
                                                 name. It may also include a locality of collection of the material. It may also be possible to identify the genetic resource through reference to a voucher specimen or field notes held in an identified archive
-                                                or collection. Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</div>
+                                                or collection. </div>
                                             <div km-rich-textbox name="subjectMatter" rows="6" ng-model="document.subjectMatter" locales="document.header.languages"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="km-control-group" name="optionalSubjectMatterinfo" caption="Optional additional subject matter details">
+                                <div class="km-control-group" name="optionalSubjectMatterinfo" caption="Additional additional subject matter details">
                                     <span class="help-block">Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty</span>
                                     <div class="row">
                                         <div class="col-xs-12">
@@ -159,7 +165,8 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="keywords" caption="Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent">
-                                                <div km-select multiple required name="keywords" ng-model="document.keywords" items="options.keywords()"></div>
+                                                 <div class="help-info"></div>
+                                                <div km-select multiple show-description="true" required name="keywords" ng-model="document.keywords" items="options.keywords()"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -193,6 +200,7 @@
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="referenceOfInformedConsent" caption="Reference or evidence of prior informed consent (PIC)">
+                                             <div class="help-info">This field is to provide information on PIC. This includes information on any national reference or identifiers that may aid countries to search and retrieve information related to PIC, or the permit or its equivalent in their national files.</div>
                                             <div km-rich-textbox name="referenceOfInformedConsent" rows="4" ng-model="document.referenceOfInformedConsent" locales="document.header.languages"></div>
                                         </div>
                                     </div>
@@ -200,7 +208,6 @@
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="responsibleAuthorities" caption="Person or entity who granted prior informed consent (PIC)">
-
                                              <div document-selector ng-model="document.responsibleAuthorities"
                                                                         question="responsibleAuthorities"
                                                                         schema="contact"
@@ -216,7 +223,7 @@
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="personeToWhomGranted" caption="Person or entity to whom prior informed consent (PIC) was granted">
-                                            <span class="help-block">Please provide the contact details of the person or entity to whom prior informed consent was granted.</span>
+                                            <span class="help-info">Please provide the contact details of the person or entity to whom prior informed consent was granted.</span>
                                             <div document-selector ng-model="document.personeToWhomGranted"
                                                                         question="personeToWhomGranted"
                                                                         schema="contact"
@@ -231,7 +238,16 @@
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="referenceOfAgreedTerms" caption="Reference or evidence of establishment of mutually agreed terms (MAT)">
+                                           <div class="help-info">This field is to provide information on MAT. This includes information on any national reference or identifiers that may aid countries to search and retrieve information related to MAT, or the permit or its equivalent in their national files.</div>
                                             <div km-rich-textbox name="referenceOfAgreedTerms" rows="4" ng-model="document.referenceOfAgreedTerms" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-3">
+                                        <div class="km-control-group" name="dateOfAccess" caption="Date of access to the genetic resources">
+                                            <div km-date placeholder="YYYY-MM-DD" required name="dateOfAccess" ng-model="document.dateOfAccess"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -243,6 +259,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="description" caption="Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources, including  the type of use">
+                                        <div class="help-info">This could include information on utilization of genetic resources at, inter alia, any stage of research, development, innovation, pre-commercialization or commercialization. The information provided will allow the provider of the genetic resource to check whether the use of the genetic resource is in conformity with PIC and MAT and that benefits are shared in accordance with MAT.</div>
                                         <div km-rich-textbox name="description" rows="4" ng-model="document.description" locales="document.header.languages"></div>
                                     </div>
                                 </div>
@@ -251,6 +268,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" required name="geneticRessourceUsers" caption=" Person or entity making information available to the checkpoint on the utilization of the genetic resource ">
+                                        <div class="help-info">This information allows the provider of the genetic resource to check whether the person or entity to whom the PIC was granted is the same person or entity providing evidence of PIC and MAT at the checkpoint. In case of discrepancy, providers can verify information and conditions related to third party transfer.</div>
                                         <div document-selector ng-model="document.geneticRessourceUsers"
                                                                         question="geneticRessourceUsers"
                                                                         schema="contact"
@@ -284,12 +302,13 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="informationDocuments" caption="Upload relevant document">
+                                        <div class="help-info">An attachment is preferred. Otherwise, provide the location of the document, i.e. web address including the URL of the website (e.g. http://absch.cbd.int/) and the name of the website (e.g. “Access and Benefit-sharing  Clearing-House”.</div>
                                         <div km-link name="informationDocuments" ng-model="document.informationDocuments" identifier="document.header.identifier"></div>
                                     </div>
                                 </div>
                             </div>
                         </section>
-                    </div>
+                    
                         <section>
 
                             <legend>Additional Information</legend>
@@ -322,11 +341,10 @@
                                 </div>
                             </div>
                         </section>
-                    
+                    </div>
                 </form>
 
                 <div ng-show="tab=='review'" km-tab="review">
-
                     <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
                         <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
                     </div>
@@ -336,4 +354,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>
