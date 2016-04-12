@@ -439,12 +439,12 @@
 
                                      <div class="input-group col-xs-4"  name="question16.permitsOnAbsCh">
                                         <input ng-disabled="!isQ11Yes(document.question11.answer)" type="number" name="permitsOnAbsCh" class="form-control text-right" ng-model="document.question16.permitsOnAbsCh" min="0" ng-init="document.question16.permitsOnAbsCh=0">
-                                        &nbsp;<span class="label label-info" ng-if="recordsCount.ircc">
-                                            <i class="fa fa-info-circle color-white"/> No. of permits or their equivalents published
-                                            <span class="badge" style="padding-top: 1px;padding-bottom: 1px;">{{recordsCount.ircc}}</span>
-                                        </span>
+                                        
+                                        <div class="help-info color-blue bold" ng-if="recordsCount.ircc">
+                                           Currently you have <strong>{{recordsCount.ircc}} </strong> permits or their equivalents (IRCC) published in the ABS-CH.
+                                        </div>
                                     </div>
-
+                                 
                                     </div>
                                     <div class="km-control-group" name="question16FurtherInfo" caption="">
                                         Please provide further information
@@ -784,10 +784,11 @@
                                     </div>
                                     <div class="km-control-group row" name="question27_ccsOnAbsCh" caption="Please provide the number of checkpoint communiques available in the ABS Clearing-House, if applicable">
                                         <input class="col-xs-2" type="number" name="ccsOnAbsCh" class="form-control text-right" ng-model="document.question27.cpcsOnAbsChCount" min="0" ng-init="document.question27.cpcsOnAbsChCount=0">
-                                        &nbsp;<span class="label label-info" ng-if="recordsCount.cpc">
-                                            <i class="fa fa-info-circle color-white"/> No. of Checkpoint Communique published
-                                            <span class="badge" style="padding-top: 1px;padding-bottom: 1px;">{{recordsCount.cpc}}</span>
-                                        </span>
+                                        
+                                        <div class="help-info color-blue bold" ng-if="recordsCount.cpc">
+                                           Currently you have <strong>{{recordsCount.cpc}} </strong> Checkpoint Communiques published (CPC) published in the ABS-CH.
+                                        </div>
+                                        
                                     </div>
 
                                     <div class="km-control-group" name="q27relevantDocuments" caption="Any other relevant documents">
@@ -1538,6 +1539,7 @@
                                     <div class="row" ng-show="document.question54.answer">
                                         <div class="col-xs-10 col-xs-offset-1">
                                             <div class="km-control-group" ng-required="document.question54.answer" name="question54_measures" caption="Has your country taken measures to implement the awareness-raising strategy for the Nagoya Protocol on ABS?">
+                                               <div class="help-info">Adopted as descision NP-1/9</div>
                                                 <div class="km-yes-no" ng-required="document.question54.answer" name="question54_measures" ng-click="Q54Clear()" ng-model="document.question54.measures.answer"></div>
                                             </div>
                                             <div ng-show="document.question54.measures.answer" class="km-control-group" name="question54MeasuresFurtherInfo" caption="">
@@ -1579,6 +1581,7 @@
                                     <div class="row" ng-show="document.question55.answer">
                                         <div class="col-xs-10 col-xs-offset-1">
                                             <div class="km-control-group" name="question55_measures" caption="Has your country taken measures to implement the strategic framework for capacity-building and development to support effective implementation of the Nagoya Protocol on ABS? ">
+                                                <div class="help-info">Adopted as descision NP-1/8</div>
                                                 <div class="km-yes-no" name="question55_measures" ng-click="Q55Clear()" ng-model="document.question55.measures.answer"></div>
                                             </div>
                                             <div ng-show="document.question55.measures.answer" class="km-control-group" name="question55MeasuresFurtherInfo" caption="">
@@ -1838,6 +1841,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group"  name="question63"  bold="true" caption="65. Does your country have specific staff to administer functions directly related to the implementation of the Nagoya Protocol? ">
+                                        <div class="help-info">The collection of this information could be useful for the evaluation of the effectiveness of the Protocol under Article 31 on assessment and review as well as for measuring progress and identifying difficulties and challenges implementing the Protocol.</div>
                                         <div class="km-yes-no" name="question63" ng-model="document.question63.answer" ng-click="Q63Clear()"></div>
                                     </div>
 
