@@ -266,7 +266,10 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                     if(!measure)
                         return;
                     if($scope.type!='single'){
-                        _.each(measure.absMeasures, function(measureElement) {
+                        // if(measure.absMeasures.geneticResource) {
+                        //     newMeasureElement(measure.absMeasures.geneticResource, measure);
+                        // };
+                        _.each(measure.absMeasures.relevantElements, function(measureElement) {
                             newMeasureElement(measureElement, measure);
                         });
                     }
@@ -297,8 +300,13 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                 function newMeasureElement(measureElement, measure, type, parentMeasure){
                     var identifier = measureElement.identifier;
 
-                    if(measureElement.parent)
-                        identifier = identifier + '#' + measureElement.parent;
+                    if(measureElement.parent){
+                        if(measureElement.parent.indexOf('#') > 0)
+                            identifier = measureElement.parent;
+                        else
+                            identifier += '#' + measureElement.parent;
+                        // identifier = identifier + '#' + measureElement.parent;
+                    }
 
                     var element = _.findWhere($scope.terms, {'identifier': identifier});
 
