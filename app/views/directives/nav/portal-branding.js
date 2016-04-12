@@ -23,7 +23,7 @@ define(['app', 'underscore', ], function(app, _) {
                     $scope.development_env = false;
                     $scope.training_env = false;
 
-                    if ($location.absUrl().toLowerCase().indexOf("://dev-absch.cbd.int") > 0 || $location.absUrl().toLowerCase().indexOf("localhost:2010") > 0) {
+                    if ($location.absUrl().toLowerCase().indexOf("://absch.cbddev.xyz") > 0 || $location.absUrl().toLowerCase().indexOf("localhost:2010") > 0) {
                         $scope.development_env = true;
                         $scope.training_env = false;
                         $scope.production_env = false;
