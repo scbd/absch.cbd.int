@@ -48,6 +48,11 @@
             <span class="helpinfoInline" ng-show="type.abbreviation ==='CBI'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCBIInfo = !showCBIInfo"></i> 
             </span>
+            
+              <span class="helpinfoInline" ng-show="type.abbreviation ==='CON'" >
+                <i class="fa fa-info-circle helpicon pull-right" ng-click="showCONInfo = !showCONInfo"></i> 
+            </span>
+            
          
          </h3>
          
@@ -65,10 +70,24 @@
            </script>
          
          
+       
          <a class="pull-right well-help-close" 
-         ng-click="showCNAInfo=false;showCPPInfo=false;showA19A20Info=false;showVLRInfo=false;showIRCCInfo=false;showCPCInfo=false;showCPCInfo=false;showNDBInfo=false;showMSRInfo=false;showCNAInfo=false;"
-         ng-show="showCNAInfo     || showCPPInfo    || showA19A20Info    || showVLRInfo    || showIRCCInfo    || showCPCInfo    || showCPCInfo    || showNDBInfo    || showMSRInfo    || showCNAInfo"
+         ng-click="showCONInfo=false;showCNAInfo=false;showCPPInfo=false;showA19A20Info=false;showVLRInfo=false;showIRCCInfo=false;showCPCInfo=false;showCPCInfo=false;showNDBInfo=false;showMSRInfo=false;showCNAInfo=false;"
+         ng-show=" showCONInfo ||    showCNAInfo    || showCPPInfo    || showA19A20Info    || showVLRInfo    || showIRCCInfo    || showCPCInfo    || showCPCInfo    || showNDBInfo    || showMSRInfo    || showCNAInfo"
          >&times;</a>
+         
+         <!--CON---------------------------->
+         <div ng-if="showCONInfo" class="well well-help" >
+             
+             <h5> Introduction</h5>
+            <div>Many common formats include the possibility to add contact details for both individuals and organisations.  Through filling this form you can create a list of contacts which is shared and visible among all national users, similar to a national agenda, and that you can use in filling the common formats. When adding a contact to another common format, the list of contacts for your country will appear and you can select from it the relevant contact(s). In case that you want to include a new contact which is not currently in the list, you will need to save the form as a draft and go to the dashboard to create a new contact.</div>
+           <br>
+            <div>To avoid duplication in the submission of information, when you want to create contacts for several individuals working in the same organisation, you can first add the contact of the organisation, and then add the individual contact information and include a link to the record on the organisation.</div>
+            
+            <div ng-include="'defaultIntro'"></div>
+           
+         </div>
+         
          <!--CNA---------------------------->
          <div ng-if="showCNAInfo" class="well well-help" >
              
