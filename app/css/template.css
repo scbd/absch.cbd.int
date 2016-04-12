@@ -1578,3 +1578,9 @@ footer .logo {
    }
    
    legend + .help-info{position:relative; top:-15px;}
+   
+   .msr-table th{border-top:0;border-bottom:1px solid #999;color:#333;}
+   
+  .msr-table>tbody>tr>td, .msr-table>tbody>tr>th, .msr-table>tfoot>tr>td, .msr-table>tfoot>tr>th, .msr-table>thead>tr>td, .msr-table>thead>tr>th{
+      border-top:0;
+  }
