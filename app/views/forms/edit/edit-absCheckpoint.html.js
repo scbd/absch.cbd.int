@@ -62,7 +62,7 @@ define(['app', '/app/views/forms/edit/edit.js',
 
             return document &&
                 document.jurisdiction &&
-                document.jurisdiction.identifier == "DEEEDB35-A34B-4755-BF77-D713017195E3";
+                document.jurisdiction.identifier == "9627DF2B-FFAC-4F85-B075-AF783FF2A0B5";
         };
         //==================================
         //

@@ -51,12 +51,31 @@
             </span>
          
          </h3>
+         
+         
+         <script type="text/ng-template"  id="defaultIntro">
+           <h5> Introduction</h5>
+           <div>Please fill in the submission form and complete all fields following the instructions given. 
+                Certain fields are mandatory and indicated with an asterisk(*). The review of the form will highlight the mandatory fields that need 
+                to be filled before it is possible to publish the record. The record can be saved as a draft.
+                Frequently saving of records is recommended, especially in case of intermittent internet connections.
+		   </div>
+           <br>
+           <div>It is possible to introduce information one of the six offical UN languages. Select languages using the button located at the top left of the page and for each submission field, a text boxes will 
+                appear in the languages selected.</div>
+                <hr style="border-color:#ccc;margin-bottom:15px;">
+           </script>
+         
+         
          <a class="pull-right well-help-close" 
          ng-click="showCNAInfo=false;showCPPInfo=false;showA19A20Info=false;showVLRInfo=false;showIRCCInfo=false;showCPCInfo=false;showCPCInfo=false;showNDBInfo=false;showMSRInfo=false;showCNAInfo=false;"
          ng-show="showCNAInfo     || showCPPInfo    || showA19A20Info    || showVLRInfo    || showIRCCInfo    || showCPCInfo    || showCPCInfo    || showNDBInfo    || showMSRInfo    || showCNAInfo"
          >&times;</a>
          <!--CNA---------------------------->
          <div ng-if="showCNAInfo" class="well well-help" >
+             
+            <div ng-include="'defaultIntro'"></div>
+            
              
             <div>Article 13 of the Nagoya Protocol requires the designation of one or more competent national authorities (CNA) on access and benefit-sharing. This information shall be made available to the ABS Clearing-House in accordance with paragraph 2 (b) of Article 14 of the Protocol. Where a Party designates more than one competent national authority, it must provide relevant information on the respective responsibilities of those authorities to the Secretariat along with its notification designating the authority(ies).&nbsp;</div>
             <br>
@@ -65,6 +84,9 @@
         
          <!--MSR---------------------------->
          <div ng-if="showMSRInfo" class="well well-help" >
+             
+              <div ng-include="'defaultIntro'"></div>
+              
             <div>Article 14 paragraph 2 (a) of the Nagoya Protocol provides that Parties shall make available to the ABS Clearing-House
               information on legislative, administrative and policy measures on access and benefit-sharing.</div>
               <br>
@@ -86,22 +108,12 @@
          
           <!--NDB---------------------------->
          <div ng-if="showNDBInfo" class="well well-help" >
-            <div>Please fill in the submission form and complete all fields following the instructions given. 
-                Certain fields are mandatory. The review of the form will highlight those fields that need to be 
-                filled before it is possible to publish the record. The record can be saved as a draft. 
-                Frequently saving of records is recommended in the case of intermittent internet connections.</div>
-             <br>
-             <div>Once all mandatory fields have been filled out and the record is ready to be published, you can 
-                 review the form in its final version. If you are a national authorized user you can send it for 
-                 approval of the publishing authority. If you are the publishing authority you can publish the record immediately.</div>
-             <br>
-             <div>It is possible to introduce information in different languages. Select as many languages as you
-                  wish from the button located at the top left of the page and for each submission field, a text boxes
-                   will appear in the languages selected.</div>
+             <div ng-include="'defaultIntro'"></div>
          </div>
          
            <!--IRCC---------------------------->
          <div ng-if="showIRCCInfo" class="well well-help" >
+              <div ng-include="'defaultIntro'"></div>
             <div>Parties requiring prior informed consent (PIC) are to provide for the issuance of a permit or its equivalent
                  at the time of access as evidence of the decision to grant PIC and of the establishment of mutually agreed 
                  terms (MAT) (Article 3, paragraph 3(e)). This information is to be made available to the ABS Clearing-House 
@@ -155,6 +167,7 @@
          
            <!--CPC---------------------------->
          <div ng-if="showCPCInfo" class="well well-help" >
+              <div ng-include="'defaultIntro'"></div>
             <div>Checkpoints will collect and receive relevant information related to prior informed consent, to the source of 
                 the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic
                  resources (Article 17, paragraph 1 (a) (i)), including from the internationally recognized certificate of 
@@ -179,21 +192,26 @@
          
            <!--CP---------------------------->
          <div ng-if="showCPInfo" class="well well-help" >
+              <div ng-include="'defaultIntro'"></div>
             <div>The submission form is to be used for registering information on checkpoints designated under Article 17, paragraph 1 (a) of the Protocol. The role of checkpoints is to collect or receive, as appropriate, relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources (subparagraph i). Such information collected by the checkpoint needs to be provided to relevant national authorities, to the Party providing prior informed consent and to the ABS Clearing-House, as appropriate (subparagraph iii).</div>
          </div>
          
           <!--VLR---------------------------->
          <div ng-if="showVLRInfo" class="well well-help" >
+              <div ng-include="'defaultIntro'"></div>
+              
             <div>The Virtual Library of the ABS Clearing-House hosts a number of resources which are relevant to ABS 
                 and the Nagoya Protocol. This includes, among others, general literature on ABS and the Nagoya Protocol,
                  awareness-raising materials, case studies, videos, capacity-building resources, etc.</div>
             <br>
 		   <div>The Virtual Library can be a space where knowledge, lessons learned and best practices are shared to 
                support capacity-building for the effective implementation of the Nagoya Protocol.</div>
+               
          </div>
          
          <!--A19A20---------------------------->
          <div ng-if="showA19A20Info" class="well well-help" >
+              <div ng-include="'defaultIntro'"></div>
             <div>Articles 19 and 20 of the Protocol require each Party to encourage, as appropriate, the development, 
                 update and use of sectoral and cross-sectoral model contractual clauses for mutually agreed terms,
                  as well as voluntary codes of conduct, guidelines and best practices and/or standards in relation 
@@ -216,19 +234,12 @@
          
          <!--CPP---------------------------->
          <div ng-if="showCPPInfo" class="well well-help" >
-            <div>Please fill in the submission form and complete all fields following the instructions given. 
-                Certain fields are mandatory. The review of the form will highlight those fields that need 
-                to be filled before it is possible to publish the record. The record can be saved as a draft. 
-                Frequently saving of records is recommended in the case of intermittent internet connections.
-		   </div>
-           <br>
-           <div>It is possible to introduce information in different languages. Select as many languages as you wish
-                from the button located at the top left of the page and for each submission field, a text boxes will 
-                appear in the languages selected.</div>
+             <div ng-include="'defaultIntro'"></div>
          </div>
          
          <!--CBI---------------------------->
          <div ng-if="showCBIInfo" class="well well-help" >
+              <div ng-include="'defaultIntro'"></div>
             <div>Article 22 of the Nagoya Protocol provides that Parties shall cooperate in the capacity-building, capacity development and strengthening of human resources and institutional capacities to effectively implement the Protocol in developing country Parties, including existing global, regional, subregional and national institutions and organizations. In this context, Parties should also facilitate the involvement of indigenous and local communities and relevant stakeholders, including non-governmental organizations and the private sector.</div>
             <br>
             <div>Article 22, paragraph 6,  provides that information on capacity-building and development initiatives  at national, regional, international levels should be provided to the ABS Clearing-House with a view of promoting synergy and coordination on capacity-building and development for ABS.</div>
@@ -236,6 +247,8 @@
             <div>Having all information on capacity-building projects and initiatives available in one database can provide opportunities for coordination among actors involved in capacity-building in the same geographical area or covering similar thematic issues and to learn from each other experiences.  It can also help to identify and address gaps and overlaps in the coverage of capacity-building initiatives.</div>
             
          </div>
+         
+    
       
       </div>
   </div>

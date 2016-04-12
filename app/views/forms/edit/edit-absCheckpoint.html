@@ -47,6 +47,7 @@
                       <div class="row">
                           <div class="col-xs-12">
                                   <div class="km-control-group" name="name" required caption="Name of the checkpoint">
+                                      <div class="help-info">Bear in mind that the name of the checkpoint will help to identify the record in the ABS Clearing-House.</div>
                                       <div km-textbox-ml ng-model="document.name" rows="1" placeholder="" locales="document.header.languages"></div>
                                   </div>
                           </div>
@@ -56,9 +57,11 @@
                       <section>
 
                       <legend name="responsibilities–title">Responsibilities</legend>
+                      <div class="help-info">Article 17, paragraph 1 (a) (i) provides that designated checkpoints would collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, as appropriate; subparagraph (iv) provides that checkpoints should have functions relevant to the utilization of genetic resources, or to the collection of relevant information at, inter alia, any stage of research, development, innovation, pre commercialization or commercialization. </div>
                       <div class="row">
                           <div class="col-xs-12">
                               <div class="km-control-group" required name="responsibilities" caption="Short description of responsibilities">
+                                     <div class="help-info">A short description of the responsibilities of the checkpoint will help users of genetic resources and others to identify and clarify the role and functioning of the checkpoint in the collection of relevant information about the utilization of resources at, inter alia, any stage of research, development, innovation, pre-commercialization or commercialization. (maximum 300 characters)</div>
                                   <div km-rich-textbox name="responsibilities" rows="6" ng-model="document.responsibilities" locales="document.header.languages"></div>
                               </div>
                           </div>
@@ -66,6 +69,7 @@
                       <div class="row">
                           <div class="col-xs-12">
                                   <div class="km-control-group" name="jurisdiction" caption="Area of jurisdiction">
+                                      <div class="help-info">The information on the area of jurisdiction (national/federal, subnational, or community level) can help mapping different geographical responsibilities if there is more than one checkpoint.</div>
                                        <div afc-autocomplete name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" required></div>
                                   </div>
                           </div>
@@ -97,8 +101,16 @@
                       <section>
 
                       <legend name="nationalAuthorities">National authority/ies to receive the information collected or received by the designated checkpoint</legend>
-                       <div class="help-block">Please indicate to which national authority or contact person in your country you wish to send the information collected or received by the designated checkpoint. For multiple authorities, please include multiple record numbers or contact details forms. Please note that the Party providing prior informed consent will automatically receive the information collected or received by the checkpoint.</div>
-
+                      <div class="help-info">
+                          In accordance with Article 17, paragraph 1 (a) (i) and (iii), of the Nagoya Protocol, the information collected or received by the checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, including from the internationally recognized certificate of compliance, needs to be provided to relevant national authorities, to the Party providing prior informed consent and to the ABS Clearing-House, as appropriate. On the basis of the information provided, the ABS Clearing-House will issue a communiqué and automatically send a courtesy copy to the designated national authority/ies of your country.
+                         <br><br>
+                        Therefore, the contacts included in the following section on national authority/ies will be the ones to receive the information collected or received by the designated checkpoint (and communicated to the ABS Clearing-House through the checkpoint communique (CPC)). For multiple authorities, please include multiple record numbers or contact detail forms. Please note that the Party providing prior informed consent will automatically receive the information collected or received by the checkpoint.
+                        Please indicate to which national authority or contact person in your country you wish to send the information collected or received by the designated checkpoint. For multiple authorities, please include multiple record numbers or contact details forms. Please note that the Party providing prior informed consent will automatically receive the information collected or received by the checkpoint.
+                       
+                        </div>
+                      
+                      
+                      
 
                       <div class="row">
                           <div class="col-xs-12">
