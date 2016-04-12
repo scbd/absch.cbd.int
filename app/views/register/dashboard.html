@@ -10,7 +10,19 @@
         
         <!--help info---------------------------->
          <div ng-if="showInfo" class="well well-help" >
-             Dashboard help...
+            <div ng-if="user.government">
+            The Dashbaord allows registered ABS-CH users to find information about your CH account, your role and permissions in the ABS-CH. Here you can also update your profile or change your password.
+            This page also provides an overview of all the records prepared by the authorized users of your country and their different status: published, drafts and pending requests.  
+            Click on the category of record you wish to view for more details or add a new record.
+            <br><br>
+            Upon request a training site is also available to help ABS-CH users familiarize themselves with the functioning of the ABS-CH without altering the content of the official ABS-CH.
+            </div>
+            <div ng-if="!user.government">
+            The Dashbaord allows registered ABS-CH users to find information about your CH account, your role and permissions in the ABS-CH. Here you can also update your profile or change your password.   
+            This page also provides an overview of all your records their different status: published, drafts and pending requests.  Click on the category of record you wish to view for more details or add a new record.
+            Upon request a training site is also available to help ABS-CH users familiarize themselves with the functioning of the ABS-CH without altering the content of the official ABS-CH.
+            </div>
+             
          </div>
 
       </div>
