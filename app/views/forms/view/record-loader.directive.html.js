@@ -178,8 +178,8 @@ app.directive('recordLoader', [function () {
                     qDocumentInfo = storage.documents.get(identifier,{ info: true}).then(function(result) { return result.data || result });
 				}
 				else{
-					qDocument = storage.documentVersions.get(identifier,{'version':version}).then(function(result) { return result.data || result });
-                    qDocumentInfo = storage.documentVersions.get(identifier,{ info: true}).then(function(result) { return result.data || result });
+					qDocument = storage.documents.get(identifier + '@' + version).then(function(result) { return result.data || result });
+                    qDocumentInfo = storage.documents.get(identifier + '@' + version,{ info: true}).then(function(result) { return result.data || result });
 				}
 				$q.all([qDocument, qDocumentInfo]).then(function(results) {
 
