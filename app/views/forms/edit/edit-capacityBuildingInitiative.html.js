@@ -86,6 +86,8 @@ define(['app', '/app/views/forms/edit/edit.js', '../view/view-capacity-building-
         }
         return false;
     };
+    
+   
 
     //============================================================
     //
@@ -154,5 +156,7 @@ define(['app', '/app/views/forms/edit/edit.js', '../view/view-capacity-building-
       };
 
     $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});
+    $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
+    
   }]);
 });
