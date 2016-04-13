@@ -75,9 +75,9 @@
         font-weight:bold;
     }
 
-    .paddingleft3::before {
-     /*content: " - ";*/
-    }
+    /*.paddingleft3::before {
+     content: " - ";
+    }*/
 
     .paddingleft3percent {
         padding-left: 3%!important;
@@ -91,8 +91,9 @@
     }
 
     .paddingleft9 {
-        padding-left: 9%!important;
+        padding-left: 5%!important;
     }
+  
 
     .paddingleft12 {
         padding-left: 12%!important;
@@ -124,6 +125,10 @@
         font-weight:bold;
     }
     legend{font-size:16px;font-weight:bold;}
+    .paddingleft0{
+       background-color: #eee;
+        
+    }
 </style>
 <legend>
     {{title}}
@@ -235,7 +240,7 @@
             <tbody>
               <tr ng-repeat="element in otherElements">
                     <td>
-                        {{element.name|lstring}} ({{element.section|lstring}})
+                      - &nbsp; {{element.name|lstring}} ({{element.section|lstring}})
                     </td>
               </tr>
             </tbody>
@@ -245,9 +250,9 @@
     <script  type="text/ng-template"  id="/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement">
         <div ng-repeat="element in elements" style="padding-left:25px;">
             <span ng-repeat="area in element.types">
-                {{area|term}}<span ng-if="!$last">,</span>
+               - &nbsp; {{area|term}}<span ng-if="!$last">,</span>
               </span>
-              <span class="bold"> found in </span>
+              <span> <i>found in</i> </span>
               <span ng-repeat="area in element.areas">
                   {{area|term}} <span ng-if="!$last">,</span>
               </span>
