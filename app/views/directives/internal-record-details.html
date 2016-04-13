@@ -53,15 +53,12 @@
                                  <td class="bold"> {{getUserCountry(docInfo.metadata.government)}}</td>
                             </tr>
                             <tr>
-                                <td><label> Created by: </label></td>
-                                <td class="bold">
-                                    {{docInfo.createdBy.firstName}}  {{docInfo.createdBy.lastName}} 
-                                    (<a ng-href="mailto:{{docInfo.createdBy.email}}">{{docInfo.createdBy.email}} </a>)
-                                    <span class="unbold"> on </span>
-                                    {{docInfo.createdOn | formatDateWithTime}}
+                                <td><label> History:</label></td>
+                                <td>
+                                  <div view-history document-id="docInfo.identifier"></div>
                                 </td>
                             </tr>
-                            <tr ng-if="docInfo.revision > 0">
+                            <!--<tr ng-if="docInfo.revision > 0">
                                 <td><label>Last Published by: </label></td>
                                 <td class="bold">
                                     {{docInfo.updatedBy.firstName}}  {{docInfo.updatedBy.lastName}} 
@@ -69,7 +66,7 @@
                                     <span class="unbold"> on </span>
                                     {{docInfo.updatedOn | formatDateWithTime}}
                                 </td>
-                            </tr>
+                            </tr>-->
                     </table>
                 </div>
             </div>

@@ -1,4 +1,5 @@
-define(['app' , 'scbd-angularjs-services', 'scbd-angularjs-filters', 
+define(['app' , 'scbd-angularjs-services', 'scbd-angularjs-filters', 	'/app/views/forms/view/view-history-directive.html.js',
+
     ], function (app) {
 	app.directive('internalRecordDetails', function($http){
 		return{
