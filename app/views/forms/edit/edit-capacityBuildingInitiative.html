@@ -121,12 +121,15 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="km-control-group" required name="organizations" caption="Agency(ies) or organisation(s) implementing and/or executing the initiative">
-
+                                <div class="help-info">In some instances an agency could play both the implementing and executing roles. In those cases, please select both boxes.</div>
 								<div class="checkbox"><label><input type="checkbox" ng-model="document.isImplementedByAgencies">Implementing agency(ies) or organization(s)</label></div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="km-control-group" ng-show="document.isImplementedByAgencies" name="implementingAgencies" caption="Please select the implementing agency(ies) or organization(s)">
-                                            
+                                            <div class="help-info">Implementing agency refers to the organisation or legal entity responsible for developing the initiative and overseeing its
+                                                implementation, monitoring and evaluation, including making funding available, ensuring that fiduciary standards and quality
+                                                assurance are applied, and preparation of the project completion reports. The implementing agency is ultimately the entity
+                                                responsible for the completion of the initiative and is accountable to the donor.</div>
                                             <div document-selector ng-model="document.implementingAgencies"
                                                                         question="implementingAgencies"
                                                                         schema="contact"
@@ -143,7 +146,9 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="km-control-group" ng-show="document.isExecutededByAgencies" name="executingAgencies" caption="Please select the executing agency(ies) or organization(s)">
-                                            
+                                            <div class="help-info">Executing agency refers to the organisation/institution directly managing the initiative, including the day-to- day planning,
+                                            coordination and execution of its activities, monitoring and reporting on the progress made, procuring and managing resources
+                                            (staff, funds, equipment, etc.), and carrying out other project management functions.</div>
                                              <div document-selector ng-model="document.executingAgencies"
                                                                         question="executingAgencies"
                                                                         schema="contact"
@@ -160,7 +165,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="Please select the collaborating partner(s)">
-                                            
+                                            <div class="help-info">Collaborating partners refer to entities or organizations making significant financial or other contribution to the initiative and/or
+                                                    actively supporting or collaborating in the implementation of the initiative.</div>
                                              <div document-selector ng-model="document.collaboratingPartners"
                                                                         question="collaboratingPartners"
                                                                         schema="contact"
@@ -196,6 +202,10 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="km-control-group" required name="type" caption="Type of capacity-building initiative">
+                                    <div class="help-info">Select "Project/programme" if the entire project or programme is for building capacity in ABS.</div>
+                                     <div class="help-info">Select "Component" if the ABS-related activity/component is part of a broader non-ABS project (e.g. a protected area project withan ABS component or activity) and provide the title and further details about the broader project/initiative.
+</div>
+                                    <div class="help-info">Select "Stand-alone" if the activity is not part of a project or programme.</div>
 									<div km-select name="type" required ng-model="document.type" items="options.cbiTypes()"></div>
 								</div>
 							</div>
@@ -240,7 +250,11 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="km-control-group" required name="categories" caption="Category(ies) of capacity-building activities">
-									<div km-term-check show-description="true" name="categories" required ng-model="document.categories" terms="options.categories()" binding-type="term[]"></div>
+									<div class="help-info"> "Experiential learning" involves action learning through hands-on experience, observation, interaction and reflection. This can be achieved through on-the- job training (e.g. apprenticeships/internships, job-shadowing, mentoring, etc.), study tours, and staff exchange or twinning programmes.</div>
+                                    <div class="help-info">"Trainings" may include formal classroom-based, instructor-led training courses.</div>
+                                    <div class="help-info">"Workshops" may include general peer-to- peer exchange workshops, multi-stakeholder workshops or workshops for exchange of</div>
+                                    
+                                    <div km-term-check show-description="true" name="categories" required ng-model="document.categories" terms="options.categories()" binding-type="term[]"></div>
 								</div>
 							</div>
 						</div>
@@ -250,12 +264,14 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="km-control-group" required name="fundingSourceTypes" caption="Type(s) of funding source">
-									<div km-term-check show-description="true" name="fundingSourceTypes" required ng-model="document.fundingSourceTypes" terms="options.fundingSources()" binding-type="term[]"></div>
+                                    <div class="help-info">Self-funding may include funds obtained through crowd funding, membership fees, etc.</div>
+                                    <div km-term-check show-description="true" name="fundingSourceTypes" required ng-model="document.fundingSourceTypes" terms="options.fundingSources()" binding-type="term[]"></div>
 								</div>
 							</div>
 						</div>
 						<div class="row" ng-show="isSelfFunding()">
 							<div class="col-md-12">
+                                
 								<div class="km-control-group" required="isSelfFunding()" name="selfFunding" caption="Please provide further information on funding">
 									<div km-textbox-ml required="isSelfFunding()" rows="2" name="selfFunding" ng-model="document.selfFundingInfo" placeholder="" locales="document.header.languages"></div>
 								</div>
@@ -266,6 +282,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="km-control-group" name="corefundingsources" caption="Core funding-source(s)">
+                                   
                                       <div document-selector ng-model="document.coreFundingSources"
                                                                         question="coreFundingSources"
                                                                         schema="contact"
@@ -296,6 +313,7 @@
 						<div class="row">
 							<div class="col-md-3">
 								<div class="km-control-group" name="totalBudget" caption="Total budget (amount, in US dollars)">
+                                     <div class="help-info">This may include in kind contributions expressed in monetary terms.</div>
 									<!-- <div km-textbox-ml name="totalBudget" ng-model="document.totalBudget" rows="1" locales="document.header.languages"></div> -->
 									<div class="input-group">
 									  <span class="input-group-addon">USD$</span>
@@ -307,6 +325,7 @@
 
 
 						<legend>Capacity-building outcomes</legend>
+                        <div class="help-info">This information can be provided once that there are some results (outputs, outcomes or impacts) or best practices and lessons learned from the ongoing or completed initiative.</div>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="km-control-group" name="resultsAchievements" caption="Results: Main achievements">
@@ -359,6 +378,7 @@
 
 						<div class="row">
 							<div class="col-md-12">
+                                <div class="help-info">The key areas have been identified by the Strategic Framework for capacity-building and development to support the effective implementation of the Nagoya Protocol (decision NP-1/8).</div>
 								<div class="km-control-group" name="absKeyAreas" caption="Key areas and strategic measures for capacity-building and development">
 									<div km-term-check name="absKeyAreas" ng-model="document.absKeyAreas" terms="options.absKeyAreas()" binding-type="term[]"></div>
 								</div>
