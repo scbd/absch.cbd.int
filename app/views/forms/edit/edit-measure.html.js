@@ -1270,20 +1270,6 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         $scope.binding.relevantElements = oNewBinding;
                 }
 
-                function updateProperties(terms, level) {
-
-                    _.each(terms, function(term) {
-                        term.level = level;
-                        _.findWhere($scope.terms, {identifier:term.identifier}).level = level;
-                        //
-                        // var lbterm = _.findWhere($scope.terms, {identifier:_.first(term.broaderTerms)});
-                        // if(_.intersection(scopeofMeasureElements, _.pluck(term.broaderTerms,'identifier')).length > 0)
-                        //     scopeofMeasureElements.push(term.identifier);
-
-                        updateProperties(term.narrowerTerms, level + 1);
-                    });
-                }
-
                 $scope.updateSelected = function(term, answer, answerText){
                     if(term.narrowerTerms){
 
@@ -1362,7 +1348,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                             $scope.rootTerms = thesaurus.buildTree(refTerms);
                         else
                             $scope.rootTerms = Enumerable.from(refTerms).Select("o=>{identifier : o.identifier, name : o.name, title : o.title, description : o.description}").ToArray();
-                        updateProperties($scope.rootTerms, 1);
+
                     }
 
                     $scope.load();
