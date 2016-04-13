@@ -262,21 +262,25 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                     else $scope.error = error.data || "unkown error";
                 }
 
+                var grSubsetId;
+                var grCoverId
                 function addMeasureToElements(measure) {
                     if(!measure)
                         return;
                     if($scope.type!='single'){
                         if(measure.absMeasures.geneticResource) {
                             if(measure.absMeasures.geneticResource.answer){
-                                var id = addCustomElement('Covers all genetic resources', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1', 1);
+                                if(!grCoverId)
+                                    grCoverId = addCustomElement('Covers all genetic resources', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1', 1);
                                 var geneticResource = measure.absMeasures.geneticResource;
-                                newMeasureElement({identifier:id, section:geneticResource.section}, measure);
+                                newMeasureElement({identifier:grCoverId, section:geneticResource.section}, measure);
                             }
                             else{
+                                if(!grSubsetId)
+                                    grSubsetId = addCustomElement('Covers a subset of genetic resources', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1', 2);
 
-                                var id = addCustomElement('Covers a subset of genetic resources', '4E2974DF-216E-46C8-8797-8E3A3BLAISE1', 2);
                                 var geneticResource = measure.absMeasures.geneticResource;
-                                var identifier = newMeasureElement({identifier:id, section:{}}, measure);
+                                var identifier = newMeasureElement({identifier:grSubsetId, section:{}}, measure);
                                 grElement = _.findWhere($scope.terms, {'identifier': identifier});
                                 grElement.geneticResourcesTerms = measure.absMeasures.geneticResource.elements;
                             }
@@ -413,7 +417,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                     amendedForTitle='';
                                     _.each(doc.document.amendedMeasures, function(msr){
                                         var amendedFor = _.find($scope.document , function(measure){return measure.document.header.identifier== msr.identifier;});
-                                        amendedForTitle += amendedFor.title_t;
+                                        amendedForTitle += amendedFor.rec_title;
                                     });
                                 }
                                 term.sortOrder = getJurisdictionSortIndex(doc.document.jurisdiction.identifier);
@@ -444,11 +448,13 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         if(element.sort)
                             term.sortOrder = element.sort;
                         //special case for genetic resource
-                        if(term.identifier=='4E2974DF-216E-46C8-8797-8E3A3BLAISE1')
+                        if(term.identifier=='4E2974DF-216E-46C8-8797-8E3A3BLAISE1'){
                             term.isChildSelected = true;
+                            updateProperties(term.narrowerTerms, level + 1);
+                        }
                         else if (term.narrowerTerms) {
                                 term.isChildSelected = updateProperties(term.narrowerTerms, level + 1);
-                            }
+                        }
                         if(!term.isChildSelected) {
                             if($scope.sections[term.identifier])
                                 term.isChildSelected = true;
