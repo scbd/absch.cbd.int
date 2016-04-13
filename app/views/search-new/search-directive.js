@@ -169,6 +169,11 @@ define(['app', 'underscore', '/app/js/common.js',
                             termID = $scope.searchFilters[filterID].id;
                             var broader =  $scope.searchFilters[filterID].broader ;
                          }
+                        if(typeof doc ==='string') {
+                            filterID = doc;
+                            termID = $scope.searchFilters[filterID].id;
+                            var broader =  $scope.searchFilters[filterID].broader ;
+                         }
 
                         if($scope.setFilters[termID])
                            delete $scope.setFilters[termID];
@@ -987,6 +992,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     //===============================================================================================================================
                     loadFilters();
                     if($routeParams.recordType){
+                      
                         $scope.currentTab = $routeParams.recordType;
 
                         var query =  $location.search();
