@@ -80,9 +80,18 @@
 </div> <!-- records details-->
    
 <!--{{internalDocument}}-->
+
+
+<div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo && revisionNo != 'draft'">
+			<h3>
+                This document has been updated. This is not the latest published version.
+                <a ng-href="/database/record/{{internalDocument | uniqueID}}" target="new">Click here to view the latest record.</a>
+			</h3>
+		</div>
+
     
-	<div ng-show="!error && internalDocument">
-		<div style="float:right">
+	<div ng-show="!error && internalDocument && showDetails">
+		<div style="float:right; position:relative;top:1px;">
 			<div class="btn-group" ng-show="documentVersionCount>1">
 				<button type="button" class="btn btn-danger">Version {{revisionNo}}</button>
 				<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
@@ -95,17 +104,13 @@
 				</ul>
 			</div>
 		</div>
-		<div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo && revisionNo != 'draft'">
-			<h3>
-                This document has been updated. This is not the latest published version.
-                <a ng-href="/database/record/{{internalDocument.header.identifier}}" target="new">Click here to view the latest record.</a>
-			</h3>
-		</div>
+      </div>  
         
-       
+		
+        
 		<div id="schemaView" ng-show="internalDocument">
 
 		</div>
 
-	</div>
+	
 </div>

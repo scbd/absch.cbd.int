@@ -6,6 +6,7 @@ define(['app',
 	'/app/views/directives/help-directive.html.js',
     '/app/views/directives/internal-record-details.js',
     '/app/views/directives/party-status.js',
+    '/app/views/forms/view/view-default-reference.directive.js',
     '/app/views/forms/view/view-contact-reference.directive.js'
     ], function (app) {
 app.directive('recordLoader', [function () {
@@ -66,6 +67,10 @@ app.directive('recordLoader', [function () {
 				$scope.internalDocument = _new;
 				if($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)){
 					loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
+                    
+                    if($scope.showDetails){
+                        $scope.documentVersionCount = $scope.internalDocument.info.count;
+                    }
 				}
 			});
 
@@ -187,7 +192,7 @@ app.directive('recordLoader', [function () {
 					$scope.internalDocumentInfo = results[1];
 					$scope.internalDocument.info = results[1];
 
-					$scope.documentVersionCount = $scope.internalDocumentInfo.revision
+					$scope.documentVersionCount = $scope.internalDocumentInfo.revision || $scope.internalDocumentInfo.Count;
 
 					if(version && $scope.internalDocumentInfo.revision != version){
 						$scope.internalDocumentInfo.revision = version;

@@ -65,7 +65,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                             $scope.model=[];
 
                         if(!$scope.isInModel(doc.identifier_s))
-                            $scope.model.push({identifier: doc.identifier_s});
+                            $scope.model.push({identifier: doc.identifier_s +"@"+ doc._revision_i});
                     }
                     if(!doc.__checked && $scope.isInModel(doc.identifier_s)){
                         	$scope.removeDocument(doc)
@@ -103,6 +103,9 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 											return result.data || {};
 										});
 					})
+                    
+                    
+                    
                     if($scope.model.length === 0 )
                         $scope.model = undefined;
                 }
