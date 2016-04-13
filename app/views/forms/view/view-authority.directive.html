@@ -71,10 +71,7 @@
 				<label>Links to relevant legislative, administrative or policy measure(s) </label>
 					<ul class="km-value">
 						<li ng-repeat="item in absPolicyBasisForCompetencyRef" ng-show="item.document.title" >
-							<a target="_new_win" class="reflink" href="/database/{{item.document.header.schema}}/{{item.document.header.identifier}}"><strong>
-                                {{item.document.title | lstring}}
-                            </strong>
-							</a>
+						    <div view-default-reference ng-model="item.document" locale="locale"></div>
 						</li>
 					</ul>
 			</div>
