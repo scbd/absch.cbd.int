@@ -306,16 +306,16 @@ app.directive('recordLoader', [function () {
 				if(schema.toLowerCase() == 'modelcontractualclause' || schema.toLowerCase() == 'communityprotocol')
 					lschema = 'resource';
 
-				if(schema.toLowerCase() == 'nfp')
-					lschema = 'focalPoint'
+				if(_.contains(["NEWS", "NEW",], lschema.toUpperCase()))
+					lschema = lschema.toLowerCase();
+				else if(_.contains(["NFP", "ST", "NT", "MT", "PR", "MTD"], lschema.toUpperCase()))
+					lschema = $filter("mapSchema")(lschema);
+
 				var schemaDetails = schemaMapping[lschema.toLowerCase()];
 
 				require([schemaDetails], function() {
 
-					if(_.contains(["NEWS", "NEW",], lschema.toUpperCase()))
-						lschema = lschema.toLowerCase();
-					else if(_.contains(["NFP", "ST", "NT", "MT", "PR", "MTD"], lschema.toUpperCase()))
-						lschema = $filter("mapSchema")(lschema);
+
 
 					var name = snake_case(lschema);
 
