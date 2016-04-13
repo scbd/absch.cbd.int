@@ -28,11 +28,11 @@
                     </td>
                     <td style="margin-bottom:20px;" >
                         
-                        <div ng-if="doc.header.schema ==='contact' || doc.header.schema ==='authority'" class="km-value">
+                        <div ng-if="doc.header.schema ==='contact' || doc.header.schema ==='authority'" >
                              <div view-contact-reference ng-model="doc" locale="locale"></div>
                         </div>
                         
-                         <div ng-if="doc.header.schema === 'measure'" class="km-value">
+                         <div ng-if="doc.header.schema === 'measure'" >
                              <div view-default-reference ng-model="doc" locale="locale"></div>
                         </div>
                         

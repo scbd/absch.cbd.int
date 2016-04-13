@@ -1600,7 +1600,7 @@ footer .logo {
         }
         
         .selected-reference-uid{
-            font-size:16px;
+            font-size:14px;
             font-weight: 500;
             text-transform: uppercase;
             padding-right:5px;
@@ -1609,23 +1609,23 @@ footer .logo {
             
         }
         .selected-reference-name{
-            font-size:14px;
+            font-size:12px;
             font-weight: 500;
             /*text-transform: uppercase;*/
              padding-right:5px;
               padding-left:5px;
             border-right:1px solid #ddd;
-            color:#666;
+            color:#333;
              display:inline;
             
             
         }
         .selected-reference-title{
-            font-size:14px;
+            font-size:12px;
             font-weight: 500;
             /*text-transform: uppercase;*/
             padding-left:5px;
-            color:#666;
+            color:#333;
             display:inline;
             
             
