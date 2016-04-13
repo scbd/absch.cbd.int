@@ -79,9 +79,11 @@
      /*content: " - ";*/
     }
 
+    .paddingleft3percent {
+        padding-left: 3%!important;
+    }
     .paddingleft6 {
         padding-left: 6%!important;
-
     }
 
     .paddingleft6::before {
@@ -221,7 +223,7 @@
             <tr ng:if="!term.isChildSelected && term.level == 1" id="{{term.identifier}}">
                 <td class="matrixheaderColumn rightBorder subList1 cover50 noBottomBorder noTopBorder"
                 colspan="1" style="padding-top:0px;padding-bottom:0px">
-                    <span class="color-blue bold paddingleft3">No provisions for this element</span>
+                    <span class="color-blue bold" ng-class="{'paddingleft3percent':type=='multiple', 'paddingleft6':type!='multiple'}">No provisions for this element</span>
                 </td>
             </tr>
         </table>
