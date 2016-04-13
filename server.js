@@ -23,7 +23,7 @@ app.all('/app/*', function(req, res) { res.status(404).send(); } );
 app.get('/app/absPDFViewer/*'   , function(req, res) {
 	res.sendFile(__dirname + '/app/absPDFViewer/absPermitPrint.html');
 });
-
+// app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
 app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbddev.xyz:443', secure: false }));
 
 // Configure index.html
