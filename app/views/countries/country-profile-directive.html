@@ -59,7 +59,7 @@
                     <td >{{measure.rec_meta2[0]}}</td>
                     <td>{{measure.rec_meta3[0]}}</td>
                     <td>{{measure.rec_meta5[0]}}</td>
-                    <td>{{measure.rec_meta4[0]}}</td>
+                    <td>{{measure.rec_meta4[0]|formatDate}}</td>
                 </tr>
                  <tr>
                     <td class="bg-grey bold"><span class="badge">{{(measureMatrixDocuments|filter:{measureMatrix:true}).length}}</span></td>
