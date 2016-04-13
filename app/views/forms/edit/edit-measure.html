@@ -156,13 +156,16 @@
                     applies to a group of countries that is not covered by any of the existing groups, select each of the countries concerned by the
                     measure separately from the drop down menu.</div>
 
-
-
                   <div style="width:250px;" afc-autocomplete required name="jurisdiction"  ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Select area of jurisdiction..."></div>
+                  <div ng-if="isJurisdictionRegional()">
+                        <div class="color-red" ng-if="!document.government.identifier">Please first select a country.</div>
+                  </div>
+                  
                 </div>
               </div>
 
               <div class="col-xs-12">
+                   
                 <div ng-if="isJurisdictionRegional() && !canAddRegionalMeasure()">
                   <div class="alert alert-warning"><h4>Please contact the ABS-CH (absch@cbd.int) for authorization to add Regional or Multilateral ABS Measures.</h4></div>
                 </div>
