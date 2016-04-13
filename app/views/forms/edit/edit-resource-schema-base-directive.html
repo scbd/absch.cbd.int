@@ -186,7 +186,7 @@
 						</div>
 						<div class="row" ng-if="isResource">
 							<div class="col-md-12">
-								<div class="km-control-group" required name="aichiTargets" caption="Related Aichi target(s)">
+								<div class="km-control-group" required name="aichiTargets" caption="Related Aichi Target(s)">
 									<div km-term-check name="aichiTargets" required ng-model="document.aichiTargets" terms="options.aichiTargets()" binding-type="term[]"></div>
 								</div>
 							</div>
@@ -194,7 +194,7 @@
 					</section>
 					<section>
 
-						<legend>Keywords for facilitating online searches</legend>
+						<legend ng-if="IsCapacityBuilding() || IsLiterature() || isMcc">Keywords for facilitating online searches</legend>
 
                         <div class="row" ng-if="isMcc">
 							<div class="col-xs-12">
@@ -204,7 +204,7 @@
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row" ng-if="IsLiterature() && IsTarget16()">
 							<div class="col-xs-12">
 								<div class="km-control-group" required name="absSubjects" caption="Thematic areas(s)">
 									<div km-term-check name="absSubjects" required ng-model="document.absSubjects" terms="options.absSubjects()" binding-type="term[]"></div>
@@ -212,7 +212,7 @@
 							</div>
 						</div>
 
-						<div class="row" ng-if="isResource">
+						<div class="row" ng-if="IsCapacityBuilding() && IsTarget16()">
 							<div class="col-md-12">
 								<div class="km-control-group" name="absKeyAreas" caption="Key areas and strategic measures for capacity-building and development">
 									<div km-term-check name="absKeyAreas" ng-model="document.absKeyAreas" terms="options.absKeyAreas()" binding-type="term[]"></div>

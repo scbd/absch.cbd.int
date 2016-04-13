@@ -125,6 +125,38 @@ define(['app', 'underscore'], function (app, _) {
 			               _.contains(purposes, '9F48AEA0-EE28-4B6F-AB91-E0E088A8C6B7') || // Raising awareness
 			               _.contains(purposes, '5831C357-95CA-4F09-963B-DF9E8AFD8C88');   // Training/learning
 			    };
+                
+                //============================================================
+				//
+				//============================================================
+			    $scope.IsLiterature = function(document) {
+
+			        document = document || $scope.document;
+
+			        if (!document || !document.purpose)
+			            return false;
+
+			        var purposes = _.map(document.purpose, 'identifier');
+
+			        return _.contains(purposes, 'C1B32F41-89D1-4EDC-8EF2-335362B91F8D'); // Literature
+
+			    };
+                
+                //============================================================
+				//
+				//============================================================
+			    $scope.IsTarget16 = function(document) {
+
+			        document = document || $scope.document;
+
+			        if (!document || !document.aichiTargets)
+			            return false;
+
+			        var aichiTargets = _.map(document.aichiTargets, 'identifier');
+
+			        return _.contains(aichiTargets, 'AICHI-TARGET-16');
+
+			    };
 
 				//============================================================
 				//
