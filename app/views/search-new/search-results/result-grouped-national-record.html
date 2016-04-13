@@ -6,7 +6,7 @@
     <record-viewer ng-if="showDoc" doc-id='doc.identifier_s' doc-schema='doc.schema_s' class="card card-3"></record-viewer>
 
     <div class="recordDefault nationalRecords card card-1" style="margin-bottom:10px;" ng-show="!showDoc" ng-click="showDoc=!showDoc">
-        
+
         <div class="type color-blue">{{doc.rec_type ? doc.rec_type : (doc.schema_s | schemaShortName) }}</div>
         <div class="title">{{doc.rec_title}}</div>
         <span class="description hidden-xs descriptionSpan">
@@ -31,6 +31,12 @@
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta3" id="meta3">
                 <span  ng-repeat="meta in doc.rec_meta3" ng-class="{'color-red':meta==='Revoked'}">{{meta}}{{$last ? '':', '}}</span>
+            </li>
+            <li class="hidden-xs" ng-if="doc.rec_meta5" id="meta5">
+                <span ng-repeat="meta in doc.rec_meta5">{{meta}}</span>
+            </li>
+            <li class="hidden-xs" ng-if="doc.rec_meta4" id="meta4">
+                <span  ng-repeat="meta in doc.rec_meta4">{{meta}}</span>
             </li>
             <li>
                 <span class="last-span color-blue">{{doc.rec_date | formatDate}}</span>

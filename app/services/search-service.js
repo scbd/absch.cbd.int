@@ -4,16 +4,16 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
         function($http, $q, realm, localStorageService, appConfigService) {
             return new function() {
 
-                var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, schemaSort_i, sort1_s, sort2_s, sort3_s,';
-                var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt';
+                var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, schemaSort_i, sort1_s, sort2_s, sort3_s, sort4_s,';
+                var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
 
                 var searchDefaults = {
                     currentPage: 0,
                     rowsPerPage: 25,
-                    sort: 'government_EN_t asc, schemaSort_i asc, sort1_s asc, sort2_s asc, sort3_s asc, updatedDate_dt desc',
+                    sort: 'government_EN_t asc, schemaSort_i asc, sort1_s asc, sort2_s asc, sort3_s asc, sort4_s asc, updatedDate_dt desc',
                     fields: base_fields + en_fields,
                     query: '*:*',
-                    groupSort: 'government_EN_t asc, schemaSort_i asc, sort1_s asc, sort2_s asc, sort3_s asc, updatedDate_dt desc',
+                    groupSort: 'government_EN_t asc, schemaSort_i asc, sort1_s asc, sort2_s asc, sort3_s asc, sort4_s asc, updatedDate_dt desc',
                     groupField: 'government_s',
                     groupLimit: 1000
                 }
