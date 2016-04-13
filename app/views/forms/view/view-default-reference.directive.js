@@ -41,8 +41,17 @@ app.directive("viewDefaultReference", [function () {
                    return uid;
                    
                }
-            
-            
+               
+               $scope.getUniqueIDLink = function(doc){
+                   var uidRev =$filter('uniqueID')(doc.header.identifier);
+                   var uid =$filter('uniqueIDWithoutRevision')(doc.header.identifier);
+                   var rev = uidRev.substring(uid.length+1);
+                   
+                   if(!uid)
+                    return uidRev;   
+                   
+                   return uid + "/" + rev  ;
+               }
             
             
 		 }] //controller

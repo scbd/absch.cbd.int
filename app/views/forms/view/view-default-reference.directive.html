@@ -1,5 +1,9 @@
 ﻿<div style="margin-top:7px;">
-    <div class="selected-reference-uid">{{getUniqueID(model)}} </div> 
+  
+    <div class="selected-reference-uid">
+        <a ng-href="/database/{{model.header.schema | schemaShortName}}/{{getUniqueIDLink(model)}}" target="_new"><i class="fa fa-external-link-square" aria-hidden="true"></i> {{getUniqueID(model)}}</a></div> 
     <div class="selected-reference-name">{{model.header.schema | schemaName}} </div> 
     <div class="selected-reference-title">{{model.title | lstring:locale}} </div> 
+    
+    {{model}}
 </div>
