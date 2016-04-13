@@ -28,15 +28,13 @@
 			<div class="km-value km-pre"ng-bind-html="document.description | lstring:local"></div>
 		</div>
 
-
-
-			<div ng-show="document.jurisdiction">
-				<label>Jurisdiction(s)</label>
-				<div class="km-value">
-					{{document.jurisdiction|term}}
-					<span ng-if="document.jurisdictionName ">({{document.jurisdictionName | lstring:locale}})</span>
-				</div>
+		<div ng-show="document.jurisdiction">
+			<label>Jurisdiction(s)</label>
+			<div class="km-value">
+				{{document.jurisdiction|term}}
+				<span ng-if="document.jurisdictionName ">({{document.jurisdictionName | lstring:locale}})</span>
 			</div>
+		</div>
 
 
 		<div ng-show="document.jurisdictionRegions">
@@ -84,6 +82,12 @@
 			</div>
 		</div>
 
+		<div ng-show="document.isModelContractualClause">
+			<label>The measure contains model contractual clauses</label>
+			<div class="km-value">
+				{{document.isModelContractualClauseDescription|lstring}}
+			</div>
+		</div>
 		<!-- <div ng-show="registeredMeasures">
 			<label>Related measures</label>
 			<div class="reference-select">
@@ -232,6 +236,6 @@
 			</div>
 		</div>
 	</div>
-    
+
     <div document-metadata  class="panel-footer"></div>
 </div>
