@@ -3,21 +3,21 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
     app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 'localStorageService', 'Thesaurus',
         function($http, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus) {
             return new function() {
-                
-                
+
+
                 //==================================================================================
                 this.getReferenceRecordIndex = function(schema, documentId) {
 
                     var item = [];
                     var queryFields = 'fl=id,identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
 
-                    if (schema.toUpperCase() == "FOCALPOINT") {
+                    if (schema.toUpperCase() == "FOCALPOINT" || schema.toUpperCase() == "NFP") {
                         queryFields += 'description_EN_t,government_s,government_EN_t,organization_EN_t,function_EN_t,department_EN_t,title_EN_t,treaty_CEN_ss,type_CEN_ss,email_ss,telephone_s,ctgList_ss,fax_ss';
-                    } else if (schema.toUpperCase() == "MEETING") {
+                    } else if (schema.toUpperCase() == "MEETING" || schema.toUpperCase() == "MT") {
                         queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
-                    } else if (schema.toUpperCase() == "NOTIFICATION") {
+                    } else if (schema.toUpperCase() == "NOTIFICATION" || schema.toUpperCase() == "NT") {
                         queryFields += 'date_s,deadline_s,symbol_s,reference_s,sender_s,schema_CEN_s,title_EN_t,description_EN_t,recipient_ss,url_ss,text_EN_txt';
-                    } else if (schema.toUpperCase() == "PRESSRELEASE" || schema.toUpperCase() == "STATEMENT" || schema.toUpperCase() == "NEWS"|| schema.toUpperCase() == "NEW") {
+                    } else if (_.contains(["pressrelease", "statement", "news", "new", "pr", "st", "news", "new"], schema.toLowerCase())) {
                         queryFields += 'date_s,symbol_s,schema_CEN_s,title_EN_t,description_EN_t,themes_CEN_ss,url_ss,thematicAreas_CEN_ss,text_EN_txt';
                     }
 
@@ -161,14 +161,13 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                 //==================================================================================
                 this.integerToHex = function(d, schema) {
                     var schemaCode = '';
-                    if (schema.toLowerCase() == "pressrelease" || schema.toLowerCase() == "statement"
-                    || schema.toLowerCase() == "news"|| schema.toLowerCase() == "new")
+                    if (_.contains(["pressrelease", "statement", "news", "new", "pr", "st", "news", "new"], schema.toLowerCase()))
                         schemaCode = "52000000cbd0180000000000";
-                    else if (schema.toLowerCase() == "notification")
+                    else if (schema.toLowerCase() == "notification" || schema.toLowerCase() == "nt")
                         schemaCode = "52000000cbd0120000000000";
-                    else if (schema.toLowerCase() == "meeting")
+                    else if (schema.toLowerCase() == "meeting" || schema.toLowerCase() == "mt")
                         schemaCode = "52000000cbd0050000000000";
-                    else if (schema.toLowerCase() == "focalpoint")
+                    else if (schema.toLowerCase() == "focalpoint" || schema.toLowerCase() == "nfp")
                         schemaCode = "52000000cbd0220000000000";
 
                     if (schemaCode == '')
@@ -269,7 +268,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                 this.getRegions = function(){
 
                     return $http.get('/api/v2013/thesaurus/domains/regions/terms').then(function (response) {
-                        
+
                         var termsTree = thesaurus.buildTree(response.data);
                         var classes   = _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
 
@@ -277,7 +276,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                     });
 
                 }
-                
+
                 //==================================================================================
                 this.getThematicAreas= function(){
                      return $http.get('/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms').then(function (response) {
@@ -299,7 +298,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
-                
+
                 //==================================================================================
                 this.getJurisdictions= function(){
                      return $http.get('/api/v2013/thesaurus/domains/4D4413D8-36F9-4CD2-8CC1-4F3C866DDE5A/terms').then(function (response) {
@@ -307,7 +306,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
-                
+
                  //==================================================================================
                 this.getMSR_jurisdictions= function(){
                      return $http.get('/api/v2013/thesaurus/domains/7A56954F-7430-4B8B-B733-54B8A5E7FF40/terms').then(function (response) {
@@ -322,7 +321,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
-                
+
                  //==================================================================================
                 this.getMSR_elements= function(){
                       return $http.get('/api/v2013/thesaurus/domains/50616B56-12F3-4C46-BC43-2DFC26679177/terms').then(function (response) {
@@ -330,7 +329,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
-                
+
                   //==================================================================================
                 this.getMSR_status= function(){
                      return $http.get('/api/v2013/thesaurus/domains/ED7CDBD8-7762-4A84-82DD-30C01458A799/terms').then(function (response) {
@@ -345,7 +344,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
-                
+
                  //==================================================================================
                 this.getCNA_scope= function(){
                      return $http.get('/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms').then(function (response) {
@@ -353,7 +352,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
-                
+
                  //==================================================================================
                 // this.getIRCC_use= function(){
                 //      return $http.get('/api/v2013/thesaurus/domains/A7B77788-8C90-4849-9327-E181E9522F3A/terms').then(function (response) {
@@ -361,7 +360,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                 //         return response.data;
                 //     });
                 // }
-                
+
                  //==================================================================================
                 this.getMCC_keywords= function(){
                      return $http.get('/api/v2013/thesaurus/domains/ABS-A1920-Keywords/terms').then(function (response) {
@@ -390,7 +389,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
-                
+
                   //==================================================================================
                 // this.getCBI_cats1= function(){
                 //      return $http.get('/api/v2013/thesaurus/domains/7178400C-B8A6-4794-B363-0366FD324DA7/terms').then(function (response) {
@@ -398,7 +397,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                 //         return response.data;
                 //     });
                 // }
-                
+
                   //==================================================================================
                 this.getCBI_trainingTypes= function(){
                      return $http.get('/api/v2013/thesaurus/domains/D6E6A4AA-8B88-4AE9-AF5C-9CB852FFE4DC/terms').then(function (response) {
@@ -406,22 +405,22 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
-                
+
                  //==================================================================================
                 this.getCBI_audience= function(){
                      return $http.get('/api/v2013/thesaurus/domains/AFB155C4-93A6-402C-B812-CFC7488ED651/terms').then(function (response) {
                         return response.data;
                     });
                 }
-                
+
                  //==================================================================================
                 this.getCBI_fundingsrc= function(){
                      return $http.get('/api/v2013/thesaurus/domains/Capacity Building Project Funding Types/terms').then(function (response) {
                         return response.data;
                     });
                 }
-                
-                
+
+
                  //==================================================================================
                 this.getCBI_status= function(){
                      return $http.get('/api/v2013/thesaurus/domains/4E7731C7-791E-46E9-A579-7272AF261FED/terms').then(function (response) {
@@ -436,7 +435,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
-                
+
                 //  //==================================================================================
                 // this.getCBR_target= function(){
                 //      return $http.get('/api/v2013/thesaurus/domains/AFB155C4-93A6-402C-B812-CFC7488ED651/terms').then(function (response) {
@@ -451,7 +450,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
-                
+
                  //==================================================================================
                 this.getCBR_formats= function(){
                      return $http.get('/api/v2013/thesaurus/domains/D2D97AB3-4D20-41D4-8CBE-B21C33924823/terms').then(function (response) {
@@ -459,7 +458,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
-                
+
                  //==================================================================================
                 this.getCPP_types= function(){
                      return $http.get('/api/v2013/thesaurus/domains/ED9BE33E-B754-4E31-A513-002316D0D602/terms').then(function (response) {
@@ -474,9 +473,9 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
-                
-               
-                
+
+
+
                  //==================================================================================
                 this.getAichiTargets= function(){
                      return $http.get('/api/v2013/thesaurus/domains/AICHI-TARGETS/terms').then(function (response) {
@@ -484,30 +483,30 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         return response.data;
                     });
                 }
-                
-               
-                
-                
+
+
+
+
                 // //==================================================================================
                 // this.getAllKeywords = function(){
 
-                   
+
                 //     var termsTree;
                 //      retrun $http.get('/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms').then(function (response) {
                 //         var termsTree = thesaurus.buildTree(response.data);
                 //         return  _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
                 //     });
-                    
+
                 //     //ABS key areas
                 //      keywords['keyAreas'] =  $http.get('/api/v2013/thesaurus/domains/2B2A5166-F949-4B1E-888F-A7976E76320B/terms').then(function (response) {
                 //         termsTree = thesaurus.buildTree(response.data);
                 //         return _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
                 //     });
-                    
+
                 //     return  keywords;
 
                 // }
-                
+
                 //==================================================================================
                 this.getAllKeywords = function(){
 
@@ -515,27 +514,27 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                     var thematicAreas;
                     var keyAreas;
                     var termsTree;
-                    
+
                     //ABS thematic areas
                    keywords['thematicAreas'] =  $http.get('/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms').then(function (response) {
                         termsTree = thesaurus.buildTree(response.data);
                         return  _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
                     });
-                    
+
                     //ABS key areas
                      keywords['keyAreas'] =  $http.get('/api/v2013/thesaurus/domains/2B2A5166-F949-4B1E-888F-A7976E76320B/terms').then(function (response) {
                         termsTree = thesaurus.buildTree(response.data);
                         return _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
                     });
-                    
+
                     return  keywords;
 
                 }
-                
-               
-                
-                
-                
+
+
+
+
+
                 //==================================================================================
                 function flatten(items, collection) {
                     items.forEach(function (item) {

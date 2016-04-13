@@ -22,7 +22,7 @@ app.directive('recordLoader', [function () {
             showDetails: "="
 		},
 		link: function($scope) {
-            
+
             if(!$scope.linkTarget || $scope.linkTarget == '')
 				$scope.linkTarget = '_new';
 			//debugger;
@@ -38,27 +38,27 @@ app.directive('recordLoader', [function () {
 				commonjs,$timeout, $filter, $http, $httpAWS, realm, $element, $compile) {
 				var schemaMapping = {
 					news 				       : '/app/views/forms/view/view-news.directive.html.js',
-					absNationalReport 	       : '/app/views/forms/view/view-abs-national-report.directive.js',
-					absCheckpoint		       : '/app/views/forms/view/view-abs-checkpoint.directive.js',
-				    absCheckpointCommunique    : '/app/views/forms/view/view-abs-checkpoint-communique.directive.js',
-				    absPermit			       : '/app/views/forms/view/view-abs-permit.directive.js',
+					absnationalreport 	       : '/app/views/forms/view/view-abs-national-report.directive.js',
+					abscheckpoint		       : '/app/views/forms/view/view-abs-checkpoint.directive.js',
+				    abscheckpointcommunique    : '/app/views/forms/view/view-abs-checkpoint-communique.directive.js',
+				    abspermit			       : '/app/views/forms/view/view-abs-permit.directive.js',
 				    authority			       : '/app/views/forms/view/view-authority.directive.js',
-				    authorityReference	       : '/app/views/forms/view/view-authority-reference.directive.js',
+				    authorityreference	       : '/app/views/forms/view/view-authority-reference.directive.js',
 				    contact				       : '/app/views/forms/view/view-contact.directive.js',
-				    contactReference	       : '/app/views/forms/view/view-contact-reference.directive.js',
+				    contactreference	       : '/app/views/forms/view/view-contact-reference.directive.js',
 				    database			       : '/app/views/forms/view/view-database.directive.js',
 				    measure				       : '/app/views/forms/view/view-measure.directive.js',
 				    organization		       : '/app/views/forms/view/view-organization.directive.js',
-				    organizationReference      : '/app/views/forms/view/view-organization-reference.directive.js',
+				    organizationreference      : '/app/views/forms/view/view-organization-reference.directive.js',
 				    resource			       : '/app/views/forms/view/view-resource.directive.js',
-				    focalPoint			       : '/app/views/forms/view/view-focalpoint.directive.html.js',
+				    focalpoint			       : '/app/views/forms/view/view-focalpoint.directive.html.js',
 				    meeting				       : '/app/views/forms/view/view-meeting.directive.html.js',
 				    statement			       : '/app/views/forms/view/view-statement.directive.html.js',
-				    pressRelease		       : '/app/views/forms/view/view-pressrelease.directive.html.js',
+				    pressrelease		       : '/app/views/forms/view/view-pressrelease.directive.html.js',
 				    new					       : '/app/views/forms/view/view-new.directive.html.js',
 				    notification		       : '/app/views/forms/view/view-notification.directive.html.js',
-					capacityBuildingInitiative : '/app/views/forms/view/view-capacity-building-initiative.directive.js',
-					capacityBuildingResource   : '/app/views/forms/view/view-capacity-building-resource.directive.js'
+					capacitybuildinginitiative : '/app/views/forms/view/view-capacity-building-initiative.directive.js',
+					capacitybuildingresource   : '/app/views/forms/view/view-capacity-building-resource.directive.js'
 				}
 
 			$scope.$watch("document", function(_new) {
@@ -68,8 +68,8 @@ app.directive('recordLoader', [function () {
 					loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
 				}
 			});
-            
-            
+
+
                $scope.getUserCountry = function(id){
                         var term = {};
                         term.identifier = id
@@ -134,11 +134,10 @@ app.directive('recordLoader', [function () {
 			//==================================
 			$scope.loadDocument = function(documentSchema,documentID,documentRevision){
 
-				if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
-				|| documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT" || documentSchema.toUpperCase()=="NEWS"
-				|| documentSchema.toUpperCase()=="NEW"))
+				if(documentSchema &&
+				_.contains(["FOCALPOINT", "MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "NFP", "ST", "NT", "MT", "PR", "MTD"],  documentSchema.toUpperCase()))
 				{
-					commonjs.getReferenceRecordIndex(documentSchema,documentID).then(function(data){
+					commonjs.getReferenceRecordIndex(documentSchema, documentID).then(function(data){
 						$scope.internalDocument = data.data;
 					});
 					loadViewDirective(documentSchema);
@@ -307,10 +306,21 @@ app.directive('recordLoader', [function () {
 				if(schema.toLowerCase() == 'modelcontractualclause' || schema.toLowerCase() == 'communityprotocol')
 					lschema = 'resource';
 
-				var schemaDetails = schemaMapping[lschema];
+				if(schema.toLowerCase() == 'nfp')
+					lschema = 'focalPoint'
+				var schemaDetails = schemaMapping[lschema.toLowerCase()];
 
 				require([schemaDetails], function() {
+
+					if(_.contains(["NEWS", "NEW",], lschema.toUpperCase()))
+						lschema = lschema.toLowerCase();
+					else if(_.contains(["NFP", "ST", "NT", "MT", "PR", "MTD"], lschema.toUpperCase()))
+						lschema = $filter("mapSchema")(lschema);
+
 					var name = snake_case(lschema);
+
+
+
 					var directiveHtml =
 						"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
 						.replace(/DIRECTIVE/g, 'view-' + name);
