@@ -54,6 +54,15 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     ]).then(function(o) {
                         var data = o[0].data;
 
+                        var policy = _.findWhere(data, {identifier:'8165BF22-EEF0-4DF8-B3F2-8E0AEED13E2F'});
+                        if(policy){
+                            policy.title.en = 'Policy/Strategy/Action plan';
+                            policy.description  = 'A policy or strategy provides the general framework to guide the development of legislative, administrative or policy measures on ABS with a view to achieve an overall aim. A policy or strategy generally involve setting goals and  determining actions to achieve the goals, An action plan is a detailed plan outlining actions needed to reach one or more goals';
+                        }
+                        var policyDocument = _.findWhere(data, {identifier:'383BDFAC-7AD0-4A22-840D-086CC836EEF8'});
+                        if(policyDocument)
+                            data.splice(data.indexOf(policyDocument),1);
+
                         data.push({
                             "identifier": "8165BF22-EEF0-4DF8-B3F2-8E0AEBLAISE1",
                             "name": "Community protocol and procedures",
@@ -61,7 +70,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                                 "en": "Community protocol and procedures"
                             },
                             "shortTitle": {},
-                            "description": "Community protocol and procedures Description.",
+                            "description": "Community protocols and procedures are participatory tools that articulate indigenous and local community determined values, procedures, and priorities, and set out rights and responsibilities as the basis for engaging with external actors",
                             "source": "",
                             "broaderTerms": [],
                             "narrowerTerms": [],
@@ -75,7 +84,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                                 "en": "Customary Laws"
                             },
                             "shortTitle": {},
-                            "description": "Customary Laws Description.",
+                            "description": "Customary laws are traditional common rule or practice that has become an intrinsic part of the accepted and expected conduct in a community and that are accepted as legal requirements or obligatory rules of conduct",
                             "source": "",
                             "broaderTerms": [],
                             "narrowerTerms": [],
@@ -288,20 +297,21 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
             });
 
             function appendOthers(elementMeasures, other) {
-                _.each(elementsForOthers, function(element) {
+                _.each(elementsForOthers, function(element, key) {
                     var otherElement = angular.copy(other);
                     // if(otherElement.identifier.indexOf('#')>0)
                     //     otherElement.identifier = otherElement.identifier;
                     // else
-                        otherElement.identifier = otherElement.identifier + '#' + element;
-                    otherElement.broaderTerms.push(element);
-                    var el = _.findWhere(elementMeasures, {identifier:element});
-                    otherElement.title.en = 'Reference to any other relevant articles and sections';
+                        otherElement.identifier = otherElement.identifier + '#' + key;
+                    otherElement.broaderTerms.push(key);
+                    var el = _.findWhere(elementMeasures, {identifier:key});
+                    otherElement.title.en = element.title;
+                    otherElement.description = element.description;
                     elementMeasures.push(otherElement);
 
 
                     var parentElement = _.find(elementMeasures, {
-                        identifier: element
+                        identifier: key
                     })
                     if (parentElement)
                         parentElement.narrowerTerms.push(otherElement.identifier);
@@ -309,11 +319,29 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 });
                 return elementMeasures;
             }
-
-            var elementsForOthers = [
-                "24E809DA-20F4-4457-9A8A-87C08DF81E8A", "08B2CDEC-786F-4977-AD0A-6A709695528D","9847FA8A-16C3-4466-A378-F20AF9FF883B",
-                "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63", "01DA2D8E-F2BB-4E85-A17E-AB0219194A17", "5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"
-            ];
+            var elementsForOthers = {
+                "24E809DA-20F4-4457-9A8A-87C08DF81E8A" : {
+                    title : 'Reference to any other relevant articles and sections', description : ''
+                },
+                "08B2CDEC-786F-4977-AD0A-6A709695528D" : {
+                    title : 'Any other element relevant to access',
+                    description : 'This may include, for instance, additional information on the scope of the access provisions of the measure, special considerations for access, or other relevant access provisions.'
+                },
+                "9847FA8A-16C3-4466-A378-F20AF9FF883B" : {
+                    title : 'Any other element relevant to benefit-sharing',
+                    description : 'This may include, for instance, additional information on the scope of the benefit-sharing provisions of the measure, establishment of benefit-sharing funds or other relevant benefit-sharing provisions'
+                },
+                "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63" : {
+                    title : 'Any other element relevant to Compliance',
+                    description : 'This may include, for instance, additional information on the scope of the compliance provisions of the measure, or other relevant compliance provisions.'
+                },
+                "01DA2D8E-F2BB-4E85-A17E-AB0219194A17" : {
+                    title : 'Any other element relevant to relationship with other international instrument', description : ''
+                },
+                "5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8" : {
+                    title : 'Reference to any other relevant articles and sections', description : ''
+                }
+            };
 
             $scope.gettext = function(identifier){
 
@@ -664,7 +692,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         "en": "Does it cover access to genetic resources"
                     },
                     "shortTitle": {},
-                    "description": "Does it cover access to genetic resources",
+                    "description": "",
                     "source": "",
                     "broaderTerms": ["08B2CDEC-786F-4977-AD0A-6A709695528D"],
                     "narrowerTerms": ["7CAC5B93-7E27-441F-BFEB-9E416D48B1BE", "A7769659-17DB-4ED4-B1CA-A3ADD9CBD3A4"],
@@ -837,7 +865,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "description": "",
                     "source": "",
                     "broaderTerms": [],
-                    "narrowerTerms": ["4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C", "1FCC6CA9-022F-42FD-BD02-43AE674FEB56", "4C57FDB4-3B92-46DD-B4C2-BB93DBLAISE8"],
+                    "narrowerTerms": ["4C57FDB4-3B92-46DD-B4C2-BB93DBLAISE8", "4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C", "1FCC6CA9-022F-42FD-BD02-43AE674FEB56"],
                     "relatedTerms": [],
                     "nonPreferedTerms": []
                 },  {
@@ -860,7 +888,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         "en": "Does it cover issues related to monitoring the utilization of genetic resources, (Article 17)"
                     },
                     "shortTitle": {},
-                    "description": "",
+                    "description": "This may include, for instance, information on checkpoints or reporting requirements.",
                     "source": "",
                     "broaderTerms": ["E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63"],
                     "narrowerTerms": [],
@@ -870,7 +898,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "identifier": "1FCC6CA9-022F-42FD-BD02-43AE674FEB56",
                     "name": "Does it cover compliance with mutually agreed terms (Article 18)?",
                     "title": {
-                        "en": "Compliance with mutually agreed terms"
+                        "en": "Does it cover compliance with mutually agreed terms (Article 18)?"
                     },
                     "shortTitle": {},
                     "description": "",
@@ -906,6 +934,19 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "relatedTerms": [],
                     "nonPreferedTerms": []
                 }, {
+                    "identifier": "ECBDB95A-B389-4DB4-AD9B-DA359FONSECA",
+                    "name": "Competent national authority",
+                    "title": {
+                        "en": "Competent national authority"
+                    },
+                    "shortTitle": {},
+                    "description": "",
+                    "source": "",
+                    "broaderTerms": ["5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"],
+                    "narrowerTerms": [],
+                    "relatedTerms": [],
+                    "nonPreferedTerms": []
+                }, {
                     "identifier": "7CB2A03A-F0CF-4458-BB3B-A60DEC1F942E",
                     "name": "Transboundary cooperation ",
                     "title": {
@@ -933,9 +974,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "ECBDB95A-B389-4DB4-AD9B-DA3590DF7781",
-                    "name": "Capacity",
+                    "name": "Capacity-building",
                     "title": {
-                        "en": "Capacity"
+                        "en": "Capacity-building"
                     },
                     "shortTitle": {},
                     "description": "",
@@ -951,10 +992,10 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         "en": "Other",
                     },
                     "shortTitle": {},
-                    "description": "Other",
+                    "description": "",
                     "source": "In house (ICCP report)",
                     "broaderTerms": [],
-                    "narrowerTerms": ["ECBDB95A-B389-4DB4-AD9B-DA3590DF7781", "ECE508D3-26C6-42E6-A8B8-162606E5BA04", "7CB2A03A-F0CF-4458-BB3B-A60DEC1F942E"],
+                    "narrowerTerms": ["ECBDB95A-B389-4DB4-AD9B-DA359FONSECA", "ECE508D3-26C6-42E6-A8B8-162606E5BA04", "7CB2A03A-F0CF-4458-BB3B-A60DEC1F942E", "ECBDB95A-B389-4DB4-AD9B-DA3590DF7781"],
                     "relatedTerms": [],
                     "nonPreferedTerms": ["OTHER-OBSOLETE"]
                 }]

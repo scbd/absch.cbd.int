@@ -160,14 +160,19 @@
                   <div ng-if="isJurisdictionRegional()">
                         <div class="color-red" ng-if="!document.government.identifier">Please first select a country.</div>
                   </div>
-                  
+
                 </div>
               </div>
 
               <div class="col-xs-12">
-                   
+
                 <div ng-if="isJurisdictionRegional() && !canAddRegionalMeasure()">
-                  <div class="alert alert-warning"><h4>Please contact the ABS-CH (absch@cbd.int) for authorization to add Regional or Multilateral ABS Measures.</h4></div>
+                  <div class="alert alert-warning"><h4>
+                      Please note that regional or multilateral measures only need to be registered once in the ABS Clearing-House and that each of the
+                      countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in
+                      their country profile. It is recommended that one country agrees to register the measure on behalf of the regional organization or
+                      the group of countries that share the same measure.
+                  </h4></div>
                 </div>
 
                 <div ng-if="isJurisdictionRegional() && canAddRegionalMeasure()">
@@ -394,7 +399,7 @@
                           <table style="width:100%" cellspacing="0" cellpadding="0">
                               <tbody>
                                   <tr class="whiteBG btop">
-                                      <td style="text-align:left;vertical-align:middle;width:12%" >
+                                      <td style="text-align:left;vertical-align:middle;width:125px" >
                                           <div class="btn-group ng-scope matrix-btn" >
                                               <label class="btn ">
                                                   <input type="radio"  ng-model="binding.geneticResource.answer" name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="true"
@@ -479,7 +484,7 @@
                           <table style="width:100%" cellspacing="0" cellpadding="0">
                               <tbody>
                                   <tr class="whiteBG btop">
-                                      <td style="text-align:left;vertical-align:middle;width:12%" >                                      
+                                      <td style="text-align:left;vertical-align:middle;width:125px" >
                                           <div class="btn-group matrix-btn ng-scope" >
                                               <label class="btn">
                                                   <input type="radio"  ng-model="identifiers['B8A150E054154AD3AD97856ABD485E90']" name="rd_B8A150E054154AD3AD97856ABD485E90"
@@ -512,7 +517,7 @@
 
                                   <tr class="whiteBG btop">
 
-                                        <td style="text-align:left;vertical-align:middle;width:12%" >
+                                        <td style="text-align:left;vertical-align:middle;width:125px" >
                                             <div class="btn-group matrix-btn ng-scope" >
                                                 <label class="btn">
                                                     <input type="radio"  ng-model="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD"
@@ -543,7 +548,7 @@
                                       </td>
                                   </tr>
                                   <tr class="whiteBG btop">
-                                      <td style="text-align:left;vertical-align:middle;width:12%" >
+                                      <td style="text-align:left;vertical-align:middle;width:125px" >
                                           <div class="btn-group matrix-btn ng-scope" >
                                               <label class="btn">
                                                   <input type="radio"  ng-model="identifiers['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']"
@@ -601,8 +606,8 @@
               ng:if="!isStaticIdentifier(term.identifier) && (!term.broaderTerms || isParentSelected(term.identifier, term.level))">
                 <table style="width:100%" cellspacing="0" cellpadding="0">
                 <tr  ng:class="{'paddingleft0 btop' : isMainElement(term.identifier), 'btop':isYesNo(term.identifier), 'spacing30':!isYesNo(term.identifier), 'measureChecked' : identifiers[term.identifier]}" >
-                  <td style="text-align:left;vertical-align:middle;width:12%" >
-                      <div class="btn-group matrix-btn " ng:if="isYesNo(term.identifier)" ng:class="{'bg-main' : isMainElement(term.identifier)}">
+                  <td style="text-align:left;vertical-align:middle;width:125px" ng:if="isYesNo(term.identifier)">
+                      <div class="btn-group matrix-btn "  ng:class="{'bg-main' : isMainElement(term.identifier)}">
                          <label class="btn">
                            <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier],'yes')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}"
                            ng-value="{{((term.narrowerTerms.length||0) ==0) ? true : false}}"> Yes
@@ -613,16 +618,17 @@
                          </label>
                      </div>
                   </td>
-                  <td style="text-align:left;vertical-align:middle;" id="{{term.identifier}}_help" style="" >
+                  <td style="text-align:left;vertical-align:middle;" id="{{term.identifier}}_help" style=""  colspan="{{isYesNo(term.identifier) ? 1 : 2}}">
                     <label for="{{term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' ? 'otherAbsMeasure' : term.identifier}}" name="{{term.identifier}}" >
                          &nbsp;
                          <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}"
                          ng:if="!isReadOnly(term.identifier) && !isYesNo(term.identifier)" />
-                         <span title="{{term.description|lstring:locale}}" ng:class="{true:'bold',false:'normalText'}[isMainElement(term.identifier) || isYesNo(term.identifier) || isSecondaryElement(term.identifier)]" style="position:relative;top:7px;">
-                              <span ng-class="{'bold':term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0}">{{term.title||term.name | lstring:locale}} </span>
+                         <span title="{{term.description|lstring:locale}}" ng:class="{true:'bold',false:'normalText'}[isMainElement(term.identifier) || (isYesNo(term.identifier) && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')< 0)]" style="position:relative;top:7px;">
+                              <span ng-class="{'bold':term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && isYesNo(term.identifier)}">{{term.title||term.name | lstring:locale}} </span>
                               <i ng-show="term.description" class="icon-question-sign"></i>
                          </span>
                     </label>
+                    <span class="help-info" ng:if="term.description && term.description.length > 0" style="padding-left:25px">{{term.description}}</span>
                   </td>
                   <td style="width:250px;text-align:right;vertical-align:middle">
                     <div ng-show="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0 && ((identifiers[term.identifier] && (term.narrowerTerms.length||0) == 0) || (scopeOfMeasureTerm == term.identifier && identifiers[term.identifier]==false))"
