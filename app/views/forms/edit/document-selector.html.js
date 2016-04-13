@@ -39,6 +39,14 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             //
             //==================================
 			$scope.openAddDialog = function(){
+                
+                 _.forEach($scope.rawDocuments.docs, function (doc) {
+                    doc.__checked = false;
+                    if($scope.isInModel(doc.identifier_s)){
+                        doc.__checked = true;
+                    }
+                });
+                
                 $('#'+$scope.question).modal('show');
 			};
 
@@ -50,15 +58,22 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                 //$scope.model=undefined;
 
                 _.forEach($scope.rawDocuments.docs, function (doc) {
+                    
                     if(doc.__checked === true)
                     {
                         if(!$scope.model)
                             $scope.model=[];
 
-                        $scope.model.push({identifier: doc.identifier_s});
+                        if(!$scope.isInModel(doc.identifier_s))
+                            $scope.model.push({identifier: doc.identifier_s});
                     }
+                    if(!doc.__checked && $scope.isInModel(doc.identifier_s)){
+                        	$scope.removeDocument(doc)
+                    }
+
                 });
-				 $scope.syncDocuments();
+				
+                $scope.syncDocuments();
 
 
 				$('#'+$scope.question).modal('hide');
@@ -74,6 +89,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                 _.forEach($scope.rawDocuments.docs, function (doc) {
                     doc.__checked = false;
                 });
+                
 
                 if ($scope.model){
 					var docs = []
@@ -86,7 +102,6 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 						$scope.selectedDocuments = _.map(results, function(result){
 											return result.data || {};
 										});
-						console.log(selectedDocuments);
 					})
                     if($scope.model.length === 0 )
                         $scope.model = undefined;
@@ -97,6 +112,17 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 				$scope.areVisible = true;
 			};
 
+            //==================================
+            //
+            //==================================
+			$scope.isInModel = function(id){
+          
+                return  _.find($scope.model, function (mod) {
+                    return mod.identifier === id
+                });
+                
+			};
+            
             //==================================
             //
             //==================================
@@ -125,21 +151,31 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             //
             //==================================
 			$scope.removeDocument = function(document){
-
-                 _.forEach($scope.rawDocuments.docs, function (doc) {
-                    if(doc.identifier_s === document.header.identifier ){
-                        doc.__checked = false;
-                    }
-                });
                 
-                 $scope.selectedDocuments =  _.filter($scope.selectedDocuments, function (doc) {
-                    if(doc.header.identifier !== document.header.identifier ){
-                     return doc;
-                    }
-                });
+                var removeId;
+                 if(document.header)
+                    removeId = document.header.identifier;
+                 else
+                    removeId = document.identifier_s;
+                    
+                 if($scope.rawDocuments){
+                    _.forEach($scope.rawDocuments.docs, function (doc) {
+                            if(doc.identifier_s === removeId ){
+                                doc.__checked = false;
+                            }
+                    });
+                 }
+                
+                if($scope.selectedDocuments){
+                    $scope.selectedDocuments =  _.filter($scope.selectedDocuments, function (doc) {
+                        if(doc.header.identifier !== removeId ){
+                        return doc;
+                        }
+                    });
+                }
                 
                $scope.model =  _.filter($scope.model, function (doc) {
-                    if(doc.identifier !== document.header.identifier ){
+                    if(doc.identifier !== removeId){
                      return doc;
                     }
                 });
@@ -148,7 +184,6 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                     if($scope.model.length===0)
                         $scope.model = undefined;
                 }
-
 
 			};
 
