@@ -76,7 +76,7 @@
                         <div ng-if="nationalLoading">
                             <i class="fa fa-spin fa-spinner"  style="margin-left:50%" /> loading..
                         </div>
-                        <h4 class="bg-white" ng-if="rawDocs.data.length === 0">no records found</h4>
+                        <h4 class="bg-white" ng-if="rawDocs.groups.length === 0"><br>no records found</h4>
                     </div>
                 </div>
                 <div class="tab-pane bg-white" style="padding-top:20px;" ng-class="{'active':currentTab==='referenceRecords'}" ng-if="currentTab=='referenceRecords'">
@@ -88,7 +88,7 @@
                         <div ng-if="referenceLoading">
                             <i class="fa fa-spin fa-spinner"  style="margin-left:50%" /> loading..
                         </div>
-                        <h4 class="bg-white" ng-if="refDocs.data.response.numFound === 0">no records found</h4>
+                        <h4 class="bg-white" ng-if="refDocs.docs.length === 0">no records found</h4>
                     </div>
                 </div>
                 <div class="tab-pane bg-white" style="padding-top:20px;" ng-class="{'active':currentTab==='scbdRecords'}" ng-if="currentTab=='scbdRecords'">
@@ -100,7 +100,7 @@
                         <div ng-if="scbdLoading">
                             <i class="fa fa-spin fa-spinner "  style="margin-left:50%" /> loading..
                         </div>
-                        <h4 class="bg-white" ng-if="scbdDocs.data.response.numFound === 0">no records found</h4>
+                        <h4 class="bg-white" ng-if="scbdDocs.docs.length === 0">no records found</h4>
                     </div>
                 </div>
             </div>
