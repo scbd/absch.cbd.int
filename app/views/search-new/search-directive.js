@@ -812,8 +812,8 @@ define(['app', 'underscore', '/app/js/common.js',
                         addFilter('modelContractualClause', {'sort': 2, type:'reference', 'name':'Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standard', 'id':'modelContractualClause', 'description':'Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.'});
 
                         addFilter('communityProtocol', {'sort': 3, type:'reference', 'name':'Community Protocols and Procedures and Customary Laws', 'id':'communityProtocol', 'description':'Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.'});
-                        addFilter('capacityBuildingInitiative', {'sort': 4, type:'reference', 'name':'Capacity Building Initiatives', 'id':'capacityBuildingInitiative', 'description':''});
-                        addFilter('capacityBuildingResource', {'sort': 5, type:'reference', 'name':'Capacity Building Resources', 'id':'capacityBuildingResource', 'description':''});
+                        addFilter('capacityBuildingInitiative', {'sort': 4, type:'reference', 'name':'Capacity-building Initiatives', 'id':'capacityBuildingInitiative', 'description':''});
+                        addFilter('capacityBuildingResource', {'sort': 5, type:'reference', 'name':'Capacity-building Resources', 'id':'capacityBuildingResource', 'description':''});
 
                         //SCBD
                         addFilter('news',  {'sort': 1,'type':'scbd', 'name':'News', 'id':'news', 'description':'ABS related news'});
