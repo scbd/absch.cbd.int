@@ -53,8 +53,8 @@
                     <th ng-click="sortMeasure='entryIntoForce_dt';reverseMeasure=!reverseMeasure">Date <i class="fa" ng-class="{'fa-caret-up':sortMeasure=='entryIntoForce_dt' && reverseMeasure,'fa-caret-down':sortMeasure=='entryIntoForce_dt' && !reverseMeasure}" /></th>
                 </tr>
                 <tr ng-repeat="measure in absMeasure = (measureMatrixDocuments|orderBy:sortMeasure:reverseMeasure)">
-                    <td><input type="checkbox"  ng-model="measure.measureMatrix" ></input></td>
-                    <td><a target="_new" ng-href="database/record/{{measure.uniqueIdentifier_s}}">{{measure.rec_title}}</a></td>
+                    <td style="padding-left:8px;"><input type="checkbox"  ng-model="measure.measureMatrix" ></input></td>
+                    <td><a target="_new" ng-href="database/record/{{measure.uniqueIdentifier_s.toUpperCase()}}">{{measure.rec_title}}</a></td>
                     <td>{{measure.rec_meta1[0]}}</td>
                     <td >{{measure.rec_meta2[0]}}</td>
                     <td>{{measure.rec_meta3[0]}}</td>
@@ -62,7 +62,7 @@
                     <td>{{measure.rec_meta5[0]}}</td>
                 </tr>
                  <tr>
-                    <td class="bg-grey bold">{{(measureMatrixDocuments|filter:{measureMatrix:true}).length}}</td>
+                    <td class="bg-grey bold"><span class="badge">{{(measureMatrixDocuments|filter:{measureMatrix:true}).length}}</span></td>
                     <td class="bg-grey bold" >records included in matrix overview</td>
                 </tr>
             </table>
