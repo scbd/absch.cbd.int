@@ -1,63 +1,20 @@
-<div id="view-history" ng-show="documents" style="padding-left:10px;">
-            <table style="width:100%" class="table table-condensed" >
-                <tr>
-                    <th class="color-grey hidden-xs" style="width:250px">Updated on</th>
-                    <th class="color-grey" style="width:250px">Record identifier</th>
-                    <th class="color-grey hidden-xs" >Action</th>
-                    <th class="color-grey hidden-xs" style="width:30px" ng-show="showFile">File</th>
-                </tr>
-                
-                 <tr>
-                    <td style="width:250px" class="bold hidden-xs" > 
-                       <a ng-click="showHistory = !showHistory;" ><i class="fa" ng-class="{'fa-chevron-circle-up':!showHistory,'fa-chevron-circle-down':showHistory  }"></i> {{documents[0].updatedOn | formatDateWithTime}} </a>
-                    </td>
+<div id="view-history">
 
-                     <td style="width:250px">
-                         <a ng-href="/database/{{documents[0].type | schemaShortName}}/{{documents[0] | uniqueIDWithoutRevision}}/{{documents[0].revision}}"  target="_blank">
-						 <span  ng-class="{'bold': $index == 0}">{{documents[0] | uniqueID}}</span>
-						 </a>
-                    </td>
-                    <td class="hidden-xs">
-                        <span ng-show="documents[0].body.amendmentIntent==1  && !isPermit && documents[0].type!='absCheckpointCommunique'">
-                            <span class="bold color-red"> REVOKED</span></span>
-                        <span ng-show="isPermit && documents[0].type=='absCheckpointCommunique'">
-                            <span class="bold"> CPC SENT</span></span>
-                        <span ng-show="(documents[0].body.amendmentIntent==0 || (documents[0].revision > 1 && documents[0].body.amendmentIntent==undefined) && !isPermit && document.type!='absCheckpointCommunique')||
-                            (documents[0].revision > 1 && undefined==isPermit && documents[0].type=='absCheckpointCommunique')">
-                            <span class="bold color-green"> UPDATED</span></span>
-                        <span ng-show="(documents[0].revision == 1 && isPermit && documents[0].type!='absCheckpointCommunique') || (documents[0].revision == 1 && !isPermit)">
-                            <span class="bold color-green"> PUBLISHED</span></span>
-                         <div ng-show="documents[0].body.amendmentsDescription">
-                                <span ng-show="documents[0].body.amendmentsDescription">
-						  		<span ng-show="!more" ng-bind-html="documents[0].body.amendmentsDescription| lstring:locale | limitTo:80">
-						  		<a ng-href="#" ng-click="more=!more" ng-show="(documents[0].body.amendmentsDescription| lstring:locale).length > 200">
-									<strong>...more</strong> </a></span>
-									<span ng-show="more" ng-bind-html="documents[0].body.amendmentsDescription| lstring:locale">
-										<a ng-href="#" ng-click="more=!more"> <strong>less</strong></a>
-									</span>
-					  			</span>
-                            </div>
-                    </td>
-                    <td class="hidden-xs" style="width:30px" ng-show="showFile">
-                         <a type="button" target="_blank"  ng-href="/database/record/{{documents[0] | uniqueID}}">
-                            <i class="fa fa-file-o"></i>
-                                    <!--<span>{{documents[0] | uniqueID}}</span>-->
-                                <!-- ABSCH-{{documents[0].body.header.schema | lowercase | schemaShortName}}-{{documents[0].documentID}}-{{documents[0].revision}} -->
-                            </a>
-                    </td>
-                </tr>
-        
-                <tr ng-repeat="document in documents | orderBy:'createdOn':true" ng-show="showHistory && $index > 0" >
-                    <td class="hidden-xs" style="width:250px"  > 
-                       <span>{{document.updatedOn | formatDateWithTime}}</span>
-                    </td>
-
-                     <td style="width:250px" >
-                         <a ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}"  target="_blank">
-						 <span>{{document | uniqueID}}</span>
-						 </a>
-                    </td>
-                    <td class="hidden-xs">
+<table style="width:100%!important;" class="table table-condensed" >
+               
+              
+                <tbody ng-repeat="document in documents | orderBy:'updatedOn':false"  >
+                     
+                     <tr ng-show="$index===0" style="border-bottom:2px solid #ddd;">
+                        <td><span class="bold color-grey"> CREATED </span></td>
+                        <td>  by <span style="font-weight:500;">{{document.submittedBy.firstName}}{{document.submittedBy.lastName}} ({{document.submittedBy.email}})</span> on <span style="font-weight:500;">{{document.submittedOn | formatDateWithTime}}</span> </td>
+                        <td>
+                            <span style="margin-left:10px;"> DRAFT </span>
+                        </td>
+                    </tr>
+               
+                    <tr>
+                    <td style="width:100px;" >
                         <span ng-show="document.body.amendmentIntent==1  && !isPermit && document.type!='absCheckpointCommunique'">
                             <span class="bold color-red"> REVOKED</span></span>
                         <span ng-show="isPermit && document.type=='absCheckpointCommunique'">
@@ -79,17 +36,22 @@
 					  			</span>
                             </div>
                     </td>
-                   
-                    <td class="hidden-xs" style="width:30px" ng-show="showFile">
-                         <a type="button" target="_blank"  ng-href="/database/record/{{document | uniqueID}}">
-                            <i class="fa fa-file-o"></i>
-                                    <!--<span>{{document | uniqueID}}</span>-->
-                                <!-- ABSCH-{{document.body.header.schema | lowercase | schemaShortName}}-{{document.documentID}}-{{document.revision}} -->
-                            </a>
+
+                    <td> 
+                     by <span style="font-weight:500;">{{document.updatedBy.firstName}}{{document.updatedBy.lastName}} ({{document.updatedBy.email}})</span> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span> 
                     </td>
+
+                     <td>
+                         
+                         <a style="margin-left:10px;" ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}"  target="_blank">
+						 <span>{{document | uniqueID}}</span>
+						 </a>
+                    </td>
+               
                     
                 </tr>
-                </div>
+                </tbody>
+              
                 </table>
                
                         
