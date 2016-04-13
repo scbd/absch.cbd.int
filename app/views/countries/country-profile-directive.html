@@ -38,7 +38,7 @@
         <span class="badge pull-right" ng-class="{'bg-grey3': nationalMeasure==0, 'bg-black': nationalMeasure > 0}">{{nationalMeasure}}</span>
     </h4>
     <div ng-if="showMSR &&  nationalMeasure > 0" class="well bg-white">
-        
+
         <!--<div ng-repeat="doc in absch_nfp | filter:{'schema_s':'measure'}" style="margin-bottom:20px;">
             <result-grouped-national-record doc='doc'></result-grouped-national-record>
         </div>-->
@@ -58,8 +58,8 @@
                     <td>{{measure.rec_meta1[0]}}</td>
                     <td >{{measure.rec_meta2[0]}}</td>
                     <td>{{measure.rec_meta3[0]}}</td>
-                    <td>{{measure.rec_meta4[0]}}</td>
                     <td>{{measure.rec_meta5[0]}}</td>
+                    <td>{{measure.rec_meta4[0]}}</td>
                 </tr>
                  <tr>
                     <td class="bg-grey bold"><span class="badge">{{(measureMatrixDocuments|filter:{measureMatrix:true}).length}}</span></td>
