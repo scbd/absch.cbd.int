@@ -628,7 +628,7 @@
                               <i ng-show="term.description" class="icon-question-sign"></i>
                          </span>
                     </label>
-                    <span class="help-info" ng:if="term.description && term.description.length > 0" style="padding-left:25px">{{term.description}}</span>
+                    <span class="help-info" ng:if="term.description && term.description.length > 0 && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0" style="padding-left:25px">{{term.description}}</span>
                   </td>
                   <td style="width:250px;text-align:right;vertical-align:middle">
                     <div ng-show="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0 && ((identifiers[term.identifier] && (term.narrowerTerms.length||0) == 0) || (scopeOfMeasureTerm == term.identifier && identifiers[term.identifier]==false))"
