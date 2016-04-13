@@ -12,12 +12,10 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/e
 
     _.extend($scope.options, {
         resourceTypes   : function() {
-            return $q.all([
-                          $http.get("/api/v2013/thesaurus/domains/7E688641-F642-4C46-A024-70ED76D3DF40/terms", { cache: true }),
-                          $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })
-                      ]).then(function(o) {
-                          var data = o[0].data;
-                          data.push(o[1].data);
+            return $q.when(
+                          $http.get("/api/v2013/thesaurus/domains/7E688641-F642-4C46-A024-70ED76D3DF40/terms", { cache: true })
+                      ).then(function(o) {
+                          var data = o.data;
                           return  Thesaurus.buildTree(data);
                       });
         }

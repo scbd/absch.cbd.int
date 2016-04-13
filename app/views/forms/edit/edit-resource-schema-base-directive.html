@@ -34,7 +34,7 @@
 							</div>
 							<div class="col-xs-6" ng-show="isOtherSelected(document.resourceTypes)">
 								<div class="km-control-group" required name="resourceTypeName" caption="Name of other type of resource">
-									<div km-textbox-ml required name="resourceTypeName" rows="1" ng-model="document.resourceTypeName" locales="document.header.languages"></div>
+									<div km-textbox-ml show-descriptions="true" required name="resourceTypeName" rows="1" ng-model="document.resourceTypeName" locales="document.header.languages"></div>
 								</div>
 							</div>
 						</div>
@@ -134,7 +134,7 @@
 						<div class="row" >
 							<div class="col-xs-12">
 								<div class="km-control-group" name="source" caption="Source">
-									<div class="help-block">A reference to a document from which the present document is derived (e.g. an article from a journal). For original
+									<div class="help-block">A reference to a resource from which the present resource is derived (e.g. an article from a journal). For original
 										documents you may wish to specify "original document".</div>
 									<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
 								</div>
@@ -144,12 +144,12 @@
 					</section>
 
 					<section>
-						<legend>Access to the document(s)</legend>
+						<legend>Access to the resource(s)</legend>
 
 						<div class="row">
 							<div class="col-xs-12">
-								<div class="km-control-group" required name="resourceLinks" caption="Link to the document(s)">
-									<div class="help-block">Please always attach the relevant document(s) that will be stored in the database for users to download. When resources
+								<div class="km-control-group" required name="resourceLinks" caption="Link to the resource(s)">
+									<div class="help-block">Please always attach the relevant resource(s) that will be stored in the database for users to download. When resources
 										are available on the Internet, please also provide a link to them.</div>
 									<div km-link name="resourceLinks" required ng-model="document.resourceLinks" allow-link="true" allow-file="true" extensions="options.documentLinksExt"
 									identifier="document.header.identifier"></div>
@@ -167,18 +167,18 @@
 						</div>
 					</section>
 					<section>
-						<legend>Information on the content of document</legend>
+						<legend>Information on the content of resource</legend>
 
 						<div class="row">
 							<div class="col-xs-12">
-								<div class="km-control-group"  name="summary" caption="Summary, abstract or table of contents">
+								<div class="km-control-group"  name="summary" caption="Summary, abstract or table of contents (max 300 words)">
 									<div km-textbox-ml ng-model="document.summary"  rows="4" locales="document.header.languages"></div>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-xs-12">
-								<div class="km-control-group" name="regions" caption="Country(ies), Regional or Economic group(s) related to the document">
+								<div class="km-control-group" name="regions" caption="Country(ies), Regional or Economic group(s) related to the resource">
 									<div km-select style="display: inline-block" name="regions" ng-model="document.regions" items="options.regions()" multiple
 									placeholder="Select a country(ies) and/or region(s)..."></div>
 								</div>
