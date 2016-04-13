@@ -1073,9 +1073,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         "nonPreferedTerms": []
                     }, {
                         "identifier": "4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C",
-                        "name": "Issues related to monitoring the utilization of genetic resources, (Article 17)",
+                        "name": "Issues related to monitoring the utilization of genetic resources (Article 17)",
                         "title": {
-                            "en": "Issues related to monitoring the utilization of genetic resources, (Article 17)"
+                            "en": "Issues related to monitoring the utilization of genetic resources (Article 17)"
                         },
                         "shortTitle": {},
                         "description": "This may include, for instance, information on checkpoints or reporting requirements.",
@@ -1125,9 +1125,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         "nonPreferedTerms": []
                     }, {
                         "identifier": "ECBDB95A-B389-4DB4-AD9B-DA359FONSECA",
-                        "name": "Competent national authority",
+                        "name": "Competent national authority/ies",
                         "title": {
-                            "en": "Competent national authority"
+                            "en": "Competent national authority/ies"
                         },
                         "shortTitle": {},
                         "description": "",
