@@ -11,21 +11,41 @@ app.directive("viewDefaultReference", [function () {
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: ["$scope", "IStorage", "$filter", function ($scope, storage, $filter) {
+		controller: ["$scope", "IStorage", "$filter", '$q', function ($scope, storage, $filter, $q) {
 
-			
+
             // $scope.document = $scope.model;
-           
+
             // //==================================
 		    // //
 		    // //==================================
-		    // $scope.$watch('model', function(newValue, oldValue){
-		    //     if(newValue != oldValue){
-            //          $scope.document = newValue;
-		    //     }
-		    // }); 
+		    $scope.$watch('model', function(newValue, oldValue){
+		        if(newValue){
+					$q.when(loadReferenceDocument($scope.model))
+					.then(function(data) {
+						$scope.document = data;
+					});
 
-            
+		        }
+		    });
+
+
+			function loadReferenceDocument(identifier){
+
+				return storage.documents.get(identifier, { info : true})
+						.then(function(result){
+							return result.data;
+						})
+						.catch(function(error, code){
+							if (code == 404) {
+								return storage.drafts.get(ref.identifier, { info : true})
+									.then(function(result){
+										return result.data;
+									});
+							};
+						});
+			}
+
 		 }] //controller
 	};
 }]);

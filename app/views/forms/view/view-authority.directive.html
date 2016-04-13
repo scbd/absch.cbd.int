@@ -60,18 +60,18 @@
 
 
 
-		<div ng-show="document.absPolicyBasisForCompetency || absPolicyBasisForCompetencyRef ">
+		<div ng-show="document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef ">
 			<legend>Legislative, administrative or policy basis for the competence of the CNA</legend>
 			<div ng-show="document.absPolicyBasisForCompetency">
 				<!--<label>Information on the legal, administrative or policy basis for the competence of the CNA</label>-->
 				<div class="km-value" ng-bind-html="document.absPolicyBasisForCompetency | lstring:locale">
 				</div>
 			</div>
-			<div ng-show="absPolicyBasisForCompetencyRef">
+			<div ng-if="document.absPolicyBasisForCompetencyRef">
 				<label>Links to relevant legislative, administrative or policy measure(s) </label>
 					<ul class="km-value">
-						<li ng-repeat="item in absPolicyBasisForCompetencyRef" ng-show="item.document.title" >
-						    <div view-default-reference ng-model="item.document" locale="locale"></div>
+						<li ng-repeat="item in document.absPolicyBasisForCompetencyRef" >
+						    <div view-default-reference ng-model="item.identifier" locale="locale"></div>
 						</li>
 					</ul>
 			</div>
