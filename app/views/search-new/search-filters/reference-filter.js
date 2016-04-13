@@ -1,6 +1,6 @@
 define(['app'], function(app) {
 
-    app.directive('referenceFilter', function() {
+    app.directive('referenceFilter', function($timeout) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -10,6 +10,11 @@ define(['app'], function(app) {
             scope:false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                $scope.rf_searchFilters = searchDirectiveCtrl.getSearchFilters('reference');
+               
+               
+                  $timeout(function(){
+                                $element.find('[data-toggle="tooltip"]').tooltip();
+                            },50);
                
             }//link
         };

@@ -1593,3 +1593,8 @@ footer .logo {
 			border: 1px solid transparent;
 			background-color: rgb(192, 192, 192);
 		}
+        
+        .tooltip-inner {
+    max-width: 350px;
+    
+        }
