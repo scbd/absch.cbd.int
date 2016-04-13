@@ -332,7 +332,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     description : 'This may include, for instance, additional information on the scope of the benefit-sharing provisions of the measure, establishment of benefit-sharing funds or other relevant benefit-sharing provisions'
                 },
                 "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63" : {
-                    title : 'Any other element relevant to Compliance',
+                    title : 'Any other element relevant to compliance',
                     description : 'This may include, for instance, additional information on the scope of the compliance provisions of the measure, or other relevant compliance provisions.'
                 },
                 "01DA2D8E-F2BB-4E85-A17E-AB0219194A17" : {
@@ -726,9 +726,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "5427EB8F-5532-4AE2-88EE-5B9619917480",
-                    "name": "Does it cover Access to traditional knowledge associated with genetic resources, including prior informed consent or approval or involvement",
+                    "name": "Does it cover access to traditional knowledge associated with genetic resources?",
                     "title": {
-                        "en": "Does it cover Access to traditional knowledge associated with genetic resources, including prior informed consent or approval or involvement"
+                        "en": "Does it cover access to traditional knowledge associated with genetic resources?"
                     },
                     "shortTitle": {},
                     "description": "",
@@ -883,9 +883,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C",
-                    "name": "Does it cover issues related to monitoring the utilization of genetic resources, (Article 17)",
+                    "name": "Does it cover issues related to monitoring the utilization of genetic resources (Article 17)?",
                     "title": {
-                        "en": "Does it cover issues related to monitoring the utilization of genetic resources, (Article 17)"
+                        "en": "Does it cover issues related to monitoring the utilization of genetic resources (Article 17)?"
                     },
                     "shortTitle": {},
                     "description": "This may include, for instance, information on checkpoints or reporting requirements.",
@@ -935,9 +935,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     "nonPreferedTerms": []
                 }, {
                     "identifier": "ECBDB95A-B389-4DB4-AD9B-DA359FONSECA",
-                    "name": "Competent national authority",
+                    "name": "Competent national authority/ies",
                     "title": {
-                        "en": "Competent national authority"
+                        "en": "Competent national authority/ies"
                     },
                     "shortTitle": {},
                     "description": "",
