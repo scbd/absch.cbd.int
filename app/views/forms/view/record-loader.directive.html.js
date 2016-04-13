@@ -70,7 +70,11 @@ app.directive('recordLoader', [function () {
 			});
             
             
-            
+               $scope.getUserCountry = function(id){
+                        var term = {};
+                        term.identifier = id
+                        return $filter('term')(term);
+                   }
 			//==================================
 			//
 			//==================================

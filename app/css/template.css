@@ -1584,3 +1584,12 @@ footer .logo {
   .msr-table>tbody>tr>td, .msr-table>tbody>tr>th, .msr-table>tfoot>tr>td, .msr-table>tfoot>tr>th, .msr-table>thead>tr>td, .msr-table>thead>tr>th{
       border-top:0;
   }
+  #RecordDetails td {padding-right:5px;}
+         #RecordDetails label {color:#666;}
+         
+         .localeBtn {
+			padding: 6px 12px;
+			font-size: 14px;
+			border: 1px solid transparent;
+			background-color: rgb(192, 192, 192);
+		}
