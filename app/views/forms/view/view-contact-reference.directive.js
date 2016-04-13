@@ -43,7 +43,26 @@ app.directive("viewContactReference", [function () {
 				else if(newVal.source){
 						$scope.document = newVal;
 				}
+                
+                
+                
 			});
+            
+            $scope.isCNA = function() {
+
+				var doc = $scope.document;
+
+				if(!doc)
+					return false;
+                 
+                if(doc.header.schema==='authority') {
+                    doc.type = "CNA";
+                    return true;
+                }
+				
+				return false;
+			};
+            
 
 
 			$scope.isPerson = function() {

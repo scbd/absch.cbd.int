@@ -16,18 +16,28 @@
           
         </div>
     </div>
-
+<!--{{rawDocuments}} {{model}}-->
     <div class="row" ng-show="areVisible && !disabled">
         <div class="col-xs-12" >
             <br />
             <table class="table" id="search-new"  style="padding-bottom:3px;width:100%;">
-				<tr ng-repeat="doc in rawDocuments.docs | filter:isChecked">
+				<tr ng-repeat="doc in selectedDocuments">
                     <td style="margin-bottom:20px;width:30px;">
                             <a class="btn btn-default" ng-click="removeDocument(doc)" class="link color-red">
                                 <i class="fa fa-times" ></i></a>
                     </td>
                     <td style="margin-bottom:20px;" >
-                        <result-default doc='doc' type="nationalRecords"></result-default>
+                        
+                        <div ng-if="doc.header.schema ==='contact' || doc.header.schema ==='authority'" class="km-value">
+                             <div view-contact-reference ng-model="doc" locale="locale"></div>
+                        </div>
+                        
+                         <!--<div ng-if="doc.header.schema ==='measure'" class="km-value">
+                             <div view-measure-reference ng-model="doc" locale="locale"></div>
+                        </div>-->
+                        
+                     
+                       
 					</td>
 				</tr>
 			</table>
@@ -43,6 +53,7 @@
                 <div class="modal-header bg-grey">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h3>Please select from the list of published record(s) below:</h3>
+                      <div class="help-info">If the record is not yet listed, please save your current draft and go to ‘Dashboard’ and create a new record.</div>
                     <div ng-show="filter">
                          <input type="textbox" ng-model="keyword" placeholder="fitler records by keywords or unique identifier"  class="form-control" >
                     </div>
@@ -65,6 +76,7 @@
 
                 <div class="modal-footer bg-grey">
                     <div class="row">
+                        
                         <div class="col-xs-12">
                             <a type="button" class="btn btn-primary bold" style="color:white;" ng-click="saveDocuments()">Save</a>
                             <a type="button" class="btn btn-warning bold" data-dismiss="modal" ng-click="syncDocuments()" >Close</a>

@@ -90,9 +90,7 @@ define(['app', '/app/views/forms/edit/edit.js',
             if (!$scope.isSubNational(document) && !$scope.isCommunity(document) && !$scope.isOthers(document)) {
                 document.jurisdictionName = undefined;
             }
-            if (document.informAllAuthorities !== false) {
-                document.authoritiesToInform = undefined;
-            }
+        
 
             if (/^\s*$/g.test(document.notes))
                 document.notes = undefined;

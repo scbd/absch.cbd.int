@@ -1,7 +1,9 @@
 ﻿<div>
+    
+    
 	<div ng-if="isOrganization()">
-        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="document.type!='CNA'" style="">Organization</div>
-		<div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="document.type=='CNA'" >Competent National Authority</div>
+        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="!isCNA()" style="">Organization</div>
+		<div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="isCNA()" >Competent National Authority</div>
 		<div>
 			 <span style="font-weight:500;">{{document.organization | lstring:locale}}</span>
 			 <span ng-show="document.organizationAcronym && (document.organizationAcronym | lstring:locale)!= 'NA'">({{document.organizationAcronym | lstring:locale}})</span>
@@ -17,7 +19,7 @@
 	</div>
 
 	<div ng-if="isPerson()">
-        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="document.type!='CNA'" style="">Person</div>
+        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="!isCNA()" style="">Person</div>
 		<div>
 			 <span style="font-weight:500;">{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</span>
 		</div>

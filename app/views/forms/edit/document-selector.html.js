@@ -27,6 +27,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 		link : function($scope) {
 
             $scope.rawDocuments = [];
+            $scope.selectedDocuments=[];
 			$scope.areVisible = false;
             $scope.userGov = $scope.$root.user.government;
 
@@ -46,7 +47,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             //==================================
 			$scope.saveDocuments = function(){
 
-                $scope.model=undefined;
+                //$scope.model=undefined;
 
                 _.forEach($scope.rawDocuments.docs, function (doc) {
                     if(doc.__checked === true)
@@ -59,6 +60,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                 });
 				 $scope.syncDocuments();
 
+
 				$('#'+$scope.question).modal('hide');
 				$scope.areVisible = true;
 			};
@@ -68,7 +70,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             //
             //==================================
 			$scope.syncDocuments = function(){
-
+                
                 _.forEach($scope.rawDocuments.docs, function (doc) {
                     doc.__checked = false;
                 });
@@ -81,10 +83,10 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 					$q.all(docs)
 					.then(function(results){
 
-						var documents = _.map(results, function(result){
+						$scope.selectedDocuments = _.map(results, function(result){
 											return result.data || {};
 										});
-						console.log(documents);
+						console.log(selectedDocuments);
 					})
                     if($scope.model.length === 0 )
                         $scope.model = undefined;
@@ -125,21 +127,28 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 			$scope.removeDocument = function(document){
 
                  _.forEach($scope.rawDocuments.docs, function (doc) {
-                    if(doc.identifier_s === document.identifier_s ){
+                    if(doc.identifier_s === document.header.identifier ){
                         doc.__checked = false;
                     }
                 });
-
-               $scope.model =  _.filter($scope.model, function (doc) {
-                    if(doc.identifier !== document.identifier_s ){
+                
+                 $scope.selectedDocuments =  _.filter($scope.selectedDocuments, function (doc) {
+                    if(doc.header.identifier !== document.header.identifier ){
                      return doc;
                     }
                 });
-
+                
+               $scope.model =  _.filter($scope.model, function (doc) {
+                    if(doc.identifier !== document.header.identifier ){
+                     return doc;
+                    }
+                });
+                
                 if($scope.model){
                     if($scope.model.length===0)
                         $scope.model = undefined;
                 }
+
 
 			};
 
@@ -200,10 +209,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 		    //==================================
 		    $scope.$watch('government', function(newValue, oldValue){
 		        if(newValue != oldValue){
-
                      $scope.syncDocuments();
-
-
 		        }
 		    });
 

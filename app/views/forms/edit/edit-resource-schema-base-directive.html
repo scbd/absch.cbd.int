@@ -29,12 +29,12 @@
 						<div class="row">
 							<div class="col-xs-6">
 								<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
-									<div km-select multiple name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"></div>
+									<div km-select multiple show-description="true" name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"></div>
 								</div>
 							</div>
 							<div class="col-xs-6" ng-show="isOtherSelected(document.resourceTypes)">
 								<div class="km-control-group" required name="resourceTypeName" caption="Name of other type of resource">
-									<div km-textbox-ml show-descriptions="true" required name="resourceTypeName" rows="1" ng-model="document.resourceTypeName" locales="document.header.languages"></div>
+									<div km-textbox-ml show-description="true" required name="resourceTypeName" rows="1" ng-model="document.resourceTypeName" locales="document.header.languages"></div>
 								</div>
 							</div>
 						</div>
