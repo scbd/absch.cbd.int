@@ -39,10 +39,29 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                     $scope.title="Elements of the measure";
 
 
-                var elementsForOthers = [
-                    "24E809DA-20F4-4457-9A8A-87C08DF81E8A", "08B2CDEC-786F-4977-AD0A-6A709695528D","9847FA8A-16C3-4466-A378-F20AF9FF883B",
-                    "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63", "01DA2D8E-F2BB-4E85-A17E-AB0219194A17", "5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8"
-                ];
+                var elementsForOthers = {
+                    "24E809DA-20F4-4457-9A8A-87C08DF81E8A" : {
+                        title : 'Reference to any other relevant articles and sections', description : ''
+                    },
+                    "08B2CDEC-786F-4977-AD0A-6A709695528D" : {
+                        title : 'Any other element relevant to access',
+                        description : 'This may include, for instance, additional information on the scope of the access provisions of the measure, special considerations for access, or other relevant access provisions.'
+                    },
+                    "9847FA8A-16C3-4466-A378-F20AF9FF883B" : {
+                        title : 'Any other element relevant to benefit-sharing',
+                        description : 'This may include, for instance, additional information on the scope of the benefit-sharing provisions of the measure, establishment of benefit-sharing funds or other relevant benefit-sharing provisions'
+                    },
+                    "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63" : {
+                        title : 'Any other element relevant to compliance',
+                        description : 'This may include, for instance, additional information on the scope of the compliance provisions of the measure, or other relevant compliance provisions.'
+                    },
+                    "01DA2D8E-F2BB-4E85-A17E-AB0219194A17" : {
+                        title : 'Any other element relevant to relationship with other international instrument', description : ''
+                    },
+                    "5B6177DD-5E5E-434E-8CB7-D63D6BLAISE8" : {
+                        title : 'Reference to any other relevant articles and sections', description : ''
+                    }
+                };
                 $scope.api = {
                     reloadMatrix : reloadMatrix
                 }
@@ -85,17 +104,17 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             other        = data[1].data||data[1];
                             //main other
                             //$scope.terms.push(angular.copy(other));
-                            _.each(elementsForOthers, function(element){
+                            _.each(elementsForOthers, function(element, key){
 
-                                if(!_.some($scope.terms, {identifier:other.identifier + '#' + element})){
+                                if(!_.some($scope.terms, {identifier:other.identifier + '#' + key})){
 
                                     var otherElement = angular.copy(other);
-                                    otherElement.title.en = 'Reference to other relevant articles and sections';
-                                    otherElement.identifier = otherElement.identifier + '#' + element;
-                                    otherElement.broaderTerms.push(element);
+                                    otherElement.title = element.title;
+                                    otherElement.identifier = otherElement.identifier + '#' + key;
+                                    otherElement.broaderTerms.push(key);
                                     $scope.terms.push(otherElement)
 
-                                    var parentElement = _.find($scope.terms, {identifier:element})
+                                    var parentElement = _.find($scope.terms, {identifier:key})
                                     if(parentElement)
                                       parentElement.narrowerTerms.push(otherElement.identifier);
                                 }
@@ -161,7 +180,8 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                     }
                                     // else
                                     //     oNewIdentifiers[identifier] = true;
-                                    oNewSections[identifier] = $scope.binding.relevantElements[i].section;
+                                    // if($scope.binding.relevantElements[i].identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0)
+                                        oNewSections[identifier] = $scope.binding.relevantElements[i].section;
 
                                     var elementTerm = _.findWhere($scope.terms, {identifier:identifier});
                                     if(elementTerm)
@@ -896,9 +916,9 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         "nonPreferedTerms": []
                     }, {
                         "identifier": "5427EB8F-5532-4AE2-88EE-5B9619917480",
-                        "name": "Access to traditional knowledge associated with genetic resources, including prior informed consent or approval or involvement",
+                        "name": "Access to traditional knowledge associated with genetic resources",
                         "title": {
-                            "en": "Access to traditional knowledge associated with genetic resources, including prior informed consent or approval or involvement"
+                            "en": "Access to traditional knowledge associated with genetic resources"
                         },
                         "shortTitle": {},
                         "description": "",
