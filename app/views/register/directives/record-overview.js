@@ -41,8 +41,8 @@ define(['app', 'underscore', '/app/services/role-service.js'], function(app, _) 
                     
                     
                 },
-                controller : ['$scope', '$element', 'roleService', '$rootScope', '$compile', '$filter', '$routeParams',
-                    function($scope, $element, roleService, $rootScope, $compile, $filter, $routeParams){
+                controller : ['$scope', '$element', 'roleService', '$rootScope', '$compile', '$filter', '$routeParams','$timeout',
+                    function($scope, $element, roleService, $rootScope, $compile, $filter, $routeParams,$timeout){
 
                     if ($rootScope.user && $rootScope.user.isAuthenticated && roleService.hasAbsRoles()) {
                         require(['/app/views/register/directives/national-records-menu.html.js'], function(menu) {
@@ -53,6 +53,10 @@ define(['app', 'underscore', '/app/services/role-service.js'], function(app, _) 
                             });
                         });
                     }
+                    
+                     $timeout(function(){
+                                $element.find('[data-toggle="tooltip"]').tooltip();
+                            },50);
 
                 }]
             };

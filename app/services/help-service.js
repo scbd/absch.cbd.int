@@ -78,23 +78,22 @@ define(['app', 'jquery', 'toastr', 'ngStorage'], function (app, $) { 'use strict
                      
                      case "nr": return "<i class='fa fa-info-circle color-litegrey'></i>  The interim national report on implementation of the Nagoya Protocol on Access and Benefit-sharing called for under Article 29 of the Protocol is a series of questions answered by Parties and other Governments based on those provisions of the Protocol that establish obligations for the Parties to the Protocol. The interim national report can be a useful tool for both Parties and non-Parties to assess the level of implementation of the Nagoya Protocol, as well as gaps and needs in terms of capacity, and will assist the COP-MOP in reviewing, on a regular basis, the implementation of the Nagoya Protocol and to make, within its mandate, the decisions necessary to promote its effective implementation in accordance with Article 26, paragraph 4.";
                      
-                     case "referenceRecords": return "<i class='fa fa-info-circle color-litegrey'></i> ";
+                     case "referenceRecords": return "<i class='fa fa-info-circle color-litegrey'></i> Reference records include a number of ABS relevant resources and information. They can be submitted by any registered user of the ABS Clearing-House (Parties, Non-Parties, governments, international organizations, indigenous and local communities, and relevant stakeholders.";
                      
-                     case "a19a20": return "<i class='fa fa-info-circle color-litegrey'></i> ";
+                     case "a19a20": return "<i class='fa fa-info-circle color-litegrey'></i> Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors";
                      
-                     case "vlr": return "<i class='fa fa-info-circle color-litegrey'></i> ";
+                     case "cpp": return "<i class='fa fa-info-circle color-litegrey'></i> Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.";
                      
-                     case "cbr": return "<i class='fa fa-info-circle color-litegrey'></i> ";
-                     
-                     case "cbi": return "<i class='fa fa-info-circle color-litegrey'></i> ";
+                     case "vlr": return "<i class='fa fa-info-circle color-litegrey'></i> The virtual library in the ABS Clearing-House hosts a number of ABS relevant resources submitted by any registered user of the ABS Clearing-House. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc.";
+                    
+                     case "cbi": return "<i class='fa fa-info-circle color-litegrey'></i> Information on Capacity-building Initiatives at national, regional and international levels, are shared to promote synergy and coordination on capacity-building and development for access and benefit-sharing.";
                         
                          
-                    
-                    
-                    
+                    case "scbdRecords": return "<i class='fa fa-info-circle color-litegrey'></i> Information published by the SCBD. These include meetings, news stories, notifications and statements.";
+                        
                     
                     default: 
-                        return "this is the dfefault";   
+                        return " ";   
                 }
                     
             };
