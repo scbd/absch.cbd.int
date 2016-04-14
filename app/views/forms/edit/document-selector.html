@@ -21,7 +21,7 @@
         <div class="col-xs-12" >
             <br />
             <table class="table" id="search-new"  style="padding-bottom:3px;width:100%;">
-				<tr ng-repeat="doc in selectedDocuments">
+				<tr ng-repeat="doc in model">
                     <td style="margin-bottom:15px;width:15px;">
                             <a class="btn btn-default" ng-click="removeDocument(doc)" class="link color-red">
                                 <i class="fa fa-times" ></i></a>
@@ -29,11 +29,11 @@
                     <td style="margin-bottom:20px;" >
                         
                         <div ng-if="doc.header.schema ==='contact' || doc.header.schema ==='authority'" >
-                             <div view-contact-reference ng-model="doc" locale="locale" class="km-value"></div>
+                             <div view-contact-reference ng-model="doc.identifier" locale="locale" class="km-value"></div>
                         </div>
                         
                          <div ng-if="doc.header.schema === 'measure'" >
-                             <div view-default-reference ng-model="doc" locale="locale"></div>
+                             <div view-default-reference ng-model="doc.identifier" locale="locale"></div>
                         </div>
 
 					</td>
