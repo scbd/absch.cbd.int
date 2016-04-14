@@ -23,9 +23,11 @@ app.directive("viewContactReference", [function () {
 						$scope.document = newVal.document;
 					}
 					else{
-						storage.documents.get(newVal.identifier)
+						storage.documents.get(newVal.identifier, {info:true})
 							.then(function(data){
-								$scope.document = data.data;
+								$scope.document = angular.copy(data.data.body);
+								delete data.data.body;
+								$scope.document.info = data.data;
 								if($scope.document && $scope.document.contactOrganization){
 									storage.documents.get($scope.document.contactOrganization)
 									.then(function(data){
@@ -43,26 +45,26 @@ app.directive("viewContactReference", [function () {
 				else if(newVal.source){
 						$scope.document = newVal;
 				}
-                
-                
-                
+
+
+
 			});
-            
+
             $scope.isCNA = function() {
 
 				var doc = $scope.document;
 
 				if(!doc)
 					return false;
-                 
+
                 if(doc.header.schema==='authority') {
                     doc.type = "CNA";
                     return true;
                 }
-				
+
 				return false;
 			};
-            
+
 
 
 			$scope.isPerson = function() {
