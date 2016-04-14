@@ -29,9 +29,8 @@
 					<label>Reference number(s) to other internationally recognized certificate(s) of compliance that relate(s) to this permit</label>
 					<div class="km-value">
 						<ul>
-							<li ng-repeat="permit in document.referencePermits">
-                                <i class="fa fa-external-link-square" aria-hidden="true"></i>
-								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}" target="_new">{{permit | lstring:locale | uniqueID}}</a>
+							<li ng-repeat="item in document.referencePermits">
+                            <div view-default-reference ng-model="item.identifier" locale="locale"></div> 
 							</li>
 						</ul>
 					</div>

@@ -136,9 +136,7 @@
 			<label>Related measures</label>
 				<ul class="km-value">
 					<li ng-repeat="item in linkedMeasures" >
-						<a target="_new_win" href="/database/{{item.document.type}}/{{item.document.documentID}}">
-                        <i class="fa fa-external-link-square" aria-hidden="true"></i>
-                        <strong>{{item.document.title | lstring}}</strong></a>
+						 <div view-default-reference ng-model="item.identifier" locale="locale"></div>
 					</li>
 				</ul>
 
@@ -152,9 +150,7 @@
 
 				<ul class="km-value">
 					<li ng-repeat="item in amendedMeasures" >
-                        <i class="fa fa-external-link-square" aria-hidden="true"></i>
-						<a target="_new_win" href="/database/{{item.document.type}}/{{item.document.documentID}}">
-                        <strong>{{item.document.title | lstring}}</strong></a>
+                         <div view-default-reference ng-model="item.identifier" locale="locale"></div>
 					</li>
 				</ul>
 			</div>
@@ -178,9 +174,7 @@
 			<ul class="km-value">
 				<li ng-repeat="item in document.measureAmendedBy" >
                     <i class="fa fa-external-link-square" aria-hidden="true"></i>
-						<a target="_new_win" href="/database/MSR/{{item.identifier_s}}">
-							<strong>{{item.title_t | lstring}}</strong>
-						</a>
+						 <div view-default-reference ng-model="item.identifier" locale="locale"></div>
 					</li>
 			</ul>
 		</div>
@@ -190,10 +184,7 @@
 			<label>This measure is related to:</label>
 			<ul class="km-value">
 				<li ng-repeat="item in document.measureRelatedTo" >
-                    <i class="fa fa-external-link-square" aria-hidden="true"></i>
-					<a target="_new_win" href="/database/MSR/{{item.identifier_s}}">
-						{{item.title_t | lstring}}
-					</a>
+                     <div view-default-reference ng-model="item.identifier" locale="locale"></div>
 				</li>
 			</ul>
 		</div>

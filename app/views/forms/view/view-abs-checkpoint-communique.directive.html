@@ -29,12 +29,8 @@
 				<legend>Checkpoint/s that collected or received the information</legend>
 				<div class="km-value">
 					<ul>
-						<li ng-repeat="checkpoint in document.checkpoint">
-							<a href="{{linkTarget}}" target="_new" class="bold"><i class="fa fa-external-link-square" aria-hidden="true"></i> {{checkpoint.name | lstring:locale}} </a>
-                            
-                            
-                            <!--<a ng-href="#" ng-click="showcp= !showcp" class="btn btn-xs btn-info">{{showcp ? "- less" : "+ more"}} details</a>
-							<div ng-show="showcp" view-abs-checkpoint  ng-model="checkpoint" document-info="checkpoint" hide="footer" locale="getLocale()" link-target={{linkTarget}}></div>-->
+						<li ng-repeat="item in document.checkpoint">
+							 <div view-default-reference ng-model="item.identifier" locale="locale"></div> 
 						</li>
 					</ul>
 				</div>
@@ -71,8 +67,8 @@
 					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
 					<div class="km-value">
 						<ul>
-							<li ng-repeat="permit in document.permit">
-								<a target="{{target}}" href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale| uniqueIDWithoutRevision}}">{{permit | lstring:locale | uniqueIDWithoutRevision}}</a>
+							<li ng-repeat="item in document.permit">
+								 <div view-default-reference ng-model="item.identifier" locale="locale"></div> 
 							</li>
 						</ul>
 					</div>
