@@ -1024,8 +1024,8 @@ footer .logo {
     display: none;
     position: relative;
     top: -16px!important;
-    /*left: -20px!important;*/
-    padding:0;margin:0;
+    padding:0;
+    margin:0;
     width: 100%;
     height: 100%;
     min-height:40px;
@@ -1047,6 +1047,21 @@ footer .logo {
     will-change: opacity;
     z-index: 1000;
 }
+    #npMap .dimmer {
+        position: absolute!important;
+        top: 0!important;
+        left: 0!important;
+        padding:0;
+        margin:0;
+    }
+    
+    #npMap .loader {
+       top: 50%!important;
+    }
+    #npMap .blockRegion {
+       position: relative;
+    }
+    
 .loader {
     position: absolute;
     top: 10%;
