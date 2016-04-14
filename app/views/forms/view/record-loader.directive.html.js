@@ -7,7 +7,8 @@ define(['app',
     '/app/views/directives/internal-record-details.js',
     '/app/views/directives/party-status.js',
     '/app/views/forms/view/view-default-reference.directive.js',
-    '/app/views/forms/view/view-contact-reference.directive.js'
+    '/app/views/forms/view/view-contact-reference.directive.js',
+	'/app/services/search-service.js'
     ], function (app) {
 app.directive('recordLoader', [function () {
 	return {
@@ -34,9 +35,9 @@ app.directive('recordLoader', [function () {
 				$scope.init();
 		},
 		controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs","$timeout",
-		"$filter","$http","$http","realm", "$element", '$compile',
+		"$filter","$http","$http","realm", "$element", '$compile', 'searchService',
 			function ($scope, $route, storage, authentication, $q, $location,
-				commonjs,$timeout, $filter, $http, $httpAWS, realm, $element, $compile) {
+				commonjs,$timeout, $filter, $http, $httpAWS, realm, $element, $compile, searchService) {
 				var schemaMapping = {
 					news 				       : '/app/views/forms/view/view-news.directive.html.js',
 					absnationalreport 	       : '/app/views/forms/view/view-abs-national-report.directive.js',
@@ -67,10 +68,7 @@ app.directive('recordLoader', [function () {
 				$scope.internalDocument = _new;
 				if($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)){
 					loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
-                    
-                    if($scope.showDetails){
-                        $scope.documentVersionCount = $scope.internalDocument.info.count;
-                    }
+
 				}
 			});
 
@@ -174,6 +172,15 @@ app.directive('recordLoader', [function () {
 				$scope.error = undefined;
 				var qDocument;
 				var qDocumentInfo;
+
+				var queryParameters = {
+					'query'    : 'uniqueIdentifier_s:*-' + identifier,
+					'rowsPerPage': 1,
+					fields		 : '_revision_i'
+				};
+				var qVersionInfo  = searchOperation = searchService.list(queryParameters, null);
+
+
 				if(version=='draft'){
                     qDocument = storage.drafts.get(identifier).then(function(result) { return result.data || result });
                     qDocumentInfo = storage.drafts.get(identifier,{ info: true}).then(function(result) { return result.data || result });
@@ -185,14 +192,20 @@ app.directive('recordLoader', [function () {
 				else{
 					qDocument = storage.documents.get(identifier + '@' + version).then(function(result) { return result.data || result });
                     qDocumentInfo = storage.documents.get(identifier + '@' + version,{ info: true}).then(function(result) { return result.data || result });
+
 				}
-				$q.all([qDocument, qDocumentInfo]).then(function(results) {
+				$q.all([qDocument, qDocumentInfo, qVersionInfo]).then(function(results) {
 
 					$scope.internalDocument     = results[0];
 					$scope.internalDocumentInfo = results[1];
 					$scope.internalDocument.info = results[1];
 
-					$scope.documentVersionCount = $scope.internalDocumentInfo.revision || $scope.internalDocumentInfo.Count;
+					console.log(results[2].data.response.docs[0]);
+					if(results[2].data.response.docs.length >0){
+						$scope.documentVersionCount = results[2].data.response.docs[0]._revision_i
+					}
+					else
+						$scope.documentVersionCount = $scope.internalDocumentInfo.revision || $scope.internalDocumentInfo.Count;
 
 					if(version && $scope.internalDocumentInfo.revision != version){
 						$scope.internalDocumentInfo.revision = version;

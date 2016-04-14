@@ -23,7 +23,7 @@
 		<p>The document does not exists, if you think this file should be available, please report to
 			<a href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
 	</div>
-    
+
    <div id="RecordDetails" ng-if="showDetails">
    <div class="row" >
             <div class="col-xs-12">
@@ -32,7 +32,7 @@
                     <table>
                             <tr>
                                 <td><label> Unique Identifier: </label></td>
-                                <td class="bold"> 
+                                <td class="bold">
                                     <span ng-if="docInfo.revision == 'draft'">
                                        not yet assigned
                                     </span>
@@ -45,10 +45,10 @@
                                 <td><label> Current Status: </label></td>
                                 <td class="bold">
                                     <span class="color-grey" ng-if="internalDocumentInfo.revision == 'draft'">
-                                        DRAFT 
+                                        DRAFT
                                     </span>
                                     <span class="color-green"  ng-if="internalDocumentInfo.revision > 0">
-                                        PUBLISHED 
+                                        PUBLISHED
                                     </span>
                                     <span class="color-red"  ng-if="internalDocumentInfo.workingDocumentLock">
                                         [ Locked: Pending publishing request ]
@@ -78,7 +78,7 @@
             </div>
         </div>
 </div> <!-- records details-->
-   
+
 <!--{{internalDocument}}-->
 
 
@@ -89,7 +89,7 @@
 			</h3>
 		</div>
 
-    
+
 	<div ng-show="!error && internalDocument && showDetails">
 		<div style="float:right; position:relative;top:1px;">
 			<div class="btn-group" ng-show="documentVersionCount>1">
@@ -104,13 +104,13 @@
 				</ul>
 			</div>
 		</div>
-      </div>  
-        
-		
-        
+      </div>
+
+
+
 		<div id="schemaView" ng-show="internalDocument">
 
 		</div>
 
-	
+
 </div>
