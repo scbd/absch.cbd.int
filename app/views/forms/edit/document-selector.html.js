@@ -39,14 +39,14 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             //
             //==================================
 			$scope.openAddDialog = function(){
-                
+
                  _.forEach($scope.rawDocuments.docs, function (doc) {
                     doc.__checked = false;
                     if($scope.isInModel(doc.identifier_s)){
                         doc.__checked = true;
                     }
                 });
-                
+
                 $('#'+$scope.question).modal('show');
 			};
 
@@ -58,7 +58,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                 //$scope.model=undefined;
 
                 _.forEach($scope.rawDocuments.docs, function (doc) {
-                    
+
                     if(doc.__checked === true)
                     {
                         if(!$scope.model)
@@ -72,7 +72,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                     }
 
                 });
-				
+
                 $scope.syncDocuments();
 
 
@@ -85,11 +85,11 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             //
             //==================================
 			$scope.syncDocuments = function(){
-                
+
                 _.forEach($scope.rawDocuments.docs, function (doc) {
                     doc.__checked = false;
                 });
-                
+
 
                 if ($scope.model){
 					var docs = []
@@ -103,9 +103,9 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 											return result.data || {};
 										});
 					})
-                    
-                    
-                    
+
+
+
                     if($scope.model.length === 0 )
                         $scope.model = undefined;
                 }
@@ -119,13 +119,13 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             //
             //==================================
 			$scope.isInModel = function(id){
-          
+
                 return  _.find($scope.model, function (mod) {
                     return mod.identifier === id
                 });
-                
+
 			};
-            
+
             //==================================
             //
             //==================================
@@ -154,13 +154,15 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             //
             //==================================
 			$scope.removeDocument = function(document){
-                
+
                 var removeId;
-                 if(document.header)
+				 if(document.identifier)
+				   removeId = document.identifier;
+                 else if(document.header)
                     removeId = document.header.identifier;
                  else
                     removeId = document.identifier_s;
-                    
+
                  if($scope.rawDocuments){
                     _.forEach($scope.rawDocuments.docs, function (doc) {
                             if(doc.identifier_s === removeId ){
@@ -168,7 +170,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                             }
                     });
                  }
-                
+
                 if($scope.selectedDocuments){
                     $scope.selectedDocuments =  _.filter($scope.selectedDocuments, function (doc) {
                         if(doc.header.identifier !== removeId ){
@@ -176,13 +178,13 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                         }
                     });
                 }
-                
+
                $scope.model =  _.filter($scope.model, function (doc) {
                     if(doc.identifier !== removeId){
                      return doc;
                     }
                 });
-                
+
                 if($scope.model){
                     if($scope.model.length===0)
                         $scope.model = undefined;
@@ -251,7 +253,25 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 		        }
 		    });
 
+			$scope.isContact = function(document){
+				return _.some($scope.selectedDocuments, function(doc){
+						return doc.header.identifier==removeRevisonNumber(document.identifier) && doc.header.schema == "contact"
+				});
+			}
+			$scope.isAuthority = function(document){
+				return _.some($scope.selectedDocuments, function(doc){
+						return doc.header.identifier==removeRevisonNumber(document.identifier) && doc.header.schema == "authority"
+				});
+			}
+			$scope.isMeasure = function(document){
+				return _.some($scope.selectedDocuments, function(doc){
+						return doc.header.identifier==removeRevisonNumber(document.identifier) && doc.header.schema == "measure"
+				});
+			}
 
+			function removeRevisonNumber(identifier){
+				return identifier.substr(0, identifier.indexOf('@'))
+			}
 
 		},
 
