@@ -1,12 +1,10 @@
 
-<div style="margin-top:7px;">
-
+<div class="default-reference-viewer">
     <div class="selected-reference-uid">
         <a ng-href="/database/{{document.body.header.schema | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_new">
             <i class="fa fa-external-link-square" aria-hidden="true"></i> {{document | uniqueID}}
         </a>
     </div>
     <div class="selected-reference-name">{{document.body.header.schema | schemaName}} </div>
-    <div class="selected-reference-title">{{document.body.title | lstring:locale}} </div>
-        
+    <div class="selected-reference-title">{{document.body.title | lstring:locale}} </div>   
 </div>
