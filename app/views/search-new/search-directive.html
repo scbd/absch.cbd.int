@@ -6,7 +6,7 @@
 
                 <span ng-repeat="filter in setFilters" style="margin-bottom:10px;">
                     <button class="btn btn-sm btn-info bold" style="margin-top:5px;" ng-click="removeFilter(filter.id)">
-                        <span ng-if="filter.type === 'freeText'">&#34;</span>{{filter.name}}<span ng-if="filter.type === 'freeText'">&#34;</span>
+                        <span ng-if="filter.type === 'freeText'">&#34;</span>{{filter.name}}<span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
                         <span aria-hidden="true">×</span>
                     </button>
                 </span>

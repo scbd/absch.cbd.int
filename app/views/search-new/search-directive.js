@@ -64,29 +64,74 @@ define(['app', 'underscore', '/app/js/common.js',
 
                     //===============================================================================================================================
                     $scope.saveFreeTextFilter = function(text) {
+                        
                         if(!text && text.length <= 0)
                             return;
 
-                        var id = 'freeText_' + text;
+                        var fid = 'freeText_' + text;
+                        var id = undefined;
 
-                         if($scope.setFilters[id] )
-                           delete $scope.setFilters[id];
+                         if($scope.setFilters[fid] )
+                           delete $scope.setFilters[fid];
                         else{
-                           $scope.setFilters[id] = {'type':'freeText', 'name': ""+text+"", 'id':id};
+                           
+                           if(isUID(text)){
+                                id = getIdentifier(text); 
+                           }
+                           if(id)
+                               $scope.setFilters[id] = {'type':'UID', 'name': ""+text+"", 'id':id};
+                           else
+                                $scope.setFilters[fid] = {'type':'freeText', 'name': ""+text+"", 'id':fid};
+                           
                            $scope.searchKeyword = "";
                         }
 
                         $scope.refresh = true;
                     };
+                     //===============================================================================================================================
+                    function isUID(id) {
+                       if(!id) return false;
+                       
+                       var uid = id.toLowerCase().trim();
+                       
+                       if(uid.indexOf("absch-", 0) || uid.indexOf("abschdev-", 0) )
+                            return true;
+                    };
+                    
+                     //===============================================================================================================================
+                    function getIdentifier(id) {
+                          if(!id) return;                   
+                          var uid = id.toLowerCase().trim();
+                          
+                          var rec = undefined;
+                          
+                         _.each($scope.rawDocs.groups, function(country){
+                              
+                              _.find(country.doclist.docs, function(item){
+                                  if(item.uniqueIdentifier_s == id){
+                                    rec = item.identifier_s;
+                                    return;
+                                  }
+                              });
+                              if(rec){
+                                return rec;
+                              }
+                          })
+                          
+                          if(!rec){
+                               return;   
+                          }
+                          return rec;                       
+                     };
 
-                  //===============================================================================================================================
+                    //===============================================================================================================================
                     function getFilter(id) {
                          //console.log($scope.searchFilters[id]);
                          return $scope.searchFilters[id];
 
                     };
 
-                  //===============================================================================================================================
+                    //===============================================================================================================================
                     $scope.updateCurrentTab = function(tabname) {
                            $scope.currentTab = tabname;
                            $scope.showFilters= false;
@@ -100,41 +145,42 @@ define(['app', 'underscore', '/app/js/common.js',
                     };
 
 
-                  //===============================================================================================================================
+                    //===============================================================================================================================
                     function addFilter(filterID, filterInfo ) {
-                         //if(!$scope.searchFilters[filterID])
+                        
+                            //if(!$scope.searchFilters[filterID])
                             $scope.searchFilters[filterID] = filterInfo;
-                          //console.log(filterID);
+                            //console.log(filterID);
                     };
 
-                  //===============================================================================================================================
+                    //===============================================================================================================================
                     function getSearchFilters(type) {
-                          if(!type)
-                              return $scope.searchFilters;
+                            if(!type)
+                                return $scope.searchFilters;
 
-                           return _.filter($scope.searchFilters, function(item){if(item.type === type) return item;});
+                            return _.filter($scope.searchFilters, function(item){if(item.type === type) return item;});
                     };
 
 
-                            //===============================================================================================================================   
+                    //===============================================================================================================================   
                     function getSearchFiltersByParent(parent) {
-                          if(!parent)
-                              return $scope.searchFilters;
+                            if(!parent)
+                                return $scope.searchFilters;
 
-                           return _.filter($scope.searchFilters, function(item){if(item.parent === parent) return item;});
+                            return _.filter($scope.searchFilters, function(item){if(item.parent === parent) return item;});
                     };
 
-                     //===============================================================================================================================
+                    //===============================================================================================================================
                     function getSetFilters() {
-                         return $scope.setFilters;
+                            return $scope.setFilters;
                     };
 
-                  //===============================================================================================================================
+                   //===============================================================================================================================
                    // function getSearchKeyWord() {
                    //       return $scope.searchKeyword;
                    // };
 
-                  //===============================================================================================================================
+                   //===============================================================================================================================
                     $scope.removeFilter = function(filterID) {
                             delete $scope.setFilters[filterID];
 
@@ -159,7 +205,10 @@ define(['app', 'underscore', '/app/js/common.js',
 
                   //===============================================================================================================================
                     $scope.saveFilter = function(doc) {
-                        //console.log(doc);
+                        
+                        //TODO: if free text check to see if there is a UID and convert to indenifier
+                        console.log("addfilter:" + doc);
+                        
                         var filterID = doc.id;
                         var termID = doc.id;
                         var broader = null;
@@ -337,11 +386,14 @@ define(['app', 'underscore', '/app/js/common.js',
                         var qOr =[];
                         var q   ='';
                         var q1   ='';
+                        
+                        
 
                         if(queryType === 'national'){
                               qAnd.push(buildFieldQuery('schema_s', 'national', natSchemas.join(' ')));
                              
                               qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'  , null));
+                              
                               qOr.push(buildFieldQuery('government_REL_ss','region'  , null));
                               //qOr.push(buildTextQuery('text_EN_txt'    ,'reference', null));
                              // qOr.push(buildFieldQuery('all_terms_ss'    ,'reference', null));
@@ -354,6 +406,7 @@ define(['app', 'underscore', '/app/js/common.js',
                                qAnd.push(buildFieldQuery('government_s', 'country', "*"));
                                qOr.push(buildCountryQuery('government_s'    ,'partyStatus', null));
                                
+                               qOr.push(buildUIDQuery('text_EN_txt'  ,'UID'  , null));
                                
                         }
 
@@ -366,7 +419,7 @@ define(['app', 'underscore', '/app/js/common.js',
                                qOr.push(buildTextQuery('text_EN_txt'    ,'country', null));
                                qOr.push(buildFieldQuery('all_terms_ss'  ,'country', null));
                                qOr.push(buildTextQuery('text_EN_txt'    ,'freeText', null));
-                               qOr.push(buildFieldQuery('all_terms_ss'  ,'freeText', null));
+                               qOr.push(buildTextQuery('all_terms_ss'  ,'freeText', null));
                                qOr.push(buildTextQuery('text_EN_txt'    ,'region', null));
                                qOr.push(buildFieldQuery('all_terms_ss'  ,'region', null));
                                qOr.push(buildFieldQuery('regions_REL_ss','country', null));
@@ -399,6 +452,26 @@ define(['app', 'underscore', '/app/js/common.js',
                     function checkSetFilters(type){
                        return  _.find($scope.setFilters, function(item){if(item.type === type) return true;});
                     }
+                    
+                    
+                     //===============================================================================================================================
+                    function buildUIDQuery(field, type, boost){
+                        var q = '';
+                        var values = [];
+
+                        if($scope.setFilters){
+                            _.each($scope.setFilters, function(item){
+
+                                if(item.type == type){
+                                    values.push(item.id);
+                                }
+                                
+                            });
+                            if(values.length)
+                                q = addANDConditionText(field, values, boost)
+                        }
+                       return  q ? q : null;
+                    }
 
 
                      //===============================================================================================================================
@@ -408,9 +481,11 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         if($scope.setFilters){
                             _.each($scope.setFilters, function(item){
+
                                 if(item.type == type){
                                     values.push($scope.setFilters[item.id].name.toLowerCase());
                                 }
+                                
                             });
                             if(values.length)
                                 q = addORCondition(field, values, boost)
@@ -909,8 +984,8 @@ define(['app', 'underscore', '/app/js/common.js',
 
 
                   //===============================================================================================================================
-                    $scope.$watch('refresh', function(newVal){
-                        if(newVal === true){
+                    $scope.$watch('refresh', function(newVal, oldVal){
+                        if(newVal && newVal !== oldVal){
                             refresh_nat = true;
                             refresh_ref = true;
                             refresh_scbd = true;
