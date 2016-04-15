@@ -108,7 +108,7 @@ define(['app', 'underscore', '/app/js/common.js',
                          _.each($scope.rawDocs.groups, function(country){
                               
                               _.find(country.doclist.docs, function(item){
-                                  if(item.uniqueIdentifier_s == id){
+                                  if(item.uniqueIdentifier_s == uid){
                                     rec = item.identifier_s;
                                     return;
                                   }
