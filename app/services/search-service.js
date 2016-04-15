@@ -19,7 +19,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                 }
                 var q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
 
-                //*****************************************************************************************************************
+                //================================================================================================================
                 this.list = function(searchQuery, queryCanceler) {
 
                     _.defaults(searchQuery, searchDefaults);
@@ -33,14 +33,18 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                         'start': searchQuery.currentPage * searchQuery.rowsPerPage,
                         'rows': searchQuery.rowsPerPage,
                     };
-
+                    
+                    console.log("list:" + q + searchQuery.query);
+                    
                     return $http.get('/api/v2013/index/select', {
                         params: queryListParameters,
                         timeout: queryCanceler
                     });
+                    
+                   
                 }
 
-                //*****************************************************************************************************************
+                //================================================================================================================
                 this.group = function(searchQuery, queryCanceler) {
 
                     _.defaults(searchQuery, searchDefaults);
@@ -59,6 +63,8 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                         'group.limit': searchQuery.groupLimit,
                         'group.sort': searchQuery.groupSort
                     };
+                    
+                    console.log("group:" + q + searchQuery.query);
 
                     return $http.get('/api/v2013/index/select', {
                         params: queryGroupParameters,
@@ -66,7 +72,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                     });
                 }
 
-                //*****************************************************************************************************************
+                //================================================================================================================
                 this.facets = function(facetQuery, localStorageKey) {
 
                     if (localStorageKey) {
@@ -107,7 +113,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                     }
 
                 };
-
+                //================================================================================================================
                 this.facetsPivot = function(facetQuery, localStorageKey) {
 
                     if (localStorageKey) {
@@ -154,7 +160,8 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                     }
 
                 };
-
+                
+                //================================================================================================================
                 this.governmentSchemaFacets = function() {
 
                     var nationalRecordsQuery = {
