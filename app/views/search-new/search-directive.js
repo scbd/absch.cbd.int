@@ -92,16 +92,20 @@ define(['app', 'underscore', '/app/js/common.js',
                     function isUID(id) {
                        if(!id) return false;
                        
-                       var uid = id.toLowerCase().trim();
+                       var uid = id.trim();
+                       uid = uid.toLowerCase();
+                       console.log(uid);
                        
-                       if(uid.indexOf("absch-", 0) || uid.indexOf("abschdev-", 0) )
+                       if(uid.indexOf("absch-", 0) >= 0 || uid.indexOf("abschdev-", 0) >=0 )
                             return true;
                     };
                     
                      //===============================================================================================================================
                     function getIdentifier(id) {
-                          if(!id) return;                   
-                          var uid = id.toLowerCase().trim();
+                          if(!id) return undefined;       
+                                      
+                          var uid = id.trim();
+                          uid = uid.toLowerCase();
                           
                           var rec = undefined;
                           
@@ -119,7 +123,7 @@ define(['app', 'underscore', '/app/js/common.js',
                           })
                           
                           if(!rec){
-                               return;   
+                               return undefined;   
                           }
                           return rec;                       
                      };
