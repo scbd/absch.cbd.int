@@ -96,7 +96,7 @@ define(['app', 'underscore', '/app/js/common.js',
                        uid = uid.toLowerCase();
                        console.log(uid);
                        
-                       if(uid.indexOf("absch-", 0) >= 0 || uid.indexOf("abschdev-", 0) >=0 )
+                       if(uid.indexOf("absch-", 0) >= 0 || uid.indexOf("abschdev-", 0) >=0  || uid.indexOf("abschtrg-", 0) >=0)
                             return true;
                     };
                     
@@ -112,10 +112,15 @@ define(['app', 'underscore', '/app/js/common.js',
                          _.each($scope.rawDocs.groups, function(country){
                               
                               _.find(country.doclist.docs, function(item){
-                                  if(item.uniqueIdentifier_s == uid){
-                                    rec = item.identifier_s;
-                                    return;
-                                  }
+                                  
+                                 if(item.uniqueIdentifier_s){
+                                    var temp= item.uniqueIdentifier_s.substring(0, uid.length);
+                                    
+                                    if( temp === uid){
+                                        rec = item.identifier_s;
+                                        return;
+                                    }
+                                 }
                               });
                               if(rec){
                                 return rec;
