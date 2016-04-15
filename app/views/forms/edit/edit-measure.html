@@ -416,7 +416,7 @@
 
                                           <label for="4E2974DF-216E-46C8-8797-8E3A3BLAISE1" name="4E2974DF-216E-46C8-8797-8E3A3BLAISE1">
                                               &nbsp;
-                                              <span title="" style="position:relative;top:7px;" class="bold">
+                                              <span title=""  class="bold">
                                                   <span class="ng-binding">Does it cover all genetic resources?</span>
                                               </span>
                                           </label>
@@ -500,7 +500,7 @@
 
                                           <label for="B8A150E054154AD3AD97856ABD485E90" name="B8A150E054154AD3AD97856ABD485E90">
                                               &nbsp;
-                                              <span title="" style="position:relative;top:7px;" class="bold">
+                                              <span title=""  class="bold">
                                                   <span class="ng-binding">Does it cover traditional knowledge associated with genetic resources?</span>
                                               </span>
                                           </label>
@@ -533,7 +533,7 @@
 
                                           <label for="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" name="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD">
                                               &nbsp;
-                                              <span title="" style="position:relative;top:7px;" class="bold">
+                                              <span title=""  class="bold">
                                                   <span class="ng-binding">Does it include provisions on temporal scope?</span>
                                               </span>
                                           </label>
@@ -566,7 +566,7 @@
 
                                           <label for="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" name="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A">
                                               &nbsp;
-                                              <span title="" style="position:relative;top:7px;" class="bold">
+                                              <span title=""  class="bold">
                                                   <span class="ng-binding">Any other elements relevant to scope of application of the measure?</span>
                                               </span>
                                           </label>
@@ -623,7 +623,7 @@
                          &nbsp;
                          <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}"
                          ng:if="!isReadOnly(term.identifier) && !isYesNo(term.identifier)" />
-                         <span title="{{term.description|lstring:locale}}" ng:class="{true:'bold',false:'normalText'}[isMainElement(term.identifier) || (isYesNo(term.identifier) && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')< 0)]" style="position:relative;top:7px;">
+                         <span title="{{term.description|lstring:locale}}" ng:class="{true:'bold',false:'normalText'}[isMainElement(term.identifier) || (isYesNo(term.identifier) && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')< 0)]" >
                               <span ng-class="{'bold':term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && isYesNo(term.identifier)}">{{term.title||term.name | lstring:locale}} </span>
                               <i ng-show="term.description" class="icon-question-sign"></i>
                          </span>
