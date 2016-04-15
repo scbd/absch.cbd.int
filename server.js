@@ -39,6 +39,7 @@ app.listen(process.env.PORT || 2010, function () {
 	console.log('Server listening on %j', this.address());
 });
 
-proxy.on('error', function() {}); // ignore proxy errors
+proxy.on('error', function(err) {
+}); // ignore proxy errors
 
 process.on('SIGTERM', ()=>process.exit());
