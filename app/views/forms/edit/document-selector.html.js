@@ -115,13 +115,15 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 				$scope.areVisible = true;
 			};
 
+ 
+            
             //==================================
             //
             //==================================
 			$scope.isInModel = function(id){
-
+                
                 return  _.find($scope.model, function (mod) {
-                    return mod.identifier === id
+                    return removeRevisonNumber(mod.identifier) === id
                 });
 
 			};

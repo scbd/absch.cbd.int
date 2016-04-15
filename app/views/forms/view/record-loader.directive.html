@@ -82,7 +82,7 @@
 <!--{{internalDocument}}-->
 
 
-<div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo && revisionNo != 'draft'">
+        <div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo && revisionNo != 'draft'">
 			<h3>
                 This document has been updated. This is not the latest published version.
                 <a ng-href="/database/{{internalDocument.header.schema | schemaShortName}}/{{internalDocument | uniqueIDWithoutRevision}}" target="new">Click here to view the latest record.</a>
@@ -120,11 +120,15 @@
                   <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
 			</div>
 		</div>-->
-
-
-		<div id="schemaView" ng-show="internalDocument">
-
+        
+        <div style="float:right; position:relative;top:1px;right:1px;">
+			<div>
+            <a title="Edit" ng-show="!internalDocumentInfo.workingDocumentLock" type="button" class="btn btn-default" href="/register/{{internalDocument.header.schema|mapSchema}}/{{internalDocument.header.identifier}}/edit">
+                  <i class="fa fa-edit"></i> edit </a>
+                 <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+			</div>
 		</div>
 
+		<div id="schemaView" ng-show="internalDocument"></div>
 
 </div>
