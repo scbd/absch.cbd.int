@@ -60,11 +60,11 @@
                                              <div document-selector ng-model="document.checkpointSelected"
                                                                question="checkpointSelected"
                                                                government="document.government"
-                                                               schema="contact"
+                                                               schema="absCheckpoint"
                                                                filter="true"
                                                               ></div>
-                                            
-                                            
+
+
                                             <!--<div km-select multiple name="checkpointSelected" ng-model="document.checkpointSelected" items="options.checkpoints()" placeholder="Please select ..." required></div>-->
                                         </div>
                                     </div>
@@ -74,7 +74,7 @@
 
                         <section>
                             <legend name="certificate">Details of the internationally recognized certificate of compliance</legend>
-                           
+
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="panel panel-default">
@@ -92,19 +92,19 @@
                                                                         disabled="isPermitNotAvailable()"
                                                                         filter="true"
                                                                         ></div>
-                                                              
-                                                
+
+
                                                 <!--<div existing-permit ng-model="document.permit" ng-disabled="isPermitNotAvailable()">-->
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
                             <br>
 
                             <div class="clearfix"></div>
-                            
+
                             <div ng-class="{'disable':!isPermitNotAvailable(), 'bg-white':isPermitNotAvailable() }" class="well no-shadow" style="padding-top:0;padding-bottom:0;">
                                 <div class="row">
                                     <div class="col-xs-12">
@@ -217,8 +217,8 @@
                                                                         government="document.government"
                                                                         filter="true"
                                                                         ></div>
-                                                                        
-                                                                        
+
+
                                             <!--<field-embed-contact ng-model="document.responsibleAuthorities" locales="document.header.languages" caption="{{document.responsibleAuthorities ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>-->
                                         </div>
                                     </div>
@@ -246,7 +246,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row">
                                     <div class="col-xs-12 col-md-3">
                                         <div class="km-control-group" name="dateOfAccess" caption="Date of access to the genetic resources">
@@ -278,8 +278,8 @@
                                                                         government="document.government"
                                                                         filter="true"
                                                                         ></div>
-                                                                        
-                                        
+
+
                                         <!--<field-embed-contact multiple ng-model="document.geneticRessourceUsers" name="geneticRessourceUsers" locales="document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>-->
 
                                     </div>
@@ -311,7 +311,7 @@
                                 </div>
                             </div>
                         </section>
-                    
+
                         <section>
 
                             <legend>Additional Information</legend>
