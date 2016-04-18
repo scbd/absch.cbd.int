@@ -3,7 +3,7 @@
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
 
     <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
-    
+
     <span block-region activate="isLoading()" ng-if="isLoading()"></span>
   <div class="registerpage-content" >
 
@@ -17,10 +17,10 @@
     </div>-->
 
     <div ng-show="!isLoading() && status!='hidden'">
-        
+
         <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages"  hide-timer="false"></div>
          <div km-document-validation ng-model="validationReport"></div>
-        
+
         <form class="editForm" name="editForm" id="editForm" style="margin-top:10px">
             <div ng-show="tab=='edit'" km-tab="edit">
              <legend name="formInfo" style="display:none"></legend>
@@ -71,14 +71,14 @@
                                 <div class="km-control-group" name="permit"
                                     caption="Links to other internationally recognized certificate(s) of compliance (IRCC) that relate(s) to this permit">
                                      <div class="help-info">Sometimes a permit can be related to other previously issued permits, for instance to a permit for accessing a soil sample. Depending on the MAT, it is possible that some countries decide to issue specific permits for subsequently identified genetic resources from the taken soil sample. For such cases, the ABS Clearing-House offers the possibility to link different IRCCs together. IRCCs linked through this mechanism will be displayed together and thus facilitate tracking of the IRCCs. </div>
-                                     
-                                 
+
+
                                      <div document-selector ng-model="document.referencePermits"
                                                                question="referencePermits"
                                                                government="document.government"
                                                                schema="absPermit"></div>
-                                                               
-<!--                                   
+
+<!--
                                     <div km-select multiple name="permit"
                                     ng-model="document.referencePermits"items="options.permits()" placeholder="Please select ..."></div>-->
 
@@ -93,14 +93,14 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="km-control-group" name="authority" required caption="Competent national authority (CNA) responsible for issuing this permit or its equivalent">
-                                
+
                                  <div document-selector ng-model="document.authority"
                                                                question="authority"
                                                                government="document.government"
                                                                schema="authority"
                                                                type="radio"></div>
-                                
-                                
+
+
                                 <!--<field-embed-contact ng-model="document.authority" locales="document.header.languages"
                                  caption="{{(document.authority ? 'Change' : 'Add') + ' Issuing Authority »'}}"></field-embed-contact>-->
                             </div>
@@ -165,16 +165,16 @@
                                         <div class="km-control-group " name="providers" required caption="The provider" style="margin-top:0;">
                                             <span class="help-info">Please provide the name and contact details of the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
                                             <div ng-show="!document.providerConfidential">
-                                                
-                                                
-                                                 
+
+
+
                                                 <div document-selector ng-model="document.providers"
                                                                question="providers"
                                                                government="document.government"
-                                                               schema="contact"
+                                                               schema="(contact authority)"
                                                               ></div>
-                                                               
-                                                
+
+
                                                 <!--<field-embed-contact multiple ng-model="document.providers" locales="document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>-->
                                             </div>
                                         </div>
@@ -229,9 +229,9 @@
                                                  <div document-selector ng-model="document.informedConsents"
                                                                question="informedConsents"
                                                                government="document.government"
-                                                               schema="contact"
+                                                               schema="(contact authority)"
                                                               ></div>
-                                                
+
                                                 <!--<field-embed-contact multiple ng-model="document.informedConsents" locales="document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>-->
                                             </div>
                                         </div>

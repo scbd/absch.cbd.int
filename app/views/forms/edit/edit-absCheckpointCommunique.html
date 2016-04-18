@@ -213,7 +213,7 @@
                                         <div class="km-control-group" name="responsibleAuthorities" caption="Person or entity who granted prior informed consent (PIC)">
                                              <div document-selector ng-model="document.responsibleAuthorities"
                                                                         question="responsibleAuthorities"
-                                                                        schema="contact"
+                                                                        schema="(contact authority)"
                                                                         government="document.government"
                                                                         filter="true"
                                                                         ></div>
@@ -229,7 +229,7 @@
                                             <span class="help-info">Please provide the contact details of the person or entity to whom prior informed consent was granted.</span>
                                             <div document-selector ng-model="document.personeToWhomGranted"
                                                                         question="personeToWhomGranted"
-                                                                        schema="contact"
+                                                                        schema="(contact authority)"
                                                                         government="document.government"
                                                                         filter="true"
                                                                         ></div>
@@ -274,7 +274,7 @@
                                         <div class="help-info">This information allows the provider of the genetic resource to check whether the person or entity to whom the PIC was granted is the same person or entity providing evidence of PIC and MAT at the checkpoint. In case of discrepancy, providers can verify information and conditions related to third party transfer.</div>
                                         <div document-selector ng-model="document.geneticRessourceUsers"
                                                                         question="geneticRessourceUsers"
-                                                                        schema="contact"
+                                                                        schema="(contact authority)"
                                                                         government="document.government"
                                                                         filter="true"
                                                                         ></div>

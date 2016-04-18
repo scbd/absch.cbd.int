@@ -6,14 +6,14 @@
         <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
                     <span block-region activate="isLoading()" ng-if="isLoading()"></span>
             <div class="registerpage-content">
-                
+
                 <div class="alert alert-error" ng-show="hasError()">
                     <strong>Error as occured...</strong>
                     <div>{{error}}</div>
                 </div>
-                
+
                 <warning-message-cna doc="document"></warning-message-cna>
-                
+
                 <!--<div ng-show="isLoading()">
                     <i class="fa fa-spinner fa-spin"></i> Loading...
                 </div>-->
@@ -22,7 +22,7 @@
 
                     <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="false" />
 
-                    <div km-document-validation ng-model="validationReport"></div>                
+                    <div km-document-validation ng-model="validationReport"></div>
                     <form class="editForm" name="editForm">
 
                         <div ng-show="tab=='edit'" km-tab="edit">
@@ -54,7 +54,7 @@
                             <section>
                                 <legend name="coordinates">Coordinates</legend>
                                 <div class="help-info">The coordinates will help users of genetic resources to get in contact with the CNA. It is important to keep this information up to date in order to provide users with recent and accurate information.</div>
-                                
+
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="address" caption="Address">
@@ -131,13 +131,13 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="contacts" caption="Additional contacts">
-                                        
+
                                           <div document-selector ng-model="document.contacts"
                                                                question="contacts"
                                                                government="document.government"
-                                                               schema="contact"
+                                                               schema="(contact authority)"
                                                                filter="true"></div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                                                                government="document.government"
                                                                schema="measure"
                                                                filter="true"></div>
-                                       </div> 
+                                       </div>
                                     </div>
                                 </div>
 
@@ -200,7 +200,7 @@
                                                             Please ensure that the responsibilities for each competent national authority (CNA)is well described in all published records.
                                                             </h4>
                                                         </div>
-                                                        
+
                                                     <div class="km-control-group" name="responsibilities" caption="Short description of CNA responsibilities (maximum 500 words)." required>
                                                         <div class="help-info">Article 13, paragraph 2 provides that “Competent national authorities shall, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms”. Remember that the purpose of this section is to help users understand responsibilities regarding access to genetic resources and should answer the question: Who grants access for what? The description of responsibilities should be short and clear to understand. </div>
                                                         <div km-rich-textbox name="responsibilities" ng-model="document.responsibilities" rows="6" placeholder="" locales="document.header.languages" required></div>
