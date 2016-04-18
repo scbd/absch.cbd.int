@@ -108,24 +108,7 @@ define(['app', '/app/views/forms/edit/edit.js',
                 if (!$scope.isOthers()) {
                     document.keywordOthers = undefined;
                 }
-
-                // if (document.checkpointSelected) {
-                //     document.checkpoint = [];
-                //     document.checkpointSelected.forEach(function(checkpoint) {
-                //
-                //         var selected = _.where($scope.checkpointList, {
-                //             "identifier": checkpoint.identifier
-                //         });
-                //         if (selected && selected.length > 0 && selected[0].body)
-                //             selected = selected[0].body;
-                //         // console.log(_.isEmpty(selected));
-                //         if (!_.isEmpty(selected))
-                //             document.checkpoint.push(selected);
-                //     });
-                //     if (_.isEmpty(document.checkpoint))
-                //         document.checkpoint = undefined;
-                // } else
-                    document.checkpoint = undefined;
+                document.checkpointSelected = undefined;
                 return document;
             };
 
