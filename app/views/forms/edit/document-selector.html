@@ -40,7 +40,7 @@
                     </td>
                     <td style="margin-bottom:20px;" >
                         <div ng-if="isContact(model) || isAuthority(model)" view-contact-reference ng-model="model" locale="locale" class="km-value"></div>
-                        <div ng-if="!isContact(doc) && !isAuthority(doc)" view-default-reference ng-model="model.identifier" locale="locale"></div>
+                        <div ng-if="!isContact(model) && !isAuthority(model)" view-default-reference ng-model="model.identifier" locale="locale"></div>
 					</td>
 				</tr>
 			</table>
