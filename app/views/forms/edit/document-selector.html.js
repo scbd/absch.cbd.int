@@ -61,11 +61,15 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 
                     if(doc.__checked === true)
                     {
-                        if(!$scope.model)
+                        if(!$scope.model && $scope.type != 'radio')
                             $scope.model=[];
 
                         if(!$scope.isInModel(doc.identifier_s))
-                            $scope.model.push({identifier: doc.identifier_s +"@"+ doc._revision_i});
+							var document = {identifier: doc.identifier_s +"@"+ doc._revision_i};
+							if($scope.type == 'radio')
+								$scope.model = document;
+							else
+                            	$scope.model.push(document);
                     }
                     if(!doc.__checked && $scope.isInModel(doc.identifier_s)){
                         	$scope.removeDocument(doc)
@@ -91,22 +95,30 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                 });
 
 
+				var docs = []
                 if ($scope.model){
-					var docs = []
-                    _.each($scope.model, function (mod) {
-						docs.push(IStorage.documents.get(mod.identifier));
-                    });
+					if($scope.type == 'radio'){
+						docs.push(IStorage.documents.get($scope.model.identifier));
+					}
+					else{
+	                    _.each($scope.model, function (mod) {
+							docs.push(IStorage.documents.get(mod.identifier));
+	                    });
+					}
+
 					$q.all(docs)
 					.then(function(results){
+						// if($scope.type == 'radio'){
+						// 	$scope.selectedDocuments = results.data || {};
+						// }
+						// else{
+							$scope.selectedDocuments = _.map(results, function(result){
+												return result.data || {};
+											});
+						// }
+					});
 
-						$scope.selectedDocuments = _.map(results, function(result){
-											return result.data || {};
-										});
-					})
-
-
-
-                    if($scope.model.length === 0 )
+                    if($scope.model.length === 0 || _.isEmpty($scope.model))
                         $scope.model = undefined;
                 }
 
@@ -115,16 +127,22 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 				$scope.areVisible = true;
 			};
 
- 
-            
+
+
             //==================================
             //
             //==================================
 			$scope.isInModel = function(id){
-                
-                return  _.find($scope.model, function (mod) {
-                    return removeRevisonNumber(mod.identifier) === id
-                });
+
+				if(!$scope.model)
+					return false;
+
+				if($scope.type == 'radio')
+					return removeRevisonNumber($scope.model.identifier) === id
+
+				return  _.find($scope.model, function (mod) {
+		                    return removeRevisonNumber(mod.identifier) === id
+		                });
 
 			};
 
@@ -180,12 +198,14 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                         }
                     });
                 }
-
-               $scope.model =  _.filter($scope.model, function (doc) {
-                    if(doc.identifier !== removeId){
-                     return doc;
-                    }
-                });
+			   if($scope.type != 'radio')
+	               $scope.model =  _.filter($scope.model, function (doc) {
+	                    if(doc.identifier !== removeId){
+	                     return doc;
+	                    }
+	                });
+				else
+					$scope.model = undefined;
 
                 if($scope.model){
                     if($scope.model.length===0)

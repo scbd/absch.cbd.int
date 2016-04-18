@@ -23,7 +23,7 @@
         <div class="col-xs-12" >
             <br />
             <table class="table" id="search-new"  style="padding-bottom:3px;width:100%;">
-				<tr ng-repeat="doc in model">
+				<tr ng-repeat="doc in model" ng-if="type!='radio'">
                     <td style="margin-bottom:15px;width:15px;">
                             <a class="btn btn-default" ng-click="removeDocument(doc)" class="link color-red">
                                 <i class="fa fa-times" ></i></a>
@@ -31,6 +31,16 @@
                     <td style="margin-bottom:20px;" >
                         <div ng-if="isContact(doc) || isAuthority(doc)" view-contact-reference ng-model="doc" locale="locale" class="km-value"></div>
                         <div ng-if="isMeasure(doc)" view-default-reference ng-model="doc.identifier" locale="locale"></div>
+					</td>
+				</tr>
+                <tr ng-if="type=='radio'">
+                    <td style="margin-bottom:15px;width:15px;">
+                            <a class="btn btn-default" ng-click="removeDocument(model)" class="link color-red">
+                                <i class="fa fa-times" ></i></a>
+                    </td>
+                    <td style="margin-bottom:20px;" >
+                        <div ng-if="isContact(model) || isAuthority(model)" view-contact-reference ng-model="model" locale="locale" class="km-value"></div>
+                        <div ng-if="isMeasure(model)" view-default-reference ng-model="model.identifier" locale="locale"></div>
 					</td>
 				</tr>
 			</table>
