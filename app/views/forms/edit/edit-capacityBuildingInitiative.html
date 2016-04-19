@@ -123,24 +123,27 @@
 								<div class="km-control-group" required name="organizations" caption="Agency(ies) or organisation(s) implementing and/or executing the initiative">
                                 <div class="help-info">In some instances an agency could play both the implementing and executing roles. In those cases, please select both boxes.</div>
 								<div class="checkbox"><label><input type="checkbox" ng-model="document.isImplementedByAgencies">Implementing agency(ies) or organization(s)</label></div>
-                                <div class="row">
+
+                                <!-- Add contacts hidden till 2020/we get solution on Organizations CBI has Add contact -->
+                                <!-- <div document-selector ng-model="document.implementingAgencies"
+                                                            question="implementingAgencies"
+                                                            schema="contact"
+                                                            government="document.government"
+                                                            filter="true"
+                                                            ></div> -->
+                                <!-- <div class="row" >
                                     <div class="col-md-12">
                                         <div class="km-control-group" ng-show="document.isImplementedByAgencies" name="implementingAgencies" caption="Please select the implementing agency(ies) or organization(s)">
                                             <div class="help-info">Implementing agency refers to the organisation or legal entity responsible for developing the initiative and overseeing its
                                                 implementation, monitoring and evaluation, including making funding available, ensuring that fiduciary standards and quality
                                                 assurance are applied, and preparation of the project completion reports. The implementing agency is ultimately the entity
                                                 responsible for the completion of the initiative and is accountable to the donor.</div>
-                                            <!-- <div document-selector ng-model="document.implementingAgencies"
-                                                                        question="implementingAgencies"
-                                                                        schema="contact"
-                                                                        government="document.government"
-                                                                        filter="true"
-                                                                        ></div> -->
+
 
                                             <field-embed-contact multiple ng-model="document.implementingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
 								<div class="checkbox"><label><input type="checkbox" ng-model="document.isExecutededByAgencies">Executing agency(ies) or organization(s)</label></div>
                                 <div class="row">
