@@ -23,12 +23,43 @@ app.directive("viewContactReference", [function () {
 		replace: true,
 		transclude: false,
 		scope: {
-			document: "=ngModel",
+			model: "=ngModel",
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: ["$scope", function ($scope) {
+		controller: ["$scope","$http","$filter", function ($scope,$http,$filter) {
+            
+           	//========================================
+            $scope.$watch("model", function(newVal) {
+				
+                if(!newVal)
+					return;
+           
+                $http.get('/api/v2013/documents/' +  $scope.model.identifier,  {}).success(function(data){
+                    $scope.document = data;
+                });
+                
+                $scope.uid = $filter("uniqueID")($scope.document);
+               
+            });
+            
+            //========================================
+             $scope.isCNA = function() {
 
+				var doc = $scope.document;
+
+				if(!doc)
+					return false;
+
+                if(doc.header.schema==='authority') {
+                    doc.type = "CNA";
+                    return true;
+                }
+
+				return false;
+			};
+            
+            //========================================
 			$scope.isPerson = function() {
 
 				var doc = $scope.document;
@@ -45,6 +76,7 @@ app.directive("viewContactReference", [function () {
 				return false;
 			};
 
+            //========================================
 			$scope.isOrganization = function() {
 
 				return !$scope.isPerson();
@@ -52,6 +84,7 @@ app.directive("viewContactReference", [function () {
 		}]
 	};
 }]);
+
 
 app.filter("lstring", function() {
 	return lstring;
@@ -245,7 +278,157 @@ app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
 			});
 		};
 	}]);
+    
+    
+    //============================================================
+    app.filter("uniqueID", ["$http", '$filter', '$q',
+	 						function($http, $filter, $q) {
+		var cacheMap = {};
 
+		return function(term) {
+
+			if(!term)
+				return "";
+
+            var document;
+
+			if(term && angular.isString(term)){
+
+                term = { identifier : term };
+    		    if(cacheMap[term.identifier])
+    			     return cacheMap[term.identifier] ;
+
+                document = $http.get('/api/v2013/documents/' +  term.identifier +'?info=true');
+
+            }
+            else if(term && angular.isObject(term)){
+                document = term.info && term.info.metadata ? term.info : term;
+
+                var revision = ''
+                if(document.revision)
+                    revision = '-' + document.revision;
+                var identifier = '';
+                if(term.identifier)
+                    identifier = term.identifier;
+                else if(document.identifier)
+                    identifier = document.identifier;
+                else if(document.data && document.data.identifier)
+                    identifier = document.data.identifier;
+                else if(document.id)
+                    identifier = document.id;
+
+                    if(identifier == '')
+                        return;
+
+                term = { identifier : identifier + revision};
+
+        		if(cacheMap[term.identifier])
+        			return cacheMap[term.identifier] ;
+            }
+
+            if(!document)
+                return;
+
+			cacheMap[term.identifier] = $q.when(document).then(function(document) {
+
+                if(document.data)
+                    document = document.data;
+                else
+                    document = document;
+
+                if(document.schema_s && (document.schema_s.toLowerCase() == "statement" || document.schema_s.toLowerCase() == "notification" ||  document.schema_s.toLowerCase() == "news" ||
+                    document.schema_s.toLowerCase() == "meeting" ||  document.schema_s.toLowerCase() == "pressrelease" ||  document.schema_s.toLowerCase() == "new" ||
+                    document.schema_s.toLowerCase() == "focalpoint")){
+                        cacheMap[term.identifier] = document.identifier_s ? document.identifier_s : document.id;
+                        return cacheMap[term.identifier];
+
+                    }
+
+                var government = '';
+				var documentId;
+
+				if(document.documentID)
+					documentId = document.documentID;
+				else if(document.id){
+
+						if(document.id.indexOf('_')>0)
+							documentId = commonjs.hexToInteger(document.id.substr(0,document.id.indexOf('_')));
+						else
+							documentId = commonjs.hexToInteger(document.id);
+				}
+				if(document.government_s)
+                    government = document.government_s;
+                else if(document.government)
+                    government = document.government.identifier;
+                else if(document.metadata && document.metadata.government)
+                    government = document.metadata.government;
+                else if(document.body && document.body.government)
+                    government = document.body.government.identifier;
+
+                var unique = 'ABSCH' + 
+						'-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s||document.schema)) +
+                        '-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +
+                        '-' + documentId;
+				if( document.revision)
+					unique = unique + '-' + document.revision;
+
+				cacheMap[term.identifier] = unique;
+
+				return unique;
+
+			}).catch(function(){
+
+				cacheMap[term.identifier] = term.identifier;
+
+				return term.identifier;
+
+			});
+			return cacheMap[term.identifier];
+		};
+	}])
+    
+    //============================================================
+    app.filter("uniqueIDWithoutRevision", ['$filter', function($filter) {
+
+		return function( document ) {
+            var unique = $filter("uniqueID")(document);
+
+
+            if(angular.isString(unique) && document)
+                return unique.substring(0,unique.lastIndexOf('-'));
+			
+            return '';
+
+		};
+	}]);
+
+        //==================================================================================
+        this.hexToInteger = function(hex) {
+            if (hex && hex.length == 24)
+                return parseInt(hex.substr(15, 9), 16);
+
+            return hex;
+        }
+        //==================================================================================
+        this.integerToHex = function(d, schema) {
+            var schemaCode = '';
+            if (_.contains(["pressrelease", "statement", "news", "new", "pr", "st", "news", "new"], schema.toLowerCase()))
+                schemaCode = "52000000cbd0180000000000";
+            else if (schema.toLowerCase() == "notification" || schema.toLowerCase() == "nt")
+                schemaCode = "52000000cbd0120000000000";
+            else if (schema.toLowerCase() == "meeting" || schema.toLowerCase() == "mt")
+                schemaCode = "52000000cbd0050000000000";
+            else if (schema.toLowerCase() == "focalpoint" || schema.toLowerCase() == "nfp")
+                schemaCode = "52000000cbd0220000000000";
+
+            if (schemaCode == '')
+                return d;
+
+            var hex = Number(d).toString(16);
+            hex = schemaCode.substr(0, 24 - hex.length) + hex;
+
+            return hex;
+        }
 
 app.filter("schemaShortName", [function() {
 

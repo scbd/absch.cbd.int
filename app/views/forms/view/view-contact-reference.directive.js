@@ -11,8 +11,10 @@ app.directive("viewContactReference", [function () {
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: ["$scope", "IStorage", function ($scope, storage) {
-
+		controller: ["$scope", "IStorage", "$filter", function ($scope, storage, $filter) {
+            
+             $scope.uid = "";
+            
 			$scope.$watch("model", function(newVal) {
 				if(!newVal)
 					return;
@@ -38,17 +40,16 @@ app.directive("viewContactReference", [function () {
 							});
 					}
 				}
-				else if(newVal.header) {
+				else if(newVal.header || newVal.source) {
 					$scope.document = newVal;
 				}
-				//tweak for document's old versions after migration as of Feb 16
-				else if(newVal.source){
-						$scope.document = newVal;
-				}
-
+				if($scope.document)
+                    $scope.uid = $filter("uniqueID")($scope.document);
 
 
 			});
+            
+        
 
             $scope.isCNA = function() {
 
