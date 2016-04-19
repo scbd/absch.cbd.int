@@ -33,7 +33,7 @@
                         <div ng-if="!isContact(doc) && !isAuthority(doc)" view-default-reference ng-model="doc.identifier" locale="locale"></div>
 					</td>
 				</tr>
-                <tr ng-if="type=='radio'">
+                <tr ng-if="type=='radio' && model">
                     <td style="margin-bottom:15px;width:15px;">
                             <a class="btn btn-default" ng-click="removeDocument(model)" class="link color-red">
                                 <i class="fa fa-times" ></i></a>
