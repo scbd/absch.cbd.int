@@ -57,8 +57,7 @@ app.directive("viewContactReference", [function() {
         scope: {
             model: "=ngModel",
             locale: "=",
-            target: "@linkTarget",
-            document: "=document"
+            target: "@linkTarget"
         },
         controller: ["$scope", "$http", "$filter", function($scope, $http, $filter) {
 
@@ -97,13 +96,17 @@ app.directive("viewContactReference", [function() {
 
                 if (!newVal)
                     return;
-
-                $http.get('/api/v2013/documents/' + $scope.model.identifier + '?info').success(function(data) {
-                    $scope.document = data.body;
-                    var info = angular.copy(data);
-                    delete info.body;
-                    $scope.document.info = info;
-                });
+                if(newVal.header){
+                    $scope.document = newVal;
+                }
+                else{
+                    $http.get('/api/v2013/documents/' + $scope.model.identifier + '?info').success(function(data) {
+                        $scope.document = data.body;
+                        var info = angular.copy(data);
+                        delete info.body;
+                        $scope.document.info = info;
+                    });
+                }
 
             });
 
@@ -510,9 +513,9 @@ app.directive("permit", [function() {
                                 $scope.document.government = data;
                             });
                     });
-                    
+
                     var identifierWithoutRevision = $scope.documentId.substr(0, $scope.documentId.indexOf('@'))
-                    
+
                     $http.get('/api/v2013/documents/' + identifierWithoutRevision + '/versions?body=true&cache=true')
                         .success(function(data) {
                             $scope.versions = data.Items;

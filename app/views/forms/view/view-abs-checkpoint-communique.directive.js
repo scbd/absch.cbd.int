@@ -60,85 +60,8 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 				});
 			});
 
-			//====================
-			//
-			//====================
-			$scope.$watch("document.checkpointCommuniques", function () {
-				if ($scope.document) {
-					$scope.checkpointCommuniques = angular.fromJson(angular.toJson($scope.document.checkpointCommuniques));
-
-					if ($scope.checkpointCommuniques)
-						$scope.loadReferences($scope.checkpointCommuniques);
-				}
-			});
-
-			//====================
-			//
-			//====================
-			$scope.loadReference = function (ref) {
-
-					storage.documents.get(ref.identifier, { cache: true })
-						.success(function (data) {
-							ref.document = data;
-						})
-						.error(function (error, code) {
-							if (code == 404 && $scope.allowDrafts == "true") {
-
-								storage.drafts.get(ref.identifier, { cache: true })
-									.success(function (data) {
-										ref.document = data;
-									})
-									.error(function () {
-										ref.document = undefined;
-										ref.error = error;
-										ref.errorCode = code;
-									});
-							}
-
-							ref.document = undefined;
-							ref.error = error;
-							ref.errorCode = code;
-
-						});
-			};
-
-			//====================
-			//
-			//====================
-			$scope.loadReferences = function(targets) {
-
-				angular.forEach(targets, function(ref){
-
-					storage.documents.get(ref.identifier, { cache : true})
-						.success(function(data){
-							ref.document = data;
-						})
-						.error(function(error, code){
-							if (code == 404 && $scope.allowDrafts == "true") {
-
-								storage.drafts.get(ref.identifier, { cache : true})
-									.success(function(data){
-										ref.document = data;
-									})
-									.error(function(){
-										ref.document  = undefined;
-										ref.error     = error;
-										ref.errorCode = code;
-									});
-							}
-
-							ref.document  = undefined;
-							ref.error     = error;
-							ref.errorCode = code;
-
-						});
-				});
-			};
-
 			$scope.$watch("document", function (oldVal,newVal) {
-				//if (oldVal && oldVal!=oldVal) {
 					getContacts(newVal);
-				//}
 			});
 
 			function getContacts(document){
@@ -169,7 +92,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 
 					$http.get(query).success(function(res) {
 						angular.forEach(res.response.docs, function(cna){
-							cnaQuery.push({identifier: cna.identifier_s});
+							$scope.emailList.push({identifier: cna.identifier_s});
 						});
 					});
 				}
@@ -190,7 +113,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 					var government =  document.government.identifier;
 					var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
 					"+organization_EN_t,telephone_s,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + realm.value.toLowerCase() +
-					"+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(type_ss:NP-FP+OR+type_ss:ABS-FP)+AND+(government_s:" + government + "))&rows=50";
+					"+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(government_s:" + government + "))&rows=50";
 
 					$http.get(query).success(function(res) {
 						angular.forEach(res.response.docs, function(nfp){

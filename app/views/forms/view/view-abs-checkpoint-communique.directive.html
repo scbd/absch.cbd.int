@@ -30,7 +30,7 @@
 				<div class="km-value">
 					<ul>
 						<li ng-repeat="item in document.checkpoint">
-							 <div view-default-reference ng-model="item.identifier" locale="locale"></div> 
+							 <div view-default-reference ng-model="item.identifier" locale="locale"></div>
 						</li>
 					</ul>
 				</div>
@@ -44,12 +44,12 @@
 						</div>
 					</div>
 				</div>
-				<div >
+				<div ng-if="emailList">
 		            <div class="row top-border bg-lightblue">
 		                <div ng-repeat="contact in emailList" class="">
 		                    <div class="col-xs-12">
 		                        <div class="km-value">
-		                            <div view-contact-reference document="contact" locale="locale"></div>
+		                            <div view-contact-reference ng-model="contact" locale="locale"></div>
 		                        </div>
 		                    </div>
 		                </div>
@@ -68,7 +68,7 @@
 					<div class="km-value">
 						<ul>
 							<li ng-repeat="item in document.permit">
-								 <div view-default-reference ng-model="item.identifier" locale="locale"></div> 
+								 <div view-default-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
 						</ul>
 					</div>
@@ -150,7 +150,7 @@
 						<div class="km-value km-pre"ng-bind-html="document.referenceOfInformedConsent | lstring:locale"></div>
 					</div>
 
-					
+
 
 					<div ng-show="document.personeToWhomGranted">
 						<label>Person or entity to whom prior informed consent was granted</label>
@@ -158,17 +158,17 @@
 							<div view-contact-reference ng-model="document.personeToWhomGranted" locale="locale"></div>
 						</div>
 					</div>
-                    
+
                     <div ng-show="document.referenceOfAgreedTerms">
 						<label>Reference or evidence of establishment of mutually agreed terms</label>
 						<div class="km-value km-pre"ng-bind-html="document.referenceOfAgreedTerms | lstring:locale"></div>
 					</div>
-                    
+
                     <div ng-show="document.dateOfAccess">
 					    <label>Date of access to the genetic resource</label>
 					    <div class="km-value">{{document.dateOfAccess}}</div>
 				    </div>
-                    
+
 				</div>
 			</div>
 			<div ng-show="document.description || document.dateFrom || document.dateTo ||
@@ -208,7 +208,7 @@
 					<div class="km-value km-pre">{{document.information | lstring:locale}}</div>
 				</div>
 			</div>
-			
+
             <div ng-show="document.relevantInformation||document.relevantDocuments">
 				<legend>Additional Information</legend>
 

@@ -17,6 +17,7 @@
     <!--<script src="../libs/barcode-39.js/barcode-39.min.js"></script>-->
 
     <script src="../libs/angular/angular.min.js"></script>
+    <script src="../libs/underscore/underscore-min.js"></script>
     <script src="../libs/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="absCheckpointCommunique.html.js"></script>
     <script src="absCommon.js"></script>
@@ -101,12 +102,12 @@
                 <div class="col-xs-12">
                     <label>Checkpoint(s) that collected or received this information:</label>
                       <div class="text"  ng-repeat="item in document.checkpoint">
-                        <span view-default-reference ng-model="item.identifier" locale="locale"></span> 
+                        <span view-default-reference ng-model="item.identifier" locale="locale"></span>
                       </div>
                     </div>
              </div>
-               
-             
+
+
 
 
             <legend>Recipients of the Checkpoint Communiqué</legend>
@@ -114,7 +115,7 @@
                 <div ng-repeat="contact in emailList">
                     <div class="col-xs-12">
                         <div class="text">
-                            <div view-contact-reference document="contact" locale="locale"></div>
+                            <div view-contact-reference ng-model="contact" locale="locale"></div>
                         </div>
                     </div>
                 </div>
@@ -130,10 +131,10 @@
                     <label>INTERNATIONAL RECOGNIZED CERTIFICATE(s) OF COMPLIANCE</label>
                     <div ng-show="!document.permitNotAvailable || document.permit">
                             <div class="text"  ng-repeat="item in document.permit">
-                            <span view-default-reference ng-model="item.identifier" locale="locale"></span> 
+                            <span view-default-reference ng-model="item.identifier" locale="locale"></span>
                         </div>
                     </div>
-                   
+
                 </div>
 
 

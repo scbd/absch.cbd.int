@@ -7,17 +7,16 @@ app.directive("viewContactReference", [function () {
 		replace: true,
 		transclude: false,
 		scope: {
-            document: "=document",
 			model: "=ngModel",
 			locale: "=",
 			target: "@linkTarget"
 		},
 		controller: ["$scope", "IStorage", "$filter", function ($scope, storage, $filter) {
-            
+
 			$scope.isCNA = false;
             $scope.isPerson = false;
             $scope.isOrganization= false;
-            
+
             //==================================================
             function checkCNA(doc) {
 				if(!doc)
@@ -75,7 +74,7 @@ app.directive("viewContactReference", [function () {
 				}
 
 			});
-            
+
             //==================================================
             $scope.$watch("document", function(newVal, oldVal) {
                 if(newVal){
@@ -83,8 +82,8 @@ app.directive("viewContactReference", [function () {
                     $scope.isPerson = checkPerson(newVal);
                     $scope.isOrganization = !$scope.isPerson;
                 }
-            });   
-            
+            });
+
 		}]
 	};
 }]);
