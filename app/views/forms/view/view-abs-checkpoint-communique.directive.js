@@ -147,12 +147,14 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 
 				$scope.emailList = [];
 				if(document.permit){
-						angular.forEach(document.permit, function(permit){
-							$http.get('/api/v2013/documents/' +  permit.identifier, { info:""})
-							.success(function(result){
-								if(result.authority && (result.authority.title_t || result.authority.firstName))
-									$scope.emailList.push(result.authority);
 
+						var permits = _.map(document.permit, function(document){
+							return $http.get('/api/v2013/documents/' +  document.identifier)
+						});
+						$q.all(permits)
+						.then(function(results){
+							_.each(results, function(result){
+								$scope.emailList.push({identifier:result.data.authority.identifier})
 							});
 						});
 				}
@@ -166,23 +168,22 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 					"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:" + country.join('+OR government_s:') + "))&rows=50"
 
 					$http.get(query).success(function(res) {
-						var cnaQuery=[]
 						angular.forEach(res.response.docs, function(cna){
-							cnaQuery.push($http.get('/api/v2013/documents/' + cna.identifier_s, {}));
+							cnaQuery.push({identifier: cna.identifier_s});
 						});
-						$q.all(cnaQuery).then(function(data){
-							angular.forEach(data, function(document){
-								$scope.emailList.push(document);
-							});
-						})
 					});
 				}
 				if(document.checkpoint){
-					angular.forEach(document.checkpoint, function(checkpoint){
-						if(checkpoint.contactsToInform)
-							angular.forEach(checkpoint.contactsToInform, function(contact){
-								$scope.emailList.push(contact);
-							});
+					var checkpoints = _.map(document.checkpoint, function(document){
+						return $http.get('/api/v2013/documents/' +  document.identifier)
+					});
+					$q.all(checkpoints)
+					.then(function(results){
+						 _.each(results, function(result){
+							_.each(result.data.contactsToInform, function(contacts){
+								   $scope.emailList.push({identifier:contacts.identifier})
+							 });
+						});
 					});
 				}
 				if(document.government){
@@ -195,6 +196,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 						angular.forEach(res.response.docs, function(nfp){
 								$scope.emailList.push(
 										{
+											header	: {identifier:nfp.identifier_s},
 											type:'person',
 											firstName:nfp.title_t,
 											addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
