@@ -4,6 +4,7 @@
 		<span class="color-black"> (IRCC) </span>
 		</h4> </div>
 	<div class="record-body panel-body">
+        
 
 			<legend ng-if="document.government">
                 <a  ng-if="document.info" class="btn btn-default btn-small pull-right" style="background-color:#f5f5f5;" target="_new" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
@@ -237,10 +238,12 @@
 						<li ng-repeat="term in document.usage">{{term|term}}</li>
 					</ul>
 				</div>
-				<div ng-if="document.usageConfidential">
-					<div class="km-value km-pre confidential">Confidential information</div>
-				</div>
-			</div>
+            </div>
+            <div ng-if="document.usageConfidential">
+                <label>Type of use allowed by the permit or its equivalent</label>
+                <div class="km-value km-pre confidential">Confidential information</div>
+            </div>
+			
 
 			<div ng-show="document.usageDescription">
 				<label>Additional information about the specified uses covered by the permit or its equivalent or use restrictions</label>
@@ -322,6 +325,11 @@
 
 				</div>
 			</div>
+            
+            <div>
+                <legend>Ammendment history</legend>
+                <div view-history document-id="document.header.identifier" public-view="true"></div>
+             </div>
 
 
 	</div>

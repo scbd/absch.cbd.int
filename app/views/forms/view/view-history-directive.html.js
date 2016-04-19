@@ -8,6 +8,7 @@ define(['app'], function(app) {
             transclude: false,
             scope: {
                 documentId: "=",
+                publicView: "=",
             },
             // link: function($scope, $element) {
             //     // $element.find("[data-toggle='tooltip']").tooltip({trigger:'hover'});

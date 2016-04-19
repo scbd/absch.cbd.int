@@ -5,7 +5,7 @@
               
                 <tbody ng-repeat="document in documents | orderBy:'updatedOn':false"  >
                      
-                     <tr ng-show="$index===0" style="border-bottom:2px solid #ddd;">
+                     <tr ng-show="$index===0 && !publicView" style="border-bottom:2px solid #ddd;">
                         <td><span class="bold color-grey"> CREATED </span></td>
                         <td>  by <span style="font-weight:500;">{{document.submittedBy.firstName}}{{document.submittedBy.lastName}} ({{document.submittedBy.email}})</span> on <span style="font-weight:500;">{{document.submittedOn | formatDateWithTime}}</span> </td>
                         <td>
@@ -15,7 +15,7 @@
                
                     <tr>
                     <td style="width:100px;" >
-                        <span ng-show="document.body.amendmentIntent==1  && !isPermit && document.type!='absCheckpointCommunique'">
+                        <span ng-show="document.body.amendmentIntent==1  && document.type!='absCheckpointCommunique'">
                             <span class="bold color-red"> REVOKED</span></span>
                         <span ng-show="isPermit && document.type=='absCheckpointCommunique'">
                             <span class="bold"> CPC SENT</span></span>
@@ -24,8 +24,13 @@
                             <span class="bold color-green"> UPDATED</span></span>
                         <span ng-show="(document.revision == 1 && isPermit && document.type!='absCheckpointCommunique') || (document.revision == 1 && !isPermit)">
                             <span class="bold color-green"> PUBLISHED</span></span>
-                        
-                         <div ng-show="document.body.amendmentsDescription">
+                    </td>
+             
+                    <td> 
+                        <div ng-show="!publicView">by <span style="font-weight:500;">{{document.updatedBy.firstName}}{{document.updatedBy.lastName}} ({{document.updatedBy.email}})</span> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span></div> 
+                        <div ng-show="publicView"> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span></div> 
+                       
+                        <div ng-show="document.body.amendmentsDescription">
                                 <span ng-show="document.body.amendmentsDescription">
 						  		<span ng-show="!more" ng-bind-html="document.body.amendmentsDescription| lstring:locale | limitTo:80">
 						  		<a ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentsDescription| lstring:locale).length > 200">
@@ -37,12 +42,7 @@
                             </div>
                     </td>
 
-                    <td> 
-                     by <span style="font-weight:500;">{{document.updatedBy.firstName}}{{document.updatedBy.lastName}} ({{document.updatedBy.email}})</span> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span> 
-                    </td>
-
                      <td>
-                         
                          <a style="margin-left:10px;" ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}"  target="_blank">
 						 <span>{{document | uniqueID}}</span>
 						 </a>

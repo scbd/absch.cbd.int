@@ -36,7 +36,7 @@
             <a href="#" ng-click="gotoList($event,'resource')" class="color-darkgrey" style="font-weight:500;"> Virtual Library Record (VLR) - Reference material, literature and capacity-building resources</a>
         </div> 
         <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/VLR/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('resource','publish')===0}">{{facets('resource','publish')}}</a> </div>  
-        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/VLR/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('resource','draft')===0}">{{facets('resource','draft')}}</a></div> 
+        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/VLR/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('resource','draft') - facets('resource','request')===0}">{{facets('resource','draft') - facets('resource','request')}}</a></div> 
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/VLR/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('resource','request')===0}">{{facets('resource','request')}}</a></div> 
     </div>
     
@@ -56,7 +56,8 @@
             <a href="#" ng-click="gotoList($event,'capacityBuildingInitiative')" class="color-darkgrey" style="font-weight:500;">Capacity-building Initiatives (CBI)</a>
         </div> 
         <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/CBI/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('capacityBuildingInitiative','publish')===0}">{{facets('capacityBuildingInitiative','publish')}}</a> </div>  
-        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CBI/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('capacityBuildingInitiative','draft')===0}">{{facets('capacityBuildingInitiative','draft')}}</a></div> 
+        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CBI/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('capacityBuildingInitiative','draft') - facets('capacityBuildingInitiative','request')
+        ===0}">{{facets('capacityBuildingInitiative','draft') - facets('capacityBuildingInitiative','request')}}</a></div> 
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CBI/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('capacityBuildingInitiative','request')===0}">{{facets('capacityBuildingInitiative','request')}}</a></div> 
     </div>
     
@@ -66,7 +67,7 @@
             <a href="#" ng-click="gotoList($event,'modelContractualClause')" class="color-darkgrey" style="font-weight:500;"> Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards (A19A20)</a>
         </div> 
         <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/A19A20/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('modelContractualClause','publish')===0}">{{facets('modelContractualClause','publish')}}</a> </div>  
-        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/A19A20/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('modelContractualClause','draft')===0}">{{facets('modelContractualClause','draft')}}</a></div> 
+        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/A19A20/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('modelContractualClause','draft')  - facets('modelContractualClause','request')===0}">{{facets('modelContractualClause','draft') - facets('modelContractualClause','request')}}</a></div> 
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/A19A20/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('modelContractualClause','request')===0}">{{facets('modelContractualClause','request')}}</a></div> 
     </div>
     
@@ -76,7 +77,7 @@
             <a href="#" ng-click="gotoList($event,'communityProtocol')" class="color-darkgrey" style="font-weight:500;">Community protocols and procedures and customary laws (CPP)</a>
         </div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/CPP/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('communityProtocol','publish')===0}">{{facets('communityProtocol','publish')}}</a> </div>  
-        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPP/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('communityProtocol','draft')===0}">{{facets('communityProtocol','draft')}}</a></div> 
+        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPP/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('communityProtocol','draft')  - facets('communityProtocol','request')===0}">{{facets('communityProtocol','draft') - facets('communityProtocol','request')}}</a></div> 
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPP/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('communityProtocol','request')===0}">{{facets('communityProtocol','request')}}</a></div> 
     </div>
     

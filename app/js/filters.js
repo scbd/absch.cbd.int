@@ -239,12 +239,8 @@ define(["app",'/app/js/common.js'], function (app) {
 	//
 	//============================================================
 	app.filter("schemaName", [function() {
-
 		return function( schema ) {
-			//return mapSchema(schema);
-
-			if(!schema)
-				return schema;
+			if(!schema)return schema;
 			if(schema.toLowerCase()=="focalpoint"				 ) return "ABS National Focal Point";
 			if(schema.toLowerCase()=="authority"				 ) return "Competent National Authority";
 			if(schema.toLowerCase()=="contact"					 ) return "Contact";
@@ -267,8 +263,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="notification"				 ) return "Notification";
 			if(schema.toLowerCase()=="capacitybuildinginitiative") return "Capacity-building Initiative";
 			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "Capacity-building Resource";
-			if(schema.toLowerCase()=="endorsement"				) return "Endorsements";
-			// return schema;
+			if(schema.toLowerCase()=="endorsement"				 ) return "Endorsements";
 		};
 	}]);
 

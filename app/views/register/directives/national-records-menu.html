@@ -14,7 +14,7 @@
             <a href="#" ng-click="gotoList($event,'contact')" class="color-darkgrey" style="font-weight:500;" > Contacts (CON)</a>
          </div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/CON/status/published"  class="label label-success"  ng-class="{'bg-litegrey': facets('contact','publish')===0}">{{facets('contact','publish')}}</a> </div>
-        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CON/status/drafts"  class="label label-default" ng-class="{'bg-litegrey': facets('contact','draft')===0}">{{facets('contact','draft')}}</a></div>
+        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CON/status/drafts"  class="label label-default" ng-class="{'bg-litegrey': facets('contact','draft') - facets('contact','request')===0}">{{facets('contact','draft') - facets('contact','request')}}</a></div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CON/status/requests"  class="label label-danger" ng-class="{'bg-litegrey': facets('contact','request')===0}">{{facets('contact','request')}}</a></div>
     </div>
 
@@ -34,7 +34,7 @@
             <a href="#" ng-click="gotoList($event,'authority')" class="color-darkgrey" style="font-weight:500;">Competent National Authority (CNA)</a>
         </div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/CNA/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('authority','publish')===0}">{{facets('authority','publish')}}</a> </div>
-        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CNA/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('authority','draft')===0}">{{facets('authority','draft')}}</a></div>
+        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CNA/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('authority','draft') - facets('authority','request')===0}">{{facets('authority','draft') - facets('authority','request')}}</a></div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CNA/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('authority','request')===0}">{{facets('authority','request')}}</a></div>
     </div>
      <div class="row link1"  style="padding:0;margin:0 -3px 5px -3px" ng-click="gotoList($event,'measure')">
@@ -43,7 +43,7 @@
             <a ng-click="gotoList($event,'measure')" class="color-darkgrey" style="font-weight:500;">Legislative, administrative or policy measures <span class="hidden-sm">on access and benefit-sharing</span> (MSR)</a>
         </div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/MSR/status/published" class="label label-success"  ng-class="{'bg-litegrey': facets('measure','publish')===0}">{{facets('measure','publish')}}</a> </div>
-        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/MSR/status/drafts" class="label label-default"  ng-class="{'bg-litegrey': facets('measure','draft')===0}">{{facets('measure','draft')}}</a></div>
+        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/MSR/status/drafts" class="label label-default"  ng-class="{'bg-litegrey': facets('measure','draft') - facets('measure','request')===0}">{{facets('measure','draft') - facets('measure','request')}}</a></div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/MSR/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('measure','request')===0}">{{facets('measure','request')}}</a></div>
     </div>
      <div class="row link1"  style="padding:0;margin:0 -3px 5px -3px" ng-click="gotoList($event,'database')">
@@ -52,7 +52,7 @@
             <a href="#" ng-click="gotoList($event,'database')" class="color-darkgrey" style="font-weight:500;">National Website or Database (NDB)</a>
         </div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/NDB/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('database','publish')===0}">{{facets('database','publish')}}</a> </div>
-        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NDB/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('database','draft')===0}">{{facets('database','draft')}}</a></div>
+        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NDB/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('database','draft') - facets('database','request')===0}">{{facets('database','draft') - facets('database','request')}}</a></div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NDB/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('database','request')===0}">{{facets('database','request')}}</a></div>
     </div>
      <div class="row link1"  style="padding:0;margin:0 -3px 5px -3px" ng-click="gotoList($event,'absPermit')">
@@ -61,7 +61,7 @@
             <a href="#" ng-click="gotoList($event,'absPermit')" class="color-darkgrey" style="font-weight:500;">Permit or its equivalent <span class="hidden-sm">constituting an internationally recognized certificate of compliance</span> (IRCC)</a>
         </div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/IRCC/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('absPermit','publish')===0}">{{facets('absPermit','publish')}}</a> </div>
-        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/IRCC/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('absPermit','draft')===0}">{{facets('absPermit','draft')}}</a></div>
+        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/IRCC/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('absPermit','draft') - facets('absPermit','request')===0}">{{facets('absPermit','draft') - facets('absPermit','request')}}</a></div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/IRCC/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('absPermit','request')===0}">{{facets('absPermit','request')}}</a></div>
 
     </div>
@@ -72,7 +72,7 @@
             <a href="#" ng-click="gotoList($event,'absCheckpoint')" class="color-darkgrey" style="font-weight:500;">Checkpoint (CP)</a>
         </div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/CP/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('absCheckpoint','publish')===0}">{{facets('absCheckpoint','publish')}}</a> </div>
-        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CP/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('absCheckpoint','draft')===0}">{{facets('absCheckpoint','draft')}}</a></div>
+        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CP/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('absCheckpoint','draft') - facets('absCheckpoint','request')===0}">{{facets('absCheckpoint','draft') - facets('absCheckpoint','request')}}</a></div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CP/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('absCheckpoint','request')===0}">{{facets('absCheckpoint','request')}}</a></div>
     </div>
 
@@ -82,7 +82,7 @@
             <a href="#" ng-click="gotoList($event,'absCheckpointCommunique')" class="color-darkgrey" style="font-weight:500;" >Information for the Checkpoint Communiqué (CPC)</a>
         </div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/CPC/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('absCheckpointCommunique','publish')===0}">{{facets('absCheckpointCommunique','publish')}}</a> </div>
-        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPC/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('absCheckpointCommunique','draft')===0}">{{facets('absCheckpointCommunique','draft')}}</a></div>
+        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPC/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('absCheckpointCommunique','draft') - facets('absCheckpointCommunique','request')===0}">{{facets('absCheckpointCommunique','draft') - facets('absCheckpointCommunique','request')}}</a></div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPC/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('absCheckpointCommunique','request')===0}">{{facets('absCheckpointCommunique','request')}}</a></div>
 
     </div>
@@ -94,7 +94,7 @@
             <a href="#" ng-click="gotoList($event,'absNationalReport')" class="color-darkgrey" style="font-weight:500;">Interim National Report on the Implementation <span class="hidden-sm">of the Nagoya Protocol</span> (NR)</a>
         </div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/NR/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('absNationalReport','publish')===0}">{{facets('absNationalReport','publish')}}</a> </div>
-        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NR/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('absNationalReport','draft')===0}">{{facets('absNationalReport','draft')}}</a></div>
+        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NR/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('absNationalReport','draft') - facets('absNationalReport','request')===0}">{{facets('absNationalReport','draft') - facets('absNationalReport','request')}}</a></div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NR/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('absNationalReport','request')===0}">{{facets('absNationalReport','request')}}</a></div>
     </div>
 

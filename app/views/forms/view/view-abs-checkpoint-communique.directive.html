@@ -1,7 +1,7 @@
 ﻿<div id="Record" class="record panel panel-default">
 
 	<div class="panel-heading bg-blue" ng-show="display('header')">
-		<h4>Information for the Checkpoint Communiqué
+		<h4>Checkpoint Communiqué
 		<span class="color-black"> (CPC) </span> </h4>
 	</div>
 	<div class="record-body panel-body">
@@ -49,7 +49,7 @@
 		                <div ng-repeat="contact in emailList" class="">
 		                    <div class="col-xs-12">
 		                        <div class="km-value">
-		                            <div view-contact-reference ng-model="contact" locale="locale"></div>
+		                            <div view-contact-reference document="contact" locale="locale"></div>
 		                        </div>
 		                    </div>
 		                </div>

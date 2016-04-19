@@ -1,9 +1,9 @@
 <div ng-show="document">
-    <div ng-if="isOrganization()">
+    <div ng-if="isOrganization">
         <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;"
-        ng-if="!isCNA()" style="">Organization</div>
+        ng-if="!isCNA" style="">Organization</div>
         <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;"
-        ng-if="isCNA()">
+        ng-if="isCNA">
             Competent National Authority</div>
         <div>
             <span style="font-weight:500;">{{document.organization | lstring:locale}}</span>
@@ -17,8 +17,8 @@
         </div>
     </div>
 
-    <div ng-if="isPerson()">
-        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="!isCNA()" style="">Person</div>
+    <div ng-if="isPerson">
+        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="!isCNA" style="">Person</div>
         <div>
             <span style="font-weight:500;">{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</span>
         </div>
@@ -62,7 +62,7 @@
     <div ng-show="(document.contactOrganization || document).websites">
         Website: <span ng-repeat="item in (document.contactOrganization || document).websites"><a target="_new" ng-href="{{item.url}}">{{item.url}}</a><span ng-show="!$last">, </span></span>
     </div>
-    <div ng-if="isCNA()">
+    <div ng-if="isCNA">
         <a ng-href="/database/{{document.header.schema | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.info.revision}}" target="_new">
             <i class="fa fa-external-link-square" aria-hidden="true"></i> {{document | uniqueID}}
         </a>

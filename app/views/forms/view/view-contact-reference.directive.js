@@ -7,15 +7,45 @@ app.directive("viewContactReference", [function () {
 		replace: true,
 		transclude: false,
 		scope: {
+            document: "=document",
 			model: "=ngModel",
 			locale: "=",
 			target: "@linkTarget"
 		},
 		controller: ["$scope", "IStorage", "$filter", function ($scope, storage, $filter) {
             
-             $scope.uid = "";
+			$scope.isCNA = false;
+            $scope.isPerson = false;
+            $scope.isOrganization= false;
             
-			$scope.$watch("model", function(newVal) {
+            //==================================================
+            function checkCNA(doc) {
+				if(!doc)
+					return false;
+               if(!doc.type && doc.header){
+                    if(doc.header.schema==='authority') {
+                        doc.type = "CNA";
+                        return true;
+                    }
+                }
+
+				return false;
+			};
+
+            //==================================================
+			function checkPerson(doc) {
+				if(!doc)
+					return false;
+				if(doc.type==="person")
+					return true;
+				if(!doc.type && (doc.firstName))
+					return true; //default behaviour
+				return false;
+			};
+
+
+            //==================================================
+            $scope.$watch("model", function(newVal) {
 				if(!newVal)
 					return;
 
@@ -43,51 +73,18 @@ app.directive("viewContactReference", [function () {
 				else if(newVal.header || newVal.source) {
 					$scope.document = newVal;
 				}
-				if($scope.document)
-                    $scope.uid = $filter("uniqueID")($scope.document);
-
 
 			});
             
-        
-
-            $scope.isCNA = function() {
-
-				var doc = $scope.document;
-
-				if(!doc)
-					return false;
-
-                if(doc.header.schema==='authority') {
-                    doc.type = "CNA";
-                    return true;
+            //==================================================
+            $scope.$watch("document", function(newVal, oldVal) {
+                if(newVal){
+                    $scope.isCNA = checkCNA(newVal);
+                    $scope.isPerson = checkPerson(newVal);
+                    $scope.isOrganization = !$scope.isPerson;
                 }
-
-				return false;
-			};
-
-
-
-			$scope.isPerson = function() {
-
-				var doc = $scope.document;
-
-				if(!doc)
-					return false;
-
-				if(doc.type=="person")
-					return true;
-
-				if(!doc.type && (document.firstName || document.lastName))
-					return true; //default behaviour
-
-				return false;
-			};
-
-			$scope.isOrganization = function() {
-
-				return !$scope.isPerson();
-			};
+            });   
+            
 		}]
 	};
 }]);
