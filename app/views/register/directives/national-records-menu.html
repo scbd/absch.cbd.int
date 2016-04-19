@@ -81,7 +81,7 @@
             <span ng-click="gotoNew($event,'absCheckpointCommunique')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
             <a href="#" ng-click="gotoList($event,'absCheckpointCommunique')" class="color-darkgrey" style="font-weight:500;" >Information for the Checkpoint Communiqué (CPC)</a>
         </div>
-        <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/CPC/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('absCheckpointCommunique','publish')===0}">{{facets('absCheckpoint','publish')}}</a> </div>
+        <div class="col-xs-1 col-sm-2 col-md-1 text-right" ><a ng-href="/register/CPC/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('absCheckpointCommunique','publish')===0}">{{facets('absCheckpointCommunique','publish')}}</a> </div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPC/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('absCheckpointCommunique','draft')===0}">{{facets('absCheckpointCommunique','draft')}}</a></div>
         <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPC/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('absCheckpointCommunique','request')===0}">{{facets('absCheckpointCommunique','request')}}</a></div>
 
