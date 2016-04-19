@@ -35,8 +35,11 @@ app.directive("viewContactReference", [function () {
                 if(!newVal)
 					return;
            
-                $http.get('/api/v2013/documents/' +  $scope.model.identifier,  {}).success(function(data){
-                    $scope.document = data;
+                $http.get('/api/v2013/documents/' +  $scope.model.identifier + '?info').success(function(data){
+                    $scope.document = data.body;
+                    var info = angular.copy(data);
+                    delete info.body;
+                    $scope.document.info = info;
                 });
                 
                 $scope.uid = $filter("uniqueID")($scope.document);
@@ -227,57 +230,7 @@ function lstring(ltext, locale)
 		}
 	});
 
-app.filter("uniqueID", ['$filter', '$q','$http', function( $filter, $q, $http) {
-		var cacheMap = {};
 
-		return function(term, revision) {
-
-			if(!term)
-				return "";
-
-			var document;
-
-			if(term && term.identifier){
-				if(cacheMap[term.identifier + (revision ? '_revision':'')])
-					return cacheMap[term.identifier+ (revision ? '_revision':'')] ;
-
-				document = $http.get('/api/v2013/documents/' +  term.identifier +'?info=true');
-			}
-
-
-			if(!document)
-				return;
-
-			cacheMap[term.identifier+ (revision ? '_revision':'')] = $q.when(document).then(function(document) {
-
-				document = document.data;
-
-				var government = ''
-				if(document.government)
-					government = document.government.identifier;
-				else if(document.metadata && document.metadata.government)
-					government = document.metadata.government;
-				else if(document.body && document.body.government)
-					government = document.body.government.identifier;
-
-				var unique = 'ABSCH' + (document.realm.toUpperCase().replace('ABS','').replace('-','')) + '-' + $filter("schemaShortName")($filter("lowercase")(document.type)) +
-						(government != '' ? '-' + $filter("uppercase")(government) : '') +
-						'-' + document.documentID + (revision ? ('-' + document.revision) : '');
-
-
-				cacheMap[term.identifier+ (revision ? '_revision':'')] = unique;
-
-				return unique;
-
-			}).catch(function(){
-
-				cacheMap[term.identifier+ (revision ? '_revision':'')] = term.identifier;
-
-				return term.identifier;
-
-			});
-		};
-	}]);
     
     
     //============================================================
