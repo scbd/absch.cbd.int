@@ -130,14 +130,14 @@
                                                 implementation, monitoring and evaluation, including making funding available, ensuring that fiduciary standards and quality
                                                 assurance are applied, and preparation of the project completion reports. The implementing agency is ultimately the entity
                                                 responsible for the completion of the initiative and is accountable to the donor.</div>
-                                            <div document-selector ng-model="document.implementingAgencies"
+                                            <!-- <div document-selector ng-model="document.implementingAgencies"
                                                                         question="implementingAgencies"
                                                                         schema="contact"
                                                                         government="document.government"
                                                                         filter="true"
-                                                                        ></div>
-                                            
-                                            <!--<field-embed-contact multiple ng-model="document.implementingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>-->
+                                                                        ></div> -->
+
+                                            <field-embed-contact multiple ng-model="document.implementingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
                                         </div>
                                     </div>
                                 </div>
@@ -149,14 +149,14 @@
                                             <div class="help-info">Executing agency refers to the organisation/institution directly managing the initiative, including the day-to- day planning,
                                             coordination and execution of its activities, monitoring and reporting on the progress made, procuring and managing resources
                                             (staff, funds, equipment, etc.), and carrying out other project management functions.</div>
-                                             <div document-selector ng-model="document.executingAgencies"
+                                             <!-- <div document-selector ng-model="document.executingAgencies"
                                                                         question="executingAgencies"
                                                                         schema="contact"
                                                                         government="document.government"
                                                                         filter="true"
-                                                                        ></div>
-                                            
-                                            <!--<field-embed-contact multiple ng-model="document.executingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>-->
+                                                                        ></div> -->
+
+                                            <field-embed-contact multiple ng-model="document.executingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
                                         </div>
                                     </div>
                                 </div>
@@ -167,14 +167,14 @@
                                         <div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="Please select the collaborating partner(s)">
                                             <div class="help-info">Collaborating partners refer to entities or organizations making significant financial or other contribution to the initiative and/or
                                                     actively supporting or collaborating in the implementation of the initiative.</div>
-                                             <div document-selector ng-model="document.collaboratingPartners"
+                                             <!-- <div document-selector ng-model="document.collaboratingPartners"
                                                                         question="collaboratingPartners"
                                                                         schema="contact"
                                                                         government="document.government"
                                                                         filter="true"
-                                                                        ></div>
-                                                                        
-                                            <!--<field-embed-contact multiple ng-model="document.collaboratingPartners" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>-->
+                                                                        ></div> -->
+
+                                            <field-embed-contact multiple ng-model="document.collaboratingPartners" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
                                         </div>
                                     </div>
                                 </div>
@@ -186,15 +186,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="km-control-group" name="contacts" caption="Contact person(s)">
-                                    
-                                     <div document-selector ng-model="document.contacts"
+
+                                     <!-- <div document-selector ng-model="document.contacts"
                                                                         question="contacts"
                                                                         schema="contact"
                                                                         government="document.government"
                                                                         filter="true"
-                                                                        ></div>
-                                                                        
-                                    <!--<field-embed-contact multiple ng-model="document.contacts" locales="document.header.languages" caption="{{'Add a contact »'}}"></field-embed-contact>-->
+                                                                        ></div> -->
+
+                                    <field-embed-contact multiple ng-model="document.contacts" locales="document.header.languages" caption="{{'Add a contact »'}}"></field-embed-contact>
                                 </div>
                             </div>
                         </div>
@@ -253,7 +253,7 @@
 									<div class="help-info"> "Experiential learning" involves action learning through hands-on experience, observation, interaction and reflection. This can be achieved through on-the- job training (e.g. apprenticeships/internships, job-shadowing, mentoring, etc.), study tours, and staff exchange or twinning programmes.</div>
                                     <div class="help-info">"Trainings" may include formal classroom-based, instructor-led training courses.</div>
                                     <div class="help-info">"Workshops" may include general peer-to- peer exchange workshops, multi-stakeholder workshops or workshops for exchange of</div>
-                                    
+
                                     <div km-term-check show-description="true" name="categories" required ng-model="document.categories" terms="options.categories()" binding-type="term[]"></div>
 								</div>
 							</div>
@@ -271,7 +271,7 @@
 						</div>
 						<div class="row" ng-show="isSelfFunding()">
 							<div class="col-md-12">
-                                
+
 								<div class="km-control-group" required="isSelfFunding()" name="selfFunding" caption="Please provide further information on funding">
 									<div km-textbox-ml required="isSelfFunding()" rows="2" name="selfFunding" ng-model="document.selfFundingInfo" placeholder="" locales="document.header.languages"></div>
 								</div>
@@ -282,14 +282,14 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="km-control-group" name="corefundingsources" caption="Core funding-source(s)">
-                                   
-                                      <div document-selector ng-model="document.coreFundingSources"
+
+                                      <!-- <div document-selector ng-model="document.coreFundingSources"
                                                                         question="coreFundingSources"
                                                                         schema="contact"
                                                                         government="document.government"
                                                                         filter="true"
-                                                                        ></div>
-                                    <!--<field-embed-contact multiple ng-model="document.coreFundingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>-->
+                                                                        ></div> -->
+                                    <field-embed-contact multiple ng-model="document.coreFundingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
                                 </div>
                             </div>
                         </div>
@@ -297,15 +297,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="km-control-group" name="cofinancingsources" caption="Co-financing source(s)">
-                                    
-                                      <div document-selector ng-model="document.coFinancingSources"
+
+                                      <!-- <div document-selector ng-model="document.coFinancingSources"
                                                                         question="coFinancingSources"
                                                                         schema="contact"
                                                                         government="document.government"
                                                                         filter="true"
-                                                                        ></div>
-                                                                        
-                                    <!--<field-embed-contact multiple ng-model="document.coFinancingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>-->
+                                                                        ></div> -->
+
+                                    <field-embed-contact multiple ng-model="document.coFinancingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
                                 </div>
                             </div>
                         </div>
@@ -367,7 +367,7 @@
 						</div>
 
                         <legend>Information on the thematic coverage of the initiative</legend>
-                        
+
                         <div class="row" >
 							<div class="col-md-12">
 								<div class="km-control-group" required name="aichiTargets" caption="Related Aichi Biodiversity Target(s)">

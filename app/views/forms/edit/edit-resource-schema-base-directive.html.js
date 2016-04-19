@@ -1,4 +1,5 @@
-define(['app', 'underscore'], function (app, _) {
+define(['app', 'underscore',
+'./field-embed-contact.directive.js'], function (app, _) {
 
 	app.directive('editSchemaResourceBase', ["$q", "$timeout", "Thesaurus", function ($q, $timeout, Thesaurus)
 	{
@@ -125,7 +126,7 @@ define(['app', 'underscore'], function (app, _) {
 			               _.contains(purposes, '9F48AEA0-EE28-4B6F-AB91-E0E088A8C6B7') || // Raising awareness
 			               _.contains(purposes, '5831C357-95CA-4F09-963B-DF9E8AFD8C88');   // Training/learning
 			    };
-                
+
                 //============================================================
 				//
 				//============================================================
@@ -141,7 +142,7 @@ define(['app', 'underscore'], function (app, _) {
 			        return _.contains(purposes, 'C1B32F41-89D1-4EDC-8EF2-335362B91F8D'); // Literature
 
 			    };
-                
+
                 //============================================================
 				//
 				//============================================================
@@ -197,29 +198,29 @@ define(['app', 'underscore'], function (app, _) {
 				//============================================================
 				//
 				//============================================================
-				$scope.$on("loadDocument", function(evt, info) {
-					var loadRecords = [];
-					_.each($scope.document.organizations, function(org){
-						loadRecords.push($scope.loadRecords(org.identifier));
-					});
-					$q.all(loadRecords).then(function(data){
-						$scope.document.organizationsRef = data;
-					});
-				});
+				// $scope.$on("loadDocument", function(evt, info) {
+				// 	var loadRecords = [];
+				// 	_.each($scope.document.organizations, function(org){
+				// 		loadRecords.push($scope.loadRecords(org.identifier));
+				// 	});
+				// 	$q.all(loadRecords).then(function(data){
+				// 		$scope.document.organizationsRef = data;
+				// 	});
+				// });
 
 				//============================================================
 				//
 				//============================================================
-				$scope.$watch("document.organizationsRef", function(newValue){
-
-					if(newValue){
-						$scope.document.organizations = [];
-						_.each(newValue, function(org){
-							$scope.document.organizations.push({identifier: org.header.identifier});
-						});
-
-					}
-				});
+				// $scope.$watch("document.organizationsRef", function(newValue){
+				//
+				// 	if(newValue){
+				// 		$scope.document.organizations = [];
+				// 		_.each(newValue, function(org){
+				// 			$scope.document.organizations.push({identifier: org.identifier||org.header.identifier});
+				// 		});
+				//
+				// 	}
+				// });
 
 				//==================================
 				//

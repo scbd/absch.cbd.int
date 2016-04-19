@@ -26,7 +26,7 @@
 					<legend name="formInfo" style="display:none"></legend>
 					<section>
 						<legend>General information</legend>
-						
+
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" required name="title" caption="Title">
@@ -103,17 +103,17 @@ performing certain types of tasks and/or implementing specific approaches. </div
 							</div>
 						</div>
 
-						<div class="row" ng-if="document.organizationsRef">
+						<div class="row" ng-if="document.organizations">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="organizations" caption="Authoring organisation(s) ">
 
-                                    <div document-selector ng-model="document.organizationsRef"
+                                    <!-- <div document-selector ng-model="document.organizationsRef"
                                                                         question="organizationsRef"
                                                                         schema="contact"
                                                                         government="document.government"
                                                                         filter="true"
-                                                                        ></div>
-
+                                                                        ></div> -->
+								<field-embed-contact multiple ng-model="document.organizations" organization-only locales="document.header.languages" caption="Add organizations »">
 
 								</div>
 							</div>
@@ -136,8 +136,8 @@ performing certain types of tasks and/or implementing specific approaches. </div
 								</div>
 							</div>
 						</div>
-                        
-                      
+
+
 
 						<div class="row" >
 							<div class="col-xs-12" ng-if="isResource">

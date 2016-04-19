@@ -11,7 +11,33 @@ app.directive("viewOrganizationReference", [function () {
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: [function () {
+		controller: ["$scope", "IStorage", function ($scope, storage){
+
+			$scope.$watch("document", function(newVal)
+			{
+				if(newVal && newVal.identifier)
+					loadReferences(newVal);
+				else
+					$scope.organization = newVal;
+			});
+			function loadReferences(ref) {
+
+				storage.documents.get(ref.identifier, { cache : true})
+					.success(function(data){
+						$scope.organization = data;
+					})
+					.error(function(error, code){
+						if (code == 404) {
+
+							storage.drafts.get(ref.identifier, { cache : true})
+								.success(function(data){
+									$scope.organization = data;
+								});
+						};
+
+					});
+			};
+
 		}]
 	};
 }]);
