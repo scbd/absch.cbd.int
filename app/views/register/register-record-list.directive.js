@@ -25,8 +25,8 @@ function(app, _) {
                         trigger: 'hover'
                     });
 
-                    
-                     
+
+
                     $scope.$watch("recordToDelete", function(val) {
                         if (val && !deleteRecordModel.is(":visible")) {
                             deleteRecordModel.appendTo('body').modal("show");
@@ -139,8 +139,8 @@ function(app, _) {
                                 commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint')) ||
                                 commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
                                 commonjs.isUserInRole($rootScope.getRoleName('Administrator')))){
-                           $scope.cantDelete = false;  
-                           $scope.iacCantDelete = true;   
+                           $scope.cantDelete = false;
+                           $scope.iacCantDelete = true;
                             $scope.recordToDelete = "0";
                         }
                         else{
@@ -152,7 +152,7 @@ function(app, _) {
                             } else {
                                 $scope.recordToDelete = record;
                                 $scope.cantDelete = false;
-                                                        
+
                             }
                         }
 
@@ -218,7 +218,7 @@ function(app, _) {
                     //
                     //============================================================
                     $scope.isDraft = function(entity) {
-                        return entity && entity.workingDocumentCreatedOn;
+                        return entity && entity.workingDocumentCreatedOn && !entity.workingDocumentLock;
                     };
 
                     //============================================================
@@ -246,7 +246,7 @@ function(app, _) {
                     $scope.isPublished = function(entity) {
                         return entity && entity.documentID;
                     };
-                    
+
                      if($routeParams.status){
                         var status = $routeParams.status;
                         if(status === 'published' )
@@ -585,11 +585,11 @@ function(app, _) {
 
                     function loadRecords() {
                         $scope.loading = true;
-                        
-                        
-                       
-                        
-                        
+
+
+
+
+
                         var schema = $filter("mapSchema")($routeParams.document_type);
 
                         if (schema === null || schema == undefined)
