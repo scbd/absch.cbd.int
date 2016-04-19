@@ -514,8 +514,10 @@ app.directive("permit", [function() {
                             });
                     });
 
-                    var identifierWithoutRevision = $scope.documentId.substr(0, $scope.documentId.indexOf('@'))
-
+                    var identifierWithoutRevision = $scope.documentId;
+                    if(identifierWithoutRevision.indexOf('@')>0)
+                        identifierWithoutRevision = identifierWithoutRevision.substr(0, identifierWithoutRevision.indexOf('@'));
+                        
                     $http.get('/api/v2013/documents/' + identifierWithoutRevision + '/versions?body=true&cache=true')
                         .success(function(data) {
                             $scope.versions = data.Items;
