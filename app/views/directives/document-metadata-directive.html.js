@@ -7,26 +7,21 @@ define(['app', '/app/js/common.js'
 			templateUrl: '/app/views/directives/document-metadata-directive.html',
 			controller: ['$scope', '$filter','commonjs','$element', '$compile', function($scope, $filter, commonjs, $element, $compile){
 
-				$scope.getDocumentId = function(document){
+				$scope.getUniqueID = function(document){
 					if(!document)
 						return;
+                    var uid
 					if(!document.id)
-						return $filter("uniqueIDWithoutRevision")(document.info);
+						uid = $filter("uniqueIDWithoutRevision")(document.info);
 					else
-						return commonjs.hexToInteger(document.id);
+						uid = $filter("uniqueID")(document);
+
+                    if(!uid)
+                     return "unique identifier not yet assigned ";
+
+                    return uid;
 				}
-                
-               $scope.getUniqueID = function(doc){
-                
-                   var uid =$filter('uniqueID')(doc);
-                   
-                   if(!uid)
-                    return "unique identifier not yet assigned ";   
-                   
-                   return uid;
-                   
-               }
-                
+
 				$scope.loadReportRecord = function(schema, identifier){
 
                     require(['/app/views/directives/report-record.js'], function() {

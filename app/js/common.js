@@ -160,6 +160,9 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                 }
                 //==================================================================================
                 this.integerToHex = function(d, schema) {
+                    if(!schema)
+                        return d;
+
                     var schemaCode = '';
                     if (_.contains(["pressrelease", "statement", "news", "new", "pr", "st", "news", "new"], schema.toLowerCase()))
                         schemaCode = "52000000cbd0180000000000";

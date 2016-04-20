@@ -92,7 +92,8 @@ app.directive('recordLoader', [function () {
 				var documentSchema = $route.current.params.documentSchema;
 				var documentRevision = $route.current.params.revision;
 
-				var documentID = documentSchema ? commonjs.integerToHex($route.current.params.documentID, documentSchema) : $route.current.params.documentID;
+				var documentID = $route.current.params.documentID
+				//documentSchema ? commonjs.integerToHex($route.current.params.documentID, documentSchema) : $route.current.params.documentID;
 
 				if($scope.revisionNo)
 					documentRevision = $scope.revisionNo;
@@ -124,6 +125,7 @@ app.directive('recordLoader', [function () {
 						documentID = docNum[docNum.length-1];
 
 				}
+				documentID = commonjs.integerToHex(documentID, documentSchema);
 
 				$scope.loadDocument(documentSchema,documentID,documentRevision);
 				// else

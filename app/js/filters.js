@@ -1,5 +1,5 @@
 ﻿
-define(["app",'/app/js/common.js'], function (app) {
+define(["app",'/app/js/common.js', '../services/app-config-service'], function (app) {
 
 
 	//============================================================
@@ -26,8 +26,8 @@ define(["app",'/app/js/common.js'], function (app) {
 	}
 
 //============================================================
-    app.filter("uniqueID", ["IStorage", '$filter', '$q','commonjs', 'realm',
-	 						function(storage, $filter, $q, commonjs, realm) {
+    app.filter("uniqueID", ["IStorage", '$filter', '$q','commonjs', 'realm', 'appConfigService',
+	 						function(storage, $filter, $q, commonjs, realm, appConfigService) {
 		var cacheMap = {};
 
 		return function(term) {
@@ -82,14 +82,6 @@ define(["app",'/app/js/common.js'], function (app) {
                 else
                     document = document;
 
-                if(document.schema_s && (document.schema_s.toLowerCase() == "statement" || document.schema_s.toLowerCase() == "notification" ||  document.schema_s.toLowerCase() == "news" ||
-                    document.schema_s.toLowerCase() == "meeting" ||  document.schema_s.toLowerCase() == "pressrelease" ||  document.schema_s.toLowerCase() == "new" ||
-                    document.schema_s.toLowerCase() == "focalpoint")){
-                        cacheMap[term.identifier] = document.identifier_s ? document.identifier_s : document.id;
-                        return cacheMap[term.identifier];
-
-                    }
-
                 var government = '';
 				var documentId;
 
@@ -111,7 +103,13 @@ define(["app",'/app/js/common.js'], function (app) {
                 else if(document.body && document.body.government)
                     government = document.body.government.identifier;
 
-                var unique = 'ABSCH' + (realm.value.toUpperCase().replace('ABS','').replace('-','')) +
+
+				var relamPrefix = '';
+				if(document.schema_s &&
+				(!_.contains(appConfigService.scbdSchemas, document.schema_s.toLowerCase() || document.schema_s.toLowerCase()!= 'focalpoint')))
+					relamPrefix = (realm.value.toUpperCase().replace('ABS','').replace('-',''));
+
+				var unique = 'ABSCH' + relamPrefix +
 						'-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s||document.schema)) +
                         '-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +
                         '-' + documentId;
