@@ -20,15 +20,22 @@
                         <span ng-if="country.isNPInbetweenParty" class="color-inbetween bold">Ratified not yet Party to the Nagoya Protocol</span>
                         <div ng-if="country.code==='dk'" style="margin-left:194px;"class="bold"><i class="fa fa-info-circle"></i> Denmark’s ratification of the Nagoya Protocol does not apply in respect of Greenland and the Faroe Islands.</div>
                     </div>
-                    <div style="margin-bottom:5px;">
-                        <label>Signatory:</label>
-                        <span ng-if="country.isNPSignatory" class="color-pink bold">Signatory</span>
-                        <span ng-if="!country.isNPSignatory" class="color-grey bold">No</span>
-                    </div>
-                    <div ng-if="country.isNPParty || country.isNPInbetweenParty" style="margin-bottom:5px;">
+                     <div ng-if="country.isNPParty || country.isNPInbetweenParty" style="margin-bottom:5px;">
                         <label>Enter<span ng-if="country.isNPInbetweenParty">s</span><span ng-if="country.isNPParty">ed</span> into force on:</label>
                         <span class="color-grey bold">{{country.entryIntoForce|formatDate}}</span>
                     </div>
+                    <div ng-if="country.isNPRatified && country.dateDeposit"  style="margin-bottom:5px;">
+                        <label ng-if="country.instrument" ><span style="text-transform:capitalize;">{{country.instrument}}</span> on:</label>
+                        <label ng-if="!country.instrument">Ratification on:</label>
+                        <span class="color-grey bold">{{country.dateDeposit|formatDate}}</span>
+                    </div>
+                    <div style="margin-bottom:5px;">
+                        <label>Signatory:</label>
+                        <span ng-if="country.isNPSignatory && !country.dateSigned" class="color-pink bold">Signatory</span>
+                        <span ng-if="country.isNPSignatory && country.dateSigned" class="color-pink bold">Signed on {{country.dateSigned|formatDate}} </span>
+                        <span ng-if="!country.isNPSignatory" class="color-grey bold">No</span>
+                    </div>
+                   
                     <div style="white-space:nowrap;overflow-x:hidden;margin-bottom:5px;">
                         <label>CBD Country Profile:</label>
                         <a  href="https://www.cbd.int/countries/?country={{country.code}}" target="_new"> www.cbd.int/countries/?country={{country.code}} </a>

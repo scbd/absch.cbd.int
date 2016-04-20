@@ -560,14 +560,34 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                     country.isNPSignatory = isSignatory(countryDetails) || country.code == 'EU';
                     country.isNPRatified = isRatified(countryDetails) || country.code == 'EU';
                     country.isNPInbetweenParty = moment().diff(moment(treaties.XXVII8b.deposit), 'days') < 90;
-
+                    
+                    country.dateDeposit =  countryDetails.treaties.XXVII8b.deposit;
+                    country.instrument = countryDetails.treaties.XXVII8b.instrument;
+                    country.dateSigned = countryDetails.treaties.XXVII8b.signature;
+                    
                     if (country.isNPInbetweenParty)
                         country.entryIntoForce = moment(treaties.XXVII8b.deposit).add(90, 'day');
                     else
-                        country.entryIntoForce = treaties.XXVII8b.deposit;
+                        country.entryIntoForce = treaties.XXVII8b.party;
 
                     return country;
                 }
+                
+                
+                //==================================================================================
+                function isNPParty(entity) {
+
+                    if (entity && entity.isNPParty != undefined)
+                        return entity.isNPParty;
+
+                    if (entity && entity.isNPInbetweenParty != undefined)
+                        return entity.isNPInbetweenParty;
+
+                    return entity && (moment().diff(moment(entity.treaties.XXVII8b.deposit), 'days') >= 90) && (entity.treaties.XXVII8b.instrument == "ratification" ||
+                        entity.treaties.XXVII8b.instrument == "accession" ||
+                        entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
+                }
+                
                 //==================================================================================
                 function isNPParty(entity) {
 
