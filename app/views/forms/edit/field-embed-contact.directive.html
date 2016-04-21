@@ -1,153 +1,175 @@
-﻿<div>
+<div>
     <link href="/app/css/record.css" rel="stylesheet">
 
-    <div id="myModal" class="modal fade" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- dialog body -->
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    Are you sure you want to permanently delete this contact?
-                </div>
-                <!-- dialog buttons -->
-                <div class="modal-footer">
-                    <button type="button" id="deleteOk" class="btn btn-danger">Ok</button>
-                    <button type="button" data-dismiss="modal" class="btn btn-primary">Cancel</button>
-                </div>
+    <div ng-if="getContacts().length > 0">
+        <div class="col-xs-12 form-control no-shadow thin-border" ng-repeat="contact in getContacts()" style="height:auto;margin-bottom:5px;">
+            <div class="pull-right">
+                <button type="button" class="btn btn-default" ng-click="deleteContact($index, true)"><i class="fa fa-times"></i>
+                </button>
             </div>
+            <view-organization-reference ng-model='contact' locale="en"></view-organization-reference>
         </div>
     </div>
-    <div class="row" ng-show="getContacts()">
-        <div ng-show="showFilter">
-            <div class="col-xs-10" style="padding-bottom:3px;">
-                <span ng-click="filterBy=null" class="btn" style="font-weight:strong;">
-                    <i ng-hide="filterBy" class="glyphicon glyphicon-ok"></i> All
-                    <span class="badge">
-                        {{(getContacts() ).length}}</span>
-                </span>
-                <!-- <span ng-click="filterBy=isOrganization" class="btn" style="font-weight:strong;">
-                    <i ng-show="filterBy==isOrganization" class="glyphicon glyphicon-ok"></i> Organizations
-                    <span class="badge">{{(getContacts() | filter:isOrganization).length}}</span>
-                </span>
-                <span ng-click="filterBy=isPerson" class="btn" style="font-weight:strong;">
-                    <i ng-show="filterBy==isPerson" class="glyphicon glyphicon-ok"></i> People
-                    <span class="badge">{{(getContacts() | filter:isPerson).length}}</span>
-                </span> -->
-                <span ng-click="filterBy=isCNA" class="btn" style="font-weight:strong;">
-                    <i ng-show="filterBy==isCNA" class="glyphicon glyphicon-ok"></i> CNA
-                    <span class="badge">{{(getContacts() | filter:isCNA).length}}</span>
-                </span>
-                <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword" style="width:160px;display:inline;">
-            </div>
-            <div class="col-xs-2" ng-show="showButtons()" style="padding-bottom:3px;">
-                <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
-                    <a ng-click="editContact(-1)" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-plus-sign"></span>Add new</a>
-                </span>
-            </div>
-        </div>
-    </div>
-
-   <!--  <div class="row">
-        <div class="col-xs-12"><div style="border-bottom:3px solid #111;"></div></div>
-    </div> -->
-<!--    
-        display: block;
-    width: 100%;
-
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    -->
-
-        <div  ng-if="getContacts().length > 0" >
-                <div class="col-xs-12 form-control no-shadow thin-border" ng-repeat="contact in getContacts() | filter:filterBy | filter:keywords" style="height:auto;margin-bottom:5px;" >
-                    <div class="pull-right" ><!-- ng-show="showButtons(contact)" -->
-                         <button type="button" class="btn btn-default" ng-click="editContact($index)"><i class="fa fa-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-default" ng-click="deleteContact($index, true)"><i class="fa fa-times"></i>
-                        </button>
-                    </div>
-                    <view-contact-reference ng-model='contact' locale="en"></view-contact-reference>
-                </div>
-        </div>
 
     <!-- ng-show="showButtons()" -->
-    	<button class="btn btn-default" ng-click="editContact(-1)" >
-	     <i class="fa fa-plus"></i> {{caption || 'ADD ORGANIZATION OR CONTACT »'}}
-	   </button>
+    <button class="btn btn-default" ng-click="showContacts(-1)">
+        <i class="fa fa-plus"></i> {{caption || 'ADD ORGANIZATION OR CONTACT »'}}
+    </button>
 
     <!-- Modal -->
     <div class="modal fade" id="editContact" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header" ng-class="{'bg-orange':organizationOnly, 'bg-blue':!organizationOnly}">
+                <div class="modal-header">
                     <button type="button" class="close" aria-hidden="true" ng-click="closeContact()"><i class="material-icons">close</i></button>
+                    <!-- <h2 class="modal-title" id="myModalLabel">
+                      <a ng-click="showExisting=true" ng-show="!showExisting">Select exisiting organization</a>
+                      <a ng-click="showExisting=false" ng-show="showExisting">Create organization</a>
+                    </h2> -->
                     <h2 class="modal-title" id="myModalLabel">
-                        <span ng-hide="exisiting">Add a new <span ng-if="!organizationOnly">Contact or </span>Organization</span>
-                        <span ng-show="exisiting" >Select exisiting <span ng-if="!organizationOnly">Contact or </span>organization</span>
+                        <span ng-hide="showExisting">Add a new Organization</span>
+                        <span ng-show="showExisting" >Select exisiting Organization</span>
                     </h2>
                     <br>
-                    <label ng-hide="selectExisting || organizationOnly" class="radio-inline">
-                        <input type="radio" ng-model="edition.contact.type" value="organization" name="editionContactType" />Organization</label>
-                    <label ng-hide="selectExisting || organizationOnly" class="radio-inline">
-                        <input type="radio" ng-model="edition.contact.type" value="person" name="editionContactType" />Person</label>
-                     <a class="pull-right color-white" href="#" ng-click="loadExisting();exisiting=!exisiting"><strong>{{buttonText}}</strong></a>
-                     <br>
+                     <a class="pull-right" ng-click="loadExisting();showExisting=true" ng-show="!showExisting" ng-href="#">Select exisiting organization</a>
+                     <a class="pull-right" ng-click="showExisting=false" ng-show="showExisting" ng-href="#">Create organization</a>
+
                 </div>
-                <div class="modal-body" style="padding-top:0;">
-                    <div ng-hide="selectExisting">
-
-                         <div style="margin-bottom:30px;"></br>
-                            <span class="color-red pull-left" ng-hide="editContactForm.$valid">* Mandatory fields must be filled in before record can be saved.</span>
-                            <span class="alert alert-danger" ng-if="errorMessage">{{errorMessage}}</span>
-                            <a type="button" class="pull-right btn" ng-class="{'btn-primary':editContactForm.$valid, 'btn-default bg-red': !editContactForm.$valid}" ng-disabled="!editContactForm.$valid" ng-click="saveContact()">Save changes</a>
-                            <a type="button" class="pull-right btn btn-default" ng-click="closeContact()">Close</a>
-                         </div>
-                          <div class="clearfix"></div>
-                        <form name="editContactForm" >
-                            <div edit-contact-base ng-model="edition.contact" locales="locales" form="editContactForm"></div>
-                        </form>
-                         <div class="clearfix"></div>
-                        <div style="margin-top: 30px;">
-                            <span class="color-red pull-left" ng-hide="editContactForm.$valid">* Mandatory fields must be filled in before record can be saved.</span>
-                            <a type="button" class="pull-right btn" ng-class="{'btn-primary':editContactForm.$valid, 'btn-default bg-red': !editContactForm.$valid}" ng-disabled="!editContactForm.$valid" ng-click="saveContact()">Save changes</a>
-                            <a type="button" class="pull-right btn btn-default" ng-click="closeContact()">Close</a>
-                         </div>
-                        <div class="clearfix"></div>
+                <div class="modal-body">
+                    <div ng-show="loading">
+                        <h1><i class="fa fa-spinner fa-spin"></i></h1>
                     </div>
-
-                      <div ng-show="loading && selectExisting">
-                           <h1><i class="fa fa-spinner fa-spin"></i></h1>
-                      </div>
-
-                    <div ng-show="selectExisting && !showFilter" class="row"></br>
-                        <div ng-repeat="contact in existingContacts | filter:isSelected">
-                           
-                            <div class="col-xs-12">
-                                <div class="well">
-                                    <i class="fa fa-spinner fa-spin" ng-if="contact.loading"></i>
-                                    <div class="pull-right">
-                                        <button type="button" class="btn btn-default" ng-click="deleteContact($index)"><i class="fa fa-trash-o"></i></button>
-                                        <button type="button" class="btn btn-default" ng-click="selectContact(contact)"><i class="glyphicon glyphicon-thumbs-up"></i>
-                                        </button>
+                    <div ng-show="!showExisting">
+                        <div>
+                            <div km-document-validation ng-model="validationReport"></div>
+                            <legend>General information</legend>
+                            <div class="row">
+                                <div class="col-md-8 col-xs-12">
+                                    <div class="km-control-group" name="name" required caption="Name of the organization">
+                                        <div km-textbox-ml name="name" required ng-model="edition.contact.name" placeholder="text entry" locales="edition.contact.header.languages"></div>
                                     </div>
-                                    <view-contact-reference ng-model='contact' locale="en"></view-contact-reference>
+                                </div>
+
+                                <div class="col-md-4 col-xs-12">
+                                    <div class="km-control-group" name="acronym" required caption="Acronym">
+                                        <div km-textbox-ml name="acronym" required ng-model="edition.contact.acronym" placeholder="text entry" locales="edition.contact.header.languages"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="km-control-group" name="contact_organizationType" caption="Type of organization">
+                                        <div km-select name="contact_organizationType" ng-model="edition.contact.organizationType" items="options.organizationTypes()"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" ng-show="edition.contact.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
+                                    <div class="km-control-group" name="contact_organizationTypeName" caption="Other organization type">
+                                        <div km-textbox-ml name="contact_organizationTypeName" ng-model="edition.contact.organizationType.customValue" placeholder="example: SCBD" locales="locales"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <legend>Organization Coordinates</legend>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="km-control-group" name="address" caption="Address">
+                                        <div km-textbox-ml ng-model="edition.contact.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800" locales="edition.contact.header.languages"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="km-control-group" name="city" required caption="City">
+                                        <div km-textbox-ml required name="city" ng-model="edition.contact.city" locales="edition.contact.header.languages" placeholder="example: Montreal"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="km-control-group" name="state" caption="State or Province">
+                                        <div km-textbox-ml name="state" ng-model="edition.contact.state" locales="edition.contact.header.languages" placeholder="example: Quebec"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="km-control-group" name="postalCode" caption="Postal Code or Zip">
+                                        <div km-textbox-ml name="postalCode" ng-model="edition.contact.postalCode" locales="edition.contact.header.languages" placeholder="example: H2Y 1N9"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="km-control-group" name="country" required caption="Country">
+                                        <div km-select required name="country" ng-model="edition.contact.country" items="options.countries()"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="km-control-group" name="phones" required caption="Phone numbers">
+                                        <div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
+                                        <div km-inputtext-list required name="phones" ng-model="edition.contact.phones" placeholder="example: +1 514.288.2220"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="km-control-group" name="faxes" caption="Fax Numbers">
+                                        <div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
+                                        <div km-inputtext-list name="faxes" ng-model="edition.contact.faxes" placeholder="example: +1 514.288.6588"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="km-control-group" name="emails" required caption="Emails">
+                                        <div km-inputtext-list required name="emails" ng-model="edition.contact.emails" placeholder="example: secretariat@cbd.int"></div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="km-control-group" name="websites" caption="Web Sites">
+                                        <div km-link name="websites" ng-model="edition.contact.websites" allow-link="true" allow-file="false"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="modal-footer">
-                                <a type="button" class="btn btn-default" ng-click="closeContact()">Close</a>
+                    </div>
+                    <div ng-show="showExisting" class="row">
+                        </br>
+                        <div ng-repeat="contact in existingContacts | filter:isSelected">
+                            <div class="clearfix" ng-if="$index % 3 == 0"></div>
+                            <div class="col-xs-4">
+                                <div class="well">
+                                    <span class="label label-warning" ng-if="contact.revisonType=='request'">Pending Approval</span>
+                                    <span class="label label-primary" ng-if="contact.revisonType=='published'">Published</span>
+                                    <div class="pull-right">
+                                        <button type="button" class="btn btn-default" ng-click="selectContact(contact)"><i class="glyphicon glyphicon-thumbs-up"></i>
+                                        </button>
+                                    </div>
+                                    <view-organization-reference ng-model='contact' locale="en"></view-organization-reference>
+                                </div>
                             </div>
                         </div>
+                        <span ng-if="!loading && existingContacts && existingContacts.length==0">
+                      No organizations found. Please  <a ng-click="showExisting=false" ng-show="showExisting" ng-href="#">Create organization</a>
+                       add new organization
+                  </span>
+
                     </div>
                 </div>
-
+                <div class="modal-footer">
+                    <div class="clearfix"></div>
+                    <div style="margin-top: 30px;">
+                        <a type="button" class="pull-right btn btn-primary" ng-click="saveContact()" ng-show="!showExisting">Save changes</a> &nbsp;
+                        <a type="button" class="pull-right btn btn-default" ng-click="closeContact()">Close</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
 </div>

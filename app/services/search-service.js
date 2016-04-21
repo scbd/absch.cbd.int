@@ -1,104 +1,201 @@
-define(['app', 'underscore'], function (app, _) {
+define(['app', 'underscore', './local-storage-service.js', './app-config-service.js'], function(app, _) {
 
-    app.factory('searchService', ['$http', '$q', function ($http, $q) {
-        return new function () {
+    app.factory('searchService', ['$http', '$q', 'realm', 'localStorageService', 'appConfigService',
+        function($http, $q, realm, localStorageService, appConfigService) {
+            return new function() {
 
-            var searchDefaults = {
-                currentPage     : 0,
-                rowsPerPage     : 25,
-                sort            : 'createdDate_dt desc',
-                fields          : 'identifier_s, title_t, description_t',
-                query           : '*:*',
+                var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, schemaSort_i, sort1_s, sort2_s, sort3_s, sort4_s, _revision_i,';
+                var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
 
-                groupSort       :   'government_EN_t',
-                groupField      :   'government_EN_t asc'
-            }
+                var searchDefaults = {
+                    currentPage: 0,
+                    rowsPerPage: 25,
+                    sort: 'government_EN_t asc, schemaSort_i asc, sort1_s asc, sort2_s asc, sort3_s asc, sort4_s asc, updatedDate_dt desc',
+                    fields: base_fields + en_fields,
+                    query: '*:*',
+                    groupSort: 'government_EN_t asc, schemaSort_i asc, sort1_s asc, sort2_s asc, sort3_s asc, sort4_s asc, updatedDate_dt desc',
+                    groupField: 'government_s',
+                    groupLimit: 1000
+                }
+                var q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
 
-            this.list = function(searchQuery, queryCanceler){
+                //================================================================================================================
+                this.list = function(searchQuery, queryCanceler) {
 
-               _.defaults(searchQuery, searchDefaults);
+                    _.defaults(searchQuery, searchDefaults);
+                    q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
 
-               var queryListParameters = {
-                    'q': searchQuery.query,
-                    'sort': searchQuery.sort,
-                    'fl': searchQuery.fields,
-                    'wt': 'json',
-                    'start': searchQuery.currentPage * searchQuery.rowsPerPage,
-                    'rows': searchQuery.rowsPerPage,
-                };
-
-                return $http.get('/api/v2013/index/select', { params: queryListParameters, timeout: queryCanceler });
-            }
-
-            this.group = function(searchQuery, queryCanceler){
-
-               _.defaults(searchQuery, searchDefaults);
-
-               var queryGroupParameters = {
-                    'q': searchQuery.query + ' AND government_s:*',
-                    'sort': searchQuery.sort,
-                    'fl': searchQuery.fields,
-                    'wt': 'json',
-                    'start': searchQuery.currentPage * searchQuery.rowsPerPage,
-                    'rows': searchQuery.rowsPerPage,
-                    'group': true,
-                    'group.ngroups' : true,
-                    'group.field': searchQuery.groupField,
-                    'group.limit': 1000,
-                    'group.sort': searchQuery.groupSort
-                };
-
-                return $http.get('/api/v2013/index/select', { params: queryGroupParameters, timeout: queryCanceler });
-            }
-
-            this.facets = function(facetQuery){
-
-               _.defaults(facetQuery, searchDefaults);
-
-                if(facetQuery) {
-
-                    var queryFacetsParameters = {
-                        'q'             : facetQuery.query,
-                        'fl'            : '',
-                        'wt'            : 'json',
-                        'rows'          : 0,
-                        'facet'         : true,
-                        'facet.field'   : facetQuery.fields,
-                        'facet.query'   : facetQuery.query,
-                        'facet.limit'   : 512,
-                        'facet.mincount': 1
+                    var queryListParameters = {
+                        'q': q + searchQuery.query,
+                        'sort': searchQuery.sort,
+                        'fl': searchQuery.fields,
+                        'wt': 'json',
+                        'start': searchQuery.currentPage * searchQuery.rowsPerPage,
+                        'rows': searchQuery.rowsPerPage,
                     };
-                   var queryAction =  $http.get('/api/v2013/index/select', { params: queryFacetsParameters });
-                   return $q.when(queryAction)
-                    .then(function (data) {
-                        var facets = {};
-                        _.each(facetQuery.fields, function(facet){
-                            facets[facet] = readFacets2(data.data.facet_counts.facet_fields[facet]);
-                        });
-                        console.log(facets);
-                        return facets;
-                    })
+                    
+                    console.log("list:" + q + searchQuery.query);
+                    
+                    return $http.get('/api/v2013/index/select', {
+                        params: queryListParameters,
+                        timeout: queryCanceler
+                    });
+                    
+                   
                 }
 
-           }
+                //================================================================================================================
+                this.group = function(searchQuery, queryCanceler) {
 
+                    _.defaults(searchQuery, searchDefaults);
+                    q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
 
-           /////////////////////////////////////
-           //       internal functions        //
-           ////////////////////////////////////
-           function readFacets2(solrArray) {
+                    var queryGroupParameters = {
+                        'q': q + searchQuery.query,
+                        'sort': searchQuery.sort,
+                        'fl': searchQuery.fields,
+                        'wt': 'json',
+                        'start': searchQuery.currentPage * searchQuery.rowsPerPage,
+                        'rows': searchQuery.rowsPerPage,
+                        'group': true,
+                        'group.ngroups': true,
+                        'group.field': searchQuery.groupField,
+                        'group.limit': searchQuery.groupLimit,
+                        'group.sort': searchQuery.groupSort
+                    };
+                    
+                    console.log("group:" + q + searchQuery.query);
 
-                var facets = [];
-                if(solrArray){
-                    for (var i = 0; i < solrArray.length; i += 2) {
+                    return $http.get('/api/v2013/index/select', {
+                        params: queryGroupParameters,
+                        timeout: queryCanceler
+                    });
+                }
 
-                        var facet = solrArray[i];
+                //================================================================================================================
+                this.facets = function(facetQuery, localStorageKey) {
 
-                        facets.push({ symbol: facet, title: facet, count: solrArray[i + 1] });
+                    if (localStorageKey) {
+                        var fromStorage = localStorageService.get(localStorageKey);
+                        if (fromStorage)
+                            return fromStorage;
                     }
-                }
-                return facets;
-           };
+                    _.defaults(facetQuery, searchDefaults);
+
+                    if (facetQuery) {
+                        q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
+                        var queryFacetsParameters = {
+                            'q': q + facetQuery.query,
+                            'fl': '',
+                            'wt': 'json',
+                            'rows': 0,
+                            'facet': true,
+                            'facet.field': facetQuery.fields,
+                            'facet.query': facetQuery.query,
+                            'facet.limit': 512,
+                            'facet.mincount': 1
+                        };
+                        var queryAction = $http.get('/api/v2013/index/select', {
+                            params: queryFacetsParameters
+                        });
+                        return $q.when(queryAction)
+                            .then(function(data) {
+                                var facets = {};
+                                _.each(facetQuery.fields, function(facet) {
+                                    facets[facet] = readFacets2(data.data.facet_counts.facet_fields[facet]);
+                                });
+
+                                if (localStorageKey)
+                                    localStorageService.set(localStorageKey, facets);
+
+                                return facets;
+                            })
+                    }
+
+                };
+                //================================================================================================================
+                this.facetsPivot = function(facetQuery, localStorageKey) {
+
+                    if (localStorageKey) {
+                        var fromStorage = localStorageService.get(localStorageKey);
+                        if (fromStorage) //&& fromStorage.expiry < new date())
+                            return fromStorage;
+                    }
+                    _.defaults(facetQuery, searchDefaults);
+
+                    if (facetQuery) {
+                        q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
+                        var queryFacetsParameters = {
+                            'q': q + facetQuery.query,
+                            'fl': '',
+                            'wt': 'json',
+                            'rows': 0,
+                            'facet': true,
+                            'facet.pivot': facetQuery.fields,
+                            'facet.limit': 512,
+                            'facet.mincount': 1
+                        };
+                        var queryAction = $http.get('/api/v2013/index/select', {
+                            params: queryFacetsParameters
+                        });
+                        return $q.when(queryAction)
+                            .then(function(data) {
+
+                                var facets = _.map(data.data.facet_counts.facet_pivot[facetQuery.fields], function(data) {
+                                    var facet = {};
+                                    facet.government = data.value;
+                                    facet.recordCount = data.count;
+                                    facet.schemas = {};
+                                    _.each(data.pivot, function(pivotFacets) {
+                                        facet.schemas[pivotFacets.value] = pivotFacets.count;
+                                    });
+                                    return facet;
+                                });
+
+                                if (localStorageKey)
+                                    localStorageService.set(localStorageKey, facets);
+
+                                return facets;
+                            });
+                    }
+
+                };
+                
+                //================================================================================================================
+                this.governmentSchemaFacets = function() {
+
+                    var nationalRecordsQuery = {
+                        fields: 'government_s,schema_s',
+                        query: 'schema_s:(' + appConfigService.nationalSchemas.join(' ') + ')'
+                    };
+                    return this.facetsPivot(nationalRecordsQuery, 'governmentFacets');
+
+                };
+
+
+                /////////////////////////////////////
+                //       internal functions        //
+                ////////////////////////////////////
+                function readFacets2(solrArray) {
+
+                    var facets = [];
+                    if (solrArray) {
+                        for (var i = 0; i < solrArray.length; i += 2) {
+
+                            var facet = solrArray[i];
+
+                            facets.push({
+                                symbol: facet,
+                                title: facet,
+                                count: solrArray[i + 1]
+                            });
+                        }
+                    }
+                    return facets;
+                };
+
+
+            }
         }
-    }]);
+    ]);
 });

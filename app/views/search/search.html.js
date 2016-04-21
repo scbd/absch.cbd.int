@@ -59,7 +59,10 @@ define(['app','underscore','/app/js/common.js',
         $scope.$watch('currentPage',     function() {
             refresh();
         });
-        $scope.$watch('querySchema',     function() { $scope.currentPage=0; refresh(); });
+        $scope.$watch('querySchema',     function() {
+            $scope.currentPage=0;
+            refresh();
+        });
         $scope.$watch('queryGovernment', function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryTargets',    function() { $scope.currentPage=0; refresh(); });
         $scope.$watch('queryTheme',      function() { $scope.currentPage=0; refresh(); });
@@ -150,7 +153,7 @@ define(['app','underscore','/app/js/common.js',
                                   'government_s,publicationYear_is,resourceTypes_CEN_ss,regions_CEN_ss,languages_CEN_ss,absResposibleForAll_b,absJurisdiction_EN_t,jurisdiction_CEN_s,geneticResourceTypes_CEN_ss,thematicAreas_CEN_ss,usage_CEN_ss,keywords_CEN_ss,informAllAuthorities_b,originCountries_CEN_ss,orgperson_s,status_EN_t,type_EN_t,endDate_dt,startDate_dt,amendmentIntent_i,' +
                                   'resourceLinksLanguage_ss,type_ss,ownerGovernment_s',
                     currentPage : $scope.currentPage,
-                    itemsPerPage: $scope.itemsPerPage
+                    rowsPerPage: $scope.itemsPerPage
                 };
                 searchOperation = searchService.list(listQuery, queryCanceler);
             }
@@ -165,7 +168,7 @@ define(['app','underscore','/app/js/common.js',
                     groupField  : 'government_s',
                     groupSort   : 'government_EN_s asc',
                     currentPage : $scope.currentPage,
-                    itemsPerPage: $scope.itemsPerPage
+                    rowsPerPage: $scope.itemsPerPage
                 };
                 searchOperation = searchService.group(groupQuery, queryCanceler);
             }

@@ -1,4 +1,5 @@
-define(['app', '/app/views/directives/help-directive.html.js', '/app/views/forms/view/view-contact-reference.directive.js'], function (app) {
+define(['app', '/app/views/directives/help-directive.html.js', '/app/views/forms/view/view-contact-reference.directive.js',
+'/app/views/directives/party-status.js'], function (app) {
 
 app.directive("viewAuthority", [function () {
 	return {
@@ -19,6 +20,7 @@ app.directive("viewAuthority", [function () {
 		},
 		controller : ["$scope", "IStorage", function ($scope, storage)
 		{
+
 			//====================
 			//
 			//====================
@@ -41,15 +43,15 @@ app.directive("viewAuthority", [function () {
 					$scope.loadReferences($scope.contacts);
 			});
 
-			$scope.$watch("document.absPolicyBasisForCompetencyRef", function(_new)
-			{
-				if ($scope.document && $scope.document.absPolicyBasisForCompetencyRef) {
-					$scope.absPolicyBasisForCompetencyRef = angular.fromJson(angular.toJson($scope.document.absPolicyBasisForCompetencyRef));
-
-					if ($scope.absPolicyBasisForCompetencyRef)
-						$scope.loadReferences($scope.absPolicyBasisForCompetencyRef, true);
-				}
-			});
+			// $scope.$watch("document.absPolicyBasisForCompetencyRef", function(_new)
+			// {
+			// 	if ($scope.document && $scope.document.absPolicyBasisForCompetencyRef) {
+			// 		$scope.absPolicyBasisForCompetencyRef = angular.fromJson(angular.toJson($scope.document.absPolicyBasisForCompetencyRef));
+			//
+			// 		if ($scope.absPolicyBasisForCompetencyRef)
+			// 			$scope.loadReferences($scope.absPolicyBasisForCompetencyRef, true);
+			// 	}
+			// });
 
 			//====================
 			//
@@ -58,7 +60,7 @@ app.directive("viewAuthority", [function () {
 
 				angular.forEach(targets, function(ref){
 
-					storage.documents.get(ref.identifier, { cache : true})
+					storage.documents.get(ref.identifier, { info : true, body:true})
 						.success(function(data){
 							ref.document = data;
 						})

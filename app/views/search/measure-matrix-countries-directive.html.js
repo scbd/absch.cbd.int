@@ -16,6 +16,10 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                             function($scope, $http, realm, $q, $filter, $routeParams, $element) {
 
             $scope.documentsLoaded = false;
+            
+             $scope.isSelected = function(docID) {
+                 return;
+             }
 
             $scope.$watch('documents', function(docs){
                 if(docs && docs.length>0){

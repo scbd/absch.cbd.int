@@ -1,4 +1,5 @@
-define(['app'], function (app) {
+define(['app',"/app/views/forms/edit/field-embed-contact.directive.js"],
+function (app) {
 
 app.directive("editContactBase", [ function () {
 
@@ -12,7 +13,8 @@ app.directive("editContactBase", [ function () {
 			locales : "=locales",
 			form : "=form"
 		},
-		controller : ["$scope", "$http", "$filter", "underscore", "$q", function ($scope, $http, $filter, _, $q)
+		controller : ["$scope", "$http", "$filter", "underscore", "$q", 'IStorage',
+		 function ($scope, $http, $filter, _, $q, storage)
 		{
 			$scope.doc = {};
 
@@ -57,6 +59,16 @@ app.directive("editContactBase", [ function () {
 				if(newValue && newValue.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
 					if(document.organizationType && document.organizationType.customValue)
 						document.organizationType.customValue = undefined;
+				}
+			});
+
+			$scope.$watch('document.contactOrganization', function(newValue){
+				if(newValue ){
+					document.address	= undefined;
+					document.city		= undefined;
+					document.state		= undefined;
+					document.postalCode	= undefined;
+					document.country	= undefined;
 				}
 			});
 

@@ -1,49 +1,62 @@
-define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','scbd-angularjs-filters',
-    '/app/views/directives/login.directive.html.js',
-    '/app/views/directives/xuser-notifications.js',
-    'ngMaterial','ngAria', 'angular-animate','toastr',
-], function(app) {
+define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
+    'angular-localizer', 'scbd-angularjs-services', 'scbd-angularjs-filters',
+    'scbd-branding/directives/footer',
+    '/app/views/directives/nav/portal-branding.js',
+    'scbd-branding/directives/header/header',
+    '/app/views/directives/nav/portal-nav.js',
+    'ngAria', 'angular-animate', 'toastr', 'ionsound'
+    //, '/app/services/app-config-service.js'
+], function(app, _) {
     'use strict';
 
-    app.controller('TemplateController', ['$scope', '$rootScope','showHelp' , '$window', '$location', 'authentication', '$browser', 'realmConfiguration', 'underscore', 'IUserNotifications', '$timeout','$filter',
-     '$anchorScroll','breadcrumbs','$mdToast','toastr',//'localStorageService',localStorageService,
-        function($scope, $rootScope, showHelp, $window, $location, authentication, $browser, realmConfiguration, _, userNotifications, $timeout, $filter,$anchorScroll,breadcrumbs, $mdToast, toastr ) {
+    app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
+        '$location','realmConfiguration','$anchorScroll', 'breadcrumbs', 'toastr', '$route',
+        'cfgUserNotification','$window', '$element','localStorageService', 'appConfigService', //'apiUrl',
+        function($scope, $rootScope, showHelp, $location, realmConfiguration,
+            $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window, $element, localStorageService,
+            appConfigService
+            //, apiUrl
+        ) {
 
+            //$scope.ACCOUNTS_URL = apiUrl.devAccountsUrl();
 
             $scope.controller = "TemplateController";
-            $scope.breadcrumbs     = breadcrumbs;
-            $scope.$root.pageTitle = { text: "" };
-
-            $scope.showHelp = showHelp.value;
-
-
-        // $scope.goHome               = function() { $location.path('/'); };
-        // $scope.currentPath          = function() { return $location.path(); };.
-        //============================================================
-        //
-        //
-        //============================================================
-         $scope.toggleSideBar = function() {
-            $element.find("#wrapper").toggleClass("toggled");
-         }
+            $scope.breadcrumbs = breadcrumbs;
+            $scope.$root.pageTitle = {
+                text: ""
+            };
 
 
-        //============================================================
-        //
-        //
-        //============================================================
-        $scope.gotoAnchor = function(x) {
-          var newHash = 'anchor' + x;
-          if ($location.hash() !== newHash) {
-            // set the $location.hash to `newHash` and
-            // $anchorScroll will automatically scroll to it
-            $location.hash('anchor' + x);
-          } else {
-            // call $anchorScroll() explicitly,
-            // since $location.hash hasn't changed
-            $anchorScroll();
-          }
-        };
+
+
+            // $scope.goHome               = function() { $location.path('/'); };
+            // $scope.currentPath          = function() { return $location.path(); };.
+            //============================================================
+            //
+            //
+            //============================================================
+            $scope.toggleSideBar = function() {
+                $element.find("#wrapper").toggleClass("toggled");
+            }
+
+
+
+            //============================================================
+            //
+            //
+            //============================================================
+            $scope.gotoAnchor = function(x) {
+                var newHash = 'anchor' + x;
+                if ($location.hash() !== newHash) {
+                    // set the $location.hash to `newHash` and
+                    // $anchorScroll will automatically scroll to it
+                    $location.hash('anchor' + x);
+                } else {
+                    // call $anchorScroll() explicitly,
+                    // since $location.hash hasn't changed
+                    $anchorScroll();
+                }
+            };
 
             $scope.$root.getRoleName = function(roleName) {
                 if (roleName) {
@@ -64,11 +77,11 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
                 }
             };
 
-//            $scope.updateStorage = function(){
-//                localStorageService.set('hideDisclaimer', true);
-//                $scope.hideDisclaimer=true;
-//            };
-//    	    $scope.hideDisclaimer = localStorageService.get('hideDisclaimer');
+            //            $scope.updateStorage = function(){
+            //                localStorageService.set('hideDisclaimer', true);
+            //                $scope.hideDisclaimer=true;
+            //            };
+            //    	    $scope.hideDisclaimer = localStorageService.get('hideDisclaimer');
             //============================================================
             //
             //
@@ -103,148 +116,95 @@ define(['app','ng-breadcrumbs','angular-localizer','scbd-angularjs-services','sc
                 $scope.env_name = "TRAINING";
             }
 
-            //============================================================
-            //
-            //
-            //============================================================
-            $scope.actionSignOut = function() {
-                authentication.signOut();
+            $scope.feedbackHelp = function() {
+                if ($scope.showHelp.show)
+                    showSimpleToast("Help information is turned on.");
+
+                if (!$scope.showHelp.show)
+                    showSimpleToast("Help information is turned off.");
             };
 
-            //============================================================
-            //
-            //
-            //============================================================
-            $scope.actionSignup = function() {
-                var redirect_uri = encodeURIComponent($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/');
-                $window.location.href = 'https://accounts.cbd.int/signup?redirect_uri=' + redirect_uri;
+            $scope.feedbackGlossary = function() {
+                if ($scope.showHelp.glossary)
+                    showSimpleToast("Glossary is turned on.");
+
+                if (!$scope.showHelp.glossary)
+                    showSimpleToast("Glossary is turned off.");
             };
 
-            //============================================================
+
+            //======================================================
             //
             //
-            //============================================================
-            $scope.actionPassword = function() {
-                var redirect_uri = encodeURIComponent($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/');
-                $window.location.href = 'https://accounts.cbd.int/password?redirect_uri=' + redirect_uri;
-            };
-
-            //============================================================
-            //
-            //
-            //============================================================
-            $scope.actionProfile = function() {
-                var redirect_uri = encodeURIComponent($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/');
-                $window.location.href = 'https://accounts.cbd.int/profile?redirect_uri=' + redirect_uri;
-
-            };
-
-            $scope.closePopup = function() {
-                $('#loginDialog').modal('hide')
-            };
-
-            // $rootScope.$on("$locationChangeSuccess", function() {
-            //     $anchorScroll();
-            // });
+            //======================================================
 
 
+            $rootScope.$on("showSimpleToast", function(evt, msg) {
+                showSimpleToast(msg);
 
-
-
-        $scope.feedbackHelp = function() {
-                if($scope.showHelp.show)
-                     showSimpleToast("Help information is turned on.");
-
-                if(!$scope.showHelp.show)
-                     showSimpleToast("Help information is turned off.");
-        };
-
-        $scope.feedbackGlossary= function() {
-                if($scope.showHelp.glossary)
-                     showSimpleToast("Glossary is turned on.");
-
-                if(!$scope.showHelp.glossary)
-                     showSimpleToast("Glossary is turned off.");
-        };
-
-
-        //======================================================
-        //
-        //
-        //======================================================
-
-        $rootScope.$on("showCustomToast", function(evt, template) {
-           $mdToast.show({
-               controller: 'ToastCtrl',
-                templateUrl: '/app/views/toasts/' + template + '.html',
-                hideDelay: 3000,
-                position:'top right'
             });
 
-        });
-
-        $rootScope.$on("showSimpleToast", function(evt, msg) {
-           showSimpleToast(msg);
-
-        });
-
-        $rootScope.$on("showSimpleToastConfirm", function(evt, msg) {
-           showSimpleToastConfirm(msg);
-
-        });
-
-        $rootScope.$on("showConfirmToast", function(evt, msg, broadcaster) {
-            $scope.showToastConfirmBroadcast(msg,broadcaster );
-        });
-
-
-        $rootScope.$on('event:auth-emailVerification', function(evt, data){
-            $scope.showEmailVerificationMessage = data.message;
-        });
-
-        function showSimpleToast(msg)
-        {
-
-             toastr.info(msg);
-
-            // $mdToast.show(
-            //   $mdToast.simple()
-            //     .content(msg)
-            //     .position('top right')
-            //     .hideDelay(3000)
-            // );
-        }
-
-        function showSimpleToastConfirm(msg)
-        {
-            $mdToast.show(
-              $mdToast.simple()
-                .content(msg)
-                .action("ok")
-                .position('top right')
-                .hideDelay(3000)
-            );
-        }
-
-        $scope.showToastConfirm = function(msg, broadcaster)
-        {
-            var toast = $mdToast.simple()
-                  .content(msg)
-                  .action('ok')
-                  .highlightAction(false)
-                  .position('top right')
-                  .hideDelay(20000);
-
-            $mdToast.show(toast).then(function() {
-                $scope.$broadcast(broadcaster);
+            $scope.$on('signOut', function(evt, data) {
+                $window.location.reload();
             });
 
+            if(cfgUserNotification){
+                cfgUserNotification
+                .notificationUrls = {
+                                    documentNotificationUrl     : '/register/requests/',
+                                    viewAllNotificationUrl      : '/register/requests',
+                                    documentMessageUrl          : '/mailbox/'
+                                };
+            }
+
+            function showSimpleToast(msg) {
+                toastr.info(msg);
+            }
+
+
+
+            $rootScope.$on('event:server-pushNotification', function(evt,pushNotification){
+                if(pushNotification.type == 'documentNotification'){
+                    // toastr.info(data.message);
+                    if(pushNotification.data && pushNotification.data.realm == appConfigService.currentRealm){
+                        localStorageService.remove('governmentFacets');
+                        localStorageService.remove('searchFilters');
+                    }
+                }
+            });
+
+
+            //============================================================
+        //
+        //
+        //============================================================
+        $rootScope.$watch('user', _.debounce(function(user) {
+
+            if (!user)
+                return;
+
+            require(["_slaask"], function(_slaask) {
+
+                if (user.isAuthenticated) {
+                    _slaask.identify(user.name, {
+                        'user-id' : user.userID,
+                        'name' : user.name,
+                        'email' : user.email,
+                    });
+
+                    if(_slaask.initialized) {
+                        _slaask.slaaskSendUserInfos();
+                    }
+                }
+
+                if(!_slaask.initialized) {
+                    _slaask.init('ae83e21f01860758210a799872e12ac4');
+                    _slaask.initialized = true;
+                }
+            });
+        }, 1000));
+
         }
-        }
-    ])
-    .controller('ToastCtrl', function($scope, $mdToast) {
-        $scope.closeToast = function() {
-            $mdToast.hide();
-        };
-    });
+    ]);
+
 });

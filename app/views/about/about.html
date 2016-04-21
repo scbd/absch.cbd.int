@@ -1,42 +1,422 @@
 <link rel="stylesheet" href="/app/css/about.css">
+<div id="aboutPage" ng-controller="AboutController" >
+  <div smooth-scroll duration="100" offset="200"></div>
+  <style>
+    .nav > li > a {padding-top: 10px;font-weight: bold;}
+    .nav-pills>li{padding-top:10px;}
+    .nav-pills>li>a:hover, .nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{background-color:#ddd; color:#1FA65D;}
+    .nav-pills>li>a {color:#1FA65D;padding:0 3px; font-weight: bold; display:inline;}
+    .sublist{margin-left:20px!important;padding-top:0!important;}
+    .sublist>a{color:#888!important;font-weight: normal!important;}
+    .sublist>a:hover{color:#111!important;}
+    #aboutPage h1 {border-bottom:1px solid #ddd;padding-bottom:5px;padding-top:10px;margin-top:0;margin-bottom:20px;}
+     #aboutPage h3 {background-color:#e5e5e5;padding:3px;}
+     #aboutPage .well h5 {color:#1FA65D;font-weight: bold;font-size:105%;}
+     .backtothetop {font-size:12px}
+     #myAffix {position:fixed;}
+     .affix{position:fixed;top: 10px!important;}
+     @media (max-width: 768px) {
+        #myAffix, .affix{
+            position:relative!important;
+        }
+    }
+    .plusbtn{position:relative;top:-2px;padding:0 3px 2px 3px!important;cursor:pointer;}
 
-<div ng-controller="AboutController" >
+</style>
+  <div class="container-fluid">
+  <div class="row">
+    <nav class="col-xs-12 col-sm-3" id="myAffix" data-spy="affix" >
+     
+   
+   
+     
+      <ul class="nav nav-pills nav-stacked" style="padding-bottom:30px">
+        <li><a ng-click="showAbout = !showAbout" class="btn-sm btn-default plusbtn">{{showAbout ? "-" : "+"}}</a> <a href="#" scroll-to="top" ng-click="showAbout = true;">About the ABSCH</a></li>
+            <ul ng-show="showAbout">
+                <li><a scroll-to="about-intro" class="color-green" href="#">Introduction</a></li>
+                <li><a scroll-to="about-bg" class="color-green" href="#">Background</a></li>
+                <li><a scroll-to="about-what" class="color-green" href="#">What is the ABSCH?</a></li>
+             </ul>
+        <li><a ng-click="showWhy = !showWhy" class="btn-sm btn-default plusbtn">{{showWhy ? "-" : "+"}}</a> <a href="#" scroll-to="about-why" ng-click="showWhy = true" >What does it do</a></li>
+               <ul ng-show="showWhy">
+                <li><a scroll-to="about-why1" class="color-green" href="#">Facilitates connections</a></li>
+                <li><a scroll-to="about-why2" class="color-green" href="#">Helps with compliance</a></li>
+                <li><a scroll-to="about-why3" class="color-green" href="#">Provides tools for monitoring utilization</a></li>
+                <li><a scroll-to="about-why4" class="color-green" href="#">Offers reliable and up-to-date information</a></li>
+                <li><a scroll-to="about-why5" class="color-green" href="#">Promotes awareness-raising and capacity-building</a></li>
+                <li><a scroll-to="about-why6" class="color-green" href="#">Promote efficiencies and effectiveness in capacity-building</a></li>
+             </ul>
+
+        <li><a ng-click="showWho = !showWho" class="btn-sm btn-default plusbtn">{{showWho ? "-" : "+"}}</a> <a href="#" scroll-to="about-who" ng-click="showWho = true">Who is it for</a></li>
+                <ul ng-show="showWho">
+                    <li><a scroll-to="about-who1" class="color-green" href="#">Parties and non-Parties</a></li>
+                    <li><a scroll-to="about-who2" class="color-green" href="#">Indigenous and local communities (ILCs)</a></li>
+                    <li><a scroll-to="about-who3" class="color-green" href="#">Private sector and research institutions</a></li>
+                    <li><a scroll-to="about-who4" class="color-green" href="#">Organizations involved in capacity-building  </a></li>
+                    <li><a scroll-to="about-who5" class="color-green" href="#">International and non-governmental organizations and others</a></li>
+                </ul>
+        <li><a ng-click="showRoles = !showRoles" class="btn-sm btn-default plusbtn">{{showRoles ? "-" : "+"}}</a> <a href="#" scroll-to="about-roles" ng-click="showRoles = true">Users and responsibilities</a></li>
+            <ul ng-show="showRoles">
+                <li><a scroll-to="about-rolesParties" class="color-green" href="#">Parties and Non-Parties</a></li>
+                <ul>
+                    <li><a scroll-to="about-rolesPA" class="color-green" href="#">Publishing Authorities (PA)</a></li>
+                    <li><a scroll-to="about-rolesNAU" class="color-green" href="#">National Authorized Users (NAU)</a></li>
+                </ul>
+                 <li><a scroll-to="about-rolesUsers" class="color-green" href="#">Other users (CBD account holders)</a></li>
+                 <li><a scroll-to="about-rolesPublic" class="color-green" href="#">General Public (no CBD account)</a></li>
+             </ul>
+
+        <li><a ng-click="showTypes = !showTypes" class="btn-sm btn-default plusbtn">{{showTypes ? "-" : "+"}}</a> <a href="#" scroll-to="about-types" ng-click="showTypes = true">Types of information available</a></li>
+            <ul ng-show="showTypes">
+                <li><a scroll-to="about-types1" class="color-green" href="#">National records</a></li>
+                <li><a scroll-to="about-types2" class="color-green" href="#">Reference records</a></li>
+                <li><a scroll-to="about-types3" class="color-green" href="#">SCBD managed records</a></li>
+            </ul>
+         <li><a ng-click="showSearch = !showSearch" class="btn-sm btn-default plusbtn">{{showSearch ? "-" : "+"}}</a> <a href="#" scroll-to="about-search" ng-click="showSearch = true">Finding information</a></li>
+            <ul ng-show="showSearch">
+                <li><a scroll-to="about-search1" class="color-green" href="#">Search</a></li>
+                <li><a scroll-to="about-search2" class="color-green" href="#">Country profiles</a></li>
+            </ul>
+         <li><a ng-click="showSubmit = !showSubmit" class="btn-sm btn-default plusbtn">{{showSubmit ? "-" : "+"}}</a> <a href="#" scroll-to="about-submit" ng-click="showSubmit = true">Submit information</a></li>
+            <ul ng-show="showSubmit">
+                <li><a scroll-to="about-submit1" class="color-green" href="#">Getting an account</a></li>
+                <li><a scroll-to="about-submit2" class="color-green" href="#">Managing your information</a></li>
+            </ul>
+        <li><a ng-click="showNP = !showNP" class="btn-sm btn-default plusbtn">{{showNP ? "-" : "+"}}</a> <a href="#" scroll-to="about-np" ng-click="showNP = true">About the Nagoya Protocol</a></li>
+            <ul ng-show="showNP">
+                <li><a scroll-to="about-np1" class="color-green" href="#">Text of the Nagoya Protocol</a></li>
+                <li><a scroll-to="about-np2" class="color-green" href="#">Becoming a Party</a></li>
+                <li><a scroll-to="about-np3" class="color-green" href="#">COP-MOP</a></li>
+            </ul>
+            
+        <li><a ng-click="showGettingHelp = !showGettingHelp" class="btn-sm btn-default plusbtn">{{showGettingHelp ? "-" : "+"}}</a> <a href="#" scroll-to="about-help" ng-click="showGettingHelp = true">Help and Capacity Building</a></li>
+            <ul ng-show="showGettingHelp">
+                <li><a scroll-to="about-help1" class="color-green" href="#">Help using the ABSCH</a></li>
+                <li><a scroll-to="about-help3" class="color-green" href="#">Contact us</a></li>
+            </ul>
+
+        <li><a  class="btn-sm btn-default plusbtn">+</a>  <a href="#" scroll-to="about-contact"> Contact us </a></li>
+              
+
+         <li><i class="fa fa-external-link-square color-green"></i>  <a href="/about/faq">Frequently Asked Questions</a></li>
+         
+        
+         
+        <li> <i class="fa fa-arrow-circle-up color-blue"></i> <a scroll-to="top" class="hidden-xs color-blue" href="#">  back to the top  </a></li>
+      </ul>
+    </nav>
+    <div class="col-xs-12 col-sm-9   col-sm-offset-3">
+           <div style="padding-bottom:30px;">   
+                <h1>About the ABS Clearing-House</h1>
+                <h3 id="about-intro">Introduction</h3>
+                <p> The Access and Benefit-sharing Clearing-House (ABSCH) is a platform for exchanging information on access and benefit-sharing established by Article 14 of the Protocol, as part of clearing-house mechanism under Article 18, paragraph 3 of the Convention. The ABS Clearing-House is a key tool for facilitating the implementation of the Nagoya Protocol, by enhancing legal certainty and transparency on procedures for access, and for monitoring the utilization of genetic resources along the value chain, including through the internationally recognized certificate of compliance. By hosting relevant information regarding ABS, the Clearing-House offers opportunities for connecting users and providers of genetic resources and associated traditional knowledge.</p>
+                
+                <h3  id="about-bg">Background</h3>
+                <p> The Nagoya Protocol on Access and Benefit-sharing (ABS) was negotiated in order to provide greater legal certainty and transparency for both providers and users of genetic resources and   associated traditional knowledge by: </p>
+                <ul>
+                <li>Establishing more predictable conditions for access to those resources; and</li>
+                <li>Helping to ensure benefit-sharing when genetic resources leave the contracting Party providing the genetic resources.</li>
+                </ul>
+                    <p>Researchers and businesses need to secure legal clarity, certainty and transparency when accessing genetic resources and/or associated traditional knowledge. Without such legal certainty, potential users of genetic resources and/or associate traditional knowledge could be less eager to invest in bioprospecting and researching activities, as their activities may lead to controversy and allegations of misappropriation or misuse of these resources or knowledge. </p>
+                    <p>Providers of genetic resources and associated traditional knowledge, on the other hand, want to ensure that benefits arising from the utilization of their resources are shared in a fair and equitable manner once the resource or knowledge leaves the country.</p>
+                    <div class="well">
+                        <h5> What Users want:</h5>
+                        <li>Access to genetic resources (GR)  and associated traditional knowledge (TK)</li>
+                        <li>A clear understanding about how to access GR and TK</li>
+                        <li>Legal certainty for utilizing the GR and TK when due process has been followed</li>
+        
+                        <h5>What Providers want:</h5>
+                        <li>Control over access to their own GR and TK</li>
+                        <li>Ensure that users comply with all conditions set in MAT</li>
+                        <li>Assurance that the entitled  benefits arising from utilization are received in accordance with MAT</li>
+
+                        <h5>What everybody wants:</h5>
+                        <li>Fair and equitable sharing of benefits</li>
+                        <li>Sustainable use of biodiversity</li>
+                        <li>Conservation of biodiversity</li>
+                    </div>
+                    
+                    <p>The Nagoya Protocol provisions on access, benefit-sharing and compliance, provides a framework that aims to address the concerns of both users and providers. </p>
+
+                    <p>However, in order to translate the Nagoya Protocol into practice, Parties need to create the necessary conditions and take the measures required by the Protocol to ensure that a national framework is in place to implement ABS at the national level and enable the development of ABS agreements for the benefit of all involved in the process.</p>
 
 
-    <div class="container" style="padding:10px;">
-        <a href="/help" class="color-orange"><i class="fa fa-question-circle" ></i> HELP</a>
-        &nbsp;&nbsp;&nbsp;<i class="fa fa-caret-right color-litegrey" ></i>&nbsp;&nbsp;&nbsp;
+                    <p>It is in this context and with this aim that Parties to the CBD included [Article 14], in the Nagoya Protocol, which establishes an Access and Benefit Sharing Clearing House (ABS Clearing-House). </p>
 
+                    <p>The Nagoya Protocol establishes the ABS Clearing-House, as part of the clearing-house mechanism of the Convention, as a means for sharing information related to access and benefit-sharing, and in particular its goal is to provide access to information made available by each Party relevant to the implementation of the Protocol. </p>
 
-        <span class="dropdown">
-            <a class="dropdown-toggle"  data-toggle="dropdown" href="#"><i class="fa fa-star" ></i> ABOUT THE ABSCH</a>
-            <div class="dropdown-menu" role="menu" >
-                <ng-include   src="'/app/views/help/links/about.html'"></ng-inlcude>
+                    <p>The ABS Clearing-House allows countries to share information on procedures for accessing genetic resources and monitor the utilization of the resources along the value chain. The ABS Clearing-House plays a key role in enhancing the legal certainty and transparency that both providers and users of genetic resources, as well as associated traditional knowledge, are looking for.</p>
+                    
+                    <div class="well">
+                        <h5>Making the ABC’s of ABS a reality</h5>
+                        <li><strong>A</strong>ccess – Enhancing legal certainty, transparency and clarity on how to access genetic resources and associated traditional knowledge.</li>
+                        <li><strong>B</strong>enefit-sharing – Contributing to increase opportunities for sharing benefits from the use of genetic resources and associated traditional knowledge.</li>
+                        <li><strong>C</strong>ompliance – Assisting to ensure compliance with ABS measures and transparency in monitoring the utilization of genetic resources through the value chain.</li>
+                    </div>
+                    
+                    <p>A fully functional ABS Clearing-House also represents a major step in achieving Aichi Biodiversity Target 16, which provides that by 2015, the Nagoya Protocol is in force and operational, consistent with national legislations.</p>
+                    
+                    <h3 id="about-what">What is the ABS Clearing-House</h3>
+                    <p>Article 14, of the Nagoya Protocol, establishes the ABS Clearing-House, as part of the clearing-house mechanism of the Convention, as a means for sharing information related to access and benefit-sharing, and in particular its goal is to provide access to information made available by each Party relevant to the implementation of the Protocol.</p>
+                    <p>In practical terms, the sharing of information is done through an online platform designed to enable, primarily Parties, but also non-Parties  indigenous and local communities (ILCs), international and non-governmental organizations, research institutions and businesses to make information available  and access information related to access and benefit-sharing.</p>
+                    <p>To ensure that the ABS-CH fulfills its role in adding clarity and transparency in access and benefit-sharing, Parties to the CBD agreed in Article 14 of the Protocol, to make mandatory for Parties to share certain types of information through the ABS Clearing-House, namely:
+                        <ul style="list-style-type: lower-alpha;">
+                        <li>Legislative, administrative and policy measures on access and benefit-sharing;</li>
+                        <li>Information on the national focal point and competent national authority or authorities (CNA); and</li>
+                        <li>Permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT).</li>
+                        </ul>
+                    </p>
+                    
+                    <p>In addition to this essential information, the Protocol also identifies other types of information to make available through the ABS-CH.</p>
+                   
+                        <p>Article 14, paragraph 2, also requires Parties to make available through the ABS Clearing-House any information required by this Protocol. This would include: </p>
+                        <ul style="list-style-type: lower-alpha;">
+                            <li>Measures to inform potential users of traditional knowledge associated with genetic resources about their obligations for access to and fair and equitable sharing of benefits arising from the utilization of such knowledge (Article 12, paragraph 2);</li>
+                            <li>Information provided to designated checkpoints that collect or receive, as appropriate, relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, including from internationally recognized certificates of compliance (IRCC), where they are available (Article 17, paragraph 1 (a) (iii)); and</li>
+                            <li> Information on capacity-building and development initiatives at national, regional and international levels that should be shared through the ABS Clearing-House with a view to promoting synergy and coordination on capacity-building and development for access and benefit-sharing (Article 22, paragraph 6).</li>
+                        </ul>
+                        <p>The ABS Clearing-House will also need to provide access to other types of information that Parties may provide, or officially endorse, relevant to the implementation of the Protocol. Additional information specified in the Protocol (Article 14, paragraph 3) includes: </p>
+                        <ul style="list-style-type: lower-alpha;">
+                            <li>Relevant competent authorities of indigenous and local communities (ILCs), and information as so decided; </li>
+                            <li>Model contractual clauses; </li>
+                            <li>Methods and tools developed to monitor genetic resources; and </li>
+                            <li>Codes of conduct and best practices. </li>
+                        </ul>
+                        <p>Finally, Article 14, paragraph 2, provides that Parties shall make information to the ABS Clearing-House any information required pursuant to the decisions taken by the Conference of the Parties to the Protocol. </p>
+                  
             </div>
-        </span>
+            
+            
+            
+            <div style="padding-bottom:30px;" id="about-why">   
+                    <h1>What does it do</h1>
 
-    </div>
-
-
-    <div style="background-color:white;padding-top:20px;padding-bottom:30px;border-top:2px solid #ddd;">
-        <div class="container">
-            <div  class="row">
-
-              <div  class="col-xs-9 main-content" >
-
-
-
-                  <ng-include src="subTemplateUrl" ></ng-include></ng-include>
+                    <p id="about-why1"><strong>1. The ABS Clearing-House facilitates the connection between users and providers of genetic resources and associated traditional knowledge. </strong></p>
+                    <p>The ABS Clearing-House allows providers to share information on contacts and requirements for accessing genetic resources and traditional knowledge through this platform. Users can then easily find information on the ABS Clearing-House on how to access these resources in an organized manner, and all in one convenient location. </p>
+                    <p>By providing reliable information, the ABS Clearing-House facilitates the connection between users and providers of genetic resources and associated traditional knowledge, and therefore creates opportunities for ABS agreements.</p>
+                    <p>As a result, the ABS Clearing-House increases opportunities for the fair and equitable sharing of benefits coming from the use of genetic resources and associated traditional knowledge.</p>
+                    <br>
+                    <p id="about-why2"><strong>2. The ABS Clearing-House helps users to comply with national ABS measures and requirements.</strong></p>
+                    <p>By sharing reliable and complete information regarding national measures and requirements on ABS through the ABS Clearing-House, countries can help users of genetic resources and associated traditional knowledge understand and follow ABS rules and facilitate users’ compliance with national legislation.</p>
+                     <br>
+                    <p id="about-why3"><strong>3. The ABS Clearing-House provides tools to help countries monitor the utilization of genetic resources.</strong></p>
+                    <p>Through a centralized and standardized system, the ABS Clearing-House helps providers monitor how their genetic resources are being used throughout the value chain. When a provider country grants access to a genetic resource and publishes information on the permit or an equivalent, the ABS Clearing-House automatically generates an internationally recognized certificate of compliance (IRCC). </p>
+                    <p>The IRCC helps users of genetic resources to provide the required information to the checkpoints established along the value chain. As checkpoints collect or received information, including from the IRCC, they can include all the information in the checkpoint communique. The ABS Clearing-House send the checkpoint communiqué to all those involved in the process, namely the Party providing prior informed consent. The checkpoint serves as an important tool in monitoring the utilization of genetic resources.</p>
+                     <br>
+                    <p id="about-why4"><strong>4. The ABS Clearing-House offers reliable and up-to-date information. </strong></p>
+                    <p>The information available on the ABS Clearing-House follows secure publishing procedures. These procedures ensure that users have access to accurate information on ABS, making the process of access and utilization of genetic resources more fair, transparent and reliable.</p>
+                    <br>
+                    <p id="about-why5"><strong>5. The ABS Clearing-House promotes awareness-raising and capacity-building for the Nagoya Protocol.</strong></p>
+                    <p>The ABS community can use the ABS Clearing-House to share experiences in implementing the Nagoya Protocol, capacity-building resources, communication materials and publications on ABS to a wider audience. The ABS Clearing-House plays, thus, an important role in building capacity to implement the Protocol and providing easy access to best practices, lessons learned and materials</p>
+                    <br>
+                    <p id="about-why6"><strong>6. The ABS Clearing-House can promote efficiencies and effectiveness in capacity-building projects and resources for the Nagoya Protocol</strong></p>
+                    <p>Countries and organizations can share information on their projects, resources and materials for building capacity for the Nagoya Protocol. Having all available information on a single place can help organizations and countries to learn from other projects, to create synergies both at the design and implementation stage of projects, and avoid the duplication of efforts in capacity-building activities and materials.</p>
+                
+            
+            </div> 
+            
+            
+            
+             <div style="padding-bottom:30px;" id="about-who">   
+                    <h1>Who it is for </h1>
+                    
+                    <p id="about-who1"><strong>Parties and non-Parties. </strong> By publishing national information on the ABS Clearing-House, Parties to the Nagoya Protocol and other governments help both users and providers of genetic resources and associated traditional knowledge. Users can find the information they need to access genetic resources and associated traditional knowledge, while providers will find the necessary tools to monitor the utilization of these resources. Non-Parties to the Protocol are encouraged to share all their relevant ABS information through the ABS Clearing-House in the same conditions as Parties do.</p>
+                    
+                    <br>
+                    <p id="about-who2"><strong>Indigenous and local communities (ILCs)</strong>  can use the ABS Clearing-House to share information on how to access traditional knowledge associated with genetic resources, such as community protocols and customary laws. They can also access and contribute to the ABS Clearing-House with awareness-raising and capacity-building materials on the Nagoya Protocol in their own indigenous languages. </p>
+                
+                    <br>
+                    <p id="about-who3"><strong>Private sector and research institutions </strong>   using or seeking access to genetic resources can also benefit from the ABS Clearing-House in finding reliable and up-to-date information on how to access genetic resources and associated traditional knowledge. They can contribute to the ABS Clearing-House by sharing model contractual clauses, codes of conduct, guidelines and best practices they have developed. </p>
+                    
+                    <br>
+                    <p id="about-who4"><strong>Organizations involved in capacity-building for the Nagoya Protocol  </strong>  can share capacity-building resources and materials and information on their projects or activities, including lessons learned from their implementation. In exchange, they are able to access information on projects or resources registered by other actors, and therefore, create opportunities for capitalizing best practices and developing coordinated approaches to building and developing capacity.</p>
+                    
+                    <br>
+                    <p id="about-who5"><strong> International and non-governmental organizations and others   </strong>  can raise awareness and promote capacity building on ABS through the ABS Clearing-House. The ABS Clearing-House offers a space to share materials, literature, and learning modules related to ABS and the Nagoya Protocol. These resources can contribute to promote ratifications and implementation of the Nagoya Protocol, as well as increase opportunities for collaboration among the ABS community. </p>
               </div>
+                
+              
+               <div style="padding-bottom:30px;" id="about-roles">   
+                    <h1>User roles and responsibilites  </h1>
+                    
+                     <h3 id="about-rolesParties">Parties and non-Parties</h3> 
+                     <p>In order to ensure that the national records published in the ABS Clearing-House are reliable and provide legal certainty for users, Parties are required to designate a single person responsible for publishing all national records in the ABS Clearing-House. This function is referred to as publishing authority (PA). The duties of the National Focal Point (NFP) could also be expanded to incorporate the role of the publishing authority.</p>
+                     <p>The publishing authority can prepare draft records and publish them directly, or can designate one or more national authorized users (NAUs) to assist them in preparing draft records for their publication in the ABS Clearing-House.</p>
+                     <p>Publishing authorities and national authorized users can register both national and reference records.</p>
+                     <p>Non-Parties are encouraged to share all relevant ABS information through the ABS Clearing-House in the same conditions as Parties. The status of non-Party to the Protocol will be shown in the display of the record of these countries.</p>
+                     <div class="well">
+                        <h4 id="about-rolesPA">Publishing authorities (PA)</h4>
+                        <p><strong>Designation of the PA</strong></p>
+                        <p>The national focal point (NFP) on access and benefit-sharing is to communicate the designation of the publishing authority for the ABS Clearing-House through an official written communication addressed to the Executive Secretary. A form has been prepared for designating the ABS Clearing-House publishing authority (PA) and any national authorized users (NAUs).</p>
+                        <p><strong>Functions of the PA</strong></p>
+                        <p>The PA is responsible for:
+                            <ul>
+                                <li>Authorizing the publication of all national records registered in the ABS Clearing-House;</li>
+                                <li>Deleting records already published in the ABS Clearing-House, if necessary;</li>
+                                <li>Ensuring that the information made available on the ABS Clearing-House is complete, relevant and up-to-date; and</li>
+                                <li>Ensuring that no confidential data is published in the ABS Clearing-House. The ABS Clearing-House does not host any confidential information and all information published in the ABS Clearing-House is publicly available and can be accessed by the general public.</li>
+                                <li>Managing the designation of the National Authorized Users (NAUs)</li>
+                            </ul>
+                        </p>
+                    </div>
+                    <div class="well">
+                        <h4 id="about-rolesNAU">National authorized users (NAUs)</h4>
+                        <p><strong>Designation of the NAUs</strong></p>
+                        <p>******************to be updated.******************</p>
+                        <p><strong>Functions of the NAUs</strong></p>
+                        <p>The function of national authorized users is to assist the publishing authorities in the preparation of draft national records.</p>
+                        <p>National authorized users can create and manage draft records of their country which are then forwarded to the publishing authority for publication.</p>
+                    </div>
 
+                     <h3 id="about-rolesUsers">Other users (CBD account holders)</h3> 
+                     <p>Anyone can contribute reference records to the ABSCH. A CBD account which will give you access to register information in all CBD clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH) and the clearing-house mechanism (CHM) under the Convention. Anyone can sign up for a CBD account at <a href="https://accounts.cbd.int/signup" target="new_">accounts.cbd.int/signup</a></p>
+                     <p>This gives an opportunity to different stakeholders, indigenous and local communities, academia, non-governmental organizations, research institutions, private sector, etc. to contribute to the ABS Clearing-House by posting relevant ABS information and to create a community where knowledge and best practices are shared to support the implementation of the Nagoya Protocol. </p>
+                     <p>The Secretariat is responsible for validating all reference records before final publication in the ABS Clearing-House.</p>
+                     
+                     
+                     <h3 id="about-rolesPublic">General public (no CBD account)</h3> 
+                     <p>All information published in the ABS Clearing-House becomes publicly available for the general public to consult and view. Aa CBD account is not needed in order to search or view any information published in the ABS Clearing-House.</p>
 
-              <div class="col-xs-3"  >
-                  <ng-include  src="'/app/views/help/links/about.html'"></ng-inlcude>
-              </div>
+               </div>
+            
+            
+                 <div style="padding-bottom:30px;" id="about-types">   
+                    <h1>Types of information available in the ABS Clearing-House </h1>
+                    <p>The information available in the ABS Clearing-House is divided into three main groups: national records, reference records and SCBD managed records.</p>
+                    
+                    <h3 class="color-blue" id="about-types1">National records</h3>
+                    <p>National records are published by Governments and include national information relevant for the implementation of the Nagoya Protocol as well as information Parties are obliged to provide in accordance with the Protocol.<p>
+                    
+                    <p><strong>ABS National Focal Points (NFP)</strong> 
+                    Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).</p>
+                    
+                     <p><strong>Compentent National Authorities (CNA)</strong> 
+                     Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)</p>
+                    
+                     <p><strong>Legislative, administrative or policy measures (MSR)</strong> 
+                     Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.</p>
+                    
+                     <p><strong>National Websites and Databases (NDB)</strong>
+                     Information and links to national websites or databases which are relevant for ABS.</p>
+                    
+                    <p><strong>Internationally Recognized Certificate of Compliance (IRCC)</strong>
+                    Certificate constituted from the information on the permit or its equivalent registered in the ABS Clearing-House, serving as evidence that the genetic resource which it covers has been accessed in accordance with prior informed consent and that mutually agreed terms have been established. It contains the minimum necessary information to allow monitoring the utilization of genetic resources by users throughout the value chain (Article 17).</p>
+                    
+                    <p><strong>Checkpoints (CP)</strong>
+                    Entities designated by Parties to effectively collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources, as appropriate (Article 17, 1(a) (i)).</p>
+                    
+                    <p><strong>Checkpoint Communiqués (CPC)</strong> 
+                    A  summary of the information collected or received by  a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).</p>
+                    
+                     <p><strong>Interim National report(NR)</strong> 
+                     Document submitted by Parties in the context of Article 29 of the Protocol to report on the measures that it has taken to implement this Protocol.</p>
+                    
+                    
+                    <h3 class="color-orange" id="about-types2">Reference records</h3>
+                    <p>Reference records include a number of ABS relevant resources and information. They can be submitted by any registered user of the ABS Clearing-House (Parties, Non-Parties, governments, international organizations, indigenous and local communities, and relevant stakeholders.</p>
+                    
+                    <p><strong>Virtual Library Records</strong>
+                    The virtual library in the ABS Clearing-House hosts a number of ABS relevant resources submitted by any registered user of the ABS Clearing-House. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc. </p>
+                    
+                     <p><strong>Model Contractual Clauses</strong>
+                    Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. </p>
+                    
+                     <p><strong> Codes of Conduct, Guidelines, Best Practices and/or Standards </strong>
+                    Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.</p>
+                    
+                     <p><strong>Community Protocols and Procedures and Customary Laws </strong>
+                    Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.</p>
+                    
+                     <p><strong>Capacity-building Initiatives</strong>
+                     Information on Capacity-building Initiatives at national, regional and international levels, are shared to promote synergy and coordination on capacity-building and development for access and benefit-sharing.
+                    </p>
+                    
+                   
+                     <h3 id="about-types3">SCBD managed records</h3>
+                     <p>Information published by the SCBD. These include meetings, news stories, notifications and statements.</p>
+                     
+                     <p><strong>News </strong>  News stories compiled from various media sources, relevant to access and benefit-sharing. </p>
+                     <p><strong>Meetings </strong> Information on upcoming meetings relevant to the implementation of the Protocol.</p>
+                     <p><strong>Notifications </strong> Notifications issued by the SCBD, and relevant to the implementation of the Protocol. </p>
+                     <p><strong>Press Releases </strong> Press releases issued by the SCBD, relevant to access and benefit-sharing.</p>
+                     <p><strong>Statements </strong> Statements relevant to access and benefit-sharing made by the SCBD.</p>
 
-            </div> <!-- end row -->
-          </div> <!-- end container  -->
+               </div>
+               
+               <div style="padding-bottom:30px;" id="about-search">   
+                    <h1>Finding Information </h1>
+                    <h3 id="about-search1">Search</h3>
+                    <p>All type of information stored in the ABS Clearing-House can found using the search. A CBD account is not needed to search in the ABSCH. You can select keywords, dates, or use a free text to narrow down the results set display. The set of result as been grouped in to individualt tabs by record type: national records, reference records, and SBCD records. <a href="/search">Click here to search the ABSCH</a>  </p>
+                    <h3 id="about-search2">Country Profiles</h3>
+                    <p>A broad overview of the status of ratification, National Records, and information on the representatives. Each individual country profile provides all the national information published by that country. </p>
+                 </div>
+               
+               
+                 <div style="padding-bottom:30px;" id="about-submit">   
+                    <h1>Submitting Information </h1>
+                    <h3 id="about-submit1">Getting an account</h3>
+                    <p>To submit information on the ABS-CH, you need to create an account with the CBD by filling the form here: <a href="https://accounts.cbd.int/signup">accounts.cbd.int/signup</a>.  After filling the form, you will automatically receive a link, by email, to confirm your account. A CBD account enables you to register reference records in all CBD clearing-houses, including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH) and the clearing-house mechanism (CHM). To publish national information you need to be designated by the National CBD or ABS Focal Point. </p>
+                    <h3 id="about-submit2">Managing your information</h3>
+                    <p></p>
+                 </div>
+               
+               
+                 <div style="padding-bottom:30px;" id="about-np">   
+                    <h1>About the the Nagoya Protocol </h1>
+                      <p>The Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization to the Convention on Biological Diversity is an international agreement which aims at sharing the benefits arising from the utilization of genetic resources in a fair and equitable way, including by appropriate access to genetic resources and by appropriate transfer of relevant technologies, taking into account all rights over those resources and to technologies, and by appropriate funding, thereby contributing to the conservation of biological diversity and the sustainable use of its components.
+                     <br> <a href="https://www.cbd.int/abs/">For more information please see the ABS portal on the CBD website</a></p>
+                      
+                      
+                    <h3 id="about-np1">Text of the Nagoya Protocol</h3>
+                    <p>For the protocol text and courtesy translations: <a href="https://www.cbd.int/abs/text/default.shtml">Text of the Nagoya Protocol</a></p>
+                    
+                    <h3 id="about-np2">Becoming a Party</h3>
+                    <p>States and regional economic integration organizations that are Parties to the Convention on Biological Diversity are eligible to become a Party to the Nagoya Protocol. 
+                        The United Nations Secretary-General acts as Depositary for the Nagoya Protocol through the United Nations Treaty Section in New York. Certified true copies of the Nagoya Protocol are available here. Please follow further instructions available here:
+                        <a href="https://www.cbd.int/abs/becoming-party/default.shtml">Becoming a Party</a></p>
+                    
+                    
+                    
+                    
+                    <h3 id="about-np3">COP-MOP</h3/>
+                     <p><a href="https://www.cbd.int/abs/NPCOPMOP-Bureau.shtml">COP-MOP Bureau</a>: Information on the current membership of the COP-MOP Bureau is available by following the link. </p>
+                     <p><a href="https://www.cbd.int/decisions/np-mop/">Nagoya Protocol COP-MOP Decisions:</a> The decisions taken by the Parties to the Nagoya Protocol can be accessed here: Nagoya Protocol COP-MOP Decisions</p>
+                     <p><a href="https://www.cbd.int/abs/COPMOP2-Preparatory.shtml">Preparatory processes and milestones towards COP-MOP 2 of the Nagoya Protocol</a>: Second meeting of the Conference of the Parties serving as the meeting of the Parties to the Nagoya Protocol on Access and Benefit-sharing is scheduled for December 4-17, 2016, in Cancun, Mexico. The link provides details on the preparatory processes and milestones towards this meeting. </p>
+               </div> 
+               
+               <div style="padding-bottom:30px;" id="about-help">   
+                    <h1>Help and capacity-building </h1>
+                    <h3 id="about-help1">Help using the ABSCH</h3>
+                    <p> Some of the questions you may have could find an answer in the frequently asked questions section. The ABS-CH  team provides Help Desk services through email, phone and Skype that offer technical support for registering or searching information and organizes regular trainings in the form of online webinars to help users become familiar with the various functions of the ABS Clearing-House.</p>
+                    <p>The ABS-CH is promoted at relevant workshops, side events, and meetings for different audiences. The CBD Secretariat is currently working on making available the ABS-CH in the six official UN languages, and its interface and main functions are constantly improved to facilitate the operability with other databases and systems, including tablets and smart phones. The ABS-CH team is also working in the development of step by step guides and an e-learning module about the ABS Clearing-House.</p>
+                 
 
-
+               </div>   
+               
+                 <div style="padding-bottom:30px;" id="about-contact">   
+                    <h1>Contact Us</h1>           
+                    <p> <strong>ABS Clearing-House</strong> <br>
+                        Secretariat of the Convention on Biological Diversity <br>
+                        413, Saint Jacques Street, suite 800 
+                        Montreal QC H2Y 1N9 Canada<br>
+                        email: absch@cbd.int<br>
+                        skype: abs-ch<br>
+                        telephone: +1 514 288 2220
+                    </p>
+                  </div>   
     </div>
+    
+    
+  </div>
+</div>
+<script>
+    $('#myAffix').affix({
+  offset: {
+    top: 200,
+    bottom: function () {
+      return (this.bottom = $('.footer').outerHeight(true))
+    }
+  }
+})
+</script>
 </div><!--  end controller -->

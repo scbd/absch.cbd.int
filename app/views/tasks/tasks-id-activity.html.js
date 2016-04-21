@@ -1,19 +1,17 @@
 ﻿define(['app',
-	'../forms/view/view-abs-checkpoint.directive.js',
-	'../forms/view/view-abs-checkpoint-communique.directive.js',
-	'../forms/view/view-abs-permit.directive.js',
-	'../forms/view/view-authority.directive.js',
-	'../forms/view/view-authority-reference.directive.js',
-	'../forms/view/view-contact.directive.js',
-	'../forms/view/view-contact-reference.directive.js',
-	'../forms/view/view-database.directive.js',
-	'../forms/view/view-measure.directive.js',
-	'../forms/view/view-organization.directive.js',
-	'../forms/view/view-organization-reference.directive.js',
-	'../forms/view/view-resource.directive.js',
-	'../forms/view/record-loader.directive.html.js',
-	'../forms/view/view-capacity-building-initiative.directive.js',
-	'../forms/view/view-capacity-building-resource.directive.js'
+	// '../forms/view/view-abs-checkpoint.directive.js',
+	// '../forms/view/view-abs-checkpoint-communique.directive.js',
+	// '../forms/view/view-abs-permit.directive.js',
+	// '../forms/view/view-authority.directive.js',
+	// '../forms/view/view-authority-reference.directive.js',
+	// '../forms/view/view-contact.directive.js',
+	// '../forms/view/view-contact-reference.directive.js',
+	// '../forms/view/view-database.directive.js',
+	// '../forms/view/view-measure.directive.js',
+	// '../forms/view/view-organization.directive.js',
+	// '../forms/view/view-organization-reference.directive.js',
+	// '../forms/view/view-resource.directive.js',
+	'../forms/view/record-loader.directive.html.js'
 ], function (app) {
 
 app.controller("TaskIdActivityController", [ "$scope", "$timeout", "$http", "$route", "$location", "IStorage", "IWorkflows", "authentication", "underscore", function ($scope, $timeout, $http, $route, $location, IStorage, IWorkflows, authentication, _)

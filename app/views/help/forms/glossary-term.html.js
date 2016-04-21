@@ -1,10 +1,10 @@
-define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'angular-message',
+define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 
         '/app/js/common.js', 'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',],
   function (angular, app, _) {
 
     app.controller("glossaryTermController",
-      ["$routeParams", "$scope", "$q", "$timeout", '$http', '$element', '$mdToast', '$route', 'commonjs', 'breadcrumbs', '$mdDialog',
-        function ($routeParams, $scope, $q, $timeout, $http, $element, $mdToast, $route, commonjs, breadcrumbs, $mdDialog) {
+      ["$routeParams", "$scope","$rootScope", "$q", "$timeout", '$http', '$element',  '$route', 'commonjs', 'breadcrumbs', '$mdDialog',
+        function ($routeParams, $scope, $rootScope, $q, $timeout, $http, $element,  $route, commonjs, breadcrumbs, $mdDialog) {
 
           $scope.languages = ['en'];
           var url = '/api/v2015/' + $route.current.$$route.schema;
@@ -85,12 +85,8 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
                   doc.sequence = document.sequence;
                   updateBreadcrumbs();
                 }
-                $mdToast.show(
-                  $mdToast.simple()
-                    .content('Glossary updated!')
-                    .position("top right")
-                    .hideDelay(3000)
-                  );
+                $rootScope.$broadcast("showSimpleToast", "Glossary updated!");
+
               });
 
           }
@@ -155,12 +151,8 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
 									.then(function(){
 										$scope.glossarys.splice(_.indexOf($scope.glossarys, glossaryDocument), 1);
 										$scope.document = $scope.glossarys[0];
-										$mdToast.show(
-												$mdToast.simple()
-													.content($scope.helptype + ' deleted!')
-													.position("top right")
-													.hideDelay(3000)
-												);
+										 $rootScope.$broadcast("showSimpleToast", $scope.helptype + ' deleted!');
+
 									});
 							});
 

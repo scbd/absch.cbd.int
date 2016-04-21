@@ -1,6 +1,6 @@
 define(['app',
         '/app/views/search/measure-matrix-elements-derective.html.js',
-        '/app/services/search-service.js', '/app/services/app-config-service.js'
+        '/app/services/search-service.js', '/app/services/app-config-service.js','/app/views/directives/party-status.js'
     ], function (app) {
 
 app.directive("viewMeasure", [function () {
@@ -26,7 +26,7 @@ app.directive("viewMeasure", [function () {
 
 				if(!$scope.hide) return true; //show all fields
 
-				return( $scope.hide.indexOf(field) >= 0 ? false : true);
+				return( $scope.hide.indexOf(field) >= 0 ? false : false);
 			}
 
 			//====================
@@ -38,7 +38,7 @@ app.directive("viewMeasure", [function () {
 					$scope.amendedMeasures = angular.fromJson(angular.toJson($scope.document.amendedMeasures));
 
 					if ($scope.amendedMeasures)
-						$scope.loadReferences($scope.amendedMeasures, true);
+						$scope.loadReferences($scope.amendedMeasures, false);
 				}
 			});
 
@@ -50,7 +50,7 @@ app.directive("viewMeasure", [function () {
 					$scope.registeredMeasures = angular.fromJson(angular.toJson($scope.document.registeredMeasures));
 
 					if ($scope.registeredMeasures)
-						$scope.loadReferences($scope.registeredMeasures, true);
+						$scope.loadReferences($scope.registeredMeasures, false);
 				}
 			});
 
@@ -63,7 +63,7 @@ app.directive("viewMeasure", [function () {
 					$scope.linkedMeasures = angular.fromJson(angular.toJson($scope.document.linkedMeasures));
 
 					if ($scope.linkedMeasures)
-						$scope.loadReferences($scope.linkedMeasures, true);
+						$scope.loadReferences($scope.linkedMeasures, false);
 				}
 			});
 

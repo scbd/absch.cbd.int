@@ -4,19 +4,18 @@
 		<span class="color-black"> (IRCC) </span>
 		</h4> </div>
 	<div class="record-body panel-body">
+        
 
-			<div class="pull-right" ng-if="document.info">
-				<a class="btn btn-default" style="background-color:#f5f5f5;" target="_new" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
-			</div>
-			<br/>
-
-			<legend ng-if="document.government">General information</legend>
+			<legend ng-if="document.government">
+                <a  ng-if="document.info" class="btn btn-default btn-small pull-right" style="background-color:#f5f5f5;" target="_new" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
+		         General information
+            </legend>
 
 			<div ng-show="document.government">
 				<label>Country</label>
-				<span class="help-block">The country publishing this record.</span>
 				<div class="km-value" >
 					{{document.government|term}}
+                    <span ng-party-status government="document.government" id="government"></span>
 				</div>
 			</div>
 
@@ -31,8 +30,8 @@
 					<label>Reference number(s) to other internationally recognized certificate(s) of compliance that relate(s) to this permit</label>
 					<div class="km-value">
 						<ul>
-							<li ng-repeat="permit in document.referencePermits">
-								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale}}" target="_new">{{permit | lstring:locale | uniqueID}}</a>
+							<li ng-repeat="item in document.referencePermits">
+                            <div view-default-reference ng-model="item.identifier" locale="locale"></div> 
 							</li>
 						</ul>
 					</div>
@@ -45,7 +44,7 @@
 			</div>
 
 			<div ng-show="document.authority">
-				<legend>Issuing Authority <span class="help-block">The authority responsible for issuing this permit</span></legend>
+				<legend>Issuing Authority <span class="help-info">The authority responsible for issuing this permit</span></legend>
 				<div class="km-value">
 					<div view-contact-reference ng-model="document.authority" locale="locale"></div>
 				</div>
@@ -88,8 +87,7 @@
 				</div>
 
 				<div ng-show="document.providers || document.providerConfidential">
-					<label>The provider
-						<span class="help-block">The person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
+					<label>The provider (the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation)</span>
 					</label>
 					<div class="km-value" ng-show="!document.providerConfidential" ng-repeat="provider in document.providers">
 						<div view-contact-reference ng-model="provider" locale="locale"></div>
@@ -160,12 +158,12 @@
     				</div>
     			</div>
 
-<legend>Subject-matter </legend>
+<legend>Subject-matter or genetic resource(s) </legend>
 				<div ng-show="document.geneticResources">
 					<label>Subject-matter or genetic resources covered by the permit or its equivalent</label>
 					<div class="km-value km-pre"ng-bind-html="document.geneticResources | lstring:locale"></div>
 				</div>
-		
+
 				<div ng-show="document.geneticResourcesConfidential">
 					<label>Subject-matter or genetic resources covered by the permit or its equivalent</label>
 					<div class="km-value km-pre confidential">Confidential information</div>
@@ -240,10 +238,12 @@
 						<li ng-repeat="term in document.usage">{{term|term}}</li>
 					</ul>
 				</div>
-				<div ng-if="document.usageConfidential">
-					<div class="km-value km-pre confidential">Confidential information</div>
-				</div>
-			</div>
+            </div>
+            <div ng-if="document.usageConfidential">
+                <label>Type of use allowed by the permit or its equivalent</label>
+                <div class="km-value km-pre confidential">Confidential information</div>
+            </div>
+			
 
 			<div ng-show="document.usageDescription">
 				<label>Additional information about the specified uses covered by the permit or its equivalent or use restrictions</label>
@@ -325,12 +325,15 @@
 
 				</div>
 			</div>
+            
+            <div>
+                <legend>Ammendment history</legend>
+                <div view-history document-id="document.header.identifier" public-view="true"></div>
+             </div>
 
-      <!-- <div view-related-checkpoint-communique permit-id="document.header.identifier"></div> -->
-	  		<div  ng-if="document.info">
-				<legend>Certificate History</legend>
-				<div view-history document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
-			</div>
+
 	</div>
-	<div document-metadata  class="panel-footer"></div>
+	
+        <div document-metadata class="panel-footer"></div>
+  
 </div>

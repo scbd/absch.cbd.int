@@ -7,20 +7,22 @@ define(['app'], function(app) {
             replace: true,
             transclude: false,
             scope: {
-                documentID: "=documentId",
-                loadDocuments: "=loadDocuments",
-                government: "=government"
+                documentId: "=",
+                publicView: "=",
             },
-            link: function($scope, $element) {
-                // $element.find("[data-toggle='tooltip']").tooltip({trigger:'hover'});
-            },
+            // link: function($scope, $element) {
+            //     // $element.find("[data-toggle='tooltip']").tooltip({trigger:'hover'});
+            // },
             controller: ['$scope', 'IStorage', "$q", "$route", "$filter", "$timeout",
                 function($scope, storage, $q, $route, $filter, $timeout) {
 
+                    if($scope.documentId)
+                        load($scope.documentId);
+                    
                     //==================================
                     //
                     //==================================
-                    $scope.load = function(identifier) {
+                    function load(identifier) {
 
                         $scope.error = undefined;
 
@@ -88,6 +90,12 @@ define(['app'], function(app) {
                             }));
                         });
                     };
+                    
+                     $scope.$watch("documentId", function() {
+                         if($scope.documentId)
+                            load($scope.documentId);
+                    })
+                    
 
                     $scope.$watch("documents", function() {
                         $scope.column = 'createdOn';

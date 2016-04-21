@@ -1,26 +1,26 @@
 ﻿<div>
-	<b>{{document.name | lstring:locale}} <i ng-show="document.acronym">({{document.acronym | lstring:locale}})</i></b>
-	<div km-terms ng-model="document.organizationType">
+	<b>{{organization.name | lstring:locale}} <i ng-show="organization.acronym">({{organization.acronym | lstring:locale}})</i></b>
+	<div km-terms ng-model="organization.organizationType">
 		<span ng-repeat="term in terms">{{term.name}}</span>
 	</div>
 	<address style="margin-top: 5px; margin-bottom: 5px">
-		<div class="km-pre">{{document.address | lstring:locale}}</div>
-		{{document.city | lstring:locale}}<span ng-show="document.city">, </span>
-		{{document.state | lstring:locale}}<br ng-show="document.city || document.state" />
-		{{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
-		<b>{{document.country|term}}</b>
+		<div class="km-pre">{{organization.address | lstring:locale}}</div>
+		{{organization.city | lstring:locale}}<span ng-show="organization.city">, </span>
+		{{organization.state | lstring:locale}}<br ng-show="organization.city || organization.state" />
+		{{organization.postalCode | lstring:locale}}<span ng-show="organization.postalCode">, </span>
+		<b>{{organization.country|term}}</b>
 	</address>
 
-	<div ng-show="document.phones">
-		Phone: <span ng-repeat="item in document.phones">{{item}}<span ng-show="!$last">, </span></span>
+	<div ng-show="organization.phones">
+		Phone: <span ng-repeat="item in organization.phones">{{item}}<span ng-show="!$last">, </span></span>
 	</div>
-	<div ng-show="document.faxes">
-		Fax: <span ng-repeat="item in document.faxes">{{item}}<span ng-show="!$last">, </span></span>
+	<div ng-show="organization.faxes">
+		Fax: <span ng-repeat="item in organization.faxes">{{item}}<span ng-show="!$last">, </span></span>
 	</div>
-	<div ng-show="document.emails">
-		Emails: <span ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
+	<div ng-show="organization.emails">
+		Emails: <span ng-repeat="item in organization.emails"><a ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
 	</div>
-	<div ng-show="document.websites">
-		Websites: <span ng-repeat="item in document.websites"><a ng-href="{{item.url}}">{{item.name||item.url}}</a><span ng-show="!$last">, </span></span>
+	<div ng-show="organization.websites">
+		Websites: <span ng-repeat="item in organization.websites"><a ng-href="{{item.url}}">{{item.name||item.url}}</a><span ng-show="!$last">, </span></span>
 	</div>
 </div>

@@ -111,8 +111,10 @@
 			md-list-item.md-2-line .md-list-item-text{padding:0;}
 			md-divider{padding:0;}
 		</style>
-		
 
+
+            
+            
 				<!--<div class="table">
 
 					<div ng-show="groupedMeasures">
@@ -218,13 +220,9 @@
 							</div>
 					</div>
 				</div>-->
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3><strong>Elements of the measure</strong></h3>
-					</div>
-					<div class="panel-body" id="pandelBody_{{$index}}" style="margin-top:0;padding-top:0;">
-						<div measure-matrix-elements name="absMeasures" type="multiple" ng-model="noModel" locales="measures[0].document.header.languages"
+				
+				<div measure-matrix-elements title="Overview of Key ABS Measure Elements" name="absMeasures" type="multiple" ng-model="noModel" locales="measures[0].document.header.languages"
 						document="measures" api="apiMeasure"></div>
-					</div>
-				</div>
+					
+				
 	</div>

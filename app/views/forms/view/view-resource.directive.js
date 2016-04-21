@@ -10,13 +10,10 @@ app.directive("viewResource", [function () {
 			document: "=ngModel",
 			locale  : "=",
 			target  : "@linkTarget",
-			hide : "@",
-			heading	:	"@",
-			shortHeading : "@"
+			hide : "@"
 		},
 		controller : ["$scope", "IStorage", "$http", function ($scope, storage, $http)
 		{
-
 			//====================
 			//
 			//====================
@@ -25,7 +22,7 @@ app.directive("viewResource", [function () {
 				if(!$scope.hide) return true; //show all fields
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
-			}
+			};
 
 			//====================
 			//
@@ -40,7 +37,7 @@ app.directive("viewResource", [function () {
 
 			$scope.tryme = function(){
 				console.log('tryme');
-			}
+			};
 
 			//====================
 			//

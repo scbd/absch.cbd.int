@@ -1,51 +1,47 @@
-
-		<div class="container-fluid record-metadata ">
+<div id="doc-metadata" class="container-fluid record-metadata">
 		<div class="row">
+			<div class="col-xs-12">
+
+                <a ng-href="/database/{{(document.schema_s||document.header.schema)|schemaShortName}}/{{getUniqueID(document)}}" target="_new_" class="uid">
+				<i class="fa fa-external-link-square"></i> {{getUniqueID(document)}} </a>
+
+				<span class="date">| {{document.info.updatedOn | formatDate}}</span>
+				<span class="pull-right">
+					<a href="#" class=" color-red" ng-click="loadReportRecord(document.schema_s||document.header.schema,document.identifier_s||document.header.identifier)" ><i class="fa fa-exclamation-triangle"></i> Report record</a>
+				</span>
+				<div id="divReportRecord"></div>
+			</div>
+		</div>
+
+		<!-- <div class="row">
 		 <div class="col-xs-12">
 
-			<div ng-show="document.info.createdBy && document.info.createdBy != document.info.updatedBy">
-				<label class="record-metadata-label">Created by:</label>
-				<span class="record-metadata-text">
-					<a href="mailto:{{document.info.createdBy.email}}"><i class="fa fa-envelope"></i>
-						{{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}}
-					</a>
-					on {{document.info.createdOn | date:'d-MMM-y  h:mm:ss a'}}
-					<!-- {{document.info.createdBy.firstName}} {{document.info.createdBy.lastName}}
-					(<a href="mailto:{{document.info.createdBy.email}}">{{document.info.createdBy.email}}</a>) on {{document.info.createdOn | date:'d-MMM-y  h:mm:ss a'}} -->
-				</span>
-			</div>
-
-			<div ng-show="!document.info.createdBy && document.info.createdOn">
-				<label class="record-metadata-label">Published by:</label>
-				<span class="record-metadata-text">
-					<a href="mailto:secretariat@cbd.int"><i class="fa fa-envelope"></i>
-						SCBD
-					</a>
-				 	 on {{document.info.createdOn| date:'d-MMM-y  h:mm:ss a'}}
-				</span>
-			</div>
-
-			<div ng-show="document.info.updatedBy">
-				<label class="record-metadata-label">Published by:</label>
-				<span class="record-metadata-text">
-					<a href="mailto:{{document.info.updatedBy.email}}"><i class="fa fa-envelope"></i>
-						{{document.info.updatedBy.firstName}} {{document.info.updatedBy.lastName}}
-					</a>
-					 on {{document.info.updatedOn| date:'d-MMM-y  h:mm:ss a'}}
-				</span>
-			</div>
-
-			<div >
-					<label class="record-metadata-label">Record identifier:</label>
-					<span class="record-metadata-text">
-				
-						<a target="_new" href="/database/{{getDocumentSchema(document.header.schema)}}/{{getDocumentId(document)}}">
+             <div ng-show="!document.info.createdBy" style="padding-left:10px;">
+                <table style="width:100%" class="table table-condensed" >
+                <tr>
+                    <th class="color-grey hidden-xs" style="width:250px">Updated on</th>
+                    <th class="color-grey" style="width:250px">Record Identifier</th>
+                    <th class="color-grey hidden-xs" >Action</th>
+                </tr>
+                <tr>
+                    <td class="hidden-xs" style="width:250px" ng-class="{'bold': $index == 0}">
+                        <strong>{{document.info.updatedOn | formatDateWithTime}}</strong>
+                    </td>
+                     <td style="width:250px">
+                        <a target="_new" href="/database/{{getDocumentSchema(document.header.schema)}}/{{getDocumentId(document)}}">
 				 			<span >{{document.info | uniqueIDWithoutRevision }}</span>
 							<span ng-show="document.id">{{getDocumentId(document)}}</span>
 					    </a>
 						<span ng-show="!document.info  && !document.id">not yet assigned</span>
-					</span>
-			</div>
-			</div>
+                    </td>
+                    <td class="hidden-xs">
+                      <span ng-show="document.id" class="bold color-green"> PUBLISHED</span>
+                      <span ng-show="!document.info  && !document.id" class="bold">not yet published</span>
+                    </td>
+                </tr>
+                </table>
+             </div>
+            <div view-history ng-if="document.info.updatedBy"  document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
 		</div>
+	</div>-->
 </div>

@@ -7,12 +7,13 @@
 
 
 
-<legend>General information</legend>	
+<legend>General information</legend>
 
 		<div ng-show="document.government">
-			<label name="country">Country <span class="help-block">The country publishing this record.</span></label>
+			<label name="country">Country</label>
 			<div class="km-value">
 				{{document.government|term}}
+                <span ng-party-status government="document.government" id="government"></span>
 			</div>
 		</div>
 
@@ -37,7 +38,7 @@
 			</div>
 		</div>
 
-		
+
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
 			<legend>Additional Information</legend>
@@ -54,13 +55,7 @@
 				</div>
 			</div>
 		</div>
-        <div class="row" style="padding-top:10px;" ng-show="document.info.revision">
-            <div class="col-xs-12">
-                
-                <div view-history document-id="document.header.identifier" load-documents="true"
-                government="document.government.identifier"></div>
-        	</div>
-		</div>
+
 	</div>
-	<div document-metadata  class="panel-footer"></div>
+        <div document-metadata class="panel-footer"></div>
 </div>

@@ -1,6 +1,6 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-blue"><label>
-		National Report
+		<span class="color-white"> Interim National Report on the Implementation of the Nagoya Protocol </span>
 		<span class="color-black"> (NR) </span>
 		</label>
 	</div>
@@ -27,7 +27,7 @@
 				<div>
 					<label>2. Contact person</label>
 					<div view-contact-reference ng-model="document.contact" locale="locale"  ng-show="document.contact">{{document.contact}}</div>
-					<div  class="km-value"  ng-hide="document.contact">No Contact provided</div>			
+					<div  class="km-value"  ng-hide="document.contact">No Contact provided</div>
 				</div>
 			</div>
 		</div>
@@ -709,17 +709,17 @@
 											<label>Please provide further information</label>
 											<div class="km-value">{{document.question26.additionalInfo | lstring:locale}}</div>
 										</div>
-										<label>Has your country taken measures to address situations of non-compliance?</label>	
+										<label>Has your country taken measures to address situations of non-compliance?</label>
 										<div class="km-value km-pre">{{booleanToText(document.question26.violation.answer)}}</div>
-										<div>									
-											<ul>	
+										<div>
+											<ul>
 												<div ng-show="document.question26.violation.additionalInfo">
 						                            <label>Please provide further information</label>
 						                            <div class="km-value">{{document.question26.violation.additionalInfo | lstring:locale}}</div>
 						                        </div>
 											</ul>
 										</div>
-									</ul>									
+									</ul>
 								</div>
 								<div ng-show="document.question26.furtherInfo">
 									<label>Use the text entry to provide further information</label>
@@ -744,7 +744,7 @@
 					    	<ul>
 								<div class="km-value km-pre">{{booleanToText(document.question27.answer)}}</div>
 				                <div ng-show="document.question27.answer">
-				                	<ul>				                	
+				                	<ul>
 					                    <div>
 							            	<label>Has your country made use of the checkpoint communique?</label>
 							            	<div class="km-value">{{document.question27.cpc.hasOwnProperty('option')? document.question27.cpc.option : "Not selected"}} </div>
@@ -1861,7 +1861,7 @@
 						<label>Financial resources have been made available</label>
 						<ul>
 							<div class="km-value km-pre">{{booleanToText(document.question62.donor.answer)}}</div>
-							<div ng-show="document.question62.donor.additionalInfo">								
+							<div ng-show="document.question62.donor.additionalInfo">
                             	<label>Please provide further information</label>
 								<div class="km-value">{{document.question62.donor.additionalInfo | lstring:locale}}</div>
 							</div>
@@ -1874,7 +1874,7 @@
 								<label>From other Parties</label>
 								<ul>
 									<div class="km-value km-pre">{{booleanToText(document.question62.recipient.parties)}}</div>
-									<div ng-show="document.question62.recipient.partiesInfo">							
+									<div ng-show="document.question62.recipient.partiesInfo">
                             			<label>Please provide further information</label>
 										<div class="km-value">{{document.question62.recipient.partiesInfo | lstring:locale}}</div>
 									</div>
@@ -1897,7 +1897,7 @@
 										<label>From other sources</label>
 										<ul>
 											<div class="km-value km-pre">{{booleanToText(document.question62.recipient.otherSources)}}</div>
-											<div ng-show="document.question62.recipient.otherSourcesInfo">				
+											<div ng-show="document.question62.recipient.otherSourcesInfo">
                             					<label>Please provide further information</label>
 												<div class="km-value">{{document.question62.recipient.otherSourcesInfo | lstring:locale}}</div>
 											</div>
@@ -1924,29 +1924,25 @@
 						</div>
 					</ul>
 				</div>
-				
+
 				<div>
 					<label>63. Please provide information on experiences related to the mobilization of resources in support of the implementation of the Protocol.</label>
-					<ul>
-						<div class="km-value">{{document.question63new.relevantInformation | lstring:locale}}</div>
-						<div class="km-value" ng-repeat="item in document.question63new.relevantDocuments">
-							<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-						</div>
-					</ul>
+					<div class="km-value">{{document.question62new.relevantInformation | lstring:locale}}</div>
+					<div class="km-value" ng-repeat="item in document.question63new.relevantDocuments">
+						<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+					</div>
 				</div>
-				
+
 				<div>
 					<label>64. Please provide information on the status of funds mobilized in support of the implementation of the Protocol.</label>
-					<ul>
-						<div class="km-value">{{document.question64new.relevantInformation | lstring:locale}}</div>
-						<div class="km-value" ng-repeat="item in document.question64new.relevantDocuments">
-							<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-						</div>
-					</ul>
+					<div class="km-value">{{document.question63new.relevantInformation | lstring:locale}}</div>
+					<div class="km-value" ng-repeat="item in document.question64new.relevantDocuments">
+						<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+					</div>
 				</div>
-				
+
 				<div>
 					<label>65. Does your country have specific staff to administer functions directly related to the implementation of the Nagoya Protocol?</label>
 					<ul>
@@ -2018,11 +2014,10 @@
 					<ul>
 						<div class="km-value">{{text(document.question65) | lstring:locale}}</div>
 					</ul>
-				</div>	
+				</div>
 			</div>
 		</div>
 
 	</div>
-	<div document-metadata  class="panel-footer"></div>
-
+    <div document-metadata  class="panel-footer"></div>
 </div>

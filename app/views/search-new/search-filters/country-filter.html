@@ -1,0 +1,39 @@
+<div id="Search-Filter" style="margin-bottom:30px;">
+     <div ng-if="cf_fitlers.length">
+        <span class="country-heading">Countries</span>
+
+        <a ng-href="#" ng-click="cf_setCountryFilter('All')" style="padding-right:10px;white-space:nowrap;" class="letter color-black" ng-class="{'letter-active':!cf_countryFilter && !cf_partyFilter}" >
+             <!--<i ng-class="{'fa-check-square':!cf_countryFilter && !cf_partyFilter}" class="fa fa-square color-black"></i> -->
+             All</a>
+        <!--<span ng-repeat="letter in alphabet">
+            <a ng-href="#" ng-click="cf_setCountryFilter(letter)" class="letter" ng-class="{'letter-active':cf_countryFilter == letter}">{{letter}}</a>
+        </span>-->
+        <a ng-href="#" ng-click="cf_setPartyFilter('party')" style="padding-left:10px;white-space:nowrap;" class="letter color-party" ng-class="{'letter-active':cf_partyFilter == 'party'}"> 
+            <!--<i ng-class="{'fa-check-square':cf_partyFilter == 'party'}" class="fa fa-square color-party"></i> -->
+            Parties</a>
+        <a ng-href="#" ng-click="cf_setPartyFilter('nonparty')" style="padding-left:10px;white-space:nowrap;" class="letter color-nonparty" ng-class="{'letter-active':cf_partyFilter == 'nonparty'}" >
+            <!--<i ng-class="{'fa-check-square':cf_partyFilter == 'nonparty'}" class="fa fa-square color-nonparty"></i> -->
+             Non-Parties</a>
+        <a ng-href="#" ng-click="cf_setPartyFilter('inbetween')" style="padding-left:10px;white-space:nowrap;" class="letter color-inbetween" ng-class="{'letter-active':cf_partyFilter == 'inbetween'}" >
+            <!--<i ng-class="{'fa-check-square':cf_partyFilter == 'inbetween'}" class="fa fa-square color-inbetween"></i>  -->
+            Ratified not yet Party</a>
+        <hr class="heading" />
+    </div>
+    <div style="max-height:300px;overflow-y:scroll"" >
+        <div ng-repeat="doc in cf_fitlers = (cf_countries | filter:searchKeyword | orderBy:'name')">
+
+            <div ng-if="cf_showCountry(doc)">
+            <a class="filter"  ng-click="saveFilter(doc)" >
+                <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
+                <span ng-class="{'color-party': doc.isNPParty, 'color-inbetween':doc.isNPInbetweenParty }">{{doc.name}}</span>
+            </a>
+            <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon"></i>
+                <span ng-class="{'color-party': doc.isNPParty}">
+                   {{doc.isNPParty ? "Party to the Nagoya Protocol since " : "Non-Party"}}
+                    <span class="date" ng-if="doc.entryIntoForce">{{doc.entryIntoForce | formatDate}}</span>
+                </span>
+            </p>-->
+            </div>
+        </div>
+   </div>
+</div>

@@ -6,8 +6,8 @@
     				<tr ng-repeat="doc in rawPermitSelected">{{doc}}
     					<td>
     						<span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
-                            <span class="latest-country"> {{doc.government_s | term:locale}} </span> |
-                            <span>{{doc.identifier_s | uniqueID}}</span>
+                            <span class="latest-country"> {{doc.government | term:locale}} </span> |
+                            <span>{{doc | uniqueID}}</span>
                             <div class="latest-title">{{doc.title_t}} </div>
     					</td>
                         <td>
@@ -97,8 +97,8 @@
             							<td>
 
             								<span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
-                                            <span class="latest-country"> {{doc.government_s | term:locale}} </span> |
-                                            <span>{{doc.identifier_s | uniqueID}}</span>
+                                            <span class="latest-country"> {{doc.government | term:locale}} </span> |
+                                            <span>{{doc | uniqueID}}</span>
                                             <!-- <span class="latest-schema"> {{doc.schema_EN_t | schemaName}} </span> -->
                                             <div class="latest-title">{{doc.title_t}} </div>
             							</td>

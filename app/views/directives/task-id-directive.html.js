@@ -1,5 +1,5 @@
 define(['app',
-	'../forms/view/record-loader.directive.html.js'], function (app) {
+	'../forms/view/record-loader.directive.html.js', 'toastr'], function (app) {
 
 app.directive('taskId', function () {
         return {
@@ -10,10 +10,12 @@ app.directive('taskId', function () {
                 loadTaskData : '=',
                 workflowTaskId : '@',
                 onActivityUpdate : '&', //used in case if the directive parent needs to be refreshed else the workflow details will be fetched.
+                showDetails: "="
             },
-            controller: [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element',
-					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element)
+            controller: [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element', 'toastr','$window',
+					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element, toastr, $window)
 					{
+						var rejectRecordModal = $element.find("#rejectModal");
 						//==================================================
 						//
 						//
@@ -32,10 +34,17 @@ app.directive('taskId', function () {
 												$scope.document = result.data || result;
 											});
 										}
+                                        if(!workflow.workflowAge){
+                                            workflow.workflowAge = {'age':12,'type':'weeks'};
+                                        }
+                                        var expiryDate = moment(workflow.createdOn)
+                                                                            .add(workflow.workflowAge.age,workflow.workflowAge.type);
+                                        workflow.daysToApproval = expiryDate.diff(moment(), 'days');
 
 									});
 								}
 						}
+                        
 
 
 						//==================================================
@@ -49,13 +58,13 @@ app.directive('taskId', function () {
 							$scope.isUpdating = true;
 							IWorkflows.updateActivity($scope.workflowTaskId, $scope.workflow.activities[0].name, resultData).then(function(result){
 									// if($scope.$parentWatcher){
-									console.log(result);
+									// console.log(result);
 										var msg = "";
 										if(result.result.action == 'approve'){
-											msg = "Record approved successfully";
+											msg = "Record published";
 										}
 										else{
-											msg = "Record rejected successfully";
+											msg = "Record rejected";
 										}
 
 										var workflowInfo = {workflowId:$scope.workflowTaskId, activity:result}
@@ -72,15 +81,17 @@ app.directive('taskId', function () {
 											load();
 											$scope.isUpdating = false;
 										}
+									toastr.success(msg);
+
+
 
 							}).catch(function(error) {
-								alert(error);
+								//alert(error);
+								 toastr.error('There was an error processing your request, please try again.');
 								$scope.isUpdating = false;
 								$element.find('.overlayDiv').removeClass('overlayDiv');
 								$element.find('#spiner').css('display', 'none');
 								$scope.isUpdating = false;
-							}).finally(function(){
-
 							});
 						};
 						$scope.user = function() {
@@ -93,13 +104,21 @@ app.directive('taskId', function () {
 						$scope.isAssignedToMe = function(activity) {
 							return activity && _.contains(activity.assignedTo||[], $scope.$root.user.userID||-1);
 						};
+                        
+                        //==================================================
+						//
+						//
+						//==================================================
+						$scope.workFlowIsCreatedByMe = function() {
+							return $scope.workflow && ($scope.workflow.createdBy == $scope.$root.user.userID);
+						};
 
 						//==================================================
 						//
 						//
 						//==================================================
 						$scope.isOpen = function(element) {
-							return element && !element.closedOn;
+							return element && !element.closedOn && !element.timedOut;
 						}
 
 						//==================================================
@@ -124,6 +143,15 @@ app.directive('taskId', function () {
 								load();
 							}
 		                });
+
+						$scope.showRejectDialog = function(){
+
+							rejectRecordModal.appendTo('body').modal("show");
+						}
+
+			            $scope.$on('$destroy', function(){
+			                $('#rejectModal').remove();
+			            });
 
 					}
 				]

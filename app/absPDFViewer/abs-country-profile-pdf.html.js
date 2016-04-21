@@ -163,7 +163,7 @@ app.controller('printCountryProfile', ['$scope', '$http', '$location', '$sce', '
                     // else if(_.contains(type,'ABS-IC'))
                     //     return 'ABS ICNP Focal Point';
                     else if (_.contains(type, 'CBD-FP1') || _.contains(type, 'CBD-FP2'))
-                        return 'CBD National Focal Point';
+                        return 'CBD Primary Focal Point';
                     else
                         return 'National Focal Point';
                 } else

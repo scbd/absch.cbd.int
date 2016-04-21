@@ -1,98 +1,129 @@
-﻿<div ng-cloak>
 
-	<style>
-	/*legend {width: 98%;}*/
-        .localeBtn{
-            padding: 6px 12px;
-            font-size: 14px;
-            border: 1px solid transparent;
-            background-color: rgb(192, 192, 192);
-        }
-    </style>
+<div ng-cloak>
 
-	<div class="alert alert-error text-center" ng-show="error" >
+     <div block-region activate="loading"></div>
+
+	<div class="alert alert-error text-center" ng-show="error">
 		<strong>Error as occured...</strong>
 		<div>{{error}}</div>
 	</div>
-    <div class="jumbotron" style="background-color:white;" role="alert" ng-show="documentSuccess">
-      <h2>Thank you for downloading document {{documentUID}}.</h2>
-      <p>If the document did not download try clicking
-      <a href="{{documentUrl}}" class="alert-link">here...</a></p>
-      </br></br></br></br>
-      This window will close automatically in {{timeLaspe}} seconds.
-    </div>
+	<div class="jumbotron" style="background-color:white;" role="alert" ng-show="documentSuccess">
+		<h2>Thank you for downloading document {{documentUID}}.</h2>
+		<p>If the document did not download try clicking
+			<a href="{{documentUrl}}" class="alert-link">here...</a></p>
+		</br>
+		</br>
+		</br>
+		</br>
+		This window will close automatically in {{timeLaspe}} seconds.
+	</div>
 
 	<div class="jumbotron" style="background-color:white;" role="alert" ng-show="documentError">
-      <h2>Thank you for requesting document {{documentUID}}.</h2>
-      <p>The document does not exists, if you think this file should be available, please report to
-		<a href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
-    </div>
-	<div ng-show="!error && internalDocument">
-		<div style="float:right">
+		<h2>Thank you for requesting document {{documentUID}}.</h2>
+		<p>The document does not exists, if you think this file should be available, please report to
+			<a href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
+	</div>
 
-
-			<!-- <button  type="button" class="btn localeBtn" ng-click="edit()" ng-show="canEdit()" >Edit</button> -->
-
-
-            <div class="btn-group" ng-show="documentVersionCount>1">
-              <button type="button" class="btn btn-danger">Revision {{revisionNo}}</button>
-              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <li ng-repeat="n in [] | range:documentVersionCount" >
-                    <a ng-href="#" ng-click="loadRevision($index+1)">{{$index+1}}</a>
-                </li>
+   <div id="RecordDetails" ng-if="showDetails">
+   <div class="row" >
+            <div class="col-xs-12">
+                <div class="well">
+                    <h3 style="margin:0 0 20px 0;padding:0;">Record Information</h3>
+                    <table>
+                            <tr>
+                                <td><label> Unique Identifier: </label></td>
+                                <td class="bold">
+                                        {{internalDocument | uniqueID}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label> Current Status: </label></td>
+                                <td class="bold">
+                                    <span class="color-grey" ng-if="internalDocumentInfo.revision === '0'">
+                                        DRAFT
+                                    </span>
+                                    <span class="color-green"  ng-if="internalDocumentInfo.revision > 0">
+                                        PUBLISHED
+                                    </span>
+                                    <span class="color-red"  ng-if="internalDocumentInfo.workingDocumentLock">
+                                        [ Locked: Pending publishing request ]
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label> Record Type: </label></td>
+                                <td class="bold">{{internalDocumentInfo.metadata.schema | schemaName}}</td>
+                            </tr>
+                             <tr  ng-if="docInfo.revision > 0">
+                                <td><label> Record Versions: </label></td>
+                                <td class="bold">{{internalDocumentInfo.revision}}</td>
+                            </tr>
+                            <tr ng-if="docInfo.metadata.government">
+                                <td><label> Record Owner: </label></td>
+                                 <td class="bold"> {{getUserCountry(internalDocumentInfo.metadata.government)}}</td>
+                            </tr>
+                            <tr>
+                                <td><label> History:</label></td>
+                                <td>
+                                  <div view-history document-id="internalDocumentInfo.identifier"></div>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
             </div>
         </div>
+</div> <!-- records details-->
 
-		<div id="schemaView" ng-show="internalDocument">
+<!--{{internalDocument}}-->
 
+
+        <div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo && revisionNo != 'draft'">
+			<h3>
+                This document has been updated. This is not the latest published version.
+                <a ng-href="/database/{{internalDocument.header.schema | schemaShortName}}/{{internalDocument | uniqueIDWithoutRevision}}" target="new">Click here to view the latest record.</a>
+			</h3>
 		</div>
-	<!-- <h1>{{internalDocument}}</h1> -->
-<!--  {{document}} -->
-<!-- {{internalDocument}} -->
-		<!-- <div ng-switch on="internalDocument.header.schema" >
-            <div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo">The latest revision is {{documentVersionCount}}, you are viewing revison {{revisionNo}}</div>
-			<div view-authority	ng-switch-when="authority" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  ></div>
 
-			<div view-contact ng-switch-when="contact"	ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}  ></div>
 
-			<div view-database ng-switch-when="database" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}} ></div>
-
-			<div view-resource ng-switch-when="resource" heading="Virtual Library Record" short-heading="VLR" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}} ></div>
-
-			<div view-resource ng-switch-when="modelContractualClause" heading="Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards" short-heading="A19A20" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}} ></div>
-			<div view-resource ng-switch-when="communityProtocol" heading="Community protocols and procedures and customary laws" short-heading="CPP" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}} ></div>
-
-			<div view-organization	ng-switch-when="organization" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-measure ng-switch-when="measure" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-abs-checkpoint ng-switch-when="absCheckpoint" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-abs-checkpoint-communique ng-switch-when="absCheckpointCommunique" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-abs-permit ng-switch-when="absPermit"	 ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-focal-point ng-switch-when="focalPoint" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-meeting ng-switch-when="meeting" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-notification ng-switch-when="notification" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-press-release ng-switch-when="pressRelease" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-statement ng-switch-when="statement" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-news ng-switch-when="news" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}}></div>
-
-			<div view-abs-national-report ng-switch-when="absNationalReport" ng-model="internalDocument" document-info="internalDocumentInfo" locale="getLocale()" link-target={{linkTarget}} ></div>
-
-			<div ng-switch-default>
-				<div class="text-center"><h1 style="color:#fa6938"><i class="fa fa-spinner fa-spin"></i></h1></div>
+	<!--<div ng-show="!error && internalDocument && showDetails">
+		<div style="float:right; position:relative;top:1px;">
+			<div class="btn-group" ng-show="documentVersionCount>1">
+				<button type="button" class="btn btn-danger">Version {{revisionNo}}</button>
+				<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li ng-repeat="n in [] | range:documentVersionCount">
+						<a ng-href="#" ng-click="loadRevision($index+1)">version {{$index+1}} <span ng-if="$last">(latest version)</span></a>
+					</li>
+				</ul>
 			</div>
-		</div> -->
-	</div>
-	<!-- <div view-other	ng-model="internalDocument"  locale="getLocale()" link-target={{linkTarget}} ></div> -->
+		</div>
+      </div>-->
+      
+      
+        <!--<div style="float:right; position:relative;top:1px;right:1px;">
+			<div>
+				  <button title="Locked for edit" ng-show="isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
+                  
+                   <button title="Cancel request" ng-show="isRequest(record) && showAddButton() && isMyRecord(record)" type="button" class="btn btn-default" ng-click="askDeleteWorkflowRequest(record)">
+                       <i class="fa fa-undo"></i></button>
+                       
+                  <a title="Edit" ng-show="!isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|mapSchema}}/{{record.identifier}}/edit">
+                  <i class="fa fa-edit"></i></a>
+                  
+                  <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+			</div>
+		</div>-->
+        
+        <div style="float:right; position:relative;top:1px;right:1px;" ng-if="showDetails">
+			<div>
+            <a title="Edit" ng-show="!internalDocumentInfo.workingDocumentLock" type="button" class="btn btn-default" href="/register/{{internalDocument.header.schema|mapSchema}}/{{internalDocument.header.identifier}}/edit">
+                  <i class="fa fa-edit"></i> edit </a>
+                 <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+			</div>
+		</div>
+
+		<div id="schemaView" ng-show="internalDocument"></div>
+
 </div>

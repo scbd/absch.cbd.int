@@ -14,9 +14,10 @@
     <link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
 
     <script src="../libs/momentjs/min/moment.min.js"></script>
-    <script src="../libs/barcode-39.js/barcode-39.min.js"></script>
+    <!--<script src="../libs/barcode-39.js/barcode-39.min.js"></script>-->
 
     <script src="../libs/angular/angular.min.js"></script>
+    <script src="../libs/underscore/underscore-min.js"></script>
     <script src="../libs/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="absCheckpointCommunique.html.js"></script>
     <script src="absCommon.js"></script>
@@ -33,7 +34,7 @@
 
 <body>
     <div ng-app="ngapp" class="main-nav">
-        <div ng-controller="printPermit" style="width:1000px;"   ng-class="{'watermark' : documentInfo.Realm && documentInfo.Realm.toUpperCase()!= 'ABS'}">
+        <div ng-controller="printPermit" style="width:1000px;"  >
             <div class="col-xs-12 alert alert-danger" ng-show="documentInfo.Realm && documentInfo.Realm.toUpperCase()!= 'ABS'">
                 <h4>Warning!</h4>
                 <p>this pdf was generated from ABS-CH test website.<p>
@@ -57,10 +58,10 @@
                 </div>
             </div>
 
-            <div class="bg-blue" style="padding:5px;">
+            <div class="bg-blue text-center" style="padding:5px;">
                 <h1>
-                    <span class="color-lightblue">Checkpoint Communiqué:
-                        <span class="color-white">{{documentInfo|uniqueID}}</span>
+                    <div class="color-lightblue">ABS Clearing-House Checkpoint Communiqué</div>
+                        <div class="color-white">{{documentInfo|uniqueID}}</div>
                 </h1>
             </div>
 
@@ -78,13 +79,13 @@
                     <div class="text">{{document.title| lstring:locale}}</div>
                 </div>
                 <div class="col-xs-3">
-                    <label>UID:</label>
+                    <label>Unique Identifier:</label>
                     <div class="text">
                         {{documentInfo|uniqueID}}
                     </div>
                 </div>
                 <div class="col-xs-3">
-                    <label>Sent:</label>
+                    <label>Sent on:</label>
                     <div class="text">
                         {{documentVersion.createdOn |formatDate}}
                     </div>
@@ -98,36 +99,21 @@
                     <label>Issuing country:</label>
                     <div class="text">{{document.government|term:locale}}</div>
                 </div>
-                <div class="col-xs-6">
-                    <label>Checkpoint that collected or received this information:</label>
-                </div>
-                <div class="col-xs-6">
-                    <label>Checkpoint responsibilities:</label>
-                </div>
-                <span ng-repeat="cp in document.checkpoint">
-                    <div class="col-xs-6">
-                        <div class="text">
-                            {{cp.name|lstring}}
-                            <br/>
-                            <span ng-show="cp.jurisidction">{{cp.jurisidction|term}}
-                                <br/>
-                            </span>
-                            <span ng-bind-html="renderHtml(cp.relevantInformation)" /></span>
-                <!-- <span>https://absch.cbd.int/database/{{cp.header|uniqueID:false}}</span> -->
-                </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="text" ng-bind-html="renderHtml(cp.responsibilities)"></div>
-                </div>
-                </span>
-            </div>
+                <div class="col-xs-12">
+                    <label>Checkpoint(s) that collected or received this information:</label>
+                      <div class="text"  ng-repeat="item in document.checkpoint">
+                        <span view-default-reference ng-model="item.identifier" locale="locale"></span>
+                      </div>
+                    </div>
+             </div>
+
+
 
 
             <legend>Recipients of the Checkpoint Communiqué</legend>
             <div class="row top-border bg-lightblue">
                 <div ng-repeat="contact in emailList">
-                    <div ng-class="{'row': ($index+1)%4==0}"> </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-12">
                         <div class="text">
                             <div view-contact-reference ng-model="contact" locale="locale"></div>
                         </div>
@@ -141,25 +127,14 @@
 
                 <!-- repeat for each IRCC, if IRCC was included-->
                 <div class="clearfix"></div>
-                <div class="col-xs-8">
+                <div class="col-xs-12">
                     <label>INTERNATIONAL RECOGNIZED CERTIFICATE(s) OF COMPLIANCE</label>
-                    <div class="text" >
-                        <div ng-show="!document.permitNotAvailable || document.permit">
-                            <ul>
-                                <li ng-repeat="permit in document.permit" class="ng-scope">
-                                    <a href="https://absch.cbd.int/database/{{permit.document.header | uniqueID}}" ng-show="documentInfo.Realm && documentInfo.Realm.toUpperCase()== 'ABS'">
-                                        {{permit.document.header | uniqueID}}
-                                    </a>
-                                    <a href="https://training-absch.cbd.int/database/{{permit.document.header | uniqueID}}" ng-show="documentInfo.Realm && documentInfo.Realm.toUpperCase()== 'ABS-TRG'">
-                                        {{permit.document.header | uniqueID}}
-                                    </a>
-                                    <a href="https://dev-absch.cbd.int/database/{{permit.document.header | uniqueID}}" ng-show="documentInfo.Realm && documentInfo.Realm.toUpperCase()== 'ABS-DEV'">
-                                        {{permit.document.header | uniqueID}}
-                                    </a>
-                                </li>
-                            </ul>
+                    <div ng-show="!document.permitNotAvailable || document.permit">
+                            <div class="text"  ng-repeat="item in document.permit">
+                            <span view-default-reference ng-model="item.identifier" locale="locale"></span>
                         </div>
                     </div>
+
                 </div>
 
 
@@ -173,7 +148,7 @@
 
                     <div class="clearfix"></div>
                     <div class="col-xs-6">
-                        <label>Source country of the genetic resource</label>
+                        <label>Source country of the genetic resource(s)</label>
                         <div class="text">
                             <ul>
                                 <li ng-repeat="country in document.originCountries">{{country|term}}</li>
@@ -236,7 +211,7 @@
                     <label>People or entities utilizing the genetic resource at the checkpoint</label>
                 </div>
                 <div class="col-xs-12">
-                    <div class="col-xs-4" ng-repeat="user in document.geneticRessourceUsers" style="padding-left:0px;">
+                    <div ng-repeat="user in document.geneticRessourceUsers" style="padding-left:0px;">
                         <div class="text">
                             <div view-contact-reference ng-model="user" locale="locale"></div>
                         </div>
@@ -255,7 +230,7 @@
                 </div>
 
                 <div class="clearfix"></div>
-                <div class="col-xs-12">
+                <div class="col-xs-12" ng-show="document.informationDocument || document.relevantDocuments">
                     <label>Attached documents</label>
                     <ul style="list-style-type: none;" class="text">
                         <li ng-repeat="item in document.informationDocuments">

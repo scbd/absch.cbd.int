@@ -1,5 +1,5 @@
 ﻿
-define(["app",'/app/js/common.js'], function (app) {
+define(["app",'/app/js/common.js', '../services/app-config-service'], function (app) {
 
 
 	//============================================================
@@ -25,9 +25,9 @@ define(["app",'/app/js/common.js'], function (app) {
 
 	}
 
-
-    app.filter("uniqueID", ["IStorage", '$filter', '$q','commonjs', 'realm',
-	 						function(storage, $filter, $q, commonjs, realm) {
+//============================================================
+    app.filter("uniqueID", ["IStorage", '$filter', '$q','commonjs', 'realm', 'appConfigService',
+	 						function(storage, $filter, $q, commonjs, realm, appConfigService) {
 		var cacheMap = {};
 
 		return function(term) {
@@ -82,14 +82,6 @@ define(["app",'/app/js/common.js'], function (app) {
                 else
                     document = document;
 
-                if(document.schema_s && (document.schema_s.toLowerCase() == "statement" || document.schema_s.toLowerCase() == "notification" ||
-                    document.schema_s.toLowerCase() == "meeting" ||  document.schema_s.toLowerCase() == "pressrelease" ||
-                    document.schema_s.toLowerCase() == "focalpoint")){
-                        cacheMap[term.identifier] = document.identifier_s ? document.identifier_s : document.id;
-                        return cacheMap[term.identifier];
-
-                    }
-
                 var government = '';
 				var documentId;
 
@@ -102,6 +94,10 @@ define(["app",'/app/js/common.js'], function (app) {
 						else
 							documentId = commonjs.hexToInteger(document.id);
 				}
+                
+                if(documentId === undefined)
+                    documentId = "DRAFT";
+                
 				if(document.government_s)
                     government = document.government_s;
                 else if(document.government)
@@ -111,11 +107,22 @@ define(["app",'/app/js/common.js'], function (app) {
                 else if(document.body && document.body.government)
                     government = document.body.government.identifier;
 
-                var unique = 'ABSCH' + (realm.value.toUpperCase().replace('ABS','').replace('-','')) +
+
+				var relamPrefix = '';
+				if(document.schema_s &&
+				(!_.contains(appConfigService.scbdSchemas, document.schema_s.toLowerCase() || document.schema_s.toLowerCase()!= 'focalpoint')))
+					relamPrefix = (realm.value.toUpperCase().replace('ABS','').replace('-',''));
+
+				var unique = 'ABSCH' + relamPrefix +
 						'-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s||document.schema)) +
                         '-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +
                         '-' + documentId;
-				if( document.revision)
+                        
+				if(document.revision === 'draft'){
+                    document.revision = "0";
+                }
+                
+                if( document.revision)
 					unique = unique + '-' + document.revision;
 
 				cacheMap[term.identifier] = unique;
@@ -132,8 +139,8 @@ define(["app",'/app/js/common.js'], function (app) {
 			return cacheMap[term.identifier];
 		};
 	}])
-
-    app.filter("uniqueIDWithoutRevision", ['$filter', function($filter) {
+//============================================================
+    app.filter("uniqueIDWithoutRevision", ['$filter', 'commonjs', function($filter, commonjs) {
 
 		return function( document ) {
             var unique = $filter("uniqueID")(document);
@@ -150,6 +157,45 @@ define(["app",'/app/js/common.js'], function (app) {
 	}]);
 
 
+
+	app.filter("partyStatus", ['$q', 'commonjs',	function($q, commonjs) {
+		var partyStatusMap = {};
+
+		return function(term) {
+
+			if(!term)
+				return "";
+
+			if (term && angular.isString(term))
+                term = {
+                    identifier: term
+                };
+
+			term.identifier = term.identifier.toUpperCase();
+
+			if(partyStatusMap[term.identifier])
+				return partyStatusMap[term.identifier] ;
+
+			partyStatusMap[term.identifier] = $q.when(commonjs.getCountry(term.identifier))
+			.then(function(country) {
+
+				partyStatusMap[term.identifier] = country;
+				console.log(country);
+				return country;
+
+			}).catch(function(){
+
+				partyStatusMap[term.identifier] = term.identifier;
+
+				return term.identifier;
+
+			});
+			return partyStatusMap[term];
+		};
+	}]);
+
+
+//============================================================
 	app.filter("checkpointTitle", ["$http", '$filter', function($http, $filter) {
 		var cacheMap = {};
 
@@ -164,7 +210,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			locale = locale||"en";
 
 			if(cacheMap[term.identifier])
-				return cacheMap[term.identifier].title;
+				return $filter("lstring")(cacheMap[term.identifier].title, locale);
 
 			cacheMap[term.identifier] = $http.get("/api/v2013/documents/" + encodeURIComponent(term.identifier),  {cache:true}).then(function(result) {
 
@@ -200,12 +246,8 @@ define(["app",'/app/js/common.js'], function (app) {
 	//
 	//============================================================
 	app.filter("schemaName", [function() {
-
 		return function( schema ) {
-			//return mapSchema(schema);
-
-			if(!schema)
-				return schema;
+			if(!schema)return schema;
 			if(schema.toLowerCase()=="focalpoint"				 ) return "ABS National Focal Point";
 			if(schema.toLowerCase()=="authority"				 ) return "Competent National Authority";
 			if(schema.toLowerCase()=="contact"					 ) return "Contact";
@@ -216,18 +258,19 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="abscheckpoint"			 ) return "Checkpoint";
 			if(schema.toLowerCase()=="abscheckpointcommunique"	 ) return "Checkpoint Communiqué";
 			if(schema.toLowerCase()=="abspermit"				 ) return "Internationally Recognized Certificate of Compliance";
-            if(schema.toLowerCase()=="meetingdocument"			 ) return "Meeting Documents";
-            if(schema.toLowerCase()=="pressrelease"				 ) return "Press Releases";
+            if(schema.toLowerCase()=="meetingdocument"			 ) return "Meeting Document";
+            if(schema.toLowerCase()=="pressrelease"				 ) return "Press Release";
 			if(schema.toLowerCase()=="news"						 ) return "News";
-			if(schema.toLowerCase()=="absnationalreport"		 ) return "National Report";
+			if(schema.toLowerCase()=="new"						 ) return "What's New";
+            if(schema.toLowerCase()=="statement"			     ) return "Statement";
+			if(schema.toLowerCase()=="absnationalreport"		 ) return "Interim National Report on the Implementation of the Nagoya Protocol";
 			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
-			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community protocols and procedures and customary laws";
-			if(schema.toLowerCase()=="meeting"					 ) return "Meetings";
-			if(schema.toLowerCase()=="notification"				 ) return "Notifications";
-			if(schema.toLowerCase()=="capacitybuildinginitiative") return "Capacity-building Initiatives";
-			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "Capacity-building Resources";
-
-			// return schema;
+			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community Protocol and Procedures and Customary Law";
+			if(schema.toLowerCase()=="meeting"					 ) return "Meeting";
+			if(schema.toLowerCase()=="notification"				 ) return "Notification";
+			if(schema.toLowerCase()=="capacitybuildinginitiative") return "Capacity-building Initiative";
+			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "Capacity-building Resource";
+			if(schema.toLowerCase()=="endorsement"				 ) return "Endorsements";
 		};
 	}]);
 
@@ -241,6 +284,7 @@ define(["app",'/app/js/common.js'], function (app) {
 		return function( schema ) {
 			if(!schema)
 				return schema;
+
 			if(schema.toLowerCase()=="focalpoint"				 ) return "ABS National Focal Points";
 			if(schema.toLowerCase()=="authority"				 ) return "Competent National Authorities";
 			if(schema.toLowerCase()=="contact"					 ) return "Contact";
@@ -254,13 +298,17 @@ define(["app",'/app/js/common.js'], function (app) {
             if(schema.toLowerCase()=="meetingdocument"			 ) return "Meeting Documents";
             if(schema.toLowerCase()=="pressrelease"				 ) return "Press Releases";
 			if(schema.toLowerCase()=="news"						 ) return "News";
-			if(schema.toLowerCase()=="absnationalreport"		 ) return "National Reports";
+			if(schema.toLowerCase()=="new"						 ) return "What's New";
+            if(schema.toLowerCase()=="statement"			     ) return "Statement";
+			if(schema.toLowerCase()=="absnationalreport"		 ) return "Interim National Reports on the Implementation of the Nagoya Protocol";
 			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
-			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community protocols and procedures and customary laws";
+			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community Protocols and Procedures and Customary Laws";
 			if(schema.toLowerCase()=="meeting"					 ) return "Meetings";
 			if(schema.toLowerCase()=="notification"				 ) return "Notifications";
 			if(schema.toLowerCase()=="capacitybuildinginitiative") return "Capacity-building Initiatives";
 			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "Capacity-building Resources";
+			if(schema.toLowerCase()=="endorsement"				 ) return "Endorsements";
+
 
 			return schema;
 		};
@@ -277,6 +325,7 @@ define(["app",'/app/js/common.js'], function (app) {
 
 			if(!schema)
 				return schema;
+
 			if(schema.toLowerCase()=="focalpoint" 				  ||	schema.toLowerCase()=="nfp"	) return "account_box";
 			if(schema.toLowerCase()=="authority"  				  ||	schema.toLowerCase()=="cna"	) return "account_box";
 			if(schema.toLowerCase()=="contact"  				  ||	schema.toLowerCase()=="con"	) return "contacts";
@@ -295,6 +344,7 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toLowerCase()=="communityprotocol" 		  ||	schema.toLowerCase()=="cpp"	) return "folder";
 			if(schema.toLowerCase()=="capacitybuildinginitiative" ||	schema.toLowerCase()=="cbi"	) return "insert_drive_file";
 			if(schema.toLowerCase()=="capacitybuildingresource"   ||	schema.toLowerCase()=="cbr"	) return "insert_drive_file";
+			if(schema.toLowerCase()=="endorsement" 				||	schema.toLowerCase()=="edr"	) return "folder";
 
 			return schema;
 		};
@@ -348,12 +398,15 @@ define(["app",'/app/js/common.js'], function (app) {
         	if(schema.toLowerCase()=="pressrelease"				 ) return "PR";
             if(schema.toLowerCase()=="meetingdocument"    		 ) return "MTD";
 			if(schema.toLowerCase()=="news"						 ) return "NEWS";
+			if(schema.toLowerCase()=="new"						 ) return "NEW";
 			if(schema.toLowerCase()=="absnationalreport"		 ) return "NR";
 			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "A19A20";
 			if(schema.toLowerCase()=="communityprotocol"		 ) return "CPP";
 			if(schema.toLowerCase()=="capacitybuildinginitiative") return "CBI";
 			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "CBR";
+			if(schema.toLowerCase()=="endorsement"				) return "EDR";
 
+			if(schema.toUpperCase()=="NEW"				        ) return "new";
 			if(schema.toUpperCase()=="NEWS"				        ) return "news";
             if(schema.toUpperCase()=="NFP"				        ) return "focalPoint";
 			if(schema.toUpperCase()=="CNA"				    	) return "authority";
@@ -378,6 +431,8 @@ define(["app",'/app/js/common.js'], function (app) {
 			if(schema.toUpperCase()=="CBR"				    	) return "capacityBuildingResource";
 
 
+			if(schema.toUpperCase()=="EDR"						) return "endorsement";
+
 			return schema;
 	}
 
@@ -390,5 +445,35 @@ define(["app",'/app/js/common.js'], function (app) {
 		console.log(text);
 			return $sce.trustAsHtml(text)
 		}
-	})
+	});
+
+//https://github.com/HubSpot/humanize/blob/master/public/src/humanize.js
+	app.filter('humanizeNumber', function() {
+		return function(value) {
+		    var end, leastSignificant, number, specialCase;
+		    number = parseInt(value, 10);
+		    if (number === 0) {
+		      return value;
+		    }
+		    specialCase = number % 100;
+		    if (specialCase === 11 || specialCase === 12 || specialCase === 13) {
+		      return "" + number + "th";
+		    }
+		    leastSignificant = number % 10;
+		    switch (leastSignificant) {
+		      case 1:
+		        end = "st";
+		        break;
+		      case 2:
+		        end = "nd";
+		        break;
+		      case 3:
+		        end = "rd";
+		        break;
+		      default:
+		        end = "th";
+		    }
+		    return "" + number + end;
+		};
+	});
 });

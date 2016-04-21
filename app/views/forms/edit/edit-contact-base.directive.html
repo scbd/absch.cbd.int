@@ -5,7 +5,7 @@
 		}
 	</style>
 
-	<div ng-hide="document.type=='organization' || document.type=='CNA'">
+	<div ng-show="document.type=='person'">
 
 		<legend>Personal Information</legend>
 
@@ -36,7 +36,25 @@
 			</div>
 
 		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="km-control-group" name="contact_organization"  caption="Organization">
+					<!-- <div km-select name="contact_organization" ng-model="document.organization"
+						items="options.organization()" required></div> -->
+					<field-embed-contact ng-model="document.contactOrganization" locales="document.header.languages"
+					name="organization" caption="Link Organization »"
+					sub-filter="[{'type':'organization'}]"></field-embed-contact>
 
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="km-control-group" name="contact_department" caption="Department / Division / Unit">
+					<div km-textbox-ml name="contact_department" ng-model="document.department" locales="locales"></div>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="km-control-group" name="contact_designation" caption="Job Title">
@@ -45,125 +63,77 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="row">
-
-		<div class="col-md-7 col-xs-12">
-			<div class="km-control-group" name="contact_organization" ng-required="!form.organization.$valid && document.type!='person'" caption="Organization">
-				<div class="help-block">Fullname without abbreviation</div>
-				<div ng-if="document.header.schema=='organization'" km-textbox-ml name="contact_organization" ng-model="document.name" required locales="locales"></div>
-				<div ng-if="document.type=='organization' && document.header.schema=='contact'" km-textbox-ml name="contact_organization" ng-model="document.organization"  locales="locales"></div>
-			</div>
-		</div>
-
-		<div class="col-md-5 col-xs-12">
-				<div class="km-control-group" name="contact_organizationAcronym" caption="Acronym" ng-required="!form.organization.$valid && document.type!='person'">
-				<div class="help-block">Abbreviation for long name</div>
-				<div  ng-if="document.header.schema=='organization'" km-textbox-ml name="contact_organizationAcronym" ng-model="document.acronym" placeholder="example: SCBD" locales="locales"></div>
-				<div  ng-if="document.type=='organization'  && document.header.schema=='contact'" km-textbox-ml name="contact_organizationAcronym" ng-model="document.organizationAcronym" placeholder="example: SCBD" locales="locales"></div>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-8">
-			<div class="km-control-group" name="contact_organizationType" caption="Type of organization">
-				<div km-select name="contact_organizationType" ng-model="document.organizationType" items="options.organizationTypes()"></div>
-			</div>
-		</div>
-		<div class="col-md-4" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-			<div class="km-control-group" name="contact_organizationTypeName" caption="Other organization type">
-				<div km-textbox-ml name="contact_organizationTypeName" ng-model="document.organizationType.customValue" placeholder="example: SCBD" locales="locales"></div>
-			</div>
-		</div>
-	</div>
-
-	<div ng-show="document.header.schema!='organization' && (document.type=='organization' || document.type=='CNA')">
-
-		<legend>Contact Person </legend>
-
-		<div class="help-block">Please provide name of the person in the organization (if any)</div>
-
-		<div  class="row">
-
-			<div class="col-md-4 col-sm-4 col-xs-12">
-				<div class="km-control-group" name="contact_prefix" caption="Title">
-					<div km-textbox-ml name="contact_prefix" ng-model="document.prefix" locales="locales"></div>
+	<div ng-show="document.type=='organization'">
+		<legend>Organization Information</legend>
+		<div class="row">
+			<div class="col-md-7 col-xs-12">
+				<div class="km-control-group" name="contact_organization" ng-required="!form.organization.$valid && document.type!='person'" caption="Organization">
+					<div class="help-info">Fullname without abbreviation</div>
+					<div ng-if="document.header.schema=='organization'" km-textbox-ml name="contact_organization" ng-model="document.name" required locales="locales"></div>
+					<div ng-if="document.type=='organization' && document.header.schema=='contact'" km-textbox-ml name="contact_organization" ng-model="document.organization"  locales="locales"></div>
 				</div>
 			</div>
 
-			<div class="col-md-8 col-sm-8 col-xs-12">
-				<div class="km-control-group" name="contact_firstName" caption="First name">
-					<input type="text" class="form-control" name="contact_firstName" ng-model="document.firstName"/>
+			<div class="col-md-5 col-xs-12">
+					<div class="km-control-group" name="contact_organizationAcronym" caption="Acronym" ng-required="!form.organization.$valid && document.type!='person'">
+					<div class="help-info">Abbreviation for long name</div>
+					<div  ng-if="document.header.schema=='organization'" km-textbox-ml name="contact_organizationAcronym" ng-model="document.acronym" placeholder="example: SCBD" locales="locales"></div>
+					<div  ng-if="document.type=='organization'  && document.header.schema=='contact'" km-textbox-ml name="contact_organizationAcronym" ng-model="document.organizationAcronym" placeholder="example: SCBD" locales="locales"></div>
 				</div>
 			</div>
-
-			<div class="col-md-4 col-sm-4 col-xs-12">
-				<div class="km-control-group" name="contact_middleName" caption="Middle Name">
-					<input type="text" class="form-control" name="contact_middleName" ng-model="document.middleName"/>
-				</div>
-			</div>
-
-			<div class="col-md-8 col-sm-8 col-xs-12">
-				<div class="km-control-group" name="contact_lastName" caption="Last name">
-					<input type="text" class="form-control" name="contact_lastName" ng-model="document.lastName"/>
-				</div>
-			</div>
-
 		</div>
 
 		<div class="row">
-			<div class="col-md-12">
-				<div class="km-control-group" name="contact_designation" caption="Job Title">
-					<div km-textbox-ml name="contact_designation" ng-model="document.designation" locales="locales"></div>
+			<div class="col-md-8">
+				<div class="km-control-group" name="contact_organizationType" caption="Type of organization">
+					<div km-select name="contact_organizationType" ng-model="document.organizationType" items="options.organizationTypes()"></div>
+				</div>
+			</div>
+			<div class="col-md-4" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
+				<div class="km-control-group" name="contact_organizationTypeName" caption="Other organization type">
+					<div km-textbox-ml name="contact_organizationTypeName" ng-model="document.organizationType.customValue" placeholder="example: SCBD" locales="locales"></div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div ng-hide="document.contactOrganization">
 
-	<div class="row" ng-show="document.header.schema!='organization'">
-		<div class="col-md-12">
-			<div class="km-control-group" name="contact_department" caption="Department / Division / Unit">
-				<div km-textbox-ml name="contact_department" ng-model="document.department" locales="locales"></div>
-			</div>
-		</div>
-	</div>
+		<legend>Address</legend>
 
-	<legend>Address</legend>
-
-	<div class="row">
-		<div class="col-md-12">
-			<div class="km-control-group" name="contact_address" caption="Street address">
-				<div km-textbox-ml name="contact_address" ng-model="document.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800" locales="locales"></div>
-			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-6">
-			<div class="km-control-group" name="contact_city" caption="City" required>
-				<div km-textbox-ml name="contact_city" ng-model="document.city" locales="locales" placeholder="example: Montreal" required></div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="km-control-group" name="contact_address" caption="Street address">
+					<div km-textbox-ml name="contact_address" ng-model="document.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800" locales="locales"></div>
+				</div>
 			</div>
 		</div>
 
-		<div class="col-md-6">
-			<div class="km-control-group" name="contact_state" caption="State or Province">
-				<div km-textbox-ml name="contact_state" ng-model="document.state" locales="locales" placeholder="example: Quebec"></div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="km-control-group" name="contact_city" caption="City" required>
+					<div km-textbox-ml name="contact_city" ng-model="document.city" locales="locales" placeholder="example: Montreal"></div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="km-control-group" name="contact_state" caption="State or Province">
+					<div km-textbox-ml name="contact_state" ng-model="document.state" locales="locales" placeholder="example: Quebec"></div>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="row">
+		<div class="row">
 
-		<div class="col-md-6">
-			<div class="km-control-group" name="contact_postalCode" caption="Postal Code or Zip">
-				<div km-textbox-ml name="contact_postalCode" ng-model="document.postalCode" locales="locales" placeholder="example: H2Y 1N9"></div>
+			<div class="col-md-6">
+				<div class="km-control-group" name="contact_postalCode" caption="Postal Code or Zip">
+					<div km-textbox-ml name="contact_postalCode" ng-model="document.postalCode" locales="locales" placeholder="example: H2Y 1N9"></div>
+				</div>
 			</div>
-		</div>
 
-		<div class="col-md-6">
-			<div class="km-control-group" name="contact_country" ng-required="!form.contact_country.$valid" caption="Country address">
-				<div km-select name="contact_country" ng-model="document.country" items="options.countries()" required></div>
+			<div class="col-md-6">
+				<div class="km-control-group" name="contact_country" ng-required="!form.contact_country.$valid" caption="Country address">
+					<div km-select name="contact_country" ng-model="document.country" items="options.countries()"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -172,15 +142,15 @@
 
 	<div class="row">
 		<div class="col-md-6 col-xs-12">
-			<div class="km-control-group" name="contact_phones" required caption="Phone numbers">
-				<div class="help-block">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
+			<div class="km-control-group" name="contact_phones" caption="Phone numbers">
+				<div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
 				<div km-inputtext-list name="contact_phones" ng-model="document.phones"  placeholder="example: +1 514.288.2220" ></div>
 			</div>
 		</div>
 
 		<div class="col-md-6 col-xs-12">
 			<div class="km-control-group" name="contact_faxes" caption="Fax Numbers">
-				<div class="help-block">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
+				<div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
 				<div km-inputtext-list name="contact_faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
 			</div>
 		</div>

@@ -74,7 +74,7 @@ app.directive("existingPermit", [ function () {
                         'q': q,
                         'sort': 'createdDate_dt desc, title_t asc',
                         'fl': 'id,identifier_s,title_t,createdDate_dt,government_s,amendmentIntent_i,' +
-                                'resourceLinksLanguage_ss,',
+                                'resourceLinksLanguage_ss,schema_s,_revision_i',
                         'wt': 'json',
                         'start': 0,
                         'rows': 25,
@@ -92,6 +92,7 @@ app.directive("existingPermit", [ function () {
 						 queryCanceler = null;
                          $scope.rawPermitDocs = [];
                          $scope.rawPermitDocs = data.response.docs;
+                         transformPermits($scope.rawPermitDocs);
 						 $scope.isLoading = false;
 						 loaded = true;
 
@@ -153,7 +154,7 @@ app.directive("existingPermit", [ function () {
 								$scope.rawPermitSelected.push(doc);
 								if(!$scope.model)
 									$scope.model = [];
-								$scope.model.push({identifier:doc.identifier_s});
+								$scope.model.push({identifier:doc.identifier_s + '@' + doc.revision});
 						}
 					});
 
@@ -179,7 +180,7 @@ app.directive("existingPermit", [ function () {
                         'q': q,
                         'sort': 'createdDate_dt desc, title_t asc',
                         'fl': 'id,identifier_s,title_t,createdDate_dt,government_s,amendmentIntent_i,' +
-                                'resourceLinksLanguage_ss,',
+                                'resourceLinksLanguage_ss,schema_s,_revision_i',
                         'wt': 'json',
                         'start': 0,
                         'rows': 25,
@@ -189,8 +190,9 @@ app.directive("existingPermit", [ function () {
 
 	                    $http.get('/api/v2013/index/select', { params: queryParameters })
 						.success(function (data) {
-							console.log(data);
+							//console.log(data);
 	                       $scope.rawPermitSelected = data.response.docs;
+                           transformPermits($scope.rawPermitSelected)
 	                    }).error(function (error) {
 	                        console.log('onerror'); console.log(error);
 	                    });
@@ -208,7 +210,6 @@ app.directive("existingPermit", [ function () {
 				}
 				$scope.$watch('model', function(newValue){
 					if(newValue && $scope.rawPermitSelected.length==0){
-						console.log(newValue);
 						$scope.loadReference();
 					}
 				});
@@ -220,7 +221,16 @@ app.directive("existingPermit", [ function () {
 					$scope.rawPermitSelected = _.filter($scope.rawPermitSelected, function(per){
 						return per.identifier_s != permit.identifier_s;
 					})
-				}
+				};
+
+                function transformPermits(documents){
+                    _.map(documents, function(document){
+                        document.government = {identifier : document.government_s};
+                        document.identifier = document.identifier_s;
+                        document.schema = document.schema_s;
+                        document.revision = document._revision_i;
+                    });
+                }
 		}]
 	};
 }]);

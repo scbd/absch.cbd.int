@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+define(['app', 'scbd-angularjs-controls','bootstrap-datepicker'], function (app) {
 
 app.directive('searchFilterDates', function ($http) {
     return {
@@ -9,7 +9,8 @@ app.directive('searchFilterDates', function ($http) {
               title: '@title',
               query: '=query',
               field: '@field',
-              api   : '=?'
+              api   : '=?',
+              onChange : '&'
               //since: '=since',
               //until: '=until'
         },
@@ -68,6 +69,7 @@ app.directive('searchFilterDates', function ($http) {
                 } else {
                     $scope.query = '*:*';
                 }
+                $scope.onChange({query:$scope.query});
             };
 
             $scope.$watch('selectedDate', function (value) {

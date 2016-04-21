@@ -1,17 +1,9 @@
-define(['app', '/app/views/forms/edit/edit.js', '../view/view-capacity-building-initiative.directive.js'], function (app) {
+define(['app', '/app/views/forms/edit/edit.js', '../view/view-capacity-building-initiative.directive.js',
+'./field-embed-contact.directive.js'], function (app) {
 
-  app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller",
-  "$location", "Thesaurus", "Enumerable", "underscore",  'IStorage',
-  function ($scope, $http, $filter, $q, $routeParams, $controller,$location, Thesaurus, Enumerable, _, storage) {
+  app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", "underscore", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, Thesaurus, Enumerable, _) {
 
     $controller('editController', {$scope: $scope});
-
-    $scope.documentContacts = {};
-    // $scope.implementingAgenciesRef  = [];
-    // $scope.executingAgenciesRef     = [];
-    // $scope.collaboratingPartnersRef = [];
-    // $scope.coreFundingSourcesRef    = [];
-    // $scope.coFinancingSourcesRef    = [];
 
     $scope.path = $location.path();
 
@@ -96,6 +88,8 @@ define(['app', '/app/views/forms/edit/edit.js', '../view/view-capacity-building-
         return false;
     };
 
+
+
     //============================================================
     //
     //============================================================
@@ -158,72 +152,12 @@ define(['app', '/app/views/forms/edit/edit.js', '../view/view-capacity-building-
 
         if (/^\s*$/g.test(document.notes))
           document.notes = undefined;
-        // $scope.isSelfFunding
-        // $scope.isPartofBroaderInitiative
-        if(!document.isImplementedByAgencies)
-            $scope.documentContacts.implementingAgenciesRef = undefined;
-        if(!document.isExecutededByAgencies)
-            $scope.documentContacts.executingAgenciesRef = undefined;
-        if(!document.isCollaboratededByPartners)
-            $scope.documentContacts.collaboratingPartnersRef = undefined;
-
-          updateDocument(document, $scope.documentContacts.implementingAgenciesRef, 'implementingAgencies');
-          updateDocument(document, $scope.documentContacts.executingAgenciesRef, 'executingAgencies');
-          updateDocument(document, $scope.documentContacts.collaboratingPartnersRef, 'collaboratingPartners');
-          updateDocument(document, $scope.documentContacts.coreFundingSourcesRef, 'coreFundingSources');
-          updateDocument(document, $scope.documentContacts.coFinancingSourcesRef, 'coFinancingSources');
-
 
         return document;
       };
 
-    $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]}, true);
+    $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});
+    $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
 
-    $scope.$on("loadDocument", function(evt, info) {
-        if($scope.document.implementingAgencies)
-            $q.all(_.map($scope.document.implementingAgencies, loadRecords)).then(function(data){
-                $scope.documentContacts.implementingAgenciesRef = _.pluck(data, 'data');
-            });
-        if($scope.document.executingAgencies)
-            $q.all(_.map($scope.document.executingAgencies, loadRecords)).then(function(data){
-                $scope.documentContacts.executingAgenciesRef = _.pluck(data, 'data');;
-            });
-        if($scope.document.collaboratingPartners)
-            $q.all(_.map($scope.document.collaboratingPartners, loadRecords)).then(function(data){
-                $scope.documentContacts.collaboratingPartnersRef = _.pluck(data, 'data');;
-            });
-        if($scope.document.coreFundingSources)
-            $q.all(_.map($scope.document.coreFundingSources, loadRecords)).then(function(data){
-                $scope.documentContacts.coreFundingSourcesRef = _.pluck(data, 'data');;
-            });
-        if($scope.document.coFinancingSources)
-            $q.all(_.map($scope.document.coFinancingSources, loadRecords)).then(function(data){
-                $scope.documentContacts.coFinancingSourcesRef = _.pluck(data, 'data');;
-            });
-    });
-
-    function updateDocument(document, refField, documentField){
-        if(refField){
-            document[documentField] = _.map(refField, function(org){ return {identifier: org.header.identifier};});
-        }
-        else
-            document[documentField] = undefined;
-    }
-    //==================================
-    //
-    //==================================
-    function loadRecords(organization) {
-
-
-        if (organization && organization.identifier) { //lookup single record
-
-            return storage.documents.get(organization.identifier)
-                .catch(function(e) {
-                    if (e.status == 404) {
-                        return storage.drafts.get(organization.identifier);
-                    }
-                });
-        }
-    }
   }]);
 });

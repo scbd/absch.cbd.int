@@ -3,19 +3,19 @@
 		<h4>Competent National Authority
 		<span class="color-black"> (CNA) </span></h4>
 	</div>
-	<div class="record-body panel-body" help schema="viewCNA" show-help="showHelp">
-
+	<div class="record-body panel-body" help schema="viewCNA" >
+		<!-- {{document.government|term}} -->
 	<div name="article-13-2"></div>
+		<legend ng-if="document.government || document.name || document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0">General information</legend>
 
-		<legend ng-if="document.government || document.name || document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0">General information</legend>	
-
-		<div ng-show="document.government">
-			<label name="country">Country <span class="help-block">The country publishing this record.</span></label>
+		<div ng-show="document.government" >
+			<label name="country">Country</label>
 			<div class="km-value">
-				{{document.government|term}}
+				<span>{{document.government|term}}</span>
+				<span ng-party-status government="document.government" id="government"></span>
 			</div>
 		</div>
-		
+
 		<div ng-if="document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0 " >
 			<label name="name">Competent National Authority</label>
 			<div class="km-value">
@@ -35,7 +35,7 @@
 					<li ng-repeat="item in document.emails">
                         <a ng-href="mailto:{{item}}"><i class="fa fa-envelope-o"></i> {{item}}</a></li>
 				</ul>
-	
+
 				<ul  ng-show="document.websites" class="list" style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;">
 					<li ng-repeat="item in document.websites">
                         <a target="_new_" ng-href="{{item.url}}"> <i class="fa fa-external-link"></i> {{item.name||item.url}}</a>
@@ -45,39 +45,34 @@
 			</div>
 		</div>
 
-		
+
 		<legend ng-if="contacts.length > 0">Contact(s)</legend>
 		<div ng-show="contacts.length > 0" class="row">
-				<div ng-repeat="contact in contacts" >
+				<div  ng-repeat="contact in contacts" >
 					<div class="col-xs-12">
-						<div view-contact-reference ng-model="contact" locale="locale" class="well" style="margin-bottom:0;"></div>
-					</div>
+		                        <div class="km-value">
+		                            <div view-contact-reference ng-model="contact" locale="locale"></div>
+		                        </div>
+		                    </div>
 				</div>
 		</div>
 
-
-
-
-		<div ng-show="document.absPolicyBasisForCompetency || absPolicyBasisForCompetencyRef ">
+		<div ng-show="document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef ">
 			<legend>Legislative, administrative or policy basis for the competence of the CNA</legend>
 			<div ng-show="document.absPolicyBasisForCompetency">
 				<!--<label>Information on the legal, administrative or policy basis for the competence of the CNA</label>-->
 				<div class="km-value" ng-bind-html="document.absPolicyBasisForCompetency | lstring:locale">
 				</div>
 			</div>
-			<div ng-show="absPolicyBasisForCompetencyRef">
+			<div ng-if="document.absPolicyBasisForCompetencyRef">
 				<label>Links to relevant legislative, administrative or policy measure(s) </label>
-				<div  class="km-value">
-					<ul>
-						<li ng-repeat="item in absPolicyBasisForCompetencyRef" ng-show="item.document.title" >
-							<a target="_new_win" class="reflink" href="/database/{{item.document.header.schema}}/{{item.document.header.identifier}}"><strong>{{item.document.title | lstring}}</strong>
-							</a>
+					<ul class="km-value">
+						<li ng-repeat="item in document.absPolicyBasisForCompetencyRef" >
+						    <div view-default-reference ng-model="item.identifier" locale="locale"></div>
 						</li>
 					</ul>
-				</div>
 			</div>
-
-
+            
 		</div>
 
 		<div ng-if="document.responsibilities ||document.absResponsibleForAll || document.absFunctions|| document.absJurisdiction||document.absGeneticResourceTypes ">
@@ -88,7 +83,7 @@
 			</div>
 
 			<div ng-if="document.absResponsibleForAll">
-				<div class="km-value">This CNA is responsible for all functions under the Nagoya Protocol. </div>
+				<div class="km-value">Responsible for all genetic resources.</div>
 			</div>
 
 			<div ng-show="document.absFunctions">
@@ -114,6 +109,7 @@
 					<span ng-repeat="jur in document.absJurisdiction">{{jur|term}}{{$last ? '' : ', '}} </span>
 					<span ng-if="document.absJurisdictionName ">({{document.absJurisdictionName | lstring:locale}})</span>
 				</div>
+
 			</div>
 
 
@@ -142,7 +138,6 @@
 			</div>
 
 		</div>
-
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
 			<legend>Additional Information</legend>
 
@@ -158,14 +153,9 @@
 				</div>
 			</div>
 		</div>
-        <div class="row" style="padding-top:10px;" ng-show="document.info.revision">
-            <div class="col-xs-12">
-
-                <div view-history document-id="document.header.identifier" load-documents="true"
-                government="document.government.identifier"></div>
-            </div>
-        </div>
 
 	</div>
-	<div document-metadata  class="panel-footer"></div>
+
+    <div document-metadata class="panel-footer" ></div>
+
 </div>

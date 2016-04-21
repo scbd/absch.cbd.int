@@ -29,6 +29,7 @@ app.directive('searchFilterSchemas', function ($http) {
             if($scope.recordType == 'reference'){
                 $scope.previewType = 'list';
             }
+
             //**********************************************************
             $scope.isInProfiles = function(tab) {
                 return $scope.recordType == 'countryProfile' || ($route.current.$$route.type =='countryProfile' && $scope.recordType == 'countryProfile');
@@ -78,10 +79,10 @@ app.directive('searchFilterSchemas', function ($http) {
                 status                   : function () { return loadDomainWithFacets('status','measure','status_s'); },
                 typeOfDocuments          : function () { return loadDomainWithFacets('typeOfDocuments', 'measure','type_s'); },
                 cnaJurisdictions         : function () { return loadDomainWithFacets('cnaJurisdictions', 'authority', 'absJurisdiction_ss'); },
-                absGeneticResourceTypes  : function () { return loadDomainWithFacets('absGeneticResourceTypes', 'authority','absGeneticResourceTypes_ss') },
+                absGeneticResourceTypes  : function () { return loadDomainWithFacets('absGeneticResourceTypes', 'authority','absGeneticResourceTypes_ss'); },
                 keywords                 : function () { return loadDomainWithFacets('keywords', 'absPermit', 'keywords_ss'); },
                 usage                    : function () { return loadDomainWithFacets('usage', 'absPermit', 'usage_ss'); },
-                cpJurisdictions         : function () { return  loadDomainWithFacets('cpJurisdictions', 'absCheckpoint', 'jurisdiction_s') },
+                cpJurisdictions         : function () { return  loadDomainWithFacets('cpJurisdictions', 'absCheckpoint', 'jurisdiction_s'); },
 
                 countries                : function () { return thesaurusService.getDomainTerms('countries').then(function (o) { return $filter("orderBy")(o, "name"); }); },
                 regions                  : function () { return $q.all([thesaurusService.getDomainTerms('countries'),
@@ -480,7 +481,7 @@ app.directive('searchFilterSchemas', function ($http) {
             }
 
             $scope.queryStatus = function(type){
-                commonjs.getCountries()
+                $q.when(commonjs.getCountries())
                 .then(function(data){
                     $scope.queryPartyStatus = '';
                     var npParties
@@ -642,10 +643,14 @@ app.directive('searchFilterSchemas', function ($http) {
             ////country profile search
 
             $scope.$watch('countryProfileSearch', function(newVal){
-                 if($scope.recordType == 'countryProfile')
+                 if($scope.recordType == 'countryProfile'){
+                $scope.query = {};
+                $timeout(function(){
                     $scope.query = newVal;
+                },100);
+//console.log(newVal);
+                }
             },true);
-
 
              $scope.$watch('keyword', function(newVal){
                  if($scope.recordType == 'national' || $scope.recordType == 'reference' )
@@ -688,7 +693,7 @@ app.directive('searchFilterSchemas', function ($http) {
             function buildCountryProfileFacets(){
                 if(!$scope.countryProfileFacets && $scope.isInProfiles()){
                     $scope.countryProfileFacets = {};
-                    commonjs.getCountries()
+                    $q.when(commonjs.getCountries())
                     .then(function(countries){
                         $scope.countryProfileFacets.parties = _.where(countries, {isNPParty:true}).length;
                         $scope.countryProfileFacets.nonParties = _.where(countries, {isNPParty:false}).length;
@@ -703,7 +708,11 @@ app.directive('searchFilterSchemas', function ($http) {
             //     $scope.countryProfileSearch ={partyStatus: 'parties', countryProfile_keyword:''}
             // }
 
-
+            $timeout(function(){
+                if(commonjs.isAbsAdministrator()){
+                    $scope.isAbsAdministrator = true;
+                };
+            },2000);
 
         }]
     }

@@ -147,12 +147,7 @@ legend + .help-block{position:relative; top:-15px;}
 .legend2{font-size:14px;padding:3px;font-weight:500;margin-bottom:20px; border-bottom: 1px solid #e5e5e5;}
 
 
-.help-block{
-	font-size:11px;
-	color:#666;
-	padding: 0 0 5px 0;
-	margin: 0;
-}
+
 .form-group{
 	padding:0;
 	margin: 0 0 20px 0;
@@ -169,9 +164,6 @@ legend + .help-block{position:relative; top:-15px;}
 }
 
 
-.header{
-	border-bottom: 5px #333 solid;
-}
 
 .table-striped{
 	background-color:#efefef;
@@ -269,17 +261,12 @@ legend + .help-block{position:relative; top:-15px;}
 
 .btn-draft{
 	/*background-color:#999;*/
-	color: #fff;
-background-color: #999;
-border-color: #888;
+	color: #fff!important;
+    background-color: #666;
+    border-color: #888;
 }
 
-.btn-draft{
-	/*background-color:#999;*/
-	color: #fff;
-background-color: #999;
-border-color: #888;
-}
+
 
 .registerpage-header{
 	/*background-color:#333;*/
@@ -379,7 +366,6 @@ ul.km-value {
 address.km-value,
 div.km-value,
 ul.km-value > li {
-background-color: #fff;
 border: 1px solid #c0c0c0;
 border-radius: 3px;
 padding: 5px 8px 5px 8px;
@@ -615,5 +601,5 @@ border-bottom:5px solid pink;
 }
 
 label{
-	font-weight:normal;
+	font-weight:500;
 }

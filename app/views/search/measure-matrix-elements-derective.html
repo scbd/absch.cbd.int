@@ -1,4 +1,4 @@
-<div>
+<div class="bg-white">
 <style>
     .matrixTable tr .headerColumn {
         width: 30%;
@@ -70,19 +70,14 @@
         width: 55%;
     }
 
-    .paddingleft0 {
-        background-color: #ddd;
-        margin-top:30px!important;
-        border-bottom:1px #fff solid;
-    }
 
     .paddingleft3 {
         font-weight:bold;
     }
 
-    .paddingleft3::before {
-     /*content: " - ";*/
-    }
+    /*.paddingleft3::before {
+     content: " - ";
+    }*/
 
     .paddingleft6 {
         padding-left: 6%!important;
@@ -96,6 +91,7 @@
     .paddingleft9 {
         padding-left: 9%!important;
     }
+
 
     .paddingleft12 {
         padding-left: 12%!important;
@@ -126,27 +122,61 @@
     .boldLabel{
         font-weight:bold;
     }
+    legend{font-size:16px;font-weight:bold;}
+    .paddingleft0{
+       background-color: #eee;
+
+    }
 </style>
-    <table class="table matrixTable">
-         <tr>
-             <td>
-                <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
-                <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
-             </td>
-          </tr>
+<legend>
+    {{title}}
+
+    <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
+    <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
+
+</legend>
+
+    <table class="table matrixTable bg-white" style="margin-bottom:0;">
           <tr ng-if="rootTerms.length==0">
               <td>
-                  <i class="fa fa-spin fa-spinner fa-5x" />
+
+                   <div block-region activate="true" style="margin-bottom:20px;"></div>
+
               </td>
           </tr>
+          <!-- <tr>
+              <td>
+                    <div ng-repeat="element in measureMainElements">
+                            <div class="tableCell" ng-include="'/app/views/search/matrix/new-measure-matrix.directive'">
+                            </div>
+                    </div>
+              </td>
+          </tr> -->
+
         <tr ng:repeat="term in rootTerms" ng-if="rootTerms.length>0">
             <td class="tableCell" ng-include="'/app/views/search/matrix/measure-matrix.directive/abs/inner'">
             </td>
         </tr>
     </table>
+    <script type="text/ng-template" id="/app/views/search/matrix/new-measure-matrix.directive">
+        <table class="table">
+            <tr>
+                <td>
+                    {{$index}}. {{element.title|lstring}}
+                    <span ng-if="element.section">
+                        ({{element.section|lstring}})
+                    </span>
+                </td>
+            </tr>
+        </table>
+        <div ng-repeat="element in element.narrowerTerms" style="padding-left:50px;">
+            <div class="tableCell" ng-include="'/app/views/search/matrix/new-measure-matrix.directive'">
+            </div>
+        </div>
+    </script>
     <script type="text/ng-template" id="/app/views/search/matrix/measure-matrix.directive/abs/inner">
-
-        <table class="table" ng:if="term.isChildSelected || (!term.broaderTerms && term.narrowerTerms) || (!term.broaderTerms && !term.narrowerTerms) || (term.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')">
+        <!--{{term.identifier}}-->
+        <table class="table" ng:if="(term.identifier=='4E2974DF-216E-46C8-8797-8E3A3BLAISE1' || term.isChildSelected || (!term.broaderTerms && term.narrowerTerms) || (!term.broaderTerms && !term.narrowerTerms) || (term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && term.answer))">
             <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}" >
                 <td class="matrixheaderColumn rightBorder "
                 ng:class="{'paddingleft0':term.level==1, 'paddingleft3':term.level==2 && !term.isMeasure , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
@@ -156,7 +186,8 @@
                         </strong>
                         <!--exception for TK-->
                         <span ng-if="term.broaderTerms && !term.isMeasure" ng-style="{'boldLabel':term.identifier=='B8A150E054154AD3AD97856ABD485E90'}">
-                            {{(term.title||term.name)  | lstring:locale}}<span ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0">: {{otherCustomValues[term.identifier]  | lstring:locale}}</span>
+                            {{(term.title||term.name)  | lstring:locale}}
+                            <!--<span ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0">: {{otherCustomValues[term.identifier]  | lstring:locale}}</span>-->
                         </span>
                         <span ng-if="term.broaderTerms && term.isMeasure">
                             <span ng-if="term.measureType=='linked'">Related to</span>
@@ -165,12 +196,22 @@
                                 <a target="new" ng-href="/database/record/{{term.measure|uniqueID}}" >{{term.title||term.name | lstring:locale}} </a>
                             </span>
                         </span>
-                         <span ng-if="sections[term.identifier]" class="color-blue bold"> ( {{sections[term.identifier] | lstring:locale}} ) </span>
+                         <span ng-if="sections[term.identifier] && sections[term.identifier].en" class="color-blue bold"> ( {{sections[term.identifier] | lstring:locale}} ) </span>
                          <span ng-if="term.isMeasure && term.measure.amendedFor"> amending {{term.measure.amendedFor}}</span>
                         <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="term.level<2"></i>
                         <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="term.level<2"></i>
 
                 </td>
+            </tr>
+            <tr ng-if="term.identifier=='4E2974DF-216E-46C8-8797-8E3A3BLAISE1' || term.geneticResourcesTerms" >
+              <td colspan="3" class="paddingleft9">
+                  <span onload="elements = term.geneticResourcesTerms|| binding.geneticResource.elements" ng-include="'/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement'"></span>
+              </td>
+            </tr>
+            <tr ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && identifiers[term.identifier]">
+              <td colspan="3" style="padding-left:50px">
+                  <span onload="otherElements = otherTerms[term.identifier]" ng-include="'/app/views/forms/edit/view-measure.directive/abs/inner/other'"></span>
+              </td>
             </tr>
             <tr ng:if="term.narrowerTerms && term.narrowerTerms.length > 0" id="{{term.identifier}}">
                 <td class="matrixheaderColumn rightBorder subList1 cover50 noBottomBorder noTopBorder"
@@ -182,7 +223,40 @@
                     </table>
                 </td>
             </tr>
+            <tr ng:if="!term.isChildSelected && term.level == 1" id="{{term.identifier}}">
+                <td class="matrixheaderColumn rightBorder subList1 cover50 noBottomBorder noTopBorder"
+                colspan="1" style="padding-top:0px;padding-bottom:0px">
+                    <span class="color-blue bold paddingleft3">No provisions for this element</span>
+                </td>
+            </tr>
         </table>
     </script>
+
+    <script  type="text/ng-template"  id="/app/views/forms/edit/view-measure.directive/abs/inner/other">
+     <div style="padding-left:25px;">
+        <table class="table table-hover" style="padding:0;margin:0;width:100%;">
+            <tbody>
+              <tr ng-repeat="element in otherElements">
+                    <td>
+                      - &nbsp; {{element.name|lstring}} ({{element.section|lstring}})
+                    </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+    </script>
+    <script  type="text/ng-template"  id="/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement">
+        <div ng-repeat="element in elements" style="padding-left:25px;">
+            <span ng-repeat="area in element.types">
+               - &nbsp; {{area|term}}<span ng-if="!$last">,</span>
+              </span>
+              <span> <i>found in</i> </span>
+              <span ng-repeat="area in element.areas">
+                  {{area|term}} <span ng-if="!$last">,</span>
+              </span>
+              <span ng-if="element.section" class="color-blue bold">({{element.section|lstring}})</span>
+        </div>
+    </script>
+
     <!-- ng:if="(term.narrowerTerms && term.narrowerTerms.length > 0) || sections[term.identifier]" -->
 </div>

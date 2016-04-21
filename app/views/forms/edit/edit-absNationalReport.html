@@ -2,8 +2,9 @@
 
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
 
-    <md-content layout-padding style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <div  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
 
+                <span block-region activate="isLoading()" ng-if="isLoading()"></span>
   <div class="registerpage-content" style="padding-bottom:30px;">
 
     <div ng-show="msg" class="alert alert-success alert-dismissable">
@@ -15,17 +16,17 @@
       <strong>Error as occured...</strong>
       <div>{{error}}</div>
     </div>
-
+<!--
     <div ng-show="isLoading()">
         <i class="fa fa-spinner fa-spin"></i> Loading...
-    </div>
+    </div>-->
 
     <div ng-show="!isLoading() && status!='hidden'">
-     
+
         <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages"  hide-timer="false"/>
-   
+
         <div km-document-validation ng-model="validationReport"></div>
-                
+
         <div class="row" ng-show="tab == 'edit'">
             <div class="col-xs-12">
                 <ul class="pagination" id="nrTabs" ng-click="setTab()">
@@ -52,38 +53,38 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="tab-content">
-                        
+
                         <div  class="tab-pane active" id="part0">
-                        
+
                              <div  style="margin-bottom:20px;">
                                  <h4>
                                 GUIDELINES FOR THE INTERIM NATIONAL REPORT ON THE IMPLEMENTATION OF THE NAGOYA PROTOCOL
                                  </h4>
                                  <div>
-                                 <p>The following format for the preparation of the interim national report on implementation of the Nagoya Protocol on Access and Benefit-sharing called for under Article 29 of the Protocol is a series of questions based on those provisions of the Protocol that establish obligations for the Parties to the Protocol. These questions are identified as mandatory and are marked with an asterisk</p> 
-                                 
+                                 <p>The following format for the preparation of the interim national report on implementation of the Nagoya Protocol on Access and Benefit-sharing called for under Article 29 of the Protocol is a series of questions based on those provisions of the Protocol that establish obligations for the Parties to the Protocol. These questions are identified as mandatory and are marked with an asterisk</p>
+
                                  <p>In addition, some questions are not strictly based on the provisions of the Protocol and are identified as voluntary. They are included in the reporting format to contribute to the assessment and review of the effectiveness of the Protocol in the context of Article 31 and to identify challenges and difficulties in implementing the Protocol, and of decisions adopted by the Conference of the Parties serving as the meeting of the Parties to the Nagoya Protocol (COP-MOP).</p>
-                                 
+
                                  <p>The interim national report can be a useful tool for both Parties and non-Parties to assess the level of implementation of the Nagoya Protocol, as well as gaps and needs in terms of capacity, and will assist the COP-MOP in reviewing, on a regular basis, the implementation of the Nagoya Protocol and to make, within its mandate, the decisions necessary to promote its effective implementation in accordance with Article 26, paragraph 4.</p>
-                                 
+
                                  <p>Information submitted through the interim national report could also serve to share experiences, challenges and solutions among countries in relation to the implementation of the Nagoya Protocol. In this regard, the interim national report can be a valuable tool for building and developing capacity to implement the Protocol and for designing capacity-building activities more effectively. The format is intended to minimize the reporting burden on countries and therefore questions are simple in nature (usually yes or no questions). Generally, these questions are followed by text entries where countries are encouraged to provide details on the measures taken as well as to report on difficulties and challenges to implement particular provisions of the Protocol and to provide further information on the issue by linking to existing Access and Benefit-sharing Clearing-House (ABS Clearing-House) records, websites or uploading documents. This is an opportunity to identify good practices and constraints in implementation of the Nagoya Protocol.</p>
-                                 
+
                                  <p>In order to avoid duplication in the submission of information and to make the best use of the information already made available through the ABS Clearing-House, countries would be given the possibility of linking existing national and reference ABS Clearing-House records published by the publishing authority to the different sections of the interim national report if they wish to do so, or else the Secretariat when consolidating information for consideration of the COP-MOP, in addition to the information contained in the interim national report will also include relevant information already published in the ABS Clearing-House.</p>
-                                 
+
                                  <p>Although there is no set limit on length of text, in order to assist with the review and synthesis of the information in the reports, respondents are invited to ensure that answers are as relevant and as succinct as possible.</p>
-                                 
+
                                  <p>Countries are invited to submit any other information in the section provided at the end of the reporting format. The Executive Secretary welcomes any comments on the adequacy of the questions and difficulties in completing the questions, and any further recommendations on how these reporting guidelines could be improved.</p>
-                                 
+
                                  <p>It is recommended that Parties involve all relevant stakeholders in the preparation of the report in order to ensure a participatory and transparent approach to its development.</p>
-                                 
+
                                  <p>Countries should use the online version of the format, unless technically not feasible, and to submit the report through the ABS Clearing-House while ensuring that the national information on the ABS Clearing-House is up-to-date.</p>
-                                 
+
                                  <p>Only if not technically feasible, Parties should resort to offline submissions to the ABS Clearing-House. Offline submissions should use the protected form, as provided for download on the ABS Clearing-House in MS Word format.  It is recommended that countries send the report via email to the Secretariat (secretariat@cbd.int), and include a scanned copy of the last page signed by the ABS Clearing-House publishing authority. Subsequently, the Executive Secretary will assist Parties in making their report available on the ABS Clearing-House.</p>
                                  </div>
-                             </div> 
-                        
+                             </div>
+
                         </div>
-                        
+
                         <div class="tab-pane" id="part1">
 
                             <legend>General Information</legend>
@@ -118,7 +119,7 @@
                                             <div km-textbox-ml rows=4 name="question3Challenges" ng-model="document.question3.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                         </div>
                                     </div>
-                                    <div ng-show="!isQ3Yes(document.question3.answer)" class="km-control-group" style="margin-bottom:20px;" name="q3DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div ng-show="!isQ3Yes(document.question3.answer)" class="km-control-group" style="margin-bottom:20px;" name="q3DocRefs" caption="Please select the clearing-house records that contain relevant information">
                                         <div document-selection ng-model="document.question3.documentReferenceIDs"
                                                                 ng-disabled="!document.government || isQ3Yes(document.question3.answer)"
                                                                 question="question3"
@@ -135,7 +136,7 @@
 
                             <div class="row" ng-class="{'disable': document.question3.answer===undefined}">
             					<div class="col-xs-12">
-                                    <div class="km-control-group" bold="true" ng-required="!isQ3Yes(document.question3.answer)" name="question4" caption="4. Has your country taken legislative, administrative and policy measures on ABS?"> 
+                                    <div class="km-control-group" bold="true" ng-required="!isQ3Yes(document.question3.answer)" name="question4" caption="4. Has your country taken legislative, administrative and policy measures on ABS?">
                                         <div ng-show="!isQ3Yes(document.question3.answer)" ng-required="!isQ3Yes(document.question3.answer)" class="km-yes-no"  name="question4" ng-model="document.question4.answer" ng-click="isQ4Yes(document.question4.answer)"></div>
                                     </div>
                                     <div ng-show="document.question4.answer" class="km-control-group" name="question4.AdditionalInfo" caption="">
@@ -147,7 +148,7 @@
                                         <div km-textbox-ml rows=4 name="question4.ChallengesInfo" ng-required="isQ3Yes(document.question3.answer)" ng-model="document.question4.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div ng-show="!document.question3.answer" class="km-control-group" style="margin-bottom:20px;" name="q4DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div ng-show="!document.question3.answer" class="km-control-group" style="margin-bottom:20px;" name="q4DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question4.documentReferenceIDs"
                                                                 ng-disabled="!document.government || document.question3.answer"
                                                                 question="question4"
@@ -173,7 +174,7 @@
                                         <div km-textbox-ml rows=4 name="question5FurtherInfo" ng-model="document.question5.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div ng-show="!document.question3.answer" class="km-control-group" style="margin-bottom:20px;" name="q5DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div ng-show="!document.question3.answer" class="km-control-group" style="margin-bottom:20px;" name="q5DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question5.documentReferenceIDs"
                                                                 ng-disabled="!document.government || document.question3.answer"
                                                                 question="question5"
@@ -197,7 +198,7 @@
                                         <div km-textbox-ml rows=4 name="question6FurtherInfo" ng-model="document.question6.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div ng-show="!document.question3.answer" class="km-control-group" style="margin-bottom:20px;" name="q6DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div ng-show="!document.question3.answer" class="km-control-group" style="margin-bottom:20px;" name="q6DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question6.documentReferenceIDs"
                                                                 ng-disabled="!document.government || document.question3.answer"
                                                                 question="question6"
@@ -227,7 +228,7 @@
                                         <div km-textbox-ml rows=4 name="question7FurtherInfo" ng-model="document.question7.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div ng-show="!document.question3.answer" class="km-control-group" style="margin-bottom:20px;" name="q7DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div ng-show="!document.question3.answer" class="km-control-group" style="margin-bottom:20px;" name="q7DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question7.documentReferenceIDs"
                                                                 ng-disabled="!document.government || document.question3.answer"
                                                                 question="question7"
@@ -251,7 +252,7 @@
                                         <div km-textbox-ml rows=4 name="question8FurtherInfo" ng-model="document.question8.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q8DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q8DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question8.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question8"
@@ -276,7 +277,7 @@
                                         <div km-textbox-ml rows=4 name="question9FurtherInfo" ng-model="document.question9.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q9DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q9DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question9.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question9"
@@ -290,11 +291,11 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group"  bold="true" name="question10" caption="10. Additional information">
-                                        Please provide a summary of the main difficulties and challenges 
+                                        Please provide a summary of the main difficulties and challenges
                                         <div km-textbox-ml rows=4 name="question10" ng-model="document.question10.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q10DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q10DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question10.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question10"
@@ -330,7 +331,7 @@
                                         <div km-textbox-ml rows=4 name="question11FurtherInfo" ng-model="document.question11.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q11DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q11DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question11.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question11"
@@ -346,7 +347,7 @@
                                         Please answer Question 11 to know if it is required to answer Question 12 to 17. <br /> <br />
                                     </div>
                                 </div>
-                            </div>                        
+                            </div>
 
                             <div class="row" ng-class="{'disable': !document.question11.answer}">
                                 <div class="col-xs-12">
@@ -358,7 +359,7 @@
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question12FurtherInfo" ng-model="document.question12.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q12DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q12DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question12.documentReferenceIDs"
                                                                 ng-disabled="!document.government || !document.question11.answer"
                                                                 question="question12"
@@ -379,7 +380,7 @@
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question13FurtherInfo" ng-model="document.question13.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q13DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q13DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question13.documentReferenceIDs"
                                                                 ng-disabled="!document.government || !document.question11.answer"
                                                                 question="question13"
@@ -400,7 +401,7 @@
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question14FurtherInfo" ng-model="document.question14.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q14DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q14DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question14.documentReferenceIDs"
                                                                 ng-disabled="!document.government || !document.question11.answer"
                                                                 question="question14"
@@ -421,7 +422,7 @@
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question15FurtherInfo" ng-model="document.question15.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q15DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q15DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question15.documentReferenceIDs"
                                                                 ng-disabled="!document.government || !document.question11.answer"
                                                                 question="question15"
@@ -438,15 +439,19 @@
 
                                      <div class="input-group col-xs-4"  name="question16.permitsOnAbsCh">
                                         <input ng-disabled="!isQ11Yes(document.question11.answer)" type="number" name="permitsOnAbsCh" class="form-control text-right" ng-model="document.question16.permitsOnAbsCh" min="0" ng-init="document.question16.permitsOnAbsCh=0">
+                                        
+                                        <div class="help-info color-blue bold" ng-if="recordsCount.ircc">
+                                           Currently you have <strong>{{recordsCount.ircc}} </strong> permits or their equivalents (IRCC) published in the ABS-CH.
+                                        </div>
                                     </div>
-
+                                 
                                     </div>
                                     <div class="km-control-group" name="question16FurtherInfo" caption="">
                                         Please provide further information
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question16FurtherInfo" ng-model="document.question16.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q16DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q16DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question16.documentReferenceIDs"
                                                                 ng-disabled="!document.government || !document.question11.answer"
                                                                 question="question16"
@@ -467,7 +472,7 @@
                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" km-textbox-ml rows=4 name="question17FurtherInfo" ng-model="document.question17.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q17DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q17DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question17.documentReferenceIDs"
                                                                 ng-disabled="!document.government || !document.question11.answer"
                                                                 question="question17"
@@ -515,7 +520,7 @@
                                         <div km-textbox-ml rows=4 name="question18FurtherInfo" ng-model="document.question18.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q18DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q18DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question18.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question18"
@@ -529,11 +534,11 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group"  bold="true"  name="question19" caption="19. Additional information">
-                                        Please provide a summary of the main difficulties and challenges 
+                                        Please provide a summary of the main difficulties and challenges
                                         <div km-textbox-ml rows=4 name="question19" ng-model="document.question19.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q19DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q19DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question19.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question19"
@@ -560,7 +565,7 @@
                                         <div km-textbox-ml rows=4 name="question20FurtherInfo" ng-model="document.question20.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q20DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q20DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question20.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question20"
@@ -581,7 +586,7 @@
                                         <div km-textbox-ml rows=4 name="question21FurtherInfo" ng-model="document.question21.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q21DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q21DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question21.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question21"
@@ -602,7 +607,7 @@
                                         <div km-textbox-ml rows=4 name="question22FurtherInfo" ng-model="document.question22.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q22DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q22DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question22.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question22"
@@ -620,7 +625,7 @@
                                         <div km-textbox-ml rows=4 name="question23" ng-model="document.question23.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q23DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q23DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question23.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question23"
@@ -673,7 +678,7 @@
                                         <div km-textbox-ml rows=4 name="question24FurtherInfo" ng-model="document.question24.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q24DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q24DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question24.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question24"
@@ -707,7 +712,7 @@
                                         <div km-textbox-ml rows=4 name="question25FurtherInfo" ng-model="document.question25.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q25DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q25DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question25.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question25"
@@ -743,7 +748,7 @@
                                         <div km-textbox-ml rows=4 name="question26FurtherInfo" ng-model="document.question26.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q26DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q26DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question26.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question26"
@@ -779,6 +784,11 @@
                                     </div>
                                     <div class="km-control-group row" name="question27_ccsOnAbsCh" caption="Please provide the number of checkpoint communiques available in the ABS Clearing-House, if applicable">
                                         <input class="col-xs-2" type="number" name="ccsOnAbsCh" class="form-control text-right" ng-model="document.question27.cpcsOnAbsChCount" min="0" ng-init="document.question27.cpcsOnAbsChCount=0">
+                                        
+                                        <div class="help-info color-blue bold" ng-if="recordsCount.cpc">
+                                           Currently you have <strong>{{recordsCount.cpc}} </strong> Checkpoint Communiques published (CPC) published in the ABS-CH.
+                                        </div>
+                                        
                                     </div>
 
                                     <div class="km-control-group" name="q27relevantDocuments" caption="Any other relevant documents">
@@ -796,7 +806,7 @@
                                         <div km-textbox-ml rows=4 name="question28FurtherInfo" ng-model="document.question28.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q28DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q28DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question28.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question28"
@@ -822,7 +832,7 @@
                                         <div km-textbox-ml rows=4 name="question29FurtherInfo" ng-model="document.question29.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q29DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q29DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question29.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question29"
@@ -840,7 +850,7 @@
                                         <div km-textbox-ml rows=4 name="question30" ng-model="document.question30.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q30DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q30DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question30.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question30"
@@ -870,7 +880,7 @@
                                         <div km-textbox-ml rows=4 name="question31FurtherInfo" ng-model="document.question31.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q31DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q31DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question31.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question31"
@@ -891,7 +901,7 @@
                                         <div km-textbox-ml rows=4 name="question32FurtherInfo" ng-model="document.question32.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q32DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q32DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question32.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question32"
@@ -920,7 +930,7 @@
                                         <div km-textbox-ml rows=4 name="question33MechanismsFurtherInfo" ng-model="document.question33.mechanisms.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q33DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q33DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question33.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question33"
@@ -938,7 +948,7 @@
                                         <div km-textbox-ml rows=4 name="question34" ng-model="document.question34.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q34DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q34DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question34.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question34"
@@ -968,7 +978,7 @@
                                         <div km-textbox-ml rows=4 name="question35ResearchFurtherInfo" ng-model="document.question35.research.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35ResearchDocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35ResearchDocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question35.research.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question35Research"
@@ -984,7 +994,7 @@
                                         Please provide further information
                                         <div km-textbox-ml rows=4 name="question35EmergenciesFurtherInfo" ng-model="document.question35.emergencies.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35EmergenciesDocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35EmergenciesDocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question35.emergencies.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question35Emergencies"
@@ -1000,7 +1010,7 @@
                                         Please provide further information
                                         <div km-textbox-ml rows=4 name="question35AccessFurtherInfo" ng-model="document.question35.access.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35AccessDocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35AccessDocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question35.access.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question35Access"
@@ -1018,7 +1028,7 @@
                                         <div km-textbox-ml rows=4 name="question35ImportanceFurtherInfo" ng-model="document.question35.importance.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35ImportanceDocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35ImportanceDocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question35.importance.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question35Importance"
@@ -1046,7 +1056,7 @@
                                         <div km-textbox-ml rows=4 name="question36" ng-model="document.question36.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q36DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q36DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question36.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question36"
@@ -1073,7 +1083,7 @@
                                         <div km-textbox-ml rows=4 name="question37FurtherInfo" ng-model="document.question37.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q37DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q37DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question37.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question37"
@@ -1102,7 +1112,7 @@
                                                 Please provide further information and reference to the domestic law establishing rights of indigenous and local communities to grant access to genetic resources
                                                 <div km-textbox-ml rows=2 name="question38LawFurtherInfo" ng-model="document.question38.law.furtherInfo" locales="document.header.languages" placeholder=""></div>
 
-                                                <div class="km-control-group" style="margin-bottom:20px;" name="q38LawDocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                                <div class="km-control-group" style="margin-bottom:20px;" name="q38LawDocRefs" caption="Please select the relevant ABSCH records">
                                                     <div document-selection ng-model="document.question38.law.documentReferenceIDs"
                                                                             ng-disabled="!document.government"
                                                                             question="question38Law"
@@ -1137,7 +1147,7 @@
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question38FurtherInfo" ng-model="document.question38.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q38DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q38DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question38.documentReferenceIDs"
                                                                 ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question38"
@@ -1158,7 +1168,7 @@
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question39FurtherInfo" ng-model="document.question39.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q39DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q39DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question39.documentReferenceIDs"
                                                                 ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question39"
@@ -1179,7 +1189,7 @@
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question40FurtherInfo" ng-model="document.question40.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q40DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q40DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question40.documentReferenceIDs"
                                                                 ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question40"
@@ -1200,7 +1210,7 @@
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question41FurtherInfo" ng-model="document.question41.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q41DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q41DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question41.documentReferenceIDs"
                                                                 ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question41"
@@ -1222,7 +1232,7 @@
                                         Please provide further information on how your country is supporting the development of community protocols.
                                         <div km-textbox-ml rows=3 name="question42CommunityFurtherInfo" ng-model="document.question42.community.furtherInfo" locales="document.header.languages" placeholder=""></div>
 
-                                        <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsCommunity" caption="Please select the clearing-house record number containing relevant information">
+                                        <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsCommunity" caption="Please select the relevant ABSCH records">
                                             <div document-selection ng-model="document.question42.community.documentReferenceIDs"
                                                                     ng-disabled="!document.government || !Q37IsYes()"
                                                                     question="question42community"
@@ -1239,7 +1249,7 @@
                                         Please provide further information on how your country is supporting the development of minimum requirements mutually agreed terms.
                                         <div km-textbox-ml rows=3 name="question42MATFurtherInfo" ng-model="document.question42.mat.furtherInfo" locales="document.header.languages" placeholder=""></div>
 
-                                        <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsMat" caption="Please select the clearing-house record number containing relevant information">
+                                        <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsMat" caption="Please select the relevant ABSCH records">
                                             <div document-selection ng-model="document.question42.mat.documentReferenceIDs"
                                                                     ng-disabled="!document.government || !Q37IsYes()"
                                                                     question="question42mat"
@@ -1256,7 +1266,7 @@
                                         Please provide further information on how your country is supporting the development of model contractual clauses
                                         <div km-textbox-ml rows=3 name="question42MCCFurtherInfo" ng-model="document.question42.mcc.furtherInfo" locales="document.header.languages" placeholder=""></div>
 
-                                        <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsmcc" caption="Please select the clearing-house record number containing relevant information">
+                                        <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsmcc" caption="Please select the relevant ABSCH records">
                                             <div document-selection ng-model="document.question42.mcc.documentReferenceIDs"
                                                                     ng-disabled="!document.government || !Q37IsYes()"
                                                                     question="question42mcc"
@@ -1278,7 +1288,7 @@
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question43FurtherInfo" ng-model="document.question43.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q43DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q43DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question43.documentReferenceIDs"
                                                                 ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question43"
@@ -1296,7 +1306,7 @@
                                         <div ng-disabled="!document.question37.answer" km-textbox-ml rows=4 name="question44" ng-model="document.question44.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q44DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q44DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question44.documentReferenceIDs"
                                                                 ng-disabled="!document.government || !Q37IsYes()"
                                                                 question="question44"
@@ -1325,7 +1335,7 @@
                                         <div km-textbox-ml rows=4 name="question45FurtherInfo" ng-model="document.question45.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q45DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q45DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question45.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question45"
@@ -1342,7 +1352,7 @@
                                         <div km-textbox-ml rows=4 name="question46" ng-model="document.question46.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q46DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q46DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question46.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question46"
@@ -1360,7 +1370,7 @@
                                         <div km-textbox-ml rows=4 name="question47" ng-model="document.question47.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q47DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q47DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question47.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question47"
@@ -1394,7 +1404,7 @@
                                         <div km-textbox-ml rows=4 name="question48FurtherInfo" ng-model="document.question48.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q48DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q48DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question48.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question48"
@@ -1417,7 +1427,7 @@
                                         Please provide further information
                                         <div km-textbox-ml rows=4 name="question49FurtherInfo" ng-model="document.question49.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q49DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q49DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question49.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question49"
@@ -1435,7 +1445,7 @@
                                         <div km-textbox-ml rows=4 name="question50" ng-model="document.question50.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q50DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q50DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question50.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question50"
@@ -1464,7 +1474,7 @@
                                         <div km-textbox-ml rows=4 name="question51FurtherInfo" ng-model="document.question51.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q51DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q51DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question51.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question51"
@@ -1485,7 +1495,7 @@
                                         <div km-textbox-ml rows=4 name="question52FurtherInfo" ng-model="document.question52.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q52DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q52DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question52.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question52"
@@ -1503,7 +1513,7 @@
                                         <div km-textbox-ml rows=4 name="question53" ng-model="document.question53.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q53DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q53DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question53.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question53"
@@ -1529,6 +1539,7 @@
                                     <div class="row" ng-show="document.question54.answer">
                                         <div class="col-xs-10 col-xs-offset-1">
                                             <div class="km-control-group" ng-required="document.question54.answer" name="question54_measures" caption="Has your country taken measures to implement the awareness-raising strategy for the Nagoya Protocol on ABS?">
+                                               <div class="help-info">Adopted as descision NP-1/9</div>
                                                 <div class="km-yes-no" ng-required="document.question54.answer" name="question54_measures" ng-click="Q54Clear()" ng-model="document.question54.measures.answer"></div>
                                             </div>
                                             <div ng-show="document.question54.measures.answer" class="km-control-group" name="question54MeasuresFurtherInfo" caption="">
@@ -1536,7 +1547,7 @@
                                                 <div km-textbox-ml rows=2 name="question54MeasuresFurtherInfo" ng-model="document.question54.measures.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
 
-                                            <div ng-show="document.question54.measures.answer" class="km-control-group" style="margin-bottom:20px;" name="q54DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                            <div ng-show="document.question54.measures.answer" class="km-control-group" style="margin-bottom:20px;" name="q54DocRefs" caption="Please select the relevant ABSCH records">
                                                 <div document-selection ng-model="document.question54.measures.documentReferenceIDs"
                                                                         ng-disabled="!document.government"
                                                                         question="question54measures"
@@ -1551,7 +1562,7 @@
                                         <div km-textbox-ml rows=4 name="question54FurtherInfo" ng-model="document.question54.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q54DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q54DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question54.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question54"
@@ -1570,6 +1581,7 @@
                                     <div class="row" ng-show="document.question55.answer">
                                         <div class="col-xs-10 col-xs-offset-1">
                                             <div class="km-control-group" name="question55_measures" caption="Has your country taken measures to implement the strategic framework for capacity-building and development to support effective implementation of the Nagoya Protocol on ABS? ">
+                                                <div class="help-info">Adopted as descision NP-1/8</div>
                                                 <div class="km-yes-no" name="question55_measures" ng-click="Q55Clear()" ng-model="document.question55.measures.answer"></div>
                                             </div>
                                             <div ng-show="document.question55.measures.answer" class="km-control-group" name="question55MeasuresFurtherInfo" caption="">
@@ -1577,7 +1589,7 @@
                                                 <div km-textbox-ml rows=2 name="question55MeasuresFurtherInfo" ng-model="document.question55.measures.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                             </div>
 
-                                            <div ng-show="document.question55.measures.answer" class="km-control-group" style="margin-bottom:20px;" name="q55DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                            <div ng-show="document.question55.measures.answer" class="km-control-group" style="margin-bottom:20px;" name="q55DocRefs" caption="Please select the relevant ABSCH records">
                                                 <div document-selection ng-model="document.question55.measures.documentReferenceIDs"
                                                                         ng-disabled="!document.government"
                                                                         question="question55measures"
@@ -1593,7 +1605,7 @@
                                         <div km-textbox-ml rows=4 name="question55FurtherInfo" ng-model="document.question55.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q55DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q55DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question55.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question55"
@@ -1614,7 +1626,7 @@
                                         <div km-textbox-ml rows=4 name="question56FurtherInfo" ng-model="document.question56.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q56DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q56DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question56.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question56"
@@ -1635,7 +1647,7 @@
                                         <div km-textbox-ml rows=4 name="question57FurtherInfo" ng-model="document.question57.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q57DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q57DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question57.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question57"
@@ -1653,7 +1665,7 @@
                                         <div km-textbox-ml rows=4 name="question58" ng-model="document.question58.challengesInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q58DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q58DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question58.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question58"
@@ -1685,7 +1697,7 @@
                                         <div km-textbox-ml rows=4 name="question59FurtherInfo" ng-model="document.question59.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q59DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q59DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question59.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question59"
@@ -1706,7 +1718,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q60DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q60DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question60.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question60"
@@ -1735,7 +1747,7 @@
                                         <div km-textbox-ml rows=4 name="question61FurtherInfo" ng-model="document.question61.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>-->
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q61DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q61DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question61.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question61"
@@ -1796,7 +1808,7 @@
                                         <div km-textbox-ml rows=4 name="question62FurtherInfo" ng-model="document.question62.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>-->
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q62DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q62DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question62.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question62"
@@ -1814,7 +1826,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                              <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="question64new"  bold="true" caption="64. Please provide information on the status of funds mobilized in support of the implementation of the Protocol.">
@@ -1823,12 +1835,13 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            
+
+
 
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group"  name="question63"  bold="true" caption="65. Does your country have specific staff to administer functions directly related to the implementation of the Nagoya Protocol? ">
+                                        <div class="help-info">The collection of this information could be useful for the evaluation of the effectiveness of the Protocol under Article 31 on assessment and review as well as for measuring progress and identifying difficulties and challenges implementing the Protocol.</div>
                                         <div class="km-yes-no" name="question63" ng-model="document.question63.answer" ng-click="Q63Clear()"></div>
                                     </div>
 
@@ -1849,7 +1862,7 @@
                                         <div km-textbox-ml rows=4 name="question63FurtherInfo" ng-model="document.question63.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q63DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q63DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question63.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question63"
@@ -1867,7 +1880,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q64DocRefs" caption="Please select the clearing-house record number containing relevant information">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q64DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selection ng-model="document.question64.documentReferenceIDs"
                                                                 ng-disabled="!document.government"
                                                                 question="question64"
@@ -1893,20 +1906,20 @@
                                             </div>
                                         </div>
                                     </div>
-                            </div>  
+                            </div>
 
                             <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="Notes"  bold="true" caption="Notes:">
                                             <!-- <div km-textbox-ml rows=4 name="question65FurtherInfo" ng-model="document.question65" locales="document.header.languages" placeholder="">
                                             </div> -->
-                                           <div class="help-block">The “Notes” field is for your personal notes or comments and will be hidden when
+                                           <div class="help-info">The “Notes” field is for your personal notes or comments and will be hidden when
                                             viewing the record. This field is not meant to be used for confidential information.</div>
                                             <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
                                             <!-- <div km-notes name="notes" ng-model="document.notes"></div>-->
                                         </div>
                                     </div>
-                            </div>  
+                            </div>
                         </div>
                   </div>
                 </div>
@@ -1944,5 +1957,5 @@
 
 
 
-</md-content>
+</div>
 </div>

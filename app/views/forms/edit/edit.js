@@ -5,12 +5,14 @@ define([
     '/app/views/forms/edit/field-embed-contact.directive.js',
     '/app/views/forms/edit/edit-contact-base.directive.js',
     '/app/views/forms/view/view-contact-reference.directive.js',
+    '/app/views/forms/view/view-default-reference.directive.js',
     '/app/views/forms/view/view-organization-reference.directive.js',
     '/app/views/forms/view/record-loader.directive.html.js',
     '/app/views/forms/view/view-organization.directive.js',
     '/app/views/forms/view/view-organization-reference.directive.js',
     '/app/views/forms/view/view-history-directive.html.js',
-    '/app/views/directives/workflow-std-buttons.html.js'
+    '/app/views/directives/workflow-std-buttons.html.js',
+     '/app/views/forms/edit/document-selector.html.js',
   ], function (app) {
 
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
@@ -20,55 +22,12 @@ define([
 
     $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
     // $scope.showHelp = {'show':true,'hasHelp':true, showTour:false};
- 
+
     $scope.status   = "loading";
     $scope.error    = null;
 
     $scope.tab      = "edit";
     $scope.review   = { locale: "en" };
-
-    //intro.js configurations
-	$scope.startTour=false;
-
-
-    $scope.introOptions = {
-      steps: [
-        {
-          intro: "Welcome to the introduction the ABSCH Dashboard. When the page is fully loaded click 'Next ->' to start the tour.",
-        },
-		{
-          element: '.stepedit',
-          intro: 'Use these panels to get an overview of your documents and requests, as well as view the detail lists of requests.',
-        },
-        {
-          element: '.stepreview',
-          intro: 'This feed give an overview of the activities of all members.',
-        },
-        {
-          element: '#stepdraft',
-          intro: 'To create a new document or view and edit current documents, select the type of document you want work with here.',
-          position: 'right',
-        },
-        {
-          element: '#steppublish',//steppublishRequest
-          intro: 'Blaise FOnsecaThese labels describe the number of documents in each phase.<br />Green is published<br />Gray is draft<br />Red is Requests',
-
-        },
-        {
-          element: 'input[type=text]',
-          intro: '<br />Green is published<br />Gray is draft<br />Red is Requests',
-        },
-        {
-          element: 'div[km-rich-textbox]',
-          intro: 'Febina Fonseca Gray is draft<br />Red is Requests',
-        },
-        {
-          element: 'div[km-link]',
-          intro: 'Febina Fonseca Gray is draft<br />Red is Requests',
-        }
-      ],
-    };
-
 
     $scope.options  = {
       countries		: function() {
@@ -85,26 +44,6 @@ define([
           return o.data;
         });
       },
-      //TODO: once multiple is ready, I'll use this instead of Regions
-      /*
-      regions2			: function() {
-        return $q.all([
-          $http.get("/api/v2013/thesaurus/domains/regions/terms", { cache: true }),
-          $http.get("/api/v2013/thesaurus/domains/countries/terms",   { cache: true })
-        ]).then(function(o) {
-          var regions2 = Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
-            Enumerable.from($filter("orderBy")(o[1].data, "name"))
-          ).toArray();
-
-          _.each(regions2, function(element) {
-            element.__value = element.name;
-          });
-
-          return regions2;
-        });
-      },
-      */
-
       regions			: function() {
         return $q.all([
           $http.get("/api/v2013/thesaurus/domains/regions/terms", { cache: true }),
@@ -154,7 +93,7 @@ define([
     $scope.$on("documentInvalid", function(){
       $scope.tab = "review";
     });
-    
+
     $scope.$on("clearDocumentErrors", function(){
       $scope.validationReport = {clearErrors:[]};
     });
@@ -195,6 +134,24 @@ define([
       return false;
   };
 
+    //==================================
+    //
+    //==================================
+    $scope.canAddRegionalMeasure = function(document) {
+      document = document || $scope.document;
+
+      if (!document)
+        return false;
+
+      if(document.jurisdiction.identifier == '528B1187-F1BD-4479-9FB3-ADBD9076D361' && (document.government.identifier == "eur" ||  document.government.identifier == "eu")){
+         document.jurisdictionRegions = [{"identifier":"bd12d7fb-91f7-4b2d-996c-e70f18a51f0e"}];
+         return true;
+      }
+
+      document.jurisdictionRegions = null;
+        return false;
+
+     };
 
     //==================================
     //
@@ -352,7 +309,7 @@ define([
     //
     //==================================
     $scope.loadRecords = function(identifier, schema, cache) {
-      
+
       if(cache == undefined) cache = true;
 
       if (identifier) { //lookup single record
@@ -387,9 +344,9 @@ define([
     }
 
     $scope.setDocument = function(additionalParams, excludeGovernment) {
-      
+
       $scope.status = "loading";
-      
+
       var qDocument = {};
       $scope.document = {};
       if($routeParams.identifier)
@@ -407,7 +364,7 @@ define([
           qDocument[key] = additionalParams[key];
         if(excludeGovernment)
           delete qDocument['government'];
-         
+
         // canCreate(qDocument);
       }
       /*
@@ -430,9 +387,9 @@ define([
         }
 
         $scope.$emit("loadDocument", {identifier:doc.header.identifier,schema:doc.header.schema});
-        
+
         $scope.status = "ready";
-        
+
       }).catch(function(err) {
 
         $scope.onError(err.data, err.status)
@@ -463,7 +420,7 @@ define([
         });
       }, 2000);
     });
-    
+
     function canCreate(document){
         $q.when(storage.drafts.security.canCreate(document.header.identifier, document.header.schema)).then(function(doc) {
             if(!doc.isAllowed){
@@ -475,7 +432,7 @@ define([
           throw err;
       });
     }
-    
+
     $rootScope.$on('$includeContentLoaded', function(event) {
 
       if($('#dialogCancel').length != 0){
@@ -506,7 +463,7 @@ define([
 
         $scope.origanalDocument = newDocument;
     });
-    
-    
+
+
   }]);
 });

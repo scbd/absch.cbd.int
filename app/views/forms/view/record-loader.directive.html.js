@@ -4,6 +4,11 @@ define(['app',
     '/app/js/common.js',
     '/app/views/directives/document-metadata-directive.html.js',
 	'/app/views/directives/help-directive.html.js',
+    '/app/views/directives/internal-record-details.js',
+    '/app/views/directives/party-status.js',
+    '/app/views/forms/view/view-default-reference.directive.js',
+    '/app/views/forms/view/view-contact-reference.directive.js',
+	'/app/services/search-service.js'
     ], function (app) {
 app.directive('recordLoader', [function () {
 	return {
@@ -15,10 +20,12 @@ app.directive('recordLoader', [function () {
 			linkTarget: "@",
 			document: "=",
 			locale  : "=",
-			hide: "@"
+			hide: "@",
+            showDetails: "="
 		},
 		link: function($scope) {
-			if(!$scope.linkTarget || $scope.linkTarget == '')
+
+            if(!$scope.linkTarget || $scope.linkTarget == '')
 				$scope.linkTarget = '_new';
 			//debugger;
 			$scope.internalDocument     = undefined;
@@ -28,41 +35,49 @@ app.directive('recordLoader', [function () {
 				$scope.init();
 		},
 		controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs","$timeout",
-		"$filter","$http","$http","realm", "$element", '$compile',
+		"$filter","$http","$http","realm", "$element", '$compile', 'searchService',
 			function ($scope, $route, storage, authentication, $q, $location,
-				commonjs,$timeout, $filter, $http, $httpAWS, realm, $element, $compile) {
+				commonjs,$timeout, $filter, $http, $httpAWS, realm, $element, $compile, searchService) {
 				var schemaMapping = {
 					news 				       : '/app/views/forms/view/view-news.directive.html.js',
-					absNationalReport 	       : '/app/views/forms/view/view-abs-national-report.directive.js',
-					absCheckpoint		       : '/app/views/forms/view/view-abs-checkpoint.directive.js',
-				    absCheckpointCommunique    : '/app/views/forms/view/view-abs-checkpoint-communique.directive.js',
-				    absPermit			       : '/app/views/forms/view/view-abs-permit.directive.js',
+					absnationalreport 	       : '/app/views/forms/view/view-abs-national-report.directive.js',
+					abscheckpoint		       : '/app/views/forms/view/view-abs-checkpoint.directive.js',
+				    abscheckpointcommunique    : '/app/views/forms/view/view-abs-checkpoint-communique.directive.js',
+				    abspermit			       : '/app/views/forms/view/view-abs-permit.directive.js',
 				    authority			       : '/app/views/forms/view/view-authority.directive.js',
-				    authorityReference	       : '/app/views/forms/view/view-authority-reference.directive.js',
+				    authorityreference	       : '/app/views/forms/view/view-authority-reference.directive.js',
 				    contact				       : '/app/views/forms/view/view-contact.directive.js',
-				    contactReference	       : '/app/views/forms/view/view-contact-reference.directive.js',
+				    contactreference	       : '/app/views/forms/view/view-contact-reference.directive.js',
 				    database			       : '/app/views/forms/view/view-database.directive.js',
 				    measure				       : '/app/views/forms/view/view-measure.directive.js',
 				    organization		       : '/app/views/forms/view/view-organization.directive.js',
-				    organizationReference      : '/app/views/forms/view/view-organization-reference.directive.js',
+				    organizationreference      : '/app/views/forms/view/view-organization-reference.directive.js',
 				    resource			       : '/app/views/forms/view/view-resource.directive.js',
-				    focalPoint			       : '/app/views/forms/view/view-focalpoint.directive.html.js',
+				    focalpoint			       : '/app/views/forms/view/view-focalpoint.directive.html.js',
 				    meeting				       : '/app/views/forms/view/view-meeting.directive.html.js',
 				    statement			       : '/app/views/forms/view/view-statement.directive.html.js',
-				    pressRelease		       : '/app/views/forms/view/view-pressrelease.directive.html.js',
+				    pressrelease		       : '/app/views/forms/view/view-pressrelease.directive.html.js',
+				    new					       : '/app/views/forms/view/view-new.directive.html.js',
 				    notification		       : '/app/views/forms/view/view-notification.directive.html.js',
-					capacityBuildingInitiative : '/app/views/forms/view/view-capacity-building-initiative.directive.js',
-					capacityBuildingResource   : '/app/views/forms/view/view-capacity-building-resource.directive.js'
+					capacitybuildinginitiative : '/app/views/forms/view/view-capacity-building-initiative.directive.js',
+					capacitybuildingresource   : '/app/views/forms/view/view-capacity-building-resource.directive.js'
 				}
 
 			$scope.$watch("document", function(_new) {
 				$scope.error = null;
 				$scope.internalDocument = _new;
-				if($scope.internalDocument){
-					loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema)
+				if($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)){
+					loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
+
 				}
 			});
 
+
+               $scope.getUserCountry = function(id){
+                        var term = {};
+                        term.identifier = id
+                        return $filter('term')(term);
+                   }
 			//==================================
 			//
 			//==================================
@@ -77,7 +92,8 @@ app.directive('recordLoader', [function () {
 				var documentSchema = $route.current.params.documentSchema;
 				var documentRevision = $route.current.params.revision;
 
-				var documentID = documentSchema ? commonjs.integerToHex($route.current.params.documentID, documentSchema) : $route.current.params.documentID;
+				var documentID = $route.current.params.documentID
+				//documentSchema ? commonjs.integerToHex($route.current.params.documentID, documentSchema) : $route.current.params.documentID;
 
 				if($scope.revisionNo)
 					documentRevision = $scope.revisionNo;
@@ -109,6 +125,7 @@ app.directive('recordLoader', [function () {
 						documentID = docNum[docNum.length-1];
 
 				}
+				documentID = commonjs.integerToHex(documentID, documentSchema);
 
 				$scope.loadDocument(documentSchema,documentID,documentRevision);
 				// else
@@ -116,18 +133,22 @@ app.directive('recordLoader', [function () {
 
 			}
 
+
+            //==================================
+			//
+			//==================================
 			$scope.loadDocument = function(documentSchema,documentID,documentRevision){
 
-				if(documentSchema && (documentSchema.toUpperCase()=="FOCALPOINT" || documentSchema.toUpperCase()=="MEETING" || documentSchema.toUpperCase()=="NOTIFICATION"
-				|| documentSchema.toUpperCase()=="PRESSRELEASE" || documentSchema.toUpperCase()=="STATEMENT" || documentSchema.toUpperCase()=="NEWS"))
+				if(documentSchema &&
+				_.contains(["FOCALPOINT", "MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "NFP", "ST", "NT", "MT", "PR", "MTD"],  documentSchema.toUpperCase()))
 				{
-					commonjs.getReferenceRecordIndex(documentSchema,documentID).then(function(data){
+					commonjs.getReferenceRecordIndex(documentSchema, documentID).then(function(data){
 						$scope.internalDocument = data.data;
 					});
 					loadViewDirective(documentSchema);
 				}
 				else if (documentID){
-					$scope.load(documentID,documentRevision);
+					$scope.load(documentID, documentRevision);
 				}
 			};
 
@@ -153,28 +174,40 @@ app.directive('recordLoader', [function () {
 				$scope.error = undefined;
 				var qDocument;
 				var qDocumentInfo;
-				if(version==undefined){
 
-					qDocument = storage.documents.get(identifier)
-									   .then(function(result) { return result.data || result });
+				var queryParameters = {
+					'query'    : 'uniqueIdentifier_s:*-' + identifier,
+					'rowsPerPage': 1,
+					fields		 : '_revision_i'
+				};
+				var qVersionInfo  = searchOperation = searchService.list(queryParameters, null);
+
+
+				if(version=='draft'){
+                    qDocument = storage.drafts.get(identifier).then(function(result) { return result.data || result });
+                    qDocumentInfo = storage.drafts.get(identifier,{ info: true}).then(function(result) { return result.data || result });
+                }
+                else if(version==undefined){
+					qDocument = storage.documents.get(identifier).then(function(result) { return result.data || result });
+                    qDocumentInfo = storage.documents.get(identifier,{ info: true}).then(function(result) { return result.data || result });
 				}
 				else{
-					qDocument = storage.documentVersions.get(identifier,{'version':version})
-									   .then(function(result) { return result.data || result });
-
-				//	qDocumentInfo = storage.documentVersions.get(identifier,{ info: true,'version':version }).then(function(result) { return result.data || result });
+					qDocument = storage.documents.get(identifier + '@' + version).then(function(result) { return result.data || result });
+                    qDocumentInfo = storage.documents.get(identifier + '@' + version,{ info: true}).then(function(result) { return result.data || result });
 
 				}
-				qDocumentInfo = storage.documents.get(identifier,{ info: true}).then(function(result) { return result.data || result });
-
-
-				$q.all([qDocument, qDocumentInfo]).then(function(results) {
+				$q.all([qDocument, qDocumentInfo, qVersionInfo]).then(function(results) {
 
 					$scope.internalDocument     = results[0];
 					$scope.internalDocumentInfo = results[1];
 					$scope.internalDocument.info = results[1];
 
-					$scope.documentVersionCount = $scope.internalDocumentInfo.revision
+					console.log(results[2].data.response.docs[0]);
+					if(results[2].data.response.docs.length >0){
+						$scope.documentVersionCount = results[2].data.response.docs[0]._revision_i
+					}
+					else
+						$scope.documentVersionCount = $scope.internalDocumentInfo.revision || $scope.internalDocumentInfo.Count;
 
 					if(version && $scope.internalDocumentInfo.revision != version){
 						$scope.internalDocumentInfo.revision = version;
@@ -186,11 +219,14 @@ app.directive('recordLoader', [function () {
 
 					loadViewDirective($scope.internalDocument.header.schema);
 
-				}).then(null, function(error) {
-					//debugger;
-					 // $scope.error = error.Message || error || "Http Error: " + errorCode;
-					 console.log( $scope.error );
-				})
+				}).catch(function(error){
+						if(error.status == 404 && version!= 'draft'){
+							$scope.load(identifier, 'draft');
+						}
+					})
+				.finally(function(){
+						$scope.loading = false;
+		        })
 
 			};
 
@@ -290,10 +326,21 @@ app.directive('recordLoader', [function () {
 				if(schema.toLowerCase() == 'modelcontractualclause' || schema.toLowerCase() == 'communityprotocol')
 					lschema = 'resource';
 
-				var schemaDetails = schemaMapping[lschema];
+				if(_.contains(["NEWS", "NEW",], lschema.toUpperCase()))
+					lschema = lschema.toLowerCase();
+				else if(_.contains(["NFP", "ST", "NT", "MT", "PR", "MTD"], lschema.toUpperCase()))
+					lschema = $filter("mapSchema")(lschema);
+
+				var schemaDetails = schemaMapping[lschema.toLowerCase()];
 
 				require([schemaDetails], function() {
+
+
+
 					var name = snake_case(lschema);
+
+
+
 					var directiveHtml =
 						"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
 						.replace(/DIRECTIVE/g, 'view-' + name);

@@ -1,80 +1,95 @@
-<div ng-hide="hideEverything">
+<div class="row" style="margin:0;padding:0;" ng-hide="hideEverything">
+    <div class="col-xs-12" style="margin-bottom:20px;">
+        
+        <div class="panel panel-danger" >
+            <div class="panel-heading bg-red">
+                <h3 style="padding:0;margin:0;" class="color-white">Publishing Request Pending</h3>
+                </div>
+            
+            <div class="panel-body">
+                Requested by: &nbsp; 
+                <span class="bold">
+                {{workflow.createdBy_info.firstName + ' ' + workflow.createdBy_info.lastName}}
+                <a ng-href="mailTo:{{workflow.createdBy_info.email}}" class="color-blue">({{workflow.createdBy_info.email}})</a>
+                <span class="unbold"> on </span>
+                {{workflow.createdOn | formatDateWithTime}}
+                </span>
+            </div>
 
-<style>
-.overlayDiv{
-		opacity:0.2;
-		z-index:100;
-		background:gray;
-	}
-</style>
-  <div ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'" >
+            <div ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'">
+                <div class="row row-centered"   style="margin:0;padding:0;" id="buttonsDiv"  ng-show="isAssignedToMe(activity)">
+                    <div class="col-xs-4 text-center" ng-show="isAssignedToMe(activity)">
+                        <button type="button" class="btn btn-success bold"  ng-click="updateActivity({ action : 'approve' })"
+                        ng-disabled="isUpdating">
+                            <i class="fa fa-check-circle"></i>
+                            <span class="hidden-xs">APPROVE</span>
+                        </button>
+                    </div>
+                    <div class="col-xs-4 text-center" ng-show="!isUpdating" >
+                        <a type="button" class="btn btn-info bold  color-white"  ng-href="/register/{{workflow.data.metadata.schema | schemaShortName}}/{{activity.input.identifier}}/edit?workflow={{workflowTaskId}}">
+                            <i class="fa fa-pencil-square-o"></i>
+                            <span class="hidden-xs">EDIT</span></a>
 
-    <div class="row row-centered" id="buttonsDiv"  style="margin-bottom:15px;border-top:1px dashed #333;border-bottom:1px dashed #333;padding-bottom:15px;padding-top:15px;" ng-show="isAssignedToMe(activity)">
-
-      <div class="col-xs-4">
-        <button type="button" class="btn btn-lg btn-success" style="width:140px;" ng-click="updateActivity({ action : 'approve' })" ng-disabled="isUpdating">
-          <i class="glyphicon glyphicon-ok"></i>
-          <br>APPROVE
-        </button>
-
-      </div>
-	  <div class="col-xs-4" ng-show="!isUpdating">
-		<a type="button" class="btn btn-lg btn-info" style="width:140px;" ng-href="/register/{{workflow.data.metadata.schema | schemaShortName}}/{{activity.input.identifier}}/edit?workflow={{workflowTaskId}}">
-			<i class="glyphicon glyphicon-edit"></i>
-			<br>EDIT</a>
-
-	  </div>
-      <div class="col-xs-4" ng-show="isUpdating">
-        <a type="button" class="btn btn-lg btn-info" style="width:140px;" >
-          <i class="fa fa-cog fa-spin fa-lg" id="spinner"  style="display:none"/>
-          <br>EDIT</a>
-      </div>
-
-      <div class="col-xs-4">
-        <button type="button" class="btn btn-lg btn-warning" style="width:140px;" data-toggle="modal" data-target="#rejectModal{{workflowTaskId}}" ng-disabled="isUpdating">
-          <i class="glyphicon glyphicon-remove"></i>
-          <br>REJECT
-        </button>
-      </div>
-
-
+                    </div>
+                    <div class="col-xs-4 text-center" ng-show="isUpdating" >
+                        <a type="button" class="btn btn-info bold color-white" >
+                            <i class="fa fa-cog fa-spin fa-lg" id="spinner" style="display:none" />
+                            <span class="hidden-xs">EDIT</span></a>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <button type="button" class="btn btn-warning bold"  ng-click="showRejectDialog()"
+                        ng-disabled="isUpdating">
+                            <i class="fa fa-times-circle"></i>
+                           <span class="hidden-xs"> REJECT</span>
+                        </button>
+                    </div> 
+                </div>
+                <div class="row" style="margin:0;padding:0;" ng-show="workFlowIsCreatedByMe()">
+                    <div class="col-xs-12">
+                        <button type="button" class="btn btn-warning bold"  ng-click=""  ng-disabled="isUpdating">
+                            <i class="fa fa-rotate-left"></i>
+                           <span class="hidden-xs"> Cancel Publishing Request</span>
+                           
+                        </button>
+                        
+                    </div> 
+                </div>
+            </div>
+            <div class="panel-footer" style="margin-top:20px;">
+                <span>This request will automatically expire in <span class="color-red bold">{{workflow.daysToApproval}} days</span> </span> 
+            </div>
+        </div>
+        
+          
     </div>
+    
+     <div class="col-xs-12">
+      <div ng-show="document" class="t-document">
+                <record-loader show-details="showDetails"  class="shadow-z-2" hide-buttons="true" link-target="_self"></record-loader>
+            </div>
+     </div>
 
     <form name="rejectForm" role="form">
-      <div class="modal fade" id="rejectModal{{workflowTaskId}}">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title">Request Changes or Reject a record revision</h4>
+        <div class="modal fade" id="rejectModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-red">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title color-white">Request Changes or Reject a record version</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p ng-class="{ 'has-warning':rejectForm.reason.$error.required, 'has-success':!rejectForm.reason.$invalid }">
+                            <span ng-show="rejectForm.reason.$error.required">Please provide the reason this records is being rejected.</span>
+                            <textarea class="form-control" rows="5" name="reason" ng-model="rejectReason" required></textarea>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger bold" data-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="fa fa-times-circle"></i> Reject</button>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-              <p ng-class="{ 'has-warning':rejectForm.reason.$error.required, 'has-success':!rejectForm.reason.$invalid }">
-                <textarea class="form-control" rows="5" name="reason" ng-model="rejectReason" required></textarea>
-                <span class="help-block" ng-show="rejectForm.reason.$error.required">Please provide instructions on how you want the record to be modified or the reason why you rejected this record.</span>
-              </p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-warning" data-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="glyphicon glyphicon-remove"></i> Request Changes / Reject</button>
-            </div>
-          </div>
         </div>
-      </div>
     </form>
 
-  </div>
-	<div ng-show="document" class="t-document">
-	<record-loader document="document" class="shadow-z-2" hide-buttons="true" link-target="_self"></record-loader>
-	</div>
-
-  <style>
-    .text {
-      font-size: 12px;
-      font-weight: bold;
-      color: #333;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-  </style>
 </div>

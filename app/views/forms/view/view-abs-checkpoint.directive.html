@@ -5,15 +5,16 @@
 		<!--<span style="text-transform:uppercase;">ABSCH-CP-{{document.government.identifier}}-{{document.info.documentID}}</span> -->
 		</h4> </div>
 
-	<div class="record-body panel-body" help schema="ViewCP" show-help="showHelp">
+	<div class="record-body panel-body" help schema="ViewCP" >
 		 <div name="article17-1-a"></div>
 
 		<legend ng-if="document.government || document.name">General information</legend>
 
 		<div ng-show="document.government">
-			<label name="country">Country <span class="help-block">The country publishing this record.</span></label>
-			<div class="km-value">
+			<label name="country">Country</label>
+			<div class="km-value" >
 				{{document.government|term}}
+                <span ng-party-status government="document.government" id="government"></span>
 			</div>
 		</div>
 
@@ -51,27 +52,27 @@
 			</div>-->
 		</div>
 
-		<div ng-if="document.informAllAuthorities || document.authoritiesToInform || document.contactsToInfor" >
+		<div ng-if="document.informAllAuthorities || document.contactsToInform" >
 			<legend>Authority/ies to receive courtesy copies of checkpoint communiqués of the information collected or received from this checkpoint</legend>
 
-			<div class="help-block" style="padding-top:10px;">All national authorities and contacts indicated below will receive email copies of checkpoint communiqués containing the information collected or received and published from this checkpoint. Please note that the national authorities providing prior informed consent (PIC) will also automatically receive email copies of all published checkpoint communiqués (CPC). The ABSCH can not guarantee that emails have been received or read.</div>
+			<div class="help-info" style="padding-top:10px;">All national authorities and contacts indicated below will receive email copies of checkpoint communiqués containing the information collected or received and published from this checkpoint. Please note that the national authorities providing prior informed consent (PIC) will also automatically receive email copies of all published checkpoint communiqués (CPC). The ABSCH can not guarantee that emails have been received or read.</div>
 			<div class="km-value" ng-show="document.informAllAuthorities">
 
 				<a href="/search/countries/{{document.government.identifier}}" target="_new"> All national competent authorities ({{document.government|term}}) </a> have been selected to automatically receive checkpoint communiqués by email published from this checkpoint.
 			</div>
-			<div ng-show="document.authoritiesToInform">
-				<div class="km-value" ng-repeat="authority in authoritiesToInform">
-					<div class="view-authority-reference" ng-model="authority.document" locale="locale"></div>
+          
+			<div ng-show="document.contactsToInform">
+				<div class="km-value" ng-repeat="authority in document.contactsToInform">
+                    <div view-contact-reference ng-model="authority" locale="locale"></div>
 				</div>
 			</div>
-			<div ng-show="document.contactsToInform" class="row">
-				<!--<label ng-if="document.informAllAuthorities || document.authoritiesToInform">Additional National Authorities to receive checkpoint communiqués by email from this checkpoint</label>-->
+			<!--<div ng-show="document.contactsToInform" class="row">
 				<div ng-repeat="contact in document.contactsToInform">
 					<div class="col-xs-12">
 						<div view-contact-reference ng-model="contact" locale="locale" class="well"></div>
 					</div>
 				</div>
-			</div>
+			</div>-->
 
 			<div class="km-value" ng-show="!document.informAllAuthorities && !document.authoritiesToInform && !document.contactsToInform">
 				<span >No additional authorities have been selected to receive the automatic email copies of checkpoint communiqués published from this checkpoint. </span>
@@ -94,13 +95,9 @@
 				</div>
 			</div>
 		</div>
-        <div class="row" style="padding-top:10px;" ng-show="document.info.revision">
-            <div class="col-xs-12">
 
-                <div view-history document-id="document.header.identifier" load-documents="true"
-                government="document.government.identifier"></div>
-            </div>
-        </div>
 	</div>
-	<div document-metadata  class="panel-footer" ng-show="display('footer')" ></div>
+	
+	 <div document-metadata class="panel-footer"></div>
+
 </div>

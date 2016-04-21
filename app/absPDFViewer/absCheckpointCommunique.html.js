@@ -43,66 +43,132 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 	    return $sce.trustAsHtml($filter("lstring")(html_code,sLocale));
 	};
 
-
 	function getContacts(document){
-		$scope.emailList = [];
+
+	    $scope.emailList = [];
 		if(document.permit){
-				angular.forEach(document.permit, function(permit){
-					if(permit.document.authority  && (permit.document.authority.title_t || permit.document.authority.firstName))
-						$scope.emailList.push(permit.document.authority);
-				})
+
+				var permits = _.map(document.permit, function(document){
+					return $http.get('/api/v2013/documents/' +  document.identifier)
+				});
+				$q.all(permits)
+				.then(function(results){
+					_.each(results, function(result){
+						$scope.emailList.push({identifier:result.data.authority.identifier})
+					});
+				});
 		}
 		else if(document.responsibleAuthorities){
 			$scope.emailList.push(document.personeToWhomGranted);
 		}
 		else if(document.originCountries){
 
-			var country = _.map(document.originCountries, function(country){ return country.identifier })
-			var query = "/api/v2013/index/select?fl=id,identifier_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
+			var country = _.map(document.originCountries, function(country){ return country.identifier });
+			var query = "/api/v2013/index/select?fl=id,identifier_s&q=(realm_ss:" + realm.value.toLowerCase() +
 			"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:" + country.join('+OR government_s:') + "))&rows=50"
 
 			$http.get(query).success(function(res) {
-				var cnaQuery=[]
 				angular.forEach(res.response.docs, function(cna){
-					cnaQuery.push($http.get('/api/v2013/documents/' + cna.identifier_s, {}));
+					$scope.emailList.push({identifier: cna.identifier_s});
 				});
-				$q.all(cnaQuery).then(function(data){
-					angular.forEach(data, function(document){
-						$scope.emailList.push(document);
-					});
-				})
 			});
 		}
 		if(document.checkpoint){
-			angular.forEach(document.checkpoint, function(checkpoint){
-				if(checkpoint.contactsToInform)
-					angular.forEach(checkpoint.contactsToInform, function(contact){
-						$scope.emailList.push(contact);
-					});
+			var checkpoints = _.map(document.checkpoint, function(document){
+				return $http.get('/api/v2013/documents/' +  document.identifier)
+			});
+			$q.all(checkpoints)
+			.then(function(results){
+				 _.each(results, function(result){
+					_.each(result.data.contactsToInform, function(contacts){
+						   $scope.emailList.push({identifier:contacts.identifier})
+					 });
+				});
 			});
 		}
-		var government =  document.government.identifier;
-		var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
-		"+organization_EN_t,telephone_s,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
-		"+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(type_ss:NP-FP+OR+type_ss:ABS-FP)+AND+(government_s:" + government + "))&rows=50";
+	    if(document.government){
+	        var government =  document.government.identifier;
+	        var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
+	        "+organization_EN_t,telephone_s,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
+	        "+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(government_s:" + government + "))&rows=50";
 
-		$http.get(query).success(function(res) {
-			angular.forEach(res.response.docs, function(nfp){
-				console.log(nfp);
-					$scope.emailList.push(
-							{
-								type:'person',
-								firstName:nfp.title_t,
-								addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
-								country: nfp.addressCountry_s,
-								phones:[nfp.telephone_s],
-								faxes:nfp.fax_ss,
-								emails:nfp.email_ss
-							});
-			});
-			console.log(	$scope.emailList);
-		});
+	        $http.get(query).success(function(res) {
+	            angular.forEach(res.response.docs, function(nfp){
+	                    $scope.emailList.push(
+	                            {
+									header	: {identifier:nfp.identifier_s},
+									type:'person',
+	                                firstName:nfp.title_t,
+	                                addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
+	                                country: nfp.addressCountry_s,
+	                                phones:[nfp.telephone_s],
+	                                faxes:nfp.fax_ss,
+	                                emails:nfp.email_ss
+	                            });
+	            });
+	        });
+	    }
 	}
+
+	// function getContacts(document){
+	// 	$scope.emailList = [];
+	// 	if(document.permit){
+	// 			angular.forEach(document.permit, function(permit){
+	// 				if(permit.document.authority  && (permit.document.authority.title_t || permit.document.authority.firstName))
+	// 					$scope.emailList.push(permit.document.authority);
+	// 			})
+	// 	}
+	// 	else if(document.responsibleAuthorities){
+	// 		$scope.emailList.push(document.personeToWhomGranted);
+	// 	}
+	// 	else if(document.originCountries){
+	//
+	// 		var country = _.map(document.originCountries, function(country){ return country.identifier })
+	// 		var query = "/api/v2013/index/select?fl=id,identifier_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
+	// 		"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:" + country.join('+OR government_s:') + "))&rows=50"
+	//
+	// 		$http.get(query).success(function(res) {
+	// 			var cnaQuery=[]
+	// 			angular.forEach(res.response.docs, function(cna){
+	// 				cnaQuery.push($http.get('/api/v2013/documents/' + cna.identifier_s, {}));
+	// 			});
+	// 			$q.all(cnaQuery).then(function(data){
+	// 				angular.forEach(data, function(document){
+	// 					$scope.emailList.push(document);
+	// 				});
+	// 			})
+	// 		});
+	// 	}
+	// 	if(document.checkpoint){
+	// 		angular.forEach(document.checkpoint, function(checkpoint){
+	// 			if(checkpoint.contactsToInform)
+	// 				angular.forEach(checkpoint.contactsToInform, function(contact){
+	// 					$scope.emailList.push(contact);
+	// 				});
+	// 		});
+	// 	}
+	// 	var government =  document.government.identifier;
+	// 	var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
+	// 	"+organization_EN_t,telephone_s,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
+	// 	"+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(type_ss:NP-FP+OR+type_ss:ABS-FP)+AND+(government_s:" + government + "))&rows=50";
+	//
+	// 	$http.get(query).success(function(res) {
+	// 		angular.forEach(res.response.docs, function(nfp){
+	// 			console.log(nfp);
+	// 				$scope.emailList.push(
+	// 						{
+	// 							type:'person',
+	// 							firstName:nfp.title_t,
+	// 							addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
+	// 							country: nfp.addressCountry_s,
+	// 							phones:[nfp.telephone_s],
+	// 							faxes:nfp.fax_ss,
+	// 							emails:nfp.email_ss
+	// 						});
+	// 		});
+	// 		console.log(	$scope.emailList);
+	// 	});
+	// }
 
 
 }]);

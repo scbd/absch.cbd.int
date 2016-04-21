@@ -92,11 +92,18 @@ app.controller("myTasksCotroller", [ "$scope", "$timeout", "IWorkflows", "realm"
                             //tasks = _.clone($scope.taskLists||[]);
         					workflows.forEach(function(workflow) {
 
-        						workflow.activities.forEach(function(activity){
-        								tasks.push({ workflow : workflow, activity : activity,
+                                if(!workflow.workflowAge){
+                                    workflow.workflowAge = {'age':12,'type':'weeks'};
+                                }
+                                workflow.workflowExpiryDate = moment(workflow.createdOn)
+                                                                    .add(workflow.workflowAge.age,workflow.workflowAge.type);
+        						// workflow.activities.forEach(function(activity){
+        								tasks.push({ workflow : workflow, //activity : activity,
                                                     identifier: workflow.data.identifier,
-                                                    isActive : $routeParams.workflowId && workflow._id==$routeParams.workflowId ? true : false});
-                                });
+                                                    isActive : $routeParams.workflowId && workflow._id==$routeParams.workflowId ? true : false,
+                                                    activity : _.last(workflow.activities)
+                                                });
+                                // });
         					});
 
         					$scope.taskLists = _.union(tasks, $scope.taskLists);//$filter("orderBy")(tasks,'workflow.createdOn',true);

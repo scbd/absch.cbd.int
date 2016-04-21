@@ -1,19 +1,20 @@
 ﻿<div id="Record" class="record panel panel-default">
 
 	<div class="panel-heading bg-blue" ng-show="display('header')">
-		<h4>Information for the Checkpoint Communiqué
+		<h4>Checkpoint Communiqué
 		<span class="color-black"> (CPC) </span> </h4>
 	</div>
 	<div class="record-body panel-body">
-			<div class="pull-right" ng-if="showPdf">
-				<a class="btn btn-primary" target="_blank" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
-			</div>
+
     	   	<div ng-show="document.government || document.checkpoint">
-				<legend>General information</legend>
+				<legend>
+                    <a ng-if="showPdf" class="pull-right btn btn-default" target="_blank" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
+                    General information</legend>
 				<div ng-show="document.government">
 					<label>Country issuing this checkpoint communique</label>
 					<div class="km-value" >
 						{{document.government|term:locale}}
+                        <span ng-party-status government="document.government" id="government"></span>
 					</div>
 				</div>
 			</div>
@@ -28,9 +29,8 @@
 				<legend>Checkpoint/s that collected or received the information</legend>
 				<div class="km-value">
 					<ul>
-						<li ng-repeat="checkpoint in document.checkpoint">
-							{{checkpoint.name | lstring:locale}} <a ng-href="#" ng-click="showcp= !showcp" class="btn btn-xs btn-info">{{showcp ? "- less" : "+ more"}} details</a>
-							<div ng-show="showcp" view-abs-checkpoint  ng-model="checkpoint" document-info="checkpoint" hide="footer" locale="getLocale()" link-target={{linkTarget}}></div>
+						<li ng-repeat="item in document.checkpoint">
+							 <div view-default-reference ng-model="item.identifier" locale="locale"></div>
 						</li>
 					</ul>
 				</div>
@@ -39,23 +39,23 @@
 				<legend>Recipients of the Checkpoint Communiqué</legend>
 				<div class="row">
 					<div class="col-xs-12 col-lg-12" >
-						<div class="help-block color-red"  >
-							Note: The ABS Clearing-House can not guarantee the receipt of automatically generated emails. </br>
+						<div class="help-info color-red"  >
+							Note: The ABS Clearing-House does not guarantee the receipt of automatically generated emails. </br>
 						</div>
 					</div>
 				</div>
-				<div >
+				<div ng-if="emailList">
 		            <div class="row top-border bg-lightblue">
 		                <div ng-repeat="contact in emailList" class="">
 		                    <div class="col-xs-12">
-		                        <div class="well">
+		                        <div class="km-value">
 		                            <div view-contact-reference ng-model="contact" locale="locale"></div>
 		                        </div>
 		                    </div>
 		                </div>
 		            </div>
 				</div>
-			<div>
+			</div>
 
 			<div ng-show="document.permit || document.permitNotAvailable ||
 						document.originCountries || responsibleAuthority ||
@@ -67,11 +67,10 @@
 					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
 					<div class="km-value">
 						<ul>
-							<li ng-repeat="permit in document.permit">
-								<a href="/database/record?documentSchema=ABSPERMIT&documentID={{permit | lstring:locale| uniqueIDWithoutRevision}}">{{permit | lstring:locale | uniqueIDWithoutRevision}}</a>
+							<li ng-repeat="item in document.permit">
+								 <div view-default-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
 						</ul>
-
 					</div>
 				</div>
 				<div ng-show="document.permitNotAvailable" class="km-value">
@@ -80,7 +79,7 @@
 				<div ng-show="document.originCountries || document.responsibleAuthorities ||
 					document.specimen || document.taxonomy || document.gisFiles || document.subjectMatter ||
 					document.referenceOfInformedConsent || document.referenceOfAgreedTerms ||
-					document.personeToWhomGranted || document.keywords">
+					document.personeToWhomGranted || document.keywords || document.dateOfAccess"">
 					<div ng-show="document.originCountries">
 						<label>Source of the genetic resource</label>
 						<div class="km-value">
@@ -151,10 +150,7 @@
 						<div class="km-value km-pre"ng-bind-html="document.referenceOfInformedConsent | lstring:locale"></div>
 					</div>
 
-					<div ng-show="document.referenceOfAgreedTerms">
-						<label>Reference or evidence of establishment of mutually agreed terms</label>
-						<div class="km-value km-pre"ng-bind-html="document.referenceOfAgreedTerms | lstring:locale"></div>
-					</div>
+
 
 					<div ng-show="document.personeToWhomGranted">
 						<label>Person or entity to whom prior informed consent was granted</label>
@@ -162,6 +158,17 @@
 							<div view-contact-reference ng-model="document.personeToWhomGranted" locale="locale"></div>
 						</div>
 					</div>
+
+                    <div ng-show="document.referenceOfAgreedTerms">
+						<label>Reference or evidence of establishment of mutually agreed terms</label>
+						<div class="km-value km-pre"ng-bind-html="document.referenceOfAgreedTerms | lstring:locale"></div>
+					</div>
+
+                    <div ng-show="document.dateOfAccess">
+					    <label>Date of access to the genetic resource</label>
+					    <div class="km-value">{{document.dateOfAccess}}</div>
+				    </div>
+
 				</div>
 			</div>
 			<div ng-show="document.description || document.dateFrom || document.dateTo ||
@@ -201,7 +208,8 @@
 					<div class="km-value km-pre">{{document.information | lstring:locale}}</div>
 				</div>
 			</div>
-			<div ng-show="document.relevantInformation||document.relevantDocuments">
+
+            <div ng-show="document.relevantInformation||document.relevantDocuments">
 				<legend>Additional Information</legend>
 
 				<div ng-show="document.relevantInformation">
@@ -217,14 +225,10 @@
 				</div>
 			</div>
 
-            <div class="row" style="padding-top:10px;" ng-show="document.info.revision">
-                <div class="col-xs-12">
-                    <label>Record history</label>
-                    <div view-history document-id="document.header.identifier" load-documents="true"
-                    government="document.government.identifier"></div>
-                </div>
-            </div>
+
 
 	</div>
-	<div document-metadata  class="panel-footer" ></div>
+	<div class="panel-footer">
+        <div document-metadata ></div>
+    </div>
 </div>

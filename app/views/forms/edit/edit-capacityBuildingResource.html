@@ -1,9 +1,10 @@
-<div class="md-whiteframe-z2" ng-controller="editCapacityBuildingResource">
+<div ng-controller="editCapacityBuildingResource">
 
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
 
-    <md-content layout-padding style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
 
+                <span block-region activate="isLoading()" ng-if="isLoading()"></span>
         <div class="registerpage-content">
 
             <div class="alert alert-success alert-dismissable" ng-show="msg">
@@ -94,7 +95,7 @@
     					<div class="row">
     						<div class="col-md-12">
     							<div class="km-control-group" required name="authors" caption="Author(s)">
-    								<div class="help-block">Name of the person who has authored the publication or information resource.</div>
+    								<div class="help-info">Name of the person who has authored the publication or information resource.</div>
     								<div km-textbox-ml required ng-model="document.authors" rows="2" locales="document.header.languages"></div>
     							</div>
     						</div>
@@ -103,7 +104,16 @@
     					<div class="row">
     						<div class="col-md-12">
                                 <div class="km-control-group" name="organizations" caption="Reference to the authoring organisation(s)">
-                                    <field-embed-contact organization-only multiple ng-model="document.organizations" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>
+                                    
+                                    <div document-selector ng-model="document.organizations"
+                                                                        question="organizations"
+                                                                        schema="contact"
+                                                                        government="document.government"
+                                                                        filter="true"
+                                                                        ></div>
+                                    
+                                    
+                                    <!--<field-embed-contact multiple ng-model="document.organizations" locales="document.header.languages" caption="{{'Add an organization »'}}"></field-embed-contact>-->
                                 </div>
     							<!-- <div class="km-control-group" name="organizations" caption="Reference to the authoring organisation(s)">
     								<div km-reference multiple name="organizations" ng-model="document.organizations" loader="loadRecords(identifier, 'organization')" order-by="sortContacts(reference)">
@@ -127,7 +137,7 @@
     					<div class="row">
     						<div class="col-md-12">
     							<div class="km-control-group" name="rights" caption="Rights">
-    								<div class="help-block">Information about rights held in and over the resource, such as copyright holder, and availability for reproduction for educational or non-profit purposes.</div>
+    								<div class="help-info">Information about rights held in and over the resource, such as copyright holder, and availability for reproduction for educational or non-profit purposes.</div>
     								<div km-textbox-ml name="rights" ng-model="document.rights" locales="document.header.languages"></div>
     							</div>
     						</div>
@@ -136,7 +146,7 @@
     					<div class="row">
     						<div class="col-md-12">
     							<div class="km-control-group" name="source" caption="Source">
-    								<div class="help-block">A reference to a resource from which the present resource is derived (e.g. an article from a journal). For original documents you may wish to specify "original document".</div>
+    								<div class="help-info">A reference to a resource from which the present resource is derived (e.g. an article from a journal). For original documents you may wish to specify "original document".</div>
     								<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
     							</div>
     						</div>
@@ -147,7 +157,7 @@
     					<div class="row">
     						<div class="col-md-12">
     							<div class="km-control-group" required name="resourceLinks" caption="Link to the resource(s)">
-    								<div class="help-block">Please always attach the relevant document(s) that will be stored in the database for users to download. When resources are available on the Internet, please also provide a link to them.</div>
+    								<div class="help-info">Please always attach the relevant document(s) that will be stored in the database for users to download. When resources are available on the Internet, please also provide a link to them.</div>
     								<div km-link name="resourceLinks" required ng-model="document.resourceLinks" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
     							</div>
     						</div>
@@ -156,7 +166,7 @@
     					<div class="row">
     						<div class="col-md-12">
     							<div class="km-control-group" name="cover" caption="Cover image(s)">
-    								<div class="help-block">Only JPEG and PNG formats are supported.</div>
+    								<div class="help-info">Only JPEG and PNG formats are supported.</div>
     								<div km-link name="cover" ng-model="document.covers" allow-link="false" allow-file="true" mime-types="image/jpeg;image/png" identifier="document.header.identifier"></div>
     							</div>
     						</div>
@@ -196,7 +206,7 @@
     					<div class="row">
     						<div class="col-md-12">
     							<div class="km-control-group" name="address" caption="Any other relavent information">
-    								<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+    								<div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
     								<div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
     							</div>
     						</div>
@@ -210,18 +220,17 @@
     						</div>
     					</div>
 
-                        <section>
-                            <legend>Notes</legend>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="km-control-group" name="notes">
-                                        <div class="help-block">The “Notes” field is for your personal notes or comments and will be hidden when
-                                            viewing the record. This field is not meant to be used for confidential information.</div>
-                                        <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+    					<div class="row">
+    						<div class="col-md-12">
+    							<div class="km-control-group" name="notes">
+    								<legend>Notes</legend>
+    								<span class="help-info">
+    									The field “Notes” is for personal reference and can be seen only when the record is being edited.
+    								</span>
+    								<div km-notes name="notes" ng-model="document.notes"></div>
+    							</div>
+    						</div>
+    					</div>
     				</div>
 
 				</form>
@@ -241,5 +250,5 @@
     </div>
 </div>
 
-</md-content>
+</div>
 </div>

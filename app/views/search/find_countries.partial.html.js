@@ -185,7 +185,7 @@ define(['app', 'underscore', '/app/js/common.js'], function(app, _) {
           $scope.refresh = buildQuery;
 
           $scope.$watch('externalFilter', function(newValue, oldValue) {
-            console.log(oldValue, newValue);
+//console.log(oldValue, newValue);
             if(oldValue && newValue && oldValue.length > newValue.length){ //i.e filter had been removed.
                 var removedFilter = _.without(oldValue, newValue);
                 console.log(removedFilter);

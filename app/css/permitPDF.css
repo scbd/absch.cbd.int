@@ -123,3 +123,34 @@ background-size: 150px;
 a[href]:after {
     content: '';
 };
+ .selected-reference-uid{
+            font-size:14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            padding-right:5px;
+            border-right:1px solid #ddd;
+            display:inline;
+            
+        }
+        .selected-reference-name{
+            font-size:12px;
+            font-weight: 500;
+            /*text-transform: uppercase;*/
+             padding-right:5px;
+              padding-left:5px;
+            border-right:1px solid #ddd;
+            color:#333;
+             display:inline;
+            
+            
+        }
+        .selected-reference-title{
+            font-size:12px;
+            font-weight: 500;
+            /*text-transform: uppercase;*/
+            padding-left:5px;
+            color:#333;
+            display:inline;
+            
+            
+        }
