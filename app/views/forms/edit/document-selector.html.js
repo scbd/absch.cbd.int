@@ -102,7 +102,8 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 					}
 					else{
 	                    _.each($scope.model, function (mod) {
-							docs.push(IStorage.documents.get(mod.identifier));
+							if(mod.identifier)
+								docs.push(IStorage.documents.get(mod.identifier));
 	                    });
 					}
 
