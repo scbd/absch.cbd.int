@@ -34,6 +34,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         })
                     ]).then(function(o) {
                         var data = getABSMeasure();
+                        data = updateABSMeasureText(data);
                         //TODO: this function appears generic to returning from .all, perhaps cut code by making this function and reusing it?
                         //   var data = o[0].data;
                         //data.push(o[1].data);
@@ -1004,6 +1005,71 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 }]
             }
 
+            function updateABSMeasureText(data){
+
+                var absMeasureUpdatedText = {
+                    "08B2CDEC-786F-4977-AD0A-6A709695528D": {
+                        "title": {
+                        "en": "Does the measure cover access?"
+                        }
+                    },
+                    "1E824A31-BDFB-4C47-9593-8006B5FC7D60":{
+                        "title": {"en": "Does it cover access to genetic resources?"}
+                    },
+                    "5427EB8F-5532-4AE2-88EE-5B9619917480": {
+                        "title": {
+                            "en": "Does it cover access to traditional knowledge associated with genetic resources?"
+                        }
+                    },
+                    "5427EB8F-5532-4AE2-88EE-5B961BLAISE4":{
+                        "title": {
+                            "en": "Does the measure provides for the issuance of a permit of its equivalent at the time of access for constituting an internationally recognized certificate of compliance?"
+                        }
+                    },
+                    "5427EB8F-5532-4AE2-88EE-5B961BLAISE5":{
+                        "title": {
+                            "en": "Does the measure establish rules and procedures for mutually agreed terms?"
+                        }
+                    },
+                    "9847FA8A-16C3-4466-A378-F20AF9FF883B":{
+                        "title": {
+                            "en": "Does the measure cover benefit-sharing?"
+                        }
+                    },
+                    "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63":{
+                        "title": {
+                            "en": "Does the measure cover compliance?"
+                        }
+                    },
+                    "4C57FDB4-3B92-46DD-B4C2-BB93DBLAISE8":{
+                        "title": {
+                            "en": "Does it cover compliance with domestic legislation or regulatory requirements of the other Party (Article 15 and 16)?"
+                        }
+                    },
+                    "4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C":{
+                        "title": {
+                            "en": "Does it cover issues related to monitoring the utilization of genetic resources (Article 17)?"
+                        }
+                    },
+                    "1FCC6CA9-022F-42FD-BD02-43AE674FEB56":{
+                        "title": {
+                            "en": "Does it cover compliance with mutually agreed terms (Article 18)?"
+                        }
+                    },
+                    "01DA2D8E-F2BB-4E85-A17E-AB0219194A17":{
+                        "title": {
+                            "en": "Does this measure include provisions on how its application relates to other international instruments?"
+                        }
+                    }
+                }
+
+                _.each(data, function(element){
+                    if(absMeasureUpdatedText[element.identifier]){
+                        element.title = absMeasureUpdatedText[element.identifier].title;
+                    }
+                });
+                return data;
+            }
             // {
             //     "identifier": "1E824A31-BDFB-4C47-9593-8006B5BLAISE1*****",
             //     "name": "Does the measure cover access?",
@@ -1528,7 +1594,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
                 };
 
-                $scope.isStaticIdentifier = function(identifier) {
+                $scope.cIdentifier = function(identifier) {
                     //use indexof to catch #others
                     return _.indexOf(staticIdentifiers, identifier)>=0
                 }
