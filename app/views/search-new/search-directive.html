@@ -54,15 +54,15 @@
         </div>
     </div>
 
-    <div class="container-fluid" style="padding-top:10px;">
+    <div class="container-fluid" style="margin-top:10px;">
 
         <div class="row" style="padding:10px 0 0 0;margin:0px;">
             <div class="col-xs-12" style="padding:0;margin:0;">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" >
-                    <li ng-class="{'active':currentTab==='nationalRecords'}"><a href="#" class="color-blue" ng-click="updateCurrentTab('nationalRecords')">National <span class="hidden-xs">records</span> <span class="pull-right badge bg-blue" style="margin-left:10px;position:relative;top:2px;">{{recordCount[0].count}}</span></a></li>
-                    <li ng-class="{'active':currentTab==='referenceRecords'}"><a href="#" class="color-orange" ng-click="updateCurrentTab('referenceRecords')">Reference <span class="hidden-xs">records</span> <span class="pull-right badge bg-orange" style="margin-left:10px;position:relative;top:2px;">{{recordCount[1].count}}</span></a></li>
-                    <li ng-class="{'active':currentTab==='scbdRecords'}"><a href="#" class="color-darkgrey" ng-click="updateCurrentTab('scbdRecords')">SCBD <span class="hidden-xs">records</span> <span class="pull-right badge" style="margin-left:10px;position:relative;top:2px;">{{recordCount[2].count}}</span></a></li>
+                    <li ng-class="{'active':currentTab==='nationalRecords'}"><a href="#" class="color-blue" ng-click="updateCurrentTab('nationalRecords')">National <span class="hidden-xs">records</span> <span class="badge bg-blue" style="margin-left:10px;">{{recordCount[0].count}}</span></a></li>
+                    <li ng-class="{'active':currentTab==='referenceRecords'}"><a href="#" class="color-orange" ng-click="updateCurrentTab('referenceRecords')">Reference <span class="hidden-xs">records</span> <span class=" badge bg-orange" style="margin-left:10px;">{{recordCount[1].count}}</span></a></li>
+                    <li ng-class="{'active':currentTab==='scbdRecords'}"><a href="#" class="color-darkgrey" ng-click="updateCurrentTab('scbdRecords')">SCBD <span class="hidden-xs">records</span> <span class="badge" style="margin-left:10px;">{{recordCount[2].count}}</span></a></li>
                 </ul>
             </div>
             <!-- Tab panes -->
