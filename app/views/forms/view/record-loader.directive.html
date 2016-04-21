@@ -33,18 +33,13 @@
                             <tr>
                                 <td><label> Unique Identifier: </label></td>
                                 <td class="bold">
-                                    <span ng-if="docInfo.revision == 'draft'">
-                                       not yet assigned
-                                    </span>
-                                    <span ng-if="docInfo.revision != 'draft'">
                                         {{internalDocument | uniqueID}}
-                                    </span>
                                 </td>
                             </tr>
                             <tr>
                                 <td><label> Current Status: </label></td>
                                 <td class="bold">
-                                    <span class="color-grey" ng-if="internalDocumentInfo.revision == 'draft'">
+                                    <span class="color-grey" ng-if="internalDocumentInfo.revision === '0'">
                                         DRAFT
                                     </span>
                                     <span class="color-green"  ng-if="internalDocumentInfo.revision > 0">

@@ -13,19 +13,14 @@
                             <tr>
                                 <td><label> Unique Identifier: </label></td>
                                 <td class="bold"> 
-                                    <span ng-if="docInfo.revision == 'draft'">
-                                       not yet assigned
-                                    </span>
-                                    <span ng-if="docInfo.revision != 'draft'">
                                         {{doc | uniqueID}}
-                                    </span>
                                 </td>
                             </tr>
                             <tr>
                                 <td><label> Record Status: </label></td>
                                 <td class="bold">
                                     
-                                    <span class="color-grey" ng-if="docInfo.revision == 'draft'">
+                                    <span class="color-grey" ng-if="docInfo.revision == '0'">
                                         DRAFT 
                                     </span>
                                     

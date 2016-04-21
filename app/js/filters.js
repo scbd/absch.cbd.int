@@ -94,6 +94,10 @@ define(["app",'/app/js/common.js', '../services/app-config-service'], function (
 						else
 							documentId = commonjs.hexToInteger(document.id);
 				}
+                
+                if(documentId === undefined)
+                    documentId = "DRAFT";
+                
 				if(document.government_s)
                     government = document.government_s;
                 else if(document.government)
@@ -113,7 +117,12 @@ define(["app",'/app/js/common.js', '../services/app-config-service'], function (
 						'-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s||document.schema)) +
                         '-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +
                         '-' + documentId;
-				if( document.revision)
+                        
+				if(document.revision === 'draft'){
+                    document.revision = "0";
+                }
+                
+                if( document.revision)
 					unique = unique + '-' + document.revision;
 
 				cacheMap[term.identifier] = unique;
