@@ -113,7 +113,8 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
            when('/register',                                           {templateUrl: '/app/views/register/register.html',          label:'Management Center',  param:'true', resolveController: true,resolve : { securized : securize() },subTemplateUrl: '/app/views/register/dashboard.html',}).
            when('/register/notifications',                             {templateUrl: '/app/views/register/register.html',          label:'Notifications',  param:'true', resolveController: true,resolve : { securized : securize() }, subTemplateUrl: '/app/views/register/notifications.html',}).
 
-           when('/register/requests',                                  {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize() }, subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',    type : 'all'}).
+           when('/register/requests',      { redirectTo:'/register/notifications' }).
+           
 
            when('/register/:document_type/status/:status',             {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl: '/app/views/register/type_document_list.html',}).
 
