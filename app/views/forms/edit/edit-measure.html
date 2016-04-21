@@ -305,7 +305,9 @@
             </section>
 
             <section>
-            <legend name="elementsOfMeasure">Elements of the measure</legend>
+            <legend>
+                <label for="absMeasures"> Elements of the measure</label>
+            </legend>
             <div class="help-info">Please select which elements are included in the measure being registered and identify the relevant articles or sections of the
                 measure for each of the selected elements. This information will assist to in displaying information on the national legal
                 framework.</div>
@@ -689,7 +691,7 @@
                   <div flex style="text-align:right;font-weight:bold;">Add reference to relevant articles and sections</div>
                 </div>
 
-               <div edit-measure-abs name="absMeasures" api="absMeasureApi" required ng-model="document.absMeasures" locales="document.header.languages"
+               <div edit-measure-abs name="absMeasuresMatrix" api="absMeasureApi" required ng-model="document.absMeasures" locales="document.header.languages"
                    document="document"></div>
               </div>
             </div>
