@@ -253,6 +253,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 if(document.absMeasures && !document.absMeasures.geneticResource && !document.absMeasures.relevantElements)
                     document.absMeasures = undefined;
 
+                if(document.absMeasuresForDelete)
+                    document.absMeasuresForDelete = undefined;
+
                 return document;
             };
 

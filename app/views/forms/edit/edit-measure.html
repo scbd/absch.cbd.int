@@ -311,12 +311,23 @@
                 framework.</div>
 
 
-            <!--<div class="help-block">
-                {{document.absMeasures}}
-                <span ng-repeat="elm in document.absMeasures.relevantElements">
-                    {{$index}}. {{elm.identifier|term}}<span ng-if="elm.customValue">({{elm.customValue}})</span><br/>
-                </span>
-            </div>-->
+                <div ng-if="document.absMeasuresForDelete">
+        			<div class="alert alert-warning">
+                        <h4>
+                            <span class="label label-info">
+                                <i class='fa fa-info-circle'></i>
+                                <strong>This list is for reference purpose only.
+                                    The new measure matrix is not available on the old format of this list.</strong>
+                            </span>
+                        </h4>
+                        <br/>
+        	            <span ng-repeat="elm in document.absMeasuresForDelete">
+        	                {{$index+1}}. {{elm|term}} <span ng-if="elm.customValue">{{elm.customValue}}</span>
+        	                    &nbsp;<span ng-if="elm.section">({{elm.section|lstring}})</span>
+        	                <br/>
+        	            </span>
+        			</div>
+                </div>
 
 
 
