@@ -1594,7 +1594,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
                 };
 
-                $scope.cIdentifier = function(identifier) {
+                $scope.saticIdentifier = function(identifier) {
                     //use indexof to catch #others
                     return _.indexOf(staticIdentifiers, identifier)>=0
                 }
