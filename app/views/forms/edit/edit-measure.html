@@ -415,19 +415,19 @@
                                       <td style="text-align:left;vertical-align:middle;width:125px" >
                                           <div class="btn-group ng-scope matrix-btn" >
                                               <label class="btn ">
-                                                  <input type="radio"  ng-model="binding.geneticResource.answer" name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="true"
-                                                   ng-change="binding.geneticResource.section=undefined;binding.geneticResource.elements=undefined;binding.geneticResource.identifier='4E2974DF-216E-46C8-8797-8E3A3BLAISE1'"> Yes
+                                                  <input type="radio"  ng-model="binding.geneticResource.answer" name="rd_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" ng-value="true"
+                                                   ng-change="binding.geneticResource.section=undefined;binding.geneticResource.elements=undefined;binding.geneticResource.identifier='CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'"> Yes
                                               </label>
                                               <label class="btn ">
                                                   <input type="radio"  ng-model="binding.geneticResource.answer"
-                                                  name="rd_4E2974DF-216E-46C8-8797-8E3A3BLAISE1" ng-value="false"
-                                                  ng-change="binding.geneticResource.section=undefined;binding.geneticResource.elements=undefined;binding.geneticResource.identifier='4E2974DF-216E-46C8-8797-8E3A3BLAISE1'"> No
+                                                  name="rd_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" ng-value="false"
+                                                  ng-change="binding.geneticResource.section=undefined;binding.geneticResource.elements=undefined;binding.geneticResource.identifier='CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'"> No
                                               </label>
                                           </div>
                                       </td>
-                                      <td style="text-align:left;vertical-align:middle;" id="4E2974DF-216E-46C8-8797-8E3A3BLAISE1_help">
+                                      <td style="text-align:left;vertical-align:middle;" id="CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F_help">
 
-                                          <label for="4E2974DF-216E-46C8-8797-8E3A3BLAISE1" name="4E2974DF-216E-46C8-8797-8E3A3BLAISE1">
+                                          <label for="CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" name="CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F">
                                               &nbsp;
                                               <span title=""  class="bold">
                                                   <span class="ng-binding">Does it cover all genetic resources?</span>
@@ -639,7 +639,7 @@
                          <span title="{{term.description|lstring:locale}}" ng:class="{true:'bold',false:'normalText'}[isMainElement(term.identifier) || (isYesNo(term.identifier) && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')< 0)]" >
                               <span ng-class="{'bold':term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && isYesNo(term.identifier)}">{{term.title||term.name | lstring:locale}} </span>
                               <i ng-show="term.description" class="icon-question-sign"></i>
-                         </span>
+                         </span>{{term.identifier}}
                     </label>
                     <span class="help-info" ng:if="term.description && term.description.length > 0 && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0" style="padding-left:25px">{{term.description}}</span>
                   </td>
