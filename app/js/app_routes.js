@@ -45,6 +45,8 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
             //when('/help/register',               { templateUrl: '/app/views/help/register/register.html',           label:'Submitting Information',             resolveController: true, resolveUser : true}).
 
              when('/about',                        { templateUrl: '/app/views/about/about.html',                        label:'About the ABSCH',                 resolveController:true, resolveUser : true}).
+                
+             when('/about/blog',                        { templateUrl: '/app/views/about/blog.html',                        label:'ABSCH Development Blog',                 resolveController:true, resolveUser : true}).
 
 
             when('/forums',                        { templateUrl: '/app/views/forums/forum-list-view.html',         label:'Forums',       resolveController: true, resolve : { securized : securize() } }).
