@@ -176,7 +176,7 @@
     </script>
     <script type="text/ng-template" id="/app/views/search/matrix/measure-matrix.directive/abs/inner">
         <!--{{term.identifier}}-->
-        <table class="table" ng:if="(term.identifier=='4E2974DF-216E-46C8-8797-8E3A3BLAISE1' || term.isChildSelected || (!term.broaderTerms && term.narrowerTerms) || (!term.broaderTerms && !term.narrowerTerms) || (term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && term.answer))">
+        <table class="table" ng:if="(term.identifier=='CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F' || term.isChildSelected || (!term.broaderTerms && term.narrowerTerms) || (!term.broaderTerms && !term.narrowerTerms) || (term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && term.answer))">
             <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}" >
                 <td class="matrixheaderColumn rightBorder "
                 ng:class="{'paddingleft0':term.level==1, 'paddingleft3':term.level==2 && !term.isMeasure , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
@@ -203,7 +203,7 @@
 
                 </td>
             </tr>
-            <tr ng-if="term.identifier=='4E2974DF-216E-46C8-8797-8E3A3BLAISE1' || term.geneticResourcesTerms" >
+            <tr ng-if="term.identifier=='CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F' || term.geneticResourcesTerms" >
               <td colspan="3" class="paddingleft9">
                   <span onload="elements = term.geneticResourcesTerms|| binding.geneticResource.elements" ng-include="'/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement'"></span>
               </td>

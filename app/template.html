@@ -41,13 +41,18 @@
     <script>
 
         var domain = document.location.hostname.replace(/[^\.]+\./, '');
-        
+
          if(domain=='localhost') domain = 'cbddev.xyz';
 
         document.getElementById('authenticationFrame').src = 'https://accounts.'+domain+'/app/authorize.html';
 
     </script>
-
+    <div class="alert alert-warning ng-binding" style="margin-bottom: 0px; text-align: center" aria-hidden="true">
+        <button type="button" ng-click="showEmailVerificationMessage = undefined" class="close" style="opacity: 1;">×</button>
+        <strong class="ng-binding">
+        PLEASE NOTE! The ABSCH will be undergoing a scheduled maintenance today Friday, April 22nd, 2016, from 17h00 – 23h59 Montreal time. <br/>
+        All features may not be availble. Thank you for your understanding.</strong>
+    </div>
     <scbd-header></scbd-header>
     <portal-branding></portal-branding>
     <portal-nav></portal-nav>
