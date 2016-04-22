@@ -16,8 +16,8 @@ app.directive('ngPartyStatus', function () {
                     // if($scope.code)
                     //     getStatus($scope.code);
                         
-                    if($scope.government)
-                        getStatus($scope.government.identifier);
+                    // if($scope.government)
+                    //     getStatus($scope.government.identifier);
                      
                     function getStatus(code){ 
                         if(!code)return;
@@ -32,6 +32,12 @@ app.directive('ngPartyStatus', function () {
                             //if(newValue && newValue != oldValue){
                                 getStatus($scope.code); 
                             //}
+                        });
+                        
+                        $scope.$watch('government', function(newValue, oldValue){
+                            if(newValue && newValue != oldValue){
+                                getStatus($scope.government.identifier); 
+                            }
                         });
             
                     

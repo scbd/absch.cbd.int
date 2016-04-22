@@ -25,7 +25,7 @@
             <div ng-if="cf_showCountry(doc)">
             <a class="filter"  ng-click="saveFilter(doc)" >
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
-                <span ng-class="{'color-party': doc.isNPParty, 'color-inbetween':doc.isNPInbetweenParty }">{{doc.name}}</span>
+                <span  class="bold" ng-class="{'color-party': doc.isNPParty, 'color-inbetween':doc.isNPInbetweenParty, 'color-nonparty':!doc.isNPParty && !doc.isNPInbetweenParty }">{{doc.name}}</span>
             </a>
             <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon"></i>
                 <span ng-class="{'color-party': doc.isNPParty}">
