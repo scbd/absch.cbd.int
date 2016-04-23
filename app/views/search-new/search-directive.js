@@ -215,7 +215,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         var groupQuery = {
                             query       : q,
-                            sort: 'government_EN_t asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
+                            sort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
                             currentPage : nationalCurrentPage,
                             rowsPerPage: $scope.itemsPerPage
                         };
@@ -360,7 +360,7 @@ define(['app', 'underscore', '/app/js/common.js',
                               qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
                               qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
 
-                            
+
 
 
                         }

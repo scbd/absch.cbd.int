@@ -10,10 +10,10 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                 var searchDefaults = {
                     currentPage: 0,
                     rowsPerPage: 25,
-                    sort: 'government_EN_t asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
+                    sort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
                     fields: base_fields + en_fields,
                     query: '*:*',
-                    groupSort: 'government_EN_t asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
+                    groupSort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
                     groupField: 'government_s',
                     groupLimit: 100000
                 }
@@ -33,15 +33,15 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                         'start': searchQuery.currentPage * searchQuery.rowsPerPage,
                         'rows': searchQuery.rowsPerPage,
                     };
-                    
+
                     console.log("list:" + q + searchQuery.query);
-                    
+
                     return $http.get('/api/v2013/index/select', {
                         params: queryListParameters,
                         timeout: queryCanceler
                     });
-                    
-                   
+
+
                 }
 
                 //================================================================================================================
@@ -63,7 +63,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                         'group.limit': searchQuery.groupLimit,
                         'group.sort': searchQuery.groupSort
                     };
-                    
+
                     console.log("group:" + q + searchQuery.query);
 
                     return $http.get('/api/v2013/index/select', {
@@ -160,7 +160,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                     }
 
                 };
-                
+
                 //================================================================================================================
                 this.governmentSchemaFacets = function() {
 
