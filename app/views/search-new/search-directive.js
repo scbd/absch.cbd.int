@@ -215,6 +215,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         var groupQuery = {
                             query       : q,
+                            sort: 'government_EN_t asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
                             currentPage : nationalCurrentPage,
                             rowsPerPage: $scope.itemsPerPage
                         };
@@ -263,7 +264,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         var listQuery = {
                             query       : q,
-                            sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : '',
+                            sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : undefined,
                             currentPage : referenceCurrentPage,
                             rowsPerPage: $scope.itemsPerPage
                         };
@@ -308,7 +309,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         var listQuery = {
                             query       : q,
-                            sort        : 'updatedDate_dt desc',
+                            sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : undefined,
                             currentPage : scbdCurrentPage,
                             rowsPerPage : $scope.itemsPerPage
                         };
