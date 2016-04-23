@@ -215,6 +215,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         var groupQuery = {
                             query       : q,
+                            sort: 'government_EN_t asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
                             currentPage : nationalCurrentPage,
                             rowsPerPage: $scope.itemsPerPage
                         };
@@ -263,7 +264,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         var listQuery = {
                             query       : q,
-                            sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : '',
+                            sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : undefined,
                             currentPage : referenceCurrentPage,
                             rowsPerPage: $scope.itemsPerPage
                         };
@@ -308,7 +309,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         var listQuery = {
                             query       : q,
-                            sort        : 'updatedDate_dt desc',
+                            sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : undefined,
                             currentPage : scbdCurrentPage,
                             rowsPerPage : $scope.itemsPerPage
                         };
@@ -348,30 +349,28 @@ define(['app', 'underscore', '/app/js/common.js',
 
                         if(queryType === 'national'){
                               qAnd.push(buildFieldQuery('schema_s', 'national', natSchemas.join(' ')));
-
+                              qAnd.push(buildFieldQuery('government_s', 'country', "*"));
+                              qAnd.push(buildCountryQuery('government_s'    ,'partyStatus', null));
                               qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'  , null));
-
                               qOr.push(buildFieldQuery('government_REL_ss','region'  , null));
                               //qOr.push(buildTextQuery('text_EN_txt'    ,'reference', null));
                              // qOr.push(buildFieldQuery('all_terms_ss'    ,'reference', null));
                               qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
                               qOr.push(buildFieldQuery('all_terms_ss'    ,'scbd', null));
-
                               qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
                               qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
 
-                               qAnd.push(buildFieldQuery('government_s', 'country', "*"));
-                               qOr.push(buildCountryQuery('government_s'    ,'partyStatus', null));
+                            
 
 
                         }
 
                         if(queryType === 'reference'){
                                qAnd.push(buildFieldQuery('schema_s','reference', refSchemas.join(' ')));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
-                               qOr.push(buildFieldQuery('all_terms_ss'  ,'scbd', null));
-                               //qOr.push(buildTextQuery('text_EN_txt'     ,'national', null));
-                               //qOr.push(buildFieldQuery('all_terms_ss'   ,'national', null));
+                              // qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
+                               //qOr.push(buildFieldQuery('all_terms_ss'  ,'scbd', null));
+                              // qOr.push(buildTextQuery('text_EN_txt'     ,'national', null));
+                              // qOr.push(buildFieldQuery('all_terms_ss'   ,'national', null));
                                qOr.push(buildTextQuery('text_EN_txt'    ,'country', null));
                                qOr.push(buildFieldQuery('all_terms_ss'  ,'country', null));
                                qOr.push(buildTextQuery('text_EN_txt'    ,'freeText', null));

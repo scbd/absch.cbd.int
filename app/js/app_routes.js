@@ -45,6 +45,8 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
             //when('/help/register',               { templateUrl: '/app/views/help/register/register.html',           label:'Submitting Information',             resolveController: true, resolveUser : true}).
 
              when('/about',                        { templateUrl: '/app/views/about/about.html',                        label:'About the ABSCH',                 resolveController:true, resolveUser : true}).
+                
+             when('/about/blog',                        { templateUrl: '/app/views/about/blog.html',                        label:'ABSCH Development Blog',                 resolveController:true, resolveUser : true}).
 
 
             when('/forums',                        { templateUrl: '/app/views/forums/forum-list-view.html',         label:'Forums',       resolveController: true, resolve : { securized : securize() } }).
@@ -93,10 +95,13 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
 
             when('/countries',                   { templateUrl: '/app/views/countries/index.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
             when('/countries/status/:status',    { templateUrl: '/app/views/countries/index.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
+            when('/countries/gl',      { redirectTo:'/countries/dk' }).
+            when('/countries/eh',      { redirectTo:'/countries/ma' }).
+            when('/countries/tw',      { redirectTo:'/countries/cn' }).
+            when('/countries/fk',      { redirectTo:'/countries' }).
             when('/countries/:code',             { templateUrl: '/app/views/countries/country-profile.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
             // when('/countries/:code',     { templateUrl: '/app/views/countries/profiles.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
-
-
+            
             when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
             when('/database/record/:documentID',  { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
             when('/database/record/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
