@@ -6,15 +6,22 @@
                 <tbody ng-repeat="document in documents | orderBy:'updatedOn':false"  >
                      
                      <tr ng-show="$index===0 && !publicView" style="border-bottom:2px solid #ddd;">
-                        <td><span class="bold color-grey"> CREATED </span></td>
-                        <td>  by <span style="font-weight:500;">{{document.submittedBy.firstName}}{{document.submittedBy.lastName}} ({{document.submittedBy.email}})</span> on <span style="font-weight:500;">{{document.submittedOn | formatDateWithTime}}</span> </td>
-                        <td>
-                            <span style="margin-left:10px;"> DRAFT </span>
+                         <td>
+                            <span> DRAFT </span>
                         </td>
+                        <td ><span  style="margin:0 10px;" class="bold color-grey"> CREATED </span></td>
+                        <td>  by <span style="font-weight:500;">{{document.submittedBy.firstName}}{{document.submittedBy.lastName}} ({{document.submittedBy.email}})</span> on <span style="font-weight:500;">{{document.submittedOn | formatDateWithTime}}</span> </td>
                     </tr>
                
                     <tr>
-                    <td style="width:100px;" >
+                        
+                   <td style="white-space:nowrap;">
+                         <a ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}"  target="_blank">
+						 <span>{{document | uniqueID}}</span>
+						 </a>
+                    </td>
+                    <td >
+                        <div  style="margin:0 10px;">
                         <span ng-show="document.body.amendmentIntent==1  && document.type!='absCheckpointCommunique'">
                             <span class="bold color-red"> REVOKED</span></span>
                         <span ng-show="isPermit && document.type=='absCheckpointCommunique'">
@@ -24,9 +31,10 @@
                             <span class="bold color-green"> UPDATED</span></span>
                         <span ng-show="(document.revision == 1 && isPermit && document.type!='absCheckpointCommunique') || (document.revision == 1 && !isPermit)">
                             <span class="bold color-green"> PUBLISHED</span></span>
+                        </div>
                     </td>
              
-                    <td> 
+                    <td style="width:100%;"> 
                         <div ng-show="!publicView">by <span style="font-weight:500;">{{document.updatedBy.firstName}}{{document.updatedBy.lastName}} ({{document.updatedBy.email}})</span> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span></div> 
                         <div ng-show="publicView"> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span></div> 
                        
@@ -42,11 +50,7 @@
                             </div>
                     </td>
 
-                     <td>
-                         <a style="margin-left:10px;" ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}"  target="_blank">
-						 <span>{{document | uniqueID}}</span>
-						 </a>
-                    </td>
+                 
                
                     
                 </tr>

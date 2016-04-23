@@ -69,8 +69,8 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
             when('/mailbox',                        { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
             when('/mailbox/:mailId',                { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
 
-            when('/search/new',                             { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true}).
-            when('/search/new/byCountry',                   { templateUrl: '/app/views/search/country-search.html',   label:'Search',         resolveController: true, resolveUser : true}).
+            // when('/search/new',                             { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true}).
+            // when('/search/new/byCountry',                   { templateUrl: '/app/views/search/country-search.html',   label:'Search',         resolveController: true, resolveUser : true}).
 
             // when('/search/new/measurematrix',                   { templateUrl: '/app/views/search/measure-matrix.html',   label:'Matrix',         resolveController: true, resolveUser : true}).
             // when('/search/new/measurematrix/:uniqueId',         { templateUrl: '/app/views/search/measure-matrix.html',   label:'Matrix',         resolveController: true, resolveUser : true}).
@@ -86,10 +86,10 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
             // when('/search/:documentSchema',                 { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true}).
             // when('/search/:documentSchema/:countryCode',    { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true}).
             // when('/find/simple',                            { templateUrl: '/app/views/find/simple.html',   label:'Simple Search',  resolveController: true, resolveUser : true}).
-            when('/search/national-records/:documentSchema?',              { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true, type:'national'}).
-            when('/search/countries/:countryCode?',                       { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true, type:'countryProfile'}).
-            when('/search/countries/:countryCode/:documentType',                       { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true, type:'countryProfile'}).
-            when('/search/reference-records/:documentSchema?',             { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true, type:'reference'}).
+            when('/search/national-records/:documentSchema?',              { redirectTo:'/search-new' }).
+            when('/search/countries/:countryCode?',                        { redirectTo:'/countries/:countryCode' }).
+            when('/search/countries/:countryCode/:documentType',           { redirectTo:'/countries/:countryCode' }).
+            when('/search/reference-records/:documentSchema?',             { redirectTo:'/search-new' }).
 
             // when('/find',                                   { redirectTo:'/search'}).
 
