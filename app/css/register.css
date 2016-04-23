@@ -347,17 +347,8 @@ table, td , tr{
 	display:block;
 	padding-left:16px;
 }
-/*.help-block{
-/*same as alert-info*/
-color: #31708f;
-background-color: #d9edf7;
-border-color: #bce8f1;
-padding: 5px;
-margin-bottom: 10px;
-border: 1px solid transparent;
-border-radius: 4px;
-}*/
 
+/*
 ul.km-value {
   padding-left: 0;
   list-style: none;
@@ -376,7 +367,7 @@ display: block;
 -moz-border-radius: 5px;
 -ms-border-radius: 5px;
 -o-border-radius: 5px;
-}
+}*/
 
 @media (min-width: 768px) {
   .modal-lg {

@@ -46,10 +46,10 @@ define(['app', '/app/js/common.js', '/app/services/thesaurus-service.js',
                                 $scope.rawDocs = undefined;
                             var groupQuery = {
                                 query       : searchQuery.q,
-                                sort        : 'government_EN_t asc, createdDate_dt desc, title_t asc',
+                                sort        : 'government_EN_s asc, createdDate_dt desc, title_t asc',
                                 fields      : 'id,identifier_s,title_t,description_t,url_ss,schema_EN_t,date_dt,government_s,government_EN_t,schema_s,summary_EN_t,jurisdiction_EN_t,type_ss,uniqueIdentifier_s,ownerGovernment_s,type_EN_t,status_EN_t',
                                 groupField  : 'government_s',
-                                groupSort   : 'government_EN_t asc',
+                                groupSort   : 'government_EN_s asc',
                                 currentPage : searchQuery.currentPage,
                                 rowsPerPage: searchQuery.itemsPerPage
                             };
