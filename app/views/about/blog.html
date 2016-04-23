@@ -1,10 +1,111 @@
 <div id="blogPage" ng-controller="BlogController" >
   <div smooth-scroll duration="100" offset="200"></div>
   
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
-     <h1> ABS Clearing-House Development Blog</h1>
+     <h1> ABS Clearing-House development blog</h1>
+     <hr style="border-bottom:1px solid #999;">
+    
+    <h2>Release of several major improvements to the ABS-CH <strong class="pull-right color-green">April 22 2016</strong> </h2>
+
+    <p>
+    Following the technical advice provided during the meeting of the IAC last October, and the online discussions held until 15 January 2016 we have been working on a number of issues to improve the performance and functionalities of the ABS Clearing-House (ABS-CH) as well as to incorporate the technical advice provided in a new version of the website.  With these latest improvements we hope to stabilize the layout and functionality and shift some of our focus to other important issues such as translation and capacity-building, and populating the ABS Clearing-House.
+    Please find below a  summary of the main improvements and changes made to the ABS-CH. 
+    </p> 
+    <p class="bold color-green">
+      If you have any questions please feel free to contact us (absch@cbd.int) or test out our new help desk service by clicking the green question mark (?) icon located on the bottom right side of the website. 
+     </p>
+
+<br>
+
+<h4>Summary of changes and improvements:</h4>
+
+<p>
+<br><strong>Overall speed and performance of the ABSCH</strong>
+</p>
+<p>
+  Improved speed and efficiency in loading: A number of changes have been made to improve speed and efficiency of the ABSCH, in particular to ensure better functioning for users with slower internet connections.  
+</p>
+<p>Responsive design: Pages have been made more responsive to help display information more efficiently on all screen sizes and devices (e.g. phone, tablets). 
+</p>
+<p>Browser support: Functionality that was only available to users with the newest browsers has been changed, removed or updated to support all common modern browsers (IE 9+, chrome, firefox). 
+</p>
+<br><strong>Improvements in design</strong>
+<p>
+General design: Following various comments from the IAC, we have made several changes in terms of design, including: reducing the spacing between records; improving the display of the record overview in the home page; changing the colour of links to indicate when they are clickable; enhancing distinction between different record categories. 
+</p>
+<p>
+Map: We have included an improved map to visualize country information on the homepage and country profile pages. This map has been integrated as a separate library and will be used and maintained for all CBD websites. 
+</p>
+<p>
+Country profiles: We also enhanced accessibility and display of country profiles by creating a new page for each country profile that includes a link to CBD country profile as advised.
+</p>
+<p>
+Visual integration with the CHM and other CBD websites and branding: Many of the changes to the layout, branding elements and navigation of the submit page have been done to ensure consistency in the user experience across CBD websites and browsers.
+</p>
+
+<p>
+<br><strong>Search functions</strong>
+</p>
+<p>
+Major changes have been made to update the search page. We have improved the layout and introduced several changes making it faster and improving the indexing and sorting for displaying results more efficiently and across platforms. In the coming months the ABS-CH and all CBD websites will be moving to a new more powerful search service. This service will provide a more intelligent way of mapping information behind the scenes. One key feature that will be interesting for ABS-CH users is the ability to also index text and keywords from inside attachments such as PDF and Word documents.  
+</p>
+<p>
+As the backend search service improves, the new search layout is not expected to change much with the exception of the improved search results. With the new layout we are moving towards a simpler way of searching that focusses more on users keywords (like google) rather than a list of predefined keyword filters.
+</p>
+<p>
+The layout of the search page has been updated to allow for searches across national, reference and SCBD record categories simultaneously. Search results are displayed in separate tabs in order to allow cross category searching while maintaining visual distinction between records categories. Other specific suggestions such as removing contact details from record metadata for PA and NAU and to create a separate category for SCBD records have been also implemented.
+</p>
+<p>
+<br><strong>Integration with the CHM and website</strong>
+</p>
+<p>
+We have worked on integrating functionalities, branding elements and services for all clearing-house platforms (login, maps, user notifications, language services, shared controlled vocabularies, API) and those elements have been extracted from the ABS-CH and placed into common and shared code library for all CHM and CBD websites. This will help ensure that all CBD websites share a common look and feel and deliver a consistent user experience.
+</p>
+<p>
+One major change is the Unified user notifications system for all clearing-house platforms (CBD CHM, BCH, ABS-CH). This feature is accessible in the submit page as “Requests and notifications” as well as by clicking a small bell icon in the top navigation next to your name when you are signed in. 
+</p>
+<p>
+The notification system has been developed with a view to help keep the data in the ABSCH updated. This page will provide users with important feedback and allow them to follow up on the status of their records. Notifications are triggered by important system and user driven events that happen in the clearing-houses, such as: new publication requests, approval of a request, recalled or canceled requests, rejected requests, reminders and alerts. For example, we have setup a notification to remind PAs, on a regular interval, when they have outstanding publishing requests. We will also send notifications to PAs to alert them when records such as ABS measures change status when, for example, they enter into force or are about to be retired. The notification system also provides a backup for the ABSCH’s automated emails, since we cannot guarantee the automated emails are received or read because of spam filters and other common email problems. This notification system can also provide PAs with, on a regular interval (e.g. a monthly), an aggregated report of the important activities, reminders and statistics that have occurred during that period. 
+</p>
+<p>
+<br><strong>Common formats and submitting information</strong>
+</p>
+<p>
+We have implemented the technical guidance provided by the IAC in the common formats with the exception of the endorsement function in relation to Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standard and Community Protocols and Procedures and Customary Laws. When implementing this feature we faced a number of outstanding questions that need further clarification before it can be implemented. Therefore, we have decided that this aspect should be further discussed and taken up in the next IAC meeting. 
+</p>
+<p>
+As further explained below, changes in the thematic areas list and indexing of records for the search function will not be visible due to limitations with the DEV environment. However, these changes will be reflected in the common formats, search filters and the metadata provided in the summary of the records displayed in the search.
+</p>
+<p>
+Another issue we have addressed is the way records are versioned and referenced in other records. We have implemented a record versioning system to help track records that are referenced in other records. We are now in the process of developing tools to help manage updates and deletes of referenced records. This change is mostly invisible to the user but is most noticeable in the way contacts are now used and referenced in the system. 
+</p>
+<p>
+<br><strong>Other new feature include:</strong>
+</p>
+<p>
+Online designation of PA and NAUs: The User Management function allows designating and making changes to PAs and NAU directly online.
+</p>
+<p>
+Possibility to report on records: This feature allows users of the ABS-CH to report to the SCBD problems with existing record with a view to keep the ABS-CH up-to-date and correct. Examples of problems are when a record is considered incorrect or inappropriate, when there is a broken link or outdated information, or if there is a copyright infringement.
+</p>
+<p>
+<br><strong>Help and capacity-building</strong>
+</p>
+<p>
+Real-time chat help desk:  Since the recent changes to the ABSCH have been so many, and in order to provide immediate support, we have installed a real-time chat application for users to ask for help for problems they experience. The help desk service is available online for direct messages during SCBD office hours. After office hours users can use a form to submit their questions by email to the help desk.
+</p>
+<p>
+About the ABS-CH: We have created a new About us section and updated and expanded the information on the ABS-CH (we will update information for this page in the following days). We are currently working on updating and improving the list of Frequently Asked Questions.
+</p>
+<p>
+Help pop ups: Help is identified with a “(i)” icon that provides information on keywords. This helps users to navigate the website without having the visual display becoming cluttered with a lot of explanatory information.
+</p>
+
+    
+    
     </div>
   </div>
+  
   
 </div><!--  end controller -->
