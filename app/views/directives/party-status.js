@@ -8,6 +8,9 @@ app.directive('ngPartyStatus', function () {
                     code : '=',
                     government : '='
                 },
+            link: function ($scope, element, attrs) {
+                
+            },
             controller: [ "$scope", '$rootScope', '$filter', '$timeout', 'commonjs', '$q',
 					 function ($scope, $rootScope, $filter, $timeout, commonjs, $q) 
 					{
@@ -35,9 +38,9 @@ app.directive('ngPartyStatus', function () {
                         });
                         
                         $scope.$watch('government', function(newValue, oldValue){
-                            if(newValue && newValue != oldValue){
+                            //if(newValue && newValue != oldValue){
                                 getStatus($scope.government.identifier); 
-                            }
+                            //}
                         });
             
                     
