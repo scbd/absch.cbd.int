@@ -26,16 +26,14 @@
   <div class="container-fluid">
   <div class="row">
     <nav class="col-xs-12 col-sm-3" id="myAffix" data-spy="affix" >
-     
-   
-   
+
      
       <ul class="nav nav-pills nav-stacked" style="padding-bottom:30px">
-        <li><a ng-click="showAbout = !showAbout" class="btn-sm btn-default plusbtn">{{showAbout ? "-" : "+"}}</a> <a href="#" scroll-to="top" ng-click="showAbout = true;">About the ABSCH</a></li>
+        <li><a ng-click="showAbout = !showAbout" class="btn-sm btn-default plusbtn">{{showAbout ? "-" : "+"}}</a> <a href="#" scroll-to="top" ng-click="showAbout = true;">About the ABS-CH</a></li>
             <ul ng-show="showAbout">
                 <li><a scroll-to="about-intro" class="color-green" href="#">Introduction</a></li>
                 <li><a scroll-to="about-bg" class="color-green" href="#">Background</a></li>
-                <li><a scroll-to="about-what" class="color-green" href="#">What is the ABSCH?</a></li>
+                <li><a scroll-to="about-what" class="color-green" href="#">What is the ABS-CH?</a></li>
              </ul>
         <li><a ng-click="showWhy = !showWhy" class="btn-sm btn-default plusbtn">{{showWhy ? "-" : "+"}}</a> <a href="#" scroll-to="about-why" ng-click="showWhy = true" >What does it do</a></li>
                <ul ng-show="showWhy">
@@ -61,27 +59,40 @@
                 <ul>
                     <li><a scroll-to="about-rolesPA" class="color-green" href="#">Publishing Authorities (PA)</a></li>
                     <li><a scroll-to="about-rolesNAU" class="color-green" href="#">National Authorized Users (NAU)</a></li>
+                    <li><a scroll-to="about-rolesDesignation" class="color-green" href="#">Designation of PAs and NAUs</a></li>
                 </ul>
                  <li><a scroll-to="about-rolesUsers" class="color-green" href="#">Other users (CBD account holders)</a></li>
                  <li><a scroll-to="about-rolesPublic" class="color-green" href="#">General Public (no CBD account)</a></li>
              </ul>
 
+
+ <li><a ng-click="showWork = !showWork" class="btn-sm btn-default plusbtn">{{showWork ? "-" : "+"}}</a> <a href="#" scroll-to="about-work" ng-click="showWork = true">How does the ABS-CH work?</a></li>
+            <ul ng-show="showWork">
+                <li><a scroll-to="about-workAccount" class="color-green" href="#">Creating an account</a></li>
+                 <li><a scroll-to="about-workSubmit" class="color-green" href="#">Submitting Information </a></li>
+                  <li><a scroll-to="about-workSearch" class="color-green" href="#">Searching Information</a></li>
+             </ul>
+
+<li><a ng-click="showCFs = !showCFs" class="btn-sm btn-default plusbtn">{{showCFs ? "-" : "+"}}</a> <a href="#" scroll-to="about-cf" ng-click="showCFs = true">Common Formats</a></li>
+  <ul ng-show="showCFs">
+                <li><a scroll-to="about-cfDownload" class="color-green" href="#">Download the offline versions</a></li>
+            </ul>
         <li><a ng-click="showTypes = !showTypes" class="btn-sm btn-default plusbtn">{{showTypes ? "-" : "+"}}</a> <a href="#" scroll-to="about-types" ng-click="showTypes = true">Types of information available</a></li>
             <ul ng-show="showTypes">
                 <li><a scroll-to="about-types1" class="color-green" href="#">National records</a></li>
                 <li><a scroll-to="about-types2" class="color-green" href="#">Reference records</a></li>
                 <li><a scroll-to="about-types3" class="color-green" href="#">SCBD managed records</a></li>
             </ul>
-         <li><a ng-click="showSearch = !showSearch" class="btn-sm btn-default plusbtn">{{showSearch ? "-" : "+"}}</a> <a href="#" scroll-to="about-search" ng-click="showSearch = true">Finding information</a></li>
+         <!--<li><a ng-click="showSearch = !showSearch" class="btn-sm btn-default plusbtn">{{showSearch ? "-" : "+"}}</a> <a href="#" scroll-to="about-search" ng-click="showSearch = true">Finding information</a></li>
             <ul ng-show="showSearch">
                 <li><a scroll-to="about-search1" class="color-green" href="#">Search</a></li>
                 <li><a scroll-to="about-search2" class="color-green" href="#">Country profiles</a></li>
-            </ul>
-         <li><a ng-click="showSubmit = !showSubmit" class="btn-sm btn-default plusbtn">{{showSubmit ? "-" : "+"}}</a> <a href="#" scroll-to="about-submit" ng-click="showSubmit = true">Submit information</a></li>
+            </ul>-->
+         <!--<li><a ng-click="showSubmit = !showSubmit" class="btn-sm btn-default plusbtn">{{showSubmit ? "-" : "+"}}</a> <a href="#" scroll-to="about-submit" ng-click="showSubmit = true">Submit information</a></li>
             <ul ng-show="showSubmit">
                 <li><a scroll-to="about-submit1" class="color-green" href="#">Getting an account</a></li>
                 <li><a scroll-to="about-submit2" class="color-green" href="#">Managing your information</a></li>
-            </ul>
+            </ul>-->
         <li><a ng-click="showNP = !showNP" class="btn-sm btn-default plusbtn">{{showNP ? "-" : "+"}}</a> <a href="#" scroll-to="about-np" ng-click="showNP = true">About the Nagoya Protocol</a></li>
             <ul ng-show="showNP">
                 <li><a scroll-to="about-np1" class="color-green" href="#">Text of the Nagoya Protocol</a></li>
@@ -91,7 +102,7 @@
             
         <li><a ng-click="showGettingHelp = !showGettingHelp" class="btn-sm btn-default plusbtn">{{showGettingHelp ? "-" : "+"}}</a> <a href="#" scroll-to="about-help" ng-click="showGettingHelp = true">Help and Capacity Building</a></li>
             <ul ng-show="showGettingHelp">
-                <li><a scroll-to="about-help1" class="color-green" href="#">Help using the ABSCH</a></li>
+                <li><a scroll-to="about-help1" class="color-green" href="#">Help using the ABS-CH</a></li>
                 <li><a scroll-to="about-help3" class="color-green" href="#">Contact us</a></li>
             </ul>
 
@@ -109,7 +120,7 @@
            <div style="padding-bottom:30px;">   
                 <h1>About the ABS Clearing-House</h1>
                 <h3 id="about-intro">Introduction</h3>
-                <p> The Access and Benefit-sharing Clearing-House (ABSCH) is a platform for exchanging information on access and benefit-sharing established by Article 14 of the Protocol, as part of clearing-house mechanism under Article 18, paragraph 3 of the Convention. The ABS Clearing-House is a key tool for facilitating the implementation of the Nagoya Protocol, by enhancing legal certainty and transparency on procedures for access, and for monitoring the utilization of genetic resources along the value chain, including through the internationally recognized certificate of compliance. By hosting relevant information regarding ABS, the Clearing-House offers opportunities for connecting users and providers of genetic resources and associated traditional knowledge.</p>
+                <p> The Access and Benefit-sharing Clearing-House (ABS-CH) is a platform for exchanging information on access and benefit-sharing established by Article 14 of the Protocol, as part of clearing-house mechanism under Article 18, paragraph 3 of the Convention. The ABS Clearing-House is a key tool for facilitating the implementation of the Nagoya Protocol, by enhancing legal certainty and transparency on procedures for access, and for monitoring the utilization of genetic resources along the value chain, including through the internationally recognized certificate of compliance. By hosting relevant information regarding ABS, the Clearing-House offers opportunities for connecting users and providers of genetic resources and associated traditional knowledge.</p>
                 
                 <h3  id="about-bg">Background</h3>
                 <p> The Nagoya Protocol on Access and Benefit-sharing (ABS) was negotiated in order to provide greater legal certainty and transparency for both providers and users of genetic resources and   associated traditional knowledge by: </p>
@@ -240,14 +251,23 @@
                     <h1>User roles and responsibilites  </h1>
                     
                      <h3 id="about-rolesParties">Parties and non-Parties</h3> 
-                     <p>In order to ensure that the national records published in the ABS Clearing-House are reliable and provide legal certainty for users, Parties are required to designate a single person responsible for publishing all national records in the ABS Clearing-House. This function is referred to as publishing authority (PA). The duties of the National Focal Point (NFP) could also be expanded to incorporate the role of the publishing authority.</p>
-                     <p>The publishing authority can prepare draft records and publish them directly, or can designate one or more national authorized users (NAUs) to assist them in preparing draft records for their publication in the ABS Clearing-House.</p>
-                     <p>Publishing authorities and national authorized users can register both national and reference records.</p>
-                     <p>Non-Parties are encouraged to share all relevant ABS information through the ABS Clearing-House in the same conditions as Parties. The status of non-Party to the Protocol will be shown in the display of the record of these countries.</p>
+
+                         <p> In order to ensure that the national records published in the ABS Clearing-House are reliable and provide legal certainty
+                            for users, Parties are required to designate a single person responsible for publishing all national records in the ABS
+                            Clearing-House. This function is referred to as publishing authority (PA). The duties of the National Focal Point (NFP)
+                            could also be expanded to incorporate the role of the publishing authority.
+                        </p>
+                        <p> The publishing authority can prepare draft records and publish them directly, or can designate one or more national authorized
+                            users (NAUs) to assist them in preparing draft records for their publication in the ABS Clearing-House.
+                        </p>
+                        <p> Publishing authorities and national authorized users can register both national and reference records.
+                        </p>
+                        <p> Non-Parties are encouraged to share all relevant ABS information through the ABS Clearing-House in the same conditions as
+                            Parties. The status of non-Party to the Protocol will be shown in the display of the record of these countries.
+                        </p>               
                      <div class="well">
                         <h4 id="about-rolesPA">Publishing authorities (PA)</h4>
-                        <p><strong>Designation of the PA</strong></p>
-                        <p>The national focal point (NFP) on access and benefit-sharing is to communicate the designation of the publishing authority for the ABS Clearing-House through an official written communication addressed to the Executive Secretary. A form has been prepared for designating the ABS Clearing-House publishing authority (PA) and any national authorized users (NAUs).</p>
+                      
                         <p><strong>Functions of the PA</strong></p>
                         <p>The PA is responsible for:
                             <ul>
@@ -258,27 +278,128 @@
                                 <li>Managing the designation of the National Authorized Users (NAUs)</li>
                             </ul>
                         </p>
-                    </div>
-                    <div class="well">
+                     <br>
                         <h4 id="about-rolesNAU">National authorized users (NAUs)</h4>
-                        <p><strong>Designation of the NAUs</strong></p>
-                        <p>******************to be updated.******************</p>
                         <p><strong>Functions of the NAUs</strong></p>
                         <p>The function of national authorized users is to assist the publishing authorities in the preparation of draft national records.</p>
                         <p>National authorized users can create and manage draft records of their country which are then forwarded to the publishing authority for publication.</p>
+                        
+                         <br>
+                         <h4 id="about-rolesDesignation">Designation of PAs and NAUs</h4>
+                         <p>The national focal point (NFP) on access and benefit-sharing is to designate a single publishing authority for the ABS Clearing-House. As a national focal point you can also designate yourself as a publishing authority.</p>
+                         <p>The designation of national authorized users can be done at any time by the national focal point or the publishing authority. Each Party can designate as many national authorized users as they wish. For each national authorized user an individual email-address needs to be provided for identification purposes in the database.</p>
+                         <p>Designation can be done online through the ABS Clearing-House  or offline through an official written communication addressed to the Executive Secretary of the Convention on Biological Diversity (CBD).</p>
+                          <br>
+                         <p class="bold">Online designation of PAs and NAUs</p>
+                         <p>If you are the national focal point (NFP) on access and benefit-sharing for your country, you can designate the PA and one or more NAUs through the ABS Clearing-House. Also, if you are the PA, you can designate the NAUs through the ABS Clearing-House</p>
+                          <p>
+                              In order to designate these roles through the ABS Clearing-House, you need to log into your CBD account and click on ‘Submit’. Here, you will see a tab for ‘User Management’, where you will find all ABS-CH authorized users that have been granted permission to work in the national records for your country. You can select a particular CBD account, and click on edit to assign/ revoke roles (for instance, change the PA or delete a NAU). If a person already holding a CBD account does not appear as an ABS-CH authorized user for your country, you can find them by clicking ‘Add Authorized User’. Through this feature, you can search among all CBD accounts using their email addresses, and assign them a PA or NAU role. This feature also allows you to assign roles to someone who does not yet have a CBD account. To do this, click on ‘Add Authorized User’, and enter an email address and other details of the person you wish to include as PA or NAU. The ABS Clearing-House will send them an automated email request to activate their account. Once they have activated their CBD account, they can start working on national records.
+                              
+                          </p>
+                          <br>
+                           <p class="bold">Designating the PAs and NAUs through written communication</p>
+                         <p>
+                             The national focal point (NFP) on access and benefit-sharing is to communicate the designation of the publishing authority for the ABS Clearing-House through an official written communication addressed to the Executive Secretary. A form has been prepared for designating the ABS Clearing-House publishing authority (PA) and any national authorized users (NAUs).
+                             
+                         </p>
+                          <p>
+                              The designation of national authorized users can be done at any time by the national focal point or the publishing authority. These designations may be sent to the Secretariat by postal mail, fax or as an attachment to an e-mail and must contain the complete contact details and the appropriate endorsements. 
+                          </p>
+                          <a href="http://www.cbd.int/doc/abs/commonformats/ABSCH-PA.doc" >
+                                <i class="glyphicon glyphicon-circle-arrow-down"></i> Download Publishing Authority(PA) and National Authorized User(NAU) nomination form
+                            </a>
+                         
                     </div>
 
-                     <h3 id="about-rolesUsers">Other users (CBD account holders)</h3> 
-                     <p>Anyone can contribute reference records to the ABSCH. A CBD account which will give you access to register information in all CBD clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH) and the clearing-house mechanism (CHM) under the Convention. Anyone can sign up for a CBD account at <a href="https://accounts.cbd.int/signup" target="new_">accounts.cbd.int/signup</a></p>
-                     <p>This gives an opportunity to different stakeholders, indigenous and local communities, academia, non-governmental organizations, research institutions, private sector, etc. to contribute to the ABS Clearing-House by posting relevant ABS information and to create a community where knowledge and best practices are shared to support the implementation of the Nagoya Protocol. </p>
-                     <p>The Secretariat is responsible for validating all reference records before final publication in the ABS Clearing-House.</p>
+                     <h3 id="about-rolesUsers">Other registered users of the ABS Clearing House</h3> 
+                        <p>
+                            Anyone can include information as reference records only by creating a CBD account. A CBD account will give you access to register information in all CBD clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH) and the clearing-house mechanism (CHM) under the Convention. You can register for a CBD account at accounts.cbd.int/signing. Make sure you enter all the information required as instructed on the form. You’ll automatically receive an e-mail with a link you have to click to confirm your account.
+                        </p>
+                        <p>
+                            This gives an opportunity to different stakeholders, indigenous and local communities, academia, non-governmental organizations, research institutions, private sector, etc. to contribute to the ABS Clearing-House by posting relevant ABS information and to create a community where knowledge and best practices are shared to support the implementation of the Nagoya Protocol.
+                        </p>
+                        <p>
+                           The Secretariat is responsible for validating all reference records before final publication in the ABS Clearing-House. 
+                        </p>
                      
-                     
-                     <h3 id="about-rolesPublic">General public (no CBD account)</h3> 
-                     <p>All information published in the ABS Clearing-House becomes publicly available for the general public to consult and view. Aa CBD account is not needed in order to search or view any information published in the ABS Clearing-House.</p>
+                     <h3 id="about-rolesPublic">General public</h3> 
+                     <p>
+                         All information published in the ABS Clearing-House becomes publicly available for the general public to consult and download. There is no need of having a CBD account to search and access information published in the ABS Clearing-House
+                     </p>
 
                </div>
-            
+             <div style="padding-bottom:30px;" id="about-work">   
+                    <h1>How does the ABS Clearing House work?</h1>
+                    <h3 id="about-workAccount">Creating an account</h3>
+                    <p>
+                    Any person can have a CBD account which will give you access to register information in all CBD clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH) and the clearing-house mechanism (CHM) under the Convention. You can register for a CBD account at accounts.cbd.int/signin 
+                    </p>
+                    <p>
+                    Make sure you enter all the information required as instructed on the form. You’ll automatically receive an e-mail with a link you have to click to confirm your account.
+                    </p>
+                    <p>
+                    Once you have an account, you will be able to submit information at the following link: absch.cbd.int/register
+                    </p>
+                    
+                    <h3 id="about-workSubmit">Submitting Information</h3>
+                     <p>
+                    The information published in the ABS Clearing-House is classified in three different categories: national records, reference records, and secretariat records. In order to register these records, common formats need to be filled in
+                    </p>
+                    <p>
+                    The clearing-house operates based on submissions submitted under common formats. Common formats are standardized forms to facilitate submission of information in a harmonized manner. The ABS Clearing-House common formats make use of controlled vocabulary and metadata in order to facilitate a consistent registering and search of information in the ABS-CH. 
+                    </p>
+                    
+                    <h3 id="about-workSearch">Searching</h3>
+                    <p>
+                        Thanks to the implementation of common formats, the search function allows for filtering information by keywords, countries, regions, date, types of documents and many others. Everyone can search for information through the ABS Clearing-House without needing an account
+                    </p>
+                    <p>
+                    <strong>Country profiles</strong> provide an overview of a country's national ABS information published by governments, including its legislative, administrative, or policy measures, competent national authorities, national focal points. <a href="/countries/" target="_new">Country profiles</a> is the place you'll find all the national record information made available through the ABS Clearing-House pertaining to a specific country.
+                    </p>
+
+             
+             </div>
+             
+               <div style="padding-bottom:30px;" id="about-cf">   
+                    <h1>Common Formats</h1>
+                    <p>
+                        The clearing-house operates based on submissions submitted under common formats. Common formats are standardized forms to facilitate submission of information in a harmonized manner. The ABS Clearing-House common formats make use of controlled vocabulary and metadata in order to facilitate a consistent registering and search of information in the ABS-CH. 
+                    </p>
+                     <p>
+                      The common formats differentiate between mandatory and non-mandatory information.  Some fields are mandatory to ensure that the record contains the minimum information necessary for displaying records consistently.  The common formats are also designed to be flexible and provide for opportunities to include additional information
+                    </p>
+                     <p>
+                     Common formats are available online in the submit information page and offline in MS word format. 
+                      <br><br>
+                      <div id="about-cfDownload">Download the offline versions here:</div>
+                     
+                    </p>
+
+                    <strong class="color-blue">National Records</strong>
+                        <ul class="list-group">
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-MSR.doc"> Legislative, administrative or policy measures<i class="fa fa-download pull-right"></i></a></li>
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-CPC.doc"> Checkpoint Communiqué<i class="fa fa-download pull-right"></i></a></li>
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-CNA.doc"> Competent National Authority<i class="fa fa-download pull-right"></i></a></li>
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-IRCC.doc"> Internationally Recognized Certificate of Compliance<i class="fa fa-download pull-right"></i></a></li>
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-CP.doc"> Checkpoint<i class="fa fa-download pull-right"></i></a></li>
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-NDB.doc"> National Websites and Database<i class="fa fa-download pull-right"></i></a></li>
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-NR.doc"> Intermin National Report<i class="fa fa-download pull-right"></i></a></li>
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-NFP.doc"> National Focal Point<i class="fa fa-download pull-right"></i></a></li>
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-PA-NAU.doc"> Publishing Authority/National Authorised User<i class="fa fa-download pull-right"></i></a></li>
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-CON.doc"> National Contact (person or organization)<i class="fa fa-download pull-right"></i></a></li>
+                        </ul>
+                    <strong class="color-orange">Reference Records</strong>
+                        <ul class="list-group">
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-VLR.doc"> Virtual Library Record<i class="fa fa-download pull-right"></i></a></li>
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-CBI.doc">  Capacity-building Initiative<i class="fa fa-download pull-right"></i></a></li>
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-A19-20.docx"> Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and Standards <i class="fa fa-download pull-right"></i></a></li>
+                        <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-CPP.doc">  Community protocols and procedures and customary laws<i class="fa fa-download pull-right"></i></a></li>
+                        </ul></p>
+                    
+                    
+                    
+                    
+               </div>
             
                  <div style="padding-bottom:30px;" id="about-types">   
                     <h1>Types of information available in the ABS Clearing-House </h1>
@@ -343,10 +464,10 @@
 
                </div>
                
-               <div style="padding-bottom:30px;" id="about-search">   
+               <!--<div style="padding-bottom:30px;" id="about-search">   
                     <h1>Finding Information </h1>
                     <h3 id="about-search1">Search</h3>
-                    <p>All type of information stored in the ABS Clearing-House can found using the search. A CBD account is not needed to search in the ABSCH. You can select keywords, dates, or use a free text to narrow down the results set display. The set of result as been grouped in to individualt tabs by record type: national records, reference records, and SBCD records. <a href="/search">Click here to search the ABSCH</a>  </p>
+                    <p>All type of information stored in the ABS Clearing-House can found using the search. A CBD account is not needed to search in the ABS-CH. You can select keywords, dates, or use a free text to narrow down the results set display. The set of result as been grouped in to individualt tabs by record type: national records, reference records, and SBCD records. <a href="/search">Click here to search the ABS-CH</a>  </p>
                     <h3 id="about-search2">Country Profiles</h3>
                     <p>A broad overview of the status of ratification, National Records, and information on the representatives. Each individual country profile provides all the national information published by that country. </p>
                  </div>
@@ -359,7 +480,7 @@
                     <h3 id="about-submit2">Managing your information</h3>
                     <p></p>
                  </div>
-               
+               -->
                
                  <div style="padding-bottom:30px;" id="about-np">   
                     <h1>About the the Nagoya Protocol </h1>
@@ -386,7 +507,7 @@
                
                <div style="padding-bottom:30px;" id="about-help">   
                     <h1>Help and capacity-building </h1>
-                    <h3 id="about-help1">Help using the ABSCH</h3>
+                    <h3 id="about-help1">Help using the ABS-CH</h3>
                     <p> Some of the questions you may have could find an answer in the frequently asked questions section. The ABS-CH  team provides Help Desk services through email, phone and Skype that offer technical support for registering or searching information and organizes regular trainings in the form of online webinars to help users become familiar with the various functions of the ABS Clearing-House.</p>
                     <p>The ABS-CH is promoted at relevant workshops, side events, and meetings for different audiences. The CBD Secretariat is currently working on making available the ABS-CH in the six official UN languages, and its interface and main functions are constantly improved to facilitate the operability with other databases and systems, including tablets and smart phones. The ABS-CH team is also working in the development of step by step guides and an e-learning module about the ABS Clearing-House.</p>
                  
@@ -399,7 +520,7 @@
                         Secretariat of the Convention on Biological Diversity <br>
                         413, Saint Jacques Street, suite 800 
                         Montreal QC H2Y 1N9 Canada<br>
-                        email: absch@cbd.int<br>
+                        email: ABS-CH@cbd.int<br>
                         skype: abs-ch<br>
                         telephone: +1 514 288 2220
                     </p>
