@@ -215,7 +215,7 @@
                     <span class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.vlr}}" data-container="body"></span>
                     </h5>
 
-            <div ng-repeat="doc in referenceRecords.capacityBuildingResource.docs" ng-show="doc.title_t && $index < 5"  class="link1">
+            <div ng-repeat="doc in referenceRecords.resource.docs" ng-show="doc.title_t && $index < 5"  class="link1">
                 <!-- <div id="capacityBuildingResources" ng-include="home-list.html"> -->
                 <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;">
                     <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
