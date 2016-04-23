@@ -32,12 +32,12 @@
             <li class="hidden-xs" ng-if="doc.rec_meta3" id="meta3">
                 <span  ng-repeat="meta in doc.rec_meta3" ng-class="{'color-red':meta==='Revoked'}">{{meta}}{{$last ? '':', '}}</span>
             </li>
-            <li class="hidden-xs" ng-if="doc.rec_meta5" id="meta5">
+            <!--<li class="hidden-xs" ng-if="doc.rec_meta5" id="meta5">
                 <span ng-repeat="meta in doc.rec_meta5">{{meta}}</span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta4" id="meta4">
                 <span  ng-repeat="meta in doc.rec_meta4">{{meta}}</span>
-            </li>
+            </li>-->
             <li>
                 <span class="last-span color-blue">{{doc.rec_date | formatDate}}</span>
             </li>
