@@ -211,12 +211,12 @@
         <div class="col-md-3">
 
                 <h5 style="padding:5px;border-radius:3px;margin-bottom:0;" class="bg-orange linkDark" ng-click="goto('/search-new/referenceRecords/?schema=resource')">
-                    <span class="badge bg-white">{{referenceRecords.capacityBuildingResource.recordCount}}</span> Literature and Capacity-building Resources
+                    <span class="badge bg-white">{{referenceRecords.resource.recordCount}}</span> Virtual Library Records
                     <span class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{help.vlr}}" data-container="body"></span>
                     </h5>
 
             <div ng-repeat="doc in referenceRecords.resource.docs" ng-show="doc.title_t && $index < 5"  class="link1">
-                <!-- <div id="capacityBuildingResources" ng-include="home-list.html"> -->
+                <!-- <div id="resources" ng-include="home-list.html"> -->
                 <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;">
                     <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
