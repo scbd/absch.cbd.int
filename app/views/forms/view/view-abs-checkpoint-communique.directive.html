@@ -27,8 +27,8 @@
 
 			<div ng-show="document.checkpoint">
 				<legend>Checkpoint/s that collected or received the information</legend>
-				<div class="km-value">
-					<ul>
+				<div >
+					<ul class="km-value" >
 						<li ng-repeat="item in document.checkpoint">
 							 <div view-default-reference ng-model="item.identifier" locale="locale"></div>
 						</li>
@@ -65,9 +65,9 @@
 				<legend>Details of the internationally recognize certificate of compliance</legend>
 				<div ng-show="document.permit">
 					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
-					<div class="km-value">
-						<ul>
-							<li ng-repeat="item in document.permit">
+					<div >
+						<ul  class="km-value">
+							<li  ng-repeat="item in document.permit">
 								 <div view-default-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
 						</ul>

@@ -173,8 +173,8 @@
 			<label>This measure has been amended by:</label>
 			<ul class="km-value">
 				<li ng-repeat="item in document.measureAmendedBy" >
-                    <i class="fa fa-external-link-square" aria-hidden="true"></i>
-						 <div view-default-reference ng-model="item.identifier" locale="locale"></div>
+                    <i class="fa fa-external-link-square" aria-hidden="true"></i>{{item}}
+						 <div view-default-reference ng-model="item.identifier_s" locale="locale"></div>
 					</li>
 			</ul>
 		</div>
@@ -184,7 +184,7 @@
 			<label>This measure is related to:</label>
 			<ul class="km-value">
 				<li ng-repeat="item in document.measureRelatedTo" >
-                     <div view-default-reference ng-model="item.identifier" locale="locale"></div>
+                     <div view-default-reference ng-model="item.identifier_s" locale="locale"></div>
 				</li>
 			</ul>
 		</div>

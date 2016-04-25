@@ -22,7 +22,8 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             question  : "@question",
             schema    : "@schema",
             type     : "@type",
-            filter : "@filter"
+            filter : "@filter",
+            hideSelf : "=hideSelf",
 		},
 		link : function($scope) {
 
@@ -30,11 +31,11 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             $scope.selectedDocuments=[];
 			$scope.areVisible = false;
             $scope.userGov = $scope.$root.user.government;
+           
 
             if(!$scope.type) $scope.type = "checkbox";
 
-
-
+      
             //==================================
             //
             //==================================
@@ -45,6 +46,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                     if($scope.isInModel(doc.identifier_s)){
                         doc.__checked = true;
                     }
+                    
                 });
 
                 $('#'+$scope.question).modal('show');
@@ -90,8 +92,15 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             //==================================
 			$scope.syncDocuments = function(){
 
-                _.forEach($scope.rawDocuments.docs, function (doc) {
+               $scope.rawDocuments.docs =  _.filter($scope.rawDocuments.docs, function (doc) {
                     doc.__checked = false;
+                   
+                    if($scope.hideSelf && $scope.hideSelf === doc.identifier_s)
+                    {
+                        return false;
+                    }
+                    return doc;
+                    
                 });
 
 
@@ -155,6 +164,8 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                     return item;
                 }
 			};
+  
+
 
             //==================================
             //
@@ -231,6 +242,12 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                     q  = q + " AND government_s:" + $scope.government.identifier;
                 if(!$scope.government &&  $scope.userGov)
                     q  = q + " AND government_s:" + $scope.userGov;
+                 
+                if($scope.hideSelf){
+                    q  = q + " AND NOT (identifier_s:" + $scope.hideSelf + ")";
+                }     
+                    
+               console.log("hide=" + q);
 
                 var queryParameters = {
                     'query'    : q,
