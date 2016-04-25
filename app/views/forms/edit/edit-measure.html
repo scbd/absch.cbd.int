@@ -394,7 +394,7 @@
                                       <label for="24E809DA-20F4-4457-9A8A-87C08DF81E8A" name="24E809DA-20F4-4457-9A8A-87C08DF81E8A">
                                           &nbsp;
                                           <span title="" style="position:relative;top:2px;" class="boldText">
-                                              <span class="ng-binding">Scope of application of the measure</span>
+                                              <span >Scope of application of the measure</span>
                                           </span>
                                       </label>
                                   </td>
@@ -411,7 +411,7 @@
                       <li>
                           <table style="width:100%" cellspacing="0" cellpadding="0">
                               <tbody>
-                                  <tr class="whiteBG btop">
+                                  <tr class="whiteBG btop" id="qt_{{term.identifier}}">
                                       <td style="text-align:left;vertical-align:middle;width:125px" >
                                           <div class="btn-group ng-scope matrix-btn" >
                                               <label class="btn ">
@@ -427,10 +427,10 @@
                                       </td>
                                       <td style="text-align:left;vertical-align:middle;" id="CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F_help">
 
-                                          <label for="CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" name="CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F">
+                                          <label for="qt_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" name="CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F">
                                               &nbsp;
                                               <span title=""  class="bold">
-                                                  <span class="ng-binding">Does it cover all genetic resources?</span>
+                                                  <span >Does it cover all genetic resources?</span>
                                               </span>
                                           </label>
                                       </td>
@@ -438,6 +438,7 @@
 
                                       </td>
                                       <td style="width:250px;text-align:right;vertical-align:middle">
+                                          <lable style="display:none" for="sec_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F">Please enter the relavant article which covers genetic resource.</label>
                                           <div ng-show="binding.geneticResource.answer" km-textbox-ml="" ng-model="binding.geneticResource.section" locales="locales"
                                               ng-required="binding.geneticResource.answer" placeholder="example: Article 14.2"  ngChange="updateScopeGR()">
                                           </div>
@@ -447,6 +448,8 @@
                           </table>
                           <div ng-if="binding.geneticResource.answer==false" style="margin: 0  0 10px 20px;">
                               <div>Please select elements from the list below and click add. Please add as many elements as necessary.</div>
+                              <label style="display:none" for="col_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F">Please select atleast one element which covers genetic resource.</label>
+
                               <table class="table" style="padding:0;margin:0 0 15px 0;width:auto!important;">
                                 <tr>
                                     <td>
@@ -496,7 +499,7 @@
                       <li >
                           <table style="width:100%" cellspacing="0" cellpadding="0">
                               <tbody>
-                                  <tr class="whiteBG btop">
+                                  <tr class="whiteBG btop" id="qt_{{term.identifier}}">
                                       <td style="text-align:left;vertical-align:middle;width:125px" >
                                           <div class="btn-group matrix-btn ng-scope" >
                                               <label class="btn">
@@ -511,10 +514,10 @@
                                       </td>
                                       <td style="text-align:left;vertical-align:middle;" id="B8A150E054154AD3AD97856ABD485E90_help">
 
-                                          <label for="B8A150E054154AD3AD97856ABD485E90" name="B8A150E054154AD3AD97856ABD485E90">
+                                          <label for="qt_B8A150E054154AD3AD97856ABD485E90" name="B8A150E054154AD3AD97856ABD485E90">
                                               &nbsp;
                                               <span title=""  class="bold">
-                                                  <span class="ng-binding">Does it cover traditional knowledge associated with genetic resources?</span>
+                                                  <span >Does it cover traditional knowledge associated with genetic resources?</span>
                                               </span>
                                           </label>
                                       </td>
@@ -528,7 +531,7 @@
                                       </td>
                                   </tr>
 
-                                  <tr class="whiteBG btop">
+                                  <tr class="whiteBG btop" id="qt_{{term.identifier}}">
 
                                         <td style="text-align:left;vertical-align:middle;width:125px" >
                                             <div class="btn-group matrix-btn ng-scope" >
@@ -544,10 +547,10 @@
                                         </td>
                                         <td style="text-align:left;vertical-align:middle;" id="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD_help">
 
-                                          <label for="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" name="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD">
+                                          <label for="qt_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" name="2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD">
                                               &nbsp;
                                               <span title=""  class="bold">
-                                                  <span class="ng-binding">Does it include provisions on temporal scope?</span>
+                                                  <span >Does it include provisions on temporal scope?</span>
                                               </span>
                                           </label>
                                       </td>
@@ -560,7 +563,7 @@
                                           </div>
                                       </td>
                                   </tr>
-                                  <tr class="whiteBG btop">
+                                  <tr class="whiteBG btop" id="qt_{{term.identifier}}">
                                       <td style="text-align:left;vertical-align:middle;width:125px" >
                                           <div class="btn-group matrix-btn ng-scope" >
                                               <label class="btn">
@@ -577,10 +580,10 @@
                                       </td>
                                       <td style="text-align:left;vertical-align:middle;" id="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A_help">
 
-                                          <label for="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" name="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A">
+                                          <label for="qt_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" name="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A">
                                               &nbsp;
                                               <span title=""  class="bold">
-                                                  <span class="ng-binding">Any other elements relevant to scope of application of the measure?</span>
+                                                  <span >Any other elements relevant to scope of application of the measure?</span>
                                               </span>
                                           </label>
                                       </td>
@@ -617,8 +620,12 @@
             <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs/inner">
               <div ng-class="{measureChecked : identifiers[term.identifier]}" style=""
               ng:if="!isStaticIdentifier(term.identifier) && (!term.broaderTerms || isParentSelected(term.identifier, term.level))">
-                <table style="width:100%" cellspacing="0" cellpadding="0">
-                <tr  ng:class="{'paddingleft0 btop' : isMainElement(term.identifier), 'btop':isYesNo(term.identifier), 'spacing30':!isYesNo(term.identifier), 'measureChecked' : identifiers[term.identifier]}" >
+                  <label style="display:none" for="col_{{term.identifier}}">
+                      Please indicate when elements are covered under {{term.title||term.name | lstring:locale}}
+                  </label>
+                <table style="width:100%" cellspacing="0" cellpadding="0" id="col_{{term.identifier}}">
+                <tr  ng:class="{'paddingleft0 btop' : isMainElement(term.identifier), 'btop':isYesNo(term.identifier),
+                'spacing30':!isYesNo(term.identifier), 'measureChecked' : identifiers[term.identifier]}" id="qt_{{term.identifier}}">
                   <td style="text-align:left;vertical-align:middle;width:125px" ng:if="isYesNo(term.identifier)">
                       <div class="btn-group matrix-btn "  ng:class="{'bg-main' : isMainElement(term.identifier)}">
                          <label class="btn">
@@ -632,18 +639,21 @@
                      </div>
                   </td>
                   <td style="text-align:left;vertical-align:middle;" id="{{term.identifier}}_help" style=""  colspan="{{isYesNo(term.identifier) ? 1 : 2}}">
-                    <label for="{{term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' ? 'otherAbsMeasure' : term.identifier}}" name="{{term.identifier}}" >
+                    <label for="qt_{{term.identifier}}" name="{{term.identifier}}" >
                          &nbsp;
                          <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}"
                          ng:if="!isReadOnly(term.identifier) && !isYesNo(term.identifier)" />
                          <span title="{{term.description|lstring:locale}}" ng:class="{true:'bold',false:'normalText'}[isMainElement(term.identifier) || (isYesNo(term.identifier) && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')< 0)]" >
                               <span ng-class="{'bold':term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && isYesNo(term.identifier)}">{{term.title||term.name | lstring:locale}} </span>
                               <i ng-show="term.description" class="icon-question-sign"></i>
-                         </span>
+                         </span>{{term.identifier}}
                     </label>
                     <span class="help-info" ng:if="term.description && term.description.length > 0 && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0" style="padding-left:25px">{{term.description}}</span>
                   </td>
                   <td style="width:250px;text-align:right;vertical-align:middle">
+                    <label style="display:none" for="sec_{{term.identifier}}">
+                        Please enter relevant article for {{term.title||term.name | lstring:locale}}
+                    </label>
                     <div ng-show="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0 && ((identifiers[term.identifier] && (term.narrowerTerms.length||0) == 0) || (scopeOfMeasureTerm == term.identifier && identifiers[term.identifier]==false))"
                      km-textbox-ml ng-model="sections[term.identifier]"
                     locales="locales" ng-required="identifiers[term.identifier]" placeholder="example: Article 14.2"></div>
@@ -653,6 +663,7 @@
 
                 <tr ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && identifiers[term.identifier]">
                   <td colspan="3">
+                      <label style="display:none" for="col_{{term.identifier}}">Please select atleast one {{term.title||term.name | lstring:locale}}</label>
                       <span onload="otherElements = otherTerms[term.identifier]" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
                   </td>
                 </tr>

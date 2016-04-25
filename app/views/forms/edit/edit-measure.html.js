@@ -474,6 +474,8 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                                         "B8A150E054154AD3AD97856ABD485E90", "2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD",
                                         "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A"];
 
+                var parentsOfSectionElements = []
+
                 var scopeofMeasureElements = ["CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F"];
                 $scope.scopeOfMeasureTerm = "CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F";
                 $scope.scopeElement = {};
