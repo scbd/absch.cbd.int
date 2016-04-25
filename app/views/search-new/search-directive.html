@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12" style="padding-bottom:10px;">
-                
+
 
                 <span ng-repeat="filter in setFilters" style="margin-bottom:10px;">
                     <button class="btn btn-sm btn-info bold" style="margin-top:5px;" ng-click="removeFilter(filter.id)">
@@ -70,13 +70,13 @@
                 <div class="tab-pane bg-white" ng-class="{'active':currentTab==='nationalRecords'}" ng-if="currentTab==='nationalRecords'">
                     <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="nationalLoading" infinite-scroll-distance="10">
                         <!-- <div block-region activate="nationalLoading"></div> -->
-                        <div ng-repeat="country in rawDocs.groups" id="search-country-group"> 
+                        <div ng-repeat="country in rawDocs.groups" id="search-country-group">
                             <national-records-country group='country'></national-records-country>
                         </div>
                         <div ng-if="nationalLoading">
                             <i class="fa fa-spin fa-spinner"  style="margin-left:50%" /> loading..
                         </div>
-                        <h4 class="bg-white" ng-if="rawDocs.groups.length === 0"><br>no records found</h4>
+                        <h4 class="bg-white" ng-if="!nationalLoading && rawDocs.groups.length === 0"><br>no records found</h4>
                     </div>
                 </div>
                 <div class="tab-pane bg-white" style="padding-top:20px;" ng-class="{'active':currentTab==='referenceRecords'}" ng-if="currentTab=='referenceRecords'">
@@ -88,7 +88,7 @@
                         <div ng-if="referenceLoading">
                             <i class="fa fa-spin fa-spinner"  style="margin-left:50%" /> loading..
                         </div>
-                        <h4 class="bg-white" ng-if="refDocs.docs.length === 0">no records found</h4>
+                        <h4 class="bg-white" ng-if="!referenceLoading && refDocs.docs.length === 0">no records found</h4>
                     </div>
                 </div>
                 <div class="tab-pane bg-white" style="padding-top:20px;" ng-class="{'active':currentTab==='scbdRecords'}" ng-if="currentTab=='scbdRecords'">
@@ -100,7 +100,7 @@
                         <div ng-if="scbdLoading">
                             <i class="fa fa-spin fa-spinner "  style="margin-left:50%" /> loading..
                         </div>
-                        <h4 class="bg-white" ng-if="scbdDocs.docs.length === 0">no records found</h4>
+                        <h4 class="bg-white" ng-if="!scbdLoading && scbdDocs.docs.length === 0">no records found</h4>
                     </div>
                 </div>
             </div>

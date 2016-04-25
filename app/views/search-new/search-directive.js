@@ -968,7 +968,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             var documents = _.pluck($scope.rawDocs.groups, 'doclist');
                             var docCount = getRecordCount(documents);
 
-                            if($scope.nationalLoading || docCount == $scope.recordCount[0].count)
+                            if($scope.nationalLoading || !$scope.recordCount || docCount == $scope.recordCount[0].count)
                                 return;
 
                             $scope.nationalLoading = true;
@@ -976,14 +976,14 @@ define(['app', 'underscore', '/app/js/common.js',
                             nationalQuery();
                         }
                         else if($scope.currentTab == 'referenceRecords'){
-                            if($scope.referenceLoading || ($scope.refDocs.docs||[]).length == $scope.recordCount[1].count)
+                            if($scope.referenceLoading || !$scope.recordCount || ($scope.refDocs.docs||[]).length == $scope.recordCount[1].count)
                                 return;
                             $scope.referenceLoading = true;
                             referenceCurrentPage += 1;
                             referenceQuery();
                         }
                         else if($scope.currentTab == 'scbdRecords'){
-                            if($scope.scbdLoading || ($scope.scbdDocs.docs||[]).length == $scope.recordCount[2].count)
+                            if($scope.scbdLoading || !$scope.recordCount || ($scope.scbdDocs.docs||[]).length == $scope.recordCount[2].count)
                                 return;
                             $scope.scbdLoading = true;
                             scbdCurrentPage += 1;
@@ -1016,6 +1016,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             if(query.schema){
                                 $scope.saveFilter(query.schema);
                             }
+                            $scope.refresh = false;
                         }
                     }
 
