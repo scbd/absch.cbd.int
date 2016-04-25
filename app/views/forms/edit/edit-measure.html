@@ -315,14 +315,14 @@
 
                 <div ng-if="document.absMeasuresForDelete">
         			<div class="alert alert-warning">
-                        <h4 class="color-blue">
-                         
+                        <h3 class="color-blue">
                                 <i class='fa fa-info-circle'></i>
-                                <strong>This list is for reference purpose only.
-                                    The new measure matrix is not available on the old format of this list.</strong>
+                                <strong>
+                                   The format for saving the <i>Elements of Measures</i> has changed. This record must be manually updated.
+                                   The below list of <i>Elments of measures</i> is from the previous version and is meant for reference purpose in order to help you update this record.
+                                  </strong>
                             
-                        </h4>
-                        <br/>
+                        </h3>
         	            <span ng-repeat="elm in document.absMeasuresForDelete">
         	                {{$index+1}}. {{elm|term}} <span ng-if="elm.customValue">{{elm.customValue}}</span>
         	                    &nbsp;<span ng-if="elm.section">({{elm.section|lstring}})</span>
