@@ -315,12 +315,12 @@
 
                 <div ng-if="document.absMeasuresForDelete">
         			<div class="alert alert-warning">
-                        <h4>
-                            <span class="label label-info">
+                        <h4 class="color-blue">
+                         
                                 <i class='fa fa-info-circle'></i>
                                 <strong>This list is for reference purpose only.
                                     The new measure matrix is not available on the old format of this list.</strong>
-                            </span>
+                            
                         </h4>
                         <br/>
         	            <span ng-repeat="elm in document.absMeasuresForDelete">
@@ -646,7 +646,7 @@
                          <span title="{{term.description|lstring:locale}}" ng:class="{true:'bold',false:'normalText'}[isMainElement(term.identifier) || (isYesNo(term.identifier) && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')< 0)]" >
                               <span ng-class="{'bold':term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && isYesNo(term.identifier)}">{{term.title||term.name | lstring:locale}} </span>
                               <i ng-show="term.description" class="icon-question-sign"></i>
-                         </span>{{term.identifier}}
+                         </span>
                     </label>
                     <span class="help-info" ng:if="term.description && term.description.length > 0 && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0" style="padding-left:25px">{{term.description}}</span>
                   </td>
