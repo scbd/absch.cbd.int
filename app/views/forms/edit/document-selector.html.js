@@ -32,7 +32,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 			$scope.areVisible = false;
             $scope.userGov = $scope.$root.user.government;
             $scope.showAddButton = false;
-           
+            $scope.isLoading = true;
 
             if(!$scope.type) $scope.type = "checkbox";
 
@@ -247,7 +247,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                         console.log('ERROR: ' + error);
                     })
                     .finally(function(){
-                        $scope.isLoading = false;
+                       // $scope.isLoading = false;
                     });
 
                 console.log(q);
@@ -281,7 +281,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             //
             //==================================
 			$scope.openAddDialog = function(){
-                
+
                  load();
                     
                  $scope.syncDocuments();
@@ -295,6 +295,9 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                 });
 
                 $('#'+$scope.question).modal('show');
+                
+                $scope.isLoading = false;
+                  
 			};
 
 
