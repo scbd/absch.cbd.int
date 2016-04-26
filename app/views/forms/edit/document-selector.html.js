@@ -31,27 +31,12 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             $scope.selectedDocuments=[];
 			$scope.areVisible = false;
             $scope.userGov = $scope.$root.user.government;
+            $scope.showAddButton = false;
            
 
             if(!$scope.type) $scope.type = "checkbox";
 
       
-            //==================================
-            //
-            //==================================
-			$scope.openAddDialog = function(){
-
-                 _.forEach($scope.rawDocuments.docs, function (doc) {
-                    doc.__checked = false;
-                    if($scope.isInModel(doc.identifier_s)){
-                        doc.__checked = true;
-                    }
-                    
-                });
-
-                $('#'+$scope.question).modal('show');
-			};
-
             //==================================
             //
             //==================================
@@ -247,8 +232,6 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                     q  = q + " AND NOT (identifier_s:" + $scope.hideSelf + ")";
                 }     
                     
-               console.log("hide=" + q);
-
                 var queryParameters = {
                     'query'    : q,
                     'currentPage' : 0,
@@ -273,8 +256,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
            //==================================
             //
             //==================================
-            this.load = function () {
-
+            function load() {
                 if(!$scope.rawDocuments || _.isEmpty($scope.rawDocuments))
                 {
                     getDocs();
@@ -282,16 +264,40 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                 }
             };
 
-            load();
+           
 
 			//==================================
 		    //
 		    //==================================
 		    $scope.$watch('government', function(newValue, oldValue){
-		        if(newValue != oldValue){
-                     $scope.syncDocuments();
+		        if(newValue){
+                     //$scope.syncDocuments();
+                     $scope.showAddButton = true;
 		        }
 		    });
+            
+            
+            //==================================
+            //
+            //==================================
+			$scope.openAddDialog = function(){
+                
+                 load();
+                    
+                 $scope.syncDocuments();
+
+                 _.forEach($scope.rawDocuments.docs, function (doc) {
+                    doc.__checked = false;
+                    if($scope.isInModel(doc.identifier_s)){
+                        doc.__checked = true;
+                    }
+                    
+                });
+
+                $('#'+$scope.question).modal('show');
+			};
+
+
 
 			$scope.isContact = function(document){
 				return _.some($scope.selectedDocuments, function(doc){
