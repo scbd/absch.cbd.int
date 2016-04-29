@@ -557,8 +557,8 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                             }
                             if($scope.binding.relevantElements[i].answer != undefined){
                                 oNewIdentifiers[identifier] = $scope.binding.relevantElements[i].answer;
-                                if(!initialized && ((!$scope.binding.relevantElements[i].answer && identifier != $scope.scopeOfMeasureTerm)
-                                || ($scope.binding.relevantElements[i].answer && identifier == $scope.scopeOfMeasureTerm)))
+
+                                if(!initialized && $scope.binding.relevantElements[i].answer)
                                     setChildrenSelected(identifier, identifier != $scope.scopeOfMeasureTerm);
                             }
                             // else
@@ -645,21 +645,14 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 $scope.updateSelected = function(term, answer, answerText){
                     if(term.narrowerTerms){
 
-                        if((answerText == 'no' && term.identifier != $scope.scopeOfMeasureTerm ) ||
-                        (term.identifier == $scope.scopeOfMeasureTerm && answerText == 'yes')){
+                        if(answerText == 'no'){
                             removeSelectedChildren(term.identifier);
                         }
                         else{
-
-                            if(term.identifier == $scope.scopeOfMeasureTerm){
-                                setChildrenSelected(term.identifier);
-                            }
-                            else{
-                                _.each(term.narrowerTerms, function(term){
-                                    var lterm = _.findWhere($scope.terms, {identifier:term.identifier});
-                                    lterm.showElement = true;
-                                });
-                            }
+                            _.each(term.narrowerTerms, function(term){
+                                var lterm = _.findWhere($scope.terms, {identifier:term.identifier});
+                                lterm.showElement = true;
+                            });
                         }
                     }
                     else if(term.identifier.indexOf('#') > 0){
@@ -817,7 +810,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         term =[];
 
                     term.push({
-                        name:'', section:''
+
                     });
                 }
 
@@ -828,8 +821,8 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
 
                 $scope.appendEmptyOther = function(otherElements){
                     var lastItem = otherElements[otherElements.length-1];
-                    if(lastItem.name != "" )//&& lastItem.section != "")
-                        otherElements.push({name:'', section:''});
+                    if(!angular.equals(lastItem, {}) && lastItem.name != "")
+                        otherElements.push({});
 
                     $scope.save();
                 }
@@ -837,7 +830,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 $scope.initializeOther = function(otherElement){
                     $scope.otherTerms[otherElement.identifier] = [];
                     //.scopeOtherElements = [];
-                    $scope.otherTerms[otherElement.identifier].push({name:'', section:''});
+                    $scope.otherTerms[otherElement.identifier].push({});
                     // otherElement.scopeOtherElements.push({name:'', section:''});
                                         $scope.save();
                 }

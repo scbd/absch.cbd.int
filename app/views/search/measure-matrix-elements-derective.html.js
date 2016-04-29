@@ -136,7 +136,14 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                 throw "Terms must be array";
 
                             if ($scope.binding) {
-
+                                 if($scope.binding.geneticResource) {
+                                    if($scope.binding.geneticResource.answer){
+                                        var grCoverId = addCustomElement('Covers all genetic resources', 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', 1);
+                                        var geneticResource = $scope.binding.geneticResource;
+                                        oNewSections[grCoverId] = geneticResource.section;
+                                        oNewIdentifiers[grCoverId] = true;
+                                    }
+                                }
                                 if (!$.isArray($scope.binding.relevantElements))
                                     throw "ABS Elements must be array";
 
@@ -156,29 +163,25 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
 
                                         if($scope.binding.relevantElements[i].parent
                                             && !$scope.binding.relevantElements[i].hasOwnProperty('answer')
-                                        // && identifier != '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#BE944E70-2098-45AC-891B-D5E94AFECB99'
                                         ){
-                                            if(!oNewOtherTerms[identifier])
-                                                oNewOtherTerms[identifier] = [];
+                                            // if(oNewOtherCustomValues[identifier] || $scope.binding.relevantElements[i].section){
+                                                if(!oNewOtherTerms[identifier])
+                                                    oNewOtherTerms[identifier] = [];
 
-                                            var lOtherTerm = {
-                                                identifier  : '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED',
-                                                name        : oNewOtherCustomValues[identifier],
-                                                section     : $scope.binding.relevantElements[i].section,
-                                                parent      : $scope.binding.relevantElements[i].parent
-                                            };
-                                            oNewOtherTerms[identifier].push(lOtherTerm);
+                                                var lOtherTerm = {
+                                                    identifier  : '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED',
+                                                    name        : oNewOtherCustomValues[identifier],
+                                                    section     : $scope.binding.relevantElements[i].section,
+                                                    parent      : $scope.binding.relevantElements[i].parent
+                                                };
+                                                oNewOtherTerms[identifier].push(lOtherTerm);
+                                            // }
                                         }
                                     }
                                     if($scope.binding.relevantElements[i].answer != undefined){
                                         oNewIdentifiers[identifier] = $scope.binding.relevantElements[i].answer;
-                                        // if(((!$scope.binding.relevantElements[i].answer && identifier != $scope.scopeOfMeasureTerm)
-                                        // || ($scope.binding.relevantElements[i].answer && identifier == $scope.scopeOfMeasureTerm)))
-                                        //     setChildrenSelected(identifier, identifier != $scope.scopeOfMeasureTerm);
                                     }
-                                    // else
-                                    //     oNewIdentifiers[identifier] = true;
-                                    // if($scope.binding.relevantElements[i].identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0)
+                                    if($scope.binding.relevantElements[i].section)
                                         oNewSections[identifier] = $scope.binding.relevantElements[i].section;
 
                                     var elementTerm = _.findWhere($scope.terms, {identifier:identifier});
@@ -308,6 +311,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         });
                     }
                     if($scope.type=='single'){
+
                         _.each(measure.measureAmendedBy, function(measureElement) {
                             if(measureElement.measure)
                                 _.each(measureElement.measure.absMeasures, function(element) {
@@ -347,8 +351,8 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                     if(!parentElement.narrowerTerms)
                         parentElement.narrowerTerms = [];
                     parentElement.narrowerTerms.push(elementMeasure.identifier);
-
-                    $scope.identifiers[elementMeasure.identifier] = true;
+                    if($scope.identifiers)
+                        $scope.identifiers[elementMeasure.identifier] = true;
 
                     return elementMeasure.identifier;
 
@@ -402,7 +406,8 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
 
                         $scope.terms.push(elementMeasure);
 
-                        $scope.identifiers[elementMeasure.identifier] = true;
+                        if($scope.identifiers)
+                            $scope.identifiers[elementMeasure.identifier] = true;
                         if(measureElement.section ||measureElement.elements)
                             $scope.sections[elementMeasure.identifier] = measureElement.section||{};
 
@@ -421,7 +426,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         });
                         term.level = level;
 
-                        term.answer = element.answer;
+                        term.answer = element.answer||$scope.identifiers[term.identifier];
 
                         if (element.measureIdentifier) {
                             term.sortOrder = 1;

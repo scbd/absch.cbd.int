@@ -438,7 +438,11 @@
 
                                       </td>
                                       <td style="width:250px;text-align:right;vertical-align:middle">
-                                          <lable style="display:none" for="sec_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F">Please enter the relavant article which covers genetic resource.</label>
+                                          <label for="sec_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" style="width:0px;height:0px;display:inline">
+                                              <span style="display:none">
+                                                  Please enter the relavant article which covers all genetic resource.
+                                              </span>
+                                          </label>
                                           <div ng-show="binding.geneticResource.answer" km-textbox-ml="" ng-model="binding.geneticResource.section" locales="locales"
                                               ng-required="binding.geneticResource.answer" placeholder="example: Article 14.2"  ngChange="updateScopeGR()">
                                           </div>
@@ -448,7 +452,11 @@
                           </table>
                           <div ng-if="binding.geneticResource.answer==false" style="margin: 0  0 10px 20px;">
                               <div>Please select elements from the list below and click add. Please add as many elements as necessary.</div>
-                              <label style="display:none" for="col_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F">Please select atleast one element which covers genetic resource.</label>
+                              <label for="col_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F"style="width:0px;height:0px;display:inline">
+                                  <span style="display:none">
+                                      Please select atleast one element which covers genetic resource.
+                                  </span>
+                              </label>
 
                               <table class="table" style="padding:0;margin:0 0 15px 0;width:auto!important;">
                                 <tr>
@@ -525,6 +533,11 @@
 
                                       </td>
                                       <td style="width:250px;text-align:right;vertical-align:middle">
+                                          <label for="sec_B8A150E054154AD3AD97856ABD485E90" style="width:0px;height:0px;display:inline">
+                                              <span style="display:none">
+                                                  Please enter the relavant article for traditional knowledge associated with genetic resources.
+                                              </span>
+                                          </label>
                                           <div ng-show="identifiers['B8A150E054154AD3AD97856ABD485E90']" km-textbox-ml="" ng-model="sections['B8A150E054154AD3AD97856ABD485E90']" locales="locales"
                                               ng-required="identifiers['B8A150E054154AD3AD97856ABD485E90']" placeholder="example: Article 14.2">
                                           </div>
@@ -558,6 +571,11 @@
 
                                       </td>
                                       <td style="width:250px;text-align:right;vertical-align:middle">
+                                          <label for="sec_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" style="width:0px;height:0px;display:inline">
+                                              <span style="display:none">
+                                                  Please enter the relavant article for provisions on temporal scope.
+                                              </span>
+                                          </label>
                                           <div ng-show="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" km-textbox-ml="" ng-model="sections['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" locales="locales"
                                               ng-required="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" placeholder="example: Article 14.2">
                                           </div>
@@ -594,6 +612,16 @@
                                   </tr>
                                   <tr ng-if="identifiers['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']">
                                     <td colspan="3">
+                                        <label for="col_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" style="width:0px;height:0px;display:inline">
+                                            <span style="display:none">
+                                                Please select atleast one other elements relevant to scope of application of the measure.
+                                            </span>
+                                        </label>
+                                        <label for="sec_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" style="width:0px;height:0px;display:inline">
+                                            <span style="display:none">
+                                                Please enter the relavant name/article for other elements relevant to scope of application of the measure.
+                                            </span>
+                                        </label>
                                         <span onload="otherElements = otherTerms['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
                                     </td>
                                   </tr>
@@ -620,8 +648,10 @@
             <script type="text/ng-template"  id="/app/views/forms/edit/edit-measure.directive/abs/inner">
               <div ng-class="{measureChecked : identifiers[term.identifier]}" style=""
               ng:if="!isStaticIdentifier(term.identifier) && (!term.broaderTerms || isParentSelected(term.identifier, term.level))">
-                  <label style="display:none" for="col_{{term.identifier}}">
-                      Please indicate when elements are covered under {{term.title||term.name | lstring:locale}}
+                  <label for="col_{{term.identifier}}" style="width:0px;height:0px;display:inline">
+                      <span style="display:none">
+                          Please indicate which elements are covered under {{term.title||term.name | lstring:locale}}
+                      </span>
                   </label>
                 <table style="width:100%" cellspacing="0" cellpadding="0" id="col_{{term.identifier}}">
                 <tr  ng:class="{'paddingleft0 btop' : isMainElement(term.identifier), 'btop':isYesNo(term.identifier),
@@ -630,11 +660,11 @@
                       <div class="btn-group matrix-btn "  ng:class="{'bg-main' : isMainElement(term.identifier)}">
                          <label class="btn">
                            <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier],'yes')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}"
-                           ng-value="{{((term.narrowerTerms.length||0) ==0) ? true : false}}"> Yes
+                           ng-value="true"> Yes<!--{{((term.narrowerTerms.length||0) ==0) ? true : false}}-->
                          </label>
                          <label class="btn">
                              <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier], 'no')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}"
-                             ng-value="{{((term.narrowerTerms.length||0) == 0) ? false : true}}"> No
+                             ng-value="false"> No<!--{{((term.narrowerTerms.length||0) == 0) ? false : true}}-->
                          </label>
                      </div>
                   </td>
@@ -651,19 +681,29 @@
                     <span class="help-info" ng:if="term.description && term.description.length > 0 && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0" style="padding-left:25px">{{term.description}}</span>
                   </td>
                   <td style="width:250px;text-align:right;vertical-align:middle">
-                    <label style="display:none" for="sec_{{term.identifier}}">
-                        Please enter relevant article for {{term.title||term.name | lstring:locale}}
-                    </label>
+                      <label for="sec_{{term.identifier}}" style="width:0px;height:0px;display:inline">
+                          <span style="display:none">
+                              Please enter relevant article for {{term.title||term.name | lstring:locale}}
+                          </span>
+                      </label>
                     <div ng-show="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0 && ((identifiers[term.identifier] && (term.narrowerTerms.length||0) == 0) || (scopeOfMeasureTerm == term.identifier && identifiers[term.identifier]==false))"
                      km-textbox-ml ng-model="sections[term.identifier]"
                     locales="locales" ng-required="identifiers[term.identifier]" placeholder="example: Article 14.2"></div>
-
                   </td>
                 </tr>
 
                 <tr ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && identifiers[term.identifier]">
                   <td colspan="3">
-                      <label style="display:none" for="col_{{term.identifier}}">Please select atleast one {{term.title||term.name | lstring:locale}}</label>
+                      <label for="col_{{term.identifier}}" style="width:0px;height:0px;display:inline">
+                          <span style="display:none">
+                              Please select atleast one {{term.title||term.name | lstring:locale}}
+                          </span>
+                      </label>
+                      <label for="sec_{{term.identifier}}" style="width:0px;height:0px;display:inline">
+                          <span style="display:none">
+                              Please enter the relavant name/article {{term.title||term.name | lstring:locale}}
+                          </span>
+                      </label>
                       <span onload="otherElements = otherTerms[term.identifier]" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
                   </td>
                 </tr>
