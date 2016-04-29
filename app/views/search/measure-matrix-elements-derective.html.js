@@ -144,51 +144,50 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                         oNewIdentifiers[grCoverId] = true;
                                     }
                                 }
-                                // if (!$.isArray($scope.binding.relevantElements))
-                                //     throw "ABS Elements must be array";
+                                if (!$.isArray($scope.binding.relevantElements)){
+                                    for (var i = 0; i < $scope.binding.relevantElements.length; ++i) {
+                                        var identifier = $scope.binding.relevantElements[i].identifier;
+                                        //handle others
 
-                                for (var i = 0; i < $scope.binding.relevantElements.length; ++i) {
-                                    var identifier = $scope.binding.relevantElements[i].identifier;
-                                    //handle others
+                                        if ($scope.binding.relevantElements[i].parent) {
+                                            if ($scope.binding.relevantElements[i].parent){
+                                                // identifier.indexOf('#')<0 &&  $scope.binding.relevantElements[i].parent.indexOf('#')<0)
+                                                if($scope.binding.relevantElements[i].parent.indexOf('#') > 0)
+                                                    identifier = $scope.binding.relevantElements[i].parent;
+                                                else
+                                                    identifier += '#' + $scope.binding.relevantElements[i].parent;
+                                            }
+                                            oNewOtherCustomValues[identifier] = $scope.binding.relevantElements[i].customValue;
 
-                                    if ($scope.binding.relevantElements[i].parent) {
-                                        if ($scope.binding.relevantElements[i].parent){
-                                            // identifier.indexOf('#')<0 &&  $scope.binding.relevantElements[i].parent.indexOf('#')<0)
-                                            if($scope.binding.relevantElements[i].parent.indexOf('#') > 0)
-                                                identifier = $scope.binding.relevantElements[i].parent;
-                                            else
-                                                identifier += '#' + $scope.binding.relevantElements[i].parent;
+                                            if($scope.binding.relevantElements[i].parent
+                                                && !$scope.binding.relevantElements[i].hasOwnProperty('answer')
+                                            ){
+                                                // if(oNewOtherCustomValues[identifier] || $scope.binding.relevantElements[i].section){
+                                                    if(!oNewOtherTerms[identifier])
+                                                        oNewOtherTerms[identifier] = [];
+
+                                                    var lOtherTerm = {
+                                                        identifier  : '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED',
+                                                        name        : oNewOtherCustomValues[identifier],
+                                                        section     : $scope.binding.relevantElements[i].section,
+                                                        parent      : $scope.binding.relevantElements[i].parent
+                                                    };
+                                                    oNewOtherTerms[identifier].push(lOtherTerm);
+                                                // }
+                                            }
                                         }
-                                        oNewOtherCustomValues[identifier] = $scope.binding.relevantElements[i].customValue;
-
-                                        if($scope.binding.relevantElements[i].parent
-                                            && !$scope.binding.relevantElements[i].hasOwnProperty('answer')
-                                        ){
-                                            // if(oNewOtherCustomValues[identifier] || $scope.binding.relevantElements[i].section){
-                                                if(!oNewOtherTerms[identifier])
-                                                    oNewOtherTerms[identifier] = [];
-
-                                                var lOtherTerm = {
-                                                    identifier  : '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED',
-                                                    name        : oNewOtherCustomValues[identifier],
-                                                    section     : $scope.binding.relevantElements[i].section,
-                                                    parent      : $scope.binding.relevantElements[i].parent
-                                                };
-                                                oNewOtherTerms[identifier].push(lOtherTerm);
-                                            // }
+                                        if($scope.binding.relevantElements[i].answer != undefined){
+                                            oNewIdentifiers[identifier] = $scope.binding.relevantElements[i].answer;
                                         }
-                                    }
-                                    if($scope.binding.relevantElements[i].answer != undefined){
-                                        oNewIdentifiers[identifier] = $scope.binding.relevantElements[i].answer;
-                                    }
-                                    if($scope.binding.relevantElements[i].section)
-                                        oNewSections[identifier] = $scope.binding.relevantElements[i].section;
+                                        if($scope.binding.relevantElements[i].section)
+                                            oNewSections[identifier] = $scope.binding.relevantElements[i].section;
 
-                                    var elementTerm = _.findWhere($scope.terms, {identifier:identifier});
-                                    if(elementTerm)
-                                        elementTerm.answer = $scope.binding.relevantElements[i].answer;
+                                        var elementTerm = _.findWhere($scope.terms, {identifier:identifier});
+                                        if(elementTerm)
+                                            elementTerm.answer = $scope.binding.relevantElements[i].answer;
+                                    }
+                                    initialized = true;
                                 }
-                                initialized = true;
                             }
 
                             if (!angular.equals(oNewIdentifiers, $scope.identifiers)){
