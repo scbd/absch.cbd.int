@@ -31,13 +31,13 @@ define(['text!./search-map.html',
 
             _.each(countries, function(country) {
 
-              var countryFacet = _.where(countryFacets, {
+              var countryFacet = _.findWhere(countryFacets, {
                 government : country.code.toLowerCase()
               });
-              if (countryFacet.length > 0) {
+              if (countryFacet) {
 
                 _.each(countryFacet.schemas, function(document, key) {
-                  country[$filter("schemaShortName")(key)] = document.count;
+                  country[$filter("schemaShortName")(key)] = document;
                 });
                 country.total = countryFacet.recordCount;
               }
