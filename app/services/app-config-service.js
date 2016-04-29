@@ -102,7 +102,7 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
                     'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
                 }]
             }, {
-                'host': 'dev-absch.cbd.int',
+                'host': 'absch.cbddev.xyz',
                 'realm': 'ABS-DEV',
                 'roles': [{
                     'User': 'User'
