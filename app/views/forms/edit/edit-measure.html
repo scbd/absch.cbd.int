@@ -315,14 +315,14 @@
 
                 <div ng-if="document.absMeasuresForDelete">
         			<div class="alert alert-warning">
-                        <h4>
-                            <span class="label label-info">
+                        <h4 class="color-blue">
                                 <i class='fa fa-info-circle'></i>
-                                <strong>This list is for reference purpose only.
-                                    The new measure matrix is not available on the old format of this list.</strong>
-                            </span>
+                                <strong>
+                                   The format for saving the <i>Elements of Measures</i> has changed. This record must be manually updated.
+                                   The below list of <i>Elments of measures</i> is from the previous version and is meant for reference purposes in order to help you update this record.
+                                  </strong>
+                            
                         </h4>
-                        <br/>
         	            <span ng-repeat="elm in document.absMeasuresForDelete">
         	                {{$index+1}}. {{elm|term}} <span ng-if="elm.customValue">{{elm.customValue}}</span>
         	                    &nbsp;<span ng-if="elm.section">({{elm.section|lstring}})</span>
@@ -676,7 +676,7 @@
                          <span title="{{term.description|lstring:locale}}" ng:class="{true:'bold',false:'normalText'}[isMainElement(term.identifier) || (isYesNo(term.identifier) && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')< 0)]" >
                               <span ng-class="{'bold':term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && isYesNo(term.identifier)}">{{term.title||term.name | lstring:locale}} </span>
                               <i ng-show="term.description" class="icon-question-sign"></i>
-                         </span>{{term.identifier}}
+                         </span>
                     </label>
                     <span class="help-info" ng:if="term.description && term.description.length > 0 && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0" style="padding-left:25px">{{term.description}}</span>
                   </td>
@@ -723,7 +723,7 @@
                         </td>
                         <td>
                             <div style="max-width:200px" km-textbox-ml="" ng-model="element.name" locales="locales"
-                                ng-required="true" placeholder="bacteria" ng-change="appendEmptyOther(otherElements)">
+                                ng-required="true" placeholder="other element" ng-change="appendEmptyOther(otherElements)">
                             </div>
                         </td>
                         <td class="pull-right">
