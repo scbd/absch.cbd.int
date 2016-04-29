@@ -144,8 +144,8 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                         oNewIdentifiers[grCoverId] = true;
                                     }
                                 }
-                                if (!$.isArray($scope.binding.relevantElements))
-                                    throw "ABS Elements must be array";
+                                // if (!$.isArray($scope.binding.relevantElements))
+                                //     throw "ABS Elements must be array";
 
                                 for (var i = 0; i < $scope.binding.relevantElements.length; ++i) {
                                     var identifier = $scope.binding.relevantElements[i].identifier;
