@@ -144,7 +144,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                         oNewIdentifiers[grCoverId] = true;
                                     }
                                 }
-                                if (!$.isArray($scope.binding.relevantElements)){
+                                if ($.isArray($scope.binding.relevantElements)){
                                     for (var i = 0; i < $scope.binding.relevantElements.length; ++i) {
                                         var identifier = $scope.binding.relevantElements[i].identifier;
                                         //handle others
