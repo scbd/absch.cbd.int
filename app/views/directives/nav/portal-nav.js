@@ -5,9 +5,9 @@ app.directive('portalNav', function () {
     replace: true,
     // transclude: true,
     templateUrl: '/app/views/directives/nav/portal-nav.html',
-    scope: {
-            uid: '@',
-    },
+    // scope: {
+    //         uid: '@',
+    // },
     link: ['$scope', '$q', '$element', function ($scope, $q, $element) {
 
     }]
@@ -16,14 +16,14 @@ app.directive('portalNav', function () {
 
       $scope.breadcrumbs     = breadcrumbs;
       $scope.$root.pageTitle = { text: "" };
-      
+
       $scope.showHelp = helpService.getHelp();
- 
+
        $scope.toggleHelp = function(){
            $scope.showHelp = !$scope.showHelp;
            helpService.toggleHelp();
        };
-       
+
       }]};//end controller
   });
 });

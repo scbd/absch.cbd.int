@@ -14,14 +14,14 @@
             </div>
             <div id="navbar">
                 <ul class="nav navbar-nav pull-left" style="width:100%" >
-                    <div class="bold color-orange1 hidden-md hidden-lg" ng-if="!production_env">
+                    <!-- <div class="bold color-orange1 hidden-md hidden-lg" ng-if="!production_env">
                         <span ng-show="development_env"> DEV</span>
                         <span ng-show="training_env"> TRG</span>
                     </div>
                     <div class="bold color-orange1 hidden-xs" ng-if="!production_env">
                         <span ng-show="development_env"> DEVELOPMENT</span>
                         <span ng-show="training_env"> TRAINING</span>
-                    </div>
+                    </div> -->
                     <li >
                          <a href="/">
                             <strong class="color-white visible-xs ">ABSCH</strong>
@@ -49,7 +49,7 @@
                         </a>
                     </li>
                     <!--<li class="last pull-right">
-                        <a ng-click="toggleHelp();"> <i class="fa fa-info-circle" ng-class="{'helpOn':showHelp ,'helpOff':!showHelp }"></i> </i> 
+                        <a ng-click="toggleHelp();"> <i class="fa fa-info-circle" ng-class="{'helpOn':showHelp ,'helpOff':!showHelp }"></i> </i>
                         </a>
                     </li>-->
                     <li class="pull-right" ng-if="training_env||development_env"><a href="/forums" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;Forums</span></a></li>
