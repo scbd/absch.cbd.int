@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-xs-12" >
 
-           <button ng-show="showAddButton" style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled" ><i class="fa fa-plus"></i> {{caption || 'Add record'}}{{type!=='radio' ? "(s)" : ""}}</button>
+           <button  style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled" ><i class="fa fa-plus"></i> {{caption || 'Add record'}}{{type!=='radio' ? "(s)" : ""}}</button>
 
            <span ng-show="model.length==0 || !model"> <i class="color-blue"> No records have been linked. </i> </span>
 

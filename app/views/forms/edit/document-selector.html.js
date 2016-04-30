@@ -269,7 +269,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 			//==================================
 		    //
 		    //==================================
-		    $scope.$watch('government', function(newValue, oldValue){
+		    $scope.$watch('model', function(newValue, oldValue){
 		        if(newValue){
                      //$scope.syncDocuments();
                      $scope.showAddButton = true;
