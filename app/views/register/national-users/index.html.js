@@ -8,6 +8,7 @@ app.controller("nationalUsersController", ['$scope', '$http', '$q', 'ngDialog', 
         var manageableRoles = {};
         var authenticatedUser = $rootScope.user;
         var government = authenticatedUser.government;
+        var governmentPARole;
 
         $scope.edit                = edit;
         $scope.dropUser            = dropUser;
@@ -31,9 +32,19 @@ app.controller("nationalUsersController", ['$scope', '$http', '$q', 'ngDialog', 
             $scope.loading = true;
 
             $q.all([loadUsers(), loadRoles()]).then(function(){
+
                 users.forEach(function(u){
                     u.canBeDropped = canDropUser(u);
                     u.showExtraRoles = true;
+
+                    var userRoles = _.each(u.roles, function(rid){
+                        var userRole = $scope.roles[rid];
+                        if(_.contains(['AbsPublishingAuthorities', 'AbsPublishingAuthorities-dev', 'AbsPublishingAuthorities-trg'],userRole.code)){
+                        // if(_.contains(['AbsNationalAuthorizedUser', 'AbsNationalAuthorizedUser-dev', 'AbsNationalAuthorizedUser-trg'],userRole.code)){
+                            governmentPARole = userRole;
+                        }
+                        return
+                    });
                 });
             }).catch(function(err){
                 $scope.error = err.data || err;
@@ -156,7 +167,8 @@ app.controller("nationalUsersController", ['$scope', '$http', '$q', 'ngDialog', 
                 className : 'ngdialog-theme-default wide',
                 resolve : {
                     user : _literal(user),
-                    manageableRoles : _literal(manageableRoles)
+                    manageableRoles : _literal(manageableRoles),
+                    governmentPARole : _literal(governmentPARole),
                 }
 
             }).then(function(dialog) {

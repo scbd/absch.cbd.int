@@ -1,6 +1,6 @@
 define([], function() {
 
-    return ['$scope', 'user', 'manageableRoles', function ($scope, user, manageableRoles) {
+    return ['$scope', 'user', 'manageableRoles', 'governmentPARole', function ($scope, user, manageableRoles, governmentPARole) {
 
         var _ctrl = this;
 
@@ -56,6 +56,24 @@ define([], function() {
 
             return stats;
         };
+
+        _ctrl.roleFilter = function(role) {
+            if(_ctrl.selectedRoles[role.roleId] || !governmentPARole || role.roleId!= governmentPARole.roleId)
+                    return true;
+
+            return false;
+        }
+        _ctrl.updateGovernmentPA = function(role) {
+            if(_.contains(['AbsPublishingAuthorities', 'AbsPublishingAuthorities-dev', 'AbsPublishingAuthorities-trg'],userRole.code)){
+            // if(_.contains(['AbsNationalAuthorizedUser', 'AbsNationalAuthorizedUser-dev', 'AbsNationalAuthorizedUser-trg'],role.code)){
+                if(_ctrl.selectedRoles[role.roleId])
+                    governmentPARole = role;
+                else {
+                    governmentPARole = null;
+                }
+            }
+        }
+
 
         function roleStatus(role) {
             return {

@@ -25,11 +25,12 @@
 
 
         <table class="table table-striped" style="width:100%">
-            <tr ng-repeat="role in editRolesDialogCtrl.roles" ng-class="editRolesDialogCtrl.rowClasses(role)">
+            <tr ng-repeat="role in editRolesDialogCtrl.roles" ng-class="editRolesDialogCtrl.rowClasses(role)"
+            ng-show="editRolesDialogCtrl.roleFilter(role)">
                 <td style="vertical-align:middle;width:2em">
                     <i class="fa fa-fw", style="font-size:150%"
                        ng-class=" { 'fa-check-square-o' : editRolesDialogCtrl.selectedRoles[role.roleId], 'fa-square-o' : !editRolesDialogCtrl.selectedRoles[role.roleId] }"
-                       ng-click="editRolesDialogCtrl.selectedRoles[role.roleId]=!editRolesDialogCtrl.selectedRoles[role.roleId]"></i>
+                       ng-click="editRolesDialogCtrl.selectedRoles[role.roleId]=!editRolesDialogCtrl.selectedRoles[role.roleId];editRolesDialogCtrl.updateGovernmentPA(role)"></i>
                 </td>
                 <td style="width:90%">
                     {{role.name}}
