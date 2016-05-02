@@ -815,7 +815,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
 
                         addFilter('npParty',  {'sort': 1,'type':'partyStatus','name':'Party to the Nagoya Protocol', 'id':'npParty', 'description':''});
-                        addFilter('npInbetween',  {'sort': 2,'type':'partyStatus','name':'Ratified not yet Party to the Nagoya Protocol', 'id':'npInbetween', 'description':''});
+                        addFilter('npInbetween',  {'sort': 2,'type':'partyStatus','name':'Ratified, not yet Party to the Nagoya Protocol', 'id':'npInbetween', 'description':''});
                         addFilter('npNonParty',  {'sort': 3,'type':'partyStatus','name':'Not a Party to the Nagoya Protocol ', 'id':'npNonParty', 'description':''});
                         addFilter('npSignatory',  {'sort': 4,'type':'partyStatus','name':'Signatory to the Nagoya Protocol', 'id':'npSignatory', 'description':''});
 
