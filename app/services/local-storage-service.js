@@ -1,14 +1,15 @@
 define(['app', 'jquery', 'underscore', 'toastr', 'ngStorage'],
  function (app, $, _) { 'use strict';
 
-	app.factory('localStorageService',  ["$http","$location", "$rootScope","toastr", "$localStorage",
+	app.factory('localStorageService',  ["$http","$location", "$rootScope","toastr",
+    "$sessionStorage",//"$localStorage",
 	 function($http,$location, $rootScope, toastr, $localStorage) {
 
 		return new function(){
 
             this.get = function(key){
-                return;
-                
+                // return;
+
                 var existing = angular.copy($localStorage[key]);
 
                 if(!existing)
