@@ -79,7 +79,7 @@
                     <a ng-href="#" ng-click="setPartyFilter('party')" style="margin-left:10px;" class="letter  " ng-class="{'letter-active':partyFilter == 'party'}">
                         <i class="color-party fa fa-square"></i> Parties</a>
                         <a ng-href="#" ng-click="setPartyFilter('inbetween')" style="margin-left:10px;" class="letter  " ng-class="{'letter-active':partyFilter == 'inbetween'}">
-                        <i class="color-inbetween fa fa-square"></i> Ratified not yet Party</a>
+                        <i class="color-inbetween fa fa-square"></i> Ratified, not yet Party</a>
                     <a ng-href="#" ng-click="setPartyFilter('nonparty')" style="margin-left:10px;" class="letter " ng-class="{'letter-active':partyFilter == 'nonparty'}" >
                         <i class="color-nonparty fa fa-square"></i>  Non-Parties</a>
 
@@ -150,7 +150,7 @@
                                 <div style="margin-left:35px;text-transform:uppercase;font-weight:500;">
                                     <span ng-if="!country.isNPParty && !country.isNPInbetweenParty" class="color-grey"  style="font-size:10px;margin-right:10px;">Non-Party</span>
                                     <span ng-if="country.isNPParty" class="color-party"  style="font-size:10px;margin-right:10px;">Party to the Nagoya Protocol</span>
-                                    <span ng-if="country.isNPInbetweenParty" class="color-inbetween"  style="font-size:10px;margin-right:10px;">Ratified not yet Party</span>
+                                    <span ng-if="country.isNPInbetweenParty" class="color-inbetween"  style="font-size:10px;margin-right:10px;">Ratified, not yet Party</span>
                                     <span ng-if="country.isNPSignatory" class="color-pink"  style="font-size:10px;margin-right:10px;">Signatory</span>
                                     <span ng-if="country.entryIntoForce" class="color-grey"  style="font-size:10px;margin-right:20px;">Entry into force: {{country.entryIntoForce|formatDate}}</span>
                                 </div>

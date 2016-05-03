@@ -113,7 +113,7 @@ define(['text!./search-map.html',
             if (country.isNPParty)
               country.status = '<p style="width:100%;text-align:center;background-color: #5F4586;margin:0;padding:0;" class="party-status" ng-if="isNPParty">Party</p>';
             else if (country.isNPInbetweenParty)
-              country.status = '<p style="width:100%;text-align:center;background-color: #EC971F;margin:0;padding:0;" class="party-status" ng-if="isNPInbetweenParty">Ratified not yet Party</p>';
+              country.status = '<p style="width:100%;text-align:center;background-color: #EC971F;margin:0;padding:0;" class="party-status" ng-if="isNPInbetweenParty">Ratified, not yet Party</p>';
             else
               country.status = '<p style="width:100%;text-align:center;background-color: #333;margin:0;padding:0;" class="party-status" ng-if="isNPSignatory">Non Party</p>';
             return country;
