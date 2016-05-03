@@ -8,11 +8,17 @@
 	<div class="record-body panel-body">
 
 		<div ng-show="document.type=='organization'">
-			
-           
-            
+
+
+
             <legend>Organization</legend>
-            
+			<div ng-show="document.government">
+				<label>Government</label>
+				<div class="km-value">
+					{{document.government | term}}
+					<span ng-party-status government="document.government" id="government"></span>
+				</div>
+			</div>
 			<div>
                 <label>Name</label>
 				<div class="km-value">
@@ -26,47 +32,41 @@
 				</div>
 			</div>
 
-			<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
-				<label>Address</label>
-				<address class="km-value">
-					<div class="km-pre">{{document.address | lstring:locale}}</div>
-					{{document.city | lstring:locale}}
-					<span ng-show="document.city">, </span>
-					{{document.state | lstring:locale}}
-					<br ng-show="document.city || document.state" /> {{document.postalCode | lstring:locale}}
-					<span ng-show="document.postalCode">, </span>
-					<b>{{document.country|term}}</b>
-				</address>
-			</div>
 		</div>
 
 
 		<div ng-show="document.type=='person'">
              <legend>Person</legend>
-           
-            
+			 <div ng-show="document.government">
+  			   <label>Government</label>
+  			   <div class="km-value">
+  				   {{document.government | term}}
+				   <span ng-party-status government="document.government" id="government"></span>
+  			   </div>
+  		   </div>
+
             <div>
 				<label>Name</label>
 				<div class="km-value">
 					{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}
 				</div>
 			</div>
-            
-			
+
+
 			<div ng-show="document.designation">
 				<label>Title</label>
 				<div class="km-value">
 					{{document.designation| lstring:locale}}
 				</div>
 			</div>
-            
+
             <div ng-show="document.department">
 				<label>Department / Division / Unit</label>
 				<div class="km-value">
 					{{document.department| lstring:locale}}
 				</div>
 			</div>
-            
+
             <div ng-show="document.contactOrganization">
 				<legend>Organization</legend>
 				<div class="km-value">
@@ -75,7 +75,18 @@
 			</div>
 
 		</div>
-
+		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
+			<label>Address</label>
+			<address class="km-value">
+				<div class="km-pre">{{document.address | lstring:locale}}</div>
+				{{document.city | lstring:locale}}
+				<span ng-show="document.city">, </span>
+				{{document.state | lstring:locale}}
+				<br ng-show="document.city || document.state" /> {{document.postalCode | lstring:locale}}
+				<span ng-show="document.postalCode">, </span>
+				<b>{{document.country|term}}</b>
+			</address>
+		</div>
         <div ng-show="document.phones" >
             <label>Phone numbers</label>
             <ul class="km-value">
