@@ -17,8 +17,10 @@ a:active{color: #000;}
 }
 
 .training-bg{
-    background: url('/app/img/training-bg1.png');
+    background: url('/app/img/stripes.gif');
+    /*background-color: #a94442!important;*/
 }
+
 .dropdown-menu > li > a:hover{
     color:#666!important;
 }
