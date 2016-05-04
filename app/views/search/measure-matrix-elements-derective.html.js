@@ -142,6 +142,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                         var geneticResource = $scope.binding.geneticResource;
                                         oNewSections[grCoverId] = geneticResource.section;
                                         oNewIdentifiers[grCoverId] = true;
+                                        oNewIdentifiers['CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'] = true;
                                     }
                                 }
                                 if ($.isArray($scope.binding.relevantElements)){
@@ -287,7 +288,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                 function addMeasureToElements(measure) {
                     if(!measure)
                         return;
-                    if($scope.type!='single'){
+                    if($scope.type!='single' && measure.absMeasures){
                         if(measure.absMeasures.geneticResource) {
                             if(measure.absMeasures.geneticResource.answer){
                                 if(!grCoverId)
