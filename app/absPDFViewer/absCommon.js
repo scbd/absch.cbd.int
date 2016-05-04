@@ -517,11 +517,11 @@ app.directive("permit", [function() {
                     var identifierWithoutRevision = $scope.documentId;
                     if(identifierWithoutRevision.indexOf('@')>0)
                         identifierWithoutRevision = identifierWithoutRevision.substr(0, identifierWithoutRevision.indexOf('@'));
-                        
+
                     $http.get('/api/v2013/documents/' + identifierWithoutRevision + '/versions?body=true&cache=true')
                         .success(function(data) {
                             $scope.versions = data.Items;
-                            console.log(data);
+                            // console.log(data);
                         });
 
                     $http.get('/api/v2013/documents/' + $scope.documentId + '?info', {}).success(function(data) {
