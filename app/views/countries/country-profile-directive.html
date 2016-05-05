@@ -30,29 +30,28 @@
         <span class="badge pull-right" ng-class="{'bg-grey3': nationalMeasure==0, 'bg-black': nationalMeasure > 0}">{{nationalMeasure}}</span>
     </h4>
     <div ng-if="showMSR &&  nationalMeasure > 0" class="well bg-white">
-
         <div style="width:100%;margin-bottom:30px;">
          <legend>   Select the ABS Measures to be displayed in the overview</legend>
-         <div ng-repeat="measure in absMeasure = (measureMatrixDocuments|orderBy:sortMeasure:reverseMeasure)" ng-class="{'bg-grey': $index % 2 === 0}" style="padding:5px 0px;">
+         <div ng-repeat="measure in absMeasure = (measureMatrixDocuments|orderBy:sortMeasure:reverseMeasure)"  style="padding:5px 0px;border-bottom:1px solid #fff;" 
+            ng-class="{'bg-nationalmsr':measure.rec_meta1[0] === 'National / Federal','bg-subnationalmsr':measure.rec_meta1[0] === 'Sub-national','bg-communitymsr':measure.rec_meta1[0] === 'Community' }">
              <div> 
                  <input type="checkbox"  ng-model="measure.measureMatrix" style="margin-left:5px;" ></input>
-                 
                  <a target="_new" ng-href="database/record/{{measure.uniqueIdentifier_s.toUpperCase()}}"> 
-                    <span class="" style="margin-left:10px;">{{$index+1}}.</span> 
+                    <span class="color-black" style="margin-left:10px;">{{$index+1}}.</span> 
                     <!---->
                     <span class="bold">{{measure.rec_title}} </span> 
                  </a>
-                
              </div>
              <div class="recordDefault">
-                <ul class="metadata bold" style="margin-left:20px;font-size:11px!important;">
-                     <li><span style="font-size:12px!important;padding-left:10px;padding-right:10px;color:#999;">{{measure.rec_meta1[0]}}</span></li>
-                     <li><span style="font-size:12px!important;padding-left:10px;padding-right:10px;color:#999;">{{measure.rec_type}}</span></li>
-                     <li><span style="font-size:12px!important;padding-left:10px;padding-right:10px;color:#999;">{{measure.rec_meta3[0]}}</span></li>
+                <ul class="metadata bold" style="margin-left:20px;font-size:10px!important;">
+                     <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta1">{{measure.rec_meta1[0]}}</span></li>
+                     <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_type">{{measure.rec_type}}</span></li>
+                     <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta3">{{measure.rec_meta3[0]}}</span></li>
+                     <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta5">{{measure.rec_meta5[0]}}</span></li>
                      <li style="border:0;">
-                         <span style="font-size:12px!important;padding-left:10px;padding-right:10px;border:0;color:#999;" ng-if="measure.entryIntoForce_dt">Entry into force: {{measure.entryIntoForce_dt|formatDate}}</span>
-                         <span style="font-size:12px!important;padding-left:10px;padding-right:10px;border:0;color:#999;" ng-if="measure.adoption_dt">Adoption: {{measure.adoption_dt|formatDate}} </span>
-                         <span style="font-size:12px!important;padding-left:10px;padding-right:10px;border:0;color:#999;" ng-if="measure.retired_dt">Retired: {{measure.retired_dt|formatDate}}</span>
+                         <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.entryIntoForce_dt">Entry into force: {{measure.entryIntoForce_dt|formatDate}}</span>
+                         <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.adoption_dt">Adoption: {{measure.adoption_dt|formatDate}} </span>
+                         <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.retired_dt">Retired: {{measure.retired_dt|formatDate}}</span>
                      </li>
                 </ul>
              </div>
