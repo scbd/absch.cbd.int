@@ -153,48 +153,12 @@
                             //create seprate collection for measure matrix
                             if(document.schema_s=='measure'){
 
-                                //  if(document.type_EN_t =="Strategy / Action Plan")
-                                //     document.type_sort = 1;
-                                //  if(document.type_EN_t =="Policy Document")
-                                //     document.type_sort = 2;
-                                //  if(document.type_EN_t =="Law")
-                                //     document.type_sort = 3;
-                                //  if(document.type_EN_t =="Regulatory or Administrative Measures")
-                                //     document.type_sort = 4;
-                                //  if(document.type_EN_t =="Guidelines")
-                                //     document.type_sort = 5;
-                                //  if(document.type_EN_t =="Explanatory Information")
-                                //     document.type_sort = 6;
-                                //  if(document.type_EN_t =="Other")
-                                //     document.type_sort = 7;
-
-                                //  if(document.status_EN_t =="Legally binding ")
-                                //     document.status_sort = 1;
-                                //  if(document.status_EN_t =="Not legally binding")
-                                //     document.status_sort = 2;
-                                //  if(document.status_EN_t =="Draft")
-                                //     document.status_sort = 3;
-                                //  if(document.status_EN_t =="Retired")
-                                //     document.status_sort = 4;
-
-                                //  if(document.jurisdiction_EN_t =="Regional / Multilateral")
-                                //     document.jurisdiction_sort = 1;
-                                //  if(document.jurisdiction_EN_t =="National / Federal")
-                                //     document.jurisdiction_sort = 2;
-                                //  if(document.jurisdiction_EN_t =="Sub-national")
-                                //     document.jurisdiction_sort = 3;
-                                //  if(document.jurisdiction_EN_t =="Community")
-                                //     document.jurisdiction_sort = 4;
-                                //  if(document.jurisdiction_EN_t =="Other")
-                                //     document.jurisdiction_sort = 5;
-
                                 if(!document.retired_dt || moment() <= moment(document.retired_dt)){
                                     document.measureMatrix = true;
                                 }
-                                // else{
-                                //     //retired measures
-                                //     document.jurisdiction_sort = 9;
-                                // }
+                                else
+                                    document.measureMatrix = false;
+                             
                                 measureMatrixDocuments.push(document);
 
                             }
@@ -370,11 +334,11 @@
                     return measure.measureMatrix;
                 }
 
-                $scope.selectAllForMatrix = function(){
-                    _.map($scope.measureMatrixDocuments,function(item){
-                        item.measureMatrix = !$scope.measureMatrixDocuments.selectAll;
-                    })
-                }
+                // $scope.selectAllForMatrix = function(){
+                //     _.map($scope.measureMatrixDocuments,function(item){
+                //         item.measureMatrix = !$scope.measureMatrixDocuments.selectAll;
+                //     })
+                // }
             }]
 
         };
