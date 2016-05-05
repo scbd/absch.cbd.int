@@ -33,7 +33,8 @@
         <div style="width:100%;margin-bottom:30px;">
          <legend>   Select the ABS Measures to be displayed in the overview</legend>
          <div ng-repeat="measure in absMeasure = (measureMatrixDocuments|orderBy:sortMeasure:reverseMeasure)"  style="padding:5px 0px;border-bottom:1px solid #fff;" 
-            ng-class="{'bg-nationalmsr':measure.rec_meta1[0] === 'National / Federal','bg-subnationalmsr':measure.rec_meta1[0] === 'Sub-national','bg-communitymsr':measure.rec_meta1[0] === 'Community' }">
+            ng-class="{'bg-nationalmsr':measure.rec_meta1[0] === 'National / Federal','bg-subnationalmsr':measure.rec_meta1[0] === 'Sub-national','bg-communitymsr':measure.rec_meta1[0] === 'Community','bg-regionalmsr':measure.rec_meta1[0] === 'Regional / Multilateral'
+            ,'bg-othermsr':measure.rec_meta1[0] === 'Other' }">
              <div> 
                  <input type="checkbox"  ng-model="measure.measureMatrix" style="margin-left:5px;" ></input>
                  <a target="_new" ng-href="database/record/{{measure.uniqueIdentifier_s.toUpperCase()}}"> 
