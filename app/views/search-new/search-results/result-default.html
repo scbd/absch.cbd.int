@@ -18,7 +18,7 @@
 
             <div class="title">{{doc.rec_title}}</div>
 
-            <div class="description hidden-xs descriptionSpan">{{doc.rec_summary|limitTo:250}}
+            <div class="description hidden-xs descriptionSpan" ng-if="doc.rec_summary">{{doc.rec_summary|limitTo:250}}
                 <span ng-if="doc.rec_summary.length > 250">...</span>
             </div>
             <ul class="metadata bold">
