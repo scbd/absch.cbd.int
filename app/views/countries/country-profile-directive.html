@@ -50,8 +50,11 @@
                      <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta3">{{measure.rec_meta3[0]}}</span></li>
                      <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta5">{{measure.rec_meta5[0]}}</span></li>
                      <li style="border:0;">
-                         <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.entryIntoForce_dt">Entry into force: {{measure.entryIntoForce_dt|formatDate}}</span>
-                         <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.adoption_dt">Adoption: {{measure.adoption_dt|formatDate}} </span>
+                         <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.entryIntoForce_dt">
+                             Entry into force: {{measure.entryIntoForce_dt|formatDate}} <span style="font-size:11px!important;padding-left:0px;padding-right:0;border:0;color:#666;"  ng-if="measure.limitedApplication_dt"> until {{measure.limitedApplication_dt|formatDate}} </span></span>
+                         <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.adoption_dt">
+                             Adoption: {{measure.adoption_dt|formatDate}}  <span style="font-size:11px!important;padding-left:0px;padding-right:0;border:0;color:#666;" ng-if="measure.limitedApplication_dt">until {{measure.limitedApplication_dt|formatDate}} </span> </span>
+                        
                          <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.retired_dt">Retired: {{measure.retired_dt|formatDate}}</span>
                      </li>
                 </ul>
