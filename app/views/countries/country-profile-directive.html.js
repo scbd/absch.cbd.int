@@ -96,7 +96,7 @@
                         //                 '&rows=100&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json';
 
                     var searchQuery = {
-                        //fields  : 'id,rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t',
+                        fields  : 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt, entryIntoForce_dt,adoption_dt,retired_dt,limitedApplication_dt',
                         query   : 'schema_s:(' + appConfigService.nationalSchemas.join(' ') +') AND (government_s:' + $scope.code.toLowerCase() + ' OR (originCountries_ss:' +
                                    $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + '))',
                         rowsPerPage    : 500
@@ -153,48 +153,12 @@
                             //create seprate collection for measure matrix
                             if(document.schema_s=='measure'){
 
-                                 if(document.type_EN_t =="Strategy / Action Plan")
-                                    document.type_sort = 1;
-                                 if(document.type_EN_t =="Policy Document")
-                                    document.type_sort = 2;
-                                 if(document.type_EN_t =="Law")
-                                    document.type_sort = 3;
-                                 if(document.type_EN_t =="Regulatory or Administrative Measures")
-                                    document.type_sort = 4;
-                                 if(document.type_EN_t =="Guidelines")
-                                    document.type_sort = 5;
-                                 if(document.type_EN_t =="Explanatory Information")
-                                    document.type_sort = 6;
-                                 if(document.type_EN_t =="Other")
-                                    document.type_sort = 7;
-
-                                 if(document.status_EN_t =="Legally binding ")
-                                    document.status_sort = 1;
-                                 if(document.status_EN_t =="Not legally binding")
-                                    document.status_sort = 2;
-                                 if(document.status_EN_t =="Draft")
-                                    document.status_sort = 3;
-                                 if(document.status_EN_t =="Retired")
-                                    document.status_sort = 4;
-
-                                 if(document.jurisdiction_EN_t =="Regional / Multilateral")
-                                    document.jurisdiction_sort = 1;
-                                 if(document.jurisdiction_EN_t =="National / Federal")
-                                    document.jurisdiction_sort = 2;
-                                 if(document.jurisdiction_EN_t =="Sub-national")
-                                    document.jurisdiction_sort = 3;
-                                 if(document.jurisdiction_EN_t =="Community")
-                                    document.jurisdiction_sort = 4;
-                                 if(document.jurisdiction_EN_t =="Other")
-                                    document.jurisdiction_sort = 5;
-
                                 if(!document.retired_dt || moment() <= moment(document.retired_dt)){
                                     document.measureMatrix = true;
                                 }
-                                else{
-                                    //retired measures
-                                    document.jurisdiction_sort = 9;
-                                }
+                                else
+                                    document.measureMatrix = false;
+                             
                                 measureMatrixDocuments.push(document);
 
                             }
@@ -224,12 +188,8 @@
 
                 //**********************************************************
                 $scope.$watch('absch_nfp', function(value) {
-
                     if (!value) return;
-
                     $scope.getFacets(value);
-
-
                 });
 
 
@@ -371,16 +331,14 @@
                 }
 
                 $scope.isForMeasureMatrix = function(measure){
-
                     return measure.measureMatrix;
-
                 }
-                $scope.selectAllForMatrix = function(){
 
-                    _.map($scope.measureMatrixDocuments,function(item){
-                        item.measureMatrix = !$scope.measureMatrixDocuments.selectAll;
-                    })
-                }
+                // $scope.selectAllForMatrix = function(){
+                //     _.map($scope.measureMatrixDocuments,function(item){
+                //         item.measureMatrix = !$scope.measureMatrixDocuments.selectAll;
+                //     })
+                // }
             }]
 
         };

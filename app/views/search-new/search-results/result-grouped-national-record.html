@@ -9,7 +9,7 @@
 
         <div class="type color-blue">{{doc.rec_type ? doc.rec_type : (doc.schema_s | schemaShortName) }}</div>
         <div class="title">{{doc.rec_title}}</div>
-        <span class="description hidden-xs descriptionSpan">
+        <span class="description hidden-xs descriptionSpan" ng-if="doc.rec_summary">
             {{doc.rec_summary|limitTo:250}}
             <span ng-if="doc.rec_summary.length > 250">...</span>
         </span>
