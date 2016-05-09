@@ -46,23 +46,6 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         });
                 }
                 //==================================================================================
-                this.isUserInRole = function(role) {
-
-                    if (!$rootScope.user)
-                        return false;
-
-                    var userRoles = $rootScope.user.roles;
-                    if (!role)
-                        return false;
-
-                    for (var i = 0; i < userRoles.length; i++) {
-                        if (userRoles[i] == role)
-                            return true;
-                    }
-
-                    return false;
-                }
-                //==================================================================================
                 this.getCountries = function() {
 
                     var fromStorage = localStorageService.get('countries');
@@ -91,28 +74,6 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         .then(function(response) {
                             return formatCountry(response.data);
                         });
-                }
-                //==================================================================================
-                this.isIAC = function() {
-                    return this.isUserInRole($rootScope.getRoleName('abschiac'));
-                }
-                //==================================================================================
-                this.isAbsAdministrator = function() {
-                    return this.isUserInRole($rootScope.getRoleName('AbsAdministrator'));
-                }
-                //==================================================================================
-                this.isAnyOtherRoleThenIAC = function() {
-
-                    return this.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
-                        this.isUserInRole($rootScope.getRoleName('AbsNationalAuthorizedUser')) ||
-                        this.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint')) ||
-                        this.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
-                        this.isUserInRole($rootScope.getRoleName('Administrator'))
-
-                }
-                //==================================================================================
-                this.hasAbsRoles = function() {
-                    return this.isAbsAdministrator() || this.isAnyOtherRoleThenIAC();
                 }
                 //==================================================================================
                 this.isNPParty = function(entity) {
@@ -560,11 +521,11 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                     country.isNPSignatory = isSignatory(countryDetails) || country.code == 'EU';
                     country.isNPRatified = isRatified(countryDetails) || country.code == 'EU';
                     country.isNPInbetweenParty = moment().diff(moment(treaties.XXVII8b.deposit), 'days') < 90;
-                    
+
                     country.dateDeposit =  countryDetails.treaties.XXVII8b.deposit;
                     country.instrument = countryDetails.treaties.XXVII8b.instrument;
                     country.dateSigned = countryDetails.treaties.XXVII8b.signature;
-                    
+
                     if (country.isNPInbetweenParty)
                         country.entryIntoForce = moment(treaties.XXVII8b.deposit).add(90, 'day');
                     else
@@ -572,8 +533,8 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
 
                     return country;
                 }
-                
-                
+
+
                 //==================================================================================
                 function isNPParty(entity) {
 
@@ -587,7 +548,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         entity.treaties.XXVII8b.instrument == "accession" ||
                         entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
                 }
-                
+
                 //==================================================================================
                 function isNPParty(entity) {
 
