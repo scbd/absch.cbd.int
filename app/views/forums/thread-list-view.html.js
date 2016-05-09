@@ -1,9 +1,9 @@
 define(['app', 'cbd-forums',
-	'/app/js/common.js'], function(app) {
+	'/app/js/common.js', '/app/services/role-service.js'], function(app) {
 
 
-    return ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route","commonjs","$rootScope",
-        function($scope, $http, $q, $filter, $timeout, $location, $route, commonjs, $rootScope) {
+    return ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route","commonjs","$rootScope", "roleService",
+        function($scope, $http, $q, $filter, $timeout, $location, $route, commonjs, $rootScope, roleService) {
 
             //$scope.forumId = 17384;
 
@@ -24,8 +24,8 @@ define(['app', 'cbd-forums',
 
 
 			$scope.isAdmin = function(){
-				return commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
-				commonjs.isUserInRole($rootScope.getRoleName('Administrator'))
+				return roleService.isAbsAdministrator() ||
+				roleService.isAdministrator()
 
 			};
 

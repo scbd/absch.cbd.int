@@ -22,12 +22,12 @@ define(['app',
 
   app.controller("TypeDocumentListController",
     ["$rootScope", "$scope", "$q", "$window", "IStorage", "underscore",
-     "schemaTypes", "$compile", "$timeout","lstringFilter", "$routeParams","$filter",'$location',
+     "$compile", "$timeout","lstringFilter", "$routeParams","$filter",'$location',
     function ($rootScope, $scope, $q, $window, storage, _,
-      schemaTypes,$compile,$timeout,lstringFilter, $routeParams, $filter, $location) {
+      $compile,$timeout,lstringFilter, $routeParams, $filter, $location) {
 
     $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
 	$scope.document_type = $routeParams.document_type;
-    
+
   }]);
 });

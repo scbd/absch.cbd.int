@@ -16,10 +16,10 @@
             },
             controller: ["$scope", "$http", "$routeParams", "linqjs", "$filter", "realm",
                 "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope',
-                'schemaTypes','breadcrumbs','smoothScroll','$location', 'searchService', 'appConfigService',
+                'breadcrumbs','smoothScroll','$location', 'searchService', 'appConfigService',
                 function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
                             $element, $timeout, countriescommonjs, IStorage,$rootScope,
-                            schemaTypes, breadcrumbs,smoothScroll,$location, searchService, appConfigService) {
+                            breadcrumbs,smoothScroll,$location, searchService, appConfigService) {
 
                 $scope.api = {
                     loadCountryDetails : $scope.loadCountryDetails

@@ -71,10 +71,8 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
 
             $scope.askDelete = function(record) {
 
-                if(!(commonjs.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
-                        commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint')) ||
-                        commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
-                        commonjs.isUserInRole($rootScope.getRoleName('Administrator')))){
+                if(!(roleService.isAbsPublishingAuthority() || roleService.isAbsNationalFocalPoint() ||
+                     roleService.isAbsAdministrator() ||roleService.isAdministrator())){
                    $scope.cantDelete = false;
                    $scope.iacCantDelete = true;
                     $scope.recordToDelete = "0";

@@ -6,8 +6,8 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                 restrict: 'EAC',
                 replace: true,
                 templateUrl: '/app/views/directives/home-country-dashboard-directive.html',
-                controller: ['$scope', '$filter', 'schemaTypes', 'realm', '$q', 'searchService', 'appConfigService', 'commonjs','$element', 'helpService',"$timeout", "$location",
-                    function($scope, $filter, schemaTypes, realm, $q, searchService, appConfigService, commonjs, $element, helpService, $timeout, $location) {
+                controller: ['$scope', '$filter', 'realm', '$q', 'searchService', 'appConfigService', 'commonjs','$element', 'helpService',"$timeout", "$location",
+                    function($scope, $filter, realm, $q, searchService, appConfigService, commonjs, $element, helpService, $timeout, $location) {
 
                        $scope.help = {};
 

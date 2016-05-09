@@ -20,9 +20,9 @@ define(['app',
 
 app.controller("ContactsController",
 	["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
-	 "schemaTypes", "$compile", "$timeout","lstringFilter", "$routeParams",
+	 "$compile", "$timeout","lstringFilter", "$routeParams",
 	 function ($rootScope, $location, $scope, $q, $window, storage, _,
-	  schemaTypes,$compile,$timeout,lstringFilter, $routeParams) {
+	  $compile,$timeout,lstringFilter, $routeParams) {
 
     //TODO: this is almost identical to type_document_list.html.js... inherit them
 

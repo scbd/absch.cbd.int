@@ -5,9 +5,9 @@ define(['app'], function (app) {
 
 app.controller("presentationController",
 	["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
-	 "schemaTypes", "$compile", "$timeout","lstringFilter", "$routeParams",
+	 "$compile", "$timeout","lstringFilter", "$routeParams",
 	 function ($rootScope, $location, $scope, $q, $window, storage, _,
-	  schemaTypes,$compile,$timeout,lstringFilter, $routeParams) {
+	  $compile,$timeout,lstringFilter, $routeParams) {
 
 
 		var current_page = 'start';

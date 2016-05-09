@@ -1,10 +1,11 @@
 define(['app', 'underscore', '/app/js/common.js',
-       '/app/services/search-service.js'],
+       '/app/services/search-service.js', '/app/services/role-service.js'],
 function(app, _) {
     "use strict";
 
-    app.directive("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage",'$rootScope', 'searchService', 'toastr',"$routeParams",
-        function($timeout, commonjs, bootbox, $http, IWorkflows, IStorage, $rootScope, searchService, toastr, $routeParams) {
+    app.directive("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage",'$rootScope',
+     'searchService', 'toastr',"$routeParams", "roleService",
+        function($timeout, commonjs, bootbox, $http, IWorkflows, IStorage, $rootScope, searchService, toastr, $routeParams, roleService) {
 
             return {
                 restrict: "EA",
@@ -129,16 +130,14 @@ function(app, _) {
                     //============================================================
                     $scope.askDelete = function(record) {
 
-                        if (commonjs.isIAC() && !commonjs.isAnyOtherRoleThenIAC()) {
+                        if (roleService.isIAC() && !roleService.isAnyOtherRoleThenIAC()) {
                             $scope.iacCantDelete = true;
                             $scope.cantDelete = false;
                             $scope.recordToDelete = "0";
 
                         }
-                        if(!(commonjs.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
-                                commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint')) ||
-                                commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
-                                commonjs.isUserInRole($rootScope.getRoleName('Administrator')))){
+                        if(!(roleService.isAbsPublishingAuthority() || roleService.isAbsNationalFocalPoint() ||
+                            roleService.isAbsAdministrator() || roleService.isAdministrator())){
                            $scope.cantDelete = false;
                            $scope.iacCantDelete = true;
                             $scope.recordToDelete = "0";
@@ -236,8 +235,7 @@ function(app, _) {
 
                     $scope.isPublishingAuthority = function(entity) {
                         return entity && entity.workingDocumentLock &&
-                            (commonjs.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
-                            commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint')));
+                            (roleService.isAbsPublishingAuthority() || roleService.isAbsNationalFocalPoint());
                     };
                     //============================================================
                     //
@@ -303,18 +301,18 @@ function(app, _) {
 
                     $scope.showAddButton = function() {
 
-                        return commonjs.isUserInRole($rootScope.getRoleName('AbsPublishingAuthorities')) ||
-                            commonjs.isUserInRole($rootScope.getRoleName('AbsNationalAuthorizedUser')) ||
-                            commonjs.isUserInRole($rootScope.getRoleName('AbsNationalFocalPoint')) ||
-                            commonjs.isUserInRole($rootScope.getRoleName('abschiac')) ||
-                            commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
-                            commonjs.isUserInRole($rootScope.getRoleName('Administrator')) ||
+                        return roleService.isAbsPublishingAuthority() ||
+                            roleService.isAbsNationalAuthorizedUser() ||
+                            roleService.isAbsNationalFocalPoint() ||
+                            roleService.isIAC() ||
+                            roleService.isAbsAdministrator() ||
+                            roleService.isAdministrator() ||
                             _.contains(['resource', 'modelContractualClause','communityProtocol','capacityBuildingResource','capacityBuildingInitiative'],$scope.schema);
 
                     }
 
                     $scope.isIAC = function() {
-                        return commonjs.isUserInRole($rootScope.getRoleName('abschiac'));
+                        return roleService.isIAC();
                     }
 
                     //============================================================

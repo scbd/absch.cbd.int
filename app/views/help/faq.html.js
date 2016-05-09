@@ -1,6 +1,7 @@
-define(['app','underscore','ngSmoothScroll','ngAria','angular-animate','scbd-angularjs-services','scbd-angularjs-filters','scbd-angularjs-controls'], function (app, _) {
+define(['app','underscore','ngSmoothScroll','ngAria','angular-animate','scbd-angularjs-services',
+'scbd-angularjs-filters','scbd-angularjs-controls', '/app/services/role-service.js'], function (app, _) {
 app.controller("faqController",
-	["$rootScope", "$scope", "$q", "underscore",'$http','commonjs','smoothScroll', '$element', function ($rootScope, $scope, $q, _, $http, commonjs, smoothScroll, $element) {
+	["$rootScope", "$scope", "$q", "underscore",'$http','commonjs','smoothScroll', '$element', 'roleService', function ($rootScope, $scope, $q, _, $http, commonjs, smoothScroll, $element, roleService) {
 
 		 $q.when( $http.get('/api/v2015/help-faqs'))
           .then(function(response){
@@ -16,8 +17,8 @@ app.controller("faqController",
           });
 
           $scope.isAdmin = function(){
-				return commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
-				commonjs.isUserInRole($rootScope.getRoleName('Administrator'))
+				return roleService.isAbsAdministrator() ||
+				roleService.isAdministrator()
 
 			};
 

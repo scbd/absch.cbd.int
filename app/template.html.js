@@ -10,9 +10,9 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
     'use strict';
 
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
-        '$location','realmConfiguration','$anchorScroll', 'breadcrumbs', 'toastr', '$route',
+        '$location','$anchorScroll', 'breadcrumbs', 'toastr', '$route',
         'cfgUserNotification','$window', '$element','localStorageService', 'appConfigService', //'apiUrl',
-        function($scope, $rootScope, showHelp, $location, realmConfiguration,
+        function($scope, $rootScope, showHelp, $location,
             $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window, $element, localStorageService,
             appConfigService
             //, apiUrl
@@ -59,21 +59,9 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             };
 
             $scope.$root.getRoleName = function(roleName) {
+                console.warn('Depriciated, use appConfigService.getRoleName');
                 if (roleName) {
-                    var realmConfig = _.where(realmConfiguration, {
-                        host: $location.$$host
-                    });
-                    if (realmConfig.length > 0) {
-                        var role = _.find(realmConfig[0].roles, function(key) {
-                            return _.keys(key)[0] == roleName;
-                        });
-                        // console.log(realmConfig, role)
-                        if (role)
-                            return _.values(role)[0];
-                        else
-                            throw roleName + ' role is not configured for realm ' + realmConfig[0].realm + ', please update realm-configuration.js';
-                    } else
-                        throw 'Realm not configured, please update realm-configuration.js';
+                    return appConfigService.getRoleName(roleName);
                 }
             };
 

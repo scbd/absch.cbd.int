@@ -26,8 +26,8 @@ define(['app', 'underscore','ng-breadcrumbs', 'cbd-forums',
         });
 
         $scope.isAdmin = function(){
-            return commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
-            commonjs.isUserInRole($rootScope.getRoleName('Administrator'))
+            return roleService.isAbsAdministrator() ||
+            roleService.isAdministrator()
 
         }
 

@@ -1,11 +1,11 @@
-define(['app','/app/views/directives/help-directive.html.js'], function (app) {
+define(['app','/app/views/directives/help-directive.html.js', '/app/services/role-service.js'], function (app) {
 
-	app.controller('HelpController', ['$scope','$rootScope', '$location', '$window', 'commonjs', function ($scope, $rootScope, $location, $window, commonjs) {
+	app.controller('HelpController', ['$scope','$rootScope', '$location', '$window', 'commonjs', 'roleService', function ($scope, $rootScope, $location, $window, commonjs, roleService) {
 
 
 		$scope.isAdmin = function(){
-				return commonjs.isUserInRole($rootScope.getRoleName('AbsAdministrator')) ||
-				commonjs.isUserInRole($rootScope.getRoleName('Administrator'))
+				return roleService.isAbsAdministrator() ||
+				roleService.isAdministrator()
 
 			};
 
