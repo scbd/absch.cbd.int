@@ -1,10 +1,8 @@
 'use strict';
 define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services', 'services', 'filters',
- 'realm-configuration', '/app/services/app-config-service.js'], function (app, _) {
+ '/app/services/app-config-service.js'], function (app, _) {
 
     app.value("realm", {value:"ABS"});
-    app.value("schemaTypes", [ "absNationalReport", "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority",
-     "measure", "database", "resource", "modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"]);
     app.value("showHelp", { value : false });
 
     app.provider("realm", {
@@ -186,7 +184,7 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                 if(useNationalRoles){
                     var path = $location.$$url.replace('/register/','');
                     var schema;
-                    
+
                     if(path.indexOf('/')>0)
                         schema = path.substr(0, path.indexOf('/'));
                     else
