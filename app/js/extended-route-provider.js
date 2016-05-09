@@ -1,6 +1,6 @@
 'use strict';
 
-define(['app', 'angular'], function(app, angular) {
+define(['app', 'angular', '../services/app-config-service'], function(app, angular) {
 
     app.provider('extendedRoute', ["$routeProvider", function($routeProvider) {
 
@@ -68,17 +68,8 @@ define(['app', 'angular'], function(app, angular) {
         //============================================================
         function resolveController() {
 
-            return ['$q', '$route', '$filter','realm', '$location','underscore','realmConfiguration', function($q, $route, $filter, realm, $location, _,realmConfiguration) {
-
-                if($location.$$host != 'absch.cbd.int'){
-
-                    var realmConfig = _.where(realmConfiguration,{host:$location.$$host});
-                    //console.log(realmConfig)
-                    if(realmConfig && realmConfig.length>0)
-    				     realm.value = realmConfig[0].realm;
-                    else
-                        realm.value = 'ABS-DEV';
-    			}
+            return ['$q', '$route', '$filter','$location','underscore',
+             function($q, $route, $filter, $location, _) {
 
                 var deferred = $q.defer();
 
