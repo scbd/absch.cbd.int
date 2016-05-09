@@ -12,10 +12,10 @@ define(['app', 'linqjs', 'angular-localizer',
                 transclude: false,
                 scope   :{},
                 controller : ["$rootScope", "$location", "$scope", "$q", "$window", "IStorage", "underscore", "breadcrumbs",
-                                "schemaTypes", "$timeout", "$filter", "$routeParams", "$cookies", "bootbox", "realm", "IWorkflows",
+                                "$timeout", "$filter", "$routeParams", "$cookies", "bootbox", "realm", "IWorkflows",
                                 '$element', 'toastr', '$compile', 'commonjs',
                     function($rootScope, $location, $scope, $q, $window, storage, _, breadcrumbs,
-                                schemaTypes, $timeout, $filter, $routeParams, $cookies, bootbox, realm, workflows,
+                                $timeout, $filter, $routeParams, $cookies, bootbox, realm, workflows,
                                 $element, toastr, $compile, commonjs) {
 
                                 var document_type;
@@ -105,6 +105,12 @@ define(['app', 'linqjs', 'angular-localizer',
                                         schemaType: "nationalRecords",
                                         title: 'endorsement',
 
+                                    },
+                                    organization: {
+                                        abbreviation: 'ORG',
+                                        schemaType: "referenceRecords",
+                                        title: 'organization',
+
                                     }
 
                                 };
@@ -185,7 +191,7 @@ define(['app', 'linqjs', 'angular-localizer',
                                     //  var fromStorage = localStorageService.get('documentRegisterFacets');
                                     // if(fromStorage)
                                     //     return fromStorage;
-                                    
+
                                     var published = storage.documentQuery.facets("", {
                                         collection: "my"
                                     });
