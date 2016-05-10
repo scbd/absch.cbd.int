@@ -135,6 +135,9 @@ function(app) {
                             $q.all([qDrafts, qPublished]).then(function(results) {
                                     _.each(results,  function(result, index){
                                        _.each(result.data.Items,function(contact) {
+                                           if(index==0 && !contact.workingDocumentLock){
+                                               return;
+                                           }
                                            var lContact = contact.body;
                                            var exists = _.some($scope.existingContacts, function(org){return org.header.identifier == lContact.header.identifier});
                                            if(!exists){
