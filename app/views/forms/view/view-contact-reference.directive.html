@@ -6,8 +6,8 @@
         ng-if="isCNA">
             Competent National Authority</div>
         <div>
-            <span style="font-weight:500;">{{document.organization | lstring:locale}}</span>
-            <span ng-show="document.organizationAcronym && (document.organizationAcronym | lstring:locale)!= 'NA'">({{document.organizationAcronym | lstring:locale}})</span>
+            <span style="font-weight:500;">{{document.name | lstring:locale}}</span>
+            <span ng-show="document.acronym">({{document.acronym | lstring:locale}})</span>
         </div>
 
         <div>{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</div>
