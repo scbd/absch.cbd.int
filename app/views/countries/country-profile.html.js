@@ -25,7 +25,13 @@ define(['app','underscore',
 
         //   $timeout(function(){
               ammap3Service.eachCountry('zoom-map-country', function(mapCountry){
-                var countryDetails = _.findWhere(countries, {code : mapCountry.id});
+                  var countryCode = mapCountry.id;
+                  if(ammap3Service.exceptionRegionMapping[mapCountry.id]){
+                      countryCode = ammap3Service.exceptionRegionMapping[mapCountry.id];
+                  }
+                  var countryDetails = _.findWhere(countries, {
+                      code : countryCode
+                  });
                 if(countryDetails){
                     if(countryDetails.isNPInbetweenParty)
                         mapCountry.colorReal=mapCountry.baseSettings.color= "#EC971F";
