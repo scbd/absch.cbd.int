@@ -6,7 +6,7 @@ define(['app'], function(app) {
             replace: true,
             // transclude: true,
             require:'^searchDirective',
-            templateUrl: '/app/views/search-new/search-filters/reference-filter.html',
+            templateUrl: '/app/views/search/search-filters/reference-filter.html',
             scope:false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                $scope.rf_searchFilters = searchDirectiveCtrl.getSearchFilters('reference');

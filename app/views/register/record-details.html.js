@@ -1,5 +1,5 @@
 define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html.js',
-'/app/views/search-new/search-results/record-viewer.js',
+'/app/views/search/search-results/record-viewer.js',
         '/app/js/common.js', '/app/services/role-service.js', 'toastr',
           'scbd-branding/directives/xuser-notifications-panel', '/app/views/directives/block-region-directive.js',
 ], function(app, _) {

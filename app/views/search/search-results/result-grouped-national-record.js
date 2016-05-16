@@ -1,5 +1,5 @@
 define(['app', 'underscore', '/app/js/common.js',
-'/app/views/search-new/search-results/record-viewer.js'
+'/app/views/search/search-results/record-viewer.js'
 ], function(app, _) {
 
     app.directive('resultGroupedNationalRecord', function() {
@@ -8,7 +8,7 @@ define(['app', 'underscore', '/app/js/common.js',
             replace: true,
             // transclude: true,
             //require:'^searchDirective',
-            templateUrl: '/app/views/search-new/search-results/result-grouped-national-record.html',
+            templateUrl: '/app/views/search/search-results/result-grouped-national-record.html',
             scope: {
                 doc:'='
             },

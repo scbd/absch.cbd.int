@@ -1,5 +1,5 @@
 define(['app',
-        '/app/views/search/measure-matrix-elements-derective.html.js',
+        '/app/views/measure-matrix/measure-matrix-elements-derective.html.js',
         '/app/services/search-service.js', '/app/services/app-config-service.js','/app/views/directives/party-status.js'
     ], function (app) {
 

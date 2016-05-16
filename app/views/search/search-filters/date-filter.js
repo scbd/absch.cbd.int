@@ -7,7 +7,7 @@ define(['app', 'underscore', '/app/js/common.js', 'scbd-angularjs-controls','boo
             replace: true,
             // transclude: true,
             require:'^searchDirective',
-            templateUrl: '/app/views/search-new/search-filters/date-filter.html',
+            templateUrl: '/app/views/search/search-filters/date-filter.html',
             scope: false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                 // $scope.since = {};

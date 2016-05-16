@@ -1,5 +1,5 @@
 define(['app', '/app/js/common.js',
-'/app/views/search-new/search-results/result-grouped-national-record.js',
+'/app/views/search/search-results/result-grouped-national-record.js',
 '/app/views/directives/party-status.js',
 ], function(app, _) {
 
@@ -9,7 +9,7 @@ define(['app', '/app/js/common.js',
             replace: true,
             // transclude: true,
             require:'^searchDirective',
-            templateUrl: '/app/views/search-new/search-results/national-records-country.html',
+            templateUrl: '/app/views/search/search-results/national-records-country.html',
             scope: {
                 group:'='
             },

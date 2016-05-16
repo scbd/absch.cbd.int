@@ -3,7 +3,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
     app.directive("measureMatrixElements", function() {
         return {
             restrict: "EAC",
-            templateUrl: "/app/views/search/measure-matrix-elements-derective.html",
+            templateUrl: "/app/views/measure-matrix/measure-matrix-elements-derective.html",
             replace: true,
             transclude: false,
             require: "?ngModel",

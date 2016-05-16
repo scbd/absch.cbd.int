@@ -7,7 +7,7 @@ define(['app', 'underscore', '/app/js/common.js',
             replace: true,
             // transclude: true,
             require:'^searchDirective',
-            templateUrl: '/app/views/search-new/search-filters/region-filter.html',
+            templateUrl: '/app/views/search/search-filters/region-filter.html',
             scope: false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
 

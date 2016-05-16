@@ -1,5 +1,5 @@
 define(['app', '/app/js/common.js',
-'/app/views/search-new/search-results/record-viewer.js'
+'/app/views/search/search-results/record-viewer.js'
     ], function (app) {
 	app.controller('adminReportedRecordsCtrl', ['$scope', '$http','commonjs','$element',
         function($scope, $http, commonjs, $element){

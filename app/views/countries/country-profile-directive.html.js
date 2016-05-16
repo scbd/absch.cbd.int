@@ -1,7 +1,7 @@
  define(['app','underscore','linqjs', 'ngMaterial','ngAria','angular-animate',
-   '/app/views/search/measure-matrix-countries-directive.html.js',
+   '/app/views/measure-matrix/measure-matrix-countries-directive.html.js',
    '/app/js/common.js',
-   '/app/views/search-new/search-results/result-grouped-national-record.js',
+   '/app/views/search/search-results/result-grouped-national-record.js',
    '/app/services/search-service.js', '/app/services/app-config-service.js'
  ], function(app, _, linqjs) {
 

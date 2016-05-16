@@ -67,38 +67,16 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
             when('/mailbox',                        { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
             when('/mailbox/:mailId',                { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
 
-            // when('/search/new',                             { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true}).
-            // when('/search/new/byCountry',                   { templateUrl: '/app/views/search/country-search.html',   label:'Search',         resolveController: true, resolveUser : true}).
-
-            // when('/search/new/measurematrix',                   { templateUrl: '/app/views/search/measure-matrix.html',   label:'Matrix',         resolveController: true, resolveUser : true}).
-            // when('/search/new/measurematrix/:uniqueId',         { templateUrl: '/app/views/search/measure-matrix.html',   label:'Matrix',         resolveController: true, resolveUser : true}).
-            when('/measurematrix/:code',            { templateUrl: '/app/views/search/measure-matrix-countries.html',   label:'Measures Matrix',         resolveController: true, resolveUser : true}).
-
-
-            when('/search-new/:recordType',   { templateUrl: '/app/views/search-new/search-page.html',   label:'SEARCH',         resolveController: true}).
-
-            when('/search-new',                      { templateUrl: '/app/views/search-new/search-page.html',   label:'SEARCH',         resolveController: true}).
-
-            when('/find',                                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser : true}).
-            when('/search',                                 { templateUrl: '/app/views/search/find.html',   label:'Search',         resolveController: true, resolveUser : true}).
-            // when('/search/:documentSchema',                 { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true}).
-            // when('/search/:documentSchema/:countryCode',    { templateUrl: '/app/views/search/search.html',   label:'Search',         resolveController: true, resolveUser : true}).
-            // when('/find/simple',                            { templateUrl: '/app/views/find/simple.html',   label:'Simple Search',  resolveController: true, resolveUser : true}).
-            when('/search/national-records/:documentSchema?',              { redirectTo:'/search-new' }).
+            when('/search/:recordType',                     { templateUrl: '/app/views/search/search-page.html',   label:'SEARCH',         resolveController: true}).
+            when('/search',                                 { templateUrl: '/app/views/search/search-page.html',   label:'SEARCH',         resolveController: true}).
+            when('/search/national-records/:documentSchema?',              { redirectTo:'/search' }).
             when('/search/countries/:countryCode?',                        { redirectTo:'/countries/:countryCode' }).
             when('/search/countries/:countryCode/:documentType',           { redirectTo:'/countries/:countryCode' }).
-            when('/search/reference-records/:documentSchema?',             { redirectTo:'/search-new' }).
-
-            // when('/find',                                   { redirectTo:'/search'}).
+            when('/search/reference-records/:documentSchema?',             { redirectTo:'/search' }).
 
             when('/countries',                   { templateUrl: '/app/views/countries/index.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
             when('/countries/status/:status',    { templateUrl: '/app/views/countries/index.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
-            when('/countries/gl',      { redirectTo:'/countries/dk' }).
-            when('/countries/eh',      { redirectTo:'/countries/ma' }).
-            when('/countries/tw',      { redirectTo:'/countries/cn' }).
-            when('/countries/fk',      { redirectTo:'/countries' }).
             when('/countries/:code',             { templateUrl: '/app/views/countries/country-profile.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
-            // when('/countries/:code',     { templateUrl: '/app/views/countries/profiles.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
 
             when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
             when('/database/record/:documentID',  { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).

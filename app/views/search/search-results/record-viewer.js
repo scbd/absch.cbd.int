@@ -15,7 +15,7 @@ define(['app', 'underscore', '/app/js/common.js',
             restrict: 'EAC',
             replace: true,
             // transclude: true,
-            templateUrl: '/app/views/search-new/search-results/record-viewer.html',
+            templateUrl: '/app/views/search/search-results/record-viewer.html',
             scope: {
                 docId:'=',
                 docSchema:'=',  

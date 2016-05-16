@@ -1,6 +1,6 @@
 
 define(['app', 'underscore', '/app/js/common.js',
-'/app/views/search-new/search-results/result-default.js', 
+'/app/views/search/search-results/result-default.js', 
 '/app/services/search-service.js',
 '/app/services/app-config-service.js'
 ], function(app, _) {
