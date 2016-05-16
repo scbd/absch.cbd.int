@@ -31,8 +31,8 @@
                         <span ng-show="showExisting" >Select exisiting Organization</span>
                     </h2>
                     <br>
-                     <a class="pull-right" ng-click="loadExisting();showExisting=true" ng-show="!showExisting" ng-href="#">Select exisiting organization</a>
-                     <a class="pull-right" ng-click="showExisting=false" ng-show="showExisting" ng-href="#">Create organization</a>
+                     <a class="pull-right btn btn-primary" ng-click="showExisting=true" ng-show="!showExisting" ng-href="#">Select exisiting organization</a>
+                     <a class="pull-right btn btn-primary" ng-click="editContact(-1);showExisting=false" ng-show="showExisting" ng-href="#">Create organization</a>
 
                 </div>
                 <div class="modal-body">
