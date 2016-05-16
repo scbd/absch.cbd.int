@@ -3,7 +3,8 @@ define(['app',
 '/app/views/directives/search-filter-dates.partial.html.js',
 '/app/views/search/search-results/result-default.js',
 '/app/services/search-service.js',
-'/app/services/app-config-service.js'], function (app, commonjs) { // jshint ignore:line
+'/app/services/app-config-service.js'
+], function (app, commonjs) { // jshint ignore:line
 
 app.directive("documentSelector", ["$http",'$rootScope', "$filter", "underscore", "$q", "searchService", "appConfigService", "IStorage",
 function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, IStorage) {
@@ -32,11 +33,10 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 			$scope.areVisible = false;
             $scope.userGov = $scope.$root.user.government;
             $scope.showAddButton = false;
-            $scope.isLoading = true;
 
             if(!$scope.type) $scope.type = "checkbox";
 
-      
+
             //==================================
             //
             //==================================
@@ -79,13 +79,13 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 
                $scope.rawDocuments.docs =  _.filter($scope.rawDocuments.docs, function (doc) {
                     doc.__checked = false;
-                   
+
                     if($scope.hideSelf && $scope.hideSelf === doc.identifier_s)
                     {
                         return false;
                     }
                     return doc;
-                    
+
                 });
 
 
@@ -149,7 +149,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                     return item;
                 }
 			};
-  
+
 
 
             //==================================
@@ -216,7 +216,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             //==================================
             function getDocs () {
                 var searchOperation;
-
+				$scope.isLoading = true;
                 var schema = "*";
                 if ($scope.schema)
                     schema = $scope.schema;
@@ -227,11 +227,11 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                     q  = q + " AND government_s:" + $scope.government.identifier;
                 if(!$scope.government &&  $scope.userGov)
                     q  = q + " AND government_s:" + $scope.userGov;
-                 
+
                 if($scope.hideSelf){
                     q  = q + " AND NOT (identifier_s:" + $scope.hideSelf + ")";
-                }     
-                    
+                }
+
                 var queryParameters = {
                     'query'    : q,
                     'currentPage' : 0,
@@ -247,10 +247,9 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                         console.log('ERROR: ' + error);
                     })
                     .finally(function(){
-                       // $scope.isLoading = false;
+                       $scope.isLoading = false;
                     });
 
-                console.log(q);
             }
 
            //==================================
@@ -264,7 +263,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                 }
             };
 
-           
+
 
 			//==================================
 		    //
@@ -275,15 +274,15 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                      $scope.showAddButton = true;
 		        }
 		    });
-            
-            
+
+
             //==================================
             //
             //==================================
 			$scope.openAddDialog = function(){
 
                  load();
-                    
+
                  $scope.syncDocuments();
 
                  _.forEach($scope.rawDocuments.docs, function (doc) {
@@ -291,13 +290,11 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                     if($scope.isInModel(doc.identifier_s)){
                         doc.__checked = true;
                     }
-                    
+
                 });
 
                 $('#'+$scope.question).modal('show');
-                
-                $scope.isLoading = false;
-                  
+
 			};
 
 
