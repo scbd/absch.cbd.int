@@ -12,12 +12,12 @@ define(['app', 'underscore', '/app/services/role-service.js'], function(app, _) 
                 scope : {},
                 link    : function($scope, element, attrs, absRegisterCtrl){
                     // console.log(absRegisterCtrl);
-                    
+
                     //===================================================================
                     $scope.gotoList = function($event, type){
                         absRegisterCtrl.gotoList($event, type);
                     }
-                    
+
                     //===================================================================
                     $scope.gotoNew = function($event, type){
                         absRegisterCtrl.gotoNew($event, type);
@@ -33,13 +33,13 @@ define(['app', 'underscore', '/app/services/role-service.js'], function(app, _) 
                         }
 
                     };
-                    
+
                     //===================================================================
                     $scope.isActiveTab = function(){
                         return false;
                     }
 
-                    
+
                 },
                 controller : ['$scope', '$element', 'roleService', '$rootScope', '$compile', '$filter', '$routeParams','authentication','$location',
                     function($scope, $element, roleService, $rootScope, $compile, $filter, $routeParams, authentication, $location){
@@ -56,11 +56,11 @@ define(['app', 'underscore', '/app/services/role-service.js'], function(app, _) 
                                 isAbsNationalAuthorizedUser : roleService.isAbsNationalAuthorizedUser(),
                                 isUser                      : roleService.isUser()
                             };
-                        
+
                         }
-              
-                       
-                    
+
+
+
                     if ($rootScope.user && $rootScope.user.isAuthenticated && roleService.hasAbsRoles()) {
 
                         require(['/app/views/register/directives/national-records-menu.html.js'], function(menu) {
