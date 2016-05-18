@@ -1,4 +1,4 @@
-define(['app','/app/views/register/register-record-list.directive.js',
+define(['app',
 '/app/views/directives/task-id-directive.html.js',
 '/app/views/directives/user-details.directive.html.js',
 '/app/views/directives/help-directive.html.js',

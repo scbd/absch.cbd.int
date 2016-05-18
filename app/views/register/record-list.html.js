@@ -6,9 +6,10 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
         "use strict";
 
         app.controller("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage", '$rootScope',
-            'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", "$element",
+            'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", "$element", "breadcrumbs",
             function ($timeout, commonjs, bootbox, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
-                $scope, $q, guid, editFormUtility, $filter, $element) {
+                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs) {
+
                 $scope.orderBy = ['-updatedOn'];
 
                 var deleteRecordModel = $element.find("#deleteRecordModel");
@@ -19,6 +20,13 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     trigger: 'hover'
                 });
 
+                if ($routeParams.document_type) {
+                    var type =  $filter("mapSchema")($routeParams.document_type);
+                    $scope.schema = type;
+                    breadcrumbs.options = {
+                        'document_type': $filter("schemaName")(type)
+                    };
+                }
 
 
                 $scope.$watch("recordToDelete", function (val) {

@@ -20,7 +20,8 @@ define(['app',
 			replace: true,
 			transclude: false,
 			scope: {},
-			controller: ["$rootScope", "$scope", "$routeParams", "$filter", function ($rootScope, $scope, $routeParams, $filter) {
+			controller: ["$rootScope", "$scope", "$routeParams", "$filter", "$route",
+			 function ($rootScope, $scope, $routeParams, $filter, $route) {
 
 				var document_types = {
 
@@ -112,9 +113,9 @@ define(['app',
 					}
 
 				};
-
-				$scope.type = document_types[$filter("mapSchema")($routeParams.document_type)];
-				$scope.document_type = $routeParams.document_type;
+				var documentType = $routeParams.document_type || $route.current.$$route.documentType
+				$scope.type = document_types[$filter("mapSchema")(documentType)];
+				$scope.document_type = documentType;
 			}]
 
 		};

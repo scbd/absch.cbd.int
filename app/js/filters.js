@@ -253,7 +253,7 @@ define(["app",'/app/js/common.js', '../services/app-config-service'], function (
 			if(schema.toLowerCase()=="database"					 ) return "National Website or Database";
 			if(schema.toLowerCase()=="resource"					 ) return "Virtual Library Resource";
 			if(schema.toLowerCase()=="organization"				 ) return "Organization";
-			if(schema.toLowerCase()=="measure" 					 ) return "Legislative, Administrative or Policy Measures";
+			if(schema.toLowerCase()=="measure" 					 ) return "Legislative, Administrative or Policy Measure";
 			if(schema.toLowerCase()=="abscheckpoint"			 ) return "Checkpoint";
 			if(schema.toLowerCase()=="abscheckpointcommunique"	 ) return "Checkpoint Communiqué";
 			if(schema.toLowerCase()=="abspermit"				 ) return "Internationally Recognized Certificate of Compliance";
@@ -263,13 +263,13 @@ define(["app",'/app/js/common.js', '../services/app-config-service'], function (
 			if(schema.toLowerCase()=="new"						 ) return "What's New";
             if(schema.toLowerCase()=="statement"			     ) return "Statement";
 			if(schema.toLowerCase()=="absnationalreport"		 ) return "Interim National Report on the Implementation of the Nagoya Protocol";
-			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
+			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standard";
 			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community Protocol and Procedures and Customary Law";
 			if(schema.toLowerCase()=="meeting"					 ) return "Meeting";
 			if(schema.toLowerCase()=="notification"				 ) return "Notification";
 			if(schema.toLowerCase()=="capacitybuildinginitiative") return "Capacity-building Initiative";
 			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "Capacity-building Resource";
-			if(schema.toLowerCase()=="endorsement"				 ) return "Endorsements";
+			if(schema.toLowerCase()=="endorsement"				 ) return "Endorsement";
 		};
 	}]);
 

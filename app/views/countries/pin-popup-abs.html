@@ -53,7 +53,7 @@
         <br>
         <span class="badge">{{CPC}}</span> Checkpoint Communiqués
         <br><br>
-        <div class="label label-info {{exceptionCountry=='dk' ? 'show' : 'hide'}}" style="white-space: normal;">
+        <div class="label label-info {{(exceptionCountry=='dk' || codeLower=='dk') ? 'show' : 'hide'}}" style="white-space: normal;">
             <i class="fa fa-info" /> Denmark’s ratification of the Protocol does not apply in respect of Greenland and the Faroe Islands.
         </div>
         <div class="label label-info {{codeLower=='fk' ? 'show' : 'hide'}}" style="white-space: normal;">

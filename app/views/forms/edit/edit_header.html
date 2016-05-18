@@ -1,55 +1,56 @@
 <div class="register-content-header color-white" style="margin-top:20px;" ng-class="{'bg-blue': type.schemaType != 'referenceRecords','bg-orange': type.schemaType == 'referenceRecords' }">
-
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet">
     <div style="padding:10px 10px;">
-        <h3>{{type.title}} <span class="color-darkgrey">({{type.abbreviation}})</span>
+        <h3>{{type|mapSchema|schemaName}} <span class="color-darkgrey">({{type}})</span>
 
-            <span class="helpinfoInline" ng-show="type.abbreviation ==='CNA'" >
+            <span class="helpinfoInline" ng-show="type ==='CNA'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCNAInfo = !showCNAInfo"></i>
             </span>
 
-            <span class="helpinfoInline" ng-show="type.abbreviation ==='MSR'" >
+            <span class="helpinfoInline" ng-show="type ==='MSR'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showMSRInfo = !showMSRInfo"></i>
             </span>
 
-            <span class="helpinfoInline" ng-show="type.abbreviation ==='NDB'" >
+            <span class="helpinfoInline" ng-show="type ==='NDB'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showNDBInfo = !showNDBInfo"></i>
             </span>
 
-             <span class="helpinfoInline" ng-show="type.abbreviation ==='CP'" >
+             <span class="helpinfoInline" ng-show="type ==='CP'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCPInfo = !showCPInfo"></i>
             </span>
 
-             <span class="helpinfoInline" ng-show="type.abbreviation ==='CPC'" >
+             <span class="helpinfoInline" ng-show="type ==='CPC'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCPCInfo = !showCPCInfo"></i>
             </span>
 
-             <span class="helpinfoInline" ng-show="type.abbreviation ==='IRCC'" >
+             <span class="helpinfoInline" ng-show="type ==='IRCC'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showIRCCInfo = !showIRCCInfo"></i>
             </span>
 
-             <span class="helpinfoInline" ng-show="type.abbreviation ==='NR'" >
+             <span class="helpinfoInline" ng-show="type ==='NR'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showNRInfo = !showNRInfo"></i>
             </span>
 
-             <span class="helpinfoInline" ng-show="type.abbreviation ==='VLR'" >
+             <span class="helpinfoInline" ng-show="type ==='VLR'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showVLRInfo = !showVLRInfo"></i>
             </span>
 
 
-            <span class="helpinfoInline" ng-show="type.abbreviation ==='A19A20'" >
+            <span class="helpinfoInline" ng-show="type ==='A19A20'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showA19A20Info = !showA19A20Info"></i>
             </span>
 
-            <span class="helpinfoInline" ng-show="type.abbreviation ==='CPP'" >
+            <span class="helpinfoInline" ng-show="type ==='CPP'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCPPInfo = !showCPPInfo"></i>
             </span>
 
 
-            <span class="helpinfoInline" ng-show="type.abbreviation ==='CBI'" >
+            <span class="helpinfoInline" ng-show="type ==='CBI'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCBIInfo = !showCBIInfo"></i>
             </span>
 
-             <span class="helpinfoInline" ng-show="type.abbreviation ==='CON'" >
+             <span class="helpinfoInline" ng-show="type ==='CON'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCONInfo = !showCONInfo"></i>
             </span>
 

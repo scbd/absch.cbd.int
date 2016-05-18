@@ -1,6 +1,5 @@
 define(['app', 'underscore',
  '/app/services/role-service.js',
- '/app/views/register/directives/record-overview.js',
  '/app/views/register/directives/register-top-menu.js'],
 function(app, _) {
     "use strict";
@@ -39,11 +38,12 @@ function(app, _) {
 
 
             $scope.gotoNew = function($event, cftype) {
-                $location.url("/register/" + $filter("mapSchema")(cftype) + "/new");
+                $event.stopPropagation();
+                $location.path("/register/" + $filter("mapSchema")(cftype) + "/new");
             }
 
             $scope.gotoList = function($event, cftype) {
-                $location.url("/register/" + $filter("mapSchema")(cftype));
+                $location.path("/register/" + $filter("mapSchema")(cftype));
             }
 
             //===================================================================
@@ -56,15 +56,7 @@ function(app, _) {
             };
 
             function init(){
-                if (roleService.hasAbsRoles()) {
-
-                    require(['/app/views/register/directives/national-records-menu.html.js'], function(menu) {
-                        $scope.$apply(function() {
-                            $element.find('#menuPlaceholder')
-                                .append($compile('<div register-national-menu ></div>')($scope));
-                        });
-                    });
-                }
+                $scope.isNationalUser = roleService.hasAbsRoles();
                 loadFacets();
             }
 

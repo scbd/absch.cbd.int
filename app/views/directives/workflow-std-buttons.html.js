@@ -7,22 +7,16 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
     	return{
     		restrict: 'EAC',
     		replace:false,
-            require : '^^absRegister',
     		templateUrl: '/app/views/directives/workflow-std-buttons.html',
     		scope: {
     			getDocumentFn : '&document',
                 languages     : '=languages',
                 hideTimer     : '@hideTimer'
     		},
-            link: function ($scope, $element, attr, controller)
-			{
-                console.log(controller);
-
-			},
     		controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",'$element', 'toastr', '$location', '$filter', '$routeParams',
             function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows, $element, toastr, $location, $filter, $routeParams)
 			{
-                var document_type =  $filter("mapSchema")($routeParams.document_type);
+                var document_type =  $filter("mapSchema")($route.current.$$route.documentType);
                 //////////////////////////////
                 $scope.errors              = null;
                 var next_fs

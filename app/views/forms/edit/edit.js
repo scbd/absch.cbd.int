@@ -16,18 +16,27 @@ define([
   ], function (app) {
 
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
-                                   "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","underscore",
+                                   "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","underscore", "$route", "breadcrumbs",
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
-                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, _) {
+                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, _, $route, breadcrumbs) {
 
-    $scope.type = $rootScope.document_types[$filter("mapSchema")($routeParams.document_type)];
-    // $scope.showHelp = {'show':true,'hasHelp':true, showTour:false};
+
+    $scope.type = $route.current.$$route.documentType;
 
     $scope.status   = "loading";
     $scope.error    = null;
-
     $scope.tab      = "edit";
     $scope.review   = { locale: "en" };
+
+    console.log(breadcrumbs.breadcrumbs);
+    var breadcrumb = {    
+        label : $filter('schemaName')($filter('mapSchema')($scope.type)),
+        originalPath : "/register/:document_type",
+        param:$scope.type,
+        path:"/register/" + $scope.type
+    }
+    breadcrumbs.breadcrumbs.splice(2, 0 , breadcrumb);
+    console.log(breadcrumbs.breadcrumbs);
 
     $scope.options  = {
       countries		: function() {
@@ -350,12 +359,12 @@ define([
       var qDocument = {};
       $scope.document = {};
       if($routeParams.identifier)
-        qDocument = editFormUtility.load($routeParams.identifier, $filter("mapSchema")($routeParams.document_type));
+        qDocument = editFormUtility.load($routeParams.identifier, $filter("mapSchema")($scope.type));
       else {
         qDocument = {
           header: {
             identifier: guid(),
-            schema   : $filter("mapSchema")($routeParams.document_type),
+            schema   : $filter("mapSchema")($scope.type),
             languages: ["en"]
           },
           government: $scope.userGovernment() ? { identifier: $scope.userGovernment() } : undefined,
