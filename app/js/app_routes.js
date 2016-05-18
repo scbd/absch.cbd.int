@@ -67,22 +67,17 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                 when('/database/:documentSchema/:documentID',           { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
                 when('/database/:documentSchema/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
 
-                when('/register/tasks/:id',                                 {templateUrl: '/app/views/tasks/tasks-id.html',             label:'Management Center',  param:'true', resolveController: true, resolve : { securized : securize() }}).
-                when('/register/tasks/:id/:activity',                       {templateUrl: '/app/views/tasks/tasks-id-activity.html',    label:'Management Center',  param:'true', resolveController: true, resolve : { securized : securize() }}).
-                when('/dashboard',                                          {redirectTo:  '/register/dashboard'}).
-
+                
                 when('/register',                                           {templateUrl: '/app/views/register/dashboard.html',         label:'Management Center',  param:'true', resolveController: true, resolve : { securized : securize() }}).
+                when('/dashboard',                                          {redirectTo:  '/register/dashboard'}).
                 when('/register/dashboard',                                 {templateUrl: '/app/views/register/dashboard.html',         label:'Dashboard',  param:'true', resolveController: true, resolve : { securized : securize() }}).
 
-                when('/register/admin',                                     {templateUrl: '/app/views/register/admin.html',          label:'Management Center',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
-                when('/register/notifications',                             {templateUrl: '/app/views/register/register.html',          label:'Notifications',  param:'true', resolveController: true,resolve : { securized : securize() }, subTemplateUrl: '/app/views/register/notifications.html',}).
+                when('/register/admin',                                     { templateUrl: '/app/views/register/admin.html',          label:'ABSCH Admin',    param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+                when('/register/notifications',                             { templateUrl: '/app/views/register/notifications.html',  label:'Notifications',  param:'true', resolveController: true,resolve : { securized : securize() }}).
                 when('/register/requests',                                  { redirectTo:'/register/notifications' }).
-                when('/register/:document_type/status/:status',             {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl:'/app/views/register/type_document_list.html',}).
-
-                when('/register/requests/:workflowId',                      {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }, subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',type : 'all'}).
-                when('/register/requests/:type/:status',                    {templateUrl: '/app/views/register/register.html',          label:'Requests',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }, subTemplateUrl: '/app/views/tasks/my-tasks.directive.html',}).
-                when('/register/national-users',                            {templateUrl: '/app/views/register/register.html',          label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl: '/app/views/register/national-users/index.html'}).
-
+                
+                when('/register/:document_type/status/:status',             {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
+                when('/register/national-users',                            {templateUrl: '/app/views/register/national-users/index.html', label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
                 when('/register/:document_type',                            {templateUrl: '/app/views/register/record-list.html',       label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
                 when('/register/CON/new',           {templateUrl: '/app/views/forms/edit/edit-contact.html',                   label:'New',  param:'true', resolveController: true,documentType :'CON' , resolve : { securized : securize(null,true) }, }).
@@ -111,12 +106,11 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                 when('/register/A19A20/:identifier/edit',        {templateUrl: '/app/views/forms/edit/edit-modelContractualClause.html',    label:'Edit',  param:'true', resolveController: true, documentType :'MCC' , resolve : { securized : securize() }, }).
                 when('/register/CPP/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-communityProtocol.html',         label:'Edit',  param:'true', resolveController: true, documentType :'CPP' , resolve : { securized : securize() }, }).
 
-                // when('/register/:document_type/:identifier/edit',           {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl: '/app/views/forms/edit/edit--', }).
                 when('/register/:document_type/:identifier/edit/:tour',     {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl: '/app/views/forms/edit/edit--',  }).
                 when('/register/:document_type/:documentID/view',           {templateUrl: '/app/views/register/record-details.html',    label:'View',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
-                when('/register/admin/pending-requests',                             {templateUrl: '/app/views/register/register.html',          label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) },subTemplateUrl: '/app/views/admin/pending-tasks.html'}).
-                when('/register/admin/reported-records',                             {templateUrl: '/app/views/register/register.html',          label:'Reported Records',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) },subTemplateUrl: '/app/views/admin/reported-records.html'}).
+                when('/register/admin/pending-requests',         { templateUrl: '/app/views/register/admin/pending-tasks.html',      label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+                when('/register/admin/reported-records',         { templateUrl: '/app/views/register/admin/reported-records.html',   label:'Reported Records',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
 
 
                 when('/workshops/lac',               { templateUrl: '/app/views/workshops/lac.html',            label:'Workshops',            resolveController: true, resolveUser: true}).

@@ -30,7 +30,7 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 				'roles': [{
 					'User': 'User'
 				}, {
-					'Administrator': 'Administrator-dev'
+					'Administrator': 'Administrator'
 				}, {
 					'AbsAdministrator': 'AbsAdministrator-dev'
 				}, {
@@ -48,7 +48,7 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 				'roles': [{
 					'User': 'User'
 				}, {
-					'Administrator': 'Administrator-dev'
+					'Administrator': 'Administrator'
 				}, {
 					'AbsAdministrator': 'AbsAdministrator-dev'
 				}, {

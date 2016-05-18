@@ -1,0 +1,53 @@
+<div ng-controller="adminReportedRecordsCtrl" id="RegisterPage">
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet">
+
+    <span register-top-menu></span>
+
+    <div class="register-content card card-1-notrans">
+
+        <div class="register-content-header bg-pink color-white">
+            <div style="padding:10px 10px;">
+                <h3>Reported Records</h3>
+            </div>
+        </div>
+        <div class="register-content-content">
+
+
+            <table class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <td>Schema</td>
+                        <td>Reported By</td>
+                        <td>Reported On</td>
+                        <td>Information</td>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="record in reportRecords | orderBy:'reportedOn':'desc'">
+                    <tr ng-click="record.showDoc=!record.showDoc">
+                        <td>
+                            {{record.schema|schemaName}}
+                        </td>
+                        <td>
+                            {{record.reportedBy}}
+                        </td>
+                        <td>
+                            {{record.reportedOn|formatDate}}
+                        </td>
+                        <td>
+                            <span ng-if="record.incorrect">incorrect or inappropriate |</span>
+                            <span ng-if="record.broken">broken link or outdated information |</span>
+                            <span ng-if="record.copyright">copyright infringement</span><br> {{record.additionalInformation}}
+                        </td>
+                    </tr>
+                    <tr ng-if="record.showDoc">
+                        <td colspan="4">
+                            <record-viewer doc-id='record.identifier' doc-schema='record.schema' class="card card-3"></record-viewer>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

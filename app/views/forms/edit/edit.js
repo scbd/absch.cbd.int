@@ -12,7 +12,8 @@ define([
     '/app/views/forms/view/view-organization-reference.directive.js',
     '/app/views/forms/view/view-history-directive.html.js',
     '/app/views/directives/workflow-std-buttons.html.js',
-     '/app/views/forms/edit/document-selector.html.js',
+    '/app/views/forms/edit/document-selector.html.js',
+    '/app/views/register/directives/register-top-menu.js'
   ], function (app) {
 
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
