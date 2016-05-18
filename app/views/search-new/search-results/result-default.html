@@ -11,17 +11,17 @@
     
     <div ng-show="!showDoc" ng-click="showDoc=!showDoc" style="padding:0!important;margin:0!important;">
         <div class="{{type}}">
-            <div class="schema">
-                <span class="hidden-xs">{{doc.schema_s | schemaName}}</span>
-                <span style="display:inline!important;"> ({{doc.schema_s | schemaShortName}})</span>
-            </div>
+      
+            <div class="title bold">{{doc.rec_title}}</div>
 
-            <div class="title">{{doc.rec_title}}</div>
-
-            <div class="description hidden-xs descriptionSpan" ng-if="doc.rec_summary">{{doc.rec_summary|limitTo:250}}
+            <span class="description hidden-xs descriptionSpan" ng-if="doc.rec_summary">{{doc.rec_summary|limitTo:250}}
                 <span ng-if="doc.rec_summary.length > 250">...</span>
-            </div>
+            </span>
             <ul class="metadata bold">
+                <li>
+                    <span class="schema bold">{{doc.schema_s | schemaName}}</span>
+                </li>
+                
                 <li ng-if="doc.rec_countryName" class="hidden-xs">
                     <span>{{doc.rec_countryName}}</span>
                 </li>
