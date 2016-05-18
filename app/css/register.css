@@ -596,6 +596,6 @@ label{
 }
 
 
-.modal-open .form-group{
+.modal-open .form-control{
 	opacity: 0.9;
 }
