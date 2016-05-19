@@ -1657,3 +1657,7 @@ footer .logo {
             color:#999;
             
          }
+         
+         .organization-modal-maxheight{
+             max-height:500px;overflow-y:scroll;
+         }

@@ -27,7 +27,7 @@
                         <span ng-show="showExisting" >Select an exisiting organization</span>
                     </h3>
                 </div>
-                <div class="modal-body" style=" max-height:500px;overflow-y:scroll;">
+                <div class="modal-body" ng-class="{'organization-modal-maxheight':showExisting}">
                  
                     <div ng-show="!showExisting">
                         <div>
