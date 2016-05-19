@@ -1,18 +1,19 @@
 <div ng-show="document">
     <div ng-if="isOrganization">
-        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;"
-        ng-if="!isCNA" style="">Organization</div>
-        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;"
-        ng-if="isCNA">
+        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="!isCNA" style="">Organization</div>
+        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="isCNA">
             Competent National Authority</div>
         <div>
-            <span style="font-weight:500;">{{document.name | lstring:locale}}</span>
-            <span ng-show="document.acronym">({{document.acronym | lstring:locale}})</span>
+            <span style="font-weight:500;">{{(document.name||document.organization) | lstring:locale}}</span>
+            <span ng-show="document.acronym">({{(document.acronym||document.organizationAcronym) | lstring:locale}})</span>
         </div>
-
-        <div>{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</div>
-
-        <div>
+        <div ng-if="document.organizationType">
+            {{document.organizationType|term}}
+        </div>
+        <div ng-if="document.firstName||document.lastName">
+            {{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}
+        </div>
+        <div ng-if="document.designation || document.department">
             {{document.designation | lstring:locale}}<span ng-show="document.designation && document.department">, </span> {{document.department | lstring:locale}}
         </div>
     </div>
@@ -21,12 +22,6 @@
         <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="!isCNA" style="">Person</div>
         <div>
             <span style="font-weight:500;">{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</span>
-        </div>
-        <div ng-if="document.contactOrganization">
-            <b>{{document.contactOrganization.organization | lstring:locale}}</b>
-            <span ng-show="document.contactOrganization.organizationAcronym">
-					 ({{document.contactOrganization.organizationAcronym | lstring:locale}})
-				 </span>
         </div>
         <div>
             {{document.designation | lstring:locale}}<span ng-show="document.designation && document.department">, </span> {{document.department | lstring:locale}}
@@ -38,33 +33,54 @@
         </div>
 
     </div>
+    <!--<span onload="otherElements = otherTerms[term.identifier]" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>-->
+    <span ng-if="document" onload="document=document" ng-include="'/app/views/forms/view/contact-reference/address'"></span>
 
-    <address style="margin-top: 8px; margin-bottom: 8px">
-		<div >
-			<!-- class="km-pre" -->
-			<span ng-show="document.addressHTML" ng-bind-html="document.addressHTML | lstring:locale"></span>
-			{{(document.contactOrganization || document).address | lstring:locale}}</div>
-			{{(document.contactOrganization || document).city | lstring:locale}}<span ng-show="(document.contactOrganization || document).city && document.state">, </span>
-			{{(document.contactOrganization || document).state | lstring:locale}}<br ng-show="(document.contactOrganization || document).city || document.state" />
-			{{(document.contactOrganization || document).postalCode | lstring:locale}}<span ng-show="(document.contactOrganization || document).postalCode">, </span>
-		    <span style="font-weight:500;">{{(document.contactOrganization || document).country|term}}</span>
-	</address>
+    <div ng-if="isPerson && document.contactOrganization">
+        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;">
+            Related Organization
+        </div>
 
-    <div ng-show="(document.contactOrganization || document).phones">
-        Phone: <span ng-repeat="item in (document.contactOrganization || document).phones">{{item}}<span ng-show="!$last">, </span></span>
+        <div ng-if="document.contactOrganization">
+            <b>{{document.contactOrganization.organization | lstring:locale}}</b>
+            <span ng-show="document.contactOrganization.organizationAcronym">
+					 ({{document.contactOrganization.organizationAcronym | lstring:locale}})
+				 </span>
+        </div>
+        <div ng-if="document.contactOrganization.organizationType">
+            {{document.contactOrganization.organizationType|term}}
+        </div>
+        <span ng-if="document.contactOrganization" onload="document=document.contactOrganization" ng-include="'/app/views/forms/view/contact-reference/address'"></span>
+
     </div>
-    <div ng-show="(document.contactOrganization || document).faxes">
-        Fax: <span ng-repeat="item in (document.contactOrganization || document).faxes">{{item}}<span ng-show="!$last">, </span></span>
-    </div>
-    <div ng-show="(document.contactOrganization || document).emails">
-        Email: <span ng-repeat="item in (document.contactOrganization || document).emails"><a ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
-    </div>
-    <div ng-show="(document.contactOrganization || document).websites">
-        Website: <span ng-repeat="item in (document.contactOrganization || document).websites"><a target="_new" ng-href="{{item.url}}">{{item.url}}</a><span ng-show="!$last">, </span></span>
-    </div>
-    <div ng-if="isCNA">
-        <a ng-href="/database/{{document.header.schema | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.info.revision}}" target="_new">
-            <i class="fa fa-external-link-square" aria-hidden="true"></i> {{document | uniqueID}}
-        </a>
-    </div>
+
+    <script id="/app/views/forms/view/contact-reference/address" type="text/ng-template">
+        <address style="margin-bottom:2px!important">
+                <span ng-show="document.addressHTML" ng-bind-html="document.addressHTML | lstring:locale"></span>
+                {{document.address | lstring:locale}}</div>
+                {{document.city | lstring:locale}}<span ng-show="document.city && document.state">, </span>
+                {{document.state | lstring:locale}}<br ng-show="document.city || document.state" />
+                {{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
+                <span style="font-weight:500;">{{document.country|term}}</span>
+        </address>
+
+        <div ng-show="document.phones">
+            Phone: <span ng-repeat="item in document.phones">{{item}}<span ng-show="!$last">, </span></span>
+        </div>
+        <div ng-show="document.faxes">
+            Fax: <span ng-repeat="item in document.faxes">{{item}}<span ng-show="!$last">, </span></span>
+        </div>
+        <div ng-show="document.emails">
+            Email: <span ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
+        </div>
+        <div ng-show="document.websites">
+            Website: <span ng-repeat="item in document.websites"><a target="_new" ng-href="{{item.url}}">{{item.url}}</a><span ng-show="!$last">, </span></span>
+        </div>
+        <div ng-if="isCNA">
+            <a ng-href="/database/{{document.header.schema | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.info.revision}}" target="_new">
+                <i class="fa fa-external-link-square" aria-hidden="true"></i> {{document | uniqueID}}
+            </a>
+        </div>
+    </script>
+
 </div>

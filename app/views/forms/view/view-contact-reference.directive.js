@@ -60,10 +60,11 @@ app.directive("viewContactReference", [function () {
 								delete data.data.body;
 								$scope.document.info = data.data;
 								if($scope.document && $scope.document.contactOrganization){
-									storage.documents.get($scope.document.contactOrganization)
-									.then(function(data){
-										_.extend($scope.document.contactOrganization, data.data);
-									});
+									storage.documents
+											.get($scope.document.contactOrganization.identifier)
+											.then(function(data){
+												_.extend($scope.document.contactOrganization, data.data);
+											});
 								}
 
 							});
