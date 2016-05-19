@@ -1,6 +1,7 @@
-﻿define(['app','/app/js/common.js'], function (app) {
+﻿define(['app','/app/js/common.js', '/app/services/role-service.js'], function (app) {
 
-app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonjs", function(storage, workflows, $q, realm, commonjs) {
+app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonjs", "roleService",
+ function(storage, workflows, $q, realm, commonjs, roleService) {
 
 	var schemasWorkflowTypes  = {
 
@@ -50,7 +51,7 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 
 					return securityPromise.then(
 						function(isAllowed) {
-							if (!isAllowed && !commonjs.isIAC())
+							if (!isAllowed && !roleService.isIAC())
 								throw { data: { error: "Not allowed" }, status: "notAuthorized" };
 
 							var documentPromise = hasDraft ? storage.drafts.get(identifier)
