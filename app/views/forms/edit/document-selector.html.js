@@ -198,7 +198,8 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                 }
 			   if($scope.type != 'radio')
 	               $scope.model =  _.filter($scope.model, function (doc) {
-	                    if(doc.identifier !== removeId){
+	                    if((doc.identifier !== removeId && removeId.indexOf('@')>=0) || 
+                           (removeId.indexOf('@')<0 && removeRevisonNumber(doc.identifier) !== removeRevisonNumber(removeId))){
 	                     return doc;
 	                    }
 	                });
