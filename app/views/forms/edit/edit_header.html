@@ -5,10 +5,11 @@
 
     <span register-top-menu></span>
 
-    <div class="register-content-header color-white" style="margin-top:20px;" ng-class="{'bg-blue': type.schemaType != 'referenceRecords','bg-orange': type.schemaType == 'referenceRecords' }">
+    <div class="register-content-header color-white" style="margin-top:20px;"
+     ng-class="{'bg-blue': schemaType != 'referenceRecords','bg-orange': schemaType == 'referenceRecords' }">
 
         <div style="padding:10px 10px;">
-            <h3>{{type|mapSchema|schemaName}} <span class="color-darkgrey">({{type}})</span>
+            <h3 style="padding: 0; margin: 0 0 5px 0;">{{type|mapSchema|schemaName}} <span class="color-darkgrey">({{type}})</span>
 
             <span class="helpinfoInline" ng-show="type ==='CNA'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCNAInfo = !showCNAInfo"></i>
