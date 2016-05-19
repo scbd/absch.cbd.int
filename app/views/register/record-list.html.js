@@ -484,10 +484,14 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                     var qAnd = [];
                     qAnd.push("(type eq '" + schema + "')");
-
-                    var qDocuments = storage.documents.query(qAnd.join(" and ") || undefined, undefined, {
+                    
+                    var publishedParams = {
                         cache: false
-                    });
+                    };
+                    if (schema == "contact")
+                        publishedParams.body = true;
+                        
+                    var qDocuments = storage.documents.query(qAnd.join(" and ") || undefined, undefined, publishedParams);
 
                     var draftParams = {
                         cache: false
