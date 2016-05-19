@@ -51,12 +51,13 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                         if(!$scope.model && $scope.type != 'radio')
                             $scope.model=[];
 
-                        if(!$scope.isInModel(doc.identifier_s))
+                        if(!$scope.isInModel(doc.identifier_s)){
 							var document = {identifier: doc.identifier_s +"@"+ doc._revision_i};
 							if($scope.type == 'radio')
 								$scope.model = document;
 							else
                             	$scope.model.push(document);
+                        }
                     }
                     if(!doc.__checked && $scope.isInModel(doc.identifier_s)){
                         	$scope.removeDocument(doc)
@@ -300,23 +301,27 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 
 
 			$scope.isContact = function(document){
-				return _.some($scope.selectedDocuments, function(doc){
+				return document && _.some($scope.selectedDocuments, function(doc){
 						return doc.header.identifier==removeRevisonNumber(document.identifier) && doc.header.schema == "contact"
 				});
 			}
 			$scope.isAuthority = function(document){
-				return _.some($scope.selectedDocuments, function(doc){
+				return document && _.some($scope.selectedDocuments, function(doc){
 						return doc.header.identifier==removeRevisonNumber(document.identifier) && doc.header.schema == "authority"
 				});
 			}
 			$scope.isMeasure = function(document){
-				return _.some($scope.selectedDocuments, function(doc){
+				return document && _.some($scope.selectedDocuments, function(doc){
 						return doc.header.identifier==removeRevisonNumber(document.identifier) && doc.header.schema == "measure"
 				});
 			}
 
 			function removeRevisonNumber(identifier){
-				return identifier.substr(0, identifier.indexOf('@'))
+                
+                if(identifier.indexOf('@')>=0)
+				    return identifier.substr(0, identifier.indexOf('@'))
+                
+                return identifier;
 			}
 
 		},
