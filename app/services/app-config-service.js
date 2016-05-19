@@ -30,7 +30,7 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 				'roles': [{
 					'User': 'User'
 				}, {
-					'Administrator': 'Administrator-dev'
+					'Administrator': 'Administrator'
 				}, {
 					'AbsAdministrator': 'AbsAdministrator-dev'
 				}, {
@@ -48,7 +48,7 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 				'roles': [{
 					'User': 'User'
 				}, {
-					'Administrator': 'Administrator-dev'
+					'Administrator': 'Administrator'
 				}, {
 					'AbsAdministrator': 'AbsAdministrator-dev'
 				}, {
@@ -118,7 +118,7 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
                     if (role)
                         return _.values(role)[0];
                     else
-                        throw roleName + ' role is not configured for realm ' + realmConfig[0].realm + ', please update realm-configuration.js';
+						throw roleName + ' role is not configured for realm ' + realmConfig.realm + ', please update realm-configuration.js';
                 } else
                     throw 'Realm not configured, please update realm-configuration.js';
             }

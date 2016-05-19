@@ -113,7 +113,8 @@ performing certain types of tasks and/or implementing specific approaches. </div
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" required name="publicationYear" caption="Publication year">
-									<input type="number" required name="publicationYear" ng-model="document.publicationYear" />
+									<input type="number" required name="publicationYear" ng-model="document.publicationYear"/>
+									<!-- min="0" max="9999" maxlength="4"  ng-change="maxLengthCheck(document.publicationYear)"/> -->
 								</div>
 							</div>
 						</div>

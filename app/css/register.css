@@ -594,3 +594,8 @@ border-bottom:5px solid pink;
 label{
 	font-weight:500;
 }
+
+
+.modal-open .form-control{
+	opacity: 0.9;
+}

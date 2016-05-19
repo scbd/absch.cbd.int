@@ -25,7 +25,8 @@ function(app) {
                 $scope.showContacts = function(index) {
                     if (!modalEdit.is(":visible")) {
                         modalEdit.modal("show");
-                        $scope.editContact(index)
+                        $scope.loadExisting();
+                        $scope.showExisting=true;
                     }
                     if (modalEdit.is(":visible")) {
                         modalEdit.modal("hide");

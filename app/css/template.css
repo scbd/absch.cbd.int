@@ -1411,12 +1411,12 @@ footer .logo {
 .comma:nth-last-of-type(2):after {
   content: " and ";
 }
-    #RegisterPage dt{color:#888;margin-top:3px;}
+        #RegisterPage dt{color:#888;margin-top:3px;}
         #RegisterPage dd{color:#333;margin-top:3px;font-weight:bold;}
-        #RegisterPage .register-content {background-color: #FFF;margin:20px 0; }
-        #RegisterPage .register-content-header  h3 {padding:0;margin:0 0 5px 0;}
-        #RegisterPage .register-content-content {padding:20px;}
-        #RegisterPage  .cp-header label{margin-right:10px; width:140px; color:#999; font-weight: bold;}
+        #RegisterPage .register-content, #SubmitPage .register-content {background-color: #FFF;margin:20px 0; }
+        #RegisterPage .register-content-header  h3, #SubmitPage .register-content-header  h3  {padding:0;margin:0 0 5px 0;}
+        #RegisterPage .register-content-content, #SubmitPage .register-content-content  {padding:20px;}
+        #RegisterPage  .cp-header label, #SubmitPage .cp-header label {margin-right:10px; width:140px; color:#999; font-weight: bold;}
 
 
  #SubmitPage .factive{color:white;}

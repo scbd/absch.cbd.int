@@ -1,115 +1,287 @@
-<div ng-controller="DashboardController" class="register-content card card-1-notrans">
+<div ng-controller="DashboardController" id="RegisterPage">
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet">
 
- <div class="register-content-header bg-darkgrey color-white">
-      <div style="padding:10px 10px;">
-        <h3>Dashboard 
+    <span register-top-menu></span>
+
+    <div class="register-content card card-1-notrans">
+        <div class="register-content-header bg-darkgrey color-white">
+            <div style="padding:10px 10px;">
+                <h3>Dashboard
               <span class="helpinfoInline">
-                <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i> 
+                <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i>
             </span>
         </h3>
-        
-        <!--help info---------------------------->
-         <div ng-if="showInfo" class="well well-help" >
-            <div ng-if="user.government">
-            The Dashbaord allows registered ABS-CH users to find information about your CH account, your role and permissions in the ABS-CH. Here you can also update your profile or change your password.
-            This page also provides an overview of all the records prepared by the authorized users of your country and their different status: published, drafts and pending requests.  
-            Click on the category of record you wish to view for more details or add a new record.
-            <br><br>
-            Upon request a training site is also available to help ABS-CH users familiarize themselves with the functioning of the ABS-CH without altering the content of the official ABS-CH.
-            </div>
-            <div ng-if="!user.government">
-            The Dashbaord allows registered ABS-CH users to find information about your CH account, your role and permissions in the ABS-CH. Here you can also update your profile or change your password.   
-            This page also provides an overview of all your records their different status: published, drafts and pending requests.  Click on the category of record you wish to view for more details or add a new record.
-            Upon request a training site is also available to help ABS-CH users familiarize themselves with the functioning of the ABS-CH without altering the content of the official ABS-CH.
-            </div>
-             
-         </div>
 
-      </div>
-  </div>
-  <div class="register-content-content" >
-       
-         <div class="row well" style="margin:0 0 30px 0">
-            <h4 style="padding:3px;margin-top:0;border-bottom:1px solid #ddd;">&nbsp; Welcome <span class="color-black bold">{{user.name}}</span></h4>
-            <div class="col-md-6 cp-header">
-                <table>
-                    <tr>
-                        <td><label>Name:</label></td>
-                        <td><strong>{{user.name}}</strong></td>
-                    </tr>
-                    <tr>
-                        <td><label>Primary email:</label></td>
-                        <td><strong>{{user.email}}</strong></td>
-                  </tr>
-                   <tr>
-                        <td><label>Country affiliation:</label></td>
-                        <td  ng-if="user.government"><a href="/countries/{{user.government | uppercase}}"><strong>{{userCountry|term}}</strong></a></td>
-                        <td  ng-if="!user.government"><strong>none</strong></td>
-                    </tr>
-                   </table>
+                <!--help info---------------------------->
+                <div ng-if="showInfo" class="well well-help">
+                    <div ng-if="user.government">
+                        The Dashbaord allows registered ABS-CH users to find information about your CH account, your role and permissions in the ABS-CH. Here you can also update your profile or change your password. This page also provides an overview of all the records prepared
+                        by the authorized users of your country and their different status: published, drafts and pending requests. Click on the category of record you wish to view for more details or add a new record.
+                        <br>
+                        <br> Upon request a training site is also available to help ABS-CH users familiarize themselves with the functioning of the ABS-CH without altering the content of the official ABS-CH.
+                    </div>
+                    <div ng-if="!user.government">
+                        The Dashbaord allows registered ABS-CH users to find information about your CH account, your role and permissions in the ABS-CH. Here you can also update your profile or change your password. This page also provides an overview of all your records their
+                        different status: published, drafts and pending requests. Click on the category of record you wish to view for more details or add a new record. Upon request a training site is also available to help ABS-CH users familiarize themselves
+                        with the functioning of the ABS-CH without altering the content of the official ABS-CH.
+                    </div>
+
+                </div>
+
             </div>
-             <div class="col-md-6 cp-header">
-                  <table>
-                        <td><label>Role(s):</label></td>
+        </div>
+        <div class="register-content-content">
+
+            <div class="row well" style="margin:0 0 30px 0">
+                <h4 style="padding:3px;margin-top:0;border-bottom:1px solid #ddd;">&nbsp; Welcome <span class="color-black bold">{{user.name}}</span></h4>
+                <div class="col-md-6 cp-header">
+                    <table>
+                        <tr>
+                            <td>
+                                <label>Name:</label>
+                            </td>
+                            <td><strong>{{user.name}}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Primary email:</label>
+                            </td>
+                            <td><strong>{{user.email}}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Country affiliation:</label>
+                            </td>
+                            <td ng-if="user.government"><a href="/countries/{{user.government | uppercase}}"><strong>{{userCountry|term}}</strong></a></td>
+                            <td ng-if="!user.government"><strong>none</strong></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-6 cp-header">
+                    <table>
                         <td>
-                           <span class="comma" ng-if="roles.isAbsNationalFocalPoint">
+                            <label>Role(s):</label>
+                        </td>
+                        <td>
+                            <span class="comma" ng-if="roles.isAbsNationalFocalPoint">
                             <strong>ABS National Focal Point </strong>
                             <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="ABS National Focal Points are responsible for liason with the Secretariat as well as to designate themselves or another user as the Publishing Authority (PA) for the ABSCH." data-container="body"></span>
                             </span>
-                            
-                            <span class="comma"  ng-if="roles.isAbsPublishingAuthority" ><strong>National Publishing Authority (PA)</strong>
+
+                            <span class="comma" ng-if="roles.isAbsPublishingAuthority"><strong>National Publishing Authority (PA)</strong>
                                 <span class="helpinfoInline fa fa-info-circle " data-toggle="tooltip" data-html="true" data-title="Each country can designate only one PA for the ABSCH. The PA's job is to make information publically available on the ABSCH by verifing and publishing records.
                                 PAs can also designate National Authorized Users (NAUs) who are allowed to submit draft records for their country." data-container="body"></span>
                             </span>
-                            
-                            <span  class="comma" ng-if="roles.isAbsNationalAuthorizedUser"><strong>National Authorized User (NAU)</strong>
+
+                            <span class="comma" ng-if="roles.isAbsNationalAuthorizedUser"><strong>National Authorized User (NAU)</strong>
                                 <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="ABS National Focal Points have the responsiblity to designate themselves or another user as the Publishing Authority (PA) as well as be the liason with the Secretariat." data-container="body"></span>
                             </span>
-                            
-                            <span class="comma"  ng-if="roles.isUser"><strong>Regular User</strong>
+
+                            <span class="comma" ng-if="roles.isUser"><strong>Regular User</strong>
                                 <span  class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="Regular users can create draft reference records and request their publication from the SCBD." data-container="body"></span>
                             </span>
-                            
-                            <span class="comma"  ng-if="roles.isAbsAdministrator"><strong class="color-pink">ABSCH Admin</strong>
-                            </span>
-                            
-                            <span  class="comma" ng-if="roles.isAdministrator" ><strong class="color-pink">Admin</strong>
-                            </span> 
-                            
-                          </td>
-                    </tr>
-                     <tr>
-                        <td><label>Update profile:</label></td>
-                        <td><a href="https://accounts.cbd.int/profile" target="_new"><strong>accounts.cbd.int/profile</strong></a></td>
-                    </tr>
-                    <tr>
-                        <td><label>Update password:</label></td>
-                        <td><a href="https://accounts.cbd.int/password" target="_new"><strong>accounts.cbd.int/password</strong></a></td>
-                    </tr>
-                    
-                  </table>
-                  
-          
-                  <dt ng-if="user.roles.indexOf(getRoleName('AbsAdministrator'))>=0" style="text-align:left;white-space:nowrap;">Current Realm</dt>
-                  <dd ng-if="user.roles.indexOf(getRoleName('AbsAdministrator'))>=0"><span switch-realm></span></dd>
-              </dl>
-          </div>
 
-          <!--<div class="col-md-6" style="margin-top:10px;margin-bottom:20px;" >
-              <div class="box no-shadow thin-border" style="padding:10px;margin:0;">
-                  <h4 style="padding-top;0;margin-top:0;">Manage your account with <a href="http://accounts.cbd.int" class="color-green bold">accounts.cbd.int</a></h4>
-                  <ul style="padding:0 0 0 15px;">
-                      <li><a href="#" ng-click="actionProfile()">Update your profile</a></li>
-                      <li><a href="#" ng-click="actionPassword()" >Change your password</a></li>
-                      <li><a href="#" ng-click="actionSignOut()" >Sign out</a></li>
-                      <li> <strong>Need Help? Contact us: <a href="mailto:absch@cbd.int" class="color-blue">absch@cbd.int</a></strong></li>
-                  </ul>
-              </div>
-          </div>-->
-      </div>
-    
-      <record-overview></record-overview>
-       
-      
-  </div>
-</div> <!-- controller -->
+                            <span class="comma" ng-if="roles.isAbsAdministrator"><strong class="color-pink">ABSCH Admin</strong>
+                            </span>
+
+                            <span class="comma" ng-if="roles.isAdministrator"><strong class="color-pink">Admin</strong>
+                            </span>
+
+                        </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Update profile:</label>
+                            </td>
+                            <td><a href="https://accounts.cbd.int/profile" target="_new"><strong>accounts.cbd.int/profile</strong></a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Update password:</label>
+                            </td>
+                            <td><a href="https://accounts.cbd.int/password" target="_new"><strong>accounts.cbd.int/password</strong></a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="SubmitPage">
+                <h4 class="visible-xs" style="padding:3px;margin-top:0;border-bottom:1px solid #ddd;">
+               Record overview
+                <div class="row bg-white" style="font-size:12px;padding:5x 0;margin:0;">
+                  <span class="pull-right"><span class="label label-danger">&nbsp;</span> Requests</span>
+                  <span class="pull-right">&nbsp;&nbsp;<span class="label label-default">&nbsp;</span> Draft records&nbsp;&nbsp;</span>
+                  <span class="pull-right"><span class="label label-success">&nbsp;</span> Published records</span>
+                </div>
+           </h4>
+
+                <div class="row hidden-xs" style="padding:0;margin:0 0 10px 0;border-bottom:1px solid #ddd;">
+                    <div class="col-sm-6 col-md-9">
+                        <h4 style="padding:0;margin:0;">Record overview</h4></div>
+                    <div class="col-sm-2 col-md-1 text-right bold"><span class="label label-success"></span> Published</div>
+                    <div class="col-sm-2 col-md-1 text-right bold"><span class="label label-default"></span> Drafts</div>
+                    <div class="col-sm-2 col-md-1 text-right bold"><span class="label label-danger"></span> Requests</div>
+
+                </div>
+
+
+
+
+                <div id="menuPlaceholder" ng-if="isNationalUser">
+                    <div class="row  bg-grey" style="padding:0;margin:0 0 5px 0;">
+                        <div class="col-xs-12 bold">National Contacts (People and Organizations)
+
+
+                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-title="Published contacts (a person or organization) can be referenced in other national records. However, contacts can not be created from others records.
+            You will need to have your national contacts published before they are available to be included in other national records." data-container="body"></span>
+
+                        </div>
+                    </div>
+                    <div class="row link1" style="padding:0;margin:0 -3px 5px -3px">
+                        <div class="col-xs-9 col-sm-6 col-md-9" ng-click="gotoList($event,'contact')">
+                            <span ng-click="gotoNew($event,'contact')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
+                            <a href="#" ng-click="gotoList($event,'contact')" class="color-darkgrey" style="font-weight:500;"> Contacts (CON)</a>
+                        </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CON/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('contact','publish')===0}">{{facets('contact','publish')}}</a> </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CON/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('contact','draft') - facets('contact','request')===0}">{{facets('contact','draft') - facets('contact','request')}}</a></div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CON/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('contact','request')===0}">{{facets('contact','request')}}</a></div>
+                    </div>
+
+                    <div class="row  bg-grey" style="padding:0;margin:20px 0 5px 0;">
+                        <div class="col-xs-12 bold">
+                            <span class="color-blue">National records</span>
+                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-title="National records contain information that is typically required to be reported as part of a Party’s obligations under the Nagoya
+                Protocol on Access and Benefit-sharing and must be validated by the ABS-CH Publishing Authority prior to being made available in the ABS Clearing-House." data-container="body"></span>
+
+
+                        </div>
+                    </div>
+
+                    <div class="row link1" style="padding:0;margin:0 -3px 5px -3px">
+                        <div class="col-xs-9 col-sm-6 col-md-9" ng-click="gotoList($event,'authority')">
+                            <span ng-click="gotoNew($event,'authority')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
+                            <a href="#" ng-click="gotoList($event,'authority')" class="color-darkgrey" style="font-weight:500;">Competent National Authority (CNA)</a>
+                        </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CNA/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('authority','publish')===0}">{{facets('authority','publish')}}</a> </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CNA/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('authority','draft')===0}">{{facets('authority','draft')}}</a></div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CNA/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('authority','request')===0}">{{facets('authority','request')}}</a></div>
+                    </div>
+                    <div class="row link1" style="padding:0;margin:0 -3px 5px -3px" ng-click="gotoList($event,'measure')">
+                        <div class="col-xs-9 col-sm-6 col-md-9">
+                            <span ng-click="gotoNew($event,'measure')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
+                            <a ng-click="gotoList($event,'measure')" class="color-darkgrey" style="font-weight:500;">Legislative, administrative or policy measures <span class="hidden-sm">on access and benefit-sharing</span> (MSR)</a>
+                        </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/MSR/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('measure','publish')===0}">{{facets('measure','publish')}}</a> </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/MSR/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('measure','draft')===0}">{{facets('measure','draft')}}</a></div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/MSR/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('measure','request')===0}">{{facets('measure','request')}}</a></div>
+                    </div>
+                    <div class="row link1" style="padding:0;margin:0 -3px 5px -3px" ng-click="gotoList($event,'database')">
+                        <div class="col-xs-9 col-sm-6 col-md-9">
+                            <span ng-click="gotoNew($event,'database')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
+                            <a href="#" ng-click="gotoList($event,'database')" class="color-darkgrey" style="font-weight:500;">National Website or Database (NDB)</a>
+                        </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NDB/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('database','publish')===0}">{{facets('database','publish')}}</a> </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NDB/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('database','draft')===0}">{{facets('database','draft')}}</a></div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NDB/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('database','request')===0}">{{facets('database','request')}}</a></div>
+                    </div>
+                    <div class="row link1" style="padding:0;margin:0 -3px 5px -3px" ng-click="gotoList($event,'absPermit')">
+                        <div class="col-xs-9 col-sm-6 col-md-9">
+                            <span ng-click="gotoNew($event,'absPermit')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
+                            <a href="#" ng-click="gotoList($event,'absPermit')" class="color-darkgrey" style="font-weight:500;">Permit or its equivalent <span class="hidden-sm">constituting an internationally recognized certificate of compliance</span> (IRCC)</a>
+                        </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/IRCC/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('absPermit','publish')===0}">{{facets('absPermit','publish')}}</a> </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/IRCC/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('absPermit','draft')===0}">{{facets('absPermit','draft')}}</a></div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/IRCC/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('absPermit','request')===0}">{{facets('absPermit','request')}}</a></div>
+
+                    </div>
+
+                    <div class="row link1" style="padding:0;margin:0 -3px 5px -3px" ng-click="gotoList($event,'absCheckpoint')">
+                        <div class="col-xs-9 col-sm-6 col-md-9">
+                            <span ng-click="gotoNew($event,'absCheckpoint')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
+                            <a href="#" ng-click="gotoList($event,'absCheckpoint')" class="color-darkgrey" style="font-weight:500;">Checkpoint (CP)</a>
+                        </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CP/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('absCheckpoint','publish')===0}">{{facets('absCheckpoint','publish')}}</a> </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CP/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('absCheckpoint','draft')===0}">{{facets('absCheckpoint','draft')}}</a></div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CP/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('absCheckpoint','request')===0}">{{facets('absCheckpoint','request')}}</a></div>
+                    </div>
+
+                    <div class="row link1" style="padding:0;margin:0 -3px 5px -3px" ng-click="gotoList($event,'absCheckpointCommunique')">
+                        <div class="col-xs-9 col-sm-6 col-md-9">
+                            <span ng-click="gotoNew($event,'absCheckpointCommunique')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
+                            <a href="#" ng-click="gotoList($event,'absCheckpointCommunique')" class="color-darkgrey" style="font-weight:500;">Information for the Checkpoint Communiqué (CPC)</a>
+                        </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPC/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('absCheckpointCommunique','publish')===0}">{{facets('absCheckpointCommunique','publish')}}</a> </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPC/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('absCheckpointCommunique','draft')===0}">{{facets('absCheckpointCommunique','draft')}}</a></div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPC/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('absCheckpointCommunique','request')===0}">{{facets('absCheckpointCommunique','request')}}</a></div>
+
+                    </div>
+
+
+                    <div class="row link1" style="padding:0;margin:0 -3px 5px -3px" ng-click="gotoList($event,'absNationalReport')">
+                        <div class="col-xs-9 col-sm-6 col-md-9">
+                            <span ng-click="gotoNew($event,'absNationalReport')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
+                            <a href="#" ng-click="gotoList($event,'absNationalReport')" class="color-darkgrey" style="font-weight:500;">Interim National Report on the Implementation <span class="hidden-sm">of the Nagoya Protocol</span> (NR)</a>
+                        </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NR/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('absNationalReport','publish')===0}">{{facets('absNationalReport','publish')}}</a> </div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NR/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('absNationalReport','draft')===0}">{{facets('absNationalReport','draft')}}</a></div>
+                        <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/NR/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('absNationalReport','request')===0}">{{facets('absNationalReport','request')}}</a></div>
+                    </div>
+
+                </div>
+
+                <div class="row  bg-grey" style="padding:0;margin:20px 0 5px 0;">
+                    <div class="col-xs-12 bold"><span class="color-orange">Reference records</span>
+                        <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-title="Reference records contain information relevant to the Protocol (but not reported as part of a Party’s obligations under the
+                  Protocol). This information can be made available to the ABS Clearing-House by any registered user
+                  (including representatives of Governments, indigenous and local communities, academia, nongovernmental organizations, research
+                  institutions, business representatives, etc.). All reference records are validated by the Secretariat prior to being made available in the ABS
+                  Clearing-House." data-container="body"></span>
+                    </div>
+                </div>
+                <div class="row link1" style="padding:0;margin:0 -3px 5px -3px" ng-click="gotoList($event,'resource')">
+                    <div class="col-xs-9 col-sm-6 col-md-9">
+                        <span ng-click="gotoNew($event,'resource')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
+                        <a href="#" ng-click="gotoList($event,'resource')" class="color-darkgrey" style="font-weight:500;"> Virtual Library Record (VLR) - Reference material, literature and capacity-building resources</a>
+                    </div>
+                    <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/VLR/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('resource','publish')===0}">{{facets('resource','publish')}}</a> </div>
+                    <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/VLR/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('resource','draft')===0}">{{facets('resource','draft')}}</a></div>
+                    <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/VLR/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('resource','request')===0}">{{facets('resource','request')}}</a></div>
+                </div>
+                <div class="row link1" style="padding:0;margin:0 -3px 5px -3px" ng-click="gotoList($event,'capacityBuildingInitiative')">
+                    <div class="col-xs-9 col-sm-6 col-md-9">
+                        <span ng-click="gotoNew($event,'capacityBuildingInitiative')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
+                        <a href="#" ng-click="gotoList($event,'capacityBuildingInitiative')" class="color-darkgrey" style="font-weight:500;">Capacity-building Initiatives (CBI)</a>
+                    </div>
+                    <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CBI/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('capacityBuildingInitiative','publish')===0}">{{facets('capacityBuildingInitiative','publish')}}</a> </div>
+                    <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CBI/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('capacityBuildingInitiative','draft')===0}">{{facets('capacityBuildingInitiative','draft')}}</a></div>
+                    <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CBI/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('capacityBuildingInitiative','request')===0}">{{facets('capacityBuildingInitiative','request')}}</a></div>
+                </div>
+
+                <div class="row link1" style="padding:0;margin:0 -3px 5px -3px" ng-click="gotoList($event,'modelContractualClause')">
+                    <div class="col-xs-9 col-sm-6 col-md-9">
+                        <span ng-click="gotoNew($event,'modelContractualClause')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
+                        <a href="#" ng-click="gotoList($event,'modelContractualClause')" class="color-darkgrey" style="font-weight:500;"> Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards (A19A20)</a>
+                    </div>
+                    <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/A19A20/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('modelContractualClause','publish')===0}">{{facets('modelContractualClause','publish')}}</a> </div>
+                    <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/A19A20/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('modelContractualClause','draft')===0}">{{facets('modelContractualClause','draft') }}</a></div>
+                    <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/A19A20/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('modelContractualClause','request')===0}">{{facets('modelContractualClause','request')}}</a></div>
+                </div>
+
+                <div class="row link1" style="padding:0;margin:0 -3px 5px -3px" ng-click="gotoList($event,'communityProtocol')">
+                    <div class="col-xs-9 col-sm-6 col-md-9">
+                        <span ng-click="gotoNew($event,'communityProtocol')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
+                        <a href="#" ng-click="gotoList($event,'communityProtocol')" class="color-darkgrey" style="font-weight:500;">Community protocols and procedures and customary laws (CPP)</a>
+                    </div>
+                    <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPP/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('communityProtocol','publish')===0}">{{facets('communityProtocol','publish')}}</a> </div>
+                    <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPP/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('communityProtocol','draft')===0}">{{facets('communityProtocol','draft')}}</a></div>
+                    <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a ng-href="/register/CPP/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('communityProtocol','request')===0}">{{facets('communityProtocol','request')}}</a></div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- controller -->

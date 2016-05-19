@@ -21,14 +21,10 @@ require.config({
         'jquery'                    : '../libs/jquery/dist/jquery.min',
         'bootstrap'                 : '../libs/bootstrap/dist/js/bootstrap.min',
         'underscore'                : '../libs/underscore/underscore-min',
-        'lodash'                    : '../libs/lodash/lodash',
+        'lodash'                    : '../libs/lodash/lodash.min',
         'moment'                    : '../libs/momentjs/min/moment-with-langs.min',
         'angular-animate'           : '../libs/angular-animate/angular-animate.min',
         'view-abs-checkpoint'       :'../views/forms/view/view-abs-checkpoint.directive',
-        'introjs'                   : '../libs/intro.js/minified/intro.min',
-        'angular-introjs'           : '../js/directives/angular-intro',
-        'jqvmap'                    : '../libs/jqvmap/jqvmap/jquery.vmap.min',
-        'jqvmapworld'               : '../js/jquery.vmap.world_update',
         'text-angular-sanitize'     : '../libs/textAngular/dist/textAngular-sanitize.min',
         'text-angular'              : '../libs/textAngular/dist/textAngular.min',
         'cbd-forums'                : '../libs/cbd-forums/cbd-forums',
@@ -46,7 +42,7 @@ require.config({
         'ngStorage'                 : '../libs/ngstorage/ngStorage.min',
         'angular-block-ui'          :  '../libs/angular-block-ui/dist/angular-block-ui.min',
         'ngDialog'                  :  '../libs/ng-dialog/js/ngDialog.min',
-        'socket.io'             : '../libs/socket.io-1.4.5/index'
+        'socket.io'                 : '../libs/socket.io-1.4.5/index'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },

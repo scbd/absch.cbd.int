@@ -1,5 +1,5 @@
 define(['app', '/app/js/common.js', '/app/views/directives/search-filter-dates.partial.html.js',
-'/app/views/search-new/search-results/result-default.js'], function (app, commonjs) { // jshint ignore:line
+'/app/views/search/search-results/result-default.js'], function (app, commonjs) { // jshint ignore:line
 
 app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore", "guid",  "$timeout", "$q","IStorage","commonjs", function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs) {
 

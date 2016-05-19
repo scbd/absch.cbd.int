@@ -1,6 +1,7 @@
 define(['app',
- '/app/services/role-service.js',
-  'scbd-branding/directives/xuser-notifications-panel',
+        '/app/services/role-service.js',
+        'scbd-branding/directives/xuser-notifications-panel',
+        '/app/views/register/directives/register-top-menu.js'
   ], function(app) {
     "use strict";
     app.controller("NotificationsController", ["$rootScope", "$scope", "underscore", "roleService", "IWorkflows", "realm", "$q",
