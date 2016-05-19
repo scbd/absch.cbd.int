@@ -24,7 +24,7 @@ define([
 
     $scope.type = $route.current.$$route.documentType;
     
-    if(_.contains(appConfigService.nationalSchemas, $scope.type))
+    if(_.contains(appConfigService.nationalSchemas, $filter('mapSchema')($scope.type)))
       $scope.schemaType = 'nationalRecords';
     else
       $scope.schemaType = 'referenceRecords';
