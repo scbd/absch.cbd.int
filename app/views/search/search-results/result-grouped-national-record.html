@@ -7,14 +7,17 @@
 
     <div class="recordDefault nationalRecords card card-1" style="margin-bottom:10px;" ng-show="!showDoc" ng-click="showDoc=!showDoc">
 
-        <div class="type color-blue">{{doc.rec_type ? doc.rec_type : (doc.schema_s | schemaShortName) }}</div>
-        <div class="title">{{doc.rec_title}}</div>
+       
+        <div class="title bold">{{doc.rec_title}}</div>
         <span class="description hidden-xs descriptionSpan" ng-if="doc.rec_summary">
             {{doc.rec_summary|limitTo:250}}
             <span ng-if="doc.rec_summary.length > 250">...</span>
         </span>
 
-        <ul class="metadata bold">
+        <ul class="metadata bold" style="padding-top:0;margin-top:0;">
+            <li class="hidden-xs">
+             <span class="color-blue">{{doc.rec_type ? doc.rec_type + " ("+ (doc.schema_s | schemaShortName) +")": (doc.schema_s | schemaName) }}</span>
+             </li>
             <li ng-if="doc.rec_countryName" class="hidden-xs">
                 <span>{{doc.rec_countryName}}</span>
             </li>
@@ -39,7 +42,7 @@
                 <span  ng-repeat="meta in doc.rec_meta4">{{meta}}</span>
             </li>
             <li>
-                <span class="last-span color-blue">{{doc.rec_date | formatDate}}</span>
+                <span class="last-span">{{doc.rec_date | formatDate}}</span>
             </li>
         </ul>
         <!--{{doc.schemaSort_i}} | {{doc.sort1_s}} | {{doc.sort2_s}} | {{doc.sort3_s}}-->

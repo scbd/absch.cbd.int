@@ -1106,6 +1106,9 @@ footer .logo {
         color:#fa6938;
     }
     #search-new .scbdRecords .schema{
+        color:#000;
+    }
+     #search-new .scbdRecords .title{
         color:#666;
     }
 
@@ -1158,15 +1161,15 @@ footer .logo {
         font-size:12px;
     }
     .recordDefault .title{
-        color:#111;
+        color:#333;
         font-size:14px;
-        padding:0 10px 0 10px;
+        padding:0 10px 0 0;
         display:inline!important;
     }
 
 
     #result-grouped-national-record .title{
-        color:#111;
+        color:#333;
         font-size:14px;
         padding:0 6px 0 0;
         display:inline!important;
@@ -1192,7 +1195,7 @@ footer .logo {
         overflow: hidden;
     }
     .descriptionSpan{
-        display: inline-block;
+        /*display:inline-block;*/
         white-space: initial!important;
         width: 100%!important;
     }
