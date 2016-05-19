@@ -1,10 +1,10 @@
 <div id="Search-Filter"  >
       <div  style="margin-bottom:30px;">
-        <div class="heading" ng-if="nf_fitlers.length">National Records </div>
-        <p class="helpinfo" ng-if="nf_fitlers.length" ><i class="fa fa-info-circle helpicon" ></i> National records are published by Governments and include national information relevant for the implementation of the Nagoya Protocol as well as information Parties are obliged to provide in accordance with the Protocol.</p>
-        <hr  class="heading" ng-if="nf_fitlers.length">
+        <div class="heading" ng-if="nf_filters.length">National Records </div>
+        <p class="helpinfo" ng-if="nf_filters.length" ><i class="fa fa-info-circle helpicon" ></i> National records are published by Governments and include national information relevant for the implementation of the Nagoya Protocol as well as information Parties are obliged to provide in accordance with the Protocol.</p>
+        <hr  class="heading" ng-if="nf_filters.length">
         
-        <div ng-repeat="doc in nf_fitlers = (nf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])">
+        <div ng-repeat="doc in nf_filters = (nf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])">
             
             <a class="filter"  ng-click="saveFilter(doc)">
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> 

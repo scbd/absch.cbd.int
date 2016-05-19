@@ -12,7 +12,7 @@ define(['app', 'underscore', '/app/js/common.js', 'scbd-angularjs-controls','boo
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                 // $scope.since = {};
 
-                $scope.df_fitlers = searchDirectiveCtrl.getSearchFilters("date");
+                $scope.df_filters = searchDirectiveCtrl.getSearchFilters("date");
 
             },//link
             controller  : ['$scope', function($scope){
@@ -41,12 +41,12 @@ define(['app', 'underscore', '/app/js/common.js', 'scbd-angularjs-controls','boo
                     } else {
                         query = '*:*';
                     }
-                    $scope.saveDateFilter($scope.df_fitlers[0].id, query);
+                    $scope.saveDateFilter($scope.df_filters[0].id, query);
                 }
 
-                // if($scope.df_fitlers.length > 0){
-                // //    if($scope.df_fitlers[0])
-                // console.log($scope.df_fitlers);
+                // if($scope.df_filters.length > 0){
+                // //    if($scope.df_filters[0])
+                // console.log($scope.df_filters);
                 // }
             }]
         };
