@@ -5,7 +5,7 @@
     </div>
 
     <h4 class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showNFP = !showNFP" ng-class="{'color-litegrey': nfpCount == 0}">
-        <i class="fa" ng-class="{'fa-plus':!showNFP, 'fa-minus':showNFP}" style="font-size:14px;font-weight:normal;"></i>ABS National Focal Points (NFP)
+        <i class="fa" ng-class="{'fa-plus':!showNFP, 'fa-minus':showNFP}" style="font-size:14px;font-weight:normal;"></i> ABS National Focal Points (NFP)
         <span class="badge pull-right" ng-class="{'bg-grey3': nfpCount==0, 'bg-black': nfpCount > 0}">{{nfpCount}}</span>
     </h4>
     <div ng-if="showNFP && nfpCount > 0" class="well bg-white">

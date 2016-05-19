@@ -2,9 +2,9 @@
     <link href="/app/css/record.css" rel="stylesheet">
 
     <div ng-if="getContacts().length > 0">
-        <div class="col-xs-12 form-control no-shadow thin-border" ng-repeat="contact in getContacts()" style="height:auto;margin-bottom:5px;">
+        <div class="col-xs-12 form-control no-shadow thin-border bg-litegrey" ng-repeat="contact in getContacts()" style="height:auto;margin-bottom:5px;">
             <div class="pull-right">
-                <button type="button" class="btn btn-default" ng-click="deleteContact($index, true)"><i class="fa fa-times"></i>
+                <button type="button" class="btn btn-warning" ng-click="deleteContact($index, true)"><i class="fa fa-times"></i>
                 </button>
             </div>
             <view-organization-reference ng-model='contact' locale="en"></view-organization-reference>
@@ -20,25 +20,15 @@
     <div class="modal fade" id="editContact" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-litegrey">
                     <button type="button" class="close" aria-hidden="true" ng-click="closeContact()"><i class="material-icons">close</i></button>
-                    <!-- <h2 class="modal-title" id="myModalLabel">
-                      <a ng-click="showExisting=true" ng-show="!showExisting">Select exisiting organization</a>
-                      <a ng-click="showExisting=false" ng-show="showExisting">Create organization</a>
-                    </h2> -->
-                    <h2 class="modal-title" id="myModalLabel">
-                        <span ng-hide="showExisting">Add a new Organization</span>
-                        <span ng-show="showExisting" >Select exisiting Organization</span>
-                    </h2>
-                    <br>
-                     <a class="pull-right btn btn-primary" ng-click="showExisting=true" ng-show="!showExisting" ng-href="#">Select exisiting organization</a>
-                     <a class="pull-right btn btn-primary" ng-click="editContact(-1);showExisting=false" ng-show="showExisting" ng-href="#">Create organization</a>
-
+                    <h3 class="modal-title" id="myModalLabel">
+                        <span ng-hide="showExisting">New organization</span>
+                        <span ng-show="showExisting" >Select an exisiting organization</span>
+                    </h3>
                 </div>
                 <div class="modal-body">
-                    <div ng-show="loading">
-                        <h1><i class="fa fa-spinner fa-spin"></i></h1>
-                    </div>
+                 
                     <div ng-show="!showExisting">
                         <div>
                             <div km-document-validation ng-model="validationReport"></div>
@@ -139,33 +129,37 @@
                         </div>
                     </div>
                     <div ng-show="showExisting" class="row">
-                        </br>
-                        <div ng-repeat="contact in existingContacts | filter:isSelected">
-                            <div class="clearfix" ng-if="$index % 3 == 0"></div>
-                            <div class="col-xs-4">
-                                <div class="well">
+                        <div class="col-xs-12">
+                            <div ng-if="!loading && existingContacts && existingContacts.length==0" style="padding:0 10px;">
+                                <h3 class="color-litegrey">No organizations found. Please add a new organization.</h3>
+                            </div>
+                            <input type="textbox" ng-model="keyword" placeholder="filter organisation name" class="form-control" style="margin-bottom:20px;">
+                        </div>
+                        
+                        <div class="col-xs-12 " ng-repeat="contact in existingContacts | filter:keyword | filter:isSelected | orderBy:'name.en'">
+                            <div class="well">
+                                <div class="col-xs-1"> 
+                                    <a class="btn btn-default" href="#" ng-click="selectContact(contact)"><i class="fa fa-thumbs-o-up"></i></a>
+                                </div>
+                                <div class="col-xs-11"> 
                                     <span class="label label-warning" ng-if="contact.revisonType=='request'">Pending Approval</span>
-                                    <span class="label label-primary" ng-if="contact.revisonType=='published'">Published</span>
-                                    <div class="pull-right">
-                                        <button type="button" class="btn btn-default" ng-click="selectContact(contact)"><i class="glyphicon glyphicon-thumbs-up"></i>
-                                        </button>
-                                    </div>
                                     <view-organization-reference ng-model='contact' locale="en"></view-organization-reference>
                                 </div>
+                                <div class="clearfix"></div>
                             </div>
-                        </div>
-                        <span ng-if="!loading && existingContacts && existingContacts.length==0">
-                      No organizations found. Please  <a ng-click="showExisting=false" ng-show="showExisting" ng-href="#">Create organization</a>
-                       add new organization
-                  </span>
-
+                        </div>                        
+                    </div>
+                    <div ng-show="loading">
+                        <h4>Loading <i class="fa fa-spinner fa-spin"></i></h4>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-litegrey">
                     <div class="clearfix"></div>
-                    <div style="margin-top: 30px;">
+                    <div>
+                        <a class="btn btn-default pull-left" ng-click="showExisting=true" ng-show="!showExisting" ng-href="#"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Select from exisiting organizations</a>
+                        <a class="btn btn-primary color-white" ng-click="editContact(-1);showExisting=false" ng-show="showExisting" ng-href="#">Add new organization</a>
+                        <a type="button" class="pull-right btn btn-warning" ng-click="closeContact()">Close</a>
                         <a type="button" class="pull-right btn btn-primary" ng-click="saveContact()" ng-show="!showExisting">Save changes</a> &nbsp;
-                        <a type="button" class="pull-right btn btn-default" ng-click="closeContact()">Close</a>
                     </div>
                 </div>
             </div>
