@@ -1,4 +1,5 @@
-define(['angular', 'lodash', 'require','app', 'ngDialog', '/app/services/app-config-service.js'], function(ng, _, require, app) { 'use strict';
+define(['angular', 'lodash', 'require','app', 'ngDialog', '/app/services/app-config-service.js', 
+ '/app/views/register/directives/register-top-menu.js'], function(ng, _, require, app) { 'use strict';
 
 app.controller("nationalUsersController", ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'appConfigService',
     function($scope, $http, $q, ngDialog, $rootScope, realm, appConfigService) {

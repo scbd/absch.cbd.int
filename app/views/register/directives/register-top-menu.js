@@ -1,6 +1,6 @@
 define(['app', 'underscore', '/app/services/role-service.js'], function(app, _) {
 
-    app.directive("registerTopMenu", ['roleService', function(roleService) {
+    app.directive("registerTopMenu", ['roleService', '$rootScope', function(roleService, $rootScope) {
 
         return {
             restrict: "EA",
@@ -11,8 +11,10 @@ define(['app', 'underscore', '/app/services/role-service.js'], function(app, _) 
             link: function($scope, element, attrs) {
 
                 $scope.roles = {
-                    isAdministrator: roleService.isAdministrator()
+                    isAdministrator: roleService.isAdministrator(),
+                    isAbsAdministrator: roleService.isAbsAdministrator()
                 };
+                $scope.user = $rootScope.user;
             }
         };
     }]);
