@@ -283,7 +283,7 @@ legend + .help-block{position:relative; top:-15px;}
 .title{
 	font-weight: normal;
 	font-size: 18px;
-	text-transform:uppercase;
+	/*text-transform:uppercase;*/
 	color:white;
 }
 
