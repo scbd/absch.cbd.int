@@ -1,6 +1,6 @@
 //fixed a bug with the comment up here ;)
 define([
-    'app',
+    'app', 'app/services/app-config-service.js',
     '/app/views/forms/edit/editFormUtility.js',
     '/app/views/forms/edit/field-embed-contact.directive.js',
     '/app/views/forms/edit/edit-contact-base.directive.js',
@@ -17,13 +17,18 @@ define([
   ], function (app) {
 
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
-                                   "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","underscore", "$route", "breadcrumbs",
+                                   "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","underscore", "$route", "breadcrumbs", "appConfigService",
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
-                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, _, $route, breadcrumbs) {
+                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, _, $route, breadcrumbs, appConfigService) {
 
 
     $scope.type = $route.current.$$route.documentType;
-
+    
+    if(_.contains(appConfigService.nationalSchemas, $scope.type))
+      $scope.schemaType = 'nationalRecords';
+    else
+      $scope.schemaType = 'referenceRecords';
+      
     $scope.status   = "loading";
     $scope.error    = null;
     $scope.tab      = "edit";
