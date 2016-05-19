@@ -85,7 +85,7 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 
 		]
 
-        var nationalSchemas 	= [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint", "absNationalReport"];
+        var nationalSchemas 	= [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint", "absNationalReport", "contact"];
         var referenceSchemas 	= [ "resource", "modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"];
 		var scbdSchemas			= [ "meeting", "notification", "pressRelease", "statement", "news", "new" ];
 
