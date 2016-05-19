@@ -65,8 +65,8 @@
                     <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new">
                         <div class="row" style="margin:0 0 10px 0;padding:0;" ng-show="!isLoading" ng-repeat="doc in rawDocuments.docs | filter:keyword">
                             <div class="col-xs-1 text-right">
-                                <input ng-show="type==='checkbox'" type="checkbox" ng-model="doc.__checked" style="width: 30px; height: 30px;" />
-                                <input ng-show="type==='radio'" type="radio" name="{{question}}_selected" ng-click="selectDoc(doc)" style="width: 30px; height: 30px;" />
+                                <input ng-show="type==='checkbox'" type="checkbox" ng-model="doc.__checked" style="width: 16px; height: 16px;" />
+                                <input ng-show="type==='radio'" type="radio" name="{{question}}_selected" ng-click="selectDoc(doc)" style="width: 16px; height: 16px;" />
                             </div>
                             <div class="col-xs-11">
                                 <result-default doc='doc' type="nationalRecords"></result-default>
