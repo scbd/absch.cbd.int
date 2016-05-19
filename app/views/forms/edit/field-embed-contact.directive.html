@@ -20,20 +20,12 @@
     <div class="modal fade" id="editContact" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-litegrey">
                     <button type="button" class="close" aria-hidden="true" ng-click="closeContact()"><i class="material-icons">close</i></button>
-                    <!-- <h2 class="modal-title" id="myModalLabel">
-                      <a ng-click="showExisting=true" ng-show="!showExisting">Select exisiting organization</a>
-                      <a ng-click="showExisting=false" ng-show="showExisting">Create organization</a>
-                    </h2> -->
-                    <h2 class="modal-title" id="myModalLabel">
-                        <span ng-hide="showExisting">Add a new Organization</span>
-                        <span ng-show="showExisting" >Select exisiting Organization</span>
-                    </h2>
-                    <br>
-                     <a class="pull-right btn btn-primary" ng-click="showExisting=true" ng-show="!showExisting" ng-href="#">Select exisiting organization</a>
-                     <a class="pull-right btn btn-primary" ng-click="editContact(-1);showExisting=false" ng-show="showExisting" ng-href="#">Create organization</a>
-
+                    <h3 class="modal-title" id="myModalLabel">
+                        <span ng-hide="showExisting">New organization</span>
+                        <span ng-show="showExisting" >Select an exisiting organization</span>
+                    </h3>
                 </div>
                 <div class="modal-body">
                     <div ng-show="loading">
@@ -139,7 +131,11 @@
                         </div>
                     </div>
                     <div ng-show="showExisting" class="row">
-                        </br>
+                        
+                        <div ng-if="!loading && existingContacts && existingContacts.length==0" style="padding:0 10px;">
+                            <h3 class="color-litegrey">No organizations found. Please add a new organization.</h3>
+                        </div>
+                        
                         <div ng-repeat="contact in existingContacts | filter:isSelected">
                             <div class="clearfix" ng-if="$index % 3 == 0"></div>
                             <div class="col-xs-4">
@@ -153,19 +149,16 @@
                                     <view-organization-reference ng-model='contact' locale="en"></view-organization-reference>
                                 </div>
                             </div>
-                        </div>
-                        <span ng-if="!loading && existingContacts && existingContacts.length==0">
-                      No organizations found. Please  <a ng-click="showExisting=false" ng-show="showExisting" ng-href="#">Create organization</a>
-                       add new organization
-                  </span>
-
+                        </div>                        
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-litegrey">
                     <div class="clearfix"></div>
-                    <div style="margin-top: 30px;">
-                        <a type="button" class="pull-right btn btn-primary" ng-click="saveContact()" ng-show="!showExisting">Save changes</a> &nbsp;
+                    <div>
+                        <a class="btn btn-info color-white pull-left" ng-click="showExisting=true" ng-show="!showExisting" ng-href="#"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Select from exisiting organizations</a>
+                        <a class="btn btn-primary color-white" ng-click="editContact(-1);showExisting=false" ng-show="showExisting" ng-href="#">Add new organization</a>
                         <a type="button" class="pull-right btn btn-default" ng-click="closeContact()">Close</a>
+                        <a type="button" class="pull-right btn btn-primary" ng-click="saveContact()" ng-show="!showExisting">Save changes</a> &nbsp;
                     </div>
                 </div>
             </div>
