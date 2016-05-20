@@ -34,7 +34,6 @@ define([
     $scope.tab      = "edit";
     $scope.review   = { locale: "en" };
 
-    console.log(breadcrumbs.breadcrumbs);
     var breadcrumb = {    
         label : $filter('schemaName')($filter('mapSchema')($scope.type)),
         originalPath : "/register/:document_type",
@@ -42,7 +41,6 @@ define([
         path:"/register/" + $scope.type
     }
     breadcrumbs.breadcrumbs.splice(2, 0 , breadcrumb);
-    console.log(breadcrumbs.breadcrumbs);
 
     $scope.options  = {
       countries		: function() {
