@@ -28,7 +28,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     $scope.rawDocs = [];
                     $scope.refDocs = [];
                     $scope.scbdDocs = [];
-                    var natSchemas = appConfigService.nationalSchemas;
+                    var natSchemas = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint", "absNationalReport"];
                     var refSchemas = appConfigService.referenceSchemas;
                     var scbdSchemas = appConfigService.scbdSchemas;
                     // var refSchemas = ["modelContractualClause communityProtocol capacityBuildingInitiative capacityBuildingResource"];
