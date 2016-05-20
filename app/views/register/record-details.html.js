@@ -1,8 +1,10 @@
 define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html.js',
     '/app/views/search/search-results/record-viewer.js',
     '/app/js/common.js', '/app/services/role-service.js', 'toastr',
-    'scbd-branding/directives/xuser-notifications-panel', '/app/views/directives/block-region-directive.js',
-    '/app/views/register/directives/register-top-menu.js'
+    'scbd-branding/directives/xuser-notifications-panel',
+    '/app/views/directives/block-region-directive.js',
+    '/app/views/register/directives/register-top-menu.js',
+    '/app/views/directives/task-id-directive.html.js'
 ], function (app, _) {
     "use strict";
     app.controller("recordDetailsController", ["$rootScope", "$scope", "$filter", "$routeParams", "IStorage", "$q",
