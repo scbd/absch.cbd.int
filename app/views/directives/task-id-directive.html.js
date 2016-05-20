@@ -4,7 +4,7 @@ define(['app',
 app.directive('taskId', function () {
         return {
             restrict: 'EAC',
-            templateUrl: '/app/views/directives/task-id-directive.html?'+(new Date().getTime()),
+            templateUrl: '/app/views/directives/task-id-directive.html?',
             replace: true,
             scope: {
                 loadTaskData : '=',
