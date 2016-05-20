@@ -28,11 +28,15 @@ define(['app', 'underscore', '/app/js/common.js',
                     $scope.rawDocs = [];
                     $scope.refDocs = [];
                     $scope.scbdDocs = [];
-                    var natSchemas = [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint", "absNationalReport"];
+                    var natSchemas = _.clone(appConfigService.nationalSchemas);
+                    //remove contact from national schema list for search
+                    if(natSchemas.indexOf('contact')>=0){
+                        natSchemas.splice(natSchemas.indexOf('contact'), 1);
+                    }
+                    //[ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint", "absNationalReport"];
                     var refSchemas = appConfigService.referenceSchemas;
                     var scbdSchemas = appConfigService.scbdSchemas;
-                    // var refSchemas = ["modelContractualClause communityProtocol capacityBuildingInitiative capacityBuildingResource"];
-                    // var scbdSchemas = ["meeting notification pressRelease statement news"];
+                    
                     $scope.currentTab = "nationalRecords";
                     $scope.refresh = false;
                     var refresh_nat = true;
