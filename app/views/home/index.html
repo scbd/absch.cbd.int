@@ -31,20 +31,20 @@
                 <div class="col-md-4">
                     <div class="home-col">
                         <div class="text-center" ng-show="entryintoforce">
-                            <div layout="row" style="padding-top:0;margin-top:0;">
-                                <div flex class="bg-green">
+                            <div class="row" >
+                                <div  class="col-xs-4 bg-green">
                                     <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{yearsSinceEntry}}</span>
                                     <br>
                                     <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">year<span ng-if="yearsSinceEntry > 1">s</span>
                                     </span>
                                 </div>
-                                <div flex class="bg-green">
+                                <div  class="col-xs-4 bg-green" style="border-left:3px solid #eee;; border-right:3px solid #eee;">
                                     <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{monthsSinceEntry}}</span>
                                     <br>
                                     <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">month<span ng-if="monthsSinceEntry > 1">s</span>
                                     </span>
                                 </div>
-                                <div flex class="bg-green">
+                                <div  class="col-xs-4 bg-green">
                                     <span class="color-white" style="font-weight:bold; font-size:32px;text-shadow: 0 1px 2px rgba(0, 0, 0, .6);">{{daysSinceEntry}}</span>
                                     <br>
                                     <span style="color:#EEE;text-transform: uppercase;font-weight:bold;font-size:14px;">day<span ng-if="daysSinceEntry > 1">s</span>
