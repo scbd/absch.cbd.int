@@ -362,9 +362,9 @@
 
 						<div class="row">
 							<div class="col-md-12">
-                                <div class="help-info">The key areas have been identified by the Strategic Framework for capacity-building and development to support the effective implementation of the Nagoya Protocol (decision NP-1/8).</div>
-								<div class="km-control-group" name="absKeyAreas" caption="Key areas and strategic measures for capacity-building and development">
-									<div km-term-check name="absKeyAreas" ng-model="document.absKeyAreas" terms="options.absKeyAreas()" binding-type="term[]"></div>
+                               <div class="km-control-group" name="absKeyAreas" required caption="Key areas and strategic measures for capacity-building and development">
+									 <div class="help-info">The key areas have been identified by the Strategic Framework for capacity-building and development to support the effective implementation of the Nagoya Protocol (decision NP-1/8).</div>
+									 <div km-term-check name="absKeyAreas" ng-model="document.absKeyAreas" terms="options.absKeyAreas()" binding-type="term[]"></div>
 								</div>
 							</div>
 						</div>
@@ -375,7 +375,7 @@
 
 						<div class="row">
 							<div class="col-md-12">
-								<div class="km-control-group" name="address" caption="Any other relavent information">
+								<div class="km-control-group" name="address" caption="Any other relavent information" >
 									<div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
 									<div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 								</div>
