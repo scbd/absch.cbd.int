@@ -1,5 +1,5 @@
-<div ng-controller="recordDetailsController"  id="RegisterPage">
-    
+<div ng-controller="recordDetailsController" id="RegisterPage">
+
     <link href="/app/css/register.css" rel="stylesheet">
     <link href="/app/css/record.css" rel="stylesheet">
 
@@ -8,15 +8,15 @@
         <div class="register-content-header bg-darkgrey color-white">
             <div style="padding:10px 10px;">
                 <h3>Record Details
-                <span class="helpinfoInline">
-                    <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i> 
-                </span>
-            </h3>
-            
-            <!--help info---------------------------->
-            <div ng-if="showInfo" class="well well-help" >
-                View all information about a record.
-            </div>
+                    <span class="helpinfoInline">
+                        <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i> 
+                    </span>
+                </h3>
+
+                <!--help info---------------------------->
+                <div ng-if="showInfo" class="well well-help">
+                    View all information about a record.
+                </div>
             </div>
         </div>
         <div class="register-content-content">
@@ -26,7 +26,7 @@
             <div ng-if="showRequestHistory">
                 <div task-id show-details="true" class="record-body" load-task-data='showRequestHistory' workflow-task-id="{{document.workflowId}}" on-activity-update="refreshworkflowRecord(document, workflowInfo)"></div>
             </div>
-            
+
             <div ng-if="!showRequestHistory">
                 <record-loader show-details="true" class="shadow-z-2" hide-buttons="true" link-target="_self"></record-loader>
             </div>
@@ -101,6 +101,6 @@
             </div>
 
         </div>
-     </div>
+    </div>
 </div>
 <!-- controller -->

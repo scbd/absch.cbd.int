@@ -21,11 +21,17 @@
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>General information</label>
+				<label>2. General information</label>
 			</div>
 			<div class="panel-body">
+				<div ng-show="document.title">
+					<label>Title of this national report</label>
+					<div class="km-value">
+						<strong>{{document.title | lstring:locale}}</strong>
+					</div>
+				</div>
 				<div>
-					<label>2. Contact person</label>
+					<label>Contact person</label>
 					<div view-contact-reference ng-model="document.contact" locale="locale"  
 					ng-if="document.contact">
 					</div>
