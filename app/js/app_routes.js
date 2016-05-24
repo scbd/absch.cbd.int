@@ -105,8 +105,8 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                 when('/register/CBI/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-capacityBuildingInitiative.html',label:'Edit',  param:'true', resolveController: true, documentType :'CBI' , resolve : { securized : securize() }, }).
                 when('/register/A19A20/:identifier/edit',        {templateUrl: '/app/views/forms/edit/edit-modelContractualClause.html',    label:'Edit',  param:'true', resolveController: true, documentType :'A19A20' , resolve : { securized : securize() }, }).
                 when('/register/CPP/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-communityProtocol.html',         label:'Edit',  param:'true', resolveController: true, documentType :'CPP' , resolve : { securized : securize() }, }).
+                when('/register/ORG/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-organization.html',              label:'Edit',  param:'true', resolveController: true, documentType :'ORG' , resolve : { securized : securize() }, }).
 
-                when('/register/:document_type/:identifier/edit/:tour',     {templateUrl: '/app/views/register/register.html',          label:'Edit',  param:'true', resolveController: true,resolve : { securized : securize(null,true) },subTemplateUrl: '/app/views/forms/edit/edit--',  }).
                 when('/register/:document_type/:documentID/view',           {templateUrl: '/app/views/register/record-details.html',    label:'View',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
                 when('/register/admin/pending-requests',         { templateUrl: '/app/views/register/admin/pending-tasks.html',      label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
