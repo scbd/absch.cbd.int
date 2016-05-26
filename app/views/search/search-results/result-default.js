@@ -1,23 +1,27 @@
 define(['app', 'underscore', '/app/js/common.js',
-'/app/views/search/search-results/record-viewer.js'
+'/app/views/forms/view/record-loader.directive.html.js'
 ], function(app, _) {
 
-    app.directive('resultDefault', function() {
+    app.directive('resultDefault', ["$timeout", function($timeout) {
         return {
             restrict: 'EAC',
             replace: true,
-            // transclude: true,
-            //require:'^searchDirective',
             templateUrl: '/app/views/search/search-results/result-default.html',
             scope: {
                 doc:'=',
                 type:'@'
             },
-            link: function($scope, $element, $attrs, searchDirectiveCtrl) {
+            link: function($scope, $element) {
 
-
-
+               $scope.api = {};
+                $scope.$watch('showDoc', function(newVal){
+                    if(newVal && $scope.doc){
+                        $timeout(function(){
+                            $scope.api.recordLoaderApi.loadDocument($scope.doc.schema_s, $scope.doc.identifier_s);
+                        }, 10);
+                    } 
+                });
             },
         };
-    });
+    }]);
 });

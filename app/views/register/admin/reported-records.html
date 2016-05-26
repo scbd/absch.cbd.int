@@ -24,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody ng-repeat="record in reportRecords | orderBy:'reportedOn':'desc'">
-                    <tr ng-click="record.showDoc=!record.showDoc">
+                    <tr ng-click="record.showDoc=!record.showDoc;loadDocumentDetails(record.showDoc, record)">
                         <td>
                             {{record.schema|schemaName}}
                         </td>
@@ -42,7 +42,9 @@
                     </tr>
                     <tr ng-if="record.showDoc">
                         <td colspan="4">
-                            <record-viewer doc-id='record.identifier' doc-schema='record.schema' class="card card-3"></record-viewer>
+                            <div style="padding:5px 0px 10px 0px!important;margin:0 0 0 0!important;">
+                                <record-loader class="card card-3" api="api.recordLoaderApi" show-details="false" hide-buttons="true" link-target="_new"></record-loader>
+                            </div> 
                         </td>
                     </tr>
                 </tbody>
