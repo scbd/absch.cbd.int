@@ -59,7 +59,8 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js' , '/app/views/forms
         }
 
         if(document.government){
-            document.title = {en: $filter("term")(document.government) + " Interim national report on the implementation of the Nagoya Protocol"};
+            if(!document.title)
+                document.title = {en: $filter("term")(document.government) + " Interim national report on the implementation of the Nagoya Protocol"};
             updateRecords(document.government);
         }
 
