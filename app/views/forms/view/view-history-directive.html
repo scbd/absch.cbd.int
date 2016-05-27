@@ -21,7 +21,7 @@
                             <span class="bold color-green"> PUBLISHED</span></span>
                     </div>
                 </td>
-                <td>
+                <td > 
                     <div ng-show="!publicView">by <span style="font-weight:500;">{{document.updatedBy.firstName}}{{document.updatedBy.lastName}} ({{document.updatedBy.email}})</span> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span></div>
                     <div ng-show="publicView"> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span></div>
 
@@ -36,8 +36,8 @@
                         </span>
                     </div>
                 </td>
-                <td ng-if="!publicView">
-                    <div> &nbsp;Requested by
+                <td ng-if="!publicView" >
+                    <div style="margin:0 10px;"> &nbsp;Requested by
                         <span style="font-weight:500;">{{document.submittedBy.firstName}}{{document.submittedBy.lastName}} ({{document.submittedBy.email}})
                             </span> on <span style="font-weight:500;">{{document.submittedOn | formatDateWithTime}}</span></div>
                 </td>
