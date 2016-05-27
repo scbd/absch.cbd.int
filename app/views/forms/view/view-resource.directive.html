@@ -91,18 +91,20 @@
 
 		<div ng-show="document.purpose">
 			<label>Main purpose of the resource</label>
-
-			<ul class="km-value">
-				<li ng-repeat="purpose in document.purpose">{{purpose | term:locale}}</li>
-			</ul>
+			<div class="km-value">
+				<ul>
+					<li ng-repeat="purpose in document.purpose">{{purpose | term:locale}}</li>
+				</ul>
+			</div>
 		</div>
 
 		<div ng-show="document.targetGroups">
 			<label>Target group(s)/beneficiary(ies)</label>
-
-			<ul class="km-value">
-				<li ng-repeat="group in document.targetGroups">{{group | term:locale}}</li>
-			</ul>
+			<div class="km-value">
+				<ul>
+					<li ng-repeat="group in document.targetGroups">{{group | term:locale}}</li>
+				</ul>
+			</div>
 		</div>
 
 		<div ng-show="document.expertiseLevel">
@@ -137,9 +139,11 @@
 
 		<div ng-show="document.aichiTargets">
 			<label>Related Aichi target(s)</label>
-			<ul class="km-value">
-				<li ng-repeat="term in document.aichiTargets">{{term | term:locale}}</li>
-			</ul>
+			<div class="km-value">
+				<ul >
+					<li ng-repeat="term in document.aichiTargets">{{term | term:locale}}</li>
+				</ul>
+			</div>
 		</div>
 
 		<div ng-show="document.absSubjects || document.mccKeywords || document.keywords">
@@ -162,9 +166,11 @@
 
 		<div ng-show="document.absKeyAreas">
 			<label>Key areas and strategic measures for capacity-building and development</label>
-			<ul class="km-value">
-				<li ng-repeat="term in document.absKeyAreas">{{term | term:locale}}</li>
-			</ul>
+			<div class="km-value">
+				<ul >
+					<li ng-repeat="term in document.absKeyAreas">{{term | term:locale}}</li>
+				</ul>
+			</div>
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">

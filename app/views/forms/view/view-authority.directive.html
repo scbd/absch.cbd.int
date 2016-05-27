@@ -66,11 +66,13 @@
 			</div>
 			<div ng-if="document.absPolicyBasisForCompetencyRef">
 				<label>Links to relevant legislative, administrative or policy measure(s) </label>
-					<ul class="km-value">
-						<li ng-repeat="item in document.absPolicyBasisForCompetencyRef" >
-						    <div view-default-reference ng-model="item.identifier" locale="locale"></div>
-						</li>
-					</ul>
+						<div class="km-value">
+							<ul>
+								<li ng-repeat="item in document.absPolicyBasisForCompetencyRef" >
+									<div view-default-reference ng-model="item.identifier" locale="locale"></div>
+								</li>
+							</ul>
+						</div>
 			</div>
             
 		</div>

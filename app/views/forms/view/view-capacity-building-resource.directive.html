@@ -122,9 +122,11 @@
 
 			<div ng-show="document.cbdSubjects">
 				<label>Subject/Topic/Issue</label>
-				<ul class="km-value">
-					<li ng-repeat="term in document.cbdSubjects">{{term | term:locale}}</li>
-				</ul>
+					<div class="km-value">
+						<ul>
+							<li ng-repeat="term in document.cbdSubjects">{{term | term:locale}}</li>
+						</ul>
+					</div>
 			</div>
 
 			<div ng-show="document.aichiTargets">

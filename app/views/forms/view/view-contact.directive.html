@@ -89,23 +89,29 @@
 		</div>
         <div ng-show="document.phones" >
             <label>Phone numbers</label>
-            <ul class="km-value">
-                <li ng-repeat="item in document.phones">{{item}}</li>
-            </ul>
+            	<div class="km-value">
+					<ul>
+						<li ng-repeat="item in document.phones">{{item}}</li>
+					</ul>
+				</div>
         </div>
 
         <div ng-show="document.faxes">
             <label>Fax Numbers</label>
-            <ul class="km-value">
-                <li ng-repeat="item in document.faxes">{{item}}</li>
-            </ul>
+            	<div class="km-value">
+					<ul>
+						<li ng-repeat="item in document.faxes">{{item}}</li>
+					</ul>
+				</div>
         </div>
 
         <div ng-show="document.emails">
             <label>Emails</label>
-            <ul class="km-value">
-                <li ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a></li>
-            </ul>
+            <div class="km-value">
+				<ul>
+					<li ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a></li>
+				</ul>
+			</div>
         </div>
 
         <div ng-show="document.websites">

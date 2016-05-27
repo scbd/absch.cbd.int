@@ -110,36 +110,41 @@
 		<div ng-show="document.documents">
 			<legend>Document details</legend>
 			<label>Document text</label>
-				<ul  class="km-value" >
-					<li ng-repeat="item in document.documents">
-						<a target="_blank" ng-href="{{item.url}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
-						<i ng-show="item.language">({{item.language}})</i>
-						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-					</li>
-				</ul>
+				<div class="km-value">
+					<ul>
+						<li ng-repeat="item in document.documents">
+							<a target="_blank" ng-href="{{item.url}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
+							<i ng-show="item.language">({{item.language}})</i>
+							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+						</li>
+					</ul>
+				</div>
 		</div>
 
 		<div ng-show="document.documentTranslations">
 			<label>Translation</label>
-				<ul class="km-value" >
-					<li ng-repeat="item in document.documentTranslations">
-						<a target="_blank" ng-href="{{item.url}}">
-                            <i class="fa fa-external-link-square" aria-hidden="true"></i>
-                            {{item.name||item.url}}</a>
-						<i ng-show="item.language">({{item.language}})</i>
-						<i ng-show="item.translationType">({{item.translationType}})</i>
-						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-					</li>
-				</ul>
+				<div class="km-value">
+					<ul>
+						<li ng-repeat="item in document.documentTranslations">
+							<a target="_blank" ng-href="{{item.url}}">
+								<i class="fa fa-external-link-square" aria-hidden="true"></i>
+								{{item.name||item.url}}</a>
+							<i ng-show="item.language">({{item.language}})</i>
+							<i ng-show="item.translationType">({{item.translationType}})</i>
+							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+						</li>
+					</ul>
+				</div>
 		</div>
 		<div ng-show="linkedMeasures">
 			<label>Related measures</label>
-				<ul class="km-value">
-					<li ng-repeat="item in linkedMeasures" >
-						 <div view-default-reference ng-model="item.identifier" locale="locale"></div>
-					</li>
-				</ul>
-
+				<div class="km-value">
+					<ul>
+						<li ng-repeat="item in linkedMeasures" >
+							<div view-default-reference ng-model="item.identifier" locale="locale"></div>
+						</li>
+					</ul>
+				</div>
 		</div>
 
 
@@ -148,11 +153,13 @@
 			<div ng-show="amendedMeasures">
 				<label>This measure is amending the following:</label>
 
-				<ul class="km-value">
-					<li ng-repeat="item in amendedMeasures" >
-                         <div view-default-reference ng-model="item.identifier" locale="locale"></div>
-					</li>
-				</ul>
+				<div class="km-value">
+					<ul>
+						<li ng-repeat="item in amendedMeasures" >
+							<div view-default-reference ng-model="item.identifier" locale="locale"></div>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<div ng-show="document.amendmentsDescription">
 				<label>Summary of the amendments</label>
@@ -171,22 +178,26 @@
 		<div ng-show="document.measureAmendedBy && document.measureAmendedBy.length>0">
 			<legend>Amendments</legend>
 			<label>This measure has been amended by:</label>
-			<ul class="km-value">
-				<li ng-repeat="item in document.measureAmendedBy" >
-                    <i class="fa fa-external-link-square" aria-hidden="true"></i>
-						 <div view-default-reference ng-model="item.identifier_s" locale="locale"></div>
+			<div class="km-value">
+				<ul>
+					<li ng-repeat="item in document.measureAmendedBy">
+						<i class="fa fa-external-link-square" aria-hidden="true"></i>
+						<div view-default-reference ng-model="item.identifier_s" locale="locale"></div>
 					</li>
-			</ul>
+				</ul>
+			</div>
 		</div>
 
 		<div ng-show="document.measureRelatedTo && document.measureRelatedTo.length>0">
 			<legend>Relationships</legend>
 			<label>This measure is related to:</label>
-			<ul class="km-value">
-				<li ng-repeat="item in document.measureRelatedTo" >
-                     <div view-default-reference ng-model="item.identifier_s" locale="locale"></div>
-				</li>
-			</ul>
+			<div class="km-value">
+				<ul>
+					<li ng-repeat="item in document.measureRelatedTo" >
+						<div view-default-reference ng-model="item.identifier_s" locale="locale"></div>
+					</li>
+				</ul>
+			</div>
 		</div>
 
         <!-- <div ng-if="document.absMeasuresForDelete">
@@ -236,13 +247,15 @@
 
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website address or attached documents</label>
-					<ul class="km-value">
-						<li ng-repeat="item in document.relevantDocuments">
-                            <i class="fa fa-external-link-square" aria-hidden="true"></i>
-							<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-						</li>
-					</ul>
+					<div class="km-value">
+						<ul>
+							<li ng-repeat="item in document.relevantDocuments">
+								<i class="fa fa-external-link-square" aria-hidden="true"></i>
+								<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+							</li>
+						</ul>
+					</div>
 			</div>
 		</div>
 	</div>
