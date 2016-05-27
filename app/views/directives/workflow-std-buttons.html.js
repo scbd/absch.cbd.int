@@ -456,7 +456,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 
                         $('#divShowError').show('slow');
 
-                        if(data.error && data.error.data.Message)
+                        if(data.error && data.error.data && data.error.data.Message)
                             $scope.errorMessage += data.error.data.Message;
 
                     }
