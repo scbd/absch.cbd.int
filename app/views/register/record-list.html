@@ -56,7 +56,7 @@
                         <!-- <th style="width:50px;">&nbsp;</th> -->
                         <th ng-click="toggleOrderBy('title|lstring')" id="titleHeader">Title</th>
                         <th ng-if="schema=='contact'" ng-click="toggleOrderBy('body.type')" id="body.typeHeader">Type</th>
-                        <th style="width:200px;" ng-click="toggleOrderBy('SubmittedBy')" id="createdOnHeader">Submitted by</th>
+                        <th style="width:200px;" ng-click="toggleOrderBy('SubmittedBy')" id="createdOnHeader">Last published</th>
                         <th style="width:200px;" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">Last updated</th>
                         <th style="width:150px;" ng-click="toggleOrderBy('status')" id="statusHeader">Status</th>
                         <th style="width:100px;">{{filteredRecords.length}} Record(s)</th>
@@ -98,29 +98,51 @@
                             <span style="font-size:11px;font-weight:500;text-transform:uppercase;padding:4px 10px 4px 4px;color:#666">{{record.body.type}}</span>
                         </td>
                         <td>
-                            <div ng-show="record.submittedBy">
-                                <a style="color:#666" href="mailto:{{record.submittedBy.email}}">
-                                    <strong>
-                                    {{record.submittedBy.firstName}} {{record.submittedBy.lastName}}</strong>
-                                </a>
-                                </br>
-                                <span style="font-size:10px;white-space:nowrap;">{{record.submittedOn | formatDateWithTime }}</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div ng-show="record.updatedBy">
+                            <div ng-if="record.updatedBy && isPublished(record)">
                                 <a style="color:#666" href="mailto:{{record.updatedBy.email}}">
                                     <strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong>
                                 </a>
                                 </br>
                                 <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | formatDateWithTime }}</span>
                             </div>
-                            <div ng-show="record.createdBy && !record.updatedBy">
+                            <div ng-if="record.createdBy && !record.updatedBy && isPublished(record)">
                                 <a style="color:#666" href="mailto:{{record.createdBy.email}}">
                                     <strong>{{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong>
                                 </a>
                                 </br>
                                 <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | formatDateWithTime }}</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="record.workingDocumentUpdatedBy">
+                                <a style="color:#666" href="mailto:{{record.workingDocumentUpdatedBy.email}}">
+                                    <strong>{{record.workingDocumentUpdatedBy.firstName}} {{record.workingDocumentUpdatedBy.lastName}}</strong>
+                                </a>
+                                </br>
+                                <span style="font-size:10px;white-space:nowrap;">{{record.workingDocumentUpdatedOn | formatDateWithTime }}</span>
+                            </div>
+                            <div ng-if="record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
+                                <a style="color:#666" href="mailto:{{record.workingDocumentCreatedBy.email}}">
+                                    <strong>{{record.workingDocumentCreatedBy.firstName}} {{record.workingDocumentCreatedBy.lastName}}</strong>
+                                </a>
+                                </br>
+                                <span style="font-size:10px;white-space:nowrap;">{{record.workingDocumentCreatedBy | formatDateWithTime }}</span>
+                            </div>
+                            <div ng-if="!record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
+                                <div ng-show="record.updatedBy">
+                                    <a style="color:#666" href="mailto:{{record.updatedBy.email}}">
+                                        <strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong>
+                                    </a>
+                                    </br>
+                                    <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | formatDateWithTime }}</span>
+                                </div>
+                                <div ng-show="record.createdBy && !record.updatedBy">
+                                    <a style="color:#666" href="mailto:{{record.createdBy.email}}">
+                                        <strong>{{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong>
+                                    </a>
+                                    </br>
+                                    <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | formatDateWithTime }}</span>
+                                </div>
                             </div>
                         </td>
                         <td>
