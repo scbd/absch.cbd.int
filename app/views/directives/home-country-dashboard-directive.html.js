@@ -56,8 +56,16 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                         }
 
                         $scope.loadingNationalFacets = true;
-
-                        $q.when(searchService.governmentSchemaFacets())
+                        
+                        // on home page measure count
+                        // check trello card https://trello.com/c/tJbtvjl8
+                        //
+                        var virtualQuery = {
+                            query : 'virtual_b:*', fields: ['schema_s']
+                        }
+                        var virtualRegionalMeasureCount = searchService.facets(virtualQuery, 'virtualRegionalMeasureCount');
+                        
+                        $q.all([searchService.governmentSchemaFacets(), virtualRegionalMeasureCount])
                             .then(function(results) {
 
 								var nationalRecords = {	absCheckpoint		   : { countryCount :0, recordCount : 0 },
@@ -69,7 +77,7 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
 														measure:                 { countryCount :0, recordCount : 0 },
                                                         absNationalReport:       { countryCount :0, recordCount : 0 }
 													};
-								_.each(results, function(country){
+								_.each(results[0], function(country){
 									nationalRecords.absCheckpoint.recordCount           += country.schemas.absCheckpoint||0;
 									nationalRecords.absCheckpointCommunique.recordCount += country.schemas.absCheckpointCommunique||0;
 									nationalRecords.absPermit.recordCount               += country.schemas.absPermit||0;
@@ -88,7 +96,15 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
 									nationalRecords.measure.countryCount                 += (country.schemas.measure ? 1 : 0);
                                     nationalRecords.absNationalReport.countryCount       += (country.schemas.absNationalReport ? 1 : 0);
 								});
+                                if(results[1] && results[1].schema_s && results[1].schema_s.length > 0){
+                                    var virtualRegionalCont = _.first(results[1].schema_s)
+                                    if(virtualRegionalCont.symbol == 'measure'){
+                                        if(nationalRecords.measure.recordCount > 0)
+                                            nationalRecords.measure.recordCount = nationalRecords.measure.recordCount - virtualRegionalCont.count
+                                    }                                                                
+                                }
 								$scope.nationalRecords = nationalRecords;
+                                
                             })
                             .catch(function(error) {
                                 console.log(error);
