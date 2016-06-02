@@ -101,6 +101,7 @@
         var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } }
         addLoadEvent(function() { outdatedBrowser( { bgColor: '#f25648', color: '#ffffff', lowerThan: 'boxShadow', languagePath: 'app/libs/outdated-browser/outdatedbrowser/lang/en.html' }) });
 
+    if(domain == 'cbd.int'){
          /**************************
           For Googel Analytics
         **************************/
@@ -118,6 +119,7 @@
 
         ga('create', 'UA-1996573-11', 'auto');
         ga('send', 'pageview');
+    }
     </script>
 
 </body>
