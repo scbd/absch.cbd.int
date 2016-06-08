@@ -1,14 +1,16 @@
 define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', '/app/js/common.js',
     '/app/services/search-service.js', '/app/services/role-service.js',
     './directives/register-top-menu.js', '../directives/block-region-directive.js',
-	'/app/views/forms/edit/editFormUtility.js', '/app/views/register/directives/record-type-header.html.js'],
+	'/app/views/forms/edit/editFormUtility.js', '/app/views/register/directives/record-type-header.html.js',
+    '/app/services/local-storage-service.js'
+],
     function (app, _) {
         "use strict";
 
         app.controller("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage", '$rootScope',
-            'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", "$element", "breadcrumbs",
+            'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", "$element", "breadcrumbs", "localStorageService",
             function ($timeout, commonjs, bootbox, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
-                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs) {
+                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService) {
 
                 $scope.orderBy = ['-updatedOn'];
 
@@ -118,13 +120,13 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         $scope.recordToDelete = "0";
 
                     }
-                    if (!(roleService.isAbsPublishingAuthority() || roleService.isAbsNationalFocalPoint() ||
-                        roleService.isAbsAdministrator() || roleService.isAdministrator())) {
-                        $scope.cantDelete = false;
-                        $scope.iacCantDelete = true;
-                        $scope.recordToDelete = "0";
-                    }
-                    else {
+                    // if (!(roleService.isAbsPublishingAuthority() || roleService.isAbsNationalFocalPoint() ||
+                    //     roleService.isAbsAdministrator() || roleService.isAdministrator())) {
+                    //     $scope.cantDelete = false;
+                    //     $scope.iacCantDelete = true;
+                    //     $scope.recordToDelete = "0";
+                    // }
+                    // else {
                         if (record.type == 'absPermit' && $scope.isPublished(record)) {
                             //cant delete only modify
                             $scope.pilotDelete = true;
@@ -135,7 +137,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                             $scope.cantDelete = false;
 
                         }
-                    }
+                    // }
 
                 };
 
@@ -148,7 +150,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                     $scope.loading = true;
 
-                    return $q.when(storage.drafts.delete(record.identifier)).then(function () {
+                    return $q.when(storage.drafts.delete(record)).then(function () {
 
                         recordDeleted(record);
                         $scope.recordToDelete = null;
@@ -166,7 +168,8 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                     $scope.loading = true;
 
-                    return $q.when(storage.documents.delete(record.identifier)).then(function () {
+                    return $q.when(editFormUtility.deleteDocument(record, $scope.additionalInfo))
+                    .then(function () {
                         //alert($("#record" + record.identifier));
                         // $("#record" + record.identifier).toggle('Explode');
                         //
@@ -505,6 +508,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         $scope.records = [];
                         var documents = results[0].data.Items;
                         var drafts = results[1].data.Items;
+                        var wokflowActive = localStorageService.get('workflow-activity-status');
 
                         var map = {};
 
@@ -516,6 +520,12 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         });
 
                         _.values(map).forEach(function (row) {
+                           //waiting for workflow status from socketIO
+                            if(wokflowActive && wokflowActive.identifier == row.identifier){
+                                row.workflowActivityStatus =  'pending';
+                                verifyWorkflowStatus(wokflowActive.workflowId, row)
+                            }
+
                             $scope.records.push(row);
                         })
                         $("a[role*='button']").toggleClass('ui-disabled');
@@ -529,7 +539,6 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     for (var i = 0; i <= $scope.records.length; ++i) {
                         if ($scope.records[i] == doc) {
                             $scope.records.splice(i, 1);
-                            $scope.refreshFacets();
                         }
                     }
                     toastr.info('<h1>Record deleted.</h1>', {
@@ -539,11 +548,31 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                 function recordDuplicated(doc) {
                     $scope.records.push(doc);
-                    $scope.refreshFacets();
                 }
 
                 loadRecords();
 
+
+                $rootScope.$on('event:server-pushNotification', function(evt,data){
+                    if(data.type == 'workflowActivityStatus'){
+                        var document = _.findWhere($scope.records, {identifier: data.data.identifier})
+                        if(document)
+                             document.workflowActivityStatus =  data.data.workflowActivity;
+                        
+                        localStorageService.remove('workflow-activity-status');            
+                    }
+                });
+
+                function verifyWorkflowStatus(workflowId, document){
+
+                    IWorkflows.get(workflowId)
+                    .then(function(workflow){
+                        var activity = _.first(workflow.activities)                        
+                        if(activity && activity.completedBy)
+                            localStorageService.remove('workflow-activity-status');
+
+                    });
+                }
             }]);
 
     });

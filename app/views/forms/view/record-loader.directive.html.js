@@ -1,4 +1,5 @@
 define(['app',
+	'scbd-angularjs-services',
 	'scbd-angularjs-filters',
 	'./view-history-directive.html.js',
     '/app/js/common.js',
@@ -37,8 +38,9 @@ define(['app',
 					$scope.init();
 			},
 			controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService',
-				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter, $http, $httpAWS, realm, $element, $compile, searchService) {
+				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows",
+				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
+				 $http, $httpAWS, realm, $element, $compile, searchService, IWorkflows) {
 
 					var schemaMapping = {
 						news: '/app/views/forms/view/view-news.directive.html.js',
@@ -70,7 +72,6 @@ define(['app',
 						$scope.internalDocument = _new;
 						if ($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)) {
 							loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
-
 						}
 					});
 
@@ -207,7 +208,6 @@ define(['app',
 							$scope.internalDocumentInfo = results[1];
 							$scope.internalDocument.info = results[1];
 
-							console.log(results[2].data.response.docs[0]);
 							if (results[2].data.response.docs.length > 0) {
 								$scope.documentVersionCount = results[2].data.response.docs[0]._revision_i
 							}
@@ -223,6 +223,16 @@ define(['app',
 								$scope.revisionNo = $scope.documentVersionCount
 
 							loadViewDirective($scope.internalDocument.header.schema);
+
+							if($scope.internalDocumentInfo.workingDocumentLock){
+								IWorkflows.get($scope.internalDocumentInfo.workingDocumentLock.lockID.replace('workflow-', ''))
+								.then(function(workflow){
+									if(workflow && workflow.type.name == 'delete-record')
+										$scope.workflowRequestType = "deletion";
+									else
+										$scope.workflowRequestType = "publishing";
+								});
+							}
 
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
@@ -339,17 +349,10 @@ define(['app',
 						var schemaDetails = schemaMapping[lschema.toLowerCase()];
 
 						require([schemaDetails], function () {
-
-
-
 							var name = snake_case(lschema);
-
-
-
 							var directiveHtml =
 								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
 									.replace(/DIRECTIVE/g, 'view-' + name);
-
 							$scope.$apply(function () {
 								$element.find('#schemaView')
 									.empty()
