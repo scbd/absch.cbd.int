@@ -12,7 +12,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                     var queryFields = 'fl=id,identifier_s,schema_s,createdDate_dt,createdByEmail_s,createdBy_s,updatedDate_dt,updatedByEmail_s,updatedBy_s,url_ss,';
 
                     if (schema.toUpperCase() == "FOCALPOINT" || schema.toUpperCase() == "NFP") {
-                        queryFields += 'description_EN_t,government_s,government_EN_t,organization_EN_t,function_EN_t,department_EN_t,title_EN_t,treaty_CEN_ss,type_CEN_ss,email_ss,telephone_s,ctgList_ss,fax_ss';
+                        queryFields += 'description_EN_t,government_s,government_EN_t,organization_EN_t,function_EN_t,department_EN_t,title_EN_t,treaty_CEN_ss,type_CEN_ss,email_ss,telephone_ss,ctgList_ss,fax_ss';
                     } else if (schema.toUpperCase() == "MEETING" || schema.toUpperCase() == "MT") {
                         queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
                     } else if (schema.toUpperCase() == "NOTIFICATION" || schema.toUpperCase() == "NT") {
