@@ -146,22 +146,26 @@
                             </div>
                         </td>
                         <td>
+                            <span ng-if="record.workflowActivityStatus == 'pending'" class="label label-primary">
+                                <i class="fa fa-spin fa-spinner"/> waiting for workflow status
+                            </span>
+                            <div  ng-show="record.workflowActivityStatus!='pending'">                                
+                                <div ng-show="isPublished(record) && !isRequest(record)" class="color-published-green bold"> Published </div>
+                                <div ng-show="isDraft(record) && !isRequest(record)" class="color-litegrey bold"> Draft </div>
+                                <div ng-show="isRequest(record) && !record.isUpdating && !isPublishingAuthority(record)" class="color-red bold"> Pending approval </div>
 
-                            <div ng-show="isPublished(record) && !isRequest(record)" class="color-published-green bold"> Published </div>
-                            <div ng-show="isDraft(record) && !isRequest(record)" class="color-litegrey bold"> Draft </div>
-                            <div ng-show="isRequest(record) && !record.isUpdating && !isPublishingAuthority(record)" class="color-red bold"> Pending approval </div>
-
-                            <a class="btn btn-danger color-white" ng-show="isRequest(record) && !record.isUpdating && isPublishingAuthority(record)" ng-href="/register/{{record.metadata.schema | schemaShortName}}/{{record.identifier}}/view">
-                            Pending approval
-                        </a>
-                            <div ng-show="isRequest(record) && record.isUpdating">
-                                <a class="btn btn-info" type="button" ng-click="return" style="padding:4px;">
-                                    <strong><i class="fa fa-spin fa-cog"></i> Processing...</strong>
+                                <a class="btn btn-danger color-white" ng-show="isRequest(record) && !record.isUpdating && isPublishingAuthority(record)" ng-href="/register/{{record.metadata.schema | schemaShortName}}/{{record.identifier}}/view">
+                                    Pending approval
                                 </a>
+                                <div ng-show="isRequest(record) && record.isUpdating">
+                                    <a class="btn btn-info" type="button" ng-click="return" style="padding:4px;">
+                                        <strong><i class="fa fa-spin fa-cog"></i> Processing...</strong>
+                                    </a>
+                                </div>
                             </div>
                         </td>
                         <td>
-                            <div class="btn-group document_buttons btn-group-sm" style="width:100px;">
+                            <div class="btn-group document_buttons btn-group-sm" style="width:100px;" ng-show="record.workflowActivityStatus!='pending'">
                                 <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
                                 <button title="Locked for edit" ng-show="isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
                                 <button title="Cancel request" ng-show="isRequest(record) && showAddButton() && isMyRecord(record)" type="button" class="btn btn-default" ng-click="askDeleteWorkflowRequest(record)"><i class="fa fa-undo"></i></button>
