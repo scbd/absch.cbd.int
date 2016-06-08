@@ -198,7 +198,7 @@ performing certain types of tasks and/or implementing specific approaches. </div
 								</div>
 							</div>
 						</div>
-						<div class="row">
+						<div class="row" ng-if="isResource">
 							<div class="col-md-12">
 								<div class="km-control-group" required name="aichiTargets" caption="Related Aichi Biodiversity Target(s)">
 									<div km-term-check name="aichiTargets" required ng-model="document.aichiTargets" terms="options.aichiTargets()" binding-type="term[]"></div>
