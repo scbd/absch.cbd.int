@@ -89,7 +89,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 	    if(document.government){
 	        var government =  document.government.identifier;
 	        var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
-	        "+organization_EN_t,telephone_s,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
+	        "+organization_EN_t,telephone_ss,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
 	        "+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(government_s:" + government + "))&rows=50";
 
 	        $http.get(query).success(function(res) {
@@ -101,7 +101,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 	                                firstName:nfp.title_t,
 	                                addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
 	                                country: nfp.addressCountry_s,
-	                                phones:[nfp.telephone_s],
+	                                phones:nfp.telephone_ss,
 	                                faxes:nfp.fax_ss,
 	                                emails:nfp.email_ss
 	                            });
@@ -149,7 +149,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 	// 	}
 	// 	var government =  document.government.identifier;
 	// 	var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
-	// 	"+organization_EN_t,telephone_s,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
+	// 	"+organization_EN_t,telephone_ss,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
 	// 	"+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(type_ss:NP-FP+OR+type_ss:ABS-FP)+AND+(government_s:" + government + "))&rows=50";
 	//
 	// 	$http.get(query).success(function(res) {
@@ -161,7 +161,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 	// 							firstName:nfp.title_t,
 	// 							addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
 	// 							country: nfp.addressCountry_s,
-	// 							phones:[nfp.telephone_s],
+	// 							phones:[nfp.telephone_ss],
 	// 							faxes:nfp.fax_ss,
 	// 							emails:nfp.email_ss
 	// 						});

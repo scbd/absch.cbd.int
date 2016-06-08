@@ -112,7 +112,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 				if(document.government){
 					var government =  document.government.identifier;
 					var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
-					"+organization_EN_t,telephone_s,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + realm.value.toLowerCase() +
+					"+organization_EN_t,telephone_ss,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + realm.value.toLowerCase() +
 					"+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(government_s:" + government + "))&rows=50";
 
 					$http.get(query).success(function(res) {
@@ -124,7 +124,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 											firstName:nfp.title_t,
 											addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
 											country: nfp.addressCountry_s,
-											phones:[nfp.telephone_s],
+											phones:nfp.telephone_ss,
 											faxes:nfp.fax_ss,
 											emails:nfp.email_ss
 										});
