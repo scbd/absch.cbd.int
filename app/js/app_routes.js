@@ -49,11 +49,11 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                 when('/mailbox',                        { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
                 when('/mailbox/:mailId',                { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
 
+                when('/search/countries/:countryCode?',                        { redirectTo:'/countries/:countryCode' }).
+                when('/search/countries/:countryCode/:documentType',           { redirectTo:'/countries/:countryCode' }).
                 when('/search/:recordType',                     { templateUrl: '/app/views/search/search-page.html',   label:'SEARCH',         resolveController: true}).
                 when('/search',                                 { templateUrl: '/app/views/search/search-page.html',   label:'SEARCH',         resolveController: true}).
                 when('/search/national-records/:documentSchema?',              { redirectTo:'/search' }).
-                when('/search/countries/:countryCode?',                        { redirectTo:'/countries/:countryCode' }).
-                when('/search/countries/:countryCode/:documentType',           { redirectTo:'/countries/:countryCode' }).
                 when('/search/reference-records/:documentSchema?',             { redirectTo:'/search' }).
 
                 when('/countries',                   { templateUrl: '/app/views/countries/index.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
