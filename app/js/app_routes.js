@@ -119,8 +119,8 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                 when('/oauth2/callback',             { templateUrl: '/app/views/oauth2/callback.html',          resolveController: true, resolveUser: true}).
                 
                 when('/about/faq', {templateUrl: '/app/views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
-                
-
+                when('/guides', {templateUrl: '/app/views/about/guides.html', resolveController: true, resolveUser: true, label:'Step-by-step guides'}).
+               
                 otherwise({templateUrl: '/app/views/shared/404.html', label:'404 Error'});
 
     }]);
