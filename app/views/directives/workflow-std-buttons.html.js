@@ -1,8 +1,9 @@
 define(['app','/app/views/directives/workflow-history-directive.html.js',
-        'toastr'], function (app) {
+        'toastr', '/app/services/local-storage-service.js'
+], function (app) {
 
-    app.directive('workflowStdButtons',["$q", "$timeout","underscore",
-     function($q, $timeout, _){
+    app.directive('workflowStdButtons',["$q", "$timeout","underscore", "localStorageService",
+     function($q, $timeout, _, localStorageService){
 
     	return{
     		restrict: 'EAC',
@@ -224,10 +225,11 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                                 processRequest = editFormUtility.publish(document);
                             }
 
-                            return $q.when(processRequest).then(function(documentInfo) {
+                            return $q.when(processRequest)
+                            .then(function(documentInfo) {
 
                                 $('form').filter('.dirty').removeClass('dirty');
-    							documentPublished(documentInfo);
+    							documentPublished(document, documentInfo._id);
                                 $scope.$emit("updateOrignalDocument", document);
     							return documentInfo;
 
@@ -270,10 +272,11 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                             $element.find('#continueRequest').bind('click', function(){
                                 $scope.closeAddInfoDialog(true);
                                 $scope.loading = true;
-                                $q.when(editFormUtility.publishRequest(document,$scope.InfoDoc ? $scope.InfoDoc.additionalInfo:'')).then(function(workflowInfo) {
+                                $q.when(editFormUtility.publishRequest(document,$scope.InfoDoc ? $scope.InfoDoc.additionalInfo:''))
+                                .then(function(workflowInfo) {
 
                                     $('form').filter('.dirty').removeClass('dirty');
-                                    documentPublishRequested(document);
+                                    documentPublishRequested(document, workflowInfo._id);
                                     $scope.$emit("updateOrignalDocument", document);
                                     return workflowInfo;
 
@@ -507,9 +510,13 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                 // and a request for publication is sent to a FocalPoint/Admin
                 //
                 //============================================================
-                function documentPublishRequested() {
+                function documentPublishRequested(documentInfo, workflowId) {
 
                     toastr.info('Record saved. A publishing request has been sent to your Publishing Authority.');
+                    localStorageService.set('workflow-activity-status', {
+                        identifier : documentInfo.header.identifier, type:'request',
+                        workflowId : workflowId
+                    });
 
                     $timeout(function() {
                         $location.path('/register/' + $filter("mapSchema")(document_type));
@@ -523,9 +530,13 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                 // and published directly to the repository
                 //
                 //============================================================
-                function documentPublished(documentInfo) {
+                function documentPublished(documentInfo, workflowId) {
 
                     toastr.info('Record published. The record will be now publicly accessible on ABSCH.');
+                    localStorageService.set('workflow-activity-status', {
+                        identifier : documentInfo.header.identifier, type:'publish',
+                        workflowId : workflowId
+                    });
                     $timeout(function() {
                         $location.path('/register/' + $filter("mapSchema")(document_type));
                     }, 1000);
