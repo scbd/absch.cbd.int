@@ -1,73 +1,79 @@
 <div class="row" style="margin:0;padding:0;" ng-hide="hideEverything">
     <div class="col-xs-12" style="margin-bottom:20px;">
-        
-        <div class="panel panel-danger" >
+
+        <div class="panel panel-danger">
             <div class="panel-heading bg-red">
-                <h3 style="padding:0;margin:0;" class="color-white">Publishing Request Pending</h3>
-                </div>
-            
+                <h3 style="padding:0;margin:0;" class="color-white">
+                    <span ng-if="workflow.type.name != 'delete-record'">Publishing </span>
+                    <span ng-if="workflow.type.name == 'delete-record'">Deletion </span>
+                    Request Pending</h3>
+            </div>
+
             <div class="panel-body">
-                Requested by: &nbsp; 
+                Requested by: &nbsp;
                 <span class="bold">
                 {{workflow.createdBy_info.firstName + ' ' + workflow.createdBy_info.lastName}}
                 <a ng-href="mailTo:{{workflow.createdBy_info.email}}" class="color-blue">({{workflow.createdBy_info.email}})</a>
-                <span class="unbold"> on </span>
-                {{workflow.createdOn | formatDateWithTime}}
+                <span class="unbold"> on </span> {{workflow.createdOn | formatDateWithTime}}
                 </span>
             </div>
 
             <div ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'">
-                <div class="row row-centered"   style="margin:0;padding:0;" id="buttonsDiv"  ng-show="isAssignedToMe(activity)">
-                    <div class="col-xs-4 text-center" ng-show="isAssignedToMe(activity)">
-                        <button type="button" class="btn btn-success bold"  ng-click="updateActivity({ action : 'approve' })"
-                        ng-disabled="isUpdating">
+                <div class="row row-centered" style="margin:0;padding:0;" id="buttonsDiv" ng-show="isAssignedToMe(activity)">
+                    <div class="col-xs-4 text-center" ng-show="isAssignedToMe(activity) && activity.name != 'deleteRecord'">
+                        <button type="button" class="btn btn-success bold" ng-click="updateActivity({ action : 'approve' })" ng-disabled="isUpdating">
                             <i class="fa fa-check-circle"></i>
                             <span class="hidden-xs">APPROVE</span>
                         </button>
                     </div>
-                    <div class="col-xs-4 text-center" ng-show="!isUpdating" >
-                        <a type="button" class="btn btn-info bold  color-white"  ng-href="/register/{{workflow.data.metadata.schema | schemaShortName}}/{{activity.input.identifier}}/edit?workflow={{workflowTaskId}}">
+                    <div class="col-xs-4 text-center" ng-show="isAssignedToMe(activity) && activity.name == 'deleteRecord'">
+                        <button type="button" class="btn btn-warning bold" ng-click="confirmDelete()" ng-disabled="isUpdating">
+                            <i class="fa fa-check-circle"></i>
+                            <span class="hidden-xs">APPROVE DELETE</span>
+                        </button>
+                    </div>
+                    <div class="col-xs-4 text-center" ng-show="!isUpdating && activity.name != 'deleteRecord'">
+                        <a type="button" class="btn btn-info bold  color-white" ng-href="/register/{{workflow.data.metadata.schema | schemaShortName}}/{{activity.input.identifier}}/edit?workflow={{workflowTaskId}}">
                             <i class="fa fa-pencil-square-o"></i>
                             <span class="hidden-xs">EDIT</span></a>
 
                     </div>
-                    <div class="col-xs-4 text-center" ng-show="isUpdating" >
-                        <a type="button" class="btn btn-info bold color-white" >
+                    <div class="col-xs-4 text-center" ng-show="isUpdating && activity.name != 'deleteRecord'">
+                        <a type="button" class="btn btn-info bold color-white">
                             <i class="fa fa-cog fa-spin fa-lg" id="spinner" style="display:none" />
                             <span class="hidden-xs">EDIT</span></a>
                     </div>
                     <div class="col-xs-4 text-center">
-                        <button type="button" class="btn btn-warning bold"  ng-click="showRejectDialog()"
-                        ng-disabled="isUpdating">
+                        <button type="button" class="btn btn-warning bold" ng-click="showRejectDialog()" ng-disabled="isUpdating">
                             <i class="fa fa-times-circle"></i>
                            <span class="hidden-xs"> REJECT</span>
                         </button>
-                    </div> 
+                    </div>
                 </div>
                 <div class="row" style="margin:0;padding:0;" ng-show="workFlowIsCreatedByMe()">
                     <div class="col-xs-12">
-                        <button type="button" class="btn btn-warning bold"  ng-click=""  ng-disabled="isUpdating">
+                        <button type="button" class="btn btn-warning bold" ng-click="" ng-disabled="isUpdating">
                             <i class="fa fa-rotate-left"></i>
                            <span class="hidden-xs"> Cancel Publishing Request</span>
                            
                         </button>
-                        
-                    </div> 
+
+                    </div>
                 </div>
             </div>
             <div class="panel-footer" style="margin-top:20px;">
-                <span>This request will automatically expire in <span class="color-red bold">{{workflow.daysToApproval}} days</span> </span> 
+                <span>This request will automatically expire in <span class="color-red bold">{{workflow.daysToApproval}} days</span> </span>
             </div>
         </div>
-        
-          
+
+
     </div>
-    
-     <div class="col-xs-12">
-      <div ng-show="document" class="t-document">
-                <record-loader show-details="showDetails"  class="shadow-z-2" hide-buttons="true" link-target="_self"></record-loader>
-            </div>
-     </div>
+
+    <div class="col-xs-12">
+        <div ng-show="document" class="t-document">
+            <record-loader show-details="showDetails" class="shadow-z-2" hide-buttons="true" link-target="_self"></record-loader>
+        </div>
+    </div>
 
     <form name="rejectForm" role="form">
         <div class="modal fade" id="rejectModal">
@@ -91,5 +97,29 @@
             </div>
         </div>
     </form>
+
+    <script type="text/ng-template" id="deleteConfirmation">
+        <!--<div class="modal-content">-->
+        <div class="modal-header">
+            <h3 class="modal-title">Delete Confirmation
+                </h3>
+        </div>
+
+        <div class="modal-body">
+            Are you sure you want to delete this record?
+
+            <br/>
+            <!--<span ng-if="showDocumentHistory" document-reference-history identifier="{{showDocumentHistory}}"></span>   -->
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success bold" ng-click="updateActivity()" ng-disabled="isUpdating">
+                            <span class="hidden-xs">Yes</span>
+                        </button>
+            <button type="button" class="btn btn-warning bold" ng-click="closeConfirmation()" ng-disabled="isUpdating">
+                            <span class="hidden-xs">Cancel</span>
+                        </button>
+        </div>
+        <!--</div> -->
+    </script>
 
 </div>

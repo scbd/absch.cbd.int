@@ -1,5 +1,6 @@
 define(['app',
-	'../forms/view/record-loader.directive.html.js', 'toastr'], function (app) {
+	'../forms/view/record-loader.directive.html.js', 'toastr', , 'ngDialog',
+	'/app/views/directives/document-reference-history.html.js'], function (app) {
 
 app.directive('taskId', function () {
         return {
@@ -12,8 +13,8 @@ app.directive('taskId', function () {
                 onActivityUpdate : '&', //used in case if the directive parent needs to be refreshed else the workflow details will be fetched.
                 showDetails: "="
             },
-            controller: [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element', 'toastr','$window',
-					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element, toastr, $window)
+            controller: [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element', 'toastr','$window', 'ngDialog', 
+					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element, toastr, $window, ngDialog)
 					{
 						var rejectRecordModal = $element.find("#rejectModal");
 						//==================================================
@@ -51,40 +52,35 @@ app.directive('taskId', function () {
 						//
 						//
 						//==================================================
-						$scope.updateActivity = function(resultData) {
+						$scope.updateActivity = function(resultData, isDelete) {
 							$element.find('#buttonsDiv').wrap("<div class='overlayDiv'> </div>")
 
 							$element.find('#spinner').css('display', 'block');
 							$scope.isUpdating = true;
-							IWorkflows.updateActivity($scope.workflowTaskId, $scope.workflow.activities[0].name, resultData).then(function(result){
-									// if($scope.$parentWatcher){
-									// console.log(result);
-										var msg = "";
-										if(result.result.action == 'approve'){
+							IWorkflows.updateActivity($scope.workflowTaskId, $scope.workflow.activities[0].name, resultData)
+							.then(function(result){
+									var msg = "";
+									if(result.result.action == 'approve'){
+										if(isDelete)
+											msg = "Record deleted";
+										else
 											msg = "Record published";
-										}
-										else{
-											msg = "Record rejected";
-										}
+									}
+									else{
+										msg = "Record rejected";
+									}
 
-										var workflowInfo = {workflowId:$scope.workflowTaskId, activity:result}
+									var workflowInfo = {workflowId:$scope.workflowTaskId, activity:result}
 
-										if(typeof $scope.onActivityUpdate == 'function'){
-											// $timeout(function(){
-											 	$scope.onActivityUpdate({document:$scope.document, workflowInfo:workflowInfo});
-												$scope.hideEverything=true;
-											// $scope.$emit('taskAction',{document:$scope.document, workflowAction:resultData});
-											// 	$scope.isUpdating = false;
-											// }, 8000);
-										}
-										else{
-											load();
-											$scope.isUpdating = false;
-										}
+									if(typeof $scope.onActivityUpdate == 'function'){
+											$scope.onActivityUpdate({document:$scope.document, workflowInfo:workflowInfo});
+											$scope.hideEverything=true;
+									}
+									else{
+										load();
+										$scope.isUpdating = false;
+									}
 									toastr.success(msg);
-
-
-
 							}).catch(function(error) {
 								//alert(error);
 								 toastr.error('There was an error processing your request, please try again.');
@@ -152,6 +148,29 @@ app.directive('taskId', function () {
 			            $scope.$on('$destroy', function(){
 			                $('#rejectModal').remove();
 			            });
+
+
+						$scope.confirmDelete = function(){
+							
+							var identifier = $scope.document.header.identifier
+							var updateActivity = $scope.updateActivity;
+							ngDialog.open({
+								closeByEscape: false, closeByDocument: false,
+								template : 'deleteConfirmation',
+								controller: ['$scope', function($scope) {
+									$scope.showDocumentHistory = identifier;
+
+									$scope.updateActivity = function(){
+										updateActivity({ action : 'approve' }, true);
+										$scope.closeConfirmation();
+									}
+									$scope.closeConfirmation = function(){
+										ngDialog.close();
+									}
+								}]
+							});
+						}
+
 
 					}
 				]
