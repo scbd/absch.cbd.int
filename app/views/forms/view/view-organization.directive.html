@@ -37,7 +37,7 @@
 		<div ng-show="document.emails">
 			<label>Emails</label>
 			<div  class="km-value">
-				<ul>
+				<ul class="list">
 					<li ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a></li>
 				</ul>
 			</div>
@@ -64,7 +64,7 @@
 			<div ng-show="document.thematicAreas">
 				<label>CBD Thematic areas</label>
 				<div  class="km-value">
-					<ul km-terms ng-model="document.thematicAreas">
+					<ul class="list" km-terms ng-model="document.thematicAreas">
 						<li ng-repeat="term in terms">{{term.name}}</li>
 					</ul>
 				</div>

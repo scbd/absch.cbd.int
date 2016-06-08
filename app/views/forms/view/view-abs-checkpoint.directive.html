@@ -37,7 +37,7 @@
 			<div ng-show="document.jurisdiction">
 				<label>Area of Jurisdiction</label>
 				<div class="km-value">
-					<ul>
+					<ul class="list">
 						<li>{{document.jurisdiction|term}}
 							<span ng-if="isSubNational() ||isCommunity() || isOthers()">({{document.jurisdictionName | lstring:locale}})</span>
 						</li>

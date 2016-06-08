@@ -24,7 +24,7 @@
 		<div ng-show="document.geographicScope && document.geographicScope.regionsOrCountries">
 			<label>Geographical or political/economic group(s) and/or country(ies)</label>
 			<div class="km-value">
-                <ul  ng-show="document.geographicScope.regionsOrCountries">
+                <ul  class="list" ng-show="document.geographicScope.regionsOrCountries">
                     <li ng-repeat="term in document.geographicScope.regionsOrCountries">{{term | term:locale}} </li>
                 </ul>
             </div>
@@ -118,7 +118,7 @@
 		<div ng-show="document.targetGroups">
 			<label>Target group(s)/beneficiaries</label>
 			<div class="km-value">
-            <ul>
+            <ul class="list">
 				<li ng-repeat="term in document.targetGroups">{{term | term:locale}}</li>
 			</ul>
             </div>
@@ -127,7 +127,7 @@
 		<div ng-show="document.categories">
 			<label>Category(ies) of capacity-building activities</label>
 			<div class="km-value">
-            <ul>
+            <ul class="list">
 				<li ng-repeat="term in document.categories">{{term | term:locale}}</li>
 			</ul>
             </div>
@@ -138,7 +138,7 @@
 		<div ng-show="document.fundingSourceTypes">
 			<label>Type(s) of funding source</label>
 			<div class="km-value">
-            <ul>
+            <ul class="list">
 				<li ng-repeat="term in document.fundingSourceTypes">{{term | term:locale}}</li>
 			</ul>
             </div>
@@ -192,7 +192,7 @@
 
 			<label>Key areas and strategic measures for capacity-building and development</label>
 			<div class="km-value">
-            <ul>
+            <ul class="list">
 				<li ng-repeat="term in document.absKeyAreas">{{term | term:locale}}</li>
 			</ul>
             </div>
@@ -208,7 +208,7 @@
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website address or attached documents</label>
 				<div class="km-value" >
-					<ul>
+					<ul class="list">
 						<li ng-repeat="item in document.relevantDocuments">
 							<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>

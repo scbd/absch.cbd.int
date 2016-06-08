@@ -234,7 +234,7 @@
 			<div ng-if="document.usage">
 				<label>Type of use allowed by the permit or its equivalent</label>
 				<div class="km-value" ng-if="document.usage && !document.usageConfidential">
-					<ul>
+					<ul class="list">
 						<li ng-repeat="term in document.usage">{{term|term}}</li>
 					</ul>
 				</div>
