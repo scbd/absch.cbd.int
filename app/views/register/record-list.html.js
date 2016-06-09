@@ -114,7 +114,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                 //============================================================
                 $scope.askDelete = function (record) {
 
-                    if (roleService.isIAC() && !roleService.isAnyOtherRoleThenIAC()) {
+                    if (roleService.isIAC() && !roleService.isAnyOtherRoleThanIAC()) {
                         $scope.iacCantDelete = true;
                         $scope.cantDelete = false;
                         $scope.recordToDelete = "0";
@@ -363,18 +363,6 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     //$("#record" + document.identifier).toggle('explode',{},500);
                 });
 
-                $scope.updateWorkflowList = function (document, workflowInfo) {
-
-                    var currentDocument = _.first(_.filter($scope.records, function (doc) {
-                        return doc.identifier == document.header.identifier;
-                    }));
-
-                    if (currentDocument)
-                        currentDocument.isUpdating = true;
-
-                    $scope.refreshworkflowRecord(document, workflowInfo)
-                };
-
                 $scope.askDeleteWorkflowRequest = function (record) {
                     $scope.recordForDeleteWorkflowRequest = record;
                 };
@@ -522,8 +510,12 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         _.values(map).forEach(function (row) {
                            //waiting for workflow status from socketIO
                             if(wokflowActive && wokflowActive.identifier == row.identifier){
-                                row.workflowActivityStatus =  'pending';
-                                verifyWorkflowStatus(wokflowActive.workflowId, row)
+                                if(!row.workingDocumentLock){
+                                    row.workflowActivityStatus =  'pending';
+                                    verifyWorkflowStatus(wokflowActive.workflowId, row);
+                                }else{
+                                    localStorageService.remove('workflow-activity-status');
+                                }
                             }
 
                             $scope.records.push(row);
@@ -554,12 +546,21 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
 
                 $rootScope.$on('event:server-pushNotification', function(evt,data){
-                    if(data.type == 'workflowActivityStatus'){
+                    if((data.type == 'workflowActivityStatus' || data.type == 'userNotification') &&
+                      data.data && data.data.identifier){
                         var document = _.findWhere($scope.records, {identifier: data.data.identifier})
-                        if(document)
-                             document.workflowActivityStatus =  data.data.workflowActivity;
+                        if(document){
+                             
+                            $q.when(updateDocumentStatus(document))
+                            .then(function(){
+                                document.workflowActivityStatus =  data.data.workflowActivity;
+                            });
+                        }
+                        if(localStorageService.get('workflow-activity-status')){
+                            if(localStorageService.get('workflow-activity-status').identifier == data.data.identifier)
+                                localStorageService.remove('workflow-activity-status');            
+                        }                        
                         
-                        localStorageService.remove('workflow-activity-status');            
                     }
                 });
 
@@ -570,6 +571,30 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         var activity = _.first(workflow.activities)                        
                         if(activity && activity.completedBy)
                             localStorageService.remove('workflow-activity-status');
+
+                    });
+                }
+
+                function updateDocumentStatus(document){
+
+                    storage.documents.get(document.identifier, {'info': true })
+                    .then(function (data) {
+
+                        document.revision = data.data.revision;
+                        document.updatedBy = data.data.updatedBy;
+                        document.updatedOn = data.data.updatedOn;
+                        document.workingDocumentBody = data.data.workingDocumentBody;
+                        document.workingDocumentCreatedBy = data.data.workingDocumentCreatedBy;
+                        document.workingDocumentCreatedOn = data.data.workingDocumentCreatedOn;
+                        document.workingDocumentID = data.data.workingDocumentID;
+                        document.workingDocumentLock = data.data.workingDocumentLock;
+                        document.workingDocumentMetadata = data.data.workingDocumentMetadata;
+                        document.workingDocumentOwner = data.data.workingDocumentOwner;
+                        document.workingDocumentSize = data.data.workingDocumentSize;
+                        document.workingDocumentSummary = data.data.workingDocumentSummary;
+                        document.workingDocumentTitle = data.data.workingDocumentTitle;
+                        document.workingDocumentUpdatedBy = data.data.workingDocumentUpdatedBy;
+                        document.workingDocumentUpdatedOn = data.data.workingDocumentUpdatedOn;
 
                     });
                 }
