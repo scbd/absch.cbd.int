@@ -115,14 +115,14 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
 
 
                         var referenceRecordsQuery = {
-                            fields: 'title_t, createdDate_dt,schema_s,identifier_s,startDate_dt,endDate_s,url_ss',
+                            fields: 'title_t, updatedDate_dt,schema_s,identifier_s,startDate_dt,endDate_s,url_ss',
                             query: 'schema_s:(' + appConfigService.referenceSchemas.join(' ') + ' ' +
                                    appConfigService.scbdSchemas.join(' ')  + ')',
-                            sort       : 'startDate_dt asc, updatedDate_dt desc',
+                            sort       : 'sort1_dt desc, updatedDate_dt desc',
                             rows       : 100,
                             groupField : 'schema_s',
                             groupLimit : 5,
-                            groupSort  : 'startDate_dt desc, updatedDate_dt desc'
+                            groupSort  : 'sort1_dt desc, updatedDate_dt desc'
                         };
 
 
