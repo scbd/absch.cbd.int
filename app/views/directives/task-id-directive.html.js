@@ -1,6 +1,8 @@
 define(['app',
 	'../forms/view/record-loader.directive.html.js', 'toastr', , 'ngDialog',
-	'/app/views/directives/document-reference-history.html.js'], function (app) {
+	'/app/views/directives/document-reference-history.html.js',
+	'/app/services/local-storage-service.js'
+], function (app) {
 
 app.directive('taskId', function () {
         return {
@@ -13,8 +15,8 @@ app.directive('taskId', function () {
                 onActivityUpdate : '&', //used in case if the directive parent needs to be refreshed else the workflow details will be fetched.
                 showDetails: "="
             },
-            controller: [ "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element', 'toastr','$window', 'ngDialog', 
-					 function ($scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element, toastr, $window, ngDialog)
+            controller: ["$rootScope", "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication", "underscore",'$element', 'toastr','$window', 'ngDialog', 'localStorageService', 
+					 function ($rootScope, $scope, $timeout, $http, $route, IStorage, IWorkflows, authentication, _, $element, toastr, $window, ngDialog, localStorageService)
 					{
 						var rejectRecordModal = $element.find("#rejectModal");
 						//==================================================
@@ -69,18 +71,20 @@ app.directive('taskId', function () {
 									else{
 										msg = "Record rejected";
 									}
+									localStorageService.set('workflow-activity-status', {identifier:$scope.document.header.identifier});
 
-									var workflowInfo = {workflowId:$scope.workflowTaskId, activity:result}
+									$rootScope.$on('event:server-pushNotification', function(evt,data){
+										if(data.type == 'workflowActivityStatus' && data.data.workflowActivity == 'create-revision-from-draft'){
 
-									if(typeof $scope.onActivityUpdate == 'function'){
+											localStorageService.remove('workflow-activity-status');
+
+											var workflowInfo = {workflowId:$scope.workflowTaskId, activity:result}     
 											$scope.onActivityUpdate({document:$scope.document, workflowInfo:workflowInfo});
-											$scope.hideEverything=true;
-									}
-									else{
-										load();
-										$scope.isUpdating = false;
-									}
-									toastr.success(msg);
+											$scope.hideEverything=true;    
+											toastr.success(msg);        
+										}
+									});
+
 							}).catch(function(error) {
 								//alert(error);
 								 toastr.error('There was an error processing your request, please try again.');
