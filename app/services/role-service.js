@@ -39,7 +39,7 @@ define(['app', 'underscore', './app-config-service.js'], function (app, _) { 'us
 				return this.isUserInRole(appConfigService.getRoleName('User'));
 			}
 
-			this.isAnyOtherRoleThenIAC = function() {
+			this.isAnyOtherRoleThanIAC = function() {
 
 				return this.isAbsPublishingAuthority() ||
 					this.isAbsNationalAuthorizedUser() ||
@@ -49,7 +49,7 @@ define(['app', 'underscore', './app-config-service.js'], function (app, _) { 'us
 
 			}
 			this.hasAbsRoles = function() {
-				return this.isAbsAdministrator() || this.isAnyOtherRoleThenIAC();
+				return this.isAbsAdministrator() || this.isAnyOtherRoleThanIAC() || this.isIAC();
 			}
 		}
 
