@@ -577,7 +577,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                 function updateDocumentStatus(document){
 
-                    storage.documents.get(document.identifier, {'info': true })
+                  return storage.documents.get(document.identifier, {'info': true })
                     .then(function (data) {
 
                         document.revision = data.data.revision;
