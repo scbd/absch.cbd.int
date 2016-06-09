@@ -82,10 +82,10 @@
                             <div class="panel-body">
                                 <a ng-href="/database/{{schema}}/{{contact.documentId}}">{{contact.title_t}}</a>
                                 <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
-                                <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
+                                <ul ng-show="contact.telephones || contact.telephone_ss || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
                                     <!-- <i class="fa fa-phone-square"></i><i class="fa fa-phone-square"></i><i class="fa fa-fax"></i>
                                             <i class="fa fa-envelope-o"></i> -->
-                                    <li ng-show="contact.telephone_s"> {{contact.telephone_s}}</li>
+                                    <li ng-show="contact.telephone_ss" ng-repeat="item in contact.telephone_ss"> {{item}}</li>
                                     <li ng-show="contact.telephones" ng-repeat="item in contact.telephones"> {{item}}</li>
                                     <li ng-show="contact.fax_ss" ng-repeat="item in contact.fax_ss"> {{item}}</li>
                                 </ul>
