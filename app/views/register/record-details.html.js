@@ -51,9 +51,6 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
                 if (workflowInfo.workflowId) {
                     IWorkflows.get(workflowInfo.workflowId).then(function (data) {
                         if (data.state == 'completed') {
-                            // var currentDocument = _.first(_.filter($scope.records, function(doc) {
-                            //     return doc.documentId == document.header.documentId;
-                            // }));
                             $scope.showRequestHistory = false;
                         } else {
                             $timeout(function () {
