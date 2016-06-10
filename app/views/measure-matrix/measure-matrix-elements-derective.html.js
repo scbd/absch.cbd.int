@@ -138,12 +138,19 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             if ($scope.binding) {
                                  if($scope.binding.geneticResource) {
                                     if($scope.binding.geneticResource.answer){
-                                        var grCoverId = addCustomElement('Covers all genetic resources', 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', 1);
+                                        var grCoverId = addCustomElement('Covers all genetic resources', '24E809DA-20F4-4457-9A8A-87C08DF81E8A', 1);
                                         var geneticResource = $scope.binding.geneticResource;
-                                        oNewSections[grCoverId] = geneticResource.section;
+                                        oNewSections[grCoverId] = geneticResource.section||{};
                                         oNewIdentifiers[grCoverId] = true;
-                                        oNewIdentifiers['CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'] = true;
+                                        oNewIdentifiers['24E809DA-20F4-4457-9A8A-87C08DF81E8A'] = true;
                                     }
+                                }
+                                if(!$scope.binding.geneticResource || $scope.binding.geneticResource.answer){
+                                    //delete  from list
+                                   var geneticResource = _.findWhere($scope.terms, {identifier : 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'});
+                                   if(geneticResource){
+                                      $scope.terms.splice(_.indexOf($scope.terms, geneticResource), 1);
+                                   }
                                 }
                                 if ($.isArray($scope.binding.relevantElements)){
                                     for (var i = 0; i < $scope.binding.relevantElements.length; ++i) {
