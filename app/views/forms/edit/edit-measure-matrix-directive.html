@@ -88,13 +88,13 @@
         </div>
         <div block-region activate="isElementsLoading"></div>
         <div ng-show="isElementsLoading===false">
-            <div style="list-style:none;padding:0;margin:0;" id="24E809DA-20F4-4457-9A8A-87C08DF81E8A">
+            <div style="padding:0;margin:0;" id="24E809DA-20F4-4457-9A8A-87C08DF81E8A" class=" measureChecked">
                 <div>
                     <table style="width:100%" cellspacing="0" cellpadding="0">
                         <tbody>
-                            <tr class="whiteBG btop" id="qt_{{term.identifier}}">
+                            <tr class=" btop paddingleft0" id="qt_{{term.identifier}}">
                                 <td style="text-align:left;vertical-align:middle;width:125px">
-                                    <div class="btn-group ng-scope matrix-btn">
+                                    <div class="btn-group matrix-btn bg-main">
                                         <label class="btn ">
                                             <input type="radio" ng-model="binding.geneticResource.answer" name="rd_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" ng-value="true" ng-change="binding.geneticResource.section=undefined;binding.geneticResource.elements=undefined;binding.geneticResource.identifier='CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'"/> Yes
                                         </label>
@@ -121,7 +121,7 @@
                                                                         Please enter all references to the relevant articles related to genetic resource.
                                                                     </span>
                                     </label>
-                                    <div ng-show="binding.geneticResource.answer" km-textbox-ml="" ng-model="binding.geneticResource.section" locales="locales" ng-required="binding.geneticResource.answer" placeholder="example: Ex. Article 14.2 or Section II" ngChange="updateScopeGR()">
+                                    <div ng-show="binding.geneticResource.answer" km-textbox-ml="" ng-model="binding.geneticResource.section" locales="locales" ng-required="binding.geneticResource.answer" placeholder="Ex. Article 14.2 or Section I" ngChange="updateScopeGR()">
                                     </div>
                                 </td>
                             </tr>
@@ -169,7 +169,7 @@
                                                         </span>
                                                     </td>
                                                     <td class="text-right" style="width:253px;text-align:right;vertical-align:middle">
-                                                        <div class="pull-right" km-textbox-ml="" ng-model="element.section" locales="locales" ng-required="true" placeholder="example: Ex. Article 14.2 or Section II">
+                                                        <div class="pull-right" km-textbox-ml="" ng-model="element.section" locales="locales" ng-required="true" placeholder="Ex. Article 14.2 or Section I">
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -185,9 +185,9 @@
                 <div>
                     <table style="width:100%" cellspacing="0" cellpadding="0">
                         <tbody>
-                            <tr class="whiteBG btop" id="qt_{{term.identifier}}">
+                            <tr class=" btop paddingleft0" id="qt_{{term.identifier}}">
                                 <td style="text-align:left;vertical-align:middle;width:125px">
-                                    <div class="btn-group matrix-btn ng-scope">
+                                    <div class="btn-group matrix-btn bg-main">
                                         <label class="btn">
                                             <input type="radio" ng-model="identifiers['B8A150E054154AD3AD97856ABD485E90']" name="rd_B8A150E054154AD3AD97856ABD485E90" ng-value="true" ng-change="sections['B8A150E054154AD3AD97856ABD485E90']=undefined"> Yes
                                         </label>
@@ -212,15 +212,15 @@
                                                                 Please enter all references to the relevant articles related to traditional knowledge associated with genetic resources.
                                                             </span>
                                     </label>
-                                    <div ng-show="identifiers['B8A150E054154AD3AD97856ABD485E90']" km-textbox-ml="" ng-model="sections['B8A150E054154AD3AD97856ABD485E90']" locales="locales" ng-required="identifiers['B8A150E054154AD3AD97856ABD485E90']" placeholder="example: Ex. Article 14.2 or Section II">
+                                    <div ng-show="identifiers['B8A150E054154AD3AD97856ABD485E90']" km-textbox-ml="" ng-model="sections['B8A150E054154AD3AD97856ABD485E90']" locales="locales" ng-required="identifiers['B8A150E054154AD3AD97856ABD485E90']" placeholder="Ex. Article 14.2 or Section I">
                                     </div>
                                 </td>
                             </tr>
 
-                            <tr class="whiteBG btop" id="qt_{{term.identifier}}">
+                            <tr class=" btop paddingleft0" id="qt_{{term.identifier}}">
 
                                 <td style="text-align:left;vertical-align:middle;width:125px">
-                                    <div class="btn-group matrix-btn ng-scope">
+                                    <div class="btn-group matrix-btn bg-main">
                                         <label class="btn">
                                             <input type="radio" ng-model="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" name="rd_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" ng-value="true" value="false" ng-change="sections['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']=undefined"> Yes
                                         </label>
@@ -246,13 +246,13 @@
                                                                 Please enter all references to the relevant articles related to provisions on temporal scope.
                                             </span>
                                     </label>
-                                    <div ng-show="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" km-textbox-ml="" ng-model="sections['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" locales="locales" ng-required="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" placeholder="example: Ex. Article 14.2 or Section II">
+                                    <div ng-show="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" km-textbox-ml="" ng-model="sections['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" locales="locales" ng-required="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" placeholder="Ex. Article 14.2 or Section I">
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="whiteBG btop" id="qt_{{term.identifier}}">
+                            <tr class=" btop paddingleft0" id="qt_{{term.identifier}}">
                                 <td style="text-align:left;vertical-align:middle;width:125px">
-                                    <div class="btn-group matrix-btn ng-scope">
+                                    <div class="btn-group matrix-btn bg-main">
                                         <label class="btn">
                                             <input type="radio" ng-model="identifiers['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']" ng-change="initializeOther({identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A'})" name="rd_scopeOthers"   ng-value="true" value="true"> Yes
                                         </label>
@@ -338,7 +338,7 @@
                           </span>
                     </label>
                         <div ng-show="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0 && ((identifiers[term.identifier] && (term.narrowerTerms.length||0) == 0) || (scopeOfMeasureTerm == term.identifier && identifiers[term.identifier]==false))" km-textbox-ml
-                            ng-model="sections[term.identifier]" required locales="locales" ng-required="identifiers[term.identifier]" placeholder="example: Ex. Article 14.2 or Section II"></div>
+                            ng-model="sections[term.identifier]" required locales="locales" ng-required="identifiers[term.identifier]" placeholder="Ex. Article 14.2 or Section I"></div>
                     </td>
                     <!--ng-class="{'required':!sections[term.identifier]}"-->
                 </tr>
@@ -379,7 +379,7 @@
                 </td>
                 <td >
                     <div class="pull-right" style="max-width:250px;width:250px" km-textbox-ml="" ng-model="element.section" locales="locales" 
-                    ng-required="true" placeholder="example: Ex. Article 14.2 or Section II" ng-change="appendEmptyOther(otherElements)">
+                    ng-required="true" placeholder="Ex. Article 14.2 or Section I" ng-change="appendEmptyOther(otherElements)">
                     </div>
                 </td>
             </tr>
