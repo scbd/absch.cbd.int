@@ -1,4 +1,4 @@
-define(['app', 'underscore'
+define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
 ], function (app, _) {
 
 
@@ -15,10 +15,10 @@ define(['app', 'underscore'
                 termsFn: "&terms",
                 required: "@",
                 layout: "@",
-                document: "=document",
-                api: '=?'
+                document: "=document"
             },
             link: function ($scope, $element, $attr, ngModelController) {
+                $scope.isElementsLoading = true;
                 $scope.identifiers = null;
                 $scope.sections = null;
                 $scope.otherCustomValues = null;
@@ -48,8 +48,8 @@ define(['app', 'underscore'
                     $element.addClass("list-unstyled");
 
             },
-            controller: ["$scope", "$q", "Thesaurus", "Enumerable", '$element', '$http', 
-            function ($scope, $q, thesaurus, Enumerable, $element, $http) {
+            controller: ["$scope", "$q", "Thesaurus", "Enumerable", '$element', '$http', '$timeout',
+            function ($scope, $q, thesaurus, Enumerable, $element, $http, $timeout) {
 
                 var readOnlyElements = [
                     "24E809DA-20F4-4457-9A8A-87C08DF81E8A", "54281688-DE5F-4465-953C-76A8CBE61DED", "4E2974DF-216E-46C8-8797-8E3A33D6A048",
@@ -87,10 +87,6 @@ define(['app', 'underscore'
                 $scope.scopeOfMeasureTerm = "CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F";
                 $scope.scopeElement = {};
                 var initialized = false;
-
-                $scope.api = {
-                    updateTerms: updateTerms
-                }
 
 
                 $scope.options = {
@@ -448,12 +444,14 @@ define(['app', 'underscore'
                 };
 
                 $scope.appendEmptyOther = function (otherElements, skipSave) {
-                    var lastItem = otherElements[otherElements.length - 1];
-                    if (!angular.equals(lastItem, {}) && lastItem.name != "")
-                        otherElements.push({});
+                    $timeout(function(){
+                        var lastItem = otherElements[otherElements.length - 1];
+                        if (!angular.equals(lastItem, {}) && lastItem.name != "")
+                            otherElements.push({});
 
-                    if(!skipSave)
-                    $scope.save();
+                        if(!skipSave)
+                        $scope.save();
+                    }, 200);
                 }
 
                 $scope.initializeOther = function (otherElement) {
@@ -607,24 +605,23 @@ define(['app', 'underscore'
                     });
                 }
 
-                function loadMe(){
+                function loadElementsSource(){
+                    $scope.isElementsLoading = true;
                     var queries = [$scope.options.absMeasures(), $scope.options.other()]
                     $q.all(queries)
                         .then(function(data) {
                             var elementMeasures = data[0];
                             var other = data[1].data;
                             elementMeasures = appendOthers(elementMeasures, other);
-                            updateTerms(elementMeasures);
+                            $scope.terms = elementMeasures;
 
+                        })
+                        .finally(function(){
+                            $scope.isElementsLoading = false;
                         });
                 }
 
-                function updateTerms(newElements) {
-                    $scope.terms = newElements;
-                    // $scope.onTerms(newElements);
-                }
-
-                loadMe();
+                loadElementsSource();
             }]
         }
     });
