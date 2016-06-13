@@ -101,19 +101,17 @@ performing certain types of tasks and/or implementing specific approaches. </div
 								</div>
 							</div>
 						</div>
-
+						<!--//Authors or Authoring organization is madatory Error message -->
+						<label for="author_org" style="width:0px;height:0px;display:inline">
+							<span style="display:none">
+								Please enter author(s) details or select authoring organizations
+							</span>
+						</label>
+									
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="organizations" caption="Authoring organisation(s) ">
-
-                                    <!-- <div document-selector ng-model="document.organizationsRef"
-                                                                        question="organizationsRef"
-                                                                        schema="contact"
-                                                                        government="document.government"
-                                                                        filter="true"
-                                                                        ></div> -->
-								<field-embed-contact multiple ng-model="document.organizations" organization-only locales="document.header.languages" caption="Add organizations »">
-
+									<field-embed-contact multiple ng-model="document.organizations" organization-only locales="document.header.languages" caption="Add organizations »">
 								</div>
 							</div>
 						</div>
