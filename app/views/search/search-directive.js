@@ -23,6 +23,9 @@ define(['app', 'underscore', '/app/js/common.js',
              'appConfigService', '$routeParams', '$location',
             function($scope, $q, realm, searchService, commonjs, localStorageService,
                 $http, thesaurus, appConfigService, $routeParams, $location) {
+    
+                    var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
+                    var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
 
                     var queryCanceler = null;
                     $scope.rawDocs = [];
@@ -261,12 +264,15 @@ define(['app', 'underscore', '/app/js/common.js',
                             console.log('trying to abort pending request...');
                             queryCanceler.resolve(true);
                         }
-
+                        var fields = base_fields + en_fields + 
+                        ', implementingAgencies_EN_txt, executingAgencies_EN_txt, collaboratingPartners_EN_txt, authors_t, organizations_EN_txt, publicationYear_i';
+                        
                         var q = queryFilterBuilder("reference");
 
                         queryCanceler = $q.defer();
 
                         var listQuery = {
+                            fields      : fields,
                             query       : q,
                             sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : undefined,
                             currentPage : referenceCurrentPage,
