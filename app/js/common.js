@@ -114,7 +114,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                 }
                 //==================================================================================
                 this.hexToInteger = function(hex) {
-                    if (hex && hex.length == 24)
+                    if (hex && hex.length >= 24)
                         return parseInt(hex.substr(15, 9), 16);
 
                     return hex;
