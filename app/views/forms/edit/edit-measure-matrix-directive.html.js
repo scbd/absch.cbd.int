@@ -405,7 +405,14 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
 
                 $scope.isOther = function (term) {
                     // console.log(term.broaderTerms);
-                    return term.broaderTerms && _.contains(_.pluck(term.broaderTerms, 'identifier'), 'BE944E70-2098-45AC-891B-D5E94AFECB99');
+                    // if(term.identifier == 'BE944E70-2098-45AC-891B-D5E94AFECB99'){
+                        
+                        var result =  term.broaderTerms && _.contains(_.pluck(term.broaderTerms, 'identifier'), 'BE944E70-2098-45AC-891B-D5E94AFECB99');
+                        if(result && $scope.identifiers && $scope.identifiers['BE944E70-2098-45AC-891B-D5E94AFECB99']!=undefined)
+                            return $scope.identifiers['BE944E70-2098-45AC-891B-D5E94AFECB99'];
+
+                        return result;
+                    // }
                 }
 
                 $scope.addGRRecord = function (geneticResource, grTypesApi, grAreasApi) {
