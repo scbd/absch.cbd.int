@@ -299,7 +299,8 @@
         </div>
     </div>
     <script type="text/ng-template" id="/app/views/forms/edit/edit-measure.directive/abs/inner">
-        <div ng-class="{measureChecked : identifiers[term.identifier]}" style="" ng:if="!isStaticIdentifier(term.identifier) && (!term.broaderTerms || isParentSelected(term.identifier, term.level))">
+        <div ng-class="{measureChecked : identifiers[term.identifier]}" style="" 
+        ng:if="!isStaticIdentifier(term.identifier) && (!term.broaderTerms || isParentSelected(term.identifier, term.level) || isOther(term))">
             <label for="col_{{term.identifier}}" style="width:0px;height:0px;display:inline">
             <span style="display:none">
                           {{term.title||term.name | lstring:locale}} Please indicate which elements are covered.
