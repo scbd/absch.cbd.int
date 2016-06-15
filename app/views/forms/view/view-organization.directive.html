@@ -56,8 +56,8 @@
 
 			<div ng-show="document.organizationType">
 				<label>Type of organization</label>
-				<div class="km-value" km-terms ng-model="document.organizationType">
-					<span ng-repeat="term in terms">{{term.name}}</span>
+				<div class="km-value">
+					{{document.organizationType | term}}
 				</div>
 			</div>
 
