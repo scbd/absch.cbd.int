@@ -181,8 +181,8 @@
                                                 <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
                                                 <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
 
-                                                <ul ng-show="contact.telephones || contact.telephone_s || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
-                                                    <li ng-show="contact.telephone_s"><i class="fa fa-phone-square" /> {{contact.telephone_s}}</li>
+                                                <ul ng-show="contact.telephones || contact.telephone_ss || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">
+                                                    <li ng-show="contact.telephone_ss" ng-repeat="item in contact.telephone_ss"><i class="fa fa-phone-square" /> {{item}}</li>
                                                     <li ng-repeat="item in contact.telephones"><i class="fa fa-phone-square" /> {{item}}</li>
                                                     <li ng-repeat="item in contact.fax_ss"><i class="fa fa-fax" /> {{item}}</li>
                                                 </ul>
