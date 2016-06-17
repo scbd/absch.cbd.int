@@ -19,13 +19,13 @@
 		<div ng-show="document.startDate_dt">
 			<label>Start date</label>
 			<span class="km-value">
-				{{document.startDate_dt | formatDate}}
+				{{document.startDate_dt | moment:'utc' | formatDate}}
 			</span>
 		</div>
 		<div ng-show="document.endDate_dt">
 			<label>End date</label>
 			<span class="km-value">
-				{{document.endDate_dt | formatDate}}
+				{{document.endDate_dt | moment:'utc' | formatDate}}
 			</span>
 		</div>
 
