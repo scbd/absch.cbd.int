@@ -3,11 +3,11 @@ define(['app',
 '/app/views/directives/search-filter-dates.partial.html.js',
 '/app/views/search/search-results/result-default.js',
 '/app/services/search-service.js',
-'/app/services/app-config-service.js'
+'/app/services/app-config-service.js', 'ngDialog'
 ], function (app, commonjs) { // jshint ignore:line
 
-app.directive("documentSelector", ["$http",'$rootScope', "$filter", "underscore", "$q", "searchService", "appConfigService", "IStorage",
-function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, IStorage) {
+app.directive("documentSelector", ["$http",'$rootScope', "$filter", "underscore", "$q", "searchService", "appConfigService", "IStorage", 'ngDialog',
+function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, IStorage, ngDialog) {
 
 	return {
 		restrict   : "EA",
@@ -67,8 +67,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 
                 $scope.syncDocuments();
 
-
-				$('#'+$scope.question).modal('hide');
+                ngDialog.close();
 				$scope.areVisible = true;
 			};
 
@@ -118,8 +117,6 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                         $scope.model = undefined;
                 }
 
-
-				$('#'+$scope.question).modal('hide');
 				$scope.areVisible = true;
 			};
 
@@ -295,7 +292,11 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 
                 });
 
-                $('#'+$scope.question).modal('show');
+                ngDialog.open({
+                    template: 'documentSelectionModal',
+                    closeByDocument: false,
+                    scope: $scope
+                });
 
 			};
 
@@ -317,6 +318,10 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 				});
 			}
 
+            $scope.closeDialog = function () {
+                $scope.syncDocuments();
+                ngDialog.close();
+            };
 			function removeRevisonNumber(identifier){
                 
                 if(identifier.indexOf('@')>=0)
