@@ -1,4 +1,4 @@
-define(['app',
+define(['app','ngSmoothScroll',
 	'scbd-angularjs-filters',
 	'./view-history-directive.html.js',
     '/app/js/common.js',
