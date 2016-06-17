@@ -115,7 +115,7 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
 
 
                         var referenceRecordsQuery = {
-                            fields: 'title_t, updatedDate_dt,schema_s,identifier_s,startDate_dt,endDate_s,url_ss',
+                            fields: 'title_t, updatedDate_dt,schema_s,identifier_s,startDate_dt,endDate_s,url_ss, uniqueIdentifier_s',
                             query: 'schema_s:(' + appConfigService.referenceSchemas.join(' ') + ' ' +
                                    appConfigService.scbdSchemas.join(' ')  + ')',
                             sort       : 'sort1_dt desc, updatedDate_dt desc',
