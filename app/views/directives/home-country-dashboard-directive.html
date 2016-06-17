@@ -312,7 +312,10 @@
             <div ng-repeat="doc in referenceRecords.meeting.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
                 <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;" >
-                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.startDate_dt | moment:'utc' | formatDate}}</span>
+                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> 
+                        {{doc.startDate_dt | moment:'utc' | formatDate}} - {{doc.endDate_dt | moment:'utc' | formatDate}} 
+                        ({{doc.eventCity_s}}, {{doc.eventCountry_EN_t}})
+                    </span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
             </div>
