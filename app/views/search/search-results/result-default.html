@@ -58,7 +58,7 @@
                     <li ng-if="doc.rec_countryName && type != referenceRecords" class="hidden-xs">
                         <span>{{doc.rec_countryName}}</span>
                     </li>
-                    <li ng-if="doc.uniqueIdentifier_s && type != referenceRecords">
+                    <li ng-if="doc.uniqueIdentifier_s">
                         <span>{{doc.uniqueIdentifier_s}}</span>
                     </li>
                     <li class="hidden-xs" ng-if="doc.rec_meta1 && doc.schema_s !=='database' && type != referenceRecords" id="meta1">
@@ -73,8 +73,13 @@
                         <span ng-repeat="meta in doc.rec_meta3" ng-class="{'color-red':meta==='Revoked'}">{{meta}}{{$last ? '':', '}}</span>
                     </li>
 
-                    <li>
+                    <li ng-if="doc.schema_s !=='meeting'">
                         <span class="last-span">{{doc.rec_date | formatDate}}</span>
+                    </li>
+                     <li ng-if="doc.schema_s =='meeting'">
+                        <span class="last-span"> 
+                            {{doc.startDate_dt | moment:'utc' | formatDate}} - {{doc.endDate_dt | moment:'utc' | formatDate}} 
+                            | {{doc.eventCity_s}} | {{doc.eventCountry_EN_t}}</span>
                     </li>
                 </ul>
             </div>

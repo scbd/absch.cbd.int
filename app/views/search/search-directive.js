@@ -312,14 +312,15 @@ define(['app', 'underscore', '/app/js/common.js',
                             console.log('trying to abort pending request...');
                             queryCanceler.resolve(true);
                         }
-
+                        var fields = base_fields + en_fields + ', startDate_dt,endDate_dt,url_ss, uniqueIdentifier_s, eventCity_s, eventCountry_EN_t';
                         var q = queryFilterBuilder("scbd");
 
                         queryCanceler = $q.defer();
 
                         var listQuery = {
                             query       : q,
-                            sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : undefined,
+                            fields      : fields,
+                            sort        : _.isEmpty($scope.setFilters) ? 'sort1_dt desc, updatedDate_dt desc' : undefined,
                             currentPage : scbdCurrentPage,
                             rowsPerPage : $scope.itemsPerPage
                         };

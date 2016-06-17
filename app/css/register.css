@@ -599,3 +599,15 @@ label{
 .modal-open .form-control{
 	opacity: 0.9;
 }
+
+
+#documentStatus .btn-group.open{
+	width: 100%;
+}
+
+.ngdialog-content{
+	width:70% !important;
+}
+.ngdialog.ngdialog-theme-default{
+	padding-top: 10px;
+}
