@@ -1,5 +1,5 @@
 define(['app', '/app/js/common.js', 'scbd-angularjs-services', 'scbd-angularjs-controls',
-'/app/views/forms/view/view-contact-reference.directive.js',
+'/app/views/forms/view/view-contact-reference.directive.js', 'ngDialog',
 '/app/views/forms/view/view-organization-reference.directive.js'],
 function(app) {
 
@@ -18,24 +18,11 @@ function(app) {
             },
             link: function($scope, $element, $attrs) {
 
-                var modalEdit = $element.find("#editContact");
-
                 $scope.multiple = $attrs.multiple !== undefined;
 
-                $scope.showContacts = function(index) {
-                    if (!modalEdit.is(":visible")) {
-                        modalEdit.modal("show");
-                        $scope.loadExisting();
-                        $scope.showExisting=true;
-                    }
-                    if (modalEdit.is(":visible")) {
-                        modalEdit.modal("hide");
-                    }
-                    $scope.errorMessage = undefined;
-                }
             },
-            controller: ["$scope", "$http", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q", "IStorage", "commonjs",
-                function($scope, $http, $window, $filter, _, guid, editFormUtility, $q, storage, commonjs) {
+            controller: ["$scope", "$http", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q", "IStorage", "commonjs", 'ngDialog',
+                function($scope, $http, $window, $filter, _, guid, editFormUtility, $q, storage, commonjs, ngDialog) {
                     var workingContacts = null;
 
                     $scope.options  = {
@@ -68,6 +55,16 @@ function(app) {
                         workingContacts = null;
                     });
 
+                    $scope.showContacts = function(index) {                   
+                        $scope.loadExisting();
+                        $scope.showExisting=true;
+                        $scope.errorMessage = undefined;
+                        ngDialog.open({
+                            template: 'organizationModal',
+                            closeByDocument: false,
+                            scope: $scope
+                        });
+                    }
                     //============================================================
                     //
                     //
@@ -112,7 +109,7 @@ function(app) {
                     //============================================================
                     $scope.closeContact = function() {
 
-                        $scope.showContacts();
+                        closeDialog();
                         workingContacts = undefined;
                         //clear the dropdown list display text which remains after the dialog is closed.
                         $scope.$broadcast('clearSelectSelection');
@@ -165,7 +162,7 @@ function(app) {
                         } else {
                             $scope.model = {identifier:contact.header.identifier + '@' + (contact.revision||'1')};
                         }
-                        $scope.showContacts();
+                        closeDialog()
                         workingContacts = undefined;
                         //clear the dropdown list display text which remains after the dialog is closed.
                         $scope.$broadcast('clearSelectSelection');
@@ -273,6 +270,11 @@ function(app) {
                         .finally(function(){
                             $scope.loading = false;
                         });;
+                    };
+
+                    function closeDialog() {
+                        ngDialog.close();
+                        $scope.errorMessage = undefined;
                     };
 
                     function saveContactDraft(contact){

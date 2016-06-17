@@ -142,6 +142,7 @@ define(['app', 'ngDialog',
 							$scope.loading = false;
 							ngDialog.openConfirm({
 								template: 'cancelWorkflowRequestModalTemplate',
+                            	closeByDocument: false,
 								scope: $scope
 							});
 						};
