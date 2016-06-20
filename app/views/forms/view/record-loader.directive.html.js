@@ -179,13 +179,7 @@ define(['app','ngSmoothScroll',
 						var qDocument;
 						var qDocumentInfo;
 
-						var queryParameters = {
-							'query': 'uniqueIdentifier_s:*-' + identifier,
-							'rowsPerPage': 1,
-							fields: '_revision_i'
-						};
-						var qVersionInfo = searchOperation = searchService.list(queryParameters, null);
-
+						
 
 						if (version == 'draft') {
 							qDocument = storage.drafts.get(identifier).then(function (result) { return result.data || result });
@@ -201,28 +195,33 @@ define(['app','ngSmoothScroll',
 
 						}
 						$scope.loading = true;
-						$q.all([qDocument, qDocumentInfo, qVersionInfo]).then(function (results) {
+						$q.all([qDocument, qDocumentInfo]).then(function (results) {
 
 							$scope.internalDocument = results[0];
 							$scope.internalDocumentInfo = results[1];
 							$scope.internalDocument.info = results[1];
 
-							console.log(results[2].data.response.docs[0]);
-							if (results[2].data.response.docs.length > 0) {
-								$scope.documentVersionCount = results[2].data.response.docs[0]._revision_i
-							}
-							else
-								$scope.documentVersionCount = $scope.internalDocumentInfo.revision || $scope.internalDocumentInfo.Count;
+							// console.log(results[2].data.response.docs[0]);
+							return $q.when(getDocumentVersion($scope.internalDocumentInfo.identifier))
+									.then(function(verResult){
+										
+										if (verResult.data.response.docs.length > 0) {
+											$scope.documentVersionCount = verResult.data.response.docs[0]._revision_i
+										}
+										else
+											$scope.documentVersionCount = $scope.internalDocumentInfo.revision || $scope.internalDocumentInfo.Count;
 
-							if (version && $scope.internalDocumentInfo.revision != version) {
-								$scope.internalDocumentInfo.revision = version;
-							}
-							if (version)
-								$scope.revisionNo = version
-							else
-								$scope.revisionNo = $scope.documentVersionCount
+										if (version && $scope.internalDocumentInfo.revision != version) {
+											$scope.internalDocumentInfo.revision = version;
+										}
+										if (version)
+											$scope.revisionNo = version
+										else
+											$scope.revisionNo = $scope.documentVersionCount
 
-							loadViewDirective($scope.internalDocument.header.schema);
+										loadViewDirective($scope.internalDocument.header.schema);
+									
+									});
 
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
@@ -235,6 +234,15 @@ define(['app','ngSmoothScroll',
 
 					};
 
+					function getDocumentVersion(identifier){
+
+						var queryParameters = {
+							'query': 'identifier_s:' + identifier,
+							'rowsPerPage': 1,
+							fields: '_revision_i'
+						};
+						return searchOperation = searchService.list(queryParameters, null);
+					}
 					//==================================
 					//
 					//==================================
