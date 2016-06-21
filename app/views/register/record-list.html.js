@@ -212,7 +212,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                 $scope.isMyRecord = function (entity) {
                     return entity && entity.workingDocumentLock &&
-                        entity.workingDocumentLock.lockedBy.userId == $rootScope.user.userID;
+                        entity.workingDocumentLock.lockedBy.userID == $rootScope.user.userID;
                 };
 
                 $scope.isPublishingAuthority = function (entity) {

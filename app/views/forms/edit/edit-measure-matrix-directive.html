@@ -139,9 +139,11 @@
                                         <table class="table" style="padding:0;margin:0 0 15px 0;width:auto!important;">
                                             <tr>
                                                 <td>
-                                                    <div km-select multiple name="grTypes" ng-model="geneticResource.types" items="options.grTypes()" placeholder="Please select genetic resource types" api="grTypesApi"></div>
+                                                    <div km-select multiple name="grTypes" ng-model="geneticResource.types" items="options.grTypes()" 
+                                                    placeholder="Please select genetic resource types" api="grTypesApi" ></div><!--show-description="true"-->
                                                     <span class="bold" style="margin: 0 10px;"> found in </span>
-                                                    <div km-select multiple name="grArea" ng-model="geneticResource.areas" items="options.grAreas()" placeholder="Please select areas of access" api="grAreasApi"></div>
+                                                    <div km-select multiple name="grArea" ng-model="geneticResource.areas" items="options.grAreas()" 
+                                                    placeholder="Please select areas of access" api="grAreasApi"></div>
 
                                                 </td>
                                                 <td>
