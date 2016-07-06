@@ -69,9 +69,9 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 					return;
 
 				$scope.emailList = [];
-				if(document.permit){
+				if(document.absIRCCs){
 
-						var permits = _.map(document.permit, function(document){
+						var permits = _.map(document.absIRCCs, function(document){
 							return $http.get('/api/v2013/documents/' +  document.identifier)
 						});
 						$q.all(permits)
@@ -81,12 +81,12 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 							});
 						});
 				}
-				else if(document.responsibleAuthorities){
-					$scope.emailList.push(document.personeToWhomGranted);
+				else if(document.entityWhoGrantedPIC){
+					$scope.emailList.push(document.entityToWhomGrantedPIC);
 				}
-				else if(document.originCountries){
+				else if(document.sourceCountries){
 
-					var country = _.map(document.originCountries, function(country){ return country.identifier });
+					var country = _.map(document.sourceCountries, function(country){ return country.identifier });
 					var query = "/api/v2013/index/select?fl=id,identifier_s&q=(realm_ss:" + realm.value.toLowerCase() +
 					"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:" + country.join('+OR government_s:') + "))&rows=50"
 
@@ -96,8 +96,8 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 						});
 					});
 				}
-				if(document.checkpoint){
-					var checkpoints = _.map(document.checkpoint, function(document){
+				if(document.absCheckpoints){
+					var checkpoints = _.map(document.absCheckpoints, function(document){
 						return $http.get('/api/v2013/documents/' +  document.identifier)
 					});
 					$q.all(checkpoints)

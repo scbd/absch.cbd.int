@@ -309,11 +309,11 @@
                                         <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='title_t';reverseCPC=!reverseCPC">title
                                             <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='title_t' && reverseCPC),'fa-caret-down':(sortCPC=='title_t' && !reverseCPC)}"></i>
                                         </div>
-                                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='originCountries_CEN_ss';reverseCPC=!reverseCPC">source country
-                                            <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='originCountries_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='originCountries_CEN_ss' && !reverseCPC)}"></i>
+                                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='sourceCountries_CEN_ss';reverseCPC=!reverseCPC">source country
+                                            <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='sourceCountries_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='sourceCountries_CEN_ss' && !reverseCPC)}"></i>
                                         </div>
-                                        <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPC='geneticRessourceUsers';reverseCPC=!reverseCPC">user
-                                            <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='geneticRessourceUsers' && reverseCPC),'fa-caret-down':(sortCPC=='geneticRessourceUsers' && !reverseCPC)}"></i>
+                                        <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPC='personsAtCheckpoint';reverseCPC=!reverseCPC">user
+                                            <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='personsAtCheckpoint' && reverseCPC),'fa-caret-down':(sortCPC=='personsAtCheckpoint' && !reverseCPC)}"></i>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPC='keywords_CEN_ss';reverseCPC=!reverseCPC">subject matter
                                             <i class="fa" ng-class="{'fa-caret-up':(sortCPC=='keywords_CEN_ss' && reverseCPC),'fa-caret-down':(sortCPC=='keywords_CEN_ss' && !reverseCPC)}"></i>
@@ -338,12 +338,12 @@
                                                     {{communique.title_t}}
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">
-                                                    <span ng-repeat="country in communique.originCountries_CEN_ss">{{parseJSON(country)|lstring}}
+                                                    <span ng-repeat="country in communique.sourceCountries_CEN_ss">{{parseJSON(country)|lstring}}
                                                         <br/>
                                                     </span>
                                                 </div>
                                                 <div class="col-lg-1 col-md-1 col-xs-1">
-                                                    <span ng-repeat="user in communique.geneticRessourceUsers">{{user.organization|lstring}}
+                                                    <span ng-repeat="user in communique.personsAtCheckpoint">{{user.organization|lstring}}
                                                         <br/>
                                                     </span>
                                                 </div>
@@ -351,8 +351,8 @@
                                                     <span ng-repeat="keyword in communique.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span>
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">
-                                                    <span ng-show="!communique.permit_ss">Not available</span>
-                                                    <span ng-repeat="permit in communique.permit_ss">
+                                                    <span ng-show="!communique.absIRCCs_ss">Not available</span>
+                                                    <span ng-repeat="permit in communique.absIRCCs_ss">
                                                         <a ng-href="/database/{{permit|uniqueID}}" target="_new">{{permit|uniqueID}}</a>
                                                         <br/>
                                                     </span>
@@ -386,8 +386,8 @@
                                         <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='title_t';reverseCPCReceived=!reverseCPCReceived">title
                                             <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='title_t' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='title_t' && !reverseCPCReceived)}"></i>
                                         </div>
-                                        <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPCReceived='geneticRessourceUsers';reverseCPCReceived=!reverseCPCReceived">user
-                                            <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='geneticRessourceUsers' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='geneticRessourceUsers' && !reverseCPCReceived)}"></i>
+                                        <div class="col-lg-1 col-md-1 col-xs-1 tableheader" ng-click="sortCPCReceived='personsAtCheckpoint';reverseCPCReceived=!reverseCPCReceived">user
+                                            <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='personsAtCheckpoint' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='personsAtCheckpoint' && !reverseCPCReceived)}"></i>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortCPCReceived='keywords_CEN_ss';reverseCPCReceived=!reverseCPCReceived">subject matter
                                             <i class="fa" ng-class="{'fa-caret-up':(sortCPCReceived=='keywords_CEN_ss' && reverseCPCReceived),'fa-caret-down':(sortCPCReceived=='keywords_CEN_ss' && !reverseCPCReceived)}"></i>
@@ -417,7 +417,7 @@
                                                     {{communique.title_t}}
                                                 </div>
                                                 <div class="col-lg-1 col-md-1 col-xs-1">
-                                                    <span ng-repeat="user in communique.geneticRessourceUsers">{{user.organization|lstring}}
+                                                    <span ng-repeat="user in communique.personsAtCheckpoint">{{user.organization|lstring}}
                                                         <br/>
                                                     </span>
                                                 </div>
@@ -425,8 +425,8 @@
                                                     <span ng-repeat="keyword in communique.keywords_CEN_ss">{{parseJSON(keyword)|lstring}}{{$last ? '':', '}}</span>
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">
-                                                    <span ng-show="!communique.permit_ss">Not available</span>
-                                                    <span ng-repeat="permit in communique.permit_ss">
+                                                    <span ng-show="!communique.absIRCCs_ss">Not available</span>
+                                                    <span ng-repeat="permit in communique.absIRCCs_ss">
                                                         <a ng-href="/database/{{permit|uniqueID}}" target="_new">{{permit|uniqueID}}</a>
                                                         <br/>
                                                     </span>
