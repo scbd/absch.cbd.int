@@ -77,30 +77,30 @@ define(['app', '/app/views/forms/edit/edit.js',
                     return undefined;
 
                 document = angular.fromJson(angular.toJson(document));
-                if (document.permitNotAvailable === true) {
-                    document.permit = undefined;
+                if (document.irccsNotAvailable === true) {
+                    document.absIRCCs = undefined;
                 } else {
-                    document.originCountries = undefined;
+                    document.sourceCountries = undefined;
                     document.responsibleAuthority = undefined;
                     document.subjectMatter = undefined;
-                    document.specimen = undefined;
-                    document.taxonomy = undefined;
+                    document.specimens = undefined;
+                    document.taxonomies = undefined;
                     document.gisFiles = undefined;
                     document.gisMapCenter = undefined;
                     document.keywords = undefined;
-                    document.referenceOfInformedConsent = undefined;
-                    document.referenceOfAgreedTerms = undefined;
-                    document.personeToWhomGranted = undefined;
-                    document.responsibleAuthorities = undefined;
+                    document.evidenceOfPIC = undefined;
+                    document.evidenceOfMAT = undefined;
+                    document.entityToWhomGrantedPIC = undefined;
+                    document.entityWhoGrantedPIC = undefined;
                 }
-                if (document.date == '')
-                    document.date = undefined;
+                if (document.dateCollected == '')
+                    document.dateCollected = undefined;
 
-                if (document.dateFrom == '')
-                    document.dateFrom = undefined;
+                if (document.dateCollectedFrom == '')
+                    document.dateCollectedFrom = undefined;
 
-                if (document.dateTo == '')
-                    document.dateTo = undefined;
+                if (document.dateCollectedTo == '')
+                    document.dateCollectedTo = undefined;
 
                 if (/^\s*$/g.test(document.notes))
                     document.notes = undefined;
@@ -119,7 +119,7 @@ define(['app', '/app/views/forms/edit/edit.js',
                 document = document || $scope.document;
 
                 return document &&
-                    document.permitNotAvailable;
+                    document.irccsNotAvailable;
             };
 
             $scope.isOthers = function(document) {
