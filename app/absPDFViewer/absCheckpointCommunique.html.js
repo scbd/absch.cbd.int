@@ -24,8 +24,8 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 			$scope.documentVersion = result[2].data;
 			$scope.realm = $scope.documentInfo.Realm;
 
-			if($scope.document.permit){
-				$scope.document.permit.forEach(function(item){
+			if($scope.document.absIRCCs){
+				$scope.document.absIRCCs.forEach(function(item){
 					$http.get('/api/v2013/documents/' +  item.identifier, { info:""})
 					.success(function(result){
 						item.document = result;
@@ -46,9 +46,9 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 	function getContacts(document){
 
 	    $scope.emailList = [];
-		if(document.permit){
+		if(document.absIRCCs){
 
-				var permits = _.map(document.permit, function(document){
+				var permits = _.map(document.absIRCCs, function(document){
 					return $http.get('/api/v2013/documents/' +  document.identifier)
 				});
 				$q.all(permits)
@@ -58,12 +58,12 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 					});
 				});
 		}
-		else if(document.responsibleAuthorities){
-			$scope.emailList.push(document.personeToWhomGranted);
+		else if(document.entityWhoGrantedPIC){
+			$scope.emailList.push(document.entityToWhomGrantedPIC);
 		}
-		else if(document.originCountries){
+		else if(document.sourceCountries){
 
-			var country = _.map(document.originCountries, function(country){ return country.identifier });
+			var country = _.map(document.sourceCountries, function(country){ return country.identifier });
 			var query = "/api/v2013/index/select?fl=id,identifier_s&q=(realm_ss:" + realm.value.toLowerCase() +
 			"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:" + country.join('+OR government_s:') + "))&rows=50"
 
@@ -73,8 +73,8 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 				});
 			});
 		}
-		if(document.checkpoint){
-			var checkpoints = _.map(document.checkpoint, function(document){
+		if(document.absCheckpoints){
+			var checkpoints = _.map(document.absCheckpoints, function(document){
 				return $http.get('/api/v2013/documents/' +  document.identifier)
 			});
 			$q.all(checkpoints)
@@ -112,18 +112,18 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 
 	// function getContacts(document){
 	// 	$scope.emailList = [];
-	// 	if(document.permit){
-	// 			angular.forEach(document.permit, function(permit){
+	// 	if(document.absIRCCs){
+	// 			angular.forEach(document.absIRCCs, function(permit){
 	// 				if(permit.document.authority  && (permit.document.authority.title_t || permit.document.authority.firstName))
 	// 					$scope.emailList.push(permit.document.authority);
 	// 			})
 	// 	}
-	// 	else if(document.responsibleAuthorities){
-	// 		$scope.emailList.push(document.personeToWhomGranted);
+	// 	else if(document.entityWhoGrantedPIC){
+	// 		$scope.emailList.push(document.entityToWhomGrantedPIC);
 	// 	}
-	// 	else if(document.originCountries){
+	// 	else if(document.sourceCountries){
 	//
-	// 		var country = _.map(document.originCountries, function(country){ return country.identifier })
+	// 		var country = _.map(document.sourceCountries, function(country){ return country.identifier })
 	// 		var query = "/api/v2013/index/select?fl=id,identifier_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
 	// 		"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:" + country.join('+OR government_s:') + "))&rows=50"
 	//
@@ -139,8 +139,8 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 	// 			})
 	// 		});
 	// 	}
-	// 	if(document.checkpoint){
-	// 		angular.forEach(document.checkpoint, function(checkpoint){
+	// 	if(document.absCheckpoints){
+	// 		angular.forEach(document.absCheckpoints, function(checkpoint){
 	// 			if(checkpoint.contactsToInform)
 	// 				angular.forEach(checkpoint.contactsToInform, function(contact){
 	// 					$scope.emailList.push(contact);
