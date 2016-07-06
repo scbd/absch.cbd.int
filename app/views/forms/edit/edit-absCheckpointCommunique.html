@@ -54,14 +54,18 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="control-group">
-                                        <div class="km-control-group" name="absCheckpoints" required caption="Checkpoint/s that collected or received the information">
+                                        <div class="km-control-group" name="checkpoint" required caption="Checkpoint/s that collected or received the information">
                                             <div class="help-info"> In this field you can select from the existing ABS-CH records, the record of the checkpoint/s that collected or received the information.</div>
 
                                              <div document-selector ng-model="document.absCheckpoints"
-                                                               question="absCheckpoints"
+                                                               question="checkpoint"
                                                                government="document.government"
                                                                schema="absCheckpoint"
-                                                               filter="true"></div>
+                                                               filter="true"
+                                                              ></div>
+
+
+                                            <!--<div km-select multiple name="checkpointSelected" ng-model="document.checkpointSelected" items="options.checkpoints()" placeholder="Please select ..." required></div>-->
                                         </div>
                                     </div>
                                 </div>
@@ -75,20 +79,23 @@
                                 <div class="col-xs-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <span ng-class="{'confidential-text':document.absIRCCsNotAvailable}">
-                                                <input type="checkbox" name="absIRCCsNotAvailable" ng-model="document.absIRCCsNotAvailable" watch-items> The internationally recognized certificate of compliance (IRCC) is not available</input>
+                                            <span ng-class="{'confidential-text':document.irccsNotAvailable}">
+                                                <input type="checkbox" name="irccsNotAvailable" ng-model="document.irccsNotAvailable" watch-items> The internationally recognized certificate of compliance (IRCC) is not available</input>
                                             </span>
                                         </div>
-                                        <div class="panel-body panel-body-confidential" ng-class="{'disable':document.absIRCCsNotAvailable}">
-                                            <div class="km-control-group" style="margin-bottom:20px;" name="absIRCCs" required caption="Links to internationally recognized certificate(s) of compliance (IRCC) that relate to this communiqué">
+                                        <div class="panel-body panel-body-confidential" ng-class="{'disable':document.irccsNotAvailable}">
+                                            <div class="km-control-group" style="margin-bottom:20px;" name="permit" required caption="Links to internationally recognized certificate(s) of compliance (IRCC) that relate to this communiqué">
                                                   <div class="help-info">Here, the reference of the IRCC is to be included if a user of a genetic resource presented an IRCC to the checkpoint. Use the different filters or the unique identifier in the text field to search for the existing relevant IRCC. If the IRCC is not available you need to select the option “This information is not available” and the grey box below will be enabled.</div>
                                                 <div document-selector ng-model="document.absIRCCs"
-                                                                        question="absIRCCs"
+                                                                        question="permit"
                                                                         schema="absPermit"
-                                                                        disabled="isAbsIRCCsNotAvailable()"
+                                                                        disabled="isPermitNotAvailable()"
                                                                         filter="true"
                                                                         government="{'identifier':'*'}"
                                                                         ></div>
+
+
+                                                <!--<div existing-permit ng-model="document.absIRCCs" ng-disabled="isPermitNotAvailable()">-->
                                                 </div>
                                             </div>
 
@@ -99,7 +106,7 @@
 
                             <div class="clearfix"></div>
 
-                            <div ng-class="{'disable':!isAbsIRCCsNotAvailable(), 'bg-white':isAbsIRCCsNotAvailable() }" class="well no-shadow" style="padding-top:0;padding-bottom:0;">
+                            <div ng-class="{'disable':!isPermitNotAvailable(), 'bg-white':isPermitNotAvailable() }" class="well no-shadow" style="padding-top:0;padding-bottom:0;">
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <h3>This section is required when the internationally recognized certificate of compliance (IRCC) is not available.</h3>
@@ -169,8 +176,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12" ng-show="isOthers()">
-                                            <div class="km-control-group" required name="keywordOther" caption="Other keywords">
-                                                <div km-textbox-ml required name="keywordOther" rows="1" ng-model="document.keywordOther" locales="document.header.languages"></div>
+                                            <div class="km-control-group" required name="keywordOthers" caption="Other keywords">
+                                                <div km-textbox-ml required name="keywordOthers" rows="1" ng-model="document.keywordOthers" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -211,19 +218,23 @@
                                                                         government="document.government"
                                                                         filter="true"
                                                                         ></div>
-                                            </div>
+
+
+                                            <!--<field-embed-contact ng-model="document.entityWhoGrantedPIC" locales="document.header.languages" caption="{{document.entityWhoGrantedPIC ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>-->
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                       <div class="km-control-group" name="entityToWhomPICGranted" caption="Person or entity to whom prior informed consent (PIC) was granted">
+                                        <div class="km-control-group" name="entityToWhomGrantedPIC" caption="Person or entity to whom prior informed consent (PIC) was granted">
                                             <span class="help-info">Please provide the contact details of the person or entity to whom prior informed consent was granted.</span>
-                                            <div document-selector ng-model="document.entityToWhomPICGranted" type="radio"
-                                                                        question="entityToWhomPICGranted"
+                                            <div document-selector ng-model="document.entityToWhomGrantedPIC" type="radio"
+                                                                        question="entityToWhomGrantedPIC"
                                                                         schema="(contact authority)"
                                                                         government="document.government"
                                                                         filter="true"
                                                                         ></div>
+                                            <!--<field-embed-contact ng-model="document.entityToWhomGrantedPIC" locales="document.header.languages" caption="{{document.entityToWhomGrantedPIC ? 'Replace organisation or a contact »' : 'Add an organisation or a contact »'}}"></field-embed-contact>-->
 
                                         </div>
                                     </div>
@@ -260,7 +271,7 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" name="personsAtCheckpoint" caption=" Person or entity making information available to the checkpoint on the utilization of the genetic resource ">
+                                    <div class="km-control-group" required name="personsAtCheckpoint" caption=" Person or entity making information available to the checkpoint on the utilization of the genetic resource ">
                                         <div class="help-info">This information allows the provider of the genetic resource to check whether the person or entity to whom the PIC was granted is the same person or entity providing evidence of PIC and MAT at the checkpoint. In case of discrepancy, providers can verify information and conditions related to third party transfer.</div>
                                         <div document-selector ng-model="document.personsAtCheckpoint"
                                                                         question="personsAtCheckpoint"
@@ -268,6 +279,10 @@
                                                                         government="document.government"
                                                                         filter="true"
                                                                         ></div>
+
+
+                                        <!--<field-embed-contact multiple ng-model="document.personsAtCheckpoint" name="personsAtCheckpoint" locales="document.header.languages" caption="Add an organisation or a contact »"></field-embed-contact>-->
+
                                     </div>
                                 </div>
                             </div>
@@ -275,19 +290,27 @@
                             <label>Date on which the information was collected or received at the checkpoint</label>
                             <div class="row" style="margin-bottom:20px;">
                                 <div class="col-xs-4">
-                                    <div km-date placeholder="YYYY-MM-DD" required name="dateCollected" ng-model="document.dateCollected"></div>
+                                    <div km-date placeholder="YYYY-MM-DD" required name="date" ng-model="document.dateCollected"></div>
                                 </div>
                                 <div class="col-xs-1 bg-grey">
                                     <div style="font-size:16px;font-weight:bold;padding: 6px;text-align: center;" name="dateOR" caption="OR">OR</div>
                                 </div>
                                 <div class="col-xs-3 text-right">
-                                    <div km-date placeholder="FROM" required name="dateCollectedFrom" ng-model="document.dateCollectedFrom"></div>
+                                    <div km-date placeholder="FROM" required name="dateFrom" ng-model="document.dateCollectedFrom"></div>
                                 </div>
                                 <div class="col-xs-3  text-right">
-                                    <div km-date placeholder="TO" required name="ddateCollectedTo" ng-model="document.dateCollectedTo"></div>
+                                    <div km-date placeholder="TO" required name="dateTo" ng-model="document.dateCollectedTo"></div>
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="informationDocuments" caption="Upload relevant document">
+                                        <div class="help-info">An attachment is preferred. Otherwise, provide the location of the document, i.e. web address including the URL of the website (e.g. http://absch.cbd.int/) and the name of the website (e.g. “Access and Benefit-sharing  Clearing-House”.</div>
+                                        <div km-link name="informationDocuments" ng-model="document.informationDocuments" identifier="document.header.identifier"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </section>
 
                         <section>

@@ -24,11 +24,12 @@
     		 	    <strong>{{document.title | lstring:locale}}</strong>
     		 	</div>
 		 	</div>
-			<div ng-show="document.checkpoints">
+
+			<div ng-show="document.absCheckpoints">
 				<legend>Checkpoint/s that collected or received the information</legend>
 					<div class="km-value">
 						<ul>
-							<li ng-repeat="item in document.checkpoints">
+							<li ng-repeat="item in document.absCheckpoints">
 								<div view-default-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
 						</ul>
@@ -56,11 +57,11 @@
 				</div>
 			</div>
 
-			<div ng-show="document.absIRCCs || document.absIRCCsNotAvailable ||
-						document.sourceCountries || entityWhoGrantedPIC ||
+			<div ng-show="document.absIRCCs || document.irccsNotAvailable ||
+						document.sourceCountries || responsibleAuthority ||
 						document.specimens || document.taxonomies || document.gisFiles || document.subjectMatter ||
 						document.evidenceOfPIC || document.evidenceOfMAT ||
-						document.entityToWhomPICGranted || document.personsAtCheckpoint">
+						document.entityToWhomGrantedPIC || document.personsAtCheckpoint">
 				<legend>Details of the internationally recognize certificate of compliance</legend>
 				<div ng-show="document.absIRCCs">
 					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
@@ -138,7 +139,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="term in document.keywords">{{term|term}}
-										<span ng-show="term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'"> ({{document.keywordOther|lstring:locale}})</span>
+										<span ng-show="term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'"> ({{document.keywordOthers|lstring:locale}})</span>
 									</li>
 								</ul>
 							</div>
@@ -148,6 +149,8 @@
 						<label>Reference or evidence of prior informed consent</label>
 						<div class="km-value km-pre"ng-bind-html="document.evidenceOfPIC | lstring:locale"></div>
 					</div>
+
+
 
 					<div ng-show="document.entityToWhomGrantedPIC">
 						<label>Person or entity to whom prior informed consent was granted</label>
@@ -168,7 +171,8 @@
 
 				</div>
 			</div>
-			<div ng-show="document.description || document.dateCollectedFrom || document.dateCollectedTo || information || informationDocuments ||document.personsAtCheckpoint">
+			<div ng-show="document.description || document.dateCollectedFrom || document.dateCollectedTo ||
+				 information || informationDocuments ||document.personsAtCheckpoint">
 				<legend>Information on the utilization of the genetic resource(s)</legend>
 				<div ng-show="document.description">
 					<label>Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources</label>

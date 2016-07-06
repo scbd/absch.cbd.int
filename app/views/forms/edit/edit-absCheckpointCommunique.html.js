@@ -15,7 +15,7 @@ define(['app', '/app/views/forms/edit/edit.js',
 
             $scope.checkpointList = [];
             _.extend($scope.options, {
-                absIRCCs: function() {
+                permits: function() {
                     return commonjs.loadSchemaDocumentsForDropdown('absPermit');
                 },
                 keywords: function() {
@@ -77,11 +77,11 @@ define(['app', '/app/views/forms/edit/edit.js',
                     return undefined;
 
                 document = angular.fromJson(angular.toJson(document));
-                if (document.absIRCCsNotAvailable === true) {
+                if (document.irccsNotAvailable === true) {
                     document.absIRCCs = undefined;
                 } else {
                     document.sourceCountries = undefined;
-                    document.entityWhoGrantedPIC = undefined;
+                    document.responsibleAuthority = undefined;
                     document.subjectMatter = undefined;
                     document.specimens = undefined;
                     document.taxonomies = undefined;
@@ -90,8 +90,8 @@ define(['app', '/app/views/forms/edit/edit.js',
                     document.keywords = undefined;
                     document.evidenceOfPIC = undefined;
                     document.evidenceOfMAT = undefined;
-                    document.entityToWhomPICGranted = undefined;
-                    document.responsibleAuthorities = undefined;
+                    document.entityToWhomGrantedPIC = undefined;
+                    document.entityWhoGrantedPIC = undefined;
                 }
                 if (document.dateCollected == '')
                     document.dateCollected = undefined;
@@ -106,22 +106,20 @@ define(['app', '/app/views/forms/edit/edit.js',
                     document.notes = undefined;
 
                 if (!$scope.isOthers()) {
-                    document.keywordOther = undefined;
+                    document.keywordOthers = undefined;
                 }
                 document.checkpointSelected = undefined;
-                document.informationDocuments = undefined;
-
                 return document;
             };
 
             //==================================
             //
             //==================================
-            $scope.isAbsIRCCsNotAvailable = function(document) {
+            $scope.isPermitNotAvailable = function(document) {
                 document = document || $scope.document;
 
                 return document &&
-                    document.absIRCCsNotAvailable;
+                    document.irccsNotAvailable;
             };
 
             $scope.isOthers = function(document) {
