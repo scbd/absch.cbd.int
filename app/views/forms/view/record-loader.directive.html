@@ -85,7 +85,7 @@
 
     <div style="float:right; position:relative;top:1px;right:1px;" ng-if="showDetails">
         <div>
-            <a title="Edit" ng-show="!internalDocumentInfo.workingDocumentLock" type="button" class="btn btn-default" href="/register/{{internalDocument.header.schema|mapSchema}}/{{internalDocument.header.identifier}}/edit">
+            <a title="Edit" ng-show="!internalDocumentInfo.workingDocumentLock" type="button" class="btn btn-default" href="/register/{{internalDocument.header.schema|schemaShortName}}/{{internalDocument.header.identifier}}/edit">
                 <i class="fa fa-edit"></i> edit </a>
             <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
         </div>
