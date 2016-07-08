@@ -79,11 +79,11 @@
                                 <div class="col-xs-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <span ng-class="{'confidential-text':document.irccsNotAvailable}">
-                                                <input type="checkbox" name="irccsNotAvailable" ng-model="document.irccsNotAvailable" watch-items> The internationally recognized certificate of compliance (IRCC) is not available</input>
+                                            <span ng-class="{'confidential-text':document.absIRCCsNotAvailable}">
+                                                <input type="checkbox" name="absIRCCsNotAvailable" ng-model="document.absIRCCsNotAvailable" watch-items> The internationally recognized certificate of compliance (IRCC) is not available</input>
                                             </span>
                                         </div>
-                                        <div class="panel-body panel-body-confidential" ng-class="{'disable':document.irccsNotAvailable}">
+                                        <div class="panel-body panel-body-confidential" ng-class="{'disable':document.absIRCCsNotAvailable}">
                                             <div class="km-control-group" style="margin-bottom:20px;" name="permit" required caption="Links to internationally recognized certificate(s) of compliance (IRCC) that relate to this communiqué">
                                                   <div class="help-info">Here, the reference of the IRCC is to be included if a user of a genetic resource presented an IRCC to the checkpoint. Use the different filters or the unique identifier in the text field to search for the existing relevant IRCC. If the IRCC is not available you need to select the option “This information is not available” and the grey box below will be enabled.</div>
                                                 <div document-selector ng-model="document.absIRCCs"
@@ -303,14 +303,6 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="km-control-group" name="informationDocuments" caption="Upload relevant document">
-                                        <div class="help-info">An attachment is preferred. Otherwise, provide the location of the document, i.e. web address including the URL of the website (e.g. http://absch.cbd.int/) and the name of the website (e.g. “Access and Benefit-sharing  Clearing-House”.</div>
-                                        <div km-link name="informationDocuments" ng-model="document.informationDocuments" identifier="document.header.identifier"></div>
-                                    </div>
-                                </div>
-                            </div>
                         </section>
 
                         <section>
