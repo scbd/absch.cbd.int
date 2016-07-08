@@ -129,7 +129,7 @@
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
                     <label>INTERNATIONAL RECOGNIZED CERTIFICATE(s) OF COMPLIANCE</label>
-                    <div ng-show="!document.irccsNotAvailable || document.absIRCCs">
+                    <div ng-show="!document.absIRCCsNotAvailable || document.absIRCCs">
                             <div class="text"  ng-repeat="item in document.absIRCCs">
                             <span view-default-reference ng-model="item.identifier" locale="locale"></span>
                         </div>
@@ -139,7 +139,7 @@
 
 
                 <!-- if IRCC was NOT included-->
-                <div ng-show="document.irccsNotAvailable==true">
+                <div ng-show="document.absIRCCsNotAvailable==true">
                     <div class="clearfix"></div>
                     <div class="col-xs-12">
                         <label>Internationally Recognized Certificate of Complicance (IRCC)</label>

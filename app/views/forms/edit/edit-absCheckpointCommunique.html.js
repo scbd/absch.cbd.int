@@ -77,11 +77,11 @@ define(['app', '/app/views/forms/edit/edit.js',
                     return undefined;
 
                 document = angular.fromJson(angular.toJson(document));
-                if (document.irccsNotAvailable === true) {
+                if (document.absIRCCsNotAvailable === true) {
                     document.absIRCCs = undefined;
                 } else {
                     document.sourceCountries = undefined;
-                    document.responsibleAuthority = undefined;
+                    document.entityWhoGrantedPIC = undefined;
                     document.subjectMatter = undefined;
                     document.specimens = undefined;
                     document.taxonomies = undefined;
@@ -109,6 +109,8 @@ define(['app', '/app/views/forms/edit/edit.js',
                     document.keywordOthers = undefined;
                 }
                 document.checkpointSelected = undefined;
+                document.informationDocuments = undefined;
+
                 return document;
             };
 
@@ -119,7 +121,7 @@ define(['app', '/app/views/forms/edit/edit.js',
                 document = document || $scope.document;
 
                 return document &&
-                    document.irccsNotAvailable;
+                    document.absIRCCsNotAvailable;
             };
 
             $scope.isOthers = function(document) {
