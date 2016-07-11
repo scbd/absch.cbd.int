@@ -39,11 +39,11 @@ function(app, _) {
 
             $scope.gotoNew = function($event, cftype) {
                 $event.stopPropagation();
-                $location.path("/register/" + $filter("mapSchema")(cftype) + "/new");
+                $location.path("/register/" + $filter("schemaShortName")(cftype) + "/new");
             }
 
             $scope.gotoList = function($event, cftype) {
-                $location.path("/register/" + $filter("mapSchema")(cftype));
+                $location.path("/register/" + $filter("schemaShortName")(cftype));
             }
 
             //===================================================================

@@ -264,7 +264,7 @@ define(['app','ngSmoothScroll',
 						var schema = $scope.internalDocumentInfo.type;
 						var identifier = $scope.internalDocumentInfo.identifier;
 						$timeout(function () {
-							$location.path("/register/" + $filter("mapSchema")(schema) + "/" + identifier + '/edit');
+							$location.path("/register/" + $filter("schemaShortName")(schema) + "/" + identifier + '/edit');
 						}, 1);
 
 					}
