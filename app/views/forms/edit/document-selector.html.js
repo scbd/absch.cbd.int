@@ -239,7 +239,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 
                 searchOperation = searchService.list(queryParameters, null);
 
-                $q.when(searchOperation)
+                return $q.when(searchOperation)
                     .then(function(data) {
                        $scope.rawDocuments = data.data.response;
                     }).catch(function(error) {
@@ -257,8 +257,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             function load() {
                 if(!$scope.rawDocuments || _.isEmpty($scope.rawDocuments))
                 {
-                    getDocs();
-                    return;
+                    return getDocs();                    
                 }
             };
 
@@ -269,7 +268,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 		    //==================================
 		    $scope.$watch('model', function(newValue, oldValue){
 		        if(newValue){
-                     //$scope.syncDocuments();
+                     $scope.syncDocuments();
                      $scope.showAddButton = true;
 		        }
 		    });
@@ -280,24 +279,23 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             //==================================
 			$scope.openAddDialog = function(){
 
-                 load();
-
-                 $scope.syncDocuments();
-
-                 _.forEach($scope.rawDocuments.docs, function (doc) {
-                    doc.__checked = false;
-                    if($scope.isInModel(doc.identifier_s)){
-                        doc.__checked = true;
-                    }
-
-                });
-
                 ngDialog.open({
                     template: 'documentSelectionModal',
                     closeByDocument: false,
                     scope: $scope
                 });
 
+                 $q.when(load())
+                    .then(function (){                        
+                        //$scope.syncDocuments();
+                        _.forEach($scope.rawDocuments.docs, function (doc) {
+                            doc.__checked = false;
+                            if($scope.isInModel(doc.identifier_s)){
+                                doc.__checked = true;
+                            }
+
+                        });
+                    });
 			};
 
 
