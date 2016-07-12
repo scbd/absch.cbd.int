@@ -66,7 +66,7 @@ app.directive("viewAbsPermit", [function () {
 			//====================
 			//
 			//====================
-			// $scope.$watch("document.authority", function (_new) {
+			// $scope.$watch("document.absCNA", function (_new) {
 			// 	$scope.authority = undefined;
 			//
 			// 	if (_new) {
