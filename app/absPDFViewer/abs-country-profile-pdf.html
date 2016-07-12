@@ -246,8 +246,8 @@
                                         <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='title_t';reversePermit=!reversePermit">name
                                             <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='title_t' && reversePermit),'fa-caret-down':(sortPermit=='title_t' && !reversePermit)}"></i>
                                         </div>
-                                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='informedConsents_CEN_ss';reversePermit=!reversePermit">issued to
-                                            <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='informedConsents_CEN_ss' && reversePermit),'fa-caret-down':(sortPermit=='informedConsents_CEN_ss' && !reversePermit)}"></i>
+                                        <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='entitiesToWhomPICGranted_CEN_ss';reversePermit=!reversePermit">issued to
+                                            <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='entitiesToWhomPICGranted_CEN_ss' && reversePermit),'fa-caret-down':(sortPermit=='entitiesToWhomPICGranted_CEN_ss' && !reversePermit)}"></i>
                                         </div>
                                         <div class="col-lg-2 col-md-2 col-xs-2 tableheader" ng-click="sortPermit='authority_s';reversePermit=!reversePermit">CNA
                                             <i class="fa" ng-class="{'fa-caret-up':(sortPermit=='authority_s' && reversePermit),'fa-caret-down':(sortPermit=='authority_s' && !reversePermit)}"></i>
@@ -269,8 +269,8 @@
                                                     {{permit.title_t}}
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">
-                                                    <div class="confidential" ng-show="!permit.informedConsents_CEN_ss">Confidential information</div>
-                                                    {{permit.informedConsents_CEN_ss}}
+                                                    <div class="confidential" ng-show="!permit.entitiesToWhomPICGranted_CEN_ss">Confidential information</div>
+                                                    {{permit.entitiesToWhomPICGranted_CEN_ss}}
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-xs-2">
                                                     {{parseJSON(permit.authority_s).firstName + ' ' + parseJSON(permit.authority_s).lastName}}

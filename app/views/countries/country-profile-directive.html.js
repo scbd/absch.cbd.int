@@ -158,7 +158,7 @@
                                 }
                                 else
                                     document.measureMatrix = false;
-                             
+
                                 measureMatrixDocuments.push(document);
 
                             }
