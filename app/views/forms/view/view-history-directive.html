@@ -21,16 +21,16 @@
                             <span class="bold color-green"> PUBLISHED</span></span>
                     </div>
                 </td>
-                <td > 
+                <td >
                     <div ng-show="!publicView">by <span style="font-weight:500;">{{document.updatedBy.firstName}} {{document.updatedBy.lastName}} ({{document.updatedBy.email}})</span> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span></div>
                     <div ng-show="publicView"> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span></div>
 
-                    <div ng-show="document.body.amendmentsDescription">
-                        <span ng-show="document.body.amendmentsDescription">
-						  		<span ng-show="!more" ng-bind-html="document.body.amendmentsDescription| lstring:locale | limitTo:80">
-						  		<a ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentsDescription| lstring:locale).length > 200">
+                    <div ng-show="document.body.amendmentDescription">
+                        <span ng-show="document.body.amendmentDescription">
+						  		<span ng-show="!more" ng-bind-html="document.body.amendmentDescription| lstring:locale | limitTo:80">
+						  		<a ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentDescription| lstring:locale).length > 200">
 									<strong>...more</strong> </a></span>
-                        <span ng-show="more" ng-bind-html="document.body.amendmentsDescription| lstring:locale">
+                        <span ng-show="more" ng-bind-html="document.body.amendmentDescription| lstring:locale">
 										<a ng-href="#" ng-click="more=!more"> <strong>less</strong></a>
 									</span>
                         </span>

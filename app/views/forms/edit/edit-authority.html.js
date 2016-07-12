@@ -1,4 +1,4 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js', '/app/js/common.js', 
+define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js', '/app/js/common.js',
  '/app/views/forms/edit/document-selector.html.js', '/app/views/forms/edit/warning-message-cna.html.js',
         '../view/view-authority.directive.js'
         ], function(app, _) {
@@ -8,7 +8,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
         $controller('editController', {
             $scope: $scope
         });
-      
+
         $scope.getMeasures=[];
         $scope.path = $location.path();
         //$scope.documentUID = "NEW";
@@ -86,7 +86,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
             },
 
         });
-        
+
         //==================================
         $scope.showResponsibleforAllMsg = function() {
 
@@ -98,28 +98,28 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 return error.property == 'absResponsibleForAllNot';
             });
         };
-        
-       
+
+
         //==================================
         //
         //==================================
         $scope.getCleanDocument = function(document) {
-                
+
             document = document || $scope.document;
 
             if (!document)
                 return undefined;
-                
+
             //document = angular.fromJson(angular.toJson(document));
-           
-            if (!document.consentGranted) {
+
+            if (!document.picGranted) {
                 document.consentInformation = undefined;
                 document.consentDocuments = undefined;
             }
 
             if (!document.mutuallyAgreedTermsEstablished) {
-                document.mutuallyAgreedTermsInformation = undefined;
-                document.mutuallyAgreedTermsDocuments = undefined;
+                document.matInformation = undefined;
+                document.matDocuments = undefined;
             }
 
             if (document.gisFiles && document.gisFiles.length === 0) {
@@ -134,16 +134,16 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 document.consentedAmendment = undefined;
                 document.amendmentsDescription = undefined;
             }
-            if (document.providerConfidential) {
+            if (document.providersConfidential) {
                 document.providers = undefined;
             }
-            if (document.informedConsentConfidential) {
-                document.informedConsents = undefined;
+            if (document.entitiesToWhomPICGrantedConfidential) {
+                document.entitiesToWhomPICGranted = undefined;
             }
             if (document.geneticResourcesConfidential) {
                 document.geneticResources = undefined;
                 document.specimen = undefined;
-                document.taxonomy = undefined;
+                document.taxonomies = undefined;
                 document.gisFiles = undefined;
                 document.gisMapCenter = undefined;
             }
@@ -169,7 +169,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 identifier: "cbdLibrary:abs-ch"
             }]
         });
-        
+
         //==================================
         $scope.showJurisdictionName = function() {
 
