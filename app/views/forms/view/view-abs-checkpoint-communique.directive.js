@@ -70,14 +70,13 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 
 				$scope.emailList = [];
 				if(document.absIRCCs){
-
-						var permits = _.map(document.absIRCCs, function(document){
+						var permits =  _.map(document.permit, function(document){
 							return $http.get('/api/v2013/documents/' +  document.identifier)
 						});
-						$q.all(permits)
+						$q.all(absIRCCs)
 						.then(function(results){
 							_.each(results, function(result){
-								$scope.emailList.push({identifier:result.data.authority.identifier})
+								$scope.emailList.push({identifier:result.data.absCNA.identifier})
 							});
 						});
 				}

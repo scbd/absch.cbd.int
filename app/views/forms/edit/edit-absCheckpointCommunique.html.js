@@ -15,7 +15,7 @@ define(['app', '/app/views/forms/edit/edit.js',
 
             $scope.checkpointList = [];
             _.extend($scope.options, {
-                permits: function() {
+                absIRCCs: function() {
                     return commonjs.loadSchemaDocumentsForDropdown('absPermit');
                 },
                 keywords: function() {
@@ -90,8 +90,8 @@ define(['app', '/app/views/forms/edit/edit.js',
                     document.keywords = undefined;
                     document.evidenceOfPIC = undefined;
                     document.evidenceOfMAT = undefined;
-                    document.entityToWhomGrantedPIC = undefined;
-                    document.entityWhoGrantedPIC = undefined;
+                    document.entityToWhomPICGranted = undefined;
+                    document.responsibleAuthorities = undefined;
                 }
                 if (document.dateCollected == '')
                     document.dateCollected = undefined;
@@ -106,7 +106,7 @@ define(['app', '/app/views/forms/edit/edit.js',
                     document.notes = undefined;
 
                 if (!$scope.isOthers()) {
-                    document.keywordOthers = undefined;
+                    document.keywordOther = undefined;
                 }
                 document.checkpointSelected = undefined;
                 document.informationDocuments = undefined;
@@ -117,7 +117,7 @@ define(['app', '/app/views/forms/edit/edit.js',
             //==================================
             //
             //==================================
-            $scope.isPermitNotAvailable = function(document) {
+            $scope.isAbsIRCCsNotAvailable = function(document) {
                 document = document || $scope.document;
 
                 return document &&
