@@ -5,7 +5,7 @@ machine:
 dependencies:
   override:
     - docker info
-    - docker build -t absch-cbd-int .
+    - docker build -t absch-cbd-int --build-arg VERSION=$CIRCLE_SHA1 .
 
 test:
   override:

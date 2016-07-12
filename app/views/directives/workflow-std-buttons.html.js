@@ -483,7 +483,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                            }, 100)
                        } else {
                            $timeout(function() {
-                               $location.path('/register/' + $filter("mapSchema")(document_type));
+                               $location.path('/register/' + $filter("schemaShortName")(document_type));
                            }, 100);
                        }
                    }, 500);
@@ -512,7 +512,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                     toastr.info('Record saved. A publishing request has been sent to your Publishing Authority.');
 
                     $timeout(function() {
-                        $location.path('/register/' + $filter("mapSchema")(document_type));
+                        $location.path('/register/' + $filter("schemaShortName")(document_type));
                     }, 1000);
 
                 };
@@ -527,7 +527,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 
                     toastr.info('Record published. The record will be now publicly accessible on ABSCH.');
                     $timeout(function() {
-                        $location.path('/register/' + $filter("mapSchema")(document_type));
+                        $location.path('/register/' + $filter("schemaShortName")(document_type));
                     }, 1000);
 
                 };

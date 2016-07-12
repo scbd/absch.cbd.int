@@ -26,7 +26,7 @@
                 <span>{{doc.uniqueIdentifier_s}}</span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta1 && doc.schema_s !=='database'"  id="meta1">
-                <span ng-if="doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;" >CP:</span>
+                <span ng-if="doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;" >CHECKPOINT:</span>
                 <span  ng-repeat="meta in doc.rec_meta1">{{meta}}{{$last ? '':', '}}</span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta2 && doc.schema_s !=='absPermit'" id="meta2" >
