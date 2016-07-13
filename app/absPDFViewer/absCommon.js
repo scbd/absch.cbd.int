@@ -352,11 +352,15 @@ app.filter("uniqueID", ["$http", '$filter', '$q',
                     government = document.metadata.government;
                 else if (document.body && document.body.government)
                     government = document.body.government.identifier;
+                
+                var relamPrefix = '';
+				relamPrefix = (document.realm.toUpperCase().replace('ABS','').replace('-',''));
 
-                var unique = 'ABSCH' +
-                    '-' + $filter("schemaShortName")($filter("lowercase")(document.type || document.schema_s || document.schema)) +
-                    '-' + (government != '' ? $filter("uppercase")(government) : 'SCBD') +
-                    '-' + documentId;
+				var unique = 'ABSCH' + relamPrefix +
+						'-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s||document.schema)) +
+                        '-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +
+                        '-' + documentId;
+
                 if (document.revision)
                     unique = unique + '-' + document.revision;
 
