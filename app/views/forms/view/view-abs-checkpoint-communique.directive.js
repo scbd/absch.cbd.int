@@ -70,18 +70,20 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 
 				$scope.emailList = [];
 				if(document.absIRCCs){
-						var permits =  _.map(document.permit, function(document){
+						var absIRCCs =  _.map(document.permit, function(document){
 							return $http.get('/api/v2013/documents/' +  document.identifier)
 						});
 						$q.all(absIRCCs)
 						.then(function(results){
 							_.each(results, function(result){
-								$scope.emailList.push({identifier:result.data.absCNA.identifier})
+								if(result.data.absCNA && !_.some($scope.emailList, {identifier:result.data.absCNA.identifier}))
+									$scope.emailList.push({identifier:result.data.absCNA.identifier})
 							});
 						});
 				}
 				else if(document.entityWhoGrantedPIC){
-					$scope.emailList.push(document.entityToWhomGrantedPIC);
+					if(!_.some($scope.emailList, {identifier:document.entityToWhomGrantedPIC}))
+						$scope.emailList.push(document.entityToWhomGrantedPIC);
 				}
 				else if(document.sourceCountries){
 
@@ -91,7 +93,8 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 
 					$http.get(query).success(function(res) {
 						angular.forEach(res.response.docs, function(cna){
-							$scope.emailList.push({identifier: cna.identifier_s});
+							if(!_.some($scope.emailList, {identifier:cna.identifier_s}))
+								$scope.emailList.push({identifier: cna.identifier_s});
 						});
 					});
 				}
@@ -103,7 +106,8 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 					.then(function(results){
 						 _.each(results, function(result){
 							_.each(result.data.contactsToInform, function(contacts){
-								   $scope.emailList.push({identifier:contacts.identifier})
+								if(!_.some($scope.emailList, {identifier:contacts.identifier}))
+								  $scope.emailList.push({identifier:contacts.identifier})
 							 });
 						});
 					});
@@ -116,8 +120,10 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 
 					$http.get(query).success(function(res) {
 						angular.forEach(res.response.docs, function(nfp){
-								$scope.emailList.push(
+								if(!_.some($scope.emailList, {identifier:nfp.identifier_s}))							
+	                    			$scope.emailList.push(
 										{
+											identifier:nfp.identifier_s,
 											header	: {identifier:nfp.identifier_s},
 											type:'person',
 											firstName:nfp.title_t,

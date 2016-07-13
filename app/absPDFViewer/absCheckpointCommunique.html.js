@@ -30,12 +30,12 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 					.success(function(result){
 						item.document = result;
 					}).finally(function(){
-						getContacts($scope.document)
+						getContacts($scope.document, $scope.documentInfo.realm)
 					});
 				})
 			}
 			else
-				getContacts($scope.document);
+				getContacts($scope.document, $scope.documentInfo.realm);
 	});
 
 	$scope.renderHtml = function(html_code)
@@ -43,7 +43,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 	    return $sce.trustAsHtml($filter("lstring")(html_code,sLocale));
 	};
 
-	function getContacts(document){
+	function getContacts(document, realm){
 
 	    $scope.emailList = [];
 		if(document.absIRCCs){
@@ -54,22 +54,25 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 				$q.all(permits)
 				.then(function(results){
 					_.each(results, function(result){
-						$scope.emailList.push({identifier:result.data.absCNA.identifier})
+						if(result.data.absCNA && !_.some($scope.emailList, {identifier:result.data.absCNA.identifier}))
+							$scope.emailList.push({identifier:result.data.absCNA.identifier})
 					});
 				});
 		}
 		else if(document.entityWhoGrantedPIC){
-			$scope.emailList.push(document.entityToWhomGrantedPIC);
+			if(!_.some($scope.emailList, {identifier:document.entityToWhomGrantedPIC}))
+					$scope.emailList.push(document.entityToWhomGrantedPIC);
 		}
 		else if(document.sourceCountries){
 
 			var country = _.map(document.sourceCountries, function(country){ return country.identifier });
-			var query = "/api/v2013/index/select?fl=id,identifier_s&q=(realm_ss:" + realm.value.toLowerCase() +
+			var query = "/api/v2013/index/select?fl=id,identifier_s&q=(realm_ss:" + realm.toLowerCase() +
 			"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:" + country.join('+OR government_s:') + "))&rows=50"
 
 			$http.get(query).success(function(res) {
 				angular.forEach(res.response.docs, function(cna){
-					$scope.emailList.push({identifier: cna.identifier_s});
+					if(!_.some($scope.emailList, {identifier:cna.identifier_s}))
+							$scope.emailList.push({identifier: cna.identifier_s});
 				});
 			});
 		}
@@ -81,7 +84,8 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 			.then(function(results){
 				 _.each(results, function(result){
 					_.each(result.data.contactsToInform, function(contacts){
-						   $scope.emailList.push({identifier:contacts.identifier})
+						   if(!_.some($scope.emailList, {identifier:contacts.identifier}))
+								$scope.emailList.push({identifier:contacts.identifier})
 					 });
 				});
 			});
@@ -94,8 +98,10 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 
 	        $http.get(query).success(function(res) {
 	            angular.forEach(res.response.docs, function(nfp){
+					if(!_.some($scope.emailList, {identifier:nfp.identifier_s}))							
 	                    $scope.emailList.push(
 	                            {
+									identifier:nfp.identifier_s,
 									header	: {identifier:nfp.identifier_s},
 									type:'person',
 	                                firstName:nfp.title_t,
