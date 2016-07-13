@@ -420,9 +420,9 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
                         alert('please select a GR Type or GR Area');
                         return;
                     }
-                    if (!$scope.binding.geneticResource.elements)
-                        $scope.binding.geneticResource.elements = [];
-                    $scope.binding.geneticResource.elements.push({
+                    if (!$scope.binding.geneticResource)
+                        $scope.binding.geneticResource = [];
+                    $scope.binding.geneticResource.push({
                         types: geneticResource.types,
                         areas: geneticResource.areas
                     });
@@ -433,7 +433,7 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
                 };
 
                 $scope.deleteElement = function (element) {
-                    $scope.binding.geneticResource.elements.splice($scope.binding.geneticResource.elements.indexOf(element), 1);
+                    $scope.binding.geneticResource.splice($scope.binding.geneticResource.indexOf(element), 1);
                 }
 
                 $scope.addOther = function (term) {
