@@ -416,8 +416,8 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
                 }
 
                 $scope.addGRRecord = function (geneticResource, grTypesApi, grAreasApi) {
-                    if (!geneticResource || (!geneticResource.types && !geneticResource.areas)) {
-                        alert('please select a GR Type or GR Area');
+                    if (!geneticResource || (!geneticResource.types || !geneticResource.areas)) {
+                        alert('please select a GR Type and GR Area');
                         return;
                     }
                     if (!$scope.binding.geneticResource)
@@ -593,7 +593,13 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
                             "title": {
                                 "en": "Does this measure include provisions on how its application relates to other international instruments?"
                             }
+                        },
+                        "BE944E70-2098-45AC-891B-D5E94AFECB99":{
+                            "title": {
+                                "en": "Does this measure include any other relevant elements of the measure?"
+                            }
                         }
+                        
                     }
 
                     _.each(data, function(element){

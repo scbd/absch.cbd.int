@@ -184,7 +184,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     document.limitedApplication = undefined;
 
                 if(!document.isModelContractualClause)
-                    document.modelContractualClauseDescription = undefined;
+                    document.isModelContractualClauseDescription = undefined;
 
                 if (document.absMeasures && !_.findWhere(document.absMeasures, {
                         identifier: '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'
