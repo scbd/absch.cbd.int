@@ -112,14 +112,14 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
 
             //document = angular.fromJson(angular.toJson(document));
 
-            if (!document.picGranted) {
+            if (!document.consentGranted) {
                 document.consentInformation = undefined;
                 document.consentDocuments = undefined;
             }
 
-            if (!document.mutuallyAgreedTermsEstablished) {
-                document.matInformation = undefined;
-                document.matDocuments = undefined;
+            if (!document.mutuallyAgreedTermsInformation) {
+                document.mutuallyAgreedTermsInformation = undefined;
+                document.mutuallyAgreedTermsDocuments = undefined;
             }
 
             if (document.gisFiles && document.gisFiles.length === 0) {
@@ -134,16 +134,16 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 document.consentedAmendment = undefined;
                 document.amendmentsDescription = undefined;
             }
-            if (document.providersConfidential) {
-                document.providers = undefined;
+            if (document.providerConfidential) {
+                document.provider = undefined;
             }
-            if (document.entitiesToWhomPICGrantedConfidential) {
-                document.entitiesToWhomPICGranted = undefined;
+            if (document.informedConsentConfidential) {
+                document.informedConsents = undefined;
             }
             if (document.geneticResourcesConfidential) {
                 document.geneticResources = undefined;
                 document.specimen = undefined;
-                document.taxonomies = undefined;
+                document.taxonomy = undefined;
                 document.gisFiles = undefined;
                 document.gisMapCenter = undefined;
             }
