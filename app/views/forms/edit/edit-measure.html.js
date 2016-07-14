@@ -190,7 +190,10 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         identifier: '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'
                     }))
                     document.otherAbsMeasure = undefined;
-
+                
+                if(document.absMesasureNotApplicable)
+                     document.absMeasures = undefined;
+                     
                 if(document.absMeasures && !document.absMeasures.geneticResource && !document.absMeasures.relevantElements)
                     document.absMeasures = undefined;
                 
