@@ -101,6 +101,8 @@ app.directive("viewContactReference", [function() {
                 }
                 else{
                     $http.get('/api/v2013/documents/' + $scope.model.identifier + '?info').success(function(data) {
+                        
+                        $scope.documentForUID = data;
                         $scope.document = data.body;
                         var info = angular.copy(data);
                         delete info.body;

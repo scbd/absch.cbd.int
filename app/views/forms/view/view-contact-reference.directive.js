@@ -56,6 +56,7 @@ app.directive("viewContactReference", [function () {
 					else{
 						storage.documents.get(newVal.identifier, {info:true})
 							.then(function(data){
+								$scope.documentForUID = angular.copy(data.data);
 								$scope.document = angular.copy(data.data.body);
 								delete data.data.body;
 								$scope.document.info = data.data;
