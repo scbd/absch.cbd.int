@@ -107,6 +107,14 @@ app.directive("viewContactReference", [function() {
                         var info = angular.copy(data);
                         delete info.body;
                         $scope.document.info = info;
+
+
+                        if($scope.document.info.Realm && $scope.document.info.Realm.toUpperCase()== 'ABS')
+                            $scope.websiteUrl = 'https://absch.cbd.int';
+                        else if($scope.document.info.Realm && $scope.document.info.Realm.toUpperCase()=='ABS-TRG')
+                            $scope.websiteUrl = 'https://training-absch.cbd.int';
+                        else if($scope.document.info.Realm && $scope.document.info.Realm.toUpperCase()== 'ABS-DEV')
+                            $scope.websiteUrl = 'https://absch.cbddev.xyz';
                     });
                 }
 
