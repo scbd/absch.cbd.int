@@ -4,7 +4,14 @@
 		<span class="color-black"> (IRCC) </span>
 		</h4> </div>
 	<div class="record-body panel-body">
-
+			<div class="alert alert-danger" ng-show="!loading && document && document.amendmentIntent==1">
+				<div class="text-center">
+					<h1>THIS CERTIFICATE HAS BEEN REVOKED</h1>
+					<p>
+						See certificate history for more information.
+					</p>
+				</div>
+			</div>
 
 			<legend ng-if="document.government">
                 <a  ng-if="document.info" class="btn btn-default btn-small pull-right" style="background-color:#f5f5f5;" target="_new" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
