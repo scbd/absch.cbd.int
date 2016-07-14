@@ -77,9 +77,12 @@
             Website: <span ng-repeat="item in document.websites"><a target="_new" ng-href="{{item.url}}">{{item.url}}</a><span ng-show="!$last">, </span></span>
         </div>
         <div ng-if="isCNA">
-            <a ng-href="/database/{{document.header.schema | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.info.revision}}" target="_new">
-                <i class="fa fa-external-link-square" aria-hidden="true"></i> {{document | uniqueID}}
+            <a ng-href="/database/{{document.header.schema | schemaShortName}}/{{document.info.revision}}" target="_new">
+                <i class="fa fa-external-link-square" aria-hidden="true"></i> 
+                {{(documentForUID || document) | uniqueID}}
             </a>
+            <!--{{isCNA}}
+        {{document | uniqueID}}{{document}}-->
         </div>
     </script>
 
