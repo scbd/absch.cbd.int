@@ -44,7 +44,7 @@
         <div class="text-center">
             <h1 class="color-white">THIS CERTIFICATE HAS BEEN REVOKED</h1>
             <p>
-                See certificate history for more information.
+                See amendment history for more information.
             </p>
         </div>
     </div>
@@ -326,7 +326,7 @@
   </div>
 
     <!-- <div ng-show="versions && false"> -->
-    <legend>Certificate History</legend>
+    <legend>Amendment History</legend>
     <div class="row top-border bg-litegreen">
 
         <div class="col-xs-2">
@@ -343,7 +343,7 @@
             <label>Unique identifier</label>
         </div>
 
-        <div ng-repeat="document in versions | orderBy:document.createdOn" class="history-text">
+        <div ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text">
             <div class="clearfix"></div>
             <hr style="border-color:#FFF;margin:3;padding:3;">
             <div class="col-xs-2 history-text-date">
@@ -353,11 +353,11 @@
                 <span ng-show="document.body.amendmentIntent==1">
                     <strong>REVOKED</strong>
                 </span>
-                <span ng-show="document.body.amendmentIntent==0">
-                    <strong>AMENDED</strong>
+                <span ng-show="((versions.length>1 && document.body.amendmentIntent!=1 && document.revision < versions.length))">
+                    <span class="bold color-green"> OLD VERSION</span>
                 </span>
-                <span ng-show="document.body.amendmentIntent==undefined">
-                    <strong>PUBLISHED</strong>
+                <span ng-show="versions.length==1 || (versions.length>1 && versions.length == document.revision && document.body.amendmentIntent!=1)">
+                    <span class="bold color-green"> CURRENT VERSION</span>
                 </span>
             </div>
             <div class="col-xs-4">

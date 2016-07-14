@@ -122,6 +122,10 @@ app.directive("viewAbsPermit", [function () {
 						});
 				});
 			};
+
+			$scope.$on('evt:show-document-revoked-message',function(){
+				$scope.showRevokedMessage=true;
+			});
 		}]
 	};
 }]);

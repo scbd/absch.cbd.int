@@ -4,11 +4,11 @@
 		<span class="color-black"> (IRCC) </span>
 		</h4> </div>
 	<div class="record-body panel-body">
-			<div class="alert alert-danger" ng-show="!loading && document && document.amendmentIntent==1">
+			<div class="alert alert-danger" ng-show="!loading && document && (document.amendmentIntent==1 || showRevokedMessage)">
 				<div class="text-center">
 					<h1>THIS CERTIFICATE HAS BEEN REVOKED</h1>
 					<p>
-						See certificate history for more information.
+						See amendment history for more information.
 					</p>
 				</div>
 			</div>

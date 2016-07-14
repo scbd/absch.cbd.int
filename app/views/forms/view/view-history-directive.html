@@ -1,42 +1,63 @@
 <div id="view-history">
 
     <table style="width:100%!important;" class="table table-condensed">
-        <tbody ng-repeat="document in documents | orderBy:'updatedOn':false">
+        <tbody ng-repeat="document in documents | orderBy:'updatedOn':true">
             <tr>
                 <td style="white-space:nowrap;">
                     <a ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_blank">
                         <span>{{document | uniqueID}}</span>
                     </a>
                 </td>
-                <td>
-                    <div style="margin:0 10px;">
+                <td style="width:12%">
+                    <div style="margin:0 10px;" ng-if="!isPermit">
                         <span ng-show="document.body.amendmentIntent==1  && document.type!='absCheckpointCommunique'">
-                            <span class="bold color-red"> REVOKED</span></span>
+                            <span class="bold color-red"> REVOKED</span>
+                        </span>
                         <span ng-show="isPermit && document.type=='absCheckpointCommunique'">
-                            <span class="bold"> CPC SENT</span></span>
+                            <span class="bold"> CPC SENT</span>
+                        </span>
                         <span ng-show="(document.body.amendmentIntent==0 || (document.revision > 1 && document.body.amendmentIntent==undefined) && !isPermit && document.type!='absCheckpointCommunique')||
                             (document.revision > 1 && undefined==isPermit && document.type=='absCheckpointCommunique')">
-                            <span class="bold color-green"> UPDATED</span></span>
+                            <span class="bold color-green"> UPDATED</span>
+                        </span>
                         <span ng-show="(document.revision == 1 && isPermit && document.type!='absCheckpointCommunique') || (document.revision == 1 && !isPermit)">
-                            <span class="bold color-green"> PUBLISHED</span></span>
+                            <span class="bold color-green"> PUBLISHED</span>
+                        </span>
+                    </div>
+
+                    <div style="margin:0 10px;" ng-if="isPermit">
+                        <span ng-show="document.body.amendmentIntent==1  && document.type!='absCheckpointCommunique'">
+                            <span class="bold color-red"> REVOKED</span>
+                        </span>
+                        <span ng-show="((documents.length>1 && document.body.amendmentIntent!=1 && document.revision < documents.length))">
+                            <span class="bold color-green"> OLD VERSION</span>
+                        </span>
+                        <span ng-show="documents.length==1 || (documents.length>1 && documents.length == document.revision && document.body.amendmentIntent!=1)">
+                            <span class="bold color-green"> CURRENT VERSION</span>
+                        </span>
                     </div>
                 </td>
-                <td >
+                <td>
                     <div ng-show="!publicView">by <span style="font-weight:500;">{{document.updatedBy.firstName}} {{document.updatedBy.lastName}} ({{document.updatedBy.email}})</span> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span></div>
                     <div ng-show="publicView"> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span></div>
 
                     <div ng-show="document.body.amendmentDescription">
                         <span ng-show="document.body.amendmentDescription">
-						  		<span ng-show="!more" ng-bind-html="document.body.amendmentDescription| lstring:locale | limitTo:80">
-						  		<a ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentDescription| lstring:locale).length > 200">
-									<strong>...more</strong> </a></span>
-                        <span ng-show="more" ng-bind-html="document.body.amendmentDescription| lstring:locale">
-										<a ng-href="#" ng-click="more=!more"> <strong>less</strong></a>
-									</span>
+						  		<div ng-show="!more">
+                                    <span ng-bind-html="document.body.amendmentDescription| lstring:locale | limitTo:200"></span>
+                                    <a ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentDescription| lstring:locale).length > 200">
+                                        <strong>...more</strong> 
+                                    </a>
+                                </div>
+                                <div ng-show="more"> 
+                                    <span ng-bind-html="document.body.amendmentDescription| lstring:locale">
+                                    </span>
+                                    <a ng-href="#" ng-click="more=!more"> <strong>...less</strong></a>
+                                </div>
                         </span>
                     </div>
                 </td>
-                <td ng-if="!publicView" >
+                <td ng-if="!publicView">
                     <div style="margin:0 10px;"> &nbsp;Requested by
                         <span style="font-weight:500;">{{document.submittedBy.firstName}} {{document.submittedBy.lastName}} ({{document.submittedBy.email}})
                             </span> on <span style="font-weight:500;">{{document.submittedOn | formatDateWithTime}}</span></div>
