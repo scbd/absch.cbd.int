@@ -1,4 +1,4 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js', '/app/js/common.js', 
+define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js', '/app/js/common.js',
  '/app/views/forms/edit/document-selector.html.js', '/app/views/forms/edit/warning-message-cna.html.js',
         '../view/view-authority.directive.js'
         ], function(app, _) {
@@ -8,7 +8,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
         $controller('editController', {
             $scope: $scope
         });
-      
+
         $scope.getMeasures=[];
         $scope.path = $location.path();
         //$scope.documentUID = "NEW";
@@ -86,7 +86,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
             },
 
         });
-        
+
         //==================================
         $scope.showResponsibleforAllMsg = function() {
 
@@ -98,26 +98,26 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 return error.property == 'absResponsibleForAllNot';
             });
         };
-        
-       
+
+
         //==================================
         //
         //==================================
         $scope.getCleanDocument = function(document) {
-                
+
             document = document || $scope.document;
 
             if (!document)
                 return undefined;
-                
+
             //document = angular.fromJson(angular.toJson(document));
-           
+
             if (!document.consentGranted) {
                 document.consentInformation = undefined;
                 document.consentDocuments = undefined;
             }
 
-            if (!document.mutuallyAgreedTermsEstablished) {
+            if (!document.mutuallyAgreedTermsInformation) {
                 document.mutuallyAgreedTermsInformation = undefined;
                 document.mutuallyAgreedTermsDocuments = undefined;
             }
@@ -135,7 +135,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 document.amendmentsDescription = undefined;
             }
             if (document.providerConfidential) {
-                document.providers = undefined;
+                document.provider = undefined;
             }
             if (document.informedConsentConfidential) {
                 document.informedConsents = undefined;
@@ -169,7 +169,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/direct
                 identifier: "cbdLibrary:abs-ch"
             }]
         });
-        
+
         //==================================
         $scope.showJurisdictionName = function() {
 
