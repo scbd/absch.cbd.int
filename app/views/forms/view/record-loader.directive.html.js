@@ -70,7 +70,7 @@ define(['app','ngSmoothScroll',
 						$scope.internalDocument = _new;
 						if ($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)) {
 							loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
-
+							checkIfPermitRevoked();
 						}
 					});
 
@@ -200,8 +200,9 @@ define(['app','ngSmoothScroll',
 							$scope.internalDocument = results[0];
 							$scope.internalDocumentInfo = results[1];
 							$scope.internalDocument.info = results[1];
+							checkIfPermitRevoked();
 
-							// console.log(results[2].data.response.docs[0]);
+							
 							return $q.when(getDocumentVersion($scope.internalDocumentInfo.identifier))
 									.then(function(verResult){
 										
@@ -374,6 +375,13 @@ define(['app','ngSmoothScroll',
 						});
 					}
 					
+					function checkIfPermitRevoked(){
+
+						if($scope.internalDocument && $scope.internalDocument.header.schema == 'absPermit'){
+							if($scope.internalDocument.amendmentIntent == 1)
+                  				$scope.isIRCCRevoked = true;
+						}
+					}
 					
 					$scope.api = {
 						loadDocument: $scope.loadDocument

@@ -1,5 +1,5 @@
 define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', '/app/js/common.js',
-    '/app/services/search-service.js', '/app/services/role-service.js',
+    '/app/services/search-service.js', '/app/services/role-service.js','scbd-angularjs-controls',
     './directives/register-top-menu.js', '../directives/block-region-directive.js',
 	'/app/views/forms/edit/editFormUtility.js', '/app/views/register/directives/record-type-header.html.js'],
     function (app, _) {
@@ -15,6 +15,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                 var deleteRecordModel = $element.find("#deleteRecordModel");
                 var duplicateRecordModel = $element.find("#duplicateRecordModel");
                 var deleteWorkflowRequestMadal = $element.find("#deleteWorkflowRequestModal");
+                $scope.amendmentDocument = {locales:['en']};
 
                 $element.find("[data-toggle='tooltip']").tooltip({
                     trigger: 'hover'
@@ -126,10 +127,15 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     }
                     else {
                         if (record.type == 'absPermit' && $scope.isPublished(record)) {
-                            //cant delete only modify
-                            $scope.pilotDelete = true;
-                            $scope.cantDelete = true;
-                            $scope.recordToDelete = "0"; //TODO:only for pilot phase
+                            $scope.loading = true;
+                            $q.when(storage.documents.get(record.identifier))
+                            .then(function (result) {
+                                $scope.pilotDelete = true;
+                                $scope.cantDelete = true;
+                                $scope.recordToDelete = record; //TODO:only for pilot phase'
+                                $scope.recordToDelete.document = result.data;
+                                $scope.recordToDelete.document.amendmentDescription = undefined;
+                            }).finally(function(){$scope.loading=false;});
                         } else {
                             $scope.recordToDelete = record;
                             $scope.cantDelete = false;
@@ -179,6 +185,29 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         delete $scope.loading
                     });
                 };
+
+                $scope.revokeRecord = function(record){
+                    if(!record.document)
+                        return;
+                    if(!record.document.amendmentDescription || _.values(record.document.amendmentDescription).length == 0)
+                        return record.showRevokeError = true;
+                    
+                    $scope.loading = true;
+                    var document = record.document;
+                    document.amendmentIntent = 1;
+                    record.showRevokeError = false;
+
+                    return $q.when(editFormUtility.publishRequest(document))
+                            .then(function (document) { 
+                                
+                                $scope.$emit("documentDeleted", record);
+                                $scope.amendmentDocument = {locales:['en']};
+                                $scope.recordToDelete = null;
+
+                            }).finally(function () {
+                                delete $scope.loading
+                            });
+                }
 
                 //============================================================
                 //
@@ -501,10 +530,11 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                     var qDrafts = storage.drafts.query(qAnd.join(" and ") || undefined, draftParams);
 
-                    $q.all([qDocuments, qDrafts]).then(function (results) {
+                    $q.all([qDocuments, qDrafts, getRevokedDocuments()]).then(function (results) {
                         $scope.records = [];
                         var documents = results[0].data.Items;
                         var drafts = results[1].data.Items;
+                        var revoked = results[2].data.response.docs;
 
                         var map = {};
 
@@ -515,7 +545,10 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                             map[o.identifier] = o;
                         });
 
-                        _.values(map).forEach(function (row) {
+                        _.values(map).forEach(function (row) {                            
+                            if(_.some(revoked, function(doc){ return doc.identifier_s == row.identifier})){
+                                row.revoked = true;
+                            }
                             $scope.records.push(row);
                         })
                         $("a[role*='button']").toggleClass('ui-disabled');
@@ -540,6 +573,17 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                 function recordDuplicated(doc) {
                     $scope.records.push(doc);
                     $scope.refreshFacets();
+                }
+
+
+                function getRevokedDocuments(){
+
+                    var queryParameters = {
+                        'query': 'amendmentIntent_i:1 AND government_s:' + $rootScope.user.government,
+                        'rowsPerPage': 100,
+                        fields: 'identifier_s'
+                    };
+                    return searchService.list(queryParameters, null);
                 }
 
                 loadRecords();

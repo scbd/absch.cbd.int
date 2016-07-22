@@ -57,11 +57,17 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/js/common.js',
       if(info.identifier)//$scope.status=="loading"
           $q.when(editFormUtility.documentExists(info.identifier),function(exists){
               $scope.documentExists = exists;
+             
               //amendment intent should be entered by users for every edit/ clear it on load if any from previous update
-              if($scope.document.amendmentIntent != undefined){
-                $scope.document.amendmentIntent = undefined;
+              if($scope.document.amendmentIntent != undefined){                
+                if($scope.document.amendmentIntent == 1)
+                  $scope.isIRCCRevoked = true;
+                  
+                if(!$scope.isIRCCRevoked)  
+                  $scope.document.amendmentIntent = undefined;
               }
-              if($scope.document.amendmentDescription)
+
+              if(!$scope.isIRCCRevoked && $scope.document.amendmentDescription)
                 $scope.document.amendmentDescription = undefined;
 
           });

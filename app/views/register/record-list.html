@@ -3,17 +3,15 @@
     <link href="/app/css/record.css" rel="stylesheet">
 
     <span register-top-menu></span>
-   
-    <div class="card card-1-notrans"> 
+
+    <div class="card card-1-notrans">
         <span record-type-header></span>
-        
+
         <div class="register-content-content">
             <div ng-show="msg" class="alert alert-success alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
                 <strong>{{msg}}</strong>
             </div>
-
-
             <div class="row">
                 <div class="col-xs-8">
                     <div class="btn-group-sm">
@@ -53,7 +51,6 @@
             <table class="table table-hover table-striped" style="width:100%;margin-top:20px;">
                 <thead>
                     <tr>
-                        <!-- <th style="width:50px;">&nbsp;</th> -->
                         <th ng-click="toggleOrderBy('title|lstring')" id="titleHeader">Title</th>
                         <th ng-if="schema=='contact'" ng-click="toggleOrderBy('body.type')" id="body.typeHeader">Type</th>
                         <th style="width:200px;" ng-click="toggleOrderBy('SubmittedBy')" id="createdOnHeader">Last published</th>
@@ -91,7 +88,7 @@
                             </a>
                         </span>
                             <div style="font-size:11px;font-weight:bold;text-transform:uppercase;color:#666;" ng-if="isPublished(record)">
-                                {{record | uniqueID}}
+                                {{record | uniqueID}} <span ng-show="isDraft(record) || isRequest(record)" class="label label-primary">draft</span>
                             </div>
                         </td>
                         <td ng-if="schema=='contact'">
@@ -147,14 +144,14 @@
                         </td>
                         <td>
 
-                            <div ng-show="isPublished(record) && !isRequest(record)" class="color-published-green bold"> Published </div>
-                            <div ng-show="isDraft(record) && !isRequest(record)" class="color-litegrey bold"> Draft </div>
-                            <div ng-show="isRequest(record) && !record.isUpdating && !isPublishingAuthority(record)" class="color-red bold"> Pending approval </div>
-
-                            <a class="btn btn-danger color-white" ng-show="isRequest(record) && !record.isUpdating && isPublishingAuthority(record)" ng-href="/register/{{record.metadata.schema | schemaShortName}}/{{record.identifier}}/view">
-                            Pending approval
-                        </a>
-                            <div ng-show="isRequest(record) && record.isUpdating">
+                            <div ng-show="!record.revoked && isPublished(record) && !isRequest(record)" class="color-published-green bold"> Published </div>
+                            <div ng-show="!record.revoked && isDraft(record) && !isRequest(record)" class="color-litegrey bold"> Draft </div>
+                            <div ng-show="!record.revoked && isRequest(record) && !record.isUpdating && !isPublishingAuthority(record)" class="color-red bold"> Pending approval </div>
+                            <span class="color-red bold" ng-show="record.revoked">Revoked</span>
+                            <a class="btn btn-danger color-white" ng-show="!record.revoked && isRequest(record) && !record.isUpdating && isPublishingAuthority(record)" ng-href="/register/{{record.metadata.schema | schemaShortName}}/{{record.identifier}}/view">
+                                Pending approval
+                            </a>
+                            <div ng-show="!record.revoked && isRequest(record) && record.isUpdating">
                                 <a class="btn btn-info" type="button" ng-click="return" style="padding:4px;">
                                     <strong><i class="fa fa-spin fa-cog"></i> Processing...</strong>
                                 </a>
@@ -163,36 +160,19 @@
                         <td>
                             <div class="btn-group document_buttons btn-group-sm" style="width:100px;">
                                 <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
-                                <button title="Locked for edit" ng-show="isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
-                                <button title="Cancel request" ng-show="isRequest(record) && showAddButton() && isMyRecord(record)" type="button" class="btn btn-default" ng-click="askDeleteWorkflowRequest(record)"><i class="fa fa-undo"></i></button>
-                                <a title="Edit" ng-show="!isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|schemaShortName}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
-                                <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+                                <button title="Locked for edit" ng-show="!record.revoked && isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
+                                <button title="Cancel request" ng-show="!record.revoked && isRequest(record) && showAddButton() && isMyRecord(record)" type="button" class="btn btn-default" ng-click="askDeleteWorkflowRequest(record)"><i class="fa fa-undo"></i></button>
+                                <a title="Edit" ng-show="!record.revoked && !isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|schemaShortName}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
+                                <button title="Delete" ng-show="!record.revoked && !isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
                             </div>
                         </td>
                     </tr>
-                    <!--<tr ng-show="displayDetails || (displayRequest && !record.isUpdating)" style="border:0!important;background-color:inherit!important;" ng-class="{'bg-grey': displayDetails||displayRequest}">
-                
-                    <td colspan="6" style="border:0!important;">
-                        <div ng-show="displayDetails">
-                            <a style="z-index:999999;width:100%;padding:0!important;margin:0!important;" ng-click="displayDetails=false;displayRequest=false;">
-                                    <span class="pull-right bold" aria-hidden="true" style="z-index:999999;color:#FFF;font-size:20px;padding-right:10px;position:relative;top:3px;cursor:pointer;">&times;</span>
-                                </a>
-                            <div record-loader document="record.data" class="record-body"></div>
-                        </div>
-
-                        <div ng-show="displayRequest">
-                            <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{getWorkflowID(record)}}" on-activity-update="updateWorkflowList(document, workflowInfo)"></div>
-                        </div>
-
-                    </td>
-                </tr>-->
                     <tr ng-if="displayReference && record.body && record.body.badRevisions && record.body.badRevisions.length > 0" style="border:0!important;background-color:inherit!important;" ng-class="{'bg-grey': displayReference}">
                         <td colspan="6" style="border:0!important;">
 
                             <div ng-show="displayReference" block-region activate=" loading">
 
                                 <div class="btn-group-sm pull-right">
-                                    <!-- style="font-size: 16px; color: white;margin:0;padding:0;float:right;"> -->
                                     <a ng-href="#" class="btn btn-sm btn-primary" ng-click="loading = !loading">
                                         <span class="glyphicon glyphicon-random"></span> Update</a>
                                 </div>
@@ -252,9 +232,24 @@
 
                         </div>
                         <div class="modal-body" ng-show="cantDelete || pilotDelete">
-
-                            Not allowed to delete published ABSCH-IRCC records. IRCC records can be amended and set as <i>revoked</i>. <i>Revoked</i> IRCC records are no longer valid.
-                            <!-- <span class="label label-danger">The delete button is only enabled for pilot phase.</span> -->
+                            <div ng-show="isPublished(recordToDelete)" class="well">
+                                <span class="label label-info">Not allowed to delete published ABSCH-IRCC records.
+                                    <i>Revoked</i> IRCC records are no longer valid.
+                                </span></br>
+                                <p><b>{{recordToDelete.title|lstring}}</b> {{recordToDelete | uniqueIDWithoutRevision}}</p>
+                                <p ng-bind-html="recordToDelete.summary|lstring"></p>
+                                <hr/>
+                                <div km-form-languages ng-model="recordToDelete.document.header.languages" style="padding-top:20px;padding-left:0px;" class="pull-left btn-xs"></div></br></br></br>
+                                <div class="km-control-group"> 
+                                    <div class="km-control-group" name="amendmentDescription" required caption="Provide a summary of the reason for revoking this IRCC">
+                                        <div km-textbox-ml ng-model="recordToDelete.document.amendmentDescription" rows="3" placeholder="" locales="recordToDelete.document.header.languages" />
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-danger" ng-disabled="loading" ng-click="revokeRecord(recordToDelete)">
+                                    Revoke this IRCC
+                                </button></br></br>
+                                <div class="alert alert-danger" ng-if="recordToDelete.showRevokeError">Please enter a summary of the reason for revoking this IRCC</div> 
+                            </div>
                         </div>
                         <div class="modal-body" ng-show="iacCantDelete">
 
@@ -269,7 +264,6 @@
                 </div>
                 <!-- /.modal-dialog -->
             </div>
-            <!-- /.modal -->
 
             <div id="duplicateRecordModel" class="modal fade" data-backdrop="static">
                 <div class="modal-dialog">
@@ -307,6 +301,9 @@
                     </div>
                 </div>
             </div>
+
+
+
         </div>
 
 

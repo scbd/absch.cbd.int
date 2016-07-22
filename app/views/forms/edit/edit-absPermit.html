@@ -1,7 +1,28 @@
 ﻿<div ng-controller="editAbsPermit">
 
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <style>
+        .dimmer-parent{
+            position: relative;
+        }
+        .blockRegion {
+            position: initial;
+            /*box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);*/
+            margin: 1rem 0;
+            padding: 1em;
+            border-radius: .28571429rem;
+            /*border: 1px solid rgba(34,36,38,.15);*/
+        }
+        .dimmer {
+            border-radius: inherit!important;
+            position: absolute!important;
+            top: 0!important;
+            left: 0!important;
+            padding: 0;
+            margin: 0;
+        }
 
+    </style>
     <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
 
         <span block-region activate="isLoading()" ng-if="isLoading()"></span>
@@ -11,26 +32,39 @@
                 <strong>Error as occured...</strong>
                 <div>{{error}}</div>
             </div>
-            <div ng-show="!isLoading() && status!='hidden'">
-
-                <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="false"></div>
-                <div km-document-validation ng-model="validationReport"></div>
-
+            <div ng-show="!isLoading() && status!='hidden'" class="dimmer-parent">
+                <div ng-if="isIRCCRevoked">
+                    <div class="blockRegion inverted dimmer active" ng-if="isIRCCRevoked"><div class="medium loader"></div></div>
+                    <label for="invalidForm" style="width:100%">
+                        <div class="alert alert-danger" ng-show="isIRCCRevoked">
+                            <div class="text-center">
+                                <h1>THIS CERTIFICATE HAS BEEN REVOKED</h1>
+                                <p>
+                                    Revoked IRCC's are not editable.
+                                </p>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                
+                <div ng-show="!isIRCCRevoked">
+                    <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="isIRCCRevoked"></div>
+                    <div km-document-validation ng-model="validationReport"></div>
+                </div>
+                
                 <form class="editForm" name="editForm" id="editForm" style="margin-top:10px">
                     <div ng-show="tab=='edit'" km-tab="edit">
-                        <legend name="formInfo" style="display:none"></legend>
-                        <!--<div class="alert alert-warning">Please note that all information published on the ABS Clearing-House will be made public and therefore, confidential information should not be submitted. Publishing authorities are reminded that it is their responsibility to ensure that   any confidentiality clauses in mutually agreed terms are respected.
-                        </div>-->
-
+                        <legend name="formInfo" style="display:none"></legend>                        
                         <section ng-show="documentExists">
                             <legend>Amendment intent</legend>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="amendmentIntent" required caption="Please indicate what the intent of the modification is">
                                         <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0"> <strong> Update: </strong> Information is being submitted to replace a previously issued internationally recognized certificate
-                                        of compliance (a new certificate will be constituted and the old one will no longer be valid)</br>
+                                        of compliance (a new certificate will be constituted and the old one will no longer be valid)
+                                        <!--</br>
                                         <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="1"> <strong> Revoke: </strong> An existing permit or its equivalent is being revoked and the constituted internationally recognized
-                                        certificate of compliance will no longer be valid.
+                                        certificate of compliance will no longer be valid.-->
                                     </div>
                                 </div>
                             </div>
@@ -44,7 +78,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12">
+                                <div class="col-xs-12" id="amendmentHistory">
                                     <label>Amendment history</label>
 
                                     <div view-history document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
