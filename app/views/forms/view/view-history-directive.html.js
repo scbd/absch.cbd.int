@@ -49,7 +49,7 @@ define(['app'], function(app) {
                             if (results.data.Items && results.data.Items.length > 0 && $scope.documents[0].type == "absPermit") {
                                 $scope.isPermit = true;
 
-                                if(_.some($scope.documents, function(document){return document.body.amendmentIntent==0;})){
+                                if(_.some($scope.documents, function(document){return document.body.amendmentIntent==1;})){
                                     $scope.$emit('evt:show-document-revoked-message',{});
                                 }
                             }

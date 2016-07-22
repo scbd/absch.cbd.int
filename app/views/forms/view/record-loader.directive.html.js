@@ -1,5 +1,4 @@
-define(['app',
-	'scbd-angularjs-services',
+define(['app','ngSmoothScroll',
 	'scbd-angularjs-filters',
 	'./view-history-directive.html.js',
     '/app/js/common.js',
@@ -38,9 +37,8 @@ define(['app',
 					$scope.init();
 			},
 			controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows",
-				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-				 $http, $httpAWS, realm, $element, $compile, searchService, IWorkflows) {
+				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService',
+				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter, $http, $httpAWS, realm, $element, $compile, searchService) {
 
 					var schemaMapping = {
 						news: '/app/views/forms/view/view-news.directive.html.js',
@@ -72,6 +70,7 @@ define(['app',
 						$scope.internalDocument = _new;
 						if ($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)) {
 							loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
+							checkIfPermitRevoked();
 						}
 					});
 
@@ -180,13 +179,7 @@ define(['app',
 						var qDocument;
 						var qDocumentInfo;
 
-						var queryParameters = {
-							'query': 'uniqueIdentifier_s:*-' + identifier,
-							'rowsPerPage': 1,
-							fields: '_revision_i'
-						};
-						var qVersionInfo = searchOperation = searchService.list(queryParameters, null);
-
+						
 
 						if (version == 'draft') {
 							qDocument = storage.drafts.get(identifier).then(function (result) { return result.data || result });
@@ -202,37 +195,34 @@ define(['app',
 
 						}
 						$scope.loading = true;
-						$q.all([qDocument, qDocumentInfo, qVersionInfo]).then(function (results) {
+						$q.all([qDocument, qDocumentInfo]).then(function (results) {
 
 							$scope.internalDocument = results[0];
 							$scope.internalDocumentInfo = results[1];
 							$scope.internalDocument.info = results[1];
+							checkIfPermitRevoked();
 
-							if (results[2].data.response.docs.length > 0) {
-								$scope.documentVersionCount = results[2].data.response.docs[0]._revision_i
-							}
-							else
-								$scope.documentVersionCount = $scope.internalDocumentInfo.revision || $scope.internalDocumentInfo.Count;
+							
+							return $q.when(getDocumentVersion($scope.internalDocumentInfo.identifier))
+									.then(function(verResult){
+										
+										if (verResult.data.response.docs.length > 0) {
+											$scope.documentVersionCount = verResult.data.response.docs[0]._revision_i
+										}
+										else
+											$scope.documentVersionCount = $scope.internalDocumentInfo.revision || $scope.internalDocumentInfo.Count;
 
-							if (version && $scope.internalDocumentInfo.revision != version) {
-								$scope.internalDocumentInfo.revision = version;
-							}
-							if (version)
-								$scope.revisionNo = version
-							else
-								$scope.revisionNo = $scope.documentVersionCount
+										if (version && $scope.internalDocumentInfo.revision != version) {
+											$scope.internalDocumentInfo.revision = version;
+										}
+										if (version)
+											$scope.revisionNo = version
+										else
+											$scope.revisionNo = $scope.documentVersionCount
 
-							loadViewDirective($scope.internalDocument.header.schema);
-
-							if($scope.internalDocumentInfo.workingDocumentLock){
-								IWorkflows.get($scope.internalDocumentInfo.workingDocumentLock.lockID.replace('workflow-', ''))
-								.then(function(workflow){
-									if(workflow && workflow.type.name == 'delete-record')
-										$scope.workflowRequestType = "deletion";
-									else
-										$scope.workflowRequestType = "publishing";
-								});
-							}
+										loadViewDirective($scope.internalDocument.header.schema);
+									
+									});
 
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
@@ -245,6 +235,15 @@ define(['app',
 
 					};
 
+					function getDocumentVersion(identifier){
+
+						var queryParameters = {
+							'query': 'identifier_s:' + identifier,
+							'rowsPerPage': 1,
+							fields: '_revision_i'
+						};
+						return searchOperation = searchService.list(queryParameters, null);
+					}
 					//==================================
 					//
 					//==================================
@@ -266,7 +265,7 @@ define(['app',
 						var schema = $scope.internalDocumentInfo.type;
 						var identifier = $scope.internalDocumentInfo.identifier;
 						$timeout(function () {
-							$location.path("/register/" + $filter("mapSchema")(schema) + "/" + identifier + '/edit');
+							$location.path("/register/" + $filter("schemaShortName")(schema) + "/" + identifier + '/edit');
 						}, 1);
 
 					}
@@ -349,10 +348,17 @@ define(['app',
 						var schemaDetails = schemaMapping[lschema.toLowerCase()];
 
 						require([schemaDetails], function () {
+
+
+
 							var name = snake_case(lschema);
+
+
+
 							var directiveHtml =
 								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
 									.replace(/DIRECTIVE/g, 'view-' + name);
+
 							$scope.$apply(function () {
 								$element.find('#schemaView')
 									.empty()
@@ -369,6 +375,13 @@ define(['app',
 						});
 					}
 					
+					function checkIfPermitRevoked(){
+
+						if($scope.internalDocument && $scope.internalDocument.header.schema == 'absPermit'){
+							if($scope.internalDocument.amendmentIntent == 1)
+                  				$scope.isIRCCRevoked = true;
+						}
+					}
 					
 					$scope.api = {
 						loadDocument: $scope.loadDocument
