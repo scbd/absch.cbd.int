@@ -205,7 +205,7 @@
             </tr>
             <tr ng-if="term.identifier=='CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F' || term.geneticResourcesTerms" >
               <td colspan="3" style="padding-left:5%">
-                  <span onload="elements = term.geneticResourcesTerms|| binding.geneticResource.elements" ng-include="'/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement'"></span>
+                  <span onload="elements = term.geneticResourcesTerms|| binding.geneticResourceElements" ng-include="'/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement'"></span>
               </td>
             </tr>
             <tr ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && identifiers[term.identifier]">

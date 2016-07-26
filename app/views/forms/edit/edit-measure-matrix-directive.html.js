@@ -327,15 +327,18 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
 
                 function setChildrenSelected(identifier, skipRecurvsive) {
                     var term = _.findWhere($scope.terms, { identifier: identifier });
-                    term.showElement = true;
-                    _.each(term.narrowerTerms, function (narrowerIdentifier) {
-                        var narrowerTerm = _.findWhere($scope.terms, { identifier: narrowerIdentifier });
-                        narrowerTerm.showElement = true;
+                    if(term){
+                        term.showElement = true;
+                        _.each(term.narrowerTerms, function (narrowerIdentifier) {
+                            var narrowerTerm = _.findWhere($scope.terms, { identifier: narrowerIdentifier });
+                            narrowerTerm.showElement = true;
 
-                        if (!skipRecurvsive && narrowerTerm.narrowerTerms && narrowerTerm.narrowerTerms.length > 0)
-                            setChildrenSelected(narrowerIdentifier);
-                    });
+                            if (!skipRecurvsive && narrowerTerm.narrowerTerms && narrowerTerm.narrowerTerms.length > 0)
+                                setChildrenSelected(narrowerIdentifier);
+                        });
+                    }
                 }
+                    
 
                 //==============================
                 //
@@ -420,9 +423,9 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
                         alert('please select a GR Type and GR Area');
                         return;
                     }
-                    if (!$scope.binding.geneticResource)
-                        $scope.binding.geneticResource = [];
-                    $scope.binding.geneticResource.push({
+                    if (!$scope.binding.geneticResourceElements)
+                        $scope.binding.geneticResourceElements = [];
+                    $scope.binding.geneticResourceElements.push({
                         types: geneticResource.types,
                         areas: geneticResource.areas
                     });
@@ -433,7 +436,7 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
                 };
 
                 $scope.deleteElement = function (element) {
-                    $scope.binding.geneticResource.splice($scope.binding.geneticResource.indexOf(element), 1);
+                    $scope.binding.geneticResourceElements.splice($scope.binding.geneticResourceElements.indexOf(element), 1);
                 }
 
                 $scope.addOther = function (term) {

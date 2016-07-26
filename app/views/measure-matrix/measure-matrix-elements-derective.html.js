@@ -136,16 +136,16 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                 throw "Terms must be array";
 
                             if ($scope.binding) {
-                                 if($scope.binding.geneticResource) {
-                                    if($scope.binding.geneticResource.answer){
-                                        var grCoverId = addCustomElement('Covers all genetic resources', '24E809DA-20F4-4457-9A8A-87C08DF81E8A', 1);
-                                        var geneticResource = $scope.binding.geneticResource;
-                                        oNewSections[grCoverId] = geneticResource.section||{};
-                                        oNewIdentifiers[grCoverId] = true;
-                                        oNewIdentifiers['24E809DA-20F4-4457-9A8A-87C08DF81E8A'] = true;
-                                    }
-                                }
-                                if(!$scope.binding.geneticResource || $scope.binding.geneticResource.answer){
+                                //  if($scope.binding.geneticResource) {
+                                //     if($scope.binding.geneticResource.answer){
+                                //         var grCoverId = addCustomElement('Covers all genetic resources', '24E809DA-20F4-4457-9A8A-87C08DF81E8A', 1);
+                                //         var geneticResource = $scope.binding.geneticResource;
+                                //         oNewSections[grCoverId] = geneticResource.section||{};
+                                //         oNewIdentifiers[grCoverId] = true;
+                                //         oNewIdentifiers['24E809DA-20F4-4457-9A8A-87C08DF81E8A'] = true;
+                                //     }
+                                // }
+                                if(!$scope.binding.geneticResourceElements || $scope.binding.geneticResourceElements.answer){
                                     //delete  from list
                                    var geneticResource = _.findWhere($scope.terms, {identifier : 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'});
                                    if(geneticResource){
@@ -290,28 +290,28 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                     else $scope.error = error.data || "unkown error";
                 }
 
-                var grSubsetId;
-                var grCoverId
+                // var grSubsetId;
+                // var grCoverId
                 function addMeasureToElements(measure) {
                     if(!measure)
                         return;
                     if($scope.type!='single' && measure.absMeasures){
-                        if(measure.absMeasures.geneticResource) {
-                            if(measure.absMeasures.geneticResource.answer){
-                                if(!grCoverId)
-                                    grCoverId = addCustomElement('Covers all genetic resources', 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', 1);
-                                var geneticResource = measure.absMeasures.geneticResource;
-                                newMeasureElement({identifier:grCoverId, section:geneticResource.section}, measure);
-                            }
-                            else{
-                                if(!grSubsetId)
-                                    grSubsetId = addCustomElement('Covers a subset of genetic resources', 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', 2);
+                        if(measure.absMeasures.geneticResourceElements) {
+                            // if(measure.absMeasures.geneticResource.answer){
+                            //     if(!grCoverId)
+                            //         grCoverId = addCustomElement('Covers all genetic resources', 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', 1);
+                            //     var geneticResource = measure.absMeasures.geneticResource;
+                            //     newMeasureElement({identifier:grCoverId, section:geneticResource.section}, measure);
+                            // }
+                            // else{
+                                // if(!grSubsetId)
+                                //     grSubsetId = addCustomElement('Covers a subset of genetic resources', 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', 2);
 
-                                var geneticResource = measure.absMeasures.geneticResource;
-                                var identifier = newMeasureElement({identifier:grSubsetId, section:{}}, measure);
+                                var geneticResource = measure.absMeasures.geneticResourceElements;
+                                var identifier = newMeasureElement({identifier:'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', section:{}}, measure);
                                 grElement = _.findWhere($scope.terms, {'identifier': identifier});
-                                grElement.geneticResourcesTerms = measure.absMeasures.geneticResource.elements;
-                            }
+                                grElement.geneticResourcesTerms = measure.absMeasures.geneticResourceElements;
+                            // }
                         };
                         _.each(measure.absMeasures.relevantElements, function(measureElement) {
                             newMeasureElement(measureElement, measure);
