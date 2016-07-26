@@ -37,9 +37,11 @@ app.directive("viewDefaultReference", [function () {
 							return result.data;
 						})
 						.catch(function(error, code){
-							if (code == 404) {
-								return storage.drafts.get(ref.identifier, { info : true})
+							if (error.status == 404) {
+								$scope.errorCode = 404;
+								return storage.drafts.get(identifier, { info : true})
 									.then(function(result){
+										$scope.errorCode = undefined;
 										return result.data;
 									});
 							};
