@@ -89,21 +89,6 @@
 				{{document.modelContractualClauseDescription|lstring}}
 			</div>
 		</div>
-		<!-- <div ng-show="registeredMeasures">
-			<label>Related measures</label>
-			<div class="reference-select">
-				<table class="table table-hover table-striped">
-					<tr ng-repeat="item in registeredMeasures"  ng-hide="item.errorCode">
-						<td>
-							<strong>{{item.document.title | lstring}}</strong>
-							<div ng-bind-html="item.document.summary | lstring:locale"></div>
-							<div class="alert alert-block" ng-show="item.errorCode"><strong>Record not found</strong> {{item.identifier}}</div>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div> -->
-
 		<div ng-show="document.registeredMeasuresDescription">
 			<div class="km-value km-pre">{{document.registeredMeasuresDescription | lstring:review.local}}</div>
 		</div>
@@ -137,11 +122,11 @@
 				</ul>
 			</div>
 		</div>
-		<div ng-show="linkedMeasures">
+		<div ng-show="document.linkedMeasures">
 			<label>Related measures</label>
 			<div class="km-value">
 				<ul>
-					<li ng-repeat="item in linkedMeasures">
+					<li ng-repeat="item in document.linkedMeasures">
 						<div view-default-reference ng-model="item.identifier" locale="locale"></div>
 					</li>
 				</ul>
@@ -149,14 +134,14 @@
 		</div>
 
 
-		<div ng-show="amendedMeasures || document.amendmentsDescription">
+		<div ng-show="document.amendedMeasures || document.amendmentsDescription">
 			<legend>Amendments</legend>
 			<div ng-show="amendedMeasures">
 				<label>This measure is amending the following:</label>
 
 				<div class="km-value">
 					<ul>
-						<li ng-repeat="item in amendedMeasures">
+						<li ng-repeat="item in document.amendedMeasures">
 							<div view-default-reference ng-model="item.identifier" locale="locale"></div>
 						</li>
 					</ul>
@@ -182,7 +167,6 @@
 			<div class="km-value">
 				<ul>
 					<li ng-repeat="item in document.measureAmendedBy">
-						<i class="fa fa-external-link-square" aria-hidden="true"></i>
 						<div view-default-reference ng-model="item.identifier_s" locale="locale"></div>
 					</li>
 				</ul>
