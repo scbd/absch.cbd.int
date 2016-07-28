@@ -111,20 +111,12 @@ define(['app', 'underscore',
 					fileFormats 	: function() { return $http.get("/api/v2013/thesaurus/domains/D2D97AB3-4D20-41D4-8CBE-B21C33924823/terms", { cache: true }).then(function(o){ return Thesaurus.buildTree(o.data); }); },
 	 			    purposes 	    : function() { return $http.get("/api/v2013/thesaurus/domains/E712C9CD-437E-454F-BA72-E7D20E4C28ED/terms", { cache: true }).then(function(o){ return Thesaurus.buildTree(o.data); }); },
 	 			    targetGroups    : function() { return $http.get("/api/v2013/thesaurus/domains/AFB155C4-93A6-402C-B812-CFC7488ED651/terms", { cache: true }).then(function(o){ return o.data; }); },
-	 			    expertiseLevels : function() { return $http.get("/api/v2013/thesaurus/domains/1B57D9C3-F5F8-4875-94DC-93E427F3BFD8/terms", { cache: true }).then(function(o){ return o.data; }); },
-					publicationYears : function() {
-						var years = [];
-						var end = new Date().getFullYear(); 
-						for (var i = end; i > 1970 ; i--) {
-                            years.push({id:i, name: i});
-                        } 
-						return years;
-					},
+	 			    expertiseLevels : function() { return $http.get("/api/v2013/thesaurus/domains/1B57D9C3-F5F8-4875-94DC-93E427F3BFD8/terms", { cache: true }).then(function(o){ return o.data; }); },					
 
 				});
 				$scope.years = [];
 				var end = new Date().getFullYear(); 
-				for (var i = end; i > 1970 ; i--) {
+				for (var i = end; i > (end-100) ; i--) {
 					$scope.years.push({id:i, name: i});
                 } 
 				//============================================================
