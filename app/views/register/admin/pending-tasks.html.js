@@ -1,4 +1,4 @@
-define(['app', 'underscore', '/app/js/common.js', '/app/views/directives/infinite-scroll-directive.js', 'moment',
+define(['app', 'underscore', '/app/js/common.js', 'ngInfiniteScroll', 'moment',
     '/app/views/register/directives/register-top-menu.js'], function (app) {
 
         "use strict";
