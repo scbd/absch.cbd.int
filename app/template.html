@@ -39,13 +39,13 @@
         document.getElementById('authenticationFrame').src = 'https://accounts.'+domain+'/app/authorize.html';
 
     </script>
-   
+
     <scbd-header></scbd-header>
     <portal-branding></portal-branding>
     <portal-nav></portal-nav>
 
     <div class="container-full page-content" style="min-height:1000px;" ng-class="{'training-bg':!production_env}">
-        <ng-view></ng-view>
+        <ng-view autoscroll="true"></ng-view>
     </div>
 
     <div class="footer">
