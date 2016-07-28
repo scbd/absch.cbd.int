@@ -90,14 +90,14 @@
 
                     //*******************************************************
                         // var queryCPCRevURL = '/api/v2013/index/select?fl=id,identifier_s,title_t,keywords_CEN_ss'+
-                        //                 'checkpoint_CEN_ss,createdDate_dt,geneticRessourceUsers_s,government_s,permit_ss,' +
-                        //                 '&q=(realm_ss:' + realm.value.toLowerCase() + ' OR realm_ss:absch) AND schema_s:absCheckpointCommunique AND (originCountries_ss:'+
+                        //                 'checkpoint_CEN_ss,createdDate_dt,personsAtCheckpoint_s,government_s,permit_ss,' +
+                        //                 '&q=(realm_ss:' + realm.value.toLowerCase() + ' OR realm_ss:absch) AND schema_s:absCheckpointCommunique AND (sourceCountries_ss:'+
                         //                 $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + ')' +
                         //                 '&rows=100&sort=createdDate_dt+desc,+title_t+asc&start=0&wt=json';
 
                     var searchQuery = {
                         fields  : 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt, entryIntoForce_dt,adoption_dt,retired_dt,limitedApplication_dt',
-                        query   : 'schema_s:(' + appConfigService.nationalSchemas.join(' ') +') AND (government_s:' + $scope.code.toLowerCase() + ' OR (originCountries_ss:' +
+                        query   : 'schema_s:(' + appConfigService.nationalSchemas.join(' ') +') AND (government_s:' + $scope.code.toLowerCase() + ' OR (sourceCountries_ss:' +
                                    $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + '))',
                         rowsPerPage    : 500
                     };
@@ -146,8 +146,8 @@
                             }
                             else if(document.schema_s=="absCheckpointCommunique"){
 
-                                if(document.geneticRessourceUsers_s){
-                                    document.geneticRessourceUsers = $scope.parseJSON(document.geneticRessourceUsers_s);
+                                if(document.personsAtCheckpoint_s){
+                                    document.personsAtCheckpoint = $scope.parseJSON(document.personsAtCheckpoint_s);
                                 }
                             }
                             //create seprate collection for measure matrix
@@ -158,7 +158,7 @@
                                 }
                                 else
                                     document.measureMatrix = false;
-                             
+
                                 measureMatrixDocuments.push(document);
 
                             }
@@ -167,8 +167,8 @@
                         $scope.measureMatrixDocuments = measureMatrixDocuments;
                         $scope.measureMatrixDocuments.selectAll = true;
                         // $scope.cpcReceived.forEach(function(document){
-                        //     if(document.geneticRessourceUsers_s){
-                        //         document.geneticRessourceUsers = $scope.parseJSON(document.geneticRessourceUsers_s);
+                        //     if(document.personsAtCheckpoint_s){
+                        //         document.personsAtCheckpoint = $scope.parseJSON(document.personsAtCheckpoint_s);
                         //     }
                         //     $scope.cpcReceivedCount++;
                         // });
@@ -267,7 +267,7 @@
 
                 $scope.isCheckpointCommuniqueReceived = function(entity){
                     return entity && entity.schema_s == "absCheckpointCommunique"
-                    && (entity.originCountries_ss==$scope.code  || entity.permitSourceCountry_ss==$scope.code);
+                    && (entity.sourceCountries_ss==$scope.code  || entity.permitSourceCountry_ss==$scope.code);
                 }
 
                 $scope.isCheckpoint = function(entity){

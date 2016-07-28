@@ -9,7 +9,7 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/js/common.js',
     $scope.path= $location.path();
 
     _.extend($scope.options, {
-      usage		: function () { return $http.get("/api/v2013/thesaurus/domains/A7B77788-8C90-4849-9327-E181E9522F3A/terms",	{ cache: true }).then(function (o) { return o.data; }); },
+      usages		: function () { return $http.get("/api/v2013/thesaurus/domains/A7B77788-8C90-4849-9327-E181E9522F3A/terms",	{ cache: true }).then(function (o) { return o.data; }); },
       keywords  : function () { return $q.all([$http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", { cache: true }),
                                $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })])
                            .then(function (o) {
@@ -57,12 +57,12 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/js/common.js',
       if(info.identifier)//$scope.status=="loading"
           $q.when(editFormUtility.documentExists(info.identifier),function(exists){
               $scope.documentExists = exists;
-              //amendment intent shoudl be entered by users for every edit/ clear it on load if any from previous update
+              //amendment intent should be entered by users for every edit/ clear it on load if any from previous update
               if($scope.document.amendmentIntent != undefined){
                 $scope.document.amendmentIntent = undefined;
-}
-              if($scope.document.amendmentsDescription)
-                $scope.document.amendmentsDescription = undefined;
+              }
+              if($scope.document.amendmentDescription)
+                $scope.document.amendmentDescription = undefined;
 
           });
     });
@@ -80,14 +80,14 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/js/common.js',
 
       document = angular.fromJson(angular.toJson(document));
 
-      if (!document.consentGranted) {
-        document.consentInformation = undefined;
-        document.consentDocuments = undefined;
+      if (!document.picGranted) {
+        document.picInformation = undefined;
+        document.picDocuments = undefined;
       }
 
-      if (!document.mutuallyAgreedTermsEstablished) {
-        document.mutuallyAgreedTermsInformation = undefined;
-        document.mutuallyAgreedTermsDocuments = undefined;
+      if (!document.matEstablished) {
+        document.matInformation = undefined;
+        document.matDocuments = undefined;
       }
 
       if (document.gisFiles && document.gisFiles.length===0) {
@@ -100,29 +100,29 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/js/common.js',
 
       if (!document.amendedPermits) {
         document.consentedAmendment = undefined;
-        //document.amendmentsDescription = undefined;
+        //document.amendmentDescription = undefined;
       }
-      if (document.providerConfidential) {
+      if (document.providersConfidential) {
         document.providers = undefined;
       }
-      if (document.informedConsentConfidential) {
-        document.informedConsents = undefined;
+      if (document.entitiesToWhomPICGrantedConfidential) {
+        document.entitiesToWhomPICGranted = undefined;
       }
-      if(document.usageConfidential){
-          document.usage = undefined;
+      if(document.usagesConfidential){
+          document.usages = undefined;
       }
-      if (document.expiration=="") {
-        document.expiration = undefined;
+      if (document.dateOfExpiry=="") {
+        document.dateOfExpiry = undefined;
       }
-      if (document.geneticResourcesConfidential) {
-        document.geneticResources = undefined;
+      if (document.subjectMatterConfidential) {
+        document.subjectMatter = undefined;
       }
       if(!$scope.documentExists){
         document.amendmentIntent = undefined;
-        document.amendmentsDescription = undefined;
+        document.amendmentDescription = undefined;
       }
       if(!$scope.isOthers()){
-        document.keywordOthers = undefined;
+        document.keywordOther = undefined;
       }
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
@@ -137,10 +137,10 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/js/common.js',
     $scope.isCommercial = function (document) {
       document = document || $scope.document;
 
-      if (!document || !document.usage)
+      if (!document || !document.usages)
         return false;
 
-      var qLibraries = Enumerable.from(document.usage);
+      var qLibraries = Enumerable.from(document.usages);
 
       return qLibraries.Any(function (o) { return o.identifier == "5E833A3F-87D1-4ADD-8701-9F1B76383017"; });
     };

@@ -6,7 +6,7 @@
 	</div>
 	<div class="record-body panel-body">
 
-    	   	<div ng-show="document.government || document.checkpoint">
+    	   	<div ng-show="document.government || document.absCheckpoints">
 				<legend>
                     <a ng-if="showPdf" class="pull-right btn btn-default" target="_blank" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
                     General information</legend>
@@ -24,12 +24,11 @@
     		 	    <strong>{{document.title | lstring:locale}}</strong>
     		 	</div>
 		 	</div>
-
-			<div ng-show="document.checkpoint">
+			<div ng-show="document.checkpoints">
 				<legend>Checkpoint/s that collected or received the information</legend>
 					<div class="km-value">
 						<ul>
-							<li ng-repeat="item in document.checkpoint">
+							<li ng-repeat="item in document.checkpoints">
 								<div view-default-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
 						</ul>
@@ -57,65 +56,65 @@
 				</div>
 			</div>
 
-			<div ng-show="document.permit || document.permitNotAvailable ||
-						document.originCountries || responsibleAuthority ||
-						document.specimen || document.taxonomy || document.gisFiles || document.subjectMatter ||
-						document.referenceOfInformedConsent || document.referenceOfAgreedTerms ||
-						document.personeToWhomGranted || document.geneticRessourceUsers">
+			<div ng-show="document.absIRCCs || document.absIRCCsNotAvailable ||
+						document.sourceCountries || entityWhoGrantedPIC ||
+						document.specimens || document.taxonomies || document.gisFiles || document.subjectMatter ||
+						document.evidenceOfPIC || document.evidenceOfMAT ||
+						document.entityToWhomPICGranted || document.personsAtCheckpoint">
 				<legend>Details of the internationally recognize certificate of compliance</legend>
-				<div ng-show="document.permit">
+				<div ng-show="document.absIRCCs">
 					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
 					<div class="km-value">
 						<ul>
-							<li  ng-repeat="item in document.permit">
+							<li  ng-repeat="item in document.absIRCCs">
 								 <div view-default-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
 						</ul>
 					</div>
 				</div>
-				<div ng-show="document.permitNotAvailable" class="km-value">
+				<div ng-show="document.irccsNotAvailable" class="km-value">
 					The internationally recognized certificate of compliance (IRCC) is not available
 				</div>
-				<div ng-show="document.originCountries || document.responsibleAuthorities ||
-					document.specimen || document.taxonomy || document.gisFiles || document.subjectMatter ||
-					document.referenceOfInformedConsent || document.referenceOfAgreedTerms ||
-					document.personeToWhomGranted || document.keywords || document.dateOfAccess"">
-					<div ng-show="document.originCountries">
+				<div ng-show="document.sourceCountries || document.entityWhoGrantedPIC ||
+					document.specimens || document.taxonomies || document.gisFiles || document.subjectMatter ||
+					document.evidenceOfPIC || document.evidenceOfMAT ||
+					document.entityToWhomGrantedPIC || document.keywords || document.dateOfAccess">
+					<div ng-show="document.sourceCountries">
 						<label>Source of the genetic resource</label>
 						<div class="km-value">
 							<ul class="list">
-								<li ng-repeat="term in document.originCountries">{{term|term:locale}}</li>
+								<li ng-repeat="term in document.sourceCountries">{{term|term:locale}}</li>
 							</ul>
 						</div>
 					</div>
-					<div ng-show="document.responsibleAuthorities">
+					<div ng-show="document.entityWhoGrantedPIC">
 						<label>Person or entity who granted prior informed consent</label>
 						<div class="km-value">
-							<div view-contact-reference ng-model="document.responsibleAuthorities" locale="locale"></div>
+							<div view-contact-reference ng-model="document.entityWhoGrantedPIC" locale="locale"></div>
 						</div>
 					</div>
 					<div ng-show="document.subjectMatter">
 						<label>Subject-matter or genetic resources relevant to the information collected or received</label>
 						<div class="km-value km-pre"ng-bind-html="document.subjectMatter | lstring:locale"></div>
 					</div>
-					<div ng-show="document.specimen || document.taxonomy || document.gisFiles || document.keywords">
+					<div ng-show="document.specimens || document.taxonomies || document.gisFiles || document.keywords">
 						<label>Optional additional subject-matter details</label>
-						<div ng-show="document.specimen">
+						<div ng-show="document.specimens">
 							<label>Specimen data</label>
 							<div class="km-value">
 							<ul class="list">
-								<li ng-repeat="item in document.specimen">
+								<li ng-repeat="item in document.specimens">
 									<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 									<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 								</li>
 							</ul>
 							</div>
 						</div>
-						<div ng-show="document.taxonomy">
+						<div ng-show="document.taxonomies">
 							<label>Taxonomy data</label>
 							<div class="km-value">
 								<ul class="list">
-									<li ng-repeat="item in document.taxonomy">
+									<li ng-repeat="item in document.taxonomies">
 										<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 									</li>
@@ -139,29 +138,27 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="term in document.keywords">{{term|term}}
-										<span ng-show="term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'"> ({{document.keywordOthers|lstring:locale}})</span>
+										<span ng-show="term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'"> ({{document.keywordOther|lstring:locale}})</span>
 									</li>
 								</ul>
 							</div>
 						</div>
 					</div>
-					<div ng-show="document.referenceOfInformedConsent">
+					<div ng-show="document.evidenceOfPIC">
 						<label>Reference or evidence of prior informed consent</label>
-						<div class="km-value km-pre"ng-bind-html="document.referenceOfInformedConsent | lstring:locale"></div>
+						<div class="km-value km-pre"ng-bind-html="document.evidenceOfPIC | lstring:locale"></div>
 					</div>
 
-
-
-					<div ng-show="document.personeToWhomGranted">
+					<div ng-show="document.entityToWhomGrantedPIC">
 						<label>Person or entity to whom prior informed consent was granted</label>
 						<div class="km-value">
-							<div view-contact-reference ng-model="document.personeToWhomGranted" locale="locale"></div>
+							<div view-contact-reference ng-model="document.entityToWhomGrantedPIC" locale="locale"></div>
 						</div>
 					</div>
 
-                    <div ng-show="document.referenceOfAgreedTerms">
+                    <div ng-show="document.evidenceOfMAT">
 						<label>Reference or evidence of establishment of mutually agreed terms</label>
-						<div class="km-value km-pre"ng-bind-html="document.referenceOfAgreedTerms | lstring:locale"></div>
+						<div class="km-value km-pre"ng-bind-html="document.evidenceOfMAT | lstring:locale"></div>
 					</div>
 
                     <div ng-show="document.dateOfAccess">
@@ -171,30 +168,29 @@
 
 				</div>
 			</div>
-			<div ng-show="document.description || document.dateFrom || document.dateTo ||
-				 information || informationDocuments ||document.geneticRessourceUsers">
+			<div ng-show="document.description || document.dateCollectedFrom || document.dateCollectedTo || information || informationDocuments ||document.personsAtCheckpoint">
 				<legend>Information on the utilization of the genetic resource(s)</legend>
 				<div ng-show="document.description">
 					<label>Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources</label>
 					<div class="km-value km-pre" ng-bind-html="document.description | lstring:locale"></div>
 				</div>
-				<div ng-show="document.geneticRessourceUsers">
+				<div ng-show="document.personsAtCheckpoint">
 					<label>Person or entity making information available to the checkpoint on the utilization of the genetic resource</label>
-					<div class="km-value" ng-repeat="user in document.geneticRessourceUsers">
+					<div class="km-value" ng-repeat="user in document.personsAtCheckpoint">
 						<div view-contact-reference ng-model="user" locale="locale"></div>
 					</div>
 				</div>
-				<div ng-show="document.date">
+				<div ng-show="document.dateCollected">
 					<label>Date on which the information was collected at the checkpoint</label>
-					<div class="km-value">{{document.date}}</div>
+					<div class="km-value">{{document.dateCollected}}</div>
 				</div>
-				<div ng-show="document.dateFrom">
+				<div ng-show="document.dateCollectedFrom">
 					<label>Date on which the information started being collected at the checkpoint</label>
-					<div class="km-value">{{document.dateFrom}}</div>
+					<div class="km-value">{{document.dateCollectedFrom}}</div>
 				</div>
-				<div ng-show="document.dateTo">
+				<div ng-show="document.dateCollectedTo">
 					<label>Date on which the information was received at the checkpoint</label>
-					<div class="km-value">{{document.dateTo}}</div>
+					<div class="km-value">{{document.dateCollectedTo}}</div>
 				</div>
 				<div ng-show="document.informationDocuments">
 					<label>Relevant document</label>

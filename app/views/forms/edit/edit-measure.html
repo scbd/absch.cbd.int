@@ -37,11 +37,11 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <h3 ng-show="!document.isAmendment" style="color:black!important;">
-                  If no, the following information is not required.
-                </h3>
+                                                If no, the following information is not required.
+                                            </h3>
                                             <h3 ng-show="document.isAmendment==true" style="color:black!important;">
-                  Please select the previously registered record that is being amended.
-                </h3>
+                                                Please select the previously registered record that is being amended.
+                                            </h3>
 
                                             <div class="km-control-group">
                                                 <div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
@@ -161,11 +161,12 @@
                                         <div ng-if="isJurisdictionRegional() && !canAddRegionalMeasure()">
                                             <div class="alert alert-warning">
                                                 <h4>
-                      Please note that regional or multilateral measures only need to be registered once in the ABS Clearing-House and that each of the
-                      countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in
-                      their country profile. It is recommended that one country agrees to register the measure on behalf of the regional organization or
-                      the group of countries that share the same measure.
-                  </h4></div>
+                                                    Please note that regional or multilateral measures only need to be registered once in the ABS Clearing-House and that each of the
+                                                    countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in
+                                                    their country profile. It is recommended that one country agrees to register the measure on behalf of the regional organization or
+                                                    the group of countries that share the same measure.
+                                                </h4>
+                                            </div>
                                         </div>
 
                                         <div ng-if="isJurisdictionRegional() && canAddRegionalMeasure()">
@@ -295,7 +296,9 @@
                                 <legend>
                                     <label for="absMeasures"> Elements of the measure</label>
                                 </legend>
-                                <div class="help-info">Please select which elements are included in the measure being registered and identify the relevant articles or sections of the measure for each of the selected elements. This information will assist in displaying information on the national legal framework and help potential users to understand the access, benefit-sharing and /or compliance requirements of your country.Sometimes the content and elements of the measure relate to goals and plans to implement ABS domestically. This could be the case, for instance, for some ABS strategies or action plans. In such cases, you can select that the elements of the measure are not applicable.
+                                <div class="help-info">Please select which elements are included in the measure being registered and identify the relevant articles or sections of the measure for each of the selected elements. This information will assist in displaying information
+                                    on the national legal framework and help potential users to understand the access, benefit-sharing and /or compliance requirements of your country.Sometimes the content and elements of the measure relate to goals and
+                                    plans to implement ABS domestically. This could be the case, for instance, for some ABS strategies or action plans. In such cases, you can select that the elements of the measure are not applicable.
                                 </div>
 
 
@@ -315,71 +318,77 @@
                                         </span>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <span ng-class="{'confidential-text':document.absMesasureNotApplicable}">
+                                                    <input type="checkbox" name="absMesasureNotApplicable" ng-model="document.absMesasureNotApplicable" watch-items> The elements of the measure is not available to this measure.</input>
+                                                </span>
+                                            </div>
+                                            <div class="panel-body panel-body-confidential" ng-class="{'disable':document.absMesasureNotApplicable}">
+                                                <div class="km-control-group" style="margin-bottom:20px;" name="absMeasures" required caption="" ng-if="!document.absMesasureNotApplicable">
+                                                    <div class="help-info"></div>
+                                                    <div layout="row" style="margin-bottom:5px;">
+                                                        <div style="font-weight:bold;padding-left:0px" class="col-lg-6">Check the relevant elements of the measure</div>
+                                                        <div style="text-align:right;font-weight:bold;" class="col-lg-6">Add reference to relevant articles and sections</div>
+                                                    </div>
+                                                    <div edit-measure-matrix name="absMeasuresMatrix" required ng-model="document.absMeasures" locales="document.header.languages" document="document" ng-disabled="document.absMesasureNotApplicable"></div>
+                                                </div>
+                                            </div>
 
-                               
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
 
 
 
+                            <section>
+                                <legend>Additional information</legend>
 
-                               
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="km-control-group" name="address" caption="Any other relevant information">
+                                            <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+                                            <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div layout="row" style="margin-bottom:5px;">
-                            <div style="font-weight:bold;padding-left:0px" class="col-lg-6">Check the relevant elements of the measure</div>
-                            <div style="text-align:right;font-weight:bold;" class="col-lg-6">Add reference to relevant articles and sections</div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+                                            <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <legend>Notes</legend>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="km-control-group" name="notes">
+                                            <div class="help-block">The “Notes” field is for your personal notes or comments and will be hidden when viewing the record. This field is not meant to be used for confidential information.</div>
+                                            <textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
                         </div>
+                    </form>
 
-                        <div edit-measure-matrix name="absMeasuresMatrix"  required ng-model="document.absMeasures" locales="document.header.languages" document="document"></div>
-                    </div>
-                </div>
-                </section>
+                    <div class="row" ng-show="tab=='review'" km-tab="review">
+                        <div class="col-xs-12">
 
-
-
-                <section>
-                    <legend>Additional information</legend>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="km-control-group" name="address" caption="Any other relevant information">
-                                <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
-                                <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+                            <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
+                                <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
                             </div>
+
+                            <div view-measure ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-                                <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section>
-                    <legend>Notes</legend>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="km-control-group" name="notes">
-                                <div class="help-block">The “Notes” field is for your personal notes or comments and will be hidden when viewing the record. This field is not meant to be used for confidential information.</div>
-                                <textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-            </div>
-            </form>
-
-            <div class="row" ng-show="tab=='review'" km-tab="review">
-                <div class="col-xs-12">
-
-                    <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
-                        <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
-                    </div>
-
-                    <div view-measure ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
                 </div>
             </div>
         </div>

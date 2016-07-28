@@ -15,7 +15,7 @@ define(['app', '/app/views/forms/edit/edit.js',
 
             $scope.checkpointList = [];
             _.extend($scope.options, {
-                permits: function() {
+                absIRCCs: function() {
                     return commonjs.loadSchemaDocumentsForDropdown('absPermit');
                 },
                 keywords: function() {
@@ -77,49 +77,51 @@ define(['app', '/app/views/forms/edit/edit.js',
                     return undefined;
 
                 document = angular.fromJson(angular.toJson(document));
-                if (document.permitNotAvailable === true) {
-                    document.permit = undefined;
+                if (document.absIRCCsNotAvailable === true) {
+                    document.absIRCCs = undefined;
                 } else {
-                    document.originCountries = undefined;
-                    document.responsibleAuthority = undefined;
+                    document.sourceCountries = undefined;
+                    document.entityWhoGrantedPIC = undefined;
                     document.subjectMatter = undefined;
-                    document.specimen = undefined;
-                    document.taxonomy = undefined;
+                    document.specimens = undefined;
+                    document.taxonomies = undefined;
                     document.gisFiles = undefined;
                     document.gisMapCenter = undefined;
                     document.keywords = undefined;
-                    document.referenceOfInformedConsent = undefined;
-                    document.referenceOfAgreedTerms = undefined;
-                    document.personeToWhomGranted = undefined;
+                    document.evidenceOfPIC = undefined;
+                    document.evidenceOfMAT = undefined;
+                    document.entityToWhomPICGranted = undefined;
                     document.responsibleAuthorities = undefined;
                 }
-                if (document.date == '')
-                    document.date = undefined;
+                if (document.dateCollected == '')
+                    document.dateCollected = undefined;
 
-                if (document.dateFrom == '')
-                    document.dateFrom = undefined;
+                if (document.dateCollectedFrom == '')
+                    document.dateCollectedFrom = undefined;
 
-                if (document.dateTo == '')
-                    document.dateTo = undefined;
+                if (document.dateCollectedTo == '')
+                    document.dateCollectedTo = undefined;
 
                 if (/^\s*$/g.test(document.notes))
                     document.notes = undefined;
 
                 if (!$scope.isOthers()) {
-                    document.keywordOthers = undefined;
+                    document.keywordOther = undefined;
                 }
                 document.checkpointSelected = undefined;
+                document.informationDocuments = undefined;
+
                 return document;
             };
 
             //==================================
             //
             //==================================
-            $scope.isPermitNotAvailable = function(document) {
+            $scope.isAbsIRCCsNotAvailable = function(document) {
                 document = document || $scope.document;
 
                 return document &&
-                    document.permitNotAvailable;
+                    document.absIRCCsNotAvailable;
             };
 
             $scope.isOthers = function(document) {

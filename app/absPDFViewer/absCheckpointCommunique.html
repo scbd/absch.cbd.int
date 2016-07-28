@@ -101,7 +101,7 @@
                 </div>
                 <div class="col-xs-12">
                     <label>Checkpoint(s) that collected or received this information:</label>
-                      <div class="text"  ng-repeat="item in document.checkpoint">
+                      <div class="text"  ng-repeat="item in document.absCheckpoints">
                         <span view-default-reference ng-model="item.identifier" locale="locale"></span>
                       </div>
                     </div>
@@ -127,19 +127,16 @@
 
                 <!-- repeat for each IRCC, if IRCC was included-->
                 <div class="clearfix"></div>
-                <div class="col-xs-12">
+                <div class="col-xs-12" ng-if="!document.absIRCCsNotAvailable || document.absIRCCs">
                     <label>INTERNATIONAL RECOGNIZED CERTIFICATE(s) OF COMPLIANCE</label>
-                    <div ng-show="!document.permitNotAvailable || document.permit">
-                            <div class="text"  ng-repeat="item in document.permit">
-                            <span view-default-reference ng-model="item.identifier" locale="locale"></span>
-                        </div>
+                        <div class="text"  ng-repeat="item in document.absIRCCs">
+                        <span view-default-reference ng-model="item.identifier" locale="locale"></span>
                     </div>
-
                 </div>
 
 
                 <!-- if IRCC was NOT included-->
-                <div ng-show="document.permitNotAvailable==true">
+                <div ng-if="document.absIRCCsNotAvailable==true">
                     <div class="clearfix"></div>
                     <div class="col-xs-12">
                         <label>Internationally Recognized Certificate of Complicance (IRCC)</label>
@@ -151,11 +148,11 @@
                         <label>Source country of the genetic resource(s)</label>
                         <div class="text">
                             <ul>
-                                <li ng-repeat="country in document.originCountries">{{country|term}}</li>
+                                <li ng-repeat="country in document.sourceCountries">{{country|term}}</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6" ng-if="document.keywords">
                         <label>Keywords</label>
                         <div class="text">
                             <ul>
@@ -167,26 +164,26 @@
                     <div class="clearfix"></div>
                     <div class="col-xs-12">
                         <label>Evidence of prior informed consent (PIC)</label>
-                        <div class="text" ng-bind-html="renderHtml(document.referenceOfInformedConsent)"></div>
+                        <div class="text" ng-bind-html="renderHtml(document.evidenceOfPIC)"></div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="col-xs-6">
                         <label>Grantor of prior informed consent (PIC)</label>
                         <div class="text">
-                            <div view-contact-reference ng-model="document.responsibleAuthorities" locale="locale"></div>
+                            <div view-contact-reference ng-model="document.entityWhoGrantedPIC" locale="locale"></div>
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <label>Grantee of prior informed consent (PIC)</label>
                         <div class="text">
-                            <div view-contact-reference ng-model="document.personeToWhomGranted" locale="locale"></div>
+                            <div view-contact-reference ng-model="document.entityToWhomPICGranted" locale="locale"></div>
                         </div>
                     </div>
 
                     <div class="clearfix"></div>
                     <div class="col-xs-12">
                         <label>Evidence of mutually agreed terms (MAT)</label>
-                        <div class="text" ng-bind-html="renderHtml(document.referenceOfAgreedTerms)"></div>
+                        <div class="text" ng-bind-html="renderHtml(document.evidenceOfMAT)"></div>
                     </div>
                 </div>
                 <!-- end if no IRCC -->
@@ -200,9 +197,9 @@
                 <div class="col-xs-4">
                     <label>Information collected or received on:</label>
                     <div class="text">
-                        <span ng-show="document.date">{{document.date}}</span>
-                        <span ng-show="document.dateFrom && !document.date">{{document.dateFrom}}</span>
-                        <span ng-show="document.dateTo && document.dateFrom"> to {{document.dateTo}}</span>
+                        <span ng-show="document.dateCollected">{{document.dateCollected}}</span>
+                        <span ng-show="document.dateCollectedFrom && !document.dateCollected">{{document.dateCollectedFrom}}</span>
+                        <span ng-show="document.dateCollectedTo && document.dateCollectedFrom"> to {{document.dateCollectedTo}}</span>
                     </div>
                 </div>
 
@@ -211,7 +208,7 @@
                     <label>People or entities utilizing the genetic resource at the checkpoint</label>
                 </div>
                 <div class="col-xs-12">
-                    <div ng-repeat="user in document.geneticRessourceUsers" style="padding-left:0px;">
+                    <div ng-repeat="user in document.personsAtCheckpoint" style="padding-left:0px;">
                         <div class="text">
                             <div view-contact-reference ng-model="user" locale="locale"></div>
                         </div>
@@ -263,7 +260,7 @@
                 </div>
             </div>
 
-            <div ng-repeat="permit  in document.permit" style="page-break-before:always">
+            <div ng-repeat="permit  in document.absIRCCs" style="page-break-before:always">
                 <div permit document-id="permit.identifier"></div>
             </div>
 
