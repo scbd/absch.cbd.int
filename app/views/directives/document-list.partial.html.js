@@ -1,7 +1,7 @@
 define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
     './document-metadata-directive.html.js',
     '/app/js/common.js',
-    '/app/views/directives/infinite-scroll-directive.js'
+    'ngInfiniteScroll'
 ], function(app) {
 
     app.directive('documentList', function($http, $filter) {
