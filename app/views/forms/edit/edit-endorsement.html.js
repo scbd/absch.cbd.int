@@ -11,7 +11,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js',
     _.extend($scope.options, {
       endorsedSchemas		: function () {
         var schemas = [];
-            schemas.push({"identifier": "resource", "title": "Virtual Library Records"});
+            schemas.push({"identifier": "resource", "title": "Virtual Library Resources"});
             schemas.push({"identifier": "modelContractualClause", "title": "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards"});
             schemas.push({"identifier": "communityProtocol", "title": "Community protocols and procedures and customary laws"});
         return schemas;

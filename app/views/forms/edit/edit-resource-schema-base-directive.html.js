@@ -1,6 +1,19 @@
 define(['app', 'underscore',
-'./field-embed-contact.directive.js'], function (app, _) {
-
+'./field-embed-contact.directive.js'
+], function (app, _) {
+	app.directive('convertToNumber', function() {
+		return {
+			require: 'ngModel',
+			link: function(scope, element, attrs, ngModel) {
+			ngModel.$parsers.push(function(val) {
+				return parseInt(val, 10);
+			});
+			ngModel.$formatters.push(function(val) {
+				return '' + val;
+			});
+			}
+		};
+	});
 	app.directive('editSchemaResourceBase', ["$q", "$timeout", "Thesaurus", function ($q, $timeout, Thesaurus)
 	{
 		return {
@@ -98,10 +111,14 @@ define(['app', 'underscore',
 					fileFormats 	: function() { return $http.get("/api/v2013/thesaurus/domains/D2D97AB3-4D20-41D4-8CBE-B21C33924823/terms", { cache: true }).then(function(o){ return Thesaurus.buildTree(o.data); }); },
 	 			    purposes 	    : function() { return $http.get("/api/v2013/thesaurus/domains/E712C9CD-437E-454F-BA72-E7D20E4C28ED/terms", { cache: true }).then(function(o){ return Thesaurus.buildTree(o.data); }); },
 	 			    targetGroups    : function() { return $http.get("/api/v2013/thesaurus/domains/AFB155C4-93A6-402C-B812-CFC7488ED651/terms", { cache: true }).then(function(o){ return o.data; }); },
-	 			    expertiseLevels : function() { return $http.get("/api/v2013/thesaurus/domains/1B57D9C3-F5F8-4875-94DC-93E427F3BFD8/terms", { cache: true }).then(function(o){ return o.data; }); },
+	 			    expertiseLevels : function() { return $http.get("/api/v2013/thesaurus/domains/1B57D9C3-F5F8-4875-94DC-93E427F3BFD8/terms", { cache: true }).then(function(o){ return o.data; }); },					
 
 				});
-
+				$scope.years = [];
+				var end = new Date().getFullYear(); 
+				for (var i = end; i > (end-100) ; i--) {
+					$scope.years.push({id:i, name: i});
+                } 
 				//============================================================
 				//
 				//============================================================
@@ -189,38 +206,7 @@ define(['app', 'underscore',
 				function removeFromList(badSubjectList,validList){
 					return _.without(validList,badSubjectList);
 				}
-				//if(_.contains(['modelContractualClause', 'resource', 'communityProtocol'],$scope.type))
-					// $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]}, true);
-				// else
-				// 	$scope.setDocument({}, true);
-
-				//============================================================
-				//
-				//============================================================
-				// $scope.$on("loadDocument", function(evt, info) {
-				// 	var loadRecords = [];
-				// 	_.each($scope.document.organizations, function(org){
-				// 		loadRecords.push($scope.loadRecords(org.identifier));
-				// 	});
-				// 	$q.all(loadRecords).then(function(data){
-				// 		$scope.document.organizationsRef = data;
-				// 	});
-				// });
-
-				//============================================================
-				//
-				//============================================================
-				// $scope.$watch("document.organizationsRef", function(newValue){
-				//
-				// 	if(newValue){
-				// 		$scope.document.organizations = [];
-				// 		_.each(newValue, function(org){
-				// 			$scope.document.organizations.push({identifier: org.identifier||org.header.identifier});
-				// 		});
-				//
-				// 	}
-				// });
-
+				
 				//==================================
 				//
 				//==================================
@@ -229,7 +215,6 @@ define(['app', 'underscore',
 
 					if (identifier) { //lookup single record
 						var deferred = $q.defer();
-
 						storage.documents.get(identifier)
 							.then(function(r) {
 								deferred.resolve(r.data);

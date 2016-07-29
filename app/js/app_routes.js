@@ -147,7 +147,7 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                     else
                         schema = path;
 
-                    var schemaName = $filter('schemaShortName')(schema);
+                    var schemaName = $filter('mapSchema')(schema);
                     if(!_.contains(appConfigService.referenceSchemas, schemaName))
                         roles = (roles || []).concat(appConfigService.nationalRoles());
                 }
