@@ -194,7 +194,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 if(document.absMesasureNotApplicable)
                      document.absMeasures = undefined;
                      
-                if(document.absMeasures && !document.absMeasures.geneticResource && !document.absMeasures.relevantElements)
+                if(document.absMeasures && !document.absMeasures.geneticResourceElements && !document.absMeasures.relevantElements)
                     document.absMeasures = undefined;
                 
                 if(document.absMeasures){
