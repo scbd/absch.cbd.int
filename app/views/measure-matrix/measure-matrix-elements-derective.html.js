@@ -136,15 +136,6 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                 throw "Terms must be array";
 
                             if ($scope.binding) {
-                                //  if($scope.binding.geneticResource) {
-                                //     if($scope.binding.geneticResource.answer){
-                                //         var grCoverId = addCustomElement('Covers all genetic resources', '24E809DA-20F4-4457-9A8A-87C08DF81E8A', 1);
-                                //         var geneticResource = $scope.binding.geneticResource;
-                                //         oNewSections[grCoverId] = geneticResource.section||{};
-                                //         oNewIdentifiers[grCoverId] = true;
-                                //         oNewIdentifiers['24E809DA-20F4-4457-9A8A-87C08DF81E8A'] = true;
-                                //     }
-                                // }
                                 if(!$scope.binding.geneticResourceElements || $scope.binding.geneticResourceElements.answer){
                                     //delete  from list
                                    var geneticResource = _.findWhere($scope.terms, {identifier : 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'});
