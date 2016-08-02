@@ -49,11 +49,11 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                 when('/mailbox',                        { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
                 when('/mailbox/:mailId',                { templateUrl: '/app/views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
 
+                when('/search/countries/:countryCode?',                        { redirectTo:'/countries/:countryCode' }).
+                when('/search/countries/:countryCode/:documentType',           { redirectTo:'/countries/:countryCode' }).
                 when('/search/:recordType',                     { templateUrl: '/app/views/search/search-page.html',   label:'SEARCH',         resolveController: true}).
                 when('/search',                                 { templateUrl: '/app/views/search/search-page.html',   label:'SEARCH',         resolveController: true}).
                 when('/search/national-records/:documentSchema?',              { redirectTo:'/search' }).
-                when('/search/countries/:countryCode?',                        { redirectTo:'/countries/:countryCode' }).
-                when('/search/countries/:countryCode/:documentType',           { redirectTo:'/countries/:countryCode' }).
                 when('/search/reference-records/:documentSchema?',             { redirectTo:'/search' }).
 
                 when('/countries',                   { templateUrl: '/app/views/countries/index.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
@@ -119,8 +119,8 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                 when('/oauth2/callback',             { templateUrl: '/app/views/oauth2/callback.html',          resolveController: true, resolveUser: true}).
                 
                 when('/about/faq', {templateUrl: '/app/views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
-                
-
+                when('/guides', {templateUrl: '/app/views/about/guides.html', resolveController: true, resolveUser: true, label:'Step-by-step guides'}).
+               
                 otherwise({templateUrl: '/app/views/shared/404.html', label:'404 Error'});
 
     }]);
@@ -147,7 +147,7 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                     else
                         schema = path;
 
-                    var schemaName = $filter('schemaShortName')(schema);
+                    var schemaName = $filter('mapSchema')(schema);
                     if(!_.contains(appConfigService.referenceSchemas, schemaName))
                         roles = (roles || []).concat(appConfigService.nationalRoles());
                 }

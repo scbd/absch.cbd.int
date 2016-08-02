@@ -47,8 +47,11 @@ define(['app'], function(app) {
                                 $scope.showFile = true;
 
                             if (results.data.Items && results.data.Items.length > 0 && $scope.documents[0].type == "absPermit") {
-                                loadPermitCPC(identifier, results.data.Items);
                                 $scope.isPermit = true;
+
+                                if(_.some($scope.documents, function(document){return document.body.amendmentIntent==1;})){
+                                    $scope.$emit('evt:show-document-revoked-message',{});
+                                }
                             }
 
                         }).then(null, function(error) {
@@ -56,42 +59,8 @@ define(['app'], function(app) {
                         }).finally(function(){$scope.loading = false;});
 
                     };
-
-
-                    function loadPermitCPC(identifier, documents) {
-
-                        if (!documents)
-                            return;
-
-                        if (!identifier) {
-                            $scope.loading = false;
-                            return;
-                        }
-                        var filter = ["type eq 'absCheckpointCommunique'"];
-                        var query = [
-                            [{
-                                permit: identifier
-                            }]
-                        ];
-
-                        var qDocument = storage.documentQuery.body(filter, query, {
-                            body: true
-                        });
-                        $q.when(qDocument).then(function(results) {
-                            $q.when(results.data.forEach(function(cpc) {
-                                var qDoc = storage.documentVersions.get(cpc.identifier, {
-                                    body: true
-                                });
-                                $q.when(qDoc).then(function(results) {
-                                    results.data.Items.forEach(function(history) {
-                                        $scope.documents.push(history);
-                                    });
-                                });
-                            }));
-                        });
-                    };
                     
-                     $scope.$watch("documentId", function() {
+                    $scope.$watch("documentId", function() {
                          if($scope.documentId)
                             load($scope.documentId);
                     })
@@ -103,10 +72,9 @@ define(['app'], function(app) {
 
                     $scope.formatEmails = function(emailList) {
                         var emailString = '';
-                        // console.log(angular.isArray(emailList),emailList)
+                        
                         if (angular.isArray(emailList))
                             emailList.forEach(function(email) {
-                                //console.log(email.emails.join(',') +'(' + email.firstName + ' ' + email.lastName + ')');
                                 if (email.emails) {
                                     emailString += email.emails.join(',');
 
@@ -121,7 +89,7 @@ define(['app'], function(app) {
                                     }
                                 }
                             });
-                        // console.log(emailString)
+                        
                         return emailString;
                     }
 

@@ -1,13 +1,5 @@
-
-
-
-
-
-
-
-
 <div class="row">
-     <div class="col-xs-12">
+    <div class="col-xs-12">
 
         <span ng-show="lastSaved && hideTimer=='false'" class="color-grey label pull-right" style="background-color:#ddd;text-transform:uppercase;font-size:12px;">
             <span style="position:relative;top:1px;"><i class="glyphicon glyphicon-time" style="position:relative;top:2px;"></i><span class="color-blue" style="padding:3px;">{{lastSaved}}</span> since last save</span>
@@ -16,50 +8,33 @@
 
     <div class="clearfix"></div>
 
-
-    <!--<span ng-show="loading || security==undefined">
-                    <button class="btn btn-default shadow-z-2" style="background-color:#999;">
-                        <span ng-show="security==undefined">Loading access
-                            <br> controls</span>
-                        <span ng-show="tab=='review' && loading">Validating</span>
-                        <span ng-show="tab=='draft' && loading">Saving draft</span>
-                        <span ng-show="tab=='publishRequest' && loading">Requesting for
-                            <br> publication</span>
-                        <span ng-show="tab=='publish' && loading">Publishing</span>
-                        <i ng-show="loading || security==undefined" class="fa fa-spinner fa-spin">
-                    </button>
-
-                    </i>
-                </li>-->
-
-
     <div class="col-xs-12">
 
 
 
-         <div km-form-languages ng-model="languages" style="padding-top:20px;" class="pull-left btn-xs"></div>
+        <div km-form-languages ng-model="languages" style="padding-top:20px;" class="pull-left btn-xs"></div>
 
-          <ul style="list-style-type:none;margin:0;padding:0;padding-top:20px;" class="pull-right">
-              <li style="display: inline;"><button  type="button" class="btn btn-warning " ng-click="close()" ng-disabled="loading">
+        <ul style="list-style-type:none;margin:0;padding:0;padding-top:20px;" class="pull-right">
+            <li style="display: inline;"><button type="button" class="btn btn-warning " ng-click="close()" ng-disabled="loading">
                 <i class="glyphicon glyphicon-remove"></i> Close</button>
-              </li>
-              <li style="display: inline;">
-                  <button type="button" class="btn btn-default bg-draft" width="50px" ng-click="tab='draft';saveDraft()" ng-disabled="loading">Save Draft
+            </li>
+            <li style="display: inline;">
+                <button type="button" class="btn btn-default bg-draft" width="50px" ng-click="tab='draft';saveDraft()" ng-disabled="loading">Save Draft
                     <i ng-show="tab=='draft' && (loading || security==undefined)" class="fa fa-spinner fa-spin"></i>
                   </button>
-              </li>
+            </li>
 
-              <li style="display: inline;" ng-show="security.canSave">
-                    <button type="button" class="btn btn-danger bg-published " width="50px" ng-click="tab='publish';publish()" ng-disabled="loading">Publish
+            <li style="display: inline;" ng-show="security.canSave">
+                <button type="button" class="btn btn-danger bg-published " width="50px" ng-click="tab='publish';publish()" ng-disabled="loading">Publish
                          <i ng-show="tab=='publish' && loading" class="fa fa-spinner fa-spin"></i>
                     </button>
-                </li>
-                <li style="display: inline;" ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
-                    <button id="publish_button" type="button" class="btn btn-danger bg-request" ng-href="#" ng-click="tab='publishRequest';publishRequest()" ng-disabled="loading">Request Publication
+            </li>
+            <li style="display: inline;" ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
+                <button id="publish_button" type="button" class="btn btn-danger bg-request" ng-href="#" ng-click="tab='publishRequest';publishRequest()" ng-disabled="loading">Request Publication
                          <i ng-show="tab=='publishRequest' && loading" class="fa fa-spinner fa-spin"></i>
                     </button>
-                </li>
-          </ul>
+            </li>
+        </ul>
 
     </div>
 
@@ -67,22 +42,18 @@
 
     <div class="col-xs-12" style="border-bottom:1px solid #eee;margin-bottom:20px;">
         <ul style="list-style-type:none;margin:0;padding:0;padding-top:20px;" class="pull-left">
-              <li class="tab" style="display: inline;" ng-class="{'tab-selected': tab=='edit'}">
-                  <a ng-click="tab='edit'" ng-disabled="loading || security==undefined">
+            <li class="tab" style="display: inline;" ng-class="{'tab-selected': tab=='edit'}">
+                <a ng-click="tab='edit'" ng-disabled="loading || security==undefined">
                       Submission form
                    </a>
-              </li>
-              <li class="tab" style="display: inline;" ng-class="{'tab-selected': tab=='review'}">
-                  <a ng-click="tab='review'" ng-disabled="loading || security==undefined">
+            </li>
+            <li class="tab" style="display: inline;" ng-class="{'tab-selected': tab=='review'}">
+                <a ng-click="tab='review'" ng-disabled="loading || security==undefined">
                       Review
                    </a>
-              </li>
-          </ul>
+            </li>
+        </ul>
     </div>
-</div>
-
-<div>
-
 
     <div style="display:none" id="msgDraftSaveMessage">
         Your record has been saved as a draft.
@@ -94,8 +65,7 @@
                 <button type="button" class="close" ng-click="showError=false">
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Close</span>
-                </button>
-                {{errorMessage}}
+                </button> {{errorMessage}}
             </div>
 
         </div>
@@ -135,9 +105,9 @@
                     <textarea class="form-control" rows="5" name="info" ng-model="InfoDoc.additionalInfo"></textarea>
                 </div>
                 <div class="modal-footer" style="margin-top:0">
-                   
-                     <button type="button" class="btn btn-warning" ng-click="closeAddInfoDialog(false)" >Cancel</button>
-                     
+
+                    <button type="button" class="btn btn-warning" ng-click="closeAddInfoDialog(false)">Cancel</button>
+
                     <button type="button" id="continueRequest" class="btn btn-danger" ng-disabled="loading">Send Request</button>
                 </div>
             </div>

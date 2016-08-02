@@ -1,11 +1,11 @@
 define(['app', 'underscore',
  '/app/services/role-service.js',
- '/app/views/register/directives/register-top-menu.js'],
+ '/app/views/register/directives/register-top-menu.js', 'toastr'],
 function(app, _) {
     "use strict";
     app.controller("DashboardController", ["$rootScope", "$scope", "IStorage", "roleService", "$compile", "realm", "$q",
-                    "$routeParams", '$location', "$filter", "$http", "$element","$timeout",
-        function($rootScope, $scope, storage, roleService, $compile, realm, $q, $routeParams, $location, $filter, $http, $element, $timeout) {
+                    "$routeParams", '$location', "$filter", "$http", "$element","$timeout", 'toastr',
+        function($rootScope, $scope, storage, roleService, $compile, realm, $q, $routeParams, $location, $filter, $http, $element, $timeout, toastr) {
 
             var schemaFacets = {};
 
@@ -39,11 +39,11 @@ function(app, _) {
 
             $scope.gotoNew = function($event, cftype) {
                 $event.stopPropagation();
-                $location.path("/register/" + $filter("mapSchema")(cftype) + "/new");
+                $location.path("/register/" + $filter("schemaShortName")(cftype) + "/new");
             }
 
             $scope.gotoList = function($event, cftype) {
-                $location.path("/register/" + $filter("mapSchema")(cftype));
+                $location.path("/register/" + $filter("schemaShortName")(cftype));
             }
 
             //===================================================================

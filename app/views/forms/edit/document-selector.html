@@ -1,7 +1,4 @@
 <div>
-    <style>
-        /*.default-reference-viewer{background-color: #f5f5f5; border-radius:3px;padding:7px;border:1px solid #ccc;}*/
-    </style>
     <!-- existing documents display -->
     <div class="row">
         <div class="col-xs-12">
@@ -50,44 +47,40 @@
 
     <!-- Modal -->
 
-    <div class="modal fade rounded" id="{{question}}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-grey">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h3>Please select from the list of published record(s) below:</h3>
-                    <div class="help-info">If the record is not yet listed, please save your current draft and go to ‘Dashboard’ and create a new record.</div>
-                    <div ng-show="filter">
-                        <input type="textbox" ng-model="keyword" placeholder="filter records by keywords or unique identifier" class="form-control">
-                    </div>
+    <script type="text/ng-template" id="documentSelectionModal">
+        <div class="rounded" id="{{question}}">
+            <div class="modal-header bg-grey">
+                <h3>Please select from the list of published record(s) below:</h3>
+                <div class="help-info">If the record is not yet listed, please save your current draft and go to ‘Dashboard’ and create a new record.</div>
+                <div ng-show="filter">
+                    <input type="textbox" ng-model="keyword" placeholder="filter records by keywords or unique identifier" class="form-control">
                 </div>
-                <div class="modal-body">
-                    <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new">
-                        <div class="row" style="margin:0 0 10px 0;padding:0;" ng-show="!isLoading" ng-repeat="doc in rawDocuments.docs | filter:keyword">
-                            <div class="col-xs-1 text-right">
-                                <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" style="width: 16px; height: 16px;" />
-                                <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true"
-                                style="width: 16px; height: 16px;" />
-                            </div>
-                            <div class="col-xs-11">
-                                <result-default doc='doc' type="nationalRecords"></result-default>
-                            </div>
+            </div>
+            <div class="modal-body">
+                <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new">
+                    <div class="row" style="margin:0 0 10px 0;padding:0;" ng-show="!isLoading" ng-repeat="doc in rawDocuments.docs | filter:keyword">
+                        <div class="col-xs-1 text-right">
+                            <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" style="width: 16px; height: 16px;" />
+                            <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" style="width: 16px; height: 16px;" />
                         </div>
-                        <div ng-if="isLoading"> <i class="fa fa-spinner fa-spin"></i> Loading...</div>
-                        <div ng-if="rawDocuments.numFound===0"> no records found.</div>
+                        <div class="col-xs-11">
+                            <result-default doc='doc' type="nationalRecords"></result-default>
+                        </div>
                     </div>
+                    <div ng-if="isLoading"> <i class="fa fa-spinner fa-spin"></i> Loading...</div>
+                    <div ng-if="rawDocuments.numFound===0"> no records found.</div>
                 </div>
+            </div>
 
-                <div class="modal-footer bg-grey">
-                    <div class="row">
+            <div class="modal-footer bg-grey">
+                <div class="row">
 
-                        <div class="col-xs-12">
-                            <a type="button" class="btn btn-primary bold" style="color:white;" ng-click="saveDocuments()">Save</a>
-                            <a type="button" class="btn btn-warning bold" data-dismiss="modal" ng-click="syncDocuments()">Close</a>
-                        </div>
+                    <div class="col-xs-12">
+                        <a type="button" class="btn btn-primary bold" style="color:white;" ng-click="saveDocuments()">Save</a>
+                        <a type="button" class="btn btn-warning bold" data-dismiss="modal" ng-click="closeDialog()">Close</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </script>
 </div>

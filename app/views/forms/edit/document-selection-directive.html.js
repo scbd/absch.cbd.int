@@ -1,7 +1,8 @@
-define(['app', '/app/js/common.js', '/app/views/directives/search-filter-dates.partial.html.js',
+define(['app', '/app/js/common.js', '/app/views/directives/search-filter-dates.partial.html.js', 'ngDialog',
 '/app/views/search/search-results/result-default.js'], function (app, commonjs) { // jshint ignore:line
 
-app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore", "guid",  "$timeout", "$q","IStorage","commonjs", function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs) {
+app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore", "guid",  "$timeout", "$q","IStorage","commonjs", 'ngDialog', 
+function ($http, Thesaurus, $filter, _, guid, $timeout, $q, storage, commonjs, ngDialog) {
 
 	return {
 		restrict   : "EA",
@@ -81,7 +82,11 @@ app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore
             //==================================
 			$scope.openAddDialog = function(){
                 checkExistingDocuments();
-                $('#'+$scope.question).modal('show');
+                ngDialog.openConfirm({
+                    template: 'documentSelectionModal',
+                    closeByDocument: false,
+                    scope: $scope
+                });
 			};
 
             //==================================
@@ -131,8 +136,6 @@ app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore
                 $scope.model = checkedDocuments;
 
                 loadDocuments();
-
-				$('#'+$scope.question).modal('hide');
 				$scope.areVisible = true;
 			};
 
@@ -189,6 +192,10 @@ app.directive("documentSelection", ["$http", "Thesaurus", "$filter", "underscore
 					loadDocuments();
 				}
 			});
+
+            $scope.closeDialog = function () {
+                ngDialog.close();
+            };
 
 		}
 	};

@@ -3,11 +3,11 @@ define(['app',
 '/app/views/directives/search-filter-dates.partial.html.js',
 '/app/views/search/search-results/result-default.js',
 '/app/services/search-service.js',
-'/app/services/app-config-service.js'
+'/app/services/app-config-service.js', 'ngDialog'
 ], function (app, commonjs) { // jshint ignore:line
 
-app.directive("documentSelector", ["$http",'$rootScope', "$filter", "underscore", "$q", "searchService", "appConfigService", "IStorage",
-function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, IStorage) {
+app.directive("documentSelector", ["$http",'$rootScope', "$filter", "underscore", "$q", "searchService", "appConfigService", "IStorage", 'ngDialog',
+function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, IStorage, ngDialog) {
 
 	return {
 		restrict   : "EA",
@@ -67,8 +67,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 
                 $scope.syncDocuments();
 
-
-				$('#'+$scope.question).modal('hide');
+                ngDialog.close();
 				$scope.areVisible = true;
 			};
 
@@ -118,8 +117,6 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                         $scope.model = undefined;
                 }
 
-
-				$('#'+$scope.question).modal('hide');
 				$scope.areVisible = true;
 			};
 
@@ -242,7 +239,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 
                 searchOperation = searchService.list(queryParameters, null);
 
-                $q.when(searchOperation)
+                return $q.when(searchOperation)
                     .then(function(data) {
                        $scope.rawDocuments = data.data.response;
                     }).catch(function(error) {
@@ -260,8 +257,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             function load() {
                 if(!$scope.rawDocuments || _.isEmpty($scope.rawDocuments))
                 {
-                    getDocs();
-                    return;
+                    return getDocs();                    
                 }
             };
 
@@ -272,7 +268,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 		    //==================================
 		    $scope.$watch('model', function(newValue, oldValue){
 		        if(newValue){
-                     //$scope.syncDocuments();
+                     $scope.syncDocuments();
                      $scope.showAddButton = true;
 		        }
 		    });
@@ -283,20 +279,23 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             //==================================
 			$scope.openAddDialog = function(){
 
-                 load();
-
-                 $scope.syncDocuments();
-
-                 _.forEach($scope.rawDocuments.docs, function (doc) {
-                    doc.__checked = false;
-                    if($scope.isInModel(doc.identifier_s)){
-                        doc.__checked = true;
-                    }
-
+                ngDialog.open({
+                    template: 'documentSelectionModal',
+                    closeByDocument: false,
+                    scope: $scope
                 });
 
-                $('#'+$scope.question).modal('show');
+                 $q.when(load())
+                    .then(function (){                        
+                        //$scope.syncDocuments();
+                        _.forEach($scope.rawDocuments.docs, function (doc) {
+                            doc.__checked = false;
+                            if($scope.isInModel(doc.identifier_s)){
+                                doc.__checked = true;
+                            }
 
+                        });
+                    });
 			};
 
 
@@ -317,6 +316,10 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 				});
 			}
 
+            $scope.closeDialog = function () {
+                $scope.syncDocuments();
+                ngDialog.close();
+            };
 			function removeRevisonNumber(identifier){
                 
                 if(identifier.indexOf('@')>=0)

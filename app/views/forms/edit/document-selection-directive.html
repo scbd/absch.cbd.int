@@ -1,104 +1,65 @@
 <div>
     <!-- existing documents display -->
     <div class="row">
-        <div class="col-xs-12" >
+        <div class="col-xs-12">
             <span ng-show="model.length==0 || !model"> <i class="color-blue"> No records have been linked. </i> </span>
             <span ng-show="model.length==1"><i class="color-blue">There is <b>{{model.length}}</b> linked record.</i></span>
             <span ng-show="model.length>1"><i class="color-blue">There are <b>{{model.length}}</b> linked records.</i></span>
-            <button class="btn btn-default btn-sm" ng-click="openAddDialog();" ng-disabled="disabled" ><i class="fa fa-plus"></i> {{caption||'Add record(s)'}}</button>
-            <button  type="button" ng-click="showRecords(); areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords" class="btn btn-primary btn-sm">Display records</button>
-            <button  type="button" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0" class="btn btn-primary btn-sm">Hide records</button>
+            <button class="btn btn-default btn-sm" ng-click="openAddDialog();" ng-disabled="disabled"><i class="fa fa-plus"></i> {{caption||'Add record(s)'}}</button>
+            <button type="button" ng-click="showRecords(); areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords" class="btn btn-primary btn-sm">Display records</button>
+            <button type="button" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0" class="btn btn-primary btn-sm">Hide records</button>
         </div>
     </div>
     <div class="row" ng-show="areVisible">
-        <div class="col-xs-12" >
+        <div class="col-xs-12">
             <br />
-            <table class="table table-hover " id="search-new"  style="padding-bottom:3px;width:100%;">
-				<tr ng-repeat="doc in selectedDocuments | orderBy:['schema_s', 'title_t']">
+            <table class="table table-hover " id="search-new" style="padding-bottom:3px;width:100%;">
+                <tr ng-repeat="doc in selectedDocuments | orderBy:['schema_s', 'title_t']">
                     <td style="margin-bottom:10px;width:30px;">
                         <span style="font-size: 16px;margin:0;padding:0;float:right;">
                             <a ng-click="removeDocument(doc)" class="color-red">
                                 <i class="fa fa-times"></i></a>
                         </span>
                     </td>
-                    <td style="width:100%;margin-bottom:10px;" >
-                      <result-default doc='doc' type="nationalRecords"></result-default>
-					</td>
-				</tr>
-			</table>
+                    <td style="width:100%;margin-bottom:10px;">
+                        <result-default doc='doc' type="nationalRecords"></result-default>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade rounded" id="{{question}}" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-grey">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h3>Please select from published record(s) below:</h3>
-                    <div>
-                        <div ng-show="!schema" km-select name="selectedSchema" ng-model="selectedSchema" items="options.nationalSchemas()" placeholder="Filter by record type..."></div>
+    <script type="text/ng-template" id="documentSelectionModal">
+        <div class="rounded" id="{{question}}">
+            <div class="modal-header bg-grey">
+               <h3>Please select from published record(s) below:</h3>
+                <div>
+                    <div ng-show="!schema" km-select name="selectedSchema" ng-model="selectedSchema" items="options.nationalSchemas()" placeholder="Filter by record type..."></div>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new">
+                    <div class="row" style="margin:0 0 10px 0;padding:0;" ng-show="!isLoading" ng-repeat="doc in filteredDocuments = (rawDocuments |  filter:{schema_s:selectedSchema.identifier}) track by $index">
+
+                        <div class="col-xs-1 text-right">
+                            <input type="checkbox" ng-model="doc.__checked" style="width: 30px; height: 30px;" /></div>
+                        <div class="col-xs-11">
+                            <result-default doc='doc' type="nationalRecords"></result-default>
+                        </div>
+
                     </div>
+                    <div ng-show="isLoading"> loading...</div>
                 </div>
-                <div class="modal-body">
-
-                    <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new">
-                    	<div class="row" style="margin:0 0 10px 0;padding:0;" ng-show="!isLoading" ng-repeat="doc in filteredDocuments = (rawDocuments |  filter:{schema_s:selectedSchema.identifier}) track by $index">
-                       
-                                <div class="col-xs-1 text-right">
-                                    <input type="checkbox" ng-model="doc.__checked"  style="width: 30px; height: 30px;"/></div>
-                                <div class="col-xs-11">
-                                    <result-default doc='doc' type="nationalRecords"></result-default>
-                                </div>
-                           
-                        </div>
-                        <div  ng-show="isLoading"> loading...</div>
-                    </div> 
-                        
-                        
-                        
-                        
-                        
-                        <!--<table class="table table-bordered" style="padding:0;margin:0;width:100%;"   >
-    						<tr n>
-    							<td>
-    								<input type="checkbox" ng-model="doc.__checked"  style="width: 30px; height: 30px;"/>
-    							</td>
-    							<td style="padding:0;margin:20px;background-color:white;">
-                                  
-                                    <result-default doc='doc' type="nationalRecords"></result-default>
-<!--                                   
-                                    <div class="latest-title"><a href="/database/{{getUniqueId(doc.identifier_s)}}" target="_new">{{doc.title_t}}</a></div>
-                                    <span  style="text-transform:uppercase; font-size:12px; font-weight:bold;"><span class="bg-blue" style="padding-left:3px;padding-right:3px;">{{doc.schema_s | schemaName}} </span> &nbsp; <span>{{getUniqueId(doc.identifier_s)}}</span></span>
-                                </td>-->
-                                <!--<td>
-                                    <a ng-href="/database/{{doc.schema_s}}/{{getDocumentId(doc)}}" target="_new" class="pull-right"style="padding:0px 3px;color:#999;">
-                                        <i class="glyphicon glyphicon-new-window" id="help-record-newwindow"></i>
-                                    </a>
-                                </td>-->
-    						<!--</tr>
-
-    						<tr ng-show="filteredDocuments.length==0 && !isLoading">
-    							<td colspan="3">No records.</td>
-    						</tr>
-
-    						<tr ng-show="isLoading">
-    							<td colspan="3">
-    								Loading...
-    							</td>
-    						</tr>
-    					</table>
-                    </div>-->
-                </div>
-
-                <div class="modal-footer bg-grey">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <a type="button" class="btn btn-primary" ng-click="saveDocuments()">Save</a>
-                            <a type="button" class="btn btn-default" data-dismiss="modal">Close</a>
-                        </div>
+            </div>
+            <div class="modal-footer bg-grey">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <a type="button" class="btn btn-primary" ng-click="saveDocuments()">Save</a>
+                        <a type="button" class="btn btn-default" ng-clikc="closeDialog()">Close</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </script>
 </div>

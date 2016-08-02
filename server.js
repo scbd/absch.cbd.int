@@ -9,7 +9,6 @@ var app     = express();
 // Initialize constants
 
 var oneDay   = 86400000;
-var cacheTag = Math.random() * 0x80000000 | 0;
 
 // Set routes
 
@@ -23,13 +22,14 @@ app.all('/app/*', function(req, res) { res.status(404).send(); } );
 app.get('/app/absPDFViewer/*'   , function(req, res) {
 	res.sendFile(__dirname + '/app/absPDFViewer/absPermitPrint.html');
 });
+
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
-app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbddev.xyz', changeOrigin: true }));
+app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbddev.xyz', changeOrigin: true, secure:false }));
 
 // Configure index.html
 
 app.get('/*', function (req, res) {
-    res.cookie('cachetag', cacheTag);
+    res.cookie('VERSION', process.env.VERSION);
     res.sendFile(__dirname + '/app/template.html');
 });
 

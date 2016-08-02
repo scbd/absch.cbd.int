@@ -1,8 +1,10 @@
 define(['app', '/app/js/common.js', 'scbd-angularjs-services', 'scbd-angularjs-controls',
-'/app/views/forms/view/view-contact-reference.directive.js',
-'/app/views/forms/view/view-organization-reference.directive.js'],
+'/app/views/forms/view/view-contact-reference.directive.js', 'ngDialog',
+'/app/views/forms/view/view-organization-reference.directive.js',
+'/app/services/search-service.js','ngInfiniteScroll'
+],
 function(app) {
-
+    
     app.directive("fieldEmbedContact", [function() {
 
         return {
@@ -18,26 +20,17 @@ function(app) {
             },
             link: function($scope, $element, $attrs) {
 
-                var modalEdit = $element.find("#editContact");
-
                 $scope.multiple = $attrs.multiple !== undefined;
 
-                $scope.showContacts = function(index) {
-                    if (!modalEdit.is(":visible")) {
-                        modalEdit.modal("show");
-                        $scope.loadExisting();
-                        $scope.showExisting=true;
-                    }
-                    if (modalEdit.is(":visible")) {
-                        modalEdit.modal("hide");
-                    }
-                    $scope.errorMessage = undefined;
-                }
             },
-            controller: ["$scope", "$http", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q", "IStorage", "commonjs",
-                function($scope, $http, $window, $filter, _, guid, editFormUtility, $q, storage, commonjs) {
+            controller: ["$scope", "$http", "$window", "$filter", "underscore", "guid", "editFormUtility", "$q", "IStorage", "commonjs", 'ngDialog', 'searchService', 'appConfigService',
+                function($scope, $http, $window, $filter, _, guid, editFormUtility, $q, storage, commonjs, ngDialog, searchService, appConfigService) {
                     var workingContacts = null;
-
+                    var currentPage = -1;
+                    var queryCanceler;
+                    $scope.recordCount = 0;
+                    $scope.loadingDocuments = false;
+                    $scope.search = {};
                     $scope.options  = {
         				countries         : function() { return $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
         				organizationTypes : function() {
@@ -68,6 +61,16 @@ function(app) {
                         workingContacts = null;
                     });
 
+                    $scope.showContacts = function(index) {                   
+                        $scope.loadExisting();
+                        $scope.showExisting=true;
+                        $scope.errorMessage = undefined;
+                        ngDialog.open({
+                            template: 'organizationModal',
+                            closeByDocument: false,
+                            scope: $scope
+                        });
+                    }
                     //============================================================
                     //
                     //
@@ -112,7 +115,7 @@ function(app) {
                     //============================================================
                     $scope.closeContact = function() {
 
-                        $scope.showContacts();
+                        closeDialog();
                         workingContacts = undefined;
                         //clear the dropdown list display text which remains after the dialog is closed.
                         $scope.$broadcast('clearSelectSelection');
@@ -125,34 +128,74 @@ function(app) {
                     //============================================================
                     $scope.loadExisting = function() {
 
-                        if (!$scope.existingContacts) {
+                        if($scope.loadingDocuments || $scope.existingContacts && $scope.recordCount == $scope.existingContacts.length)
+                            return;
 
-                            $scope.loading = true;
-
-                            var qDrafts = storage.drafts.query("(type eq 'organization')", {body: true});
-                            var qPublished = storage.documents.query("(type eq 'organization')", "my", {body: true});
-                            $scope.existingContacts = [];
-
-                            $q.all([qDrafts, qPublished]).then(function(results) {
-                                    _.each(results,  function(result, index){
-                                       _.each(result.data.Items,function(contact) {
-                                           if(index==0 && !contact.workingDocumentLock){
-                                               return;
-                                           }
-                                           var lContact = contact.body;
-                                           var exists = _.some($scope.existingContacts, function(org){return org.header.identifier == lContact.header.identifier});
-                                           if(!exists){
-                                               lContact.revisonType = index == 0 ? 'request' : 'published';
-                                               lContact.revision = contact.revision;
-                                               $scope.existingContacts.push(lContact);
-                                           }
-                                       });
-                                   })
-                                })
-                                .finally(function() {
-                                    $scope.loading = false;
-                                });
+                        $scope.loadingDocuments = true;
+                        currentPage += 1;
+                        $scope.searchOrganizations();
+                    };
+                    $scope.$watch('search.keyword', function(newVal) {
+                        if(newVal !=undefined){
+                            $scope.searchOrganizations(true);
                         }
+                    })
+                    $scope.searchOrganizations = function(clear) {
+                        
+                        if (queryCanceler) {
+                            console.log('trying to abort pending request...');
+                            queryCanceler.resolve(true);
+                        }
+                        var fields = 'identifier_s, _state_s,revision:_revision_i, name:title_s, acronym:acronym_s, organizationType_s,' +
+                                         'address_EN_t, city_EN_t, state_EN_t, postalCode_EN_t, country_s, phones:phones_ss, faxes:faxes_ss, emails:emails_ss, websites:websites_ss'
+                            
+                        var q = 'realm_ss:' + appConfigService.currentRealm.toLowerCase() + ' AND ';
+                        if($scope.search.keyword){
+                            var qFields = ['text_EN_txt', 'title_s', 'acronym_s', 'organizationType_EN_s', 'address_s', 'state_s', 'postalCode_s', 'country_EN_s', 'emails_ss']
+                            q += '(' + qFields.join(':"*' + $scope.search.keyword + '*" OR ') + ':" *' 
+                                     + $scope.search.keyword + '*") AND ';
+                            if(clear){
+                                currentPage = -1;
+                                $scope.recordCount = 0;
+                                $scope.loadingDocuments = false;
+                            }
+                        }
+                        if(currentPage===-1)
+                            currentPage=0;
+                            
+                        var queryListParameters = {
+                            'q'     : q + 'schema_s:organization',
+                            'sort'  : 'updatedDate_dt desc',
+                            'fl'    : fields,
+                            'wt'    : 'json',
+                            'start' : currentPage * 25,
+                            'rows'  : 25,
+                        };
+
+                        queryCanceler = $q.defer();
+                        $q.when($http.get('/api/v2013/index/select', {  params: queryListParameters, timeout: queryCanceler}))
+                          .then(function (data) {
+                            queryCanceler = null;
+                            if(!$scope.existingContacts || currentPage == 0){
+                                var docs = data.data.response.docs;
+                                    _.each(docs, function(record){
+                                    formatOrganization(record);
+                                });
+                                $scope.existingContacts = docs;
+                                $scope.recordCount = data.data.response.numFound;
+                                
+                            }
+                            else {
+                                _.each(data.data.response.docs, function(record){
+                                    $scope.existingContacts.push(formatOrganization(record));
+                                });
+                            }
+                        }).catch(function(error) {
+                            console.log('ERROR: ' + error);
+                        })
+                        .finally(function(){
+                            $scope.loadingDocuments = false;
+                        });
                     }
 
                     $scope.selectContact = function(contact) {
@@ -165,7 +208,7 @@ function(app) {
                         } else {
                             $scope.model = {identifier:contact.header.identifier + '@' + (contact.revision||'1')};
                         }
-                        $scope.showContacts();
+                        closeDialog()
                         workingContacts = undefined;
                         //clear the dropdown list display text which remains after the dialog is closed.
                         $scope.$broadcast('clearSelectSelection');
@@ -275,6 +318,16 @@ function(app) {
                         });;
                     };
 
+                    function closeDialog() {
+                        ngDialog.close();
+                        $scope.errorMessage = undefined;
+                        currentPage = -1;
+                        queryCanceler = null;
+                        $scope.recordCount = 0;
+                        $scope.loadingDocuments = false;
+                        $scope.search = {};
+                    };
+
                     function saveContactDraft(contact){
                     		if(!contact)
                     			throw "Invalid document";
@@ -336,6 +389,32 @@ function(app) {
                     	})
 
                     	return $q.all([a,b]);
+                    }
+
+                    function formatOrganization(organization){
+
+                        organization.header = {
+                            identifier :  organization.identifier_s
+                        }
+                        if(organization.organizationType_s)
+                            organization.organizationType = {
+                                identifier :  organization.organizationType_s
+                            }
+                        if(organization.country_s) 
+                            organization.country = {
+                                identifier :  organization.country_s
+                            }
+
+                        if(organization.address_EN_t)
+                            organization.address = { en : organization.address_EN_t }  
+                        if(organization.city_EN_t)
+                             organization.city = { en : organization.city_EN_t }   
+                        if(organization.state_EN_t)
+                             organization.state = { en : organization.state_EN_t }   
+                        if(organization.postalCode_EN_t)
+                             organization.postalCode = { en : organization.postalCode_EN_t }
+
+                        return organization;  
                     }
                 }
             ]

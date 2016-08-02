@@ -1,6 +1,6 @@
 define(['app', 'underscore', '/app/js/common.js',
 '/app/services/search-service.js',
-'/app/views/directives/infinite-scroll-directive.js',
+'ngInfiniteScroll',
 '/app/views/search/search-filters/keyword-filter.js',
 '/app/views/search/search-filters/national-filter.js',
 '/app/views/search/search-filters/reference-filter.js',
@@ -23,6 +23,9 @@ define(['app', 'underscore', '/app/js/common.js',
              'appConfigService', '$routeParams', '$location',
             function($scope, $q, realm, searchService, commonjs, localStorageService,
                 $http, thesaurus, appConfigService, $routeParams, $location) {
+    
+                    var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
+                    var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
 
                     var queryCanceler = null;
                     $scope.rawDocs = [];
@@ -261,12 +264,15 @@ define(['app', 'underscore', '/app/js/common.js',
                             console.log('trying to abort pending request...');
                             queryCanceler.resolve(true);
                         }
-
+                        var fields = base_fields + en_fields + 
+                        ', implementingAgencies_EN_txt, executingAgencies_EN_txt, collaboratingPartners_EN_txt, authors_t, organizations_EN_txt, publicationYear_i';
+                        
                         var q = queryFilterBuilder("reference");
 
                         queryCanceler = $q.defer();
 
                         var listQuery = {
+                            fields      : fields,
                             query       : q,
                             sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : undefined,
                             currentPage : referenceCurrentPage,
@@ -306,14 +312,15 @@ define(['app', 'underscore', '/app/js/common.js',
                             console.log('trying to abort pending request...');
                             queryCanceler.resolve(true);
                         }
-
+                        var fields = base_fields + en_fields + ', startDate_dt,endDate_dt,url_ss, uniqueIdentifier_s, eventCity_s, eventCountry_EN_t';
                         var q = queryFilterBuilder("scbd");
 
                         queryCanceler = $q.defer();
 
                         var listQuery = {
                             query       : q,
-                            sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : undefined,
+                            fields      : fields,
+                            sort        : _.isEmpty($scope.setFilters) ? 'sort1_dt desc, updatedDate_dt desc' : undefined,
                             currentPage : scbdCurrentPage,
                             rowsPerPage : $scope.itemsPerPage
                         };
@@ -825,7 +832,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
 
                         //reference
-                        addFilter('resource', {'sort': 1,'value':false, type:'reference', 'name':'Virtual Library Records ', 'id':'resource', 'description':'The virtual library in the ABS Clearing-House hosts a number of ABS relevant resources submitted by any registered user of the ABS Clearing-House. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc.'});
+                        addFilter('resource', {'sort': 1,'value':false, type:'reference', 'name':'Virtual Library Resources ', 'id':'resource', 'description':'The virtual library in the ABS Clearing-House hosts a number of ABS relevant resources submitted by any registered user of the ABS Clearing-House. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc.'});
 
                         addFilter('modelContractualClause', {'sort': 2, type:'reference', 'name':'Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standard', 'id':'modelContractualClause', 'description':'Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.'});
 

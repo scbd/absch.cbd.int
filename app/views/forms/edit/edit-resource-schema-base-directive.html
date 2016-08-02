@@ -38,9 +38,7 @@
 						<div class="row">
 							<div class="col-xs-6">
 								<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
-                                    <div class="help-info"  ng-if="isResource">"Case study" in this regard refers to a specific study/description or analysis of a project, policy or activity which documents experiences and lessons learned that are likely to help inform or improve future activities or activities of others.</div>
-                                    <div class="help-info"  ng-if="isResource">"Good practice" refers to practices, processes, techniques or working methods that have consistently and empirically proved effective and are being used as a benchmark or standard.</div>
-									<div km-select multiple  name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"></div>
+                                    <div km-select multiple  name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()" show-description="true"></div>
 								</div>
 							</div>
 							<div class="col-xs-6" ng-show="isOtherSelected(document.resourceTypes)">
@@ -61,7 +59,7 @@
 							<div class="col-md-12">
 								<div class="km-control-group" name="formatDetails" caption="Format details">
 									<div class="help-info">Format details may be used to provide further information relating to the format of the attachments, including its dimensions (e.g. size, number of pages or duration) or the software, hardware, or other equipment needed to display or operate it (e.g. “Requires Acrobat Reader for viewing”).</div>
-									<div km-textbox-ml rows="2" name="formatDetails" ng-model="document.formatDetails" locales="document.header.languages"></div>
+									<div km-textbox-ml rows="2" name="formatDetails" ng-model="document.formatDetails" locales="document.header.languages" ></div>
 								</div>
 							</div>
 						</div>
@@ -69,10 +67,7 @@
 						<div class="row">
 							<div class="col-md-12" ng-if="isResource">
 								<div class="km-control-group" required name="purpose" caption="Please identify the main purpose of the resource">
-                                    <div class="help-info">"Assessing capacity-building needs" are, for example, capacity needs assessment tools, methodological guidance, surveys, etc.</div>
-                                    <div class="help-info">"Providing technical guidance" refers to guidance materials that provide practical advice and support, including explanations/illustrations, instructions and advice for
-performing certain types of tasks and/or implementing specific approaches. </div>
-									<div km-select multiple  required name="purpose" ng-model="document.purpose" items="options.purposes()"></div>
+                                   <div km-select multiple  required name="purpose" ng-model="document.purpose" items="options.purposes()" show-description="true"></div>
 								</div>
 							</div>
 						</div>
@@ -93,6 +88,12 @@ performing certain types of tasks and/or implementing specific approaches. </div
 							</div>
 						</div>
 
+						<!--//Authors or Authoring organization is madatory Error message -->
+						<label for="author_org" style="width:0px;height:0px;display:inline">
+							<span style="display:none">
+								Please enter author(s) details or select authoring organizations
+							</span>
+						</label>
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" required name="authors" caption="Author(s)">
@@ -101,19 +102,11 @@ performing certain types of tasks and/or implementing specific approaches. </div
 								</div>
 							</div>
 						</div>
-
+									
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" name="organizations" caption="Authoring organisation(s) ">
-
-                                    <!-- <div document-selector ng-model="document.organizationsRef"
-                                                                        question="organizationsRef"
-                                                                        schema="contact"
-                                                                        government="document.government"
-                                                                        filter="true"
-                                                                        ></div> -->
-								<field-embed-contact multiple ng-model="document.organizations" organization-only locales="document.header.languages" caption="Add organizations »">
-
+									<field-embed-contact multiple ng-model="document.organizations" organization-only locales="document.header.languages" caption="Add organizations »">
 								</div>
 							</div>
 						</div>
@@ -121,8 +114,9 @@ performing certain types of tasks and/or implementing specific approaches. </div
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="km-control-group" required name="publicationYear" caption="Publication year">
-									<input type="number" required name="publicationYear" ng-model="document.publicationYear"/>
-									<!-- min="0" max="9999" maxlength="4"  ng-change="maxLengthCheck(document.publicationYear)"/> -->
+									<select class="form-control" style="width:10%" required name="publicationYear" ng-model="document.publicationYear" convert-to-number>>
+										 <option ng-repeat="option in years" value="{{option.id}}">{{option.name}}</option>
+									</select>
 								</div>
 							</div>
 						</div>

@@ -12,11 +12,44 @@
         <div ng-show="!showDoc" ng-click="showDoc=!showDoc" style="padding:0!important;margin:0!important;">
             <div class="{{type}}">
 
-                <div class="title bold">{{doc.rec_title}}</div>
+                <div class="title bold">{{doc.rec_title}}
+                    <span ng-if="doc.publicationYear_i">({{doc.publicationYear_i}})</span>
+                </div>
 
                 <span class="description hidden-xs descriptionSpan" ng-if="doc.rec_summary">{{doc.rec_summary|limitTo:250}}
                 <span ng-if="doc.rec_summary.length > 250">...</span>
                 </span>
+                <div ng-if="doc.schema_s=='capacityBuildingInitiative'">
+                     <span ng-if="doc.implementingAgencies_EN_txt">
+                        <strong>Implemented by</strong>  
+                            <span ng-repeat="item in doc.implementingAgencies_EN_txt">{{item}}
+                                <span ng-if="!$last">|</span>
+                            </span>
+                    </span> 
+                    <span ng-if="doc.executingAgencies_EN_txt">
+                        <strong>executed by</strong>
+                            <span ng-repeat="item in doc.executingAgencies_EN_txt">{{item}}
+                                <span ng-if="!$last">|</span>
+                            </span>
+                    </span>
+                     <span ng-if="doc.collaboratingPartners_EN_txt">
+                       <strong> with the collaboration of </strong> 
+                            <span ng-repeat="item in doc.collaboratingPartners_EN_txt">{{item}}
+                                <span ng-if="!$last">|</span>
+                            </span>
+                    </span>
+                </div>
+                 <div ng-if="doc.schema_s=='resource'">
+                     <span ng-if="doc.authors_t">Author(s): {{doc.authors_t}}</span>
+                     <span ng-if="doc.organizations_EN_txt">
+                        <strong>Organizations </strong>  
+                            <span ng-repeat="item in doc.organizations_EN_txt">{{item}}
+                                <span ng-if="!$last">|</span>
+                            </span>
+                    </span> 
+                </div> 
+
+                    
                 <ul class="metadata bold">
                     <li>
                         <span class="schema bold">{{doc.schema_s | schemaName}}</span>
@@ -25,7 +58,7 @@
                     <li ng-if="doc.rec_countryName && type != referenceRecords" class="hidden-xs">
                         <span>{{doc.rec_countryName}}</span>
                     </li>
-                    <li ng-if="doc.uniqueIdentifier_s && type != referenceRecords">
+                    <li ng-if="doc.uniqueIdentifier_s">
                         <span>{{doc.uniqueIdentifier_s}}</span>
                     </li>
                     <li class="hidden-xs" ng-if="doc.rec_meta1 && doc.schema_s !=='database' && type != referenceRecords" id="meta1">
@@ -40,8 +73,13 @@
                         <span ng-repeat="meta in doc.rec_meta3" ng-class="{'color-red':meta==='Revoked'}">{{meta}}{{$last ? '':', '}}</span>
                     </li>
 
-                    <li>
+                    <li ng-if="doc.schema_s !=='meeting'">
                         <span class="last-span">{{doc.rec_date | formatDate}}</span>
+                    </li>
+                     <li ng-if="doc.schema_s =='meeting'">
+                        <span class="last-span"> 
+                            {{doc.startDate_dt | moment:'utc' | formatDate}} - {{doc.endDate_dt | moment:'utc' | formatDate}} 
+                            | {{doc.eventCity_s}} | {{doc.eventCountry_EN_t}}</span>
                     </li>
                 </ul>
             </div>

@@ -1,15 +1,17 @@
 <div class="row" style="margin:0;padding:0;" ng-hide="hideEverything">
     <div class="col-xs-12" style="margin-bottom:20px;">
         <style>
-            .active {position: absolute!important;
-    top: 0!important;
-    left: 0!important;
-    padding: 0;
-    margin: 0;}
-            </style>
-            <!--<span block-region activate="isUpdating"></span>-->
+            .active {
+                position: absolute!important;
+                top: 0!important;
+                left: 0!important;
+                padding: 0;
+                margin: 0;
+            }
+        </style>
+        <!--<span block-region activate="isUpdating"></span>-->
 
-            <span block-region activate="isUpdating"></span>
+        <span block-region activate="isUpdating"></span>
         <div class="panel panel-danger">
 
             <div class="panel-heading bg-red">
@@ -57,11 +59,9 @@
                     <div class="row" style="margin:0;padding:0;" ng-show="workFlowIsCreatedByMe()">
                         <div class="col-xs-12">
                             <button type="button" class="btn btn-warning bold" ng-click="" ng-disabled="isUpdating">
-                            <i class="fa fa-rotate-left"></i>
-                           <span class="hidden-xs"> Cancel Publishing Request</span>
-                           
-                        </button>
-
+                                <i class="fa fa-rotate-left"></i>
+                                <span class="hidden-xs"> Cancel Publishing Request</span>                           
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,6 @@
             </div>
         </div>
 
-
     </div>
 
     <div class="col-xs-12">
@@ -79,29 +78,38 @@
             <record-loader show-details="showDetails" class="shadow-z-2" hide-buttons="true" link-target="_self"></record-loader>
         </div>
     </div>
+    <script type="text/ng-template" id="rejectWorkflowRequestModalTemplate">
+        <form name="rejectForm" role="form">
+            <div class="modal-header bg-red">
+                <h4 class="modal-title color-white">Request Changes or Reject a record version</h4>
+            </div>
+            <div class="modal-body">
+                <p ng-class="{ 'has-warning':rejectForm.reason.$error.required, 'has-success':!rejectForm.reason.$invalid }">
+                    <span ng-show="rejectForm.reason.$error.required">Please provide the reason this records is being rejected.</span>
+                    <textarea class="form-control" rows="5" name="reason" ng-model="rejectReason" required></textarea>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" ng-click="closeDialog();">Cancel</button>
+                <button type="button" class="btn btn-danger bold" data-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="fa fa-times-circle"></i> Reject</button>
+            </div>
+        </form>
+    </script>
 
-    <form name="rejectForm" role="form">
-        <div class="modal fade" id="rejectModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-red">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title color-white">Request Changes or Reject a record version</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p ng-class="{ 'has-warning':rejectForm.reason.$error.required, 'has-success':!rejectForm.reason.$invalid }">
-                            <span ng-show="rejectForm.reason.$error.required">Please provide the reason this records is being rejected.</span>
-                            <textarea class="form-control" rows="5" name="reason" ng-model="rejectReason" required></textarea>
-                        </p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger bold" data-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="fa fa-times-circle"></i> Reject</button>
-                    </div>
-                </div>
+    <script type="text/ng-template" id="cancelWorkflowRequestModalTemplate">
+        <div id="cancelWorkflowRequestModal">
+            <div class="modal-header">
+                <h4>Cancel publishing request<i ng-show="loading==true" class="fa fa-spinner fa-spin" style="display:none"></i></h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to recall and cancel this publishing request?</p>
+            </div>
+            <div class="modal-footer" style="margin-top:0">
+                <button type="button" class="btn btn-default" ng-click="closeDialog();">close</button>
+                <button ng-disabled="loading==true" type="button" ng-click="cancelWorkflowRequest(workflow)" class="btn btn-primary">Yes</button>
             </div>
         </div>
-    </form>
+    </script>
 
     <script type="text/ng-template" id="deleteConfirmation">
         <!--<div class="modal-content">-->

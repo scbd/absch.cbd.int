@@ -217,8 +217,8 @@
 
             <div ng-repeat="doc in referenceRecords.resource.docs" ng-show="doc.title_t && $index < 5"  class="link1">
                 <!-- <div id="resources" ng-include="home-list.html"> -->
-                <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;">
-                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                <a href="/database/{{doc.schema_s}}/{{doc.identifier_s}}"  style="padding-bottom:5px;">
+                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.updatedDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
             </div>
@@ -232,8 +232,8 @@
 
             <div ng-repeat="doc in referenceRecords.capacityBuildingInitiative.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="capacityBuildingInitiative" ng-include="home-list.html"> -->
-                <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;" >
-                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                <a href="/database/{{doc.schema_s}}/{{doc.identifier_s}}"  style="padding-bottom:5px;" >
+                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.updatedDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
             </div>
@@ -245,8 +245,8 @@
                 </h5>
             <div ng-repeat="doc in referenceRecords.modelContractualClause.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="modelContractualClause" ng-include="home-list.html"> -->
-                <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;"  >
-                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                <a href="/database/{{doc.schema_s}}/{{doc.identifier_s}}"  style="padding-bottom:5px;"  >
+                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.updatedDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
             </div>
@@ -261,8 +261,8 @@
 
             <div ng-repeat="doc in referenceRecords.communityProtocol.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
-                <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;" >
-                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                <a href="/database/{{doc.schema_s}}/{{doc.identifier_s}}"  style="padding-bottom:5px;" >
+                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.updatedDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
             </div>
@@ -272,7 +272,7 @@
 
     <div class="clearfix"></div>
     <h3 style="padding-left:15px;padding-bottom:0;margin-bottom:0;margin-top:50px;">
-        SCBD record
+        SCBD managed records
          <a href="#" class="helpinfoInline fa fa-info-circle color-darkgrey" data-toggle="tooltip" data-html="true"  data-title="{{help.scbdRecords}}" data-container="body"></a></h3>
     <div style="margin-left:15px;padding-left:15px;border-top:1px solid #BBB;"></div>
     <div class="row-fluid">
@@ -284,7 +284,7 @@
             <div ng-repeat="doc in referenceRecords.new.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
                 <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;" >
-                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.updatedDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
             </div>
@@ -298,7 +298,7 @@
             <div ng-repeat="doc in referenceRecords.notification.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
                 <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;" >
-                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.updatedDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
             </div>
@@ -312,7 +312,10 @@
             <div ng-repeat="doc in referenceRecords.meeting.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
                 <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;" >
-                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> 
+                        {{doc.startDate_dt | moment:'utc' | formatDate}} - {{doc.endDate_dt | moment:'utc' | formatDate}} 
+                        ({{doc.eventCity_s}}, {{doc.eventCountry_EN_t}})
+                    </span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
             </div>
@@ -326,7 +329,7 @@
             <div ng-repeat="doc in referenceRecords.news.docs" ng-show="doc.title_t && $index < 5" class="link1">
                 <!-- <div id="communityProtocol" ng-include="home-list.html"> -->
                 <a href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}"  style="padding-bottom:5px;" >
-                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.createdDate_dt | formatDate}}</span>
+                    <span class="color-darkgrey" style="text-transform:uppercase;font-weight:bold;font-size:10px;"> {{doc.updatedDate_dt | formatDate}}</span>
                     <span class="color-grey" style="display:block;font-size:12px;">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                 </a>
             </div>

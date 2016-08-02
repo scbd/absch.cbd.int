@@ -42,7 +42,8 @@ require.config({
         'ngStorage'                 : '../libs/ngstorage/ngStorage.min',
         'angular-block-ui'          :  '../libs/angular-block-ui/dist/angular-block-ui.min',
         'ngDialog'                  :  '../libs/ng-dialog/js/ngDialog.min',
-        'socket.io'                 : '../libs/socket.io-1.4.5/index'
+        'socket.io'                 : '../libs/socket.io-1.4.5/index',
+        'ngInfiniteScroll'          : '../libs/ngInfiniteScroll/build/ng-infinite-scroll'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -76,6 +77,7 @@ require.config({
     },
     packages: [
         { name: 'scbd-branding'          , location : '../libs/scbd-branding' },
+        { name: 'scbd-angularjs-controls', location : '../libs/scbd-angularjs-controls/form-control-directives', main : 'all-controls.js' },
         { name: 'scbd-angularjs-services', location : '../libs/scbd-angularjs-services/services' },
         { name: 'scbd-angularjs-filters',  location : '../libs/scbd-angularjs-services/filters' },
         { name: 'scbd-map',                location : '../libs/scbd-map' },

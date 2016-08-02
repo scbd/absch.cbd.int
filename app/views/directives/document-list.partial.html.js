@@ -1,7 +1,7 @@
 define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
     './document-metadata-directive.html.js',
     '/app/js/common.js',
-    '/app/views/directives/infinite-scroll-directive.js'
+    'ngInfiniteScroll'
 ], function(app) {
 
     app.directive('documentList', function($http, $filter) {
@@ -469,7 +469,7 @@ define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
 
                         } else if (document.schema_s == 'absCheckpointCommunique') {
                             output.recordtype = "nationalRecord";
-                            output.originCountries = (document.originCountries_CEN_ss);
+                            output.sourceCountries = (document.sourceCountries_CEN_ss);
                             // output.title = "Checkpoint communiqué - "+ moment(document.createdDate_dt).format('MM/DD/YYYY hh:mm') ;
 
                             //TODO: output.description should be the summary of utilization

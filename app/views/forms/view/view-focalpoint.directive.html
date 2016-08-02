@@ -57,10 +57,14 @@
 			</span>
 		</div>
 
-		<div ng-show="document.telephone_s">
+		<div ng-show="document.telephone_ss">
 			<label>Telephone</label>
 			<span class="km-value">
-				<i class="fa fa-phone" /> {{document.telephone_s}}
+				<ul style="list-style-type: none;padding-left:0;">
+					<li ng-repeat="item in document.telephone_ss">
+						<i class="fa fa-phone" /> {{item}}
+					</li>
+				</ul>
 			</span>
 		</div>
 

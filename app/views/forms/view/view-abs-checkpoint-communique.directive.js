@@ -69,42 +69,45 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 					return;
 
 				$scope.emailList = [];
-				if(document.permit){
-
-						var permits = _.map(document.permit, function(document){
+				if(document.absIRCCs){
+						var absIRCCs =  _.map(document.permit, function(document){
 							return $http.get('/api/v2013/documents/' +  document.identifier)
 						});
-						$q.all(permits)
+						$q.all(absIRCCs)
 						.then(function(results){
 							_.each(results, function(result){
-								$scope.emailList.push({identifier:result.data.authority.identifier})
+								if(result.data.absCNA && !_.some($scope.emailList, {identifier:result.data.absCNA.identifier}))
+									$scope.emailList.push({identifier:result.data.absCNA.identifier})
 							});
 						});
 				}
-				else if(document.responsibleAuthorities){
-					$scope.emailList.push(document.personeToWhomGranted);
+				else if(document.entityWhoGrantedPIC){
+					if(!_.some($scope.emailList, {identifier:document.entityToWhomGrantedPIC}))
+						$scope.emailList.push(document.entityToWhomGrantedPIC);
 				}
-				else if(document.originCountries){
+				else if(document.sourceCountries){
 
-					var country = _.map(document.originCountries, function(country){ return country.identifier });
+					var country = _.map(document.sourceCountries, function(country){ return country.identifier });
 					var query = "/api/v2013/index/select?fl=id,identifier_s&q=(realm_ss:" + realm.value.toLowerCase() +
 					"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:" + country.join('+OR government_s:') + "))&rows=50"
 
 					$http.get(query).success(function(res) {
 						angular.forEach(res.response.docs, function(cna){
-							$scope.emailList.push({identifier: cna.identifier_s});
+							if(!_.some($scope.emailList, {identifier:cna.identifier_s}))
+								$scope.emailList.push({identifier: cna.identifier_s});
 						});
 					});
 				}
-				if(document.checkpoint){
-					var checkpoints = _.map(document.checkpoint, function(document){
+				if(document.absCheckpoints){
+					var checkpoints = _.map(document.absCheckpoints, function(document){
 						return $http.get('/api/v2013/documents/' +  document.identifier)
 					});
 					$q.all(checkpoints)
 					.then(function(results){
 						 _.each(results, function(result){
 							_.each(result.data.contactsToInform, function(contacts){
-								   $scope.emailList.push({identifier:contacts.identifier})
+								if(!_.some($scope.emailList, {identifier:contacts.identifier}))
+								  $scope.emailList.push({identifier:contacts.identifier})
 							 });
 						});
 					});
@@ -112,19 +115,21 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 				if(document.government){
 					var government =  document.government.identifier;
 					var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
-					"+organization_EN_t,telephone_s,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + realm.value.toLowerCase() +
+					"+organization_EN_t,telephone_ss,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + realm.value.toLowerCase() +
 					"+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(government_s:" + government + "))&rows=50";
 
 					$http.get(query).success(function(res) {
 						angular.forEach(res.response.docs, function(nfp){
-								$scope.emailList.push(
+								if(!_.some($scope.emailList, {identifier:nfp.identifier_s}))							
+	                    			$scope.emailList.push(
 										{
+											identifier:nfp.identifier_s,
 											header	: {identifier:nfp.identifier_s},
 											type:'person',
 											firstName:nfp.title_t,
 											addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
 											country: nfp.addressCountry_s,
-											phones:[nfp.telephone_s],
+											phones:nfp.telephone_ss,
 											faxes:nfp.fax_ss,
 											emails:nfp.email_ss
 										});

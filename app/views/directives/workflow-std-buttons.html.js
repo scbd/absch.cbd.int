@@ -486,7 +486,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                            }, 100)
                        } else {
                            $timeout(function() {
-                               $location.path('/register/' + $filter("mapSchema")(document_type));
+                               $location.path('/register/' + $filter("schemaShortName")(document_type));
                            }, 100);
                        }
                    }, 500);
@@ -519,7 +519,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                     });
 
                     $timeout(function() {
-                        $location.path('/register/' + $filter("mapSchema")(document_type));
+                        $location.path('/register/' + $filter("schemaShortName")(document_type));
                     }, 1000);
 
                 };
@@ -538,7 +538,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                         workflowId : workflowId
                     });
                     $timeout(function() {
-                        $location.path('/register/' + $filter("mapSchema")(document_type));
+                        $location.path('/register/' + $filter("schemaShortName")(document_type));
                     }, 1000);
 
                 };
