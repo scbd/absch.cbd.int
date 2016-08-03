@@ -182,7 +182,8 @@
                 ng:class="{'paddingleft0':term.level==1, 'paddingleft3':term.level==2 && !term.isMeasure , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
                         &nbsp;
                         <strong ng-if="!term.broaderTerms">
-                           {{  term.title||term.name | lstring:locale|uppercase}}<span ng-if="term.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' && otherCustomValues[term.identifier]">: {{otherCustomValues[term.identifier]| lstring:locale}}</span>
+                           {{  term.title||term.name | lstring:locale|uppercase}}
+                           <span ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && otherCustomValues[term.identifier]">: {{otherCustomValues[term.identifier]| lstring:locale}}</span>
                         </strong>
                         <!--exception for TK-->
                         <span ng-if="term.broaderTerms && !term.isMeasure" ng-style="{'boldLabel':term.identifier=='B8A150E054154AD3AD97856ABD485E90'}">
@@ -194,9 +195,11 @@
                             <span ng-if="term.measureType=='amended'">Amended by</span>
                             <span class="color-blue">
                                 <a target="new" ng-href="/database/record/{{term.measure|uniqueID}}" >{{term.title||term.name | lstring:locale}} </a>
+                                <span class="color-blue bold" ng-if="otherCustomValues[term.identifier]">: {{otherCustomValues[term.identifier]| lstring:locale}}</span>
                             </span>
                         </span>
-                         <span ng-if="sections[term.identifier] && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0" class="color-blue bold"> ( {{sections[term.identifier] | lstring:locale}} ) </span>
+                         <span ng-if="sections[term.identifier] && !isEmpty(sections[term.identifier]) && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0" 
+                         class="color-blue bold"> ( {{sections[term.identifier] | lstring:locale}} )</span>
                          <span ng-if="term.isMeasure && term.measure.amendedFor"> amending {{term.measure.amendedFor}}</span>
                         <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="term.level<2"></i>
                         <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="term.level<2"></i>
@@ -205,7 +208,7 @@
             </tr>
             <tr ng-if="term.identifier=='CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F' || term.geneticResourcesTerms" >
               <td colspan="3" style="padding-left:5%">
-                  <span onload="elements = term.geneticResourcesTerms|| binding.geneticResource.elements" ng-include="'/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement'"></span>
+                  <span onload="elements = term.geneticResourcesTerms|| binding.geneticResourceElements" ng-include="'/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement'"></span>
               </td>
             </tr>
             <tr ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && identifiers[term.identifier]">

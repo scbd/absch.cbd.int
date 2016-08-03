@@ -1,4 +1,5 @@
-define(['app','ngSmoothScroll',
+define(['app',
+	'scbd-angularjs-services', 'ngSmoothScroll',
 	'scbd-angularjs-filters',
 	'./view-history-directive.html.js',
     '/app/js/common.js',
@@ -37,8 +38,9 @@ define(['app','ngSmoothScroll',
 					$scope.init();
 			},
 			controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService',
-				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter, $http, $httpAWS, realm, $element, $compile, searchService) {
+				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows",
+				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
+					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows) {
 
 					var schemaMapping = {
 						news: '/app/views/forms/view/view-news.directive.html.js',
@@ -70,7 +72,7 @@ define(['app','ngSmoothScroll',
 						$scope.internalDocument = _new;
 						if ($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)) {
 							loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
-
+							checkIfPermitRevoked();
 						}
 					});
 
@@ -145,10 +147,10 @@ define(['app','ngSmoothScroll',
 							_.contains(["FOCALPOINT", "MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "NFP", "ST", "NT", "MT", "PR", "MTD"], documentSchema.toUpperCase())) {
 							$scope.loading = true;
 							commonjs.getReferenceRecordIndex(documentSchema, documentID)
-							.then(function (data) {
-								$scope.internalDocument = data.data;
-								$scope.loading = false;
-							});
+								.then(function (data) {
+									$scope.internalDocument = data.data;
+									$scope.loading = false;
+								});
 							loadViewDirective(documentSchema);
 						}
 						else if (documentID) {
@@ -179,7 +181,7 @@ define(['app','ngSmoothScroll',
 						var qDocument;
 						var qDocumentInfo;
 
-						
+
 
 						if (version == 'draft') {
 							qDocument = storage.drafts.get(identifier).then(function (result) { return result.data || result });
@@ -201,40 +203,49 @@ define(['app','ngSmoothScroll',
 							$scope.internalDocumentInfo = results[1];
 							$scope.internalDocument.info = results[1];
 
-							// console.log(results[2].data.response.docs[0]);
 							return $q.when(getDocumentVersion($scope.internalDocumentInfo.identifier))
-									.then(function(verResult){
-										
-										if (verResult.data.response.docs.length > 0) {
-											$scope.documentVersionCount = verResult.data.response.docs[0]._revision_i
-										}
-										else
-											$scope.documentVersionCount = $scope.internalDocumentInfo.revision || $scope.internalDocumentInfo.Count;
+								.then(function (verResult) {
 
-										if (version && $scope.internalDocumentInfo.revision != version) {
-											$scope.internalDocumentInfo.revision = version;
-										}
-										if (version)
-											$scope.revisionNo = version
-										else
-											$scope.revisionNo = $scope.documentVersionCount
+									if (verResult.data.response.docs.length > 0) {
+										$scope.documentVersionCount = verResult.data.response.docs[0]._revision_i
+									}
+									else
+										$scope.documentVersionCount = $scope.internalDocumentInfo.revision || $scope.internalDocumentInfo.Count;
 
-										loadViewDirective($scope.internalDocument.header.schema);
-									
-									});
+									if (version && $scope.internalDocumentInfo.revision != version) {
+										$scope.internalDocumentInfo.revision = version;
+									}
+									if (version)
+										$scope.revisionNo = version
+									else
+										$scope.revisionNo = $scope.documentVersionCount
+
+									loadViewDirective($scope.internalDocument.header.schema);
+									checkIfPermitRevoked();
+
+									if ($scope.internalDocumentInfo.workingDocumentLock) {
+										IWorkflows.get($scope.internalDocumentInfo.workingDocumentLock.lockID.replace('workflow-', ''))
+											.then(function (workflow) {
+												if (workflow && workflow.type.name == 'delete-record')
+													$scope.workflowRequestType = "deletion";
+												else
+													$scope.workflowRequestType = "publishing";
+											});
+									}
+								});
 
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
 								$scope.load(identifier, 'draft');
 							}
 						})
-						.finally(function () {
-							$scope.loading = false;
-						})
+							.finally(function () {
+								$scope.loading = false;
+							})
 
 					};
 
-					function getDocumentVersion(identifier){
+					function getDocumentVersion(identifier) {
 
 						var queryParameters = {
 							'query': 'identifier_s:' + identifier,
@@ -347,17 +358,10 @@ define(['app','ngSmoothScroll',
 						var schemaDetails = schemaMapping[lschema.toLowerCase()];
 
 						require([schemaDetails], function () {
-
-
-
 							var name = snake_case(lschema);
-
-
-
 							var directiveHtml =
 								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
 									.replace(/DIRECTIVE/g, 'view-' + name);
-
 							$scope.$apply(function () {
 								$element.find('#schemaView')
 									.empty()
@@ -373,8 +377,15 @@ define(['app','ngSmoothScroll',
 							return (pos ? separator : '') + letter.toLowerCase();
 						});
 					}
-					
-					
+
+					function checkIfPermitRevoked() {
+
+						if ($scope.internalDocument && $scope.internalDocument.header.schema == 'absPermit') {
+							if ($scope.internalDocument.amendmentIntent == 1)
+								$scope.isIRCCRevoked = true;
+						}
+					}
+
 					$scope.api = {
 						loadDocument: $scope.loadDocument
 					}

@@ -46,8 +46,8 @@
                                         PUBLISHED
                                     </span>
                                 <span class="color-red" ng-if="internalDocumentInfo.workingDocumentLock">
-                                        [ Locked: Pending publishing request ]
-                                    </span>
+                                        [ Locked: Pending {{workflowRequestType}} request ]
+                                </span>
                             </td>
                         </tr>
                         <tr>
@@ -83,7 +83,7 @@
     </div>
 
 
-    <div style="float:right; position:relative;top:1px;right:1px;" ng-if="showDetails">
+    <div style="float:right; position:relative;top:1px;right:1px;" ng-if="!isIRCCRevoked && showDetails">
         <div>
             <a title="Edit" ng-show="!internalDocumentInfo.workingDocumentLock" type="button" class="btn btn-default" href="/register/{{internalDocument.header.schema|schemaShortName}}/{{internalDocument.header.identifier}}/edit">
                 <i class="fa fa-edit"></i> edit </a>

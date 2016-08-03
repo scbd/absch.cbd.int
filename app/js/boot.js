@@ -42,7 +42,8 @@ require.config({
         'ngStorage'                 : '../libs/ngstorage/ngStorage.min',
         'angular-block-ui'          :  '../libs/angular-block-ui/dist/angular-block-ui.min',
         'ngDialog'                  :  '../libs/ng-dialog/js/ngDialog.min',
-        'socket.io'                 : '../libs/socket.io-1.4.5/index'
+        'socket.io'                 : '../libs/socket.io-1.4.5/index',
+        'ngInfiniteScroll'          : '../libs/ngInfiniteScroll/build/ng-infinite-scroll'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },

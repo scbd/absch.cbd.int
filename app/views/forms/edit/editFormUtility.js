@@ -196,11 +196,32 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 			}).then(function(draftInfo) {
 				return createWorkflow(draftInfo, additionalInfo); // return workflow info
 			});
+		},
+		
+		//==================================
+		//
+		//==================================
+		deleteDocument: function(document, additionalInfo) {
+
+			var draftInfo = {
+				identifier 				: document.identifier,
+				documentID			 	: document.documentID,
+				workingDocumentTitle	: document.title,
+				workingDocumentSummary	: document.summary,
+				workingDocumentMetadata	: document.metadata
+			};
+			var workflowType = {
+				name : 'deleteRecord', version : "0.4"
+			}	
+			
+			return createWorkflow(draftInfo, additionalInfo, workflowType); // return workflow info
+	
 		}
 	};
 
-	function createWorkflow(draftInfo, additionalInfo){
-		var type = schemasWorkflowTypes[draftInfo.type];
+	function createWorkflow(draftInfo, additionalInfo, type){
+		if(!type)
+		 	type = schemasWorkflowTypes[draftInfo.type];
 
 		if(!type)
 			throw "No workflow type defined for this record type: " + draftInfo.type;
