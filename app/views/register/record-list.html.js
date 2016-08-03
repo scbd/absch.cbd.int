@@ -61,6 +61,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                 deleteRecordModel.on("hidden.bs.modal", function () {
                     $timeout(function () {
                         $scope.recordToDelete = null; //clear on backdrop click
+                        $scope.security = undefined;
                     });
                 });
 
@@ -119,31 +120,28 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         $scope.iacCantDelete = true;
                         $scope.cantDelete = false;
                         $scope.recordToDelete = "0";
+                        $scope.security = undefined;
 
                     }
-                    // if (!(roleService.isAbsPublishingAuthority() || roleService.isAbsNationalFocalPoint() ||
-                    //     roleService.isAbsAdministrator() || roleService.isAdministrator())) {
-                    //     $scope.cantDelete = false;
-                    //     $scope.iacCantDelete = true;
-                    //     $scope.recordToDelete = "0";
-                    // }
-                    // else {
-                        if (record.type == 'absPermit' && $scope.isPublished(record)) {
-                            $scope.loading = true;
-                            $q.when(storage.documents.get(record.identifier))
-                            .then(function (result) {
-                                $scope.pilotDelete = true;
-                                $scope.cantDelete = true;
-                                $scope.recordToDelete = record; //TODO:only for pilot phase'
-                                $scope.recordToDelete.document = result.data;
-                                $scope.recordToDelete.document.amendmentDescription = undefined;
-                            }).finally(function(){$scope.loading=false;});
-                        } else {
-                            $scope.recordToDelete = record;
-                            $scope.cantDelete = false;
+                    if (record.type == 'absPermit' && $scope.isPublished(record)) {
+                        $scope.loading = true;
+                        $q.when(storage.documents.get(record.identifier))
+                        .then(function (result) {
+                            $scope.pilotDelete = true;
+                            $scope.cantDelete = true;
+                            $scope.recordToDelete = record; //TODO:only for pilot phase'
+                            $scope.recordToDelete.document = result.data;
+                            $scope.recordToDelete.document.amendmentDescription = undefined;
+                        }).finally(function(){$scope.loading=false;});
+                    } else {
+                        $scope.recordToDelete = record;
+                        $scope.cantDelete = false;
+                    }
 
-                        }
-                    // }
+                    $q.when(storage.documents.security.canDelete(record.identifier, record.type))
+                    .then(function (allowed){
+                        $scope.security = {canDelete : allowed };
+                    })
 
                 };
 
@@ -160,6 +158,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                         recordDeleted(record);
                         $scope.recordToDelete = null;
+                        $scope.security = undefined;
 
                     }).finally(function () {
                         delete $scope.loading
@@ -175,14 +174,16 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     $scope.loading = true;
 
                     return $q.when(editFormUtility.deleteDocument(record, $scope.additionalInfo))
-                    .then(function () {
-                        //alert($("#record" + record.identifier));
-                        // $("#record" + record.identifier).toggle('Explode');
-                        //
-                        // $timeout(function(){
+                    .then(function (workflowInfo) {
+                        localStorageService.set('workflow-activity-status', {
+                            identifier : record.identifier, type:'delete',
+                            workflowId : workflowInfo._id
+                        });
+                        record.workflowActivityStatus == 'pending';
+
                         $scope.$emit("documentDeleted", record);
                         $scope.recordToDelete = null;
-                        // },1500);
+                        $scope.security = undefined;
 
                     }).finally(function () {
                         delete $scope.loading
@@ -412,68 +413,10 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         });
                 };
 
-                $scope.refreshworkflowRecord = function (document, workflowInfo) {
-                    if (workflowInfo.workflowId) {
-                        IWorkflows.get(workflowInfo.workflowId).then(function (data) {
-                            if (data.state == 'completed') {
-                                var currentDocument = _.first(_.filter($scope.records, function (doc) {
-                                    return doc.identifier == document.header.identifier;
-                                }));
-                                storage.documents.get(document.header.identifier, {
-                                    'info': true
-                                }).then(function (data) {
-
-                                    currentDocument.revision = data.data.revision;
-                                    currentDocument.updatedBy = data.data.updatedBy;
-                                    currentDocument.updatedOn = data.data.updatedOn;
-                                    currentDocument.workingDocumentBody = data.data.workingDocumentBody;
-                                    currentDocument.workingDocumentCreatedBy = data.data.workingDocumentCreatedBy;
-                                    currentDocument.workingDocumentCreatedOn = data.data.workingDocumentCreatedOn;
-                                    currentDocument.workingDocumentID = data.data.workingDocumentID;
-                                    currentDocument.workingDocumentLock = data.data.workingDocumentLock;
-                                    currentDocument.workingDocumentMetadata = data.data.workingDocumentMetadata;
-                                    currentDocument.workingDocumentOwner = data.data.workingDocumentOwner;
-                                    currentDocument.workingDocumentSize = data.data.workingDocumentSize;
-                                    currentDocument.workingDocumentSummary = data.data.workingDocumentSummary;
-                                    currentDocument.workingDocumentTitle = data.data.workingDocumentTitle;
-                                    currentDocument.workingDocumentUpdatedBy = data.data.workingDocumentUpdatedBy;
-                                    currentDocument.workingDocumentUpdatedOn = data.data.workingDocumentUpdatedOn;
-                                    $scope.$emit('taskAction', {
-                                        document: document,
-                                        workflowAction: workflowInfo.activity
-                                    });
-                                });
-                            } else {
-                                $timeout(function () {
-                                    $scope.refreshworkflowRecord(document, workflowInfo);
-                                }, 2000);
-                            }
-                        });
-                    }
-                }
-
                 $scope.refreshList = function (schema) {
                     loadRecords();
                     // $scope.$emit("refreshDocumentList", {document_type:schema});
                 };
-
-                function shake(div) {
-                    var interval = 100,
-                        distance = 20,
-                        times = 10
-                    $(div).css('position', 'relative');
-                    for (var iter = 0; iter < (times + 1); iter++) {
-                        $(div).animate({
-                            left: ((iter % 2 == 0 ? distance : distance * -1))
-                        }, interval);
-                    } //for
-                    $(div).animate({
-                        left: 0
-                    }, interval, function () {
-                        $(div).css('position', 'inherit');
-                    });
-
-                }
 
                 function highlight(obj) {
                     $('html, body').animate({
@@ -595,11 +538,16 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                       data.data && data.data.identifier){
                         var document = _.findWhere($scope.records, {identifier: data.data.identifier})
                         if(document){
-                             
-                            $q.when(updateDocumentStatus(document))
-                            .then(function(){
-                                document.workflowActivityStatus =  data.data.workflowActivity;
-                            });
+
+                            if(data.data.workflowActivity == 'document-deleted'){
+                                $scope.records.splice($scope.records.indexOf($scope.records), 1);
+                            }
+                            else{
+                                $q.when(updateDocumentStatus(document))
+                                .then(function(){
+                                    document.workflowActivityStatus =  data.data.workflowActivity;
+                                });
+                            }
                         }
                         if(localStorageService.get('workflow-activity-status')){
                             if(localStorageService.get('workflow-activity-status').identifier == data.data.identifier)
