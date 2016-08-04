@@ -203,36 +203,21 @@ define(['app',
 							$scope.internalDocumentInfo = results[1];
 							$scope.internalDocument.info = results[1];
 
-							return $q.when(getDocumentVersion($scope.internalDocumentInfo.identifier))
-								.then(function (verResult) {
+							checkIfPermitRevoked();
 
-									if (verResult.data.response.docs.length > 0) {
-										$scope.documentVersionCount = verResult.data.response.docs[0]._revision_i
-									}
-									else
-										$scope.documentVersionCount = $scope.internalDocumentInfo.revision || $scope.internalDocumentInfo.Count;
+							if ($scope.internalDocumentInfo.workingDocumentLock) {
+								IWorkflows.get($scope.internalDocumentInfo.workingDocumentLock.lockID.replace('workflow-', ''))
+									.then(function (workflow) {
+										if (workflow && workflow.type.name == 'delete-record')
+											$scope.workflowRequestType = "deletion";
+										else
+											$scope.workflowRequestType = "publishing";
+									});
+							}				
+							if (version)
+								$scope.revisionNo = version
 
-									if (version && $scope.internalDocumentInfo.revision != version) {
-										$scope.internalDocumentInfo.revision = version;
-									}
-									if (version)
-										$scope.revisionNo = version
-									else
-										$scope.revisionNo = $scope.documentVersionCount
-
-									loadViewDirective($scope.internalDocument.header.schema);
-									checkIfPermitRevoked();
-
-									if ($scope.internalDocumentInfo.workingDocumentLock) {
-										IWorkflows.get($scope.internalDocumentInfo.workingDocumentLock.lockID.replace('workflow-', ''))
-											.then(function (workflow) {
-												if (workflow && workflow.type.name == 'delete-record')
-													$scope.workflowRequestType = "deletion";
-												else
-													$scope.workflowRequestType = "publishing";
-											});
-									}
-								});
+							loadViewDirective($scope.internalDocument.header.schema);
 
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
@@ -245,15 +230,6 @@ define(['app',
 
 					};
 
-					function getDocumentVersion(identifier) {
-
-						var queryParameters = {
-							'query': 'identifier_s:' + identifier,
-							'rowsPerPage': 1,
-							fields: '_revision_i'
-						};
-						return searchOperation = searchService.list(queryParameters, null);
-					}
 					//==================================
 					//
 					//==================================

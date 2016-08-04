@@ -75,7 +75,7 @@
     </div>
 
 
-    <div class="alert alert-danger" role="alert" ng-show="documentVersionCount != revisionNo && revisionNo != 'draft'">
+    <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.latestRevision != internalDocumentInfo.revision && revisionNo != 'draft'">
         <h3>
                 This document has been updated. This is not the latest published version.
                 <a ng-href="/database/{{internalDocument.header.schema | schemaShortName}}/{{internalDocument | uniqueIDWithoutRevision}}" target="new">Click here to view the latest record.</a>
