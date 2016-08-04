@@ -48,10 +48,9 @@
                 </div>
                 
                 <div ng-show="!isIRCCRevoked">
-                    <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="isIRCCRevoked"></div>
-                    <div km-document-validation ng-model="validationReport"></div>
+                    <div workflow-std-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="isIRCCRevoked"></div>                  
                 </div>
-                
+                <div km-document-validation ng-model="validationReport"></div>
                 <form class="editForm" name="editForm" id="editForm" style="margin-top:10px">
                     <div ng-show="tab=='edit'" km-tab="edit">
                         <legend name="formInfo" style="display:none"></legend>                        
