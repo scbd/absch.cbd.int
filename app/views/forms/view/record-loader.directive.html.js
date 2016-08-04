@@ -201,28 +201,11 @@ define(['app','ngSmoothScroll',
 							$scope.internalDocumentInfo = results[1];
 							$scope.internalDocument.info = results[1];
 							checkIfPermitRevoked();
+				
+							if (version)
+								$scope.revisionNo = version
 
-							
-							return $q.when(getDocumentVersion($scope.internalDocumentInfo.identifier))
-									.then(function(verResult){
-										
-										if (verResult.data.response.docs.length > 0) {
-											$scope.documentVersionCount = verResult.data.response.docs[0]._revision_i
-										}
-										else
-											$scope.documentVersionCount = $scope.internalDocumentInfo.revision || $scope.internalDocumentInfo.Count;
-
-										if (version && $scope.internalDocumentInfo.revision != version) {
-											$scope.internalDocumentInfo.revision = version;
-										}
-										if (version)
-											$scope.revisionNo = version
-										else
-											$scope.revisionNo = $scope.documentVersionCount
-
-										loadViewDirective($scope.internalDocument.header.schema);
-									
-									});
+							loadViewDirective($scope.internalDocument.header.schema);
 
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
@@ -234,16 +217,6 @@ define(['app','ngSmoothScroll',
 						})
 
 					};
-
-					function getDocumentVersion(identifier){
-
-						var queryParameters = {
-							'query': 'identifier_s:' + identifier,
-							'rowsPerPage': 1,
-							fields: '_revision_i'
-						};
-						return searchOperation = searchService.list(queryParameters, null);
-					}
 					//==================================
 					//
 					//==================================
@@ -348,13 +321,7 @@ define(['app','ngSmoothScroll',
 						var schemaDetails = schemaMapping[lschema.toLowerCase()];
 
 						require([schemaDetails], function () {
-
-
-
 							var name = snake_case(lschema);
-
-
-
 							var directiveHtml =
 								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
 									.replace(/DIRECTIVE/g, 'view-' + name);
