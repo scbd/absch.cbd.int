@@ -521,9 +521,15 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
 
                 function getRevokedDocuments(){
+                    var filter;
+                    if(!$rootScope.user.government)
+                        filter = '_ownership_s:("' + ($rootScope.user.userGroups||[]).join('" "') + '")'
+                    else
+                        filter = 'government_s:'+$rootScope.user.government;
 
                     var queryParameters = {
-                        'query': 'amendmentIntent_i:1 AND government_s:' + $rootScope.user.government,
+                        //
+                        'query': 'amendmentIntent_i:1 AND ' + filter,
                         'rowsPerPage': 100,
                         fields: 'identifier_s'
                     };
