@@ -533,10 +533,12 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                 function documentPublished(documentInfo, workflowId) {
 
                     toastr.info('Record published. The record will be now publicly accessible on ABSCH.');
-                    localStorageService.set('workflow-activity-status', {
-                        identifier : documentInfo.header.identifier, type:'publish',
-                        workflowId : workflowId
-                    });
+                    if(documentInfo.header.schema!= 'contact'){
+                        localStorageService.set('workflow-activity-status', {
+                            identifier : documentInfo.header.identifier, type:'publish',
+                            workflowId : workflowId
+                        });
+                    }
                     $timeout(function() {
                         $location.path('/register/' + $filter("schemaShortName")(document_type));
                     }, 1000);

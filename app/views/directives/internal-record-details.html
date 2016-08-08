@@ -71,7 +71,7 @@
             <div class="col-xs-12">
                 <div class="pull-right" >
                     <button title="Cancel request" ng-show="canRecall && showAddButton()"
-                    type="button" class="btn btn-warning color-white" ng-click="askDeleteWorkflowRequest()"><i class="fa fa-undo"></i> Recall</button>
+                    type="button" class="btn btn-warning color-white" ng-click="askRecallWorkflowRequest()"><i class="fa fa-undo"></i> Recall</button>
                     <a title="Edit" ng-show="!canRecall && !showRequestHistory && showButton()" type="button" class="btn btn-default"
                     href="/register/{{document.schema|mapSchema}}/{{document.identifier}}/edit"><i class="fa fa-edit"></i> Edit</a>
                     <button title="Delete" ng-show="!canRecall && !showRequestHistory && showButton()"

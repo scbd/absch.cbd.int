@@ -152,9 +152,9 @@
                                 <div ng-show="!record.revoked && isDraft(record) && !isRequest(record)" class="color-litegrey bold"> Draft </div>
                                 <span class="color-red bold" ng-show="record.revoked">Revoked</span>
                                 <a class="btn btn-danger color-white" ng-show="!record.revoked && isPublishingAuthority(record) && isRequest(record) && !record.isUpdating " ng-href="/register/{{record.metadata.schema | schemaShortName}}/{{record.identifier}}/view">
-                                Pending approval
-                            </a>
-                                <div class="color-red bold" ng-show="!record.revoked && isRequest(record) && !record.isUpdating">
+                                    Pending approval
+                                </a>
+                                <div class="color-red bold" ng-show="!record.revoked && isRequest(record) && record.isUpdating">
                                     Pending approval
                                 </div>
                                 <div ng-show="!record.revoked && isRequest(record) && record.isUpdating">
@@ -169,7 +169,7 @@
                             <div class="btn-group document_buttons btn-group-sm" style="width:100px;" ng-show="record.workflowActivityStatus!='pending'">
                                 <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
                                 <button title="Locked for edit" ng-show="!record.revoked && isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
-                                <button title="Cancel request" ng-show="!record.revoked && isRequest(record) && showAddButton() && isMyRecord(record)" type="button" class="btn btn-default" ng-click="askDeleteWorkflowRequest(record)"><i class="fa fa-undo"></i></button>
+                                <button title="Cancel request" ng-show="!record.revoked && isRequest(record) && showAddButton() && isMyRecord(record)" type="button" class="btn btn-default" ng-click="askRecallWorkflowRequest(record)"><i class="fa fa-undo"></i></button>
                                 <a title="Edit" ng-show="!record.revoked && !isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|schemaShortName}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
                                 <button title="Delete" ng-show="!record.revoked && !isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
                             </div>
@@ -214,105 +214,90 @@
                 </tbody>
             </table>
 
-            <div id="deleteRecordModel" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">What do you want to delete? <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+            <script type="text/ng-template" id="deleteRecordModal">              
+                    <div class="modal-header">
+                        <h4 class="modal-title" ng-if="isIRCC">Revoke document<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                        <h4 class="modal-title" ng-if="!isIRCC">What do you want to delete? <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                    </div>
+                    <div class="modal-body" ng-show="!isIRCC">
+
+                        <div ng-show="isDraft(recordToDelete)" class="well">
+                            <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
+                            <em>Draft {{recordToDelete.documentID||'[new]'}}</em>
+                            <p><b>{{recordToDelete.workingDocumentTitle|lstring}}</b></p>
+                            <p ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></p>
                         </div>
-                        <div class="modal-body" ng-hide="cantDelete || iacCantDelete">
 
-                            <div ng-show="isDraft(recordToDelete)" class="well">
-                                <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
-                                <em>Draft {{recordToDelete.documentID||'[new]'}}</em>
-                                <p><b>{{recordToDelete.workingDocumentTitle|lstring}}</b></p>
-                                <p ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></p>
-                            </div>
-
-                            <div ng-show="isPublished(recordToDelete)" class="well">
-                                <button ng-show="security" type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
+                        <div ng-show="isPublished(recordToDelete)" class="well">
+                            <button ng-show="security" type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
                                <span ng-if="!security.canDelete">Request</span> Unpublish and delete the record</button>
-                                <em>Published record {{recordToDelete.documentID}}</em>
-                                <p><b>{{recordToDelete.title|lstring}}</b></p>
-                                <p ng-bind-html="recordToDelete.summary|lstring"></p>
-                            </div>
-
+                            <em>Published record {{recordToDelete.documentID}}</em>
+                            <p><b>{{recordToDelete.title|lstring}}</b></p>
+                            <p ng-bind-html="recordToDelete.summary|lstring"></p>
                         </div>
-                        <div class="modal-body" ng-show="cantDelete || pilotDelete">
-                            <div ng-show="isPublished(recordToDelete)" class="well">
-                                <span class="label label-info">Not allowed to delete published ABSCH-IRCC records.
+
+                    </div>
+                    <div class="modal-body" ng-show="isIRCC">
+                        <div ng-show="isPublished(recordToDelete)" class="well">
+                            <span class="label label-info">Not allowed to delete published ABSCH-IRCC records.
                                     <i>Revoked</i> IRCC records are no longer valid.
                                 </span></br>
-                                <p><b>{{recordToDelete.title|lstring}}</b> {{recordToDelete | uniqueIDWithoutRevision}}</p>
-                                <p ng-bind-html="recordToDelete.summary|lstring"></p>
-                                <hr/>
-                                <div km-form-languages ng-model="recordToDelete.document.header.languages" style="padding-top:20px;padding-left:0px;" class="pull-left btn-xs"></div>
-                                </br>
-                                </br>
-                                </br>
-                                <div class="km-control-group">
-                                    <div class="km-control-group" name="amendmentDescription" required caption="Provide a summary of the reason for revoking this IRCC">
-                                        <div km-textbox-ml ng-model="recordToDelete.document.amendmentDescription" rows="3" placeholder="" locales="recordToDelete.document.header.languages" />
-                                    </div>
+                            <p><b>{{recordToDelete.title|lstring}}</b> {{recordToDelete | uniqueIDWithoutRevision}}</p>
+                            <p ng-bind-html="recordToDelete.summary|lstring"></p>
+                            <hr/>
+                            <div km-form-languages ng-model="recordToDelete.document.header.languages" style="padding-top:20px;padding-left:0px;" class="pull-left btn-xs"></div>
+                            </br>
+                            </br>
+                            </br>
+                            <div class="km-control-group">
+                                <div class="km-control-group" name="amendmentDescription" required caption="Provide a summary of the reason for revoking this IRCC">
+                                    <div km-textbox-ml ng-model="recordToDelete.document.amendmentDescription" rows="3" placeholder="" locales="recordToDelete.document.header.languages" />
                                 </div>
-                                <button type="button" class="btn btn-danger" ng-disabled="loading" ng-click="revokeRecord(recordToDelete)">
+                            </div>
+                            <button type="button" class="btn btn-danger" ng-disabled="loading" ng-click="revokeRecord(recordToDelete)">
                                     Revoke this IRCC
                                 </button></br>
-                                </br>
-                                <div class="alert alert-danger" ng-if="recordToDelete.showRevokeError">Please enter a summary of the reason for revoking this IRCC</div>
-                            </div>
-                        </div>
-                        <div class="modal-body" ng-show="iacCantDelete">
-
-                            You do not have sufficient privileges to delete document.
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </br>
+                            <div class="alert alert-danger" ng-if="recordToDelete.showRevokeError">Please enter a summary of the reason for revoking this IRCC</div>
                         </div>
                     </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" ng-click="closeDialog()">Close</button>
+                    </div>
+            </script>
 
-            <div id="duplicateRecordModel" class="modal fade" data-backdrop="static">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4>Duplicate record<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure you want to duplicate this record, this will create a new draft record with same details?</p>
-                        </div>
-                        <div class="modal-footer" style="margin-top:0">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button ng-disabled="loading" type="button" ng-click="duplicate(recordToDuplicate)" class="btn btn-primary">Yes</button>
-                        </div>
+            <script type="text/ng-template" id="duplicateRecordModal">
+                    <div class="modal-header">
+                        <h4>Duplicate record<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to duplicate this record, this will create a new draft record with same details?</p>
+                    </div>
+                    <div class="modal-footer" style="margin-top:0">
+                        <button ng-disabled="loading" type="button" class="btn btn-default" ng-click="closeDialog('duplicateRecordModal')">Cancel</button>
+                        <button ng-disabled="loading" type="button" ng-click="duplicate(recordToDuplicate)" class="btn btn-primary">Yes</button>
+                    </div>
+            </script>
+
+            <script type="text/ng-template" id="recallWorkflowRequestModal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4>Cancel publishing request<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to cancel this publishing request?</p>
+                    </div>
+                    <div class="modal-footer" style="margin-top:0">
+                        <button type="button" class="btn btn-default" ng-click="closeDialog()">close</button>
+                        <button ng-disabled="loading" type="button" ng-click="deleteWorkflowRequest(recordForDeleteWorkflowRequest)" class="btn btn-primary">Yes</button>
+
                     </div>
                 </div>
-            </div>
-
-            <div id="deleteWorkflowRequestModal" class="modal fade" data-backdrop="static">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4>Cancel publishing request<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure you want to cancel this publishing request?</p>
-                        </div>
-                        <div class="modal-footer" style="margin-top:0">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
-                            <button ng-disabled="loading" type="button" ng-click="deleteWorkflowRequest(recordForDeleteWorkflowRequest)" class="btn btn-primary">Yes</button>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </script>
+            <script type="text/ng-template" id="unauthorisedError">
+                <p>You are not authorized to create duplicate records.</p>
+            </script>
             </div>
         </div>
     </div>

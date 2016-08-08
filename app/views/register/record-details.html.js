@@ -128,7 +128,7 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
             };
 
 
-            $scope.askDeleteWorkflowRequest = function () {
+            $scope.askRecallWorkflowRequest = function () {
                 $scope.recordForDeleteWorkflowRequest = $scope.document;
             };
             $scope.deleteWorkflowRequest = function (record) {
@@ -148,7 +148,7 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
 
 
             var deleteRecordModal = $element.find("#deleteRecordModal");
-            var deleteWorkflowRequestMadal = $element.find("#deleteWorkflowRequestModal");
+            var deleteWorkflowRequestMadal = $element.find("#recallWorkflowRequestModal");
 
             $scope.$watch("recordToDelete", function (val) {
                 if (val && !deleteRecordModal.is(":visible")) {
@@ -182,7 +182,7 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
 
             $scope.$on('$destroy', function () {
                 $('#deleteRecordModal').remove();
-                $('#deleteWorkflowRequestModal').remove();
+                $('#recallWorkflowRequestModal').remove();
             });
 
         }
