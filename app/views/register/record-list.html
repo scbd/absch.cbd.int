@@ -151,7 +151,7 @@
                                 <div ng-show="!record.revoked && isPublished(record) && !isRequest(record)" class="color-published-green bold"> Published </div>
                                 <div ng-show="!record.revoked && isDraft(record) && !isRequest(record)" class="color-litegrey bold"> Draft </div>
                                 <span class="color-red bold" ng-show="record.revoked">Revoked</span>
-                                <a class="btn btn-danger color-white" ng-show="!record.revoked && isPublishingAuthority(record) && isRequest(record) && !record.isUpdating " ng-href="/register/{{record.metadata.schema | schemaShortName}}/{{record.identifier}}/view">
+                                <a class="btn btn-danger color-white" ng-show="!record.revoked  && isRequest(record) && !record.isUpdating " ng-href="/register/{{record.metadata.schema | schemaShortName}}/{{record.identifier}}/view">
                                     Pending approval
                                 </a>
                                 <div class="color-red bold" ng-show="!record.revoked && isRequest(record) && record.isUpdating">
