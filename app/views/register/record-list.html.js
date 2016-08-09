@@ -436,6 +436,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                             $scope.loading = false;
                         });
                 }
+                
                 function recordDeleted(doc) {
                     for (var i = 0; i <= $scope.records.length; ++i) {
                         if ($scope.records[i] == doc) {
