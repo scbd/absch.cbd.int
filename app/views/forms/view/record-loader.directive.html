@@ -1,4 +1,4 @@
-<div >
+<div>
 
     <div smooth-scroll duration="100" offset="200"></div>
     <div block-region activate="loading"></div>
@@ -24,7 +24,7 @@
             <a href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
     </div>
 
-    <div id="RecordDetails" ng-if="showDetails" >
+    <div id="RecordDetails" ng-if="showDetails">
         <div class="row">
             <div class="col-xs-12">
                 <div class="well">
@@ -39,10 +39,10 @@
                         <tr>
                             <td><label> Current Status: </label></td>
                             <td class="bold">
-                                <span class="color-grey" ng-if="internalDocumentInfo.revision === '0'">
+                                <span class="color-grey" ng-if="internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0'">
                                         DRAFT
                                     </span>
-                                <span class="color-green" ng-if="internalDocumentInfo.revision > 0">
+                                <span class="color-green" ng-if="internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">
                                         PUBLISHED
                                     </span>
                                 <span class="color-red" ng-if="internalDocumentInfo.workingDocumentLock">
