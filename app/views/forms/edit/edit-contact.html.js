@@ -51,6 +51,18 @@ define(['app', '/app/views/forms/edit/edit.js',
 
 			if(document.type == "organization"){
 				document.firstName = document.middleName = document.lastName = undefined;
+				document.contactOrganization = undefined;
+			}
+			else{
+				document.organization = undefined;
+				document.organizationType = undefined;
+				if(document.contactOrganization){
+					document.address = undefined;
+					document.city	 = undefined;
+					document.state	 = undefined;
+					document.postalCode	 = undefined;
+					document.country	 = undefined;
+				}
 			}
 
             return document;
