@@ -1,5 +1,5 @@
 define(['app','/app/views/directives/workflow-history-directive.html.js',
-        'toastr', '/app/services/local-storage-service.js'
+        'toastr', '/app/services/local-storage-service.js', '/app/services/app-config-service.js'
 ], function (app) {
 
     app.directive('workflowStdButtons',["$q", "$timeout","underscore", "localStorageService",
@@ -14,8 +14,8 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                 languages     : '=languages',
                 hideTimer     : '@hideTimer'
     		},
-    		controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",'$element', 'toastr', '$location', '$filter', '$routeParams',
-            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows, $element, toastr, $location, $filter, $routeParams)
+    		controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",'$element', 'toastr', '$location', '$filter', '$routeParams', 'appConfigService',
+            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows, $element, toastr, $location, $filter, $routeParams, appConfigService)
 			{
                 var document_type =  $filter("mapSchema")($route.current.$$route.documentType);
                 //////////////////////////////
@@ -447,7 +447,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 
                     if(data){
                         $scope.showError = true;
-                        $scope.errorMessage = 'Your action ';
+                        $scope.errorMessage = 'Your action to ';
                         if(data.action=='saveDraft')
                             $scope.errorMessage += 'save draft ';
                         else if(data.action=='publish')
@@ -512,7 +512,12 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                 //============================================================
                 function documentPublishRequested(documentInfo, workflowId) {
 
-                    toastr.info('Record saved. A publishing request has been sent to your Publishing Authority.');
+                    if(_.contains(appConfigService.referenceSchemas, documentInfo.header.schema)){
+                        toastr.info('Record saved. A publishing request has been sent to your SCBD.');
+                    }
+                    else
+                        toastr.info('Record saved. A publishing request has been sent to your Publishing Authority.');
+                        
                     localStorageService.set('workflow-activity-status', {
                         identifier : documentInfo.header.identifier, type:'request',
                         workflowId : workflowId
