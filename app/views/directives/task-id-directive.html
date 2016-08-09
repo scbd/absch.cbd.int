@@ -28,7 +28,10 @@
                 <a ng-href="mailTo:{{workflow.createdBy_info.email}}" class="color-blue">({{workflow.createdBy_info.email}})</a>
                 <span class="unbold"> on </span> {{workflow.createdOn | formatDateWithTime}}
                 </span>
-
+                <span ng-if="workflow.data.additionalInfo" class="bold">
+                    </br> </br>Additional information provided by requestor :- 
+                    <span class="unbold">{{workflow.data.additionalInfo}}</span></br> </br>
+                </span>
                 <div ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'">
                     <div class="row row-centered" style="margin:0;padding:0;" id="buttonsDiv" ng-show="isAssignedToMe(activity)">
                         <div class="col-xs-4 text-center" ng-show="isAssignedToMe(activity) && activity.name != 'deleteRecord'">
@@ -44,7 +47,7 @@
                         </button>
                         </div>
                         <div class="col-xs-4 text-center" ng-show="activity.name != 'deleteRecord'">
-                            <button type="button" class="btn btn-info bold  color-white" ng-click="edit(workflow, activity)" ng-disabled="isUpdating">
+                            <button type="button" class="btn btn-info bold  color-white" ng-click="edit(workflow, activity, workflow._id)" ng-disabled="isUpdating">
                             <i class="fa fa-pencil-square-o"></i>
                             <span class="hidden-xs">EDIT</span>
                         </button>

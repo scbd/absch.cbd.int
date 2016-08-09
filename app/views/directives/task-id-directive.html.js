@@ -20,7 +20,7 @@ define(['app', 'underscore',
 				"$filter", '$element', 'toastr', '$window', 'ngDialog', 'localStorageService', "$location",
 				function ($rootScope, $scope, $timeout, $http, $route, IStorage, IWorkflows, authentication,
 					$filter, $element, toastr, $window, ngDialog, localStorageService, $location) {
-					var rejectRecordModal = $element.find("#rejectModal");
+					
 					//==================================================
 					//
 					//
@@ -77,7 +77,7 @@ define(['app', 'underscore',
 									msg = "Record rejected";
 								}
 								localStorageService.set('workflow-activity-status', { identifier: $scope.document.header.identifier });
-
+								$scope.closeDialog();
 								$rootScope.$on('event:server-pushNotification', function (evt, data) {
 									if (data.type == 'workflowActivityStatus' && data.data.workflowActivity == 'create-revision-from-draft') {
 
@@ -148,18 +148,10 @@ define(['app', 'underscore',
 					$scope.showRejectDialog = function () {
 						ngDialog.openConfirm({
 							template: 'rejectWorkflowRequestModalTemplate',
+							closeByDocument: false,
 							scope: $scope
 						});
 					}
-
-					$scope.showRejectDialog = function () {
-
-						rejectRecordModal.appendTo('body').modal("show");
-					}
-
-					$scope.$on('$destroy', function () {
-						$('#rejectModal').remove();
-					});
 
 					$scope.askCancelWorkflowRequest = function () {
 						$scope.loading = false;
@@ -215,9 +207,9 @@ define(['app', 'underscore',
 					}
 
 
-					$scope.edit = function (workflow, activity) {
+					$scope.edit = function (workflow, activity, workflowId) {
 						var schemaName = $filter("schemaShortName")(workflow.data.metadata.schema);
-						$location.path('/register/' + schemaName + '/' + activity.input.identifier + '/edit?workflow=' + workflowTaskId);
+						$location.url('/register/' + schemaName + '/' + activity.input.identifier + '/edit?workflow=' + workflowId);
 					}
 
 				}
