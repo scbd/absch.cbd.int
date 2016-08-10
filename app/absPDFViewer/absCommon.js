@@ -59,7 +59,7 @@ app.directive("viewContactReference", [function() {
             locale: "=",
             target: "@linkTarget"
         },
-        controller: ["$scope", "$http", "$filter", function($scope, $http, $filter) {
+        controller: ["$scope", "$http", "$filter", "$timeout", function($scope, $http, $filter, $timeout) {
 
             $scope.isCNA = false;
             $scope.isPerson = false;
@@ -108,6 +108,12 @@ app.directive("viewContactReference", [function() {
                         delete info.body;
                         $scope.document.info = info;
 
+                        if($scope.document && $scope.document.contactOrganization){
+                            $http.get('/api/v2013/documents/' + $scope.document.contactOrganization.identifier)
+                                 .success(function(data) {
+                                        angular.extend($scope.document.contactOrganization, data);
+                                  });
+                        }
 
                         if($scope.document.info.Realm && $scope.document.info.Realm.toUpperCase()== 'ABS')
                             $scope.websiteUrl = 'https://absch.cbd.int';
