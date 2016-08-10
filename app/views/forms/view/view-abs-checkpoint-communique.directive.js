@@ -70,7 +70,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 
 				$scope.emailList = [];
 				if(document.absIRCCs){
-						var absIRCCs =  _.map(document.permit, function(document){
+						var absIRCCs =  _.map(document.absIRCCs, function(document){
 							return $http.get('/api/v2013/documents/' +  document.identifier)
 						});
 						$q.all(absIRCCs)
