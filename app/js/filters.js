@@ -63,13 +63,17 @@ define(["app",'/app/js/common.js', '../services/app-config-service'], function (
                 else if(document.id)
                     identifier = document.id;
 
-                    if(identifier == '')
-                        return;
+				if(identifier == '')
+					return;
+				
+				if( document.documentID === undefined && !document.id)
+                    revision = "DRAFT";
 
                 term = { identifier : identifier + revision};
 
-        		if(cacheMap[term.identifier])
-        			return cacheMap[term.identifier] ;
+        		if(cacheMap[term.identifier]){
+        				return cacheMap[term.identifier] ;
+				}
             }
 
             if(!document)
