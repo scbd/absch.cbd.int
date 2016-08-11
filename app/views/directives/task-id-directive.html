@@ -43,7 +43,7 @@
                         <div class="col-xs-4 text-center" ng-show="isAssignedToMe(activity) && activity.name == 'deleteRecord'">
                             <button type="button" class="btn btn-danger bold" ng-click="confirmDelete()" ng-disabled="isUpdating">
                             <i class="fa fa-check-circle"></i>
-                            <span class="hidden-xs">APPROVE DELETE</span>
+                            <span class="hidden-xs">DELETE RECORD</span>
                         </button>
                         </div>
                         <div class="col-xs-4 text-center" ng-show="activity.name != 'deleteRecord'">
@@ -55,7 +55,7 @@
                         <div class="col-xs-4 text-center">
                             <button type="button" class="btn btn-warning bold" ng-click="showRejectDialog()" ng-disabled="isUpdating">
                             <i class="fa fa-times-circle"></i>
-                           <span class="hidden-xs"> REJECT</span>
+                           <span class="hidden-xs">REJECT REQUEST</span>
                         </button>
                         </div>
                     </div>
@@ -84,17 +84,17 @@
     <script type="text/ng-template" id="rejectWorkflowRequestModalTemplate">
         <form name="rejectForm" role="form">
             <div class="modal-header bg-red">
-                <h4 class="modal-title color-white">Request changes or reject request</h4>
+                <h4 class="modal-title color-white">Request changes or reject this request</h4>
             </div>
             <div class="modal-body bg-white">
                 <p ng-class="{ 'has-warning':rejectForm.reason.$error.required, 'has-success':!rejectForm.reason.$invalid }">
-                    <span ng-show="rejectForm.reason.$error.required">Please provide the reason this records is being rejected.</span>
+                    <span ng-show="rejectForm.reason.$error.required">Please provide the reason this record is being rejected.</span>
                     <textarea class="form-control" rows="5" name="reason" ng-model="rejectReason" required></textarea>
                 </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-warning bold pull-left" data-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="fa fa-times-circle"></i> Reject</button>
-                <button type="button" class="btn btn-default" ng-click="closeDialog();">Close</button>
+                <button type="button" class="btn btn-default" ng-click="closeDialog();">Cancel</button>
             </div>
         </form>
     </script>
