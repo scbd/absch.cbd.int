@@ -85,7 +85,7 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/js/common.js',
         return undefined;
 
       document = angular.fromJson(angular.toJson(document));
-
+      
       if (!document.picGranted) {
         document.picInformation = undefined;
         document.picDocuments = undefined;
@@ -127,6 +127,9 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/js/common.js',
         document.amendmentIntent = undefined;
         document.amendmentDescription = undefined;
       }
+      else
+        document.amendmentIntent = 1;
+
       if(!$scope.isOthers()){
         document.keywordOther = undefined;
       }
