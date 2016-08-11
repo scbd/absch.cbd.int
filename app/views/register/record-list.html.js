@@ -443,7 +443,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                             $scope.records.splice(i, 1);
                         }
                     }
-                    toastr.info('<h1>Record deleted.</h1>', {
+                    toastr.info('Record deleted.', {
                         allowHtml: true
                     });
                 }
