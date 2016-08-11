@@ -118,7 +118,7 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
 
                 return $q.when(IStorage.documents.delete(record.identifier)).then(function () {
                     $scope.recordToDelete = null;
-                    toastr.info('<h1>Record deleted.</h1>', {
+                    toastr.info('Record deleted.', {
                         allowHtml: true
                     });
                     $location.path("/register/" + record.schema);

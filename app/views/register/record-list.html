@@ -1,6 +1,9 @@
 <div id="SubmitPage" ng-controller="registerRecordList">
     <link href="/app/css/register.css" rel="stylesheet">
     <link href="/app/css/record.css" rel="stylesheet">
+    <style>
+        .ngdialog.ngdialog-theme-default .ngdialog-content{padding:0;}
+    </style>
 
     <span register-top-menu></span>
 
@@ -88,7 +91,7 @@
                             </a>
                         </span>
                             <div style="font-size:11px;font-weight:bold;text-transform:uppercase;color:#666;" ng-if="isPublished(record)">
-                                {{record | uniqueID}} <span ng-show="isDraft(record) || isRequest(record)" class="label label-primary">draft</span>
+                                {{record | uniqueID}} <span ng-show="isDraft(record) || isRequest(record)" class="label label-default small">draft</span>
                             </div>
                         </td>
                         <td ng-if="schema=='contact'">
@@ -143,8 +146,10 @@
                             </div>
                         </td>
                         <td>
-                            <span ng-if="record.workflowActivityStatus == 'pending'" class="label label-primary">
-                                <i class="fa fa-spin fa-spinner"/> waiting for workflow status
+                            <span ng-if="record.workflowActivityStatus == 'pending'" >
+                                <div class="btn btn-primary color-white" >
+                                     <i class="fa fa-spin fa-spinner"/> Processing...
+                                </div>
                             </span>
                             <div ng-show="record.workflowActivityStatus!='pending'">
 
@@ -160,7 +165,7 @@
                                 <div ng-show="!record.revoked && isRequest(record) && record.isUpdating">
                                     <div ng-show="isRequest(record) && record.isUpdating">
                                         <a class="btn btn-info" type="button" ng-click="return" style="padding:4px;">
-                                            <strong><i class="fa fa-spin fa-cog"></i> Processing...</strong>
+                                            <strong><i class="fa fa-spin fa-cog"></i> Processing... </strong>
                                         </a>
                                     </div>
                                 </div>
@@ -215,53 +220,70 @@
             </table>
 
             <script type="text/ng-template" id="deleteRecordModal">              
+                
                     <div class="modal-header">
-                        <h4 class="modal-title" ng-if="isIRCC">Revoke document<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
-                        <h4 class="modal-title" ng-if="!isIRCC">What do you want to delete? <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                        <h4 class="modal-title" >Confirm change to the following record(s) <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
                     </div>
-                    <div class="modal-body" ng-show="!isIRCC">
-
-                        <div ng-show="isDraft(recordToDelete)" class="well">
-                            <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
-                            <em>Draft {{recordToDelete.documentID||'[new]'}}</em>
-                            <p><b>{{recordToDelete.workingDocumentTitle|lstring}}</b></p>
-                            <p ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></p>
-                        </div>
-
-                        <div ng-show="isPublished(recordToDelete)" class="well">
-                            <button ng-show="security" type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
-                               <span ng-if="!security.canDelete">Request</span> Unpublish and delete the record</button>
-                            <em>Published record {{recordToDelete.documentID}}</em>
-                            <p><b>{{recordToDelete.title|lstring}}</b></p>
-                            <p ng-bind-html="recordToDelete.summary|lstring"></p>
-                        </div>
-
-                    </div>
-                    <div class="modal-body" ng-show="isIRCC">
-                        <div ng-show="isPublished(recordToDelete)" class="well">
-                            <span class="label label-info">Not allowed to delete published ABSCH-IRCC records.
-                                    <i>Revoked</i> IRCC records are no longer valid.
-                                </span></br>
-                            <p><b>{{recordToDelete.title|lstring}}</b> {{recordToDelete | uniqueIDWithoutRevision}}</p>
-                            <p ng-bind-html="recordToDelete.summary|lstring"></p>
-                            <hr/>
-                            <div km-form-languages ng-model="recordToDelete.document.header.languages" style="padding-top:20px;padding-left:0px;" class="pull-left btn-xs"></div>
-                            </br>
-                            </br>
-                            </br>
-                            <div class="km-control-group">
-                                <div class="km-control-group" name="amendmentDescription" required caption="Provide a summary of the reason for revoking this IRCC">
-                                    <div km-textbox-ml ng-model="recordToDelete.document.amendmentDescription" rows="3" placeholder="" locales="recordToDelete.document.header.languages" />
-                                </div>
+                    <div class="modal-body  bg-white" >
+                        
+                        <div ng-show="isDraft(recordToDelete)" class="well" style="font-size:14px;">
+                            <div style="font-size:11px;font-weight:bold;text-transform:uppercase;color:#999;border-bottom:1px solid #ddd;margin-bottom:10px;">DRAFT RECORD</div>
+                            <div class="row">     
+                                <div class="col-xs-2" class="color-litegrey">Title:</div> <div class="col-xs-10" style="font-weight:bold"> {{recordToDelete.workingDocumentTitle|lstring}}</div>
+                              </div>
+                             <div class="row">    
+                                <div class="col-xs-2" class="small color-litegrey">Unique ID:</div> <div class="col-xs-10" style="font-weight:bold"> <i>DRAFT</i></div>
+                             </div>
+                            <div class="row"> 
+                                <div class="col-xs-2" class="color-litegrey">Summary:</div> <div class="col-xs-10" style="font-weight:bold" > <span ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></span></div>
+                             </div>
+                            <div class="row" style="margin-top:10px;"> 
+                                <div class="col-xs-12"> <button type="button" class="btn btn-danger" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete draft</button></div>
                             </div>
-                            <button type="button" class="btn btn-danger" ng-disabled="loading" ng-click="revokeRecord(recordToDelete)">
-                                    Revoke this IRCC
-                                </button></br>
-                            </br>
-                            <div class="alert alert-danger" ng-if="recordToDelete.showRevokeError">Please enter a summary of the reason for revoking this IRCC</div>
                         </div>
+
+                        <div ng-show="isPublished(recordToDelete)" class="well" style="font-size:14px;">
+                            <div style="font-size:11px;font-weight:bold;text-transform:uppercase;border-bottom:1px solid #ddd;margin-bottom:10px;" class="color-green">PUBLISHED RECORD</div>
+                             <div class="row"  ng-show="isIRCC" style="margin-bottom:10px;">     
+                                 <div class="col-xs-12 bold">
+                                    Published Internationally Recognized Certificates of Compliance (IRCC) records can only be revoked.
+                                    A revoked IRCC will no longer be valid and will remain published in the ABSCH for tracibility and transparency. 
+                                    Revoked IRCCs will be clearly marked as revoked in the search and display of the record.
+                                </div>
+                              </div>
+                            <div class="row">     
+                                <div class="col-xs-2" class="color-litegrey">Title:</div> <div class="col-xs-10" style="font-weight:bold"> {{recordToDelete.title|lstring}}</div>
+                              </div>
+                             <div class="row">    
+                                <div class="col-xs-2" class="small color-litegrey">Unique ID:</div> <div class="col-xs-10" style="font-weight:bold"> <a href="/database/{{recordToDelete | uniqueIDWithoutRevision}}" target="_new">{{recordToDelete | uniqueIDWithoutRevision}}</a></div>
+                             </div>
+                            <div class="row"> 
+                                <div class="col-xs-2" class="color-litegrey">Summary:</div> <div class="col-xs-10" style="font-weight:bold" > <span ng-bind-html="recordToDelete.summary|lstring"></span></div>
+                             </div>
+
+                              <div class="row" ng-show="isIRCC"> 
+                                   <div class="col-xs-12">
+                                        <div km-form-languages ng-model="recordToDelete.document.header.languages" class="pull-right"></div><br>
+                                        <div class="km-control-group">
+                                            <div class="km-control-group" name="amendmentDescription" required caption="Provide a summary of the reason for revoking this IRCC">
+                                            <div km-textbox-ml ng-model="recordToDelete.document.amendmentDescription" rows="3" placeholder="" locales="recordToDelete.document.header.languages" />
+                                            </div>
+                                        </div>
+                                        <div class="alert alert-danger" ng-if="recordToDelete.showRevokeError">Please enter a summary of the reason for revoking this IRCC</div>
+                                        <button type="button" class="btn btn-danger" ng-disabled="loading" ng-click="revokeRecord(recordToDelete)">
+                                            Revoke this IRCC
+                                        </button>
+                                    </div>
+                             </div>
+
+                            <div class="row" style="margin-top:10px;" ng-show="!isIRCC"> 
+                                <div class="col-xs-12">  <button ng-show="security" type="button" class="btn btn-danger" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
+                                <span ng-if="!security.canDelete">Request</span> Unpublish and delete the record</button> </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer" >
                         <button type="button" class="btn btn-default" ng-click="closeDialog()">Close</button>
                     </div>
             </script>
