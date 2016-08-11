@@ -40,14 +40,14 @@
                             <span ng-if="record.copyright">copyright infringement</span><br> {{record.additionalInformation}}
                         </div>
                         <div class="col-xs-2">
-                            <input type="button" class="btn btn-primary" value="History" ng-click="viewHistory($event, record)" />
+                            <!--<input type="button" class="btn btn-primary" value="History" ng-click="viewHistory($event, record)" />-->
                             <input type="button" class="btn btn-primary" value="Add Comments" ng-click="addComments($event, record)" />
                             <input type="button" class="btn btn-warning" value="Delete" ng-click="delete($event, record)" />
                         </div>
                     </div>
-                    <div ng-if="record.showHistory">
+                    <div ng-if="record.history">
                         <!--<div class="col-xs-1"></div>-->
-                        <table class=" table table-striped" style="margin:auto;width:80%">
+                        <table class="table table-striped" style="margin:auto;width:80%">
                             <thead class="row " style="padding:10px;border-bottom:1px solid white;">                
                                 <td>No.</td>
                                 <td>Date</td>
