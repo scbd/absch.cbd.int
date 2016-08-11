@@ -39,14 +39,17 @@
                         <tr>
                             <td><label> Current Status: </label></td>
                             <td class="bold">
-                                <span class="color-grey" ng-if="internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0'">
+                                <span class="color-grey" ng-if="!internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">
                                         DRAFT
                                     </span>
-                                <span class="color-green" ng-if="internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">
+                                <span class="color-green" ng-if="!internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">
                                         PUBLISHED
                                     </span>
-                                <span class="color-red" ng-if="internalDocumentInfo.workingDocumentLock">
+                                <span class="color-red" ng-if="!internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">
                                         [ Locked: Pending {{workflowRequestType}} request ]
+                                </span>
+                                <span class="color-green" ng-if="internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">
+                                    DELETED
                                 </span>
                             </td>
                         </tr>
@@ -85,7 +88,7 @@
 
     <div style="float:right; position:relative;top:1px;right:1px;" ng-if="!isIRCCRevoked && showDetails">
         <div>
-            <a title="Edit" ng-show="!internalDocumentInfo.workingDocumentLock" type="button" class="btn btn-default" href="/register/{{internalDocument.header.schema|schemaShortName}}/{{internalDocument.header.identifier}}/edit">
+            <a title="Edit" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button" class="btn btn-default" href="/register/{{internalDocument.header.schema|schemaShortName}}/{{internalDocument.header.identifier}}/edit">
                 <i class="fa fa-edit"></i> edit </a>
             <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
         </div>
