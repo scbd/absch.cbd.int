@@ -77,7 +77,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     return $q.when(storage.drafts.delete(record.identifier))
                     .then(function () {
 
-                        recordDeleted(record);
+                        recordDeleted(record, true);
                         $scope.recordToDelete = null;
                         $scope.security = undefined;
                         $scope.closeDialog();
@@ -437,10 +437,15 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         });
                 }
                 
-                function recordDeleted(doc) {
-                    for (var i = 0; i <= $scope.records.length; ++i) {
-                        if ($scope.records[i] == doc) {
-                            $scope.records.splice(i, 1);
+                function recordDeleted(doc, isDraft) {
+                    if (isDraft && $scope.isPublished(doc)){
+                        updateDocumentStatus(doc.identifier, 'draftDeleted')
+                    }
+                    else{
+                        for (var i = 0; i <= $scope.records.length; ++i) {
+                            if ($scope.records[i] == doc) {
+                                $scope.records.splice(i, 1);
+                            }
                         }
                     }
                     toastr.info('Record deleted.', {
