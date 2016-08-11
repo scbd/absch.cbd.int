@@ -80,14 +80,12 @@
                     <h4>Canceling changes</h4>
                 </div>
                 <div class="modal-body">
-
                     <p>If you want to cancel the changes you just made to this draft, you can keep the previous version of the draft, which will then be available in the list of drafts on the Management Centre. You or your colleagues can then continue editing
                         the record in the current, or a later, session.</p>
-
                 </div>
                 <div class="modal-footer" style="margin-top:0">
                     <button type="button" ng-click="closeDialog()" class="btn btn-default cancelClose">Cancel</button>
-                    <button type="button" ng-click="close()" class="btn btn-primary closeWithoutSaving">Close without saving</button>
+                    <button type="button" ng-click="close()" class="btn btn-warning closeWithoutSaving pull-left">Close without saving</button>
                 </div>
             </div>
         </div>
@@ -101,14 +99,12 @@
                     <h2>Publishing Request</h2>
                 </div>
                 <div class="modal-body">
-                    <p>Would you like to add additional information for approver?</p>
+                    <p>Would you like to add additional information for the publishing authority?</p>
                     <textarea class="form-control" rows="5" name="info" ng-model="InfoDoc.additionalInfo"></textarea>
                 </div>
                 <div class="modal-footer" style="margin-top:0">
-
-                    <button type="button" class="btn btn-warning" ng-click="closeAddInfoDialog(false)">Cancel</button>
-
-                    <button type="button" id="continueRequest" class="btn btn-danger" ng-disabled="loading">Send Request</button>
+                    <button type="button" class="btn btn-default" ng-click="closeAddInfoDialog(false)">Cancel</button>
+                    <button type="button" id="continueRequest" class="btn btn-primary pull-left" ng-disabled="loading">Send Request</button>
                 </div>
             </div>
         </div>

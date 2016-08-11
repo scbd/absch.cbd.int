@@ -608,6 +608,8 @@ label{
 .ngdialog-content{
 	width:70% !important;
 }
-.ngdialog.ngdialog-theme-default{
+/*.ngdialog.ngdialog-theme-default{
 	padding-top: 10px;
-}
+}*/
+
+  .ngdialog.ngdialog-theme-default .ngdialog-content{padding:0;}

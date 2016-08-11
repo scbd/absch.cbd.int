@@ -1,9 +1,7 @@
 <div id="SubmitPage" ng-controller="registerRecordList">
     <link href="/app/css/register.css" rel="stylesheet">
     <link href="/app/css/record.css" rel="stylesheet">
-    <style>
-        .ngdialog.ngdialog-theme-default .ngdialog-content{padding:0;}
-    </style>
+
 
     <span register-top-menu></span>
 
@@ -74,7 +72,7 @@
                     <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest}">
 
                         <td style="width:40%; padding-left:10px;">
-                            <span ng-show="isPublished(record)">
+                            <span ng-show="isPublished(record) && !isDraft(record) && !isRequest(record)">
                             <a ng-href="/register/{{record.type|schemaShortName}}/{{record.identifier}}/view" ng-show="record.documentID">
                                 {{(record.workingDocumentTitle||record.title)|lstring}}
                             </a>
@@ -85,7 +83,7 @@
                             </a>
                         </span>
 
-                            <span ng-show="isDraft(record) && !isPublished(record) && !isRequest(record)">
+                            <span ng-show="isDraft(record)  && !isRequest(record)">
                             <a href="/register/{{record.type|schemaShortName}}/{{record.identifier}}/edit">
                                 {{(record.workingDocumentTitle||record.title)|lstring}}
                             </a>
@@ -278,13 +276,16 @@
 
                             <div class="row" style="margin-top:10px;" ng-show="!isIRCC"> 
                                 <div class="col-xs-12">  <button ng-show="security" type="button" class="btn btn-danger" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
-                                <span ng-if="!security.canDelete">Request</span> Unpublish and delete the record</button> </div>
+                                <span ng-if="!security.canDelete">Request deletion of this record </span> 
+                                 <span ng-if="security.canDelete"> Delete the record </span>
+                                </button> 
+                                </div>
                             </div>
                         </div>
 
                     </div>
                     <div class="modal-footer" >
-                        <button type="button" class="btn btn-default" ng-click="closeDialog()">Close</button>
+                        <button type="button" class="btn btn-default" ng-click="closeDialog()">Cancel</button>
                     </div>
             </script>
 
@@ -297,7 +298,7 @@
                     </div>
                     <div class="modal-footer" style="margin-top:0">
                         <button ng-disabled="loading" type="button" class="btn btn-default" ng-click="closeDialog('duplicateRecordModal')">Cancel</button>
-                        <button ng-disabled="loading" type="button" ng-click="duplicate(recordToDuplicate)" class="btn btn-primary">Yes</button>
+                        <button ng-disabled="loading" type="button" ng-click="duplicate(recordToDuplicate)" class="btn btn-primary">Duplicate</button>
                     </div>
             </script>
 
@@ -307,11 +308,11 @@
                         <h4>Cancel publishing request<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure you want to cancel this publishing request?</p>
+                        <h2>Are you sure you want to cancel this publishing request?</h2>
                     </div>
                     <div class="modal-footer" style="margin-top:0">
-                        <button type="button" class="btn btn-default" ng-click="closeDialog()">close</button>
-                        <button ng-disabled="loading" type="button" ng-click="deleteWorkflowRequest(recordForDeleteWorkflowRequest)" class="btn btn-primary">Yes</button>
+                        <button type="button" class="btn btn-default" ng-click="closeDialog()">Do not cancel the request</button>
+                        <button ng-disabled="loading" type="button" ng-click="deleteWorkflowRequest(recordForDeleteWorkflowRequest)" class="btn btn-primary pull-left">Cancel request</button>
 
                     </div>
             </script>
