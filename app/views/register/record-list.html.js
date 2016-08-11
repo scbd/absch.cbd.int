@@ -306,7 +306,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     return roleService.isIAC();
                 }   
 
-                $rootScope.$on('event:server-pushNotification', function(evt,data){
+                var evtServerPushNotification = $rootScope.$on('event:server-pushNotification', function(evt,data){
                     if((data.type == 'workflowActivityStatus' || data.type == 'userNotification') &&
                       data.data && data.data.identifier){
                           
@@ -322,7 +322,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                                     if(document && localStorageDocument.type == 'revoke')
                                         document.revoked = true;
-
+                                     
                                     localStorageService.remove('workflow-activity-status');
                                 }
                                 else
@@ -341,6 +341,10 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     }
                 });
 
+
+                $scope.$on('$destroy', function(){
+                    evtServerPushNotification();
+                })
 
                 $scope.refreshList = function (schema) {
                     loadRecords();
@@ -480,17 +484,28 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     IWorkflows.get(workflowId)
                     .then(function(workflow){
                         var activity = _.first(workflow.activities)                        
-                        if((activity && activity.completedBy) || !activity && workflow.state=="completed")
+                        if((activity && activity.completedBy) || !activity && workflow.state=="completed"){
                             localStorageService.remove('workflow-activity-status');
+                        }
 
                     });
                 }
 
-                function updateDocumentStatus(identifier, workflowActivity){
+                function updateDocumentStatus(identifier, workflowActivity, draft){
+                  
+                  var docQuery = storage.documents.get(identifier, {'info': true });
+                  if(draft)
+                     docQuery = storage.drafts.get(identifier, {'info': true });
 
-                  return storage.documents.get(identifier, {'info': true })
+                  return $q.when(docQuery)
                         .then(function (data) {
+
                             var currentDocument = _.findWhere($scope.records, {identifier: identifier})
+                            
+                            if(data.data.deletedOn){
+                                $scope.records.splice($scope.records.indexOf(currentDocument), 1);
+                                return;
+                            }
                             
                             currentDocument.title = data.data.title;
                             currentDocument.documentID = data.data.documentID;
@@ -510,7 +525,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                             currentDocument.workingDocumentTitle = data.data.workingDocumentTitle;
                             currentDocument.workingDocumentUpdatedBy = data.data.workingDocumentUpdatedBy;
                             currentDocument.workingDocumentUpdatedOn = data.data.workingDocumentUpdatedOn;
-                            if(currentDocument.type == 'absPermit'){
+                            if(currentDocument.type == 'absPermit' && !draft){
                                 //delay by 2 sec for indexing to finish
                                 $timeout(function(){
                                     $q.when(getRevokedDocuments(currentDocument.type))
@@ -521,7 +536,11 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                                     });
                                 },2000);
                             }
-                        });
+                        })
+                        .catch(function(error){
+                            if(error.status === 404 && !draft)
+                                updateDocumentStatus(identifier, workflowActivity, true);
+                        });;
                 }
 
 

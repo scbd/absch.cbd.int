@@ -75,7 +75,7 @@ define(['app', 'underscore',
 									}
 									else{
 										msg = "Record published";
-										operationType = 'request'
+										operationType = 'publish'
 									}
 								}
 								else {
@@ -85,16 +85,16 @@ define(['app', 'underscore',
 								localStorageService.set('workflow-activity-status', { identifier: $scope.document.header.identifier, type: operationType });
 								$scope.closeDialog();
 
-								$rootScope.$on('event:server-pushNotification', function (evt, data) {
+					var evtServerPushNotification = $rootScope.$on('event:server-pushNotification', function (evt, data) {
 									
 									var localStorageDocument = localStorageService.get('workflow-activity-status');
 
-									if(data.type == 'workflowActivityStatus' && 
+									if(data.type == 'workflowActivityStatus' && localStorageDocument &&
 										localStorageDocument.identifier == data.data.identifier && (
 										(data.data.workflowActivity == 'document-unlock' && localStorageDocument.type == 'reject') || 
 										(data.data.workflowActivity == 'create-revision-from-draft' && 'publish' == localStorageDocument.type) || 
 										(data.data.workflowActivity == 'document-deleted' && 'delete'==localStorageDocument.type))){
-
+										
 										localStorageService.remove('workflow-activity-status');
 
 										var workflowInfo = { workflowId: $scope.workflowTaskId, activity: result }
@@ -103,6 +103,10 @@ define(['app', 'underscore',
 										toastr.success(msg);
 									}
 								});
+
+								$scope.$on('$destroy', function(){
+									evtServerPushNotification();
+								})
 
 							}).catch(function (error) {
 								toastr.error('There was an error processing your request, please try again.');
