@@ -71,11 +71,11 @@ define(['app', 'underscore',
 								if (result.result.action == 'approve') {
 									if (isDelete){
 										msg = "Record deleted";
-										operationType = 'request';
+										operationType = 'delete';
 									}
 									else{
 										msg = "Record published";
-										operationType = 'delete'
+										operationType = 'request'
 									}
 								}
 								else {
@@ -89,7 +89,8 @@ define(['app', 'underscore',
 									
 									var localStorageDocument = localStorageService.get('workflow-activity-status');
 
-									if(data.type == 'workflowActivityStatus' && (
+									if(data.type == 'workflowActivityStatus' && 
+										localStorageDocument.identifier == data.data.identifier && (
 										(data.data.workflowActivity == 'document-unlock' && localStorageDocument.type == 'reject') || 
 										(data.data.workflowActivity == 'create-revision-from-draft' && 'publish' == localStorageDocument.type) || 
 										(data.data.workflowActivity == 'document-deleted' && 'delete'==localStorageDocument.type))){
