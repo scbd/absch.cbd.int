@@ -22,19 +22,19 @@ define(['app', '/app/js/common.js',
             };
           
             $scope.viewHistory = function(evt, record){
-                    console.log(evt)
+                    
                     evt.stopPropagation()
                     record.showHistory = !record.showHistory;
 
-                    if(record.showHistory){
-                        $http.get('/api/v2015/report-records/' + record._id)
-                        .then(function (data) {
-                            record.history = data.data.history
-                        });
-                    } 
+                    // if(record.showHistory){
+                    //     $http.get('/api/v2015/report-records/' + record._id)
+                    //     .then(function (data) {
+                    //         record.history = data.data.history
+                    //     });
+                    // } 
             };
             $scope.addComments = function(evt, record){
-                console.log(evt)
+                
                 evt.stopPropagation()
                 var recordCopy = angular.copy(record);
                 ngDialog.open({
@@ -61,7 +61,7 @@ define(['app', '/app/js/common.js',
             } 
             
             $scope.delete = function(evt, record){
-                console.log(evt)
+                
                 evt.stopPropagation();
                 ngDialog.open({
                                 template : 'confirmDeleteDialog',
