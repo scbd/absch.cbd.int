@@ -67,19 +67,32 @@ define(['app', 'underscore',
 						IWorkflows.updateActivity($scope.workflowTaskId, $scope.workflow.activities[0].name, resultData)
 							.then(function (result) {
 								var msg = "";
+								var operationType;
 								if (result.result.action == 'approve') {
-									if (isDelete)
+									if (isDelete){
 										msg = "Record deleted";
-									else
+										operationType = 'request';
+									}
+									else{
 										msg = "Record published";
+										operationType = 'delete'
+									}
 								}
 								else {
 									msg = "Record rejected";
+									operationType = 'reject'
 								}
-								localStorageService.set('workflow-activity-status', { identifier: $scope.document.header.identifier });
+								localStorageService.set('workflow-activity-status', { identifier: $scope.document.header.identifier, type: operationType });
 								$scope.closeDialog();
+
 								$rootScope.$on('event:server-pushNotification', function (evt, data) {
-									if (data.type == 'workflowActivityStatus' && data.data.workflowActivity == 'create-revision-from-draft') {
+									
+									var localStorageDocument = localStorageService.get('workflow-activity-status');
+
+									if(data.type == 'workflowActivityStatus' && (
+										(data.data.workflowActivity == 'document-unlock' && localStorageDocument.type == 'reject') || 
+										(data.data.workflowActivity == 'create-revision-from-draft' && 'publish' == localStorageDocument.type) || 
+										(data.data.workflowActivity == 'document-deleted' && 'delete'==localStorageDocument.type))){
 
 										localStorageService.remove('workflow-activity-status');
 
