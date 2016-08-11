@@ -1,9 +1,8 @@
-<div id="view-history">
-
+<div id="view-history" style="max-height:200px;overflow:scroll;">
     <table style="width:100%!important;" class="table table-condensed">
         <tr>
                 <th class="color-litegrey" style="font-size:12px;bold;"> Unique identifier</th>
-                <th class="color-litegrey" style="font-size:12px;bold;"> Version</th>
+                <th class="color-litegrey" style="font-size:12px;bold;"> Status</th>
                 <th class="color-litegrey" style="font-size:12px;bold;"> Published </th>
                 <th class="color-litegrey" style="font-size:12px;bold;" ng-if="!publicView"> Requested </th>
             </tr>
@@ -14,7 +13,7 @@
                         <strong>{{document | uniqueID}}</strong>
                     </a>
                 </td>
-                <td style="min-width:12%">
+                <td>
                     <div>
                         <span ng-show="document.body.amendmentIntent==1  && document.type!='absCheckpointCommunique'">
                             <span class="bold color-red"> REVOKED</span>
@@ -23,14 +22,16 @@
                             <span class="bold color-green"> OLD</span>
                         </span>
                         <span ng-show="documents.length==1 || (documents.length>1 && documents.length == document.revision && (!isPermit || document.body.amendmentIntent!=1))">
-                            <span class="bold color-green"> CURRENT</span>
+                            <span class="bold color-green"> PUBLISHED</span>
                         </span>
                     </div>
                 </td>
-                <td>
+                <td >
                     <div ng-show="!publicView">
                         <span>{{document.updatedBy.firstName}} {{document.updatedBy.lastName}} ({{document.updatedBy.email}})</span> 
-                        <br> <span style="font-size:11px;text-transform:uppercase;font-weight:bold">{{document.updatedOn | formatDateWithTime}}</span></div>
+                        <br> <span style="font-size:11px;text-transform:uppercase;font-weight:bold">{{document.updatedOn | formatDateWithTime}}</span>
+                        </div>
+                        
                         <div ng-show="publicView"> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span></div>
 
                     <div ng-show="document.body.amendmentDescription">

@@ -1291,7 +1291,7 @@ div.recordDefault:hover {
 #doc-metadata .table-condensed>tfoot>tr>th,
 #doc-metadata .table-condensed>thead>tr>td,
 #doc-metadata .table-condensed>thead>tr>th {
-    padding: 0!important;
+    padding:0!important;
     margin: 0!important;
     border: 0!important;
 }
@@ -1301,7 +1301,7 @@ div.recordDefault:hover {
 #view-history .table-condensed>tfoot>tr>th,
 #view-history .table-condensed>thead>tr>td,
 #view-history .table-condensed>thead>tr>th {
-    padding: 0!important;
+    padding: 0  10px 0 10px !important;
     margin: 0!important;
     border: 0!important;
 }
