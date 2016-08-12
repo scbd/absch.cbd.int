@@ -128,7 +128,7 @@ define(['app', '/app/views/forms/edit/edit.js', '/app/js/common.js',
         document.amendmentDescription = undefined;
       }
       else
-        document.amendmentIntent = 1;
+        document.amendmentIntent = 0;
 
       if(!$scope.isOthers()){
         document.keywordOther = undefined;
