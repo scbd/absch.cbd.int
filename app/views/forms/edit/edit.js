@@ -470,7 +470,9 @@ define([
     }
 
     $scope.$on('$locationChangeStart', confirmLeaving);
-
+    $scope.$on('$locationChangeSuccess', function(evt, data){
+      $rootScope.next_url = undefined;
+    });
     //raised when  a document is published or requested for publishing
     //update orignal document with the updated one to avoid validation on page leave event(confirmLeaving).
     $scope.$on('updateOrignalDocument', function(evt,newDocument){

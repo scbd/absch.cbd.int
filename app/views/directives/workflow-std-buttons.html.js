@@ -380,8 +380,12 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                 //====================
 				//
 				//====================
-				$scope.close = function()
+                
+				$scope.close = function(closeDialog)
 				{
+                    if(!closeDialog)
+                        return closeDocument(true);
+
 					return $scope.closeDialog().then(function() {
 						closeDocument();
 					}).catch(function(error){
@@ -468,28 +472,34 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 
                 $scope.loadSecurity();
 
-                function closeDocument(){
-                    toastr.info("Your record has been closed without saving.");
+                function closeDocument(skipToast){
+                    if(!skipToast)
+                        toastr.info("Your record has been closed without saving.");
 
                     var absHosts = ['https://absch.cbddev.xyz/', 'https://training-absch.cbd.int/',
                        'http://localhost:2010/', 'https://absch.cbd.int/', 'https://absch.cbddev.xyz/',
                    ]
                    $timeout(function() {
-                       if ($rootScope.next_url) {
+                       if($route.current.params.workflow){
+                           $timeout(function() {
+                               $location.url('/register/' + $filter("schemaShortName")(document_type)+'/' + $route.current.params.identifier + '/view');
+                           }, 100);
+                       }
+                       else if ($rootScope.next_url) {
                            var url = $rootScope.next_url.replace($location.$$protocol + '://' +
                                $location.$$host + ($location.$$host != 'absch.cbd.int' ? ':' + $location.$$port : '') + '/', '');
                            _.each(absHosts, function(host) {
                                url = url.replace(host, '');
                            });
                            $timeout(function() {
-                               $location.path(url);
+                               $location.url(url);
                            }, 100)
                        } else {
                            $timeout(function() {
-                               $location.path('/register/' + $filter("schemaShortName")(document_type));
+                               $location.url('/register/' + $filter("schemaShortName")(document_type));
                            }, 100);
                        }
-                   }, 500);
+                   }, 100);
 
                 }
 
