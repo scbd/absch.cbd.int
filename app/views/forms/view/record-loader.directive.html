@@ -39,17 +39,20 @@
                         <tr>
                             <td><label> Current Status: </label></td>
                             <td class="bold">
-                                <span class="color-grey" ng-if="!internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">
+                                <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">
                                         DRAFT
                                     </span>
-                                <span class="color-green" ng-if="!internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">
+                                <span class="color-green" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">
                                         PUBLISHED
                                     </span>
-                                <span class="color-red" ng-if="!internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">
+                                <span class="color-red" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">
                                         [ Locked: Pending {{workflowRequestType}} request ]
                                 </span>
-                                <span class="color-green" ng-if="internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">
+                                <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">
                                     DELETED
+                                </span>
+                                <span ng-show="!internalDocument.deletedOn && internalDocument.amendmentIntent==1  && internalDocument.type!='absCheckpointCommunique'">
+                                    <span class="bold color-red"> REVOKED</span>
                                 </span>
                             </td>
                         </tr>

@@ -15,14 +15,17 @@
                 </td>
                 <td>
                     <div>
-                        <span ng-show="document.body.amendmentIntent==1  && document.type!='absCheckpointCommunique'">
+                        <span ng-show="!document.deletedOn && document.body.amendmentIntent==1  && document.type!='absCheckpointCommunique'">
                             <span class="bold color-red"> REVOKED</span>
                         </span>
-                        <span ng-show="((documents.length>1 && document.body.amendmentIntent!=1 && document.revision < documents.length))">
-                            <span class="bold color-green"> OLD</span>
+                        <span ng-show="((documents.length>1 && !document.deletedOn && document.body.amendmentIntent!=1 && document.revision < documents.length))">
+                            <span class="bold color-grey"> OLD</span>
                         </span>
-                        <span ng-show="documents.length==1 || (documents.length>1 && documents.length == document.revision && (!isPermit || document.body.amendmentIntent!=1))">
+                        <span ng-show="!document.deletedOn && (documents.length==1 || (documents.length>1 && documents.length == document.revision && (!isPermit || document.body.amendmentIntent!=1)))">
                             <span class="bold color-green"> PUBLISHED</span>
+                        </span>
+                        <span ng-show="document.deletedOn">
+                            <span class="bold color-grey"> DELETED</span>
                         </span>
                     </div>
                 </td>
