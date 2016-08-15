@@ -1,4 +1,5 @@
-define(['app','ngSmoothScroll',
+define(['app',
+	'scbd-angularjs-services', 'ngSmoothScroll',
 	'scbd-angularjs-filters',
 	'./view-history-directive.html.js',
     '/app/js/common.js',
@@ -37,8 +38,9 @@ define(['app','ngSmoothScroll',
 					$scope.init();
 			},
 			controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService',
-				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter, $http, $httpAWS, realm, $element, $compile, searchService) {
+				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows",
+				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
+					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows) {
 
 					var schemaMapping = {
 						news: '/app/views/forms/view/view-news.directive.html.js',
@@ -145,10 +147,10 @@ define(['app','ngSmoothScroll',
 							_.contains(["FOCALPOINT", "MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "NFP", "ST", "NT", "MT", "PR", "MTD"], documentSchema.toUpperCase())) {
 							$scope.loading = true;
 							commonjs.getReferenceRecordIndex(documentSchema, documentID)
-							.then(function (data) {
-								$scope.internalDocument = data.data;
-								$scope.loading = false;
-							});
+								.then(function (data) {
+									$scope.internalDocument = data.data;
+									$scope.loading = false;
+								});
 							loadViewDirective(documentSchema);
 						}
 						else if (documentID) {
@@ -179,7 +181,7 @@ define(['app','ngSmoothScroll',
 						var qDocument;
 						var qDocumentInfo;
 
-						
+
 
 						if (version == 'draft') {
 							qDocument = storage.drafts.get(identifier).then(function (result) { return result.data || result });
@@ -205,6 +207,20 @@ define(['app','ngSmoothScroll',
 							if (version)
 								$scope.revisionNo = version
 
+							checkIfPermitRevoked();
+
+							if ($scope.internalDocumentInfo.workingDocumentLock) {
+								IWorkflows.get($scope.internalDocumentInfo.workingDocumentLock.lockID.replace('workflow-', ''))
+									.then(function (workflow) {
+										if (workflow && workflow.type.name == 'delete-record')
+											$scope.workflowRequestType = "deletion";
+										else
+											$scope.workflowRequestType = "publishing";
+									});
+							}				
+							if (version)
+								$scope.revisionNo = version
+
 							loadViewDirective($scope.internalDocument.header.schema);
 
 						}).catch(function (error) {
@@ -212,11 +228,12 @@ define(['app','ngSmoothScroll',
 								$scope.load(identifier, 'draft');
 							}
 						})
-						.finally(function () {
-							$scope.loading = false;
-						})
+							.finally(function () {
+								$scope.loading = false;
+							})
 
 					};
+
 					//==================================
 					//
 					//==================================
@@ -325,7 +342,6 @@ define(['app','ngSmoothScroll',
 							var directiveHtml =
 								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
 									.replace(/DIRECTIVE/g, 'view-' + name);
-
 							$scope.$apply(function () {
 								$element.find('#schemaView')
 									.empty()
@@ -341,15 +357,15 @@ define(['app','ngSmoothScroll',
 							return (pos ? separator : '') + letter.toLowerCase();
 						});
 					}
-					
-					function checkIfPermitRevoked(){
 
-						if($scope.internalDocument && $scope.internalDocument.header.schema == 'absPermit'){
-							if($scope.internalDocument.amendmentIntent == 1)
-                  				$scope.isIRCCRevoked = true;
+					function checkIfPermitRevoked() {
+
+						if ($scope.internalDocument && $scope.internalDocument.header.schema == 'absPermit') {
+							if ($scope.internalDocument.amendmentIntent == 1)
+								$scope.isIRCCRevoked = true;
 						}
 					}
-					
+
 					$scope.api = {
 						loadDocument: $scope.loadDocument
 					}
