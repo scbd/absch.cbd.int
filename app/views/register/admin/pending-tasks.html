@@ -14,20 +14,36 @@
   <div class="register-content-content" >
 
           <legend name="formInfo" style="display:none"></legend>
-          <div style="font-weight:bold;">Records which have been not approved since 12 weeks.</div>
+          <!--<div style="font-weight:bold;">Records which have been not approved since 12 weeks.</div>-->
           <div class="registerpage-content">
 
               <div class="alert alert-danger" ng-show="__error">
                   <strong>Error: </strong>{{__error}}
-              </div>
-
-              <div class="pull-left">
-                  <!-- <strong>Type:</strong> -->
-                  <div km-select ng-model="filterType" binding-type="string" placeholder="Record Type" items="options.filterTypes()"></div>
-                  <!-- <strong>Status:</strong> -->
-                  <div km-select ng-model="filterStatus" binding-type="string" placeholder="Record Status" items="options.filterStatus()"></div>
-                  <input type="text" ng-model="keywords" placeholder=" keyword " class="form-control keyword" style="width:250px;display:inline;">
-              </div>
+              </div>  
+              <legend>Filters </legend>              
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="km-control-group" name="startDate" required caption="Start Date">
+                            <div km-date placeholder="YYYY-MM-DD" required name="startDate" ng-model="filters.startDate"></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="km-control-group" name="endDate" caption="End Date">
+                            <div km-date placeholder="YYYY-MM-DD" name="endDate" ng-model="filters.endDate"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="pull-left">
+                            <!-- <strong>Type:</strong> -->
+                            <div km-select ng-model="filterType" binding-type="string" placeholder="Record Type" items="options.filterTypes()"></div>
+                            <!-- <strong>Status:</strong> -->
+                            <div km-select ng-model="filterStatus" binding-type="string" placeholder="Record Status" items="options.filterStatus()"></div>
+                            <input type="text" ng-model="keywords" placeholder=" keyword " class="form-control keyword" style="width:250px;display:inline;">
+                        </div>
+                    </div>
+                </div>
               <br>
               <br>
 
@@ -134,6 +150,7 @@
                                           <div ng-hide="task.activity.name=='publishRecord'">{{task.activity.name}}*</div>
                                           <span ng-hide="true">{{ formLoading = task.isActive ? false : (tasksDisplay ? true :undefined)}}<span>
                                       </div>
+                                      <div ng-if="task.workflow.state=='completed' && task.workflow.activities.length ==0">{{task.workflow.state|uppercase}}</div>
                                   </div>
                                   <div ng-show="tasksDisplay || task.isActive" class="col-xs-12" style="padding:20px 20px 0 20px;">
                                       <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{task.workflow._id}}" on-activity-update="updateWorkflowList(document, workflowInfo)"></div>
