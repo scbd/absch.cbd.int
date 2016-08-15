@@ -2,16 +2,16 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
     '/app/services/search-service.js', '/app/services/role-service.js','scbd-angularjs-controls',
     './directives/register-top-menu.js', '../directives/block-region-directive.js',
 	'/app/views/forms/edit/editFormUtility.js', '/app/views/register/directives/record-type-header.html.js',
-    '/app/services/local-storage-service.js', 'ngDialog'
+    '/app/services/local-storage-service.js', 'ngDialog', '/app/services/app-config-service.js'
 ],
     function (app, _) {
         "use strict";
 
         app.controller("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage", '$rootScope',
             'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", 
-            "$element", "breadcrumbs", "localStorageService", "ngDialog",
+            "$element", "breadcrumbs", "localStorageService", "ngDialog", "appConfigService",
             function ($timeout, commonjs, bootbox, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
-                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog) {
+                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, appConfigService) {
 
                 $scope.orderBy = ['-updatedOn'];
                 $scope.amendmentDocument = {locales:['en']};
@@ -400,13 +400,17 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                     var qDrafts = storage.drafts.query(qAnd.join(" and ") || undefined, draftParams);
 
-                    $q.all([qDocuments, qDrafts, getRevokedDocuments(schema)]).then(function (results) {
+                    $q.all([qDocuments, qDrafts, getRevokedDocuments(schema), loadmyTasks(schema)])
+                      .then(function (results) {
                         $scope.records = [];
                         var documents = results[0].data.Items;
                         var drafts = results[1].data.Items;
 
                         var wokflowActive = localStorageService.get('workflow-activity-status');
                         var revoked = schema!='absPermit' ? [] : results[2].data.response.docs;
+                        
+                        var myTasks = results[3];
+                        
 
                         var map = {};
 
@@ -434,6 +438,20 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                             $scope.records.push(row);
                         })
                         $("a[role*='button']").toggleClass('ui-disabled');
+
+                        myTasks.forEach(function(workflow) { //tweaks
+                            
+                            if(workflow.data && !_.findWhere($scope.records, {identifier: workflow.data.identifier})){
+                                $scope.records.push({
+                                    identifier  : workflow.data.identifier,
+                                    title       : workflow.data.title,
+                                    metadata    : workflow.data.metadata,
+                                    type        : workflow.data.metadata.schema
+                                });
+                                updateDocumentStatus(workflow.data.identifier)
+                            }
+                        });
+
                         return $scope.records;
                     })
                         .finally(function () {
@@ -460,8 +478,8 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                 function getRevokedDocuments(schema){
                     if(schema!= 'absPermit'){
                         var q = $q.defer();
-
-                        return q.resolve({});
+                        q.resolve([]);
+                        return q.promise;
                     }
 
                     var filter;
@@ -530,7 +548,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                                 $timeout(function(){
                                     $q.when(getRevokedDocuments(currentDocument.type))
                                     .then(function(data){
-                                        if(data && _.some(data.data.response.docs, function(doc){ return doc.identifier_s == currentDocument.identifier})){
+                                        if(data.data && _.some(data.data.response.docs, function(doc){ return doc.identifier_s == currentDocument.identifier})){
                                             currentDocument.revoked = true;
                                         }
                                     });
@@ -543,6 +561,28 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         });;
                 }
 
+                function loadmyTasks(schema){
+
+                    if(!_.contains(appConfigService.referenceSchemas, schema)){
+
+                        var defer = $q.defer();
+                        defer.resolve([]);
+                        return defer.promise;
+                    }
+
+                    var myUserID = $scope.$root.user.userID;
+                        var query    = {
+                            $and : [
+                                { "activities.assignedTo" : myUserID } ,
+                                { "closedOn"             : { $exists : false } },
+                                { "data.realm"           : appConfigService.currentRealm },
+                                { "data.metadata.schema" : schema }
+                            ]
+                        };
+
+                    return IWorkflows.query(query);
+
+                }
 
                 loadRecords();
 
