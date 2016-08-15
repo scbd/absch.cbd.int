@@ -125,7 +125,7 @@
         </div>-->
         <div ng-show="document.relatedIRCCs">
                 <label>Unique identifier(s) of related internationally recognized certificate(s) of compliance</label>
-                <div class="km-value" ng-repeat="item in document.relatedIRCCs">
+                <div class="text" ng-repeat="item in document.relatedIRCCs">
                      <span view-default-reference ng-model="item.identifier" locale="locale"></span>
                 </div>
             </div>
