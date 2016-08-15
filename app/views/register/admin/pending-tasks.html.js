@@ -1,5 +1,7 @@
 define(['app', 'underscore', '/app/js/common.js', 'ngInfiniteScroll', 'moment', 'scbd-angularjs-controls',
-    '/app/views/register/directives/register-top-menu.js'], function (app) {
+    '/app/views/register/directives/register-top-menu.js',
+    '/app/views/directives/task-id-directive.html.js',
+    '/app/views/forms/view/record-loader.directive.html.js'], function (app) {
 
         "use strict";
         app.controller("adminPendingTasksCotroller", ["$scope", "$timeout", "IWorkflows", "realm", "commonjs",
