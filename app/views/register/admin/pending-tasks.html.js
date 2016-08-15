@@ -1,18 +1,18 @@
-define(['app', 'underscore', '/app/js/common.js', 'ngInfiniteScroll', 'moment',
+define(['app', 'underscore', '/app/js/common.js', 'ngInfiniteScroll', 'moment', 'scbd-angularjs-controls',
     '/app/views/register/directives/register-top-menu.js'], function (app) {
 
         "use strict";
         app.controller("adminPendingTasksCotroller", ["$scope", "$timeout", "IWorkflows", "realm", "commonjs",
             function ($scope, $timeout, IWorkflows, realm, commonjs) {
-
+                $scope.filters = {};
                 $scope.sortTerm = 'createdOn';
                 $scope.orderList = true;
 
-                var query = {
+                var filterQuery = {
                     $and: [
                         { state: "running" },
                         { "data.realm": realm.value },
-                        { createdOn: { "$lte": moment().subtract(12, "weeks").toISOString() } }
+                        { createdOn: { "$gte": moment().subtract(12, "weeks").toISOString() } }
                     ]
                 };
 
@@ -67,7 +67,7 @@ define(['app', 'underscore', '/app/js/common.js', 'ngInfiniteScroll', 'moment',
                     if ($scope.recordCount > 0) {
 
                         $scope.loadingTasks = true;
-                        IWorkflows.query(query, null, $scope.length, $scope.skip == 0 ? 0 : $scope.length * $scope.skip).then(function (workflows) {
+                        IWorkflows.query(filterQuery, null, $scope.length, $scope.skip == 0 ? 0 : $scope.length * $scope.skip).then(function (workflows) {
                             $scope.skip++;
                             var tasks = [];
                             //tasks = _.clone($scope.taskLists||[]);
@@ -98,6 +98,8 @@ define(['app', 'underscore', '/app/js/common.js', 'ngInfiniteScroll', 'moment',
                             $scope.loadingTasks = false;
                         });
                     }
+                    else
+                        $scope.loadingTasks = false;
 
                 }
 
@@ -108,7 +110,7 @@ define(['app', 'underscore', '/app/js/common.js', 'ngInfiniteScroll', 'moment',
                     $scope.loadingTasks = true;
                     //get record count
                     if (!$scope.recordCount)
-                        IWorkflows.query(query, 1).then(function (recordCount) {
+                        IWorkflows.query(filterQuery, 1).then(function (recordCount) {
                             $scope.recordCount = recordCount.count;
                             $scope.tasks = [];
                             load();
@@ -148,6 +150,26 @@ define(['app', 'underscore', '/app/js/common.js', 'ngInfiniteScroll', 'moment',
                     }
                     //return entity && _.contains($scope.filterStatus, entity.workflow.data.metadata.schema);
                 };
+
+                $scope.$watch('filters', function(old, newVal){
+
+                     //{ state: "running" },
+                    var queries = [ 
+                                    { "data.realm": realm.value }
+                                  ]
+                    if($scope.filters.endDate)
+                        queries.push({ createdOn: { "$lte": moment(moment($scope.filters.endDate).format("YYYY-MM-DD")).toISOString() } })
+                    
+                    if($scope.filters.startDate)
+                        queries.push({ createdOn: { "$gte": moment(moment($scope.filters.startDate).format("YYYY-MM-DD")).toISOString() } })
+                    
+                    filterQuery.$and = queries;
+                    console.log(filterQuery);
+                    $scope.recordCount = 0;
+                    $scope.length = 25;
+                    $scope.skip = 0;
+                    $scope.loadTasks();
+                }, true)
 
             }]);
     });
