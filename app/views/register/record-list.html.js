@@ -320,7 +320,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                                     (data.data.workflowActivity == 'create-revision-from-draft' && _.contains(['revoke', 'publish'], localStorageDocument.type)) || 
                                     (data.data.workflowActivity == 'document-deleted' && 'delete'==localStorageDocument.type)){
 
-                                    if(document && localStorageDocument.type == 'revoke')
+                                    if(document && localStorageDocument.type == 'revoke' && data.data.workflowActivity == 'create-revision-from-draft')
                                         document.revoked = true;
                                      
                                     localStorageService.remove('workflow-activity-status');
