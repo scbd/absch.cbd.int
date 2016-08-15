@@ -26,8 +26,8 @@
                 <span class="bold">
                 {{workflow.createdBy_info.firstName + ' ' + workflow.createdBy_info.lastName}}
                 <a ng-href="mailTo:{{workflow.createdBy_info.email}}" class="color-blue">({{workflow.createdBy_info.email}})</a>
-                <span class="unbold"> on </span> {{workflow.createdOn | formatDateWithTime}}
-                </span>
+                <span class="unbold"> on </span> {{workflow.createdOn | formatDateWithTime}} </span>
+                <span ng-if="document.amendmentIntent == 1" class="bold color-red"> has requested to revoke this record.</span>
                 <span ng-if="workflow.data.additionalInfo" class="bold">
                     </br> </br>Additional information provided by requestor :- 
                     <span class="unbold">{{workflow.data.additionalInfo}}</span></br> </br>
@@ -46,7 +46,7 @@
                             <span class="hidden-xs">DELETE RECORD</span>
                         </button>
                         </div>
-                        <div class="col-xs-4 text-center" ng-show="activity.name != 'deleteRecord'">
+                        <div class="col-xs-4 text-center" ng-show="activity.name != 'deleteRecord' && document.amendmentIntent != 1">
                             <button type="button" class="btn btn-info bold  color-white" ng-click="edit(workflow, activity, workflow._id)" ng-disabled="isUpdating">
                             <i class="fa fa-pencil-square-o"></i>
                             <span class="hidden-xs">EDIT</span>
