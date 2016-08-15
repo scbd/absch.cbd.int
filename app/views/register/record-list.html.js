@@ -316,7 +316,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                             
                             var localStorageDocument = localStorageService.get('workflow-activity-status');
                             if(localStorageDocument.identifier == data.data.identifier){ 
-                                if((data.data.workflowActivity == 'document-lock' && localStorageDocument.type == 'request') || 
+                                if((data.data.workflowActivity == 'document-lock' && && _.contains(['revoke', 'request'], localStorageDocument.type)) || 
                                     (data.data.workflowActivity == 'create-revision-from-draft' && _.contains(['revoke', 'publish'], localStorageDocument.type)) || 
                                     (data.data.workflowActivity == 'document-deleted' && 'delete'==localStorageDocument.type)){
 
