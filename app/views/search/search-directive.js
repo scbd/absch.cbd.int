@@ -1,6 +1,6 @@
 define(['app', 'underscore', '/app/js/common.js',
 '/app/services/search-service.js',
-'/app/views/directives/infinite-scroll-directive.js',
+'ngInfiniteScroll',
 '/app/views/search/search-filters/keyword-filter.js',
 '/app/views/search/search-filters/national-filter.js',
 '/app/views/search/search-filters/reference-filter.js',

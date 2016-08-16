@@ -327,15 +327,18 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
 
                 function setChildrenSelected(identifier, skipRecurvsive) {
                     var term = _.findWhere($scope.terms, { identifier: identifier });
-                    term.showElement = true;
-                    _.each(term.narrowerTerms, function (narrowerIdentifier) {
-                        var narrowerTerm = _.findWhere($scope.terms, { identifier: narrowerIdentifier });
-                        narrowerTerm.showElement = true;
+                    if(term){
+                        term.showElement = true;
+                        _.each(term.narrowerTerms, function (narrowerIdentifier) {
+                            var narrowerTerm = _.findWhere($scope.terms, { identifier: narrowerIdentifier });
+                            narrowerTerm.showElement = true;
 
-                        if (!skipRecurvsive && narrowerTerm.narrowerTerms && narrowerTerm.narrowerTerms.length > 0)
-                            setChildrenSelected(narrowerIdentifier);
-                    });
+                            if (!skipRecurvsive && narrowerTerm.narrowerTerms && narrowerTerm.narrowerTerms.length > 0)
+                                setChildrenSelected(narrowerIdentifier);
+                        });
+                    }
                 }
+                    
 
                 //==============================
                 //
@@ -420,9 +423,9 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
                         alert('please select a GR Type and GR Area');
                         return;
                     }
-                    if (!$scope.binding.geneticResource)
-                        $scope.binding.geneticResource = [];
-                    $scope.binding.geneticResource.push({
+                    if (!$scope.binding.geneticResourceElements)
+                        $scope.binding.geneticResourceElements = [];
+                    $scope.binding.geneticResourceElements.push({
                         types: geneticResource.types,
                         areas: geneticResource.areas
                     });
@@ -433,7 +436,7 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
                 };
 
                 $scope.deleteElement = function (element) {
-                    $scope.binding.geneticResource.splice($scope.binding.geneticResource.indexOf(element), 1);
+                    $scope.binding.geneticResourceElements.splice($scope.binding.geneticResourceElements.indexOf(element), 1);
                 }
 
                 $scope.addOther = function (term) {
@@ -518,11 +521,11 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
                         title : 'Reference to any other relevant articles and sections', description : ''
                     },
                     "08B2CDEC-786F-4977-AD0A-6A709695528D" : {
-                        title : 'Any other element relevant to access',
+                        title : 'Any other elements relevant to access',
                         description : 'This may include, for instance, additional information on the scope of the access provisions of the measure, special considerations for access, or other relevant access provisions.'
                     },
                     "9847FA8A-16C3-4466-A378-F20AF9FF883B" : {
-                        title : 'Any other element relevant to benefit-sharing',
+                        title : 'Any other elements relevant to benefit-sharing',
                         description : 'This may include, for instance, additional information on the scope of the benefit-sharing provisions of the measure, establishment of benefit-sharing funds or other relevant benefit-sharing provisions'
                     },
                     "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63" : {
@@ -530,7 +533,7 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
                         description : 'This may include, for instance, additional information on the scope of the compliance provisions of the measure, or other relevant compliance provisions.'
                     },
                     "01DA2D8E-F2BB-4E85-A17E-AB0219194A17" : {
-                        title : 'Any other element relevant to relationship with other international instrument', description : ''
+                        title : 'Any other relevant relationships with other international instruments', description : ''
                     },
                     "BE944E70-2098-45AC-891B-D5E94AFECB99" : {
                         title : 'Reference to any other relevant articles and sections', description : ''
@@ -556,12 +559,12 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
                         },
                         "9AE45FB8-7788-4D26-B8E9-6B1647055519":{
                             "title": {
-                                "en": "Does the measure provides for the issuance of a permit of its equivalent at the time of access for constituting an internationally recognized certificate of compliance?"
+                                "en": "Does the measure provides for the issuance of a permit of its equivalent at the time of access for constituting an internationally recognized certificate of compliance (IRCC)?"
                             }
                         },
                         "8FA89F2D-3D6B-46A2-93BC-8B157054D726":{
                             "title": {
-                                "en": "Does the measure establish rules and procedures for mutually agreed terms?"
+                                "en": "Does the measure establish rules and procedures for mutually agreed terms(MAT)?"
                             }
                         },
                         "9847FA8A-16C3-4466-A378-F20AF9FF883B":{
@@ -596,7 +599,7 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
                         },
                         "BE944E70-2098-45AC-891B-D5E94AFECB99":{
                             "title": {
-                                "en": "Does this measure include any other relevant elements of the measure?"
+                                "en": "Does this measure include any other relevant elements?"
                             }
                         }
                         

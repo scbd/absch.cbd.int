@@ -136,16 +136,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                 throw "Terms must be array";
 
                             if ($scope.binding) {
-                                 if($scope.binding.geneticResource) {
-                                    if($scope.binding.geneticResource.answer){
-                                        var grCoverId = addCustomElement('Covers all genetic resources', '24E809DA-20F4-4457-9A8A-87C08DF81E8A', 1);
-                                        var geneticResource = $scope.binding.geneticResource;
-                                        oNewSections[grCoverId] = geneticResource.section||{};
-                                        oNewIdentifiers[grCoverId] = true;
-                                        oNewIdentifiers['24E809DA-20F4-4457-9A8A-87C08DF81E8A'] = true;
-                                    }
-                                }
-                                if(!$scope.binding.geneticResource || $scope.binding.geneticResource.answer){
+                                if(!$scope.binding.geneticResourceElements || $scope.binding.geneticResourceElements.answer){
                                     //delete  from list
                                    var geneticResource = _.findWhere($scope.terms, {identifier : 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'});
                                    if(geneticResource){
@@ -290,28 +281,15 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                     else $scope.error = error.data || "unkown error";
                 }
 
-                var grSubsetId;
-                var grCoverId
                 function addMeasureToElements(measure) {
                     if(!measure)
                         return;
                     if($scope.type!='single' && measure.absMeasures){
-                        if(measure.absMeasures.geneticResource) {
-                            if(measure.absMeasures.geneticResource.answer){
-                                if(!grCoverId)
-                                    grCoverId = addCustomElement('Covers all genetic resources', 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', 1);
-                                var geneticResource = measure.absMeasures.geneticResource;
-                                newMeasureElement({identifier:grCoverId, section:geneticResource.section}, measure);
-                            }
-                            else{
-                                if(!grSubsetId)
-                                    grSubsetId = addCustomElement('Covers a subset of genetic resources', 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', 2);
-
-                                var geneticResource = measure.absMeasures.geneticResource;
-                                var identifier = newMeasureElement({identifier:grSubsetId, section:{}}, measure);
-                                grElement = _.findWhere($scope.terms, {'identifier': identifier});
-                                grElement.geneticResourcesTerms = measure.absMeasures.geneticResource.elements;
-                            }
+                        if(measure.absMeasures.geneticResourceElements) {                            
+                            // var geneticResource = measure.absMeasures.geneticResourceElements;
+                            var identifier = newMeasureElement({identifier:'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', section:{}}, measure);
+                            grElement = _.findWhere($scope.terms, {'identifier': identifier});
+                            grElement.geneticResourcesTerms = measure.absMeasures.geneticResourceElements;
                         };
                         _.each(measure.absMeasures.relevantElements, function(measureElement) {
                             newMeasureElement(measureElement, measure);
@@ -326,19 +304,6 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                 });
 
                         });
-                        // _.each(measure.linkedMeasures, function(measureElement) {
-                        //     if(measureElement.measure)
-                        //         _.each(measureElement.measure.absMeasures, function(element) {
-                        //             newMeasureElement(element, measureElement.measure, 'linked', measure.header.identifier);
-                        //         });
-                        //
-                        // });
-                        // _.each(measure.amendedMeasures, function(measureElement) {
-                        //     if(measureElement.measure)
-                        //         _.each(measureElement.measure.absMeasures, function(element) {
-                        //             newMeasureElement(element, measureElement.measure, 'amended', measure.header.identifier);
-                        //         });
-                        // });
                     }
                 }
 
@@ -369,12 +334,14 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                 function newMeasureElement(measureElement, measure, type, parentMeasure){
                     var identifier = measureElement.identifier;
 
+                    if(identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" && measureElement.answer)
+                        return;
+
                     if(measureElement.parent){
                         if(measureElement.parent.indexOf('#') > 0)
                             identifier = measureElement.parent;
                         else
                             identifier += '#' + measureElement.parent;
-                        // identifier = identifier + '#' + measureElement.parent;
                     }
 
                     var element = _.findWhere($scope.terms, {'identifier': identifier});
@@ -417,6 +384,12 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             $scope.identifiers[elementMeasure.identifier] = true;
                         if(measureElement.section ||measureElement.elements)
                             $scope.sections[elementMeasure.identifier] = measureElement.section||{};
+                         if(measureElement.customValue){
+                             if(!$scope.otherCustomValues)
+                                $scope.otherCustomValues = [];
+                            $scope.otherCustomValues[elementMeasure.identifier] = measureElement.customValue||{};
+                         }
+
 
                         existing.push({measureId:measure.header.identifier, elementId:element.identifier, type:type});
 
@@ -443,11 +416,12 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             var amendedForTitle;
                             if($scope.type=='multiple'){
                                 doc = _.find($scope.document , function(measure){return measure.document && measure.document.header.identifier==element.measureIdentifier;});
-                                if(doc.document.amendedMeasures){
+                                if(doc && doc.document.amendedMeasures){
                                     amendedForTitle='';
                                     _.each(doc.document.amendedMeasures, function(msr){
                                         var amendedFor = _.find($scope.document , function(measure){return measure.document.header.identifier== msr.identifier;});
-                                        amendedForTitle += amendedFor.rec_title;
+                                        if(amendedFor)
+                                            amendedForTitle += amendedFor.rec_title;
                                     });
                                 }
                                 term.sortOrder = getJurisdictionSortIndex(doc.document.jurisdiction.identifier);
@@ -560,13 +534,18 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         //change hierarchy are required by abs measure matrix
                         if(element.identifier == 'A896179F-833E-4F76-B3F4-81CC95C66592'){// Mutually agreed terms
                             var benefitSharing = _.findWhere(data, {identifier:'9847FA8A-16C3-4466-A378-F20AF9FF883B'})
-                            benefitSharing.narrowerTerms = element.narrowerTerms;
+                            if(benefitSharing)
+                                benefitSharing.narrowerTerms = element.narrowerTerms;
                         }
                     });
                     // remove Mutually agreed terms
                     return _.filter(data, function(element){
                         return element.identifier != 'A896179F-833E-4F76-B3F4-81CC95C66592'
                     });
+                }
+
+                $scope.isEmpty = function(section){
+                    return _.isEmpty(section);
                 }
 
             }]

@@ -1,6 +1,7 @@
 define(['app',
         '/app/views/measure-matrix/measure-matrix-elements-derective.html.js',
-        '/app/services/search-service.js', '/app/services/app-config-service.js','/app/views/directives/party-status.js'
+        '/app/services/search-service.js', '/app/services/app-config-service.js','/app/views/directives/party-status.js',
+    '/app/views/forms/view/view-contact-reference.directive.js'
     ], function (app) {
 
 app.directive("viewMeasure", [function () {
@@ -29,44 +30,6 @@ app.directive("viewMeasure", [function () {
 				return( $scope.hide.indexOf(field) >= 0 ? false : false);
 			}
 
-			//====================
-			//
-			//====================
-			$scope.$watch("document.amendedMeasures", function(_new)
-			{
-				if ($scope.document && $scope.document.amendedMeasures) {
-					$scope.amendedMeasures = angular.fromJson(angular.toJson($scope.document.amendedMeasures));
-
-					if ($scope.amendedMeasures)
-						$scope.loadReferences($scope.amendedMeasures, false);
-				}
-			});
-
-			//====================
-			//
-			//====================
-			$scope.$watch("document.registeredMeasures", function (_new) {
-				if ($scope.document && $scope.document.registeredMeasures) {
-					$scope.registeredMeasures = angular.fromJson(angular.toJson($scope.document.registeredMeasures));
-
-					if ($scope.registeredMeasures)
-						$scope.loadReferences($scope.registeredMeasures, false);
-				}
-			});
-
-			//====================
-			//
-			//====================
-			$scope.$watch("document.linkedMeasures", function(_new)
-			{
-				if ($scope.document && $scope.document.linkedMeasures) {
-					$scope.linkedMeasures = angular.fromJson(angular.toJson($scope.document.linkedMeasures));
-
-					if ($scope.linkedMeasures)
-						$scope.loadReferences($scope.linkedMeasures, false);
-				}
-			});
-
             $scope.$watch("document", function (_new) {
 				if ($scope.document && $scope.document.header
                     && $scope.document.header.identifier) {
@@ -89,7 +52,8 @@ app.directive("viewMeasure", [function () {
                           .then(function(data){
                               $scope.document.measureAmendedBy = data[0].data.response.docs;
                               $scope.document.measureRelatedTo = data[1].data.response.docs;
-                              $scope.measureMatrixApi.reloadMatrix(true);
+                              if($scope.measureMatrixApi)
+							  	$scope.measureMatrixApi.reloadMatrix(true);
                           });
 				}
 			});
@@ -103,43 +67,7 @@ app.directive("viewMeasure", [function () {
 					return model;
 			}
 
-			//====================
-			//
-			//====================
-			$scope.loadReferences = function(targets, infoOnly) {
-
-				angular.forEach(targets, function(ref) {
-
-					var oOptions = { cache: true };
-
-					if (infoOnly)
-						oOptions.info = true;
-
-					storage.documents.get(ref.identifier, oOptions)
-						.success(function(data){
-							ref.document = data;
-						})
-						.error(function(error, code){
-							if (code == 404 && $scope.allowDrafts == "true") {
-
-								storage.drafts.get(ref.identifier, oOptions)
-									.success(function(data){
-										ref.document = data;
-									})
-									.error(function(draftError, draftCode){
-										ref.document  = undefined;
-										ref.error     = error;
-										ref.errorCode = code;
-									});
-							}
-
-							ref.document  = undefined;
-							ref.error     = error;
-							ref.errorCode = code;
-
-						});
-				});
-			};
+		
 		}]
 	};
 }]);

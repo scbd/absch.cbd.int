@@ -63,6 +63,7 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                 when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
                 when('/database/record/:documentID',  { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
                 when('/database/record/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
+                when('/certificate/:documentID',                        { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
                 when('/database/:documentID',                           { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
                 when('/database/:documentSchema/:documentID',           { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
                 when('/database/:documentSchema/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
@@ -76,7 +77,7 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                 when('/register/notifications',                             { templateUrl: '/app/views/register/notifications.html',  label:'Notifications',  param:'true', resolveController: true,resolve : { securized : securize() }}).
                 when('/register/requests',                                  { redirectTo:'/register/notifications' }).
                 
-                when('/register/:document_type/status/:status',             {templateUrl: '/app/views/register/register.html',          label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
+                when('/register/:document_type/status/:status',             {templateUrl: '/app/views/register/record-list.html',          param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
                 when('/register/national-users',                            {templateUrl: '/app/views/register/national-users/index.html', label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
                 when('/register/:document_type',                            {templateUrl: '/app/views/register/record-list.html',       label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
@@ -147,7 +148,7 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                     else
                         schema = path;
 
-                    var schemaName = $filter('schemaShortName')(schema);
+                    var schemaName = $filter('mapSchema')(schema);
                     if(!_.contains(appConfigService.referenceSchemas, schemaName))
                         roles = (roles || []).concat(appConfigService.nationalRoles());
                 }

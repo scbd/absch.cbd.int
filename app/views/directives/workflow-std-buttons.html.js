@@ -1,8 +1,9 @@
 define(['app','/app/views/directives/workflow-history-directive.html.js',
-        'toastr'], function (app) {
+        'toastr', '/app/services/local-storage-service.js', '/app/services/app-config-service.js'
+], function (app) {
 
-    app.directive('workflowStdButtons',["$q", "$timeout","underscore",
-     function($q, $timeout, _){
+    app.directive('workflowStdButtons',["$q", "$timeout","underscore", "localStorageService",
+     function($q, $timeout, _, localStorageService){
 
     	return{
     		restrict: 'EAC',
@@ -13,8 +14,8 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                 languages     : '=languages',
                 hideTimer     : '@hideTimer'
     		},
-    		controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",'$element', 'toastr', '$location', '$filter', '$routeParams',
-            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows, $element, toastr, $location, $filter, $routeParams)
+    		controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",'$element', 'toastr', '$location', '$filter', '$routeParams', 'appConfigService',
+            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows, $element, toastr, $location, $filter, $routeParams, appConfigService)
 			{
                 var document_type =  $filter("mapSchema")($route.current.$$route.documentType);
                 //////////////////////////////
@@ -224,10 +225,11 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                                 processRequest = editFormUtility.publish(document);
                             }
 
-                            return $q.when(processRequest).then(function(documentInfo) {
+                            return $q.when(processRequest)
+                            .then(function(documentInfo) {
 
                                 $('form').filter('.dirty').removeClass('dirty');
-    							documentPublished(documentInfo);
+    							documentPublished(document, documentInfo._id);
                                 $scope.$emit("updateOrignalDocument", document);
     							return documentInfo;
 
@@ -270,10 +272,11 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                             $element.find('#continueRequest').bind('click', function(){
                                 $scope.closeAddInfoDialog(true);
                                 $scope.loading = true;
-                                $q.when(editFormUtility.publishRequest(document,$scope.InfoDoc ? $scope.InfoDoc.additionalInfo:'')).then(function(workflowInfo) {
+                                $q.when(editFormUtility.publishRequest(document,$scope.InfoDoc ? $scope.InfoDoc.additionalInfo:''))
+                                .then(function(workflowInfo) {
 
                                     $('form').filter('.dirty').removeClass('dirty');
-                                    documentPublishRequested(document);
+                                    documentPublishRequested(document, workflowInfo._id);
                                     $scope.$emit("updateOrignalDocument", document);
                                     return workflowInfo;
 
@@ -377,8 +380,12 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                 //====================
 				//
 				//====================
-				$scope.close = function()
+                
+				$scope.close = function(closeDialog)
 				{
+                    if(!closeDialog)
+                        return closeDocument(true);
+
 					return $scope.closeDialog().then(function() {
 						closeDocument();
 					}).catch(function(error){
@@ -444,7 +451,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 
                     if(data){
                         $scope.showError = true;
-                        $scope.errorMessage = 'Your action ';
+                        $scope.errorMessage = 'Your action to ';
                         if(data.action=='saveDraft')
                             $scope.errorMessage += 'save draft ';
                         else if(data.action=='publish')
@@ -465,28 +472,34 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
 
                 $scope.loadSecurity();
 
-                function closeDocument(){
-                    toastr.info("Your record has been closed without saving.");
+                function closeDocument(skipToast){
+                    if(!skipToast)
+                        toastr.info("Your record has been closed without saving.");
 
                     var absHosts = ['https://absch.cbddev.xyz/', 'https://training-absch.cbd.int/',
                        'http://localhost:2010/', 'https://absch.cbd.int/', 'https://absch.cbddev.xyz/',
                    ]
                    $timeout(function() {
-                       if ($rootScope.next_url) {
+                       if($route.current.params.workflow){
+                           $timeout(function() {
+                               $location.url('/register/' + $filter("schemaShortName")(document_type)+'/' + $route.current.params.identifier + '/view');
+                           }, 100);
+                       }
+                       else if ($rootScope.next_url) {
                            var url = $rootScope.next_url.replace($location.$$protocol + '://' +
                                $location.$$host + ($location.$$host != 'absch.cbd.int' ? ':' + $location.$$port : '') + '/', '');
                            _.each(absHosts, function(host) {
                                url = url.replace(host, '');
                            });
                            $timeout(function() {
-                               $location.path(url);
+                               $location.url(url);
                            }, 100)
                        } else {
                            $timeout(function() {
-                               $location.path('/register/' + $filter("schemaShortName")(document_type));
+                               $location.url('/register/' + $filter("schemaShortName")(document_type));
                            }, 100);
                        }
-                   }, 500);
+                   }, 100);
 
                 }
 
@@ -507,9 +520,18 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                 // and a request for publication is sent to a FocalPoint/Admin
                 //
                 //============================================================
-                function documentPublishRequested() {
+                function documentPublishRequested(documentInfo, workflowId) {
 
-                    toastr.info('Record saved. A publishing request has been sent to your Publishing Authority.');
+                    if(_.contains(appConfigService.referenceSchemas, documentInfo.header.schema)){
+                        toastr.info('Record saved. A publishing request has been sent to your SCBD.');
+                    }
+                    else
+                        toastr.info('Record saved. A publishing request has been sent to your Publishing Authority.');
+                        
+                    localStorageService.set('workflow-activity-status', {
+                        identifier : documentInfo.header.identifier, type:'request',
+                        workflowId : workflowId
+                    });
 
                     $timeout(function() {
                         $location.path('/register/' + $filter("schemaShortName")(document_type));
@@ -523,9 +545,15 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                 // and published directly to the repository
                 //
                 //============================================================
-                function documentPublished(documentInfo) {
+                function documentPublished(documentInfo, workflowId) {
 
                     toastr.info('Record published. The record will be now publicly accessible on ABSCH.');
+                    if(documentInfo.header.schema!= 'contact'){
+                        localStorageService.set('workflow-activity-status', {
+                            identifier : documentInfo.header.identifier, type:'publish',
+                            workflowId : workflowId
+                        });
+                    }
                     $timeout(function() {
                         $location.path('/register/' + $filter("schemaShortName")(document_type));
                     }, 1000);

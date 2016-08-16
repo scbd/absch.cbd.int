@@ -50,10 +50,7 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
 
                 if (workflowInfo.workflowId) {
                     IWorkflows.get(workflowInfo.workflowId).then(function (data) {
-                        if (data.state == workflowInfo.status || 'completed') {
-                            // var currentDocument = _.first(_.filter($scope.records, function(doc) {
-                            //     return doc.documentId == document.header.documentId;
-                            // }));
+                        if (data.state == 'completed') {
                             $scope.showRequestHistory = false;
                         } else {
                             $timeout(function () {
@@ -121,7 +118,7 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
 
                 return $q.when(IStorage.documents.delete(record.identifier)).then(function () {
                     $scope.recordToDelete = null;
-                    toastr.info('<h1>Record deleted.</h1>', {
+                    toastr.info('Record deleted.', {
                         allowHtml: true
                     });
                     $location.path("/register/" + record.schema);
@@ -131,7 +128,7 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
             };
 
 
-            $scope.askDeleteWorkflowRequest = function () {
+            $scope.askRecallWorkflowRequest = function () {
                 $scope.recordForDeleteWorkflowRequest = $scope.document;
             };
             $scope.deleteWorkflowRequest = function (record) {
@@ -151,7 +148,7 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
 
 
             var deleteRecordModal = $element.find("#deleteRecordModal");
-            var deleteWorkflowRequestMadal = $element.find("#deleteWorkflowRequestModal");
+            var deleteWorkflowRequestMadal = $element.find("#recallWorkflowRequestModal");
 
             $scope.$watch("recordToDelete", function (val) {
                 if (val && !deleteRecordModal.is(":visible")) {
@@ -185,7 +182,7 @@ define(['app', 'underscore', '/app/views/forms/view/record-loader.directive.html
 
             $scope.$on('$destroy', function () {
                 $('#deleteRecordModal').remove();
-                $('#deleteWorkflowRequestModal').remove();
+                $('#recallWorkflowRequestModal').remove();
             });
 
         }

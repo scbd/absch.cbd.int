@@ -184,7 +184,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     document.limitedApplication = undefined;
 
                 if(!document.isModelContractualClause)
-                    document.isModelContractualClauseDescription = undefined;
+                    document.modelContractualClauseDescription = undefined;
 
                 if (document.absMeasures && !_.findWhere(document.absMeasures, {
                         identifier: '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'
@@ -194,7 +194,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                 if(document.absMesasureNotApplicable)
                      document.absMeasures = undefined;
                      
-                if(document.absMeasures && !document.absMeasures.geneticResource && !document.absMeasures.relevantElements)
+                if(document.absMeasures && !document.absMeasures.geneticResourceElements && !document.absMeasures.relevantElements)
                     document.absMeasures = undefined;
                 
                 if(document.absMeasures){

@@ -42,7 +42,7 @@
 
     <div class="alert alert-danger" ng-show="versions && versions[0].body.amendmentIntent==1">
         <div class="text-center">
-            <h1 class="color-white">THIS CERTIFICATE HAS BEEN REVOKED</h1>
+            <h1 class="color-white">THIS CERTIFICATE HAS BEEN REVOKED AND IS NO LONGER VALID</h1>
             <p>
                 See amendment history for more information.
             </p>
@@ -119,13 +119,13 @@
     			</div>
         </div>
 
-         <div class="col-xs-12" ng-if="document.referenceToNationalPermit">
+         <!--<div class="col-xs-12" ng-if="document.referenceToNationalPermit">
             <label>Reference to other internationally recognized certificate(s) of compliance that relate(s) to this permit</label>
             <div class="text" ng-bind-html="renderHtml(document.referenceToNationalPermit)"></div>
-        </div>
+        </div>-->
         <div ng-show="document.relatedIRCCs">
                 <label>Unique identifier(s) of related internationally recognized certificate(s) of compliance</label>
-                <div class="km-value" ng-repeat="item in document.relatedIRCCs">
+                <div class="text" ng-repeat="item in document.relatedIRCCs">
                      <span view-default-reference ng-model="item.identifier" locale="locale"></span>
                 </div>
             </div>
@@ -351,7 +351,7 @@
             </div>
             <div class="col-xs-2">
                 <span ng-show="document.body.amendmentIntent==1">
-                    <strong>REVOKED</strong>
+                    <span class="bold color-red"> REVOKED</span>
                 </span>
                 <span ng-show="((versions.length>1 && document.body.amendmentIntent!=1 && document.revision < versions.length))">
                     <span class="bold color-green"> OLD VERSION</span>
@@ -362,7 +362,7 @@
             </div>
             <div class="col-xs-4">
                 <span ng-bind-html="document.body.amendmentDescription| lstring:locale"></span>
-                <span ng-show="document.body.amendmentIntent==undefined">Permit information published to the ABS clearing-house and certificate generated.</span>
+                <span ng-show="document.body.amendmentIntent==undefined">Permit information published to the ABS clearing-house and certificate constituted.</span>
             </div>
              <div class="col-xs-4">
                 {{document | uniqueID}}

@@ -1,20 +1,20 @@
 define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', '/app/js/common.js',
-    '/app/services/search-service.js', '/app/services/role-service.js',
+    '/app/services/search-service.js', '/app/services/role-service.js','scbd-angularjs-controls',
     './directives/register-top-menu.js', '../directives/block-region-directive.js',
-	'/app/views/forms/edit/editFormUtility.js', '/app/views/register/directives/record-type-header.html.js'],
+	'/app/views/forms/edit/editFormUtility.js', '/app/views/register/directives/record-type-header.html.js',
+    '/app/services/local-storage-service.js', 'ngDialog', '/app/services/app-config-service.js'
+],
     function (app, _) {
         "use strict";
 
         app.controller("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage", '$rootScope',
-            'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", "$element", "breadcrumbs",
+            'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", 
+            "$element", "breadcrumbs", "localStorageService", "ngDialog", "appConfigService",
             function ($timeout, commonjs, bootbox, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
-                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs) {
+                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, appConfigService) {
 
                 $scope.orderBy = ['-updatedOn'];
-
-                var deleteRecordModel = $element.find("#deleteRecordModel");
-                var duplicateRecordModel = $element.find("#duplicateRecordModel");
-                var deleteWorkflowRequestMadal = $element.find("#deleteWorkflowRequestModal");
+                $scope.amendmentDocument = {locales:['en']};
 
                 $element.find("[data-toggle='tooltip']").tooltip({
                     trigger: 'hover'
@@ -27,56 +27,6 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         'document_type': $filter("schemaName")(type)
                     };
                 }
-
-
-                $scope.$watch("recordToDelete", function (val) {
-                    if (val && !deleteRecordModel.is(":visible")) {
-                        deleteRecordModel.appendTo('body').modal("show");
-                    }
-                    if (!val && deleteRecordModel.is(":visible")) {
-                        deleteRecordModel.modal("hide");
-                    }
-                });
-
-                $scope.$watch("recordToDuplicate", function (val) {
-                    if (val && !duplicateRecordModel.is(":visible")) {
-                        duplicateRecordModel.appendTo('body').modal("show");
-                    }
-                    if (!val && duplicateRecordModel.is(":visible")) {
-                        duplicateRecordModel.modal("hide");
-                    }
-                });
-                $scope.$watch("recordForDeleteWorkflowRequest", function (val) {
-                    if (val && !deleteWorkflowRequestMadal.is(":visible")) {
-                        deleteWorkflowRequestMadal.appendTo('body').modal("show");
-                    }
-                    if (!val && deleteWorkflowRequestMadal.is(":visible")) {
-                        deleteWorkflowRequestMadal.modal("hide");
-                    }
-                });
-
-                deleteRecordModel.on("hidden.bs.modal", function () {
-                    $timeout(function () {
-                        $scope.recordToDelete = null; //clear on backdrop click
-                    });
-                });
-
-                duplicateRecordModel.on("hidden.bs.modal", function () {
-                    $timeout(function () {
-                        $scope.recordToDuplicate = null; //clear on backdrop click
-                    });
-                });
-                deleteWorkflowRequestMadal.on("hidden.bs.modal", function () {
-                    $timeout(function () {
-                        $scope.recordForDeleteWorkflowRequest = null; //clear on backdrop click
-                    });
-                });
-
-                $scope.$on('$destroy', function () {
-                    $('#deleteRecordModel').remove();
-                    $('#duplicateRecordModel').remove();
-                    $('#deleteWorkflowRequestModal').remove();
-                });
                 $scope.toggleOrderBy = function (key) {
                     if (key == $scope.orderBy[0].substr(1))
                         $scope.orderBy = (($scope.orderBy[0].substr(0, 1) == '+') ? '-' : '+') + key;
@@ -92,51 +42,27 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                 //
                 //
                 //============================================================
-                $scope.edit = function (record) {
-
-                    $scope.$emit("editDocument", record.type, record.identifier);
-                };
-
-                //============================================================
-                //
-                //
-                //============================================================
-                $scope.newDoc = function () {
-
-                    $scope.$emit("newDocument", $scope.schema);
-                };
-
-                //============================================================
-                //
-                //
-                //============================================================
                 $scope.askDelete = function (record) {
 
-                    if (roleService.isIAC() && !roleService.isAnyOtherRoleThenIAC()) {
-                        $scope.iacCantDelete = true;
-                        $scope.cantDelete = false;
-                        $scope.recordToDelete = "0";
-
-                    }
-                    if (!(roleService.isAbsPublishingAuthority() || roleService.isAbsNationalFocalPoint() ||
-                        roleService.isAbsAdministrator() || roleService.isAdministrator())) {
-                        $scope.cantDelete = false;
-                        $scope.iacCantDelete = true;
-                        $scope.recordToDelete = "0";
-                    }
-                    else {
-                        if (record.type == 'absPermit' && $scope.isPublished(record)) {
-                            //cant delete only modify
-                            $scope.pilotDelete = true;
-                            $scope.cantDelete = true;
-                            $scope.recordToDelete = "0"; //TODO:only for pilot phase
-                        } else {
+                    if (record.type == 'absPermit' && $scope.isPublished(record)) {
+                        $scope.loading = true;                        
+                        $scope.isIRCC = true;
+                        $q.when(storage.documents.get(record.identifier))
+                        .then(function (result) {   
                             $scope.recordToDelete = record;
-                            $scope.cantDelete = false;
-
-                        }
+                            $scope.recordToDelete.document = result.data;
+                            $scope.recordToDelete.document.amendmentDescription = undefined;
+                        }).finally(function(){$scope.loading=false;});
+                    } else {
+                        $scope.recordToDelete = record;
+                        $scope.isIRCC = false;
                     }
 
+                    $q.when(storage.documents.security.canDelete(record.identifier, record.type))
+                    .then(function (allowed){
+                        $scope.security = {canDelete : allowed };
+                    })
+                    ngDialog.open({template: 'deleteRecordModal', scope : $scope});
                 };
 
                 //============================================================
@@ -148,11 +74,13 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                     $scope.loading = true;
 
-                    return $q.when(storage.drafts.delete(record.identifier)).then(function () {
+                    return $q.when(storage.drafts.delete(record.identifier))
+                    .then(function () {
 
-                        recordDeleted(record);
+                        recordDeleted(record, true);
                         $scope.recordToDelete = null;
-
+                        $scope.security = undefined;
+                        $scope.closeDialog();
                     }).finally(function () {
                         delete $scope.loading
                     });
@@ -166,20 +94,131 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                     $scope.loading = true;
 
-                    return $q.when(storage.documents.delete(record.identifier)).then(function () {
-                        //alert($("#record" + record.identifier));
-                        // $("#record" + record.identifier).toggle('Explode');
-                        //
-                        // $timeout(function(){
-                        $scope.$emit("documentDeleted", record);
-                        $scope.recordToDelete = null;
-                        // },1500);
+                    return $q.when(editFormUtility.deleteDocument(record, $scope.additionalInfo))
+                    .then(function (workflowInfo) {
+                        localStorageService.set('workflow-activity-status', {
+                            identifier : record.identifier, type: $scope.security.canDelete ? 'delete' : 'request',
+                            workflowId : workflowInfo._id
+                        });
+                         var currentDocument = _.findWhere($scope.records, {identifier: record.identifier})
+                         currentDocument.workflowActivityStatus = 'pending';
 
+                        $scope.recordToDelete = null;
+                        $scope.security = undefined;
+                        $scope.closeDialog();
                     }).finally(function () {
                         delete $scope.loading
                     });
                 };
 
+                $scope.revokeRecord = function(record){
+                    if(!record.document)
+                        return;
+                    if(!record.document.amendmentDescription || _.values(record.document.amendmentDescription).length == 0)
+                        return record.showRevokeError = true;
+                    
+                    $scope.loading = true;
+                    var document = record.document;
+                    document.amendmentIntent = 1;
+                    record.showRevokeError = false;
+
+                    return $q.when(editFormUtility.publishRequest(document))
+                            .then(function (document) {                                 
+                                $scope.amendmentDocument = {locales:['en']};
+                                $scope.recordToDelete = null;
+
+                                localStorageService.set('workflow-activity-status', {
+                                    identifier : record.identifier, type:'revoke',
+                                    workflowId : document._id
+                                });
+                                var currentDocument = _.findWhere($scope.records, {identifier: record.identifier})
+                                currentDocument.workflowActivityStatus =  'pending';
+                                $scope.closeDialog();
+                            }).finally(function () {
+                                delete $scope.loading
+                            });
+                }
+                //============================================================
+                //
+                //
+                //============================================================
+                $scope.askDuplicate = function (record) {
+
+                    $scope.recordToDuplicate = record;
+                    ngDialog.open({template: 'duplicateRecordModal', scope : $scope});
+                };
+
+                $scope.duplicate = function (entity) {
+                    $scope.loading = true;
+                    var document;
+                    //	console.log(entity);
+                    if ($scope.isDraft(entity) || $scope.isRequest(entity)) {
+                        document = storage.drafts.get(entity.identifier)
+                    } else if ($scope.isPublished(entity)) {
+                        document = storage.documents.get(entity.identifier);
+                    }
+
+                    return $q.when(document).then(function (document) {
+                        //console.log(document);
+                        if (!document.data)
+                            throw "Invalid document";
+
+                        document = document.data;
+                        document.header.identifier = guid();
+
+                        if(document.header.schema == 'absPermit'){
+                            document.amendmentIntent = undefined;
+                            document.amendmentDescription = undefined;
+                        }
+
+                        return editFormUtility.saveDraft(document);
+
+                    }).then(function (draftInfo) {
+                        $scope.records.push(draftInfo);
+                        $timeout(function () {
+                            highlight("#record" + draftInfo.identifier); //.effect( "shake" );
+                        }, 500)
+
+                        $scope.closeDialog();
+                        return draftInfo;
+
+                    }).catch(function (error) {
+                        $scope.closeDialog();
+                        if (error.status == 403) {
+                            ngDialog.open({template: 'unauthorisedError'});
+                        }
+                        else
+                             ngDialog.open({template: '<p>' + error.message||(error.data||{}).message + '</p>', plane:true});                        
+
+                    }).finally(function () {
+                        $scope.loading = false;
+                        $scope.recordToDuplicate = null;
+                    });
+                };
+
+                //============================================================
+                //
+                //
+                //============================================================
+                $scope.askRecallWorkflowRequest = function (record) {
+                    $scope.recordForDeleteWorkflowRequest = record;
+                    ngDialog.open({template: 'recallWorkflowRequestModal', scope : $scope});
+                };
+
+                $scope.deleteWorkflowRequest = function (record) {
+                    console.log(record);
+                    $scope.loading = true;
+                    IWorkflows.cancel(record.workingDocumentLock.lockID.replace('workflow-', ''), { 'action': 'cancel' })
+                        .then(function (data) {
+                            $timeout(function () {
+                                highlight("#record" + record.identifier);
+                            }, 500);
+                            $scope.recordForDeleteWorkflowRequest = null;
+                        })
+                        .finally(function () {
+                            $scope.loading = false;
+                        });
+                };
                 //============================================================
                 //
                 //
@@ -251,36 +290,6 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                     return "";
                 };
 
-                //============================================================
-                //
-                //
-                //============================================================
-                $scope.loadDocument = function (item) {
-
-                    if (item.data)
-                        return;
-
-                    item.data = {
-                        'schema': item.type,
-                        'url_ss': '',
-                        'data': []
-                    };
-                    // $http.get("/api/v2013/documents/"+item.identifier).then(function (result) {
-                    //     item.data = result.data;
-                    //
-                    $http.get("/api/v2013/documents/" + item.identifier + "?info").then(function (result) {
-                        item.data = angular.copy(result.data.body);
-                        item.data.info = result.data;
-                        delete item.data.info.body;
-                    });
-                    // 	// if(item.type='absPermit'){
-                    // 	// 	console.log($scope.records);
-                    // 	// }
-                    //
-                    // });
-                    //href="/database/record?documentID={{record.documentID}}"
-                }
-
                 $scope.showAddButton = function () {
 
                     return roleService.isAbsPublishingAuthority() ||
@@ -295,165 +304,56 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                 $scope.isIAC = function () {
                     return roleService.isIAC();
-                }
+                }   
 
-                //============================================================
-                //
-                //
-                //============================================================
-                $scope.askDuplicate = function (record) {
+                var evtServerPushNotification = $rootScope.$on('event:server-pushNotification', function(evt,data){
+                    if((data.type == 'workflowActivityStatus' || data.type == 'userNotification') &&
+                      data.data && data.data.identifier){
+                          
+                        var document = _.findWhere($scope.records, {identifier: data.data.identifier})
+                        var updateDocument = true;
+                        if(localStorageService.get('workflow-activity-status')){
+                            
+                            var localStorageDocument = localStorageService.get('workflow-activity-status');
+                            if(localStorageDocument.identifier == data.data.identifier){ 
+                                if( (data.data.workflowActivity == 'document-lock' && _.contains(['revoke', 'request'], localStorageDocument.type)) || 
+                                    (data.data.workflowActivity == 'create-revision-from-draft' && _.contains(['revoke', 'publish'], localStorageDocument.type)) || 
+                                    (data.data.workflowActivity == 'document-deleted' && 'delete'==localStorageDocument.type)){
 
-                    $scope.recordToDuplicate = record;
-
-                };
-
-                $scope.duplicate = function (entity) {
-                    $scope.loading = true;
-                    var document;
-                    //	console.log(entity);
-                    if ($scope.isDraft(entity) || $scope.isRequest(entity)) {
-                        document = storage.drafts.get(entity.identifier)
-                    } else if ($scope.isPublished(entity)) {
-                        document = storage.documents.get(entity.identifier);
-                    }
-
-                    return $q.when(document).then(function (document) {
-                        //console.log(document);
-                        if (!document.data)
-                            throw "Invalid document";
-
-                        document = document.data;
-
-                        document.header.identifier = guid();
-
-                        return editFormUtility.saveDraft(document);
-
-                    }).then(function (draftInfo) {
-                        recordDuplicated(draftInfo)
-                        //$scope.records.push(draftInfo);
-                        $timeout(function () {
-                            highlight("#record" + draftInfo.identifier); //.effect( "shake" );
-                        }, 500)
-
-
-                        return draftInfo;
-
-                    }).catch(function (error) {
-                        if (error.error.indexOf('Not authorized to save draft') >= 0) {
-                            bootbox.alert('You are not authorized to create duplicate records.')
+                                    if(document && localStorageDocument.type == 'revoke' && data.data.workflowActivity == 'create-revision-from-draft')
+                                        document.revoked = true;
+                                     
+                                    localStorageService.remove('workflow-activity-status');
+                                }
+                                else
+                                    updateDocument = false;
+                            }
+                        }                        
+                        if(document && updateDocument){
+                            if(data.data.workflowActivity == 'document-deleted'){
+                                recordDeleted(document);
+                                //$scope.records.splice($scope.records.indexOf(document), 1);
+                            }
+                            else{
+                                updateDocumentStatus(document.identifier, data.data.workflowActivity);
+                            }
                         }
-                        $scope.$emit("documentError", {
-                            action: "duplicate",
-                            error: error
-                        })
-
-                    }).finally(function () {
-                        $scope.loading = false;
-                        $scope.recordToDuplicate = null;
-                    });
-                };
-
-                $scope.$on('shakeUpdatedRecord', function (evt, document) {
-                    //console.log(document);
-                    //$("#record" + document.identifier).toggle('toggleUpdated',1000);
-                    highlight("#record" + document.identifier);
-                    //$("#record" + document.identifier).toggle('explode',{},500);
+                    }
                 });
 
-                $scope.updateWorkflowList = function (document, workflowInfo) {
 
-                    var currentDocument = _.first(_.filter($scope.records, function (doc) {
-                        return doc.identifier == document.header.identifier;
-                    }));
-
-                    if (currentDocument)
-                        currentDocument.isUpdating = true;
-
-                    $scope.refreshworkflowRecord(document, workflowInfo)
-                };
-
-                $scope.askDeleteWorkflowRequest = function (record) {
-                    $scope.recordForDeleteWorkflowRequest = record;
-                };
-
-                $scope.deleteWorkflowRequest = function (record) {
-                    console.log(record);
-                    $scope.loading = true;
-                    IWorkflows.cancel(record.workingDocumentLock.lockID.replace('workflow-', ''), { 'action': 'cancel' })
-                        .then(function (data) {
-                            $scope.$emit("documentWorkflowRequestDeleted", record);
-                            $timeout(function () {
-                                highlight("#record" + record.identifier);
-                            }, 500);
-                            $scope.recordForDeleteWorkflowRequest = null;
-                        })
-                        .finally(function () {
-                            $scope.loading = false;
-                        });
-                };
-
-                $scope.refreshworkflowRecord = function (document, workflowInfo) {
-                    if (workflowInfo.workflowId) {
-                        IWorkflows.get(workflowInfo.workflowId).then(function (data) {
-                            if (data.state == 'completed') {
-                                var currentDocument = _.first(_.filter($scope.records, function (doc) {
-                                    return doc.identifier == document.header.identifier;
-                                }));
-                                storage.documents.get(document.header.identifier, {
-                                    'info': true
-                                }).then(function (data) {
-
-                                    currentDocument.revision = data.data.revision;
-                                    currentDocument.updatedBy = data.data.updatedBy;
-                                    currentDocument.updatedOn = data.data.updatedOn;
-                                    currentDocument.workingDocumentBody = data.data.workingDocumentBody;
-                                    currentDocument.workingDocumentCreatedBy = data.data.workingDocumentCreatedBy;
-                                    currentDocument.workingDocumentCreatedOn = data.data.workingDocumentCreatedOn;
-                                    currentDocument.workingDocumentID = data.data.workingDocumentID;
-                                    currentDocument.workingDocumentLock = data.data.workingDocumentLock;
-                                    currentDocument.workingDocumentMetadata = data.data.workingDocumentMetadata;
-                                    currentDocument.workingDocumentOwner = data.data.workingDocumentOwner;
-                                    currentDocument.workingDocumentSize = data.data.workingDocumentSize;
-                                    currentDocument.workingDocumentSummary = data.data.workingDocumentSummary;
-                                    currentDocument.workingDocumentTitle = data.data.workingDocumentTitle;
-                                    currentDocument.workingDocumentUpdatedBy = data.data.workingDocumentUpdatedBy;
-                                    currentDocument.workingDocumentUpdatedOn = data.data.workingDocumentUpdatedOn;
-                                    $scope.$emit('taskAction', {
-                                        document: document,
-                                        workflowAction: workflowInfo.activity
-                                    });
-                                });
-                            } else {
-                                $timeout(function () {
-                                    $scope.refreshworkflowRecord(document, workflowInfo);
-                                }, 2000);
-                            }
-                        });
-                    }
-                }
+                $scope.$on('$destroy', function(){
+                    evtServerPushNotification();
+                })
 
                 $scope.refreshList = function (schema) {
                     loadRecords();
-                    // $scope.$emit("refreshDocumentList", {document_type:schema});
                 };
 
-                function shake(div) {
-                    var interval = 100,
-                        distance = 20,
-                        times = 10
-                    $(div).css('position', 'relative');
-                    for (var iter = 0; iter < (times + 1); iter++) {
-                        $(div).animate({
-                            left: ((iter % 2 == 0 ? distance : distance * -1))
-                        }, interval);
-                    } //for
-                    $(div).animate({
-                        left: 0
-                    }, interval, function () {
-                        $(div).css('position', 'inherit');
-                    });
-
+                $scope.closeDialog = function(){
+                    ngDialog.close();
                 }
+
 
                 function highlight(obj) {
                     $('html, body').animate({
@@ -468,7 +368,6 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
 
                 }
-
 
                 function loadRecords() {
                     $scope.loading = true;
@@ -501,10 +400,17 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                     var qDrafts = storage.drafts.query(qAnd.join(" and ") || undefined, draftParams);
 
-                    $q.all([qDocuments, qDrafts]).then(function (results) {
+                    $q.all([qDocuments, qDrafts, getRevokedDocuments(schema), loadmyTasks(schema)])
+                      .then(function (results) {
                         $scope.records = [];
                         var documents = results[0].data.Items;
                         var drafts = results[1].data.Items;
+
+                        var wokflowActive = localStorageService.get('workflow-activity-status');
+                        var revoked = schema!='absPermit' ? [] : results[2].data.response.docs;
+                        
+                        var myTasks = results[3];
+                        
 
                         var map = {};
 
@@ -516,30 +422,167 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         });
 
                         _.values(map).forEach(function (row) {
+                           //waiting for workflow status from socketIO
+                            if(wokflowActive && wokflowActive.identifier == row.identifier){
+                                if(!row.workingDocumentLock){
+                                    row.workflowActivityStatus =  'pending';
+                                    verifyWorkflowStatus(wokflowActive.workflowId, row);
+                                }else{
+                                    localStorageService.remove('workflow-activity-status');
+                                }
+                            }                         
+                            if(_.some(revoked, function(doc){ return doc.identifier_s == row.identifier})){
+                                row.revoked = true;
+                            }
+
                             $scope.records.push(row);
                         })
                         $("a[role*='button']").toggleClass('ui-disabled');
+
+                        myTasks.forEach(function(workflow) { //tweaks
+                            
+                            if(workflow.data && !_.findWhere($scope.records, {identifier: workflow.data.identifier})){
+                                $scope.records.push({
+                                    identifier  : workflow.data.identifier,
+                                    title       : workflow.data.title,
+                                    metadata    : workflow.data.metadata,
+                                    type        : workflow.data.metadata.schema
+                                });
+                            }
+                            updateDocumentStatus(workflow.data.identifier, 'status', true)
+                            
+                        });
+
                         return $scope.records;
                     })
                         .finally(function () {
                             $scope.loading = false;
                         });
                 }
-                function recordDeleted(doc) {
-                    for (var i = 0; i <= $scope.records.length; ++i) {
-                        if ($scope.records[i] == doc) {
-                            $scope.records.splice(i, 1);
-                            $scope.refreshFacets();
+                
+                function recordDeleted(doc, isDraft) {
+                    if (isDraft && $scope.isPublished(doc)){
+                        updateDocumentStatus(doc.identifier, 'draftDeleted')
+                    }
+                    else{
+                        for (var i = 0; i <= $scope.records.length; ++i) {
+                            if ($scope.records[i] == doc) {
+                                $scope.records.splice(i, 1);
+                            }
                         }
                     }
-                    toastr.info('<h1>Record deleted.</h1>', {
+                    toastr.info('Record deleted.', {
                         allowHtml: true
                     });
                 }
 
-                function recordDuplicated(doc) {
-                    $scope.records.push(doc);
-                    $scope.refreshFacets();
+                function getRevokedDocuments(schema){
+                    if(schema!= 'absPermit'){
+                        var q = $q.defer();
+                        q.resolve([]);
+                        return q.promise;
+                    }
+
+                    var filter;
+                    if(!$rootScope.user.government)
+                        filter = '_ownership_s:("' + ($rootScope.user.userGroups||[]).join('" "') + '")'
+                    else
+                        filter = 'government_s:'+$rootScope.user.government;
+
+                    var queryParameters = {
+                        //
+                        'query': 'amendmentIntent_i:1 AND ' + filter,
+                        'rowsPerPage': 100,
+                        fields: 'identifier_s'
+                    };
+                    return searchService.list(queryParameters, null);
+                }
+
+                function verifyWorkflowStatus(workflowId, document){
+
+                    IWorkflows.get(workflowId)
+                    .then(function(workflow){
+                        var activity = _.first(workflow.activities)                        
+                        if((activity && activity.completedBy) || !activity && workflow.state=="completed"){
+                            localStorageService.remove('workflow-activity-status');
+                        }
+
+                    });
+                }
+
+                function updateDocumentStatus(identifier, workflowActivity, draft){
+                  
+                  var docQuery = storage.documents.get(identifier, {'info': true });
+                  if(draft)
+                     docQuery = storage.drafts.get(identifier, {'info': true });
+
+                  return $q.when(docQuery)
+                        .then(function (data) {
+
+                            var currentDocument = _.findWhere($scope.records, {identifier: identifier})
+                            
+                            if(data.data.deletedOn){
+                                $scope.records.splice($scope.records.indexOf(currentDocument), 1);
+                                return;
+                            }
+                            
+                            currentDocument.title = data.data.title;
+                            currentDocument.documentID = data.data.documentID;
+                            currentDocument.workflowActivityStatus =  workflowActivity
+                            currentDocument.revision = data.data.revision;
+                            currentDocument.updatedBy = data.data.updatedBy;
+                            currentDocument.updatedOn = data.data.updatedOn;
+                            currentDocument.workingDocumentBody = data.data.workingDocumentBody;
+                            currentDocument.workingDocumentCreatedBy = data.data.workingDocumentCreatedBy;
+                            currentDocument.workingDocumentCreatedOn = data.data.workingDocumentCreatedOn;
+                            currentDocument.workingDocumentID = data.data.workingDocumentID;
+                            currentDocument.workingDocumentLock = data.data.workingDocumentLock;
+                            currentDocument.workingDocumentMetadata = data.data.workingDocumentMetadata;
+                            currentDocument.workingDocumentOwner = data.data.workingDocumentOwner;
+                            currentDocument.workingDocumentSize = data.data.workingDocumentSize;
+                            currentDocument.workingDocumentSummary = data.data.workingDocumentSummary;
+                            currentDocument.workingDocumentTitle = data.data.workingDocumentTitle;
+                            currentDocument.workingDocumentUpdatedBy = data.data.workingDocumentUpdatedBy;
+                            currentDocument.workingDocumentUpdatedOn = data.data.workingDocumentUpdatedOn;
+                            if(currentDocument.type == 'absPermit' && !draft){
+                                //delay by 2 sec for indexing to finish
+                                $timeout(function(){
+                                    $q.when(getRevokedDocuments(currentDocument.type))
+                                    .then(function(data){
+                                        if(data.data && _.some(data.data.response.docs, function(doc){ return doc.identifier_s == currentDocument.identifier})){
+                                            currentDocument.revoked = true;
+                                        }
+                                    });
+                                },2000);
+                            }
+                        })
+                        .catch(function(error){
+                            if(error.status === 404 && !draft)
+                                updateDocumentStatus(identifier, workflowActivity, true);
+                        });;
+                }
+
+                function loadmyTasks(schema){
+
+                    if(!_.contains(appConfigService.referenceSchemas, schema)){
+
+                        var defer = $q.defer();
+                        defer.resolve([]);
+                        return defer.promise;
+                    }
+
+                    var myUserID = $scope.$root.user.userID;
+                        var query    = {
+                            $and : [
+                                { "activities.assignedTo" : myUserID } ,
+                                { "closedOn"             : { $exists : false } },
+                                { "data.realm"           : appConfigService.currentRealm },
+                                { "data.metadata.schema" : schema }
+                            ]
+                        };
+
+                    return IWorkflows.query(query);
+
                 }
 
                 loadRecords();

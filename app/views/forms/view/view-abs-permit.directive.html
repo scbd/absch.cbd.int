@@ -6,7 +6,7 @@
 	<div class="record-body panel-body">
 			<div class="alert alert-danger" ng-show="!loading && document && (document.amendmentIntent==1 || showRevokedMessage)">
 				<div class="text-center">
-					<h1>THIS CERTIFICATE HAS BEEN REVOKED</h1>
+					<h1>THIS CERTIFICATE HAS BEEN REVOKED AND IS NO LONGER VALID</h1>
 					<p>
 						See amendment history for more information.
 					</p>
@@ -248,7 +248,7 @@
 
 			<div ng-show="document.usagesDescription">
 				<label>Additional information about the specified uses covered by the permit or its equivalent or use restrictions</label>
-				<div class="km-value km-pre"ng-bind-html="document.usageDescription | lstring:locale"></div>
+				<div class="km-value km-pre"ng-bind-html="document.usagesDescription | lstring:locale"></div>
 			</div>
 			<div ng-show="document.thirdPartyTransferCondition">
 				<label>Conditions for third party transfer

@@ -10,14 +10,7 @@ define(['app', '/app/views/forms/edit/edit.js',
 
 		$scope.doc = {};
         $scope.path = $location.path();
-        _.extend($scope.options, {
-            organizationTypes: function() {
-                return $http.get("/api/v2013/thesaurus/domains/Organization%20Types/terms", {
-                    cache: true
-                }).then(function(o) {
-                    return o.data;
-                });
-            },
+        _.extend($scope.options, {            
 			addressCountries         : function() {
 				return $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true })
 						.then(function(o){ return $filter("orderBy")(o.data, "name"); });
@@ -55,6 +48,22 @@ define(['app', '/app/views/forms/edit/edit.js',
             if (/^\s*$/g.test(document.middleName)) document.middleName = undefined;
             if (/^\s*$/g.test(document.lastName)) document.lastName = undefined;
             if (/^\s*$/g.test(document.notes)) document.notes = undefined;
+
+			if(document.type == "organization"){
+				document.firstName = document.middleName = document.lastName = undefined;
+				document.contactOrganization = undefined;
+			}
+			else{
+				document.organization = undefined;
+				document.organizationType = undefined;
+				if(document.contactOrganization){
+					document.address = undefined;
+					document.city	 = undefined;
+					document.state	 = undefined;
+					document.postalCode	 = undefined;
+					document.country	 = undefined;
+				}
+			}
 
             return document;
         };
