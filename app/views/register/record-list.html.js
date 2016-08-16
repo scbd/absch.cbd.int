@@ -448,8 +448,9 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                                     metadata    : workflow.data.metadata,
                                     type        : workflow.data.metadata.schema
                                 });
-                                updateDocumentStatus(workflow.data.identifier)
                             }
+                            updateDocumentStatus(workflow.data.identifier, 'status', true)
+                            
                         });
 
                         return $scope.records;
