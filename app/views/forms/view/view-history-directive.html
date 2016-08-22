@@ -1,11 +1,14 @@
 <div id="view-history" style="max-height:200px;overflow:scroll;">
-    <table style="width:100%!important;" class="table table-condensed">
+    <table style="width:100%!important;" class="table table-condensed" >
         <tr>
                 <th class="color-litegrey" style="font-size:12px;bold;"> Unique identifier</th>
                 <th class="color-litegrey" style="font-size:12px;bold;"> Status</th>
-                <th class="color-litegrey" style="font-size:12px;bold;"> Date </th>
-                <th class="color-litegrey" style="font-size:12px;bold;" ng-if="!publicView"> Requested </th>
+                <th class="color-litegrey" style="font-size:12px;bold;"> Date <span ng-if="!publicView">Published</span> </th>
+                <th class="color-litegrey" style="font-size:12px;bold;" ng-if="!publicView"> Date Requested </th>
             </tr>
+            <tr ng-show="documents.length > 0">
+             <td colspan="4" class="text-center"> no record history available </td>
+           </tr>
         <tbody ng-repeat="document in documents | orderBy:'updatedOn':true" style="font-size:12px;" >
             <tr>
                 <td style="white-space:nowrap;">
