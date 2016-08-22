@@ -184,11 +184,18 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
 
                     }).catch(function (error) {
                         $scope.closeDialog();
+                         var message;
                         if (error.status == 403) {
-                            ngDialog.open({template: 'unauthorisedError'});
+                            message = 'You are not authorized to create duplicate records.'                           
                         }
                         else
-                             ngDialog.open({template: '<p>' + error.message||(error.data||{}).message + '</p>', plane:true});                        
+                            message = error.message||(error.data||{}).message;
+                         var close = $scope.closeDialog;
+                         ngDialog.open({template: 'errorModal', 
+                                        controller: ['$scope', function($scope) {
+                                           $scope.errorMessage = message;
+                                           $scope.closeDialog = close;
+                                        }]});                        
 
                     }).finally(function () {
                         $scope.loading = false;
@@ -214,6 +221,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                                 highlight("#record" + record.identifier);
                             }, 500);
                             $scope.recordForDeleteWorkflowRequest = null;
+                            $scope.closeDialog();
                         })
                         .finally(function () {
                             $scope.loading = false;

@@ -12,7 +12,15 @@ define(['app', 'underscore', './app-config-service.js'], function (app, _) { 'us
 
 				return _.contains($rootScope.user.roles, role);
 			};
+			
+			this.isUserInRoles = function(roles) {
 
+				if (!$rootScope.user)
+					return false;
+
+				return _.intersection($rootScope.user.roles, roles).length > 0;
+			};
+			
 			this.isIAC = function() {
 				return this.isUserInRole(appConfigService.getRoleName('abschiac'));
 			}
