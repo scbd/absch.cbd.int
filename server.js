@@ -35,7 +35,7 @@ app.get('/*', function (req, res) {
 
 // Start server
 
-app.listen(process.env.PORT || 2010, function () {
+app.listen(process.env.PORT || 2010, '0.0.0.0',function () {
 	console.log('Server listening on %j', this.address());
 });
 
