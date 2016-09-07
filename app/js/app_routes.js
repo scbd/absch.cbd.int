@@ -60,7 +60,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('database/:documentID',                           { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
                when('database/:documentSchema/:documentID',           { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
                when('database/:documentSchema/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
-                
+               
                when('/register',                                           {templateUrl: '/app/views/register/dashboard.html',         label:'Management Center',  param:'true', resolveController: true, resolve : { securized : securize() }}).
                when('/dashboard',                                          {redirectTo:  '/register/dashboard'}).
                when('/register/dashboard',                                 {templateUrl: '/app/views/register/dashboard.html',         label:'Dashboard',  param:'true', resolveController: true, resolve : { securized : securize() }}).
