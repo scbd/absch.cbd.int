@@ -12,7 +12,7 @@
 		<div ng-show="document.government">
 			<label name="country">Country</label>
 			<div class="km-value">
-				{{document.government|term}}
+				{{document.government|term:locale}}
 				<span ng-party-status government="document.government" id="government"></span>
 			</div>
 		</div>
@@ -26,13 +26,13 @@
 
 		<div ng-show="document.description">
 			<label>Brief description</label>
-			<div class="km-value km-pre" ng-bind-html="document.description | lstring:local"></div>
+			<div class="km-value km-pre" ng-bind-html="document.description | lstring:locale"></div>
 		</div>
 
 		<div ng-show="document.jurisdiction">
 			<label>Jurisdiction(s)</label>
 			<div class="km-value">
-				{{document.jurisdiction|term}}
+				{{document.jurisdiction|term:locale}}
 				<span ng-if="document.jurisdictionName ">({{document.jurisdictionName | lstring:locale}})</span>
 			</div>
 		</div>
@@ -42,7 +42,7 @@
 			<label>Country name and/or Geographical or political/economic group(s)</label>
 			<div class="km-value">
 				<ul>
-					<li ng-repeat="term in document.jurisdictionRegions">{{term|term}}</li>
+					<li ng-repeat="term in document.jurisdictionRegions">{{term|term:locale}}</li>
 				</ul>
 			</div>
 		</div>
@@ -51,7 +51,7 @@
 		<div ng-show="document.status">
 			<label>Current status of the measure</label>
 			<div class="km-value">
-				{{document.status|term}}
+				{{document.status|term:locale}}
 			</div>
 		</div>
 
@@ -79,18 +79,18 @@
 		<div ng-show="document.type">
 			<label>Type of document / measure</label>
 			<div class="km-value">
-				{{document.type|term}}
+				{{document.type|term:locale}}
 			</div>
 		</div>
 
 		<div ng-show="document.isModelContractualClause">
 			<label>The measure contains model contractual clauses</label>
 			<div class="km-value" ng-if="document.modelContractualClauseDescription">
-				{{document.modelContractualClauseDescription|lstring}}
+				{{document.modelContractualClauseDescription|lstring:locale}}
 			</div>
 		</div>
 		<div ng-show="document.registeredMeasuresDescription">
-			<div class="km-value km-pre">{{document.registeredMeasuresDescription | lstring:review.local}}</div>
+			<div class="km-value km-pre">{{document.registeredMeasuresDescription | lstring:locale}}</div>
 		</div>
 
 		<div ng-show="document.documents">
@@ -149,7 +149,7 @@
 			</div>
 			<div ng-show="document.amendmentsDescription">
 				<label>Summary of the amendments</label>
-				<div class="km-value km-pre" ng-bind-html="document.amendmentsDescription | lstring:review.local"></div>
+				<div class="km-value km-pre" ng-bind-html="document.amendmentsDescription | lstring:review.locale"></div>
 			</div>
 
 		</div>
@@ -189,7 +189,8 @@
 			<span class="km-value confidential-text">The elements of the measure are not applicable for this measure.</span>
 		</div>
 		<div ng-if="document.absMeasures">
-			<div measure-matrix-elements name="absMeasures" type="single" ng-model="document.absMeasures" locales="document.header.languages" document="document" api="measureMatrixApi">
+			<div measure-matrix-elements name="absMeasures" type="single" ng-model="document.absMeasures" 
+			locale="locale" document="document" api="measureMatrixApi">
 			</div>
 		</div>
 

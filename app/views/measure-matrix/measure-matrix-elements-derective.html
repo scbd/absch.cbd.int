@@ -162,9 +162,9 @@
         <table class="table">
             <tr>
                 <td>
-                    {{$index}}. {{element.title|lstring}}
+                    {{$index}}. {{element.title|lstring:locale}}
                     <span ng-if="element.section">
-                        ({{element.section|lstring}})
+                        ({{element.section|lstring:locale}})
                     </span>
                 </td>
             </tr>
@@ -241,7 +241,7 @@
             <tbody>
               <tr ng-repeat="element in otherElements">
                     <td>
-                      - &nbsp; {{element.name|lstring}} ({{element.section|lstring}})
+                      - &nbsp; {{element.name|lstring:locale}} ({{element.section|lstring:locale}})
                     </td>
               </tr>
             </tbody>
@@ -257,7 +257,7 @@
               <span ng-repeat="area in element.areas">
                   {{area|term}} <span ng-if="!$last">,</span>
               </span>
-              <span ng-if="element.section" class="color-blue bold">({{element.section|lstring}})</span>
+              <span ng-if="element.section" class="color-blue bold">({{element.section|lstring:locale}})</span>
         </div>
     </script>
 
