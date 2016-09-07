@@ -1,7 +1,6 @@
 define(['app',
 		'scbd-angularjs-services/locale'
         ], function (app, moment) {
-
     return ["$scope", "$location", "locale","$timeout", "$window", "$routeParams",
 		function ($scope, $location, locale, $timeout, $window, $routeParams){
 			    var lang = 'en';
