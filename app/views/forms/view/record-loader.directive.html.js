@@ -169,9 +169,11 @@ define(['app',
 					//
 					//==================================
 					$scope.getLocale = function () {
-						return $scope.$root.locale;
+						return $scope.currentLocale || $scope.$root.locale;
 					}
-
+					$scope.setLocale = function(locale){
+						$scope.currentLocale = locale
+					}
 					//==================================
 					//
 					//==================================
