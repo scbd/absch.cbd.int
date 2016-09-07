@@ -166,7 +166,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
 
                     var nationalRecordsQuery = {
                         fields: 'government_s,schema_s',
-                        query: 'schema_s:(' + appConfigService.nationalSchemas.join(' ') + ')'
+                        query: 'NOT virtual_b:* AND schema_s:(' + appConfigService.nationalSchemas.join(' ') + ')'
                     };
                     return this.facetsPivot(nationalRecordsQuery, 'governmentFacets');
 
