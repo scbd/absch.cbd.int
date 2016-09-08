@@ -2,16 +2,27 @@ define(['app', '/app/js/common.js',
     '/app/views/forms/view/record-loader.directive.html.js',
     '/app/views/register/directives/register-top-menu.js', 'ngDialog'
 ], function (app) {
-    app.controller('adminReportedRecordsCtrl', ['$scope', '$http', '$timeout', '$element', 'ngDialog',
-        function ($scope, $http, $timeout, $element, ngDialog) {
+    app.controller('adminReportedRecordsCtrl', ['$scope', '$http', '$timeout', '$element', 'ngDialog', '$routeParams',
+        function ($scope, $http, $timeout, $element, ngDialog, $routeParams) {
             
-            
-            $http.get('/api/v2015/report-records')
+            $scope.api = {};
+            var recordId='';
+            if($routeParams.id){
+                recordId = '/' + $routeParams.id;
+            }
+
+            $http.get('/api/v2015/report-records' + recordId)
                 .then(function (data) {
-                    $scope.reportRecords = data.data
+                    if($routeParams.id){
+                        var record = data.data;
+                        record.showDoc = true;
+                        $scope.loadDocumentDetails(record.showDoc, record)
+                        $scope.reportRecords = [record];                        
+                    }
+                    else
+                        $scope.reportRecords = data.data
                 });
 
-            $scope.api = {};
             
             $scope.loadDocumentDetails = function (showDoc, record) {
                 if (showDoc) {
