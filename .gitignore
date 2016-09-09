@@ -13,10 +13,10 @@ lib-cov
 pids
 logs
 results
-
 npm-debug.log
 node_modules
 app/libs
 app_build
 app/views/mockups
 .vscode
+i18n
