@@ -86,7 +86,7 @@ function* serveLanguageFile(req){
                 language = parseCookies(req, 'Preferences').replace('Locale=','');
 
            if(_.includes(validLanguages, language.toLowerCase())){
-       
+                      
                 var path = `/i18n/${language}/app${req.url}`;               
 
                 let statsLang;
