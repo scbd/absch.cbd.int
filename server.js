@@ -17,7 +17,7 @@ var oneDay   = 86400000;
 
 app.use('/app', function(req, res, next) {
 	
-    var langFilepath = servelangugeFile(req);
+    var langFilepath = serveLanguageFile(req);
     if(langFilepath)    
         return res.sendFile(langFilepath);
     // console.log(req.url)
@@ -44,7 +44,7 @@ app.get('/*', function (req, res) {
     res.cookie('VERSION', process.env.VERSION);
 
     req.url = '/template.html';
-    var langFilepath = servelangugeFile(req);
+    var langFilepath = serveLanguageFile(req);
     if(langFilepath)    
         return res.sendFile(langFilepath);
 
@@ -63,8 +63,8 @@ proxy.on('error', function(err) {
 
 process.on('SIGTERM', ()=>process.exit());
 
-function servelangugeFile(req){
-    var htlmRegex = /.html$/g;
+function serveLanguageFile(req){
+    var htlmRegex = /.html[^.]/g;
     var cookieLangRegex = /Preferences=Locale=(ar|fr|es|ru|zh)/g
     var url = req.url;
     if(htlmRegex.test(url)){
