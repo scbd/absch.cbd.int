@@ -5,7 +5,7 @@ machine:
 dependencies:
   override:
     - docker info
-    - docker build -t output --build-arg VERSION=$CIRCLE_SHA1 .
+    - docker build -t output --build-arg VERSION=$CIRCLE_SHA1 BRANCH=$CIRCLE_BRANCH .
 
 test:
   override:
