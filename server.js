@@ -51,6 +51,7 @@ app.get('/?:lang(ar|en|es|fr|ru|zh)?/*', function (req, res) {
 
         return res.render(__dirname + '/app/template.ejs', options);  
     })
+
 });
 
 // Start server
