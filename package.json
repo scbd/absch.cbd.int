@@ -4,7 +4,8 @@
   "dependencies": {
     "bower": "1.7.9",
     "express": "4.13.4",
-    "http-proxy": "1.13.2"
+    "http-proxy": "1.13.2",
+    "lodash": "^4.15.0"
   },
   "engine": "node >= 4.2",
   "private": true,
