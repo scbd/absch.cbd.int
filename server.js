@@ -81,11 +81,8 @@ function serveLanguageFile(req){
                 language = parseCookies(req, 'Preferences').replace('Locale=','');
 
            if(_.includes(validLanguages, language.toLowerCase())){
-                // console.log(req.url);
+                
               var path = `/i18n/${language}/app${req.url}`;
-            //   if(req.url.indexOf('/app')>=0){
-            //       console.log(req.url);
-            //   }
               if (fs.existsSync(__dirname + path)) {
                   var statsLang  = fs.statSync(__dirname + path);
                   var statsEN    = fs.statSync(`${__dirname}/app${req.url}`);
