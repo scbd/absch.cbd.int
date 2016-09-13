@@ -25,7 +25,7 @@ COPY package.json bower.json .bowerrc .npmrc ./
 RUN npm install -q
 
 #copy touched files from EN version
-RUN mv -f /usr/tmp/i18n/en/* ./
+RUN mv -f /usr/tmp/i18n/en/app ./app
 
 #copy touched files from Other UN lang version
 RUN mkdir ./i18n
