@@ -35,6 +35,8 @@ COPY package.json bower.json .bowerrc .npmrc ./
 
 RUN npm install -q
 
+#clean up
+RUN rm -fr /usr/share/doc && rm -fr /usr/share/locale
 
 ENV PORT 8000
 
