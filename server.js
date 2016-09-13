@@ -3,8 +3,9 @@
 // Create HTTP server and proxy
 
 var _       = require('lodash');
-var fs      = require('fs');
+var fs      = require('co-fs');
 var util    = require('util');
+var co      = require('co');
 var express = require('express');
 var proxy   = require('http-proxy').createProxyServer({});
 var app     = express();
@@ -16,12 +17,14 @@ var oneDay   = 86400000;
 // Set routes
 
 app.use('/app', function(req, res, next) {
-	
-    var langFilepath = serveLanguageFile(req);
-    if(langFilepath)    
-        return res.sendFile(langFilepath);
-    // console.log(req.url)
-    next();
+	co(function*(){
+        let langFilepath = yield serveLanguageFile(req);
+        if(langFilepath)    
+            return res.sendFile(langFilepath);
+        // console.log(req.url)
+        next();
+    })
+    // console.log('finish first step');
 });
 
 app.use('/app',             express.static(__dirname + '/app'));
@@ -47,12 +50,14 @@ app.get('/*', function (req, res) {
    }   
    res.cookie('appVersion', appVersion);
    res.cookie('VERSION', process.env.VERSION);  
-    req.url = '/template.html';
-    var langFilepath = serveLanguageFile(req);
-    if(langFilepath)    
-        return res.sendFile(langFilepath);
+   req.url = '/template.html';   
+   co(function*(){
+        var langFilepath = yield serveLanguageFile(req);
+        if(langFilepath)    
+            return res.sendFile(langFilepath);
 
-    res.sendFile(__dirname + '/app/template.html');
+        res.sendFile(__dirname + '/app/template.html');
+    })
 });
 
 // Start server
@@ -66,8 +71,8 @@ proxy.on('error', function(err) {
 
 process.on('SIGTERM', ()=>process.exit());
 
-function serveLanguageFile(req){
-    var htlmRegex = /.html[^.]/g;
+function* serveLanguageFile(req){
+    var htlmRegex = /.html/g; ///.html?[^.]/g//\.html(?!.js)
     var cookieLangRegex = /Preferences=Locale=(ar|fr|es|ru|zh)/g
     var url = req.url;
     if(htlmRegex.test(url)){
@@ -81,17 +86,22 @@ function serveLanguageFile(req){
                 language = parseCookies(req, 'Preferences').replace('Locale=','');
 
            if(_.includes(validLanguages, language.toLowerCase())){
-                
-              var path = `/i18n/${language}/app${req.url}`;
-              if (fs.existsSync(__dirname + path)) {
-                  var statsLang  = fs.statSync(__dirname + path);
-                  var statsEN    = fs.statSync(`${__dirname}/app${req.url}`);
+       
+                var path = `/i18n/${language}/app${req.url}`;               
 
-                  var mLangtime  = new Date(util.inspect(statsLang.mtime));
-                  var mENtime    = new Date(util.inspect(statsEN.mtime));
-                  if(mLangtime >= mENtime)
-                    return __dirname + path;
-              }  
+                let statsLang;
+                try{
+                    statsLang  = yield fs.stat(__dirname + path);
+                }catch(e){}
+                if (statsLang && statsLang.isFile()) {
+                    
+                    var statsEN    = yield fs.stat(`${__dirname}/app${req.url}`);
+
+                    var mLangtime  = new Date(util.inspect(statsLang.mtime));
+                    var mENtime    = new Date(util.inspect(statsEN.mtime));
+                    if(mLangtime >= mENtime)
+                        return __dirname + path;
+                }
            }
         }
     }
