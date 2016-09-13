@@ -15,7 +15,6 @@ var app     = express();
 var oneDay   = 86400000;
 app.set('view engine', 'ejs');
 // Set routes
-
 app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',     translation, express.static(__dirname + '/app'));
 app.use('/app',                              express.static(__dirname + '/app'));
 app.use('/cbd-forums',      express.static(__dirname + '/app/libs/cbd-forums'));
