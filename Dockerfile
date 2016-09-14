@@ -28,12 +28,9 @@ RUN npm install -q
 RUN mv -f /usr/tmp/i18n/en/app ./app
 
 #copy touched files from Other UN lang version
-RUN mkdir ./i18n
-RUN mv /usr/tmp/i18n/others/ar ./i18n
-RUN mv /usr/tmp/i18n/others/fr ./i18n
-RUN mv /usr/tmp/i18n/others/es ./i18n
-RUN mv /usr/tmp/i18n/others/ru ./i18n
-RUN mv /usr/tmp/i18n/others/zh ./i18n
+RUN mkdir ./i18n && mv /usr/tmp/i18n/others/zh ./i18n
+RUN mv /usr/tmp/i18n/others/ar ./i18n && mv /usr/tmp/i18n/others/fr ./i18n  
+RUN mv /usr/tmp/i18n/others/es ./i18n && mv /usr/tmp/i18n/others/ru ./i18n 
 
 #clean up
 RUN rm -fr /usr/tmp/i18n && rm -fr /usr/share/doc && rm -fr /usr/share/locale
