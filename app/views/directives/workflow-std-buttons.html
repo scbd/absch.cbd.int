@@ -9,21 +9,17 @@
     <div class="clearfix"></div>
 
     <div class="col-xs-12">
-
-
-
         <div km-form-languages ng-model="languages" style="padding-top:20px;" class="pull-left btn-xs"></div>
 
         <ul style="list-style-type:none;margin:0;padding:0;padding-top:20px;" class="pull-right">
             <li style="display: inline;"><button type="button" class="btn btn-warning " ng-click="close()" ng-disabled="loading">
                 <i class="glyphicon glyphicon-remove"></i> Close</button>
             </li>
-            <li style="display: inline;">
+            <li style="display: inline;"  ng-show="security.canSaveDraft">
                 <button type="button" class="btn btn-default bg-draft" width="50px" ng-click="tab='draft';saveDraft()" ng-disabled="loading">Save Draft
                     <i ng-show="tab=='draft' && (loading || security==undefined)" class="fa fa-spinner fa-spin"></i>
                   </button>
             </li>
-
             <li style="display: inline;" ng-show="security.canSave">
                 <button type="button" class="btn btn-danger bg-published " width="50px" ng-click="tab='publish';publish()" ng-disabled="loading">Publish
                          <i ng-show="tab=='publish' && loading" class="fa fa-spinner fa-spin"></i>
@@ -35,7 +31,6 @@
                     </button>
             </li>
         </ul>
-
     </div>
 
     <div class="clearfix"></div>
