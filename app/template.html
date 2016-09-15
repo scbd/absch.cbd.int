@@ -26,8 +26,71 @@
     <![endif]-->
 
 </head>
+<body ng-controller="TemplateController" id="top" lang="en">
+    <div class="m-app-loading" ng-animate-children>
+        <!--
+            HACKY CODE WARNING: I'm putting Style block inside directive so that it
+            will be removed from the DOM when we remove the directive container.
+        -->
+        <style type="text/css">
+            div.m-app-loading {
+                position: fixed ;
+            }
+            div.m-app-loading div.animated-container {
+                background-color: #FFFFFF ;
+                bottom: 0px ;
+                left: 0px ;
+                opacity: 1.0 ;
+                position: fixed ;
+                right: 0px ;
+                top: 0px ;
+                z-index: 999999 ;
+            }
+            /* Used to initialize the ng-leave animation state. */
+            div.m-app-loading div.animated-container.ng-leave {
+                opacity: 1.0 ;
+                transition: all linear 200ms ;
+                    -webkit-transition: all linear 200ms ;
+            }
+            /* Used to set the end properties of the ng-leave animation state. */
+            div.m-app-loading div.animated-container.ng-leave-active {
+                opacity: 0 ;
+            }
+            div.m-app-loading div.messaging {
+                color: #1FA65D ;
+                font-family: monospace ;
+                left: 0px ;
+                margin-top: -37px ;
+                position: absolute ;
+                right: 0px ;
+                text-align: center ;
+                top: 50% ;
+            }
+            div.m-app-loading h1 {
+                font-size: 26px ;
+                line-height: 35px ;
+                margin: 0px 0px 20px 0px ;
+            }
+            div.m-app-loading p {
+                font-size: 18px ;
+                line-height: 14px ;
+                margin: 0px 0px 0px 0px ;
+            }
+        </style>
 
-<body ng-controller="TemplateController" ng-cloak id="top">
+
+        <!-- BEGIN: Actual animated container. -->
+        <div class="animated-container">
+            <div class="messaging">
+                <span class="color-orange ng-scope" ng-if="development_env" style="font-size:48px;font-weight:bold;"> 
+                    <img src="http://absch.cbd.int/app/img/cbd-spine.png" style="height:60px;position:relative;top:-5px;padding:0 5px 0 0;margin:0;">ABSCH 
+                    <img src="http://absch.cbd.int/app/img/cbd-logo-green-en.svg" style="height:60px;position:relative;top:-5px;padding:0 5px 0 0;margin:0;">
+                </span>
+                <h1>
+                    <i class="fa fa-spin fa-3x fa-circle-o-notch"></i> ABSCH is loading
+                </h1>
+            </div>
+
 
     <iframe   id="authenticationFrame" style="display:none"></iframe>
     <script>
