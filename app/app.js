@@ -62,7 +62,33 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
                 $location.path(path);
                 if (!keep_previous_path_in_history) $location.replace();
             };
-
+            $rootScope.$on('$locationChangeSuccess', function (evt, newUrl, oldUrl) {
+                
+                console.log('success', newUrl, oldUrl);
+            });
+            $rootScope.$on('$locationChangeStart', function (evt, newUrl, oldUrl) {
+                
+                console.log('start', newUrl, oldUrl);
+            });
+            $rootScope.$on('$routeChangeSuccess', function (evt, newUrl, oldUrl) {
+                
+                console.log('route success', newUrl, oldUrl);
+            });
+            // var activePath;
+            $rootScope.$on('$routeChangeStart', function (evt, next, current) {
+                
+                 console.log(locale);
+                // var langRegex = new RegExp('^\/(ar|en|es|fr|ru|zh)')
+                // if (locale != 'en' && !langRegex.test($location.path()) && $location.path().indexOf("/lang/")<0    
+                //     && $rootScope.activePath != $location.path()) {
+                //     evt.preventDefault();
+                //     $rootScope.activePath = '/' + locale + $location.path();
+                //    console.log( $rootScope.activePath)
+                //     $rootScope.$evalAsync(function() {
+                //         $location.path( $rootScope.activePath);
+                //     });
+                // }
+            });
         }]);
 
         return app;

@@ -1,11 +1,13 @@
 'use strict';
 
-define(['app', 'angular', '../services/app-config-service'], function(app, angular) {
-
+define(['app', 'angular', 'angular-regex', '../services/app-config-service', 'scbd-angularjs-services/locale'], function(app, angular) {
+    // app.provider('$route', app.RouteProviderRegex);
     app.provider('extendedRoute', ["$routeProvider", function($routeProvider) {
+        
+        var baseUrl =  '/';//$('#appBaseUrl').text();
 
         var __when = $routeProvider.when.bind($routeProvider);
-  // console.log(__when);
+
         //============================================================
         //
         //
@@ -22,8 +24,9 @@ define(['app', 'angular', '../services/app-config-service'], function(app, angul
             if(route.resolveUser) {
                 ext.resolve.user = resolveUser();
             }
-
-            return __when(path, angular.extend(route, ext));
+            var prj = proxy;
+             console.log(baseUrl+path);
+            return __when(baseUrl+path, angular.extend(route, ext));
         }
 
         return angular.extend($routeProvider, { when: new_when });
@@ -55,7 +58,6 @@ define(['app', 'angular', '../services/app-config-service'], function(app, angul
         function resolveUser() {
             return ['$rootScope', 'authentication', function($rootScope, authentication) {
                 return authentication.getUser().then(function (user) {
-//                    console.log('route',user);
                     return user;
                 });
             }];

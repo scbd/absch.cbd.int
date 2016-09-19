@@ -14,28 +14,16 @@ var app     = express();
 
 var oneDay   = 86400000;
 
+app.set('view engine', 'ejs');
 // Set routes
 
-app.use('/app', function(req, res, next) {
-	co(function*(){
-        let langFilepath = yield serveLanguageFile(req);
-        if(langFilepath)    
-            return res.sendFile(langFilepath);
-        // console.log(req.url)
-        next();
-    })
-    // console.log('finish first step');
-});
+app.use('/:lang(ar|en|es|fr|ru|zh)/app',     translation, express.static(__dirname + '/app'));
+app.use('/app',                              express.static(__dirname + '/app'));
 
-app.use('/app',             express.static(__dirname + '/app'));
-app.use('/scbd-templates',  express.static(__dirname + '/app/libs/scbd-angularjs-controls/scbd-templates'));
 app.use('/cbd-forums',      express.static(__dirname + '/app/libs/cbd-forums'));
 app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { maxAge: oneDay }));
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
-app.get('/app/absPDFViewer/*'   , function(req, res) {
-	res.sendFile(__dirname + '/app/absPDFViewer/absPermitPrint.html');
-});
 
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
 app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbddev.xyz', changeOrigin: true, secure:false }));
@@ -52,11 +40,15 @@ app.get('/*', function (req, res) {
    res.cookie('VERSION', process.env.VERSION);  
    req.url = '/template.html';   
    co(function*(){
-        var langFilepath = yield serveLanguageFile(req);
-        if(langFilepath)    
-            return res.sendFile(langFilepath);
+        var langFilepath = yield getLanguageFile(req);
+        var preferredLang = getPreferredLanguage(req);
 
-        res.sendFile(__dirname + '/app/template.html');
+        var options = { baseUrl: req.headers.base_url ||  (preferredLang ? ('/'+preferredLang+'/') : '/') };
+        if(langFilepath){
+             return res.render(langFilepath, options);
+        } 
+
+        return res.render(__dirname + '/app/template.ejs', options);  
     })
 });
 
@@ -71,8 +63,44 @@ proxy.on('error', function(err) {
 
 process.on('SIGTERM', ()=>process.exit());
 
-function* serveLanguageFile(req){
-    var htlmRegex = /.html/g; ///.html?[^.]/g//\.html(?!.js)
+function translation(req, res, next) {
+
+   co(function*(){
+        let langFilepath = yield getLanguageFile(req);
+        console.log(req.url)
+        if(langFilepath){
+             return res.sendFile(langFilepath);
+        }    
+            
+        next();
+   });
+}
+
+function* getLanguageFile(req){
+
+    var preferredLang = getPreferredLanguage(req);
+    
+    if(preferredLang){
+        var path = `/i18n/${preferredLang}/app${req.url}`;               
+
+        let statsLang;
+        try{
+            statsLang  = yield fs.stat(__dirname + path);
+        }catch(e){}
+        if (statsLang && statsLang.isFile()) {
+            
+            var statsEN    = yield fs.stat(`${__dirname}/app${req.url}`);
+
+            var mLangtime  = new Date(util.inspect(statsLang.mtime));
+            var mENtime    = new Date(util.inspect(statsEN.mtime));
+            if(mLangtime >= mENtime)
+                return __dirname + path;
+        }
+    }           
+}
+
+function getPreferredLanguage(req){
+    var htlmRegex = /.(html|ejs)/g; ///.html?[^.]/g//\.html(?!.js)
     var cookieLangRegex = /Preferences=Locale=(ar|fr|es|ru|zh)/g
     var url = req.url;
     if(htlmRegex.test(url)){
@@ -86,21 +114,7 @@ function* serveLanguageFile(req){
                 language = parseCookies(req, 'Preferences').replace('Locale=','');
 
            if(_.includes(validLanguages, language.toLowerCase())){
-                var path = `/i18n/${language}/app${req.url}`;               
-
-                let statsLang;
-                try{
-                    statsLang  = yield fs.stat(__dirname + path);
-                }catch(e){}
-                if (statsLang && statsLang.isFile()) {
-                    
-                    var statsEN    = yield fs.stat(`${__dirname}/app${req.url}`);
-
-                    var mLangtime  = new Date(util.inspect(statsLang.mtime));
-                    var mENtime    = new Date(util.inspect(statsEN.mtime));
-                    if(mLangtime >= mENtime)
-                        return __dirname + path;
-                }
+               return language;
            }
         }
     }
