@@ -25,7 +25,6 @@ define(['app', 'angular', 'angular-regex', '../services/app-config-service', 'sc
                 ext.resolve.user = resolveUser();
             }
             var prj = proxy;
-        //  console.log(baseUrl+path);
             return __when(baseUrl+path, angular.extend(route, ext));
         }
 

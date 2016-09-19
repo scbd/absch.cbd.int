@@ -15,7 +15,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
 
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
-
+        var langRegex = '/(?:ar|en|es|fr\ru\zh)';
         $routeProvider.
                when('',               { templateUrl: '/app/views/home/index.html', label:'ABSCH', resolveController: true, resolveUser : true}).
                when('lang/:langCode', { templateUrl: '/app/views/shared/lang.html',label:'ABSCH', resolveController: true}).
@@ -68,7 +68,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('register/admin',                                     { templateUrl: '/app/views/register/admin.html',          label:'ABSCH Admin',    param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                when('register/notifications',                             { templateUrl: '/app/views/register/notifications.html',  label:'Notifications',  param:'true', resolveController: true,resolve : { securized : securize() }}).
                when('register/requests',                                  { redirectTo:'/register/notifications' }).
-            
+
                when('register/:document_type/status/:status',             {templateUrl: '/app/views/register/record-list.html',          param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
                when('register/national-users',                            {templateUrl: '/app/views/register/national-users/index.html', label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
                when('register/:document_type',                            {templateUrl: '/app/views/register/record-list.html',       label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).

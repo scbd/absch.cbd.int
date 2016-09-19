@@ -38,13 +38,12 @@ app.get('/?:lang(ar|en|es|fr|ru|zh)?/*', function (req, res) {
    }   
    res.cookie('appVersion', appVersion);
    res.cookie('VERSION', process.env.VERSION);
-
    req.url = '/template.ejs';
    co(function*(){
         var langFilepath = yield getLanguageFile(req);
         var preferredLang = getPreferredLanguage(req);
-
         var options = { baseUrl: urlPreferredLang || (req.headers.base_url ||  (preferredLang ? ('/'+preferredLang+'/') : '/')) };
+        
         if(langFilepath){
              return res.render(langFilepath, options);
         } 
@@ -68,7 +67,6 @@ function translation(req, res, next) {
    
    co(function*(){
         let langFilepath = yield getLanguageFile(req);
-
         if(langFilepath){
              return res.sendFile(langFilepath);
         }    
