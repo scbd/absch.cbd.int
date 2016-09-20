@@ -176,6 +176,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     document.entryIntoForce = undefined;
                 if (document.retired == '')
                     document.retired = undefined;
+                
+                if(!$scope.isTypeOther())
+                    document.otherTypeName = undefined;
 
                 if (/^\s*$/g.test(document.notes))
                     document.notes = undefined;
@@ -243,152 +246,9 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
             $scope.$on("loadDocument", function(evt, info) {
                 if (info.schema != "measure")
                     return;
-
-
-                // if($scope.document && $scope.document.absMeasures){
-                // var queries = [$scope.options.absMeasures(), $scope.options.other()]
-                // $q.all(queries)
-                //     .then(function(data) {
-                //         var elementMeasures = data[0];
-                //         var other = data[1].data;
-                //         elementMeasures = appendOthers(elementMeasures, other);
-                //         if($scope.absMeasureApi)
-                //             $scope.absMeasureApi.updateTerms(elementMeasures);
-
-                //     });
-                // }
             });
 
-            // function appendOthers(elementMeasures, other) {
-            //     _.each(elementsForOthers, function(element, key) {
-            //         var otherElement = angular.copy(other);
-            //         // if(otherElement.identifier.indexOf('#')>0)
-            //         //     otherElement.identifier = otherElement.identifier;
-            //         // else
-            //             otherElement.identifier = otherElement.identifier + '#' + key;
-            //         otherElement.broaderTerms.push(key);
-            //         var el = _.findWhere(elementMeasures, {identifier:key});
-            //         otherElement.title.en = element.title;
-            //         otherElement.description = element.description;
-            //         elementMeasures.push(otherElement);
-
-
-            //         var parentElement = _.find(elementMeasures, {
-            //             identifier: key
-            //         })
-            //         if (parentElement)
-            //             parentElement.narrowerTerms.push(otherElement.identifier);
-
-            //     });
-            //     return elementMeasures;
-            // }
-            // var elementsForOthers = {
-            //     "24E809DA-20F4-4457-9A8A-87C08DF81E8A" : {
-            //         title : 'Reference to any other relevant articles and sections', description : ''
-            //     },
-            //     "08B2CDEC-786F-4977-AD0A-6A709695528D" : {
-            //         title : 'Any other element relevant to access',
-            //         description : 'This may include, for instance, additional information on the scope of the access provisions of the measure, special considerations for access, or other relevant access provisions.'
-            //     },
-            //     "9847FA8A-16C3-4466-A378-F20AF9FF883B" : {
-            //         title : 'Any other element relevant to benefit-sharing',
-            //         description : 'This may include, for instance, additional information on the scope of the benefit-sharing provisions of the measure, establishment of benefit-sharing funds or other relevant benefit-sharing provisions'
-            //     },
-            //     "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63" : {
-            //         title : 'Any other element relevant to compliance',
-            //         description : 'This may include, for instance, additional information on the scope of the compliance provisions of the measure, or other relevant compliance provisions.'
-            //     },
-            //     "01DA2D8E-F2BB-4E85-A17E-AB0219194A17" : {
-            //         title : 'Any other element relevant to relationship with other international instrument', description : ''
-            //     },
-            //     "BE944E70-2098-45AC-891B-D5E94AFECB99" : {
-            //         title : 'Reference to any other relevant articles and sections', description : ''
-            //     }
-            // };
-
-            // $scope.gettext = function(identifier){
-
-            //     var terms = getABSMeasure();
-            //     term = _.findWhere(terms, {identifier:identifier})
-            //     if(term)
-            //         return term.title.en;
-
-            //     return '';
-            // }
-
-            // function updateABSMeasureText(data){
-
-            //     var absMeasureUpdatedText = {
-            //         "08B2CDEC-786F-4977-AD0A-6A709695528D": {
-            //             "title": {
-            //             "en": "Does the measure cover access?"
-            //             }
-            //         },
-            //         "1E824A31-BDFB-4C47-9593-8006B5FC7D60":{
-            //             "title": {"en": "Does it cover access to genetic resources?"}
-            //         },
-            //         "5427EB8F-5532-4AE2-88EE-5B9619917480": {
-            //             "title": {
-            //                 "en": "Does it cover access to traditional knowledge associated with genetic resources?"
-            //             }
-            //         },
-            //         "9AE45FB8-7788-4D26-B8E9-6B1647055519":{
-            //             "title": {
-            //                 "en": "Does the measure provides for the issuance of a permit of its equivalent at the time of access for constituting an internationally recognized certificate of compliance?"
-            //             }
-            //         },
-            //         "8FA89F2D-3D6B-46A2-93BC-8B157054D726":{
-            //             "title": {
-            //                 "en": "Does the measure establish rules and procedures for mutually agreed terms?"
-            //             }
-            //         },
-            //         "9847FA8A-16C3-4466-A378-F20AF9FF883B":{
-            //             "title": {
-            //                 "en": "Does the measure cover benefit-sharing?"
-            //             }
-            //         },
-            //         "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63":{
-            //             "title": {
-            //                 "en": "Does the measure cover compliance?"
-            //             }
-            //         },
-            //         "F2E6038A-6E99-4BCE-9582-155B72CC7730":{
-            //             "title": {
-            //                 "en": "Does it cover compliance with domestic legislation or regulatory requirements of the other Party (Article 15 and 16)?"
-            //             }
-            //         },
-            //         "4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C":{
-            //             "title": {
-            //                 "en": "Does it cover issues related to monitoring the utilization of genetic resources (Article 17)?"
-            //             }
-            //         },
-            //         "1FCC6CA9-022F-42FD-BD02-43AE674FEB56":{
-            //             "title": {
-            //                 "en": "Does it cover compliance with mutually agreed terms (Article 18)?"
-            //             }
-            //         },
-            //         "01DA2D8E-F2BB-4E85-A17E-AB0219194A17":{
-            //             "title": {
-            //                 "en": "Does this measure include provisions on how its application relates to other international instruments?"
-            //             }
-            //         }
-            //     }
-
-            //     _.each(data, function(element){
-            //         if(absMeasureUpdatedText[element.identifier]){
-            //             element.title = absMeasureUpdatedText[element.identifier].title;
-            //         }
-            //         //change hierarchy are required by abs measure matrix
-            //         if(element.identifier == 'A896179F-833E-4F76-B3F4-81CC95C66592'){// Mutually agreed terms
-            //             var benefitSharing = _.findWhere(data, {identifier:'9847FA8A-16C3-4466-A378-F20AF9FF883B'})
-            //             benefitSharing.narrowerTerms = element.narrowerTerms;
-            //         }
-            //     });
-            //     // remove Mutually agreed terms
-            //     return _.filter(data, function(element){
-            //         return element.identifier != 'A896179F-833E-4F76-B3F4-81CC95C66592'
-            //     });
-            // }
+            
 
         }
     ]);
