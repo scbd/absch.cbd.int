@@ -15,7 +15,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
 
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
-        var langRegex = '/(?:ar|en|es|fr\ru\zh)';
+
         $routeProvider.
                when('',               { templateUrl: '/app/views/home/index.html', label:'ABSCH', resolveController: true, resolveUser : true}).
                when('lang/:langCode', { templateUrl: '/app/views/shared/lang.html',label:'ABSCH', resolveController: true}).
@@ -61,9 +61,9 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('database/:documentSchema/:documentID',           { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
                when('database/:documentSchema/:documentID/:revision', { templateUrl: '/app/views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
                 
-               when('register',                                           {templateUrl: '/app/views/register/dashboard.html',         label:'Management Center',  param:'true', resolveController: true, resolve : { securized : securize() }}).
-               when('dashboard',                                          {redirectTo:  '/register/dashboard'}).
-               when('register/dashboard',                                 {templateUrl: '/app/views/register/dashboard.html',         label:'Dashboard',  param:'true', resolveController: true, resolve : { securized : securize() }}).
+               when('/register',                                           {templateUrl: '/app/views/register/dashboard.html',         label:'Management Center',  param:'true', resolveController: true, resolve : { securized : securize() }}).
+               when('/dashboard',                                          {redirectTo:  '/register/dashboard'}).
+               when('/register/dashboard',                                 {templateUrl: '/app/views/register/dashboard.html',         label:'Dashboard',  param:'true', resolveController: true, resolve : { securized : securize() }}).
 
                when('register/admin',                                     { templateUrl: '/app/views/register/admin.html',          label:'ABSCH Admin',    param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                when('register/notifications',                             { templateUrl: '/app/views/register/notifications.html',  label:'Notifications',  param:'true', resolveController: true,resolve : { securized : securize() }}).
@@ -113,8 +113,8 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
 
                when('oauth2/callback',             { templateUrl: '/app/views/oauth2/callback.html',          resolveController: true, resolveUser: true}).
                 
-               when('about/faq', {templateUrl: '/app/views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
-               when('guides', {templateUrl: '/app/views/about/guides.html', resolveController: true, resolveUser: true, label:'Step-by-step guides'}).
+               when('/about/faq', {templateUrl: '/app/views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
+               when('/guides', {templateUrl: '/app/views/about/guides.html', resolveController: true, resolveUser: true, label:'Step-by-step guides'}).
                
                otherwise({templateUrl: '/app/views/shared/404.html', label:'404 Error'});
 

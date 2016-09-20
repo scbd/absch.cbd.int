@@ -77,17 +77,16 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
             // var activePath;
             $rootScope.$on('$routeChangeStart', function (evt, next, current) {
                 
-                 console.log(locale);
-                // var langRegex = new RegExp('^\/(ar|en|es|fr|ru|zh)')
-                // if (locale != 'en' && !langRegex.test($location.path()) && $location.path().indexOf("/lang/")<0    
-                //     && $rootScope.activePath != $location.path()) {
-                //     evt.preventDefault();
-                //     $rootScope.activePath = '/' + locale + $location.path();
-                //    console.log( $rootScope.activePath)
-                //     $rootScope.$evalAsync(function() {
-                //         $location.path( $rootScope.activePath);
-                //     });
-                // }
+                var langRegex = new RegExp('^\/(ar|en|es|fr|ru|zh)')
+                if (locale != 'en' && !langRegex.test($location.path()) && $location.path().indexOf("/lang/")<0    
+                    && $rootScope.activePath != $location.path()  && $location.$$absUrl.indexOf(locale)<0  ) {
+                    evt.preventDefault();
+                    $rootScope.activePath = '/' + locale + $location.path();
+                   console.log(locale, $rootScope.activePath)
+                    $rootScope.$evalAsync(function() {
+                        $location.path( $rootScope.activePath);
+                    });
+                }
             });
         }]);
 

@@ -67,6 +67,8 @@ function translation(req, res, next) {
 
    co(function*(){
         let langFilepath = yield getLanguageFile(req);
+        // if(req.url == "app/services/app-config-service.js")
+        //     console.log(req.url);
         console.log(req.url)
         if(langFilepath){
              return res.sendFile(langFilepath);

@@ -4,7 +4,7 @@ define(['app', 'angular', 'angular-regex', '../services/app-config-service', 'sc
     // app.provider('$route', app.RouteProviderRegex);
     app.provider('extendedRoute', ["$routeProvider", function($routeProvider) {
         
-        var baseUrl =  '/';//$('#appBaseUrl').text();
+        var baseUrl = "";//$('#appBaseUrl').text();
 
         var __when = $routeProvider.when.bind($routeProvider);
 
@@ -25,7 +25,7 @@ define(['app', 'angular', 'angular-regex', '../services/app-config-service', 'sc
                 ext.resolve.user = resolveUser();
             }
             var prj = proxy;
-             console.log(baseUrl+path);
+         console.log(baseUrl+path);
             return __when(baseUrl+path, angular.extend(route, ext));
         }
 
