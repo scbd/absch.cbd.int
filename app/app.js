@@ -63,7 +63,6 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
               $location.path(path);
               if (!keep_previous_path_in_history) $location.replace();
             };
-            
         }]);
 
         return app;
