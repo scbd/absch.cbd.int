@@ -136,7 +136,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                 throw "Terms must be array";
 
                             if ($scope.binding) {
-                                if(!$scope.binding.geneticResourceElements || $scope.binding.geneticResourceElements.answer){
+                                if(!$scope.binding.geneticResources || !$scope.binding.geneticResources.elements || !$scope.binding.geneticResources.answer){
                                     //delete  from list
                                    var geneticResource = _.findWhere($scope.terms, {identifier : 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'});
                                    if(geneticResource){
@@ -285,11 +285,11 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                     if(!measure)
                         return;
                     if($scope.type!='single' && measure.absMeasures){
-                        if(measure.absMeasures.geneticResourceElements) {                            
-                            // var geneticResource = measure.absMeasures.geneticResourceElements;
+                        if(measure.absMeasures.geneticResources && measure.absMeasures.geneticResources.elements) {                            
+                            // var geneticResource = measure.absMeasures.geneticResourcesElements;
                             var identifier = newMeasureElement({identifier:'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', section:{}}, measure);
                             grElement = _.findWhere($scope.terms, {'identifier': identifier});
-                            grElement.geneticResourcesTerms = measure.absMeasures.geneticResourceElements;
+                            grElement.geneticResourcesTerms = measure.absMeasures.geneticResources.elements;
                         };
                         _.each(measure.absMeasures.relevantElements, function(measureElement) {
                             newMeasureElement(measureElement, measure);
@@ -452,7 +452,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         if(element.sort)
                             term.sortOrder = element.sort;
                         //special case for genetic resource
-                        if(term.identifier=='CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'){
+                        if(term.identifier=='CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F' && term.answer==true){
                             term.isChildSelected = true;
                             updateProperties(term.narrowerTerms, level + 1);
                         }
