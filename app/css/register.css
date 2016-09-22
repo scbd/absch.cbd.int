@@ -613,3 +613,5 @@ label{
 }*/
 
   .ngdialog.ngdialog-theme-default .ngdialog-content{padding:0;}
+
+  .modal-body{background-color:#FFF;}
