@@ -21,21 +21,21 @@
         <li>
             <input type="text" class="form-control" aria-label="search" placeholder="Search FAQs" ng-model="keyword" style="width:340px;">
            <!--&nbsp; &nbsp; &nbsp;
-            <i class="fa" ng-class="{'fa-toggle-on':showAll, 'fa-toggle-off:!showAll}"></i> <a href="#" ng-click="showAll=!showAll"> show all </a>        -->
+            <i class="fa" ng-class="{'fa-toggle-on':showAll, 'fa-toggle-off:!showAll}"></i> <a translation-url  href="#" ng-click="showAll=!showAll"> show all </a>        -->
         </li>
         
         <li><hr style="border-top:1px solid #999;"></li>
         
-        <li ng-repeat="(key,faq) in faqs"><a href="#{{key}}">{{key.substring(3)}}</a>
+        <li ng-repeat="(key,faq) in faqs"><a translation-url  href="#{{key}}">{{key.substring(3)}}</a>
              <ul class="nav nav-stacked">
                 <li  ng-class="{'bg-white':show || showAll}" class="sublist" ng-repeat="term in faq | filter:keyword | orderBy:['sequence']">
-                 <div><a href="#" ng-show="show || showAll" class="pull-right" ng-click="show=false" style="color:#428bca;"><strong>&times;</strong></a></div>
-                 <div class="term"><a href="#{{term.id}}" ng-click="show=!show">{{term.title}}</a></div>
+                 <div><a translation-url  href="#" ng-show="show || showAll" class="pull-right" ng-click="show=false" style="color:#428bca;"><strong>&times;</strong></a></div>
+                 <div class="term"><a translation-url  href="#{{term.id}}" ng-click="show=!show">{{term.title}}</a></div>
                 
                  <div ng-show="show || showAll" style="padding:5px;margin-top:20px;">
-                    <!--<h3><a name="{{term.id}}">{{term.title}}</a></h3>-->
+                    <!--<h3><a translation-url  name="{{term.id}}">{{term.title}}</a></h3>-->
                      <p ng-bind-html="term.description|lstring"></p>
-                     <!--<div class="pull-right"><a href="#"  scroll-to="anchorTop" class="color-litegrey"><i class="fa fa-arrow-circle-up"></i> back to top</a></div>-->
+                     <!--<div class="pull-right"><a translation-url  href="#"  scroll-to="anchorTop" class="color-litegrey"><i class="fa fa-arrow-circle-up"></i> back to top</a></div>-->
                  <div>
                 </li>
             </ul>

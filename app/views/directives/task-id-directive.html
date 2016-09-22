@@ -25,7 +25,7 @@
                 Requested by: &nbsp;
                 <span class="bold">
                 {{workflow.createdBy_info.firstName + ' ' + workflow.createdBy_info.lastName}}
-                <a ng-href="mailTo:{{workflow.createdBy_info.email}}" class="color-blue">({{workflow.createdBy_info.email}})</a>
+                <a translation-url  ng-href="mailTo:{{workflow.createdBy_info.email}}" class="color-blue">({{workflow.createdBy_info.email}})</a>
                 <span class="unbold"> on </span> {{workflow.createdOn | formatDateWithTime}} </span>
                 <span ng-if="document.amendmentIntent == 1" class="bold color-red"> has requested to revoke this record.</span>
                 <span ng-if="workflow.data.additionalInfo" class="bold">

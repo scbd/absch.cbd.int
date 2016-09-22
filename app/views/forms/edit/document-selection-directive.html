@@ -17,7 +17,7 @@
                 <tr ng-repeat="doc in selectedDocuments | orderBy:['schema_s', 'title_t']">
                     <td style="margin-bottom:10px;width:30px;">
                         <span style="font-size: 16px;margin:0;padding:0;float:right;">
-                            <a ng-click="removeDocument(doc)" class="color-red">
+                            <a translation-url  ng-click="removeDocument(doc)" class="color-red">
                                 <i class="fa fa-times"></i></a>
                         </span>
                     </td>
@@ -55,8 +55,8 @@
             <div class="modal-footer bg-grey">
                 <div class="row">
                     <div class="col-xs-12">
-                        <a type="button" class="btn btn-primary" ng-click="saveDocuments()">Save</a>
-                        <a type="button" class="btn btn-default" ng-clikc="closeDialog()">Close</a>
+                        <a translation-url  type="button" class="btn btn-primary" ng-click="saveDocuments()">Save</a>
+                        <a translation-url  type="button" class="btn btn-default" ng-clikc="closeDialog()">Close</a>
                     </div>
                 </div>
             </div>

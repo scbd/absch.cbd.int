@@ -2,13 +2,13 @@
 		<div class="row">
 			<div class="col-xs-12">
 
-                <a ng-href="/database/{{(document.schema_s||document.header.schema)|schemaShortName}}/{{getUniqueIDForUrl(document)}}" 
+                <a translation-url  ng-href="/database/{{(document.schema_s||document.header.schema)|schemaShortName}}/{{getUniqueIDForUrl(document)}}" 
 				target="_new_" class="uid">
 				<i class="fa fa-external-link-square"></i> {{getUniqueID(document)}} </a>
 
 				<span class="date">| {{document.info.updatedOn | formatDate}}</span>
 				<span class="pull-right">
-					<a href="#" class=" color-red" ng-click="loadReportRecord(document.schema_s||document.header.schema,document.identifier_s||document.header.identifier)" ><i class="fa fa-exclamation-triangle"></i> Report record</a>
+					<a translation-url  href="#" class=" color-red" ng-click="loadReportRecord(document.schema_s||document.header.schema,document.identifier_s||document.header.identifier)" ><i class="fa fa-exclamation-triangle"></i> Report record</a>
 				</span>
 				<div id="divReportRecord"></div>
 			</div>
@@ -29,7 +29,7 @@
                         <strong>{{document.info.updatedOn | formatDateWithTime}}</strong>
                     </td>
                      <td style="width:250px">
-                        <a target="_new" href="/database/{{getDocumentSchema(document.header.schema)}}/{{getDocumentId(document)}}">
+                        <a translation-url  target="_new" href="/database/{{getDocumentSchema(document.header.schema)}}/{{getDocumentId(document)}}">
 				 			<span >{{document.info | uniqueIDWithoutRevision }}</span>
 							<span ng-show="document.id">{{getDocumentId(document)}}</span>
 					    </a>

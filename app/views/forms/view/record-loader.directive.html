@@ -10,7 +10,7 @@
     <div class="jumbotron" style="background-color:white;" role="alert" ng-show="documentSuccess">
         <h2>Thank you for downloading document {{documentUID}}.</h2>
         <p>If the document did not download try clicking
-            <a href="{{documentUrl}}" class="alert-link">here...</a></p>
+            <a translation-url  href="{{documentUrl}}" class="alert-link">here...</a></p>
         </br>
         </br>
         </br>
@@ -21,7 +21,7 @@
     <div class="jumbotron" style="background-color:white;" role="alert" ng-show="documentError">
         <h2>Thank you for requesting document {{documentUID}}.</h2>
         <p>The document does not exists, if you think this file should be available, please report to
-            <a href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
+            <a translation-url  href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
     </div>
 
     <div id="RecordDetails" ng-if="showDetails">
@@ -82,16 +82,17 @@
 
 
     <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.latestRevision != internalDocumentInfo.revision && revisionNo != 'draft'">
-        <h2> 
-                <span> This record has been updated. This is not the latest published version.</span>
-                <a ng-href="/database/{{internalDocument.header.schema | schemaShortName}}/{{internalDocument | uniqueIDWithoutRevision}}" target="new"> Click here to view the latest version of the record.</a>
-			</h2>
+        <h3>
+                This document has been updated. This is not the latest published version.
+                <a translation-url  ng-href="/database/{{internalDocument.header.schema | schemaShortName}}/{{internalDocument | uniqueIDWithoutRevision}}" target="new">Click here to view the latest version of the record.</a>
+			</h3>
     </div>
 
 
     <div style="float:right; position:relative;top:1px;right:1px;" ng-if="!isIRCCRevoked && showDetails">
         <div>
-            <a title="Edit" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button" class="btn btn-default" href="/register/{{internalDocument.header.schema|schemaShortName}}/{{internalDocument.header.identifier}}/edit">
+            <a translation-url  title="Edit" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
+            class="btn btn-default" ng-href="/register/{{internalDocument.header.schema|schemaShortName}}/{{internalDocument.header.identifier}}/edit">
                 <i class="fa fa-edit"></i> edit </a>
             <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
         </div>

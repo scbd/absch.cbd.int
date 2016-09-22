@@ -103,7 +103,7 @@
 		<div ng-show="document.projectDocument">
 			<label>Project document or document describing the initiative</label>
 			<div class="km-value" ng-repeat="item in document.projectDocument">
-				<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+				<a translation-url  target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 			</div>
 		</div>
@@ -175,7 +175,7 @@
 			<div ng-show="document.resultsOutputs">
 				<label>Main outputs</label>
 				<div class="km-value" ng-repeat="item in document.resultsOutputs">
-					<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+					<a translation-url  target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 				</div>
 			</div>
@@ -210,7 +210,7 @@
 				<div class="km-value" >
 					<ul class="list">
 						<li ng-repeat="item in document.relevantDocuments">
-							<a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+							<a translation-url  target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 						</li>
 					</ul>

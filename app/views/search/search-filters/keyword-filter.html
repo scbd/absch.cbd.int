@@ -15,7 +15,7 @@
             <div ng-repeat="doc in relatedkeywords = (related | filter:searchKeyword | orderBy:'parent' )" >
                 <div ng-if="doc.parent != relatedkeywords[$index-1].parent && $index > 0" style="margin-top:10px;"></div>
                 <div class="bold color-darkgrey" ng-if="doc.parent != relatedkeywords[$index-1].parent" >{{doc.parent}}</div>
-                    <a class="filter" ng-show="doc.level===0 || isFilterOn(doc.broader)" ng-click="saveFilter(doc)" ng-class="{'level0':level===0,'level1':doc.level===1,'level2':doc.level===2,'level3':doc.level===3, }">
+                    <a translation-url  class="filter" ng-show="doc.level===0 || isFilterOn(doc.broader)" ng-click="saveFilter(doc)" ng-class="{'level0':level===0,'level1':doc.level===1,'level2':doc.level===2,'level3':doc.level===3, }">
                         <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                         {{doc.name}}
                     </a>
@@ -32,7 +32,7 @@
         </div>
         <div  style="max-height:300px;overflow-y:scroll">
             <div ng-repeat="doc in kfilters = (keywordSearchFiltersNoDups  | filter:searchKeyword | orderBy:'name')" >
-                    <a class="filter"  ng-click="saveFilter(doc)">
+                    <a translation-url  class="filter"  ng-click="saveFilter(doc)">
                         <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                         {{doc.name}}
                     </a>

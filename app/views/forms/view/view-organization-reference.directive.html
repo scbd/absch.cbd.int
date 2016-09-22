@@ -3,7 +3,7 @@
 	<div km-terms ng-model="organization.organizationType">
 		<span ng-repeat="term in terms">{{term.name}}</span>
 	</div>
-	<address style="margin-top: 5px; margin-bottom: 5px">
+	<a translation-url ddress style="margin-top: 5px; margin-bottom: 5px">
 		<div class="km-pre">{{organization.address | lstring:locale}}</div>
 		{{organization.city | lstring:locale}}<span ng-show="organization.city">, </span>
 		{{organization.state | lstring:locale}}<br ng-show="organization.city || organization.state" />
@@ -18,9 +18,9 @@
 		Fax: <span ng-repeat="item in organization.faxes">{{item}}<span ng-show="!$last">, </span></span>
 	</div>
 	<div ng-show="organization.emails">
-		Emails: <span ng-repeat="item in organization.emails"><a ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
+		Emails: <span ng-repeat="item in organization.emails"><a translation-url  ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
 	</div>
 	<div ng-show="organization.websites">
-		Websites: <span ng-repeat="item in organization.websites"><a ng-href="{{item.url}}">{{item.name||item.url}}</a><span ng-show="!$last">, </span></span>
+		Websites: <span ng-repeat="item in organization.websites"><a translation-url  ng-href="{{item.url}}">{{item.name||item.url}}</a><span ng-show="!$last">, </span></span>
 	</div>
 </div>

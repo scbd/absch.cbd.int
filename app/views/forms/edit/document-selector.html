@@ -7,10 +7,10 @@
 
             <span ng-show="model.length==0 || !model"> <i class="color-blue"> No records have been linked. </i> </span>
 
-            <a class="bold" href="#" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords">
+            <a translation-url  class="bold" href="#" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords">
                 <i class="fa fa-chevron-circle-right"></i> {{model.length}} linked records.
             </a>
-            <a class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0 ">
+            <a translation-url  class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0 ">
                 <i class="fa fa-chevron-circle-down"></i> {{model.length}} linked records.
             </a>
 
@@ -22,7 +22,7 @@
             <table class="table" id="search-new" style="padding-bottom:3px;width:100%;">
                 <tr ng-repeat="doc in model" ng-if="type!='radio'">
                     <td style="margin-bottom:15px;width:15px;">
-                        <a class="btn btn-default" ng-click="removeDocument(doc)" class="link color-red">
+                        <a translation-url  class="btn btn-default" ng-click="removeDocument(doc)" class="link color-red">
                             <i class="fa fa-times"></i></a>
                     </td>
                     <td style="margin-bottom:20px;">
@@ -32,7 +32,7 @@
                 </tr>
                 <tr ng-if="type=='radio' && model">
                     <td style="margin-bottom:15px;width:15px;">
-                        <a class="btn btn-default" ng-click="removeDocument(model)" class="link color-red">
+                        <a translation-url  class="btn btn-default" ng-click="removeDocument(model)" class="link color-red">
                             <i class="fa fa-times"></i></a>
                     </td>
                     <td style="margin-bottom:20px;">
@@ -75,8 +75,8 @@
             <div class="modal-footer bg-grey">
                 <div class="row">
                     <div class="col-xs-12">
-                        <a type="button" class="btn btn-primary bold pull-left" style="color:white;"  ng-click="saveDocuments()">Save</a>
-                        <a type="button" class="btn btn-warning bold" data-dismiss="modal" ng-click="closeDialog()">Close</a>
+                        <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;"  ng-click="saveDocuments()">Save</a>
+                        <a translation-url  type="button" class="btn btn-warning bold" data-dismiss="modal" ng-click="closeDialog()">Close</a>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,4 @@
 'use strict';
-
 define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate', 'text-angular', 'ngSmoothScroll', 'angular-loggly-logger'],
     function (angular) {
 
@@ -75,20 +74,33 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
                 console.log('route success', newUrl, oldUrl);
             });
             // var activePath;
-            $rootScope.$on('$routeChangeStart', function (evt, next, current) {
+            // $rootScope.$on('$routeChangeStart', function (evt, next, current) {
                 
-                var langRegex = new RegExp('^\/(ar|en|es|fr|ru|zh)')
-                if (locale != 'en' && !langRegex.test($location.path()) && $location.path().indexOf("/lang/")<0    
-                    && $rootScope.activePath != $location.path()  && $location.$$absUrl.indexOf(locale)<0  ) {
-                    evt.preventDefault();
-                    $rootScope.activePath = '/' + locale + $location.path();
-                   console.log(locale, $rootScope.activePath)
-                    $rootScope.$evalAsync(function() {
-                        $location.path( $rootScope.activePath);
-                    });
-                }
-            });
+            //     var langRegex = new RegExp('^\/(ar|en|es|fr|ru|zh)')
+            //     if (locale != 'en' && !langRegex.test($location.path()) && $location.path().indexOf("/lang/")<0    
+            //         && $rootScope.activePath != $location.path()  && $location.$$absUrl.indexOf(locale)<0  ) {
+            //         evt.preventDefault();
+            //         $rootScope.activePath = '/' + locale + $location.path();
+            //        console.log(locale, $rootScope.activePath)
+            //         $rootScope.$evalAsync(function() {
+            //             $location.path( $rootScope.activePath, false );
+            //         });
+            //     }
+            // });
         }]);
-
+        // app.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+        //     var original = $location.path;
+        //     $location.path = function (path, reload) {
+        //         console.log(path);
+        //         if (reload === false) {
+        //             var lastRoute = $route.current;
+        //             var un = $rootScope.$on('$locationChangeSuccess', function () {
+        //                 $route.current = lastRoute;
+        //                 un();
+        //             });
+        //         }
+        //         return original.apply($location, [path]);
+        //     };
+        // }])
         return app;
     });

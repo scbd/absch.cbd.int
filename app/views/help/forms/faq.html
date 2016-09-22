@@ -14,7 +14,7 @@
                 <div layout="column" layout-align="top center">
                     <md-list>
                         <md-list-item ng-repeat="term in faqs">
-                            <a href="/help/faq/{{term._id}}">
+                            <a translation-url  href="/help/faq/{{term._id}}">
                             {{term.title}}
                         </a>
                             <md-divider ng-if="!$last"></md-divider>
