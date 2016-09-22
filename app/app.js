@@ -1,5 +1,4 @@
 'use strict';
-
 define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate', 'text-angular', 'ngSmoothScroll',
     ],
     function(angular) {
@@ -64,6 +63,19 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
               if (!keep_previous_path_in_history) $location.replace();
             };
         }]);
-
+        // app.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+        //     var original = $location.path;
+        //     $location.path = function (path, reload) {
+        //         console.log(path);
+        //         if (reload === false) {
+        //             var lastRoute = $route.current;
+        //             var un = $rootScope.$on('$locationChangeSuccess', function () {
+        //                 $route.current = lastRoute;
+        //                 un();
+        //             });
+        //         }
+        //         return original.apply($location, [path]);
+        //     };
+        // }])
         return app;
     });

@@ -6,7 +6,6 @@ define(['app',
 			    var lang = 'en';
 				if($routeParams.langCode)
 					lang = $routeParams.langCode;
-
 				$cookies.put("locale", lang, {path: "/"});	
                 $scope.currentLanguage = lang;
 
