@@ -4,9 +4,12 @@
 		<span class="color-black"> (IRCC) </span>
 		</h4> </div>
 	<div class="record-body panel-body">
-			<div class="alert alert-danger" ng-show="!loading && document && (document.amendmentIntent==1 || showRevokedMessage)">
+			<div class="alert alert-danger" ng-show="!loading && document && (document.amendmentIntent==1 || showRevokedMessage || document.info.revision !== document.info.latestRevision)">
 				<div class="text-center">
-					<h1>THIS CERTIFICATE HAS BEEN REVOKED AND IS NO LONGER VALID</h1>
+					<h1 ng-if="document.amendmentIntent==1 || showRevokedMessage">THIS CERTIFICATE HAS BEEN <u>REVOKED</u> AND IS NO LONGER VALID</h1>
+
+					<h1 ng-if="document.info.revision !== document.info.latestRevision">THIS CERTIFICATE HAS BEEN <u>UPDATED</u> AND IS NO LONGER VALID</h1>
+
 					<p>
 						See amendment history for more information.
 					</p>

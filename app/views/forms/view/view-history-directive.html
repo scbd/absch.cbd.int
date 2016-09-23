@@ -6,8 +6,8 @@
                 <th class="color-litegrey" style="font-size:12px;bold;"> Date <span ng-if="!publicView">Published</span> </th>
                 <th class="color-litegrey" style="font-size:12px;bold;" ng-if="!publicView"> Date Requested </th>
             </tr>
-            <tr ng-show="documents.length > 0">
-             <td colspan="4" class="text-center"> no record history available </td>
+            <tr ng-if="documents.length =< 0">
+             <td colspan="4" > no history available  </td>
            </tr>
         <tbody ng-repeat="document in documents | orderBy:'updatedOn':true" style="font-size:12px;" >
             <tr>
