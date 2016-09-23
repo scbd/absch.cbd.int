@@ -6,8 +6,8 @@
                 <th class="color-litegrey" style="font-size:12px;bold;"> Date <span ng-if="!publicView">Published</span> </th>
                 <th class="color-litegrey" style="font-size:12px;bold;" ng-if="!publicView"> Date Requested </th>
             </tr>
-            <tr ng-show="documents.length > 0">
-             <td colspan="4" class="text-center"> no record history available </td>
+            <tr ng-if="documents.length =< 0">
+             <td colspan="4" > no history available  </td>
            </tr>
         <tbody ng-repeat="document in documents | orderBy:'updatedOn':true" style="font-size:12px;" >
             <tr>
@@ -22,7 +22,7 @@
                             <span class="bold color-red"> REVOKED</span>
                         </span>
                         <span ng-show="((documents.length>1 && !document.deletedOn && document.body.amendmentIntent!=1 && document.revision < documents.length))">
-                            <span class="bold color-grey"> OLD</span>
+                            <span class="bold color-grey" >{{(document.type | schemaShortName) === 'IRCC' ? "NOT VALID" : "OLD VERSION"}}</span>
                         </span>
                         <span ng-show="!document.deletedOn && (documents.length==1 || (documents.length>1 && documents.length == document.revision && (!isPermit || document.body.amendmentIntent!=1)))">
                             <span class="bold color-green"> PUBLISHED</span>
