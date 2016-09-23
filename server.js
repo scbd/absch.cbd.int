@@ -113,7 +113,7 @@ function getPreferredLanguage(req){
     var url = req.url;
     if(htlmRegex.test(url)){
 
-        if(_.includes(req.headers, 'Preferred-Language') ||
+        if(_.includes(req.headers, 'preferred-language') ||
           cookieLangRegex.test(req.headers.cookie)){
 
            var validLanguages = ['ar', 'fr', 'es', 'ru', 'zh']
