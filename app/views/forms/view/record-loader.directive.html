@@ -83,8 +83,7 @@
 
     <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.latestRevision != internalDocumentInfo.revision && revisionNo != 'draft'">
         <h2> 
-                <span ng-if="(internalDocument.header.schema | schemaShortName) != 'IRCC'"> This record has been updated. This is not the latest published version.</span>
-                <span ng-if="(internalDocument.header.schema | schemaShortName) === 'IRCC'">This Internationally Recognized Certificate of Compliance (IRCC) has been updated. A new version has been constituted and <u> this version is no longer valid.</u> </span>
+                <span> This record has been updated. This is not the latest published version.</span>
                 <a ng-href="/database/{{internalDocument.header.schema | schemaShortName}}/{{internalDocument | uniqueIDWithoutRevision}}" target="new"> Click here to view the latest version of the record.</a>
 			</h2>
     </div>

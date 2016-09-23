@@ -8,14 +8,14 @@
 				<div class="text-center">
 					<h1 ng-if="document.amendmentIntent==1 || showRevokedMessage">THIS CERTIFICATE HAS BEEN <u>REVOKED</u> AND IS NO LONGER VALID</h1>
 
-					<h1 ng-if="document.info.revision !== document.info.latestRevision">THIS CERTIFICATE HAS BEEN <u>UPDATED</u> AND IS NO LONGER VALID</h1>
+					<h1 ng-if="document.info.revision !== document.info.latestRevision">THIS CERTIFICATE HAS BEEN <u>UPDATED</u>. A NEW VERSION HAS BEEN CONSTITUTED AND THIS VERSION IS NO LONGER VALID</h1>
 
 					<p>
 						See amendment history for more information.
 					</p>
 				</div>
 			</div>
-			
+
 			<legend ng-if="document.government">
                 <a  ng-if="document.info && document.info.revision === document.info.latestRevision" class="btn btn-default btn-small pull-right" style="background-color:#f5f5f5;" target="_new" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
 		         General information
