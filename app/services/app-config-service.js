@@ -61,7 +61,26 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 					'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
 				}]
 			},
-
+			//staginh
+                        {
+				'host': 'absch.staging.cbd.int',
+				'realm': 'ABS-DEV',
+				'roles': [{
+					'User': 'User'
+				}, {
+					'Administrator': 'Administrator'
+				}, {
+					'AbsAdministrator': 'AbsAdministrator-dev'
+				}, {
+					'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
+				}, {
+					'abschiac': 'abschiac-dev'
+				}, {
+					'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
+				}, {
+					'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
+				}]
+			},
 			//Training
 			{
 				'host': 'training-absch.cbd.int',
