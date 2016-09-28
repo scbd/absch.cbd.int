@@ -6,11 +6,16 @@
         }
     </style>
     <div style="width:100%" ng-show="userFilters.length>0">
+<<<<<<< HEAD
         <div class="row table-striped" style="padding:10px;border-bottom:1px solid #ddd;">
+=======
+        <div class="row table-striped" style="padding:10px;border-bottom:1px solid white;">
+>>>>>>> 65024f8... save user search queries
             <div class="col-xs-2">Filter Title</div>
             <div class="col-xs-2">last Updated On</div>
             <div class="col-xs-2"></div>
         </div>
+<<<<<<< HEAD
         <div  class="row" style="padding:10px;border-bottom:1px solid #ddd;"
          ng-repeat="record in userFilters | orderBy:'reportedOn':'desc'">
             <div>
@@ -21,6 +26,18 @@
                     {{(record.meta.modifiedOn||record.meta.createdOn)|formatDate}}
                 </div>
                  <div class="filter col-xs-8">
+=======
+        <div  class="row table-striped" style="padding:10px;border-bottom:1px solid white;"
+         ng-repeat="record in userFilters | orderBy:'reportedOn':'desc'">
+            <div>
+                <div class="col-xs-2">
+                    {{record.queryTitle}}
+                </div>
+                <div class="col-xs-1">
+                    {{(record.meta.modifiedOn||record.meta.createdOn)|formatDate}}
+                </div>
+                 <div class="col-xs-8">
+>>>>>>> 65024f8... save user search queries
                      <span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
                         <span class="label label-info">                    
                                 <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>{{filter.name}}
