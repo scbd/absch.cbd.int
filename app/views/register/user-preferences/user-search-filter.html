@@ -1,0 +1,73 @@
+<div id="userSearchFilters">
+    <style>
+        
+        .ngdialog.ngdialog-theme-default.wide .ngdialog-content {
+            width: 750px !important;
+        }
+    </style>
+    <div style="width:100%" ng-show="userFilters.length>0">
+        <div class="row table-striped" style="padding:10px;border-bottom:1px solid white;">
+            <div class="col-xs-2">Filter Title</div>
+            <div class="col-xs-2">last Updated On</div>
+            <div class="col-xs-2"></div>
+        </div>
+        <div  class="row table-striped" style="padding:10px;border-bottom:1px solid white;"
+         ng-repeat="record in userFilters | orderBy:'reportedOn':'desc'">
+            <div>
+                <div class="col-xs-2">
+                    {{record.queryTitle}}
+                </div>
+                <div class="col-xs-1">
+                    {{(record.meta.modifiedOn||record.meta.createdOn)|formatDate}}
+                </div>
+                 <div class="col-xs-8">
+                     <span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
+                        <span class="label label-info">                    
+                                <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>{{filter.name}}
+                                <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
+                        </span>
+                     </span>
+                </div>
+                <div class="col-xs-1">
+                    <input type="button" class="btn btn-primary" value="Run" ng-click="runUserQuery(record)" />
+                    <input type="button" class="btn btn-warning" value="Delete" ng-click="deleteFilter($event, record)" />
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    <div ng-show="!userFilters || userFilters.length==0">
+        <br/><br/>
+        <div class="alert alert-info" role="alert">
+            <strong><i class="fa fa-info" /></strong> 
+            <span ng-if="user.isAuthenticated">You do not have any saved filters.</span>
+            <span ng-if="!user.isAuthenticated">Please log in to view your saved filters.</span>
+        </div>
+    </div>
+    <script type="text/ng-template" id="confirmDeleteDialog">
+        <div class="modal-header">
+            <h3 class="modal-title">
+              Confirm Delete?
+            </h3>
+        </div>
+
+        <div class="modal-body">
+            <div class="col-xs-12">
+                {{record.queryTitle}}
+            </div>
+            <div class="col-xs-12">               
+                 <span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
+                    <span class="label label-info">                    
+                        <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>{{filter.name}}
+                        <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">No</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="confirmDelete()" ng-disabled="loading">Yes</button>
+        </div>
+    </script>
+</div>

@@ -1,0 +1,226 @@
+<div ng-controller="adminReportedRecordsCtrl" id="RegisterPage">
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet">
+
+    <span register-top-menu></span>
+    <style>
+        .profile-widget {
+            position: relative;
+        }
+        
+        .panel-white {
+            border: 1px solid #dddddd;
+        }
+        
+        .panel {
+            border-radius: 0;
+            margin-bottom: 30px;
+        }
+        
+        .profile-widget .image-container {
+            background-size: cover;
+            background-position: center;
+            padding: 10px 0 10px;
+        }
+        
+        .profile-widget .image-container .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto -60px;
+            display: block;
+        }
+        
+        img {
+            vertical-align: middle;
+        }
+        
+        img {
+            border: 0;
+        }
+        
+        .profile-widget .details {
+            padding: 50px 15px 15px;
+            text-align: center;
+        }
+        .block {
+    margin-bottom: 30px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 2px rgba(0,0,0,0.01);
+    box-shadow: 0 2px rgba(0,0,0,0.01);
+}
+        .block>.nav-tabs {
+            background-color: #f9f9f9;
+            border-bottom: none;
+        }
+        
+        .nav-tabs.nav-justified {
+            width: 100%;
+            border-bottom: 0;
+        }
+        
+        .push-20 {
+            margin-bottom: 20px !important;
+        }
+        
+        .block>.nav-tabs>li {
+            margin-bottom: 0;
+        }
+        
+        .block>.nav-tabs>li.active>a,
+        .block>.nav-tabs>li.active>a:hover,
+        .block>.nav-tabs>li.active>a:focus {
+            color: #646464;
+            background-color: #fff;
+            border-color: transparent;
+        }
+        
+        .block>.nav-tabs.nav-justified>li>a {
+            margin-bottom: 0;
+        }
+        
+        .block>.nav-tabs>li {
+            margin-bottom: 0;
+        }
+        
+        .block .block-content.tab-content {
+            overflow: hidden;
+        }
+        
+        .block-content {
+            margin: 0 auto;
+            padding: 20px 20px 1px;
+            max-width: 100%;
+            overflow-x: visible;
+            -webkit-transition: opacity .2s ease-out;
+            transition: opacity .2s ease-out;
+        }
+        
+        .block-content.block-content-full {
+            padding-bottom: 20px;
+        }
+        
+        .bg-gray-lighter {
+            background-color: #f9f9f9;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .block>.nav-tabs.nav-justified>li>a {
+            margin-bottom: 0;
+        }
+        
+        .block>.nav-tabs>li>a {
+            margin-right: 0;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            color: #646464;
+            font-weight: 600;
+            border: 1px solid transparent;
+            border-radius: 0;
+        }
+    </style>
+    <div class="register-content card card-1-notrans">
+
+        <div class="register-content-header bg-pink color-white">
+            <div style="padding:10px 10px;">
+                <h3>User Prefernces</h3>
+            </div>
+        </div>
+        <div class="register-content-content" style="background-color: rgb(212, 212, 212);">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+
+                    <div class="panel panel-white profile-widget">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="image-container">
+                                    <img src="http://demo.ztapps.com/curo/v1.1/assets/img/people/1.jpg" class="avatar" alt="avatar">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="details">
+                                    <h4>Blaise Fonseca <i class="fa fa-sheild"></i></h4>
+                                    <div>CBD</div>
+                                    <div>India</div>
+                                    <div>Government none</div>
+                                    <div class="mg-top-10">
+                                        <a href="#" class="btn btn-blue">Change Avatar</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br/><br/>
+                    <div class="row">
+                        <div class="block ">
+                            <ul class="nav nav-tabs nav-justified push-20" data-toggle="tabs">
+                                <li class="active">
+                                    <a href="#tab-profile-personal"><i class="fa fa-fw fa-pencil"></i> Settings</a>
+                                </li>
+                                <li class="">
+                                    <a href="#tab-profile-password"><i class="fa fa-fw fa-asterisk"></i> Subscriptions</a>
+                                </li>
+                                <li class="">
+                                    <a href="#tab-profile-privacy"><i class="fa fa-fw fa-lock"></i> Saved Searches</a>
+                                </li>
+                            </ul>
+                            <div class="block-content tab-content">
+                                <div class="tab-pane fade active in" id="tab-profile-personal">
+                                    
+                                </div>
+                                <div class="tab-pane fade" id="tab-profile-password">
+                                   
+                                </div>
+                                <div class="tab-pane fade" id="tab-profile-privacy">
+                                   
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="addCommentsDialog">
+        <div class="modal-header">
+            <h3 class="modal-title">
+               {{record.schema|schemaName}} : - {{record.reportedBy}}
+            </h3>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group row">
+                <label for="example-text-input" class="col-xs-2 col-form-label">Status</label>
+                <div class="col-xs-10">
+                    <select class="form-control" style="width:10%" required name="status" ng-model="record.status">
+                        <option value="Read">Read</option>
+                        <option value="Not a issue">Not a issue</option>
+                        <option value="Record owner contacted">Record owner contacted</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xs-2 col-form-label">Comments</label>
+                <div class="col-xs-10">
+                    <textarea rows="3" class="form-control" id="comments" ng-model="record.comments" />
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save()" ng-disabled="loading">Submit</button>
+        </div>
+    </script>
+
+
+    
+
+</div>
