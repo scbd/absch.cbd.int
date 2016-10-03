@@ -85,7 +85,7 @@
 
 		<div ng-show="document.isModelContractualClause">
 			<label>The measure contains model contractual clauses</label>
-			<div class="km-value">
+			<div class="km-value" ng-if="document.modelContractualClauseDescription">
 				{{document.modelContractualClauseDescription|lstring}}
 			</div>
 		</div>
