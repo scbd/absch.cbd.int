@@ -1,16 +1,18 @@
 <div class="bg-texture-green" style="position:relative;padding-bottom:5px;padding-top:20px;">
 	<div class="container tag-line-container bg-green color-white " style="position:relative;margin-bottom:5px;">
-			<div class="row">
-                <div class="col-md-12">
-                        <h3>The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol.
-                            <a href="/about" ng-click="toggleTooltip()"> <i class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-title="Click here to find out more about the ABSCH" data-container="body"></i></a>
-                        </h3>
-                </div>
+        <div class="row">
+            <div class="col-md-12">
+                    <h3>The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol.
+                        <a href="/about" ng-click="toggleTooltip()"> <i class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-title="Click here to find out more about the ABSCH" data-container="body"></i></a>
+                    </h3>
             </div>
+        </div>
 	</div>
-
-	<search-map class="hidden-xs" height="500px" id="npMap"></search-map>
-
+    <div id="homeMap">
+        <div block-region activate="loading" block-text=" Loading map">
+	        <search-map class="hidden-xs" height="500px" id="npMap"></search-map>
+        </div>
+    <div>
 	<div id="Parties" class="container party-container bg-green text-center" style="position:relative;margin-bottom:15px;margin-top:5px;">
         <div class="row">
             <div class="col-md-4">

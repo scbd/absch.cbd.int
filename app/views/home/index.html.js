@@ -1,8 +1,9 @@
 define(['app','/app/js/common.js','moment',
-    '/app/views/directives/map/home-map.js',
-    '/app/views/directives/home-country-dashboard-directive.html.js'], function (app) {
-    app.controller('IndexController', ['$scope', '$http', '$window', '$cookies','realm', '$filter','$rootScope','commonjs','$element',
-    function ($scope, $http, $window, $cookies, realm, $filter, $rootScope, commonjs,$element) {
+    '/app/views/directives/home-country-dashboard-directive.html.js',
+    '/app/views/directives/map/home-map.js'
+    ], function (app) {
+    app.controller('IndexController', ['$scope', '$http', '$window', '$cookies','realm', '$filter','$rootScope','commonjs','$element', '$timeout', '$compile', 
+    function ($scope, $http, $window, $cookies, realm, $filter, $rootScope, commonjs,$element, $timeout, $compile) {
             
         $scope.locale = 'en';
         //var today= moment();
@@ -30,7 +31,6 @@ define(['app','/app/js/common.js','moment',
         $scope.yearsSinceEntry = years;
         $scope.monthsSinceEntry = months;
         $scope.daysSinceEntry = days;
-
 
     }]);
 });

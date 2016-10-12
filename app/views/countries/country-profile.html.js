@@ -1,17 +1,16 @@
 define(['app','underscore',
-  'scbd-map/zoom-map', '/app/js/common.js',
+  '/app/js/common.js',
   'scbd-angularjs-services/locale','ng-breadcrumbs',
   'css!/app/libs/flag-icon-css/css/flag-icon.min.css',
-  'css!./country-profile','./country-profile-directive.html.js'
+  'css!./country-profile','./country-profile-directive.html.js',
+    '../directives/block-region-directive.js'
 ], function(app, _) {
 
   app.controller("countryProfileController",
-  ["$scope","$route", "$http", "$timeout", "$location","locale", 'ammap3Service', 'commonjs', '$q', 'breadcrumbs',
-    function($scope,$route, $http, $timeout, $location,locale, ammap3Service,commonjs, $q, breadcrumbs) {
+  ["$scope","$route", "$http", "$timeout", "$location","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile',
+    function($scope,$route, $http, $timeout, $location,locale, commonjs, $q, breadcrumbs, $element, $compile) {
       $scope.code      = $route.current.params.code;
-      $scope.$on('$destroy', function(){
-          ammap3Service.clear('zoom-map-country');
-      });
+      
 
       $q.when(commonjs.getCountry($scope.code.toUpperCase()))
       .then(function(country){
@@ -21,33 +20,17 @@ define(['app','underscore',
           $scope.country.cssClass='flag-icon-'+$scope.country.code;
           breadcrumbs.options = { 'Country Profile': $scope.country.name };
       });
-      $q.when(commonjs.getCountries()).then(function(countries){
 
-        //   $timeout(function(){
-              ammap3Service.eachCountry('zoom-map-country', function(mapCountry){
-                  var countryCode = mapCountry.id;
-                  if(ammap3Service.exceptionRegionMapping[mapCountry.id]){
-                      countryCode = ammap3Service.exceptionRegionMapping[mapCountry.id];
-                  }
-                  var countryDetails = _.findWhere(countries, {
-                      code : countryCode
-                  });
-                if(countryDetails){
-                    if(countryDetails.isNPInbetweenParty)
-                        mapCountry.colorReal=mapCountry.baseSettings.color= "#EC971F";
-                    else if(countryDetails.isNPParty)
-                        mapCountry.colorReal=mapCountry.baseSettings.color= "#5F4586";
-                  //   else if(countryDetails.isCBDParty)
-                  //       mapCountry.colorReal= "#999";
-                    else
-                        mapCountry.colorReal=mapCountry.baseSettings.color= "#333";
-                }
-                else
-                    mapCountry.colorReal=mapCountry.baseSettings.color= "#333";
-              });
-              ammap3Service.validateData('zoom-map-country');
-        //   },1000);
-      });
+      $scope.loading = true;
+      $timeout(function(){
+            require(['/app/views/countries/search-zoom-map.html.js'], function(map){                   
+                $scope.$apply(function(){
+                    var mapElement = $element.find('#Jumbotron')
+                    $compile(mapElement.contents())($scope.$new());
+                    $scope.loading = false;                    
+                });
+            });
+      }, 2000);
 
     }
   ]);
