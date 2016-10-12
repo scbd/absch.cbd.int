@@ -3,9 +3,12 @@
         .cp-header label{margin-right:10px; width:180px;margin-bottom:0;}
 </style>
 <div smooth-scroll duration="100" offset="200"></div>
-
-   <div id="Jumbotron" class="bg-texture-green color-black hidden-xs" selected-color="#FFFFFF" style="border-top:1px solid #555;border-bottom:2px solid #ddd;">
-        <zoom-map ng-attr-zoom-to="{{country.code}}" map-id="zoom-map-country" height="350px"></zoom-map>
+   
+    <div id="Jumbotron" class="bg-texture-green color-black hidden-xs" selected-color="#FFFFFF" 
+    style="border-top:1px solid #555;border-bottom:2px solid #ddd;">     
+        <div block-region activate="loading" block-text=" Loading map">
+            <search-zoom-map zoom-to="{{country.code}}" height="350px"></search-zoom-map>
+        </div>   
     </div>
 
     <div class="row" style="margin:0;">
