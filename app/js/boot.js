@@ -43,7 +43,8 @@ require.config({
         'angular-block-ui'          :  '../libs/angular-block-ui/dist/angular-block-ui.min',
         'ngDialog'                  :  '../libs/ng-dialog/js/ngDialog.min',
         'socket.io'                 : '../libs/socket.io-1.4.5/index',
-        'ngInfiniteScroll'          : '../libs/ngInfiniteScroll/build/ng-infinite-scroll'
+        'ngInfiniteScroll'          : '../libs/ngInfiniteScroll/build/ng-infinite-scroll',
+        'angular-loggly-logger'     :  '../libs/angular-loggly-logger/angular-loggly-logger'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -73,7 +74,8 @@ require.config({
         'ngMaterial'                    : { 'deps': ['angular', 'angular-animate', 'ngAria'] },
         'toastr'                        : { 'deps': ['angular', 'angular-animate', 'ngAria'] },
         'angular-block-ui'              : { 'deps': ['angular'] },
-        'ngDialog'                      : { deps: ['angular', 'css!../libs/ng-dialog/css/ngDialog.min', 'css!../libs/ng-dialog/css/ngDialog-theme-default.css'] },
+        'ngDialog'                      : { 'deps': ['angular', 'css!../libs/ng-dialog/css/ngDialog.min', 'css!../libs/ng-dialog/css/ngDialog-theme-default.css'] },
+        'angular-loggly-logger'         : { 'deps': ['angular'] },
     },
     packages: [
         { name: 'scbd-branding'          , location : '../libs/scbd-branding' },

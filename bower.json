@@ -9,6 +9,7 @@
     "angular-flex": "https://github.com/scbd/angular-flex.git",
     "angular-intro.js": "1.2.4",
     "angular-loading-bar": "https://github.com/chieffancypants/angular-loading-bar.git#7db32aed5260560a5d4bbdaf4ea7365072d41ec8",
+    "angular-loggly-logger": "https://github.com/scbd/angular-loggly-logger.git#2c67428b49951e18bd03cbdd4834d939ba8fba74",
     "angular-material": "0.9.8",
     "angular-route": "1.4",
     "angular-sanitize": "1.4",
@@ -48,7 +49,7 @@
     "underscore": "1.7.0"
   },
   "resolutions": {
-    "angular": "1.4",
+    "angular": "1.4.14",
     "bootstrap": "3.3.6",
     "font-awesome": "4.6.3",
     "angular-material": "0.9.8",

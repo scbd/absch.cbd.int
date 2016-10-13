@@ -30,6 +30,8 @@ app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbdde
 
 app.get('/*', function (req, res) {
     res.cookie('VERSION', process.env.VERSION);
+    res.cookie('TAG', process.env.TAG);
+    res.cookie('REPONAME', process.env.REPONAME);
     res.sendFile(__dirname + '/app/template.html');
 });
 

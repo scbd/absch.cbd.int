@@ -1,22 +1,16 @@
 'use strict';
 define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services', 'services', 'filters',
  '/app/services/app-config-service.js'], function (app, _) {
-
+      
     app.value("realm", {value:"ABS"});
     app.value("showHelp", { value : false });
 
     app.provider("realm", {
 
         $get : ["$location", 'appConfigService', function($location, appConfigService) {
-
-            if(appConfigService.currentRealm){
-                return { value : appConfigService.currentRealm };
-            }
-            return 'ABS';
+            return { value : appConfigService.currentRealm || 'ABS' };
         }]
     });
-
-
     app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
         $locationProvider.html5Mode(true);
