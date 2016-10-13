@@ -36,10 +36,10 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
             });
         });
 
-        app.run(['$route', '$rootScope', '$location', 'LogglyLogger', 'realm', function ($route, $rootScope, $location, logglyLogger, realm) {
+        app.run(['$route', '$rootScope', '$location', 'LogglyLogger', 'realm', '$cookies', function ($route, $rootScope, $location, logglyLogger, realm, $cookies) {
 
-            console.log(logglyLogger);
-            logglyLogger.fields({ realm: realm.value, appVersion: '1.0' })
+            var appVersion = $cookies.get('appVersion')||'localhost';
+            logglyLogger.fields({ realm: realm.value, appVersion: appVersion })
 
             $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
                 //padding route attributes to the rootscope

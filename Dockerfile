@@ -1,7 +1,7 @@
 FROM node:4.2
 
 ARG BRANCH='master'
-ENV BRNACH $BRNACH
+ENV BRANCH $BRANCH
 RUN echo 'running on branch ' $BRANCH
 
 # clone primary repo
