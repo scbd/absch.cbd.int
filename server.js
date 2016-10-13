@@ -29,23 +29,13 @@ app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbdde
 // Configure index.html
 
 app.get('/*', function (req, res) {
-   res.cookie('VERSION', process.env.VERSION);
    var appVersion = process.env.TAG;
    if(!appVersion || appVersion.trim()==''){
        appVersion =  (process.env.BRNACH||'') + '-'+ (process.env.VERSION ||'');
-   }
+   }   
    res.cookie('appVersion', appVersion);
-   
-
-   req.url = '/template.html';
-   co(function*(){
-        var langFilepath = yield serveLanguageFile(req);
-        if(langFilepath)    
-            return res.sendFile(langFilepath);
-
-        // console.log('en file');    
-        res.sendFile(__dirname + '/app/template.html');
-    })
+   res.cookie('VERSION', process.env.VERSION);      
+   res.sendFile(__dirname + '/app/template.html');
 });
 
 // Start server
