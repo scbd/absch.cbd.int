@@ -13,8 +13,6 @@ define(['app', 'underscore', 'scbd-angularjs-services/generic-service', '/app/js
                     ]
                 };
                 
-
-                $scope.errors = null;
                 $scope.length = 25;
                 $scope.skip = 0;
                 $scope.sort = { timestamp: -1 };
@@ -29,7 +27,6 @@ define(['app', 'underscore', 'scbd-angularjs-services/generic-service', '/app/js
                          IGenericService.query('v2016', 'error-logs', filterQuery, null, null, null, 1)
                                     .then(function (recordCount) {
                                         $scope.recordCount = recordCount.count;
-                                        $scope.errors = [];
                                     })
                     }
                     IGenericService.query('v2016', 'error-logs', filterQuery, $scope.skip == 0 ? 0 : $scope.length * $scope.skip, $scope.length, $scope.sort)
@@ -43,7 +40,7 @@ define(['app', 'underscore', 'scbd-angularjs-services/generic-service', '/app/js
                 }
                 
 
-                $scope.$watch('filters', function(old, newVal){
+                $scope.$watch('filters', function(newVal){
 
                     var queries = [ 
                                     { realm: realm.value }
@@ -55,13 +52,21 @@ define(['app', 'underscore', 'scbd-angularjs-services/generic-service', '/app/js
                         queries.push({ createdOn: { "$gte": moment(moment($scope.filters.startDate).format("YYYY-MM-DD")).toISOString() } })
                     
                     filterQuery.$and = queries;
-                    console.log(filterQuery);
+                    
+                    $scope.errors = [];
                     $scope.recordCount = 0;
                     $scope.length = 25;
                     $scope.skip = 0;
                     $scope.loadErrors(true);
                 }, true)
                 
-
+                $scope.loadErrors(true);
+                
+                $scope.getGitHash = function(appVersion){
+                    if(appVersion.indexOf('-')>=0)
+                        return appVersion.split('-')[1];
+                    
+                    return appVersion;
+                }
             }]);
     });
