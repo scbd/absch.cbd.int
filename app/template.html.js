@@ -133,6 +133,10 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             });
 
             $scope.$on('signOut', function(evt, data) {
+
+                var fields = logglyLogger.fields({ realm: realm.value, appVersion: appVersion })
+                fields.user = undefined;
+                logglyLogger.fields(fields)
                 $window.location.reload();
             });
 
@@ -162,7 +166,7 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             });
 
 
-            //============================================================
+        //============================================================
         //
         //
         //============================================================
