@@ -51,7 +51,7 @@
 			<span class="km-value">
 				<ul style="list-style-type: none;padding-left:0;">
 					<li ng-repeat="item in document.email_ss">
-						<a href="mailto:{{item}}"><i class="fa fa-envelope-o" /> {{item}}</a>
+						<a translation-url  href="mailto:{{item}}"><i class="fa fa-envelope-o" /> {{item}}</a>
 					</li>
 				</ul>
 			</span>
@@ -92,7 +92,7 @@
 		<div ng-show="document.url_ss">
 			<label>Link to the information on the CBD website</label>
 			<span class="km-value">
-				<a ng-href="{{document.url_ss | lstring:locale}}" target="_">{{document.url_ss | lstring:locale}}</a>
+				<a translation-url  ng-href="{{document.url_ss | lstring:locale}}" target="_">{{document.url_ss | lstring:locale}}</a>
 			</span>
 		</div>
 	</div>

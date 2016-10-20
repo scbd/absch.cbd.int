@@ -3,8 +3,12 @@
   "description": "Access and Benefit Sharing Clearing-House",
   "dependencies": {
     "bower": "1.7.9",
+    "co": "^4.6.0",
+    "co-fs": "^1.2.0",
+    "ejs": "^2.5.2",
     "express": "4.13.4",
-    "http-proxy": "1.13.2"
+    "http-proxy": "1.13.2",
+    "lodash": "^4.15.0"
   },
   "engine": "node >= 4.2",
   "private": true,

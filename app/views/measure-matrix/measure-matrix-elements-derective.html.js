@@ -10,7 +10,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
             scope: {
                 title:"@",
                 binding: "=ngModel",
-                locales: "=",
+                locale: "=",
                 type: "@",
                 layout: "@",
                 document: "=document",

@@ -6,7 +6,6 @@ dependencies:
   override:
     - docker info
     - docker build -t output --build-arg VERSION=$CIRCLE_SHA1 --build-arg BRANCH=$CIRCLE_BRANCH --build-arg TAG=$CIRCLE_TAG .
-    
 test:
   override:
     - docker run -d -p 8000:8000 output; sleep 10

@@ -131,8 +131,8 @@
 <legend>
     {{title}}
 
-    <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
-    <a class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
+    <a translation-url  class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
+    <a translation-url  class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
 
 </legend>
 
@@ -162,9 +162,9 @@
         <table class="table">
             <tr>
                 <td>
-                    {{$index}}. {{element.title|lstring}}
+                    {{$index}}. {{element.title|lstring:locale}}
                     <span ng-if="element.section">
-                        ({{element.section|lstring}})
+                        ({{element.section|lstring:locale}})
                     </span>
                 </td>
             </tr>
@@ -194,7 +194,7 @@
                             <span ng-if="term.measureType=='linked'">Related to</span>
                             <span ng-if="term.measureType=='amended'">Amended by</span>
                             <span class="color-blue">
-                                <a target="new" ng-href="/database/record/{{term.measure|uniqueID}}" >{{term.title||term.name | lstring:locale}} </a>
+                                <a translation-url  target="new" ng-href="/database/record/{{term.measure|uniqueID}}" >{{term.title||term.name | lstring:locale}} </a>
                                 <span class="color-blue bold" ng-if="otherCustomValues[term.identifier]">: {{otherCustomValues[term.identifier]| lstring:locale}}</span>
                             </span>
                         </span>
@@ -241,7 +241,7 @@
             <tbody>
               <tr ng-repeat="element in otherElements">
                     <td>
-                      - &nbsp; {{element.name|lstring}} ({{element.section|lstring}})
+                      - &nbsp; {{element.name|lstring:locale}} ({{element.section|lstring:locale}})
                     </td>
               </tr>
             </tbody>
@@ -257,7 +257,7 @@
               <span ng-repeat="area in element.areas">
                   {{area|term}} <span ng-if="!$last">,</span>
               </span>
-              <span ng-if="element.section" class="color-blue bold">({{element.section|lstring}})</span>
+              <span ng-if="element.section" class="color-blue bold">({{element.section|lstring:locale}})</span>
         </div>
     </script>
 

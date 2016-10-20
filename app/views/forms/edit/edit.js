@@ -1,6 +1,6 @@
 //fixed a bug with the comment up here ;)
 define([
-    'app', 'app/services/app-config-service.js',
+    'app', '/app/services/app-config-service.js',
     '/app/views/forms/edit/editFormUtility.js',
     '/app/views/forms/edit/field-embed-contact.directive.js',
     '/app/views/forms/edit/edit-contact-base.directive.js',
@@ -13,13 +13,16 @@ define([
     '/app/views/forms/view/view-history-directive.html.js',
     '/app/views/directives/workflow-std-buttons.html.js',
     '/app/views/forms/edit/document-selector.html.js',
-    '/app/views/register/directives/register-top-menu.js'
+    '/app/views/register/directives/register-top-menu.js',
+    'scbd-angularjs-services/locale'
   ], function (app) {
 
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
-                                   "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","underscore", "$route", "breadcrumbs", "appConfigService",
+                                   "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","underscore", "$route", 
+                                   "breadcrumbs", "appConfigService", "locale",
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
-                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, _, $route, breadcrumbs, appConfigService) {
+                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, _, $route, 
+                                              breadcrumbs, appConfigService, locale) {
 
 
     $scope.type = $route.current.$$route.documentType;
@@ -32,7 +35,7 @@ define([
     $scope.status   = "loading";
     $scope.error    = null;
     $scope.tab      = "edit";
-    $scope.review   = { locale: "en" };
+    $scope.review   = { locale: locale };
 
     var breadcrumb = {    
         label : $filter('schemaName')($filter('mapSchema')($scope.type)),
@@ -370,7 +373,7 @@ define([
           header: {
             identifier: guid(),
             schema   : $filter("mapSchema")($scope.type),
-            languages: ["en"]
+            languages: [locale]
           },
           government: $scope.userGovernment() ? { identifier: $scope.userGovernment() } : undefined,
         };

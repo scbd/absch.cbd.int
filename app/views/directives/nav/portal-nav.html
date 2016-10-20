@@ -23,36 +23,36 @@
                         <span ng-show="training_env"> TRAINING</span>
                     </div> -->
                     <li >
-                         <a href="/">
+                         <a translation-url  ng-href=".">
                             <strong class="color-white visible-xs ">ABSCH</strong>
                             <strong class="color-white visible-sm visible-md visible-lg"><i class="fa fa-home"></i></strong>
                         </a>
                     </li>
                     <li>
-                         <a href="/about"> <i class="icon fa fa-question-circle  visible-xs "></i>
+                         <a translation-url  ng-href="about"> <i class="icon fa fa-question-circle  visible-xs "></i>
                             <span class="hidden-xs "> About the ABSCH</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/search"> <i class="icon fa fa-search visible-xs "></i>
+                        <a translation-url  ng-href="search"> <i class="icon fa fa-search visible-xs "></i>
                             <span class="hidden-xs "> Search</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/register"> <i class="icon fa fa-pencil-square-o visible-xs"></i>
+                        <a translation-url  ng-href="register"> <i class="icon fa fa-pencil-square-o visible-xs"></i>
                             <span class="hidden-xs "> Submit</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/countries"> <i class="icon fa fa-globe visible-xs"></i>
+                        <a translation-url  ng-href="countries"> <i class="icon fa fa-globe visible-xs"></i>
                             <span class="hidden-xs"> Country Profiles </span>
                         </a>
                     </li>
                     <!--<li class="last pull-right">
-                        <a ng-click="toggleHelp();"> <i class="fa fa-info-circle" ng-class="{'helpOn':showHelp ,'helpOff':!showHelp }"></i> </i>
+                        <a translation-url  ng-click="toggleHelp();"> <i class="fa fa-info-circle" ng-class="{'helpOn':showHelp ,'helpOff':!showHelp }"></i> </i>
                         </a>
                     </li>-->
-                    <li class="pull-right" ng-if="training_env||development_env"><a href="/forums" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;Forums</span></a></li>
+                    <li class="pull-right" ng-if="training_env||development_env"><a translation-url  href="/forums" ng-class="{'link-active' : getClass('/forums')}"><i class="fa fa-comments"></i><span class="hidden-xs hidden-sm">&nbsp;Forums</span></a></li>
                 </ul>
             </div>
         </div>
@@ -60,15 +60,15 @@
         <nav class="navbar navbar-breadcrumbs navbar-default navbar-static-top"  ng-hide="breadcrumbs.get().length == 1" >
         <div class="container-fluid container-breadcrumbs">
             <div class="color-litegrey" >
-                    <a href="http://www.cbd.int" class="margin-right-xs">CBD</a>
+                    <a translation-url  href="http://www.cbd.int" class="margin-right-xs">CBD</a>
                     <span ng-repeat="breadcrumb in breadcrumbs.get()" >
                         &nbsp;&nbsp;<i class="fa fa-chevron-right color-litegrey"></i>&nbsp;&nbsp;
                         <span ng-if="!breadcrumb.param">
-                            <a ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+                            <a translation-url  ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
                             <span ng-if="$last" ng-bind="breadcrumb.label"></span>
                         </span>
                         <span ng-if="breadcrumb.param">
-                            <a ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+                            <a translation-url  ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
                             <span ng-if="$last" ng-bind="breadcrumb.label"></span>
                         </span>
                     </span>

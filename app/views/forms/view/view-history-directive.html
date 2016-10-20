@@ -12,7 +12,7 @@
         <tbody ng-repeat="document in documents | orderBy:'updatedOn':true" style="font-size:12px;" >
             <tr>
                 <td style="white-space:nowrap;">
-                    <a ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_blank">
+                    <a translation-url  ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_blank">
                         <strong>{{document | uniqueID}}</strong>
                     </a>
                 </td>
@@ -44,14 +44,14 @@
                         <span ng-show="document.body.amendmentDescription">
 						  		<div ng-show="!more">
                                     <span ng-bind-html="document.body.amendmentDescription| lstring:locale | limitTo:200"></span>
-                                    <a ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentDescription| lstring:locale).length > 200">
+                                    <a translation-url  ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentDescription| lstring:locale).length > 200">
                                         <strong>...more</strong> 
                                     </a>
                                 </div>
                                 <div ng-show="more"> 
                                     <span ng-bind-html="document.body.amendmentDescription| lstring:locale">
                                     </span>
-                                    <a ng-href="#" ng-click="more=!more"> <strong>...less</strong></a>
+                                    <a translation-url  ng-href="#" ng-click="more=!more"> <strong>...less</strong></a>
                                 </div>
                         </span>
                     </div>

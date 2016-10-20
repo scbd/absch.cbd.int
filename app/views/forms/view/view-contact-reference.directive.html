@@ -55,7 +55,7 @@
     </div>
 
     <script id="/app/views/forms/view/contact-reference/address" type="text/ng-template">
-        <address style="margin-bottom:2px!important">
+        <a translation-url ddress style="margin-bottom:2px!important">
                 <span ng-show="document.addressHTML" ng-bind-html="document.addressHTML | lstring:locale"></span>
                 {{document.address | lstring:locale}}</div>
                 {{document.city | lstring:locale}}<span ng-show="document.city && document.state">, </span>
@@ -71,14 +71,14 @@
             Fax: <span ng-repeat="item in document.faxes">{{item}}<span ng-show="!$last">, </span></span>
         </div>
         <div ng-show="document.emails">
-            Email: <span ng-repeat="item in document.emails"><a ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
+            Email: <span ng-repeat="item in document.emails"><a translation-url  ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
         </div>
         <div ng-show="document.websites">
-            Website: <span ng-repeat="item in document.websites"><a target="_new" ng-href="{{item.url}}">{{item.url}}</a><span ng-show="!$last">, </span></span>
+            Website: <span ng-repeat="item in document.websites"><a translation-url  target="_new" ng-href="{{item.url}}">{{item.url}}</a><span ng-show="!$last">, </span></span>
         </div>
         <div ng-if="isCNA">
             <!--website url is used when generating certificates-->
-            <a ng-href="{{websiteUrl}}/database/{{document.header.schema | schemaShortName}}/{{(documentForUID || document) | uniqueIDWithoutRevision}}/{{document.info.revision}}" target="_new">
+            <a translation-url  ng-href="{{websiteUrl}}/database/{{document.header.schema | schemaShortName}}/{{(documentForUID || document) | uniqueIDWithoutRevision}}/{{document.info.revision}}" target="_new">
                 <i class="fa fa-external-link-square" aria-hidden="true"></i> 
                 {{(documentForUID || document) | uniqueID}}
             </a>
