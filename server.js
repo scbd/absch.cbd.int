@@ -29,8 +29,13 @@ app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbdde
 // Configure index.html
 
 app.get('/*', function (req, res) {
-    res.cookie('VERSION', process.env.VERSION);
-    res.sendFile(__dirname + '/app/template.html');
+   var appVersion = process.env.TAG;
+   if(!appVersion || appVersion.trim()==''){
+       appVersion =  (process.env.BRNACH||'') + '-'+ (process.env.VERSION ||'');
+   }   
+   res.cookie('appVersion', appVersion);
+   res.cookie('VERSION', process.env.VERSION);      
+   res.sendFile(__dirname + '/app/template.html');
 });
 
 // Start server

@@ -1,22 +1,16 @@
 'use strict';
 define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services', 'services', 'filters',
  '/app/services/app-config-service.js'], function (app, _) {
-
+      
     app.value("realm", {value:"ABS"});
     app.value("showHelp", { value : false });
 
     app.provider("realm", {
 
         $get : ["$location", 'appConfigService', function($location, appConfigService) {
-
-            if(appConfigService.currentRealm){
-                return { value : appConfigService.currentRealm };
-            }
-            return 'ABS';
+            return { value : appConfigService.currentRealm || 'ABS' };
         }]
     });
-
-
     app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
         $locationProvider.html5Mode(true);
@@ -114,7 +108,7 @@ define(['app', 'underscore', 'extended-route-provider','scbd-angularjs-services'
                 when('/register/admin/reported-records',         { templateUrl: '/app/views/register/admin/reported-records.html',   label:'Reported Records',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                 when('/register/admin/reported-records/:id',     { templateUrl: '/app/views/register/admin/reported-records.html',   label:'Record',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                 when('/register/admin/report-counts',            { templateUrl: '/app/views/register/admin/report-count.html',       label:'Report Counts',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
-
+                when('/register/admin/error-logs',               { templateUrl: '/app/views/register/admin/error-logs.html',         label:'Error Logs',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
 
 
                 when('/workshops/lac',               { templateUrl: '/app/views/workshops/lac.html',            label:'Workshops',            resolveController: true, resolveUser: true}).
