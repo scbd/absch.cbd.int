@@ -10,7 +10,8 @@ define(['app', 'underscore', '/app/js/common.js',
 '/app/views/search/search-filters/date-filter.js',
 '/app/views/search/search-results/result-default.js',
 '/app/views/search/search-results/national-records-country.js',
-'/app/services/app-config-service.js'
+'/app/services/app-config-service.js', 'ngDialog',
+'/app/views/register/user-preferences/user-search-filter.js'
 ], function(app, _) {
 
     app.directive('searchDirective', function() {
@@ -20,9 +21,9 @@ define(['app', 'underscore', '/app/js/common.js',
             // transclude: true,
             templateUrl: '/app/views/search/search-directive.html',
             controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
-             'appConfigService', '$routeParams', '$location',
+             'appConfigService', '$routeParams', '$location', 'ngDialog',
             function($scope, $q, realm, searchService, commonjs, localStorageService,
-                $http, thesaurus, appConfigService, $routeParams, $location) {
+                $http, thesaurus, appConfigService, $routeParams, $location, ngDialog) {
     
                     var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
                     var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
@@ -191,7 +192,7 @@ define(['app', 'underscore', '/app/js/common.js',
                         if($scope.setFilters[termID])
                            delete $scope.setFilters[termID];
                         else{
-                           $scope.setFilters[termID] = {type:$scope.searchFilters[filterID].type, name:$scope.searchFilters[filterID].name, id:termID, broader: broader};
+                           $scope.setFilters[termID] = {type:$scope.searchFilters[filterID].type, name:$scope.searchFilters[filterID].name, id:termID, broader: broader,  filterID:filterID};
                         }
 
                         $scope.refresh = true;
@@ -850,7 +851,10 @@ define(['app', 'underscore', '/app/js/common.js',
                         addFilter('pressRelease',  {'sort': 4,'type':'scbd',  'name':'Press Releases', 'id':'pressRelease', 'description':'ABS related press release'});
                     };
 
-                  //===============================================================================================================================
+                  ///////////////
+                  ////===============================================================================================================================
+                  /////////
+
                     function load(){
                         //console.log("loading queries");
                         switch ($scope.currentTab) {
@@ -1031,10 +1035,68 @@ define(['app', 'underscore', '/app/js/common.js',
                         }
                     }
 
+                    $scope.canShowSaveFilter = function(){
+                        return !_.isEmpty($scope.setFilters);
+                    }
+                    $scope.showSaveFilter = function(existingFilter){
+                                                            
+                        var filters = $scope.setFilters;
+
+                        ngDialog.open({
+                            className : 'ngdialog-theme-default wide',
+                            template : 'saveFilterDialog',
+                            controller : ['$scope', '$http','realm', function($scope, $http, realm){
+                                    if(existingFilter)
+                                        $scope.record = existingFilter;
+                                    else
+                                        $scope.record = {filters : _.values(filters) }
+                                    
+                                    $scope.record.realm = realm.value;
+
+                                    $scope.saveFilter = function(){
+                                        $scope.loading = true;                                            
+                                        var operation = $http.post('/api/v2016/user-search-queries', $scope.record);
+                                        if($scope.record._id)
+                                            operation = $http.put('/api/v2016/user-search-queries/' + $scope.record._id, $scope.record);
+                                        operation.then(function (data) {
+                                            record = data.data;
+                                            $scope.closeDialog();
+                                        });
+                                    }
+                                    $scope.closeDialog = function(){
+                                        ngDialog.close();                                            
+                                    }
+
+                            }]
+                        })
+                    } 
+
+                    $scope.runFilter = function(filter){
+
+                        if(filter.filters){
+                            $scope.setFilters = {};
+                            _.map(filter.filters, function(query){
+                                if(query.type == 'text'){
+                                    $scope.saveFreeTextFilter(query);
+                                }
+                                else{
+                                    $scope.saveFilter(query);
+                                }
+                            });
+                            $scope.refresh = !!$scope.refresh;
+                        }
+                    }
+
+                    $scope.clearFilter = function(){
+                        $scope.setFilters = {};
+                        $scope.refresh = !!$scope.refresh;
+                    };
+
                     load();
 
                     loadTabFacets();
 
+                   
             }]//controller
         };
     });
