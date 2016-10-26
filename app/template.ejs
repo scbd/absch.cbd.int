@@ -159,7 +159,34 @@
         function addLoadEvent(func) {
         var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } }
         addLoadEvent(function() { outdatedBrowser( { bgColor: '#f25648', color: '#ffffff', lowerThan: 'boxShadow', languagePath: 'app/libs/outdated-browser/outdatedbrowser/lang/en.html' }) });
+        addLoadEvent(function() {
+            
+            var langRegex = /(ar|en|es|fr|ru|zh)/;
+            var urlLangRegex       = /^\/(en|ar|fr|es|ru|zh)/;
+            var locale = getCookie('locale');
+            var location = window.location;
+            //debugger;
+            if(langRegex.test(locale) && !urlLangRegex.test(location.pathname)){
+                var baseUrl = location.protocol + '//' + location.host + (locale.port ? (':' + location.port) : '')
+                window.location.href = baseUrl + "/" + locale + location.pathname;
+            }
+            console.log(window.location, getCookie('locale'));
 
+        });
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length,c.length);
+                }
+            }
+            return "";
+        }
     if(domain == 'cbd.int'){
          /**************************
           For Googel Analytics
