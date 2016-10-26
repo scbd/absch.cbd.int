@@ -16,11 +16,11 @@ define(['app', 'underscore',
                 authority: 0,
                 database: 0,
                 focalPoint: 0,
-                measure: 0
+                measure: 0,
+                nationalReport: 0
             };
 
             $scope.loading = true;
-
 
             $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
                 .then(function (results) {
@@ -38,6 +38,7 @@ define(['app', 'underscore',
                             headerCount.database += facets.schemas.database || 0;
                             headerCount.focalPoint += facets.schemas.focalPoint || 0;
                             headerCount.measure += facets.schemas.measure || 0;
+                            headerCount.nationalReport += facets.schemas.nationalReport || 0;
                         }
                         return {
                             code: country.code,
@@ -53,7 +54,7 @@ define(['app', 'underscore',
                     $scope.headerCount = headerCount;
                     $element.find('[data-toggle="tooltip"]').tooltip();
                     $scope.loading = false;
-
+                    $scope.countries
                 });
 
 
@@ -61,6 +62,7 @@ define(['app', 'underscore',
             //*************************************************************************************************************************************
             $scope.setPartyFilter = function (pfilter) {
                 $scope.partyFilter = pfilter;
+                 $scope.filterCountries;
             };
 
             if ($routeParams.status) {
@@ -71,7 +73,30 @@ define(['app', 'underscore',
             else
                 $scope.setPartyFilter('All');
 
+            //*************************************************************************************************************************************
+            $scope.$watch('list', function () {
+                    $scope.total = {
+                                    absCheckpoint: 0,
+                                    absCheckpointCommunique: 0,
+                                    absPermit: 0,
+                                    authority: 0,
+                                    database: 0,
+                                    focalPoint: 0,
+                                    measure: 0,
+                                    nationalReport: 0
+                                };
 
+                    angular.forEach($scope.list, function(country){
+                        $scope.total.absCheckpoint += country.schemas.absCheckpoint || 0;
+                        $scope.total.absCheckpointCommunique += country.schemas.absCheckpointCommunique || 0;
+                        $scope.total.absPermit += country.schemas.absPermit || 0;
+                        $scope.total.authority += country.schemas.authority || 0;
+                        $scope.total.database += country.schemas.database || 0;
+                        $scope.total.focalPoint += country.schemas.focalPoint || 0;
+                        $scope.total.measure += country.schemas.measure || 0;
+                        $scope.total.nationalReport += country.schemas.nationalReport || 0;
+                    })
+             }, true)
 
             //*************************************************************************************************************************************
             $scope.hasStatus = function (item) {
@@ -89,8 +114,6 @@ define(['app', 'underscore',
                     return item.isNPInbetweenParty;
                 }
             };
-
-
 
 
             //==================================================================================
