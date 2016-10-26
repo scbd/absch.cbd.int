@@ -41,6 +41,9 @@ app.get('/?:lang(ar|en|es|fr|ru|zh)?/*', function (req, res) {
         var preferredLang = getPreferredLanguage(req);
         var options = { baseUrl: urlPreferredLang || (req.headers.base_url ||  (preferredLang ? ('/'+preferredLang+'/') : '/')) };
         
+        if(preferredLang && parseCookies(req, 'locale')!= preferredLang)
+            res.cookie('locale', preferredLang);
+        
         if(langFilepath){
              return res.render(langFilepath, options);
         } 
