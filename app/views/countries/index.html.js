@@ -56,8 +56,7 @@ define(['app', 'underscore',
                     $scope.loading = false;
                     $scope.countries
                 });
-
-
+                                  
 
             //*************************************************************************************************************************************
             $scope.setPartyFilter = function (pfilter) {

@@ -103,6 +103,18 @@
                     </ul>
                     </div>
 
+					<div class="dropdown" style="display:inline;">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						<span>
+							<strong ng-if="regionFilter==='All' || !regionFilter" >Regional groups</strong>
+						</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                        <li><a translation-url  href="#" ng-click="setRegionFilter('All');" > Show all </a></li>
+						
+                    </ul>
+                    </div>
               </div>
               <div class="col-xs-6 evenly-spaced center-text hidden-xs hidden-sm" >
                             <div>
@@ -160,6 +172,8 @@
 				</div>
 			</div>
 		</div>
+
+
 		<!--end row-->
 		<div class="row linkWhite" style="margin:0;border-bottom:2px solid #DDD;padding:5px 0 10px 0;" ng-click="gotoCountryProfile(country.code)"
 			ng-repeat="country in list = (countries | filter:keyword | filter: hasStatus | orderBy:sortTermFilter:orderList) track by country.name.en">
