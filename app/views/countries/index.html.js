@@ -5,9 +5,12 @@ define(['app', 'underscore',
     '../directives/block-region-directive.js'
 ], function (app, _) {
 
-    app.controller("CountriesMapController", ["$scope", "$element", "$location", "commonjs", "$q", 'searchService', '$filter', '$routeParams', '$compile', '$timeout',
-        function ($scope, $element, $location, commonjs, $q, searchService, $filter, $routeParams, $compile, $timeout) {
+    app.controller("CountriesMapController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams', '$compile', '$timeout',
+        function ($http, $scope, $element, $location, commonjs, $q, searchService, $filter, $routeParams, $compile, $timeout) {
             $scope.sortTerm = "name.en";
+
+            $scope.regionFilter= [];
+            $scope.rfilter="Regional groups";
 
             var headerCount = {
                 absCheckpoint: 0,
@@ -16,11 +19,11 @@ define(['app', 'underscore',
                 authority: 0,
                 database: 0,
                 focalPoint: 0,
-                measure: 0
+                measure: 0,
+                nationalReport: 0
             };
 
             $scope.loading = true;
-
 
             $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
                 .then(function (results) {
@@ -38,8 +41,10 @@ define(['app', 'underscore',
                             headerCount.database += facets.schemas.database || 0;
                             headerCount.focalPoint += facets.schemas.focalPoint || 0;
                             headerCount.measure += facets.schemas.measure || 0;
+                            headerCount.nationalReport += facets.schemas.nationalReport || 0;
                         }
                         return {
+                       
                             code: country.code,
                             name: country.name,
                             isNPParty: country.isNPParty,
@@ -53,14 +58,74 @@ define(['app', 'underscore',
                     $scope.headerCount = headerCount;
                     $element.find('[data-toggle="tooltip"]').tooltip();
                     $scope.loading = false;
+                    $scope.countries
+                    $scope.allcountries = _.clone($scope.countries);
+                });
 
+               
+
+                $q.when(commonjs.getRegions(), function(regions) {
+                        _.each(regions, function(region, index){
+                            addRegionFilter(region);
+                        });
                 });
 
 
+             //===============================================================================================================================
+            function addRegionFilter(region, parent){
+                
+                var level = region.narrowerTerms && region.identifier != '5E5B7AA4-2420-4147-825B-0820F7EC5A4B' && region.identifier != '3D0CCC9A-A0A1-4399-8FA2-41D4D649DB0E' ? region.narrowerTerms.length : 0;
+                
+                var item =  {
+                    name: region.title.en,
+                    id:region.identifier,
+                    level: level,
+                };
+                $scope.regionFilter.push(item);
+
+                _.each(region.narrowerTerms,function(narrower){
+                    addRegionFilter(narrower, region.identifier);
+                });
+            }
+           //*************************************************************************************************************************************
+            $scope.filterRegion = function (termID) {
+                
+                $scope.loading = true;
+                
+                if(!termID){
+                    $scope.rfilter = "Regional groups";
+                    $scope.countries = $scope.allcountries;
+                    $scope.loading = false;
+                    return;
+                }
+
+                url = '/api/v2013/thesaurus/terms/' + termID + '?relations'
+                var test = $q.when($http.get(url)).then(function(o) {
+                    
+                     $scope.rfilter = o.data.name;
+                     var rels = o.data.expandedRelatedTerms;
+                     var filteredcountries= [];
+
+                     _.each(rels,function(r){
+                           _.each($scope.allcountries, function(x){
+                               if(x.code.toLowerCase() == r.toLowerCase())
+                                 filteredcountries.push(x); 
+                             });
+                    });
+                    $scope.countries = filteredcountries;
+                });
+            
+                $scope.loading = false;
+            };
+            
+            
+                
+           
 
             //*************************************************************************************************************************************
             $scope.setPartyFilter = function (pfilter) {
                 $scope.partyFilter = pfilter;
+                 $scope.filterCountries;
             };
 
             if ($routeParams.status) {
@@ -71,7 +136,30 @@ define(['app', 'underscore',
             else
                 $scope.setPartyFilter('All');
 
+            //*************************************************************************************************************************************
+            $scope.$watch('list', function () {
+                    $scope.total = {
+                                    absCheckpoint: 0,
+                                    absCheckpointCommunique: 0,
+                                    absPermit: 0,
+                                    authority: 0,
+                                    database: 0,
+                                    focalPoint: 0,
+                                    measure: 0,
+                                    nationalReport: 0
+                                };
 
+                    angular.forEach($scope.list, function(country){
+                        $scope.total.absCheckpoint += country.schemas.absCheckpoint || 0;
+                        $scope.total.absCheckpointCommunique += country.schemas.absCheckpointCommunique || 0;
+                        $scope.total.absPermit += country.schemas.absPermit || 0;
+                        $scope.total.authority += country.schemas.authority || 0;
+                        $scope.total.database += country.schemas.database || 0;
+                        $scope.total.focalPoint += country.schemas.focalPoint || 0;
+                        $scope.total.measure += country.schemas.measure || 0;
+                        $scope.total.nationalReport += country.schemas.nationalReport || 0;
+                    })
+             }, true)
 
             //*************************************************************************************************************************************
             $scope.hasStatus = function (item) {
@@ -89,8 +177,6 @@ define(['app', 'underscore',
                     return item.isNPInbetweenParty;
                 }
             };
-
-
 
 
             //==================================================================================

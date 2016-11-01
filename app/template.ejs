@@ -65,7 +65,7 @@
                 position: absolute ;
                 right: 0px ;
                 text-align: center ;
-                top: 50% ;
+                top: 30% ;
             }
             div.m-app-loading h1 {
                 font-size: 26px ;
@@ -84,11 +84,12 @@
         <div class="animated-container">
             <div class="messaging">
                 <span class="color-orange ng-scope" ng-if="development_env" style="font-size:48px;font-weight:bold;"> 
-                    <img src="http://absch.cbd.int/app/img/cbd-spine.png" style="height:60px;position:relative;top:-5px;padding:0 5px 0 0;margin:0;">ABSCH 
                     <img src="http://absch.cbd.int/app/img/cbd-logo-green-en.svg" style="height:60px;position:relative;top:-5px;padding:0 5px 0 0;margin:0;">
                 </span>
                 <h1>
-                    <i class="fa fa-spin fa-3x fa-circle-o-notch"></i> ABSCH is loading
+                   <span class="color-black">ABS Clearing-House is loading ...</span>
+                   <br> <br>
+                    <i class="fa fa-spin fa-3x fa-circle-o-notch"></i> 
                 </h1>
             </div>
         </div>
@@ -159,7 +160,34 @@
         function addLoadEvent(func) {
         var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } }
         addLoadEvent(function() { outdatedBrowser( { bgColor: '#f25648', color: '#ffffff', lowerThan: 'boxShadow', languagePath: 'app/libs/outdated-browser/outdatedbrowser/lang/en.html' }) });
+        addLoadEvent(function() {
+            
+            var langRegex = /(ar|en|es|fr|ru|zh)/;
+            var urlLangRegex       = /^\/(en|ar|fr|es|ru|zh)/;
+            var locale = getCookie('locale');
+            var location = window.location;
+            //debugger;
+            if(langRegex.test(locale) && !urlLangRegex.test(location.pathname)){
+                var baseUrl = location.protocol + '//' + location.host + (locale.port ? (':' + location.port) : '')
+                window.location.href = baseUrl + "/" + locale + location.pathname;
+            }
+            console.log(window.location, getCookie('locale'));
 
+        });
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length,c.length);
+                }
+            }
+            return "";
+        }
     if(domain == 'cbd.int'){
          /**************************
           For Googel Analytics

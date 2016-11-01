@@ -491,6 +491,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                            _.each(absHosts, function(host) {
                                url = url.replace(host, '');
                            });
+                           url = url.replace(/^(en|ar|fr|es|ru|zh)\//, '/');
                            $timeout(function() {
                                $location.url(url);
                            }, 100)
