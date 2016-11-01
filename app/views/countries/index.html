@@ -118,7 +118,7 @@
 							<li role="separator" class="divider" ng-if="region.level == 2 || region.level == 1 || region.level == 3 || region.level == 11 || region.level == 9"></li>
 							<li><a translation-url  href="#" ng-click="filterRegion(region.id)" ng-class="{'bold':region.level == 2 || region.level == 1 || region.level == 3 || region.level == 11 || region.level == 9 }"> 
 						   		<span  ng-if="region.level != 0 && region.level != 2 && region.level != 1 && region.level != 3 && region.level != 11 && region.level != 9 ">&nbsp;&nbsp;</span> 
-						    	<span ng-if="region.level == 0">&nbsp; &nbsp; &nbsp; &nbsp;</span> 
+						    	<span ng-if="region.level == 0">&nbsp; &nbsp; &nbsp;</span> 
 							 	&nbsp; &nbsp; {{region.name}} </a></li>
 						</div>
                     </ul>
