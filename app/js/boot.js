@@ -46,7 +46,11 @@ require.config({
         'ngDialog'                  : 'libs/ng-dialog/js/ngDialog.min',
         'socket.io'                 : 'libs/socket.io-1.4.5/index',
         'ngInfiniteScroll'          : 'libs/ngInfiniteScroll/build/ng-infinite-scroll',
-        'angular-loggly-logger'     : 'libs/angular-loggly-logger/angular-loggly-logger'
+        'angular-loggly-logger'     : 'libs/angular-loggly-logger/angular-loggly-logger',
+        'xlsx-core'                 : 'libs/js-xlsx/dist/xlsx.core.min',
+        'xlsx'                      :  'libs/js-xlsx/dist/xlsx',
+        'file-saver'                : 'libs/file-saver.js/FileSaver',
+        'tableexport'               : 'libs/tableexport.js/dist/js/tableexport.min'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -79,6 +83,9 @@ require.config({
         'angular-block-ui'              : { 'deps': ['angular'] },
         'ngDialog'                      : { 'deps': ['angular', 'css!libs/ng-dialog/css/ngDialog.min', 'css!libs/ng-dialog/css/ngDialog-theme-default.css'] },
         'angular-loggly-logger'         : { 'deps': ['angular'] },
+        'xlsx-core'                     : { 'deps': ['jquery'] },
+        'file-saver'                    : { 'deps': ['jquery'] },
+        'tableexport'                   : { 'deps': ['jquery'] },
     },
     packages: [
         { name: 'scbd-branding'          , location : 'libs/scbd-branding' },

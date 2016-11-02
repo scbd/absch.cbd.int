@@ -3,7 +3,11 @@
     <div ng-show="!country" style="padding-left:50%">
         <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" />
     </div>
-
+    <div class="pull-right">
+        <span export export-query="getExportQuery()" query-type="getRecordType()" ></span>
+    </div>
+    <br/>
+    <br/>
     <h4 class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showNFP = !showNFP" ng-class="{'color-litegrey': nfpCount == 0}">
         <i class="fa" ng-class="{'fa-plus':!showNFP, 'fa-minus':showNFP}" style="font-size:14px;font-weight:normal;"></i> ABS National Focal Point (NFP)
         <span class="badge pull-right" ng-class="{'bg-grey3': nfpCount==0, 'bg-black': nfpCount > 0}">{{nfpCount}}</span>

@@ -1,18 +1,18 @@
 {
   "name": "absch-cbd-int",
   "dependencies": {
+    "angucomplete": "https://github.com/darylrowland/angucomplete.git#3bf6ab2da56d514c22800f9dbdfeced66cff03f4",
     "angular": "1.4",
     "angular-animate": "1.4",
-    "angular-route": "1.4",
-    "angular-sanitize": "1.4",
-    "angular-cookies": "1.4",
     "angular-block-ui": "0.2.2",
+    "angular-cookies": "1.4",
     "angular-flex": "https://github.com/scbd/angular-flex.git",
     "angular-intro.js": "1.2.4",
-    "angucomplete": "https://github.com/darylrowland/angucomplete.git#3bf6ab2da56d514c22800f9dbdfeced66cff03f4",
     "angular-loading-bar": "https://github.com/chieffancypants/angular-loading-bar.git#7db32aed5260560a5d4bbdaf4ea7365072d41ec8",
     "angular-loggly-logger": "https://github.com/scbd/angular-loggly-logger.git#2c67428b49951e18bd03cbdd4834d939ba8fba74",
     "angular-material": "0.9.8",
+    "angular-route": "1.4",
+    "angular-sanitize": "1.4",
     "angular-toastr": "1.5.0",
     "bootbox": "4.3.0",
     "bootstrap": "3.1.1",
@@ -25,6 +25,7 @@
     "ionsound": "3.0.0",
     "joyRide": "https://github.com/zurb/joyride.git#v2.0.0",
     "jquery": "2.2.4",
+    "js-xlsx": "https://github.com/SheetJS/js-xlsx.git#v0.8.0",
     "linqjs": "3.0.5",
     "lodash": "3.9.3",
     "mapsicon": "https://github.com/djaiss/mapsicon.git#b3157a80e35f6f8dd8a6ce86646493a50e7eb883",
@@ -46,6 +47,7 @@
     "scbd-branding": "https://github.com/scbd/scbd-branding.git#master",
     "scbd-map": "^1.0.7",
     "socket.io-1.4.5": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js",
+    "tableexport.js": "https://github.com/clarketm/TableExport.git#v3.2.14",
     "underscore": "1.7.0"
   },
   "resolutions": {

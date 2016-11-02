@@ -2,7 +2,8 @@
    '/app/views/measure-matrix/measure-matrix-countries-directive.html.js',
    '/app/js/common.js',
    '/app/views/search/search-results/result-grouped-national-record.js',
-   '/app/services/search-service.js', '/app/services/app-config-service.js'
+   '/app/services/search-service.js', '/app/services/app-config-service.js',
+    '/app/views/directives/export-directive.html.js'
  ], function(app, _, linqjs) {
 
     app.directive('countryProfile', function() {
@@ -101,6 +102,7 @@
                                    $scope.code.toLowerCase() + ' OR permitSourceCountry_ss:' + $scope.code.toLowerCase() + '))',
                         rowsPerPage    : 500
                     };
+                    $scope.exportQuery = searchQuery;
                     //
                     // var queryCPCRecv = $http.get(queryCPCRevURL, {cache: true})
 
@@ -339,6 +341,13 @@
                 //         item.measureMatrix = !$scope.measureMatrixDocuments.selectAll;
                 //     })
                 // }
+                $scope.getExportQuery = function(){
+                    return $scope.exportQuery;
+                
+                }
+                $scope.getRecordType = function(){
+                    return 'list';
+                }
             }]
 
         };
