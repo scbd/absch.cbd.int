@@ -5,22 +5,14 @@
             width: 750px !important;
         }
     </style>
+    <input type="button" class="btn btn-primary" value="Add" ng-click="add()" />
+                   
     <div style="width:100%" ng-show="userFilters.length>0">
         <div class="row table-striped" style="padding:10px;border-bottom:1px solid #ddd;">
             <div class="col-xs-2">Filter Title</div>
             <div class="col-xs-2">last Updated On</div>
             <div class="col-xs-2"></div>
         </div>
-        <div  class="row" style="padding:10px;border-bottom:1px solid #ddd;"
-         ng-repeat="record in userFilters | orderBy:'reportedOn':'desc'">
-            <div>
-                <div class="filter col-xs-2">
-                    {{record.queryTitle}}
-                </div>
-                <div class="filter col-xs-1">
-                    {{(record.meta.modifiedOn||record.meta.createdOn)|formatDate}}
-                </div>
-                 <div class="filter col-xs-8">
         <div  class="row table-striped" style="padding:10px;border-bottom:1px solid white;"
          ng-repeat="record in userFilters | orderBy:'reportedOn':'desc'">
             <div>
@@ -72,6 +64,26 @@
                         <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
                     </span>
                 </span>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">No</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="confirmDelete()" ng-disabled="loading">Yes</button>
+        </div>
+    </script>
+
+
+    <script type="text/ng-template" id="newFilterDialog">
+        <div class="modal-header">
+            <h3 class="modal-title">
+              Add/Edit filter
+            </h3>
+        </div>
+
+        <div class="modal-body">
+            <div class="col-xs-12">
+                <search-directive></search-directive>
             </div>
         </div>
 
