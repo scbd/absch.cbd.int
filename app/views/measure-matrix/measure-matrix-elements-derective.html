@@ -158,7 +158,7 @@
             </td>
         </tr>
     </table>
-    <script type="text/ng-template" id="/app/views/search/matrix/new-measure-matrix.directive">
+    <script type="text/ng-template" trados-translation="true" id="/app/views/search/matrix/new-measure-matrix.directive">
         <table class="table">
             <tr>
                 <td>
@@ -174,7 +174,7 @@
             </div>
         </div>
     </script>
-    <script type="text/ng-template" id="/app/views/search/matrix/measure-matrix.directive/abs/inner">
+    <script type="text/ng-template" trados-translation="true" id="/app/views/search/matrix/measure-matrix.directive/abs/inner">
         <!--{{term.identifier}}{{term.answer}}-->
         <table class="table" ng:if="(term.identifier=='CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F' || term.isChildSelected || (!term.broaderTerms && term.narrowerTerms) || (!term.broaderTerms && !term.narrowerTerms) || (term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && term.answer))">
             <tr ng:class="{'elementMeasure':term.isMeasure, 'whiteTopBorder':term.hasMeasure}" >
@@ -235,7 +235,7 @@
         </table>
     </script>
 
-    <script  type="text/ng-template"  id="/app/views/forms/edit/view-measure.directive/abs/inner/other">
+    <script  type="text/ng-template" trados-translation="true"  id="/app/views/forms/edit/view-measure.directive/abs/inner/other">
      <div style="padding-left:25px;">
         <table class="table table-hover" style="padding:0;margin:0;width:100%;">
             <tbody>
@@ -248,7 +248,7 @@
         </table>
       </div>
     </script>
-    <script  type="text/ng-template"  id="/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement">
+    <script  type="text/ng-template" trados-translation="true"  id="/app/views/forms/edit/viewmeasure.directive/abs/inner/scopeElement">
         <div ng-repeat="element in elements" style="padding-left:25px;">
             <span ng-repeat="area in element.types">
                - &nbsp; {{area|term}}<span ng-if="!$last">,</span>

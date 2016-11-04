@@ -305,7 +305,7 @@
             <div ng:repeat="term in rootTerms" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner'"></div>
         </div>
     </div>
-    <script type="text/ng-template" id="/app/views/forms/edit/edit-measure.directive/abs/inner">
+    <script type="text/ng-template" trados-translation="true" id="/app/views/forms/edit/edit-measure.directive/abs/inner">
         <div ng-class="{measureChecked : identifiers[term.identifier]}" style="" ng:if="!isStaticIdentifier(term.identifier) && (!term.broaderTerms || isParentSelected(term.identifier, term.level) || isOther(term))">
             <label for="col_{{term.identifier}}" style="width:0px;height:0px;display:inline">
             <span style="display:none">
@@ -373,7 +373,7 @@
         </ul>
     </script>
 
-    <script type="text/ng-template" id="/app/views/forms/edit/edit-measure.directive/abs/inner/other">
+    <script type="text/ng-template" trados-translation="true" id="/app/views/forms/edit/edit-measure.directive/abs/inner/other">
         <table class="table table-hover" style="padding:0;margin:0;width:100%;">
             <tr ng-repeat="element in otherElements">
                 <td ng-show="otherElements.length > 1" class="text-center" style="vertical-align:middle;width:30px;">
