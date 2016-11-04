@@ -4,17 +4,17 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
     '/app/views/directives/nav/portal-branding.js',
     'scbd-branding/directives/header/header',
     '/app/views/directives/nav/portal-nav.js',
-    'ngAria', 'angular-animate', 'toastr', 'ionsound'
+    'ngAria', 'angular-animate', 'toastr', 'ionsound', 'moment', 
     //, '/app/services/app-config-service.js'
 ], function(app, _) {
     'use strict';
 
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
         '$location','$anchorScroll', 'breadcrumbs', 'toastr', '$route',
-        'cfgUserNotification','$window', '$element','localStorageService', 'appConfigService', //'apiUrl',
+        'cfgUserNotification','$window', '$element','localStorageService', 'appConfigService', 'LogglyLogger', 'locale',
         function($scope, $rootScope, showHelp, $location,
             $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window, $element, localStorageService,
-            appConfigService
+            appConfigService, logglyLogger, locale
             //, apiUrl
         ) {
 
@@ -25,7 +25,11 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             $scope.$root.pageTitle = {
                 text: ""
             };
-
+            
+            //set default moment lang
+            var lang = locale;
+            if(lang=='zh')lang= 'zh-cn'; //moment has two ZH, use ZH-CN
+            moment.lang(lang);
 
 
 
