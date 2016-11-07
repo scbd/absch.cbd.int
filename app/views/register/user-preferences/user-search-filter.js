@@ -1,4 +1,5 @@
-define(['app', 'underscore', 'ngDialog'], function (app, _) {
+define(['app', 'underscore', 'ngDialog',
+    '/app/views/search/search-directive.js'], function (app, _) {
 
     app.directive("userSearchFilters", ['$rootScope', 'ngDialog', function ($rootScope, ngDialog) {
 
@@ -16,7 +17,7 @@ define(['app', 'underscore', 'ngDialog'], function (app, _) {
 
                 function loadSavedFilters(){
                     if($scope.user && $scope.user.isAuthenticated){
-                        $http.get('/api/v2016/user-search-queries')
+                        $http.get('/api/v2016/me/search-queries')
                             .then(function (data) {
                                 $scope.userFilters = data.data
                             });
@@ -44,7 +45,7 @@ define(['app', 'underscore', 'ngDialog'], function (app, _) {
 
                                             $scope.confirmDelete = function(){
                                                 $scope.loading = true;                                            
-                                                $http.delete('/api/v2016/user-search-queries/' + $scope.record._id)
+                                                $http.delete('/api/v2016/me/search-queries/' + $scope.record._id)
                                                 .then(function () {
                                                     removeRecord();
                                                     $scope.closeDialog();
@@ -61,6 +62,32 @@ define(['app', 'underscore', 'ngDialog'], function (app, _) {
                     }
                 }
 
+                $scope.add = function(){
+
+                    ngDialog.open({
+                                    className : 'ngdialog-theme-default wide',
+                                    template : 'newFilterDialog',
+                                    controller : ['$scope', '$http', function($scope, $http){
+                                            
+
+                                            $scope.confirmDelete = function(){
+                                                $scope.loading = true;                                            
+                                                $http.delete('/api/v2016/me/search-queries/' + $scope.record._id)
+                                                .then(function () {
+                                                    removeRecord();
+                                                    $scope.closeDialog();
+                                                });
+                                            }
+                                            $scope.closeDialog = function(){
+                                                ngDialog.close();                                            
+                                            }
+
+                                    }]
+                                })
+                    function removeRecord(){
+                        $scope.userFilters.splice($scope.userFilters.indexOf(record), 1);;
+                    }
+                }
                 loadSavedFilters();
             }]
         };

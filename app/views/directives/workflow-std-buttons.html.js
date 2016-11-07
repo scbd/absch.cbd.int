@@ -482,7 +482,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                    $timeout(function() {
                        if($route.current.params.workflow){
                            $timeout(function() {
-                               $location.url('/register/' + $filter("schemaShortName")(document_type)+'/' + $route.current.params.identifier + '/view');
+                               $location.url('/register/' + $filter("urlSchemaShortName")(document_type)+'/' + $route.current.params.identifier + '/view');
                            }, 100);
                        }
                        else if ($rootScope.next_url) {
@@ -491,12 +491,13 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                            _.each(absHosts, function(host) {
                                url = url.replace(host, '');
                            });
+                           url = url.replace(/^(en|ar|fr|es|ru|zh)\//, '/');
                            $timeout(function() {
                                $location.url(url);
                            }, 100)
                        } else {
                            $timeout(function() {
-                               $location.url('/register/' + $filter("schemaShortName")(document_type));
+                               $location.url('/register/' + $filter("urlSchemaShortName")(document_type));
                            }, 100);
                        }
                    }, 100);
@@ -534,7 +535,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                     });
 
                     $timeout(function() {
-                        $location.path('/register/' + $filter("schemaShortName")(document_type));
+                        $location.path('/register/' + $filter("urlSchemaShortName")(document_type));
                     }, 1000);
 
                 };
@@ -555,7 +556,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
                         });
                     }
                     $timeout(function() {
-                        $location.path('/register/' + $filter("schemaShortName")(document_type));
+                        $location.path('/register/' + $filter("urlSchemaShortName")(document_type));
                     }, 1000);
 
                 };

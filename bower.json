@@ -25,6 +25,7 @@
     "ionsound": "3.0.0",
     "joyRide": "https://github.com/zurb/joyride.git#v2.0.0",
     "jquery": "2.2.4",
+    "js-xlsx": "https://github.com/SheetJS/js-xlsx.git#v0.8.0",
     "linqjs": "3.0.5",
     "lodash": "3.9.3",
     "mapsicon": "https://github.com/djaiss/mapsicon.git#b3157a80e35f6f8dd8a6ce86646493a50e7eb883",
@@ -39,13 +40,14 @@
     "require-shim": "https://github.com/zetlen/require-shim.git#95b5aaea4530fb2861cc475497c7b4c62204628d",
     "requirejs": "2.1.20",
     "requirejs-domready": "2.0.1",
-    "requirejs-plugins": "1.0.3",
+    "requirejs-plugins": "~1.0.3",
     "requirejs-text": "2.0.14",
     "scbd-angularjs-controls": "https://github.com/scbd/scbd-angularjs-controls.git#master",
     "scbd-angularjs-services": "https://github.com/scbd/scbd-angularjs-services.git#master",
     "scbd-branding": "https://github.com/scbd/scbd-branding.git#master",
     "scbd-map": "^1.0.7",
     "socket.io-1.4.5": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js",
+    "tableexport.js": "https://github.com/clarketm/TableExport.git#v3.2.14",
     "underscore": "1.7.0"
   },
   "resolutions": {

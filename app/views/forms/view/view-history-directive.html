@@ -1,4 +1,4 @@
-<div id="view-history" style="max-height:200px;overflow:scroll;">
+﻿<div id="view-history" style="max-height:200px;overflow:scroll;">
     <table style="width:100%!important;" class="table table-condensed" >
         <tr>
                 <th class="color-litegrey" style="font-size:12px;bold;"> Unique identifier</th>
@@ -6,13 +6,13 @@
                 <th class="color-litegrey" style="font-size:12px;bold;"> Date <span ng-if="!publicView">Published</span> </th>
                 <th class="color-litegrey" style="font-size:12px;bold;" ng-if="!publicView"> Date Requested </th>
             </tr>
-            <tr ng-if="documents.length =< 0">
+            <tr ng-if="documents.length == 0">
              <td colspan="4" > no history available  </td>
            </tr>
         <tbody ng-repeat="document in documents | orderBy:'updatedOn':true" style="font-size:12px;" >
             <tr>
                 <td style="white-space:nowrap;">
-                    <a translation-url  ng-href="/database/{{document.type | schemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_blank">
+                    <a translation-url  ng-href="/database/{{document.type | urlSchemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_blank">
                         <strong>{{document | uniqueID}}</strong>
                     </a>
                 </td>

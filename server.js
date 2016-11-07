@@ -41,6 +41,9 @@ app.get('/?:lang(ar|en|es|fr|ru|zh)?/*', function (req, res) {
         var preferredLang = getPreferredLanguage(req);
         var options = { baseUrl: urlPreferredLang || (req.headers.base_url ||  (preferredLang ? ('/'+preferredLang+'/') : '/')) };
         
+        if(preferredLang && parseCookies(req, 'locale')!= preferredLang)
+            res.cookie('locale', preferredLang);
+        
         if(langFilepath){
              return res.render(langFilepath, options);
         } 
@@ -100,7 +103,7 @@ function getPreferredLanguage(req){
     if(req.params.lang)
         return req.params.lang;
 
-    var htlmRegex       = /.(html|ejs)/g; ///.html?[^.]/g//\.html(?!.js)
+    var htlmRegex       = /.(html|ejs|json)/g; ///.html?[^.]/g//\.html(?!.js)
     var cookieLangRegex = /locale=(ar|fr|es|ru|zh)/g
     var langRegex       = /^(ar|fr|es|ru|zh)/;
     var url = req.url;

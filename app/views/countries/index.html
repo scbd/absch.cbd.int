@@ -1,4 +1,4 @@
-<div ng-controller="CountriesMapController">
+﻿<div ng-controller="CountriesMapController">
 	<style>
 		table {
 			border-collapse: collapse;
@@ -84,42 +84,71 @@
                     </div>
 
                     <input type="text" class="form-control" ng-model="keyword" placeholder="search for a country" style="width:180px;display:inline;margin-left:3px;"></input>
-                    <div class="visible-md" style="padding-top:5px;"></div>
-                    <div style="padding-top:5px;" class="visible-xs"></div>
-                    <a translation-url  ng-href="#" ng-click="setPartyFilter('All'); " style="margin-left:10px;" class="letter" ng-class="{'letter-active':partyFilter==='All' || !partyFilter}" >All</a>
-                    <a translation-url  ng-href="#" ng-click="setPartyFilter('party')" style="margin-left:10px;" class="letter  " ng-class="{'letter-active':partyFilter == 'party'}">
-                        <i class="color-party fa fa-square"></i> Parties</a>
-                        <a translation-url  ng-href="#" ng-click="setPartyFilter('inbetween')" style="margin-left:10px;" class="letter  " ng-class="{'letter-active':partyFilter == 'inbetween'}">
-                        <i class="color-inbetween fa fa-square"></i> Ratified, not yet Party</a>
-                    <a translation-url  ng-href="#" ng-click="setPartyFilter('nonparty')" style="margin-left:10px;" class="letter " ng-class="{'letter-active':partyFilter == 'nonparty'}" >
-                        <i class="color-nonparty fa fa-square"></i>  Non-Parties</a>
 
+				   <div class="dropdown" style="display:inline;">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						<span>
+							<strong ng-if="partyFilter==='All' || !partyFilter" >Party Status</strong>
+							<strong ng-if="partyFilter == 'party'" ><i class="color-party fa fa-square"></i> Parties</strong>
+							<strong ng-if="partyFilter == 'inbetween'" ><i class="color-inbetween fa fa-square"></i> Ratified, not yet Party</strong>
+							<strong ng-if="partyFilter == 'nonparty'" ><i class="color-nonparty fa fa-square"></i> Non-Parties</strong>
+						</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><a translation-url  href="#" ng-click="setPartyFilter('All');" > Show all </a></li>
+						<li role="separator" class="divider"></li>
+						<li><a translation-url  href="#" ng-click="setPartyFilter('party');" > <i class="color-party fa fa-square"></i> Parties</a></li>
+						<li><a translation-url  href="#" ng-click="setPartyFilter('inbetween');" >  <i class="color-inbetween fa fa-square"></i> Ratified, not yet Party</a></li>
+						<li><a translation-url  href="#" ng-click="setPartyFilter('nonparty');" > <i class="color-nonparty fa fa-square"></i> Non-Parties</a></li>
+                    </ul>
+                    </div>
+
+					<div class="dropdown" style="display:inline;">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						<span>
+							<strong ng-if="rfilter==='Regional groups'">Regional groups</strong>
+							<strong ng-if="rfilter !== 'Regional groups' && rfilter" >{{rfilter}}</strong>
+						</span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" style="width:520px;max-height:450px; overflow:scroll;" aria-labelledby="dropdownMenu3" >
+                        <li><a translation-url  href="#" ng-click="filterRegion(null)"> Show all </a></li>
+						<div ng-repeat="region in regionFilter" >
+							<li role="separator" class="divider" ng-if="region.level == 2 || region.level == 1 || region.level == 3 || region.level == 11 || region.level == 9"></li>
+							<li><a translation-url  href="#" ng-click="filterRegion(region.id)" ng-class="{'bold':region.level == 2 || region.level == 1 || region.level == 3 || region.level == 11 || region.level == 9 }"> 
+						   		<span  ng-if="region.level != 0 && region.level != 2 && region.level != 1 && region.level != 3 && region.level != 11 && region.level != 9 ">&nbsp;&nbsp;</span> 
+						    	<span ng-if="region.level == 0">&nbsp; &nbsp; &nbsp;</span> 
+							 	&nbsp; &nbsp; {{region.name}} </a></li>
+						</div>
+                    </ul>
+                    </div>
               </div>
               <div class="col-xs-6 evenly-spaced center-text hidden-xs hidden-sm" >
                             <div>
                                 <span style="cursor:pointer;" ng-click="sortTable('NFP')" data-toggle="tooltip" title="ABS National Focal Points" data-container="body">
                                     <span id="nfpCount" class="bold color-black">NFP&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span><br>
-					<!--<span class="badge">{{headerCount.focalPoint}}</span>-->
+					<span class="badge bg-black">{{total.focalPoint}}</span>
 					</span>
 				</div>
 
 				<div>
 					<span style="cursor:pointer;" ng-click="sortTable('CNA')" data-toggle="tooltip" title="Competent National Authorities" data-container="body">
                                     <span id="cnaCount" class="bold color-black">CNA&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span><br>
-					<!--<span class="badge">{{headerCount.authority}}</span>-->
+					<span class="badge bg-black">{{total.authority}}</span>
 					</span>
 				</div>
 				<div>
 					<span style="cursor:pointer;" ng-click="sortTable('MSR')" data-toggle="tooltip" title="Legislative, administrative or policy measures"
 						data-container="body">
                                     <span id="msrCount" class="bold color-black">MSR&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span><br>
-					<!--<span class="badge">{{headerCount.measure}}</span>-->
+					<span class="badge bg-black">{{total.measure}}</span>
 					</span>
 				</div>
 				<div>
 					<span style="cursor:pointer;" ng-click="sortTable('NDB')" data-toggle="tooltip" title="National Websites and Databases" data-container="body">
                                     <span id="ndbCount" class="bold color-black">NDB&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span><br>
-					<!--<span class="badge">{{headerCount.database}}</span>-->
+					<span class="badge bg-black">{{total.database}}</span>
 					</span>
 				</div>
 
@@ -127,34 +156,33 @@
 					<span style="cursor:pointer;" ng-click="sortTable('IRCC')" data-toggle="tooltip" title="Internationally Recognized Certificate of Compliance"
 						data-container="body">
                                     <span id="irccCount" class="bold color-black">IRCC&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span><br>
-					<!--<span class="badge">{{headerCount.absPermit}}</span>-->
+					<span class="badge bg-black">{{total.absPermit}}</span>
 					</span>
 				</div>
 				<div>
 					<span style="cursor:pointer;" ng-click="sortTable('CP')" data-toggle="tooltip" title="Checkpoints" data-container="body">
                                     <span id="cpCount" class="bold color-black">CP&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span><br>
-					<!--<span class="badge">{{headerCount.absCheckpoint}}</span>-->
+					 <span class="badge bg-black">{{total.absCheckpoint}}</span>
 					</span>
 				</div>
 				<div>
 					<span style="cursor:pointer;" ng-click="sortTable('CPC')" data-toggle="tooltip" title="Checkpoint Communiqués" data-container="body">
                                     <span id="cpcCount" class="bold color-black">CPC&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span><br>
-					<!--<span class="badge">{{headerCount.absCheckpointCommunique}}</span>-->
+					<span class="badge bg-black">{{total.absCheckpointCommunique}}</span>
 					</span>
 				</div>
 				<div>
 					<span style="cursor:pointer;" ng-click="sortTable('NR')" data-toggle="tooltip" title="Interim National Reports on the Implementation of the Nagoya Protocol"
 						data-container="body">
-                                    <span id="cpcCount" class="bold color-black">NR&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span><br>
-					<!--<span class="badge">{{headerCount.nationalReport}}</span>-->
+                                    <span id="nrCount" class="bold color-black">NR&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span><br>
+					<span class="badge bg-black">{{total.nationalReport}}</span>
 					</span>
 				</div>
 			</div>
 		</div>
 		<!--end row-->
-
 		<div class="row linkWhite" style="margin:0;border-bottom:2px solid #DDD;padding:5px 0 10px 0;" ng-click="gotoCountryProfile(country.code)"
-			ng-repeat="country in ct = (countries | filter:keyword | filter: hasStatus | orderBy:sortTermFilter:orderList) track by country.name.en">
+			ng-repeat="country in list = (countries | filter:keyword | filter: hasStatus | orderBy:sortTermFilter:orderList) track by country.name.en">
 			<div class="col-md-6">
 
 				<div style="text-align:left;width:30px;display:inline-block;"> {{$index+1}} </div>

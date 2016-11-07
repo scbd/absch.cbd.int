@@ -1,5 +1,5 @@
 'use strict';
-define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate', 'text-angular', 'ngSmoothScroll',
+define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate', 'text-angular', 'ngSmoothScroll', 'angular-loggly-logger',
     ],
     function(angular) {
 

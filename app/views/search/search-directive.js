@@ -11,7 +11,8 @@ define(['app', 'underscore', '/app/js/common.js',
 '/app/views/search/search-results/result-default.js',
 '/app/views/search/search-results/national-records-country.js',
 '/app/services/app-config-service.js', 'ngDialog',
-'/app/views/register/user-preferences/user-search-filter.js'
+'/app/views/register/user-preferences/user-search-filter.js',
+'/app/views/directives/export-directive.html.js'
 ], function(app, _) {
 
     app.directive('searchDirective', function() {
@@ -227,6 +228,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             currentPage : nationalCurrentPage,
                             rowsPerPage: $scope.itemsPerPage
                         };
+                        $scope.exportNationalQuery = groupQuery;
                         $scope.nationalLoading = true;
                         searchOperation = searchService.group(groupQuery, queryCanceler);
 
@@ -280,6 +282,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             rowsPerPage: $scope.itemsPerPage
                         };
 
+                        $scope.exportReferenceQuery = listQuery;
                         searchOperation = searchService.list(listQuery, queryCanceler);
 
                         $q.when(searchOperation)
@@ -326,6 +329,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             rowsPerPage : $scope.itemsPerPage
                         };
 
+                        $scope.exportScbdQuery = listQuery;
                         searchOperation = searchService.list(listQuery, queryCanceler);
 
                         $q.when(searchOperation)
@@ -1096,6 +1100,19 @@ define(['app', 'underscore', '/app/js/common.js',
 
                     loadTabFacets();
 
+                    $scope.getExportQuery = function(){
+                       
+                       if($scope.currentTab =='nationalRecords')
+                            return $scope.exportNationalQuery;
+                       if($scope.currentTab =='referenceRecords')
+                            return $scope.exportReferenceQuery;
+                       if($scope.currentTab =='scbdRecords')
+                            return $scope.exportScbdQuery;
+                    
+                    }
+                    $scope.getRecordType = function(){
+                        return $scope.currentTab==='nationalRecords' ? 'group' : 'list';
+                    }
                    
             }]//controller
         };

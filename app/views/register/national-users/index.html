@@ -1,4 +1,4 @@
-<div id="RegisterPage">
+﻿<div id="RegisterPage">
 
     <link href="/app/css/register.css" rel="stylesheet">
     <link href="/app/css/record.css" rel="stylesheet">
@@ -66,7 +66,7 @@
 
                     <div ng-switch="error.code + '-' + error.field">
                         <div class="alert alert-warning" ng-switch-when="mandatory-government">
-                            <b>Oops...</b> We're sorry, but you are not member of any government.
+                            <b>Oops...</b> You are not authorized access this page. This page is only available to national users. Please contact the absch@cbd.int if you require assistance.
                         </div>
                         <div class="alert alert-warning" ng-switch-when="forbidden-">
                             <b>Oups...</b> We're sorry, but you are not authorized access this page.

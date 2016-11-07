@@ -1,5 +1,7 @@
 ﻿
-define(["app",'/app/js/common.js', '../services/app-config-service'], function (app) {
+define(["app", 'json!/app/app-data/schema-name-plural.json', 
+'/app/js/common.js', '../services/app-config-service'], 
+function (app, schemaNamePlural) {
 
 	app.directive("translationUrl", ['$browser', function($browser){
 		return {
@@ -231,33 +233,8 @@ define(["app",'/app/js/common.js', '../services/app-config-service'], function (
 		return function( schema ) {
 			if(!schema)
 				return schema;
-
-			if(schema.toLowerCase()=="focalpoint"				 ) return "ABS National Focal Points";
-			if(schema.toLowerCase()=="authority"				 ) return "Competent National Authorities";
-			if(schema.toLowerCase()=="contact"					 ) return "Contact";
-			if(schema.toLowerCase()=="database"					 ) return "National Websites or Databases";
-			if(schema.toLowerCase()=="resource"					 ) return "Virtual Library Resources";
-			if(schema.toLowerCase()=="organization"				 ) return "Organizations";
-			if(schema.toLowerCase()=="measure" 					 ) return "Legislative, Administrative or Policy Measures";
-			if(schema.toLowerCase()=="abscheckpoint"			 ) return "Checkpoints";
-			if(schema.toLowerCase()=="abscheckpointcommunique"   ) return "Checkpoint Communiqués";
-			if(schema.toLowerCase()=="abspermit"				 ) return "Internationally Recognized Certificates of Compliance";
-            if(schema.toLowerCase()=="meetingdocument"			 ) return "Meeting Documents";
-            if(schema.toLowerCase()=="pressrelease"				 ) return "Press Releases";
-			if(schema.toLowerCase()=="news"						 ) return "News";
-			if(schema.toLowerCase()=="new"						 ) return "What's New";
-            if(schema.toLowerCase()=="statement"			     ) return "Statement";
-			if(schema.toLowerCase()=="absnationalreport"		 ) return "Interim National Reports on the Implementation of the Nagoya Protocol";
-			if(schema.toLowerCase()=="modelcontractualclause"	 ) return "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards";
-			if(schema.toLowerCase()=="communityprotocol"		 ) return "Community Protocols and Procedures and Customary Laws";
-			if(schema.toLowerCase()=="meeting"					 ) return "Meetings";
-			if(schema.toLowerCase()=="notification"				 ) return "Notifications";
-			if(schema.toLowerCase()=="capacitybuildinginitiative") return "Capacity-building Initiatives";
-			if(schema.toLowerCase()=="capacitybuildingresource"  ) return "Capacity-building Resources";
-			if(schema.toLowerCase()=="endorsement"				 ) return "Endorsements";
-
-
-			return schema;
+			
+			return schemaNamePlural[schema.toLowerCase()]|| schema;
 		};
 	}]);
 

@@ -226,7 +226,7 @@ define(['app', 'underscore',
 
 
 					$scope.edit = function (workflow, activity, workflowId) {
-						var schemaName = $filter("schemaShortName")(workflow.data.metadata.schema);
+						var schemaName = $filter("urlSchemaShortName")(workflow.data.metadata.schema);
 						$location.url('/register/' + schemaName + '/' + activity.input.identifier + '/edit?workflow=' + workflowId);
 					}
 
