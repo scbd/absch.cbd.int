@@ -43,7 +43,7 @@
                         <span class="glyphicon glyphicon-random"></span> Show Reference</a>-->
                         <a translation-url  href="#" class="btn btn-sm btn-primary color-white" ng-click="refreshList(schema);" style="color:#fff;">
                             <i class="fa fa-refresh"></i> Refresh</a>
-                        <a translation-url  ng-href="/register/{{schema|schemaShortName}}/new" class="btn btn-sm btn-primary" style="color:#fff;" id="new_button">
+                        <a translation-url  ng-href="/register/{{schema|urlSchemaShortName}}/new" class="btn btn-sm btn-primary" style="color:#fff;" id="new_button">
                             <i class="fa fa-plus-square"></i> Add New </a>
                     </div>
                 </div>
@@ -73,18 +73,18 @@
 
                         <td style="width:40%; padding-left:10px;">
                             <span ng-show="isPublished(record) && !isDraft(record) && !isRequest(record)">
-                            <a translation-url  ng-href="/register/{{record.type|schemaShortName}}/{{record.identifier}}/view" ng-show="record.documentID">
+                            <a translation-url  ng-href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/view" ng-show="record.documentID">
                                 {{(record.workingDocumentTitle||record.title)|lstring}}
                             </a>
                         </span>
                             <span ng-show="isRequest(record)">
-                            <a translation-url  ng-href="/register/{{record.type|schemaShortName}}/{{record.identifier}}/view">
+                            <a translation-url  ng-href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/view">
                                 {{(record.workingDocumentTitle||record.title)|lstring}}
                             </a>
                         </span>
 
                             <span ng-show="isDraft(record)  && !isRequest(record)">
-                            <a translation-url  href="/register/{{record.type|schemaShortName}}/{{record.identifier}}/edit">
+                            <a translation-url  href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/edit">
                                 {{(record.workingDocumentTitle||record.title)|lstring}}
                             </a>
                         </span>
@@ -154,7 +154,7 @@
                                 <div ng-show="!record.revoked && isPublished(record) && !isRequest(record)" class="color-published-green bold"> Published </div>
                                 <div ng-show="!record.revoked && isDraft(record) && !isRequest(record)" class="color-litegrey bold"> Draft </div>
                                 <span class="color-red bold" ng-show="record.revoked">Revoked</span>
-                                <a translation-url  class="btn btn-danger color-white" ng-show="!record.revoked  && isRequest(record) && !record.isUpdating " ng-href="/register/{{record.metadata.schema | schemaShortName}}/{{record.identifier}}/view">
+                                <a translation-url  class="btn btn-danger color-white" ng-show="!record.revoked  && isRequest(record) && !record.isUpdating " ng-href="/register/{{record.metadata.schema | urlSchemaShortName}}/{{record.identifier}}/view">
                                     Pending approval
                                 </a>
                                 <div class="color-red bold" ng-show="!record.revoked && isRequest(record) && record.isUpdating">
@@ -173,7 +173,7 @@
                                 <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
                                 <button title="Locked for edit" ng-show="!record.revoked && isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
                                 <button title="Cancel request" ng-show="!record.revoked && isRequest(record) && showAddButton() && isMyRecord(record)" type="button" class="btn btn-default" ng-click="askRecallWorkflowRequest(record)"><i class="fa fa-undo"></i></button>
-                                <a translation-url  title="Edit" ng-show="!record.revoked && !isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|schemaShortName}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
+                                <a translation-url  title="Edit" ng-show="!record.revoked && !isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
                                 <button title="Delete" ng-show="!record.revoked && !isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
                             </div>
                         </td>

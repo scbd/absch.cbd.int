@@ -78,7 +78,7 @@
         </div>
         <div ng-if="isCNA">
             <!--website url is used when generating certificates-->
-            <a translation-url  ng-href="{{websiteUrl}}/database/{{document.header.schema | schemaShortName}}/{{(documentForUID || document) | uniqueIDWithoutRevision}}/{{document.info.revision}}" target="_new">
+            <a translation-url  ng-href="{{websiteUrl}}/database/{{document.header.schema | urlSchemaShortName}}/{{(documentForUID || document) | uniqueIDWithoutRevision}}/{{document.info.revision}}" target="_new">
                 <i class="fa fa-external-link-square" aria-hidden="true"></i> 
                 {{(documentForUID || document) | uniqueID}}
             </a>

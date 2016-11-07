@@ -37,7 +37,7 @@ define(['text!./search-map.html',
                                 if (countryFacet) {
 
                                     _.each(countryFacet.schemas, function(document, key) {
-                                        country[$filter("schemaShortName")(key)] = document;
+                                        country[$filter("urlSchemaShortName")(key)] = document;
                                     });
                                     country.total = countryFacet.recordCount;
                                 }

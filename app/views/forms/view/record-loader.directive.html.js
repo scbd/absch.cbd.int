@@ -257,7 +257,7 @@ define(['app',
 						var schema = $scope.internalDocumentInfo.type;
 						var identifier = $scope.internalDocumentInfo.identifier;
 						$timeout(function () {
-							$location.path("/register/" + $filter("schemaShortName")(schema) + "/" + identifier + '/edit');
+							$location.path("/register/" + $filter("urlSchemaShortName")(schema) + "/" + identifier + '/edit');
 						}, 1);
 
 					}

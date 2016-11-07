@@ -40,7 +40,7 @@
     "require-shim": "https://github.com/zetlen/require-shim.git#95b5aaea4530fb2861cc475497c7b4c62204628d",
     "requirejs": "2.1.20",
     "requirejs-domready": "2.0.1",
-    "requirejs-plugins": "1.0.3",
+    "requirejs-plugins": "~1.0.3",
     "requirejs-text": "2.0.14",
     "scbd-angularjs-controls": "https://github.com/scbd/scbd-angularjs-controls.git#master",
     "scbd-angularjs-services": "https://github.com/scbd/scbd-angularjs-services.git#master",

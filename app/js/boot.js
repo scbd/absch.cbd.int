@@ -12,6 +12,7 @@ require.config({
         'angular-regex'             : 'js/route-provider-regex',
         'css'                       : 'libs/require-css/css.min',
         'text'                      : 'libs/requirejs-text/text',
+        'json'                      : 'libs/requirejs-plugins/src/json',
         'shim'                      : 'libs/require-shim/src/shim',
         'linqjs'                    : 'libs/linqjs/linq',
         'angular-localizer'         : 'libs/ngLocalizer/localizer',

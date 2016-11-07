@@ -99,7 +99,7 @@
                                               <div ng-show="task.activity.completedOn">
                                                   <span ng-show="task.activity" ng-switch="task.activity.result.action">
                                                       <span ng-switch-when="approve"><a translation-url  ng-href="/database/record/{{task.workflow.result.documentID||task.workflow.data.documentID}}" target="_new_">{{task.workflow.data.title | lstring}}</a></span>
-                                                      <span ng-switch-when="reject"><a translation-url  ng-href="/register/{{task.workflow.data.metadata.schema | schemaShortName}}/{{task.workflow.result.identifier}}/edit" target="_new_">{{task.workflow.data.title | lstring}}</a></span>
+                                                      <span ng-switch-when="reject"><a translation-url  ng-href="/register/{{task.workflow.data.metadata.schema | urlSchemaShortName}}/{{task.workflow.result.identifier}}/edit" target="_new_">{{task.workflow.data.title | lstring}}</a></span>
                                                   </span>
                                               </div>
                                           </div>

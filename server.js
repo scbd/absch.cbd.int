@@ -103,7 +103,7 @@ function getPreferredLanguage(req){
     if(req.params.lang)
         return req.params.lang;
 
-    var htlmRegex       = /.(html|ejs)/g; ///.html?[^.]/g//\.html(?!.js)
+    var htlmRegex       = /.(html|ejs|json)/g; ///.html?[^.]/g//\.html(?!.js)
     var cookieLangRegex = /locale=(ar|fr|es|ru|zh)/g
     var langRegex       = /^(ar|fr|es|ru|zh)/;
     var url = req.url;
