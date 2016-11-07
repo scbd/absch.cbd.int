@@ -19,7 +19,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
         $routeProvider.
                when('/',               { templateUrl: '/app/views/home/index.html', label:'ABSCH', resolveController: true, resolveUser : true}).
                when('/lang/:langCode', { templateUrl: '/app/views/shared/lang.html',label:'ABSCH', resolveController: true}).
-               when('/signin',     {templateUrl: '/app/views/shared/login.html',resolveController: true, label:'Sign in'}).
+               when('/signin',     {templateUrl: '/app/views/shared/login-dialog.html',resolveController: true, label:'Sign in'}).
                when('/help/403',   {templateUrl: '/app/views/shared/403.html', label:'403 Error'}).
 
                when('/about',                        { templateUrl: '/app/views/about/about.html',                        label:'About the ABSCH',                 resolveController:true, resolveUser : true}).
