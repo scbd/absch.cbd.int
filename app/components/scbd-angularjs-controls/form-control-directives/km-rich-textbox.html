@@ -1,0 +1,13 @@
+﻿<div>
+	<style type="text/css">
+		.multiple-languages { margin-bottom: 3px; }
+	</style>
+	<div ng-repeat="locale in locales" class="input-group input-rich-text" ng-class="{ 'multiple-languages' : isShowLocale() && !last }" ng-switch="rows">
+			<text-angular ng-switch-default  ng-required="isRequired()" ng-model="text[locale]"
+            ng-change="onchange()" ng-disabled="ngDisabledFn()" placeholder="{{placeholder}}"
+            rows="{{rows}}" style="display:inline-block;width:100%"
+			ta-toolbar="{{toolbar}}">
+		   </text-angular>
+		<span class="input-group-addon" disabled-ng-show="isShowLocale()" style="cursor:default">{{locale | uppercase }}</span>
+	</div>
+</div>

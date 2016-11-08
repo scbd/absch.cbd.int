@@ -1,0 +1,50 @@
+#NotificationsHeaderPanel * {
+    font-size:10px;
+}
+#NotificationsHeaderPanel i {
+    font-size:14px;
+    margin-right:5px;
+}
+
+#NotificationsHeaderPanel .notification-read * {
+    color:#bbb;
+    background-color:#FFF;
+    
+}
+
+#NotificationsHeaderPanel .notification-unread {
+    background-color:#EEE;
+    color:#111;
+}
+
+#NotificationsHeaderPanel .notification-panel-header {
+    margin:0;padding:0;border-bottom:1px solid #ccc;
+}
+#NotificationsHeaderPanel .notification-row {
+    min-height:80px;margin:0;padding:0;border-bottom:1px solid #ddd;
+}
+#NotificationsHeaderPanel .notification-icon-text{
+    white-space:nowrap;font-size:10px;font-weight:bold;text-transform:uppercase;
+}
+
+#NotificationsHeaderPanel .notification-message{
+    cursor:pointer;font-weight:500;font-size:11px;
+}
+#NotificationsHeaderPanel .notification-label{
+   text-transform:uppercase;
+}
+#NotificationsHeaderPanel .notification-spacing5{
+   margin-top:5px;
+}
+#NotificationsHeaderPanel .notification-spacing10{
+   margin-top:10px;
+}
+#NotificationsHeaderPanel .notification-spacing15{
+   margin-top:15px;
+}
+#NotificationsHeaderPanel .notification-timer{
+   white-space:nowrap;font-size:10px;font-weight:bold;text-transform:uppercase;
+}
+#NotificationsHeaderPanel .notification-title{
+   font-size:12px;
+}

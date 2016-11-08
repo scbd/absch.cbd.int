@@ -1,0 +1,42 @@
+
+
+#NotificationsPanel .notification-read * {
+    color:#bbb;
+    background-color:#FFF;
+}
+
+#NotificationsPanel .notification-unread {
+    background-color:#EEE;
+}
+
+#NotificationsPanel .notification-panel-header {
+    margin:0;padding:0;border-bottom:1px solid #ccc;
+}
+#NotificationsPanel .notification-row {
+    min-height:80px;margin:0;padding:0;border-bottom:1px solid #ddd;
+}
+#NotificationsPanel .notification-icon-text{
+    white-space:nowrap;font-size:10px;font-weight:bold;text-transform:uppercase;
+}
+
+#NotificationsPanel .notification-message{
+    cursor:pointer;font-weight:500;font-size:11px;
+}
+#NotificationsPanel .notification-label{
+   text-transform:uppercase;
+}
+#NotificationsPanel .notification-spacing5{
+   margin-top:5px;
+}
+#NotificationsPanel .notification-spacing10{
+   margin-top:10px;
+}
+#NotificationsPanel .notification-spacing15{
+   margin-top:15px;
+}
+#NotificationsPanel .notification-timer{
+   white-space:nowrap;font-size:10px;font-weight:bold;text-transform:uppercase;
+}
+#NotificationsPanel .notification-title{
+   font-size:14px;
+}

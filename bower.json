@@ -42,17 +42,16 @@
     "requirejs-domready": "2.0.1",
     "requirejs-plugins": "~1.0.3",
     "requirejs-text": "2.0.14",
-    "scbd-angularjs-controls": "https://github.com/scbd/scbd-angularjs-controls.git#master",
-    "scbd-angularjs-services": "https://github.com/scbd/scbd-angularjs-services.git#master",
-    "scbd-branding": "https://github.com/scbd/scbd-branding.git#master",
-    "scbd-map": "^1.0.7",
     "socket.io-1.4.5": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js",
     "tableexport.js": "https://github.com/clarketm/TableExport.git#v3.2.14",
-    "underscore": "1.7.0"
+    "underscore": "1.7.0",
+    "ammap3": "3.18.6",
+    "ngInfiniteScroll": "1.3.0",
+    "textAngular"                     : "~1.2.2"
   },
   "resolutions": {
     "angular": "1.4.14",
-    "bootstrap": "3.3.6",
+    "bootstrap": "3.1.1",
     "font-awesome": "4.6.3",
     "angular-material": "0.9.8",
     "jquery": "2.2.4",

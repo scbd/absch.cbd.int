@@ -1,0 +1,23 @@
+﻿<div>
+
+	<div ng-hide="report || onLoad" class="alert alert-info">
+		<i class="fa fa-cog fa-spin"></i> Analyzing your document...
+	</div>
+
+	<div ng-show="report">
+		<div ng-show="isValid()" class="alert alert-success">
+			Your document is valid.
+		</div>
+
+
+		<div ng-show="hasErrors() && show" class="alert alert-warning"  >
+			<button type="button" class="close" ng-click="show=!show" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Your document contains errors.</strong>
+			<ul>
+				<li ng-repeat="error in report.errors" title="{{error.parameters}}">
+					{{getTranslation(error.code, error.property, error.parameters)}} / <a href="#" ng-click="jumpTo(error.property)">{{getLabel(error.property)}}</a>
+				</li>
+			</ul>
+		</div>
+
+</div>

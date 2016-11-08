@@ -1,0 +1,7 @@
+{
+  "name": "scbd-map",
+  "description": "SCBD map",
+  "dependencies": {
+    "bower": "1.7.0"
+  }
+}

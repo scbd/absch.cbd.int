@@ -1,0 +1,35 @@
+{
+  "name": "scbd-branding",
+  "version": "1.5.8",
+  "homepage": "https://github.com/scbd/scbd-branding",
+  "authors": [
+    "SCBD"
+  ],
+  "description": "A collection of SCBD common/shared branding directives.",
+  "main": "main.js",
+  "dependencies": {
+    "angular": "1.5.6",
+    "angular-animate": "1.5.6",
+    "bootstrap": "3.3.6",
+    "font-awesome": "4.6.3",
+    "ionsound": "3.0.0",
+    "jquery": "2.2.4",
+    "lodash": "3.10.1",
+    "moment": "2.13.0",
+    "scbd-angularjs-services": "^1.1.0",
+    "socket.io-1.4.5": "https://cdn.socket.io/socket.io-1.4.5.js",
+    "ngInfiniteScroll" : "1.3.0",
+    "requirejs": "2.1.22",
+    "require-css": "0.1.8",
+    "requirejs-text": "2.0.14"
+  },
+  "license": "MIT",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

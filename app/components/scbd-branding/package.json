@@ -1,0 +1,8 @@
+{
+  "name": "scbd-branding",
+  "version": "1.0.0",
+  "description": "SCBD shared branding",
+  "dependencies": {
+    "bower": "1.7.0"
+  }
+}
