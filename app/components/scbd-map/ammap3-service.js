@@ -13,7 +13,7 @@ define(['app',
     var mapCtrls = {};
     var pinLibrary = ['default', 'invisi-pin'];
     var pinImgLibrary = [];
-    pinImgLibrary['invisi-pixel'] = '/app/libs/scbd-map/images/pins/invisi-pin.svg';
+    pinImgLibrary['invisi-pixel'] = '/app/components/scbd-map/images/pins/invisi-pin.svg';
 
     var pinPopOverLibrary = [];
     pinPopOverLibrary['default'] = defaultPinPopOver;
@@ -500,7 +500,7 @@ define(['app',
         mapCtrls = {};
         pinLibrary = ['default', 'invisi-pin'];
         pinImgLibrary = [];
-        pinImgLibrary['invisi-pixel'] = '/app/libs/scbd-map/images/pins/invisi-pin.svg';
+        pinImgLibrary['invisi-pixel'] = '/app/components/scbd-map/images/pins/invisi-pin.svg';
 
         pinPopOverLibrary = [];
         pinPopOverLibrary['default'] = defaultPinPopOver;

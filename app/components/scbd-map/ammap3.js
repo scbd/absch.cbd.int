@@ -179,7 +179,7 @@ define(['text!./ammap3.html', 'app', 'lodash',
         //
         //=======================================================================
         function generateMarker(imageIndex) {
-          return makeMarker(imageIndex, 'pin', 'pin-invisi', '/app/libs/scbd-map/images/pins/invisi-pin.svg');
+          return makeMarker(imageIndex, 'pin', 'pin-invisi', '/app/components/scbd-map/images/pins/invisi-pin.svg');
         }
 
 
