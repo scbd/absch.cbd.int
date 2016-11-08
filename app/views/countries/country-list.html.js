@@ -5,7 +5,7 @@ define(['app', 'underscore',
     '../directives/block-region-directive.js'
 ], function (app, _) {
 
-    app.controller("CountriesMapController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams', '$compile', '$timeout',
+    app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams', '$compile', '$timeout',
         function ($http, $scope, $element, $location, commonjs, $q, searchService, $filter, $routeParams, $compile, $timeout) {
             $scope.sortTerm = "name.en";
 
