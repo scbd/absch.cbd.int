@@ -1,0 +1,49 @@
+﻿<div class="popover" style="background-color:rgba(42,47,55,.9);color:#a2a6a5;max-width: 350px;width: 395px;height:300px;max-height:400px;">
+  <style>
+
+
+.party-status  {
+      text-decoration: none;
+      color: #fff;
+
+      text-align: center;
+      letter-spacing: .5px;
+
+      border: none;
+      border-radius: 2px;
+      display: inline-block;
+      height: 20px;
+      line-height: 20px;
+      outline: 0;
+      padding: 0 2rem;
+      text-transform: uppercase;
+      vertical-align: middle;
+  }
+  .popover.top .arrow:after {
+     border-top-color: rgba(82,87,95,.9);
+ }
+  </style>
+  <div class="arrow "></div>
+  <div style="text-align:left;padding: 6px 6px 6px 6px;">
+    <span style="float:right;">{{status}}</span>
+    <h3 class="custom-title" style=""><i class="flag-icon flag-icon-{{codeLower}}"></i> {{nameLocalized}}</h3>
+
+  </div>
+<div style="clear:both;"></div>
+  <div class="text-nowrap" style="min-height:100px;padding: 6px 10px 6px 10px; ">
+    ABS National Focal Point ({{NFP}})<br>
+    Compitent National Authorities ({{CNA}})<br>
+    Legislative Administrative or Policy Measures ({{MSR}})<br>
+    Naytonal Databases and Websites ({{NDB}})<br>
+    Internationally Recognized <br>Certificate of Compliance ({{IRCC}})<br>
+    Check Points ({{CP}})<br>
+    Checkpoint Communiques ({{CPC}})<br>
+  </div>
+
+
+  <div class=" text-nowrap text-center" style="position:absolute;bottom:3px;right:15%;height:25px;vertical-align:center; ">
+    <span class="text-nowrap text-center"  href="/countries/{{codeLower}}">
+       <a href="/countries/{{codeLower}}" style="font-weight:700; cursor:pointer;color:#ffffff;font-size:18px;padding: 6px 6px 6px 6px;">VIEW COUNTRY PROFILE</a>
+    </span>
+  </div>
+</div>

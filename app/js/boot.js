@@ -33,10 +33,7 @@ require.config({
         'cbd-forums'                : 'libs/cbd-forums/cbd-forums',
         'angular-flex'              : 'libs/angular-flex/angular-flex',
         'ng-breadcrumbs'            : 'libs/ng-breadcrumbs/dist/ng-breadcrumbs.min',
-        'ionsound'                  : 'libs/ionsound/js/ion.sound.min',
-        'scbd-angularjs-services'   : 'libs/scbd-angularjs-services/scbd-services',
-        'scbd-angularjs-filters'    : 'libs/scbd-angularjs-services/filters/scbd-filters',
-        'scbd-angularjs-controls'   : 'libs/scbd-angularjs-controls/scbd-controls',
+        'ionsound'                  : 'libs/ionsound/js/ion.sound.min',        
         'ngAria'                    : 'libs/angular-aria/angular-aria.min',
         'ngMaterial'                : 'libs/angular-material/angular-material.min',
         'ngSmoothScroll'            : 'libs/ngSmoothScroll/angular-smooth-scroll.min',
@@ -89,11 +86,11 @@ require.config({
         'tableexport'                   : { 'deps': ['jquery'] },
     },
     packages: [
-        { name: 'scbd-branding'          , location : 'libs/scbd-branding' },
-        { name: 'scbd-angularjs-controls', location : 'libs/scbd-angularjs-controls/form-control-directives', main : 'all-controls.js' },
-        { name: 'scbd-angularjs-services', location : 'libs/scbd-angularjs-services/services' },
-        { name: 'scbd-angularjs-filters',  location : 'libs/scbd-angularjs-services/filters' },
-        { name: 'scbd-map',                location : 'libs/scbd-map' },
+        { name: 'scbd-branding'          , location : 'components/scbd-branding' },
+        { name: 'scbd-angularjs-controls', location : 'components/scbd-angularjs-controls/form-control-directives', main : 'all-controls.js' },
+        { name: 'scbd-angularjs-services', location : 'components/scbd-angularjs-services/services' },
+        { name: 'scbd-angularjs-filters',  location : 'components/scbd-angularjs-services/filters' },
+        { name: 'scbd-map',                location : 'components/scbd-map' },
         { name: 'ammap', main: 'ammap',    location : 'libs/ammap3/ammap' }
     ]
 });

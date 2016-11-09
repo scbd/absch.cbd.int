@@ -49,8 +49,8 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/search/national-records/:documentSchema?',              { redirectTo:'/search' }).
                when('/search/reference-records/:documentSchema?',             { redirectTo:'/search' }).
 
-               when('/countries',                   { templateUrl: '/app/views/countries/index.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
-               when('/countries/status/:status',    { templateUrl: '/app/views/countries/index.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
+               when('/countries',                   { templateUrl: '/app/views/countries/country-list.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
+               when('/countries/status/:status',    { templateUrl: '/app/views/countries/country-list.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
                when('/countries/:code',             { templateUrl: '/app/views/countries/country-profile.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
 
                when('/database/record',             { templateUrl: '/app/views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
@@ -71,7 +71,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/register/requests',                                  { redirectTo:'/register/notifications' }).
 
                when('/register/:document_type/status/:status',             {templateUrl: '/app/views/register/record-list.html',          param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
-               when('/register/national-users',                            {templateUrl: '/app/views/register/national-users/index.html', label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
+               when('/register/national-users',                            {templateUrl: '/app/views/register/national-users/nation-user-list.html', label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
                when('/register/:document_type',                            {templateUrl: '/app/views/register/record-list.html',       label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
                when('/register/CON/new',           {templateUrl: '/app/views/forms/edit/edit-contact.html',                   label:'New',  param:'true', resolveController: true,documentType :'CON' , resolve : { securized : securize(null,true) }, }).

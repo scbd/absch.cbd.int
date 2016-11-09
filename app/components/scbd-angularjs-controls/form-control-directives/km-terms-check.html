@@ -1,0 +1,31 @@
+﻿<ul>
+	<script type="text/ng-template"  id="term-check-tree-renderer.html">
+		<label>
+			<input type="checkbox" ng-model="identifiers[term.identifier]" ng-click="save()" ng-required="IsRequired()" value="{{term.identifier}}" />
+				{{term.title||term.name | lstring:locale}}			
+		</label>
+		<div class="km-select-description" ng-if="showDescription && term.description" 
+			style="padding: 3px 25px;">
+			{{term.description}}
+		</div>
+		<ul style="list-style:none">
+			<li ng:repeat="term in term.narrowerTerms" ng-include="'term-check-tree-renderer.html'">
+		</ul>
+	</script>
+
+	<li ng:repeat="term in rootTerms" ng-include="'term-check-tree-renderer.html'"></li>
+
+	<li ng-show="error">
+		<div class="alert">
+			{{error}}
+		</div>
+	</li>
+
+	<li ng-show="__loading">
+		<i class="fa fa-spinner fa-spin"></i> Loading...
+	</li>
+
+	<style>
+		li > label { font-weight: normal; }
+	</style>
+</ul>

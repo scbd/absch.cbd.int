@@ -171,7 +171,6 @@
                 var baseUrl = location.protocol + '//' + location.host + (locale.port ? (':' + location.port) : '')
                 window.location.href = baseUrl + "/" + locale + location.pathname;
             }
-            console.log(window.location, getCookie('locale'));
 
         });
         function getCookie(cname) {

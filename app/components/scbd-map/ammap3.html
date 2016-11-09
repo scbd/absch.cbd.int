@@ -1,0 +1,66 @@
+﻿
+
+<div>
+
+  <div id="dialogDisclaimer" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2 class="modal-title" style="color:black;">Disclaimer</h2>
+        </div>
+        <div class="modal-body" style="line-height:125%;">
+
+          The designations employed and the presentation of material in this map do not imply the expression of any opinion whatsoever on the part of the Secretariat concerning the legal status of any country, territory, city or area or of its authorities, or concerning
+          the delimitation of its frontiers or boundaries.
+        </div>
+        <div class="modal-footer" style="text-align:left;">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="map">
+
+    <!-- <div  class="row bg-green" >
+    <div class="col-md-10 col-md-offset-1">
+        <div class="dropshadow color-white">
+            <h3 class="z10">The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol.
+            </h3>
+        </div>
+    </div>
+  </div> -->
+
+<div id="mapdiv"></div>
+
+<div class="map-disclaimer" data-toggle="modal" href="#dialogDisclaimer">Disclaimer</div>
+</div>
+  <!-- <select id="langselect" onchange="setLanguage(this.options[this.selectedIndex].value);">
+    <option value="en" selected="selected">English (default)</option>
+    <option value="ar" >Arabic</option>
+    <option value="ja">Japanese</option>
+    <option value="fr">French</option>
+    <option value="es">Spanish</option>
+    <option value="ru">Russion</option>
+</select> -->
+
+<!-- <div class="panel panel-default" style="margin-bottom:0;" ng-if="schema==='parties'">
+
+    <div class="row" style="padding-top:3px;padding-left:120px;">
+
+
+      <div class="col-md-12" style="text-align:center; padding-right:130px;" >
+        <h4 class="leggendTitle">{{legendTitle}}</h4>
+        <h7 class="leggendTitle">(Interactive Legend)</h7>
+      </div>
+
+
+      <div class="col-xs-2 col-md-2 leggendItem" ng-repeat="item in leggends.parties" ng-click="legendHide(item);" >
+        <i class="fa fa-times fa-2x square" ng-if="!item.visible" style="display: block;"></i>
+        <div class="square" ng-style="{'background-color':item.color}" ng-if="item.visible"></div> {{item.title}}
+      </div>
+
+    </div>
+  </div> -->
+
+</div>

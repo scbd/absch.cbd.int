@@ -1,0 +1,79 @@
+.color-cbdgreen{
+    color:#069554;
+}
+.color-cbddarkgrey{
+    color:#333;
+}
+
+.color-white{
+    color:#fff;
+}
+.bg-white{
+    background-color:#FFF;
+    color:#555;
+}
+/*.color-darkgreen{
+    color:#004844!important;
+}
+.color-litegrey{
+    color:#eee!important;
+}
+.color-grey{
+    color:#999!important;
+}*/
+.color-cbdorange{
+    color:#fa6938!important;
+}
+.color-cbdgrey{
+    color:#999;
+}
+.color-cbdlitegrey{
+    color:#bdbdbd;
+}
+/*.color-white{
+    color:#fff!important;
+}
+.color-blue{
+    color:#428bca!important;
+}
+.darkGreen {
+    color: #004844;
+}*/
+.bg-cbdorange{
+    background-color:#fa6938!important;
+    color:white!important;
+}
+.bg-cbdgreen{
+    background-color:#009b48!important;
+    color:#fff!important;
+}
+/*.bg-white{
+    background-color: #FFF!important;
+    color:#069554!important;
+}
+.bg-darkgreen{
+        background-color:#004844!important;
+}
+.bg-litegrey{
+    background-color: #F9F9F9!important;
+    color:#069554;
+}
+.color-black{
+    color:#111;
+}
+.bg-blue{
+    background-color:#428bca!important;
+    color:white!important;
+}*/
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }

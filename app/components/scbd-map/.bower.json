@@ -1,0 +1,31 @@
+{
+  "name": "scbd-map",
+  "homepage": "https://github.com/scbd/scbd-branding",
+  "authors": [
+    "SCBD"
+  ],
+  "description": "Map directive used for map implimentations",
+  "main": "main.js",
+  "dependencies": {
+    "ammap3": "3.18.6"
+  },
+  "license": "MIT",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "1.0.9",
+  "_release": "1.0.9",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.0.9",
+    "commit": "2c0c590efee02daef954799f82f99d3b0d54d8e3"
+  },
+  "_source": "https://github.com/scbd/scbd-map.git",
+  "_target": "^1.0.7",
+  "_originalSource": "scbd-map"
+}

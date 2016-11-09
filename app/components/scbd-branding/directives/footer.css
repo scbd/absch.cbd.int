@@ -1,0 +1,63 @@
+#CBD-Branding .footer{}
+
+  #CBD-Branding .copyright a, #CBD-Branding .copyright a:hover, #CBD-Branding .copyright a:focus {
+      color: #FFF;
+  }
+  #CBD-Branding .footer-page{
+      min-height:30px;
+      background-color:#ddd;
+
+  }
+  #CBD-Branding .footer-portal{
+      min-height:30px;
+      background-color:#999;
+  }
+
+  #CBD-Branding .footer-portal a{
+      color:#ccc;
+      font-size:12px;
+      font-weight:normal;
+  }
+  #CBD-Branding .footer-portal ul{
+      color:white;
+      list-style-type: none;
+     padding: 0px;
+     margin: 0px;
+  }
+  #CBD-Branding .footer-portal  h4{    font-weight: 200;}
+  #CBD-Branding .footer-cbd{
+      /*min-height:200px;*/
+      background-color:#009b48;
+
+  }
+
+#CBD-Branding .footer-page-container{
+    /*background: rgba(25, 25, 25, .05);*/
+    min-height:30px;
+    padding-top:5px;
+}
+#CBD-Branding .footer-portal-container{
+    /*background: rgba(25, 25, 25, .05);*/
+    min-height:30px;
+    color:white;
+    padding-top:10px;
+    border-bottom:1px solid #555;
+}
+#CBD-Branding .footer-cbd-container{
+    /*background: rgba(25, 25, 25, .05);*/
+    /*min-height:200px;*/
+    color:white;
+    padding:20px;
+    text-align:center!important;
+}
+
+#CBD-Branding .footer-links  ul{
+ display: inline;
+
+}
+
+#CBD-Branding .footer-links  li{
+    display: inline;
+    list-style-type: none;
+    padding-left:20px;
+}

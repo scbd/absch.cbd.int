@@ -1,0 +1,80 @@
+
+#CBD-Branding.navbar-cbd-account {
+  font-size: 16px;
+  margin-bottom: 0;
+  z-index: 100;
+  list-style-type: none;
+  padding: 0px 0px 0px 0px;
+  margin: 0 0 0 0;
+  line-height: 30px;
+  font-weight: 200;
+}
+#CBD-Branding#CBD-Branding.fa-fix {
+  left: 0px;
+}
+.user-logged-in {
+  color: #bdbdbd;
+  cursor: pointer;
+  font-size: 80%;
+  position: absolute;
+  left: -16px;
+}
+@media screen and (max-width: 480px) {
+  #CBD-Branding.drop-menu-position {
+    position: absolute;
+    left: -150px;
+    top: 23px;
+  }
+}
+@media screen and (min-width: 250px) {
+  #CBD-Branding.drop-menu-position {
+    position: absolute;
+    left: -80px;
+  }
+  #CBD-Branding.dropdown-menu li a {
+    font-size: 16px;
+  }
+  #CBD-Branding.dropdown-menu > li > a:hover {
+    color: #428bca!important;
+  }
+  #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a, #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a:focus {
+    background-color: #009b48;
+    color: white;
+  }
+  #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.active>a, #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a {
+    background-image: none;
+  }
+}
+@media screen and (min-width: 480px) {
+  #dropdown-menu a {
+    color: black;
+    font-size: 14px;
+  }
+  #CBD-Branding.drop-menu-position {
+    position: absolute;
+    left: -80px;
+  }
+  #CBD-Branding.dropdown-menu {
+    background-color: white;
+    padding: 3px;
+  }
+  #CBD-Branding.navbar-default #CBD-Branding.navbar-nav #CBD-Branding.dropdown-menu li {
+    margin: 0;
+    padding: 0;
+  }
+  #CBD-Branding.dropdown-menu > li > a:hover {
+    color: #428bca!important;
+  }
+  #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a, #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a:focus {
+    background-color: #009b48;
+  }
+  #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.active>a, #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a {
+    background-image: none;
+  }
+}
+@media screen and (min-width: 810px) {
+  #CBD-Branding.drop-menu-position {
+    position: absolute;
+    left: 0px;
+  }
+}

@@ -1,0 +1,59 @@
+#CBD-Branding .dropdown-menu {
+    z-index: 1100;
+}
+#CBD-Branding .fa-badge {
+    position: relative;
+    white-space: nowrap;
+    margin-right: 24px;
+}
+#CBD-Branding .fa-badge:not([data-badge]) {
+    margin-right: auto;
+}
+#CBD-Branding .fa-badge[data-badge]:after {
+    content: attr(data-badge);
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: absolute;
+    top: -11px;
+    right: -24px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 600;
+    font-size: 9px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgb(217, 83, 79);
+    color: rgb(255, 255, 255);
+}
+#CBD-Branding .fa-button .fa-badge[data-badge]:after {
+    top: -10px;
+    right: -5px;
+}
+#CBD-Branding .fa-badge.fa-badge--no-background[data-badge]:after {
+    color: rgb(255, 64, 129);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 1px gray;
+}
+#CBD-Branding .fa-badge.fa-badge--overlap {
+    margin-right: 3px;
+}
+#CBD-Branding .fa-badge.fa-badge--overlap:after {
+    right: -7px;
+    top: -8px;
+}
