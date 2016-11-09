@@ -12,10 +12,8 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
         '$location','$anchorScroll', 'breadcrumbs', 'toastr', '$route',
         'cfgUserNotification','$window', '$element','localStorageService', 'appConfigService', 'LogglyLogger', 'locale',
-        function($scope, $rootScope, showHelp, $location,
-            $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, $window, $element, localStorageService,
-            appConfigService, logglyLogger, locale
-            //, apiUrl
+        function($scope, $rootScope, showHelp, $location, $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, 
+            $window, $element, localStorageService, appConfigService, logglyLogger, locale
         ) {
 
             //$scope.ACCOUNTS_URL = apiUrl.devAccountsUrl();
@@ -137,10 +135,6 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             });
 
             $scope.$on('signOut', function(evt, data) {
-
-                var fields = logglyLogger.fields({ realm: realm.value, appVersion: appVersion })
-                fields.user = undefined;
-                logglyLogger.fields(fields)
                 $window.location.reload();
             });
 
@@ -198,6 +192,10 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
                     _slaask.initialized = true;
                 }
             });
+           
+            var fields = logglyLogger.fields()
+            fields.user = user.userID;
+            logglyLogger.fields(fields)
         }, 1000));
 
         }
