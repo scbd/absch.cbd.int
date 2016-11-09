@@ -8,13 +8,14 @@ define(['app'], function(app) {
         //===========================
         function create(version, schema, data) {
 
-            var body = {
-                data: data
-            };
+            // var body = {
+            //     data: data
+            // };
 
-            return $http.post("/api/"+version+"/"+schema, body).then(function(resp) {
-                return resp.data;
-            });
+            return $http.post("/api/"+version+"/"+schema, data)
+                        .then(function(resp) {
+                            return resp.data;
+                        });
         }
 
         //===========================
@@ -53,9 +54,13 @@ define(['app'], function(app) {
         //
         //===========================
         function query(version, schema, query, pageNumber, pageLength, sort, count) {
+            var q;
+            if(query)
+                q = JSON.stringify(query);
+
             return $http.get("/api/"+version+"/"+schema, {
                 params: {
-                    q: JSON.stringify(query),
+                    q: q,
                     sk: pageNumber,
                     l: pageLength,
                     c: count,

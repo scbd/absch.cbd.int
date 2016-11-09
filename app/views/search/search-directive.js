@@ -11,7 +11,7 @@ define(['app', 'underscore', '/app/js/common.js',
 '/app/views/search/search-results/result-default.js',
 '/app/views/search/search-results/national-records-country.js',
 '/app/services/app-config-service.js', 'ngDialog',
-'/app/views/register/user-preferences/user-search-filter.js',
+'/app/views/register/user-preferences/user-preference-filter.js',
 '/app/views/directives/export-directive.html.js'
 ], function(app, _) {
 
@@ -22,10 +22,15 @@ define(['app', 'underscore', '/app/js/common.js',
             // transclude: true,
             templateUrl: '/app/views/search/search-directive.html',
             controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
-             'appConfigService', '$routeParams', '$location', 'ngDialog',
+             'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs',
             function($scope, $q, realm, searchService, commonjs, localStorageService,
-                $http, thesaurus, appConfigService, $routeParams, $location, ngDialog) {
-    
+                $http, thesaurus, appConfigService, $routeParams, $location, ngDialog, $attrs) {
+                    
+                    $scope.skipResults      = $attrs.skipResults;
+                    $scope.skipDateFilter   = $attrs.skipDateFilter;
+                    $scope.skipSaveFilter   = $attrs.skipSaveFilter;
+                    $scope.skipTextFilter   = $attrs.skipTextFilter;
+
                     var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
                     var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
 
@@ -96,7 +101,6 @@ define(['app', 'underscore', '/app/js/common.js',
                          return $scope.searchFilters[id];
 
                     };
-
                     //===============================================================================================================================
                     $scope.updateCurrentTab = function(tabname) {
                            $scope.currentTab = tabname;
@@ -127,6 +131,19 @@ define(['app', 'underscore', '/app/js/common.js',
                             return _.filter($scope.searchFilters, function(item){if(item.type === type) return item;});
                     };
 
+                    function setSearchFilters(filters) {
+                        $scope.setFilters = {};
+                        _.map(filters, function(query){
+                            if(query.type == 'text'){
+                                $scope.saveFreeTextFilter(query);
+                            }
+                            else{
+                                $scope.saveFilter(query);
+                            }
+                        });
+                        $scope.refresh = !!$scope.refresh;
+
+                    };
 
                     //===============================================================================================================================
                     function getSearchFiltersByParent(parent) {
@@ -232,29 +249,30 @@ define(['app', 'underscore', '/app/js/common.js',
                         $scope.nationalLoading = true;
                         searchOperation = searchService.group(groupQuery, queryCanceler);
 
-                        $q.when(searchOperation)
-                            .then(function(data) {
-                                queryCanceler = null;
+                        if(!$scope.skipResults){
+                            $q.when(searchOperation)
+                                .then(function(data) {
+                                    queryCanceler = null;
 
-                                if(nationalCurrentPage===0){
-                                    $scope.rawDocs = undefined;
-                                }
-                                if(!$scope.rawDocs || $scope.rawDocs.length == 0)
-                                    $scope.rawDocs = data.data.grouped.government_s;
-                                    //$scope.rawDocs = _.union($scope.rawDocs||{}, data.data.grouped.government_s);
-                                else {
-                                    _.each(data.data.grouped.government_s.groups, function(record){
-                                        $scope.rawDocs.groups.push(record);
-                                    });
-                                }
+                                    if(nationalCurrentPage===0){
+                                        $scope.rawDocs = undefined;
+                                    }
+                                    if(!$scope.rawDocs || $scope.rawDocs.length == 0)
+                                        $scope.rawDocs = data.data.grouped.government_s;
+                                        //$scope.rawDocs = _.union($scope.rawDocs||{}, data.data.grouped.government_s);
+                                    else {
+                                        _.each(data.data.grouped.government_s.groups, function(record){
+                                            $scope.rawDocs.groups.push(record);
+                                        });
+                                    }
 
-                            }).catch(function(error) {
-                                console.log('ERROR: ' + error);
-                            })
-                            .finally(function(){
-                                $scope.nationalLoading = false;
-                            });
-
+                                }).catch(function(error) {
+                                    console.log('ERROR: ' + error);
+                                })
+                                .finally(function(){
+                                    $scope.nationalLoading = false;
+                                });
+                        }
 
                     };
 
@@ -285,7 +303,8 @@ define(['app', 'underscore', '/app/js/common.js',
                         $scope.exportReferenceQuery = listQuery;
                         searchOperation = searchService.list(listQuery, queryCanceler);
 
-                        $q.when(searchOperation)
+                        if(!$scope.skipResults){
+                            $q.when(searchOperation)
                             .then(function(data) {
                                 queryCanceler = null;
                                 if(referenceCurrentPage===0){
@@ -305,7 +324,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             .finally(function(){
                                 $scope.referenceLoading = false;
                             });
-
+                        }
                     };
                   //===============================================================================================================================
                     function scbdQuery() {
@@ -332,7 +351,8 @@ define(['app', 'underscore', '/app/js/common.js',
                         $scope.exportScbdQuery = listQuery;
                         searchOperation = searchService.list(listQuery, queryCanceler);
 
-                        $q.when(searchOperation)
+                        if(!$scope.skipResults){
+                            $q.when(searchOperation)
                             .then(function(data) {
                                 queryCanceler = null;
                                 if(scbdCurrentPage===0){
@@ -352,6 +372,7 @@ define(['app', 'underscore', '/app/js/common.js',
                             .finally(function(){
                                 $scope.scbdLoading = false;
                             });;
+                        }
                     };
 
                   //===============================================================================================================================
@@ -921,14 +942,20 @@ define(['app', 'underscore', '/app/js/common.js',
                     this.referenceQuery = referenceQuery;
                     this.scbdQuery = scbdQuery;
                     this.getSearchFilters = getSearchFilters;
+                    $scope.getSearchFilters = getSearchFilters;
+                    this.setSearchFilters = setSearchFilters;
+                    $scope.setSearchFilters = setSearchFilters;
+
                     this.getFilter = getFilter;
                     this.getSearchFiltersByParent = getSearchFiltersByParent;
 
-                  //===============================================================================================================================
-                    $scope.$watch('currentTab', function(newVal, oldVal){
+                   //===============================================================================================================================
+                   if(!$scope.skipResults){
+                     $scope.$watch('currentTab', function(newVal, oldVal){
                        if(newVal != oldVal)
                             load();
-				    });
+				      });
+                   }
 
                     //===============================================================================================================================
                     $scope.$watch('searchKeyword', function(){
@@ -937,20 +964,22 @@ define(['app', 'underscore', '/app/js/common.js',
 
 
                   //===============================================================================================================================
-                    $scope.$watch('refresh', function(newVal, oldVal){
-                        if(newVal && newVal !== oldVal){
-                            refresh_nat = true;
-                            refresh_ref = true;
-                            refresh_scbd = true;
-                            nationalCurrentPage = 0;
-                            referenceCurrentPage = 0;
-                            scbdCurrentPage = 0;
-                            load();
-                            loadTabFacets();
-                            $scope.refresh = false;
-                            $scope.getRelatedKeywords();
-                        }
-				    });
+                  if(!$scope.skipResults){
+                        $scope.$watch('refresh', function(newVal, oldVal){
+                            if(newVal && newVal !== oldVal){
+                                refresh_nat = true;
+                                refresh_ref = true;
+                                refresh_scbd = true;
+                                nationalCurrentPage = 0;
+                                referenceCurrentPage = 0;
+                                scbdCurrentPage = 0;
+                                load();
+                                loadTabFacets();
+                                $scope.refresh = false;
+                                $scope.getRelatedKeywords();
+                            }
+                        });
+                  }
 
 
                     //===============================================================================================================================
@@ -1018,7 +1047,7 @@ define(['app', 'underscore', '/app/js/common.js',
 
                     //===============================================================================================================================
                     loadFilters();
-                    if($routeParams.recordType){
+                    if(!$scope.skipResults && $routeParams.recordType){
 
                         $scope.currentTab = $routeParams.recordType;
 
@@ -1040,7 +1069,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     }
 
                     $scope.canShowSaveFilter = function(){
-                        return !_.isEmpty($scope.setFilters);
+                        return !$scope.skipSaveFilter && !_.isEmpty($scope.setFilters);
                     }
                     $scope.showSaveFilter = function(existingFilter){
                                                             
@@ -1059,9 +1088,9 @@ define(['app', 'underscore', '/app/js/common.js',
 
                                     $scope.saveFilter = function(){
                                         $scope.loading = true;                                            
-                                        var operation = $http.post('/api/v2016/user-search-queries', $scope.record);
+                                        var operation = $http.post('/api/v2016/me/search-queries', $scope.record);
                                         if($scope.record._id)
-                                            operation = $http.put('/api/v2016/user-search-queries/' + $scope.record._id, $scope.record);
+                                            operation = $http.put('/api/v2016/me/search-queries/' + $scope.record._id, $scope.record);
                                         operation.then(function (data) {
                                             record = data.data;
                                             $scope.closeDialog();
@@ -1078,16 +1107,7 @@ define(['app', 'underscore', '/app/js/common.js',
                     $scope.runFilter = function(filter){
 
                         if(filter.filters){
-                            $scope.setFilters = {};
-                            _.map(filter.filters, function(query){
-                                if(query.type == 'text'){
-                                    $scope.saveFreeTextFilter(query);
-                                }
-                                else{
-                                    $scope.saveFilter(query);
-                                }
-                            });
-                            $scope.refresh = !!$scope.refresh;
+                            setSearchFilters(filter.filters);
                         }
                     }
 
@@ -1095,10 +1115,11 @@ define(['app', 'underscore', '/app/js/common.js',
                         $scope.setFilters = {};
                         $scope.refresh = !!$scope.refresh;
                     };
-
-                    load();
-
-                    loadTabFacets();
+                    
+                    if(!$scope.skipResults){ 
+                        load();
+                        loadTabFacets();
+                    }
 
                     $scope.getExportQuery = function(){
                        

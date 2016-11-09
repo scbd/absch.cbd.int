@@ -2,10 +2,10 @@
     <style>
         
         .ngdialog.ngdialog-theme-default.wide .ngdialog-content {
-            width: 750px !important;
+            width: 70% !important;
         }
     </style>
-    <input type="button" class="btn btn-primary" value="Add" ng-click="add()" />
+    <input type="button" class="btn btn-primary" value="Add" ng-click="addEdit()" />
                    
     <div style="width:100%" ng-show="userFilters.length>0">
         <div class="row table-striped" style="padding:10px;border-bottom:1px solid #ddd;">
@@ -22,7 +22,7 @@
                 <div class="filter col-xs-1">
                     {{(record.meta.modifiedOn||record.meta.createdOn)|formatDate}}
                 </div>
-                 <div class="filter col-xs-8">
+                 <div class="filter col-xs-7">
                      <span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
                         <span class="label label-info">                    
                                 <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>{{filter.name}}
@@ -30,8 +30,9 @@
                         </span>
                      </span>
                 </div>
-                <div class="col-xs-1">
+                <div class="col-xs-2">
                     <input type="button" class="btn btn-primary" value="Run" ng-click="runUserQuery(record)" />
+                    <input type="button" class="btn btn-primary" value="Edit" ng-click="addEdit(record)" />
                     <input type="button" class="btn btn-warning" value="Delete" ng-click="deleteFilter($event, record)" />
                 </div>
             </div>
@@ -82,14 +83,17 @@
         </div>
 
         <div class="modal-body">
-            <div class="col-xs-12">
-                <search-directive></search-directive>
+            <div class="form-group">
+                <label for="filterTitle">Title</label>
+                <input if="filterTitle" type="text" ng-model="document.queryTitle" class="form-control" placeholder="Filter title">
             </div>
+            <br/>
+            <search-directive skip-results="true" skip-save-filter="true" skip-date-filter="true"></search-directive>
         </div>
 
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">No</button>
-            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="confirmDelete()" ng-disabled="loading">Yes</button>
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Close</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save(document)" ng-disabled="loading">Save</button>
         </div>
     </script>
 </div>

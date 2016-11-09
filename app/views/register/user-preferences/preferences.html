@@ -121,7 +121,7 @@
 			border: 1px solid transparent;
 			border-radius: 0;
 		}
-	</style>
+    </style>
 	<div class="register-content card card-1-notrans">
 
 		<div class="register-content-header bg-pink color-white">
@@ -163,7 +163,7 @@
 									<a href="#preferences" ng-click="tab='setting'" data-toggle="tab"><i class="fa fa-fw fa-asterisk"></i> Settings</a>
 								</li>
 								<li>
-									<a href="#tab-user-alerts"  ng-click="tab='alerts'" data-toggle="tab"><i class="fa fa-fw fa-asterisk"></i> Alerts</a>
+									<a href="#tab-user-alerts"  ng-click="tab='subscriptions'" data-toggle="tab"><i class="fa fa-fw fa-asterisk"></i> Alerts</a>
 								</li>
 								<li>
 									<a href="#tab-search-filter"  ng-click="tab='searchFilters'" data-toggle="tab"><i class="fa fa-fw fa-lock"></i> Saved Searches</a>
@@ -175,11 +175,11 @@
 									Profile
 								</div>
 								<div class="tab-pane fade panel-body" id="tab-user-alerts">
-									pass
+									<span user-preference-filter ng-if="tab==='subscriptions'" collection="subscriptions"></span>
 								</div>
-								<div class="tab-pane fade panel-body" id="tab-search-filter">
-                                    Search filters
-									<span user-search-filters ng-if="tab==='searchFilters'" run-query="runFilter(filter)"></span>
+								<div class="tab-pane fade panel-body" id="tab-search-filter">                                    
+									<span user-preference-filter ng-if="tab==='searchFilters'" collection="search-queries" 
+										run-query="runFilter(filter)"></span>
 								</div>
 							</div>
 						</div>
@@ -190,40 +190,6 @@
 			</div>
 		</div>
 	</div>
-
-	<script type="text/ng-template" id="addCommentsDialog">
-        <div class="modal-header">
-            <h3 class="modal-title">
-               {{record.schema|schemaName}} : - {{record.reportedBy}}
-            </h3>
-        </div>
-
-        <div class="modal-body">
-            <div class="form-group row">
-                <label for="example-text-input" class="col-xs-2 col-form-label">Status</label>
-                <div class="col-xs-10">
-                    <select class="form-control" style="width:10%" required name="status" ng-model="record.status">
-                        <option value="Read">Read</option>
-                        <option value="Not a issue">Not a issue</option>
-                        <option value="Record owner contacted">Record owner contacted</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-xs-2 col-form-label">Comments</label>
-                <div class="col-xs-10">
-                    <textarea rows="3" class="form-control" id="comments" ng-model="record.comments" />
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
-            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save()" ng-disabled="loading">Submit</button>
-        </div>
-    </script>
-
-
 
 
 </div>
