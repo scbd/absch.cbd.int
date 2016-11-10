@@ -65,57 +65,68 @@ define(['app', 'underscore', 'ngDialog',
                 }
 
                 $scope.addEdit = function(existingFilter){
-                    var collection = $scope.collection;
+                    if($rootScope.user && !$rootScope.user.isAuthenticated){
+                        var signIn = $scope.$on('signIn', function(evt, data){
+                                $scope.addEdit();
+                                signIn();
+                        });
 
-                    ngDialog.open({
-                                    className : 'ngdialog-theme-default wide',
-                                    template : 'newFilterDialog',
-                                    controller : ['$scope', 'IGenericService', '$timeout','realm', function($scope, IGenericService, $timeout, realm){
-                                            
-                                            if(existingFilter){
-                                                $scope.document = angular.copy(existingFilter);
-                                                $timeout(function(){
-                                                    $scope.setSearchFilters(existingFilter.filters);
-                                                },100);
-                                            }
-                                            $scope.save = function(document){
-                                                $scope.loading = true;
-                                                var operation;
+                        $('#loginDialog').modal("show");
+                    }
+                    else{
+                                        
+                        var collection = $scope.collection;
 
-                                                document.filters = _.values($scope.setFilters);                                           
-                                                document.realm = realm.value;
-                                                if(!document._id)
-                                                    operation = IGenericService.create('v2016', 'me/'  + collection, document);
-                                                else
-                                                    operation = IGenericService.update('v2016', 'me/'  + collection, document._id, document);
+                        ngDialog.open({
+                                        className : 'ngdialog-theme-default wide',
+                                        template : 'newFilterDialog',
+                                        controller : ['$scope', 'IGenericService', '$timeout','realm', function($scope, IGenericService, $timeout, realm){
+                                                
+                                                if(existingFilter){
+                                                    $scope.document = angular.copy(existingFilter);
+                                                    $timeout(function(){
+                                                        $scope.setSearchFilters(existingFilter.filters);
+                                                    },100);
+                                                }
+                                                $scope.save = function(document){
+                                                    $scope.loading = true;
+                                                    var operation;
 
-                                                operation.then(function (data) {
-                                                           $scope.closeDialog();
-                                                           if(!document._id)
-                                                              document._id = data.id
-                                                           updateRecord(document); 
-                                                        });
-                                            }
-                                            $scope.closeDialog = function(){
-                                                ngDialog.close();                                            
-                                            }
+                                                    document.filters = _.values($scope.setFilters);                                           
+                                                    document.realm = realm.value;
+                                                    if(!document._id)
+                                                        operation = IGenericService.create('v2016', 'me/'  + collection, document);
+                                                    else
+                                                        operation = IGenericService.update('v2016', 'me/'  + collection, document._id, document);
 
-                                    }]
-                    });
-                    function updateRecord(document){
-                        if(!$scope.userFilters)
-                            $scope.userFilters = [];
-                        IGenericService.get('v2016', 'me/'  + $scope.collection, document._id)
-                        .then(function(data){                               
-                            var existing = _.findWhere($scope.userFilters, {'_id' : document._id});
-                            if(existing){
-                                existing.queryTitle = data.queryTitle;
-                                existing.meta = data.meta;
-                                existing.filters = data.filters;
-                            }
-                            else
-                                $scope.userFilters.push(data);
-                        }); 
+                                                    operation.then(function (data) {
+                                                            $scope.closeDialog();
+                                                            if(!document._id)
+                                                                document._id = data.id
+                                                            updateRecord(document); 
+                                                            });
+                                                }
+                                                $scope.closeDialog = function(){
+                                                    ngDialog.close();                                            
+                                                }
+
+                                        }]
+                        });
+                        function updateRecord(document){
+                            if(!$scope.userFilters)
+                                $scope.userFilters = [];
+                            IGenericService.get('v2016', 'me/'  + $scope.collection, document._id)
+                            .then(function(data){                               
+                                var existing = _.findWhere($scope.userFilters, {'_id' : document._id});
+                                if(existing){
+                                    existing.queryTitle = data.queryTitle;
+                                    existing.meta = data.meta;
+                                    existing.filters = data.filters;
+                                }
+                                else
+                                    $scope.userFilters.push(data);
+                            }); 
+                        }
                     }
                 }
                 loadSavedFilters();

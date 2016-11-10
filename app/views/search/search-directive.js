@@ -22,9 +22,9 @@ define(['app', 'underscore', '/app/js/common.js',
             // transclude: true,
             templateUrl: '/app/views/search/search-directive.html',
             controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
-             'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs',
+             'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope',
             function($scope, $q, realm, searchService, commonjs, localStorageService,
-                $http, thesaurus, appConfigService, $routeParams, $location, ngDialog, $attrs) {
+                $http, thesaurus, appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope) {
                     
                     $scope.skipResults      = $attrs.skipResults;
                     $scope.skipDateFilter   = $attrs.skipDateFilter;
@@ -1072,36 +1072,46 @@ define(['app', 'underscore', '/app/js/common.js',
                         return !$scope.skipSaveFilter && !_.isEmpty($scope.setFilters);
                     }
                     $scope.showSaveFilter = function(existingFilter){
-                                                            
-                        var filters = $scope.setFilters;
+                        if($rootScope.user && !$rootScope.user.isAuthenticated){
+                            var signIn = $scope.$on('signIn', function(evt, data){
+                                 $scope.showSaveFilter();
+                                 signIn();
+                            });
 
-                        ngDialog.open({
-                            className : 'ngdialog-theme-default wide',
-                            template : 'saveFilterDialog',
-                            controller : ['$scope', '$http','realm', function($scope, $http, realm){
-                                    if(existingFilter)
-                                        $scope.record = existingFilter;
-                                    else
-                                        $scope.record = {filters : _.values(filters) }
-                                    
-                                    $scope.record.realm = realm.value;
+                            $('#loginDialog').modal("show");
+                        }
+                        else{
 
-                                    $scope.saveFilter = function(){
-                                        $scope.loading = true;                                            
-                                        var operation = $http.post('/api/v2016/me/search-queries', $scope.record);
-                                        if($scope.record._id)
-                                            operation = $http.put('/api/v2016/me/search-queries/' + $scope.record._id, $scope.record);
-                                        operation.then(function (data) {
-                                            record = data.data;
-                                            $scope.closeDialog();
-                                        });
-                                    }
-                                    $scope.closeDialog = function(){
-                                        ngDialog.close();                                            
-                                    }
+                            var filters = $scope.setFilters;
 
-                            }]
-                        })
+                            ngDialog.open({
+                                className : 'ngdialog-theme-default wide',
+                                template : 'saveFilterDialog',
+                                controller : ['$scope', '$http','realm', function($scope, $http, realm){
+                                        if(existingFilter)
+                                            $scope.record = existingFilter;
+                                        else
+                                            $scope.record = {filters : _.values(filters) }
+                                        
+                                        $scope.record.realm = realm.value;
+
+                                        $scope.saveFilter = function(){
+                                            $scope.loading = true;                                            
+                                            var operation = $http.post('/api/v2016/me/search-queries', $scope.record);
+                                            if($scope.record._id)
+                                                operation = $http.put('/api/v2016/me/search-queries/' + $scope.record._id, $scope.record);
+                                            operation.then(function (data) {
+                                                record = data.data;
+                                                $scope.closeDialog();
+                                            });
+                                        }
+                                        $scope.closeDialog = function(){
+                                            ngDialog.close();                                            
+                                        }
+
+                                }]
+                            })
+                        }
                     } 
 
                     $scope.runFilter = function(filter){
