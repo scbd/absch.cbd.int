@@ -9,8 +9,8 @@
                    
     <div style="width:100%" ng-show="userFilters.length>0">
         <div class="row table-striped" style="padding:10px;border-bottom:1px solid #ddd;">
-            <div class="col-xs-2">Filter Title</div>
-            <div class="col-xs-2">last Updated On</div>
+            <div class="col-xs-2">Title</div>
+            <div class="col-xs-2">Last updated</div>
             <div class="col-xs-2"></div>
         </div>
         <div  class="row table-striped" style="padding:10px;border-bottom:1px solid white;"
@@ -31,7 +31,7 @@
                      </span>
                 </div>
                 <div class="col-xs-2">
-                    <input type="button" class="btn btn-primary" value="Run" ng-click="runUserQuery(record)" />
+                    <input type="button" class="btn btn-primary" value="Run" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'" />
                     <input type="button" class="btn btn-primary" value="Edit" ng-click="addEdit(record)" />
                     <input type="button" class="btn btn-warning" value="Delete" ng-click="deleteFilter($event, record)" />
                 </div>
@@ -88,7 +88,8 @@
                 <input if="filterTitle" type="text" ng-model="document.queryTitle" class="form-control" placeholder="Filter title">
             </div>
             <br/>
-            <search-directive skip-results="true" skip-save-filter="true" skip-date-filter="true"></search-directive>
+            <search-directive skip-results="true" skip-save-filter="true" skip-date-filter="true" 
+                    skip-keywords-filter="{{skipKeywordsFilter}}" skip-text-filter="{{skipTextFilter}}"></search-directive>
         </div>
 
         <div class="modal-footer">

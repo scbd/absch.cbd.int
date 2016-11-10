@@ -2,46 +2,6 @@
 
 	<span register-top-menu></span>
 	<style>
-		.profile-widget {
-			position: relative;
-		}
-		
-		.panel-white {
-			border: 1px solid #dddddd;
-		}
-		
-		.panel {
-			border-radius: 0;
-			margin-bottom: 30px;
-		}
-		
-		.profile-widget .image-container {
-			background-size: cover;
-			background-position: center;
-			padding: 10px 0 10px;
-		}
-		
-		.profile-widget .image-container .avatar {
-			width: 120px;
-			height: 120px;
-			border-radius: 50%;
-			margin: 0 auto -60px;
-			display: block;
-		}
-		
-		img {
-			vertical-align: middle;
-		}
-		
-		img {
-			border: 0;
-		}
-		
-		.profile-widget .details {
-			padding: 50px 15px 15px;
-			text-align: center;
-		}
-		
 		.block {
 			margin-bottom: 30px;
 			background-color: #fff;
@@ -121,7 +81,66 @@
 			border: 1px solid transparent;
 			border-radius: 0;
 		}
-    </style>
+		
+		.user-details {
+			position: relative;
+			padding: 0;
+		}
+		
+		.user-details .user-image {
+			position: relative;
+			z-index: 1;
+			width: 100%;
+			text-align: center;
+		}
+		
+		.user-image img {
+			clear: both;
+			margin: auto;
+			position: relative;
+		}
+		
+		.user-details .user-info-block {
+			width: 100%;
+			top: 55px;
+			background: rgb(255, 255, 255);
+			z-index: 0;
+			padding-top: 35px;
+		}
+		
+		.user-info-block {
+			position: static;
+		}
+		
+		.user-image {
+			position: absolute!important;
+		}
+		
+		.user-details {
+			position: relative;
+		}
+		
+		.user-info-block {
+			margin-top: 3%;
+			background-color: black;
+		}
+		
+		.user-info-block .user-heading {
+			width: 100%;
+			text-align: center;
+			margin: 10px 0 0;
+		}
+		
+		.user-info-block .navigation {
+			float: left;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			border-bottom: 1px solid #428BCA;
+			border-top: 1px solid #428BCA;
+		}
+	</style>
 	<div class="register-content card card-1-notrans">
 
 		<div class="register-content-header bg-pink color-white">
@@ -129,9 +148,102 @@
 				<h3>User Prefernces</h3>
 			</div>
 		</div>
-		<div class="register-content-content">
-			<div class="row">
-				<div class="col-sm-10 col-sm-offset-1">
+		<div class="register-content-content" style="background-color:#ddd">
+
+			<div class="row ">
+
+				<div class="col-sm-10 col-sm-offset-1 ">
+					<div class="col-sm-12 col-md-12 user-details">
+						<div class="user-image">
+							<img src="http://www.gravatar.com/avatar/441a535e073d818e655ab3cc304e46dc?s=100&d=mm&r=g" alt="{{user.name}}" title="{{user.name}}"
+								class="img-circle">
+						</div>
+						<div class="user-info-block">
+							<div class="user-heading">
+								<h3>{{user.name}}</h3>
+							</div>
+
+							<div class="row panel panel-white profile-widget">
+								<div class="block ">
+									<ul class="nav nav-tabs nav-justified push-20">
+
+										<li class="active">
+											<a href="#preferences" ng-click="tab='setting'" data-toggle="tab"><span class="glyphicon glyphicon-cog"> Settings</span></a>
+										</li>
+										<li>
+											<a href="#tab-user-alerts" ng-click="tab='subscriptions'" data-toggle="tab"><span class="glyphicon glyphicon-envelope"> Subscriptions</span></a>
+										</li>
+										<li>
+											<a href="#tab-search-filter" ng-click="tab='searchFilters'" data-toggle="tab"><i class="fa fa-fw fa-lock"></i> Saved Searches</a>
+										</li>
+									</ul>
+
+									<div class="tab-content">
+										<div class="tab-pane fade in panel-body active" id="preferences">
+											<div class="panel panel-default">
+												<div class="panel-heading">Settings</div>
+												<div class="panel-body">
+													<div class="form-group">
+														<label>Prefered language</label>
+														<select class="form-control">
+															<option>English</option>
+															<option>Arabic</option>
+															<option>Chinese</option>
+															<option>Espanol</option>
+															<option>French</option>
+															<option>Russion</option>
+														<select>
+													</div>
+													<div class="form-group">
+														<label>Email frequency</label>
+														<select class="form-control">
+															<option>Instant</option>
+															<option>Once a Week</option>
+															<option>once a Month</option>
+														<select>
+													</div>
+
+													<div class="form-group">
+														<div class="checkbox"><label><input type="checkbox" value=""><strong>Disable email notifications</strong></label></div>
+													</div>
+													<button class="btn btn-info pull-right" type="button">Update settings</button>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade panel-body" id="tab-user-alerts">
+											<div class="alert alert-info" role="alert">
+												<span class="fa fa-info"> Receive email notification when new records are published</span>
+											</div>
+
+											<div>
+												<legend>System Alerts</legend>
+												<ul class="list-group">
+													<li class="list-group-item clearfix">
+														<div class="pull-right"><button class="btn btn-default" type="button"><strong>Subscribe</strong></button></div>
+														<p class="text-bold mb0">IRCC #1</p><small>Notify me when a IRCC is issued for any contact from my country.</small></li>
+													<li class="list-group-item clearfix">
+														<div class="pull-right"><button class="btn btn-default" type="button"><strong>Subscribe</strong></button></div>
+														<p class="text-bold mb0">CPC #2</p><small>Notify me when a CPC is issued for any contact from my country.</small></li>
+												</ul>
+											</div>
+
+											<legend>My Custom Alerts</legend>
+											<span user-preference-filter ng-if="tab==='subscriptions'" collection="subscriptions"></span>
+										</div>
+										<div class="tab-pane fade panel-body" id="tab-search-filter">
+											<div class="alert alert-info" role="alert">
+												<span class="fa fa-info"> Create search filter for futrue use</span>
+											</div>
+											<span user-preference-filter ng-if="tab==='searchFilters'" collection="search-queries" run-query="runFilter(filter)"></span>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--<div class="col-sm-10 col-sm-offset-1">
 
 					<div class="panel panel-white profile-widget">
 						<div class="row">
@@ -163,10 +275,10 @@
 									<a href="#preferences" ng-click="tab='setting'" data-toggle="tab"><i class="fa fa-fw fa-asterisk"></i> Settings</a>
 								</li>
 								<li>
-									<a href="#tab-user-alerts"  ng-click="tab='subscriptions'" data-toggle="tab"><i class="fa fa-fw fa-asterisk"></i> Alerts</a>
+									<a href="#tab-user-alerts" ng-click="tab='subscriptions'" data-toggle="tab"><i class="fa fa-fw fa-asterisk"></i> Subscriptions</a>
 								</li>
 								<li>
-									<a href="#tab-search-filter"  ng-click="tab='searchFilters'" data-toggle="tab"><i class="fa fa-fw fa-lock"></i> Saved Searches</a>
+									<a href="#tab-search-filter" ng-click="tab='searchFilters'" data-toggle="tab"><i class="fa fa-fw fa-lock"></i> Saved Searches</a>
 								</li>
 							</ul>
 
@@ -175,18 +287,20 @@
 									Profile
 								</div>
 								<div class="tab-pane fade panel-body" id="tab-user-alerts">
+									<div class="alert alert-info" role="alert">
+
+									</div>
 									<span user-preference-filter ng-if="tab==='subscriptions'" collection="subscriptions"></span>
 								</div>
-								<div class="tab-pane fade panel-body" id="tab-search-filter">                                    
-									<span user-preference-filter ng-if="tab==='searchFilters'" collection="search-queries" 
-										run-query="runFilter(filter)"></span>
+								<div class="tab-pane fade panel-body" id="tab-search-filter">
+									<span user-preference-filter ng-if="tab==='searchFilters'" collection="search-queries" run-query="runFilter(filter)"></span>
 								</div>
 							</div>
 						</div>
 
 					</div>
 
-				</div>
+				</div>-->
 			</div>
 		</div>
 	</div>

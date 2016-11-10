@@ -16,6 +16,12 @@ define(['app', 'underscore', 'ngDialog',
             controller: ['$scope', '$http', 'IGenericService', 'realm', function ($scope, $http, IGenericService, realm) {
 
                 $scope.user = $rootScope.user;
+                $scope.skipKeywordsFilter = false;
+                $scope.skipTextFilter = false;
+                if($scope.collection == "subscriptions"){
+                    $scope.skipKeywordsFilter = true;
+                    $scope.skipTextFilter = true;
+                }
 
                 function loadSavedFilters(){
                     if($scope.user && $scope.user.isAuthenticated){
