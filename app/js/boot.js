@@ -46,9 +46,10 @@ require.config({
         'ngInfiniteScroll'          : 'libs/ngInfiniteScroll/build/ng-infinite-scroll',
         'angular-loggly-logger'     : 'libs/angular-loggly-logger/angular-loggly-logger',
         'xlsx-core'                 : 'libs/js-xlsx/dist/xlsx.core.min',
-        'xlsx'                      :  'libs/js-xlsx/dist/xlsx',
+        'xlsx'                      : 'libs/js-xlsx/dist/xlsx',
         'file-saver'                : 'libs/file-saver.js/FileSaver',
-        'tableexport'               : 'libs/tableexport.js/dist/js/tableexport.min'
+        'tableexport'               : 'libs/tableexport.js/dist/js/tableexport.min',
+        'angular-gravatar'          : 'libs/angular-gravatar/build/angular-gravatar'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -84,6 +85,7 @@ require.config({
         'xlsx-core'                     : { 'deps': ['jquery'] },
         'file-saver'                    : { 'deps': ['jquery'] },
         'tableexport'                   : { 'deps': ['jquery'] },
+        'angular-gravatar'              : { 'deps': ['angular']}
     },
     packages: [
         { name: 'scbd-branding'          , location : 'components/scbd-branding' },

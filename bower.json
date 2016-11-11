@@ -1,12 +1,14 @@
 {
   "name": "absch-cbd-int",
   "dependencies": {
+    "ammap3": "3.18.6",
     "angucomplete": "https://github.com/darylrowland/angucomplete.git#3bf6ab2da56d514c22800f9dbdfeced66cff03f4",
     "angular": "1.4",
     "angular-animate": "1.4",
     "angular-block-ui": "0.2.2",
     "angular-cookies": "1.4",
     "angular-flex": "https://github.com/scbd/angular-flex.git",
+    "angular-gravatar": "~0.4.2",
     "angular-intro.js": "1.2.4",
     "angular-loading-bar": "https://github.com/chieffancypants/angular-loading-bar.git#7db32aed5260560a5d4bbdaf4ea7365072d41ec8",
     "angular-loggly-logger": "https://github.com/scbd/angular-loggly-logger.git#2c67428b49951e18bd03cbdd4834d939ba8fba74",
@@ -32,6 +34,7 @@
     "momentjs": "2.7.0",
     "ng-breadcrumbs": "es-breadcrumbs#0.4.1",
     "ng-dialog": "ngDialog#0.5.8",
+    "ngInfiniteScroll": "1.3.0",
     "ngLocalizer": "*",
     "ngSmoothScroll": "1.7.1",
     "ngstorage": "0.3.10",
@@ -44,10 +47,8 @@
     "requirejs-text": "2.0.14",
     "socket.io-1.4.5": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js",
     "tableexport.js": "https://github.com/clarketm/TableExport.git#v3.2.14",
-    "underscore": "1.7.0",
-    "ammap3": "3.18.6",
-    "ngInfiniteScroll": "1.3.0",
-    "textAngular"                     : "~1.2.2"
+    "textAngular": "~1.2.2",
+    "underscore": "1.7.0"
   },
   "resolutions": {
     "angular": "1.4.14",

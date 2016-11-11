@@ -1,12 +1,12 @@
 'use strict';
-define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate', 'text-angular', 'ngSmoothScroll', 'angular-loggly-logger',
-    ],
+define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
+ 'text-angular', 'ngSmoothScroll', 'angular-loggly-logger','angular-gravatar'],
     function(angular) {
 
         var dependencies = ['ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngAnimate', 'angular-animate', 'ngAria' ,'ngMaterial','toastr',
             'ngSanitize', 'angular-intro', 'scbdControls', 'ngLocalizer', 'textAngular', 'cbd-forums',
             'ng-breadcrumbs', 'scbdServices', 'scbdFilters', 'smoothScroll', 'ngMessages', 'ngStorage', 'ngDialog',
-            'infinite-scroll', 'logglyLogger'
+            'infinite-scroll', 'logglyLogger', 'md5', 'ui.gravatar'
         ];
         angular.defineModules(dependencies);
         var app = angular.module('app', dependencies);
