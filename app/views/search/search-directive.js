@@ -142,7 +142,7 @@ define(['app', 'underscore', '/app/js/common.js',
                                 $scope.saveFilter(query);
                             }
                         });
-                        $scope.refresh = !!$scope.refresh;
+                        $scope.refresh = !$scope.refresh;
 
                     };
 
@@ -1049,23 +1049,29 @@ define(['app', 'underscore', '/app/js/common.js',
                     //===============================================================================================================================
                     loadFilters();
                     if(!$scope.skipResults && $routeParams.recordType){
+                        if($routeParams.recordType == 'run-query'){
+                            var queryFilter = localStorageService.get("run-query");
+                            setSearchFilters(queryFilter);
+                            //$scope.refresh = true;
+                        }
+                        else{
+                            $scope.currentTab = $routeParams.recordType;
 
-                        $scope.currentTab = $routeParams.recordType;
+                            var query =  $location.search();
 
-                        var query =  $location.search();
+                            if(query){
 
-                        if(query){
-
-                            if(query.text){
-                                $scope.saveFreeTextFilter(query.text);
+                                if(query.text){
+                                    $scope.saveFreeTextFilter(query.text);
+                                }
+                                if(query.country){
+                                    $scope.saveFilter(query.country);
+                                }
+                                if(query.schema){
+                                    $scope.saveFilter(query.schema);
+                                }
+                                $scope.refresh = false;
                             }
-                            if(query.country){
-                                $scope.saveFilter(query.country);
-                            }
-                            if(query.schema){
-                                $scope.saveFilter(query.schema);
-                            }
-                            $scope.refresh = false;
                         }
                     }
 

@@ -5,39 +5,30 @@
             width: 70% !important;
         }
     </style>
-    <input type="button" class="btn btn-primary" value="Add New" ng-click="addEdit()" />
-                   
+    <div class="pull-right1">
+        <input type="button" class="btn btn-primary" value="Add New" ng-click="addEdit()" />       
+    </div>     
     <div style="width:100%" ng-show="userFilters.length>0">
-        <div class="row table-striped" style="padding:10px;border-bottom:1px solid #ddd;">
-            <div class="col-xs-2">Title</div>
-            <div class="col-xs-2">Last updated</div>
-            <div class="col-xs-2"></div>
-        </div>
-        <div  class="row table-striped" style="padding:10px;border-bottom:1px solid white;"
-         ng-repeat="record in userFilters | orderBy:'reportedOn':'desc'">
-            <div>
-                <div class="filter col-xs-2">
-                    {{record.queryTitle}}
+
+        <ul class="list-group">
+            <li class="list-group-item clearfix"
+            ng-repeat="record in userFilters | orderBy:'reportedOn':'desc'">
+                <div class="pull-right">
+                    <input type="button" class="btn btn-primary" value="Run" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'" />
+                    <input type="button" class="btn btn-primary" value="Edit" ng-click="addEdit(record)" />
+                    <input type="button" class="btn btn-warning" value="Delete" ng-click="deleteFilter($event, record)" />
                 </div>
-                <div class="filter col-xs-1">
-                    {{(record.meta.modifiedOn||record.meta.createdOn)|formatDate}}
-                </div>
-                 <div class="filter col-xs-7">
-                     <span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
+                <p class="text-bold mb0">#{{$index+1}} {{record.queryTitle}}</p>
+                <small>
+                    <span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
                         <span class="label label-info">                    
                                 <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>{{filter.name}}
                                 <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
                         </span>
                      </span>
-                </div>
-                <div class="col-xs-2">
-                    <input type="button" class="btn btn-primary" value="Run" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'" />
-                    <input type="button" class="btn btn-primary" value="Edit" ng-click="addEdit(record)" />
-                    <input type="button" class="btn btn-warning" value="Delete" ng-click="deleteFilter($event, record)" />
-                </div>
-            </div>
-           
-        </div>
+                </small>
+            </li>
+        </ul>
     </div>
     <div ng-show="!userFilters || userFilters.length==0">
         <br/><br/>
