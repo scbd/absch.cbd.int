@@ -17,7 +17,7 @@ define(['app', '/app/js/common.js'
 					uid = $filter("uniqueID")(document);
 
                     if(!uid)
-                     return "unique identifier not yet assigned ";
+                     return "[new draft]";
 
                     return uid;
 				}
