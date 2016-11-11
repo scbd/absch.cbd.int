@@ -11,7 +11,7 @@
 
 		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
 			<label>Address</label>
-			<a translation-url ddress class="km-value">
+			<address class="km-value">
 			<div class="km-pre">{{document.address | lstring:locale}}</div>
 			{{document.city | lstring:locale}}<span ng-show="document.city">, </span>
 			{{document.state | lstring:locale}}<br ng-show="document.city || document.state" />

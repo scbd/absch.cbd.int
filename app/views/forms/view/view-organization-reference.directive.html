@@ -3,7 +3,7 @@
 	<div km-terms ng-model="organization.organizationType">
 		<span ng-repeat="term in terms">{{term.name}}</span>
 	</div>
-	<a translation-url ddress style="margin-top: 5px; margin-bottom: 5px">
+	<address style="margin-top: 5px; margin-bottom: 5px">
 		<div class="km-pre">{{organization.address | lstring:locale}}</div>
 		{{organization.city | lstring:locale}}<span ng-show="organization.city">, </span>
 		{{organization.state | lstring:locale}}<br ng-show="organization.city || organization.state" />

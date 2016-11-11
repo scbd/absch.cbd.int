@@ -435,7 +435,11 @@ this.integerToHex = function(d, schema) {
 
     return hex;
 }
-
+app.filter("urlSchemaShortName", ['$filter', function($fitler) {
+    return function(schema) {
+        return $fitler('schemaShortName')(schema);
+    }
+}]);
 app.filter("schemaShortName", [function() {
 
     return function(schema) {
