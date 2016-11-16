@@ -69,7 +69,7 @@ function (app, schemaNamePlural) {
     		    if(cacheMap[term.identifier])
     			     return cacheMap[term.identifier] ;
 
-                document = storage.documents.get(term.identifier, {info:""});
+                document = storage.documents.get(term.identifier, {'include-deleted':true, info:""});
 
             }
             else if(term && angular.isObject(term)){
