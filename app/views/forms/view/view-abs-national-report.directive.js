@@ -94,10 +94,18 @@ app.directive("viewAbsNationalReport", [function () {
 					
 		        	return "https://www.cbd.int/kb/record/focalPoint/" + commonjs.hexToInteger(reference.identifier);
 		        }
-		        
-				return  "/database/" + $filter("uniqueIDWithoutRevision")(reference.identifier);
-			}
+				var revsionNumber = '';
+		        if(reference.identifier.indexOf('@')>=0)
+				    revsionNumber = reference.identifier.substr(reference.identifier.indexOf('@')+1, reference.identifier.length - (reference.identifier.indexOf('@')+1));
+				
+				var UID = $filter("uniqueIDWithoutRevision")(reference.identifier);
+				if(!UID)
+					return;
 
+				var schema = UID.split('-')[1];
+
+				return  "/database/" + schema + '/' + UID + (revsionNumber ? ('/' + revsionNumber) : '');
+			}
 
 			//==================================
 		    //
@@ -112,7 +120,7 @@ app.directive("viewAbsNationalReport", [function () {
 		        	return "https://www.cbd.int/kb/record/focalPoint/" + commonjs.hexToInteger(reference.identifier);
 		        }
 		        
-				return  $filter("uniqueIDWithoutRevision")(reference.identifier);
+				return  $filter("uniqueID")(reference.identifier);
 			}
 
 
