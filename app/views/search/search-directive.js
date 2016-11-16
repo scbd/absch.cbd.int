@@ -13,6 +13,7 @@ define(['app', 'underscore', '/app/js/common.js',
 '/app/services/app-config-service.js', 'ngDialog',
 '/app/views/register/user-preferences/user-preference-filter.js',
 '/app/views/directives/export-directive.html.js'
+'/app/services/thesaurus-service.js'
 ], function(app, _) {
 
     app.directive('searchDirective', function() {
@@ -22,15 +23,15 @@ define(['app', 'underscore', '/app/js/common.js',
             // transclude: true,
             templateUrl: '/app/views/search/search-directive.html',
             controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
-             'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope',
-            function($scope, $q, realm, searchService, commonjs, localStorageService,
-                $http, thesaurus, appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope) {
+             'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService',
+            function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
+                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService) {
                     
                     $scope.skipResults          = $attrs.skipResults;
                     $scope.skipDateFilter       = $attrs.skipDateFilter;
                     $scope.skipSaveFilter       = $attrs.skipSaveFilter;
                     $scope.skipTextFilter       = $attrs.skipTextFilter;
-                    $scope.skipKeywordsFilter    = $attrs.skipKeywordsFilter;
+                    $scope.skipKeywordsFilter   = $attrs.skipKeywordsFilter;
 
                     var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
                     var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
@@ -604,8 +605,32 @@ define(['app', 'underscore', '/app/js/common.js',
                     //                 addKeywordFilter(keyword, '', 'ABS Thematic Areas');
                     //             });
                     //     });
+                            
+                        //IRCC filters
+                        $q.when(thesaurusService.getDomainTerms('usage'), function(keywords) {
+                                _.each(keywords, function(keyword, index){
+                                    addKeywordFilter(keyword, 'absPermit', 'IRCC usages');
+                                });
+                        });                        
+                        $q.when(thesaurusService.getDomainTerms('keywords'), function(keywords) {
+                                _.each(keywords, function(keyword, index){
+                                    addKeywordFilter(keyword, 'absPermit', 'IRCC keywords');
+                                });
+                        });
 
-
+                        //CP
+                         $q.when(thesaurusService.getDomainTerms('cpJurisdictions'), function(keywords) {
+                                _.each(keywords, function(keyword, index){
+                                    addKeywordFilter(keyword, 'absCheckpoint', 'Checkpoint jurisdiction');
+                                });
+                        });
+                        //CPC
+                         $q.when(thesaurusService.getDomainTerms('keywords'), function(keywords) {
+                                _.each(keywords, function(keyword, index){
+                                    addKeywordFilter(keyword, 'absCheckpointCommunique', 'Checkpoint communique keywords');
+                                });
+                        });
+                        ///////////////
                          $q.when(commonjs.getThematicAreas(), function(keywords) {
                                  var levels = [];
                                  var parents = [];
