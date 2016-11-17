@@ -212,25 +212,31 @@
 												</div>
 											</div>
 										</div>
-										<div class="tab-pane fade panel-body" id="tab-user-alerts">
+										<div class="tab-pane fade panel-body" id="tab-user-alerts" ng-if="tab==='subscriptions'">
 											<div class="alert alert-info" role="alert">
 												<span class="fa fa-info"> Receive email notification when new records are published</span>
 											</div>
 
 											<div>
 												<legend>System Alerts</legend>
-												<ul class="list-group">
-													<li class="list-group-item clearfix">
-														<div class="pull-right"><button class="btn btn-default" type="button"><strong>Subscribe</strong></button></div>
-														<p class="text-bold mb0">IRCC #1</p><small>Notify me when a IRCC is issued for any contact from my country.</small></li>
-													<li class="list-group-item clearfix">
-														<div class="pull-right"><button class="btn btn-default" type="button"><strong>Subscribe</strong></button></div>
-														<p class="text-bold mb0">CPC #2</p><small>Notify me when a CPC is issued for any contact from my country.</small></li>
-												</ul>
+													<ul class="list-group">
+														<li class="list-group-item clearfix">
+															<div class="pull-right">
+																<button class="btn btn-default" type="button" ng-if="!hasUserSubscribed('absPermit')" ng-click="subscribe('absPermit')"><strong>Subscribe</strong></button>
+																<button class="btn btn-default" type="button" ng-if="hasUserSubscribed('absPermit')"  ng-click="unsubscribe('absPermit')"><strong>Unsubscribe</strong></button>
+															</div>
+															<p class="text-bold mb0">IRCC #1</p>
+																<small>Notify me when a IRCC is issued for any contact from my country.</small>
+														</li>
+														<li class="list-group-item clearfix">
+															<div class="pull-right"><button class="btn btn-default" type="button"><strong>Subscribe</strong></button></div>
+															<p class="text-bold mb0">CPC #2</p><small>Notify me when a CPC is issued for any contact from my country.</small></li>
+													</ul>
 											</div>
 
 											<legend>My Custom Alerts</legend>
-											<span user-preference-filter ng-if="tab==='subscriptions'" collection="subscriptions"></span>
+											<span user-preference-filter ng-if="tab==='subscriptions'" collection="subscriptions"
+												collection-filter='{"isSystemAlert":false}'></span>
 										</div>
 										<div class="tab-pane fade panel-body" id="tab-search-filter">
 											<div class="alert alert-info" role="alert">

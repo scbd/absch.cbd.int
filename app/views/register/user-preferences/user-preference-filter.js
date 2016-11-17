@@ -9,7 +9,8 @@ define(['app', 'underscore', 'ngDialog',
             replace: true,
             scope: {
                 runQuery: '&',
-                collection  :  '@'
+                collection  :  '@',
+                collectionFilter : '@?'
             },
             link: function ($scope, element, attrs) { 
             },
@@ -25,7 +26,10 @@ define(['app', 'underscore', 'ngDialog',
 
                 function loadSavedFilters(){
                     if($scope.user && $scope.user.isAuthenticated){
-                        IGenericService.query('v2016', 'me/' + $scope.collection)
+                        var query = {};
+                        if($scope.collectionFilter)
+                            query = JSON.parse($scope.collectionFilter);
+                        IGenericService.query('v2016', 'me/' + $scope.collection, query)
                         .then(function (data) {
                             $scope.userFilters = data
                         });

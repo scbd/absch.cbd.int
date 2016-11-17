@@ -12,7 +12,7 @@ define(['app', 'underscore', '/app/js/common.js',
 '/app/views/search/search-results/national-records-country.js',
 '/app/services/app-config-service.js', 'ngDialog',
 '/app/views/register/user-preferences/user-preference-filter.js',
-'/app/views/directives/export-directive.html.js'
+'/app/views/directives/export-directive.html.js',
 '/app/services/thesaurus-service.js'
 ], function(app, _) {
 

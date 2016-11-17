@@ -43,8 +43,8 @@ define(['app'], function(app) {
         //===========================
         //
         //===========================
-        function deleteNotification(version, schema, id) {
-            return $http.delete("/api/"+version+"/"+schema + id).then(
+        function deleteRecord(version, schema, id) {
+            return $http.delete("/api/"+version+"/"+schema+"/" + id).then(
                 function(resp) {
                     return resp.data;
                 });
@@ -76,7 +76,7 @@ define(['app'], function(app) {
             create: create,
             get: get,
             update: update,
-            delete: deleteNotification,
+            delete: deleteRecord,
             query: query,
         };
     }]);
