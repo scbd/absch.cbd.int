@@ -8,13 +8,13 @@ define(['app',
             scope: {
                 exportQuery: '&',
                 queryType: '&',
-                // fields: '@'
+                helpTitle: '@'
             },
             link: function ($scope, element, attrs) {
                 
             },
-            controller: ["$scope", '$rootScope', '$filter', '$timeout', 'commonjs', '$q', 'searchService', 'ngDialog',
-                function ($scope, $rootScope, $filter, $timeout, commonjs, $q, searchService, ngDialog) {
+            controller: ["$scope", '$rootScope', '$filter', '$timeout', 'commonjs', '$q', 'searchService', 'ngDialog', '$element',
+                function ($scope, $rootScope, $filter, $timeout, commonjs, $q, searchService, ngDialog, $element) {
 
                     $scope.showDialog = function(){
                         var query = $scope.exportQuery();
@@ -103,6 +103,9 @@ define(['app',
                         })
                     }
 
+                     $timeout(function(){
+                        $element.find('[data-toggle="tooltip"]').tooltip();
+                    },50);
                 }
             ]
         };
