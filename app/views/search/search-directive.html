@@ -69,8 +69,8 @@
                     <li ng-class="{'active':currentTab==='referenceRecords'}"><a translation-url  href="#" class="color-orange" ng-click="updateCurrentTab('referenceRecords')">Reference <span class="hidden-xs">records</span> <span class=" badge bg-orange" style="margin-left:10px;">{{recordCount[1].count}}</span></a></li>
                     <li ng-class="{'active':currentTab==='scbdRecords'}"><a translation-url  href="#" class="color-darkgrey" ng-click="updateCurrentTab('scbdRecords')">SCBD <span class="hidden-xs">records</span> <span class="badge" style="margin-left:10px;">{{recordCount[2].count}}</span></a></li>
                     <!--<li class="pull-left">Download</li>-->
-                    <div class="pull-right">
-                        <span export export-query="getExportQuery()" query-type="getRecordType()" ></span>
+                    <div class="pull-right">                                                 
+                            <div export export-query="getExportQuery()" query-type="getRecordType()" help-title="Export the active tab data to excel/csv"></div>
                     </div>
                 </ul>
             </div>
