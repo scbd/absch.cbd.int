@@ -1,4 +1,4 @@
-define(['app', 'ngMaterial', 'ngAria', 'angular-animate',
+define(['app',
     './document-metadata-directive.html.js',
     '/app/js/common.js',
     'ngInfiniteScroll'

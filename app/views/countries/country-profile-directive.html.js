@@ -1,4 +1,4 @@
- define(['app','underscore','linqjs', 'ngMaterial','ngAria','angular-animate',
+ define(['app','underscore','linqjs',
    '/app/views/measure-matrix/measure-matrix-countries-directive.html.js',
    '/app/js/common.js',
    '/app/views/search/search-results/result-grouped-national-record.js',
