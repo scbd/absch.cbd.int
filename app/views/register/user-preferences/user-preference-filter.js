@@ -99,9 +99,26 @@ define(['app', 'underscore', 'ngDialog',
                                                     },100);
                                                 }
                                                 $scope.save = function(document){
+                                                    $scope.errors = undefined;
+                                                    if(!document || document.queryTitle == ''){
+                                                        $scope.errors = [];
+                                                        $scope.errors.push('Please enter title of the alert')
+                                                    }
+                                                    if(!document || document.queryTitle == ''){
+                                                        if(!$scope.errors)$scope.errors = [];
+                                                        $scope.errors.push('Please select at least one filter')
+                                                    }
+                                                    if($scope.errors && $scope.errors.length > 0){
+                                                        $("#dialog-errors").animate({
+                                                            scrollTop: 0
+                                                        }, 600);
+                                                        return;
+                                                    }
+
                                                     $scope.loading = true;
                                                     var operation;
-
+                                                    
+                                                    document.isSystemAlert = false;
                                                     document.filters = _.values($scope.setFilters);                                           
                                                     document.realm = realm.value;
                                                     if(!document._id)

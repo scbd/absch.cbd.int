@@ -73,14 +73,18 @@
             </h3>
         </div>
 
-        <div class="modal-body">
+        <div class="modal-body">           
             <div class="form-group">
                 <label for="filterTitle">Title</label>
-                <input if="filterTitle" type="text" ng-model="document.queryTitle" class="form-control" placeholder="Filter title">
+                <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Filter title">
             </div>
             <br/>
             <search-directive skip-results="true" skip-save-filter="true" skip-date-filter="true" 
                     skip-keywords-filter="{{skipKeywordsFilter}}" skip-text-filter="{{skipTextFilter}}"></search-directive>
+            
+            <div class="alert alert-danger" role="alert" ng-if="errors">  
+                    <p ng-repeat="error in errors">{{error}}</p>
+            </div>
         </div>
 
         <div class="modal-footer">
