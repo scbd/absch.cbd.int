@@ -2,15 +2,25 @@ define(['app', '/app/js/common.js',
 '/app/views/register/directives/register-top-menu.js', 'ngDialog',
 '/app/views/register/user-preferences/user-preference-filter.js',
 '/app/services/local-storage-service.js','angular-gravatar',
-'scbd-angularjs-services/generic-service'
+'scbd-angularjs-services/generic-service', '/app/services/role-service.js'
 ], function (app) {
     app.controller('userPreferencesCtrl', ['$scope', '$http', '$timeout', '$element', 'ngDialog', 
-    '$rootScope', 'localStorageService', '$location','IGenericService', 'realm',
+    '$rootScope', 'localStorageService', '$location','IGenericService', 'realm', 'roleService',
     function ($scope, $http, $timeout, $element, ngDialog, $rootScope, 
-        localStorageService, $location, IGenericService, realm) {
+        localStorageService, $location, IGenericService, realm, roleService) {
             var user = $rootScope.user;
 
             $scope.systemAlertsSubscription=[];
+
+            if(user.government){
+
+                if(roleService.isAbsPublishingAuthority() ||
+                    roleService.isAbsNationalAuthorizedUser() ||
+                    roleService.isAbsNationalFocalPoint()){
+
+                        $scope.showSystemAlerts = true;
+                }
+            }
 
             $scope.runFilter = function(filter){
 
@@ -19,7 +29,7 @@ define(['app', '/app/js/common.js',
             }
             
             $scope.$watch('tab', function(newVal){
-                if(newVal && newVal=='subscriptions'){
+                if(newVal && newVal=='subscriptions' && $scope.showSystemAlerts){
                     // if(!$scope.systemAlertsSubscription){
                         var query = {
                             realm         : realm,
@@ -32,6 +42,7 @@ define(['app', '/app/js/common.js',
                     // }
                 }
             });
+
 
             $scope.hasUserSubscribed = function(event){
                 return $scope.systemAlertsSubscription && 
