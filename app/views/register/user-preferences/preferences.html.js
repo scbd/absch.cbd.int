@@ -32,7 +32,7 @@ define(['app', '/app/js/common.js',
                 if(newVal && newVal=='subscriptions' && $scope.showSystemAlerts){
                     // if(!$scope.systemAlertsSubscription){
                         var query = {
-                            realm         : realm,
+                            realm         : realm.value,
                             isSystemAlert : true
                         }
                         IGenericService.query('v2016', 'me/subscriptions', query)
