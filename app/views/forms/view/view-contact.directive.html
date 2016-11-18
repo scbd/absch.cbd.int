@@ -77,7 +77,7 @@
 		</div>
 		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
 			<label>Address</label>
-			<a translation-url ddress class="km-value">
+			<address class="km-value">
 				<div class="km-pre">{{document.address | lstring:locale}}</div>
 				{{document.city | lstring:locale}}
 				<span ng-show="document.city">, </span>
@@ -109,7 +109,8 @@
             <label>Emails</label>
             <div class="km-value">
 				<ul class="list">
-					<li ng-repeat="item in document.emails"><a translation-url  ng-href="mailto:{{item}}">{{item}}</a></li>
+					<li ng-repeat="item in document.emails">
+						<a translation-url  ng-href="mailto:{{item}}">{{item}}</a></li>
 				</ul>
 			</div>
         </div>

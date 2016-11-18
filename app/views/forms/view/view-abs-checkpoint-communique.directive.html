@@ -24,11 +24,11 @@
     		 	    <strong>{{document.title | lstring:locale}}</strong>
     		 	</div>
 		 	</div>
-			<div ng-show="document.checkpoints">
+			<div ng-show="document.absCheckpoints">
 				<legend>Checkpoint/s that collected or received the information</legend>
 					<div class="km-value">
 						<ul>
-							<li ng-repeat="item in document.checkpoints">
+							<li ng-repeat="item in document.absCheckpoints">
 								<div view-default-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
 						</ul>

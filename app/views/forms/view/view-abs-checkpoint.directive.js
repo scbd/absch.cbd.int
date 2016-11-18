@@ -1,4 +1,4 @@
- define(["app",'/app/views/directives/help-directive.html.js'], function(app){
+ define(["app"], function(app){
 
 	// });
 //	 require("app")

@@ -161,7 +161,7 @@
         var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } }
         addLoadEvent(function() { outdatedBrowser( { bgColor: '#f25648', color: '#ffffff', lowerThan: 'boxShadow', languagePath: 'app/libs/outdated-browser/outdatedbrowser/lang/en.html' }) });
         addLoadEvent(function() {
-            
+            //debugger;
             var langRegex = /(ar|en|es|fr|ru|zh)/;
             var urlLangRegex       = /^\/(en|ar|fr|es|ru|zh)/;
             var locale = getCookie('locale');
@@ -169,7 +169,7 @@
             //debugger;
             if(langRegex.test(locale) && !urlLangRegex.test(location.pathname)){
                 var baseUrl = location.protocol + '//' + location.host + (locale.port ? (':' + location.port) : '')
-                window.location.href = baseUrl + "/" + locale + location.pathname;
+                window.location.href = window.location.href.replace(baseUrl, baseUrl+ "/" + locale);//
             }
 
         });
@@ -204,7 +204,7 @@
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-1996573-11', 'auto');
-        ga('send', 'pageview');
+       // ga('send', 'pageview');
     }
     </script>
 

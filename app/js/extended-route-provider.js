@@ -1,7 +1,7 @@
 'use strict';
 
-define(['app', 'angular', 'angular-regex', '../services/app-config-service', 'scbd-angularjs-services/locale'], function(app, angular) {
-    // app.provider('$route', app.RouteProviderRegex);
+define(['app', 'angular', '../services/app-config-service', 'scbd-angularjs-services/locale'], function(app, angular) {
+    
     app.provider('extendedRoute', ["$routeProvider", function($routeProvider) {
         
         var baseUrl = "";//$('#appBaseUrl').text();

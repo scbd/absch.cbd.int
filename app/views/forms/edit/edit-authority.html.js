@@ -1,4 +1,4 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/views/directives/help-directive.html.js', '/app/js/common.js',
+define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/js/common.js',
  '/app/views/forms/edit/document-selector.html.js', '/app/views/forms/edit/warning-message-cna.html.js',
         '../view/view-authority.directive.js'
         ], function(app, _) {

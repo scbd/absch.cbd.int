@@ -4,7 +4,6 @@ define(['app',
 	'./view-history-directive.html.js',
     '/app/js/common.js',
     '/app/views/directives/document-metadata-directive.html.js',
-	'/app/views/directives/help-directive.html.js',
     '/app/views/directives/internal-record-details.js',
     '/app/views/directives/party-status.js',
     '/app/views/forms/view/view-default-reference.directive.js',
@@ -190,12 +189,12 @@ define(['app',
 							qDocumentInfo = storage.drafts.get(identifier, { info: true }).then(function (result) { return result.data || result });
 						}
 						else if (version == undefined) {
-							qDocument = storage.documents.get(identifier).then(function (result) { return result.data || result });
-							qDocumentInfo = storage.documents.get(identifier, { info: true }).then(function (result) { return result.data || result });
+							qDocument = storage.documents.get(identifier, {'include-deleted':true}).then(function (result) { return result.data || result });
+							qDocumentInfo = storage.documents.get(identifier, { info: true, 'include-deleted':true }).then(function (result) { return result.data || result });
 						}
 						else {
-							qDocument = storage.documents.get(identifier + '@' + version).then(function (result) { return result.data || result });
-							qDocumentInfo = storage.documents.get(identifier + '@' + version, { info: true }).then(function (result) { return result.data || result });
+							qDocument = storage.documents.get(identifier + '@' + version, {'include-deleted':true}).then(function (result) { return result.data || result });
+							qDocumentInfo = storage.documents.get(identifier + '@' + version, {'include-deleted':true, info: true }).then(function (result) { return result.data || result });
 
 						}
 						$scope.loading = true;

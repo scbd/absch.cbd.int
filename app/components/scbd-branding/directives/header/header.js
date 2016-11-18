@@ -34,7 +34,7 @@ function(app, template, $) {
 
                     $rootScope.$on('signOut', function(){
                         socketioService.disconnect(true);
-                        connectWithToken();
+                        // connectWithToken();
                     });
 
                     $rootScope.$on('signIn', function(){

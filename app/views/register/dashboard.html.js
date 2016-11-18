@@ -13,6 +13,7 @@ function(app, _) {
 
             $timeout(function(){
                 $element.find('[data-toggle="tooltip"]').tooltip();
+                $element.find('#mySettingsPop').popover('show')
             },50);
 
 

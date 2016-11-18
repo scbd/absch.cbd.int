@@ -71,7 +71,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/register/requests',                                  { redirectTo:'/register/notifications' }).
 
                when('/register/:document_type/status/:status',             {templateUrl: '/app/views/register/record-list.html',          param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
-               when('/register/national-users',                            {templateUrl: '/app/views/register/national-users/nation-user-list.html', label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
+               when('/register/national-users',                            {templateUrl: '/app/views/register/national-users/national-user-list.html', label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
                when('/register/:document_type',                            {templateUrl: '/app/views/register/record-list.html',       label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
                when('/register/CON/new',           {templateUrl: '/app/views/forms/edit/edit-contact.html',                   label:'New',  param:'true', resolveController: true,documentType :'CON' , resolve : { securized : securize(null,true) }, }).

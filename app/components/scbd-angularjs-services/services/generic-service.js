@@ -8,13 +8,14 @@ define(['app'], function(app) {
         //===========================
         function create(version, schema, data) {
 
-            var body = {
-                data: data
-            };
+            // var body = {
+            //     data: data
+            // };
 
-            return $http.post("/api/"+version+"/"+schema, body).then(function(resp) {
-                return resp.data;
-            });
+            return $http.post("/api/"+version+"/"+schema, data)
+                        .then(function(resp) {
+                            return resp.data;
+                        });
         }
 
         //===========================
@@ -42,8 +43,8 @@ define(['app'], function(app) {
         //===========================
         //
         //===========================
-        function deleteNotification(version, schema, id) {
-            return $http.delete("/api/"+version+"/"+schema + id).then(
+        function deleteRecord(version, schema, id) {
+            return $http.delete("/api/"+version+"/"+schema+"/" + id).then(
                 function(resp) {
                     return resp.data;
                 });
@@ -53,9 +54,13 @@ define(['app'], function(app) {
         //
         //===========================
         function query(version, schema, query, pageNumber, pageLength, sort, count) {
+            var q;
+            if(query)
+                q = JSON.stringify(query);
+
             return $http.get("/api/"+version+"/"+schema, {
                 params: {
-                    q: JSON.stringify(query),
+                    q: q,
                     sk: pageNumber,
                     l: pageLength,
                     c: count,
@@ -71,7 +76,7 @@ define(['app'], function(app) {
             create: create,
             get: get,
             update: update,
-            delete: deleteNotification,
+            delete: deleteRecord,
             query: query,
         };
     }]);

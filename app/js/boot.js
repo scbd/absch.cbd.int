@@ -9,7 +9,6 @@ require.config({
         'angular-route'             : 'libs/angular-route/angular-route.min',
         'angular-cookies'           : 'libs/angular-cookies/angular-cookies.min',
         'angular-sanitize'          : 'libs/angular-sanitize/angular-sanitize.min',
-        'angular-regex'             : 'js/route-provider-regex',
         'css'                       : 'libs/require-css/css.min',
         'text'                      : 'libs/requirejs-text/text',
         'json'                      : 'libs/requirejs-plugins/src/json',
@@ -46,16 +45,18 @@ require.config({
         'ngInfiniteScroll'          : 'libs/ngInfiniteScroll/build/ng-infinite-scroll',
         'angular-loggly-logger'     : 'libs/angular-loggly-logger/angular-loggly-logger',
         'xlsx-core'                 : 'libs/js-xlsx/dist/xlsx.core.min',
-        'xlsx'                      :  'libs/js-xlsx/dist/xlsx',
+        'xlsx'                      : 'libs/js-xlsx/dist/xlsx',
         'file-saver'                : 'libs/file-saver.js/FileSaver',
-        'tableexport'               : 'libs/tableexport.js/dist/js/tableexport.min'
+        'tableexport'               : 'libs/tableexport.js/dist/js/tableexport.min',
+        'angular-gravatar'          : 'libs/angular-gravatar/build/angular-gravatar',
+        'angular-google-analytics'  : 'libs/angulartics-google-analytics/dist/angulartics-ga.min',
+        'angular-angulartics'       : 'libs/angulartics/dist/angulartics.min'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
         'angular-route'                 : { 'deps': ['angular'] },
         'angular-cookies'               : { 'deps': ['angular'] },
         'angular-sanitize'              : { 'deps': ['angular'] },
-        'angular-regex'                 : { 'deps': ['angular'] },
         'bootstrap'                     : { 'deps': ['jquery'] },
         'bootstrap-datepicker'          : { 'deps': ['jquery'] },
         'underscore'                    : { 'exports': '_' },
@@ -84,6 +85,9 @@ require.config({
         'xlsx-core'                     : { 'deps': ['jquery'] },
         'file-saver'                    : { 'deps': ['jquery'] },
         'tableexport'                   : { 'deps': ['jquery'] },
+        'angular-gravatar'              : { 'deps': ['angular']}, 
+        'angular-angulartics'             : { 'deps': ['angular']} ,
+        'angular-google-analytics'      : { 'deps': ['angular', 'angular-angulartics']}
     },
     packages: [
         { name: 'scbd-branding'          , location : 'components/scbd-branding' },
@@ -97,7 +101,7 @@ require.config({
 
 define("_slaask", window._slaask);
 
-require(['angular-flex', 'angular-route', 'angular-cookies',  'bootstrap', 'domReady'
+require(['angular', 'angular-flex', 'angular-route', 'angular-cookies',  'bootstrap', 'domReady'
     /*, 'main'*/], function (ng) {
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 

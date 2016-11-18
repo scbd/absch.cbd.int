@@ -14,7 +14,13 @@
         }
         .modal-body{background-color:#FFF;}
     </style>
-    <button type="button" class="btn btn-primary" aria-label="Close" ng-click="showDialog()" ng-disabled="loading">Export</button>
+    <div class="row">
+        <div class="col-xs-12" >
+            <button type="button" class="btn btn-primary" aria-label="Close" ng-click="showDialog()" ng-disabled="loading">
+                <span ng-if="helpTitle" class="helpinfoInline fa fa-info-circle " data-toggle="tooltip" data-html="true" data-title="{{helpTitle}}" data-container="body"></span>
+            Export</button>
+        </div>
+    </div>
 	<script type="text/ng-template" trados-translation="true" id="exportDialog">
         <div class="modal-header">
             <h3 class="modal-title">
