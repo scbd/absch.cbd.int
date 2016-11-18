@@ -9,7 +9,6 @@ require.config({
         'angular-route'             : 'libs/angular-route/angular-route.min',
         'angular-cookies'           : 'libs/angular-cookies/angular-cookies.min',
         'angular-sanitize'          : 'libs/angular-sanitize/angular-sanitize.min',
-        'angular-regex'             : 'js/route-provider-regex',
         'css'                       : 'libs/require-css/css.min',
         'text'                      : 'libs/requirejs-text/text',
         'json'                      : 'libs/requirejs-plugins/src/json',
@@ -49,14 +48,15 @@ require.config({
         'xlsx'                      : 'libs/js-xlsx/dist/xlsx',
         'file-saver'                : 'libs/file-saver.js/FileSaver',
         'tableexport'               : 'libs/tableexport.js/dist/js/tableexport.min',
-        'angular-gravatar'          : 'libs/angular-gravatar/build/angular-gravatar'
+        'angular-gravatar'          : 'libs/angular-gravatar/build/angular-gravatar',
+        'angular-google-analytics'  : 'libs/angulartics-google-analytics/dist/angulartics-ga.min',
+        'angular-angulartics'       : 'libs/angulartics/dist/angulartics.min'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
         'angular-route'                 : { 'deps': ['angular'] },
         'angular-cookies'               : { 'deps': ['angular'] },
         'angular-sanitize'              : { 'deps': ['angular'] },
-        'angular-regex'                 : { 'deps': ['angular'] },
         'bootstrap'                     : { 'deps': ['jquery'] },
         'bootstrap-datepicker'          : { 'deps': ['jquery'] },
         'underscore'                    : { 'exports': '_' },
@@ -85,7 +85,9 @@ require.config({
         'xlsx-core'                     : { 'deps': ['jquery'] },
         'file-saver'                    : { 'deps': ['jquery'] },
         'tableexport'                   : { 'deps': ['jquery'] },
-        'angular-gravatar'              : { 'deps': ['angular']}
+        'angular-gravatar'              : { 'deps': ['angular']}, 
+        'angular-angulartics'             : { 'deps': ['angular']} ,
+        'angular-google-analytics'      : { 'deps': ['angular', 'angular-angulartics']}
     },
     packages: [
         { name: 'scbd-branding'          , location : 'components/scbd-branding' },

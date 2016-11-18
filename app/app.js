@@ -3,10 +3,10 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
  'text-angular', 'ngSmoothScroll', 'angular-loggly-logger','angular-gravatar'],
     function(angular) {
 
-        var dependencies = ['ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'ngAnimate', 'angular-animate', 'ngAria' ,'ngMaterial','toastr',
+        var dependencies = ['ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'toastr',
             'ngSanitize', 'angular-intro', 'scbdControls', 'ngLocalizer', 'textAngular', 'cbd-forums',
             'ng-breadcrumbs', 'scbdServices', 'scbdFilters', 'smoothScroll', 'ngMessages', 'ngStorage', 'ngDialog',
-            'infinite-scroll', 'logglyLogger', 'md5', 'ui.gravatar'
+            'infinite-scroll', 'logglyLogger', 'md5', 'ui.gravatar','angulartics', 'angulartics.google.analytics'
         ];
         angular.defineModules(dependencies);
         var app = angular.module('app', dependencies);

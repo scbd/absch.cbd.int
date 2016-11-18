@@ -4,7 +4,7 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
     '/app/views/directives/nav/portal-branding.js',
     'scbd-branding/directives/header/header',
     '/app/views/directives/nav/portal-nav.js',
-    'ngAria', 'angular-animate', 'toastr', 'ionsound', 'moment', 
+    'ngAria', 'angular-animate', 'toastr', 'ionsound', 'moment','angular-angulartics', 'angular-google-analytics'
     //, '/app/services/app-config-service.js'
 ], function(app, _) {
     'use strict';
