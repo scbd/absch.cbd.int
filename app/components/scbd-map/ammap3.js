@@ -1,26 +1,19 @@
 define(['text!./ammap3.html', 'app', 'lodash',
-
   'css!./ammap3',
   'css!/app/libs/flag-icon-css/css/flag-icon.min.css',
   'ammap',
-  // 'ammap/plugins/export/libs/FileSaver.js/FileSaver.min',
-  // 'ammap/plugins/export/libs/jszip/jszip.min',
   'shim!./worldEUHigh[ammap]',
   'shim!ammap/themes/light[ammap]',
-  // 'shim!ammap/plugins/export/export.min[ammap]',
-  // 'shim!ammap/plugins/export/libs/fabric.js/fabric.min[ammap]',
-  // 'shim!ammap/plugins/export/libs/pdfmake/pdfmake.min[ammap]',
-  // 'shim!ammap/plugins/export/libs/pdfmake/vfs_fonts[ammap]',
-  // 'shim!ammap/plugins/export/libs/xlsx/xlsx.min[ammap]',
-  // 'css!ammap/plugins/export/export.css',
   'css!./mappin.css',
   'scbd-angularjs-services/locale',
   './ammap3-service',
   './map-data',
+  'scbd-angularjs-filters',
 ], function(template, app, _) {
   'use strict';
 
-  app.directive('ammap3', ['$timeout', '$http', 'locale', 'ammap3Service', 'mapData', '$interpolate', function($timeout, $http, locale, ammap3Service, mapDataService, $interpolate) {
+  app.directive('ammap3', ['$timeout', '$http', 'locale', 'ammap3Service', 'mapData', '$interpolate', '$filter',
+   function($timeout, $http, locale, ammap3Service, mapDataService, $interpolate, $filter) {
     return {
       restrict: 'E',
       template: template,
@@ -132,20 +125,6 @@ define(['text!./ammap3.html', 'app', 'lodash',
 
           }
 
-          // if(!pin){
-          //   _.each( $scope.map.dataProvider.areas,function(country){
-          //     //if(country.id==='CA')
-          //
-          //       if($scope.map.checkIfSelected(country) ){
-          //       //     console.log(country);
-          //       //   country.colorReal = country.color='#ffffff';country.baseSettings.color;
-          //       //   country.validate();
-          //       // console.log(country);
-          //       //console.log( $($scope.map.dataProvider.images[x].externalElement).children('#pin-' + country.id));
-          //       $scope.map.returnInitialColor(country);
-          //     }
-          //   });
-          // }
         } //closePopovers(pin)
 
         //=======================================================================
@@ -234,6 +213,10 @@ define(['text!./ammap3.html', 'app', 'lodash',
           var popoverTemplateParsed = '';
           image.scbdData.codeLower = image.scbdData.code.toLowerCase();
 
+          image.scbdData.translationUrl = '';
+          if(locale){
+            image.scbdData.translationUrl = '/' + locale;
+          }
           popoverTemplateParsed = $interpolate($scope.map.scbdConfig.popOverTemplate)(image.scbdData);
 
           return {
