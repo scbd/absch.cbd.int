@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="/app/img/favicon.png">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="/app/libs/bootstrap/dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="/app/libs/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!-- Custom styles for this template -->
@@ -26,7 +26,7 @@
     <![endif]-->
 
 </head>
-<body ng-controller="TemplateController" id="top" lang="en">
+<body ng-controller="TemplateController" id="top" lang="{{lang}}">
     <span id="appBaseUrl" style="display:none"><%=baseUrl%></span>
     <div class="m-app-loading" ng-animate-children>
         <!--
@@ -160,25 +160,33 @@
         function addLoadEvent(func) {
         var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } }
         addLoadEvent(function() { outdatedBrowser( { bgColor: '#f25648', color: '#ffffff', lowerThan: 'boxShadow', languagePath: 'app/libs/outdated-browser/outdatedbrowser/lang/en.html' }) });
-    if(domain == 'cbd.int'){
-         /**************************
-          For Googel Analytics
-        **************************/
-        (function(i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        addLoadEvent(function() {
+            var langARRegex = /^\/ar\//;
+            var location = window.location;
+            if(langARRegex.test(location.pathname)){
+             document.getElementsByTagName("body")[0].setAttribute("dir", "rtl");   
+            }
 
-        ga('create', 'UA-1996573-11', 'auto');
-       // ga('send', 'pageview');
-    }
+        });
+        if(domain == 'cbd.int'){
+            /**************************
+            For Googel Analytics
+            **************************/
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-1996573-11', 'auto');
+        // ga('send', 'pageview');
+        }
     </script>
 
 </body>
