@@ -11,9 +11,9 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" ng-click="stateFilter = 'All'">All</a></li>
-                        <li><a href="#" ng-click="stateFilter = 'unread'">Unread</a></li>
-                        <li><a href="#" ng-click="stateFilter = 'read'">Read</a></li>
+                        <li><a translation-url  href="#" ng-click="stateFilter = 'All'">All</a></li>
+                        <li><a translation-url  href="#" ng-click="stateFilter = 'unread'">Unread</a></li>
+                        <li><a translation-url  href="#" ng-click="stateFilter = 'read'">Read</a></li>
                     </ul>
                 </div>
 
@@ -30,27 +30,27 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" ng-click="typeFilter = 'All'"> All Types</a></li>
+                        <li><a translation-url  href="#" ng-click="typeFilter = 'All'"> All Types</a></li>
                         <li>
-                            <a href="#" ng-click="typeFilter = 'message'"> <i class="fa fa-envelope-o"> </i> Messages</a>
+                            <a translation-url  href="#" ng-click="typeFilter = 'message'"> <i class="fa fa-envelope-o"> </i> Messages</a>
                         </li>
                         <li>
-                            <a href="#" ng-click="typeFilter = 'request'"> <i class="fa fa-rotate-right"> </i> Publishing Requests</a>
+                            <a translation-url  href="#" ng-click="typeFilter = 'request'"> <i class="fa fa-rotate-right"> </i> Publishing Requests</a>
                         </li>
                         <li>
-                            <a href="#" ng-click="typeFilter = 'reminder'"> <i class="fa fa-calendar"> </i> Reminders</a>
+                            <a translation-url  href="#" ng-click="typeFilter = 'reminder'"> <i class="fa fa-calendar"> </i> Reminders</a>
                         </li>
                         <li>
-                            <a href="#" ng-click="typeFilter = 'approved'"> <i class="fa fa-check-circle"> </i> Approved Requests</a>
+                            <a translation-url  href="#" ng-click="typeFilter = 'approved'"> <i class="fa fa-check-circle"> </i> Approved Requests</a>
                         </li>
                         <li>
-                            <a href="#" ng-click="typeFilter = 'recalled'"> <i class="fa fa-rotate-left"> </i> Recalled Requests </a>
+                            <a translation-url  href="#" ng-click="typeFilter = 'recalled'"> <i class="fa fa-rotate-left"> </i> Recalled Requests </a>
                         </li>
                         <li>
-                            <a href="#" ng-click="typeFilter = 'rejected'"> <i class="fa fa-times-circle"> </i> Rejected Requests </a>
+                            <a translation-url  href="#" ng-click="typeFilter = 'rejected'"> <i class="fa fa-times-circle"> </i> Rejected Requests </a>
                         </li>
                         <li>
-                            <a href="#" ng-click="typeFilter = 'timedout'"> <i class="fa fa-clock-o"> </i> Expired Requests</a>
+                            <a translation-url  href="#" ng-click="typeFilter = 'timedout'"> <i class="fa fa-clock-o"> </i> Expired Requests</a>
                         </li>
                     </ul>
                 </div>
@@ -108,8 +108,8 @@
                 </div>
                 <div class="col-xs-2 text-center">
                     <div class="notification-spacing5">
-                        <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
-                        <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
@@ -147,8 +147,8 @@
                 </div>
                 <div class="col-xs-2 text-center">
                     <div class="notification-spacing5">
-                        <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
-                        <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
@@ -185,8 +185,8 @@
                 </div>
                 <div class="col-xs-2 text-center">
                     <div class="notification-spacing5">
-                        <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
-                        <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
@@ -224,8 +224,8 @@
                 </div>
                 <div class="col-xs-2 text-center">
                     <div class="notification-spacing5">
-                        <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
-                        <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
@@ -263,8 +263,8 @@
                 </div>
                 <div class="col-xs-2 text-center">
                     <div class="notification-spacing5">
-                        <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
-                        <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
@@ -303,8 +303,8 @@
                 </div>
                 <div class="col-xs-2 text-center">
                     <div class="notification-spacing5">
-                        <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
-                        <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
@@ -337,8 +337,8 @@
                 </div>
                 <div class="col-xs-2 text-center">
                     <div class="notification-spacing5">
-                        <a href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
-                        <a href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
                             <span class="hidden-xs">ago</span>
