@@ -9,16 +9,10 @@
     .sublist{margin-left:20px!important;padding-top:0!important;}
     .sublist>a{color:#888!important;font-weight: normal!important;}
     .sublist>a:hover{color:#111!important;}
-    #aboutPage h1 {border-bottom:3px solid #1FA65D;color:#1FA65D;font-weight:bold;padding-bottom:5px;padding-top:10px;margin-top:0;margin-bottom:20px;}
-     #aboutPage h3 {padding:3px;}
+    #aboutPage h1 {border-bottom:1px solid #ddd;padding-bottom:5px;padding-top:10px;margin-top:0;margin-bottom:20px;}
+     #aboutPage h3 {background-color:#e5e5e5;padding:3px;}
      #aboutPage .well h5 {color:#1FA65D;font-weight: bold;font-size:105%;}
-     .about-section{margin-bottom:200px;background-color:#fefefe; padding:10px;padding-bottom:30px;}
      .backtothetop {font-size:12px}
-
-     .find-out-more{margin-top:20px;}
-      /*.find-out-more a{color:#666;}*/
-       .find-out-more h4{}
-
      #myAffix {position:fixed;}
      .affix{position:fixed;top: 10px!important;}
      @media (max-width: 768px) {
@@ -35,64 +29,13 @@
 
      
       <ul class="nav nav-pills nav-stacked" style="padding-bottom:30px">
-        <li><a translation-url  ng-click="showAbout = !showAbout" class="btn-sm btn-default plusbtn">{{showAbout ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="top" ng-click="showAbout = true;">Introduction to the ABSCH</a></li>
+        <li><a translation-url  ng-click="showAbout = !showAbout" class="btn-sm btn-default plusbtn">{{showAbout ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="top" ng-click="showAbout = true;">About the ABS-CH</a></li>
             <ul ng-show="showAbout">
                 <li><a translation-url  scroll-to="about-intro" class="color-green" href="#">Introduction</a></li>
-                <li><a translation-url  scroll-to="about-what" class="color-green" href="#">What is the ABSCH</a></li>
-                <li><a translation-url  scroll-to="about-why" class="color-green" href="#">What does it do</a></li>
-                <li><a translation-url  scroll-to="about-who" class="color-green" href="#">Who is it for</a></li>
-                <li><a translation-url  scroll-to="about-roles" class="color-green" href="#">Users and responsibilities</a></li>
-                <li><a translation-url  scroll-to="about-types" class="color-green" href="#">Types of information available</a></li>
-                <li><a translation-url  scroll-to="about-np" class="color-green" href="#">About the Nagoya Protocol</a></li>
+                <li><a translation-url  scroll-to="about-bg" class="color-green" href="#">Background</a></li>
+                <li><a translation-url  scroll-to="about-what" class="color-green" href="#">What is the ABS-CH?</a></li>
              </ul>
-
-
-        <li><a translation-url  ng-click="showSearch = !showSearch" class="btn-sm btn-default plusbtn">{{showSearch ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="search" ng-click="showSearch = true" >Search - Finding Information</a></li>
-               <ul ng-show="showSearch">
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">Finding Information</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">Country Profiles</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">ABS Measures Matrix</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">The Search</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">Reporting records</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">Search Examples and FAQs</a></li>                   
-             </ul>
-
-         <li><a translation-url  ng-click="showSubmit = !showSubmit" class="btn-sm btn-default plusbtn">{{showSubmit ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="submit" ng-click="showSubmit = true" >Submit - Submitting Information</a></li>
-               <ul ng-show="showSubmit">
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">Participation</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">CBD Account</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">Your Dashboard</a></li>
-                 <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">National User Management</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">Submission forms</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">User Notifications System</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">Email Subscriptions and Alerts</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">National Records</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">Reference Records</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">Examples and FAQs</a></li>
-             </ul>
-         <li><a translation-url  ng-click="showMonitoring = !showMonitoring" class="btn-sm btn-default plusbtn">{{showMonitoring ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="monitoring" ng-click="showMonitoring = true" >Monitoring Utilization</a></li>
-               <ul ng-show="showMonitoring">
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">Overview</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">CBD Account</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">Your Dashboard</a></li>
-                 <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">National User Management</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">Submission forms</a></li>
-                <li><a translation-url  scroll-to="search-intro" class="color-green" href="#">User Notifications System</a></li>
-               
-             </ul>
-        <li><a translation-url  ng-click="showInterop = !showInterop" class="btn-sm btn-default plusbtn">{{showInterop? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="interop" ng-click="showInterop = true" >Interoperability</a></li>
-               <ul ng-show="showInterop">
-                <li><a translation-url  scroll-to="about-why1" class="color-green" href="#">Facilitates connections</a></li>
-               
-             </ul>
- <li><a translation-url  ng-click="showCB = !showCB" class="btn-sm btn-default plusbtn">{{showCB? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="cb" ng-click="showCB = true" >Capacity-building</a></li>
-               <ul ng-show="showCB">
-                <li><a translation-url  scroll-to="about-why1" class="color-green" href="#">Facilitates connections</a></li>
-               
-             </ul>
-
-
-        <!--<li><a translation-url  ng-click="showWhy = !showWhy" class="btn-sm btn-default plusbtn">{{showWhy ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-why" ng-click="showWhy = true" >What does it do</a></li>
+        <li><a translation-url  ng-click="showWhy = !showWhy" class="btn-sm btn-default plusbtn">{{showWhy ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-why" ng-click="showWhy = true" >What does it do</a></li>
                <ul ng-show="showWhy">
                 <li><a translation-url  scroll-to="about-why1" class="color-green" href="#">Facilitates connections</a></li>
                 <li><a translation-url  scroll-to="about-why2" class="color-green" href="#">Helps with compliance</a></li>
@@ -100,17 +43,17 @@
                 <li><a translation-url  scroll-to="about-why4" class="color-green" href="#">Offers reliable and up-to-date information</a></li>
                 <li><a translation-url  scroll-to="about-why5" class="color-green" href="#">Promotes awareness-raising and capacity-building</a></li>
                 <li><a translation-url  scroll-to="about-why6" class="color-green" href="#">Promote efficiencies and effectiveness in capacity-building</a></li>
-             </ul>-->
+             </ul>
 
-        <!--<li><a translation-url  ng-click="showWho = !showWho" class="btn-sm btn-default plusbtn">{{showWho ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-who" ng-click="showWho = true">Who is it for</a></li>
+        <li><a translation-url  ng-click="showWho = !showWho" class="btn-sm btn-default plusbtn">{{showWho ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-who" ng-click="showWho = true">Who is it for</a></li>
                 <ul ng-show="showWho">
                     <li><a translation-url  scroll-to="about-who1" class="color-green" href="#">Parties and non-Parties</a></li>
                     <li><a translation-url  scroll-to="about-who2" class="color-green" href="#">Indigenous and local communities (ILCs)</a></li>
                     <li><a translation-url  scroll-to="about-who3" class="color-green" href="#">Private sector and research institutions</a></li>
                     <li><a translation-url  scroll-to="about-who4" class="color-green" href="#">Organizations involved in capacity-building  </a></li>
                     <li><a translation-url  scroll-to="about-who5" class="color-green" href="#">International and non-governmental organizations and others</a></li>
-                </ul>-->
-        <!--<li><a translation-url  ng-click="showRoles = !showRoles" class="btn-sm btn-default plusbtn">{{showRoles ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-roles" ng-click="showRoles = true">Users and responsibilities</a></li>
+                </ul>
+        <li><a translation-url  ng-click="showRoles = !showRoles" class="btn-sm btn-default plusbtn">{{showRoles ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-roles" ng-click="showRoles = true">Users and responsibilities</a></li>
             <ul ng-show="showRoles">
                 <li><a translation-url  scroll-to="about-rolesParties" class="color-green" href="#">Parties and Non-Parties</a></li>
                 <ul>
@@ -120,26 +63,26 @@
                 </ul>
                  <li><a translation-url  scroll-to="about-rolesUsers" class="color-green" href="#">Other users (CBD account holders)</a></li>
                  <li><a translation-url  scroll-to="about-rolesPublic" class="color-green" href="#">General Public (no CBD account)</a></li>
-             </ul>-->
+             </ul>
 
 
- <!--<li><a translation-url  ng-click="showWork = !showWork" class="btn-sm btn-default plusbtn">{{showWork ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-work" ng-click="showWork = true">How does the ABSCH work?</a></li>
+ <li><a translation-url  ng-click="showWork = !showWork" class="btn-sm btn-default plusbtn">{{showWork ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-work" ng-click="showWork = true">How does the ABS-CH work?</a></li>
             <ul ng-show="showWork">
                 <li><a translation-url  scroll-to="about-workAccount" class="color-green" href="#">Creating an account</a></li>
                  <li><a translation-url  scroll-to="about-workSubmit" class="color-green" href="#">Submitting Information </a></li>
                   <li><a translation-url  scroll-to="about-workSearch" class="color-green" href="#">Searching Information</a></li>
-             </ul>-->
+             </ul>
 
-<!--<li><a translation-url  ng-click="showCFs = !showCFs" class="btn-sm btn-default plusbtn">{{showCFs ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-cf" ng-click="showCFs = true">Common Formats</a></li>
+<li><a translation-url  ng-click="showCFs = !showCFs" class="btn-sm btn-default plusbtn">{{showCFs ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-cf" ng-click="showCFs = true">Common Formats</a></li>
   <ul ng-show="showCFs">
                 <li><a translation-url  scroll-to="about-cfDownload" class="color-green" href="#">Download the offline versions</a></li>
-            </ul>-->
-        <!--<li><a translation-url  ng-click="showTypes = !showTypes" class="btn-sm btn-default plusbtn">{{showTypes ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-types" ng-click="showTypes = true">Types of information available</a></li>
+            </ul>
+        <li><a translation-url  ng-click="showTypes = !showTypes" class="btn-sm btn-default plusbtn">{{showTypes ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-types" ng-click="showTypes = true">Types of information available</a></li>
             <ul ng-show="showTypes">
                 <li><a translation-url  scroll-to="about-types1" class="color-green" href="#">National records</a></li>
                 <li><a translation-url  scroll-to="about-types2" class="color-green" href="#">Reference records</a></li>
                 <li><a translation-url  scroll-to="about-types3" class="color-green" href="#">SCBD managed records</a></li>
-            </ul>-->
+            </ul>
          <!--<li><a translation-url  ng-click="showSearch = !showSearch" class="btn-sm btn-default plusbtn">{{showSearch ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-search" ng-click="showSearch = true">Finding information</a></li>
             <ul ng-show="showSearch">
                 <li><a translation-url  scroll-to="about-search1" class="color-green" href="#">Search</a></li>
@@ -150,38 +93,35 @@
                 <li><a translation-url  scroll-to="about-submit1" class="color-green" href="#">Getting an account</a></li>
                 <li><a translation-url  scroll-to="about-submit2" class="color-green" href="#">Managing your information</a></li>
             </ul>-->
-        <!--<li><a translation-url  ng-click="showNP = !showNP" class="btn-sm btn-default plusbtn">{{showNP ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-np" ng-click="showNP = true">About the Nagoya Protocol</a></li>
+        <li><a translation-url  ng-click="showNP = !showNP" class="btn-sm btn-default plusbtn">{{showNP ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-np" ng-click="showNP = true">About the Nagoya Protocol</a></li>
             <ul ng-show="showNP">
                 <li><a translation-url  scroll-to="about-np1" class="color-green" href="#">Text of the Nagoya Protocol</a></li>
                 <li><a translation-url  scroll-to="about-np2" class="color-green" href="#">Becoming a Party</a></li>
                 <li><a translation-url  scroll-to="about-np3" class="color-green" href="#">COP-MOP</a></li>
-            </ul>-->
+            </ul>
             
-        <!--<li><a translation-url  ng-click="showGettingHelp = !showGettingHelp" class="btn-sm btn-default plusbtn">{{showGettingHelp ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-help" ng-click="showGettingHelp = true">Help and Capacity Building</a></li>
+        <li><a translation-url  ng-click="showGettingHelp = !showGettingHelp" class="btn-sm btn-default plusbtn">{{showGettingHelp ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="about-help" ng-click="showGettingHelp = true">Help and Capacity Building</a></li>
             <ul ng-show="showGettingHelp">
-                <li><a translation-url  scroll-to="about-help1" class="color-green" href="#">Help using the ABSCH</a></li>
+                <li><a translation-url  scroll-to="about-help1" class="color-green" href="#">Help using the ABS-CH</a></li>
                 <li><a translation-url  scroll-to="about-help3" class="color-green" href="#">Contact us</a></li>
-            </ul>-->
+            </ul>
 
-              <li><a translation-url   class="btn-sm btn-default plusbtn">+</a>  <a translation-url  href="#" scroll-to="about-contact"> Contact us </a></li>
-
-            <div class="other-links well" style="margin-top:20px;">
-                <li><i class="fa fa-external-link-square color-blue"></i>  <a translation-url  href="guides">E-learning modules</a></li>
-                <li><i class="fa fa-external-link-square color-blue"></i>  <a translation-url  href="about/faq">Frequently Asked Questions</a></li>
-                <li><i class="fa fa-external-link-square color-blue"></i>  <a translation-url  href="guides">Step-by-step Guides</a></li>
-                <li><i class="fa fa-external-link-square color-blue"></i>  <a translation-url  href="commonformats">Common formats </a></li>
-                <li><i class="fa fa-external-link-square color-blue"></i>  <a translation-url  href="https://github.com/scbd/absch.cbd.int/releases">Application Release Notes</a></li>
-                <li><i class="fa fa-external-link-square color-blue"></i>  <a translation-url  href="https://training-absch.cbd.int">Training website (training-absch.cbd.int) </a></li>
-            </div>
+        <li><a translation-url   class="btn-sm btn-default plusbtn">+</a>  <a translation-url  href="#" scroll-to="about-contact"> Contact us </a></li>
+              
+         <li><i class="fa fa-external-link-square color-green"></i>  <a translation-url  href="about/faq">Frequently Asked Questions</a></li>
+         
+        <li><i class="fa fa-external-link-square color-green"></i>  <a translation-url  href="guides">Guides and Training Manuals</a></li>
+        <li><i class="fa fa-external-link-square color-green"></i>  <a translation-url  href="https://github.com/scbd/absch.cbd.int/releases">Release Notes</a></li>
+        
          
         <li> <i class="fa fa-arrow-circle-up color-blue"></i> <a translation-url  scroll-to="top" class="hidden-xs color-blue" href="#">  back to the top  </a></li>
       </ul>
     </nav>
-    <div class="col-xs-12 col-sm-9   col-sm-offset-3" style="position: relative;height:100%;overflow-y: scroll;">
-           <div class="about-section" >   
-                <h1>The Access and Benefit-Sharing Clearing-House (ABSCH)</h1>
+    <div class="col-xs-12 col-sm-9   col-sm-offset-3">
+           <div style="padding-bottom:30px;">   
+                <h1>About the ABS Clearing-House</h1>
                 <h3 id="about-intro">Introduction</h3>
-                <p> The Access and Benefit-sharing Clearing-House (ABSCH) is a platform for exchanging information on access and benefit-sharing established by Article 14 of the Protocol, as part of clearing-house mechanism under Article 18, paragraph 3 of the Convention. The ABS Clearing-House is a key tool for facilitating the implementation of the Nagoya Protocol, by enhancing legal certainty and transparency on procedures for access, and for monitoring the utilization of genetic resources along the value chain, including through the internationally recognized certificate of compliance. By hosting relevant information regarding ABS, the Clearing-House offers opportunities for connecting users and providers of genetic resources and associated traditional knowledge.</p>
+                <p> The Access and Benefit-sharing Clearing-House (ABS-CH) is a platform for exchanging information on access and benefit-sharing established by Article 14 of the Protocol, as part of clearing-house mechanism under Article 18, paragraph 3 of the Convention. The ABS Clearing-House is a key tool for facilitating the implementation of the Nagoya Protocol, by enhancing legal certainty and transparency on procedures for access, and for monitoring the utilization of genetic resources along the value chain, including through the internationally recognized certificate of compliance. By hosting relevant information regarding ABS, the Clearing-House offers opportunities for connecting users and providers of genetic resources and associated traditional knowledge.</p>
                 
                 <h3  id="about-bg">Background</h3>
                 <p> The Nagoya Protocol on Access and Benefit-sharing (ABS) was negotiated in order to provide greater legal certainty and transparency for both providers and users of genetic resources and   associated traditional knowledge by: </p>
@@ -192,17 +132,16 @@
                     <p>Researchers and businesses need to secure legal clarity, certainty and transparency when accessing genetic resources and/or associated traditional knowledge. Without such legal certainty, potential users of genetic resources and/or associate traditional knowledge could be less eager to invest in bioprospecting and researching activities, as their activities may lead to controversy and allegations of misappropriation or misuse of these resources or knowledge. </p>
                     <p>Providers of genetic resources and associated traditional knowledge, on the other hand, want to ensure that benefits arising from the utilization of their resources are shared in a fair and equitable manner once the resource or knowledge leaves the country.</p>
                     <div class="well">
-
-                        <h5>What Providers want:</h5>
-                        <li>Control over access to their own genetic resources (GR) and traditional knowledge (TK)</li>
-                        <li>Ensure that users comply with all conditions set in mutual agreed terms (MAT)</li>
-                        <li>Assurance that the entitled benefits arising from utilization are received in accordance with MAT</li>
-
                         <h5> What Users want:</h5>
-                        <li>Access to GR and associated TK</li>
+                        <li>Access to genetic resources (GR)  and associated traditional knowledge (TK)</li>
                         <li>A clear understanding about how to access GR and TK</li>
-                        <li>Legal certainty for utilizing GR and TK when due process has been followed</li>
+                        <li>Legal certainty for utilizing the GR and TK when due process has been followed</li>
         
+                        <h5>What Providers want:</h5>
+                        <li>Control over access to their own GR and TK</li>
+                        <li>Ensure that users comply with all conditions set in MAT</li>
+                        <li>Assurance that the entitled  benefits arising from utilization are received in accordance with MAT</li>
+
                         <h5>What everybody wants:</h5>
                         <li>Fair and equitable sharing of benefits</li>
                         <li>Sustainable use of biodiversity</li>
@@ -221,7 +160,7 @@
                     <p>The ABS Clearing-House allows countries to share information on procedures for accessing genetic resources and monitor the utilization of the resources along the value chain. The ABS Clearing-House plays a key role in enhancing the legal certainty and transparency that both providers and users of genetic resources, as well as associated traditional knowledge, are looking for.</p>
                     
                     <div class="well">
-                        <h5>The ABS Clearing-House is helping to make the ABC’s of ABS a reality</h5>
+                        <h5>Making the ABC’s of ABS a reality</h5>
                         <li><strong>A</strong>ccess – Enhancing legal certainty, transparency and clarity on how to access genetic resources and associated traditional knowledge.</li>
                         <li><strong>B</strong>enefit-sharing – Contributing to increase opportunities for sharing benefits from the use of genetic resources and associated traditional knowledge.</li>
                         <li><strong>C</strong>ompliance – Assisting to ensure compliance with ABS measures and transparency in monitoring the utilization of genetic resources through the value chain.</li>
@@ -229,21 +168,10 @@
                     
                     <p>A fully functional ABS Clearing-House also represents a major step in achieving Aichi Biodiversity Target 16, which provides that by 2015, the Nagoya Protocol is in force and operational, consistent with national legislations.</p>
                     
-                    <div class="find-out-more well">
-                        <h4>Find out more (related links)</h4>
-                        <li><a href="https://www.cbd.int/chm" target="_new" >The Clearing-House Mechanism (CHM) of the Convention on Biological Diversity</a></li>
-                         <li><a href="https://www.cbd.int/doc/strategic-plan/targets/T16-quick-guide-en.pdf" target="_new" >Quick guide to Aichi Target 16</a></li>
-                          <li><a href="https://www.cbd.int/abs/text/" target="_new" >Text of the Nagoya Protocol </a></li>
-                          
-                    </div>
-                    <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
-            </div>
-            
-             <div class="about-section"  id="about-what">   
-                    <h1>What is the ABS Clearing-House</h1>
+                    <h3 id="about-what">What is the ABS Clearing-House</h3>
                     <p>Article 14, of the Nagoya Protocol, establishes the ABS Clearing-House, as part of the clearing-house mechanism of the Convention, as a means for sharing information related to access and benefit-sharing, and in particular its goal is to provide access to information made available by each Party relevant to the implementation of the Protocol.</p>
                     <p>In practical terms, the sharing of information is done through an online platform designed to enable, primarily Parties, but also non-Parties  indigenous and local communities (ILCs), international and non-governmental organizations, research institutions and businesses to make information available  and access information related to access and benefit-sharing.</p>
-                    <p>To ensure that the ABSCH fulfills its role in adding clarity and transparency in access and benefit-sharing, Parties to the CBD agreed in Article 14 of the Protocol, to make mandatory for Parties to share certain types of information through the ABS Clearing-House, namely:
+                    <p>To ensure that the ABS-CH fulfills its role in adding clarity and transparency in access and benefit-sharing, Parties to the CBD agreed in Article 14 of the Protocol, to make mandatory for Parties to share certain types of information through the ABS Clearing-House, namely:
                         <ul style="list-style-type: lower-alpha;">
                         <li>Legislative, administrative and policy measures on access and benefit-sharing;</li>
                         <li>Information on the national focal point and competent national authority or authorities (CNA); and</li>
@@ -251,7 +179,7 @@
                         </ul>
                     </p>
                     
-                    <p>In addition to this essential information, the Protocol also identifies other types of information to make available through the ABSCH.</p>
+                    <p>In addition to this essential information, the Protocol also identifies other types of information to make available through the ABS-CH.</p>
                    
                         <p>Article 14, paragraph 2, also requires Parties to make available through the ABS Clearing-House any information required by this Protocol. This would include: </p>
                         <ul style="list-style-type: lower-alpha;">
@@ -267,9 +195,12 @@
                             <li>Codes of conduct and best practices. </li>
                         </ul>
                         <p>Finally, Article 14, paragraph 2, provides that Parties shall make information to the ABS Clearing-House any information required pursuant to the decisions taken by the Conference of the Parties to the Protocol. </p>
+                  
             </div>
             
-            <div class="about-section"  id="about-why">   
+            
+            
+            <div style="padding-bottom:30px;" id="about-why">   
                     <h1>What does it do</h1>
 
                     <p id="about-why1"><strong>1. The ABS Clearing-House facilitates the connection between users and providers of genetic resources and associated traditional knowledge. </strong></p>
@@ -298,7 +229,7 @@
             
             
             
-             <div class="about-section"  id="about-who">   
+             <div style="padding-bottom:30px;" id="about-who">   
                     <h1>Who it is for </h1>
                     
                     <p id="about-who1"><strong>Parties and non-Parties. </strong> By publishing national information on the ABS Clearing-House, Parties to the Nagoya Protocol and other governments help both users and providers of genetic resources and associated traditional knowledge. Users can find the information they need to access genetic resources and associated traditional knowledge, while providers will find the necessary tools to monitor the utilization of these resources. Non-Parties to the Protocol are encouraged to share all their relevant ABS information through the ABS Clearing-House in the same conditions as Parties do.</p>
@@ -317,7 +248,7 @@
               </div>
                 
               
-               <div class="about-section"  id="about-roles">   
+               <div style="padding-bottom:30px;" id="about-roles">   
                     <h1>User roles and responsibilites  </h1>
                     
                      <h3 id="about-rolesParties">Parties and non-Parties</h3> 
@@ -363,7 +294,7 @@
                          <p class="bold">Online designation of PAs and NAUs</p>
                          <p>If you are the national focal point (NFP) on access and benefit-sharing for your country, you can designate the PA and one or more NAUs through the ABS Clearing-House. Also, if you are the PA, you can designate the NAUs through the ABS Clearing-House</p>
                           <p>
-                              In order to designate these roles through the ABS Clearing-House, you need to log into your CBD account and click on ‘Submit’. Here, you will see a tab for ‘User Management’, where you will find all ABSCH authorized users that have been granted permission to work in the national records for your country. You can select a particular CBD account, and click on edit to assign/ revoke roles (for instance, change the PA or delete a NAU). If a person already holding a CBD account does not appear as an ABSCH authorized user for your country, you can find them by clicking ‘Add Authorized User’. Through this feature, you can search among all CBD accounts using their email addresses, and assign them a PA or NAU role. This feature also allows you to assign roles to someone who does not yet have a CBD account. To do this, click on ‘Add Authorized User’, and enter an email address and other details of the person you wish to include as PA or NAU. The ABS Clearing-House will send them an automated email request to activate their account. Once they have activated their CBD account, they can start working on national records.
+                              In order to designate these roles through the ABS Clearing-House, you need to log into your CBD account and click on ‘Submit’. Here, you will see a tab for ‘User Management’, where you will find all ABS-CH authorized users that have been granted permission to work in the national records for your country. You can select a particular CBD account, and click on edit to assign/ revoke roles (for instance, change the PA or delete a NAU). If a person already holding a CBD account does not appear as an ABS-CH authorized user for your country, you can find them by clicking ‘Add Authorized User’. Through this feature, you can search among all CBD accounts using their email addresses, and assign them a PA or NAU role. This feature also allows you to assign roles to someone who does not yet have a CBD account. To do this, click on ‘Add Authorized User’, and enter an email address and other details of the person you wish to include as PA or NAU. The ABS Clearing-House will send them an automated email request to activate their account. Once they have activated their CBD account, they can start working on national records.
                               
                           </p>
                           <br>
@@ -383,7 +314,7 @@
 
                      <h3 id="about-rolesUsers">Other registered users of the ABS Clearing House</h3> 
                         <p>
-                            Anyone can include information as reference records only by creating a CBD account. A CBD account will give you access to register information in all CBD clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABSCH) and the clearing-house mechanism (CHM) under the Convention. You can register for a CBD account at accounts.cbd.int/signing. Make sure you enter all the information required as instructed on the form. You’ll automatically receive an e-mail with a link you have to click to confirm your account.
+                            Anyone can include information as reference records only by creating a CBD account. A CBD account will give you access to register information in all CBD clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH) and the clearing-house mechanism (CHM) under the Convention. You can register for a CBD account at accounts.cbd.int/signing. Make sure you enter all the information required as instructed on the form. You’ll automatically receive an e-mail with a link you have to click to confirm your account.
                         </p>
                         <p>
                             This gives an opportunity to different stakeholders, indigenous and local communities, academia, non-governmental organizations, research institutions, private sector, etc. to contribute to the ABS Clearing-House by posting relevant ABS information and to create a community where knowledge and best practices are shared to support the implementation of the Nagoya Protocol.
@@ -398,13 +329,11 @@
                      </p>
 
                </div>
-
-
-             <div class="about-section" id="about-work">   
+             <div style="padding-bottom:30px;" id="about-work">   
                     <h1>How does the ABS Clearing House work?</h1>
                     <h3 id="about-workAccount">Creating an account</h3>
                     <p>
-                    Any person can have a CBD account which will give you access to register information in all CBD clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABSCH) and the clearing-house mechanism (CHM) under the Convention. You can register for a CBD account at accounts.cbd.int/signin 
+                    Any person can have a CBD account which will give you access to register information in all CBD clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH) and the clearing-house mechanism (CHM) under the Convention. You can register for a CBD account at accounts.cbd.int/signin 
                     </p>
                     <p>
                     Make sure you enter all the information required as instructed on the form. You’ll automatically receive an e-mail with a link you have to click to confirm your account.
@@ -418,7 +347,7 @@
                     The information published in the ABS Clearing-House is classified in three different categories: national records, reference records, and secretariat records. In order to register these records, common formats need to be filled in
                     </p>
                     <p>
-                    The clearing-house operates based on submissions submitted under common formats. Common formats are standardized forms to facilitate submission of information in a harmonized manner. The ABS Clearing-House common formats make use of controlled vocabulary and metadata in order to facilitate a consistent registering and search of information in the ABSCH. 
+                    The clearing-house operates based on submissions submitted under common formats. Common formats are standardized forms to facilitate submission of information in a harmonized manner. The ABS Clearing-House common formats make use of controlled vocabulary and metadata in order to facilitate a consistent registering and search of information in the ABS-CH. 
                     </p>
                     
                     <h3 id="about-workSearch">Searching</h3>
@@ -432,10 +361,10 @@
              
              </div>
              
-               <div class="about-section"  id="about-cf">   
+               <div style="padding-bottom:30px;" id="about-cf">   
                     <h1>Common Formats</h1>
                     <p>
-                        The clearing-house operates based on submissions submitted under common formats. Common formats are standardized forms to facilitate submission of information in a harmonized manner. The ABS Clearing-House common formats make use of controlled vocabulary and metadata in order to facilitate a consistent registering and search of information in the ABSCH. 
+                        The clearing-house operates based on submissions submitted under common formats. Common formats are standardized forms to facilitate submission of information in a harmonized manner. The ABS Clearing-House common formats make use of controlled vocabulary and metadata in order to facilitate a consistent registering and search of information in the ABS-CH. 
                     </p>
                      <p>
                       The common formats differentiate between mandatory and non-mandatory information.  Some fields are mandatory to ensure that the record contains the minimum information necessary for displaying records consistently.  The common formats are also designed to be flexible and provide for opportunities to include additional information
@@ -474,7 +403,7 @@
                     
                </div>
             
-                 <div class="about-section"  id="about-types">   
+                 <div style="padding-bottom:30px;" id="about-types">   
                     <h1>Types of information available in the ABS Clearing-House </h1>
                     <p>The information available in the ABS Clearing-House is divided into three main groups: national records, reference records and SCBD managed records.</p>
                     
@@ -540,7 +469,7 @@
                <!--<div style="padding-bottom:30px;" id="about-search">   
                     <h1>Finding Information </h1>
                     <h3 id="about-search1">Search</h3>
-                    <p>All type of information stored in the ABS Clearing-House can found using the search. A CBD account is not needed to search in the ABSCH. You can select keywords, dates, or use a free text to narrow down the results set display. The set of result as been grouped in to individualt tabs by record type: national records, reference records, and SBCD records. <a href="search">Click here to search the ABSCH</a>  </p>
+                    <p>All type of information stored in the ABS Clearing-House can found using the search. A CBD account is not needed to search in the ABS-CH. You can select keywords, dates, or use a free text to narrow down the results set display. The set of result as been grouped in to individualt tabs by record type: national records, reference records, and SBCD records. <a href="search">Click here to search the ABS-CH</a>  </p>
                     <h3 id="about-search2">Country Profiles</h3>
                     <p>A broad overview of the status of ratification, National Records, and information on the representatives. Each individual country profile provides all the national information published by that country. </p>
                  </div>
@@ -549,13 +478,13 @@
                  <div style="padding-bottom:30px;" id="about-submit">   
                     <h1>Submitting Information </h1>
                     <h3 id="about-submit1">Getting an account</h3>
-                    <p>To submit information on the ABSCH, you need to create an account with the CBD by filling the form here: <a href="https://accounts.cbd.int/signup">accounts.cbd.int/signup</a>.  After filling the form, you will automatically receive a link, by email, to confirm your account. A CBD account enables you to register reference records in all CBD clearing-houses, including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABSCH) and the clearing-house mechanism (CHM). To publish national information you need to be designated by the National CBD or ABS Focal Point. </p>
+                    <p>To submit information on the ABS-CH, you need to create an account with the CBD by filling the form here: <a href="https://accounts.cbd.int/signup">accounts.cbd.int/signup</a>.  After filling the form, you will automatically receive a link, by email, to confirm your account. A CBD account enables you to register reference records in all CBD clearing-houses, including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH) and the clearing-house mechanism (CHM). To publish national information you need to be designated by the National CBD or ABS Focal Point. </p>
                     <h3 id="about-submit2">Managing your information</h3>
                     <p></p>
                  </div>
                -->
                
-                 <div class="about-section"  id="about-np">   
+                 <div style="padding-bottom:30px;" id="about-np">   
                     <h1>About the the Nagoya Protocol </h1>
                       <p>The Nagoya Protocol on Access to Genetic Resources and the Fair and Equitable Sharing of Benefits Arising from their Utilization to the Convention on Biological Diversity is an international agreement which aims at sharing the benefits arising from the utilization of genetic resources in a fair and equitable way, including by appropriate access to genetic resources and by appropriate transfer of relevant technologies, taking into account all rights over those resources and to technologies, and by appropriate funding, thereby contributing to the conservation of biological diversity and the sustainable use of its components.
                      <br> <a href="https://www.cbd.int/abs/">For more information please see the ABS portal on the CBD website</a></p>
@@ -578,22 +507,22 @@
                      <p><a href="https://www.cbd.int/abs/COPMOP2-Preparatory.shtml">Preparatory processes and milestones towards COP-MOP 2 of the Nagoya Protocol</a>: Second meeting of the Conference of the Parties serving as the meeting of the Parties to the Nagoya Protocol on Access and Benefit-sharing is scheduled for December 4-17, 2016, in Cancun, Mexico. The link provides details on the preparatory processes and milestones towards this meeting. </p>
                </div> 
                
-               <div class="about-section"  id="about-help">   
+               <div style="padding-bottom:30px;" id="about-help">   
                     <h1>Help and capacity-building </h1>
-                    <h3 id="about-help1">Help using the ABSCH</h3>
-                    <p> Some of the questions you may have could find an answer in the frequently asked questions section. The ABSCH  team provides Help Desk services through email, phone and Skype that offer technical support for registering or searching information and organizes regular trainings in the form of online webinars to help users become familiar with the various functions of the ABS Clearing-House.</p>
-                    <p>The ABSCH is promoted at relevant workshops, side events, and meetings for different audiences. The CBD Secretariat is currently working on making available the ABSCH in the six official UN languages, and its interface and main functions are constantly improved to facilitate the operability with other databases and systems, including tablets and smart phones. The ABSCH team is also working in the development of step by step guides and an e-learning module about the ABS Clearing-House.</p>
+                    <h3 id="about-help1">Help using the ABS-CH</h3>
+                    <p> Some of the questions you may have could find an answer in the frequently asked questions section. The ABS-CH  team provides Help Desk services through email, phone and Skype that offer technical support for registering or searching information and organizes regular trainings in the form of online webinars to help users become familiar with the various functions of the ABS Clearing-House.</p>
+                    <p>The ABS-CH is promoted at relevant workshops, side events, and meetings for different audiences. The CBD Secretariat is currently working on making available the ABS-CH in the six official UN languages, and its interface and main functions are constantly improved to facilitate the operability with other databases and systems, including tablets and smart phones. The ABS-CH team is also working in the development of step by step guides and an e-learning module about the ABS Clearing-House.</p>
                  
 
                </div>   
                
-                 <div class="about-section"  id="about-contact">   
+                 <div style="padding-bottom:30px;" id="about-contact">   
                     <h1>Contact Us</h1>           
                     <p> <strong>ABS Clearing-House</strong> <br>
                         Secretariat of the Convention on Biological Diversity <br>
                         413, Saint Jacques Street, suite 800 
                         Montreal QC H2Y 1N9 Canada<br>
-                        email: absch@cbd.int<br>
+                        email: ABS-CH@cbd.int<br>
                         skype: abs-ch<br>
                         telephone: +1 514 288 2220
                     </p>
