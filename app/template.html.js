@@ -24,11 +24,15 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
                 text: ""
             };
             
+            //html body attributes lang
+            $scope.lang = locale;
             //set default moment lang
             var lang = locale;
             if(lang=='zh')lang= 'zh-cn'; //moment has two ZH, use ZH-CN
             moment.lang(lang);
-
+            if(lang == 'ar'){
+                require(['css!http://muayyad-alsadi.github.io/bootstrap-rtl/3.x/css/bootstrap.rtl.css']);
+            }
 
 
             // $scope.goHome               = function() { $location.path('/'); };

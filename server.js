@@ -16,7 +16,7 @@ var oneDay   = 86400000;
 app.set('view engine', 'ejs');
 // Set routes
 app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',     translation, express.static(__dirname + '/app'));
-app.use('/app',                              express.static(__dirname + '/app'));
+// app.use('/app',                              express.static(__dirname + '/app'));
 app.use('/cbd-forums',      express.static(__dirname + '/app/libs/cbd-forums'));
 app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { maxAge: oneDay }));
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
@@ -37,12 +37,10 @@ app.get('/?:lang(ar|en|es|fr|ru|zh)?/*', function (req, res) {
    res.cookie('VERSION', process.env.VERSION);
    req.url = '/template.ejs';
    co(function*(){
-        var langFilepath = yield getLanguageFile(req);
+
         var preferredLang = getPreferredLanguage(req);
+        var langFilepath = yield getLanguageFile(req, preferredLang);
         var options = { baseUrl: urlPreferredLang || (req.headers.base_url ||  (preferredLang ? ('/'+preferredLang+'/') : '/')) };
-        
-        if(preferredLang && parseCookies(req, 'locale')!= preferredLang)
-            res.cookie('locale', preferredLang);
         
         if(langFilepath){
              return res.render(langFilepath, options);
@@ -75,10 +73,11 @@ function translation(req, res, next) {
    });
 }
 
-function* getLanguageFile(req){
+function* getLanguageFile(req, preferredLang){
 
-    var preferredLang = getPreferredLanguage(req);
-    
+    if(!preferredLang)
+        preferredLang = getPreferredLanguage(req);
+
     if(preferredLang){
         var path = `/i18n/${preferredLang}/app${req.url}`;               
 
@@ -104,35 +103,14 @@ function getPreferredLanguage(req){
         return req.params.lang;
 
     var htlmRegex       = /.(html|ejs|json)/g; ///.html?[^.]/g//\.html(?!.js)
-    var cookieLangRegex = /locale=(ar|fr|es|ru|zh)/g
     var langRegex       = /^(ar|fr|es|ru|zh)/;
-    var url = req.url;
-    if(htlmRegex.test(url)){
+    if(req.headers['preferred-language']){
 
-        if(_.includes(req.headers, 'preferred-language') ||
-          cookieLangRegex.test(req.headers.cookie)){
-
-           var validLanguages = ['ar', 'fr', 'es', 'ru', 'zh']
-           var language = req.headers['preferred-language'];
-           if(language==undefined)
-                language = parseCookies(req, 'locale');
-
-           if(_.includes(validLanguages, language.toLowerCase())){
-               return language;
-           }
+        var validLanguages = ['ar', 'fr', 'es', 'ru', 'zh']
+        var language = req.headers['preferred-language'];
+        
+        if(_.includes(validLanguages, language.toLowerCase())){
+            return language;
         }
     }
-}
-
-function parseCookies (request, name) {
-    var list = {},  rc = request.headers.cookie;
-
-    rc && rc.split(';').forEach(function( cookie ) {
-        var parts = cookie.split('=');
-        list[parts.shift().trim()] = decodeURI(parts.join('='));
-    });
-    if(name)
-        return list[name];
-
-    return list;
 }
