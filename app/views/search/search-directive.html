@@ -69,13 +69,16 @@
                     <li ng-class="{'active':currentTab==='referenceRecords'}"><a translation-url  href="#" class="color-orange" ng-click="updateCurrentTab('referenceRecords')">Reference <span class="hidden-xs">records</span> <span class=" badge bg-orange" style="margin-left:10px;">{{recordCount[1].count}}</span></a></li>
                     <li ng-class="{'active':currentTab==='scbdRecords'}"><a translation-url  href="#" class="color-darkgrey" ng-click="updateCurrentTab('scbdRecords')">SCBD <span class="hidden-xs">records</span> <span class="badge" style="margin-left:10px;">{{recordCount[2].count}}</span></a></li>
                     <!--<li class="pull-left">Download</li>-->
-                    <div class="pull-right">                                                 
-                            <div export export-query="getExportQuery()" query-type="getRecordType()" help-title="Export the active tab data to excel/csv"></div>
-                    </div>
+                   
                 </ul>
             </div>
             <!-- Tab panes -->
             <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;">
+                
+                <div class="pull-right" export export-query="getExportQuery()" query-type="getRecordType()" help-title="Export the active tab data to excel/csv">
+                    </div>
+                <br>
+
                 <div class="tab-pane bg-white" ng-class="{'active':currentTab==='nationalRecords'}" ng-if="currentTab==='nationalRecords'">
                     <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="nationalLoading" infinite-scroll-distance="10">
                         <!-- <div block-region activate="nationalLoading"></div> -->
