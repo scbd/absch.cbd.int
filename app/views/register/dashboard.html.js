@@ -12,8 +12,7 @@ function(app, _) {
             var schemaFacets = {};
 
             $timeout(function(){
-                $element.find('[data-toggle="tooltip"]').tooltip();
-                $element.find('#mySettingsPop').popover('show')
+                $element.find('[data-toggle="tooltip"]').tooltip();                
             },50);
 
 
