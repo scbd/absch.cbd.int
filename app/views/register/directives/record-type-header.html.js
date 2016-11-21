@@ -7,8 +7,7 @@ define(['app',
 	'/app/views/forms/view/record-loader.directive.html.js',
 	'/app/views/forms/view/view-organization.directive.js',
 	'/app/views/forms/view/view-organization-reference.directive.js',
-	'/app/views/directives/task-id-directive.html.js',
-	'/app/views/directives/user-details.directive.html.js'
+	'/app/views/directives/task-id-directive.html.js'
 ], function (app) {
 
 	"use strict";
