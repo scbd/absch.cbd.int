@@ -14,7 +14,7 @@
     <div style="width:100%" ng-show="userFilters.length>0">
 
         <ul class="list-group">
-            <li class="list-group-item clearfix"
+            <li class="list-group-item clearfix" style="background-color:#eee;"
             ng-repeat="record in userFilters | orderBy:'reportedOn':'desc'">
                 <div class="pull-right btn-group">
                     <a type="button" class="btn" ng-hide="del" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'" > <i class="fa fa-play-circle"></i> <br> run </a>
