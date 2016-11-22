@@ -6,7 +6,7 @@
         }
     </style>
     <div class="pull-right1">
-        <input type="button" class="btn btn-primary" value="Add new search filter" ng-click="addEdit()" />       
+        <input type="button" class="btn btn-primary" value="Add new search" ng-click="addEdit()" />       
     </div>    
 
    <br/>
@@ -21,7 +21,7 @@
                     <a type="button" class="btn" ng-hide="del" ng-click="addEdit(record)" > <i class="fa fa-edit"></i> <br> edit </a>
                     <a type="button" class="btn" ng-hide="del"  ng-click="del=true;"> <i class="fa fa-trash-o"></i> <br> delete  </a>
 
-                    <a type="button" class="btn color-red" ng-show="del" ng-click="confirmDelete(record);del=false;"> <i class="fa fa-trash-o"></i> <br> confirm delete?  </a>
+                    <a type="button" class="btn color-red bold" ng-show="del" ng-click="confirmDelete(record);del=false;"> <i class="fa fa-trash-o"></i> <br> confirm delete?  </a>
                     <a type="button" class="btn" ng-show="del" ng-click="del=false;"> <i class="fa fa-times-circle"></i> <br> cancel  </a>
                 </div>
 
@@ -37,12 +37,10 @@
             </li>
         </ul>
     </div>
-    <div ng-show="!userFilters || userFilters.length==0">
-        <br/><br/>
+    <div ng-hide="loading" ng-show="!userFilters || userFilters.length==0">
         <div class="alert alert-info" role="alert">
-            <strong><i class="fa fa-info" /></strong> 
-            <span ng-if="user.isAuthenticated">You do not have any saved filters.</span>
-            <span ng-if="!user.isAuthenticated">Please log in to view your saved filters.</span>
+            <h3 ng-if="user.isAuthenticated">You do not have any saved filters.</h3>
+            <h3 ng-if="!user.isAuthenticated">Please log in to view your saved filters.</h3>
         </div>
     </div>
     <script type="text/ng-template" trados-translation="true" id="confirmDeleteDialog">
