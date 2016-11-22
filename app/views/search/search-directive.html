@@ -8,11 +8,10 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </span>
+                 <a ng-href="#" ng-if="canShowSaveFilter()" class="pull-right" style="margin-top:5px;margin:5px;color:#bbb;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"ng-click="clearFilter()"> <i class="fa fa-times-circle" aria-hidden="true"></i> Clear</a>
+                 
             </div>
-            <div  class="col-md-12" style="padding-bottom:10px;">       
-                <a ng-href="#" ng-if="canShowSaveFilter()" class="pull-right btn btn-sm btn-info" style="margin-top:5px;margin:5px" ng-click="clearFilter()">Clear filter</a>
-                 <a ng-href="#" ng-if="canShowSaveFilter()" class="pull-right btn btn-sm btn-info" style="margin-top:5px;margin:5px" ng-click="showSaveFilter()">Save this filter</a>
-            </div>
+
 
             <div class="col-md-12"  ng-show="!skipTextFilter">
                 <form ng-submit="saveFreeTextFilter(searchKeyword)" class="input-group">
@@ -30,9 +29,12 @@
                     <li> <a href="" ng-class="{'active':showFilters=='country'}" ng-click="showFilters=(showFilters=='country' ? false : 'country')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Country</a> </li>
                     <li> <a href="" ng-class="{'active':showFilters=='regionFilter'}" ng-click="showFilters=(showFilters=='regionFilter' ? false : 'regionFilter')"class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Regions</a ></li>
                     <li ng-show="!skipDateFilter"> <a href="" ng-class="{'active':showFilters=='dateFilter'}" ng-click="showFilters=(showFilters=='dateFilter' ? false : 'dateFilter')"class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Date</a> </li>
-                    <li ng-show="!skipSaveFilter"> <a href="" ng-class="{'active':showFilters=='userSearchFilter'}" ng-click="showFilters=(showFilters=='userSearchFilter' ? false : 'userSearchFilter')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Saved Filter</a> </li>
+                    <li ng-show="!skipSaveFilter"> <a href="" ng-class="{'active':showFilters=='userSearchFilter'}" ng-click="showFilters=(showFilters=='userSearchFilter' ? false : 'userSearchFilter')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Saved searches</a> </li>
+                    <a ng-href="#" ng-if="canShowSaveFilter()" class="pull-right" style="padding-top:10px;color:#bbb;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;" ng-click="showSaveFilter()">Save search</a>
+
                 </ul>
             </div>
+            
         </div>
     </div>
     <div class="container-fluid" ng-show="showFilters || searchKeyword" style="z-index:10!important;top:-2px;position:relative;">
@@ -60,7 +62,6 @@
     </div>
 
     <div class="container-fluid" style="margin-top:10px;" ng-if="!skipResults">
-
         <div class="row" style="padding:10px 0 0 0;margin:0px;">
             <div class="col-xs-12" style="padding:0;margin:0;">
                 <!-- Nav tabs -->
@@ -69,16 +70,13 @@
                     <li ng-class="{'active':currentTab==='referenceRecords'}"><a translation-url  href="#" class="color-orange" ng-click="updateCurrentTab('referenceRecords')">Reference <span class="hidden-xs">records</span> <span class=" badge bg-orange" style="margin-left:10px;">{{recordCount[1].count}}</span></a></li>
                     <li ng-class="{'active':currentTab==='scbdRecords'}"><a translation-url  href="#" class="color-darkgrey" ng-click="updateCurrentTab('scbdRecords')">SCBD <span class="hidden-xs">records</span> <span class="badge" style="margin-left:10px;">{{recordCount[2].count}}</span></a></li>
                     <!--<li class="pull-left">Download</li>-->
-                   
                 </ul>
             </div>
             <!-- Tab panes -->
             <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;">
-                
-                <div class="pull-right" export export-query="getExportQuery()" query-type="getRecordType()" help-title="Export the active tab data to excel/csv">
+                <div class="pull-right"  export export-query="getExportQuery()" query-type="getRecordType()" help-title="Export result from this tab to excel/csv">
                     </div>
-                <br>
-
+                <br>    
                 <div class="tab-pane bg-white" ng-class="{'active':currentTab==='nationalRecords'}" ng-if="currentTab==='nationalRecords'">
                     <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="nationalLoading" infinite-scroll-distance="10">
                         <!-- <div block-region activate="nationalLoading"></div> -->
