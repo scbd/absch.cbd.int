@@ -15,7 +15,7 @@ function(app, template, $) {
                   controller: ['$scope', '$window', '$location','authentication', 'locale',
                   function($scope, $window, $location,authentication, locale) {
                   // code for seling locale
-                      $scope.currentLanguage = locale;
+                      $scope.currentLanguage = locale||'en';
                       $scope.changeLanguage = function(lang){
                          
                           $location.search({ returnUrl: $location.url() });
