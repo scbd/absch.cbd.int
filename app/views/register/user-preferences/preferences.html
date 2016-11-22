@@ -10,7 +10,7 @@
 		}
 		
 		.block>.nav-tabs {
-			background-color: #f9f9f9;
+			background-color: #eee;
 			border-bottom: none;
 		}
 		
@@ -61,7 +61,7 @@
 		}
 		
 		.bg-gray-lighter {
-			background-color: #f9f9f9;
+			background-color: #eee;
 		}
 		
 		.text-center {
@@ -143,44 +143,33 @@
 	</style>
 	<div class="register-content card card-1-notrans">
 
-		<div class="register-content-header bg-pink color-white">
+		<div class="register-content-header bg-darkgrey color-white">
 			<div style="padding:10px 10px;">
-				<h3>User Prefernces</h3>
+				<h3>User Preferences</h3>
 			</div>
 		</div>
-		<div class="register-content-content" style="background-color:#ddd">
-
+		<div class="register-content-content " style="background-color:#eee">
 			<div class="row ">
-
 				<div class="col-sm-12 ">
 					<div class="col-sm-12 col-md-12 user-details">
-						<div class="user-image">
-							<img gravatar-src="user.email" gravatar-size="100" class="img-circle"
-							alt="{{user.name}}" title="{{user.name}}">
-						</div>
-						<div class="user-info-block">
-							<div class="user-heading">
-								<h3>{{user.name}}</h3>
-							</div>
-
-							<div class="row panel panel-white profile-widget">
+				
+							<div class="row panel panel-white profile-widget" style="border:0;">
 								<div class="block ">
 									<ul class="nav nav-tabs nav-justified push-20">
-
 										<li class="active">
-											<a href="#preferences" ng-click="tab='setting'" data-toggle="tab"><span class="glyphicon glyphicon-cog"> Settings</span></a>
+											<a href="#preferences" ng-click="tab='setting'" data-toggle="tab"><span class="glyphicon glyphicon-cog"></span> Settings </a>
 										</li>
 										<li>
-											<a href="#tab-user-alerts" ng-click="tab='subscriptions'" data-toggle="tab"><span class="glyphicon glyphicon-envelope"> Subscriptions</span></a>
+											<a href="#tab-user-alerts" ng-click="tab='subscriptions'" data-toggle="tab"><span class="glyphicon glyphicon-envelope"></span> Email Alerts</a>
 										</li>
 										<li>
-											<a href="#tab-search-filter" ng-click="tab='searchFilters'" data-toggle="tab"><span class="glyphicon glyphicon-lock"> Saved Searches</span></a>
+											<a href="#tab-search-filter" ng-click="tab='searchFilters'" data-toggle="tab"><span class="glyphicon glyphicon-lock"></span> Saved Searches</a>
 										</li>
 									</ul>
 
 									<div class="tab-content">
-										<div class="tab-pane fade in panel-body active" id="preferences">
-											<div class="panel panel-default">
+										<div class="tab-pane fade-in panel-body active" id="preferences">
+											<div>
 												<div class="panel-heading">Settings</div>
 												<div class="panel-body">
 													<div class="form-group">
@@ -211,7 +200,7 @@
 											</div>
 										</div>
 										<div class="tab-pane fade panel-body" id="tab-user-alerts" ng-if="tab==='subscriptions'">
-											<div class="panel panel-default">
+											<div>
 												<div class="panel-heading">Receive email notification when new records are published</div>
 												<div class="panel-body">
 
@@ -239,7 +228,7 @@
 											</div>
 										</div>
 										<div class="tab-pane fade panel-body" id="tab-search-filter">
-											<div class="panel panel-default">
+											<div>
 												<div class="panel-heading">Create search filter for futrue use</div>
 												<div class="panel-body">													
 													<span user-preference-filter ng-if="tab==='searchFilters'" collection="search-queries" run-query="runFilter(filter)"></span>
