@@ -143,7 +143,6 @@ define(['app', 'underscore', '/app/js/common.js',
                                 $scope.saveFilter(query);
                             }
                         });
-                        $scope.refresh = !$scope.refresh;
 
                     };
 
@@ -1075,9 +1074,9 @@ define(['app', 'underscore', '/app/js/common.js',
                     loadFilters();
                     if(!$scope.skipResults && $routeParams.recordType){
                         if($routeParams.recordType == 'run-query'){
-                            var queryFilter = localStorageService.get("run-query");
+                            var queryFilter = localStorageService.get("run-query");                            
                             setSearchFilters(queryFilter);
-                            //$scope.refresh = true;
+                            $scope.refresh = false;
                         }
                         else{
                             $scope.currentTab = $routeParams.recordType;
