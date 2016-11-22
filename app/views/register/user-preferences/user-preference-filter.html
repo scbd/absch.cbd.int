@@ -17,7 +17,7 @@
             <li class="list-group-item clearfix" style="background-color:#eee;"
             ng-repeat="record in userFilters | orderBy:'reportedOn':'desc'">
                 <div class="pull-right btn-group">
-                    <a type="button" class="btn" ng-hide="del" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'" > <i class="fa fa-play-circle"></i> <br> run </a>
+                    <a type="button" class="btn" ng-hide="del" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'" > <i class="fa fa-play-circle"></i> <br> run query</a>
                     <a type="button" class="btn" ng-hide="del" ng-click="addEdit(record)" > <i class="fa fa-edit"></i> <br> edit </a>
                     <a type="button" class="btn" ng-hide="del"  ng-click="del=true;"> <i class="fa fa-trash-o"></i> <br> delete  </a>
 
@@ -39,11 +39,11 @@
     </div>
     <div ng-hide="loading" ng-show="!userFilters || userFilters.length==0">
         <div class="alert alert-info" role="alert">
-            <h3 ng-if="user.isAuthenticated">You do not have any saved filters.</h3>
-            <h3 ng-if="!user.isAuthenticated">Please log in to view your saved filters.</h3>
+            <h3 ng-if="user.isAuthenticated">You do not have any saved searches.</h3>
+            <h3 ng-if="!user.isAuthenticated">Please log in to view your saved searches.</h3>
         </div>
     </div>
-    <script type="text/ng-template" trados-translation="true" id="confirmDeleteDialog">
+    <!--<script type="text/ng-template" trados-translation="true" id="confirmDeleteDialog">
         <div class="modal-header">
             <h3 class="modal-title">
               Confirm Delete?
@@ -68,7 +68,7 @@
             <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
             <button type="button" class="btn btn-warning pull-left" aria-label="Save" ng-click="confirmDelete()" ng-disabled="loading">Delete</button>
         </div>
-    </script>
+    </script>-->
 
 
     <script type="text/ng-template" trados-translation="true" id="newFilterDialog">
@@ -79,19 +79,19 @@
         </div>
 
         <div class="modal-body">           
-            <div class="form-group">
-                <label for="filterTitle">Title</label>
-                <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Filter title">
-            </div>
-            <br/>
+           <label for="filterTitle">Select search filters:</label>
             <search-directive skip-results="true" skip-save-filter="true" skip-date-filter="true" 
-                    skip-keywords-filter="{{skipKeywordsFilter}}" skip-text-filter="{{skipTextFilter}}"></search-directive>
-            
-            <div class="alert alert-danger" role="alert" ng-if="errors">  
+                    skip-keywords-filter="{{skipKeywordsFilter}}" skip-text-filter="{{skipTextFilter}}">
+            </search-directive>
+            <br>
+              <div class="form-group">
+                <label for="filterTitle">Title:</label>
+                <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Search title">
+                <div class="alert alert-danger" role="alert" ng-if="errors">  
                     <p ng-repeat="error in errors">{{error}}</p>
+                </div>
             </div>
         </div>
-
         <div class="modal-footer">
             <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
             <button type="button" class="btn btn-primary pull-left" aria-label="Save" ng-click="save(document)" ng-disabled="loading">Save</button>
