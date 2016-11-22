@@ -6,27 +6,34 @@
         }
     </style>
     <div class="pull-right1">
-        <input type="button" class="btn btn-primary" value="Add New" ng-click="addEdit()" />       
-    </div>     
+        <input type="button" class="btn btn-primary" value="Add new search filter" ng-click="addEdit()" />       
+    </div>    
+
+   <br/>
+
     <div style="width:100%" ng-show="userFilters.length>0">
 
         <ul class="list-group">
             <li class="list-group-item clearfix"
             ng-repeat="record in userFilters | orderBy:'reportedOn':'desc'">
-                <div class="pull-right">
-                    <input type="button" class="btn btn-primary" value="Run" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'" />
-                    <input type="button" class="btn btn-primary" value="Edit" ng-click="addEdit(record)" />
-                    <input type="button" class="btn btn-warning" value="Delete" ng-click="deleteFilter($event, record)" />
+                <div class="pull-right btn-group">
+                    <a type="button" class="btn" ng-hide="del" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'" > <i class="fa fa-play-circle"></i> <br> run </a>
+                    <a type="button" class="btn" ng-hide="del" ng-click="addEdit(record)" > <i class="fa fa-edit"></i> <br> edit </a>
+                    <a type="button" class="btn" ng-hide="del"  ng-click="del=true;"> <i class="fa fa-trash-o"></i> <br> delete  </a>
+
+                    <a type="button" class="btn color-red" ng-show="del" ng-click="confirmDelete(record);del=false;"> <i class="fa fa-trash-o"></i> <br> confirm delete?  </a>
+                    <a type="button" class="btn" ng-show="del" ng-click="del=false;"> <i class="fa fa-times-circle"></i> <br> cancel  </a>
                 </div>
-                <p class="text-bold mb0">#{{$index+1}} {{record.queryTitle}}</p>
-                <small>
-                    <span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
+
+
+
+                <h4><a class="text-bold mb0 color-blue"  ng-click="runUserQuery(record)" >{{record.queryTitle}}</a></h4>
+                   <span style="color:#bbb;">FILTERS:</span><span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
                         <span class="label label-info">                    
                                 <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>{{filter.name}}
                                 <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
                         </span>
                      </span>
-                </small>
             </li>
         </ul>
     </div>
@@ -60,8 +67,8 @@
         </div>
 
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">No</button>
-            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="confirmDelete()" ng-disabled="loading">Yes</button>
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
+            <button type="button" class="btn btn-warning pull-left" aria-label="Save" ng-click="confirmDelete()" ng-disabled="loading">Delete</button>
         </div>
     </script>
 
@@ -88,8 +95,8 @@
         </div>
 
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Close</button>
-            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save(document)" ng-disabled="loading">Save</button>
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
+            <button type="button" class="btn btn-primary pull-left" aria-label="Save" ng-click="save(document)" ng-disabled="loading">Save</button>
         </div>
     </script>
 </div>

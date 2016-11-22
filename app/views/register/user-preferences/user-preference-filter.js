@@ -45,34 +45,37 @@ define(['app', 'underscore', 'ngDialog',
                         $scope.runQuery({ filter: record });
                 }
 
-                $scope.deleteFilter = function(evt, record){
-
-                    evt.stopPropagation();
-                    ngDialog.open({
-                                    className : 'ngdialog-theme-default wide',
-                                    template : 'confirmDeleteDialog',
-                                    controller : ['$scope', '$http', function($scope, $http){
-                                            
-                                            $scope.record = record;
-
-                                            $scope.confirmDelete = function(){
-                                                $scope.loading = true;                                            
-                                                $http.delete('/api/v2016/me/search-queries/' + $scope.record._id)
-                                                .then(function () {
-                                                    removeRecord();
-                                                    $scope.closeDialog();
-                                                });
-                                            }
-                                            $scope.closeDialog = function(){
-                                                ngDialog.close();                                            
-                                            }
-
-                                    }]
-                                })
-                    function removeRecord(){
-                        $scope.userFilters.splice($scope.userFilters.indexOf(record), 1);;
-                    }
+                $scope.confirmDelete = function(record){
+                    $scope.loading = true;                                            
+                    $http.delete('/api/v2016/me/search-queries/' + record._id)
+                    .then(function () {
+                        removeRecord();
+                        $scope.closeDialog();
+                    });
+                     $scope.userFilters.splice($scope.userFilters.indexOf(record), 1);
                 }
+                
+                // $scope.deleteFilter = function(evt, record){
+
+                //     evt.stopPropagation();
+                //     ngDialog.open({
+                //                     className : 'ngdialog-theme-default wide',
+                //                     template : 'confirmDeleteDialog',
+                //                     controller : ['$scope', '$http', function($scope, $http){
+                                            
+                //                             $scope.record = record;
+
+                                            
+                //                             $scope.closeDialog = function(){
+                //                                 ngDialog.close();                                            
+                //                             }
+
+                //                     }]
+                //                 })
+                //     function removeRecord(){
+                       
+                //     }
+                //}
 
                 $scope.addEdit = function(existingFilter){
                     if($rootScope.user && !$rootScope.user.isAuthenticated){
