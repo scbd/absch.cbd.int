@@ -1,5 +1,6 @@
 define(['app', 'underscore',
  '/app/services/role-service.js', '/app/services/app-config-service.js',
+ '/app/views/register/user-preferences/user-preference-filter.js',
  '/app/views/register/directives/register-top-menu.js', 'toastr','scbd-angularjs-services'],
 function(app, _) {
     "use strict";

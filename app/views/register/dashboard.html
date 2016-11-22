@@ -48,8 +48,18 @@
         <div class="register-content-content">
 
             <div class="row well" style="margin:0 0 30px 0">
+
+               
+
                 <h4 style="padding:3px;margin-top:0;border-bottom:1px solid #ddd;">&nbsp; Welcome <span class="color-black bold">{{user.name}}</span></h4>
-                <div class="col-md-6 cp-header">
+                <div class="col-md-2">
+                     <div class="user-image">
+                        <img gravatar-src="user.email" gravatar-size="80" class="img-circle"
+                    alt="{{user.name}}" title="{{user.name}}">
+                    </div>
+                </div>
+               
+                <div class="col-md-5 cp-header">
                     <table>
                         <tr>
                             <td>
@@ -72,7 +82,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="col-md-6 cp-header">
+                <div class="col-md-5 cp-header">
                     <table>
                         <td>
                             <label>Role(s):</label>
@@ -115,15 +125,7 @@
                                 <label>Update password:</label>
                             </td>
                             <td><a translation-url  href="https://accounts.cbd.int/password" target="_new"><strong>accounts.cbd.int/password</strong></a></td>
-                        </tr>
-                        <tr><td></td>
-                            <td style="margin-top:8px">
-                                <!--<div id="mySettingsPop"  data-toggle="popover" data-trigger="focus" data-placement="right" data-content="New">                         -->
-                                <i class="fa fa-cog" /> 
-                                <a  translation-url  href="/register/user-preferences" ><strong>My Settings</strong></a>
-                                <span class="label label-danger">New</span>
-                                <!--</div>      -->
-                            </td>
+                      
                         </tr>
                     </table>
                 </div>
