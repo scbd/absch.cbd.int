@@ -101,13 +101,11 @@ define(['app', 'underscore', 'ngDialog',
                                                     },100);
                                                 }
                                                 $scope.save = function(document){
-                                                    $scope.errors = undefined;
+                                                    $scope.errors = [];
                                                     if(!document || document.queryTitle == ''){
-                                                        $scope.errors = [];
                                                         $scope.errors.push('Please enter title of the alert')
                                                     }
-                                                    if(!document || document.queryTitle == ''){
-                                                        if(!$scope.errors)$scope.errors = [];
+                                                    if(!document || !$scope.setFilters || _.isEmpty($scope.setFilters)){                                                        
                                                         $scope.errors.push('Please select at least one filter')
                                                     }
                                                     if($scope.errors && $scope.errors.length > 0){
