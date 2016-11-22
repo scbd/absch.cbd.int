@@ -168,12 +168,13 @@
 									</ul>
 
 									<div class="tab-content">
-										<div class="tab-pane fade-in panel-body active text-center" id="preferences">
-											<h3 class="color-red"> Coming soon. In development </h3>
-										</div>
-										<!--<div class="tab-pane fade-in panel-body active" id="preferences">
+										<div class="tab-pane fade-in panel-body active " id="preferences">
+											<h3 class="color-red text-center  alert-warning" style="padding:20px;"> Coming soon. This section is  under development </h3>
 											<div>
-												<div class="panel-heading">Settings</div>
+												<div class="panel-heading">
+													<h1>Settings</h1>
+													Use these setting to customize your interaction with the ABSCH.
+												</div>
 												<div class="panel-body">
 													<div class="form-group">
 														<label>Prefered language</label>
@@ -189,37 +190,46 @@
 													<div class="form-group">
 														<label>Email frequency</label>
 														<select class="form-control"disabled>
-															<option>Instant</option>
+															<option>Immediate</option>
 															<option>Once a Week</option>
 															<option>once a Month</option>
 														<select>
 													</div>
-
 													<div class="form-group">
 														<div class="checkbox"><label><input type="checkbox" disabled value=""><strong>Disable email notifications</strong></label></div>
 													</div>
 													<button class="btn btn-info pull-right" type="button" disabled>Update settings</button>
 												</div>
 											</div>
-										</div>-->
+										</div>
 										<div class="tab-pane fade panel-body" id="tab-user-alerts" ng-if="tab==='subscriptions'">
 											<div>
 												<div class="panel-heading">
 													<h1>Email Alerts</h1>
-													Receive email notification when new records are published
-													</div>
+													Setup email alerts and get notified when new records are published.
+												</div>
 												<div class="panel-body">
 
 													<div ng-if="showSystemAlerts">
 														<legend>System Alerts</legend>
-															<ul class="list-group">
-																<li class="list-group-item clearfix">
-																	<div class="pull-right">
-																		<button class="btn btn-default" type="button" ng-if="!hasUserSubscribed('absPermit')" ng-click="subscribe('absPermit')"><strong>Subscribe</strong></button>
-																		<button class="btn btn-default" type="button" ng-if="hasUserSubscribed('absPermit')"  ng-click="unsubscribe('absPermit')"><strong>Unsubscribe</strong></button>
+															<ul class="list-group" >
+																<li class="list-group-item clearfix" style="background-color:#eee;">
+																	<div class="col-xs-12 col-sm-9">
+																		<h4 class="text-bold mb0 color-blue" >
+																			<span>Notify me when a certificate (IRCC) is constituted indicating that the person or entitiy granted prior informed consent (PIC) is from my country</span>
+																			<br>
+																			<small>
+																			<span class="color-black" ng-if="!hasUserSubscribed('absPermit')"><strong>Not subscribed</strong></span>
+																			<span class="color-black"  ng-if="hasUserSubscribed('absPermit')"><strong>You have <u>subscribed</u> to receive this alert</strong></span>
+																			</small>
+																		</h4>
 																	</div>
-																	<p class="text-bold mb0">IRCC #1</p>
-																		<small>Notify me when a IRCC is issued for any contact from my country.</small>
+																	<div class="col-xs-3">
+																		<div  style="margin-top:20px;" class="pull-right">
+																			<div ng-click="subscribe('absPermit')"   class="text-center color-blue" ng-if="!hasUserSubscribed('absPermit')" style="cursor:pointer"><i class="fa fa-square" ></i><br> subscribe</div>
+																			<div ng-click="unsubscribe('absPermit')"  class="text-center color-blue" ng-if="hasUserSubscribed('absPermit')" style="cursor:pointer"><i class="fa fa-times-circle" ></i> <br> unsubscribe</div>
+																		</div>
+																	</div>
 																</li>
 																<!--<li class="list-group-item clearfix">
 																	<div class="pull-right"><button class="btn btn-default" type="button" disabled><strong>Subscribe</strong></button></div>
@@ -227,7 +237,7 @@
 															</ul>
 													</div>
 
-													<legend>My Custom Alerts</legend>
+													<legend>Custom Email Alerts</legend>
 													<span user-preference-filter ng-if="tab==='subscriptions'" collection="subscriptions"
 														collection-filter='{"isSystemAlert":false}'></span>
 												</div>
@@ -237,7 +247,7 @@
 											<div>
 												<div class="panel-heading">
 												 	<h1>Saved Searches</h1>
-													Create search filter for futrue use</div>
+													Create customized searches for future use.</div>
 												<div class="panel-body">													
 													<span user-preference-filter ng-if="tab==='searchFilters'" collection="search-queries" run-query="runFilter(filter)"></span>
 
