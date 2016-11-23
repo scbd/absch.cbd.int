@@ -47,7 +47,7 @@ define(['app', 'underscore', 'ngDialog',
 
                 $scope.confirmDelete = function(record){
                     $scope.loading = true;                                            
-                    $http.delete('/api/v2016/me/search-queries/' + record._id)
+                    $http.delete('/api/v2016/me/' + $scope.collection + '/' + record._id)
                     .then(function () {
                         $scope.userFilters.splice($scope.userFilters.indexOf(record), 1);
                     });
