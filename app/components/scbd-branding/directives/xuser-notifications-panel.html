@@ -347,6 +347,29 @@
                 </div>
             </div>
 
+            <!--Subscription Publish=======================================-->
+            <div class="notification-spacing10" ng-if="notification.data.action==='published' && notification.type==='subscriptionNotification'">
+
+                <div class="col-xs-11">
+                    <div class="notification-message" ng-click="goto(notification);">
+                        <i class="fa fa-lg fa-bolt"> </i>
+                        <span class="notification-title">Record Published</span>
+                        <div class="notification-spacing5">
+                            <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
+                            <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
+                        </div>
+                        <div class="hidden-xs notification-spacing5">
+                            <span class="notification-label">{{notification.data.documentInfo.publisherText }}: </span>
+                            <span> {{notification.data.documentInfo.publisher }} </span>
+                            <span class="notification-label"> on </span>
+                            <span> {{notification.createdOn | formatDateWithTime}} </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-1 text-center" class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} </div>
+
+            </div>
+            
             <div style="margin-top:10px;" ng-if="!notifications">
                 <div class="col-xs-12 text-center">
                     <span class="color-grey"> no notifications </span>
