@@ -95,6 +95,9 @@ function(app, template,_,moment) {
                             else if($scope.typeFilter === item.data.action){
                                 return item;
                             }
+                            else if($scope.typeFilter === 'alert' && item.data.action==='published' && item.type==='subscriptionNotification'){
+                                return item;
+                            }
                             else
                                 return false;
                         };

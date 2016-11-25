@@ -20,6 +20,7 @@
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span ng-if="!typeFilter || typeFilter=='All'">All Types</span>
+                        <span ng-if="typeFilter=='alert'"><i class="fa fa-bolt"> </i> Alerts</span>
                         <span ng-if="typeFilter=='message'"><i class="fa fa-envelope-o"> </i> Messages</span>
                         <span ng-if="typeFilter=='request'"><i class="fa fa-rotate-right"> </i> Publishing Requests</span>
                         <span ng-if="typeFilter=='reminder'"><i class="fa fa-calendar"> </i> Reminders</span>
@@ -31,6 +32,9 @@
                     </button>
                     <ul class="dropdown-menu">
                         <li><a translation-url  href="#" ng-click="typeFilter = 'All'"> All Types</a></li>
+                        <li>
+                            <a translation-url  href="#" ng-click="typeFilter = 'alert'"> <i class="fa fa-bolt"> </i> Alerts</a>
+                        </li>
                         <li>
                             <a translation-url  href="#" ng-click="typeFilter = 'message'"> <i class="fa fa-envelope-o"> </i> Messages</a>
                         </li>
@@ -349,15 +353,23 @@
 
             <!--Subscription Publish=======================================-->
             <div class="notification-spacing10" ng-if="notification.data.action==='published' && notification.type==='subscriptionNotification'">
-
-                <div class="col-xs-11">
-                    <div class="notification-message" ng-click="goto(notification);">
+                <div class="col-xs-2 text-center hidden-xs">
+                    <div class="notification-spacing5">
                         <i class="fa fa-lg fa-bolt"> </i>
-                        <span class="notification-title">Record Published</span>
+                        <br/>
+                        <span class="notification-icon-text"> Alert </span>
+                    </div>
+                </div>
+                <div class="col-xs-10 col-sm-8">
+                    <div class="notification-message" ng-click="goto(notification);">
+                        <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-envelope-o"> </i>
+                        <div class="notification-title notification-spacing5">
+                            {{notification.data.message || 'A new record has been published'}}
+                        </div>
                         <div class="notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
-                        </div>
+                        </DIV>
                         <div class="hidden-xs notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.publisherText }}: </span>
                             <span> {{notification.data.documentInfo.publisher }} </span>
@@ -366,8 +378,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-1 text-center" class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} </div>
-
+                <div class="col-xs-2 text-center">
+                    <div class="notification-spacing5">
+                        <a translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
+                        <a translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
+                        <br>
+                        <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
+                            <span class="hidden-xs">ago</span>
+                        </span>
+                    </div>
+                </div>
             </div>
             
             <div style="margin-top:10px;" ng-if="!notifications">
