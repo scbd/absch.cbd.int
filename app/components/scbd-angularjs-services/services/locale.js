@@ -4,15 +4,15 @@ define(['app'], function(app) { 'use strict';
 
         this.$get = ['$document', '$window', function($document, $window) {
         
-        var urlLangRegex       = /^\/(en|ar|fr|es|ru|zh)/;
-        var langRegex = /(ar|en|es|fr|ru|zh)/;
-        var location = window.location;
-        var lang = location.pathname.split(urlLangRegex);
-        
-        if(lang && langRegex.test(lang[1]))
-            return lang[1];
+            var urlLangRegex       = /^\/(en|ar|fr|es|ru|zh)/;
+            var langRegex = /(ar|en|es|fr|ru|zh)/;
+            var location = window.location;
+            var lang = location.pathname.split(urlLangRegex);
+            
+            if(lang && langRegex.test(lang[1]))
+                return lang[1];
 
-            //return 'en';
+            return 'en';
 
         }];
     }]);
