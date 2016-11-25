@@ -253,7 +253,7 @@ define(['app',
                             evt.stopPropagation();
                             $scope.activeLink=type;
                             $scope.notifications = [];
-                            getNotification();
+                            getNotification(null, type=='unread' ? type :undefined);
                         }
                     }
                 ]
