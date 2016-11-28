@@ -22,6 +22,10 @@ function(app, template, $) {
                           $location.path('/lang/'+ lang);
                       }
 
+                      $scope.showMessage = function($event){
+                          $event.stopPropagation()
+                          alert('Support for Arabic language is coming soon.')
+                      }
                   }],//controller
         };//return
      });//directive
