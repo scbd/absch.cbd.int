@@ -64,13 +64,15 @@ define(['app',
                         //
                         //
                         //============================================================
-                        getNotification = function (count) {
+                        getNotification = function (count, type) {
                             if ($rootScope.user && $rootScope.user.isAuthenticated) {
                                 var queryMyNotifications;
                                 queryMyNotifications = {
-                                    $and: [{ 'state': 'unread' }],
                                     'data.documentInfo.realm': { $in: realmsForQuery }
                                 };
+
+                                if(type)
+                                    queryMyNotifications['state'] = 'unread';
 
                                 userNotifications.query(queryMyNotifications, pageNumber, pageLength, count)
                                     .then(function (data) {
@@ -147,8 +149,8 @@ define(['app',
                             //console.log(newVla,oldVal)
                             if (newVla && !angular.equals(newVla, oldVal)) {
                                 if (newVla.isAuthenticated) {
-                                    getNotification(1);//notification count;
-                                    getNotification();
+                                    getNotification(1, 'unread');//notification count;
+                                    getNotification(null, 'unread');
                                 }
                             }
                         });
@@ -180,10 +182,12 @@ define(['app',
                                         });
                                     }
                                     else {
+                                        $scope.loading = true;
                                         userNotifications.get(data.data.id)
                                             .then(function (data) {
                                                 processNotifications([data]);
-                                            });
+                                            })
+                                            .finally(function(){$scope.loading = false;});
                                     }
                                     if (data.data.state == 'read')
                                         $scope.notificationUnreadCount--;
@@ -232,7 +236,7 @@ define(['app',
                             $scope.loading = true;
 
                             pageNumber = pageNumber + pageLength;
-                            getNotification();
+                            getNotification(null, 'unread');
                         }
 
                         $scope.markAllRead = function(evt){
@@ -245,6 +249,12 @@ define(['app',
                                 });
                         }
 
+                        $scope.loadRecords = function(evt, type){
+                            evt.stopPropagation();
+                            $scope.activeLink=type;
+                            $scope.notifications = [];
+                            getNotification(null, type=='unread' ? type :undefined);
+                        }
                     }
                 ]
 

@@ -59,7 +59,7 @@ define(['app', 'lodash', 'moment'],
                         if ($location.absUrl().indexOf('http://localhost:') >= 0)
                             url = 'http://localhost:2000'
                         else
-                            url = 'https://dev-chm.cbd.int'; break;
+                            url = 'https://chm-dev.cbd.int'; break;
                     }
                 }
 

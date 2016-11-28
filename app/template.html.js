@@ -187,7 +187,8 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
                     });
 
                     if(_slaask.initialized) {
-                        _slaask.slaaskSendUserInfos();
+                        if(_slaask.slaaskSendUserInfos)
+                            _slaask.slaaskSendUserInfos();
                     }
                 }
 

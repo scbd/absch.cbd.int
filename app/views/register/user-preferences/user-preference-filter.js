@@ -45,34 +45,36 @@ define(['app', 'underscore', 'ngDialog',
                         $scope.runQuery({ filter: record });
                 }
 
-                $scope.deleteFilter = function(evt, record){
-
-                    evt.stopPropagation();
-                    ngDialog.open({
-                                    className : 'ngdialog-theme-default wide',
-                                    template : 'confirmDeleteDialog',
-                                    controller : ['$scope', '$http', function($scope, $http){
-                                            
-                                            $scope.record = record;
-
-                                            $scope.confirmDelete = function(){
-                                                $scope.loading = true;                                            
-                                                $http.delete('/api/v2016/me/search-queries/' + $scope.record._id)
-                                                .then(function () {
-                                                    removeRecord();
-                                                    $scope.closeDialog();
-                                                });
-                                            }
-                                            $scope.closeDialog = function(){
-                                                ngDialog.close();                                            
-                                            }
-
-                                    }]
-                                })
-                    function removeRecord(){
-                        $scope.userFilters.splice($scope.userFilters.indexOf(record), 1);;
-                    }
+                $scope.confirmDelete = function(record){
+                    $scope.loading = true;                                            
+                    $http.delete('/api/v2016/me/' + $scope.collection + '/' + record._id)
+                    .then(function () {
+                        $scope.userFilters.splice($scope.userFilters.indexOf(record), 1);
+                    });
+                    $scope.loading = false;     
                 }
+                
+                // $scope.deleteFilter = function(evt, record){
+
+                //     evt.stopPropagation();
+                //     ngDialog.open({
+                //                     className : 'ngdialog-theme-default wide',
+                //                     template : 'confirmDeleteDialog',
+                //                     controller : ['$scope', '$http', function($scope, $http){
+                                            
+                //                             $scope.record = record;
+
+                                            
+                //                             $scope.closeDialog = function(){
+                //                                 ngDialog.close();                                            
+                //                             }
+
+                //                     }]
+                //                 })
+                //     function removeRecord(){
+                       
+                //     }
+                //}
 
                 $scope.addEdit = function(existingFilter){
                     if($rootScope.user && !$rootScope.user.isAuthenticated){
@@ -99,13 +101,11 @@ define(['app', 'underscore', 'ngDialog',
                                                     },100);
                                                 }
                                                 $scope.save = function(document){
-                                                    $scope.errors = undefined;
+                                                    $scope.errors = [];
                                                     if(!document || document.queryTitle == ''){
-                                                        $scope.errors = [];
                                                         $scope.errors.push('Please enter title of the alert')
                                                     }
-                                                    if(!document || document.queryTitle == ''){
-                                                        if(!$scope.errors)$scope.errors = [];
+                                                    if(!document || !$scope.setFilters || _.isEmpty($scope.setFilters)){                                                        
                                                         $scope.errors.push('Please select at least one filter')
                                                     }
                                                     if($scope.errors && $scope.errors.length > 0){
