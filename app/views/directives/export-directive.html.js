@@ -13,8 +13,10 @@ define(['app',
             link: function ($scope, element, attrs) {
                 
             },
-            controller: ["$scope", '$rootScope', '$filter', '$timeout', 'commonjs', '$q', 'searchService', 'ngDialog', '$element',
-                function ($scope, $rootScope, $filter, $timeout, commonjs, $q, searchService, ngDialog, $element) {
+            controller: ["$scope", '$rootScope', '$filter', '$timeout', 'commonjs', '$q', 'searchService', 'ngDialog', '$element', 'locale',
+                function ($scope, $rootScope, $filter, $timeout, commonjs, $q, searchService, ngDialog, $element, locale) {
+                    
+                    var language = (locale || 'en').toUpperCase();
 
                     $scope.showDialog = function(){
                         var query = $scope.exportQuery();
@@ -33,16 +35,13 @@ define(['app',
                                             $scope.loading = true;
                                             $q.when(loadData(1000))
                                             .then(function(){
-                                                require([//'xlsx-core', //'xlsx'  ,
-                                                        'file-saver'  ,
-                                                        'tableexport'], function(){
-                                                            //, "xlsx"
-                                                                $element.find('#datatable').tableExport({
-                                                                    formats: ["xls", "csv"],
-                                                                    fileName: "ABSCH-data",
-                                                                });
-                                                                $element.find('.' + $scope.downloadFormat).click();
-                                                        });     
+                                                require(['tableexport'], function(){
+                                                    $element.find('#datatable').tableExport({
+                                                        formats: ["xlsx", "xls", "csv"],
+                                                        fileName: "ABSCH-data",
+                                                    });
+                                                    $element.find('.' + $scope.downloadFormat).click();
+                                                });     
                                             })
                                             .finally(function(){
                                                 $scope.loading = false;
@@ -56,8 +55,10 @@ define(['app',
                                         ngDialog.close();                                            
                                     }
 
-                                    var fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, schema_s, government_EN_t, _revision_i,' + 
+                                    var fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, schema_s, government:government_EN_t, _revision_i,' + 
                                     'rec_title:title_EN_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt';
+                                    if(language!='EN')
+                                        fields = fields.replace(/_EN/g, '_'+language);
                                     function loadData(rows){
                                         var localQuery = angular.copy(query);
                                         var searchOperation;

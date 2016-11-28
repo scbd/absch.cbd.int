@@ -40,7 +40,7 @@
                     Download Format :
                     <span class="radio" style="display: initial;">
                         <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xls" ng-model="downloadFormat">XLS (Excel)</label>                   
-                        <!--<label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" ng-model="downloadFormat">XLSX</label>                   -->
+                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" ng-model="downloadFormat">XLSX (Excel)</label>                   
                         <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv" ng-model="downloadFormat">CSV (comma separated values)</label>
                     </span>
             </div>
@@ -61,13 +61,13 @@
                         <tr ng-repeat="row in downloadDocs">
                             <td>{{row.schema_s|schemaName}}</td>
                             <td>{{row.uniqueIdentifier_s|uppercase}}</td>
-                            <td>{{row.government_EN_t}}</td>
+                            <td>{{row.government}}</td>
                             <td>{{row.rec_title}}</td>
                             <td>{{getMeta(row.rec_meta1)}}</td>
                             <td>{{getMeta(row.rec_meta2)}}</td>
                             <td>{{getMeta(row.rec_meta3)}}</td>
                             <td>{{getMeta(row.rec_meta4)}}</td>  
-                            <td>{{row.rec_date}}</td>                             
+                            <td>{{row.rec_date|formatDateWithTime}}</td>                             
                         </tr>
                     </table>
                    <h3 class="color-red bold">This is only sample of the information to be exported. All records retrieved by this search will be included in the export.</h3>
