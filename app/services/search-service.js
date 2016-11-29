@@ -34,7 +34,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                         'rows': searchQuery.rowsPerPage,
                     };
 
-                    console.log("list:" + q + searchQuery.query);
+                    // console.log("list:" + q + searchQuery.query);
 
                     return $http.get('/api/v2013/index/select', {
                         params: queryListParameters,
@@ -64,7 +64,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                         'group.sort': searchQuery.groupSort
                     };
 
-                    console.log("group:" + q + searchQuery.query);
+                    // console.log("group:" + q + searchQuery.query);
 
                     return $http.get('/api/v2013/index/select', {
                         params: queryGroupParameters,
