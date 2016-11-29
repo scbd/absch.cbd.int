@@ -6,7 +6,8 @@ define(['app',
 ], function(app, _, defaultPinPopOver) {
   'use strict';
 
-  app.factory('ammap3Service', ["locale", "$q", "longLatServ", "mapData", function(locale, $q, longLatServ, mapData) {
+
+  app.factory('ammap3Service', ["locale", "$q", "longLatServ", "mapData",  function(locale, $q, longLatServ, mapData) {
 
     var countries = null;
     var mapObject = {};
@@ -162,7 +163,7 @@ define(['app',
 
       setTimeout(function() {
         clearInterval(cancelId);
-        if (!(mapCtrls[mapId].getMap() && countries))
+        if (mapId && mapCtrls[mapId] && !(mapCtrls[mapId].getMap() && countries))
           throw ('Error: no controller or map initialazed on mapID:' + mapId + ' or no country data loaded');
 
       }, 7000);
@@ -193,6 +194,7 @@ define(['app',
       var deferred = $q.defer();
       deferred.resolved = 0;
 
+      ///TODO : switch to angular-$timeout
       var cancelId = setInterval(function() {
         if (countries) {
 
@@ -216,8 +218,9 @@ define(['app',
     //=======================================================================
     function setGlobalClickListener(mapId, onClickToDo) {
 
+    ///TODO : switch to angular-$timeout
       var cancelId = setInterval(function() {
-        if (mapCtrls[mapId].getMap()) {
+        if (mapId && mapCtrls[mapId] && mapCtrls[mapId].getMap()) {
           clearInterval(cancelId);
           return mapCtrls[mapId].getMap().addListener("click", onClickToDo);
         }
@@ -225,8 +228,8 @@ define(['app',
 
       setTimeout(function() {
         clearInterval(cancelId);
-        if (!mapCtrls[mapId].getMap())
-          throw (' setGlobalClickListener Error: no controller or map initialazed on mapID:' + mapId);
+        if (mapId && mapCtrls[mapId] && !mapCtrls[mapId].getMap())
+          throw (' setGlobalClickListener Error: no controller or map initialized on mapID:' + mapId);
 
       }, 7000);
     } //setGlobalClickListener
@@ -236,8 +239,9 @@ define(['app',
     //=======================================================================
     function setCountryClickListener(mapId, onClickToDo) {
 
+    ///TODO : switch to angular-$timeout
       var cancelId = setInterval(function() {
-        if (mapCtrls[mapId].getMap()) {
+        if (mapId && mapCtrls[mapId] && mapCtrls[mapId].getMap()) {
           clearInterval(cancelId);
           // console.log(mapCtrls[mapId].getMap());
           return mapCtrls[mapId].getMap().addListener("clickMapObject", onClickToDo);
@@ -246,7 +250,7 @@ define(['app',
 
       setTimeout(function() {
         clearInterval(cancelId);
-        if (!mapCtrls[mapId].getMap())
+        if (mapId && mapCtrls[mapId] && !mapCtrls[mapId].getMap())
           throw ('setGlobalClickListener:Error: no controller or map initialazed on mapID:' + mapId);
 
       }, 7000);
@@ -260,8 +264,9 @@ define(['app',
       var deferred = $q.defer();
       deferred.resolved = 0;
 
+      ///TODO : switch to angular-$timeout
       var cancelId = setInterval(function() {
-        if (mapCtrls[mapId] && mapCtrls[mapId].getMap()) {
+        if (mapId && mapCtrls[mapId] && mapCtrls[mapId].getMap()) {
 
           deferred.resolve(mapCtrls[mapId].getMap());
           deferred.resolved = 1;
@@ -284,8 +289,9 @@ define(['app',
       var deferred = $q.defer();
       deferred.resolved = 0;
 
+      ///TODO : switch to angular-$timeout
       var cancelId = setInterval(function() {
-        if (mapCtrls[mapId]) {
+        if (mapId && mapCtrls[mapId]) {
 
           deferred.resolve(mapCtrls[mapId]);
           deferred.resolved = 1;
