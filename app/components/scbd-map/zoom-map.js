@@ -119,6 +119,7 @@ define(['text!./zoom-map.html', 'app', 'lodash',
 
         $scope.$on('$destroy', function(){
               $scope.map.clearMap();
+              ammap3Service.clear();
               $('#' + $attr.mapId).remove();
               $scope.map = undefined;
         });

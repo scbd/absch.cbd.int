@@ -392,11 +392,7 @@ define(['app',
     //=======================================================================
     function openCountryPopup(mapId, cCode) {
       var image = _.find(mapCtrls[mapId].getMap().dataProvider.images, function(img) {
-
-          if(img.scbdData && _.contains(img.scbdData.exceptionRegion, cCode)){
-              console.log(img.scbdData);
-          }
-
+         
         if (img.scbdData && (img.scbdData.code === cCode ||
             (exceptionRegionMapping[cCode] &&  _.contains(img.scbdData.exceptionRegion, cCode) &&
              img.scbdData.code === exceptionRegionMapping[cCode])))
@@ -457,7 +453,7 @@ define(['app',
     //=======================================================================
     function validateData(mapId) {
 
-      return mapCtrls[mapId].getMap().validateData();
+      return mapCtrls[mapId] && mapCtrls[mapId].getMap().validateData();
 
     } // closePopovers
     //=======================================================================
@@ -469,7 +465,6 @@ define(['app',
 
       whenMapCtrlLoaded(mapId).then(
         function(ctrl) {
-          console.log(ctrl);
           ctrl.zoomToMapArea(areaId);
         },
         function() {
@@ -513,7 +508,8 @@ define(['app',
     } // randomCountry
 
     function clear(mapId){
-        mapCtrls[mapId].getMap().clearMap();
+       if(mapCtrls[mapId])
+          mapCtrls[mapId].getMap().clearMap();
 
         countries = null;
         mapObject = {};
