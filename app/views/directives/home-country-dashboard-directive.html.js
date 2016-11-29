@@ -91,9 +91,6 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
 								$scope.nationalRecords = nationalRecords;
                                 
                             })
-                            .catch(function(error) {
-                                console.log(error);
-                            })
                             .finally(function() {
                                 $scope.loadingNationalFacets = false;
                             });
@@ -117,7 +114,6 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
 
                         searchService.group(referenceRecordsQuery)
                             .then(function(data) {
-                                console.log(data);
                                 var referenceRecords = {};
                                 _.each(data.data.grouped.schema_s.groups, function(group){
                                     referenceRecords[group.groupValue] = {
@@ -126,9 +122,6 @@ define(['app', 'underscore', '/app/services/search-service.js', '/app/services/a
                                     };
                                 });
                                 $scope.referenceRecords = referenceRecords;
-                            })
-                            .catch(function(error) {
-                                console.log(error);
                             })
                             .finally(function() {
                                 $scope.loadingRefFacets = false;
