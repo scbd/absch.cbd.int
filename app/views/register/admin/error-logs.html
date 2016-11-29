@@ -82,6 +82,11 @@
 										<span class="">
                                                <b>URL:</b> {{error.url}}<br>
                                             </span><br>
+											 <span class="">
+                                               <b>User:</b> 
+											   <a ng-if="error.user != 1" ng-href="https://accounts.cbd.int/admin/users/{{error.user}}">{{error.user}}</a>
+											   <span ng-if="error.user == 1">Anonymous</span>
+                                            </span><br><br>
                                             <span class="">
                                                <b>User Agent:</b> {{error.userAgent.trim()}}<br>
                                             </span><br>
