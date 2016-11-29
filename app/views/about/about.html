@@ -62,7 +62,7 @@
 
          <li><a translation-url  ng-click="showSubmit = !showSubmit" class="btn-sm btn-default plusbtn">{{showSubmit ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="submit" ng-click="showSubmit = true" >Submit - Submitting Information</a></li>
                <ul ng-show="showSubmit">
-                <li><a translation-url  scroll-to="submit-intro" class="color-green" href="#">Introduction</a></li>
+                <li><a translation-url  scroll-to="submit" class="color-green" href="#">Introduction</a></li>
                 <li><a translation-url  scroll-to="submit-obligations" class="color-green" href="#">Information-sharing obligations </a></li>
                 <li><a translation-url  scroll-to="submit-account" class="color-green" href="#">CBD Account</a></li>
                 <li><a translation-url  scroll-to="submit-users" class="color-green" href="#">National User Management</a></li>
@@ -70,7 +70,7 @@
                 <li><a translation-url  scroll-to="submit-guides" class="color-green" href="#">Step-by-step guides</a></li>
                 <li><a translation-url  scroll-to="submit-notifications" class="color-green" href="#">User Notifications System</a></li>
                 <li><a translation-url  scroll-to="submit-alerts" class="color-green" href="#">Email Subscriptions and Alerts</a></li>
-                <li><a translation-url  scroll-to="submit-intro" class="color-green" href="#">Examples and FAQs</a></li>
+                <li><a translation-url  scroll-to="submit-examples" class="color-green" href="#">Examples and FAQs</a></li>
              </ul>
          <li><a translation-url  ng-click="showMonitoring = !showMonitoring" class="btn-sm btn-default plusbtn">{{showMonitoring ? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="monitoring" ng-click="showMonitoring = true" >Monitoring Utilization</a></li>
                <ul ng-show="showMonitoring">
@@ -87,14 +87,14 @@
         <li><a translation-url  ng-click="showCB = !showCB" class="btn-sm btn-default plusbtn">{{showCB? "-" : "+"}}</a> <a translation-url  href="#" scroll-to="cb" ng-click="showCB = true" >Capacity-building</a></li>
                <ul ng-show="showCB">
                 <li><a translation-url  scroll-to="cb" class="color-green" href="#">Introduction</a></li>
-                <li><a translation-url  scroll-to="cb-helpdesk" class="color-green" href="#">Help Desk Services</a></li>
+                <li><a translation-url  scroll-to="cb-helpdesk" class="color-green" href="#">Help Desk</a></li>
+                <li><a translation-url  scroll-to="cb-helpdesk" class="color-green" href="#">Outreach and engagement</a></li>
                 <li><a translation-url  scroll-to="cb-training" class="color-green" href="#">Training and workshops</a></li>
-                <li><a translation-url  scroll-to="cb-faqs" class="color-green" href="#">Examples and FAQs</a></li>
              </ul>
 
 
 
-             <li><a translation-url   class="btn-sm btn-default plusbtn">+</a>  <a translation-url  href="#" scroll-to="about-contact"> Contact us </a></li>
+             <li><a translation-url   class="btn-sm btn-default plusbtn">+</a>  <a translation-url  href="#" scroll-to="about-contact">Need help? Contact us </a></li>
 
             <div class="other-links well" style="margin-top:20px;">
                 <div style="color:#bbb;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);padding-bottom:10px;"> USEFUL LINKS </div>
@@ -131,7 +131,7 @@
                 </ul>
                     <p>Researchers and businesses need to secure legal clarity, certainty and transparency when accessing genetic resources and/or associated traditional knowledge. Without such legal certainty, potential users of genetic resources and/or associate traditional knowledge could be less eager to invest in bioprospecting and researching activities, as their activities may lead to controversy and allegations of misappropriation or misuse of these resources or knowledge. </p>
                     <p>Providers of genetic resources and associated traditional knowledge, on the other hand, want to ensure that benefits arising from the utilization of their resources are shared in a fair and equitable manner once the resource or knowledge leaves the country.</p>
-                    <div class="well">
+                    <div class="well bg-white">
 
                         <h5>What Providers want:</h5>
                         <li>Control over access to their own genetic resources (GR) and traditional knowledge (TK)</li>
@@ -155,7 +155,7 @@
 
                     <p>The ABSCH allows countries to share information on procedures for accessing genetic resources and monitor the utilization of the resources along the value chain. The ABSCH plays a key role in enhancing the legal certainty and transparency that both providers and users of genetic resources, as well as associated traditional knowledge, are looking for.</p>
                     
-                    <div class="well">
+                    <div class="well bg-white">
                         <h5>The ABSCH is helping to make the ABC’s of ABS a reality</h5>
                         <li><strong>A</strong>ccess – Enhancing legal certainty, transparency and clarity on how to access genetic resources and associated traditional knowledge.</li>
                         <li><strong>B</strong>enefit-sharing – Contributing to increase opportunities for sharing benefits from the use of genetic resources and associated traditional knowledge.</li>
@@ -253,10 +253,17 @@
                             Parties. Therefore, Non-Parties must also designate a PA in order to publish national information.
                         </p>
 
-                        <div class="well">
-                            <h5 id="about-rolesPA">Publishing authorities (PA)</h5>
+                        <div class="well bg-white">
+                               <h5 >ABS National Focal Point (NFP)</h5> 
+                                <p>The NFP is responsible to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (<a href="https://www.cbd.int/abs/text/articles/default.shtml?sec=abs-13" target="_new">Article 13, paragraph 1</a>). 
+                                The NFP must be designated or modified by completing an offical designation form offline and sending it (by fax, email or post) to the CBD Secretariat.  
+                                In order to make information available in the ABSCH the NFP is responsible for designating the publishing authority. 
+                                The NFP can designate themselves as the PA if desired. 
+                                </p>
+                            <br>
+                            <h5 id="about-rolesPA">The Publishing Authority (PA)</h5>
                             <p> The publishing authority can prepare draft records and publish them directly, or can designate one or more national authorized
-                                users (NAUs) to assist them in preparing draft records for their publication in the ABSCH.</p>
+                                users (NAUs) to assist them in preparing draft records for their publication in the ABSCH on behalf of their country .</p>
                             <p>The PA is responsible for:
                                 <ul>
                                     <li>Authorizing the publication of all national records registered in the ABSCH;</li>
@@ -270,7 +277,7 @@
                             <h5 id="about-rolesNAU">National authorized users (NAUs)</h5>
                             <p>Countries may also designate one or more National Authorized Users (NAUs). The function of NAUs is to assist the publishing authorities in the preparation of draft national records. National authorized users can create and manage draft records of their country which are then sent as requests to the publishing authority for publication.</p>
                         </div>
-                     <h3 id="about-rolesUsers">Other stakeholders who wish to contribute (Registered users) </h3> 
+                     <h3 id="about-rolesUsers">Other stakeholders (Registered users) </h3> 
                         <p>
                             Anyone can sign-up for a CBD account and submit reference records to the ABSCH.  This gives an opportunity for different stakeholders, 
                             indigenous and local communities, academia, non-governmental organizations, research institutions, private sector, etc. to contribute 
@@ -279,14 +286,14 @@
                             Although, registered users, do not publish reference records directly, they have a responsibility to keep the information they submit correct, complete and up-to-date.
                         </p>
                        
-                     <h3 id="about-rolesPublic">General public </h3> 
+                     <h3 id="about-rolesPublic">General public  </h3> 
                      <p>
-                        A CBD account is not required to access information published in the ABSCH. All published and public information is made available through the search and country profiles. 
+                        A CBD account is not required to access the information published in the ABSCH. All published information in made publically available through the search and country profiles. 
                         If you notice a potential error or broken link in any ABSCH records please report it to the Secretariat. 
                      </p>
                          
                     <div class="well">
-                        <h5><strong class="color-green"><i class="fa fa-info-circle" aria-hidden="true"></i> For information CBD Accounts please see:</strong> <a href="#" scroll-to="submit-account">CBD Accounts</a></h5>
+                        <h5><strong class="color-green"><i class="fa fa-info-circle" aria-hidden="true"></i> For information signing-up or managing your CBD Account please see:</strong> <a href="#" scroll-to="submit-account">CBD Accounts</a></h5>
                         <h5><strong class="color-green"><i class="fa fa-info-circle" aria-hidden="true"></i> For information on how to designate national users please see:</strong> <a href="#" scroll-to="submit-users">National User Management</a></h5>
                     </div>
                          
@@ -304,14 +311,14 @@
                        All national records are validated by the national publishing authority (PA) prior to being made publically available in the ABSCH.
                     <p>
                     
-                    <p class="well"><strong class="color-blue">ABS National Focal Point (NFP)</strong> 
+                    <p class="well bg-white"><strong class="color-blue">ABS National Focal Point (NFP)</strong> 
                     Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (<a href="https://www.cbd.int/abs/text/articles/default.shtml?sec=abs-13" target="_new">Article 13, paragraph 1</a>). The NFP must be designated or modified by completing an offical designation form offline and sending it (by fax, email or post) to the CBD Secretariat.  
                     <br><br>
                     <a href="/search/nationalRecords?schema=focalPoint" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-eye" aria-hidden="true"></i> view records</a> &nbsp; | &nbsp;
                     <a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-NFP.doc" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-download" aria-hidden="true"></i>  designation form</a>
                     </p>
                     
-                     <p class="well"><strong class="color-blue">Competent National Authorities (CNA)</strong> 
+                     <p class="well bg-white"><strong class="color-blue">Competent National Authorities (CNA)</strong> 
                         Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (<a href="https://www.cbd.int/abs/text/articles/default.shtml?sec=abs-13" target="_new">Article 13, paragraph 2</a>)
                         
                         <br><br>
@@ -320,7 +327,7 @@
                         <a href="http://www.cbd.int/abs/doc/guides/CNA.pdf" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-star" aria-hidden="true"></i> step-by-step guide</a>
                      </p>
                     
-                     <p class="well"><strong class="color-blue">Legislative, administrative or policy measures (MSR)</strong> 
+                     <p class="well bg-white"><strong class="color-blue">Legislative, administrative or policy measures (MSR)</strong> 
                          Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.
                         <br><br>
                         <a href="/search/nationalRecords?schema=measure" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-eye" aria-hidden="true"></i> view records</a> &nbsp; | &nbsp;
@@ -328,7 +335,7 @@
                         <a href="http://www.cbd.int/abs/doc/guides/MSR.pdf" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-star" aria-hidden="true"></i> step-by-step guide</a>
                      </p>
                     
-                     <p class="well"><strong class="color-blue">National Websites and Databases (NDB)</strong>
+                     <p class="well bg-white"><strong class="color-blue">National Websites and Databases (NDB)</strong>
                          Information and links to national websites or databases which are relevant for ABS.
                          <br><br>
                         <a href="/search/nationalRecords?schema=database" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-eye" aria-hidden="true"></i> view records</a> &nbsp; | &nbsp;
@@ -336,7 +343,7 @@
                         <a href="http://www.cbd.int/abs/doc/guides/NDB.pdf" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-star" aria-hidden="true"></i> step-by-step guide</a>
                      </p>
                     
-                    <p  class="well"><strong class="color-blue">Internationally Recognized Certificate of Compliance (IRCC)</strong>
+                    <p  class="well bg-white"><strong class="color-blue">Internationally Recognized Certificate of Compliance (IRCC)</strong>
                         Certificate constituted from the information on the permit or its equivalent registered in the ABSCH, serving as evidence that the genetic resource which it covers has been accessed in accordance with prior informed consent and that mutually agreed terms have been established. It contains the minimum necessary information to allow monitoring the utilization of genetic resources by users throughout the value chain (<a href="https://www.cbd.int/abs/text/articles/default.shtml?sec=abs-17" target="_new">Article 17</a>).
                      <br><br>
                         <a href="/search/nationalRecords?schema=AbsPermit" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-eye" aria-hidden="true"></i> view records</a> &nbsp; | &nbsp;
@@ -344,7 +351,7 @@
                         <a href="http://www.cbd.int/abs/doc/guides/IRCC.pdf" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-star" aria-hidden="true"></i> step-by-step guide</a>
                      </p>
                     
-                    <p class="well"><strong class="color-blue">Checkpoints (CP)</strong>
+                    <p class="well bg-white"><strong class="color-blue">Checkpoints (CP)</strong>
                     Entities designated by Parties to effectively collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources, as appropriate 
                     (<a href="https://www.cbd.int/abs/text/articles/default.shtml?sec=abs-17" target="_new">Article 17, 1(a) (i)</a>).
                     <br><br>
@@ -353,7 +360,7 @@
                         <a href="http://www.cbd.int/abs/doc/guides/CP.pdf" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-star" aria-hidden="true"></i> step-by-step guide</a>
                      </p>
                     
-                    <p class="well"><strong class="color-blue">Checkpoint Communiqués (CPC)</strong> 
+                    <p class="well bg-white"><strong class="color-blue">Checkpoint Communiqués (CPC)</strong> 
                     A  summary of the information collected or received by  a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources and registered in the ABSCH 
                     (<a href="https://www.cbd.int/abs/text/articles/default.shtml?sec=abs-17" target="_new">Article 17, paragraph 1(a)</a>).
                     <br><br>
@@ -362,7 +369,7 @@
                         <a href="http://www.cbd.int/abs/doc/guides/CPC.pdf" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-star" aria-hidden="true"></i> step-by-step guide</a>
                      </p>
                     
-                     <p class="well"><strong class="color-blue">Interim National report (NR)</strong> 
+                     <p class="well bg-white"><strong class="color-blue">Interim National report (NR)</strong> 
                      Document submitted by Parties in the context of <a href="https://www.cbd.int/abs/text/articles/default.shtml?sec=abs-29" target="_new">Article 29</a> sof the Protocol to report on the measures that it has taken to implement this Protocol.
                      <br><br>
                         <a href="/search/nationalRecords?schema=absNationalReport" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-eye" aria-hidden="true"></i> view records</a> &nbsp; | &nbsp;
@@ -374,7 +381,7 @@
                     <h3 class="color-orange" id="about-types2">Reference records</h3>
                     <p>Reference records include a number of ABS relevant resources and information. They can be submitted by any registered user of the ABSCH (Parties, Non-Parties, governments, international organizations, indigenous and local communities, and relevant stakeholders.</p>
                     
-                    <p class="well"><strong class="color-orange">Virtual Library Resources</strong>
+                    <p class="well bg-white"><strong class="color-orange">Virtual Library Resources</strong>
                     The virtual library in the ABSCH hosts a number of ABS relevant resources submitted by any registered user of the ABSCH. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc. 
                     <br><br>
                         <a href="/search/nationalRecords?schema=resource" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-eye" aria-hidden="true"></i> view records</a> &nbsp; | &nbsp;
@@ -382,7 +389,7 @@
                         <a href="http://www.cbd.int/abs/doc/guides/VLR.pdf" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-star" aria-hidden="true"></i> step-by-step guide</a>
                      </p>
                     
-                     <p class="well"><strong class="color-orange">Model Contractual Clauses</strong>
+                     <p class="well bg-white"><strong class="color-orange">Model Contractual Clauses</strong>
                     Model contractual clauses are addressed in <a href="https://www.cbd.int/abs/text/articles/default.shtml?sec=abs-19" target="_new">Article 19</a> of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. 
                     <br><br>
                         <a href="/search/nationalRecords?schema=modelContractualClause" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-eye" aria-hidden="true"></i> view records</a> &nbsp; | &nbsp;
@@ -390,7 +397,7 @@
                         <a href="http://www.cbd.int/abs/doc/guides/A19A20.pdf" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-star" aria-hidden="true"></i> step-by-step guide</a>
                      </p>
                     
-                     <p class="well"><strong class="color-orange"> Codes of Conduct, Guidelines, Best Practices and/or Standards </strong>
+                     <p class="well bg-white"><strong class="color-orange"> Codes of Conduct, Guidelines, Best Practices and/or Standards </strong>
                     Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in <a href="https://www.cbd.int/abs/text/articles/default.shtml?sec=abs-20" target="_new">Article 20</a> of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.
                     <br><br>
                         <a href="/search/nationalRecords?schema=modelContractualClause" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-eye" aria-hidden="true"></i> view records</a> &nbsp; | &nbsp;
@@ -398,7 +405,7 @@
                         <a href="http://www.cbd.int/abs/doc/guides/A19A20.pdf" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-star" aria-hidden="true"></i> step-by-step guide</a>
                      </p>
                     
-                     <p class="well"><strong class="color-orange">Community Protocols and Procedures and Customary Laws </strong>
+                     <p class="well bg-white"><strong class="color-orange">Community Protocols and Procedures and Customary Laws </strong>
                     Community protocols and procedures and customary laws are addressed in <a href="https://www.cbd.int/abs/text/articles/default.shtml?sec=abs-12" target="_new">Article 12</a> of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.
                     <br><br>
                         <a href="/search/nationalRecords?schema=communityProtocol" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-eye" aria-hidden="true"></i> view records</a> &nbsp; | &nbsp;
@@ -406,7 +413,7 @@
                         <a href="http://www.cbd.int/abs/doc/guides/CPP.pdf" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-star" aria-hidden="true"></i> step-by-step guide</a>
                      </p>
                     
-                     <p class="well"><strong class="color-orange">Capacity-building Initiatives</strong>
+                     <p class="well bg-white"><strong class="color-orange">Capacity-building Initiatives</strong>
                      Information on Capacity-building Initiatives at national, regional and international levels, are shared to promote synergy and coordination on capacity-building and development for access and benefit-sharing.
                     <br><br>
                         <a href="/search/nationalRecords?schema=capacityBuildingInitiative" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-eye" aria-hidden="true"></i> view records</a> &nbsp; | &nbsp;
@@ -427,7 +434,7 @@
 
 
                       <div class="well">
-                        <h5 class="color-green">For more information see: <a href="#" scroll-to="submit-obligations">Information-sharing obligations under the Protocol</a></h5>
+                        <h5 class="color-green"> <i class="fa fa-info-circle" aria-hidden="true"></i> For more information see: <a href="#" scroll-to="submit-obligations">Information-sharing obligations under the Protocol</a></h5>
                     </div>
                      <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
                </div>
@@ -479,7 +486,10 @@
                     
 
                     <div class="about-section"  id="search-cp">   
-                           <h1>Country Profiles</h1>           
+                           <h1>Country Profiles</h1> 
+                            <p>
+                                <iframe width="100%" height="315" src="https://www.youtube.com/embed/OJwn6ilvYAw" frameborder="0" allowfullscreen></iframe>
+                            </p>          
                             <p> 
                                 One of the most convenient ways to access the national information in the ABSCH is through the <a href="/countries" target="_new">country profiles</a>. 
                                 Each country profile contains all the national information that has been made available by that country, and it can provide a complete picture of the 
@@ -507,6 +517,7 @@
                                  Under the section on ABS measures the country's profile can help to provide an overview of a country’s legal framework
                                  summerized in table that groups all ABS measures by some key ABS elements. This overview is referred to as a <a href="#" scroll-to="search-matrix">ABS Measures Matrix</a>. 
                             </p>
+                           
                             <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
                       </div>
 
@@ -529,7 +540,10 @@
                       </div>
 
                         <div class="about-section"  id="search-search">   
-                           <h1>The Search Page</h1>           
+                           <h1>The Search Page</h1>    
+                           <p>
+                               <iframe width="100%" height="315" src="https://www.youtube.com/embed/YaX_llUfBts" frameborder="0" allowfullscreen></iframe>
+                               </p>       
                             <p> 
                                 The <a href="absch.cbd.int/search" target="_new">search</a> is where you can find all information published on the ABSCH. 
                                 All categories of information (national records, reference records and SCBD records) can be searched simultaneously by using a combination of free-text filters and predefined filters. 
@@ -563,7 +577,7 @@
                                         can be a useful way to locate and keep track of records, as well as, link records to information contained in a seperate database. This can be helpful, for example, 
                                         to make links between national permits, which can contain confidential information, and certificates (IRCC), which contain no confidential information.  
                                     </p>
-                                    <div class="well">
+                                    <div class="well bg-white">
                                         <h5>Searching by Unique Identifiers</h5>
                                         A Unique Identifier (UID) can be typed into the search and used as a filter, either to find a particular record or to get a list of records that reference a particular record.   
                                         For example, this can be useful if you were looking for all IRCCs issued by a specific CNA. To carry out this particular search you could select the national record type: “Internationally Recognized Certificate of Compliance” 
@@ -587,11 +601,11 @@
                       <div class="about-section"  id="search-report">   
                            <h1>Reporting records</h1>           
                             <p> 
-                            In an effort to provide the high level of reliablity of information found in the ABSCH, we have included a feature for users of the ABSCH to report records that 
-                            may contain outdated, inaccurate information, or broken links.  Users may report a record by clicking the link found at the bottom of each expanded record and complete
-                            the short submission form providing the reason for reporting the record. The Secretariat receives all reported records submissions and addresses 
-                            the each reported record in consultation with the country’s PA or NFP only when it is appropriate. Please note that the Secretariat will not modify any national information without the written 
-                            permission of the countries publishing authority. 
+                            In order to keep ABSCH records reliable and up-to-date we have included a feature to report records that 
+                            may contain outdated, inaccurate information, or broken links.  To report a record click on the "report record" link found at the bottom of 
+                            each expanded record and complete the short submission form providing your reason for reporting the record. The Secretariat receives all 
+                            reported records and addresses them in consultation with the country’s PA or NFP only when it is appropriate. Please note that the Secretariat will not 
+                            modify any national information without the explicit permission of the country's publishing authority. 
                             </p>
                             <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
                       </div>
@@ -666,23 +680,23 @@
                                 All users of the ABSCH will require CBD Account to submit information on the ABSCH. To submit national information in the ABSCH 
                                 you must first be officially designated as the publishing authority (PA) or a nationally authroized user (NAU) on behalf of your country. 
                            </p>
-                           <p>
-                                  <strong>If you already have an account >  </strong>Please take a moment to sign in to absch.cbd.int and verify that your profile information is up-to-date and complete.
-                                <br><br>
-                                  <strong>If you don’t know if you have an account or you have forgotten your password > </strong> If you don’t know if you have a CBD account or if you have forgotten your password, you can go here: accounts.cbd.int/password/reset to reset your password. If you have an account, you will receive an email with instructions on how to sign-in and reset your password. If you don't, please sign-up for one.
-                                <br><br>
-                                  <strong>If you don’t have an account > </strong> Go to: accounts.cbd.int/signup and fill out the simple form to obtain your CBD account.  You will need access to a valid email account in order to validate the account.
-                                <br><br>
-                                For more information please see the ABSCH quick guides on creating and managing your CBD Account: www.cbd.int/abs/doc/guides/Accounts.pdf.
-                        </p>
-
+                           <div class="row" style="margin-top:20px;margin-bottom:20px;">
+                                <div class="col-md-6"><iframe width="100%" height="200" src="https://www.youtube.com/embed/nAHFkAJZt1w" frameborder="0" allowfullscreen></iframe></div>
+                                <div class="col-md-6"><h3>If you already have an account</h3>Please take a moment to sign in to absch.cbd.int and verify that your profile information is up-to-date and complete.</div>
+                                <div class="clearfix"/><br><br>
+                                 <div class="col-md-6"><iframe width="100%" height="200" src="https://www.youtube.com/embed/IqoVH8IVsvI" frameborder="0" allowfullscreen></iframe></div>
+                                 <div class="col-md-6"><h3>If you don’t know if you have an account or you have forgotten your password  </h3> If you don’t know if you have a CBD account or if you have forgotten 
+                                 your password, you can go to <a href="accounts.cbd.int/password/reset" target="_new">accounts.cbd.int/password/reset</a> to reset your password. If you have an account, you will receive an email with instructions on how to sign-in and reset your password. If you don't, please sign-up for one.</div>
+                                <div class="clearfix"/><br><br>
+                                <div class="col-md-6"><iframe width="100%" height="200" src="https://www.youtube.com/embed/hv7Kgx0bjdc" frameborder="0" allowfullscreen></iframe></div>
+                                <div class="col-md-6"><h3>If you don’t have an account </h3> Go to <a href="https://accounts.cbd.int/signup" target="_new">accounts.cbd.int/signup</a> and fill out the simple form to obtain your CBD account.  You will need access to a valid email account in order to validate your CBD account.</div>
+                            </div>
                             <div class="well" >
                                 <h5 style="color:#111;"> <i class="fa fa-info-circle" aria-hidden="true"></i> In order to publish national information in the ABSCH 
                                 countries must first designate a single publishing authority (PA) responisble for validating all national records prior to their publication.</h5>
-                                <h5>For more information on the role and resposibilities of the publishing authority (PA) or a nationally authroized user (NAU) see: <a href="#" scroll-to="about-roles">Roles and resposibilities</a> </h5>
-                                <h5>For more information on how to designate national users please see: <a href="#" scroll-to="submit-users">National User Management</a> </h5>
+                                <h5><i class="fa fa-info-circle" aria-hidden="true"></i>  For more information on the role and resposibilities of the publishing authority (PA) or a nationally authroized user (NAU) see: <a href="#" scroll-to="about-roles">Roles and resposibilities</a> </h5>
+                                <h5><i class="fa fa-info-circle" aria-hidden="true"></i>  For more information on how to designate national users please see: <a href="#" scroll-to="submit-users">National User Management</a> </h5>
                             </div>
-                        
                            <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
                       </div>
 
@@ -690,49 +704,62 @@
                        <div class="about-section"  id="submit-users">   
                            <h1>Record Management Centre - User Management</h1>           
                            <p>
-                               The User Management page provides functionality manage who is authorized to view, create and publish national records for your country. Through the User Management Page, the NFP and PA can manage their country’s “team” of ABSCH users by designating or changing PA and NAU roles. The NFP can manage designations for the PA and NAUs. The PA, can manage designation only for NAU roles. It is also possible for the NFP or PA to designate these roles through written communication with the SCBD.
+                               The User Management provides functionality for national focal points (NFP) and publishing authorities (PA) to manage who is nationally authorized to view, 
+                               create and publish national records on behalf of a country. 
+                               The modifying the designation of the PA can only be done by the NFP. Both the NFP and the PA can manage designations for nationally authorized users (NAUs).
                            </p>
-                           <p>
-                               For more information on managing users in the ABSCH, please see the quick guide: www.cbd.int/abs/doc/guides/UserManagement.pdf
-                           </p>
+                          
+                            <h3 id="about-rolesDesignation">Designation of a national users for Parties and Non-Parties</h3>
+                            
+                             <p class="well bg-white">
+                                 <strong><span class="color-green">Step 1:</span> Designate an ABS national focal point (NFP)</strong>:
+                                 The national focal point (NFP) on access and benefit-sharing can only be designated or modified offline
+                                 through an official written communication addressed to the Executive Secretary.
+                                 <br><br>
+                                <a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-NFP.doc" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-download" aria-hidden="true"></i>  NFP designation form (offline)</a>
+                             </p>
 
+                              <p class="well  bg-white">
+                                 <strong><span class="color-green">Step 2:</span> Designate a publishing authority (PA)</strong>: 
+                                 In order to publish records in the ABSCH the NFP must designate a single publishing authority (PA) for their country. 
+                                 If they wish the NFP can designate themselves as the PA. The designation of the PA can be done offine through written commuication to the 
+                                  Secretariat or online through the ABSCH User Management. 
+                                  <br><br>
+                                 <a href="https://absch.cbd.int/register/national-users" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-user" aria-hidden="true"></i> ABSCH User Management (online)</a> 
+                                 &nbsp; | &nbsp;
+                                 <a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-PA-NAU.doc" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-download" aria-hidden="true"></i>  PA or NAU designation form (offline)</a>
+                             </p>
 
-                         <h4 id="about-rolesDesignation">Designation of PAs and NAUs</h4>
-                         <p>The national focal point (NFP) on access and benefit-sharing is to designate a single publishing authority for the ABSCH. As a national focal point you can also designate yourself as a publishing authority.</p>
-                         <p>The designation of national authorized users can be done at any time by the national focal point or the publishing authority. Each Party can designate as many national authorized users as they wish. For each national authorized user an individual email-address needs to be provided for identification purposes in the database.</p>
-                         <p>Designation can be done online through the ABSCH  or offline through an official written communication addressed to the Executive Secretary of the Convention on Biological Diversity (CBD).</p>
-                          <br>
-                         <p class="bold">Online designation of PAs and NAUs</p>
-                         <p>If you are the national focal point (NFP) on access and benefit-sharing for your country, you can designate the PA and one or more NAUs through the ABSCH. Also, if you are the PA, you can designate the NAUs through the ABSCH</p>
-                          <p>
-                              In order to designate these roles through the ABSCH, you need to log into your CBD account and click on ‘Submit’. Here, you will see a tab for ‘User Management’, where you will find all ABSCH authorized users that have been granted permission to work in the national records for your country. You can select a particular CBD account, and click on edit to assign/ revoke roles (for instance, change the PA or delete a NAU). If a person already holding a CBD account does not appear as an ABSCH authorized user for your country, you can find them by clicking ‘Add Authorized User’. Through this feature, you can search among all CBD accounts using their email addresses, and assign them a PA or NAU role. This feature also allows you to assign roles to someone who does not yet have a CBD account. To do this, click on ‘Add Authorized User’, and enter an email address and other details of the person you wish to include as PA or NAU. The ABSCH will send them an automated email request to activate their account. Once they have activated their CBD account, they can start working on national records.
-                              
+                             <p class="well  bg-white">
+                                 <strong><span class="color-green">Step 3:</span> If needed, designate one or more national authorized users (NAUs)</strong>: 
+                                  The designation of one or more NAUs can be done at any time by the PA or NFP. This designation can be done offline through written commuication to the 
+                                  Secretariat or online through the ABSCH User Management. 
+                                   <br><br>
+                                   <a href="https://absch.cbd.int/register/national-users" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-user" aria-hidden="true"></i> ABSCH User Management (online)</a> 
+                                   &nbsp; | &nbsp;
+                                  <a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-PA-NAU.doc" target="_new" class="color-litegrey link1 dlink"> <i class="fa fa-download" aria-hidden="true"></i>  PA or NAU designation form (offline)</a>
+                             </p>
+                             <div class="well" style="margin-top:20px;">
+                                <h5><i class="fa fa-info-circle" aria-hidden="true"></i> 
+                                   For instructions on the designating national users online please see: <a href="https://www.cbd.int/abs/doc/guides/UserManagement.pdf" target="_new"> Step-by-step guide on User Management in the ABSCH</a> </h5>
+                                 <h5><i class="fa fa-info-circle" aria-hidden="true"></i>  
+                                   For more information on the role and resposibilities of the publishing authority (PA) or a nationally authroized user (NAU) see: <a href="#" scroll-to="about-roles">Roles and resposibilities</a> </h5>
+                             </div>
                           </p>
-                          <br>
-                           <p class="bold">Designating the PAs and NAUs through written communication</p>
-                         <p>
-                             The national focal point (NFP) on access and benefit-sharing is to communicate the designation of the publishing authority for the ABSCH through an official written communication addressed to the Executive Secretary. A form has been prepared for designating the ABSCH publishing authority (PA) and any national authorized users (NAUs).
-                             
-                         </p>
-                          <p>
-                              The designation of national authorized users can be done at any time by the national focal point or the publishing authority. These designations may be sent to the Secretariat by postal mail, fax or as an attachment to an e-mail and must contain the complete contact details and the appropriate endorsements. 
-                          </p>
-                          <a href="http://www.cbd.int/doc/abs/commonformats/ABSCH-PA.doc" >
-                                <i class="glyphicon glyphicon-circle-arrow-down"></i> Download Publishing Authority(PA) and National Authorized User(NAU) nomination form
-                            </a>
-                                               
+                                      
 
                            <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
                       </div>
 
 
                       <div class="about-section"  id="submit-dashboard">   
-                           <h1>Record Management Centre - Dashboard</h1>           
+                           <h1>Your Dashboard</h1>           
                            <p>
-                               Once you have your CBD Account, and been assigned the appropriate role ( in the case of a National User), you may sign-in into the ABSCH and click on “submit information” to access the entry page for all ABSCH submissions called the Record Management Centre. The Record Management Centre is also where you will find access to other pages useful to manage submission process, such as: the Dashboard, the Notification and Request, and the User Management (only available to national users).
+                               Once you have your CBD Account you may sign-in into the ABSCH and click on “submit" from the main navigation bar to access the entry page for all ABSCH submissions called the Record Management Centre.
+                              The Record Management Centre is also where you will find access to other pages useful to manage submission process, such as: the Dashboard, the Notification and Request, and the User Management (only available to national users).
                            </p>
                            <p>
-                                The Dashboard: The first page that will load after clicking on “submit information” is the Dashboard. The Dashboard displays information on your CBD Account and give you an overview of the status (draft, request, or published) of your records on the ABSCH
+                               The Dashboard displays information on your CBD Account and gives you an overview of the status (draft, request, or published) of all your ABSCH records. If you are a national user, you will have 
                            </p>
                            <p>
                                Note: Access to submit reference record is available to all users. The draft reference records are private to you and not share with other users affiliated with your country. National Users, in additional to the having access to submit reference records, will also have share access to view and create national records for their country. Unlike reference records, which are private, draft and published national records are shared with all national users (NAU or PAs).
@@ -745,6 +772,7 @@
                       <div class="about-section"  id="submit-guides">   
                            <h1>Step-by-step guides</h1>           
                            <p>
+                               The Secretariat has prepared Step-By-Step Guides to assist you with creating and managing your CBD account, user management in the ABS Clearing-House, publishing national contacts, national records and reference records. The Step-By-Step Guides on national and reference records will provide you a detailed overview of the common formats, mandatory information, and guidance on filling the forms.
                            </p>
                            <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
                       </div>
@@ -759,12 +787,9 @@
                             </p>
                             <p>
                             Common formats are available online in the submit section of the website and offline in MS word format. 
-                            <br>
-                            <div id="about-cfDownload">Download the offline versions here:</div>
-                            
+                            Offline versions can be downloaded from the links below:
                             </p>
-
-                            <strong class="color-blue">National Records</strong>
+                            <h3 class="color-blue">National Records</h3>
                                 <ul class="list-group">
                                 <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-CON.doc"> National Contact (person or organization)<i class="fa fa-download pull-right"></i></a></li>
                                 <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-CNA.doc"> Competent National Authority<i class="fa fa-download pull-right"></i></a></li>
@@ -778,7 +803,7 @@
                                 <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-NFP.doc"> Designation of ABS National Focal Point<i class="fa fa-download pull-right"></i></a></li>
                                 <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-PA-NAU.doc"> Designation of  Publishing Authority/National Authorised Users<i class="fa fa-download pull-right"></i></a></li>
                                 </ul>
-                            <strong class="color-orange">Reference Records</strong>
+                            <h3 class="color-orange">Reference Records</h3>
                                 <ul class="list-group">
                                 <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-VLR.doc"> Virtual Library Record<i class="fa fa-download pull-right"></i></a></li>
                                 <li class="list-group-item"> <i class="fa fa-file-word-o"></i><a href="http://www.cbd.int/abs/doc/commonformats/ABSCH-CBI.doc">  Capacity-building Initiative<i class="fa fa-download pull-right"></i></a></li>
@@ -788,33 +813,21 @@
                             <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
                         </div>
 
-                      <div class="about-section"  id="submit-dashboard">   
+                      <div class="about-section"  id="submit-notifications">   
                            <h1>User notifications and requests</h1>           
                            <p>
                            </p>
                            <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
                       </div>
 
-                      <div class="about-section"  id="submit-dashboard">   
-                           <h1>User Preferences</h1>           
+                      <div class="about-section"  id="submit-alerts">   
+                           <h1>Email alerts</h1>           
                            <p>
                            </p>
                            <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
                       </div>
-
-                      <div class="about-section"  id="submit-dashboard">   
-                           <h1>National Records</h1>           
-                           <p>
-                           </p>
-                           <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
-                      </div>
-                      <div class="about-section"  id="submit-dashboard">   
-                           <h1>Reference Records</h1>           
-                           <p>
-                           </p>
-                           <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
-                      </div>
-                      <div class="about-section"  id="submit-dashboard">   
+                 
+                      <div class="about-section"  id="submit-examples">   
                            <h1>Submit Information - Examples and FAQs</h1>           
                            <p>
                            </p>
@@ -937,7 +950,7 @@
                       </div>
 
                       <div class="about-section"  id="monitoring-eg">   
-                           <h1>Capacity-building - Examples and FAQs</h1>           
+                           <h1>Monitoring Utilization - Examples and FAQs</h1>           
                            <p>
                            </p>
                            <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
@@ -959,12 +972,12 @@
                                 <br><br>
                                 Parties and others can make use of the API to avoid duplication in the submission of information to the ABSCH and, at the same time, create national or regional information systems that are fully compatible with the ABSCH. This may be particularly useful for domestic information systems containing information on permits or their equivalent or information collected or received to implement <a href="https://www.cbd.int/abs/text/articles/default.shtml?sec=abs-17" target="_new">Article 17</a> of the Protocol. 
                                 <div class="well">
-                                <h5>Documentation for developers on the use of the API is available at: <a href="https://scbd.github.io" target="_new">scbd.github.io</a>. </h5>
+                                <h5><i class="fa fa-info-circle" aria-hidden="true"></i> Documentation for developers on the use of the API is available at: <a href="https://scbd.github.io" target="_new">scbd.github.io</a>. </h5>
                                 
-                                <h5>Example and sample code is available at: <a href="https://github.com/scbd/api-examples" target="_new">github.com/scbd/api-examples</a>. </h5>
+                                <h5><i class="fa fa-info-circle" aria-hidden="true"></i> Examples and sample code is available at: <a href="https://github.com/scbd/api-examples" target="_new">github.com/scbd/api-examples</a>. </h5>
                             
-                                 Please note that improvement to and the expansion of the API documentation, examples, and sample code is currently in progress. 
-                                 <strong>Need help or have questions? </strong> For more information on how to use the ABSCH's API in your information system please contact the Secretariat at: <a href="mailto:absch@cbd.int" target="_new">absch@cbd.int</a>.
+                                 <i class="fa fa-info-circle" aria-hidden="true"></i>  Please note the API documentation, examples, and sample code is currently in progress and is updated regularly. 
+                                 For more information on how to use the ABSCH's API please contact the Secretariat at: <a href="mailto:absch@cbd.int" target="_new">absch@cbd.int</a>.
                                 </div>
                            </p>
                
@@ -990,49 +1003,46 @@
 
 
                     <div class="about-section"  id="cb">   
-                        <h1>Introduction to capacity-building for the ABS Clearing-House (ABSCH)</h1>
-                        <p>
-                        The ABSCH is a central component of the Protocol under the responsibility of the CBD Secretariat. 
-                        Parties to the Protocol have the obligation to make information available to the ABSCH and therefore there is a need ensure that all Parties have the capacity and are aware of the importance of publishing the required information in the ABSCH.  
-                        In this regard, the Secretariat plays an important role building the capacity of Parties, in particular, as well as other stakeholders, to publish information and to use the ABSCH as a tool to implement the Protocol. 
+                        <h1>Capacity-building for the ABS Clearing-House (ABSCH)</h1>
+                       <p>
+                        Parties to the Protocol have the obligation to make information available to the ABSCH and therefore there is a need ensure that all Parties 
+                        are aware of the importance of and have the capacity to use the ABSCH.
+                        Since the ABSCH is a central component of the Nagoya Protocol under the responsibility of the CBD Secretariat.  
+                        The Secretariat also plays an important role building the capacity of Parties, in particular, as well as other stakeholders, 
+                        to publish information and to use the ABSCH as a tool to implement the Protocol. 
                         <br><br>
-                        The Secretariat has been able to provide technical support and capacity-building for the use of the ABSCH thanks to
+                         The Secretariat has been able to provide technical support and capacity-building for the use of the ABSCH thanks to
                          the generous support of the Japan Biodiversity Fund and the European Union.
                         </p>
-                         <div class="well">
-                                <strong>Need help or have questions? </strong> Help using the ABSCH is always available and Secretariat is happy to help resolve any technical difficulties, answer questions or receive feedback related to the use of the ABSCH. 
-                                You can contact the ABSCH help desk via Skype (Skype name: abs-ch) or e-mail at absch@cbd.int or by using the live chat installed on the ABSCH website.
-                        </div>
                         <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
                     </div>  
 
                     <div class="about-section"  id="cb-helpdesk">   
-                    <h1>ABSCH help desk</h1>
+                    <h1>Help desk</h1>
                     <p>
                         
                     </p>
                     <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
                     </div>  
 
+                    <div class="about-section"  id="cb-outreach">   
+                    <h1>Outreach and engagement campaign</h1>
+                    <p>
+                        
+                    </p>
+                    <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
+                    </div> 
+
                     <div class="about-section"  id="cb-training">   
                     <h1>Training and workshops</h1>
-                    <p>
-                        
-                    </p>
-                    <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
-                    </div> 
-
-                    <div class="about-section"  id="cb-faqs">   
-                    <h1>Related FAQs</h1>
-                    <p>
-                        
-                    </p>
+                     
                     <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
                     </div> 
 
 
-                     <div class="about-section"  id="about-contact" style="margin-bottom:693px;">   
-                    <h1>Contact Us</h1>   
+
+                    <div class="about-section"  id="about-contact" style="margin-bottom:693px;">   
+                    <h1>Need Help? Contact Us</h1>   
                     <div class="row">
                         <div class="col-md-6">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.405203808206!2d-73.56230188405428!3d45.5019211389461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91a5a2bfa0705%3A0xa17357fa5e55d6ad!2sSecretariat+of+the+Convention+on+Biological+Diversity!5e0!3m2!1sen!2sca!4v1480355468112" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
@@ -1050,8 +1060,14 @@
                             <p>
                                 The CBD Secretariat is responsible for the development and administration of the ABSCH. 
                                 <br><br><strong class="color-green"> Need help or have questions? </strong> We are happy to provide technical support, answer questions, and receive feedback on the use of the ABSCH.  
-                                A live chat help desk service has been installed on the website to allow immediate interaction with Secretariat staff for technical support and guidance (available 9am to 5pm EST).
+                                
                             </p>
+                        </div>
+                        <div class="clearfix"/>
+                        <div class="col-xs-12" style="margin-top:20px;">
+                            A live chat help desk service has been installed on the website to allow immediate interaction with Secretariat staff for technical support and guidance (available 9am to 5pm EST).
+                            <br>
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/yiASMdKJY8A" frameborder="0" allowfullscreen></iframe>
                         </div>
                     </div>
                     <a translation-url  scroll-to="top" class="color-green pull-right" href="#"><i class="fa fa-arrow-circle-up color-blue fa-2x"></i></a>
