@@ -11,7 +11,7 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
         angular.defineModules(dependencies);
         var app = angular.module('app', dependencies);
 
-        app.config(["LogglyLoggerProvider", "realmProvider", function (LogglyLoggerProvider, realm) {
+        app.config(["LogglyLoggerProvider", "realmProvider", 'gravatarServiceProvider', function (LogglyLoggerProvider, realm, gravatarServiceProvider) {
 
             LogglyLoggerProvider
                 .includeUrl(true)
@@ -19,6 +19,9 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
                 .includeTimestamp(true)
                 .sendConsoleErrors(true)
                 .endpoint('/api/v2016/error-logs');
+
+            gravatarServiceProvider.defaults = {size     : 100,"default": 'mm' };
+            
         }]);
 
         app.config(function(toastrConfig) {
