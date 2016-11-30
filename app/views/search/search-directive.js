@@ -262,12 +262,16 @@ define(['app', 'underscore', '/app/js/common.js',
                                         $scope.rawDocs = data.data.grouped.government_s;
                                         //$scope.rawDocs = _.union($scope.rawDocs||{}, data.data.grouped.government_s);
                                     else {
+                                        if(data.data.grouped.government_s.matches!= $scope.recordCount[0].count)
+                                            $scope.recordCount[0].count = data.data.grouped.government_s.matches;
+
                                         _.each(data.data.grouped.government_s.groups, function(record){
                                             $scope.rawDocs.groups.push(record);
                                         });
                                     }
 
                                 }).catch(function(error) {
+                                    nationalCurrentPage -= 1;
                                     console.log('ERROR: ' + error);
                                 })
                                 .finally(function(){
@@ -315,11 +319,14 @@ define(['app', 'underscore', '/app/js/common.js',
                                 if(!$scope.refDocs || ($scope.refDocs.docs||[]).length == 0)
                                     $scope.refDocs = data.data.response;
                                 else {
+                                    if(data.data.response.numFound!= $scope.recordCount[1].count)
+                                       $scope.recordCount[1].count = data.data.response.numFound;
                                     _.each(data.data.response.docs, function(record){
                                         $scope.refDocs.docs.push(record);
                                     });
                                 }
                             }).catch(function(error) {
+                                referenceCurrentPage -= 1;
                                 console.log('ERROR: ' + error);
                             })
                             .finally(function(){
@@ -363,11 +370,14 @@ define(['app', 'underscore', '/app/js/common.js',
                                 if(!$scope.scbdDocs || ($scope.scbdDocs.docs||[]).length == 0)
                                     $scope.scbdDocs = data.data.response;
                                 else {
+                                     if(data.data.response.numFound!= $scope.recordCount[1].count)
+                                       $scope.recordCount[2].count = data.data.response.numFound;
                                     _.each(data.data.response.docs, function(record){
                                         $scope.scbdDocs.docs.push(record);
                                     });
                                 }
                             }).catch(function(error) {
+                                scbdCurrentPage -= 1;
                                 console.log('ERROR: ' + error);
                             })
                             .finally(function(){
@@ -1040,8 +1050,9 @@ define(['app', 'underscore', '/app/js/common.js',
                         if($scope.currentTab == 'nationalRecords'){
                             var documents = _.pluck($scope.rawDocs.groups, 'doclist');
                             var docCount = getRecordCount(documents);
-
-                            if($scope.nationalLoading || !$scope.recordCount || docCount == $scope.recordCount[0].count)
+                            
+                            //nationalCurrentPage cannot be more than 200 as No. parties are 196 to CBD
+                            if(nationalCurrentPage > 200 || $scope.nationalLoading || !$scope.recordCount || docCount == $scope.recordCount[0].count)
                                 return;
 
                             $scope.nationalLoading = true;
@@ -1049,15 +1060,16 @@ define(['app', 'underscore', '/app/js/common.js',
                             nationalQuery();
                         }
                         else if($scope.currentTab == 'referenceRecords'){
-                            if($scope.referenceLoading || !$scope.recordCount || ($scope.refDocs.docs||[]).length == $scope.recordCount[1].count)
+                            if(referenceCurrentPage > 1000 && $scope.referenceLoading || !$scope.recordCount || ($scope.refDocs.docs||[]).length == $scope.recordCount[1].count)
                                 return;
                             $scope.referenceLoading = true;
                             referenceCurrentPage += 1;
                             referenceQuery();
                         }
                         else if($scope.currentTab == 'scbdRecords'){
-                            if($scope.scbdLoading || !$scope.recordCount || ($scope.scbdDocs.docs||[]).length == $scope.recordCount[2].count)
+                            if(referenceCurrentPage > 1000 && $scope.scbdLoading || !$scope.recordCount || ($scope.scbdDocs.docs||[]).length == $scope.recordCount[2].count)
                                 return;
+
                             $scope.scbdLoading = true;
                             scbdCurrentPage += 1;
                             scbdQuery();
