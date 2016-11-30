@@ -430,30 +430,30 @@ define(['app',
     //
     //=======================================================================
     function clickMapObject(mapId, mapObject) {
-
-      mapCtrls[mapId].getMap().clickMapObject(mapObject);
+      if(mapCtrls[mapId])
+        mapCtrls[mapId].getMap().clickMapObject(mapObject);
     } // closePopovers
     //=======================================================================
     //
     //=======================================================================
     function selectObject(mapId, mapObject) {
-
-      mapCtrls[mapId].getMap().selectObject(mapObject);
+      if(mapCtrls[mapId])
+        mapCtrls[mapId].getMap().selectObject(mapObject);
     } // closePopovers
     //=======================================================================
     //
     //=======================================================================
     function getMapObject(mapId, objId) {
-
-      return mapCtrls[mapId].getMapObject(objId);
+      if(mapCtrls[mapId])
+        return mapCtrls[mapId].getMapObject(objId);
 
     } // closePopovers
     //=======================================================================
     //
     //=======================================================================
     function validateData(mapId) {
-
-      return mapCtrls[mapId] && mapCtrls[mapId].getMap().validateData();
+      if(mapCtrls[mapId])
+        return mapCtrls[mapId].getMap().validateData();
 
     } // closePopovers
     //=======================================================================
