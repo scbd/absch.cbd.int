@@ -12,8 +12,8 @@ define(['text!./ammap3.html', 'app', 'lodash',
 ], function(template, app, _) {
   'use strict';
 
-  app.directive('ammap3', ['$timeout', '$http', 'locale', 'ammap3Service', 'mapData', '$interpolate', '$filter',
-   function($timeout, $http, locale, ammap3Service, mapDataService, $interpolate, $filter) {
+  app.directive('ammap3', ['$timeout', '$http', 'locale', 'ammap3Service', 'mapData', '$interpolate', '$filter', 'localeService',
+   function($timeout, $http, locale, ammap3Service, mapDataService, $interpolate, $filter, localeService) {
     return {
       restrict: 'E',
       template: template,
@@ -214,7 +214,7 @@ define(['text!./ammap3.html', 'app', 'lodash',
           image.scbdData.codeLower = image.scbdData.code.toLowerCase();
 
           image.scbdData.translationUrl = '';
-          if(locale){
+          if(locale && (locale != 'en' || localeService.urlHasLocale())){
             image.scbdData.translationUrl = '/' + locale;
           }
           popoverTemplateParsed = $interpolate($scope.map.scbdConfig.popOverTemplate)(image.scbdData);

@@ -44,13 +44,15 @@ require.config({
         'socket.io'                 : 'libs/socket.io-1.4.5/index',
         'ngInfiniteScroll'          : 'libs/ngInfiniteScroll/build/ng-infinite-scroll',
         'angular-loggly-logger'     : 'libs/angular-loggly-logger/angular-loggly-logger',
-        'xlsx-core'                 : 'libs/js-xlsx/dist/xlsx.core.min',
-        'xlsx'                      : 'libs/js-xlsx/dist/xlsx',
-        'file-saver'                : 'libs/file-saver.js/FileSaver',
-        'tableexport'               : 'libs/tableexport.js/dist/js/tableexport.min',
+        'xlsx-js'                   : 'components/table-export/xlsx-js.min',
+        'file-saverjs'              : 'components/table-export/file-saverjs.min',
+        'tableexport'               : 'components/table-export/tableexport.min',
+        'blobjs'                    : 'components/table-export/blobjs.min',
+        'jzip'                      : 'components/table-export/jzip.min',
         'angular-gravatar'          : 'libs/angular-gravatar/build/angular-gravatar',
         'angular-google-analytics'  : 'libs/angulartics-google-analytics/dist/angulartics-ga.min',
-        'angular-angulartics'       : 'libs/angulartics/dist/angulartics.min'
+        'angular-angulartics'       : 'libs/angulartics/dist/angulartics.min',
+        'webui-popover'             : 'libs/webui-popover/dist/jquery.webui-popover.min'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -86,8 +88,9 @@ require.config({
         'file-saver'                    : { 'deps': ['jquery'] },
         'tableexport'                   : { 'deps': ['jquery'] },
         'angular-gravatar'              : { 'deps': ['angular']}, 
-        'angular-angulartics'             : { 'deps': ['angular']} ,
-        'angular-google-analytics'      : { 'deps': ['angular', 'angular-angulartics']}
+        'angular-angulartics'           : { 'deps': ['angular']} ,
+        'angular-google-analytics'      : { 'deps': ['angular', 'angular-angulartics']},
+        'webui-popover'                 : { 'deps': ['jquery', 'css!libs/webui-popover/dist/jquery.webui-popover.min']}
     },
     packages: [
         { name: 'scbd-branding'          , location : 'components/scbd-branding' },

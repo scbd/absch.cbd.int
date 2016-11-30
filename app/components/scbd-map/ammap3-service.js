@@ -6,7 +6,10 @@ define(['app',
 ], function(app, _, defaultPinPopOver) {
   'use strict';
 
-  app.factory('ammap3Service', ["locale", "$q", "longLatServ", "mapData", function(locale, $q, longLatServ, mapData) {
+
+  app.factory('ammap3Service', ["locale", "$q", "longLatServ", "mapData",  function(locale, $q, longLatServ, mapData) {
+
+    var timeouts = [];
 
     var countries = null;
     var mapObject = {};
@@ -158,14 +161,15 @@ define(['app',
         }
 
       }, 0);
+      timeouts.push(cancelId)
 
+     var timeout = setTimeout(function() {
+                    clearInterval(cancelId);
+                    if (mapId && mapCtrls[mapId] && !(mapCtrls[mapId].getMap() && countries))
+                      throw ('Error: no controller or map initialazed on mapID:' + mapId + ' or no country data loaded');
 
-      setTimeout(function() {
-        clearInterval(cancelId);
-        if (!(mapCtrls[mapId].getMap() && countries))
-          throw ('Error: no controller or map initialazed on mapID:' + mapId + ' or no country data loaded');
-
-      }, 7000);
+                  }, 7000);
+      timeouts.push(timeout);
       return deferred.promise;
     }
 
@@ -193,6 +197,7 @@ define(['app',
       var deferred = $q.defer();
       deferred.resolved = 0;
 
+      ///TODO : switch to angular-$timeout
       var cancelId = setInterval(function() {
         if (countries) {
 
@@ -202,12 +207,15 @@ define(['app',
           return deferred.promise;
         }
       }, 100);
-      setTimeout(function() {
-        if (!deferred.resolved) {
-          deferred.reject('Receiving country data timed out.');
-          clearInterval(cancelId);
-        }
-      }, 7000);
+
+      timeouts.push(cancelId);
+      var timeout = setTimeout(function() {
+                      if (!deferred.resolved) {
+                        deferred.reject('Receiving country data timed out.');
+                        clearInterval(cancelId);
+                      }
+                    }, 7000);      
+      timeouts.push(timeout);
       return deferred.promise;
     }
 
@@ -216,19 +224,21 @@ define(['app',
     //=======================================================================
     function setGlobalClickListener(mapId, onClickToDo) {
 
+    ///TODO : switch to angular-$timeout
       var cancelId = setInterval(function() {
-        if (mapCtrls[mapId].getMap()) {
+        if (mapId && mapCtrls[mapId] && mapCtrls[mapId].getMap()) {
           clearInterval(cancelId);
           return mapCtrls[mapId].getMap().addListener("click", onClickToDo);
         }
       }, 500);
+      timeouts.push(cancelId);
+      var timeout = setTimeout(function() {
+                      clearInterval(cancelId);
+                      if (mapId && mapCtrls[mapId] && !mapCtrls[mapId].getMap())
+                        throw (' setGlobalClickListener Error: no controller or map initialized on mapID:' + mapId);
 
-      setTimeout(function() {
-        clearInterval(cancelId);
-        if (!mapCtrls[mapId].getMap())
-          throw (' setGlobalClickListener Error: no controller or map initialazed on mapID:' + mapId);
-
-      }, 7000);
+                    }, 7000);      
+      timeouts.push(timeout);  
     } //setGlobalClickListener
 
     //=======================================================================
@@ -236,8 +246,9 @@ define(['app',
     //=======================================================================
     function setCountryClickListener(mapId, onClickToDo) {
 
+    ///TODO : switch to angular-$timeout
       var cancelId = setInterval(function() {
-        if (mapCtrls[mapId].getMap()) {
+        if (mapId && mapCtrls[mapId] && mapCtrls[mapId].getMap()) {
           clearInterval(cancelId);
           // console.log(mapCtrls[mapId].getMap());
           return mapCtrls[mapId].getMap().addListener("clickMapObject", onClickToDo);
@@ -246,7 +257,7 @@ define(['app',
 
       setTimeout(function() {
         clearInterval(cancelId);
-        if (!mapCtrls[mapId].getMap())
+        if (mapId && mapCtrls[mapId] && !mapCtrls[mapId].getMap())
           throw ('setGlobalClickListener:Error: no controller or map initialazed on mapID:' + mapId);
 
       }, 7000);
@@ -260,8 +271,9 @@ define(['app',
       var deferred = $q.defer();
       deferred.resolved = 0;
 
+      ///TODO : switch to angular-$timeout
       var cancelId = setInterval(function() {
-        if (mapCtrls[mapId] && mapCtrls[mapId].getMap()) {
+        if (mapId && mapCtrls[mapId] && mapCtrls[mapId].getMap()) {
 
           deferred.resolve(mapCtrls[mapId].getMap());
           deferred.resolved = 1;
@@ -269,12 +281,15 @@ define(['app',
           return deferred.promise;
         }
       }, 100);
-      setTimeout(function() {
-        if (!deferred.resolved) {
-          deferred.reject('Map is not loaded within 7 seconds.');
-          clearInterval(cancelId);
-        }
-      }, 7000);
+      timeouts.push(cancelId);
+      var timeout = setTimeout(function() {
+                      if (!deferred.resolved) {
+                        deferred.reject('Map is not loaded within 7 seconds.');
+                        clearInterval(cancelId);
+                      }
+                    }, 7000);      
+      timeouts.push(timeout);
+
       return deferred.promise;
     }
     //=======================================================================
@@ -284,8 +299,9 @@ define(['app',
       var deferred = $q.defer();
       deferred.resolved = 0;
 
+      ///TODO : switch to angular-$timeout
       var cancelId = setInterval(function() {
-        if (mapCtrls[mapId]) {
+        if (mapId && mapCtrls[mapId]) {
 
           deferred.resolve(mapCtrls[mapId]);
           deferred.resolved = 1;
@@ -293,12 +309,14 @@ define(['app',
           return deferred.promise;
         }
       }, 100);
-      setTimeout(function() {
-        if (!deferred.resolved) {
-          deferred.reject('Map Controler is not loaded within 7 seconds.');
-          clearInterval(cancelId);
-        }
-      }, 7000);
+      timeouts.push(cancelId);
+      var timeout = setTimeout(function() {
+                      if (!deferred.resolved) {
+                        deferred.reject('Map Controler is not loaded within 7 seconds.');
+                        clearInterval(cancelId);
+                      }
+                    }, 7000);
+      timeouts.push(timeout);
       return deferred.promise;
     }
     //=======================================================================
@@ -328,8 +346,8 @@ define(['app',
     //'invisi-pixel''
     //=======================================================================
     function setPinPopOver(mapId, template) {
-      if (!mapId) throw "setPinPopover Error: trying to run setPinPopover without specifiing a map instance with mapId";
-      //if(!template) throw "setPinPopover Error: trying to run setPinPopover without specifiing a popover html template";
+      if (!mapId) throw "setPinPopover Error: trying to run setPinPopover without specifying a map instance with mapId";
+      //if(!template) throw "setPinPopover Error: trying to run setPinPopover without specifying a popover html template";
 
       whenMapLoaded(mapId).then(
         function(mapInstance) {
@@ -374,11 +392,7 @@ define(['app',
     //=======================================================================
     function openCountryPopup(mapId, cCode) {
       var image = _.find(mapCtrls[mapId].getMap().dataProvider.images, function(img) {
-
-          if(img.scbdData && _.contains(img.scbdData.exceptionRegion, cCode)){
-              console.log(img.scbdData);
-          }
-
+         
         if (img.scbdData && (img.scbdData.code === cCode ||
             (exceptionRegionMapping[cCode] &&  _.contains(img.scbdData.exceptionRegion, cCode) &&
              img.scbdData.code === exceptionRegionMapping[cCode])))
@@ -416,30 +430,30 @@ define(['app',
     //
     //=======================================================================
     function clickMapObject(mapId, mapObject) {
-
-      mapCtrls[mapId].getMap().clickMapObject(mapObject);
+      if(mapCtrls[mapId])
+        mapCtrls[mapId].getMap().clickMapObject(mapObject);
     } // closePopovers
     //=======================================================================
     //
     //=======================================================================
     function selectObject(mapId, mapObject) {
-
-      mapCtrls[mapId].getMap().selectObject(mapObject);
+      if(mapCtrls[mapId])
+        mapCtrls[mapId].getMap().selectObject(mapObject);
     } // closePopovers
     //=======================================================================
     //
     //=======================================================================
     function getMapObject(mapId, objId) {
-
-      return mapCtrls[mapId].getMapObject(objId);
+      if(mapCtrls[mapId])
+        return mapCtrls[mapId].getMapObject(objId);
 
     } // closePopovers
     //=======================================================================
     //
     //=======================================================================
     function validateData(mapId) {
-
-      return mapCtrls[mapId].getMap().validateData();
+      if(mapCtrls[mapId])
+        return mapCtrls[mapId].getMap().validateData();
 
     } // closePopovers
     //=======================================================================
@@ -451,7 +465,6 @@ define(['app',
 
       whenMapCtrlLoaded(mapId).then(
         function(ctrl) {
-          console.log(ctrl);
           ctrl.zoomToMapArea(areaId);
         },
         function() {
@@ -464,12 +477,14 @@ define(['app',
     //
     //=======================================================================
     function eachCountry(mapId, callBack) {
-      _.each(mapCtrls[mapId].getMap().dataProvider.areas, function(area) {
-        if (area.id.length === 2) {
-          callBack(area);
+      if(mapCtrls[mapId]){
+        _.each(mapCtrls[mapId].getMap().dataProvider.areas, function(area) {
+          if (area.id.length === 2) {
+            callBack(area);
 
-        }
-      });
+          }
+        });
+      }
 
     } // closePopovers
     //=======================================================================
@@ -493,7 +508,8 @@ define(['app',
     } // randomCountry
 
     function clear(mapId){
-        mapCtrls[mapId].getMap().clearMap();
+       if(mapCtrls[mapId])
+          mapCtrls[mapId].getMap().clearMap();
 
         countries = null;
         mapObject = {};
@@ -504,6 +520,8 @@ define(['app',
 
         pinPopOverLibrary = [];
         pinPopOverLibrary['default'] = defaultPinPopOver;
+
+        _.map(timeouts, function(timeout){clearTimeout(timeout);})
     }
 
     return {
