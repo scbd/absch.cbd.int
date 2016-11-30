@@ -14,12 +14,13 @@ define(['app', 'webui-popover'], function(app) {
                 var settings = {
                         trigger:'click',
                         title:'ABS-CH Help',		
-                        closeable:false,
+                        closeable:true,
                         delay:0,
                         padding:true,
                         backdrop:false,
-                        height:'15%',
-                        width:'25%',
+                        style:'popover-style1',
+                        width:500,
+                        height:300,
                 };
 
                 if($scope.type == 'faq'){
@@ -39,12 +40,11 @@ define(['app', 'webui-popover'], function(app) {
                             .webuiPopover($.extend({}, settings, asyncSettings));
                 }
                 else if($scope.type == 'video'){
-                    var iframeSettings = {	width:500,
-                                                    height:350,
-                                                    closeable:true,
-                                                    padding:false,
-                                                    type:'iframe',
-                                                    url:'https://www.youtube.com/embed/' + $scope.source};					
+                    var iframeSettings = {	
+                                            closeable:true,
+                                            padding:false,
+                                            type:'iframe',
+                                            url:'https://www.youtube.com/embed/' + $scope.source};					
                     $element.find('a.show-pop')
                             .webuiPopover('destroy')
                             .webuiPopover($.extend({}, settings, iframeSettings));
