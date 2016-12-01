@@ -108,7 +108,10 @@
         document.getElementById('authenticationFrame').src = 'https://accounts.'+domain+'/app/authorize.html';
 
     </script>
-
+    <div class="alert alert-info alert-dismissible" ng-if="lang!='en'" style="margin-bottom:1px">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+         <strong>Please note that the translation of the ABS Clearing-House is in progress.</strong>
+    </div>
     <scbd-header></scbd-header>
     <portal-branding></portal-branding>
     <portal-nav></portal-nav>
