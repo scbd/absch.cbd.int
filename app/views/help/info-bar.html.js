@@ -5,22 +5,26 @@ define(['app', 'webui-popover'], function(app) {
             restrict: 'EA',
             replace: true,
             templateUrl : '/app/views/help/info-bar.html',
+            transclude: true,
             scope: { 
                 type    : '@',
-                source   : '@'               
+                source   : '@',
+                icon   : '@',
+                width: '@', 
+                height: '@'                  
             },
             link: function($scope, $element, attrs) {               
            
                 var settings = {
                         trigger:'click',
-                        title:'ABS-CH Help',		
+                        title:'ABSCH Help',		
                         closeable:true,
                         delay:0,
                         padding:true,
                         backdrop:false,
                         style:'popover-style1',
-                        width:500,
-                        height:300,
+                        width: $scope.width || 600,
+                        height: $scope.height || 300,
                 };
 
                 if($scope.type == 'faq'){
