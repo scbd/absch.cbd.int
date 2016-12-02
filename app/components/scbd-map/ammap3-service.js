@@ -404,7 +404,8 @@ define(['app',
         console.log('Country missing popover information:', cCode)
         return;
       };
-      mapCtrls[mapId].closePopovers();
+      if(mapCtrls[mapId])
+        mapCtrls[mapId].closePopovers();
       //console.log('X',mapCtrls[mapId].getMap().moveDown());
       if (image.externalElement)
         setTimeout(function() {
@@ -414,7 +415,8 @@ define(['app',
         console.log('Country missing popover information:', cCode);
 
       setTimeout(function() {
-        mapCtrls[mapId].getMap().moveUp();
+        if(mapCtrls[mapId])
+          mapCtrls[mapId].getMap().moveUp();
       }, 100);
 
     } // setPinImage
@@ -423,8 +425,8 @@ define(['app',
     //
     //=======================================================================
     function closePopovers(mapId) {
-
-      mapCtrls[mapId].closePopovers();
+      if(mapCtrls[mapId])
+        mapCtrls[mapId].closePopovers();
     } // closePopovers
     //=======================================================================
     //
