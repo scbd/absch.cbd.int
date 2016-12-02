@@ -1,9 +1,10 @@
 define(['app', '/app/js/common.js',
     '/app/views/forms/view/record-loader.directive.html.js',
     '/app/views/register/directives/register-top-menu.js', 'ngDialog'
+    , 'scbd-angularjs-services/generic-service'
 ], function (app) {
-    app.controller('adminReportedRecordsCtrl', ['$scope', '$http', '$timeout', '$element', 'ngDialog', '$routeParams',
-        function ($scope, $http, $timeout, $element, ngDialog, $routeParams) {
+    app.controller('adminReportedRecordsCtrl', ['$scope', '$http', '$timeout', '$element', 'ngDialog', '$routeParams', 'IGenericService','realm', '$q',
+        function ($scope, $http, $timeout, $element, ngDialog, $routeParams, IGenericService, realm, $q) {
             
             $scope.api = {};
             var recordId='';
@@ -11,17 +12,23 @@ define(['app', '/app/js/common.js',
                 recordId = '/' + $routeParams.id;
             }
 
-            $http.get('/api/v2015/report-records' + recordId)
-                .then(function (data) {
-                    if($routeParams.id){
-                        var record = data.data;
-                        record.showDoc = true;
-                        $scope.loadDocumentDetails(record.showDoc, record)
-                        $scope.reportRecords = [record];                        
-                    }
-                    else
-                        $scope.reportRecords = data.data
-                });
+            var operation 
+            if(recordId)
+                operation = IGenericService.get('v2015', 'report-records', recordId);
+            else
+                operation = IGenericService.query('v2015', 'report-records', {realm: realm.value});
+
+            $q.when(operation)
+              .then(function (data) {
+                if($routeParams.id){
+                    var record = data;
+                    record.showDoc = true;
+                    $scope.loadDocumentDetails(record.showDoc, record)
+                    $scope.reportRecords = [record];                        
+                }
+                else
+                    $scope.reportRecords = data
+            });
 
             
             $scope.loadDocumentDetails = function (showDoc, record) {
