@@ -12,8 +12,8 @@ define(['app', 'underscore', './block-region-directive.js' ], function (app, _) 
                         link: ['$scope', '$q', '$element', function ($scope, $q, $element) {
 
                         }]
-                        , controller: ['$scope','$rootScope', '$q','$element','$http', '$filter', 'toastr', '$timeout',
-                                function ($scope, $rootScope, $q, $element, $http, $filter, toastr, $timeout) {
+                        , controller: ['$scope','$rootScope', '$q','$element','$http', '$filter', 'toastr', '$timeout', 'realm',
+                                function ($scope, $rootScope, $q, $element, $http, $filter, toastr, $timeout, realm) {
 
                                 $scope.showReport = true;
                                 function init(){
@@ -25,6 +25,7 @@ define(['app', 'underscore', './block-region-directive.js' ], function (app, _) 
                                 $scope.submitReport = function(report){
                                     report.schema = $scope.schema;
                                     report.identifier = $scope.uid;
+                                    report.realm     = realm.value;
                                     $scope.loading = true;
                                     $http.post('/api/v2015/report-records', report)
                                     .then(function(data){

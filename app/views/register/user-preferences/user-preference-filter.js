@@ -29,6 +29,8 @@ define(['app', 'underscore', 'ngDialog',
                         var query = {};
                         if($scope.collectionFilter)
                             query = JSON.parse($scope.collectionFilter);
+                            
+                        query.realm  = realm.value;
                         IGenericService.query('v2016', 'me/' + $scope.collection, query)
                         .then(function (data) {
                             $scope.userFilters = data
@@ -54,28 +56,6 @@ define(['app', 'underscore', 'ngDialog',
                     $scope.loading = false;     
                 }
                 
-                // $scope.deleteFilter = function(evt, record){
-
-                //     evt.stopPropagation();
-                //     ngDialog.open({
-                //                     className : 'ngdialog-theme-default wide',
-                //                     template : 'confirmDeleteDialog',
-                //                     controller : ['$scope', '$http', function($scope, $http){
-                                            
-                //                             $scope.record = record;
-
-                                            
-                //                             $scope.closeDialog = function(){
-                //                                 ngDialog.close();                                            
-                //                             }
-
-                //                     }]
-                //                 })
-                //     function removeRecord(){
-                       
-                //     }
-                //}
-
                 $scope.addEdit = function(existingFilter){
                     if($rootScope.user && !$rootScope.user.isAuthenticated){
                         var signIn = $scope.$on('signIn', function(evt, data){
