@@ -1,4 +1,4 @@
-define(['text!./ammap3.html', 'app', 'lodash',
+define(['text!./ammap3.html', 'text!./default-template.html','app', 'lodash',
   'css!./ammap3',
   'css!/app/libs/flag-icon-css/css/flag-icon.min.css',
   'ammap',
@@ -9,7 +9,7 @@ define(['text!./ammap3.html', 'app', 'lodash',
   './ammap3-service',
   './map-data',
   'scbd-angularjs-filters',
-], function(template, app, _) {
+], function(template, defaultTemplate, app, _) {
   'use strict';
 
   app.directive('ammap3', ['$timeout', '$http', 'locale', 'ammap3Service', 'mapData', '$interpolate', '$filter', 'localeService',
@@ -217,13 +217,17 @@ define(['text!./ammap3.html', 'app', 'lodash',
           if(locale && (locale != 'en' || localeService.urlHasLocale())){
             image.scbdData.translationUrl = '/' + locale;
           }
-          popoverTemplateParsed = $interpolate($scope.map.scbdConfig.popOverTemplate)(image.scbdData);
+         var template = defaultTemplate
+          if($scope.map && $scope.map.scbdConfig && $scope.map.scbdConfig.popOverTemplate)
+            template = $scope.map.scbdConfig.popOverTemplate;
+
+          popoverTemplateParsed = $interpolate(template)(image.scbdData);
 
           return {
             html: true,
             trigger: 'click',
             placement: 'top',
-            title: $scope.map.scbdConfig.popOverTemplateTitle,
+            title: ($scope.map.scbdConfig||{}).popOverTemplateTitle,
             template: popoverTemplateParsed,
           };
         } //$scope.legendHide
