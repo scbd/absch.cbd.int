@@ -9,7 +9,7 @@ define(['app', 'underscore', 'scbd-angularjs-services/generic-service', '/app/js
                 var filterQuery = {
                     $and: [                        
                         { "realm": realm.value },
-                        // { createdOn: { "$gte": moment().subtract(12, "weeks").toISOString() } }
+                        { timestamp: { "$gte": moment().subtract(1, "weeks").toISOString() } }
                     ]
                 };
                 
@@ -46,10 +46,10 @@ define(['app', 'underscore', 'scbd-angularjs-services/generic-service', '/app/js
                                     { realm: realm.value }
                                   ]
                     if($scope.filters.endDate)
-                        queries.push({ createdOn: { "$lte": moment(moment($scope.filters.endDate).format("YYYY-MM-DD")).toISOString() } })
+                        queries.push({ timestamp: { "$lte": moment(moment($scope.filters.endDate).format("YYYY-MM-DD")).toISOString() } })
                     
                     if($scope.filters.startDate)
-                        queries.push({ createdOn: { "$gte": moment(moment($scope.filters.startDate).format("YYYY-MM-DD")).toISOString() } })
+                        queries.push({ timestamp: { "$gte": moment(moment($scope.filters.startDate).format("YYYY-MM-DD")).toISOString() } })
                     
                     filterQuery.$and = queries;
                     
