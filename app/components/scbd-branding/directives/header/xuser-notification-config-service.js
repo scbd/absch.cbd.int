@@ -4,7 +4,7 @@ define(['app', 'lodash', 'moment'],
         app.service("cfgUserNotification", ['$location', '$window', '$filter', function ($location, $window, $filter) {
 
             var notificationUrls = {
-                documentAlertUrl        : 'database/record?documentID=',
+                documentAlertUrl        : '/database/record?documentID=',
                 documentNotificationUrl: '/register/requests/',
                 viewAllNotificationUrl: '/register/requests',
                 documentMessageUrl: '/mailbox/'
