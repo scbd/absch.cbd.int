@@ -108,6 +108,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/register/admin/reported-records/:id',     { templateUrl: '/app/views/register/admin/reported-records.html',   label:'Record',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                when('/register/admin/report-counts',            { templateUrl: '/app/views/register/admin/report-count.html',       label:'Report Counts',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                when('/register/admin/error-logs',               { templateUrl: '/app/views/register/admin/error-logs.html',         label:'Error Logs',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+               when('/register/admin/subscriptions',            { templateUrl: '/app/views/register/admin/subscriptions.html',      label:'Subscriptions',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
 
                when('/workshops/lac',               { templateUrl: '/app/views/workshops/lac.html',            label:'Workshops',            resolveController: true, resolveUser: true}).
                when('/workshops/caribbean',         { templateUrl: '/app/views/workshops/caribbean.html',      label:'Workshops',        resolveController: true, resolveUser: true}).
