@@ -39,7 +39,7 @@ define(['app', 'lodash'], function(app, _) {
           "enabled": true
         },
         "dataProvider": {
-          "map": "worldEUHigh",
+          "map": "worldEULow",
           "getAreasFromMap": true,
         },
         "areasSettings": {
