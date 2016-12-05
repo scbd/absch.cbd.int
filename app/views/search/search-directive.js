@@ -27,6 +27,23 @@ define(['app', 'underscore', '/app/js/common.js',
             function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
                     appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService) {
                     
+                    var duplicateKeyworkds = {
+                        commercial : {
+                            identifier  : 'commercial',
+                            title : {en:'Commercial'},
+                            identifiers : [ 'A50D6E64BC6042428FF79C23E8FA3CF2', '7CAC5B93-7E27-441F-BFEB-9E416D48B1BE',
+                                            '3AC68883-4DD9-4F07-A941-30F7B910D24C']
+                        },
+                        nonCommercial : {
+                            identifier  : 'nonCommercial',
+                            title : {en:'Non commercial'},
+                            identifiers : [ 'A7769659-17DB-4ED4-B1CA-A3ADD9CBD3A4',
+                                            '7E3ECD30-1972-487B-A920-DDB439DC2DF6', '71E387A85A644CCCB1C2D6DDFA8493DD']
+                        }
+                    }
+                            
+                            
+
                     $scope.skipResults          = $attrs.skipResults;
                     $scope.skipDateFilter       = $attrs.skipDateFilter;
                     $scope.skipSaveFilter       = $attrs.skipSaveFilter;
@@ -525,7 +542,10 @@ define(['app', 'underscore', '/app/js/common.js',
                         else{
                             _.each($scope.setFilters, function(item){
                                 if(item.type == type){
-                                    q =  q + item.id + ' ';
+                                    if(duplicateKeyworkds[item.id])
+                                        q =  q + duplicateKeyworkds[item.id].identifiers.join(' ') + ' ';
+                                    else
+                                        q =  q + item.id + ' ';
                                 }
                             });
                         }
@@ -616,11 +636,13 @@ define(['app', 'underscore', '/app/js/common.js',
                     //     });
                             
                         //IRCC filters
-                        $q.when(thesaurusService.getDomainTerms('usage'), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, 'absPermit', 'IRCC usages');
-                                });
-                        });                        
+                        addKeywordFilter(duplicateKeyworkds.commercial, 'absPermit', 'IRCC usages');
+                        addKeywordFilter(duplicateKeyworkds.nonCommercial, 'absPermit', 'IRCC usages');
+                        // $q.when(thesaurusService.getDomainTerms('usage'), function(keywords) {
+                        //         _.each(keywords, function(keyword, index){
+                        //             addKeywordFilter(keyword, 'absPermit', 'IRCC usages');
+                        //         });
+                        // });                        
                         $q.when(thesaurusService.getDomainTerms('keywords'), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword, 'absPermit', 'IRCC keywords');
@@ -814,13 +836,27 @@ define(['app', 'underscore', '/app/js/common.js',
                         });
 
                     };
-
+                    function isIdentifierDuplicate(keyword){                      
+                        var duplicate;
+                        _.reduce(duplicateKeyworkds, function(memo, value, key){
+                            if(_.contains(value.identifiers, keyword.identifier)){
+                                duplicate = value;
+                                console.log(duplicate);
+                            }
+                        },{})
+                        return duplicate;
+                    }
                     //===============================================================================================================================
                      function addKeywordFilter(keyword, related, parent, level, broader){
                         if(!level)
                             level=0;
-
-                        addFilter(keyword.identifier + "@" +  related, {'type':'keyword', 'name':keyword.title.en, 'id':keyword.identifier,
+                        
+                         var dupIdentifier = isIdentifierDuplicate(keyword);
+                         if(dupIdentifier)
+                             addFilter(dupIdentifier.identifier + "@" +  related, {'type':'keyword', 'name':dupIdentifier.title.en, 'id':dupIdentifier.identifier,
+                            'description':'',  'parent' : parent, 'related' : related, filterID: dupIdentifier.identifier + "@" +  related, 'level':level, 'broader': broader, isDuplicate : true});
+                         else
+                            addFilter(keyword.identifier + "@" +  related, {'type':'keyword', 'name':keyword.title.en, 'id':keyword.identifier,
                             'description':'',  'parent' : parent, 'related' : related, filterID: keyword.identifier + "@" +  related, 'level':level, 'broader': broader});
 
                          //_.each(keyword.narrowerTerms,function(narrower){

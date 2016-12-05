@@ -5,12 +5,10 @@ define(['app', 'underscore', 'scbd-angularjs-services/generic-service', '/app/js
         "use strict";
         app.controller("subscriptionsCotroller", ["$scope", "$timeout", "IGenericService", "realm", "commonjs",
             function ($scope, $timeout, IGenericService, realm, commonjs) {
-                $scope.filters = {};
-                var filterQuery = {
-                    $and: [                        
-                        { "realm": realm.value },
-                        {'isSystemAlert': $scope.filters.systemAlerts||false}
-                    ]
+                $scope.filters = {systemAlert:false};
+                var filterQuery = {             
+                        "realm": realm.value ,
+                        'isSystemAlert': $scope.filters.systemAlerts||false
                 };
                 
                 $scope.length = 25;
@@ -19,10 +17,10 @@ define(['app', 'underscore', 'scbd-angularjs-services/generic-service', '/app/js
                 
                 
                 $scope.loadSubscriptions = function (loadCount) {
-                    if ($scope.loadingErrors || $scope.skip > Math.ceil($scope.recordCount / $scope.length))
+                    if ($scope.loadingSubscriptions || $scope.skip > Math.ceil($scope.recordCount / $scope.length))
                         return;
 
-                    $scope.loadingErrors = true;
+                    $scope.loadingSubscriptions = true;
                     if(loadCount){
                          IGenericService.query('v2016', 'subscriptions', filterQuery, null, null, null, 1)
                                     .then(function (recordCount) {
@@ -30,32 +28,31 @@ define(['app', 'underscore', 'scbd-angularjs-services/generic-service', '/app/js
                                     })
                     }
                     IGenericService.query('v2016', 'subscriptions', filterQuery, $scope.skip == 0 ? 0 : $scope.length * $scope.skip, $scope.length, $scope.sort)
-                                    .then(function (errors) {
+                                    .then(function (subscriptions) {
                                         $scope.skip++;
-                                        $scope.errors = _.union($scope.errors||[], errors);
+                                        $scope.subscriptions = _.union($scope.subscriptions||[], subscriptions);
                                     })
                                     .finally(function(){ 
-                                        $scope.loadingErrors = false;
+                                        $scope.loadingSubscriptions = false;
                                     });
                 }
                 
 
                 $scope.$watch('filters', function(newVal){
 
-                    var queries = [ 
-                                    { realm: realm.value }
-                                  ]
+                    var queries = { realm: realm.value }
                     if($scope.filters.endDate)
-                        queries.push({ 'meta.createdOn': { "$lte": moment(moment($scope.filters.endDate).format("YYYY-MM-DD")).toISOString() } })
+                        queries['meta.createdOn'] = { "$lte": moment(moment($scope.filters.endDate).format("YYYY-MM-DD")).toISOString() }
                     
                     if($scope.filters.startDate)
-                        queries.push({ 'meta.createdOn': { "$gte": moment(moment($scope.filters.startDate).format("YYYY-MM-DD")).toISOString() } })
+                        queries['meta.createdOn'] = { "$gte": moment(moment($scope.filters.startDate).format("YYYY-MM-DD")).toISOString() }
                     
-                    queries.push({ 'isSystemAlert': $scope.filters.systemAlerts||false})
+                    if(!$scope.filters.systemAlerts)
+                        queries['$or'] = [{ isSystemAlert : false},{ isSystemAlert :{$exists: false}}];
+
+                    filterQuery = queries;
                     
-                    filterQuery.$and = queries;
-                    
-                    $scope.errors = [];
+                    $scope.subscriptions = [];
                     $scope.recordCount = 0;
                     $scope.length = 25;
                     $scope.skip = 0;
