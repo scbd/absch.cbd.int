@@ -50,11 +50,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						
-						<div style="width:100%" ng-show="userFilters.length>0">
+						<div style="width:100%" ng-show="subscriptions.length>0">
 
 							<ul class="list-group">
 								<li class="list-group-item clearfix" style="background-color:#eee;"
-								ng-repeat="record in userFilters | orderBy:'reportedOn':'desc'">
+								ng-repeat="record in subscriptions | orderBy:'reportedOn':'desc'">
 									<h4>
 										<a class="text-bold mb0 color-blue"  >{{record.queryTitle}}</a>
 										<span class="label label-warning" ng-if="record.isSystemAlert"> System alert</span>
