@@ -41,7 +41,7 @@ app.directive("viewMeasure", [function () {
                             };
                             queries.push(searchService.list(listQuery));
                         }
-                        if(!$scope.document.measureRelatedTo){
+                        if(!$scope.document.linkedMeasures){
                             var listQuery = {
                                 query: 'realm_ss:' + appConfigService.currentRealm.toLowerCase() +
                                  ' AND schema_s:measure AND NOT virtual_b:* AND linkedMeasures_ss:'  + $scope.document.header.identifier
@@ -51,7 +51,7 @@ app.directive("viewMeasure", [function () {
                         $q.all(queries)
                           .then(function(data){
                               $scope.document.measureAmendedBy = data[0].data.response.docs;
-                              $scope.document.measureRelatedTo = data[1].data.response.docs;
+                              $scope.document.linkedMeasures = data[1].data.response.docs;
                               if($scope.measureMatrixApi)
 							  	$scope.measureMatrixApi.reloadMatrix(true);
                           });
