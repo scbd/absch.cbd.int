@@ -122,7 +122,7 @@
 				</ul>
 			</div>
 		</div>
-		<div ng-show="document.linkedMeasures">
+		<!--<div ng-show="document.linkedMeasures">
 			<label>Related measures</label>
 			<div class="km-value">
 				<ul>
@@ -131,7 +131,7 @@
 					</li>
 				</ul>
 			</div>
-		</div>
+		</div>-->
 
 
 		<div ng-show="document.amendedMeasures || document.amendmentsDescription">
@@ -173,15 +173,19 @@
 			</div>
 		</div>
 
-		<div ng-show="document.measureRelatedTo && document.measureRelatedTo.length>0">
-			<legend>Relationships</legend>
-			<label>This measure is related to:</label>
-			<div class="km-value">
+		<div ng-show="(document.linkedMeasures && document.linkedMeasures.length>0) || document.linkedMeasuresDescription">
+			<legend>Relationships</legend>			
+			<div class="km-value" ng-show="document.linkedMeasures && document.linkedMeasures.length>0">
+				<label>This measure is related to:</label>
 				<ul>
-					<li ng-repeat="item in document.measureRelatedTo">
+					<li ng-repeat="item in document.linkedMeasures">
 						<div view-default-reference ng-model="item.identifier_s" locale="locale"></div>
 					</li>
 				</ul>
+			</div>
+			<div ng-show="document.linkedMeasuresDescription">
+				<label>Relationships description</label>
+				<div class="km-value km-pre" ng-bind-html="document.linkedMeasuresDescription | lstring:review.locale"></div>
 			</div>
 		</div>
 		<div ng-if="document.absMesasureNotApplicable">
