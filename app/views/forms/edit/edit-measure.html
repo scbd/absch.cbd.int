@@ -46,7 +46,7 @@
                                             <div class="km-control-group">
                                                 <div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
                                                     <div class="help-info">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
-                                                    <div document-selector ng-model="document.amendedMeasures" question="amendedMeasures" government="document.government" schema="measure"></div>
+                                                    <div document-selector hide-self="document.header.identifier" ng-model="document.amendedMeasures" question="amendedMeasures" government="document.government" schema="measure"></div>
 
                                                     <!--<div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
                                                 </div>
@@ -243,7 +243,7 @@
                                             </div>
                                             <!--<div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
 
-                                            <div document-selector ng-model="document.linkedMeasures" question="linkedMeasures" government="document.government" schema="measure"></div>
+                                            <div document-selector hide-self="document.header.identifier" ng-model="document.linkedMeasures" question="linkedMeasures" government="document.government" schema="measure"></div>
 
 
                                         </div>
