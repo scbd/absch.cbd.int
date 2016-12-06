@@ -471,7 +471,8 @@ define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
                 }
 
                 $scope.deleteOther = function (otherElement) {
-                    $scope.otherTerms[otherElement.identifier] = undefined;
+                    delete $scope.sections[otherElement.identifier];                   
+                    delete $scope.otherTerms[otherElement.identifier];
                     $scope.save();
                 }
 
