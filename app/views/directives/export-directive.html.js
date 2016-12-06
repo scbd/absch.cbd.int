@@ -33,7 +33,7 @@ define(['app',
                                         var dowloadButton = $element.find('.' + $scope.downloadFormat)
                                         if(dowloadButton && dowloadButton.length==0){
                                             $scope.loading = true;
-                                            $q.when(loadData(1000))
+                                            $q.when(loadData(5000))
                                             .then(function(){
                                                 require(['tableexport'], function(){
                                                     $element.find('#datatable').tableExport({
@@ -67,27 +67,11 @@ define(['app',
                                         localQuery.currentPage = 0;
                                         localQuery.fields = fields;
 
-                                        if(queryType == 'group')
-                                            searchOperation = searchService.group(localQuery);
-                                        else
-                                            searchOperation = searchService.list(localQuery);
+                                        searchOperation = searchService.list(localQuery);
 
                                         return $q.when(searchOperation)
                                                 .then(function(data) {
-
-                                                        var documents = [];
-
-                                                        if(queryType == 'group'){
-                                                            _.each(data.data.grouped.government_s.groups, function(country){
-                                                                _.each(country.doclist.docs, function(doc){
-                                                                documents.push(doc);     
-                                                                });
-                                                            });
-                                                        }
-                                                        else if(data.data.response.docs)
-                                                            documents = data.data.response.docs;
-
-                                                        $scope.downloadDocs = documents;                               
+                                                    $scope.downloadDocs = data.data.response.docs;                               
                                                 });
 
                                     }
