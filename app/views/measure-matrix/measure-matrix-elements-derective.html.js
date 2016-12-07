@@ -444,9 +444,11 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                 doc ={document: _.first($scope.document.measureAmendedBy)};
                             }
 
-                            term.measure = {identifier: doc.document.identifier_s,government_s : doc.document.government_s,
-                                            documentID:commonjs.hexToInteger(doc.document.id),type: doc.document.schema_s,
-                                            amendedFor:amendedForTitle, revision:doc.document._revision_i};
+                            term.measure = {identifier: doc.document.identifier_s||doc.identifier_s,
+                                            government_s : doc.document.government_s||doc.government_s,
+                                            documentID:commonjs.hexToInteger(doc.document.id||doc.id),
+                                            type: doc.document.schema_s||doc.schema_s,
+                                            amendedFor:amendedForTitle, revision:doc.document._revision_i||doc._revision_i};
                            term.measureType = element.measureType;
 
                            if(element.geneticResourcesTerms){
