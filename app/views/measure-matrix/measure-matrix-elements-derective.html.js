@@ -62,6 +62,7 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                         title : 'Reference to any other relevant articles and sections', description : ''
                     }
                 };
+                var geneticResourceTermCopy;
                 $scope.api = {
                     reloadMatrix : reloadMatrix
                 }
@@ -138,7 +139,10 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                             if ($scope.binding) {
                                 if(!$scope.binding.geneticResources || !$scope.binding.geneticResources.elements || !$scope.binding.geneticResources.answer){
                                     //delete  from list
-                                   var geneticResource = _.findWhere($scope.terms, {identifier : 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'});
+                                   geneticResource = _.findWhere($scope.terms, {identifier : 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'});
+                                   if(!geneticResourceTermCopy && geneticResource)//for single MM when amending msr has GR
+                                        geneticResourceTermCopy = geneticResource;
+
                                    if(geneticResource){
                                       $scope.terms.splice(_.indexOf($scope.terms, geneticResource), 1);
                                    }
@@ -216,15 +220,16 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                 if ($scope.document.measureAmendedBy) {
 
                                     var measureAmendedBy = _.map($scope.document.measureAmendedBy, function(item) {
-                                        return $http.get('/api/v2013/documents/' + item.identifier_s);
+                                        return $http.get('/api/v2013/documents/' + item.identifier_s+'/info');
                                     })
                                     $q.all(measureAmendedBy)
                                       .then(function(data) {
                                           _.each(data, function(measure){
                                             var measureId;
-                                            measureId = _.findWhere($scope.document.measureAmendedBy, {'identifier_s': measure.data.header.identifier});
+                                            measureId = _.findWhere($scope.document.measureAmendedBy, {'identifier_s': measure.data.body.header.identifier});
                                             if(measureId){
-                                                measureId.measure = measure.data;
+                                                measureId.measure = measure.data.body;
+                                                measureId.measure.documentID = measure.data.documentID;
                                             }
                                          });
                                          return;
@@ -298,11 +303,18 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                     if($scope.type=='single'){
 
                         _.each(measure.measureAmendedBy, function(measureElement) {
-                            if(measureElement.measure)
-                                _.each(measureElement.measure.absMeasures, function(element) {
+                            if(measureElement.measure && measureElement.measure.absMeasures){
+                                if(measureElement.measure.absMeasures.geneticResources && measureElement.measure.absMeasures.geneticResources.elements) {    
+                                    if(geneticResourceTermCopy)
+                                        $scope.terms.push(geneticResourceTermCopy);
+                                    var identifier = newMeasureElement({identifier:'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', section:{}}, measureElement.measure, 'amended', measureElement.measure.header.identifier);
+                                    grElement = _.findWhere($scope.terms, {'identifier': identifier});
+                                    grElement.geneticResourcesTerms = measureElement.measure.absMeasures.geneticResources.elements;
+                                };
+                                _.each(measureElement.measure.absMeasures.relevantElements, function(element) {
                                     newMeasureElement(element, measureElement.measure, 'amended', measure.header.identifier);
                                 });
-
+                            }
                         });
                     }
                 }
@@ -429,11 +441,12 @@ define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directiv
                                 term.createdDate_dt = doc.createdDate_dt;
                             }
                             else{
-                                doc ={document: $scope.document};
+                                doc ={document: _.first($scope.document.measureAmendedBy)};
                             }
 
-                            term.measure = {identifier: doc.document.header.identifier,government : doc.document.government,
-                                            documentID:commonjs.hexToInteger(doc.id),type: doc.document.header.schema, amendedFor:amendedForTitle};
+                            term.measure = {identifier: doc.document.identifier_s,government_s : doc.document.government_s,
+                                            documentID:commonjs.hexToInteger(doc.document.id),type: doc.document.schema_s,
+                                            amendedFor:amendedForTitle, revision:doc.document._revision_i};
                            term.measureType = element.measureType;
 
                            if(element.geneticResourcesTerms){

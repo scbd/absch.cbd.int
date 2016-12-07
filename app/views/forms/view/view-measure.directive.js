@@ -37,21 +37,23 @@ app.directive("viewMeasure", [function () {
                         if(!$scope.document.measureAmendedBy){
                             var listQuery = {
                                 query: 'realm_ss:' + appConfigService.currentRealm.toLowerCase() +
-                                 ' AND schema_s:measure AND NOT virtual_b:* AND amendedMeasures_ss:'  + $scope.document.header.identifier
+                                 ' AND schema_s:measure AND NOT virtual_b:* AND amendedMeasures_ss:'  + $scope.document.header.identifier+'*'
                             };
                             queries.push(searchService.list(listQuery));
                         }
                         if(!$scope.document.linkedMeasures){
                             var listQuery = {
                                 query: 'realm_ss:' + appConfigService.currentRealm.toLowerCase() +
-                                 ' AND schema_s:measure AND NOT virtual_b:* AND linkedMeasures_ss:'  + $scope.document.header.identifier
+                                 ' AND schema_s:measure AND NOT virtual_b:* AND linkedMeasures_ss:'  + $scope.document.header.identifier+'*'
                             };
                             queries.push(searchService.list(listQuery));
                         }
                         $q.all(queries)
                           .then(function(data){
-                              $scope.document.measureAmendedBy = data[0].data.response.docs;
-                              $scope.document.linkedMeasures = data[1].data.response.docs;
+							  if(data[0])
+                              	$scope.document.measureAmendedBy = data[0].data.response.docs;
+                              if(data[1])
+							  	$scope.document.linkedMeasures = data[1].data.response.docs;
                               if($scope.measureMatrixApi)
 							  	$scope.measureMatrixApi.reloadMatrix(true);
                           });
