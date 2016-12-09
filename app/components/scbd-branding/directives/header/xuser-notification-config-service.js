@@ -70,7 +70,7 @@ define(['app', 'lodash', 'moment'],
 
                 var path;
                 if (_.contains(['ABS', 'ABS-DEV', 'ABS-TRG'], notification.data.documentInfo.realm.toUpperCase())) {
-                    if(notification.data.type == 'documentNotification')
+                    if(notification.type == 'documentNotification')
                         path = "/register/" + $filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier + "/view";
                     else
                         path = '/database/' + $filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier;
