@@ -21,8 +21,8 @@ define(['text!./search-map.html',
             //=======================================================================
             //
             //=======================================================================
-            controller: ["$scope", '$q', 'commonjs', 'searchService', '$timeout', '$filter',
-                    function($scope, $q, commonjs, searchService, $timeout, $filter) {
+            controller: ["$scope", '$q', 'commonjs', 'searchService', '$timeout', '$filter', '$element',
+                    function($scope, $q, commonjs, searchService, $timeout, $filter, $element) {
 
                         if (!$scope.height)
                             $scope.height = "500px";
@@ -71,7 +71,7 @@ define(['text!./search-map.html',
                                                 if (countryDetails) {
                                                     if (countryDetails.isNPInbetweenParty)
                                                         mapCountry.colorReal = mapCountry.baseSettings.color = "#EC971F";
-                                                    else if (countryDetails.isNPParty)
+                                                    else if (countryDetails.isNPParty && !_.contains(['GB', 'DK'],ammap3Service.exceptionRegionMapping[mapCountry.id]))
                                                         mapCountry.colorReal = mapCountry.baseSettings.color = "#5F4586";
                                                     else
                                                         mapCountry.colorReal = mapCountry.baseSettings.color = "#333";
@@ -168,6 +168,10 @@ define(['text!./search-map.html',
                                 // if (id != 'FK') { // Falkland Islands no popover
                                     ammap3Service.openCountryPopup('search-map', id); //pin, popup,
                                 // }
+                                if(event.mapObject.id == 'GB' || ammap3Service.exceptionRegionMapping[event.mapObject.id] == 'GB')
+                                    $timeout(function(){
+                                        $element.find('[data-toggle="tooltip"]').tooltip(); 
+                                    }, 500);
                             });
 
                         loadCountries();
