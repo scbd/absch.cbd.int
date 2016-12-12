@@ -20,7 +20,8 @@ define(['app','underscore',
           $scope.country.cssClass='flag-icon-'+$scope.country.code;
           breadcrumbs.options = { 'Country Profile': $scope.country.name };
       });
-
+      if($scope.code.toUpperCase == 'GB')
+            $element.find('[data-toggle="tooltip"]').tooltip(); 
       // $scope.loading = true;
       // $timeout(function(){
       //       require(['/app/views/countries/search-zoom-map.html.js'], function(map){                   
