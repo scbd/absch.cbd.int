@@ -22,7 +22,11 @@
                         <span ng-if="country.isNPParty" class="color-party bold">Party to the Nagoya Protocol</span>
                         <span ng-if="country.isNPInbetweenParty" class="color-inbetween bold">Ratified, not yet Party to the Nagoya Protocol</span>
                         <div ng-if="country.code==='dk'" style="margin-left:194px;"class="bold"><i class="fa fa-info-circle"></i> Denmark’s ratification of the Nagoya Protocol does not apply in respect of Greenland and the Faroe Islands.</div>
-                         <div ng-if="country.code==='gb'" style="margin-left:194px;"class="bold"><i class="fa fa-info-circle"></i> The UK’s ratification of the Nagoya Protocol does not extend to the 14 Overseas Territories or 3 Crown Dependencies</div>
+                         <div ng-if="country.code==='gb'" style="margin-left:194px;"class="bold">
+                             <i class="fa fa-info-circle"></i> 
+                             The UK’s ratification of the Nagoya Protocol does not extend to the 
+                             <a ng-href="#" class="gb-territories" data-toggle="tooltip" data-placement="bottom" title="Anguilla, Bermuda, British Antarctic Territory, British Indian Ocean Territory, British Virgin Islands, Cayman Islands, Falkland Islands, Gibraltar, Montserrat, Pitcairn Islands, Saint Helena, Ascension and Tristan da Cunha, South Georgia and the South Sandwich Islands, Turks and Caicos Islands" > 14 Overseas Territories or 3 Crown Dependencies</a>
+                        </div>
                     </div>
                      <div ng-if="country.isNPParty || country.isNPInbetweenParty" style="margin-bottom:5px;">
                         <label>Enter<span ng-if="country.isNPInbetweenParty">s</span><span ng-if="country.isNPParty">ed</span> into force on:</label>
