@@ -1,5 +1,8 @@
-﻿<div class="popover" style="background-color:rgba(10,10,10,.9);color:#a2a6a5;max-width:450px;width:450px;web0px;max-height:400px;
-{{codeLower=='fk' ? 'height:360px' : (codeLower=='gl' ? 'height:330px' : 'height:300px')}}">
+﻿<div class="popover" 
+style="background-color:rgba(10,10,10,.9);color:#a2a6a5;
+width:450px;web0px;max-height:400px;min-height:300px;
+{{codeLower=='fk' ? 'height:400px' : (codeLower=='gl' ? 'height:330px' : '')}}
+{{codeLower!='fk' && (codeLower=='gb'||exceptionCountry=='gb') ? 'height:360px' : ''}}">
     <style>
         .party-status {
             text-decoration: none;
@@ -29,6 +32,8 @@
         .extraHeight{
             min-height:150px!important;
         }
+        .gb-territories + .tooltip > .tooltip-inner {background-color: #d9edf7;color:#31708f;}
+        .gb-territories + .tooltip > .tooltip-arrow { border-bottom-color:#d9edf7; }
     </style>
     <div class="arrow "></div>
     <div style="text-align:left;padding: 6px 6px 6px 6px;">
@@ -42,6 +47,11 @@
         <div class="{{codeLower=='fk' ? 'show' : 'hide'}}  alert-info small " style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
             <i class="fa fa-info-circle" />
             A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern Ireland concerning sovereignty over the Falkland Islands (Malvinas).
+        </div>
+        <div class="small alert-info {{(exceptionCountry=='gb'||codeLower=='gb') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
+            <i class="fa fa-info-circle" /> 
+            The UK’s ratification of the Nagoya Protocol does not extend to the 
+                <a ng-href="#" class="gb-territories" data-toggle="tooltip" data-placement="bottom" title="Anguilla, Bermuda, British Antarctic Territory, British Indian Ocean Territory, British Virgin Islands, Cayman Islands, Falkland Islands, Gibraltar, Montserrat, Pitcairn Islands, Saint Helena, Ascension and Tristan da Cunha, South Georgia and the South Sandwich Islands, Turks and Caicos Islands" >14 Overseas Territories or 3 Crown Dependencies</a>
         </div>
     </div>
     <div style="clear:both;"></div>
