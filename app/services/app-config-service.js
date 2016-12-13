@@ -185,7 +185,8 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 		        },
 
 		        user: {
-		            signIn: "/signin"
+		            signIn: "/signin",
+					verifyEmail : '/verify-email'
 		        }
 			};
 		}

@@ -10,12 +10,13 @@ function(app, template) {
                        ngModel: '=',
                      },
                   template: template,
-                  controller: ['$scope', '$window', '$location','authentication', '$rootScope',
+                  controller: ['$scope', '$window', '$location','authentication', '$rootScope', '$q',
                   function($scope, $window, $location,authentication, $rootScope) {
                       
                       
                       $rootScope.$on('event:auth-emailVerification', function(evt, data){
                         $scope.showEmailVerificationMessage = data.message;
+                        $scope.user = $rootScope.user;
                       });
                       
                       $scope.showMessage = function (){
