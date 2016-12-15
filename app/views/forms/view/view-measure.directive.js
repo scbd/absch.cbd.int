@@ -69,6 +69,12 @@ app.directive("viewMeasure", [function () {
 					return model;
 			}
 
+			$scope.getTerm = function(term){
+
+				return {
+					identifier : term
+				}
+			}
 		
 		}]
 	};

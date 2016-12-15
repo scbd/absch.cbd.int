@@ -26,7 +26,7 @@
 				<ul>
 					<li ng-repeat="item in document.resourceLinks">
 						<a translation-url  target="_new" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-						<i ng-if="item.language" class="color-blue">({{item.language}})</i>
+						<i ng-if="item.language" class="color-blue">({{getTerm(item.language)|term:locale}})</i>
 						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 					</li>
 				</ul>
