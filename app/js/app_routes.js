@@ -17,10 +17,11 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
         $locationProvider.hashPrefix('!');
         
         $routeProvider.
-               when('/',               { templateUrl: '/app/views/home/index.html', label:'ABSCH', resolveController: true, resolveUser : true}).
-               when('/lang/:langCode', { templateUrl: '/app/views/shared/lang.html',label:'ABSCH', resolveController: true}).
-               when('/signin',     {templateUrl: '/app/views/shared/login-dialog.html',resolveController: true, label:'Sign in'}).
-               when('/help/403',   {templateUrl: '/app/views/shared/403.html', label:'403 Error'}).
+               when('/',                { templateUrl: '/app/views/home/index.html', label:'ABSCH', resolveController: true, resolveUser : true}).
+               when('/lang/:langCode',  { templateUrl: '/app/views/shared/lang.html',label:'ABSCH', resolveController: true}).
+               when('/signin',          {templateUrl: '/app/views/shared/login-dialog.html',resolveController: true, label:'Sign in'}).
+               when('/verify-email',    {templateUrl: '/app/views/shared/verify-email.html', label:'Email Verification Pending'}).
+               when('/help/403',        {templateUrl: '/app/views/shared/403.html', label:'403 Error'}).
 
                when('/about',                        { templateUrl: '/app/views/about/about.html',                        label:'About the ABSCH',                 resolveController:true, resolveUser : true}).
                when('/about/blog',                        { templateUrl: '/app/views/about/blog.html',                        label:'ABSCH Development Blog',                 resolveController:true, resolveUser : true}).
@@ -74,32 +75,32 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/register/national-users',                            {templateUrl: '/app/views/register/national-users/national-user-list.html', label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
                when('/register/:document_type',                            {templateUrl: '/app/views/register/record-list.html',       label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
-               when('/register/CON/new',           {templateUrl: '/app/views/forms/edit/edit-contact.html',                   label:'New',  param:'true', resolveController: true,documentType :'CON' , resolve : { securized : securize(null,true) }, }).
-               when('/register/CNA/new',           {templateUrl: '/app/views/forms/edit/edit-authority.html',                 label:'New',  param:'true', resolveController: true,documentType :'CNA' , resolve : { securized : securize(null,true) }, }).
-               when('/register/MSR/new',           {templateUrl: '/app/views/forms/edit/edit-measure.html',                   label:'New',  param:'true', resolveController: true,documentType :'MSR' , resolve : { securized : securize(null,true) }, }).
-               when('/register/NDB/new',           {templateUrl: '/app/views/forms/edit/edit-database.html',                  label:'New',  param:'true', resolveController: true,documentType :'NDB' , resolve : { securized : securize(null,true) }, }).
-               when('/register/IRCC/new',          {templateUrl: '/app/views/forms/edit/edit-absPermit.html',                 label:'New',  param:'true', resolveController: true,documentType :'IRCC', resolve : { securized : securize(null,true) }, }).
-               when('/register/CP/new',            {templateUrl: '/app/views/forms/edit/edit-absCheckpoint.html',             label:'New',  param:'true', resolveController: true,documentType :'CP'  , resolve : { securized : securize(null,true) }, }).
-               when('/register/CPC/new',           {templateUrl: '/app/views/forms/edit/edit-absCheckpointCommunique.html',   label:'New',  param:'true', resolveController: true,documentType :'CPC' , resolve : { securized : securize(null,true) }, }).
-               when('/register/NR/new',            {templateUrl: '/app/views/forms/edit/edit-absNationalReport.html',         label:'New',  param:'true', resolveController: true,documentType :'NR'  , resolve : { securized : securize(null,true) }, }).
-               when('/register/VLR/new',           {templateUrl: '/app/views/forms/edit/edit-resource.html',                  label:'New',  param:'true', resolveController: true,documentType :'VLR' , resolve : { securized : securize() }, }).
-               when('/register/CBI/new',           {templateUrl: '/app/views/forms/edit/edit-capacityBuildingInitiative.html',label:'New',  param:'true', resolveController: true,documentType :'CBI' , resolve : { securized : securize() }, }).
-               when('/register/A19A20/new',        {templateUrl: '/app/views/forms/edit/edit-modelContractualClause.html',    label:'New',  param:'true', resolveController: true,documentType :'A19A20' , resolve : { securized : securize() }, }).
-               when('/register/CPP/new',           {templateUrl: '/app/views/forms/edit/edit-communityProtocol.html',         label:'New',  param:'true', resolveController: true,documentType :'CPP' , resolve : { securized : securize() }, }).
+               when('/register/CON/new',           {templateUrl: '/app/views/forms/edit/edit-contact.html',                   label:'New',  param:'true', resolveController: true,documentType :'CON' , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/CNA/new',           {templateUrl: '/app/views/forms/edit/edit-authority.html',                 label:'New',  param:'true', resolveController: true,documentType :'CNA' , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/MSR/new',           {templateUrl: '/app/views/forms/edit/edit-measure.html',                   label:'New',  param:'true', resolveController: true,documentType :'MSR' , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/NDB/new',           {templateUrl: '/app/views/forms/edit/edit-database.html',                  label:'New',  param:'true', resolveController: true,documentType :'NDB' , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/IRCC/new',          {templateUrl: '/app/views/forms/edit/edit-absPermit.html',                 label:'New',  param:'true', resolveController: true,documentType :'IRCC', resolve : { securized : securize(null,true, true) }, }).
+               when('/register/CP/new',            {templateUrl: '/app/views/forms/edit/edit-absCheckpoint.html',             label:'New',  param:'true', resolveController: true,documentType :'CP'  , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/CPC/new',           {templateUrl: '/app/views/forms/edit/edit-absCheckpointCommunique.html',   label:'New',  param:'true', resolveController: true,documentType :'CPC' , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/NR/new',            {templateUrl: '/app/views/forms/edit/edit-absNationalReport.html',         label:'New',  param:'true', resolveController: true,documentType :'NR'  , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/VLR/new',           {templateUrl: '/app/views/forms/edit/edit-resource.html',                  label:'New',  param:'true', resolveController: true,documentType :'VLR' , resolve : { securized : securize(null, null, true) }, }).
+               when('/register/CBI/new',           {templateUrl: '/app/views/forms/edit/edit-capacityBuildingInitiative.html',label:'New',  param:'true', resolveController: true,documentType :'CBI' , resolve : { securized : securize(null, null, true) }, }).
+               when('/register/A19A20/new',        {templateUrl: '/app/views/forms/edit/edit-modelContractualClause.html',    label:'New',  param:'true', resolveController: true,documentType :'A19A20' , resolve : { securized : securize(null, null, true) }, }).
+               when('/register/CPP/new',           {templateUrl: '/app/views/forms/edit/edit-communityProtocol.html',         label:'New',  param:'true', resolveController: true,documentType :'CPP' , resolve : { securized : securize(null, null, true) }, }).
 
-               when('/register/CON/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { securized : securize(null,true) }, }).
-               when('/register/CNA/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-authority.html',                 label:'Edit',  param:'true', resolveController: true, documentType :'CNA' , resolve : { securized : securize(null,true) }, }).
-               when('/register/MSR/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-measure.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'MSR' , resolve : { securized : securize(null,true) }, }).
-               when('/register/NDB/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-database.html',                  label:'Edit',  param:'true', resolveController: true, documentType :'NDB' , resolve : { securized : securize(null,true) }, }).
-               when('/register/IRCC/:identifier/edit',          {templateUrl: '/app/views/forms/edit/edit-absPermit.html',                 label:'Edit',  param:'true', resolveController: true, documentType :'IRCC', resolve : { securized : securize(null,true) }, }).
-               when('/register/CP/:identifier/edit',            {templateUrl: '/app/views/forms/edit/edit-absCheckpoint.html',             label:'Edit',  param:'true', resolveController: true, documentType :'CP'  , resolve : { securized : securize(null,true) }, }).
-               when('/register/CPC/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-absCheckpointCommunique.html',   label:'Edit',  param:'true', resolveController: true, documentType :'CPC' , resolve : { securized : securize(null,true) }, }).
-               when('/register/NR/:identifier/edit',            {templateUrl: '/app/views/forms/edit/edit-absNationalReport.html',         label:'Edit',  param:'true', resolveController: true, documentType :'NR'  , resolve : { securized : securize(null,true) }, }).
-               when('/register/VLR/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-resource.html',                  label:'Edit',  param:'true', resolveController: true, documentType :'VLR' , resolve : { securized : securize() }, }).
-               when('/register/CBI/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-capacityBuildingInitiative.html',label:'Edit',  param:'true', resolveController: true, documentType :'CBI' , resolve : { securized : securize() }, }).
-               when('/register/A19A20/:identifier/edit',        {templateUrl: '/app/views/forms/edit/edit-modelContractualClause.html',    label:'Edit',  param:'true', resolveController: true, documentType :'A19A20' , resolve : { securized : securize() }, }).
-               when('/register/CPP/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-communityProtocol.html',         label:'Edit',  param:'true', resolveController: true, documentType :'CPP' , resolve : { securized : securize() }, }).
-               when('/register/ORG/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-organization.html',              label:'Edit',  param:'true', resolveController: true, documentType :'ORG' , resolve : { securized : securize() }, }).
+               when('/register/CON/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/CNA/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-authority.html',                 label:'Edit',  param:'true', resolveController: true, documentType :'CNA' , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/MSR/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-measure.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'MSR' , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/NDB/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-database.html',                  label:'Edit',  param:'true', resolveController: true, documentType :'NDB' , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/IRCC/:identifier/edit',          {templateUrl: '/app/views/forms/edit/edit-absPermit.html',                 label:'Edit',  param:'true', resolveController: true, documentType :'IRCC', resolve : { securized : securize(null,true, true) }, }).
+               when('/register/CP/:identifier/edit',            {templateUrl: '/app/views/forms/edit/edit-absCheckpoint.html',             label:'Edit',  param:'true', resolveController: true, documentType :'CP'  , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/CPC/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-absCheckpointCommunique.html',   label:'Edit',  param:'true', resolveController: true, documentType :'CPC' , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/NR/:identifier/edit',            {templateUrl: '/app/views/forms/edit/edit-absNationalReport.html',         label:'Edit',  param:'true', resolveController: true, documentType :'NR'  , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/VLR/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-resource.html',                  label:'Edit',  param:'true', resolveController: true, documentType :'VLR' , resolve : { securized : securize(null, null, true) }, }).
+               when('/register/CBI/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-capacityBuildingInitiative.html',label:'Edit',  param:'true', resolveController: true, documentType :'CBI' , resolve : { securized : securize(null, null, true) }, }).
+               when('/register/A19A20/:identifier/edit',        {templateUrl: '/app/views/forms/edit/edit-modelContractualClause.html',    label:'Edit',  param:'true', resolveController: true, documentType :'A19A20' , resolve : { securized : securize(null, null, true) }, }).
+               when('/register/CPP/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-communityProtocol.html',         label:'Edit',  param:'true', resolveController: true, documentType :'CPP' , resolve : { securized : securize(null, null, true) }, }).
+               when('/register/ORG/:identifier/edit',           {templateUrl: '/app/views/forms/edit/edit-organization.html',              label:'Edit',  param:'true', resolveController: true, documentType :'ORG' , resolve : { securized : securize(null, null, true) }, }).
 
                when('/register/:document_type/:documentID/view',           {templateUrl: '/app/views/register/record-details.html',    label:'View',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
@@ -124,12 +125,16 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
     }]);
 
 
-    function securize(roleList, useNationalRoles)
+    function securize(roleList, useNationalRoles, checkEmailVerified)
     {
         return ["$location", "authentication", "appConfigService", "$filter", "$route",
          function ($location, authentication, appConfigService, $filter, $route) {
 
             return authentication.getUser().then(function (user) {
+
+                if(checkEmailVerified && user.isAuthenticated && !user.isEmailVerified){
+                    $location.path(appConfigService.getSiteMapUrls().user.verifyEmail);
+                }
 
                 var roles = _.clone(roleList||[]);
 

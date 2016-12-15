@@ -254,14 +254,15 @@ define(['app', './apiUrl'], function(app) {
         //
         //============================================================
         function setUser(user) {
+
+            currentUser = user || undefined;
+            $rootScope.user = user || anonymous();
+            
             if (user && user.isAuthenticated && !user.isEmailVerified) {
                 $rootScope.$broadcast('event:auth-emailVerification', {
                     message: 'Email verification pending. Please verify you email before submitting any data.'
                 });
             }
-
-            currentUser = user || undefined;
-            $rootScope.user = user || anonymous();
         }
 
         //============================================================

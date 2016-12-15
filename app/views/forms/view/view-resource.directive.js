@@ -73,6 +73,14 @@ app.directive("viewResource", [function () {
 
 
 			};
+
+			$scope.getTerm = function(term){
+
+				return {
+					identifier : term
+				}
+			}
+			
 		}]
 	};
 }]);
