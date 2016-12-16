@@ -8,7 +8,9 @@ define(['app', 'jquery', 'underscore', 'toastr', 'ngStorage'],
 		return new function(){
 
             this.get = function(key){
-                // return;
+                
+                if(!$localStorage.$supported)
+                    return;
 
                 var existing = angular.copy($localStorage[key]);
 
@@ -26,6 +28,9 @@ define(['app', 'jquery', 'underscore', 'toastr', 'ngStorage'],
             };
 
             this.set = function(key, data){
+                if(!$localStorage.$supported)
+                    return;
+                    
                 var ldata = {};
 
                 var expiryDate = new Date();
