@@ -74,7 +74,7 @@
                           </div>
 
                       </div>
-                      <div  id="taskList" infinite-scroll="loadTasks()" infinite-scroll-busy="loadingTasks" infinite-scroll-distance="100" >
+                      <div  id="taskList" infinite-scroll="loadTasks()" infinite-scroll-busy="loadingTasks" infinite-scroll-distance="0" >
 
                           <div ng-repeat="task  in tasks|filter:keywords|filter:filterByType|filter:filterByStatus|orderBy:sortTerm:orderList"  id="{{task.workflow._id}}">
                           <div  class="row" ng-class="{'bg-grey':task.workflow.state=='completed','bg-danger':task.workflow.state!='completed'}" style="padding:10px;margin-bottom:10px;">
@@ -152,7 +152,7 @@
                                       </div>
                                       <div ng-if="task.workflow.state=='completed' && task.workflow.activities.length ==0">{{task.workflow.state|uppercase}}</div>
                                   </div>
-                                  <div ng-show="tasksDisplay || task.isActive" class="col-xs-12" style="padding:20px 20px 0 20px;">
+                                  <div ng-if="tasksDisplay || task.isActive" class="col-xs-12" style="padding:20px 20px 0 20px;">
                                       <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{task.workflow._id}}" on-activity-update="updateWorkflowList(document, workflowInfo)"></div>
                                   </div>
                               </div>

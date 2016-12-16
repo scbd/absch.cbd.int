@@ -4,12 +4,12 @@ define(['app', 'underscore', '/app/js/common.js', 'ngInfiniteScroll', 'moment', 
     '/app/views/forms/view/record-loader.directive.html.js'], function (app) {
 
         "use strict";
-        app.controller("adminPendingTasksCotroller", ["$scope", "$timeout", "IWorkflows", "realm", "commonjs",
-            function ($scope, $timeout, IWorkflows, realm, commonjs) {
+        app.controller("adminPendingTasksCotroller", ["$scope", "$timeout", "IWorkflows", "realm", "commonjs", '$rootScope',
+            function ($scope, $timeout, IWorkflows, realm, commonjs, $rootScope) {
                 $scope.filters = {};
                 $scope.sortTerm = 'createdOn';
                 $scope.orderList = true;
-
+                $rootScope.stopSmoothScroll = true;
                 var filterQuery = {
                     $and: [
                         { state: "running" },
@@ -93,7 +93,7 @@ define(['app', 'underscore', '/app/js/common.js', 'ngInfiniteScroll', 'moment', 
                                     .add(workflow.workflowAge.age, workflow.workflowAge.type);
                             });
 
-                            $scope.tasks = _.union(tasks, $scope.tasks);
+                            $scope.tasks = _.union($scope.tasks, tasks);
 
 
                         }).finally(function () {
@@ -166,12 +166,14 @@ define(['app', 'underscore', '/app/js/common.js', 'ngInfiniteScroll', 'moment', 
                         queries.push({ createdOn: { "$gte": moment(moment($scope.filters.startDate).format("YYYY-MM-DD")).toISOString() } })
                     
                     filterQuery.$and = queries;
-                    console.log(filterQuery);
+                    // console.log(filterQuery);
                     $scope.recordCount = 0;
                     $scope.length = 25;
                     $scope.skip = 0;
                     $scope.loadTasks();
                 }, true)
 
+
+                $scope.$on('$destroy', function(){$rootScope.stopSmoothScroll = false;})
             }]);
     });
