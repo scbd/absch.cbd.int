@@ -1,17 +1,24 @@
 ﻿<div class="row">
-    <div class="col-xs-12">
-
-        <span ng-show="lastSaved && hideTimer=='false'" class="color-grey label pull-right" style="background-color:#ddd;text-transform:uppercase;font-size:12px;">
-            <span style="position:relative;top:1px;"><i class="glyphicon glyphicon-time" style="position:relative;top:2px;"></i><span class="color-blue" style="padding:3px;">{{lastSaved}}</span> since last save</span>
-        </span>
-    </div>
-
     <div class="clearfix"></div>
 
     <div class="col-xs-12">
-        <div km-form-languages ng-model="languages" style="padding-top:20px;" class="pull-left btn-xs"></div>
+            <div class="pull-left">
+          <div style="display:inline;text-transform: uppercase;font-weight: 500;font-size:12px;margin-left:5px;">Language of the website:</div>
+           <div style="display:inline;" class="locale-header" id="MyLocale"></div>
+                 &nbsp;  | &nbsp; 
+          <div style="display:inline;text-transform: uppercase;font-weight: 500;font-size:12px;margin-left:5px;">Submission in more than one language:</div>
+                <div style="display:inline;" km-form-languages ng-model="languages"  class="btn-thin"></div>
+             &nbsp;  | &nbsp; 
+           <div style="display:inline">
+            <span ng-show="lastSaved && hideTimer=='false'" style="text-transform:uppercase;font-size:12px;font-weight: 500;padding-right:3px;">
+                <span class="bg-yellow label" style="font-size:12px;"> 
+                    <i class="color-grey glyphicon glyphicon-time"></i><span class="color-blue" style="padding:3px;">{{lastSaved}}</span>  </span>
+                    &nbsp; since last save
+            </span>
+        </div>
+    </div>
 
-        <ul style="list-style-type:none;margin:0;padding:0;padding-top:20px;" class="pull-right">
+        <ul style="list-style-type:none;margin:0;padding:0;padding-top:10px;" class="pull-right">
             <li style="display: inline;"><button type="button" class="btn btn-warning " ng-click="close()" ng-disabled="loading">
                 <i class="glyphicon glyphicon-remove"></i> Close</button>
             </li>
@@ -30,13 +37,14 @@
                          <i ng-show="tab=='publishRequest' && loading" class="fa fa-spinner fa-spin"></i>
                     </button>
             </li>
+  
         </ul>
     </div>
 
     <div class="clearfix"></div>
 
-    <div class="col-xs-12" style="border-bottom:1px solid #eee;margin-bottom:20px;">
-        <ul style="list-style-type:none;margin:0;padding:0;padding-top:20px;" class="pull-left">
+    <div class="col-xs-12" style="border-bottom:1px solid #eee;margin-bottom:0px;">
+        <ul style="list-style-type:none;margin:0;padding:0;padding-top:10px;" class="pull-left">
             <li class="tab" style="display: inline;" ng-class="{'tab-selected': tab=='edit'}">
                 <a translation-url  ng-click="tab='edit'" ng-disabled="loading || security==undefined">
                       Submission form
@@ -47,6 +55,7 @@
                       Review
                    </a>
             </li>
+                     
         </ul>
     </div>
 
