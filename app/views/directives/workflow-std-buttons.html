@@ -2,21 +2,21 @@
     <div class="clearfix"></div>
 
     <div class="col-xs-12">
-            <div class="pull-left">
-          <div style="display:inline;text-transform: uppercase;font-weight: 500;font-size:12px;margin-left:5px;">Language of the website:</div>
-           <div style="display:inline;" class="locale-header" id="MyLocale"></div>
-                 &nbsp;  | &nbsp; 
-          <div style="display:inline;text-transform: uppercase;font-weight: 500;font-size:12px;margin-left:5px;">Submission in more than one language:</div>
+
+        <div class="pull-left">
+                <div style="display:inline;text-transform: uppercase;font-weight: 500;font-size:12px;">Change website language:</div>
+                <div style="display:inline;" class="locale-header" id="MyLocale"></div>
+                &nbsp; | &nbsp; 
+                <div style="display:inline;text-transform: uppercase;font-weight: 500;font-size:12px;">Submit in other language(s):</div>
                 <div style="display:inline;" km-form-languages ng-model="languages"  class="btn-thin"></div>
-             &nbsp;  | &nbsp; 
-           <div style="display:inline">
-            <span ng-show="lastSaved && hideTimer=='false'" style="text-transform:uppercase;font-size:12px;font-weight: 500;padding-right:3px;">
-                <span class="bg-yellow label" style="font-size:12px;"> 
-                    <i class="color-grey glyphicon glyphicon-time"></i><span class="color-blue" style="padding:3px;">{{lastSaved}}</span>  </span>
-                    &nbsp; since last save
-            </span>
+                &nbsp; | &nbsp; 
+            <div style="display:inline">
+                <span ng-show="lastSaved && hideTimer=='false'" style="text-transform:uppercase;font-size:12px;font-weight: 500;padding-right:3px;">
+                <span class="bg-yellow label" style="font-size:12px;"><i class="color-grey glyphicon glyphicon-time"></i><span class="color-blue" style="padding:3px;">{{lastSaved}}</span></span>
+                &nbsp; since last save
+                </span>
+            </div>
         </div>
-    </div>
 
         <ul style="list-style-type:none;margin:0;padding:0;padding-top:10px;" class="pull-right">
             <li style="display: inline;"><button type="button" class="btn btn-warning " ng-click="close()" ng-disabled="loading">
@@ -74,7 +74,6 @@
 
         </div>
     </div>
-
 
     <div id="dialogCancel" class="modal fade" data-backdrop="static">
         <div class="modal-dialog">
