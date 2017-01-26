@@ -41,7 +41,7 @@ define(['text!./search-zoom-map.html',
                                     if(countryDetails){
                                         if(countryDetails.isNPInbetweenParty)
                                             mapCountry.colorReal=mapCountry.baseSettings.color= "#EC971F";
-                                        else if(countryDetails.isNPParty)
+                                        else if(countryDetails.isNPParty && !_.contains(['GB', 'DK'],ammap3Service.exceptionRegionMapping[mapCountry.id]))
                                             mapCountry.colorReal=mapCountry.baseSettings.color= "#5F4586";                                    
                                         else
                                             mapCountry.colorReal=mapCountry.baseSettings.color= "#333";

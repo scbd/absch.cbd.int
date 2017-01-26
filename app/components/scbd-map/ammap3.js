@@ -2,7 +2,7 @@ define(['text!./ammap3.html', 'text!./default-template.html','app', 'lodash',
   'css!./ammap3',
   'css!/app/libs/flag-icon-css/css/flag-icon.min.css',
   'ammap',
-  'shim!./worldEULow[ammap]',
+  'shim!./worldEUHigh[ammap]',
   'shim!ammap/themes/light[ammap]',
   'css!./mappin.css',
   'scbd-angularjs-services/locale',
@@ -114,7 +114,7 @@ define(['text!./ammap3.html', 'text!./default-template.html','app', 'lodash',
               country = getMapObject(cCode);
               if($scope.map.checkIfSelected(country)){
                   country =_.findWhere($scope.map.dataProvider.areas, {id : cCode});
-                  country.colorReal = country.baseSettings.color;
+                  // country.colorReal = country.baseSettings.color;
                   country.validate();
                   country.mouseEnabled = true;
                   country.balloonText = '[[title]]';
