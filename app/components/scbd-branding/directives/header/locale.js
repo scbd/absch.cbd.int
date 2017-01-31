@@ -9,7 +9,7 @@ function(app, template, $) {
          return { restrict: 'ECA' ,
                   priority: 0,// child of header
                   scope: {
-                       idname: '=id',
+                       idname: '@id',
                        ngModel: '=',
                      },
                   template: template,
