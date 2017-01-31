@@ -22,7 +22,8 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/signin',          {templateUrl: '/app/views/shared/login-dialog.html',resolveController: true, label:'Sign in'}).
                when('/verify-email',    {templateUrl: '/app/views/shared/verify-email.html', label:'Email Verification Pending'}).
                when('/help/403',        {templateUrl: '/app/views/shared/403.html', label:'403 Error'}).
-
+               
+               when('/about-new',                    { templateUrl: '/app/views/about/about-new.html',                        label:'About the ABSCH',                 resolveController:true, resolveUser : true}).
                when('/about',                        { templateUrl: '/app/views/about/about.html',                        label:'About the ABSCH',                 resolveController:true, resolveUser : true}).
                when('/about/blog',                        { templateUrl: '/app/views/about/blog.html',                        label:'ABSCH Development Blog',                 resolveController:true, resolveUser : true}).
                when('/partners/idlo/events',              { templateUrl: '/app/views/partners/idlo.html',           label:'IDLO',             resolveController: false, resolveUser: false}).
