@@ -2,9 +2,7 @@ define(['text!./home-map.html',
   'app',
   'lodash',
   './party-status.js', '/app/services/search-service.js',
-  'scbd-map/ammap3',
-  'scbd-map/ammap3-service',
-  '/app/views/countries/search-map.js'
+  '/app/views/countries/country-map.js'
 ], function(template, app, _, popoverTemplate) {
   'use strict';
 

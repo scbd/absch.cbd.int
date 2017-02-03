@@ -3,7 +3,8 @@ define(['app','underscore',
   'scbd-angularjs-services/locale','ng-breadcrumbs',
   'css!/app/libs/flag-icon-css/css/flag-icon.min.css',
   'css!./country-profile','./country-profile-directive.html.js',
-    '../directives/block-region-directive.js','/app/views/countries/search-zoom-map.html.js'
+  '../directives/block-region-directive.js',
+  '/app/views/countries/country-map.js'
 ], function(app, _) {
 
   app.controller("countryProfileController",
