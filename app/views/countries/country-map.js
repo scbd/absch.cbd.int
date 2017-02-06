@@ -42,7 +42,7 @@ function(template, app, _, popOverTemplate) {
           $scope.mapData = {
             "type": "map",
             "theme": "light",
-            "zoomDuration":0,
+            "zoomDuration": 0.5,
             "responsive": {
               "enabled": true
             },
@@ -311,15 +311,16 @@ function(template, app, _, popOverTemplate) {
               image.externalElement = generateMarker(x);
             }
 
-            if ('undefined' !== typeof image.externalElement) {
-              // reposition the element accoridng to coordinates
-              image.externalElement.style.top = map.latitudeToY(image.latitude) + 'px';
-              image.externalElement.style.left = map.longitudeToX(image.longitude) + 'px';
-            }
+            // if ('undefined' !== typeof image.externalElement) {
+            //   // reposition the element accoridng to coordinates clientX
+            //   image.externalElement.style.top = (map.latitudeToY(image.latitude)) + 'px';
+            //   image.externalElement.style.left = (map.longitudeToX(image.longitude)) + 'px';
+            // }
           }
           $scope.map.addListener("positionChanged", updateCustomMarkers);
           $scope.map.addListener("clickMapObject", openCountryPopup);
           $scope.map.addListener("click", closePopovers);
+          
         } //updateCustomMarkers
 
         //=======================================================================
@@ -402,6 +403,7 @@ function(template, app, _, popOverTemplate) {
         //=======================================================================
         //'invisi-pixel''
         //=======================================================================
+        var activeCountry;
         function openCountryPopup(event) {
           var cCode = event.mapObject.id;
 
@@ -411,6 +413,7 @@ function(template, app, _, popOverTemplate) {
             },1);
             return;
           }
+          activeCountry = cCode;
 
           var image = _.find($scope.map.dataProvider.images, function(img) {            
             if (img.scbdData && (img.scbdData.code === cCode ))
@@ -424,11 +427,19 @@ function(template, app, _, popOverTemplate) {
           };
           if($scope.map)
             closePopovers();
-
+             
+          var info = event.chart.getDevInfo();
+            console.log(info)
           if (image.externalElement)
            $timeout(function(){
-
+              // if ('undefined' !== typeof image.externalElement) {
+                // reposition the element accoridng to coordinates clientX
+                image.externalElement.style.top = info.top + 'px';
+                image.externalElement.style.left = info.left + 'px';
+              // }
               $(image.externalElement).children('#pin-' + cCode).popover('show');
+              //  $scope.map.moveDown();
+              //  $scope.map.clickMapObject($scope.map.dataProvider.images[image.index]);
               if(cCode == 'GB' || exceptionRegionMapping[cCode] == 'GB')
                 $timeout(function(){
                     $element.find('[data-toggle="tooltip"]').tooltip(); 
@@ -437,13 +448,14 @@ function(template, app, _, popOverTemplate) {
           else
             console.log('Country missing popover information:', cCode);
 
-          $timeout(function(){
-            if($scope.map)
-              $scope.map.moveUp();
-          }, 100);
+          // $timeout(function(){
+          //   if($scope.map)
+          //     $scope.map.moveDown();
+          // }, 800);
 
         } // setPinImage
         
+
         // //=======================================================================
         // //
         // //=======================================================================
