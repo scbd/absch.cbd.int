@@ -42,7 +42,7 @@ function(template, app, _, popOverTemplate) {
           $scope.mapData = {
             "type": "map",
             "theme": "light",
-            "zoomDuration": 0.5,
+            "zoomDuration": 0.1,
             "responsive": {
               "enabled": true
             },
