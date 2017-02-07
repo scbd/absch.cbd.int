@@ -615,3 +615,20 @@ label{
   .ngdialog.ngdialog-theme-default .ngdialog-content{padding:0;}
 
   .modal-body{background-color:#FFF;}
+
+  .btn-thin .btn{
+	  padding:0 3px 0 3px!important;
+	  margin:0!important;
+	  font-size:12px;font-weight: 500;
+  }
+  #MyLocale .locale-menu {
+	  left:200px;
+	  top:20px;
+  } 
+    #MyLocale .locale {
+	  display:inline;
+  } 
+    #MyLocale .badge {
+	  font-size:12px;
+	  border-radius: .25em;
+  } 

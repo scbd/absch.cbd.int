@@ -3,9 +3,7 @@ define(['app', 'underscore',
     'scbd-angularjs-filters',
     '/app/services/search-service.js',
     '../directives/block-region-directive.js',
-    'scbd-map/ammap3',
-    'scbd-map/ammap3-service',
-    '/app/views/countries/search-map.js'
+    '/app/views/countries/country-map.js'
 ], function (app, _) {
 
     app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams', '$compile', '$timeout',

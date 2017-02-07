@@ -1,6 +1,10 @@
-﻿<div class="popover" style="background-color:rgba(10,10,10,.9);color:#a2a6a5;max-width:450px;width:450px;web0px;max-height:400px;
-{{codeLower=='fk' ? 'height:360px' : (codeLower=='gl' ? 'height:330px' : 'height:300px')}}">
+﻿<div class="popover" 
+style="background-color:rgba(10,10,10,.9)!important;color:#a2a6a5;
+width:450px;web0px;max-height:400px;min-height:250px;
+{{codeLower=='fk' ? 'height:300px' : (codeLower=='gl' ? 'height:275px' : '')}}
+{{codeLower!='fk' && (codeLower=='gb'||exceptionCountry=='gb') ? 'height:300px' : ''}}">
     <style>
+       
         .party-status {
             text-decoration: none;
             color: #fff;
@@ -16,9 +20,12 @@
             text-transform: uppercase;
             vertical-align: middle;
         }
-
+        .popover .arrow,
+        .popover .arrow:after {       
+            display: none;
+        }
         .popover.top .arrow:after {
-            border-top-color: rgba(82, 87, 95, .9);
+            border-top-color: none             
         }
         .show{
             display: block
@@ -29,20 +36,35 @@
         .extraHeight{
             min-height:150px!important;
         }
+        .gb-territories + .tooltip > .tooltip-inner {background-color: #d9edf7;color:#31708f;}
+        .gb-territories + .tooltip > .tooltip-arrow { border-bottom-color:#d9edf7; }
     </style>
     <div class="arrow "></div>
     <div style="text-align:left;padding: 6px 6px 6px 6px;">
-        <i class="fa fa-times pull-right"></i>
-        <div>{{status}} </div>
-        <h3 class="custom-title" style="margin-top:10px;margin-bottom:5px;"><i class="flag-icon flag-icon-{{exceptionCountry||codeLower}}"></i> {{nameLocalized}}</h3>
-         <div class="small alert-info {{(exceptionCountry=='dk' || codeLower=='dk') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
-            <i class="fa fa-info-circle" /> 
-           Denmark’s ratification of the Protocol does not apply in respect of Greenland and the Faroe Islands.
-        </div>
-        <div class="{{codeLower=='fk' ? 'show' : 'hide'}}  alert-info small " style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
-            <i class="fa fa-info-circle" />
-            A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern Ireland concerning sovereignty over the Falkland Islands (Malvinas).
-        </div>
+         <i class="fa fa-times pull-right"></i>
+         <div class="row col-xs-12">
+            <h3 class="custom-title" style="margin-top:10px;margin-bottom:5px;width:60%;display:inline">
+                <i class="flag-icon flag-icon-{{exceptionCountry||codeLower}}"></i> {{nameLocalized}}
+            </h3>   
+            {{status}}                
+         </div>
+         <div class="row col-xs-12">
+            <div class="small alert-info {{(exceptionCountry=='dk' || codeLower=='dk') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
+                <i class="fa fa-info-circle" /> 
+            Denmark’s ratification of the Protocol does not apply in respect of Greenland and the Faroe Islands.
+            </div>
+            <div class="{{codeLower=='fk' ? 'show' : 'hide'}}  alert-info small " style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
+                <i class="fa fa-info-circle" />
+                A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern Ireland concerning sovereignty over the Falkland Islands (Malvinas).
+            </div>
+            <div class="small alert-info {{(exceptionCountry=='gb'||codeLower=='gb') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
+                <i class="fa fa-info-circle" /> 
+                The UK’s ratification of the Nagoya Protocol does not extend to the 
+                    <a ng-href="#" class="gb-territories" data-toggle="tooltip" data-placement="bottom" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Gibraltar; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands" >14 Overseas Territories </a>
+                    or <a ng-href="#" class="gb-territories" data-toggle="tooltip" data-placement="bottom" 
+                    title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
+            </div>
+         </div>
     </div>
     <div style="clear:both;"></div>
     <div class="text-nowrap" style="min-height:120px;padding: 6px 10px 6px 10px; " >

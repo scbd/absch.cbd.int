@@ -97,7 +97,6 @@ require.config({
         { name: 'scbd-angularjs-controls', location : 'components/scbd-angularjs-controls/form-control-directives', main : 'all-controls.js' },
         { name: 'scbd-angularjs-services', location : 'components/scbd-angularjs-services/services' },
         { name: 'scbd-angularjs-filters',  location : 'components/scbd-angularjs-services/filters' },
-        { name: 'scbd-map',                location : 'components/scbd-map' },
         { name: 'ammap', main: 'ammap',    location : 'libs/ammap3/ammap' }
     ]
 });

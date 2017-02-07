@@ -1,6 +1,8 @@
-﻿<div class="locale" id="CBD-Branding">
-    <a  ng-href="#"class="pull-right set-languages" data-toggle="dropdown">
-      <span class="badge badge-default color-white">{{currentLanguage|uppercase}}</span>
+﻿<div class="locale" id="{{idname}}" >
+    <a  ng-href="#"class="set-languages" data-toggle="dropdown">
+      <span class="badge badge-default color-white">
+        {{currentLanguage|uppercase}}<span class="caret"></span>
+      </span>
     </a>
     <ul id="dropdown-menu" class="dropdown-menu locale-menu" role="menu">
       <li class="disabled" style="font-weight:bold;color:#BBB;">LANGUAGES</li>

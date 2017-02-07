@@ -3,7 +3,8 @@ define(['app','underscore',
   'scbd-angularjs-services/locale','ng-breadcrumbs',
   'css!/app/libs/flag-icon-css/css/flag-icon.min.css',
   'css!./country-profile','./country-profile-directive.html.js',
-    '../directives/block-region-directive.js','/app/views/countries/search-zoom-map.html.js'
+  '../directives/block-region-directive.js',
+  '/app/views/countries/country-map.js'
 ], function(app, _) {
 
   app.controller("countryProfileController",
@@ -20,7 +21,8 @@ define(['app','underscore',
           $scope.country.cssClass='flag-icon-'+$scope.country.code;
           breadcrumbs.options = { 'Country Profile': $scope.country.name };
       });
-
+      if($scope.code.toUpperCase == 'GB')
+            $element.find('[data-toggle="tooltip"]').tooltip(); 
       // $scope.loading = true;
       // $timeout(function(){
       //       require(['/app/views/countries/search-zoom-map.html.js'], function(map){                   
