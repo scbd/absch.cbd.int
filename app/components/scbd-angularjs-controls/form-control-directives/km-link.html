@@ -6,10 +6,10 @@
 					<a target="_blank" ng-href="{{link.url}}">{{link.name||link.url}}</a>
 					<span ng-repeat="ext in extensions">
 						<i ng-show="link[ext.model]">
-							({{link[ext.model]}})
-							<!--({{( ext.options | filter: { identifier : link[ext.model] } )[0].title|lstring}})-->
+							<!--({{link[ext.model]}})-->
+							({{( ext.options | filter: { identifier : link[ext.model] } )[0].title|lstring}})
 						</i>
-						<!-- <i ng-show="link.type!= 'file' && link[ext.model]">({{link[ext.model]}})</i> -->
+						 <!--<i ng-show="link.type!= 'file' && link[ext.model]">({{link[ext.model]}})</i> -->
 					</span>
 				</td>
 				<td style="text-align:end;white-space:nowrap">
