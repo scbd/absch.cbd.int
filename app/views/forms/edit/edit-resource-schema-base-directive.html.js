@@ -98,6 +98,7 @@ define(['app', 'underscore',
 						model:"language",
 						title:"Language",
 						required:true,
+                    	mapping: function(item){ return item.identifier;},
 						options: $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
 							$scope.options.documentLinksExt[0].options = $filter("orderBy")(o.data, "name");
 							_.each($scope.options.documentLinksExt[0].options, function(element) {
