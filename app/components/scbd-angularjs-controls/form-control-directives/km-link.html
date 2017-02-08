@@ -106,7 +106,7 @@
 			<div id="uploadPlaceholder" style="display:none"></div>
 
 			<form name="fileForm">
-			<fieldset ng-hide="fileForm.$invalid">
+			<fieldset ng-hide="editor.progress.style=='error' || editor.error">
 				<div ng-show="extensions">
 
 					<div ng-repeat="ext in extensions"  ng-class="{error: fileForm[ext.model].$invalid}">
