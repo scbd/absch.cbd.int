@@ -75,6 +75,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                     model: "language",
                     title: "Language",
                     required: true,
+                    mapping: function(item){ return item.identifier;},
                     options: function() {
                         return $http.get(
                             "/api/v2013/thesaurus/domains/ISO639-2/terms", {
@@ -94,6 +95,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         model: "language",
                         title: "Language",
                         required: true,
+                        mapping: function(item){ return item.identifier;},
                         options: function() {
                             return $http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms", {
                                 cache: true
@@ -110,6 +112,7 @@ define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/j
                         model: "translationType",
                         title: "Translation Type",
                         required: true,
+                        mapping: function(item){ return item.identifier;},
                         options: function() {
                             return $http.get("/api/v2013/thesaurus/domains/19E3C535-2919-4804-966C-E62728507291/terms", {
                                 cache: true
