@@ -250,7 +250,7 @@ function (app, moment, schemaName, schemaShortName) {
 
       }).catch(function () {
 
-        cacheMap[term.identifier] = term.identifier;
+        cacheMap[term.identifier] = { title : term.identifier };
 
         return term.identifier;
 

@@ -375,7 +375,8 @@ app.directive('kmLink', function() {
 								else if (message.status == 413)
 										$scope.editor.error = 'File too big, maxium file size allowed is 20 MB.';
 								else
-										$scope.editor.error = 'There was a error uploading your file, please try again. \r\n(' + message.data.message + ')';
+										$scope.editor.error = 'There was a error uploading your file, please try again. \r\n(' 
+										+ ((message.data||{}).message||message) + ')';
 										//message.data;
 
 								if ($scope.editor.progress)
