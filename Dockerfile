@@ -9,9 +9,11 @@ ENV VERSION $VERSION
 RUN echo 'running on branch ' $VERSION
 
 # clone primary repo
-RUN git clone -b $VERSION https://github.com/scbd/absch.cbd.int.git /usr/tmp/i18n/en
+RUN git clone -n https://github.com/scbd/absch.cbd.int.git /usr/tmp/i18n/en
 
 WORKDIR /usr/tmp/i18n/en
+RUN git checkout $VERSION
+
 COPY i18n.sh ./
 RUN chmod 700 i18n.sh
 RUN ./i18n.sh
