@@ -2,10 +2,10 @@ FROM node:4.2
 
 ARG BRANCH='master'
 ENV BRANCH $BRANCH
-RUN echo 'running on branch ' $BRANCH
+RUN echo 'running on branch ' $VERSION
 
 # clone primary repo
-RUN git clone -b $BRANCH https://github.com/scbd/absch.cbd.int.git /usr/tmp/i18n/en
+RUN git clone -b $VERSION https://github.com/scbd/absch.cbd.int.git /usr/tmp/i18n/en
 
 WORKDIR /usr/tmp/i18n/en
 COPY i18n.sh ./
