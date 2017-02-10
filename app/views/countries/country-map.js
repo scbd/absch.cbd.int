@@ -46,10 +46,6 @@ function(template, app, _, popOverTemplate) {
             "responsive": {
               "enabled": true
             },
-            "responsive": {
-              "enabled": true
-            },
-
             "dataProvider": {
               "map": "worldEUHigh",
               "getAreasFromMap": true,
