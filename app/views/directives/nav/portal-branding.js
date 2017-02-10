@@ -11,8 +11,8 @@ define(['app', 'underscore', ], function(app, _) {
             link: ['$scope', '$q', '$element', function($scope, $q, $element) {
 
             }],
-            controller: ['$scope', '$rootScope', '$q', '$element', '$http', '$filter','$location',
-                function($scope, $rootScope, $q, $element, $http, $filter, $location) {
+            controller: ['$scope', '$rootScope', '$q', '$element', '$http', '$filter','$location', 'locale',
+                function($scope, $rootScope, $q, $element, $http, $filter, $location, locale) {
 
                     //============================================================
                     //
@@ -22,7 +22,7 @@ define(['app', 'underscore', ], function(app, _) {
                     $scope.production_env = true;
                     $scope.development_env = false;
                     $scope.training_env = false;
-
+                    $scope.locale   = locale;
                     if ($location.absUrl().toLowerCase().indexOf("://absch.cbddev.xyz") > 0 || $location.absUrl().toLowerCase().indexOf("localhost:2010") > 0) {
                         $scope.development_env = true;
                         $scope.training_env = false;

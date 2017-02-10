@@ -2,11 +2,20 @@
   <!-- sign in -->
   <accounts-validation-header></accounts-validation-header>
   <nav class="navbar navbar-cbd navbar-default bg-white navbar-static-top" id="anchorTop">
-
+    <style>
+      .arabic-Header {
+          margin-right: 200px;
+      }
+      .arabic-cbd-nav-bar {
+          float : right!important;
+      }
+    </style>
     <div class="container-fluid container-cbd bg-white">
       <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header ">
-        <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggleMenu = !toggleMenu"><i class="fa fa-bars"></i> Convention on Biological Diversity</span>
+      <div class="navbar-header" >
+        <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggleMenu = !toggleMenu" ng-class="{'arabic-Header' : locale=='ar'}">
+          <i class="fa fa-bars"></i> Convention on Biological Diversity
+        </span>
 
         <span href="http://www.cbd.int" class="hidden-md hidden-lg pull-left">
           <img src="/app/components/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" style="padding-left:8px;"/>
@@ -18,7 +27,7 @@
         <locale-header style="position:absolute;right:10px;top:-1px;" id="CBD-Branding"></locale-header>
       </div>
 
-      <ul class="navbar-left navlist hidden-xs hidden-sm">
+      <ul class="navbar-left navlist hidden-xs hidden-sm"  ng-class="{'arabic-cbd-nav-bar' : locale=='ar'}">
         <li ng-if="toggleMenu" ><a translation-url  href="http://www.cbd.int/convention/" class="color-cbdgrey">The Convention</a></li>
         <li ng-if="toggleMenu"><a translation-url  href="http://bch.cbd.int/protocol" class="color-cbdgrey">Cartagena Protocol</a></li>
         <li ng-if="toggleMenu"><a translation-url  href="http://www.cbd.int/abs/" class="color-cbdgrey">Nagoya Protocol</a></li>
