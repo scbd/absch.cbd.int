@@ -353,6 +353,8 @@ function (app, moment, schemaName, schemaShortName) {
 			if(schema.toLowerCase()=="capacitybuildinginitiative" ) return "CBI";
 			if(schema.toLowerCase()=="capacitybuildingresource"   ) return "CBR";
 			if(schema.toLowerCase()=="endorsement"				        ) return "EDR";
+
+      return schema;
 		};
 	}]);
 
