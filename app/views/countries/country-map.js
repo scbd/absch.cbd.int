@@ -364,8 +364,8 @@ function(template, app, _, popOverTemplate) {
           }, false);
           holder.appendChild(pin);
 
-
-          $scope.map.dataProvider.images[imageIndex].chart.chartDiv.appendChild(holder);
+          if($scope.map.dataProvider.images[imageIndex] && $scope.map.dataProvider.images[imageIndex].chart)
+            $scope.map.dataProvider.images[imageIndex].chart.chartDiv.appendChild(holder);
 
           return holder;
         }
