@@ -89,16 +89,20 @@ app.directive("viewAbsNationalReport", [function () {
 
 		    	if(!reference)
 		    		return;
-
+				var UID;
 		        if ((reference.identifier).indexOf("52000000cbd") == 0) {
-					
-		        	return "https://www.cbd.int/kb/record/focalPoint/" + commonjs.hexToInteger(reference.identifier);
+					reference.id = reference.identifier;
+					reference.schema = 'focalPoint';
+					reference.government = $scope.document.government;
+					UID = $filter("uniqueID")(reference);	        	
 		        }
+				else
+					UID = $filter("uniqueIDWithoutRevision")(reference.identifier);
+
 				var revsionNumber = '';
 		        if(reference.identifier.indexOf('@')>=0)
 				    revsionNumber = reference.identifier.substr(reference.identifier.indexOf('@')+1, reference.identifier.length - (reference.identifier.indexOf('@')+1));
 				
-				var UID = $filter("uniqueIDWithoutRevision")(reference.identifier);
 				if(!UID)
 					return;
 
@@ -116,11 +120,12 @@ app.directive("viewAbsNationalReport", [function () {
 		    		return;
 
 		        if ((reference.identifier).indexOf("52000000cbd") == 0) {
-					
-		        	return "https://www.cbd.int/kb/record/focalPoint/" + commonjs.hexToInteger(reference.identifier);
+					reference.id = reference.identifier;	
+					reference.schema = 'focalPoint';
+					reference.government = $scope.document.government;
 		        }
 		        
-				return  $filter("uniqueID")(reference.identifier);
+				return  $filter("uniqueID")(reference.id ? reference : reference.identifier);
 			}
 
 
