@@ -181,20 +181,22 @@ define(['app',
 						$scope.error = undefined;
 						var qDocument;
 						var qDocumentInfo;
-
-
+						
+						var config = {};						
 
 						if (version == 'draft') {
-							qDocument = storage.drafts.get(identifier).then(function (result) { return result.data || result });
-							qDocumentInfo = storage.drafts.get(identifier, { info: true }).then(function (result) { return result.data || result });
+							qDocument = storage.drafts.get(identifier, undefined, config).then(function (result) { return result.data || result });
+							qDocumentInfo = storage.drafts.get(identifier, { info: true }, config).then(function (result) { return result.data || result });
 						}
-						else if (version == undefined) {
-							qDocument = storage.documents.get(identifier, {'include-deleted':true}).then(function (result) { return result.data || result });
-							qDocumentInfo = storage.documents.get(identifier, { info: true, 'include-deleted':true }).then(function (result) { return result.data || result });
+						else if (version == undefined) {							
+							config.headers = {realm : undefined};
+							qDocument = storage.documents.get(identifier, {'include-deleted':true}, config).then(function (result) { return result.data || result });
+							qDocumentInfo = storage.documents.get(identifier, { info: true, 'include-deleted':true }, config).then(function (result) { return result.data || result });
 						}
 						else {
-							qDocument = storage.documents.get(identifier + '@' + version, {'include-deleted':true}).then(function (result) { return result.data || result });
-							qDocumentInfo = storage.documents.get(identifier + '@' + version, {'include-deleted':true, info: true }).then(function (result) { return result.data || result });
+							config.headers = {realm : undefined};
+							qDocument = storage.documents.get(identifier + '@' + version, {'include-deleted':true}, config).then(function (result) { return result.data || result });
+							qDocumentInfo = storage.documents.get(identifier + '@' + version, {'include-deleted':true, info: true }, config).then(function (result) { return result.data || result });
 
 						}
 						$scope.loading = true;
