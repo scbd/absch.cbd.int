@@ -77,16 +77,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js' , '/app/views/forms
             return true;
         return false;
     }
-
-    //==================================
-    //
-    //==================================
-    $scope.yesNoClear = function (answer, field) {
-        if(!answer && $scope.document && $scope.document[field] && hasValue($scope.document[field].answer)){            
-            $scope.document[field].documentReferenceIDs = undefined;
-        }
-    };
-
+   
     //==================================
     //
     //==================================

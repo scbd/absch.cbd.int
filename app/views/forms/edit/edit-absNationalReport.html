@@ -150,7 +150,7 @@
                             <div class="row">
             					<div class="col-xs-12">
                                     <div class="km-control-group" bold="true" required name="question4" caption="4. Has your country taken legislative, administrative and policy measures on ABS?">
-                                        <div required class="km-yes-no"  name="question4" ng-model="document.question4.answer" ng-click="yesNoClear(document.question4.answer, 'question4')"></div>
+                                        <div required class="km-yes-no"  name="question4" ng-model="document.question4.answer" ></div>
                                     </div>
                                     <div class="km-control-group"  name="question4.ChallengesInfo" caption="Please provide a summary of the main difficulties and challenges encountered in setting up these measures.">
                                         <div km-textbox-ml rows=4 name="question4.ChallengesInfo"  ng-model="document.question4.challengesInfo" locales="document.header.languages" placeholder=""></div>
@@ -160,10 +160,9 @@
                                         <div km-textbox-ml rows=4 name="question4.AdditionalInfo" ng-model="document.question4.additionalInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q4DocRefs" caption="Please select the relevant ABSCH records"
-                                    ng-show="document.question4.answer">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q4DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selector ng-model="document.question4.documentReferenceIDs"
-                                                                ng-disabled="!document.government || !document.question4.answer"
+                                                                ng-disabled="!document.government"
                                                                 question="question4"
                                                                 government="document.government"
                                                                 schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)" filter="true">
@@ -176,7 +175,7 @@
                             <div class="row" >
             					<div class="col-xs-12">
                                     <div class="km-control-group"  bold="true" required name="question5" caption="5. Has your country designated a national focal point as provided in Article 13?">
-                                        <div class="km-yes-no" required name="question5" ng-model="document.question5.answer"  ng-click="yesNoClear(document.question5.answer, 'question5')"></div>
+                                        <div class="km-yes-no" required name="question5" ng-model="document.question5.answer"  ></div>
                                     </div>
                                     <div class="km-control-group"  name="question5.ChallengesInfo" caption="Please provide a summary of the main difficulties and challenges encountered for designating a national focal point.">
                                         <div km-textbox-ml rows=4  name="question5.ChallengesInfo" ng-model="document.question5.challengesInfo" locales="document.header.languages" placeholder=""></div>
@@ -187,10 +186,9 @@
                                         <div km-textbox-ml rows=4 name="question5FurtherInfo" ng-model="document.question5.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q5DocRefs" caption="Please select the relevant ABSCH records"
-                                    ng-show="document.question5.answer">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q5DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selector ng-model="document.question5.documentReferenceIDs"
-                                                                ng-disabled="!document.government || !document.question5.answer"
+                                                                ng-disabled="!document.government"
                                                                 question="question5"
                                                                 government="document.government"
                                                                 schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"   filter="true">
@@ -202,7 +200,7 @@
                             <div class="row" >
             					<div class="col-xs-12">
                                     <div class="km-control-group" bold="true" required name="question6" caption="6. Has your country designated one or more competent national authorities as provided in Article 13?">
-                                        <div  class="km-yes-no" required name="question6" ng-model="document.question6.answer" ng-click="yesNoClear(document.question6.answer, 'question6')"></div>
+                                        <div  class="km-yes-no" required name="question6" ng-model="document.question6.answer" ></div>
                                     </div>
                                     <div class="km-control-group"  name="question6.ChallengesInfo" caption="Please provide a summary of the main difficulties and challenges encountered for designating one or more competent national authority.">
                                         <div km-textbox-ml rows=4 name="question6.ChallengesInfo"  ng-model="document.question6.challengesInfo" locales="document.header.languages" placeholder=""></div>
@@ -212,10 +210,9 @@
                                         <div km-textbox-ml rows=4 name="question6FurtherInfo" ng-model="document.question6.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q6DocRefs" caption="Please select the relevant ABSCH records"
-                                    ng-show="document.question6.answer">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q6DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selector ng-model="document.question6.documentReferenceIDs"
-                                                                ng-disabled="!document.government || !document.question6.answer"
+                                                                ng-disabled="!document.government"
                                                                 question="question6"
                                                                 government="document.government"
                                                                 schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"   filter="true">
@@ -233,7 +230,7 @@
                                               <input  required="!hasValue(document.question7.answer)" type="checkbox" ng-model="document.question7.notApplicable" ng-change="Q7YesNoClear()">Not applicable, since no access requirements are in place
                                             </label>
                                         </div>
-                                        <div ng-disabled="document.question7.notApplicable" required="!document.question7.notApplicable" class="km-yes-no" name="question7" ng-model="document.question7.answer" ng-click="yesNoClear(document.question7.answer, 'question7')"></div>
+                                        <div ng-disabled="document.question7.notApplicable" required="!document.question7.notApplicable" class="km-yes-no" name="question7" ng-model="document.question7.answer" ></div>
                                     </div>
                                     <div class="km-control-group" name="question7.ChallengesInfo"  caption="Please provide a summary of the main difficulties and challenges encountered for making this information available.">
                                         <div km-textbox-ml rows=4 name="question7.ChallengesInfo" ng-model="document.question7.challengesInfo" locales="document.header.languages" placeholder=""></div>
@@ -243,10 +240,9 @@
                                         <div km-textbox-ml rows=4 name="question7FurtherInfo" ng-model="document.question7.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q7DocRefs" caption="Please select the relevant ABSCH records"
-                                    ng-show="document.question7.answer">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q7DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selector ng-model="document.question7.documentReferenceIDs"
-                                                                ng-disabled="!document.government || !document.question7.answer"
+                                                                ng-disabled="!document.government"
                                                                 question="question7"
                                                                 government="document.government"
                                                                 schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"   filter="true">
@@ -257,21 +253,20 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" required bold="true" name="question8" caption="8. Has your country made available to the ABS Clearing-House permits or their equivalent for the constitution of an internationally recognized certificate of compliance in accordance with Article 17.2?">
+                                    <div class="km-control-group" bold="true" name="question8" caption="8. Has your country made available to the ABS Clearing-House permits or their equivalent for the constitution of an internationally recognized certificate of compliance in accordance with Article 17.2?">
                                         <div class="checkbox">
                                             <label><input type="checkbox" ng-model="document.question8.notApplicable" ng-change="Q8YesNoClear()">Not applicable, since no access requirements are in place</label>
                                         </div>
-                                        <div ng-disabled="document.question8.notApplicable" class="km-yes-no" name="question8" ng-model="document.question8.answer"  ng-click="yesNoClear(document.question8.answer, 'question8')"></div>
+                                        <div ng-disabled="document.question8.notApplicable" class="km-yes-no" name="question8" ng-model="document.question8.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question8FurtherInfo" caption="">
                                         Please provide further information
                                         <div km-textbox-ml rows=4 name="question8FurtherInfo" ng-model="document.question8.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q8DocRefs" caption="Please select the relevant ABSCH records"
-                                    ng-show="document.question8.answer">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q8DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selector ng-model="document.question8.documentReferenceIDs"
-                                                                ng-disabled="!document.government || !document.question8.answer"
+                                                                ng-disabled="!document.government"
                                                                 question="question8"
                                                                 government="document.government"
                                                                 schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"   filter="true">
@@ -283,7 +278,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="km-control-group"  bold="true" required name="question9" caption="9. Has your country designated one or more checkpoints as provided in Article 17?">
-                                        <div class="km-yes-no" required name="question9" ng-model="document.question9.answer" ng-click="yesNoClear(document.question9.answer, 'question9')"></div>
+                                        <div class="km-yes-no" required name="question9" ng-model="document.question9.answer" ></div>
                                     </div>
                                     <div class="km-control-group" name="question9Challenges" caption="">
                                        Please provide a summary of the main difficulties and challenges encountered for designating one or more checkpoints:
@@ -294,10 +289,9 @@
                                         <div km-textbox-ml rows=4 name="question9FurtherInfo" ng-model="document.question9.furtherInfo" locales="document.header.languages" placeholder=""></div>
                                     </div>
 
-                                    <div class="km-control-group" style="margin-bottom:20px;" name="q9DocRefs" caption="Please select the relevant ABSCH records"
-                                    ng-show="document.question9.answer">
+                                    <div class="km-control-group" style="margin-bottom:20px;" name="q9DocRefs" caption="Please select the relevant ABSCH records">
                                         <div document-selector ng-model="document.question9.documentReferenceIDs"
-                                                                ng-disabled="!document.government || !document.question9.answer"
+                                                                ng-disabled="!document.government"
                                                                 question="question9"
                                                                 government="document.government"
                                                                 schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"   filter="true">
