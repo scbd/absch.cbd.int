@@ -189,12 +189,12 @@ define(['app',
 							qDocumentInfo = storage.drafts.get(identifier, { info: true }, config).then(function (result) { return result.data || result });
 						}
 						else if (version == undefined) {							
-							config.headers = {realm : undefined};
+							config.params = {skipRealmHeader : true};
 							qDocument = storage.documents.get(identifier, {'include-deleted':true}, config).then(function (result) { return result.data || result });
 							qDocumentInfo = storage.documents.get(identifier, { info: true, 'include-deleted':true }, config).then(function (result) { return result.data || result });
 						}
 						else {
-							config.headers = {realm : undefined};
+							config.params = {skipRealmHeader : true};
 							qDocument = storage.documents.get(identifier + '@' + version, {'include-deleted':true}, config).then(function (result) { return result.data || result });
 							qDocumentInfo = storage.documents.get(identifier + '@' + version, {'include-deleted':true, info: true }, config).then(function (result) { return result.data || result });
 
