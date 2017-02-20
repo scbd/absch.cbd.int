@@ -1,4 +1,4 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document-selection-directive.html.js',
+define(['app', 'underscore', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document-selector.html.js',
         '../view/view-abs-national-report.directive.js',
         '/app/services/search-service.js','/app/services/app-config-service.js'
 ], function (app, _) {
@@ -77,53 +77,7 @@ define(['app', 'underscore', '/app/views/forms/edit/edit.js' , '/app/views/forms
             return true;
         return false;
     }
-
-    //==================================
-    //
-    //==================================
-    $scope.Q3Clear = function () {
-        if($scope.document && $scope.document.question3){
-            $scope.document.question3.challengesInfo       = undefined;
-            $scope.document.question3.documentReferenceIDs = undefined;
-        }
-
-        if($scope.document && $scope.document.question4){
-            $scope.document.question4.answer               = undefined;
-            $scope.document.question4.furtherInfo          = undefined;
-            $scope.document.question4.additionalInfo       = undefined;
-            $scope.document.question4.documentReferenceIDs = undefined;
-        }
-
-        if($scope.document && $scope.document.question5){
-            $scope.document.question5.answer               = undefined;
-            $scope.document.question5.furtherInfo          = undefined;
-            $scope.document.question5.documentReferenceIDs = undefined;
-        }
-
-        if($scope.document && $scope.document.question6){
-            $scope.document.question6.answer               = undefined;
-            $scope.document.question6.furtherInfo          = undefined;
-            $scope.document.question6.documentReferenceIDs = undefined;
-        }
-
-        if($scope.document && $scope.document.question7){
-            $scope.document.question7.notApplicable        = undefined;
-            $scope.document.question7.answer               = undefined;
-            $scope.document.question7.furtherInfo          = undefined;
-            $scope.document.question7.documentReferenceIDs = undefined;
-        }
-    };
-
-    //==================================
-    //
-    //==================================
-    $scope.isQ4Yes = function (answer) {
-        if(!answer && $scope.document && $scope.document.question4 && hasValue($scope.document.question4.answer)){
-            $scope.document.question4.additionalInfo = undefined;
-            $scope.document.question7.documentReferenceIDs = undefined;
-        }
-    };
-
+   
     //==================================
     //
     //==================================

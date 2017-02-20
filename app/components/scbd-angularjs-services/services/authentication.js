@@ -347,7 +347,13 @@ define(['app', './apiUrl'], function(app) {
         return {
             request: function(config) {
 
-
+                if(config && config.params && config.params.skipRealmHeader){
+                    config.params.skipRealmHeader   = undefined;
+                    config.headers.realm            = undefined;
+                }
+                else if(config && config.header && config.headers.realm === undefined){
+                    delete config.headers.realm;
+                }
 
                 if((config.headers || {}).hasOwnProperty('realm'))
                     return config;
@@ -357,7 +363,7 @@ define(['app', './apiUrl'], function(app) {
                     /^https:\/\/localhost[:\/]/i.test(config.url) ||
                     /^\/\w+/i.test(config.url);
 
-                if (trusted && realm) {
+               if (trusted && realm) {
                     config.headers = angular.extend(config.headers || {}, {
                         realm: realm.value || realm
                     });

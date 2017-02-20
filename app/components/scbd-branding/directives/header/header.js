@@ -17,9 +17,10 @@ function(app, template, $) {
             restrict: 'E',
             priority: 10, //parent has 0 priority
             template: template,
-            controller: ['$scope', '$rootScope', 'authentication', 'socketioService', 'apiToken',
-                function($scope, $rootScope, authentication, socketioService, apiToken) {
-
+            controller: ['$scope', '$rootScope', 'authentication', 'socketioService', 'apiToken', 'locale',
+                function($scope, $rootScope, authentication, socketioService, apiToken, locale) {
+                    $scope.locale = locale;
+                    
                     authentication.getUser().then(function(u) {
                         $scope.user = u;
                         $scope.toggleMenu = 0;

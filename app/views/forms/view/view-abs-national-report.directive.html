@@ -52,16 +52,9 @@
 		                        <label>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</label>
 		                        <div class="km-value">{{document.question3.challengesInfo | lstring:locale}}</div>
 		                </div>
-						<div ng-show="document.question3.documentReferenceIDs && !documentReferenceIDsEmpty(document.question3.documentReferenceIDs)">
-                			<label>The ABS Clearing-House unique ID containing relevant information</label>
-							<div class="km-value">
-								<ul class="list">
-									<li ng-repeat="reference in document.question3.documentReferenceIDs">
-										<a translation-url  target="_new" ng-href="{{getLink(reference)}}">{{getLinkText(reference)}}</a>
-									</li>
-								</ul>
-
-							</div>
+						<div ng-show="document.question3.additionalInfo">
+							<label>Please provide further information</label>
+							<div class="km-value">{{document.question3.additionalInfo | lstring:locale}}</div>
 						</div>
 					</ul>
 				</div>
@@ -70,13 +63,14 @@
 					<label>4. Has your country taken legislative, administrative and policy measures on ABS?</label>
 					<ul>
 						<div class="km-value km-pre" ng-hide="document.question3.answer">{{conditionalBooleanToText((document.question3.answer===undefined || document.question3.answer),document.question4.answer)}}</div>
-						<div ng-show="document.question4.additionalInfo">
-							<label>Please provide further information</label>
-							<div class="km-value">{{document.question4.additionalInfo | lstring:locale}}</div>
-						</div>
+						
 						<div ng-show="document.question4.challengesInfo || document.question3.answer">
 							<label>Please provide a summary of the main difficulties and challenges encountered in setting up these measures</label>
 							<div class="km-value">{{document.question4.challengesInfo | lstring:locale}} &nbsp;</div>
+						</div>
+						<div ng-show="document.question4.additionalInfo">
+							<label>Please provide further information</label>
+							<div class="km-value">{{document.question4.additionalInfo | lstring:locale}}</div>
 						</div>
 						<div ng-show="document.question4.documentReferenceIDs && !documentReferenceIDsEmpty(document.question4.documentReferenceIDs)">
                 			<label>The ABS Clearing-House unique ID containing relevant information</label>

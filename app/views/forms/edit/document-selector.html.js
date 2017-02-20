@@ -6,8 +6,8 @@ define(['app',
 '/app/services/app-config-service.js', 'ngDialog'
 ], function (app, commonjs) { // jshint ignore:line
 
-app.directive("documentSelector", ["$http",'$rootScope', "$filter", "underscore", "$q", "searchService", "appConfigService", "IStorage", 'ngDialog',
-function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, IStorage, ngDialog) {
+app.directive("documentSelector", ["$http",'$rootScope', "$filter", "underscore", "$q", "searchService", "appConfigService", "IStorage", 'ngDialog', 'commonjs',
+function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, IStorage, ngDialog, commonjs) {
 
 	return {
 		restrict   : "EA",
@@ -27,7 +27,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             hideSelf : "=hideSelf",
 		},
 		link : function($scope) {
-
+            var focalPointRegex = /^52000000cbd022/;
             $scope.rawDocuments = [];
             $scope.selectedDocuments=[];
 			$scope.areVisible = false;
@@ -52,7 +52,10 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                             $scope.model=[];
 
                         if(!$scope.isInModel(doc.identifier_s)){
-							var document = {identifier: doc.identifier_s +"@"+ doc._revision_i};
+							var document = {identifier: doc.identifier_s};
+                            if(doc.schema_s != "focalPoint")
+                                document.identifier += "@"+ doc._revision_i;
+
 							if($scope.type == 'radio')
 								$scope.model = document;
 							else
@@ -91,13 +94,24 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 
 				var docs = []
                 if ($scope.model){
+                    
 					if($scope.type == 'radio'){
-						docs.push(IStorage.documents.get($scope.model.identifier));
+                        if(focalPointRegex.test($scope.model.identifier)){
+                            docs.push(commonjs.getReferenceRecordIndex('NFP', $scope.model.identifier))
+                        }
+                        else
+						    docs.push(IStorage.documents.get($scope.model.identifier));
 					}
 					else{
 	                    _.each($scope.model, function (mod) {
-							if(mod.identifier)
-								docs.push(IStorage.documents.get(mod.identifier));
+							if(mod.identifier){
+
+                                if(focalPointRegex.test(mod.identifier)){
+                                    docs.push(commonjs.getReferenceRecordIndex('NFP', mod.identifier))
+                                }
+                                else
+								    docs.push(IStorage.documents.get(mod.identifier));
+                            }
 	                    });
 					}
 
@@ -108,8 +122,8 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 						// }
 						// else{
 							$scope.selectedDocuments = _.map(results, function(result){
-												return result.data || {};
-											});
+                                                            return result.data || {};
+                                                        });
 						// }
 					});
 
@@ -310,6 +324,11 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 						return doc.header.identifier==removeRevisonNumber(document.identifier) && doc.header.schema == "authority"
 				});
 			}
+
+			$scope.isFocalPoint = function(document){
+				return document && focalPointRegex.test(document.identifier)
+			}
+
 			$scope.isMeasure = function(document){
 				return document && _.some($scope.selectedDocuments, function(doc){
 						return doc.header.identifier==removeRevisonNumber(document.identifier) && doc.header.schema == "measure"

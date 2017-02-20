@@ -18,8 +18,9 @@
         </div>
     </div>
 
-    <div ng-if="isPerson">
-        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="!isCNA" style="">Person</div>
+    <div ng-if="isPerson||isNFP">
+        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="!isCNA && !isNFP" style="">Person</div>
+         <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="!isCNA && isNFP" style="">National Focal Point</div>
         <div>
             <span style="font-weight:500;">{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</span>
         </div>
@@ -61,7 +62,7 @@
                 {{document.city | lstring:locale}}<span ng-show="document.city && document.state">, </span>
                 {{document.state | lstring:locale}}<br ng-show="document.city || document.state" />
                 {{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
-                <span style="font-weight:500;">{{document.country|term}}</span>
+                <span style="font-weight:500;"><br ng-show="!document.postalCode" />{{document.country|term}}</span>
         </address>
 
         <div ng-show="document.phones">
