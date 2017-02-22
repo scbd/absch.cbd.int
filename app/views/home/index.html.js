@@ -1,10 +1,10 @@
 define(['app','/app/js/common.js','moment',
     '/app/views/directives/home-country-dashboard-directive.html.js',
-    '/app/views/directives/map/home-map.js'
+    '/app/views/directives/map/home-map.js'    
     ], function (app) {
     app.controller('IndexController', ['$scope', '$http', '$window', '$cookies','realm', '$filter','$rootScope','commonjs','$element', '$timeout', '$compile', 
     function ($scope, $http, $window, $cookies, realm, $filter, $rootScope, commonjs,$element, $timeout, $compile) {
-            
+        
         $scope.locale = 'en';
         //var today= moment();
         var today= moment();
@@ -32,5 +32,18 @@ define(['app','/app/js/common.js','moment',
         $scope.monthsSinceEntry = months;
         $scope.daysSinceEntry = days;
 
+        // angular.element(document).ready(function () {
+        //     console.log('page loading completed');
+
+            
+                // require(['/app/views/directives/map/home-map.js'], function(map){
+                //     $scope.loading = false;
+                //     $scope.$apply(function(){
+                //         var mapElement = $element.find('#Jumbotron')
+                //         $compile(mapElement.contents())($scope);
+                        
+                //     });
+                // });
+        // });
     }]);
 });
