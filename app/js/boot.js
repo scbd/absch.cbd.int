@@ -2,6 +2,8 @@
 
 window.name = 'NG_DEFER_BOOTSTRAP!';
 
+var appVersion = document.documentElement.attributes['app-version'].value;
+
 require.config({
     baseUrl : 'app/',
     'paths': {
@@ -98,7 +100,8 @@ require.config({
         { name: 'scbd-angularjs-services', location : 'components/scbd-angularjs-services/services' },
         { name: 'scbd-angularjs-filters',  location : 'components/scbd-angularjs-services/filters' },
         { name: 'ammap', main: 'ammap',    location : 'libs/ammap3/ammap' }
-    ]
+    ],
+    urlArgs: 'v=' + appVersion
 });
 
 define("_slaask", window._slaask);

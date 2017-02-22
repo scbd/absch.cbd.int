@@ -12,14 +12,18 @@ var app     = express();
 
 // Initialize constants
 
+var appVersion = process.env.TAG;
+if(!appVersion || appVersion.trim()==''){
+    appVersion =  (process.env.BRNACH||'') + '-'+ (process.env.VERSION ||'');
+}  
 var oneDay   = 86400000;
 app.set('view engine', 'ejs');
 // Set routes
-app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/components/scbd-map/worldEUHigh.js', express.static(__dirname + '/app/components/scbd-map/worldEUHigh.js', { maxAge: 86400000*365 }) );
-app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',     translation, express.static(__dirname + '/app'));
+app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/components/scbd-map/worldEUHigh.js', express.static(__dirname + '/app/components/scbd-map/worldEUHigh.js', { setHeaders: setCustomCacheControl , maxAge: 86400000*365 }) );
+app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',     translation, express.static(__dirname + '/app', { setHeaders: setCustomCacheControl }));
 // app.use('/app',                              express.static(__dirname + '/app'));
-app.use('/cbd-forums',      express.static(__dirname + '/app/libs/cbd-forums'));
-app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { maxAge: oneDay }));
+app.use('/cbd-forums',      express.static(__dirname + '/app/libs/cbd-forums', { setHeaders: setCustomCacheControl }));
+app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: setCustomCacheControl , maxAge: oneDay }));
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
 
@@ -29,19 +33,16 @@ app.get('/?:lang(ar|en|es|fr|ru|zh)?/*', function (req, res) {
    var urlPreferredLang;
    if(req.params.lang)
      urlPreferredLang = ('/'+req.params.lang+'/');
+    
+   res.setHeader('Cache-Control', 'public, max-age=0');
    
-   var appVersion = process.env.TAG;
-   if(!appVersion || appVersion.trim()==''){
-       appVersion =  (process.env.BRNACH||'') + '-'+ (process.env.VERSION ||'');
-   }   
-   res.cookie('appVersion', appVersion);
-   res.cookie('VERSION', process.env.VERSION);
+   res.cookie('VERSION', appVersion);
    req.url = '/template.ejs';
    co(function*(){
 
         var preferredLang = getPreferredLanguage(req);
         var langFilepath = yield getLanguageFile(req, preferredLang);
-        var options = { baseUrl: urlPreferredLang || (req.headers.base_url ||  (preferredLang ? ('/'+preferredLang+'/') : '/')) };
+        var options = { baseUrl: urlPreferredLang || (req.headers.base_url ||  (preferredLang ? ('/'+preferredLang+'/') : '/')), 'appVersion' : appVersion };
         
         if(langFilepath){
              return res.render(langFilepath, options);
@@ -114,4 +115,24 @@ function getPreferredLanguage(req){
             return language;
         }
     }
+}
+
+//============================================================
+//
+//
+//============================================================
+function setCustomCacheControl(res, path) {
+
+	var versionWrong = false;
+	var versionMatch = false;
+
+	versionWrong |= res.req.query && res.req.query.v && res.req.query.v!=appVersion;
+	versionWrong |= res.req.cookies && res.req.cookies.VERSION && res.req.cookies.VERSION!=appVersion;
+	versionMatch |= res.req.query && res.req.query.v && res.req.query.v==appVersion;
+	versionMatch |= res.req.cookies && res.req.cookies.VERSION && res.req.cookies.VERSION==appVersion;
+
+	if(versionWrong || !versionMatch)
+		return res.setHeader('Cache-Control', 'public, max-age=0');
+
+	res.setHeader('Cache-Control', 'public, max-age=86400000');
 }
