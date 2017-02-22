@@ -15,6 +15,7 @@ var app     = express();
 var appVersion = process.env.TAG;
 if(!appVersion || appVersion.trim()==''){
     appVersion =  (process.env.BRNACH||'') + '-'+ (process.env.VERSION ||'');
+    // if(appVersion == "-")
 }  
 var oneDay   = 86400000;
 app.set('view engine', 'ejs');
@@ -126,11 +127,12 @@ function setCustomCacheControl(res, path) {
 	var versionWrong = false;
 	var versionMatch = false;
 
-	versionWrong |= res.req.query && res.req.query.v && res.req.query.v!=appVersion;
-	versionWrong |= res.req.cookies && res.req.cookies.VERSION && res.req.cookies.VERSION!=appVersion;
-	versionMatch |= res.req.query && res.req.query.v && res.req.query.v==appVersion;
-	versionMatch |= res.req.cookies && res.req.cookies.VERSION && res.req.cookies.VERSION==appVersion;
-
+    if(res.req.headers && res.req.headers.referer!="http://localhost:2010/"){
+        versionWrong |= res.req.query && res.req.query.v && res.req.query.v!=appVersion;
+        versionWrong |= res.req.cookies && res.req.cookies.VERSION && res.req.cookies.VERSION!=appVersion;
+        versionMatch |= res.req.query && res.req.query.v && res.req.query.v==appVersion;
+        versionMatch |= res.req.cookies && res.req.cookies.VERSION && res.req.cookies.VERSION==appVersion;
+    }
 	if(versionWrong || !versionMatch)
 		return res.setHeader('Cache-Control', 'public, max-age=0');
 

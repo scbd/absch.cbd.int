@@ -3,7 +3,9 @@
 window.name = 'NG_DEFER_BOOTSTRAP!';
 
 var appVersion = document.documentElement.attributes['app-version'].value;
-
+if(appVersion=='-')
+    appVersion = new Date();
+    
 require.config({
     baseUrl : 'app/',
     'paths': {
