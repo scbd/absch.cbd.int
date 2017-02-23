@@ -240,14 +240,11 @@ function(template, app, _, popOverTemplate) {
           if(!mapCountry)
             mapCountry = getMapObject(country.code);
 
-            // if(ammap3Service.exceptionRegionMapping[mapCountry.id]){
-            //     countryCode = ammap3Service.exceptionRegionMapping[mapCountry.id];
-            // }
             
-            if (country) {
+            if (country && mapCountry) {
                 if (country.isNPInbetweenParty)
                     mapCountry.colorReal = mapCountry.baseSettings.color = "#EC971F";
-                else if (country.isNPParty )//&& !_.contains(['GB', 'DK'],ammap3Service.exceptionRegionMapping[mapCountry.id]))
+                else if (country.isNPParty )
                     mapCountry.colorReal = mapCountry.baseSettings.color = "#5F4586";
                 else
                     mapCountry.colorReal = mapCountry.baseSettings.color = "#333";
