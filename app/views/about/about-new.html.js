@@ -87,7 +87,7 @@ app.directive('spy', function ($location, $anchorScroll) {
       elem.click(function () {
         scope.$apply(function() {
           $location.hash(attrs.spy);
-          $anchorScroll();
+          // $anchorScroll();
         });
       });
 
@@ -118,11 +118,15 @@ app.controller("AboutNewController",
         bottom: ($('footer').outerHeight(true) + $('.application').outerHeight(true)) + 40
         }
      });
-    //  $('#MainControl').scrollspy({target: ".scrollspy"})
+    
+    $(".sidenav a").on('click', function(event) {
 
-    // $(document).on('activate.bs.scrollspy', function () {
-    //     console.log('active')
-    // })
-
+        if (this.hash !== "") {
+          var hash = this.hash;
+          $('html, body').animate({
+            scrollTop: $(hash).offset().top
+          }, 800);
+        } 
+    });
    }]);
 });

@@ -2,7 +2,7 @@ define(['text!./home-map.html',
   'app',
   'lodash',
   './party-status.js', '/app/services/search-service.js',
-  '/app/views/countries/country-map.js'
+  '../block-region-directive.js'
 ], function(template, app, _, popoverTemplate) {
   'use strict';
 
@@ -42,19 +42,16 @@ define(['text!./home-map.html',
             });
 
              // Delay loading map by 2 sec
-            // $scope.loading = true;
-            // $timeout(function(){
-            //     require(['scbd-map/ammap3',
-            //             'scbd-map/ammap3-service',
-            //             '/app/views/countries/search-map.js'], function(map){
-            //         $scope.loading = false;
-            //         $scope.$apply(function(){
-            //             var mapElement = $element.find('#homeMap')
-            //             $compile(mapElement.contents())($scope);
-                        
-            //         });
-            //     });
-            // }, 2000);
+            $scope.loadingMap = true;
+            angular.element(document).ready(function () {
+                require(['/app/views/countries/country-map.js'], function(map){
+                    $scope.$apply(function(){
+                        var mapElement = $element.find('#homeMap')
+                        $compile(mapElement.contents())($scope);
+                         $scope.loadingMap = false;
+                    });
+                });
+            });
         }] //controlerr
     }; //return
   }]); //directive
