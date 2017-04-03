@@ -2,8 +2,7 @@ define(['app', 'underscore',
     '/app/js/common.js',
     'scbd-angularjs-filters',
     '/app/services/search-service.js',
-    '../directives/block-region-directive.js',
-    '/app/views/countries/country-map.js'
+    '../directives/block-region-directive.js'
 ], function (app, _) {
 
     app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams', '$compile', '$timeout',
@@ -231,19 +230,16 @@ define(['app', 'underscore',
                 $location.path('/countries/' + code);
             };
             
-            // $scope.loadingMap = true;
-            // $timeout(function(){
-            //     require(['scbd-map/ammap3',
-            //              'scbd-map/ammap3-service',
-            //              '/app/views/countries/search-map.js'], function(map){ 
-            //         $scope.loadingMap = false;                  
-            //         $scope.$apply(function(){
-            //             var mapElement = $element.find('#Jumbotron')
-            //             $compile(mapElement.contents())($scope);
-                        
-            //         });
-            //     });
-            // }, 2000);
+            $scope.loadingMap = true;
+            angular.element(document).ready(function () {
+                require(['/app/views/countries/country-map.js'], function(map){
+                    $scope.$apply(function(){
+                        var mapElement = $element.find('#Jumbotron')
+                        $compile(mapElement.contents())($scope);
+                         $scope.loadingMap = false;
+                    });
+                });
+            });
 
         }
     ]);

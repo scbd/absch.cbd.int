@@ -5,10 +5,8 @@
 <div smooth-scroll duration="100" offset="200"></div>
    
     <div id="Jumbotron" class="bg-texture-green color-black hidden-xs" selected-color="#FFFFFF" 
-    style="border-top:1px solid #555;border-bottom:2px solid #ddd;">     
-        <div block-region activate="loading" block-text=" Loading map">
-            <country-map zoom-to="{{code}}" height="350px"></country-map>
-        </div>   
+    style="border-top:1px solid #555;border-bottom:2px solid #ddd;height: 400px;" block-region activate="loadingMap">            
+         <country-map zoom-to="{{code}}" height="350px"></country-map>
     </div>
 
     <div class="row" style="margin:0;">

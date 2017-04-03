@@ -3,8 +3,7 @@ define(['app','underscore',
   'scbd-angularjs-services/locale','ng-breadcrumbs',
   'css!/app/libs/flag-icon-css/css/flag-icon.min.css',
   'css!./country-profile','./country-profile-directive.html.js',
-  '../directives/block-region-directive.js',
-  '/app/views/countries/country-map.js'
+  '../directives/block-region-directive.js'
 ], function(app, _) {
 
   app.controller("countryProfileController",
@@ -23,16 +22,17 @@ define(['app','underscore',
       });
       if($scope.code.toUpperCase == 'GB')
             $element.find('[data-toggle="tooltip"]').tooltip(); 
-      // $scope.loading = true;
-      // $timeout(function(){
-      //       require(['/app/views/countries/search-zoom-map.html.js'], function(map){                   
-      //           $scope.$apply(function(){
-      //               var mapElement = $element.find('#Jumbotron')
-      //               $compile(mapElement.contents())($scope.$new());
-      //               $scope.loading = false;                    
-      //           });
-      //       });
-      // }, 2000);
+      
+      $scope.loadingMap = true;
+      angular.element(document).ready(function () {
+          require(['/app/views/countries/country-map.js'], function(map){
+              $scope.$apply(function(){
+                  var mapElement = $element.find('#Jumbotron')
+                  $compile(mapElement.contents())($scope);
+                    $scope.loadingMap = false;
+              });
+          });
+      });
 
     }
   ]);
