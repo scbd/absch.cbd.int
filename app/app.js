@@ -1,17 +1,17 @@
 'use strict';
 define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
- 'text-angular', 'ngSmoothScroll', 'angular-loggly-logger','angular-gravatar'],
+ 'text-angular', 'ngSmoothScroll', 'angular-loggly-logger'],
     function(angular) {
 
         var dependencies = ['ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'toastr',
             'ngSanitize', 'angular-intro', 'scbdControls', 'ngLocalizer', 'textAngular', 'cbd-forums',
             'ng-breadcrumbs', 'scbdServices', 'scbdFilters', 'smoothScroll', 'ngMessages', 'ngStorage', 'ngDialog',
-            'infinite-scroll', 'logglyLogger', 'md5', 'ui.gravatar','angulartics', 'angulartics.google.analytics'
+            'infinite-scroll', 'logglyLogger', 
         ];
         angular.defineModules(dependencies);
         var app = angular.module('app', dependencies);
 
-        app.config(["LogglyLoggerProvider", "realmProvider", 'gravatarServiceProvider', function (LogglyLoggerProvider, realm, gravatarServiceProvider) {
+        app.config(["LogglyLoggerProvider", "realmProvider", function (LogglyLoggerProvider, realm) {
 
             LogglyLoggerProvider
                 .includeUrl(true)
@@ -19,8 +19,6 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
                 .includeTimestamp(true)
                 .sendConsoleErrors(true)
                 .endpoint('/api/v2016/error-logs');
-
-            gravatarServiceProvider.defaults = {size     : 100,"default": 'mm' };
             
         }]);
 

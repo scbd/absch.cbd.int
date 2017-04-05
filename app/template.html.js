@@ -4,7 +4,7 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
     '/app/views/directives/nav/portal-branding.js',
     'scbd-branding/directives/header/header',
     '/app/views/directives/nav/portal-nav.js',
-    'ngAria', 'angular-animate', 'toastr', 'ionsound', 'moment','angular-angulartics', 'angular-google-analytics',
+    'ngAria', 'angular-animate', 'toastr', 'ionsound', 'moment',
     '/app/views/help/info-bar.html.js'
 ], function(app, _) {
     'use strict';
@@ -28,13 +28,18 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             $scope.lang = locale;
             //set default moment lang
             var lang = locale;
-            if(lang=='zh')lang= 'zh-cn'; //moment has two ZH, use ZH-CN
+            if(lang=='zh')
+                lang= 'zh-cn'; //moment has two ZH, use ZH-CN
             moment.lang(lang);
             if(lang == 'ar'){
                 require(['css!/app/libs/bootstrap-rtl/dist/css/bootstrap-rtl.css']);
             }
 
-
+            var basePath = (angular.element('base').attr('href')||'').replace(/\/+$/g, '');
+            $rootScope.$on('$routeChangeSuccess', function(){
+                $window.ga('set',  'page', basePath+$location.path());
+                $window.ga('send', 'pageview');
+            });
             // $scope.goHome               = function() { $location.path('/'); };
             // $scope.currentPath          = function() { return $location.path(); };.
             //============================================================
