@@ -122,17 +122,15 @@ define(['app', 'underscore', 'ngDialog',
                         function updateRecord(document){
                             if(!$scope.userFilters)
                                 $scope.userFilters = [];
-                            IGenericService.get('v2016', 'me/'  + $scope.collection, document._id)
-                            .then(function(data){                               
+                                                   
                                 var existing = _.findWhere($scope.userFilters, {'_id' : document._id});
                                 if(existing){
-                                    existing.queryTitle = data.queryTitle;
-                                    existing.meta = data.meta;
-                                    existing.filters = data.filters;
+                                    existing.queryTitle = document.queryTitle;
+                                    existing.meta = document.meta;
+                                    existing.filters = document.filters;
                                 }
                                 else
-                                    $scope.userFilters.push(data);
-                            }); 
+                                    $scope.userFilters.push(document);
                         }
                     }
                 }
