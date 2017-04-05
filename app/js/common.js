@@ -132,7 +132,9 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                     else if (schema.toLowerCase() == "meeting" || schema.toLowerCase() == "mt")
                         schemaCode = "52000000cbd0050000000000";
                     else if (schema.toLowerCase() == "focalpoint" || schema.toLowerCase() == "nfp")
-                        schemaCode = "52000000cbd0220000000000";
+                        schemaCode = "52000000cbd0220000000000";                    
+                    else if (schema.toLowerCase() == "nationalrecord")
+                        schemaCode = "52000000cbd0800000000000";
 
                     if (schemaCode == '')
                         return d;
@@ -513,7 +515,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                 function formatCountry(countryDetails){
                     var country = {};
                     var treaties = countryDetails.treaties;
-                    country.name = { en : countryDetails.name.en };
+                    country.name = countryDetails.name;
                     country.code = countryDetails.code;
 
                     country.isCBDParty = isPartyToCBD(countryDetails) || country.code == 'EU';
