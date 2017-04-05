@@ -61,7 +61,7 @@ function(template, app, _, popOverTemplate) {
                 "selectedColor": '#428BCA',
                 "rollOverColor": '#000000',
                 "selectable": true,
-                "color": '#000000',
+                "color": '#333',
                 "outlineThickness": 2.5,
                 "outlineColor": '#1fa65d',
             },
