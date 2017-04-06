@@ -14,7 +14,7 @@ define(['app', 'underscore', 'ngDialog',
             },
             link: function ($scope, element, attrs) { 
             },
-            controller: ['$scope', '$http', 'IGenericService', 'realm', function ($scope, $http, IGenericService, realm) {
+            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', function ($rootScope, $scope, $http, IGenericService, realm) {
 
                 $scope.user = $rootScope.user;
                 $scope.skipKeywordsFilter = false;
@@ -131,9 +131,34 @@ define(['app', 'underscore', 'ngDialog',
                                 }
                                 else
                                     $scope.userFilters.push(document);
+                                document.pendingStatus = true;
                         }
                     }
                 }
+
+                var evtServerPushNotification = $rootScope.$on('event:server-pushNotification', function(evt,data){
+                    if((data.type == 'userSearchQuery' || data.type == 'userSubscription') &&
+                      data.data && data.data.id){
+
+                         IGenericService.get('v2016', 'me/'  + $scope.collection, data.data.id)
+                         .then(function(record){       
+                            var document = _.findWhere($scope.userFilters, {_id: data.data.id})
+                            if(!document)
+                                $scope.userFilters.push(record);
+                            else{
+                                document = _.extend(document, record);
+                                document.pendingStatus = false;
+                            }
+                         });
+                        
+                    }
+                });
+
+
+                $scope.$on('$destroy', function(){
+                    evtServerPushNotification();
+                })
+                
                 loadSavedFilters();
             }]
         };
