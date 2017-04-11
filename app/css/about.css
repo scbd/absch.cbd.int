@@ -29,9 +29,12 @@
      margin-bottom: 0;
      padding-bottom: 0;
   }
+
+
+
   .main-content > .content{
     padding: 20px;
-    background-color: #ddd;
+    /*background-color: #ddd;*/
   }
   .main-content > p{
 
@@ -43,7 +46,7 @@
 
 #MainControl {
       position: relative;
-      background-color: #eee;
+      /*background-color: #eee;*/
     }
     
     #MainControl section {
@@ -66,7 +69,8 @@
     
     #MainControl .nav a {
       color: black;
-      font-style: italic;
+      /*font-style: italic;*/
+      font-weight: bold;
     }
     
     #MainControl .nav li a:hover,
@@ -89,7 +93,7 @@
     
     #MainControl .nav .nav a {
       font-weight: normal;
-      font-size: .85em;
+      /*font-size: .85em;*/
     }
     
     #MainControl .nav .nav span {
@@ -100,8 +104,8 @@
     #MainControl .nav .nav .active:hover a,
     #MainControl .nav .nav .active:focus a {
       font-weight: bold;
-      padding-left: 30px;
-      border-left: 5px solid #3AAA35;
+      padding-left: 10px;
+      border-left: 5px solid #1FA65D;
       background-color: #fff;
     }
     
@@ -114,7 +118,19 @@
     /*#MainControl .affix-top {
       position: relative;
     }*/
+
+   #MainControl .nav>li>a:hover, .nav>li>a:focus {
+    text-decoration: none;
+    background-color: #eee;
+    color:#111!important;
+    }
     
+
+    #MainControl .nav> li> a {
+      padding: 3px 3px 3px 3px;
+    }
+
+
     #MainControl .affix {
       top: 20px;
     }
@@ -142,7 +158,7 @@
     .sidenav ul {
       color: #999;
       font-size: 14px;
-      padding-left: 5px;
+      /*padding-left: 5px;*/
       line-height: 1.5em;
       list-style: none;
       text-wrap: none;
@@ -182,7 +198,19 @@
       margin-top: 0;
       margin-bottom: 20px;
     }
-    
+     #aboutPage h1.main {
+      border: 0;
+      color: #111;
+      font-weight: bold;
+      padding-bottom: 5px;
+      padding-top: 10px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+
+
+
     #aboutPage h3 {
       padding: 3px;
     }
@@ -223,8 +251,10 @@
     }
     
     .active.section-header> a {
-      border-left: 5px solid #3AAA35;
+      /*border-left: 5px solid #1FA65D;*/
       background-color: #1FA65D;
+      color:#fff!important;
+      padding-left:10px!important;
     }
     .intro-header{
       background-color: #fff;
