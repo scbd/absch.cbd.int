@@ -53,7 +53,7 @@
 
 
     // ng-youtube-embed events + utils service
-    app.factory('ngYoutubeEmbedService1', ['$window', '$rootScope', function($window, $rootScope) {
+    app.factory('ngYoutubeEmbedService', ['$window', '$rootScope', function($window, $rootScope) {
 
         // Function to set ready state when youtube iframe embed api has been loaded
         this.setReadyState = function() {
@@ -93,7 +93,7 @@
 
 
     // ng-youtube-embed directive
-    app.directive('ngYoutubeEmbed', ['$sce', 'ngYoutubeEmbedService1', '$rootScope', function($sce, ngYoutubeEmbedService, $rootScope) {
+    app.directive('ngYoutubeEmbed', ['$sce', 'ngYoutubeEmbedService', '$rootScope', function($sce, ngYoutubeEmbedService, $rootScope) {
         return {
             restrict: 'E',
             template: '<div ng-bind-html="youtubeEmbedFrame"></div>',
