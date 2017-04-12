@@ -117,16 +117,17 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
 
                when('/oauth2/callback',             { templateUrl: '/app/views/oauth2/callback.html',          resolveController: true, resolveUser: true}).
  
-               when('/about/faq', {templateUrl: '/app/views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
-               when('/guides', {templateUrl: '/app/views/about/guides.html', resolveController: false, resolveUser: true, label:'Step-by-step guides'}).
-               when('/commonformats', {templateUrl: '/app/views/about/commonformats.html', resolveController: false, resolveUser: true, label:'Common formats'}).
-               when('/nationalreport', {templateUrl: '/app/views/about/nrfaq.html', resolveController: false, resolveUser: true, label:'Information on the Interim National Report'}).
+               when('/about/faq', { redirectTo : '/help/faq'}).
+               when('/guides', {redirectTo: '/help/guides'}).
+               when('/commonformats', {redirectTo:'/help/common-formats'}).
+               when('/nationalreport', {redirectTo:'/help/national-report'}).
                
-               when('/help', { templateUrl: '/app/views/about/about.html',                        label:'About the ABSCH', reloadOnSearch : false,    resolveController:true, resolveUser : true}).
-               
-               when('/help/videos/:videoId?', {templateUrl: '/app/views/about/videos.html', resolveController: true, resolveUser: false, label:'ABSCH Videos'}).
-               when('/help/guides/:guideId?', {templateUrl: '/app/views/about/guides.html', resolveController: true, resolveUser: false, label:'Step-by-step guides'}).
-
+               when('/help',                    { templateUrl: '/app/views/about/about.html', label:'About the ABSCH', reloadOnSearch : false,    resolveController:true, resolveUser : true}).
+               when('/help/videos/:videoId?',   {templateUrl: '/app/views/about/videos.html', resolveController: true, resolveUser: false, label:'ABSCH Videos'}).
+               when('/help/guides/:guideId?',   {templateUrl: '/app/views/about/guides.html', resolveController: true, resolveUser: false, label:'Step-by-step guides'}).
+               when('/help/common-formats/:commonFormat?',     {templateUrl: '/app/views/about/commonformats.html', resolveController: true, resolveUser: true, label:'Common formats'}).
+               when('/help/national-report',    {templateUrl: '/app/views/about/nrfaq.html', resolveController: false, resolveUser: true, label:'Information on the Interim National Report'}).
+               when('/help/faq',                {templateUrl: '/app/views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
                
                otherwise({templateUrl: '/app/views/shared/404.html', label:'404 Error'});
 
