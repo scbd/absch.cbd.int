@@ -1,0 +1,16 @@
+﻿{
+    "country-profile"    : { "url" :"https://www.youtube.com/watch?v=6eDBShJMWfI", "heading" : "Country profile" },
+    "search-matrix"      : { "url" :"https://www.youtube.com/watch?v=IwyrMQKDZ3o", "heading" : "Search matrix" },
+    "search-search"      : { "url" :"https://www.youtube.com/watch?v=YaX_llUfBts", "heading" : "Search" },
+    "search-uid"         : { "url" :"https://www.youtube.com/watch?v=78pRh1LbDj4", "heading" : "Search uid" },
+    "search-report"      : { "url" :"https://www.youtube.com/watch?v=wOe4hUt66K4", "heading" : "Search report" },
+    "new-account"        : { "url" :"https://www.youtube.com/watch?v=nAHFkAJZt1w", "heading" : "New account" },
+    "old-account"        : { "url" :"https://www.youtube.com/watch?v=IqoVH8IVsvI", "heading" : "Old account" },
+    "forgot-password"    : { "url" :"https://www.youtube.com/watch?v=hv7Kgx0bjdc", "heading" : "Forgot password" },
+    "user-management"    : { "url" :"https://www.youtube.com/watch?v=sBYKAuS6TBA", "heading" : "User management" },
+    "dashboard"         : { "url" :"https://www.youtube.com/watch?v=s6xLer37R5M", "heading" : "Dashboard" },
+    "notification"      : { "url" :"https://www.youtube.com/watch?v=nYHA8yuTx5c", "heading" : "Notification" },
+    "email-alerts"       : { "url" :"https://www.youtube.com/watch?v=DjRtgYxyeJg", "heading" : "Email alerts" },
+    "helpdesk"          : { "url" :"https://www.youtube.com/watch?v=yiASMdKJY8A", "heading" : "Helpdesk" }
+
+}

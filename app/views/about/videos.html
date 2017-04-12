@@ -1,0 +1,14 @@
+﻿<div class="about-section"  ng-controller="videosController" id="aboutPage">
+  <link rel="stylesheet" ng-href="/app/css/about.css">
+    <h1>ABSCH Videos</h1>
+    </br>
+    <div class="row" >
+        <div class="col-xs-12 col-md-12" ng-repeat="video in videos" style="padding-bottom: 15px;">
+            <h1 ng-bind="video.heading"></h1>
+            <p>
+                <ng-youtube-embed width="100%" video="video.url"></ng-youtube-embed>
+            </p>
+        </div>
+    </div>
+
+</div>
