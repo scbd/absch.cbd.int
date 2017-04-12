@@ -14,7 +14,7 @@ define(['app', 'underscore', 'ngDialog',
             },
             link: function ($scope, element, attrs) { 
             },
-            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', function ($rootScope, $scope, $http, IGenericService, realm) {
+            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', function ($rootScope, $scope, $http, IGenericService, realm, $timeout) {
 
                 $scope.user = $rootScope.user;
                 $scope.skipKeywordsFilter = false;
@@ -109,9 +109,9 @@ define(['app', 'underscore', 'ngDialog',
                                                     operation.then(function (data) {
                                                             $scope.closeDialog();
                                                             if(!document._id)
-                                                                document._id = data.id
+                                                                document._id = data.id;      
                                                             updateRecord(document); 
-                                                            });
+                                                    });
                                                 }
                                                 $scope.closeDialog = function(){
                                                     ngDialog.close();                                            
@@ -119,46 +119,30 @@ define(['app', 'underscore', 'ngDialog',
 
                                         }]
                         });
-                        function updateRecord(document){
+                        function updateRecord(document, delay){
                             if(!$scope.userFilters)
                                 $scope.userFilters = [];
-                                                   
                                 var existing = _.findWhere($scope.userFilters, {'_id' : document._id});
-                                if(existing){
-                                    existing.queryTitle = document.queryTitle;
-                                    existing.meta = document.meta;
-                                    existing.filters = document.filters;
-                                }
-                                else
+                                if(!existing){
                                     $scope.userFilters.push(document);
-                                document.pendingStatus = true;
+                                    existing = document;
+                                }                                                       
+                                 existing.pendingStatus = true;                  
+                                 IGenericService.get('v2016', 'me/'  + $scope.collection, document._id)
+                                .then(function(data){
+                                    existing = _.extend(existing, data);                                    
+                                    existing.pendingStatus = false;
+                                })
+                                .catch(function(err){
+                                    if(err && err.status == 404){
+                                        delay = (delay||0) + 1000
+                                        $timeout(updateRecord(document, delay), delay);
+                                    }
+                                }); 
                         }
                     }
                 }
 
-                var evtServerPushNotification = $rootScope.$on('event:server-pushNotification', function(evt,data){
-                    if((data.type == 'userSearchQuery' || data.type == 'userSubscription') &&
-                      data.data && data.data.id){
-
-                         IGenericService.get('v2016', 'me/'  + $scope.collection, data.data.id)
-                         .then(function(record){       
-                            var document = _.findWhere($scope.userFilters, {_id: data.data.id})
-                            if(!document)
-                                $scope.userFilters.push(record);
-                            else{
-                                document = _.extend(document, record);
-                                document.pendingStatus = false;
-                            }
-                         });
-                        
-                    }
-                });
-
-
-                $scope.$on('$destroy', function(){
-                    evtServerPushNotification();
-                })
-                
                 loadSavedFilters();
             }]
         };
