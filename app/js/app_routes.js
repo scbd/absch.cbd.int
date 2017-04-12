@@ -121,7 +121,35 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/about/faq', {templateUrl: '/app/views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
                when('/guides', {templateUrl: '/app/views/about/guides.html', resolveController: false, resolveUser: true, label:'Step-by-step guides'}).
                when('/commonformats', {templateUrl: '/app/views/about/commonformats.html', resolveController: false, resolveUser: true, label:'Common formats'}).
-                when('/nationalreport', {templateUrl: '/app/views/about/nrfaq.html', resolveController: false, resolveUser: true, label:'Information on the Interim National Report'}).
+               when('/nationalreport', {templateUrl: '/app/views/about/nrfaq.html', resolveController: false, resolveUser: true, label:'Information on the Interim National Report'}).
+
+               // youtube videos for elearning module (redirect incase we want to update the videos without having to edit the elearing module)
+               when('/video/countries', {redirectTo:function() {window.location = "https://www.youtube.com/watch?v=6eDBShJMWfI"} }).
+               when('/video/matrix', {redirectTo:function() {window.location = "https://www.youtube.com/watch?v=IwyrMQKDZ3o"} }).
+               when('/video/search', {redirectTo:function() {window.location = "https://www.youtube.com/watch?v=YaX_llUfBts"} }).
+               when('/video/uid', {redirectTo:function() {window.location = "https://www.youtube.com/watch?v=78pRh1LbDj4"} }).
+               when('/video/reportrecord', {redirectTo:function() {window.location = "https://www.youtube.com/watch?v=wOe4hUt66K4"} }).
+               when('/video/usermanagement', {redirectTo:function() {window.location = "https://www.youtube.com/watch?v=sBYKAuS6TBA"} }).
+               when('/video/dashboard', {redirectTo:function() {window.location = "https://www.youtube.com/watch?v=s6xLer37R5M"} }).
+
+               //SPS guides
+               when('/guides/con', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/cna', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/msr', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/ndb', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/cp', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/cpc', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/ircc', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/nr', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/cbr', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/a19a20', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/cpp', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/cbi', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/vlr', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/account', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+               when('/guides/roles', {redirectTo:function() {window.location = "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf"} }).
+
+           
 
                
                otherwise({templateUrl: '/app/views/shared/404.html', label:'404 Error'});
