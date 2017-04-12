@@ -96,7 +96,7 @@ function(template, app, _, popOverTemplate) {
             CC : 'AU', //Cocos (Keeling) Islands
             CW : 'NL', //Curaçao
             CX : 'AU', //Christmas Island
-            EH : 'MA', //Western Sahara
+            // EH : 'MA', //Western Sahara
             FK : 'GB', //Falkland Islands
             FO : 'DK', //Faroe Islands
             GF : 'FR', //French Guiana
@@ -154,8 +154,8 @@ function(template, app, _, popOverTemplate) {
                               if(_.invert(exceptionRegionMapping)[country.code])
                                 addExceptionRegionsImage(country)
                             }
-
                           });
+                          addImageData({name : {en : 'Western Sahara'}, code:'EH'})
                       $scope.map.validateData();
                       updateCustomMarkers();
                   });
