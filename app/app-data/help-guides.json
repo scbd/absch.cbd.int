@@ -1,0 +1,26 @@
+﻿{
+    "countries"         : "https://www.youtube.com/watch?v=6eDBShJMWfI",
+    "matrix"            : "https://www.youtube.com/watch?v=IwyrMQKDZ3o",
+    "search"            : "https://www.youtube.com/watch?v=YaX_llUfBts",
+    "uid"               : "https://www.youtube.com/watch?v=78pRh1LbDj4",
+    "reportrecord"      : "https://www.youtube.com/watch?v=wOe4hUt66K4",
+    "usermanagement"    : "https://www.youtube.com/watch?v=sBYKAuS6TBA",
+    "dashboard"         : "https://www.youtube.com/watch?v=s6xLer37R5M",
+
+    "con"               : "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf",
+    "cna"               : "http://www.cbd.int/abs/doc/guides/cna.pdf",
+    "msr"               : "http://www.cbd.int/abs/doc/guides/msr.pdf",
+    "ndb"               : "http://www.cbd.int/abs/doc/guides/ndb.pdf",
+    "cp"                : "http://www.cbd.int/abs/doc/guides/cp.pdf",
+    "cpc"               : "http://www.cbd.int/abs/doc/guides/cpc.pdf",
+    "ircc"              : "http://www.cbd.int/abs/doc/guides/ircc.pdf",
+    "nr"                : "http://www.cbd.int/abs/doc/guides/nr.pdf",
+    "cbr"               : "http://www.cbd.int/abs/doc/guides/cbr.pdf",
+    "a19a20"            : "http://www.cbd.int/abs/doc/guides/a19a20.pdf",
+    "cpp"               : "http://www.cbd.int/abs/doc/guides/cpp.pdf",
+    "cbi"               : "http://www.cbd.int/abs/doc/guides/cbi.pdf",
+    "vlr"               : "http://www.cbd.int/abs/doc/guides/vlr.pdf",
+    "accounts"          : "http://www.cbd.int/abs/doc/guides/Accounts.pdf",
+    "roles"             : "http://www.cbd.int/abs/doc/guides/NationalContacts.pdf",
+    "user-management"   : "http://www.cbd.int/abs/doc/guides/UserManagement.pdf"
+}
