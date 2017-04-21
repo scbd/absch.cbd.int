@@ -100,10 +100,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                         });
                         return $q.when(queryAction)
                             .then(function(data) {
-                                var facets = {};
-                                _.each(facetQuery.fields, function(facet) {
-                                    facets[facet] = readFacets2(data.data.facet_counts.facet_fields[facet]);
-                                });
+                                var facets = readFacets2(data.data.facet_counts.facet_fields[facetQuery.fields]);
 
                                 if (localStorageKey)
                                     localStorageService.set(localStorageKey, facets);
@@ -202,6 +199,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                     return facets;
                 };
 
+                this.readFacets = readFacets2;
 
             }
         }

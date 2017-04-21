@@ -56,7 +56,8 @@ require.config({
         'angular-gravatar'          : 'libs/angular-gravatar/build/angular-gravatar',
         'angular-google-analytics'  : 'libs/angulartics-google-analytics/dist/angulartics-ga.min',
         'angular-angulartics'       : 'libs/angulartics/dist/angulartics.min',
-        'webui-popover'             : 'libs/webui-popover/dist/jquery.webui-popover.min'
+        'webui-popover'             : 'libs/webui-popover/dist/jquery.webui-popover.min',
+        'chart-js'                  : 'libs/chart.js/Chart'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -94,7 +95,8 @@ require.config({
         'angular-gravatar'              : { 'deps': ['angular']}, 
         'angular-angulartics'           : { 'deps': ['angular']} ,
         'angular-google-analytics'      : { 'deps': ['angular', 'angular-angulartics']},
-        'webui-popover'                 : { 'deps': ['jquery', 'css!libs/webui-popover/dist/jquery.webui-popover.min']}
+        'webui-popover'                 : { 'deps': ['jquery', 'css!libs/webui-popover/dist/jquery.webui-popover.min']},
+        'chart-js'                      : { 'deps': ['angular', 'jquery'] }
     },
     packages: [
         { name: 'scbd-branding'          , location : 'components/scbd-branding' },
