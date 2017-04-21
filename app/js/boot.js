@@ -57,7 +57,7 @@ require.config({
         'angular-google-analytics'  : 'libs/angulartics-google-analytics/dist/angulartics-ga.min',
         'angular-angulartics'       : 'libs/angulartics/dist/angulartics.min',
         'webui-popover'             : 'libs/webui-popover/dist/jquery.webui-popover.min',
-        'chart-js'                  : 'libs/chart.js/Chart'
+        'chart-js'                  : 'libs/Chart.js/Chart'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
