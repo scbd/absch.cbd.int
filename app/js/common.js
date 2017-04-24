@@ -26,18 +26,16 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
 
                             item.data = result.data.response.docs[0];
 
-                            item.data.info = [];
+                            item.data.info = {};
                             item.data.header = {
                                 'schema': item.data.schema_s
                             };
                             if (item.data.createdBy_s) {
-                                item.data.info.createdBy.firstName = item.data.createdBy_s;
-                                item.data.info.createdBy.email = item.data.createdByEmail_s;
+                                item.data.info.createdBy = { firstName : item.data.createdBy_s , email : item.data.createdByEmail_s };
                             }
                             item.data.info.createdOn = item.data.createdDate_dt;
                             if (item.data.updatedBy_s) {
-                                item.data.info.updatedBy.firstName = item.data.updatedBy_s;
-                                item.data.info.updatedBy.email = item.data.updatedByEmail_s;
+                                item.data.info.updatedBy = { firstName : item.data.updatedBy_s , email : item.data.updatedByEmail_s };
                             }
                             item.data.info.updatedOn = item.data.updatedDate_dt;
                             item.data.header.identifier = item.data.identifier_s;
