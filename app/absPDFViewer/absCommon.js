@@ -426,7 +426,9 @@ this.integerToHex = function(d, schema) {
         schemaCode = "52000000cbd0050000000000";
     else if (schema.toLowerCase() == "focalpoint" || schema.toLowerCase() == "nfp")
         schemaCode = "52000000cbd0220000000000";
-
+    else if (schema.toLowerCase() == "nationalRecord")
+        schemaCode = "52000000cbd0800000000000";
+        
     if (schemaCode == '')
         return d;
 

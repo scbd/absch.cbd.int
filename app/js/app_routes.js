@@ -23,8 +23,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/verify-email',    {templateUrl: '/app/views/shared/verify-email.html', label:'Email Verification Pending'}).
                when('/help/403',        {templateUrl: '/app/views/shared/403.html', label:'403 Error'}).
                
-               when('/about-new',                    { templateUrl: '/app/views/about/about-new.html',                        label:'About the ABSCH',                 resolveController:true, resolveUser : true}).
-               when('/about',                        { templateUrl: '/app/views/about/about.html',                        label:'About the ABSCH',                 resolveController:true, resolveUser : true}).
+               when('/about',                        { templateUrl: '/app/views/about/about.html',                        label:'About the ABSCH',             reloadOnSearch : false,    resolveController:true, resolveUser : true}).
                when('/about/blog',                        { templateUrl: '/app/views/about/blog.html',                        label:'ABSCH Development Blog',                 resolveController:true, resolveUser : true}).
                when('/partners/idlo/events',              { templateUrl: '/app/views/partners/idlo.html',           label:'IDLO',             resolveController: false, resolveUser: false}).
 
@@ -71,6 +70,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/register/admin',                                     { templateUrl: '/app/views/register/admin.html',          label:'ABSCH Admin',    param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                when('/register/notifications',                             { templateUrl: '/app/views/register/notifications.html',  label:'Notifications',  param:'true', resolveController: true,resolve : { securized : securize() }}).
                when('/register/requests',                                  { redirectTo:'/register/notifications' }).
+               when('/register/stats',                                     { templateUrl: '/app/views/register/manage/stats.html',   label:'Statistics',  param:'true', resolveController: true,resolve : { securized : securize() }}).
 
                when('/register/:document_type/status/:status',             {templateUrl: '/app/views/register/record-list.html',          param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
                when('/register/national-users',                            {templateUrl: '/app/views/register/national-users/national-user-list.html', label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
@@ -117,11 +117,17 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
 
                when('/oauth2/callback',             { templateUrl: '/app/views/oauth2/callback.html',          resolveController: true, resolveUser: true}).
  
-               when('/about/faq', {templateUrl: '/app/views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
-               when('/guides', {templateUrl: '/app/views/about/guides.html', resolveController: false, resolveUser: true, label:'Step-by-step guides'}).
-               when('/commonformats', {templateUrl: '/app/views/about/commonformats.html', resolveController: false, resolveUser: true, label:'Common formats'}).
-                when('/nationalreport', {templateUrl: '/app/views/about/nrfaq.html', resolveController: false, resolveUser: true, label:'Information on the Interim National Report'}).
-
+               when('/about/faq', { redirectTo : '/help/faq'}).
+               when('/guides', {redirectTo: '/help/guides'}).
+               when('/commonformats', {redirectTo:'/help/common-formats'}).
+               when('/nationalreport', {redirectTo:'/help/national-report'}).
+               
+               when('/help',                    { templateUrl: '/app/views/about/about.html', label:'About the ABSCH', reloadOnSearch : false,    resolveController:true, resolveUser : true}).
+               when('/help/videos/:videoId?',   {templateUrl: '/app/views/about/videos.html', resolveController: true, resolveUser: false, label:'ABSCH Videos'}).
+               when('/help/guides/:guideId?',   {templateUrl: '/app/views/about/guides.html', resolveController: true, resolveUser: false, label:'Step-by-step guides'}).
+               when('/help/common-formats/:commonFormat?',     {templateUrl: '/app/views/about/commonformats.html', resolveController: true, resolveUser: true, label:'Common formats'}).
+               when('/help/national-report',    {templateUrl: '/app/views/about/nrfaq.html', resolveController: false, resolveUser: true, label:'Information on the Interim National Report'}).
+               when('/help/faq',                {templateUrl: '/app/views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
                
                otherwise({templateUrl: '/app/views/shared/404.html', label:'404 Error'});
 

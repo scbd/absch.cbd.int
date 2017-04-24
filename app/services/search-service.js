@@ -100,10 +100,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                         });
                         return $q.when(queryAction)
                             .then(function(data) {
-                                var facets = {};
-                                _.each(facetQuery.fields, function(facet) {
-                                    facets[facet] = readFacets2(data.data.facet_counts.facet_fields[facet]);
-                                });
+                                var facets = readFacets2(data.data.facet_counts.facet_fields[facetQuery.fields]);
 
                                 if (localStorageKey)
                                     localStorageService.set(localStorageKey, facets);
@@ -114,12 +111,16 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
 
                 };
                 //================================================================================================================
-                this.facetsPivot = function(facetQuery, localStorageKey) {
+                this.facetsPivot = function(facetQuery, localStorageKey, country) {
 
                     if (localStorageKey) {
                         var fromStorage = localStorageService.get(localStorageKey);
-                        if (fromStorage) //&& fromStorage.expiry < new date())
+                        if (fromStorage){ //&& fromStorage.expiry < new date())
+                            if(country){
+                                return _.find(fromStorage, {government:country});
+                            }
                             return fromStorage;
+                        }
                     }
                     _.defaults(facetQuery, searchDefaults);
 
@@ -154,6 +155,10 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
 
                                 if (localStorageKey)
                                     localStorageService.set(localStorageKey, facets);
+                                
+                                if(country){
+                                    return _.find(facets, {government:country});
+                                }
 
                                 return facets;
                             });
@@ -162,13 +167,13 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                 };
 
                 //================================================================================================================
-                this.governmentSchemaFacets = function() {
+                this.governmentSchemaFacets = function(country) {
 
                     var nationalRecordsQuery = {
                         fields: 'government_s,schema_s',
                         query: 'NOT virtual_b:* AND schema_s:(' + appConfigService.nationalSchemas.join(' ') + ')'
                     };
-                    return this.facetsPivot(nationalRecordsQuery, 'governmentFacets');
+                    return this.facetsPivot(nationalRecordsQuery, 'governmentFacets', country);
 
                 };
 
@@ -194,6 +199,7 @@ define(['app', 'underscore', './local-storage-service.js', './app-config-service
                     return facets;
                 };
 
+                this.readFacets = readFacets2;
 
             }
         }

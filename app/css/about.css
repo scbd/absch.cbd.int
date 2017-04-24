@@ -29,9 +29,12 @@
      margin-bottom: 0;
      padding-bottom: 0;
   }
+
+
+
   .main-content > .content{
     padding: 20px;
-    background-color: #ddd;
+    /*background-color: #ddd;*/
   }
   .main-content > p{
 
@@ -39,3 +42,223 @@
   .backtotop{
     padding-top:20px;
   }
+
+
+#MainControl {
+      position: relative;
+      /*background-color: #eee;*/
+    }
+    
+    #MainControl section {
+      /*padding: 40px 0;*/
+      /*border-bottom: 1px solid #c1e1ec;*/
+    }
+    
+    #MainControl #web-development,
+    #MainControl #mobile-development {
+      padding-bottom: 0;
+    }
+    
+    #MainControl section:last-child {
+      border-bottom: none;
+    }
+    
+    #MainControl .nav {
+      /*background: #4baac8;*/
+    }
+    
+    #MainControl .nav a {
+      color: black;
+      /*font-style: italic;*/
+      font-weight: bold;
+    }
+    
+    #MainControl .nav li a:hover,
+    #MainControl .nav li a:focus {
+      /*background: #86c5da;*/
+    }
+    
+    #MainControl .nav .active {
+      font-weight: bold;
+      /*background: #72bcd4;*/
+    }
+    
+    #MainControl .nav .nav {
+      display: none;
+    }
+    
+    #MainControl .nav .active .nav {
+      display: block;
+    }
+    
+    #MainControl .nav .nav a {
+      font-weight: normal;
+      /*font-size: .85em;*/
+    }
+    
+    #MainControl .nav .nav span {
+      margin: 0 5px 0 2px;
+    }
+    
+    #MainControl .nav .nav .active a,
+    #MainControl .nav .nav .active:hover a,
+    #MainControl .nav .nav .active:focus a {
+      font-weight: bold;
+      padding-left: 10px;
+      border-left: 5px solid #1FA65D;
+      background-color: #fff;
+    }
+    
+    #MainControl .nav .nav .active span,
+    #MainControl .nav .nav .active:hover span,
+    #MainControl .nav .nav .active:focus span {
+      display: none;
+    }
+    
+    /*#MainControl .affix-top {
+      position: relative;
+    }*/
+
+   #MainControl .nav>li>a:hover, .nav>li>a:focus {
+    text-decoration: none;
+    background-color: #eee;
+    color:#111!important;
+    }
+    
+
+    #MainControl .nav> li> a {
+      padding: 3px 3px 3px 3px;
+    }
+
+
+    #MainControl .affix {
+      top: 20px;
+    }
+    
+    #MainControl .affix,
+    #MainControl .affix-bottom {
+      width: 213px;
+    }
+    
+    #MainControl .affix-bottom {
+      position: absolute;
+    }
+    
+    @media (min-width:1200px) {
+      #MainControl .affix,
+      #MainControl .affix-bottom {
+        width: 263px;
+      }
+    }
+    /*.sidenav {
+  position: fixed;
+  margin-top: 25px;
+}*/
+    
+    .sidenav ul {
+      color: #999;
+      font-size: 14px;
+      /*padding-left: 5px;*/
+      line-height: 1.5em;
+      list-style: none;
+      text-wrap: none;
+    }
+    
+    .sidenav ul ul {
+      font-size: 12px;
+      display: none;
+    }
+    
+    .sidenav ul .active ul {
+      display: block;
+    }
+    
+    .sidenav ul:has(.active) {
+      display: block;
+    }
+    
+    .sidenav .active {
+      /*color: #3AAA35;*/
+    }
+    /*.sidenav .active::before {
+  position: absolute;
+	content:'';
+	left: -5px;
+	width: 3px;
+	height: 1.5em;
+	background-color: #3AAA35;
+}*/
+    
+    #aboutPage h1 {
+      border-bottom: 3px solid #1FA65D;
+      color: #1FA65D;
+      font-weight: bold;
+      padding-bottom: 5px;
+      padding-top: 10px;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+     #aboutPage h1.main {
+      border: 0;
+      color: #111;
+      font-weight: bold;
+      padding-bottom: 5px;
+      padding-top: 10px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+
+
+
+    #aboutPage h3 {
+      padding: 3px;
+    }
+    
+    #aboutPage .well h5 {
+      color: #1FA65D;
+      font-weight: bold;
+      font-size: 105%;
+    }
+    
+    .about-section {
+      margin-bottom: 100px;
+      background-color: #fefefe;
+      padding: 10px;
+      padding-bottom: 30px;
+    }
+    
+    .backtothetop {
+      font-size: 12px
+    }
+    
+    .find-out-more {
+      margin-top: 20px;
+    }
+    
+    .dlink {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-shadow: 0px 1px 0px rgba(255, 255, 255, .5);
+    }
+    
+    .plusbtn {
+      position: relative;
+      top: -2px;
+      padding: 0 3px 2px 3px!important;
+      cursor: pointer;
+    }
+    
+    .active.section-header> a {
+      /*border-left: 5px solid #1FA65D;*/
+      background-color: #1FA65D;
+      color:#fff!important;
+      padding-left:10px!important;
+    }
+    .intro-header{
+      background-color: #fff;
+    }
+    .intro-header h1{
+      padding:5px 10px;
+    }

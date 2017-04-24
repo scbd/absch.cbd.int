@@ -14,7 +14,7 @@ define(['app', 'underscore', 'ngDialog',
             },
             link: function ($scope, element, attrs) { 
             },
-            controller: ['$scope', '$http', 'IGenericService', 'realm', function ($scope, $http, IGenericService, realm) {
+            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', function ($rootScope, $scope, $http, IGenericService, realm, $timeout) {
 
                 $scope.user = $rootScope.user;
                 $scope.skipKeywordsFilter = false;
@@ -109,9 +109,9 @@ define(['app', 'underscore', 'ngDialog',
                                                     operation.then(function (data) {
                                                             $scope.closeDialog();
                                                             if(!document._id)
-                                                                document._id = data.id
+                                                                document._id = data.id;      
                                                             updateRecord(document); 
-                                                            });
+                                                    });
                                                 }
                                                 $scope.closeDialog = function(){
                                                     ngDialog.close();                                            
@@ -119,23 +119,30 @@ define(['app', 'underscore', 'ngDialog',
 
                                         }]
                         });
-                        function updateRecord(document){
+                        function updateRecord(document, delay){
                             if(!$scope.userFilters)
                                 $scope.userFilters = [];
-                            IGenericService.get('v2016', 'me/'  + $scope.collection, document._id)
-                            .then(function(data){                               
                                 var existing = _.findWhere($scope.userFilters, {'_id' : document._id});
-                                if(existing){
-                                    existing.queryTitle = data.queryTitle;
-                                    existing.meta = data.meta;
-                                    existing.filters = data.filters;
-                                }
-                                else
-                                    $scope.userFilters.push(data);
-                            }); 
+                                if(!existing){
+                                    $scope.userFilters.push(document);
+                                    existing = document;
+                                }                                                       
+                                 existing.pendingStatus = true;                  
+                                 IGenericService.get('v2016', 'me/'  + $scope.collection, document._id)
+                                .then(function(data){
+                                    existing = _.extend(existing, data);                                    
+                                    existing.pendingStatus = false;
+                                })
+                                .catch(function(err){
+                                    if(err && err.status == 404){
+                                        delay = (delay||0) + 1000
+                                        $timeout(updateRecord(document, delay), delay);
+                                    }
+                                }); 
                         }
                     }
                 }
+
                 loadSavedFilters();
             }]
         };

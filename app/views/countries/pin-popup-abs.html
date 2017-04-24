@@ -46,7 +46,7 @@ width:450px;web0px;max-height:400px;min-height:250px;
             <h3 class="custom-title" style="margin-top:10px;margin-bottom:5px;width:60%;display:inline">
                 <i class="flag-icon flag-icon-{{exceptionCountry||codeLower}}"></i> {{nameLocalized}}
             </h3>   
-            {{status}}                
+            <span class="{{codeLower=='eh' ? 'hide' : 'show'}}">{{status}} </span>               
          </div>
          <div class="row col-xs-12">
             <div class="small alert-info {{(exceptionCountry=='dk' || codeLower=='dk') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
@@ -56,6 +56,10 @@ width:450px;web0px;max-height:400px;min-height:250px;
             <div class="{{codeLower=='fk' ? 'show' : 'hide'}}  alert-info small " style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
                 <i class="fa fa-info-circle" />
                 A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern Ireland concerning sovereignty over the Falkland Islands (Malvinas).
+            </div>
+            <div class="{{codeLower=='eh' ? 'show' : 'hide'}}  alert-info small " style="margin-top:25px;white-space: normal;line-height:0.9;padding:3px;font-size: x-large;">
+                <i class="fa fa-info-circle fa-1x" />
+                Non-Self Governing Territory.
             </div>
             <div class="small alert-info {{(exceptionCountry=='gb'||codeLower=='gb') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
                 <i class="fa fa-info-circle" /> 
@@ -67,7 +71,7 @@ width:450px;web0px;max-height:400px;min-height:250px;
          </div>
     </div>
     <div style="clear:both;"></div>
-    <div class="text-nowrap" style="min-height:120px;padding: 6px 10px 6px 10px; " >
+    <div class="text-nowrap {{codeLower=='eh' ? 'hide' : 'show'}}" style="min-height:120px;padding: 6px 10px 6px 10px; ">
         <span class="badge">{{NFP}}</span> ABS National Focal Point
         <br>
         <span class="badge">{{CNA}}</span> Competent National Authorities
@@ -83,7 +87,8 @@ width:450px;web0px;max-height:400px;min-height:250px;
         <span class="badge">{{CPC}}</span> Checkpoint Communiqués
         <br>
     </div>
-    <div style="text-align:center!important;position:absolute;bottom:3px;height:25px;vertical-align:middle;left:0;right:0;margin-left:auto;margin-right:auto;margin-bottom:10px; ">
+    <div style="text-align:center!important;position:absolute;bottom:3px;height:25px;vertical-align:middle;left:0;right:0;margin-left:auto;margin-right:auto;margin-bottom:10px; "
+    class="{{codeLower=='eh' ? 'hide' : 'show'}}">
         <a translation-url  
         href="{{translationUrl}}/countries/{{exceptionCountry||codeLower}}" class="link btn-primary" style="text-align:center!important;font-weight:700; cursor:pointer;color:#ffffff;font-size:18px;padding: 6px 6px 6px 6px;margin-bottom:3px;">VIEW COUNTRY PROFILE</a>
     </div>
