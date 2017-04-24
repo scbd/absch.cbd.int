@@ -262,3 +262,7 @@
     .intro-header h1{
       padding:5px 10px;
     }
+    .other-links *{
+      font-weight: normal!important;
+      font-size: 12px;
+    }
