@@ -17,7 +17,7 @@ define(['app', 'underscore', '/app/js/common.js', 'moment', 'scbd-angularjs-cont
                 $scope.referenceRecordsTableData = [];
                 $scope.referenceChart = true;
 
-                $scope.filters = {};
+                $scope.filters = {startDate: '2014-10-12'};
                 
                 $scope.options = {
                     filterTypes: function () {
@@ -295,7 +295,7 @@ define(['app', 'underscore', '/app/js/common.js', 'moment', 'scbd-angularjs-cont
                         'facet.range' : 'createdDate_dt',
                         'facet.range.gap' : '+1MONTH',
                         'facet.range.start' : 'NOW/MONTH-' + (monthsDifference("2014-10-12")) + 'MONTH',
-                        'facet.range.end' : 'NOW/MONTH'
+                        'facet.range.end' : 'NOW+1MONTH/MONTH'
                     };
 
                     if(options.type == 'national'){
@@ -317,18 +317,17 @@ define(['app', 'underscore', '/app/js/common.js', 'moment', 'scbd-angularjs-cont
                     var dateType = 'createdDate_dt:'
                     if($scope.filters.dateType){
                         dateType = $scope.filters.dateType;
-                        queryFacetsParameters['facet.range'] = dateType;
+                        queryFacetsParameters['facet.range'] = dateType.replace(':','');
                     }
 
                     if($scope.filters.startDate || $scope.filters.endDate) {
                         var startDate = $scope.filters.startDate ? $scope.filters.startDate + 'T00:00:00.000Z' : '*';
                         var endDate = $scope.filters.endDate ? $scope.filters.endDate + 'T23:59:59.999Z' : '*';
 
-                        queryFacetsParameters.q += ' AND ' + dateType + ' [ ' + startDate + ' TO ' + endDate + ' ]';
                         if(startDate!='*')
-                            queryFacetsParameters['facet.range.start'] = 'NOW/MONTH-' + monthsDifference(startDate) + 'MONTH';
+                            queryFacetsParameters['facet.range.start'] = 'NOW+1MONTH/MONTH-' + monthsDifference(startDate) + 'MONTH';
                         if(endDate!='*')
-                            queryFacetsParameters['facet.range.end']   = 'NOW/MONTH-' + monthsDifference(endDate) + 'MONTH';                                       
+                            queryFacetsParameters['facet.range.end']   = 'NOW+1MONTH/MONTH-' + monthsDifference(endDate) + 'MONTH';                                       
                         
                     }
                     
@@ -340,7 +339,7 @@ define(['app', 'underscore', '/app/js/common.js', 'moment', 'scbd-angularjs-cont
                    return $q.all([queryAction])
                     .then(function(results) {
                         var data = { labels: [], data: [] };
-                        var facets = searchService.readFacets(results[0].data.facet_counts.facet_ranges.createdDate_dt.counts)
+                        var facets = searchService.readFacets(results[0].data.facet_counts.facet_ranges[($scope.filters.dateType||'createdDate_dt').replace(':','')].counts)
                         _.each(facets, function(facet) {
                             var label = moment.utc(facet.symbol).format('MMMM YYYY');
                             data.labels.push(label)
