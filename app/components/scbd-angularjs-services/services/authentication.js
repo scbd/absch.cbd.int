@@ -119,6 +119,7 @@ define(['app', './apiUrl'], function(app) {
                 if(new Date(authenticationToken.expiration).getTime() < new Date().getTime()){
                     pToken = null;
                     $rootScope.$broadcast('event:auth-sessionExpired');
+                    throw 'session token expired';
                 }
             }
 
