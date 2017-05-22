@@ -53,7 +53,7 @@ define(['app', 'lodash'], function(app, _) {
     });
 
     app.factory('realmService', ['$location', function($location){
-       return function(){
+       
             var productionRealms = {
                 urls: ['https://absch.cbd.int', 'https://chm.cbd.int', 'https://accounts.cbd.int'],
                 realms: ['ABS', 'CHM']
@@ -89,6 +89,5 @@ define(['app', 'lodash'], function(app, _) {
             return {
                 envRealms : envRealms
             }
-        }
     }])
 });
