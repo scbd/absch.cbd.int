@@ -20,10 +20,10 @@
       color:#111;
     }
 
-  .main-content{
+  /*.main-content{
 
 
-  }
+  }*/
     .main-content > h1{
      border-bottom: 1px solid #bbb;
      margin-bottom: 0;
@@ -68,9 +68,9 @@
     }
     
     #MainControl .nav a {
-      color: black;
+      color:#333;
       /*font-style: italic;*/
-      font-weight: bold;
+      font-weight: normal;
     }
     
     #MainControl .nav li a:hover,
@@ -190,7 +190,7 @@
 }*/
     
     #aboutPage h1 {
-      border-bottom: 3px solid #1FA65D;
+      border-bottom: 1px solid #ccc;
       color: #1FA65D;
       font-weight: bold;
       padding-bottom: 5px;
@@ -200,17 +200,14 @@
     }
      #aboutPage h1.main {
       border: 0;
-      color: #111;
+      color: #666;
       font-weight: bold;
-      padding-bottom: 5px;
-      padding-top: 10px;
+      padding:10px 0 5px 0;
       margin-top: 0;
       margin-bottom: 0;
       background-color: #eee!important;
+      font-size: 36px;
     }
-
-
-
 
     #aboutPage h3 {
       padding: 3px;
@@ -224,9 +221,9 @@
     
     .about-section {
       margin-bottom: 100px;
-      background-color: #fefefe;
-      padding: 10px;
-      padding-bottom: 30px;
+    /*background-color: #fefefe;*/
+      padding: 0;
+      padding-bottom: 0;
     }
     
     .backtothetop {
