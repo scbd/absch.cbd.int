@@ -1,4 +1,4 @@
-define(['app'], function(app) {
+define(['app', 'lodash'], function(app, _) {
     'use strict';
 
     app.factory('Thesaurus', ['linqjs', function(Enumerable) {
@@ -51,4 +51,43 @@ define(['app'], function(app) {
             return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4()).toUpperCase();
         }
     });
+
+    app.factory('realmService', ['$location', function($location){
+       
+            var productionRealms = {
+                urls: ['https://absch.cbd.int', 'https://chm.cbd.int', 'https://accounts.cbd.int'],
+                realms: ['ABS', 'CHM']
+            }
+
+            var developmentRealms = {
+                urls: ['https://absch.cbddev.xyz', 'https://dev-chm.cbd.int', 'https://chm.cbddev.xyz', 'https://accounts.cbddev.xyz',
+                    'http://localhost:2010', 'http://localhost:2000', 'http://localhost:8000'],
+                realms: ['ABS-DEV', 'CHM-DEV']
+            }
+
+            var trainingRealms = {
+                urls: ['https://training-absch.cbd.int'],
+                realms: ['ABS-TRG']
+            }
+
+            function envRealms() {
+                if (_.some(productionRealms.urls, function (url) {
+                    return $location.absUrl().indexOf(url) >= 0;
+                }))
+                    return productionRealms.realms;
+
+                if (_.some(developmentRealms.urls, function (url) {
+                    return $location.absUrl().indexOf(url) >= 0;
+                }))
+                    return developmentRealms.realms;
+
+                if (_.some(trainingRealms.urls, function (url) {
+                    return $location.absUrl().indexOf(url) >= 0;
+                }))
+                    return trainingRealms.realms;
+            }
+            return {
+                envRealms : envRealms
+            }
+    }])
 });

@@ -1,7 +1,7 @@
-define(['app', 'socket.io', './authentication', './apiUrl'], function (app, io) {
+define(['app', 'socket.io', 'lodash', './authentication', './apiUrl', './utilities'], function (app, io, _) {
 
-    app.factory('socketioService', ['$rootScope', '$http', '$q', 'realm', "authentication", "apiUrl",
-    function ($rootScope, $http, $q, realm, authentication, apiUrl) {
+    app.factory('socketioService', ['$rootScope', '$http', '$q', 'realm', "authentication", "apiUrl", 'realmService',
+    function ($rootScope, $http, $q, realm, authentication, apiUrl, realmService) {
         return new function () {
             var apiServer = 'https://api.cbd.int/';
 
@@ -47,6 +47,15 @@ define(['app', 'socket.io', './authentication', './apiUrl'], function (app, io) 
 
                         if(message.type == 'userLogoff'){
                             authentication.signOut();
+                        }
+                        if(message.data && message.data.realm){
+                            var realms;
+                            if(angular.isArray(message.data.realm))
+                                realms = message.data.realm;
+                            else 
+                                realms = [message.data.realm];
+                            if(_.intersection(_.map(realms, _.upperCase), realmService.envRealms()).length == 0)
+                                return;
                         }
                         $rootScope.$broadcast('event:server-pushNotification', message);
                     }
