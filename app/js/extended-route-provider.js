@@ -1,7 +1,7 @@
 'use strict';
 
 define(['app', 'angular', '../services/app-config-service', 'scbd-angularjs-services/locale'], function(app, angular) {
-    
+        
     app.provider('extendedRoute', ["$routeProvider", function($routeProvider) {
         
         var baseUrl = "";//$('#appBaseUrl').text();
@@ -25,6 +25,7 @@ define(['app', 'angular', '../services/app-config-service', 'scbd-angularjs-serv
                 ext.resolve.user = resolveUser();
             }
             var prj = proxy;
+            route.templateUrl += '?v='+window.appVersion;
             return __when(baseUrl+path, angular.extend(route, ext));
         }
 
@@ -75,7 +76,7 @@ define(['app', 'angular', '../services/app-config-service', 'scbd-angularjs-serv
                 var deferred = $q.defer();
 
                 var controllers = [];
-                controllers.push($route.current.$$route.templateUrl + '.js');
+                controllers.push($route.current.$$route.templateUrl.replace(/(\?v=)/, '.js?v='));
 
                 //TODO: I'm not sure if this is the most elegant approach... reconsider
                 //NOTE: for some reason the subTemplareUrl is staying as the old one, not as the newly defined one. Yet the document_type is being changed.
