@@ -1,5 +1,5 @@
-define(['app', 'underscore', '/app/js/common.js', 'scbd-angularjs-controls','bootstrap-datepicker'
-], function(app, _) {
+define(['app', 'text!/app/views/search/search-filters/date-filter.html','underscore', '/app/js/common.js', 'scbd-angularjs-controls','bootstrap-datepicker'
+], function(app, template, _) {
 
     app.directive('dateFilter', function() {
         return {
@@ -7,7 +7,7 @@ define(['app', 'underscore', '/app/js/common.js', 'scbd-angularjs-controls','boo
             replace: true,
             // transclude: true,
             require:'^searchDirective',
-            templateUrl: '/app/views/search/search-filters/date-filter.html',
+            template: template, 
             scope: false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                 // $scope.since = {};

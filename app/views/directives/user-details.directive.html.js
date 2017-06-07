@@ -1,11 +1,11 @@
-define(['app'], function (app) {
+define(['app', 'text!/app/views/directives/user-details-directive.html'], function (app, template) {
 
 app.directive('userDetails', function($http){
 
 	return{
 		restrict: 'EAC',
 		replace:true,
-		templateUrl: '/app/views/directives/user-details-directive.html',
+		template: template,
 		
 		controller: ['$scope', function($scope){
 

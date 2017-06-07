@@ -1,11 +1,12 @@
-define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
+define(['app', "text!/app/views/measure-matrix/measure-matrix-countries-directive.html",
+        'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
         '/app/views/measure-matrix/measure-matrix-elements-derective.html.js',
-        '/app/views/forms/view/record-loader.directive.html.js'], function(app, _) {
+        '/app/views/forms/view/record-loader.directive.html.js'], function(app, template, _) {
 
     app.directive("measureMatrixCountriesDirective", function() {
         return {
             restrict: "EAC",
-            templateUrl: "/app/views/measure-matrix/measure-matrix-countries-directive.html",
+            template: template, 
             replace: true,
             transclude: false,
             scope: {

@@ -1,9 +1,9 @@
-define(['app'], function(app) {
+define(['app', 'text!/app/views/directives/others-directive.html'], function(app, template) {
 
     app.directive('others', function($http) {
         return {
             restrict: 'EAC',
-            templateUrl: '/app/views/directives/others-directive.html',
+            template: template,
             replace: true,
             scope: {
                 field: '@field'

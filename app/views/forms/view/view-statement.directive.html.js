@@ -1,9 +1,10 @@
-define(['app'], function (app) {
+define(['app',
+'text!/app/views/forms/view/view-statement.directive.html',], function (app, template) {
 
 app.directive('viewStatement', [function() {
 	return {
 		restrict: 'EAC',
-		templateUrl: '/app/views/forms/view/view-statement.directive.html',
+		template: template, 
 		replace: true,
 		transclude: false,
 		scope: {

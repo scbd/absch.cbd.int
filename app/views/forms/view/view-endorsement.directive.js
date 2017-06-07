@@ -1,9 +1,10 @@
-define(['app', './record-loader.directive.html.js', '/app/js/common.js'], function (app) {
+define(['app', "text!/app/views/forms/view/view-endorsement.directive.html", './record-loader.directive.html.js', 
+'/app/js/common.js'], function (app, template) {
 
 app.directive("viewEndorsement", [function () {
 	return {
 		restrict   : "EAC",
-		templateUrl: "/app/views/forms/view/view-endorsement.directive.html",
+		template: template ,
 		replace    : true,
 		transclude : false,
 		scope: {

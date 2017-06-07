@@ -1,11 +1,11 @@
-define(['app', '/app/services/search-service.js',
+define(['app', 'text!/app/views/directives/document-reference-history.html',,'/app/services/search-service.js',
 '/app/views/search/search-results/result-default.js',
-], function (app) {
+], function (app, template) {
     app.directive('documentReferenceHistory', function ($http) {
         return {
             restrict: 'EAC',
             replace: true,
-            templateUrl: '/app/views/directives/document-reference-history.html',
+            template: template, 
             scope: {
                 'identifier': '@'
             },

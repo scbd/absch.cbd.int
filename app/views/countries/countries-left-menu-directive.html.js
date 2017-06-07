@@ -1,9 +1,10 @@
-define(['app','underscore', '/app/js/common.js'], function(app,_) {
+define(['app','text!/app/views/countries/countries-left-menu-directive.html',
+'underscore', '/app/js/common.js'], function(app, template, _) {
 
     app.directive('countriesLeftMenu', function() {
         return {
             restrict: 'EAC',
-            templateUrl: '/app/views/countries/countries-left-menu-directive.html',
+            template: template,
             replace: true,
             scope: {
                 finishLoadingCountries: '&',

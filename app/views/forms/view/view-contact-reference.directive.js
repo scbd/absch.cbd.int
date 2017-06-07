@@ -1,9 +1,10 @@
-define(['app','underscore', 'scbd-angularjs-services', '/app/js/common.js'], function (app, _) {
+define(['app', "text!/app/views/forms/view/view-contact-reference.directive.html",'underscore', 
+'scbd-angularjs-services', '/app/js/common.js'], function (app, template, _) {
 
 	app.directive("viewContactReference", [function () {
 		return {
 			restrict: "EAC",
-			templateUrl: "/app/views/forms/view/view-contact-reference.directive.html",
+			template: template ,
 			replace: true,
 			transclude: false,
 			scope: {

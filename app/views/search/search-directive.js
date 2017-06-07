@@ -1,4 +1,4 @@
-define(['app', 'underscore', '/app/js/common.js',
+define(['app', 'text!/app/views/search/search-directive.html','underscore', '/app/js/common.js',
 '/app/services/search-service.js',
 'ngInfiniteScroll',
 '/app/views/search/search-filters/keyword-filter.js',
@@ -14,14 +14,14 @@ define(['app', 'underscore', '/app/js/common.js',
 '/app/views/register/user-preferences/user-preference-filter.js',
 '/app/views/directives/export-directive.html.js',
 '/app/services/thesaurus-service.js'
-], function(app, _) {
+], function(app, template, _) {
 
     app.directive('searchDirective', function() {
         return {
             restrict: 'EAC',
             replace: true,
             // transclude: true,
-            templateUrl: '/app/views/search/search-directive.html',
+            template: template, 
             controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService',
             function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 

@@ -1,9 +1,9 @@
-define(['app'], function(app) {
+define(['app', "text!/app/views/forms/view/view-history-directive.html"], function(app, template) {
 
     app.directive("viewHistory", [function() {
         return {
             restrict: "EAC",
-            templateUrl: "/app/views/forms/view/view-history-directive.html",
+            template: template ,
             replace: true,
             transclude: false,
             scope: {

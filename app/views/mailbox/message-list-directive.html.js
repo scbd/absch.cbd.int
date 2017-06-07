@@ -1,9 +1,10 @@
-define(['app', 'underscore'], function(app, _) {
+define(['app', 'text!/app/views/mailbox/message-list-directive.html',
+'underscore'], function(app, template, _) {
     app.directive('mailboxMessageList', function() {
         return {
             restrict: 'EAC',
             replace: true,
-            templateUrl: '/app/views/mailbox/message-list-directive.html',
+            template: template, 
             scope: {
                 onSelection: '&',
                 onDeletion: '&',

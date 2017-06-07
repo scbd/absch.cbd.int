@@ -1,4 +1,5 @@
-define(['app'], function(app) {
+define(['app',
+'text!/app/views/search/search-filters/reference-filter.html'], function(app, template) {
 
     app.directive('referenceFilter', function($timeout) {
         return {
@@ -6,7 +7,7 @@ define(['app'], function(app) {
             replace: true,
             // transclude: true,
             require:'^searchDirective',
-            templateUrl: '/app/views/search/search-filters/reference-filter.html',
+            template: template, 
             scope:false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                $scope.rf_searchFilters = searchDirectiveCtrl.getSearchFilters('reference');

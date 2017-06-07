@@ -1,15 +1,15 @@
-define(['app', '/app/js/common.js', 'scbd-angularjs-services', 'scbd-angularjs-controls',
+define(['app', "text!/app/views/forms/edit/field-embed-contact.directive.html", '/app/js/common.js', 'scbd-angularjs-services', 'scbd-angularjs-controls',
 '/app/views/forms/view/view-contact-reference.directive.js', 'ngDialog',
 '/app/views/forms/view/view-organization-reference.directive.js',
 '/app/services/search-service.js','ngInfiniteScroll'
 ],
-function(app) {
+function(app, template) {
     
     app.directive("fieldEmbedContact", [function() {
 
         return {
             restrict: "EA",
-            templateUrl: "/app/views/forms/edit/field-embed-contact.directive.html",
+            template: template ,
             replace: true,
             transclude: false,
             scope: {

@@ -1,11 +1,11 @@
-define(['app', 'underscore', '/app/views/directives/block-region-directive.js'
-], function (app, _) {
+define(['app', 'underscore', "text!/app/views/forms/edit/edit-measure-matrix-directive.html",'/app/views/directives/block-region-directive.js'
+], function (app, _, template) {
 
 
     app.directive("editMeasureMatrix", function () {
         return {
             restrict: "EAC",
-            templateUrl: "/app/views/forms/edit/edit-measure-matrix-directive.html",
+            template: template ,
             replace: true,
             transclude: false,
             require: "?ngModel",

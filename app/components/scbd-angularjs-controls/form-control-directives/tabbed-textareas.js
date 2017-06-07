@@ -16,7 +16,7 @@ define(['app', 'text!./tabbed-textareas.html','jquery','angular-localizer','angu
                 placeholder: "@",
                 preview: '@?',
             },
-            templateUrl:  template,
+            template:  template,
             controller: function($scope, $element, $attrs, $transclude) {
                 //TODO: this initialization is hacky and will probably fall apart when part of an object is defined, but not the whole part. ie. isValid will fail.
                 if (typeof $scope.binding === 'undefined') {

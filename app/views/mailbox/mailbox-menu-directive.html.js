@@ -1,9 +1,10 @@
-define(['app','underscore'], function(app,_) {
+define(['app','text!/app/views/mailbox/mailbox-menu-directive.html',
+'underscore'], function(app, template,_) {
     app.directive('mailboxMenu', function() {
         return {
             restrict: 'EAC',
             replace: true,
-            templateUrl: '/app/views/mailbox/mailbox-menu-directive.html',
+            template: template, 
             scope : {
                 onSelection : '&'
             },

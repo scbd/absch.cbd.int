@@ -1,7 +1,7 @@
-define(['app', '/app/js/common.js',
+define(['app', 'text!/app/views/search/search-results/national-records-country.html','/app/js/common.js',
 '/app/views/search/search-results/result-grouped-national-record.js',
 '/app/views/directives/party-status.js',
-], function(app, _) {
+], function(app, template, _) {
 
     app.directive('nationalRecordsCountry', function() {
         return {
@@ -9,7 +9,7 @@ define(['app', '/app/js/common.js',
             replace: true,
             // transclude: true,
             require:'^searchDirective',
-            templateUrl: '/app/views/search/search-results/national-records-country.html',
+            template: template, 
             scope: {
                 group:'='
             },

@@ -1,12 +1,12 @@
-define(['app', '/app/js/common.js',
+define(['app', '/app/js/common.js',"text!/app/views/forms/edit/permit-selection-directive.html",
     '/app/views/directives/search-filter-dates.partial.html.js'
-	], function (app,commonjs) {
+	], function (app,commonjs, template) {
 
 app.directive("existingPermit", [ function () {
 
 	return {
 		restrict   : "EA",
-		templateUrl: "/app/views/forms/edit/permit-selection-directive.html",
+		template: template ,
 		replace    : true,
 		transclude : false,
 		scope      : {

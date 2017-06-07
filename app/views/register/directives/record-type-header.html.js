@@ -1,4 +1,4 @@
-define(['app',
+define(['app',"/app/views/register/directives/record-type-header.html",
 	'/app/views/forms/edit/editFormUtility.js',
 	'/app/views/forms/edit/field-embed-contact.directive.js',
 	'/app/views/forms/edit/edit-contact-base.directive.js',
@@ -8,14 +8,14 @@ define(['app',
 	'/app/views/forms/view/view-organization.directive.js',
 	'/app/views/forms/view/view-organization-reference.directive.js',
 	'/app/views/directives/task-id-directive.html.js'
-], function (app) {
+], function (app, template) {
 
 	"use strict";
 
 	app.directive("recordTypeHeader", [function () {
 		return {
 			restrict: "EA",
-			templateUrl: "/app/views/register/directives/record-type-header.html",
+			template: template, 
 			replace: true,
 			transclude: false,
 			scope: {},

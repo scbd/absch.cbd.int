@@ -12,7 +12,7 @@ define(['app', 'text!./text.html', 'jquery', 'angular-localizer','angular-saniti
         name: '@?',
         preview: '@?',
       },
-      templateUrl: '/text.html',
+      template: template,
       controller: function($scope, $element, $attrs) {
         $('textarea', $element).each(function() {
           for (var i in $attrs)

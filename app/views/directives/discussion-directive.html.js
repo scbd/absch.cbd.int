@@ -1,9 +1,9 @@
-define(['app', 'cbd-forums'], function(app) {
+define(['app', 'text!/app/views/directives/discussion-directive.html', 'cbd-forums'], function(app, template) {
 
     app.directive('discussion', function() {
         return {
             restrict: 'EAC',
-            templateUrl: '/app/views/directives/discussion-directive.html',
+            template: template,
             scope: {
                 forumId: '@',
                 threadTitle: '@',

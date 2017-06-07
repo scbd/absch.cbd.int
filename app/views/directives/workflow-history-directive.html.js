@@ -1,4 +1,4 @@
-define(['app'], function(app) {
+define(['app', 'text!/app/views/directives/workflow-history-directive.html'], function(app, template) {
 
     app.directive('workflowHistory', ["$q", "$timeout", "underscore",
         function($q, $timeout, _) {
@@ -6,7 +6,7 @@ define(['app'], function(app) {
             return {
                 restrict: 'EAC',
                 replace: false,
-                templateUrl: '/app/views/directives/workflow-history-directive.html',
+                template: template,
                 scope: {
                     documentId: '='
                 },
