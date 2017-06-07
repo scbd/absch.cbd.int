@@ -1,4 +1,4 @@
-define(['app',
+define(['app', 'text!/app/views/forms/view/record-loader.directive.html',
 	'scbd-angularjs-services', 'ngSmoothScroll',
 	'scbd-angularjs-filters',
 	'./view-history-directive.html.js',
@@ -10,11 +10,11 @@ define(['app',
     '/app/views/forms/view/view-contact-reference.directive.js',
 	'/app/services/search-service.js',
 	'/app/views/directives/block-region-directive.js'
-], function (app) {
+], function (app, template) {
 	app.directive('recordLoader', [function () {
 		return {
 			restrict: 'EAC',
-			templateUrl: '/app/views/forms/view/record-loader.directive.html',
+			template: template,
 			replace: true,
 			transclude: false,
 			scope: {
@@ -370,9 +370,29 @@ define(['app',
 					}
 
 					$scope.api = {
-						loadDocument: $scope.loadDocument
+						loadDocument: $scope.loadDocument,
+						getDocument: function(){return $scope.internalDocument},
+						getDocumentInfo : function(){$scope.internalDocumentInfo}
 					}
 
+
+					$scope.print = function(){
+						$scope.printing = true;
+						require(['printThis', 'text!/app/views/forms/view/print-header.html', 'text!/app/views/forms/view/print-footer.html'], function(printObj, header, footer){						
+							$element.find('#schemaView').printThis({
+								debug:false,
+								printContainer:true,
+								importCSS:true,
+								importStyle : true,
+								pageTitle : $route.current.params.documentID+$('title').text(),
+								loadCSS : '/app/css/print-friendly.css',
+								header : header,
+								footer : footer
+							});	
+							$timeout(function(){$scope.printing = false;},100);
+						});
+						
+					}
 				}]
 		}
 	}]);
