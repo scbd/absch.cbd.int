@@ -54,7 +54,9 @@ require.config({
         'angular-angulartics'       : 'libs/angulartics/dist/angulartics.min',
         'webui-popover'             : 'libs/webui-popover/dist/jquery.webui-popover.min',
         'chart-js'                  : 'libs/Chart.js/Chart',
-        "printThis"                 : 'libs/printThis/printThis'
+        "printThis"                 : 'libs/printThis/printThis',
+        'jquery-highlight'          : 'libs/jquery-highlight/jquery.highlight',
+        'lunr'                      : 'libs/lunr.js/lunr'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -94,9 +96,9 @@ require.config({
         'angular-google-analytics'      : { 'deps': ['angular', 'angular-angulartics']},
         'webui-popover'                 : { 'deps': ['jquery', 'css!libs/webui-popover/dist/jquery.webui-popover.min']},
         'chart-js'                      : { 'deps': ['angular', 'jquery'] },
-         "jspdf" : {
-            exports : "jsPDF"
-        }
+        "jspdf"                         : { exports : "jsPDF" },
+        'jquery-highlight'              : { 'deps': ['jquery'] },
+        'lunr'                          : { 'deps': ['jquery'] }
     },
     packages: [
         { name: 'scbd-branding'          , location : 'components/scbd-branding' },
