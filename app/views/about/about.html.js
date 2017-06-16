@@ -1,4 +1,5 @@
-define(['app','underscore','./search-content.js'], 
+define(['app','underscore', './about-directives.js' , './search-content.js', './common-format-directive.js',
+, './guides-directive.js'], 
 function (app, _) {
 
     var videos = {
@@ -65,7 +66,9 @@ function (app, _) {
             }
         });
         
-        $element.find(".sidenav").on('click', 'a', function(event) {
+        $element.find(".sidenav a").on('click', navigate);
+        $element.find(".sidenav").on('click', 'a', navigate);
+        function navigate(event) {
 
             if (this.hash !== "") {
               var hash = this.hash;
@@ -73,8 +76,7 @@ function (app, _) {
                 scrollTop: $(hash).offset().top
               }, 800);
             } 
-        });
-
+        }
         $scope.$on('$locationChangeStart', function(evt, nextUrl){     
           if(nextUrl.indexOf('/about-new#')>0)
             evt.preventDefault();

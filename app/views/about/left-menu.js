@@ -21,11 +21,10 @@
                                 });
                             }, 500)
 
-
+                            var currentUrlParser = document.createElement('a');
+                            var nextUrlParser = document.createElement('a');
                             scope.$on('$locationChangeStart', function (evt, nextUrl, current) {
-                                console.log($location.path(), current)
-                                var currentUrlParser = document.createElement('a');
-                                var nextUrlParser = document.createElement('a');
+                                
                                 currentUrlParser.href = current;
                                 nextUrlParser.href = nextUrl;
                                 
