@@ -1,4 +1,4 @@
-﻿define(['app', 'text!./common-format-directive.html',  'scbd-angularjs-services/locale'], 
+﻿define(['app', 'text!./common-formats-directive.html',  'scbd-angularjs-services/locale'], 
 function(app, template){
 
     app.directive('commonFormatLinks', ['locale', '$route', function (locale, $route) {

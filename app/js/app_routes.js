@@ -125,7 +125,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/help',                    { templateUrl: '/app/views/about/about.html', label:'About the ABSCH', reloadOnSearch : false,    resolveController:true, resolveUser : true}).
                when('/help/videos/:videoId?',   {templateUrl: '/app/views/about/videos.html', resolveController: true, resolveUser: false, label:'ABSCH Videos'}).
                when('/help/guides/:guideId?',   {templateUrl: '/app/views/about/guides.html', resolveController: true, resolveUser: false, label:'Step-by-step guides'}).
-               when('/help/common-formats/:commonFormat?',     {templateUrl: '/app/views/about/commonformats.html', resolveController: true, resolveUser: true, label:'Common formats'}).
+               when('/help/common-formats/:commonFormat?',     {templateUrl: '/app/views/about/common-formats.html', resolveController: true, resolveUser: true, label:'Common formats'}).
                when('/help/national-report',    {templateUrl: '/app/views/about/nr-faq.html', resolveController: true, resolveUser: true, label:'Information on the Interim National Report'}).
                when('/help/faq',                {templateUrl: '/app/views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
                

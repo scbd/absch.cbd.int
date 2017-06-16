@@ -1,4 +1,4 @@
-define(['app','underscore', './about-directives.js' , './search-content.js', './common-format-directive.js',
+define(['app','underscore', './about-directives.js' , './search-content.js', './common-formats-directive.js',
 , './guides-directive.js'], 
 function (app, _) {
 
