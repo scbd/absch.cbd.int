@@ -29,7 +29,9 @@
                     var body = title.nextUntil('h1, h2, h3, h4, h5');
                     var id = title.prop('id');
                     if(id == ''){
-                        id = title.text().replace(/\s/g, '-')//'absch-'+ Math.floor((Math.random()*1000)+1)
+                        id = title.text().trim()
+                                  .replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/g, '')
+                                  .replace(/\s/g, '-')//'absch-'+ Math.floor((Math.random()*1000)+1)
                         title.prop('id', id)
                     }
                     documents.push({

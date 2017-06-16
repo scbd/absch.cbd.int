@@ -3,7 +3,10 @@
     <h1>ABSCH Videos</h1>
     </br>
     <div class="row" >
-        <div class="col-xs-12 col-md-12" ng-repeat="video in videos" style="padding-bottom: 15px;">
+        <div class="col-xs-3">
+            <span left-menu navigate-on-click="true"></span>
+        </div>
+        <div class="col-xs-9 col-md-9" ng-repeat="video in videos" style="padding-bottom: 15px;">
             <h1 ng-bind="video.heading"></h1>
             <p>
                 <ng-youtube-embed width="100%" video="video.url"></ng-youtube-embed>

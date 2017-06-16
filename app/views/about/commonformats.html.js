@@ -1,4 +1,5 @@
-﻿define(['app','underscore', 'json!/app/app-data/help-videos.json', 'scbd-angularjs-services/locale'], function (app, _, videosData) {
+﻿define(['app','underscore', 'json!/app/app-data/help-videos.json', './left-menu.js',
+'scbd-angularjs-services/locale'], function (app, _, videosData) {
 app.controller("commonFormatsController",
 	["$rootScope", "$scope", "$q", '$element', '$route', 'locale',
      function ($rootScope, $scope, $q, $element, $route, locale) {

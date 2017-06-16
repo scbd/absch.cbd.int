@@ -1,4 +1,4 @@
-﻿define(['app','underscore', 'json!/app/app-data/help-guides.json'], function (app, _, guidesData) {
+﻿define(['app','underscore', 'json!/app/app-data/help-guides.json', './left-menu.js'], function (app, _, guidesData) {
 app.controller("guidesController",
 	["$rootScope", "$scope", "$q", '$element', '$route', function ($rootScope, $scope, $q, $element, $route) {
 
