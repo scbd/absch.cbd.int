@@ -97,6 +97,7 @@
                   <p ng-bind-html="term.description|lstring"></p>
                   <!--<div class="pull-right"><a translation-url  href="#"  scroll-to="anchorTop" class="color-litegrey"><i class="fa fa-arrow-circle-up"></i> back to top</a></div>-->
                   <div>
+                  <div faq-edit faq="term" ng-if="isAdmin"></div>
               </li>
             </ul>
           </li>

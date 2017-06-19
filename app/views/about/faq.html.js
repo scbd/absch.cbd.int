@@ -1,12 +1,9 @@
-define(['app', 'underscore', 'ngAria', 'angular-animate', 'scbd-angularjs-services',
-		'scbd-angularjs-filters', 'scbd-angularjs-controls', '/app/services/role-service.js',
+define(['app', 'underscore', '/app/services/role-service.js',
 		'./left-menu.js', './about-directives.js'
 	],
 	function (app, _) {
-		app.controller("faqController", ["$rootScope", "$scope", "$q", '$http', 'commonjs', 
-		 '$element', 'roleService', '$location', '$timeout',
-			function ($rootScope, $scope, $q, $http, commonjs, 
-			 $element, roleService, $location, $timeout) {
+		app.controller("faqController", ["$scope", 'roleService', '$timeout', '$q', '$http',
+			function ($scope, roleService, $timeout, $q, $http) {
 
 				$q.when($http.get('/api/v2015/help-faqs'))
 					.then(function (response) {
@@ -36,6 +33,10 @@ define(['app', 'underscore', 'ngAria', 'angular-animate', 'scbd-angularjs-servic
 								});
 							});
 						}, 500)
+
+						// if($scope.isAdmin()){
+						// 	require(['./faq-edit.js'], function(){});
+						// }
 					});
 
 				$scope.isAdmin = function () {
