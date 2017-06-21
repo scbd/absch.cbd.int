@@ -68,7 +68,7 @@ define(['app', 'underscore', '/app/services/local-storage-service.js'], function
                         if(country)
                             return country;
                     }
-                    return $http.get('/api/v2013/countries/' + code, {cache: true })
+                    return $http.get('/api/v2013/countries/' + code.toUpperCase(), {cache: true })
                         .then(function(response) {
                             return formatCountry(response.data);
                         });

@@ -402,7 +402,7 @@ function(template, app, _, popOverTemplate) {
 
           if($scope.zoomTo){
             $timeout(function () {
-              $location.url('/countries/' + (exceptionRegionMapping[cCode] || cCode));
+              $location.url('/countries/' + (exceptionRegionMapping[cCode] || cCode)).toUpperCase();
             },1);
             return;
           }

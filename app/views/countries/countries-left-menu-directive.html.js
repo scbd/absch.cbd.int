@@ -53,7 +53,7 @@ define(['app','text!/app/views/countries/countries-left-menu-directive.html',
                     }
 
                     $scope.navigateCountry = function(code){
-                        $location.path('/countries/' + code);
+                        $location.path('/countries/' + code.toUpperCase());
                     }
 
 
