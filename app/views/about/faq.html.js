@@ -2,8 +2,8 @@ define(['app', 'underscore', '/app/services/role-service.js',
 		'./left-menu.js', './about-directives.js'
 	],
 	function (app, _) {
-		app.controller("faqController", ["$scope", 'roleService', '$timeout', '$q', '$http',
-			function ($scope, roleService, $timeout, $q, $http) {
+		app.controller("faqController", ["$scope", 'roleService', '$timeout', '$q', '$http', '$element',
+			function ($scope, roleService, $timeout, $q, $http, $element) {
 
 				$q.when($http.get('/api/v2015/help-faqs'))
 					.then(function (response) {

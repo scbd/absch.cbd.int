@@ -1,6 +1,4 @@
 ﻿<div ng-controller="faqController">
-  <!--<div smooth-scroll duration="100" offset="200"></div>-->
-  <link rel="stylesheet" href="/app/css/about.css">
 
   <style>
     .faq, .faq ul{
@@ -43,7 +41,7 @@
       background-color: #ddd;
     }
 
-    .sublist>div.term>a {
+    .sublist>h5 .term>a {
       color: #666!important;
       font-weight: bold!important;
       font-size: 18px;
@@ -83,7 +81,7 @@
                 
                 <div>
                   <a url="#" ng-show="term.show || showAll" class="pull-right" ng-click="term.show=false" 
-                  style="color:#428bca;">
+                  style="color:#428bca;cursor:pointer">
                   <strong>&times;</strong></a>
                 </div>
                 <h5> 
