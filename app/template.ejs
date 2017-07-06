@@ -181,11 +181,7 @@
             ga('set',    'location', undefined);
         }
         
-        var appVersion = document.documentElement.attributes['app-version'].value||'-';
-        if(appVersion=='-')
-            appVersion = (new Date()).getTime();
-
-        window.appVersion = appVersion;
+        window.appVersion = document.documentElement.attributes['app-version'].value;
     </script>
 
 </body>
