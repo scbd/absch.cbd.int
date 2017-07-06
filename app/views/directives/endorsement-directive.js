@@ -1,10 +1,10 @@
-define(['app','/app/services/search-service.js'
-    ], function (app) {
+define(['app','text!/app/views/directives/endorsement-directive.html', '/app/services/search-service.js'
+    ], function (app, template) {
 	app.directive('endorsement', function($http){
 		return{
 			restrict: 'EAC',
 			replace:true,
-			templateUrl: '/app/views/directives/endorsement-directive.html',
+			template: template,
             scope       : {
                 identifier  : '=',
                 schema      : '='

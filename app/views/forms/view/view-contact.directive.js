@@ -1,10 +1,11 @@
-define(['app',"/app/views/forms/view/view-contact-reference.directive.js",
-'/app/views/directives/party-status.js'], function(app) {
+define(['app', "text!/app/views/forms/view/view-contact.directive.html","/app/views/forms/view/view-contact-reference.directive.js",
+'/app/views/directives/party-status.js'], 
+function(app, template) {
 
     app.directive("viewContact", [function() {
         return {
             restrict: "EAC",
-            templateUrl: "/app/views/forms/view/view-contact.directive.html",
+            template: template ,
             replace: true,
             transclude: false,
             scope: {

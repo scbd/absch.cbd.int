@@ -1,14 +1,14 @@
-define(['app', 'underscore',
+define(['app', 'underscore','text!/app/views/directives/task-id-directive.html',
 	'../forms/view/record-loader.directive.html.js', 'toastr', , 'ngDialog',
 	'/app/views/directives/document-reference-history.html.js',
 	'/app/services/local-storage-service.js', './block-region-directive.js',
 	'../forms/view/record-loader.directive.html.js'
-], function (app, _) {
+], function (app, _, template) {
 
 	app.directive('taskId', function () {
         return {
             restrict: 'EAC',
-            templateUrl: '/app/views/directives/task-id-directive.html?',
+            template: template,
             replace: true,
             scope: {
                 loadTaskData: '=',

@@ -1,11 +1,11 @@
-define(['app', 'underscore', '/app/services/search-service.js', '/app/services/app-config-service.js', '/app/services/help-service.js',
+define(['app','text!/app/views/directives/home-country-dashboard-directive.html', 'underscore', '/app/services/search-service.js', '/app/services/app-config-service.js', '/app/services/help-service.js',
 '/app/js/common.js', './block-region-directive.js'],
-    function(app, _) {
+    function(app, template, _) {
         app.directive('homeCountryDashboard', function($http) {
             return {
                 restrict: 'EAC',
                 replace: true,
-                templateUrl: '/app/views/directives/home-country-dashboard-directive.html',
+                template: template,
                 controller: ['$scope', '$filter', 'realm', '$q', 'searchService', 'appConfigService', 'commonjs','$element', 'helpService',"$timeout", "$location",
                     function($scope, $filter, realm, $q, searchService, appConfigService, commonjs, $element, helpService, $timeout, $location) {
 

@@ -1,10 +1,10 @@
-define(['app', 'underscore', ], function(app, _) {
+define(['app', 'text!/app/views/directives/nav/portal-branding.html', 'underscore', ], function(app,template,  _) {
     app.directive('portalBranding', function() {
         return {
             restrict: 'EAC',
             replace: true,
             // transclude: true,
-            templateUrl: '/app/views/directives/nav/portal-branding.html',
+            template: template,
             scope: {
                 uid: '@',
             },

@@ -1,49 +1,108 @@
 ﻿<div ng-controller="faqController">
-<div smooth-scroll duration="100" offset="200" ></div>
-<link rel="stylesheet" href="/app/css/about.css">
-  
+
   <style>
-    .nav > li > a {padding-top: 10px;font-weight: bold;}
-    .nav>li>a:hover, .nav>li>a:focus {background-color:transparent!important;}
-    .nav-stacked>li{padding-top:10px; margin-top:0!important;}
-    .nav-stacked>li>a:hover, .nav-stacked>li.active>a, .nav-stacked>li.active>a:hover, .nav-stacked>li.active>a:focus{color:#1FA65D;background-color:transparent!important;}
-    .nav-stacked>li>a {color:#1FA65D;padding:0 3px; font-weight: bold; font-size:24px;}
-    .sublist{padding:10px!important;border-top:1px solid #bbb; background-color:#ddd; }
-    .sublist>div.term>a{color:#666!important;font-weight: bold!important; font-size:18px;}
-    .sublist>li>a:hover, .sublist>li>a:focus, {color:#111!important;background-color: transparent!important;}
-</style>
+    .faq, .faq ul{
+      list-style: none;
+      padding-left: 5px;
+    }
+    .faq>li>a {
+      padding-top: 10px;
+      font-weight: bold;
+    }
+
+    .faq>li>a:hover,
+    .faq>li>a:focus {
+      background-color: transparent!important;
+    }
+
+    .faq-stacked>li {
+      padding-top: 10px;
+      margin-top: 0!important;
+    }
+
+    .faq-stacked>li>a:hover,
+    .faq-stacked>li.active>a,
+    .faq-stacked>li.active>a:hover,
+    .faq-stacked>li.active>a:focus {
+      color: #1FA65D;
+      background-color: transparent!important;
+    }
+
+    .faq-stacked>li>a {
+      color: #1FA65D;
+      padding: 0 3px;
+      font-weight: bold;
+      font-size: 24px;
+    }
+
+    .sublist {
+      padding: 10px!important;
+      border-top: 1px solid #bbb;
+      background-color: #ddd;
+    }
+
+    .sublist>h5 .term>a {
+      color: #666!important;
+      font-weight: bold!important;
+      font-size: 18px;
+    }
+
+    .sublist>li>a:hover,
+    .sublist>li>a:focus,
+    {
+      color: #111!important;
+      background-color: transparent!important;
+    }
+
+  </style>
 
   <div class="container-fluid">
-  <div class="row-fluid">
-    <nav class="col-xs-12" >
-       <h1> Frequently Asked Questions</h1>
-       <ul class="nav nav-stacked">
-        <li>
+    <div class="row-fluid">
+      <div class="col-xs-3">
+        <span left-menu   navigate-on-click="false"></span>
+      </div>
+      <div class="col-xs-9" id="faq-content">
+        <h1> Frequently Asked Questions</h1>
+        <hr style="border-top:1px solid #999;">
+        <ul class="faq faq-stacked content">
+          <!--<li>
             <input type="text" class="form-control" aria-label="search" placeholder="Search FAQs" ng-model="keyword" style="width:340px;">
-           <!--&nbsp; &nbsp; &nbsp;
-            <i class="fa" ng-class="{'fa-toggle-on':showAll, 'fa-toggle-off:!showAll}"></i> <a translation-url  href="#" ng-click="showAll=!showAll"> show all </a>        -->
-        </li>
-        
-        <li><hr style="border-top:1px solid #999;"></li>
-        
-        <li ng-repeat="(key,faq) in faqs"><a translation-url  href="#{{key}}">{{key.substring(3)}}</a>
-             <ul class="nav nav-stacked">
-                <li  ng-class="{'bg-white':show || showAll}" class="sublist" ng-repeat="term in faq | filter:keyword | orderBy:['sequence']">
-                 <div><a translation-url  href="#" ng-show="show || showAll" class="pull-right" ng-click="show=false" style="color:#428bca;"><strong>&times;</strong></a></div>
-                 <div class="term"><a translation-url  href="#{{term.id}}" ng-click="show=!show">{{term.title}}</a></div>
-                
-                 <div ng-show="show || showAll" style="padding:5px;margin-top:20px;">
-                    <!--<h3><a translation-url  name="{{term.id}}">{{term.title}}</a></h3>-->
-                     <p ng-bind-html="term.description|lstring"></p>
-                     <!--<div class="pull-right"><a translation-url  href="#"  scroll-to="anchorTop" class="color-litegrey"><i class="fa fa-arrow-circle-up"></i> back to top</a></div>-->
-                 <div>
-                </li>
-            </ul>
-        </li>
-      </ul>
-    </nav>
+          </li>
 
+          <li>
+            <hr style="border-top:1px solid #999;">
+          </li>-->
+
+          <li ng-repeat="(key,faq) in faqs">
+            <a class="faq-header" translation-url href="#{{key}}">{{key.substring(3)}}</a>
+            <ul class="faq faq-stacked">
+              <li ng-class="{'bg-white':term.show || showAll}" class="sublist" 
+                ng-repeat="term in faq | filter:keyword | orderBy:['sequence']">
+                
+                <div>
+                  <a url="#" ng-show="term.show || showAll" class="pull-right" ng-click="term.show=false" 
+                  style="color:#428bca;cursor:pointer">
+                  <strong>&times;</strong></a>
+                </div>
+                <h5> 
+                   <div class="term">
+                     <a class="faq-header" href="#"  
+                     ng-click="term.show=!term.show">{{term.title}}</a>
+                  </div>
+                </h5>
+                <div ng-show="term.show || showAll" style="padding:5px;margin-top:20px;">
+                  <!--<h3><a translation-url  name="{{term.id}}">{{term.title}}</a></h3>-->
+                  <p ng-bind-html="term.description|lstring"></p>
+                  <!--<div class="pull-right"><a translation-url  href="#"  scroll-to="anchorTop" class="color-litegrey"><i class="fa fa-arrow-circle-up"></i> back to top</a></div>-->
+                  <div>
+                  <div faq-edit faq="term" ng-if="isAdmin"></div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+    </div>
   </div>
-</div>
 
 </div>

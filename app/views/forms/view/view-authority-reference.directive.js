@@ -1,9 +1,9 @@
-define(['app'], function (app) {
+define(['app', 'text!/app/views/forms/view/view-authority-reference.directive.html'], function (app, template) {
 
 app.directive('viewAuthorityReference', [function() {
 	return {
 		restrict: 'EAC',
-		templateUrl: '/app/views/forms/view/view-authority-reference.directive.html',
+		template: template ,
 		replace: true,
 		transclude: false,
 		scope: {

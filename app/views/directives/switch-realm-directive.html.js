@@ -1,10 +1,10 @@
-define(['app','underscore', '/app/services/app-config-service.js', 'ionsound'],
-function(app,_) {
+define(['app','text!/app/views/directives/switch-realm-directive.html', 'underscore', '/app/services/app-config-service.js'],
+function(app,template, _) {
     app.directive('switchRealm', function() {
         return {
             restrict: 'EAC',
             replace: true,
-            templateUrl: '/app/views/directives/switch-realm-directive.html',
+            template: template,
             controller: ['$scope', '$location','appConfigService','realm',
                 function($scope, $location, appConfigService, realm) {
 

@@ -1,0 +1,19 @@
+﻿ a[href]:after {
+            content: '';
+        }
+
+.report-record, .document-languages,.expander, .fa-chevron-circle-up {
+    display: none;
+}
+
+body, #htmlContent, #htmlContentHeader, #htmlContentFooter,#schemaView{
+    background-color: #fff!important;
+}
+address.km-value, div.km-value, span.km-value, ul.km-value > li, ol.km-value > li {
+    background-color: #f5f5f5!important;
+    border: 1px solid #ccc!important;
+    border: 1px solid rgba(0, 0, 0, 0.15)!important;
+}
+#htmlContentFooter{
+    margin-top: 20px;
+}

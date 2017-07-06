@@ -1,5 +1,5 @@
-define(['app', 'underscore', '/app/js/common.js',
-], function(app, _) {
+define(['app', 'text!/app/views/search/search-filters/country-filter.html','underscore', '/app/js/common.js',
+], function(app, template, _) {
 
     app.directive('countryFilter', function() {
         return {
@@ -7,7 +7,7 @@ define(['app', 'underscore', '/app/js/common.js',
             replace: true,
             // transclude: true,
             require:'^searchDirective',
-            templateUrl: '/app/views/search/search-filters/country-filter.html',
+            template: template, 
             scope: false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                

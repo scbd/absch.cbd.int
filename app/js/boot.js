@@ -1,10 +1,6 @@
 'use strict';
 
 window.name = 'NG_DEFER_BOOTSTRAP!';
-
-var appVersion = document.documentElement.attributes['app-version'].value;
-if(appVersion=='-')
-    appVersion = new Date();
     
 require.config({
     baseUrl : 'app/',
@@ -57,7 +53,10 @@ require.config({
         'angular-google-analytics'  : 'libs/angulartics-google-analytics/dist/angulartics-ga.min',
         'angular-angulartics'       : 'libs/angulartics/dist/angulartics.min',
         'webui-popover'             : 'libs/webui-popover/dist/jquery.webui-popover.min',
-        'chart-js'                  : 'libs/Chart.js/Chart'
+        'chart-js'                  : 'libs/Chart.js/Chart',
+        "printThis"                 : 'libs/printThis/printThis',
+        'jquery-highlight'          : 'libs/jquery-highlight/jquery.highlight',
+        'lunr'                      : 'libs/lunr.js/lunr'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -96,7 +95,10 @@ require.config({
         'angular-angulartics'           : { 'deps': ['angular']} ,
         'angular-google-analytics'      : { 'deps': ['angular', 'angular-angulartics']},
         'webui-popover'                 : { 'deps': ['jquery', 'css!libs/webui-popover/dist/jquery.webui-popover.min']},
-        'chart-js'                      : { 'deps': ['angular', 'jquery'] }
+        'chart-js'                      : { 'deps': ['angular', 'jquery'] },
+        "jspdf"                         : { exports : "jsPDF" },
+        'jquery-highlight'              : { 'deps': ['jquery'] },
+        'lunr'                          : { 'deps': ['jquery'] }
     },
     packages: [
         { name: 'scbd-branding'          , location : 'components/scbd-branding' },
@@ -105,7 +107,7 @@ require.config({
         { name: 'scbd-angularjs-filters',  location : 'components/scbd-angularjs-services/filters' },
         { name: 'ammap', main: 'ammap',    location : 'libs/ammap3/ammap' }
     ],
-    urlArgs: 'v=' + appVersion
+    urlArgs: 'v=' + window.appVersion
 });
 
 define("_slaask", window._slaask);

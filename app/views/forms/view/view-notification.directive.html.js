@@ -1,9 +1,9 @@
-define(['app'], function (app) {
+define(['app', 'text!/app/views/forms/view/view-notification.directive.html',], function (app, template) {
 
 app.directive('viewNotification', [function() {
 	return {
 		restrict: 'EAC',
-		templateUrl: '/app/views/forms/view/view-notification.directive.html',
+		template: template, 
 		replace: true,
 		transclude: false,
 		scope: {

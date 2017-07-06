@@ -1,10 +1,10 @@
-define(['app', '/app/js/common.js'
-    ], function (app) {
+define(['app','text!/app/views/directives/document-metadata-directive.html', '/app/js/common.js'
+    ], function (app, template) {
 	app.directive('documentMetadata', function($http){
 		return{
 			restrict: 'EAC',
 			replace:true,
-			templateUrl: '/app/views/directives/document-metadata-directive.html',
+			template: template,
 			controller: ['$scope', '$filter','commonjs','$element', '$compile', function($scope, $filter, commonjs, $element, $compile){
 
 				$scope.getUniqueID = function(document){

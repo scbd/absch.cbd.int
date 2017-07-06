@@ -1,12 +1,12 @@
-define(['app', 'underscore', '/app/js/common.js',
+define(['app', 'text!/app/views/search/search-results/result-grouped-national-record.html','underscore', '/app/js/common.js',
 '/app/views/forms/view/record-loader.directive.html.js'
-], function(app, _) {
+], function(app, template, _) {
 
     app.directive('resultGroupedNationalRecord', ["$timeout", function($timeout) {
         return {
             restrict: 'EAC',
             replace: true,
-            templateUrl: '/app/views/search/search-results/result-grouped-national-record.html',
+            template: template, 
             scope: {
                 doc:'='
             },

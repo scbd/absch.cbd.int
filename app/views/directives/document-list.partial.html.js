@@ -1,13 +1,13 @@
-define(['app',
+define(['app','text!/app/views/directives/document-list.partial.html',
     './document-metadata-directive.html.js',
     '/app/js/common.js',
     'ngInfiniteScroll'
-], function(app) {
+], function(app, template) {
 
     app.directive('documentList', function($http, $filter) {
         return {
             restrict: 'EAC',
-            templateUrl: '/app/views/directives/document-list.partial.html',
+            template: template,
             replace: true,
             scope: {
                 documents: '=',

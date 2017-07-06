@@ -1,9 +1,10 @@
-define(['app','underscore'], function(app,_) {
+define(['app','text!/app/views/mailbox/compose-directive.html',
+'underscore'], function(app, template,_) {
     app.directive('mailboxCompose', function() {
         return {
             restrict: 'EAC',
             replace: true,
-            templateUrl: '/app/views/mailbox/compose-directive.html',
+            template: template, 
             scope : {
                 onMailComposed : '&'
             },

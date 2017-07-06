@@ -227,7 +227,7 @@ define(['app', 'underscore',
 
             //==================================================================================
             $scope.gotoCountryProfile = function (code) {
-                $location.path('/countries/' + code);
+                $location.path('/countries/' + code.toUpperCase());
             };
             
             $scope.loadingMap = true;

@@ -1,9 +1,9 @@
-define(['app', 'scbd-angularjs-controls','bootstrap-datepicker'], function (app) {
+define(['app', 'text!/app/views/directives/search-filter-dates.partial.html', 'scbd-angularjs-controls','bootstrap-datepicker'], function (app, template) {
 
 app.directive('searchFilterDates', function ($http) {
     return {
         restrict: 'EAC',
-        templateUrl: '/app/views/directives/search-filter-dates.partial.html',
+        template: template,
         replace: true,
         scope: {
               title: '@title',

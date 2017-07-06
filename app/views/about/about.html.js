@@ -1,158 +1,91 @@
-define(['app','underscore','./youtube.js'], function (app, _) {
+define(['app','underscore', './about-directives.js',  './common-formats-directive.js',
+, './guides-directive.js'], 
+function (app, _) {
+// , './search-content.js',
+    var videos = {
+            countryProfile  : '6eDBShJMWfI',
+            searchMatrix    : 'IwyrMQKDZ3o',
+            searchSearch    : 'YaX_llUfBts',
+            searchUid       : '78pRh1LbDj4',
+            searchReport    : 'wOe4hUt66K4',
+            newAccount      : 'nAHFkAJZt1w',
+            oldAccount      : 'IqoVH8IVsvI',
+            forgotPassword  : 'hv7Kgx0bjdc',
+            userManagement  : 'sBYKAuS6TBA',
+            dashboard       : 's6xLer37R5M',
+            notification    : 'nYHA8yuTx5c',
+            emailAlerts     : 'DjRtgYxyeJg',
+            helpdesk        : 'yiASMdKJY8A',
 
+    };
+    app.directive('ngYoutubeEmbed', function(){
+      return {
+        link : function(scope, elem, attrs){
 
-app.directive('scrollSpy', function ($window) {
-  return {
-    restrict: 'A',
-    controller: function ($scope) {
-      $scope.spies = [];
-      this.addSpy = function (spyObj) {
-        // console.log("addSpy");
-        $scope.spies.push(spyObj);
-      };
-    },
-    link: function (scope, elem, attrs) {
-      var spyElems;
-      spyElems = [];
+            if(attrs.video){
+              var id = videos[attrs.video.replace('videos.', '')]
+              elem.css('background-image', 'url(https://img.youtube.com/vi/' + id + '/sddefault.jpg)');
 
-      scope.$watchCollection('spies', function (spies) {
-        var spy, _i, _len, _results;
-        _results = [];
+              // Overlay the Play icon to make it look like a video player
+              elem.append($('<div/>', {'class': 'play'}));
 
-        for (_i = 0, _len = spies.length; _i < _len; _i++) {
-          spy = spies[_i];
+              elem.bind('click', function() {
+                  // Create an iFrame with autoplay set to true
+                  var iframe_url = "https://www.youtube.com/embed/" + id + "?autoplay=1&autohide=1";
+                  if ($(this).data('params')) iframe_url+='&'+$(this).data('params');
 
-          if (spyElems[spy.id] == null) {
-            _results.push(spyElems[spy.id] = elem.find('#' + spy.id));
-          }
-        }
-        // console.log(_results);
-        
-        
-        return _results;
-        
-      });
+                  // The height and width of the iFrame should be the same as parent
+                  var iframe = $('<iframe/>', {'frameborder': '0', 'src': iframe_url, 'width': $(this).width(), 'height': $(this).height() })
 
-      $($window).scroll(function () {
-        var highlightSpy, pos, spy, _i, _len, _ref;
-        highlightSpy = null;
-        _ref = scope.spies;
-        
-        // cycle through `spy` elements to find which to highlight
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          spy = _ref[_i];
-          spy.out();
-          
-          // catch case where a `spy` has id = ""
-          if (spy.id == "") {
-            continue;
-          }
-          
-          // catch case where a `spy` does not have an associated `id` anchor
-          if (spyElems[spy.id] === undefined) {
-            continue;
-          }
-          
-          if ((pos = spyElems[spy.id].offset().top) - $window.scrollY <= 0) {
-            // the window has been scrolled past the top of a spy element
-            spy.pos = pos;
-
-            if (highlightSpy == null) {
-              highlightSpy = spy;
+                  // Replace the YouTube thumbnail with YouTube HTML5 Player
+                  elem.replaceWith(iframe);
+              });
             }
-            if (highlightSpy.pos < spy.pos) {
-              highlightSpy = spy;
-            }
-          }
         }
-
-        // select the last `spy` if the scrollbar is at the bottom of the page
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-          spy.pos = pos;
-          highlightSpy = spy;
-        }        
-
-        return highlightSpy != null ? highlightSpy["in"]() : void 0;
-      });
-    }
-  };
-});
-
-app.directive('spy', function ($location, $anchorScroll) {
-  return {
-    restrict: "A",
-    require: "^scrollSpy",
-    link: function(scope, elem, attrs, affix) {
-      elem.bind('click', function (e, data) {
-        scope.$apply(function() {
-          $location.hash(attrs.spy);
-          //$anchorScroll();
-          e.stopPropagation();
-          e.preventDefault();
-        });
-      });
-
-      if (attrs.spy != "") {
-        affix.addSpy({
-          id: attrs.spy,
-          in: function() {
-            elem.addClass('active');
-            $('.sidenav li').has('.active').addClass('active');
-          },
-          out: function() {
-            elem.removeClass('active');
-            $('.sidenav li').not(':has(.active)').removeClass('active');
-          }
-        });
       }
-    }
-  };
-});
+    })
+    app.controller("AboutNewController",
+      ["$rootScope", "$scope", "$q", "underscore",'$http','commonjs','smoothScroll', '$element', '$timeout',
+      function ($rootScope, $scope, $q, _, $http, commonjs, smoothScroll, $element, $timeout) {
+        
+        $timeout(function(){
+          $(window).scroll(function() {
+              var googleMap = $('#divGoogleMap');
+              if (!googleMap.attr('data-src') && googleMap.offset().top < ($(window).scrollTop() + $(window).height()-200) ) {
+                  googleMap.attr('data-src', 'yes');
+                  googleMap.append('<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.405203808206!2d-73.56230188405428!3d45.5019211389461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc91a5a2bfa0705%3A0xa17357fa5e55d6ad!2sSecretariat+of+the+Convention+on+Biological+Diversity!5e0!3m2!1sen!2sca!4v1480355468112"'+
+                        ' width="100%" height="380" frameborder="0" style="border:0" allowfullscreen class="thumbnail"></iframe>')
+              }
+          })
+        }, 1500)
 
+        $element.find('#nav').affix({
+            offset: {     
+            top: $element.find('#nav').offset().top,
+            bottom: ($('footer').outerHeight(true) + $('.application').outerHeight(true)) + 200
+            }
+        });
+        
+        $element.find(".sidenav a").on('click', navigate);
+        $element.find(".sidenav").on('click', 'a', navigate);
+        function navigate(event) {
 
-app.controller("AboutNewController",
-	["$rootScope", "$scope", "$q", "underscore",'$http','commonjs','smoothScroll', '$element', function ($rootScope, $scope, $q, _, $http, commonjs, smoothScroll, $element) {
-     $scope.videos = {
-        countryProfile  : 'https://www.youtube.com/watch?v=6eDBShJMWfI',
-        searchMatrix    : 'https://www.youtube.com/watch?v=IwyrMQKDZ3o',
-        searchSearch    : 'https://www.youtube.com/watch?v=YaX_llUfBts',
-        searchUid       : 'https://www.youtube.com/watch?v=78pRh1LbDj4',
-        searchReport    : 'https://www.youtube.com/watch?v=wOe4hUt66K4',
-        newAccount      : 'https://www.youtube.com/watch?v=nAHFkAJZt1w',
-        oldAccount      : 'https://www.youtube.com/watch?v=IqoVH8IVsvI',
-        forgotPassword  : 'https://www.youtube.com/watch?v=hv7Kgx0bjdc',
-        userManagement  : 'https://www.youtube.com/watch?v=sBYKAuS6TBA',
-        dashboard       : 'https://www.youtube.com/watch?v=s6xLer37R5M',
-        notification    : 'https://www.youtube.com/watch?v=nYHA8yuTx5c',
-        emailAlerts     : 'https://www.youtube.com/watch?v=DjRtgYxyeJg',
-        helpdesk        : 'https://www.youtube.com/watch?v=yiASMdKJY8A',
-
-     };
-     console.log( $element.find('#nav').offset().top, $('footer').outerHeight(true) , $('.application').outerHeight(true))
-     $element.find('#nav').affix({
-        offset: {     
-        top: $element.find('#nav').offset().top,
-        bottom: ($('footer').outerHeight(true) + $('.application').outerHeight(true)) + 40
+            if (this.hash !== "") {
+              var hash = this.hash;
+              $('html, body').animate({
+                scrollTop: $(hash).offset().top
+              }, 800);
+            } 
         }
-     });
-    
-    $element.find(".sidenav a").on('click', function(event) {
+        $scope.$on('$locationChangeStart', function(evt, nextUrl){     
+          if(nextUrl.indexOf('/about-new#')>0)
+            evt.preventDefault();
+        });
 
-        if (this.hash !== "") {
-          var hash = this.hash;
-          $('html, body').animate({
-            scrollTop: $(hash).offset().top
-          }, 800);
-        } 
-    });
+        $timeout(function(){$scope.ready = true;}, 500)
 
-    $scope.$on('$locationChangeStart', function(evt, nextUrl){
-     console.log('start', nextUrl)
-     if(nextUrl.indexOf('/about-new#')>0)
-      evt.preventDefault();
-    });
-    $scope.$on('$locationChangeSuccess', function(evt, data){
-      console.log('end', data)
-    });
-   }]);
+        $scope.$on('$destroy', function(){
+          $(window).unbind('scroll');
+        })
+    }]);
 });

@@ -1,6 +1,7 @@
-define(['app','/app/views/directives/workflow-history-directive.html.js',
+define(['app', 'text!/app/views/directives/workflow-std-buttons.html',
+        '/app/views/directives/workflow-history-directive.html.js',
         'toastr', '/app/services/local-storage-service.js', '/app/services/app-config-service.js'
-], function (app) {
+], function (app, template) {
 
     app.directive('workflowStdButtons',["$q", "$timeout","underscore", "localStorageService",
      function($q, $timeout, _, localStorageService){
@@ -8,7 +9,7 @@ define(['app','/app/views/directives/workflow-history-directive.html.js',
     	return{
     		restrict: 'EAC',
     		replace:false,
-    		templateUrl: '/app/views/directives/workflow-std-buttons.html',
+    		template: template,
     		scope: {
     			getDocumentFn : '&document',
                 languages     : '=languages',

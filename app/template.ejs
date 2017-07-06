@@ -180,6 +180,8 @@
             ga('set',    'hostname', window.location.hostname);
             ga('set',    'location', undefined);
         }
+        
+        window.appVersion = document.documentElement.attributes['app-version'].value;
     </script>
 
 </body>

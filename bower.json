@@ -53,7 +53,10 @@
     "textAngular": "~1.2.2",
     "underscore": "1.7.0",
     "webui-popover": "~2.1.15",
-    "angular-aria": "1.4"
+    "angular-aria": "1.4",
+    "printThis": "^1.9.0",
+    "jquery-highlight": "^3.4.0",
+    "lunr.js": "lunr#^2.1.0"
   },
   "resolutions": {
     "angular": "1.4.14",

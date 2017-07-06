@@ -1,11 +1,12 @@
-define(['app', 'underscore', 'ngDialog',
-    '/app/views/search/search-directive.js', 'scbd-angularjs-services/generic-service'], function (app, _) {
+define(['app', "text!/app/views/register/user-preferences/user-preference-filter.html",'underscore', 'ngDialog',
+    '/app/views/search/search-directive.js', 
+    'scbd-angularjs-services/generic-service'], function (app, template, _) {
 
     app.directive("userPreferenceFilter", ['$rootScope', 'ngDialog', function ($rootScope, ngDialog) {
 
         return {
             restrict: "EA",
-            templateUrl: "/app/views/register/user-preferences/user-preference-filter.html",
+            template: template, 
             replace: true,
             scope: {
                 runQuery: '&',

@@ -1,17 +1,17 @@
 define(['app',
-'/app/js/common.js',
+'/app/js/common.js',"text!/app/views/forms/edit/document-selector.html",
 '/app/views/directives/search-filter-dates.partial.html.js',
 '/app/views/search/search-results/result-default.js',
 '/app/services/search-service.js',
 '/app/services/app-config-service.js', 'ngDialog'
-], function (app, commonjs) { // jshint ignore:line
+], function (app, commonjs, template) { // jshint ignore:line
 
 app.directive("documentSelector", ["$http",'$rootScope', "$filter", "underscore", "$q", "searchService", "appConfigService", "IStorage", 'ngDialog', 'commonjs',
 function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, IStorage, ngDialog, commonjs) {
 
 	return {
 		restrict   : "EA",
-		templateUrl: "/app/views/forms/edit/document-selector.html",
+		template: template,
 		replace    : true,
 		transclude : false,
 		scope      : {

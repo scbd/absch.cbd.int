@@ -1,4 +1,4 @@
-define(['app'],  function(app, _) {
+define(['app','text!/app/views/search/search-filters/keyword-filter.html',],  function(app, template, _) {
 
     app.directive('keywordFilter', function() {
         return {
@@ -6,7 +6,7 @@ define(['app'],  function(app, _) {
             replace: true,
             // transclude: true,
             require:'^searchDirective',
-            templateUrl: '/app/views/search/search-filters/keyword-filter.html',
+            template: template, 
             scope: false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
               

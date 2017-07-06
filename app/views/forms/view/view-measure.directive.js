@@ -1,13 +1,13 @@
-define(['app',
+define(['app', "text!/app/views/forms/view/view-measure.directive.html",
         '/app/views/measure-matrix/measure-matrix-elements-derective.html.js',
         '/app/services/search-service.js', '/app/services/app-config-service.js','/app/views/directives/party-status.js',
     '/app/views/forms/view/view-contact-reference.directive.js'
-    ], function (app) {
+    ], function (app, template) {
 
 app.directive("viewMeasure", [function () {
 	return {
 		restrict   : "EAC",
-		templateUrl: "/app/views/forms/view/view-measure.directive.html",
+		template: template ,
 		replace    : true,
 		transclude : false,
 		scope: {

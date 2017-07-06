@@ -1,36 +1,54 @@
-define(['app','underscore','ngSmoothScroll','ngAria','angular-animate','scbd-angularjs-services',
-'scbd-angularjs-filters','scbd-angularjs-controls', '/app/services/role-service.js'], function (app, _) {
-app.controller("faqController",
-	["$rootScope", "$scope", "$q", "underscore",'$http','commonjs','smoothScroll', '$element', 'roleService', function ($rootScope, $scope, $q, _, $http, commonjs, smoothScroll, $element, roleService) {
+define(['app', 'underscore', '/app/services/role-service.js',
+		'./left-menu.js', './about-directives.js'
+	],
+	function (app, _) {
+		app.controller("faqController", ["$scope", 'roleService', '$timeout', '$q', '$http', '$element',
+			function ($scope, roleService, $timeout, $q, $http, $element) {
 
-		 $q.when( $http.get('/api/v2015/help-faqs'))
-          .then(function(response){
-               $scope.faqSearch = response.data;
+				$q.when($http.get('/api/v2015/help-faqs'))
+					.then(function (response) {
+						
+						$scope.faqs = _(response.data).reduce(function (memo, o) {
+							_(o.tags).each(function (i) {
+								memo[i] = memo[i] || [];
+								memo[i].push(o);
+							});
+							return memo;
+						}, {});
 
-			   $scope.faqs = _(response.data).reduce(function(memo, o) {
-				    _(o.tags).each(function(i) {
-				        memo[i] = memo[i] || [ ];
-				        memo[i].push(o);
-				    });
-				    return memo;
-				}, { });
-          });
+						$timeout(function(){
+							$('.search-results').on('click', 'a', function(e){
+								var anchor =$(this)
+								var targetElement = $element.find(anchor.attr('href'))
 
-          $scope.isAdmin = function(){
-				return roleService.isAbsAdministrator() ||
-				roleService.isAdministrator()
+								_.each($scope.faqs, function(faqs){
+									_.each(faqs, function(faq){
+										var title = faq.title.trim()
+													.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/g, '')
+													.replace(/\s/g, '-');
+										if('#'+title == anchor.attr('href')){
+											faq.show = true;
+										}
+									})
+								});
+							});
+						}, 500)
 
-			};
+						// if($scope.isAdmin()){
+						// 	require(['./faq-edit.js'], function(){});
+						// }
+					});
 
+				$scope.isAdmin = function () {
+					return roleService.isAbsAdministrator() ||
+						roleService.isAdministrator()
 
-		$scope.getTitle = function(id){
-			for(var i=0;i<$scope.faqs.length;i++){
-				if($scope.faqs[i]._id == id)
-					return $scope.faqs[i].title;
+				};
+				
+				$scope.getHref = function(text){
+					return (text||'').replace(/\s/g,'-');
+				}
+
 			}
-			return "";
-		}
-
-
-   }]);
-});
+		]);
+	});

@@ -1,9 +1,9 @@
-define(['app'], function (app) {
+define(['app', "text!/app/views/forms/view/view-releated-checkpoint-communique-directive.html",], function (app, template) {
 
 app.directive("viewRelatedCheckpointCommunique", [function () {
   return {
     restrict   : "EAC",
-    templateUrl: "/app/views/forms/view/view-releated-checkpoint-communique-directive.html",
+    template: template, 
     replace    : true,
     transclude : false,
     scope: {

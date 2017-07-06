@@ -79,7 +79,7 @@
 
                             <div>
                                 <div style="padding:0px 0 0px 0px; ">
-                                    <a translation-url  class="label label-party" id="help-record-country" ng-class="{'label-default':!document.isNPParty, 'label-primary':document.isNPParty}" ng-href="search/countries/{{document.doc.government_s}}" data-popover="true" data-html="true" type="country" data-value="{{document.doc.government_s}}">{{document.source}}</a>
+                                    <a translation-url  class="label label-party" id="help-record-country" ng-class="{'label-default':!document.isNPParty, 'label-primary':document.isNPParty}" ng-href="search/countries/{{document.doc.government_s|uppercase}}" data-popover="true" data-html="true" type="country" data-value="{{document.doc.government_s}}">{{document.source}}</a>
                                     <small ng-show="document.isInbetweenParty">(entry into force on {{document.entryIntoForce | formatDate}})</small>
 
                                     <span ng-click="displayDetails = !displayDetails;load(document,displayDetails);" ng-hide="document.schema=='focalpoint'" class="schema">{{document.schema | schemaName}}</span>

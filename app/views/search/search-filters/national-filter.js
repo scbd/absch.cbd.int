@@ -1,4 +1,5 @@
-define(['app'], function(app) {
+define(['app',
+'text!/app/views/search/search-filters/national-filter.html',], function(app, template) {
 
     app.directive('nationalFilter', function($timeout) {
         return {
@@ -6,7 +7,7 @@ define(['app'], function(app) {
             replace: true,
             // transclude: true,
             require:'^searchDirective',
-            templateUrl: '/app/views/search/search-filters/national-filter.html',
+            template: template, 
             scope:false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                

@@ -1,9 +1,12 @@
-define(['app', 'underscore','angular', '/app/js/common.js', '/app/views/directives/block-region-directive.js'], function(app, _, angular) {
+define(['app', 
+"text!/app/views/measure-matrix/measure-matrix-elements-derective.html",
+'underscore','angular', '/app/js/common.js', 
+'/app/views/directives/block-region-directive.js'], function(app, template, _, angular) {
 
     app.directive("measureMatrixElements", function() {
         return {
             restrict: "EAC",
-            templateUrl: "/app/views/measure-matrix/measure-matrix-elements-derective.html",
+            template: template, 
             replace: true,
             transclude: false,
             require: "?ngModel",

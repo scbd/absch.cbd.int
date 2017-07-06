@@ -1,15 +1,15 @@
- define(['app','underscore','linqjs',
+ define(['app', 'text!/app/views/countries/country-profile-directive.html', 'underscore','linqjs',
    '/app/views/measure-matrix/measure-matrix-countries-directive.html.js',
    '/app/js/common.js',
    '/app/views/search/search-results/result-grouped-national-record.js',
    '/app/services/search-service.js', '/app/services/app-config-service.js',
     '/app/views/directives/export-directive.html.js'
- ], function(app, _, linqjs) {
+ ], function(app, template, _, linqjs) {
 
     app.directive('countryProfile', function() {
         return {
             restrict: 'EAC',
-            templateUrl: '/app/views/countries/country-profile-directive.html',
+            template: template,
             replace: true,
             scope: {
                 api : '=?',

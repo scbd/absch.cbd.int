@@ -1,6 +1,6 @@
-define(['app', 'underscore',
+define(['app', 'underscore','text!/app/views/forms/edit/edit-resource-schema-base-directive.html',
 './field-embed-contact.directive.js'
-], function (app, _) {
+], function (app, _, template) {
 	app.directive('convertToNumber', function() {
 		return {
 			require: 'ngModel',
@@ -18,7 +18,7 @@ define(['app', 'underscore',
 	{
 		return {
 			restrict: 'EAC',
-			templateUrl: '/app/views/forms/edit/edit-resource-schema-base-directive.html',
+			template: template ,
 			replace: true,
 			controller: ["$scope", "$http", "$filter","IStorage", function ($scope, $http, $filter, storage)
 			{

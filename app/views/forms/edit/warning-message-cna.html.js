@@ -1,15 +1,15 @@
 
-define(['app', 'underscore', '/app/js/common.js',
+define(['app', 'underscore', "text!/app/views/forms/edit/warning-message-cna.html", '/app/js/common.js',
 '/app/views/search/search-results/result-default.js', 
 '/app/services/search-service.js',
 '/app/services/app-config-service.js'
-], function(app, _) {
+], function(app, _, template) {
 
     app.directive('warningMessageCna', function() {
         return {
            restrict: 'EAC',
            replace: true,
-           templateUrl: "/app/views/forms/edit/warning-message-cna.html",
+           template: template ,
            scope: {
                 doc:'='
            },

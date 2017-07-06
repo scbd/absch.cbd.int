@@ -1,10 +1,11 @@
-define(['app', 'underscore','ng-breadcrumbs','jquery', '/app/services/help-service.js'], function (app, _, showHelp, $) {
+define(['app', 'text!/app/views/directives/nav/portal-nav.html', 'underscore','ng-breadcrumbs','jquery', '/app/services/help-service.js'],
+ function (app,template, _, showHelp, $) {
 app.directive('portalNav', function () {
     return {
     restrict: 'EAC',
     replace: true,
     // transclude: true,
-    templateUrl: '/app/views/directives/nav/portal-nav.html',
+    template: template,
     // scope: {
     //         uid: '@',
     // },

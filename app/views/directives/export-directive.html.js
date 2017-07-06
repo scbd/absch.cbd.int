@@ -1,10 +1,10 @@
-define(['app',
+define(['app','text!/app/views/directives/export-directive.html',
 '/app/services/search-service.js', 'ngDialog',
-], function (app, ExcellentExport) {
+], function (app, template) {
     app.directive('export', function () {
         return {
             restrict: 'EAC',
-            templateUrl: '/app/views/directives/export-directive.html',
+            template: template,
             scope: {
                 exportQuery: '&',
                 queryType: '&',
