@@ -14,7 +14,7 @@ var app     = express();
 
 var appVersion = process.env.TAG;
 if(!appVersion || appVersion.trim()==''){
-    appVersion =  (process.env.BRNACH||'') + '-'+ (process.env.VERSION ||'');
+    appVersion =  ((process.env.BRANCH||'') + '-'+ (process.env.VERSION ||''))||process.env.COMMIT;
     // if(appVersion == "-")
 }  
 var oneDay   = 86400000;
