@@ -1,4 +1,4 @@
-define(['app','text!/app/views/directives/export-directive.html',
+define(['app','text!views/directives/export-directive.html',
 '/app/services/search-service.js', 'ngDialog',
 ], function (app, template) {
     app.directive('export', function () {

@@ -1,5 +1,5 @@
 define(['app',
-'text!/app/views/mailbox/message-directive.html',], function(app, template, _) {
+'text!views/mailbox/message-directive.html',], function(app, template, _) {
     app.directive('mailboxMessage', function() {
         return {
             restrict: 'EAC',

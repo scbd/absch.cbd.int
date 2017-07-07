@@ -1,4 +1,4 @@
-define(['app', 'text!/app/views/search/search-results/national-records-country.html','/app/js/common.js',
+define(['app', 'text!views/search/search-results/national-records-country.html','/app/js/common.js',
 '/app/views/search/search-results/result-grouped-national-record.js',
 '/app/views/directives/party-status.js',
 ], function(app, template, _) {

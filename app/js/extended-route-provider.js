@@ -4,7 +4,7 @@ define(['app', 'angular', '../services/app-config-service', 'scbd-angularjs-serv
         
     app.provider('extendedRoute', ["$routeProvider", function($routeProvider) {
         
-        var baseUrl = "";//$('#appBaseUrl').text();
+        var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
         var __when = $routeProvider.when.bind($routeProvider);
 
@@ -16,6 +16,15 @@ define(['app', 'angular', '../services/app-config-service', 'scbd-angularjs-serv
 
             var ext = { resolve: route.resolve || {} };
 
+            var templateUrl = route.templateUrl;
+            
+            if(templateUrl) {
+
+                if(templateUrl.indexOf('/')!==0) {
+                    route.templateUrl = baseUrl + templateUrl;
+                }
+                route.templateUrl += '?v='+window.appVersion;
+            }
             if(route.resolveController) {
                 ext.controller = proxy;
                 ext.resolve.controller = resolveController();
@@ -25,8 +34,8 @@ define(['app', 'angular', '../services/app-config-service', 'scbd-angularjs-serv
                 ext.resolve.user = resolveUser();
             }
             var prj = proxy;
-            route.templateUrl += '?v='+window.appVersion;
-            return __when(baseUrl+path, angular.extend(route, ext));
+
+            return __when(path, angular.extend(route, ext));
         }
 
         return angular.extend($routeProvider, { when: new_when });
@@ -78,20 +87,7 @@ define(['app', 'angular', '../services/app-config-service', 'scbd-angularjs-serv
                 var controllers = [];
                 controllers.push($route.current.$$route.templateUrl.replace(/(\?v=)/, '.js?v='));
 
-                //TODO: I'm not sure if this is the most elegant approach... reconsider
-                //NOTE: for some reason the subTemplareUrl is staying as the old one, not as the newly defined one. Yet the document_type is being changed.
-                if($route.current.$$route.subTemplateUrl && $route.current.$$route.subTemplateUrl.slice(-1) == '-'){
-                    $route.current.$$route.subTemplateUrlFull = $route.current.$$route.subTemplateUrl.slice(0, -1) +
-                                                                $filter("mapSchema")($route.current.params.document_type) + '.html';
-                    if($route.current.params.folder)
-                        $route.current.$$route.subTemplateUrlFull = $route.current.$$route.subTemplateUrlFull
-                                                                          .replace(':folder' , $route.current.params.folder)
-                }
-                else
-                    $route.current.$$route.subTemplateUrlFull = $route.current.$$route.subTemplateUrl;
 
-                if($route.current.$$route.subTemplateUrlFull && !$route.current.$$route.ignoreSubController)
-                  controllers.push($route.current.$$route.subTemplateUrlFull + '.js');
                 require(controllers, function (module) {
                     deferred.resolve(module);
                 });

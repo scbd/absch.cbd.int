@@ -1,5 +1,5 @@
 
-define(['app', 'underscore', "text!/app/views/forms/edit/warning-message-cna.html", '/app/js/common.js',
+define(['app', 'underscore', "text!views/forms/edit/warning-message-cna.html", '/app/js/common.js',
 '/app/views/search/search-results/result-default.js', 
 '/app/services/search-service.js',
 '/app/services/app-config-service.js'

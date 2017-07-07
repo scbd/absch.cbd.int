@@ -1,5 +1,5 @@
 define(['app', 
-"text!/app/views/measure-matrix/measure-matrix-elements-derective.html",
+"text!views/measure-matrix/measure-matrix-elements-derective.html",
 'underscore','angular', '/app/js/common.js', 
 '/app/views/directives/block-region-directive.js'], function(app, template, _, angular) {
 

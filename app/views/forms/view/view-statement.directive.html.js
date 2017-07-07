@@ -1,5 +1,5 @@
 define(['app',
-'text!/app/views/forms/view/view-statement.directive.html',], function (app, template) {
+'text!views/forms/view/view-statement.directive.html',], function (app, template) {
 
 app.directive('viewStatement', [function() {
 	return {

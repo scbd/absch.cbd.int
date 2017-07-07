@@ -1,4 +1,4 @@
-define(['app', 'text!/app/views/forms/view/view-focalpoint.directive.html'], function (app, template) {
+define(['app', 'text!views/forms/view/view-focalpoint.directive.html'], function (app, template) {
 
 app.directive('viewFocalPoint', [function() {
 	return {

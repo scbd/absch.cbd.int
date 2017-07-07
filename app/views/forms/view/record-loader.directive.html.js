@@ -1,4 +1,4 @@
-define(['app', 'text!/app/views/forms/view/record-loader.directive.html',
+define(['app', 'text!views/forms/view/record-loader.directive.html',
 	'scbd-angularjs-services', 'ngSmoothScroll',
 	'scbd-angularjs-filters',
 	'./view-history-directive.html.js',
@@ -378,7 +378,7 @@ define(['app', 'text!/app/views/forms/view/record-loader.directive.html',
 
 					$scope.print = function(){
 						$scope.printing = true;
-						require(['printThis', 'text!/app/views/forms/view/print-header.html', 'text!/app/views/forms/view/print-footer.html'], function(printObj, header, footer){						
+						require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html'], function(printObj, header, footer){						
 							$element.find('#schemaView').printThis({
 								debug:false,
 								printContainer:true,

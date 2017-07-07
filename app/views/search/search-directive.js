@@ -1,4 +1,4 @@
-define(['app', 'text!/app/views/search/search-directive.html','underscore', '/app/js/common.js',
+define(['app', 'text!views/search/search-directive.html','underscore', '/app/js/common.js',
 '/app/services/search-service.js',
 'ngInfiniteScroll',
 '/app/views/search/search-filters/keyword-filter.js',

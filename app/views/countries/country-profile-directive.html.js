@@ -1,4 +1,4 @@
- define(['app', 'text!/app/views/countries/country-profile-directive.html', 'underscore','linqjs',
+ define(['app', 'text!views/countries/country-profile-directive.html', 'underscore','linqjs',
    '/app/views/measure-matrix/measure-matrix-countries-directive.html.js',
    '/app/js/common.js',
    '/app/views/search/search-results/result-grouped-national-record.js',

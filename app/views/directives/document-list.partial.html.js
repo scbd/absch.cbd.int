@@ -1,4 +1,4 @@
-define(['app','text!/app/views/directives/document-list.partial.html',
+define(['app','text!views/directives/document-list.partial.html',
     './document-metadata-directive.html.js',
     '/app/js/common.js',
     'ngInfiniteScroll'

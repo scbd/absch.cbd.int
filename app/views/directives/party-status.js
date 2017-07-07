@@ -1,4 +1,4 @@
-define(['app', 'text!/app/views/directives/party-status.html', '/app/js/common.js'], function (app, template) {
+define(['app', 'text!views/directives/party-status.html', '/app/js/common.js'], function (app, template) {
 app.directive('ngPartyStatus', function () {
         return {
             restrict: 'EAC',

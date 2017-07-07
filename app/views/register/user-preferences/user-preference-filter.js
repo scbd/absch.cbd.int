@@ -1,4 +1,4 @@
-define(['app', "text!/app/views/register/user-preferences/user-preference-filter.html",'underscore', 'ngDialog',
+define(['app', "text!views/register/user-preferences/user-preference-filter.html",'underscore', 'ngDialog',
     '/app/views/search/search-directive.js', 
     'scbd-angularjs-services/generic-service'], function (app, template, _) {
 

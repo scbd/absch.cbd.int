@@ -1,4 +1,4 @@
-define(['app','text!/app/views/search/search-filters/scbd-filter.html'
+define(['app','text!views/search/search-filters/scbd-filter.html'
 ], function(app, template) {
 
     app.directive('scbdFilter', function() {

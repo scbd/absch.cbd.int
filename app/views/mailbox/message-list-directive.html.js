@@ -1,4 +1,4 @@
-define(['app', 'text!/app/views/mailbox/message-list-directive.html',
+define(['app', 'text!views/mailbox/message-list-directive.html',
 'underscore'], function(app, template, _) {
     app.directive('mailboxMessageList', function() {
         return {

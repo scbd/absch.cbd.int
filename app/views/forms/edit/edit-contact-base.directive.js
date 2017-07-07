@@ -1,4 +1,4 @@
-define(['app',"text!/app/views/forms/edit/edit-contact-base.directive.html","/app/views/forms/edit/field-embed-contact.directive.js"],
+define(['app',"text!views/forms/edit/edit-contact-base.directive.html","/app/views/forms/edit/field-embed-contact.directive.js"],
 function (app, template) {
 
 app.directive("editContactBase", [ function () {

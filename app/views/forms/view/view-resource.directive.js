@@ -1,4 +1,4 @@
-define(['app',"text!/app/views/forms/view/view-resource.directive.html",], function (app, template) {
+define(['app',"text!views/forms/view/view-resource.directive.html",], function (app, template) {
 	// ,'/app/views/directives/discussion-directive.html.js'
 app.directive("viewResource", [function () {
 	return {

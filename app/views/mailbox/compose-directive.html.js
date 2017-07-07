@@ -1,4 +1,4 @@
-define(['app','text!/app/views/mailbox/compose-directive.html',
+define(['app','text!views/mailbox/compose-directive.html',
 'underscore'], function(app, template,_) {
     app.directive('mailboxCompose', function() {
         return {

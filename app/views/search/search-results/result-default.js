@@ -1,4 +1,4 @@
-define(['app', 'text!/app/views/search/search-results/result-default.html','underscore', '/app/js/common.js',
+define(['app', 'text!views/search/search-results/result-default.html','underscore', '/app/js/common.js',
 '/app/views/forms/view/record-loader.directive.html.js'
 ], function(app, template, _) {
 

@@ -1,5 +1,5 @@
 define(['app',
-'/app/js/common.js',"text!/app/views/forms/edit/document-selector.html",
+'/app/js/common.js',"text!views/forms/edit/document-selector.html",
 '/app/views/directives/search-filter-dates.partial.html.js',
 '/app/views/search/search-results/result-default.js',
 '/app/services/search-service.js',

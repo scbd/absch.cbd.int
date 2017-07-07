@@ -1,4 +1,4 @@
-define(['app','text!/app/views/directives/switch-realm-directive.html', 'underscore', '/app/services/app-config-service.js'],
+define(['app','text!views/directives/switch-realm-directive.html', 'underscore', '/app/services/app-config-service.js'],
 function(app,template, _) {
     app.directive('switchRealm', function() {
         return {

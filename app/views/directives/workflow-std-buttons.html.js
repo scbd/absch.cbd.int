@@ -1,4 +1,4 @@
-define(['app', 'text!/app/views/directives/workflow-std-buttons.html',
+define(['app', 'text!views/directives/workflow-std-buttons.html',
         '/app/views/directives/workflow-history-directive.html.js',
         'toastr', '/app/services/local-storage-service.js', '/app/services/app-config-service.js'
 ], function (app, template) {

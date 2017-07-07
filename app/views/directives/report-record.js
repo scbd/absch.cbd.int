@@ -1,4 +1,4 @@
-define(['app', 'text!/app/views/directives/report-record.html', 'underscore', './block-region-directive.js' ], function (app, template, _) {
+define(['app', 'text!views/directives/report-record.html', 'underscore', './block-region-directive.js' ], function (app, template, _) {
         app.directive('reportRecord', function () {
                 return {
                         restrict: 'EAC',

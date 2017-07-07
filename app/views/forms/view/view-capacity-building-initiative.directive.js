@@ -1,4 +1,4 @@
-define(['app', "text!/app/views/forms/view/view-capacity-building-initiative.directive.html"], function (app, template) {
+define(['app', "text!views/forms/view/view-capacity-building-initiative.directive.html"], function (app, template) {
 
 app.directive("viewCapacityBuildingInitiative", [function () {
 	return {

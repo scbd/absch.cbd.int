@@ -1,4 +1,4 @@
-define(['app', "text!/app/views/forms/view/view-endorsement.directive.html", './record-loader.directive.html.js', 
+define(['app', "text!views/forms/view/view-endorsement.directive.html", './record-loader.directive.html.js', 
 '/app/js/common.js'], function (app, template) {
 
 app.directive("viewEndorsement", [function () {

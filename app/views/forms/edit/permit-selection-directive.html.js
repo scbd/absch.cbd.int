@@ -1,4 +1,4 @@
-define(['app', '/app/js/common.js',"text!/app/views/forms/edit/permit-selection-directive.html",
+define(['app', '/app/js/common.js',"text!views/forms/edit/permit-selection-directive.html",
     '/app/views/directives/search-filter-dates.partial.html.js'
 	], function (app,commonjs, template) {
 

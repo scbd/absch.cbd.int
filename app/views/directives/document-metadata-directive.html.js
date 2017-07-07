@@ -1,4 +1,4 @@
-define(['app','text!/app/views/directives/document-metadata-directive.html', '/app/js/common.js'
+define(['app','text!views/directives/document-metadata-directive.html', '/app/js/common.js'
     ], function (app, template) {
 	app.directive('documentMetadata', function($http){
 		return{

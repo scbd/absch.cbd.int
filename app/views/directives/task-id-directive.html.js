@@ -1,4 +1,4 @@
-define(['app', 'underscore','text!/app/views/directives/task-id-directive.html',
+define(['app', 'underscore','text!views/directives/task-id-directive.html',
 	'../forms/view/record-loader.directive.html.js', 'toastr', , 'ngDialog',
 	'/app/views/directives/document-reference-history.html.js',
 	'/app/services/local-storage-service.js', './block-region-directive.js',

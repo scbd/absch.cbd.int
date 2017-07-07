@@ -1,4 +1,4 @@
-define(['app', "text!/app/views/forms/view/view-history-directive.html"], function(app, template) {
+define(['app', "text!views/forms/view/view-history-directive.html"], function(app, template) {
 
     app.directive("viewHistory", [function() {
         return {

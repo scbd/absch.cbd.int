@@ -1,4 +1,4 @@
-define(['app','text!/app/views/mailbox/mailbox-menu-directive.html',
+define(['app','text!views/mailbox/mailbox-menu-directive.html',
 'underscore'], function(app, template,_) {
     app.directive('mailboxMenu', function() {
         return {
