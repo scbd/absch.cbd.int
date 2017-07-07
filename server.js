@@ -30,11 +30,17 @@ app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
 app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbddev.xyz', changeOrigin: true, secure:false }));
-app.get('/?:lang(ar|en|es|fr|ru|zh)?/*', function (req, res) {
+app.get('(/?:lang(ar|en|es|fr|ru|zh))?/*', function (req, res) {
    var urlPreferredLang;
+   console.log(_.compact(req.params));
    if(req.params.lang)
      urlPreferredLang = ('/'+req.params.lang+'/');
-    
+   else{ //temp because the above regex does not work for absch.cbd.int/fr case
+        var lang = _.first(_.values(_.omitBy(req.params, _.isNil)))
+        var langRegex = /^(ar|en|es|fr|ru|zh)$/
+        if(langRegex.test(lang))
+            urlPreferredLang = ('/'+lang+'/')
+   } 
    res.setHeader('Cache-Control', 'public, max-age=0');
    
    res.cookie('VERSION', appVersion);
