@@ -7,12 +7,12 @@ define([
     'views/forms/view/view-contact-reference.directive',
     'views/forms/view/view-default-reference.directive',
     'views/forms/view/view-organization-reference.directive',
-    'views/forms/view/record-loader.directive.html',
+    'views/forms/view/record-loader.directive',
     'views/forms/view/view-organization.directive',
     'views/forms/view/view-organization-reference.directive',
-    'views/forms/view/view-history-directive.html',
-    'views/directives/workflow-std-buttons.html',
-    'views/forms/edit/document-selector.html',
+    'views/forms/view/view-history-directive',
+    'views/directives/workflow-std-buttons',
+    'views/forms/edit/document-selector',
     'views/register/directives/register-top-menu',
     'scbd-angularjs-services/locale'
   ], function (app) {

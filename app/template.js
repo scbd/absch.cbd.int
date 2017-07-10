@@ -5,7 +5,7 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
     'scbd-branding/directives/header/header',
     'views/directives/nav/portal-nav',
     'ngAria', 'angular-animate', 'toastr', 'moment',
-    'views/help/info-bar.html'
+    'views/help/info-bar'
 ], function(app, _) {
     'use strict';
 

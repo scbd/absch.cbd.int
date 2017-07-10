@@ -1,7 +1,7 @@
 define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', 'js/common',
     'services/search-service', 'services/role-service','scbd-angularjs-controls',
     'views/register/directives/register-top-menu', 'views/directives/block-region-directive',
-	'views/forms/edit/editFormUtility', 'views/register/directives/record-type-header.html',
+	'views/forms/edit/editFormUtility', 'views/register/directives/record-type-header',
     'services/local-storage-service', 'ngDialog', 'services/app-config-service'
 ],
     function (app, _) {

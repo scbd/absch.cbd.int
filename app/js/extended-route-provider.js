@@ -2,9 +2,9 @@
 
 define(['app', 'angular', 'services/app-config-service', 'scbd-angularjs-services/locale'], function(app, angular) {
         
+    var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
+
     app.provider('extendedRoute', ["$routeProvider", function($routeProvider) {
-        
-        var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
         var __when = $routeProvider.when.bind($routeProvider);
 
@@ -14,36 +14,49 @@ define(['app', 'angular', 'services/app-config-service', 'scbd-angularjs-service
         //============================================================
         function new_when(path, route) {
 
-            var ext = { resolve: route.resolve || {} };
-
             var templateUrl = route.templateUrl;
-            
+            var templateModule;
+
             if(templateUrl) {
 
                 if(templateUrl.indexOf('/')!==0) {
+                    
                     route.templateUrl = baseUrl + templateUrl;
+                    templateModule  = changeExtension(templateUrl, '');
+                }
+                else {
+                    templateModule = changeExtension(templateUrl, '.js');
                 }
                 route.templateUrl += '?v='+window.appVersion;
             }
-            if(route.resolveController) {
-                ext.controller = proxy;
-                ext.resolve.controller = resolveController();
+
+            var ext = { resolve: route.resolve || {} };
+
+            if(!route.controller && route.resolveController && typeof(route.resolveController)=="string")
+                templateModule = route.resolveController;
+
+            if(!route.controller && route.resolveController) {
+                ext.controller         = proxy;
+                ext.resolve.controller = resolveController(templateModule);
             }
 
             if(route.resolveUser) {
                 ext.resolve.user = resolveUser();
             }
-            var prj = proxy;
 
             return __when(path, angular.extend(route, ext));
         }
 
-        return angular.extend($routeProvider, { when: new_when });
+        //********************************************************************************
+        //********************************************************************************
+        //********************************************************************************
+        //********************************************************************************
 
-        //********************************************************************************
-        //********************************************************************************
-        //********************************************************************************
-        //********************************************************************************
+        function changeExtension(path, ext) {
+
+            return path.replace(/(\.[a-z0-9]+$)/gi, ext);
+        }
+
 
         //============================================================
         //
@@ -56,7 +69,7 @@ define(['app', 'angular', 'services/app-config-service', 'scbd-angularjs-service
 
             var locals = angular.extend($route.current.locals, { $scope: $scope });
 
-            return $injector.invoke(controller, undefined, locals);
+            return $injector.instantiate(controller, locals);
         }
         proxy.$inject = ['$injector', '$scope', '$route', 'controller'];
 
@@ -65,35 +78,34 @@ define(['app', 'angular', 'services/app-config-service', 'scbd-angularjs-service
         //
         //============================================================
         function resolveUser() {
-            return ['$rootScope', 'authentication', function($rootScope, authentication) {
-                return authentication.getUser().then(function (user) {
+            return ['$q', '$rootScope', 'authentication', function($q, $rootScope, authentication) {
+                return $q.when(authentication.getUser()).then(function (user) {
+                    $rootScope.user = user;
                     return user;
                 });
             }];
         }
 
-
         //============================================================
         //
         //
         //============================================================
-        function resolveController() {
+        function resolveController(controllerModule) {
 
-            return ['$q', '$route', '$filter','$location','underscore',
-             function($q, $route, $filter, $location, _) {
+            return ['$q', function($q) {
 
                 var deferred = $q.defer();
 
-                var controllers = [];
-                controllers.push($route.current.$$route.templateUrl.replace(/(\?v=)/, '.js?v='));
-
-
-                require(controllers, function (module) {
+                require([controllerModule], function (module) {
                     deferred.resolve(module);
+                }, function(){
+                    deferred.reject("controller not found: " + controllerModule);
                 });
 
                 return deferred.promise;
             }];
         }
+
+        return angular.extend($routeProvider, { when: new_when });
     }]);
 });

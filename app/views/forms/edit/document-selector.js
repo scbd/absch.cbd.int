@@ -1,6 +1,6 @@
 define(['app',
 'js/common',"text!views/forms/edit/document-selector.html",
-'views/directives/search-filter-dates.partial.html',
+'views/directives/search-filter-dates.partial',
 'views/search/search-results/result-default',
 'services/search-service',
 'services/app-config-service', 'ngDialog'

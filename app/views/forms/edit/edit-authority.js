@@ -1,5 +1,5 @@
 define(['app', 'underscore', 'views/forms/edit/edit', 'js/common',
- 'views/forms/edit/document-selector.html', 'views/forms/edit/warning-message-cna.html',
+ 'views/forms/edit/document-selector', 'views/forms/edit/warning-message-cna',
         '../view/view-authority.directive'
         ], function(app, _) {
 

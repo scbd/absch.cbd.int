@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'views/forms/edit/edit' , 'views/forms/edit/document-selector.html',
+define(['app', 'underscore', 'views/forms/edit/edit' , 'views/forms/edit/document-selector',
         '../view/view-abs-national-report.directive',
         'services/search-service','services/app-config-service'
 ], function (app, _) {

@@ -1,5 +1,5 @@
 define(['app', 'text!views/search/search-results/result-grouped-national-record.html','underscore', 'js/common',
-'views/forms/view/record-loader.directive.html'
+'views/forms/view/record-loader.directive'
 ], function(app, template, _) {
 
     app.directive('resultGroupedNationalRecord', ["$timeout", function($timeout) {

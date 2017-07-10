@@ -4,7 +4,7 @@ define(['app', 'webui-popover'], function(app) {
         return {
             restrict: 'EA',
             replace: true,
-            templateUrl : '/app/views/help/info-bar.html',
+            templateUrl : 'views/help/info-bar.html',
             transclude: true,
             scope: { 
                 type    : '@',

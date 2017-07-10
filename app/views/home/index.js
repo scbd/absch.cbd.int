@@ -1,5 +1,5 @@
 define(['app','js/common','moment',
-    'views/directives/home-country-dashboard-directive.html',
+    'views/directives/home-country-dashboard-directive',
     'views/directives/map/home-map'    
     ], function (app) {
     app.controller('IndexController', ['$scope', '$http', '$window', '$cookies','realm', '$filter','$rootScope','commonjs','$element', '$timeout', '$compile', 

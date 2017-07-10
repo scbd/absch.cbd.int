@@ -117,7 +117,7 @@ require(['angular', 'angular-flex', 'angular-route', 'angular-cookies',  'bootst
     /*, 'main'*/], function (ng) {
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 
-    require(['domReady!', 'app_routes', 'template.html'], function (document) {
+    require(['domReady!', 'app_routes', 'template'], function (document) {
         ng.bootstrap(document, ['app']);
         try {
         ng.resumeBootstrap();
