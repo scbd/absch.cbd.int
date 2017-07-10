@@ -1,4 +1,4 @@
-define(['app', 'text!views/search/search-filters/region-filter.html','underscore', '/app/js/common.js',
+define(['app', 'text!views/search/search-filters/region-filter.html','underscore', 'js/common',
 ], function(app, template, _) {
 
     app.directive('regionFilter', function() {

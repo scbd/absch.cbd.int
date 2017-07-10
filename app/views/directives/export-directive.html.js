@@ -1,5 +1,5 @@
 define(['app','text!views/directives/export-directive.html',
-'/app/services/search-service.js', 'ngDialog',
+'services/search-service', 'ngDialog',
 ], function (app, template) {
     app.directive('export', function () {
         return {

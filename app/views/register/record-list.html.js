@@ -1,8 +1,8 @@
-define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', '/app/js/common.js',
-    '/app/services/search-service.js', '/app/services/role-service.js','scbd-angularjs-controls',
-    './directives/register-top-menu.js', '../directives/block-region-directive.js',
-	'/app/views/forms/edit/editFormUtility.js', '/app/views/register/directives/record-type-header.html.js',
-    '/app/services/local-storage-service.js', 'ngDialog', '/app/services/app-config-service.js'
+define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', 'js/common',
+    'services/search-service', 'services/role-service','scbd-angularjs-controls',
+    'views/register/directives/register-top-menu', 'views/directives/block-region-directive',
+	'views/forms/edit/editFormUtility', 'views/register/directives/record-type-header.html',
+    'services/local-storage-service', 'ngDialog', 'services/app-config-service'
 ],
     function (app, _) {
         "use strict";

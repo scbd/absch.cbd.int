@@ -1,8 +1,8 @@
 define(['app',
-'/app/views/mailbox/message-directive.html.js',
-'/app/views/mailbox/compose-directive.html.js',
-'/app/views/mailbox/mailbox-menu-directive.html.js',
-'/app/views/mailbox/message-list-directive.html.js',], function(app) {
+'views/mailbox/message-directive.html',
+'views/mailbox/compose-directive.html',
+'views/mailbox/mailbox-menu-directive.html',
+'views/mailbox/message-list-directive.html',], function(app) {
     return["$scope", "$rootScope",
         function($scope, $rootScope) {
 

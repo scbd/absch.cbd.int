@@ -1,7 +1,7 @@
 define(['app', "text!views/measure-matrix/measure-matrix-countries-directive.html",
         'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
-        '/app/views/measure-matrix/measure-matrix-elements-derective.html.js',
-        '/app/views/forms/view/record-loader.directive.html.js'], function(app, template, _) {
+        'views/measure-matrix/measure-matrix-elements-derective.html',
+        'views/forms/view/record-loader.directive.html'], function(app, template, _) {
 
     app.directive("measureMatrixCountriesDirective", function() {
         return {

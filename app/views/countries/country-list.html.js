@@ -1,8 +1,8 @@
 define(['app', 'underscore',
-    '/app/js/common.js',
+    'js/common',
     'scbd-angularjs-filters',
-    '/app/services/search-service.js',
-    '../directives/block-region-directive.js'
+    'services/search-service',
+    'views/directives/block-region-directive'
 ], function (app, _) {
 
     app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams', '$compile', '$timeout',
@@ -232,7 +232,7 @@ define(['app', 'underscore',
             
             $scope.loadingMap = true;
             angular.element(document).ready(function () {
-                require(['/app/views/countries/country-map.js'], function(map){
+                require(['views/countries/country-map'], function(map){
                     $scope.$apply(function(){
                         var mapElement = $element.find('#Jumbotron')
                         $compile(mapElement.contents())($scope);

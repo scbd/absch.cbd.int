@@ -1,5 +1,5 @@
-define(['app', '/app/views/forms/edit/edit.js',
-		"/app/views/forms/view/view-contact.directive.js"
+define(['app', 'views/forms/edit/edit',
+		"views/forms/view/view-contact.directive"
 ], function(app) {
 
     app.controller("editContact", ["$scope", "$http", "$filter", "$controller", "$location", "$q", 'IStorage',

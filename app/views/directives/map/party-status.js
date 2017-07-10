@@ -1,7 +1,7 @@
 define(['text!./party-status.html',
   'app',
   'lodash',
-  './odometer/odometer.js',
+  './odometer/odometer',
   'css!./odometer/odometer',
   'css!./party-status',
 

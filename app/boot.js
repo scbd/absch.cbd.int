@@ -3,7 +3,8 @@
 window.name = 'NG_DEFER_BOOTSTRAP!';
     
 require.config({
-    baseUrl : 'app/',
+    waitSeconds: 120,
+    baseUrl : (window.lang||'')+'app/',
     'paths': {
         'angular'                   : 'libs/angular/angular.min',
         'angular-route'             : 'libs/angular-route/angular-route.min',
@@ -116,7 +117,7 @@ require(['angular', 'angular-flex', 'angular-route', 'angular-cookies',  'bootst
     /*, 'main'*/], function (ng) {
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 
-    require(['domReady!', 'main'], function (document) {
+    require(['domReady!', 'app_routes', 'template.html'], function (document) {
         ng.bootstrap(document, ['app']);
         try {
         ng.resumeBootstrap();

@@ -1,5 +1,5 @@
 define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-directive.html',
-'./field-embed-contact.directive.js'
+'./field-embed-contact.directive'
 ], function (app, _, template) {
 	app.directive('convertToNumber', function() {
 		return {

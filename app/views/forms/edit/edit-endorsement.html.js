@@ -1,5 +1,5 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js',
-        '/app/services/search-service.js'], function (app, _) {
+define(['app', 'underscore', 'views/forms/edit/edit',
+        'services/search-service'], function (app, _) {
 
   app.controller("editEndorsement", ["$scope", "$http", "searchService", "$controller", "$location", 'realm',
   function ($scope, $http, searchService, $controller,$location, realm) {

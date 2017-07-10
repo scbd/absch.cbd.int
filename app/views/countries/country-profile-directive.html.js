@@ -1,9 +1,9 @@
  define(['app', 'text!views/countries/country-profile-directive.html', 'underscore','linqjs',
-   '/app/views/measure-matrix/measure-matrix-countries-directive.html.js',
-   '/app/js/common.js',
-   '/app/views/search/search-results/result-grouped-national-record.js',
-   '/app/services/search-service.js', '/app/services/app-config-service.js',
-    '/app/views/directives/export-directive.html.js'
+   'views/measure-matrix/measure-matrix-countries-directive.html',
+   'js/common',
+   'views/search/search-results/result-grouped-national-record',
+   'services/search-service', 'services/app-config-service',
+    'views/directives/export-directive.html'
  ], function(app, template, _, linqjs) {
 
     app.directive('countryProfile', function() {

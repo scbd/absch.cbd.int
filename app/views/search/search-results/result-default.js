@@ -1,5 +1,5 @@
-define(['app', 'text!views/search/search-results/result-default.html','underscore', '/app/js/common.js',
-'/app/views/forms/view/record-loader.directive.html.js'
+define(['app', 'text!views/search/search-results/result-default.html','underscore', 'js/common',
+'views/forms/view/record-loader.directive.html'
 ], function(app, template, _) {
 
     app.directive('resultDefault', ["$timeout", function($timeout) {

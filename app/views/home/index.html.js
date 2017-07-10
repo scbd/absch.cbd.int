@@ -1,6 +1,6 @@
-define(['app','/app/js/common.js','moment',
-    '/app/views/directives/home-country-dashboard-directive.html.js',
-    '/app/views/directives/map/home-map.js'    
+define(['app','js/common','moment',
+    'views/directives/home-country-dashboard-directive.html',
+    'views/directives/map/home-map'    
     ], function (app) {
     app.controller('IndexController', ['$scope', '$http', '$window', '$cookies','realm', '$filter','$rootScope','commonjs','$element', '$timeout', '$compile', 
     function ($scope, $http, $window, $cookies, realm, $filter, $rootScope, commonjs,$element, $timeout, $compile) {
@@ -36,7 +36,7 @@ define(['app','/app/js/common.js','moment',
         //     console.log('page loading completed');
 
             
-                // require(['/app/views/directives/map/home-map.js'], function(map){
+                // require(['views/directives/map/home-map'], function(map){
                 //     $scope.loading = false;
                 //     $scope.$apply(function(){
                 //         var mapElement = $element.find('#Jumbotron')

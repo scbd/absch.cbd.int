@@ -1,4 +1,4 @@
-define(['app','/app/views/directives/help-directive.html.js', '/app/services/role-service.js'], function (app) {
+define(['app','/app/views/directives/help-directive.html', '/app/services/role-service'], function (app) {
 
 	app.controller('HelpController', ['$scope','$rootScope', '$location', '$window', 'commonjs', 'roleService', function ($scope, $rootScope, $location, $window, commonjs, roleService) {
 

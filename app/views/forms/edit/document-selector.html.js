@@ -1,9 +1,9 @@
 define(['app',
-'/app/js/common.js',"text!views/forms/edit/document-selector.html",
-'/app/views/directives/search-filter-dates.partial.html.js',
-'/app/views/search/search-results/result-default.js',
-'/app/services/search-service.js',
-'/app/services/app-config-service.js', 'ngDialog'
+'js/common',"text!views/forms/edit/document-selector.html",
+'views/directives/search-filter-dates.partial.html',
+'views/search/search-results/result-default',
+'services/search-service',
+'services/app-config-service', 'ngDialog'
 ], function (app, commonjs, template) { // jshint ignore:line
 
 app.directive("documentSelector", ["$http",'$rootScope', "$filter", "underscore", "$q", "searchService", "appConfigService", "IStorage", 'ngDialog', 'commonjs',

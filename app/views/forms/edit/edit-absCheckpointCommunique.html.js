@@ -1,7 +1,7 @@
-define(['app', '/app/views/forms/edit/edit.js',
-    '../view/view-abs-checkpoint-communique.directive.js',
-    '/app/views/forms/edit/permit-selection-directive.html.js',
-    '/app/js/common.js'
+define(['app', 'views/forms/edit/edit',
+    '../view/view-abs-checkpoint-communique.directive',
+    'views/forms/edit/permit-selection-directive.html',
+    'js/common'
 ], function(app) {
 
     app.controller("editCheckpointCommunique", ["$scope", "$http", "$filter", "$q", "$controller", "IStorage",

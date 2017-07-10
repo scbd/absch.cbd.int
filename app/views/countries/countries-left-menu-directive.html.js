@@ -1,5 +1,5 @@
 define(['app','text!views/countries/countries-left-menu-directive.html',
-'underscore', '/app/js/common.js'], function(app, template, _) {
+'underscore', 'js/common'], function(app, template, _) {
 
     app.directive('countriesLeftMenu', function() {
         return {

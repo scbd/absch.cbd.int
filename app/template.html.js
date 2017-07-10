@@ -1,11 +1,11 @@
 define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
     'angular-localizer', 'scbd-angularjs-services', 'scbd-angularjs-filters',
     'scbd-branding/directives/footer',
-    '/app/views/directives/nav/portal-branding.js',
+    'views/directives/nav/portal-branding',
     'scbd-branding/directives/header/header',
-    '/app/views/directives/nav/portal-nav.js',
-    'ngAria', 'angular-animate', 'toastr', 'ionsound', 'moment',
-    '/app/views/help/info-bar.html.js'
+    'views/directives/nav/portal-nav',
+    'ngAria', 'angular-animate', 'toastr', 'moment',
+    'views/help/info-bar.html'
 ], function(app, _) {
     'use strict';
 
@@ -32,7 +32,7 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
                 lang= 'zh-cn'; //moment has two ZH, use ZH-CN
             moment.lang(lang);
             if(lang == 'ar'){
-                require(['css!/app/libs/bootstrap-rtl/dist/css/bootstrap-rtl.css']);
+                require(['css!libs/bootstrap-rtl/dist/css/bootstrap-rtl.css']);
             }
 
             var basePath = (angular.element('base').attr('href')||'').replace(/\/+$/g, '');

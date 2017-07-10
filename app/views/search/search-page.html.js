@@ -1,5 +1,5 @@
 define(['app', 'underscore',
-    '/app/views/search/search-directive.js'
+    'views/search/search-directive'
 ], function(app, exportExcel) {
     "use strict";
     app.controller("SearchPageController", ["$scope", function($scope) {

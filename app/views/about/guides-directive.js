@@ -1,4 +1,4 @@
-﻿define(['app', 'text!./guides-directive.html', 'json!/app/app-data/help-guides.json',
+﻿define(['app', 'text!./guides-directive.html', 'json!app-data/help-guides.json',
   'scbd-angularjs-services/locale'], 
 function(app, template, guidesData){
 

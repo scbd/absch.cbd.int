@@ -1,4 +1,4 @@
-define(['app','text!views/directives/document-metadata-directive.html', '/app/js/common.js'
+define(['app','text!views/directives/document-metadata-directive.html', 'js/common'
     ], function (app, template) {
 	app.directive('documentMetadata', function($http){
 		return{
@@ -47,7 +47,7 @@ define(['app','text!views/directives/document-metadata-directive.html', '/app/js
 
 				$scope.loadReportRecord = function(schema, identifier){
 
-                    require(['/app/views/directives/report-record.js'], function() {
+                    require(['views/directives/report-record'], function() {
 
                         var directiveHtml = "<div report-record uid='"+ identifier + "' schema='" +  schema + "'></div>";
 

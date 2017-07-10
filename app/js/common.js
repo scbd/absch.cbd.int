@@ -1,4 +1,4 @@
-define(['app', 'underscore', '/app/services/local-storage-service.js'], function(app, _) {
+define(['app', 'underscore', 'services/local-storage-service'], function(app, _) {
 
     app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 'localStorageService', 'Thesaurus',
         function($http, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus) {

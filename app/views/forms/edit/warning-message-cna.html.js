@@ -1,8 +1,8 @@
 
-define(['app', 'underscore', "text!views/forms/edit/warning-message-cna.html", '/app/js/common.js',
-'/app/views/search/search-results/result-default.js', 
-'/app/services/search-service.js',
-'/app/services/app-config-service.js'
+define(['app', 'underscore', "text!views/forms/edit/warning-message-cna.html", 'js/common',
+'views/search/search-results/result-default', 
+'services/search-service',
+'services/app-config-service'
 ], function(app, _, template) {
 
     app.directive('warningMessageCna', function() {

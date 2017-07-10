@@ -1,6 +1,6 @@
 define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
-        '/app/views/measure-matrix/measure-matrix-elements-derective.html.js',
-        '/app/views/forms/view/record-loader.directive.html.js'], function(app, _) {
+        'views/measure-matrix/measure-matrix-elements-derective.html',
+        'views/forms/view/record-loader.directive.html'], function(app, _) {
 
     app.controller('countryMatrixController', ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$element',
         function($scope, $http, realm, $q, $filter, $routeParams, $element) {

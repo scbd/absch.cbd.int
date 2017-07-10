@@ -1,5 +1,5 @@
-define(['app', 'underscore', 'chart-js', 'scbd-angularjs-services/generic-service', '/app/js/common.js', 'moment',
-    '/app/views/register/directives/register-top-menu.js', '/app/services/search-service.js', 'scbd-angularjs-controls', '/app/services/app-config-service.js',
+define(['app', 'underscore', 'chart-js', 'scbd-angularjs-services/generic-service', 'js/common', 'moment',
+    'views/register/directives/register-top-menu', 'services/search-service', 'scbd-angularjs-controls', 'services/app-config-service',
     'scbd-angularjs-services/storage'
     ], function (app, _) {
 

@@ -1,5 +1,5 @@
 define(['app','underscore',
-        '/app/views/measure-matrix/measure-matrix-elements-derective.html.js']
+        'views/measure-matrix/measure-matrix-elements-derective.html']
     , function (app, _) {
 
     app.controller('matrixController', ['$scope', '$http','realm','$q','$filter','$routeParams','Thesaurus','$timeout',

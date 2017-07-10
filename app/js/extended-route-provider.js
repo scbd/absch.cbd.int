@@ -1,6 +1,6 @@
 'use strict';
 
-define(['app', 'angular', '../services/app-config-service', 'scbd-angularjs-services/locale'], function(app, angular) {
+define(['app', 'angular', 'services/app-config-service', 'scbd-angularjs-services/locale'], function(app, angular) {
         
     app.provider('extendedRoute', ["$routeProvider", function($routeProvider) {
         

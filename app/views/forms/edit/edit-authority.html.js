@@ -1,6 +1,6 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js', '/app/js/common.js',
- '/app/views/forms/edit/document-selector.html.js', '/app/views/forms/edit/warning-message-cna.html.js',
-        '../view/view-authority.directive.js'
+define(['app', 'underscore', 'views/forms/edit/edit', 'js/common',
+ 'views/forms/edit/document-selector.html', 'views/forms/edit/warning-message-cna.html',
+        '../view/view-authority.directive'
         ], function(app, _) {
 
     app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "Enumerable", "$location", "IStorage", "commonjs",'searchService',

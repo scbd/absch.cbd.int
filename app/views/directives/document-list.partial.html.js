@@ -1,6 +1,6 @@
 define(['app','text!views/directives/document-list.partial.html',
-    './document-metadata-directive.html.js',
-    '/app/js/common.js',
+    './document-metadata-directive.html',
+    'js/common',
     'ngInfiniteScroll'
 ], function(app, template) {
 

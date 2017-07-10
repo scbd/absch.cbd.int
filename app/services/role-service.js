@@ -1,4 +1,4 @@
-define(['app', 'underscore', './app-config-service.js'], function (app, _) { 'use strict';
+define(['app', 'underscore', './app-config-service'], function (app, _) { 'use strict';
 
 	app.factory('roleService',  ["$http","$location", "$rootScope", "appConfigService",
 	 function($http,$location, $rootScope, appConfigService) {

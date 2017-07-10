@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/js/common.js'],
+define(['app', 'underscore', 'angular', 'views/forms/edit/edit', 'js/common'],
 function(app, _) {
 
 

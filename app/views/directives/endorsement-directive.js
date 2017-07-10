@@ -1,4 +1,4 @@
-define(['app','text!views/directives/endorsement-directive.html', '/app/services/search-service.js'
+define(['app','text!views/directives/endorsement-directive.html', 'services/search-service'
     ], function (app, template) {
 	app.directive('endorsement', function($http){
 		return{

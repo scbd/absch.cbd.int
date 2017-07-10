@@ -1,7 +1,7 @@
 define(['app', 'underscore',
- '/app/services/role-service.js', '/app/services/app-config-service.js',
- '/app/views/register/user-preferences/user-preference-filter.js',
- '/app/views/register/directives/register-top-menu.js', 'toastr','scbd-angularjs-services'],
+ 'services/role-service', 'services/app-config-service',
+ 'views/register/user-preferences/user-preference-filter',
+ 'views/register/directives/register-top-menu', 'toastr','scbd-angularjs-services'],
 function(app, _) {
     "use strict";
     app.controller("DashboardController", ["$rootScope", "$scope", "IStorage", "roleService", "$compile", "realm", "$q",

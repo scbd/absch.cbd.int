@@ -4,7 +4,7 @@ define(['app', 'underscore', 'joyRide'], function (app, _) {
                         restrict: 'EAC',
                         replace: true,
                         // transclude: true,
-                        // templateUrl: '/app/views/directives/help-directive.html',
+                        // templateUrl: 'views/directives/help-directive.html',
                         scope: {
                                 schema: '@',
                                 delay: '@'

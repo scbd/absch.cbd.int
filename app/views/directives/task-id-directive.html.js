@@ -1,8 +1,8 @@
 define(['app', 'underscore','text!views/directives/task-id-directive.html',
-	'../forms/view/record-loader.directive.html.js', 'toastr', , 'ngDialog',
-	'/app/views/directives/document-reference-history.html.js',
-	'/app/services/local-storage-service.js', './block-region-directive.js',
-	'../forms/view/record-loader.directive.html.js'
+	'../forms/view/record-loader.directive.html', 'toastr', , 'ngDialog',
+	'views/directives/document-reference-history.html',
+	'services/local-storage-service', './block-region-directive',
+	'../forms/view/record-loader.directive.html'
 ], function (app, _, template) {
 
 	app.directive('taskId', function () {

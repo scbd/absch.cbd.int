@@ -1,5 +1,5 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js','/app/views/forms/edit/edit-resource-schema-base-directive.html.js',
-        '../view/view-resource.directive.js'
+define(['app', 'underscore', 'views/forms/edit/edit','views/forms/edit/edit-resource-schema-base-directive.html',
+        '../view/view-resource.directive'
        ], function (app, _) {
 
   app.controller("editCommunityProtocol", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",

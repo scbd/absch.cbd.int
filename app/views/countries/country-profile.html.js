@@ -1,9 +1,9 @@
 define(['app','underscore',
-  '/app/js/common.js',
-  'scbd-angularjs-services/locale','ng-breadcrumbs',
-  'css!/app/libs/flag-icon-css/css/flag-icon.min.css',
-  'css!./country-profile','./country-profile-directive.html.js',
-  '../directives/block-region-directive.js'
+  'views/countries/country-profile-directive.html',
+  'views/directives/block-region-directive',
+  'js/common','scbd-angularjs-services/locale','ng-breadcrumbs',
+  'css!libs/flag-icon-css/css/flag-icon.min',
+  'css!./country-profile'
 ], function(app, _) {
 
   app.controller("countryProfileController",
@@ -25,7 +25,7 @@ define(['app','underscore',
       
       $scope.loadingMap = true;
       angular.element(document).ready(function () {
-          require(['/app/views/countries/country-map.js'], function(map){
+          require(['views/countries/country-map'], function(map){
               $scope.$apply(function(){
                   var mapElement = $element.find('#Jumbotron')
                   $compile(mapElement.contents())($scope);

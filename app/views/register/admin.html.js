@@ -1,6 +1,6 @@
-define(['app', '/app/views/directives/switch-realm-directive.html.js',
- '/app/services/role-service.js', 
- '/app/views/register/directives/register-top-menu.js'], function(app) {
+define(['app', 'views/directives/switch-realm-directive.html',
+ 'services/role-service', 
+ 'views/register/directives/register-top-menu'], function(app) {
  "use strict";
     app.controller("AdminController", ["$rootScope", "$scope", "roleService", 
         function($rootScope, $scope, roleService) {

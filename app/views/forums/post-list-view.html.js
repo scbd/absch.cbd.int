@@ -1,5 +1,5 @@
 define(['app', 'underscore','ng-breadcrumbs', 'cbd-forums',
-        '/app/js/common.js'], function(app, _) {
+        'js/common'], function(app, _) {
 
     return ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$rootScope",'$route','breadcrumbs',
      function($scope, $http, $q, $route, $routeParams, commonjs, $rootScope, $route, breadcrumbs) {

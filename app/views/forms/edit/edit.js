@@ -1,19 +1,19 @@
 //fixed a bug with the comment up here ;)
 define([
-    'app', '/app/services/app-config-service.js',
-    '/app/views/forms/edit/editFormUtility.js',
-    '/app/views/forms/edit/field-embed-contact.directive.js',
-    '/app/views/forms/edit/edit-contact-base.directive.js',
-    '/app/views/forms/view/view-contact-reference.directive.js',
-    '/app/views/forms/view/view-default-reference.directive.js',
-    '/app/views/forms/view/view-organization-reference.directive.js',
-    '/app/views/forms/view/record-loader.directive.html.js',
-    '/app/views/forms/view/view-organization.directive.js',
-    '/app/views/forms/view/view-organization-reference.directive.js',
-    '/app/views/forms/view/view-history-directive.html.js',
-    '/app/views/directives/workflow-std-buttons.html.js',
-    '/app/views/forms/edit/document-selector.html.js',
-    '/app/views/register/directives/register-top-menu.js',
+    'app', 'services/app-config-service',
+    'views/forms/edit/editFormUtility',
+    'views/forms/edit/field-embed-contact.directive',
+    'views/forms/edit/edit-contact-base.directive',
+    'views/forms/view/view-contact-reference.directive',
+    'views/forms/view/view-default-reference.directive',
+    'views/forms/view/view-organization-reference.directive',
+    'views/forms/view/record-loader.directive.html',
+    'views/forms/view/view-organization.directive',
+    'views/forms/view/view-organization-reference.directive',
+    'views/forms/view/view-history-directive.html',
+    'views/directives/workflow-std-buttons.html',
+    'views/forms/edit/document-selector.html',
+    'views/register/directives/register-top-menu',
     'scbd-angularjs-services/locale'
   ], function (app) {
 

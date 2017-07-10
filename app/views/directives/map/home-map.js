@@ -1,8 +1,8 @@
 define(['text!./home-map.html',
   'app',
   'lodash',
-  './party-status.js', '/app/services/search-service.js',
-  '../block-region-directive.js'
+  'views/directives/party-status', 'services/search-service',
+  'views/directives/block-region-directive'
 ], function(template, app, _, popoverTemplate) {
   'use strict';
 
@@ -44,7 +44,7 @@ define(['text!./home-map.html',
              // Delay loading map by 2 sec
             $scope.loadingMap = true;
             angular.element(document).ready(function () {
-                require(['/app/views/countries/country-map.js'], function(map){
+                require(['views/countries/country-map'], function(map){
                     $scope.$apply(function(){
                         var mapElement = $element.find('#homeMap')
                         $compile(mapElement.contents())($scope);

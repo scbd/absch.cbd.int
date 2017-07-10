@@ -1,5 +1,5 @@
 define(['text!./country-map.html', 'app', 'lodash', 'text!./pin-popup-abs.html', 'ammap', 'shim!./worldEUHigh[ammap]', 'shim!ammap/themes/light[ammap]',
-'/app/js/common.js', '/app/services/search-service.js', 'css!/app/libs/flag-icon-css/css/flag-icon.min.css',
+'js/common', 'services/search-service', 'css!libs/flag-icon-css/css/flag-icon.min.css',
   'scbd-angularjs-services/locale'], 
 function(template, app, _, popOverTemplate) {
   'use strict';
@@ -320,7 +320,7 @@ function(template, app, _, popOverTemplate) {
         //
         //=======================================================================
         function generateMarker(imageIndex) {
-          return makeMarker(imageIndex, 'pin', 'pin-invisi', '/app/components/scbd-map/images/pins/invisi-pin.svg');
+          return makeMarker(imageIndex, 'pin', 'pin-invisi', 'components/scbd-map/images/pins/invisi-pin.svg');
         }
 
 

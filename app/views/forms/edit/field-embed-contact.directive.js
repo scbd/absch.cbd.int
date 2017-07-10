@@ -1,7 +1,7 @@
-define(['app', "text!views/forms/edit/field-embed-contact.directive.html", '/app/js/common.js', 'scbd-angularjs-services', 'scbd-angularjs-controls',
-'/app/views/forms/view/view-contact-reference.directive.js', 'ngDialog',
-'/app/views/forms/view/view-organization-reference.directive.js',
-'/app/services/search-service.js','ngInfiniteScroll'
+define(['app', "text!views/forms/edit/field-embed-contact.directive.html", 'js/common', 'scbd-angularjs-services', 'scbd-angularjs-controls',
+'views/forms/view/view-contact-reference.directive', 'ngDialog',
+'views/forms/view/view-organization-reference.directive',
+'services/search-service','ngInfiniteScroll'
 ],
 function(app, template) {
     

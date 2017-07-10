@@ -1,5 +1,5 @@
-define(['app', 'text!views/directives/document-reference-history.html',,'/app/services/search-service.js',
-'/app/views/search/search-results/result-default.js',
+define(['app', 'text!views/directives/document-reference-history.html',,'services/search-service',
+'views/search/search-results/result-default',
 ], function (app, template) {
     app.directive('documentReferenceHistory', function ($http) {
         return {

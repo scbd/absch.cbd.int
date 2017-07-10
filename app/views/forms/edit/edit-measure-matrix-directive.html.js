@@ -1,4 +1,4 @@
-define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directive.html",'/app/views/directives/block-region-directive.js'
+define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directive.html",'views/directives/block-region-directive'
 ], function (app, _, template) {
 
 

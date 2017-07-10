@@ -1,5 +1,5 @@
-define(['app', '/app/js/common.js',"text!views/forms/edit/permit-selection-directive.html",
-    '/app/views/directives/search-filter-dates.partial.html.js'
+define(['app', 'js/common',"text!views/forms/edit/permit-selection-directive.html",
+    'views/directives/search-filter-dates.partial.html'
 	], function (app,commonjs, template) {
 
 app.directive("existingPermit", [ function () {

@@ -1,13 +1,13 @@
-define(['app',"/app/views/register/directives/record-type-header.html",
-	'/app/views/forms/edit/editFormUtility.js',
-	'/app/views/forms/edit/field-embed-contact.directive.js',
-	'/app/views/forms/edit/edit-contact-base.directive.js',
-	'/app/views/forms/view/view-contact-reference.directive.js',
-	'/app/views/forms/view/view-organization-reference.directive.js',
-	'/app/views/forms/view/record-loader.directive.html.js',
-	'/app/views/forms/view/view-organization.directive.js',
-	'/app/views/forms/view/view-organization-reference.directive.js',
-	'/app/views/directives/task-id-directive.html.js'
+define(['app',"views/register/directives/record-type-header.html",
+	'views/forms/edit/editFormUtility',
+	'views/forms/edit/field-embed-contact.directive',
+	'views/forms/edit/edit-contact-base.directive',
+	'views/forms/view/view-contact-reference.directive',
+	'views/forms/view/view-organization-reference.directive',
+	'views/forms/view/record-loader.directive.html',
+	'views/forms/view/view-organization.directive',
+	'views/forms/view/view-organization-reference.directive',
+	'views/directives/task-id-directive.html'
 ], function (app, template) {
 
 	"use strict";

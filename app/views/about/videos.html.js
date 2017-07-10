@@ -1,4 +1,4 @@
-﻿define(['app','underscore', 'json!/app/app-data/help-videos.json', './youtube.js', './left-menu.js',], function (app, _, videosData) {
+﻿define(['app','underscore', 'json!app-data/help-videos.json', './youtube', './left-menu',], function (app, _, videosData) {
 app.controller("videosController",
 	["$rootScope", "$scope", "$q", '$element', '$route', function ($rootScope, $scope, $q, $element, $route) {
 

@@ -1,5 +1,5 @@
 define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
-	'/app/js/common.js'], function (app, _) {
+	'/app/js/common'], function (app, _) {
 		app.controller("editHelpController",
 			["$routeParams", "$scope", "$rootScope", "$q", "underscore", '$http',  '$location', 'commonjs', '$mdDialog',
 				function ($routeParams, $scope, $rootScope, $q, _, $http, $location, commonjs, $mdDialog) {

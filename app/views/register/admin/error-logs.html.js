@@ -1,5 +1,5 @@
-define(['app', 'underscore', 'scbd-angularjs-services/generic-service', '/app/js/common.js', 'ngInfiniteScroll', 'moment', 'scbd-angularjs-controls',
-    '/app/views/register/directives/register-top-menu.js',
+define(['app', 'underscore', 'scbd-angularjs-services/generic-service', 'js/common', 'ngInfiniteScroll', 'moment', 'scbd-angularjs-controls',
+    'views/register/directives/register-top-menu',
     ], function (app, _) {
 
         "use strict";

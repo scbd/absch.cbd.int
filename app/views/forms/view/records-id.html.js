@@ -1,5 +1,5 @@
 define(['app',
-'./record-loader.directive.html.js',
+'./record-loader.directive.html',
 ], function (app) {
 
 

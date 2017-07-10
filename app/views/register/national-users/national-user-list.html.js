@@ -1,5 +1,5 @@
-define(['angular', 'lodash', 'require','app', 'ngDialog', '/app/services/app-config-service.js', 
- '/app/views/register/directives/register-top-menu.js'], function(ng, _, require, app) { 'use strict';
+define(['angular', 'lodash', 'require','app', 'ngDialog', 'services/app-config-service', 
+ 'views/register/directives/register-top-menu'], function(ng, _, require, app) { 'use strict';
 
 app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'appConfigService',
     function($scope, $http, $q, ngDialog, $rootScope, realm, appConfigService) {
@@ -347,7 +347,7 @@ app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog
 
             return $q(function(resolve, reject) {
 
-                require(['text!'+dialog+'.html', dialog+'.js'], function(template, controller) {
+                require(['text!'+dialog+'.html', dialog+''], function(template, controller) {
 
                     options.plain = true;
                     options.closeByDocument = false;

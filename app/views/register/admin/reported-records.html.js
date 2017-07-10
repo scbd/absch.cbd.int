@@ -1,6 +1,6 @@
-define(['app', '/app/js/common.js',
-    '/app/views/forms/view/record-loader.directive.html.js',
-    '/app/views/register/directives/register-top-menu.js', 'ngDialog'
+define(['app', 'js/common',
+    'views/forms/view/record-loader.directive.html',
+    'views/register/directives/register-top-menu', 'ngDialog'
     , 'scbd-angularjs-services/generic-service'
 ], function (app) {
     app.controller('adminReportedRecordsCtrl', ['$scope', '$http', '$timeout', '$element', 'ngDialog', '$routeParams', 'IGenericService','realm', '$q',

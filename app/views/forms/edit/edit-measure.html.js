@@ -1,5 +1,5 @@
-define(['app', 'underscore', 'angular', '/app/views/forms/edit/edit.js', '/app/js/common.js', '/app/views/forms/edit/document-selector.html.js',
-    '../view/view-measure.directive.js', '/app/views/forms/edit/edit-measure-matrix-directive.html.js'
+define(['app', 'underscore', 'angular', 'views/forms/edit/edit', 'js/common', 'views/forms/edit/document-selector.html',
+    '../view/view-measure.directive', 'views/forms/edit/edit-measure-matrix-directive.html'
 ], function(app, _, angular) {
 
     app.controller("editMeasure", ["$scope", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs',

@@ -1,4 +1,4 @@
-define(['app', '/app/views/forms/edit/edit.js', '../view/view-capacity-building-resource.directive.js'], function (app) {
+define(['app', 'views/forms/edit/edit', '../view/view-capacity-building-resource.directive'], function (app) {
 
   app.controller("editCapacityBuildingResource", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", "underscore", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, thesaurus, Enumerable, _) {
 

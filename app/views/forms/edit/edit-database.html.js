@@ -1,5 +1,5 @@
-define(['app', '/app/views/forms/edit/edit.js',
-        '../view/view-database.directive.js'], function (app) {
+define(['app', 'views/forms/edit/edit',
+        '../view/view-database.directive'], function (app) {
 
   app.controller("editDatabase", ["$scope", "$http", "$filter", "$controller", "$location", function ($scope, $http, $filter, $controller,$location) {
     $controller('editController', {$scope: $scope});

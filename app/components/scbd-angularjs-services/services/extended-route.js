@@ -1,6 +1,6 @@
 define(['require', 'app', 'angular', 'angular-route'], function(require, app, angular) { 'use strict';
 
-    var baseUrl = require.toUrl('');
+   var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
     app.provider('extendedRoute', ["$routeProvider", function($routeProvider) {
 
@@ -24,6 +24,7 @@ define(['require', 'app', 'angular', 'angular-route'], function(require, app, an
                 else {
                     templateModule = changeExtension(templateUrl, '.js');
                 }
+                // route.templateUrl += '?v='+window.appVersion;
             }
 
             var ext = { resolve: route.resolve || {} };

@@ -1,5 +1,5 @@
 define(['app', "text!views/register/directives/register-top-menu.html",
-'underscore', '/app/services/role-service.js'], function(app, template, _) {
+'underscore', 'services/role-service'], function(app, template, _) {
 
     app.directive("registerTopMenu", ['roleService', '$rootScope', function(roleService, $rootScope) {
 

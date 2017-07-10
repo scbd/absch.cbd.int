@@ -1,5 +1,5 @@
-define(['app', 'underscore', '/app/services/role-service.js',
-		'./left-menu.js', './about-directives.js'
+define(['app', 'underscore', 'services/role-service',
+		'./left-menu', './about-directives'
 	],
 	function (app, _) {
 		app.controller("faqController", ["$scope", 'roleService', '$timeout', '$q', '$http', '$element',
@@ -35,7 +35,7 @@ define(['app', 'underscore', '/app/services/role-service.js',
 						}, 500)
 
 						// if($scope.isAdmin()){
-						// 	require(['./faq-edit.js'], function(){});
+						// 	require(['./faq-edit'], function(){});
 						// }
 					});
 

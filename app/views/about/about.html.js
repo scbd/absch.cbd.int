@@ -1,7 +1,7 @@
-define(['app','underscore', './about-directives.js',  './common-formats-directive.js',
-, './guides-directive.js'], 
+define(['app','underscore', './about-directives',  './common-formats-directive',
+, './guides-directive'], 
 function (app, _) {
-// , './search-content.js',
+// , './search-content',
     var videos = {
             countryProfile  : '6eDBShJMWfI',
             searchMatrix    : 'IwyrMQKDZ3o',

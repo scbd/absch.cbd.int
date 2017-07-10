@@ -1,6 +1,6 @@
-define(['app', 'underscore', '/app/views/forms/edit/edit.js' , '/app/views/forms/edit/document-selector.html.js',
-        '../view/view-abs-national-report.directive.js',
-        '/app/services/search-service.js','/app/services/app-config-service.js'
+define(['app', 'underscore', 'views/forms/edit/edit' , 'views/forms/edit/document-selector.html',
+        '../view/view-abs-national-report.directive',
+        'services/search-service','services/app-config-service'
 ], function (app, _) {
 
   app.controller("editAbsNationalReport",
