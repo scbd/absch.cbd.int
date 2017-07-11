@@ -1,10 +1,10 @@
-define(['app', 'webui-popover'], function(app) {
+define(['app', 'text!views/help/info-bar.html', 'webui-popover'], function(app, template) {
 
     app.directive('infoBar', [function() {
         return {
             restrict: 'EA',
             replace: true,
-            templateUrl : 'views/help/info-bar.html',
+            template : template,
             transclude: true,
             scope: { 
                 type    : '@',
