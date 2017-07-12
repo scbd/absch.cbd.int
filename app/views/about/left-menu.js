@@ -1,6 +1,6 @@
 ﻿define(['app', 'text!./left-menu.html'],
     function (app, template) {
-// , './search-content.js'
+// , './search-content'
         app.directive("leftMenu", ['$timeout', '$location', function ($timeout, $location) {
             return {
                 restrict: "EAC",

@@ -1,4 +1,4 @@
-define(['app', 'text!/app/views/directives/nav/portal-nav.html', 'underscore','ng-breadcrumbs','jquery', '/app/services/help-service.js'],
+define(['app', 'text!views/directives/nav/portal-nav.html', 'underscore','ng-breadcrumbs','jquery', 'services/help-service'],
  function (app,template, _, showHelp, $) {
 app.directive('portalNav', function () {
     return {

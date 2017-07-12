@@ -1,5 +1,5 @@
-define(['app', "text!/app/views/forms/view/view-contact.directive.html","/app/views/forms/view/view-contact-reference.directive.js",
-'/app/views/directives/party-status.js'], 
+define(['app', "text!views/forms/view/view-contact.directive.html","views/forms/view/view-contact-reference.directive",
+'views/directives/party-status'], 
 function(app, template) {
 
     app.directive("viewContact", [function() {

@@ -1,6 +1,6 @@
 ﻿
-define(["app", 'json!/app/app-data/schema-name-plural.json', 
-'/app/js/common.js', '../services/app-config-service'], 
+define(["app", 'json!app-data/schema-name-plural.json', 
+'js/common', 'services/app-config-service'], 
 function (app, schemaNamePlural) {
 
 

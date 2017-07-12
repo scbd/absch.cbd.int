@@ -1,5 +1,5 @@
 define(['app', 
-"text!/app/views/forms/view/view-abs-checkpoint-communique.directive.html"], function (app, template) {
+"text!views/forms/view/view-abs-checkpoint-communique.directive.html"], function (app, template) {
 
 app.directive("viewAbsCheckpointCommunique", [function () {
 
@@ -83,8 +83,8 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 						});
 				}
 				else if(document.entityWhoGrantedPIC){
-					if(!_.some($scope.emailList, {identifier:document.entityToWhomGrantedPIC}))
-						$scope.emailList.push(document.entityToWhomGrantedPIC);
+					if(!_.some($scope.emailList, {identifier:document.entityWhoGrantedPIC}))
+						$scope.emailList.push(document.entityWhoGrantedPIC);
 				}
 				else if(document.sourceCountries){
 

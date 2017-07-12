@@ -144,7 +144,7 @@
         };
     </script>
 
-    <script src="/app/libs/requirejs/require.js" data-main="/app/js/boot.js"></script>
+    <script src="/app/libs/requirejs/require.js" data-main="/app/boot.js"></script>
     <script src="/app/libs/outdated-browser/outdatedbrowser/outdatedbrowser.min.js"></script>
     <link rel="stylesheet" href="/app/libs/outdated-browser/outdatedbrowser/outdatedbrowser.min.css">
     <div id="outdated"></div>
@@ -182,6 +182,7 @@
         }
         
         window.appVersion = document.documentElement.attributes['app-version'].value;
+        window.lang = '<%=baseUrl%>'//.replace('/','')
     </script>
 
 </body>

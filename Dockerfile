@@ -1,6 +1,7 @@
-FROM node:6.10.2-alpine
-RUN apk update && apk upgrade && \
-    apk add --no-cache bash git
+FROM node:6.10.2
+# -alpine
+# RUN apk update && apk upgrade && \
+#     apk add --no-cache bash git
 
 ARG BRANCH='master'
 ENV BRANCH $BRANCH
@@ -52,5 +53,7 @@ EXPOSE 8000
 ARG TAG
 ENV TAG $TAG
 
+ARG COMMIT
+ENV COMMIT $COMMIT
 
 CMD [ "node", "server" ]

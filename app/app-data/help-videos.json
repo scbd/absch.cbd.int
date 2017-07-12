@@ -8,9 +8,9 @@
     "old-account"        : { "url" :"https://www.youtube.com/watch?v=IqoVH8IVsvI", "heading" : "Old account" },
     "forgot-password"    : { "url" :"https://www.youtube.com/watch?v=hv7Kgx0bjdc", "heading" : "Forgot password" },
     "user-management"    : { "url" :"https://www.youtube.com/watch?v=sBYKAuS6TBA", "heading" : "User management" },
-    "dashboard"         : { "url" :"https://www.youtube.com/watch?v=s6xLer37R5M", "heading" : "Dashboard" },
-    "notification"      : { "url" :"https://www.youtube.com/watch?v=nYHA8yuTx5c", "heading" : "Notification" },
+    "dashboard"          : { "url" :"https://www.youtube.com/watch?v=s6xLer37R5M", "heading" : "Dashboard" },
+    "notification"       : { "url" :"https://www.youtube.com/watch?v=nYHA8yuTx5c", "heading" : "Notification" },
     "email-alerts"       : { "url" :"https://www.youtube.com/watch?v=DjRtgYxyeJg", "heading" : "Email alerts" },
-    "helpdesk"          : { "url" :"https://www.youtube.com/watch?v=yiASMdKJY8A", "heading" : "Helpdesk" }
+    "helpdesk"           : { "url" :"https://www.youtube.com/watch?v=yiASMdKJY8A", "heading" : "Helpdesk" }
 
 }

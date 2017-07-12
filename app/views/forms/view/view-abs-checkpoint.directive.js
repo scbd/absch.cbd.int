@@ -1,4 +1,4 @@
- define(["app", "text!/app/views/forms/view/view-abs-checkpoint.directive.html"], function(app, template){
+ define(["app", "text!views/forms/view/view-abs-checkpoint.directive.html"], function(app, template){
 
 	// });
 //	 require("app")

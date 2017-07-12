@@ -9,18 +9,18 @@ var co      = require('co');
 var express = require('express');
 var proxy   = require('http-proxy').createProxyServer({});
 var app     = express();
-
+var url     = require('url');
 // Initialize constants
 
 var appVersion = process.env.TAG;
 if(!appVersion || appVersion.trim()==''){
-    appVersion =  (process.env.BRNACH||'') + '-'+ (process.env.VERSION ||'');
+    appVersion =  ((process.env.BRANCH||'') + '-'+ (process.env.VERSION ||''))||process.env.COMMIT;
     // if(appVersion == "-")
 }  
 var oneDay   = 86400000;
 app.set('view engine', 'ejs');
 // Set routes
-app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/components/scbd-map/worldEUHigh.js', express.static(__dirname + '/app/components/scbd-map/worldEUHigh.js', { setHeaders: setCustomCacheControl , maxAge: 86400000*365 }) );
+app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: setCustomCacheControl , maxAge: 86400000*365 }) );
 app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',     translation, express.static(__dirname + '/app', { setHeaders: setCustomCacheControl }));
 // app.use('/app',                              express.static(__dirname + '/app'));
 app.use('/cbd-forums',      express.static(__dirname + '/app/libs/cbd-forums', { setHeaders: setCustomCacheControl }));
@@ -30,11 +30,17 @@ app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
 app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbddev.xyz', changeOrigin: true, secure:false }));
-app.get('/?:lang(ar|en|es|fr|ru|zh)?/*', function (req, res) {
+app.get('(/?:lang(ar|en|es|fr|ru|zh))?/*', function (req, res) {
    var urlPreferredLang;
+   
    if(req.params.lang)
      urlPreferredLang = ('/'+req.params.lang+'/');
-    
+   else{ //temp because the above regex does not work for absch.cbd.int/fr case
+        var lang = _.first(_.values(_.omitBy(req.params, _.isNil)))
+        var langRegex = /^(ar|en|es|fr|ru|zh)$/
+        if(langRegex.test(lang))
+            urlPreferredLang = ('/'+lang+'/')
+   } 
    res.setHeader('Cache-Control', 'public, max-age=0');
    
    res.cookie('VERSION', appVersion);
@@ -82,7 +88,8 @@ function* getLanguageFile(req, preferredLang){
         preferredLang = getPreferredLanguage(req);
 
     if(preferredLang){
-        var path = `/i18n/${preferredLang}/app${req.url}`;               
+        var requestedUrl = url.parse(req.url).pathname;
+        var path = `/i18n/${preferredLang}/app${requestedUrl}`;               
 
         let statsLang;
         try{
@@ -90,7 +97,7 @@ function* getLanguageFile(req, preferredLang){
         }catch(e){}
         if (statsLang && statsLang.isFile()) {
             
-            var statsEN    = yield fs.stat(`${__dirname}/app${req.url}`);
+            var statsEN    = yield fs.stat(`${__dirname}/app${requestedUrl}`);
 
             var mLangtime  = new Date(util.inspect(statsLang.mtime));
             var mENtime    = new Date(util.inspect(statsEN.mtime));
@@ -102,11 +109,16 @@ function* getLanguageFile(req, preferredLang){
 
 function getPreferredLanguage(req){
     
+    var htmlRegex       = /.(html|ejs|json)$/g; ///.html?[^.]/g//\.html(?!.js)
+    var langRegex       = /^(ar|fr|es|ru|zh)/;
+    var requestedUrl    = url.parse(req.url).pathname;
+
+    if(!htmlRegex.test(requestedUrl))
+        return;
+
     if(req.params.lang)
         return req.params.lang;
-
-    var htlmRegex       = /.(html|ejs|json)/g; ///.html?[^.]/g//\.html(?!.js)
-    var langRegex       = /^(ar|fr|es|ru|zh)/;
+    
     if(req.headers['preferred-language']){
 
         var validLanguages = ['ar', 'fr', 'es', 'ru', 'zh']

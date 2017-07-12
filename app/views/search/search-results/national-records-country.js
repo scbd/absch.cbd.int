@@ -1,6 +1,6 @@
-define(['app', 'text!/app/views/search/search-results/national-records-country.html','/app/js/common.js',
-'/app/views/search/search-results/result-grouped-national-record.js',
-'/app/views/directives/party-status.js',
+define(['app', 'text!views/search/search-results/national-records-country.html','js/common',
+'views/search/search-results/result-grouped-national-record',
+'views/directives/party-status',
 ], function(app, template, _) {
 
     app.directive('nationalRecordsCountry', function() {

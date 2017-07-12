@@ -1,5 +1,5 @@
-define(['app',"text!/app/views/forms/view/view-resource.directive.html",], function (app, template) {
-	// ,'/app/views/directives/discussion-directive.html.js'
+define(['app',"text!views/forms/view/view-resource.directive.html",], function (app, template) {
+	// ,'views/directives/discussion-directive.html'
 app.directive("viewResource", [function () {
 	return {
 		restrict   : "EAC",
