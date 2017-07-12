@@ -20,7 +20,7 @@ if(!appVersion || appVersion.trim()==''){
 var oneDay   = 86400000;
 app.set('view engine', 'ejs');
 // Set routes
-app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/components/scbd-map/worldEUHigh.js', express.static(__dirname + '/app/components/scbd-map/worldEUHigh.js', { setHeaders: setCustomCacheControl , maxAge: 86400000*365 }) );
+app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: setCustomCacheControl , maxAge: 86400000*365 }) );
 app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',     translation, express.static(__dirname + '/app', { setHeaders: setCustomCacheControl }));
 // app.use('/app',                              express.static(__dirname + '/app'));
 app.use('/cbd-forums',      express.static(__dirname + '/app/libs/cbd-forums', { setHeaders: setCustomCacheControl }));
@@ -109,11 +109,16 @@ function* getLanguageFile(req, preferredLang){
 
 function getPreferredLanguage(req){
     
+    var htmlRegex       = /.(html|ejs|json)$/g; ///.html?[^.]/g//\.html(?!.js)
+    var langRegex       = /^(ar|fr|es|ru|zh)/;
+    var requestedUrl    = url.parse(req.url).pathname;
+
+    if(!htmlRegex.test(requestedUrl))
+        return;
+
     if(req.params.lang)
         return req.params.lang;
-
-    var htlmRegex       = /.(html|ejs|json)/g; ///.html?[^.]/g//\.html(?!.js)
-    var langRegex       = /^(ar|fr|es|ru|zh)/;
+    
     if(req.headers['preferred-language']){
 
         var validLanguages = ['ar', 'fr', 'es', 'ru', 'zh']
