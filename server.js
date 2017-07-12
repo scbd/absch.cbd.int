@@ -9,7 +9,7 @@ var co      = require('co');
 var express = require('express');
 var proxy   = require('http-proxy').createProxyServer({});
 var app     = express();
-
+var url     = require('url');
 // Initialize constants
 
 var appVersion = process.env.TAG;
@@ -88,7 +88,8 @@ function* getLanguageFile(req, preferredLang){
         preferredLang = getPreferredLanguage(req);
 
     if(preferredLang){
-        var path = `/i18n/${preferredLang}/app${req.url}`;               
+        var requestedUrl = url.parse(req.url).pathname;
+        var path = `/i18n/${preferredLang}/app${requestedUrl}`;               
 
         let statsLang;
         try{
@@ -96,7 +97,7 @@ function* getLanguageFile(req, preferredLang){
         }catch(e){}
         if (statsLang && statsLang.isFile()) {
             
-            var statsEN    = yield fs.stat(`${__dirname}/app${req.url}`);
+            var statsEN    = yield fs.stat(`${__dirname}/app${requestedUrl}`);
 
             var mLangtime  = new Date(util.inspect(statsLang.mtime));
             var mENtime    = new Date(util.inspect(statsEN.mtime));
