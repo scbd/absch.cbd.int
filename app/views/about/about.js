@@ -18,7 +18,7 @@ function (app, _) {
             helpdesk        : 'yiASMdKJY8A',
 
     };
-    app.directive('ngYoutubeEmbed', function(){
+    app.directive('ngYoutubeVideoImageEmbed', function(){
       return {
         link : function(scope, elem, attrs){
 
