@@ -128,7 +128,16 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/help/common-formats/:commonFormat?',     {templateUrl: 'views/about/common-formats.html', resolveController: true, resolveUser: true, label:'Common formats'}).
                when('/help/national-report',    {templateUrl: 'views/about/nr-faq.html', resolveController: true, resolveUser: true, label:'Information on the Interim National Report'}).
                when('/help/faq',                {templateUrl: 'views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
-               
+            
+               when('/help/presentations/',         { templateUrl: 'views/help/presentations/home.html'                      ,resolveController: true, resolveUser: true}).
+               when('/help/presentations/:folder/:document_type', {
+                    templateUrl: 'views/help/presentations/presentation.html',
+                    resolveController: true,
+                    resolveUser: true,
+                    subTemplateUrl: 'views/help/presentations/:folder/-',
+                    ignoreSubController: true,
+                }).
+                when('/help/presentations/:folder', { redirectTo: '/help/presentations/:folder/start' }).
                otherwise({templateUrl: 'views/shared/404.html', label:'404 Error'});
 
     }]);

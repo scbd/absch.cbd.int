@@ -92,11 +92,28 @@ define(['app', 'angular', 'services/app-config-service', 'scbd-angularjs-service
         //============================================================
         function resolveController(controllerModule) {
 
-            return ['$q', function($q) {
+            return ['$q', '$route', '$filter', function($q, $route, $filter) {
 
                 var deferred = $q.defer();
 
-                require([controllerModule], function (module) {
+                var controllers = [];
+                controllers.push(controllerModule);
+                //TODO: I'm not sure if this is the most elegant approach... reconsider
+                //NOTE: for some reason the subTemplareUrl is staying as the old one, not as the newly defined one. Yet the document_type is being changed.
+                if($route.current.$$route.subTemplateUrl && $route.current.$$route.subTemplateUrl.slice(-1) == '-'){
+                    $route.current.$$route.subTemplateUrlFull = $route.current.$$route.subTemplateUrl.slice(0, -1) +
+                                                                $filter("mapSchema")($route.current.params.document_type) + '.html';
+                    if($route.current.params.folder)
+                        $route.current.$$route.subTemplateUrlFull = $route.current.$$route.subTemplateUrlFull
+                                                                          .replace(':folder' , $route.current.params.folder)
+                }
+                else
+                    $route.current.$$route.subTemplateUrlFull = $route.current.$$route.subTemplateUrl;
+
+                if($route.current.$$route.subTemplateUrlFull && !$route.current.$$route.ignoreSubController)
+                  controllers.push($route.current.$$route.subTemplateUrlFull + '.js');
+
+                require(controllers, function (module) {
                     deferred.resolve(module);
                 }, function(){
                     deferred.reject("controller not found: " + controllerModule);

@@ -9,7 +9,7 @@ app.controller("presentationController",
 	 function ($rootScope, $location, $scope, $q, $window, storage, _,
 	  $compile,$timeout,lstringFilter, $routeParams) {
 
-		$scope.slide = $scope.subTemplateUrl.replace('.html','');
+		$scope.slide = "/app/"+$scope.subTemplateUrl.replace('.html.','.');
 
 		//==================================
        	$scope.restart = function () {
