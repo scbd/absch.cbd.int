@@ -1,7 +1,7 @@
 define(['text!./home-map.html',
   'app',
   'lodash',
-  'views/directives/party-status', 'services/search-service',
+  './party-status', 'services/search-service',
   'views/directives/block-region-directive'
 ], function(template, app, _, popoverTemplate) {
   'use strict';
