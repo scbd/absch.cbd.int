@@ -108,7 +108,13 @@ require.config({
         { name: 'scbd-angularjs-filters',  location : 'components/scbd-angularjs-services/filters' },
         { name: 'ammap', main: 'ammap',    location : 'libs/ammap3/ammap' }
     ],
-    urlArgs: 'v=' + window.appVersion
+    urlArgs: function(id, url){
+        
+        if(url.indexOf('worldEUHigh.js')>0)
+            return '';
+        
+        return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.appVersion
+    }
 });
 
 define("_slaask", window._slaask);
