@@ -45,8 +45,8 @@ function (app, _) {
       }
     })
     app.controller("AboutNewController",
-      ["$rootScope", "$scope", "$q", "underscore",'$http','commonjs','smoothScroll', '$element', '$timeout',
-      function ($rootScope, $scope, $q, _, $http, commonjs, smoothScroll, $element, $timeout) {
+      ["$rootScope", "$scope", "$q", "underscore",'$http','commonjs','smoothScroll', '$element', '$timeout', '$location',
+      function ($rootScope, $scope, $q, _, $http, commonjs, smoothScroll, $element, $timeout, $location) {
         
         $timeout(function(){
           $(window).scroll(function() {
@@ -82,7 +82,14 @@ function (app, _) {
             evt.preventDefault();
         });
 
-        $timeout(function(){$scope.ready = true;}, 500)
+        $timeout(function(){$scope.ready = true;
+          var hash = $location.$$absUrl.split('#');
+          if(hash.length>1 && $('#'+hash[1])){
+              $('html, body').animate({
+                scrollTop: $('#'+hash[1]).offset().top
+              }, 800);
+          }
+        }, 500)
 
         $scope.$on('$destroy', function(){
           $(window).unbind('scroll');
