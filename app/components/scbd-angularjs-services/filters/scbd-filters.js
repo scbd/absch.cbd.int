@@ -85,7 +85,7 @@ function (app, moment, schemaName, schemaShortName) {
   app.filter('moment', [function() {
 
         return function(datetime, method, arg1, arg2, arg3) {
-            return moment(datetime)[method](arg1, arg2, arg3);
+            return moment.utc(datetime)[method](arg1, arg2, arg3);
         };
   }]);
 
@@ -95,10 +95,13 @@ function (app, moment, schemaName, schemaShortName) {
   //
   //============================================================
   app.filter("formatDateWithUtc", function () {
+    
     return function (date, formart) {
       if (formart === undefined)
         formart = 'DD MMM YYYY';
-      return moment.utc(date).format(formart);
+      
+      return $filter("moment")(date, 'format',formart);
+      
     };
   });
   //============================================================

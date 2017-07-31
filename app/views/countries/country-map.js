@@ -1,6 +1,8 @@
-define(['text!./country-map.html', 'app', 'lodash', 'text!./pin-popup-abs.html', 'ammap', 'shim!./worldEUHigh[ammap]', 'shim!ammap/themes/light[ammap]',
+define(['text!./country-map.html', 'app', 'lodash', 'text!./pin-popup-abs.html', 'ammap', 
+'shim!/app/views/countries/worldEUHigh[ammap].js',//using absolute url, spl case for this file as its too big to load
+'shim!ammap/themes/light[ammap]',
 'js/common', 'services/search-service', 'css!libs/flag-icon-css/css/flag-icon.min.css',
-  'scbd-angularjs-services/locale'], 
+'scbd-angularjs-services/locale'], 
 function(template, app, _, popOverTemplate) {
   'use strict';
 

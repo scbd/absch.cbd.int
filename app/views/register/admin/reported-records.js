@@ -1,5 +1,5 @@
 define(['app', 'js/common',
-    'views/forms/view/record-loader.directive.html',
+    'views/forms/view/record-loader.directive',
     'views/register/directives/register-top-menu', 'ngDialog'
     , 'scbd-angularjs-services/generic-service'
 ], function (app) {
