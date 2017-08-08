@@ -192,7 +192,7 @@
 					<span ng-if="!country.isNPParty && !country.isNPInbetweenParty" class="color-grey" style="font-size:10px;margin-right:10px;">Non-Party</span>
 					<span ng-if="country.isNPParty" class="color-party" style="font-size:10px;margin-right:10px;">Party to the Nagoya Protocol</span>
 					<span ng-if="country.isNPInbetweenParty" class="color-inbetween" style="font-size:10px;margin-right:10px;">Ratified, not yet Party</span>
-					<span ng-if="country.isNPSignatory" class="color-pink" style="font-size:10px;margin-right:10px;">Signatory</span>
+					<span ng-if="country.isNPSignatory" style="font-size:10px;margin-right:10px;">Signatory</span>
 					<span ng-if="country.entryIntoForce" class="color-grey" style="font-size:10px;margin-right:20px;">Entry into force: {{country.entryIntoForce|formatDate}}</span>
 				</div>
 			</div>
