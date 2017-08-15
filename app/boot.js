@@ -57,7 +57,8 @@ require.config({
         'chart-js'                  : 'libs/Chart.js/Chart',
         "printThis"                 : 'libs/printThis/printThis',
         'jquery-highlight'          : 'libs/jquery-highlight/jquery.highlight',
-        'lunr'                      : 'libs/lunr.js/lunr'
+        'lunr'                      : 'libs/lunr.js/lunr',
+        'diacritics'                : 'libs/diacritic/diacritics',
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },

@@ -1,0 +1,58 @@
+<div>
+    <div class="register-content card card-1-notrans">
+        <div class="register-content-header bg-darkgrey color-white">
+            <div style="padding:10px 10px;">
+                <h3 style="margin:0px;">
+                    <span ng-switch="selectedReportType">
+                        <span ng-switch-when="cpbNationalReport3">Third National Report on the Implementation of the Cartagena Protocol on Biosafety</span>
+                        <span ng-switch-when="cpbNationalReport2">Second National Report on the Implementation of the Cartagena Protocol on Biosafety</span>
+                        <span ng-switch-when="npNationalReport1">Interim National Report on the Implementation of the Nagoya Protocol</span>
+                        <span ng-switch-default="cpbNationalReport3">National Report</span>
+                    </span>
+                    <span class="helpinfoInline">
+                        <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i>
+                    </span>
+                </h3>
+
+                <!--help info---------------------------->
+                <div ng-if="showInfo" class="well well-help">
+
+                </div>
+
+            </div>
+        </div>
+        <div class="register-content-content" style="padding:5px;">
+
+            <div ng-show="!showAnalyzer" class="panel panel-default">
+
+                <div class="panel-heading">
+
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:99%">
+                                <h4 class="panel-title">Regions and Questions Settings</h4>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" ng-click="analyze(true);">Analyze »</button>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <national-report-questions-selector report-type="selectedReportType" questions="selectedQuestions" regions="selectedRegions"></national-report-questions-selector>
+
+                <div class="panel-footer text-right">
+                    <button type="button" class="btn btn-primary" ng-click="analyze(true)">Analyze »</button>
+                </div>
+
+            </div>
+
+            <national-report-analyzer ng-if="showAnalyzer" max-date="$parent.maxDate" report-type="$parent.selectedReportType" questions="$parent.selectedQuestions"
+                regions="$parent.selectedRegions"></national-report-analyzer>
+
+        </div>
+
+    </div>
+
+</div>

@@ -56,7 +56,8 @@
     "angular-aria": "1.4",
     "printThis": "1.9.0",
     "jquery-highlight": "3.4.0",
-    "lunr.js": "lunr#2.1.0"
+    "lunr.js": "lunr#2.1.0",
+    "diacritic": "^0.0.3"
   },
   "resolutions": {
     "angular": "1.4.14",

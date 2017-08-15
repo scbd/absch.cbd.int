@@ -32,4 +32,48 @@ define(['app'], function(app) { 'use strict';
                 return false;
         };
     }]);
+
+    app.filter("locale", ['locale', function(defaultLocale) {
+    	return function(ltext, locale) {
+
+            locale = locale || defaultLocale;
+
+            if(!ltext)
+    			return locale;
+
+            if(typeof(ltext) == 'string')
+    			return locale;
+
+    		if(ltext[locale])
+                return locale;
+
+    		if(ltext[defaultLocale])
+                return defaultLocale;
+
+    		if(ltext.en)
+    			return 'en';
+
+			for(var key in ltext) {
+                if(ltext[key])
+                    return key;
+			}
+
+    		return locale;
+    	};
+    }]);
+
+    app.filter("direction", ['$filter', function($filter) {
+    	return function(text, locale) {
+
+            locale = $filter('locale')(text, locale);
+
+            return $filter('localeDirection')(locale);
+    	};
+    }]);
+
+    app.filter("localeDirection", ['locale', function(defaultLocale) {
+    	return function(locale) {
+            return (locale||defaultLocale) == 'ar' ? 'rtl' : 'ltr';
+        };
+    }]);
 });
