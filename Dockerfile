@@ -23,6 +23,8 @@ RUN ./i18n.sh
 
 # clone i18n repo
 RUN git clone -b master https://github.com/scbd/absch.cbd.int-i18n.git /usr/tmp/i18n/others
+RUN if [ $BRANCH = 'dev' ]; then git checkout 'dev'; fi
+
 WORKDIR /usr/tmp/i18n/others
 COPY i18n.sh ./
 RUN chmod 700 i18n.sh
