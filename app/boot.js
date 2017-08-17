@@ -45,11 +45,12 @@ require.config({
         'socket.io'                 : 'libs/socket.io-1.4.5/index',
         'ngInfiniteScroll'          : 'libs/ngInfiniteScroll/build/ng-infinite-scroll',
         'angular-loggly-logger'     : 'libs/angular-loggly-logger/angular-loggly-logger',
-        'xlsx-js'                   : 'components/table-export/xlsx-js.min',
-        'file-saverjs'              : 'components/table-export/file-saverjs.min',
-        'tableexport'               : 'components/table-export/tableexport.min',
-        'blobjs'                    : 'components/table-export/blobjs.min',
-        'jzip'                      : 'components/table-export/jzip.min',
+        
+        "tableexport"               : "libs/tableexport.js/dist/js/tableexport",
+        "blobjs"                    : "libs/blobjs/Blob",
+        "file-saverjs"              : "libs/file-saverjs/FileSaver",
+        "xlsx"                      : "libs/js-xlsx/dist/xlsx",
+        "jszip"                     : "libs/js-xlsx/dist/jszip",
         'angular-gravatar'          : 'libs/angular-gravatar/build/angular-gravatar',
         'angular-google-analytics'  : 'libs/angulartics-google-analytics/dist/angulartics-ga.min',
         'angular-angulartics'       : 'libs/angulartics/dist/angulartics.min',
@@ -90,9 +91,7 @@ require.config({
         'angular-block-ui'              : { 'deps': ['angular'] },
         'ngDialog'                      : { 'deps': ['angular', 'css!libs/ng-dialog/css/ngDialog.min', 'css!libs/ng-dialog/css/ngDialog-theme-default.css'] },
         'angular-loggly-logger'         : { 'deps': ['angular'] },
-        'xlsx-core'                     : { 'deps': ['jquery'] },
-        'file-saver'                    : { 'deps': ['jquery'] },
-        'tableexport'                   : { 'deps': ['jquery'] },
+
         'angular-gravatar'              : { 'deps': ['angular']}, 
         'angular-angulartics'           : { 'deps': ['angular']} ,
         'angular-google-analytics'      : { 'deps': ['angular', 'angular-angulartics']},
@@ -100,7 +99,8 @@ require.config({
         'chart-js'                      : { 'deps': ['angular', 'jquery'] },
         "jspdf"                         : { exports : "jsPDF" },
         'jquery-highlight'              : { 'deps': ['jquery'] },
-        'lunr'                          : { 'deps': ['jquery'] }
+        'lunr'                          : { 'deps': ['jquery'] },
+        "xlsx"                          : { "deps": ['jszip'],"exports": 'XLSX'}
     },
     packages: [
         { name: 'scbd-branding'          , location : 'components/scbd-branding' },
@@ -133,3 +133,13 @@ require(['angular', 'angular-flex', 'angular-route', 'angular-cookies',  'bootst
         }
     });
 });
+
+
+// 'xlsx-js'                   : 'components/table-export/xlsx-js.min',
+//         'file-saverjs'              : 'components/table-export/file-saverjs.min',
+//         'tableexport'               : 'components/table-export/tableexport.min',
+//         'blobjs'                    : 'components/table-export/blobjs.min',
+//         'jzip'                      : 'components/table-export/jzip.min',
+        // 'xlsx-core'                     : { 'deps': ['jquery'] },
+        // 'file-saver'                    : { 'deps': ['jquery'] },
+        // 'tableexport'                   : { 'deps': ['jquery'] },
