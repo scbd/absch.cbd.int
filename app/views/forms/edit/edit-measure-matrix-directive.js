@@ -1,5 +1,7 @@
-define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directive.html",'views/directives/block-region-directive'
-], function (app, _, template) {
+define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directive.html", 
+'json!app-data/measure-matrix-updated-title.json', 'json!app-data/measure-matrix-other-elements.json',
+'views/directives/block-region-directive', 'scbd-angularjs-services/locale'
+], function (app, _, template, measureMatrixUpdatedTitles, elementsForOthers) {
 
 
     app.directive("editMeasureMatrix", function () {
@@ -15,7 +17,8 @@ define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directiv
                 termsFn: "&terms",
                 required: "@",
                 layout: "@",
-                document: "=document"
+                document: "=document",
+                validationReport : "="
             },
             link: function ($scope, $element, $attr, ngModelController) {
                 $scope.isElementsLoading = true;
@@ -48,8 +51,10 @@ define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directiv
                     $element.addClass("list-unstyled");
 
             },
-            controller: ["$scope", "$q", "Thesaurus", "Enumerable", '$element', '$http', '$timeout',
-            function ($scope, $q, thesaurus, Enumerable, $element, $http, $timeout) {
+            controller: ["$scope", "$q", "Thesaurus", "Enumerable", '$element', '$http', '$timeout', '$rootScope', 'locale',
+            function ($scope, $q, thesaurus, Enumerable, $element, $http, $timeout, $rootScope, locale) {
+
+                $scope.locale = locale;
 
                 var readOnlyElements = [
                     "24E809DA-20F4-4457-9A8A-87C08DF81E8A", "54281688-DE5F-4465-953C-76A8CBE61DED", "4E2974DF-216E-46C8-8797-8E3A33D6A048",
@@ -73,10 +78,10 @@ define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directiv
                     "4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C", "BE944E70-2098-45AC-891B-D5E94AFECB99"
                 ];
 
-                var elementsForOthers = [
-                    "24E809DA-20F4-4457-9A8A-87C08DF81E8A", "08B2CDEC-786F-4977-AD0A-6A709695528D", "9847FA8A-16C3-4466-A378-F20AF9FF883B",
-                    "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63", "01DA2D8E-F2BB-4E85-A17E-AB0219194A17", "BE944E70-2098-45AC-891B-D5E94AFECB99"
-                ];
+                // var elementsForOthers = [
+                //     "24E809DA-20F4-4457-9A8A-87C08DF81E8A", "08B2CDEC-786F-4977-AD0A-6A709695528D", "9847FA8A-16C3-4466-A378-F20AF9FF883B",
+                //     "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63", "01DA2D8E-F2BB-4E85-A17E-AB0219194A17", "BE944E70-2098-45AC-891B-D5E94AFECB99"
+                // ];
                 var staticIdentifiers = ["24E809DA-20F4-4457-9A8A-87C08DF81E8A", "CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F",
                     "B8A150E054154AD3AD97856ABD485E90", "2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD",
                     "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A"];
@@ -182,7 +187,6 @@ define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directiv
 
                                 if ($scope.binding.relevantElements[i].parent
                                     && !$scope.binding.relevantElements[i].hasOwnProperty('answer')
-                                    // && identifier != '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#BE944E70-2098-45AC-891B-D5E94AFECB99'
                                 ) {
                                     if (!oNewOtherTerms[identifier])
                                         oNewOtherTerms[identifier] = [];
@@ -198,6 +202,14 @@ define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directiv
                                     $scope.appendEmptyOther(oNewOtherTerms[identifier], true);
                                 }
                             }
+                            else if(identifier.indexOf("5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#")>=0
+                                    && $scope.binding.relevantElements[i].hasOwnProperty('answer')){
+                                if(!_.some($scope.binding.relevantElements, {'parent': identifier})){//add empty row for future edits
+                                    if (!oNewOtherTerms[identifier])
+                                        oNewOtherTerms[identifier] = [{}];                                    
+                                }
+                            }
+
                             if ($scope.binding.relevantElements[i].answer != undefined) {
                                 oNewIdentifiers[identifier] = $scope.binding.relevantElements[i].answer;
 
@@ -515,98 +527,12 @@ define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directiv
                     });
                     return elementMeasures;
                 }
-                var elementsForOthers = {
-                    "24E809DA-20F4-4457-9A8A-87C08DF81E8A" : {
-                        title : 'Reference to any other relevant articles and sections', description : ''
-                    },
-                    "08B2CDEC-786F-4977-AD0A-6A709695528D" : {
-                        title : 'Any other elements relevant to access',
-                        description : 'This may include, for instance, additional information on the scope of the access provisions of the measure, special considerations for access, or other relevant access provisions.'
-                    },
-                    "9847FA8A-16C3-4466-A378-F20AF9FF883B" : {
-                        title : 'Any other elements relevant to benefit-sharing',
-                        description : 'This may include, for instance, additional information on the scope of the benefit-sharing provisions of the measure, establishment of benefit-sharing funds or other relevant benefit-sharing provisions'
-                    },
-                    "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63" : {
-                        title : 'Any other element relevant to compliance',
-                        description : 'This may include, for instance, additional information on the scope of the compliance provisions of the measure, or other relevant compliance provisions.'
-                    },
-                    "01DA2D8E-F2BB-4E85-A17E-AB0219194A17" : {
-                        title : 'Any other relevant relationships with other international instruments', description : ''
-                    },
-                    "BE944E70-2098-45AC-891B-D5E94AFECB99" : {
-                        title : 'Reference to any other relevant articles and sections', description : ''
-                    }
-                };
-
-
+                
                 function updateABSMeasureText(data){
 
-                    var absMeasureUpdatedText = {
-                        "08B2CDEC-786F-4977-AD0A-6A709695528D": {
-                            "title": {
-                            "en": "Does the measure cover access?"
-                            }
-                        },
-                        "1E824A31-BDFB-4C47-9593-8006B5FC7D60":{
-                            "title": {"en": "Does it cover access to genetic resources?"}
-                        },
-                        "5427EB8F-5532-4AE2-88EE-5B9619917480": {
-                            "title": {
-                                "en": "Does it cover access to traditional knowledge associated with genetic resources?"
-                            }
-                        },
-                        "9AE45FB8-7788-4D26-B8E9-6B1647055519":{
-                            "title": {
-                                "en": "Does the measure provides for the issuance of a permit of its equivalent at the time of access for constituting an internationally recognized certificate of compliance (IRCC)?"
-                            }
-                        },
-                        "8FA89F2D-3D6B-46A2-93BC-8B157054D726":{
-                            "title": {
-                                "en": "Does the measure establish rules and procedures for mutually agreed terms(MAT)?"
-                            }
-                        },
-                        "9847FA8A-16C3-4466-A378-F20AF9FF883B":{
-                            "title": {
-                                "en": "Does the measure cover benefit-sharing?"
-                            }
-                        },
-                        "E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63":{
-                            "title": {
-                                "en": "Does the measure cover compliance?"
-                            }
-                        },
-                        "F2E6038A-6E99-4BCE-9582-155B72CC7730":{
-                            "title": {
-                                "en": "Does it cover compliance with domestic legislation or regulatory requirements of the other Party (Article 15 and 16)?"
-                            }
-                        },
-                        "4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C":{
-                            "title": {
-                                "en": "Does it cover issues related to monitoring the utilization of genetic resources (Article 17)?"
-                            }
-                        },
-                        "1FCC6CA9-022F-42FD-BD02-43AE674FEB56":{
-                            "title": {
-                                "en": "Does it cover compliance with mutually agreed terms (Article 18)?"
-                            }
-                        },
-                        "01DA2D8E-F2BB-4E85-A17E-AB0219194A17":{
-                            "title": {
-                                "en": "Does this measure include provisions on how its application relates to other international instruments?"
-                            }
-                        },
-                        "BE944E70-2098-45AC-891B-D5E94AFECB99":{
-                            "title": {
-                                "en": "Does this measure include any other relevant elements?"
-                            }
-                        }
-                        
-                    }
-
                     _.each(data, function(element){
-                        if(absMeasureUpdatedText[element.identifier]){
-                            element.title = absMeasureUpdatedText[element.identifier].title;
+                        if(measureMatrixUpdatedTitles[element.identifier]){
+                            element.title = measureMatrixUpdatedTitles[element.identifier];
                         }
                         //change hierarchy are required by abs measure matrix
                         if(element.identifier == 'A896179F-833E-4F76-B3F4-81CC95C66592'){// Mutually agreed terms
@@ -637,6 +563,23 @@ define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directiv
                 }
 
                 loadElementsSource();
+
+                $scope.$watch('validationReport', function(validationReport){
+                    if(!validationReport)
+                        return;                    
+
+                    $element.find('.measure-matrix-error').removeClass('measure-matrix-error')
+                    if(validationReport && validationReport.errors){
+                        validationReport.errors.forEach(function(error){
+                            var row = $element.find('[name="'+error.property+'"]');
+                            if(row.length<1)
+                                row = $element.find('#'+error.property);  
+                            if(row.length<1)
+                                row = $element.find('#'+error.property.replace(/^col_/, 'qt_'));  
+                            row.addClass('measure-matrix-error')
+                        });
+                    }
+                });
             }]
         }
     });
