@@ -75,6 +75,7 @@
                     $scope.loadCountryDetails = function(countryCode) {
 
                     $scope.code = countryCode || $routeParams.code;
+                    
 
                     $scope.documentCount = 0;
                     $scope.currentPage = 0;
@@ -177,12 +178,15 @@
                         $scope.getFacets($scope.absch_nfp);
                         $('[data-toggle="tooltip"]').tooltip()
 
-                        if($routeParams.countryCode && $routeParams.documentType){
-                            if($routeParams.documentType.toLowerCase()=='measure-matrix'){
-                                $scope.showMSR = true;
-                            }else{
-                                $scope['show' + $routeParams.documentType.toUpperCase()] = true;
-                            }
+                        if($routeParams.code && $routeParams.schema){                            
+                            $scope['show' + $routeParams.schema.toUpperCase()] = true;        
+                            $timeout(function(){                    
+                            var div = $element.find('#div'+$routeParams.schema.toUpperCase());
+                            if(div.length>0)
+                                $('html, body').animate({
+                                    scrollTop: div.offset().top
+                                }, 800);
+                            }, 200)
                         }
                     });
                     }

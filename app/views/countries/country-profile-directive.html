@@ -8,7 +8,7 @@
     </div>
     <br/>
     <br/>
-    <h4 class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showNFP = !showNFP" ng-class="{'color-litegrey': nfpCount == 0}">
+    <h4 id="divNFP" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showNFP = !showNFP" ng-class="{'color-litegrey': nfpCount == 0}">
         <i class="fa" ng-class="{'fa-plus':!showNFP, 'fa-minus':showNFP}" style="font-size:14px;font-weight:normal;"></i> ABS National Focal Point (NFP)
         <span class="badge pull-right" ng-class="{'bg-grey3': nfpCount==0, 'bg-black': nfpCount > 0}">{{nfpCount}}</span>
     </h4>
@@ -19,7 +19,7 @@
     </div>
 
 
-    <h4 class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showCNA = !showCNA" ng-class="{'color-litegrey': nationalAuthority == 0}">
+    <h4 id="divCNA" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showCNA = !showCNA" ng-class="{'color-litegrey': nationalAuthority == 0}">
         <i class="fa" ng-class="{'fa-plus':!showCNA, 'fa-minus':showCNA}" style="font-size:14px;font-weight:normal;"></i> Competent National Authorities (CNA)
         <span class="badge pull-right" ng-class="{'bg-grey3': nationalAuthority==0, 'bg-black': nationalAuthority > 0}">{{nationalAuthority}}</span>
     </h4>
@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <h4 class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showMSR = !showMSR" ng-class="{'color-litegrey': nationalMeasure == 0}">
+    <h4 id="divMSR" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showMSR = !showMSR" ng-class="{'color-litegrey': nationalMeasure == 0}">
         <i class="fa" ng-class="{'fa-plus':!showMSR, 'fa-minus':showMSR}" style="font-size:14px;font-weight:normal;"></i> Legislative, administrative or policy measures on access and benefit-sharing (MSR)
         <span class="badge pull-right" ng-class="{'bg-grey3': nationalMeasure==0, 'bg-black': nationalMeasure > 0}">{{nationalMeasure}}</span>
     </h4>
@@ -73,7 +73,7 @@
     </div>
 
 
-    <h4 class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showNDB = !showNDB" ng-class="{'color-litegrey': database == 0}">
+    <h4 id="divNDB" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showNDB = !showNDB" ng-class="{'color-litegrey': database == 0}">
         <i class="fa" ng-class="{'fa-plus':!showNDB, 'fa-minus':showNDB}" style="font-size:14px;font-weight:normal;"></i> National Databases and Websites (NDB)
         <span class="badge pull-right" ng-class="{'bg-grey3': database==0, 'bg-black': database > 0}">{{database}}</span>
     </h4>
@@ -82,7 +82,7 @@
             <result-grouped-national-record doc='doc'></result-grouped-national-record>
         </div>
     </div>
-    <h4 class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showCP = !showCP" ng-class="{'color-litegrey': absCheckpoint == 0}">
+    <h4 id="divCP" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showCP = !showCP" ng-class="{'color-litegrey': absCheckpoint == 0}">
         <i class="fa" ng-class="{'fa-plus':!showCP, 'fa-minus':showCP}" style="font-size:14px;font-weight:normal;"></i> Checkpoints (CP)
         <span class="badge pull-right" ng-class="{'bg-grey3': absCheckpoint==0, 'bg-black': absCheckpoint > 0}">{{absCheckpoint}}</span>
     </h4>
@@ -93,7 +93,7 @@
     </div>
 
 
-    <h4 class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showIRCC = !showIRCC" ng-class="{'color-litegrey': Permit == 0}">
+    <h4 id="divIRCC" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showIRCC = !showIRCC" ng-class="{'color-litegrey': Permit == 0}">
         <i class="fa" ng-class="{'fa-plus':!showIRCC, 'fa-minus':showIRCC}" style="font-size:14px;font-weight:normal;"></i> Internationally Recognized Certificates of Compliance (IRCC)
         <span class="badge pull-right" ng-class="{'bg-grey3': Permit==0, 'bg-black': Permit > 0}">{{Permit}}</span>
     </h4>
@@ -104,7 +104,7 @@
     </div>
 
 
-    <h4 class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showCPC = !showCPC" ng-class="{'color-litegrey': absCheckpointCommunique == 0}">
+    <h4 id="divCPC" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showCPC = !showCPC" ng-class="{'color-litegrey': absCheckpointCommunique == 0}">
         <i class="fa" ng-class="{'fa-plus':!showCPC, 'fa-minus':showCPC}" style="font-size:14px;font-weight:normal;"></i> Checkpoint Communiqués (CPC)
         <span class="badge pull-right" ng-class="{'bg-grey3': absCheckpointCommunique==0, 'bg-black': absCheckpointCommunique > 0}">{{absCheckpointCommunique}}</span>
     </h4>
@@ -115,7 +115,7 @@
     </div>
 
 
-    <h4 class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showNR = !showNR" ng-class="{'color-litegrey': absNationalReport == 0}">
+    <h4 id="divNR" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showNR = !showNR" ng-class="{'color-litegrey': absNationalReport == 0}">
         <i class="fa" ng-class="{'fa-plus':!showNR, 'fa-minus':showNR}" style="font-size:14px;font-weight:normal;"></i> Interim National Report on the Implementation of the Nagoya Protocol (NR)
         <span class="badge pull-right" ng-class="{'bg-grey3': absNationalReport==0, 'bg-black': absNationalReport > 0}">{{absNationalReport}}</span>
     </h4>
