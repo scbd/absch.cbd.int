@@ -1,53 +1,53 @@
-﻿<div ng-controller="userPreferencesCtrl" id="RegisterPage">
+﻿<div ng-controller="userPreferencesCtrl" id="PreferncesPage">
 
 	<span register-top-menu></span>
 	<style>
-		.block {
+		#PreferncesPage .block {
 			margin-bottom: 30px;
 			background-color: #fff;
 			-webkit-box-shadow: 0 2px rgba(0, 0, 0, 0.01);
 			box-shadow: 0 2px rgba(0, 0, 0, 0.01);
 		}
 		
-		.block>.nav-tabs {
+		#PreferncesPage .block>.nav-tabs {
 			background-color: #eee;
 			border-bottom: none;
 		}
 		
-		.nav-tabs.nav-justified {
+		#PreferncesPage .nav-tabs.nav-justified {
 			width: 100%;
 			border-bottom: 0;
 		}
 		
-		.push-20 {
+		#PreferncesPage .push-20 {
 			margin-bottom: 20px !important;
 		}
 		
-		.block>.nav-tabs>li {
+		#PreferncesPage .block>.nav-tabs>li {
 			margin-bottom: 0;
 		}
 		
-		.block>.nav-tabs>li.active>a,
-		.block>.nav-tabs>li.active>a:hover,
-		.block>.nav-tabs>li.active>a:focus {
+		#PreferncesPage .block>.nav-tabs>li.active>a,
+		#PreferncesPage .block>.nav-tabs>li.active>a:hover,
+		#PreferncesPage .block>.nav-tabs>li.active>a:focus {
 			color: #646464;
 			background-color: #fff;
 			border-color: transparent;
 		}
 		
-		.block>.nav-tabs.nav-justified>li>a {
+		#PreferncesPage .block>.nav-tabs.nav-justified>li>a {
 			margin-bottom: 0;
 		}
 		
-		.block>.nav-tabs>li {
+		#PreferncesPage .block>.nav-tabs>li {
 			margin-bottom: 0;
 		}
 		
-		.block .block-content.tab-content {
+		#PreferncesPage .block .block-content.tab-content {
 			overflow: hidden;
 		}
 		
-		.block-content {
+		#PreferncesPage .block-content {
 			margin: 0 auto;
 			padding: 20px 20px 1px;
 			max-width: 100%;
@@ -56,23 +56,23 @@
 			transition: opacity .2s ease-out;
 		}
 		
-		.block-content.block-content-full {
+		#PreferncesPage .block-content.block-content-full {
 			padding-bottom: 20px;
 		}
 		
-		.bg-gray-lighter {
+		#PreferncesPage .bg-gray-lighter {
 			background-color: #eee;
 		}
 		
-		.text-center {
+		#PreferncesPage .text-center {
 			text-align: center;
 		}
 		
-		.block>.nav-tabs.nav-justified>li>a {
+		#PreferncesPage .block>.nav-tabs.nav-justified>li>a {
 			margin-bottom: 0;
 		}
 		
-		.block>.nav-tabs>li>a {
+		#PreferncesPage .block>.nav-tabs>li>a {
 			margin-right: 0;
 			padding-top: 12px;
 			padding-bottom: 12px;
@@ -82,25 +82,25 @@
 			border-radius: 0;
 		}
 		
-		.user-details {
+		#PreferncesPage .user-details {
 			position: relative;
 			padding: 0;
 		}
 		
-		.user-details .user-image {
+		#PreferncesPage .user-details .user-image {
 			position: relative;
 			z-index: 1;
 			width: 100%;
 			text-align: center;
 		}
 		
-		.user-image img {
+		#PreferncesPage .user-image img {
 			clear: both;
 			margin: auto;
 			position: relative;
 		}
 		
-		.user-details .user-info-block {
+		#PreferncesPage .user-details .user-info-block {
 			width: 100%;
 			top: 55px;
 			background: rgb(255, 255, 255);
@@ -108,30 +108,30 @@
 			padding-top: 35px;
 		}
 		
-		.user-info-block {
+		#PreferncesPage .user-info-block {
 			position: static;
 		}
 		
-		.user-image {
+		#PreferncesPage .user-image {
 			position: absolute!important;
 		}
 		
-		.user-details {
+		#PreferncesPage .user-details {
 			position: relative;
 		}
 		
-		.user-info-block {
+		#PreferncesPage .user-info-block {
 			margin-top: 4%;
 			background-color: black;
 		}
 		
-		.user-info-block .user-heading {
+		#PreferncesPage .user-info-block .user-heading {
 			width: 100%;
 			text-align: center;
 			margin: 10px 0 0;
 		}
 		
-		.user-info-block .navigation {
+		#PreferncesPage .user-info-block .navigation {
 			float: left;
 			width: 100%;
 			margin: 0;
@@ -152,23 +152,22 @@
 			<div class="row ">
 				<div class="col-sm-12 ">
 					<div class="col-sm-12 col-md-12 user-details">
-				
-							<div class="row panel panel-white profile-widget" style="border:0;">
+							<div class="row panel panel-white profile-widget tabs" style="border:0;">
 								<div class="block ">
 									<ul class="nav nav-tabs nav-justified push-20">
-										<li class="active">
-											<a href="#preferences" ng-click="tab='setting'" data-toggle="tab"><span class="glyphicon glyphicon-cog"></span> Settings </a>
+										<li class="active" id="tab-setting">
+											<a href="#tab-content-setting" ng-click="tab='setting'" data-toggle="tab"><span class="glyphicon glyphicon-cog"></span> Settings </a>
 										</li>
-										<li>
-											<a href="#tab-user-alerts" ng-click="tab='subscriptions'" data-toggle="tab"><span class="glyphicon glyphicon-envelope"></span> Email Alerts</a>
+										<li id="tab-email-alerts">
+											<a href="#tab-content-email-alerts" ng-click="tab='email-alerts'" data-toggle="tab"><span class="glyphicon glyphicon-envelope"></span> Email Alerts</a>
 										</li>
-										<li>
-											<a href="#tab-search-filter" ng-click="tab='searchFilters'" data-toggle="tab"><span class="glyphicon glyphicon-lock"></span> Saved Searches</a>
+										<li id="tab-saved-searches">
+											<a href="#tab-content-saved-searches" ng-click="tab='saved-searches'" data-toggle="tab"><span class="glyphicon glyphicon-lock"></span> Saved Searches</a>
 										</li>
 									</ul>
 
 									<div class="tab-content">
-										<div class="tab-pane fade-in panel-body active " id="preferences">
+										<div class="tab-pane fade-in panel-body active " id="tab-content-setting">
 											<h3 class="color-red text-center  alert-warning" style="padding:20px;"> Coming soon. This section is  under development </h3>
 											<div>
 												<div class="panel-heading">
@@ -202,7 +201,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="tab-pane fade panel-body" id="tab-user-alerts" ng-if="tab==='subscriptions'">
+										<div class="tab-pane fade panel-body" id="tab-content-email-alerts" ng-if="tab==='email-alerts'">
 											<div>
 												<div class="panel-heading">
 													<h1>Email Alerts</h1>
@@ -238,18 +237,18 @@
 													</div>
 
 													<legend>Custom Email Alerts</legend>
-													<span user-preference-filter ng-if="tab==='subscriptions'" collection="subscriptions"
+													<span user-preference-filter ng-if="tab==='email-alerts'" collection="email-alerts"
 														collection-filter='{"isSystemAlert":false}'  run-query="runFilter(filter)"></span>
 												</div>
 											</div>
 										</div>
-										<div class="tab-pane fade panel-body" id="tab-search-filter">
+										<div class="tab-pane fade panel-body" id="tab-content-saved-searches">
 											<div>
 												<div class="panel-heading">
 												 	<h1>Saved Searches</h1>
 													Create customized searches for future use.</div>
 												<div class="panel-body">													
-													<span user-preference-filter ng-if="tab==='searchFilters'" collection="search-queries" run-query="runFilter(filter)"></span>
+													<span user-preference-filter ng-if="tab==='saved-searches'" collection="search-queries" run-query="runFilter(filter)"></span>
 
 												</div>
 											</div>
@@ -293,10 +292,10 @@
 									<a href="#preferences" ng-click="tab='setting'" data-toggle="tab"><i class="fa fa-fw fa-asterisk"></i> Settings</a>
 								</li>
 								<li>
-									<a href="#tab-user-alerts" ng-click="tab='subscriptions'" data-toggle="tab"><i class="fa fa-fw fa-asterisk"></i> Subscriptions</a>
+									<a href="#tab-user-alerts" ng-click="tab='email-alerts'" data-toggle="tab"><i class="fa fa-fw fa-asterisk"></i> email-alerts</a>
 								</li>
 								<li>
-									<a href="#tab-search-filter" ng-click="tab='searchFilters'" data-toggle="tab"><i class="fa fa-fw fa-lock"></i> Saved Searches</a>
+									<a href="#tab-saved-searches" ng-click="tab='searchFilters'" data-toggle="tab"><i class="fa fa-fw fa-lock"></i> Saved Searches</a>
 								</li>
 							</ul>
 
@@ -308,9 +307,9 @@
 									<div class="alert alert-info" role="alert">
 
 									</div>
-									<span user-preference-filter ng-if="tab==='subscriptions'" collection="subscriptions"></span>
+									<span user-preference-filter ng-if="tab==='email-alerts'" collection="email-alerts"></span>
 								</div>
-								<div class="tab-pane fade panel-body" id="tab-search-filter">
+								<div class="tab-pane fade panel-body" id="tab-saved-searches">
 									<span user-preference-filter ng-if="tab==='searchFilters'" collection="search-queries" run-query="runFilter(filter)"></span>
 								</div>
 							</div>
