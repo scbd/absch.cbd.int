@@ -38,7 +38,7 @@ define(['app','text!views/directives/export-directive.html',
                                                 require(['tableexport'], function(){
                                                     $element.find('#datatable').tableExport({
                                                         formats: ["xlsx", "xls", "csv"],
-                                                        fileName: "ABSCH-data",
+                                                        filename: "ABSCH-data",
                                                     });
                                                     $element.find('.' + $scope.downloadFormat).click();
                                                 });     
