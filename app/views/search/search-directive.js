@@ -122,6 +122,22 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                         $scope.refresh = true;
                     };
                     //===============================================================================================================================
+                    $scope.saveCustomFilter = function(filter) {
+                        
+                        if(!filter)
+                            return;
+
+                        var fid = 'custom_' + filter.id;
+
+                        if($scope.setFilters[fid] )
+                            delete $scope.setFilters[fid];
+                        else{
+                            $scope.setFilters[fid] = {'type':filter.type, 'query': filter.query, 'id':fid, name:filter.name};
+                        }
+
+                        $scope.refresh = true;
+                    };
+                    //===============================================================================================================================
                     function getFilter(id) {
                          //console.log($scope.searchFilters[id]);
                          return $scope.searchFilters[id];
@@ -162,6 +178,9 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                         _.map(filters, function(query){
                             if(query.type == 'text'){
                                 $scope.saveFreeTextFilter(query);
+                            }
+                            else if(query.type == 'custom'){
+                                $scope.saveCustomFilter(query);
                             }
                             else{
                                 $scope.saveFilter(query);
@@ -466,6 +485,11 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                                qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
                                qOr.push(buildTextQuery('text_EN_txt'    ,'partyStatus', null));
                         }
+                        //custom queries
+                        _.map(_.filter($scope.setFilters, {type:'custom'}), function(custom){
+                            if(custom.query)
+                                qAnd.push(custom.query)
+                        });
 
                         qAnd.push(buildDateFieldQuery('updatedDate_dt','publishedOn'));
 
@@ -499,6 +523,24 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                        return  q ? q : null;
                     }
 
+                    //===============================================================================================================================
+                    function buildCustomQuery(field, type, boost){
+                        var q = '';
+                        var values = [];
+
+                        if($scope.setFilters){
+                            _.each($scope.setFilters, function(item){
+
+                                if(item.type == type){
+                                    values.push($scope.setFilters[item.id].name.toLowerCase());
+                                }
+
+                            });
+                            if(values.length)
+                                q = addORCondition(field, values, boost)
+                        }
+                    return  q ? q : null;
+                    }
                   //===============================================================================================================================
                     function buildCountryQuery(field, type, boost){
                         var q = '';

@@ -1,6 +1,6 @@
-define(['app', "text!views/register/user-preferences/user-preference-filter.html",'underscore', 'ngDialog',
+define(['app', "text!views/register/user-preferences/user-preference-filter.html",'underscore', 'moment', 'ngDialog',
     'views/search/search-directive', 
-    'scbd-angularjs-services/generic-service'], function (app, template, _) {
+    'scbd-angularjs-services/generic-service'], function (app, template, _, moment) {
 
     app.directive("userPreferenceFilter", ['$rootScope', 'ngDialog', function ($rootScope, ngDialog) {
 
@@ -16,7 +16,19 @@ define(['app', "text!views/register/user-preferences/user-preference-filter.html
             link: function ($scope, element, attrs) { 
             },
             controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', function ($rootScope, $scope, $http, IGenericService, realm, $timeout) {
-
+                var systemSearches = [{
+                    system : true,
+                    "filters": [
+                      {
+                        "type": "custom",
+                        "name": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+                        "id": "entitiesToWhomPICGrantedCountry",
+                        "query" : 'entitiesToWhomPICGrantedCountry_ss:'
+                      }
+                    ],
+                    "queryTitle": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+                    "meta" : {"createdOn":moment.utc().format()}
+                }];
                 $scope.user = $rootScope.user;
                 $scope.skipKeywordsFilter = false;
                 $scope.skipTextFilter = false;
@@ -34,7 +46,8 @@ define(['app', "text!views/register/user-preferences/user-preference-filter.html
                         query.realm  = realm.value;
                         IGenericService.query('v2016', 'me/' + $scope.collection, query)
                         .then(function (data) {
-                            $scope.userFilters = data
+                            _.first(systemSearches).filters[0].query += $scope.user.government;
+                            $scope.userFilters = _.union(systemSearches, data)
                         });
                     }
                 }

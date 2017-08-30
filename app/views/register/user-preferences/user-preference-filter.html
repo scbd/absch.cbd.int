@@ -15,11 +15,11 @@
 
         <ul class="list-group">
             <li class="list-group-item clearfix" style="background-color:#eee;"
-            ng-repeat="record in userFilters | orderBy:'reportedOn':'desc'">
+            ng-repeat="record in userFilters | orderBy:'meta.createdOn':'desc'">
                 <div class="pull-right btn-group" ng-hide="record.pendingStatus">
                     <a type="button" class="btn" ng-hide="del" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'" > <i class="fa fa-play-circle"></i> <br> run query</a>
-                    <a type="button" class="btn" ng-hide="del" ng-click="addEdit(record)" > <i class="fa fa-edit"></i> <br> edit </a>
-                    <a type="button" class="btn" ng-hide="del"  ng-click="del=true;"> <i class="fa fa-trash-o"></i> <br> delete  </a>
+                    <a type="button" class="btn" ng-hide="del" ng-click="addEdit(record)" ng-disabled="!record._id" > <i class="fa fa-edit"></i> <br> edit </a>
+                    <a type="button" class="btn" ng-hide="del"  ng-click="del=true;"  ng-disabled="!record._id"> <i class="fa fa-trash-o"></i> <br> delete  </a>
 
                     <a type="button" class="btn color-red bold" ng-show="del" ng-click="confirmDelete(record);del=false;"> <i class="fa fa-trash-o"></i> <br> confirm delete?  </a>
                     <a type="button" class="btn" ng-show="del" ng-click="del=false;"> <i class="fa fa-times-circle"></i> <br> cancel  </a>
@@ -28,10 +28,10 @@
                     <i class="fa fa-spin fa-spinner" /> pending status..
                 </div>
                
-                <span class="label label-warning pull-right" ng-if="record.meta.createdOn" ng-bind="record.meta.createdOn|formatDateWithTime"></span>
+                <span class="label label-warning pull-right" ng-if="record.meta.createdOn && record._id" ng-bind="record.meta.createdOn|formatDateWithTime"></span>
                 <h4><a class="text-bold mb0 color-blue"  ng-click="runUserQuery(record)" >{{record.queryTitle}}</a></h4>
                       
-                <span style="color:#bbb;">FILTERS:</span><span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
+                <span ng-if="record._id" style="color:#bbb;">FILTERS:</span><span  ng-if="record._id" ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
                     <span class="label label-info">                    
                             <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>{{filter.name}}
                             <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
