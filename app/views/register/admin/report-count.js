@@ -133,7 +133,7 @@ define(['app', 'underscore', 'js/common', 'moment', 'scbd-angularjs-controls', '
                                         nationalRecords.absNationalReport.countryCount       += (country.schemas.absNationalReport ? 1 : 0);
                                     });
                                     $scope.nationalRecords = nationalRecords;
-
+                                    
                                     nationalChartData = {                                    
                                         labels: results[1].labels,
                                         datasets: [
@@ -150,8 +150,12 @@ define(['app', 'underscore', 'js/common', 'moment', 'scbd-angularjs-controls', '
                                         ]
                                     };
                                     combineRecordsData = angular.copy(nationalChartData);
+                                    if($scope.filters.excludeTotalCount){
+                                        nationalChartData.datasets = [];
+                                        $scope.filters.includeAllSchemas = true;
+                                        $scope.checkAll($scope.nationalRecords, true)
+                                    }
                                     drawChart("#nationalRecordsChart", nationalChartData, 'nationalChartObject');
-
                                     var referenceRecords = {resource		            : { recordCount : 0, color: '#C0C0C0' },
                                                             modelContractualClause      : { recordCount : 0, color: '#808080' },
                                                             communityProtocol           : { recordCount : 0, color: '#800000' },
@@ -178,9 +182,16 @@ define(['app', 'underscore', 'js/common', 'moment', 'scbd-angularjs-controls', '
                                             }
                                         ]
                                     };
-                                    drawChart("#referenceRecordsChart", referenceChartData, 'referenceChartObject');
 
                                     combineRecordsData.datasets.push(referenceChartData.datasets[0]);
+                                    
+                                    if($scope.filters.excludeTotalCount){
+                                        referenceChartData.datasets = [];
+                                        $scope.filters.includeAllReferenceSchemas = true;
+                                        $scope.checkAll($scope.referenceRecords, true)
+                                    }
+                                    drawChart("#referenceRecordsChart", referenceChartData, 'referenceChartObject');
+
                                     drawChart("#combineRecordsChart", combineRecordsData, 'combineChartObject');
                                 })
                                 .catch(function(error) {
@@ -340,17 +351,21 @@ define(['app', 'underscore', 'js/common', 'moment', 'scbd-angularjs-controls', '
                     .then(function(results) {
                         var data = { labels: [], data: [] };
                         var facets = searchService.readFacets(results[0].data.facet_counts.facet_ranges[($scope.filters.dateType||'createdDate_dt').replace(':','')].counts)
-                        _.each(facets, function(facet) {
+                        _.each(facets, function(facet, i) {
                             var label = moment.utc(facet.symbol).format('MMMM YYYY');
                             data.labels.push(label)
-                            data.data.push(facet.count);
+                            var prevCount =0;
+                            if($scope.filters && $scope.filters.cumulative && i>0){
+                                prevCount = data.data[i-1];
+                            }
+                            data.data.push(facet.count+prevCount);
                             var tableData = options.type == 'national' ? $scope.nationalRecordsTableData : $scope.referenceRecordsTableData;
 
                             var tableRow = _.findWhere(tableData , { label : label }) || {label : label, new:true};
                             if(options.schema) 
-                                tableRow[options.schema] = facet.count;
+                                tableRow[options.schema] = facet.count+prevCount;
                             else
-                                tableRow['allCount'] = facet.count
+                                tableRow['recordCount'] = facet.count+prevCount
                             if(tableRow.new){                                
                                  delete tableRow.new;
                                  tableData.push(tableRow)
