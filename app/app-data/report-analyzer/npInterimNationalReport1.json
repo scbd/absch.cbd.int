@@ -1,7 +1,7 @@
 ﻿[
   {
     "key": "General",
-    "title": "Party to the Nagoya Protocol",
+    "title": "Institutional structures for the implementation of the Protocol",
     "questions": [
         {
             "key": "Q003",
@@ -139,7 +139,7 @@
   },
   {
     "key": "Access",
-    "title": "Access to genetic resources (Article 6)",
+    "title": "ABS measures : Access to genetic resources (Article 6)",
     "questions": [
             {
                 "key": "Q011",
@@ -305,7 +305,7 @@
   },
   {
     "key": "Benefit-Sharing",
-    "title": "Fair and equitable benefit-sharing (Article 5)",
+    "title": "ABS measures : Fair and equitable benefit-sharing (Article 5)",
     "questions": [
             {
                 "key": "Q020",
@@ -373,7 +373,7 @@
   },
   {
     "key": "Compliance",
-    "title": "Compliance with domestic legislation or regulatory requirements on ABS (Article 15 and Article 16) and monitoring the utilization of genetic resources (Article 17)",
+    "title": "ABS measures : Compliance with domestic legislation or regulatory requirements on ABS (Article 15 and Article 16) and monitoring the utilization of genetic resources (Article 17)",
     "questions": [
             {
                 "key": "Q024_a",
@@ -580,7 +580,7 @@
   },
   {
     "key": "ComplianceMat",
-    "title": "Compliance with mutually agreed terms (MAT) (Article 18)",
+    "title": "ABS measures :- Compliance with mutually agreed terms (MAT) (Article 18)",
     "questions": [
             {
                 "key": "Q031",
@@ -763,7 +763,7 @@
   },
   {
     "key": "indigenousProvisions",
-    "title": "Provisions related to indigenous and local communities",
+    "title": "Provisions related to indigenous and local communities (Articles 6, 7 and 12)",
     "questions": [
             {
                 "key": "Q037",

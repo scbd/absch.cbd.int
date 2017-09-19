@@ -413,7 +413,7 @@ define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyze
                     var collectionUrls = {
                         cpbNationalReport2 : "/api/v2015/national-reports-cpb-2",
                         cpbNationalReport3 : "/api/v2015/national-reports-cpb-3",
-                        npNationalReport1  : "/api/v2017/national-reports-np-1"
+                        npInterimNationalReport1  : "/api/v2017/national-reports-np-1"
                     };
 
                     return $http.get(collectionUrls[options.reportType], {  params: { q : query, f : fields }, cache : true }).then(function(res) {

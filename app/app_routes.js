@@ -52,8 +52,9 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/countries/status/:status',    { templateUrl: 'views/countries/country-list.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
                when('/countries/:code/:schema?',             { templateUrl: 'views/countries/country-profile.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
                               
-               when('/reports',            { templateUrl: 'views/report-analyzer/index.html',     label:'Report Analyzer',      resolveController: true}).
-               when('/reports/analyzer',    { templateUrl: 'views/report-analyzer/analyzer.html',  label:'Report Analyzer',      resolveController: true}).
+               when('/reports',                     { templateUrl: 'views/report-analyzer/overview.html',    label:'Reports Overview',      resolveController: true}).
+               when('/reports/:report',             { templateUrl: 'views/report-analyzer/reports.html',     label:'Report',      resolveController: true}).
+               when('/reports/:report/analyzer',    { templateUrl: 'views/report-analyzer/analyzer.html',  label:'Analyzer',      resolveController: true}).
                
                when('/database/record',             { templateUrl: 'views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
                when('/database/record/:documentID',  { templateUrl: 'views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).

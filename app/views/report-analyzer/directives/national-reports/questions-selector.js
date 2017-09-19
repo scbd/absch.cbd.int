@@ -1,4 +1,5 @@
-define(['text!./questions-selector.html', 'app', 'lodash', 'require', '../selectors/terms-dialog', '../intermediate', 'scbd-angularjs-services/locale'], 
+define(['text!./questions-selector.html', 'app', 'lodash', 'require', '../selectors/terms-dialog', '../intermediate', 
+'scbd-angularjs-services/locale', 'js/common'], 
 function(templateHtml, app, _, require) {
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
@@ -15,7 +16,7 @@ function(templateHtml, app, _, require) {
     //
     //
     //==============================================
-    app.directive('nationalReportQuestionsSelector', ['$http', 'locale', function($http, locale) {
+    app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs', '$q', function($http, locale, commonjs, $q) {
         return {
             restrict : 'E',
             replace : true,
@@ -27,14 +28,14 @@ function(templateHtml, app, _, require) {
             },
             link: function ($scope) {
 
-                $scope.selectedReportType = $scope.selectedReportType || 'cpbNationalReport3';
+                $scope.selectedReportType = $scope.selectedReportType || 'npInterimNationalReport1';
                 $scope.selectedRegions    = $scope.selectedRegions    || DefaultRegions.concat();
                 $scope.allSelected = true;
                 $scope.regionsMap = {};
 
                 getRegions();
                 getCountries();
-
+                mapNPParties();
                 ///////////////////////////////////////
                 // REPORT TYPE
                 ///////////////////////////////////////
@@ -86,6 +87,9 @@ function(templateHtml, app, _, require) {
                 //
                 //====================================
                 $scope.$watchCollection('selectedRegions', function() {
+                    console.log( $scope.regionsPreset)
+                    if(_.includes(['npParties', 'npNonParties'], $scope.regionsPreset))
+                        return;
 
                     $scope.selectedRegions = $scope.selectedRegions || DefaultRegions.concat();
 
@@ -122,6 +126,21 @@ function(templateHtml, app, _, require) {
                     if(preset=="cbdRegions") { $scope.selectedRegions = DefaultRegions.concat(); }
                     if(preset=="countries")  { $scope.selectedRegions = []; $scope.showCountries = true; }
                     if(preset=="regions")    { $scope.selectedRegions = []; $scope.showRegions = true; }
+                    if(preset=="npParties")  { 
+                        $scope.selectedRegions = [];
+                        _.each(_.sortBy(_.values($scope.npCountries), "title."+locale), function(country){
+                            if(country.isNPParty)
+                                $scope.selectedRegions.push(country.code)
+                        }); 
+                    }
+                    if(preset=="npNonParties")  { 
+                        $scope.selectedRegions = [];
+                        _.each(_.sortBy(_.values($scope.npCountries), "title."+locale), function(country){
+                            if(!country.isNPParty)
+                                $scope.selectedRegions.push(country.code)
+                        }); 
+                    }
+                    console.log($scope.selectedRegions)
                 };
 
                 //====================================
@@ -175,6 +194,23 @@ function(templateHtml, app, _, require) {
                             $scope.regionsMap[t.identifier] = t;
                         });
                     }
+                }
+
+                //====================================
+                //
+                //
+                //====================================
+                function mapNPParties() {
+                    
+                   $q.when(commonjs.getCountries())
+                   .then(function(data){
+                       $scope.npCountries = [];
+                       _.each(data, function(country){
+                            $scope.npCountries[country.code.toLowerCase()] = {
+                                title : country.name, isNPParty : country.isNPParty, code : country.code.toLowerCase()
+                            }
+                       });
+                   })
                 }
 
                 ///////////////////////////////////////

@@ -10,9 +10,9 @@
             <th style="width:200px">National Report</th>
             <td>
                 <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged()"  class="form-control">
-                    <option value="cpbNationalReport3">BCH - Third National Report</option>
-                    <option value="cpbNationalReport2">BCH - Second National Report</option>
-                    <option value="npNationalReport1" >ABS - First National Report</option>
+                    <!-- <option value="cpbNationalReport3">BCH - Third National Report</option>
+                    <option value="cpbNationalReport2">BCH - Second National Report</option> -->
+                    <option value="npInterimNationalReport1" >ABS - Interim National Report on the Implementation of the Nagoya Protocol</option>
                 </select>
             </td>
         </tr>
@@ -23,6 +23,8 @@
                     <option value="cbdRegions">Breakdown by CBD regions</option>
                     <option value="countries">Select countries</option>
                     <option value="regions">Select regions</option>
+                    <option value="npParties">Breakdown by Nagoya protocol parties</option>
+                    <option value="npNonParties">Breakdown by Nagoya protocol non parties</option>
                 </select>
             </td>
         </tr>
@@ -39,8 +41,13 @@
 
                 <ul ng-if="selectedRegions.length" class="list-unstyled">
                     <li ng-repeat="c in selectedRegions">
-                        <i class="fa fa-times" ng-click="removeRegions(c)" ng-show="regionsPreset!='cbdRegions'"></i>
-                        {{regionsMap[c].title|lstring}}
+                        <span ng-if="regionsPreset!='npParties' && regionsPreset!='npNonParties'">
+                            <i class="fa fa-times" ng-click="removeRegions(c)" ng-show="regionsPreset!='cbdRegions'"></i>
+                            {{regionsMap[c].title|lstring}}
+                        </span>
+                        <span ng-if="regionsPreset!='npParties' || regionsPreset!='npNonParties'">                            
+                            {{npCountries[c].title|lstring}}
+                        </span>
                     </li>
                 </ul>
             </td>
