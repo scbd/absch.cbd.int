@@ -1,5 +1,5 @@
-﻿<div ng-controller="AdminController"  id="RegisterPage">
-  
+﻿<div ng-controller="AdminController" id="RegisterPage">
+
   <link href="/app/css/register.css" rel="stylesheet">
   <link href="/app/css/record.css" rel="stylesheet">
 
@@ -19,13 +19,54 @@
               <td><label>Current Realm: </label></td>
               <td><span switch-realm></span></td>
             </tr>
+            <tr>
+              <td></td>
+              <td>
+                <table class="table table-striped" style="width:100%">
+                  <tbody>
+
+                    <tr>
+                      <td>View list of records reported by users </td>
+                      <td>
+                        <a translation-url class="btn btn-default" ng-href="/register/admin/reported-records">Manage Reported Records</a></td>
+                    </tr>
+                    <tr>
+                      <td>View ABSCH records workflow status</td>
+                      <td>
+                        <a translation-url class="btn btn-default" ng-href="/register/admin/pending-requests">Manage Workflow Records</a></td>
+                    </tr>
+                    <tr>
+                      <td>View ABSCH counts with graph option and mutiple filters</td>
+                      <td>
+                        <a translation-url class="btn btn-default" ng-href="/register/admin/report-counts">Report counts</a></td>
+
+                    </tr>
+                    <tr>
+                      <td>View countries with/without ABSCH roles</td>
+                      <td>
+                        <a translation-url class="btn btn-default" ng-href="/register/admin/user-role-report">User Role Report</a></td>
+                    </tr>
+                    <tr>
+                      <td>View list of users using the email subscription.</td>
+                      <td>
+                        <a translation-url class="btn btn-default" ng-href="/register/admin/subscriptions">Subscriptions</a></td>
+                    </tr>
+                    <tr>
+                      <td>View client side errors</td>
+                      <td>
+                        <a translation-url class="btn btn-default" ng-href="/register/admin/error-logs">Error Logs</a></td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </td>
+            </tr>
           </table>
         </div>
-        <a translation-url  class="btn btn-default" ng-href="/register/admin/reported-records">Manage Reported Records</a>
-        <a translation-url  class="btn btn-default" ng-href="/register/admin/pending-requests">Manage Workflow Records</a>
-        <a translation-url  class="btn btn-default" ng-href="/register/admin/report-counts">Report counts</a>
-        <a translation-url  class="btn btn-default" ng-href="/register/admin/error-logs">Error Logs</a>
-        <a translation-url  class="btn btn-default" ng-href="/register/admin/subscriptions">Subscriptions</a>
+
+
+
+
 
       </div>
     </div>
