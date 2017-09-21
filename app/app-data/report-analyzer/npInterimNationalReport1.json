@@ -477,7 +477,6 @@
                     { "value": "false","title": "No"}
                 ],
                 "additionalInfo" : [
-                    {"field" : "additionalInfo", "title" : "Please provide further information", "type" : "string"},
                     {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
                     {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
                 ]
@@ -517,7 +516,7 @@
             {
                 "key": "Q027_b",
                 "section": "Compliance",
-                "number": "27.1",
+                "number": "27.2",
                 "type": "option",
                 "title": "Has your country made use of the checkpoint communique?",
                 "multiple": false,
@@ -801,7 +800,7 @@
                 "key": "Q038_b",
                 "section": "indigenousProvisions",
                 "number": "38.2",
-                "type": "string",
+                "type": "text", "field":"furtherInfo","subTitle" : "Free text",
                 "title": "Please provide further information and reference to the domestic law establishing rights of indigenous and local communities to grant access to genetic resources",
                 "multiple": false,
                 "additionalInfo" : [
@@ -898,24 +897,12 @@
                         "title": "Community protocols"
                     },
                     {
-                        "value": "geneticResources.monetary",
-                        "title": "Monetary benefits"
+                        "value": "mat",
+                        "title": "Minimum requirements for mutually agreed terms"
                     },
                     {
-                        "value": "geneticResources.nonMonetary",
-                        "title": "Non-monetary benefits"
-                    },
-                    {
-                        "value": "tk",
-                        "title": "Traditional knowledge associated with genetic resources"
-                    },
-                    {
-                        "value": "tk.monetary",
-                        "title": "Monetary benefits"
-                    },
-                    {
-                        "value": "tk.nonMonetary",
-                        "title": "Non-monetary benefits"
+                        "value": "mcc",
+                        "title": "Model contractual clauses"
                     }
                 ],
                 "additionalInfo" : [
@@ -979,7 +966,8 @@
                 "key": "Q046",
                 "section": "conservationSustainable",
                 "number": "46",
-                "type": "string",
+                "type": "text", "field" :"furtherInfo",
+                "subTitle" : "Please provide further information",
                 "title": "Please indicate how the implementation of the Nagoya Protocol has contributed to conservation and sustainable use of biodiversity in your country:",
                 "multiple": false,
                 "additionalInfo" : [
@@ -1018,7 +1006,7 @@
                     { "value": "false","title": "No"}
                 ],
                 "additionalInfo" : [
-                    {"field" : "ilcInfo", "title" : "Please provide further information", "type" : "string"},
+                    {"field" : "ilcInfo", "title" : "If your country has indigenous and local communities, please provide further detail of their involvement.", "type" : "string"},
                     {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
                     {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
                 ]
@@ -1286,6 +1274,16 @@
                 "type": "option",
                 "title": "Has your country made financial resources available to other Parties or received financial resources from other Parties or financial institutions for the purposes of implementation of the Protocol as provided in Article 25?",
                 "multiple": false,
+                "options": [
+                    { "value": "donor", "title": "Yes, financial resources have been made available" },
+                    { "value": "recipient","title": "Yes, financial resources have been received"},
+                    { "value": "recipient.parties","title": "From other Parties"},
+                    { "value": "recipient.financialInstitutions","title": "From financial institutions"},
+                    { "value": "recipient.gef", "title": "From the Global Environmental Facility" },
+                    { "value": "recipient.npImplementationFund","title": "From the Nagoya Protocol Implementation Fund"},
+                    { "value": "recipient.otherSources","title": "From other sources"},
+                    { "value": "no","title": "No"}
+                ],
                 "additionalInfo" : [
                     {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
                 ]
@@ -1294,7 +1292,7 @@
                 "key": "Q062_b",
                 "section": "optional",
                 "number": "62.2",
-                "type": "string",
+                "type": "text", "shortTitle":"Free text", "field":"relevantInformation",
                 "title": "Please provide information on experiences related to the mobilization of resources in support of the implementation of the Protocol.",
                 "multiple": false,
                 "additionalInfo" : [
@@ -1305,7 +1303,7 @@
                 "key": "Q062_c",
                 "section": "optional",
                 "number": "62.3",
-                "type": "string",
+                "type": "text", "shortTitle":"Free text", "field":"relevantInformation",
                 "title": "Please provide information on the status of funds mobilized in support of the implementation of the Protocol.",
                 "multiple": false,
                 "additionalInfo" : [
@@ -1323,10 +1321,6 @@
                 "options": [
                     { "value": "true", "title": "Yes" },
                     { "value": "false","title": "No"}
-                ],
-                "additionalInfo" : [
-                    {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                    {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
                 ]
             },
             {
@@ -1338,9 +1332,9 @@
                 "multiple": false,
                 "options": [
                     { "value": "one", "title": "One" },
-                    { "value": "five","title": "Less than 5"},
-                    { "value": "ten","title": "Less than 10"},
-                    { "value": "10orMore","title": "10 or more"}
+                    { "value": "Less than 5","title": "Less than 5"},
+                    { "value": "Less than 10","title": "Less than 10"},
+                    { "value": "10 or more","title": "10 or more"}
                 ],
                 "additionalInfo" : [
                     {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges encountered.", "type" : "string"},
