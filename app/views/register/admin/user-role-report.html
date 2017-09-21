@@ -1,0 +1,99 @@
+﻿<div ng-controller="adminUserRolesReportController" id="RegisterPage">
+        <link href="/app/css/register.css" rel="stylesheet">
+        <link href="/app/css/record.css" rel="stylesheet">
+        <link href="/app/css/AdminLTE.min.css" rel="stylesheet" />
+        
+        <span register-top-menu></span>
+    
+        <div class="register-content card card-1-notrans">
+    
+            <div class="register-content-header bg-pink color-white">
+                <div style="padding:10px 10px;">
+                    <h3> User Roles Report</h3>
+                </div>
+            </div>
+            <div class="register-content-content" style="background:#d2d6de;">
+    
+                <legend name="formInfo" style="display:none"></legend>
+                <!--<div style="font-weight:bold;">Records which have been not approved since 12 weeks.</div>-->
+                <div class="registerpage-content">
+    
+                    <div class="alert alert-danger" ng-show="__error">
+                        <strong>Error: </strong>{{__error}}
+                    </div>
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"> Filters</h3>
+                        </div>
+                        <div class="box-body">                            
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="pull-left">                                       
+                                        <div km-select ng-model="filters.partyStatus" binding-type="string" placeholder="Party Status" items="options.filterPartyStatus()"></div>
+                                        <div km-select ng-model="filters.filterType" binding-type="string" placeholder="Filter" items="options.filterTypes()"></div>
+                                        <div km-select ng-model="filters.role" binding-type="string" placeholder="Roles" items="options.filterRoles()"></div>
+                                    </div>
+                                    <div class="pull-right">
+                                        <input type="button" class="btn btn-primary" ng-click="loadRecords()" value="Filter" ng-disabled="!filters.partyStatus || !filters.filterType || !filters.role">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12" ng-if="filters.role=='nfp'">
+                                    <br/>
+                                    <div class="callout callout-warning">
+                                        <h4>Please Note!</h4>                    
+                                        <p>Only user accounts are considered and not the NFP record.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="table " style="margin-top:15px;">
+                        <div ng-show="!__error">
+    
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title"> User Roles</h3>
+                                </div>
+                                <div class="box-body">
+                                    <div class="row-fluid center" id="National">                                
+                                            <div>
+                                                    <table class="table table-hover" style="text-align: left">
+                                                        <tbody>
+                                                            <tr><th></th>
+                                                                <th>
+                                                                    Country
+                                                                </th><th>Count</th>
+                                                            </tr>
+
+                                                            <tr ng-repeat="country in countriesToShow" >   
+                                                                <td>{{$index+1}}</td>                                                         
+                                                                <td><a target="_blank" href="https://accounts.cbd.int/admin/users?government={{country.code}}&role={{role}}">
+                                                                    {{country.name|lstring:locale}}</a></td>
+                                                                <td>{{country.count}}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>    <td>Total</td>
+                                                                <td>{{totalCount}}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                       
+                                                    </table>
+                                                </div>
+    
+                                    </div>
+                                </div>
+                                <div ng-class="{'overlay':loadingRecords}" ng-if="loadingRecords">
+                                    <i class="fa fa-refresh fa-spin"></i>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                                   
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    

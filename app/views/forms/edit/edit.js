@@ -482,7 +482,11 @@ define([
 
         $scope.origanalDocument = newDocument;
     });
-
+    $rootScope.$on('event:sessionExpired-signIn', function(evt, data){
+        $scope.error = null;
+        if($scope.tab == "review")
+          validate();
+    })
 
   }]);
 });

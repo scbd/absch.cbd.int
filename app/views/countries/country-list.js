@@ -2,11 +2,12 @@ define(['app', 'underscore',
     'js/common',
     'scbd-angularjs-filters',
     'services/search-service',
-    'views/directives/block-region-directive'
+    'views/directives/block-region-directive',
+    'scbd-angularjs-services/locale'
 ], function (app, _) {
 
-    app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams', '$compile', '$timeout',
-        function ($http, $scope, $element, $location, commonjs, $q, searchService, $filter, $routeParams, $compile, $timeout) {
+    app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams', '$compile', '$timeout', 'locale',
+        function ($http, $scope, $element, $location, commonjs, $q, searchService, $filter, $routeParams, $compile, $timeout, locale) {
             $scope.sortTerm = "name.en";
 
             $scope.regionFilter= [];
@@ -241,6 +242,19 @@ define(['app', 'underscore',
                 });
             });
 
+            $scope.export = function(){
+                $scope.readyForExport = true;
+                require(['tableexport'], function(){
+                    $element.find('#forExport').tableExport({
+                        formats: ["xlsx", "xls", "csv"],
+                        filemame: "ABSCH-Country-List",
+                    });
+                    $element.find('.xlsx').click();
+                    $timeout(function(){                        
+                        $scope.readyForExport = false;
+                    }, 200)
+                });  
+            }
         }
     ]);
 

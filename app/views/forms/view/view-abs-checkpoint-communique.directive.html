@@ -61,7 +61,7 @@
 						document.specimens || document.taxonomies || document.gisFiles || document.subjectMatter ||
 						document.evidenceOfPIC || document.evidenceOfMAT ||
 						document.entityToWhomPICGranted || document.personsAtCheckpoint">
-				<legend>Details of the internationally recognized certificate of compliance (IRCC)</legend>
+				<legend>Information Collected or Received at the Checkpoint</legend>
 				<div ng-show="document.absIRCCs">
 					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
 					<div class="km-value">
@@ -72,7 +72,7 @@
 						</ul>
 					</div>
 				</div>
-				<div ng-show="document.irccsNotAvailable" class="km-value">
+				<div ng-show="document.absIRCCsNotAvailable" class="km-value">
 					The internationally recognized certificate of compliance (IRCC) is not available
 				</div>
 				<div ng-show="document.sourceCountries || document.entityWhoGrantedPIC ||

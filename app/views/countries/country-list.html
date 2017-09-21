@@ -54,7 +54,44 @@
 	<div id="Jumbotron" class="bg-texture-green color-black  hidden-xs" style="border-top:1px solid #555;border-bottom:2px solid #ddd;position:relative;height: 400px;" block-region activate="loadingMap">		
 		<span country-map></span>
 	</div>
-	<div block-region activate="loading" block-text=" Loading country details">		
+	<div block-region activate="loading" block-text=" Loading country details">
+		<div style="height:0px;width:0px;" ng-if="readyForExport">
+			<table id="forExport" style="height:0px;width:0px">
+					<tr>
+						<th>Country</th>
+						<th>Status</th>
+						<th>NFP</th>
+						<th>CNA</th>
+						<th>MSR</th>
+						<th>NDB</th>
+						<th>IRCC</th>
+						<th>CP</th>
+						<th>CPC</th>
+						<th>NP</th>
+					</tr>
+					<tr ng-repeat="country in list = (countries | filter:keyword | filter: hasStatus | orderBy:sortTermFilter:orderList) track by country.name.en">
+						<td>{{country.name|lstring:locale}}</td>
+						<td>
+							<span ng-if="!country.isNPParty && !country.isNPInbetweenParty" class="color-grey" style="font-size:10px;margin-right:10px;">Non-Party</span>
+							<span ng-if="country.isNPParty" class="color-party" style="font-size:10px;margin-right:10px;">Party</span>
+						</td>
+						<td>{{country.schemas.focalPoint ? country.schemas.focalPoint  : "0"}}</td>
+						<td>{{country.schemas.authority ? country.schemas.authority  : "0"}}</td>
+						<td>{{country.schemas.measure ? country.schemas.measure  : "0"}}</td>
+						<td>{{country.schemas.database ? country.schemas.database  : "0"}}</td>
+						<td>{{country.schemas.absPermit ? country.schemas.absPermit  : "0"}}</td>
+						<td>{{country.schemas.absCheckpoint ? country.schemas.absCheckpoint  : "0"}}</td>
+						<td>{{country.schemas.absCheckpointCommunique ? country.schemas.absCheckpointCommunique  : "0"}}</td>
+						<td>{{country.schemas.nationalreport ? country.schemas.nationalreport  : "0"}}</td>		
+					<tr>
+
+			</table>	
+		</div>		
+		<div class="row" style="margin-top:10px">
+			<div class="col-xs-12" >
+				
+			</div>
+		</div>
 		<div class="row bg-grey1" style="margin:10px 0 5px 0;padding:10px 0 5px 0;border:1px solid #d5d5d5;">
 			<div class="col-sm-12 col-md-6">
 
@@ -102,24 +139,27 @@
                     </div>
 
 					<div class="dropdown" style="display:inline;">
-					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						<span>
-							<strong ng-if="rfilter==='Regional groups'">Regional groups</strong>
-							<strong ng-if="rfilter !== 'Regional groups' && rfilter" >{{rfilter}}</strong>
-						</span>
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" style="width:520px;max-height:450px; overflow:scroll;" aria-labelledby="dropdownMenu3" >
-                        <li><a translation-url  href="#" ng-click="filterRegion(null)"> Show all </a></li>
-						<div ng-repeat="region in regionFilter" >
-							<li role="separator" class="divider" ng-if="region.level == 2 || region.level == 1 || region.level == 3 || region.level == 11 || region.level == 9"></li>
-							<li><a translation-url  href="#" ng-click="filterRegion(region.id)" ng-class="{'bold':region.level == 2 || region.level == 1 || region.level == 3 || region.level == 11 || region.level == 9 }"> 
-						   		<span  ng-if="region.level != 0 && region.level != 2 && region.level != 1 && region.level != 3 && region.level != 11 && region.level != 9 ">&nbsp;&nbsp;</span> 
-						    	<span ng-if="region.level == 0">&nbsp; &nbsp; &nbsp;</span> 
-							 	&nbsp; &nbsp; {{region.name}} </a></li>
-						</div>
-                    </ul>
-                    </div>
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							<span>
+								<strong ng-if="rfilter==='Regional groups'">Regional groups</strong>
+								<strong ng-if="rfilter !== 'Regional groups' && rfilter" >{{rfilter}}</strong>
+							</span>
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" style="width:520px;max-height:450px; overflow:scroll;" aria-labelledby="dropdownMenu3" >
+							<li><a translation-url  href="#" ng-click="filterRegion(null)"> Show all </a></li>
+							<div ng-repeat="region in regionFilter" >
+								<li role="separator" class="divider" ng-if="region.level == 2 || region.level == 1 || region.level == 3 || region.level == 11 || region.level == 9"></li>
+								<li><a translation-url  href="#" ng-click="filterRegion(region.id)" ng-class="{'bold':region.level == 2 || region.level == 1 || region.level == 3 || region.level == 11 || region.level == 9 }"> 
+									<span  ng-if="region.level != 0 && region.level != 2 && region.level != 1 && region.level != 3 && region.level != 11 && region.level != 9 ">&nbsp;&nbsp;</span> 
+									<span ng-if="region.level == 0">&nbsp; &nbsp; &nbsp;</span> 
+									&nbsp; &nbsp; {{region.name}} </a></li>
+							</div>
+						</ul>
+					</div>
+					<button class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="readyForExport||loading">					
+						<i class="fa fa-table" /> Export
+				</button>
               </div>
               <div class="col-xs-6 evenly-spaced center-text hidden-xs hidden-sm" >
                             <div>
@@ -186,13 +226,13 @@
 
 				<div style="display:inline;">
 					<span style="font-size:18px;font-weight:500;" ng-class="{'color-party': country.isNPParty, 'color-grey':!country.isNPParty, 'color-inbetween': country.isNPInbetweenParty}">
-                                    {{country.name.en}}</span>
+                                    {{country.name|lstring:locale}}</span>
 				</div>
 				<div style="margin-left:35px;text-transform:uppercase;font-weight:500;">
 					<span ng-if="!country.isNPParty && !country.isNPInbetweenParty" class="color-grey" style="font-size:10px;margin-right:10px;">Non-Party</span>
 					<span ng-if="country.isNPParty" class="color-party" style="font-size:10px;margin-right:10px;">Party to the Nagoya Protocol</span>
 					<span ng-if="country.isNPInbetweenParty" class="color-inbetween" style="font-size:10px;margin-right:10px;">Ratified, not yet Party</span>
-					<span ng-if="country.isNPSignatory" class="color-pink" style="font-size:10px;margin-right:10px;">Signatory</span>
+					<span ng-if="country.isNPSignatory" style="font-size:10px;margin-right:10px;">Signatory</span>
 					<span ng-if="country.entryIntoForce" class="color-grey" style="font-size:10px;margin-right:20px;">Entry into force: {{country.entryIntoForce|formatDate}}</span>
 				</div>
 			</div>
@@ -208,6 +248,7 @@
 				<span class="color-litegrey" style="margin-right:0px;">  NR <span class="label label-default"  ng-class="{'zero':!country.schemas.nationalreport, 'bg-green':country.schemas.nationalreport}">{{country.schemas.nationalreport ? country.schemas.nationalreport  : "0"}}</span></span>
 			</div>
 		</div>
+
 
 	</div>
 	<!--end loading-->

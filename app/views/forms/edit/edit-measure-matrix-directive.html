@@ -66,6 +66,25 @@
         #measureMatrix label {
             margin-bottom: 0px;
         }
+        .measure-matrix-error span, span.measure-matrix-error{
+            color:#a94442;
+        }
+         /* .measure-matrix-error .form-control,   */
+        .measure-matrix-error .form-control.ng-invalid{
+            border-color : #a94442;
+        }
+        .measure-matrix-error .others tr:last-child .form-control.ng-invalid{
+            border : 1px solid #ccc;
+        }
+        .measure-matrix-error .others tr:last-child span{
+            color : 1px solid #ccc;
+        }
+        #measureMatrix .table-hover tr, .table-hover:hover {
+            background-color: #fff;
+        }
+        #measureMatrix .table-hover>tbody>tr:hover{
+            background-color: #f5f5f5;
+        }
     </style>
     <div id="measureMatrix">
         <div>
@@ -91,7 +110,7 @@
                 <div>
                     <table style="width:100%" cellspacing="0" cellpadding="0" class="paddingleft0 btop">
                         <tbody>
-                            <tr class=" btop paddingleft0 bg-main" id="qt_{{term.identifier}}">
+                            <tr class=" btop paddingleft0 bg-main" id="row_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F">
                                 <td style="text-align:left;vertical-align:middle;width:125px">
                                     <div class="btn-group matrix-btn bg-main">
                                         <label class="btn ">		
@@ -106,7 +125,7 @@
                                     </div>
                                 </td>
                                 <td style="text-align:left;vertical-align:middle;" id="CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F_help">
-                                    <label for="qt_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" name="CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" class="required">		
+                                    <label for="qt_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" name="qt_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" class="required">		
                                         &nbsp;		
                                          <span title="" class="bold">		
                                              <span >Does it cover genetic resources?</span>		
@@ -116,18 +135,18 @@
                                 <td style="text-align:left;vertical-align:middle">
                                 </td>
                                 <td style="width:250px;text-align:right;vertical-align:middle">
-                                    <label for="qt_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" style="width:0px;height:0px;display:inline">		
+                                    <label for="qt_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" style="width:0px;height:0px;display:inline" >		
                                          <span style="display:none">		
                                             Please select if the measure covers genetic resources.		
                                         </span>		
                                      </label>
                                 </td>
                             </tr>
-                            <tr ng-if="binding.geneticResources.answer==true">
+                            <tr ng-if="binding.geneticResources.answer==true" id="row_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F">
                                 <td></td>
                                 <td colspan="3">
                                     <div style="margin: 0  0 10px 8px;">
-                                        <span class="normalText">Please select elements from the list below and click add. Please add as many elements as necessary.</span>
+                                        <span class="normalText" name="col_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F">Please select elements from the list below and click add. Please add as many elements as necessary.</span>
                                         <label for="col_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F" style="width:0px;height:0px;display:inline">
                                             <span style="display:none">
                                                 Please select at least one element which covers genetic resource.
@@ -152,7 +171,7 @@
                                                 Please enter all references to the relevant articles related to genetic resource.
                                             </span>
                                         </label>
-                                        <table class="table  table-striped table-hover" style="padding:0;margin:0;" ng-if="binding.geneticResources.elements">
+                                        <table class="table  table-striped table-hover" style="padding:0;margin:0;" ng-if="binding.geneticResources.elements" name="sec_CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F">
                                             <tbody>
                                                 <tr ng-repeat="element in binding.geneticResources.elements">
                                                     <td class="text-center" style="vertical-align:middle;width:30px;">
@@ -160,7 +179,7 @@
                                                     </td>
                                                     <td style="vertical-align:middle">
                                                         <span ng-repeat="area in element.types">
-                                                                                {{area|term}}<span ng-if="!$last">,</span>
+                                                                                {{area|term:locale}}<span ng-if="!$last">,</span>
                                                         </span>
                                                     </td>
                                                     <td style="vertical-align:middle">
@@ -168,11 +187,11 @@
                                                     </td>
                                                     <td style="vertical-align:middle">
                                                         <span ng-repeat="area in element.areas">
-                                                                                    {{area|term}} <span ng-if="!$last">,</span>
+                                                                                    {{area|term:locale}} <span ng-if="!$last">,</span>
                                                         </span>
                                                     </td>
                                                     <td class="text-right" style="width:253px;text-align:right;vertical-align:middle">
-                                                        <div class="pull-right" km-textbox-ml="" ng-model="element.section" locales="locales" ng-required="true" placeholder="e.g.: Article 14.2 or Section I">
+                                                        <div class="pull-right" km-textbox-ml ng-model="element.section" locales="locales" required="true" placeholder="e.g.: Article 14.2 or Section I">
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -202,7 +221,7 @@
                                     </div>
                                 </td>
                                 <td style="text-align:left;vertical-align:middle;" id="B8A150E054154AD3AD97856ABD485E90_help">
-                                    <label for="qt_B8A150E054154AD3AD97856ABD485E90" name="B8A150E054154AD3AD97856ABD485E90" class="required">
+                                    <label for="qt_B8A150E054154AD3AD97856ABD485E90" name="qt_B8A150E054154AD3AD97856ABD485E90" class="required">
                                         &nbsp;
                                         <span title="" class="bold">
                                             Does it cover traditional knowledge associated with genetic resources?
@@ -217,7 +236,8 @@
                                             Please enter all references to the relevant articles related to traditional knowledge associated with genetic resources.
                                         </span>
                                     </label>
-                                    <div ng-show="identifiers['B8A150E054154AD3AD97856ABD485E90']" km-textbox-ml="" ng-model="sections['B8A150E054154AD3AD97856ABD485E90']" locales="locales" ng-required="identifiers['B8A150E054154AD3AD97856ABD485E90']" placeholder="e.g.: Article 14.2 or Section I">
+                                    <div ng-show="identifiers['B8A150E054154AD3AD97856ABD485E90']" km-textbox-ml name="sec_B8A150E054154AD3AD97856ABD485E90"
+                                    ng-model="sections['B8A150E054154AD3AD97856ABD485E90']" locales="locales" required="identifiers['B8A150E054154AD3AD97856ABD485E90']" placeholder="e.g.: Article 14.2 or Section I">
                                     </div>
                                 </td>
                             </tr>
@@ -247,17 +267,17 @@
                                 </td>
                                 <td style="text-align:left;vertical-align:middle">
                                 </td>
-                                <td style="width:250px;text-align:right;vertical-align:middle">
+                                <td style="width:250px;text-align:right;vertical-align:middle" id="sec_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD">
                                     <label for="sec_2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD" style="width:0px;height:0px;display:inline">
                                         <span style="display:none">
                                                 Please enter all references to the relevant articles related to provisions on temporal scope.
                                         </span>
                                     </label>
-                                    <div ng-show="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" km-textbox-ml="" ng-model="sections['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" locales="locales" ng-required="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" placeholder="e.g.:Article 14.2 or Section I">
+                                    <div ng-show="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" km-textbox-ml ng-model="sections['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" locales="locales" required="identifiers['2A8B467A-5FC5-41C5-8D7B-71B78E3AFEDD']" placeholder="e.g.:Article 14.2 or Section I">
                                     </div>
                                 </td>
                             </tr>
-                            <tr class="bg-main btop paddingleft0" id="qt_{{term.identifier}}">
+                            <tr class="bg-main btop paddingleft0" id="qt_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A">
                                 <td style="text-align:left;vertical-align:middle;width:125px">
                                     <div class="btn-group matrix-btn">
                                         <label class="btn">
@@ -284,7 +304,7 @@
                             </tr>
                             <tr ng-if="identifiers['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']">
                                 <td></td>
-                                <td colspan="3">
+                                <td colspan="3" name="col_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A">
                                     <label for="col_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A" style="width:0px;height:0px;display:inline">
                                         <span style="display:none">
                                             Please select at least one other elements relevant to scope of application of the measure.
@@ -295,7 +315,9 @@
                                             Please enter all references to the relevant articles related to any other elements relevant to scope of application of the measure.
                                         </span>
                                     </label>
-                                    <span onload="otherElements = otherTerms['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
+                                    <span onload="otherElements = otherTerms['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']" 
+                                        name="sec_5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A"
+                                        ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>
                                 </td>
                             </tr>
                         </tbody>
@@ -312,7 +334,7 @@
                           {{term.title||term.name | lstring:locale}} Please indicate which elements are covered.
                       </span>
         </label>
-            <table style="width:100%" cellspacing="0" cellpadding="0" id="col_{{term.identifier}}">
+            <table style="width:100%" cellspacing="0" cellpadding="0" id="col_{{term.identifier}}" name="col_{{term.identifier}}">
                 <tr ng:class="{'paddingleft0 btop bg-main' : isMainElement(term.identifier), 'btop':isYesNo(term.identifier),
                 'spacing30':!isYesNo(term.identifier), 'measureChecked' : identifiers[term.identifier]}" id="qt_{{term.identifier}}">
                     <td style="text-align:left;vertical-align:middle;width:125px" ng:if="isYesNo(term.identifier)" ng:class="{'bg-main' : isMainElement(term.identifier)}">
@@ -330,7 +352,7 @@
                     <td style="text-align:left;vertical-align:middle;" id="{{term.identifier}}_help" style="" colspan="{{isYesNo(term.identifier) ? 1 : 2}}" ng:class="{'bg-main' : isMainElement(term.identifier)}">
                         <label for="qt_{{term.identifier}}" name="{{term.identifier}}" ng-class="{'required':isYesNo(term.identifier)}">
                         &nbsp;
-                        <input type="checkbox" ng-model="identifiers[term.identifier]" ng-required="IsRequired()" value="{{term.identifier}}" ng:if="!isReadOnly(term.identifier) && !isYesNo(term.identifier)" />
+                        <input type="checkbox" ng-model="identifiers[term.identifier]" required="IsRequired()" value="{{term.identifier}}" ng:if="!isReadOnly(term.identifier) && !isYesNo(term.identifier)" />
                         <span title="{{term.description|lstring:locale}}" ng:class="{true:'bold',false:'normalText'}[isMainElement(term.identifier)]">
                               <span>{{term.title||term.name | lstring:locale}} </span>
                         <i ng-show="term.description" class="icon-question-sign"></i>
@@ -338,16 +360,16 @@
                     </label>
                         <span class="help-info" ng:if="term.description && term.description.length > 0 && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0" style="padding-left:5px">{{term.description}}</span>
                     </td>
-                    <td style="width:250px;text-align:right;vertical-align:middle">
+                    <td style="width:250px;text-align:right;vertical-align:middle" id="sec_{{term.identifier}}">
                         <label for="sec_{{term.identifier}}" style="width:0px;height:0px;display:inline">
-                        <span style="display:none">
-                              {{term.title||term.name | lstring:locale}} Please enter all references to the relevant articles.
-                          </span>
-                    </label>
+                            <span style="display:none">
+                                {{term.title||term.name | lstring:locale}} Please enter all references to the relevant articles.
+                            </span>
+                        </label>
                         <div ng-show="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0 && ((identifiers[term.identifier] && (term.narrowerTerms.length||0) == 0) || (scopeOfMeasureTerm == term.identifier && identifiers[term.identifier]==false))" km-textbox-ml
-                            ng-model="sections[term.identifier]" required locales="locales" ng-required="identifiers[term.identifier]" placeholder="e.g.: Article 14.2 or Section I"></div>
+                            ng-model="sections[term.identifier]" required locales="locales" required="identifiers[term.identifier]" placeholder="e.g.: Article 14.2 or Section I"></div>
                     </td>
-                    <!--ng-class="{'required':!sections[term.identifier]}"-->
+                    <!--ng-class="{'required':!sections[term.identifier]}"--> 
                 </tr>
 
                 <tr ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && identifiers[term.identifier]">
@@ -374,17 +396,17 @@
     </script>
 
     <script type="text/ng-template" trados-translation="true" id="/app/views/forms/edit/edit-measure.directive/abs/inner/other">
-        <table class="table table-hover" style="padding:0;margin:0;width:100%;">
+        <table class="table table-hover others" style="padding:0;margin:0;width:100%;">
             <tr ng-repeat="element in otherElements">
                 <td ng-show="otherElements.length > 1" class="text-center" style="vertical-align:middle;width:30px;">
                     <i class="fa fa-remove color-red" style="cursor:pointer" ng-if="otherElements.length > 1 && !$last" ng-click="deleteOtherElement(element, otherElements)" />
                 </td>
                 <td>
-                    <div style="max-width:300px" km-textbox-ml="" ng-model="element.name" locales="locales" ng-required="true" placeholder="other element" ng-change="appendEmptyOther(otherElements)">
+                    <div style="max-width:300px" km-textbox-ml ng-model="element.name" locales="locales" required="true" placeholder="other element" ng-change="appendEmptyOther(otherElements)">
                     </div>
                 </td>
                 <td>
-                    <div class="pull-right" style="max-width:250px;width:250px" km-textbox-ml="" ng-model="element.section" locales="locales" ng-required="true" placeholder="e.g.: Article 14.2 or Section I" ng-change="appendEmptyOther(otherElements)">
+                    <div class="pull-right" style="max-width:250px;width:250px" km-textbox-ml ng-model="element.section" locales="locales" required="true" placeholder="e.g.: Article 14.2 or Section I" ng-change="appendEmptyOther(otherElements)">
                     </div>
                 </td>
             </tr>

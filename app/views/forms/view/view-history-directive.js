@@ -50,7 +50,7 @@ define(['app', "text!views/forms/view/view-history-directive.html"], function(ap
                                 $scope.isPermit = true;
 
                                 if(_.some($scope.documents, function(document){return document.body.amendmentIntent==1;})){
-                                    $scope.$emit('evt:show-document-revoked-message',{});
+                                    $scope.$emit('event:show-document-revoked-message',{});
                                 }
                             }
 

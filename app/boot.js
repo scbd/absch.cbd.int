@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 
 window.name = 'NG_DEFER_BOOTSTRAP!';
     
@@ -44,12 +44,12 @@ require.config({
         'ngDialog'                  : 'libs/ng-dialog/js/ngDialog.min',
         'socket.io'                 : 'libs/socket.io-1.4.5/index',
         'ngInfiniteScroll'          : 'libs/ngInfiniteScroll/build/ng-infinite-scroll',
-        'angular-loggly-logger'     : 'libs/angular-loggly-logger/angular-loggly-logger',
-        'xlsx-js'                   : 'components/table-export/xlsx-js.min',
-        'file-saverjs'              : 'components/table-export/file-saverjs.min',
-        'tableexport'               : 'components/table-export/tableexport.min',
-        'blobjs'                    : 'components/table-export/blobjs.min',
-        'jzip'                      : 'components/table-export/jzip.min',
+        'angular-loggly-logger'     : 'libs/angular-loggly-logger/angular-loggly-logger',        
+        "tableexport"               : "libs/tableexport.js/dist/js/tableexport",
+        "blobjs"                    : "libs/blobjs/Blob",
+        "file-saverjs"              : "libs/file-saverjs/FileSaver",
+        "xlsx"                      : "libs/js-xlsx/dist/xlsx",
+        "jszip"                     : "libs/js-xlsx/dist/jszip",
         'angular-gravatar'          : 'libs/angular-gravatar/build/angular-gravatar',
         'angular-google-analytics'  : 'libs/angulartics-google-analytics/dist/angulartics-ga.min',
         'angular-angulartics'       : 'libs/angulartics/dist/angulartics.min',
@@ -57,7 +57,8 @@ require.config({
         'chart-js'                  : 'libs/Chart.js/Chart',
         "printThis"                 : 'libs/printThis/printThis',
         'jquery-highlight'          : 'libs/jquery-highlight/jquery.highlight',
-        'lunr'                      : 'libs/lunr.js/lunr'
+        'lunr'                      : 'libs/lunr.js/lunr',
+        'diacritics'                : 'libs/diacritic/diacritics',
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -89,9 +90,6 @@ require.config({
         'angular-block-ui'              : { 'deps': ['angular'] },
         'ngDialog'                      : { 'deps': ['angular', 'css!libs/ng-dialog/css/ngDialog.min', 'css!libs/ng-dialog/css/ngDialog-theme-default.css'] },
         'angular-loggly-logger'         : { 'deps': ['angular'] },
-        'xlsx-core'                     : { 'deps': ['jquery'] },
-        'file-saver'                    : { 'deps': ['jquery'] },
-        'tableexport'                   : { 'deps': ['jquery'] },
         'angular-gravatar'              : { 'deps': ['angular']}, 
         'angular-angulartics'           : { 'deps': ['angular']} ,
         'angular-google-analytics'      : { 'deps': ['angular', 'angular-angulartics']},
@@ -99,7 +97,8 @@ require.config({
         'chart-js'                      : { 'deps': ['angular', 'jquery'] },
         "jspdf"                         : { exports : "jsPDF" },
         'jquery-highlight'              : { 'deps': ['jquery'] },
-        'lunr'                          : { 'deps': ['jquery'] }
+        'lunr'                          : { 'deps': ['jquery'] },
+        "xlsx"                          : { "deps": ['jszip'],"exports": 'XLSX'}
     },
     packages: [
         { name: 'scbd-branding'          , location : 'components/scbd-branding' },
@@ -119,8 +118,7 @@ require.config({
 
 define("_slaask", window._slaask);
 
-require(['angular', 'angular-flex', 'angular-route', 'angular-cookies',  'bootstrap', 'domReady'
-    /*, 'main'*/], function (ng) {
+require(['angular', 'angular-flex', 'angular-route', 'angular-cookies',  'bootstrap', 'domReady'], function (ng) {
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
 
     require(['domReady!', 'app_routes', 'template'], function (document) {

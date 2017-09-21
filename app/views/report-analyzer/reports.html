@@ -1,0 +1,36 @@
+﻿<div>
+    <div class="register-content card card-1-notrans ">
+        <div class="register-content-header bg-darkgrey color-white">
+            <div style="padding:10px 10px;">
+                <h3 style="margin:0px;">Report</h3>
+            </div>
+        </div>
+        <div class="register-content-content" style="padding:5px;">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:99%">
+                                <h4 class="panel-title">Regions and Questions Settings</h4>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-primary" ng-click="analyze()">Analyze »</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="panel-body">
+                    <national-report-questions-selector report-type="$parent.selectedReportType" questions="$parent.selectedQuestions" regions="$parent.selectedRegions"></national-report-questions-selector>
+                </div>
+
+                <div class="panel-footer text-right">
+                    <button type="button" class="btn btn-primary" ng-click="analyze()">Analyze »</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

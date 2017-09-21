@@ -15,7 +15,8 @@ app.directive('loginAccount', function ($http) {
             },
             controller: ['$scope', '$http', '$window', '$location', '$browser','authentication','$rootScope','$timeout',
              function ($scope, $http, $window, $location, $browser, authentication, $rootScope,$timeout) {
-
+              
+              $scope.sessionExpiredAlert = false
               $scope.email = null;
               $scope.password = null;
               $scope.show_feed_content= false;
@@ -34,6 +35,10 @@ app.directive('loginAccount', function ($http) {
                           
                           $scope.user=user;
                           $timeout(function(){$('#loginDialog').modal('hide');});
+                          if($scope.sessionExpiredAlert){
+                            $scope.sessionExpiredAlert = false;
+                            $rootScope.$broadcast('event:sessionExpired-signIn', user);
+                          }
                     })
                     .catch(function onerror(error) {
                         $scope.password     = "";
@@ -49,6 +54,13 @@ app.directive('loginAccount', function ($http) {
                   var redirect_uri = encodeURIComponent($location.protocol()+'://'+$location.host()+':'+$location.port()+'/');
                   $window.location.href = 'https://accounts.cbd.int/signup?redirect_uri='+redirect_uri;
               };
+
+              $rootScope.$on('event:auth-sessionExpired', function(evt, data){
+                 
+                  $scope.user = undefined;
+                  $scope.sessionExpiredAlert = true;
+                  $('#loginDialog').modal({backdrop: "static", keyboard:false});
+              })
 
             }]
 

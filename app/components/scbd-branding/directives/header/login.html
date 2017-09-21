@@ -10,6 +10,10 @@
         <div class="row" ng-show="!user.isAuthenticated">
           <div class="col-xs-12">
             <div>
+                
+              <div class="alert alert-info" ng-show="sessionExpiredAlert">
+                  <strong>Session Expired.</strong> Your session has expired, please log-in to continue.
+              </div>
               <div class="alert alert-danger" ng-show="errorInvalid">
                 <strong>Login failed.</strong> The email address and password combination you entered is incorrect.
               </div>

@@ -333,7 +333,7 @@ define(['app', 'text!views/directives/workflow-std-buttons.html',
                         $('form').filter('.dirty').removeClass('dirty');
                         $scope.$emit("updateOrignalDocument", $scope.getDocumentFn());
                         documentDraftSaved(draftInfo);
-
+                        $location.path(($location.path().replace(/\/new/, '/'+ draftInfo.identifier + '/edit')));
 						return draftInfo;
 
 

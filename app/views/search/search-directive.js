@@ -27,7 +27,7 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
             function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
                     appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService) {
                     
-                    var duplicateKeyworkds = {
+                    var customKeywords = {
                         commercial : {
                             identifier  : 'commercial',
                             title : {en:'Commercial'},
@@ -39,6 +39,13 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                             title : {en:'Non commercial'},
                             identifiers : [ 'A7769659-17DB-4ED4-B1CA-A3ADD9CBD3A4',
                                             '7E3ECD30-1972-487B-A920-DDB439DC2DF6', '71E387A85A644CCCB1C2D6DDFA8493DD']
+                        },
+                        capacityBuildingResource : {
+                            identifier  : 'capacityBuildingResource',
+                            title : {en:'Capacity building resource'},
+                            identifiers : [ 'A5C5ADE8-2061-4AB8-8E2D-1E6CFF5DD793', '3813BA1A-2DE7-4DD5-8415-3B2C6737E567',
+                                           '9F48AEA0-EE28-4B6F-AB91-E0E088A8C6B7', '05FA6F66-F942-4713-BB4C-DA032C111188', 
+                                           '5831C357-95CA-4F09-963B-DF9E8AFD8C88', '5054AC52-E738-4694-A403-6490FE7D4CF4']
                         }
                     }
                             
@@ -115,6 +122,22 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                         $scope.refresh = true;
                     };
                     //===============================================================================================================================
+                    $scope.saveCustomFilter = function(filter) {
+                        
+                        if(!filter)
+                            return;
+
+                        var fid = 'custom_' + filter.id;
+
+                        if($scope.setFilters[fid] )
+                            delete $scope.setFilters[fid];
+                        else{
+                            $scope.setFilters[fid] = {'type':filter.type, 'query': filter.query, 'id':fid, name:filter.name};
+                        }
+
+                        $scope.refresh = true;
+                    };
+                    //===============================================================================================================================
                     function getFilter(id) {
                          //console.log($scope.searchFilters[id]);
                          return $scope.searchFilters[id];
@@ -155,6 +178,9 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                         _.map(filters, function(query){
                             if(query.type == 'text'){
                                 $scope.saveFreeTextFilter(query);
+                            }
+                            else if(query.type == 'custom'){
+                                $scope.saveCustomFilter(query);
                             }
                             else{
                                 $scope.saveFilter(query);
@@ -459,6 +485,11 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                                qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
                                qOr.push(buildTextQuery('text_EN_txt'    ,'partyStatus', null));
                         }
+                        //custom queries
+                        _.map(_.filter($scope.setFilters, {type:'custom'}), function(custom){
+                            if(custom.query)
+                                qAnd.push(custom.query)
+                        });
 
                         qAnd.push(buildDateFieldQuery('updatedDate_dt','publishedOn'));
 
@@ -492,6 +523,24 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                        return  q ? q : null;
                     }
 
+                    //===============================================================================================================================
+                    function buildCustomQuery(field, type, boost){
+                        var q = '';
+                        var values = [];
+
+                        if($scope.setFilters){
+                            _.each($scope.setFilters, function(item){
+
+                                if(item.type == type){
+                                    values.push($scope.setFilters[item.id].name.toLowerCase());
+                                }
+
+                            });
+                            if(values.length)
+                                q = addORCondition(field, values, boost)
+                        }
+                    return  q ? q : null;
+                    }
                   //===============================================================================================================================
                     function buildCountryQuery(field, type, boost){
                         var q = '';
@@ -536,21 +585,32 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                   //===============================================================================================================================
                     function buildFieldQuery(field, type, allFilters){
                         var q = '';
-
-                        if($scope.setFilters[type])
+                        var capacityBuildingResource;
+                        if($scope.setFilters[type]){
                             q = field + ":(" + allFilters + ")"
+                        }
                         else{
                             _.each($scope.setFilters, function(item){
                                 if(item.type == type){
-                                    if(duplicateKeyworkds[item.id])
-                                        q =  q + duplicateKeyworkds[item.id].identifiers.join(' ') + ' ';
+                                    if(customKeywords[item.id] && item.id == 'capacityBuildingResource'){
+                                        capacityBuildingResource = true;
+                                        q =  q + 'resource' + ' '
+                                    }
+                                    else if(customKeywords[item.id] && item.id != 'capacityBuildingResource')
+                                        q =  q + customKeywords[item.id].identifiers.join(' ') + ' ';
                                     else
                                         q =  q + item.id + ' ';
+                                    
                                 }
                             });
                         }
-                        if(q)
-                             return field + ":(" + q + ")";
+
+                        if(q){
+                             var newQuery = field + ":(" + q + ")";
+                             if(capacityBuildingResource)
+                                newQuery += ' AND all_terms_ss:(' +  customKeywords['capacityBuildingResource'].identifiers.join(' ') + ') ';
+                             return newQuery;
+                        }
                         else if(allFilters)
                              return field + ":(" + allFilters + ")";
                         else
@@ -636,8 +696,8 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                     //     });
                             
                         //IRCC filters
-                        addKeywordFilter(duplicateKeyworkds.commercial, 'absPermit', 'IRCC usages');
-                        addKeywordFilter(duplicateKeyworkds.nonCommercial, 'absPermit', 'IRCC usages');
+                        addKeywordFilter(customKeywords.commercial, 'absPermit', 'IRCC usages');
+                        addKeywordFilter(customKeywords.nonCommercial, 'absPermit', 'IRCC usages');
                         // $q.when(thesaurusService.getDomainTerms('usage'), function(keywords) {
                         //         _.each(keywords, function(keyword, index){
                         //             addKeywordFilter(keyword, 'absPermit', 'IRCC usages');
@@ -838,7 +898,7 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                     };
                     function isIdentifierDuplicate(keyword){                      
                         var duplicate;
-                        _.reduce(duplicateKeyworkds, function(memo, value, key){
+                        _.reduce(customKeywords, function(memo, value, key){
                             if(_.contains(value.identifiers, keyword.identifier)){
                                 duplicate = value;
                                 console.log(duplicate);
@@ -936,6 +996,8 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                         addFilter('communityProtocol', {'sort': 3, type:'reference', 'name':'Community Protocols and Procedures and Customary Laws', 'id':'communityProtocol', 'description':'Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.'});
                         addFilter('capacityBuildingInitiative', {'sort': 4, type:'reference', 'name':'Capacity-building Initiatives', 'id':'capacityBuildingInitiative', 'description':''});
 
+                        addFilter('capacityBuildingResource', {'sort': 5, type:'reference', 'name':'Capacity-building Resources', 'id':'capacityBuildingResource', 'description':''});
+                        
                         //SCBD
                         addFilter('news',  {'sort': 1,'type':'scbd', 'name':'News', 'id':'news', 'description':'ABS related news'});
                         addFilter('notification',  {'sort': 2,'type':'scbd',  'name':'Notifications', 'id':'notification', 'description':'ABS related notifcations'});

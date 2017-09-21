@@ -5,12 +5,22 @@ define(['app', 'js/common',
 'scbd-angularjs-services/generic-service', 'services/role-service'
 ], function (app) {
     app.controller('userPreferencesCtrl', ['$scope', '$http', '$timeout', '$element', 'ngDialog', 
-    '$rootScope', 'localStorageService', '$location','IGenericService', 'realm', 'roleService',
+    '$rootScope', 'localStorageService', '$location','IGenericService', 'realm', 'roleService', '$route',
     function ($scope, $http, $timeout, $element, ngDialog, $rootScope, 
-        localStorageService, $location, IGenericService, realm, roleService) {
+        localStorageService, $location, IGenericService, realm, roleService, $route) {
             var user = $rootScope.user;
 
             $scope.systemAlertsSubscription=[];
+            console.log($route.current.params)
+            if($route.current.params.tab){
+                
+                $scope.tab = $route.current.params.tab;                    
+                $element.find('.active').removeClass('active fade')
+                $timeout(function(){
+                    $element.find('#tab-content-'+$scope.tab).removeClass('fade').addClass('active fade-in');
+                    $element.find('#tab-'+$scope.tab).addClass('active')
+                }, 100);
+            }
 
             if(user.government){
 
@@ -29,7 +39,7 @@ define(['app', 'js/common',
             }
             
             $scope.$watch('tab', function(newVal){
-                if(newVal && newVal=='subscriptions' && $scope.showSystemAlerts){
+                if(newVal && newVal=='email-alerts' && $scope.showSystemAlerts){
                     // if(!$scope.systemAlertsSubscription){
                         var query = {
                             realm         : realm.value,
