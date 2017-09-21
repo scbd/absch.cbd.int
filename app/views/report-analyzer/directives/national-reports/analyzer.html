@@ -228,11 +228,14 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Question {{currentQuestion.number}}.</h4>
-                    {{currentQuestion.title|lstring}}
+                    {{currentQuestion.title|lstring}} 
+                    <span ng-if="subTitle"><br/>
+                        <b>Sub section :-</b> {{subTitle|lstring}}
+                    </span>    
                 </div>
 
                 <div class="modal-body" style="max-height:75vh;overflow-y: auto;">
-
+                   
                     <div ng-repeat="item in countriesTexts">
                         <div class="pull-right" ng-if="::item.field!='documentReferenceIDs' && item.field!='relevantDocuments'">
                             <span  ng-repeat="(locale, text) in ::item.text" class="locale" ng-class="{ selected : (item.text|locale:item.locale)==locale }">

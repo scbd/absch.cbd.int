@@ -308,7 +308,7 @@ define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyze
                 //
                 //====================================
                 nrAnalyzer.showTexts = function(countriesTexts, question) {
-
+                    $scope.subTitle = undefined;
                     var lstring = $filter('lstring');
 
                     countriesTexts = _.filter(countriesTexts||[], function(item){
@@ -329,7 +329,12 @@ define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyze
                             return t;
                         });
                     }
-
+                    if(_.head(countriesTexts).field){
+                        var field = _.head(countriesTexts).field;
+                        var subTitle = _.find(question.additionalInfo, function(info){return info.field == field})
+                        if(subTitle)
+                            $scope.subTitle = subTitle.title;
+                    }
                     $scope.currentQuestion = question;
                     $scope.countriesTexts  = countriesTexts;
                     $scope.textsDialogVisible = !_.isEmpty(countriesTexts);
