@@ -19,7 +19,7 @@
                 <div class="pull-right btn-group" ng-hide="record.pendingStatus">
                     <a type="button" class="btn" ng-hide="del" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'" > <i class="fa fa-play-circle"></i> <br> run query</a>
                     <a type="button" class="btn" ng-hide="del" ng-click="addEdit(record)" ng-disabled="!record._id" > <i class="fa fa-edit"></i> <br> edit </a>
-                    <a type="button" class="btn" ng-hide="del"  ng-click="del=true;"  ng-disabled="!record._id"> <i class="fa fa-trash-o"></i> <br> delete  </a>
+                    <a type="button" class="btn" ng-hide="del"  ng-click="del=!!record._id;"  ng-disabled="!record._id"> <i class="fa fa-trash-o"></i> <br> delete  </a>
 
                     <a type="button" class="btn color-red bold" ng-show="del" ng-click="confirmDelete(record);del=false;"> <i class="fa fa-trash-o"></i> <br> confirm delete?  </a>
                     <a type="button" class="btn" ng-show="del" ng-click="del=false;"> <i class="fa fa-times-circle"></i> <br> cancel  </a>
