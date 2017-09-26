@@ -16,25 +16,28 @@ define(['app', "text!views/register/user-preferences/user-preference-filter.html
             link: function ($scope, element, attrs) { 
             },
             controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', function ($rootScope, $scope, $http, IGenericService, realm, $timeout) {
-                var systemSearches = [{
-                    system : true,
-                    "filters": [
-                      {
-                        "type": "custom",
-                        "name": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
-                        "id": "entitiesToWhomPICGrantedCountry",
-                        "query" : 'entitiesToWhomPICGrantedCountry_ss:'
-                      }
-                    ],
-                    "queryTitle": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
-                    "meta" : {"createdOn":moment.utc().format()}
-                }];
+                var systemSearches = [];
                 $scope.user = $rootScope.user;
                 $scope.skipKeywordsFilter = false;
                 $scope.skipTextFilter = false;
                 if($scope.collection == "subscriptions"){
                     $scope.skipKeywordsFilter = true;
                     $scope.skipTextFilter = true;
+                }
+                else{
+                    systemSearches = [{
+                        system : true,
+                        "filters": [
+                        {
+                            "type": "custom",
+                            "name": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+                            "id": "entitiesToWhomPICGrantedCountry",
+                            "query" : 'entitiesToWhomPICGrantedCountry_ss:'
+                        }
+                        ],
+                        "queryTitle": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+                        "meta" : {"createdOn":moment.utc().format()}
+                    }];
                 }
 
                 function loadSavedFilters(){
@@ -46,7 +49,8 @@ define(['app', "text!views/register/user-preferences/user-preference-filter.html
                         query.realm  = realm.value;
                         IGenericService.query('v2016', 'me/' + $scope.collection, query)
                         .then(function (data) {
-                            _.first(systemSearches).filters[0].query += $scope.user.government;
+                            if($scope.collection == "saved-searches")
+                                _.first(systemSearches).filters[0].query += $scope.user.government;
                             $scope.userFilters = _.union(systemSearches, data)
                         });
                     }
@@ -71,6 +75,8 @@ define(['app', "text!views/register/user-preferences/user-preference-filter.html
                 }
                 
                 $scope.addEdit = function(existingFilter){
+                    if(!existingFilter._id)
+                        return;
                     if($rootScope.user && !$rootScope.user.isAuthenticated){
                         var signIn = $scope.$on('signIn', function(evt, data){
                                 $scope.addEdit();

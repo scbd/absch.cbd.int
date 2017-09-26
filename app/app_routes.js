@@ -137,6 +137,9 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/help/common-formats/:commonFormat?',     {templateUrl: 'views/about/common-formats.html', resolveController: true, resolveUser: true, label:'Common formats'}).
                when('/help/national-report',    {templateUrl: 'views/about/nr-faq.html', resolveController: true, resolveUser: true, label:'Information on the Interim National Report'}).
                when('/help/faqs',               {templateUrl: 'views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
+
+
+                 when('/developer',    {templateUrl: 'views/help/developer/developer.html', resolveController: true, resolveUser: true, label:'ABSCH for developers'}).
                               
                otherwise({templateUrl: 'views/shared/404.html', label:'404 Error'});
 
