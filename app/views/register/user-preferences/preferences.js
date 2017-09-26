@@ -39,7 +39,7 @@ define(['app', 'js/common',
             }
             
             $scope.$watch('tab', function(newVal){
-                if(newVal && newVal=='email-alerts' && $scope.showSystemAlerts){
+                if(newVal && newVal=='subscriptions' && $scope.showSystemAlerts){
                     // if(!$scope.systemAlertsSubscription){
                         var query = {
                             realm         : realm.value,
