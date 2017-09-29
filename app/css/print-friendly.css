@@ -1,6 +1,13 @@
-﻿ a[href]:after {
-            content: '';
-        }
+﻿
+a[href]:after {
+    content: 'none' !important;
+  } 
+
+
+a[href]:after{
+    visibility:hidden!important;;
+}
+
 
 .report-record, .document-languages,.expander, .fa-chevron-circle-up {
     display: none;
