@@ -9,12 +9,11 @@
 		}
 		
 	</style>
-	<!--$('#blaise div').filter(function() {
 
-  return $.trim($(this).text()) === ''
-
-}).remove()-->
 	<div class="record-body panel-body" help schema="viewCNA" >
+
+		<div record-options date="document.info.updatedOn"></div>
+
 		<!-- {{document.government|term}} -->
 	<div name="article-13-2"></div>
 		<legend ng-if="document.government || document.name || document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0">General information</legend>
