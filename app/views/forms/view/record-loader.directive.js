@@ -164,15 +164,8 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 						$scope.timeLaspe--;
 						$timeout(function () { closeWindow(); }, 1000)
 					}
-					//==================================
-					//
-					//==================================
-					$scope.getLocale = function () {
-						return $scope.currentLocale || $scope.$root.locale;
-					}
-					$scope.setLocale = function(locale){
-						$scope.currentLocale = locale
-					}
+					
+					
 					//==================================
 					//
 					//==================================
@@ -343,7 +336,7 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 						require([schemaDetails], function () {
 							var name = snake_case(lschema);
 							var directiveHtml =
-								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
+								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}}></DIRECTIVE>"
 									.replace(/DIRECTIVE/g, 'view-' + name);
 							$scope.$apply(function () {
 								$element.find('#schemaView')
@@ -373,25 +366,6 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 						loadDocument: $scope.loadDocument,
 						getDocument: function(){return $scope.internalDocument},
 						getDocumentInfo : function(){$scope.internalDocumentInfo}
-					}
-
-
-					$scope.print = function(){
-						$scope.printing = true;
-						require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html'], function(printObj, header, footer){						
-							$element.find('#schemaView').printThis({
-								debug:false,
-								printContainer:true,
-								importCSS:true,
-								importStyle : true,
-								pageTitle : $route.current.params.documentID+$('title').text(),
-								loadCSS : 'css/print-friendly.css',
-								header : header,
-								footer : footer
-							});	
-							$timeout(function(){$scope.printing = false;},100);
-						});
-						
 					}
 				}]
 		}
