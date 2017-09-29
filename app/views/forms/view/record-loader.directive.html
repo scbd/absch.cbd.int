@@ -96,14 +96,6 @@
             <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
         </div>
     </div>
-    <!-- <div class="row">
-        <div class="btn-group document-languages" ng-show="internalDocument.header.languages.length>1">
-            <input type="button" class="btn" ng-class="{'active' : currentLocale==locale, 'btn-info' : currentLocale!=locale}" ng-repeat="locale in internalDocument.header.languages" ng-click="setLocale(locale)" value="{{locale | uppercase}}" />
-        </div>
-        <button class="pull-right btn btn-info" ng-click="print()" ng-show="internalDocument">
-           <i class="fa fa-spin fa-spinner" ng-if="printing" /> Print
-        </button>
-    </div> -->
     <div id="schemaView" ng-show="internalDocument"></div>
 
 </div>
