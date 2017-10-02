@@ -5,8 +5,8 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
 			restrict: 'EAC',
 			replace:true,
 			template: template,
-            controller: ['$scope', '$filter','commonjs','$element', '$compile', '$timeout', '$route',
-                function($scope, $filter, commonjs, $element, $compile, $timeout, $route){
+            controller: ['$scope', '$filter','commonjs','$element', '$compile', '$timeout', '$route', '$location',
+                function($scope, $filter, commonjs, $element, $compile, $timeout, $route, $location){
 
 				$scope.getUniqueID = function(document){
 					if(!document)
@@ -77,6 +77,10 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
                         $timeout(function(){$scope.printing = false;},100);
                     });
                     
+                }
+                $scope.showReportedRecord = function(){
+                    return !/^\/register\/\w{2,4}\/new/.test($location.path()) &&
+                           !/^\/register\/\w{2,4}\/([a-z])\w.+\/edit/i.test($location.path());
                 }
 			}]
 		};

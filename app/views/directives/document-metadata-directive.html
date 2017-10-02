@@ -2,9 +2,11 @@
 		<div class="row">
 			<div class="col-xs-12">
 
-                <a translation-url  ng-href="/database/{{(document.schema_s||document.header.schema)|urlSchemaShortName}}/{{getUniqueIDForUrl(document)}}" 
+                <a translation-url  
+                ng-href="/database/{{(document.schema_s||document.header.schema)|urlSchemaShortName}}/{{getUniqueIDForUrl(document)}}" 
 				target="_new_" class="uid">
-                <i class="fa fa-external-link-square"></i> {{getUniqueID(document)}} </a>
+                <i class="fa fa-external-link-square"></i> {{getUniqueID(document)}} 
+                </a>
                 
 				<span class="pull-right  hidden-print" >
                     
@@ -15,41 +17,10 @@
                     </a>
                     &nbsp; <span style="color:#ddd"> | </span> &nbsp;
 
-					<a translation-url  href="#" class="record-link-style color-red" ng-click="loadReportRecord(document.schema_s||document.header.schema,document.identifier_s||document.header.identifier)" ><i class="fa fa-exclamation-triangle"></i> Report</a>
+					<a ng-if="showReportedRecord()" translation-url  href="#" class="record-link-style color-red" ng-click="loadReportRecord(document.schema_s||document.header.schema,document.identifier_s||document.header.identifier)" ><i class="fa fa-exclamation-triangle"></i> Report</a>
 				</span>
 				<div id="divReportRecord"></div>
 			</div>
 		</div>
 
-		<!-- <div class="row">
-		 <div class="col-xs-12">
-
-             <div ng-show="!document.info.createdBy" style="padding-left:10px;">
-                <table style="width:100%" class="table table-condensed" >
-                <tr>
-                    <th class="color-grey hidden-xs" style="width:250px">Updated on</th>
-                    <th class="color-grey" style="width:250px">Record Identifier</th>
-                    <th class="color-grey hidden-xs" >Action</th>
-                </tr>
-                <tr>
-                    <td class="hidden-xs" style="width:250px" ng-class="{'bold': $index == 0}">
-                        <strong>{{document.info.updatedOn | formatDateWithTime}}</strong>
-                    </td>
-                     <td style="width:250px">
-                        <a translation-url  target="_new" href="/database/{{getDocumentSchema(document.header.schema)}}/{{getDocumentId(document)}}">
-				 			<span >{{document.info | uniqueIDWithoutRevision }}</span>
-							<span ng-show="document.id">{{getDocumentId(document)}}</span>
-					    </a>
-						<span ng-show="!document.info  && !document.id">not yet assigned</span>
-                    </td>
-                    <td class="hidden-xs">
-                      <span ng-show="document.id" class="bold color-green"> PUBLISHED</span>
-                      <span ng-show="!document.info  && !document.id" class="bold">not yet published</span>
-                    </td>
-                </tr>
-                </table>
-             </div>
-            <div view-history ng-if="document.info.updatedBy"  document-id="document.header.identifier" load-documents="true" government="document.government.identifier"></div>
-		</div>
-	</div>-->
 </div>
