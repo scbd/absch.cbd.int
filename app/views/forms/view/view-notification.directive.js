@@ -1,4 +1,5 @@
-define(['app', 'text!views/forms/view/view-notification.directive.html',], function (app, template) {
+define(['app', 'text!views/forms/view/view-notification.directive.html',
+'views/directives/record-options'], function (app, template) {
 
 app.directive('viewNotification', [function() {
 	return {

@@ -22,9 +22,9 @@ app.directive('recordOptions', ['locale', function (appLocale) {
                         else if(_.contains($scope.document.header.languages, 'zh')) $scope.currentLocale = 'zh';
                     }
                 }
-                if($scope.$parent.internalDocumentInfo)
-                    $scope.updatedOn = $scope.$parent.internalDocumentInfo.updatedOn;
-                    
+                if((($scope.document||{}).createdDate_dt) || $scope.$parent.internalDocumentInfo)
+                    $scope.updatedOn = ($scope.document||{}).createdDate_dt || $scope.$parent.internalDocumentInfo.updatedOn;
+
                 $scope.setCurrentLocale = function(loc){
                     $scope.currentLocale=loc
                     $scope.locale=loc
