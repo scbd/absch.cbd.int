@@ -1,6 +1,6 @@
 ﻿<div >
 <style>
-.date{
+.record-Options-div .date{
     font-size:11px!important;
     font-weight: 500;
     text-transform: uppercase;
@@ -11,7 +11,7 @@
 
     border: 1px solid rgba(0, 0, 0, 0.15);
 }
-.label{
+.record-Options-div .label{
     font-size:11px!important;
     font-weight: 500;
     text-transform: uppercase;
@@ -19,23 +19,22 @@
     padding:0!important;
 
 }
-.btn-lang{
+.record-Options-div .btn-lang{
     /* background-color: #f5f5f5; */
     font-size:11px!important;
     font-weight: 500;
 }
 </style>
-<div>
+<div class="record-Options-div">
     <div class="pull-right">
-            <span class="label" ng-show="document.header.languages.length>1">languages available:</span>
-            <div class="btn-group  btn-group-xs" role="group" ng-show="document.header.languages.length>1">
-                
+            <span class="label" ng-if="document.header.languages.length>1">languages available:</span>
+            <div class="btn-group  btn-group-xs" role="group" ng-if="document.header.languages.length>1">                
                 <button type="button" class="btn btn-lang btn-default btn-xs" ng-class="{'active' : currentLocale==loc, 'btn-info' : currentLocale!=loc}" 
                  ng-repeat="loc in document.header.languages"
                  ng-click="setCurrentLocale(loc)" >{{loc | uppercase}}</button>
             </div>
         <!-- if languages add spacer-->
-         <span ng-show="document.header.languages.length>1" style="color:#ddd"> &nbsp;  |  &nbsp; </span>
+         <span ng-show="document.header.languages.length>1 && updatedOn" style="color:#ddd"> &nbsp;  |  &nbsp; </span>
     
 
          <span ng-if="updatedOn" class="label  hidden-xs">published:</span>
