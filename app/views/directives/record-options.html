@@ -12,7 +12,7 @@
     border: 1px solid rgba(0, 0, 0, 0.15);
 }
 .label{
-    font-size:10px!important;
+    font-size:11px!important;
     font-weight: 500;
     text-transform: uppercase;
     color: #666;
@@ -27,7 +27,7 @@
 </style>
 <div>
     <div class="pull-right">
-            <span class="label">languages available:</span>
+            <span class="label" ng-show="document.header.languages.length>1">languages available:</span>
             <div class="btn-group  btn-group-xs" role="group" ng-show="document.header.languages.length>1">
                 
                 <button type="button" class="btn btn-lang btn-default btn-xs" ng-class="{'active' : currentLocale==loc, 'btn-info' : currentLocale!=loc}" 
@@ -35,7 +35,7 @@
                  ng-click="setCurrentLocale(loc)" >{{loc | uppercase}}</button>
             </div>
         <!-- if languages add spacer-->
-         &nbsp; <span style="color:#ddd"> | </span> &nbsp;
+         <span ng-show="document.header.languages.length>1" style="color:#ddd"> &nbsp;  |  &nbsp; </span>
     
 
          <span ng-if="updatedOn" class="label  hidden-xs">published:</span>

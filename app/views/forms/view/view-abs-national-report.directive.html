@@ -6,32 +6,30 @@
 	</div>
 	<div class="record-body panel-body">
 
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<label>Country</label>
-			</div>
-			<div class="panel-body">
-				<div>
-					<label>1. Country</label>
-					<div class="km-value"  ng-show="document.government">{{document.government|term}}</div>
-					<div class="km-value"  ng-hide="document.government">No country selected</div>
-				</div>
-			</div>
-		</div>
+		<div record-options date="document.info.updatedOn"></div>
+		<br><br>
+	
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				<label>2. General information</label>
+				<label>General information</label>
 			</div>
 			<div class="panel-body">
+
+				<div>
+					<label>Country</label>
+					<div class="km-value"  ng-show="document.government">{{document.government|term}}</div>
+					<div class="km-value"  ng-hide="document.government">No country selected</div>
+				</div>
+
 				<div ng-show="document.title">
-					<label>Title of this national report</label>
+					<label>1. Title of this national report</label>
 					<div class="km-value">
 						<strong>{{document.title | lstring:locale}}</strong>
 					</div>
 				</div>
 				<div>
-					<label>Contact person</label>
+					<label>2. Contact person</label>
 					<div class="km-value" view-contact-reference ng-model="document.contact" locale="locale"  ng-if="document.contact">
 					</div>
 					<div  class="km-value"  ng-if="!document.contact">No Contact provided</div>

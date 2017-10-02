@@ -1,4 +1,6 @@
-define(['app', 'text!views/forms/view/view-focalpoint.directive.html'], function (app, template) {
+define(['app', 'text!views/forms/view/view-focalpoint.directive.html', 
+'views/directives/record-options',
+], function (app, template) {
 
 app.directive('viewFocalPoint', [function() {
 	return {
