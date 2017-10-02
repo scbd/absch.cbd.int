@@ -1,4 +1,6 @@
-define(['app', 'text!views/forms/view/view-pressrelease.directive.html',], function (app, template) {
+define(['app', 'text!views/forms/view/view-pressrelease.directive.html',
+'views/directives/record-options',
+], function (app, template) {
 
 app.directive('viewPressRelease', [function() {
 	return {
