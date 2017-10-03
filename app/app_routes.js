@@ -139,6 +139,8 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/help/faqs',               {templateUrl: 'views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
 
 
+                when('/about/getting-started',                   { templateUrl: 'views/about/getting-started.html',                        label:'Getting Started Using the ABSCH',             reloadOnSearch : false,    resolveController:true, resolveUser : true}).
+
                  when('/developer',    {templateUrl: 'views/help/developer/developer.html', resolveController: true, resolveUser: true, label:'ABSCH for developers'}).
                               
                otherwise({templateUrl: 'views/shared/404.html', label:'404 Error'});

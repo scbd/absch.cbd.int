@@ -71,6 +71,7 @@
       color:#333;
       /*font-style: italic;*/
       font-weight: normal;
+      padding:0;
     }
     
     #MainControl .nav li a:hover,
@@ -127,7 +128,7 @@
     
 
     #MainControl .nav> li> a {
-      padding: 3px 3px 3px 3px;
+      padding: 0px;
     }
 
 
@@ -262,5 +263,5 @@
     }
     .other-links *{
       font-weight: normal!important;
-      font-size: 12px;
+      /* font-size: 12px; */
     }
