@@ -24,7 +24,9 @@ function(templateHtml, app, _, require) {
             scope :  {
                 selectedReportType : '=reportType',
                 selectedQuestions : '=questions',
-                selectedRegions : '=regions'
+                selectedRegions : '=regions',
+                selectedRegionsPreset : '=regionsPreset',
+                selectedRegionsPresetFilter : '=regionsPresetFilter'
             },
             link: function ($scope) {
 
@@ -87,8 +89,8 @@ function(templateHtml, app, _, require) {
                 //
                 //====================================
                 $scope.$watchCollection('selectedRegions', function() {
-                    console.log( $scope.regionsPreset)
-                    if(_.includes(['npParties', 'npNonParties'], $scope.regionsPreset))
+                    // console.log( $scope.selectedRegionsPreset)
+                    if(_.includes(['npParties', 'npNonParties'], $scope.selectedRegionsPreset))
                         return;
 
                     $scope.selectedRegions = $scope.selectedRegions || DefaultRegions.concat();
@@ -98,9 +100,9 @@ function(templateHtml, app, _, require) {
                     var hasCountry = _.any(selection, function(id) { return id.length<=3; });
                     var cbdRegions = selection.length == DefaultRegions.length && _.intersection(selection, DefaultRegions).length == DefaultRegions.length;
 
-                         if(hasCountry) $scope.regionsPreset = "countries";
-                    else if(cbdRegions) $scope.regionsPreset = "cbdRegions";
-                    else                $scope.regionsPreset = "regions";
+                         if(hasCountry) $scope.selectedRegionsPreset = "countries";
+                    else if(cbdRegions) $scope.selectedRegionsPreset = "cbdRegions";
+                    else                $scope.selectedRegionsPreset = "regions";
                 });
 
                 //====================================
@@ -121,26 +123,24 @@ function(templateHtml, app, _, require) {
                 //====================================
                 $scope.regionsPresetChanged = function () {
 
-                    var preset = $scope.regionsPreset;
-
-                    if(preset=="cbdRegions") { $scope.selectedRegions = DefaultRegions.concat(); }
+                    var preset = $scope.selectedRegionsPreset;
+                    $scope.selectedRegionsPresetFilter = [];
+                    if(preset=="cbdRegions" || preset=="npParties" || preset=="npNonParties") { $scope.selectedRegions = DefaultRegions.concat(); }
                     if(preset=="countries")  { $scope.selectedRegions = []; $scope.showCountries = true; }
                     if(preset=="regions")    { $scope.selectedRegions = []; $scope.showRegions = true; }
                     if(preset=="npParties")  { 
-                        $scope.selectedRegions = [];
                         _.each(_.sortBy(_.values($scope.npCountries), "title."+locale), function(country){
                             if(country.isNPParty)
-                                $scope.selectedRegions.push(country.code)
+                                $scope.selectedRegionsPresetFilter.push(country.code)
                         }); 
                     }
                     if(preset=="npNonParties")  { 
-                        $scope.selectedRegions = [];
                         _.each(_.sortBy(_.values($scope.npCountries), "title."+locale), function(country){
                             if(!country.isNPParty)
-                                $scope.selectedRegions.push(country.code)
+                                $scope.selectedRegionsPresetFilter.push(country.code)
                         }); 
                     }
-                    console.log($scope.selectedRegions)
+                    // console.log($scope.selectedRegions)
                 };
 
                 //====================================

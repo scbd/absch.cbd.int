@@ -34,7 +34,9 @@ define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyze
                 maxDate: '=maxDate',
                 selectedRegions: '=regions',
                 selectedQuestions: '=questions',
-                selectedReportType: '=reportType'
+                selectedReportType: '=reportType',
+                selectedRegionsPreset: '=regionsPreset',
+                selectedRegionsPresetFilter: '=regionsPresetFilter'
             },
             link: function ($scope, $element, attr, nrAnalyzer) {
                 
@@ -402,10 +404,15 @@ define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyze
                         reportType : $scope.selectedReportType,
                         regions : $scope.selectedRegions,
                         maxDate : $scope.maxDate,
-                        questions : []
+                        questions : [],
+                        regionsPresetFilter : $scope.selectedRegionsPresetFilter
                     });
 
                     var query  = { 'government_REL' : { $in: options.regions } };
+
+                    if(options.regionsPresetFilter && options.regionsPresetFilter.length > 0)
+                          query["government.identifier"] = { $in: options.regionsPresetFilter };
+
                     var fields = _(options.questions).union(['government']).reduce(function(ret, key) {
                         ret[key] = 1;
                         return ret;

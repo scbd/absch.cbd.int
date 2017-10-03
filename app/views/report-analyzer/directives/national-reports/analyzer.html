@@ -136,6 +136,15 @@
                 </li>
             </ul>
         </div>
+        <div class="btn-group pull-right" ng-if="selectedRegionsPreset">                
+            <span ng-switch="selectedRegionsPreset" class="btn btn-info">
+                <span ng-switch-when="cbdRegions">Breakdown by CBD regions</span>
+                <span ng-switch-when="countries">Select countries</span>
+                <span ng-switch-when="regions">Select regions</span>
+                <span ng-switch-when="npParties">Breakdown by Nagoya Protocol Parties</span>
+                <span ng-switch-when="npNonParties">Breakdown by Nagoya Protocol Non Parties</span>
+            </span>
+        </div>
     </div>
 
     <div id="filterBox" class="filter panel panel-primary" ng-show="filter">

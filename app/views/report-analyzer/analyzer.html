@@ -40,8 +40,9 @@
                     </table>
 
                 </div>
-
-                <national-report-questions-selector report-type="selectedReportType" questions="selectedQuestions" regions="selectedRegions"></national-report-questions-selector>
+                <national-report-questions-selector report-type="selectedReportType" questions="selectedQuestions" regions="selectedRegions"
+                regions-preset="selectedRegionsPreset"
+                regions-preset-filter="selectedRegionsPresetFilter"></national-report-questions-selector>
 
                 <div class="panel-footer text-right">
                     <button type="button" class="btn btn-primary" ng-click="analyze(true)">Analyze »</button>
@@ -50,7 +51,8 @@
             </div>
 
             <national-report-analyzer ng-if="showAnalyzer" max-date="$parent.maxDate" report-type="$parent.selectedReportType" questions="$parent.selectedQuestions"
-                regions="$parent.selectedRegions"></national-report-analyzer>
+                regions="$parent.selectedRegions" regions-preset="$parent.selectedRegionsPreset"
+                regions-preset-filter="$parent.selectedRegionsPresetFilter"></national-report-analyzer>
 
         </div>
 
