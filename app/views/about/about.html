@@ -1,9 +1,9 @@
 <div id="aboutPage" ng-controller="AboutNewController">
   <link rel="stylesheet" ng-href="/app/css/about.css">
   <style>
-    #nav li:nth-child(2) {
+    /* #nav li:nth-child(2) {
       padding-top: 5px;
-    }
+    } */
 
     #nav li a,
     .other-links {
@@ -14,7 +14,11 @@
       max-width: 22.9%;
       width: 100%;
     }
-
+    @media (max-width: 768px) {
+        .affix {
+            position: static;
+        }
+    }
 
     .youtube {
       background-position: center;
@@ -49,9 +53,9 @@
     <div class="container-fluid">
       <div class="row-fluid" scroll-spy>
 
-        <div class="col-md-3">
+        <div class="col-sm-3">
           <div class=" scrollspy sidenav">
-            <ul id="nav" class="nav hidden-xs hidden-sm ">
+            <ul id="nav" class="nav">
               <!--<li style="background-color: #1fa65d;padding: 5px;"> style="border: 1px solid #1fa65d;"
                 <search-content ng-if="ready"></search-content>
               </li>-->
@@ -152,7 +156,7 @@
           </div>
         </div>
 
-        <div class="col-md-9 content">
+        <div class="col-sm-9 content">
           <section id="intro-section">
             <div class="intro-header">
               <h1 class="main">Introduction to the Access and Benefit-Sharing Clearing-House (ABSCH)</h1>
