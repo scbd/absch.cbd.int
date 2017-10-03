@@ -52,9 +52,9 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                             $scope.model=[];
 
                         if(!$scope.isInModel(doc.identifier_s)){
-							var document = {identifier: doc.identifier_s};
-                            if(doc.schema_s != "focalPoint")
-                                document.identifier += "@"+ doc._revision_i;
+                            var document = {identifier: doc.identifier_s};
+                            
+                            document.identifier += "@"+ doc._revision_i;
 
 							if($scope.type == 'radio')
 								$scope.model = document;
@@ -96,35 +96,27 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
                 if ($scope.model){
                     
 					if($scope.type == 'radio'){
-                        if(focalPointRegex.test($scope.model.identifier)){
-                            docs.push(commonjs.getReferenceRecordIndex('NFP', $scope.model.identifier))
-                        }
-                        else
-						    docs.push(IStorage.documents.get($scope.model.identifier));
+                        var config;                            
+                         if(focalPointRegex.test($scope.model.identifier))
+                            config = {headers  : {realm:undefined}};
+						docs.push(IStorage.documents.get($scope.model.identifier, undefined, config));
 					}
 					else{
 	                    _.each($scope.model, function (mod) {
 							if(mod.identifier){
-
-                                if(focalPointRegex.test(mod.identifier)){
-                                    docs.push(commonjs.getReferenceRecordIndex('NFP', mod.identifier))
-                                }
-                                else
-								    docs.push(IStorage.documents.get(mod.identifier));
+                                var config;
+                                if(focalPointRegex.test(mod.identifier))
+									config = {headers  : {realm:undefined}};
+								docs.push(IStorage.documents.get(mod.identifier,undefined, config));
                             }
 	                    });
 					}
 
 					$q.all(docs)
 					.then(function(results){
-						// if($scope.type == 'radio'){
-						// 	$scope.selectedDocuments = results.data || {};
-						// }
-						// else{
 							$scope.selectedDocuments = _.map(results, function(result){
                                                             return result.data || {};
                                                         });
-						// }
 					});
 
                     if($scope.model.length === 0 || _.isEmpty($scope.model))

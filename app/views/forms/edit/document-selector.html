@@ -36,8 +36,8 @@
                             <i class="fa fa-times"></i></a>
                     </td>
                     <td style="margin-bottom:20px;">
-                        <div ng-if="isContact(model) || isAuthority(model) || doc.schema_s== 'focalPoint'" view-contact-reference ng-model="model" locale="locale" class="km-value"></div>
-                        <div ng-if="!isContact(model) && !isAuthority(model) && doc.schema_s!= 'focalPoint'" view-default-reference ng-model="model.identifier" locale="locale"></div>
+                        <div ng-if="isContact(model) || isAuthority(model) || isFocalPoint(model)" view-contact-reference ng-model="model" locale="locale" class="km-value"></div>
+                        <div ng-if="!isContact(model) && !isAuthority(model) && !isFocalPoint(model)" view-default-reference ng-model="model.identifier" locale="locale"></div>
                     </td>
                 </tr>
             </table>

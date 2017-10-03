@@ -56,24 +56,12 @@ define(['app', "text!views/forms/view/view-contact-reference.directive.html",'un
 							$scope.document = newVal.document;
 						}
 						else{
-							 var focalPointRegex = /^52000000cbd022/;
-							if(focalPointRegex.test(newVal.identifier)){
-								commonjs.getReferenceRecordIndex('NFP', newVal.identifier)
-								.then(function(result){
-									if(result.data && result.data.schema_s == 'focalPoint'){
-										result.data.addressHTML = result.data.description_EN_t.replace(/\n/g, '<br/>');
-										result.data.phones = result.data.telephone_ss;
-										result.data.country = {identifier:result.data.government_s};
-										result.data.emails = result.data.email_ss;
-										result.data.faxes = result.data.fax_ss;
-										result.data.firstName = result.data.title_EN_t;
-										$scope.document = result.data;
-									}
-								})
 							
-							}
-							else{
-								storage.documents.get(newVal.identifier, {info:true})
+								var config;
+								var focalPointRegex = /^52000000cbd022/;
+								if(focalPointRegex.test(newVal.identifier))
+									config = {headers  : {realm:undefined}};
+								storage.documents.get(newVal.identifier, {info:true}, config)
 									.then(function(data){
 										$scope.documentForUID = angular.copy(data.data);
 										$scope.document = angular.copy(data.data.body);
@@ -88,7 +76,6 @@ define(['app', "text!views/forms/view/view-contact-reference.directive.html",'un
 										}
 
 									});
-							}
 						}
 					}
 					else if(newVal.header || newVal.source) {
