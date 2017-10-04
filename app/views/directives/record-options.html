@@ -11,7 +11,7 @@
 
     border: 1px solid rgba(0, 0, 0, 0.15);
 }
-.record-Options-div .label{
+.record-Options-div .xlabel{
     font-size:11px!important;
     font-weight: 500;
     text-transform: uppercase;
@@ -37,7 +37,7 @@
          <span ng-show="document.header.languages.length>1 && updatedOn" style="color:#ddd"> &nbsp;  |  &nbsp; </span>
     
 
-         <span ng-if="updatedOn" class="label  hidden-xs">published:</span>
+         <span ng-if="updatedOn" class="xlabel">published:</span>
          <span ng-if="updatedOn" class="date"> {{updatedOn | formatDate}}</span>
   
     </div>
