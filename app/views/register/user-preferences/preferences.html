@@ -155,10 +155,10 @@
 							<div class="row panel panel-white profile-widget tabs" style="border:0;">
 								<div class="block ">
 									<ul class="nav nav-tabs nav-justified push-20">
-										<li class="active" id="tab-setting">
+										<!-- <li class="active" id="tab-setting">
 											<a href="#tab-content-setting" ng-click="tab='setting'" data-toggle="tab"><span class="glyphicon glyphicon-cog"></span> Settings </a>
-										</li>
-										<li id="tab-subscriptions">
+										</li> -->
+										<li id="tab-subscriptions"  class="active">
 											<a href="#tab-content-subscriptions" ng-click="tab='subscriptions'" data-toggle="tab"><span class="glyphicon glyphicon-envelope"></span> Email Alerts</a>
 										</li>
 										<li id="tab-saved-searches">
@@ -167,7 +167,7 @@
 									</ul>
 
 									<div class="tab-content">
-										<div class="tab-pane fade-in panel-body active " id="tab-content-setting">
+										<!-- <div class="tab-pane fade-in panel-body active " id="tab-content-setting">
 											<h3 class="color-red text-center  alert-warning" style="padding:20px;"> Coming soon. This section is  under development </h3>
 											<div>
 												<div class="panel-heading">
@@ -200,8 +200,8 @@
 													<button class="btn btn-info pull-right" type="button" disabled>Update settings</button>
 												</div>
 											</div>
-										</div>
-										<div class="tab-pane fade panel-body" id="tab-content-subscriptions" ng-if="tab==='subscriptions'">
+										</div> -->
+										<div class="tab-pane fade-in panel-body active" id="tab-content-subscriptions" ng-if="tab==='subscriptions'">
 											<div>
 												<div class="panel-heading">
 													<h1>Email Alerts</h1>
