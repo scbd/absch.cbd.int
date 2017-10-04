@@ -69,12 +69,12 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
                             printContainer:true,
                             importCSS:true,
                             importStyle : true,
-                            pageTitle : $route.current.params.documentID+$('title').text(),
+                            pageTitle : ($route.current.params.documentID||'')+$('title').text(),
                             loadCSS : 'css/print-friendly.css',
                             header : header,
                             footer : footer
                         });	
-                        $timeout(function(){$scope.printing = false;},100);
+                        $timeout(function(){$scope.printing = false;},1000);
                     });
                     
                 }
