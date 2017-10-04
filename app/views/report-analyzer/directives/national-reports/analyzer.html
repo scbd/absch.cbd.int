@@ -103,7 +103,7 @@
             background-color: #fff!important;
         }
         @media print{
-            #returnQuestions, #btnPrint{
+            #returnQuestions, #btnPrint, #btnClose{
                 display:none
             }
         }
@@ -142,11 +142,11 @@
             </ul>
         </div>
         <div class="btn-group pull-right">   
-            <a href="#"  ng-click="print()" class="btn btn-primary record-link-style" id="btnPrint">
+            <button  ng-click="print('#secNrAnalyzer')" class="btn btn-primary record-link-style" id="btnPrint">
                 <i class="fa fa-spin fa-spinner" ng-if="printing" /> 
                 <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
                 Print 
-            </a>             
+            </button>             
             <span ng-switch="selectedRegionsPreset" class="btn btn-info">
                 <span ng-switch-when="cbdRegions">Breakdown by CBD regions</span>
                 <span ng-switch-when="countries">Select countries</span>
@@ -243,7 +243,7 @@
     <!-- TEXTS DISPLAY -->
     <div class="modal fade" id="textsDialog">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content" id="textsDialog-model-content">
 
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -288,7 +288,12 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button  ng-click="print('#textsDialog-model-content')" class="btn btn-primary record-link-style" id="btnPrint">
+                            <i class="fa fa-spin fa-spinner" ng-if="printing" /> 
+                            <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
+                            Print 
+                        </button>   
+                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">Close</button>
                 </div>
             </div>
         </div>

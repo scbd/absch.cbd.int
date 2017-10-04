@@ -251,11 +251,10 @@ function(templateHtml, app, _, require, $) { 'use strict';
                 //
                 //
                 //====================================
-                $scope.print = function() {
+                $scope.print = function(sectionToPrint) {
                     $scope.printing = true;
-                    if(_.some($scope.sections, function(section){return !section.expanded})){
+                    if(sectionToPrint =='#secNrAnalyzer' && _.some($scope.sections, function(section){return !section.expanded})){
                         _.each($scope.sections, function(section){
-                            console.log(section)
                             if(!section.expanded){
                                 $timeout(function() {
                                     $element.find('#qt_'+section.key).click();
@@ -268,7 +267,10 @@ function(templateHtml, app, _, require, $) { 'use strict';
                         
                         require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html',
                         'css!/app/css/print-friendly'], function(printObj, header, footer){						
-                            $element.parent().parent().parent().find('#secNrAnalyzer').printThis({
+                            var printObject = $element.parent().parent().parent().find('#secNrAnalyzer');
+                            if(sectionToPrint)
+                                printObject = $element.find(sectionToPrint)
+                            printObject.printThis({
                                 debug:false,
                                 printContainer:true,
                                 importCSS:true,
