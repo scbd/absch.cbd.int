@@ -49,9 +49,12 @@ define(['app', "text!views/register/user-preferences/user-preference-filter.html
                         query.realm  = realm.value;
                         IGenericService.query('v2016', 'me/' + $scope.collection, query)
                         .then(function (data) {
-                            if($scope.collection == "saved-searches")
-                                _.first(systemSearches).filters[0].query += $scope.user.government;
-                            $scope.userFilters = _.union(systemSearches, data)
+                            if($scope.collection == "search-queries" && $scope.user.government){
+                                _.first(systemSearches).filters[0].query += $scope.user.government;                            
+                                $scope.userFilters = _.union(systemSearches, data);
+                            }
+                            else
+                            $scope.userFilters = data;
                         });
                     }
                 }
