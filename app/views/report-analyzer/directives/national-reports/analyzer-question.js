@@ -348,7 +348,6 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                         .filter(function(r) { return !!r[question.key]; })
                         .pluck('government')
                         .value();
-                    console.log(restrictedCountries.length)
                     if (previousReports && questionsMapping) {
 
                         //Only allow countries who answered to this question in both report set

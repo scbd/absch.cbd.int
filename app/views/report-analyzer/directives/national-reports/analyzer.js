@@ -1,6 +1,6 @@
 define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 'scbd-angularjs-filters', 
 '../../filters/cases', 'scbd-angularjs-services/locale', 'views/directives/view-reference-document'],
-        function(templateHtml, app, _, require, $) { 'use strict';
+function(templateHtml, app, _, require, $) { 'use strict';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
@@ -24,7 +24,8 @@ define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyze
     //
     //
     //==============================================
-    app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', function($http, $q, locale, $filter) {
+    app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$timeout',
+     function($http, $q, locale, $filter, $timeout) {
         return {
             restrict : 'E',
             replace : true,
@@ -245,6 +246,44 @@ define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyze
                 $scope.showSettings = function() {
                     $scope.$emit('nr.analyzer.settings');
                 };
+
+                //====================================
+                //
+                //
+                //====================================
+                $scope.print = function() {
+                    $scope.printing = true;
+                    if(_.some($scope.sections, function(section){return !section.expanded})){
+                        _.each($scope.sections, function(section){
+                            console.log(section)
+                            if(!section.expanded){
+                                $timeout(function() {
+                                    $element.find('#qt_'+section.key).click();
+                                },0) 
+                            }
+                        });
+                        $timeout($scope.print, 1000);
+                    }
+                    else{
+                        
+                        require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html',
+                        'css!/app/css/print-friendly'], function(printObj, header, footer){						
+                            $element.parent().parent().parent().find('#secNrAnalyzer').printThis({
+                                debug:false,
+                                printContainer:true,
+                                importCSS:true,
+                                importStyle : true,
+                                pageTitle : 'Report Analyzer : Interim National Report on the Implementation of the Nagoya Protocol',
+                                loadCSS : 'css/print-friendly.css',
+                                header : header,
+                                footer : footer
+                            });	
+                            $timeout(function(){$scope.printing = false;},1000);
+                        });
+                    }
+                };
+
+                
 
                 //====================================
                 //

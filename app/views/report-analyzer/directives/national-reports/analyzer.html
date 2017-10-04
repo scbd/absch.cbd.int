@@ -102,6 +102,11 @@
         .table-hover:hover {
             background-color: #fff!important;
         }
+        @media print{
+            #returnQuestions, #btnPrint{
+                display:none
+            }
+        }
     </style>
 
     <div ng-show="sections" style="margin-bottom:5px" id="nrAnalyzer">
@@ -136,7 +141,12 @@
                 </li>
             </ul>
         </div>
-        <div class="btn-group pull-right" ng-if="selectedRegionsPreset">                
+        <div class="btn-group pull-right">   
+            <a href="#"  ng-click="print()" class="btn btn-primary record-link-style" id="btnPrint">
+                <i class="fa fa-spin fa-spinner" ng-if="printing" /> 
+                <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
+                Print 
+            </a>             
             <span ng-switch="selectedRegionsPreset" class="btn btn-info">
                 <span ng-switch-when="cbdRegions">Breakdown by CBD regions</span>
                 <span ng-switch-when="countries">Select countries</span>
@@ -145,6 +155,7 @@
                 <span ng-switch-when="npNonParties">Breakdown by Nagoya Protocol Non Parties</span>
             </span>
         </div>
+       
     </div>
 
     <div id="filterBox" class="filter panel panel-primary" ng-show="filter">
