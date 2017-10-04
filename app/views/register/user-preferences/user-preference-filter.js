@@ -75,7 +75,7 @@ define(['app', "text!views/register/user-preferences/user-preference-filter.html
                 }
                 
                 $scope.addEdit = function(existingFilter){
-                    if(!existingFilter._id)
+                    if(existingFilter && !existingFilter._id)
                         return;
                     if($rootScope.user && !$rootScope.user.isAuthenticated){
                         var signIn = $scope.$on('signIn', function(evt, data){
