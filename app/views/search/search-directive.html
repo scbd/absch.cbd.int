@@ -22,14 +22,19 @@
             <div class="col-md-12 search hidden-xs" style="padding-top:5px;">
                 <ul>
                     <li style="text-transform:uppercase;padding-left:3px;padding-right:5px;color:#bbb;" ng-click="showFilters=null"><span ng-if="showFilters"><i class="fa fa-times-circle" aria-hidden="true"></i> close</span> <span ng-if="!showFilters">search</span> filters</li>
-                    <li> <a href="" ng-class="{'active':showFilters=='national'}" ng-click="showFilters=(showFilters=='national' ? false : 'national')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;National records</a> </li>
+                    <li> <a href="" ng-class="{'active':showFilters=='national'}" ng-click="showFilters=(showFilters=='recordtypes' ? false : 'recordtypes')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Record types</a> </li>
+
+                    <!-- <li> <a href="" ng-class="{'active':showFilters=='national'}" ng-click="showFilters=(showFilters=='national' ? false : 'national')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;National records</a> </li>
                     <li> <a href="" ng-class="{'active':showFilters=='reference'}" ng-click="showFilters=(showFilters=='reference' ? false : 'reference')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Reference records</a> </li>
-                    <li> <a href="" ng-class="{'active':showFilters=='scbd'}" ng-click="showFilters=(showFilters=='scbd' ? false : 'scbd')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;SCBD records</a> </li>
+                    <li> <a href="" ng-class="{'active':showFilters=='scbd'}" ng-click="showFilters=(showFilters=='scbd' ? false : 'scbd')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;SCBD records</a> </li> -->
+
                     <li ng-show="!skipKeywordsFilter"> <a href="" ng-class="{'active':showFilters=='thematic'}" ng-click="showFilters=(showFilters=='thematic' ? false : 'thematic')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Keywords</a> </li>
                     <li> <a href="" ng-class="{'active':showFilters=='country'}" ng-click="showFilters=(showFilters=='country' ? false : 'country')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Country</a> </li>
                     <li> <a href="" ng-class="{'active':showFilters=='regionFilter'}" ng-click="showFilters=(showFilters=='regionFilter' ? false : 'regionFilter')"class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Regions</a ></li>
                     <li ng-show="!skipDateFilter"> <a href="" ng-class="{'active':showFilters=='dateFilter'}" ng-click="showFilters=(showFilters=='dateFilter' ? false : 'dateFilter')"class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Date</a> </li>
-                    <li ng-show="!skipSaveFilter"> <a href="" ng-class="{'active':showFilters=='userSearchFilter'}" ng-click="showFilters=(showFilters=='userSearchFilter' ? false : 'userSearchFilter')" class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Saved searches</a> </li>
+                    
+                    <li ng-show="isUserAuthenticated()"> <a href="" ng-class="{'active':showFilters=='userSearchFilter'}" ng-click="showFilters=(showFilters=='userSearchFilter' ? false : 'userSearchFilter')" class="btn color-green"><i class="fa fa-caret-down"></i>&nbsp;Saved searches</a> </li>
+
                     <a ng-href="#" ng-if="canShowSaveFilter()" class="pull-right" style="padding-top:10px;color:#bbb;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;" ng-click="showSaveFilter()">Save search</a>
 
                 </ul>
@@ -47,10 +52,20 @@
                         <span class="color-blue">"{{searchKeyword}}"</span>
                     </a>
                 </div>
-
-                <national-filter ng-if="showFilters==='national' || (searchKeyword && !showFilters)"></national-filter>
-                <reference-filter ng-if="showFilters==='reference' || (searchKeyword && !showFilters)"></reference-filter>
-                <scbd-filter ng-if="showFilters==='scbd' || (searchKeyword && !showFilters)"></scbd-filter>
+                <div class="row" ng-if="showFilters==='recordtypes' || (searchKeyword && !showFilters)">
+                    <div class="col-md-12">
+                        <national-filter ></national-filter>
+                    </div>
+                    <div class="col-md-12">
+                         <reference-filter ></reference-filter>
+                    </div>
+                    <div class="col-md-12">
+                         <scbd-filter></scbd-filter>
+                    </div>
+                </div>
+                
+               
+               
                 <keyword-filter ng-if="!skipKeywordsFilter && (showFilters==='thematic' || (searchKeyword && !showFilters))"></keyword-filter>
                 <country-filter ng-if="showFilters==='country' || (searchKeyword && !showFilters)"></country-filter>
                 <region-filter ng-if="showFilters==='regionFilter' || (searchKeyword && !showFilters)"></region-filter>

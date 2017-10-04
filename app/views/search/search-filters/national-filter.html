@@ -1,8 +1,9 @@
-﻿<div id="Search-Filter"  >
-      <div  style="margin-bottom:30px;">
-        <div class="heading" ng-if="nf_filters.length">National Records </div>
-        <p class="helpinfo" ng-if="nf_filters.length" ><i class="fa fa-info-circle helpicon" ></i> National records are published by Governments and include national information relevant for the implementation of the Nagoya Protocol as well as information Parties are obliged to provide in accordance with the Protocol.</p>
+﻿<div id="Search-Filter" class="row" >
+
+      <div  class="col-md-6" ng-show="nf_filters.length" style="margin-bottom:30px;" >
+        <div class="heading color-blue" ng-if="nf_filters.length">National Records </div>
         <hr  class="heading" ng-if="nf_filters.length">
+        <p class="helpinfo" ng-if="nf_filters.length" ><i class="fa fa-info-circle helpicon" ></i> National records are published by Governments and include national information relevant for the implementation of the Nagoya Protocol as well as information Parties are obliged to provide in accordance with the Protocol.</p>
         
         <div ng-repeat="doc in nf_filters = (nf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])">
             
@@ -18,7 +19,7 @@
         </div>
       </div>
       
-      <div  style="margin-bottom:30px;">
+      <div  class="col-md-6" ng-show="nf_filters.length" style="margin-bottom:30px;">
         <div class="heading" ng-if="nf_status.length">Party Status</div>
         <hr  class="heading" ng-if="nf_status.length">
         
@@ -33,29 +34,5 @@
             <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon" ng-if="doc.description"></i> {{doc.description}} </p>-->
         </div>
       </div>
-      
-      <!--<div style="margin-bottom:30px;" >
-       <div>
-            <span class="country-heading">Party Status</span>
-            <hr class="heading" />
-        </div>  
-         
-        <a translation-url  class="filter"  ng-click="saveFilter(doc)" >
-            <i class="fa check color-party" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
-            Party to the Nagoya Protocol
-        </a><br>
-        <a translation-url  class="filter"  ng-click="saveFilter(doc)" >
-            <i class="fa check  color-inbetween" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
-            Ratified, not yet Party to the Nagoya Protocol
-        </a><br>
-         <a translation-url  class="filter"  ng-click="saveFilter(doc)" >
-            <i class="fa check color-litegrey" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
-            Not a Party to the Nagoya Protocol
-        </a><br>
-        <a translation-url  class="filter"  ng-click="saveFilter(doc)">
-            <i class="fa check color-pink" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
-            Signatory to the Nagoya Protocol
-        </a>
-    </div>-->
-      
+
 </div>

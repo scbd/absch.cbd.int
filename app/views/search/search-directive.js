@@ -23,9 +23,9 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
             // transclude: true,
             template: template, 
             controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
-             'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService',
+             'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService','$rootScope',
             function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
-                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService) {
+                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope) {
                     
                     var customKeywords = {
                         commercial : {
@@ -1212,13 +1212,18 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                     $scope.canShowSaveFilter = function(){
                         return !$scope.skipSaveFilter && !_.isEmpty($scope.setFilters);
                     }
+
+                    $scope.isUserAuthenticated = function() {
+                        //console.log("user = " + $rootScope.user.isAuthenticated);
+                        return $rootScope.user && $rootScope.user.isAuthenticated;
+                    }
+
                     $scope.showSaveFilter = function(existingFilter){
                         if($rootScope.user && !$rootScope.user.isAuthenticated){
                             var signIn = $scope.$on('signIn', function(evt, data){
                                  $scope.showSaveFilter();
                                  signIn();
                             });
-
                             $('#loginDialog').modal("show");
                         }
                         else{
