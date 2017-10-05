@@ -27,4 +27,7 @@
     #htmlContentFooter {
         margin-top: 20px;
     }
+    .panel-heading.bg-blue > .color-white, .panel-heading.bg-blue > h4, #Record h4 {
+        color: #111!important;
+    }
 }
