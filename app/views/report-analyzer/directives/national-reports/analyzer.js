@@ -268,7 +268,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                         require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html',
                         'css!/app/css/print-friendly'], function(printObj, header, footer){						
                             var printObject = $element.parent().parent().parent().find('#secNrAnalyzer');
-                            if(sectionToPrint)
+                            if(sectionToPrint !='#secNrAnalyzer' && sectionToPrint)
                                 printObject = $element.find(sectionToPrint)
                             printObject.printThis({
                                 debug:false,
