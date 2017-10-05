@@ -521,16 +521,20 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                                     data['additionalInfo'][key+'_sum']++;
                                     regions.forEach(function(region){
                                         var column = data.columns[region.identifier];
-                                        var cell   = data.rows[_.first(_.keys(data.rows))].cells  [region.identifier];
+                                        var cell;
+                                        if(!_.isEmpty(data.rows))
+                                            cell   = data.rows[_.first(_.keys(data.rows))].cells  [region.identifier];
                                         if(region.countriesMap[report.government]){
                                             //     region.countriesMap[report.government]
                                             if(!column['additionalInfo'][key+'_sum'])
                                                 column['additionalInfo'][key+'_sum'] = 0
-                                            if(!cell['additionalInfo'][key+'_sum'])
-                                                cell['additionalInfo'][key+'_sum'] = 0
-
+                                            if(cell){
+                                                if(!cell['additionalInfo'][key+'_sum'])
+                                                    cell['additionalInfo'][key+'_sum'] = 0
+                                                cell['additionalInfo'][key+'_sum']++; // column
+                                            }
                                             column['additionalInfo'][key+'_sum']++; // column
-                                            cell['additionalInfo'][key+'_sum']++; // column
+                                            
                                         }
                                     });
                                 }
