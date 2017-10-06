@@ -31,3 +31,7 @@
         color: #111!important;
     }
 }
+
+scbd-header, nav, .navbar.navbar-portal, #PortalLinks1, .footer, scbd-footer, .slaask-button {
+    display: none!important
+}

@@ -367,6 +367,11 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 						getDocument: function(){return $scope.internalDocument},
 						getDocumentInfo : function(){$scope.internalDocumentInfo}
 					}
+
+					var querString = $location.search();
+					if(querString && querString.print){
+						require(['css!/app/css/print-friendly'])
+					}
 				}]
 		}
 	}]);
