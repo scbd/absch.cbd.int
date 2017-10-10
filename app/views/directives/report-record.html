@@ -1,12 +1,12 @@
-﻿<div class="row" style="padding-left:10px;padding-right:10px;">
+﻿<div class="row" style="padding-left:10px;padding-right:10px;margin-top:20px;">
 
     <div class="clearfix"></div>
     <div class="col-xs-12 "  ng-show="showReport">
-        <div class="alert alert-info" style="padding:15px 0 0 0;" block-region activate=" loading">
-            <h3 style="margin-left:20px">Report this record
+        <div class="alert alert-danger" style="padding:0;" block-region activate=" loading">
+            <h1 style="margin-left:20px">Report this record
                 <i ng-click="showReport = !showReport" aria-label="Close" style="margin-right:20px;cursor:pointer;" class="pull-right fa fa-close"></i>
-            </h3>
-            <p style="margin-left:20px">Please use the form to report a problem with this record and help us to keep the ABS-CH up-to-date and correct.</p>
+            </h1>
+            <p style="margin-left:20px">Please use the form to report a problem with this record and help us to keep the ABSCH up-to-date and correct.</p>
             <div  style="margin:20px;">
                 <form>
                 <div class="form-group">
@@ -41,7 +41,7 @@
                     <br>
                     <div>
                         <button type="submit" class="btn btn-primary" ng-click="submitReport(report)">Submit</button>
-                        <button ng-click="showReport = !showReport" class="btn btn-warning">Cancel</button>
+                        <button ng-click="showReport = !showReport" class="btn btn-warning pull-right">Cancel</button>
 
                         <!-- <button type="submit" class="btn btn-primary" ng-click="showtoast()">show</button> -->
                     </div>
