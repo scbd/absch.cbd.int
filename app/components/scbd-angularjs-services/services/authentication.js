@@ -424,7 +424,9 @@ define(['app', './apiUrl'], function(app) {
             request: function(config) {
 
                 var rewrite = /^\/api\//.test(config.url.toLowerCase()) &&
-                                $location.host().toLowerCase() == 'absch.cbd.int';
+                                (   $location.host().toLowerCase() == 'absch.cbd.int' ||  
+                                    $location.host().toLowerCase() == 'training-absch.cbd.int'
+                                );
 
                 if(rewrite)
                     config.url = 'https://api.cbd.int' + config.url;
