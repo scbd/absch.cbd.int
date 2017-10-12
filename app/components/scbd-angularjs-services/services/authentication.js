@@ -418,11 +418,29 @@ define(['app', './apiUrl'], function(app) {
             };
         }
     ]);
+    app.factory('apiRebase', ["$location", function($location) {
+        
+        return {
+            request: function(config) {
+
+                var rewrite = /^\/api\//.test(config.url.toLowerCase()) &&
+                                (   $location.host().toLowerCase() == 'absch.cbd.int' ||  
+                                    $location.host().toLowerCase() == 'training-absch.cbd.int'
+                                );
+
+                if(rewrite)
+                    config.url = 'https://api.cbd.int' + config.url;
+
+                return config;
+            }
+        };
+    }]);
     app.config(['$httpProvider', function($httpProvider) {
         $httpProvider.interceptors.push('authenticationHttpIntercepter');
         $httpProvider.interceptors.push('realmHttpIntercepter');
         $httpProvider.interceptors.push('apiURLHttpIntercepter');
         $httpProvider.interceptors.push('genericIntercepter');
+        $httpProvider.interceptors.push('apiRebase');
     }]);
 
 });
