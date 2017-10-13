@@ -64,15 +64,15 @@
                         </thead>
                         
                         <tr ng-repeat="row in downloadDocs">
-                            <td>{{row.schema_s|schemaName}}</td>
-                            <td>{{row.uniqueIdentifier_s|uppercase}}</td>
-                            <td>{{row.government}}</td>
-                            <td>{{row.rec_title}}</td>
-                            <td>{{getMeta(row.rec_meta1)}}</td>
-                            <td>{{getMeta(row.rec_meta2)}}</td>
-                            <td>{{getMeta(row.rec_meta3)}}</td>
-                            <td>{{getMeta(row.rec_meta4)}}</td>  
-                            <td>{{row.rec_date|formatDateWithTime}}</td>                             
+                            <td class="tableexport-string">{{row.schema_s|schemaName}}</td>
+                            <td class="tableexport-string">{{row.uniqueIdentifier_s|uppercase}}</td>
+                            <td class="tableexport-string">{{row.government}}</td>
+                            <td class="tableexport-string">{{row.rec_title}}</td>
+                            <td class="tableexport-string">{{getMeta(row.rec_meta1)}}</td>
+                            <td class="tableexport-string">{{getMeta(row.rec_meta2)}}</td>
+                            <td class="tableexport-string">{{getMeta(row.rec_meta3)}}</td>
+                            <td class="tableexport-string">{{getMeta(row.rec_meta4)}}</td>  
+                            <td class="tableexport-string">{{row.rec_date|formatDate}}</td>                             
                         </tr>
                     </table>
                    <h3 class="color-red bold">This is only sample of the information to be exported. All records retrieved by this search will be included in the export.</h3>
