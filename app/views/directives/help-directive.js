@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'joyRide'], function (app, _) {
+define(['app', 'underscore', 'angular-joyride'], function (app, _) {
         app.directive('help', function ($http) {
                 return {
                         restrict: 'EAC',

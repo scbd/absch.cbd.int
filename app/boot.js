@@ -37,7 +37,7 @@ require.config({
         'ngAria'                    : 'libs/angular-aria/angular-aria.min',
         'ngMaterial'                : 'libs/angular-material/angular-material.min',
         'ngSmoothScroll'            : 'libs/ngSmoothScroll/angular-smooth-scroll.min',
-        'joyRide'                   : 'libs/joyRide/jquery.joyride-2.1',
+        'angular-joyride'           : 'libs/angular-joyride/dist/joyride',
         'toastr'                    : 'libs/angular-toastr/dist/angular-toastr.tpls.min',
         'ngStorage'                 : 'libs/ngstorage/ngStorage.min',
         'angular-block-ui'          : 'libs/angular-block-ui/dist/angular-block-ui.min',

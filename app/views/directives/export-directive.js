@@ -8,25 +8,38 @@ define(['app','text!views/directives/export-directive.html',
             scope: {
                 exportQuery: '&',
                 queryType: '&',
-                helpTitle: '@'
+                helpTitle: '@',
+                openDialog: '=?'
             },
             link: function ($scope, element, attrs) {
-                
+                $scope.$watch('openDialog', function(show, hide){
+                    if(show===undefined)
+                        return;
+                    if(show)
+                        $scope.showDialog($scope.forTour);
+                    else 
+                        $scope.closeDialog();
+                })
             },
             controller: ["$scope", '$rootScope', '$filter', '$timeout', 'commonjs', '$q', 'searchService', 'ngDialog', '$element', 'locale',
                 function ($scope, $rootScope, $filter, $timeout, commonjs, $q, searchService, ngDialog, $element, locale) {
                     
                     var language = (locale || 'en').toUpperCase();
 
-                    $scope.showDialog = function(){
+                    $scope.showDialog = function(forTour){
                         var query = $scope.exportQuery();
                         var queryType = $scope.queryType();
 
                         ngDialog.open({
+                            showClose : !forTour,
+                            closeByEscape : !forTour,
+                            closeByNavigation : !forTour,
+                            closeByDocument : !forTour,
                             className : 'ngdialog-theme-default wide',
                             template : 'exportDialog',
                             controller : ['$scope', '$element', function($scope, $element){
                                     
+                                    $scope.forTour = forTour;
                                     $scope.downloadFormat = 'xls';
                                     $scope.downloadData =  function(){
 
@@ -88,9 +101,13 @@ define(['app','text!views/directives/export-directive.html',
                         })
                     }
 
-                     $timeout(function(){
+                    $timeout(function(){
                         $element.find('[data-toggle="tooltip"]').tooltip();
                     },50);
+
+                    $scope.closeDialog = function(){
+                        ngDialog.close();     
+                    }
                 }
             ]
         };

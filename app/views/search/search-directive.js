@@ -13,7 +13,7 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
 'services/app-config-service', 'ngDialog',
 'views/register/user-preferences/user-preference-filter',
 'views/directives/export-directive',
-'services/thesaurus-service'
+'services/thesaurus-service', 'angular-animate', 'angular-joyride'
 ], function(app, template, _) {
 
     app.directive('searchDirective', function() {
@@ -24,8 +24,9 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
             template: template, 
             controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService','$rootScope',
+             'joyrideService', '$timeout',
             function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
-                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope) {
+                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, $timeout) {
                     
                     var customKeywords = {
                         commercial : {
@@ -1291,6 +1292,145 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                         return $scope.currentTab==='nationalRecords' ? 'group' : 'list';
                     }
                    
+                    
+                    $scope.tour = function(){
+                        $scope.tourOn = true;
+                        var joyride = joyrideService;
+                        
+                        joyride.config = {
+                            onStepChange: function(){  },
+                            onStart: function(){  },
+                            onFinish: function(){ 
+                                joyride.start = false;
+                                $scope.tourOn = false; 
+                                $scope.showFilters = false;                                
+                                $scope.showDownloadDialog = false;                                
+                                $('#recordsContent').removeClass('active jr_target'); 
+                                // $timeout(function(){
+                                // // $scope.updateCurrentTab('nationalRecords');
+                                // }, 100)
+                            },
+                            steps : [
+                                {   appendToBody:true,
+                                    title: "Title 2",
+                                    content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, quidem, quia mollitia harum tempora laudantium deserunt deleniti. Expedita, soluta, atque maxime minus commodi quaerat ipsum reiciendis veritatis eum laboriosam incidunt.</p><p>another example</p>'
+                                },
+                                {
+                                    type: 'element',
+                                    selector: "#freeText",
+                                    title: "Title 1",
+                                    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, quidem, quia mollitia harum tempora laudantium deserunt deleniti. Expedita, soluta, atque maxime minus commodi quaerat ipsum reiciendis veritatis eum laboriosam incidunt.',
+                                    placement: 'top'
+                                },
+                                {   appendToBody:true,
+                                    type: 'element',
+                                    selector: "#recordTypesFilterTab",
+                                    title: "Title 1",
+                                    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, quidem, quia mollitia harum tempora laudantium deserunt deleniti. Expedita, soluta, atque maxime minus commodi quaerat ipsum reiciendis veritatis eum laboriosam incidunt.',
+                                    placement: 'top',
+                                    beforeStep: openFilterTab
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#keywordsFilterTab",
+                                    title: "Title 1",
+                                    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, quidem, quia mollitia harum tempora laudantium deserunt deleniti. Expedita, soluta, atque maxime minus commodi quaerat ipsum reiciendis veritatis eum laboriosam incidunt.',
+                                    placement: 'top',
+                                    beforeStep: openFilterTab
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#countryFilterTab",
+                                    title: "Title 1",
+                                    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, quidem, quia mollitia harum tempora laudantium deserunt deleniti. Expedita, soluta, atque maxime minus commodi quaerat ipsum reiciendis veritatis eum laboriosam incidunt.',
+                                    placement: 'top',
+                                    beforeStep: openFilterTab
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#referenceRecordsTab",
+                                    title: "Title 1",
+                                    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, quidem, quia mollitia harum tempora laudantium deserunt deleniti. Expedita, soluta, atque maxime minus commodi quaerat ipsum reiciendis veritatis eum laboriosam incidunt.',
+                                    placement: 'top',
+                                    beforeStep: openRecordsTab
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#scbdRecordsTab",
+                                    title: "Title 1",
+                                    content: 'SCBD records',
+                                    placement: 'top',
+                                    beforeStep: openRecordsTab
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#exportRecords",
+                                    title: "Export",
+                                    content: 'Export button.',
+                                    placement: 'left',
+                                    beforeStep: function(resumeJoyride){
+                                        $('#recordsContent').removeClass('active jr_target');
+                                        if($scope.showDownloadDialog)$scope.showDownloadDialog = false;
+                                        resumeJoyride();
+                                    }
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: ".radio",
+                                    title: "Download Format",
+                                    content: 'Available formats for exporting data',
+                                    placement: 'top',
+                                    beforeStep: openExportDialog
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#downloadDataFile",
+                                    title: "Download Button",
+                                    content: 'Click on Download button to download data in selected format',
+                                    placement: 'top',
+                                    beforeStep: function(resumeJoyride){ 
+                                        resumeJoyride();
+                                        $timeout(function(){
+                                            $('.jr_container').css('z-index', 10000); 
+                                        }, 100);
+                                    }
+                                }
+
+                            ]
+                        };
+                        joyride.start = true;
+
+                        function openFilterTab(resumeJoyride){
+                            var step = joyride.config.steps[joyride.current];
+                            $scope.showFilters = step.selector.replace('#','').replace('Tab', '');
+                            resumeJoyride();
+                        }
+
+                        function openRecordsTab(resumeJoyride){
+                            var step = joyride.config.steps[joyride.current];
+                            $scope.updateCurrentTab(step.selector.replace('#','').replace('Tab', ''));
+                            $('#recordsContent').addClass('active jr_target');
+                            resumeJoyride();
+                        }
+                        function openExportDialog(resumeJoyride){
+                            var step = joyride.config.steps[joyride.current];
+                            $scope.showDownloadDialog = true;   
+                            $timeout(function(){
+                                resumeJoyride();
+                            }, 200);
+                            $timeout(function(){
+                                $('.jr_container').css('z-index', 10000); 
+                            }, 500);
+                            
+                        }                        
+                    }
             }]//controller
         };
     });
