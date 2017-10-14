@@ -32,6 +32,12 @@
     }
 }
 
-scbd-header, nav, .navbar.navbar-portal, #PortalLinks1, .footer, scbd-footer, .slaask-button {
+scbd-header, nav, .navbar.navbar-portal, #PortalLinks1, .footer, scbd-footer, .slaask-button, .hidden-print {
     display: none!important
+}
+.training-bg {
+    background: none
+}
+body, .container-full {
+    background: #fff;
 }

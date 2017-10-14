@@ -1,101 +1,140 @@
 ﻿<div>
 
-    <div smooth-scroll duration="100" offset="200" scroll-if="{{!$root.stopSmoothScroll}}"></div>
-    <div block-region activate="loading"></div>
+    <div id="printContentHeader" class="row" style="padding-bottom:30px;" ng-if="printMode">
+        <div class="col-xs-1">
+        </div>
 
-    <div class="alert alert-danger text-center" ng-show="error" ng-if="error">
-        <strong>Error as occured...</strong>
-        <div>{{error}}</div>
-    </div>
-    <div class="jumbotron" style="background-color:white;" role="alert" ng-if="documentSuccess">
-        <h2>Thank you for downloading document {{documentUID}}.</h2>
-        <p>If the document did not download try clicking
-            <a translation-url href="{{documentUrl}}" class="alert-link">here...</a></p>
-        </br>
-        </br>
-        </br>
-        </br>
-        This window will close automatically in {{timeLaspe}} seconds.
-    </div>
+        <div class="col-xs-3" style="text-align:center;">
+            <img style="width:60px;" src="/app/img/UNEP_logo.svg" />
+        </div>
+        <div class="col-xs-4" style="text-align:center;padding-top:5px;">
+            <img src="/app/img/cbd-logo-print-black-en.png" />
+        </div>
+        <div class="col-xs-3" style="text-align:center;">
+            <img style="width:70px;padding-top:5px;" src="/app/img/Emblem_of_the_United_Nations.svg" />
+        </div>
 
-    <div class="jumbotron" style="background-color:white;" role="alert" ng-if="documentError">
-        <h2>Thank you for requesting document {{documentUID}}.</h2>
-        <p>The document does not exists, if you think this file should be available, please report to
-            <a translation-url href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
     </div>
+    <div id="recordContent">
+        <div smooth-scroll duration="100" offset="200" scroll-if="{{!$root.stopSmoothScroll}}"></div>
+        <div block-region activate="loading"></div>
 
-    <div id="RecordDetails" ng-if="showDetails">
-        <div class="row">
-            <div class="col-xs-12">
-                <div class="well">
-                    <h3 style="margin:0 0 20px 0;padding:0;">Record Information</h3>
-                    <table style="width:100%!important;">
-                        <tr>
-                            <td><label> Unique Identifier: </label></td>
-                            <td class="bold">
-                                {{internalDocument | uniqueID}}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label> Current Status: </label></td>
-                            <td class="bold">
-                                <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">
+        <div class="alert alert-danger text-center" ng-show="error" ng-if="error">
+            <strong>Error as occured...</strong>
+            <div>{{error}}</div>
+        </div>
+        <div class="jumbotron" style="background-color:white;" role="alert" ng-if="documentSuccess">
+            <h2>Thank you for downloading document {{documentUID}}.</h2>
+            <p>If the document did not download try clicking
+                <a translation-url href="{{documentUrl}}" class="alert-link">here...</a></p>
+            </br>
+            </br>
+            </br>
+            </br>
+            This window will close automatically in {{timeLaspe}} seconds.
+        </div>
+
+        <div class="jumbotron" style="background-color:white;" role="alert" ng-if="documentError">
+            <h2>Thank you for requesting document {{documentUID}}.</h2>
+            <p>The document does not exists, if you think this file should be available, please report to
+                <a translation-url href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
+        </div>
+
+        <div id="RecordDetails" ng-if="showDetails">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="well">
+                        <h3 style="margin:0 0 20px 0;padding:0;">Record Information</h3>
+                        <table style="width:100%!important;">
+                            <tr>
+                                <td><label> Unique Identifier: </label></td>
+                                <td class="bold">
+                                    {{internalDocument | uniqueID}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label> Current Status: </label></td>
+                                <td class="bold">
+                                    <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">
                                         DRAFT
                                     </span>
-                                <span class="color-green" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">
+                                    <span class="color-green" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">
                                         PUBLISHED
                                     </span>
-                                <span class="color-red" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">
+                                    <span class="color-red" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">
                                         [ Locked: Pending {{workflowRequestType}} request ]
                                 </span>
-                                <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">
+                                    <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">
                                     DELETED
                                 </span>
-                                <span ng-show="!internalDocument.deletedOn && internalDocument.amendmentIntent==1  && internalDocument.type!='absCheckpointCommunique'">
+                                    <span ng-show="!internalDocument.deletedOn && internalDocument.amendmentIntent==1  && internalDocument.type!='absCheckpointCommunique'">
                                     <span class="bold color-red"> REVOKED</span>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label> Record Type: </label></td>
-                            <td class="bold">{{internalDocumentInfo.metadata.schema | schemaName}}</td>
-                        </tr>
-                        <tr ng-if="docInfo.revision > 0">
-                            <td><label> Record Versions: </label></td>
-                            <td class="bold">{{internalDocumentInfo.revision}}</td>
-                        </tr>
-                        <tr ng-if="docInfo.metadata.government">
-                            <td><label> Record Owner: </label></td>
-                            <td class="bold"> {{getUserCountry(internalDocumentInfo.metadata.government)}}</td>
-                        </tr>
-                        <tr>
-                            <td><label> History:</label></td>
-                            <td>
-                                <div view-history document-id="internalDocumentInfo.identifier"></div>
-                            </td>
-                        </tr>
-                    </table>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label> Record Type: </label></td>
+                                <td class="bold">{{internalDocumentInfo.metadata.schema | schemaName}}</td>
+                            </tr>
+                            <tr ng-if="docInfo.revision > 0">
+                                <td><label> Record Versions: </label></td>
+                                <td class="bold">{{internalDocumentInfo.revision}}</td>
+                            </tr>
+                            <tr ng-if="docInfo.metadata.government">
+                                <td><label> Record Owner: </label></td>
+                                <td class="bold"> {{getUserCountry(internalDocumentInfo.metadata.government)}}</td>
+                            </tr>
+                            <tr>
+                                <td><label> History:</label></td>
+                                <td>
+                                    <div view-history document-id="internalDocumentInfo.identifier"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.latestRevision != internalDocumentInfo.revision && revisionNo != 'draft'">
-        <h3>
+        <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.latestRevision != internalDocumentInfo.revision && revisionNo != 'draft'">
+            <h3>
                 This document has been updated. This is not the latest published version.
-                <a translation-url  ng-href="/database/{{internalDocument.header.schema | urlSchemaShortName}}/{{internalDocument | uniqueIDWithoutRevision}}" target="new">Click here to view the latest version of the record.</a>
-			</h3>
-    </div>
+                <a translation-url ng-href="/database/{{internalDocument.header.schema | urlSchemaShortName}}/{{internalDocument | uniqueIDWithoutRevision}}"
+                    target="new">Click here to view the latest version of the record.</a>
+            </h3>
+        </div>
 
 
-    <div style="float:right; position:relative;top:1px;right:1px;" ng-if="!isIRCCRevoked && showDetails">
-        <div>
-            <a translation-url title="Edit" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button" class="btn btn-default" ng-href="/register/{{internalDocument.header.schema|urlSchemaShortName}}/{{internalDocument.header.identifier}}/edit">
+        <div style="float:right; position:relative;top:1px;right:1px;" ng-if="!isIRCCRevoked && showDetails">
+            <div>
+                <a translation-url title="Edit" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
+                    class="btn btn-default" ng-href="/register/{{internalDocument.header.schema|urlSchemaShortName}}/{{internalDocument.header.identifier}}/edit">
                 <i class="fa fa-edit"></i> edit </a>
-            <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+                <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}"
+                    type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+            </div>
+        </div>
+        <div id="schemaView" ng-show="internalDocument"></div>
+    </div>
+    <div id="printContentFooter" style="padding-top:20px" ng-if="printMode">
+        <legend>Further Information</legend>
+        <div class="row top-border">
+            <div class="clearfix"></div>
+            <div class="col-xs-8" style="font-size:12px;">
+                Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and Benefit-sharing Clearing-House
+                may be directed to the Secretariat of the Convention on Biological Diversity.
+            </div>
+            <div class="col-xs-4" style="font-size:12px;">
+                <strong>Secretariat of the Convention on Biological Diversity</strong>
+                <br/> 413 rue Saint-Jacques, suite 800
+                <br/> Montreal, Québec, H2Y 1N9
+                <br/> Canada
+                <br/> Fax: +1 514 288-6588
+                <br/> Email: secretariat@cbd.int
+
+            </div>
         </div>
     </div>
-    <div id="schemaView" ng-show="internalDocument"></div>
 
 </div>

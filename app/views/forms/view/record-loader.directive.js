@@ -368,8 +368,9 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 						getDocumentInfo : function(){$scope.internalDocumentInfo}
 					}
 
-					var querString = $location.search();
-					if(querString && querString.print){
+					var queryString = $location.search();
+					if(queryString && queryString.print){
+						$scope.printMode = true;
 						require(['css!/app/css/print-friendly'])
 					}
 				}]
