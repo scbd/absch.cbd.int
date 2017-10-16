@@ -7,8 +7,10 @@ app.directive('recordOptions', ['locale', function (appLocale) {
                 
 
 
-                if(!$scope.currentLocale)
-                    $scope.currentLocale = appLocale
+                if(!$scope.currentLocale){
+                    $scope.currentLocale = appLocale;
+                    $scope.downloadLocale = appLocale;
+                }
 
                 if($scope.document){
                     //if document does not contain application selected locale, then select one 
@@ -28,6 +30,7 @@ app.directive('recordOptions', ['locale', function (appLocale) {
                 $scope.setCurrentLocale = function(loc){
                     $scope.currentLocale=loc
                     $scope.locale=loc
+                    $scope.downloadLocale = loc;
                 }
             }
         };
