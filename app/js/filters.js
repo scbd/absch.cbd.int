@@ -115,7 +115,7 @@ function (app, schemaNamePlural) {
 
 
 				var relamPrefix = '';
-				if((!_.contains(appConfigService.scbdSchemas, (document.schema_s||'').toLowerCase() || (document.schema_s||'').toLowerCase()!= 'focalpoint')))
+				if((!_.contains(appConfigService.scbdSchemas, (document.schema_s||'').toLowerCase())))
 					relamPrefix = (realm.value.toUpperCase().replace('ABS','').replace('-',''));
 
 				var unique = 'ABSCH' + relamPrefix +

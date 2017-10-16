@@ -153,8 +153,8 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 							loadViewDirective(documentSchema);
 						}
 						else if (documentID) {
-							if(_.contains(['FOCALPOINT', 'NFP'], documentSchema.toUpperCase()))
-								documentID = commonjs.integerToHex(documentID);
+							// if(_.contains(['FOCALPOINT', 'NFP'], documentSchema.toUpperCase()))
+							// 	documentID = commonjs.integerToHex(documentID);
 
 							$scope.load(documentID, documentRevision);
 						}

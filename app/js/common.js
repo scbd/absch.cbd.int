@@ -129,8 +129,8 @@ define(['app', 'underscore', 'services/local-storage-service'], function(app, _)
                         schemaCode = "52000000cbd0120000000000";
                     else if (schema.toLowerCase() == "meeting" || schema.toLowerCase() == "mt")
                         schemaCode = "52000000cbd0050000000000";
-                    else if (schema.toLowerCase() == "focalpoint" || schema.toLowerCase() == "nfp")
-                        schemaCode = "52000000cbd0220000000000";                    
+                    // else if (schema.toLowerCase() == "focalpoint" || schema.toLowerCase() == "nfp")
+                    //     schemaCode = "52000000cbd0220000000000";                    
                     else if (schema.toLowerCase() == "nationalrecord")
                         schemaCode = "52000000cbd0800000000000";
 
