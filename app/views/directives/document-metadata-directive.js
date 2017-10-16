@@ -62,15 +62,14 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
                 
                 $scope.print = function(){
                     $scope.printing = true;
-                    require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html',
-                            'css!/app/css/print-friendly'], function(printObj, header, footer){						
+                    require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html'], function(printObj, header, footer){						
                         $element.parent().parent().parent().find('#schemaView').printThis({
                             debug:false,
                             printContainer:true,
                             importCSS:true,
                             importStyle : true,
                             pageTitle : ($route.current.params.documentID||'')+$('title').text(),
-                            loadCSS : 'css/print-friendly.css',
+                            loadCSS : '/app/css/print-friendly.css',
                             header : header,
                             footer : footer
                         });	
