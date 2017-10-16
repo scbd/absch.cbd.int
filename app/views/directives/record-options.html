@@ -41,7 +41,7 @@
 
         <span ng-if="updatedOn" class="xlabel">published:</span>
         <span ng-if="updatedOn" class="date"> {{updatedOn | formatDate}}</span>
-        <div class="btn-group pdf-download-buttons" ng-show="$parent.internalDocumentInfo.revision">
+        <!-- <div class="btn-group pdf-download-buttons" ng-show="$parent.internalDocumentInfo.revision">
             <a type="button" class="btn btn-primary btn-xs" 
             target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/documents/{{downloadLocale}}?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}">
                 <i class="fa fa-file-pdf-o"></i> Download 
@@ -64,7 +64,7 @@
                 <li><a target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/documents/fr?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}" ng-click="downloadLocale='fr'"><i class="fa fa-file-pdf-o"></i> Français</a></li>
                 <li><a target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/documents/ru?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}" ng-click="downloadLocale='ru'"><i class="fa fa-file-pdf-o"></i> Русский</a></li>
             </ul>
-        </div>
+        </div> -->
     </div>
     
 </div>
