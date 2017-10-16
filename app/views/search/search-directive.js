@@ -1311,22 +1311,23 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                                 // }, 100)
                             },
                             steps : [
+                              
                                 {   appendToBody:true,
-                                    title: "Title 2",
-                                    content: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, quidem, quia mollitia harum tempora laudantium deserunt deleniti. Expedita, soluta, atque maxime minus commodi quaerat ipsum reiciendis veritatis eum laboriosam incidunt.</p><p>another example</p>'
+                                    title: "Introduction to the search",
+                                    content: '<p>The search page is where you will find all available information on the ABSCH. Information can be found using combinations of filters giving users the flexibility to retrieve a very wide or a very narrow set of results.</p> <p>Click next to learn more about searching for information',
                                 },
+                               
                                 {
                                     type: 'element',
                                     selector: "#freeText",
-                                    title: "Title 1",
-                                    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, quidem, quia mollitia harum tempora laudantium deserunt deleniti. Expedita, soluta, atque maxime minus commodi quaerat ipsum reiciendis veritatis eum laboriosam incidunt.',
-                                    placement: 'top'
+                                    title: "Free text search",
+                                    content: 'Start typing in the free text and you will find some suggested filters from the controlled vocabularies. Select and apply the filters to the search or enter your own free text click enter to filter the results below.'
                                 },
                                 {   appendToBody:true,
                                     type: 'element',
                                     selector: "#recordTypesFilterTab",
-                                    title: "Title 1",
-                                    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, quidem, quia mollitia harum tempora laudantium deserunt deleniti. Expedita, soluta, atque maxime minus commodi quaerat ipsum reiciendis veritatis eum laboriosam incidunt.',
+                                    title: "Filter by record type",
+                                    content: 'Select a record type. Record types are organized into three categories and the result are displayed in separate tabs below.',
                                     placement: 'top',
                                     beforeStep: openFilterTab
                                 },
@@ -1334,17 +1335,8 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                                     appendToBody:true,
                                     type: 'element',
                                     selector: "#keywordsFilterTab",
-                                    title: "Title 1",
-                                    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, quidem, quia mollitia harum tempora laudantium deserunt deleniti. Expedita, soluta, atque maxime minus commodi quaerat ipsum reiciendis veritatis eum laboriosam incidunt.',
-                                    placement: 'top',
-                                    beforeStep: openFilterTab
-                                },
-                                {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#countryFilterTab",
-                                    title: "Title 1",
-                                    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, quidem, quia mollitia harum tempora laudantium deserunt deleniti. Expedita, soluta, atque maxime minus commodi quaerat ipsum reiciendis veritatis eum laboriosam incidunt.',
+                                    title: "Filter by keyword",
+                                    content: 'Select from the list of keywords to narrow down your search. If you have already filtered by a record type, the keyword filters displayed will be applicable specifically to that record type. ',
                                     placement: 'top',
                                     beforeStep: openFilterTab
                                 },
@@ -1352,17 +1344,8 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                                     appendToBody:true,
                                     type: 'element',
                                     selector: "#referenceRecordsTab",
-                                    title: "Title 1",
-                                    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, quidem, quia mollitia harum tempora laudantium deserunt deleniti. Expedita, soluta, atque maxime minus commodi quaerat ipsum reiciendis veritatis eum laboriosam incidunt.',
-                                    placement: 'top',
-                                    beforeStep: openRecordsTab
-                                },
-                                {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#scbdRecordsTab",
-                                    title: "Title 1",
-                                    content: 'SCBD records',
+                                    title: "Reference records",
+                                    content: 'Search results are display on separate tabs organized by record category. Click on the tab to view the records associated with that category. ',
                                     placement: 'top',
                                     beforeStep: openRecordsTab
                                 },
@@ -1371,7 +1354,7 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                                     type: 'element',
                                     selector: "#exportRecords",
                                     title: "Export",
-                                    content: 'Export button.',
+                                    content: 'Use the export functionality to export the information in the tab to a spreadsheet format.',
                                     placement: 'left',
                                     beforeStep: function(resumeJoyride){
                                         $('#recordsContent').removeClass('active jr_target');
@@ -1380,29 +1363,14 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                                     }
                                 },
                                 {
-                                    appendToBody:true,
+                                     appendToBody:true,
                                     type: 'element',
-                                    selector: ".radio",
-                                    title: "Download Format",
-                                    content: 'Available formats for exporting data',
+                                    selector: "#record1",
+                                    title: "Records",
+                                    content: 'Click on a record to view the full details.',
                                     placement: 'top',
-                                    beforeStep: openExportDialog
-                                },
-                                {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#downloadDataFile",
-                                    title: "Download Button",
-                                    content: 'Click on Download button to download data in selected format',
-                                    placement: 'top',
-                                    beforeStep: function(resumeJoyride){ 
-                                        resumeJoyride();
-                                        $timeout(function(){
-                                            $('.jr_container').css('z-index', 10000); 
-                                        }, 100);
-                                    }
+                                    beforeStep: gotoFirstRefRecord
                                 }
-
                             ]
                         };
                         joyride.start = true;
@@ -1419,6 +1387,14 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                             $('#recordsContent').addClass('active jr_target');
                             resumeJoyride();
                         }
+
+                        function gotoFirstRefRecord(resumeJoyride){
+                            var step = joyride.config.steps[joyride.current];
+                            $scope.updateCurrentTab("referenceRecords");
+                            $('#record1').addClass('active jr_target');
+                            resumeJoyride();
+                        }
+
                         function openExportDialog(resumeJoyride){
                             var step = joyride.config.steps[joyride.current];
                             $scope.showDownloadDialog = true;   

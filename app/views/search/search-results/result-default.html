@@ -7,7 +7,7 @@
     <div ng-if="showDoc" style="padding:5px 0px 10px 0px!important;margin:0 0 0 0!important;">
         <record-loader class="card card-3" api="api.recordLoaderApi" show-details="false" hide-buttons="true" link-target="_new"></record-loader>
     </div>
-    <div class="recordDefault card card-1" style="padding:0!important;margin:0!important;">
+    <div id="record1" class="recordDefault card card-1" style="padding:0!important;margin:0!important;">
 
         <div ng-show="!showDoc" ng-click="showDoc=!showDoc" style="padding:0!important;margin:0!important;">
             <div class="{{type}}">
