@@ -27,18 +27,18 @@
 </style>
 <div class="record-Options-div">
     <div class="pull-right">
-            <div class="btn-group" ng-show="$parent.internalDocumentInfo.revision">
-                <a type="button" class="btn btn-primary" 
+            <div class="btn-group pdf-download-buttons" ng-show="$parent.internalDocumentInfo.revision">
+                <a type="button" class="btn btn-primary btn-xs" 
                 target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/documents/{{downloadLocale}}?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}">
                     <i class="fa fa-file-pdf-o"></i> Download 
                     <span ng-if="downloadLocale=='ar'">العربية </span>
                     <span ng-if="downloadLocale=='zh'">中文  </span>
                     <span ng-if="downloadLocale=='en'">English</span>
                     <span ng-if="downloadLocale=='es'">Español</span>
-                    <span ng-if="downloadLocale=='fr'">Français<span>
+                    <span ng-if="downloadLocale=='fr'">Français</span>
                     <span ng-if="downloadLocale=='ru'">Русский</span>
                 </a>
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="caret"></span>
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
