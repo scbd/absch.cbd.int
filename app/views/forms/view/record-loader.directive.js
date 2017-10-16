@@ -143,7 +143,7 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 					$scope.loadDocument = function (documentSchema, documentID, documentRevision) {
 
 						if (documentSchema &&
-							_.contains(["FOCALPOINT", "MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "NFP", "ST", "NT", "MT", "PR", "MTD"], documentSchema.toUpperCase())) {
+							_.contains(["MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "ST", "NT", "MT", "PR", "MTD"], documentSchema.toUpperCase())) {
 							$scope.loading = true;
 							commonjs.getReferenceRecordIndex(documentSchema, documentID)
 								.then(function (data) {
