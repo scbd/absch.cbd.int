@@ -471,12 +471,7 @@
                     </div>
                 </form>
 
-                <div class="row" ng-show="tab=='review'" km-tab="review">
-                    <div class="col-xs-12">
-
-                        <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
-                            <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
-                        </div>
+                <div class="row" ng-show="tab=='review'" km-tab="review" id="schemaView">
                         <div class="view-abs-permit" show-pdf="false" ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
                     </div>
                 </div>

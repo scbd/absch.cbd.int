@@ -28,7 +28,7 @@
     "flag-icon-css": "https://github.com/lipis/flag-icon-css.git#0.6.0",
     "font-awesome": "4.2",
     "ionsound": "3.0.0",
-    "joyRide": "https://github.com/zurb/joyride.git#v2.0.0",
+    "angular-joyride": "1.0.2",
     "jquery": "2.2.4",
     "linqjs": "3.0.5",
     "lodash": "3.9.3",
@@ -67,6 +67,8 @@
     "angular-animate": "1.5.6",
     "lodash": "3.10.1",
     "requirejs": "2.2.0",
-    "scbd-angularjs-services": "master"
+    "scbd-angularjs-services": "master",
+    "angular-joyride": "1.0.2",
+    "angular-sanitize": "1.4"
   }
 }

@@ -13,7 +13,9 @@
                 var data = {
                     type: $scope.selectedReportType,
                     regions: $scope.selectedRegions,
-                    questions: $scope.selectedQuestions
+                    questions: $scope.selectedQuestions,
+                    regionsPreset: $scope.selectedRegionsPreset,
+                    regionsPresetFilter: $scope.selectedRegionsPresetFilter
                 };
                 sessionStorage.setItem('nrAnalyzerData', JSON.stringify(data));
 

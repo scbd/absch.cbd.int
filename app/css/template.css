@@ -1141,6 +1141,10 @@ footer .logo {
     background-color: rgba(0, 0, 0, .10)!important;
     cursor: pointer;
 }
+.link2:hover {
+    color: #111!important;
+    cursor: pointer;
+}
 .linkDark:hover {
     background-color: #333!important;
     cursor: pointer;
@@ -1895,3 +1899,37 @@ legend+ .help-info {
 .modal-header h3 {
     margin: 0px;
 }
+
+
+.jr_overlay{
+     left:0; 
+    opacity: 0!important;
+}
+.jr_container {
+    border-radius: 5px;
+    background-color: #666!important;
+    border: 1px solid #111!important;
+}
+.jr_container.jr_element.jr_pos_bottom:after{
+     border-bottom: 12.5px solid #111!important;
+}
+.jr_container.jr_element.jr_pos_top:after {
+       border-top: 12.5px solid #111!important;
+}
+.jr_container.jr_element.jr_pos_left:after {
+       border-left: 12.5px solid #111!important;
+}
+.jr_container.jr_element.jr_pos_right:after {
+       border-right: 12.5px solid #111!important;
+}
+.jr_title{
+    color:#FFF!important;
+    font-size:120%!important;
+}
+.jr_content{
+    color:#eee!important;
+}
+.jr_next{
+     background-color:#428bca!important;
+}
+.jr_target{box-shadow: none!important;} 

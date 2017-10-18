@@ -11,7 +11,6 @@ define(['app', 'js/common',
             var user = $rootScope.user;
 
             $scope.systemAlertsSubscription=[];
-            console.log($route.current.params)
             if($route.current.params.tab){
                 
                 $scope.tab = $route.current.params.tab;                    
@@ -21,6 +20,8 @@ define(['app', 'js/common',
                     $element.find('#tab-'+$scope.tab).addClass('active')
                 }, 100);
             }
+            else
+                $scope.tab = 'subscriptions';
 
             if(user.government){
 

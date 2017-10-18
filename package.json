@@ -2,7 +2,7 @@
   "name": "absch.cbd.int",
   "description": "Access and Benefit Sharing Clearing-House",
   "dependencies": {
-    "bower": "1.7.9",
+    "bower": "1.8.2",
     "co": "^4.6.0",
     "co-fs": "^1.2.0",
     "ejs": "^2.5.2",

@@ -90,7 +90,7 @@
                             <legend>General Information</legend>
             				<div class="row">
             					<div class="col-xs-12">
-            						<div class="km-control-group" name="government" required  bold="true"  caption="1. Country">
+            						<div class="km-control-group" name="government" required  bold="true"  caption="Country">
                                         <span class="help-inline color-blue bold" ng-if="userGovernment()"> Country can not be changed. </span>
                                         <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
             						</div>
@@ -101,7 +101,7 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="control-group">
-                                        <div class="km-control-group" name="title" required caption="Title of this national report">
+                                        <div class="km-control-group" name="title" required caption="1. Title of this national report">
                                             <div class="help-info">This field serves as the title of the record, therefore it should be distinct and help to easily identify the record in the ABS Clearing-House.</div>
                                             <div km-textbox-ml ng-model="document.title" rows="1" placeholder="Title of this national report" locales="document.header.languages"></div>
                                         </div>
@@ -116,7 +116,7 @@
                                                                 ng-disabled="!document.government"
                                                                 question="contact"
                                                                 government="document.government"
-                                                                schema="(contact authority)"
+                                                                schema="(contact authority focalPoint)"
                                                                 filter="true" type="radio">
                                         </div>
                                     </div>
@@ -1115,8 +1115,8 @@
 
                             <div class="row" ng-class="{'disable': !document.question37.answer}">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" ng-required="Q37IsYes()" name="question38" bold="true" caption="38. Do indigenous and local communities have the established right to grant access to genetic resources according to your domestic law? (Article 6.2)">
-                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question38" ng-model="document.question38.answer" ng-click="Q38Clear()"></div>
+                                    <div class="km-control-group" required="{{Q37IsYes()}}" name="question38" bold="true" caption="38. Do indigenous and local communities have the established right to grant access to genetic resources according to your domestic law? (Article 6.2)">
+                                        <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}" class="km-yes-no" name="question38" ng-model="document.question38.answer" ng-click="Q38Clear()"></div>
                                     </div>
                                     <div class="row" ng-show="document.question38.answer">
                                         <div class="col-xs-10 col-xs-offset-1">
@@ -1172,8 +1172,8 @@
 
                             <div class="row" ng-class="{'disable': !document.question37.answer}">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" ng-required="Q37IsYes()"  bold="true" name="question39" caption="39. In accordance with domestic law has your country taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous and local communities within your country is accessed with the PIC or approval and involvement of these indigenous and local communities and that MAT have been established as provided in Article 7?">
-                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question39" ng-model="document.question39.answer"></div>
+                                    <div class="km-control-group" required="{{Q37IsYes()}}"  bold="true" name="question39" caption="39. In accordance with domestic law has your country taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous and local communities within your country is accessed with the PIC or approval and involvement of these indigenous and local communities and that MAT have been established as provided in Article 7?">
+                                        <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}" class="km-yes-no" name="question39" ng-model="document.question39.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question39FurtherInfo" caption="">
                                         Please provide further information
@@ -1193,8 +1193,8 @@
 
                             <div class="row" ng-class="{'disable': !document.question37.answer}">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" ng-required="Q37IsYes()"  bold="true" name="question40" caption="40. In implementing the Protocol and in accordance with your domestic law, is your country taking into consideration indigenous and local communities’ customary laws, community protocols and procedures with respect to traditional knowledge associated with genetic resources as provided in Article 12.1?">
-                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question40" ng-model="document.question40.answer"></div>
+                                    <div class="km-control-group" required="{{Q37IsYes()}}"  bold="true" name="question40" caption="40. In implementing the Protocol and in accordance with your domestic law, is your country taking into consideration indigenous and local communities’ customary laws, community protocols and procedures with respect to traditional knowledge associated with genetic resources as provided in Article 12.1?">
+                                        <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}" class="km-yes-no" name="question40" ng-model="document.question40.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question40FurtherInfo" caption="">
                                         Please provide further information
@@ -1214,8 +1214,8 @@
 
                             <div class="row" ng-class="{'disable': !document.question37.answer}">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" ng-required="Q37IsYes()"  bold="true" name="question41" caption="41. Has your country established mechanisms to inform potential users of traditional knowledge associated with genetic resources about their obligations as provided in Article 12.2?">
-                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question41" ng-model="document.question41.answer"></div>
+                                    <div class="km-control-group" required="{{Q37IsYes()}}"  bold="true" name="question41" caption="41. Has your country established mechanisms to inform potential users of traditional knowledge associated with genetic resources about their obligations as provided in Article 12.2?">
+                                        <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}" class="km-yes-no" name="question41" ng-model="document.question41.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question41FurtherInfo" caption="">
                                         Please provide further information
@@ -1235,65 +1235,77 @@
 
                             <div class="row" ng-class="{'disable': !document.question37.answer}">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" ng-required="Q37IsYes()" bold="true"  name="question42" caption="42. Is your country supporting the development by indigenous and local communities of the following tools as provided in Article 12.3?"></div>
+                                    <div class="km-control-group" required="{{Q37IsYes()}}" bold="true"  name="question42" caption="42. Is your country supporting the development by indigenous and local communities of the following tools as provided in Article 12.3?"></div>
+                                    <div style="margin-left:25px;">
+                                        <div class="checkbox"> 
+                                            <div style="float: left" ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}" class="km-yes-no"  ng-change="Q42Clear()"
+                                                name="question42_1" ng-model="document.question42.community.answer"></div>
+                                            <div class="km-control-group" required="{{Q37IsYes()}}" name="question42_community" caption="Community Protocol">                                               
+                                            </div>    
+                                            <div ng-show="document.question42.community.answer" class="km-control-group" name="question42CommunityFurtherInfo" caption="">
+                                                <br/>Please provide further information on how your country is supporting the development of community protocols.
+                                                <div km-textbox-ml rows=3 name="question42CommunityFurtherInfo" ng-model="document.question42.community.furtherInfo" locales="document.header.languages" placeholder=""></div>
 
-                                    <div class="checkbox">
-                                        <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-change="Q42Clear()" ng-model="document.question42.community.answer">Community protocols</label>
-                                    </div>
-                                    <div ng-show="document.question42.community.answer" class="km-control-group" name="question42CommunityFurtherInfo" caption="">
-                                        Please provide further information on how your country is supporting the development of community protocols.
-                                        <div km-textbox-ml rows=3 name="question42CommunityFurtherInfo" ng-model="document.question42.community.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                                <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsCommunity" caption="Please select the relevant ABSCH records">
+                                                    <div document-selector ng-model="document.question42.community.documentReferenceIDs"
+                                                                            ng-disabled="!document.government || !Q37IsYes()"
+                                                                            question="question42community"
+                                                                            government="document.government"
+                                                                            schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"   filter="true">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                                               
+                                        </div>
+                                        
+                                        <div class="checkbox">
+                                            <div style="float: left" ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}" class="km-yes-no"  ng-change="Q42Clear()"
+                                                    name="question42_2" ng-model="document.question42.mat.answer"> </div>                                                   
+                                            <div class="km-control-group" required="{{Q37IsYes()}}" name="question42_mat" caption="Minimum requirements for mutually agreed terms">
+                                            </div>         
+                                            <div ng-show="document.question42.mat.answer" class="km-control-group" name="question42MATFurtherInfo" caption="">
+                                                <br/>Please provide further information on how your country is supporting the development of minimum requirements mutually agreed terms.
+                                                <div km-textbox-ml rows=3 name="question42MATFurtherInfo" ng-model="document.question42.mat.furtherInfo" locales="document.header.languages" placeholder=""></div>
 
-                                        <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsCommunity" caption="Please select the relevant ABSCH records">
-                                            <div document-selector ng-model="document.question42.community.documentReferenceIDs"
-                                                                    ng-disabled="!document.government || !Q37IsYes()"
-                                                                    question="question42community"
-                                                                    government="document.government"
-                                                                    schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"   filter="true">
+                                                <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsMat" caption="Please select the relevant ABSCH records">
+                                                    <div document-selector ng-model="document.question42.mat.documentReferenceIDs"
+                                                                            ng-disabled="!document.government || !Q37IsYes()"
+                                                                            question="question42mat"
+                                                                            government="document.government"
+                                                                            schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"   filter="true">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="checkbox">
-                                        <label><input ng-disabled="!document.question37.answer" ng-change="Q42Clear()" type="checkbox" ng-model="document.question42.mat.answer">Minimum requirements for mutually agreed terms</label>
-                                    </div>
-                                    <div ng-show="document.question42.mat.answer" class="km-control-group" name="question42MATFurtherInfo" caption="">
-                                        Please provide further information on how your country is supporting the development of minimum requirements mutually agreed terms.
-                                        <div km-textbox-ml rows=3 name="question42MATFurtherInfo" ng-model="document.question42.mat.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                        <div class="checkbox">
+                                            <div style="float: left" ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}" class="km-yes-no"  ng-change="Q42Clear()"
+                                                name="question42_3" ng-model="document.question42.mcc.answer"></div>   
+                                            <div class="km-control-group" required="{{Q37IsYes()}}" name="question42_mcc" caption="Model contractual clauses">
+                                            </div>
+                                            <div ng-show="document.question42.mcc.answer" class="km-control-group" name="question42MCCFurtherInfo" caption="">
+                                                Please provide further information on how your country is supporting the development of model contractual clauses
+                                                <div km-textbox-ml rows="3" name="question42MCCFurtherInfo" ng-model="document.question42.mcc.furtherInfo" locales="document.header.languages" placeholder=""></div>
 
-                                        <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsMat" caption="Please select the relevant ABSCH records">
-                                            <div document-selector ng-model="document.question42.mat.documentReferenceIDs"
-                                                                    ng-disabled="!document.government || !Q37IsYes()"
-                                                                    question="question42mat"
-                                                                    government="document.government"
-                                                                    schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"   filter="true">
+                                                <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsmcc" caption="Please select the relevant ABSCH records">
+                                                    <div document-selector ng-model="document.question42.mcc.documentReferenceIDs"
+                                                                            ng-disabled="!document.government || !Q37IsYes()"
+                                                                            question="question42mcc"
+                                                                            government="document.government"
+                                                                            schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"   filter="true">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="checkbox">
-                                        <label><input ng-disabled="!document.question37.answer" type="checkbox" ng-change="Q42Clear()" ng-model="document.question42.mcc.answer">Model contractual clauses</label>
-                                    </div>
-                                    <div ng-show="document.question42.mcc.answer" class="km-control-group" name="question42MCCFurtherInfo" caption="">
-                                        Please provide further information on how your country is supporting the development of model contractual clauses
-                                        <div km-textbox-ml rows=3 name="question42MCCFurtherInfo" ng-model="document.question42.mcc.furtherInfo" locales="document.header.languages" placeholder=""></div>
-
-                                        <div class="km-control-group" style="margin-bottom:20px;" name="q42DocRefsmcc" caption="Please select the relevant ABSCH records">
-                                            <div document-selector ng-model="document.question42.mcc.documentReferenceIDs"
-                                                                    ng-disabled="!document.government || !Q37IsYes()"
-                                                                    question="question42mcc"
-                                                                    government="document.government"
-                                                                    schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"   filter="true">
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row" ng-class="{'disable': !document.question37.answer}">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" ng-required="Q37IsYes()"  bold="true" name="question43" caption="43. Has your country endeavoured not to restrict the customary use and exchange of genetic resources and associated traditional knowledge within and among indigenous and local communities as provided in Article 12.4?">
-                                        <div ng-disabled="!document.question37.answer" ng-required="Q37IsYes()" class="km-yes-no" name="question43" ng-model="document.question43.answer"></div>
+                                    <div class="km-control-group" required="{{Q37IsYes()}}"  bold="true" name="question43" caption="43. Has your country endeavoured not to restrict the customary use and exchange of genetic resources and associated traditional knowledge within and among indigenous and local communities as provided in Article 12.4?">
+                                        <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}" class="km-yes-no" name="question43" ng-model="document.question43.answer"></div>
                                     </div>
                                     <div class="km-control-group" name="question43FurtherInfo" caption="">
                                         Please provide further information
@@ -1944,12 +1956,7 @@
             </div> <!-- tab='edit' -->
         </form>
 
-        <div ng-show="tab=='review'" km-tab="review">
-
-
-            <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
-                <input type="button" class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-repeat="locale in document.header.languages" ng-click="$parent.review.locale = locale" value="{{locale | uppercase}}" />
-            </div>
+        <div ng-show="tab=='review'" km-tab="review" id="schemaView">
 
             <div view-abs-national-report ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
 

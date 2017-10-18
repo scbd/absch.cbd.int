@@ -8,6 +8,8 @@ define(['./directives/national-reports/questions-selector', './directives/nation
         delete $scope.selectedQuestions;
         delete $scope.selectedRegions;
         delete $scope.maxDate;
+        delete $scope.selectedRegionsPreset;
+        delete $scope.selectedRegionsPresetFilter;
 
         //========================================
         //
@@ -28,6 +30,8 @@ define(['./directives/national-reports/questions-selector', './directives/nation
             $scope.selectedReportType = mapReportType(data.type);
             $scope.selectedQuestions  = data.questions;
             $scope.selectedRegions    = data.regions;
+            $scope.selectedRegionsPreset    = data.regionsPreset;
+            $scope.selectedRegionsPresetFilter    = data.regionsPresetFilter;
 
         } catch (e) {
             sessionStorage.removeItem('nrAnalyzerData');
@@ -40,6 +44,8 @@ define(['./directives/national-reports/questions-selector', './directives/nation
         $scope.$watch('selectedReportType', saveSettings);
         $scope.$watchCollection('selectedQuestions', saveSettings);
         $scope.$watchCollection('selectedRegions',   saveSettings);
+        $scope.$watchCollection('selectedRegionsPreset',   saveSettings);
+        $scope.$watchCollection('selectedRegionsPresetFilter',   saveSettings);
 
         //========================================
         //
@@ -49,7 +55,9 @@ define(['./directives/national-reports/questions-selector', './directives/nation
             sessionStorage.setItem('nrAnalyzerData', JSON.stringify({
                 type: $scope.selectedReportType,
                 regions: $scope.selectedRegions,
-                questions: $scope.selectedQuestions
+                questions: $scope.selectedQuestions,
+                regionsPreset: $scope.selectedRegionsPreset,
+                regionsPresetFilter: $scope.selectedRegionsPresetFilter
             }));
         }
         //========================================

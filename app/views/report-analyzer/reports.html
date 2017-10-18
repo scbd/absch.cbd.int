@@ -1,5 +1,5 @@
 ﻿<div>
-    <div class="register-content card card-1-notrans ">
+    <div class="register-content card card-1-notrans " id="secNrAnalyzer">
         <div class="register-content-header bg-darkgrey color-white">
             <div style="padding:10px 10px;">
                 <h3 style="margin:0px;">Report</h3>
@@ -20,9 +20,10 @@
                         </tr>
                     </table>
                 </div>
-
                 <div class="panel-body">
-                    <national-report-questions-selector report-type="$parent.selectedReportType" questions="$parent.selectedQuestions" regions="$parent.selectedRegions"></national-report-questions-selector>
+                    <national-report-questions-selector report-type="$parent.selectedReportType" questions="$parent.selectedQuestions" 
+                    regions="$parent.selectedRegions" regions-preset="$parent.selectedRegionsPreset"
+                    regions-preset-filter="$parent.selectedRegionsPresetFilter"></national-report-questions-selector>
                 </div>
 
                 <div class="panel-footer text-right">

@@ -45,7 +45,7 @@
             <li> <a translation-url  href="/register/dashboard" ng-class="{'tabactivated':path.indexOf('dashboard') > 0}"> Dashboard </a> </li>
             <li> <a translation-url  href="/register/notifications" ng-class="{'tabactivated':path.indexOf('notifications') > 0}"> Requests & Notifications </a></li>
             <li ng-if="user.government || roles.isAbsAdministrator || roles.isAdministrator"><a translation-url  ng-class="{'tabactivated':path.indexOf('national-users')>0}" href="/register/national-users"> User Management</a> </li>
-            <li> <a translation-url  href="/register/user-preferences" ng-class="{'tabactivated':path.indexOf('user-preferences') > 0}"> Preferences  <span class="label label-danger">New</span> </a> </li>
+            <li> <a translation-url  href="/register/user-preferences" ng-class="{'tabactivated':path.indexOf('user-preferences') > 0}"> Preferences </a> </li>
             <li ng-if="roles.isAbsAdministrator || roles.isAdministrator"><a translation-url  href="/register/admin" class="bg-pink linkDark"><span class="color-white "><span class="hidden-xs hidden-sm">ABSCH</span> ADMIN</a></span>
             </li>
             <!--<li ng-if="user.government || roles.isAbsAdministrator || roles.isAdministrator"><a translation-url  ng-class="{'tabactivated':path.indexOf('stats')>0}" href="/register/stats"> Country Statistics <span class="label label-danger">New</span></a> </li>-->

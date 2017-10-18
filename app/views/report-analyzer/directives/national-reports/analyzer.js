@@ -1,6 +1,6 @@
 define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 'scbd-angularjs-filters', 
 '../../filters/cases', 'scbd-angularjs-services/locale', 'views/directives/view-reference-document'],
-        function(templateHtml, app, _, require, $) { 'use strict';
+function(templateHtml, app, _, require, $) { 'use strict';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
@@ -24,7 +24,8 @@ define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyze
     //
     //
     //==============================================
-    app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', function($http, $q, locale, $filter) {
+    app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$timeout',
+     function($http, $q, locale, $filter, $timeout) {
         return {
             restrict : 'E',
             replace : true,
@@ -34,7 +35,9 @@ define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyze
                 maxDate: '=maxDate',
                 selectedRegions: '=regions',
                 selectedQuestions: '=questions',
-                selectedReportType: '=reportType'
+                selectedReportType: '=reportType',
+                selectedRegionsPreset: '=regionsPreset',
+                selectedRegionsPresetFilter: '=regionsPresetFilter'
             },
             link: function ($scope, $element, attr, nrAnalyzer) {
                 
@@ -248,6 +251,46 @@ define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyze
                 //
                 //
                 //====================================
+                $scope.print = function(sectionToPrint) {
+                    $scope.printing = true;
+                    if(sectionToPrint =='#secNrAnalyzer' && _.some($scope.sections, function(section){return !section.expanded})){
+                        _.each($scope.sections, function(section){
+                            if(!section.expanded){
+                                $timeout(function() {
+                                    $element.find('#qt_'+section.key).click();
+                                },0) 
+                            }
+                        });
+                        $timeout($scope.print, 1000);
+                    }
+                    else{
+                        
+                        require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html',
+                        'css!/app/css/print-friendly'], function(printObj, header, footer){						
+                            var printObject = $element.parent().parent().parent().find('#secNrAnalyzer');
+                            if(sectionToPrint !='#secNrAnalyzer' && sectionToPrint)
+                                printObject = $element.find(sectionToPrint)
+                            printObject.printThis({
+                                debug:false,
+                                printContainer:true,
+                                importCSS:true,
+                                importStyle : true,
+                                pageTitle : 'Report Analyzer : Interim National Report on the Implementation of the Nagoya Protocol',
+                                loadCSS : 'css/print-friendly.css',
+                                header : header,
+                                footer : footer
+                            });	
+                            $timeout(function(){$scope.printing = false;},1000);
+                        });
+                    }
+                };
+
+                
+
+                //====================================
+                //
+                //
+                //====================================
                 var sumTypeDialog = $element.find("#sumTypeDialog");
 
                 sumTypeDialog.on("shown.bs.modal",    function() { sumTypeDialog.find('button').focus(); });
@@ -402,10 +445,15 @@ define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyze
                         reportType : $scope.selectedReportType,
                         regions : $scope.selectedRegions,
                         maxDate : $scope.maxDate,
-                        questions : []
+                        questions : [],
+                        regionsPresetFilter : $scope.selectedRegionsPresetFilter
                     });
 
                     var query  = { 'government_REL' : { $in: options.regions } };
+
+                    if(options.regionsPresetFilter && options.regionsPresetFilter.length > 0)
+                          query["government.identifier"] = { $in: options.regionsPresetFilter };
+
                     var fields = _(options.questions).union(['government']).reduce(function(ret, key) {
                         ret[key] = 1;
                         return ret;

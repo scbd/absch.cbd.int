@@ -5,7 +5,8 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
 			restrict: 'EAC',
 			replace:true,
 			template: template,
-			controller: ['$scope', '$filter','commonjs','$element', '$compile', function($scope, $filter, commonjs, $element, $compile){
+            controller: ['$scope', '$filter','commonjs','$element', '$compile', '$timeout', '$route', '$location',
+                function($scope, $filter, commonjs, $element, $compile, $timeout, $route, $location){
 
 				$scope.getUniqueID = function(document){
 					if(!document)
@@ -57,7 +58,29 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
                                 .append($compile(directiveHtml)($scope));
                         });
                     });
-				}
+                }
+                
+                $scope.print = function(){
+                    $scope.printing = true;
+                    require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html'], function(printObj, header, footer){						
+                        $element.parent().parent().parent().find('#schemaView').printThis({
+                            debug:false,
+                            printContainer:true,
+                            importCSS:true,
+                            importStyle : true,
+                            pageTitle : ($route.current.params.documentID||'')+$('title').text(),
+                            loadCSS : '/app/css/print-friendly.css',
+                            header : header,
+                            footer : footer
+                        });	
+                        $timeout(function(){$scope.printing = false;},1000);
+                    });
+                    
+                }
+                $scope.showReportedRecord = function(){
+                    return !/^\/register\/\w{2,4}\/new/.test($location.path()) &&
+                           !/^\/register\/\w{2,4}\/([a-z])\w.+\/edit/i.test($location.path());
+                }
 			}]
 		};
 

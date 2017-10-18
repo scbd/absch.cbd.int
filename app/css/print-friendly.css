@@ -1,19 +1,43 @@
-﻿ a[href]:after {
-            content: '';
-        }
-
-.report-record, .document-languages,.expander, .fa-chevron-circle-up {
-    display: none;
+﻿@media print {
+    a[href]:after {
+        content: '' !important;
+    }
+    .report-record,
+    .document-languages,
+    .expander,
+    .fa-chevron-circle-up {
+        display: none;
+    }
+    body,
+    #htmlContent,
+    #htmlContentHeader,
+    #htmlContentFooter,
+    #schemaView {
+        background-color: #fff!important;
+    }
+    address.km-value,
+    div.km-value,
+    span.km-value,
+    ul.km-value>li,
+    ol.km-value>li {
+        background-color: #f5f5f5!important;
+        border: 1px solid #ccc!important;
+        border: 1px solid rgba(0, 0, 0, 0.15)!important;
+    }
+    #htmlContentFooter {
+        margin-top: 20px;
+    }
+    .panel-heading.bg-blue > .color-white, .panel-heading.bg-blue > h4, #Record h4 {
+        color: #111!important;
+    }
 }
 
-body, #htmlContent, #htmlContentHeader, #htmlContentFooter,#schemaView{
-    background-color: #fff!important;
+scbd-header, nav, .navbar.navbar-portal, #PortalLinks1, .footer, scbd-footer, .slaask-button, .hidden-print, .pdf-download-buttons {
+    display: none!important
 }
-address.km-value, div.km-value, span.km-value, ul.km-value > li, ol.km-value > li {
-    background-color: #f5f5f5!important;
-    border: 1px solid #ccc!important;
-    border: 1px solid rgba(0, 0, 0, 0.15)!important;
+.training-bg {
+    background: none
 }
-#htmlContentFooter{
-    margin-top: 20px;
+html, body, .container-full {
+    background: #fff;
 }

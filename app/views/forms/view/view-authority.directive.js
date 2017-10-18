@@ -1,4 +1,6 @@
-define(['app', "text!views/forms/view/view-authority.directive.html", 'views/forms/view/view-contact-reference.directive',
+define(['app', "text!views/forms/view/view-authority.directive.html", 
+'views/forms/view/view-contact-reference.directive',
+'views/directives/record-options',
 'views/directives/party-status'], function (app, template) {
 
 app.directive("viewAuthority", [function () {
@@ -9,7 +11,6 @@ app.directive("viewAuthority", [function () {
 		transclude : false,
 		scope: {
 			document: "=ngModel",
-			locale  : "=",
 			target  : "@linkTarget",
 			allowDrafts : "@",
 			hide : "@"
@@ -20,7 +21,7 @@ app.directive("viewAuthority", [function () {
 		},
 		controller : ["$scope", "IStorage", function ($scope, storage)
 		{
-
+			$scope.locale = 'en' //set from record option directive
 			//====================
 			//
 			//====================

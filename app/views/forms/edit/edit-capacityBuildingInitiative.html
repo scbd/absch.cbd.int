@@ -398,11 +398,7 @@
 
 				</form>
 
-            	<div ng-show="tab=='review'" km-tab="review">
-
-                    <div class="btn-group" ng-show="reviewDocument.header.languages.length>1">
-                        <input class="btn" ng-class="{'active' : review.locale==locale, 'btn-info' : review.locale==locale}" ng-click="$parent.review.locale = locale" ng-repeat="locale in document.header.languages" type="button" value="{{locale | uppercase}}"/>
-                    </div>
+            	<div ng-show="tab=='review'" km-tab="review" id="schemaView">
                     <div view-capacity-building-initiative ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
                 </div>
 

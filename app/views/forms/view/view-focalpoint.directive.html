@@ -1,67 +1,72 @@
 ﻿<div id="Record" class="record panel panel-default">
-	<div class="panel-heading  bg-blue"> <h4>{{getNFPText(document.ctgList_ss) | uppercase}}</h4></div>
+	<div class="panel-heading  bg-blue"> <h4>{{getNFPText(document.categories) | uppercase}}</h4></div>
 	<div class="record-body panel-body">
-
-		<div ng-show="document.government_EN_t">
+		
+		<div record-options></div>
+</br>
+		<div ng-show="document.government">
 			<label>Country</label>
 			<span class="km-value">
-				{{document.government_EN_t}}
+				{{document.government|term}}
                 <span ng-party-status code="document.government_s" id="government"></span>
 			</span>
 		</div>
 
-		<div ng-show="document.title_EN_t">
+		<div ng-show="document.firstName||document.lastName">
 			<label>Name</label>
 			<span class="km-value">
-				{{document.title_EN_t | lstring:locale}}
+				{{document.title | lstring:locale}} {{document.firstName | lstring:locale}} {{document.lastName | lstring:locale}}
 			</span>
 		</div>
 
-		<div ng-show="document.description_EN_t">
+		<div ng-show="document.description">
 			<label>Description</label>
 			<span class="km-value">
-				{{document.description_EN_t}}
+				{{document.description|lstring:locale}}
 			</span>
 		</div>
 
-		<div ng-show="document.function_EN_t">
+		<div ng-show="document.designation">
 			<label>Function</label>
 			<span class="km-value">
-				{{document.function_EN_t}}
+				{{document.designation|lstring:locale}}
 			</span>
 		</div>
 
-		<div ng-show="document.department_EN_t">
+		<div ng-show="document.department">
 			<label>Department</label>
 			<span class="km-value">
-				{{document.department_EN_t}}
+				{{document.department|lstring:locale}}
 			</span>
 		</div>
 
 
-		<div ng-show="document.organization_EN_t">
+		<div ng-show="document.organization">
 			<label>Organization</label>
 			<span class="km-value">
-				{{document.organization_EN_t}}
+				{{document.organization|lstring:locale}}
 			</span>
 		</div>
 
-		<div ng-show="document.email_ss">
+		<div ng-show="document.email">
 			<label>Email</label>
 			<span class="km-value">
 				<ul style="list-style-type: none;padding-left:0;">
-					<li ng-repeat="item in document.email_ss">
+					<li ng-repeat="item in document.email">
 						<a translation-url  href="mailto:{{item}}"><i class="fa fa-envelope-o" /> {{item}}</a>
 					</li>
 				</ul>
 			</span>
 		</div>
 
-		<div ng-show="document.telephone_ss">
+		<div ng-show="document.phones||document.mobiles">
 			<label>Telephone</label>
 			<span class="km-value">
 				<ul style="list-style-type: none;padding-left:0;">
-					<li ng-repeat="item in document.telephone_ss">
+					<li ng-repeat="item in document.phones" ng-if="document.phones">
+						<i class="fa fa-phone" /> {{item}}
+					</li>
+					<li ng-repeat="item in document.mobiles" ng-if="document.mobiles">
 						<i class="fa fa-phone" /> {{item}}
 					</li>
 				</ul>
@@ -70,29 +75,29 @@
 
 
 
-		<div ng-show="document.fax_ss">
+		<div ng-show="document.faxes">
 			<label>Fax</label>
 			<span class="km-value">
 				<ul style="list-style-type: none;padding-left:0;">
-					<li ng-repeat="item in document.fax_ss">
+					<li ng-repeat="item in document.faxes">
 						<i class="fa fa-fax" /> {{item}}
 					</li>
 				</ul>
 			</span>
 		</div>
 
-		<div ng-show="document.treaty_CEN_ss">
-			<label>Treaties</label>
-			<div class="km-value" >
-				<ul class="list">
-					<li ng-repeat="item in document.treaty_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
-				</ul>
+		<div ng-show="focalPointDetails.treaty_CEN_ss">
+				<label>Treaties</label>
+				<div class="km-value" >
+					<ul class="list">
+						<li ng-repeat="item in focalPointDetails.treaty_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
+					</ul>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.url_ss">
+		<div ng-show="focalPointDetails.url_ss">
 			<label>Link to the information on the CBD website</label>
 			<span class="km-value">
-				<a translation-url  ng-href="{{document.url_ss | lstring:locale}}" target="_">{{document.url_ss | lstring:locale}}</a>
+				<a translation-url  ng-href="{{focalPointDetails.url_ss[0]}}" target="_blank">{{focalPointDetails.url_ss[0]}}</a>
 			</span>
 		</div>
 	</div>

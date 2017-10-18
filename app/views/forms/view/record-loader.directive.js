@@ -143,7 +143,7 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 					$scope.loadDocument = function (documentSchema, documentID, documentRevision) {
 
 						if (documentSchema &&
-							_.contains(["FOCALPOINT", "MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "NFP", "ST", "NT", "MT", "PR", "MTD"], documentSchema.toUpperCase())) {
+							_.contains(["MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "ST", "NT", "MT", "PR", "MTD"], documentSchema.toUpperCase())) {
 							$scope.loading = true;
 							commonjs.getReferenceRecordIndex(documentSchema, documentID)
 								.then(function (data) {
@@ -153,6 +153,9 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 							loadViewDirective(documentSchema);
 						}
 						else if (documentID) {
+							// if(_.contains(['FOCALPOINT', 'NFP'], documentSchema.toUpperCase()))
+							// 	documentID = commonjs.integerToHex(documentID);
+
 							$scope.load(documentID, documentRevision);
 						}
 					};
@@ -164,15 +167,8 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 						$scope.timeLaspe--;
 						$timeout(function () { closeWindow(); }, 1000)
 					}
-					//==================================
-					//
-					//==================================
-					$scope.getLocale = function () {
-						return $scope.currentLocale || $scope.$root.locale;
-					}
-					$scope.setLocale = function(locale){
-						$scope.currentLocale = locale
-					}
+					
+					
 					//==================================
 					//
 					//==================================
@@ -343,7 +339,7 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 						require([schemaDetails], function () {
 							var name = snake_case(lschema);
 							var directiveHtml =
-								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' locale='getLocale()' link-target={{linkTarget}}></DIRECTIVE>"
+								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}}></DIRECTIVE>"
 									.replace(/DIRECTIVE/g, 'view-' + name);
 							$scope.$apply(function () {
 								$element.find('#schemaView')
@@ -375,23 +371,10 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 						getDocumentInfo : function(){$scope.internalDocumentInfo}
 					}
 
-
-					$scope.print = function(){
-						$scope.printing = true;
-						require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html'], function(printObj, header, footer){						
-							$element.find('#schemaView').printThis({
-								debug:false,
-								printContainer:true,
-								importCSS:true,
-								importStyle : true,
-								pageTitle : $route.current.params.documentID+$('title').text(),
-								loadCSS : 'css/print-friendly.css',
-								header : header,
-								footer : footer
-							});	
-							$timeout(function(){$scope.printing = false;},100);
-						});
-						
+					var queryString = $location.search();
+					if(queryString && queryString.print){
+						$scope.printMode = true;
+						require(['css!/app/css/print-friendly'])
 					}
 				}]
 		}

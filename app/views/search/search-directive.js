@@ -13,7 +13,7 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
 'services/app-config-service', 'ngDialog',
 'views/register/user-preferences/user-preference-filter',
 'views/directives/export-directive',
-'services/thesaurus-service'
+'services/thesaurus-service', 'angular-animate', 'angular-joyride'
 ], function(app, template, _) {
 
     app.directive('searchDirective', function() {
@@ -23,9 +23,10 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
             // transclude: true,
             template: template, 
             controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
-             'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService',
+             'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService','$rootScope',
+             'joyrideService', '$timeout',
             function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
-                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService) {
+                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, $timeout) {
                     
                     var customKeywords = {
                         commercial : {
@@ -991,7 +992,7 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                         //reference
                         addFilter('resource', {'sort': 1,'value':false, type:'reference', 'name':'Virtual Library Resources ', 'id':'resource', 'description':'The virtual library in the ABS Clearing-House hosts a number of ABS relevant resources submitted by any registered user of the ABS Clearing-House. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc.'});
 
-                        addFilter('modelContractualClause', {'sort': 2, type:'reference', 'name':'Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standard', 'id':'modelContractualClause', 'description':'Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.'});
+                        addFilter('modelContractualClause', {'sort': 2, type:'reference', 'name':'Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards', 'id':'modelContractualClause', 'description':'Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.'});
 
                         addFilter('communityProtocol', {'sort': 3, type:'reference', 'name':'Community Protocols and Procedures and Customary Laws', 'id':'communityProtocol', 'description':'Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.'});
                         addFilter('capacityBuildingInitiative', {'sort': 4, type:'reference', 'name':'Capacity-building Initiatives', 'id':'capacityBuildingInitiative', 'description':''});
@@ -1212,13 +1213,18 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                     $scope.canShowSaveFilter = function(){
                         return !$scope.skipSaveFilter && !_.isEmpty($scope.setFilters);
                     }
+
+                    $scope.isUserAuthenticated = function() {
+                        //console.log("user = " + $rootScope.user.isAuthenticated);
+                        return $rootScope.user && $rootScope.user.isAuthenticated;
+                    }
+
                     $scope.showSaveFilter = function(existingFilter){
                         if($rootScope.user && !$rootScope.user.isAuthenticated){
                             var signIn = $scope.$on('signIn', function(evt, data){
                                  $scope.showSaveFilter();
                                  signIn();
                             });
-
                             $('#loginDialog').modal("show");
                         }
                         else{
@@ -1286,6 +1292,121 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                         return $scope.currentTab==='nationalRecords' ? 'group' : 'list';
                     }
                    
+                    
+                    $scope.tour = function(){
+                        $scope.tourOn = true;
+                        var joyride = joyrideService;
+                        
+                        joyride.config = {
+                            onStepChange: function(){  },
+                            onStart: function(){  },
+                            onFinish: function(){ 
+                                joyride.start = false;
+                                $scope.tourOn = false; 
+                                $scope.showFilters = false;                                
+                                $scope.showDownloadDialog = false;                                
+                                $('#recordsContent').removeClass('active jr_target'); 
+                                // $timeout(function(){
+                                // // $scope.updateCurrentTab('nationalRecords');
+                                // }, 100)
+                            },
+                            steps : [
+                              
+                                {   appendToBody:true,
+                                    title: "Introduction to the search",
+                                    content: '<p>The search page is where you will find all available information on the ABSCH. Information can be found using combinations of filters giving users the flexibility to retrieve a very wide or a very narrow set of results.</p> <p>Click next to learn more about searching for information',
+                                },
+                               
+                                {
+                                    type: 'element',
+                                    selector: "#freeText",
+                                    title: "Free text search",
+                                    content: 'Start typing in the free text and you will find some suggested filters from the controlled vocabularies. Select and apply the filters to the search or enter your own free text click enter to filter the results below.'
+                                },
+                                {   appendToBody:true,
+                                    type: 'element',
+                                    selector: "#recordTypesFilterTab",
+                                    title: "Filter by record type",
+                                    content: 'Select a record type. Record types are organized into three categories and the result are displayed in separate tabs below.',
+                                    placement: 'top',
+                                    beforeStep: openFilterTab
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#keywordsFilterTab",
+                                    title: "Filter by keyword",
+                                    content: 'Select from the list of keywords to narrow down your search. If you have already filtered by a record type, the keyword filters displayed will be applicable specifically to that record type. ',
+                                    placement: 'top',
+                                    beforeStep: openFilterTab
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#referenceRecordsTab",
+                                    title: "Reference records",
+                                    content: 'Search results are display on separate tabs organized by record category. Click on the tab to view the records associated with that category. ',
+                                    placement: 'top',
+                                    beforeStep: openRecordsTab
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#exportRecords",
+                                    title: "Export",
+                                    content: 'Use the export functionality to export the information in the tab to a spreadsheet format.',
+                                    placement: 'left',
+                                    beforeStep: function(resumeJoyride){
+                                        $('#recordsContent').removeClass('active jr_target');
+                                        if($scope.showDownloadDialog)$scope.showDownloadDialog = false;
+                                        resumeJoyride();
+                                    }
+                                },
+                                {
+                                     appendToBody:true,
+                                    type: 'element',
+                                    selector: "#record1",
+                                    title: "Records",
+                                    content: 'Click on a record to view the full details.',
+                                    placement: 'top',
+                                    beforeStep: gotoFirstRefRecord
+                                }
+                            ]
+                        };
+                        joyride.start = true;
+
+                        function openFilterTab(resumeJoyride){
+                            var step = joyride.config.steps[joyride.current];
+                            $scope.showFilters = step.selector.replace('#','').replace('Tab', '');
+                            resumeJoyride();
+                        }
+
+                        function openRecordsTab(resumeJoyride){
+                            var step = joyride.config.steps[joyride.current];
+                            $scope.updateCurrentTab(step.selector.replace('#','').replace('Tab', ''));
+                            $('#recordsContent').addClass('active jr_target');
+                            resumeJoyride();
+                        }
+
+                        function gotoFirstRefRecord(resumeJoyride){
+                            var step = joyride.config.steps[joyride.current];
+                            $scope.updateCurrentTab("referenceRecords");
+                            $('#record1').addClass('active jr_target');
+                            resumeJoyride();
+                        }
+
+                        function openExportDialog(resumeJoyride){
+                            var step = joyride.config.steps[joyride.current];
+                            $scope.showDownloadDialog = true;   
+                            $timeout(function(){
+                                resumeJoyride();
+                            }, 200);
+                            $timeout(function(){
+                                $('.jr_container').css('z-index', 10000); 
+                            }, 500);
+                            
+                        }                        
+                    }
             }]//controller
         };
     });

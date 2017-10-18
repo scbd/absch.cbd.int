@@ -1,44 +1,55 @@
 ﻿<div id="userSearchFilters">
     <style>
-        
+
+        .ngdialog-content #searchFilterTab, .ngdialog-content .help-tour {
+             display: none;
+         }
         .ngdialog.ngdialog-theme-default.wide .ngdialog-content {
             width: 70% !important;
         }
     </style>
-    <div class="pull-right1">
-        <input type="button" class="btn btn-primary" value="Add new" ng-click="addEdit()" />       
-    </div>    
-
-   <br/>
+    <br/>
 
     <div style="width:100%" ng-show="userFilters.length>0">
-
-        <ul class="list-group">
-            <li class="list-group-item clearfix" style="background-color:#eee;"
-            ng-repeat="record in userFilters | orderBy:'meta.createdOn':'desc'">
-                <div class="pull-right btn-group" ng-hide="record.pendingStatus">
-                    <a type="button" class="btn" ng-hide="del" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'" > <i class="fa fa-play-circle"></i> <br> run query</a>
-                    <a type="button" class="btn" ng-hide="del" ng-click="addEdit(record)" ng-disabled="!record._id" > <i class="fa fa-edit"></i> <br> edit </a>
-                    <a type="button" class="btn" ng-hide="del"  ng-click="del=!!record._id;"  ng-disabled="!record._id"> <i class="fa fa-trash-o"></i> <br> delete  </a>
-
-                    <a type="button" class="btn color-red bold" ng-show="del" ng-click="confirmDelete(record);del=false;"> <i class="fa fa-trash-o"></i> <br> confirm delete?  </a>
-                    <a type="button" class="btn" ng-show="del" ng-click="del=false;"> <i class="fa fa-times-circle"></i> <br> cancel  </a>
-                </div>
-                <div ng-if="record.pendingStatus" class="pull-right">
-                    <i class="fa fa-spin fa-spinner" /> pending status..
-                </div>
-               
-                <span class="label label-warning pull-right" ng-if="record.meta.createdOn && record._id" ng-bind="record.meta.createdOn|formatDateWithTime"></span>
-                <h4><a class="text-bold mb0 color-blue"  ng-click="runUserQuery(record)" >{{record.queryTitle}}</a></h4>
-                      
-                <span ng-if="record._id" style="color:#bbb;">FILTERS:</span><span  ng-if="record._id" ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
-                    <span class="label label-info">                    
-                            <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>{{filter.name}}
-                            <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>Filters</th>
+                <th>
+                    <button class="btn btn-primary pull-right" ng-click="addEdit()">
+                            <i class="fa fa-plus-circle"></i> Add new
+                    </button>
+                </th>
+            </tr>
+            <tr ng-repeat="record in userFilters | orderBy:'meta.createdOn':'desc'">
+                <td class="col-md-3" colspan="{{record._id ? 1 : 2}}">
+                    <b><a class="text-bold mb0" ng-click="runUserQuery(record)">{{record.queryTitle}}</a></b>
+                </td>
+                <td class="col-md-6" ng-if="record._id">
+                    <span ng-if="record._id" ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
+                            <span class="label label-info">                    
+                                    <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>                    {{filter.name}}
+                    <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
                     </span>
-                </span>
-            </li>
-        </ul>
+                    </span>
+                </td>
+                <td class="col-md-3">
+                    <div class="pull-right btn-group" ng-hide="record.pendingStatus">
+                        <a type="button" class="btn" ng-hide="del" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'"> <i class="fa fa-play-circle"></i> <br> run query</a>
+                        <a type="button" class="btn" ng-hide="del" ng-click="addEdit(record)" ng-disabled="!record._id"> <i class="fa fa-edit"></i> <br> edit </a>
+                        <a type="button" class="btn" ng-hide="del" ng-click="del=!!record._id;" ng-disabled="!record._id"> <i class="fa fa-trash-o"></i> <br> delete  </a>
+
+                        <a type="button" class="btn color-red bold" ng-show="del" ng-click="confirmDelete(record);del=false;"> <i class="fa fa-trash-o"></i> <br> confirm delete?  </a>
+                        <a type="button" class="btn" ng-show="del" ng-click="del=false;"> <i class="fa fa-times-circle"></i> <br> cancel  </a>
+                    </div>
+                    <div ng-if="record.pendingStatus" class="pull-right">
+                        <i class="fa fa-spin fa-spinner" /> pending status..
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
     <div ng-show="!loading && (!userFilters || userFilters.length==0)">
         <div class="alert alert-info" role="alert">
@@ -50,14 +61,14 @@
     <script type="text/ng-template" trados-translation="true" id="newFilterDialog">
         <div class="modal-header">
             <h3 class="modal-title">
-              Add/Edit filter
+                Add/Edit filter
             </h3>
         </div>
 
-        <div class="modal-body">           
-           <label for="filterTitle">Select search filters:</label>
-            <search-directive skip-results="true" skip-save-filter="true" skip-date-filter="true" 
-                    skip-keywords-filter="{{skipKeywordsFilter}}" skip-text-filter="{{skipTextFilter}}">
+        <div class="modal-body">
+            <label for="filterTitle">Select search filters:</label>
+            <search-directive skip-results="true" skip-save-filter="true" skip-date-filter="true" skip-keywords-filter="{{skipKeywordsFilter}}"
+                skip-text-filter="{{skipTextFilter}}">
             </search-directive>
             <br>
             <div class="form-group">
@@ -65,7 +76,7 @@
                 <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Search title">
             </div>
             <div>
-                <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">  
+                <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
                     <p ng-repeat="error in errors">{{error}}</p>
                 </div>
             </div>
