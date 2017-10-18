@@ -1,6 +1,6 @@
-#od1 {font-size: 24px;background-color: #5F4586;color:white;}
-#od2 {font-size: 24px;background-color: #333;color:white;}
-#od3 {font-size: 24px;background-color: #EC971F;color:white;}
+.label-party {font-size: 24px;background-color: #5F4586;color:white; min-width:30px}
+.label-inbetween {font-size: 24px;background-color: #333;color:white; min-width:30px}
+.label-nonparty {font-size: 24px;background-color: #EC971F;color:white; min-width:30px}
 
 @media (max-width: 600px){
   #od1 {font-size: 16px;}

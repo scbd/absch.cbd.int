@@ -102,12 +102,12 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             $scope.development_env = false;
             $scope.training_env = false;
 
-            if ($location.absUrl().toLowerCase().indexOf("://absch.cbddev.xyz") > 0 || $location.absUrl().toLowerCase().indexOf("localhost:2010") > 0) {
-                $scope.development_env = true;
-                $scope.training_env = false;
-                $scope.production_env = false;
-                $scope.env_name = "DEVELOPMENT";
-            }
+            // if ($location.absUrl().toLowerCase().indexOf("://absch.cbddev.xyz") > 0 || $location.absUrl().toLowerCase().indexOf("localhost:2010") > 0) {
+            //     $scope.development_env = true;
+            //     $scope.training_env = false;
+            //     $scope.production_env = false;
+            //     $scope.env_name = "DEVELOPMENT";
+            // }
             if ($location.absUrl().toLowerCase().indexOf("://training-absch.cbd.int") > 0) {
                 $scope.development_env = false;
                 $scope.training_env = true;
