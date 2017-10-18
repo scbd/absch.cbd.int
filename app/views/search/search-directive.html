@@ -11,7 +11,7 @@
                     </button>
                 </span>
                  <a ng-href="#" ng-if="canShowSaveFilter()" class="pull-right" style="margin-top:5px;margin:5px;color:#bbb;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"ng-click="clearFilter()"> <i class="fa fa-times-circle" aria-hidden="true"></i> Clear</a>
-                 <a ng-href="#" class="pull-right link2" style="margin-top:5px;margin:5px;color:#bbb;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"ng-click="tour()"> <i class="fa fa-question-circle" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Help using the search</span></a>
+                 <a ng-href="#" class="help-tour pull-right link2" style="margin-top:5px;margin:5px;color:#bbb;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"ng-click="tour()"> <i class="fa fa-question-circle" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Help using the search</span></a>
                  
             </div>
 
@@ -33,7 +33,7 @@
                     <li id="regionFilterTab"> <a href="" ng-class="{'active':showFilters=='regionFilter'}" ng-click="showFilters=(showFilters=='regionFilter' ? false : 'regionFilter')"class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Regions</a ></li>
                     <li id="dateFilterTab" ng-show="!skipDateFilter"> <a href="" ng-class="{'active':showFilters=='dateFilter'}" ng-click="showFilters=(showFilters=='dateFilter' ? false : 'dateFilter')"class="btn color-grey"><i class="fa fa-caret-down"></i>&nbsp;Date</a> </li>
                     
-                    <li id="searchFilterTab" ng-show="isUserAuthenticated()"> <a href="" ng-class="{'active':showFilters=='userSearchFilter'}" ng-click="showFilters=(showFilters=='userSearchFilter' ? false : 'userSearchFilter')" class="btn color-green"><i class="fa fa-caret-down"></i>&nbsp;Saved searches</a> </li>
+                    <li id="searchFilterTab"  ng-show="isUserAuthenticated()"> <a href="" ng-class="{'active':showFilters=='userSearchFilter'}" ng-click="showFilters=(showFilters=='userSearchFilter' ? false : 'userSearchFilter')" class="btn color-green"><i class="fa fa-caret-down"></i>&nbsp;Saved searches</a> </li>
 
                     <a ng-href="#" ng-if="canShowSaveFilter()" class="pull-right" style="padding-top:10px;color:#bbb;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;" ng-click="showSaveFilter()">Save search</a>
 
@@ -72,7 +72,7 @@
                 <region-filter ng-if="showFilters==='regionFilter' || (searchKeyword && !showFilters)"></region-filter>
                 <date-filter ng-if="showFilters==='dateFilter' && !skipDateFilter"></date-filter>
                 <span user-preference-filter ng-if="showFilters==='userSearchFilter' && !skipSaveFilter" run-query="runFilter(filter)" 
-                    collection="search-queries" style="max-height:300px;overflow-y:scroll"></span>
+                    collection="search-queries" style="max-height:300px;overflow-y:scroll;"></span>
             </div>
         </div>
     </div>
@@ -134,7 +134,6 @@
         </div>
     </div>
      <style>
-
         .ngdialog.ngdialog-theme-default.wide .ngdialog-content {
             width: 70% !important;
         }
