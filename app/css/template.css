@@ -1487,6 +1487,14 @@ div.recordDefault:hover {
 #search-new label {
     font-weight: bold!important;
 }
+
+
+@media (max-width: 600px){
+.search-tab-title > li > a{font-size: 12px!important;}
+.search-tab-title > li > a > span{font-size: 12px!important;}
+}
+
+
 #search-new .active .badge {
     background-color: #333;
     color: white;
