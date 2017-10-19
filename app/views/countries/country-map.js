@@ -223,6 +223,8 @@ function(template, app, _, popOverTemplate) {
             country.CP = 0;
           if(!country.CPC)
             country.CPC = 0;
+          if(!country.NR)
+            country.NR = 0;
         }
         //=======================================================================
         //
