@@ -7,7 +7,7 @@
 		<div ng-show="document.government">
 			<label>Country</label>
 			<span class="km-value">
-				{{document.government|term}}
+				<a ng-href="/countries/{{document.government.identifier}}" target={{target}}>{{document.government|term:locale}}</a>
                 <span ng-party-status code="document.government.identifier" id="government"></span>
 			</span>
 		</div>
@@ -19,10 +19,9 @@
 			</span>
 		</div>
 
-		<div ng-show="document.description">
+		<div ng-show="focalPointDetails.description_EN_t">
 			<label>Description</label>
-			<span class="km-value">
-				{{document.description|lstring:locale}}
+			<span class="km-value" ng-bind-html="focalPointDetails.description_EN_t">
 			</span>
 		</div>
 
@@ -48,11 +47,11 @@
 			</span>
 		</div>
 
-		<div ng-show="document.email">
+		<div ng-show="document.emails">
 			<label>Email</label>
 			<span class="km-value">
 				<ul style="list-style-type: none;padding-left:0;">
-					<li ng-repeat="item in document.email">
+					<li ng-repeat="item in document.emails">
 						<a translation-url  href="mailto:{{item}}"><i class="fa fa-envelope-o" /> {{item}}</a>
 					</li>
 				</ul>

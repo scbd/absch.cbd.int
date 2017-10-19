@@ -20,6 +20,7 @@ app.directive('viewFocalPoint', [function() {
 				$q.when(commonjs.getReferenceRecordIndex('focalPoint', newVal.header.identifier))
 					.then(function(result){
 							$scope.focalPointDetails = result.data
+							$scope.focalPointDetails.description_EN_t = ($scope.focalPointDetails.description_EN_t||'').replace(/\n/g, '<br/>')
 					})
 			})
 			
