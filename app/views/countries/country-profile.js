@@ -27,9 +27,9 @@ define(['app','underscore',
       angular.element(document).ready(function () {
           require(['views/countries/country-map'], function(map){
               $scope.$apply(function(){
-                  var mapElement = $element.find('#Jumbotron')
-                  $compile(mapElement.contents())($scope);
-                    $scope.loadingMap = false;
+                  var mapElement = $element.find('#Jumbotron');
+                  $compile(mapElement.append('<country-map zoom-to="{{code}}" height="350px" ></country-map>'))($scope);
+                  $scope.loadingMap = false;                    
               });
           });
       });
