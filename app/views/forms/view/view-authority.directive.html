@@ -12,14 +12,14 @@
 
 	<div class="record-body panel-body" help schema="viewCNA" >
 		<div record-options></div>
-		<!-- {{document.government|term}} -->
+		<!-- <a ng-href="/countries/{{document.government.identifier}}" target={{target}}>{{document.government|term:locale}}</a> -->
 	<div name="article-13-2"></div>
 		<legend ng-if="document.government || document.name || document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0">General information</legend>
 
 		<div ng-show="document.government" >
 			<label name="country">Country</label>
 			<div class="km-value">
-				<span>{{document.government|term:locale}}</span>
+				<span><a ng-href="/countries/{{document.government.identifier}}" target={{target}}>{{document.government|term:locale}}</a></span>
 				<span ng-party-status government="document.government" id="government"></span>
 			</div>
 		</div>
