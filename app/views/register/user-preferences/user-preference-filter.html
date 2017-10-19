@@ -25,7 +25,7 @@
                 </div>
             </div>
             <hr/>
-            <div ng-repeat="record in userFilters | orderBy:'meta.createdOn':'desc'" class="row">
+            <div ng-repeat="record in userFilters | orderBy:'meta.createdOn':'desc'" class="row" style="border-bottom:1px solid #e5e5e5; padding-top:5px">
                 <div ng-class="{'col-md-3':record._id, 'col-md-9':!record._id}">
                     <b>
                         <a class="text-bold mb0" ng-click="runUserQuery(record)">{{record.queryTitle}}</a>
