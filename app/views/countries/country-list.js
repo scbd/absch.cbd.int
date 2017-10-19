@@ -21,7 +21,7 @@ define(['app', 'underscore',
                 database: 0,
                 focalPoint: 0,
                 measure: 0,
-                nationalReport: 0
+                absNationalReport: 0
             };
 
             $scope.loading = true;
@@ -42,7 +42,7 @@ define(['app', 'underscore',
                             headerCount.database += facets.schemas.database || 0;
                             headerCount.focalPoint += facets.schemas.focalPoint || 0;
                             headerCount.measure += facets.schemas.measure || 0;
-                            headerCount.nationalReport += facets.schemas.nationalReport || 0;
+                            headerCount.absNationalReport += facets.schemas.absNationalReport || 0;
                         }
                         return {
                        
@@ -147,7 +147,7 @@ define(['app', 'underscore',
                                     database: 0,
                                     focalPoint: 0,
                                     measure: 0,
-                                    nationalReport: 0
+                                    absNationalReport: 0
                                 };
 
                     angular.forEach($scope.list, function(country){
@@ -158,7 +158,7 @@ define(['app', 'underscore',
                         $scope.total.database += country.schemas.database || 0;
                         $scope.total.focalPoint += country.schemas.focalPoint || 0;
                         $scope.total.measure += country.schemas.measure || 0;
-                        $scope.total.nationalReport += country.schemas.nationalReport || 0;
+                        $scope.total.absNationalReport += country.schemas.absNationalReport || 0;
                     })
              }, true)
 
@@ -223,7 +223,10 @@ define(['app', 'underscore',
                     return data.schemas.database ? data.schemas.database : ($scope.orderList ? -9999999 : 999999);
                 } else if ($scope.sortTerm == "NFP") {
                     return data.schemas.focalPoint ? data.schemas.focalPoint : ($scope.orderList ? -9999999 : 999999);
+                } else if ($scope.sortTerm == "NR") {
+                    return data.schemas.absNationalReport ? data.schemas.absNationalReport : ($scope.orderList ? -9999999 : 999999);
                 }
+                
             };
 
             //==================================================================================

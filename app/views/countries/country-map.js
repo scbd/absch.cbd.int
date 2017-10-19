@@ -223,6 +223,8 @@ function(template, app, _, popOverTemplate) {
             country.CP = 0;
           if(!country.CPC)
             country.CPC = 0;
+          if(!country.NR)
+            country.NR = 0;
         }
         //=======================================================================
         //
@@ -404,7 +406,7 @@ function(template, app, _, popOverTemplate) {
 
           if($scope.zoomTo){
             $timeout(function () {
-              $location.url('/countries/' + (exceptionRegionMapping[cCode] || cCode)).toUpperCase();
+              $location.url('/countries/' + (exceptionRegionMapping[cCode] || cCode).toUpperCase());
             },1);
             return;
           }
