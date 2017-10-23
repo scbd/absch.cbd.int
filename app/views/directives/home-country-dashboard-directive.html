@@ -374,8 +374,8 @@
             <div ng-repeat="doc in referenceRecords.new.docs" ng-show="doc.title_t && $index < 5" class="link1 ref-type-doc">
                <div style="border-left:#666 solid 3px;">
                         <div style="padding:0 5px 0 5px;">
-                            <a translation-url  href="/database/{{doc.schema_s}}/{{doc.identifier_s}}" >
-                                <span class="ref-type-doc-date"> {{doc.updatedDate_dt | formatDate}}</span>
+                            <a translation-url  href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}" >
+                                <span class="ref-type-doc-date"> {{doc.createdDate_dt | formatDate}}</span>
                                 <span class="ref-type-doc-title">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                             </a>
                       </div>
@@ -396,8 +396,8 @@
              <div ng-repeat="doc in referenceRecords.notification.docs" ng-show="doc.title_t && $index < 5" class="link1 ref-type-doc">
                <div style="border-left:#666 solid 3px;">
                         <div style="padding:0 5px 0 5px;">
-                            <a translation-url  href="/database/{{doc.schema_s}}/{{doc.identifier_s}}" >
-                                <span class="ref-type-doc-date"> {{doc.updatedDate_dt | formatDate}}</span>
+                            <a translation-url  href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}" >
+                                <span class="ref-type-doc-date"> {{doc.createdDate_dt | formatDate}}</span>
                                 <span class="ref-type-doc-title">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                             </a>
                       </div>
@@ -418,8 +418,8 @@
             <div ng-repeat="doc in referenceRecords.meeting.docs" ng-show="doc.title_t && $index < 5" class="link1 ref-type-doc">
                <div style="border-left:#666 solid 3px;">
                         <div style="padding:0 5px 0 5px;">
-                            <a translation-url  href="/database/{{doc.schema_s}}/{{doc.identifier_s}}" >
-                                <span class="ref-type-doc-date"> {{doc.updatedDate_dt | formatDate}}</span>
+                            <a translation-url  href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}" >
+                                <span class="ref-type-doc-date"> {{doc.createdDate_dt | formatDate}}</span>
                                 <span class="ref-type-doc-title">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                             </a>
                       </div>
@@ -439,8 +439,8 @@
             <div ng-repeat="doc in referenceRecords.news.docs" ng-show="doc.title_t && $index < 5" class="link1 ref-type-doc">
                <div style="border-left:#666 solid 3px;">
                         <div style="padding:0 5px 0 5px;">
-                            <a translation-url  href="/database/{{doc.schema_s}}/{{doc.identifier_s}}" >
-                                <span class="ref-type-doc-date"> {{doc.updatedDate_dt | formatDate}}</span>
+                            <a translation-url  href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}" >
+                                <span class="ref-type-doc-date"> {{doc.createdDate_dt | formatDate}}</span>
                                 <span class="ref-type-doc-title">{{doc.title_t.length > 120 ? (doc.title_t | limitTo : 120) + "..." : doc.title_t }}</span>
                             </a>
                       </div>
