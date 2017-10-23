@@ -74,7 +74,8 @@
                     </li>
 
                     <li ng-if="doc.schema_s !=='meeting'">
-                        <span class="last-span">{{doc.rec_date | formatDate}}</span>
+                        <span class="last-span" ng-if="type!='scbdRecords'">{{doc.rec_date | formatDate}}</span>
+                        <span class="last-span" ng-if="type=='scbdRecords'">{{doc.rec_createtionDate | formatDate}}</span>
                     </li>
                      <li ng-if="doc.schema_s =='meeting'">
                         <span class="last-span"> 
