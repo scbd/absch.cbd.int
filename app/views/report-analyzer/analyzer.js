@@ -10,6 +10,7 @@ define(['./directives/national-reports/questions-selector', './directives/nation
         delete $scope.maxDate;
         delete $scope.selectedRegionsPreset;
         delete $scope.selectedRegionsPresetFilter;
+        
 
         //========================================
         //

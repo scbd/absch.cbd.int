@@ -1,10 +1,39 @@
-﻿<div>
-    <div class="register-content card card-1-notrans " id="secNrAnalyzer">
-        <div class="register-content-header bg-darkgrey color-white">
-            <div style="padding:10px 10px;">
-                <h3 style="margin:0px;">Report</h3>
+﻿<div  class="container-fluid" id="secNrAnalyzer">
+                
+        <h1>National Report <span class="hidden-sm hidden-xs">on the Implementation of the Nagoya Protocol</span> (NR) </h1>
+            
+        <div class="panel panel-default hidden-xs">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Overview </h3>
+                </div>
+    
+                <div class="panel-body">
+                    <table class="table " cellspacing="0" cellpadding="0" style="width:100%;">
+                            <thead>
+                            <tr>
+                                <th>Report</th>
+                                <th style="text-align:center;">Year </th>
+                                <th style="text-align:center;">Parties </th>
+                                <th style="text-align:center;">Non-Parties </th>
+                                <th style="text-align:center;" ng-repeat="region in regionMapping">{{(region.shortTitle|lstring:locale).replace('CBD - ', '')}} </th>
+                                <th style="text-align:center;">Reports</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Interim National Report</a>
+                                <td style="text-align:center;">2017</td>
+                                <td style="text-align:center;">{{interimNationalReportByNPPartiesCount}} </td>
+                                <td style="text-align:center;">{{interimNationalReportByNPNonPartiesCount}} </td>
+                                <td style="text-align:center;" ng-repeat="region in regionMapping">{{region.count}} </td>
+                                <td style="text-align:center;"><b>{{interimNationalReportByNPPartiesCount + interimNationalReportByNPNonPartiesCount}}</b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+    <br>
+
         <div class="register-content-content" style="padding:5px;">
             <div class="panel panel-default">
 
@@ -33,5 +62,5 @@
             </div>
         </div>
 
-    </div>
+
 </div>

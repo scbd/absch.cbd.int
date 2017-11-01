@@ -1,15 +1,28 @@
 <div class="container-fluid">
 
-        <h1 ng-switch="selectedReportType">
-            <span ng-switch-when="npInterimNationalReport1">Analysis<span class="hidden-xs">: Interim National Report</span> <span class="hidden-xs hidden-sm">on the Implementation of the Nagoya Protocol (NR)</span></span>
+        <h1 ng-switch="selectedReportType"  ng-show="!showAnalyzer" >
+               <span class="hidden-xs">National Report<span> <span class="hidden-xs hidden-sm">on the Implementation of the Nagoya Protocol (NR)</span>
         </h1>
 
-        <!-- <div class="register-content-content" style="padding:5px;"> -->
+        <h1 ng-switch="selectedReportType"   ng-show="showAnalyzer" >
+            <span class="bold">Report: </span>
+            <span ng-switch-when="npInterimNationalReport1"> Interim <span class="hidden-sm hidden-md hidden-lg">NR</span><span class="hidden-xs">National Report<span> <span class="hidden-xs hidden-sm">on the Implementation of the Nagoya Protocol (NR)</span></span>
+        </h1>
 
-            <!-- <div ng-show="!showAnalyzer" class="panel panel-default">
+        <h2 ng-show="showAnalyzer">
+           Analysis: 
+            <span ng-show="showAnalyzer" style="padding:0;margin:0; display:inline" ng-switch="selectedRegionsPreset" >
+                    <span ng-switch-when="cbdRegions">Breakdown by CBD regions</span>
+                    <span ng-switch-when="countries">Select countries</span>
+                    <span ng-switch-when="regions">Select regions</span>
+                    <span ng-switch-when="npParties">Breakdown by Nagoya Protocol Parties</span>
+                    <span ng-switch-when="npNonParties">Breakdown by Nagoya Protocol Non Parties</span>
+            </span>
+        </h2>
 
+        <div class="register-content-content" style="padding:5px;">
+             <div ng-show="!showAnalyzer" class="panel panel-default">
                 <div class="panel-heading">
-
                     <table style="width:100%">
                         <tr>
                             <td style="width:99%">
@@ -20,23 +33,16 @@
                             </td>
                         </tr>
                     </table>
-
                 </div>
                 <national-report-questions-selector report-type="selectedReportType" questions="selectedQuestions" regions="selectedRegions"
                 regions-preset="selectedRegionsPreset"
                 regions-preset-filter="selectedRegionsPresetFilter"></national-report-questions-selector>
-
                 <div class="panel-footer text-right">
                     <button type="button" class="btn btn-primary" ng-click="analyze(true)">Analyze »</button>
                 </div>
-
-            </div> -->
-
+            </div>
             <national-report-analyzer ng-if="showAnalyzer" max-date="$parent.maxDate" report-type="$parent.selectedReportType" questions="$parent.selectedQuestions"
                 regions="$parent.selectedRegions" regions-preset="$parent.selectedRegionsPreset"
                 regions-preset-filter="$parent.selectedRegionsPresetFilter"></national-report-analyzer>
-
-        <!-- </div> -->
-
-
+        </div>
 </div>
