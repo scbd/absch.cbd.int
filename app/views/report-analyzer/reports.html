@@ -8,7 +8,7 @@
         
         <p>The report consists on a series of questions based on the provisions of the Protocol that establish obligations for its Parties, where countries can provide information on the measures taken to implement those obligations and share experiences on implementation.</p>
 
-        <div class="panel panel-default hidden-xs">
+        <div class="panel panel-default">
                 
                 <div class="panel-heading">
                     <h3 class="panel-title">Overview </h3>
@@ -22,17 +22,27 @@
                                 <th style="text-align:center;">Year </th>
                                 <th style="text-align:center;">Parties </th>
                                 <th style="text-align:center;">Non-Parties </th>
-                                <th style="text-align:center;" ng-repeat="region in regionMapping">{{(region.shortTitle|lstring:locale).replace('CBD - ', '')}} </th>
+                                <th style="text-align:center;" class="hidden-xs" ng-repeat="region in regionMapping">{{(region.shortTitle|lstring:locale).replace('CBD - ', '')}} </th>
                                 <th style="text-align:center;">Reports</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td>Interim National Report</a>
+                                <td>Interim National Report 
+                                        <span style="margin-left:10px;display:inline-block;">    
+                                            <i class="fa fa-file-word-o" aria-hidden="true"></i>  | 
+                                            <a id="NR-en" href="http://www.cbd.int/abs/en/commonformats/NR-en.doc" target="_new">en</a> | 
+                                            <a id="NR-fr" href="http://www.cbd.int/abs/fr/commonformats/NR-fr.doc" target="_new">fr</a> | 
+                                            <a id="NR-es" href="http://www.cbd.int/abs/es/commonformats/NR-es.doc" target="_new">es</a> | 
+                                            <a id="NR-ru" href="http://www.cbd.int/abs/ru/commonformats/NR-ru.doc" target="_new">ru</a> | 
+                                            <a id="NR-ar" href="http://www.cbd.int/abs/ar/commonformats/NR-ar.doc" target="_new">ar</a> | 
+                                            <a id="NR-zh" href="http://www.cbd.int/abs/zh/commonformats/NR-zh.doc" target="_new">zh</a> 
+                                        </span>
+                                            </td>
                                 <td style="text-align:center;">2017</td>
                                 <td style="text-align:center;">{{interimNationalReportByNPPartiesCount}} </td>
                                 <td style="text-align:center;">{{interimNationalReportByNPNonPartiesCount}} </td>
-                                <td style="text-align:center;" ng-repeat="region in regionMapping">{{region.count}} </td>
+                                <td style="text-align:center;" class="hidden-xs" ng-repeat="region in regionMapping">{{region.count}} </td>
                                 <td style="text-align:center;"><b>{{interimNationalReportByNPPartiesCount + interimNationalReportByNPNonPartiesCount}}</b></td>
                             </tr>
                         </tbody>
