@@ -7,12 +7,13 @@
                 <span ng-repeat="filter in setFilters" style="margin-bottom:10px;">
                     <button class="btn btn-sm btn-info bold" style="margin-top:5px;" ng-click="removeFilter(filter.id)">
                         <span ng-if="filter.type === 'freeText' || filter.type === 'UID' || filter.type === 'custom'">&#34;</span>{{filter.name}}<span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
-                        <span aria-hidden="true">×</span>
+                        <span aria-hidden="true">x</span>
                     </button>
                 </span>
-                 <a ng-href="#" ng-if="canShowSaveFilter()" class="pull-right" style="margin-top:5px;margin:5px;color:#bbb;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"ng-click="clearFilter()"> <i class="fa fa-times-circle" aria-hidden="true"></i> Clear</a>
-                 <a ng-href="#" class="help-tour pull-right link2" style="margin-top:5px;margin:5px;color:#bbb;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"ng-click="tour()"> <i class="fa fa-question-circle" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Help using the search</span></a>
-                 
+                <span class="btn-group pull-right">
+                 <a ng-href="#" ng-if="canShowSaveFilter()"  style="margin-top:5px;margin:5px;color:#bbb;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"ng-click="clearFilter()"> <i class="fa fa-times-circle" aria-hidden="true"></i> Clear</a>
+                 <a ng-href="#" class="help-tour link2" style="margin-top:5px;margin:5px;color:#bbb;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"ng-click="tour()"> <i class="fa fa-question-circle" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Help using the search</span></a>
+                 </span>
             </div>
 
 
@@ -81,8 +82,10 @@
         <div class="row" style="padding:10px 0 0 0;margin:0px;">
             <div class="col-xs-12" style="padding:0;margin:0;">
                 <!-- Nav tabs -->
-                <ul class="nav nav-tabs" >
-                    <li id="nationalRecordsTab" ng-class="{'active':currentTab==='nationalRecords'}"><a translation-url  href="#" class="color-blue" ng-click="updateCurrentTab('nationalRecords')">National <span class="hidden-xs">records</span> <span class="badge bg-blue" style="margin-left:10px;">{{recordCount[0].count}}</span></a></li>
+                <ul class="nav nav-tabs search-tab-title" >
+                    <li id="nationalRecordsTab" ng-class="{'active':currentTab==='nationalRecords'}">
+                        <a translation-url  href="#" class="color-blue" ng-click="updateCurrentTab('nationalRecords')">
+                            National <span class="hidden-xs">records</span> <span class="badge bg-blue" style="margin-left:10px;">{{recordCount[0].count}}</span></a></li>
                     <li id="referenceRecordsTab" ng-class="{'active':currentTab==='referenceRecords'}"><a translation-url  href="#" class="color-orange" ng-click="updateCurrentTab('referenceRecords')">Reference <span class="hidden-xs">records</span> <span class=" badge bg-orange" style="margin-left:10px;">{{recordCount[1].count}}</span></a></li>
                     <li id="scbdRecordsTab" ng-class="{'active':currentTab==='scbdRecords'}"><a translation-url  href="#" class="color-darkgrey" ng-click="updateCurrentTab('scbdRecords')">SCBD <span class="hidden-xs">records</span> <span class="badge" style="margin-left:10px;">{{recordCount[2].count}}</span></a></li>
                     <!--<li class="pull-left">Download</li>-->

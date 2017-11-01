@@ -18,7 +18,7 @@
 				<div ng-show="document.government">
 					<label>Country issuing this checkpoint communique</label>
 					<div class="km-value" >
-						{{document.government|term:locale}}
+						<a ng-href="/countries/{{document.government.identifier}}" target={{target}}>{{document.government|term:locale}}</a>
                         <span ng-party-status government="document.government" id="government"></span>
 					</div>
 				</div>

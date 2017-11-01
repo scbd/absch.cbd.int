@@ -1487,6 +1487,14 @@ div.recordDefault:hover {
 #search-new label {
     font-weight: bold!important;
 }
+
+
+@media (max-width: 600px){
+.search-tab-title > li > a{font-size: 12px!important;}
+.search-tab-title > li > a > span{font-size: 12px!important;}
+}
+
+
 #search-new .active .badge {
     background-color: #333;
     color: white;
@@ -1933,3 +1941,14 @@ legend+ .help-info {
      background-color:#428bca!important;
 }
 .jr_target{box-shadow: none!important;} 
+
+
+.label-party {font-size: 16px;background-color: #5F4586;color:white; min-width:30px}
+.label-nonparty {font-size: 16px;background-color: #333;color:white; min-width:30px}
+.label-inbetween {font-size: 16px;background-color: #EC971F;color:white; min-width:30px}
+
+@media (max-width: 600px){
+.label-party {font-size: 16px;}
+.label-inbetween {font-size: 16px;}
+.label-nonparty  {font-size: 16px;}
+}

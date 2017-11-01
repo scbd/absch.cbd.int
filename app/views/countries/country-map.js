@@ -44,9 +44,10 @@ function(template, app, _, popOverTemplate) {
           $scope.mapData = {
             "type": "map",
             "theme": "light",
+            "projection": "winkel3",
             "zoomDuration": 0.1,
             "responsive": {
-              "enabled": true
+            "enabled": true
             },
             "dataProvider": {
               "map": "worldEUHigh",
@@ -64,8 +65,7 @@ function(template, app, _, popOverTemplate) {
                 "rollOverColor": '#000000',
                 "selectable": true,
                 "color": '#333',
-                "outlineThickness": 2.5,
-                "outlineColor": '#1fa65d',
+                "outlineColor": '#666',
             },
             "smallMap": {
               "enabled": false,
@@ -223,6 +223,8 @@ function(template, app, _, popOverTemplate) {
             country.CP = 0;
           if(!country.CPC)
             country.CPC = 0;
+          if(!country.NR)
+            country.NR = 0;
         }
         //=======================================================================
         //
@@ -404,7 +406,7 @@ function(template, app, _, popOverTemplate) {
 
           if($scope.zoomTo){
             $timeout(function () {
-              $location.url('/countries/' + (exceptionRegionMapping[cCode] || cCode)).toUpperCase();
+              $location.url('/countries/' + (exceptionRegionMapping[cCode] || cCode).toUpperCase());
             },1);
             return;
           }

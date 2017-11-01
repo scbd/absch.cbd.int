@@ -1,7 +1,7 @@
 define(['text!./home-map.html',
   'app',
   'lodash',
-  './party-status', 'services/search-service',
+  'services/search-service',
   'views/directives/block-region-directive'
 ], function(template, app, _, popoverTemplate) {
   'use strict';
@@ -47,7 +47,7 @@ define(['text!./home-map.html',
                 require(['views/countries/country-map'], function(map){
                     $scope.$apply(function(){
                         var mapElement = $element.find('#homeMap')
-                        $compile(mapElement.contents())($scope);
+                        $compile(mapElement.append('<country-map zoom-to="{{code}}" height="350px" ></country-map>'))($scope);
                          $scope.loadingMap = false;
                     });
                 });

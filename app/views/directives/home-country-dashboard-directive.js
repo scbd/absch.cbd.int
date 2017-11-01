@@ -97,7 +97,7 @@ define(['app','text!views/directives/home-country-dashboard-directive.html', 'un
 
 
                         var referenceRecordsQuery = {
-                            fields: 'title_t, updatedDate_dt,schema_s,identifier_s,startDate_dt,endDate_dt,url_ss, uniqueIdentifier_s, eventCity_s, eventCountry_EN_t',
+                            fields: 'title_t, updatedDate_dt,createdDate_dt, schema_s,identifier_s,startDate_dt,endDate_dt,url_ss, uniqueIdentifier_s, eventCity_s, eventCountry_EN_t',
                             query: 'schema_s:(' + appConfigService.referenceSchemas.join(' ') + ' ' +
                                    appConfigService.scbdSchemas.join(' ')  + ')',
                             sort       : 'sort1_dt desc, updatedDate_dt desc',
