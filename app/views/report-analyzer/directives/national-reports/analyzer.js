@@ -41,8 +41,8 @@ function(templateHtml, app, _, require, $) { 'use strict';
             },
             link: function ($scope, $element, attr, nrAnalyzer) {
                 
-                $element.find("#sumTypeButton").affix({ offset: { top : $element.find('#nrAnalyzer').offset().top } });
-                $element.find("#filterBox"    ).affix({ offset: { top : 340 } });
+                // $element.find("#sumTypeButton").affix({ offset: { top : $element.find('#nrAnalyzer').offset().top } });
+                // $element.find("#filterBox"    ).affix({ offset: { top : 340 } });
 
                 $scope.allRegionsMap = {};
 

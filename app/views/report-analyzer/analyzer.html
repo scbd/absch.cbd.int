@@ -1,30 +1,12 @@
-<div>
-    
-    <div class="register-content card card-1-notrans" id="secNrAnalyzer">
-        <div class="register-content-header bg-darkgrey color-white">
-            <div style="padding:10px 10px;">
-                <h3 style="margin:0px;">
-                    <span ng-switch="selectedReportType">
-                        <span ng-switch-when="cpbNationalReport3">Third National Report on the Implementation of the Cartagena Protocol on Biosafety</span>
-                        <span ng-switch-when="cpbNationalReport2">Second National Report on the Implementation of the Cartagena Protocol on Biosafety</span>
-                        <span ng-switch-when="npInterimNationalReport1">Interim National Report on the Implementation of the Nagoya Protocol</span>
-                        <span ng-switch-default="cpbNationalReport3">National Report</span>
-                    </span>
-                    <span class="helpinfoInline">
-                        <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i>
-                    </span>
-                </h3>
+<div class="container-fluid">
 
-                <!--help info---------------------------->
-                <div ng-if="showInfo" class="well well-help">
+        <h1 ng-switch="selectedReportType">
+            <span ng-switch-when="npInterimNationalReport1">Analysis<span class="hidden-xs">: Interim National Report</span> <span class="hidden-xs hidden-sm">on the Implementation of the Nagoya Protocol (NR)</span></span>
+        </h1>
 
-                </div>
+        <!-- <div class="register-content-content" style="padding:5px;"> -->
 
-            </div>
-        </div>
-        <div class="register-content-content" style="padding:5px;">
-
-            <div ng-show="!showAnalyzer" class="panel panel-default">
+            <!-- <div ng-show="!showAnalyzer" class="panel panel-default">
 
                 <div class="panel-heading">
 
@@ -48,14 +30,13 @@
                     <button type="button" class="btn btn-primary" ng-click="analyze(true)">Analyze »</button>
                 </div>
 
-            </div>
+            </div> -->
 
             <national-report-analyzer ng-if="showAnalyzer" max-date="$parent.maxDate" report-type="$parent.selectedReportType" questions="$parent.selectedQuestions"
                 regions="$parent.selectedRegions" regions-preset="$parent.selectedRegionsPreset"
                 regions-preset-filter="$parent.selectedRegionsPresetFilter"></national-report-analyzer>
 
-        </div>
+        <!-- </div> -->
 
-    </div>
 
 </div>
