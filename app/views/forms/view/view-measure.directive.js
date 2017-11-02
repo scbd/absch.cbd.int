@@ -13,7 +13,6 @@ app.directive("viewMeasure", [function () {
 		transclude : false,
 		scope: {
 			document    : "=ngModel",
-			locale      : "=",
 			target      : "@linkTarget",
 			allowDrafts : "@",
 			hide		: "@"
