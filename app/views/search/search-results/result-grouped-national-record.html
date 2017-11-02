@@ -6,26 +6,10 @@
     </style>
 
 
-    <div class="pull-right" style="padding-right:10px;position:relative;top:5px;"  ng-show="showDoc" >
-
-        <a href="#"  ng-click="pfd()" class="record-link-style color-white">
-                <i class="fa fa-spin fa-spinner" ng-if="" /> 
-                <i class="fa fa-file-pdf-o" aria-hidden="true" ></i>
-                PDF 
-            </a>
-        &nbsp; <span style="color:#ddd"> | </span> &nbsp;
-
-        <a href="#"  ng-click="print()" class="record-link-style color-white">
-            <i class="fa fa-spin fa-spinner" ng-if="printing" /> 
-            <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
-            Print 
-        </a>
-
-        &nbsp; <span style="color:#ddd"> | </span> &nbsp;
-
-        <a translation-url class="bold"  style="color:#FFF;font-size:20px;cursor:pointer;z-index:99999999;width:100%;" ng-click="showDoc=false">
+    <div class="pull-right" style="padding-right:15px;position:relative;top:5px;"  ng-show="showDoc" >
+        <span style="color:#ddd" > | </span> &nbsp; 
+        <a translation-url class="bold"  style="position:relative;top:2px;color:#FFF;font-size:20px;cursor:pointer;z-index:99999999;width:100%;" ng-click="showDoc=false">
             &times;</a>
-
     </div>
 
     
