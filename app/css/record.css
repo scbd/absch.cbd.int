@@ -19,6 +19,9 @@
 	color:#333;
 }
 
+#Record .pre-wrap{
+	white-space: pre-wrap;
+}
 
 #Record .record-body{
 	background-color:transparent;
