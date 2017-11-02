@@ -4,6 +4,9 @@
 		<span class="color-black"> (IRCC) </span>
 		</h4> </div>
 	<div class="record-body panel-body">
+
+		
+
 			<div class="alert alert-danger" ng-show="!loading && document && (document.amendmentIntent==1 || showRevokedMessage || document.info.revision !== document.info.latestRevision)">
 				<div class="text-center">
 					<h1 ng-if="document.amendmentIntent==1 || showRevokedMessage">THIS CERTIFICATE HAS BEEN <u>REVOKED</u> AND IS NO LONGER VALID</h1>
@@ -15,7 +18,10 @@
 					</p>
 				</div>
 			</div>
-			<div record-options></div>
+			<div class="pull-right record-Options-div">
+					<span ng-if="updatedOn" class="xlabel  hidden-xs">published:</span>
+					<span ng-if="updatedOn" class="date"> {{document.updatedOn | formatDate}}</span>
+				</div>
 			<span style="color:#ddd"  class="pull-right"> &nbsp;  |  &nbsp; </span>
 			<div class="pull-right">
 				<a translation-url  class="hidden-print record-link-style" ng-if="document.info && document.info.revision === document.info.latestRevision" target="_new" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>

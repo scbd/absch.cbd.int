@@ -16,7 +16,9 @@ app.directive("viewAbsNationalReport", [function () {
 		},
 		controller : ["$scope", "underscore", "commonjs", "$filter", function ($scope, _, commonjs, $filter)
 		{
-
+			if((($scope.document||{}).createdDate_dt) || $scope.$parent.internalDocumentInfo)
+			$scope.updatedOn = ($scope.document||{}).createdDate_dt || $scope.$parent.internalDocumentInfo.updatedOn;
+			
 			//====================
 			//
 			//====================

@@ -21,6 +21,8 @@ app.directive("viewMeasure", [function () {
 		controller : ["$scope", "IStorage","$filter", "searchService", "$q", "appConfigService",
          function ($scope, storage, $filter, searchService, $q, appConfigService)
 		{
+			if((($scope.document||{}).createdDate_dt) || $scope.$parent.internalDocumentInfo)
+			$scope.updatedOn = ($scope.document||{}).createdDate_dt || $scope.$parent.internalDocumentInfo.updatedOn;
 			//====================
 			//
 			//====================

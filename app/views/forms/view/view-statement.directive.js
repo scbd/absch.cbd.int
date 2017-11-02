@@ -14,6 +14,10 @@ app.directive('viewStatement', [function() {
 			target: "@linkTarget"
 		},
 		controller: ['$scope', function ($scope) {
+
+			if((($scope.document||{}).createdDate_dt) || $scope.$parent.internalDocumentInfo)
+			$scope.updatedOn = ($scope.document||{}).createdDate_dt || $scope.$parent.internalDocumentInfo.updatedOn;
+			
 		}]
 	}
 }]);

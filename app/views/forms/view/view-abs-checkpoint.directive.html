@@ -8,7 +8,10 @@
 
 	<div class="record-body panel-body" help schema="ViewCP" >
 
-		<div record-options></div>
+			<div class="pull-right record-Options-div">
+					<span ng-if="updatedOn" class="xlabel  hidden-xs">published:</span>
+					<span ng-if="updatedOn" class="date"> {{document.updatedOn | formatDate}}</span>
+				</div>
 
 		 <div name="article17-1-a"></div>
 

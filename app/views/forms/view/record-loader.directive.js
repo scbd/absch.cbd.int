@@ -9,7 +9,8 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
     'views/forms/view/view-default-reference.directive',
     'views/forms/view/view-contact-reference.directive',
 	'services/search-service',
-	'views/directives/block-region-directive'
+	'views/directives/block-region-directive',
+	'views/directives/record-options',
 ], function (app, template) {
 	app.directive('recordLoader', [function () {
 		return {

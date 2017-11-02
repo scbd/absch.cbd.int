@@ -1,46 +1,41 @@
 ﻿<div >
-<style>
-.record-Options-div .date{
-    font-size:11px!important;
-    font-weight: 500;
-    text-transform: uppercase;
-    padding:3px;
-    background-color: #f5f5f5;
-   
-        border-radius: 4px;
 
-    border: 1px solid rgba(0, 0, 0, 0.15);
-}
-.record-Options-div .xlabel{
-    font-size:11px!important;
-    font-weight: 500;
-    text-transform: uppercase;
-    color: #666;
-    padding:0!important;
+<div class="record-Options-div" style="display:inline-block;margin-right:5px;margin-bottom:5px;">
 
-}
-.record-Options-div .btn-lang{
-    /* background-color: #f5f5f5; */
-    font-size:11px!important;
-    font-weight: 500;
-}
-</style>
-<div class="record-Options-div">
+
     <div class="pull-right">
-            
+
+        
+            <a href="#"  ng-click="pfd()" class="record-link-style color-white">
+                    <i class="fa fa-spin fa-spinner" ng-if="" /> 
+                    <i class="fa fa-file-pdf-o" aria-hidden="true" ></i>
+                    PDF 
+                </a>
+            &nbsp; <span style="color:#ddd"> | </span> &nbsp;
+    
+            <a href="#"  ng-click="print()" class="record-link-style color-white">
+                <i class="fa fa-spin fa-spinner" ng-if="printing" /> 
+                <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
+                Print 
+            </a>
+         
+
+            <span ng-show="document.header.languages.length>1 && updatedOn" style="color:#ddd"> &nbsp;  |  &nbsp; </span>
+
         <!-- <a class="hidden-print record-link-style"target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/{{currentLocale}}/documents?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}"><i class="fa fa-file-pdf-o"></i> Download</a> -->
-        <span class="label" ng-if="document.header.languages.length>1">languages available:</span>
+        <span class="xlabel hidden-xs" ng-if="document.header.languages.length>1">languages available:</span>
         <div class="btn-group  btn-group-xs" role="group" ng-if="document.header.languages.length>1">                
             <button type="button" class="btn btn-lang btn-default btn-xs" ng-class="{'active' : currentLocale==loc, 'btn-info' : currentLocale!=loc}" 
                 ng-repeat="loc in document.header.languages"
                 ng-click="setCurrentLocale(loc)" >{{loc | uppercase}}</button>
         </div>
         <!-- if languages add spacer-->
-         <span ng-show="document.header.languages.length>1 && updatedOn" style="color:#ddd"> &nbsp;  |  &nbsp; </span>
+        
+        
     
 
-        <span ng-if="updatedOn" class="xlabel">published:</span>
-        <span ng-if="updatedOn" class="date"> {{updatedOn | formatDate}}</span>
+        <!-- <span ng-if="updatedOn" class="xlabel  hidden-xs">published:</span>
+        <span ng-if="updatedOn" class="date"> {{updatedOn | formatDate}}</span> -->
         <!-- <div class="btn-group pdf-download-buttons" ng-show="$parent.internalDocumentInfo.revision">
             <a type="button" class="btn btn-primary btn-xs" 
             target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/documents/{{downloadLocale}}?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}">

@@ -6,9 +6,10 @@
 	</div>
 	<div class="record-body panel-body">
 
-		<div record-options ></div>
-		<br><br>
-	
+			<div class="pull-right record-Options-div">
+					<span ng-if="updatedOn" class="xlabel  hidden-xs">published:</span>
+					<span ng-if="updatedOn" class="date"> {{document.updatedOn | formatDate}}</span>
+				</div> <br><br>
 
 		<div class="panel panel-info">
 			<div class="panel-heading">
