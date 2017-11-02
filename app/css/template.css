@@ -1952,3 +1952,11 @@ legend+ .help-info {
 .label-inbetween {font-size: 16px;}
 .label-nonparty  {font-size: 16px;}
 }
+
+    
+    
+.record-link-style{
+    font-size:11px!important;
+        font-weight: 500;
+        text-transform: uppercase;
+    }

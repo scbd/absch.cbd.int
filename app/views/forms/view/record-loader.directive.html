@@ -115,6 +115,23 @@
                     type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
             </div>
         </div>
+      
+        <div class="pull-right" style="padding-right:10px;position:relative;top:5px;"  >
+                
+            <a href="#"  ng-click="pfd()" class="record-link-style color-white">
+                    <i class="fa fa-spin fa-spinner" ng-if="" /> 
+                    <i class="fa fa-file-pdf-o" aria-hidden="true" ></i>
+                    PDF 
+                </a>
+            &nbsp; <span style="color:#ddd"> | </span> &nbsp;
+    
+            <a href="#"  ng-click="print()" class="record-link-style color-white">
+                <i class="fa fa-spin fa-spinner" ng-if="printing" /> 
+                <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
+                Print 
+            </a>
+        </div>
+
         <div id="schemaView" ng-show="internalDocument"></div>
     </div>
     <div id="printContentFooter" style="padding-top:20px" ng-if="printMode">
