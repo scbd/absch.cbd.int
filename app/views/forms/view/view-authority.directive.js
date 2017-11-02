@@ -12,6 +12,7 @@ app.directive("viewAuthority", [function () {
 		scope: {
 			document: "=ngModel",
 			target  : "@linkTarget",
+			locale      : "=",
 			allowDrafts : "@",
 			hide : "@"
 		},

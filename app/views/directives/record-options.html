@@ -20,13 +20,13 @@
             </a>
          
 
-            <span ng-show="document.header.languages.length>1 && updatedOn" style="color:#ddd"> &nbsp;  |  &nbsp; </span>
+            <span ng-show="internalDocument.header.languages.length>1" style="color:#ddd"> &nbsp;  |  &nbsp; </span>
 
         <!-- <a class="hidden-print record-link-style"target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/{{currentLocale}}/documents?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}"><i class="fa fa-file-pdf-o"></i> Download</a> -->
-        <span class="xlabel hidden-xs" ng-if="document.header.languages.length>1">languages available:</span>
-        <div class="btn-group  btn-group-xs" role="group" ng-if="document.header.languages.length>1">                
-            <button type="button" class="btn btn-lang btn-default btn-xs" ng-class="{'active' : currentLocale==loc, 'btn-info' : currentLocale!=loc}" 
-                ng-repeat="loc in document.header.languages"
+        <span class="xlabel hidden-xs hidden-sm color-white" ng-if="internalDocument.header.languages.length>1" style="color:#fff">languages available:</span>
+        <div class="btn-group  btn-group-xs" role="group" ng-if="internalDocument.header.languages.length>1">                
+            <button type="button" class="btn btn-lang btn-default btn-xs" ng-class="{'btn-info' : currentLocale==loc}" 
+                ng-repeat="loc in internalDocument.header.languages"
                 ng-click="setCurrentLocale(loc)" >{{loc | uppercase}}</button>
         </div>
         <!-- if languages add spacer-->
