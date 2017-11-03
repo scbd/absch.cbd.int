@@ -4,9 +4,16 @@ var app = angular.module('ngapp',['ngSanitize','appCommon'])
 
 app.controller('printPermit', ['$scope','$http','$location','$filter',
  	function($scope,$http,$location, $filter) {
-	$scope.identifier = $location.search().documentID;
-
-
+	
+	var documentID = $location.search().documentID;
+	
+	if (documentID && /^absch/.test(documentID.toLowerCase())) {
+		var docNum = documentID.split('-');
+		if (docNum.length == 5) {
+			documentID = docNum[3]+'@'+docNum[4]
+		}
+	}
+	$scope.identifier = documentID;
 
 }]);
 
