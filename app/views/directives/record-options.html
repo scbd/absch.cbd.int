@@ -1,66 +1,30 @@
-﻿<div >
-
-<div class="record-Options-div" style="display:inline-block;margin-right:5px;margin-bottom:5px;">
-
-
-    <div class="pull-right">
-
-        
-            <a href="#"  ng-click="pfd()" class="record-link-style color-white">
-                    <i class="fa fa-spin fa-spinner" ng-if="" /> 
-                    <i class="fa fa-file-pdf-o" aria-hidden="true" ></i>
-                    PDF 
+﻿<div>
+    <div class="record-Options-div" style="display:inline-block;margin-right:5px;margin-bottom:5px;">
+        <div class="pull-right">
+            <!-- <div class="pull-right">
+                <a translation-url  class="hidden-print record-link-style" ng-if="document.info && document.info.revision === document.info.latestRevision" target="_new" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
+            </div> -->
+            <span>
+                <a href="#" ng-click="openPdf()" class="record-link-style color-white">                    
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                    PDF
                 </a>
-            &nbsp; <span style="color:#ddd"> | </span> &nbsp;
-    
-            <a href="#"  ng-click="print()" class="record-link-style color-white">
-                <i class="fa fa-spin fa-spinner" ng-if="printing" /> 
+            </span>
+            &nbsp;
+            <span style="color:#ddd"> | </span> &nbsp;
+            <a href="#" ng-click="print()" class="record-link-style color-white">
+                <i class="fa fa-spin fa-spinner" ng-if="printing" />
                 <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
-                Print 
+                Print
             </a>
-         
-
-            <span ng-show="internalDocument.header.languages.length>1" style="color:#ddd"> &nbsp;  |  &nbsp; </span>
-
-        <!-- <a class="hidden-print record-link-style"target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/{{currentLocale}}/documents?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}"><i class="fa fa-file-pdf-o"></i> Download</a> -->
-        <span class="xlabel hidden-xs hidden-sm color-white" ng-if="internalDocument.header.languages.length>1" style="color:#fff">languages available:</span>
-        <div class="btn-group  btn-group-xs" role="group" ng-if="internalDocument.header.languages.length>1">                
-            <button type="button" class="btn btn-lang btn-default btn-xs" ng-class="{'btn-info' : currentLocale==loc}" 
-                ng-repeat="loc in internalDocument.header.languages"
-                ng-click="setCurrentLocale(loc)" >{{loc | uppercase}}</button>
+            <span ng-show="internalDocument.header.languages.length>1" style="color:#ddd"> &nbsp; | &nbsp; </span>
+            <!-- <a class="hidden-print record-link-style"target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/{{currentLocale}}/documents?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}"><i class="fa fa-file-pdf-o"></i> Download</a> -->
+            <span class="xlabel hidden-xs hidden-sm color-white" ng-if="internalDocument.header.languages.length>1" style="color:#fff">languages available:</span>
+            <div class="btn-group  btn-group-xs" role="group" ng-if="internalDocument.header.languages.length>1">
+                <button type="button" class="btn btn-lang btn-default btn-xs" ng-class="{'btn-info' : currentLocale==loc}" ng-repeat="loc in internalDocument.header.languages"
+                    ng-click="setCurrentLocale(loc)">{{loc | uppercase}}</button>
+            </div>            
         </div>
-        <!-- if languages add spacer-->
-        
-        
-    
 
-        <!-- <span ng-if="updatedOn" class="xlabel  hidden-xs">published:</span>
-        <span ng-if="updatedOn" class="date"> {{updatedOn | formatDate}}</span> -->
-        <!-- <div class="btn-group pdf-download-buttons" ng-show="$parent.internalDocumentInfo.revision">
-            <a type="button" class="btn btn-primary btn-xs" 
-            target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/documents/{{downloadLocale}}?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}">
-                <i class="fa fa-file-pdf-o"></i> Download 
-                <span ng-if="downloadLocale=='ar'">العربية </span>
-                <span ng-if="downloadLocale=='zh'">中文  </span>
-                <span ng-if="downloadLocale=='en'">English</span>
-                <span ng-if="downloadLocale=='es'">Español</span>
-                <span ng-if="downloadLocale=='fr'">Français</span>
-                <span ng-if="downloadLocale=='ru'">Русский</span>
-            </a>
-            <button type="button" class="btn btn-primary dropdown-toggle btn-xs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu">      
-                <li><a target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/documents/ar?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}" ng-click="downloadLocale='ar'"><i class="fa fa-file-pdf-o"></i> العربية </a></li>
-                <li><a target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/documents/zh?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}" ng-click="downloadLocale='zh'"><i class="fa fa-file-pdf-o"></i> 中文  </a></li>
-                <li><a target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/documents/en?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}" ng-click="downloadLocale='en'"><i class="fa fa-file-pdf-o"></i> English</a></li>
-                <li><a target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/documents/es?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}" ng-click="downloadLocale='es'"><i class="fa fa-file-pdf-o"></i> Español</a></li>
-                <li><a target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/documents/fr?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}" ng-click="downloadLocale='fr'"><i class="fa fa-file-pdf-o"></i> Français</a></li>
-                <li><a target="_blank" ng-href="/api/v2017/generate-pdf/abs-dev/documents/ru?documentID={{document | uniqueIDWithoutRevision}}&revision={{$parent.internalDocumentInfo.revision}}" ng-click="downloadLocale='ru'"><i class="fa fa-file-pdf-o"></i> Русский</a></li>
-            </ul>
-        </div> -->
     </div>
-    
-</div>
 </div>
