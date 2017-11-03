@@ -1,18 +1,21 @@
-define(['app', 'text!views/directives/record-options.html', 'underscore', 'scbd-angularjs-services/locale'], function (app, template, _) {
-app.directive('recordOptions', ['locale', '$route', '$timeout', function (appLocale, $route, $timeout) {
+define(['app', 'text!views/directives/record-options.html', 'underscore', 'scbd-angularjs-services/locale',
+'services/app-config-service'], function (app, template, _) {
+
+app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$window',
+    function (appLocale, $route, $timeout, appConfigService, $filter, $window) {
         return {
             restrict: 'EAC',
             template : template,
-            link: function ($scope, $element, attrs) {
-                
-
+            link: function ($scope, $element, attrs) {              
 
                 if(!$scope.currentLocale){
                     $scope.currentLocale = appLocale;
                     $scope.downloadLocale = appLocale;
                 }
 
-                if($scope.internalDocument){
+                $scope.$watch('::internalDocument', function(newVal){
+                    if(!newVal)
+                        return;
                     //if document does not contain application selected locale, then select one 
                     if(!_.contains($scope.internalDocument.header.languages, appLocale)){
 
@@ -23,9 +26,11 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', function (appLoc
                         else if(_.contains($scope.internalDocument.header.languages, 'ar')) $scope.currentLocale = 'ar';
                         else if(_.contains($scope.internalDocument.header.languages, 'zh')) $scope.currentLocale = 'zh';
                     }
-                }
-                if((($scope.document||{}).createdDate_dt) || $scope.$parent.internalDocumentInfo)
-                    $scope.updatedOn = ($scope.document||{}).createdDate_dt || $scope.$parent.internalDocumentInfo.updatedOn;
+                    if(_.contains(['absPermit', 'absCheckpointCommunique'], internalDocument.header.schema)){                        
+                        if($scope.internalDocumentInfo && $scope.internalDocumentInfo.revision === $scope.internalDocumentInfo.latestRevision)
+                            $scope.hidePdf = true;
+                    }
+                })
 
                 $scope.setCurrentLocale = function(loc){
                     $scope.currentLocale=loc
@@ -50,6 +55,25 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', function (appLoc
                         $timeout(function(){$scope.printing = false;},200);
                     });
                     
+                }
+
+                $scope.openPdf = function(){
+                    var documentId = $filter('uniqueIDWithoutRevision')($scope.internalDocument);
+                    var pdfType = 'documents'
+
+                    if('absPermit' == $scope.internalDocument.header.schema)
+                        pdfType = 'ircc-certificate';
+                    else if('absCheckpointCommunique' == $scope.internalDocument.header.schema)
+                        pdfType = 'cpc-certificate';
+
+                    var pdfDownloadUrl  =  '/api/v2017/generate-pdf/:realm/:type/:lang?documentID=:documentId&revision=:revision';
+                    pdfDownloadUrl      = pdfDownloadUrl.replace(':realm'       , appConfigService.currentRealm)
+                                                        .replace(':type'        , pdfType)
+                                                        .replace(':lang'        , $scope.currentLocale)
+                                                        .replace(':documentId'  , documentId)
+                                                        .replace(':revision'    , $scope.internalDocumentInfo.revision);
+
+                    $window.open(pdfDownloadUrl);
                 }
             }
         };
