@@ -42,7 +42,7 @@
                     var status = [];
                     status.push({ 'identifier': 'all', 'name': 'All Countries' });
                     status.push({ 'identifier': 'party', 'name': 'Parties' });
-                    status.push({ 'identifier': 'nonparty', 'name': 'Non Parties' });
+                    status.push({ 'identifier': 'nonparty', 'name': 'Non-Parties' });
 
                     return status;
                 }

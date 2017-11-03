@@ -47,9 +47,9 @@ define(['app', 'underscore', 'js/common', 'moment', 'scbd-angularjs-controls', '
                     filterPartyStatus: function () {
                         var status = [];
                         status.push({ 'identifier': '1', 'name': 'All' });
-                        status.push({ 'identifier': '2', 'name': 'party' });
-                        status.push({ 'identifier': '3', 'name': 'non-party' });
-                        status.push({ 'identifier': '4', 'name': 'Ratified not yet party' });
+                        status.push({ 'identifier': '2', 'name': 'Party' });
+                        status.push({ 'identifier': '3', 'name': 'Non-Party' });
+                        status.push({ 'identifier': '4', 'name': 'Ratified not yet Party' });
 
                         return status;
                     }
