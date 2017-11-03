@@ -114,7 +114,7 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 								documentID = documentID.toLowerCase();//.replace('absch','ABSCH');
 								$scope.documentUID = documentID.toUpperCase();
 								var schemaFolder = $filter("mapSchema")(docNum[1]);
-								$scope.documentUrl = "https://s3.amazonaws.com/absch.documents." + realm.value.toLowerCase() + "/" + schemaFolder + '/' + documentID + '.pdf?id=' + new Date();
+								$scope.documentUrl = "https://s3.amazonaws.com/absch.documents." + realm.value.toLowerCase() + "/" + schemaFolder + '/' + documentID + '-en.pdf?id=' + new Date();
 
 								$httpAWS.head($scope.documentUrl, { cache: false }).then(function (success) {
 									$scope.documentSuccess = true;
