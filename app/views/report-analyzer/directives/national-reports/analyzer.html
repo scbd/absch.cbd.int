@@ -109,13 +109,30 @@
         }
     </style>
 
+    <div class="pull-right" style="position:relative;top:-30px;">   
+        <a href="" ng-click="print('#secNrAnalyzer')" class="links" id="btnPrint">
+            <i class="fa fa-spin fa-spinner" ng-if="printing" /> 
+            <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>  Print
+        </a>             
+    </div>
+ 
+    <div class="clearfix"></div>
+
     <div ng-show="sections" style="margin-bottom:5px" id="nrAnalyzer">
 
         <button type="button" class="btn btn-default"  ng-click="showSettings();" id="returnQuestions">
-            « Return to Regions and Questions settings
+            « Back to settings
         </button>
 
-        <div id="sumTypeButton" class="btn-group" title="Change how numbers are calculated">
+        <!-- <h3 style="padding:0;margin:0; display:inline" ng-switch="selectedRegionsPreset" >
+                <span ng-switch-when="cbdRegions">Breakdown by CBD regions</span>
+                <span ng-switch-when="countries">Select countries</span>
+                <span ng-switch-when="regions">Select regions</span>
+                <span ng-switch-when="npParties">Breakdown by Nagoya Protocol Parties</span>
+                <span ng-switch-when="npNonParties">Breakdown by Nagoya Protocol Non-Parties</span>
+        </h3> -->
+
+        <div id="sumTypeButton" class="btn-group pull-right" title="Change how numbers are calculated">
             <button type="button" class="btn btn-primary" ng-click="showSumTypeSelector()">∑
                 <span ng-switch="sumType">
                     <span ng-switch-when="sum">Count of responses</span>
@@ -124,10 +141,12 @@
                     <span ng-switch-when="percentGlobal">Percentage overall</span>
                 </span>
             </button>
+
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
+
             <ul class="dropdown-menu">
                 <li ng-repeat="type in ::sumTypes">
                     <a href="#" ng-click="setSumType(type)">
@@ -141,21 +160,6 @@
                 </li>
             </ul>
         </div>
-        <div class="btn-group pull-right">   
-            <button  ng-click="print('#secNrAnalyzer')" class="btn btn-primary record-link-style" id="btnPrint">
-                <i class="fa fa-spin fa-spinner" ng-if="printing" /> 
-                <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
-                Print 
-            </button>             
-            <span ng-switch="selectedRegionsPreset" class="btn btn-info">
-                <span ng-switch-when="cbdRegions">Breakdown by CBD regions</span>
-                <span ng-switch-when="countries">Select countries</span>
-                <span ng-switch-when="regions">Select regions</span>
-                <span ng-switch-when="npParties">Breakdown by Nagoya Protocol Parties</span>
-                <span ng-switch-when="npNonParties">Breakdown by Nagoya Protocol Non Parties</span>
-            </span>
-        </div>
-       
     </div>
 
     <div id="filterBox" class="filter panel panel-primary" ng-show="filter">
@@ -187,6 +191,8 @@
             </div>
         </div>
     </div>
+
+    <br>
 
     <national-report-analyzer-section sum-type="sumType" regions="::regions" section="::section" previous-questions-mapping="previousQuestionsMapping" ng-repeat="section in sections"></national-report-analyzer-section>
 

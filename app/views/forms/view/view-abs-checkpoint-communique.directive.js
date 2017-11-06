@@ -25,6 +25,9 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 			$scope.gisMapLayers = null;
 			$scope.gisMapCenter = null;
 
+			if((($scope.document||{}).createdDate_dt) || $scope.$parent.internalDocumentInfo)
+			$scope.updatedOn = ($scope.document||{}).createdDate_dt || $scope.$parent.internalDocumentInfo.updatedOn;
+
 			//====================
 			//
 			//====================

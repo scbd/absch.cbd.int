@@ -15,7 +15,10 @@ app.directive("viewDefaultReference", [function () {
 		controller: ["$scope", "IStorage", "$filter", '$q', function ($scope, storage, $filter, $q) {
 
 
-            // $scope.document = $scope.model;
+			// $scope.document = $scope.model;
+			
+			if((($scope.document||{}).createdDate_dt) || $scope.$parent.internalDocumentInfo)
+			$scope.updatedOn = ($scope.document||{}).createdDate_dt || $scope.$parent.internalDocumentInfo.updatedOn;
 
             // //==================================
 		    // //

@@ -1,10 +1,87 @@
-﻿<div>
-    <div class="register-content card card-1-notrans " id="secNrAnalyzer">
-        <div class="register-content-header bg-darkgrey color-white">
-            <div style="padding:10px 10px;">
-                <h3 style="margin:0px;">Report</h3>
+﻿<div  class="container-fluid" id="secNrAnalyzer">
+                
+        <h1>National Report <span class="hidden-sm hidden-xs">on the Implementation of the Nagoya Protocol</span> (NR) </h1>
+        
+        <p>Article 29 of the Nagoya Protocol requires Parties to monitor implementation of their obligations under the Protocol, at intervals and in the format to be determined by the Conference of the Parties serving as the meeting of the Parties to the Protocol (COP-MOP).</p>
+        
+        <p>The COP-MOP at its first meeting requested Parties to the Protocol to submit an interim national report on the implementation of the Nagoya Protocol twelve months prior to the third meeting of the COP-MOP, being the deadline for submissions the 1st November 2017. The decision also welcomes submissions of relevant information by Non-Parties.
+        <a href="/help/national-report">Click here for more information on the submission of the interim national report.</a>    
+        </p>
+        
+        <p>The report consists on a series of questions based on the provisions of the Protocol that establish obligations for its Parties, where countries can provide information on the measures taken to implement those obligations and share experiences on implementation.</p>
+        <br>
+        <p>
+            View all <b>{{interimNationalReportByNPPartiesCount + interimNationalReportByNPNonPartiesCount}}</b> published national reports: <a href="/search/nationalRecords?schema=absNationalReport" class="bold">Click here</a>
+       </p>
+       <br>
+        <p>
+
+            <b>Relevant notifications</b>
+                <p>
+                    <span  class="bold"  style="text-transform:uppercase;font-size:12px;">16 OCT 2017</span> &nbsp; &nbsp; 
+                    <a href="http://www.cbd.int/doc/notifications/2017/ntf-2017-102-abs-en.pdf">REMINDER NOTIFICATION: DEADLINE 1 NOVEMBER 2017</a>
+                </p>
+                 <p>
+                    <span class="bold" style="text-transform:uppercase;font-size:12px;">16 AUG 2017</span> &nbsp; &nbsp; 
+                    <a href="http://www.cbd.int/doc/notifications/2017/ntf-2017-076-abs-en.pdf">REMINDER NOTIFICATION: Submission of the Interim National Report</a>
+                </p>
+                <p>
+                    <span  class="bold"  style="text-transform:uppercase;font-size:12px;">23 FEB 2017</span> &nbsp; &nbsp; 
+                    <a href="http://www.cbd.int/doc/notifications/2017/ntf-2017-017-absch-en.pdf"> NOTIFICATION: Submission of the Interim National Report and Publication of Information on the ABS Clearing-House</a>
+                </p>
+        </p>
+
+      <br>
+
+
+
+        <div class="panel panel-default">
+                
+                <div class="panel-heading">
+                    <h3 class="panel-title">Overview </h3>
+                </div>
+    
+                <div class="panel-body">
+                    <table class="table" cellspacing="0" cellpadding="0" style="width:100%;">
+                            <thead>
+                            <tr>
+                                <th>Report</th>
+                                <th style="text-align:center;">Year </th>
+                                <th style="text-align:center;">Parties </th>
+                                <th style="text-align:center;">Non-Parties </th>
+                                <th style="text-align:center;" class="hidden-xs" ng-repeat="region in regionMapping">{{(region.shortTitle|lstring:locale).replace('CBD - ', '')}} </th>
+                                <th style="text-align:center;">Reports</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Interim National Report 
+                                        <span style="margin-left:10px;display:inline-block;">    
+                                            <i class="fa fa-file-word-o" aria-hidden="true"></i>  | 
+                                            <a id="NR-en" href="http://www.cbd.int/abs/en/commonformats/NR-en.doc" target="_new">en</a> | 
+                                            <a id="NR-fr" href="http://www.cbd.int/abs/fr/commonformats/NR-fr.doc" target="_new">fr</a> | 
+                                            <a id="NR-es" href="http://www.cbd.int/abs/es/commonformats/NR-es.doc" target="_new">es</a> | 
+                                            <a id="NR-ru" href="http://www.cbd.int/abs/ru/commonformats/NR-ru.doc" target="_new">ru</a> | 
+                                            <a id="NR-ar" href="http://www.cbd.int/abs/ar/commonformats/NR-ar.doc" target="_new">ar</a> | 
+                                            <a id="NR-zh" href="http://www.cbd.int/abs/zh/commonformats/NR-zh.doc" target="_new">zh</a> 
+                                        </span>
+                                            </td>
+                                <td style="text-align:center;">2017</td>
+                                <td style="text-align:center;">{{interimNationalReportByNPPartiesCount}} </td>
+                                <td style="text-align:center;">{{interimNationalReportByNPNonPartiesCount}} </td>
+                                <td style="text-align:center;" class="hidden-xs" ng-repeat="region in regionMapping">{{region.count}} </td>
+                                <td style="text-align:center;">
+                                    <a href="/search/nationalRecords?schema=absNationalReport">
+                                        <b>{{interimNationalReportByNPPartiesCount + interimNationalReportByNPNonPartiesCount}}</b>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+    <br>
+
         <div class="register-content-content" style="padding:5px;">
             <div class="panel panel-default">
 
@@ -33,5 +110,5 @@
             </div>
         </div>
 
-    </div>
+
 </div>

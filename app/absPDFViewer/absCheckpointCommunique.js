@@ -8,34 +8,41 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 	$scope.locale = sLocale;
 
 	var params = {};
-	// params            = clone(params||{});
-
-	 params.identifier = $location.search().documentID;
-
+	params.identifier = $location.search().documentID;
+	if (params.identifier && /^absch/.test(params.identifier.toLowerCase())){
+		var docNum = params.identifier.split('-');
+		if (docNum.length == 5) {
+			params.identifier = docNum[3]+'@'+docNum[4]
+		}
+	}
 
 	var document = 			$http.get('/api/v2013/documents/' +  params.identifier, { });
 	var documentInfo = 		$http.get('/api/v2013/documents/' +  params.identifier + '?info', { });
-	var documentVersion=	$http.get('/api/v2013/documents/'+params.identifier+'/versions?body=true&cache=true')
 
-	$q.all([document,documentInfo,documentVersion]).then(function(result){
+	$q.all([document,documentInfo]).then(function(result){
 
 		 	$scope.document = result[0].data;
 			$scope.documentInfo = result[1].data;
-			$scope.documentVersion = result[2].data;
 			$scope.realm = $scope.documentInfo.Realm;
 
-			if($scope.document.absIRCCs){
-				$scope.document.absIRCCs.forEach(function(item){
-					$http.get('/api/v2013/documents/' +  item.identifier, { info:""})
-					.success(function(result){
-						item.document = result;
-					}).finally(function(){
-						getContacts($scope.document, $scope.documentInfo.realm)
-					});
-				})
-			}
-			else
-				getContacts($scope.document, $scope.documentInfo.realm);
+			var documentVersion=	$http.get('/api/v2013/documents/'+$scope.document.header.identifier+'/versions?body=true&cache=true')
+			$q.when(documentVersion)
+			.then(function(data){
+				$scope.documentVersion = data.data;
+
+				if($scope.document.absIRCCs){
+					$scope.document.absIRCCs.forEach(function(item){
+						$http.get('/api/v2013/documents/' +  item.identifier, { info:""})
+						.success(function(result){
+							item.document = result;
+						}).finally(function(){
+							getContacts($scope.document, $scope.documentInfo.realm)
+						});
+					})
+				}
+				else
+					getContacts($scope.document, $scope.documentInfo.realm);
+			})
 	});
 
 	$scope.renderHtml = function(html_code)

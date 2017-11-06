@@ -9,7 +9,8 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
     'views/forms/view/view-default-reference.directive',
     'views/forms/view/view-contact-reference.directive',
 	'services/search-service',
-	'views/directives/block-region-directive'
+	'views/directives/block-region-directive',
+	'views/directives/record-options','scbd-angularjs-services/locale'
 ], function (app, template) {
 	app.directive('recordLoader', [function () {
 		return {
@@ -20,7 +21,7 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 			scope: {
 				linkTarget: "@",
 				document: "=",
-				locale: "=",
+				locale: "=?",
 				hide: "@",
 				showDetails: "=",
 				api: '=?'
@@ -37,10 +38,13 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 					$scope.init();
 			},
 			controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows",
+				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows", "locale",
 				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows) {
-
+					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows, appLocale) {
+					
+					if(!$scope.locale)
+						$scope.locale = appLocale;
+					
 					var schemaMapping = {
 						news: 'views/forms/view/view-news.directive',
 						absnationalreport: 'views/forms/view/view-abs-national-report.directive',
@@ -110,7 +114,7 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 								documentID = documentID.toLowerCase();//.replace('absch','ABSCH');
 								$scope.documentUID = documentID.toUpperCase();
 								var schemaFolder = $filter("mapSchema")(docNum[1]);
-								$scope.documentUrl = "https://s3.amazonaws.com/absch.documents." + realm.value.toLowerCase() + "/" + schemaFolder + '/' + documentID + '.pdf?id=' + new Date();
+								$scope.documentUrl = "https://s3.amazonaws.com/absch.documents." + realm.value.toLowerCase() + "/" + schemaFolder + '/' + documentID + '-en.pdf?id=' + new Date();
 
 								$httpAWS.head($scope.documentUrl, { cache: false }).then(function (success) {
 									$scope.documentSuccess = true;
@@ -339,7 +343,7 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 						require([schemaDetails], function () {
 							var name = snake_case(lschema);
 							var directiveHtml =
-								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}}></DIRECTIVE>"
+								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}} locale='locale'></DIRECTIVE>"
 									.replace(/DIRECTIVE/g, 'view-' + name);
 							$scope.$apply(function () {
 								$element.find('#schemaView')

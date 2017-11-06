@@ -615,17 +615,17 @@
                 ]
             },
             {
-                "key": "Q033_a",
+                "key": "Q033",
                 "section": "ComplianceMat",
-                "number": "32.1",
-                "type": "list",
+                "number": "33",
+                "type": "header",
                 "title": "Has your country taken measures regarding the following points as provided in Article 18.3? ",
-                "multiple": true
+                "multiple": false
             },
             {
-                "key": "Q033_b",
+                "key": "Q033_a",
                 "section": "ComplianceMat",
-                "number": "33.2",
+                "number": "33.1",
                 "type": "option",
                 "title": "Access to justice?",
                 "multiple": false,
@@ -638,9 +638,9 @@
                 ]
             },
             {
-                "key": "Q033_c",
+                "key": "Q033_b",
                 "section": "ComplianceMat",
-                "number": "33.3",
+                "number": "33.2",
                 "type": "option",
                 "title": "Utilization of mechanisms regarding mutual recognition and enforcement of foreign judgements and arbitral awards? ",
                 "multiple": false,

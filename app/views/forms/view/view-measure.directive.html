@@ -6,7 +6,10 @@
 		</h4></div>
 	<div class="record-body panel-body">
 
-		<div record-options></div>
+			<div class="pull-right record-Options-div">
+					<span ng-if="updatedOn" class="xlabel  hidden-xs">published:</span>
+					<span ng-if="updatedOn" class="date"> {{updatedOn | formatDate}}</span>
+				</div>
 
 		<legend ng-if="document.government || document.title || document.description || document.jurisdiction || document.jurisdictionRegions || document.status || document.adoption">
 			General information</legend>

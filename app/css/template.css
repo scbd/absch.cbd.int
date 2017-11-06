@@ -1952,3 +1952,35 @@ legend+ .help-info {
 .label-inbetween {font-size: 16px;}
 .label-nonparty  {font-size: 16px;}
 }
+
+    
+    
+.record-link-style{
+    font-size:11px!important;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+    .record-Options-div .date{
+        font-size:11px!important;
+        font-weight: 500;
+        text-transform: uppercase;
+        padding:3px;
+        background-color: #f5f5f5;
+       
+            border-radius: 4px;
+    
+        border: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    .record-Options-div .xlabel{
+        font-size:11px!important;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: #666;
+        padding:0!important;
+    
+    }
+    .record-Options-div .btn-lang{
+        /* background-color: #f5f5f5; */
+        font-size:11px!important;
+        font-weight: 500;
+    }

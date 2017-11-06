@@ -8,7 +8,10 @@
 	</div>
 	<div class="record-body panel-body">
 
-		<div record-options></div><br>
+			<div class="pull-right record-Options-div">
+					<span ng-if="updatedOn" class="xlabel  hidden-xs">published:</span>
+					<span ng-if="updatedOn" class="date"> {{updatedOn | formatDate}}</span>
+				</div> <br>
 
 		<div ng-show="document.title">
 			<label>Title</label>

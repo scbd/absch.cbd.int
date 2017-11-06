@@ -1,15 +1,16 @@
 ﻿<div id="Record" class="record panel panel-default">
 
 	<div class="panel-heading bg-blue" ng-show="display('header')">
-		<h4>Checkpoint Communiqué
-		<span class="color-black"> (CPC) </span> </h4>
+		<h4>
+		<span >Checkpoint Communiqué <span class="color-black"> (CPC) </span> </span>
+		</h4>	
 	</div>
 	<div class="record-body panel-body">
-		<div record-options></div>
-		<span style="color:#ddd"  class="pull-right"> &nbsp;  |  &nbsp; </span>
-			<div class="pull-right">
-				 <a translation-url  ng-if="showPdf"  class="hidden-print record-link-style"target="_blank" ng-href="/database/record/{{document | uniqueID}}"><i class="fa fa-file-pdf-o"></i> Download</a>
+			<div class="pull-right record-Options-div">
+				<span ng-if="updatedOn" class="xlabel  hidden-xs">published:</span>
+				<span ng-if="updatedOn" class="date"> {{updatedOn | formatDate}}</span>
 			</div>
+		
 
     	   	<div ng-show="document.government || document.absCheckpoints">
 				<legend>

@@ -24,7 +24,7 @@
                     <option value="countries">Select countries</option>
                     <option value="regions">Select regions</option>
                     <option value="npParties">Breakdown by Nagoya Protocol Parties</option>
-                    <option value="npNonParties">Breakdown by Nagoya Protocol Non Parties</option>
+                    <option value="npNonParties">Breakdown by Nagoya Protocol Non-Parties</option>
                 </select>
             </td>
         </tr>
@@ -36,7 +36,7 @@
             <td>
 
                 <div ng-hide="selectedRegions.length || showCountries || showRegions" class="alert alert-warning" role="alert" style="margin-bottom:0px">
-                    No countries or regions selected.
+                    No countries or regions selected
                 </div>
 
                 <ul ng-if="selectedRegions.length" class="list-unstyled">
@@ -59,7 +59,7 @@
                 <input type="checkbox"  ng-model="allSelected" indeterminate="allSelected===null" ng-click="allSectionsClicked()" >
             </td>
             <th class="Title" colspan="4" ng-click="allSelected=!allSelected; allSectionsClicked();">
-                All questions and/or sections of the report.
+                All questions and/or sections of the report
             </th>
         </tr>
 

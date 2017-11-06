@@ -18,18 +18,18 @@
         <tr>
             <th style="width:22px"></th>
             <th class="text-right">&nbsp;</th>
-            <th style="width:30px" class="text-center  text-nowrap">Total</th>
+            <th style="width:30px" class="text-center text-nowrap">Total</th>
             <th style="width:60px" class="text-center text-nowrap"><span ng-if="::question.type!='text'">%</span></th>
             <th style="width:50px" class="text-center" ng-click="toggleRegion(region)" ng-repeat-start="region in ::regions track by region.identifier">
                 <div data-toggle="tooltip" data-original-title="{{::(region.title|lstring)}}">
-                    <span ng-bind-html="::region.htmlTitle"></span><span class="text-nowrap">
+                    <span ng-bind-html="::region.htmlTitle.replace('CBD ', '')"></span><span class="text-nowrap">
                         <i class="fa" ng-class="{ 'fa-caret-left': expanded[region.identifier] , 'fa-caret-right': !expanded[region.identifier] }"></i>
                     </span>
                 </div>
             </th>
             <!-- show countries if expanded[region.identifier] -->
             <th style="width:25px" ng-if="expanded[region.identifier]" ng-repeat="country in region.countries|filter:{visible:true} track by country.identifier">
-                <a href="/database/record.shtml?documentid={{::reportsMap[country.identifier].documentId}}" target="_report" data-toggle="tooltip" data-original-title="{{::country.title|lstring}}">{{::(country.identifier|uppercase)}}</a>
+                <a href="/database/records/{{::reportsMap[country.identifier].documentId}}" target="_report" data-toggle="tooltip" data-original-title="{{::country.title|lstring}}">{{::(country.identifier|uppercase)}}</a>
             </th>
             <th ng-repeat-end ng-show="::false"></th>
             <th style="width:10px;background-color:white"></th>

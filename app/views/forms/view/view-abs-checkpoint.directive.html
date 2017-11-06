@@ -1,13 +1,17 @@
 ﻿<div id="Record" class="record panel panel-default" >
 
 	<div class="panel-heading bg-blue" ng-show="display('header')">
-		<h4>Checkpoint <span class="color-black"> (CP) </span>
-		<!--<span style="text-transform:uppercase;">ABSCH-CP-{{document.government.identifier}}-{{document.info.documentID}}</span> -->
-		</h4> </div>
+		<h4>
+		<span>Checkpoint <span class="color-black"> (CP) </span> </span>
+		</h4>	
+	</div>
 
 	<div class="record-body panel-body" help schema="ViewCP" >
 
-		<div record-options></div>
+			<div class="pull-right record-Options-div">
+					<span ng-if="updatedOn" class="xlabel  hidden-xs">published:</span>
+					<span ng-if="updatedOn" class="date"> {{updatedOn | formatDate}}</span>
+				</div>
 
 		 <div name="article17-1-a"></div>
 

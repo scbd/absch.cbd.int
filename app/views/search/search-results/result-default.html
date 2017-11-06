@@ -1,8 +1,10 @@
 ﻿<div style="padding:0!important;margin:0 0 20px 0!important;">
 
-    <a translation-url  ng-show="showDoc" style="z-index:999999;width:100%;padding:0!important;margin:0!important;" ng-click="showDoc=false">
-        <span class="pull-right bold" aria-hidden="true" style="z-index:999999;color:#FFF;font-size:20px;padding-right:10px;position:relative;top:3px;cursor:pointer;">&times;</span>
-    </a>
+        <div class="pull-right" style="padding-right:15px;position:relative;top:5px;"  ng-show="showDoc" >
+                 <span style="color:#ddd" > | </span> &nbsp; 
+                <a translation-url class="bold"  style="position:relative;top:2px;color:#FFF;font-size:20px;cursor:pointer;z-index:99999999;width:100%;" ng-click="showDoc=false">
+                    &times;</a>
+            </div>
 
     <div ng-if="showDoc" style="padding:5px 0px 10px 0px!important;margin:0 0 0 0!important;">
         <record-loader class="card card-3" api="api.recordLoaderApi" show-details="false" hide-buttons="true" link-target="_new"></record-loader>

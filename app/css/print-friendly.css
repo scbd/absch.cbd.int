@@ -32,7 +32,8 @@
     }
 }
 
-scbd-header, nav, .navbar.navbar-portal, #PortalLinks1, .footer, scbd-footer, .slaask-button, .hidden-print, .pdf-download-buttons {
+scbd-header, nav, .navbar.navbar-portal, #PortalLinks1, .footer, scbd-footer, .slaask-button, .hidden-print, .pdf-download-buttons,
+.slaask-alert-overlay, .slaask-alert, .hidden-print, .lang-alert  {
     display: none!important
 }
 .training-bg {

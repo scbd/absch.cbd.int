@@ -2,13 +2,10 @@
 	<div class="panel-heading  bg-darkgrey"><h4>News</h4></div>
 	<div class="record-body panel-body">
 
-			<div record-options></div><br>
-	<!--<div ng-show="document.date_s">
-			<label>Date</label>
-			<span class="km-value">
-				{{document.date_s| formatDate}}
-			</span>
-		</div>-->
+			<div class="pull-right record-Options-div">
+					<span ng-if="updatedOn" class="xlabel  hidden-xs">published:</span>
+					<span ng-if="updatedOn" class="date"> {{updatedOn | formatDate}}</span>
+				</div>
 
 		<div ng-show="document.title_EN_t">
 			<label>Title</label>

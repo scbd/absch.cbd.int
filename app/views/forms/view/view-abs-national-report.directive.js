@@ -16,7 +16,9 @@ app.directive("viewAbsNationalReport", [function () {
 		},
 		controller : ["$scope", "underscore", "commonjs", "$filter", function ($scope, _, commonjs, $filter)
 		{
-
+			if((($scope.document||{}).createdDate_dt) || $scope.$parent.internalDocumentInfo)
+			$scope.updatedOn = ($scope.document||{}).createdDate_dt || $scope.$parent.internalDocumentInfo.updatedOn;
+			
 			//====================
 			//
 			//====================
@@ -105,7 +107,7 @@ app.directive("viewAbsNationalReport", [function () {
 		        if(reference.identifier.indexOf('@')>=0)
 				    revsionNumber = reference.identifier.substr(reference.identifier.indexOf('@')+1, reference.identifier.length - (reference.identifier.indexOf('@')+1));
 				
-				if(!UID)
+				if(!UID || typeof UID != 'string')
 					return;
 
 				var schema = UID.split('-')[1];
