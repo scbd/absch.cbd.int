@@ -26,7 +26,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                         else if(_.contains($scope.internalDocument.header.languages, 'ar')) $scope.currentLocale = 'ar';
                         else if(_.contains($scope.internalDocument.header.languages, 'zh')) $scope.currentLocale = 'zh';
                     }
-                    if($scope.internalDocumentInfo.workingDocumentBody)
+                    if($scope.internalDocumentInfo.documentID === undefined && !$scope.internalDocumentInfo.id)
                         $scope.hidePdf = true;
                     if(_.contains(['absPermit', 'absCheckpointCommunique'], $scope.internalDocument.header.schema)){                        
                         if($scope.internalDocumentInfo && $scope.internalDocumentInfo.revision < $scope.internalDocumentInfo.latestRevision)
