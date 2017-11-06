@@ -26,10 +26,11 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                         else if(_.contains($scope.internalDocument.header.languages, 'ar')) $scope.currentLocale = 'ar';
                         else if(_.contains($scope.internalDocument.header.languages, 'zh')) $scope.currentLocale = 'zh';
                     }
-                    if($scope.internalDocumentInfo.documentID === undefined && !$scope.internalDocumentInfo.id)
+                    if($scope.internalDocumentInfo && $scope.internalDocumentInfo.documentID === undefined && !$scope.internalDocumentInfo.id)
                         $scope.hidePdf = true;
                     if(_.contains(['absPermit', 'absCheckpointCommunique'], $scope.internalDocument.header.schema)){                        
-                        if($scope.internalDocumentInfo && $scope.internalDocumentInfo.revision < $scope.internalDocumentInfo.latestRevision)
+                        if($scope.internalDocumentInfo && $scope.internalDocumentInfo && 
+                           $scope.internalDocumentInfo.revision < $scope.internalDocumentInfo.latestRevision)
                             $scope.hidePdf = true;
                     }
                 })
@@ -73,7 +74,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                                                         .replace(':type'        , pdfType)
                                                         .replace(':lang'        , $scope.downloadLocale)
                                                         .replace(':documentId'  , documentId)
-                                                        .replace(':revision'    , $scope.internalDocumentInfo.revision);
+                                                        .replace(':revision'    ,($scope.internalDocumentInfo||{}).revision);
 
                     $window.open(pdfDownloadUrl);
                 }
