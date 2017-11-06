@@ -107,7 +107,7 @@ app.directive("viewAbsNationalReport", [function () {
 		        if(reference.identifier.indexOf('@')>=0)
 				    revsionNumber = reference.identifier.substr(reference.identifier.indexOf('@')+1, reference.identifier.length - (reference.identifier.indexOf('@')+1));
 				
-				if(!UID)
+				if(!UID || typeof UID != 'string')
 					return;
 
 				var schema = UID.split('-')[1];
