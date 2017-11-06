@@ -22,9 +22,6 @@ app.directive("viewAuthority", [function () {
 		},
 		controller : ["$scope", "IStorage", function ($scope, storage)
 		{
-			if((($scope.document||{}).createdDate_dt) || $scope.$parent.internalDocumentInfo)
-			$scope.updatedOn = ($scope.document||{}).createdDate_dt || $scope.$parent.internalDocumentInfo.updatedOn;
-		
 			$scope.locale = 'en' //set from record option directive
 			//====================
 			//
