@@ -10,7 +10,8 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
     'views/forms/view/view-contact-reference.directive',
 	'services/search-service',
 	'views/directives/block-region-directive',
-	'views/directives/record-options','scbd-angularjs-services/locale'
+	'views/directives/record-options','scbd-angularjs-services/locale',
+	'views/forms/directives/document-date'
 ], function (app, template) {
 	app.directive('recordLoader', [function () {
 		return {

@@ -18,10 +18,8 @@
 					</p>
 				</div>
 			</div>
-			<div class="pull-right record-Options-div">
-				<span ng-if="updatedOn" class="xlabel  hidden-xs">published:</span>
-				<span ng-if="updatedOn" class="date"> {{updatedOn | formatDate}}</span>
-			</div>			
+			
+		<document-date></document-date>		
 
 			<legend ng-if="document.government">
 		         General information
