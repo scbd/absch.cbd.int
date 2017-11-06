@@ -26,8 +26,10 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                         else if(_.contains($scope.internalDocument.header.languages, 'ar')) $scope.currentLocale = 'ar';
                         else if(_.contains($scope.internalDocument.header.languages, 'zh')) $scope.currentLocale = 'zh';
                     }
-                    if(_.contains(['absPermit', 'absCheckpointCommunique'], internalDocument.header.schema)){                        
-                        if($scope.internalDocumentInfo && $scope.internalDocumentInfo.revision === $scope.internalDocumentInfo.latestRevision)
+                    if($scope.internalDocumentInfo.workingDocumentBody)
+                        $scope.hidePdf = true;
+                    if(_.contains(['absPermit', 'absCheckpointCommunique'], $scope.internalDocument.header.schema)){                        
+                        if($scope.internalDocumentInfo && $scope.internalDocumentInfo.revision < $scope.internalDocumentInfo.latestRevision)
                             $scope.hidePdf = true;
                     }
                 })
@@ -69,7 +71,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                     var pdfDownloadUrl  =  '/api/v2017/generate-pdf/:realm/:type/:lang?documentID=:documentId&revision=:revision';
                     pdfDownloadUrl      = pdfDownloadUrl.replace(':realm'       , appConfigService.currentRealm)
                                                         .replace(':type'        , pdfType)
-                                                        .replace(':lang'        , $scope.currentLocale)
+                                                        .replace(':lang'        , $scope.downloadLocale)
                                                         .replace(':documentId'  , documentId)
                                                         .replace(':revision'    , $scope.internalDocumentInfo.revision);
 
@@ -79,4 +81,3 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
         };
     }]);
 });
-
