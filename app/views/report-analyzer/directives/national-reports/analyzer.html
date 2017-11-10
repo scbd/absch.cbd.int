@@ -103,8 +103,8 @@
             background-color: #fff!important;
         }
         @media print{
-            #returnQuestions, #btnPrint, #btnClose{
-                display:none
+            #returnQuestions, #btnPrint, #btnClose, .analyzer-buttons{
+                display:none!important;
             }
         }
     </style>
@@ -118,7 +118,7 @@
  
     <div class="clearfix"></div>
 
-    <div ng-show="sections" style="margin-bottom:5px" id="nrAnalyzer">
+    <div ng-show="sections" style="margin-bottom:5px" id="nrAnalyzer " class="analyzer-buttons">
 
         <button type="button" class="btn btn-default"  ng-click="showSettings();" id="returnQuestions">
             « Back to settings
