@@ -145,14 +145,19 @@ function (app, schemaNamePlural) {
 		};
 	}])
 //============================================================
-    app.filter("uniqueIDWithoutRevision", ['$filter', 'commonjs', function($filter, commonjs) {
+	app.filter("uniqueIDWithoutRevision", ['$filter', 'commonjs', 'appConfigService',
+	 function($filter, commonjs, appConfigService) {
 
 		return function( document ) {
-            var unique = $filter("uniqueID")(document);
+            var unique = $filter("uniqueID")(document);			
 
+            if(angular.isString(unique) && document){
 
-            if(angular.isString(unique) && document)
-                return unique.substring(0,unique.lastIndexOf('-'));
+				if(_.contains(appConfigService.scbdSchemas, document.header.schema))
+					return unique;
+
+				return unique.substring(0,unique.lastIndexOf('-'));
+			}
 			// else if(angular.isString(unique) && document.identifier)
             //     return unique.substring(0,unique.lastIndexOf('-'));
 
