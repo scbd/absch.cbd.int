@@ -153,7 +153,7 @@ function (app, schemaNamePlural) {
 
             if(angular.isString(unique) && document){
 
-				if(_.contains(appConfigService.scbdSchemas, document.header.schema))
+				if(document.header && _.contains(appConfigService.scbdSchemas, document.header.schema))
 					return unique;
 
 				return unique.substring(0,unique.lastIndexOf('-'));
