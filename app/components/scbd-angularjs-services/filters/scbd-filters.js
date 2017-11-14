@@ -1,4 +1,4 @@
-define(['app', 'moment', 'json!./schema-name.json', 'json!./schema-short-name.json'], 
+define(['app', 'moment', 'json!./schema-name.json', 'json!./schema-short-name.json', 'scbd-angularjs-services/locale'], 
 function (app, moment, schemaName, schemaShortName) {
 
 
@@ -222,7 +222,7 @@ function (app, moment, schemaName, schemaShortName) {
   //
   //
   //============================================================
-  app.filter("term", ["$http", '$filter', function ($http, $filter) {
+  app.filter("term", ["$http", '$filter', 'locale', function ($http, $filter, appLocale) {
     var cacheMap = {};
 
     return function (term, locale) {
@@ -235,7 +235,7 @@ function (app, moment, schemaName, schemaShortName) {
           identifier: term
         };
 
-      locale = locale || "en";
+      locale = locale || appLocale || "en";
 
       if (term.customValue)
         return $filter("lstring")(term.customValue, locale);

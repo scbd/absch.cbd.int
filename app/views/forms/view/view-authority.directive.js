@@ -21,8 +21,7 @@ app.directive("viewAuthority", [function () {
 			$scope.contacts = undefined;
 		},
 		controller : ["$scope", "IStorage", function ($scope, storage)
-		{
-			$scope.locale = 'en' //set from record option directive
+		{			
 			//====================
 			//
 			//====================

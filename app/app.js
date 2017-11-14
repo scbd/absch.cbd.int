@@ -36,10 +36,10 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
                 });
             });
 
-       app.run(['$route', '$rootScope', '$location', 'LogglyLogger', 'realm', '$cookies', 
-       function ($route, $rootScope, $location, logglyLogger, realm, $cookies) {
+       app.run(['$route', '$rootScope', '$location', 'LogglyLogger', 'realm', '$cookies', '$window',
+       function ($route, $rootScope, $location, logglyLogger, realm, $cookies, $window) {
 
-            var appVersion = $cookies.get('appVersion')||'localhost';
+            var appVersion = $window.appVersion||'localhost';
             logglyLogger.fields({ realm: realm.value, appVersion: appVersion })
 
             $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {

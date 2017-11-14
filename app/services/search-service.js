@@ -1,7 +1,8 @@
-define(['app', 'underscore', './local-storage-service', './app-config-service'], function(app, _) {
+define(['app', 'underscore', './local-storage-service', './app-config-service',
+'scbd-angularjs-services/locale'], function(app, _) {
 
-    app.factory('searchService', ['$http', '$q', 'realm', 'localStorageService', 'appConfigService',
-        function($http, $q, realm, localStorageService, appConfigService) {
+    app.factory('searchService', ['$http', '$q', 'realm', 'localStorageService', 'appConfigService', 'locale',
+        function($http, $q, realm, localStorageService, appConfigService, locale) {
             return new function() {
 
                 var base_fields = 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
@@ -28,7 +29,7 @@ define(['app', 'underscore', './local-storage-service', './app-config-service'],
                     var queryListParameters = {
                         'q': q + searchQuery.query,
                         'sort': searchQuery.sort,
-                        'fl': searchQuery.fields,
+                        'fl': localeFields(searchQuery.fields),
                         'wt': 'json',
                         'start': searchQuery.currentPage * searchQuery.rowsPerPage,
                         'rows': searchQuery.rowsPerPage,
@@ -53,7 +54,7 @@ define(['app', 'underscore', './local-storage-service', './app-config-service'],
                     var queryGroupParameters = {
                         'q': q + searchQuery.query,
                         'sort': searchQuery.sort,
-                        'fl': searchQuery.fields,
+                        'fl': localeFields(searchQuery.fields),
                         'wt': 'json',
                         'start': searchQuery.currentPage * searchQuery.rowsPerPage,
                         'rows': searchQuery.rowsPerPage,
@@ -198,6 +199,15 @@ define(['app', 'underscore', './local-storage-service', './app-config-service'],
                     }
                     return facets;
                 };
+
+                function localeFields(fields){
+
+                    if(locale && locale!='en'){
+                        return fields.replace(/_EN/ig, '_'+(locale||'en').toUpperCase())
+                    }
+
+                    return fields;
+                }
 
                 this.readFacets = readFacets2;
 

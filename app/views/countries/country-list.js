@@ -78,7 +78,7 @@ define(['app', 'underscore',
                 var level = region.narrowerTerms && region.identifier != '5E5B7AA4-2420-4147-825B-0820F7EC5A4B' && region.identifier != '3D0CCC9A-A0A1-4399-8FA2-41D4D649DB0E' ? region.narrowerTerms.length : 0;
                 
                 var item =  {
-                    name: region.title.en,
+                    name: region.title[locale||'en'],
                     id:region.identifier,
                     level: level,
                 };

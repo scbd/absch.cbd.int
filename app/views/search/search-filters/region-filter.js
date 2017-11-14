@@ -26,7 +26,7 @@ define(['app', 'text!views/search/search-filters/region-filter.html','underscore
                
                 //===================================================================
                $scope.IsCBDRegion = function(item) {
-                  if(item.name.indexOf("CBD Regional Groups") >= 0 ){
+                  if(item.name && item.name.indexOf("CBD Regional Groups") >= 0 ){
                       
                       return true;
                   }

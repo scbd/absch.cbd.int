@@ -31,6 +31,8 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             if(lang=='zh')
                 lang= 'zh-cn'; //moment has two ZH, use ZH-CN
             moment.lang(lang);
+            if(lang != 'en')
+                require(['css!/app/css/translation.css']);
             if(lang == 'ar'){
                 require(['css!libs/bootstrap-rtl/dist/css/bootstrap-rtl.css']);
             }
@@ -205,7 +207,8 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
            
             var fields = logglyLogger.fields()
             fields.user = user.userID;
-            logglyLogger.fields(fields)
+            logglyLogger.fields(fields);
+            
         }, 1000));
 
         }
