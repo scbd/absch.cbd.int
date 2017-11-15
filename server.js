@@ -10,6 +10,7 @@ var express = require('express');
 var proxy   = require('http-proxy').createProxyServer({});
 var app     = express();
 var url     = require('url');
+var cookieParser = require('cookie-parser')
 // Initialize constants
 
 var appVersion = process.env.TAG;
@@ -19,6 +20,7 @@ if(!appVersion || appVersion.trim()==''){
 }  
 var oneDay   = 86400000;
 app.set('view engine', 'ejs');
+app.use(cookieParser())
 // Set routes
 app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: setCustomCacheControl , maxAge: 86400000*365 }) );
 app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',     translation, express.static(__dirname + '/app', { setHeaders: setCustomCacheControl }));
