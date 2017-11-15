@@ -46,13 +46,13 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'json!app
                         },
                         nonCommercial : {
                             identifier  : 'nonCommercial',
-                            "title": {
-                                "en": "Commercial",
-                                "es": "Comercial",
-                                "fr": "Commercial",
-                                "ar": "تجاري",
-                                "ru": "Коммерческое",
-                                "zh": "商业"
+                            "title":{
+                                "en":"Non-Commercial",
+                                "es":"No comercial",
+                                "fr":"Non-commercial",
+                                "ar":"غير تجاري",
+                                "ru":"Некоммерческое",
+                                "zh":"非商业"
                             },
                             identifiers : [ 'A7769659-17DB-4ED4-B1CA-A3ADD9CBD3A4',
                                             '7E3ECD30-1972-487B-A920-DDB439DC2DF6', '71E387A85A644CCCB1C2D6DDFA8493DD']
