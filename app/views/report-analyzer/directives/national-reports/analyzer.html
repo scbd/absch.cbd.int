@@ -102,9 +102,16 @@
         .table-hover:hover {
             background-color: #fff!important;
         }
+        #textsDialog-model-content .modal-body{
+            max-height:75vh;
+            overflow-y: auto;
+        }
         @media print{
             #returnQuestions, #btnPrint, #btnClose, .analyzer-buttons{
                 display:none!important;
+            }
+            #textsDialog-model-content .modal-body{
+                max-height:100%;
             }
         }
     </style>
@@ -260,7 +267,7 @@
                     </span>    
                 </div>
 
-                <div class="modal-body" style="max-height:75vh;overflow-y: auto;">
+                <div class="modal-body ">
                    
                     <div ng-repeat="item in countriesTexts">
                         <div class="pull-right" ng-if="::item.field!='documentReferenceIDs' && item.field!='relevantDocuments'">
