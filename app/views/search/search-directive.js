@@ -1,4 +1,5 @@
-define(['app', 'text!views/search/search-directive.html','underscore', 'js/common',
+define(['app', 'text!views/search/search-directive.html','underscore', 'json!app-data/schema-name-plural.json', 'json!app-data/search-tour.json',
+'js/common',
 'services/search-service',
 'ngInfiniteScroll',
 'views/search/search-filters/keyword-filter',
@@ -13,8 +14,9 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
 'services/app-config-service', 'ngDialog',
 'views/register/user-preferences/user-preference-filter',
 'views/directives/export-directive',
-'services/thesaurus-service', 'angular-animate', 'angular-joyride'
-], function(app, template, _) {
+'services/thesaurus-service', 'angular-animate', 'angular-joyride',
+'scbd-angularjs-services/locale'
+], function(app, template, _, schemaNames, joyRideText) {
 
     app.directive('searchDirective', function() {
         return {
@@ -24,20 +26,34 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
             template: template, 
             controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService','$rootScope',
-             'joyrideService', '$timeout',
+             'joyrideService', '$timeout', 'locale',
             function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
-                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, $timeout) {
+                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, $timeout, locale) {
                     
                     var customKeywords = {
                         commercial : {
                             identifier  : 'commercial',
-                            title : {en:'Commercial'},
+                            "title": {
+                                "en": "Commercial",
+                                "es": "Comercial",
+                                "fr": "Commercial",
+                                "ar": "تجاري",
+                                "ru": "Коммерческое",
+                                "zh": "商业"
+                            },
                             identifiers : [ 'A50D6E64BC6042428FF79C23E8FA3CF2', '7CAC5B93-7E27-441F-BFEB-9E416D48B1BE',
                                             '3AC68883-4DD9-4F07-A941-30F7B910D24C']
                         },
                         nonCommercial : {
                             identifier  : 'nonCommercial',
-                            title : {en:'Non commercial'},
+                            "title": {
+                                "en": "Commercial",
+                                "es": "Comercial",
+                                "fr": "Commercial",
+                                "ar": "تجاري",
+                                "ru": "Коммерческое",
+                                "zh": "商业"
+                            },
                             identifiers : [ 'A7769659-17DB-4ED4-B1CA-A3ADD9CBD3A4',
                                             '7E3ECD30-1972-487B-A920-DDB439DC2DF6', '71E387A85A644CCCB1C2D6DDFA8493DD']
                         },
@@ -235,7 +251,7 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                     $scope.saveFilter = function(doc) {
 
                         //TODO: if free text check to see if there is a UID and convert to indenifier
-                        console.log("addfilter:" + doc);
+                        console.debug("addfilter:" + doc);
 
                         var filterID = doc.id;
                         var termID = doc.id;
@@ -337,6 +353,7 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                         var fields = base_fields + en_fields + 
                         ', implementingAgencies_EN_txt, executingAgencies_EN_txt, collaboratingPartners_EN_txt, authors_t, organizations_EN_txt, publicationYear_i';
                         
+
                         var q = queryFilterBuilder("reference");
 
                         queryCanceler = $q.defer();
@@ -682,7 +699,7 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                                 var countries = data;
 
                                 _.each(countries, function(country, index){
-                                addFilter(country.code.toLowerCase(), {'sort': index, 'type':'country', 'name':country.name.en, 'id':country.code.toLowerCase(), 'description':'', "isCBDParty": country.isCBDParty,"isNPParty":country.isNPParty,"isNPSignatory": country.isNPSignatory,"isNPRatified": country.isNPRatified ,"isNPInbetweenParty":country.isNPInbetweenParty,"entryIntoForce": country.entryIntoForce});
+                                addFilter(country.code.toLowerCase(), {'sort': index, 'type':'country', 'name':country.name[locale||en], 'id':country.code.toLowerCase(), 'description':'', "isCBDParty": country.isCBDParty,"isNPParty":country.isNPParty,"isNPSignatory": country.isNPSignatory,"isNPRatified": country.isNPRatified ,"isNPInbetweenParty":country.isNPInbetweenParty,"entryIntoForce": country.entryIntoForce});
                                 });
                         });
                     };
@@ -902,7 +919,6 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                         _.reduce(customKeywords, function(memo, value, key){
                             if(_.contains(value.identifiers, keyword.identifier)){
                                 duplicate = value;
-                                console.log(duplicate);
                             }
                         },{})
                         return duplicate;
@@ -914,10 +930,10 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                         
                          var dupIdentifier = isIdentifierDuplicate(keyword);
                          if(dupIdentifier)
-                             addFilter(dupIdentifier.identifier + "@" +  related, {'type':'keyword', 'name':dupIdentifier.title.en, 'id':dupIdentifier.identifier,
+                             addFilter(dupIdentifier.identifier + "@" +  related, {'type':'keyword', 'name':dupIdentifier.title[locale||en], 'id':dupIdentifier.identifier,
                             'description':'',  'parent' : parent, 'related' : related, filterID: dupIdentifier.identifier + "@" +  related, 'level':level, 'broader': broader, isDuplicate : true});
                          else
-                            addFilter(keyword.identifier + "@" +  related, {'type':'keyword', 'name':keyword.title.en, 'id':keyword.identifier,
+                            addFilter(keyword.identifier + "@" +  related, {'type':'keyword', 'name':keyword.title[locale||en], 'id':keyword.identifier,
                             'description':'',  'parent' : parent, 'related' : related, filterID: keyword.identifier + "@" +  related, 'level':level, 'broader': broader});
 
                          //_.each(keyword.narrowerTerms,function(narrower){
@@ -927,7 +943,7 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                     // //===============================================================================================================================
                     //  function addThematicAreaFilter(keyword,related, parent){
 
-                    //     addFilter(keyword.identifier, {'type':'keyword', 'name':keyword.title.en, 'id':keyword.identifier,
+                    //     addFilter(keyword.identifier, {'type':'keyword', 'name':keyword.title[locale||en], 'id':keyword.identifier,
                     //         'description':'', 'parent' : parent, 'related' : related});
 
                     //     //_.each(keyword.narrowerTerms,function(narrower){
@@ -950,7 +966,7 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                     //===============================================================================================================================
                     function addRegionFilter(region, parent){
 
-                        addFilter(region.identifier, {'type':'region', 'name':region.title.en, 'id':region.identifier,
+                        addFilter(region.identifier, {'type':'region', 'name':region.title[locale||en], 'id':region.identifier,
                             'description':'', 'parent' : parent});
 
                         _.each(region.narrowerTerms,function(narrower){
@@ -966,21 +982,21 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                     function loadSchemaFilters() {
                        //national
 
-                        addFilter('focalPoint',  {'sort': 1,'type':'national',  'name':'ABS National Focal Point', 'id':'focalPoint', 'description':'Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).'});
+                        addFilter('focalPoint',  {'sort': 1,'type':'national',  'name':schemaNames.focalpoint, 'id':'focalPoint', 'description':'Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).'});
 
-                        addFilter('authority',  {'sort': 2,'type':'national',  'name':'Competent National Authorities', 'id':'authority', 'description':'Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)'});
+                        addFilter('authority',  {'sort': 2,'type':'national',  'name':schemaNames.authority, 'id':'authority', 'description':'Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)'});
 
-                        addFilter('measure',  {'sort': 3,'type':'national', 'name':'Legislative, administrative or policy measures', 'id':'measure', 'description':'Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.'});
+                        addFilter('measure',  {'sort': 3,'type':'national', 'name':schemaNames.measure, 'id':'measure', 'description':'Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.'});
 
-                        addFilter('database',  {'sort': 4,'type':'national','name':'National Websites and Databases', 'id':'database', 'description':'Information and links to national websites or databases which are relevant for ABS.'});
+                        addFilter('database',  {'sort': 4,'type':'national','name':schemaNames.database, 'id':'database', 'description':'Information and links to national websites or databases which are relevant for ABS.'});
 
-                        addFilter('absPermit', {'sort': 5,'type':'national',  'name':'Internationally Recognized Certificate of Compliance', 'id':'absPermit', 'description':'Certificate constituted from the information on the permit or its equivalent registered in the ABS Clearing-House, serving as evidence that the genetic resource which it covers has been accessed in accordance with prior informed consent and that mutually agreed terms have been established. It contains the minimum necessary information to allow monitoring the utilization of genetic resources by users throughout the value chain (Article 17).'});
+                        addFilter('absPermit', {'sort': 5,'type':'national',  'name':schemaNames.abspermit, 'id':'absPermit', 'description':'Certificate constituted from the information on the permit or its equivalent registered in the ABS Clearing-House, serving as evidence that the genetic resource which it covers has been accessed in accordance with prior informed consent and that mutually agreed terms have been established. It contains the minimum necessary information to allow monitoring the utilization of genetic resources by users throughout the value chain (Article 17).'});
 
-                        addFilter('absCheckpoint',   {'sort': 6,'type':'national',  'name':'Checkpoints', 'id':'absCheckpoint', 'description':'Entities designated by Parties to effectively collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources, as appropriate (Article 17, 1(a) (i)).'});
+                        addFilter('absCheckpoint',   {'sort': 6,'type':'national',  'name':schemaNames.abscheckpoint, 'id':'absCheckpoint', 'description':'Entities designated by Parties to effectively collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources, as appropriate (Article 17, 1(a) (i)).'});
 
-                        addFilter('absCheckpointCommunique',  {'sort': 7,'type':'national','name':'Checkpoint Communiqués ', 'id':'absCheckpointCommunique', 'description':'A summary of the information collected or received by a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment  utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).'});
+                        addFilter('absCheckpointCommunique',  {'sort': 7,'type':'national','name':schemaNames.abscheckpointcommunique, 'id':'absCheckpointCommunique', 'description':'A summary of the information collected or received by a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment  utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).'});
 
-                        addFilter('absNationalReport',  {'sort': 8,'type':'national','name':'Interim National Report on the Implementation of the Nagoya Protocol', 'id':'absNationalReport', 'description':'Interim National Report on the Implementation of the Nagoya Protocol'});
+                        addFilter('absNationalReport',  {'sort': 8,'type':'national','name':schemaNames.absnationalreport, 'id':'absNationalReport', 'description':'Interim National Report on the Implementation of the Nagoya Protocol'});
 
 
                         addFilter('npParty',  {'sort': 1,'type':'partyStatus','name':'Party to the Nagoya Protocol', 'id':'npParty', 'description':''});
@@ -990,24 +1006,24 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
 
 
                         //reference
-                        addFilter('resource', {'sort': 1,'value':false, type:'reference', 'name':'Virtual Library Resources ', 'id':'resource', 'description':'The virtual library in the ABS Clearing-House hosts a number of ABS relevant resources submitted by any registered user of the ABS Clearing-House. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc.'});
+                        addFilter('resource', {'sort': 1,'value':false, type:'reference', 'name':schemaNames.resource, 'id':'resource', 'description':'The virtual library in the ABS Clearing-House hosts a number of ABS relevant resources submitted by any registered user of the ABS Clearing-House. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc.'});
 
-                        addFilter('modelContractualClause', {'sort': 2, type:'reference', 'name':'Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards', 'id':'modelContractualClause', 'description':'Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.'});
+                        addFilter('modelContractualClause', {'sort': 2, type:'reference', 'name':schemaNames.modelcontractualclause, 'id':'modelContractualClause', 'description':'Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.'});
 
-                        addFilter('communityProtocol', {'sort': 3, type:'reference', 'name':'Community Protocols and Procedures and Customary Laws', 'id':'communityProtocol', 'description':'Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.'});
-                        addFilter('capacityBuildingInitiative', {'sort': 4, type:'reference', 'name':'Capacity-building Initiatives', 'id':'capacityBuildingInitiative', 'description':''});
+                        addFilter('communityProtocol', {'sort': 3, type:'reference', 'name':schemaNames.communityprotocol, 'id':'communityProtocol', 'description':'Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.'});
+                        addFilter('capacityBuildingInitiative', {'sort': 4, type:'reference', 'name':schemaNames.capacitybuildinginitiative, 'id':'capacityBuildingInitiative', 'description':''});
 
-                        addFilter('capacityBuildingResource', {'sort': 5, type:'reference', 'name':'Capacity-building Resources', 'id':'capacityBuildingResource', 'description':''});
+                        addFilter('capacityBuildingResource', {'sort': 5, type:'reference', 'name':schemaNames.capacitybuildingresource, 'id':'capacityBuildingResource', 'description':''});
                         
                         //SCBD
-                        addFilter('news',  {'sort': 1,'type':'scbd', 'name':'News', 'id':'news', 'description':'ABS related news'});
-                        addFilter('notification',  {'sort': 2,'type':'scbd',  'name':'Notifications', 'id':'notification', 'description':'ABS related notifcations'});
+                        addFilter('news',  {'sort': 1,'type':'scbd', 'name':schemaNames.news, 'id':'news', 'description':'ABS related news'});
+                        addFilter('notification',  {'sort': 2,'type':'scbd',  'name':schemaNames.notification, 'id':'notification', 'description':'ABS related notifications'});
 
-                        addFilter('new',  {'sort': 3,'type':'scbd', 'name':'What\'s New', 'id':'new', 'description':'What\'s new'});
-                        addFilter('meeting',  {'sort': 4,'type':'scbd',  'name':'Meetings', 'id':'meeting', 'description':'ABS related meetings'});
+                        addFilter('new',  {'sort': 3,'type':'scbd', 'name':schemaNames.new, 'id':'new', 'description':'What\'s new'});
+                        addFilter('meeting',  {'sort': 4,'type':'scbd',  'name':schemaNames.meeting, 'id':'meeting', 'description':'ABS related meetings'});
 
-                        addFilter('statement',  {'sort': 3,'type':'scbd', 'name':'Statements', 'id':'statement', 'description':'ABS related statements'});
-                        addFilter('pressRelease',  {'sort': 4,'type':'scbd',  'name':'Press Releases', 'id':'pressRelease', 'description':'ABS related press release'});
+                        addFilter('statement',  {'sort': 3,'type':'scbd', 'name':schemaNames.statement, 'id':'statement', 'description':'ABS related statements'});
+                        addFilter('pressRelease',  {'sort': 4,'type':'scbd',  'name':schemaNames.pressrelease, 'id':'pressRelease', 'description':'ABS related press release'});
                     };
 
                   ///////////////
@@ -1311,67 +1327,62 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'js/commo
                                 // }, 100)
                             },
                             steps : [
-                              
-                                {   appendToBody:true,
-                                    title: "Introduction to the search",
-                                    content: '<p>The search page is where you will find all available information on the ABSCH. Information can be found using combinations of filters giving users the flexibility to retrieve a very wide or a very narrow set of results.</p> <p>Click next to learn more about searching for information',
-                                },
-                               
-                                {
-                                    type: 'element',
-                                    selector: "#freeText",
-                                    title: "Free text search",
-                                    content: 'Start typing in the free text and you will find some suggested filters from the controlled vocabularies. Select and apply the filters to the search or enter your own free text click enter to filter the results below.'
-                                },
-                                {   appendToBody:true,
-                                    type: 'element',
-                                    selector: "#recordTypesFilterTab",
-                                    title: "Filter by record type",
-                                    content: 'Select a record type. Record types are organized into three categories and the result are displayed in separate tabs below.',
-                                    placement: 'top',
-                                    beforeStep: openFilterTab
-                                },
-                                {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#keywordsFilterTab",
-                                    title: "Filter by keyword",
-                                    content: 'Select from the list of keywords to narrow down your search. If you have already filtered by a record type, the keyword filters displayed will be applicable specifically to that record type. ',
-                                    placement: 'top',
-                                    beforeStep: openFilterTab
-                                },
-                                {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#referenceRecordsTab",
-                                    title: "Reference records",
-                                    content: 'Search results are display on separate tabs organized by record category. Click on the tab to view the records associated with that category. ',
-                                    placement: 'top',
-                                    beforeStep: openRecordsTab
-                                },
-                                {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#exportRecords",
-                                    title: "Export",
-                                    content: 'Use the export functionality to export the information in the tab to a spreadsheet format.',
-                                    placement: 'left',
-                                    beforeStep: function(resumeJoyride){
-                                        $('#recordsContent').removeClass('active jr_target');
-                                        if($scope.showDownloadDialog)$scope.showDownloadDialog = false;
-                                        resumeJoyride();
-                                    }
-                                },
-                                {
-                                     appendToBody:true,
-                                    type: 'element',
-                                    selector: "#record1",
-                                    title: "Records",
-                                    content: 'Click on a record to view the full details.',
-                                    placement: 'top',
-                                    beforeStep: gotoFirstRefRecord
-                                }
-                            ]
+                                
+                                  {   appendToBody:true,
+                                      title: joyRideText.step1.title,
+                                      content: joyRideText.step1.content,
+                                  },
+                                 
+                                  {
+                                      type: 'element',
+                                      selector: "#freeText",
+                                      title: joyRideText.step2.title,
+                                      content: joyRideText.step2.title
+                                  },
+                                  {   appendToBody:true,
+                                      type: 'element',
+                                      selector: "#recordTypesFilterTab",
+                                      title: joyRideText.step3.title,
+                                      content: joyRideText.step3.content,
+                                      placement: 'top',
+                                      beforeStep: openFilterTab
+                                  },
+                                  {
+                                      appendToBody:true,
+                                      type: 'element',
+                                      selector: "#keywordsFilterTab",
+                                      title: joyRideText.step4.title,
+                                      content: joyRideText.step4.content,
+                                      placement: 'top',
+                                      beforeStep: openFilterTab
+                                  },
+                                  {
+                                      appendToBody:true,
+                                      type: 'element',
+                                      selector: "#referenceRecordsTab",
+                                      title: joyRideText.step5.title,
+                                      content: joyRideText.step5.content,
+                                      placement: 'top',
+                                      beforeStep: openRecordsTab
+                                  },
+                                  {
+                                      appendToBody:true,
+                                      type: 'element',
+                                      selector: "#exportRecords",
+                                      title: joyRideText.step6.title,
+                                      content: joyRideText.step6.content,
+                                      placement: 'left'
+                                  },
+                                  {
+                                       appendToBody:true,
+                                      type: 'element',
+                                      selector: "#record1",
+                                      title: joyRideText.step7.title,
+                                      content: joyRideText.step7.content,
+                                      placement: 'top',
+                                      beforeStep: gotoFirstRefRecord
+                                  }
+                              ]
                         };
                         joyride.start = true;
 

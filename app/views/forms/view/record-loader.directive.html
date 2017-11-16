@@ -1,20 +1,5 @@
 ﻿<div>
-
-    <div id="printContentHeader" class="row" style="padding-bottom:30px;" ng-if="printMode">
-        <div class="col-xs-1">
-        </div>
-
-        <div class="col-xs-3" style="text-align:center;">
-            <img style="width:60px;" src="/app/img/UNEP_logo.svg" />
-        </div>
-        <div class="col-xs-4" style="text-align:center;padding-top:5px;">
-            <img src="/app/img/cbd-logo-print-black-en.png" />
-        </div>
-        <div class="col-xs-3" style="text-align:center;">
-            <img style="width:70px;padding-top:5px;" src="/app/img/Emblem_of_the_United_Nations.svg" />
-        </div>
-
-    </div>
+    <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'" ng-if="printMode"></div>    
     <div id="recordContent">
         <div smooth-scroll duration="100" offset="200" scroll-if="{{!$root.stopSmoothScroll}}"></div>
         <div block-region activate="loading"></div>
@@ -122,24 +107,6 @@
 
         <div id="schemaView" ng-show="internalDocument"></div>
     </div>
-    <div id="printContentFooter" style="padding-top:20px" ng-if="printMode">
-        <legend>Further Information</legend>
-        <div class="row top-border">
-            <div class="clearfix"></div>
-            <div class="col-xs-8" style="font-size:12px;">
-                Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and Benefit-sharing Clearing-House
-                may be directed to the Secretariat of the Convention on Biological Diversity.
-            </div>
-            <div class="col-xs-4" style="font-size:12px;">
-                <strong>Secretariat of the Convention on Biological Diversity</strong>
-                <br/> 413 rue Saint-Jacques, suite 800
-                <br/> Montreal, Québec, H2Y 1N9
-                <br/> Canada
-                <br/> Fax: +1 514 288-6588
-                <br/> Email: secretariat@cbd.int
-
-            </div>
-        </div>
-    </div>
+    <div id="printContentFooter" ng-if="printMode" ng-include="'/app/views/forms/view/print-footer.html'"></div>
 
 </div>

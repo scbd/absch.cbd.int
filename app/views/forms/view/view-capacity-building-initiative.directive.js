@@ -19,8 +19,8 @@ app.directive("viewCapacityBuildingInitiative", [function () {
 		controller : ["$scope", "IStorage", "$http", function ($scope, storage, $http)
 		{
 
-			if((($scope.document||{}).createdDate_dt) || $scope.$parent.internalDocumentInfo)
-			$scope.updatedOn = ($scope.document||{}).createdDate_dt || $scope.$parent.internalDocumentInfo.updatedOn;
+			
+			
 
             $scope.options  = {
 

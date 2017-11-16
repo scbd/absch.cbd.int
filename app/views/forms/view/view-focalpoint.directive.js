@@ -16,8 +16,8 @@ app.directive('viewFocalPoint', [function() {
 		controller: ['$scope','commonjs', '$q', function ($scope, commonjs, $q) {
 
 
-			if((($scope.document||{}).createdDate_dt) || $scope.$parent.internalDocumentInfo)
-			$scope.updatedOn = ($scope.document||{}).createdDate_dt || $scope.$parent.internalDocumentInfo.updatedOn;
+			
+			
 			
 			$scope.getNFPText = commonjs.getNFPText;
 

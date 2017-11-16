@@ -2,7 +2,7 @@
     <style>
 
         .ngdialog-content #searchFilterTab, .ngdialog-content .help-tour {
-             display: none;
+             display: none!important;
          }
         .ngdialog.ngdialog-theme-default.wide .ngdialog-content {
             width: 70% !important;
@@ -10,9 +10,8 @@
     </style>
     <br/>
 
-    <div style="width:100%" ng-show="userFilters.length>0">
-        <div class="table table-striped">
-            <div class="row">
+    <div style="width:100%" >
+        <div class="row">
                 <div class="col-md-3">
                     <b>Title</b>
                 </div>
@@ -25,6 +24,8 @@
                 </div>
             </div>
             <hr/>
+        <div class="table table-striped" ng-show="userFilters.length>0">
+            
             <div ng-repeat="record in userFilters | orderBy:'meta.createdOn':'desc'" class="row" style="border-bottom:1px solid #e5e5e5; padding-top:5px">
                 <div ng-class="{'col-md-3':record._id, 'col-md-9':!record._id}">
                     <b>
@@ -65,8 +66,10 @@
     </div>
     <div ng-show="!loading && (!userFilters || userFilters.length==0)">
         <div class="alert alert-info" role="alert">
-            <h3 ng-if="user.isAuthenticated">You do not have any saved searches.</h3>
-            <h3 ng-if="!user.isAuthenticated">Please log in to view your saved searches.</h3>
+            <span ng-if="user.isAuthenticated">You do not have any saved 
+                <span ng-if="collection=='subscriptions'"> email alerts</span>
+                <span ng-if="collection=='search-queries'">searches.</span></span>
+            <span ng-if="!user.isAuthenticated">Please log in to view your saved searches.</span>
         </div>
     </div>
 

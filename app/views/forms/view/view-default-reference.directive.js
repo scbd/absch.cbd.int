@@ -17,8 +17,8 @@ app.directive("viewDefaultReference", [function () {
 
 			// $scope.document = $scope.model;
 			
-			if((($scope.document||{}).createdDate_dt) || $scope.$parent.internalDocumentInfo)
-			$scope.updatedOn = ($scope.document||{}).createdDate_dt || $scope.$parent.internalDocumentInfo.updatedOn;
+			
+			
 
             // //==================================
 		    // //

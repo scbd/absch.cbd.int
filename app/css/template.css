@@ -1750,6 +1750,11 @@ div.recordDefault:hover {
     width: 650px;
     margin: 30px auto;
 }
+
+#Record .pre-wrap{
+	white-space: pre-wrap;
+}
+
 .partystatus {
     font-size: 11px;
     margin-right: 10px;

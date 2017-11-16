@@ -1,8 +1,8 @@
 define(['app', 'text!views/directives/record-options.html', 'underscore', 'scbd-angularjs-services/locale',
-'services/app-config-service'], function (app, template, _) {
+'services/app-config-service', 'js/common'], function (app, template, _) {
 
-app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$window',
-    function (appLocale, $route, $timeout, appConfigService, $filter, $window) {
+app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$window', 'commonjs', '$timeout',
+    function (appLocale, $route, $timeout, appConfigService, $filter, $window, commonjs, $timeout) {
         return {
             restrict: 'EAC',
             template : template,
@@ -26,12 +26,16 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                         else if(_.contains($scope.internalDocument.header.languages, 'ar')) $scope.currentLocale = 'ar';
                         else if(_.contains($scope.internalDocument.header.languages, 'zh')) $scope.currentLocale = 'zh';
                     }
-                    if($scope.internalDocumentInfo.documentID === undefined && !$scope.internalDocumentInfo.id)
+                    if($scope.internalDocumentInfo && $scope.internalDocumentInfo.documentID === undefined && !$scope.internalDocumentInfo.id)
                         $scope.hidePdf = true;
                     if(_.contains(['absPermit', 'absCheckpointCommunique'], $scope.internalDocument.header.schema)){                        
-                        if($scope.internalDocumentInfo && $scope.internalDocumentInfo.revision < $scope.internalDocumentInfo.latestRevision)
+                        if($scope.internalDocumentInfo && $scope.internalDocumentInfo && 
+                           $scope.internalDocumentInfo.revision < $scope.internalDocumentInfo.latestRevision)
                             $scope.hidePdf = true;
                     }
+                    $timeout(function(){
+                        $scope.pdfUrl = getPdfUrl();
+                    }, 200);
                 })
 
                 $scope.setCurrentLocale = function(loc){
@@ -59,23 +63,27 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                     
                 }
 
-                $scope.openPdf = function(){
+                function getPdfUrl(){
                     var documentId = $filter('uniqueIDWithoutRevision')($scope.internalDocument);
+                    
                     var pdfType = 'documents'
 
                     if('absPermit' == $scope.internalDocument.header.schema)
                         pdfType = 'ircc-certificate';
                     else if('absCheckpointCommunique' == $scope.internalDocument.header.schema)
                         pdfType = 'cpc-certificate';
+                    else if(_.contains(appConfigService.scbdSchemas, $scope.internalDocument.header.schema))
+                        pdfType = 'scbd-records'
 
-                    var pdfDownloadUrl  =  '/api/v2017/generate-pdf/:realm/:type/:lang?documentID=:documentId&revision=:revision';
+                    var pdfDownloadUrl  =  '/api/v2017/generate-pdf/:realm/:type/:lang?documentID=:documentId&revision=:revision&schema=:schema';
                     pdfDownloadUrl      = pdfDownloadUrl.replace(':realm'       , appConfigService.currentRealm)
                                                         .replace(':type'        , pdfType)
                                                         .replace(':lang'        , $scope.downloadLocale)
                                                         .replace(':documentId'  , documentId)
-                                                        .replace(':revision'    , $scope.internalDocumentInfo.revision);
-
-                    $window.open(pdfDownloadUrl);
+                                                        .replace(':revision'    , ($scope.internalDocumentInfo||{}).revision||'')
+                                                        .replace(':schema'      , $scope.internalDocument.header.schema);
+                    return pdfDownloadUrl;
+                    // $window.open(pdfDownloadUrl);
                 }
             }
         };
