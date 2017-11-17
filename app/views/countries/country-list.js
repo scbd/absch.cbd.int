@@ -3,15 +3,15 @@ define(['app', 'underscore',
     'scbd-angularjs-filters',
     'services/search-service',
     'views/directives/block-region-directive',
-    'scbd-angularjs-services/locale'
+    'scbd-angularjs-services/locale',
+    'scbd-angularjs-controls/km-select'
 ], function (app, _) {
 
     app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams', '$compile', '$timeout', 'locale',
         function ($http, $scope, $element, $location, commonjs, $q, searchService, $filter, $routeParams, $compile, $timeout, locale) {
+            var regionRelations = {};
             $scope.sortTerm = "name.en";
-
             $scope.regionFilter= [];
-            $scope.rfilter="Regional groups";
 
             var headerCount = {
                 absCheckpoint: 0,
@@ -23,7 +23,9 @@ define(['app', 'underscore',
                 measure: 0,
                 absNationalReport: 0
             };
-
+            $scope.options = {
+                regions : commonjs.getRegions
+            }
             $scope.loading = true;
 
             $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
@@ -63,66 +65,72 @@ define(['app', 'underscore',
                     $scope.allcountries = _.clone($scope.countries);
                 });
 
-               
-
-                $q.when(commonjs.getRegions(), function(regions) {
-                        _.each(regions, function(region, index){
-                            addRegionFilter(region);
-                        });
-                });
-
-
-             //===============================================================================================================================
-            function addRegionFilter(region, parent){
-                
-                var level = region.narrowerTerms && region.identifier != '5E5B7AA4-2420-4147-825B-0820F7EC5A4B' && region.identifier != '3D0CCC9A-A0A1-4399-8FA2-41D4D649DB0E' ? region.narrowerTerms.length : 0;
-                
-                var item =  {
-                    name: region.title[locale||'en'],
-                    id:region.identifier,
-                    level: level,
-                };
-                $scope.regionFilter.push(item);
-
-                _.each(region.narrowerTerms,function(narrower){
-                    addRegionFilter(narrower, region.identifier);
-                });
-            }
            //*************************************************************************************************************************************
             $scope.filterRegion = function (termID) {
                 
                 $scope.loading = true;
                 
                 if(!termID){
-                    $scope.rfilter = "Regional groups";
                     $scope.countries = $scope.allcountries;
                     $scope.loading = false;
                     return;
                 }
 
                 url = '/api/v2013/thesaurus/terms/' + termID + '?relations'
-                var test = $q.when($http.get(url)).then(function(o) {
-                    
-                     $scope.rfilter = o.data.name;
-                     var rels = o.data.expandedRelatedTerms;
-                     var filteredcountries= [];
-
-                     _.each(rels,function(r){
-                           _.each($scope.allcountries, function(x){
-                               if(x.code.toLowerCase() == r.toLowerCase())
-                                 filteredcountries.push(x); 
-                             });
-                    });
-                    $scope.countries = filteredcountries;
+                var relationsQuery;
+                if(regionRelations[termID]){
+                    var deferred = $q.defer();
+                    deferred.resolve({data:regionRelations[termID]});
+                    relationsQuery = deferred.promise;
+                }
+                else
+                    relationsQuery = $q.when($http.get(url));
+                
+                $q.when(relationsQuery)
+                .then(function(o) {
+                    regionRelations[termID] = o.data;
                 });
             
                 $scope.loading = false;
             };
             
             
-                
+            $scope.$watch('regions', function(newVal, oldVal){
+                if(newVal){
+                    console.log(newVal, oldVal)
+                    var diff = _.difference(_.pluck(newVal, "identifier"), _.pluck(oldVal, "identifier"));
+                    _.each(diff, $scope.filterRegion)
+                }
+            })   
            
+            $scope.hasRegions = function(country){
+                if(country && $scope.regions){
+                    if(_.some($scope.regions, function(region){
+                        if(regionRelations[region.identifier]){
+                            var regionRels =  regionRelations[region.identifier].expandedRelatedTerms;
+                            if(_.contains(regionRels, country.code.toLowerCase()))
+                                return true;
+                        }
+                    })){
+                        return true;;
+                    }
+                    return false;
+                }
 
+                return true;
+            }
+            $scope.getRegions = function(code){
+                var countryReg = _.filter(regionRelations, function(region){
+                    if(_.contains(_.map($scope.regions, 'identifier'), region.identifier)){                   
+                        var regionRels =  regionRelations[region.identifier].expandedRelatedTerms;
+                        return _.contains(regionRels, code.toLowerCase())
+                    }
+                });
+                if(countryReg)
+                    return _.map(countryReg, 'name').join(' / ');
+                
+                return '';
+            }
             //*************************************************************************************************************************************
             $scope.setPartyFilter = function (pfilter) {
                 $scope.partyFilter = pfilter;
