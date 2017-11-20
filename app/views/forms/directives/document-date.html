@@ -1,4 +1,10 @@
-﻿<div class="pull-right record-Options-div" ng-if="updatedOn">
-    <span class="xlabel">published:</span>
-    <span class="date"> {{updatedOn | formatDate}}</span>
+﻿<div class="pull-right record-Options-div">
+    <span class="xlabel" ng-if="createdOn">submitted on:</span>
+    <span class="date" ng-if="createdOn">
+        {{createdOn | formatDate}}
+    </span>
+    &nbsp;
+    <span class="xlabel" ng-if="updatedOn && !createdOn">published:</span>
+    <span class="xlabel" ng-if="updatedOn && createdOn">last updated:</span>
+    <span class="date" ng-if="updatedOn"> {{updatedOn | formatDate}}</span>
 </div>
