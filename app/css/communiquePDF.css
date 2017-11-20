@@ -139,3 +139,17 @@ background-size: 150px;
 a[href]:after {
     content: '';
 };
+
+.main-nav {
+    border-bottom: 0px solid #fff;
+    padding-top: 0px;
+}
+.unep-logo {
+    height: 60px!important;
+}
+.cbd-logo {
+    height: 50px!important;
+}
+.un-logo {
+    height: 60px!important;
+}
