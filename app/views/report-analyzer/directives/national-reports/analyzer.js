@@ -485,6 +485,8 @@ function(templateHtml, app, _, require, $) { 'use strict';
                 //==============================================
                 nrAnalyzer.normalizeAnswer = function (v) {
 
+                    if(!v)
+                        return;
                     if(_.isArray(v) || _.isArray(v.options))
                         return _(v.options||v).map(nrAnalyzer.normalizeAnswer).compact().value();
                     // console.log($scope.selectedQuestions);

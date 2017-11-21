@@ -282,10 +282,10 @@
                             {{item.text|lstring:item.locale}}
                         </pre>
                         <div class="km-value" ng-style="{ direction : (item.text|direction:item.locale) }" ng-if="item.field=='relevantDocuments'"> 
-                            <span ng-repeat="file in item.text">
+                            <div ng-repeat="file in item.text">
                                 <a target="_new" ng-href="{{file.url}}"><i class="fa fa-file"></i> {{file.name||file.url}}</a>
                                 <i ng-show="file.name && file.url.indexOf('/api/v2013/documents/')<0">({{file.url}})</i>
-                            </span>
+                            </div>
                         </div> 
                         <div ng-if="::item.field=='documentReferenceIDs' && typeof(item.text)!='number'" ng-style="{ direction : (item.text|direction:item.locale) }">
                             <!-- {{item.text|lstring:item.locale}} -->

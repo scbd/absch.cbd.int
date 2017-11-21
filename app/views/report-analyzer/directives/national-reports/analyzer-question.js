@@ -585,11 +585,11 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                     if(_.isEmpty(answers))
                         answers = undefined;
 
-                    if($scope.question.type=='text' && !!answers)
-                    answers = 'text';
+                    if(answers && $scope.question.type=='text' && !!answers)
+                        answers = 'text';
 
-                    if($scope.question.type=='number' && !!answers.number)
-                    answers = 'number';
+                    if(answers && $scope.question.type=='number' && !!answers.number)
+                        answers = 'number';
 
                     return _([answers]).flatten().compact().value();
                 }
