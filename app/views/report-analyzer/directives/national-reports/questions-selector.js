@@ -63,9 +63,9 @@ function(templateHtml, app, _, require) {
                     if(!reportType)
                         return;
 
-                    $http.get(baseUrl+'app-data/report-analyzer/'+reportType+'.json', { cache : true }).then(function(res){
+                    require(['json!'+baseUrl+'app-data/report-analyzer/'+reportType+'.json'], function(res){
 
-                        $scope.sections = res.data;
+                        $scope.sections = res;
 
                         if($scope.selectedQuestions) {
 

@@ -155,16 +155,13 @@ function(templateHtml, app, _, require, $) { 'use strict';
                 function loadPreviousReportQuestionsMapping() {
 
                     var reportType = $scope.selectedReportType;
-
-                    return $http.get(baseUrl+'app-data/report-analyzer/mapping/'+reportType+'.json', { cache : true }).then(function(res) {
-
-                        return res.data;
-
-                    }).catch(function() {
-
-                        return undefined;
-
+                    var deferred = $q.defer();
+                    
+                    require(['json!'+baseUrl+'app-data/report-analyzer/mapping/'+reportType+'.json'], function(res){
+                        deferred.resolve(res);
                     });
+
+                    return deferred.promise;
                 }
 
                 //====================================
@@ -174,20 +171,24 @@ function(templateHtml, app, _, require, $) { 'use strict';
                 function loadSections() {
 
                     var reportType = $scope.selectedReportType;
+                    var deferred = $q.defer();
 
-                    return $http.get(baseUrl+'app-data/report-analyzer/'+reportType+'.json', { cache : true }).then(function(res) {
+                    require(['json!'+baseUrl+'app-data/report-analyzer/'+reportType+'.json'], function(res){
 
                         var selection = _($scope.selectedQuestions).reduce(mapReduce(), {});
 
-                        return _.filter(res.data, function(section) {
+                        var data =  _.filter(res, function(section) {
 
-                            section.questions = _.filter(section.questions, function(q) {
-                                return selection[q.key];
-                            });
+                                        section.questions = _.filter(section.questions, function(q) {
+                                            return selection[q.key];
+                                        });
 
-                            return section.questions.length;
-                        });
+                                        return section.questions.length;
+                                    });
+                        deferred.resolve(data);
                     });
+
+                    return deferred.promise;
                 }
 
                 //====================================
