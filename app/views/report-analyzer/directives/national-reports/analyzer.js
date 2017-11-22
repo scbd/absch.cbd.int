@@ -374,8 +374,9 @@ function(templateHtml, app, _, require, $) { 'use strict';
                             return t;
                         });
                     }
-                    if(_.head(countriesTexts).field){
-                        var field = _.head(countriesTexts).field;
+                    var item = _.head(countriesTexts)
+                    if(item && item.field){
+                        var field = item.field;
                         var subTitle = _.find(question.additionalInfo, function(info){return info.field == field})
                         if(subTitle)
                             $scope.subTitle = subTitle.title;
