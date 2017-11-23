@@ -904,10 +904,6 @@
                         "value": "mcc",
                         "title": "Model contractual clauses"
                     }
-                ],
-                "additionalInfo" : [
-                    {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                    {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
                 ]
             },
             {
