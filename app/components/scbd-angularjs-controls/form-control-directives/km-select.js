@@ -33,7 +33,7 @@ function(app, angular, $, _, template) {
         $scope.attr = $attrs;
         $scope.multiple = $attrs.multiple !== undefined && $attrs.multiple !== null;
         $scope.watchItems = $attrs.watchItems !== undefined && $attrs.watchItems !== null;
-        $scope.displayCount = 3;
+        $scope.displayCount = $attrs.displayCount || 3;
 
         if ($scope.showDescription === undefined)
           $scope.showDescription = 'false';
@@ -61,22 +61,22 @@ function(app, angular, $, _, template) {
             event.stopPropagation();
         });
 
-        // if ($scope.multiple)
-          // $element.find('.dropdown-toggle').popover({
-          //   trigger: "hover",
-          //   html: true,
-          //   placement: "top",
-          //   content: function() {
-          //     var oNames = _.map($scope.getTitles(), function(o) {
-          //       return ;//html.encode(o);
-          //     });
-          //
-          //     if (!oNames || !oNames.length)
-          //       return null;
-          //
-          //     return "<ul><li style=\"width:500px;\">" + oNames.join("</li>\n<li>") + "</li></ul>";
-          //   }
-          // });
+        if ($scope.multiple && $attrs.showSelectionPopOver)
+          $element.find('.dropdown-toggle').popover({
+            trigger: "hover",
+            html: true,
+            placement: "top",
+            content: function() {
+              var oNames = _.map($scope.getTitles(), function(o) {
+                return o;
+              });
+          
+              if (!oNames || !oNames.length)
+                return null;
+          
+              return "<ul><li style=\"width:500px;\">" + oNames.join("</li>\n<li>") + "</li></ul>";
+            }
+          });
 
 
         $scope.$on('clearSelectSelection', function(info) {

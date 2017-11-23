@@ -25,9 +25,7 @@
     <script src="absCommon.js"></script>
     <script src="abs-country-profile-pdf.js"></script>
     <style>
-        body {
-            zoom: 0.53; /* using 0.55 or higher results in the elements not lining up correctly */
-        }
+       
         a[href]:after {
             content: '';
         }
@@ -88,19 +86,10 @@
 
 <body>
     <div ng-app="ngapp" class="main-nav">
-        <div ng-controller="printCountryProfile" style="width:1000px;">
+        <div ng-controller="printCountryProfile" >
 
-            <div class="row" style="padding-bottom:30px;">
-                    <div class="col-xs-4" style="text-align:center;">
-                            <img style="max-width:120px;padding-top:10px" src="/app/img/UNEP_logo.svg" />
-                        </div>
-                        <div class="col-xs-4" style="text-align:center;padding-top:5px;">
-                            <img src="/app/img/cbd-logo-black-en.svg" style="max-width:180px;" />
-                        </div>
-                        <div class="col-xs-4" style="text-align:center;">
-                            <img style="max-width:80px;padding-top:5px;" src="/app/img/Emblem_of_the_United_Nations.svg" />
-                        </div>
-            </div>
+          
+            <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'"></div>    
             <div class="row">
                 <div class="col-xs-12" style="margin:auto;text-align:center;">
                     <h1>

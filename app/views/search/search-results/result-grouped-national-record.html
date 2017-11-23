@@ -52,8 +52,17 @@
             <li class="hidden-xs" ng-if="doc.rec_meta4" id="meta4">
                 <span  ng-repeat="meta in doc.rec_meta4">{{meta}}</span>
             </li>
-            <li>
-                <span class="last-span">{{doc.rec_date | formatDate}}</span>
+            <li> 
+                <span  ng-if="doc.schema_s =='absNationalReport' && compareDate(doc.rec_date, doc.rec_creationDate)">
+                    <span class="xlabel">submitted on:</span>
+                    <span class="date">
+                            {{doc.rec_creationDate | formatDate}} 
+                    </span>
+                </span>                
+                <span class="last-span">
+                    <label class="xlabel" ng-if="doc.schema_s =='absNationalReport' && compareDate(doc.rec_date, doc.rec_creationDate)">&nbsp;last updated:</label>
+                    {{doc.rec_date | formatDate}}
+                </span>
             </li>
         </ul>
         <!--{{doc.schemaSort_i}} | {{doc.sort1_s}} | {{doc.sort2_s}} | {{doc.sort3_s}}-->

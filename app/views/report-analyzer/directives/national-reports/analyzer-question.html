@@ -82,9 +82,9 @@
                 <i class="fa fa-filter fa-lg" disabled title="This filter is disabled"></i>
             </td>
             <td>{{question.subTitle||'Free text'}}</td>
-            <td class="text-center">{{question.options[0].sum}}</td>
-            <td class="text-center"><img ng-if="::question.options[0].sum" src="/app/views/report-analyzer/resources/nr-documents.png" 
-                ng-click="showTexts(null, question.field, question.type)" style="cursor:pointer"></td>
+            <td class="text-center">{{question.options[0].sum||rows[0].sum}}</td>
+            <td class="text-center"><img ng-if="::question.options[0].sum||rows[0].sum" src="/app/views/report-analyzer/resources/nr-documents.png" 
+                ng-click="showTexts(undefined, question.field, question.type)" style="cursor:pointer"></td>
             <td class="text-center text-nowrap region" class="bchCellGroup text-nowrap" ng-repeat-start="region in ::regions track by region.identifier">
                 {{rows[0].cells[region.identifier].sum}}
                 <img ng-if="rows[0].cells[region.identifier].sum"  ng-click="showTexts(region.countries, question.field)" src="/app/views/report-analyzer/resources/nr-documents.png" style="cursor:pointer">

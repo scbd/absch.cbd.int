@@ -1,6 +1,6 @@
-define(['app', 'text!views/search/search-results/result-grouped-national-record.html','underscore', 'js/common',
+define(['app', 'text!views/search/search-results/result-grouped-national-record.html','underscore', 'moment', 'js/common',
 'views/forms/view/record-loader.directive'
-], function(app, template, _) {
+], function(app, template, _, moment) {
 
     app.directive('resultGroupedNationalRecord', ["$timeout", function($timeout) {
         return {
@@ -20,6 +20,9 @@ define(['app', 'text!views/search/search-results/result-grouped-national-record.
                     } 
                 });
 
+                $scope.compareDate = function(published, createdOn){
+                    return moment.utc(published) > moment.utc(createdOn) && !moment.utc(createdOn).isSame(moment.utc(published), 'day');
+                }
 
             },
         };

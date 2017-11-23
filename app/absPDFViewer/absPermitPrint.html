@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="ico/favicon.png">
-
+    
+    <link rel="stylesheet" type="text/css" href="/app/css/template.css">
     <!-- Bootstrap core CSS -->
     <link href="../libs/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <!-- Custom styles for this template -->
@@ -22,9 +23,7 @@
     <script src="absCommon.js"></script>
 
     <style type="text/css">
-        body {
-            zoom: 0.53; /* using 0.55 or higher results in the elements not lining up correctly */
-        }
+       
         #watermark {
             color: black;
             padding-left: 250px;
@@ -51,7 +50,7 @@
 
     <div ng-app="ngapp" class="main-nav">
 
-        <div ng-controller="printPermit" style="width:1000px;">
+        <div ng-controller="printPermit">
 
 			<div permit document-id="identifier"></div>
 
