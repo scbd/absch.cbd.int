@@ -3,8 +3,8 @@
 ], function (app, _) {
 
     "use strict";
-    app.controller("adminUserRolesReportController", ["$scope", "$timeout", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter",
-        function ($scope, $timeout, realm, commonjs, $q, appConfigService, $http, $filter) {
+    app.controller("adminUserRolesReportController", ["$scope", "$timeout", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter", "$element",
+        function ($scope, $timeout, realm, commonjs, $q, appConfigService, $http, $filter, $element) {
             $scope.filters = {};
             $scope.countries = {};
 
@@ -66,6 +66,7 @@
             $scope.loadRecords = function(){
                 $scope.userData = [];
                 $scope.countriesToShow = [];
+                $scope.totalCount = 0;
                 var role = roleMapping[realm.value.toLowerCase()][$scope.filters.role];
                 if(role){
                     $scope.loadingRecords = true;
@@ -106,7 +107,7 @@
                     // if(countryUsers.length > 0){
                          $scope.totalCount += countryUsers.length;
                          var country = _.findWhere($scope.countries, {code:code.toUpperCase()})
-                         $scope.countriesToShow.push({code:code, name: country.name, count:countryUsers.length})
+                         $scope.countriesToShow.push({code:code, name: country.name, count:countryUsers.length, users : countryUsers})
                     // }
                     // else{
                     //     console.log(code);
@@ -116,6 +117,30 @@
             $scope.getCountry = function(code){
                 return _.findWhere($scope.countries, {code: code.toUpperCase()})
             }
+
+            $scope.export = function(){
+                var users = [];
+                $scope.usersToExport = [];
+                _.each($scope.countriesToShow, function(country){
+                    _.each(country.users, function(user){
+                        users.push({country: country.name, userName :user.firstName + ' ' + user.lastName, userEmail : user.email })
+                    });
+                })
+                $scope.usersToExport = users;
+                $scope.readyForExport = true;
+                require(['tableexport'], function(){
+                    $element.find('#forExport').tableExport({
+                        formats: ["xlsx", "xls", "csv"],
+                        filename: "ABSCH-Users-List",
+                    });
+                    $element.find('.xlsx').click();
+                    $timeout(function(){                        
+                        $scope.readyForExport = false;
+                    }, 200)
+                });  
+            }
+
+
             loadCountries();
         }]);
 });
