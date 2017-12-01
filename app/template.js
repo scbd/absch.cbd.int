@@ -175,6 +175,14 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             });
 
 
+
+            function updateSize() {
+                $rootScope.$applyAsync(function(){
+                    $rootScope.deviceSize = $('.device-size:visible').attr('size');
+                });
+            }
+            updateSize();            
+            angular.element($window).on('resize', updateSize);
         //============================================================
         //
         //
