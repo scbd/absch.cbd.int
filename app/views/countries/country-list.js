@@ -1,4 +1,4 @@
-define(['app', 'underscore',
+﻿define(['app', 'underscore',
     'js/common',
     'scbd-angularjs-filters',
     'services/search-service',
@@ -242,23 +242,25 @@ define(['app', 'underscore',
                 $location.path('/countries/' + code.toUpperCase());
             };
             
-            $scope.loadingMap = true;
-            angular.element(document).ready(function () {
-                require(['views/countries/country-map'], function(map){
-                    $scope.$apply(function(){
-                        var mapElement = $element.find('#Jumbotron')
-                        $compile(mapElement.contents())($scope);
-                         $scope.loadingMap = false;
+            if($scope.$root.deviceSize !== 'sm' && $scope.$root.deviceSize !== 'xs'){
+                $scope.loadingMap = true;
+                angular.element(document).ready(function () {
+                    require(['views/countries/country-map'], function(map){
+                        $scope.$apply(function(){
+                            var mapElement = $element.find('#Jumbotron')
+                            $compile(mapElement.contents())($scope);
+                            $scope.loadingMap = false;
+                        });
                     });
                 });
-            });
+            }
 
             $scope.export = function(){
                 $scope.readyForExport = true;
                 require(['tableexport'], function(){
                     $element.find('#forExport').tableExport({
                         formats: ["xlsx", "xls", "csv"],
-                        filemame: "ABSCH-Country-List",
+                        filename: "ABSCH-Country-List",
                     });
                     $element.find('.xlsx').click();
                     $timeout(function(){                        

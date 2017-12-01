@@ -29,8 +29,8 @@ define(['text!./home-map.html',
       //=======================================================================
       //
       //=======================================================================
-      controller: ['$scope', '$http', 'realm', '$q', '$filter', 'commonjs','$timeout', 'searchService', '$compile', '$element',
-      function($scope, $http, realm, $q, $filter, commonjs,$timeout, searchService, $compile, $element) {
+      controller: ['$scope', '$http', 'realm', '$q', '$filter', 'commonjs','$timeout', 'searchService', '$compile', '$element', '$rootScope',
+      function($scope, $http, realm, $q, $filter, commonjs,$timeout, searchService, $compile, $element, $rootScope) {
 
             $q.when(commonjs.getCountries(), function(countries) {
 
@@ -41,17 +41,19 @@ define(['text!./home-map.html',
 
             });
 
-             // Delay loading map by 2 sec
-            $scope.loadingMap = true;
-            angular.element(document).ready(function () {
-                require(['views/countries/country-map'], function(map){
-                    $scope.$apply(function(){
-                        var mapElement = $element.find('#homeMap')
-                        $compile(mapElement.append('<country-map zoom-to="{{code}}" height="350px" ></country-map>'))($scope);
-                         $scope.loadingMap = false;
-                    });
-                });
-            });
+            if($rootScope.deviceSize !== 'sm' && $rootScope.deviceSize !== 'xs'){
+              // Delay loading map by 2 sec
+              $scope.loadingMap = true;
+              angular.element(document).ready(function () {
+                  require(['views/countries/country-map'], function(map){
+                      $scope.$apply(function(){
+                          var mapElement = $element.find('#homeMap')
+                          $compile(mapElement.append('<country-map zoom-to="{{code}}" height="350px" ></country-map>'))($scope);
+                          $scope.loadingMap = false;
+                      });
+                  });
+              });
+            }
         }] //controlerr
     }; //return
   }]); //directive
