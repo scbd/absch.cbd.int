@@ -1,10 +1,10 @@
-define(['app', 'views/forms/edit/edit', '../view/view-capacity-building-initiative.directive',
-'./field-embed-contact.directive'], function (app) {
+define(['app', 'underscore', 'views/forms/edit/edit', '../view/view-capacity-building-initiative.directive',
+'./field-embed-contact.directive'], function (app, _) {
 
   app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", "underscore", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, Thesaurus, Enumerable, _) {
 
     $controller('editController', {$scope: $scope});
-
+   
     $scope.path = $location.path();
 
     $scope.options  = {
@@ -19,19 +19,15 @@ define(['app', 'views/forms/edit/edit', '../view/view-capacity-building-initiati
                                                    }); },
 
         regions: function() {
-           return $q.all([
-               $http.get("/api/v2013/thesaurus/domains/regions/terms", {
-                   cache: true
-               }),
-               $http.get("/api/v2013/thesaurus/domains/countries/terms", {
-                   cache: true
-               })
-           ]).then(function(o) {
-               return Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
-                   Enumerable.from($filter("orderBy")(o[1].data, "name"))
-               ).toArray();
+           return $q.all([$http.get("/api/v2013/thesaurus/domains/regions/terms", {cache: true})]).then(function(o) {
+               return Enumerable.from($filter("orderBy")(o[0].data, "name")).toArray();
            });
         },
+        countries: function() {
+            return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", {cache: true})]).then(function(o) {
+                return Enumerable.from($filter("orderBy")(o[0].data, "name")).toArray();
+            });
+         },
         status : function () {
              return $http.get("/api/v2013/thesaurus/domains/4E7731C7-791E-46E9-A579-7272AF261FED/terms", { cache: true })
              .then(function(o){
@@ -78,6 +74,19 @@ define(['app', 'views/forms/edit/edit', '../view/view-capacity-building-initiati
          },
     };
 
+    $scope.isGlobalOrRegional = function () {
+        if($scope.document && $scope.document.geographicScope && $scope.document.geographicScope.scope){
+            return _.contains(['56B8CEB7-56B5-436B-99D9-AA7C4622F326', 'C7D6719B-8AD9-4EB1-A472-B0B858DE0F56'], $scope.document.geographicScope.scope.identifier);
+        }
+        return false;
+    };
+
+    $scope.isNational = function () {
+        if($scope.document && $scope.document.geographicScope && $scope.document.geographicScope.scope){
+            return $scope.document.geographicScope.scope.identifier == "20B2CC6D-646D-4FD5-BD53-D652BA3FA088";
+        }
+        return false;
+    };
     //============================================================
     //
     //============================================================
@@ -120,6 +129,13 @@ define(['app', 'views/forms/edit/edit', '../view/view-capacity-building-initiati
         return false;
     };
 
+    $scope.isProposedOrApproved = function(){
+
+        if($scope.document && $scope.document.status)
+            return _.contains(['73E2AC27-D964-487C-A4E6-0997BB27AF01','851B10ED-AE62-4F28-B178-6D40389CC8DB'], $scope.document.status.identifier)
+        return false;
+    }
+
     //============================================================
     //
     //============================================================
@@ -140,6 +156,17 @@ define(['app', 'views/forms/edit/edit', '../view/view-capacity-building-initiati
             $scope.document.duration = undefined;
     };
 
+    // $scope.$watch('document.geographicScope.scope', function(newVal){
+    //     if(!$scope.document)
+    //         return;
+    //     if($scope.isGlobalOrRegional() && $scope.isNational())
+    //         return;
+    //     if(!$scope.isGlobalOrRegional())
+    //         $scope.geographicalRegions = undefined;
+    //     if(!$scope.isNational())
+    //         $scope.geographicalCountries = undefined;
+    // })
+
     //==================================
     //
     //==================================
@@ -152,6 +179,27 @@ define(['app', 'views/forms/edit/edit', '../view/view-capacity-building-initiati
 
         if (/^\s*$/g.test(document.notes))
           document.notes = undefined;
+
+        if(!document.geographicScope)
+            document.geographicScope = {};
+        if(!$scope.isGlobalOrRegional())
+            delete document.geographicScope.regions;
+        if(!$scope.isGlobalOrRegional() && !$scope.isNational())
+            delete document.geographicScope.countries;
+
+        if(_.isEmpty(document.geographicScope))
+            document.geographicScope = undefined;
+
+        if(document.capacityBuildingsType && !document.capacityBuildingsType.isBroaderProjectPart)
+            document.capacityBuildingsType.broaderProjectPart = undefined;
+
+        if(document.status && $scope.isProposedOrApproved()){
+            document.durationPeriod = undefined;
+            document.durationText = undefined;
+        }
+            
+        if((document.durationText||'').trim() == '')
+            document.durationText = undefined;
 
         return document;
       };
