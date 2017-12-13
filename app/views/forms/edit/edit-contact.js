@@ -1,13 +1,13 @@
 define(['app', 'views/forms/edit/edit',
-		"views/forms/view/view-contact.directive"
+		"views/forms/view/view-contact.directive", 'services/role-service'
 ], function(app) {
 
-    app.controller("editContact", ["$scope", "$http", "$filter", "$controller", "$location", "$q", 'IStorage',
-	function($scope, $http, $filter, $controller, $location, $q, storage) {
+    app.controller("editContact", ["$scope", "$http", "$filter", "$controller", "$location", "$q", 'IStorage', 'roleService',
+	function($scope, $http, $filter, $controller, $location, $q, storage, roleService) {
         $controller('editController', {
             $scope: $scope
         });
-
+		$scope.isNationalUser = roleService.hasAbsRoles();
 		$scope.doc = {};
         $scope.path = $location.path();
         _.extend($scope.options, {            
