@@ -306,7 +306,7 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
                         roleService.isIAC() ||
                         roleService.isAbsAdministrator() ||
                         roleService.isAdministrator() ||
-                        _.contains(['resource', 'modelContractualClause', 'communityProtocol', 'capacityBuildingResource', 'capacityBuildingInitiative'], $scope.schema);
+                        _.contains(['contact', 'resource', 'modelContractualClause', 'communityProtocol', 'capacityBuildingResource', 'capacityBuildingInitiative'], $scope.schema);
 
                 }
 
