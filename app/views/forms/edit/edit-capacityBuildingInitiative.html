@@ -127,15 +127,6 @@
 							</div>
 						</div>
 						
-
-						<div class="row" ng-show="isPartofBroaderInitiative()">
-								<div class="col-md-12">
-									<div class="km-control-group" required="isPartofBroaderInitiative()" name="partOfBroaderInitiative" caption="Please provide further information on the broader project/programme/initiative">
-										<div km-textbox-ml required="isPartofBroaderInitiative()" rows="2" name="partOfBroaderInitiative" ng-model="document.typeInfo" placeholder="" locales="document.header.languages"></div>
-									</div>
-								</div>
-							</div>
-
 						<div class="row">
 							<div class="col-md-12">
 								<div class="km-control-group" required name="status" caption="5. Status of the document">
@@ -238,21 +229,17 @@
 						</div>
 
 
-                        <!-- <div class="row">
+                        <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="contacts" caption="8. Contact person(s)"> -->
+                                <div class="km-control-group" name="contacts" caption="8. Contact person(s)">
 
-                                     <!-- <div document-selector ng-model="document.contacts"
+                                     <div document-selector ng-model="document.contacts"
                                                                         question="contacts"
-                                                                        schema="contact"
-                                                                        government="document.government"
-                                                                        filter="true"
-                                                                        ></div> -->
-
-                                    <!-- <field-embed-contact multiple ng-model="document.contacts" locales="document.header.languages" caption="{{'Add a contact »'}}"></field-embed-contact> -->
-                                <!-- </div>
+                                                                        schema="((focalpoint authority) OR (schema_s:contact AND type_s:person))"
+                                                                        filter="true" skip-government="true"></div>
+                                </div>
                             </div>
-                        </div> -->
+                        </div>
 
 
 

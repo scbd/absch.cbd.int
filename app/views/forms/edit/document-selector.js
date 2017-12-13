@@ -26,7 +26,7 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
             filter : "@filter",
             hideSelf : "=hideSelf",
 		},
-		link : function($scope) {
+		link : function($scope, $element, $attr) {
             var focalPointRegex = /^52000000cbd022/;
             $scope.rawDocuments = [];
             $scope.selectedDocuments=[];
@@ -228,10 +228,12 @@ function ($http, $rootScope, $filter, _,  $q, searchService, appConfigService, I
 
                 var q  = "schema_s:"+ schema;
 
-                if($scope.government)
-                    q  = q + " AND government_s:" + $scope.government.identifier;
-                if(!$scope.government &&  $scope.userGov)
-                    q  = q + " AND government_s:" + $scope.userGov;
+                if(!$attr.skipGovernment){
+                    if($scope.government)
+                        q  = q + " AND government_s:" + $scope.government.identifier;
+                    if(!$scope.government &&  $scope.userGov)
+                        q  = q + " AND government_s:" + $scope.userGov;
+                }
 
                 if($scope.hideSelf){
                     q  = q + " AND NOT (identifier_s:" + $scope.hideSelf + ")";
