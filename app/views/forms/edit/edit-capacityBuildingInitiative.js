@@ -193,14 +193,24 @@ define(['app', 'underscore', 'views/forms/edit/edit', '../view/view-capacity-bui
         if(document.capacityBuildingsType && !document.capacityBuildingsType.isBroaderProjectPart)
             document.capacityBuildingsType.broaderProjectPart = undefined;
 
-        if(document.status && $scope.isProposedOrApproved()){
+        if(document.status && !$scope.isProposedOrApproved()){
             document.durationPeriod = undefined;
             document.durationText = undefined;
         }
             
         if((document.durationText||'').trim() == '')
             document.durationText = undefined;
+        
 
+        if(document.type)
+            delete document.type;
+        if(document.duration)
+            delete document.duration;
+        if(document.geographicScope && document.geographicScope.regionsOrCountries)
+            delete document.geographicScope.regionsOrCountries;
+        if(document.typeInfo)
+            delete document.typeInfo;
+            
         return document;
       };
 
