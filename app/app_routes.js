@@ -79,7 +79,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/register/national-users',                            {templateUrl: 'views/register/national-users/national-user-list.html', label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
                when('/register/:document_type',                            {templateUrl: 'views/register/record-list.html',       label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
-               when('/register/CON/new',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'New',  param:'true', resolveController: true,documentType :'CON' , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/CON/new',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'New',  param:'true', resolveController: true,documentType :'CON' , resolve : { securized : securize(null,null, true) }, }).
                when('/register/CNA/new',           {templateUrl: 'views/forms/edit/edit-authority.html',                 label:'New',  param:'true', resolveController: true,documentType :'CNA' , resolve : { securized : securize(null,true, true) }, }).
                when('/register/MSR/new',           {templateUrl: 'views/forms/edit/edit-measure.html',                   label:'New',  param:'true', resolveController: true,documentType :'MSR' , resolve : { securized : securize(null,true, true) }, }).
                when('/register/NDB/new',           {templateUrl: 'views/forms/edit/edit-database.html',                  label:'New',  param:'true', resolveController: true,documentType :'NDB' , resolve : { securized : securize(null,true, true) }, }).
@@ -92,7 +92,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/register/A19A20/new',        {templateUrl: 'views/forms/edit/edit-modelContractualClause.html',    label:'New',  param:'true', resolveController: true,documentType :'A19A20' , resolve : { securized : securize(null, null, true) }, }).
                when('/register/CPP/new',           {templateUrl: 'views/forms/edit/edit-communityProtocol.html',         label:'New',  param:'true', resolveController: true,documentType :'CPP' , resolve : { securized : securize(null, null, true) }, }).
 
-               when('/register/CON/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { securized : securize(null,true, true) }, }).
+               when('/register/CON/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { securized : securize(null,null, true) }, }).
                when('/register/CNA/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-authority.html',                 label:'Edit',  param:'true', resolveController: true, documentType :'CNA' , resolve : { securized : securize(null,true, true) }, }).
                when('/register/MSR/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-measure.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'MSR' , resolve : { securized : securize(null,true, true) }, }).
                when('/register/NDB/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-database.html',                  label:'Edit',  param:'true', resolveController: true, documentType :'NDB' , resolve : { securized : securize(null,true, true) }, }).
@@ -157,6 +157,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
 
                 if(checkEmailVerified && user.isAuthenticated && !user.isEmailVerified){
                     $location.path(appConfigService.getSiteMapUrls().user.verifyEmail);
+                    return;
                 }
 
                 var roles = _.clone(roleList||[]);
@@ -174,7 +175,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                         schema = path;
 
                     var schemaName = $filter('mapSchema')(schema);
-                    if(!_.contains(appConfigService.referenceSchemas, schemaName))
+                    if(!_.contains(_.union(['contact'], appConfigService.referenceSchemas), schemaName))
                         roles = (roles || []).concat(appConfigService.nationalRoles());
                 }
                 if (!user.isAuthenticated) {
