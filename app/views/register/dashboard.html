@@ -166,17 +166,16 @@
                             <div class="col-xs-1 col-sm-2 col-md-1 text-right"><a translation-url  ng-href="/register/CON/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('contact','request')===0}">{{facets('contact','request')}}</a></div>
                         </div>
     
-                        <div class="row  bg-grey" style="padding:0;margin:20px 0 5px 0;">
-                            <div class="col-xs-12 bold">
-                                <span class="color-blue">National records</span>
-                                <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-title="National records contain information that is typically required to be reported as part of a Party’s obligations under the Nagoya
-                                    Protocol on Access and Benefit-sharing and must be validated by the ABS-CH Publishing Authority prior to being made available in the ABS Clearing-House." data-container="body"></span>                            </div>
-                        </div>
                 </div>
 
-                <div id="menuPlaceholder" ng-if="isNationalUser">
-                    
+                <div id="menuPlaceholder" ng-if="isNationalUser">                    
 
+                    <div class="row  bg-grey" style="padding:0;margin:20px 0 5px 0;">
+                        <div class="col-xs-12 bold">
+                            <span class="color-blue">National records</span>
+                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-title="National records contain information that is typically required to be reported as part of a Party’s obligations under the Nagoya
+                                Protocol on Access and Benefit-sharing and must be validated by the ABS-CH Publishing Authority prior to being made available in the ABS Clearing-House." data-container="body"></span>                            </div>
+                    </div>
                     <div class="row link1" style="padding:0;margin:0 -3px 5px -3px">
                         <div class="col-xs-9 col-sm-6 col-md-9" ng-click="gotoList($event,'authority')">
                             <span ng-click="gotoNew($event,'authority')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;"> <i class="fa fa-plus"></i></span>
