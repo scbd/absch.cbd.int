@@ -1,5 +1,5 @@
 define(['app','text!views/directives/export-directive.html', 'underscore',
-'services/search-service', 'ngDialog', 'services/role-service'
+'services/search-service', 'ngDialog', 'services/role-service',
 ], function (app, template, _) {
     app.directive('export', function () {
         return {
@@ -110,6 +110,9 @@ define(['app','text!views/directives/export-directive.html', 'underscore',
                                                                                 else
                                                                                     document[field] =  'Non Party';
                                                                             }
+                                                                            else if(document[field] instanceof Array){
+                                                                                document[field] = document[field].join(', ');
+                                                                            }
                                                                         })
                                                                     })
                                                                 });
@@ -131,18 +134,17 @@ define(['app','text!views/directives/export-directive.html', 'underscore',
 
 
                                     $scope.customFields = function(){
-                                        var customFields = $scope.customFieldsList;
+                                        var customFields = $scope.customFieldList;
                                         var fieldsDialog = ngDialog.open({
                                             name     : 'customFields',
                                             template : 'customFieldsDialog',
-                                            controller : ['$scope', function($scope){
-                                                                                                        
+                                            controller : ['$scope', '$q', '$http', 'realm', '$timeout', function($scope, $q, $http, realm, $timeout){
                                                     $scope.fields = [
                                                         { name : 'partyStatus', title : 'Party Status',  description : '', field : 'partyStatus'},
                                                         { name : 'createdOn', title : 'Created on', description : '', field : 'createdDate_dt'},
                                                         { name : 'regionalMeasure', title : 'Is Regional Measure', description : '', field : 'virtual_b'},
                                                         { name : 'measureElements', title : 'Has elements of measure', description : '', field : 'thematicAreas_ss', type : 'length'}
-                                                    ]
+                                                    ];
                                                     $scope.closeDialog = function(){
                                                         ngDialog.close(fieldsDialog.id);                                            
                                                     }
@@ -153,14 +155,22 @@ define(['app','text!views/directives/export-directive.html', 'underscore',
                                                         $element.find('.'+downloadFormat).remove();
                                                         
                                                     }
-                                                    if(customFields && customFields.length > 0){
-                                                        customFields.forEach(function(f){
-                                                            var field = _.findWhere($scope.fields, {'field':f})
-                                                            if(field)
-                                                                field.selected = true;
-                                                        })
-                                                    }
                                                     
+                                                    require(['json!./views/directives/field-list.json'], function(data){
+                                                        var fields = ((data||{}).fields||{}).split(',')
+                                                        $timeout(function(){
+                                                            $scope.fields = _.union($scope.fields, _.map(fields, function(field){
+                                                                            return {name: field, title:field, field: field}
+                                                                        }));
+                                                            if(customFields && customFields.length > 0){
+                                                                customFields.forEach(function(f){
+                                                                    var field = _.findWhere($scope.fields, {'field':f})
+                                                                    if(field)
+                                                                        field.selected = true;
+                                                                })
+                                                            }
+                                                        })
+                                                    });
                                             }]
                                         })
                                         fieldsDialog.closePromise.then(function(data){
