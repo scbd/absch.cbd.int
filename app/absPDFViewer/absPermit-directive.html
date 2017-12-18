@@ -54,13 +54,13 @@
                     <label>Verification link (view latest version)</label>
                     <div class="text">
                         <a href="https://absch.cbd.int/database/{{documentInfo | uniqueIDWithoutRevision}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()== 'ABS'">
-                            https://absch.cbd.int/database/{{documentInfo|uniqueID:false}}
+                            https://absch.cbd.int/database/{{documentInfo|uniqueIDWithoutRevision}}
                         </a>
                         <a href="https://training-absch.cbd.int/database/{{documentInfo | uniqueIDWithoutRevision}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()=='ABS-TRG'">
-                            https://training-absch.cbd.int/database/{{documentInfo|uniqueID:false}}
+                            https://training-absch.cbd.int/database/{{documentInfo|uniqueIDWithoutRevision}}
                         </a>
                         <a href="https://absch.cbddev.xyz/database/{{documentInfo | uniqueIDWithoutRevision}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()== 'ABS-DEV'">
-                            https://absch.cbddev.xyz/database/{{documentInfo|uniqueID:false}}
+                            https://absch.cbddev.xyz/database/{{documentInfo|uniqueIDWithoutRevision}}
                         </a>
                     </div>
                 </div>
