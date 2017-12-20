@@ -1,7 +1,8 @@
 ﻿'use strict';
 
 window.name = 'NG_DEFER_BOOTSTRAP!';
-    
+if(/Safari/.test(navigator.userAgent)) { console.log = function(){}; }
+
 require.config({
     waitSeconds: 120,
     baseUrl : (window.lang||'')+'app/',
