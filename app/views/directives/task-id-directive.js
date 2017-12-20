@@ -41,9 +41,9 @@ define(['app', 'underscore','text!views/directives/task-id-directive.html',
 								if (!workflow.workflowAge) {
 									workflow.workflowAge = { 'age': 12, 'type': 'weeks' };
 								}
-								var expiryDate = moment(workflow.createdOn)
+								var expiryDate = moment.utc(workflow.createdOn)
 									.add(workflow.workflowAge.age, workflow.workflowAge.type);
-								workflow.daysToApproval = expiryDate.diff(moment(), 'days');
+								workflow.daysToApproval = expiryDate.diff(moment.utc(), 'days');
 
 							});
 						}

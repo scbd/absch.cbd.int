@@ -6,9 +6,8 @@ define(['app','js/common','moment',
     function ($scope, $http, $window, $cookies, realm, $filter, $rootScope, commonjs,$element, $timeout, $compile) {
         
         $scope.locale = 'en';
-        //var today= moment();
-        var today= moment();
-        var entry= moment("2014-10-12");
+        var today= moment.utc();
+        var entry= moment.utc("2014-10-12");
         $scope.entryintoforce = today.diff(entry, 'hours', true) >= 0 ? true:false;
 
         $scope.yearsSinceEntry = today.diff(entry, 'years', true);

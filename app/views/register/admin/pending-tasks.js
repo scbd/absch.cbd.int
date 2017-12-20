@@ -89,7 +89,7 @@ define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'scbd-an
                                 if (!workflow.workflowAge) {
                                     workflow.workflowAge = { 'age': 12, 'type': 'weeks' };
                                 }
-                                workflow.workflowExpiryDate = moment(workflow.createdOn)
+                                workflow.workflowExpiryDate = moment.utc(workflow.createdOn)
                                     .add(workflow.workflowAge.age, workflow.workflowAge.type);
                             });
 
