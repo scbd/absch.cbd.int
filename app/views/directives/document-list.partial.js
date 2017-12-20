@@ -304,7 +304,7 @@ define(['app','text!views/directives/document-list.partial.html',
                         var locale = "en"; //$scope.$root.locale;
 
                         var formatDate = function formatDate(date) {
-                            return date + ''; //moment(date).format('MMMM Do YYYY');
+                            return date + ''; 
                         };
                         output.id = document.id;
                         output.schema = document.schema_s.toLowerCase();
@@ -470,7 +470,6 @@ define(['app','text!views/directives/document-list.partial.html',
                         } else if (document.schema_s == 'absCheckpointCommunique') {
                             output.recordtype = "nationalRecord";
                             output.sourceCountries = (document.sourceCountries_CEN_ss);
-                            // output.title = "Checkpoint communiqué - "+ moment(document.createdDate_dt).format('MM/DD/YYYY hh:mm') ;
 
                             //TODO: output.description should be the summary of utilization
                             //TODO: the metadata should include a link to download the pdf
@@ -561,7 +560,7 @@ define(['app','text!views/directives/document-list.partial.html',
                             output.recordtype = "referenceRecord";
                             output.eventCity = document.eventCity_EN_t;
                             output.eventCountry = document.eventCountry_EN_t;
-                            output.description = document.eventCity_EN_t + ' from ' + moment(document.startDate_dt).format('Do MMM YYYY') + ' to ' + moment(document.endDate_dt).format('Do MMM YYYY');
+                            output.description = document.eventCity_EN_t + ' from ' + moment.utc(document.startDate_dt).format('Do MMM YYYY') + ' to ' + moment.utc(document.endDate_dt).format('Do MMM YYYY');
 
                         }
 

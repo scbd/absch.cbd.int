@@ -520,14 +520,14 @@ define(['app', 'underscore', 'services/local-storage-service'], function(app, _)
                     country.isNPParty = isNPParty(countryDetails) || country.code == 'EU';
                     country.isNPSignatory = isSignatory(countryDetails) || country.code == 'EU';
                     country.isNPRatified = isRatified(countryDetails) || country.code == 'EU';
-                    country.isNPInbetweenParty = moment().diff(moment(treaties.XXVII8b.deposit), 'days') < 90;
+                    country.isNPInbetweenParty = moment.utc().diff(moment.utc(treaties.XXVII8b.deposit), 'days') < 90;
 
                     country.dateDeposit =  countryDetails.treaties.XXVII8b.deposit;
                     country.instrument = countryDetails.treaties.XXVII8b.instrument;
                     country.dateSigned = countryDetails.treaties.XXVII8b.signature;
 
                     if (country.isNPInbetweenParty)
-                        country.entryIntoForce = moment(treaties.XXVII8b.deposit).add(90, 'day');
+                        country.entryIntoForce = moment.utc(treaties.XXVII8b.deposit).add(90, 'day');
                     else
                         country.entryIntoForce = treaties.XXVII8b.party;
 
@@ -544,7 +544,7 @@ define(['app', 'underscore', 'services/local-storage-service'], function(app, _)
                     if (entity && entity.isNPInbetweenParty != undefined)
                         return entity.isNPInbetweenParty;
 
-                    return entity && (moment().diff(moment(entity.treaties.XXVII8b.deposit), 'days') >= 90) && (entity.treaties.XXVII8b.instrument == "ratification" ||
+                    return entity && (moment.utc().diff(moment.utc(entity.treaties.XXVII8b.deposit), 'days') >= 90) && (entity.treaties.XXVII8b.instrument == "ratification" ||
                         entity.treaties.XXVII8b.instrument == "accession" ||
                         entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
                 }
@@ -558,7 +558,7 @@ define(['app', 'underscore', 'services/local-storage-service'], function(app, _)
                     if (entity && entity.isNPInbetweenParty != undefined)
                         return entity.isNPInbetweenParty;
 
-                    return entity && (moment().diff(moment(entity.treaties.XXVII8b.deposit), 'days') >= 90) && (entity.treaties.XXVII8b.instrument == "ratification" ||
+                    return entity && (moment.utc().diff(moment.utc(entity.treaties.XXVII8b.deposit), 'days') >= 90) && (entity.treaties.XXVII8b.instrument == "ratification" ||
                         entity.treaties.XXVII8b.instrument == "accession" ||
                         entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
                 }

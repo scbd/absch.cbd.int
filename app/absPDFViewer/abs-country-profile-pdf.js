@@ -25,7 +25,7 @@ app.controller('printCountryProfile', ['$scope', '$http', '$location', '$sce', '
                         $scope.country = response.data;
 
                         if ($scope.country)
-                            $scope.entryIntoForceDate = moment($scope.country.treaties.XXVII8b.deposit).add(90, 'days');
+                            $scope.entryIntoForceDate = moment.utc($scope.country.treaties.XXVII8b.deposit).add(90, 'days');
                     });
                     //*******************************************************
                     var schema = ["absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database"]
@@ -176,7 +176,7 @@ app.controller('printCountryProfile', ['$scope', '$http', '$location', '$sce', '
             }
             $scope.isInbetweenParty =function(entity) {
                 return entity && (entity.isInbetweenParty
-                            ||( entity.treaties && moment().diff(moment(entity.treaties.XXVII8b.deposit), 'days') < 90));
+                            ||( entity.treaties && moment.utc().diff(moment.utc(entity.treaties.XXVII8b.deposit), 'days') < 90));
             }
 
             $scope.isSignatory = function(entity) {

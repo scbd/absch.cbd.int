@@ -156,7 +156,7 @@
                             //create seprate collection for measure matrix
                             if(document.schema_s=='measure'){
 
-                                if(!document.retired_dt || moment() <= moment(document.retired_dt)){
+                                if(!document.retired_dt || moment.utc() <= moment.utc(document.retired_dt)){
                                     document.measureMatrix = true;
                                 }
                                 else
