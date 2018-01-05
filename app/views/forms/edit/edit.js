@@ -1,6 +1,6 @@
 //fixed a bug with the comment up here ;)
 define([
-    'app', 'services/app-config-service',
+    'app', 'underscore', 'services/app-config-service',
     'views/forms/edit/editFormUtility',
     'views/forms/edit/field-embed-contact.directive',
     'views/forms/edit/edit-contact-base.directive',
@@ -15,7 +15,7 @@ define([
     'views/forms/edit/document-selector',
     'views/register/directives/register-top-menu',
     'scbd-angularjs-services/locale'
-  ], function (app) {
+  ], function (app, _) {
 
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
                                    "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","underscore", "$route", 
@@ -159,9 +159,13 @@ define([
 
       if (!document)
         return false;
-
-      if(document.jurisdiction.identifier == '528B1187-F1BD-4479-9FB3-ADBD9076D361' && (document.government.identifier == "eur" ||  document.government.identifier == "eu")){
-         document.jurisdictionRegions = [{"identifier":"bd12d7fb-91f7-4b2d-996c-e70f18a51f0e"}];
+      var allowedRegionalMeasuresMapping = {
+        "pe"    : "9C5E1A4D-E8EE-4C74-B9C9-5C7BCDF6B84A",
+        "eu"    : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e",
+        "eur"   : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e" 
+      }
+      if(document.jurisdiction.identifier == '528B1187-F1BD-4479-9FB3-ADBD9076D361' && allowedRegionalMeasuresMapping[document.government.identifier]){
+         document.jurisdictionRegions = [{"identifier":allowedRegionalMeasuresMapping[document.government.identifier]}];
          return true;
       }
 
