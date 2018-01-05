@@ -37,9 +37,11 @@ define(['app', 'text!views/directives/workflow-std-buttons.html',
                 //BOOTSTRAP Dialog handling
 				var qCancelDialog = $element.find("#dialogCancel");
                 var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
+                var qWorkflowDraftDialog = $element.find("#divWorkflowDraft");
 
 				$scope.cancelDialogDefered = [];
                 $scope.AdditionalInfoDialogDefered = [];
+                $scope.WorkflowDraftDialogDefered = [];
 
 				$scope.showCancelDialog = function(visible) {
         			  if($('form').filter('.dirty').length == 0) {
@@ -104,6 +106,32 @@ define(['app', 'text!views/directives/workflow-std-buttons.html',
                     $timeout(function(){
                         var promise = null;
                         while((promise=$scope.AdditionalInfoDialogDefered.pop()))
+                            promise.resolve(false);
+                    });
+                });
+
+                $scope.showWorkflowDraftDialog = function(visible) {
+                    var isVisible = qWorkflowDraftDialog.css("display")!='none';
+                    if(visible == isVisible)
+                        return $q.when(isVisible);
+                    var defered = $q.defer();
+                    $scope.WorkflowDraftDialogDefered.push(defered)
+                    qWorkflowDraftDialog.modal(visible ? "show" : "hide");
+                    return defered.promise;
+                }
+
+                qWorkflowDraftDialog.on('shown.bs.modal' ,function() {
+                    $timeout(function(){
+                        var promise = null;
+                        while((promise=$scope.WorkflowDraftDialogDefered.pop()))
+                            promise.resolve(true);
+                    });
+                });
+
+                qWorkflowDraftDialog.on('hidden.bs.modal' ,function() {
+                    $timeout(function(){
+                        var promise = null;
+                        while((promise=$scope.WorkflowDraftDialogDefered.pop()))
                             promise.resolve(false);
                     });
                 });
@@ -313,39 +341,60 @@ define(['app', 'text!views/directives/workflow-std-buttons.html',
 				$scope.saveDraft = function()
 				{
 					$scope.loading = true;
-					$scope.$emit("clearDocumentErrors");
+                    $scope.$emit("clearDocumentErrors");
 					return $q.when($scope.getDocumentFn()).then(function(document)
 					{
 						if(!document)
 							throw "Invalid document";
+                        if($route.current.params.workflow){
 
-						return editFormUtility.saveDraft(document);
+                            $element.find('#continueWorkflowDraftRequest').bind('click', function(){
+                                $scope.closeWorkflowDraftDialog(true);
+                                $scope.loading = true;
+                                storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, {})
+                                        .then(function(edit){
+                                           return storage.drafts.locks.get(document.header.identifier,{lockID:''})
+                                        })
+                                        .then(function(lockInfo){
+                                           return storage.drafts.locks.delete(document.header.identifier, lockInfo.data[0].lockID)
+                                        })
+                                        .then(function(){
+                                           return storage.drafts.put(document.header.identifier, document);
+                                        })
+                                        .then(function(draftInfo){
+                                           return afterDraftSaved(draftInfo);
+                                        }).catch(function(error){
+                                            $scope.$emit("documentError", { action: "saveDraft", error: error })
+                                        }).finally(function(){
+                                            $scope.loading = false;
+                                        });
 
-					}).then(function(draftInfo) {
+                            });
 
-                        toastr.info($element.find('#msgDraftSaveMessage').text());
+                            return 	$scope.showWorkflowDraftDialog(true);
+                        }
+                        else{
+                            return editFormUtility.saveDraft(document)
+                                    .then(function(draftInfo){
+                                        return afterDraftSaved(draftInfo);
+                                    });
+                        }                            
 
-						// if(draftInfo.type=='authority'){
-						// 	//in case of authority save the CNA as a contact in drafts
-						// 	saveAuthorityInContacts(draftInfo);
-						// }
-						//$scope.$emit("documentDraftSaved", draftInfo)
-                        $('form').filter('.dirty').removeClass('dirty');
-                        $scope.$emit("updateOrignalDocument", $scope.getDocumentFn());
-                        documentDraftSaved(draftInfo);
-                        $location.path(($location.path().replace(/\/new/, '/'+ draftInfo.identifier + '/edit')));
-						return draftInfo;
+                        function afterDraftSaved(draftInfo){
+                            toastr.info($element.find('#msgDraftSaveMessage').text());
 
+                            $('form').filter('.dirty').removeClass('dirty');
+                            $scope.$emit("updateOrignalDocument", $scope.getDocumentFn());
+                            documentDraftSaved(draftInfo);
+                            $location.path(($location.path().replace(/\/new/, '/'+ draftInfo.identifier + '/edit')));
+                            return draftInfo;
+                        }
 
 					}).catch(function(error){
-
-						$scope.$emit("documentError", { action: "saveDraft", error: error })
-
+						$scope.$emit("documentError", { action: "saveDraft", error: error });
 					}).finally(function(){
 						    $scope.loading = false;
                             $scope.timer(true);
-						//return $scope.closeDialog();
-
 					});
 				};
 
@@ -417,8 +466,14 @@ define(['app', 'text!views/directives/workflow-std-buttons.html',
                     });
                 };
 
+                $scope.closeWorkflowDraftDialog = function(changeLoading)
+                {
+                    return $q.all([$scope.showWorkflowDraftDialog(false)]).finally(function(){
+                        $scope.loading = changeLoading;
+                    });
+                };
 
-                  $scope.$on("documentInvalid", function(){
+                $scope.$on("documentInvalid", function(){
                   $scope.tab = "review";
                 });
 
