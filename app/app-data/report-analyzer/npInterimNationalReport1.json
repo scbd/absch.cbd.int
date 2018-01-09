@@ -16,7 +16,7 @@
             ],
             "additionalInfo" : [
                 {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges encountered  and answer all the following questions.", "type" : "string"},
-                {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"}            
+                {"field" : "additionalInfo", "title" : "Please provide further information", "type" : "string"}            
             ]
         },
         {
