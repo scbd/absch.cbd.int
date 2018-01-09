@@ -172,8 +172,7 @@
                                                 displayed as part of their legal framework in their country profile. It is recommended that one country agrees to register the measure on behalf of the regional organization or the group of countries that
                                                 share the same measure.</div>
                                             <div class="km-control-group" required name="jurisdictionRegions" caption="Country name(s) and/or Geographical or political/economic group(s)">
-                                                <button type="button" class="btn btn-info" ng-repeat="region in document.jurisdictionRegions">{{region|term}}</button>
-                                                <!--<div  km-select required name="jurisdictionRegions" ng-model="document.jurisdictionRegions" items="options.regions()" multiple ></div>-->
+                                                <button type="button" class="btn btn-info" ng-if="document.jurisdictionRegions && document.jurisdictionRegions.length >0">{{document.jurisdictionRegions[0]|term}}</button>
                                             </div>
                                         </div>
 
