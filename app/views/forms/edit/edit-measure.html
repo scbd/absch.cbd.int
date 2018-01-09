@@ -171,9 +171,8 @@
                                             <div class="help-info">Please note that regional or multilateral measures only need to be registered once in the ABS Clearing-House and that each of the countries selected as being covered by the regional measure will have the measure
                                                 displayed as part of their legal framework in their country profile. It is recommended that one country agrees to register the measure on behalf of the regional organization or the group of countries that
                                                 share the same measure.</div>
-
                                             <div class="km-control-group" required name="jurisdictionRegions" caption="Country name(s) and/or Geographical or political/economic group(s)">
-                                                <button type="button" class="btn btn-info">European Union Member States</button>
+                                                <button type="button" class="btn btn-info" ng-repeat="region in document.jurisdictionRegions">{{region|term}}</button>
                                                 <!--<div  km-select required name="jurisdictionRegions" ng-model="document.jurisdictionRegions" items="options.regions()" multiple ></div>-->
                                             </div>
                                         </div>
