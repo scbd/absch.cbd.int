@@ -297,10 +297,52 @@
                             {{item.text}}
                         </pre>
                     </div>
+                    <div style="height:0px;width:0px;overflow:hidden" ng-if="exporting">
+                            <table id="forExport" style="height:0px;width:0px">
+                                    <tr>
+                                        <td></td>
+                                        <td colspan="5">
+                                            Question {{currentQuestion.number}}.
+                                            {{currentQuestion.title|lstring}}                                                     
+                                            Sub section :-{{subTitle|lstring}}
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Country</th>
+                                        <td ng-repeat="lang in ['en', 'ar', 'fr', 'es', 'zh', 'ru']" class="tableexport-string">
+                                            {{lang|languageLongName}}
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat="item in countriesTexts">
+                                        <td>{{::allRegionsMap[item.government].title|lstring}}</td>
+                                        <td ng-repeat="lang in ['en', 'ar', 'fr', 'es', 'zh', 'ru']" class="tableexport-string">  
 
+                                            <pre ng-if="::item.text[lang] && item.field!='documentReferenceIDs' && item.field!='relevantDocuments' && typeof(item.text)!='number'"
+                                                style="white-space:pre-line" ng-style="{ direction : (item.text|direction:lang) }">
+                                                {{item.text|lstring:lang}}
+                                            </pre>
+                                            <div class="km-value" ng-style="{ direction : (item.text|direction:lang) }" ng-if="item.field=='relevantDocuments'"> 
+                                                <div ng-repeat="file in item.text">
+                                                    <a target="_new" ng-href="{{file.url}}"><i class="fa fa-file"></i> {{file.name||file.url}}</a>
+                                                    <i ng-show="file.name && file.url.indexOf('/api/v2013/documents/')<0">({{file.url}})</i>
+                                                </div>
+                                            </div> 
+                                            <pre ng-if="::typeof(item.text)=='number' && item.text[lang]" style="white-space:pre-line" ng-style="{ direction : (item.text|direction:lang) }">
+                                                {{item.text|lstring:lang}}
+                                            </pre>
+                                        </td>                                        	
+                                    <tr>
+                
+                            </table>	
+                        </div>		
                 </div>
 
                 <div class="modal-footer">
+                        <button  ng-click="export()" class="btn btn-primary record-link-style" id="btnPrint">
+                                <i class="fa fa-spin fa-spinner" ng-if="exporting" /> 
+                                <i class="fa fa-table" aria-hidden="true" ng-if="!exporting"></i>
+                                Export 
+                            </button>   
                         <button  ng-click="print('#textsDialog-model-content')" class="btn btn-primary record-link-style" id="btnPrint">
                             <i class="fa fa-spin fa-spinner" ng-if="printing" /> 
                             <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>

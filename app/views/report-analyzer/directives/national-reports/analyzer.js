@@ -288,6 +288,23 @@ function(templateHtml, app, _, require, $) { 'use strict';
                     }
                 };
 
+                                //====================================
+                //
+                //
+                //====================================
+                $scope.export = function() {
+                    $scope.exporting = true;
+                    require(['tableexport'], function(){
+                        $element.find('#forExport').tableExport({
+                            formats: ["xlsx", "xls", "csv"],
+                            filename: "ABSCH-NR-Analyzer",
+                        });
+                        $element.find('.xlsx').click();
+                        $timeout(function(){                        
+                            $scope.exporting = false;
+                        }, 200)
+                    });  
+                };
                 
 
                 //====================================
