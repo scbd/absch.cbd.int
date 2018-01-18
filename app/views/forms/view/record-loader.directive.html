@@ -1,5 +1,6 @@
 ﻿<div>
-    <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'" ng-if="printMode"></div>    
+    <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'" ng-if="printMode"></div>
+    
     <div id="recordContent">
         <div smooth-scroll duration="100" offset="200" scroll-if="{{!$root.stopSmoothScroll}}"></div>
         <div block-region activate="loading"></div>
@@ -11,7 +12,8 @@
         <div class="jumbotron" style="background-color:white;" role="alert" ng-if="documentSuccess">
             <h2>Thank you for downloading document {{documentUID}}.</h2>
             <p>If the document did not download try clicking
-                <a translation-url href="{{documentUrl}}" class="alert-link">here...</a></p>
+                <a translation-url href="{{documentUrl}}" class="alert-link">here...</a>
+            </p>
             </br>
             </br>
             </br>
@@ -22,7 +24,8 @@
         <div class="jumbotron" style="background-color:white;" role="alert" ng-if="documentError">
             <h2>Thank you for requesting document {{documentUID}}.</h2>
             <p>The document does not exists, if you think this file should be available, please report to
-                <a translation-url href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
+                <a translation-url href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a>
+            </p>
         </div>
 
         <div id="RecordDetails" ng-if="showDetails">
@@ -32,13 +35,17 @@
                         <h3 style="margin:0 0 20px 0;padding:0;">Record Information</h3>
                         <table style="width:100%!important;">
                             <tr>
-                                <td><label> Unique Identifier: </label></td>
+                                <td>
+                                    <label> Unique Identifier: </label>
+                                </td>
                                 <td class="bold">
                                     {{internalDocument | uniqueID}}
                                 </td>
                             </tr>
                             <tr>
-                                <td><label> Current Status: </label></td>
+                                <td>
+                                    <label> Current Status: </label>
+                                </td>
                                 <td class="bold">
                                     <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">
                                         DRAFT
@@ -48,29 +55,37 @@
                                     </span>
                                     <span class="color-red" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">
                                         [ Locked: Pending {{workflowRequestType}} request ]
-                                </span>
+                                    </span>
                                     <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">
-                                    DELETED
-                                </span>
+                                        DELETED
+                                    </span>
                                     <span ng-show="!internalDocument.deletedOn && internalDocument.amendmentIntent==1  && internalDocument.type!='absCheckpointCommunique'">
-                                    <span class="bold color-red"> REVOKED</span>
+                                        <span class="bold color-red"> REVOKED</span>
                                     </span>
                                 </td>
                             </tr>
                             <tr>
-                                <td><label> Record Type: </label></td>
+                                <td>
+                                    <label> Record Type: </label>
+                                </td>
                                 <td class="bold">{{internalDocumentInfo.metadata.schema | schemaName}}</td>
                             </tr>
                             <tr ng-if="docInfo.revision > 0">
-                                <td><label> Record Versions: </label></td>
+                                <td>
+                                    <label> Record Versions: </label>
+                                </td>
                                 <td class="bold">{{internalDocumentInfo.revision}}</td>
                             </tr>
                             <tr ng-if="docInfo.metadata.government">
-                                <td><label> Record Owner: </label></td>
+                                <td>
+                                    <label> Record Owner: </label>
+                                </td>
                                 <td class="bold"> {{getUserCountry(internalDocumentInfo.metadata.government)}}</td>
                             </tr>
                             <tr>
-                                <td><label> History:</label></td>
+                                <td>
+                                    <label> History:</label>
+                                </td>
                                 <td>
                                     <div view-history document-id="internalDocumentInfo.identifier"></div>
                                 </td>
@@ -95,14 +110,16 @@
             <div>
                 <a translation-url title="Edit" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
                     class="btn btn-default" ng-href="/register/{{internalDocument.header.schema|urlSchemaShortName}}/{{internalDocument.header.identifier}}/edit">
-                <i class="fa fa-edit"></i> edit </a>
+                    <i class="fa fa-edit"></i> edit </a>
                 <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}"
-                    type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+                    type="button" class="btn btn-default" ng-click="askDelete(record)">
+                    <i class="fa fa-trash-o"></i>
+                </button>
             </div>
         </div>
-        
-        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;"  >
-                <div record-options></div>
+
+        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;">
+            <div record-options></div>
         </div>
 
         <div id="schemaView" ng-show="internalDocument"></div>

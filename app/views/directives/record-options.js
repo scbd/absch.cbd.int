@@ -75,10 +75,8 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                     else if(_.contains(appConfigService.scbdSchemas, $scope.internalDocument.header.schema))
                         pdfType = 'scbd-records'
 
-                    var pdfDownloadUrl  =  '/api/v2017/generate-pdf/:realm/:type/:lang?documentID=:documentId&revision=:revision&schema=:schema';
-                    pdfDownloadUrl      = pdfDownloadUrl.replace(':realm'       , appConfigService.currentRealm)
-                                                        .replace(':type'        , pdfType)
-                                                        .replace(':lang'        , $scope.downloadLocale)
+                    var pdfDownloadUrl  =  '/pdf/:type/:schema/:documentId/:revision';
+                    pdfDownloadUrl      = pdfDownloadUrl.replace(':type'        , pdfType)
                                                         .replace(':documentId'  , documentId)
                                                         .replace(':revision'    , ($scope.internalDocumentInfo||{}).revision||'')
                                                         .replace(':schema'      , $scope.internalDocument.header.schema);
