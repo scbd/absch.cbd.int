@@ -64,7 +64,8 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/database/:documentSchema/:documentID',           { templateUrl: 'views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
                when('/database/:documentSchema/:documentID/:revision', { templateUrl: 'views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
                
-               
+               when('/pdf/:type/:schema/:documentId/:revision?',               { templateUrl: 'views/pdf-viewer/records-pdf-viewer.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
+                              
                when('/register',                                           {templateUrl: 'views/register/dashboard.html',         label:'Management Center',  param:'true', resolveController: true, resolve : { securized : securize() }}).
                when('/dashboard',                                          {redirectTo:  '/register/dashboard'}).
                when('/register/dashboard',                                 {templateUrl: 'views/register/dashboard.html',         label:'Dashboard',  param:'true', resolveController: true, resolve : { securized : securize() }}).

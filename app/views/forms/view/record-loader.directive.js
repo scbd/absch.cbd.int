@@ -1,4 +1,4 @@
-define(['app', 'text!views/forms/view/record-loader.directive.html',
+﻿define(['app', 'text!views/forms/view/record-loader.directive.html', 
 	'scbd-angularjs-services', 'ngSmoothScroll',
 	'scbd-angularjs-filters',
 	'./view-history-directive',
@@ -13,6 +13,7 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 	'views/directives/record-options','scbd-angularjs-services/locale',
 	'views/forms/directives/document-date'
 ], function (app, template) {
+
 	app.directive('recordLoader', [function () {
 		return {
 			restrict: 'EAC',
@@ -39,10 +40,11 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 					$scope.init();
 			},
 			controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows", "locale",
+				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows", "locale", "$sce",
 				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows, appLocale) {
+					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows, appLocale, $sce) {
 					
+
 					if(!$scope.locale)
 						$scope.locale = appLocale;
 					

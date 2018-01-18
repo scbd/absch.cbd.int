@@ -60,6 +60,9 @@ require.config({
         'jquery-highlight'          : 'libs/jquery-highlight/jquery.highlight',
         'lunr'                      : 'libs/lunr.js/lunr',
         'diacritics'                : 'libs/diacritic/diacritics',
+        'pdfjs-dist/build/pdf'      : 'views/psd-viewer/pdfjs/pdf',
+        'pdfjs-dist/build/pdf.worker' : 'views/psd-viewer/pdfjs/build/pdf.worker',        
+        'pdf-object'                 : 'libs/pdfobject/pdfobject',
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -99,7 +102,9 @@ require.config({
         "jspdf"                         : { exports : "jsPDF" },
         'jquery-highlight'              : { 'deps': ['jquery'] },
         'lunr'                          : { 'deps': ['jquery'] },
-        "xlsx"                          : { "deps": ['jszip'],"exports": 'XLSX'}
+        "xlsx"                          : { "deps": ['jszip'],"exports": 'XLSX'},
+        'pdfjs-dist/build/pdf'          : { 'deps': ['angular']}, 
+        'pdf-object'                    : { 'deps': ['angular']}  
     },
     packages: [
         { name: 'scbd-branding'          , location : 'components/scbd-branding' },
