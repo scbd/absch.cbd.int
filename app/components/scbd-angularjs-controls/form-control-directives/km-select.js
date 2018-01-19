@@ -94,6 +94,8 @@ function(app, angular, $, _, template) {
           unSelectItem: onUnSelectItem,
           unSelectAll: onUnSelectAll,
           getItem: onGetItem,
+          selectItem: onSelectItem,
+          selectAll: onSelectAll,
         };
 
         function onUnSelectItem(item) {
@@ -107,6 +109,23 @@ function(app, angular, $, _, template) {
           $scope.clearSelection();
         }
 
+        function onSelectAll() {
+          _.each($scope.allItems || [], function(item) {
+            item.selected = true;
+          });
+          $scope.save();
+        }
+
+        function onSelectItem(item) {
+
+          if (item.identifier) {
+            var element = _.findWhere($scope.allItems || [], {identifier: item.identifier})
+            if(element){
+              element.selected = true;
+              $scope.save();
+            }
+          }
+        }
 
         function onGetItem(identifier) {
           return _.find($scope.allItems, {
@@ -138,14 +157,15 @@ function(app, angular, $, _, template) {
         //==============================
         //
         //==============================
-        function flaten(subTree) {
+        function flaten(subTree, parent) {
           var oResult = [];
 
           _.each(subTree, function(o) {
             oResult.push(o);
-
+            if(parent)
+              o.parent = parent;
             if (o.children)
-              oResult = _.union(oResult, flaten(o.children));
+              oResult = _.union(oResult, flaten(o.children, o.identifier));
           });
 
           return oResult;
