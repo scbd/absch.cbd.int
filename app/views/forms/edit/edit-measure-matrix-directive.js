@@ -28,6 +28,7 @@ define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directiv
                 $scope.terms = null;
                 $scope.rootTerms = [];
                 $scope.otherTerms = [];
+                $scope.geneticResource = {types: [], areas:[]};
 
                 $scope.$watch("terms", $scope.onTerms);
                 $scope.$watch("binding", $scope.load);
@@ -428,6 +429,52 @@ define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directiv
 
                         return result;
                     // }
+                }
+                $scope.$watch('geneticResource.types', function(newVal, oldVal){
+                    if(newVal && $scope.geneticResource.grTypesApi){
+                        
+                        var newElementIdentifiers = _.pluck(newVal, "identifier");
+                        var oldElementIdentifiers = _.pluck(oldVal, "identifier");
+                        var allTypeIdentifier = "4E2974DF-216E-46C8-8797-8E3A33D6A048";
+
+                        if(_.contains(newElementIdentifiers, allTypeIdentifier)){
+
+                            var newElements = _.difference(newElementIdentifiers, oldElementIdentifiers);
+
+                            if(_.contains(newElements, allTypeIdentifier))
+                                $scope.geneticResource.grTypesApi.selectAll();
+                            else if(oldVal.length > newVal.length)
+                                $scope.geneticResource.grTypesApi.unSelectItem({identifier:allTypeIdentifier});
+                        }
+                    }
+                })
+                $scope.$watch('geneticResource.areas', function(newVal, oldVal){
+                    if(newVal && $scope.geneticResource.grAreasApi){
+                        var source = $scope.options.grAreas();
+                        var newElementIdentifiers = _.pluck(newVal, "identifier");
+                        var oldElementIdentifiers = _.pluck(oldVal, "identifier");
+
+                        var newElements = _.difference(newElementIdentifiers, oldElementIdentifiers);
+                        if(newElements.length){
+                            var element = $scope.geneticResource.grAreasApi.getItem(newElements[0]);
+                            if(element && element.children){
+                                _.each(element.children,  $scope.geneticResource.grAreasApi.selectItem)
+                            }
+                        }
+                        else{ //element was unchecked
+                            var oldElements = _.difference(oldElementIdentifiers, newElementIdentifiers);
+                            if(oldElements.length){
+                                var element = $scope.geneticResource.grAreasApi.getItem(oldElements[0]);
+                                if(element){
+                                    $scope.geneticResource.grAreasApi.unSelectItem({identifier: element.parent})
+                                }
+                            }
+                        }
+                    }
+                });
+
+                $scope.hasIdentifier = function(identifier, list){
+                    return _.findWhere(list, {identifier: identifier});
                 }
 
                 $scope.addGRRecord = function (geneticResource, grTypesApi, grAreasApi) {
