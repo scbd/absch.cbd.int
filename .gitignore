@@ -21,3 +21,4 @@ app/views/mockups
 .vscode
 i18n
 TestCases
+package-lock.json
