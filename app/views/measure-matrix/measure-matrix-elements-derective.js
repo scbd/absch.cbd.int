@@ -150,6 +150,9 @@ define(['app',
                                       $scope.terms.splice(_.indexOf($scope.terms, geneticResource), 1);
                                    }
                                 }
+                                else{
+                                    oNewIdentifiers[$scope.binding.geneticResources.identifier] = true;
+                                }
                                 if ($.isArray($scope.binding.relevantElements)){
                                     for (var i = 0; i < $scope.binding.relevantElements.length; ++i) {
                                         var identifier = $scope.binding.relevantElements[i].identifier;
