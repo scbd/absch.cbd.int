@@ -129,8 +129,10 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 //
                 //==============================================
                 $scope.showText = function(government, text, field) {
-                    if(text && (text.details || text.number ||text[field]))
-                        text =  (text.details ||text.number || text[field]);
+                    if(text && (text.details ||text[field]))
+                        text =  (text.details || text[field]);
+                    else if(!!text.number && field == 'number')
+                        text =  text.number;                     
                     else if(!field && text)
                         text = text
                     else
@@ -173,9 +175,11 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
 
                         var text = report[$scope.question.key];
 
-                        if(text && (text.details ||text.number || text[field]))
-                            text =  (text.details ||text.number || text[field]);
-                       else if((!field && text))
+                        if(text && (text.details ||text[field]))
+                            text =  (text.details || text[field]);
+                        else if(!!text.number && field == 'number')
+                            text =  text.number;          
+                        else if((!field && text))
                             text = text
                         else
                             text = undefined;

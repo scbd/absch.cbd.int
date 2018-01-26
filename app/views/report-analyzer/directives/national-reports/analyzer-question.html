@@ -84,14 +84,14 @@
             <td>{{question.subTitle||'Free text'}}</td>
             <td class="text-center">{{question.options[0].sum||rows[0].sum}}</td>
             <td class="text-center"><img ng-if="::question.options[0].sum||rows[0].sum" src="/app/views/report-analyzer/resources/nr-documents.png" 
-                ng-click="showTexts(undefined, question.field, question.type)" style="cursor:pointer"></td>
+                ng-click="showTexts(undefined, question.type)" style="cursor:pointer"></td>
             <td class="text-center text-nowrap region" class="bchCellGroup text-nowrap" ng-repeat-start="region in ::regions track by region.identifier">
                 {{rows[0].cells[region.identifier].sum}}
-                <img ng-if="rows[0].cells[region.identifier].sum"  ng-click="showTexts(region.countries, question.field)" src="/app/views/report-analyzer/resources/nr-documents.png" style="cursor:pointer">
+                <img ng-if="rows[0].cells[region.identifier].sum"  ng-click="showTexts(region.countries, question.type)" src="/app/views/report-analyzer/resources/nr-documents.png" style="cursor:pointer">
             </td>
             <!-- show countries if expanded[region.identifier] -->
             <td class="text-center text-nowrap country country"ng-if="expanded[region.identifier]" ng-repeat="country in region.countries|filter:{visible:true} track by country.identifier">
-                <img ng-if="hasText(country.identifier, reportsMap[country.identifier][question.key], question.field)" src="/app/views/report-analyzer/resources/nr-document.png" ng-click="showText(country.identifier, reportsMap[country.identifier][question.key], question.field)" style="cursor:pointer">
+                <img ng-if="hasText(country.identifier, reportsMap[country.identifier][question.key], question.type)" src="/app/views/report-analyzer/resources/nr-document.png" ng-click="showText(country.identifier, reportsMap[country.identifier][question.key], question.field)" style="cursor:pointer">
             </td>
             <td ng-repeat-end ng-show="::false"></th>
             <td style="padding:0px;background-color:white"></td>

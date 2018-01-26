@@ -277,7 +277,7 @@
                         </div>
                         <h5>{{::allRegionsMap[item.government].title|lstring}}</h5>
                         
-                        <pre ng-if="::item.field!='documentReferenceIDs' && item.field!='relevantDocuments' && typeof(item.text)!='number'"
+                        <pre ng-if="::item.field!='documentReferenceIDs' && item.field!='relevantDocuments' && item.field!='number'"
                             style="white-space:pre-line" ng-style="{ direction : (item.text|direction:item.locale) }">
                             {{item.text|lstring:item.locale}}
                         </pre>
@@ -287,13 +287,13 @@
                                 <i ng-show="file.name && file.url.indexOf('/api/v2013/documents/')<0">({{file.url}})</i>
                             </div>
                         </div> 
-                        <div ng-if="::item.field=='documentReferenceIDs' && typeof(item.text)!='number'" ng-style="{ direction : (item.text|direction:item.locale) }">
+                        <div ng-if="::item.field=='documentReferenceIDs' && item.field!='number'" ng-style="{ direction : (item.text|direction:item.locale) }">
                             <!-- {{item.text|lstring:item.locale}} -->
                             <div class="col-xs-12">
                                 <view-reference-document identifier='item.text[0].identifier'></view-reference-document>
                             </div>
                         </div>
-                        <pre ng-if="::typeof(item.text)=='number'" style="white-space:pre-line" ng-style="{ direction : (item.text|direction:item.locale) }">
+                        <pre ng-if="::item.field=='number'" style="white-space:pre-line" ng-style="{ direction : (item.text|direction:item.locale) }">
                             {{item.text}}
                         </pre>
                     </div>
@@ -316,8 +316,8 @@
                                     <tr ng-repeat="item in countriesTexts">
                                         <td>{{::allRegionsMap[item.government].title|lstring}}</td>
                                         <td ng-repeat="lang in ['en', 'ar', 'fr', 'es', 'zh', 'ru']" class="tableexport-string">  
-
-                                            <pre ng-if="::item.text[lang] && item.field!='documentReferenceIDs' && item.field!='relevantDocuments' && typeof(item.text)!='number'"
+                                            
+                                            <pre ng-if="::item.text[lang] && item.field!='documentReferenceIDs' && item.field!='relevantDocuments' && item.field!='number'"
                                                 style="white-space:pre-line" ng-style="{ direction : (item.text|direction:lang) }">
                                                 {{item.text|lstring:lang}}
                                             </pre>
@@ -327,7 +327,7 @@
                                                     <i ng-show="file.name && file.url.indexOf('/api/v2013/documents/')<0">({{file.url}})</i>
                                                 </div>
                                             </div> 
-                                            <pre ng-if="::typeof(item.text)=='number' && item.text[lang]" style="white-space:pre-line" ng-style="{ direction : (item.text|direction:lang) }">
+                                            <pre ng-if="::item.field=='number' && item.text[lang]" style="white-space:pre-line" ng-style="{ direction : (item.text|direction:lang) }">
                                                 {{item.text|lstring:lang}}
                                             </pre>
                                         </td>                                        	
