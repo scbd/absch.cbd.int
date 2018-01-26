@@ -176,8 +176,9 @@ function(templateHtml, app, _, require, $) { 'use strict';
                     require(['json!'+baseUrl+'app-data/report-analyzer/'+reportType+'.json'], function(res){
 
                         var selection = _($scope.selectedQuestions).reduce(mapReduce(), {});
-
-                        var data =  _.filter(res, function(section) {
+                        //not sure why but if the result is edited it somehow gets stored with require and 
+                        //on the next use require gives the modified result. 
+                        var data =  _.filter(angular.copy(res), function(section) {
 
                                         section.questions = _.filter(section.questions, function(q) {
                                             return selection[q.key];
@@ -538,3 +539,4 @@ function(templateHtml, app, _, require, $) { 'use strict';
         };
     }]);
 });
+
