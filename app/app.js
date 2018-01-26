@@ -42,41 +42,7 @@ define(['angular', 'angular-sanitize', 'angular-loading-bar', 'angular-animate',
             var appVersion = $window.appVersion||'localhost';
             logglyLogger.fields({ realm: realm.value, appVersion: appVersion })
 
-            $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-                //padding route attributes to the rootscope
-                if (current.$$route && current.$$route.subTemplateUrl)
-                    $rootScope.subTemplateUrl = current.$$route.subTemplateUrlFull;
-            });
-
-            // todo: would be proper to change this to decorators of $location and $route
-            $location.update_path = function (path, keep_previous_path_in_history) {
-              if ($location.path() == path) return;
-
-              var routeToKeep = $route.current;
-              $rootScope.$on('$locationChangeSuccess', function () {
-                if (routeToKeep) {
-                  $route.current = routeToKeep;
-                  routeToKeep = null;
-                }
-              });
-
-              $location.path(path);
-              if (!keep_previous_path_in_history) $location.replace();
-            };
         }]);
-        // app.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
-        //     var original = $location.path;
-        //     $location.path = function (path, reload) {
-        //         console.log(path);
-        //         if (reload === false) {
-        //             var lastRoute = $route.current;
-        //             var un = $rootScope.$on('$locationChangeSuccess', function () {
-        //                 $route.current = lastRoute;
-        //                 un();
-        //             });
-        //         }
-        //         return original.apply($location, [path]);
-        //     };
-        // }])
+        
         return app;
     });
