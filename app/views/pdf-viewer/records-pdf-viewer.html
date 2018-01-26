@@ -1,4 +1,4 @@
-﻿<div ng-controller="pdfViewer" style="margin-left:20%;margin-right:20%">
+﻿<div ng-controller="pdfViewer" style="margin-left:10%;margin-right:10%">
 
     <style>
         pdfviewer canvas {
@@ -27,18 +27,6 @@
             </div>
         </div>
         <div class="row" style="background:#fff">
-            <div class="col-md-10" style="padding:0px;border-right: 1px solid #ddd">
-                <div class="file-viewer-preview file-preview">
-                    <div style="margin-left:50%;margin-top:5%;" ng-if="loading">
-                        <i class="fa fa-spin fa-3x fa-circle-o-notch" ></i> 
-                        <br/> loading pdf
-                    </div>
-                    <!-- <pdfjs-viewer src="{{ pdf.src }}"></pdfjs-viewer> -->
-                    <link rel="stylesheet" href="./viewer.css">
-                    <div id="viewPdf">
-                    </div>                        
-                </div>
-            </div>
             <div class="col-md-2">
                 <div class="" style="width:100%;">
                     <br> File Name : {{pdf.fileName|uppercase}}
@@ -49,8 +37,20 @@
                     </a>
                     <br>
                     <br> View in
-                    <span ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']" ng-if="lang!=pdfLocale">
+                    <span ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']">
                         <a ng-href="#" ng-click="loadLangPdf(lang)">{{lang}}</a> | </span>
+                </div>
+            </div>
+            <div class="col-md-10" style="padding:0px;border-right: 1px solid #ddd">
+                <div class="file-viewer-preview file-preview">
+                    <div style="margin-left:50%;margin-top:5%;" ng-if="loading">
+                        <i class="fa fa-spin fa-3x fa-circle-o-notch" ></i> 
+                        <br/> loading pdf
+                    </div>
+                    <!-- <pdfjs-viewer src="{{ pdf.src }}"></pdfjs-viewer> -->
+                    <link rel="stylesheet" href="./viewer.css">
+                    <div id="viewPdf">
+                    </div>                        
                 </div>
             </div>
         </div>
