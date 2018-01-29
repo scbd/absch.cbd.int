@@ -1,5 +1,5 @@
 ﻿
-define(['app', 'underscore', 'linqjs','bootbox'], function (app, _, Enumerable,bootbox) {
+define(['app', 'underscore', 'linqjs'], function (app, _, Enumerable) {
 
 	app.factory("htmlUtility", function() {
 		return {
@@ -20,9 +20,5 @@ define(['app', 'underscore', 'linqjs','bootbox'], function (app, _, Enumerable,b
 	app.factory('linqjs', [function() {
 		return Enumerable;
 	}])
-
-    app.factory('bootbox', [function() {
-		return bootbox;
-	}]);
 	
 });

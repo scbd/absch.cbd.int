@@ -7,10 +7,10 @@ define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters',
     function (app, _) {
         "use strict";
 
-        app.controller("registerRecordList", ["$timeout", "commonjs", "bootbox", "$http", "IWorkflows", "IStorage", '$rootScope',
+        app.controller("registerRecordList", ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
             'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", 
             "$element", "breadcrumbs", "localStorageService", "ngDialog", "appConfigService",
-            function ($timeout, commonjs, bootbox, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
+            function ($timeout, commonjs, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
                 $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, appConfigService) {
 
                 $scope.orderBy = ['-updatedOn'];

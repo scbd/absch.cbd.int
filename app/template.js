@@ -1,18 +1,16 @@
-define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
-    'angular-localizer', 'scbd-angularjs-services', 'scbd-angularjs-filters',
+define(['app', 'underscore', 'ng-breadcrumbs',  'moment',
     'scbd-branding/directives/footer',
     'views/directives/nav/portal-branding',
     'scbd-branding/directives/header/header',
-    'views/directives/nav/portal-nav',
-    'ngAria', 'angular-animate', 'toastr', 'moment',
-    'views/help/info-bar'
-], function(app, _) {
+    'views/directives/nav/portal-nav'
+], function (app, _) {
     'use strict';
 
+
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
-        '$location','$anchorScroll', 'breadcrumbs', 'toastr', '$route',
-        'cfgUserNotification','$window', '$element','localStorageService', 'appConfigService', 'LogglyLogger', 'locale',
-        function($scope, $rootScope, showHelp, $location, $anchorScroll, breadcrumbs, toastr, $route, cfgUserNotification, 
+        '$location', '$anchorScroll', 'breadcrumbs', 'toastr', '$route',
+        '$window', '$element', 'localStorageService', 'appConfigService', 'LogglyLogger', 'locale',
+        function ($scope, $rootScope, showHelp, $location, $anchorScroll, breadcrumbs, toastr, $route,
             $window, $element, localStorageService, appConfigService, logglyLogger, locale
         ) {
 
@@ -23,23 +21,23 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             $scope.$root.pageTitle = {
                 text: ""
             };
-            
+
             //html body attributes lang
             $scope.lang = locale;
             //set default moment lang
             var lang = locale;
-            if(lang=='zh')
-                lang= 'zh-cn'; //moment has two ZH, use ZH-CN
+            if (lang == 'zh')
+                lang = 'zh-cn'; //moment has two ZH, use ZH-CN
             moment.lang(lang);
-            if(lang != 'en')
+            if (lang != 'en')
                 require(['css!/app/css/translation.css']);
-            if(lang == 'ar'){
+            if (lang == 'ar') {
                 require(['css!libs/bootstrap-rtl/dist/css/bootstrap-rtl.css']);
             }
 
-            var basePath = (angular.element('base').attr('href')||'').replace(/\/+$/g, '');
-            $rootScope.$on('$routeChangeSuccess', function(){
-                $window.ga('set',  'page', basePath+$location.path());
+            var basePath = (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
+            $rootScope.$on('$routeChangeSuccess', function () {
+                $window.ga('set', 'page', basePath + $location.path());
                 $window.ga('send', 'pageview');
             });
             // $scope.goHome               = function() { $location.path('/'); };
@@ -48,7 +46,7 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             //
             //
             //============================================================
-            $scope.toggleSideBar = function() {
+            $scope.toggleSideBar = function () {
                 $element.find("#wrapper").toggleClass("toggled");
             }
 
@@ -58,7 +56,7 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             //
             //
             //============================================================
-            $scope.gotoAnchor = function(x) {
+            $scope.gotoAnchor = function (x) {
                 var newHash = 'anchor' + x;
                 if ($location.hash() !== newHash) {
                     // set the $location.hash to `newHash` and
@@ -71,7 +69,7 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
                 }
             };
 
-            $scope.$root.getRoleName = function(roleName) {
+            $scope.$root.getRoleName = function (roleName) {
                 console.warn('Depriciated, use appConfigService.getRoleName');
                 if (roleName) {
                     return appConfigService.getRoleName(roleName);
@@ -87,7 +85,7 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             //
             //
             //============================================================
-            $scope.getClass = function(path) {
+            $scope.getClass = function (path) {
                 if ($location.path().substr(0, path.length) == path) {
                     return true;
                 } else {
@@ -117,7 +115,7 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
                 $scope.env_name = "TRAINING";
             }
 
-            $scope.feedbackHelp = function() {
+            $scope.feedbackHelp = function () {
                 if ($scope.showHelp.show)
                     showSimpleToast("Help information is turned on.");
 
@@ -125,7 +123,7 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
                     showSimpleToast("Help information is turned off.");
             };
 
-            $scope.feedbackGlossary = function() {
+            $scope.feedbackGlossary = function () {
                 if ($scope.showHelp.glossary)
                     showSimpleToast("Glossary is turned on.");
 
@@ -140,23 +138,23 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
             //======================================================
 
 
-            $rootScope.$on("showSimpleToast", function(evt, msg) {
+            $rootScope.$on("showSimpleToast", function (evt, msg) {
                 showSimpleToast(msg);
 
             });
 
-            $scope.$on('signOut', function(evt, data) {
+            $scope.$on('signOut', function (evt, data) {
                 $window.location.reload();
             });
 
-            if(cfgUserNotification){
-                cfgUserNotification
-                .notificationUrls = {
-                                    documentNotificationUrl     : '/register/requests/',
-                                    viewAllNotificationUrl      : '/register/requests',
-                                    documentMessageUrl          : '/mailbox/'
-                                };
-            }
+            // if(cfgUserNotification){
+            //     cfgUserNotification
+            //     .notificationUrls = {
+            //                         documentNotificationUrl     : '/register/requests/',
+            //                         viewAllNotificationUrl      : '/register/requests',
+            //                         documentMessageUrl          : '/mailbox/'
+            //                     };
+            // }
 
             function showSimpleToast(msg) {
                 toastr.info(msg);
@@ -164,10 +162,10 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
 
 
 
-            $rootScope.$on('event:server-pushNotification', function(evt,pushNotification){
-                if(pushNotification.type == 'documentNotification'){
+            $rootScope.$on('event:server-pushNotification', function (evt, pushNotification) {
+                if (pushNotification.type == 'documentNotification') {
                     // toastr.info(data.message);
-                    if(pushNotification.data && pushNotification.data.realm == appConfigService.currentRealm){
+                    if (pushNotification.data && pushNotification.data.realm == appConfigService.currentRealm) {
                         localStorageService.remove('governmentFacets');
                         localStorageService.remove('searchFilters');
                     }
@@ -177,75 +175,82 @@ define(['app', 'underscore', 'ng-breadcrumbs','angular-animate',
 
 
             function updateSize() {
-                $rootScope.$applyAsync(function(){
+                $rootScope.$applyAsync(function () {
                     $rootScope.deviceSize = $('.device-size:visible').attr('size');
                 });
             }
-            updateSize();            
+            updateSize();
             angular.element($window).on('resize', updateSize);
-        //============================================================
-        //
-        //
-        //============================================================
-        $rootScope.$watch('user', _.debounce(function(user) {
+            //============================================================
+            //
+            //
+            //============================================================
+            $rootScope.$watch('user', _.debounce(function (user) {
 
-            if (!user)
-                return;
+                if (!user)
+                    return;
 
-            require(["_slaask"], function(_slaask) {
+                require(["_slaask"], function (_slaask) {
 
-                if (user.isAuthenticated) {
-                    _slaask.identify(user.name, {
-                        'user-id' : user.userID,
-                        'name' : user.name,
-                        'email' : user.email,
-                    });
+                    if (user.isAuthenticated) {
+                        _slaask.identify(user.name, {
+                            'user-id': user.userID,
+                            'name': user.name,
+                            'email': user.email,
+                        });
 
-                    if(_slaask.initialized) {
-                        if(_slaask.slaaskSendUserInfos)
-                            _slaask.slaaskSendUserInfos();
+                        if (_slaask.initialized) {
+                            if (_slaask.slaaskSendUserInfos)
+                                _slaask.slaaskSendUserInfos();
+                        }
                     }
-                }
 
-                if(!_slaask.initialized) {
-                    _slaask.init('8b989bd6ee0cf49384761d4f86ddd945');
-                    _slaask.initialized = true;
-                }
-            });
-           
-            var fields = logglyLogger.fields()
-            fields.user = user.userID;
-            logglyLogger.fields(fields);
-            
-        }, 1000));
+                    if (!_slaask.initialized) {
+                        _slaask.init('8b989bd6ee0cf49384761d4f86ddd945');
+                        _slaask.initialized = true;
+                    }
+                });
+
+                var fields = logglyLogger.fields()
+                fields.user = user.userID;
+                logglyLogger.fields(fields);
+
+            }, 1000));
 
         }
     ]);
     app.directive(
-            "mAppLoading",
-            function( $animate ) {
-                // Return the directive configuration.
-                return({
-                    link: link,
-                    restrict: "C"
-                });
-                // I bind the JavaScript events to the scope.
-                function link( scope, element, attributes ) {
-                    // Due to the way AngularJS prevents animation during the bootstrap
-                    // of the application, we can't animate the top-level container; but,
-                    // since we added "ngAnimateChildren", we can animated the inner
-                    // container during this phase.
-                    // --
-                    // NOTE: Am using .eq(1) so that we don't animate the Style block.
-                    $animate.leave( element.children().eq( 1 ) ).then(
-                        function cleanupAfterAnimation() {
-                            // Remove the root directive element.
-                            element.remove();
-                            // Clear the closed-over variable references.
-                            scope = element = attributes = null;
-                        }
-                    );
-                }
+        "mAppLoading",
+        function ($animate) {
+            // Return the directive configuration.
+            return ({
+                link: link,
+                restrict: "C"
+            });
+            // I bind the JavaScript events to the scope.
+            function link(scope, element, attributes) {
+                // Due to the way AngularJS prevents animation during the bootstrap
+                // of the application, we can't animate the top-level container; but,
+                // since we added "ngAnimateChildren", we can animated the inner
+                // container during this phase.
+                // --
+                // NOTE: Am using .eq(1) so that we don't animate the Style block.
+                $animate.leave(element.children().eq(1)).then(
+                    function cleanupAfterAnimation() {
+                        // Remove the root directive element.
+                        element.remove();
+                        // Clear the closed-over variable references.
+                        scope = element = attributes = null;
+                    }
+                );
             }
-        );
+        }
+    );
+
+    require(['angular-animate', 'scbd-angularjs-filters','scbd-angularjs-services',
+        'angular-localizer',
+        'ngAria', 'angular-animate'
+    ], function () {
+
+    })
 });
