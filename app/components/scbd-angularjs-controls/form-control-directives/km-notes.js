@@ -22,9 +22,9 @@ define(['app','text!./km-notes.html','angular'], function(app,template,angular) 
                 $scope.timestamp = Date.now();
                 $scope.skipLoad = false;
                 $scope.texts = [];
-                $scope.$watch('binding', $scope.load);
                 $scope.$watch('binding', function() {
                     ngModelController.$setViewValue($scope.binding);
+                    $scope.load();
                 });
 
             },
