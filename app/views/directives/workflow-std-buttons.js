@@ -362,6 +362,7 @@ define(['app', 'text!views/directives/workflow-std-buttons.html',
                                            return storage.drafts.put(document.header.identifier, document);
                                         })
                                         .then(function(draftInfo){
+                                           $location.search('workflow', null);
                                            return afterDraftSaved(draftInfo);
                                         }).catch(function(error){
                                             $scope.$emit("documentError", { action: "saveDraft", error: error })
@@ -386,7 +387,7 @@ define(['app', 'text!views/directives/workflow-std-buttons.html',
                             $('form').filter('.dirty').removeClass('dirty');
                             $scope.$emit("updateOrignalDocument", $scope.getDocumentFn());
                             documentDraftSaved(draftInfo);
-                            $location.path(($location.path().replace(/\/new/, '/'+ draftInfo.identifier + '/edit')));
+                            $location.path($location.url().replace(/\/new/, '/'+ draftInfo.identifier + '/edit'));
                             return draftInfo;
                         }
 
