@@ -45,7 +45,11 @@ define(['app','text!./km-notes.html','angular'], function(app,template,angular) 
                     });
 
                     var oBinding = $scope.binding || [];
-
+                    try{
+                        oBinding = JSON.parse(oBinding);
+                    }
+                    catch(err){}
+                    
                     $scope.texts = [];
 
                     angular.forEach(oBinding, function(text, i) {
@@ -83,7 +87,7 @@ define(['app','text!./km-notes.html','angular'], function(app,template,angular) 
                         }
                     }
 
-                    $scope.binding = !$.isEmptyObject(oNewBinding) ? oNewBinding : undefined;
+                    $scope.binding = !$.isEmptyObject(oNewBinding) ? JSON.stringify(oNewBinding) : undefined;
                     $scope.skipLoad = true;
                 };
 
