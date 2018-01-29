@@ -1,11 +1,11 @@
-define(['app','text!./km-notes.html','angular'], function(app,template,angular) {
+define(['app','text!./km-notes.html','angular', 'scbd-angularjs-services/authentication'], function(app,template,angular) {
 
     //============================================================
     //
     //
     //============================================================
     //NOTE: Requires a user!
-    app.directive('kmNotes', function($http, $filter) {
+    app.directive('kmNotes', ['$http', '$filter', 'authentication', function($http, $filter, authentication) {
         return {
             restrict: 'EAC',
             template: template,
@@ -38,18 +38,12 @@ define(['app','text!./km-notes.html','angular'], function(app,template,angular) 
                         return;
                     }
 
-                    $http.get("/api/v2013/authentication/user/", {
-                        cache: true
-                    }).success(function(data) {
-                        $scope.user = data;
-                    });
-
                     var oBinding = $scope.binding || [];
                     try{
                         oBinding = JSON.parse(oBinding);
                     }
                     catch(err){}
-                    
+
                     $scope.texts = [];
 
                     angular.forEach(oBinding, function(text, i) {
@@ -72,23 +66,26 @@ define(['app','text!./km-notes.html','angular'], function(app,template,angular) 
                 //
                 //==============================
                 $scope.save = function() {
-                    var oNewBinding = [];
-                    var oText = $scope.texts;
+                    authentication.getUser()
+                    .then(function(user){
+                        var oNewBinding = [];
+                        var oText = $scope.texts;
 
-                    angular.forEach(oText, function(text, i) {
-                        if ($.trim(text.value) !== "")
-                            oNewBinding.push($.trim(text.value));
-                    });
+                        angular.forEach(oText, function(text, i) {
+                            if ($.trim(text.value) !== "")
+                                oNewBinding.push($.trim(text.value));
+                        });
 
-                    if ($scope.newtext) {
-                        if ($.trim($scope.newtext) !== "") {
-                            var timestamp = $filter('date')(Date.now(), 'medium');
-                            oNewBinding.push("[ " + $scope.user.name + " | " + timestamp + " ] - " + $.trim($scope.newtext));
+                        if ($scope.newtext) {
+                            if ($.trim($scope.newtext) !== "") {
+                                var timestamp = $filter('date')(Date.now(), 'medium');
+                                oNewBinding.push("[ " + user.name + " | " + timestamp + " ] - " + $.trim($scope.newtext));
+                            }
                         }
-                    }
 
-                    $scope.binding = !$.isEmptyObject(oNewBinding) ? JSON.stringify(oNewBinding) : undefined;
-                    $scope.skipLoad = true;
+                        $scope.binding = !$.isEmptyObject(oNewBinding) ? JSON.stringify(oNewBinding) : undefined;
+                        $scope.skipLoad = true;
+                    });
                 };
 
                 //==============================
@@ -99,5 +96,5 @@ define(['app','text!./km-notes.html','angular'], function(app,template,angular) 
                 };
             }]
         };
-    });
+    }]);
 });
