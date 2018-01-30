@@ -1,17 +1,14 @@
 define(['app', 'underscore', 'ng-breadcrumbs',  'moment',
-    'scbd-branding/directives/footer',
-    'views/directives/nav/portal-branding',
-    'scbd-branding/directives/header/header',
-    'views/directives/nav/portal-nav'
+'scbd-branding/directives/header/xuser-notification-config-service'
 ], function (app, _) {
     'use strict';
 
 
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
         '$location', '$anchorScroll', 'breadcrumbs', 'toastr', '$route',
-        '$window', '$element', 'localStorageService', 'appConfigService', 'LogglyLogger', 'locale',
+        '$window', '$element', 'localStorageService', 'appConfigService', 'LogglyLogger', 'locale', '$compile',
         function ($scope, $rootScope, showHelp, $location, $anchorScroll, breadcrumbs, toastr, $route,
-            $window, $element, localStorageService, appConfigService, logglyLogger, locale
+            $window, $element, localStorageService, appConfigService, logglyLogger, locale, $compile
         ) {
 
             //$scope.ACCOUNTS_URL = apiUrl.devAccountsUrl();
@@ -217,6 +214,21 @@ define(['app', 'underscore', 'ng-breadcrumbs',  'moment',
 
             }, 1000));
 
+
+
+            require(['angular-animate', 'scbd-angularjs-filters','scbd-angularjs-services',
+                'angular-localizer',
+                'ngAria', 'angular-animate',
+                'scbd-branding/directives/footer',
+                'views/directives/nav/portal-branding',
+                'scbd-branding/directives/header/header',
+                'views/directives/nav/portal-nav'], function () {
+                    $('#divHeader').append('<scbd-header></scbd-header><portal-branding></portal-branding><portal-nav></portal-nav>');
+                    $('#divFooter').append('<scbd-footer></scbd-footer>')
+                    $compile($('#divHeader').contents())($scope);
+                    $compile($('#divFooter').contents())($scope);
+
+            })
         }
     ]);
     app.directive(
@@ -247,10 +259,4 @@ define(['app', 'underscore', 'ng-breadcrumbs',  'moment',
         }
     );
 
-    require(['angular-animate', 'scbd-angularjs-filters','scbd-angularjs-services',
-        'angular-localizer',
-        'ngAria', 'angular-animate'
-    ], function () {
-
-    })
 });
