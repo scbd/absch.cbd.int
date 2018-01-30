@@ -40,9 +40,9 @@
 					$scope.init();
 			},
 			controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows", "locale", "$sce",
+				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows", "locale",
 				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows, appLocale, $sce) {
+					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows, appLocale) {
 					
 
 					if(!$scope.locale)
