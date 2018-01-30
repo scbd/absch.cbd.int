@@ -118,10 +118,7 @@
     <div class="device-size visible-sm" size="sm" style="height:0px;width:0px"></div>
     <div class="device-size visible-md" size="md" style="height:0px;width:0px"></div>
     <div class="device-size visible-lg" size="lg" style="height:0px;width:0px"></div>
-    
-    <scbd-header></scbd-header>
-    <portal-branding></portal-branding>
-    <portal-nav></portal-nav>
+    <div id="divHeader"></div>
 
     <div class="container-full page-content" style="min-height:1000px;" ng-class="{'training-bg':!production_env}">
         <ng-view autoscroll="true"></ng-view>
@@ -134,7 +131,8 @@
                 </div>
             </div>
     </div>
-    <scbd-footer></scbd-footer>
+    <div id="divFooter"></div>
+    
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
