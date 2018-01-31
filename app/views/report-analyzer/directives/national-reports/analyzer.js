@@ -396,9 +396,12 @@ function(templateHtml, app, _, require, $) { 'use strict';
                     var item = _.head(countriesTexts)
                     if(item && item.field){
                         var field = item.field;
+                        $scope.questionType = field.field;
                         var subTitle = _.find(question.additionalInfo, function(info){return info.field == field})
-                        if(subTitle)
+                        if(subTitle){
                             $scope.subTitle = subTitle.title;
+                            $scope.questionType = subTitle.field;
+                        }
                     }
                     $scope.currentQuestion = question;
                     $scope.countriesTexts  = countriesTexts;
