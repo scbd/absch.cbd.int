@@ -540,7 +540,6 @@
                     { "value": "false","title": "No"}
                 ],
                 "additionalInfo" : [
-                    {"field" : "additionalInfo", "title" : "Please provide further information on how your country is encouraging the use of cost-effective communication tools and systems.", "type" : "string"},
                     {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
                     {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
                 ]
@@ -557,6 +556,7 @@
                     { "value": "false","title": "No"}
                 ],
                 "additionalInfo" : [
+                    {"field" : "additionalInfo", "title" : "Please provide further information on how your country is encouraging the use of cost-effective communication tools and systems.", "type" : "string"},                    
                     {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
                     {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
                 ]
