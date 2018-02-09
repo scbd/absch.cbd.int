@@ -7,7 +7,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
     //
     //
     //==============================================
-    app.directive('nationalReportAnalyzerQuestion', ['$timeout', function($timeout) {
+    app.directive('nationalReportAnalyzerQuestion', ['$timeout', 'realm', function($timeout, realm) {
         return {
             restrict : 'E',
             replace : true,
@@ -22,6 +22,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
             },
             link: function ($scope, el, attr, nrAnalyzer) {
 
+                $scope.realm = realm.value
                 initTooltips();
 
                 //==============================================

@@ -1,4 +1,4 @@
-<div class="question" style="margin-bottom:10px;overflow-y:scroll" ng-class="{ highlight : previousReports }" ng-disabled="!fullSum && question.type!='header'">
+<div class="question" style="margin-bottom:10px;overflow-y:scroll" ng-class="{ highlight : previousReports }" ng-disabled="realm!= 'ABS' && !fullSum && question.type!='header'">
 
     <span class="pull-right"  ng-if="::previousQuestionsMapping[question.key]">
         <span ng-switch="::previousQuestionsMapping[question.key][0]">
