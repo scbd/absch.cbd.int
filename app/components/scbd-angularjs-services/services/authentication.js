@@ -170,7 +170,7 @@ define(['app', './apiUrl'], function(app) {
                 return $http.get('/api/v2013/authentication/user', {
                     headers: {
                         Authorization: "Ticket " + authenticationToken.token
-                    }, cache:true
+                    }, cache:false
                 }).then(function(r) {
                     return r.data;
                 });
@@ -205,7 +205,7 @@ define(['app', './apiUrl'], function(app) {
                 return $q.all([token, $http.get('/api/v2013/authentication/user', {
                     headers: {
                         Authorization: "Ticket " + token.authenticationToken
-                    }, cache:true
+                    }, cache:false
                 })]);
 
             }).then(function(res) {
