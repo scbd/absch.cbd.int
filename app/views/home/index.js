@@ -1,10 +1,11 @@
-define(['app','js/common','moment',
+define(['app','moment','js/common',
     'views/directives/home-country-dashboard-directive',
-    'views/directives/map/home-map'    
-    ], function (app) {
-    app.controller('IndexController', ['$scope', '$http', '$window', '$cookies','realm', '$filter','$rootScope','commonjs','$element', '$timeout', '$compile', 
-    function ($scope, $http, $window, $cookies, realm, $filter, $rootScope, commonjs,$element, $timeout, $compile) {
-        
+    'views/directives/map/home-map',
+    'angular-cookies'
+], function (app, moment) {
+    app.controller('IndexController', ['$scope',
+    function ($scope) {
+
         $scope.locale = 'en';
         var today= moment.utc();
         var entry= moment.utc("2014-10-12");

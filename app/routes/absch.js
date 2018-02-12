@@ -1,8 +1,7 @@
 'use strict';
 define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-services', 'js/services', 'js/filters',
- 'services/app-config-service'], function (app, _) {
-      
-    app.value("realm", {value:"ABS"});
+ 'services/app-config-service', 'angular-route', 'services/app-config-service'], function (app, _) {
+
     app.value("showHelp", { value : false });
 
     app.provider("realm", {

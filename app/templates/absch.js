@@ -1,7 +1,20 @@
-define(['app', 'underscore', 'ng-breadcrumbs',  'moment',
-'scbd-branding/directives/header/xuser-notification-config-service'
-], function (app, _) {
+define(['app', 'underscore', 'moment', 'angular', 'toastr', 'ng-breadcrumbs', 'bootstrap', 'routes/absch', 'angular-loading-bar', 'angular-animate', 'scbd-branding/directives/header/xuser-notification-config-service'
+], function (app, _, moment, angular) {
     'use strict';
+
+    app.config(["toastrConfig", function(toastrConfig) {
+        angular.extend(toastrConfig, {
+            autoDismiss: true,
+            containerId: 'toast-container',
+            maxOpened: 1,
+            newestOnTop: true,
+            positionClass: 'toast-top-right',
+            preventDuplicates: true,
+            preventOpenDuplicates:false,
+            target: 'body',
+            timeOut: 2000,
+            });
+        }]);
 
 
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
@@ -259,4 +272,6 @@ define(['app', 'underscore', 'ng-breadcrumbs',  'moment',
         }
     );
 
+
+    angular.bootstrap(document, [app.name]);
 });
