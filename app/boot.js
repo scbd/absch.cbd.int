@@ -83,6 +83,8 @@ require.config({
         'ngStorage'                     : { 'deps': ['angular'] },
         'angular-flex'                  : { 'deps': ['angular'] },
         'ng-breadcrumbs'                : { 'deps': ['angular'] },
+        'ngSmoothScroll'                : { 'deps': ['angular'] },
+        'angular-joyride'               : { 'deps': ['angular', 'angular-animate'] },
         'scbd-angularjs-services'       : { 'deps': ['angular']},
         'scbd-angularjs-filters'        : { 'deps': ['angular']},
         'scbd-angularjs-controls'       : { 'deps': ['angular', 'angular-sanitize', 'angular-localizer']},
@@ -121,16 +123,3 @@ require.config({
 });
 
 define("_slaask", window._slaask);
-
-require(['angular', 'angular-flex', 'angular-route', 'angular-cookies',  'bootstrap', 'domReady'], function (ng) {
-    // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
-
-    require(['domReady!', 'app_routes', 'template'], function (document) {
-        ng.bootstrap(document, ['app']);
-        try {
-        ng.resumeBootstrap();
-        } catch(err) {
-          console.log('err', err);
-        }
-    });
-});
