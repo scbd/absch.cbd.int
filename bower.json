@@ -7,7 +7,7 @@
     "angular-animate": "1.4",
     "angular-block-ui": "0.2.2",
     "angular-cookies": "1.4",
-    "angular-flex": "https://github.com/scbd/angular-flex.git#666854e543af4bc68f00a537f17c665ae9e90028",
+    "angular-flex": "git://github.com/scbd/angular-flex.git#2.1.0",
     "angular-gravatar": "0.4.2",
     "angular-intro.js": "1.2.4",
     "angular-loading-bar": "https://github.com/chieffancypants/angular-loading-bar.git#7db32aed5260560a5d4bbdaf4ea7365072d41ec8",
@@ -70,6 +70,7 @@
     "scbd-angularjs-services": "master",
     "angular-joyride": "1.0.2",
     "angular-sanitize": "1.4",
-    "pdfobject": "d37c492c02"
+    "pdfobject": "d37c492c02",
+    "js-xlsx": "^0.9.12"
   }
 }
