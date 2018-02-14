@@ -1,0 +1,60 @@
+@import url('http://fonts.googleapis.com/css?family=Roboto:600');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,600,900');
+
+
+
+.bch-brand { 
+    background-image:url('/app/img/bch.svg');
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+@media (max-width: 768px) {
+    .bch-brand-xs { 
+        background-image:url('/app/img/bch.svg');
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+}
+
+.bch-header > h1 {
+    margin: 0px;
+    color:white;
+    min-height:80px;
+    line-height:80px;
+    padding-left:25px;
+    text-shadow: 2px 2px 3px #777;
+    font-size: 32px;
+    font-weight: 900;
+    font-family: Lato, Arial Black;
+}
+
+.bch-header > .navbar-default {
+    font-family: Lato, Arial;
+    font-weight: 400;
+    font-size: 18px;
+    background-color: #585971;
+    border: none;
+    border-radius: 0px;
+}
+.bch-header > .navbar-default .navbar-brand {
+    font-weight: 600;
+    color: white;
+}
+
+.bch-header > .navbar-default .navbar-nav>li>a {
+    color: white;
+}
+
+.bch-header > .navbar-default .navbar-nav>.active {
+}
+.bch-header > .navbar-default .navbar-brand.active, 
+.bch-header > .navbar-default .navbar-nav>.active>a {
+    font-weight: 600;
+    background-color: #0b0b3e;
+}
+
+.bch-header > .navbar-default .navbar-brand:hover, 
+.bch-header > .navbar-default .navbar-nav>li>a:hover {
+    background-color: #0b0b3e;
+}
