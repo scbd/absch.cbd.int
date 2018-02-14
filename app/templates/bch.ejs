@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" app-version="<%=appVersion%>">
+
+<head>
+    <base href="<%=baseUrl%>">
+    <meta charset="utf-8">
+    <title>Biosafety Clearing-House</title>
+    <meta name="description" content="The Biosafety Clearing-House">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/app/img/favicon.png">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="/app/libs/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="/app/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/app/libs/bootstrap-datepicker/css/datepicker.css" >
+    <link rel="stylesheet" type="text/css" href="/app/libs/angular-toastr/dist/angular-toastr.min.css" />
+    <link rel="stylesheet" type="text/css" href="/app/css/km.css">
+    <link rel="stylesheet" type="text/css" href="/app/css/template.css">
+    <link rel="stylesheet" type="text/css" href="/app/css/bch/template.css">
+
+
+    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body ng-controller="BchTemplateController" id="top" lang="{{lang}}">
+    <iframe   id="authenticationFrame" style="display:none"></iframe>
+    <script>
+        var domain = document.location.hostname.replace(/[^\.]+\./, '');
+         if(domain=='localhost') domain = 'cbddev.xyz';
+        document.getElementById('authenticationFrame').src = 'https://accounts.'+domain+'/app/authorize.html';
+    </script>
+
+    <scbd-header></scbd-header>
+    
+    <bch-header></bch-header>
+
+    <div class="container-full page-content">
+        <ng-view autoscroll="true"></ng-view>
+    </div>
+
+    <bch-footer></bch-footer>
+
+    <scbd-footer></scbd-footer>
+    
+    <div class="device-size visible-xs" size="xs" style="height:0px;width:0px"></div>
+    <div class="device-size visible-sm" size="sm" style="height:0px;width:0px"></div>
+    <div class="device-size visible-md" size="md" style="height:0px;width:0px"></div>
+    <div class="device-size visible-lg" size="lg" style="height:0px;width:0px"></div>
+
+    <script src="/app/libs/requirejs/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>
+    <script>require(['templates/bch'])</script>
+    
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- <script async src="https://cdn.slaask.com/chat.js" onload=" window._slaask.createScriptTag = function (url) { var t = {}; require([url], function() { t.onload(); }); return t; }; "></script> 
+     --> 
+
+</body>
+
+</html>

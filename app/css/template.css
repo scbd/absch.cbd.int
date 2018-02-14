@@ -95,10 +95,6 @@ background-color: white;
     background-color: #428bca!important;
 }
 
-.nav> li> a {
-    padding-top: 6px;
-}
-
 .badge-notify {
     background: red;
     position: relative;

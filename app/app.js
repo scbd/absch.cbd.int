@@ -1,6 +1,5 @@
 'use strict';
-define(['angular-flex', 'angular-sanitize',
- 'text-angular', 'ngSmoothScroll', 'angular-loggly-logger'],
+define(['angular-flex', 'angular-sanitize', 'angular-loggly-logger'],
     function(angular) {
 
         var app = angular.module('app', angular.defineModules([

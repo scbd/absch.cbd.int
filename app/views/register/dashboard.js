@@ -1,19 +1,19 @@
-define(['app', 'underscore',
+define(['app', 'underscore', 'angular', 
  'services/role-service', 'services/app-config-service',
  'views/register/user-preferences/user-preference-filter',
  'views/register/directives/register-top-menu', 'toastr','scbd-angularjs-services'],
-function(app, _) {
+function(app, _, ng) {
     "use strict";
-    app.controller("DashboardController", ["$rootScope", "$scope", "IStorage", "roleService", "$compile", "realm", "$q",
-                    "$routeParams", '$location', "$filter", "$http", "$element","$timeout", 'toastr', 'appConfigService',
+    return ["$rootScope", "$scope", "IStorage", "roleService", "$compile", "realm", "$q",
+                    "$routeParams", '$location', "$filter", "$http", "$timeout", 'toastr', 'appConfigService',
                     'IWorkflows',
         function($rootScope, $scope, storage, roleService, $compile, realm, $q, $routeParams, 
-                $location, $filter, $http, $element, $timeout, toastr, appConfigService, IWorkflows) {
+                $location, $filter, $http, $timeout, toastr, appConfigService, IWorkflows) {
 
             var schemaFacets = {};
 
             $timeout(function(){
-                $element.find('[data-toggle="tooltip"]').tooltip();                
+                ng.element('ng-view').find('[data-toggle="tooltip"]').tooltip();                
             },50);
 
 
@@ -139,5 +139,5 @@ function(app, _) {
                 }
             init();
         }
-    ]);
+    ];
 });
