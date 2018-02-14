@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-if(/Safari/.test(navigator.userAgent)) { console.log = function(){}; }
+if(/Safari/.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)) { console.log = function(){}; }
 
 require.config({
     waitSeconds: 120,
@@ -28,7 +28,7 @@ require.config({
         'angular-animate'           : 'libs/angular-animate/angular-animate.min',
         'view-abs-checkpoint'       : 'views/forms/view/view-abs-checkpoint.directive',
         'text-angular-sanitize'     : 'libs/textAngular/dist/textAngular-sanitize.min',
-        'text-angular'              : 'libs/textAngular/dist/textAngular.min',
+        'text-angular'              : 'libs/textAngular/src/textAngular',
         'cbd-forums'                : 'libs/cbd-forums/cbd-forums',
         'angular-flex'              : 'libs/angular-flex/angular-flex',
         'ng-breadcrumbs'            : 'libs/ng-breadcrumbs/dist/ng-breadcrumbs.min',
@@ -80,6 +80,7 @@ require.config({
         'text-angular-sanitize'         : { 'deps': ['angular', 'angular-sanitize']},
         'cbd-forums'                    : { 'deps': ['angular', 'bootstrap']},
         'ngStorage'                     : { 'deps': ['angular'] },
+        'ngInfiniteScroll'              : { 'deps': ['angular'] },
         'angular-flex'                  : { 'deps': ['angular'] },
         'ng-breadcrumbs'                : { 'deps': ['angular'] },
         'ngSmoothScroll'                : { 'deps': ['angular'] },
