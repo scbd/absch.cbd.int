@@ -16,29 +16,29 @@ define(['require', 'app', 'underscore', 'angular-route', 'services/app-config-se
         $routeProvider.whenAsync = whenAsync;
 
         $routeProvider.
-               whenAsync('/',                                { templateUrl: 'views/home/bch.html',              controller: true, label:'The BCH'}).
+               whenAsync('/',                                { templateUrl: 'views/home/bch.html',              controller: function() { return importQ('views/home/bch'); }, label:'The BCH'}).
                
-               whenAsync('/signin',                          { templateUrl: 'views/shared/login-dialog.html',   controller: true, label:'Sign in'}).
+               whenAsync('/signin',                          { templateUrl: 'views/shared/login-dialog.html',   controller: function() { return importQ('views/shared/login-dialog'); }, label:'Sign in'}).
 
-               whenAsync('/register',                        { templateUrl: 'views/register/dashboard.html',    controller: true, label:'Management Center',  param:'true' }).
-               whenAsync('/dashboard',                       { redirectTo:  '/register/dashboard'}).
-               whenAsync('/register/dashboard',              { templateUrl: 'views/register/dashboard.html',    controller: true, label:'Dashboard',  param:'true', resolve : { user : securize() }}).
+               whenAsync('/register',                               { templateUrl: 'views/register/dashboard.html',    controller: function() { return importQ('views/register/dashboard'); }, label:'Management Center',  param:'true' }).
+               whenAsync('/dashboard',                              { redirectTo:  '/register/dashboard'}).
+               whenAsync('/register/dashboard',                     { templateUrl: 'views/register/dashboard.html',    controller: function() { return importQ('views/register/dashboard');   }, label:'Dashboard', resolve : { user : securize() }}).
+               whenAsync('/register/:document_type/status/:status', { templateUrl: 'views/register/record-list.html',  controller: function() { return importQ('views/register/record-list'); }, label:'Status',    resolve : { user : securize(null,true) }}).
 
-               whenAsync('/mailbox',                         { templateUrl: 'views/mailbox/inbox.html',         controller: true, label:'Mailbox', resolve : { user : securize() } }).
-               whenAsync('/mailbox/:mailId',                 { templateUrl: 'views/mailbox/inbox.html',         controller: true, label:'Mailbox', resolve : { user : securize() } }).
+               whenAsync('/mailbox',                         { templateUrl: 'views/mailbox/inbox.html',         controller: function() { return importQ('views/mailbox/inbox'); }, label:'Mailbox', resolve : { user : securize() } }).
+               whenAsync('/mailbox/:mailId',                 { templateUrl: 'views/mailbox/inbox.html',         controller: function() { return importQ('views/mailbox/inbox'); }, label:'Mailbox', resolve : { user : securize() } }).
 
                // BCH4 PAGES
-               whenAsync('/about/countryprofile.shtml',      { redirectTo:'/countries/:country' }).
-               whenAsync('/countries/:country',              { templateUrl: 'views/shared/cms-content.html', target:'http://bilodeaux7.local/about/countryprofile.shtml?country={country}', controller: true }).
-               whenAsync('/about/:subpath*?',                { templateUrl: 'views/shared/cms-content.html', target:'http://bilodeaux7.local/about/{subpath}',                              controller: true }).
-               whenAsync('/protocol/:subpath*?',             { templateUrl: 'views/shared/cms-content.html', target:'http://bilodeaux7.local/protocol/{subpath}',                           controller: true }).
-               whenAsync('/onlineconferences/:subpath*?',    { templateUrl: 'views/shared/cms-content.html', target:'http://bilodeaux7.local/onlineconferences/{subpath}',                  controller: true }).
+               whenAsync('/about/countryprofile.shtml',      { redirectTo:  '/countries/:country' }).
+               whenAsync('/countries/:country',              { templateUrl: 'views/shared/cms-content.html', target:'http://bilodeaux7.local/about/countryprofile.shtml?country={country}', controller: function() { return importQ('views/shared/cms-content'); } }).
+               whenAsync('/about/:subpath*?',                { templateUrl: 'views/shared/cms-content.html', target:'http://bilodeaux7.local/about/{subpath}',                              controller: function() { return importQ('views/shared/cms-content'); } }).
+               whenAsync('/protocol/:subpath*?',             { templateUrl: 'views/shared/cms-content.html', target:'http://bilodeaux7.local/protocol/{subpath}',                           controller: function() { return importQ('views/shared/cms-content'); } }).
+               whenAsync('/onlineconferences/:subpath*?',    { templateUrl: 'views/shared/cms-content.html', target:'http://bilodeaux7.local/onlineconferences/{subpath}',                  controller: function() { return importQ('views/shared/cms-content'); } }).
 
                whenAsync('/help/forbidden',   { templateUrl: 'views/shared/403.html', label:'Forbidden'}).
                whenAsync('/help/not-found',   { templateUrl: 'views/shared/404.html', label:'Not found'}).
-               
-               
-               otherwise({ templateUrl: 'views/shared/404.html', label:'Page not found'});
+
+               otherwise({ templateUrl: baseUrl+'views/shared/404.html', label:'Page not found'});
     }]);
     
     //============================================================
@@ -49,33 +49,25 @@ define(['require', 'app', 'underscore', 'angular-route', 'services/app-config-se
 
         route = route || {};
 
-        var templateUrl = route.templateUrl;
-
         if(route.templateUrl && !/^\//.test(route.templateUrl)) {
             route.templateUrl = baseUrl+route.templateUrl;
         }
 
-        if(route.controller===true || route.resolveController) { // requirejs 
-
-            route.resolve = route.resolve || {};
-
-            route.resolve.lazyController = ['$q', function($q){
-                
-                var controllerModule = templateUrl.replace(/\.html$/, '');
-                
-                return $q(function(resolve, reject) {
-                    require([controllerModule], resolve, reject);
-                });
-            }];
-        }
-        else if(route.controller && angular.isFunction(route.controller)) { // Webpack
+        if(route.controller && angular.isFunction(route.controller)) { // Webpack
         
             var controllerFn = route.controller;
         
             route.resolve = route.resolve || {};
         
             route.resolve.lazyController = ['$injector', function($injector) {
-                return $injector.invoke(controllerFn, {});
+                
+                var result =  $injector.invoke(controllerFn, {});
+                
+                if(result.$inject) {
+                    result = $injector.invoke(result, {});
+                }
+                
+                return result;
             }];
         }
 
@@ -85,7 +77,7 @@ define(['require', 'app', 'underscore', 'angular-route', 'services/app-config-se
 
                 if(!lazyController) return;
 
-                var locals = angular.extend($route.current.locals, { $scope: $scope });
+                var locals = angular.extend({}, $route.current.locals, { $scope: $scope });
 
                 return $injector.instantiate(lazyController, locals);
             }];
@@ -96,6 +88,26 @@ define(['require', 'app', 'underscore', 'angular-route', 'services/app-config-se
         return this;
     }
     
+    //============================================================
+    //
+    //
+    //============================================================
+    function importQ(module) { // fake webpack lazyload import()
+        
+        var importFn = function($q) {
+            return $q(function(resolve, reject) {
+                require([module], resolve, function(e) { 
+                    console.error(e);
+                    reject(e);
+                });
+            });
+        };
+        
+        importFn.$inject = ['$q'];
+
+        return importFn;
+    }
+
     //============================================================
     //
     //
@@ -125,7 +137,6 @@ define(['require', 'app', 'underscore', 'angular-route', 'services/app-config-se
                     if (!$location.search().returnUrl)
                         $location.search({ returnUrl: $location.url() });
 
-                    
                     $location.url("/signin");
                     $location.search({ returnUrl: currentUrl });
                     

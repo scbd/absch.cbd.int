@@ -1,6 +1,5 @@
-define(['app',
-		'scbd-branding/directives/header/login'
-        ], function (app, moment) {
+define(['jquery' //'scbd-branding/directives/header/login' // <== buggy because of the "packages"
+], function ($) {
 
     return ["$scope", "$location", function ($scope, $location){
 
