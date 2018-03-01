@@ -1,7 +1,7 @@
-define(['app', 'lodash'], function(app, _) {
+define(['app', 'lodash', 'linqjs'], function(app, _, Enumerable) {
     'use strict';
 
-    app.factory('Thesaurus', ['linqjs', function(Enumerable) {
+    app.factory('Thesaurus', [function() {
         return {
             buildTree: function(terms) {
                 var oTerms = [];
@@ -55,20 +55,32 @@ define(['app', 'lodash'], function(app, _) {
     app.factory('realmService', ['$location', function($location){
        
             var productionRealms = {
-                urls: ['https://absch.cbd.int', 'https://chm.cbd.int', 'https://accounts.cbd.int'],
-                realms: ['ABS', 'CHM']
-            }
+                urls: [
+                    'https://absch.cbd.int', 
+                    'https://bch.cbd.int', 
+                    'https://chm.cbd.int', 
+                    'https://accounts.cbd.int'
+                ],
+                realms: ['ABS', 'BCH', 'CHM']
+            };
 
             var developmentRealms = {
-                urls: ['https://absch.cbddev.xyz', 'https://dev-chm.cbd.int', 'https://chm.cbddev.xyz', 'https://accounts.cbddev.xyz',
-                    'http://localhost:2010', 'http://localhost:2000', 'http://localhost:8000'],
-                realms: ['ABS-DEV', 'CHM-DEV']
-            }
+                urls: ['https://absch.cbddev.xyz', 
+                       'https://bch.cbddev.xyz',
+                       'https://dev-chm.cbd.int', 'https://chm.cbddev.xyz', 
+                       'https://accounts.cbddev.xyz',
+                       'http://localhost:2010', 'http://localhost:2000', 'http://localhost:8000'
+                   ],
+                realms: ['ABS-DEV', 'BCH-DEV', 'CHM-DEV']
+            };
 
             var trainingRealms = {
-                urls: ['https://training-absch.cbd.int'],
-                realms: ['ABS-TRG']
-            }
+                urls: [
+                    'https://training-absch.cbd.int', 
+                    'https://training-bch.cbd.int' 
+                ],
+                realms: ['ABS-TRG', 'BCH-TRG']
+            };
 
             function envRealms() {
                 if (_.some(productionRealms.urls, function (url) {

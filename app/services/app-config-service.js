@@ -2,132 +2,82 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 
 	app.factory('appConfigService',  ["$location", function($location) {
 		var realmConfigurations = [
+            
+            /////////////
+            //  ABSCH  //
 			//Production
 			{
-				'host': 'absch.cbd.int',
-				'realm': 'ABS',
-				'roles': [{
-						'User': 'User'
-						}, {
-							'Administrator': 'Administrator'
-						}, {
-							'AbsAdministrator': 'AbsAdministrator'
-						}, {
-							'AbsPublishingAuthorities': 'AbsPublishingAuthorities'
-						}, {
-							'abschiac': 'abschiac'
-						}, {
-							'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser'
-						}, {
-							'AbsNationalFocalPoint': 'AbsNationalFocalPoint'
-						}]
+				hosts: ['absch.cbd.int'],
+				realm: 'ABS',
+				roles: {
+					'AbsAdministrator':           'AbsAdministrator',
+					'AbsPublishingAuthorities':   'AbsPublishingAuthorities',
+					'abschiac':                   'abschiac',
+					'AbsNationalAuthorizedUser':  'AbsNationalAuthorizedUser',
+					'AbsNationalFocalPoint':      'AbsNationalFocalPoint',
+				}
 			},
 
 			//Development
 			{
-				'host': 'localhost',
-				'realm': 'ABS-DEV',
-				'roles': [{
-					'User': 'User'
-				}, {
-					'Administrator': 'Administrator'
-				}, {
-					'AbsAdministrator': 'AbsAdministrator-dev'
-				}, {
-					'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
-				}, {
-					'abschiac': 'abschiac-dev'
-				}, {
-					'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
-				}, {
-					'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
-				}]
+				hosts: ['absch.staging.cbd.int', 'absch.cbddev.xyz', 'absch.local', 'localhost'],
+				realm: 'ABS-DEV',
+				roles: {
+                    'AbsAdministrator':           'AbsAdministrator-dev',
+					'AbsPublishingAuthorities':   'AbsPublishingAuthorities-dev',
+					'abschiac':                   'abschiac-dev',
+					'AbsNationalAuthorizedUser':  'AbsNationalAuthorizedUser-dev',
+					'AbsNationalFocalPoint':      'AbsNationalFocalPoint-dev',
+				}
 			},
-			{
-				'host': 'absch.local',
-				'realm': 'ABS-DEV',
-				'roles': [{
-					'User': 'User'
-				}, {
-					'Administrator': 'Administrator'
-				}, {
-					'AbsAdministrator': 'AbsAdministrator-dev'
-				}, {
-					'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
-				}, {
-					'abschiac': 'abschiac-dev'
-				}, {
-					'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
-				}, {
-					'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
-				}]
-			}, {
-				'host': 'absch.cbddev.xyz',
-				'realm': 'ABS-DEV',
-				'roles': [{
-					'User': 'User'
-				}, {
-					'Administrator': 'Administrator'
-				}, {
-					'AbsAdministrator': 'AbsAdministrator-dev'
-				}, {
-					'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
-				}, {
-					'abschiac': 'abschiac-dev'
-				}, {
-					'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
-				}, {
-					'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
-				}]
-			},
-			//staginh
-                        {
-				'host': 'absch.staging.cbd.int',
-				'realm': 'ABS-DEV',
-				'roles': [{
-					'User': 'User'
-				}, {
-					'Administrator': 'Administrator'
-				}, {
-					'AbsAdministrator': 'AbsAdministrator-dev'
-				}, {
-					'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
-				}, {
-					'abschiac': 'abschiac-dev'
-				}, {
-					'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
-				}, {
-					'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
-				}]
-			},
+            
 			//Training
 			{
-				'host': 'training-absch.cbd.int',
-				'realm': 'ABS-TRG',
-				'roles': [{
-					'User': 'ABSRegisteredUser-trg'
-				}, {
-					'Administrator': 'Administrator'
-				}, {
-					'AbsAdministrator': 'AbsAdministrator-trg'
-				}, {
-					'AbsPublishingAuthorities': 'AbsPublishingAuthorities-trg'
-				}, {
-					'abschiac': 'abschiac-trg'
-				}, {
-					'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-trg'
-				}, {
-					'AbsNationalFocalPoint': 'AbsNationalFocalPoint-trg'
-				}]
+				hosts: ['training-absch.cbd.int'],
+				realm: 'ABS-TRG',
+				roles: {
+					'User':                       'ABSRegisteredUser-trg',
+					'AbsAdministrator':           'AbsAdministrator-trg',
+					'AbsPublishingAuthorities':   'AbsPublishingAuthorities-trg',
+					'abschiac':                   'abschiac-trg',
+					'AbsNationalAuthorizedUser':  'AbsNationalAuthorizedUser-trg',
+					'AbsNationalFocalPoint':      'AbsNationalFocalPoint-trg',
+				}
 			},
 
+            /////////////
+            //   BCH   //
+			{
+				hosts: ['bch.cbd.int'],
+				realm: 'BCH',
+				roles: { 
+					'NationalFocalPoint': 'NationalFocalPoint',
+					'AuthorizedUser':     'AuthorizedUser',
+				},
+            },
+			{
+				hosts: ['training-bch.cbd.int'],
+				realm: 'BCH-TRG',
+				roles: { 
+					'NationalFocalPoint': 'NationalFocalPoint-Train',
+					'AuthorizedUser':     'AuthorizedUser-Train',
+				},
+            },
+			{
+				hosts: ['bch.staging.cbd.int', 'bch.cbddev.xyz', 'bch.cbd.local'],
+				realm: 'BCH-DEV',
+				roles: { 
+					'NationalFocalPoint': 'BchNationalFocalPoint:dev',
+					'AuthorizedUser':     'BchAuthorizedUser:dev',
+				},
+            }
 		]
 
         var nationalSchemas 	= [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint", "absNationalReport", "contact"];
         var referenceSchemas 	= [ "resource", "modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"];
 		var scbdSchemas			= [ "meeting", "notification", "pressRelease", "statement", "news", "new" ];
 
-        var realmConfig 		= _.find(realmConfigurations,{host:$location.$$host});
+        var realmConfig 		= _.find(realmConfigurations, function(c){ return ~c.hosts.indexOf($location.$$host); });
         var currentRealm 		= realmConfig.realm;
 
         function setCurrentRealm(newRealm){
@@ -136,40 +86,32 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 				currentRealm = newRealm;
 			}
 			else{
-				throw 'Realm not found, please contact ABSCH team';
+				throw 'Realm not found, please contact SCBD';
 			}
 
         }
 
-        function getRoles(){
-            return realmConfig.roles;
-        }
-
 		function getRoleName(roleName) {
-            if (roleName) {
-
-                if (realmConfig) {
-                    var role = _.find(realmConfig.roles, function(key) {
-                        return _.keys(key)[0] == roleName;
-                    });
-                    // console.log(realmConfig, role)
-                    if (role)
-                        return _.values(role)[0];
-                    else
-						throw roleName + ' role is not configured for realm ' + realmConfig.realm + ', please update realm-configuration.js';
-                } else
-                    throw 'Realm not configured, please update realm-configuration.js';
-            }
+            
+            if (!realmConfig)
+                throw 'Realm not configured, please update realm-configuration.js';
+                
+            if(!realmConfig.roles[roleName])
+                console.warn(roleName + ' role is not configured for realm ' + realmConfig.realm + ', please update realm-configuration');
+                
+            return realmConfig.roles[roleName] || roleName;
         }
+        
 		function nationalRoles(){
 
-		   return _.without(
-					   _.flatten(
-					       _.map(getRoles(), function(role) {
-					           return _.values(role);
-				       	   })
-			   			),
-				 'User');
+            if (!realmConfig)
+                throw 'Realm not configured, please update realm-configuration.js';
+            
+            var roles = _.without(_.keys(realmConfig.roles), 'User');
+            
+            return _.map(roles, function(role) {
+                return realmConfig.roles[role] || role;
+            });
 		}
 
 		function getSiteMapUrls(){
@@ -199,7 +141,6 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 			currentRealm        :   currentRealm,
 			setCurrentRealm  	:   setCurrentRealm,
 
-			getRoles            :   getRoles,
 			nationalRoles		:	nationalRoles,
 			getRoleName			:	getRoleName,
 

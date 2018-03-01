@@ -1,4 +1,4 @@
-define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', 'js/common',
+define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', 'js/common', 'js/filters',
     'services/search-service', 'services/role-service','scbd-angularjs-controls',
     'views/register/directives/register-top-menu', 'views/directives/block-region-directive',
 	'views/forms/edit/editFormUtility', 'views/register/directives/record-type-header',
