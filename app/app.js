@@ -1,6 +1,5 @@
-'use strict';
 define(['angular-flex', 'angular-sanitize', 'angular-loggly-logger'],
-    function(angular) {
+    function(angular) { 'use strict';
 
         var app = angular.module('app', angular.defineModules([
             'ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'toastr',
@@ -23,7 +22,7 @@ define(['angular-flex', 'angular-sanitize', 'angular-loggly-logger'],
        app.run(['LogglyLogger', 'realm', '$window', function (logglyLogger, realm, $window) {
 
             var appVersion = $window.appVersion||'localhost';
-            logglyLogger.fields({ realm: realm.value, appVersion: appVersion })
+            logglyLogger.fields({ realm: realm.value, appVersion: appVersion });
 
         }]);
         
