@@ -10,20 +10,32 @@ define(['app', 'lodash', 'moment'],
                 documentMessageUrl: '/mailbox/'
             };
             var productionRealms = {
-                urls: ['https://absch.cbd.int', 'https://chm.cbd.int', 'https://accounts.cbd.int'],
-                realms: ['ABS', 'CHM']
-            }
+                urls: [
+                    'https://absch.cbd.int', 
+                    'https://bch.cbd.int', 
+                    'https://chm.cbd.int', 
+                    'https://accounts.cbd.int'
+                ],
+                realms: ['ABS', 'BCH', 'CHM']
+            };
 
             var developmentRealms = {
-                urls: ['https://absch.cbddev.xyz', 'https://dev-chm.cbd.int', 'https://chm.cbddev.xyz', 'https://accounts.cbddev.xyz',
-                    'http://localhost:2010', 'http://localhost:2000', 'http://localhost:8000'],
-                realms: ['ABS-DEV', 'CHM-DEV']
-            }
+                urls: ['https://absch.cbddev.xyz', 
+                       'https://bch.cbddev.xyz',
+                       'https://dev-chm.cbd.int', 'https://chm.cbddev.xyz', 
+                       'https://accounts.cbddev.xyz',
+                       'http://localhost:2010', 'http://localhost:2000', 'http://localhost:8000'
+                   ],
+                realms: ['ABS-DEV', 'BCH-DEV', 'CHM-DEV']
+            };
 
             var trainingRealms = {
-                urls: ['https://training-absch.cbd.int'],
-                realms: ['ABS-TRG']
-            }
+                urls: [
+                    'https://training-absch.cbd.int', 
+                    'https://training-bch.cbd.int' 
+                ],
+                realms: ['ABS-TRG', 'BCH-TRG']
+            };
 
             function realmsForQuery() {
                 if (_.some(productionRealms.urls, function (url) {
