@@ -1,16 +1,11 @@
-'use strict';
 define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-services', 'js/services', 'js/filters',
- 'services/app-config-service', 'angular-route', 'services/app-config-service'], function (app, _) {
+ 'services/app-config-service', 'angular-route', 'services/app-config-service'], function (app, _) { 'use strict';
 
     app.value("showHelp", { value : false });
 
-    app.provider("realm", {
-
-        $get : ["$location", 'appConfigService', function($location, appConfigService) {
-            return { value : appConfigService.currentRealm || 'ABS' };
-        }]
-    });
-    app.config(['extendedRouteProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+    app.config(['extendedRouteProvider', '$locationProvider', 'realmProvider', function ($routeProvider, $locationProvider, realmProvider) {
+        
+        realmProvider.setFallbackRealm('ABS-DEV');
 
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');

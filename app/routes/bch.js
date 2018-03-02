@@ -2,13 +2,9 @@ define(['require', 'app', 'underscore', 'angular-route', 'services/app-config-se
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,''); // '/app/'
 
-    app.provider("realm", {
-        $get : ['appConfigService', function(appConfigService) {
-            return { value : appConfigService.currentRealm || 'BCH' };
-        }]
-    });
-    
-    app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+    app.config(['$routeProvider', '$locationProvider', 'realmProvider', function ($routeProvider, $locationProvider, realmProvider) {
+        
+        realmProvider.setFallbackRealm('BCH-DEV');
 
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
@@ -30,17 +26,17 @@ define(['require', 'app', 'underscore', 'angular-route', 'services/app-config-se
 
                // BCH4 PAGES
                whenAsync('/about/countryprofile.shtml',      { redirectTo:  '/countries/:country' }).
-               whenAsync('/countries/:country',              { templateUrl: 'views/shared/cms-content.html', target:'http://bilodeaux7.local/about/countryprofile.shtml?country={country}', controller: function() { return importQ('views/shared/cms-content'); } }).
-               whenAsync('/about/:subpath*?',                { templateUrl: 'views/shared/cms-content.html', target:'http://bilodeaux7.local/about/{subpath}',                              controller: function() { return importQ('views/shared/cms-content'); } }).
-               whenAsync('/protocol/:subpath*?',             { templateUrl: 'views/shared/cms-content.html', target:'http://bilodeaux7.local/protocol/{subpath}',                           controller: function() { return importQ('views/shared/cms-content'); } }).
-               whenAsync('/onlineconferences/:subpath*?',    { templateUrl: 'views/shared/cms-content.html', target:'http://bilodeaux7.local/onlineconferences/{subpath}',                  controller: function() { return importQ('views/shared/cms-content'); } }).
+               whenAsync('/countries/:country',              { templateUrl: 'views/shared/cms-content.html', target:'https://bch.cbd.int/about/countryprofile.shtml?country=:country', controller: function() { return importQ('views/shared/cms-content'); } }).
+               whenAsync('/about/:subpath*?',                { templateUrl: 'views/shared/cms-content.html', target:'https://bch.cbd.int/about/:subpath',                              controller: function() { return importQ('views/shared/cms-content'); } }).
+               whenAsync('/protocol/:subpath*?',             { templateUrl: 'views/shared/cms-content.html', target:'https://bch.cbd.int/protocol/:subpath',                           controller: function() { return importQ('views/shared/cms-content'); } }).
+               whenAsync('/onlineconferences/:subpath*?',    { templateUrl: 'views/shared/cms-content.html', target:'https://bch.cbd.int/onlineconferences/:subpath',                  controller: function() { return importQ('views/shared/cms-content'); } }).
 
                whenAsync('/help/forbidden',   { templateUrl: 'views/shared/403.html', label:'Forbidden'}).
                whenAsync('/help/not-found',   { templateUrl: 'views/shared/404.html', label:'Not found'}).
 
                otherwise({ templateUrl: baseUrl+'views/shared/404.html', label:'Page not found'});
     }]);
-    
+
     //============================================================
     //
     //
