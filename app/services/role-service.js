@@ -20,6 +20,10 @@ define(['app', 'underscore', './app-config-service'], function (app, _) { 'use s
 
 				return _.intersection($rootScope.user.roles, roles).length > 0;
 			};
+
+			this.is = function(role) {
+				return this.isUserInRole(appConfigService.getRoleName(role));
+			}
 			
 			this.isIAC = function() {
 				return this.isUserInRole(appConfigService.getRoleName('abschiac'));

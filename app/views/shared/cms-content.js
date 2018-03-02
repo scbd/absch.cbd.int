@@ -11,14 +11,14 @@ define(['jquery', 'text!./404.html', 'text!./403.html', 'app'], function($, html
         
         for(var key in $route.current.params) {
             
-            var re  = new RegExp(escapeRegExp('{'+key+'}'), 'g');
+            var re  = new RegExp(escapeRegExp(':'+key)+'\\b', 'g');
             var val = $route.current.params[key];
             
             if(re.test(url)) url = url.replace(re, val);
             else             params[key] = val;
         }
         
-        url = url.replace(/\{\w*\}/g, '');
+        url = url.replace(/:\w+\b/g, '');
         
         $http.get(url, {cache:true, params: params }).then(function(res) {
             
