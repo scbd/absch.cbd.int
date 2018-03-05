@@ -1343,9 +1343,8 @@
                 "key": "Q064",
                 "section": "awarenessRaising",
                 "number": "64",
-                "type": "text", "field" :"furtherInfo",
-                "title": "Additional Information",
-                "subTitle" : "Please provide a summary of the main difficulties and challenges:",
+                "type": "text", "shortTitle":"Free text", "field" :"furtherInfo",
+                "title": "Any other relevant information",
                 "multiple": false,
                 "additionalInfo" : [
                     {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
@@ -1354,17 +1353,20 @@
             }
         
     ]
+  },
+  {
+    "key": "comments",
+    "title": "Comments on the reporting format",
+    "questions": [
+        {
+            "key": "Q066",
+            "section": "awarenessRaising",
+            "number": "66",
+            "type": "text",
+            "title": "Please provide any comment that you may have regarding the format of this report",
+            "multiple": false
+        }
+    ]
   }
-
-
-
-
-
-
-
-
-
-
-
 
 ]
