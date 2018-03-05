@@ -1,5 +1,5 @@
 define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 'scbd-angularjs-filters', 
-'../../filters/cases', 'scbd-angularjs-services/locale', 'views/directives/view-reference-document'],
+'../../filters/cases', 'scbd-angularjs-services/locale', 'views/directives/view-reference-document', 'scbd-angularjs-services/authentication'],
 function(templateHtml, app, _, require, $) { 'use strict';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
@@ -24,8 +24,8 @@ function(templateHtml, app, _, require, $) { 'use strict';
     //
     //
     //==============================================
-    app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$timeout',
-     function($http, $q, locale, $filter, $timeout) {
+    app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$timeout', 'authentication',
+     function($http, $q, locale, $filter, $timeout, authentication) {
         return {
             restrict : 'E',
             replace : true,
@@ -351,8 +351,8 @@ function(templateHtml, app, _, require, $) { 'use strict';
                 var nrAnalyzer = this;
                 var isScbd = false;
 
-                $http.get('/api/v2013/authentication/user').then(function(res){
-                    isScbd = !!~res.data.roles.indexOf('ScbdStaff');
+                authentication.getUser().then(function(res){
+                    isScbd = !!~res.roles.indexOf('ScbdStaff');
                 });
 
                 //====================================

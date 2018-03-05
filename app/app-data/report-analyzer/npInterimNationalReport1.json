@@ -1217,14 +1217,14 @@
                 "section": "technology",
                 "number": "59",
                 "type": "option",
-                "title": "Additional Information",
-                "subTitle" : "Is your country collaborating and cooperating in technical and scientific research and development programmes as a means to achieve the objective of the Protocol as provided in Article 23?",
+                "title": "Is your country collaborating and cooperating in technical and scientific research and development programmes as a means to achieve the objective of the Protocol as provided in Article 23?",
                 "multiple": false,
                 "options": [
                     { "value": "true", "title": "Yes" },
                     { "value": "false","title": "No"}
                 ],
                 "additionalInfo" : [
+                    {"field" : "additionalInfo", "title" : "Please provide a summary of the measures taken.", "type" : "string"},
                     {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
                     {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
                 ]
@@ -1259,7 +1259,7 @@
                     { "value": "false","title": "No"}
                 ],
                 "additionalInfo" : [
-                    {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
+                    {"field" : "additionalInfo", "title" : "Please provide further information", "type" : "string"},
                     {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges encountered.", "type" : "string"},
                     {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
                 ]
@@ -1318,6 +1318,11 @@
                 "options": [
                     { "value": "true", "title": "Yes" },
                     { "value": "false","title": "No"}
+                ],
+                "additionalInfo" : [
+                    {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges encountered.", "type" : "string"},
+                    {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
+                    {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
                 ]
             },
             {
@@ -1332,20 +1337,14 @@
                     { "value": "Less than 5","title": "Less than 5"},
                     { "value": "Less than 10","title": "Less than 10"},
                     { "value": "10 or more","title": "10 or more"}
-                ],
-                "additionalInfo" : [
-                    {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges encountered.", "type" : "string"},
-                    {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                    {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
                 ]
             },
             {
                 "key": "Q064",
                 "section": "awarenessRaising",
                 "number": "64",
-                "type": "text", "field" :"furtherInfo",
-                "title": "Additional Information",
-                "subTitle" : "Please provide a summary of the main difficulties and challenges:",
+                "type": "text", "shortTitle":"Free text", "field" :"furtherInfo",
+                "title": "Any other relevant information",
                 "multiple": false,
                 "additionalInfo" : [
                     {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
@@ -1354,17 +1353,20 @@
             }
         
     ]
+  },
+  {
+    "key": "comments",
+    "title": "Comments on the reporting format",
+    "questions": [
+        {
+            "key": "Q066",
+            "section": "awarenessRaising",
+            "number": "66",
+            "type": "text",
+            "title": "Please provide any comment that you may have regarding the format of this report",
+            "multiple": false
+        }
+    ]
   }
-
-
-
-
-
-
-
-
-
-
-
 
 ]
