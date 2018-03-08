@@ -1,0 +1,42 @@
+﻿{
+    "abs" : [
+        {
+            "type"         : "npInterimNationalReport1",
+            "title"        : "ABS - Interim National Report on the Implementation of the Nagoya Protocol",
+            "questionsUrl" : "app-data/abs/report-analyzer/npInterimNationalReport1.json",
+            "mappingsUrl"  : "app-data/abs/report-analyzer/mapping/npInterimNationalReport1.json",
+            "dataUrl"      : "/api/v2017/national-reports-np-1",
+            "infoBlockUrl"  : "views/report-analyzer/includes/npInterimNationalReport1.html",
+            "year"          : "2016",
+            "offlineFormats": [
+                {"lang": "en", "url":"http://www.cbd.int/abs/en/commonformats/NR-en.doc"},
+                {"lang": "fr", "url":"http://www.cbd.int/abs/fr/commonformats/NR-fr.doc"},
+                {"lang": "es", "url":"http://www.cbd.int/abs/es/commonformats/NR-es.doc"},
+                {"lang": "ru", "url":"http://www.cbd.int/abs/ru/commonformats/NR-ru.doc"},
+                {"lang": "ar", "url":"http://www.cbd.int/abs/ar/commonformats/NR-ar.doc"},
+                {"lang": "zh", "url":"http://www.cbd.int/abs/zh/commonformats/NR-zh.doc"}
+            ]
+        }
+    ],
+    "bch" : [
+        {
+            "type"          : "cpbNationalReport2",
+            "title"         : "BCH - Second National Report",
+            "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport2.json",
+            "mappingsUrl"   : "app-data/bch/report-analyzer/mapping/cpbNationalReport2.json",
+            "dataUrl"       : "/api/v2015/national-reports-cpb-2",
+            "infoBlockUrl"  : "views/report-analyzer/includes/cpbNationalReport2.html",
+            "year"          : "2016",
+            "offlineFormats": [
+            ]
+        },
+        {   
+            "type"          : "cpbNationalReport3",
+            "title"         : "BCH - Third National Report",
+            "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport3.json",
+            "mappingsUrl"   : "app-data/bch/report-analyzer/mapping/cpbNationalReport3.json",
+            "dataUrl"       : "/api/v2015/national-reports-cpb-3",
+            "infoBlockUrl"  : "views/report-analyzer/includes/cpbNationalReport3.html"
+        }
+    ]
+}

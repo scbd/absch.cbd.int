@@ -1,52 +1,69 @@
 define(['./directives/national-reports/questions-selector', './directives/national-reports/analyzer'], function() { 'use strict';
 
-    return ['$scope', '$location', function($scope, $location) {
-
-        $scope.showAnalyzer = false;
-
-        delete $scope.selectedReportType;
-        delete $scope.selectedQuestions;
-        delete $scope.selectedRegions;
-        delete $scope.maxDate;
-        delete $scope.selectedRegionsPreset;
-        delete $scope.selectedRegionsPresetFilter;
+    return ['$scope', '$location', 'realm', '$timeout',
+     function($scope, $location, realm, $timeout) {
         
+        var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
+        $scope.showAnalyzer = false;
+        $scope.self = $scope;
+        require(['json!'+baseUrl+'app-data/report-analyzer-mapping.json'], function(res){
+            var appName = realm.value.replace(/-.*/,'').toLowerCase();
+            
+            $scope.reportData = res[appName];
 
-        //========================================
-        //
-        //
-        //========================================
-        try {
+            $timeout(function(){
 
-            var data = $location.search();
+                delete $scope.selectedReportType;
+                delete $scope.selectedQuestions;
+                delete $scope.selectedRegions;
+                delete $scope.maxDate;
+                delete $scope.selectedRegionsPreset;
+                delete $scope.selectedRegionsPresetFilter;
+                
 
-            if(data.date) {
-                $scope.maxDate = new Date(data.date);
-                $scope.maxDate.setDate($scope.maxDate.getDate()+1);
-            }
+                //========================================
+                //
+                //
+                //========================================
+                try {
 
-            if(!data.type)
-                data = JSON.parse(sessionStorage.getItem('nrAnalyzerData') || '{}');
+                    var data = $location.search();
 
-            $scope.selectedReportType = mapReportType(data.type);
-            $scope.selectedQuestions  = data.questions;
-            $scope.selectedRegions    = data.regions;
-            $scope.selectedRegionsPreset    = data.regionsPreset;
-            $scope.selectedRegionsPresetFilter    = data.regionsPresetFilter;
+                    if(data.date) {
+                        $scope.maxDate = new Date(data.date);
+                        $scope.maxDate.setDate($scope.maxDate.getDate()+1);
+                    }
 
-        } catch (e) {
-            sessionStorage.removeItem('nrAnalyzerData');
-        } finally {
-            //sessionStorage.removeItem('nrAnalyzerData');
-        }
+                    if(!data.type)
+                        data = JSON.parse(sessionStorage.getItem('nrAnalyzerData') || '{}');
 
-        analyze(true);
+                    $scope.selectedReportType = mapReportType(data.type);
+                    $scope.selectedQuestions  = data.questions;
+                    $scope.selectedRegions    = data.regions;
+                    $scope.selectedRegionsPreset    = data.regionsPreset;
+                    $scope.selectedRegionsPresetFilter    = data.regionsPresetFilter;
+                    $scope.activeReport = _.find($scope.reportData, {type:$scope.selectedReportType});
 
-        $scope.$watch('selectedReportType', saveSettings);
-        $scope.$watchCollection('selectedQuestions', saveSettings);
-        $scope.$watchCollection('selectedRegions',   saveSettings);
-        $scope.$watchCollection('selectedRegionsPreset',   saveSettings);
-        $scope.$watchCollection('selectedRegionsPresetFilter',   saveSettings);
+                } catch (e) {
+                    sessionStorage.removeItem('nrAnalyzerData');
+                } finally {
+                    //sessionStorage.removeItem('nrAnalyzerData');
+                }
+                
+                analyze($scope.activeReport ? true : false);
+                
+
+                $scope.$watch('selectedReportType', function(newVal){
+                    $scope.activeReport = _.find($scope.reportData, {type:newVal});
+                    saveSettings(newVal)
+                });
+                $scope.$watchCollection('selectedQuestions', saveSettings);
+                $scope.$watchCollection('selectedRegions',   saveSettings);
+                $scope.$watchCollection('selectedRegionsPreset',   saveSettings);
+                $scope.$watchCollection('selectedRegionsPresetFilter',   saveSettings);
+
+            }, 100)
+        });
 
         //========================================
         //

@@ -189,8 +189,8 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                         else if(!!text.number && type == 'number')
                             text =  text.number;         
                         else if(!field && isLString(text))
-                            text = text                 
-                        else if((!field && type == 'string'))
+                            text = text          
+                        else if((!field && (type == 'text' || type == 'string')))
                             text = text
                         else
                             text = undefined;

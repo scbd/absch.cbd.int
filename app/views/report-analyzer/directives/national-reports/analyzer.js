@@ -24,8 +24,8 @@ function(templateHtml, app, _, require, $) { 'use strict';
     //
     //
     //==============================================
-    app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$timeout', 'authentication',
-     function($http, $q, locale, $filter, $timeout, authentication) {
+    app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$timeout', 'authentication', 'realm',
+     function($http, $q, locale, $filter, $timeout, authentication, realm) {
         return {
             restrict : 'E',
             replace : true,
@@ -37,7 +37,8 @@ function(templateHtml, app, _, require, $) { 'use strict';
                 selectedQuestions: '=questions',
                 selectedReportType: '=reportType',
                 selectedRegionsPreset: '=regionsPreset',
-                selectedRegionsPresetFilter: '=regionsPresetFilter'
+                selectedRegionsPresetFilter: '=regionsPresetFilter',
+                reportData : "=reportData"
             },
             link: function ($scope, $element, attr, nrAnalyzer) {
                 
@@ -73,6 +74,8 @@ function(templateHtml, app, _, require, $) { 'use strict';
 
                     loaded = true;
                     $scope.filter = undefined;
+
+                    $scope.activeReport = _.find($scope.reportData, {type:$scope.selectedReportType});
 
                     $q.all([loadRegions(), loadSections(), nrAnalyzer.loadReports(), loadPreviousReportQuestionsMapping()]).then(function(results) {
 
@@ -157,7 +160,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
                     
-                    require(['json!'+baseUrl+'app-data/report-analyzer/mapping/'+reportType+'.json'], function(res){
+                    require(['json!'+baseUrl+$scope.activeReport.mappingsUrl], function(res){
                         deferred.resolve(res);
                     });
 
@@ -172,12 +175,10 @@ function(templateHtml, app, _, require, $) { 'use strict';
 
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
-
-                    require(['json!'+baseUrl+'app-data/report-analyzer/'+reportType+'.json'], function(res){
+                    
+                    require(['json!'+baseUrl+$scope.activeReport.questionsUrl], function(res){
 
                         var selection = _($scope.selectedQuestions).reduce(mapReduce(), {});
-                        //not sure why but if the result is edited it somehow gets stored with require and 
-                        //on the next use require gives the modified result. 
                         var data =  _.filter(angular.copy(res), function(section) {
 
                                         section.questions = _.filter(section.questions, function(q) {
