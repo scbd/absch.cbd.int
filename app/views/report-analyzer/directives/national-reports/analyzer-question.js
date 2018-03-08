@@ -183,8 +183,10 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                         if(text && (text.details ||text[field]))
                             text =  (text.details || text[field]);
                         else if(!!text.number && type == 'number')
-                            text =  text.number;          
-                        else if((!field && type == 'string'))
+                            text =  text.number;         
+                        else if(!field && isLString(text))
+                            text = text          
+                        else if((!field && (type == 'text' || type == 'string')))
                             text = text
                         else
                             text = undefined;
@@ -651,6 +653,10 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                     if(BB.length<2) BB = '0'+BB;
 
                     return '#'+RR+GG+BB;
+                }
+
+                function isLString(element){
+                    return element.ar || element.en || element.fr || element.es || element.ru || element.zh;
                 }
             }
         };
