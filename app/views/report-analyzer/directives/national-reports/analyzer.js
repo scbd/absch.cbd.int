@@ -489,13 +489,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                         query.date = { $lt : { $date :  options.maxDate } };
                     }
 
-                    var collectionUrls = {
-                        cpbNationalReport2 : "/api/v2015/national-reports-cpb-2",
-                        cpbNationalReport3 : "/api/v2015/national-reports-cpb-3",
-                        npInterimNationalReport1  : "/api/v2017/national-reports-np-1"
-                    };
-
-                    return $http.get(collectionUrls[options.reportType], {  params: { q : query, f : fields }, cache : true }).then(function(res) {
+                    return $http.get($scope.activeReport.dataUrl, {  params: { q : query, f : fields }, cache : true }).then(function(res) {
                         return _.map(res.data, function(report) {
                             report.government = nrAnalyzer.normalizeAnswer(report.government);
                             return report;
@@ -522,23 +516,6 @@ function(templateHtml, app, _, require, $) { 'use strict';
 
                     return v;
                 };
-
-                // //==============================================
-                // //
-                // //
-                // //==============================================
-                // nrAnalyzer.normalizeAdditionalInfo = function (v) {
-
-                //     if(_.isArray(v))
-                //         return _(v).map(nrAnalyzer.normalizeAnswer).compact().value();
-
-                //     v = v && (v.value || v.identifier || v);
-
-                //     if(typeof(v)=='boolean')
-                //         v = v.toString();
-
-                //     return v;
-                // };
             }]
         };
     }]);
