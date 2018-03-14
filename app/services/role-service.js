@@ -10,7 +10,7 @@ define(['app', 'underscore', './app-config-service'], function (app, _) { 'use s
 				if (!$rootScope.user)
 					return false;
 
-				return _.contains($rootScope.user.roles, role);
+				return _.intersection($rootScope.user.roles, role).length;
 			};
 			
 			this.isUserInRoles = function(roles) {
@@ -26,29 +26,30 @@ define(['app', 'underscore', './app-config-service'], function (app, _) { 'use s
 			}
 			
 			this.isIAC = function() {
-				return this.isUserInRole(appConfigService.getRoleName('abschiac'));
+				return this.isUserInRoles(appConfigService.getRoleName('iac'));
 			}
 
 			this.isAdministrator = function() {
-				return this.isUserInRole(appConfigService.getRoleName('Administrator'));
+				return this.isUserInRoles(appConfigService.getRoleName('administrator'));
 			}
 			this.isAbsAdministrator = function() {
-				return this.isUserInRole(appConfigService.getRoleName('AbsAdministrator'));
+				return this.isUserInRoles(appConfigService.getRoleName('administrator'));
 			}
 
 			this.isAbsPublishingAuthority = function() {
-				return this.isUserInRole(appConfigService.getRoleName('AbsPublishingAuthorities'));
+				return this.isUserInRoles(appConfigService.getRoleName('publishingAuthorities'));
 			}
 			this.isAbsNationalAuthorizedUser = function() {
-				return this.isUserInRole(appConfigService.getRoleName('AbsNationalAuthorizedUser'));
+				return this.isUserInRole(appConfigService.getRoleName('nationalAuthorizedUser'));
 			}
 
 			this.isAbsNationalFocalPoint = function() {
-				return this.isUserInRole(appConfigService.getRoleName('AbsNationalFocalPoint'));
+				return this.isUserInRoles(appConfigService.getRoleName('nationalFocalPoint'));
 			}
 
 			this.isUser = function() {
-				return this.isUserInRole(appConfigService.getRoleName('User'));
+				return this.isUserInRole('User');
+					//appConfigService.getRoleName('User'));
 			}
 
 			this.isAnyOtherRoleThanIAC = function() {
