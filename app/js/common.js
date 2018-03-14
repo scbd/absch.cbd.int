@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'services/local-storage-service'], function(app, _) {
+define(['app', 'underscore', 'services/local-storage-service', 'scbd-angularjs-services/storage', './filters'], function(app, _) {
 
     app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 
     'localStorageService', 'Thesaurus', 'realm',
