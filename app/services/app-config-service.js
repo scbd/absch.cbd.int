@@ -1,160 +1,41 @@
-define(['app', 'underscore'], function (app, _) { 'use strict';
+define(['app', 'json!/api/v2018/realm-configurations/'+ encodeURIComponent(location.host||''),
+		'underscore'], function (app,realmConf, _) { 'use strict';
 
 	app.factory('appConfigService',  ["$location", function($location) {
-		var realmConfigurations = [
-			//Production
-			{
-				'host': 'absch.cbd.int',
-				'realm': 'ABS',
-				'roles': [{
-						'User': 'User'
-						}, {
-							'Administrator': 'Administrator'
-						}, {
-							'AbsAdministrator': 'AbsAdministrator'
-						}, {
-							'AbsPublishingAuthorities': 'AbsPublishingAuthorities'
-						}, {
-							'abschiac': 'abschiac'
-						}, {
-							'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser'
-						}, {
-							'AbsNationalFocalPoint': 'AbsNationalFocalPoint'
-						}]
-			},
+		console.log(realmConf);
 
-			//Development
-			{
-				'host': 'localhost',
-				'realm': 'ABS-DEV',
-				'roles': [{
-					'User': 'User'
-				}, {
-					'Administrator': 'Administrator'
-				}, {
-					'AbsAdministrator': 'AbsAdministrator-dev'
-				}, {
-					'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
-				}, {
-					'abschiac': 'abschiac-dev'
-				}, {
-					'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
-				}, {
-					'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
-				}]
-			},
-			{
-				'host': 'absch.local',
-				'realm': 'ABS-DEV',
-				'roles': [{
-					'User': 'User'
-				}, {
-					'Administrator': 'Administrator'
-				}, {
-					'AbsAdministrator': 'AbsAdministrator-dev'
-				}, {
-					'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
-				}, {
-					'abschiac': 'abschiac-dev'
-				}, {
-					'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
-				}, {
-					'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
-				}]
-			}, {
-				'host': 'absch.cbddev.xyz',
-				'realm': 'ABS-DEV',
-				'roles': [{
-					'User': 'User'
-				}, {
-					'Administrator': 'Administrator'
-				}, {
-					'AbsAdministrator': 'AbsAdministrator-dev'
-				}, {
-					'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
-				}, {
-					'abschiac': 'abschiac-dev'
-				}, {
-					'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
-				}, {
-					'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
-				}]
-			},
-			//staginh
-                        {
-				'host': 'absch.staging.cbd.int',
-				'realm': 'ABS-DEV',
-				'roles': [{
-					'User': 'User'
-				}, {
-					'Administrator': 'Administrator'
-				}, {
-					'AbsAdministrator': 'AbsAdministrator-dev'
-				}, {
-					'AbsPublishingAuthorities': 'AbsPublishingAuthorities-dev'
-				}, {
-					'abschiac': 'abschiac-dev'
-				}, {
-					'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-dev'
-				}, {
-					'AbsNationalFocalPoint': 'AbsNationalFocalPoint-dev'
-				}]
-			},
-			//Training
-			{
-				'host': 'training-absch.cbd.int',
-				'realm': 'ABS-TRG',
-				'roles': [{
-					'User': 'ABSRegisteredUser-trg'
-				}, {
-					'Administrator': 'Administrator'
-				}, {
-					'AbsAdministrator': 'AbsAdministrator-trg'
-				}, {
-					'AbsPublishingAuthorities': 'AbsPublishingAuthorities-trg'
-				}, {
-					'abschiac': 'abschiac-trg'
-				}, {
-					'AbsNationalAuthorizedUser': 'AbsNationalAuthorizedUser-trg'
-				}, {
-					'AbsNationalFocalPoint': 'AbsNationalFocalPoint-trg'
-				}]
-			},
+		var realmConfigurations = realmConf || window.realmConfigurations;
+		var realmConfig; 		
+		if(realmConfigurations.length >1)
+			realmConfig = _.findWhere(realmConfigurations,{host:location.host});
+		else
+			realmConfig = _.head(realmConfigurations);
 
-		]
-
-        var nationalSchemas 	= [ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint", "absNationalReport", "contact"];
-        var referenceSchemas 	= [ "resource", "modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"];
+		var nationalSchemas 	= _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='national' ? key : undefined}))
+			//[ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint", "absNationalReport", "contact"];
+		var referenceSchemas 	= _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='reference' ? key : undefined}))
+			//[ "resource", "modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"];
 		var scbdSchemas			= [ "meeting", "notification", "pressRelease", "statement", "news", "new" ];
 
-        var realmConfig 		= _.find(realmConfigurations,{host:$location.$$host});
+
         var currentRealm 		= realmConfig.realm;
-
-        function setCurrentRealm(newRealm){
-			if(_.find(realmConfigurations,{realm : newRealm})){
-				realmConfig = _.find(realmConfigurations,{realm : newRealm});
-				currentRealm = newRealm;
-			}
-			else{
-				throw 'Realm not found, please contact ABSCH team';
-			}
-
-        }
 
         function getRoles(){
             return realmConfig.roles;
         }
+		//temporary
+		String.prototype.lowerCaseFirstLetter = function() {
+			return this.charAt(0).toLowerCase() + this.slice(1);
+		}
 
 		function getRoleName(roleName) {
             if (roleName) {
 
-                if (realmConfig) {
-                    var role = _.find(realmConfig.roles, function(key) {
-                        return _.keys(key)[0] == roleName;
-                    });
-                    // console.log(realmConfig, role)
-                    if (role)
-                        return _.values(role)[0];
+                if (realmConfig) {//temp replace
+					var roles = realmConfig.roles[roleName.replace(/^Abs/i,'').lowerCaseFirstLetter()]
+					
+                    if (roles)
+                        return roles;
                     else
 						throw roleName + ' role is not configured for realm ' + realmConfig.realm + ', please update realm-configuration.js';
                 } else
@@ -197,7 +78,6 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 			scbdSchemas			:	scbdSchemas,
 
 			currentRealm        :   currentRealm,
-			setCurrentRealm  	:   setCurrentRealm,
 
 			getRoles            :   getRoles,
 			nationalRoles		:	nationalRoles,

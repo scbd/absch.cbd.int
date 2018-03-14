@@ -122,9 +122,12 @@ require.config({
 
 define("_slaask", window._slaask);
 
-require(['angular', 'angular-flex', 'angular-route', 'angular-cookies',  'bootstrap', 'domReady'], function (ng) {
+require(['angular', 'json!/api/v2018/realm-configurations/'+ encodeURIComponent(location.host||''),
+    'angular-flex', 'angular-route', 'angular-cookies',  'bootstrap', 'domReady'], function (ng, data) {
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
-
+    
+    window.realmConfiguration = data;
+    console.log(data);
     require(['domReady!', 'app_routes', 'template'], function (document) {
         ng.bootstrap(document, ['app']);
         try {
@@ -134,3 +137,23 @@ require(['angular', 'angular-flex', 'angular-route', 'angular-cookies',  'bootst
         }
     });
 });
+
+
+//==================================================
+// Protect window.console method calls, e.g. console is not defined on IE
+// unless dev tools are open, and IE doesn't define console.debug
+//==================================================
+(function fixIEConsole() { 'use strict';
+
+    if (!window.console) {
+        window.console = {};
+    }
+
+    var methods = ["log", "info", "warn", "error", "debug", "trace", "dir", "group","groupCollapsed", "groupEnd", "time", "timeEnd", "profile", "profileEnd", "dirxml", "assert", "count", "markTimeline", "timeStamp", "clear"];
+    var noop    = function() {};
+
+    for(var i = 0; i < methods.length; i++) {
+        if (!window.console[methods[i]])
+            window.console[methods[i]] = noop;
+    }
+})();
