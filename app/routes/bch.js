@@ -24,6 +24,10 @@ define(['require', 'app', 'underscore', 'angular-route', 'services/app-config-se
                whenAsync('/mailbox',                         { templateUrl: 'views/mailbox/inbox.html',         controller: function() { return importQ('views/mailbox/inbox'); }, label:'Mailbox', resolve : { user : securize() } }).
                whenAsync('/mailbox/:mailId',                 { templateUrl: 'views/mailbox/inbox.html',         controller: function() { return importQ('views/mailbox/inbox'); }, label:'Mailbox', resolve : { user : securize() } }).
 
+               whenAsync('/reports',                       { templateUrl: 'views/report-analyzer/reports.html',   label:'Reports',  resolveController: true}).
+               whenAsync('/reports/analyzer',              { templateUrl: 'views/report-analyzer/analyzer.html',  label:'Analyzer', resolveController: true}).
+               whenAsync('/database/reports*',             { redirectTo:  '/reports' }).
+
                // BCH4 PAGES
                whenAsync('/about/countryprofile.shtml',      { redirectTo:  '/countries/:country' }).
                whenAsync('/countries/:country',              { templateUrl: 'views/shared/cms-content.html', target:'https://bch.cbd.int/about/countryprofile.shtml?country=:country', controller: function() { return importQ('views/shared/cms-content'); } }).
