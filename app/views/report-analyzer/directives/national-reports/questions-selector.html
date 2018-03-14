@@ -10,9 +10,10 @@
             <th style="width:200px">National Report</th>
             <td>
                 <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged()"  class="form-control">
-                    <!-- <option value="cpbNationalReport3">BCH - Third National Report</option>
-                    <option value="cpbNationalReport2">BCH - Second National Report</option> -->
-                    <option value="npInterimNationalReport1" >ABS - Interim National Report on the Implementation of the Nagoya Protocol</option>
+                    <option ng-repeat="report in reportData" value="{{report.type}}" >
+                        {{report.title}}
+                    </option>
+                    
                 </select>
             </td>
         </tr>
@@ -52,7 +53,6 @@
                 </ul>
             </td>
     </table>
-
     <table class="table table-hover">
         <tr>
             <td>

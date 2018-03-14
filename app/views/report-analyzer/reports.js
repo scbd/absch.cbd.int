@@ -1,10 +1,13 @@
-﻿define(['lodash', 'views/report-analyzer/directives/national-reports/questions-selector'
+﻿define(['lodash', 
+'views/report-analyzer/directives/national-reports/questions-selector'
 ], function (_) {
     'use strict';
+    
+    return ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', '$sce',
+    function($scope, $location, commonjs, $q, $http, realm, $sce) {
 
-    return ['$scope', '$location', 'commonjs', '$q', '$http',
-    function($scope, $location, commonjs, $q, $http) {
-
+        var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
+        
             //========================================
             //
             //
@@ -32,51 +35,66 @@
                 "0EC2E5AE-25F3-4D3A-B71F-8019BB62ED4B"  // CBD Regional Groups - Western Europe and Others
             ];
             $scope.regionMapping = {};
-    
             
-            var regionsQuery = _.map(DefaultRegions, function(region){return $http.get('/api/v2013/thesaurus/terms/'+region+'?relations')})
-        
-            $q.all(regionsQuery)
-            .then(function(data){            
-                _.map(data, function(regionData){
-                    var region = regionData.data;
-                    $scope.regionMapping[region.identifier] = {
-                        countries : region.narrowerTerms, shortTitle : region.shortTitle, title : region.title, identifier: region.identifier, 
-                        count:0 , reportCountries:[]
-                    }
+
+            require(['json!app-data/report-analyzer-mapping.json'], function(res){
+                var appName = realm.value.replace(/-.*/,'').toLowerCase();
+                
+                $scope.reportData = res[appName];
+            
+                var regionsQuery = _.map(DefaultRegions, function(region){return $http.get('/api/v2013/thesaurus/terms/'+region+'?relations')})
+            
+                $q.all(regionsQuery)
+                .then(function(data){            
+                    _.map(data, function(regionData){
+                        var region = regionData.data;
+                        $scope.regionMapping[region.identifier] = {
+                            countries : region.narrowerTerms, shortTitle : region.shortTitle, title : region.title, identifier: region.identifier, 
+                            count:0 , reportCountries:[]
+                        }
+                    });      
                 })
-                $q.when(getReportCount())
-                .then(function(result){
-                    var reportCountries = [];
-                    _.map(result.data, function(report) {                  
-                        var region = _.find(_.values($scope.regionMapping), function(region){
-                            return _.contains(region.countries, report.government.identifier);
-                        });
-                        reportCountries.push(report.government.identifier.toUpperCase());
-                        $scope.regionMapping[region.identifier].count += 1;
+                .then(function(){
+
+                    $scope.$watch('selectedReportType', function(newVal){
+                        if(newVal)
+                            getReportCount(newVal);
                     });
-                    $q.when(commonjs.getCountries())
-                    .then(function(data){
-                        var parties  = _.map(_.filter(data, function(country){return country.isNPParty;}), 'code');
-                        var nonParties =  _.map(_.filter(data, function(country){return !country.isNPParty;}), 'code');
-                        $scope.interimNationalReportByNPPartiesCount = _.intersection(parties, reportCountries).length;
-                        $scope.interimNationalReportByNPNonPartiesCount = _.intersection(nonParties, reportCountries).length;
-                    });
+                    
                 });
             });
-    
-            function getReportCount(){
-              var reportType = 'npInterimNationalReport1'
-              var query  = { 'government_REL' : { $in: DefaultRegions} };
-              var fields = '{"government":1}'
-    
-              var collectionUrls = {
-                  cpbNationalReport2 : "/api/v2015/national-reports-cpb-2",
-                  cpbNationalReport3 : "/api/v2015/national-reports-cpb-3",
-                  npInterimNationalReport1  : "/api/v2017/national-reports-np-1"
-              };
-    
-              return $http.get(collectionUrls[reportType], {  params: { q : query, f : fields }, cache : true });
+
+            function getReportCount(reportType){
+                var query  = { 'government_REL' : { $in: DefaultRegions} };
+                var fields = '{"government":1}'
+        
+                $scope.activeReport = _.find($scope.reportData, {type:reportType});
+                if($scope.activeReport.infoBlockUrl.indexOf(baseUrl)!=0)
+                    $scope.activeReport.infoBlockUrl = baseUrl + $scope.activeReport.infoBlockUrl;
+              
+                return $http.get($scope.activeReport.dataUrl, {  params: { q : query, f : fields }, cache : true })
+                        .then(function(result){
+                            _.each($scope.regionMapping, function(region){
+                                region.count = 0;
+                                region.reportCountries = [];
+                            });
+
+                            var reportCountries = [];
+                            _.map(result.data, function(report) {                  
+                                var region = _.find(_.values($scope.regionMapping), function(region){
+                                    return _.contains(region.countries, report.government.identifier);
+                                });
+                                reportCountries.push(report.government.identifier.toUpperCase());
+                                $scope.regionMapping[region.identifier].count += 1;
+                            });
+                            $q.when(commonjs.getCountries())
+                            .then(function(data){
+                                var parties  = _.map(_.filter(data, function(country){return country.isAppProtocolParty;}), 'code');
+                                var nonParties =  _.map(_.filter(data, function(country){return !country.isAppProtocolParty;}), 'code');
+                                $scope.interimNationalReportByPartiesCount = _.intersection(parties, reportCountries).length;
+                                $scope.interimNationalReportByNonPartiesCount = _.intersection(nonParties, reportCountries).length;
+                            });
+                        });
             }
         }
     ];

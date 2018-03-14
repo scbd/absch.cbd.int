@@ -1,10 +1,13 @@
-define(['app', 'underscore', 'services/local-storage-service'], function(app, _) {
+define(['app', 'underscore', 'services/local-storage-service', 'scbd-angularjs-services/storage', './filters'], function(app, _) {
 
-    app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 'localStorageService', 'Thesaurus',
-        function($http, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus) {
+    app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 
+    'localStorageService', 'Thesaurus', 'realm',
+        function($http, $rootScope, realm, storage, $filter, $q, 
+            localStorageService, thesaurus, realm) {
             return new function() {
 
-
+                var appName = realm.value.replace(/-.*/,'').toLowerCase();
+               
                 //==================================================================================
                 this.getReferenceRecordIndex = function(schema, documentId) {
 
@@ -521,7 +524,13 @@ define(['app', 'underscore', 'services/local-storage-service'], function(app, _)
                     country.isNPSignatory = isSignatory(countryDetails) || country.code == 'EU';
                     country.isNPRatified = isRatified(countryDetails) || country.code == 'EU';
                     country.isNPInbetweenParty = moment.utc().diff(moment.utc(treaties.XXVII8b.deposit), 'days') < 90;
-
+                    
+                    country.isCPParty = isCPParty(countryDetails);
+                    if(appName == 'abs')
+                        country.isAppProtocolParty   = country.isNPParty
+                    else if(appName == 'bch')
+                        country.isAppProtocolParty   = country.isCPParty
+                        
                     country.dateDeposit =  countryDetails.treaties.XXVII8b.deposit;
                     country.instrument = countryDetails.treaties.XXVII8b.instrument;
                     country.dateSigned = countryDetails.treaties.XXVII8b.signature;
@@ -536,17 +545,17 @@ define(['app', 'underscore', 'services/local-storage-service'], function(app, _)
 
 
                 //==================================================================================
-                function isNPParty(entity) {
+                function isCPParty(entity) {
 
-                    if (entity && entity.isNPParty != undefined)
-                        return entity.isNPParty;
+                    if (entity && entity.isCPParty != undefined)
+                        return entity.isCPParty;
 
-                    if (entity && entity.isNPInbetweenParty != undefined)
-                        return entity.isNPInbetweenParty;
-
-                    return entity && (moment.utc().diff(moment.utc(entity.treaties.XXVII8b.deposit), 'days') >= 90) && (entity.treaties.XXVII8b.instrument == "ratification" ||
-                        entity.treaties.XXVII8b.instrument == "accession" ||
-                        entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
+                    return entity && entity.treaties.XXVII8a.party;
+                    // (moment.utc().diff(moment.utc(entity.treaties.XXVII8a.deposit), 'days') >= 90) 
+                    // && (entity.treaties.XXVII8a.instrument == "ratification" ||
+                    //     entity.treaties.XXVII8a.instrument == "accession" ||
+                    //     entity.treaties.XXVII8a.instrument == "acceptance" || 
+                    //     entity.treaties.XXVII8a.instrument == "approval");
                 }
 
                 //==================================================================================

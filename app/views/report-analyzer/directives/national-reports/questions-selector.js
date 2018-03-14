@@ -16,7 +16,8 @@ function(templateHtml, app, _, require) {
     //
     //
     //==============================================
-    app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs', '$q', function($http, locale, commonjs, $q) {
+    app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs', '$q', '$timeout', 'realm',
+     function($http, locale, commonjs, $q, $timeout, realm) {
         return {
             restrict : 'E',
             replace : true,
@@ -26,11 +27,13 @@ function(templateHtml, app, _, require) {
                 selectedQuestions : '=questions',
                 selectedRegions : '=regions',
                 selectedRegionsPreset : '=regionsPreset',
-                selectedRegionsPresetFilter : '=regionsPresetFilter'
+                selectedRegionsPresetFilter : '=regionsPresetFilter',
+                reportData  : '=reportData'
             },
             link: function ($scope) {
-
-                $scope.selectedReportType = $scope.selectedReportType || 'npInterimNationalReport1';
+                
+                $scope.selectedReportType = $scope.selectedReportType || $scope.reportData[0].type;
+                
                 $scope.selectedRegions    = $scope.selectedRegions    || DefaultRegions.concat();
                 $scope.allSelected = true;
                 $scope.regionsMap = {};
@@ -60,23 +63,26 @@ function(templateHtml, app, _, require) {
                 //====================================
                 $scope.$watch('selectedReportType', function (reportType) {
 
-                    if(!reportType)
+                    if(!reportType || !$scope.reportData)
                         return;
+                    
+                    var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
+                    require(['json!'+reportTypeDetails.questionsUrl], function(res){
 
-                    require(['json!'+baseUrl+'app-data/report-analyzer/'+reportType+'.json'], function(res){
+                        $timeout(function(){
+                            $scope.sections = res;
 
-                        $scope.sections = res;
+                            if($scope.selectedQuestions) {
 
-                        if($scope.selectedQuestions) {
+                                setSelectedQuestions();
 
-                            setSelectedQuestions();
+                            } else {
 
-                        } else {
+                                $scope.allSelected = true;
+                                $scope.allSectionsClicked();
 
-                            $scope.allSelected = true;
-                            $scope.allSectionsClicked();
-
-                        }
+                            }
+                        }, 100);
                     });
                 });
 
