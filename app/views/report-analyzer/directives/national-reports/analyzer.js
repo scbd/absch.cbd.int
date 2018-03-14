@@ -520,4 +520,3 @@ function(templateHtml, app, _, require, $) { 'use strict';
         };
     }]);
 });
-

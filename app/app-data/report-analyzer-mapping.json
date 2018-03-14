@@ -21,7 +21,11 @@
     "bch" : [
         {
             "type"          : "cpbNationalReport2",
+<<<<<<< HEAD
             "title"         : "BCH - Second National Report",
+=======
+            "title"         : "CPB - Second National Report",
+>>>>>>> Mergeg branch: bch-report-analyser 
             "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport2.json",
             "mappingsUrl"   : "app-data/bch/report-analyzer/mapping/cpbNationalReport2.json",
             "dataUrl"       : "/api/v2015/national-reports-cpb-2",
@@ -32,7 +36,11 @@
         },
         {   
             "type"          : "cpbNationalReport3",
+<<<<<<< HEAD
             "title"         : "BCH - Third National Report",
+=======
+            "title"         : "CPB - Third National Report",
+>>>>>>> Mergeg branch: bch-report-analyser 
             "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport3.json",
             "mappingsUrl"   : "app-data/bch/report-analyzer/mapping/cpbNationalReport3.json",
             "dataUrl"       : "/api/v2015/national-reports-cpb-3",
