@@ -159,7 +159,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                 var roles = _.clone(roleList||[]);
 
                 if (roles && !_.isEmpty(roles)) {
-                    roles = _.map(roles, appConfigService.getRoleName);
+                    roles = _.flatten(_.map(roles, appConfigService.getRoleName));
                 }
                 if(useNationalRoles){
                     var path = $location.$$url.replace('/register/','');
