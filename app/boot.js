@@ -122,12 +122,9 @@ require.config({
 
 define("_slaask", window._slaask);
 
-require(['angular', 'json!/api/v2018/realm-configurations/'+ encodeURIComponent(location.host||''),
-    'angular-flex', 'angular-route', 'angular-cookies',  'bootstrap', 'domReady'], function (ng, data) {
+require(['angular', 'angular-flex', 'angular-route', 'angular-cookies',  
+        'bootstrap', 'domReady'], function (ng, data) {
     // NOTE: place operations that need to initialize prior to app start here using the `run` function on the top-level module
-    
-    window.realmConfiguration = data;
-    console.log(data);
     require(['domReady!', 'app_routes', 'template'], function (document) {
         ng.bootstrap(document, ['app']);
         try {
