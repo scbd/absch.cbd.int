@@ -1,4 +1,4 @@
-define(['app', 'json!/api/v2018/realm-configurations/'+ encodeURIComponent(location.host||''),
+define(['app', 'json!/api/v2018/realm-configurations/'+ window.clearingHouseHost||'',
 		'underscore'], function (app,realmConf, _) { 'use strict';
 
 	app.factory('appConfigService',  ["$location", function($location) {
