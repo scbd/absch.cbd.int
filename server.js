@@ -53,7 +53,8 @@ app.get('(/?:lang(ar|en|es|fr|ru|zh))?/*', function (req, res) {
 
         var preferredLang = getPreferredLanguage(req);
         var langFilepath = yield getLanguageFile(req, preferredLang);
-        var options = { baseUrl: urlPreferredLang || (req.headers.base_url ||  (preferredLang ? ('/'+preferredLang+'/') : '/')), 'appVersion' : appVersion };
+        var options = { baseUrl: urlPreferredLang || (req.headers.base_url ||  (preferredLang ? ('/'+preferredLang+'/') : '/')),
+                        'appVersion' : appVersion, clearingHouseHost : process.env.CLEARINGHOUSE_HOST};
         
         if(langFilepath){
              return res.render(langFilepath, options);
