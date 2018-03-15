@@ -1,8 +1,11 @@
-@import url('http://fonts.googleapis.com/css?family=Roboto:600');
 @import url('https://fonts.googleapis.com/css?family=Lato:400,600,900');
 
-body, .container-full{
-    background-color: initial !important;
+body, .footer-cbd {
+    background-color: #585971 !important;
+}
+
+body > div:first-child, .page-content {
+    background-color: white;
 }
 
 .bch-brand { 
