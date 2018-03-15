@@ -74,7 +74,7 @@ require.config({
         'angular-loading-bar'           : { 'deps': ['angular']},
         'introjs'                       : { 'exports': 'introJs'},
         'angular-introjs'               : { 'deps':['angular', 'introjs']},
-        'angular-localizer'             : { 'deps':['angular']},
+        'angular-localizer'             : { 'deps':['angular', 'angular-cookies']},
         'jqvmap'                        : { 'deps': ['jquery'] },
         'text-angular'                  : { 'deps': ['text-angular-sanitize', 'angular'] },
         'text-angular-sanitize'         : { 'deps': ['angular', 'angular-sanitize']},

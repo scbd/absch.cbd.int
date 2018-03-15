@@ -30,24 +30,30 @@
 
 </head>
 <body ng-controller="BchTemplateController" id="top" lang="{{lang}}">
-    <iframe   id="authenticationFrame" style="display:none"></iframe>
+
+    <!-- PAGE -->
+    <div>
+        <scbd-header></scbd-header>
+        
+        <bch-header></bch-header>
+
+        <div class="container-full page-content">
+            <ng-view autoscroll="true"></ng-view>
+        </div>
+
+        <bch-footer></bch-footer>
+
+        <scbd-footer></scbd-footer>
+    </div>
+    
+    <!-- LOGIC -->
+    
+    <iframe id="authenticationFrame" style="display:none"></iframe>
     <script>
         var domain = document.location.hostname.replace(/[^\.]+\./, '');
          if(domain=='localhost') domain = 'cbddev.xyz';
         document.getElementById('authenticationFrame').src = 'https://accounts.'+domain+'/app/authorize.html';
     </script>
-
-    <scbd-header></scbd-header>
-    
-    <bch-header></bch-header>
-
-    <div class="container-full page-content">
-        <ng-view autoscroll="true"></ng-view>
-    </div>
-
-    <bch-footer></bch-footer>
-
-    <scbd-footer></scbd-footer>
     
     <div class="device-size visible-xs" size="xs" style="height:0px;width:0px"></div>
     <div class="device-size visible-sm" size="sm" style="height:0px;width:0px"></div>

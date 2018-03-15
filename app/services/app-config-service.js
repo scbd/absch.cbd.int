@@ -208,7 +208,7 @@ define(['app', 'underscore'], function (app, _) { 'use strict';
 			referenceSchemas    :   referenceSchemas,
 			scbdSchemas			:	scbdSchemas,
 
-			get currentRealm()  { $injector.invoke(['realm', function(realm) { return realm.value; }]); },
+			get currentRealm()  { return $injector.invoke(['realm', function(realm) { return realm.value; }]); },
 			setCurrentRealm  	: function(newRealm) { return $injector.invoke(['realm', function(realm) { return realm.setRealm(newRealm); }]); },
 
 			nationalRoles		:	nationalRoles,

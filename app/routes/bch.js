@@ -1,4 +1,4 @@
-define(['require', 'app', 'underscore', 'angular-route', 'services/app-config-service'], function (require, app, _) { 'use strict';
+define(['require', 'app', 'lodash', 'angular-route', 'services/app-config-service'], function (require, app, _) { 'use strict';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,''); // '/app/'
 
@@ -16,10 +16,20 @@ define(['require', 'app', 'underscore', 'angular-route', 'services/app-config-se
                
                whenAsync('/signin',                          { templateUrl: 'views/shared/login-dialog.html',   controller: function() { return importQ('views/shared/login-dialog'); }, label:'Sign in'}).
 
-               whenAsync('/register',                               { templateUrl: 'views/register/dashboard.html',    controller: function() { return importQ('views/register/dashboard'); }, label:'Management Center',  param:'true' }).
+               whenAsync('/register',                               { templateUrl: 'views/register/record-types.html', controller: function() { return importQ('views/register/record-types'); }, label:'Submit', resolve : { user : currentUser() }}).
                whenAsync('/dashboard',                              { redirectTo:  '/register/dashboard'}).
                whenAsync('/register/dashboard',                     { templateUrl: 'views/register/dashboard.html',    controller: function() { return importQ('views/register/dashboard');   }, label:'Dashboard', resolve : { user : securize() }}).
                whenAsync('/register/:document_type/status/:status', { templateUrl: 'views/register/record-list.html',  controller: function() { return importQ('views/register/record-list'); }, label:'Status',    resolve : { user : securize(null,true) }}).
+
+               whenAsync('/register/contact/new',       { templateUrl: 'views/forms/edit/edit-contact.html',                   label:'New',  param:'true', resolveController: true,documentType :'CON' , resolve : { securized : securize(null,null, true) }, }).
+               whenAsync('/register/authority/new',     { templateUrl: 'views/forms/edit/edit-authority.html',                 label:'New',  param:'true', resolveController: true,documentType :'MSR' , resolve : { securized : securize(null,true, true) }, }).
+               whenAsync('/register/database/new',      { templateUrl: 'views/forms/edit/edit-database.html',                  label:'New',  param:'true', resolveController: true,documentType :'NDB' , resolve : { securized : securize(null,true, true) }, }).
+               whenAsync('/register/resource/new',      { templateUrl: 'views/forms/edit/edit-resource.html',                  label:'New',  param:'true', resolveController: true,documentType :'VLR' , resolve : { securized : securize(null, null, true) }, }).
+               whenAsync('/register/CBI/new',           { templateUrl: 'views/forms/edit/edit-capacityBuildingInitiative.html',label:'New',  param:'true', resolveController: true,documentType :'CBI' , resolve : { securized : securize(null, null, true) }, }).
+
+               when('/register/CON/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { securized : securize(null,null, true) }, }).
+
+
 
                whenAsync('/mailbox',                         { templateUrl: 'views/mailbox/inbox.html',         controller: function() { return importQ('views/mailbox/inbox'); }, label:'Mailbox', resolve : { user : securize() } }).
                whenAsync('/mailbox/:mailId',                 { templateUrl: 'views/mailbox/inbox.html',         controller: function() { return importQ('views/mailbox/inbox'); }, label:'Mailbox', resolve : { user : securize() } }).
@@ -52,7 +62,12 @@ define(['require', 'app', 'underscore', 'angular-route', 'services/app-config-se
         if(route.templateUrl && !/^\//.test(route.templateUrl)) {
             route.templateUrl = baseUrl+route.templateUrl;
         }
-
+        
+        if(!route.controller && route.resolveController) { // Legacy
+            var module = route.templateUrl.replace(new RegExp('^'+baseUrl.replace(/\//g, '\\/')), '').replace(/\.html$/, '');
+            route.controller = importQ(module);
+        }
+        
         if(route.controller && angular.isFunction(route.controller)) { // Webpack
         
             var controllerFn = route.controller;
@@ -69,6 +84,15 @@ define(['require', 'app', 'underscore', 'angular-route', 'services/app-config-se
                 
                 return result;
             }];
+            
+            if(!route.controllerAs && route.templateUrl) {
+
+                var matches = route.templateUrl.match(/\/([A-z\-]+)\.html/);
+
+                if(matches) {
+                    route.controllerAs = _.camelCase(matches[1])+'Ctrl';
+                }
+            }
         }
 
         if(route.resolve && route.resolve.lazyController) {

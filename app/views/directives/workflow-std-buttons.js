@@ -1,10 +1,10 @@
-define(['app', 'text!views/directives/workflow-std-buttons.html',
+define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
         'views/directives/workflow-history-directive',
         'toastr', 'services/local-storage-service', 'services/app-config-service'
 ], function (app, template) {
 
-    app.directive('workflowStdButtons',["$q", "$timeout","underscore", "localStorageService",
-     function($q, $timeout, _, localStorageService){
+    app.directive('workflowStdButtons',["$q", "$timeout", "localStorageService",
+     function($q, $timeout, localStorageService){
 
     	return{
     		restrict: 'EAC',
