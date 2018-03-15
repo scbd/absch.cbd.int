@@ -1,6 +1,6 @@
 //fixed a bug with the comment up here ;)
 define([
-    'app', 'underscore', 'services/app-config-service',
+    'app', 'underscore', 'linqjs', 'services/app-config-service',
     'views/forms/edit/editFormUtility',
     'views/forms/edit/field-embed-contact.directive',
     'views/forms/edit/edit-contact-base.directive',
@@ -14,14 +14,15 @@ define([
     'views/directives/workflow-std-buttons',
     'views/forms/edit/document-selector',
     'views/register/directives/register-top-menu',
-    'scbd-angularjs-services/locale'
-  ], function (app, _) {
+    'scbd-angularjs-services/locale',
+    'views/directives/workflow-std-buttons'
+], function (app, _, Enumerable) {
 
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
-                                   "authentication", "Enumerable", "editFormUtility", "$routeParams", "$timeout","underscore", "$route", 
+                                   "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
                                    "breadcrumbs", "appConfigService", "locale",
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
-                                              authentication, Enumerable, editFormUtility, $routeParams, $timeout, _, $route, 
+                                              authentication, editFormUtility, $routeParams, $timeout, $route, 
                                               breadcrumbs, appConfigService, locale) {
 
 
