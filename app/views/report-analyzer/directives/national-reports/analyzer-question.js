@@ -119,6 +119,8 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                         text =  (text.details || text[field]);
                     else if(!!text.number && type == 'number')
                         text =  text.number;          
+                    else if(!field && isLString(text))
+                        text = text                          
                     else if(!field && type == 'string'){
                         text = text
                     }
@@ -136,7 +138,9 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                     if(text && (text.details ||text[field]))
                         text =  (text.details || text[field]);
                     else if(!!text.number && type == 'number')
-                        text =  text.number;                     
+                        text =  text.number;         
+                    else if(!field && isLString(text))
+                        text = text                            
                     else if(!field && type == 'string')
                         text = text
                     else
@@ -183,7 +187,9 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                         if(text && (text.details ||text[field]))
                             text =  (text.details || text[field]);
                         else if(!!text.number && type == 'number')
-                            text =  text.number;          
+                            text =  text.number;         
+                        else if(!field && isLString(text))
+                            text = text                 
                         else if((!field && type == 'string'))
                             text = text
                         else
@@ -652,6 +658,11 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
 
                     return '#'+RR+GG+BB;
                 }
+                
+                function isLString(element){
+                    return element.ar || element.en || element.fr || element.es || element.ru || element.zh;
+                }
+
             }
         };
     }]);
