@@ -5,22 +5,28 @@
     "use strict";
     app.controller("adminUserRolesReportController", ["$scope", "$timeout", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter", "$element",
         function ($scope, $timeout, realm, commonjs, $q, appConfigService, $http, $filter, $element) {
-            $scope.filters = {};
-            $scope.countries = {};
-
-            var roleMapping = {};
+            $scope.sortByField = 'name.en'
+            $scope.reverse = false;
+            $scope.filters      = {};
+            $scope.countries    = {};
+            var regions         = [];            
+            var roleMapping     = {};
+            
             roleMapping['abs']={
                 nfp : 1276,
                 pa  : 1298,
-                nau : 1294
+                nau : 1294,
+                iac : 1295
             }
             roleMapping['abs-trg']={
                 pa  : 1308,
-                nau : 1310
+                nau : 1310,
+                iac : 1309
             }
             roleMapping['abs-dev']={
                 pa  : 1445,
-                nau : 1443
+                nau : 1443,
+                iac : 1442
             }
 //
             $scope.options = {
@@ -36,6 +42,7 @@
                     types.push({ 'identifier': 'nfp', 'name': 'National Focal Point' });
                     types.push({ 'identifier': 'pa', 'name': 'Publishing Authority' });
                     types.push({ 'identifier': 'nau', 'name': 'National Authorized User' });
+                    types.push({ 'identifier': 'iac', 'name': 'ABS-CH IAC' });
                     return types;
                 },
                 filterPartyStatus: function () {
@@ -48,19 +55,26 @@
                 }
             };
            
-            function loadCountries(){
+            function loadCountryAndRegions(){
                 $q.when(commonjs.getCountries())
                 .then(function(data){
                     $scope.countries = data;
                     var eu = _.findWhere($scope.countries, {code: 'EU'});
                     if(eu)
                         eu.code = 'EUR';
-                    
-                    // _.map(data, function(country){
-                    //     $scope.countries[country.code] = {
-                    //         isNPParty : country.isNPParty, name:country.name, code:country.code
-                    //     }
-                    // })
+                })
+                $q.when($http.get('/api/v2013/thesaurus/domains/regions/terms?relations=true', {cache:true}))
+                .then(function(response){
+                    var cbdRegions = [
+                        "D50FE62D-8A5E-4407-83F8-AFCAAF708EA4", // CBD Regional Groups - Africa
+                        "5E5B7AA4-2420-4147-825B-0820F7EC5A4B", // CBD Regional Groups - Asia and the Pacific
+                        "942E40CA-4C23-4D3A-A0B4-736CD0EFCD54", // CBD Regional Groups - Central and Eastern Europe
+                        "3D0CCC9A-A0A1-4399-8FA2-41D4D649DB0E", // CBD Regional Groups - Latin America and the Caribbean
+                        "0EC2E5AE-25F3-4D3A-B71F-8019BB62ED4B"  // CBD Regional Groups - Western Europe and Others
+                    ];
+                    regions = _.map(cbdRegions, function(region){
+                        return _.findWhere(response.data, {identifier: region});
+                    })
                 })
             }
             $scope.loadRecords = function(){
@@ -83,7 +97,7 @@
                         else 
                             countries = _.map($scope.countries, function(country){return country.code.toLowerCase()})
 
-                        var userCountries = _.map(result.data, function(user){ if(!user.government)console.log(user); return user.government})
+                        var userCountries = _.map(result.data, function(user){ if(!user.government) return user.government})
                         var countriesToShow=[];
                         if($scope.filters.filterType == 'have' || $scope.filters.filterType == 'morethenone'){
                             countriesToShow = _.intersection(countries, userCountries);;
@@ -107,7 +121,13 @@
                     // if(countryUsers.length > 0){
                          $scope.totalCount += countryUsers.length;
                          var country = _.findWhere($scope.countries, {code:code.toUpperCase()})
-                         $scope.countriesToShow.push({code:code, name: country.name, count:countryUsers.length, users : countryUsers})
+                         var region = _.find(regions, function(region){
+                             return _.contains(region.narrowerTerms, code)
+                            })
+                         $scope.countriesToShow.push({code:code, name: country.name, count:countryUsers.length, 
+                                                        users : countryUsers, region: ((region||{}).title||{}).en,
+                                                        user : countryUsers
+                                                    })
                     // }
                     // else{
                     //     console.log(code);
@@ -141,6 +161,6 @@
             }
 
 
-            loadCountries();
+            loadCountryAndRegions();
         }]);
 });
