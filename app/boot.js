@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 window.name = 'NG_DEFER_BOOTSTRAP!';
-if(/Safari/.test(navigator.userAgent)) { console.log = function(){}; }
+if(/Safari/.test(navigator.userAgent)) { if(!console.log)console.log = function(){}; }
 
 require.config({
     waitSeconds: 120,
