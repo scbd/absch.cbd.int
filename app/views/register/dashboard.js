@@ -1,6 +1,5 @@
 define(['app', 'underscore',
  'services/role-service', 'services/app-config-service',
- 'views/register/user-preferences/user-preference-filter',
  'views/register/directives/register-top-menu', 'toastr','scbd-angularjs-services'],
 function(app, _) {
     "use strict";
@@ -9,6 +8,9 @@ function(app, _) {
                     'IWorkflows',
         function($rootScope, $scope, storage, roleService, $compile, realm, $q, $routeParams, 
                 $location, $filter, $http, $element, $timeout, toastr, appConfigService, IWorkflows) {
+
+            $scope.nationalSchemas = _.without(appConfigService.nationalSchemas, 'contact');
+            $scope.referenceSchemas = _.without(appConfigService.referenceSchemas, 'capacityBuildingResource');
 
             var schemaFacets = {};
 
