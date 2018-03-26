@@ -10,7 +10,7 @@ define(['app', 'underscore', './app-config-service'], function (app, _) { 'use s
 				if (!$rootScope.user)
 					return false;
 
-				return _.intersection($rootScope.user.roles, role).length;
+				return _.intersection($rootScope.user.roles, role).length > 0;
 			};
 			
 			this.isUserInRoles = function(roles) {
@@ -44,7 +44,7 @@ define(['app', 'underscore', './app-config-service'], function (app, _) { 'use s
 			}
 
 			this.isUser = function() {
-				return this.isUserInRole('User');
+				return this.isUserInRole(['User']);
 					//appConfigService.getRoleName('User'));
 			}
 
