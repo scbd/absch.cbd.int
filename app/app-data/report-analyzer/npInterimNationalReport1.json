@@ -521,8 +521,9 @@
                 "title": "Has your country made use of the checkpoint communique?",
                 "multiple": false,
                 "options": [
-                    { "value": "true", "title": "Yes" },
-                    { "value": "false","title": "No"}
+                    { "value": "yes", "title": "Yes" },
+                    { "value": "no","title": "No"},
+                    { "value": "other","title": "Other"}
                 ],
                 "additionalInfo" : [
                     {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"}
