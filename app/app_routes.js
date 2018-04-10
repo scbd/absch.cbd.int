@@ -37,7 +37,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                when('/forums/caribbean/:threadId',    { templateUrl: 'views/forums/post-list-view.html'    ,label:'Thread-Subject'  ,resolveController: true, resolve : { securized : securize() }, forumId:17378, forumListUrl:'/forums/caribbean/', text:'Caribbean Region Forum'}).
                when('/forums/art10_groups',              { templateUrl: 'views/forums/thread-list-view.html' ,label:'Art 10 Groups'  ,resolveController: true, resolve : { securized : securize() }, forumId:17316, postUrl:'/forums/art10_groups', text:'Forum on Article 10' }).
                when('/forums/art10_groups/:threadId',    { templateUrl: 'views/forums/post-list-view.html'   ,label:'Thread-Subject'  ,resolveController: true, resolve : { securized : securize() }, forumId:17316, forumListUrl:'/forums/art10_groups/', text:'Forum on Article 10' }).
-
+               when('/cms/ui/forums/attachment.aspx',    { template: '<div></div>'   ,label:'POST-Attachments'  ,resolveController: 'views/forums/post-attachment-view', resolve : { securized : securize() }}).
                when('/mailbox',                        { templateUrl: 'views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
                when('/mailbox/:mailId',                { templateUrl: 'views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
 
