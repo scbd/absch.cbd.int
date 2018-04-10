@@ -40,7 +40,7 @@ function(templateHtml, app, _, require) {
 
                 getRegions();
                 getCountries();
-                mapNPParties();
+                mapProtocolParties();
                 ///////////////////////////////////////
                 // REPORT TYPE
                 ///////////////////////////////////////
@@ -67,7 +67,7 @@ function(templateHtml, app, _, require) {
                         return;
                     
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
-                    require(['json!'+reportTypeDetails.questionsUrl], function(res){
+                    require(['json!'+baseUrl+reportTypeDetails.questionsUrl], function(res){
 
                         $timeout(function(){
                             $scope.sections = res;
@@ -96,7 +96,7 @@ function(templateHtml, app, _, require) {
                 //====================================
                 $scope.$watchCollection('selectedRegions', function() {
                     // console.log( $scope.selectedRegionsPreset)
-                    if(_.includes(['npParties', 'npNonParties'], $scope.selectedRegionsPreset))
+                    if(_.includes(['protocolParties', 'protocolNonParties'], $scope.selectedRegionsPreset))
                         return;
 
                     $scope.selectedRegions = $scope.selectedRegions || DefaultRegions.concat();
@@ -131,18 +131,18 @@ function(templateHtml, app, _, require) {
 
                     var preset = $scope.selectedRegionsPreset;
                     $scope.selectedRegionsPresetFilter = [];
-                    if(preset=="cbdRegions" || preset=="npParties" || preset=="npNonParties") { $scope.selectedRegions = DefaultRegions.concat(); }
+                    if(preset=="cbdRegions" || preset=="protocolParties" || preset=="protocolNonParties") { $scope.selectedRegions = DefaultRegions.concat(); }
                     if(preset=="countries")  { $scope.selectedRegions = []; $scope.showCountries = true; }
                     if(preset=="regions")    { $scope.selectedRegions = []; $scope.showRegions = true; }
-                    if(preset=="npParties")  { 
-                        _.each(_.sortBy(_.values($scope.npCountries), "title."+locale), function(country){
-                            if(country.isNPParty)
+                    if(preset=="protocolParties")  { 
+                        _.each(_.sortBy(_.values($scope.protocolCountries), "title."+locale), function(country){
+                            if(country.isProtocolParty)
                                 $scope.selectedRegionsPresetFilter.push(country.code)
                         }); 
                     }
-                    if(preset=="npNonParties")  { 
-                        _.each(_.sortBy(_.values($scope.npCountries), "title."+locale), function(country){
-                            if(!country.isNPParty)
+                    if(preset=="protocolNonParties")  { 
+                        _.each(_.sortBy(_.values($scope.protocolCountries), "title."+locale), function(country){
+                            if(!country.isProtocolParty)
                                 $scope.selectedRegionsPresetFilter.push(country.code)
                         }); 
                     }
@@ -206,14 +206,14 @@ function(templateHtml, app, _, require) {
                 //
                 //
                 //====================================
-                function mapNPParties() {
+                function mapProtocolParties() {
                     
                    $q.when(commonjs.getCountries())
                    .then(function(data){
-                       $scope.npCountries = [];
+                       $scope.protocolCountries = [];
                        _.each(data, function(country){
-                            $scope.npCountries[country.code.toLowerCase()] = {
-                                title : country.name, isNPParty : country.isNPParty, code : country.code.toLowerCase()
+                            $scope.protocolCountries[country.code.toLowerCase()] = {
+                                title : country.name, isProtocolParty : country.isAppProtocolParty, code : country.code.toLowerCase()
                             }
                        });
                    })

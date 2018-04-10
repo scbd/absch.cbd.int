@@ -3,6 +3,13 @@
 
 <head>
     <base href="<%=baseUrl%>">
+    
+    <script>
+        window.clearingHouseHost = '<%=clearingHouseHost%>';
+        window.appVersion = document.documentElement.attributes['app-version'].value;
+        window.lang = '<%=baseUrl%>'//.replace('/','')
+    </script>
+    
     <meta charset="utf-8">
     <title>Biosafety Clearing-House</title>
     <meta name="description" content="The Biosafety Clearing-House">

@@ -1,5 +1,5 @@
 define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 'scbd-angularjs-filters', 
-'../../filters/cases', 'scbd-angularjs-services/locale', 'views/directives/view-reference-document'],
+'../../filters/cases', 'scbd-angularjs-services/locale', 'views/directives/view-reference-document', 'scbd-angularjs-services/authentication'],
 function(templateHtml, app, _, require, $) { 'use strict';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
@@ -160,7 +160,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
                     
-                    require(['json!'+$scope.activeReport.mappingsUrl], function(res){
+                    require(['json!'+baseUrl+$scope.activeReport.mappingsUrl], function(res){
                         deferred.resolve(res);
                     });
 
@@ -176,7 +176,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
                     
-                    require(['json!'+$scope.activeReport.questionsUrl], function(res){
+                    require(['json!'+baseUrl+$scope.activeReport.questionsUrl], function(res){
 
                         var selection = _($scope.selectedQuestions).reduce(mapReduce(), {});
                         var data =  _.filter(angular.copy(res), function(section) {
@@ -352,8 +352,8 @@ function(templateHtml, app, _, require, $) { 'use strict';
                 var nrAnalyzer = this;
                 var isScbd = false;
 
-                $http.get('/api/v2013/authentication/user').then(function(res){
-                    isScbd = !!~res.data.roles.indexOf('ScbdStaff');
+                authentication.getUser().then(function(res){
+                    isScbd = !!~res.roles.indexOf('ScbdStaff');
                 });
 
                 //====================================
@@ -397,9 +397,12 @@ function(templateHtml, app, _, require, $) { 'use strict';
                     var item = _.head(countriesTexts)
                     if(item && item.field){
                         var field = item.field;
+                        $scope.questionType = field.field;
                         var subTitle = _.find(question.additionalInfo, function(info){return info.field == field})
-                        if(subTitle)
+                        if(subTitle){
                             $scope.subTitle = subTitle.title;
+                            $scope.questionType = subTitle.field;
+                        }
                     }
                     $scope.currentQuestion = question;
                     $scope.countriesTexts  = countriesTexts;
@@ -486,13 +489,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                         query.date = { $lt : { $date :  options.maxDate } };
                     }
 
-                    var collectionUrls = {
-                        cpbNationalReport2 : "/api/v2015/national-reports-cpb-2",
-                        cpbNationalReport3 : "/api/v2015/national-reports-cpb-3",
-                        npInterimNationalReport1  : "/api/v2017/national-reports-np-1"
-                    };
-
-                    return $http.get(collectionUrls[options.reportType], {  params: { q : query, f : fields }, cache : true }).then(function(res) {
+                    return $http.get($scope.activeReport.dataUrl, {  params: { q : query, f : fields }, cache : true }).then(function(res) {
                         return _.map(res.data, function(report) {
                             report.government = nrAnalyzer.normalizeAnswer(report.government);
                             return report;
@@ -519,23 +516,6 @@ function(templateHtml, app, _, require, $) { 'use strict';
 
                     return v;
                 };
-
-                // //==============================================
-                // //
-                // //
-                // //==============================================
-                // nrAnalyzer.normalizeAdditionalInfo = function (v) {
-
-                //     if(_.isArray(v))
-                //         return _(v).map(nrAnalyzer.normalizeAnswer).compact().value();
-
-                //     v = v && (v.value || v.identifier || v);
-
-                //     if(typeof(v)=='boolean')
-                //         v = v.toString();
-
-                //     return v;
-                // };
             }]
         };
     }]);

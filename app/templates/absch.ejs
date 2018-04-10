@@ -186,7 +186,8 @@
             ga('set',    'hostname', window.location.hostname);
             ga('set',    'location', undefined);
         }
-        
+
+        window.clearingHouseHost = '<%=clearingHouseHost%>';
         window.appVersion = document.documentElement.attributes['app-version'].value;
         window.lang = '<%=baseUrl%>'//.replace('/','')
     </script>

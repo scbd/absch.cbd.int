@@ -3,11 +3,10 @@ define(['./directives/national-reports/questions-selector', './directives/nation
     return ['$scope', '$location', 'realm', '$timeout',
      function($scope, $location, realm, $timeout) {
         
+        var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
         $scope.showAnalyzer = false;
-        $scope.realm = realm;
         $scope.self = $scope;
-        
-        require(['json!app-data/report-analyzer-mapping.json'], function(res){
+        require(['json!'+baseUrl+'app-data/report-analyzer-mapping.json'], function(res){
             var appName = realm.value.replace(/-.*/,'').toLowerCase();
             
             $scope.reportData = res[appName];

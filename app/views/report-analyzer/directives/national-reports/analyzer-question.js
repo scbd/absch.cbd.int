@@ -7,7 +7,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
     //
     //
     //==============================================
-    app.directive('nationalReportAnalyzerQuestion', ['$timeout', function($timeout) {
+    app.directive('nationalReportAnalyzerQuestion', ['$timeout', 'realm', function($timeout, realm) {
         return {
             restrict : 'E',
             replace : true,
@@ -22,6 +22,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
             },
             link: function ($scope, el, attr, nrAnalyzer) {
 
+                $scope.realm = realm.value
                 initTooltips();
 
                 //==============================================
@@ -113,11 +114,14 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 //
                 //
                 //==============================================
-                $scope.hasText = function(government, text, field) {
+                $scope.hasText = function(government, text, field, type) {
                     if(text && (text.details || text[field]))
                         text =  (text.details || text[field]);
-                    else if(!field && text)
+                    else if(!!text.number && type == 'number')
+                        text =  text.number;          
+                    else if(!field && type == 'string'){
                         text = text
+                    }
                     else
                         text = undefined;
                     
@@ -128,12 +132,12 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 //
                 //
                 //==============================================
-                $scope.showText = function(government, text, field) {
+                $scope.showText = function(government, text, field, type) {
                     if(text && (text.details ||text[field]))
                         text =  (text.details || text[field]);
-                    else if(!!text.number && field == 'number')
+                    else if(!!text.number && type == 'number')
                         text =  text.number;                     
-                    else if(!field && text)
+                    else if(!field && type == 'string')
                         text = text
                     else
                         text = undefined;
@@ -141,7 +145,8 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                     nrAnalyzer.showTexts([{
                         government : government,
                         text : text,
-                        field : field
+                        field : field,
+                        type: type
                     }], $scope.question);
                 };
 
@@ -149,7 +154,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 //
                 //
                 //==============================================
-                $scope.showTexts = function(governments, field) {
+                $scope.showTexts = function(governments, field, type) {
                     
                     if(!governments)
                         governments = _.pluck($scope.reports, 'government');
@@ -189,7 +194,8 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                         return {
                             government : report.government,
                             text : text,
-                            field : field
+                            field : field,
+                            type: type
                         };
 
                     }).value();

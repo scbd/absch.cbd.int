@@ -161,7 +161,7 @@ define([
       if (!document)
         return false;
       var allowedRegionalMeasuresMapping = {
-        "pe-onhold"    : "9C5E1A4D-E8EE-4C74-B9C9-5C7BCDF6B84A",
+        "pe"    : "9C5E1A4D-E8EE-4C74-B9C9-5C7BCDF6B84A",
         "eu"    : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e",
         "eur"   : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e" 
       }

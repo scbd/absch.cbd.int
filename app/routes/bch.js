@@ -4,8 +4,6 @@ define(['require', 'app', 'lodash', 'angular-route', 'services/app-config-servic
 
     app.config(['$routeProvider', '$locationProvider', 'realmProvider', function ($routeProvider, $locationProvider, realmProvider) {
         
-        realmProvider.setFallbackRealm('BCH-DEV');
-
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
         

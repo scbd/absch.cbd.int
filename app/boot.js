@@ -123,3 +123,22 @@ require.config({
 });
 
 define("_slaask", window._slaask);
+
+//==================================================
+// Protect window.console method calls, e.g. console is not defined on IE
+// unless dev tools are open, and IE doesn't define console.debug
+//==================================================
+(function fixIEConsole() { 'use strict';
+
+    if (!window.console) {
+        window.console = {};
+    }
+
+    var methods = ["log", "info", "warn", "error", "debug", "trace", "dir", "group","groupCollapsed", "groupEnd", "time", "timeEnd", "profile", "profileEnd", "dirxml", "assert", "count", "markTimeline", "timeStamp", "clear"];
+    var noop    = function() {};
+
+    for(var i = 0; i < methods.length; i++) {
+        if (!window.console[methods[i]])
+            window.console[methods[i]] = noop;
+    }
+})();
