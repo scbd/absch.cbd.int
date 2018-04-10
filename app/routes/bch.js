@@ -21,13 +21,13 @@ define(['require', 'app', 'lodash', 'angular-route', 'services/app-config-servic
                whenAsync('/register/dashboard',                     { templateUrl: 'views/register/dashboard.html',    controller: function() { return importQ('views/register/dashboard');   }, label:'Dashboard', resolve : { user : securize() }}).
                whenAsync('/register/:document_type/status/:status', { templateUrl: 'views/register/record-list.html',  controller: function() { return importQ('views/register/record-list'); }, label:'Status',    resolve : { user : securize(null,true) }}).
 
-               whenAsync('/register/contact/new',       { templateUrl: 'views/forms/edit/edit-contact.html',                   label:'New',  param:'true', resolveController: true,documentType :'CON' , resolve : { securized : securize(null,null, true) }, }).
-               whenAsync('/register/authority/new',     { templateUrl: 'views/forms/edit/edit-authority.html',                 label:'New',  param:'true', resolveController: true,documentType :'MSR' , resolve : { securized : securize(null,true, true) }, }).
-               whenAsync('/register/database/new',      { templateUrl: 'views/forms/edit/edit-database.html',                  label:'New',  param:'true', resolveController: true,documentType :'NDB' , resolve : { securized : securize(null,true, true) }, }).
-               whenAsync('/register/resource/new',      { templateUrl: 'views/forms/edit/edit-resource.html',                  label:'New',  param:'true', resolveController: true,documentType :'VLR' , resolve : { securized : securize(null, null, true) }, }).
-               whenAsync('/register/CBI/new',           { templateUrl: 'views/forms/edit/edit-capacityBuildingInitiative.html',label:'New',  param:'true', resolveController: true,documentType :'CBI' , resolve : { securized : securize(null, null, true) }, }).
+               whenAsync('/register/contact/new',       { templateUrl: 'views/forms/edit/edit-contact.html',                   label:'New',  param:'true', resolveController: true,documentType :'CON' , resolve : { user : securize(null,null, true) }, }).
+               whenAsync('/register/authority/new',     { templateUrl: 'views/forms/edit/edit-authority.html',                 label:'New',  param:'true', resolveController: true,documentType :'MSR' , resolve : { user : securize(null,true, true) }, }).
+               whenAsync('/register/database/new',      { templateUrl: 'views/forms/edit/edit-database.html',                  label:'New',  param:'true', resolveController: true,documentType :'NDB' , resolve : { user : securize(null,true, true) }, }).
+               whenAsync('/register/resource/new',      { templateUrl: 'views/forms/edit/edit-resource.html',                  label:'New',  param:'true', resolveController: true,documentType :'VLR' , resolve : { user : securize(null, null, true) }, }).
+               whenAsync('/register/CBI/new',           { templateUrl: 'views/forms/edit/edit-capacityBuildingInitiative.html',label:'New',  param:'true', resolveController: true,documentType :'CBI' , resolve : { user : securize(null, null, true) }, }).
 
-               when('/register/CON/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { securized : securize(null,null, true) }, }).
+               when('/register/CON/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { user : securize(null,null, true) }, }).
 
 
 
