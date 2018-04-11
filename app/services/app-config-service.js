@@ -1,5 +1,5 @@
 define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost||''),
-		'underscore'], function (app, realmConfigurations, _) { 'use strict';
+		'lodash'], function (app, realmConfigurations, _) { 'use strict';
     
 	var realmConfig = _.findWhere(realmConfigurations,{ host : window.location.host}) || _.head(realmConfigurations);
 
