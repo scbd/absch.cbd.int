@@ -7,7 +7,7 @@
     "angular-animate": "1.4",
     "angular-block-ui": "0.2.2",
     "angular-cookies": "1.4",
-    "angular-flex": "git://github.com/scbd/angular-flex.git#2.1.0",
+    "angular-flex": "git://github.com/scbd/angular-flex.git",
     "angular-gravatar": "0.4.2",
     "angular-intro.js": "1.2.4",
     "angular-loading-bar": "https://github.com/chieffancypants/angular-loading-bar.git#7db32aed5260560a5d4bbdaf4ea7365072d41ec8",
