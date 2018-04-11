@@ -5,8 +5,6 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
 
     app.config(['extendedRouteProvider', '$locationProvider', 'realmProvider', function ($routeProvider, $locationProvider, realmProvider) {
         
-        realmProvider.setFallbackRealm('ABS-DEV');
-
         $locationProvider.html5Mode(true);
         $locationProvider.hashPrefix('!');
         
@@ -158,7 +156,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                 var roles = _.clone(roleList||[]);
 
                 if (roles && !_.isEmpty(roles)) {
-                    roles = _.map(roles, appConfigService.getRoleName);
+                    roles = _.flatten(_.map(roles, appConfigService.getRoleName));
                 }
                 if(useNationalRoles){
                     var path = $location.$$url.replace('/register/','');
