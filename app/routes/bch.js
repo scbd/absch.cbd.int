@@ -24,7 +24,8 @@ define(['require', 'app', 'lodash', 'angular-route', 'services/app-config-servic
                whenAsync('/register/database/new',      { templateUrl: 'views/forms/edit/edit-database.html',                  label:'New',  param:'true', resolveController: true,documentType :'NDB' , resolve : { user : securize(null,true, true) }, }).
                whenAsync('/register/resource/new',      { templateUrl: 'views/forms/edit/edit-resource.html',                  label:'New',  param:'true', resolveController: true,documentType :'VLR' , resolve : { user : securize(null, null, true) }, }).
                whenAsync('/register/CBI/new',           { templateUrl: 'views/forms/edit/edit-capacityBuildingInitiative.html',label:'New',  param:'true', resolveController: true,documentType :'CBI' , resolve : { user : securize(null, null, true) }, }).
-
+               whenAsync('/register/pending-requests',  { templateUrl: 'views/register/pending-tasks.html',                     label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize() }}).
+               
                when('/register/CON/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { user : securize(null,null, true) }, }).
 
 
