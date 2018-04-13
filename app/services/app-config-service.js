@@ -3,32 +3,58 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost
     
 	var realmConfig = _.findWhere(realmConfigurations,{ host : window.location.host}) || _.head(realmConfigurations);
 
-	app.factory('appConfigService',  ["$location", function($location) {
-		console.log(realmConf);
+	var nationalSchemas  = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='national'  ? key : undefined; }));
+	var referenceSchemas = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='reference' ? key : undefined; }));
+	var scbdSchemas      = [ "meeting", "notification", "pressRelease", "statement", "news", "new" ];
+	
+	console.log("Realm:", (realmConfig||{}).realm || 'NOT_FOUND');
 
-		var realmConfigurations = realmConf || window.realmConfigurations;
-		var realmConfig; 		
-		if(realmConfigurations.length >1)
-			realmConfig = _.findWhere(realmConfigurations,{host:location.host});
-		else
-			realmConfig = _.head(realmConfigurations);
+	if(!realmConfig)
+		throw new Error("Unknow realm for host: "+window.location.host + ' clearingHouseHost: ' + window.clearingHouseHost);
 
-		var nationalSchemas 	= _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='national' ? key : undefined}))
-			//[ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint", "absNationalReport", "contact"];
-		var referenceSchemas 	= _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='reference' ? key : undefined}))
-			//[ "resource", "modelContractualClause", "communityProtocol", "capacityBuildingInitiative", "capacityBuildingResource"];
-		var scbdSchemas			= [ "meeting", "notification", "pressRelease", "statement", "news", "new" ];
+    app.provider("realm", function() {
+        
+        var realmProvider = this;
+        
+        realmProvider.$get = [function() {
 
+            if(!realmConfig)
+                throw new Error("Unknow realm for host: "+window.location.host);
 
-        var currentRealm 		= realmConfig.realm;
+            return { 
+                value : realmConfig.realm,
 
-        function getRoles(){
-            return realmConfig.roles;
-        }
-		//temporary
-		String.prototype.lowerCaseFirstLetter = function() {
-			return this.charAt(0).toLowerCase() + this.slice(1);
-		}
+                is : function(realm, strict) {
+                    
+                    var realmRe = strict ? new RegExp('^'+escapeRegExp(realm)+'($)')     //  MATCH realm exactly
+                                         : new RegExp('^'+escapeRegExp(realm)+'(\b|$)'); //  MATCH realm with boundaries eg: ABS, ABS-*, BCH, BCH-*
+                    
+                    return realmRe.test(realmConfig.realm);
+                },
+
+                getRole : function(roleName) {
+                    
+                    var roles = realmConfig.roles[patchRoleName(roleName)];
+                    
+                    if(!roles)
+                        console.warn(roleName + ' role is not configured for realm ' + realmConfig.realm + ', please update realm-configuration');
+                        
+                    return roles || [roleName];
+                },
+                
+                nationalRoles : function() {
+                    return _(realmConfig.roles).values().flatten().compact().uniq().without('User', 'user').value();
+                },
+
+                schemas : function() {
+                    return realmConfig.schemas;
+                }                
+            };
+        }];
+    });    
+
+	app.factory('appConfigService',  ["$injector", function($injector) {
+        
 
         //===========================
         //

@@ -295,11 +295,14 @@ function (app, moment, schemaName, schemaShortName) {
   //
   //
   //============================================================
-  app.filter("schemaName", [function() {
+  app.filter("schemaName", ['realm', 'locale', function(realm, locale) {
+    var schemas = realm.schemas();
 		return function( schema ) {
 			if(!schema)return schema;
+      
+      var result = ((schemas[schema]||{}).title||{})[locale];
 
-      return schemaName[schema.toLowerCase()] || schema;
+      return result || schemaName[schema.toLowerCase()] || schema;//legacy
 
 		};
 	}]);
