@@ -58,10 +58,10 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
                
                when('/pdf/:type/:schema/:documentId/:revision?',               { templateUrl: 'views/pdf-viewer/records-pdf-viewer.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
                               
-               when('/register',                                           {templateUrl: 'views/register/dashboard.html',         label:'Management Center',  param:'true', resolveController: true, resolve : { securized : securize() }}).
-               when('/dashboard',                                          {redirectTo:  '/register/dashboard'}).
-               when('/register/dashboard',                                 {templateUrl: 'views/register/dashboard.html',         label:'Dashboard',  param:'true', resolveController: true, resolve : { securized : securize() }}).
-               
+               when('/register',                                           { templateUrl: 'views/register/dashboard.html',         label:'Management Center',  param:'true', resolveController: true, resolve : { securized : securize() }}).
+               when('/dashboard',                                          { redirectTo:  '/register/dashboard'}).
+               when('/register/dashboard',                                 { templateUrl: 'views/register/dashboard.html',         label:'Dashboard',  param:'true', resolveController: true, resolve : { securized : securize() }}).
+               when('/register/pending-requests',                          { templateUrl: 'views/register/pending-tasks.html',            label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize() }}).
                when('/register/user-preferences/:tab?',                    { templateUrl: 'views/register/user-preferences/preferences.html',          label:'ABSCH Admin',    param:'true', resolveController: true,resolve : { securized : securize() }}).
                when('/register/admin',                                     { templateUrl: 'views/register/admin.html',          label:'ABSCH Admin',    param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                when('/register/notifications',                             { templateUrl: 'views/register/notifications.html',  label:'Notifications',  param:'true', resolveController: true,resolve : { securized : securize() }}).
@@ -101,7 +101,7 @@ define(['app', 'underscore', 'js/extended-route-provider','scbd-angularjs-servic
 
                when('/register/:document_type/:documentID/view',           {templateUrl: 'views/register/record-details.html',    label:'View',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
-               when('/register/admin/pending-requests',         { templateUrl: 'views/register/admin/pending-tasks.html',      label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+               when('/register/admin/pending-requests',         { templateUrl: 'views/register/pending-tasks.html',            label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                when('/register/admin/reported-records',         { templateUrl: 'views/register/admin/reported-records.html',   label:'Reported Records',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                when('/register/admin/reported-records/:id',     { templateUrl: 'views/register/admin/reported-records.html',   label:'Record',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                when('/register/admin/report-counts',            { templateUrl: 'views/register/admin/report-count.html',       label:'Report Counts',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).

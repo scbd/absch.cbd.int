@@ -1,34 +1,21 @@
 define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'scbd-angularjs-controls',
-    'views/register/directives/register-top-menu',
+    'views/register/directives/register-top-menu', 'services/role-service',
     'views/directives/task-id-directive',
     'views/forms/view/record-loader.directive'], function (app) {
 
         "use strict";
-        app.controller("adminPendingTasksCotroller", ["$scope", "$timeout", "IWorkflows", "realm", "commonjs", '$rootScope',
-            function ($scope, $timeout, IWorkflows, realm, commonjs, $rootScope) {
+        app.controller("pendingTasksCotroller", ["$scope", "$timeout", "IWorkflows", "realm", "commonjs", '$rootScope', 'roleService', 'locale',
+            function ($scope, $timeout, IWorkflows, realm, commonjs, $rootScope, roleService, locale) {
                 $scope.filters = {};
                 $scope.sortTerm = 'createdOn';
                 $scope.orderList = true;
                 $rootScope.stopSmoothScroll = true;
-                var filterQuery = {
-                    $and: [
-                        { state: "running" },
-                        { "data.realm": realm.value },
-                        { createdOn: { "$gte": moment().subtract(12, "weeks").toISOString() } }
-                    ]
-                };
-
+                
                 $scope.options = {
                     filterTypes: function () {
-                        var types = [];
-                        types.push({ 'identifier': 'authority', 'name': 'Competent National Authority' });
-                        types.push({ 'identifier': 'measure', 'name': 'Legislative, administrative or policy measures' });
-                        types.push({ 'identifier': 'database', 'name': 'National Websites and Databases' });
-                        types.push({ 'identifier': 'absPermit', 'name': 'Internationally Recognized Certificate of Compliance' });
-                        types.push({ 'identifier': 'absCheckpoint', 'name': 'Checkpoints' });
-                        types.push({ 'identifier': 'absCheckpointCommunique', 'name': 'Checkpoint Communiqués' });
-                        types.push({ 'identifier': 'resource', 'name': 'Virtual Library Record' });
-                        return types;
+                        return _.sortBy(_.map(realm.schemas(), function(schema, key){
+                            return {identifier: key, name: schema.title[locale]}
+                        }), "name");
                     },
                     filterStatus: function () {
                         var status = [];
@@ -64,12 +51,13 @@ define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'scbd-an
                 //==============================
                 //
                 //==============================
-                function load(taskGroupBy) {
+                function load(query) {
 
                     if ($scope.recordCount > 0) {
-
+                        if(!query)
+                            query = buildQuery();
                         $scope.loadingTasks = true;
-                        IWorkflows.query(filterQuery, null, $scope.length, $scope.skip == 0 ? 0 : $scope.length * $scope.skip).then(function (workflows) {
+                        IWorkflows.query(query, null, $scope.length, $scope.skip == 0 ? 0 : $scope.length * $scope.skip).then(function (workflows) {
                             $scope.skip++;
                             var tasks = [];
                             //tasks = _.clone($scope.taskLists||[]);
@@ -105,20 +93,22 @@ define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'scbd-an
 
                 }
 
-                $scope.loadTasks = function () {
+                $scope.loadTasks = function (query) {
                     if ($scope.loadingTasks || $scope.skip > Math.ceil($scope.recordCount / $scope.length))
                         return;
 
+                    if(!query)
+                        query = buildQuery();
                     $scope.loadingTasks = true;
                     //get record count
                     if (!$scope.recordCount)
-                        IWorkflows.query(filterQuery, 1).then(function (recordCount) {
+                        IWorkflows.query(query, 1).then(function (recordCount) {
                             $scope.recordCount = recordCount.count;
                             $scope.tasks = [];
-                            load();
+                            load(query);
                         });
                     else
-                        load();
+                        load(query);
                 }
                 //==============================
                 //
@@ -155,24 +145,35 @@ define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'scbd-an
 
                 $scope.$watch('filters', function(old, newVal){
 
-                     //{ state: "running" },
-                    var queries = [ 
-                                    { "data.realm": realm.value }
-                                  ]
-                    if($scope.filters.endDate)
-                        queries.push({ createdOn: { "$lte": moment(moment($scope.filters.endDate).format("YYYY-MM-DD")).toISOString() } })
-                    
-                    if($scope.filters.startDate)
-                        queries.push({ createdOn: { "$gte": moment(moment($scope.filters.startDate).format("YYYY-MM-DD")).toISOString() } })
-                    
-                    filterQuery.$and = queries;
-                    // console.log(filterQuery);
                     $scope.recordCount = 0;
                     $scope.length = 25;
                     $scope.skip = 0;
-                    $scope.loadTasks();
-                }, true)
+                    $scope.loadTasks(buildQuery());
+                }, true);
 
+                function buildQuery(){
+                    var queries = {
+                        $and: [
+                            { state: "running" },
+                            { "data.realm": realm.value }
+                        ]
+                    };
+                    if(!roleService.isAdministrator()){
+                        queries.$and.push({"activities.assignedTo": $rootScope.user.userID});
+                    }
+                    if($scope.filters.endDate)
+                        queries.$and.push({ createdOn: { "$lte": moment(moment($scope.filters.endDate).format("YYYY-MM-DD")).toISOString() } })
+                    
+                    if($scope.filters.startDate)
+                        queries.$and.push({ createdOn: { "$gte": moment(moment($scope.filters.startDate).format("YYYY-MM-DD")).toISOString() } })
+                    else
+                        queries.$and.push({ createdOn: { "$gte": moment().subtract(12, "weeks").toISOString() }});
+                        
+                    if($scope.filters.filterType && $scope.filters.filterType.length > 0)
+                        queries.$and.push({ "data.metadata.schema": { $in: $scope.filters.filterType }});
+                    
+                    return queries;
+                }
 
                 $scope.$on('$destroy', function(){$rootScope.stopSmoothScroll = false;})
             }]);
