@@ -1,6 +1,6 @@
 define(['app', 'underscore', 'angular', 
  'services/role-service', 'services/app-config-service',
- 'views/register/directives/register-top-menu', 'toastr','scbd-angularjs-services'],
+ 'views/register/directives/register-top-menu', 'toastr','scbd-angularjs-services', 'views/register/directives/top-records'],
 function(app, _, ng) {
     "use strict";
     return ["$rootScope", "$scope", "IStorage", "roleService", "$compile", "realm", "$q",
@@ -11,6 +11,8 @@ function(app, _, ng) {
 
             $scope.nationalSchemas = _.without(appConfigService.nationalSchemas, 'contact');
             $scope.referenceSchemas = _.without(appConfigService.referenceSchemas, 'capacityBuildingResource');
+            $scope.topRecords = {};
+            $scope.user = $rootScope.user;
 
             var schemaFacets = {};
 
@@ -23,8 +25,6 @@ function(app, _, ng) {
             $scope.isFilter = function(filter) {
                 return $scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
             }
-
-            $scope.user = $rootScope.user;
 
             if ($scope.user.isAuthenticated) {
                 $scope.roles = {
@@ -42,6 +42,11 @@ function(app, _, ng) {
 
             }
 
+
+            $scope.showTopRecords = function($event, schema) {
+                $event.stopPropagation();
+                $scope.topRecords[schema] = !$scope.topRecords[schema];
+            }
 
             $scope.gotoNew = function($event, cftype) {
                 $event.stopPropagation();
