@@ -17,6 +17,9 @@
         .popover.right>.arrow:after {
             border-right-color: #d9534f;
         }
+        .cursor{
+            cursor: pointer;
+        }
     </style>
     <span register-top-menu></span>
 
@@ -55,114 +58,114 @@
             </div>
         </div>
         <div class="register-content-content">
-
             <div class="row well" style="margin:0 0 30px 0">
-
-
-
                 <h4 style="padding:3px;margin-top:0;border-bottom:1px solid #ddd;">&nbsp; Welcome
                     <span class="color-black bold">{{user.name}}</span>
+                    <i class="pull-right fa fa-chevron-circle-down cursor" ng-show="!showProfileInfo" aria-hidden="true" ng-click="showProfileInfo=true"></i>
+                    <i class="pull-right fa fa-chevron-circle-up cursor"   ng-show="showProfileInfo" aria-hidden="true" ng-click="showProfileInfo=false"></i>
                 </h4>
+                <div class="row" ng-if="showProfileInfo">
+                    <div class="col-md-5 cp-header">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label>Name:</label>
+                                </td>
+                                <td>
+                                    <strong>{{user.name}}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Primary email:</label>
+                                </td>
+                                <td>
+                                    <strong>{{user.email}}</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Country affiliation:</label>
+                                </td>
+                                <td ng-if="user.government">
+                                    <a translation-url href="/countries/{{user.government | uppercase}}">
+                                        <strong>{{userCountry|term}}</strong>
+                                    </a>
+                                </td>
+                                <td ng-if="!user.government">
+                                    <strong>none</strong>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-5 cp-header">
+                        <table>
+                            <td>
+                                <label>Role(s):</label>
+                            </td>
+                            <td>
+                                <span class="comma" ng-if="roles.isAbsNationalFocalPoint">
+                                    <strong>ABS National Focal Point </strong>
+                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="The ABS National Focal Point is responsible for liason with the Secretariat as well as to designate themselves or another user as the Publishing Authority (PA) for the ABSCH."
+                                        data-container="body"></span>
+                                </span>
 
-                <div class="col-md-5 cp-header">
-                    <table>
-                        <tr>
-                            <td>
-                                <label>Name:</label>
+                                <span class="comma" ng-if="roles.isAbsPublishingAuthority">
+                                    <strong>National Publishing Authority (PA)</strong>
+                                    <span class="helpinfoInline fa fa-info-circle " data-toggle="tooltip" data-html="true" data-title="Each country can designate only one PA for the ABSCH. The PA's job is to make information publically available on the ABSCH by verifing and publishing records.
+                                    PAs can also designate National Authorized Users (NAUs) who are allowed to submit draft records for their country."
+                                        data-container="body"></span>
+                                </span>
+
+                                <span class="comma" ng-if="roles.isAbsNationalAuthorizedUser">
+                                    <strong>National Authorized User (NAU)</strong>
+                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="The ABS National Focal Point has the responsiblity to designate themselves or another user as the Publishing Authority (PA) as well as be the liason with the Secretariat."
+                                        data-container="body"></span>
+                                </span>
+
+                                <span class="comma" ng-if="roles.isUser">
+                                    <strong>Regular User</strong>
+                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="Regular users can create draft reference records and request their publication from the SCBD."
+                                        data-container="body"></span>
+                                </span>
+
+                                <span class="comma" ng-if="roles.isAbsAdministrator">
+                                    <strong class="color-pink">ABSCH Admin</strong>
+                                </span>
+
+                                <span class="comma" ng-if="roles.isAdministrator">
+                                    <strong class="color-pink">Admin</strong>
+                                </span>
+
                             </td>
-                            <td>
-                                <strong>{{user.name}}</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Primary email:</label>
-                            </td>
-                            <td>
-                                <strong>{{user.email}}</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Country affiliation:</label>
-                            </td>
-                            <td ng-if="user.government">
-                                <a translation-url href="/countries/{{user.government | uppercase}}">
-                                    <strong>{{userCountry|term}}</strong>
-                                </a>
-                            </td>
-                            <td ng-if="!user.government">
-                                <strong>none</strong>
-                            </td>
-                        </tr>
-                    </table>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Update profile:</label>
+                                </td>
+                                <td>
+                                    <a translation-url href="https://accounts.cbd.int/profile" target="_new">
+                                        <strong>accounts.cbd.int/profile</strong>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Update password:</label>
+                                </td>
+                                <td>
+                                    <a translation-url href="https://accounts.cbd.int/password" target="_new">
+                                        <strong>accounts.cbd.int/password</strong>
+                                    </a>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-                <div class="col-md-5 cp-header">
-                    <table>
-                        <td>
-                            <label>Role(s):</label>
-                        </td>
-                        <td>
-                            <span class="comma" ng-if="roles.isAbsNationalFocalPoint">
-                                <strong>ABS National Focal Point </strong>
-                                <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="The ABS National Focal Point is responsible for liason with the Secretariat as well as to designate themselves or another user as the Publishing Authority (PA) for the ABSCH."
-                                    data-container="body"></span>
-                            </span>
-
-                            <span class="comma" ng-if="roles.isAbsPublishingAuthority">
-                                <strong>National Publishing Authority (PA)</strong>
-                                <span class="helpinfoInline fa fa-info-circle " data-toggle="tooltip" data-html="true" data-title="Each country can designate only one PA for the ABSCH. The PA's job is to make information publically available on the ABSCH by verifing and publishing records.
-                                PAs can also designate National Authorized Users (NAUs) who are allowed to submit draft records for their country."
-                                    data-container="body"></span>
-                            </span>
-
-                            <span class="comma" ng-if="roles.isAbsNationalAuthorizedUser">
-                                <strong>National Authorized User (NAU)</strong>
-                                <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="The ABS National Focal Point has the responsiblity to designate themselves or another user as the Publishing Authority (PA) as well as be the liason with the Secretariat."
-                                    data-container="body"></span>
-                            </span>
-
-                            <span class="comma" ng-if="roles.isUser">
-                                <strong>Regular User</strong>
-                                <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="Regular users can create draft reference records and request their publication from the SCBD."
-                                    data-container="body"></span>
-                            </span>
-
-                            <span class="comma" ng-if="roles.isAbsAdministrator">
-                                <strong class="color-pink">ABSCH Admin</strong>
-                            </span>
-
-                            <span class="comma" ng-if="roles.isAdministrator">
-                                <strong class="color-pink">Admin</strong>
-                            </span>
-
-                        </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Update profile:</label>
-                            </td>
-                            <td>
-                                <a translation-url href="https://accounts.cbd.int/profile" target="_new">
-                                    <strong>accounts.cbd.int/profile</strong>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Update password:</label>
-                            </td>
-                            <td>
-                                <a translation-url href="https://accounts.cbd.int/password" target="_new">
-                                    <strong>accounts.cbd.int/password</strong>
-                                </a>
-                            </td>
-
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
+            </div>            
+            <top-records filter="workingDocumentLock/lockedOn ne null" title="Pending Requests" top="1" view-all-url="/register/notifications"></top-records>
+            <br/>
             <div id="SubmitPage">
                 <h4 class="visible-xs" style="padding:3px;margin-top:0;border-bottom:1px solid #ddd;">
                     Record overview
@@ -202,6 +205,10 @@
                     </div>
                     <div class="row link1" style="padding:0;margin:0 -3px 5px -3px">
                         <div class="col-xs-9 col-sm-6 col-md-9" ng-click="gotoList($event,'contact')">
+                            <span ng-click="showTopRecords($event,'contact')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;">
+                                <i class="fa fa-chevron-circle-down cursor" ng-class="{'fa-chevron-circle-down':!topRecords['contact'], 'fa-chevron-circle-up':topRecords['contact']}"
+                                 aria-hidden="true"></i>                                
+                            </span>
                             <span ng-click="gotoNew($event,'contact')" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;">
                                 <i class="fa fa-plus"></i>
                             </span>
@@ -219,6 +226,9 @@
                         <div class="col-xs-1 col-sm-2 col-md-1 text-right">
                             <a translation-url ng-href="/register/CON/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('contact','request')===0}">{{facets('contact','request')}}</a>
                         </div>
+                        <div ng-if="topRecords['contact']" class="col-xs-12">
+                            <top-records schema="contact" top="10" style="padding-top:5px;" show-schema-name="false"></top-records>
+                        </div>
                     </div>
 
                 </div>
@@ -235,6 +245,10 @@
                     </div>
                     <div class="row link1" style="padding:0;margin:0 -3px 5px -3px" ng-repeat="schema in nationalSchemas">
                         <div class="col-xs-9 col-sm-6 col-md-9" ng-click="gotoList($event,schema)">
+                            <span ng-click="showTopRecords($event,schema)" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;">
+                                <i class="fa fa-chevron-circle-down cursor" ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
+                                 aria-hidden="true"></i>                                
+                            </span>
                             <span ng-click="gotoNew($event,schema)" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;">
                                 <i class="fa fa-plus"></i>
                             </span>
@@ -254,9 +268,10 @@
                         <div class="col-xs-1 col-sm-2 col-md-1 text-right">
                             <a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a>
                         </div>
-                    </div>
-                   
-
+                        <div ng-if="topRecords[schema]" class="col-xs-12">
+                            <top-records schema="{{schema}}" top="10" style="padding-top:5px;" show-schema-name="false"></top-records>
+                        </div>
+                    </div> 
                 </div>
 
                 <div class="row  bg-grey" style="padding:0;margin:20px 0 5px 0;">
@@ -273,6 +288,10 @@
 
                 <div class="row link1" style="padding:0;margin:0 -3px 5px -3px" ng-repeat="schema in referenceSchemas">
                     <div class="col-xs-9 col-sm-6 col-md-9" ng-click="gotoList($event,schema)">
+                        <span ng-click="showTopRecords($event,schema)" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;">
+                            <i class="fa fa-chevron-circle-down cursor" ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
+                                aria-hidden="true"></i>                                
+                        </span>
                         <span ng-click="gotoNew($event,schema)" class="label color-blue bg-litegrey linkDark" style="margin: 0 0 0 1px;">
                             <i class="fa fa-plus"></i>
                         </span>
@@ -291,6 +310,9 @@
                     </div>
                     <div class="col-xs-1 col-sm-2 col-md-1 text-right">
                         <a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a>
+                    </div>
+                    <div ng-if="topRecords[schema]" class="col-xs-12">
+                        <top-records schema="{{schema}}" top="10" style="padding-top:5px;" show-schema-name="false"></top-records>
                     </div>
                 </div>
             </div>
