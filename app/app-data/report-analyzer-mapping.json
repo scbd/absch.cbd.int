@@ -27,8 +27,7 @@
             "dataUrl"       : "/api/v2015/national-reports-cpb-2",
             "infoBlockUrl"  : "views/report-analyzer/includes/cpbNationalReport2.html",
             "year"          : "2016",
-            "offlineFormats": [
-            ]
+            "offlineFormats": []
         },
         {   
             "type"          : "cpbNationalReport3",
