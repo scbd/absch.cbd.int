@@ -1,4 +1,4 @@
-define(['app', 'views/directives/switch-realm-directive',
+define(['app', 
  'services/role-service', 
  'views/register/directives/register-top-menu'], function(app) {
  "use strict";
