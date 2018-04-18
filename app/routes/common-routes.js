@@ -1,0 +1,232 @@
+﻿define(['require', 'app', 'lodash', 'angular-route', 'services/app-config-service'], function (require, app, _) { 'use strict';
+
+    var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
+    
+    app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+        
+        $locationProvider.html5Mode(true);
+        $locationProvider.hashPrefix('!');
+        
+        $routeProvider.whenAsync    = whenAsync;
+        $routeProvider.
+                whenAsync('/lang/:langCode',  { templateUrl: 'views/shared/lang.html',label:'ABSCH', resolveController: true}).
+                whenAsync('/signin',          {templateUrl: 'views/shared/login-dialog.html',resolveController: true, label:'Sign in'}).
+                whenAsync('/verify-email',    {templateUrl: 'views/shared/verify-email.html', label:'Email Verification Pending'}).
+                whenAsync('/help/403',        {templateUrl: 'views/shared/403.html', label:'403 Error'}).
+                
+                
+                whenAsync('/mailbox',                        { templateUrl: 'views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
+                whenAsync('/mailbox/:mailId',                { templateUrl: 'views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
+
+                whenAsync('/search/countries/:countryCode?',                        { redirectTo:'/countries/:countryCode' }).
+                whenAsync('/search/countries/:countryCode/:documentType',           { redirectTo:'/countries/:countryCode/:documentType' }).
+                whenAsync('/search/:recordType',                     { templateUrl: 'views/search/search-page.html',   label:'SEARCH',         resolveController: true}).
+                whenAsync('/search',                                 { templateUrl: 'views/search/search-page.html',   label:'SEARCH',         resolveController: true}).
+                whenAsync('/search/national-records/:documentSchema?',              { redirectTo:'/search' }).
+                whenAsync('/search/reference-records/:documentSchema?',             { redirectTo:'/search' }).
+
+                whenAsync('/countries',                   { templateUrl: 'views/countries/country-list.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
+                whenAsync('/countries/status/:status',    { templateUrl: 'views/countries/country-list.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
+                whenAsync('/countries/:code/:schema?',             { templateUrl: 'views/countries/country-profile.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
+                                
+                whenAsync('/reports',                     { templateUrl: 'views/report-analyzer/reports.html',    label:'Reports',      resolveController: true}).
+                whenAsync('/reports/analyzer',    { templateUrl: 'views/report-analyzer/analyzer.html',  label:'Analyzer',      resolveController: true}).
+                
+                whenAsync('/database/record',             { templateUrl: 'views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
+                whenAsync('/database/record/:documentID',  { templateUrl: 'views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
+                whenAsync('/database/record/:documentID/:revision', { templateUrl: 'views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
+                whenAsync('/certificate/:documentID',                        { templateUrl: 'views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
+                whenAsync('/database/:documentID',                           { templateUrl: 'views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
+                whenAsync('/database/:documentSchema/:documentID',           { templateUrl: 'views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
+                whenAsync('/database/:documentSchema/:documentID/:revision', { templateUrl: 'views/forms/view/records-id.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
+                
+                whenAsync('/pdf/:type/:schema/:documentId/:revision?',               { templateUrl: 'views/pdf-viewer/records-pdf-viewer.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
+                                
+                whenAsync('/register',                                           { templateUrl: 'views/register/dashboard.html',         label:'Management Center',  param:'true', resolveController: true, resolve : { securized : securize() }}).
+                whenAsync('/dashboard',                                          { redirectTo:  '/register/dashboard'}).
+                whenAsync('/register/dashboard',                                 { templateUrl: 'views/register/dashboard.html',         label:'Dashboard',  param:'true', resolveController: true, resolve : { securized : securize() }}).
+                whenAsync('/register/pending-requests',                          { templateUrl: 'views/register/pending-tasks.html',            label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize() }}).
+                whenAsync('/register/user-preferences/:tab?',                    { templateUrl: 'views/register/user-preferences/preferences.html',          label:'ABSCH Admin',    param:'true', resolveController: true,resolve : { securized : securize() }}).
+                whenAsync('/register/admin',                                     { templateUrl: 'views/register/admin.html',          label:'ABSCH Admin',    param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+                whenAsync('/register/notifications',                             { templateUrl: 'views/register/notifications.html',  label:'Notifications',  param:'true', resolveController: true,resolve : { securized : securize() }}).
+                whenAsync('/register/requests',                                  { redirectTo:'/register/notifications' }).
+                whenAsync('/register/stats',                                     { templateUrl: 'views/register/manage/stats.html',   label:'Statistics',  param:'true', resolveController: true,resolve : { securized : securize() }}).
+
+                whenAsync('/register/:document_type/status/:status',             {templateUrl: 'views/register/record-list.html',          param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
+                whenAsync('/register/national-users',                            {templateUrl: 'views/register/national-users/national-user-list.html', label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
+                whenAsync('/register/:document_type',                            {templateUrl: 'views/register/record-list.html',       label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
+
+                whenAsync('/register/CON/new',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'New',  param:'true', resolveController: true,documentType :'CON' , resolve : { securized : securize(null,null, true) }, }).
+                
+                whenAsync('/register/CON/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { securized : securize(null,null, true) }, }).
+                
+                whenAsync('/register/:document_type/:documentID/view',           {templateUrl: 'views/register/record-details.html',    label:'View',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
+
+                whenAsync('/register/admin/pending-requests',         { templateUrl: 'views/register/pending-tasks.html',            label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+                whenAsync('/register/admin/reported-records',         { templateUrl: 'views/register/admin/reported-records.html',   label:'Reported Records',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+                whenAsync('/register/admin/reported-records/:id',     { templateUrl: 'views/register/admin/reported-records.html',   label:'Record',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+                whenAsync('/register/admin/report-counts',            { templateUrl: 'views/register/admin/report-count.html',       label:'Report Counts',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+                whenAsync('/register/admin/error-logs',               { templateUrl: 'views/register/admin/error-logs.html',         label:'Error Logs',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+                whenAsync('/register/admin/subscriptions',            { templateUrl: 'views/register/admin/subscriptions.html',      label:'Subscriptions',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+                whenAsync('/register/admin/user-role-report',         { templateUrl: 'views/register/admin/user-role-report.html',   label:'user Role Report',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+    
+                whenAsync('/oauth2/callback',             { templateUrl: 'views/oauth2/callback.html',          resolveController: true, resolveUser: true})
+           
+    }]);
+
+    return {
+        currentUser : currentUser,
+        securize    : securize,
+        importQ     : importQ,
+        baseUrl     : baseUrl      
+    }
+
+    //============================================================
+    //
+    //
+    //============================================================
+    function currentUser() {
+        return ['$q', 'authentication', function($q, authentication) {
+            return $q.when(authentication.getUser());
+        }];
+    }
+
+    //============================================================
+    //
+    //
+    //============================================================
+    function securize(roleList, useNationalRoles, checkEmailVerified)
+    {
+        return ["$location", "authentication", "appConfigService", "$filter", "$route",
+         function ($location, authentication, appConfigService, $filter, $route) {
+
+            return authentication.getUser().then(function (user) {
+
+                if(checkEmailVerified && user.isAuthenticated && !user.isEmailVerified){
+                    $location.path(appConfigService.getSiteMapUrls().user.verifyEmail);
+                    return;
+                }
+
+                var roles = _.clone(roleList||[]);
+
+                if (roles && !_.isEmpty(roles)) {
+                    roles = _.flatten(_.map(roles, appConfigService.getRoleName));
+                }
+                if(useNationalRoles){
+                    var path = $location.$$url.replace('/register/','');
+                    var schema;
+
+                    if(path.indexOf('/')>0)
+                        schema = path.substr(0, path.indexOf('/'));
+                    else
+                        schema = path;
+
+                    var schemaName = $filter('mapSchema')(schema);
+                    if(!_.contains(_.union(['contact'], appConfigService.referenceSchemas), schemaName))
+                        roles = (roles || []).concat(appConfigService.nationalRoles());
+                }
+                if (!user.isAuthenticated) {
+
+                    console.log("securize: force sign in");
+
+                    if (!$location.search().returnUrl)
+                        $location.search({ returnUrl: $location.url() });
+
+                    $location.path(appConfigService.getSiteMapUrls().user.signIn);
+                    // throw "Force sign-in";
+
+                }
+                else if (roles && !_.isEmpty(roles) && _.isEmpty(_.intersection(roles, user.roles))){
+
+                    console.log("securize: not authorized");
+
+                    $location.search({ path: $location.url() });
+                    $location.path(appConfigService.getSiteMapUrls().errors.notAuthorized);
+                }
+
+                return user;
+            });
+        }];
+    }
+    //============================================================
+    //
+    //
+    //============================================================
+    function importQ(module) { // fake webpack lazyload import()
+        
+        var importFn = function($q) {
+            return $q(function(resolve, reject) {
+                require([module], resolve, function(e) { 
+                    console.error(e);
+                    reject(e);
+                });
+            });
+        };
+        
+        importFn.$inject = ['$q'];
+
+        return importFn;
+    }
+    
+    //============================================================
+    //
+    //
+    //============================================================
+    function whenAsync(path, route) {
+
+        route = route || {};
+
+        if(route.templateUrl && !/^\//.test(route.templateUrl)) {
+            route.templateUrl = baseUrl+route.templateUrl;
+        }
+        
+        if(!route.controller && route.resolveController) { // Legacy
+            var module = route.templateUrl.replace(new RegExp('^'+baseUrl.replace(/\//g, '\\/')), '').replace(/\.html$/, '');
+            route.controller = importQ(module);
+        }
+        
+        if(route.controller && angular.isFunction(route.controller)) { // Webpack
+        
+            var controllerFn = route.controller;
+        
+            route.resolve = route.resolve || {};
+        
+            route.resolve.lazyController = ['$injector', function($injector) {
+                
+                var result =  $injector.invoke(controllerFn, {});
+                
+                if(result.$inject) {
+                    result = $injector.invoke(result, {});
+                }
+                
+                return result;
+            }];
+            
+            if(!route.controllerAs && route.templateUrl) {
+
+                var matches = route.templateUrl.match(/\/([A-z\-]+)\.html/);
+
+                if(matches) {
+                    route.controllerAs = _.camelCase(matches[1])+'Ctrl';
+                }
+            }
+        }
+
+        if(route.resolve && route.resolve.lazyController) {
+
+            route.controller = ['$injector', '$scope', '$route', 'lazyController', function ($injector, $scope, $route, lazyController) {
+
+                if(!lazyController) return;
+
+                var locals = angular.extend({}, $route.current.locals, { $scope: $scope });
+
+                return $injector.instantiate(lazyController, locals);
+            }];
+        }
+
+        this.when(path, route);
+
+        return this;
+    }
+    
+});
