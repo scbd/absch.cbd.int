@@ -1,4 +1,4 @@
-define(['app', 'text!views/search/search-directive.html','underscore', 'json!app-data/schema-name-plural.json', 'json!app-data/search-tour.json',
+define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-data/schema-name-plural.json', 'json!app-data/search-tour.json',
 'js/common',
 'services/search-service',
 'ngInfiniteScroll',
@@ -980,23 +980,29 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'json!app
 
                   //===============================================================================================================================
                     function loadSchemaFilters() {
-                       //national
+                       
+                        
+                        _.each(realm.schemas, function(schema, key){
+                            if(!_.includes(['contact'], key)){
+                                addFilter(key,  {'sort': schema.sort,'type':schema.type,  'name':schema.title.en, 
+                                    'id':key, 'description':(schema.description||{}).en}); 
+                            }
+                        })
+                        // addFilter('focalPoint',  {'sort': 1,'type':'national',  'name':schemaNames.focalpoint, 'id':'focalPoint', 'description':'Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).'});
 
-                        addFilter('focalPoint',  {'sort': 1,'type':'national',  'name':schemaNames.focalpoint, 'id':'focalPoint', 'description':'Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).'});
+                        // addFilter('authority',  {'sort': 2,'type':'national',  'name':schemaNames.authority, 'id':'authority', 'description':'Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)'});
 
-                        addFilter('authority',  {'sort': 2,'type':'national',  'name':schemaNames.authority, 'id':'authority', 'description':'Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)'});
+                        // addFilter('measure',  {'sort': 3,'type':'national', 'name':schemaNames.measure, 'id':'measure', 'description':'Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.'});
 
-                        addFilter('measure',  {'sort': 3,'type':'national', 'name':schemaNames.measure, 'id':'measure', 'description':'Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.'});
+                        // addFilter('database',  {'sort': 4,'type':'national','name':schemaNames.database, 'id':'database', 'description':'Information and links to national websites or databases which are relevant for ABS.'});
 
-                        addFilter('database',  {'sort': 4,'type':'national','name':schemaNames.database, 'id':'database', 'description':'Information and links to national websites or databases which are relevant for ABS.'});
+                        // addFilter('absPermit', {'sort': 5,'type':'national',  'name':schemaNames.abspermit, 'id':'absPermit', 'description':'Certificate constituted from the information on the permit or its equivalent registered in the ABS Clearing-House, serving as evidence that the genetic resource which it covers has been accessed in accordance with prior informed consent and that mutually agreed terms have been established. It contains the minimum necessary information to allow monitoring the utilization of genetic resources by users throughout the value chain (Article 17).'});
 
-                        addFilter('absPermit', {'sort': 5,'type':'national',  'name':schemaNames.abspermit, 'id':'absPermit', 'description':'Certificate constituted from the information on the permit or its equivalent registered in the ABS Clearing-House, serving as evidence that the genetic resource which it covers has been accessed in accordance with prior informed consent and that mutually agreed terms have been established. It contains the minimum necessary information to allow monitoring the utilization of genetic resources by users throughout the value chain (Article 17).'});
+                        // addFilter('absCheckpoint',   {'sort': 6,'type':'national',  'name':schemaNames.abscheckpoint, 'id':'absCheckpoint', 'description':'Entities designated by Parties to effectively collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources, as appropriate (Article 17, 1(a) (i)).'});
 
-                        addFilter('absCheckpoint',   {'sort': 6,'type':'national',  'name':schemaNames.abscheckpoint, 'id':'absCheckpoint', 'description':'Entities designated by Parties to effectively collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources, as appropriate (Article 17, 1(a) (i)).'});
+                        // addFilter('absCheckpointCommunique',  {'sort': 7,'type':'national','name':schemaNames.abscheckpointcommunique, 'id':'absCheckpointCommunique', 'description':'A summary of the information collected or received by a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment  utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).'});
 
-                        addFilter('absCheckpointCommunique',  {'sort': 7,'type':'national','name':schemaNames.abscheckpointcommunique, 'id':'absCheckpointCommunique', 'description':'A summary of the information collected or received by a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment  utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).'});
-
-                        addFilter('absNationalReport',  {'sort': 8,'type':'national','name':schemaNames.absnationalreport, 'id':'absNationalReport', 'description':'Interim National Report on the Implementation of the Nagoya Protocol'});
+                        // addFilter('absNationalReport',  {'sort': 8,'type':'national','name':schemaNames.absnationalreport, 'id':'absNationalReport', 'description':'Interim National Report on the Implementation of the Nagoya Protocol'});
 
 
                         addFilter('npParty',  {'sort': 1,'type':'partyStatus','name':'Party to the Nagoya Protocol', 'id':'npParty', 'description':''});
@@ -1006,14 +1012,14 @@ define(['app', 'text!views/search/search-directive.html','underscore', 'json!app
 
 
                         //reference
-                        addFilter('resource', {'sort': 1,'value':false, type:'reference', 'name':schemaNames.resource, 'id':'resource', 'description':'The virtual library in the ABS Clearing-House hosts a number of ABS relevant resources submitted by any registered user of the ABS Clearing-House. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc.'});
+                        // addFilter('resource', {'sort': 1,'value':false, type:'reference', 'name':schemaNames.resource, 'id':'resource', 'description':'The virtual library in the ABS Clearing-House hosts a number of ABS relevant resources submitted by any registered user of the ABS Clearing-House. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc.'});
 
-                        addFilter('modelContractualClause', {'sort': 2, type:'reference', 'name':schemaNames.modelcontractualclause, 'id':'modelContractualClause', 'description':'Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.'});
+                        // addFilter('modelContractualClause', {'sort': 2, type:'reference', 'name':schemaNames.modelcontractualclause, 'id':'modelContractualClause', 'description':'Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.'});
 
-                        addFilter('communityProtocol', {'sort': 3, type:'reference', 'name':schemaNames.communityprotocol, 'id':'communityProtocol', 'description':'Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.'});
-                        addFilter('capacityBuildingInitiative', {'sort': 4, type:'reference', 'name':schemaNames.capacitybuildinginitiative, 'id':'capacityBuildingInitiative', 'description':''});
+                        // addFilter('communityProtocol', {'sort': 3, type:'reference', 'name':schemaNames.communityprotocol, 'id':'communityProtocol', 'description':'Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.'});
+                        // addFilter('capacityBuildingInitiative', {'sort': 4, type:'reference', 'name':schemaNames.capacitybuildinginitiative, 'id':'capacityBuildingInitiative', 'description':''});
 
-                        addFilter('capacityBuildingResource', {'sort': 5, type:'reference', 'name':schemaNames.capacitybuildingresource, 'id':'capacityBuildingResource', 'description':''});
+                        // addFilter('capacityBuildingResource', {'sort': 5, type:'reference', 'name':schemaNames.capacitybuildingresource, 'id':'capacityBuildingResource', 'description':''});
                         
                         //SCBD
                         addFilter('news',  {'sort': 1,'type':'scbd', 'name':schemaNames.news, 'id':'news', 'description':'ABS related news'});
