@@ -13,7 +13,7 @@ define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'scbd-an
                 
                 $scope.options = {
                     filterTypes: function () {
-                        return _.sortBy(_.map(realm.schemas(), function(schema, key){
+                        return _.sortBy(_.map(realm.schemas, function(schema, key){
                             return {identifier: key, name: schema.title[locale]}
                         }), "name");
                     },

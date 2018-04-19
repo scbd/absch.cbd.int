@@ -296,7 +296,7 @@ function (app, moment, schemaName, schemaShortName) {
   //
   //============================================================
   app.filter("schemaName", ['realm', 'locale', function(realm, locale) {
-    var schemas = realm.schemas();
+    var schemas = realm.schemas;
 		return function( schema ) {
 			if(!schema)return schema;
       
