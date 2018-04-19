@@ -2,17 +2,19 @@ define(['app', 'jquery', 'underscore', 'toastr', 'ngStorage'],
  function (app, $, _) { 'use strict';
 
 	app.factory('localStorageService',  ["$http","$location", "$rootScope","toastr",
-    "$sessionStorage",//"$localStorage",
-	 function($http,$location, $rootScope, toastr, $localStorage) {
+    "$sessionStorage", 'realm',//"$localStorage",
+	 function($http,$location, $rootScope, toastr, $localStorage, realm) {
 
 		return new function(){
 
             this.get = function(key){
                 
+                var lKey = realm.value + key
+
                 if(!$localStorage.$supported)
                     return;
 
-                var existing = angular.copy($localStorage[key]);
+                var existing = angular.copy($localStorage[lKey]);
 
                 if(!existing)
                     return;
@@ -20,14 +22,16 @@ define(['app', 'jquery', 'underscore', 'toastr', 'ngStorage'],
                 if(new Date() < new Date(existing.expiry))
                     return existing.data;
 
-                //remove expired data from storage;
-                console.log(key);
-                this.remove(key);
+                //remove expired data from storage;                
+                this.remove(lKey);
 
                 return;
             };
 
             this.set = function(key, data){
+
+                var lKey = realm.value + key
+
                 if(!$localStorage.$supported)
                     return;
                     
@@ -39,11 +43,11 @@ define(['app', 'jquery', 'underscore', 'toastr', 'ngStorage'],
                 ldata.expiry = expiryDate;
                 ldata.data   = data;
 
-                $localStorage[key] = ldata;
+                $localStorage[lKey] = ldata;
             };
 
             this.remove = function(key){
-                delete $localStorage[key];
+                delete $localStorage[realm.value + key];
             };
 
             this.removeAll = function(){
@@ -51,6 +55,7 @@ define(['app', 'jquery', 'underscore', 'toastr', 'ngStorage'],
             };
 
             this.hasStorageExpired = function(key, expiryDate){
+                var lKey = realm.value + key
                 var today = new Date();
                 return expiryDate.getFullYear() < today.getFullYear()
                     && expiryDate.getDate()     < today.getDate()
