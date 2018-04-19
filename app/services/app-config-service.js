@@ -22,7 +22,13 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost
                 throw new Error("Unknow realm for host: "+window.location.host);
 
             return { 
-                value : realmConfig.realm,
+                value               :   realmConfig.realm,
+                uIdPrefix           :   realmConfig.uIdPrefix,
+                schemas             :   realmConfig.schemas,
+                
+                nationalSchemas     :   nationalSchemas,
+                referenceSchemas    :   referenceSchemas,
+                scbdSchemas			:   scbdSchemas,
 
                 is : function(realm, strict) {
                     
@@ -44,11 +50,7 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost
                 
                 nationalRoles : function() {
                     return _(realmConfig.roles).values().flatten().compact().uniq().without('User', 'user').value();
-                },
-
-                schemas : function() {
-                    return realmConfig.schemas;
-                }                
+                }
             };
         }];
     });    
