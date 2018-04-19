@@ -29,12 +29,12 @@
                     </li>
                 </ul>
                 
-                <form class="navbar-form navbar-right">
+                <div class="navbar-form navbar-right">
                     <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" name="searchQuery" ng-model="searchQuery" class="form-control" placeholder="Search" ng-keypress="isEnterPressed($event)"/>
                     </div>
-                    <a type="submit" class="btn btn-link hidden-xs"><i class="fa fa-search"></i></a>
-                </form>
+                    <a class="btn btn-link hidden-xs" ng-click="isEnterPressed(true)"><i class="fa fa-search"></i></a>
+                </div>
                 
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
