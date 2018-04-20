@@ -1,7 +1,6 @@
 define(['app', 'underscore', 'views/forms/view/record-loader.directive',
 'views/forms/view/record-loader.directive',
     'js/common', 'services/role-service', 'toastr',
-    'scbd-branding/directives/xuser-notifications-panel',
     'views/directives/block-region-directive',
     'views/register/directives/register-top-menu',
     'views/directives/task-id-directive'
