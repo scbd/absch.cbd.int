@@ -38,7 +38,16 @@
 				<i ng-show="document.website.name">({{document.website.url}})</i>
 			</div>
 		</div>
-
+		<div ng-show="document.websites && document.websites.length >0">
+			<label>URL of the website</label>
+			<div class="km-value">
+				<div ng-repeat="site in document.websites">
+					<a translation-url  target="{{target}}" target="_new" ng-href="{{site.url}}">{{site.name||site.url}}</a>
+					<i ng-show="site.name">({{site.url}})</i>
+				</div>
+			</div>
+		</div>
+	
 
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
