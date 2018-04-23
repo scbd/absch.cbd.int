@@ -1,8 +1,5 @@
-define(['text!./home-map.html',
-  'app',
-  'lodash',
-  'services/search-service',
-  'views/directives/block-region-directive'
+define(['text!./home-map.html','app', 'lodash', 'services/search-service',
+  'views/directives/block-region-directive', 'js/common'
 ], function(template, app, _, popoverTemplate) {
   'use strict';
 
@@ -34,9 +31,15 @@ define(['text!./home-map.html',
 
             $q.when(commonjs.getCountries(), function(countries) {
 
-                $scope.numParty     = _.where(countries, {isNPParty:     true}).length;
-                $scope.numNonParty  = countries.length -  $scope.numParty;
-                $scope.numRatified  = _.where(countries, {isNPInbetweenParty:  true}).length;
+              if($scope.options.isBch){
+                  $scope.numRatified  = _.where(countries, {isNPInbetweenParty:  true}).length;
+                  $scope.numParty     = _.where(countries, {isAppProtocolParty:     true}).length;
+              }
+              else {                
+                  $scope.numRatified  = _.where(countries, {isNPInbetweenParty:  true}).length;
+                  $scope.numParty     = _.where(countries, {isAppProtocolParty:     true}).length;
+              }
+              $scope.numNonParty  = countries.length -  $scope.numParty;
                 
 
             });
@@ -54,6 +57,16 @@ define(['text!./home-map.html',
                   });
               });
             }
+
+            $scope.options = {
+              isBch       : realm.is('BCH'),
+              isAbs       : realm.is('ABS'),
+              protocol    : realm.protocol,
+              protocolShortName  :realm.protocolShortName,
+              chShortName :realm.chShortName,
+              chLongName  :realm.chLongName
+            }
+
         }] //controlerr
     }; //return
   }]); //directive

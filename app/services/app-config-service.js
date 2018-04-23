@@ -26,6 +26,11 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost
                 uIdPrefix           :   realmConfig.uIdPrefix,
                 schemas             :   realmConfig.schemas,
                 
+                chShortName         :   realmConfig.uIdPrefix,
+                chLongName          :   realmConfig.displayName.replace(/(-DEV)|(-TRG)/i, ''),
+                protocol            :   realmConfig.protocol || 'Nagoya Protocol',
+                protocolShortName   :   realmConfig.protocolShortName || 'ABS',
+
                 nationalSchemas     :   nationalSchemas,
                 referenceSchemas    :   referenceSchemas,
                 scbdSchemas			:   scbdSchemas,
@@ -33,7 +38,7 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost
                 is : function(realm, strict) {
                     
                     var realmRe = strict ? new RegExp('^'+escapeRegExp(realm)+'($)')     //  MATCH realm exactly
-                                         : new RegExp('^'+escapeRegExp(realm)+'(\b|$)'); //  MATCH realm with boundaries eg: ABS, ABS-*, BCH, BCH-*
+                                         : new RegExp('^'+escapeRegExp(realm)+'(\\b|$)'); //  MATCH realm with boundaries eg: ABS, ABS-*, BCH, BCH-*
                     
                     return realmRe.test(realmConfig.realm);
                 },
