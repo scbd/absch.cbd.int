@@ -3,7 +3,8 @@ define(['app', './common-routes', 'angular-route'], function (app,commonRoutes) 
     app.config(['$routeProvider', function ($routeProvider) {
                
         $routeProvider.
-               whenAsync('/',                                { templateUrl: 'views/home/bch.html',              controller: function() { return commonRoutes.importQ('views/home/bch'); }, label:'The BCH'}).
+               whenAsync('/',                           { templateUrl: 'views/home/bch.html',              controller: function() { return commonRoutes.importQ('views/home/bch'); }, label:'The BCH'}).
+               whenAsync('/register',                   {templateUrl: 'views/register/record-types.html',                     controller: function() { return commonRoutes.importQ('views/register/record-types'); }, label:'Submit', resolve : { user : commonRoutes.currentUser() }}).
                whenAsync('/register/CNA/new',           {templateUrl: 'views/forms/edit/edit-authority.html',                 label:'New',  param:'true', resolveController: true,documentType :'CNA' , resolve : { securized : commonRoutes.securize(null,true, true) }, }).
                whenAsync('/register/NDB/new',           {templateUrl: 'views/forms/edit/edit-database.html',                  label:'New',  param:'true', resolveController: true,documentType :'NDB' , resolve : { securized : commonRoutes.securize(null,true, true) }, }).
                whenAsync('/register/CBI/new',           {templateUrl: 'views/forms/edit/edit-capacityBuildingInitiative.html',label:'New',  param:'true', resolveController: true,documentType :'CBI' , resolve : { securized : commonRoutes.securize(null, null, true) }, }).
