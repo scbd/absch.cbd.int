@@ -114,6 +114,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 
                     $scope.relatedKeywords = {};
 
+
                     //===============================================================================================================================
                     $scope.isFreeTextFilterOn = function(filterID) {
                           return false;
@@ -1005,10 +1006,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                         // addFilter('absNationalReport',  {'sort': 8,'type':'national','name':schemaNames.absnationalreport, 'id':'absNationalReport', 'description':'Interim National Report on the Implementation of the Nagoya Protocol'});
 
 
-                        addFilter('npParty',  {'sort': 1,'type':'partyStatus','name':'Party to the Nagoya Protocol', 'id':'npParty', 'description':''});
-                        addFilter('npInbetween',  {'sort': 2,'type':'partyStatus','name':'Ratified, not yet Party to the Nagoya Protocol', 'id':'npInbetween', 'description':''});
-                        addFilter('npNonParty',  {'sort': 3,'type':'partyStatus','name':'Not a Party to the Nagoya Protocol ', 'id':'npNonParty', 'description':''});
-                        addFilter('npSignatory',  {'sort': 4,'type':'partyStatus','name':'Signatory to the Nagoya Protocol', 'id':'npSignatory', 'description':''});
+                        addFilter('npParty',  {'sort': 1,'type':'partyStatus','name':'Party to the Protocol', 'id':'npParty', 'description':''});
+                        addFilter('npInbetween',  {'sort': 2,'type':'partyStatus','name':'Ratified, not yet Party to the Protocol', 'id':'npInbetween', 'description':''});
+                        addFilter('npNonParty',  {'sort': 3,'type':'partyStatus','name':'Not a Party to the Protocol ', 'id':'npNonParty', 'description':''});
+                        addFilter('npSignatory',  {'sort': 4,'type':'partyStatus','name':'Signatory to the Protocol', 'id':'npSignatory', 'description':''});
 
 
                         //reference
@@ -1424,6 +1425,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                             
                         }                        
                     }
+
             }]//controller
         };
     });
