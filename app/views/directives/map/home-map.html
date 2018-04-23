@@ -4,9 +4,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>The Access and Benefit-sharing Clearing-house (ABSCH) is a platform for exchanging information on ABS and a key tool for facilitating the implementation of the Nagoya Protocol.
-                                <a translation-url  href="/about" ng-click="toggleTooltip()"> <i class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-title="Click here to find out more about the ABSCH" data-container="body"></i></a>
-                            </h3>
+                    <h3>The <span ng-bind="options.chLongName"></span> (<span ng-bind="options.chShortName"></span>) 
+                        is a platform for exchanging information on <span ng-bind="options.protocolShortName"></span> and a key tool for 
+                        facilitating the implementation of the <span ng-bind="options.protocol"></span>.
+                        <a translation-url  href="/about" ng-click="toggleTooltip()"> 
+                            <i class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" 
+                            data-title="Click here to find out more about the Clearing-house" data-container="body"></i></a>
+                    </h3>
                 </div>
             </div>
         </div>
@@ -23,13 +27,15 @@
         <div class="row">
             <div class="col-md-4">
                 <span class="label label-party">{{numParty}}</span>
-                <a translation-url href="/countries/status/party" class="link od-label">Parties to the Nagoya Protocol</a>
+                <a translation-url href="/countries/status/party" class="link od-label">Parties to the <span ng-bind="options.protocol"></span>
+                </a>
             </div>
 
             <div class="col-md-4">
                 <span class="label label-inbetween">{{numRatified}}</span>
                 <a translation-url href="/countries/status/inbetween" class="link od-label">Ratified, not yet Party</a>
-                <a translation-url href="#" class="helpinfoInline fa fa-info-circle color-grey" data-toggle="tooltip" data-title="Countries that have deposited their instrument of ratification but have not yet completed the 90 day waiting period before the Protocol enters into force for their country. "
+                <a translation-url href="#" class="helpinfoInline fa fa-info-circle color-grey" data-toggle="tooltip" 
+                data-title="Countries that have deposited their instrument of ratification but have not yet completed the 90 day waiting period before the Protocol enters into force for their country. "
                     data-container="body"></a>
             </div>
 
