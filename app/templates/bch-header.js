@@ -12,7 +12,7 @@ define(['app', 'text!./bch-header.html'], function (app, html) { 'use strict';
                 $scope.isEnterPressed = function($event){
                     if($event === true || $event.which === 13){
 
-                        $location.url('/search?q='+$scope.searchQuery)
+                        $location.url('/search/nationalRecords?text='+$scope.searchQuery||'')
                         $scope.searchQuery='';
                     }
                 }
