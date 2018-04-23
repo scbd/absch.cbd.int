@@ -73,7 +73,7 @@
                                  .replace("{{revision}}", $route.current.params.revision)
                                  .replace("{{schema}}", $route.current.params.schema);
         }
-        $scope.loadLangPdf('en')
+        $scope.loadLangPdf(locale||'en')
     }])
 
 })
