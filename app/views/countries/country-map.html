@@ -18,9 +18,138 @@
             .amcharts-main-div, .amcharts-chart-div{
                 position: static!important;
             }
+
+            .map-marker {
+                /* adjusting for the marker dimensions
+                so that it is centered on coordinates */
+                margin-left: -8px;
+                margin-top: -8px;
+            }
+            .map-marker.map-clickable {
+                cursor: pointer;
+            }
+            .pulse {
+                width: 10px;
+                height: 10px;
+                border: 5px solid #f7f14c;
+                -webkit-border-radius: 30px;
+                -moz-border-radius: 30px;
+                border-radius: 30px;
+                background-color: #716f42;
+                z-index: 10;
+                position: absolute;
+            }
+            .map-marker .dot {
+                border: 10px solid #fff601;
+                background: transparent;
+                -webkit-border-radius: 60px;
+                -moz-border-radius: 60px;
+                border-radius: 60px;
+                height: 50px;
+                width: 50px;
+                -webkit-animation: pulse 3s ease-out;
+                -moz-animation: pulse 3s ease-out;
+                animation: pulse 3s ease-out;
+                -webkit-animation-iteration-count: infinite;
+                -moz-animation-iteration-count: infinite;
+                animation-iteration-count: infinite;
+                position: absolute;
+                top: -20px;
+                left: -20px;
+                z-index: 1;
+                opacity: 0;
+            }
+            @-moz-keyframes pulse {
+                0% {
+                    -moz-transform: scale(0);
+                    opacity: 0.0;
+                }
+                25% {
+                    -moz-transform: scale(0);
+                    opacity: 0.1;
+                }
+                50% {
+                    -moz-transform: scale(0.1);
+                    opacity: 0.3;
+                }
+                75% {
+                    -moz-transform: scale(0.5);
+                    opacity: 0.5;
+                }
+                100% {
+                    -moz-transform: scale(1);
+                    opacity: 0.0;
+                }
+            }
+            @-webkit-keyframes "pulse" {
+                0% {
+                    -webkit-transform: scale(0);
+                    opacity: 0.0;
+                }
+                25% {
+                    -webkit-transform: scale(0);
+                    opacity: 0.1;
+                }
+                50% {
+                    -webkit-transform: scale(0.1);
+                    opacity: 0.3;
+                }
+                75% {
+                    -webkit-transform: scale(0.5);
+                    opacity: 0.5;
+                }
+                100% {
+                    -webkit-transform: scale(1);
+                    opacity: 0.0;
+                }
+            }
+            .map-filters-bg {
+                height: 350px;
+                background: #080808;                
+                opacity: 0.2;
+            }
+            #map-filters {                
+                /* right: 20px; */
+                padding: 10px;
+                position: absolute;
+                top:0;
+            }
+            
         </style>
         <!--<link type="text/css" href="/app/libs/ammap3/ammap/plugins/export/export.css" rel="stylesheet" />-->
-        <div id="mapdiv" style="height:350px;"></div>
+        <!-- <div ng-if="isBCH" id="map-filters">
+                <select class="map-select" ><option value="winkel3">winkel3</option><option value="eckert3">eckert3</option><option value="eckert5">eckert5</option><option value="eckert6">eckert6</option><option value="miller" selected="selected">miller</option><option value="equirectangular">equirectangular</option><option value="mercator">mercator</option></select>
+        </div> -->
+        <div class="row">
+            <div class="col-md-10" block-region activate="loadingMap">
+                <div id="mapdiv" style="height:350px;"></div>
+            </div>
+            <div class="col-md-2" ng-if="isBCH" style="height: 350px;">
+                <div class="map-filters-bg" ></div>
+                <div id="map-filters">
+                    <div>Map Type :
+                        <select ng-model="options.mapType">
+                            <option value="nationalRecords">National records</option>
+                            <option value="lmoDecisions">LMO decisions</option>
+                        </select>
+                    </div>
+                    <div ng-if="options.mapType=='lmoDecisions'">
+                        <div>LMO :
+                            <select ng-model="options.lmo">
+                                <option ng-selected="options.lmo==lmo.identifier" ng-value="lmo.identifier" ng-repeat="lmo in lmos">{{lmo.title|lstring:locale}}</option>
+                            </select>
+                        </div>
+                        <div>Decision :
+                            <select ng-model="options.lmoDecision">
+                                <option value="approved">Approved</option>
+                                <option value="approvedWithCondition">Approved with conditions</option>                                
+                                <option value="rejected">Rejected</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="map-disclaimer" data-toggle="modal" href="#dialogDisclaimer">Disclaimer</div>
 
         <div id="dialogDisclaimer" class="modal fade">
@@ -41,5 +170,4 @@
             </div>
         </div>
     </div>
-
 </div>
