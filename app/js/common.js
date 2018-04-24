@@ -550,7 +550,7 @@ define(['app', 'underscore', 'services/local-storage-service', 'scbd-angularjs-s
                     if (entity && entity.isCPParty != undefined)
                         return entity.isCPParty;
 
-                    return entity && entity.treaties.XXVII8a.party;
+                    return entity && entity.treaties.XXVII8a.party!=null;
                     // (moment.utc().diff(moment.utc(entity.treaties.XXVII8a.deposit), 'days') >= 90) 
                     // && (entity.treaties.XXVII8a.instrument == "ratification" ||
                     //     entity.treaties.XXVII8a.instrument == "accession" ||
