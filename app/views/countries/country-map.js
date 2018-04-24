@@ -1,9 +1,9 @@
-define(['text!./country-map.html', 'app', 'lodash', 'text!./pin-popup-abs.html', 'ammap', 
+define(['require', 'text!./country-map.html', 'app', 'lodash',  'ammap', 
 'shim!/app/views/countries/worldEUHigh[ammap].js',//using absolute url, spl case for this file as its too big to load
 'shim!ammap/themes/light[ammap]',
 'js/common', 'services/search-service', 'css!libs/flag-icon-css/css/flag-icon.min.css',
 'scbd-angularjs-services/locale'], 
-function(template, app, _, popOverTemplate) {
+function(require, template, app, _) {
   'use strict';
 
   app.directive('countryMap', ['$timeout', function($timeout) {
@@ -16,7 +16,7 @@ function(template, app, _, popOverTemplate) {
         zoomTo: '@zoomTo'
       },
       link: function($scope, $element, $attr, requiredDirectives) {
-        
+
         var ammap3 = requiredDirectives[0];
        
         initMap();
@@ -83,9 +83,15 @@ function(template, app, _, popOverTemplate) {
         } //$scope.initMap
       }, //link
 
-      controller: ["$scope", 'commonjs', 'searchService', '$q', '$interpolate', '$filter', '$location', '$element', 'localeService', 'locale',
-      function($scope, commonjs, searchService, $q, $interpolate, $filter, $location, $element, localeService, locale) {
-        
+      controller: ["$scope", 'commonjs', 'searchService', '$q', '$interpolate', '$filter', '$location', '$element', 
+        'localeService', 'locale', 'realm', '$http',
+      function($scope, commonjs, searchService, $q, $interpolate, $filter, $location, $element, localeService, locale, realm, $http) {
+        var countriesLangLat = {};
+        $scope.isBCH    = realm.is('BCH');
+        $scope.isABS    = realm.is('ABS');
+        $scope.options  = { mapType :'nationalRecords', lmoDecision:'approved'};
+
+        var popOverTemplate;
         var exceptionRegionMapping = {
             AI : 'GB', //Anguilla
             AS : 'US', //American Samoa
@@ -142,49 +148,63 @@ function(template, app, _, popOverTemplate) {
         };
 
         function loadCountries(){
-          return $q.when(commonjs.getCountries()).then(function(countries) {
+          var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
-              return $q.when(searchService.governmentSchemaFacets())
-                  .then(function(countryFacets) {
-                      
-                          _.map(countries, function(country){
-                            var facets = _.findWhere(countryFacets, {government: country.code.toLowerCase()});
-                            changeAreaColor(country);
-                            if(!$scope.zoomTo){
-                              addImageData(country, facets);
+          require(['text!' + baseUrl + '/views/countries/pin-popup-'+ realm.value.replace(/-.*/g,'').toLowerCase() +'.html'], function(template){
+            popOverTemplate = template;
+            
+            return $q.when(commonjs.getCountries()).then(function(countries) {
 
-                              if(_.invert(exceptionRegionMapping)[country.code])
-                                addExceptionRegionsImage(country)
-                            }
-                          });
-                          addImageData({name : {en : 'Western Sahara'}, code:'EH'})
-                      $scope.map.validateData();
-                      updateCustomMarkers();
-                  });
+                return $q.when(searchService.governmentSchemaFacets())
+                    .then(function(countryFacets) {
+
+                            var nationalSchemas = _.filter(realm.schemas, {type:'national'})
+                            _.map(countries, function(country){
+                              var code = country.code.toLowerCase();
+                              // if(code == 'xk')
+                              //   exceptionRegionMapping['XK'].toLowerCase();
+                              var facets = _.findWhere(countryFacets, {government: code});
+                              changeAreaColor(country);
+                              if(!$scope.zoomTo){
+                                addImageData(country, facets, nationalSchemas);
+
+                                if(_.invert(exceptionRegionMapping)[country.code])
+                                  addExceptionRegionsImage(country, nationalSchemas)
+                              }
+                            });
+                            addImageData({name : {en : 'Western Sahara'}, code:'EH'}, nationalSchemas)
+                        $scope.map.validateData();
+                        updateCustomMarkers();
+                    });
+            });
+          
           });
         }
 
-        function addExceptionRegionsImage(country){
+        function addExceptionRegionsImage(country, nationalSchemas){
 
           _.each(exceptionRegionMapping, function(code, exceptionRegion) {
               if(code == country.code){
                 var exceptionCountryData = angular.copy(country);
                 exceptionCountryData.code = exceptionRegion;
                 exceptionCountryData.exceptionCountry  = code.toLowerCase();
-                addImageData(exceptionCountryData)
+                addImageData(exceptionCountryData, nationalSchemas)
               }
               //if(exceptionRegion[c])
           });
 
         }
 
-        function addImageData(country, facets){
+        function addImageData(country, facets, nationalSchemas){
           var image = {};
-          var long = $scope.map.getAreaCenterLongitude(getMapObject(country.code));
-          var lat = $scope.map.getAreaCenterLatitude(getMapObject(country.code));
+          if(!countriesLangLat || !countriesLangLat[country.code]){
+            var long = $scope.map.getAreaCenterLongitude(getMapObject(country.code));
+            var lat = $scope.map.getAreaCenterLatitude(getMapObject(country.code));
+            countriesLangLat[country.code] = {long : long, lat: lat, name: country.name};
+          }
 
-          image.lat = lat;
-          image.long = long;
+          image.lat = countriesLangLat[country.code].lat;
+          image.long = countriesLangLat[country.code].long;
           image.code = country.code;
           country.codeLower   = country.code.toLowerCase();          
           country.nameLocalized     = country.name.en;
@@ -193,14 +213,14 @@ function(template, app, _, popOverTemplate) {
             _.each(facets.schemas, function(document, key) {
                 country[$filter("urlSchemaShortName")(key)] = document;
             });
-          normalizeFacets(country);
+          normalizeFacets(country, nationalSchemas);
 
-          if (country.isNPParty)
-              country.status = '<span style="display:inline;width:35%;text-align:center;background-color: #5F4586;margin:0;padding:0;" class="pull-right party-status" ng-if="isNPParty">Party</span>';
-          else if (country.isNPInbetweenParty)
-              country.status = '<span style="display:inline;width:35%;text-align:center;background-color: #EC971F;margin:0;padding:0;" class="pull-right party-status" ng-if="isNPInbetweenParty">Ratified, not yet Party</span>';
+          if (($scope.isABS && country.isNPParty) || $scope.isBCH && country.isCPParty)
+              country.status = '<span style="display:inline;width:35%;text-align:center;background-color: #5F4586;margin:0;padding:0;" class="pull-right party-status">Party</span>';
+          else if (($scope.isABS && country.isNPInbetweenParty))
+              country.status = '<span style="display:inline;width:35%;text-align:center;background-color: #EC971F;margin:0;padding:0;" class="pull-right party-status">Ratified, not yet Party</span>';
           else
-              country.status = '<span style="display:inline;width:35%;text-align:center;background-color: #333;margin:0;padding:0;" class="pull-right party-status" ng-if="isNPSignatory">Non Party</span>';
+              country.status = '<span style="display:inline;width:35%;text-align:center;background-color: #333;margin:0;padding:0;" class="pull-right party-status">Non Party</span>';
           
           image.scbdData = country;
 
@@ -208,23 +228,12 @@ function(template, app, _, popOverTemplate) {
 
         }
 
-        function normalizeFacets(country){
-          if(!country.NFP)
-            country.NFP = 0;
-          if(!country.CNA)
-            country.CNA = 0;
-          if(!country.MSR)
-            country.MSR = 0;
-          if(!country.NDB)
-            country.NDB = 0;
-          if(!country.IRCC)
-            country.IRCC = 0;
-          if(!country.CP)
-            country.CP = 0;
-          if(!country.CPC)
-            country.CPC = 0;
-          if(!country.NR)
-            country.NR = 0;
+        function normalizeFacets(country, nationalSchemas){
+
+          _.each(nationalSchemas, function(schema){
+            if(!country[schema.shortCode])
+              country[schema.shortCode] = 0;
+          })          
         }
         //=======================================================================
         //
@@ -246,16 +255,20 @@ function(template, app, _, popOverTemplate) {
 
             
             if (country && mapCountry) {
-                if (country.isNPInbetweenParty)
+                if (($scope.isABS && country.isNPInbetweenParty))
                     mapCountry.colorReal = mapCountry.baseSettings.color = "#EC971F";
-                else if (country.isNPParty )
+                else if (($scope.isABS && country.isNPParty) || ($scope.isBCH && country.isCPParty))
                     mapCountry.colorReal = mapCountry.baseSettings.color = "#5F4586";
                 else
                     mapCountry.colorReal = mapCountry.baseSettings.color = "#333";
             } else {
                     mapCountry.colorReal = mapCountry.baseSettings.color = "#333";
             }
-          
+
+            if(country.code == 'RS' && $scope.isBCH && country.isCPParty){
+              var xkMapCountry = getMapObject('XK');
+              xkMapCountry.colorReal = "#5F4586";
+            }
         } //getMapObject
 
          //=======================================================================
@@ -348,7 +361,7 @@ function(template, app, _, popOverTemplate) {
 
           $(pin).popover(generatePopover(imageIndex));
           pin.addEventListener('click', function(event) {
-            console.log('pin click')
+            
             closePopovers(pin);
             if ($(pin).data('bs.popover').tip().hasClass('in')) {
 
@@ -426,7 +439,7 @@ function(template, app, _, popOverTemplate) {
             closePopovers();
              
           var info = event.chart.getDevInfo();
-            console.log(info)
+            
           if (image.externalElement)
            $timeout(function(){
               // if ('undefined' !== typeof image.externalElement) {
@@ -485,6 +498,143 @@ function(template, app, _, popOverTemplate) {
 
         loadCountries();
 
+        function loadLmoMap(lmoDecisions){         
+
+          var map = $scope.map;//AmCharts.makeChart( "mapdiv", mapOptions );
+          // map.write("mapdiv");
+          var images = {};
+          _.each(lmoDecisions, function(decision){
+            if(decision && decision.countries){      
+              _.each(decision.countries, function(country){
+                country.country = country.country.replace(/^eur$/, 'eu');
+                if(!images[country.country]){
+                   
+                  var decisions = _.filter(country.bch, {decision: $scope.options.lmoDecision});
+                  if(decisions && decisions.length > 0){                   
+                    var mapArea = _.findWhere(map.dataProvider.areas, {id: country.country.toUpperCase()})
+                    images[country.country] = {
+                        "zoomLevel": 5, "scale": 0.5, "title": countriesLangLat[country.country.toUpperCase()].name.en,
+                        "latitude": map.getAreaCenterLatitude(mapArea),
+                        "longitude": map.getAreaCenterLongitude(mapArea)
+                    };
+                  }
+
+                }
+              })  
+            }
+          })
+          map.dataProvider.images = _.values(images);
+          map.validateData();
+          // add events to recalculate map position when the map is moved or zoomed
+          map.addListener( "positionChanged", updateCustomMarkers );
+          
+          // this function will take current images on the map and create HTML elements for them
+          function updateCustomMarkers( event ) {
+            // get map object
+            var map = event.chart;
+          
+            // go through all of the images
+            for ( var x in map.dataProvider.images ) {
+              // get MapImage object
+              var image = map.dataProvider.images[ x ];
+          
+              // check if it has corresponding HTML element
+              if ( 'undefined' == typeof image.externalElement )
+                image.externalElement = createCustomMarker( image );
+          
+              // reposition the element accoridng to coordinates
+              var xy = map.coordinatesToStageXY( image.longitude, image.latitude );
+              image.externalElement.style.top = xy.y + 'px';
+              image.externalElement.style.left = xy.x + 'px';
+            }
+          }
+          
+          // this function creates and returns a new marker element
+          function createCustomMarker( image ) {
+            // create holder
+            var holder = document.createElement( 'div' );
+            holder.className = 'map-marker';
+            holder.title = image.title;
+            holder.style.position = 'absolute';
+          
+            // maybe add a link to it?
+            if ( undefined != image.url ) {
+              holder.onclick = function() {
+                window.location.href = image.url;
+              };
+              holder.className += ' map-clickable';
+            }
+          
+            // create dot
+            var dot = document.createElement( 'div' );
+            dot.className = 'dot';
+            holder.appendChild( dot );
+          
+            // create pulse
+            var pulse = document.createElement( 'div' );
+            pulse.className = 'pulse';
+            holder.appendChild( pulse );
+          
+            // append the marker to the map container
+            image.chart.chartDiv.appendChild( holder );
+          
+            return holder;
+          }
+          updateCustomMarkers({chart:map});
+        }
+
+        var lmoDecisions;
+        $scope.$watch('options.mapType', function(newVal, oldVal){
+          if(newVal == 'lmoDecisions'){
+            $scope.map.dataProvider.images=[] //.clearLabels();
+            
+            if(!$scope.lmos){
+              $scope.lmos = [{identifier:'all', title:{en:'All'}},
+                            {identifier:'MON-877Ø1-2', title:{en:'MON-877Ø1-2'}},
+                            {identifier:'KM-ØØØH71-4', title:{en:'KM-ØØØH71-4'}},
+                            {identifier:'DKB-89614-9', title:{en:'DKB-89614-9'}},
+                            {identifier:'MON-ØØ81Ø-6', title:{en:'MON-ØØ81Ø-6'}}
+                          ];
+            }
+            if($scope.options.lmo!='all')
+              $scope.options.lmo = 'all'
+            else
+              loadLmoDetails();
+          }          
+        })
+
+        $scope.$watch('options.lmo', function(newVal, oldVal){
+          if(newVal && $scope.options.mapType == 'lmoDecisions'){
+
+            if(newVal!= 'all')
+              return loadLmoDetails(newVal);
+
+            loadLmoDetails();
+          }          
+        })
+
+        $scope.$watch('options.lmoDecision', function(newVal, oldVal){
+          if(newVal && $scope.options.mapType == 'lmoDecisions' && lmoDecisions){
+            loadLmoMap(lmoDecisions);
+          }          
+        })
+
+        function loadLmoDetails(lmo){
+
+          var query = {
+            "uniqueIdentification" : { $exists : true},
+            "countries.bch" : { $exists : true},
+          };
+          if(lmo)
+            query.uniqueIdentification = lmo;
+
+          $q.when($http.get('http://localhost:8000/api/v2013/lmos', { params: {q:JSON.stringify(query)}}))
+          .then(function(result){
+            lmoDecisions = result.data;
+            loadLmoMap(result.data);
+          })
+        }
+        
       }],
     }; // return
   }]); //app.directive('searchFilterCountries
