@@ -1,0 +1,72 @@
+﻿<div class="popover" 
+style="background-color:rgba(10,10,10,.9)!important;color:#a2a6a5;width:500px;web0px;max-height:500px;min-height:300px;">
+    <style>
+       
+        .party-status {
+            text-decoration: none;
+            color: #fff;
+            text-align: center;
+            letter-spacing: .5px;
+            border: none;
+            border-radius: 2px;
+            display: inline-block;
+            height: 20px;
+            line-height: 20px;
+            outline: 0;
+            padding: 0 2rem;
+            text-transform: uppercase;
+            vertical-align: middle;
+        }
+        .popover .arrow,
+        .popover .arrow:after {       
+            display: none;
+        }
+        .popover.top .arrow:after {
+            border-top-color: none             
+        }
+        .show{
+            display: block
+        }
+        .hide{
+            display: none;
+        }
+        .extraHeight{
+            min-height:150px!important;
+        }
+    </style>
+    <div class="arrow "></div>
+    <div style="text-align:left;padding: 6px 6px 6px 6px;">
+         <i class="fa fa-times pull-right"></i>
+         <div class="row col-xs-12">
+            <h3 class="custom-title" style="margin-top:10px;margin-bottom:5px;width:60%;display:inline">
+                <i class="flag-icon flag-icon-{{exceptionCountry||codeLower}}"></i> {{nameLocalized}}
+            </h3>   
+            <span class="{{codeLower=='eh' ? 'hide' : 'show'}}">{{status}} </span>               
+         </div>
+    </div>
+    <div style="clear:both;"></div>
+    <div class="text-nowrap" style="min-height:120px;padding: 6px 10px 6px 10px; ">
+        <span class="badge">{{NFP}}</span> ABS National Focal Point
+        <br>
+        <span class="badge">{{CNA}}</span> Competent National Authorities
+        <br>
+        <span class="badge">{{LAW}}</span> Biosafety Law, Regulation, Guidelines and Agreements
+        <br>
+        <span class="badge">{{NDB}}</span> National Databases and Websites
+        <br>
+        <span class="badge">{{DEC}}</span> Country's Decision or any other Communication
+        <br>
+        <span class="badge">{{NRI3}}</span> Third National Report on the Implementation 
+        <!-- of the Cartagena Protocol on Biosafety -->
+        <br>
+        <span class="badge">{{EXP}}</span> Biosafety Expert
+        <br>
+        <span class="badge">{{EXPA}}</span> Report on the assignment undertaken by the Biosafety Expert      
+        <br>
+    </div>
+    <div style="text-align:center!important;position:absolute;bottom:3px;height:25px;vertical-align:middle;left:0;right:0;margin-left:auto;margin-right:auto;margin-bottom:10px; "
+    class="{{codeLower=='eh' ? 'hide' : 'show'}}">
+        <a translation-url  
+        href="{{translationUrl}}/countries/{{exceptionCountry||codeLower|uppercase}}" class="link btn-primary" style="text-align:center!important;font-weight:700; cursor:pointer;color:#ffffff;font-size:18px;padding: 6px 6px 6px 6px;margin-bottom:3px;">VIEW COUNTRY PROFILE</a>
+    </div>
+</div>
