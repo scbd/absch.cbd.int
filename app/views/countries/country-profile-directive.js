@@ -1,10 +1,10 @@
- define(['app', 'text!views/countries/country-profile-directive.html', 'underscore','linqjs',
+ define(['app', 'text!views/countries/country-profile-directive.html', 'lodash',
    'views/measure-matrix/measure-matrix-countries-directive',
    'js/common',
    'views/search/search-results/result-grouped-national-record',
    'services/search-service', 'services/app-config-service',
     'views/directives/export-directive'
- ], function(app, template, _, linqjs) {
+ ], function(app, template, _) {
 
     app.directive('countryProfile', function() {
         return {
@@ -15,11 +15,11 @@
                 api : '=?',
                 code : '='
             },
-            controller: ["$scope", "$http", "$routeParams", "linqjs", "$filter", "realm",
-                "commonjs", "$q", '$element', '$timeout','commonjs','IStorage','$rootScope',
+            controller: ["$scope", "$http", "$routeParams",  "$filter", "realm",
+                "commonjs", "$q", '$element', '$timeout','IStorage','$rootScope',
                 'breadcrumbs','smoothScroll','$location', 'searchService', 'appConfigService',
-                function($scope, $http, $routeParams, linqjs, $filter, realm, commonjs, $q,
-                            $element, $timeout, countriescommonjs, IStorage,$rootScope,
+                function($scope, $http, $routeParams, $filter, realm, commonjs, $q,
+                            $element, $timeout, IStorage, $rootScope,
                             breadcrumbs,smoothScroll,$location, searchService, appConfigService) {
 
                 $scope.api = {
@@ -202,49 +202,47 @@
                 //**********************************************************
                 $scope.getFacets = function(data) {
 
-                    var linqObj = linqjs.from(data);
-                    $scope.nationalAuthority = linqObj.count(function(schema) {
-
-                    return schema.schema_s.toLowerCase() == 'authority';
-                    });
+                    $scope.nationalAuthority = _.filter(data, function(schema) {
+                        return schema.schema_s.toLowerCase() == 'authority';
+                    }).length;
                     //console.log(response.data.response.docs);
-                    $scope.nfpCount = linqObj.count(function(schema) {
+                    $scope.nfpCount = _.filter(data, function(schema) {
                     // console.log(schema.schema_EN_t.toLowerCase() + ' ' + 'national focal point'.toLowerCase());
                     return schema.schema_s.toLowerCase() == 'focalpoint'.toLowerCase();
-                    });
+                    }).length;
 
-                    $scope.nationalMeasure = linqObj.count(function(schema) {
+                    $scope.nationalMeasure = _.filter(data, function(schema) {
                     return schema.schema_s.toLowerCase() == 'measure';
-                    });
+                    }).length;
 
-                    $scope.Permit = linqObj.count(function(schema) {
+                    $scope.Permit = _.filter(data, function(schema) {
                     return schema.schema_s.toLowerCase() == 'abspermit';
-                    });
+                    }).length;
 
-                    $scope.absCheckpoint = linqObj.count(function(schema) {
+                    $scope.absCheckpoint = _.filter(data, function(schema) {
                     return schema.schema_s.toLowerCase() == 'abscheckpoint';
-                    });
+                    }).length;
 
-                    $scope.absCheckpointCommunique = linqObj.count(function(schema) {
+                    $scope.absCheckpointCommunique = _.filter(data, function(schema) {
                     return schema.schema_s.toLowerCase() == 'abscheckpointcommunique';
-                    });
+                    }).length;
 
-                    $scope.database = linqObj.count(function(schema) {
+                    $scope.database = _.filter(data, function(schema) {
                     return schema.schema_s.toLowerCase() == 'database';
-                    });
-                    $scope.resource = linqObj.count(function(schema) {
+                    }).length;
+                    $scope.resource = _.filter(data, function(schema) {
                     return schema.schema_s.toLowerCase() == 'resource';
-                    });
+                    }).length;
 
-                    $scope.absNationalReport = linqObj.count(function(schema) {
+                    $scope.absNationalReport = _.filter(data, function(schema) {
                     return schema.schema_s.toLowerCase() == 'absnationalreport';
-                    });
+                    }).length;
                 }
 
                 $scope.showlist = false;
 
                 //**********************************************************
-                $scope.countriescommonjs = countriescommonjs;
+         
                 $scope.$on('loadCountryProfile', function(evt, evtData){
                     $scope.loadCountryDetails(evtData.data.countryCode);
                 })
