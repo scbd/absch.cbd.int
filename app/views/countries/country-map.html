@@ -18,7 +18,21 @@
             .amcharts-main-div, .amcharts-chart-div{
                 position: static!important;
             }
-
+            .map-filters-bg {
+                height: 350px;
+                background: #080808;                
+                opacity: 0.2;
+            }
+            #map-filters {                
+                /* right: 20px; */
+                padding: 10px;
+                position: absolute;
+                top:0;
+            }
+            
+        </style>
+        
+        <style ng-if="options.mapType=='lmoDecisions'">
             .map-marker {
                 /* adjusting for the marker dimensions
                 so that it is centered on coordinates */
@@ -103,18 +117,6 @@
                     opacity: 0.0;
                 }
             }
-            .map-filters-bg {
-                height: 350px;
-                background: #080808;                
-                opacity: 0.2;
-            }
-            #map-filters {                
-                /* right: 20px; */
-                padding: 10px;
-                position: absolute;
-                top:0;
-            }
-            
         </style>
         <!--<link type="text/css" href="/app/libs/ammap3/ammap/plugins/export/export.css" rel="stylesheet" />-->
         <!-- <div ng-if="isBCH" id="map-filters">
