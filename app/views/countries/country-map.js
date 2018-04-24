@@ -644,7 +644,7 @@ function(require, template, app, _) {
           if(lmo)
             query.uniqueIdentification = lmo;
 
-          $q.when($http.get('http://localhost:8000/api/v2013/lmos', { params: {q:JSON.stringify(query)}}))
+          $q.when($http.get('/api/v2013/lmos', { params: {q:JSON.stringify(query)}}))
           .then(function(result){
             lmoDecisions = result.data;
             loadLmoMap(result.data);
