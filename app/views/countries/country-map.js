@@ -1,8 +1,8 @@
-define(['require', 'text!./country-map.html', 'app', 'lodash',  'ammap', 
-'shim!/app/views/countries/worldEUHigh[ammap].js',//using absolute url, spl case for this file as its too big to load
-'shim!ammap/themes/light[ammap]',
+define(['require', 'text!./country-map.html', 'app', 'lodash',  'libs/ammap3/ammap/ammap', 
+'shim!/app/views/countries/worldEUHigh[libs/ammap3/ammap/ammap].js',//using absolute url, spl case for this file as its too big to load
+'shim!libs/ammap3/ammap/themes/light[libs/ammap3/ammap/ammap]',
 'js/common', 'services/search-service', 'css!libs/flag-icon-css/css/flag-icon.min.css',
-'scbd-angularjs-services/locale'], 
+'components/scbd-angularjs-services/services/locale'], 
 function(require, template, app, _) {
   'use strict';
 

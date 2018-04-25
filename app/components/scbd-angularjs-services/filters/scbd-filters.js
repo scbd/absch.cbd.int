@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'moment', 'json!./schema-name.json', 'json!./schema-short-name.json', 'scbd-angularjs-services/locale'], 
+define(['app', 'lodash', 'moment', 'json!./schema-name.json', 'json!./schema-short-name.json', 'components/scbd-angularjs-services/services/locale'], 
 function (app, _, moment, schemaName, schemaShortName) {
 
 

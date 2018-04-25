@@ -1,7 +1,7 @@
 define(['app','underscore',
   'views/countries/country-profile-directive',
   'views/directives/block-region-directive',
-  'js/common','scbd-angularjs-services/locale','ng-breadcrumbs',
+  'js/common','components/scbd-angularjs-services/services/locale','ng-breadcrumbs',
   'css!libs/flag-icon-css/css/flag-icon.min',
   'css!./country-profile'
 ], function(app, _) {

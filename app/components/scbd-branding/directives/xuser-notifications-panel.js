@@ -1,8 +1,8 @@
 define(['app',
   'text!./xuser-notifications-panel.html','lodash','moment',
   'css!./xuser-notifications-panel',
-  'scbd-angularjs-filters',
-  'scbd-angularjs-services/user-notifications', 'ngInfiniteScroll', './header/xuser-notification-config-service'],
+  'components/scbd-angularjs-services/filters/scbd-filters',
+  'components/scbd-angularjs-services/services/user-notifications', 'ngInfiniteScroll', './header/xuser-notification-config-service'],
 function(app, template,_,moment) {
     
     app.directive('xuserNotificationsPanel', function() {

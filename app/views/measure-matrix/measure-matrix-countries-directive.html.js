@@ -1,5 +1,5 @@
 define(['app', "text!views/measure-matrix/measure-matrix-countries-directive.html",
-        'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
+        'underscore','components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
         'views/measure-matrix/measure-matrix-elements-derective',
         'views/forms/view/record-loader.directive'], function(app, template, _) {
 

@@ -1,4 +1,4 @@
-define(['app', 'text!./tree-selector.html', 'lodash', 'scbd-angularjs-filters', '../intermediate'], function(app, templateHtml, _) {
+define(['app', 'text!./tree-selector.html', 'lodash', 'components/scbd-angularjs-services/filters/scbd-filters', '../intermediate'], function(app, templateHtml, _) {
 
     //==============================================
     //

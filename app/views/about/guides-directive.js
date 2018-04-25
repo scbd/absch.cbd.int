@@ -1,5 +1,5 @@
 ﻿define(['app', 'text!./guides-directive.html', 'json!app-data/help-guides.json',
-  'scbd-angularjs-services/locale'], 
+  'components/scbd-angularjs-services/services/locale'], 
 function(app, template, guidesData){
 
     app.directive('guidesPartial', ['locale', '$route', function (locale, $route) {

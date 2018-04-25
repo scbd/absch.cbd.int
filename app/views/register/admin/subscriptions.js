@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'scbd-angularjs-services/generic-service', 'js/common', 'ngInfiniteScroll', 'moment', 'scbd-angularjs-controls',
+define(['app', 'underscore', 'components/scbd-angularjs-services/services/generic-service', 'js/common', 'ngInfiniteScroll', 'moment', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
     'views/register/directives/register-top-menu',
     ], function (app, _) {
 

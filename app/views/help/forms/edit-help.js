@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',
+define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
 	'/app/js/common'], function (app, _) {
 		app.controller("editHelpController",
 			["$routeParams", "$scope", "$rootScope", "$q", "underscore", '$http',  '$location', 'commonjs', '$mdDialog',

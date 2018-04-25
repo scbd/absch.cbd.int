@@ -1,4 +1,4 @@
-define(['app','text!./km-notes.html','angular', 'scbd-angularjs-services/authentication'], function(app,template,angular) {
+define(['app','text!./km-notes.html','angular', 'components/scbd-angularjs-services/services/authentication'], function(app,template,angular) {
 
     //============================================================
     //
