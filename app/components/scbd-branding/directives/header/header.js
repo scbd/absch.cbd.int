@@ -3,13 +3,13 @@ define(['app',
         'jquery',
         'css!components/scbd-branding/css/colors',
         'css!./header',
-        'scbd-angularjs-services/authentication',
+        'components/scbd-angularjs-services/services/authentication',
         './account',
         './locale',
         './accounts-validation',
         './login',
         './xuser-notifications-icon',
-        'scbd-angularjs-services/socket-io-service'
+        'components/scbd-angularjs-services/services/socket-io-service'
 ],
 function(app, template, $) {
     app.directive('scbdHeader', function() {

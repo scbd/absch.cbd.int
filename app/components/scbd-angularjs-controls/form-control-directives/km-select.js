@@ -1,5 +1,5 @@
-define(['app', 'angular', 'jquery', 'lodash', 'text!./km-select.html','scbd-angularjs-filters',
-       'scbd-angularjs-services/locale'], 
+define(['app', 'angular', 'jquery', 'lodash', 'text!./km-select.html','components/scbd-angularjs-services/filters/scbd-filters',
+       'components/scbd-angularjs-services/services/locale'], 
 function(app, angular, $, _, template) {
   //============================================================
   //

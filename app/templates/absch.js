@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'moment', 'angular', 'toastr', 'ng-breadcrumbs', 'bootstrap', 'routes/absch', 'angular-loading-bar', 'angular-animate', 'scbd-branding/directives/header/xuser-notification-config-service'
+define(['app', 'underscore', 'moment', 'angular', 'toastr', 'ng-breadcrumbs', 'bootstrap', 'routes/absch', 'angular-loading-bar', 'angular-animate', 'components/scbd-branding/directives/header/xuser-notification-config-service'
 ], function (app, _, moment, angular) {
     'use strict';
 
@@ -229,12 +229,12 @@ define(['app', 'underscore', 'moment', 'angular', 'toastr', 'ng-breadcrumbs', 'b
 
 
 
-            require(['angular-animate', 'scbd-angularjs-filters','scbd-angularjs-services',
+            require(['angular-animate', 'components/scbd-angularjs-services/filters/scbd-filters','components/scbd-angularjs-services/services/main',
                 'angular-localizer',
                 'ngAria', 'angular-animate',
-                'scbd-branding/directives/footer',
+                'components/scbd-branding/directives/footer',
                 'views/directives/nav/portal-branding',
-                'scbd-branding/directives/header/header',
+                'components/scbd-branding/directives/header/header',
                 'views/directives/nav/portal-nav'], function () {
                     $('#divHeader').append('<scbd-header></scbd-header><portal-branding></portal-branding><portal-nav></portal-nav>');
                     $('#divFooter').append('<scbd-footer></scbd-footer>')

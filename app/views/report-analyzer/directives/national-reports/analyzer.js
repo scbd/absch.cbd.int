@@ -1,5 +1,5 @@
-define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 'scbd-angularjs-filters', 
-'../../filters/cases', 'scbd-angularjs-services/locale', 'views/directives/view-reference-document', 'scbd-angularjs-services/authentication'],
+define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 'components/scbd-angularjs-services/filters/scbd-filters', 
+'../../filters/cases', 'components/scbd-angularjs-services/services/locale', 'views/directives/view-reference-document', 'components/scbd-angularjs-services/services/authentication'],
 function(templateHtml, app, _, require, $) { 'use strict';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');

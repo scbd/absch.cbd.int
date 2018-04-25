@@ -1,6 +1,6 @@
 define(['app',
         'services/role-service',
-        'scbd-branding/directives/xuser-notifications-panel',
+        'components/scbd-branding/directives/xuser-notifications-panel',
         'views/register/directives/register-top-menu'
   ], function(app) {
     "use strict";

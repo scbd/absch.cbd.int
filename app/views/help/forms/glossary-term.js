@@ -1,5 +1,5 @@
 define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 
-        '/app/js/common', 'scbd-angularjs-services', 'scbd-angularjs-filters', 'scbd-angularjs-controls',],
+        '/app/js/common', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'components/scbd-angularjs-controls/form-control-directives/all-controls',],
   function (angular, app, _) {
 
     app.controller("glossaryTermController",

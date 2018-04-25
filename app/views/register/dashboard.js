@@ -1,6 +1,6 @@
 define(['app', 'underscore', 'angular', 
  'services/role-service', 'services/app-config-service',
- 'views/register/directives/register-top-menu', 'toastr','scbd-angularjs-services', 'views/register/directives/top-records'],
+ 'views/register/directives/register-top-menu', 'toastr','components/scbd-angularjs-services/services/main', 'views/register/directives/top-records'],
 function(app, _, ng) {
     "use strict";
     return ["$rootScope", "$scope", "IStorage", "roleService", "$compile", "realm", "$q",

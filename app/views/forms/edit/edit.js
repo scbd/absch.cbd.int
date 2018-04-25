@@ -14,7 +14,7 @@ define([
     'views/directives/workflow-std-buttons',
     'views/forms/edit/document-selector',
     'views/register/directives/register-top-menu',
-    'scbd-angularjs-services/locale',
+    'components/scbd-angularjs-services/services/locale',
     'views/directives/workflow-std-buttons'
 ], function (app, _, Enumerable) {
 
