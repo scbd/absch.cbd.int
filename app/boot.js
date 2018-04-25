@@ -26,7 +26,7 @@ require.config({
         'lodash'                    : 'libs/lodash/lodash.min',
         'moment'                    : 'libs/momentjs/min/moment-with-langs.min',
         'angular-animate'           : 'libs/angular-animate/angular-animate.min',
-        'view-abs-checkpoint'       : 'views/forms/view/view-abs-checkpoint.directive',
+        'view-abs-checkpoint'       : 'views/forms/view/abs/view-abs-checkpoint.directive',
         'text-angular-sanitize'     : 'libs/textAngular/dist/textAngular-sanitize.min',
         'text-angular'              : 'libs/textAngular/src/textAngular',
         'cbd-forums'                : 'libs/cbd-forums/cbd-forums',

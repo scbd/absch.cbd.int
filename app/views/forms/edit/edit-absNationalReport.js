@@ -1,5 +1,5 @@
 define(['app', 'underscore', 'views/forms/edit/edit' , 'views/forms/edit/document-selector',
-        '../view/view-abs-national-report.directive',
+        '../view/abs/view-abs-national-report.directive',
         'services/search-service','services/app-config-service'
 ], function (app, _) {
 

@@ -1,5 +1,5 @@
 define(['app', 'underscore', 'views/forms/edit/edit','views/forms/edit/edit-resource-schema-base-directive',
-        '../view/view-resource.directive'
+        '../view/abs/view-resource.directive'
        ], function (app, _) {
 
   app.controller("editCommunityProtocol", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",

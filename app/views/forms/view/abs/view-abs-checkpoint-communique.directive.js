@@ -1,5 +1,5 @@
 define(['app', 
-"text!views/forms/view/view-abs-checkpoint-communique.directive.html", 'views/directives/record-options'], function (app, template) {
+"text!views/forms/view/abs/view-abs-checkpoint-communique.directive.html", 'views/directives/record-options'], function (app, template) {
 
 app.directive("viewAbsCheckpointCommunique", [function () {
 
