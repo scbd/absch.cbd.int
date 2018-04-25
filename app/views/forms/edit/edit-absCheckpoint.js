@@ -1,5 +1,5 @@
 define(['app', 'views/forms/edit/edit',
-    '../view/view-abs-checkpoint.directive'
+    '../view/abs/view-abs-checkpoint.directive'
 ], function(app) {
 
     app.controller("editAbsCheckpoint", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, $http, $filter, $q, $routeParams, $controller, $location) {
