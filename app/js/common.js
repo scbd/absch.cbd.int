@@ -532,9 +532,10 @@ define(['app', 'underscore', 'services/local-storage-service', 'scbd-angularjs-s
                         country.isAppProtocolParty   = country.isCPParty
                         
                     country.dateDeposit =  countryDetails.treaties.XXVII8b.deposit;
-                    country.instrument = countryDetails.treaties.XXVII8b.instrument;
-                    country.dateSigned = countryDetails.treaties.XXVII8b.signature;
-
+                    country.instrument  = countryDetails.treaties.XXVII8b.instrument;
+                    country.dateSigned  = countryDetails.treaties.XXVII8b.signature;
+                    country.treaties    = countryDetails.treaties;
+                    
                     if (country.isNPInbetweenParty)
                         country.entryIntoForce = moment.utc(treaties.XXVII8b.deposit).add(90, 'day');
                     else
