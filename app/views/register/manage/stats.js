@@ -1,6 +1,6 @@
-define(['app', 'underscore', 'chart-js', 'scbd-angularjs-services/generic-service', 'js/common', 'moment',
-    'views/register/directives/register-top-menu', 'services/search-service', 'scbd-angularjs-controls', 'services/app-config-service',
-    'scbd-angularjs-services/storage'
+define(['app', 'underscore', 'chart-js', 'components/scbd-angularjs-services/services/generic-service', 'js/common', 'moment',
+    'views/register/directives/register-top-menu', 'services/search-service', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'services/app-config-service',
+    'components/scbd-angularjs-services/services/storage'
     ], function (app, _) {
 
         "use strict";

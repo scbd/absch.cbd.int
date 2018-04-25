@@ -1,6 +1,6 @@
 define(['app', "text!views/register/user-preferences/user-preference-filter.html",'underscore', 'moment', 'ngDialog',
     'views/search/search-directive', 
-    'scbd-angularjs-services/generic-service'], function (app, template, _, moment) {
+    'components/scbd-angularjs-services/services/generic-service'], function (app, template, _, moment) {
 
     app.directive("userPreferenceFilter", ['$rootScope', 'ngDialog', function ($rootScope, ngDialog) {
 

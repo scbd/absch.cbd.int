@@ -1,4 +1,4 @@
-﻿define(['app', 'underscore', 'js/common', 'scbd-angularjs-controls', 'scbd-angularjs-services', 
+﻿define(['app', 'underscore', 'js/common', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'components/scbd-angularjs-services/services/main', 
 'views/register/directives/register-top-menu', 'services/app-config-service',
 ], function (app, _) {
 

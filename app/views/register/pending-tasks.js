@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'scbd-angularjs-controls',
+define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
     'views/register/directives/register-top-menu', 'services/role-service',
     'views/directives/task-id-directive',
     'views/forms/view/record-loader.directive'], function (app) {

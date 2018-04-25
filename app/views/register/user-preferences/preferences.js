@@ -2,7 +2,7 @@ define(['app', 'js/common',
 'views/register/directives/register-top-menu', 'ngDialog',
 'views/register/user-preferences/user-preference-filter',
 'services/local-storage-service',
-'scbd-angularjs-services/generic-service', 'services/role-service'
+'components/scbd-angularjs-services/services/generic-service', 'services/role-service'
 ], function (app) {
     app.controller('userPreferencesCtrl', ['$scope', '$http', '$timeout', '$element', 'ngDialog', 
     '$rootScope', 'localStorageService', '$location','IGenericService', 'realm', 'roleService', '$route',

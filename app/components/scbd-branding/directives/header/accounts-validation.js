@@ -1,7 +1,7 @@
 define(['app',
   'text!./accounts-validation.html',
   'css!./accounts-validation',
-  'scbd-angularjs-services/authentication',
+  'components/scbd-angularjs-services/services/authentication',
 ],
 function(app, template) {
      app.directive('accountsValidationHeader', function() {

@@ -15,7 +15,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 'views/register/user-preferences/user-preference-filter',
 'views/directives/export-directive',
 'services/thesaurus-service', 'angular-animate', 'angular-joyride',
-'scbd-angularjs-services/locale'
+'components/scbd-angularjs-services/services/locale'
 ], function(app, template, _, schemaNames, joyRideText) {
 
     app.directive('searchDirective', function() {

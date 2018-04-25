@@ -1,4 +1,4 @@
-define(['app', 'underscore', './common-routes', 'js/extended-route-provider','scbd-angularjs-services', 'js/services', 'js/filters',
+define(['app', 'underscore', './common-routes', 'js/extended-route-provider','components/scbd-angularjs-services/services/main', 'js/services', 'js/filters',
  'services/app-config-service', 'angular-route', 'services/app-config-service'], function (app, _, commonRoutes) { 'use strict';
 
     app.value("showHelp", { value : false });

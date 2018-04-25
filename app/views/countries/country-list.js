@@ -1,10 +1,10 @@
 ﻿define(['app', 'underscore',
     'js/common',
-    'scbd-angularjs-filters',
+    'components/scbd-angularjs-services/filters/scbd-filters',
     'services/search-service',
     'views/directives/block-region-directive',
-    'scbd-angularjs-services/locale',
-    'scbd-angularjs-controls/km-select'
+    'components/scbd-angularjs-services/services/locale',
+    'components/scbd-angularjs-controls/form-control-directives/km-select'
 ], function (app, _) {
 
     app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams', '$compile', '$timeout', 'locale',
