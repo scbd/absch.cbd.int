@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/edit/field-embed-contact.directive.html", 'js/common', 'scbd-angularjs-services', 'scbd-angularjs-controls',
+define(['app', "text!views/forms/edit/field-embed-contact.directive.html", 'js/common', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
 'views/forms/view/view-contact-reference.directive', 'ngDialog',
 'views/forms/view/view-organization-reference.directive',
 'services/search-service','ngInfiniteScroll'

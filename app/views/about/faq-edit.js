@@ -13,7 +13,7 @@ function(app, template){
             $scope.editFaq = function(){
                 var faqForEdit = angular.copy($scope.faq);
                 
-                require(['scbd-angularjs-controls'], function(){
+                require(['components/scbd-angularjs-controls/form-control-directives/all-controls'], function(){
                     ngDialog.open({
                         className : 'ngdialog-theme-default wide',
                         template: 'faq-edit-modal',

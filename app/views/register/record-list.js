@@ -1,5 +1,5 @@
-define(['app', 'underscore','scbd-angularjs-services', 'scbd-angularjs-filters', 'js/common', 'js/filters',
-    'services/search-service', 'services/role-service','scbd-angularjs-controls',
+define(['app', 'underscore','components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'js/common', 'js/filters',
+    'services/search-service', 'services/role-service','components/scbd-angularjs-controls/form-control-directives/all-controls',
     'views/register/directives/register-top-menu', 'views/directives/block-region-directive',
 	'views/forms/edit/editFormUtility', 'views/register/directives/record-type-header',
     'services/local-storage-service', 'ngDialog', 'services/app-config-service'

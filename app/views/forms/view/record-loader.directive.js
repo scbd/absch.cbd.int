@@ -1,6 +1,6 @@
 ﻿define(['app', 'text!views/forms/view/record-loader.directive.html', 
-	'scbd-angularjs-services', 'ngSmoothScroll',
-	'scbd-angularjs-filters',
+	'components/scbd-angularjs-services/services/main', 'ngSmoothScroll',
+	'components/scbd-angularjs-services/filters/scbd-filters',
 	'./view-history-directive',
     'js/common',
     'views/directives/document-metadata-directive',
@@ -10,7 +10,7 @@
     'views/forms/view/view-contact-reference.directive',
 	'services/search-service',
 	'views/directives/block-region-directive',
-	'views/directives/record-options','scbd-angularjs-services/locale',
+	'views/directives/record-options','components/scbd-angularjs-services/services/locale',
 	'views/forms/directives/document-date'
 ], function (app, template) {
 

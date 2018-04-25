@@ -1,5 +1,5 @@
 define(['app','underscore', "text!views/forms/view/view-default-reference.directive.html", 
-'scbd-angularjs-services'], function (app, _, template) {
+'components/scbd-angularjs-services/services/main'], function (app, _, template) {
 
 app.directive("viewDefaultReference", [function () {
 	return {

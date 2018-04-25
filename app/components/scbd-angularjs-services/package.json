@@ -13,7 +13,7 @@
   "author": "Blaise Fonseca",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/scbd/scbd-angularjs-services/issues"
+    "url": "https://github.com/scbd/components/scbd-angularjs-services/services/issues"
   },
   "homepage": "https://github.com/scbd/scbd-angularjs-services#readme",
   "devDependencies": {
