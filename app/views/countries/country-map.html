@@ -126,23 +126,23 @@
             <div class="col-md-10" block-region activate="loadingMap">
                 <div id="mapdiv" style="height:350px;"></div>
             </div>
-            <div class="col-md-2" ng-if="isBCH" style="height: 350px;">
+            <div class="col-md-2" ng-if="isBCH" style="height: 350px;padding-right: 0px;">
                 <div class="map-filters-bg" ></div>
                 <div id="map-filters">
-                    <div>Map Type :
-                        <select ng-model="options.mapType">
+                    <div><label>Map Type :</label>
+                        <select ng-model="options.mapType" class="form-control">
                             <option value="nationalRecords">National records</option>
                             <option value="lmoDecisions">LMO decisions</option>
                         </select>
                     </div>
                     <div ng-if="options.mapType=='lmoDecisions'">
-                        <div>LMO :
-                            <select ng-model="options.lmo">
-                                <option ng-selected="options.lmo==lmo.identifier" ng-value="lmo.identifier" ng-repeat="lmo in lmos">{{lmo.title|lstring:locale}}</option>
+                        <div><label> LMO :</label>
+                            <select ng-model="options.lmo" class="form-control">
+                                <option ng-selected="options.lmo==lmo.identifier" ng-value="lmo.identifier" ng-repeat="lmo in lmos">{{lmo.title}}</option>
                             </select>
                         </div>
-                        <div>Decision :
-                            <select ng-model="options.lmoDecision">
+                        <div><label>Decision :</label>
+                            <select ng-model="options.lmoDecision" class="form-control">
                                 <option value="approved">Approved</option>
                                 <option value="approvedWithCondition">Approved with conditions</option>                                
                                 <option value="rejected">Rejected</option>
