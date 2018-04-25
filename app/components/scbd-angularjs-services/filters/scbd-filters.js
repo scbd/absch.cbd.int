@@ -1,5 +1,5 @@
-define(['app', 'moment', 'json!./schema-name.json', 'json!./schema-short-name.json', 'scbd-angularjs-services/locale'], 
-function (app, moment, schemaName, schemaShortName) {
+define(['app', 'lodash', 'moment', 'json!./schema-name.json', 'json!./schema-short-name.json', 'scbd-angularjs-services/locale'], 
+function (app, _, moment, schemaName, schemaShortName) {
 
 
   app.directive("translationUrl", ['$browser', function($browser){
@@ -296,11 +296,11 @@ function (app, moment, schemaName, schemaShortName) {
   //
   //============================================================
   app.filter("schemaName", ['realm', 'locale', function(realm, locale) {
-    var schemas = realm.schemas;
+    
 		return function( schema ) {
 			if(!schema)return schema;
       
-      var result = ((schemas[schema]||{}).title||{})[locale];
+      var result = ((realm.schemas[schema]||{}).title||{})[locale];
 
       return result || schemaName[schema.toLowerCase()] || schema;//legacy
 
@@ -312,14 +312,16 @@ function (app, moment, schemaName, schemaShortName) {
 	//
 	//
 	//============================================================
-	app.filter("schemaShortName", [function() {
+	app.filter("schemaShortName", ['realm', function(realm) {
 
 		return function( schema ) {
 
 			if(!schema)
 				return schema;
 
-      return schemaShortName[schema.toLowerCase()] || schema;
+        var result = (realm.schemas[schema]||{}).shortCode;
+
+        return result || schema;
 
 		};
 	}]);
@@ -329,12 +331,16 @@ function (app, moment, schemaName, schemaShortName) {
 	//
 	//
 	//============================================================
-	app.filter("urlSchemaShortName", [function() {
+	app.filter("urlSchemaShortName", ['realm', function(realm) {
 
 		return function( schema ) {
 
 			if(!schema)
 				return schema;
+      
+      var shortCode = (realm.schemas[schema]||{}).shortCode;
+      if(shortCode)
+        return shortCode;
 
 			if(schema.toLowerCase()=="focalpoint"				          ) return "NFP";
 			if(schema.toLowerCase()=="authority"				          ) return "CNA";
@@ -369,11 +375,15 @@ function (app, moment, schemaName, schemaShortName) {
 	//
 	//
 	//============================================================
-	app.filter("mapSchema", [function() {
+	app.filter("mapSchema", ['realm', function(realm) {
 
 		return function( schema ) {
 			if(!schema)
 				return schema;
+
+      var realmSchema = _.findKey(realm.schemas, {shortCode: schema.toUpperCase()})
+      if(realmSchema)
+        return realmSchema;
 
 			if(schema.toUpperCase()=="NEW"				      ) return "new";
 			if(schema.toUpperCase()=="NEWS"				      ) return "news";
