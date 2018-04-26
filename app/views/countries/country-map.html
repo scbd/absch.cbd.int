@@ -33,6 +33,10 @@
         </style>
         
         <style ng-if="options.mapType=='lmoDecisions'">
+
+            .amcharts-main-div, .amcharts-chart-div{
+                position: relative!important;
+            }
             .map-marker {
                 /* adjusting for the marker dimensions
                 so that it is centered on coordinates */
@@ -50,7 +54,7 @@
                 -moz-border-radius: 30px;
                 border-radius: 30px;
                 background-color: #716f42;
-                z-index: 10;
+                z-index: 0;
                 position: absolute;
             }
             .map-marker .dot {
@@ -70,7 +74,7 @@
                 position: absolute;
                 top: -20px;
                 left: -20px;
-                z-index: 1;
+                z-index: 0;
                 opacity: 0;
             }
             @-moz-keyframes pulse {
@@ -117,6 +121,12 @@
                     opacity: 0.0;
                 }
             }
+            .popup-header {
+                width: 100%;
+                font-weight: bold;
+                font-size:16px;
+                z-index: 1000;
+            }
         </style>
         <!--<link type="text/css" href="/app/libs/ammap3/ammap/plugins/export/export.css" rel="stylesheet" />-->
         <!-- <div ng-if="isBCH" id="map-filters">
@@ -143,6 +153,7 @@
                         </div>
                         <div><label>Decision :</label>
                             <select ng-model="options.lmoDecision" class="form-control">
+                                <option value="all">All</option>
                                 <option value="approved">Approved</option>
                                 <option value="approvedWithCondition">Approved with conditions</option>                                
                                 <option value="rejected">Rejected</option>
