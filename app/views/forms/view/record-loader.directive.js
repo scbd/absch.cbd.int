@@ -11,7 +11,7 @@
 	'services/search-service',
 	'views/directives/block-region-directive',
 	'views/directives/record-options','components/scbd-angularjs-services/services/locale',
-	'views/forms/directives/document-date'
+	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/form-control-directives/km-value-ml'
 ], function (app, template) {
 
 	app.directive('recordLoader', [function () {
@@ -75,7 +75,7 @@
 						notification				: 'views/forms/view/scbd/view-notification.directive',
 						news						: 'views/forms/view/scbd/view-news.directive',
 
-						"law" 						: 'views/forms/view/bch/view-law.directive',
+						"biosafteyLaw" 				: 'views/forms/view/bch/view-law.directive',
 						"decision" 					: 'views/forms/view/bch/view-decision.directive',
 						"riskAssessment" 			: 'views/forms/view/bch/view-risk-assessment.directive',
 						"cpbNationalReport3" 		: 'views/forms/view/bch/view-national-report3.directive',
