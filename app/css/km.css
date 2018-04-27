@@ -150,3 +150,10 @@ ul.km-value
   -o-animation:      loading-bar-spinner 400ms linear infinite;
   animation:         loading-bar-spinner 400ms linear infinite;
 }*/
+
+
+.multiple-languages { margin-bottom: 3px; }
+.km-value-ml-div{
+	border-radius: 3px 0px 0px 3px!important;
+	margin-bottom: 0px!important;
+}
