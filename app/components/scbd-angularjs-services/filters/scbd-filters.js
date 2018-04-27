@@ -222,7 +222,7 @@ function (app, _, moment, schemaName, schemaShortName) {
   //
   //
   //============================================================
-  app.filter("term", ["$http", '$filter', 'locale', function ($http, $filter, appLocale) {
+  app.filter("term", ["$http", '$filter', 'locale', function ($http, $filter, websiteLocale) {
     var cacheMap = {};
 
     return function (term, locale) {
@@ -234,8 +234,10 @@ function (app, _, moment, schemaName, schemaShortName) {
         term = {
           identifier: term
         };
-
-      locale = locale || appLocale || "en";
+      
+      if(locale && _.isArray(locale))
+        locale = websiteLocale;
+      locale = locale || "en";
 
       if (term.customValue)
         return $filter("lstring")(term.customValue, locale);
@@ -253,14 +255,13 @@ function (app, _, moment, schemaName, schemaShortName) {
 
       }).catch(function () {
 
-        cacheMap[term.identifier] = { title : term.identifier };
+        cacheMap[term.identifier] = term.identifier;
 
         return term.identifier;
 
       });
     };
   }]);
-
 
   app.filter("lstring", function () {
     return function (ltext, locale) {
@@ -279,6 +280,11 @@ function (app, _, moment, schemaName, schemaShortName) {
         sText = ltext.en;
 
       if (!sText) {
+
+        var normalized = normalizeText(ltext)
+        if(normalized[locale])
+          return normalized[locale];
+
         for (var key in ltext) {
           sText = ltext[key];
           if (sText)
@@ -289,6 +295,7 @@ function (app, _, moment, schemaName, schemaShortName) {
       return sText || "";
     };
   });
+
 
   //============================================================
   //
@@ -413,4 +420,78 @@ function (app, _, moment, schemaName, schemaShortName) {
 		};
 	}]);
 
+
+  app.filter("lstringLocale", ['locale', function(defaultLocale) {
+    return function(ltext, locale) {
+      
+      if(locale && _.isArray(locale))
+        locale = defaultLocale;
+
+      locale = locale || defaultLocale;
+
+      if(!ltext)
+        return locale;
+
+      if(typeof(ltext) == 'string')
+        return locale;
+
+      if(ltext[locale])
+        return locale;
+
+      if(ltext[defaultLocale])
+              return defaultLocale;
+
+      if(ltext.en)
+        return 'en';
+      
+      if(ltext.fr) return 'fr';
+      if(ltext.es) return 'es';
+      if(ltext.ru) return 'ru';
+      if(ltext.ar) return 'ar';
+      if(ltext.zh) return 'zh';
+
+      for(var key in ltext) {
+        if(ltext[key])
+            return key;
+      }
+
+      return locale;
+    };
+  }]);
+
+  app.filter("direction", ['$filter', function($filter) {
+    return function(text, locale) {
+
+          locale = $filter('lstringLocale')(text, locale);
+
+          return $filter('localeDirection')(locale);
+    };
+  }]);
+
+  app.filter("localeDirection", ['locale', function(defaultLocale) {
+    return function(locale) {
+          return (locale||defaultLocale) == 'ar' ? 'rtl' : 'ltr';
+      };
+  }]);
+
+  function normalizeText(text) {
+
+		if(!text) return null;
+
+		var entry = { ar: text.ar, en: text.en, es: text.es, fr: text.fr, ru: text.ru, zh: text.zh };
+
+		if(!entry.en) entry.en = entry.fr;
+		if(!entry.en) entry.en = entry.es;
+		if(!entry.en) entry.en = entry.ru;
+		if(!entry.en) entry.en = entry.ar;
+		if(!entry.en) entry.en = entry.zh;
+
+		if(!entry.fr) entry.fr = entry.en;
+		if(!entry.es) entry.es = entry.en;
+		if(!entry.ru) entry.ru = entry.en;
+		if(!entry.ar) entry.ar = entry.en;
+		if(!entry.zh) entry.zh = entry.en;
+
+    return entry;
+  }
 });
