@@ -125,7 +125,7 @@
 						if ($route.current.params.documentNumber)
 							var documentID = $route.current.params.documentNumber;
 
-						if (documentID && documentID.toLowerCase().indexOf('absch') == 0) {
+						if (documentID && (/^bch/i.test(documentID) || /^abs/i.test(documentID))) {
 							var docNum = documentID.split('-');
 							if (docNum.length == 5) {
 								documentID = documentID.toLowerCase();//.replace('absch','ABSCH');
