@@ -1,67 +1,21 @@
-﻿<div class="popover" 
-style="background-color:rgba(10,10,10,.9)!important;color:#a2a6a5;
-width:500px;web0px;max-height:500px;min-height:300px;
-{{codeLower=='fk' ? 'height:400px' : (codeLower=='gl' ? 'height:375px' : '')}}
-{{codeLower!='fk' && (codeLower=='gb'||exceptionCountry=='gb') ? 'height:400px' : ''}}">
-    <style>
-       
-        .party-status {
-            text-decoration: none;
-            color: #fff;
-            text-align: center;
-            letter-spacing: .5px;
-            border: none;
-            border-radius: 2px;
-            display: inline-block;
-            height: 20px;
-            line-height: 20px;
-            outline: 0;
-            padding: 0 2rem;
-            text-transform: uppercase;
-            vertical-align: middle;
-        }
-        .popover .arrow,
-        .popover .arrow:after {       
-            display: none;
-        }
-        .popover.top .arrow:after {
-            border-top-color: none             
-        }
-        .show{
-            display: block
-        }
-        .hide{
-            display: none;
-        }
-        .extraHeight{
-            min-height:150px!important;
-        }
-        .gb-territories + .tooltip > .tooltip-inner {background-color: #d9edf7;color:#31708f;}
-        .gb-territories + .tooltip > .tooltip-arrow { border-bottom-color:#d9edf7; }
-    </style>
+﻿<div>
+    
     <div class="arrow "></div>
-    <div style="text-align:left;padding: 6px 6px 6px 6px;">
-         <i class="fa fa-times pull-right"></i>
+    <div style="text-align:left;padding: 6px 6px 6px 6px;">         
          <div class="row col-xs-12">
-            <h3 class="custom-title" style="margin-top:10px;margin-bottom:5px;width:60%;display:inline">
-                <i class="flag-icon flag-icon-{{exceptionCountry||codeLower}}"></i> {{nameLocalized}}
-            </h3>   
-            <span class="{{codeLower=='eh' ? 'hide' : 'show'}}">{{status}} </span>               
-         </div>
-         <div class="row col-xs-12">
-            <div class="small alert-info {{(exceptionCountry=='dk' || codeLower=='dk') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
+            <div class="small alert-info {{(country.exceptionCountry=='dk' || country.code.toLowerCase()=='dk') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
                 <i class="fa fa-info-circle" /> 
             Denmark’s ratification of the Protocol does not apply in respect of Greenland and the Faroe Islands.
             </div>
-            <div class="{{codeLower=='fk' ? 'show' : 'hide'}}  alert-info small " style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
+            <div class="{{country.code.toLowerCase()=='fk' ? 'show' : 'hide'}}  alert-info small " style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
                 <i class="fa fa-info-circle" />
                 A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern Ireland concerning sovereignty over the Falkland Islands (Malvinas).
             </div>
-            <div class="{{codeLower=='eh' ? 'show' : 'hide'}}  alert-info small " style="margin-top:25px;white-space: normal;line-height:0.9;padding:3px;font-size: x-large;">
+            <div class="{{country.code.toLowerCase()=='eh' ? 'show' : 'hide'}}  alert-info small " style="margin-top:25px;white-space: normal;line-height:0.9;padding:3px;font-size: x-large;">
                 <i class="fa fa-info-circle fa-1x" />
                 Non-Self Governing Territory.
             </div>
-            <div class="small alert-info {{(exceptionCountry=='gb'||codeLower=='gb') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
+            <div class="small alert-info {{(country.exceptionCountry=='gb'||country.code.toLowerCase()=='gb') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;line-height:0.9;padding:3px;">
                 <i class="fa fa-info-circle" /> 
                 The UK’s ratification of the Nagoya Protocol does not extend to the 
                     <a ng-href="#" class="gb-territories" data-toggle="tooltip" data-placement="bottom" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Gibraltar; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands" >14 Overseas Territories </a>
@@ -70,28 +24,14 @@ width:500px;web0px;max-height:500px;min-height:300px;
             </div>
          </div>
     </div>
-    <div style="clear:both;"></div>
-    <div class="text-nowrap {{codeLower=='eh' ? 'hide' : 'show'}}" style="min-height:120px;padding: 6px 10px 6px 10px; ">
-        <span class="badge">{{NFP}}</span> ABS National Focal Point
-        <br>
-        <span class="badge">{{CNA}}</span> Competent National Authorities
-        <br>
-        <span class="badge">{{MSR}}</span> Legislative Administrative or Policy Measures
-        <br>
-        <span class="badge">{{NDB}}</span> National Databases and Websites
-        <br>
-        <span class="badge">{{IRCC}}</span> Internationally Recognized Certificates of Compliance
-        <br>
-        <span class="badge">{{CP}}</span> Checkpoints
-        <br>
-        <span class="badge">{{CPC}}</span> Checkpoint Communiqués
-        <br>
-        <span class="badge">{{NR}}</span> Interim National Report on the Implementation of the Nagoya Protocol      
-        <br>
-    </div>
-    <div style="text-align:center!important;position:absolute;bottom:3px;height:25px;vertical-align:middle;left:0;right:0;margin-left:auto;margin-right:auto;margin-bottom:10px; "
-    class="{{codeLower=='eh' ? 'hide' : 'show'}}">
-        <a translation-url  
-        href="{{translationUrl}}/countries/{{exceptionCountry||codeLower|uppercase}}" class="link btn-primary" style="text-align:center!important;font-weight:700; cursor:pointer;color:#ffffff;font-size:18px;padding: 6px 6px 6px 6px;margin-bottom:3px;">VIEW COUNTRY PROFILE</a>
+    <div >
+        <table class="table">
+            <tr ng-repeat="schema in country.schemas">
+                <td>
+                    <span class="badge">{{schema.count}}</span>
+                </td>
+                <td>{{schema.title|lstring:locale}}</td>
+            </tr>
+        </table>
     </div>
 </div>
