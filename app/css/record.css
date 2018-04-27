@@ -13,6 +13,7 @@
 
 #Record .list{
 	margin:0;padding:0;padding-left:15px;
+	list-style-type: none;
 }
 
 #Record .km-value{
