@@ -10,18 +10,18 @@
                 font-size: 11px;
                 opacity: 0.7;
                 display: block;
-                float: right;
+                float: left;
                 bottom: 20px;
                 right: 5px;
                 cursor: pointer;
+                left:10%
             }
-            .amcharts-main-div, .amcharts-chart-div{
+            /* .amcharts-main-div, .amcharts-chart-div{
                 position: static!important;
-            }
+            } */
             .map-filters-bg {
                 height: 350px;
-                background: #080808;                
-                opacity: 0.2;
+                color: #fff;
             }
             #map-filters {                
                 /* right: 20px; */
@@ -29,14 +29,25 @@
                 position: absolute;
                 top:0;
             }
-            
+            .zoom {
+                position: absolute;
+                top: 15px;
+                right: 25px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                padding: 5px 12px;
+                background: rgba(255, 255, 255, 0.5);
+                cursor: pointer;
+                z-index: 100;
+                max-width:200px;
+            }
         </style>
         
-        <style ng-if="options.mapType=='lmoDecisions'">
-
-            .amcharts-main-div, .amcharts-chart-div{
+        <style >
+            /* ng-if="options.mapType=='lmoDecisions'" */
+            /* .amcharts-main-div, .amcharts-chart-div{
                 position: relative!important;
-            }
+            } */
             .map-marker {
                 /* adjusting for the marker dimensions
                 so that it is centered on coordinates */
@@ -133,37 +144,103 @@
                 <select class="map-select" ><option value="winkel3">winkel3</option><option value="eckert3">eckert3</option><option value="eckert5">eckert5</option><option value="eckert6">eckert6</option><option value="miller" selected="selected">miller</option><option value="equirectangular">equirectangular</option><option value="mercator">mercator</option></select>
         </div> -->
         <div class="row">
-            <div class="col-md-10" block-region activate="loadingMap">
-                <div id="mapdiv" style="height:350px;"></div>
+            <div class="col-md-9" block-region activate="loadingMap">
+                    <div class="zoom">
+                        <div style="border-bottom:1px solid #eee">Filters</div>
+                        <div class="col-md-12">
+                            <label class="checkbox-inline"><input ng-model="options.showLmos" type="checkbox" value="" ng-change="showLmos_changed()">Show LMO's</label>
+                        </div>
+                        <div class="col-md-12"  ng-if="options.showLmos">                            
+                            <select ng-model="options.lmo" class="form-control" ng-options="lmo.identifier as lmo.title for lmo in lmos" ng-change="lmo_changed()">
+                            </select>
+                        </div>
+                    </div>
+                <div id="chartdiv" style="height:350px;"></div>
             </div>
-            <div class="col-md-2" ng-if="isBCH" style="height: 350px;padding-right: 0px;">
-                <div class="map-filters-bg" ></div>
-                <div id="map-filters">
-                    <div><label>Map Type :</label>
-                        <select ng-model="options.mapType" class="form-control">
-                            <option value="nationalRecords">National records</option>
-                            <option value="lmoDecisions">LMO decisions</option>
-                        </select>
-                    </div>
-                    <div ng-if="options.mapType=='lmoDecisions'">
-                        <div><label> LMO :</label>
-                            <select ng-model="options.lmo" class="form-control">
-                                <option ng-selected="options.lmo==lmo.identifier" ng-value="lmo.identifier" ng-repeat="lmo in lmos">{{lmo.title}}</option>
-                            </select>
+            
+            <div class="col-md-3" ng-if="isBCH" style="height:350px;padding-right: 0px!important;
+            margin-left: 0px;
+            padding-left: 0px;">
+                    <style>
+                            .party-status {
+                                text-decoration: none;
+                                color: #fff;
+                                text-align: center;
+                                letter-spacing: .5px;
+                                border: none;
+                                border-radius: 2px;
+                                display: inline-block;
+                                height: 20px;
+                                line-height: 20px;
+                                outline: 0;
+                                padding: 0 2rem;
+                                text-transform: uppercase;
+                                vertical-align: middle;
+                            }
+                    
+                            .map-container {
+                                max-height: 350px;
+                            }
+                    
+                            .map-container-header,
+                            .map-container-footer {
+                                padding: 5px;
+                            }
+                    
+                            .map-container-mainbody {
+                                margin-top: 0;
+                                min-height: 150px;
+                                max-height: 270px;
+                                background: #21a55a;
+                                overflow: auto;
+                            }
+                    
+                            .map-container-header {
+                                min-height: 40px;
+                                border-bottom: 1px solid #EEE;
+                                background: #21a55a;
+                                max-height: 80px;
+                                overflow: hidden;
+                                
+                            }
+                    
+                            .map-container-footer {
+                                height: 40px;
+                                background: #21a55a;
+                            }
+                            .amcharts-chart-div svg{
+                                width:100% !important;
+                            }
+                        </style>
+                <!-- <div class="map-filters-bg" ></div> -->
+                <div class="map-container " ng-if="currentCountry">
+                        <div class="map-container-header">
+                            <div class="row col-xs-12">
+                                <h3 class="custom-title" style="margin-top:10px;margin-bottom:5px;width:60%;display:inline">
+                                    <i class="flag-icon flag-icon-{{currentCountry.exceptionCountry||currentCountry.code.toLowerCase()}}"></i> {{currentCountry.name|lstring}}
+                                </h3>
+                                <span ng-if="(isABS && currentCountry.isNPParty) || (isBCH && currentCountry.isCPParty)"
+                                    style="display:inline;width:35%;text-align:center;background-color: #5F4586;margin:0;padding:0;" class="pull-right party-status">Party</span>
+                                <span ng-if="(isABS && currentCountry.isNPInbetweenParty)"
+                                    style="display:inline;width:35%;text-align:center;background-color: #EC971F;margin:0;padding:0;" class="pull-right party-status">Ratified, not yet Party</span>
+                                <span ng-if="(isABS && !currentCountry.isNPParty && !currentCountry.isNPInbetweenParty) || (isBCH && !currentCountry.isCPParty)"
+                                    style="display:inline;width:35%;text-align:center;background-color: #333;margin:0;padding:0;" class="pull-right party-status">Non Party</span>
+                            </div>
                         </div>
-                        <div><label>Decision :</label>
-                            <select ng-model="options.lmoDecision" class="form-control">
-                                <option value="all">All</option>
-                                <option value="approved">Approved</option>
-                                <option value="approvedWithCondition">Approved with conditions</option>                                
-                                <option value="rejected">Rejected</option>
-                            </select>
+                        <div class="map-filters-bg map-container-mainbody">
+                                <ng-include ng-if="currentCountry" onload="country=currentCountry" src="'/app/views/countries/pin-popup-bch.html'" ></ng-include>
+               
+                        </div>
+                        <div class="map-container-footer">
+                            <div style="text-align:center!important;" class="{{currentCountry.code.toLowerCase()=='eh' ? 'hide' : 'show'}}">
+                                <a translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}" class="link btn-primary"
+                                    style="text-align:center!important;font-weight:700; cursor:pointer;color:#ffffff;font-size:18px;padding: 6px 6px 6px 6px;margin-bottom:3px;">VIEW COUNTRY PROFILE</a>
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
-        <div class="map-disclaimer" data-toggle="modal" href="#dialogDisclaimer">Disclaimer</div>
+        <div class="map-disclaimer pull-left" data-toggle="modal" href="#dialogDisclaimer">Disclaimer</div>
 
         <div id="dialogDisclaimer" class="modal fade">
             <div class="modal-dialog">
