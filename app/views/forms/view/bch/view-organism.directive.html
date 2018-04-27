@@ -7,25 +7,58 @@
 	</div>
 	<div class="record-body panel-body">
 
-
-
 		<document-date></document-date>
-		<legend>General information</legend>
-
-		<div ng-show="document.government">
-			<label name="country">Country</label>
-			<div class="km-value">
-				<a ng-href="/countries/{{document.government.identifier}}" target={{target}}>{{document.government|term:locale}}</a>
-				<span ng-party-status government="document.government" id="government"></span>
-			</div>
+		<legend>Organism information</legend>
+		
+		<div ng-show="document.scientificName">
+			<label>Scientific name</label>
+			<div class="km-value">{{document.scientificName}} 
+				<span ng-if="document.scientificNameSynonyms">({{document.scientificNameSynonyms}})</span></div>
 		</div>
 
-		<div ng-show="document.title">
-			<label>Title</label>
+		<div>
+			<label>Taxonomic Classification</label>
 			<div class="km-value">
-				<strong>{{document.title | lstring:locale}}</strong>
+				<table cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr ng-if="document.kingdom"><td  style="padding: 2px 3px 2px 2px;padding-left: 5px;">Kingdom</td><td id="E6884729" style="padding: 2px 2px 2px 3px;" 	ng-bind="document.kingdom"	></td></td>
+						<tr ng-if="document.phylum"><td  style="padding: 2px 3px 2px 2px;padding-left: 10px;">Phylum</td><td id="E6884732" style="padding: 2px 2px 2px 3px;" 	ng-bind="document.phylum"	></td></tr>
+						<tr ng-if="document._class"><td  style="padding: 2px 3px 2px 2px;padding-left: 15px;">Class</td><td id="E6884735" style="padding: 2px 2px 2px 3px;" 	ng-bind="document._class"	></td></tr>
+						<tr ng-if="document.order"><td  style="padding: 2px 3px 2px 2px;padding-left: 20px;">Order</td><td id="E6884738" style="padding: 2px 2px 2px 3px;" 	ng-bind="document.order"	></td></tr>
+						<tr ng-if="document.family"><td  style="padding: 2px 3px 2px 2px;padding-left: 25px;">Family</td><td id="E6884741" style="padding: 2px 2px 2px 3px;" 	ng-bind="document.family"	><!-- ng-bind="document.subFamily " --></td></tr>
+						<tr ng-if="document.genus"><td  style="padding: 2px 3px 2px 2px;padding-left: 30px;">Genus</td><td id="E6884744" style="padding: 2px 2px 2px 3px;"		ng-bind="document.genus"	></td></tr>
+						<tr ng-if="document.species"><td  style="padding: 2px 3px 2px 2px;padding-left: 35px;">Species</td><td id="E6884747" style="padding: 2px 2px 2px 3px;"	ng-bind="document.species"	><!-- ng-bind="document.subSpecies" --></td></tr>
+					</tbody>
+				</table>
 			</div>
+			<!-- <km-value-ml value="document.scientificNameSynonyms" locales="locale"></km-value-ml> -->
 		</div>
+
+		<div ng-show="document.commonNames">
+			<label>Common name(s)</label>
+			<!-- <km-value-ml value="document.commonNames" locales="locale"></km-value-ml> -->
+		</div>
+
+		<legend>Additional Classification</legend>
+		
+		<div ng-show="document.organismType">
+			<label>Type of organism</label>
+			<div class="km-value" ng-bind="document.organismType | term:locale | lstring:locale"></div>
+		</div>
+
+		<div ng-show-off="document.scientificName">
+			<label>Organism domestication</label>
+			<div class="km-value" ng-bind="document.organismType | term:locale | lstring:locale"></div>
+		</div>
+
+		<div ng-show="document.commonNames">
+			<label>Common name(s)</label>
+			<km-value-ml value="document.commonNames" locales="locale"></km-value-ml>
+		</div>
+
+
+
+
 
 
 		<div ng-show="document.description">
