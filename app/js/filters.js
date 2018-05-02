@@ -119,7 +119,7 @@ function (app, schemaNamePlural) {
 				// 	relamPrefix = (realm.value.toUpperCase().replace('ABS','').replace('-',''));
 
 				var unique = realm.uIdPrefix +
-						'-' + $filter("schemaShortName")($filter("lowercase")(document.type||document.schema_s||document.schema)) +
+						'-' + $filter("schemaShortName")(document.type||document.schema_s||document.schema) +
                         '-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +
                         '-' + documentId;
 
