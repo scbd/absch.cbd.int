@@ -1,6 +1,9 @@
-define(['app', "text!views/forms/view/bch/view-lmo.directive.html", 	'views/directives/record-options'], function (app, template) {
+define(['app', "text!views/forms/view/bch/view-lmo.directive.html", 
+'views/directives/record-options', './view-lmo-reference.directive', './view-lmo-gene.directive',
+'views/forms/view/view-reference-records.directive'
+], function (app, template) {
 
-app.directive("viewLmo", [function () {
+app.directive("viewModifiedOrganism", [function () {
 	return {
 		restrict   : "EAC",
 		template: template ,
