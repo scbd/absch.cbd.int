@@ -144,8 +144,8 @@
                 <select class="map-select" ><option value="winkel3">winkel3</option><option value="eckert3">eckert3</option><option value="eckert5">eckert5</option><option value="eckert6">eckert6</option><option value="miller" selected="selected">miller</option><option value="equirectangular">equirectangular</option><option value="mercator">mercator</option></select>
         </div> -->
         <div class="row">
-            <div class="col-md-9" block-region activate="loadingMap">
-                    <div class="zoom">
+            <div class="col-md-9" >
+                    <div class="zoom" ng-if="isBch">
                         <div style="border-bottom:1px solid #eee">Filters</div>
                         <div class="col-md-12">
                             <label class="checkbox-inline"><input ng-model="options.showLmos" type="checkbox" value="" ng-change="showLmos_changed()">Show LMO's</label>
@@ -158,7 +158,7 @@
                 <div id="chartdiv" style="height:350px;"></div>
             </div>
             
-            <div class="col-md-3" ng-if="isBCH" style="height:350px;padding-right: 0px!important;
+            <div class="col-md-3" style="height:350px;padding-right: 0px!important;
             margin-left: 0px;
             padding-left: 0px;">
                     <style>
