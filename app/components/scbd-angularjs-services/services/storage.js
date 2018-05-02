@@ -1,4 +1,4 @@
-﻿define(['app'], function(app) {
+﻿define(['app', 'lodash'], function(app, _) {
     'use strict';
 
     app.factory("IStorage", ["$http", "$q", "authentication", "realm", function($http, $q, authentication, defaultRealm) {
@@ -392,12 +392,12 @@
                     "params": oTrans.params
                 }).then(
                     function(success) {
-                        return angular.extend(success.data || {}, {
+                        return _.defaults(success.data || {}, {
                             "url": oTrans.url
                         });
                     },
                     function(error) {
-                        error.data = angular.extend(error.data || {}, {
+                        error.data = _.defaults(error.data || {}, {
                             "url": oTrans.url
                         });
                         throw error;
