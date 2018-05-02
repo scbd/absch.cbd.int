@@ -1,8 +1,8 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-blue">
 		<h4>
-			Genetic element
-			<span class="color-black"> (dnaSequence) </span>
+				Gene and DNA Sequence
+			<span class="color-black"> (DNA) </span>
 		</h4>
 	</div>
 	<div class="record-body panel-body">
@@ -12,14 +12,6 @@
 		<document-date></document-date>
 		<legend>General information</legend>
 
-		<div ng-show="document.government">
-			<label name="country">Country</label>
-			<div class="km-value">
-				<a ng-href="/countries/{{document.government.identifier}}" target={{target}}>{{document.government|term:locale}}</a>
-				<span ng-party-status government="document.government" id="government"></span>
-			</div>
-		</div>
-
 		<div ng-show="document.title">
 			<label>Title</label>
 			<div class="km-value">
@@ -27,12 +19,70 @@
 			</div>
 		</div>
 
-
-		<div ng-show="document.description">
-			<label>Description</label>
-			<div class="km-value km-pre" ng-bind-html="document.description | lstring:locale"></div>
+		<div ng-show="document.name">
+			<label>Name of the gene or DNA sequence</label>
+			<km-value-ml value="document.name" locales="locale"></km-value-ml>
+		</div>
+		<div ng-show="document.synonymNames">
+			<label>Alternate Genetic Element Name (synonyms)</label>
+			<km-value-ml value="document.synonymNames" locales="locale"></km-value-ml>
+		</div>
+		<div ng-show="document.abbreviation">
+			<label>Abbreviation</label>
+			<km-value-ml value="document.abbreviation" locales="locale"></km-value-ml>
+		</div>
+		<div ng-show="document.family">
+			<label>Category of DNA sequence</label>
+			<div class="km-value" ng-bind="document.family | term:locale"></div>
 		</div>
 
+		<div ng-show="document.isSynthetic!=undefined">
+			<label>Is the gene / DNA sequence is a synthetic molecule?</label>
+			<span ng-if="document.isSynthetic">Yes</span>
+			<span ng-if="!document.isSynthetic">No</span>
+		</div>
+	
+		<legend>Donor organism</legend>
+
+		<div ng-show="document.donorOrganism">
+			<label>Donor organism</label>
+			<div class="km-value">
+				<view-default-reference ng-model="document.donorOrganism.identifier" locale="locale" target="target"></view-default-reference>
+			</div>
+		</div>
+
+		<div ng-show="document.donorOrganismCollectionPoint">
+			<label>Donor organism point of collection</label>
+			<div class="km-value">
+				<km-value-ml value="document.donorOrganismCollectionPoint" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+
+		<legend>Characteristics of the protein coding sequence</legend>
+
+		<div ng-show="document.proteinName">
+			<label>Name of the protein expressed by the coding sequence</label>
+			<div class="km-value">
+					<km-value-ml value="document.proteinName" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-show="document.biologicalFunction">
+			<label>Biological function</label>
+			<div class="km-value">
+				<km-value-ml value="document.biologicalFunction" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-show="document.traits">
+			<label>Related trait(s) or use(s) in biotechnology</label>
+			<div class="km-value">
+				<ul class="list">
+					<li ng-repeat="use in document.traits" ng-bind="use | term:locale"></li>
+				</ul>
+			</div>
+		</div>
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
 			<legend>Additional Information</legend>
 
