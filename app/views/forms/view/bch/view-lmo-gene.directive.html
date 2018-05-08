@@ -177,7 +177,7 @@
                         {{dnaDetails[gene.identifier].identity}}
                     </div>
                     <div >
-                        <a href="dnaDetails[gene.identifier].url_ss[0]">{{dnaDetails[gene.identifier].uniqueIdentifier}}</a>
+                        <a target="_blank" ng-href="{{dnaDetails[gene.identifier].urls[0]}}">{{dnaDetails[gene.identifier].uniqueIdentifier}}</a>
                     </div>
                     <div >
                         <span >{{gene.size.toFixed(2)}} kb</span>
