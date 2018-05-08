@@ -23,7 +23,7 @@ app.directive("viewLmoGene", [function () {
 					var geneIdentifiers = _.map(_.flatten(newValue), "identifier");
 					var searchQuery = {
 						query 	: "identifier_s:(" +geneIdentifiers.join(' ') + ")",
-						fields	: 'identifier_s,identity:identity_EN_t, uniqueIdentifier:uniqueIdentifier_s, urls:url_ss'
+						fields	: 'identifier_s,identity:identity_EN_s, uniqueIdentifier:uniqueIdentifier_s, urls:url_ss'
 					}
 					$scope.dnaDetails = {};
 					$q.when(searchService.list(searchQuery))
