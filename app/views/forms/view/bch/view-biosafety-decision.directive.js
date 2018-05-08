@@ -1,6 +1,6 @@
-define(['app', "text!views/forms/view/bch/view-decision.directive.html", 	'views/directives/record-options'], function (app, template) {
+define(['app', "text!views/forms/view/bch/view-biosafety-decision.directive.html", 	'views/directives/record-options'], function (app, template) {
 
-app.directive("viewDecision", [function () {
+app.directive("viewBiosafetyDecision", [function () {
 	return {
 		restrict   : "EAC",
 		template: template ,
