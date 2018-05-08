@@ -76,7 +76,7 @@
 						news						: 'views/forms/view/scbd/view-news.directive',
 
 						"biosafteyLaw" 				: 'views/forms/view/bch/view-law.directive',
-						"decision" 					: 'views/forms/view/bch/view-decision.directive',
+						"biosafetyDecision" 		: 'views/forms/view/bch/view-biosafety-decision.directive',
 						"riskAssessment" 			: 'views/forms/view/bch/view-risk-assessment.directive',
 						"cpbNationalReport3" 		: 'views/forms/view/bch/view-national-report3.directive',
 						"expert" 					: 'views/forms/view/bch/view-expert.directive',
