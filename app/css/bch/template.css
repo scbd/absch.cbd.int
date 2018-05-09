@@ -53,10 +53,11 @@ body > div:first-child, .page-content {
 
 .bch-header > .navbar-default .navbar-nav>.active {
 }
+.active-menu,
 .bch-header > .navbar-default .navbar-brand.active, 
 .bch-header > .navbar-default .navbar-nav>.active>a {
     font-weight: 600;
-    background-color: #0b0b3e;
+    background-color: #0b0b3e!important;
 }
 
 .bch-header > .navbar-default .navbar-brand:hover, 
