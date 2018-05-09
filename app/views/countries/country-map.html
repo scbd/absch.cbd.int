@@ -139,10 +139,7 @@
                 z-index: 1000;
             }
         </style>
-        <!--<link type="text/css" href="/app/libs/ammap3/ammap/plugins/export/export.css" rel="stylesheet" />-->
-        <!-- <div ng-if="isBCH" id="map-filters">
-                <select class="map-select" ><option value="winkel3">winkel3</option><option value="eckert3">eckert3</option><option value="eckert5">eckert5</option><option value="eckert6">eckert6</option><option value="miller" selected="selected">miller</option><option value="equirectangular">equirectangular</option><option value="mercator">mercator</option></select>
-        </div> -->
+        
         <div class="row">
             <div class="col-md-9" >
                     <div class="zoom" ng-if="isBCH">
@@ -155,12 +152,11 @@
                             </select>
                         </div>
                     </div>
-                <div id="chartdiv" style="height:350px;"></div>
+                <div id="chartdiv" style="height:350px;" ng-style="{'height': isBCH ? '450px' : '350px'}"></div>
             </div>
             
-            <div class="col-md-3" style="height:350px;padding-right: 0px!important;
-            margin-left: 0px;
-            padding-left: 0px;">
+            <div class="col-md-3" style="height:350px;padding-right: 0px!important; margin-left: 0px;padding-left: 0px;"
+            ng-style="{'height': isBCH ? '450px' : '350px'}">
                     <style>
                             .party-status {
                                 text-decoration: none;
@@ -190,7 +186,6 @@
                             .map-container-mainbody {
                                 margin-top: 0;
                                 min-height: 150px;
-                                max-height: 270px;
                                 background: #21a55a;
                                 overflow: auto;
                             }
@@ -213,7 +208,7 @@
                             }
                         </style>
                 <!-- <div class="map-filters-bg" ></div> -->
-                <div class="map-container " ng-if="currentCountry">
+                <div class="map-container " ng-if="currentCountry" ng-style="{'height': isBCH ? '450px' : '350px'}">
                         <div class="map-container-header">
                             <div class="row col-xs-12">
                                 <h3 class="custom-title" style="margin-top:10px;margin-bottom:5px;width:60%;display:inline">
