@@ -52,8 +52,8 @@
 
 
 	<div id="Jumbotron" class="bg-texture-green color-black hidden-sm hidden-xs" 
-	style="border-top:1px solid #555;border-bottom:2px solid #ddd;position:relative;height: 353px;" 
-	block-region activate="loadingMap">	
+	style="border-top:1px solid #555;border-bottom:2px solid #ddd;position:relative;" 
+	block-region activate="loadingMap"  ng-style="{'height': isBCH ? '450px' : '350px'}">	
 	</div>
 	<div block-region activate="loading" block-text=" Loading country details">
 		<div style="height:0px;width:0px;" ng-if="readyForExport">
