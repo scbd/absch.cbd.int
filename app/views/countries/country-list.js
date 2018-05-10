@@ -7,9 +7,13 @@
     'components/scbd-angularjs-controls/form-control-directives/km-select'
 ], function (app, _) {
 
-    app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams', '$compile', '$timeout', 'locale',
-        function ($http, $scope, $element, $location, commonjs, $q, searchService, $filter, $routeParams, $compile, $timeout, locale) {
+    app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams', '$compile', '$timeout', 'locale', 'realm',
+        function ($http, $scope, $element, $location, commonjs, $q, searchService, $filter, $routeParams, $compile, $timeout, locale, realm) {
             var regionRelations = {};
+            
+            
+            $scope.isBCH          = realm.is('BCH');
+            $scope.isABS          = realm.is('ABS');    
             $scope.sortTerm = "name.en";
             $scope.regionFilter= [];
 

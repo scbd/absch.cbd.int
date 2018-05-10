@@ -7,10 +7,12 @@ define(['app','underscore',
 ], function(app, _) {
 
   app.controller("countryProfileController",
-  ["$scope","$route", "$http", "$timeout", "$location","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile',
-    function($scope,$route, $http, $timeout, $location,locale, commonjs, $q, breadcrumbs, $element, $compile) {
+  ["$scope","$route", "$http", "$timeout", "$location","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm',
+    function($scope,$route, $http, $timeout, $location,locale, commonjs, $q, breadcrumbs, $element, $compile, realm) {
       $scope.code      = $route.current.params.code;
       
+      $scope.isBCH          = realm.is('BCH');
+      $scope.isABS          = realm.is('ABS');  
 
       $q.when(commonjs.getCountry($scope.code.toUpperCase()))
       .then(function(country){
