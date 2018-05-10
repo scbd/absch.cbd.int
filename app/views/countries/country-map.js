@@ -125,6 +125,10 @@ function(require, template, app, _) {
         };
         $scope.options = {lmo:'all'};
         $scope.self = $scope;
+
+        if($scope.zoomTo)
+            mapOptions.dataProvider.linkToObject = $scope.zoomTo;
+
         var map = AmCharts.makeChart( "chartdiv", mapOptions );
 
           // add events to recalculate map position when the map is moved or zoomed
@@ -236,6 +240,9 @@ function(require, template, app, _) {
           var code = event.mapObject.id;
           if($scope.currentCountry && $scope.currentCountry.code== code)
             return;
+
+          if($scope.zoomTo)
+            $location.path('/countries/'+code)
           // $timeout(function(){
           //   $scope.currentCountry = undefined;
           // }, 10);
