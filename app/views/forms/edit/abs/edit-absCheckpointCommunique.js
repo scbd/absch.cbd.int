@@ -1,5 +1,5 @@
 define(['app', 'views/forms/edit/edit',
-    '../view/abs/view-abs-checkpoint-communique.directive',
+    'views/forms/view/abs/view-abs-checkpoint-communique.directive',
     'views/forms/edit/permit-selection-directive',
     'js/common'
 ], function(app) {
