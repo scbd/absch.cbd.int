@@ -27,12 +27,9 @@ require.config({
         'moment'                    : 'libs/momentjs/min/moment-with-langs.min',
         'angular-animate'           : 'libs/angular-animate/angular-animate.min',
         'view-abs-checkpoint'       : 'views/forms/view/abs/view-abs-checkpoint.directive',
-        'text-angular-sanitize'     : 'libs/textAngular/dist/textAngular-sanitize.min',
-        'text-angular'              : 'libs/textAngular/src/textAngular',
         'cbd-forums'                : 'libs/cbd-forums/cbd-forums',
         'angular-flex'              : 'libs/angular-flex/angular-flex',
         'ng-breadcrumbs'            : 'libs/ng-breadcrumbs/dist/ng-breadcrumbs.min',
-        'ionsound'                  : 'libs/ionsound/js/ion.sound.min',        
         'ngAria'                    : 'libs/angular-aria/angular-aria.min',
         'ngMaterial'                : 'libs/angular-material/angular-material.min',
         'ngSmoothScroll'            : 'libs/ngSmoothScroll/angular-smooth-scroll.min',
@@ -61,6 +58,8 @@ require.config({
         'pdfjs-dist/build/pdf'      : 'views/psd-viewer/pdfjs/pdf',
         'pdfjs-dist/build/pdf.worker' : 'views/psd-viewer/pdfjs/build/pdf.worker',        
         'pdf-object'                 : 'libs/pdfobject/pdfobject',
+        'angular-trix'              : 'libs/angular-trix/dist/angular-trix.min',
+        'trix'                      : 'libs/trix/dist/trix'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -76,16 +75,14 @@ require.config({
         'angular-introjs'               : { 'deps':['angular', 'introjs']},
         'angular-localizer'             : { 'deps':['angular', 'angular-cookies']},
         'jqvmap'                        : { 'deps': ['jquery'] },
-        'text-angular'                  : { 'deps': ['text-angular-sanitize', 'angular'] },
-        'text-angular-sanitize'         : { 'deps': ['angular', 'angular-sanitize']},
         'cbd-forums'                    : { 'deps': ['angular', 'bootstrap']},
         'ngStorage'                     : { 'deps': ['angular'] },
-        'ngInfiniteScroll'              : { 'deps': ['angular'] },
         'angular-flex'                  : { 'deps': ['angular'] },
+        'ngInfiniteScroll'              : { 'deps': ['angular'] },
         'ng-breadcrumbs'                : { 'deps': ['angular'] },
+        'scbd-angularjs-services'       : { 'deps': ['angular']},
         'ngSmoothScroll'                : { 'deps': ['angular'] },
         'angular-joyride'               : { 'deps': ['angular', 'angular-animate'] },
-        'scbd-angularjs-services'       : { 'deps': ['angular']},
         'scbd-angularjs-filters'        : { 'deps': ['angular']},
         'scbd-angularjs-controls'       : { 'deps': ['angular', 'angular-sanitize', 'angular-localizer']},
         'ngAria'                        : { 'deps': ['angular'] },
@@ -104,7 +101,9 @@ require.config({
         'lunr'                          : { 'deps': ['jquery'] },
         "xlsx"                          : { "deps": ['jszip'],"exports": 'XLSX'},
         'pdfjs-dist/build/pdf'          : { 'deps': ['angular']}, 
-        'pdf-object'                    : { 'deps': ['angular']}  
+        'pdf-object'                    : { 'deps': ['angular']}  ,
+        'angular-trix'                  : { 'deps': ['angular', 'trix', 'css!libs/trix/dist/trix.css']},
+        'trix'                          : { 'deps': ['angular']}
     },
     urlArgs: function(id, url){
         
