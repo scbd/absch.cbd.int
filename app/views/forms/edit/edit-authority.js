@@ -1,10 +1,8 @@
-define(['app', 'underscore', 'views/forms/edit/edit', 'js/common',
- 'views/forms/edit/document-selector', 'views/forms/edit/warning-message-cna',
-        '../view/abs/view-authority.directive'
-        ], function(app, _) {
+define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js/common',
+'views/forms/edit/document-selector', 'views/forms/edit/warning-message-cna', '../view/view-authority.directive' ], function(app, _) {
 
-    app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "Enumerable", "$location", "IStorage", "commonjs",'searchService',
-     function($scope, $http, $filter, Thesaurus, $q, $controller, Enumerable, $location, storage, commonjs,searchService) {
+    app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "$location", "IStorage", "commonjs",'searchService',
+     function($scope, $http, $filter, Thesaurus, $q, $controller, $location, storage, commonjs,searchService) {
         $controller('editController', {
             $scope: $scope
         });
@@ -94,7 +92,7 @@ define(['app', 'underscore', 'views/forms/edit/edit', 'js/common',
             if (!$scope.document || (!$scope.document.absResponsibleForAll || !$scope.validationReport))
                 return false;
 
-            return Enumerable.from($scope.validationReport.errors).any(function(error) {
+            return _.some($scope.validationReport.errors, function(error) {
                 return error.property == 'absResponsibleForAllNot';
             });
         };
@@ -177,7 +175,7 @@ define(['app', 'underscore', 'views/forms/edit/edit', 'js/common',
                 return false;
 
             //var jurisdictions = $scope.document.absJurisdiction
-            return _.intersection(_.pluck($scope.document.absJurisdiction, 'identifier'),
+            return _.intersection(_.map($scope.document.absJurisdiction, 'identifier'),
                                 ['DEBB019D-8647-40EC-8AE5-10CA88572F6E', 'DEEEDB35-A34B-4755-BF77-D713017195E3', '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED']).length > 0;
         }
 

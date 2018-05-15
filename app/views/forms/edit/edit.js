@@ -1,6 +1,6 @@
 //fixed a bug with the comment up here ;)
 define([
-    'app', 'underscore', 'linqjs', 'services/app-config-service',
+    'app', 'lodash', 'linqjs', 'js/services', 'services/app-config-service',
     'views/forms/edit/editFormUtility',
     'views/forms/edit/field-embed-contact.directive',
     'views/forms/edit/edit-contact-base.directive',
@@ -28,7 +28,7 @@ define([
 
     $scope.type = $route.current.$$route.documentType;
     
-    if(_.contains(appConfigService.nationalSchemas, $filter('mapSchema')($scope.type)))
+    if(_.includes(appConfigService.nationalSchemas, $filter('mapSchema')($scope.type)))
       $scope.schemaType = 'nationalRecords';
     else
       $scope.schemaType = 'referenceRecords';
