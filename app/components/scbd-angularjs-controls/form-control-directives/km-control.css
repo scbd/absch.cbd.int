@@ -1,0 +1,95 @@
+﻿.multiple-languages {
+    margin-bottom: 3px;
+}
+
+.km-rtl .btn {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0.3rem;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.km-rtl .btn+.btn {
+    margin-left: 1rem;
+}
+
+.km-rtl .btn:hover {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.km-rtl trix-toolbar .dialogs .dialog {
+    border: 1px solid #d6d6d6;
+    border-radius: 2px;
+}
+
+.km-rtl .dialog .trix-button-group {
+    margin-top: 0;
+}
+
+.km-rtl .link_url_fields>input {
+    border-color: #d6d6d6 !important;
+    border-radius: 2px !important;
+}
+
+.trix-button-row {
+    border-color: #d6d6d6 #d6d6d6 transparent;
+    border-image: none;
+    border-radius: 2px 2px 0 0;
+    border-style: solid;
+    border-width: 1px;
+    padding-left: 5px;
+}
+trix-toolbar{
+    display: block;
+}
+trix-toolbar .trix-button-group {
+    border-color: #d6d6d6;
+    border-radius: 2px;
+    box-shadow: none;
+    margin-bottom: 0;
+    margin-right: 2px;
+    margin-top: 5px;
+    margin-bottom: -2px;
+    display: inline-block!important;
+}
+
+.km-rtl, trix-editor {
+    border-color: #d6d6d6;
+    border-radius: 0 0 3px 3px;
+    word-wrap: break-word;
+    color: #333;
+}
+
+trix-toolbar .trix-button-group button {
+    border-bottom: 0 none;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: opacity 0.2s ease 0s;
+}
+
+trix-toolbar .trix-button-group button.active,
+trix-toolbar .trix-button-group button.active:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.2) inset !important;
+    opacity: 1;
+}
+
+trix-toolbar .trix-button-group button:hover {
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1) inset !important;
+    opacity: 1;
+}
+
+/* .km-rtl trix-toolbar .trix-button-group, trix-toolbar .trix-button-row {
+    display: inline;
+} */
+trix-toolbar .trix-button-row {
+    display: inherit!important;
+}

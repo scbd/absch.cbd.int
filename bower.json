@@ -47,7 +47,6 @@
     "requirejs-text": "2.0.14",
     "socket.io-1.4.5": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js",
     "tableexport.js": "4.0.10",
-    "textAngular": "1.2.2",
     "underscore": "1.7.0",
     "webui-popover": "2.1.15",
     "angular-aria": "1.4",
@@ -55,7 +54,8 @@
     "jquery-highlight": "3.4.0",
     "lunr.js": "lunr#2.1.0",
     "diacritic": "^0.0.3",
-    "pdfobject": "https://github.com/pipwerks/PDFObject.git"
+    "pdfobject": "https://github.com/pipwerks/PDFObject.git",
+    "angular-trix": "^1.0.2"
   },
   "resolutions": {
     "angular": "1.4",

@@ -1,4 +1,4 @@
-define(['app','text!./km-rich-textbox.html','angular','text-angular'], function(app,template,angular) {
+define(['app','text!./km-rich-textbox.html','angular','angular-trix'], function(app,template,angular) {
 	//============================================================
 	//
 	//
