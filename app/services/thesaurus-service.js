@@ -6,7 +6,7 @@ define(['app', 'underscore'], function (app, _) {
 
             this.getDomains = function(domainIdentifier){
 
-                return $http.get('/api/v2013/thesaurus/domains/' + domainIdentifier );
+                return $http.get('/api/v2013/thesaurus/domains/' + domainIdentifier , {cache:true});
             };
 
             this.getDomainTerms = function(termIdentifier, includeOthers){
@@ -21,7 +21,7 @@ define(['app', 'underscore'], function (app, _) {
 
                 if(includeOthers){
                     var urlOther = '/api/v2013/thesaurus/terms/' + domainTerms['others'];
-                    return $q.all([$http.get(url),$http.get(urlOther)])
+                    return $q.all([$http.get(url, {cache:true}),$http.get(urlOther), {cache:true}])
                                 .then(function(termData){
                                     var data = termData[0].data;
                                     data.push(termData[1].data);
@@ -30,13 +30,13 @@ define(['app', 'underscore'], function (app, _) {
                 }
                 if(termIdentifier == 'others'){
                     url = '/api/v2013/thesaurus/terms/' + domainTerms.others;
-                    return $q.when($http.get(url))
+                    return $q.when($http.get(url, {cache:true}))
                              .then(function(data){
                                 return data.data;
                              });
                 }
 
-                return $q.when($http.get(url))
+                return $q.when($http.get(url, {cache:true}))
                             .then(function(data){
                                 return data.data;
                             });
@@ -57,8 +57,12 @@ define(['app', 'underscore'], function (app, _) {
                 absSubjects              : "CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924",
                 mccResourceTypes         : "840427E5-E5AC-4578-B238-C81EAEEDBDD8",
                 cppResourceTypes         : "ED9BE33E-B754-4E31-A513-002316D0D602",
-                languages                : "ISO639-2"
+                languages                : "ISO639-2",
 
+
+                decisionTypes            :  'DecisionTypes',
+                DecisionLMOFFPSubject    :  'DecisionLMOFFPSubject',
+                DecisionResults          :  'DecisionResults'
 
             }
         }
