@@ -4,7 +4,7 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
     //
     //
     //============================================================
-    app.directive('kmTermRadio', function() {
+    app.directive('kmTermRadio', ["$q","Thesaurus", function($q,thesaurus){
         return {
             restrict: 'EAC',
             template: template,
@@ -16,34 +16,69 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
                 //bindingName : '@ngModel',
                 bindingType: '@',
                 termsFn: '&terms',
-                description: "=",
+                description: "=?",
                 layout: "@",
-                required: "@"
+                required: "@",
+                locales: '=?'
             },
             link: function($scope, $element, $attr, ngModelController) {
 
+                $scope.uniqueId = (Math.random()).toString().split('.')[1];
                 $scope.description = true;
                 $scope.selection = null;
                 $scope.terms = null;
                 $scope.rootTerms = [];
+                $scope.showOther = $scope.bindingType == "term" && $attr.showOther;
+                $scope.other = { identifier : '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'}
+                $scope.onTerms  = onTerms;
+                $scope.save     = save;
+                $scope.load     = load;
+                $scope.clear    = clear;
 
-                $scope.$watch('terms', $scope.onTerms);
-                $scope.$watch('selection', $scope.save);
-                $scope.$watch('binding', $scope.load);
-                $scope.$watch('binding', function() {
-                    ngModelController.$setViewValue($scope.binding);
-                });
-
-                $scope.init();
+                $scope.$watch('terms', onTerms);
+                // $scope.$watch('selection', save);
+                $scope.$watch('binding', load);  
 
                 if (!$attr["class"])
-                    $element.addClass("list-unstyled");
-            },
-            controller: ["$scope", "$q","Thesaurus", function($scope, $q,thesaurus) {
+                    $element.find('ul:first').addClass("list-unstyled");
+                
                 //==============================
                 //
                 //==============================
-                $scope.init = function() {
+                function save() {
+                    //debugger;
+
+                    if (!$scope.selection)
+                        return;
+
+                    var oNewBinding = {};
+
+                    if ($scope.selection && $scope.selection.identifier) {
+                        if ($scope.bindingType == "string") oNewBinding = $scope.selection.identifier;
+                        else if ($scope.bindingType == "term"){
+                            oNewBinding = {
+                                identifier: $scope.selection.identifier
+                            };
+                            if($scope.showOther && $scope.selection.identifier == $scope.other.identifier)
+                                oNewBinding.customValue = $scope.selection.customValue
+                        }
+                        else throw "bindingType not supported";
+                    }
+
+                    if (!angular.equals(oNewBinding, $scope.binding))
+                        $scope.binding = oNewBinding;
+
+                    if ($.isEmptyObject($scope.binding))
+                        $scope.binding = undefined;
+                        
+                    ngModelController.$setViewValue($scope.binding);
+
+                };
+                        
+                //==============================
+                //
+                //==============================
+                function init() {
                     $scope.setError(null);
                     $scope.__loading = true;
 
@@ -61,7 +96,7 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
                 //==============================
                 //
                 //==============================
-                $scope.load = function() {
+                function load() {
                     if (!$scope.terms) // Not initialized
                         return;
 
@@ -78,41 +113,23 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
                         if ($scope.bindingType == "string") oNewSelection = {
                             identifier: $scope.binding
                         };
-                        else if ($scope.bindingType == "term") oNewSelection = {
-                            identifier: $scope.binding.identifier
-                        };
+                        else if ($scope.bindingType == "term") {
+                            oNewSelection = {
+                                identifier: $scope.binding.identifier
+                            };
+                            if($scope.showOther && $scope.binding.identifier == $scope.other.identifier)
+                                oNewSelection.customValue = $scope.binding.customValue
+                        }
                         else throw "bindingType not supported";
                     }
 
                     if (!angular.equals(oNewSelection, $scope.selection))
                         $scope.selection = oNewSelection;
+                    
+                    save();
                 };
 
-                //==============================
-                //
-                //==============================
-                $scope.save = function() {
-                    //debugger;
-
-                    if (!$scope.selection)
-                        return;
-
-                    var oNewBinding = {};
-
-                    if ($scope.selection && $scope.selection.identifier) {
-                        if ($scope.bindingType == "string") oNewBinding = $scope.selection.identifier;
-                        else if ($scope.bindingType == "term") oNewBinding = {
-                            identifier: $scope.selection.identifier
-                        };
-                        else throw "bindingType not supported";
-                    }
-
-                    if (!angular.equals(oNewBinding, $scope.binding))
-                        $scope.binding = oNewBinding;
-
-                    if ($.isEmptyObject($scope.binding))
-                        $scope.binding = undefined;
-                };
+                
 
                 //==============================
                 //
@@ -124,7 +141,7 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
                 //==============================
                 //
                 //==============================
-                $scope.onTerms = function(refTerms) {
+                function onTerms(refTerms) {
 
                     $scope.rootTerms = [];
 
@@ -150,7 +167,13 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
                     if (error.status == 404) $scope.error = "Terms not found";
                     else $scope.error = error.data || "unkown error";
                 };
-            }]
+
+                function clear(){
+                    $scope.selection={};
+                    save();
+                }
+                init();
+            }
         };
-    });
+    }]);
 });
