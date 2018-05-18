@@ -395,7 +395,7 @@ define([
       console.log('id, ', qDocument.header.identifier);
       */
 
-      $q.when(qDocument).then(function(doc) {
+      return $q.when(qDocument).then(function(doc) {
 
         $scope.tab    = "edit";
         $scope.document = doc;

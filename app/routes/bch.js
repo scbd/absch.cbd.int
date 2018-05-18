@@ -8,6 +8,10 @@ define(['app', './common-routes', 'angular-route'], function (app,commonRoutes) 
                
                whenAsync('/database/reports*',               { redirectTo:  '/reports' }).
 
+               whenAsync('/register/DEC/new',                   {templateUrl: 'views/forms/edit/bch/edit-biosafety-decision.html',  label:'New',  param:'true', resolveController: true,documentType :'DEC' , resolve : { securized : commonRoutes.securize(null,true, true) }, }).
+             
+               whenAsync('/register/DEC/:identifier/edit',      {templateUrl: 'views/forms/edit/bch/edit-biosafety-decision.html',      label:'Edit', param:'true', resolveController: true, documentType :'DEC' , resolve : { securized : commonRoutes.securize(null,true, true) }, }).
+               
                // BCH4 PAGES
                whenAsync('/about/countryprofile.shtml',      { redirectTo:  '/countries/:country' }).
                whenAsync('/countries/:country',              { templateUrl: 'views/shared/cms-content.html', target:'https://bch.cbd.int/about/countryprofile.shtml?country=:country', controller: function() { return commonRoutes.importQ('views/shared/cms-content'); } }).

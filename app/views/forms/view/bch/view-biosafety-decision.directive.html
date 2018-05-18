@@ -45,9 +45,19 @@
 				<km-value-bool value="document.takenPriorEntryIntoForce" locales="locale"></km-value-bool>
 			</div>
 		</div>
-		<div ng-show="document.jurisdiction">
+		<div ng-show="document.jurisdictions">
 			<label>Jurisdiction</label>
-			<div class="km-value" ng-bind="document.jurisdiction|term:locale"></div>
+			<div class="km-value">
+				<ul>
+					<li ng-repeat="item in document.jurisdictions" ng-bind="item|term:locale"></li>
+				</ul>
+			</div>
+		</div>
+		<div ng-show="document.jurisdictionDetails">
+			<label>Jurisdiction details</label>
+			<div class="km-value">
+				<km-value-ml value="document.jurisdictionDetails" locales="locale"></km-value-ml>
+			</div>
 		</div>
 		<div ng-if="document.isAmendment">
 			<div ng-show="document.isAmendment">
@@ -79,7 +89,6 @@
 		</div>
 
 		<legend>Decision or communication details</legend>
-
 		<div ng-show="document.decisionTypes">
 			<label>Subject(s) of the decision</label>
 			<div class="km-value">
