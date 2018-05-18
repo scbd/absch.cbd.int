@@ -8,12 +8,17 @@ define(['app'], function(app) {
                 activate : '='
             },
             link: function($scope, $element, attrs) {
-                var blockText = 'Loading...'
-                if(attrs.blockText)
-                    blockText = attrs.blockText;
+                var blockText = ''; 
+                if(!attrs.skipLoadingIcon){
+                    blockText = 'Loading...';                                   
+                    if(attrs.blockText)
+                        blockText = attrs.blockText;
+
+                    blockText = '<i class="fa fa-spin fa-cog" /> ';
+                }
 
                 $element.addClass('blockRegion');
-                var loadtHtml = '<div class="inverted dimmer" ng-class="{\'active\': activate}"><div class="medium loader"><i class="fa fa-spin fa-cog" /> '+ blockText + ' </div></div>';
+                var loadtHtml = '<div class="inverted dimmer" ng-class="{\'active\': activate}"><div class="medium loader">'+ blockText + ' </div></div>';
 
                 $element.append($compile(loadtHtml)($scope));
 
