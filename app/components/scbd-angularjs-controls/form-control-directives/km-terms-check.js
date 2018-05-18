@@ -4,7 +4,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs'], fun
     //
     //
     //============================================================
-    app.directive('kmTermCheck', function() {
+    app.directive('kmTermCheck',["$q", "Thesaurus", '$timeout',function($q, thesaurus, $timeout) {
         return {
             restrict: 'EAC',
             template: template,
@@ -19,6 +19,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs'], fun
                 layout: "@"
             },
             link: function($scope, $element, $attr, ngModelController) {
+
 				$scope.showDescription = $attr.showDescription == 'true';
                 $scope.identifiers = null;
                 $scope.terms = null;
@@ -26,24 +27,22 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs'], fun
                 if($scope.showDescription === undefined)
                     $scope.showDescription = 'false';
 
-                $scope.$watch('terms', $scope.onTerms);
-                $scope.$watch('identifier', $scope.save);
-                $scope.$watch('binding', $scope.load);
-                $scope.$watch('binding', function() {
-                    ngModelController.$setViewValue($scope.binding);
-                });
+                $scope.onTerms  = onTerms;
+                $scope.save     = save;
+                $scope.load     = load;
+                $scope.clear    = clear;
 
-                $scope.init();
+                $scope.$watch('terms', onTerms);
+                $scope.$watch('identifier', save);
+                $scope.$watch('binding', load);  
 
                 if (!$attr["class"])
-                    $element.addClass("list-unstyled");
-
-            },
-            controller: ["$scope", "$q", "Thesaurus", '$timeout',function($scope, $q, thesaurus, $timeout) {
+                    $element.find('ul:first').addClass("list-unstyled");
+           
                 //==============================
                 //
                 //==============================
-                $scope.init = function() {
+                function init() {
                     $scope.setError(null);
                     $scope.__loading = true;
 
@@ -66,7 +65,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs'], fun
                 //==============================
                 //
                 //==============================
-                $scope.load = function() {
+                function load() {
                     if (!$scope.terms) // Not initialized
                         return;
 
@@ -89,12 +88,14 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs'], fun
 
                     if (!angular.equals(oNewIdentifiers, $scope.identifiers))
                         $scope.identifiers = oNewIdentifiers;
+                    
+                    save();
                 };
 
                 //==============================
                 //
                 //==============================
-                $scope.save = function() {
+                function save() {
                     if (!$scope.identifiers)
                         return;
 
@@ -117,6 +118,8 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs'], fun
 
                     if (!angular.equals(oNewBinding, $scope.binding))
                         $scope.binding = oNewBinding;
+
+                    ngModelController.$setViewValue($scope.binding);
                 };
 
                 //==============================
@@ -129,7 +132,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs'], fun
                 //==============================
                 //
                 //==============================
-                $scope.onTerms = function(refTerms) {
+                function onTerms(refTerms) {
 
                     $scope.rootTerms = [];
 
@@ -155,7 +158,14 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs'], fun
                     if (error.status == 404) $scope.error = "Terms not found";
                     else $scope.error = error.data || "unkown error";
                 };
-            }]
+
+                function clear(){
+                    $scope.identifiers=[];
+                    save();
+                }
+
+                init();
+            }
         };
-    });
+    }]);
 });
