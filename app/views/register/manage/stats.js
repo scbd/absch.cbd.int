@@ -54,6 +54,14 @@ define(['app', 'underscore', 'chart-js', 'components/scbd-angularjs-services/ser
                         },
                         {
                         value: 0,
+                        color: "#3c8dbc",
+                        highlight: "#3c8dbc",
+                        schema: "absProcedure",
+                        label : "ABS Procedure (PRO)",
+                        class : "text-light-blue"
+                        },
+                        {
+                        value: 0,
                         color: "#d2d6de",
                         highlight: "#d2d6de",
                         schema: "absCheckpointCommunique",

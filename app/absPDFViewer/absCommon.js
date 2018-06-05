@@ -464,6 +464,7 @@ app.filter("schemaShortName", [function() {
         if (schema.toLowerCase() == "meetingdocument") return "MTD";
         if (schema.toLowerCase() == "capacitybuildinginitiative") return "CBI";
         if (schema.toLowerCase() == "capacitybuildingresource") return "CBR";
+        if (schema.toLowerCase() == "absprocedure") return "PRO";
 
 
         return schema;
@@ -499,6 +500,7 @@ app.filter("schemaName", [function() {
         if (schema.toLowerCase() == "capacitybuildinginitiative") return "Capacity-building Initiative";
         if (schema.toLowerCase() == "capacitybuildingresource") return "Capacity-building Resource";
         if (schema.toLowerCase() == "endorsement") return "Endorsements";
+        if (schema.toLowerCase() == "absprocedure") return "ABS Procedure";
 
         return schema;
     };

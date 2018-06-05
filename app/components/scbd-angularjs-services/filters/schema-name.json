@@ -21,5 +21,6 @@
     "notification"				                :  "Notification", 
     "capacitybuildinginitiative"                :  "Capacity-building Initiative", 
     "capacitybuildingresource"                  :  "Capacity-building Resource", 
-    "endorsement"				                :  "Endorsement"
+    "endorsement"				                :  "Endorsement",
+    "absprocedure"				                :  "ABS Procedure"
 } 

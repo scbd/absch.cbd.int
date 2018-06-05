@@ -1,0 +1,271 @@
+﻿<div  ng-controller="editAbsProcedure" >
+<style>
+    .indent{padding:0  15px 0 15px;}
+</style>
+
+    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div> 
+
+    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+
+        <span block-region activate="isLoading()" ng-if="isLoading()"></span>
+        <div class="registerpage-content" >
+
+          <div ng-show="msg" class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
+            <strong>{{msg}}</strong>
+          </div>
+
+          <div class="alert alert-danger alert-dismissible" ng-show="hasError()">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
+              <strong>Error as occured...</strong>
+              <div>{{error}}</div>
+          </div>
+
+          <div ng-show="!isLoading() && status!='hidden'">
+            <div workflow-arrow-buttons document="getCleanDocument()" languages="document.header.languages"  hide-timer="false"/>
+
+             <div km-document-validation ng-model="validationReport"></div>
+
+             <div class="editForm" ng-show="tab=='intro'" km-tab="intro">    
+                <!-- This should be the same file as on the guides page in the about section  -->
+
+                <h3>Introduction to ABS Procedures</h3>
+            
+                <p>An ABS Procedure is national record that is meant to guide applicants seeking access to genetic resources and/or traditional knowledge associated with genetic resources through the steps required for access to such resources and/or knowledge in your country. </p>
+                
+                <p> <span class="color-blue">Please note a separate record is to be published for each different procedure.</span> Your country may have a number of procedures in place on how to apply for access, each of which may differ depending on various factors, such as: the intended use (e.g. commercial or non-commercial, use inside or outside the country); the type of genetic resources (e.g. plants, animals, microorganisms); the area of access (e.g. ex situ, protected areas, public or private lands); the type of user (e.g. foreign or national users); and/or the type of provider of genetic resources and/or traditional knowledge associated with genetic resources (e.g. indigenous peoples and local communities). 
+                 </p>
+
+                <h4>More information</h4>
+                <p>offline version</p>
+                <p>guides</p>
+                <p>faqs</p>
+            </div>
+
+              <form name="editForm"  class="editForm" >
+                  <div class="editForm" ng-show="tab=='edit'" km-tab="edit">                   
+                    <section>
+                   
+                            <legend>General Information</legend>
+                            
+                            <div class="row">
+                                    <div class="col-xs-12">
+                                           <div class="km-control-group" name="languages" required caption="1. Please select in which language(s) you wish to submit this record:">
+                                                 <div class="indent" >
+                                                     <div  afc-autocomplete required name="languages"  ng-model="document.languages" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="English"></div>
+                                                 </div>
+                                           </div>
+                                       </div>
+                                   </div>
+
+                      <div class="row">
+                       <div class="col-xs-12">
+                              <div class="km-control-group" name="government" required caption="2. Country">
+                                    <div class="indent" >
+                                        <div  afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+                                    </div>
+                              </div>
+                          </div>
+                      </div>
+                    
+                      <legend>Description of the ABS Procedure</legend>
+
+                      <div class="row">
+                          <div class="col-xs-12">
+                                  <div class="km-control-group" name="name" required caption="3. This is an ABS procedure for:">
+                                      <div class="indent help-info"> Please provide a title for this specific ABS procedure (E.g.: Non-commercial use) </div>
+                                      <div class="indent" km-textbox-ml ng-model="document.name" rows="1" placeholder="" locales="document.header.languages"></div>
+                                  </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                            <div class="col-xs-12">
+                                    <div class="km-control-group" name="jurisdiction" caption="4. Area of jurisdiction:">
+                                        <div class="help-info indent">Jurisdiction where this ABS procedure is relevant</div>
+                                        <div class="indent" >
+                                            <div afc-autocomplete name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" required></div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row indent" ng-show="isSubNational()">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national jurisdiction">
+                                        <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row indent" ng-show="isCommunity()">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" required name="jurisdictionName" caption="Name of the community">
+                                        <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row indent" ng-show="isOthers()">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" required name="jurisdictionName" caption="Name of other jurisdiction">
+                                        <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                      <div class="row">
+                        <div class="col-xs-12">
+                            <div class="km-control-group" name="contacts" caption="5. Where should applications for access be made?">
+                                    <div class="indent help-info"> Please provide relevant contacts or links. </div>
+                                <div class="indent">
+                                    <div document-selector ng-model="document.contacts"
+                                                             question="contacts"
+                                                             government="document.government"
+                                                             schema="(authority contact)"></div>        
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                          <div class="col-xs-12">
+                              <div class="km-control-group" required name="requirements" caption="6. What are the conditions or requirements a potential user needs to fulfil to apply for access?">
+                                    <div class="indent">
+                                     <div class="help-info"></div>
+                                     <div km-rich-textbox name="requirements" rows="3" ng-model="document.requirements" locales="document.header.languages"></div>
+                                     </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                            <div class="col-xs-12">
+                                <div class="km-control-group" required name="description" caption="7. Please provide a step-by step description or a visual representation of the ABS procedure">
+                                    <div class="indent">
+                                        <div km-rich-textbox name="description" rows="3" ng-model="document.description" locales="document.header.languages"></div>
+                                        <br>
+                                        <div class="help-info">For example, you may wish to attach a flow chart or timeline.</div>
+                                        <div km-link name="descriptionVisual" ng-model="document.description_attachment" a  identifier="document.header.identifier"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="km-control-group" required name="appDocs" caption="8. Does the applicant need to provide any documents?">
+                                    <div class="indent">
+                                        <div class="km-yes-no" name="hasApplicationDocuments" ng-model="document.hasApplicationDocuments"></div>
+                                        <br><div class="help-info">Please provide information on application forms or required documents (e.g.: copy of applicant’s national passport)</div>
+                                        <div km-rich-textbox name="appDocsText" rows="3" ng-model="document.applicationDocumentsText" locales="document.header.languages"></div>
+                                        <br><div class="help-info">Please attach relevant application form/documents or provide a link to website</div>
+                                        <div km-link name="appDocsLinks" ng-model="document.appDocsLinks"  identifier="document.header.identifier"></div>
+                                        <br><div class=" help-info"> Please provide information on whom the application should be sent to:</div>
+                                        <div document-selector ng-model="document.appDocsContact"
+                                                             question="appDocsContact"
+                                                             government="document.government"
+                                                             schema="(authority contact)"></div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" required name="appFees" caption="9. Are there application fees?">
+                                        <div class="indent">
+                                            <div class="km-yes-no" name="hasAppFees" ng-model="document.hasAppFees"></div>
+                                            <br><div class="help-info">Please provide any additional information on application fees</div>
+                                            <div km-rich-textbox name="appFeesText" rows="3" ng-model="appFeesText" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="duration" caption="10. How long does the application process take:">
+                                        <div class="indent">
+                                            <input type="number" name="duration" ng-model="document.duration"
+                                            minlength="1" placeholder="eg. 24" ng-change="clearDates()" class="form-control"
+                                            style="display:inline-block;width:100px"/>
+                                            <select name="durationPeriod" ng-model="document.durationPeriod"  class="form-control"
+                                            style="display:inline-block;width:100px" placeholder="eg. Months">
+                                                <option value=""></option>	
+                                                <option value="days">Days</option>
+                                                <option value="months">Months</option>
+                                                <option value="years">Years</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="relevantMeasures" caption="11. Relevant ABS measure(s):">
+                                                <div class="indent">
+                                                    <div document-selector ng-model="document.relevantMeasures"
+                                                                             question="relevantMeasures"
+                                                                             government="document.government"
+                                                                             schema="(measures)"></div>        
+                                                </div>   
+                                            </div>
+                                         </div>
+                                 </div>
+                      
+
+                      </section>
+
+                      
+
+                      <section>
+
+                      <legend>Additional Information</legend>
+                      <div class="row">
+                          <div class="col-xs-12">
+                              <div class="km-control-group" name="relevantInformation" caption="12. Additional Information">
+                                        <div class="indent"> 
+                                            <div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+                                            <div km-rich-textbox name="relevantInformation" rows="3" ng-model="document.relevantInformation" locales="document.header.languages"></div>
+                                            <br><div class="help-info">Other relevant website address or attached documents:</div>
+                                            <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
+                                        </div>
+                                  </div>
+                              </div>
+                          </div>
+                      
+
+                      
+                      </section>
+
+                      <section>
+                      <legend>Notes</legend>
+                      <div class="row">
+                          <div class="col-xs-12">
+                              <div class="km-control-group" name="notes">
+                                              <div class="help-info">The “Notes” field is for your personal notes or comments and will be hidden when
+                                            viewing the record. This field is not meant to be used for confidential information.</div>
+                                  <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
+                              </div>
+                          </div>
+                      </div>
+                      </section>
+
+
+                    </div>
+                </form>
+          </div>
+            <div ng-show="tab=='review'" km-tab="review" id="schemaView">
+                <div class="view-abs-checkpoint" ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></div>
+            </div>
+           
+                <hr>
+                <br>
+                <div workflow-arrow-buttons document="getCleanDocument()" languages="document.header.languages"  hide-timer="false"/> 
+            
+
+        </div>
+      </div>
+</div>

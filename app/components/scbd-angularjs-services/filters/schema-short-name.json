@@ -21,5 +21,6 @@
     "communityprotocol"		            :   "CPP", 
     "capacitybuildinginitiative"        :   "CBI", 
     "capacitybuildingresource"          :   "CBR", 
-    "endorsement"				        :   "EDR"
+    "endorsement"				        :   "EDR",
+    "absprocedure"				        :   "PRO"
 }

@@ -1,0 +1,259 @@
+﻿<div class="row">
+<style>
+
+.steps { 
+  list-style: none; 
+  overflow: hidden; 
+  font: 14px;
+  margin: 0;
+  padding: 0;
+  font-weight: 450; 
+}
+.steps li { 
+  float: left; 
+}
+.steps li a {
+  color: white;
+  text-decoration: none; 
+  padding: 8px 0 8px 55px;
+  background: #ccc; 
+  position: relative; 
+  display: block;
+  float: left;
+}
+.steps li a:after { 
+  content: " "; 
+  display: block; 
+  width: ; 
+  height: 0;
+  border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+  border-bottom: 50px solid transparent;
+  border-left: 30px solid #ccc;
+  position: absolute;
+  top: 50%;
+  margin-top: -50px; 
+  left: 100%;
+  z-index: 2; 
+}   
+.steps li a:before { 
+  content: " "; 
+  display: block; 
+  width: 0; 
+  height: 0;
+  border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+  border-bottom: 50px solid transparent;
+  border-left: 30px solid white;
+  position: absolute;
+  top: 50%;
+  margin-top: -50px; 
+  margin-left: 1px;
+  left: 100%;
+  z-index: 1; 
+}   
+.steps li:first-child a {
+  padding-left: 24px;
+}
+.steps li:a       { background:        #ccc;}
+.steps li:a:after { border-left-color: #ccc; }
+.steps li a:hover { background: #aaa; }
+.steps li a:hover:after { border-left-color: #aaa!important;}
+.steps li.arrowSelected a {  background: #aaa!important; color:#000!important;}
+.steps li.arrowSelected a:after {  border-left-color: #aaa!important;}
+
+
+.steps li.publish a:hover { background: #5cb85c; color:#FFF!important;}
+.steps li.publish a:hover:after { border-left-color: #5cb85c!important;}
+.steps li.publish.arrowSelected a {  background: #5cb85c!important; color:#FFF!important;}
+.steps li.publish.arrowSelected a:after {  border-left-color: #5cb85c!important;}
+  
+</style>
+
+<div  class="hidden-xs">
+
+        <div class="pull-right" ><!-- ng-show="security.canSaveDraft" -->
+            <button type="button" class="btn  btn-default bg-draft" ng-click="tab='draft';saveDraft()" ng-disabled="loading"> 
+                <i ng-show="tab=='draft' && (loading || security==undefined)" class="fa fa-spinner fa-spin"></i> 
+                Save Draft</button>
+        </div>
+
+        <!-- one page form -->
+        <ul class="steps">
+                <li ng-class="{'arrowSelected': tab=='intro'}">
+                    <a href="#" ng-click="tab='intro'" ng-disabled="loading || security==undefined">Introduction</a></li>
+                <li ng-class="{'arrowSelected': tab=='edit'}">
+                    <a href="#" ng-click="tab='edit'" ng-disabled="loading || security==undefined">Submission form</a></li>
+                <li ng-class="{'arrowSelected': tab=='review'}" >
+                    <a href="#" ng-click="tab='review'" ng-disabled="loading || security==undefined">Preview</a></li>
+                <li class="publish" ng-class="{'publish arrowSelected': tab=='publish'}">
+                    <a href="#" ng-click="tab='publish'" ng-disabled="loading || security==undefined">Publish</a></li>
+        </ul>
+
+
+       <!-- few page form -->
+        <!-- <ul class="steps">
+            <li><a href="#">Introduction</a></li>
+            <li class="current"><a href="#">Page 1 </a></li>
+            <li><a href="#">Page 2 </a></li>
+            <li><a href="#">Page 3 </a></li>
+            <li><a href="#">Preview</a></li>
+            <li class="publish"><a href="#">Publish</a></li>
+        </ul> -->
+        
+        <!-- many page form -->
+        <!-- <ul class="steps">
+            <li ><a href="#">Introduction</a></li>
+            <li class="current"><a href="#">Page 1  <span class="caret"></span> </a></li>
+            <li><a href="#">Next</a></li>
+            <li><a href="#">Preview</a></li>
+            <li class="publish"><a href="#">Publish</a></li>
+        </ul> -->
+</div>
+
+<!-- small screen view -->
+<div style="margin:0px 20px 20px 0;" class="visible-xs hidden-sm hidden-md hidden-lg">
+        <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default bg-grey color-white "><span class="glyphicon glyphicon-backward"></span></button>
+            <button type="button" class="btn btn-default bg-grey color-white "> Introduction <span class="caret"></span> </button> 
+            <button type="button" class="btn btn-default bg-grey color-white "><span class="glyphicon glyphicon-forward"> </span></button>
+        </div>
+        <button type="button" class="btn  btn-default bg-draft "><i class="fa fa-save"></i></button>
+        <button type="button" class="btn  btn-default bg-published ">Publish</button>
+</div>
+
+
+
+<!-- 
+    <div class="clearfix"></div>
+
+    <div class="col-xs-12">
+
+        <div class="pull-left">
+                <div style="display:inline;text-transform: uppercase;font-weight: 500;font-size:12px;">Change website language:</div>
+                <div style="display:inline;" class="locale-header" id="MyLocale"></div>
+                &nbsp; | &nbsp; 
+                <div style="display:inline;text-transform: uppercase;font-weight: 500;font-size:12px;">Submit in other language(s):</div>
+                <div style="display:inline;" km-form-languages ng-model="languages"  class="btn-thin"></div>
+                &nbsp; | &nbsp; 
+            <div style="display:inline">
+                <span ng-show="lastSaved && hideTimer=='false'" style="text-transform:uppercase;font-size:12px;font-weight: 500;padding-right:3px;">
+                <span class="bg-yellow label" style="font-size:12px;"><i class="color-grey glyphicon glyphicon-time"></i><span class="color-blue" style="padding:3px;">{{lastSaved}}</span></span>
+                &nbsp; since last save
+                </span>
+            </div>
+        </div>
+
+        <ul style="list-style-type:none;margin:0;padding:0;padding-top:10px;" class="pull-right">
+            <li style="display: inline;"><button type="button" class="btn btn-warning " ng-click="close()" ng-disabled="loading">
+                <i class="glyphicon glyphicon-remove"></i> Close</button>
+            </li>
+            <li style="display: inline;"  ng-show="security.canSaveDraft">
+                <button type="button" class="btn btn-default bg-draft" width="50px" ng-click="tab='draft';saveDraft()" ng-disabled="loading">Save Draft
+                    <i ng-show="tab=='draft' && (loading || security==undefined)" class="fa fa-spinner fa-spin"></i>
+                  </button>
+            </li>
+            <li style="display: inline;" ng-show="security.canSave">
+                <button type="button" class="btn btn-danger bg-published " width="50px" ng-click="tab='publish';publish()" ng-disabled="loading">Publish
+                         <i ng-show="tab=='publish' && loading" class="fa fa-spinner fa-spin"></i>
+                    </button>
+            </li>
+            <li style="display: inline;" ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
+                <button id="publish_button" type="button" class="btn btn-danger bg-request" ng-href="#" ng-click="tab='publishRequest';publishRequest()" ng-disabled="loading">Request Publication
+                         <i ng-show="tab=='publishRequest' && loading" class="fa fa-spinner fa-spin"></i>
+                    </button>
+            </li>
+  
+        </ul>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="col-xs-12" style="border-bottom:1px solid #eee;margin-bottom:0px;">
+        <ul style="list-style-type:none;margin:0;padding:0;padding-top:10px;" class="pull-left">
+            <li class="tab" style="display: inline;" ng-class="{'tab-selected': tab=='edit'}">
+                <a translation-url  ng-click="tab='edit'" ng-disabled="loading || security==undefined">
+                      Submission form
+                   </a>
+            </li>
+            <li class="tab" style="display: inline;" ng-class="{'tab-selected': tab=='review'}">
+                <a translation-url  ng-click="tab='review'" ng-disabled="loading || security==undefined">
+                      Review
+                   </a>
+            </li>
+                     
+        </ul>
+    </div>
+
+    <div style="display:none" id="msgDraftSaveMessage">
+        Your record has been saved as a draft.
+    </div>
+
+    <div class="row" style="display:none" id="divShowError" ng-show="showError">
+        <div class="col-xs-12">
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" ng-click="showError=false">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button> {{errorMessage}}
+            </div>
+
+        </div>
+    </div>
+
+    <div id="dialogCancel" class="modal fade" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">×</button>
+                    <h4>Canceling changes</h4>
+                </div>
+                <div class="modal-body">
+                    <p>If you want to cancel the changes you just made to this draft, you can keep the previous version of the draft, which will then be available in the list of drafts on the Management Centre. You or your colleagues can then continue editing
+                        the record in the current, or a later, session.</p>
+                </div>
+                <div class="modal-footer" style="margin-top:0">
+                    <button type="button" ng-click="closeDialog()" class="btn btn-default cancelClose">Cancel</button>
+                    <button type="button" ng-click="close(true)" class="btn btn-warning closeWithoutSaving pull-left">Close without saving</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divAdditionalInfo" class="modal fade" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-red color-white">
+                    <button type="button" class="close" ng-click="closeAddInfoDialog(false)" aria-hidden="true">×</button>
+                    <h2>Publishing Request</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Would you like to add additional information for the publishing request?</p>
+                    <textarea class="form-control" rows="5" name="info" ng-model="InfoDoc.additionalInfo"></textarea>
+                </div>
+                <div class="modal-footer" style="margin-top:0">
+                    <button type="button" class="btn btn-default" ng-click="closeAddInfoDialog(false)">Cancel</button>
+                    <button type="button" id="continueRequest" class="btn btn-primary pull-left" ng-disabled="loading">Send Request</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divWorkflowDraft" class="modal fade" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-red color-white">
+                    <h2>Edit Publishing Request</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Editing and saving as draft a publishing request will cancel the publishing request and send it back to draft mode. 
+                    <br/>Are you sure you want to continue?</p>
+                </div>
+                <div class="modal-footer" style="margin-top:0">
+                    <button type="button" class="btn btn-default" ng-click="closeWorkflowDraftDialog(false)">No</button>
+                    <button type="button" id="continueWorkflowDraftRequest" class="btn btn-primary pull-left" ng-disabled="loading">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+</div>

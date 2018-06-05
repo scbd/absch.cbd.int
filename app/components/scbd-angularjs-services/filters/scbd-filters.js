@@ -371,7 +371,8 @@ function (app, _, moment, schemaName, schemaShortName) {
 			if(schema.toLowerCase()=="communityprotocol"		      ) return "CPP";
 			if(schema.toLowerCase()=="capacitybuildinginitiative" ) return "CBI";
 			if(schema.toLowerCase()=="capacitybuildingresource"   ) return "CBR";
-			if(schema.toLowerCase()=="endorsement"				        ) return "EDR";
+      if(schema.toLowerCase()=="endorsement"				        ) return "EDR";
+      if(schema.toLowerCase()=="absprocedure"				        ) return "PRO";
 
       return schema;
 		};
@@ -415,6 +416,7 @@ function (app, _, moment, schemaName, schemaShortName) {
 			if(schema.toUpperCase()=="CBI"				    	) return "capacityBuildingInitiative";
 			if(schema.toUpperCase()=="CBR"				    	) return "capacityBuildingResource";
 			if(schema.toUpperCase()=="EDR"						  ) return "endorsement";
+      if(schema.toUpperCase()=="PRO"						  ) return "absProcedure";
 
 			return schema;
 		};

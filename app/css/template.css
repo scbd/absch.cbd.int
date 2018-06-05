@@ -1567,12 +1567,14 @@ div.recordDefault:hover {
 #PreferncesPage .register-content {
     background-color: #FFF;
     margin: 20px 0;
+    
 }
 #RegisterPage .register-content-header h3,
 #SubmitPage .register-content-header h3,
 #PreferncesPage .register-content-header h3 {
     padding: 0;
     margin: 0 0 5px 0;
+   
 }
 #RegisterPage .register-content-content,
 #SubmitPage .register-content-content,

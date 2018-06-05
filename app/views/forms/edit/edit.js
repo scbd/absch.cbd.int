@@ -15,7 +15,8 @@ define([
     'views/forms/edit/document-selector',
     'views/register/directives/register-top-menu',
     'components/scbd-angularjs-services/services/locale',
-    'views/directives/workflow-std-buttons'
+    'views/directives/workflow-std-buttons',
+    'views/directives/workflow-arrow-buttons'
 ], function (app, _, Enumerable) {
 
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",

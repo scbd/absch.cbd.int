@@ -3,56 +3,45 @@
         <div style="padding:10px 10px;">
             <h3>{{type.title}} <span class="color-darkgrey"> ({{type.abbreviation}})</span>
 
-        <span class="helpinfoInline" ng-show="type.abbreviation ==='CNA'" >
+            <span class="helpinfoInline" ng-show="type.abbreviation ==='CNA'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCNAInfo = !showCNAInfo"></i>
             </span>
-
             <span class="helpinfoInline" ng-show="type.abbreviation ==='MSR'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showMSRInfo = !showMSRInfo"></i>
             </span>
-
             <span class="helpinfoInline" ng-show="type.abbreviation ==='NDB'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showNDBInfo = !showNDBInfo"></i>
             </span>
-
              <span class="helpinfoInline" ng-show="type.abbreviation ==='CP'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCPInfo = !showCPInfo"></i>
             </span>
-
+            <span class="helpinfoInline" ng-show="type.abbreviation ==='PRO'" >
+               <i class="fa fa-info-circle helpicon pull-right" ng-click="showPROInfo = !showPROInfo"></i>
+            </span>
              <span class="helpinfoInline" ng-show="type.abbreviation ==='CPC'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCPCInfo = !showCPCInfo"></i>
             </span>
-
              <span class="helpinfoInline" ng-show="type.abbreviation ==='IRCC'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showIRCCInfo = !showIRCCInfo"></i>
             </span>
-
              <span class="helpinfoInline" ng-show="type.abbreviation ==='NR'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showNRInfo = !showNRInfo"></i>
             </span>
-
              <span class="helpinfoInline" ng-show="type.abbreviation ==='VLR'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showVLRInfo = !showVLRInfo"></i>
             </span>
-
-
             <span class="helpinfoInline" ng-show="type.abbreviation ==='A19A20'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showA19A20Info = !showA19A20Info"></i>
             </span>
-
             <span class="helpinfoInline" ng-show="type.abbreviation ==='CPP'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCPPInfo = !showCPPInfo"></i>
             </span>
-
-
             <span class="helpinfoInline" ng-show="type.abbreviation ==='CBI'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCBIInfo = !showCBIInfo"></i>
             </span>
-
               <span class="helpinfoInline" ng-show="type.abbreviation ==='CON'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCONInfo = !showCONInfo"></i>
             </span>
-
 
          </h3>
 
@@ -72,7 +61,7 @@
 
 
             <a translation-url  class="pull-right well-help-close" ng-click="showCONInfo=false;showCNAInfo=false;showCPPInfo=false;showA19A20Info=false;showVLRInfo=false;showIRCCInfo=false;showCPCInfo=false;showCPCInfo=false;showNDBInfo=false;showMSRInfo=false;showCNAInfo=false;"
-                ng-show=" showCONInfo ||    showCNAInfo    || showCPPInfo    || showA19A20Info    || showVLRInfo    || showIRCCInfo    || showCPCInfo    || showCPCInfo    || showNDBInfo    || showMSRInfo    || showCNAInfo">&times;</a>
+                ng-show=" showCONInfo ||    showCNAInfo    || showCPPInfo    || showA19A20Info    || showVLRInfo    || showIRCCInfo    || showCPCInfo    || showCPCInfo    || showNDBInfo    || showMSRInfo    || showCNAInfo || showPROInfo">&times;</a>
 
             <!--CON---------------------------->
             <div ng-if="showCONInfo" class="well well-help">
@@ -198,6 +187,13 @@
                 <div>The submission form is to be used for registering information on checkpoints designated under Article 17, paragraph 1 (a) of the Protocol. The role of checkpoints is to collect or receive, as appropriate, relevant information related to
                     prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources (subparagraph i). Such information collected by the checkpoint needs to be
                     provided to relevant national authorities, to the Party providing prior informed consent and to the ABS Clearing-House, as appropriate (subparagraph iii).</div>
+            </div>
+
+             <!--PRO---------------------------->
+             <div ng-if="showPROInfo" class="well well-help">
+                <div ng-include="'defaultIntro'"></div>
+                <h5> ABS PROCEDURE</h5>
+                <div> to do </div>
             </div>
 
             <!--VLR---------------------------->

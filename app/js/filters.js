@@ -249,7 +249,8 @@ function (app, schemaNamePlural) {
 			if(schema.toLowerCase()=="communityprotocol" 		  ||	schema.toLowerCase()=="cpp"	) return "folder";
 			if(schema.toLowerCase()=="capacitybuildinginitiative" ||	schema.toLowerCase()=="cbi"	) return "insert_drive_file";
 			if(schema.toLowerCase()=="capacitybuildingresource"   ||	schema.toLowerCase()=="cbr"	) return "insert_drive_file";
-			if(schema.toLowerCase()=="endorsement" 				||	schema.toLowerCase()=="edr"	) return "folder";
+			if(schema.toLowerCase()=="endorsement" 				  ||	schema.toLowerCase()=="edr"	) return "folder";
+			if(schema.toLowerCase()=="absprocedure" 			  ||	schema.toLowerCase()=="pro"	) return "folder";
 
 			return schema;
 		};
