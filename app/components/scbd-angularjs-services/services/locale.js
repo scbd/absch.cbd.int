@@ -3,7 +3,7 @@ define(['app'], function(app) { 'use strict';
     var urlLangRegex       = /^\/(en|ar|fr|es|ru|zh)(\/|$)/;
     app.provider('locale', [function() {
 
-        this.$get = ['$window', function($document, $window) {
+        this.$get = ['$window', function($window) {
         
             var location = $window.location;
             var lang = location.pathname.match(urlLangRegex);
@@ -16,7 +16,7 @@ define(['app'], function(app) { 'use strict';
         }];
     }]);
     
-    app.service('localeService', ['$window', function($document, $window) {
+    app.service('localeService', ['$window', function($window) {
 
         this.urlHasLocale = function () {
                 var location = $window.location;
