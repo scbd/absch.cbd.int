@@ -1,15 +1,14 @@
 define(['app'], function(app) { 'use strict';
 
+    var urlLangRegex       = /^\/(en|ar|fr|es|ru|zh)(\/|$)/;
     app.provider('locale', [function() {
 
-        this.$get = ['$document', '$window', function($document, $window) {
+        this.$get = ['$window', function($window) {
         
-            var urlLangRegex       = /^\/(en|ar|fr|es|ru|zh)$/;
-            var langRegex = /(ar|en|es|fr|ru|zh)/;
-            var location = window.location;
-            var lang = location.pathname.split(urlLangRegex);
+            var location = $window.location;
+            var lang = location.pathname.match(urlLangRegex);
             
-            if(lang && langRegex.test(lang[1]))
+            if(lang)
                 return lang[1];
 
             return 'en';
@@ -17,16 +16,13 @@ define(['app'], function(app) { 'use strict';
         }];
     }]);
     
-    app.service('localeService', ['$document', '$window', function($document, $window) {
-
-        var urlLangRegex       = /^\/(en|ar|fr|es|ru|zh)$/;
-        var langRegex = /(ar|en|es|fr|ru|zh)/;
+    app.service('localeService', ['$window', function($window) {
 
         this.urlHasLocale = function () {
-                var location = window.location;
-                var lang = location.pathname.split(urlLangRegex);
+                var location = $window.location;
+                var lang = location.pathname.match(urlLangRegex);
                 
-                if(lang && langRegex.test(lang[1]))
+                if(lang)
                     return true;
                 
                 return false;

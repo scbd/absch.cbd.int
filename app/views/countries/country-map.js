@@ -158,8 +158,12 @@ function(template, app, _, popOverTemplate) {
                             }
                           });
                           addImageData({name : {en : 'Western Sahara'}, code:'EH'})
-                      $scope.map.validateData();
-                      updateCustomMarkers();
+                          //change for Taiwan, set party color as China
+                          var twCountry = getMapObject('TW'); 
+                          twCountry.colorReal = twCountry.baseSettings.color = "#5F4586";
+
+                          $scope.map.validateData();
+                          updateCustomMarkers();
                   });
           });
         }
@@ -248,7 +252,7 @@ function(template, app, _, popOverTemplate) {
             if (country && mapCountry) {
                 if (country.isNPInbetweenParty)
                     mapCountry.colorReal = mapCountry.baseSettings.color = "#EC971F";
-                else if (country.isNPParty )
+                else if (country.isNPParty)
                     mapCountry.colorReal = mapCountry.baseSettings.color = "#5F4586";
                 else
                     mapCountry.colorReal = mapCountry.baseSettings.color = "#333";
@@ -256,6 +260,7 @@ function(template, app, _, popOverTemplate) {
                     mapCountry.colorReal = mapCountry.baseSettings.color = "#333";
             }
           
+
         } //getMapObject
 
          //=======================================================================
