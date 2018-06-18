@@ -1,0 +1,109 @@
+﻿version: 2
+
+_defaults: &defaults
+  docker:
+    - image: docker:17.05.0-ce
+  working_directory: ~/scbd/absch.cbd.int
+  parallelism: 1
+
+_run:
+  buildDocker: &buildDocker
+    name: Build docker image
+    command: |
+      docker info
+      docker build -t output --build-arg VERSION=$CIRCLE_SHA1 --build-arg BRANCH=${CIRCLE_BRANCH:-master} --build-arg TAG=$CIRCLE_TAG .
+  testImage: &testImage
+    name: Test docker image 
+    command:  |
+      docker run --name absch -d -p 8000:8000 output;sleep 10;
+      docker exec absch curl --retry 10 --retry-delay 5 -v http://localhost:8000/
+
+jobs:
+  build:
+    <<: *defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: *buildDocker
+      - run: *testImage
+
+  build-deploy-branches:
+    <<: *defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: *buildDocker
+      - run: *testImage
+      - deploy:
+          name: Deploy build to docker hub 
+          command:  |
+            eval "echo Branch:"{$CIRCLE_BRANCH}" User:"{$CIRCLE_PROJECT_USERNAME}
+            docker ps
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker tag output scbd/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
+            docker push scbd/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
+
+  build_and_deploy_releases:
+    <<: *defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: *buildDocker
+      - run: *testImage
+      - deploy:
+          name: Deploy build to docker hub 
+          command:  |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker tag output scbd/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
+            docker push scbd/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
+
+  build_and_deploy_tags:
+    <<: *defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: *buildDocker
+      - run: *testImage
+      - deploy:
+          name: Deploy build to docker hub 
+          command:  |
+            if [ "$CIRCLE_PROJECT_USERNAME}" == 'scbd' ]; then
+              docker login -u $DOCKER_USER -p $DOCKER_PASS
+              docker tag output scbd/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
+              docker push scbd/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
+            else
+              echo "Invalid tag, only scbd tags allowed"
+            fi
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore:
+                - /^(master|dev|stg)$/
+                - /^release\/.*/  
+            tags:
+              ignore:
+                - /^v?[0-9]+(\.[0-9]+)*$/
+                
+      - build-deploy-branches:
+          filters:
+            branches:
+              only: /^(master|dev|stg)$/
+      - build_and_deploy_releases:
+          filters:
+            branches:
+                only:
+                  - /^release\/.*/  
+      - build_and_deploy_tags:
+          # requires:
+          #   - build
+          filters:
+            branches:
+              only:
+                - /^release\/.*/  
+            tags:
+              only:
+                - /^v?[0-9]+(\.[0-9]+)*$/
