@@ -16,8 +16,8 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 		}
 	}
 
-	var document = 			$http.get('/api/v2013/documents/' +  params.identifier, { });
-	var documentInfo = 		$http.get('/api/v2013/documents/' +  params.identifier + '?info', { });
+	var document = 			$http.get('/api/v2013/documents/' +  encodeURIComponent(params.identifier), { });
+	var documentInfo = 		$http.get('/api/v2013/documents/' +  encodeURIComponent(params.identifier) + '?info', { });
 
 	$q.all([document,documentInfo]).then(function(result){
 
@@ -25,14 +25,14 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 			$scope.documentInfo = result[1].data;
 			$scope.realm = $scope.documentInfo.Realm;
 
-			var documentVersion=	$http.get('/api/v2013/documents/'+$scope.document.header.identifier+'/versions?body=true&cache=true')
+			var documentVersion=	$http.get('/api/v2013/documents/'+encodeURIComponent($scope.document.header.identifier)+'/versions?body=true&cache=true')
 			$q.when(documentVersion)
 			.then(function(data){
 				$scope.documentVersion = data.data;
 
 				if($scope.document.absIRCCs){
 					$scope.document.absIRCCs.forEach(function(item){
-						$http.get('/api/v2013/documents/' +  item.identifier, { info:""})
+						$http.get('/api/v2013/documents/' +  encodeURIComponent(item.identifier), { info:""})
 						.success(function(result){
 							item.document = result;
 						}).finally(function(){
@@ -56,7 +56,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 		if(document.absIRCCs){
 
 				var permits = _.map(document.absIRCCs, function(document){
-					return $http.get('/api/v2013/documents/' +  document.identifier)
+					return $http.get('/api/v2013/documents/' + encodeURIComponent(document.identifier))
 				});
 				$q.all(permits)
 				.then(function(results){
@@ -73,19 +73,48 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 		else if(document.sourceCountries){
 
 			var country = _.map(document.sourceCountries, function(country){ return country.identifier });
-			var query = "/api/v2013/index/select?fl=id,identifier_s&q=(realm_ss:" + realm.toLowerCase() +
-			"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:" + country.join('+OR government_s:') + "))&rows=50"
-
-			$http.get(query).success(function(res) {
+			var queryUrl = "/api/v2013/index/select"
+					
+					var qs = {
+						fl	: "id,identifier_s",
+						q	: "(realm_ss:" + realm.toLowerCase() + " AND NOT version_s:* AND schema_s:authority AND (government_s:(" + country.join(' ') + ")))",
+						rows: 50
+					}
+			$http.get(queryUrl, { params: qs}).success(function(res) {
 				angular.forEach(res.response.docs, function(cna){
 					if(!_.some($scope.emailList, {identifier:cna.identifier_s}))
 							$scope.emailList.push({identifier: cna.identifier_s});
 				});
 			});
+
+			
+			var queryUrl = "/api/v2013/index/select";
+			var qs = {
+				fl	: "id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,organization_EN_t,telephone_ss,type_ss,fax_ss,government_CEN_s,addressCountry_s",
+				q	: "(realm_ss:" + realm.toLowerCase() + " AND NOT version_s:* AND schema_s:focalPoint AND (government_s:(" + country.join(' ') + ")))",
+				rows: 50
+			}
+			$http.get(queryUrl, { params: qs}).success(function(res) {
+				angular.forEach(res.response.docs, function(nfp){
+					if(!_.some($scope.emailList, {identifier:nfp.identifier_s}))							
+						$scope.emailList.push(
+								{
+									identifier:nfp.identifier_s,
+									header	: {identifier:nfp.identifier_s},
+									type:'person',
+									firstName:nfp.title_t,
+									addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
+									country: nfp.addressCountry_s,
+									phones:nfp.telephone_ss,
+									faxes:nfp.fax_ss,
+									emails:nfp.email_ss
+								});
+				});
+			});
 		}
 		if(document.absCheckpoints){
 			var checkpoints = _.map(document.absCheckpoints, function(document){
-				return $http.get('/api/v2013/documents/' +  document.identifier)
+				return $http.get('/api/v2013/documents/' +  encodeURIComponent(document.identifier))
 			});
 			$q.all(checkpoints)
 			.then(function(results){
@@ -97,30 +126,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 				});
 			});
 		}
-	    if(document.government){
-	        var government =  document.government.identifier;
-	        var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
-	        "+organization_EN_t,telephone_ss,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + $scope.realm.toLowerCase() +
-	        "+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(government_s:" + government + "))&rows=50";
-
-	        $http.get(query).success(function(res) {
-	            angular.forEach(res.response.docs, function(nfp){
-					if(!_.some($scope.emailList, {identifier:nfp.identifier_s}))							
-	                    $scope.emailList.push(
-	                            {
-									identifier:nfp.identifier_s,
-									header	: {identifier:nfp.identifier_s},
-									type:'person',
-	                                firstName:nfp.title_t,
-	                                addressHTML:{en:nfp.description_EN_t.replace(/\n/g, '<br/>')},
-	                                country: nfp.addressCountry_s,
-	                                phones:nfp.telephone_ss,
-	                                faxes:nfp.fax_ss,
-	                                emails:nfp.email_ss
-	                            });
-	            });
-	        });
-	    }
+	    
 	}
 
 }]);
