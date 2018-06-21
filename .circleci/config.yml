@@ -37,8 +37,6 @@ jobs:
       - deploy:
           name: Deploy build to docker hub 
           command:  |
-            eval "echo Branch:"{$CIRCLE_BRANCH}" User:"{$CIRCLE_PROJECT_USERNAME}
-            docker ps
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker tag output scbd/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
             docker push scbd/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
@@ -51,11 +49,11 @@ jobs:
       - run: *buildDocker
       - run: *testImage
       - deploy:
-          name: Deploy build to docker hub 
-          command:  |
-            docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker tag output scbd/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
-            docker push scbd/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
+          name: Deploy release build to docker hub 
+          command:  |            
+            docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+            docker tag output scbd/$CIRCLE_PROJECT_REPONAME:release-${CIRCLE_BRANCH//release\//}
+            docker push scbd/$CIRCLE_PROJECT_REPONAME:release-${CIRCLE_BRANCH//release\//}
 
   build_and_deploy_tags:
     <<: *defaults
@@ -65,13 +63,16 @@ jobs:
       - run: *buildDocker
       - run: *testImage
       - deploy:
-          name: Deploy build to docker hub 
+          name: Deploy tag build to docker hub 
           command:  |
-            if [ "$CIRCLE_PROJECT_USERNAME}" == 'scbd' ]; then
-              docker login -u $DOCKER_USER -p $DOCKER_PASS
-              docker tag output scbd/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
-              docker push scbd/$CIRCLE_PROJECT_REPONAME:$CIRCLE_BRANCH
+            if [ "${CIRCLE_PROJECT_USERNAME}" == 'scbd' ]; then
+              docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+              docker tag output scbd/$CIRCLE_PROJECT_REPONAME:${CIRCLE_TAG//v/}
+              docker tag output scbd/$CIRCLE_PROJECT_REPONAME:latest
+              docker push scbd/$CIRCLE_PROJECT_REPONAME:${CIRCLE_TAG//v/}
+              docker push scbd/$CIRCLE_PROJECT_REPONAME:latest
             else
+              eval "echo Branch:"{$CIRCLE_BRANCH}" User:"{$CIRCLE_PROJECT_USERNAME}
               echo "Invalid tag, only scbd tags allowed"
             fi
 workflows:
@@ -98,12 +99,8 @@ workflows:
                 only:
                   - /^release\/.*/  
       - build_and_deploy_tags:
-          # requires:
-          #   - build
           filters:
             branches:
-              only:
-                - /^release\/.*/  
+                ignore: /.*/
             tags:
-              only:
-                - /^v?[0-9]+(\.[0-9]+)*$/
+              only: /^v?[0-9]+(\.[0-9]+)*$/
