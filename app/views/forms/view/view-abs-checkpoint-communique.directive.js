@@ -75,7 +75,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 				$scope.emailList = [];
 				if(document.absIRCCs){
 						var absIRCCs =  _.map(document.absIRCCs, function(document){
-							return $http.get('/api/v2013/documents/' +  document.identifier)
+							return $http.get('/api/v2013/documents/' +  encodeURIComponent(document.identifier))
 						});
 						$q.all(absIRCCs)
 						.then(function(results){
@@ -92,10 +92,14 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 				else if(document.sourceCountries){
 
 					var country = _.map(document.sourceCountries, function(country){ return country.identifier });
-					var query = "/api/v2013/index/select?fl=id,identifier_s&q=(realm_ss:" + realm.value.toLowerCase() +
-					"+AND+NOT+version_s:*+AND+schema_s:authority+AND+(government_s:(" + country.join(' ') + ")))&rows=50"
-
-					$http.get(query).success(function(res) {
+					var queryUrl = "/api/v2013/index/select"
+					
+					var qs = {
+						fl	: "id,identifier_s",
+						q	: "(realm_ss:" + realm.value.toLowerCase() + " AND NOT version_s:* AND schema_s:authority AND (government_s:(" + country.join(' ') + ")))",
+						rows: 50
+					}
+					$http.get(queryUrl, { params: qs}).success(function(res) {
 						angular.forEach(res.response.docs, function(cna){
 							if(!_.some($scope.emailList, {identifier:cna.identifier_s}))
 								$scope.emailList.push({identifier: cna.identifier_s});
@@ -104,11 +108,13 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 
 					if(document.government){
 						var government =  document.government.identifier;
-						var query = "/api/v2013/index/select?fl=id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,"+
-						"+organization_EN_t,telephone_ss,type_ss,fax_ss,government_CEN_s,addressCountry_s&q=(realm_ss:" + realm.value.toLowerCase() +
-						"+AND+NOT+version_s:*+AND+schema_s:focalPoint+AND+(government_s:(" + country.join(' ') + ")))&rows=50";
-
-						$http.get(query).success(function(res) {
+						var queryUrl = "/api/v2013/index/select";
+						var qs = {
+							fl	: "id,identifier_s,schema_s,title_t,department_EN_t,description_EN_t,email_ss,organization_EN_t,telephone_ss,type_ss,fax_ss,government_CEN_s,addressCountry_s",
+							q	: "(realm_ss:" + realm.value.toLowerCase() + " AND NOT version_s:* AND schema_s:focalPoint AND (government_s:(" + country.join(' ') + ")))",
+							rows: 50
+						}
+						$http.get(queryUrl, { params: qs}).success(function(res) {
 							angular.forEach(res.response.docs, function(nfp){
 									if(!_.some($scope.emailList, {identifier:nfp.identifier_s}))							
 										$scope.emailList.push(
@@ -129,7 +135,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 				}
 				if(document.absCheckpoints){
 					var checkpoints = _.map(document.absCheckpoints, function(document){
-						return $http.get('/api/v2013/documents/' +  document.identifier)
+						return $http.get('/api/v2013/documents/' + encodeURIComponent(document.identifier))
 					});
 					$q.all(checkpoints)
 					.then(function(results){
