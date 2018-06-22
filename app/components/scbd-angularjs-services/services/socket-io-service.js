@@ -3,7 +3,7 @@ define(['app', 'socket.io', 'lodash', './authentication', './apiUrl', './utiliti
     app.factory('socketioService', ['$rootScope', '$http', '$q', 'realm', "authentication", "apiUrl", 'realmService',
     function ($rootScope, $http, $q, realm, authentication, apiUrl, realmService) {
         return new function () {
-            var apiServer = 'https://api.cbd.int/';
+            var apiServer = 'https://api-direct.cbd.int/';
 
             if(apiUrl.isAppDevelopment()){
                 
