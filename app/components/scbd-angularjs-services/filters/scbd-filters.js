@@ -211,11 +211,11 @@ function (app, _, moment, schemaName, schemaShortName) {
     };
   });
 
-  app.filter("toTrusted", function ($sce) {
+  app.filter("toTrusted", ["$sce", function ($sce) {
     return function (value) {
       return $sce.trustAsHtml(value);
     };
-  });
+  }]);
 
   //============================================================
   //
