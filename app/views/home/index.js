@@ -1,6 +1,7 @@
 define(['app','moment','js/common',
     'views/directives/home-country-dashboard-directive',
     'views/directives/map/home-map',
+    'views/directives/home-articles',
     'angular-cookies'
 ], function (app, moment) {
     app.controller('IndexController', ['$scope',
