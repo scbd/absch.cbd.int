@@ -97,7 +97,7 @@
                         else 
                             countries = _.map($scope.countries, function(country){return country.code.toLowerCase()})
 
-                        var userCountries = _.map(result.data, function(user){ if(!user.government) return user.government})
+                        var userCountries = _.map(result.data, function(user){ if(user.government) return user.government})
                         var countriesToShow=[];
                         if($scope.filters.filterType == 'have' || $scope.filters.filterType == 'morethenone'){
                             countriesToShow = _.intersection(countries, userCountries);;
