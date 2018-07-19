@@ -26,22 +26,13 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 			$scope.realm = $scope.documentInfo.Realm;
 
 			var documentVersion=	$http.get('/api/v2013/documents/'+encodeURIComponent($scope.document.header.identifier)+'/versions?body=true&cache=true')
-			$q.when(documentVersion)
-			.then(function(data){
-				$scope.documentVersion = data.data;
+			var qs = { q 	: { "identifier": $scope.document.header.identifier+"@"+$scope.documentInfo.revision }, fo 	: 1 }
+			var emailRecipients = $http.get('/api/v2018/abs-certificate-emails', { params: qs});
 
-				if($scope.document.absIRCCs){
-					$scope.document.absIRCCs.forEach(function(item){
-						$http.get('/api/v2013/documents/' +  encodeURIComponent(item.identifier), { info:""})
-						.success(function(result){
-							item.document = result;
-						}).finally(function(){
-							getContacts($scope.document, $scope.documentInfo.realm)
-						});
-					})
-				}
-				else
-					getContacts($scope.document, $scope.documentInfo.realm);
+			$q.all([documentVersion, emailRecipients])
+			.then(function(data){
+				$scope.documentVersion = data[0].data;
+				$scope.emailList = _.map(_.uniq(data[1].data.recipients), function(doc){return {identifier: doc}});
 			})
 	});
 
