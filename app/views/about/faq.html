@@ -27,9 +27,9 @@
         <div>
             <input style="width:100%;border-radius: 2px; padding: 12px 20px;margin: 8px 0;box-sizing: border-box;border:solid 1px #ddd;" ng-model="searchText" placeholder=" What are you looking for? "> 
             <i ng-show="searchText != ''" ng-click="searchText=''" class="fa fa-times-circle pull-right" style="position: relative;top:-40px;left:-10px;font-size: 20px;" ></i>
-
+            
+            <div style="border-bottom:1px solid #ddd; margin-bottom:3px;">Categories:</div> 
             <div style="margin-bottom: 20px;">
-              Categories: 
               <div class="tag" ng-class="{'tag-active': category=='#about'}" ng-click="toggleCategory('#about')">About the ABSCH <i ng-show="category=='#about'" class="fa fa-times-circle" ></i></div>
               <div class="tag" ng-class="{'tag-active': category=='#account'}" ng-click="toggleCategory('#account')" > Your CBD Account <i ng-show="category=='#account'" class="fa fa-times-circle" ></i></div>
               <div class="tag" ng-class="{'tag-active': category=='#monitoring'}" ng-click="toggleCategory('#monitoring')">Monitoring the utilization of genetic resources <i ng-show="category=='#monitoring'" class="fa fa-times-circle" ></i></div>

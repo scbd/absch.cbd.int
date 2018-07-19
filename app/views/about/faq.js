@@ -1,9 +1,9 @@
 define(['app', 'underscore', 'services/role-service',
-		'./left-menu', './about-directives'
+		'./left-menu', './about-directives', '/components/scbd-angularjs-services/services/locale'
 	],
 	function (app, _) {
-		app.controller("faqController", ["$scope", "$route",'roleService', '$timeout', '$q', '$http', '$element',
-			function ($scope, $route, roleService, $timeout, $q, $http, $element) {
+		app.controller("faqController", ["$scope", "$route",'roleService', '$timeout', '$q', '$http', '$element', 'locale',
+			function ($scope, $route, roleService, $timeout, $q, $http, $element, locale) {
 
 				$scope.status   = "loading";
 				$scope.error    = null;
@@ -16,9 +16,6 @@ define(['app', 'underscore', 'services/role-service',
 					loadArticle(id);
 				else
 					loadArticles("ABSCH-FAQs");
-
-
-					
 
 				//---------------------------------------------------------------------
 				$scope.toggleCategory = function(tag){
@@ -38,7 +35,7 @@ define(['app', 'underscore', 'services/role-service',
 				function loadArticles(tag){
 					var ag = [];
 					ag.push({"$match":{"$and":[{"customTags.title.en":encodeURIComponent(tag)}]}});
-					ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "tags":1, "customTags": 1}});
+					ag.push({"$project" : {["title."+ locale]:1, "content":1, "coverImage":1, "meta":1, "tags":1, "customTags": 1}});
 					
 					var qs = {
 					"ag" : JSON.stringify(ag)
@@ -55,7 +52,6 @@ define(['app', 'underscore', 'services/role-service',
 					// return url;
 					return url && url
 					.replace(/attachments.cbd.int\//, '$&'+size+'/')
-					.replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&'+size+'/')
 				}
 				//---------------------------------------------------------------------
 				$scope.loadArticle = function(id){
