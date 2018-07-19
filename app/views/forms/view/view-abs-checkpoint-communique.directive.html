@@ -49,7 +49,7 @@
 				</div>
 				<div ng-if="emailList">
 		            <div class="row top-border bg-lightblue">
-		                <div ng-repeat="contact in emailList" class="">
+		                <div ng-repeat="contact in emailList track by $index" class="">
 		                    <div class="col-xs-12">
 		                        <div class="km-value">
 		                            <div view-contact-reference ng-model="contact" locale="locale"></div>
