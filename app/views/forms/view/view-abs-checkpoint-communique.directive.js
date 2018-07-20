@@ -76,7 +76,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 					q 	: { "identifier": document.header.identifier+"@"+document.info.revision },
 					fo 	: 1
 				}
-				$q.when($http.get('/api/v2018/abs-certificate-emails', { params: qs}))
+				$q.when($http.get('/api/v2018/abs-certificate-receivers', { params: qs}))
 				.then(function(res) {
 					$scope.emailList = _.map(_.uniq(res.data.recipients), function(doc){return {identifier: doc}});
 				});
