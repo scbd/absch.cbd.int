@@ -27,7 +27,7 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 
 			var documentVersion=	$http.get('/api/v2013/documents/'+encodeURIComponent($scope.document.header.identifier)+'/versions?body=true&cache=true')
 			var qs = { q 	: { "identifier": $scope.document.header.identifier+"@"+$scope.documentInfo.revision }, fo 	: 1 }
-			var emailRecipients = $http.get('/api/v2018/abs-certificate-emails', { params: qs});
+			var emailRecipients = $http.get('/api/v2018/abs-certificate-receivers', { params: qs});
 
 			$q.all([documentVersion, emailRecipients])
 			.then(function(data){
