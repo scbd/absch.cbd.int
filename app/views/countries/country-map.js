@@ -147,10 +147,6 @@ function(require, template, app, _) {
         function loadCountries(){
           var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
-          // require(['text!' + baseUrl + '/views/countries/pin-popup-'+ realm.value.replace(/-.*/g,'').toLowerCase() +'.html'], function(template){
-          //   popOverTemplate = template;
-            var date = new Date();
-            console.log(date);
             return $q.when(commonjs.getCountries()).then(function(lcountries) {                  
 
                         _.map(lcountries, function(country){
@@ -162,9 +158,12 @@ function(require, template, app, _) {
                               addExceptionRegionsImage(country)
                           }
                         });
+                        addImageData({name : {en : 'Western Sahara'}, code:'EH'})
+                        //change for Taiwan, set party color as China
+                        var twCountry = getMapObject('TW'); 
+                        twCountry.colorReal = twCountry.baseSettings.color = "#5F4586";
 
                         map.validateData();
-                        console.log(new Date());
                         map.addListener("clickMapObject", showCountryDetails);
                         // map.addListener("click", closePopovers);
                         if($routeParams.code){
