@@ -6,11 +6,11 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost
 	var nationalSchemas  = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='national'  ? key : undefined; }));
 	var referenceSchemas = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='reference' ? key : undefined; }));
 	var scbdSchemas      = [ "meeting", "notification", "pressRelease", "statement", "news", "new" ];
-	
-	console.log("Realm:", (realmConfig||{}).realm || 'NOT_FOUND');
+    
+    console.log("Realm:", (realmConfig||{}).realm || 'NOT_FOUND');
 
-	if(!realmConfig)
-		throw new Error("Unknow realm for host: "+window.location.host + ' clearingHouseHost: ' + window.clearingHouseHost);
+    if(!realmConfig)
+        throw new Error("Unknow realm for host: "+window.location.host + ' clearingHouseHost: ' + window.clearingHouseHost);
 
     app.provider("realm", function() {
         
@@ -115,7 +115,7 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost
 			scbdSchemas			:	scbdSchemas,
 
 			get currentRealm()  { return $injector.invoke(['realm', function(realm) { return realm.value; }]); },
-			setCurrentRealm  	: function(newRealm) { return $injector.invoke(['realm', function(realm) { return realm.setRealm(newRealm); }]); },
+			setCurrentRealm  	: function() { throw new Error("not supported") },
 
 			nationalRoles		:	nationalRoles,
 			getRoleName			:	getRoleName,
@@ -131,4 +131,16 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost
     function escapeRegExp(str) { 
         return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&"); 
     }    
+    
+    //===========================
+    //
+    //===========================
+    function patchRoleName(roleName) {
+        
+        roleName = roleName.replace(/^Abs/i,'');
+        roleName = roleName[0].toLowerCase() + roleName.substr(1);
+
+        return roleName;
+    }
+    
 });

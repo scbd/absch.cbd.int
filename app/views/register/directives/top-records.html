@@ -76,7 +76,7 @@
         </tbody>
     </table>
     <div ng-if="self.records.Count > 0" style="margin:0 48%">
-        <a translation-url class="btn btn-default btn-xs" ng-href="/register/{{record.type|urlSchemaShortName}}" ng-if="!self.viewAllUrl">View All</a>
+        <a translation-url class="btn btn-default btn-xs" ng-href="/register/{{schema|urlSchemaShortName}}" ng-if="!self.viewAllUrl">View All</a>
         <a translation-url class="btn btn-default btn-xs" ng-href="{{self.viewAllUrl}}" ng-if="self.viewAllUrl">View All</a>
     </div>
 
