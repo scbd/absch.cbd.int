@@ -69,6 +69,8 @@ define(['app', 'underscore', './common-routes', 'js/extended-route-provider','co
 
                whenAsync('/developer',    {templateUrl: 'views/help/developer/developer.html', resolveController: true, resolveUser: true, label:'ABSCH for developers'}).                  
                
+               whenAsync('/register/admin/ircc-counts',              { templateUrl: 'views/register/admin/ircc-counts.html',         label:'IRCC Counts',  param:'true', resolveController: true,resolve : { securized : commonRoutes.securize(['Administrator']) }}).
+
                otherwise({templateUrl: commonRoutes.baseUrl+'views/shared/404.html', label:'404 Error'});
 
     }]);

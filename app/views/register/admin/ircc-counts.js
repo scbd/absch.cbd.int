@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'js/common', 'moment', 'scbd-angularjs-controls', 'scbd-angularjs-services', 
+define(['app', 'lodash', 'js/common', 'moment', 
     'views/register/directives/register-top-menu','chart-js',
     'services/search-service','services/app-config-service',
 ], function (app) {
@@ -112,11 +112,16 @@ define(['app', 'lodash', 'js/common', 'moment', 'scbd-angularjs-controls', 'scbd
                                                             return _.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s);
                                                         }).length
                                     nationalRecords.GrantedTo.foreign = _.filter(data, function(doc){
-                                                            return !_.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s);
+                                                            return doc.entitiesToWhomPICGrantedCountry_EN_ss && !_.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s);
+                                                        }).length;  
+                                    nationalRecords.GrantedTo.both = _.filter(data, function(doc){
+                                                            return doc.entitiesToWhomPICGrantedCountry_EN_ss && doc.entitiesToWhomPICGrantedCountry_EN_ss.length > 1 
+                                                                   && _.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s);
                                                         }).length;                                    
                                     nationalRecords.GrantedTo.confidential       =  count(data, 'entitiesToWhomPICGrantedConfidential_b', true);
                                     nationalRecords.GrantedTo.nonConfidential    =  count(data, 'entitiesToWhomPICGrantedConfidential_b', false);
-                                            
+                                     
+
                                     /////////////////////////////
                                     ///////UsageAndGranted
                                     //////////////////////////////
@@ -129,11 +134,11 @@ define(['app', 'lodash', 'js/common', 'moment', 'scbd-angularjs-controls', 'scbd
                                             && _.includes(doc.usages_EN_ss, 'Non-Commercial');
                                     }).length;            
                                     nationalRecords.UsageAndGranted.commercialForeign = _.filter(data, function(doc){
-                                        return !_.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                        return doc.entitiesToWhomPICGrantedCountry_EN_ss && !_.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
                                                 && _.includes(doc.usages_EN_ss, 'Commercial');
                                     }).length
                                     nationalRecords.UsageAndGranted.nonCommercialForeign = _.filter(data, function(doc){
-                                        return !_.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                        return doc.entitiesToWhomPICGrantedCountry_EN_ss && !_.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
                                             && _.includes(doc.usages_EN_ss, 'Non-Commercial');
                                     }).length;
                                     
@@ -176,7 +181,7 @@ define(['app', 'lodash', 'js/common', 'moment', 'scbd-angularjs-controls', 'scbd
                 }
                 function count(data, field, value){
                     return _.filter(data, function(doc){
-                        return doc[field]==value;
+                        return doc[field]===value;
                     }).length
                 }
                 // 
