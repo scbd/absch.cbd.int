@@ -27,7 +27,7 @@
 					"ag" : JSON.stringify(ag)
 					};
 
-					$q.when($http.get('https://api.cbd.int/api/v2017/articles/search', {params: qs}))
+					$q.when($http.get('https://api.cbd.int/api/v2017/articles', {params: qs}))
 					.then(function(results){
 					if((results||{}).data && results.data.length > 0)
 						$scope.articles = results.data;
