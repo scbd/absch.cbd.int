@@ -56,8 +56,8 @@
 						absPermit					: 'views/forms/view/abs/view-abs-permit.directive',
 						authorityreference			: 'views/forms/view/abs/view-authority-reference.directive',
 						measure						: 'views/forms/view/abs/view-measure.directive',						
-						capacityBuildingInitiative	: 'views/forms/view/abs/view-capacity-building-initiative.directive',
-						capacityBuildingResource	: 'views/forms/view/abs/view-capacity-building-resource.directive',
+						capacityBuildingInitiative	: 'views/forms/view/view-capacity-building-initiative.directive',
+						capacityBuildingResource	: 'views/forms/view/view-capacity-building-resource.directive',
 
 						contact						: 'views/forms/view/view-contact.directive',
 						contactreference			: 'views/forms/view/view-contact-reference.directive',
