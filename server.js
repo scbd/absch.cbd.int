@@ -13,7 +13,7 @@ var proxy   = require('http-proxy').createProxyServer({});
 var app     = express();
 var url     = require('url');
 var cookieParser = require('cookie-parser');
-const rendertron = require('rendertron-middleware');
+// const rendertron = require('rendertron-middleware');
 // Initialize constants
 
 var appVersion = process.env.TAG;
@@ -25,9 +25,9 @@ var oneDay   = 86400000;
 app.set('view engine', 'ejs');
 app.use(cookieParser())
 
-app.use(rendertron.makeMiddleware({
-    proxyUrl: process.env.RENDERTRON_URL || 'http://rendertron:8080/render'
-}));
+// app.use(rendertron.makeMiddleware({
+//     proxyUrl: process.env.RENDERTRON_URL || 'http://rendertron:8080/render'
+// }));
 
 // Set routes
 app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: setCustomCacheControl , maxAge: 86400000*365 }) );
