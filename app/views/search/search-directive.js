@@ -576,7 +576,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                              if(values.length)
                                  q = addANDConditionText(field, values, boost)
                         }
-                        console.log(q);
 
                        return  q ? q : null;
                     }

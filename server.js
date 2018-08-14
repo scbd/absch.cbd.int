@@ -26,7 +26,7 @@ app.set('view engine', 'ejs');
 app.use(cookieParser())
 
 app.use(rendertron.makeMiddleware({
-    proxyUrl: 'http://localhost:7000/render',
+    proxyUrl: process.env.RENDERTRON_URL || 'http://rendertron:8080/render'
 }));
 
 // Set routes
