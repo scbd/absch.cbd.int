@@ -54,7 +54,6 @@ app.controller('printCountryProfile', ['$scope', '$http', '$location', '$sce', '
                         .then(function(results) {
                             $scope.absch_nfp = results[0].data.response.docs;
                             $scope.cpcReceived = results[1].data.response.docs;
-                            console.log(results);
                             $scope.absch_nfp.forEach(function(document) {
                                 document.identifier = document.identifier_s;
                                 if (document.schema_s == "focalPoint") {

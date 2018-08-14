@@ -562,7 +562,6 @@ define(['app', 'underscore', 'views/forms/edit/edit' , 'views/forms/edit/documen
     function getAbsDocuments (government) {
         var natSchemas = appConfigService.nationalSchemas;
         var q  = '(realm_ss:' + realm.value.toLowerCase() + ' ) AND NOT version_s:* AND government_s:'+ government.identifier + " AND schema_s:(" + natSchemas.join(' ') + ")";
-        console.log(q);
         var queryParameters = {
             'query'    : q,
              currentPage : 0,
