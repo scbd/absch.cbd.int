@@ -36,12 +36,9 @@ define(['app', 'socket.io', 'lodash', './authentication', './apiUrl', './utiliti
 
 
             function onConnect() {
-                // console.log(socket);
                 console.log("connected from the client side");
 
                 subscribe('push-notification', function(msg){
-                    console.log(msg);
-
                     if(isJSON(msg)){
                         var message = JSON.parse(msg);
 

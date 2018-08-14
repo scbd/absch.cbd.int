@@ -1,4 +1,4 @@
-define(['angular-flex',  'angular-sanitize', 'angular-loggly-logger'],
+define(['angular-flex',  'angular-sanitize', 'angular-loggly-logger', 'angular-joyride'],
     function(angular, ) { 'use strict';
 
         var app = angular.module('app', angular.defineModules([
