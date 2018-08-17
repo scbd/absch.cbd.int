@@ -1,4 +1,4 @@
-define(['app', 'underscore', "text!views/forms/edit/edit-measure-matrix-directive.html", 
+define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-directive.html", 
 'json!app-data/measure-matrix-updated-title.json', 'json!app-data/measure-matrix-other-elements.json',
 'views/directives/block-region-directive', 'components/scbd-angularjs-services/services/locale'
 ], function (app, _, template, measureMatrixUpdatedTitles, elementsForOthers) {

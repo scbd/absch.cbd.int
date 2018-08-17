@@ -9,7 +9,7 @@ function(app, _, ng) {
         function($rootScope, $scope, storage, roleService, $compile, realm, $q, $routeParams, 
                 $location, $filter, $http, $timeout, toastr, appConfigService, IWorkflows) {
 
-            $scope.nationalSchemas = _.without(appConfigService.nationalSchemas, 'contact');
+            $scope.nationalSchemas = _.without(appConfigService.nationalSchemas, 'contact', 'focalPoint');
             $scope.referenceSchemas = _.without(appConfigService.referenceSchemas, 'capacityBuildingResource');
             $scope.topRecords = {};
             $scope.user = $rootScope.user;
