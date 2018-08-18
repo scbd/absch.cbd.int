@@ -1,5 +1,7 @@
-﻿define(['require', 'app', 'lodash', 'angular-route', 'services/app-config-service', 
-'components/scbd-angularjs-services/filters/scbd-filters'], function (require, app, _) { 'use strict';
+﻿define(['require', 'app', 'lodash', 'angular-route', 
+'services/app-config-service', 'js/services', 'js/filters',
+'components/scbd-angularjs-services/filters/scbd-filters', 
+'components/scbd-angularjs-services/services/main'], function (require, app, _) { 'use strict';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
     
@@ -230,6 +232,10 @@
 
                 return $injector.instantiate(lazyController, locals);
             }];
+        }
+
+        if((route.templateUrl||'').length > 0 && window.appVersion){
+            route.templateUrl += (route.templateUrl.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.appVersion;
         }
 
         this.when(path, route);
