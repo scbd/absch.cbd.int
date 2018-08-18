@@ -1,9 +1,8 @@
-define(['app', 'underscore', './common-routes', 'js/extended-route-provider','components/scbd-angularjs-services/services/main', 'js/services', 'js/filters',
- 'services/app-config-service', 'angular-route', 'services/app-config-service'], function (app, _, commonRoutes) { 'use strict';
+define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
 
     app.value("showHelp", { value : false });
 
-    app.config(['extendedRouteProvider', '$locationProvider', 'realmProvider', function ($routeProvider, $locationProvider, realmProvider) {
+    app.config(['$routeProvider', function ($routeProvider) {
         
         $routeProvider.
                whenAsync('/',                { templateUrl: 'views/home/index.html', label:'ABSCH', resolveController: true, resolveUser : true}).
