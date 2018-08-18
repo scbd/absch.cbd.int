@@ -114,4 +114,7 @@ require.config({
     }
 });
 
+if(window.appTemplate)
+    require([window.appTemplate])
+
 define("_slaask", window._slaask);
