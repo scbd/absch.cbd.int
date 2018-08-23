@@ -186,40 +186,49 @@
                             .map-container-mainbody {
                                 margin-top: 0;
                                 min-height: 150px;
+                                height: 270px!important;
                                 overflow: auto;
                             }
                     
                             .map-container-header {
                                 min-height: 40px;
-                                border-bottom: 1px solid #EEE;
+                                border-bottom: 1px solid #999;
                                 max-height: 80px;
                                 overflow: hidden;
-                                
+                                margin-top:10px;
                             }
                     
                             .map-container-footer {
-                                height: 40px;
+                                height: 0px;
                             }
+
                             .amcharts-chart-div svg{
                                 width:100% !important;
                             }
                             .reduced-height{
                                 height: 230px;
                             }
+                            .table-map  *{
+                                border:none!important;
+
+                            }
                         </style>
                 <!-- <div class="map-filters-bg" ></div> -->
-                <div class="map-container " ng-if="currentCountry" ng-style="{'height': isBCH ? '450px' : '350px'}">
+                <div class="map-container"  ng-style="{'height': isBCH ? '450px' : '350px'}">
                         <div class="map-container-header">
-                            <div class="row col-xs-12" ng-if="currentCountry.code">
-                                <h3 class="custom-title" style="margin-top:10px;margin-bottom:5px;width:60%;display:inline">
-                                    <i class="flag-icon flag-icon-{{currentCountry.exceptionCountry||currentCountry.code.toLowerCase()}}"></i> {{currentCountry.name|lstring}}
+                            <div class="row col-xs-12" >
+                                <h3 class="custom-title" style="margin-top:10px;margin-bottom:5px;width:60%;display:inline" >
+                                    <span ng-if="!currentCountry.code"> National Records </span>
+                                    <i  ng-if="currentCountry.code" class="flag-icon flag-icon-{{currentCountry.exceptionCountry||currentCountry.code.toLowerCase()}}"></i> {{currentCountry.name|lstring}}
                                 </h3>
-                                <span ng-if="(isABS && currentCountry.isNPParty) || (isBCH && currentCountry.isCPParty)"
+
+                                
+                                <!-- <span ng-if="(isABS && currentCountry.isNPParty) || (isBCH && currentCountry.isCPParty)"
                                     style="display:inline;width:35%;text-align:center;background-color: #5F4586;margin:0;padding:0;" class="pull-right party-status">Party</span>
                                 <span ng-if="(isABS && currentCountry.isNPInbetweenParty)"
                                     style="display:inline;width:35%;text-align:center;background-color: #EC971F;margin:0;padding:0;" class="pull-right party-status">Ratified, not yet Party</span>
                                 <span ng-if="(isABS && !currentCountry.isNPParty && !currentCountry.isNPInbetweenParty) || (isBCH && !currentCountry.isCPParty)"
-                                    style="display:inline;width:35%;text-align:center;background-color: #333;margin:0;padding:0;" class="pull-right party-status">Non Party</span>
+                                    style="display:inline;width:35%;text-align:center;background-color: #333;margin:0;padding:0;" class="pull-right party-status">Non Party</span> -->
                             </div>
                         </div>
                         <div class="map-filters-bg map-container-mainbody" ng-class="{'reduced-height':reduceDetailsHeight}">
@@ -234,11 +243,11 @@
                
                         </div>
                         <div class="map-container-footer">
-                            <div ng-if="currentCountry.code"
+                            <!-- <div ng-if="currentCountry.code"
                              style="text-align:center!important;" class="{{currentCountry.code.toLowerCase()=='eh' ? 'hide' : 'show'}}">
                                 <a translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}" class="link btn-primary"
                                     style="text-align:center!important;font-weight:700; cursor:pointer;color:#ffffff;font-size:18px;padding: 6px 6px 6px 6px;margin-bottom:3px;">VIEW COUNTRY PROFILE</a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
             </div>
