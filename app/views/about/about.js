@@ -45,8 +45,8 @@ function (app, _) {
       }
     })
     app.controller("AboutNewController",
-      ["$rootScope", "$scope", "$q", "underscore",'$http','commonjs','smoothScroll', '$element', '$timeout', '$location',
-      function ($rootScope, $scope, $q, _, $http, commonjs, smoothScroll, $element, $timeout, $location) {
+      ["$scope", '$element', '$timeout', '$location',
+      function ($scope, $element, $timeout, $location) {
         
         $timeout(function(){
           $(window).scroll(function() {
