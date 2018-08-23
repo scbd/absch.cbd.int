@@ -68,7 +68,9 @@ function(require, template, app, _) {
         // var lmoDecisions;
         var latlong           = {};
         $scope.isBCH          = realm.is('BCH');
-        $scope.isABS          = realm.is('ABS');        
+        $scope.isABS          = realm.is('ABS');
+        $scope.countryMapScope= $scope;
+
         var exceptionRegionMapping = {
             AI : 'GB', //Anguilla
             AS : 'US', //American Samoa
@@ -169,6 +171,9 @@ function(require, template, app, _) {
                         if($routeParams.code){
                           showCountryDetails({mapObject: { id: $routeParams.code}});
                         }
+                        else{
+                            showCountryDetails({mapObject: {}});
+                        }
             });
           
           // });
@@ -236,44 +241,60 @@ function(require, template, app, _) {
         }
         function showCountryDetails(event) {
 
-          var code = event.mapObject.id;
-          if($scope.currentCountry && $scope.currentCountry.code== code)
-            return;
+            var code = event.mapObject.id;
+            if($scope.currentCountry && $scope.currentCountry.code== code)
+                return;
 
-          if($scope.zoomTo)
-            $location.path('/countries/'+code)
-          // $timeout(function(){
-          //   $scope.currentCountry = undefined;
-          // }, 10);
-
-          if(exceptionRegionMapping[code]){
-            code = exceptionRegionMapping[code];
-          }
-          $q.when(countryFacets(code.toLowerCase()), function(facets){
-            $timeout(function(){    
-              $scope.currentCountry = _.extend(countries[code], facets);
-              console.log($scope.currentCountry)       
-            },100)
-          })
-          console.log(code);
+            if($scope.zoomTo)
+                $location.path('/countries/'+code)
+          
+            if(exceptionRegionMapping[code]){
+                code = exceptionRegionMapping[code];
+            }
+            $q.when(countryFacets((code ? code.toLowerCase() : code)), function(facets){
+                $scope.currentCountry = undefined;
+                $timeout(function(){
+                    $scope.reduceDetailsHeight = false;
+                    if(code){
+                        $scope.currentCountry = _.extend(countries[code], facets);
+                        if(($scope.currentCountry.name[locale]||'').length > 25)
+                            $scope.reduceDetailsHeight = true;
+                        return;
+                    }
+                    
+                    $scope.currentCountry = { schemas : facets };
+                    
+                },100)
+            });
          
         }
         function countryFacets(code){
           return $q.when(searchService.governmentSchemaFacets(code))
-                  .then(function(countryFacets) {                      
-                      return normalizeFacets(((countryFacets||{}).schemas||{}));
+                  .then(function(countryFacets) { 
+                    if(code)                     
+                        return normalizeFacets(((countryFacets||{}).schemas||{}));
+
+                    //loop array for global facets
+                    var facets = {};
+                    _.each(countryFacets, function(countrySchema){
+                        normalizeFacets(((countrySchema||{}).schemas||{}), facets)
+                    })
+                    return facets;
                   });
         }
 
-        function normalizeFacets(country){
-          var facets = {};
+        function normalizeFacets(countrySchemas, facets){
+          if(!facets)
+            facets = {};
 
           _.each(realm.schemas, function(schema, key){
-            if(schema.type=='national'){
+            if(schema.type=='national' && key!=='contact'){
 
-              if(country[key])
-                facets[schema.shortCode] = _.extend(schema, {count:country[key]});
-              else
+            var prevCount = (facets[schema.shortCode]||{}).count||0;
+              if(countrySchemas[key]){
+                facets[schema.shortCode] = _.extend(schema, {count:countrySchemas[key] + prevCount});
+              }
+              else if(prevCount==0)
                 facets[schema.shortCode] = _.extend(schema, {count:0});
             }
           }); 
