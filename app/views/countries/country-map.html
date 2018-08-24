@@ -212,6 +212,10 @@
                                 border:none!important;
 
                             }
+                            .custom-title{
+                                font-size: 20px!important;
+                                font-weight: bold;
+                            }
                         </style>
                 <!-- <div class="map-filters-bg" ></div> -->
                 <div class="map-container"  ng-style="{'height': isBCH ? '450px' : '350px'}">
@@ -219,7 +223,8 @@
                             <div class="row col-xs-12" >
                                 <h3 class="custom-title" style="margin-top:10px;margin-bottom:5px;width:60%;display:inline" >
                                     <span ng-if="!currentCountry.code"> National Records </span>
-                                    <i  ng-if="currentCountry.code" class="flag-icon flag-icon-{{currentCountry.exceptionCountry||currentCountry.code.toLowerCase()}}"></i> {{currentCountry.name|lstring}}
+                                    <i  ng-if="currentCountry.code" class="flag-icon flag-icon-{{currentCountry.exceptionCountry||currentCountry.code.toLowerCase()}}"></i>
+                                    {{currentCountry.name|lstring}}
                                 </h3>
 
                                 
