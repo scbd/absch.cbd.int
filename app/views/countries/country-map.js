@@ -245,11 +245,16 @@ function(require, template, app, _) {
             if($scope.currentCountry && $scope.currentCountry.code== code)
                 return;
 
-            if($scope.zoomTo)
-                $location.path('/countries/'+code)
           
             if(exceptionRegionMapping[code]){
                 code = exceptionRegionMapping[code];
+            }
+
+            if($scope.zoomTo){
+                if($routeParams.schema)
+                    $location.path('/countries/'+code+'/'+$routeParams.schema)
+                else
+                    $location.path('/countries/'+code)
             }
             $q.when(countryFacets((code ? code.toLowerCase() : code)), function(facets){
                 $scope.currentCountry = undefined;
@@ -259,10 +264,17 @@ function(require, template, app, _) {
                         $scope.currentCountry = _.extend(countries[code], facets);
                         if(($scope.currentCountry.name[locale]||'').length > 25)
                             $scope.reduceDetailsHeight = true;
+                       
+                        if(($scope.currentCountry.exceptionCountry||'').toLowerCase()=='gb' || ($scope.currentCountry.code||'').toLowerCase() == 'gb'){
+                            $timeout(function(){
+                                $element.find('[data-toggle="tooltip"]').tooltip(); 
+                            },300)
+                        }
                         return;
                     }
                     
                     $scope.currentCountry = { schemas : facets };
+                    
                     
                 },100)
             });

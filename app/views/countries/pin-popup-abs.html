@@ -9,7 +9,7 @@
              >Not a Party to the Nagoya Protocol</span>
     </div>
 
-    <div class="row"
+    <div class="row abs-exception-tooltip"
     ng-if="country.exceptionCountry=='dk'||country.code.toLowerCase()=='dk'||
             country.code.toLowerCase()=='fk'||country.code.toLowerCase()=='eh'||
             country.exceptionCountry=='gb'||country.code.toLowerCase()=='gb'">
@@ -29,7 +29,7 @@
                 The UK’s ratification of the Nagoya Protocol does not extend to the
                 <a ng-href="#"  class=" color-litegrey gb-territories" data-toggle="tooltip" data-placement="bottom" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Gibraltar; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands">14 Overseas Territories </a>
                 or
-                <a ng-href="#" class=" color-litegrey gb-territories" data-toggle="tooltip" data-placement="bottom" title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
+                <a ng-href="#" class=" color-litegrey gb-territories" data-toggle="tooltip" data-placement="right" title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
             </div>
         </div>
     </div>
@@ -40,7 +40,14 @@
                 <td >
                     <span class="badge bg-black">{{schema.count}}</span>
                 </td>
-                <td>{{schema.title | lstring:locale}}</td>
+                <td>
+                    <a ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff">
+                        {{schema.title | lstring:locale}}
+                    </a>
+                    <a ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search/nationalRecords"  style="color:#fff">
+                        {{schema.title | lstring:locale}}
+                    </a>
+                </td>
             </tr>
         </table>
     </div>

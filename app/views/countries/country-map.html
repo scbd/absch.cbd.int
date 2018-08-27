@@ -221,19 +221,17 @@
                 <div class="map-container"  ng-style="{'height': isBCH ? '450px' : '350px'}">
                         <div class="map-container-header">
                             <div class="row col-xs-12" >
-                                <h3 class="custom-title" style="margin-top:10px;margin-bottom:5px;width:60%;display:inline" >
-                                    <span ng-if="!currentCountry.code"> National Records </span>
-                                    <i  ng-if="currentCountry.code" class="flag-icon flag-icon-{{currentCountry.exceptionCountry||currentCountry.code.toLowerCase()}}"></i>
-                                    {{currentCountry.name|lstring}}
+                                
+                                <h3 class="custom-title" style="margin-top:10px;margin-bottom:5px;width:60%;display:inline;" >
+                                    <a ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search/nationalRecords" style="color:#fff">
+                                        <span ng-if="!currentCountry.code"> National Records </span>
+                                    </a>
+                                    <a ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}"  style="color:#fff">
+                                        <i  class="flag-icon flag-icon-{{currentCountry.exceptionCountry||currentCountry.code.toLowerCase()}}"></i> 
+                                        {{currentCountry.name|lstring}}
+                                    </a>
                                 </h3>
 
-                                
-                                <!-- <span ng-if="(isABS && currentCountry.isNPParty) || (isBCH && currentCountry.isCPParty)"
-                                    style="display:inline;width:35%;text-align:center;background-color: #5F4586;margin:0;padding:0;" class="pull-right party-status">Party</span>
-                                <span ng-if="(isABS && currentCountry.isNPInbetweenParty)"
-                                    style="display:inline;width:35%;text-align:center;background-color: #EC971F;margin:0;padding:0;" class="pull-right party-status">Ratified, not yet Party</span>
-                                <span ng-if="(isABS && !currentCountry.isNPParty && !currentCountry.isNPInbetweenParty) || (isBCH && !currentCountry.isCPParty)"
-                                    style="display:inline;width:35%;text-align:center;background-color: #333;margin:0;padding:0;" class="pull-right party-status">Non Party</span> -->
                             </div>
                         </div>
                         <div class="map-filters-bg map-container-mainbody" ng-class="{'reduced-height':reduceDetailsHeight}">
@@ -248,11 +246,6 @@
                
                         </div>
                         <div class="map-container-footer">
-                            <!-- <div ng-if="currentCountry.code"
-                             style="text-align:center!important;" class="{{currentCountry.code.toLowerCase()=='eh' ? 'hide' : 'show'}}">
-                                <a translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}" class="link btn-primary"
-                                    style="text-align:center!important;font-weight:700; cursor:pointer;color:#ffffff;font-size:18px;padding: 6px 6px 6px 6px;margin-bottom:3px;">VIEW COUNTRY PROFILE</a>
-                            </div> -->
                         </div>
                     </div>
             </div>
