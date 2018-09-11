@@ -1,7 +1,7 @@
 define(['app', 'underscore', './app-config-service'], function (app, _) { 'use strict';
 
-	app.factory('roleService',  ["$http","$location", "$rootScope", "appConfigService",
-	 function($http,$location, $rootScope, appConfigService) {
+	app.factory('roleService',  ["$http","$location", "$rootScope", "realm",
+	 function($http,$location, $rootScope, realm) {
 
 		return new function(){
 
@@ -22,34 +22,34 @@ define(['app', 'underscore', './app-config-service'], function (app, _) { 'use s
 			};
 
 			this.is = function(role) {
-				return this.isUserInRole(appConfigService.getRoleName(role));
+				return this.isUserInRole(realm.getRole(role));
 			}
 			
 			this.isIAC = function() {
-				return this.isUserInRoles(appConfigService.getRoleName('iac'));
+				return this.isUserInRoles(realm.getRole('iac'));
 			}
 
 			this.isAdministrator = function() {
-				return this.isUserInRoles(appConfigService.getRoleName('administrator'));
+				return this.isUserInRoles(realm.getRole('administrator'));
 			}
 			this.isAbsAdministrator = function() {
-				return this.isUserInRoles(appConfigService.getRoleName('administrator'));
+				return this.isUserInRoles(realm.getRole('administrator'));
 			}
 
 			this.isAbsPublishingAuthority = function() {
-				return this.isUserInRoles(appConfigService.getRoleName('publishingAuthorities'));
+				return this.isUserInRoles(realm.getRole('publishingAuthorities'));
 			}
 			this.isAbsNationalAuthorizedUser = function() {
-				return this.isUserInRole(appConfigService.getRoleName('nationalAuthorizedUser'));
+				return this.isUserInRole(realm.getRole('nationalAuthorizedUser'));
 			}
 
 			this.isAbsNationalFocalPoint = function() {
-				return this.isUserInRoles(appConfigService.getRoleName('nationalFocalPoint'));
+				return this.isUserInRoles(realm.getRole('nationalFocalPoint'));
 			}
 
 			this.isUser = function() {
 				return this.isUserInRole(['User']);
-					//appConfigService.getRoleName('User'));
+					//realm.getRole('User'));
 			}
 
 			this.isAnyOtherRoleThanIAC = function() {

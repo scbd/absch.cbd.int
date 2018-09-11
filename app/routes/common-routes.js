@@ -110,8 +110,8 @@
     //============================================================
     function securize(roleList, useNationalRoles, checkEmailVerified)
     {
-        return ["$location", "authentication", "appConfigService", "$filter", "$route",
-         function ($location, authentication, appConfigService, $filter, $route) {
+        return ["$location", "authentication", "appConfigService", "$filter", "$route", "realm",
+         function ($location, authentication, appConfigService, $filter, $route, realm) {
 
             return authentication.getUser().then(function (user) {
 
@@ -123,7 +123,7 @@
                 var roles = _.clone(roleList||[]);
 
                 if (roles && !_.isEmpty(roles)) {
-                    roles = _.flatten(_.map(roles, appConfigService.getRoleName));
+                    roles = _.flatten(_.map(roles, realm.getRole));
                 }
                 if(useNationalRoles){
                     var path = $location.$$url.replace('/register/','');
@@ -135,8 +135,8 @@
                         schema = path;
 
                     var schemaName = $filter('mapSchema')(schema);
-                    if(!_.contains(_.union(['contact'], appConfigService.referenceSchemas), schemaName))
-                        roles = (roles || []).concat(appConfigService.nationalRoles());
+                    if(!_.contains(_.union(['contact'], realm.referenceSchemas), schemaName))
+                        roles = (roles || []).concat(realm.nationalRoles());
                 }
                 if (!user.isAuthenticated) {
 
