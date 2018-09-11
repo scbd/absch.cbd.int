@@ -581,7 +581,7 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
                 function documentPublishRequested(documentInfo, workflowId) {
 
                     if(_.contains(appConfigService.referenceSchemas, documentInfo.header.schema)){
-                        toastr.info('Record saved. A publishing request has been sent to your SCBD.');
+                        toastr.info('Record saved. A publishing request has been sent to SCBD.');
                     }
                     else
                         toastr.info('Record saved. A publishing request has been sent to your Publishing Authority.');

@@ -87,8 +87,8 @@ define(['app', 'views/forms/edit/edit',
 
             //document = angular.fromJson(angular.toJson(document));
 
-            if (!$scope.isSubNational(document) && !$scope.isCommunity(document) && !$scope.isOthers(document)) {
-                document.jurisdictionName = undefined;
+            if (document.jurisdiction && !$scope.isSubNational(document) && !$scope.isCommunity(document) && !$scope.isOthers(document)) {
+                document.jurisdiction.customValue = undefined;
             }
         
 

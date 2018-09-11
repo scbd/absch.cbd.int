@@ -504,7 +504,7 @@ define([
       var qs = {
         "ag" : JSON.stringify(ag)
       };
-      $q.when($http.get('https://api.cbd.int/api/v2017/articles', {params: qs}))
+      $q.when($http.get('https://api.cbd.int/api/v2017/articles', {params: qs, cache:true}))
       .then(function(results){
         if((results||{}).data && results.data.length > 0)
           $scope.article = results.data[0];

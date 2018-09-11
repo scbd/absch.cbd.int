@@ -648,7 +648,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     var ag = [];
                     ag.push({"$match":{"adminTags.title.en": { "$all" :
                         [   encodeURIComponent('edit-form'), encodeURIComponent(realm.value),
-                            encodeURIComponent(schema)]}}
+                            encodeURIComponent($filter("urlSchemaShortName")(document_type))]}}
                     });
                     ag.push({"$project" : {"title":1, "content":1}});
                     
