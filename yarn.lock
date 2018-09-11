@@ -18,21 +18,21 @@
   version "1.0.0"
   resolved "https://codeload.github.com/darylrowland/angucomplete/tar.gz/3bf6ab2da56d514c22800f9dbdfeced66cff03f4"
 
-"@bower_components/angular-animate@angular/bower-angular-animate#1.4":
-  version "1.4.14"
-  resolved "https://codeload.github.com/angular/bower-angular-animate/tar.gz/e7f778fc054a086ba3326d898a00fa1bc78650a8"
+"@bower_components/angular-animate@angular/bower-angular-animate#1.5":
+  version "1.5.11"
+  resolved "https://codeload.github.com/angular/bower-angular-animate/tar.gz/ac17971fdc62d7ea816a079401084e6da2af3e3e"
 
-"@bower_components/angular-aria@angular/bower-angular-aria#1.4":
-  version "1.4.14"
-  resolved "https://codeload.github.com/angular/bower-angular-aria/tar.gz/04f1f5982d8974fcc9914d62f9958661227b139b"
+"@bower_components/angular-aria@angular/bower-angular-aria#1.5":
+  version "1.5.11"
+  resolved "https://codeload.github.com/angular/bower-angular-aria/tar.gz/a90418459eb67c49673de35ca4c313fe8a07942e"
 
 "@bower_components/angular-block-ui@McNull/angular-block-ui#0.2.2":
   version "0.2.2"
   resolved "https://codeload.github.com/McNull/angular-block-ui/tar.gz/0d01eee67a6f8b0fd6beeaf16f950d1870842702"
 
-"@bower_components/angular-cookies@angular/bower-angular-cookies#1.4":
-  version "1.4.14"
-  resolved "https://codeload.github.com/angular/bower-angular-cookies/tar.gz/2de9bf5ebbf9b2ff4c3842204c2381b6311d4a80"
+"@bower_components/angular-cookies@angular/bower-angular-cookies#1.5":
+  version "1.5.11"
+  resolved "https://codeload.github.com/angular/bower-angular-cookies/tar.gz/a443bb1d7edc1688acf8d820932f27b4b19b89bc"
 
 "@bower_components/angular-flex@scbd/angular-flex.git":
   version "2.0.0"
@@ -73,13 +73,13 @@
   version "1.5.6"
   resolved "https://codeload.github.com/angular/bower-angular-mocks/tar.gz/20b2794ac1d7bace5925c9e5a33d8e3264c9d120"
 
-"@bower_components/angular-route@angular/bower-angular-route#1.4":
-  version "1.4.14"
-  resolved "https://codeload.github.com/angular/bower-angular-route/tar.gz/785dd6ff64784a33840ab4535503f3f576e78751"
+"@bower_components/angular-route@angular/bower-angular-route#1.5":
+  version "1.5.11"
+  resolved "https://codeload.github.com/angular/bower-angular-route/tar.gz/cdb9db456ece8b3f80a638bb7bd69dc2dcd4eee9"
 
-"@bower_components/angular-sanitize@angular/bower-angular-sanitize#1.4":
-  version "1.4.14"
-  resolved "https://codeload.github.com/angular/bower-angular-sanitize/tar.gz/59e924f5265b4b81978b624582d5d322f344262d"
+"@bower_components/angular-sanitize@angular/bower-angular-sanitize#1.5":
+  version "1.5.11"
+  resolved "https://codeload.github.com/angular/bower-angular-sanitize/tar.gz/84df06c4ec4f1eef7f9d0b849b9fdf5433c2669c"
 
 "@bower_components/angular-toastr@Foxandxss/angular-toastr#1.5.0":
   version "1.5.0"
@@ -92,9 +92,9 @@
     angular ">=1.2.0"
     trix latest
 
-"@bower_components/angular@angular/bower-angular#1.4.9":
-  version "1.4.9"
-  resolved "https://codeload.github.com/angular/bower-angular/tar.gz/a69eba562dc18df13f27ca0274c90ee26c29004e"
+"@bower_components/angular@angular/bower-angular#1.5":
+  version "1.5.11"
+  resolved "https://codeload.github.com/angular/bower-angular/tar.gz/0f57428c3ffe2f486264ab7fbee3968dccc7b720"
 
 "@bower_components/angulartics-google-analytics@angulartics/angulartics-google-analytics#0.3.0":
   version "0.3.0"
@@ -129,6 +129,15 @@
 "@bower_components/bootstrap@twbs/bootstrap#3.3.7":
   version "3.3.7"
   resolved "https://codeload.github.com/twbs/bootstrap/tar.gz/0b9c4a4007c44201dce9a6cc1a38407005c26c86"
+
+"@bower_components/cbd-forums@scbd/forums#1.2.9":
+  version "1.2.9"
+  resolved "https://codeload.github.com/scbd/forums/tar.gz/c75f4aa8df2a7e89e7f3d1b18038710f6f09e881"
+  dependencies:
+    angular "~1.2.18"
+    bootstrap "~3.1"
+    jquery "~2.0.3"
+    underscore "~1.7.0"
 
 "@bower_components/diacritic@Nijikokun/Diacritics.js#0.0.3":
   version "0.0.3"
@@ -314,6 +323,10 @@ angular@>=1.2.0, angular@^1.5.6:
   version "1.7.4"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.4.tgz#c1bf4884c2d470c06907737a1bf0835a9f646f31"
 
+angular@~1.2.18:
+  version "1.2.32"
+  resolved "http://registry.npmjs.org/angular/-/angular-1.2.32.tgz#df52625a5167919931418dda3a9208b9f5fa3db4"
+
 array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
@@ -368,6 +381,10 @@ body-parser@1.18.2:
 bootstrap@^3.3.4:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
+
+bootstrap@~3.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.1.1.tgz#17e14ed261c0fcd9b52ea9aa6420f6d51cd5fa77"
 
 buffer-from@^1.0.0:
   version "1.1.1"
@@ -726,6 +743,10 @@ jquery@~1.11:
   version "1.11.3"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.11.3.tgz#dd8b74278b27102d29df63eae28308a8cfa1b583"
 
+jquery@~2.0.3:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-2.2.4.tgz#2c89d6889b5eac522a7eea32c14521559c6cbf02"
+
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
@@ -1021,6 +1042,10 @@ type-is@~1.6.15, type-is@~1.6.16:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
+
+underscore@~1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.7.0.tgz#6bbaf0877500d36be34ecaa584e0db9fef035209"
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"

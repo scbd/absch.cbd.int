@@ -32,8 +32,8 @@ app.use(cookieParser())
 // Set routes
 app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: setCustomCacheControl , maxAge: 86400000*365 }) );
 
-app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',     translation, express.static(__dirname + '/app', { setHeaders: setCustomCacheControl }));
-app.use('/app/libs',      express.static(__dirname + '/node_modules/@bower_components', { setHeaders: setCustomCacheControl }));
+app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: setCustomCacheControl }));
+app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',          translation, express.static(__dirname + '/app', { setHeaders: setCustomCacheControl }));
 
 app.use('/cbd-forums',      express.static(__dirname + '/app/libs/cbd-forums', { setHeaders: setCustomCacheControl }));
 app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: setCustomCacheControl , maxAge: oneDay }));

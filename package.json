@@ -12,7 +12,8 @@
     "rendertron-middleware" : "0.1.2",
     "@bower_components/angular-flex": "scbd/angular-flex.git",
     "@bower_components/angular-loggly-logger": "scbd/angular-loggly-logger#2c67428b49951e18bd03cbdd4834d939ba8fba74",
-    "@bower_components/ngstorage": "gsklee/ngStorage#0.3.11"
+    "@bower_components/ngstorage": "gsklee/ngStorage#0.3.11",
+    "@bower_components/cbd-forums": "scbd/forums#1.2.9"
     
   },
 
@@ -21,11 +22,11 @@
     "@bower_components/SHA-1": "linkgod/SHA-1",
     "@bower_components/ammap3": "amcharts/ammap3#3.21.6",
     "@bower_components/angucomplete": "darylrowland/angucomplete#3bf6ab2da56d514c22800f9dbdfeced66cff03f4",
-    "@bower_components/angular": "angular/bower-angular#1.4.9",
-    "@bower_components/angular-animate": "angular/bower-angular-animate#1.4",
-    "@bower_components/angular-aria": "angular/bower-angular-aria#1.4",
+    "@bower_components/angular": "angular/bower-angular#1.5",
+    "@bower_components/angular-animate": "angular/bower-angular-animate#1.5",
+    "@bower_components/angular-aria": "angular/bower-angular-aria#1.5",
     "@bower_components/angular-block-ui": "McNull/angular-block-ui#0.2.2",
-    "@bower_components/angular-cookies": "angular/bower-angular-cookies#1.4",
+    "@bower_components/angular-cookies": "angular/bower-angular-cookies#1.5",
     "@bower_components/angular-flex": "scbd/angular-flex.git",
     "@bower_components/angular-gravatar": "wallin/angular-gravatar#0.4.2",
     "@bower_components/angular-intro.js": "mendhak/angular-intro.js#1.2.4",
@@ -35,8 +36,8 @@
     "@bower_components/angular-loggly-logger": "scbd/angular-loggly-logger#2c67428b49951e18bd03cbdd4834d939ba8fba74",
     "@bower_components/angular-material": "angular/bower-material#0.9.8",
     "@bower_components/angular-mocks": "angular/bower-angular-mocks#1.5.6",
-    "@bower_components/angular-route": "angular/bower-angular-route#1.4",
-    "@bower_components/angular-sanitize": "angular/bower-angular-sanitize#1.4",
+    "@bower_components/angular-route": "angular/bower-angular-route#1.5",
+    "@bower_components/angular-sanitize": "angular/bower-angular-sanitize#1.5",
     "@bower_components/angular-toastr": "Foxandxss/angular-toastr#1.5.0",
     "@bower_components/angular-trix": "sachinchoolur/angular-trix#1.0.2",
     "@bower_components/angulartics": "angulartics/angulartics#1.0.0",

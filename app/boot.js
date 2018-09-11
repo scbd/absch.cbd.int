@@ -7,7 +7,7 @@ require.config({
     waitSeconds: 120,
     baseUrl : (window.lang||'')+'app/',
     'paths': {
-        'angular'                   : cdnHost + 'angular@1.4.14/angular.min',
+        'angular'                   : cdnHost + 'angular@1.5/angular.min',
         'angular-route'             : cdnHost + 'angular-route@1.4.14/angular-route.min',
         'angular-cookies'           : cdnHost + 'angular-cookies@1.4.14/angular-cookies.min',
         'angular-sanitize'          : cdnHost + 'angular-sanitize@1.4.14/angular-sanitize.min',
