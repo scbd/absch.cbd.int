@@ -42,7 +42,7 @@ require.config({
         'webui-popover'             : cdnHost + 'webui-popover@1.2.15/dist/jquery.webui-popover.min',
         'chart-js'                  : cdnHost + 'chart@1.1.1/Chart.min',
         'printThis'                 : cdnHost + 'print-this@1.9.0/printThis',
-        'diacritics'                : cdnHost + 'diacritics@0.0.5/diacritics',
+        'diacritics'                : cdnHost + 'diacritics@0.0.5/index',
         'pdfjs-dist/build/pdf'      : cdnHost + 'pdfjs-dist@2.0.489/build/pdf.min',
        'pdfjs-dist/build/pdf.worker': cdnHost + 'pdfjs-dist@2.0.489/build/pdf.worker.min ',       
         'pdf-object'                : cdnHost + 'pdfobject@2.0.201604172/pdfobject.min',
