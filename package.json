@@ -8,7 +8,7 @@
     "ejs"                   : "2.5.5",
     "express"               : "4.16.3",
     "http-proxy"            : "1.13.2",
-    "lodash"                : "4.17.0",
+    "lodash"                : "4.17.5",
     "rendertron-middleware" : "0.1.2",
     "@bower_components/angular-flex": "scbd/angular-flex.git",
     "@bower_components/angular-loggly-logger": "scbd/angular-loggly-logger#2c67428b49951e18bd03cbdd4834d939ba8fba74",
