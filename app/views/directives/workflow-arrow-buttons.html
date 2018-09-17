@@ -134,7 +134,7 @@
         </div>
     </div>
     
-   <div ng-show="tab=='intro'" km-tab="intro">
+   <div ng-if="tab=='intro'" km-tab="intro">
         <div ng-transclude="introForm">
             <i ng-if="tab=='intro' && loading" class="fa fa-spinner fa-spin"></i>
             <h3>{{article.title|lstring}}</h3>

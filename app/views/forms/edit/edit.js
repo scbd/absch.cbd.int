@@ -408,8 +408,7 @@ define([
             $scope.startTour=true;
             $location.search("tour", null);
         }
-        $scope.article = [];
-        loadArticle(doc.header.schema);
+        
         $scope.$emit("loadDocument", {identifier:doc.header.identifier,schema:doc.header.schema});
 
         $scope.status = "ready";
@@ -494,22 +493,6 @@ define([
         if($scope.tab == "review")
           validate();
     })
-
-
-    function loadArticle(schema){
-      var ag = [];
-      ag.push({"$match":{"$and":[{"customTags.title.en":encodeURIComponent(schema)}]}});
-      ag.push({"$project" : {"title":1, "content":1}});
-      
-      var qs = {
-        "ag" : JSON.stringify(ag)
-      };
-      $q.when($http.get('https://api.cbd.int/api/v2017/articles', {params: qs, cache:true}))
-      .then(function(results){
-        if((results||{}).data && results.data.length > 0)
-          $scope.article = results.data[0];
-      })
-    }
 
   }]);
 });

@@ -509,6 +509,9 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 });
 
                 $scope.switchTab = function(tab){
+                    if(tab==$scope.tab)
+                        return;
+                        
                     $scope.tab = tab;
 
                     if(tab == "review" || tab == "edit" || tab == "intro" || tab == "publish")
