@@ -40,7 +40,7 @@ require.config({
         'xlsx'                      : cdnHost + 'xlsx@0.13.4/dist/xlsx.min',
         'jszip'                     : cdnHost + 'jszip@3.1.5/dist/jszip.min',
         'webui-popover'             : cdnHost + 'webui-popover@1.2.15/dist/jquery.webui-popover.min',
-        'chart-js'                  : cdnHost + 'chart@1.1.1/Chart.min',
+        'chart-js'                  : cdnHost + 'chart.js@1.1.1/Chart.min',
         'printThis'                 : cdnHost + 'print-this@1.9.0/printThis',
         'diacritics'                : cdnHost + 'diacritics@0.0.5/index',
         'pdfjs-dist/build/pdf'      : cdnHost + 'pdfjs-dist@2.0.489/build/pdf.min',

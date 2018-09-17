@@ -81,13 +81,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                     $scope.rawDocs = [];
                     $scope.refDocs = [];
                     $scope.scbdDocs = [];
-                    var natSchemas = _.clone(appConfigService.nationalSchemas);
-                    //remove contact from national schema list for search
-                    if(natSchemas.indexOf('contact')>=0){
-                        natSchemas.splice(natSchemas.indexOf('contact'), 1);
-                    }
+                    var natSchemas = _.without(appConfigService.nationalSchemas, "contact");
+                   
                     //[ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint", "absNationalReport"];
-                    var refSchemas = appConfigService.referenceSchemas;
+                    var refSchemas = _.without(appConfigService.referenceSchemas, "organization");
                     var scbdSchemas = appConfigService.scbdSchemas;
                     
                     $scope.currentTab = "nationalRecords";
