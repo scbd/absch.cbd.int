@@ -1,14 +1,10 @@
-define(['app',
-'js/common',"text!views/forms/edit/document-selector.html",
-'underscore',
-'views/directives/search-filter-dates.partial',
-'views/search/search-results/result-default',
-'services/search-service',
-'services/app-config-service', 'ngDialog'
-], function (app, commonjs, template, _) { // jshint ignore:line
+define(['app',"text!views/forms/edit/document-selector.html",
+'underscore','js/common', 'views/directives/search-filter-dates.partial',
+'views/search/search-results/result-default', 'services/search-service','services/app-config-service', 'ngDialog'
+], function (app, template, _) { // jshint ignore:line
 
-app.directive("documentSelector", ["$http",'$rootScope', "$filter", "$q", "searchService", "appConfigService", "IStorage", 'ngDialog', 'commonjs',
-function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStorage, ngDialog, commonjs) {
+app.directive("documentSelector", ["$http",'$rootScope', "$filter", "$q", "searchService", "appConfigService", "IStorage", 'ngDialog', 'commonjs','$compile',
+function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStorage, ngDialog, commonjs, $compile) {
 
 	return {
 		restrict   : "EA",
@@ -263,8 +259,8 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
            //==================================
             //
             //==================================
-            function load() {
-                if(!$scope.rawDocuments || _.isEmpty($scope.rawDocuments))
+            function load(refresh) {
+                if(refresh || !$scope.rawDocuments || _.isEmpty($scope.rawDocuments))
                 {
                     return getDocs();                    
                 }
@@ -287,14 +283,14 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             //
             //==================================
 			$scope.openAddDialog = function(){
-
+                $scope.addNewContact = false;
                 ngDialog.open({
                     template: 'documentSelectionModal',
                     closeByDocument: false,
                     scope: $scope
                 });
 
-                 $q.when(load())
+                 $q.when(load(true))
                     .then(function (){                        
                         //$scope.syncDocuments();
                         _.forEach($scope.rawDocuments.docs, function (doc) {
@@ -333,7 +329,34 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             $scope.closeDialog = function () {
                 $scope.syncDocuments();
                 ngDialog.close();
+                $('body').removeClass('modal-open')
             };
+
+            $scope.loadContactDirective = function(){
+
+                $scope.addNewContact = true;
+                require(['views/forms/edit/directives/edit-contact.directive'], function(){
+                    
+                    var directiveHtml = "<DIRECTIVE on-post-publish='onNewContactPublish(data)' link-target={{linkTarget}} locales='locales'></DIRECTIVE>"
+                            .replace(/DIRECTIVE/g, 'edit-contact');
+                    $scope.$apply(function () {
+                        $('#divNewContact').empty().append($compile(directiveHtml)($scope));
+                    });
+                })
+            }
+
+            $scope.onNewContactPublish = function(data){
+                
+                if(!$scope.rawDocuments.docs)
+                    $scope.rawDocuments.docs = [];
+                
+                $scope.rawDocuments.docs.push({                   
+                    _revision_i: 1,
+                    identifier_s: data.identifier,__checked : true
+                })
+                $scope.saveDocuments();
+            }
+
 			function removeRevisonNumber(identifier){
                 
                 if(identifier.indexOf('@')>=0)

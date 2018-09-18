@@ -19,7 +19,17 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
     		scope: {
     			getDocumentFn : '&document',
                 languages     : '=languages',
-                tab           : '=?'
+                tab           : '=?',
+                onPreCloseFn      : "&onPreClose",
+				onPostCloseFn     : "&onPostClose",
+				onPreRevertFn     : "&onPreRevert",
+				onPostRevertFn    : "&onPostRevert",
+				onPreSaveDraftFn  : "&onPreSaveDraft",
+				onPostSaveDraftFn : "&onPostSaveDraft",
+				onPrePublishFn    : "&onPrePublish",
+				onPostPublishFn   : "&onPostPublish",
+                onErrorFn: "&onError",
+                validationReport    : '=?'
     		},
             controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",
             '$element', 'toastr', '$location', '$filter', '$routeParams', 
@@ -226,7 +236,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 						var validationReport = validation;
 						//Has validation errors ?
 						if(validationReport && validationReport.errors && validationReport.errors.length>0) {
-                            $scope.$emit("documentInvalid", validationReport);
+                            // $scope.$emit("documentInvalid", validationReport);
+                            $scope.tab = "review";
                             $scope.validationReport = validationReport;
                         }
                     }).catch(function(error){
@@ -255,9 +266,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
 						//Has validation errors ?
 						if(validationReport && validationReport.errors && validationReport.errors.length>0) {
-
-                            $scope.$emit("documentInvalid", validationReport);
                             $scope.validationReport = validationReport;
+                            $scope.tab = "review";
 						}
 						else {
 
@@ -291,6 +301,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                                 $('form').filter('.dirty').removeClass('dirty');
     							documentPublished(document, documentInfo._id);
                                 $scope.$emit("updateOrignalDocument", document);
+
+                                $scope.onPostPublishFn({ data: documentInfo });
     							return documentInfo;
 
     						});
@@ -325,7 +337,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 						//Has validation errors ?
 						if(validationReport && validationReport.errors && validationReport.errors.length>0) {
 
-							$scope.$emit("documentInvalid", validationReport);
+                            $scope.$emit("documentInvalid", validationReport);
+                            $scope.tab = "review";
 						}
 						else{
 
@@ -371,6 +384,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				//====================
 				$scope.saveDraft = function()
 				{
+                    $scope.tab = 'edit';
 					$scope.loading = true;
                     $scope.validationReport = {clearErrors:[]};
 					return $q.when($scope.getDocumentFn()).then(function(document)
@@ -511,7 +525,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 $scope.switchTab = function(tab){
                     if(tab==$scope.tab)
                         return;
-                        
+
                     $scope.tab = tab;
 
                     if(tab == "review" || tab == "edit" || tab == "intro" || tab == "publish")

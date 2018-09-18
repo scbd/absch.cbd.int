@@ -94,7 +94,7 @@
                                         <div class="km-control-group" name="contactsOrLinks" caption="5. Where should applications for access be made?">
                                             <div class="indent help-info"> Please provide relevant contacts or links. </div>
                                             <div class="indent">
-                                                <div document-selector ng-model="document.contacts" question="contacts" government="document.government" schema="(authority contact)"></div>
+                                                <div document-selector ng-model="document.contacts" question="contacts" government="document.government" schema="(authority contact)" locales="document.header.languages"></div>
                                                 <br/>
                                                 <div km-link name="appDocsLinks" ng-model="document.appDocsLinks" identifier="document.header.identifier"></div>
 

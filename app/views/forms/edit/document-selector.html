@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="modal-body">
-                <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new">
+                <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new" ng-hide="addNewContact">
                     <div class="row" style="margin:0 0 10px 0;padding:0;" ng-show="!isLoading" ng-repeat="doc in rawDocuments.docs | filter:keyword">
                         <div class="col-xs-1 text-right">
                             <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" style="width: 16px; height: 16px;" />
@@ -70,16 +70,17 @@
                     <div ng-if="isLoading"> <i class="fa fa-spinner fa-spin"></i> Loading...</div>
                     <div ng-if="rawDocuments.numFound===0"> no records found.</div>
                 </div>
-                <div  ng-show="addNewContact">
-                    <div id="addNewContact" ng-if="addNewContact"></div>
+                <div  ng-show="addNewContact" class="row" style="max-width:100%">
+                    <div id="divNewContact" class="col-lg-12" style="margin:20px"></div>
                 </div>
             </div>
 
             <div class="modal-footer bg-grey">
                 <div class="row">
                     <div class="col-xs-12">
-                        <!-- <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;"  ng-click="loadContactDirective()">Save</a> -->
-                        <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;"  ng-click="saveDocuments()">Save</a>
+                        <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="addNewContact"   ng-click="addNewContact=!addNewContact;loadContactDirective()">Create Contact</a>
+                        <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-show="addNewContact"   ng-click="addNewContact=!addNewContact">Show Existing Contacts</a>
+                        <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="addNewContact"   ng-click="saveDocuments()">Save</a>
                         <a translation-url  type="button" class="btn btn-warning bold" data-dismiss="modal" ng-click="closeDialog()">Close</a>
                     </div>
                 </div>
