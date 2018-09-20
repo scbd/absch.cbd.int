@@ -2,21 +2,22 @@
   "name": "absch.cbd.int",
   "description": "Access and Benefit Sharing Clearing-House",
   "dependencies": {
-    "co"                    : "4.6.0",
-    "co-fs"                 : "1.2.0",
-    "cookie-parser"         : "1.4.3",
-    "ejs"                   : "2.5.5",
-    "express"               : "4.16.3",
-    "http-proxy"            : "1.13.2",
-    "lodash"                : "4.17.5",
-    "rendertron-middleware" : "0.1.2",
     "@bower_components/angular-flex": "scbd/angular-flex.git",
+    "@bower_components/angular-localizer": "funkjunky/ngLocalizer",
     "@bower_components/angular-loggly-logger": "scbd/angular-loggly-logger#2c67428b49951e18bd03cbdd4834d939ba8fba74",
+    "@bower_components/cbd-forums": "scbd/forums#818a1c4082d5db4ac0c5d4b9f7c422e898516e4a",
+    "@bower_components/jquery": "jquery/jquery-dist#3.3.1",
     "@bower_components/ngstorage": "gsklee/ngStorage#0.3.11",
-    "@bower_components/cbd-forums": "scbd/forums#1.2.9"
-    
+    "@bower_components/require-shim": "zetlen/require-shim",
+    "co": "4.6.0",
+    "co-fs": "1.2.0",
+    "cookie-parser": "1.4.3",
+    "ejs": "2.5.5",
+    "express": "4.16.3",
+    "http-proxy": "1.13.2",
+    "lodash": "4.17.5",
+    "rendertron-middleware": "0.1.2"
   },
-
   "devDependencies": {
     "@bower_components/Chart.js": "chartjs/Chart.js#1.1.1",
     "@bower_components/SHA-1": "linkgod/SHA-1",
@@ -48,14 +49,13 @@
     "@bower_components/bootstrap-duallistbox": "istvan-ujjmeszaros/bootstrap-duallistbox#534e15a6402ebe142c28a80b50845fdb1f30ac76",
     "@bower_components/bootstrap-material-design": "FezVrasta/bootstrap-material-design#0.1.5",
     "@bower_components/bootstrap-rtl": "morteza/bootstrap-rtl#~3.4.0",
-    
     "@bower_components/diacritic": "Nijikokun/Diacritics.js#0.0.3",
     "@bower_components/file-saverjs": "clarketm/FileSaver.js#1.3.5",
     "@bower_components/flag-icon-css": "lipis/flag-icon-css#0.6.0",
     "@bower_components/font-awesome": "FortAwesome/Font-Awesome#4.2",
     "@bower_components/intro.js": "usablica/intro.js#1.0.0",
     "@bower_components/ionsound": "IonDen/ion.sound#3.0.0",
-    "@bower_components/jquery": "jquery/jquery-dist#2.2.4",
+    "@bower_components/jquery": "jquery/jquery-dist#3.3.1",
     "@bower_components/jquery-highlight": "knownasilya/jquery-highlight#3.4.0",
     "@bower_components/js-xlsx": "SheetJS/js-xlsx#0.9.12",
     "@bower_components/linqjs": "mihaifm/linq#3.0.5",
@@ -92,8 +92,20 @@
   "engines": {
     "yarn": ">= 1.0.0"
   },
-  "f" : {
+  "f": {
     "@bower_components/cbd-forums": "https://github.com/scbd/forums.git#1.2.8",
     "@bower_components/socket.io": "2.1.1"
+  },
+  "resolutions": {
+    "depd": "1.1.2",
+    "qs": "6.5.1",
+    "safe-buffer": "5.1.1",
+    "setprototypeof": "1.1.0",
+    "statuses": "1.4.0",
+    "http-errors": "1.6.3",
+    "combined-stream": "1.0.7",
+    "extsprintf": "1.3.0",
+    "angular": "1.5.11",
+    "jquery": "3.3.1"
   }
 }

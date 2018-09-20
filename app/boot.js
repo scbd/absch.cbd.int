@@ -50,7 +50,7 @@ require.config({
         'trix'                      : cdnHost + 'trix@0.12.0/dist/trix',
 
         'shim'                      : 'libs/require-shim/src/shim',
-        'angular-localizer'         : 'libs/ngLocalizer/localizer',
+        'angular-localizer'         : 'libs/angular-localizer/localizer',
         'view-abs-checkpoint'       : 'views/forms/view/abs/view-abs-checkpoint.directive', 
         'angular-flex'              : 'libs/angular-flex/angular-flex',
         'angular-loggly-logger'     : 'libs/angular-loggly-logger/angular-loggly-logger'     

@@ -1,7 +1,7 @@
 FROM node:8.4.0
 # -alpine
-# RUN apk update && apk upgrade && \
-#     apk add --no-cache bash git
+#  RUN apt-get update && apt-get install -y yarn
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 
 ARG BRANCH='master'
 ENV BRANCH $BRANCH
@@ -35,9 +35,9 @@ WORKDIR /usr/src/app
 #copy touched files from EN version
 RUN mv -f /usr/tmp/i18n/en/* ./
 
-COPY package.json bower.json .bowerrc .npmrc ./
+COPY package.json .npmrc ./
 
-RUN npm install -q
+RUN yarn install --flat --production
 
 
 #copy touched files from Other UN lang version

@@ -2,61 +2,13 @@
 # yarn lockfile v1
 
 
-"@bower_components/Chart.js@chartjs/Chart.js#1.1.1":
-  version "1.1.1"
-  resolved "https://codeload.github.com/chartjs/Chart.js/tar.gz/a62537a80029cd5a2e230769a652904e2de2d5d4"
-
-"@bower_components/SHA-1@linkgod/SHA-1":
-  version "0.1.1"
-  resolved "https://codeload.github.com/linkgod/SHA-1/tar.gz/f13a50ff7e8188e0bbd5c6d98f92b213c0d5120a"
-
-"@bower_components/ammap3@amcharts/ammap3#3.21.6":
-  version "3.21.6"
-  resolved "https://codeload.github.com/amcharts/ammap3/tar.gz/1a50b79d20651b38195999eb524265e381a22fa4"
-
-"@bower_components/angucomplete@darylrowland/angucomplete#3bf6ab2da56d514c22800f9dbdfeced66cff03f4":
-  version "1.0.0"
-  resolved "https://codeload.github.com/darylrowland/angucomplete/tar.gz/3bf6ab2da56d514c22800f9dbdfeced66cff03f4"
-
-"@bower_components/angular-animate@angular/bower-angular-animate#1.5":
-  version "1.5.11"
-  resolved "https://codeload.github.com/angular/bower-angular-animate/tar.gz/ac17971fdc62d7ea816a079401084e6da2af3e3e"
-
-"@bower_components/angular-aria@angular/bower-angular-aria#1.5":
-  version "1.5.11"
-  resolved "https://codeload.github.com/angular/bower-angular-aria/tar.gz/a90418459eb67c49673de35ca4c313fe8a07942e"
-
-"@bower_components/angular-block-ui@McNull/angular-block-ui#0.2.2":
-  version "0.2.2"
-  resolved "https://codeload.github.com/McNull/angular-block-ui/tar.gz/0d01eee67a6f8b0fd6beeaf16f950d1870842702"
-
-"@bower_components/angular-cookies@angular/bower-angular-cookies#1.5":
-  version "1.5.11"
-  resolved "https://codeload.github.com/angular/bower-angular-cookies/tar.gz/a443bb1d7edc1688acf8d820932f27b4b19b89bc"
-
 "@bower_components/angular-flex@scbd/angular-flex.git":
   version "2.0.0"
   resolved "https://codeload.github.com/scbd/angular-flex/tar.gz/9ca1bc11df71fc0036b3859f8b7de8411589f5f4"
 
-"@bower_components/angular-gravatar@wallin/angular-gravatar#0.4.2":
-  version "0.4.2"
-  resolved "https://codeload.github.com/wallin/angular-gravatar/tar.gz/d2cdd4fe27d86744f8c4fa86779be73e5af63a87"
-
-"@bower_components/angular-intro.js@mendhak/angular-intro.js#1.2.4":
-  version "0.1.0"
-  resolved "https://codeload.github.com/mendhak/angular-intro.js/tar.gz/9c96c06839b0e91a871ffb5f77af35c9366078f1"
-
-"@bower_components/angular-joyride@ahmed-wagdi/angular-joyride#1.0.2":
-  version "1.0.1"
-  resolved "https://codeload.github.com/ahmed-wagdi/angular-joyride/tar.gz/8c2ede0e8b6794a53cff0c74012f46b012daab8d"
-
-"@bower_components/angular-loader@angular/bower-angular-loader#1.5.6":
-  version "1.5.6"
-  resolved "https://codeload.github.com/angular/bower-angular-loader/tar.gz/297bf93d4d53bb1658ad34a315a73ab87feaab02"
-
-"@bower_components/angular-loading-bar@chieffancypants/angular-loading-bar#7db32aed5260560a5d4bbdaf4ea7365072d41ec8":
-  version "0.9.0"
-  resolved "https://codeload.github.com/chieffancypants/angular-loading-bar/tar.gz/7db32aed5260560a5d4bbdaf4ea7365072d41ec8"
+"@bower_components/angular-localizer@funkjunky/ngLocalizer":
+  version "0.0.0"
+  resolved "https://codeload.github.com/funkjunky/ngLocalizer/tar.gz/f15c2c45d1509ccaf8fe2fa6201d152576ebd8a9"
 
 "@bower_components/angular-loggly-logger@scbd/angular-loggly-logger#2c67428b49951e18bd03cbdd4834d939ba8fba74":
   version "0.2.4"
@@ -65,231 +17,26 @@
     angular "^1.5.6"
     angular-mocks "^1.5.6"
 
-"@bower_components/angular-material@angular/bower-material#0.9.8":
-  version "0.9.8"
-  resolved "https://codeload.github.com/angular/bower-material/tar.gz/5f7de8ced18d4663d7a90caecf620fc1f8a66568"
-
-"@bower_components/angular-mocks@angular/bower-angular-mocks#1.5.6":
-  version "1.5.6"
-  resolved "https://codeload.github.com/angular/bower-angular-mocks/tar.gz/20b2794ac1d7bace5925c9e5a33d8e3264c9d120"
-
-"@bower_components/angular-route@angular/bower-angular-route#1.5":
-  version "1.5.11"
-  resolved "https://codeload.github.com/angular/bower-angular-route/tar.gz/cdb9db456ece8b3f80a638bb7bd69dc2dcd4eee9"
-
-"@bower_components/angular-sanitize@angular/bower-angular-sanitize#1.5":
-  version "1.5.11"
-  resolved "https://codeload.github.com/angular/bower-angular-sanitize/tar.gz/84df06c4ec4f1eef7f9d0b849b9fdf5433c2669c"
-
-"@bower_components/angular-toastr@Foxandxss/angular-toastr#1.5.0":
-  version "1.5.0"
-  resolved "https://codeload.github.com/Foxandxss/angular-toastr/tar.gz/4ac181c4aac7b66fddb213b0da3a0287ab23d9ba"
-
-"@bower_components/angular-trix@sachinchoolur/angular-trix#1.0.2":
-  version "1.0.2"
-  resolved "https://codeload.github.com/sachinchoolur/angular-trix/tar.gz/3eee4444e2b9b9505ae299d888c7e2363b1c9e3c"
-  dependencies:
-    angular ">=1.2.0"
-    trix latest
-
-"@bower_components/angular@angular/bower-angular#1.5":
-  version "1.5.11"
-  resolved "https://codeload.github.com/angular/bower-angular/tar.gz/0f57428c3ffe2f486264ab7fbee3968dccc7b720"
-
-"@bower_components/angulartics-google-analytics@angulartics/angulartics-google-analytics#0.3.0":
-  version "0.3.0"
-  resolved "https://codeload.github.com/angulartics/angulartics-google-analytics/tar.gz/94461284f21c09690d3b21aed73d0380c1cddb21"
-
-"@bower_components/angulartics@angulartics/angulartics#1.0.0":
-  version "1.0.0"
-  resolved "https://codeload.github.com/angulartics/angulartics/tar.gz/8371cc04925147204c74ad03ad8c984bd8408819"
-
-"@bower_components/blobjs@clarketm/Blob.js#1.1.0":
-  version "1.1.0"
-  resolved "https://codeload.github.com/clarketm/Blob.js/tar.gz/25ef1c33373a1bcd1fe8fb280d1bc0921e2802aa"
-
-"@bower_components/bootstrap-datepicker@eternicode/bootstrap-datepicker#1.3.0":
-  version "0.0.0"
-  resolved "https://codeload.github.com/eternicode/bootstrap-datepicker/tar.gz/37db99f95ff3a32ccc76b7122b2b73f3b0b9fe42"
-
-"@bower_components/bootstrap-duallistbox@istvan-ujjmeszaros/bootstrap-duallistbox#534e15a6402ebe142c28a80b50845fdb1f30ac76":
-  version "3.0.5"
-  resolved "https://codeload.github.com/istvan-ujjmeszaros/bootstrap-duallistbox/tar.gz/534e15a6402ebe142c28a80b50845fdb1f30ac76"
-
-"@bower_components/bootstrap-material-design@FezVrasta/bootstrap-material-design#0.1.5":
-  version "0.1.5"
-  resolved "https://codeload.github.com/FezVrasta/bootstrap-material-design/tar.gz/0c6f8f3e9d48adef6add4fa3454f587324d2f2ab"
-
-"@bower_components/bootstrap-rtl@morteza/bootstrap-rtl#~3.4.0":
-  version "3.4.0"
-  resolved "https://codeload.github.com/morteza/bootstrap-rtl/tar.gz/961dc50152095a948ffcd57a5df154856b4e49b7"
-  dependencies:
-    bootstrap "^3.3.4"
-
-"@bower_components/bootstrap@twbs/bootstrap#3.3.7":
-  version "3.3.7"
-  resolved "https://codeload.github.com/twbs/bootstrap/tar.gz/0b9c4a4007c44201dce9a6cc1a38407005c26c86"
-
-"@bower_components/cbd-forums@scbd/forums#1.2.9":
+"@bower_components/cbd-forums@scbd/forums#818a1c4082d5db4ac0c5d4b9f7c422e898516e4a":
   version "1.2.9"
-  resolved "https://codeload.github.com/scbd/forums/tar.gz/c75f4aa8df2a7e89e7f3d1b18038710f6f09e881"
+  resolved "https://codeload.github.com/scbd/forums/tar.gz/818a1c4082d5db4ac0c5d4b9f7c422e898516e4a"
   dependencies:
-    angular "~1.2.18"
+    angular "1.5"
     bootstrap "~3.1"
-    jquery "~2.0.3"
+    jquery "3.3.1"
     underscore "~1.7.0"
 
-"@bower_components/diacritic@Nijikokun/Diacritics.js#0.0.3":
-  version "0.0.3"
-  resolved "https://codeload.github.com/Nijikokun/Diacritics.js/tar.gz/901ba2ca1d864bc6ed9ce7be9d7f800488696942"
-
-"@bower_components/file-saverjs@clarketm/FileSaver.js#1.3.5":
-  version "1.3.5"
-  resolved "https://codeload.github.com/clarketm/FileSaver.js/tar.gz/e241bd15288553341b3629f5d1e0bc7aaa8a7a38"
-
-"@bower_components/flag-icon-css@lipis/flag-icon-css#0.6.0":
-  version "0.5.1"
-  resolved "https://codeload.github.com/lipis/flag-icon-css/tar.gz/5d0453d5ea12daacec207da7eed9615c9be082ef"
-
-"@bower_components/font-awesome@FortAwesome/Font-Awesome#4.2":
-  version "4.2.0"
-  resolved "https://codeload.github.com/FortAwesome/Font-Awesome/tar.gz/a65bd93d81e9e6bd5ebfa41757a4474960b973b4"
-
-"@bower_components/intro.js@usablica/intro.js#1.0.0":
-  version "1.0.0"
-  resolved "https://codeload.github.com/usablica/intro.js/tar.gz/ea5466317ab75de6f46b0b39bae7a29c2aa18d68"
-
-"@bower_components/ionsound@IonDen/ion.sound#3.0.0":
-  version "3.0.0"
-  resolved "https://codeload.github.com/IonDen/ion.sound/tar.gz/d1d055ecbf82f8b0ad49468cd5a345b2ed8ff192"
-
-"@bower_components/jquery-highlight@knownasilya/jquery-highlight#3.4.0":
-  version "3.4.0"
-  resolved "https://codeload.github.com/knownasilya/jquery-highlight/tar.gz/8c7723ec0fa3433dbab7d7405c1d4be8d448bead"
-  dependencies:
-    jquery ">= 1.0.0"
-
-"@bower_components/jquery@jquery/jquery-dist#2.2.4":
-  version "2.2.4"
-  resolved "https://codeload.github.com/jquery/jquery-dist/tar.gz/c0185ab7c75aab88762c5aae780b9d83b80eda72"
-
-"@bower_components/js-xlsx@SheetJS/js-xlsx#0.9.12":
-  version "0.9.12"
-  resolved "https://codeload.github.com/SheetJS/js-xlsx/tar.gz/8c4f1f4e84c7ca8e9bd2ca9e0204034b29d0bb02"
-  dependencies:
-    adler-32 "~1.0.0"
-    cfb "~0.11.1"
-    codepage "~1.8.0"
-    commander "~2.9.0"
-    crc-32 "~1.0.0"
-    exit-on-epipe "~1.0.0"
-    ssf "~0.9.0"
-
-"@bower_components/linqjs@mihaifm/linq#3.0.5":
-  version "3.0.5"
-  resolved "https://codeload.github.com/mihaifm/linq/tar.gz/2e19bbb7390fc92f977448cd9b39c40991776a73"
-
-"@bower_components/lodash@lodash/lodash#3.9.3":
-  version "3.9.3"
-  resolved "https://codeload.github.com/lodash/lodash/tar.gz/2ecdedd5b48b20f5ae786147fff4fd16749e83c8"
-
-"@bower_components/lunr.js@olivernn/lunr.js#2.1.0":
-  version "2.1.0"
-  resolved "https://codeload.github.com/olivernn/lunr.js/tar.gz/cf96052b82426eb84302b64797e498aabb681e59"
-
-"@bower_components/mapsicon@djaiss/mapsicon":
-  version "0.0.0"
-  resolved "https://codeload.github.com/djaiss/mapsicon/tar.gz/33ba28808f8d32b5bae0ffada9cadd07073852e1"
-
-"@bower_components/momentjs@moment/moment#2.7.0":
-  version "2.7.0"
-  resolved "https://codeload.github.com/moment/moment/tar.gz/9acd38fcff7c996200ac0e4df49b5ca9737940f0"
-
-"@bower_components/ng-breadcrumbs@egesu/ng-breadcrumbs#0.4.1":
-  version "0.0.0"
-  resolved "https://codeload.github.com/egesu/ng-breadcrumbs/tar.gz/2715039e281048a00c2b5597e6d0f079aeb15f86"
-
-"@bower_components/ng-dialog@likeastore/ngDialog#0.5.8":
-  version "0.5.8"
-  resolved "https://codeload.github.com/likeastore/ngDialog/tar.gz/4352b664d14044d4b215cff14b8991964dbc11aa"
-
-"@bower_components/ngInfiniteScroll@ng-infinite-scroll/ng-infinite-scroll-bower#1.3.0":
-  version "1.3.0"
-  resolved "https://codeload.github.com/ng-infinite-scroll/ng-infinite-scroll-bower/tar.gz/6fbf4b41947f9a3023b4aba0e613231950ccc4a1"
-
-"@bower_components/ngLocalizer@funkjunky/ngLocalizer":
-  version "0.0.0"
-  resolved "https://codeload.github.com/funkjunky/ngLocalizer/tar.gz/f15c2c45d1509ccaf8fe2fa6201d152576ebd8a9"
-
-"@bower_components/ngSmoothScroll@d-oliveros/angular-smooth-scroll#1.7.1":
-  version "0.0.0"
-  resolved "https://codeload.github.com/d-oliveros/angular-smooth-scroll/tar.gz/bd5464133efebc83e9b0bb22e9a0a635879a2cc5"
+"@bower_components/jquery@jquery/jquery-dist#3.3.1":
+  version "3.3.1"
+  resolved "https://codeload.github.com/jquery/jquery-dist/tar.gz/9e8ec3d10fad04748176144f108d7355662ae75e"
 
 "@bower_components/ngstorage@gsklee/ngStorage#0.3.11":
   version "0.3.11"
   resolved "https://codeload.github.com/gsklee/ngStorage/tar.gz/253b718a0b35b044fba25c78b1b2020d672c4017"
 
-"@bower_components/outdated-browser@burocratik/outdated-browser#1.1.1":
-  version "1.0.0"
-  resolved "https://codeload.github.com/burocratik/outdated-browser/tar.gz/f26abac535e3683afec599b7a5dbdba7470d20a0"
-
-"@bower_components/pdfobject@pipwerks/PDFObject":
-  version "2.0.201604172"
-  resolved "https://codeload.github.com/pipwerks/PDFObject/tar.gz/d37c492c026dc8abeac636d1d5d6eeebdb409e8b"
-
-"@bower_components/printThis@jasonday/printThis#1.9.0":
-  version "1.9.0"
-  resolved "https://codeload.github.com/jasonday/printThis/tar.gz/2ea804980cd76d1583d986e29e3e4e72c4b79c92"
-  dependencies:
-    jquery "~1.11"
-
-"@bower_components/rangy@timdown/rangy-release#~1.3.0":
-  version "0.0.0"
-  resolved "https://codeload.github.com/timdown/rangy-release/tar.gz/a9518d3d6142b7fe58fd47ddd6a1068f7eb52a0b"
-
-"@bower_components/require-css@guybedford/require-css#0.1.8":
-  version "0.1.8"
-  resolved "https://codeload.github.com/guybedford/require-css/tar.gz/3b1d86858259762e5bb9db72c3df6ea808cd9d6d"
-
-"@bower_components/require-shim@zetlen/require-shim#95b5aaea4530fb2861cc475497c7b4c62204628d":
+"@bower_components/require-shim@zetlen/require-shim":
   version "0.0.0"
   resolved "https://codeload.github.com/zetlen/require-shim/tar.gz/95b5aaea4530fb2861cc475497c7b4c62204628d"
-
-"@bower_components/requirejs-domready@requirejs/domReady#2.0.1":
-  version "2.0.1"
-  resolved "https://codeload.github.com/requirejs/domReady/tar.gz/c74caaa6dac64f2f47093f4952b991390406adfb"
-
-"@bower_components/requirejs-plugins@millermedeiros/requirejs-plugins#1.0.3":
-  version "0.0.0"
-  resolved "https://codeload.github.com/millermedeiros/requirejs-plugins/tar.gz/ac9de4bfae70b0630754a9faf93c42db362cb9a2"
-
-"@bower_components/requirejs-text@requirejs/text#2.0.14":
-  version "2.0.14"
-  resolved "https://codeload.github.com/requirejs/text/tar.gz/b57d66a8aa705c4dcd4959ced3be2cbda7e76183"
-
-"@bower_components/requirejs@jrburke/requirejs-bower#2.2.0":
-  version "0.0.0"
-  resolved "https://codeload.github.com/jrburke/requirejs-bower/tar.gz/f50aa125e93710c10bb43cf452a97f2abeb144cb"
-
-"@bower_components/tableexport.js@clarketm/TableExport#4.0.10":
-  version "4.0.10"
-  resolved "https://codeload.github.com/clarketm/TableExport/tar.gz/6e01b100cec3fe6933880052dcd3ef8427f194f5"
-  dependencies:
-    blobjs "^1.1.1"
-    file-saverjs "^1.3.6"
-    xlsx "^0.9.13"
-
-"@bower_components/trix@basecamp/trix":
-  version "0.12.0"
-  resolved "https://codeload.github.com/basecamp/trix/tar.gz/1f9b090b464fb5eb9444c1d31df06fb0a234fe54"
-
-"@bower_components/underscore@jashkenas/underscore#1.7.0":
-  version "1.7.0"
-  resolved "https://codeload.github.com/jashkenas/underscore/tar.gz/da996e665deb0b69b257e80e3e257c04fde4191c"
-
-"@bower_components/webui-popover@sandywalker/webui-popover#2.1.15":
-  version "1.2.15"
-  resolved "https://codeload.github.com/sandywalker/webui-popover/tar.gz/a519d5f7db8229ee5afd6939b1ed880e7d5856a7"
 
 accepts@~1.3.5:
   version "1.3.5"
@@ -297,14 +44,6 @@ accepts@~1.3.5:
   dependencies:
     mime-types "~2.1.18"
     negotiator "0.6.1"
-
-adler-32@~1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/adler-32/-/adler-32-1.0.0.tgz#28728a71756f629666dd1653cd80793a9df18651"
-  dependencies:
-    concat-stream ""
-    exit-on-epipe ""
-    printj ""
 
 ajv@^5.3.0:
   version "5.5.2"
@@ -319,13 +58,9 @@ angular-mocks@^1.5.6:
   version "1.7.4"
   resolved "https://registry.yarnpkg.com/angular-mocks/-/angular-mocks-1.7.4.tgz#106d9c96eae0117ad9962ee688da5e514edae645"
 
-angular@>=1.2.0, angular@^1.5.6:
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.4.tgz#c1bf4884c2d470c06907737a1bf0835a9f646f31"
-
-angular@~1.2.18:
-  version "1.2.32"
-  resolved "http://registry.npmjs.org/angular/-/angular-1.2.32.tgz#df52625a5167919931418dda3a9208b9f5fa3db4"
+angular@1.5, angular@1.5.11, angular@^1.5.6:
+  version "1.5.11"
+  resolved "https://registry.yarnpkg.com/angular/-/angular-1.5.11.tgz#8c5ba7386f15965c9acf3429f6881553aada30d6"
 
 array-flatten@1.1.1:
   version "1.1.1"
@@ -359,10 +94,6 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-blobjs@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/blobjs/-/blobjs-1.1.1.tgz#544af6db887b1c62f45ea8e07ceb45c13b5995aa"
-
 body-parser@1.18.2:
   version "1.18.2"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.18.2.tgz#87678a19d84b47d859b83199bd59bce222b10454"
@@ -378,17 +109,9 @@ body-parser@1.18.2:
     raw-body "2.3.2"
     type-is "~1.6.15"
 
-bootstrap@^3.3.4:
-  version "3.3.7"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
-
 bootstrap@~3.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.1.1.tgz#17e14ed261c0fcd9b52ea9aa6420f6d51cd5fa77"
-
-buffer-from@^1.0.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
 
 bytes@3.0.0:
   version "3.0.0"
@@ -397,12 +120,6 @@ bytes@3.0.0:
 caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
-
-cfb@~0.11.1:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/cfb/-/cfb-0.11.1.tgz#a96db8f272a6c3fb99dbbb23ef41223f48be1ea7"
-  dependencies:
-    commander ""
 
 co-from-stream@0.0.0:
   version "0.0.0"
@@ -425,43 +142,11 @@ co@4.6.0, co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
 
-codepage@~1.8.0:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/codepage/-/codepage-1.8.1.tgz#f1a009d5261dc2754628bacb6fbbf0e6e2abffaa"
-  dependencies:
-    commander ""
-    concat-stream ""
-    exit-on-epipe ""
-    voc ""
-
-colors@0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/colors/-/colors-0.6.2.tgz#2423fe6678ac0c5dae8852e5d0e5be08c997abcc"
-
-combined-stream@1.0.6, combined-stream@~1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.6.tgz#723e7df6e801ac5613113a7e445a9b69cb632818"
+combined-stream@1.0.6, combined-stream@1.0.7, combined-stream@~1.0.6:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.7.tgz#2d1d24317afb8abe95d6d2c0b07b57813539d828"
   dependencies:
     delayed-stream "~1.0.0"
-
-commander@:
-  version "2.18.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.18.0.tgz#2bf063ddee7c7891176981a2cc798e5754bc6970"
-
-commander@~2.9.0:
-  version "2.9.0"
-  resolved "http://registry.npmjs.org/commander/-/commander-2.9.0.tgz#9c99094176e12240cb22d6c5146098400fe0f7d4"
-  dependencies:
-    graceful-readlink ">= 1.0.0"
-
-concat-stream@:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/concat-stream/-/concat-stream-1.6.2.tgz#904bdf194cd3122fc675c77fc4ac3d4ff0fd1a34"
-  dependencies:
-    buffer-from "^1.0.0"
-    inherits "^2.0.3"
-    readable-stream "^2.2.2"
-    typedarray "^0.0.6"
 
 content-disposition@0.5.2:
   version "0.5.2"
@@ -486,16 +171,9 @@ cookie@0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
 
-core-util-is@1.0.2, core-util-is@~1.0.0:
+core-util-is@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
-
-crc-32@~1.0.0, crc-32@~1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/crc-32/-/crc-32-1.0.2.tgz#09507984ee9bcce3bd1b8861f0de8ab10ae8187d"
-  dependencies:
-    exit-on-epipe ""
-    printj ""
 
 dashdash@^1.12.0:
   version "1.14.1"
@@ -513,11 +191,7 @@ delayed-stream@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delayed-stream/-/delayed-stream-1.0.0.tgz#df3ae199acadfb7d440aaae0b29e2272b24ec619"
 
-depd@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.1.tgz#5783b4e1c459f06fa5ca27f991f3d06e7a310359"
-
-depd@~1.1.1, depd@~1.1.2:
+depd@1.1.1, depd@1.1.2, depd@~1.1.1, depd@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
 
@@ -555,10 +229,6 @@ etag@~1.8.1:
 eventemitter3@1.x.x:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-1.2.0.tgz#1c86991d816ad1e504750e73874224ecf3bec508"
-
-exit-on-epipe@, exit-on-epipe@~1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/exit-on-epipe/-/exit-on-epipe-1.0.1.tgz#0bdd92e87d5285d267daa8171d0eb06159689692"
 
 express@4.16.3:
   version "4.16.3"
@@ -599,13 +269,9 @@ extend@~3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
 
-extsprintf@1.3.0:
+extsprintf@1.3.0, extsprintf@^1.2.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.3.0.tgz#96918440e3041a7a414f8c52e3c574eb3c3e1e05"
-
-extsprintf@^1.2.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
 
 fast-deep-equal@^1.0.0:
   version "1.1.0"
@@ -614,10 +280,6 @@ fast-deep-equal@^1.0.0:
 fast-json-stable-stringify@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/fast-json-stable-stringify/-/fast-json-stable-stringify-2.0.0.tgz#d5142c0caee6b1189f87d3a76111064f86c8bbf2"
-
-file-saverjs@^1.3.6:
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/file-saverjs/-/file-saverjs-1.3.6.tgz#b7a454e126f56cf71fcb70159b8356142654e78e"
 
 finalhandler@1.1.1:
   version "1.1.1"
@@ -647,12 +309,6 @@ forwarded@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
 
-frac@~1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/frac/-/frac-1.0.6.tgz#9a0dfc23956852a8b320623bebcf1be9ea048229"
-  dependencies:
-    voc ""
-
 fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
@@ -662,10 +318,6 @@ getpass@^0.1.1:
   resolved "https://registry.yarnpkg.com/getpass/-/getpass-0.1.7.tgz#5eff8e3e684d569ae4cb2b1282604e8ba62149fa"
   dependencies:
     assert-plus "^1.0.0"
-
-"graceful-readlink@>= 1.0.0":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
 har-schema@^2.0.0:
   version "2.0.0"
@@ -678,16 +330,7 @@ har-validator@~5.1.0:
     ajv "^5.3.0"
     har-schema "^2.0.0"
 
-http-errors@1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/http-errors/-/http-errors-1.6.2.tgz#0a002cc85707192a7e7946ceedc11155f60ec736"
-  dependencies:
-    depd "1.1.1"
-    inherits "2.0.3"
-    setprototypeof "1.0.3"
-    statuses ">= 1.3.1 < 2"
-
-http-errors@~1.6.2:
+http-errors@1.6.2, http-errors@1.6.3, http-errors@~1.6.2:
   version "1.6.3"
   resolved "http://registry.npmjs.org/http-errors/-/http-errors-1.6.3.tgz#8b55680bb4be283a0b5bf4ea2e38580be1d9320d"
   dependencies:
@@ -715,7 +358,7 @@ iconv-lite@0.4.19:
   version "0.4.19"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
 
-inherits@2.0.3, inherits@^2.0.3, inherits@~2.0.3:
+inherits@2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
@@ -727,25 +370,13 @@ is-typedarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
 
-isarray@~1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
-
 isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
-"jquery@>= 1.0.0":
+jquery@3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
-
-jquery@~1.11:
-  version "1.11.3"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.11.3.tgz#dd8b74278b27102d29df63eae28308a8cfa1b583"
-
-jquery@~2.0.3:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-2.2.4.tgz#2c89d6889b5eac522a7eea32c14521559c6cbf02"
 
 jsbn@~0.1.0:
   version "0.1.1"
@@ -772,9 +403,9 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
-lodash@4.15.0:
-  version "4.15.0"
-  resolved "http://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz#3162391d8f0140aa22cf8f6b3c34d6b7f63d3aa9"
+lodash@4.17.5:
+  version "4.17.5"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -832,14 +463,6 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
 
-printj@:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/printj/-/printj-1.2.0.tgz#852fca7283cdb82f3fd08d007bde701a224cc397"
-
-process-nextick-args@~2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.0.tgz#a37d732f4271b4ab1ad070d35508e8290788ffaa"
-
 proxy-addr@~2.0.3:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-2.0.4.tgz#ecfc733bf22ff8c6f407fa275327b9ab67e48b93"
@@ -855,13 +478,9 @@ punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
 
-qs@6.5.1:
+qs@6.5.1, qs@~6.5.2:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
-
-qs@~6.5.2:
-  version "6.5.2"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
 
 range-parser@~1.2.0:
   version "1.2.0"
@@ -875,18 +494,6 @@ raw-body@2.3.2:
     http-errors "1.6.2"
     iconv-lite "0.4.19"
     unpipe "1.0.0"
-
-readable-stream@^2.2.2:
-  version "2.3.6"
-  resolved "http://registry.npmjs.org/readable-stream/-/readable-stream-2.3.6.tgz#b11c27d88b8ff1fbe070643cf94b0c79ae1b0aaf"
-  dependencies:
-    core-util-is "~1.0.0"
-    inherits "~2.0.3"
-    isarray "~1.0.0"
-    process-nextick-args "~2.0.0"
-    safe-buffer "~5.1.1"
-    string_decoder "~1.1.1"
-    util-deprecate "~1.0.1"
 
 rendertron-middleware@0.1.2:
   version "0.1.2"
@@ -923,13 +530,9 @@ requires-port@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
 
-safe-buffer@5.1.1:
+safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@^5.1.2:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
-
-safe-buffer@^5.0.1, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
 
 safer-buffer@^2.0.2, safer-buffer@^2.1.0, safer-buffer@~2.1.0:
   version "2.1.2"
@@ -962,21 +565,9 @@ serve-static@1.13.2:
     parseurl "~1.3.2"
     send "0.16.2"
 
-setprototypeof@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.0.3.tgz#66567e37043eeb4f04d91bd658c0cbefb55b8e04"
-
-setprototypeof@1.1.0:
+setprototypeof@1.0.3, setprototypeof@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
-
-ssf@~0.9.0, ssf@~0.9.1:
-  version "0.9.4"
-  resolved "https://registry.yarnpkg.com/ssf/-/ssf-0.9.4.tgz#8e57a98c19dbbf1edd53f0f8c9e7fd524b0f6c9c"
-  dependencies:
-    colors "0.6.2"
-    frac "~1.0.6"
-    voc ""
 
 sshpk@^1.7.0:
   version "1.14.2"
@@ -993,19 +584,9 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
 
-"statuses@>= 1.3.1 < 2", "statuses@>= 1.4.0 < 2":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
-
-statuses@~1.4.0:
+statuses@1.4.0, "statuses@>= 1.3.1 < 2", "statuses@>= 1.4.0 < 2", statuses@~1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.4.0.tgz#bb73d446da2796106efcc1b601a253d6c46bd087"
-
-string_decoder@~1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
-  dependencies:
-    safe-buffer "~5.1.0"
 
 thunkify@0.0.1:
   version "0.0.1"
@@ -1017,10 +598,6 @@ tough-cookie@~2.4.3:
   dependencies:
     psl "^1.1.24"
     punycode "^1.4.1"
-
-trix@latest:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/trix/-/trix-0.12.0.tgz#e34940f3b10111c596c85b6c817e4336c7fc0973"
 
 tunnel-agent@^0.6.0:
   version "0.6.0"
@@ -1039,10 +616,6 @@ type-is@~1.6.15, type-is@~1.6.16:
     media-typer "0.3.0"
     mime-types "~2.1.18"
 
-typedarray@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
-
 underscore@~1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.7.0.tgz#6bbaf0877500d36be34ecaa584e0db9fef035209"
@@ -1050,10 +623,6 @@ underscore@~1.7.0:
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
-
-util-deprecate@~1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
 
 utils-merge@1.0.1:
   version "1.0.1"
@@ -1074,19 +643,3 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
-
-voc@:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/voc/-/voc-1.1.0.tgz#d1a08aeff66646bf17cdba2e47c935a7a9b0218b"
-
-xlsx@^0.9.13:
-  version "0.9.13"
-  resolved "https://registry.yarnpkg.com/xlsx/-/xlsx-0.9.13.tgz#5861d11e10a1f99b6f2b491e2d119a7777d066e7"
-  dependencies:
-    adler-32 "~1.0.0"
-    cfb "~0.11.1"
-    codepage "~1.8.0"
-    commander "~2.9.0"
-    crc-32 "~1.0.2"
-    exit-on-epipe "~1.0.0"
-    ssf "~0.9.1"
