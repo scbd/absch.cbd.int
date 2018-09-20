@@ -165,7 +165,7 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
                     }
 
                     if (error.status == 404) $scope.error = "Terms not found";
-                    else $scope.error = error.data || "unkown error";
+                    else $scope.error = error.data || "unknown error";
                 };
 
                 function clear(){

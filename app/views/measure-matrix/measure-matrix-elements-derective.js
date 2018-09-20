@@ -289,7 +289,7 @@ define(['app',
                     }
 
                     if (error.status == 404) $scope.error = "Terms not found";
-                    else $scope.error = error.data || "unkown error";
+                    else $scope.error = error.data || "unknown error";
                 }
 
                 function addMeasureToElements(measure) {
