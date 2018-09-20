@@ -252,7 +252,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.publish = function()
 				{
 					$scope.loading = true;
-					$scope.validationReport = {clearErrors:[]};
+					$scope.validationReport = undefined
 					var qDocument = $scope.getDocumentFn();
 					var qReport   = validate(qDocument);
 
@@ -322,7 +322,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.publishRequest = function()
 				{
 					$scope.loading = true;
-					$scope.validationReport = {clearErrors:[]};
+					$scope.validationReport = undefined
 					var qDocument = $scope.getDocumentFn();
 					var qReport   = validate(qDocument);
 
@@ -386,7 +386,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				{
                     $scope.tab = 'edit';
 					$scope.loading = true;
-                    $scope.validationReport = {clearErrors:[]};
+                    $scope.validationReport = undefined
 					return $q.when($scope.getDocumentFn()).then(function(document)
 					{
 						if(!document)
@@ -446,24 +446,6 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				//====================
 				//
 				//====================
-				function validate(document) {
-
-					return $q.when(document).then(function(document){
-
-						if(!document)
-							throw "Invalid document";
-
-						return storage.documents.validate(document);
-
-					}).then(function(result) {
-
-						return result.data || result;
-					});
-				}
-
-				//====================
-				//
-				//====================
 				$scope.checkErrors = function()
 				{
 					$scope.errors = "";
@@ -518,10 +500,6 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     });
                 };
 
-                $scope.$on("documentInvalid", function(){
-                  $scope.tab = "review";
-                });
-
                 $scope.switchTab = function(tab){
                     if(tab==$scope.tab)
                         return;
@@ -566,6 +544,26 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                     }
                 });
+
+
+				//====================
+				//
+				//====================
+				function validate(document) {
+
+					return $q.when(document).then(function(document){
+
+						if(!document)
+							throw "Invalid document";
+
+						return storage.documents.validate(document);
+
+					}).then(function(result) {
+
+						return result.data || result;
+					});
+				}
+
 
                 function closeDocument(skipToast){
                     if(!skipToast)
@@ -683,6 +681,34 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 }
 
                 $scope.loadSecurity();
+
+
+                // function confirmLeaving(evt, next, current) {
+                //     var formChanged = !angular.equals($scope.getCleanDocument(), $scope.origanalDocument);
+            
+                //     if(formChanged)
+                //         $('.editForm').closest('form').addClass('dirty');
+            
+                //     if(consideringClosing || $('form').filter('.dirty').length == 0)
+                //     return;
+            
+                //     evt.preventDefault();
+            
+                //     $('#dialogCancel').modal('show');
+                //     $rootScope.next_url = next;
+                //     consideringClosing = true;
+                // }
+            
+                // $scope.$on('$locationChangeStart', confirmLeaving);
+                // $scope.$on('$locationChangeSuccess', function(evt, data){
+                //     $rootScope.next_url = undefined;
+                // });
+                // //raised when  a document is published or requested for publishing
+                // //update orignal document with the updated one to avoid validation on page leave event(confirmLeaving).
+                // $scope.$on('updateOrignalDocument', function(evt,newDocument){
+            
+                //     $scope.origanalDocument = newDocument;
+                // });
 
             }]
     	};

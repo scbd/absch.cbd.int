@@ -133,8 +133,8 @@
             </div>
         </div>
     </div>
-    
-   <div ng-if="tab=='intro'" km-tab="intro">
+
+    <div ng-if="tab=='intro'" km-tab="intro">
         <div ng-transclude="introForm">
             <i ng-if="tab=='intro' && loading" class="fa fa-spinner fa-spin"></i>
             <h3>{{article.title|lstring}}</h3>
@@ -142,40 +142,43 @@
         </div>
     </div>
 
-    <div ng-show="tab=='edit'" km-tab="edit" class="edit-form editForm" >
+    <div ng-show="tab=='edit'" km-tab="edit" class="edit-form editForm">
         <div ng-transclude="editForm"></div>
     </div>
- 
+
     <div ng-show="tab=='review'" km-tab="review" id="schemaView" class="viewForm">
-       <div ng-transclude="reviewForm"></div>
+        <div ng-transclude="reviewForm"></div>
     </div>
     <div ng-show="tab=='publish'" km-tab="publish">
         <div ng-transclude-slot="publishForm"></div>
         <div class="row margin-bottom-20">
             <div class="clearfix"></div>
-        
-            <div class="col-xs-12">            
-        
+
+            <div class="col-xs-12">
+
                 <ul style="list-style-type:none;margin:0;padding:0;padding-top:10px;">
-                    <li style="display: inline;"><button type="button" class="btn btn-warning " ng-click="close()" ng-disabled="loading">
-                        <i class="glyphicon glyphicon-remove"></i> Close</button>
+                    <li style="display: inline;"><button type="button" class="btn btn-warning " ng-click="close()"
+                            ng-disabled="loading">
+                            <i class="glyphicon glyphicon-remove"></i> Close</button>
                     </li>
                     <li style="display: inline;" ng-show="security.canSave">
-                        <button type="button" class="btn btn-danger bg-published " width="50px" ng-click="tab='publish';publish()" ng-disabled="loading">Publish
-                                    <i ng-show="tab=='publish' && loading" class="fa fa-spinner fa-spin"></i>
-                            </button>
+                        <button type="button" class="btn btn-danger bg-published " width="50px" ng-click="tab='publish';publish()"
+                            ng-disabled="loading">Publish
+                            <i ng-show="tab=='publish' && loading" class="fa fa-spinner fa-spin"></i>
+                        </button>
                     </li>
                     <li style="display: inline;" ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
-                        <button id="publish_button" type="button" class="btn btn-danger bg-request" ng-href="#" ng-click="tab='publishRequest';publishRequest()" ng-disabled="loading">Request Publication
-                                    <i ng-show="tab=='publishRequest' && loading" class="fa fa-spinner fa-spin"></i>
-                            </button>
+                        <button id="publish_button" type="button" class="btn btn-danger bg-request" ng-href="#"
+                            ng-click="tab='publishRequest';publishRequest()" ng-disabled="loading">Request Publication
+                            <i ng-show="tab=='publishRequest' && loading" class="fa fa-spinner fa-spin"></i>
+                        </button>
                     </li>
-            
+
                 </ul>
             </div>
-        
+
             <div class="clearfix"></div>
-                
+
             <div id="dialogCancel" class="modal fade" data-backdrop="static">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -184,17 +187,20 @@
                             <h4>Canceling changes</h4>
                         </div>
                         <div class="modal-body">
-                            <p>If you want to cancel the changes you just made to this draft, you can keep the previous version of the draft, which will then be available in the list of drafts on the Management Centre. You or your colleagues can then continue editing
+                            <p>If you want to cancel the changes you just made to this draft, you can keep the previous
+                                version of the draft, which will then be available in the list of drafts on the
+                                Management Centre. You or your colleagues can then continue editing
                                 the record in the current, or a later, session.</p>
                         </div>
                         <div class="modal-footer" style="margin-top:0">
                             <button type="button" ng-click="closeDialog()" class="btn btn-default cancelClose">Cancel</button>
-                            <button type="button" ng-click="close(true)" class="btn btn-warning closeWithoutSaving pull-left">Close without saving</button>
+                            <button type="button" ng-click="close(true)" class="btn btn-warning closeWithoutSaving pull-left">Close
+                                without saving</button>
                         </div>
                     </div>
                 </div>
             </div>
-        
+
             <div id="divAdditionalInfo" class="modal fade" data-backdrop="static">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -208,12 +214,13 @@
                         </div>
                         <div class="modal-footer" style="margin-top:0">
                             <button type="button" class="btn btn-default" ng-click="closeAddInfoDialog(false)">Cancel</button>
-                            <button type="button" id="continueRequest" class="btn btn-primary pull-left" ng-disabled="loading">Send Request</button>
+                            <button type="button" id="continueRequest" class="btn btn-primary pull-left" ng-disabled="loading">Send
+                                Request</button>
                         </div>
                     </div>
                 </div>
             </div>
-        
+
             <div id="divWorkflowDraft" class="modal fade" data-backdrop="static">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -221,18 +228,20 @@
                             <h2>Edit Publishing Request</h2>
                         </div>
                         <div class="modal-body">
-                            <p>Editing and saving as draft a publishing request will cancel the publishing request and send it back to draft mode. 
-                            <br/>Are you sure you want to continue?</p>
+                            <p>Editing and saving as draft a publishing request will cancel the publishing request and
+                                send it back to draft mode.
+                                <br />Are you sure you want to continue?</p>
                         </div>
                         <div class="modal-footer" style="margin-top:0">
                             <button type="button" class="btn btn-default" ng-click="closeWorkflowDraftDialog(false)">No</button>
-                            <button type="button" id="continueWorkflowDraftRequest" class="btn btn-primary pull-left" ng-disabled="loading">Yes</button>
+                            <button type="button" id="continueWorkflowDraftRequest" class="btn btn-primary pull-left"
+                                ng-disabled="loading">Yes</button>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            
+
+
         </div>
         <div ng-transclude="reviewForm"></div>
     </div>
@@ -241,7 +250,7 @@
         <ng-include onload="workflowScope=workflowScope" src="'template/workflow-arrows'"></ng-include>
     </div>
 
-    <script type="text/ng-template" trados-translation="true" id="template/workflow-arrows">   
+    <script type="text/ng-template" trados-translation="true" id="template/workflow-arrows">
         <div class="hidden-xs">
 
             <div class="pull-right">
