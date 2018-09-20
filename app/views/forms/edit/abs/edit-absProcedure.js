@@ -30,6 +30,9 @@ define(['app', 'views/forms/edit/edit',
                     return jurisdictions;
                 });
             },
+            keywords   : function() {
+                return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", { cache: true }).then(function(o){return o.data;});
+            }
         });
 
         $scope.ac_jurisdictions = function() {
