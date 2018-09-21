@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@bower_components/ammap3@amcharts/ammap3#3.21.6":
+  version "3.21.6"
+  resolved "https://codeload.github.com/amcharts/ammap3/tar.gz/1a50b79d20651b38195999eb524265e381a22fa4"
+
 "@bower_components/angular-flex@scbd/angular-flex.git":
   version "2.0.0"
   resolved "https://codeload.github.com/scbd/angular-flex/tar.gz/9ca1bc11df71fc0036b3859f8b7de8411589f5f4"

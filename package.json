@@ -2,6 +2,7 @@
   "name": "absch.cbd.int",
   "description": "Access and Benefit Sharing Clearing-House",
   "dependencies": {
+    "@bower_components/ammap3": "amcharts/ammap3#3.21.6",
     "@bower_components/angular-flex": "scbd/angular-flex.git",
     "@bower_components/angular-localizer": "funkjunky/ngLocalizer",
     "@bower_components/angular-loggly-logger": "scbd/angular-loggly-logger#2c67428b49951e18bd03cbdd4834d939ba8fba74",
@@ -21,7 +22,6 @@
   "devDependencies": {
     "@bower_components/Chart.js": "chartjs/Chart.js#1.1.1",
     "@bower_components/SHA-1": "linkgod/SHA-1",
-    "@bower_components/ammap3": "amcharts/ammap3#3.21.6",
     "@bower_components/angucomplete": "darylrowland/angucomplete#3bf6ab2da56d514c22800f9dbdfeced66cff03f4",
     "@bower_components/angular": "angular/bower-angular#1.5",
     "@bower_components/angular-animate": "angular/bower-angular-animate#1.5",
