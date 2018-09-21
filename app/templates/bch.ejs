@@ -60,9 +60,8 @@
     <div class="device-size visible-md" size="md" style="height:0px;width:0px"></div>
     <div class="device-size visible-lg" size="lg" style="height:0px;width:0px"></div>
 
-    <script src="/app/libs/requirejs/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>
-    <script>require(['templates/bch'])</script>
-    
+    <script src="https://cdn.cbd.int/requirejs@2.2.0/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>
+    <script>window.appTemplate = 'templates/bch'</script>
     <script async src='https://www.google-analytics.com/analytics.js'></script>
     <!-- <script async src="https://cdn.slaask.com/chat.js" onload=" window._slaask.createScriptTag = function (url) { var t = {}; require([url], function() { t.onload(); }); return t; }; "></script> 
      --> 
