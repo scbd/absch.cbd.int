@@ -4,7 +4,6 @@
 	'./view-history-directive',
     'js/common',
     'views/directives/document-metadata-directive',
-    'views/directives/internal-record-details',
     'views/directives/party-status',
     'views/forms/view/view-default-reference.directive',
     'views/forms/view/view-contact-reference.directive',

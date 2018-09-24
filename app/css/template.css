@@ -1627,7 +1627,7 @@ div.recordDefault:hover {
     background-color: #eee!important;
 }
 #SubmitPage td {
-    border-bottom: 1px solid #DDD!important;
+    border-bottom: 1px solid #DDD;
     padding: 10px 0;
 }
 #SubmitPage .label {
