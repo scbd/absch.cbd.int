@@ -18,7 +18,7 @@ define(['app',
 
                         function loadArticles(){
                             var ag = [];
-                            ag.push({"$match":{"$and":[{"customTags.title.en":encodeURIComponent("absch-news")}]}});
+                            ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent("ABSCH-Announcement")}]}});
                             ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1}});
                             
                             var qs = {

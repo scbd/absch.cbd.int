@@ -17,7 +17,7 @@ define(['app','underscore',
       if (id) 
         loadArticle(id);
       else
-        loadArticles("ABSCH-NEWS");
+        loadArticles("ABSCH-Announcement");
 
       //---------------------------------------------------------------------
       function loadArticle(id){
@@ -29,7 +29,7 @@ define(['app','underscore',
       //---------------------------------------------------------------------
       function loadArticles(tag){
         var ag = [];
-        ag.push({"$match":{"$and":[{"customTags.title.en":encodeURIComponent(tag)}]}});
+        ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent(tag)}]}});
         ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1}});
         
         var qs = {

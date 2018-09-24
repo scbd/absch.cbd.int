@@ -16,7 +16,7 @@
 
 </style>
 
-    <h3 style="border-bottom:1px solid #ddd;">What's new on the ABS Clearing-House</h3>
+    <h3 style="border-bottom:1px solid #ddd;">ABSCH Announcements</h3>
         
         <div class="row"  ng-if="article">
             <div class="col-md-5">
@@ -25,8 +25,8 @@
             </div>
             <div class="col-md-7">
                 <p class="news-date bg-white" >{{article.meta.createdOn | date}}</p>
-                <h1 style="font-size:260%;">{{article.title[locale]}}</h1>
-                <p ng-bind-html="article.content[locale]"></p>
+                <h1 style="font-size:260%;">{{article.title.en}}</h1>
+                <p ng-bind-html="article.content.en"></p>
             </div>
         </div>
 
@@ -41,8 +41,7 @@
                                 </div>
                                 <div style="margin:5px;">
                                     <h4>{{article.title.en}}</h4>
-                                    
-                                    <p>{{ article.content.en | limitTo: 100 }}{{article.content.en.length > 100 ? '...' : ''}} </p>
+                                    <div> <span ng-bind-html="(article.content.en | limitTo: 100)+(article.content.en.length > 100 ? '...' : '')" style="display:inline;"></span></div>
                                 </div>
                             </div>
                     </div>  
