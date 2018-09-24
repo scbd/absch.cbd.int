@@ -4,14 +4,12 @@ define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'compone
     'views/forms/view/record-loader.directive'], function (app) {
 
         "use strict";
-        app.controller("pendingTasksCotroller", ["$scope",  "$timeout", "IWorkflows", "realm", "commonjs", '$rootScope', 'roleService', 'locale',
+        app.controller("pendingTasksCotroller", ["$scope", "$timeout", "IWorkflows", "realm", "commonjs", '$rootScope', 'roleService', 'locale',
             function ($scope, $timeout, IWorkflows, realm, commonjs, $rootScope, roleService, locale) {
                 $scope.filters = {};
                 $scope.sortTerm = 'createdOn';
                 $scope.orderList = true;
                 $rootScope.stopSmoothScroll = true;
-
-                $scope.today = new Date();
                 
                 $scope.options = {
                     filterTypes: function () {
@@ -50,16 +48,6 @@ define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'compone
                         $scope.orderList = true;
                     }
                 };
-
-                //==================================
-                $scope.getDays = function (Date1) {
-
-                    var days = moment.duration().asDays();
-
-                    return days;
-                };
-               
-
                 //==============================
                 //
                 //==============================
@@ -158,7 +146,7 @@ define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'compone
                 $scope.$watch('filters', function(old, newVal){
 
                     $scope.recordCount = 0;
-                    $scope.length = 100;
+                    $scope.length = 25;
                     $scope.skip = 0;
                     $scope.loadTasks(buildQuery());
                 }, true);
@@ -171,7 +159,7 @@ define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'compone
                         ]
                     };
                     if(!roleService.isAdministrator()){
-                       // queries.$and.push({"activities.assignedTo": $rootScope.user.userID});
+                        queries.$and.push({"activities.assignedTo": $rootScope.user.userID});
                     }
                     if($scope.filters.endDate)
                         queries.$and.push({ createdOn: { "$lte": moment(moment($scope.filters.endDate).format("YYYY-MM-DD")).toISOString() } })
