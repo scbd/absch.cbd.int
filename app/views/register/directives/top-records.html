@@ -1,4 +1,4 @@
-﻿<div class="row well top-records" style="margin:0 0 5px 0" ng-show="loading || self.records.Items.length > 0">
+﻿<div class="row top-records" style="margin:0 0 5px 0" ng-show="loading || self.records.Items.length > 0">
     <h4 ng-if="self.title" style="padding:3px;margin-top:0;border-bottom:1px solid #ddd;">{{self.title}}</h4>
     <div ng-if="loading" style="margin:0 48%">
         <i class="fa fa-spin fa-spinner" />
@@ -12,14 +12,14 @@
         }
     </style>
     <table class="table table-hover table-striped" style="width:100%;" ng-if="self.records.Items.length > 0">
-        <thead style="padding-bottom:10px;">
+        <!-- <thead style="padding-bottom:10px;">
             <tr>
                 <th class="col-md-5" id="titleHeader">Title</th>
                 <th class="col-md-2" id="updatedOnHeader">Last updated</th>
                 <th class="col-md-2" >Status</th>
                 <th class="col-md-3" >{{records.Items.length}} Record(s)</th>
             </tr>
-        </thead>
+        </thead> -->
         <tbody ng-repeat="record in self.records.Items | orderBy:'workingDocumentLock.lockedOn'">
 
             <tr id="record{{record.identifier}}">
