@@ -112,9 +112,10 @@
         }
     </style>
 
-    <div class="workflow-arrows margin-bottom-20">
+    <div class="workflow-arrows margin-bottom-20"  >
         <ng-include onload="workflowScope=workflowScope" src="'template/workflow-arrows'"></ng-include>
     </div>
+
     <div class="workflow-validation-error">
         <div km-document-validation ng-model="validationReport"></div>
     </div>
@@ -133,6 +134,8 @@
             </div>
         </div>
     </div>
+
+
 
     <div ng-if="tab=='intro'" km-tab="intro">
         <div ng-transclude="introForm">
@@ -243,8 +246,13 @@
 
 
         </div>
+
         <div ng-transclude="reviewForm"></div>
     </div>
+
+
+     
+        
 
     <div class="workflow-tabs">
         <ng-include onload="workflowScope=workflowScope" src="'template/workflow-arrows'"></ng-include>
@@ -262,20 +270,36 @@
             </div>
 
             <!-- one page form -->
-            <ul class="steps">
-                <li ng-class="{'arrowSelected': workflowScope.tab=='intro'}">
-                    <a href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Introduction</a>
-                </li>
-                <li ng-class="{'arrowSelected': workflowScope.tab=='edit'}">
-                    <a href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Submission form</a>
-                </li>
-                <li ng-class="{'arrowSelected': workflowScope.tab=='review'}">
-                    <a href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Preview</a>
-                </li>
-                <li class="publish" ng-class="{'publish arrowSelected': workflowScope.tab=='publish'}">
-                    <a href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</a>
-                </li>
-            </ul>
+            
+             <div class="row pull-left">
+                <div class="col-xs-1">
+                        <button type="button" class="btn btn-default bg-grey color-white ">
+                                <span class="glyphicon glyphicon-backward"></span>
+                        </button>
+                 </div>
+                <div class="col-xs-10">
+                    <ul class="steps">
+                        <li ng-class="{'arrowSelected': workflowScope.tab=='intro'}">
+                            <a href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Introduction</a>
+                        </li>
+                        <li ng-class="{'arrowSelected': workflowScope.tab=='edit'}">
+                            <a href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Submission form</a>
+                        </li>
+                        <li ng-class="{'arrowSelected': workflowScope.tab=='review'}">
+                            <a href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Preview</a>
+                        </li>
+                        <li class="publish" ng-class="{'publish arrowSelected': workflowScope.tab=='publish'}">
+                            <a href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</a>
+                        </li>
+                    </ul>
+                </div>
+               <div class="col-xs-1">
+                    <button type="button" class="btn btn-default bg-grey color-white ">
+                    <span class="glyphicon glyphicon-forward"> </span>
+                    </button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
         </div>
         <!-- small screen view -->
         <div style="margin:0px 20px 20px 0;" class="visible-xs hidden-sm hidden-md hidden-lg">
