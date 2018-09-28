@@ -42,7 +42,7 @@ define(['app', 'underscore', 'moment', 'angular', 'toastr', 'ng-breadcrumbs', 'b
             if (lang != 'en')
                 require(['css!/app/css/translation.css']);
             if (lang == 'ar') {
-                require(['css!libs/bootstrap-rtl/dist/css/bootstrap-rtl.css']);
+                require(['css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-rtl.min.css']);
             }
 
             var basePath = (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
@@ -230,12 +230,10 @@ define(['app', 'underscore', 'moment', 'angular', 'toastr', 'ng-breadcrumbs', 'b
 
 
             require(['angular-animate', 'components/scbd-angularjs-services/filters/scbd-filters','components/scbd-angularjs-services/services/main',
-                'angular-localizer',
-                'ngAria', 'angular-animate',
-                'components/scbd-branding/directives/footer',
-                'views/directives/nav/portal-branding',
-                'components/scbd-branding/directives/header/header',
-                'views/directives/nav/portal-nav'], function () {
+                'angular-localizer', 'angular-animate', 'components/scbd-branding/directives/footer',
+                'views/directives/nav/portal-branding', 'components/scbd-branding/directives/header/header', 'views/directives/nav/portal-nav'], 
+            function () {
+
                     $('#divHeader').append('<scbd-header></scbd-header><portal-branding></portal-branding><portal-nav></portal-nav>');
                     $('#divFooter').append('<scbd-footer></scbd-footer>')
                     $compile($('#divHeader').contents())($scope);
@@ -252,19 +250,10 @@ define(['app', 'underscore', 'moment', 'angular', 'toastr', 'ng-breadcrumbs', 'b
                 link: link,
                 restrict: "C"
             });
-            // I bind the JavaScript events to the scope.
             function link(scope, element, attributes) {
-                // Due to the way AngularJS prevents animation during the bootstrap
-                // of the application, we can't animate the top-level container; but,
-                // since we added "ngAnimateChildren", we can animated the inner
-                // container during this phase.
-                // --
-                // NOTE: Am using .eq(1) so that we don't animate the Style block.
                 $animate.leave(element.children().eq(1)).then(
                     function cleanupAfterAnimation() {
-                        // Remove the root directive element.
                         element.remove();
-                        // Clear the closed-over variable references.
                         scope = element = attributes = null;
                     }
                 );
