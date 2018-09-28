@@ -40,7 +40,8 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                 if (!$attr["class"])
                     $element.find('ul:first').addClass("list-unstyled");
            
-                //==============================
+                $scope.enableSearch = $attr.enableSearch;
+                //==============================   
                 //
                 //==============================
                 function init() {
