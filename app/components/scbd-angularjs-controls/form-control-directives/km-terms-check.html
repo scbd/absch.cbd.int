@@ -1,5 +1,25 @@
 ﻿<div>
-	<div class="col-xs-11">
+	<div class="col-xs-12" ng-show="enableSearch">
+		<div class="input-group pull-left" style="max-width:300px;">
+			<input  type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the list" style="font-weight:bold;">
+			<span type="submit" class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
+		</div>
+		<button class="btn btn-default btn-xs pull-right" ng-click="clear()" ng-if="binding.length>0">
+				<i class="fa fa-remove" ></i> Clear selection</button>
+	</div>
+	<div class="col-xs-12">
+		<div ng-if="searchKeyword" style="margin:20px">
+			<table class="table table-stripped table-hover">
+				<tr ng-repeat="term in searchList|filter:hasMatch">
+					<td>
+						<label>
+							<input type="checkbox" ng-model="identifiers[term.identifier]" ng-click="save()" 
+								ng-required="IsRequired()" value="{{term.identifier}}"/> {{term.displayTitle | lstring:locale}}
+						</label>
+					</td>
+				</tr>
+			</table>
+		</div>
 		<ul>
 			<script type="text/ng-template" id="term-check-tree-renderer.html">
 				<label>
@@ -33,8 +53,5 @@
 			</style>
 		</ul>
 	</div>
-		<div class="col-xs-1">
-				<button class="btn btn-default btn-xs" ng-click="clear()" ng-if="binding.length>0">
-						<i class="fa fa-remove" /> Clear selection</button>
-		</div>
+		
 	</div>
