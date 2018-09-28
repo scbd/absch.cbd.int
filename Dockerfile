@@ -1,13 +1,18 @@
-FROM node:8.4.0
+FROM node:8.12.0
 # -alpine
-#  RUN apt-get update && apt-get install -y yarn
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+#  RUN apt-get update && apt-get install -y apk
+
+#  RUN apk install yarn
+# RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+
+RUN yarn --version
 
 ARG BRANCH='master'
 ENV BRANCH $BRANCH
 
 ARG VERSION
 ENV VERSION $VERSION
+
 
 RUN echo 'running on branch ' $VERSION
 
