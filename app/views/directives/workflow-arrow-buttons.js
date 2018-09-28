@@ -228,7 +228,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.review = function()
 				{
 					$scope.loading = true;
-					$scope.validationReport = undefined;
+                    $scope.validationReport = undefined;
+                    $scope.errors              = null;
 					var qReport   = validate($scope.getDocumentFn());
 
 					return $q.when(qReport).then(function(validation) {
@@ -240,6 +241,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                             $scope.tab = "review";
                             $scope.validationReport = validationReport;
                         }
+                        else
+                            $scope.validationReport = {};
                     }).catch(function(error){
 						$scope.$emit("documentError", { action: "review", error: error });
 					}).finally(function(){
@@ -252,7 +255,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.publish = function()
 				{
 					$scope.loading = true;
-					$scope.validationReport = undefined
+					$scope.validationReport = undefined;
+                    $scope.errors              = null;
 					var qDocument = $scope.getDocumentFn();
 					var qReport   = validate(qDocument);
 
@@ -322,7 +326,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.publishRequest = function()
 				{
 					$scope.loading = true;
-					$scope.validationReport = undefined
+					$scope.validationReport = undefined;
+                    $scope.errors              = null;
 					var qDocument = $scope.getDocumentFn();
 					var qReport   = validate(qDocument);
 
@@ -386,7 +391,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				{
                     $scope.tab = 'edit';
 					$scope.loading = true;
-                    $scope.validationReport = undefined
+                    $scope.errors              = null;
 					return $q.when($scope.getDocumentFn()).then(function(document)
 					{
 						if(!document)
