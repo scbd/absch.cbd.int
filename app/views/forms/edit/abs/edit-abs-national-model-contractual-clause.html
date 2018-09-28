@@ -1,0 +1,176 @@
+﻿<div ng-controller="editAbsNationalModelContractualClause">
+    <style>
+        .indent {
+            padding: 0 15px 0 15px;
+        }
+    </style>
+
+    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+
+    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+
+        <span block-region activate="isLoading()" ng-if="isLoading()"></span>
+        <div class="registerpage-content">
+
+            <div workflow-arrow-buttons document="getCleanDocument()" 
+            languages="document.header.languages" hide-timer="false" tab="tab">
+                <!-- <intro-form></intro-form> -->
+                <edit-form>
+                    <form name="editForm" class="editForm">
+                        <div class="editForm">
+                            <section>
+
+                                <legend>General Information</legend>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="languages" required caption="1. Please select in which language(s) you wish to submit this record:">
+                                            <div class="indent">
+                                                <div km-form-languages required name="languages" ng-model="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="government" required caption="2. Country">
+                                            <div class="indent">
+                                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
+                                                    filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="title" required caption="3. Title:">
+                                            <div class="indent" km-textbox-ml ng-model="document.title" rows="1" placeholder="" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="description" caption="4. Summary or abstract ">
+                                            <div class="indent">
+                                                <div km-rich-textbox name="description" rows="3" ng-model="document.description" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="jurisdiction" caption="5. Area of jurisdiction:" >
+                                            <div class="help-info indent">Jurisdiction where this national model contractual clause is relevant</div>
+                                            <div class="indent" style="max-width:300px;">
+                                                <div afc-autocomplete name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter"
+                                                    mapping="genericMapping" selectbox="true" ></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row indent" ng-if="isSubNational()">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national jurisdiction">
+                                            <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdiction.customValue" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row indent" ng-if="isCommunity()">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" required name="jurisdictionName" caption="Name of the community">
+                                            <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdiction.customValue" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row indent" ng-if="isOthers()">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" required name="jurisdictionName" caption="Name of other jurisdiction">
+                                            <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdiction.customValue" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="relevantMeasures" caption="6. Relevant ABS Measure(s):">
+                                            <div class="indent help-info"> Please provide relevant ABS Measure(s). </div>
+                                            <div class="indent">
+                                                <div document-selector ng-model="document.relevantMeasures" question="measure" government="document.government" schema="(measure)" locales="document.header.languages"></div>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" required name="keywords" caption="7. Please select the relevant keywords:">
+                                            <div km-term-check name="keywords" required ng-model="document.keywords" terms="options.keywords()" binding-type="term[]"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group"  name="thematicAreas" caption="8. Thematic area(s):">
+                                            <div km-term-check enable-search="true" name="thematicAreas"  ng-model="document.thematicAreas" terms="options.thematicAreas()" binding-type="term[]"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+
+
+                            <section>
+
+                                <legend>Attached files, documents, or resources</legend>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="resourceLinks" require caption="9. Link to the resource(s)">
+                                            <div class="indent">
+                                                <div class="help-info">Please use this field to provide any other relevant information that may not
+                                                    have been addressed elsewhere in the record.</div>
+                                                <div km-rich-textbox name="relevantInformation" rows="3" ng-model="document.relevantInformation" locales="document.header.languages"></div>
+                                                <br>
+                                                <div class="help-info">Other relevant website address or attached documents:</div>
+                                                <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </section>
+
+                            <section>
+                                <legend>Notes</legend>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="notes">
+                                            <div class="help-info">The “Notes” field is for your personal notes or comments and will be hidden when
+                                                viewing the record. This field is not meant to be used for confidential information.</div>
+                                            <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+
+                        </div>
+                    </form>
+                </edit-form>
+                <review-form>
+                        <view-abs-national-model-contractual-clause ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></view-abs-national-model-contractual-clause>
+                </review-form>
+                <!-- <publish-form></publish-form> -->
+            </div>
+
+        </div>
+    </div>
+</div>
