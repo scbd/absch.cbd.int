@@ -388,7 +388,7 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
                     }
 
                     if (error.status == 404) $scope.error = "Terms not found";
-                    else $scope.error = error.data || "unkown error";
+                    else $scope.error = error.data || "unknown error";
                 }
 
                 $scope.$emit("getDocumentInfo", {});
