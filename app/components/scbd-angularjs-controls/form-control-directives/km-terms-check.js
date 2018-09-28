@@ -1,10 +1,11 @@
-define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs'], function(app, angular, $, template, Enumerable) { 'use strict';
+define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lodash',
+'components/scbd-angularjs-services/services/locale'], function(app, angular, $, template, Enumerable, _) { 'use strict';
 
     //============================================================
     //
     //
     //============================================================
-    app.directive('kmTermCheck',["$q", "Thesaurus", '$timeout',function($q, thesaurus, $timeout) {
+    app.directive('kmTermCheck',["$q", "Thesaurus", '$timeout', 'locale', function($q, thesaurus, $timeout, locale) {
         return {
             restrict: 'EAC',
             template: template,
@@ -39,7 +40,8 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs'], fun
                 if (!$attr["class"])
                     $element.find('ul:first').addClass("list-unstyled");
            
-                //==============================
+                $scope.enableSearch = $attr.enableSearch;
+                //==============================   
                 //
                 //==============================
                 function init() {
@@ -141,6 +143,8 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs'], fun
                             $scope.rootTerms = thesaurus.buildTree(refTerms);
                         else
                             $scope.rootTerms = Enumerable.from(refTerms).select("o=>{identifier : o.identifier, name : o.name, title : o.title}").toArray();
+                        
+                        buildSearchList($scope.rootTerms)
                     }
 
                     $scope.load();
@@ -156,12 +160,58 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs'], fun
                     }
 
                     if (error.status == 404) $scope.error = "Terms not found";
-                    else $scope.error = error.data || "unkown error";
+                    else $scope.error = error.data || "unknown error";
                 };
 
                 function clear(){
                     $scope.identifiers=[];
                     save();
+                }
+
+                $scope.hasMatch = function(term){
+                    if(!$scope.searchKeyword)
+                        return;
+
+                    var title = term.searchTitle[locale]
+                    if(!title)
+                        title = term.searchTitle['en'];
+
+                    if(title.toLowerCase().indexOf($scope.searchKeyword.toLowerCase())>=0)
+                        return true;
+                }
+                function buildSearchList(rootTerms, searchList){
+
+                    $scope.searchList = searchList = searchList || $scope.searchList||[];
+
+
+                    _.each(rootTerms, function(term){
+                        searchList.push({
+                            identifier: term.identifier, searchTitle: term.title,
+                            displayTitle: buildDisplayTitle(term)
+                        });
+                        if(term.narrowerTerms){                            
+                            buildSearchList(term.narrowerTerms, searchList)
+                         }
+                    })
+
+                }
+
+                function buildDisplayTitle(term){
+                    var broaderTitle= {};
+                    var mergedTitle = {}
+                    if(term.broaderTerms){
+                       broaderTitle =  buildDisplayTitle(term.broaderTerms[0]);
+                    }
+                    
+                    mergedTitle.en = (broaderTitle.en||'') + ' -> ' + (term.title.en ||'');
+                    mergedTitle.es = (broaderTitle.es||'') + ' -> ' + (term.title.es ||'');
+                    mergedTitle.fr = (broaderTitle.fr||'') + ' -> ' + (term.title.fr ||'');
+                    mergedTitle.ar = (broaderTitle.ar||'') + ' -> ' + (term.title.ar ||'');
+                    mergedTitle.ru = (broaderTitle.ru||'') + ' -> ' + (term.title.ru ||'');
+                    mergedTitle.zh = (broaderTitle.zh||'') + ' -> ' + (term.title.zh ||'');
+
+                    
+                    return mergedTitle;
                 }
 
                 init();
