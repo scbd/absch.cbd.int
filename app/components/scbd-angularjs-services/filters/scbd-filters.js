@@ -211,11 +211,11 @@ function (app, _, moment, schemaName, schemaShortName) {
     };
   });
 
-  app.filter("toTrusted", function ($sce) {
+  app.filter("toTrusted", ["$sce", function ($sce) {
     return function (value) {
       return $sce.trustAsHtml(value);
     };
-  });
+  }]);
 
   //============================================================
   //
@@ -239,11 +239,9 @@ function (app, _, moment, schemaName, schemaShortName) {
         locale = websiteLocale;
       locale = locale || "en";
 
-      if (term.customValue)
-        return $filter("lstring")(term.customValue, locale);
-
       if (cacheMap[term.identifier])
-        return $filter("lstring")(cacheMap[term.identifier].title, locale);
+        return $filter("lstring")(cacheMap[term.identifier].title, locale) + 
+          (term.customValue ? (' ('+$filter("lstring")(term.customValue, locale) + ')') : '');
 
       cacheMap[term.identifier] = $http.get("/api/v2013/thesaurus/terms?termCode=" + encodeURIComponent(term.identifier), {
         cache: true
@@ -251,7 +249,8 @@ function (app, _, moment, schemaName, schemaShortName) {
 
         cacheMap[term.identifier] = result.data;
 
-        return $filter("lstring")(cacheMap[term.identifier].title, locale);
+        return $filter("lstring")(cacheMap[term.identifier].title, locale)+ 
+          (term.customValue ? (' ('+$filter("lstring")(term.customValue, locale) + ')') : '');
 
       }).catch(function () {
 
