@@ -31,12 +31,13 @@ app.use(cookieParser())
 
 // Set routes
 app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: setCustomCacheControl , maxAge: 86400000*365 }) );
-app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',     translation, express.static(__dirname + '/app', { setHeaders: setCustomCacheControl }));
-// app.use('/app',                              express.static(__dirname + '/app'));
+
+app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: setCustomCacheControl }));
+app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',          translation, express.static(__dirname + '/app', { setHeaders: setCustomCacheControl }));
+
 app.use('/cbd-forums',      express.static(__dirname + '/app/libs/cbd-forums', { setHeaders: setCustomCacheControl }));
 app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: setCustomCacheControl , maxAge: oneDay }));
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
-
 
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
 app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbddev.xyz', changeOrigin: true, secure:false }));
