@@ -1,9 +1,7 @@
- define(["app", "text!views/forms/view/abs/view-abs-procedure.directive.html", 'views/directives/record-options',], function(app, template){
+ define(["app", "text!views/forms/view/abs/view-abs-procedure.directive.html", 
+ 	'views/directives/record-options', 'views/forms/view/view-reference-records.directive',
+	'views/forms/view/view-contact-reference.directive'], function(app, template){
 
-	// });
-//	 require("app")
-	// console.log(app);
-//	return {
 			app.directive("viewAbsProcedure", [function () {
 					
 				return {
@@ -22,10 +20,9 @@
 					{
 						$scope.contacts = undefined;
 					},
-					controller : ["$scope", "IStorage", function ($scope, storage)
+					controller : ["$scope", 'realm', "IStorage", function ($scope, realm, storage)
 					{
-						
-						
+						$scope.schema = realm.schemas.absProcedure
 						//====================
 						//
 						//====================
@@ -36,101 +33,9 @@
 							return( $scope.hide.indexOf(field) >= 0 ? false : true);
 						}
 
-						//====================
-						//
-						//====================
-						$scope.$watch("document.contacts", function()
-						{
-							if ($scope.document) {
-								$scope.contacts = angular.fromJson(angular.toJson($scope.document.contacts));
-
-								if ($scope.contacts)
-									$scope.loadReferences($scope.contacts);
-							}
-						});
-
-						//====================
-						//
-						//====================
-						$scope.$watch("document.authoritiesToInform", function () {
-							if ($scope.document) {
-								$scope.authoritiesToInform = angular.fromJson(angular.toJson($scope.document.authoritiesToInform));
-
-								if ($scope.authoritiesToInform)
-									$scope.loadReferences($scope.authoritiesToInform);
-							}
-						});
-
-						//====================
-						//
-						//====================
-						$scope.loadReferences = function(targets) {
-
-							angular.forEach(targets, function(ref){
-
-								storage.documents.get(ref.identifier, { cache : true})
-									.success(function(data){
-										ref.document = data;
-									})
-									.error(function(error, code){
-										if (code == 404 && $scope.allowDrafts == "true") {
-
-											storage.drafts.get(ref.identifier, { cache : true})
-												.success(function(data){
-													ref.document = data;
-												})
-												.error(function(){
-													ref.document  = undefined;
-													ref.error     = error;
-													ref.errorCode = code;
-												});
-										}
-
-										ref.document  = undefined;
-										ref.error     = error;
-										ref.errorCode = code;
-
-									});
-							});
-						};
-
-						//==================================
-						//
-						//==================================
-						$scope.isSubNational = function(document) {
-
-							document = document || $scope.document;
-
-							return document &&
-								   document.jurisdiction &&
-								   document.jurisdiction.identifier == "DEBB019D-8647-40EC-8AE5-10CA88572F6E";
-						};
-						
-						//==================================
-						//
-						//==================================
-						$scope.isOthers = function(document) {
-
-							document = document || $scope.document;
-
-							return document &&
-								   document.jurisdiction &&
-								   document.jurisdiction.identifier == "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED";
-						};
-						//==================================
-						//
-						//==================================
-						$scope.isCommunity = function (document) {
-
-							document = document || $scope.document;
-
-							return document &&
-								   document.jurisdiction &&
-								   document.jurisdiction.identifier == "DEEEDB35-A34B-4755-BF77-D713017195E3";
-						};
 					}]
 				};
 			}]);
-		//}
+			
  	}
  );
