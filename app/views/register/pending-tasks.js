@@ -1,41 +1,21 @@
-define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
+define(['app', 'underscore', 'js/common',  'moment', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
     'views/register/directives/register-top-menu', 'services/role-service',
     'views/directives/task-id-directive',
     'views/forms/view/record-loader.directive'], function (app) {
 
         "use strict";
-        app.controller("pendingTasksCotroller", ["$scope", "$timeout", "IWorkflows", "realm", "commonjs", '$rootScope', 'roleService', 'locale',
+        app.controller("pendingTasksCotroller", ["$scope",  "$timeout", "IWorkflows", "realm", "commonjs", '$rootScope', 'roleService', 'locale',
             function ($scope, $timeout, IWorkflows, realm, commonjs, $rootScope, roleService, locale) {
-                $scope.filters = {};
+                
+
                 $scope.sortTerm = 'createdOn';
                 $scope.orderList = true;
-                $rootScope.stopSmoothScroll = true;
-                
-                $scope.options = {
-                    filterTypes: function () {
-                        return _.sortBy(_.map(realm.schemas, function(schema, key){
-                            return {identifier: key, name: schema.title[locale]}
-                        }), "name");
-                    },
-                    filterStatus: function () {
-                        var status = [];
-                        status.push({ 'identifier': '1', 'name': 'Wating your approval' });
-                        status.push({ 'identifier': '2', 'name': 'Approved' });
-                        status.push({ 'identifier': '3', 'name': 'Rejected' });
-
-                        return status;
-                    }
-                };
-
+                $scope.today = new Date();
                 $scope.tasks = null;
-                $scope.load = load;
-
                 $scope.sortTerm = 'workflow.createdOn';
                 $scope.orderList = true;
-
-                $scope.length = 25;
-                $scope.skip = 0;
                 $scope.sort = { createdOn: -1 };
+                load(null);
 
                 //==================================
                 $scope.sortTable = function (term) {
@@ -48,19 +28,32 @@ define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'compone
                         $scope.orderList = true;
                     }
                 };
-                //==============================
-                //
-                //==============================
+
+                //==================================
+                $scope.getDays = function (Date1) {
+                    var days = moment.duration().asDays();
+                    return days;
+                };
+
+                //==================================
+                $scope.filterByStatus = function (stat) {
+                   $scope.filterStatus = stat;
+                   $scope.tasks = null;
+                   load(null);
+                };
+
+                //==================================
                 function load(query) {
 
-                    if ($scope.recordCount > 0) {
                         if(!query)
                             query = buildQuery();
+
                         $scope.loadingTasks = true;
-                        IWorkflows.query(query, null, $scope.length, $scope.skip == 0 ? 0 : $scope.length * $scope.skip).then(function (workflows) {
-                            $scope.skip++;
+
+                        IWorkflows.query(query, null).then(function (workflows) {
+                           
                             var tasks = [];
-                            //tasks = _.clone($scope.taskLists||[]);
+
                             workflows.forEach(function (workflow) {
                                 if (workflow.activities.length > 0) {
                                     workflow.activities.forEach(function (activity) {
@@ -87,94 +80,51 @@ define(['app', 'underscore', 'js/common', 'ngInfiniteScroll', 'moment', 'compone
                         }).finally(function () {
                             $scope.loadingTasks = false;
                         });
-                    }
-                    else
-                        $scope.loadingTasks = false;
-
                 }
 
-                $scope.loadTasks = function (query) {
-                    if ($scope.loadingTasks || $scope.skip > Math.ceil($scope.recordCount / $scope.length))
-                        return;
-
-                    if(!query)
-                        query = buildQuery();
-                    $scope.loadingTasks = true;
-                    //get record count
-                    if (!$scope.recordCount)
-                        IWorkflows.query(query, 1).then(function (recordCount) {
-                            $scope.recordCount = recordCount.count;
-                            $scope.tasks = [];
-                            load(query);
-                        });
-                    else
-                        load(query);
-                }
-                //==============================
-                //
-                //==============================
-                $scope.formatWID = function (workflowID) {
-                    return workflowID.replace(/(?:.*)(.{3})(.{4})$/g, "W$1-$2");
-                };
-
-
-                $scope.filterByType = function (entity) {
-
-                    if (!$scope.filterType)
-                        return true;
-
-                    return entity && $scope.filterType == entity.workflow.data.metadata.schema;
-                };
-
-                $scope.filterByStatus = function (task) {
-
-                    if (!$scope.filterStatus)
-                        return true;
-
-                    if ($scope.filterStatus == 1) {
-                        return task && task.workflow.state != 'completed' && task.activity.name == 'publishRecord';
-                    }
-                    else if ($scope.filterStatus == 2) {
-                        return task && task.workflow.state == 'completed' && task.activity.result.action == 'approve';
-                    }
-                    else if ($scope.filterStatus == 3) {
-                        return task && task.workflow.state == 'completed' && task.activity.result.action == 'reject';
-                    }
-                    //return entity && _.contains($scope.filterStatus, entity.workflow.data.metadata.schema);
-                };
-
-                $scope.$watch('filters', function(old, newVal){
-
-                    $scope.recordCount = 0;
-                    $scope.length = 25;
-                    $scope.skip = 0;
-                    $scope.loadTasks(buildQuery());
-                }, true);
-
+                //==================================
                 function buildQuery(){
                     var queries = {
                         $and: [
-                            { state: "running" },
                             { "data.realm": realm.value }
                         ]
                     };
                     if(!roleService.isAdministrator()){
-                        queries.$and.push({"activities.assignedTo": $rootScope.user.userID});
+                        var status = $scope.filterStatus || 'Pending';
+
+                            if(status == 'Pending'){
+                                queries.$and.push({ "state": 'running'})
+                                queries.$and.push({$or : [{"createdBy": $rootScope.user.userID}, {"activities.assignedTo": $rootScope.user.userID}] });
+                            }
+                            else if(status == 'Approved' ){
+                                queries.$and.push({ "state": 'completed'})
+                                queries.$and.push({$or : [{ "activities.result.action": 'approve'}, {"activities.result.action": 'approved'}] });
+                                queries.$and.push({$or : [{"createdBy": $rootScope.user.userID}, {"activities.completedBy": $rootScope.user.userID}] });
+                            }
+                            else if(status == 'Rejected'){
+                                queries.$and.push({"state": 'completed'})
+                                queries.$and.push({$or : [{"activities.result.action": 'reject'}, {"activities.result.action": 'rejected'}] });
+                                queries.$and.push({$or : [{"createdBy": $rootScope.user.userID}, {"activities.completedBy": $rootScope.user.userID}] });
+                            }
+                            else if(status == 'TimedOut' ){
+                                queries.$and.push({"state": 'timedOut'})
+                                queries.$and.push({$or : [{"createdBy": $rootScope.user.userID}, {"activities.assignedTo": $rootScope.user.userID}] });
+                            }
+                            else if(status == 'Canceled' ){
+                                queries.$and.push({"state": 'canceled'})
+                                queries.$and.push({"activities.assignedTo": $rootScope.user.userID});
+                            }
+                            else if(status == 'All' ){
+                                queries.$and.push({$or : [{"createdBy": $rootScope.user.userID}, 
+                                {"activities.assignedTo": $rootScope.user.userID},
+                                {"activities.canceledBy": $rootScope.user.userID},
+                                {"activities.completedBy": $rootScope.user.userID},
+                                {"activities.terminatedBy": $rootScope.user.userID}
+                                ] });
+                            }
                     }
-                    if($scope.filters.endDate)
-                        queries.$and.push({ createdOn: { "$lte": moment(moment($scope.filters.endDate).format("YYYY-MM-DD")).toISOString() } })
-                    
-                    if($scope.filters.startDate)
-                        queries.$and.push({ createdOn: { "$gte": moment(moment($scope.filters.startDate).format("YYYY-MM-DD")).toISOString() } })
-                    else
-                        queries.$and.push({ createdOn: { "$gte": moment().subtract(12, "weeks").toISOString() }});
-                        
-                    if($scope.filters.filterType && $scope.filters.filterType.length > 0)
-                        queries.$and.push({ "data.metadata.schema": { $in: $scope.filters.filterType }});
-                    
                     return queries;
                 }
 
-                $scope.$on('$destroy', function(){$rootScope.stopSmoothScroll = false;})
             }]);
     });

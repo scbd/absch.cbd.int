@@ -53,6 +53,12 @@ define(['app',"views/register/directives/record-type-header",
 						schemaType: "nationalRecords",
 
 					},
+					absProcedure: {
+						abbreviation: 'PRO',
+						title: 'ABS Procedure',
+						schemaType: "nationalRecords",
+						
+					},
 					absCheckpointCommunique: {
 						abbreviation: 'CPC',
 						schemaType: "nationalRecords",
