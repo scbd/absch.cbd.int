@@ -49,7 +49,7 @@
                     pagemode: "thumbs",
                     page: 1
                 },
-                forcePDFJS: true,
+                forcePDFJS: false,
                 PDFJS_URL: "/app/views/pdf-viewer/pdfjs/web/viewer.html"
             };
             pdfObject.embed($scope.pdf.src, '#viewPdf', options)
