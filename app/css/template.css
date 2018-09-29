@@ -1567,12 +1567,14 @@ div.recordDefault:hover {
 #PreferncesPage .register-content {
     background-color: #FFF;
     margin: 20px 0;
+    
 }
 #RegisterPage .register-content-header h3,
 #SubmitPage .register-content-header h3,
 #PreferncesPage .register-content-header h3 {
     padding: 0;
     margin: 0 0 5px 0;
+   
 }
 #RegisterPage .register-content-content,
 #SubmitPage .register-content-content,
@@ -1625,7 +1627,7 @@ div.recordDefault:hover {
     background-color: #eee!important;
 }
 #SubmitPage td {
-    border-bottom: 1px solid #DDD!important;
+    border-bottom: 1px solid #DDD;
     padding: 10px 0;
 }
 #SubmitPage .label {
