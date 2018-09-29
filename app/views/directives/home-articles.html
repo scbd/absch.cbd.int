@@ -1,0 +1,39 @@
+﻿<div>
+<style>
+.responsive {
+    width: 100%;
+    height: auto;
+}
+.news-image {
+    width: 100%;
+    height: 120px;
+    background-image: url('img_flowers.jpg');
+    background-size: cover;
+}
+.sized{height: 120px;}
+.small-sized{height: 10px;}
+.news-date{float:right; vertical-align: text-bottom;padding:3px; font-size: 10px; text-transform: uppercase; }
+
+</style>
+    <h4 style="padding-bottom:5px;margin-bottom:0;padding-top:20px;">ABSCH Announcements
+        <span class="pull-right more-link" style="top:10px; position: relative;"> <a href="/articles/" class="color-litegrey"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> {{articles.length}} records </a></span>
+    </h4>
+    <div style="border-top:1px solid #DDD;"></div>
+
+        <div class="row" style="margin:10px 5px 10px 5px; max-height:520px!important;overflow: hidden;">
+           <div ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:8" style="cursor:pointer"  >
+                    <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2" ng-click="loadArticle(article._id)">
+                       
+                        <div  style="background-color:#f9f9f9;border-top:1px solid #ddd; border-bottom:1px solid #ddd;height:250px;margin-bottom:10px;">
+                            <div  class="news-image" style="background-image: url({{::getSizedImage(article.coverImage.url, '200x200')}});" ng-class="{'sized':article.coverImage.url,'small-sized':!article.coverImage.url}"> 
+                                    <span class="bg-black color-white news-date">{{article.meta.createdOn | date}}</span>
+                            </div>
+                            <div style="margin:5px;">
+                                <h4>{{article.title.en}}</h4>
+                                <div> <span ng-bind-html="(article.content.en | limitTo: 100)+(article.content.en.length > 100 ? '...' : '')" style="display:inline;"></span></div>
+                            </div>
+                        </div>
+                 </div>  
+           </div>
+        </div>
+</div>

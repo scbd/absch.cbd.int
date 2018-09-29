@@ -1,108 +1,52 @@
 ﻿<div ng-controller="faqController">
+<style>
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #ddd;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color:  #ddd
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color:  #ddd
+}
+:-moz-placeholder { /* Firefox 18- */
+  color:  #ddd
+}
+.tag{position: relative; display:inline-block; white-space:nowrap;padding:5px 12px 5px 12px; margin:1px; border-radius: 3px; font-size: 11px; border:1px solid #ddd; text-transform: uppercase; cursor: pointer;background-color: white; }
+.tag-active{position: relative; display:inline-block;white-space:nowrap;padding:5px; margin:1px; border-radius: 3px; font-size: 11px; border:1px solid #ddd; text-transform: uppercase; cursor: pointer;color:white;background-color: #333; }
 
-  <style>
-    .faq, .faq ul{
-      list-style: none;
-      padding-left: 5px;
-    }
-    .faq>li>a {
-      padding-top: 10px;
-      font-weight: bold;
-    }
-
-    .faq>li>a:hover,
-    .faq>li>a:focus {
-      background-color: transparent!important;
-    }
-
-    .faq-stacked>li {
-      padding-top: 10px;
-      margin-top: 0!important;
-    }
-
-    .faq-stacked>li>a:hover,
-    .faq-stacked>li.active>a,
-    .faq-stacked>li.active>a:hover,
-    .faq-stacked>li.active>a:focus {
-      color: #1FA65D;
-      background-color: transparent!important;
-    }
-
-    .faq-stacked>li>a {
-      color: #1FA65D;
-      padding: 0 3px;
-      font-weight: bold;
-      font-size: 24px;
-    }
-
-    .sublist {
-      padding: 10px!important;
-      border-top: 1px solid #bbb;
-      background-color: #ddd;
-    }
-
-    .sublist>h5 .term>a {
-      color: #666!important;
-      font-weight: bold!important;
-      font-size: 18px;
-    }
-
-    .sublist>li>a:hover,
-    .sublist>li>a:focus,
-    {
-      color: #111!important;
-      background-color: transparent!important;
-    }
-
-  </style>
-
+</style>
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="col-sm-3 col-xs-12">
         <span left-menu   navigate-on-click="false"></span>
       </div>
       <div class="col-sm-9 col-xs-12" id="faq-content">
-        <h1> Frequently Asked Questions</h1>
-        <hr style="border-top:1px solid #999;">
-        <ul class="faq faq-stacked content">
-          <!--<li>
-            <input type="text" class="form-control" aria-label="search" placeholder="Search FAQs" ng-model="keyword" style="width:340px;">
-          </li>
+        <h1 style="border-bottom:1px solid #ddd;"> Frequently Asked Questions (FAQs)</h1>
 
-          <li>
-            <hr style="border-top:1px solid #999;">
-          </li>-->
+        <div>
+            <input style="width:100%;border-radius: 2px; padding: 12px 20px;margin: 8px 0;box-sizing: border-box;border:solid 1px #ddd;" ng-model="searchText" placeholder=" What are you looking for? "> 
+            <i ng-show="searchText != ''" ng-click="searchText=''" class="fa fa-times-circle pull-right" style="position: relative;top:-40px;left:-10px;font-size: 20px;" ></i>
+            
+            <div style="border-bottom:1px solid #ddd; margin-bottom:3px;">Categories:</div> 
+            <div style="margin-bottom: 20px;">
+              <div class="tag" ng-class="{'tag-active': category=='#about'}" ng-click="toggleCategory('#about')">About the ABSCH <i ng-show="category=='#about'" class="fa fa-times-circle" ></i></div>
+              <div class="tag" ng-class="{'tag-active': category=='#account'}" ng-click="toggleCategory('#account')" > Your CBD Account <i ng-show="category=='#account'" class="fa fa-times-circle" ></i></div>
+              <div class="tag" ng-class="{'tag-active': category=='#monitoring'}" ng-click="toggleCategory('#monitoring')">Monitoring the utilization of genetic resources <i ng-show="category=='#monitoring'" class="fa fa-times-circle" ></i></div>
+              <div class="tag" ng-class="{'tag-active': category=='#submit'}" ng-click="toggleCategory('#submit')">Submitting Information <i ng-show="category=='#submit'" class="fa fa-times-circle" ></i></div>
+              <div class="tag" ng-class="{'tag-active': category=='#search'}" ng-click="toggleCategory('#search')">Finding Information <i ng-show="category=='#search'" class="fa fa-times-circle" ></i></div>
+              <div class="tag" ng-class="{'tag-active': category=='#interop'}" ng-click="toggleCategory('#interop')">Interoperability <i ng-show="category=='#interop'" class="fa fa-times-circle" ></i></div>
+              <div class="tag" ng-class="{'tag-active': category=='#help'}" ng-click="toggleCategory('#help')">Help <i ng-show="category=='#help'" class="fa fa-times-circle" ></i></div>
 
-          <li ng-repeat="(key,faq) in faqs">
-            <a class="faq-header" translation-url href="#{{key}}">{{key.substring(3)}}</a>
-            <ul class="faq faq-stacked">
-              <li ng-class="{'bg-white':term.show || showAll}" class="sublist" 
-                ng-repeat="term in faq | filter:keyword | orderBy:['sequence']">
-                
-                <div>
-                  <a url="#" ng-show="term.show || showAll" class="pull-right" ng-click="term.show=false" 
-                  style="color:#428bca;cursor:pointer">
-                  <strong>&times;</strong></a>
-                </div>
-                <h5> 
-                   <div class="term">
-                     <a class="faq-header" href="#"  
-                     ng-click="term.show=!term.show">{{term.title}}</a>
-                  </div>
-                </h5>
-                <div ng-show="term.show || showAll" style="padding:5px;margin-top:20px;">
-                  <!--<h3><a translation-url  name="{{term.id}}">{{term.title}}</a></h3>-->
-                  <p ng-bind-html="term.description|lstring"></p>
-                  <!--<div class="pull-right"><a translation-url  href="#"  scroll-to="anchorTop" class="color-litegrey"><i class="fa fa-arrow-circle-up"></i> back to top</a></div>-->
-                  <div>
-                  <div faq-edit faq="term" ng-if="isAdmin"></div>
-              </li>
-            </ul>
-          </li>
-        </ul>
+            </div>
+        </div>
+
+        <div ng-repeat="article in articles | filter:searchText | filter:category | orderBy:'meta.updatedOn':true " style="cursor:pointer"  >
+            <span ng-click="showFAQ=!showFAQ" ng-class="{'color-litegrey':!showFAQ, 'color-grey':showFAQ}" style="font-weight:normal;font-size:1.4em;"><i class="fa" ng-class="{'fa-plus-circle':!showFAQ, 'fa-minus-circle color-grey':showFAQ}"></i> {{article.title.en}}</span>
+            <div ng-show="showFAQ" style="background-color:#e9e9e9;margin-bottom:10px;padding:20px;border-top:#ddd 1px solid;"><p ng-bind-html="article.content[locale]"> </p></div>
+        </div>
+        
       </div>
-
     </div>
   </div>
-
 </div>

@@ -1,52 +1,61 @@
 define(['app', 'underscore', 'services/role-service',
-		'./left-menu', './about-directives'
+		'./left-menu', './about-directives', '/components/scbd-angularjs-services/services/locale'
 	],
 	function (app, _) {
-		app.controller("faqController", ["$scope", 'roleService', '$timeout', '$q', '$http', '$element',
-			function ($scope, roleService, $timeout, $q, $http, $element) {
+		app.controller("faqController", ["$scope", "$route",'roleService', '$timeout', '$q', '$http', '$element', 'locale',
+			function ($scope, $route, roleService, $timeout, $q, $http, $element, locale) {
 
-				$q.when($http.get('/api/v2015/help-faqs'))
-					.then(function (response) {
-						
-						$scope.faqs = _(response.data).reduce(function (memo, o) {
-							_(o.tags).each(function (i) {
-								memo[i] = memo[i] || [];
-								memo[i].push(o);
-							});
-							return memo;
-						}, {});
+				$scope.status   = "loading";
+				$scope.error    = null;
+				$scope.category = "";
+				$scope.searchText="";
 
-						$timeout(function(){
-							$('.search-results').on('click', 'a', function(e){
-								var anchor =$(this)
-								var targetElement = $element.find(anchor.attr('href'))
+				var id = $route.current.params.id;
+			
+				if (id) 
+					loadArticle(id);
+				else
+					loadArticles("ABSCH-FAQs");
 
-								_.each($scope.faqs, function(faqs){
-									_.each(faqs, function(faq){
-										var title = faq.title.trim()
-													.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/g, '')
-													.replace(/\s/g, '-');
-										if('#'+title == anchor.attr('href')){
-											faq.show = true;
-										}
-									})
-								});
-							});
-						}, 500)
+				//---------------------------------------------------------------------
+				$scope.toggleCategory = function(tag){
+					if ($scope.category == tag)
+						$scope.category="" 
+					else 
+						$scope.category=tag;
+				}
+				//---------------------------------------------------------------------
+				function loadArticle(id){
+					$q.when($http.get('https://api.cbd.int/api/v2017/articles/' + id))
+					.then(function(results){
+						$scope.article = results.data;
+					})
+				}
+				//---------------------------------------------------------------------
+				function loadArticles(tag){
+					var ag = [];
+					ag.push({"$match":{"$and":[{"customTags.title.en":encodeURIComponent(tag)}]}});
+					ag.push({"$project" : {["title."+ locale]:1, "content":1, "coverImage":1, "meta":1, "tags":1, "customTags": 1}});
+					
+					var qs = {
+					"ag" : JSON.stringify(ag)
+					};
 
-						// if($scope.isAdmin()){
-						// 	require(['./faq-edit'], function(){});
-						// }
-					});
-
-				$scope.isAdmin = function () {
-					return roleService.isAbsAdministrator() ||
-						roleService.isAdministrator()
-
-				};
-				
-				$scope.getHref = function(text){
-					return (text||'').replace(/\s/g,'-');
+					$q.when($http.get('https://api.cbd.int/api/v2017/articles', {params: qs}))
+					.then(function(results){
+					if((results||{}).data && results.data.length > 0)
+						$scope.articles = results.data;
+					})
+				}
+				//---------------------------------------------------------------------
+				$scope.getSizedImage = function(url, size){
+					// return url;
+					return url && url
+					.replace(/attachments.cbd.int\//, '$&'+size+'/')
+				}
+				//---------------------------------------------------------------------
+				$scope.loadArticle = function(id){
+					$location.path('/articles/' + id );
 				}
 
 			}
