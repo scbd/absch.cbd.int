@@ -20,19 +20,19 @@ define(['app', 'text!./km-document-validation.html','jquery'], function(app, tem
                 //====================
                 $scope.jumpTo = function(field) {
 
-                    var qLabel = $element.parents("[km-tab]:last").parent().find("form[name='editForm'] label[for='" + field + "']:first");
+                    var qLabel = $element.parents().find("[km-tab]:last").parent().find("form[name='editForm'] label[for='" + field + "']:first");
 
                     if (qLabel.length === 0) //handle for abs as abs has the validation directive on edit instead of view form;
                         qLabel = $element.parent().find("form[name='editForm'] label[for='" + field + "']:first");
 
-                    var sTab = qLabel.parents("[km-tab]:first").attr("km-tab");
+                    var sTab = 'edit';//qLabel.parents().find("[km-tab]").attr("km-tab");
 
                     // inner tabs
-                    var sTabName   = qLabel.parents(".tab-pane").attr("id");
-                    var sPagerName = $('a[href$="'+ sTabName + '"]').parents("ul.pagination").attr("id");
+                    var sTabName   = qLabel.parents().find(".tab-pane").attr("id");
+                    var sPagerName = $('a[href$="'+ sTabName + '"]').parents().find("ul.pagination").attr("id");
 
                     if (sTab) {
-                        var qBody = $element.parents("body,html");
+                         var qBody = $("html, body") //$element.parents().find("body,html");
 
                         $scope.$parent.tab = sTab;
 
@@ -44,7 +44,7 @@ define(['app', 'text!./km-document-validation.html','jquery'], function(app, tem
 
                             qBody.stop().animate({
                                 scrollTop: qLabel.offset().top - 50
-                            }, 300);
+                            }, 1000);
                         });
                     }
                 };
@@ -54,7 +54,7 @@ define(['app', 'text!./km-document-validation.html','jquery'], function(app, tem
                 //====================
                 $scope.getLabel = function(field) {
 
-                    var qLabel = $element.parents("[km-tab]:last").parent().find("form[name='editForm'] label[for='" + field + "']:first");
+                    var qLabel = $element.parents().find("[km-tab]:last").parent().find("form[name='editForm'] label[for='" + field + "']:first");
 
                     if (qLabel.length === 0) //handle for abs as abs has the validation directive on edit instead of view form;
                         qLabel = $element.parent().find("form[name='editForm'] label[for='" + field + "']:first");

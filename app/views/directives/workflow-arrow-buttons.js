@@ -1,27 +1,52 @@
-define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
+define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore',
         'views/directives/workflow-history-directive',
         'toastr', 'services/local-storage-service', 'services/app-config-service'
 ], function (app, template) {
-
-    app.directive('workflowStdButtons',["$q", "$timeout", "localStorageService",
+    
+    app.directive('workflowArrowButtons',["$q", "$timeout", "localStorageService",
      function($q, $timeout, localStorageService){
 
     	return{
-    		restrict: 'EAC',
+    		restrict: 'EA',
     		replace:false,
-    		template: template,
+            template: template,
+            transclude  : {
+                introForm   : '?introForm',
+                editForm    : 'editForm',
+                reviewForm  : 'reviewForm',
+                publishForm : '?publishForm'
+            },
     		scope: {
     			getDocumentFn : '&document',
                 languages     : '=languages',
-                hideTimer     : '@hideTimer'
+                tab           : '=?',
+                onPreCloseFn      : "&onPreClose",
+				onPostCloseFn     : "&onPostClose",
+				onPreRevertFn     : "&onPreRevert",
+				onPostRevertFn    : "&onPostRevert",
+				onPreSaveDraftFn  : "&onPreSaveDraft",
+				onPostSaveDraftFn : "&onPostSaveDraft",
+				onPrePublishFn    : "&onPrePublish",
+				onPostPublishFn   : "&onPostPublish",
+                onErrorFn: "&onError",
+                validationReport    : '=?'
     		},
-    		controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",'$element', 'toastr', '$location', '$filter', '$routeParams', 'appConfigService',
-            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows, $element, toastr, $location, $filter, $routeParams, appConfigService)
+            controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",
+            '$element', 'toastr', '$location', '$filter', '$routeParams', 
+            'appConfigService', 'realm', '$http',
+            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows, 
+                $element, toastr, $location, $filter, $routeParams, appConfigService, realm, $http)
 			{
-                var document_type =  $filter("mapSchema")($route.current.$$route.documentType);
-                //////////////////////////////
+                if(!$scope.tab)
+                    $scope.tab = 'edit';
+
+                $scope.workflowScope = $scope;
                 $scope.errors              = null;
+                
                 var next_fs
+                var document_type =  $filter("mapSchema")($route.current.$$route.documentType);
+                
+                //////////////////////////////
                 $(".progressbar li button").click(function(){
                 	next_fs = $(this).parent();
                     var classes = next_fs.attr("class").split(' ')
@@ -43,6 +68,10 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
                 $scope.AdditionalInfoDialogDefered = [];
                 $scope.WorkflowDraftDialogDefered = [];
 
+
+                ///////////////////////////////
+                //// TODO: use ngDialiog
+                ///////////////////////////////
 				$scope.showCancelDialog = function(visible) {
         			  if($('form').filter('.dirty').length == 0) {
         				closeDocument();
@@ -82,7 +111,6 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
 							promise.resolve(false);
 					});
 				});
-
 
                 $scope.showAdditionalInfoDialog = function(visible) {
                     var isVisible = qAdditionalInfoDialog.css("display")!='none';
@@ -191,27 +219,44 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
 					}).finally(function(){
 
 						$scope.loading = false;
-                        $scope.timer(true);
 					});
 				}
 
-                $scope.timer = function(startNew){
-                    if(startNew){
-                        $scope.lastSaved = '';
-                        $scope.lastSavedTime = moment();
-                    }
-                    var duration = moment.duration(moment() - $scope.lastSavedTime)
-                    $scope.lastSaved = duration._data.hours + ':' + duration._data.minutes + ':' + duration._data.seconds
-                    $timeout(function(){$scope.timer();},1000);
-                }
+                //====================
+				//
+				//====================
+				$scope.review = function()
+				{
+					$scope.loading = true;
+                    $scope.validationReport = undefined;
+                    $scope.errors              = null;
+					var qReport   = validate($scope.getDocumentFn());
 
+					return $q.when(qReport).then(function(validation) {
+
+						var validationReport = validation;
+						//Has validation errors ?
+						if(validationReport && validationReport.errors && validationReport.errors.length>0) {
+                            // $scope.$emit("documentInvalid", validationReport);
+                            $scope.tab = "review";
+                            $scope.validationReport = validationReport;
+                        }
+                        else
+                            $scope.validationReport = {};
+                    }).catch(function(error){
+						$scope.$emit("documentError", { action: "review", error: error });
+					}).finally(function(){
+						$scope.loading = false;
+					});
+                }
 				//====================
 				//
 				//====================
 				$scope.publish = function()
 				{
 					$scope.loading = true;
-					$scope.$emit("clearDocumentErrors");
+					$scope.validationReport = undefined;
+                    $scope.errors              = null;
 					var qDocument = $scope.getDocumentFn();
 					var qReport   = validate(qDocument);
 
@@ -225,8 +270,8 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
 
 						//Has validation errors ?
 						if(validationReport && validationReport.errors && validationReport.errors.length>0) {
-
-							$scope.$emit("documentInvalid", validationReport);
+                            $scope.validationReport = validationReport;
+                            $scope.tab = "review";
 						}
 						else {
 
@@ -260,6 +305,8 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
                                 $('form').filter('.dirty').removeClass('dirty');
     							documentPublished(document, documentInfo._id);
                                 $scope.$emit("updateOrignalDocument", document);
+
+                                $scope.onPostPublishFn({ data: documentInfo });
     							return documentInfo;
 
     						});
@@ -279,7 +326,8 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
 				$scope.publishRequest = function()
 				{
 					$scope.loading = true;
-					$scope.$emit("clearDocumentErrors");
+					$scope.validationReport = undefined;
+                    $scope.errors              = null;
 					var qDocument = $scope.getDocumentFn();
 					var qReport   = validate(qDocument);
 
@@ -294,7 +342,8 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
 						//Has validation errors ?
 						if(validationReport && validationReport.errors && validationReport.errors.length>0) {
 
-							$scope.$emit("documentInvalid", validationReport);
+                            $scope.$emit("documentInvalid", validationReport);
+                            $scope.tab = "review";
 						}
 						else{
 
@@ -340,8 +389,9 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
 				//====================
 				$scope.saveDraft = function()
 				{
+                    $scope.tab = 'edit';
 					$scope.loading = true;
-                    $scope.$emit("clearDocumentErrors");
+                    $scope.errors              = null;
 					return $q.when($scope.getDocumentFn()).then(function(document)
 					{
 						if(!document)
@@ -395,27 +445,8 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
 						$scope.$emit("documentError", { action: "saveDraft", error: error });
 					}).finally(function(){
 						    $scope.loading = false;
-                            $scope.timer(true);
 					});
 				};
-
-				//====================
-				//
-				//====================
-				function validate(document) {
-
-					return $q.when(document).then(function(document){
-
-						if(!document)
-							throw "Invalid document";
-
-						return storage.documents.validate(document);
-
-					}).then(function(result) {
-
-						return result.data || result;
-					});
-				}
 
 				//====================
 				//
@@ -474,29 +505,22 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
                     });
                 };
 
-                $scope.$on("documentInvalid", function(){
-                  $scope.tab = "review";
-                });
+                $scope.switchTab = function(tab){
+                    if(tab==$scope.tab)
+                        return;
 
-                //==================================
-                //
-                //==================================
-                $scope.$watch("tab", function(tab) {
-                  if(tab == "review" || tab == "edit"){
-                      $scope.$parent.tab = tab;
-                      $scope.updateStep(tab);
-                  }
+                    $scope.tab = tab;
 
+                    if(tab == "review" || tab == "edit" || tab == "intro" || tab == "publish")
+                        $scope.updateStep(tab);
+                    
+                    if(tab == "intro")
+                        loadArticle(document_type);
 
+                    if(tab == "review" || tab == "publish")
+                        $scope.review();
+                }
 
-                });
-                $scope.$parent.$watch("tab", function(tab) {
-
-                  if(tab == "review" || tab == "edit" ){
-                      $scope.updateStep(tab);
-                      $scope.tab = tab;
-                  }
-                });
                 $scope.updateStep = function(tab){
                     $(".progressbar li").removeClass('active');
                     $(".step" + tab).addClass('active');
@@ -527,7 +551,24 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
                 });
 
 
-                $scope.loadSecurity();
+				//====================
+				//
+				//====================
+				function validate(document) {
+
+					return $q.when(document).then(function(document){
+
+						if(!document)
+							throw "Invalid document";
+
+						return storage.documents.validate(document);
+
+					}).then(function(result) {
+
+						return result.data || result;
+					});
+				}
+
 
                 function closeDocument(skipToast){
                     if(!skipToast)
@@ -581,7 +622,7 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
                 function documentPublishRequested(documentInfo, workflowId) {
 
                     if(_.contains(appConfigService.referenceSchemas, documentInfo.header.schema)){
-                        toastr.info('Record saved. A publishing request has been sent to SCBD.');
+                        toastr.info('Record saved. A publishing request has been sent to your SCBD.');
                     }
                     else
                         toastr.info('Record saved. A publishing request has been sent to your Publishing Authority.');
@@ -618,6 +659,61 @@ define(['app', 'text!views/directives/workflow-std-buttons.html', 'underscore',
 
                 };
 
+                function loadArticle(schema){
+                    
+                    if($scope.article)
+                        return;
+
+                    $scope.loading = true;
+                    var ag = [];
+                    ag.push({"$match":{"adminTags.title.en": { "$all" :
+                        [   encodeURIComponent('edit-form'), encodeURIComponent(realm.value),
+                            encodeURIComponent($filter("urlSchemaShortName")(document_type))]}}
+                    });
+                    ag.push({"$project" : {"title":1, "content":1}});
+                    
+                    var qs = {
+                      "ag" : JSON.stringify(ag)
+                    };
+                    $q.when($http.get('https://api.cbd.int/api/v2017/articles', {params: qs, cache:true}))
+                    .then(function(results){
+                      if((results||{}).data && results.data.length > 0)
+                        $scope.article = results.data[0];
+                    })
+                    .finally(function(){
+                        $scope.loading = false;
+                    })
+                }
+
+                $scope.loadSecurity();
+
+
+                // function confirmLeaving(evt, next, current) {
+                //     var formChanged = !angular.equals($scope.getCleanDocument(), $scope.origanalDocument);
+            
+                //     if(formChanged)
+                //         $('.editForm').closest('form').addClass('dirty');
+            
+                //     if(consideringClosing || $('form').filter('.dirty').length == 0)
+                //     return;
+            
+                //     evt.preventDefault();
+            
+                //     $('#dialogCancel').modal('show');
+                //     $rootScope.next_url = next;
+                //     consideringClosing = true;
+                // }
+            
+                // $scope.$on('$locationChangeStart', confirmLeaving);
+                // $scope.$on('$locationChangeSuccess', function(evt, data){
+                //     $rootScope.next_url = undefined;
+                // });
+                // //raised when  a document is published or requested for publishing
+                // //update orignal document with the updated one to avoid validation on page leave event(confirmLeaving).
+                // $scope.$on('updateOrignalDocument', function(evt,newDocument){
+            
+                //     $scope.origanalDocument = newDocument;
+                // });
 
             }]
     	};
