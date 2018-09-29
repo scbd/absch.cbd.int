@@ -1,0 +1,53 @@
+﻿<div ng-controller="viewArticles">
+<style>
+.responsive {
+    width: 100%;
+    height: auto;
+}
+.news-image {
+    width: 100%;
+    height: 120px;
+    background-image: url('img_flowers.jpg');
+    background-size: cover;
+}
+.sized{height: 120px;}
+.small-sized{height: 10px;}
+.news-date{float:right; vertical-align: text-bottom;padding:3px; font-size: 10px; text-transform: uppercase; }
+
+</style>
+
+    <h3 style="border-bottom:1px solid #ddd;">ABSCH Announcements</h3>
+        
+        <div class="row"  ng-if="article">
+            <div class="col-md-5">
+                <img class="thumbnail" style="margin-right:10px;width:100%; margin: auto; width: 100%;" ng-if="article.coverImage.url" src="{{getSizedImage(article.coverImage.url, '600x600')}}">
+               
+            </div>
+            <div class="col-md-7">
+                <p class="news-date bg-white" >{{article.meta.createdOn | date}}</p>
+                <h1 style="font-size:260%;">{{article.title.en}}</h1>
+                <p ng-bind-html="article.content.en"></p>
+            </div>
+        </div>
+
+   
+        <div class="row" style="margin:10px 5px 10px 5px;" ng-if="articles">
+            <div ng-repeat="article in articles | orderBy:'meta.createdOn':true" style="cursor:pointer"  >
+                        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2" ng-click="loadArticle(article._id)">
+                        
+                            <div  style="background-color:#f9f9f9;border-top:1px solid #ddd; border-bottom:1px solid #ddd;height:250px;margin-bottom:10px;">
+                                <div  class="news-image" style="background-image: url({{::getSizedImage(article.coverImage.url, '200x200')}});" ng-class="{'sized':article.coverImage.url,'small-sized':!article.coverImage.url}"> 
+                                        <span class="bg-red color-white news-date">{{article.meta.createdOn | date}}</span>
+                                </div>
+                                <div style="margin:5px;">
+                                    <h4>{{article.title.en}}</h4>
+                                    <div> <span ng-bind-html="(article.content.en | limitTo: 100)+(article.content.en.length > 100 ? '...' : '')" style="display:inline;"></span></div>
+                                </div>
+                            </div>
+                    </div>  
+            </div>
+        </div>
+
+      
+  
+</div>

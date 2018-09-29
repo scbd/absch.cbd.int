@@ -59,10 +59,14 @@ define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
                whenAsync('/help',                         {redirectTo  : '/help/about'}).
                whenAsync('/help/faq',                     {redirectTo  : '/help/faqs'}).
 
+               whenAsync('/help/guides',     { templateUrl: 'views/about/guides.html',  label:"Step-by-step guides", resolveController: true, resolveUser: true}).
+               whenAsync('/help/guides/:id', { templateUrl: 'views/about/guides.html',  param:'true', resolveController: true, resolveUser: true}).
+               
+
                whenAsync('/help/about',                   { templateUrl: 'views/about/about.html',                        label:'About the ABSCH',             reloadOnSearch : false,    resolveController:true, resolveUser : true}).
                whenAsync('/help/about/blog',              { templateUrl: 'views/about/blog.html',                        label:'ABSCH Development Blog',                 resolveController:true, resolveUser : true}).
                whenAsync('/help/videos/:videoId?',   {templateUrl: 'views/about/videos.html', resolveController: true, resolveUser: false, label:'ABSCH Videos'}).
-               whenAsync('/help/guides/:guideId?',   {templateUrl: 'views/about/guides.html', resolveController: true, resolveUser: false, label:'Step-by-step guides'}).
+               //whenAsync('/help/guides/:guideId?',   {templateUrl: 'views/about/guides.html', resolveController: true, resolveUser: false, label:'Step-by-step guides'}).
                whenAsync('/help/common-formats/:commonFormat?',     {templateUrl: 'views/about/common-formats.html', resolveController: true, resolveUser: true, label:'Common formats'}).
                whenAsync('/help/national-report',    {templateUrl: 'views/about/nr-faq.html', resolveController: true, resolveUser: true, label:'Information on the Interim National Report'}).
                whenAsync('/help/faqs',               {templateUrl: 'views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
