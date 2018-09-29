@@ -5,11 +5,11 @@
 
     <span register-top-menu></span>
 
-    <div class="register-content-header color-white" style="margin-top:20px;"
-     ng-class="{'bg-blue': schemaType != 'referenceRecords','bg-orange': schemaType == 'referenceRecords' }">
+    <div class="register-content-header bg-white" style="margin-top:20px;" ng-class="{'bg-blue': schemaType != 'referenceRecords','bg-orange': schemaType == 'referenceRecords' }">
 
-        <div style="padding:10px 10px;">
-            <h3 style="padding: 0; margin: 0 0 5px 0;">{{type|mapSchema|schemaName}} <span class="color-darkgrey">({{type}})</span>
+         <div style="padding:5px 5px;">
+             
+            <h3 style="padding: 0 5px 0 5px; margin: 0; font-weight: normal;"> {{type|mapSchema|schemaName}} ({{type}})
 
             <span class="helpinfoInline" ng-show="type ==='CNA'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCNAInfo = !showCNAInfo"></i>
@@ -39,6 +39,10 @@
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showNRInfo = !showNRInfo"></i>
             </span>
 
+            <span class="helpinfoInline" ng-show="type ==='PRO'" >
+                <i class="glyphicon glyphicon-remove pull-right color-white" ng-click="close()" ></i>
+            </span>
+
              <span class="helpinfoInline" ng-show="type ==='VLR'" >
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showVLRInfo = !showVLRInfo"></i>
             </span>
@@ -61,9 +65,7 @@
                 <i class="fa fa-info-circle helpicon pull-right" ng-click="showCONInfo = !showCONInfo"></i>
             </span>
 
-
          </h3>
-
 
             <script type="text/ng-template" trados-translation="true" id="defaultIntro">
                 <h5> Instructions</h5>
@@ -77,7 +79,7 @@
 
 
             <a translation-url  class="pull-right well-help-close" ng-click="showCONInfo=false;showCNAInfo=false;showCPPInfo=false;showA19A20Info=false;showVLRInfo=false;showIRCCInfo=false;showCPCInfo=false;showCPCInfo=false;showNDBInfo=false;showMSRInfo=false;showCNAInfo=false;"
-                ng-show=" showCONInfo ||    showCNAInfo    || showCPPInfo    || showA19A20Info    || showVLRInfo    || showIRCCInfo    || showCPCInfo    || showCPCInfo    || showNDBInfo    || showMSRInfo    || showCNAInfo">&times;</a>
+                ng-show=" showCONInfo ||    showCNAInfo    || showCPPInfo    || showA19A20Info    || showVLRInfo    || showIRCCInfo    || showCPCInfo    || showCPCInfo    || showNDBInfo    || showMSRInfo    || showCNAInfo || showPROInfo">&times;</a>
 
             <!--CON---------------------------->
             <div ng-if="showCONInfo" class="well well-help">
@@ -213,6 +215,14 @@
                     prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources (subparagraph i). Such information collected by the checkpoint needs to be
                     provided to relevant national authorities, to the Party providing prior informed consent and to the ABS Clearing-House, as appropriate (subparagraph iii).</div>
 
+                <div ng-include="'defaultIntro'"></div>
+            </div>
+
+            <!--CP---------------------------->
+            <div ng-if="showPROInfo" class="well well-help">
+
+                <h5> Introduction</h5>
+                <div>ADD INFO HERE ON PROCEDURES</div>
                 <div ng-include="'defaultIntro'"></div>
             </div>
 
