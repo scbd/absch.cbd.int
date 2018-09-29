@@ -1,0 +1,82 @@
+﻿<div class="row well top-records" style="margin:0 0 30px 0" ng-show="loading || self.records.Items.length > 0">
+
+        <h4 style="padding-bottom:3px;margin-top:0;border-bottom:1px solid #ddd;"><span class="color-black bold">{{self.title}}</span>
+            <span class="pull-right"> 
+                    <a translation-url style="color:#999;"  ng-href="/register/{{schema|urlSchemaShortName}}" ng-if="!self.viewAllUrl">
+                        view all <span class="color-white bg-red badge" style="position:relative;top:-3px;font-size:14px;">{{self.records.Count}}</span> <span class="hidden-xs"> requests</span>
+                    </a>
+                    <a translation-url style="color:#999;"  ng-href="{{self.viewAllUrl}}" ng-if="self.viewAllUrl">
+                        view all <span class="color-white bg-red badge" style="position:relative;top:-3px;font-size:14px;">{{self.records.Count}}</span>  <span class="hidden-xs"> requests</span>
+                    </a>
+            </span>
+        </h4>
+
+    <div ng-if="loading" style="margin:0 48%">
+        <i class="fa fa-spin fa-spinner" />
+    </div>
+
+    <style>
+         .top-records .table>thead>tr>th, .top-records .table>tbody>tr>td{
+            padding:3px!important;
+        }
+        .top-records .table>tbody+tbody{
+            border-top: none
+        }
+    </style>
+
+    <table class="table table-hover" style="width:100%;" ng-if="self.records.Items.length > 0">
+        <thead style="padding:3px 3px 10px 3px; background-color: #DDD;">
+            <tr>
+                <th class="" style="font-size:12px;" id="titleHeader">&nbsp; Latest publishing requests</th>
+                <th class="" style="width:14%;font-size:12px;" id="updatedOnHeader">Requested by:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="record{{record.identifier}}" ng-repeat="record in self.records.Items | orderBy:'workingDocumentLock.lockedOn'" style="margin-bottom:10px;">
+                <td>                   
+                    <span>
+                        <div>
+                        <!-- <span style="font-size:9px;" class="label label-primary bg-published" ng-if="record.documentID">Published</span>
+                        <span style="font-size:9px;" class="label label-warning bg-draft" ng-if="record.workingDocumentCreatedOn && !record.workingDocumentLock">Draft</span> -->
+                        <span style="font-size:10px;white-space:nowrap;">
+                            <span class="hidden-xs" ng-if="!showSchemaName">{{record.type|schemaName}}</span>
+                            <span class="visible-xs" ng-if="!showSchemaName">{{record.type|urlSchemaShortName}}</span>
+                        </span></div>
+                        <a translation-url ng-href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/view">
+                            {{(record.workingDocumentTitle||record.title)|lstring}}
+                        </a>
+                    </span>
+                </td>
+                <td style="width:21%;" class="text-center">                    
+                    <div ng-if="record.workingDocumentUpdatedBy">
+                        <a translation-url  style="color:#666" href="mailto:{{record.workingDocumentUpdatedBy.email}}">
+                            <strong>{{record.workingDocumentUpdatedBy.firstName}} {{record.workingDocumentUpdatedBy.lastName}}</strong>
+                        </a>
+                        <span style="font-size:10px;white-space:nowrap;"> on {{record.workingDocumentUpdatedOn | formatDateWithTime }}</span>
+                    </div>
+                    <div ng-if="record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
+                        <a translation-url  style="color:#666" href="mailto:{{record.workingDocumentCreatedBy.email}}">
+                            <strong>{{record.workingDocumentCreatedBy.firstName}} {{record.workingDocumentCreatedBy.lastName}}</strong>
+                        </a>
+                        <span style="font-size:10px;white-space:nowrap;"> on {{record.workingDocumentCreatedBy | formatDateWithTime }}</span>
+                    </div>
+                    <div ng-if="!record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
+                            <div ng-show="record.updatedBy">
+                                <a translation-url  style="color:#666" href="mailto:{{record.updatedBy.email}}">
+                                    <strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong>
+                                </a>
+                                <span style="font-size:10px;white-space:nowrap;"> on {{record.updatedOn | formatDateWithTime }}</span>
+                            </div>
+                            <div ng-show="record.createdBy && !record.updatedBy">
+                                <a translation-url  style="color:#666" href="mailto:{{record.createdBy.email}}">
+                                    <strong>{{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong>
+                                </a>
+                                <div style="font-size:10px;white-space:nowrap;"> on {{record.createdOn | formatDateWithTime }}</div>
+                            </div>
+                        </div>                   
+                </td> 
+            </tr>
+        </tbody>
+    </table>
+  
+</div>

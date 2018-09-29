@@ -32,65 +32,34 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="well">
-                        <h3 style="margin:0 0 20px 0;padding:0;">Record Information</h3>
-                        <table style="width:100%!important;">
-                            <tr>
-                                <td>
-                                    <label> Unique Identifier: </label>
-                                </td>
-                                <td class="bold">
-                                    {{internalDocument | uniqueID}}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label> Current Status: </label>
-                                </td>
-                                <td class="bold">
-                                    <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">
-                                        DRAFT
-                                    </span>
-                                    <span class="color-green" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">
-                                        PUBLISHED
-                                    </span>
-                                    <span class="color-red" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">
-                                        [ Locked: Pending {{workflowRequestType}} request ]
-                                    </span>
-                                    <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">
-                                        DELETED
-                                    </span>
-                                    <span ng-show="!internalDocument.deletedOn && internalDocument.amendmentIntent==1  && internalDocument.type!='absCheckpointCommunique'">
-                                        <span class="bold color-red"> REVOKED</span>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label> Record Type: </label>
-                                </td>
-                                <td class="bold">{{internalDocumentInfo.metadata.schema | schemaName}}</td>
-                            </tr>
-                            <tr ng-if="docInfo.revision > 0">
-                                <td>
-                                    <label> Record Versions: </label>
-                                </td>
-                                <td class="bold">{{internalDocumentInfo.revision}}</td>
-                            </tr>
-                            <tr ng-if="docInfo.metadata.government">
-                                <td>
-                                    <label> Record Owner: </label>
-                                </td>
-                                <td class="bold"> {{getUserCountry(internalDocumentInfo.metadata.government)}}</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label> History:</label>
-                                </td>
-                                <td>
-                                    <div view-history document-id="internalDocumentInfo.identifier"></div>
-                                </td>
-                            </tr>
-                        </table>
+                        <h3 style="margin:0 0 10px 0;padding:0;border-bottom:1px solid #999;">Record Information</h3>
+                        <div> 
+                            <span style="font-size:12px">Type: </span> 
+                            {{internalDocumentInfo.metadata.schema | schemaName}} </div>
+                        <div>
+                            <span style="font-size:12px">Status: </span>
+                            <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">
+                                DRAFT
+                            </span>
+                            <span class="color-green" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">
+                                PUBLISHED
+                            </span>
+                            <span class="color-red" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">
+                                [Locked: Pending {{workflowRequestType}} request]
+                            </span>
+                            <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">
+                                DELETED
+                            </span>
+                            <span ng-show="!internalDocument.deletedOn && internalDocument.amendmentIntent==1  && internalDocument.type!='absCheckpointCommunique'">
+                                <span class="bold color-red"> REVOKED</span>
+                            </span>
+                        </div>
+                        <div>
+                            <span style="font-size:12px">History: </span>
+                            <div view-history document-id="internalDocumentInfo.identifier"></div>
+                        </div>
+
+                       
                     </div>
                 </div>
             </div>
