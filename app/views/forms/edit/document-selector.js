@@ -33,7 +33,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 
             if(!$scope.type) $scope.type = "checkbox";
 
-
+            $scope.hideAddContact = ($scope.schema||'').indexOf('contact')<0
             //==================================
             //
             //==================================
