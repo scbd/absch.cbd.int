@@ -25,7 +25,7 @@
                         </a>
                     </li>
                     <li>
-                        <a  translation-url href="http://bch.cbd.int/protocol" ng-click="activeMenu='protocol'"
+                        <a  translation-url href="/protocol" ng-click="activeMenu='protocol'"
                         ng-class="{'active-menu' : activeMenu == 'protocol'}">
                             <i class="icon fa fa-book visible-xs"></i><span class="hidden-xs">Protocol</span>
                         </a>
@@ -37,15 +37,15 @@
                         </a>
                     </li>
                     <li>
-                        <a translation-url  ng-href="/register" ng-click="activeMenu='manage'"
-                        ng-class="{'active-menu' : activeMenu == 'manage'}"> <i class="icon fa fa-list-alt visible-xs"></i>
-                            <span class="hidden-xs "> <i class="icon fa fa-lock"></i> Manage</span>
+                        <a translation-url  ng-href="/register"  ng-click="activeMenu='submit'"
+                         ng-class="{'active-menu' : activeMenu == 'submit'}"> <i class="icon fa fa-pencil-square-o visible-xs"></i>
+                         <span class="hidden-xs "> Submit</span>
                         </a>
                     </li>
                     <li>
-                        <a translation-url  ng-href="/register/dashboard"  ng-click="activeMenu='submit'"
-                         ng-class="{'active-menu' : activeMenu == 'submit'}"> <i class="icon fa fa-pencil-square-o visible-xs"></i>
-                            <span class="hidden-xs "> Submit</span>
+                        <a translation-url  ng-href="register/dashboard" ng-click="activeMenu='manage'"
+                        ng-class="{'active-menu' : activeMenu == 'manage'}"> <i class="icon fa fa-list-alt visible-xs"></i>
+                            <span class="hidden-xs "><i class="icon fa fa-lock"></i> Manage </span>
                         </a>
                     </li>
                     <li>
@@ -59,7 +59,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a translation-url  href="/forums" ng-class="{'active-menu' : activeMenu == 'forums'}" ng-click="activeMenu='forums'">
+                        <a translation-url  href="/onlineconferences" ng-class="{'active-menu' : activeMenu == 'forums'}" ng-click="activeMenu='forums'">
                             <i class="fa fa-comments visible-xs"></i><span class="hidden-xs">&nbsp;Forums</span>
                         </a>
                     </li>
@@ -70,7 +70,6 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="/reports">National Reports</a></li>
-                            <li><a href="/onlineconferences">Online forums and portals</a></li>
                             <li><a href="#">todo</a></li>
                             <li><a href="#">todo</a></li>
                             <li><a href="#">todo</a></li>
