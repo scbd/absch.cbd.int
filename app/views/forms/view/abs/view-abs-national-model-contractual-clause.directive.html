@@ -29,9 +29,7 @@
              </div>
              <div ng-show="document.description">
                 <label> Summary or abstract</label>
-                <div class="km-value">
-                    <strong>{{document.description | lstring:locale}}</strong>
-                </div>
+                <km-value-ml value="document.description" locales="locale" km-pre html></km-value-ml>         
             </div>
             <div ng-show="document.jurisdiction">
                 <label>Area of Jurisdiction</label>
@@ -42,15 +40,15 @@
     
             <div ng-show="document.relevantMeasures">
                 <label>Relevant ABS Measure(s)</label>
-                <div class="km-value" ng-repeat="contact in document.relevantMeasures">
-                    <div view-reference-reference ng-model="contact" locale="locale"></div>
+                <div class="km-value" ng-repeat="measure in document.relevantMeasures">
+                    <div view-default-reference ng-model="measure.identifier" locale="locale"></div>
                 </div>
             </div>
     
             <div ng-show="document.keywords">
                 <label>Keywords</label>
                 <div class="km-value">
-                    <ul class="list">
+                    <ul>
                         <li ng-repeat="term in document.keywords">{{term | term:locale}}</li>
                     </ul>
                 </div>
@@ -59,8 +57,8 @@
             <div ng-show="document.keywords">
                 <label>Thematic area(s)</label>
                 <div class="km-value">
-                    <ul class="list">
-                        <li ng-repeat="term in document.keywords">{{term | term:locale}}</li>
+                    <ul>
+                        <li ng-repeat="term in document.thematicAreas">{{term | term:locale}}</li>
                     </ul>
                 </div>
             </div>
@@ -68,14 +66,18 @@
                 <legend>Additional Information</legend>
     
                 <div ng-show="document.relevantInformation">
-                    <div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+                    <km-value-ml value="document.relevantInformation" locales="locale" km-pre html></km-value-ml>     
                 </div>
     
                 <div ng-show="document.relevantDocuments">
                     <label>Other relevant links or attached documents</label>
-                    <div class="km-value" ng-repeat="item in document.relevantDocuments">
-                        <a translation-url  target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-                        <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+                    <div class="km-value">
+                        <ul >
+                            <li ng-repeat="item in document.relevantDocuments">
+                                <a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                                <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
