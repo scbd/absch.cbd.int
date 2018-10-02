@@ -45,7 +45,7 @@ define([
         param:$scope.type,
         path:"/register/" + $scope.type
     }
-    breadcrumbs.breadcrumbs.splice(2, 0 , breadcrumb);
+    breadcrumbs.breadcrumbs.splice(1, 0 , breadcrumb);
 
     $scope.options  = {
       countries		: function() {

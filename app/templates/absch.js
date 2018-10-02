@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'moment', 'angular', 'toastr', 'ng-breadcrumbs', 'bootstrap', 'routes/absch', 'angular-loading-bar', 'angular-animate', 'components/scbd-branding/directives/header/xuser-notification-config-service'
+define(['app', 'underscore', 'moment', 'angular', 'toastr', 'bootstrap', 'routes/absch', 'angular-loading-bar', 'angular-animate', 'components/scbd-branding/directives/header/xuser-notification-config-service'
 ], function (app, _, moment, angular) {
     'use strict';
 
@@ -18,16 +18,15 @@ define(['app', 'underscore', 'moment', 'angular', 'toastr', 'ng-breadcrumbs', 'b
 
 
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
-        '$location', '$anchorScroll', 'breadcrumbs', 'toastr', '$route',
+        '$location', '$anchorScroll', 'toastr', '$route',
         '$window', '$element', 'localStorageService', 'appConfigService', 'LogglyLogger', 'locale', '$compile',
-        function ($scope, $rootScope, showHelp, $location, $anchorScroll, breadcrumbs, toastr, $route,
+        function ($scope, $rootScope, showHelp, $location, $anchorScroll, toastr, $route,
             $window, $element, localStorageService, appConfigService, logglyLogger, locale, $compile
         ) {
 
             //$scope.ACCOUNTS_URL = apiUrl.devAccountsUrl();
 
             $scope.controller = "TemplateController";
-            $scope.breadcrumbs = breadcrumbs;
             $scope.$root.pageTitle = {
                 text: ""
             };
