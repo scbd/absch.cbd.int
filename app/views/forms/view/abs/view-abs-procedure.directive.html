@@ -24,7 +24,7 @@
 		 <div ng-show="document.name">
 		 	<label>Title</label>
 		 	<div class="km-value">
-		 	<strong>{{document.name | lstring:locale}}</strong>
+				<km-value-ml value="document.name" locales="locale"></km-value-ml>  
 		 	</div>
 		 </div>
 		 
@@ -50,14 +50,14 @@
 		<div ng-show="document.requirements">
 			<label>Conditions or requirements a potential user needs to fulfil to apply for access</label>
 			<div class="km-value">
-				<strong>{{document.requirements | lstring:locale}}</strong>
+				<km-value-ml value="document.requirements" locales="locale" km-pre html></km-value-ml>    
 			</div>
 		</div>
 		
 		<div ng-show="document.description || document.descriptionLinks">
 			<label>Step-by step description or a visual representation of the ABS procedure</label>
 			<div class="km-value">
-				<strong>{{document.description | lstring:locale}}</strong>
+				<km-value-ml value="document.description" locales="locale" km-pre html></km-value-ml>   
 			</div>
 
 			<div class="km-value" ng-repeat="item in document.descriptionLinks" ng-show="document.descriptionLinks">
@@ -74,7 +74,7 @@
 		<div ng-show="document.applicationInformation">
 			<label>Information on application forms or required documents</label>
 			<div class="km-value">
-				<strong>{{document.applicationInformation | lstring:locale}}</strong>
+				<km-value-ml value="document.applicationInformation" locales="locale" km-pre html></km-value-ml>     
 			</div>
 		</div>
 		<div ng-show="document.applicationLinks">
@@ -100,7 +100,7 @@
 		<div ng-show="document.applicationFeesInformation">
 			<label>Additional information on application fees</label>
 			<div class="km-value">
-				<strong>{{document.applicationFeesInformation | lstring:locale}}</strong>
+				<km-value-ml value="document.applicationFeesInformation" locales="locale" km-pre html></km-value-ml>   
 			</div>
 		</div>
 		
@@ -131,7 +131,7 @@
 			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">
-				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+				<km-value-ml value="document.relevantInformation" locales="locale" km-pre html></km-value-ml> 
 			</div>
 
 			<div ng-show="document.relevantDocuments">
