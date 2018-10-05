@@ -45,7 +45,7 @@ define([
         param:$scope.type,
         path:"/register/" + $scope.type
     }
-    breadcrumbs.breadcrumbs.splice(1, 0 , breadcrumb);
+    breadcrumbs.breadcrumbs.splice(2, 0 , breadcrumb);
 
     $scope.options  = {
       countries		: function() {
@@ -121,7 +121,7 @@ define([
     //
     //==================================
     $scope.$watch("tab", function(tab) {
-      if(tab == "review")
+      if(tab == "review" || tab=='publish')
         validate();
     });
 
@@ -490,7 +490,7 @@ define([
     });
     $rootScope.$on('event:sessionExpired-signIn', function(evt, data){
         $scope.error = null;
-        if($scope.tab == "review")
+        if($scope.tab == "review" || tab=='publish')
           validate();
     })
 
