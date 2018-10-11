@@ -1,8 +1,0 @@
-﻿<span style="text-align:left" ng-hide="status == 'loading'" >
-	<span ng-hide="errors || status=='loading buttons'">
-			<input type="button" class="btn btn-warning" ng-click="new_cancel($event)" value="Close"/>
-			<button type="button" class="btn btn-default bg-draft" ng-click="new_saveDraft($event)" > Save Draft <i ng-show="status=='saving'" class="fa fa-spinner fa-spin"></i></button>
-			<button ng-show="security.canSave" type="button" class="btn btn-success" ng-click="new_publish($event)" > Publish <i ng-show="status=='publishing'" class="fa fa-spinner fa-spin"></i></button>
-			<button ng-show="!security.canSave" type="button" class="btn btn-danger" ng-click="new_publishRequest($event)" > Send Publishing Request <i ng-show="status=='publishing'" class="fa fa-spinner fa-spin"></i></button>
-	</span>
-</span>
