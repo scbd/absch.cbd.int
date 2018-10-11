@@ -39,26 +39,26 @@ app.directive("viewCapacityBuildingResource", [function () {
 				angular.forEach(targets, function(ref){
 
 					storage.documents.get(ref.identifier, { cache : true})
-						.success(function(data){
+					.then(function(res){return res.data}).then(function (data){
 							ref.document = data;
 						})
-						.error(function(error, code){
-							if (code == 404) {
+						.catch(function(error){
+							if (error.status == 404) {
 
 								storage.drafts.get(ref.identifier, { cache : true})
-									.success(function(data){
+								.then(function(res){return res.data}).then(function (data){
 										ref.document = data;
 									})
-									.error(function(){
+									.catch(function(){
 										ref.document  = undefined;
-										ref.error     = error;
-										ref.errorCode = code;
+										ref.error     = error.data;
+										ref.errorCode = error.status;
 									});
 							}
 
 							ref.document  = undefined;
-							ref.error     = error;
-							ref.errorCode = code;
+							ref.error     = error.data;
+							ref.errorCode = error.status;
 
 						});
 				});

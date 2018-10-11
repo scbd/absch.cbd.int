@@ -57,26 +57,26 @@ app.directive("viewOrganization", [function () {
 				angular.forEach(targets, function(ref){
 
 					storage.documents.get(ref.identifier, { cache : true})
-						.success(function(data){
-							ref.document = data;
+						.then(function(res){
+							ref.document = res.data;
 						})
-						.error(function(error, code){
-							if (code == 404 && $scope.allowDrafts == "true") {
+						.catch(function(error){
+							if (error.status == 404 && $scope.allowDrafts == "true") {
 
 								storage.drafts.get(ref.identifier, { cache : true})
-									.success(function(data){
-										ref.document = data;
+									.then(function(res){
+										ref.document = res.data;
 									})
-									.error(function() {
+									.catch(function() {
 										ref.document  = undefined;
-										ref.error     = error;
-										ref.errorCode = code;
+										ref.error     = error.data;
+										ref.errorCode = error.status;
 									});
 							}
 
 							ref.document  = undefined;
-							ref.error     = error;
-							ref.errorCode = code;
+							ref.error     = error.data;
+							ref.errorCode = error.status;
 
 						});
 				});

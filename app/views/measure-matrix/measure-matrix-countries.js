@@ -29,7 +29,7 @@ define(['app', 'underscore','components/scbd-angularjs-services/services/main', 
                 $http.get('/api/v2013/index/select', {
                         params: queryParameters
                     })
-                    .success(function(data) {
+                    .then(function(res){return res.data}).then(function (data) {
 
                         $scope.measures = [];
                         var measuresData = data.response.docs;
@@ -47,7 +47,7 @@ define(['app', 'underscore','components/scbd-angularjs-services/services/main', 
 
                             });
 
-                    }).error(function(error) {
+                    }).catch(function(error) {
                         console.log('onerror');
                         console.log(error);
                     });
@@ -205,7 +205,7 @@ define(['app', 'underscore','components/scbd-angularjs-services/services/main', 
                         };
 
                         $http.get('/api/v2013/index/select', { params: queryFacetsParameters })
-                        .success(function (data) {
+                        .then(function(res){return res.data}).then(function (data) {
                             $scope.facets = data.facet_counts.facet_fields;
                             console.log(($scope.facets));
                         });

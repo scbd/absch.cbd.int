@@ -36,8 +36,8 @@ app.directive("viewDefaultReference", [function() {
             });
 
             function loadReferenceDocument(identifier) {
-                $http.get('/api/v2013/documents/' + identifier + '?info').success(function(data) {
-                    $scope.document = data;
+                $http.get('/api/v2013/documents/' + identifier + '?info').then(function(res) {
+                    $scope.document = res.data;
                 });
             }
 
@@ -100,18 +100,18 @@ app.directive("viewContactReference", [function() {
                     $scope.document = newVal;
                 }
                 else{
-                    $http.get('/api/v2013/documents/' + $scope.model.identifier + '?info').success(function(data) {
+                    $http.get('/api/v2013/documents/' + $scope.model.identifier + '?info').then(function(res) {
                         
-                        $scope.documentForUID = data;
-                        $scope.document = data.body;
-                        var info = angular.copy(data);
+                        $scope.documentForUID = res.data;
+                        $scope.document = res.data.body;
+                        var info = angular.copy(res.data);
                         delete info.body;
                         $scope.document.info = info;
 
                         if($scope.document && $scope.document.contactOrganization){
                             $http.get('/api/v2013/documents/' + $scope.document.contactOrganization.identifier)
-                                 .success(function(data) {
-                                        angular.extend($scope.document.contactOrganization, data);
+                                 .then(function(res) {
+                                        angular.extend($scope.document.contactOrganization, res.data);
                                   });
                         }
 
@@ -520,22 +520,22 @@ app.directive("permit", [function() {
                 $scope.locale = sLocale;
 
                 $scope.load = function() {
-                    $http.get('/api/v2013/documents/' + $scope.documentId, {}).success(function(data) {
+                    $http.get('/api/v2013/documents/' + $scope.documentId, {}).then(function(res) {
 
-                        $scope.document = data;
+                        $scope.document = res.data;
                         var usageDetails = []
 
                         if ($scope.document.usage) {
                             $scope.document.usage.forEach(function(usage) {
 
-                                $scope.getTerm(usage.identifier).success(function(data) {
+                                $scope.getTerm(usage.identifier).then(function(data) {
                                     usageDetails.push(data);
                                 });
                             });
                         }
                         $scope.document.usage = usageDetails;
                         $scope.getTerm($scope.document.government.identifier)
-                            .success(function(data) {
+                            .then(function(data) {
                                 $scope.document.government = data;
                             });
                     });
@@ -545,13 +545,12 @@ app.directive("permit", [function() {
                         identifierWithoutRevision = identifierWithoutRevision.substr(0, identifierWithoutRevision.indexOf('@'));
 
                     $http.get('/api/v2013/documents/' + identifierWithoutRevision + '/versions?body=true&cache=true')
-                        .success(function(data) {
-                            $scope.versions = data.Items;
-                            // console.log(data);
+                        .then(function(res) {
+                            $scope.versions = res.data.Items;
                         });
 
-                    $http.get('/api/v2013/documents/' + $scope.documentId + '?info', {}).success(function(data) {
-                        $scope.documentInfo = data;
+                    $http.get('/api/v2013/documents/' + $scope.documentId + '?info', {}).then(function(res) {
+                        $scope.documentInfo = res.data;
                     });
                 }
                 $scope.renderHtml = function(html_code) {
@@ -565,7 +564,7 @@ app.directive("permit", [function() {
                 })
 
                 $scope.getTerm = function(identifier) {
-                    return $http.get('/api/v2013/thesaurus/terms/' + identifier, {});
+                    return $http.get('/api/v2013/thesaurus/terms/' + identifier, {}).then(function(res){return res.data;});
                 }
 
             }]

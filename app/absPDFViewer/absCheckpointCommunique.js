@@ -71,8 +71,8 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 						q	: "(realm_ss:" + realm.toLowerCase() + " AND NOT version_s:* AND schema_s:authority AND (government_s:(" + country.join(' ') + ")))",
 						rows: 50
 					}
-			$http.get(queryUrl, { params: qs}).success(function(res) {
-				angular.forEach(res.response.docs, function(cna){
+			$http.get(queryUrl, { params: qs}).then(function(res) {
+				angular.forEach(res.data.response.docs, function(cna){
 					if(!_.some($scope.emailList, {identifier:cna.identifier_s}))
 							$scope.emailList.push({identifier: cna.identifier_s});
 				});
@@ -85,8 +85,8 @@ app.controller('printPermit', ['$scope','$http','$location','$sce','$filter','$q
 				q	: "(realm_ss:" + realm.toLowerCase() + " AND NOT version_s:* AND schema_s:focalPoint AND (government_s:(" + country.join(' ') + ")))",
 				rows: 50
 			}
-			$http.get(queryUrl, { params: qs}).success(function(res) {
-				angular.forEach(res.response.docs, function(nfp){
+			$http.get(queryUrl, { params: qs}).then(function(res) {
+				angular.forEach(res.data.response.docs, function(nfp){
 					if(!_.some($scope.emailList, {identifier:nfp.identifier_s}))							
 						$scope.emailList.push(
 								{
