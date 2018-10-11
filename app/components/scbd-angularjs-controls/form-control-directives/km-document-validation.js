@@ -14,6 +14,11 @@ define(['app', 'text!./km-document-validation.html','jquery'], function(app, tem
                 report: '=ngModel',
             },
             link: function($scope, $element, $attr) {
+
+                var container  = $attr.container || 'body,html';
+                $attr.$observe('container', function(){
+                    container = $attr.container|| 'body,html'
+                })
                 $scope.onLoad = true;
                 //====================
                 //
@@ -32,7 +37,10 @@ define(['app', 'text!./km-document-validation.html','jquery'], function(app, tem
                     var sPagerName = $('a[href$="'+ sTabName + '"]').parents().find("ul.pagination").attr("id");
 
                     if (sTab) {
-                         var qBody =$element.parents().filter("body,html");
+                        var qBody =$element.parents().filter(container);
+
+                        if(qBody.size()==0)//if provided container not found then use default
+                            qBody =$element.parents().filter("body,html");
 
                         $scope.$parent.tab = sTab;
 

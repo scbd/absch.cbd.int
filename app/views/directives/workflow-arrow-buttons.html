@@ -117,17 +117,17 @@
     </div>
 
     <div class="workflow-validation-error">
-        <div km-document-validation ng-model="validationReport"></div>
+        <div km-document-validation ng-model="validationReport" container={{container}}></div>
     </div>
 
     <div style="display:none" id="msgDraftSaveMessage">
         Your record has been saved as a draft.
     </div>
 
-    <div class="row" style="display:none" id="divShowError" ng-show="showError">
+    <div class="row" id="divShowError" ng-show="errorMessage">
         <div class="col-xs-12">
             <div class="alert alert-danger" role="alert">
-                <button type="button" class="close" ng-click="showError=false">
+                <button type="button" class="close" ng-click="errorMessage=undefined">
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Close</span>
                 </button> {{errorMessage}}
