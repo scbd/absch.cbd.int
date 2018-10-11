@@ -1,4 +1,6 @@
-﻿define(['app',"text!./edit-contact.directive.html", 'views/directives/workflow-arrow-buttons', "views/forms/view/view-contact.directive"],
+﻿define(['app',"text!./edit-contact.directive.html", 'views/directives/workflow-arrow-buttons', 
+"views/forms/view/view-contact.directive", 'services/role-service',
+'components/scbd-angularjs-services/services/locale', 'views/forms/edit/editFormUtility'],
 function (app, template) {
 
 app.directive("editContact", [ function () {
@@ -14,9 +16,10 @@ app.directive("editContact", [ function () {
 			form        : "=form",
             onPostPublishFn   : "&onPostPublish",
 		},
-		controller : ["$scope", "$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'guid', 'editFormUtility',
-        function($scope, $http, $filter, $rootScope, $location, $q, storage, roleService, guid, editFormUtility)
+		controller : ["$scope", "$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'guid', 'editFormUtility', 'locale',
+        function($scope, $http, $filter, $rootScope, $location, $q, storage, roleService, guid, editFormUtility, locale)
 		{
+            $scope.isNationalUser = roleService.hasAbsRoles();
             $scope.options = {            
                 addressCountries         : function() {
                     return $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true })
@@ -31,27 +34,29 @@ app.directive("editContact", [ function () {
                         return orgs;
                     });
                 }
-            };
-        
-    
+            };           
+            
             //==================================
             //
             //==================================
             $scope.getCleanDocument = function(document) {
-    
+
                 document = document || $scope.document;
-    
+
                 if (!document)
                     return undefined;
-    
+
                 document = angular.fromJson(angular.toJson(document));
-    
+
                 document.source = undefined;
                 if (/^\s*$/g.test(document.firstName)) document.firstName = undefined;
                 if (/^\s*$/g.test(document.middleName)) document.middleName = undefined;
                 if (/^\s*$/g.test(document.lastName)) document.lastName = undefined;
                 if (/^\s*$/g.test(document.notes)) document.notes = undefined;
-    
+
+                if(!$scope.isNationalUser)
+                    document.government = undefined;
+
                 if(document.type == "organization"){
                     document.firstName = document.middleName = document.lastName = undefined;
                     document.contactOrganization = undefined;
@@ -67,9 +72,10 @@ app.directive("editContact", [ function () {
                         document.country	 = undefined;
                     }
                 }
-    
+
                 return document;
             };
+
         
             $scope.$watch('document.organizationType', function(newValue){
                 if(newValue && newValue.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
@@ -88,8 +94,7 @@ app.directive("editContact", [ function () {
                 }
             });
             
-            $scope.onPostPublish = function(documentInfo){
-                console.log(documentInfo);
+            $scope.onPostPublishOrRequest = function(documentInfo){
                 $scope.onPostPublishFn({ data: documentInfo });
             };
             
@@ -106,7 +111,7 @@ app.directive("editContact", [ function () {
                         header: {
                         identifier  : guid(),
                         schema      : 'contact',
-                        languages   : $scope.locales
+                        languages   : $scope.locales|| [locale]
                         },
                         government: $rootScope.user.government ? { identifier: $rootScope.user.government } : undefined,
                     };        

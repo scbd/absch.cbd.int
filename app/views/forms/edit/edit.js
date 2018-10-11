@@ -2,16 +2,8 @@
 define([
     'app', 'lodash', 'linqjs', 'js/services', 'services/app-config-service',
     'views/forms/edit/editFormUtility',
-    'views/forms/edit/field-embed-contact.directive',
-    'views/forms/edit/edit-contact-base.directive',
-    'views/forms/view/view-contact-reference.directive',
-    'views/forms/view/view-default-reference.directive',
-    'views/forms/view/view-organization-reference.directive',
     'views/forms/view/record-loader.directive',
-    'views/forms/view/view-organization.directive',
-    'views/forms/view/view-organization-reference.directive',
     'views/forms/view/view-history-directive',
-    'views/directives/workflow-std-buttons',
     'views/forms/edit/document-selector',
     'views/register/directives/register-top-menu',
     'components/scbd-angularjs-services/services/locale',
@@ -19,6 +11,15 @@ define([
     'views/directives/workflow-arrow-buttons'
 ], function (app, _, Enumerable) {
 
+
+  // 'views/directives/workflow-std-buttons',
+  // 'views/forms/edit/organization-selector',
+  // 'views/forms/view/view-contact-reference.directive',
+  // 'views/forms/view/view-default-reference.directive',
+  // 'views/forms/view/view-organization-reference.directive',
+  // 'views/forms/view/view-organization.directive',
+  // 'views/forms/view/view-organization-reference.directive',
+  
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
                                    "breadcrumbs", "appConfigService", "locale",
@@ -122,7 +123,7 @@ define([
     //==================================
     $scope.$watch("tab", function(tab) {
       if(tab == "review" || tab=='publish')
-        validate();
+       $scope.reviewDocument = $scope.getCleanDocument();
     });
 
 
@@ -270,28 +271,6 @@ define([
     $scope.userGovernment = function() {
       return $scope.$root.user.government;
     };
-
-    //==================================
-    //
-    //==================================
-    function validate() {
-
-      $scope.validationReport = null;
-
-      var oDocument = $scope.reviewDocument = $scope.getCleanDocument();
-
-      return storage.documents.validate(oDocument).then(function(success) {
-
-        $scope.validationReport = success.data;
-        return !!(success.data && success.data.errors && success.data.errors.length);
-
-      }).catch(function(error) {
-
-        $scope.onError(error.data);
-        return true;
-
-      });
-    }
 
     //==================================
     //

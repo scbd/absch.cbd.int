@@ -1,5 +1,5 @@
 define(['app', 'underscore', 'views/forms/edit/edit', '../view/view-capacity-building-initiative.directive',
-'./field-embed-contact.directive'], function (app, _) {
+'./organization-selector'], function (app, _) {
 
   app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", "underscore", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, Thesaurus, Enumerable, _) {
 

@@ -337,7 +337,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                 $scope.addNewContact = true;
                 require(['views/forms/edit/directives/edit-contact.directive'], function(){
                     
-                    var directiveHtml = "<DIRECTIVE on-post-publish='onNewContactPublish(data)' link-target={{linkTarget}} locales='locales'></DIRECTIVE>"
+                    var directiveHtml = "<DIRECTIVE on-post-publish='onNewContactPublish(data)' is-dialog='true' container='.ngdialog' link-target={{linkTarget}} locales='locales'></DIRECTIVE>"
                             .replace(/DIRECTIVE/g, 'edit-contact');
                     $scope.$apply(function () {
                         $('#divNewContact').empty().append($compile(directiveHtml)($scope));

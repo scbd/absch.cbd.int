@@ -1,5 +1,5 @@
 define(['app', "text!views/forms/view/view-capacity-building-initiative.directive.html",
-'views/directives/record-options',
+'views/directives/record-options', './view-contact-reference.directive', './view-organization-reference.directive'
 ], function (app, template) {
 
 app.directive("viewCapacityBuildingInitiative", [function () {
@@ -31,19 +31,6 @@ app.directive("viewCapacityBuildingInitiative", [function () {
 									   }); }
     		};
 
-
-    		//====================
-    		//
-    		//====================
-    		$scope.$watch("document.organizations", function(_new)
-    		{
-    			$scope.organizations = angular.fromJson(angular.toJson(_new || []));
-
-    			if($scope.organizations)
-    				$scope.loadReferences($scope.organizations);
-    		});
-
-
 			//====================
 			//
 			//====================
@@ -54,52 +41,6 @@ app.directive("viewCapacityBuildingInitiative", [function () {
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			};
 
-			//====================
-			//
-			//====================
-			$scope.$watch("document.organizations", function(_new)
-			{
-				$scope.organizations = angular.fromJson(angular.toJson(_new||[]));
-
-				if($scope.organizations)
-					$scope.loadReferences($scope.organizations);
-			});
-
-
-			//====================
-			//
-			//====================
-			$scope.loadReferences = function(targets) {
-
-				angular.forEach(targets, function(ref){
-
-					storage.documents.get(ref.identifier, { cache : true})
-						.success(function(data){
-							ref.document = data;
-						})
-						.error(function(error, code){
-							if (code == 404) {
-
-								storage.drafts.get(ref.identifier, { cache : true})
-									.success(function(data){
-										ref.document = data;
-									})
-									.error(function(){
-										ref.document  = undefined;
-										ref.error     = error;
-										ref.errorCode = code;
-									});
-							}
-
-							ref.document  = undefined;
-							ref.error     = error;
-							ref.errorCode = code;
-
-						});
-				});
-
-
-			};
 		}]
 	};
 }]);
