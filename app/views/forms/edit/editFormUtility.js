@@ -5,17 +5,17 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 
 	var schemasWorkflowTypes  = {
 
-		"absPermit"					: { name : "publishNationalRecord", version : "0.4" },
-		"absCheckpoint"				: { name : "publishNationalRecord", version : "0.4" },
-		"absCheckpointCommunique"	: { name : "publishNationalRecord", version : "0.4" },
-		"authority"					: { name : "publishNationalRecord", version : "0.4" },
-		"measure"					: { name : "publishNationalRecord", version : "0.4" },
-		"database"					: { name : "publishNationalRecord", version : "0.4" },
-		"absNationalReport" 		: { name : "publishNationalRecord", version : "0.4" },
-		"contact"					: { name : "publishNationalRecord", version : "0.4" },
-		"endorsement"				: { name : "publishNationalRecord", version : "0.4" },
-		"absProcedure"				: { name : "publishNationalRecord", version : "0.4" },
-		"absModelContractualClause"	: { name : "publishNationalRecord", version : "0.4" },
+		"absPermit"							: { name : "publishNationalRecord", version : "0.4" },
+		"absCheckpoint"						: { name : "publishNationalRecord", version : "0.4" },
+		"absCheckpointCommunique"			: { name : "publishNationalRecord", version : "0.4" },
+		"authority"							: { name : "publishNationalRecord", version : "0.4" },
+		"measure"							: { name : "publishNationalRecord", version : "0.4" },
+		"database"							: { name : "publishNationalRecord", version : "0.4" },
+		"absNationalReport" 				: { name : "publishNationalRecord", version : "0.4" },
+		"contact"							: { name : "publishNationalRecord", version : "0.4" },
+		"endorsement"						: { name : "publishNationalRecord", version : "0.4" },
+		"absProcedure"						: { name : "publishNationalRecord", version : "0.4" },
+		"absNationalModelContractualClause"	: { name : "publishNationalRecord", version : "0.4" },
 
 		"resource"					: { name : "publishReferenceRecord", version : undefined },
 		"modelContractualClause"	: { name : "publishReferenceRecord", version : undefined },

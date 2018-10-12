@@ -54,7 +54,10 @@
 						absCheckpointCommunique		: 'views/forms/view/abs/view-abs-checkpoint-communique.directive',
 						absPermit					: 'views/forms/view/abs/view-abs-permit.directive',
 						authorityreference			: 'views/forms/view/abs/view-authority-reference.directive',
-						measure						: 'views/forms/view/abs/view-measure.directive',						
+						measure						: 'views/forms/view/abs/view-measure.directive',	
+						absNationalModelContractualClause	: 'views/forms/view/abs/view-abs-national-model-contractual-clause.directive',
+						absProcedure						: 'views/forms/view/abs/view-abs-procedure.directive',		
+
 						capacityBuildingInitiative	: 'views/forms/view/view-capacity-building-initiative.directive',
 						capacityBuildingResource	: 'views/forms/view/view-capacity-building-resource.directive',
 
