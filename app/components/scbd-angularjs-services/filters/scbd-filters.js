@@ -15,7 +15,7 @@ function (app, _, moment, schemaName, schemaShortName) {
             var langRegex 			= new RegExp('^\/(ar|en|es|fr|ru|zh)');
             var externalUrlRegex 	= new RegExp('^(http|https|mailto)');
             var startWithRegex	 	= new RegExp('^\/');
-            var attachmentRegx    = new RegExp('api\/v2013\/documents\/(.*)\/attachments\/')
+            var attachmentRegx    = new RegExp('^\/api\/','i')
             if(lastPath != $attrs.href && !attachmentRegx.test($attrs.href) && !langRegex.test($attrs.href) && startWithRegex.test($attrs.href)){
               lastPath = $browser.baseHref() + $attrs.href.replace(/^\//, ''); 
               $attrs.$set('href', lastPath);
