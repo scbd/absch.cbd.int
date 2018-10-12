@@ -29,7 +29,7 @@ define(['app','underscore',
         };
 
         $http.get('/api/v2013/index/select', { params: queryParameters })
-		.success(function (data) {
+		.then(function(res){return res.data}).then(function (data) {
 
              $scope.measures = [];
              $scope.measures = data.response.docs;
@@ -38,7 +38,7 @@ define(['app','underscore',
                  $scope.loadMatrix($scope.measures[0]);
              }
 
-        }).error(function (error) {
+        }).catch(function (error) {
             console.log('onerror'); console.log(error);
         });
 

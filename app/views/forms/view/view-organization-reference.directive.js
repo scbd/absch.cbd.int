@@ -26,15 +26,15 @@ app.directive("viewOrganizationReference", [function () {
 			function loadReferences(ref) {
 
 				storage.documents.get(ref.identifier, { cache : true})
-					.success(function(data){
-						$scope.organization = data;
+					.then(function(res){
+						$scope.organization = res.data;
 					})
-					.error(function(error, code){
-						if (code == 404) {
+					.catch(function(error){
+						if (error.status == 404) {
 
 							storage.drafts.get(ref.identifier, { cache : true})
-								.success(function(data){
-									$scope.organization = data;
+								.then(function(res){
+									$scope.organization = res.data;
 								});
 						};
 

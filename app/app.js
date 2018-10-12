@@ -1,9 +1,9 @@
-define(['angular-flex',  'angular-sanitize', 'angular-loggly-logger', 'angular-joyride'],
+define(['angular-flex', 'angular-animate', 'angular-sanitize', 'angular-loggly-logger', 'angular-joyride'],
     function(angular) { 'use strict';
 
         var app = angular.module('app', angular.defineModules([
-            'ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'toastr',
-            'ngSanitize', 'angular-intro', 'scbdControls', 'ngLocalizer', 'angularTrix', 'cbd-forums',
+            'ngAnimate', 'ngSanitize', 'ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'toastr',
+            'angular-intro', 'scbdControls', 'ngLocalizer', 'angularTrix', 'cbd-forums',
             'ng-breadcrumbs', 'scbdServices', 'scbdFilters', 'smoothScroll', 'ngMessages', 'ngStorage', 'ngDialog',
             'infinite-scroll', 'logglyLogger', 'angular-joyride'
         ]));

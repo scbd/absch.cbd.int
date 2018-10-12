@@ -570,10 +570,10 @@ define(['app', 'underscore', 'views/forms/edit/edit' , 'views/forms/edit/documen
 
         var deferred = $q.defer();
         
-        searchService.list(queryParameters, null).success(function (data) {
-             deferred.resolve(data.response.docs);
-        }).error(function (error) {
-            console.log('onerror'); console.log(error);
+        searchService.list(queryParameters, null).then(function (res) {
+             deferred.resolve(res.data.response.docs);
+        }).catch(function (error) {
+            console.log(error);
         });
 
         return deferred.promise;
