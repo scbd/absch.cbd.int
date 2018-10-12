@@ -1,7 +1,6 @@
 define(['app',"views/register/directives/record-type-header",
 	'views/forms/edit/editFormUtility',
-	'views/forms/edit/field-embed-contact.directive',
-	'views/forms/edit/edit-contact-base.directive',
+	'views/forms/edit/organization-selector',
 	'views/forms/view/view-contact-reference.directive',
 	'views/forms/view/view-organization-reference.directive',
 	'views/forms/view/record-loader.directive',

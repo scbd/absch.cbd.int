@@ -2,23 +2,23 @@
 define([
     'app', 'lodash', 'linqjs', 'js/services', 'services/app-config-service',
     'views/forms/edit/editFormUtility',
-    'views/forms/edit/field-embed-contact.directive',
-    'views/forms/edit/edit-contact-base.directive',
-    'views/forms/view/view-contact-reference.directive',
-    'views/forms/view/view-default-reference.directive',
-    'views/forms/view/view-organization-reference.directive',
     'views/forms/view/record-loader.directive',
-    'views/forms/view/view-organization.directive',
-    'views/forms/view/view-organization-reference.directive',
     'views/forms/view/view-history-directive',
-    'views/directives/workflow-std-buttons',
     'views/forms/edit/document-selector',
     'views/register/directives/register-top-menu',
     'components/scbd-angularjs-services/services/locale',
-    'views/directives/workflow-std-buttons',
     'views/directives/workflow-arrow-buttons'
 ], function (app, _, Enumerable) {
 
+
+  // 'views/directives/workflow-std-buttons',
+  // 'views/forms/edit/organization-selector',
+  // 'views/forms/view/view-contact-reference.directive',
+  // 'views/forms/view/view-default-reference.directive',
+  // 'views/forms/view/view-organization-reference.directive',
+  // 'views/forms/view/view-organization.directive',
+  // 'views/forms/view/view-organization-reference.directive',
+  
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
                                    "breadcrumbs", "appConfigService", "locale",
@@ -121,8 +121,8 @@ define([
     //
     //==================================
     $scope.$watch("tab", function(tab) {
-      if(tab == "review")
-        validate();
+      if(tab == "review" || tab=='publish')
+       $scope.reviewDocument = $scope.getCleanDocument();
     });
 
 
@@ -274,28 +274,6 @@ define([
     //==================================
     //
     //==================================
-    function validate() {
-
-      $scope.validationReport = null;
-
-      var oDocument = $scope.reviewDocument = $scope.getCleanDocument();
-
-      return storage.documents.validate(oDocument).then(function(success) {
-
-        $scope.validationReport = success.data;
-        return !!(success.data && success.data.errors && success.data.errors.length);
-
-      }).catch(function(error) {
-
-        $scope.onError(error.data);
-        return true;
-
-      });
-    }
-
-    //==================================
-    //
-    //==================================
     $scope.isFieldValid = function(field) {
       if (field && $scope.validationReport && $scope.validationReport.errors)
         return !Enumerable.from($scope.validationReport.errors).any(function(x){return x.property==field})
@@ -422,77 +400,6 @@ define([
     };
 
 
-    var consideringClosing = false;
-    //TODO: burn angular... essentially the issue is that this function is called once the ng-include finished with the form html, but that form html still needs to be parsed and the directives still need to load THEIR templates, so those inputs aren't in the form yet... hence while change isn't triggering.
-    var attachEvents = _.once(function() {
-      $timeout(function() {
-        $('.editForm input').change(function() {
-          $(this).closest('form').addClass('dirty');
-        });
-        $('#dialogCancel').find('.closeWithoutSaving').click(function() {
-          consideringClosing = true;
-        });
-        $('.cancelClose').click(function() {
-          consideringClosing = false;
-        });
-        $('#dialogSave').on('shown.bs.modal', function() {
-          consideringClosing = true;
-        });
-        $('#dialogDuplicate').on('shown.bs.modal', function() {
-          consideringClosing = true;
-        });
-      }, 2000);
-    });
-
-    function canCreate(document){
-        $q.when(storage.drafts.security.canCreate(document.header.identifier, document.header.schema)).then(function(doc) {
-            if(!doc.isAllowed){
-              $scope.status = "hidden";
-              $scope.error  = "You are not authorized to modify this record";
-            }
-        }).catch(function(err) {
-          $scope.onError(err.data, err.status)
-          throw err;
-      });
-    }
-
-    $rootScope.$on('$includeContentLoaded', function(event) {
-
-      if($('#dialogCancel').length != 0){
-        attachEvents();
-      }
-    });
-    function confirmLeaving(evt, next, current) {
-        var formChanged = !angular.equals($scope.getCleanDocument(), $scope.origanalDocument);
-
-        if(formChanged)
-            $('.editForm').closest('form').addClass('dirty');
-
-      if(consideringClosing || $('form').filter('.dirty').length == 0)
-        return;
-
-      evt.preventDefault();
-
-      $('#dialogCancel').modal('show');
-      $rootScope.next_url = next;
-      consideringClosing = true;
-    }
-
-    $scope.$on('$locationChangeStart', confirmLeaving);
-    $scope.$on('$locationChangeSuccess', function(evt, data){
-      $rootScope.next_url = undefined;
-    });
-    //raised when  a document is published or requested for publishing
-    //update orignal document with the updated one to avoid validation on page leave event(confirmLeaving).
-    $scope.$on('updateOrignalDocument', function(evt,newDocument){
-
-        $scope.origanalDocument = newDocument;
-    });
-    $rootScope.$on('event:sessionExpired-signIn', function(evt, data){
-        $scope.error = null;
-        if($scope.tab == "review")
-          validate();
-    })
 
   }]);
 });

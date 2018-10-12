@@ -49,7 +49,7 @@
                 whenAsync('/pdf/:type/:schema/:documentId/:revision?',               { templateUrl: 'views/pdf-viewer/records-pdf-viewer.html', label:'Record',  param:'true',  resolveController: true, resolveUser: true}).
                                 
                 // whenAsync('/register',                                           { templateUrl: 'views/register/dashboard.html',         label:'Management Center',  param:'true', resolveController: true, resolve : { securized : securize() }}).
-                whenAsync('/register',                                          { redirectTo:  '/register/dashboard'}).
+                whenAsync('/register',                                           { templateUrl: 'views/register/dashboard.html',         label:'Dashboard',  param:'true', resolveController: true, resolve : { securized : securize() }}).
                 whenAsync('/dashboard',                                          { redirectTo:  '/register/dashboard'}).
                 whenAsync('/register/dashboard',                                 { templateUrl: 'views/register/dashboard.html',         label:'Dashboard',  param:'true', resolveController: true, resolve : { securized : securize() }}).
                 whenAsync('/register/pending-requests',                          { templateUrl: 'views/register/pending-tasks.html',            label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize() }}).
@@ -67,7 +67,8 @@
                 whenAsync('/register/CNA/new',           {templateUrl: 'views/forms/edit/edit-authority.html',                 label:'New',  param:'true', resolveController: true,documentType :'CNA' , resolve : { securized : securize(null,true, true) }, }).
                 whenAsync('/register/NDB/new',           {templateUrl: 'views/forms/edit/edit-database.html',                  label:'New',  param:'true', resolveController: true,documentType :'NDB' , resolve : { securized : securize(null,true, true) }, }).
                 whenAsync('/register/VLR/new',           {templateUrl: 'views/forms/edit/edit-resource.html',                  label:'New',  param:'true', resolveController: true,documentType :'VLR' , resolve : { securized : securize(null, null, true) }, }).
-               
+                whenAsync('/register/ORG/new',           {templateUrl: 'views/forms/edit/edit-organization.html',              label:'New',  param:'true', resolveController: true,documentType :'ORG' , resolve : { securized : securize(null, null, true) }, }).
+                
                 whenAsync('/register/CNA/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-authority.html',                 label:'Edit',  param:'true', resolveController: true, documentType :'CNA' , resolve : { securized : securize(null,true, true) }, }).
                 whenAsync('/register/CON/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { securized : securize(null,null, true) }, }).
                 whenAsync('/register/NDB/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-database.html',                  label:'Edit',  param:'true', resolveController: true, documentType :'NDB' , resolve : { securized : securize(null,true, true) }, }).

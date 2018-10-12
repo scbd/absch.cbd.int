@@ -1,6 +1,5 @@
 ﻿define(["app", "text!views/forms/view/abs/view-abs-national-model-contractual-clause.directive.html", 
-'views/directives/record-options', 'views/forms/view/view-reference-records.directive',
-'views/forms/view/view-contact-reference.directive'], function(app, template){
+'views/directives/record-options', 'views/forms/view/view-default-reference.directive'], function(app, template){
 
        app.directive("viewAbsNationalModelContractualClause", [function () {
                
