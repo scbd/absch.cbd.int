@@ -87,16 +87,16 @@ app.directive("existingPermit", [ function () {
 
 		            queryCanceler = $q.defer();
 
-		            $http.get('/api/v2013/index/select', { params: queryParameters, timeout: queryCanceler }).success(function (data) {
+		            $http.get('/api/v2013/index/select', { params: queryParameters, timeout: queryCanceler }).then(function (res) {
 
 						 queryCanceler = null;
                          $scope.rawPermitDocs = [];
-                         $scope.rawPermitDocs = data.response.docs;
+                         $scope.rawPermitDocs = res.data.response.docs;
                          transformPermits($scope.rawPermitDocs);
 						 $scope.isLoading = false;
 						 loaded = true;
 
-                    }).error(function (error) {
+                    }).catch(function (error) {
                         console.log('onerror'); console.log(error);
                     });
                 };
@@ -189,11 +189,11 @@ app.directive("existingPermit", [ function () {
 
 
 	                    $http.get('/api/v2013/index/select', { params: queryParameters })
-						.success(function (data) {
+						.then(function(res){return res.data}).then(function (data) {
 							//console.log(data);
 	                       $scope.rawPermitSelected = data.response.docs;
                            transformPermits($scope.rawPermitSelected)
-	                    }).error(function (error) {
+	                    }).catch(function (error) {
 	                        console.log('onerror'); console.log(error);
 	                    });
 					}
