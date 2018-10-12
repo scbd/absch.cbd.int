@@ -67,7 +67,8 @@
                 whenAsync('/register/CNA/new',           {templateUrl: 'views/forms/edit/edit-authority.html',                 label:'New',  param:'true', resolveController: true,documentType :'CNA' , resolve : { securized : securize(null,true, true) }, }).
                 whenAsync('/register/NDB/new',           {templateUrl: 'views/forms/edit/edit-database.html',                  label:'New',  param:'true', resolveController: true,documentType :'NDB' , resolve : { securized : securize(null,true, true) }, }).
                 whenAsync('/register/VLR/new',           {templateUrl: 'views/forms/edit/edit-resource.html',                  label:'New',  param:'true', resolveController: true,documentType :'VLR' , resolve : { securized : securize(null, null, true) }, }).
-               
+                whenAsync('/register/ORG/new',           {templateUrl: 'views/forms/edit/edit-organization.html',              label:'New',  param:'true', resolveController: true,documentType :'ORG' , resolve : { securized : securize(null, null, true) }, }).
+                
                 whenAsync('/register/CNA/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-authority.html',                 label:'Edit',  param:'true', resolveController: true, documentType :'CNA' , resolve : { securized : securize(null,true, true) }, }).
                 whenAsync('/register/CON/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { securized : securize(null,null, true) }, }).
                 whenAsync('/register/NDB/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-database.html',                  label:'Edit',  param:'true', resolveController: true, documentType :'NDB' , resolve : { securized : securize(null,true, true) }, }).

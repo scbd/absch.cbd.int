@@ -14,14 +14,14 @@ app.directive("editContact", [ function () {
             identifier  : '=',
 			locales     : "=locales",
 			form        : "=form",
-            onPostPublishFn   : "&onPostPublish",
+            onPostPublishFn   : "&onPostPublish"
 		},
 		controller : ["$scope", "$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'guid', 'editFormUtility', 'locale',
         function($scope, $http, $filter, $rootScope, $location, $q, storage, roleService, guid, editFormUtility, locale)
 		{
             $scope.isNationalUser = roleService.hasAbsRoles();
             $scope.options = {            
-                addressCountries         : function() {
+                countries         : function() {
                     return $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true })
                             .then(function(o){ return $filter("orderBy")(o.data, "name"); });
                 },
@@ -36,6 +36,18 @@ app.directive("editContact", [ function () {
                 }
             };           
             
+            $scope.genericFilter = function($query, items) {
+                var matchedOptions = [];
+                for(var i=0; i!=items.length; ++i)
+                if(items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
+                    matchedOptions.push(items[i]);
+        
+                return matchedOptions;
+            };
+        
+            $scope.genericMapping = function(item) {
+                return {identifier: item.identifier};
+            };
             //==================================
             //
             //==================================

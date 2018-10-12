@@ -14,7 +14,7 @@ define(['app'], function(app) {
                     if(attrs.blockText)
                         blockText = attrs.blockText;
 
-                    blockText = '<i class="fa fa-spin fa-cog" /> ';
+                    blockText = '<i class="fa fa-spin fa-cog" /> <strong>' + blockText + '</strong>';
                 }
 
                 $element.addClass('blockRegion');
@@ -23,10 +23,21 @@ define(['app'], function(app) {
                 $element.append($compile(loadtHtml)($scope));
 
                 $scope.$watch('activate', function(newVal){
-                    if(newVal)
+                    if(newVal){
                         $element.addClass('blockRegion');
-                    else
+                        if(attrs.updateParentPosition)
+                            $element.parent().addClass('blockRegion-parent-position')
+                    }
+                    else{
                         $element.removeClass('blockRegion');
+                        if(attrs.updateParentPosition)
+                            $element.parent().removeClass('blockRegion-parent-position')
+                    }
+                });
+
+                $scope.$on('$destroy', function(){
+                    if(attrs.updateParentPosition)
+                        $element.parent().removeClass('blockRegion-parent-position')
                 })
             }
         }

@@ -359,8 +359,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 						}
 						else{
 
-					    $scope.validationReport = {isSaving:true};
                             $element.find('#continueRequest').bind('click', function(){
+					            $scope.validationReport = {isSaving:true};
                                 $scope.closeAddInfoDialog(true);
                                 $scope.loading = true;
                                 $q.when(editFormUtility.publishRequest(document,$scope.InfoDoc ? $scope.InfoDoc.additionalInfo:''))
@@ -555,6 +555,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         else if(data.error && data.error.data)
                             $scope.errorMessage += data.error.data;
 
+                        $scope.validationReport.isSaving=false;
                     }
                 }
 
@@ -699,8 +700,91 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 $scope.loadSecurity();
 
 
+
+
+
+
+
+                ////////////////////////////////////////////////////////////////////
+                //// NEEDS CLEANUP/////////////////////////////////////////////////
+
+
+                    var consideringClosing = false;
+                    //TODO: burn angular... essentially the issue is that this function is called once the ng-include finished with the form html, but that form html still needs to be parsed and the directives still need to load THEIR templates, so those inputs aren't in the form yet... hence while change isn't triggering.
+                    var attachEvents = _.once(function() {
+                    $timeout(function() {
+                        $('.editForm input').change(function() {
+                        $(this).closest('form').addClass('dirty');
+                        });
+                        $('#dialogCancel').find('.closeWithoutSaving').click(function() {
+                        consideringClosing = true;
+                        });
+                        $('.cancelClose').click(function() {
+                        consideringClosing = false;
+                        });
+                        $('#dialogSave').on('shown.bs.modal', function() {
+                        consideringClosing = true;
+                        });
+                        $('#dialogDuplicate').on('shown.bs.modal', function() {
+                        consideringClosing = true;
+                        });
+                    }, 2000);
+                    });
+
+                    function canCreate(document){
+                        $q.when(storage.drafts.security.canCreate(document.header.identifier, document.header.schema)).then(function(doc) {
+                            if(!doc.isAllowed){
+                            $scope.status = "hidden";
+                            $scope.error  = "You are not authorized to modify this record";
+                            }
+                        }).catch(function(err) {
+                        $scope.onError(err.data, err.status)
+                        throw err;
+                    });
+                    }
+
+                    $rootScope.$on('$includeContentLoaded', function(event) {
+
+                    if($('#dialogCancel').length != 0){
+                        attachEvents();
+                    }
+                    });
+                    function confirmLeaving(evt, next, current) {
+                        var formChanged = !angular.equals($scope.getDocumentFn(), $scope.origanalDocument);
+
+                        if(formChanged)
+                            $('.editForm').closest('form').addClass('dirty');
+
+                    if(consideringClosing || $('form').filter('.dirty').length == 0)
+                        return;
+
+                    evt.preventDefault();
+
+                    $('#dialogCancel').modal('show');
+                    $rootScope.next_url = next;
+                    consideringClosing = true;
+                    }
+
+                    $scope.$on('$locationChangeStart', confirmLeaving);
+                    $scope.$on('$locationChangeSuccess', function(evt, data){
+                    $rootScope.next_url = undefined;
+                    });
+                    //raised when  a document is published or requested for publishing
+                    //update orignal document with the updated one to avoid validation on page leave event(confirmLeaving).
+                    $scope.$on('updateOrignalDocument', function(evt,newDocument){
+
+                        $scope.origanalDocument = newDocument;
+                    });
+                    $rootScope.$on('event:sessionExpired-signIn', function(evt, data){
+                        $scope.error = null;
+                        if($scope.tab == "review" || tab=='publish')
+                        validate();
+                    })
+
+                //////////////////////////////////////////////////////////////////////
+
                 // function confirmLeaving(evt, next, current) {
-                //     var formChanged = !angular.equals($scope.getCleanDocument(), $scope.origanalDocument);
+                //     var formChanged = !angular.equals($scope.getDocumentFn(), $scope.origanalDocument);
             
                 //     if(formChanged)
                 //         $('.editForm').closest('form').addClass('dirty');

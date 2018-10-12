@@ -1,6 +1,6 @@
 ﻿<div id="editOrganizationDiv">
 
-    <span block-region activate="isLoading()" ng-if="isLoading()"></span>
+    <span block-region activate="status=='loading'" ng-if="status=='loading'" update-parent-position="true"></span>
     <div class="registerpage-content">
 
         <div workflow-arrow-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="false"

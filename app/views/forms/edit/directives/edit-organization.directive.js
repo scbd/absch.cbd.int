@@ -35,6 +35,18 @@ app.directive("editOrganization", [ "$http", "$filter", "$q", 'guid', 'editFormU
                 }
             };           
             
+            $scope.genericFilter = function($query, items) {
+                var matchedOptions = [];
+                for(var i=0; i!=items.length; ++i)
+                if(items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
+                    matchedOptions.push(items[i]);
+        
+                return matchedOptions;
+            };
+        
+            $scope.genericMapping = function(item) {
+                return {identifier: item.identifier};
+            };
             //==================================
             //
             //==================================

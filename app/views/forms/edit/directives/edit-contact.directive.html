@@ -1,9 +1,9 @@
 ﻿<div id="editContactDiv">
 
-    <span block-region activate="isLoading()" ng-if="isLoading()"></span>
+    <span block-region activate="status=='loading'" ng-if="status=='loading'"></span>
     <div class="registerpage-content">        
 
-            <div document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            <workflow-arrow-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
             on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
@@ -224,7 +224,7 @@
                 <review-form>
                     <view-contact ng-model='document' locale="review.locale"></view-contact>
                 </review-form>
-            </div>
+            </workflow-arrow-buttons>
     </div>
 
 </div>
