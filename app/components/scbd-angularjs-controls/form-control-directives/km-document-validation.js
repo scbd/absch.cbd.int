@@ -14,6 +14,11 @@ define(['app', 'text!./km-document-validation.html','jquery'], function(app, tem
                 report: '=ngModel',
             },
             link: function($scope, $element, $attr) {
+
+                var container  = $attr.container || 'body,html';
+                $attr.$observe('container', function(){
+                    container = $attr.container|| 'body,html'
+                })
                 $scope.onLoad = true;
                 //====================
                 //
@@ -25,14 +30,17 @@ define(['app', 'text!./km-document-validation.html','jquery'], function(app, tem
                     if (qLabel.length === 0) //handle for abs as abs has the validation directive on edit instead of view form;
                         qLabel = $element.parent().find("form[name='editForm'] label[for='" + field + "']:first");
 
-                    var sTab = 'edit';//qLabel.parents().find("[km-tab]").attr("km-tab");
+                    var sTab = qLabel.parents().find('[km-tab="edit"]').attr("km-tab")
 
                     // inner tabs
-                    var sTabName   = qLabel.parents().find(".tab-pane").attr("id");
+                    var sTabName   = qLabel.parents().filter(".tab-pane").attr("id");
                     var sPagerName = $('a[href$="'+ sTabName + '"]').parents().find("ul.pagination").attr("id");
 
                     if (sTab) {
-                         var qBody = $("html, body") //$element.parents().find("body,html");
+                        var qBody =$element.parents().filter(container);
+
+                        if(qBody.size()==0)//if provided container not found then use default
+                            qBody =$element.parents().filter("body,html");
 
                         $scope.$parent.tab = sTab;
 

@@ -16,7 +16,7 @@ define(['app', 'angular', 'jquery', 'lodash', 'text!./km-value-ml.html'], functi
 				$scope.markdown = attrs.hasOwnProperty("markdown");
 				$scope.kmPre	= attrs.hasOwnProperty("kmPre");
 				$scope.html		= attrs.hasOwnProperty("html");
-				
+
 				$scope.$watch('locales', function(text) {
 					// console.log($scope.locales, _.isString($scope.locales))
 					if(_.isString($scope.locales)){
@@ -34,9 +34,17 @@ define(['app', 'angular', 'jquery', 'lodash', 'text!./km-value-ml.html'], functi
 				{
 					return $scope.locales && $scope.locales.length>1;
 				};
-
+				
 				$scope.self = $scope;
 			}
 		};
 	}]);
+
+	app.filter('addclear', function(){
+
+		return function(html){
+			return  (html||'') + '<div class="html-div-clear-fix"></div>'
+		}
+
+	})
 });

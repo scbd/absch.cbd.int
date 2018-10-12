@@ -1,10 +1,15 @@
 ﻿<div>
 
-	<div ng-hide="report || onLoad" class="alert alert-info">
+	<!-- <div ng-hide="!report.isAnalyzing && (report || onLoad)" class="alert alert-info">
+		<i class="fa fa-cog fa-spin"></i> Analyzing your document...
+	</div> -->
+	<div ng-show="report.isAnalyzing" class="alert alert-info">
 		<i class="fa fa-cog fa-spin"></i> Analyzing your document...
 	</div>
-
-	<div ng-show="report">
+	<div ng-show="report.isSaving" class="alert alert-info">
+		<i class="fa fa-cog fa-spin"></i> Saving your document...
+	</div>
+	<div ng-show="report && !report.isAnalyzing">
 		<div ng-show="isValid()" class="alert alert-success">
 			Your document is valid.
 		</div>
