@@ -1,5 +1,5 @@
-define(['app', 'lodash', 'moment', 'json!./schema-name.json', 'json!./schema-short-name.json', 'components/scbd-angularjs-services/services/locale'], 
-function (app, _, moment, schemaName, schemaShortName) {
+define(['app', 'lodash', 'moment', 'json!./schema-name.json', 'components/scbd-angularjs-services/services/locale'], 
+function (app, _, moment, scbdSchemaDetails, schemaShortName) {
 
 
   app.directive("translationUrl", ['$browser', function($browser){
@@ -94,7 +94,7 @@ function (app, _, moment, schemaName, schemaShortName) {
   //
   //
   //============================================================
-  app.filter("formatDateWithUtc", function () {
+  app.filter("formatDateWithUtc", ['$filter', function ($filter) {
     
     return function (date, formart) {
       if (formart === undefined)
@@ -103,7 +103,7 @@ function (app, _, moment, schemaName, schemaShortName) {
       return $filter("moment")(date, 'format',formart);
       
     };
-  });
+  }]);
   //============================================================
   //
   //
@@ -301,14 +301,23 @@ function (app, _, moment, schemaName, schemaShortName) {
   //
   //
   //============================================================
-  app.filter("schemaName", ['realm', 'locale', function(realm, locale) {
+  app.filter("schemaName", ['realm', 'locale', '$filter', function(realm, locale, $filter) {
     
 		return function( schema ) {
+
 			if(!schema)return schema;
       
-      var result = ((realm.schemas[schema]||{}).title||{})[locale];
+      var data = ((realm.schemas[schema]||{}).title||{});
 
-      return result || schemaName[schema.toLowerCase()] || schema;//legacy
+      if(!data)
+        data = scbdSchemaDetails[schema];
+
+      var result = $filter('lstring')(data, locale);
+
+      if(!result || result == '')
+        result = schema;//legacy
+
+      return result;
 
 		};
 	}]);
@@ -319,63 +328,27 @@ function (app, _, moment, schemaName, schemaShortName) {
 	//
 	//============================================================
 	app.filter("schemaShortName", ['realm', function(realm) {
-
-		return function( schema ) {
-
-			if(!schema)
-				return schema;
-
-        var result = (realm.schemas[schema]||{}).shortCode;
-
-        return result || schema;
-
+		return function( schema ) {	
+			return schemaShortName(realm, schema);
 		};
 	}]);
-
-   //============================================================
-	//
-	//
-	//
-	//============================================================
 	app.filter("urlSchemaShortName", ['realm', function(realm) {
 
 		return function( schema ) {
-
-			if(!schema)
-				return schema;
-      
-      var shortCode = (realm.schemas[schema]||{}).shortCode;
-      if(shortCode)
-        return shortCode;
-
-			if(schema.toLowerCase()=="focalpoint"				          ) return "NFP";
-			if(schema.toLowerCase()=="authority"				          ) return "CNA";
-			if(schema.toLowerCase()=="contact"				   	 	      ) return "CON";
-			if(schema.toLowerCase()=="database"				   	 	      ) return "NDB";
-			if(schema.toLowerCase()=="resource"				   	 	      ) return "VLR";
-			if(schema.toLowerCase()=="organization"			   	      ) return "ORG";
-			if(schema.toLowerCase()=="measure" 				   	        ) return "MSR";
-			if(schema.toLowerCase()=="abscheckpoint"			        ) return "CP";
-			if(schema.toLowerCase()=="abscheckpointcommunique" 	  ) return "CPC";
-			if(schema.toLowerCase()=="abspermit"				          ) return "IRCC";
-      if(schema.toLowerCase()=="statement"				          ) return "ST";
-      if(schema.toLowerCase()=="notification"			   	      ) return "NT";
-      if(schema.toLowerCase()=="meeting"					          ) return "MT";
-      if(schema.toLowerCase()=="pressrelease"				        ) return "PR";
-      if(schema.toLowerCase()=="meetingdocument"    		    ) return "MTD";
-			if(schema.toLowerCase()=="news"		                    ) return "NEWS";
-			if(schema.toLowerCase()=="new"		                    ) return "NEW";
-			if(schema.toLowerCase()=="absnationalreport"		      ) return "NR";
-			if(schema.toLowerCase()=="modelcontractualclause"	    ) return "A19A20";
-			if(schema.toLowerCase()=="communityprotocol"		      ) return "CPP";
-			if(schema.toLowerCase()=="capacitybuildinginitiative" ) return "CBI";
-			if(schema.toLowerCase()=="capacitybuildingresource"   ) return "CBR";
-			if(schema.toLowerCase()=="endorsement"				        ) return "EDR";
-
-      return schema;
+			return schemaShortName(realm, schema);
 		};
-	}]);
+  }]);
+  
+  function schemaShortName(realm, schema) {
 
+    if(!schema)
+      return schema;
+
+      var result = (realm.schemas[schema]||{}).shortCode;
+
+      return result || (scbdSchemaDetails[schema]||{}).shortCode || schema;
+  }
+  
   //============================================================
 	//
 	//
@@ -391,31 +364,9 @@ function (app, _, moment, schemaName, schemaShortName) {
       if(realmSchema)
         return realmSchema;
 
-			if(schema.toUpperCase()=="NEW"				      ) return "new";
-			if(schema.toUpperCase()=="NEWS"				      ) return "news";
-      if(schema.toUpperCase()=="NFP"				      ) return "focalPoint";
-			if(schema.toUpperCase()=="CNA"				    	) return "authority";
-			if(schema.toUpperCase()=="CON"				    	) return "contact";
-			if(schema.toUpperCase()=="NDB"				    	) return "database";
-			if(schema.toUpperCase()=="VLR"				    	) return "resource";
-			if(schema.toUpperCase()=="ORG"			        ) return "organization";
-			if(schema.toUpperCase()=="MSR" 				    	) return "measure";
-			if(schema.toUpperCase()=="CP"			          ) return "absCheckpoint";
-			if(schema.toUpperCase()=="CPC"              ) return "absCheckpointCommunique";
-			if(schema.toUpperCase()=="IRCC"				    	) return "absPermit";
-      if(schema.toUpperCase()=="ST"				        ) return "statement";
-      if(schema.toUpperCase()=="NT"			          ) return "notification";
-      if(schema.toUpperCase()=="MT"				        ) return "meeting";
-      if(schema.toUpperCase()=="PR"			          ) return "pressRelease";
-			if(schema.toUpperCase()=="NR"						    ) return "absNationalReport";
-			if(schema.toUpperCase()=="A19A20"				    ) return "modelContractualClause";
-			if(schema.toUpperCase()=="CPP"				    	) return "communityProtocol";
-			if(schema.toUpperCase()=="RAT"				    	) return "parties";
-			if(schema.toUpperCase()=="CBI"				    	) return "capacityBuildingInitiative";
-			if(schema.toUpperCase()=="CBR"				    	) return "capacityBuildingResource";
-			if(schema.toUpperCase()=="EDR"						  ) return "endorsement";
-
-			return schema;
+      realmSchema = _.findKey(scbdSchemaDetails, {shortCode: schema.toUpperCase()})
+      
+      return realmSchema || schema;
 		};
 	}]);
 

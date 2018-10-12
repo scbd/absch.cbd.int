@@ -1,25 +1,93 @@
 ﻿{
-    "focalpoint"				                :  "ABS National Focal Point", 
-    "authority"				                    :  "Competent National Authority", 
-    "contact"					                :  "Contact", 
-    "database"					                :  "National Website or Database", 
-    "resource"					                :  "Virtual Library Resource", 
-    "organization"				                :  "Organization", 
-    "measure" 					                :  "Legislative, Administrative or Policy Measure", 
-    "abscheckpoint"			                    :  "Checkpoint", 
-    "abscheckpointcommunique"	                :  "Checkpoint Communiqué", 
-    "abspermit"				                    :  "Internationally Recognized Certificate of Compliance", 
-    "meetingdocument"			                :  "Meeting Document", 
-    "pressrelease"				                :  "Press Release", 
-    "news"						                :  "News", 
-    "new"						                :  "What's New", 
-    "statement"			                        :  "Statement", 
-    "absnationalreport"		                    :  "Interim National Report on the Implementation of the Nagoya Protocol", 
-    "modelcontractualclause"	                :  "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standard", 
-    "communityprotocol"		                    :  "Community Protocol and Procedures and Customary Law", 
-    "meeting"					                :  "Meeting", 
-    "notification"				                :  "Notification", 
-    "capacitybuildinginitiative"                :  "Capacity-building Initiative", 
-    "capacitybuildingresource"                  :  "Capacity-building Resource", 
-    "endorsement"				                :  "Endorsement"
-} 
+    "meetingDocument": {
+        "type": "scbd",
+        "title": {
+            "en": "Meeting Document"
+        },
+        "description": {
+            "en": "Meeting Document"
+        },
+        "shortCode": "MTD",
+        "titlePlural": {
+            "en": "Meeting Document"
+        }
+    },
+    "pressRelease": {
+        "type": "scbd",
+        "title": {
+            "en": "Press Release"
+        },
+        "description": {
+            "en": "Press Release"
+        },
+        "shortCode": "PR",
+        "titlePlural": {
+            "en": "Press Releases"
+        }
+    },
+    "news": {
+        "type": "scbd",
+        "title": {
+            "en": "News"
+        },
+        "description": {
+            "en": "News"
+        },
+        "shortCode": "NEWS",
+        "titlePlural": {
+            "en": "News"
+        }
+    },
+    "new": {
+        "type": "scbd",
+        "title": {
+            "en": "What's New"
+        },
+        "description": {
+            "en": "What's New"
+        },
+        "shortCode": "NEW",
+        "titlePlural": {
+            "en": "What's New"
+        }
+    },
+    "statement": {
+        "type": "scbd",
+        "title": {
+            "en": "Statement"
+        },
+        "description": {
+            "en": "Statements"
+        },
+        "shortCode": "ST",
+        "titlePlural": {
+            "en": "Statement"
+        }
+    },
+    "meeting": {
+        "type": "scbd",
+        "title": {
+            "en": "Meeting"
+        },
+        "description": {
+            "en": "Meeting"
+        },
+        "shortCode": "MT",
+        "titlePlural": {
+            "en": "Meetings"
+        }
+    },
+    "notification": {
+        "type": "scbd",
+        "title": {
+            "en": "Notification"
+        },
+        "description": {
+            "en": "Notification"
+        },
+        "shortCode": "NT",
+        "titlePlural": {
+            "en": "Notifications"
+        }
+    }
+}
