@@ -3,8 +3,10 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
         'toastr', 'services/local-storage-service', 'services/app-config-service'
 ], function (app, template) {
     
-    app.directive('workflowArrowButtons',["$q", "$timeout", "localStorageService",
-     function($q, $timeout, localStorageService){
+    app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
+    'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 'localStorageService',
+    function ($rootScope,  storage, editFormUtility, $route, IWorkflows, toastr, $location, $filter, 
+            $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService){
 
     	return{
     		restrict: 'EA',
@@ -26,22 +28,28 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				onPostRevertFn    : "&onPostRevert",
 				onPreSaveDraftFn  : "&onPreSaveDraft",
 				onPostSaveDraftFn : "&onPostSaveDraft",
+				onPreRequestFn    : "&onPreRequest",
+				onPostRequestFn   : "&onPostRequest",
 				onPrePublishFn    : "&onPrePublish",
 				onPostPublishFn   : "&onPostPublish",
                 onErrorFn: "&onError",
                 validationReport    : '=?'
     		},
-            controller: ["$rootScope","$scope", "IStorage", "editFormUtility", "$route","IWorkflows",
-            '$element', 'toastr', '$location', '$filter', '$routeParams', 
-            'appConfigService', 'realm', '$http',
-            function ($rootScope, $scope, storage, editFormUtility, $route, IWorkflows, 
-                $element, toastr, $location, $filter, $routeParams, appConfigService, realm, $http)
-			{
+            link : function($scope, $element, $attr){
+
+                $scope.container  = $attr.container;                
+                var isDialog = $attr.isDialog||false;
+                $attr.$observe('isDialog', function(){
+                    isDialog = $attr.isDialog||false
+                })
+                $attr.$observe('container', function(){
+                    $scope.container  = $attr.container; 
+                })
+
                 if(!$scope.tab)
                     $scope.tab = 'edit';
 
                 $scope.workflowScope = $scope;
-                $scope.errors              = null;
                 
                 var next_fs
                 var document_type =  $filter("mapSchema")($route.current.$$route.documentType);
@@ -227,9 +235,9 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				//====================
 				$scope.review = function()
 				{
-					$scope.loading = true;
-                    $scope.validationReport = undefined;
-                    $scope.errors              = null;
+					$scope.loading = true;                    
+					$scope.validationReport = {isAnalyzing:true};
+                   $scope.errorMessage              = null;
 					var qReport   = validate($scope.getDocumentFn());
 
 					return $q.when(qReport).then(function(validation) {
@@ -244,7 +252,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         else
                             $scope.validationReport = {};
                     }).catch(function(error){
-						$scope.$emit("documentError", { action: "review", error: error });
+						showError(null, { action: "review", error: error });
+                        $scope.validationReport = undefined;
 					}).finally(function(){
 						$scope.loading = false;
 					});
@@ -255,8 +264,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.publish = function()
 				{
 					$scope.loading = true;
-					$scope.validationReport = undefined;
-                    $scope.errors              = null;
+					$scope.validationReport = {isAnalyzing:true};
+                   $scope.errorMessage              = null;
 					var qDocument = $scope.getDocumentFn();
 					var qReport   = validate(qDocument);
 
@@ -275,6 +284,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 						}
 						else {
 
+					        $scope.validationReport = {isSaving:true};
                             var processRequest;
                             if($route.current.params.workflow){
                                 var metadata = {};
@@ -313,10 +323,12 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         }
 					}).catch(function(error){
 
-						$scope.$emit("documentError", { action: "publish", error: error })
+                        showError(null,  { action: "publish", error: error });                        
+					    $scope.validationReport = undefined;
 
 					}).finally(function(){
-						    $scope.loading = false;
+                            $scope.loading = false;
+                            
 					});
 				};
 
@@ -325,9 +337,9 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				//====================
 				$scope.publishRequest = function()
 				{
-					$scope.loading = true;
-					$scope.validationReport = undefined;
-                    $scope.errors              = null;
+					$scope.loading = true;					
+					$scope.validationReport = {isAnalyzing:true};
+                   $scope.errorMessage              = null;
 					var qDocument = $scope.getDocumentFn();
 					var qReport   = validate(qDocument);
 
@@ -348,6 +360,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 						else{
 
                             $element.find('#continueRequest').bind('click', function(){
+					            $scope.validationReport = {isSaving:true};
                                 $scope.closeAddInfoDialog(true);
                                 $scope.loading = true;
                                 $q.when(editFormUtility.publishRequest(document,$scope.InfoDoc ? $scope.InfoDoc.additionalInfo:''))
@@ -356,10 +369,11 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                                     $('form').filter('.dirty').removeClass('dirty');
                                     documentPublishRequested(document, workflowInfo._id);
                                     $scope.$emit("updateOrignalDocument", document);
+                                    $scope.onPostRequestFn({ data: workflowInfo });
                                     return workflowInfo;
 
                                 }).catch(function(error){
-                                    $scope.$emit("documentError", { action: "publishRequest", error: error })
+                                    showError(null,  { action: "publishRequest", error: error })
 
                                 }).finally(function(){
                                         $scope.loading = false;
@@ -371,7 +385,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         }
 
 					}).catch(function(error){
-						$scope.$emit("documentError", { action: "publishRequest", error: error });
+						showError(null,  { action: "publishRequest", error: error });
+                        $scope.validationReport = undefined;
 					}).finally(function(){
                             $scope.loading = false;
                     });
@@ -391,7 +406,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				{
                     $scope.tab = 'edit';
 					$scope.loading = true;
-                    $scope.errors              = null;
+                   $scope.errorMessage              = null;
 					return $q.when($scope.getDocumentFn()).then(function(document)
 					{
 						if(!document)
@@ -415,7 +430,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                                            $location.search('workflow', null);
                                            return afterDraftSaved(draftInfo);
                                         }).catch(function(error){
-                                            $scope.$emit("documentError", { action: "saveDraft", error: error })
+                                            showError(null,  { action: "saveDraft", error: error })
                                         }).finally(function(){
                                             $scope.loading = false;
                                         });
@@ -437,27 +452,17 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                             $('form').filter('.dirty').removeClass('dirty');
                             $scope.$emit("updateOrignalDocument", $scope.getDocumentFn());
                             documentDraftSaved(draftInfo);
-                            $location.path($location.path().replace(/\/new/, '/'+ draftInfo.identifier + '/edit'));
+                            if(!isDialog)
+                                $location.path($location.path().replace(/\/new/, '/'+ draftInfo.identifier + '/edit'));
                             return draftInfo;
                         }
 
 					}).catch(function(error){
-						$scope.$emit("documentError", { action: "saveDraft", error: error });
+						showError(null,  { action: "saveDraft", error: error });
 					}).finally(function(){
 						    $scope.loading = false;
 					});
-				};
-
-				//====================
-				//
-				//====================
-				$scope.checkErrors = function()
-				{
-					$scope.errors = "";
-
-					if($scope.errors.trim()=="")
-						$scope.errors = null;
-				};
+				};				
 
                 //====================
 				//
@@ -472,7 +477,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 						closeDocument();
 					}).catch(function(error){
 
-						$scope.$emit("documentError", { action: "close", error: error })
+						showError(null,  { action: "close", error: error })
 
 					}).finally(function(){
 
@@ -528,7 +533,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                 }
 
-                $scope.$on("documentError",function(evt, data){
+                $scope.$on("documentError", showError);
+                function showError(evt, data){
 
                     if(data){
                         $scope.showError = true;
@@ -544,18 +550,20 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                         $('#divShowError').show('slow');
 
-                        if(data.error && data.error.data && data.error.data.Message)
-                            $scope.errorMessage += data.error.data.Message;
+                        if(data.error && data.error.data && (data.error.data.Message||data.error.data.message))
+                            $scope.errorMessage += data.error.data.Message||data.error.data.message;
+                        else if(data.error && data.error.data)
+                            $scope.errorMessage += data.error.data;
 
+                        $scope.validationReport.isSaving=false;
                     }
-                });
-
+                }
 
 				//====================
 				//
 				//====================
 				function validate(document) {
-
+                    
 					return $q.when(document).then(function(document){
 
 						if(!document)
@@ -632,9 +640,11 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         workflowId : workflowId
                     });
 
-                    $timeout(function() {
-                        $location.path('/register/' + $filter("urlSchemaShortName")(document_type));
-                    }, 1000);
+                    if(!isDialog){
+                        $timeout(function() {
+                            $location.path('/register/' + $filter("urlSchemaShortName")(document_type));
+                        }, 1000);
+                    }
 
                 };
 
@@ -653,9 +663,11 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                             workflowId : workflowId
                         });
                     }
-                    $timeout(function() {
-                        $location.path('/register/' + $filter("urlSchemaShortName")(document_type));
-                    }, 1000);
+                    if(!isDialog){
+                        $timeout(function() {
+                            $location.path('/register/' + $filter("urlSchemaShortName")(document_type));
+                        }, 1000);
+                    }
 
                 };
 
@@ -688,8 +700,91 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 $scope.loadSecurity();
 
 
+
+
+
+
+
+                ////////////////////////////////////////////////////////////////////
+                //// NEEDS CLEANUP/////////////////////////////////////////////////
+
+
+                    var consideringClosing = false;
+                    //TODO: burn angular... essentially the issue is that this function is called once the ng-include finished with the form html, but that form html still needs to be parsed and the directives still need to load THEIR templates, so those inputs aren't in the form yet... hence while change isn't triggering.
+                    var attachEvents = _.once(function() {
+                    $timeout(function() {
+                        $('.editForm input').change(function() {
+                        $(this).closest('form').addClass('dirty');
+                        });
+                        $('#dialogCancel').find('.closeWithoutSaving').click(function() {
+                        consideringClosing = true;
+                        });
+                        $('.cancelClose').click(function() {
+                        consideringClosing = false;
+                        });
+                        $('#dialogSave').on('shown.bs.modal', function() {
+                        consideringClosing = true;
+                        });
+                        $('#dialogDuplicate').on('shown.bs.modal', function() {
+                        consideringClosing = true;
+                        });
+                    }, 2000);
+                    });
+
+                    function canCreate(document){
+                        $q.when(storage.drafts.security.canCreate(document.header.identifier, document.header.schema)).then(function(doc) {
+                            if(!doc.isAllowed){
+                            $scope.status = "hidden";
+                            $scope.error  = "You are not authorized to modify this record";
+                            }
+                        }).catch(function(err) {
+                        $scope.onError(err.data, err.status)
+                        throw err;
+                    });
+                    }
+
+                    $rootScope.$on('$includeContentLoaded', function(event) {
+
+                    if($('#dialogCancel').length != 0){
+                        attachEvents();
+                    }
+                    });
+                    function confirmLeaving(evt, next, current) {
+                        var formChanged = !angular.equals($scope.getDocumentFn(), $scope.origanalDocument);
+
+                        if(formChanged)
+                            $('.editForm').closest('form').addClass('dirty');
+
+                    if(consideringClosing || $('form').filter('.dirty').length == 0)
+                        return;
+
+                    evt.preventDefault();
+
+                    $('#dialogCancel').modal('show');
+                    $rootScope.next_url = next;
+                    consideringClosing = true;
+                    }
+
+                    $scope.$on('$locationChangeStart', confirmLeaving);
+                    $scope.$on('$locationChangeSuccess', function(evt, data){
+                    $rootScope.next_url = undefined;
+                    });
+                    //raised when  a document is published or requested for publishing
+                    //update orignal document with the updated one to avoid validation on page leave event(confirmLeaving).
+                    $scope.$on('updateOrignalDocument', function(evt,newDocument){
+
+                        $scope.origanalDocument = newDocument;
+                    });
+                    $rootScope.$on('event:sessionExpired-signIn', function(evt, data){
+                        $scope.error = null;
+                        if($scope.tab == "review" || tab=='publish')
+                        validate();
+                    })
+
+                //////////////////////////////////////////////////////////////////////
+
                 // function confirmLeaving(evt, next, current) {
-                //     var formChanged = !angular.equals($scope.getCleanDocument(), $scope.origanalDocument);
+                //     var formChanged = !angular.equals($scope.getDocumentFn(), $scope.origanalDocument);
             
                 //     if(formChanged)
                 //         $('.editForm').closest('form').addClass('dirty');
@@ -715,7 +810,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 //     $scope.origanalDocument = newDocument;
                 // });
 
-            }]
+            }
     	};
 
     }]);

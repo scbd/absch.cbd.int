@@ -112,22 +112,23 @@
         }
     </style>
 
+    <span block-region activate="loading" ng-if="loading" update-parent-position="true" block-text="processing..."></span>
     <div class="workflow-arrows margin-bottom-20"  >
         <ng-include onload="workflowScope=workflowScope" src="'template/workflow-arrows'"></ng-include>
     </div>
 
     <div class="workflow-validation-error">
-        <div km-document-validation ng-model="validationReport"></div>
+        <div km-document-validation ng-model="validationReport" container={{container}}></div>
     </div>
 
     <div style="display:none" id="msgDraftSaveMessage">
         Your record has been saved as a draft.
     </div>
 
-    <div class="row" style="display:none" id="divShowError" ng-show="showError">
+    <div class="row" id="divShowError" ng-show="errorMessage">
         <div class="col-xs-12">
             <div class="alert alert-danger" role="alert">
-                <button type="button" class="close" ng-click="showError=false">
+                <button type="button" class="close" ng-click="errorMessage=undefined">
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Close</span>
                 </button> {{errorMessage}}
@@ -172,8 +173,8 @@
                     </li>
                     <li style="display: inline;" ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
                         <button id="publish_button" type="button" class="btn btn-danger bg-request" ng-href="#"
-                            ng-click="tab='publishRequest';publishRequest()" ng-disabled="loading">Request Publication
-                            <i ng-show="tab=='publishRequest' && loading" class="fa fa-spinner fa-spin"></i>
+                            ng-click="publishRequest()" ng-disabled="loading">Request Publication
+                            <i ng-show="loading" class="fa fa-spinner fa-spin"></i>
                         </button>
                     </li>
 
@@ -181,69 +182,6 @@
             </div>
 
             <div class="clearfix"></div>
-
-            <div id="dialogCancel" class="modal fade" data-backdrop="static">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">×</button>
-                            <h4>Canceling changes</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>If you want to cancel the changes you just made to this draft, you can keep the previous
-                                version of the draft, which will then be available in the list of drafts on the
-                                Management Centre. You or your colleagues can then continue editing
-                                the record in the current, or a later, session.</p>
-                        </div>
-                        <div class="modal-footer" style="margin-top:0">
-                            <button type="button" ng-click="closeDialog()" class="btn btn-default cancelClose">Cancel</button>
-                            <button type="button" ng-click="close(true)" class="btn btn-warning closeWithoutSaving pull-left">Close
-                                without saving</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="divAdditionalInfo" class="modal fade" data-backdrop="static">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header bg-red color-white">
-                            <button type="button" class="close" ng-click="closeAddInfoDialog(false)" aria-hidden="true">×</button>
-                            <h2>Publishing Request</h2>
-                        </div>
-                        <div class="modal-body">
-                            <p>Would you like to add additional information for the publishing request?</p>
-                            <textarea class="form-control" rows="5" name="info" ng-model="InfoDoc.additionalInfo"></textarea>
-                        </div>
-                        <div class="modal-footer" style="margin-top:0">
-                            <button type="button" class="btn btn-default" ng-click="closeAddInfoDialog(false)">Cancel</button>
-                            <button type="button" id="continueRequest" class="btn btn-primary pull-left" ng-disabled="loading">Send
-                                Request</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="divWorkflowDraft" class="modal fade" data-backdrop="static">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header bg-red color-white">
-                            <h2>Edit Publishing Request</h2>
-                        </div>
-                        <div class="modal-body">
-                            <p>Editing and saving as draft a publishing request will cancel the publishing request and
-                                send it back to draft mode.
-                                <br />Are you sure you want to continue?</p>
-                        </div>
-                        <div class="modal-footer" style="margin-top:0">
-                            <button type="button" class="btn btn-default" ng-click="closeWorkflowDraftDialog(false)">No</button>
-                            <button type="button" id="continueWorkflowDraftRequest" class="btn btn-primary pull-left"
-                                ng-disabled="loading">Yes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
 
         </div>
 
@@ -318,4 +256,65 @@
     </script>
 
 
+    <div id="dialogCancel" class="modal fade" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">×</button>
+                        <h4>Canceling changes</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>If you want to cancel the changes you just made to this draft, you can keep the previous
+                            version of the draft, which will then be available in the list of drafts on the
+                            Management Centre. You or your colleagues can then continue editing
+                            the record in the current, or a later, session.</p>
+                    </div>
+                    <div class="modal-footer" style="margin-top:0">
+                        <button type="button" ng-click="closeDialog()" class="btn btn-default cancelClose">Cancel</button>
+                        <button type="button" ng-click="close(true)" class="btn btn-warning closeWithoutSaving pull-left">Close
+                            without saving</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="divAdditionalInfo" class="modal fade" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-red color-white">
+                        <button type="button" class="close" ng-click="closeAddInfoDialog(false)" aria-hidden="true">×</button>
+                        <h2>Publishing Request</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Would you like to add additional information for the publishing request?</p>
+                        <textarea class="form-control" rows="5" name="info" ng-model="InfoDoc.additionalInfo"></textarea>
+                    </div>
+                    <div class="modal-footer" style="margin-top:0">
+                        <button type="button" class="btn btn-default" ng-click="closeAddInfoDialog(false)">Cancel</button>
+                        <button type="button" id="continueRequest" class="btn btn-primary pull-left" ng-disabled="loading">Send
+                            Request</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="divWorkflowDraft" class="modal fade" data-backdrop="static">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-red color-white">
+                        <h2>Edit Publishing Request</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p>Editing and saving as draft a publishing request will cancel the publishing request and
+                            send it back to draft mode.
+                            <br />Are you sure you want to continue?</p>
+                    </div>
+                    <div class="modal-footer" style="margin-top:0">
+                        <button type="button" class="btn btn-default" ng-click="closeWorkflowDraftDialog(false)">No</button>
+                        <button type="button" id="continueWorkflowDraftRequest" class="btn btn-primary pull-left"
+                            ng-disabled="loading">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
