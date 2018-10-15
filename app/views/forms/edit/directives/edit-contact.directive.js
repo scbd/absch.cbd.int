@@ -3,7 +3,8 @@
 'components/scbd-angularjs-services/services/locale', 'views/forms/edit/editFormUtility'],
 function (app, template) {
 
-app.directive("editContact", [ function () {
+app.directive("editContact", [ "$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'guid', 'editFormUtility', 'locale',
+function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, editFormUtility, locale){
 
 	return {
 		restrict   : "E",
@@ -16,10 +17,12 @@ app.directive("editContact", [ function () {
 			form        : "=form",
             onPostPublishFn   : "&onPostPublish"
 		},
-		controller : ["$scope", "$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'guid', 'editFormUtility', 'locale',
-        function($scope, $http, $filter, $rootScope, $location, $q, storage, roleService, guid, editFormUtility, locale)
-		{
+		link : function($scope, $element, $attr){
+
+            $scope.container    = $attr.container
+            $scope.isDialog     = $attr.isDialog;
             $scope.isNationalUser = roleService.hasAbsRoles();
+
             $scope.options = {            
                 countries         : function() {
                     return $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true })
@@ -140,7 +143,7 @@ app.directive("editContact", [ function () {
             
             setDocument();
 
-		}]
+		}
 	};
 }]);
 

@@ -108,14 +108,14 @@ define([
     //==================================
     //
     //==================================
-    $scope.$on("documentInvalid", function(evt, data){
-       $scope.tab = "review";
-       $scope.validationReport = data;
-    });
+    // $scope.$on("documentInvalid", function(evt, data){
+    //    $scope.tab = "review";
+    //    $scope.validationReport = data;
+    // });
 
-    $scope.$on("clearDocumentErrors", function(){
-      $scope.validationReport = {clearErrors:[]};
-    });
+    // $scope.$on("clearDocumentErrors", function(){
+    //   $scope.validationReport = {clearErrors:[]};
+    // });
 
     //==================================
     //
@@ -387,7 +387,7 @@ define([
             $location.search("tour", null);
         }
         
-        $scope.$emit("loadDocument", {identifier:doc.header.identifier,schema:doc.header.schema});
+        $scope.$emit("loadDocument", {identifier:doc.header.identifier,schema:doc.header.schema, document:doc});
 
         $scope.status = "ready";
 

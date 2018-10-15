@@ -24,6 +24,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             hideSelf : "=hideSelf",
 		},
 		link : function($scope, $element, $attr) {
+            var dialogId;
             var focalPointRegex = /^52000000cbd022/;
             $scope.rawDocuments = [];
             $scope.selectedDocuments=[];
@@ -33,7 +34,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 
             if(!$scope.type) $scope.type = "checkbox";
 
-            $scope.hideAddContact = ($scope.schema||'').indexOf('contact')<0
+            $scope.hideAddContact = $attr.allowNew || ($scope.schema||'').indexOf('contact')<0
             //==================================
             //
             //==================================
@@ -67,7 +68,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 
                 $scope.syncDocuments();
 
-                ngDialog.close();
+                ngDialog.close(dialogId);
 				$scope.areVisible = true;
 			};
 
@@ -284,11 +285,12 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             //==================================
 			$scope.openAddDialog = function(){
                 $scope.addNewContact = false;
-                ngDialog.open({
+                var dialog = ngDialog.open({
                     template: 'documentSelectionModal',
                     closeByDocument: false,
                     scope: $scope
                 });
+                dialogId = dialog.id
 
                  $q.when(load(true))
                     .then(function (){                        
@@ -328,7 +330,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 
             $scope.closeDialog = function () {
                 $scope.syncDocuments();
-                ngDialog.close();
+                ngDialog.close(dialogId);
                 $('body').removeClass('modal-open')
             };
 
