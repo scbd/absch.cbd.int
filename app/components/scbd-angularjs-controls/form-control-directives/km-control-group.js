@@ -21,7 +21,7 @@ define(['app', 'text!./km-control-group.html', 'jquery','lodash'], function(app,
 						return !$scope.isValidFn({ "name": $scope.name });
 					};
 				}
-				else if ($scope.$parent.isFieldValid) {
+				else if ($scope.$parent.$parent.isFieldValid) {
 					$scope.hasError = function() { return false; };
 					$scope.hasWarning = function() {
 						return !$scope.$parent.isFieldValid($scope.name);
@@ -30,9 +30,9 @@ define(['app', 'text!./km-control-group.html', 'jquery','lodash'], function(app,
 
 				$scope.hasWarning = function() {  //default behavior
 
-					if($scope.name && $scope.$parent && $scope.$parent.validationReport && $scope.$parent.validationReport.warnings) {
+					if($scope.name && $scope.$parent && ($scope.$parent.$parent||{}).validationReport && $scope.$parent.$parent.validationReport.warnings) {
 
-						return !!_.findWhere($scope.$parent.validationReport.warnings, { property : $scope.name });
+						return !!_.findWhere($scope.$parent.$parent.validationReport.warnings, { property : $scope.name });
 					}
 
 					return false; //default behavior
@@ -40,9 +40,9 @@ define(['app', 'text!./km-control-group.html', 'jquery','lodash'], function(app,
 
 				$scope.hasError = function() {  //default behavior
 
-					if($scope.name && $scope.$parent && $scope.$parent.validationReport && $scope.$parent.validationReport.errors) {
+					if($scope.name && $scope.$parent && ($scope.$parent.$parent||{}).validationReport && $scope.$parent.$parent.validationReport.errors) {
 
-						return !!_.findWhere($scope.$parent.validationReport.errors, { property : $scope.name });
+						return !!_.findWhere($scope.$parent.$parent.validationReport.errors, { property : $scope.name });
 					}
 
 					return false;

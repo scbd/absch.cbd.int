@@ -37,8 +37,25 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
     		},
             link : function($scope, $element, $attr){
 
-                $scope.container  = $attr.container;                
-                var isDialog = $attr.isDialog||false;
+                var originalDocument;
+                var next_fs
+                var document_type = $filter("mapSchema")($route.current.$$route.documentType);
+                var isDialog      = $attr.isDialog||false;
+
+                //BOOTSTRAP Dialog handling
+				var qCancelDialog         = $element.find("#dialogCancel");
+				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
+				var qWorkflowDraftDialog  = $element.find("#divWorkflowDraft");
+
+                $scope.container                   = $attr.container;
+                $scope.cancelDialogDefered         = [];
+                $scope.AdditionalInfoDialogDefered = [];
+                $scope.WorkflowDraftDialogDefered  = [];
+                $scope.workflowScope               = $scope;
+                
+                if(!$scope.tab)
+                    $scope.tab = 'edit';
+
                 $attr.$observe('isDialog', function(){
                     isDialog = $attr.isDialog||false
                 })
@@ -46,13 +63,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     $scope.container  = $attr.container; 
                 })
 
-                if(!$scope.tab)
-                    $scope.tab = 'edit';
 
-                $scope.workflowScope = $scope;
-                
-                var next_fs
-                var document_type =  $filter("mapSchema")($route.current.$$route.documentType);
                 
                 //////////////////////////////
                 $(".progressbar li button").click(function(){
@@ -67,14 +78,6 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                 });
 
-                //BOOTSTRAP Dialog handling
-				var qCancelDialog = $element.find("#dialogCancel");
-                var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
-                var qWorkflowDraftDialog = $element.find("#divWorkflowDraft");
-
-				$scope.cancelDialogDefered = [];
-                $scope.AdditionalInfoDialogDefered = [];
-                $scope.WorkflowDraftDialogDefered = [];
 
 
                 ///////////////////////////////
@@ -263,11 +266,11 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				//====================
 				$scope.publish = function()
 				{
-					$scope.loading = true;
-					$scope.validationReport = {isAnalyzing:true};
-                   $scope.errorMessage              = null;
-					var qDocument = $scope.getDocumentFn();
-					var qReport   = validate(qDocument);
+					    $scope.loading          = true;
+					    $scope.validationReport = {isAnalyzing:true};
+					    $scope.errorMessage     = null;
+					var qDocument               = $scope.getDocumentFn();
+					var qReport                 = validate(qDocument);
 
 					return $q.all([qDocument, qReport]).then(function(results) {
 
@@ -314,7 +317,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                                 $('form').filter('.dirty').removeClass('dirty');
     							documentPublished(document, documentInfo._id);
-                                $scope.$emit("updateOrignalDocument", document);
+                                originalDocument =  document;
 
                                 $scope.onPostPublishFn({ data: documentInfo });
     							return documentInfo;
@@ -368,7 +371,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                                     $('form').filter('.dirty').removeClass('dirty');
                                     documentPublishRequested(document, workflowInfo._id);
-                                    $scope.$emit("updateOrignalDocument", document);
+                                    originalDocument = document;
                                     $scope.onPostRequestFn({ data: workflowInfo });
                                     return workflowInfo;
 
@@ -450,7 +453,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                             toastr.info($element.find('#msgDraftSaveMessage').text());
 
                             $('form').filter('.dirty').removeClass('dirty');
-                            $scope.$emit("updateOrignalDocument", $scope.getDocumentFn());
+                            originalDocument = $scope.getDocumentFn();
                             documentDraftSaved(draftInfo);
                             if(!isDialog)
                                 $location.path($location.path().replace(/\/new/, '/'+ draftInfo.identifier + '/edit'));
@@ -712,23 +715,23 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     var consideringClosing = false;
                     //TODO: burn angular... essentially the issue is that this function is called once the ng-include finished with the form html, but that form html still needs to be parsed and the directives still need to load THEIR templates, so those inputs aren't in the form yet... hence while change isn't triggering.
                     var attachEvents = _.once(function() {
-                    $timeout(function() {
-                        $('.editForm input').change(function() {
-                        $(this).closest('form').addClass('dirty');
-                        });
-                        $('#dialogCancel').find('.closeWithoutSaving').click(function() {
-                        consideringClosing = true;
-                        });
-                        $('.cancelClose').click(function() {
-                        consideringClosing = false;
-                        });
-                        $('#dialogSave').on('shown.bs.modal', function() {
-                        consideringClosing = true;
-                        });
-                        $('#dialogDuplicate').on('shown.bs.modal', function() {
-                        consideringClosing = true;
-                        });
-                    }, 2000);
+                        $timeout(function() {
+                            $('.editForm input').change(function() {
+                                $(this).closest('form').addClass('dirty');
+                            });
+                            $('#dialogCancel').find('.closeWithoutSaving').click(function() {
+                                consideringClosing = true;
+                            });
+                            $('.cancelClose').click(function() {
+                                consideringClosing = false;
+                            });
+                            $('#dialogSave').on('shown.bs.modal', function() {
+                                consideringClosing = true;
+                            });
+                            $('#dialogDuplicate').on('shown.bs.modal', function() {
+                                consideringClosing = true;
+                            });
+                        }, 2000);
                     });
 
                     function canCreate(document){
@@ -738,77 +741,51 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                             $scope.error  = "You are not authorized to modify this record";
                             }
                         }).catch(function(err) {
-                        $scope.onError(err.data, err.status)
-                        throw err;
-                    });
+                            $scope.onError(err.data, err.status)
+                            throw err;
+                        });
                     }
+                    $rootScope.$on("loadDocument", function(event, data) {
+                        console.log(data)
+                        originalDocument = data.document;
+                    });
 
                     $rootScope.$on('$includeContentLoaded', function(event) {
 
-                    if($('#dialogCancel').length != 0){
-                        attachEvents();
-                    }
+                        if($('#dialogCancel').length != 0){
+                            attachEvents();
+                        }
                     });
                     function confirmLeaving(evt, next, current) {
-                        var formChanged = !angular.equals($scope.getDocumentFn(), $scope.origanalDocument);
+                        var formChanged = !angular.equals($scope.getDocumentFn(), originalDocument);
 
                         if(formChanged)
                             $('.editForm').closest('form').addClass('dirty');
 
-                    if(consideringClosing || $('form').filter('.dirty').length == 0)
-                        return;
+                        if(consideringClosing || $('form').filter('.dirty').length == 0)
+                            return;
 
-                    evt.preventDefault();
+                        evt.preventDefault();
 
-                    $('#dialogCancel').modal('show');
-                    $rootScope.next_url = next;
-                    consideringClosing = true;
+                        $('#dialogCancel').modal('show');
+                        $rootScope.next_url = next;
+                        consideringClosing = true;
                     }
 
                     $scope.$on('$locationChangeStart', confirmLeaving);
                     $scope.$on('$locationChangeSuccess', function(evt, data){
-                    $rootScope.next_url = undefined;
+                        $rootScope.next_url = undefined;
                     });
-                    //raised when  a document is published or requested for publishing
-                    //update orignal document with the updated one to avoid validation on page leave event(confirmLeaving).
-                    $scope.$on('updateOrignalDocument', function(evt,newDocument){
 
-                        $scope.origanalDocument = newDocument;
-                    });
                     $rootScope.$on('event:sessionExpired-signIn', function(evt, data){
                         $scope.error = null;
-                        if($scope.tab == "review" || tab=='publish')
+                        if($scope.tab == "review" || $scope.tab=='publish')
                         validate();
                     })
 
                 //////////////////////////////////////////////////////////////////////
 
-                // function confirmLeaving(evt, next, current) {
-                //     var formChanged = !angular.equals($scope.getDocumentFn(), $scope.origanalDocument);
-            
-                //     if(formChanged)
-                //         $('.editForm').closest('form').addClass('dirty');
-            
-                //     if(consideringClosing || $('form').filter('.dirty').length == 0)
-                //     return;
-            
-                //     evt.preventDefault();
-            
-                //     $('#dialogCancel').modal('show');
-                //     $rootScope.next_url = next;
-                //     consideringClosing = true;
-                // }
-            
-                // $scope.$on('$locationChangeStart', confirmLeaving);
-                // $scope.$on('$locationChangeSuccess', function(evt, data){
-                //     $rootScope.next_url = undefined;
-                // });
-                // //raised when  a document is published or requested for publishing
-                // //update orignal document with the updated one to avoid validation on page leave event(confirmLeaving).
-                // $scope.$on('updateOrignalDocument', function(evt,newDocument){
-            
-                //     $scope.origanalDocument = newDocument;
-                // });
+                
 
             }
     	};

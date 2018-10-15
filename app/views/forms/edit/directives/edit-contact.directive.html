@@ -16,7 +16,7 @@
 										<div class="row" ng-if="isNationalUser">
 											<div class="col-sm-12">
 												<div class="km-control-group" name="government" required caption="Government">
-													<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+													<div afc-autocomplete required name="government" ng-disabled="isNationalUser" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
 												</div>
 											</div>
 										</div>
@@ -75,7 +75,7 @@
 												<div class="col-md-12">
 													<div class="km-control-group" name="contact_organization" caption="Organization">
 														<div document-selector ng-model="document.contactOrganization" type="radio"
-																					 question="contactOrganization"
+																					 question="contactOrganization" allow-new="{{isDialog?false:true}}"
 																					 government="document.government"
 																					 schema="contact AND type_s:organization"></div>
 													</div>
