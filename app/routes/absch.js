@@ -47,35 +47,32 @@ define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
                whenAsync('/register/ORG/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-organization.html',              label:'Edit',  param:'true', resolveController: true, documentType :'ORG' , resolve : { securized : commonRoutes.securize(null, null, true) }, }).
                whenAsync('/register/NMCC/:identifier/edit',          {templateUrl: 'views/forms/edit/abs/edit-abs-national-model-contractual-clause.html',  label:'Edit',  param:'true', resolveController: true, documentType :'NMCC'  , resolve : { securized : commonRoutes.securize(null,true, true) }, }).
                
-               whenAsync('/workshops/lac',               { templateUrl: 'views/workshops/lac.html',            label:'Workshops',            resolveController: true, resolveUser: true}).
-               whenAsync('/workshops/caribbean',         { templateUrl: 'views/workshops/caribbean.html',      label:'Workshops',        resolveController: true, resolveUser: true}).
+            //    whenAsync('/workshops/lac',               { templateUrl: 'views/workshops/lac.html',            label:'Workshops',            resolveController: true, resolveUser: true}).
+            //    whenAsync('/workshops/caribbean',         { templateUrl: 'views/workshops/caribbean.html',      label:'Workshops',        resolveController: true, resolveUser: true}).
                
-               whenAsync('/about/faq',                   { redirectTo : '/help/faq'}).
-               whenAsync('/guides',                      {redirectTo: '/help/guides'}).
-               whenAsync('/commonformats',               {redirectTo:'/help/common-formats'}).
-               whenAsync('/nationalreport',              {redirectTo:'/help/national-report'}).               
-               whenAsync('/about',                        {redirectTo  : '/help/about'}).
-               whenAsync('/about/blog',                   {redirectTo  : '/help/about'}).
-               whenAsync('/help',                         {redirectTo  : '/help/about'}).
-               whenAsync('/help/faq',                     {redirectTo  : '/help/faqs'}).
+               whenAsync('/guides',                      {redirectTo: '/about/guides'}).
+               whenAsync('/faqs',                        {redirectTo: '/about/faqs'}).
+               whenAsync('/commonformats',               {redirectTo: '/about/offline'}).
+               whenAsync('/common-formats',              {redirectTo: '/about/offline'}).
+               whenAsync('/nationalreport',              {redirectTo: '/about/interimReport'}).               
+               whenAsync('/help',                        {redirectTo  : '/about'}).
+               whenAsync('/help/faq',                    {redirectTo  : '/about/faqs'}).
+               whenAsync('/help/guides',                 {redirectTo  : '/about/guides'}).
+               whenAsync('/help/about',                  {redirectTo  : '/about'}).
+               whenAsync('/help/national-report',        {redirectTo  : '/about/interimReport'}).
+               whenAsync('/help/guides/:guideId?',       {redirectTo  : '/about/guide/:guideId?'}).
+               whenAsync('/about/getting-started',       {redirectTo  : '/about/gettingStartedGovernments'}).
+               whenAsync('/about/developer',             {redirectTo  : '/about/api'}).
+               whenAsync('/about/videos',            {redirectTo  : '/help/videos'}).
 
-               whenAsync('/help/guides',     { templateUrl: 'views/about/guides.html',  label:"Step-by-step guides", resolveController: true, resolveUser: true}).
-               whenAsync('/help/guides/:id', { templateUrl: 'views/about/guides.html',  param:'true', resolveController: true, resolveUser: true}).
-               
-
-               whenAsync('/help/about',                   { templateUrl: 'views/about/about.html',                        label:'About the ABSCH',             reloadOnSearch : false,    resolveController:true, resolveUser : true}).
-               whenAsync('/help/about/blog',              { templateUrl: 'views/about/blog.html',                        label:'ABSCH Development Blog',                 resolveController:true, resolveUser : true}).
                whenAsync('/help/videos/:videoId?',   {templateUrl: 'views/about/videos.html', resolveController: true, resolveUser: false, label:'ABSCH Videos'}).
-               //whenAsync('/help/guides/:guideId?',   {templateUrl: 'views/about/guides.html', resolveController: true, resolveUser: false, label:'Step-by-step guides'}).
                whenAsync('/help/common-formats/:commonFormat?',     {templateUrl: 'views/about/common-formats.html', resolveController: true, resolveUser: true, label:'Common formats'}).
-               whenAsync('/help/national-report',    {templateUrl: 'views/about/nr-faq.html', resolveController: true, resolveUser: true, label:'Information on the Interim National Report'}).
-               whenAsync('/help/faqs',               {templateUrl: 'views/about/faq.html', resolveController: true, resolveUser: true, label:'FAQs'}).
+
+               whenAsync('/about/',           { templateUrl: 'views/about/about.html',   label:'About the ABSCH', resolveController:true, resolveUser : false}).
+               whenAsync('/about/:id',        { templateUrl: 'views/about/about.html',   param:'true',  resolveController:true, resolveUser : false}).
+               whenAsync('/about/:id/:guide', { templateUrl: 'views/about/about.html',   param:'true',   resolveController:true, resolveUser : false}).
 
 
-               whenAsync('/about/getting-started',                   { templateUrl: 'views/about/getting-started.html',                        label:'Getting Started Using the ABSCH',             reloadOnSearch : false,    resolveController:true, resolveUser : true}).
-
-               whenAsync('/developer',    {templateUrl: 'views/help/developer/developer.html', resolveController: true, resolveUser: true, label:'ABSCH for developers'}).                  
-               
                otherwise({templateUrl: commonRoutes.baseUrl+'views/shared/404.html', label:'404 Error'});
 
     }]);
