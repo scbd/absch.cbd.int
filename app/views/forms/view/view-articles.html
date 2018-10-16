@@ -1,4 +1,4 @@
-﻿<div ng-controller="viewArticles">
+﻿<div ng-controller="viewArticles" >
 <style>
 .responsive {
     width: 100%;
@@ -16,9 +16,10 @@
 
 </style>
 
-    <h3 style="border-bottom:1px solid #ddd;">ABSCH Announcements</h3>
+    <h3 style="border-bottom:1px solid #ddd;"> Announcements</h3>
         
-        <div class="row"  ng-if="article">
+    <div class="container" ng-if="article">
+        <div class="row">
             <div class="col-md-5">
                 <img class="thumbnail" style="margin-right:10px;width:100%; margin: auto; width: 100%;" ng-if="article.coverImage.url" src="{{getSizedImage(article.coverImage.url, '600x600')}}">
                
@@ -29,8 +30,8 @@
                 <p ng-bind-html="article.content.en"></p>
             </div>
         </div>
-
-   
+    </div>  
+       
         <div class="row" style="margin:10px 5px 10px 5px;" ng-if="articles">
             <div ng-repeat="article in articles | orderBy:'meta.createdOn':true" style="cursor:pointer"  >
                         <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2" ng-click="loadArticle(article._id)">

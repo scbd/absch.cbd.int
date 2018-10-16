@@ -1,0 +1,29 @@
+﻿<div>
+    <h1 class="color-green bold" style="margin-bottom:30px;"> {{title}} {{search}}</h1>    
+        <table ng-show="search" style="width:100%;">
+            <tr>
+              <!-- <td ng-show="categories">
+                  <div class="dropdown" >
+                      <button style="border-radius: 2px; padding: 12px 20px;border:solid 1px #ddd;" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                          All categories <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" ng-repeat="category in articleCategories">
+                          <li><a ng-click="toggleCategory(category)">{{category}}</a></li>
+                      </ul>
+                  </div>
+              </td> -->
+              <td style="width:100%;">
+                  <input style="width:100%;border-radius: 2px; padding: 12px 20px;border:solid 1px #ddd;" ng-model="searchText" placeholder=" What are you looking for? "> 
+              </td>
+          </tr>
+       </table>
+
+      <div ng-repeat="article in articles | filter:searchText | orderBy:'title.en' " style="cursor:pointer" >
+          <span ng-click="showFAQ=!showFAQ" ng-class="{'color-litegrey':!showFAQ, 'color-grey':showFAQ}" style="font-weight:normal;font-size:1.4em;">
+              <i class="fa" ng-class="{'fa-plus-circle':!showFAQ, 'fa-minus-circle color-grey':showFAQ}"></i> <span  ng-bind-html="article.title[locale]"></span>
+          </span>
+          <div ng-show="showFAQ" style="background-color:#FFF;margin-bottom:10px;padding:20px;border-top:#ddd 1px solid;">
+              <p ng-bind-html="article.content[locale]"> </p>
+          </div>
+      </div>
+</div>
