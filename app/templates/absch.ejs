@@ -137,17 +137,6 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-
-    <!-- Slaask. need to be placed just before require.JS script tag -->
-    <script src="https://cdn.slaask.com/chat.js"></script>
-    <script>
-        //patch slaask to works with requireJS
-        window._slaask.createScriptTag = function (url) {
-            var t = {};
-            require([url], function() { t.onload(); });
-            return t;
-        };
-    </script>
     
     <script>window.appTemplate = 'templates/absch'</script>
    
