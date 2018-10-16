@@ -1,4 +1,4 @@
-﻿define(['app','underscore', 'json!app-data/help-videos.json', './youtube', './left-menu', 'ngDialog',], function (app, _, videosData) {
+﻿define(['app','underscore', 'json!app-data/help-videos.json', './youtube', 'ngDialog',], function (app, _, videosData) {
 app.controller("videosController",
 	["$rootScope", "$scope", "$q", '$element', '$route', 'ngDialog', function ($rootScope, $scope, $q, $element, $route, ngDialog) {
 
