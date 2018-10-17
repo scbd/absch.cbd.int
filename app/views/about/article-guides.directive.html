@@ -7,12 +7,16 @@
             height: auto;
         }
     </style>
+    
 
+    <div class="pull-left bold color-blue" style="text-transform: uppercase;font-size: 10px;"> ABS Clearing-House Step-by-step guide </div>
+    <div class="pull-right" style="text-transform: uppercase;font-size: 10px;"> <a href="" class="color-grey" ng-click="expand=!expand; expandAll(expand);"> 
+        <span ng-if="!expand">+ expand </span> <span ng-if="expand">- collapse</span> </a> &nbsp; | &nbsp; print &nbsp; | &nbsp; email </div> 
 
     <h2 class="color-green bold"> {{format.summary[locale]}} </h2>  
-
+    <hr>
         <div>
-            <span ng-click="show_introABSCH=!show_introABSCH" ng-class="{'color-litegrey':!showFAQ, 'color-grey':showFAQ}" style="font-weight:normal;font-size:1.4em; cursor:pointer;">
+            <span ng-click="show_introABSCH=!show_introABSCH" ng-class="{'color-grey':!showFAQ, 'color-black':showFAQ}" style="font-weight:normal;font-size:1.4em; cursor:pointer;">
                 <i class="fa" ng-class="{'fa-plus':!show_introABSCH, 'fa-minus color-grey':show_introABSCH}"></i> <span  ng-bind-html="introABSCH.title[locale]"></span>
             </span>
             <div ng-show="show_introABSCH" style="background-color:#e9e9e9;margin-bottom:10px;padding:20px;border-top:#ddd 1px solid;">
@@ -21,7 +25,7 @@
         </div>
 
         <div >
-            <span ng-click="show_requirements=!show_requirements" ng-class="{'color-litegrey':!show_requirements, 'color-grey':show_requirements}" style="font-weight:normal;font-size:1.4em; cursor:pointer;">
+            <span ng-click="show_requirements=!show_requirements" ng-class="{'color-grey':!show_requirements, 'color-black':show_requirements}" style="font-weight:normal;font-size:1.4em; cursor:pointer;">
                 <i class="fa" ng-class="{'fa-plus':!show_requirements, 'fa-minus color-grey':show_requirements}"></i> <span  ng-bind-html="requirements.title[locale]"></span>
             </span>
             <div ng-show="show_requirements" style="background-color:#e9e9e9;margin-bottom:10px;padding:20px;border-top:#ddd 1px solid;">
@@ -30,7 +34,7 @@
         </div>
 
         <div >
-                <span ng-click="show_help=!show_help" ng-class="{'color-litegrey':!show_help, 'color-grey':show_help}" style="font-weight:normal;font-size:1.4em; cursor:pointer;">
+                <span ng-click="show_help=!show_help" ng-class="{'color-grey':!show_help, 'color-black':show_help}" style="font-weight:normal;font-size:1.4em; cursor:pointer;">
                     <i class="fa" ng-class="{'fa-plus':!show_help, 'fa-minus color-grey':show_help}"></i> <span  ng-bind-html="help.title[locale]"></span>
                 </span>
                 <div ng-show="show_help" style="background-color:#e9e9e9;margin-bottom:10px;padding:20px;border-top:#ddd 1px solid;">
@@ -38,9 +42,11 @@
                 </div>
             </div>
 
-        <div >
+            <hr>
+
+            <div >
                 <span ng-click="show_intro=!show_intro" ng-class="{'color-grey':!show_intro, 'color-black':show_intro}" style="font-weight:normal;font-size:1.4em; cursor:pointer;">
-                    <i class="fa" ng-class="{'fa-plus':!show_intro, 'fa-minus color-grey':show_intro}"></i> STEP 1: <span  ng-bind-html="intro.title[locale]"></span>
+                    <i class="fa" ng-class="{'fa-plus':!show_intro, 'fa-minus color-grey':show_intro}"></i> <span  ng-bind-html="intro.title[locale]"></span>
                 </span>
                 <div ng-show="show_intro" style="background-color:#e9e9e9;margin-bottom:10px;padding:20px;border-top:#ddd 1px solid;">
                     <p ng-bind-html="intro.content[locale]"> </p>
@@ -49,7 +55,7 @@
 
         <div >
                 <span ng-click="show_signIn=!show_signIn" ng-class="{'color-grey':!show_signIn, 'color-black':show_signIn}" style="font-weight:normal;font-size:1.4em; cursor:pointer;">
-                    <i class="fa" ng-class="{'fa-plus':!show_signIn, 'fa-minus color-grey':show_signIn}"></i> STEP 2: <span  ng-bind-html="signIn.title[locale]"></span>
+                    <i class="fa" ng-class="{'fa-plus':!show_signIn, 'fa-minus color-grey':show_signIn}"></i> <span class="color-litegrey">STEP 1:</span> <span  ng-bind-html="signIn.title[locale]"></span>
                 </span>
                 <div ng-show="show_signIn" style="background-color:#e9e9e9;margin-bottom:10px;padding:20px;border-top:#ddd 1px solid;">
                          <p ng-bind-html="signIn.content[locale]"> </p>
@@ -58,7 +64,7 @@
 
         <div >
                 <span ng-click="show_dashboard=!show_dashboard" ng-class="{'color-grey':!show_dashboard, 'color-black':show_dashboard}" style="font-weight:normal;font-size:1.4em; cursor:pointer;">
-                    <i class="fa" ng-class="{'fa-plus':!show_dashboard, 'fa-minus color-grey':show_dashboard}"></i> STEP 3: <span  ng-bind-html="dashboard.title[locale]"></span>
+                    <i class="fa" ng-class="{'fa-plus':!show_dashboard, 'fa-minus color-grey':show_dashboard}"></i> <span class="color-litegrey">STEP 2:</span> <span  ng-bind-html="dashboard.title[locale]"></span>
                 </span>
                 <div ng-show="show_dashboard" style="background-color:#e9e9e9;margin-bottom:10px;padding:20px;border-top:#ddd 1px solid;">
                          <p ng-bind-html="dashboard.content[locale]"> </p>
@@ -67,7 +73,7 @@
 
         <div >
                 <span ng-click="show_format=!show_format" ng-class="{'color-grey':!show_format, 'color-black':show_format}" style="font-weight:normal;font-size:1.4em; cursor:pointer;">
-                    <i class="fa" ng-class="{'fa-plus':!show_format, 'fa-minus color-grey':show_format}"></i> STEP 4: <span  ng-bind-html="format.title[locale]"></span>
+                    <i class="fa" ng-class="{'fa-plus':!show_format, 'fa-minus color-grey':show_format}"></i> <span class="color-litegrey">STEP 3:</span> <span  ng-bind-html="format.title[locale]"></span>
                 </span>
                 <div ng-show="show_format" style="background-color:#e9e9e9;margin-bottom:10px;padding:20px;border-top:#ddd 1px solid;">
                            <p ng-bind-html="format.content[locale]"> </p>
@@ -76,7 +82,7 @@
 
         <div >
                 <span ng-click="show_review=!show_review" ng-class="{'color-grey':!show_review, 'color-black':show_review}" style="font-weight:normal;font-size:1.4em; cursor:pointer;">
-                    <i class="fa" ng-class="{'fa-plus':!show_review, 'fa-minus color-grey':show_review}"></i> STEP 5: <span  ng-bind-html="review.title[locale]"></span>
+                    <i class="fa" ng-class="{'fa-plus':!show_review, 'fa-minus color-grey':show_review}"></i> <span class="color-litegrey">STEP 4:</span> <span  ng-bind-html="review.title[locale]"></span>
                 </span>
                 <div ng-show="show_format" style="background-color:#e9e9e9;margin-bottom:10px;padding:20px;border-top:#ddd 1px solid;">
                          <p ng-bind-html="review.content[locale]"> </p>
@@ -85,7 +91,7 @@
             
         <div >
                 <span ng-click="show_publish=!show_publish" ng-class="{'color-grey':!show_publish, 'color-black':show_publish}" style="font-weight:normal;font-size:1.4em; cursor:pointer;">
-                    <i class="fa" ng-class="{'fa-plus':!show_publish, 'fa-minus color-grey':show_publish}"></i> STEP 6: <span  ng-bind-html="publish.title[locale]"></span>
+                    <i class="fa" ng-class="{'fa-plus':!show_publish, 'fa-minus color-grey':show_publish}"></i> <span class="color-litegrey">STEP 5:</span> <span  ng-bind-html="publish.title[locale]"></span>
                 </span>
                 <div ng-show="show_format" style="background-color:#e9e9e9;margin-bottom:10px;padding:20px;border-top:#ddd 1px solid;">
                         <p ng-bind-html="publish.content[locale]"> </p>
