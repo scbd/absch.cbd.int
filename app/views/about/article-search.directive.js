@@ -35,7 +35,7 @@ app.directive("articleSearch", [ function () {
             for(var i=0;i < tags.length;++i){
               ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent(tags[i].trim())}]}});
             }
-            ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1}});
+            ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "adminTags":1, "customTags":1, "tags":1}});
             
             var qs = {
               "ag" : JSON.stringify(ag)
