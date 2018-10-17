@@ -54,7 +54,7 @@ define(['app', 'underscore', 'services/local-storage-service', 'components/scbd-
                         return fromStorage;
 
                     return $http.get('/api/v2013/countries', {
-                            cache: true
+                            cache: true, params : {s:{ 'name.en':1}}
                         })
                         .then(function(response) {
                             var countries = _.map(response.data,formatCountry);

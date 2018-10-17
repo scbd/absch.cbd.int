@@ -1,4 +1,4 @@
-﻿define(['app', 'underscore',
+﻿define(['app', 'lodash',
     'js/common',
     'components/scbd-angularjs-services/filters/scbd-filters',
     'services/search-service',
@@ -7,66 +7,62 @@
     'components/scbd-angularjs-controls/form-control-directives/km-select'
 ], function (app, _) {
 
-    app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', '$routeParams', '$compile', '$timeout', 'locale', 'realm',
-        function ($http, $scope, $element, $location, commonjs, $q, searchService, $filter, $routeParams, $compile, $timeout, locale, realm) {
-            var regionRelations = {};
-            
-            
-            $scope.isBCH          = realm.is('BCH');
-            $scope.isABS          = realm.is('ABS');    
-            $scope.sortTerm = "name.en";
-            $scope.regionFilter= [];
+    app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', 
+    '$routeParams', '$compile', '$timeout', 'locale', 'realm',
+        function ($http, $scope, $element, $location, commonjs, $q, searchService, $filter, $routeParams, $compile, 
+            $timeout, locale, realm) {
+            var regionRelations = {};            
+            $scope.isBCH        = realm.is('BCH');
+            $scope.isABS        = realm.is('ABS');    
+            $scope.sortTerm     = "name.en";
+            $scope.loading      = true;
 
-            var headerCount = {
-                absCheckpoint: 0,
-                absCheckpointCommunique: 0,
-                absPermit: 0,
-                authority: 0,
-                database: 0,
-                focalPoint: 0,
-                measure: 0,
-                absNationalReport: 0
-            };
+
             $scope.options = {
-                regions : commonjs.getRegions
+                regions  : commonjs.getRegions,
+                countries: function(){
+                    return $q.when(commonjs.getCountries())
+                    .then(function(countries){
+                            return _.sortBy(_.map(countries, function(country){
+                                return _.extend(country, {identifier:country.code});
+                            }), function(country){return country.name[locale];})
+                    });
+                }
             }
-            $scope.loading = true;
 
             $q.all([commonjs.getCountries(), searchService.governmentSchemaFacets()])
                 .then(function (results) {
+
+                    var headerCount = [];
+                    _(realm.schemas).map(function(schema, key){ 
+                        if(schema.type=='national' && key!= 'contact'){
+                            headerCount.push({schema:key, count:0, title : schema.title, shortCode : schema.shortCode });
+                        }
+                    }).value();
+
                     var countries = results[0];
                     var countryFacets = results[1];
                     $scope.countries = _.map(countries, function (country) {
                         var facets = _.findWhere(countryFacets, { government: country.code.toLowerCase() });
                         if (!facets)
                             facets = {};
-                        if (facets.schemas) {
-                            headerCount.absCheckpoint += facets.schemas.absCheckpoint || 0;
-                            headerCount.absCheckpointCommunique += facets.schemas.absCheckpointCommunique || 0;
-                            headerCount.absPermit += facets.schemas.absPermit || 0;
-                            headerCount.authority += facets.schemas.authority || 0;
-                            headerCount.database += facets.schemas.database || 0;
-                            headerCount.focalPoint += facets.schemas.focalPoint || 0;
-                            headerCount.measure += facets.schemas.measure || 0;
-                            headerCount.absNationalReport += facets.schemas.absNationalReport || 0;
-                        }
-                        return {
-                       
-                            code: country.code,
-                            name: country.name,
-                            isNPParty: country.isNPParty,
-                            isNPInbetweenParty: country.isNPInbetweenParty,
-                            isNPSignatory: country.isNPSignatory,
-                            entryIntoForce: country.entryIntoForce,
-                            schemas: facets.schemas || {},
-                            totalCount: facets.recordCount
-                        };
+
+                        country.schemas = {};
+                        _.each(headerCount, function(headerSchema){
+                            var count = (facets.schemas||{})[headerSchema.schema]||0;
+                            headerSchema.count += count;
+                            country.schemas[headerSchema.schema] = {
+                                count:count, title : headerSchema.title, shortCode : headerSchema.shortCode
+                            }
+                        });
+                        country.totalCount = facets.recordCount||0;
+                        return country;
                     });
                     $scope.headerCount = headerCount;
-                    $element.find('[data-toggle="tooltip"]').tooltip();
                     $scope.loading = false;
                     $scope.countries
                     $scope.allcountries = _.clone($scope.countries);
+                    $timeout(function(){$element.find('[data-toggle="tooltip"]').tooltip()}, 300);
                 });
 
            //*************************************************************************************************************************************
@@ -101,7 +97,6 @@
             
             $scope.$watch('regions', function(newVal, oldVal){
                 if(newVal){
-                    console.log(newVal, oldVal)
                     var diff = _.difference(_.pluck(newVal, "identifier"), _.pluck(oldVal, "identifier"));
                     _.each(diff, $scope.filterRegion)
                 }
@@ -123,6 +118,15 @@
 
                 return true;
             }
+
+            $scope.hasCountries = function(country){
+                if(country && $scope.countryFilter){
+                    return _.contains(_.map($scope.countryFilter, 'identifier'), country.code);
+                }
+
+                return true;
+            }
+
             $scope.getRegions = function(code){
                 var countryReg = _.filter(regionRelations, function(region){
                     if(_.contains(_.map($scope.regions, 'identifier'), region.identifier)){                   
@@ -151,27 +155,22 @@
 
             //*************************************************************************************************************************************
             $scope.$watch('list', function () {
-                    $scope.total = {
-                                    absCheckpoint: 0,
-                                    absCheckpointCommunique: 0,
-                                    absPermit: 0,
-                                    authority: 0,
-                                    database: 0,
-                                    focalPoint: 0,
-                                    measure: 0,
-                                    absNationalReport: 0
-                                };
+                    
+                    if(!$scope.list || !$scope.headerCount.length)
+                        return;
 
+                    var total = {};
                     angular.forEach($scope.list, function(country){
-                        $scope.total.absCheckpoint += country.schemas.absCheckpoint || 0;
-                        $scope.total.absCheckpointCommunique += country.schemas.absCheckpointCommunique || 0;
-                        $scope.total.absPermit += country.schemas.absPermit || 0;
-                        $scope.total.authority += country.schemas.authority || 0;
-                        $scope.total.database += country.schemas.database || 0;
-                        $scope.total.focalPoint += country.schemas.focalPoint || 0;
-                        $scope.total.measure += country.schemas.measure || 0;
-                        $scope.total.absNationalReport += country.schemas.absNationalReport || 0;
-                    })
+
+                        _.each($scope.headerCount,function(counter){
+                            total[counter.schema] = (total[counter.schema]||0) + country.schemas[counter.schema].count || 0;
+                        });
+
+                    });
+                    _.each($scope.headerCount,function(counter){
+                        counter.count = total[counter.schema]||0;
+                    });
+
              }, true)
 
             //*************************************************************************************************************************************
@@ -221,22 +220,8 @@
                     return data.name.en;
                 else if (!data.schemas)
                     return ($scope.orderList ? -9999999 : 999999);
-                else if ($scope.sortTerm == "CNA") {
-                    return data.schemas.authority ? data.schemas.authority : ($scope.orderList ? -9999999 : 999999);
-                } else if ($scope.sortTerm == "CP") {
-                    return data.schemas.absCheckpoint ? data.schemas.absCheckpoint : ($scope.orderList ? -9999999 : 999999);
-                } else if ($scope.sortTerm == "CPC") {
-                    return data.schemas.absCheckpointCommunique ? data.schemas.absCheckpointCommunique : ($scope.orderList ? -9999999 : 999999);
-                } else if ($scope.sortTerm == "IRCC") {
-                    return data.schemas.absPermit ? data.schemas.absPermit : ($scope.orderList ? -9999999 : 999999);
-                } else if ($scope.sortTerm == "MSR") {
-                    return data.schemas.measure ? data.schemas.measure : ($scope.orderList ? -9999999 : 999999);
-                } else if ($scope.sortTerm == "NDB") {
-                    return data.schemas.database ? data.schemas.database : ($scope.orderList ? -9999999 : 999999);
-                } else if ($scope.sortTerm == "NFP") {
-                    return data.schemas.focalPoint ? data.schemas.focalPoint : ($scope.orderList ? -9999999 : 999999);
-                } else if ($scope.sortTerm == "NR") {
-                    return data.schemas.absNationalReport ? data.schemas.absNationalReport : ($scope.orderList ? -9999999 : 999999);
+                else if (data.schemas[$scope.sortTerm]) {
+                    return data.schemas[$scope.sortTerm].count ? data.schemas[$scope.sortTerm].count : ($scope.orderList ? -9999999 : 999999);
                 }
                 
             };
