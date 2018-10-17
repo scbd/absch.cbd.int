@@ -22,6 +22,7 @@ p.list-title{ margin-bottom:0;padding-bottom:0;}
                         <li><a href="" ng-click="loadArticle('whatisit')">What is it?</a></li>
                         <li><a href="#" ng-click="loadArticle('whatitdoes')">What does it do?</a></li>
                         <li><a href="#" ng-click="loadArticle('whoisitfor')">Who is it for?</a></li>
+                        <li><a href="#" ng-click="loadFaqs('about-faq')">FAQs</a></li>
                     </ul>
                         
                     <p class="list-title"><strong>Getting started</strong></p>
@@ -73,10 +74,12 @@ p.list-title{ margin-bottom:0;padding-bottom:0;}
 
                     <p class="list-title"><strong>More information</strong></p>
                     <ul>
-                        <li><a href="#" ng-click="loadFaqs()">FAQs</a></li>
+                        <li><a href="#" ng-click="loadFaqs()">Frequently Asked Questions (FAQs)</a></li>
                         <li><a href="https://www.cbd.int/abs/text/" target="_new">Text of the Protocol</a></li>
+                        <li><a href="#" ng-click="loadArticle('guides')"> Step-by-step guides </a> </li>
                         <li><a href="#" ng-click="loadArticle('offline')">Offline common formats</a></li>
-                        <li><a href="#" ng-click="loadArticle('feedback')">Send us your feedback</a></li>
+                        <li><a href="https://absch.cbd.int/forums"  >ABS Forums</a></li>
+                        <li><a href="#" ng-click="show='feedback'" >Send us your feedback</a></li>
                     </ul>
 
                   </div>
@@ -99,6 +102,10 @@ p.list-title{ margin-bottom:0;padding-bottom:0;}
 
                         <div  id="search-content" ng-if="show=='search'">
                             <article-search tags="ABSCH-About" locale="{{locale}}"  title="About the ABS Clearing-House" keyword="searchText"></article-search>
+                        </div>
+
+                        <div  id="search-content" ng-if="show=='feedback'">
+                            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScdhmH66W5BevP-dgNwr70KGTAk0TibwEf26Ee9-5fNRL2AcQ/viewform?embedded=true" width="100%" height="992" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
                         </div>
 
                     </div>

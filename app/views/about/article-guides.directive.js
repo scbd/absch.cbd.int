@@ -27,13 +27,14 @@ app.directive("articleGuides", [ function () {
           $scope.format=[];
           $scope.review=[];
           $scope.publish=[];
+          $scope.expand=false;
 
           //---------------------------------------------------------------------
           function loadArticles(str){
             var ag = [];
             
             ag.push({"$match":{"adminTags.title.en":{"$in":[encodeURIComponent("ABSCH-Guide"), "ABSCH-Guide-"  + $scope.type.toUpperCase() ]}}});
-            ag.push({"$project" : {"title":1, "summary":1,"content":1, "coverImage":1, "meta":1,  "adminTags":1}});
+            ag.push({"$project" : {"title":1, "summary":1,"content":1,"meta":1, "adminTags":1}});
             
             var qs = {
               "ag" : JSON.stringify(ag)
@@ -108,7 +109,19 @@ app.directive("articleGuides", [ function () {
               .replace(/attachments.cbd.int\//, '$&'+size+'/')
               .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&'+size+'/')
           }
-          
+
+          //---------------------------------------------------------------------
+          $scope.expandAll = function(expand){
+            $scope.show_introABSCH = expand;
+            $scope.show_requirements = expand;
+            $scope.show_help = expand;
+            $scope.show_intro = expand;
+            $scope.show_signIn = expand;
+            $scope.show_dashboard = expand;
+            $scope.show_format = expand;
+            $scope.show_publish = expand;
+          }
+         
 		}]
 	};
 }]);

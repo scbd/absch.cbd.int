@@ -20,13 +20,16 @@ define(['app','underscore',
       $scope.id = $route.current.params.id;
       $scope.guide = $route.current.params.guide;
 
-      if($scope.id == "guide" && $scope.guide){
+      if($scope.id == "guides" && $scope.guide){
         $scope.show = "guides";
       }
       else if($scope.id == "faqs"){
         $scope.faqs = "ABSCH-About, faqs"; 
         $scope.showSearch = true;
         $scope.show = "faqs";
+      }
+      else if($scope.id == "feedback"){
+        $scope.show = "feedback";
       }
       else if($scope.id){
         loadArticles(["ABSCH-About", $scope.id]);
@@ -42,7 +45,7 @@ define(['app','underscore',
         for(var i=0;i < tags.length;++i){
           ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent(tags[i])}]}});
         }
-        ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1}});
+        ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "adminTags":1, "customTags":1, "tags":1}});
         
         var qs = {
           "ag" : JSON.stringify(ag)
