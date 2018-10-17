@@ -22,6 +22,7 @@
 
                                 <legend>General Information</legend>
 
+
                                 <div class="row">
                                     <div class="col-xs-12" >
                                         <div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
@@ -31,10 +32,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <br>
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="government" required caption="2. Country">
+                                        <div class="km-control-group" name="government" required caption="1. Country">
                                             <div class="indent">
                                                 <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
                                                     filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
@@ -47,7 +49,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="name" required caption="3. This is an ABS procedure for:">
+                                        <div class="km-control-group" name="name" required caption="2. This is an ABS procedure for:">
                                             <div class="indent help-info"> Please provide a title for this specific ABS procedure (E.g.: Non-commercial use)
                                                 </div>
                                             <div class="indent" km-textbox-ml ng-model="document.name" rows="1" placeholder="" locales="document.header.languages"></div>
@@ -57,7 +59,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="jurisdiction" caption="4. Area of jurisdiction:" >
+                                        <div class="km-control-group" name="jurisdiction" caption="3. Area of jurisdiction:" >
                                             <div class="help-info indent">Jurisdiction where this ABS procedure is relevant</div>
                                             <div class="indent" style="max-width:300px;">
                                                 <div afc-autocomplete name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter"
@@ -91,7 +93,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="contactsOrLinks" caption="5. Where should applications for access be made?">
+                                        <div class="km-control-group" name="contactsOrLinks" caption="4. Where should applications for access be made?">
                                             <div class="indent help-info"> Please provide relevant contacts or links. </div>
                                             <div class="indent">
                                                 <div document-selector ng-model="document.contacts" question="contacts" government="document.government" schema="(authority contact)" locales="document.header.languages"></div>
@@ -105,7 +107,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="requirements" caption="6. What are the conditions or requirements a potential user needs to fulfil to apply for access?">
+                                        <div class="km-control-group" required name="requirements" caption="5. What are the conditions or requirements a potential user needs to fulfil to apply for access?">
                                             <div class="indent">
                                                 <div class="help-info"></div>
                                                 <div km-rich-textbox name="requirements" rows="3" ng-model="document.requirements" locales="document.header.languages"></div>
@@ -116,7 +118,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="description" caption="7. Please provide a step-by step description or a visual representation of the ABS procedure">
+                                        <div class="km-control-group" required name="description" caption="6. Please provide a step-by step description or a visual representation of the ABS procedure">
                                             <div class="indent">
                                                 <div km-rich-textbox name="description" rows="3" ng-model="document.description" locales="document.header.languages"></div>
                                                 <br>
@@ -129,7 +131,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="hasApplicationDocuments" caption="8. Does the applicant need to provide any documents?">
+                                        <div class="km-control-group" required name="hasApplicationDocuments" caption="7. Does the applicant need to provide any documents?">
                                             <div class="indent">
                                                 <div class="km-yes-no"  ng-model="document.hasApplicationDocuments"></div>
                                                 <br>
@@ -149,7 +151,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="hasApplicationFees" caption="9. Are there application fees?">
+                                        <div class="km-control-group" required name="hasApplicationFees" caption="8. Are there application fees?">
                                             <div class="indent">
                                                 <div class="km-yes-no" name="hasApplicationFees" ng-model="document.hasApplicationFees"></div>
                                                 <br>
@@ -163,7 +165,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="duration" caption="10. How long does the application process take:">
+                                        <div class="km-control-group" name="duration" caption="9. How long does the application process take:">
                                             <div class="indent">
                                                 <input type="number" name="duration" ng-model="document.duration" minlength="1" placeholder="eg. 24" ng-change="clearDates()"
                                                     class="form-control" style="display:inline-block;width:100px" />
@@ -182,7 +184,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="relevantMeasures" caption="11. Relevant ABS measure(s):">
+                                        <div class="km-control-group" name="relevantMeasures" caption="10. Relevant ABS measure(s):">
                                             <div class="indent">
                                                 <div document-selector ng-model="document.relevantMeasures" question="relevantMeasures" government="document.government"
                                                     schema="(measures)"></div>
@@ -193,7 +195,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="keywords" caption="12. Keywords">
+                                        <div class="km-control-group" required name="keywords" caption="11. Keywords">
                                             <div km-term-check enable-search="true" name="keywords" required ng-model="document.keywords" terms="options.keywords()" binding-type="term[]"></div>
                                         </div>
                                     </div>
