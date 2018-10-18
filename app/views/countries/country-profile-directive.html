@@ -1,129 +1,63 @@
 ﻿<div id="search-new">
 
-    <div ng-show="!country" style="padding-left:50%">
+    <div ng-show="!countryRecords" style="padding-left:50%">
         <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" />
     </div>
-    <div class="pull-right">
+    <!-- <div class="pull-right">
         <span export export-query="getExportQuery()" query-type="getRecordType()" help-title="Export countries data to excel/csv"></span>
     </div>
     <br/>
-    <br/>
-    <h4 id="divNFP" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showNFP = !showNFP" ng-class="{'color-litegrey': nfpCount == 0}">
-        <i class="fa" ng-class="{'fa-plus':!showNFP, 'fa-minus':showNFP}" style="font-size:14px;font-weight:normal;"></i> ABS National Focal Point (NFP)
-        <span class="badge pull-right" ng-class="{'bg-grey3': nfpCount==0, 'bg-black': nfpCount > 0}">{{nfpCount}}</span>
-    </h4>
-    <div ng-if="showNFP && nfpCount > 0" class="well bg-white">
-        <div ng-repeat="doc in absch_nfp | filter:{'schema_s':'focalPoint'}">
-            <result-grouped-national-record doc='doc'></result-grouped-national-record>
+    <br/> -->
+    <div ng-repeat="schema in countryRecords">
+
+        <h4 id="div{{schema.shortCode}}" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="schema.display = !schema.display" ng-class="{'color-litegrey': schema.numFound == 0}">
+            <i class="fa" ng-class="{'fa-plus':!schema.display, 'fa-minus':schema.display}" style="font-size:14px;font-weight:normal;"></i> 
+            <span ng-bind="schema.title|lstring:locale"></span>(<span ng-bind="schema.shortCode"></span>)
+            <span class="badge pull-right" ng-class="{'bg-grey3': schema.numFound==0, 'bg-black': schema.numFound > 0}" ng-bind="schema.numFound"></span>
+        </h4>
+        <div ng-if="schema.display && schema.numFound > 0" class="well bg-white">
+            <div ng-repeat="doc in schema.docs|orderBy:title_t" ng-if="schema.shortCode!='MSR'">
+                <result-grouped-national-record doc='doc'></result-grouped-national-record>
+            </div>
+
+            <div ng-if="schema.shortCode=='MSR'">
+                <div style="width:100%;margin-bottom:30px;">
+                    <legend>   Select the ABS Measures to be displayed in the overview</legend>
+                    <div ng-repeat="measure in schema.docs|orderBy:sortMeasure"  style="padding:5px 0px;border-bottom:1px solid #fff;" 
+                       ng-class="{'bg-nationalmsr':measure.rec_meta1[0] === 'National / Federal','bg-subnationalmsr':measure.rec_meta1[0] === 'Sub-national','bg-communitymsr':measure.rec_meta1[0] === 'Community','bg-regionalmsr':measure.rec_meta1[0] === 'Regional / Multilateral'
+                       ,'bg-othermsr':measure.rec_meta1[0] === 'Other' }">
+                        <div> 
+                            <input type="checkbox"  ng-model="measure.measureMatrix" style="margin-left:5px;" />
+                            <a translation-url  target="_new" ng-href="database/record/{{measure|uniqueID}}"> 
+                               <span class="color-black" style="margin-left:10px;">{{$index+1}}.</span>
+                               <span class="bold">{{measure.rec_title}} </span> 
+                            </a>
+                        </div>
+                        <div class="recordDefault">
+                           <ul class="metadata bold" style="margin-left:20px;font-size:10px!important;">
+                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta1">{{measure.rec_meta1[0]}}</span></li>
+                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_type">{{measure.rec_type}}</span></li>
+                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta3">{{measure.rec_meta3[0]}}</span></li>
+                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta5">{{measure.rec_meta5[0]}}</span></li>
+                                <li style="border:0;">
+                                    <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.entryIntoForce_dt">
+                                        Entry into force: {{measure.entryIntoForce_dt|formatDate}} <span style="font-size:11px!important;padding-left:0px;padding-right:0;border:0;color:#666;"  ng-if="measure.limitedApplication_dt"> until {{measure.limitedApplication_dt|formatDate}} </span></span>
+                                    <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.adoption_dt">
+                                        Adoption: {{measure.adoption_dt|formatDate}}  <span style="font-size:11px!important;padding-left:0px;padding-right:0;border:0;color:#666;" ng-if="measure.limitedApplication_dt">until {{measure.limitedApplication_dt|formatDate}} </span> </span>
+                                   
+                                    <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.retired_dt">Retired: {{measure.retired_dt|formatDate}}</span>
+                                </li>
+                           </ul>
+                        </div>
+                    </div>
+                       <!--<a translation-url  class="link" style="margin-top:20px;" ng-click="selectAllForMatrix()" > select <span ng-if="!measureMatrixDocuments.selectAll">all</span><span ng-if="measureMatrixDocuments.selectAll">none</span></a>-->
+                   </div>    
+                       
+                   <div style="margin-bottom:20px;">
+                       <div ng-hide="(schema.docs|filter:{measureMatrix:true}).length==0" measure-matrix-countries-directive documents="schema.docs"></div>
+                   </div>
+            </div>
         </div>
     </div>
-
-
-    <h4 id="divCNA" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showCNA = !showCNA" ng-class="{'color-litegrey': nationalAuthority == 0}">
-        <i class="fa" ng-class="{'fa-plus':!showCNA, 'fa-minus':showCNA}" style="font-size:14px;font-weight:normal;"></i> Competent National Authorities (CNA)
-        <span class="badge pull-right" ng-class="{'bg-grey3': nationalAuthority==0, 'bg-black': nationalAuthority > 0}">{{nationalAuthority}}</span>
-    </h4>
-    <div ng-if="showCNA &&  nationalAuthority > 0" class="well bg-white">
-        <div ng-repeat="doc in absch_nfp | filter:{'schema_s':'authority'}" style="margin-bottom:20px;">
-            <result-grouped-national-record doc='doc'></result-grouped-national-record>
-        </div>
-    </div>
-
-    <h4 id="divMSR" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showMSR = !showMSR" ng-class="{'color-litegrey': nationalMeasure == 0}">
-        <i class="fa" ng-class="{'fa-plus':!showMSR, 'fa-minus':showMSR}" style="font-size:14px;font-weight:normal;"></i> Legislative, administrative or policy measures on access and benefit-sharing (MSR)
-        <span class="badge pull-right" ng-class="{'bg-grey3': nationalMeasure==0, 'bg-black': nationalMeasure > 0}">{{nationalMeasure}}</span>
-    </h4>
-    <div ng-if="showMSR &&  nationalMeasure > 0" class="well bg-white">
-        <div style="width:100%;margin-bottom:30px;">
-         <legend>   Select the ABS Measures to be displayed in the overview</legend>
-         <div ng-repeat="measure in absMeasure = (measureMatrixDocuments|orderBy:sortMeasure:reverseMeasure)"  style="padding:5px 0px;border-bottom:1px solid #fff;" 
-            ng-class="{'bg-nationalmsr':measure.rec_meta1[0] === 'National / Federal','bg-subnationalmsr':measure.rec_meta1[0] === 'Sub-national','bg-communitymsr':measure.rec_meta1[0] === 'Community','bg-regionalmsr':measure.rec_meta1[0] === 'Regional / Multilateral'
-            ,'bg-othermsr':measure.rec_meta1[0] === 'Other' }">
-             <div> 
-                 <input type="checkbox"  ng-model="measure.measureMatrix" style="margin-left:5px;" ></input>
-                 <a translation-url  target="_new" ng-href="database/record/{{measure|uniqueID}}"> 
-                    <span class="color-black" style="margin-left:10px;">{{$index+1}}.</span> 
-                    <!---->
-                    <span class="bold">{{measure.rec_title}} </span> 
-                 </a>
-             </div>
-             <div class="recordDefault">
-                <ul class="metadata bold" style="margin-left:20px;font-size:10px!important;">
-                     <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta1">{{measure.rec_meta1[0]}}</span></li>
-                     <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_type">{{measure.rec_type}}</span></li>
-                     <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta3">{{measure.rec_meta3[0]}}</span></li>
-                     <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta5">{{measure.rec_meta5[0]}}</span></li>
-                     <li style="border:0;">
-                         <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.entryIntoForce_dt">
-                             Entry into force: {{measure.entryIntoForce_dt|formatDate}} <span style="font-size:11px!important;padding-left:0px;padding-right:0;border:0;color:#666;"  ng-if="measure.limitedApplication_dt"> until {{measure.limitedApplication_dt|formatDate}} </span></span>
-                         <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.adoption_dt">
-                             Adoption: {{measure.adoption_dt|formatDate}}  <span style="font-size:11px!important;padding-left:0px;padding-right:0;border:0;color:#666;" ng-if="measure.limitedApplication_dt">until {{measure.limitedApplication_dt|formatDate}} </span> </span>
-                        
-                         <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.retired_dt">Retired: {{measure.retired_dt|formatDate}}</span>
-                     </li>
-                </ul>
-             </div>
-         </div>
-            <!--<a translation-url  class="link" style="margin-top:20px;" ng-click="selectAllForMatrix()" > select <span ng-if="!measureMatrixDocuments.selectAll">all</span><span ng-if="measureMatrixDocuments.selectAll">none</span></a>-->
-        </div>    
-            
-        <div style="margin-bottom:20px;">
-            <div ng-hide="(measureMatrixDocuments|filter:{measureMatrix:true}).length==0" measure-matrix-countries-directive documents="measureMatrixDocuments"></div>
-        </div>
-    </div>
-
-
-    <h4 id="divNDB" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showNDB = !showNDB" ng-class="{'color-litegrey': database == 0}">
-        <i class="fa" ng-class="{'fa-plus':!showNDB, 'fa-minus':showNDB}" style="font-size:14px;font-weight:normal;"></i> National Databases and Websites (NDB)
-        <span class="badge pull-right" ng-class="{'bg-grey3': database==0, 'bg-black': database > 0}">{{database}}</span>
-    </h4>
-    <div ng-if="showNDB &&  database > 0" class="well bg-white">
-        <div ng-repeat="doc in absch_nfp | filter:{'schema_s':'database'}" style="margin-bottom:20px;">
-            <result-grouped-national-record doc='doc'></result-grouped-national-record>
-        </div>
-    </div>
-    <h4 id="divCP" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showCP = !showCP" ng-class="{'color-litegrey': absCheckpoint == 0}">
-        <i class="fa" ng-class="{'fa-plus':!showCP, 'fa-minus':showCP}" style="font-size:14px;font-weight:normal;"></i> Checkpoints (CP)
-        <span class="badge pull-right" ng-class="{'bg-grey3': absCheckpoint==0, 'bg-black': absCheckpoint > 0}">{{absCheckpoint}}</span>
-    </h4>
-    <div ng-if="showCP &&  absCheckpoint > 0" class="well bg-white">
-        <div ng-repeat="doc in absch_nfp | filter:isCheckpoint" style="margin-bottom:20px;">
-            <result-grouped-national-record doc='doc'></result-grouped-national-record>
-        </div>
-    </div>
-
-
-    <h4 id="divIRCC" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showIRCC = !showIRCC" ng-class="{'color-litegrey': Permit == 0}">
-        <i class="fa" ng-class="{'fa-plus':!showIRCC, 'fa-minus':showIRCC}" style="font-size:14px;font-weight:normal;"></i> Internationally Recognized Certificates of Compliance (IRCC)
-        <span class="badge pull-right" ng-class="{'bg-grey3': Permit==0, 'bg-black': Permit > 0}">{{Permit}}</span>
-    </h4>
-    <div ng-if="showIRCC &&  Permit > 0" class="well bg-white">
-        <div ng-repeat="doc in absPermit = (absch_nfp|filter:isPermit|orderBy:sortPermit:reversePermit)" style="margin-bottom:20px;">
-            <result-grouped-national-record doc='doc'></result-grouped-national-record>
-        </div>
-    </div>
-
-
-    <h4 id="divCPC" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showCPC = !showCPC" ng-class="{'color-litegrey': absCheckpointCommunique == 0}">
-        <i class="fa" ng-class="{'fa-plus':!showCPC, 'fa-minus':showCPC}" style="font-size:14px;font-weight:normal;"></i> Checkpoint Communiqués (CPC)
-        <span class="badge pull-right" ng-class="{'bg-grey3': absCheckpointCommunique==0, 'bg-black': absCheckpointCommunique > 0}">{{absCheckpointCommunique}}</span>
-    </h4>
-    <div ng-if="showCPC &&  absCheckpointCommunique > 0" class="well bg-white">
-        <div ng-repeat="doc in absCommunique = (absch_nfp|filter:isCheckpointCommunique)" style="margin-bottom:20px;">
-            <result-grouped-national-record doc='doc'></result-grouped-national-record>
-        </div>
-    </div>
-
-
-    <h4 id="divNR" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" ng-click="showNR = !showNR" ng-class="{'color-litegrey': absNationalReport == 0}">
-        <i class="fa" ng-class="{'fa-plus':!showNR, 'fa-minus':showNR}" style="font-size:14px;font-weight:normal;"></i> Interim National Report on the Implementation of the Nagoya Protocol (NR)
-        <span class="badge pull-right" ng-class="{'bg-grey3': absNationalReport==0, 'bg-black': absNationalReport > 0}">{{absNationalReport}}</span>
-    </h4>
-    <div ng-if="showNR &&  absNationalReport > 0" class="well bg-white">
-        <div ng-repeat="doc in absch_nfp|filter:isNationalReport" style="margin-bottom:20px;">
-            <result-grouped-national-record doc='doc'></result-grouped-national-record>
-        </div>
-    </div>
-
-
+   
 </div>
