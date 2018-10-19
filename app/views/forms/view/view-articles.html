@@ -26,8 +26,8 @@
             </div>
             <div class="col-md-7">
                 <p class="news-date bg-white" >{{article.meta.createdOn | date}}</p>
-                <h1 style="font-size:260%;">{{article.title.en}}</h1>
-                <p ng-bind-html="article.content.en"></p>
+                <h1 style="font-size:260%;">{{article.title  | lstring:locale}}</h1>
+                <p ng-bind-html="article.content  | lstring:locale"></p>
             </div>
         </div>
     </div>  
@@ -41,8 +41,8 @@
                                         <span class="bg-red color-white news-date">{{article.meta.createdOn | date}}</span>
                                 </div>
                                 <div style="margin:5px;">
-                                    <h4>{{article.title.en}}</h4>
-                                    <div> <span ng-bind-html="(article.content.en | limitTo: 100)+(article.content.en.length > 100 ? '...' : '')" style="display:inline;"></span></div>
+                                    <h4>{{article.title | lstring:locale}}</h4>
+                                    <div> <span ng-bind-html="(article.content | lstring:locale | limitTo: 100)+(article.content.en.length > 100 ? '...' : '')" style="display:inline;"></span></div>
                                 </div>
                             </div>
                     </div>  

@@ -87,21 +87,22 @@ p.list-title{ margin-bottom:0;padding-bottom:0;}
                   <div class="col-sm-9 col-xs-12">
 
                         <div id="article-content"  ng-repeat="article in articles" ng-if="show=='articles'">
-                            <h1 class="color-green bold" style="margin-bottom:30px;"  ng-bind-html="article.title[locale]"></h1>
-                            <div ng-bind-html="article.content[locale]"></div>
-                           
+                            <h1 class="color-green bold" style="margin-bottom:30px;"  ng-bind-html="article.title | lstring:locale"></h1>
+                            <div ng-bind-html="article.content | lstring:locale"></div>
                         </div>
 
                         <div  id="faq-content" ng-if="show=='faqs'">
-                            <article-search tags="{{faqs}}" locale="{{locale}}"  title="Frequently Asked Questions (FAQs)" search="showSearch"></article-search>
+                            <br>
+                            <article-search admin-tags="{{faqs}}" locale="{{locale}}"  title="Frequently Asked Questions (FAQs)" search="showSearch"></article-search>
                         </div>
 
                         <div  id="guides-content" ng-if="show=='guides'">
-                            <article-guides type="{{guide}}" locale="{{locale}}"  title="Step-by-step guide"></article-guides>
+                            <article-guides type="{{guide}}" locale="{{locale}}"  title="Step-by-step guide" show-faqs="true"></article-guides>
                         </div>
 
                         <div  id="search-content" ng-if="show=='search'">
-                            <article-search tags="ABSCH-About" locale="{{locale}}"  title="About the ABS Clearing-House" keyword="searchText"></article-search>
+                            <br>
+                            <article-search admin-tags="ABSCH-About" locale="{{locale}}"  title="About the ABS Clearing-House" keyword="searchText"></article-search>
                         </div>
 
                         <div  id="search-content" ng-if="show=='feedback'">

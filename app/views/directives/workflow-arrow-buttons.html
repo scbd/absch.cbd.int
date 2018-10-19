@@ -136,13 +136,14 @@
         </div>
     </div>
 
-
-
     <div ng-if="tab=='intro'" km-tab="intro">
-        <div ng-transclude="introForm">
+        <div ng-transclude="introForm" class="well bg-white">
             <i ng-if="tab=='intro' && loading" class="fa fa-spinner fa-spin"></i>
-            <h3>{{article.title|lstring}}</h3>
-            <p ng-bind-html="article.content|lstring|toTrusted"></p>
+            <div>
+                <h2>{{article.title|lstring}}</h2>
+                <br>
+                <p ng-bind-html="article.content|lstring|toTrusted"></p>
+            </div>
         </div>
     </div>
 
@@ -160,25 +161,23 @@
 
             <div class="col-xs-12">
 
-                <ul style="list-style-type:none;margin:0;padding:0;padding-top:10px;">
-                    <li style="display: inline;"><button type="button" class="btn btn-warning " ng-click="close()"
-                            ng-disabled="loading">
-                            <i class="glyphicon glyphicon-remove"></i> Close</button>
-                    </li>
-                    <li style="display: inline;" ng-show="security.canSave">
-                        <button type="button" class="btn btn-danger bg-published " width="50px" ng-click="tab='publish';publish()"
-                            ng-disabled="loading">Publish
-                            <i ng-show="tab=='publish' && loading" class="fa fa-spinner fa-spin"></i>
-                        </button>
-                    </li>
-                    <li style="display: inline;" ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
-                        <button id="publish_button" type="button" class="btn btn-danger bg-request" ng-href="#"
-                            ng-click="publishRequest()" ng-disabled="loading">Request Publication
-                            <i ng-show="loading" class="fa fa-spinner fa-spin"></i>
-                        </button>
-                    </li>
-
-                </ul>
+                <div class="well">
+                    <p style="font-size:16px;"> <strong>Please ensure that the information in this record is correct, complete, relevant and not confidential. </strong> This clearing-house does not host any confidential information and all information published will become publicly available. </p>
+                    <ul style="list-style-type:none;margin:0;padding:0;padding-top:10px;">
+                        <li style="display: inline;" ng-show="security.canSave">
+                            <button type="button" class="btn btn-danger bg-published btn-lg " width="50px" ng-click="tab='publish';publish()"
+                                ng-disabled="loading">Publish
+                                <i ng-show="tab=='publish' && loading" class="fa fa-spinner fa-spin"></i>
+                            </button>
+                        </li>
+                        <li style="display: inline;" ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
+                            <button id="publish_button" type="button" class="btn btn-danger bg-request btn-lg" ng-href="#"
+                                ng-click="publishRequest()" ng-disabled="loading">Request Publication
+                                <i ng-show="loading" class="fa fa-spinner fa-spin"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div class="clearfix"></div>

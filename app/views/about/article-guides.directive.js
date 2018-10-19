@@ -11,7 +11,8 @@ app.directive("articleGuides", [ function () {
         scope: {
             type  : '@',
             locale: '@',
-            title:  '@'
+            title:  '@',
+            showFaqs:  '@'
         },
 		controller : ["$scope", "$http", "$filter", "$rootScope", "locale", "$q",
         function($scope, $http, $filter, $rootScope, locale, $q)
@@ -40,7 +41,6 @@ app.directive("articleGuides", [ function () {
               "ag" : JSON.stringify(ag)
               
             };
-            console.log (JSON.stringify(ag));
 
             $q.when($http.get('https://api.cbd.int/api/v2017/articles', {params: qs}))
             .then(function(results){
@@ -50,6 +50,7 @@ app.directive("articleGuides", [ function () {
               for(var i=0;i < results.data.length;++i){
 
                   var admintags = JSON.stringify(results.data[i].adminTags);
+                  console.log("a="+admintags);
 
                   if(admintags.indexOf("ABSCHIntroduction") > 0 ){
                     $scope.introABSCH = results.data[i];
@@ -119,6 +120,7 @@ app.directive("articleGuides", [ function () {
             $scope.show_signIn = expand;
             $scope.show_dashboard = expand;
             $scope.show_format = expand;
+            $scope.show_review = expand;
             $scope.show_publish = expand;
           }
          
