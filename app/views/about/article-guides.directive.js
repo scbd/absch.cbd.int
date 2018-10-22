@@ -1,4 +1,4 @@
-﻿define(['app',"text!./article-guides.directive.html"],
+﻿define(['app',"text!./article-guides.directive.html",   'services/articles-service'],
 function (app, template) {
 
 app.directive("articleGuides", [ function () {
@@ -14,8 +14,8 @@ app.directive("articleGuides", [ function () {
             title:  '@',
             showFaqs:  '@'
         },
-		controller : ["$scope", "$http", "$filter", "$rootScope", "locale", "$q",
-        function($scope, $http, $filter, $rootScope, locale, $q)
+		controller : ["$scope", "$http", "$filter", "$rootScope", "locale", "$q","articlesService",
+        function($scope, $http, $filter, $rootScope, locale, $q, articlesService)
 		{
           
           loadArticles();
@@ -41,65 +41,62 @@ app.directive("articleGuides", [ function () {
               "ag" : JSON.stringify(ag)
               
             };
+            articlesService.getArticles(qs).then(function(data){
+              $scope.articles = data;
+            
+              for(var i=0;i < data.length;++i){
 
-            $q.when($http.get('https://api.cbd.int/api/v2017/articles', {params: qs}))
-            .then(function(results){
-              if((results||{}).data && results.data.length > 0)
-              $scope.article = results.data;
-
-              for(var i=0;i < results.data.length;++i){
-
-                  var admintags = JSON.stringify(results.data[i].adminTags);
+                  var admintags = JSON.stringify(data[i].adminTags);
                   console.log("a="+admintags);
 
                   if(admintags.indexOf("ABSCHIntroduction") > 0 ){
-                    $scope.introABSCH = results.data[i];
+                    $scope.introABSCH = data[i];
                     continue;
                   }
                   
                   if(admintags.indexOf("Requirements") >  0){
-                    $scope.requirements = results.data[i];
+                    $scope.requirements = data[i];
                     continue;
                   }
                   
                   if(admintags.indexOf("help") > 0){
-                    $scope.help = results.data[i];
+                    $scope.help = data[i];
                     continue;
                   }
 
                   if(admintags.indexOf("Introduction") > 0 && admintags.indexOf($scope.type.toUpperCase()) > 0){
-                    $scope.intro = results.data[i];
+                    $scope.intro = data[i];
                     continue;
                   }
 
 
                   if(admintags.indexOf("SignIn") > 0){
-                    $scope.signIn = results.data[i];
+                    $scope.signIn = data[i];
                     continue;
                   }
 
                   if(admintags.indexOf("Dashboard") > 0){
-                    $scope.dashboard = results.data[i];
+                    $scope.dashboard = data[i];
                     continue;
                   }
                  
                   if(admintags.indexOf("Review") > 0){
-                    $scope.review = results.data[i];
+                    $scope.review = data[i];
                     continue;
                   }
 
                   if(admintags.indexOf(("ABSCH-Guide-" + $scope.type.toUpperCase())) > 0){
-                    $scope.format = results.data[i];
+                    $scope.format = data[i];
                     continue;
                   }
 
                   if(admintags.indexOf("Publish") > 0){
-                    $scope.publish = results.data[i];
+                    $scope.publish = data[i];
                     continue;
                   }
 
               }
-            })
+            });
 
           }
           

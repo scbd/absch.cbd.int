@@ -1,6 +1,10 @@
-﻿<div ng-controller="viewArticles" >
+﻿<div id="Announcements" ng-controller="viewArticles" >
 <style>
 .responsive {
+    width: 100%;
+    height: auto;
+}
+#Announcements img{
     width: 100%;
     height: auto;
 }
@@ -13,21 +17,27 @@
 .sized{height: 120px;}
 .small-sized{height: 10px;}
 .news-date{float:right; vertical-align: text-bottom;padding:3px; font-size: 10px; text-transform: uppercase; }
-
+.noimage{display: table-cell; vertical-align: middle; font-size:24px;padding:10px; top:-20px;position: relative; }
+.noimagetable{display: table; height: 200px; overflow: hidden; width: 100%;}
 </style>
 
     <h3 style="border-bottom:1px solid #ddd;"> Announcements</h3>
         
     <div class="container" ng-if="article">
-        <div class="row">
-            <div class="col-md-5">
-                <img class="thumbnail" style="margin-right:10px;width:100%; margin: auto; width: 100%;" ng-if="article.coverImage.url" src="{{getSizedImage(article.coverImage.url, '600x600')}}">
-               
+        <div class="row well bg-white">
+            <div  class="col-xs-12 col-sm-6 col-md-3 hidden-xs" ng-if="article.coverImage.url" >
+                <img class="thumbnail" style="max-width:300px;width:100%; width: 100%; margin-right:20px;" ng-if="article.coverImage.url" src="{{getSizedImage(article.coverImage.url, '200x200')}}">
             </div>
-            <div class="col-md-7">
-                <p class="news-date bg-white" >{{article.meta.createdOn | date}}</p>
-                <h1 style="font-size:260%;">{{article.title  | lstring:locale}}</h1>
-                <p ng-bind-html="article.content  | lstring:locale"></p>
+            <div class="col-xs-12" ng-class="{'col-sm-6 col-md-9' : article.coverImage.url}">
+                    <span class="news-date bg-white pull-right" >{{article.meta.createdOn | date}}</span>
+
+                    <div>             
+                        <h3 style="font-size:160%;margin-bottom:30px;">{{article.title  | lstring:locale}}</h3>
+                    </div>
+            </div>
+
+            <div class="col-md-12" style="padding-top:10px;" >
+                <p ng-bind-html="article.content  | lstring:locale | toTrustedOembedVideo"></p>
             </div>
         </div>
     </div>  
@@ -36,15 +46,17 @@
             <div ng-repeat="article in articles | orderBy:'meta.createdOn':true" style="cursor:pointer"  >
                         <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2" ng-click="loadArticle(article._id)">
                         
-                            <div  style="background-color:#f9f9f9;border-top:1px solid #ddd; border-bottom:1px solid #ddd;height:250px;margin-bottom:10px;">
-                                <div  class="news-image" style="background-image: url({{::getSizedImage(article.coverImage.url, '200x200')}});" ng-class="{'sized':article.coverImage.url,'small-sized':!article.coverImage.url}"> 
-                                        <span class="bg-red color-white news-date">{{article.meta.createdOn | date}}</span>
-                                </div>
-                                <div style="margin:5px;">
-                                    <h4>{{article.title | lstring:locale}}</h4>
-                                    <div> <span ng-bind-html="(article.content | lstring:locale | limitTo: 100)+(article.content.en.length > 100 ? '...' : '')" style="display:inline;"></span></div>
-                                </div>
-                            </div>
+                                <div  style="background-color:#f9f9f9;border-top:1px solid #ddd; border-bottom:1px solid #ddd;height:200px;margin-bottom:10px;">
+                                        <div  class="news-image" style="background-image: url({{::getSizedImage(article.coverImage.url, '200x200')}});" ng-class="{'sized':article.coverImage.url,'small-sized':!article.coverImage.url}"> 
+                                                <span class="bg-red color-white news-date">{{article.meta.createdOn | date}}</span>
+                                        </div>
+                                        <div style="margin:5px;" ng-class="{'noimagetable':!article.coverImage.url}" >
+                                            
+                                            <h4  ng-class="{'noimage':!article.coverImage.url}">
+                                                <span style="display:block;font-size: 10px; text-transform: uppercase;" class="color-blue bold">{{article.summary | lstring:locale}}</span>
+                                                {{article.title | lstring:locale}}</h4>
+                                        </div>
+                                    </div>
                     </div>  
             </div>
         </div>

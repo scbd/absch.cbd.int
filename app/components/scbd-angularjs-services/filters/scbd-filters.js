@@ -205,6 +205,7 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
       });
     });
   }]);
+
   app.filter('to_trusted', function ($sce) {
     return function (html) {
       return $sce.trustAsHtml(html);
@@ -213,6 +214,21 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
 
   app.filter("toTrusted", ["$sce", function ($sce) {
     return function (value) {
+      return $sce.trustAsHtml(value);
+    };
+  }]);
+
+
+  app.filter("toTrustedOembedVideo", ["$sce", function ($sce) {
+    return function (value) {
+      
+      if(value.indexOf("<oembed") > 0){
+        value = value.replace("https://www.youtube.com/watch?v=","https://www.youtube.com/embed/" );
+        value = value.replace("https://vimeo.com/","https://player.vimeo.com/video/" );
+        value = value.replace("<oembed url=\"","<iframe src='" );
+        value = value.replace("\"></oembed>","' style='width: 100%; height: 450px;' frameborder='0' allow='autoplay; encrypted-media' allowfullscreen=''></iframe>" );
+      }
+
       return $sce.trustAsHtml(value);
     };
   }]);

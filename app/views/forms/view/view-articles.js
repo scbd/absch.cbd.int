@@ -2,12 +2,13 @@ define(['app','underscore',
   '/forms/view/view-articles',
   '/js/common',
   '/components/scbd-angularjs-services/services/locale',
+  'services/articles-service',
   'ng-breadcrumbs',
 ], function(app, _) {
 
   app.controller("viewArticles",
-  ["$scope","$route", "$http", "$timeout", "$location","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm',
-    function($scope,$route, $http, $timeout, $location,locale, commonjs, $q, breadcrumbs, $element, $compile, realm) {
+  ["$scope","$route", "$http", "$timeout", "$location","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm','articlesService',
+    function($scope,$route, $http, $timeout, $location,locale, commonjs, $q, breadcrumbs, $element, $compile, realm, articlesService) {
       
       $scope.status   = "loading";
       $scope.error    = null;
@@ -36,10 +37,8 @@ define(['app','underscore',
           "ag" : JSON.stringify(ag)
         };
 
-        $q.when($http.get('https://api.cbd.int/api/v2017/articles', {params: qs}))
-        .then(function(results){
-          if((results||{}).data && results.data.length > 0)
-            $scope.articles = results.data;
+        articlesService.getArticles(qs).then(function(data){
+          $scope.articles = data;
         })
       }
       //---------------------------------------------------------------------
