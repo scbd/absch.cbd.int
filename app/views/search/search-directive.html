@@ -1,5 +1,9 @@
 ﻿ <div id="search-new">
-       
+       <style>
+           .pagination{
+               margin-top: 0px;
+           }
+        </style>
     <div class="container-fluid">
            
         <div class="row">
@@ -93,44 +97,48 @@
             </div>
             <!-- Tab panes -->
             <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;" id="recordsContent">
-                <div  class="pull-right " id="exportRecords" export export-query="getExportQuery()"
-                 query-type="getRecordType()" help-title="Export result from this tab to excel/csv" open-dialog="showDownloadDialog"></div>
-                <br>    
-                <div class="tab-pane bg-white" ng-class="{'active':currentTab==='nationalRecords'}" ng-if="currentTab==='nationalRecords'">
-                    <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="nationalLoading" infinite-scroll-distance="10">
+                <div  class="pull-right btn"  ng-if="tabs[currentTab].pageCount>0" style="border:1px solid #eee" id="exportRecords" 
+                    export export-query="getExportQuery()" query-type="getRecordType()" help-title="Export result from this tab to excel/csv" 
+                    open-dialog="showDownloadDialog"></div>
+                 <div class="pull-right"  ng-if="tabs[currentTab].pageCount>0" pagination current-page="tabs[currentTab].currentPage" 
+                     page-count="tabs[currentTab].pageCount" on-page-change="onPageChange(page)"></div> 
+                
+                <div class="tab-pane bg-white" ng-class="{'active':currentTab==='nationalRecords'}" ng-if="currentTab==='nationalRecords'">                     
                         <!-- <div block-region activate="nationalLoading"></div> -->
-
-                        <div ng-repeat="country in rawDocs.groups" id="search-country-group">
+                        <div ng-repeat="country in rawDocs" id="search-country-group">
                             <national-records-country group='country'></national-records-country>
                         </div>
                         <div ng-if="nationalLoading">
                             <i class="fa fa-spin fa-spinner"  style="margin-left:50%" /> loading..
                         </div>
                         <h4 class="bg-white" ng-if="!nationalLoading && rawDocs.groups.length === 0"><br>no records found</h4>
-                    </div>
                 </div>
-                <div class="tab-pane bg-white" style="padding-top:20px;" ng-class="{'active':currentTab==='referenceRecords'}" ng-if="currentTab=='referenceRecords'">
-                    <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="referenceLoading" infinite-scroll-distance="10">
+                <div class="tab-pane bg-white" ng-class="{'active':currentTab==='referenceRecords'}" ng-if="currentTab=='referenceRecords'">
                          <!-- <div block-region activate="referenceLoading"></div> -->
-                        <div ng-repeat="rec in refDocs.docs">
-                            <result-default doc=rec type="referenceRecords"></result-default>
+                    <div class="row">  
+                        <div class="col-md-12">
+                            <div ng-repeat="rec in refDocs.docs">
+                                <result-default doc=rec type="referenceRecords"></result-default>
+                            </div>
+                            <div ng-if="referenceLoading">
+                                <i class="fa fa-spin fa-spinner"  style="margin-left:50%" /> loading..
+                            </div>
+                            <h4 class="bg-white" ng-if="!referenceLoading && refDocs.docs.length === 0">no records found</h4>
                         </div>
-                        <div ng-if="referenceLoading">
-                            <i class="fa fa-spin fa-spinner"  style="margin-left:50%" /> loading..
-                        </div>
-                        <h4 class="bg-white" ng-if="!referenceLoading && refDocs.docs.length === 0">no records found</h4>
                     </div>
                 </div>
-                <div class="tab-pane bg-white" style="padding-top:20px;" ng-class="{'active':currentTab==='scbdRecords'}" ng-if="currentTab=='scbdRecords'">
+                <div class="tab-pane bg-white" ng-class="{'active':currentTab==='scbdRecords'}" ng-if="currentTab=='scbdRecords'">
                     <!-- <div block-region activate="scbdLoading"></div> -->
-                    <div infinite-scroll="updateScrollPage()" infinite-scroll-disabled="scbdLoading" infinite-scroll-distance="10">
-                        <div ng-repeat="rec in scbdDocs.docs">
-                            <result-default doc=rec type="scbdRecords"></result-default>
+                    <div class="row">  
+                        <div class="col-md-12">
+                            <div ng-repeat="rec in scbdDocs.docs">
+                                <result-default doc=rec type="scbdRecords"></result-default>
+                            </div>
+                            <div ng-if="scbdLoading">
+                                <i class="fa fa-spin fa-spinner "  style="margin-left:50%" /> loading..
+                            </div>
+                            <h4 class="bg-white" ng-if="!scbdLoading && scbdDocs.docs.length === 0">no records found</h4>
                         </div>
-                        <div ng-if="scbdLoading">
-                            <i class="fa fa-spin fa-spinner "  style="margin-left:50%" /> loading..
-                        </div>
-                        <h4 class="bg-white" ng-if="!scbdLoading && scbdDocs.docs.length === 0">no records found</h4>
                     </div>
                 </div>
             </div>
