@@ -1,7 +1,6 @@
 define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-data/schema-name-plural.json', 'json!app-data/search-tour.json',
 'js/common',
 'services/search-service',
-'ngInfiniteScroll',
 'views/search/search-filters/keyword-filter',
 'views/search/search-filters/national-filter',
 'views/search/search-filters/reference-filter',
@@ -15,7 +14,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 'views/register/user-preferences/user-preference-filter',
 'views/directives/export-directive',
 'services/thesaurus-service', 'angular-animate', 'angular-joyride',
-'components/scbd-angularjs-services/services/locale'
+'components/scbd-angularjs-services/services/locale',
+'components/scbd-angularjs-controls/form-control-directives/pagination'
 ], function(app, template, _, schemaNames, joyRideText) {
 
     app.directive('searchDirective', function() {
@@ -66,7 +66,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                         }
                     }
                             
-                            
+                    var schemaTemplate = {};
+                    var index=0;        
+                    _(realm.schemas).map(function(schema, key){ 
+                        if(schema.type=='national' && key!= 'contact'){
+                            schemaTemplate[key] = { title : schema.title, shortCode : schema.shortCode, index: index++, docs:[], numFound:0};
+                        }
+                    }).value();
 
                     $scope.skipResults          = $attrs.skipResults;
                     $scope.skipDateFilter       = $attrs.skipDateFilter;
@@ -81,9 +87,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                     $scope.rawDocs = [];
                     $scope.refDocs = [];
                     $scope.scbdDocs = [];
-                    var natSchemas = _.without(appConfigService.nationalSchemas, "contact");
-                   
-                    //[ "absPermit", "absCheckpoint", "absCheckpointCommunique", "authority", "measure", "database", "focalPoint", "absNationalReport"];
+
+                    var natSchemas = _.without(appConfigService.nationalSchemas, "contact");                   
                     var refSchemas = _.without(appConfigService.referenceSchemas, "organization");
                     var scbdSchemas = appConfigService.scbdSchemas;
                     
@@ -111,6 +116,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 
                     $scope.relatedKeywords = {};
 
+                    $scope.tabs = {
+                        nationalRecords : {currentPage : 0, pageCount   : 0},
+                        referenceRecords : {currentPage : 0, pageCount   : 0},
+                        scbdRecords : {currentPage : 0, pageCount   : 0}
+                    }
 
                     //===============================================================================================================================
                     $scope.isFreeTextFilterOn = function(filterID) {
@@ -290,7 +300,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                         var searchOperation;
 
                         if (queryCanceler) {
-                            console.log('trying to abort pending request...');
                             queryCanceler.resolve(true);
                         }
 
@@ -301,8 +310,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                         var groupQuery = {
                             query       : q,
                             sort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
-                            currentPage : nationalCurrentPage,
-                            rowsPerPage: $scope.itemsPerPage
+                            currentPage     : currentPage   || $scope.tabs['nationalRecords'].currentPage,
+                            rowsPerPage     : itemsPerPage  || $scope.itemsPerPage,
+                            groupField      : 'governmentSchemaIdentifier_s',
+                            groupLimit      : 10
                         };
                         $scope.exportNationalQuery = groupQuery;
                         $scope.nationalLoading = true;
@@ -313,23 +324,29 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                                 .then(function(data) {
                                     queryCanceler = null;
 
-                                    if(nationalCurrentPage===0){
-                                        $scope.rawDocs = undefined;
-                                    }
-                                    if(!$scope.rawDocs || $scope.rawDocs.length == 0)
-                                        $scope.rawDocs = data.data.grouped.government_s;
-                                        //$scope.rawDocs = _.union($scope.rawDocs||{}, data.data.grouped.government_s);
-                                    else {
-                                        if(data.data.grouped.government_s.matches!= $scope.recordCount[0].count)
-                                            $scope.recordCount[0].count = data.data.grouped.government_s.matches;
+                                    $scope.recordCount[0].count = data.data.grouped.governmentSchemaIdentifier_s.matches;
+                                    $scope.tabs['nationalRecords'].pageCount = Math.ceil(data.data.grouped.governmentSchemaIdentifier_s.ngroups / $scope.itemsPerPage);
 
-                                        _.each(data.data.grouped.government_s.groups, function(record){
-                                            $scope.rawDocs.groups.push(record);
-                                        });
-                                    }
+                                    $scope.rawDocs = {groups:[]}; 
+                                    
+                                    var countryRecords = {}
+                                    _.each(data.data.grouped.governmentSchemaIdentifier_s.groups, function(record){
+
+                                        var gpDetails = (record.groupValue||'').split('_');
+                                        if(!gpDetails.length)
+                                            return;
+                                        var schema              = gpDetails[1];
+                                        var country             = gpDetails[0];
+                                        if(!countryRecords[country])
+                                            countryRecords[country] = { schemas : angular.copy(schemaTemplate) };
+                                        countryRecords[country].country = country;
+
+                                        countryRecords[country].schemas[schema]     = _.extend(countryRecords[country].schemas[schema], record.doclist);
+
+                                    });
+                                    $scope.rawDocs = countryRecords;
 
                                 }).catch(function(error) {
-                                    nationalCurrentPage -= 1;
                                     console.log('ERROR: ' + error);
                                 })
                                 .finally(function(){
@@ -360,8 +377,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                             fields      : fields,
                             query       : q,
                             sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : undefined,
-                            currentPage : referenceCurrentPage,
-                            rowsPerPage: $scope.itemsPerPage
+                            currentPage     : $scope.tabs['referenceRecords'].currentPage,
+                            rowsPerPage     : $scope.itemsPerPage,
                         };
 
                         $scope.exportReferenceQuery = listQuery;
@@ -371,19 +388,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                             $q.when(searchOperation)
                             .then(function(data) {
                                 queryCanceler = null;
-                                if(referenceCurrentPage===0){
-                                    $scope.refDocs = undefined;
-                                }
 
-                                if(!$scope.refDocs || ($scope.refDocs.docs||[]).length == 0)
-                                    $scope.refDocs = data.data.response;
-                                else {
-                                    if(data.data.response.numFound!= $scope.recordCount[1].count)
-                                       $scope.recordCount[1].count = data.data.response.numFound;
-                                    _.each(data.data.response.docs, function(record){
-                                        $scope.refDocs.docs.push(record);
-                                    });
-                                }
+                                $scope.tabs['referenceRecords'].pageCount = Math.ceil(data.data.response.numFound / $scope.itemsPerPage);
+                                $scope.refDocs = data.data.response;
+                                $scope.recordCount[1].count = data.data.response.numFound;
+
                             }).catch(function(error) {
                                 referenceCurrentPage -= 1;
                                 console.log('ERROR: ' + error);
@@ -411,8 +420,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                             query       : q,
                             fields      : fields,
                             sort        : _.isEmpty($scope.setFilters) ? 'sort1_dt desc, updatedDate_dt desc' : undefined,
-                            currentPage : scbdCurrentPage,
-                            rowsPerPage : $scope.itemsPerPage
+                            currentPage     : $scope.tabs['scbdRecords'].currentPage,
+                            rowsPerPage     : $scope.itemsPerPage,
                         };
 
                         $scope.exportScbdQuery = listQuery;
@@ -422,19 +431,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                             $q.when(searchOperation)
                             .then(function(data) {
                                 queryCanceler = null;
-                                if(scbdCurrentPage===0){
-                                    $scope.scbdDocs = undefined;
-                                }
-
-                                if(!$scope.scbdDocs || ($scope.scbdDocs.docs||[]).length == 0)
-                                    $scope.scbdDocs = data.data.response;
-                                else {
-                                     if(data.data.response.numFound!= $scope.recordCount[1].count)
-                                       $scope.recordCount[2].count = data.data.response.numFound;
-                                    _.each(data.data.response.docs, function(record){
-                                        $scope.scbdDocs.docs.push(record);
-                                    });
-                                }
+                                
+                                $scope.tabs['scbdRecords'].pageCount = Math.ceil(data.data.response.numFound / $scope.itemsPerPage);
+                                $scope.scbdDocs = data.data.response;
+                                $scope.recordCount[2].count = data.data.response.numFound;
+                               
                             }).catch(function(error) {
                                 scbdCurrentPage -= 1;
                                 console.log('ERROR: ' + error);
@@ -984,23 +985,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                                 addFilter(key,  {'sort': schema.sort,'type':schema.type,  'name':schema.title.en, 
                                     'id':key, 'description':(schema.description||{}).en}); 
                             }
-                        })
-                        // addFilter('focalPoint',  {'sort': 1,'type':'national',  'name':schemaNames.focalpoint, 'id':'focalPoint', 'description':'Institution designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1).'});
-
-                        // addFilter('authority',  {'sort': 2,'type':'national',  'name':schemaNames.authority, 'id':'authority', 'description':'Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)'});
-
-                        // addFilter('measure',  {'sort': 3,'type':'national', 'name':schemaNames.measure, 'id':'measure', 'description':'Measures adopted at domestic level to implement the access and benefit-sharing obligations of the Convention or/and the Nagoya Protocol.'});
-
-                        // addFilter('database',  {'sort': 4,'type':'national','name':schemaNames.database, 'id':'database', 'description':'Information and links to national websites or databases which are relevant for ABS.'});
-
-                        // addFilter('absPermit', {'sort': 5,'type':'national',  'name':schemaNames.abspermit, 'id':'absPermit', 'description':'Certificate constituted from the information on the permit or its equivalent registered in the ABS Clearing-House, serving as evidence that the genetic resource which it covers has been accessed in accordance with prior informed consent and that mutually agreed terms have been established. It contains the minimum necessary information to allow monitoring the utilization of genetic resources by users throughout the value chain (Article 17).'});
-
-                        // addFilter('absCheckpoint',   {'sort': 6,'type':'national',  'name':schemaNames.abscheckpoint, 'id':'absCheckpoint', 'description':'Entities designated by Parties to effectively collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms and/or to the utilization of genetic resources, as appropriate (Article 17, 1(a) (i)).'});
-
-                        // addFilter('absCheckpointCommunique',  {'sort': 7,'type':'national','name':schemaNames.abscheckpointcommunique, 'id':'absCheckpointCommunique', 'description':'A summary of the information collected or received by a checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment  utilization of genetic resources and registered in the ABS Clearing-House (Article 17.1 (a)).'});
-
-                        // addFilter('absNationalReport',  {'sort': 8,'type':'national','name':schemaNames.absnationalreport, 'id':'absNationalReport', 'description':'Interim National Report on the Implementation of the Nagoya Protocol'});
-
+                        })                        
 
                         addFilter('npParty',  {'sort': 1,'type':'partyStatus','name':'Party to the Protocol', 'id':'npParty', 'description':''});
                         addFilter('npInbetween',  {'sort': 2,'type':'partyStatus','name':'Ratified, not yet Party to the Protocol', 'id':'npInbetween', 'description':''});
@@ -1008,16 +993,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                         addFilter('npSignatory',  {'sort': 4,'type':'partyStatus','name':'Signatory to the Protocol', 'id':'npSignatory', 'description':''});
 
 
-                        //reference
-                        // addFilter('resource', {'sort': 1,'value':false, type:'reference', 'name':schemaNames.resource, 'id':'resource', 'description':'The virtual library in the ABS Clearing-House hosts a number of ABS relevant resources submitted by any registered user of the ABS Clearing-House. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc.'});
-
-                        // addFilter('modelContractualClause', {'sort': 2, type:'reference', 'name':schemaNames.modelcontractualclause, 'id':'modelContractualClause', 'description':'Model contractual clauses are addressed in Article 19 of the Protocol. They can assist in the development of agreements that are consistent with ABS requirements and may reduce transaction costs while promoting legal certainty and transparency. Codes of Conduct, Guidelines, Best Practices and/or Standards are addressed in Article 20 of the Protocol.They may assist users to undertake their activities in a manner that is consistent with ABS requirements while also taking into account the practices of different sectors.'});
-
-                        // addFilter('communityProtocol', {'sort': 3, type:'reference', 'name':schemaNames.communityprotocol, 'id':'communityProtocol', 'description':'Community protocols and procedures and customary laws are addressed in Article 12 of the Protocol. They can help other actors to understand and respect the community’s procedures and values with respect to access and benefit-sharing.'});
-                        // addFilter('capacityBuildingInitiative', {'sort': 4, type:'reference', 'name':schemaNames.capacitybuildinginitiative, 'id':'capacityBuildingInitiative', 'description':''});
-
-                        // addFilter('capacityBuildingResource', {'sort': 5, type:'reference', 'name':schemaNames.capacitybuildingresource, 'id':'capacityBuildingResource', 'description':''});
-                        
+                        //TODO get from scbd.json
                         //SCBD
                         addFilter('news',  {'sort': 1,'type':'scbd', 'name':schemaNames.news, 'id':'news', 'description':'ABS related news'});
                         addFilter('notification',  {'sort': 2,'type':'scbd',  'name':schemaNames.notification, 'id':'notification', 'description':'ABS related notifications'});
@@ -1421,6 +1397,23 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                             
                         }                        
                     }
+
+                    $scope.onPageChange = function(page){
+                        $scope.tabs[$scope.currentTab].currentPage = page;
+                        if($scope.currentTab==='nationalRecords'){
+                            nationalQuery()
+                        }
+                        else if($scope.currentTab==='referenceRecords'){
+                            referenceQuery()
+                        }
+                        else if($scope.currentTab==='scbdRecords'){
+                            scbdQuery()
+                        }
+                        
+
+                    }
+
+
 
             }]//controller
         };

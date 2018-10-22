@@ -1,13 +1,11 @@
-define(['app', 'text!views/search/search-results/national-records-country.html','js/common',
-'views/search/search-results/result-grouped-national-record',
-'views/directives/party-status',
+define(['app', 'text!views/search/search-results/national-records-country.html','lodash',
+'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status',
 ], function(app, template, _) {
 
-    app.directive('nationalRecordsCountry', function() {
+    app.directive('nationalRecordsCountry', ['searchService', function(searchService) {
         return {
             restrict: 'EAC',
             replace: true,
-            // transclude: true,
             require:'^searchDirective',
             template: template, 
             scope: {
@@ -18,22 +16,34 @@ define(['app', 'text!views/search/search-results/national-records-country.html',
                    if(!$scope.group)
                         $scope.norecords = true;
 
-                   $scope.name      = $scope.group.groupValue;
-                   $scope.numFound  = $scope.group.doclist.numFound;
-                   $scope.docs      = $scope.group.doclist.docs;
+                   $scope.name      = $scope.group.country;
+                   $scope.numFound  = _.reduce($scope.group.schemas, function(sum, schema){return sum + schema.numFound}, 0);
+                   $scope.schemas   = $scope.group.schemas;
                    $scope.getFilter = searchDirectiveCtrl.getFilter;
-                //    $scope.loading   = $scope.group.loading;
-                   //
-                   //
-                //    $scope.updateScrollPage = function() {
-                //        if($scope.loading || $scope.docs.length == $scope.numFound)
-                //            return;
-                //        $scope.loading = true;
-                //        currentPage = currentPage + 1;
-                //        searchDirectiveCtrl.nationalQuery(currentPage);
-                //    };
+                
 
+                    $scope.loadRecords = function(key, schema, number){
+
+                        schema.isLoading = true;
+                        var query = {
+                            query   : 'schema_s:(' + key +') AND government_s:' + $scope.group.country.toLowerCase(),
+                            sort    : 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
+                            rowsPerPage    : number||5000,
+                            start          : number ? undefined : (schema.start==0 ? 10 : schema.start),
+                            currentPage    : schema.start==0 ? 1 : Math.ceil((schema.start+number)/10)
+                        }
+                        return searchService.list(query)
+                        .then(function(result){
+                            schema.start = query.currentPage*10;
+                            
+                            schema.docs = schema.docs.concat(result.data.response.docs)
+                        })
+                        .finally(function(){
+                            schema.isLoading = false;
+                        })
+
+                    }
             },
         };
-    });
+    }]);
 });
