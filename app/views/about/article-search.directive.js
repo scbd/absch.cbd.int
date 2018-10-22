@@ -1,4 +1,4 @@
-﻿define(['app',"text!./article-search.directive.html"],
+﻿define(['app',"text!./article-search.directive.html",   'services/articles-service'],
 function (app, template) {
 
 app.directive("articleSearch", [ function () {
@@ -17,8 +17,8 @@ app.directive("articleSearch", [ function () {
             categories: '@',
             keyword:'='
         },
-		controller : ["$scope", "$http", "$filter", "$rootScope", "locale", "$q",
-        function($scope, $http, $filter, $rootScope, locale, $q)
+		controller : ["$scope", "$http", "$filter", "$rootScope", "locale", "$q", 'articlesService',
+        function($scope, $http, $filter, $rootScope, locale, $q, articlesService)
 		{
            if ($scope.adminTags) 
                loadArticles($scope.adminTags);
@@ -50,10 +50,8 @@ app.directive("articleSearch", [ function () {
               "ag" : JSON.stringify(ag)
             };
     
-            $q.when($http.get('https://api.cbd.int/api/v2017/articles', {params: qs}))
-            .then(function(results){
-              if((results||{}).data && results.data.length > 0)
-              $scope.articles = results.data;
+            articlesService.getArticles(qs).then(function(data){
+              $scope.articles = data;
             })
           }
           //---------------------------------------------------------------------
