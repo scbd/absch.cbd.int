@@ -32,7 +32,7 @@
                     <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2" ng-click="loadArticle(article._id)">
 
                         <div  style="background-color:#f9f9f9;border-top:1px solid #ddd; border-bottom:1px solid #ddd;height:200px;margin-bottom:10px;">
-                            <div  class="news-image" style="background-image: url({{::getSizedImage(article.coverImage.url, '200x200')}});" ng-class="{'sized':article.coverImage.url,'small-sized':!article.coverImage.url}"> 
+                            <div  class="news-image" style="background-image: url({{::getSizedImage(article.coverImage.url, '400x400')}});" ng-class="{'sized':article.coverImage.url,'small-sized':!article.coverImage.url}"> 
                                     <span class="bg-red color-white news-date">{{article.meta.createdOn | date}}</span>
                             </div>
                             <div style="margin:5px;" ng-class="{'noimagetable':!article.coverImage.url}" >
