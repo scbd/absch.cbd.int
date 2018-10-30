@@ -1,5 +1,5 @@
 define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
-        'bootstrap', 'routes/bch', 'ng-breadcrumbs','toastr',
+        'bootstrap', 'routes/bch', 'ng-breadcrumbs','toastr','angular-animate', 
         'components/scbd-branding/directives/header/header',
         'components/scbd-branding/directives/footer'], function (app, angular, footerHtml) { 'use strict';
 
