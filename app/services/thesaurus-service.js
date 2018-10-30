@@ -61,8 +61,9 @@ define(['app', 'underscore'], function (app, _) {
 
 
                 decisionTypes            :  'DecisionTypes',
-                DecisionLMOFFPSubject    :  'DecisionLMOFFPSubject',
-                DecisionResults          :  'DecisionResults'
+                decisionLMOFFPSubject    :  'DecisionLMOFFPSubject',
+                decisionResults          :  'DecisionResults',
+                riskAssessmentScope      :  'RiskAssessmentScope'
 
             }
         }
