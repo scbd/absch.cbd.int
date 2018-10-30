@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/bch/view-risk-assignment.directive.html", 	'views/directives/record-options'], function (app, template) {
+define(['app', "text!views/forms/view/bch/view-risk-assessment.directive.html", 	'views/directives/record-options'], function (app, template) {
 
 app.directive("viewRiskAssignment", [function () {
 	return {
