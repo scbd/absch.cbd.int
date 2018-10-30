@@ -44,10 +44,10 @@ function (app, _) {
 				});
 			},
 			decisionLMOFFPSubject: function() {
-				return thesaurusService.getDomainTerms('DecisionLMOFFPSubject');
+				return thesaurusService.getDomainTerms('decisionLMOFFPSubject');
 			},
 			decisionResult: function() {
-				return thesaurusService.getDomainTerms('DecisionResults');
+				return thesaurusService.getDomainTerms('decisionResults');
 			}
 			
 		});
