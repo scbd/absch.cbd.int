@@ -17,8 +17,8 @@
 				<tr ng-repeat="term in filteredList = (searchList|filter:hasMatch)">
 					<td  ng-class="{'no-border':$first}"> 
 						<label>
-							<input type="checkbox" ng-model="identifiers[term.identifier]" ng-change="save()" ng-required="IsRequired()" value="{{term.identifier}}"/>
-							 <span class="color-litegrey" ng-bind-html="term.displayTitle | lstring:locale"></span>
+							<input type="checkbox" ng-model="identifiers[term.identifier]" ng-change="save()" 
+								ng-required="IsRequired()" value="{{term.identifier}}"/> {{term.displayTitle | lstring:locale}}
 						</label>
 					</td>
 				</tr>
