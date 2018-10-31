@@ -1,10 +1,13 @@
-define(['app', 'text!./bch-header.html'], function (app, html) { 'use strict';
+define(['app', 'text!./bch-header.html','ng-breadcrumbs'], function (app, html) { 'use strict';
 
-    app.directive('bchHeader', ['$http', '$location', function ($http, $location) {
+    app.directive('bchHeader', ['$http', '$location','breadcrumbs', function ($http, $location, breadcrumbs) {
         return {
             restrict: 'E',
             template: html,
             link: function($scope) {
+
+                $scope.breadcrumbs     = breadcrumbs;
+                
                 $http.get('/api/v2015/countries', {params: { f: { code:1, name:1 } }, cache:1 }).then(function(res){
                     $scope.countries = res.data;
                 });
