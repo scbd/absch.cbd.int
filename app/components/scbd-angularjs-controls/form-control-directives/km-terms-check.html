@@ -17,13 +17,10 @@
 				<tr ng-repeat="term in filteredList = (searchList|filter:hasMatch)">
 					<td  ng-class="{'no-border':$first}"> 
 						<label>
-<<<<<<< HEAD
+
 							<input type="checkbox" ng-model="identifiers[term.identifier]" ng-change="save()" 
 								ng-required="IsRequired()" value="{{term.identifier}}"/> {{term.displayTitle | lstring:locale}}
-=======
-							<input type="checkbox" ng-model="identifiers[term.identifier]" ng-change="save()"  ng-required="IsRequired()" value="{{term.identifier}}"/> 
-							<span class="color-litegrey" ng-bind-html="term.displayTitle | lstring:locale"></span>
->>>>>>> update to keywords select
+
 						</label>
 					</td>
 				</tr>
