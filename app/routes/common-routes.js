@@ -93,9 +93,18 @@
         currentUser : currentUser,
         securize    : securize,
         importQ     : importQ,
-        baseUrl     : baseUrl      
+        baseUrl     : baseUrl,
+        injectRouteParams : injectRouteParams
     }
-
+    //============================================================
+    //
+    //
+    //============================================================
+    function injectRouteParams(params) {
+        return ['$route', function($route) {
+            return _.defaults($route.current.params, params);
+        }];
+    }
     //============================================================
     //
     //

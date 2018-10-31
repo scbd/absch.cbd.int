@@ -2,9 +2,11 @@ define(['app', 'lodash', 'views/forms/edit/edit', 'services/thesaurus-service',
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-risk-assessment.directive"], 
 function (app, _) {
 
-	return ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "thesaurusService",
-	function($scope, $http, $filter, Thesaurus, $q, $controller, thesaurusService) {
-	   	
+	app.controller("editRiskAssessment", ["$scope", "$routeParams", "$route", "Thesaurus", "$q", "$controller", "thesaurusService",
+	function($scope, $routeParams, $route, Thesaurus, $q, $controller, thesaurusService) {
+		
+		$scope.isNational = $routeParams.isNational;
+		
 		$controller('editController', {
 			$scope: $scope
 		});
@@ -27,6 +29,10 @@ function (app, _) {
 			if (!document)
 				return undefined;
 
+			if(!$scope.isNational && document.government){
+				document.government = undefined;
+			}
+
 			if (/^\s*$/g.test(document.notes))
 				document.notes = undefined;
 
@@ -35,6 +41,6 @@ function (app, _) {
 		
 		$scope.setDocument({});
 
-   }];
+   }]);
 
 });
