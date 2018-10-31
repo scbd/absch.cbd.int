@@ -13,7 +13,7 @@
 				<tr ng-repeat="term in searchList|filter:hasMatch">
 					<td>
 						<label>
-							<input type="checkbox" ng-model="identifiers[term.identifier]" ng-click="save()" 
+							<input type="checkbox" ng-model="identifiers[term.identifier]" ng-change="save()" 
 								ng-required="IsRequired()" value="{{term.identifier}}"/> {{term.displayTitle | lstring:locale}}
 						</label>
 					</td>
@@ -23,7 +23,7 @@
 		<ul>
 			<script type="text/ng-template" id="term-check-tree-renderer.html">
 				<label>
-					<input type="checkbox" ng-model="identifiers[term.identifier]" ng-click="save()" ng-required="IsRequired()" value="{{term.identifier}}"
+					<input type="checkbox" ng-model="identifiers[term.identifier]" ng-change="save()" ng-required="IsRequired()" value="{{term.identifier}}"
 					/> {{term.title||term.name | lstring:locale}}
 				</label>
 				<div class="km-select-description" ng-if="showDescription && term.description" style="padding: 3px 25px;">
