@@ -4,25 +4,8 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
  function(storage, workflows, $q, realm, commonjs, roleService) {
 
 	var schemasWorkflowTypes  = {
-
-		"absPermit"							: { name : "publishNationalRecord", version : "0.4" },
-		"absCheckpoint"						: { name : "publishNationalRecord", version : "0.4" },
-		"absCheckpointCommunique"			: { name : "publishNationalRecord", version : "0.4" },
-		"authority"							: { name : "publishNationalRecord", version : "0.4" },
-		"measure"							: { name : "publishNationalRecord", version : "0.4" },
-		"database"							: { name : "publishNationalRecord", version : "0.4" },
-		"absNationalReport" 				: { name : "publishNationalRecord", version : "0.4" },
-		"contact"							: { name : "publishNationalRecord", version : "0.4" },
-		"endorsement"						: { name : "publishNationalRecord", version : "0.4" },
-		"absProcedure"						: { name : "publishNationalRecord", version : "0.4" },
-		"absNationalModelContractualClause"	: { name : "publishNationalRecord", version : "0.4" },
-
-		"resource"					: { name : "publishReferenceRecord", version : undefined },
-		"modelContractualClause"	: { name : "publishReferenceRecord", version : undefined },
-		"communityProtocol"			: { name : "publishReferenceRecord", version : undefined },
-		"organization"				: { name : "publishReferenceRecord", version : undefined },
-		"capacityBuildingInitiative": { name : "publishReferenceRecord", version : undefined },
-		"capacityBuildingResource"	: { name : "publishReferenceRecord", version : undefined }
+		"national"		: { name : "publishNationalRecord", version : "0.4" },
+		"reference"		: { name : "publishReferenceRecord", version : undefined }
 	};
 
 	var _self = {
@@ -222,8 +205,11 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 	};
 
 	function createWorkflow(draftInfo, additionalInfo, type){
+
+		schema = realm.schemas[draftInfo.type]
+
 		if(!type)
-		 	type = schemasWorkflowTypes[draftInfo.type];
+		 	type = schemasWorkflowTypes[schema.type];
 
 		if(!type)
 			throw "No workflow type defined for this record type: " + draftInfo.type;
