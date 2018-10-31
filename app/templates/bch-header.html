@@ -5,9 +5,31 @@
         .navbar-nav>li {
             float: left;
         }
+        .navbar-breadcrumbs{
+    min-height:26px;
+    background-color:#FFF!important;
+    z-index:70;
+    margin-bottom:0;
+}
+
+.container-breadcrumbs{
+    /*background: rgba(25, 25, 25, .05);*/
+    min-height:30px;
+    color:white;
+    padding-top:7px;
+    font-size:12px;
+    padding-left:38px;
+}
+.container-breadcrumbs a{
+    color:#999;
+    font-weight: bold;
+}
+.color-litegrey{
+    color: #999!important;
+}
     </style>
-    <nav class="navbar navbar-links navbar-default navbar-static-top">
-        <div class="container-fluid container-links color-grey">           
+    <nav class="navbar navbar-links navbar-default navbar-static-top" style="margin-bottom:0px;">
+        <div class="container-fluid container-links color-grey" style="margin-bottom:5px">           
             <div class="navbar-header">
             </div>
             <div class="" id="bch-navbar">
@@ -80,4 +102,23 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+    <nav class="navbar navbar-breadcrumbs navbar-default navbar-static-top"  ng-hide="breadcrumbs.get().length == 1" >
+            <div class="container-fluid container-breadcrumbs">
+                <div class="color-litegrey" >
+                        <a translation-url  href="http://www.cbd.int" class="margin-right-xs">CBD</a>
+                        <span ng-repeat="breadcrumb in breadcrumbs.get()" >
+                            &nbsp;&nbsp;<i class="fa fa-chevron-right color-litegrey"></i>&nbsp;&nbsp;
+                            <span ng-if="!breadcrumb.param">
+                                <a translation-url  ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+                                <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+                            </span>
+                            <span ng-if="breadcrumb.param">
+                                <a translation-url  ng-if="!$last" ng-href="{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+                                <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+                            </span>
+                        </span>
+                </div>
+            </div>
+        </nav>
+</div>
     
