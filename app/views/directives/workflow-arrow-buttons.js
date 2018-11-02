@@ -814,8 +814,45 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                 //////////////////////////////////////////////////////////////////////
 
-                
+                $scope.changeTab = function(type){
+                    switch ($scope.tab) {
+                        case 'intro':{
+                            $scope.prevTab = undefined;
+                            $scope.nextTab = 'edit';
+                            break;
+                        }
+                        case 'edit':{
+                            $scope.prevTab = 'intro';
+                            $scope.nextTab = 'review';
+                            break;
+                        }
+                        case 'review':{
+                            $scope.prevTab = 'edit';
+                            $scope.nextTab = 'publish';
+                            break;
+                        }
+                        case 'publish':{
+                            $scope.prevTab = 'review';
+                            $scope.nextTab = undefined;
+                            break;
+                        }
+                        default:{
+                            $scope.prevTab = undefined;
+                            $scope.nextTab = undefined;
+                            break;
+                        }
+                    }
 
+                    if(type=='prev' && $scope.prevTab)
+                        $scope.switchTab($scope.prevTab);
+                    else if(type=='next' && $scope.nextTab)
+                        $scope.switchTab($scope.nextTab);
+
+                    if(type)
+                        $scope.changeTab();
+                }
+
+                $scope.changeTab();
             }
     	};
 
