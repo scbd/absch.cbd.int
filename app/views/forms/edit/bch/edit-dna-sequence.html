@@ -18,7 +18,7 @@
 
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>General information</legend>
+									<legend>General information about the genetic element</legend>
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
@@ -28,26 +28,68 @@
 											</div>
 										</div>
 									</div>
-									<div class="row" ng-if="isNational">
-										<div class="col-sm-12">
-											<div class="km-control-group" name="government" required caption="Country submitting the decision or communication">
-												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government"
-												 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
-											</div>
-										</div>
-									</div>
-
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="title" caption="Title of the risk assessment">
-												<div km-textbox-ml name="title" required ng-model="document.title" locales="document.header.languages"></div>
+											<div class="km-control-group" required name="name" caption="Name">
+												<div km-textbox-ml name="name" required ng-model="document.name" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
-									
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="synonymNames" caption="Alternate Genetic Element Name (synonyms)">
+												<div ng-repeat="synonym in synonymNames" style="padding-bottom:5px;">
+													<div km-textbox-ml name="synonymNames_{{$index}}" ng-model="synonym.value" locales="document.header.languages"></div>
+												</div>
+												<button class="btn btn-primary" ng-click="synonymNames.push({})">Add a item</button>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="abbreviation" caption="Abbreviation">
+												<div km-textbox-ml name="abbreviation" required ng-model="document.abbreviation" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="family" required caption="Category">
+												<div km-term-radio required ng-model="document.family" locales="document.header.languages"
+													terms="options.family" binding-type="term" show-other="true"></div>
+											</div>	
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="isSynthetic" required caption="Is the genetic element a synthetic molecule?">
+												<div km-yes-no required ng-model="document.isSynthetic" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</section>
 
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Donor organism</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="donorOrganism" caption="Donor organism">											
+												<div document-selector ng-model="document.donorOrganism" question="donorOrganism"
+													schema="(organism)"></div>			
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="donorOrganismCollectionPoint" caption="Point of collection or acquisition of the donor organism(s)">												
+												<div km-rich-textbox ng-model="document.donorOrganismCollectionPoint" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
 							<section>
 								<div class="well no-shadow bg-white">
 									<legend>Additional information</legend>

@@ -25,7 +25,12 @@
 		</div>
 		<div ng-show="document.synonymNames">
 			<label>Alternate Genetic Element Name (synonyms)</label>
-			<km-value-ml value="document.synonymNames" locales="locale"></km-value-ml>
+			<ul class="list" style="padding-left:0px">
+				<li ng-repeat="synonym in document.synonymNames" style="padding-bottom:5px;">
+					<km-value-ml value="synonym" locales="locale"></km-value-ml>
+				</li>
+			</ul>
+			
 		</div>
 		<div ng-show="document.abbreviation">
 			<label>Abbreviation</label>
@@ -38,8 +43,8 @@
 
 		<div ng-show="document.isSynthetic!=undefined">
 			<label>Is the gene / DNA sequence is a synthetic molecule?</label>
-			<span ng-if="document.isSynthetic">Yes</span>
-			<span ng-if="!document.isSynthetic">No</span>
+			<div class="km-value" ng-if="document.isSynthetic">Yes</div>
+			<div class="km-value" ng-if="!document.isSynthetic">No</div>
 		</div>
 	
 		<legend>Donor organism</legend>
@@ -54,7 +59,7 @@
 		<div ng-show="document.donorOrganismCollectionPoint">
 			<label>Donor organism point of collection</label>
 			<div class="km-value">
-				<km-value-ml value="document.donorOrganismCollectionPoint" locales="locale"></km-value-ml>
+				<km-value-ml value="document.donorOrganismCollectionPoint"  html locales="locale"></km-value-ml>
 			</div>
 		</div>
 
@@ -71,7 +76,7 @@
 		<div ng-show="document.biologicalFunction">
 			<label>Biological function</label>
 			<div class="km-value">
-				<km-value-ml value="document.biologicalFunction" locales="locale"></km-value-ml>
+				<km-value-ml value="document.biologicalFunction" html locales="locale"></km-value-ml>
 			</div>
 		</div>
 
@@ -87,7 +92,7 @@
 			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">
-				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+				<km-value-ml value="document.relevantInformation" html locales="locale"></km-value-ml>
 			</div>
 
 			<div ng-show="document.relevantDocuments">
@@ -98,10 +103,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="km-value">
-				<pre>
-				{{document|json}}</pre>
-			</div>
 	</div>
 	<div document-metadata class="panel-footer"></div>
 </div>
