@@ -80,7 +80,7 @@
             border-left-color: #aaa !important;
         }
 
-        .steps li.arrowSelected a {
+        .steps li.arrowSelected a, .active-button {
             background: #aaa !important;
             color: #000 !important;
         }
@@ -207,7 +207,8 @@
             
              <div class="row pull-left">
                 <div class="col-xs-1">
-                        <button type="button" class="btn btn-default bg-grey color-white ">
+                        <button type="button" class="btn btn-default bg-grey color-white " 
+                        ng-disabled="!prevTab" ng-click="changeTab('prev')" ng-class="{'active-button':prevTab}">
                                 <span class="glyphicon glyphicon-backward"></span>
                         </button>
                  </div>
@@ -228,8 +229,9 @@
                     </ul>
                 </div>
                <div class="col-xs-1">
-                    <button type="button" class="btn btn-default bg-grey color-white ">
-                    <span class="glyphicon glyphicon-forward"> </span>
+                    <button type="button" class="btn btn-default bg-grey color-white " 
+                    ng-disabled="!nextTab" ng-click="changeTab('next')"  ng-class="{'active-button':nextTab}">
+                        <span class="glyphicon glyphicon-forward"> </span>
                     </button>
                 </div>
             </div>
