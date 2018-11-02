@@ -17,8 +17,9 @@
     "ejs": "2.5.5",
     "express": "4.16.3",
     "http-proxy": "1.13.2",
-    "lodash": "4.17.5",
-    "rendertron-middleware": "0.1.2"
+    "lodash": "4.17.10",
+    "prerender-node": "^3.2.1"
+
   },
   "devDependencies": {
     "@bower_components/Chart.js": "chartjs/Chart.js#1.1.1",
@@ -29,7 +30,6 @@
     "@bower_components/angular-aria": "angular/bower-angular-aria#1.7.4",
     "@bower_components/angular-block-ui": "McNull/angular-block-ui#0.2.2",
     "@bower_components/angular-cookies": "angular/bower-angular-cookies#1.7.4",
-    "@bower_components/angular-gravatar": "wallin/angular-gravatar#0.4.2",
     "@bower_components/angular-intro.js": "mendhak/angular-intro.js#1.2.4",
     "@bower_components/angular-joyride": "ahmed-wagdi/angular-joyride#1.0.2",
     "@bower_components/angular-loader": "angular/bower-angular-loader#1.5.6",
