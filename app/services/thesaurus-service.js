@@ -63,8 +63,9 @@ define(['app', 'underscore'], function (app, _) {
                 decisionTypes            :  'DecisionTypes',
                 decisionLMOFFPSubject    :  'DecisionLMOFFPSubject',
                 decisionResults          :  'DecisionResults',
-                riskAssessmentScope      :  'RiskAssessmentScope'
-
+                riskAssessmentScope      :  'RiskAssessmentScope',
+                dnaSequenceFamily        :  '82DAAF04-6698-4CA6-81D5-F200AE64C63A',
+                dnaSequenceTraits        :  'B8EB2261-7695-4DC5-9C4E-026D380DA7CB'
             }
         }
     }]);
