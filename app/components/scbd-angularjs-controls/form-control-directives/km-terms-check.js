@@ -24,6 +24,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
 				$scope.showDescription = $attr.showDescription == 'true';
                 $scope.identifiers = null;
                 $scope.terms = null;
+                $scope.searchKeyword = '';
                 $scope.rootTerms = [];
                 if($scope.showDescription === undefined)
                     $scope.showDescription = 'false';
@@ -32,6 +33,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                 $scope.save     = save;
                 $scope.load     = load;
                 $scope.clear    = clear;
+                $scope.clearInputText    = clearInputText;
 
                 $scope.$watch('terms', onTerms);
                 $scope.$watch('identifier', save);
@@ -162,12 +164,16 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     if (error.status == 404) $scope.error = "Terms not found";
                     else $scope.error = error.data || "unknown error";
                 };
-
+                //==============================
                 function clear(){
                     $scope.identifiers=[];
                     save();
                 }
-
+                //==============================
+                function clearInputText(){
+                    $scope.searchKeyword = "";
+                }
+                //==============================
                 $scope.hasMatch = function(term){
                     if(!$scope.searchKeyword)
                         return;
@@ -179,6 +185,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     if(title.toLowerCase().indexOf($scope.searchKeyword.toLowerCase())>=0)
                         return true;
                 }
+                //==============================
                 function buildSearchList(rootTerms, searchList){
 
                     $scope.searchList = searchList = searchList || $scope.searchList||[];
@@ -187,7 +194,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     _.each(rootTerms, function(term){
                         searchList.push({
                             identifier: term.identifier, searchTitle: term.title,
-                            displayTitle: buildDisplayTitle(term)
+                            displayTitle: buildDisplayTitle(term, 1)
                         });
                         if(term.narrowerTerms){                            
                             buildSearchList(term.narrowerTerms, searchList)
@@ -195,21 +202,50 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     })
 
                 }
-
-                function buildDisplayTitle(term){
+                //==============================
+                function buildDisplayTitle(term, i){
                     var broaderTitle= {};
-                    var mergedTitle = {}
-                    if(term.broaderTerms){
-                       broaderTitle =  buildDisplayTitle(term.broaderTerms[0]);
-                    }
-                    
-                    mergedTitle.en = (broaderTitle.en||'') + ' -> ' + (term.title.en ||'');
-                    mergedTitle.es = (broaderTitle.es||'') + ' -> ' + (term.title.es ||'');
-                    mergedTitle.fr = (broaderTitle.fr||'') + ' -> ' + (term.title.fr ||'');
-                    mergedTitle.ar = (broaderTitle.ar||'') + ' -> ' + (term.title.ar ||'');
-                    mergedTitle.ru = (broaderTitle.ru||'') + ' -> ' + (term.title.ru ||'');
-                    mergedTitle.zh = (broaderTitle.zh||'') + ' -> ' + (term.title.zh ||'');
+                    var mergedTitle = {};
 
+                    if(term.broaderTerms){
+                       
+                        broaderTitle =  buildDisplayTitle(term.broaderTerms[0], 0);
+                        
+                        if(i){
+                            mergedTitle.en = (broaderTitle.en||'') + " <i class='fa fa-caret-right color-grey '></i> <span class='color-grey bold'>" + (term.title.en ||'') + "</span>";
+                            mergedTitle.es = (broaderTitle.es||'') + " <i class='fa fa-caret-right color-grey '></i> <span class='color-grey bold'>" + (term.title.es ||'') + "</span>";
+                            mergedTitle.fr = (broaderTitle.fr||'') + " <i class='fa fa-caret-right color-grey '></i> <span class='color-grey bold'>" + (term.title.fr ||'') + "</span>";
+                            mergedTitle.ar = (broaderTitle.ar||'') + " <i class='fa fa-caret-right color-grey '></i> <span class='color-grey bold'>" + (term.title.ar ||'') + "</span>";
+                            mergedTitle.ru = (broaderTitle.ru||'') + " <i class='fa fa-caret-right color-grey '></i> <span class='color-grey bold'>" + (term.title.ru ||'') + "</span>";
+                            mergedTitle.zh = (broaderTitle.zh||'') + " <i class='fa fa-caret-right color-grey '></i> <span class='color-grey bold'>" + (term.title.zh ||'') + "</span>";
+                        }
+                        else{
+                            mergedTitle.en = (broaderTitle.en||'') + " <i class='fa fa-caret-right color-grey '></i> " + (term.title.en ||'');
+                            mergedTitle.es = (broaderTitle.es||'') + " <i class='fa fa-caret-right color-grey '></i> " + (term.title.es ||'');
+                            mergedTitle.fr = (broaderTitle.fr||'') + " <i class='fa fa-caret-right color-grey '></i> " + (term.title.fr ||'');
+                            mergedTitle.ar = (broaderTitle.ar||'') + " <i class='fa fa-caret-right color-grey '></i> " + (term.title.ar ||'');
+                            mergedTitle.ru = (broaderTitle.ru||'') + " <i class='fa fa-caret-right color-grey '></i> " + (term.title.ru ||'');
+                            mergedTitle.zh = (broaderTitle.zh||'') + " <i class='fa fa-caret-right color-grey '></i> " + (term.title.zh ||'');
+                        }
+                    }
+                    else{
+                        if(i){
+                            mergedTitle.en = "<span class='color-grey bold'>" +(term.title.en ||'') + "</span>";
+                            mergedTitle.es = "<span class='color-grey bold'>" +(term.title.es ||'') + "</span>";
+                            mergedTitle.fr = "<span class='color-grey bold'>" +(term.title.fr ||'') + "</span>";
+                            mergedTitle.ar = "<span class='color-grey bold'>" +(term.title.ar ||'') + "</span>";
+                            mergedTitle.ru = "<span class='color-grey bold'>" +(term.title.ru ||'') + "</span>";
+                            mergedTitle.zh = "<span class='color-grey bold'>" +(term.title.zh ||'') + "</span>";
+                        }
+                        else{
+                            mergedTitle.en = (term.title.en ||'');
+                            mergedTitle.es = (term.title.es ||'');
+                            mergedTitle.fr = (term.title.fr ||'');
+                            mergedTitle.ar = (term.title.ar ||'');
+                            mergedTitle.ru = (term.title.ru ||'');
+                            mergedTitle.zh = (term.title.zh ||'');
+                        }
+                    }
                     
                     return mergedTitle;
                 }
