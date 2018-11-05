@@ -674,6 +674,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                 };
 
+                //============================================================
                 function loadArticle(schema){
                     
                     if($scope.article)
@@ -691,7 +692,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                       "ag" : JSON.stringify(ag)
                     };
 
-                    articlesService.getArticles(qs).then(function(data){
+                    articlesService.getArticles(qs, true).then(function(data){
                         $scope.article = data[0];
                     })
                     .finally(function(){
@@ -699,6 +700,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     })
                 }
 
+                //============================================================
                 $scope.loadSecurity();
 
 
