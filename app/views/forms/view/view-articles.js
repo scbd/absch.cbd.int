@@ -1,14 +1,13 @@
 define(['app','underscore',
   '/forms/view/view-articles',
-  '/js/common',
   '/components/scbd-angularjs-services/services/locale',
   'services/articles-service',
   'ng-breadcrumbs',
 ], function(app, _) {
 
   app.controller("viewArticles",
-  ["$scope","$route", "$http", "$timeout", "$location","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm','articlesService',
-    function($scope,$route, $http, $timeout, $location,locale, commonjs, $q, breadcrumbs, $element, $compile, realm, articlesService) {
+  ["$scope","$route", "$http", "$location", "locale", '$q', 'breadcrumbs','articlesService',
+    function($scope,$route, $http,  $location, locale, $q, breadcrumbs, articlesService) {
       
       $scope.status   = "loading";
       $scope.error    = null;
@@ -20,11 +19,23 @@ define(['app','underscore',
       else
         loadArticles("ABSCH-Announcement");
 
+        var breadcrumb = {    
+          label : 'Announcement',
+          originalPath : "articles",
+          param:'articles',
+          path:"/articles/"
+        }
+
       //---------------------------------------------------------------------
       function loadArticle(id){
           $q.when($http.get('https://api.cbd.int/api/v2017/articles/' + id))
           .then(function(results){
               $scope.article = results.data;
+
+              if($scope.article){
+                 //breadcrumbs.breadcrumbs.splice(1, 0 , breadcrumb);
+                 breadcrumbs.options = {'articleTitle':  $scope.article.title[locale] };
+              }
           })
       }
       //---------------------------------------------------------------------
@@ -39,6 +50,8 @@ define(['app','underscore',
 
         articlesService.getArticles(qs).then(function(data){
           $scope.articles = data;
+
+          
         })
       }
       //---------------------------------------------------------------------
