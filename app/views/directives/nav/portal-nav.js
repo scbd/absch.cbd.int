@@ -1,4 +1,4 @@
-define(['app', 'text!views/directives/nav/portal-nav.html', 'underscore','ng-breadcrumbs','jquery', 'services/help-service'],
+define(['app', 'text!views/directives/nav/portal-nav.html', 'underscore','ng-breadcrumbs','jquery', 'services/help-service', 'js/common'],
  function (app, template, _, showHelp, $) {
 app.directive('portalNav', function () {
     return {
@@ -12,12 +12,14 @@ app.directive('portalNav', function () {
     link: ['$scope', '$q', '$element', function ($scope, $q, $element) {
         
     }]
-    , controller: ['$scope','$rootScope', '$q','$element','$http', '$filter','breadcrumbs', 'helpService',
-            function ($scope, $rootScope, $q, $element, $http, $filter, breadcrumbs, helpService) {
+    , controller: ['$scope','$rootScope', '$q','$element','$http', '$filter','breadcrumbs', 'helpService', 'commonjs',
+            function ($scope, $rootScope, $q, $element, $http, $filter, breadcrumbs, helpService, commonjs) {
 
-        $http.get('/api/v2015/countries', {params: { f: { code:1, name:1 } }, cache:1 }).then(function(res){
-            $scope.countries = res.data;
-        });
+
+        $q.when(commonjs.getCountries())
+                .then(function(data){
+                    $scope.countries = data;
+                })
 
       $scope.breadcrumbs     = breadcrumbs;
       $scope.$root.pageTitle = { text: "" };
