@@ -45,7 +45,7 @@ define(['app', 'underscore', './app-config-service',
 
                 //================================================================================================================
                 function openInNewWindow(str) {
-                    return str.replace(/href=/g," target=\\\"_new_window_\\\" href=" );
+                    return str.replace(/href=/g," target=\\\"_new\\\" href=" );
                 }
                 
                 //================================================================================================================
