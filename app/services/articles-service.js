@@ -23,6 +23,26 @@ define(['app', 'underscore', './app-config-service',
                                 }
                         })
                 }
+
+                //================================================================================================================
+                this.getArticle = function(id,openInNew) {
+                      
+                    return $http.get('https://api.cbd.int/api/v2017/articles/' + id)
+                      .then(function(results){
+                            if(results.data)
+                            {    
+                                var value = JSON.stringify(results.data);
+                                
+                                if(openInNew){
+                                    value = openInNewWindow(value);
+                                }
+                                value = replaceOembed(value);
+
+                                return JSON.parse(value);
+                            }
+                    })
+            }
+
                 //================================================================================================================
                 function openInNewWindow(str) {
                     return str.replace(/href=/g," target=\\\"_new_window_\\\" href=" );
