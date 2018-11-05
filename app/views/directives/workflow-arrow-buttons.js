@@ -1,12 +1,12 @@
 define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore',
         'views/directives/workflow-history-directive',
-        'toastr', 'services/local-storage-service', 'services/app-config-service'
+        'toastr', 'services/local-storage-service', 'services/app-config-service', 'services/articles-service',
 ], function (app, template) {
     
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
-    'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 'localStorageService',
+    'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 'localStorageService', 'articlesService',
     function ($rootScope,  storage, editFormUtility, $route, IWorkflows, toastr, $location, $filter, 
-            $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService){
+            $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, articlesService){
 
     	return{
     		restrict: 'EA',
@@ -690,10 +690,9 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     var qs = {
                       "ag" : JSON.stringify(ag)
                     };
-                    $q.when($http.get('https://api.cbd.int/api/v2017/articles', {params: qs, cache:true}))
-                    .then(function(results){
-                      if((results||{}).data && results.data.length > 0)
-                        $scope.article = results.data[0];
+
+                    articlesService.getArticles(qs).then(function(data){
+                        $scope.article = data[0];
                     })
                     .finally(function(){
                         $scope.loading = false;
