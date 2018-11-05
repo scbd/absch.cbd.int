@@ -1,6 +1,4 @@
 define(['app','underscore',
-  '/about/new-about',
-  '/js/common',
   '/components/scbd-angularjs-services/services/locale',
   './article-search.directive',
   './article-guides.directive',
@@ -10,8 +8,8 @@ define(['app','underscore',
 ], function(app, _) {
 
   app.controller("newAbout",
-  ["$scope","$route", "$http", "$timeout", "$location","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm','$window', '$location', 'articlesService',
-    function($scope,$route, $http, $timeout, $location,locale, commonjs, $q, breadcrumbs, $element, $compile, realm, $window, $location, articlesService) {
+  ["$scope","$route", "$location", "locale", 'breadcrumbs', '$location', 'articlesService',
+    function($scope,$route, $location, locale, breadcrumbs,  $location, articlesService) {
       
       $scope.status   = "loading";
       $scope.error    = null;
@@ -19,16 +17,25 @@ define(['app','underscore',
       $scope.searchText ="";
       $scope.showSearch = true;
 
+      var breadcrumb = {    
+        label : 'About ABSCH',
+        originalPath : "about",
+        param:'about',
+        path:"/about/"
+      }
+
       $scope.id = $route.current.params.id;
       $scope.guide = $route.current.params.guide;
 
       if($scope.id == "guides" && $scope.guide){
         $scope.show = "guides";
+        breadcrumbs.options = {'aboutCode': "Step-by-step guides" };
       }
       else if($scope.id == "faqs"){
         $scope.faqs = "ABSCH-About, faqs"; 
         $scope.showSearch = true;
         $scope.show = "faqs";
+        breadcrumbs.options = {'aboutCode': "FAQs" };
       }
       else if($scope.id == "feedback"){
         $scope.show = "feedback";
@@ -40,6 +47,7 @@ define(['app','underscore',
         loadArticles(["ABSCH-About", "Introduction"]);
       }
      
+    
       //---------------------------------------------------------------------
       function loadArticles(tags){
         var ag = [];
@@ -55,9 +63,10 @@ define(['app','underscore',
       
         articlesService.getArticles(qs).then(function(data){
           $scope.articles = data;
-        })
 
-     
+          if($scope.articles)
+           breadcrumbs.options = {'aboutCode': $scope.articles[0].title[locale] };
+        })
       }
 
       //---------------------------------------------------------------------
@@ -84,11 +93,13 @@ define(['app','underscore',
           $scope.showSearch = false;
         }
         $scope.show = "faqs";
+
       }
 
       //---------------------------------------------------------------------
       $scope.loadGuides = function(){
         $scope.show = "guides";
+        breadcrumbs.options = {'aboutCode': "Step-by-step guides" };
       }
 
       //==================================================
