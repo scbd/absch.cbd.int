@@ -31,7 +31,7 @@
                 <img class="thumbnail" style="max-width:300px;width:100%; width: 100%; margin-right:20px;" ng-if="article.coverImage.url" src="{{getSizedImage(article.coverImage.url, '400x400')}}">
             </div>
             <div class="col-xs-12" ng-class="{'col-sm-6 col-md-9' : article.coverImage.url}">
-                    <span class="news-date bg-white pull-right bold"  >{{article.meta.createdOn | date}}</span>
+                    <span class="news-date bg-white pull-right bold"  >{{article.meta.createdOn | formatDateWithUtc }}</span>
 
                     <div>             
                         <h3 style="font-size:160%;margin-bottom:30px;">{{article.title  | lstring:locale}}</h3>
@@ -50,7 +50,7 @@
                         
                                 <div  style="background-color:#f9f9f9;border-top:1px solid #ddd; border-bottom:1px solid #ddd;height:200px;margin-bottom:10px;">
                                         <div  class="news-image" style="background-image: url({{::getSizedImage(article.coverImage.url, '400x400')}});" ng-class="{'sized':article.coverImage.url,'small-sized':!article.coverImage.url}"> 
-                                                <span class="bg-red color-white news-date">{{article.meta.createdOn | date}}</span>
+                                                <span class="bg-red color-white news-date">{{article.meta.createdOn | formatDateWithUtc}}</span>
                                         </div>
                                         <div style="margin:5px;" ng-class="{'noimagetable':!article.coverImage.url}" >
                                             
