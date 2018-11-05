@@ -1,4 +1,4 @@
-﻿define(['app',"text!./article-guides.directive.html",   'services/articles-service'],
+﻿define(['app',"text!./article-guides.directive.html", 'services/articles-service'],
 function (app, template) {
 
 app.directive("articleGuides", [ function () {
@@ -14,8 +14,8 @@ app.directive("articleGuides", [ function () {
             title:  '@',
             showFaqs:  '@'
         },
-		controller : ["$scope", "$http", "$filter", "$rootScope", "locale", "$q","articlesService",
-        function($scope, $http, $filter, $rootScope, locale, $q, articlesService)
+		controller : ["$scope", "articlesService",
+        function($scope,  articlesService)
 		{
           
           loadArticles();
