@@ -1,8 +1,8 @@
-define(['app', 'underscore', './local-storage-service', './app-config-service',
+define(['app', 'underscore', './app-config-service',
 'components/scbd-angularjs-services/services/locale'], function(app, _) {
 
-    app.factory('articlesService', ['$http', '$q', 'localStorageService', 'appConfigService', 'locale',
-        function($http, $q, realm, localStorageService, appConfigService, locale) {
+    app.factory('articlesService', ['$http',
+        function($http) {
             return new function() {
 
                 //================================================================================================================
