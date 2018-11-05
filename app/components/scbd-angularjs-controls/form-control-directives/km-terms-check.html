@@ -1,25 +1,72 @@
 ﻿<div>
+
 	<div class="col-xs-12" ng-show="enableSearch">
 		<div class="input-group pull-left" style="max-width:300px;">
 			<input  type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the list" style="font-weight:bold;">
-			<span type="submit" class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
+			<span class="input-group-addon" id="basic-addon2">
+				<i class="fa fa-search" ></i>
+			</span>
 		</div>
-		<button class="btn btn-default btn-xs pull-right" ng-click="clear()" ng-if="binding.length>0">
-				<i class="fa fa-remove" ></i> Clear selection</button>
+		<span style="position: relative; top:10px; margin-left:20px"> <i class="color-blue">{{ binding.length || "0"}} keywords selected.</i></span>
+		
+
 	</div>
-	<div class="col-xs-12">
-		<div ng-if="searchKeyword" style="margin:20px">
-			<table class="table table-stripped table-hover">
-				<tr ng-repeat="term in searchList|filter:hasMatch">
-					<td>
+	<div class="col-xs-12" >
+		<div ng-if="searchKeyword && searchKeyword.length > 2"  class="optionsbox">
+			<table class="table table-condensed" >
+				<tr ng-repeat="term in filteredList = (searchList|filter:hasMatch)">
+					<td  ng-class="{'no-border':$first}"> 
 						<label>
 							<input type="checkbox" ng-model="identifiers[term.identifier]" ng-change="save()" 
-								ng-required="IsRequired()" value="{{term.identifier}}"/> {{term.displayTitle | lstring:locale}}
+								ng-required="IsRequired()" value="{{term.identifier}}"/> <span class="color-litegrey" ng-bind-html="term.displayTitle | lstring:locale"></span>
 						</label>
 					</td>
 				</tr>
 			</table>
+			<p ng-hide="filteredList.length"> Keyword not found. </p>
 		</div>
+
+		<div ng-class="{'searchbox': enableSearch}" >
+
+				<button class="btn btn-default btn-xs pull-right" ng-click="clear()" ng-if="binding.length>0">
+						<i class="fa fa-remove"  ></i> Clear selection</button>
+			<ul>
+				<script type="text/ng-template" id="term-check-tree-renderer.html">
+					<label>
+						<input type="checkbox" ng-model="identifiers[term.identifier]" ng-change="save()" ng-required="IsRequired()" value="{{term.identifier}}"
+						/> {{term.title||term.name | lstring:locale}}
+					</label>
+					<div class="km-select-description" ng-if="showDescription && term.description" style="padding: 3px 25px;">
+						{{term.description}}
+					</div>
+					<ul style="list-style:none">
+						<li ng:repeat="term in term.narrowerTerms" ng-include="'term-check-tree-renderer.html'">
+					</ul>
+				</script>
+
+				<li ng:repeat="term in rootTerms" ng-include="'term-check-tree-renderer.html'"></li>
+
+				<li ng-show="error">
+					<div class="alert">
+						{{error}}
+					</div>
+				</li>
+
+				<li ng-show="__loading">
+					<i class="fa fa-spinner fa-spin"></i> Loading...
+				</li>
+
+				<style>
+					li>label {
+						font-weight: normal;
+					}
+					.optionsbox{position:absolute; height:300px; overflow: scroll; width:100%;padding:15px; border:1px solid #999; border-radius:5px; box-shadow: 5px 10px #bbb ;margin-bottom:15px; background-color: #fff;}
+					.searchbox {overflow: scroll;padding:10px; background-color: #eee; border-top:1px solid #ddd;border-bottom:1px solid #ddd;}
+					.no-border{border-top:none!important;}
+				</style>
+			</ul>
+		</div>
+<<<<<<< HEAD
 		<ul>
 			<script type="text/ng-template" id="term-check-tree-renderer.html">
 				<label>
@@ -52,6 +99,8 @@
 				}
 			</style>
 		</ul>
+=======
+>>>>>>> update to keywords select
 	</div>
 		
 	</div>
