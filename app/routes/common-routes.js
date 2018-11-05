@@ -36,7 +36,7 @@
                 whenAsync('/reports/analyzer',    { templateUrl: 'views/report-analyzer/analyzer.html',  label:'Analyzer',      resolveController: true}).
                 
                 whenAsync('/articles',   { templateUrl: 'views/forms/view/view-articles.html',     label:"Announcements", resolveController: true, resolveUser: true}).
-                whenAsync('/articles/:id',   { templateUrl: 'views/forms/view/view-articles.html',  param:'true', resolveController: true, resolveUser: true}).
+                whenAsync('/articles/:id',   { templateUrl: 'views/forms/view/view-articles.html', label: "articleTitle",  param:'true', resolveController: true, resolveUser: true}).
                        
                 whenAsync('/database/record',             { templateUrl: 'views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).
                 whenAsync('/database/record/:documentID',  { templateUrl: 'views/forms/view/records-id.html'     ,resolveController: true, resolveUser: true}).

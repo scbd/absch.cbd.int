@@ -21,7 +21,9 @@
 .noimagetable{display: table; height: 200px; overflow: hidden; width: 100%;}
 </style>
 
-    <h3 style="border-bottom:1px solid #ddd;"> Announcements</h3>
+    <h3 style="border-bottom:1px solid #ddd;"> <a href="/articles/" class="color-grey"> Announcements </a>
+        <a  ng-if="article" class="pull-right" href="/articles/"> <i class="fa fa-arrow-circle-left"></i> view all </a>
+    </h3>
         
     <div class="container" ng-if="article">
         <div class="row well bg-white">
@@ -29,7 +31,7 @@
                 <img class="thumbnail" style="max-width:300px;width:100%; width: 100%; margin-right:20px;" ng-if="article.coverImage.url" src="{{getSizedImage(article.coverImage.url, '400x400')}}">
             </div>
             <div class="col-xs-12" ng-class="{'col-sm-6 col-md-9' : article.coverImage.url}">
-                    <span class="news-date bg-white pull-right" >{{article.meta.createdOn | date}}</span>
+                    <span class="news-date bg-white pull-right bold"  >{{article.meta.createdOn | date}}</span>
 
                     <div>             
                         <h3 style="font-size:160%;margin-bottom:30px;">{{article.title  | lstring:locale}}</h3>
