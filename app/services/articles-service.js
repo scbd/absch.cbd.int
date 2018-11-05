@@ -36,7 +36,7 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                             value = value.replace(/www\.youtube\.com\/watch\?v\=/g, "www.youtube.com/embed/" );
                             value = value.replace(/vimeo\.com\//g, "player.vimeo.com/video/" );
                             value = value.replace(/\<oembed url=/g, "<iframe src=" );
-                            value = value.replace(/\>\<\/oembed\>/g ,"\' style=\'width: 100%; height: 450px;\' frameborder=\'0\' allow=\'autoplay; encrypted-media\' allowfullscreen=\'\'></iframe>" );
+                            value = value.replace(/\>\<\/oembed\>/g ," style=\\\"width: 100%; height: 450px;\\\" frameborder=\\\"0\\\" allow=\\\"autoplay; encrypted-media\\\" allowfullscreen=\\\"\\\"></iframe>" );
                             
                         }
 

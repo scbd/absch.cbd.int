@@ -88,7 +88,7 @@ p.list-title{ margin-bottom:0;padding-bottom:0;}
 
                         <div id="article-content"  ng-repeat="article in articles" ng-if="show=='articles'">
                             <h1 class="color-green bold" style="margin-bottom:30px;"  ng-bind-html="article.title | lstring:locale"></h1>
-                            <div ng-bind-html="article.content | lstring:locale | toTrustedOembedVideo"></div>
+                            <div ng-bind-html="article.content | lstring:locale | toTrusted"></div>
                          </div>
 
                         <div  id="faq-content" ng-if="show=='faqs'">
