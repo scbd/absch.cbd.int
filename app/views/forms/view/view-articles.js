@@ -28,30 +28,27 @@ define(['app','underscore',
 
       //---------------------------------------------------------------------
       function loadArticle(id){
-          $q.when($http.get('https://api.cbd.int/api/v2017/articles/' + id))
-          .then(function(results){
-              $scope.article = results.data;
-
-              if($scope.article){
-                 //breadcrumbs.breadcrumbs.splice(1, 0 , breadcrumb);
-                 breadcrumbs.options = {'articleTitle':  $scope.article.title[locale] };
-              }
-          })
+        articlesService.getArticle(id, true).then(function(data){
+          
+          $scope.article = data;
+          
+          if($scope.article){
+            //breadcrumbs.breadcrumbs.splice(1, 0 , breadcrumb);
+            breadcrumbs.options = {'articleTitle':  $scope.article.title[locale] };
+         }
+        })
       }
+
       //---------------------------------------------------------------------
       function loadArticles(tag){
         var ag = [];
         ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent(tag)}]}});
         ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1}});
-        
         var qs = {
           "ag" : JSON.stringify(ag)
         };
-
         articlesService.getArticles(qs).then(function(data){
           $scope.articles = data;
-
-          
         })
       }
       //---------------------------------------------------------------------
