@@ -33,7 +33,7 @@
 
                         <div  style="background-color:#f9f9f9;border-top:1px solid #ddd; border-bottom:1px solid #ddd;height:200px;margin-bottom:10px;">
                             <div  class="news-image" style="background-image: url({{::getSizedImage(article.coverImage.url, '400x400')}});" ng-class="{'sized':article.coverImage.url,'small-sized':!article.coverImage.url}"> 
-                                    <span class="bg-red color-white news-date">{{article.meta.createdOn | date}}</span>
+                                    <span class="bg-red color-white news-date">{{article.meta.createdOn | formatDateWithUtc}}</span>
                             </div>
                             <div style="margin:5px;" ng-class="{'noimagetable':!article.coverImage.url}" >
                                 
