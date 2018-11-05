@@ -31,6 +31,8 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 			$scope.areVisible = false;
             $scope.userGov = $scope.$root.user.government;
             $scope.showAddButton = false;
+            $scope.sortType     = 'rec_title'; 
+            $scope.sortReverse  = false;  
 
             if(!$scope.type) $scope.type = "checkbox";
 

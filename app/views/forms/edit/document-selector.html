@@ -1,4 +1,15 @@
 ﻿<div>
+
+        <style>
+                #rec {font-size:12px;}
+                #rec .type {text-transform:uppercase; white-space:nowrap; font-size:10px; font-weight:bold;}
+                #rec .id {text-transform:uppercase; white-space:nowrap; }
+                #rec .title {color:#111;font-size:12px; font-weight:bold;}
+                #rec .meta {max-width:20%;}
+                .col-title {color:#333; text-transform: uppercase; font-size: 12px; font-weight: bold;}
+        </style>
+
+
     <!-- existing documents display -->
     <div class="row">
         <div class="col-xs-12">
@@ -50,30 +61,84 @@
     <script type="text/ng-template" trados-translation="true" id="documentSelectionModal">
         <div class="rounded bg-dropshadow" id="{{question}}">
             <div class="modal-header bg-grey ">
-                <h3>Please select from the list of published record(s) below:</h3>
-                <div class="help-info">If the record is not listed, please save your current draft and go to the ‘Dashboard’ and create a new record.</div>
-                <div ng-show="filter">
+                <h3>Please select from the list of <span class="bold color-blue">{{docs.length}}</span>  published record(s) below:</h3>
+                <div ng-if="hideAddContact" class="help-info">If the record is not listed, please save your current draft and go to the ‘Dashboard’ and create a new record.</div>
+                <div ng-if="!hideAddContact" class="help-info">If the contact you are looking for is not listed, please create a new record by clicking the <a style="cursor:pointer;" ng-click="addNewContact=!addNewContact;loadContactDirective()">'create contact'</a> button below.</div>
+                <!-- <div ng-show="filter"> -->
                     <input type="textbox" ng-model="keyword" placeholder="filter records by keywords or unique identifier" class="form-control">
-                </div>
+                <!-- </div> -->
             </div>
-            <div class="modal-body">
+            
+            <div class="modal-body" >
+                
                 <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new" ng-hide="addNewContact">
-                    <div class="row" style="margin:0 0 10px 0;padding:0;" ng-show="!isLoading" ng-repeat="doc in rawDocuments.docs | filter:keyword">
-                        <div class="col-xs-1 text-right">
-                            <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" style="width: 16px; height: 16px;" />
-                            <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" style="width: 16px; height: 16px;" />
-                        </div>
-                        <div class="col-xs-11">
-                            <result-default doc='doc' type="nationalRecords"></result-default>
-                        </div>
-                    </div>
+                        <div class="row" style="margin:0;padding:0;" ng-show="!isLoading" >
+                                
+                            <div ng-if="hideAddContact" ng-repeat="doc in docs = (rawDocuments.docs | filter:keyword)">
+                                    <div class="col-xs-1 text-right">
+                                        <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" style="width: 16px; height: 16px;" />
+                                        <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" style="width: 16px; height: 16px;" />
+                                    </div>
+                                    <div class="col-xs-11">
+                                        <result-default doc='doc' type="nationalRecords"></result-default>
+                                    </div>
+                                </div>
+                            
+                            
+                            <table ng-if="!hideAddContact" class="table table-condensed table-striped" style="width:100%;" >
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th style="white-space:nowrap;"><a href="#" class="col-title" ng-click="sortType = 'schema_s'; sortReverse = !sortReverse">type</a>  
+                                            <span ng-show="sortType == 'schema_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+
+                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_title'; sortReverse = !sortReverse">name</a> 
+                                            <span ng-show="sortType == 'rec_title'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+
+                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_countryName'; sortReverse = !sortReverse">owner</a>
+                                            <span ng-show="sortType == 'rec_countryName'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+
+                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'uniqueIdentifier_s'; sortReverse = !sortReverse">unique identifier</a>
+                                            <span ng-show="sortType == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+
+                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">summary</a>
+                                            <span ng-show="sortType == 'rec_summary'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                    </tr>
+                                </thead>
+                                        <tbody>
+                                          <tr ng-repeat="doc in docs = (rawDocuments.docs | orderBy:sortType:sortReverse  | filter:keyword)" id="rec">
+                                            <td style="width:0;"><span class="bold">{{$index+1}}.</span></td>
+                                            <td  style="width:0;">  
+                                                <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" />
+                                                <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" />
+                                            </td>
+                                            <td class="type"> {{doc.schema_s | schemaShortName}}</td>
+                                            <td style="min-width:30%" class="title"> <a href="{{doc.url_ss}}" target="_new">{{doc.rec_title}}</a></td>
+                                            <td > {{doc.rec_countryName}}</td>
+                                            <td class="id color-blue"> <a href="{{doc.url_ss}}" target="_new">{{doc.uniqueIdentifier_s}}</a></td>
+                                            <td class="summary"> {{doc.rec_summary | limitTo:20 }}</td>
+                                            <td class="meta"> <span ng-repeat="meta in doc.rec_meta1">{{meta}}{{$last ? '':', '}}</span></td>
+                                            <td class="meta"> <span ng-repeat="meta1 in doc.rec_meta2">{{meta1}}{{$last ? '':', '}}</span></td>
+                                            <td class="meta"> <span ng-repeat="meta2 in doc.rec_meta3">{{meta2}}{{$last ? '':', '}}</span></td>
+                                        </tr>
+                                        </tbody>
+                                      </table>
+                                      
+
+                        </div> 
+
                     <div ng-if="isLoading"> <i class="fa fa-spinner fa-spin"></i> Loading...</div>
                     <div ng-if="rawDocuments.numFound===0"> no records found.</div>
                 </div>
                 <div  ng-show="addNewContact" class="row" style="max-width:100%">
                     <div id="divNewContact" class="col-lg-12" style="margin:20px"></div>
                 </div>
-            </div>
+            </div> 
 
             <div class="modal-footer bg-grey">
                 <div class="row">
