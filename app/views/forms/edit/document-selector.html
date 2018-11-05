@@ -120,7 +120,7 @@
                                             <td class="type"> {{doc.schema_s | schemaShortName}}</td>
                                             <td style="min-width:30%" class="title"> <a href="{{doc.url_ss}}" target="_new">{{doc.rec_title}}</a></td>
                                             <td > {{doc.rec_countryName}}</td>
-                                            <td class="id color-blue"> <a href="{{doc.url_ss}}" target="_new">{{doc.uniqueIdentifier_s}}</a></td>
+                                            <td class="id color-blue"> <a href="{{doc.url_ss}}" target="_blank">{{doc.uniqueIdentifier_s}}</a></td>
                                             <td class="summary"> {{doc.rec_summary | limitTo:20 }}</td>
                                             <td class="meta"> <span ng-repeat="meta in doc.rec_meta1">{{meta}}{{$last ? '':', '}}</span></td>
                                             <td class="meta"> <span ng-repeat="meta1 in doc.rec_meta2">{{meta1}}{{$last ? '':', '}}</span></td>
