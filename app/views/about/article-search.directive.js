@@ -1,4 +1,4 @@
-﻿define(['app',"text!./article-search.directive.html",   'services/articles-service'],
+﻿define(['app',"text!./article-search.directive.html", 'services/articles-service'],
 function (app, template) {
 
 app.directive("articleSearch", [ function () {
@@ -17,8 +17,8 @@ app.directive("articleSearch", [ function () {
             categories: '@',
             keyword:'='
         },
-		controller : ["$scope", "$http", "$filter", "$rootScope", "locale", "$q", 'articlesService',
-        function($scope, $http, $filter, $rootScope, locale, $q, articlesService)
+		controller : ["$scope",'articlesService',
+        function($scope, articlesService)
 		{
            if ($scope.adminTags) 
                loadArticles($scope.adminTags);

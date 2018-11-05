@@ -69,7 +69,7 @@ define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
                whenAsync('/help/common-formats/:commonFormat?',     {templateUrl: 'views/about/common-formats.html', resolveController: true, resolveUser: true, label:'Common formats'}).
 
                whenAsync('/about/',           { templateUrl: 'views/about/about.html',   label:'About the ABSCH', resolveController:true, resolveUser : false}).
-               whenAsync('/about/:id',        { templateUrl: 'views/about/about.html',   param:'true',  resolveController:true, resolveUser : false}).
+               whenAsync('/about/:id',        { templateUrl: 'views/about/about.html',   label:'aboutCode',       param:'true',  resolveController:true, resolveUser : false}).
                whenAsync('/about/:id/:guide', { templateUrl: 'views/about/about.html',   param:'true',   resolveController:true, resolveUser : false}).
 
 
