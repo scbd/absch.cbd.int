@@ -12,8 +12,16 @@
             padding: 0;
             font-weight: 450;
         }
-
-        .steps li {
+        .steps-xs{
+            font-size: 12px !important;
+        }
+        .steps-xs li a {
+            color: white;
+            text-decoration: none;
+            padding: 3px 0 3px 45px !important;
+            background: #ccc;
+            position: relative;
+            display: block;
             float: left;
         }
 
@@ -26,6 +34,12 @@
             display: block;
             float: left;
         }
+
+        .steps li {
+            float: left;
+        }
+
+       
 
         .steps li a:after {
             content: " ";
@@ -107,6 +121,15 @@
         .steps li.publish.arrowSelected a:after {
             border-left-color: #5cb85c !important;
         }
+        .btnSelected{
+            background: #666;
+            color: #FFF !important;
+        }
+        .btnSelected:hover {
+            background: #666;
+            color: #FFF !important;
+        }
+       
         .viewForm{
             margin: 20px 0px;
         }
@@ -238,21 +261,32 @@
         </div>
         <!-- small screen view -->
         <div style="margin:0px 20px 20px 0;" class="visible-xs hidden-sm hidden-md hidden-lg">
-            <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-default bg-grey color-white ">
+            <div  class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-sm btn-default " ng-click="previousTab(workflowScope.tab)">
                     <span class="glyphicon glyphicon-backward"></span>
                 </button>
-                <button type="button" class="btn btn-default bg-grey color-white "> Introduction
-                    <span class="caret"></span>
-                </button>
-                <button type="button" class="btn btn-default bg-grey color-white ">
+                        <button  class="btn btn-sm btn-default " ng-class="{'btnSelected': workflowScope.tab=='intro'}">
+                            <span ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Intro</span>
+                        </button>
+                        <button   class="btn btn-sm btn-default "ng-class="{'btnSelected': workflowScope.tab=='edit'}">
+                            <span href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Form</span>
+                        </button>
+                        <button  class="btn btn-sm btn-default" ng-class="{'btnSelected': workflowScope.tab=='review'}">
+                            <span href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Review</span>
+                        </button>
+                        <button  class="btn btn-sm btn-default" ng-class="{'btnSelected': workflowScope.tab=='publish'}">
+                            <span href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</span>
+                        </button>
+                <button type="button" class="btn btn-sm btn-default  " ng-click="nextTab(workflowScope.tab)">
                     <span class="glyphicon glyphicon-forward"> </span>
                 </button>
             </div>
-            <button type="button" class="btn  btn-default bg-draft ">
-                <i class="fa fa-save"></i>
-            </button>
-            <button type="button" class="btn  btn-default bg-published ">Publish</button>
+
+            <button type="button" class="btn btn-sm btn-default bg-draft pull-right" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()" 
+            ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
+                <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
+                <i class="fa fa-save"></i></button>
+         
         </div>
     </script>
 
