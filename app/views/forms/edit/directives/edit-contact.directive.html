@@ -22,6 +22,20 @@
                                         </div>
                                     </div>
 									<section>
+											<br>
+											<div class="row">
+													<div class="col-xs-12">
+														<div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
+															<div class="indent">
+																<div km-form-languages required name="languages" ng-model="document.header.languages"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+										
+												<legend>General Information</legend>
+
+
 										<div class="row" ng-if="isNationalUser">
 											<div class="col-sm-12">
 												<div class="km-control-group" name="government" required caption="Government">
@@ -32,7 +46,7 @@
 										<div class="row">
 											<div class="col-xs-12">
 												<legend name="contactType">Contact Type</legend>
-												<div class="km-control-group" name="notes">
+												<div class="km-control-group" >
 													<label class="radio-inline">
 														<input type="radio" ng-model="document.type" value="organization" name="editionContactType" />Organization</label>
 													<label class="radio-inline">

@@ -39,7 +39,7 @@
                                         <div class="text-center">
                                             <h1>THIS CERTIFICATE HAS BEEN REVOKED</h1>
                                             <p>
-                                                Revoked IRCCs are not editable.
+                                                Revoked or cancelled certificates are not editable.
                                             </p>
                                         </div>
                                     </div>
@@ -47,8 +47,21 @@
                             </div>
                         <form class="editForm" name="editForm" id="editForm" style="margin-top:10px">
                                 <div ng-show="tab=='edit'" km-tab="edit">
-                                    <legend name="formInfo" style="display:none"></legend>                        
+                                    <legend name="formInfo" style="display:none"></legend>    
+                                    
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                                <div class="indent">
+                                                    <div km-form-languages required name="languages" ng-model="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <section ng-show="documentExists">
+                                        
                                         <legend>Amendment intent</legend>
                                         <!--<div class="row">
                                             <div class="col-xs-12">
