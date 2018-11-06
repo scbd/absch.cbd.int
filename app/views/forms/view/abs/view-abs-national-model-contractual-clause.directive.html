@@ -63,14 +63,15 @@
                 </div>
             </div>
             <div ng-show="document.relevantInformation||document.relevantDocuments">
-                <legend>Additional Information</legend>
+                <legend>Attached files, documents, or resources </legend>
     
                 <div ng-show="document.relevantInformation">
+                        <label>Additional information</label>
                     <km-value-ml value="document.relevantInformation" locales="locale" km-pre html></km-value-ml>     
                 </div>
     
                 <div ng-show="document.relevantDocuments">
-                    <label>Other relevant links or attached documents</label>
+                        <label>Links or attached files or documents</label>
                     <div class="km-value">
                         <ul >
                             <li ng-repeat="item in document.relevantDocuments">
