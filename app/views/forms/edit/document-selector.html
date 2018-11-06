@@ -143,9 +143,12 @@
             <div class="modal-footer bg-grey">
                 <div class="row">
                     <div class="col-xs-12">
-                        <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="hideAddContact || addNewContact"   ng-click="addNewContact=!addNewContact;loadContactDirective()">Create Contact</a>
-                        <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-show="addNewContact"   ng-click="addNewContact=!addNewContact">Show Existing Contacts</a>
+
                         <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="addNewContact"   ng-click="saveDocuments()">Select</a>
+
+                        <a translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-hide="hideAddContact || addNewContact"   ng-click="addNewContact=!addNewContact;loadContactDirective()">Create Contact</a>
+                        <a translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-show="addNewContact"   ng-click="addNewContact=!addNewContact">Show Existing Contacts</a>
+                       
                         <a translation-url  type="button" class="btn btn-warning bold" data-dismiss="modal" ng-click="closeDialog()">Close</a>
                     </div>
                 </div>
