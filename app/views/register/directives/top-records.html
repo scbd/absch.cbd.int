@@ -12,18 +12,33 @@
         }
     </style>
     <table class="table table-hover table-striped" style="width:100%;" ng-if="self.records.Items.length > 0">
-        <!-- <thead style="padding-bottom:10px;">
+        <thead style="padding-bottom:10px;">
             <tr>
-                <th class="col-md-5" id="titleHeader">Title</th>
-                <th class="col-md-2" id="updatedOnHeader">Last updated</th>
-                <th class="col-md-2" >Status</th>
-                <th class="col-md-3" >{{records.Items.length}} Record(s)</th>
+                <th> 
+                    <span class="bold" style="padding-left:3px;font-weight: normal;font-size:12px;">Latest records</span> 
+                </th>
+                <th style="font-weight: normal;font-size:12px;"> Title</th>
+                <th style="font-weight: normal;font-size:12px;"> Updated</th>
+                <th style="font-weight: normal;font-size:12px;"> <span class="hidden-xs">Status</span>
+                    <span ng-if="self.records.Count > 0"  class="pull-right" >
+                        <a  class="bold"  style="white-space:nowrap;padding-left:10px;padding-right:10px;font-weight: normal;font-size:12px;" translation-url ng-href="/register/{{schema|urlSchemaShortName}}" ng-if="!self.viewAllUrl">View all</a>
+                        <a  class="bold"  style="white-space:nowrap;padding-left:5px;padding-right:10px;font-weight: normal;font-size:12px;" translation-url ng-href="{{self.viewAllUrl}}" ng-if="self.viewAllUrl">View all</a>
+                    </span>
+                </th>
             </tr>
-        </thead> -->
+        </thead> 
         <tbody ng-repeat="record in self.records.Items | orderBy:'workingDocumentLock.lockedOn'">
-
             <tr id="record{{record.identifier}}">
-                               
+                <td style="width:100px; text-align: right;">
+                    <span style="padding-left:3px;padding-right:15px;">
+                        <span ng-if="!showSchemaName">{{record.type|schemaName}}</span>
+                        <div class="btn-group document_buttons btn-group-xs" ng-show="record.workflowActivityStatus!='pending'">
+                            <a translation-url  title="View" ng-show="record.documentID" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/view"><i class="glyphicon glyphicon-search"></i></a>  
+                            <a translation-url  title="Lock" ng-show="record.workingDocumentLock" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/view"><i class="glyphicon glyphicon-lock"></i></a>                          
+                            <a translation-url  title="Edit" ng-show="!record.workingDocumentLock" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>                        
+                        </div>
+                        </span>
+                    </td>       
                 <td style="width:40%;">                   
                     <span>
                         <a translation-url ng-href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/view">
@@ -64,20 +79,7 @@
                     <span class="label label-warning bg-draft" ng-if="record.workingDocumentCreatedOn && !record.workingDocumentLock">Draft</span>
                     <span class="label label-warning bg-request" ng-if="record.workingDocumentLock">Request</span>                    
                 </td> 
-                <td>
-                    <span ng-if="!showSchemaName">{{record.type|schemaName}}</span>
-                    <div class="btn-group document_buttons btn-group-xs" style="width:100px;" ng-show="record.workflowActivityStatus!='pending'">
-                        <a translation-url  title="View" ng-show="record.documentID" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/view"><i class="glyphicon glyphicon-search"></i></a>  
-                        <a translation-url  title="Lock" ng-show="record.workingDocumentLock" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/view"><i class="glyphicon glyphicon-lock"></i></a>                          
-                        <a translation-url  title="Edit" ng-show="!record.workingDocumentLock" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>                        
-                    </div>
-                </td>
             </tr>
         </tbody>
     </table>
-    <div ng-if="self.records.Count > 0" style="margin:0 48%">
-        <a translation-url class="btn btn-default btn-xs" ng-href="/register/{{schema|urlSchemaShortName}}" ng-if="!self.viewAllUrl">View All</a>
-        <a translation-url class="btn btn-default btn-xs" ng-href="{{self.viewAllUrl}}" ng-if="self.viewAllUrl">View All</a>
-    </div>
-
 </div>
