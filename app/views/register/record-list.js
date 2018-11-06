@@ -1,7 +1,7 @@
-define(['app', 'underscore','components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'js/common', 'js/filters',
+define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'js/common', 'js/filters',
     'services/search-service', 'services/role-service','components/scbd-angularjs-controls/form-control-directives/all-controls',
     'views/register/directives/register-top-menu', 'views/directives/block-region-directive',
-	'views/forms/edit/editFormUtility', 'views/register/directives/record-type-header',
+	'views/forms/edit/editFormUtility', 
     'services/local-storage-service', 'ngDialog', 'services/app-config-service'
 ],
     function (app, _) {
@@ -38,6 +38,11 @@ define(['app', 'underscore','components/scbd-angularjs-services/services/main', 
                     $('#' + key.split('|')[0] + 'Header').append(' <span class="ordericon glyphicon glyphicon-chevron-' + direction + ' text-primary"></span>');
                 };
 
+                if(_.includes(appConfigService.nationalSchemas, $filter('mapSchema')($scope.schema)))
+                $scope.schemaType = 'nationalRecords';
+                else
+                $scope.schemaType = 'referenceRecords';
+       
                 //============================================================
                 //
                 //

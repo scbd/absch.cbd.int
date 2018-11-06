@@ -260,15 +260,12 @@
     <div id="dialogCancel" class="modal fade" data-backdrop="static">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header bg-red">
                         <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">×</button>
-                        <h4>Canceling changes</h4>
+                        <h4>CLOSE AND CANCEL CHANGES</h4>
                     </div>
-                    <div class="modal-body">
-                        <p>If you want to cancel the changes you just made to this draft, you can keep the previous
-                            version of the draft, which will then be available in the list of drafts on the
-                            Management Centre. You or your colleagues can then continue editing
-                            the record in the current, or a later, session.</p>
+                    <div class="modal-body" style="text-align: center;">
+                        <h1>Are you sure you want to close this record without saving? <span class="color-red">Any changes will be lost.</span> </h1> 
                     </div>
                     <div class="modal-footer" style="margin-top:0">
                         <button type="button" ng-click="closeDialog()" class="btn btn-default cancelClose">Cancel</button>
