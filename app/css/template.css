@@ -1063,12 +1063,11 @@ footer .logo {
 }
 
 .blockRegion {
-    position: initial;
-    /*box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);*/
-    
+    position:initial;
+
     /* margin: 1rem 0;
     padding: 1em; */
-    border-radius: .28571429rem;
+    /* border-radius: .28571429rem; */
     /*border: 1px solid rgba(34,36,38,.15);*/
 }
 .dimmer {
@@ -1086,7 +1085,8 @@ footer .logo {
 .dimmer {
     display: none;
     position: absolute;
-    top: -16px!important;
+    top: 0px!important;
+    left: 0px!important;
     padding: 0;
     margin: 0;
     width: 100%;
