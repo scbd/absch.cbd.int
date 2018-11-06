@@ -1074,13 +1074,13 @@ footer .logo {
     border-radius: inherit!important;
 }
 .inverted.dimmer {
-    background-color: rgba(255, 255, 255, .85);
+    /* background-color: rgba(255, 255, 255, .85); */
 }
 .dimmed.dimmable>.animating.dimmer,
 .dimmed.dimmable>.visible.dimmer,
 .active.dimmer {
     display: block;
-    opacity: 0.5;
+    opacity: 0.3;
 }
 .dimmer {
     display: none;
@@ -1095,7 +1095,7 @@ footer .logo {
     text-align: center;
     vertical-align: middle;
     background-color: rgba(0, 0, 0, .85);
-    opacity: 0.5;
+    opacity: 0.3;
     line-height: 1;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
