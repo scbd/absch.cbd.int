@@ -447,6 +447,8 @@ app.filter("schemaShortName", [function() {
     return function(schema) {
 
         if (!schema) return schema;
+        if (schema.toLowerCase() == "absprocedure") return "PRO";
+        if (schema.toLowerCase() == "absnationalmodelcontractualclause") return "NMCC;
         if (schema.toLowerCase() == "focalpoint") return "NFP";
         if (schema.toLowerCase() == "authority") return "CNA";
         if (schema.toLowerCase() == "contact") return "CON";
@@ -476,6 +478,8 @@ app.filter("schemaName", [function() {
     return function(schema) {
 
         if (!schema) return schema;
+        if (schema.toLowerCase() == "absprocedure") return "ABS Procedure";
+        if (schema.toLowerCase() == "absnationalmodelcontractualclause") return "National Model Contractual Clause";
         if (schema.toLowerCase() == "focalpoint") return "ABS National Focal Point";
         if (schema.toLowerCase() == "authority") return "Competent National Authority";
         if (schema.toLowerCase() == "contact") return "Contact";
