@@ -229,8 +229,7 @@
             
              <div class="row pull-left">
                 <div class="col-xs-1">
-                        <button type="button" class="btn btn-default bg-grey color-white " 
-                        ng-disabled="!prevTab" ng-click="changeTab('prev')" ng-class="{'active-button':prevTab}">
+                        <button type="button" class="btn btn-default bg-grey color-white " ng-click="previousTab(workflowScope.tab)" ng-disabled="disablePreviousBtn">
                                 <span class="glyphicon glyphicon-backward"></span>
                         </button>
                  </div>
@@ -251,8 +250,7 @@
                     </ul>
                 </div>
                <div class="col-xs-1">
-                    <button type="button" class="btn btn-default bg-grey color-white " 
-                    ng-disabled="!nextTab" ng-click="changeTab('next')"  ng-class="{'active-button':nextTab}">
+                    <button type="button" class="btn btn-default bg-grey color-white " ng-click="goNextTab(workflowScope.tab)"    ng-disabled="disableNextBtn" >
                         <span class="glyphicon glyphicon-forward"> </span>
                     </button>
                 </div>
@@ -262,7 +260,7 @@
         <!-- small screen view -->
         <div style="margin:0px 20px 20px 0;" class="visible-xs hidden-sm hidden-md hidden-lg">
             <div  class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-sm btn-default " ng-click="previousTab(workflowScope.tab)">
+                <button type="button" class="btn btn-sm btn-default " ng-click="previousTab(workflowScope.tab)" ng-disabled="disablePreviousBtn">
                     <span class="glyphicon glyphicon-backward"></span>
                 </button>
                         <button  class="btn btn-sm btn-default " ng-class="{'btnSelected': workflowScope.tab=='intro'}">
@@ -277,7 +275,7 @@
                         <button  class="btn btn-sm btn-default" ng-class="{'btnSelected': workflowScope.tab=='publish'}">
                             <span href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</span>
                         </button>
-                <button type="button" class="btn btn-sm btn-default  " ng-click="nextTab(workflowScope.tab)">
+                <button type="button" class="btn btn-sm btn-default  " ng-click="goNextTab(workflowScope.tab)"  ng-disabled="disableNextBtn">
                     <span class="glyphicon glyphicon-forward"> </span>
                 </button>
             </div>
