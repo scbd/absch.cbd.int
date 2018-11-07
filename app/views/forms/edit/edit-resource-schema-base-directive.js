@@ -1,4 +1,4 @@
-define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-directive.html',
+define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-directive.html','services/role-service',
 './organization-selector'
 ], function (app, _, template) {
 	app.directive('convertToNumber', function() {
@@ -20,8 +20,27 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 			restrict: 'EAC',
 			template: template ,
 			replace: true,
-			controller: ["$scope", "$http", "$filter","IStorage", function ($scope, $http, $filter, storage)
+			controller: ["$rootScope", "$scope", "$http", "$filter","IStorage", "roleService", function ($rootScope, $scope, $http, $filter, storage, roleService)
 			{
+
+				$scope.user = $rootScope.user;
+				if ($scope.user.isAuthenticated) {
+					$scope.roles = {
+						is                       : roleService.is.bind(roleService),
+						isAbsPublishingAuthority : roleService.isAbsPublishingAuthority(),
+						isAbsNationalFocalPoint  : roleService.isAbsNationalFocalPoint(),
+						isAbsAdministrator       : roleService.isAbsAdministrator(),
+						isAdministrator          : roleService.isAdministrator(),
+						isAbsNationalAuthorizedUser : roleService.isAbsNationalAuthorizedUser(),
+						isUser                      : roleService.isUser()
+					};
+	
+					if($scope.user.government)
+						$scope.userCountry = {identifier:$scope.user.government };
+	
+				}
+
+				$scope.displayMCCWarning = false;
 
 				var changeParentFor = ['F7D357FEC3884D388FD49CECBCFF5083', '3A02804CB9AB43F2BADF23B6BC0F5661'];
 				var newParent = '5427EB8F-5532-4AE2-88EE-5B9619917480';
@@ -143,7 +162,8 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 			               _.contains(purposes, '05FA6F66-F942-4713-BB4C-DA032C111188') || // Providing technical guidance
 			               _.contains(purposes, '9F48AEA0-EE28-4B6F-AB91-E0E088A8C6B7') || // Raising awareness
 			               _.contains(purposes, '5831C357-95CA-4F09-963B-DF9E8AFD8C88');   // Training/learning
-			    };
+				};
+		
 
                 //============================================================
 				//
@@ -186,6 +206,7 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 						$scope.shortHeading = "MCC";
 						$scope.isMcc        = true;
 						absSubjectsToSkip   = mccToSkip;
+						
 					}
 					else if(newValue=="resource"){
 						$scope.heading      = "Virtual Library Record";
@@ -200,6 +221,17 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 						absSubjectsToSkip   = cppToSkip;
 					}
 				});
+
+				$scope.$watch('document.resourceTypes',function(newValue) {
+					
+				
+					if (newValue && JSON.stringify(newValue).indexOf('48D40B9E207B43948D95A0BA8F0D710F') > 0)
+						
+						$scope.displayMCCWarning = true;
+					else
+						$scope.displayMCCWarning = false;
+				});
+
 
 				//============================================================
 				//
