@@ -80,7 +80,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
 
                 //====================            
-                $scope.nextTab = function(currentTab)
+                $scope.goNextTab = function(currentTab)
                 {
                     switch(currentTab){
                         case "intro":   $scope.switchTab("edit");
