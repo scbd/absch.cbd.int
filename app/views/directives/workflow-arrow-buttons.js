@@ -80,7 +80,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
 
                 //====================            
-                $scope.nextTab = function(currentTab)
+                $scope.goNextTab = function(currentTab)
                 {
                     switch(currentTab){
                         case "intro":   $scope.switchTab("edit");
@@ -89,7 +89,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                             break;
                         case "review":   $scope.switchTab("publish");
                             break;
-                        case "publish":  
+                        case "publish":  $scope.disableNextBtn = true;
                             break;
                     }
                 }
@@ -97,7 +97,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 $scope.previousTab = function(currentTab)
                 {
                     switch(currentTab){
-                        case "intro":   
+                        case "intro":   $scope.disablePreviousBtn = true;
                             break;
                         case "edit":   $scope.switchTab("intro");
                             break;
@@ -106,6 +106,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         case "publish":  $scope.switchTab("review");
                             break;
                     }
+                  
                 }
 
                 ///////////////////////////////
@@ -276,8 +277,10 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 						var validationReport = validation;
 						//Has validation errors ?
 						if(validationReport && validationReport.errors && validationReport.errors.length>0) {
+                            
+                            $scope.switchTab("review");
                             // $scope.$emit("documentInvalid", validationReport);
-                            $scope.tab = "review";
+                           // $scope.tab = "review";
                             $scope.validationReport = validationReport;
                         }
                         else
@@ -542,6 +545,10 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 };
 
                 $scope.switchTab = function(tab){
+                    
+                    $scope.disablePreviousBtn = false;
+                    $scope.disableNextBtn = false;
+                    
                     if(tab==$scope.tab)
                         return;
 
@@ -550,11 +557,17 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     if(tab == "review" || tab == "edit" || tab == "intro" || tab == "publish")
                         $scope.updateStep(tab);
                     
-                    if(tab == "intro")
+                    if(tab == "intro"){
                         loadArticle(document_type);
+                        $scope.disablePreviousBtn = true;
+                    }
 
                     if(tab == "review" || tab == "publish")
                         $scope.review();
+
+                    if(tab == "publish")
+                        $scope.disableNextBtn = true;
+
                 }
 
                 $scope.updateStep = function(tab){
