@@ -14,75 +14,10 @@ p.list-title{ margin-bottom:0;padding-bottom:0;}
                 <div class="row">
                   <div class="col-sm-3 col-xs-12" style="background-color: #f9f9f9;">
                     <br>
-                    <input style="width:100%;border-radius: 2px; padding: 12px 20px;border:solid 1px #ddd;" ng-model="searchText" placeholder="Search 'About the ABSCH' "> 
+                    <input style="width:100%;border-radius: 2px; padding: 12px 20px;border:solid 1px #ddd;" ng-model="searchText" placeholder="Search this page "> 
                     <br>
                     <br>
-                    <p class="list-title"><strong>About the ABS Clearing-House</strong></p>
-                    <ul>
-                        <li><a href="#" ng-click="loadArticle('Introduction')">Introduction</a></li>
-                        <li><a href="#" ng-click="loadArticle('whatisit')">What is it?</a></li>
-                        <li><a href="#" ng-click="loadArticle('whatitdoes')">What does it do?</a></li>
-                        <li><a href="#" ng-click="loadArticle('whoisitfor')">Who is it for?</a></li>
-                        <li><a href="#" ng-click="loadFaqs('about-faq')">FAQs</a></li>
-                    </ul>
-                        
-                    <p class="list-title"><strong>Getting started</strong></p>
-                    <ul>
-                      <li><a href="#" ng-click="loadArticle('gettingStartedGovernments')">For Governments </a></li> 
-                      <li><a href="#" ng-click="loadArticle('gettingStartedOthers')">For other stakeholders </a> </li>
-                    </ul>
-
-                    <p class="list-title"><strong>Finding information</strong></p>
-                    <ul>
-                      <li><a href="#" ng-click="loadArticle('infoTypes')">Types of information available </a></li> 
-                      <li><a href="#" ng-click="loadArticle('search')">Search </a> </li>
-                      <li><a href="#" ng-click="loadArticle('countryProfiles')">Country profiles </a> </li>
-                      <li><a href="#" ng-click="loadArticle('emailAlerts')">Email alerts</a> </li>
-                      <li><a href="#" ng-click="loadFaqs('search-faq')">FAQs</a> </li>
-                    </ul>
-
-                    <p class="list-title"><strong>Submitting information</strong></p>
-                    <ul>
-                      <li><a href="#" ng-click="loadArticle('obligations')">Information-sharing obligations</a></li> 
-                      <li><a href="#" ng-click="loadArticle('interimReport')">Interim national report</a> </li>
-                      <li><a href="#" ng-click="loadArticle('roles')">Types of users </a> </li>
-                      <li><a href="#" ng-click="loadArticle('accounts')">CBD Account </a> </li>
-                      <li><a href="#" ng-click="loadArticle('offline')">Submitting offline</a> </li>
-                      <li><a href="#" ng-click="loadFaqs('submit-faq')">FAQs</a> </li>
-                    </ul>
-
-                    <p class="list-title"><strong>Monitoring utilization</strong></p>
-                    <ul>
-                      <li><a href="#" ng-click="loadArticle('monitoring')">Overview</a></li> 
-                      <li><a href="#" ng-click="loadArticle('monitoringConcepts')">Key entities and concepts </a> </li>
-                      <li><a href="#" ng-click="loadArticle('monitoringFlow')">Flow of information </a> </li>
-                      <li><a href="#" ng-click="loadFaqs('monitoring-faq')">FAQs</a> </li>
-                    </ul>
-
-                    <p class="list-title"><strong>Interoperability</strong></p>
-                    <ul>
-                      <li><a href="#" ng-click="loadArticle('api')"> Th application programming interface (API)</a></li> 
-                      <li><a href="#" ng-click="loadFaqs('api-faq')">FAQs</a> </li>
-                    </ul>
-
-                    <p class="list-title"><strong>Need help?</strong></p>
-                    <ul>
-                         <li><a href="#" ng-click="loadArticle('training')"> Training </a></li> 
-                         <li><a href="#" ng-click="loadArticle('guides')"> Step-by-step guides </a> </li>
-                         <!-- <li><a href="#" ng-click="loadArticle('elearing')"> E-learning </a> </li> -->
-                         <li><a href="#" ng-click="loadArticle('contactUs')"> Contact us </a> </li>
-                    </ul>
-
-                    <p class="list-title"><strong>More information</strong></p>
-                    <ul>
-                        <li><a href="#" ng-click="loadFaqs()">Frequently Asked Questions (FAQs)</a></li>
-                        <li><a href="https://www.cbd.int/abs/text/" target="_new">Text of the Protocol</a></li>
-                        <li><a href="#" ng-click="loadArticle('guides')"> Step-by-step guides </a> </li>
-                        <li><a href="#" ng-click="loadArticle('offline')">Offline common formats</a></li>
-                        <li><a href="https://absch.cbd.int/forums"  >ABS Forums</a></li>
-                        <li><a href="#" ng-click="show='feedback'" >Send us your feedback</a></li>
-                    </ul>
-
+                    <div ng-bind-html="links.content | lstring:locale | toTrusted"></div>
                   </div>
 
                   <div class="col-sm-9 col-xs-12" id="articles">
@@ -98,7 +33,7 @@ p.list-title{ margin-bottom:0;padding-bottom:0;}
                         </div>
 
                         <div  id="guides-content" ng-if="show=='guides'">
-                            <article-guides type="{{guide}}" locale="{{locale}}"  title="Step-by-step guide" show-faqs="true"></article-guides>
+                            <article-guides type="{{type}}" locale="{{locale}}"  title="Step-by-step guide" show-faqs="true"></article-guides>
                         </div>
 
                         <div  id="search-content" ng-if="show=='search'">
