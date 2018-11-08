@@ -100,7 +100,8 @@
                 <div  class="pull-right btn"  ng-if="tabs[currentTab].pageCount>0" style="border:1px solid #eee" id="exportRecords" 
                     export export-query="getExportQuery()" query-type="getRecordType()" help-title="Export result from this tab to excel/csv" 
                     open-dialog="showDownloadDialog"></div>
-                 <div class="pull-right"  ng-if="tabs[currentTab].pageCount>0" pagination current-page="tabs[currentTab].currentPage" 
+                 
+                <div class="text-center" ng-if="tabs[currentTab].pageCount>0" pagination current-page="tabs[currentTab].currentPage" 
                      page-count="tabs[currentTab].pageCount" on-page-change="onPageChange(page)"></div> 
                 
                 <div class="tab-pane bg-white" ng-class="{'active':currentTab==='nationalRecords'}" ng-if="currentTab==='nationalRecords'">                     
@@ -141,6 +142,9 @@
                         </div>
                     </div>
                 </div>
+                <div  class="text-center" ng-if="tabs[currentTab].pageCount>0" pagination current-page="tabs[currentTab].currentPage" 
+                    page-count="tabs[currentTab].pageCount" on-page-change="onPageChange(page)"></div> 
+               
             </div>
         </div>
     </div>
