@@ -72,7 +72,7 @@ define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
 
                whenAsync('/about/',           { templateUrl: 'views/about/about.html',   label:'About the ABSCH', resolveController:true, resolveUser : false}).
                whenAsync('/about/:id',        { templateUrl: 'views/about/about.html',   label:'aboutCode',       param:'true',  resolveController:true, resolveUser : false}).
-               whenAsync('/about/:id/:guide', { templateUrl: 'views/about/about.html',   param:'true',   resolveController:true, resolveUser : false}).
+               whenAsync('/about/:id/:type', { templateUrl: 'views/about/about.html',   param:'true',   resolveController:true, resolveUser : false}).
                
                whenAsync('/register/admin/ircc-counts',                { templateUrl: 'views/register/admin/ircc-counts.html',      label:'IRCC Counts',  param:'true', resolveController: true,resolve : { securized : commonRoutes.securize(['Administrator']) }}).
     

@@ -17,6 +17,8 @@ define(['app','underscore',
       $scope.searchText ="";
       $scope.showSearch = true;
 
+      loadLinks();
+
       var breadcrumb = {    
         label : 'About ABSCH',
         originalPath : "about",
@@ -25,17 +27,18 @@ define(['app','underscore',
       }
 
       $scope.id = $route.current.params.id;
-      $scope.guide = $route.current.params.guide;
+      $scope.type = $route.current.params.type;
+      $scope.faqType = $route.current.params.faqType;
 
-      if($scope.id == "guides" && $scope.guide){
+      if($scope.id == "guides" && $scope.type){
         $scope.show = "guides";
         breadcrumbs.options = {'aboutCode': "Step-by-step guides" };
       }
       else if($scope.id == "faqs"){
-        $scope.faqs = "ABSCH-About, faqs"; 
-        $scope.showSearch = true;
-        $scope.show = "faqs";
-        breadcrumbs.options = {'aboutCode': "FAQs" };
+        //$scope.faqs = "ABSCH-About, faqs"; 
+        //$scope.showSearch = true;
+        //$scope.show = "faqs";
+        loadFaqs($scope.type);
       }
       else if($scope.id == "feedback"){
         $scope.show = "feedback";
@@ -47,6 +50,14 @@ define(['app','underscore',
         loadArticles(["ABSCH-About", "Introduction"]);
       }
      
+       //---------------------------------------------------------------------
+       function loadLinks(){
+      
+        articlesService.getArticle("5be4b1828a5b94000193d1e9").then(function(data){
+          $scope.links = data;
+        })
+      }
+
     
       //---------------------------------------------------------------------
       function loadArticles(tags){
@@ -84,7 +95,7 @@ define(['app','underscore',
       }
 
       //---------------------------------------------------------------------
-      $scope.loadFaqs = function(faqType){
+      function loadFaqs(faqType){
         $scope.faqs = "ABSCH-About, faqs"; 
         $scope.showSearch = true;
 
@@ -93,7 +104,7 @@ define(['app','underscore',
           $scope.showSearch = false;
         }
         $scope.show = "faqs";
-
+        breadcrumbs.options = {'aboutCode': "FAQs" };
       }
 
       //---------------------------------------------------------------------
