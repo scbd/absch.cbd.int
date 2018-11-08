@@ -1,11 +1,6 @@
 define(['text!./party-status.html',
   'app',
-  'lodash',
-  './odometer/odometer',
-  'css!./odometer/odometer',
-  'css!./party-status',
-
-], function(template, app, _, Odometer) {
+], function(template, app, _) {
   'use strict';
 
   app.directive('partyStatus', function() {
@@ -18,34 +13,7 @@ define(['text!./party-status.html',
       link: function($scope, $element, $attr) {
 
            $element.find("#od").attr('id', $attr.id);
-          // var od = new Odometer({
-          //   el: $element.find("#" + $attr.id)[0],
-          //   value: 300, // default value
-          //   format: 'd', // default value
-          //   duration: 2000,
-          // });
-
-
-
-
-          // var clearWatch = $scope.$watch('num', function() {
-
-          //   if ($scope.num) {
-
-          //     clearWatch();
-          //     // if ($scope.num < 200 && $scope.num > 9)
-          //     //   $scope.num = Number('1' + $scope.num);
-          //     // else if ($scope.num < 10)
-          //     //   $scope.num = Number('10' + $scope.num);
-
-          //     if ($attr.delay)
-          //       setTimeout(function() {
-          //         od.update($scope.num);
-          //       }, $attr.delay);
-          //     else
-          //       od.update($scope.num);
-          //   }
-          // });
+          
         } //link
     };
   });
