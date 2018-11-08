@@ -64,6 +64,8 @@ define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
                whenAsync('/about/getting-started',       {redirectTo  : '/about/gettingStartedGovernments'}).
                whenAsync('/about/developer',             {redirectTo  : '/about/api'}).
                whenAsync('/about/videos',            {redirectTo  : '/help/videos'}).
+               whenAsync('/about/commonformats',               {redirectTo: '/about/offline'}).
+               whenAsync('/about/common-formats',              {redirectTo: '/about/offline'}).
 
                whenAsync('/help/videos/:videoId?',   {templateUrl: 'views/about/videos.html', resolveController: true, resolveUser: false, label:'ABSCH Videos'}).
                whenAsync('/help/common-formats/:commonFormat?',     {templateUrl: 'views/about/common-formats.html', resolveController: true, resolveUser: true, label:'Common formats'}).
