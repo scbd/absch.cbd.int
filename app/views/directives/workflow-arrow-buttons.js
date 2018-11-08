@@ -89,7 +89,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                             break;
                         case "review":   $scope.switchTab("publish");
                             break;
-                        case "publish":  $scope.disableNextBtn = true;
+                        case "publish": 
                             break;
                     }
                 }
@@ -97,7 +97,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 $scope.previousTab = function(currentTab)
                 {
                     switch(currentTab){
-                        case "intro":   $scope.disablePreviousBtn = true;
+                        case "intro":   
                             break;
                         case "edit":   $scope.switchTab("intro");
                             break;
