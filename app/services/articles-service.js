@@ -1,5 +1,4 @@
-define(['app', 'underscore', './app-config-service',
-'components/scbd-angularjs-services/services/locale'], function(app, _) {
+define(['app', 'underscore', './app-config-service'], function(app, _) {
 
     app.factory('articlesService', ['$http',
         function($http) {
