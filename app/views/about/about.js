@@ -119,9 +119,7 @@ define(['app','underscore',
           $scope.show = "search";
         }
       });
-
      
-   
     }
   ]);
 
