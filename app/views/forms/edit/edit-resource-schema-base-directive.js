@@ -1,4 +1,4 @@
-define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-directive.html',
+define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-directive.html','services/role-service',
 './organization-selector'
 ], function (app, _, template) {
 	app.directive('convertToNumber', function() {
@@ -20,9 +20,18 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 			restrict: 'EAC',
 			template: template ,
 			replace: true,
-			controller: ["$scope", "$http", "$filter","IStorage", function ($scope, $http, $filter, storage)
+			controller: ["$rootScope", "$scope", "$http", "$filter","IStorage", "roleService", function ($rootScope, $scope, $http, $filter, storage, roleService)
 			{
 
+				$scope.user = $rootScope.user;
+				$scope.isNationalUser = false;
+
+				if ($scope.user.isAuthenticated) {
+					$scope.isNationalUser =  roleService.isAbsPublishingAuthority() || roleService.isAbsNationalAuthorizedUser();
+				}
+
+				$scope.displayMCCWarning = false;
+				
 				var changeParentFor = ['F7D357FEC3884D388FD49CECBCFF5083', '3A02804CB9AB43F2BADF23B6BC0F5661'];
 				var newParent = '5427EB8F-5532-4AE2-88EE-5B9619917480';
 
@@ -200,6 +209,13 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 						absSubjectsToSkip   = cppToSkip;
 					}
 				});
+				$scope.$watch('document.resourceTypes',function(newValue) {
+					if (newValue && _.indexOf((_.map(newValue, "identifier")), '48D40B9E207B43948D95A0BA8F0D710F') >= 0)
+						$scope.displayMCCWarning = true;
+					else
+						$scope.displayMCCWarning = false;
+				});
+
 
 				//============================================================
 				//
