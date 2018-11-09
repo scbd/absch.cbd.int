@@ -48,6 +48,11 @@
 												<div km-select multiple name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"
 												 show-description="true"></div>
 											</div>
+											<div ng-if="(roles.isAbsPublishingAuthority || roles.isAbsNationalAuthorizedUser) && displayMCCWarning" class="alert alert-info">
+												<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4><strong>Please note:</strong> If this module contractual clause has been developed by your country, then please submit it under the national record format <a href="/register/NMCC/new" class="color-blue" >'National Model Contractual Clause'</a> so that will be clearly visible as a national record in the search and country profile. </h4>
+												<a href="/register/NMCC/new" class="bold">Click here</a> to open the national record submission form.
+											</div>
 										</div>
 										<div class="col-xs-6" ng-show="isOtherSelected(document.resourceTypes)">
 											<div class="km-control-group" required name="resourceTypeName" caption="Name of other type of resource">
