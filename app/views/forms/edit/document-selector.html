@@ -74,7 +74,7 @@
                 <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new" ng-hide="addNewContact">
                         <div class="row" style="margin:0;padding:0;" ng-show="!isLoading" >
                                 
-                            <div ng-if="hideAddContact" ng-repeat="doc in docs = (rawDocuments.docs | filter:keyword)">
+                            <div ng-if="hideAddContact && !listView" ng-repeat="doc in docs = (rawDocuments.docs | filter:keyword)">
                                     <div class="col-xs-1 text-right">
                                         <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" style="width: 16px; height: 16px;" />
                                         <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" style="width: 16px; height: 16px;" />
@@ -85,7 +85,7 @@
                                 </div>
                             
                             
-                            <table ng-if="!hideAddContact" class="table table-condensed table-striped" style="width:100%;" >
+                            <table ng-if="!hideAddContact || listView" class="table table-condensed table-striped" style="width:100%;" >
                                 <thead>
                                     <tr>
                                         <th></th>
