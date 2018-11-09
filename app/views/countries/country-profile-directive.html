@@ -22,15 +22,15 @@
                 <div ng-repeat="doc in schema.docs|orderBy:title_t">
                     <result-grouped-national-record doc='doc'></result-grouped-national-record>
                 </div>
-                <div class="btn-group" ng-if="schema.numFound>  schema.docs.length">
-                    <button class="btn btn-default" ng-click="loadRecords(key, schema,10)" ng-disabled="schema.isLoading">
-                        <i class="fa fa-arrow-down" aria-hidden="true"></i> Load next 10 records 
+                <div class="btn-group" ng-if="schema.numFound >  schema.docs.length">
+                    <button class="btn btn-default bold" style="font-size: 10px;text-transform: uppercase;"  ng-click="loadRecords(key, schema,10)" ng-disabled="schema.isLoading">
+                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show next 10 records 
                     </button>
-                    <button ng-if="schema.isLoading" class="btn btn-default" ng-disabled="true"  >
+                    <button ng-if="schema.isLoading" class="btn btn-default" ng-disabled="true" style="font-size: 10px;text-transform: uppercase;"   >
                         <i class="fa fa-spin fa-spinner pull-left" ></i> loading...
                     </button>
-                    <button class="btn btn-default" ng-click="loadRecords(key, schema)"    ng-disabled="schema.isLoading"  >
-                        <i class="fa fa-arrow-down" aria-hidden="true"></i> Load remaining records
+                    <button class="btn btn-default bold" ng-click="loadRecords(key, schema)" style="font-size: 10px;text-transform: uppercase;"  ng-disabled="schema.isLoading"  >
+                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show all {{schema.numFound}} records
                     </button>
                 </div>
             </div>
