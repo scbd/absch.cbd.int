@@ -22,4 +22,4 @@ app/views/mockups
 i18n
 TestCases
 package-lock.json
-package-lock.json
+yarn.lock
