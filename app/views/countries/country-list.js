@@ -156,15 +156,16 @@
             //*************************************************************************************************************************************
             $scope.$watch('list', function () {
                     
-                    if(!$scope.list || !$scope.headerCount.length)
+                    if(!$scope.list || !($scope.headerCount||{}).length)
                         return;
 
                     var total = {};
                     angular.forEach($scope.list, function(country){
-
-                        _.each($scope.headerCount,function(counter){
-                            total[counter.schema] = (total[counter.schema]||0) + country.schemas[counter.schema].count || 0;
-                        });
+                        if(country.schemas){
+                            _.each($scope.headerCount,function(counter){
+                                total[counter.schema] = (total[counter.schema]||0) + (country.schemas[counter.schema].count||0);
+                            });
+                        }
 
                     });
                     _.each($scope.headerCount,function(counter){

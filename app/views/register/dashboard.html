@@ -238,7 +238,7 @@
                                 </td>
                                 <td  style="width:7%;" class="text-center"><a translation-url ng-href="/register/CON/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('contact','publish')===0}">{{facets('contact','publish')}}</a>  </td>
 
-                                <td   style="width:7%;" class="text-center"><a translation-url ng-href="/register/CON/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets('contact','draft') - facets('contact','request')===0}">{{facets('contact','draft') - facets('contact','request')}}</a> </td>
+                                <td   style="width:7%;" class="text-center"><a translation-url ng-href="/register/CON/status/drafts" class="label label-default" ng-class="{'bg-litegrey': Math.max(0, facets('contact','draft') - facets('contact','request'))===0}">{{Math.max(0, facets('contact','draft') - facets('contact','request'))}}</a> </td>
 
                                 <td  style="width:7%;" class="text-center"><a translation-url ng-href="/register/CON/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('contact','request')===0}">{{facets('contact','request')}}</a></div>
                                 </td>
@@ -279,11 +279,11 @@
                                      <a translation-url href="#" ng-click="gotoList($event,schema)" class="color-darkgrey" style="font-weight:500;">
                                             {{schema|schemaName}} ({{schema|urlSchemaShortName}})</a>
                                 </td>
-                                <td style="width:7%;" class="text-center"><a translation-url ng-href="/register/CON/status/published" class="label label-success" ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>  </td>
+                                <td style="width:7%;" class="text-center"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/published" class="label label-success" ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>  </td>
 
-                                <td style="width:7%;" class="text-center"><a translation-url ng-href="/register/CON/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets(schema,'draft') - facets(schema,'request')===0}">{{facets(schema,'draft') - facets(schema,'request')}}</a> </td>
+                                <td style="width:7%;" class="text-center"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/drafts" class="label label-default" ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}">{{Math.max(0, facets(schema,'draft') - facets(schema,'request'))}}</a> </td>
 
-                                <td style="width:7%;" class="text-center"><a translation-url ng-href="/register/CON/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a></div>
+                                <td style="width:7%;" class="text-center"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a></div>
                                 </td>
                             </tr>
                         </tbody>
@@ -324,11 +324,11 @@
                                      <a translation-url href="#" ng-click="gotoList($event,schema)" class="color-darkgrey" style="font-weight:500;">
                                             {{schema|schemaName}} ({{schema|urlSchemaShortName}})</a>
                                 </td>
-                                <td style="width:7%;" class="text-center"><a translation-url ng-href="/register/CON/status/published" class="label label-success" ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>  </td>
+                                <td style="width:7%;" class="text-center"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/published" class="label label-success" ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>  </td>
 
-                                <td style="width:7%;" class="text-center"><a translation-url ng-href="/register/CON/status/drafts" class="label label-default" ng-class="{'bg-litegrey': facets(schema,'draft') - facets(schema,'request')===0}">{{facets(schema,'draft') - facets(schema,'request')}}</a> </td>
+                                <td style="width:7%;" class="text-center"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/drafts" class="label label-default" ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}">{{Math.max(0, facets(schema,'draft') - facets(schema,'request'))}}</a> </td>
 
-                                <td style="width:7%;" class="text-center"><a translation-url ng-href="/register/CON/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a></div>
+                                <td style="width:7%;" class="text-center"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a></div>
                                 </td>
                             </tr>
                         </tbody>
