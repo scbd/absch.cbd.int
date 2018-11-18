@@ -73,7 +73,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                             schemaTemplate[key] = { title : schema.title, shortCode : schema.shortCode, index: index++, docs:[], numFound:0};
                         }
                     }).value();
-
+                    $scope.recordCount = [{count:0},{count:0},{count:0}];
                     $scope.skipResults          = $attrs.skipResults;
                     $scope.skipDateFilter       = $attrs.skipDateFilter;
                     $scope.skipSaveFilter       = $attrs.skipSaveFilter;
@@ -1102,6 +1102,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                                 nationalCurrentPage = 0;
                                 referenceCurrentPage = 0;
                                 scbdCurrentPage = 0;
+                                
+                                $scope.tabs['nationalRecords'].currentPage = 0;
+                                $scope.tabs['referenceRecords'].currentPage = 0;
+                                $scope.tabs['scbdRecords'].currentPage = 0;
                                 load();
                                 loadTabFacets();
                                 $scope.refresh = false;
