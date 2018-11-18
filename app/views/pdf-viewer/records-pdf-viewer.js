@@ -49,7 +49,7 @@
                     pagemode: "thumbs",
                     page: 1
                 },
-                forcePDFJS: false,
+                forcePDFJS: true,
                 PDFJS_URL: "/app/views/pdf-viewer/pdfjs/web/viewer.html"
             };
             pdfObject.embed($scope.pdf.src, '#viewPdf', options)
@@ -65,7 +65,7 @@
         
         function getPdfSrc(pdfLocale){
             $scope.pdf.fileName = uniqueId + '-' + pdfLocale + '.pdf';
-            var src = '/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?documentID={{documentId}}&revision={{revision}}&schema={{schema}}';
+            var src = 'https://api-direct.cbd.int/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?documentID={{documentId}}&revision={{revision}}&schema={{schema}}';
             return src .replace("{{realm}}", realm.value)
                                  .replace("{{locale}}", pdfLocale)
                                  .replace("{{type}}", $route.current.params.type)
