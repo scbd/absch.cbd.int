@@ -6,6 +6,9 @@ define(['app',
                 restrict: 'EAC',
                 replace: true,
                 template: template,
+                scope   : {
+                    tags: '@?'
+                },
                 controller: ['$scope', '$http','$q', '$filter', '$location', 'articlesService',
                     function($scope, $http, $q, $filter, $location, articlesService) {
                     
@@ -18,7 +21,7 @@ define(['app',
                         //---------------------------------------------------------------------
                         function loadArticles(){
                             var ag = [];
-                            ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent("ABSCH-Announcement")}]}});
+                            ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent($scope.tags||"ABSCH-Announcement")}]}});
                             ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "summary":1}});
                             
                             var qs = {
