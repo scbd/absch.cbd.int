@@ -1,17 +1,21 @@
 define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost||''),
-		'lodash'], function (app, realmConfigurations, _) { 'use strict';
+		'lodash', 'json!components/scbd-angularjs-services/filters/schema-name.json'], function (app, realmConfigurations, _, scbdSchemas) { 'use strict';
     
 	var realmConfig = _.findWhere(realmConfigurations,{ host : window.location.host}) || _.head(realmConfigurations);
-
-	var nationalSchemas  = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='national'  ? key : undefined; }));
-	var referenceSchemas = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='reference' ? key : undefined; }));
-	var scbdSchemas      = [ "meeting", "notification", "pressRelease", "statement", "news", "new" ];
     
-    console.log("Realm:", (realmConfig||{}).realm || 'NOT_FOUND');
-
     if(!realmConfig)
         throw new Error("Unknow realm for host: "+window.location.host + ' clearingHouseHost: ' + window.clearingHouseHost);
 
+	var nationalSchemas  = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='national'  ? key : undefined; }));
+	var referenceSchemas = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='reference' ? key : undefined; }));
+    var scbdSchemas      = _.compact(_.map(scbdSchemas, function(schema, key){ 
+        realmConfig.schemas[key] = schema;
+        return key; 
+    }));
+    
+    console.log("Realm:", (realmConfig||{}).realm || 'NOT_FOUND');
+
+    
     app.provider("realm", function() {
         
         var realmProvider = this;

@@ -1,6 +1,6 @@
 define(['app','underscore',
-  '/forms/view/view-articles',
-  '/components/scbd-angularjs-services/services/locale',
+  './view-articles',
+  'components/scbd-angularjs-services/services/locale',
   'services/articles-service',
   'ng-breadcrumbs',
 ], function(app, _) {
