@@ -66,7 +66,7 @@ define(['app','text!views/directives/home-country-dashboard-directive.html', 'lo
                                 
                                 $timeout(function(){
                                     $element.find('[data-toggle="tooltip"]').tooltip();
-                                },100);
+                                },500);
                             })
                             .finally(function() {
                                 $scope.loadingNationalFacets = false;
