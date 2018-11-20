@@ -34,7 +34,11 @@
 
 		<div ng-show="document.scientificNameSynonyms">
 				<label>Scientific name synonyms(s)</label>
-				<div class="km-value" ng-bind="document.scientificNameSynonyms"> </div>
+				<div class="km-value"> 
+					<ul class="list">
+						<li ng-repeat="name in document.scientificNameSynonyms" ng-bind="name"></li>
+					</ul>
+				</div>
 		</div>
 
 		<div ng-show="document.commonNames">
@@ -83,22 +87,22 @@
 		
 		<div ng-show="document.plantCultivar">
 				<label>Centre(s) of origin</label>
-				<km-value-ml value="document.plantCultivar" locales="locale"></km-value-ml>
+				<km-value-ml value="document.plantCultivar" locales="locale" html></km-value-ml>
 		</div>
 
 		<div ng-show="document.originCentre">
 				<label>Centre(s) of genetic diversity</label>
-				<km-value-ml value="document.originCentre" locales="locale"></km-value-ml>
+				<km-value-ml value="document.originCentre" locales="locale" html></km-value-ml>
 		</div>
 
 		<div ng-show="document.habitat">
 				<label>Habitat range</label>
-				<km-value-ml value="document.habitat" locales="locale"></km-value-ml>
+				<km-value-ml value="document.habitat" locales="locale" html></km-value-ml>
 		</div>
 
 		<div ng-show="document.geographicalDistribution">
 				<label>Geographical distribution</label>
-				<km-value-ml value="document.geographicalDistribution" locales="locale"></km-value-ml>
+				<km-value-ml value="document.geographicalDistribution" locales="locale" html></km-value-ml>
 		</div>
 
 		<div ng-show="document.compatibleSpecies">
@@ -109,7 +113,7 @@
 
 		<div ng-show="document.pathogenicity">
 				<label>Known pathogenicity and/or allergenicity</label>
-				<km-value-ml value="document.pathogenicity" locales="locale"></km-value-ml>
+				<km-value-ml value="document.pathogenicity" locales="locale" html ></km-value-ml>
 		</div>
 
 		<div ng-show="document.commonUses">
@@ -125,7 +129,7 @@
 			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">
-				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+				<km-value-ml value="document.relevantInformation" locales="locale" html ></km-value-ml>
 			</div>
 
 			<div ng-show="document.relevantDocuments">
