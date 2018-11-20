@@ -78,7 +78,10 @@ define(['app', 'underscore'], function (app, _) {
                 dnaSequenceTraits        :  'B8EB2261-7695-4DC5-9C4E-026D380DA7CB',
                 legislationAgreementTypes:  'Legislation And Agreement Types',
                 subjectAreas             :  'Subject Areas',
-                typeOfOrganisms          :  'TypeOfOrganisms'
+                typeOfOrganisms          :  'TypeOfOrganisms',
+                domestication            :  'B89720B8-81BF-4A6B-8084-8D464403C25A',
+                OrganismCommonUses       :  'OrganismCommonUses',
+                
             }
         }
     }]);

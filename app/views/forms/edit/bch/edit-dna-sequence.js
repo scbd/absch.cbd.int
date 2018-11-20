@@ -36,16 +36,11 @@ function (app, _) {
 			return document;
 		};
 
-		$scope.addSynonymName = function(){
-			if(!$scope.synonymNames)
-				$scope.synonymNames = [];
-			if($scope.synonymNames.length > 0 && _.isEmpty($scope.synonymNames[$scope.synonymNames.length]))
-				return;
-			synonymNames.push({})
-		}
-
-
-		$scope.setDocument({}, true);
+		$q.when($scope.setDocument({}, true))
+		.then(function(doc){
+			if(doc.synonymNames)
+				$scope.synonymNames = _.map(doc.synonymNames, function(t){return { value: t}});
+		});
 
    }]);
 
