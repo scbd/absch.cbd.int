@@ -253,6 +253,13 @@ background-color: white;
     background-color: #1FA65D!important;
 }
 
+.bch-map-bg{
+    background-color: #d8e3f7!important;
+}
+.bch-map-text-color{
+    color:#585972!important;
+}
+
 .bg-black {
     background-color: #111!important;
     color: white!important;

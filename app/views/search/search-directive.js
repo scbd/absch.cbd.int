@@ -697,7 +697,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                                 var countries = data;
 
                                 _.each(countries, function(country, index){
-                                addFilter(country.code.toLowerCase(), {'sort': index, 'type':'country', 'name':country.name[locale||en], 'id':country.code.toLowerCase(), 'description':'', "isCBDParty": country.isCBDParty,"isNPParty":country.isNPParty,"isNPSignatory": country.isNPSignatory,"isNPRatified": country.isNPRatified ,"isNPInbetweenParty":country.isNPInbetweenParty,"entryIntoForce": country.entryIntoForce});
+                                    addFilter(country.code.toLowerCase(), {'sort': index, 'type':'country', 'name':country.name[locale||en], 'id':country.code.toLowerCase(), 'description':'', "isCBDParty": country.isCBDParty,"isNPParty":country.isNPParty,
+                                        "isAppProtocolParty": country.isAppProtocolParty, "isNPSignatory": country.isNPSignatory,"isNPRatified": country.isNPRatified ,"isNPInbetweenParty":country.isNPInbetweenParty,"entryIntoForce": country.entryIntoForce});
                                 });
                         });
                     };
