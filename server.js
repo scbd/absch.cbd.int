@@ -3,7 +3,6 @@
 process.env.CLEARINGHOUSE = process.env.CLEARINGHOUSE || 'ABS';
 
 // Create HTTP server and proxy
-
 var _       = require('lodash');
 var fs      = require('co-fs');
 var util    = require('util');
@@ -40,7 +39,7 @@ app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHead
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
-app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbd.int', changeOrigin: true, secure:false }));
+app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbddev.xyz', changeOrigin: true, secure:false }));
 app.get('/?:lang(ar|en|es|fr|ru|zh)?/*', function (req, res) {
    var urlPreferredLang;
    
