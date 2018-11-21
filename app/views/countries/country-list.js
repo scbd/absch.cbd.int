@@ -181,10 +181,10 @@
                     return true;
                 }
                 if ($scope.partyFilter === 'party') {
-                    return item.isNPParty;
+                    return item.isAppProtocolParty;
                 }
                 if ($scope.partyFilter === 'nonparty') {
-                    return !item.isNPParty;
+                    return !item.isAppProtocolParty;
                 }
                 if ($scope.partyFilter === 'inbetween') {
                     return item.isNPInbetweenParty;
@@ -213,10 +213,10 @@
             //==================================================================================
             $scope.sortTermFilter = function (data) {
 
-                if ($scope.sortTerm == "isNPParty")
-                    return data.isNPParty + ' ' + data.entryIntoForce;
-                else if ($scope.sortTerm == "!isNPParty")
-                    return !!data.isNPParty + ' ' + data.name.en;
+                if ($scope.sortTerm == "isAppProtocolParty")
+                    return data.isAppProtocolParty + ' ' + data.entryIntoForce;
+                else if ($scope.sortTerm == "!isAppProtocolParty")
+                    return !!data.isAppProtocolParty + ' ' + data.name.en;
                 else if ($scope.sortTerm == "name.en")
                     return data.name.en;
                 else if (!data.schemas)

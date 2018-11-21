@@ -29,6 +29,9 @@ define(['text!./home-map.html','app', 'lodash', 'services/search-service',
       controller: ['$scope', '$http', 'realm', '$q', '$filter', 'commonjs','$timeout', 'searchService', '$compile', '$element', '$rootScope',
       function($scope, $http, realm, $q, $filter, commonjs,$timeout, searchService, $compile, $element, $rootScope) {
 
+            $scope.isBCH          = realm.is('BCH');
+            $scope.isABS          = realm.is('ABS');  
+            
             $q.when(commonjs.getCountries(), function(countries) {
 
               if($scope.options.isBch){

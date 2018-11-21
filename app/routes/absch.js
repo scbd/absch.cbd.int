@@ -21,7 +21,9 @@ define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
                whenAsync('/forums/caribbean/:threadId',    { templateUrl: 'views/forums/post-list-view.html'    ,label:'Thread-Subject'  ,resolveController: true, resolve : { securized : commonRoutes.securize() }, forumId:17378, forumListUrl:'/forums/caribbean/', text:'Caribbean Region Forum'}).
                whenAsync('/forums/art10_groups',              { templateUrl: 'views/forums/thread-list-view.html' ,label:'Art 10 Groups'  ,resolveController: true, resolve : { securized : commonRoutes.securize() }, forumId:17316, postUrl:'/forums/art10_groups', text:'Forum on Article 10' }).
                whenAsync('/forums/art10_groups/:threadId',    { templateUrl: 'views/forums/post-list-view.html'   ,label:'Thread-Subject'  ,resolveController: true, resolve : { securized : commonRoutes.securize() }, forumId:17316, forumListUrl:'/forums/art10_groups/', text:'Forum on Article 10' }).
-
+               
+               whenAsync('/register/admin/ircc-counts',       { templateUrl: 'views/register/admin/ircc-counts.html',   label:'IRCC counts',  param:'true', resolveController: true,resolve : { securized : ommonRoutes.securize(['Administrator']) }}).
+    
                whenAsync('/register/MSR/new',           {templateUrl: 'views/forms/edit/abs/edit-measure.html',                   label:'New',  param:'true', resolveController: true,documentType :'MSR' , resolve : { securized : commonRoutes.securize(null,true, true) }, }).
                whenAsync('/register/NDB/new',           {templateUrl: 'views/forms/edit/edit-database.html',                  label:'New',  param:'true', resolveController: true,documentType :'NDB' , resolve : { securized : commonRoutes.securize(null,true, true) }, }).
                whenAsync('/register/IRCC/new',          {templateUrl: 'views/forms/edit/abs/edit-absPermit.html',                 label:'New',  param:'true', resolveController: true,documentType :'IRCC', resolve : { securized : commonRoutes.securize(null,true, true) }, }).

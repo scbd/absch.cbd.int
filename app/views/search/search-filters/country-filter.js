@@ -31,19 +31,14 @@ define(['app', 'text!views/search/search-filters/country-filter.html','underscor
                };
                
                //*************************************************************************************************************************************
-               $scope.cf_setPartyFilter = function(pfilter) {
-                    $scope.cf_partyFilter = pfilter;
-               };
-               
-               //*************************************************************************************************************************************
                function cf_filterParty(item) { 
                     if(!$scope.cf_partyFilter) 
                         return true;
                     if($scope.cf_partyFilter ==='party'){
-                        return item.isNPParty;
+                        return item.isAppProtocolParty;
                     }  
                     if($scope.cf_partyFilter ==='nonparty'){
-                        return !item.isNPParty;
+                        return !item.isAppProtocolParty;
                     } 
                     if($scope.cf_partyFilter ==='inbetween'){
                         return item.isNPInbetweenParty;

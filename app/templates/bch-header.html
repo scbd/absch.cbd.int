@@ -71,15 +71,24 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                        <a href="#" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
                         ng-class="{'active-menu' : activeMenu == 'countryProfile'}" ng-click="activeMenu='countryProfile'">
-                            <i class="icon fa fa-globe visible-xs"></i>
-                            <span class="hidden-xs">Country Profiles <span class="caret"></span></span>
+                            <span  ng-href="countries">Country Profiles <span class="caret"></span></span>
                         </a>
-                        <ul class="dropdown-menu"  style="max-height:400px;overflow-y:scroll">
-                            <li ng-repeat="c in ::countries|orderBy:'name.en' track by c._id"><a href="/countries/{{::c.code|lowercase}}#">{{::c.name.en}}</a></li>
+                        <a ng-href="countries" class="visible-xs"> <i class="icon fa fa-globe "></i></a>
+                        <ul class="dropdown-menu hidden-xs"  style="padding:10px;max-height:380px;overflow-y:scroll; border:0;margin-top:11px;">
+                            <br>
+                            <li style="border:0!important;"> <a style="color:#111!important;font-size:16px;" ng-href="countries"> Overview - List all countries </a></li>
+                            <hr>
+                            <li  style="border:0!important;" ng-repeat="c in list = (countries | orderBy:'name' ) track by c.name.en" >
+                                <a style="color:#666!important;font-size:14px;" href="/countries/{{c.code}}#" >
+                                    <span class="bold" ng-class="{'color-party': c.isNPParty, 'color-grey':!c.isNPParty, 'color-inbetween': c.isNPInbetweenParty}">
+                                        {{c.name | lstring:locale}}
+                                        </span>
+                                    </a></li>
                         </ul>
                     </li>
+    
                     <li>
                         <a translation-url  href="/onlineconferences" ng-class="{'active-menu' : activeMenu == 'forums'}" ng-click="activeMenu='forums'">
                             <i class="fa fa-comments visible-xs"></i><span class="hidden-xs">&nbsp;Forums</span>
