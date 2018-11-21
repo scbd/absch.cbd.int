@@ -81,6 +81,7 @@ define(['app', 'underscore'], function (app, _) {
                 typeOfOrganisms          :  'TypeOfOrganisms',
                 domestication            :  'B89720B8-81BF-4A6B-8084-8D464403C25A',
                 OrganismCommonUses       :  'OrganismCommonUses',
+                techniqueUsed            :  'ABE9DCE3-92BA-4D5D-8948-7F7E541EEC6B'
                 
             }
         }

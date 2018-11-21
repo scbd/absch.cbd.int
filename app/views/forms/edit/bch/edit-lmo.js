@@ -11,6 +11,9 @@ function (app, _) {
 		});
 
 		_.extend($scope.options, {		
+			techniqueUsed	: thesaurusService.getDomainTerms('techniqueUsed'),
+			commonUses 		: thesaurusService.getDomainTerms('OrganismCommonUses'),
+			traits			: thesaurusService.getDomainTerms('dnaSequenceTraits')
 		});
 		
 		//==================================
@@ -29,7 +32,7 @@ function (app, _) {
 			return document;
 		};
 		
-		$scope.setDocument({});
+		$scope.setDocument({}, true);
 
    }]);
 
