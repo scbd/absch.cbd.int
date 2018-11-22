@@ -21,6 +21,7 @@ var oneDay   = 86400000;
 if(!appVersion || appVersion.trim()==''){
     appVersion =  ((process.env.BRANCH||'') + '-'+ (process.env.VERSION ||''))||process.env.COMMIT;
 }  
+let apiUrl = process.env.API_URL||'https://api.cbddev.xyz';
 
 app.set('view engine', 'ejs');
 
@@ -39,7 +40,7 @@ app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHead
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
-app.all('/api/*', (req, res) => proxy.web(req, res, { target: 'https://api.cbddev.xyz', changeOrigin: true, secure:false }));
+app.all('/api/*', (req, res) => proxy.web(req, res, { target: apiUrl, changeOrigin: true, secure:false }));
 app.get('/?:lang(ar|en|es|fr|ru|zh)?/*', function (req, res) {
    var urlPreferredLang;
    
