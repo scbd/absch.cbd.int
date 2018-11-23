@@ -1,10 +1,26 @@
 ﻿<div >
-    <table class="table">
+    <!-- <table class="table">
         <tr ng-repeat="schema in country.schemas">
             <td>
                 <span class="badge">{{schema.count}}</span>
             </td>
             <td>{{schema.title|lstring:locale}}</td>
         </tr>
-    </table>
+    </table> -->
+
+    <table class="table table-map table-condensed" >
+            <tr ng-repeat="schema in country.schemas" style="border:none;">
+                <td >
+                    <span class="badge bg-black">{{schema.count}}</span>
+                </td>
+                <td>
+                    <a ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff">
+                        {{schema.title | lstring:locale}}
+                    </a>
+                    <a ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search/nationalRecords"  style="color:#fff">
+                        {{schema.title | lstring:locale}}
+                    </a>
+                </td>
+            </tr>
+        </table>
 </div>
