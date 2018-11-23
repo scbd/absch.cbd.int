@@ -72,7 +72,7 @@ function (app, _) {
 			//////////////////////////////////
 
 			var decisionTypes = [];
-			decisionTypes	=	$scope.decisions.commonDecisions||$scope.decisions.otherDecisions||[];
+			decisionTypes	=	_.compact($scope.decisions.commonDecisions||[$scope.decisions.otherDecisions]||[]);
 
 			if($scope.isLmoDecisionForIntentionalIntroduction && document.addressesTransboundaryMovement)
 				decisionTypes = _.union(decisionTypes, [$scope.decisions.intentionDecisions]);
