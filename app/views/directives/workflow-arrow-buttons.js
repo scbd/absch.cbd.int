@@ -734,7 +734,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     };
 
                     articlesService.getArticles(qs, true).then(function(data){
-                        $scope.article = data[0];
+                        if(data)
+                            $scope.article = data[0];
                     })
                     .finally(function(){
                         $scope.loading = false;
