@@ -4,7 +4,7 @@ define(['app', './common-routes', 'angular-route'], function (app,commonRoutes) 
                
         $routeProvider.
                whenAsync('/',                           { templateUrl: 'views/home/bch.html',              controller: function() { return commonRoutes.importQ('views/home/bch'); }, label:'The BCH'}).
-               whenAsync('/register',                   {templateUrl: 'views/register/record-types.html',                     controller: function() { return commonRoutes.importQ('views/register/record-types'); }, label:'Submit', resolve : { user : commonRoutes.currentUser() }}).
+               whenAsync('/submit',                     {templateUrl: 'views/register/record-types.html',                     controller: function() { return commonRoutes.importQ('views/register/record-types'); }, label:'Submit', resolve : { user : commonRoutes.currentUser() }}).
                
                whenAsync('/database/reports*',               { redirectTo:  '/reports' }).
 
