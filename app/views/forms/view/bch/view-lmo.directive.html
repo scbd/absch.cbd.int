@@ -33,7 +33,7 @@
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.developers" >						
-						<view-contact-reference ng-model='item.identifier' locale="locale"></view-contact-reference>
+						<view-contact-reference ng-model='item' locale="locale"></view-contact-reference>
 					</li>
 				</ul>
 			</div>
@@ -184,7 +184,7 @@
 		</div>
 		
 		<div>
-			<view-reference-records ng-model="document.header.identifier"></view-reference-records>
+			<view-default-reference ng-model="document.header.identifier"></view-default-reference>
 				
 			</div>
 	</div>

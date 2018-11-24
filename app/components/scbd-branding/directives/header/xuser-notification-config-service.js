@@ -56,6 +56,7 @@ define(['app', 'lodash', 'moment'],
             }
 
             function notificationUrl(notification) {
+                var url = ''
                 switch (notification.data.documentInfo.realm.toUpperCase()) {
                     case 'ABS':
                         url = 'https://absch.cbd.int'; break;
