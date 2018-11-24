@@ -1057,7 +1057,7 @@ footer .logo {
     z-index: 80;
 }
 #anchorTop {
-    z-index: 1001;
+    z-index: 1001!important;
 }
 .label {
     padding: .2em .6em .2em!important;
