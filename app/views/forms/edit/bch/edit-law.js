@@ -1,5 +1,5 @@
 define(['app', 'lodash', 'views/forms/edit/edit', 'services/thesaurus-service',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-law.directive"], 
+	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-law.directive"], 
 function (app, _) {
 
 	app.controller("editLaw", ["$scope", "$routeParams", "$filter", "Thesaurus", "$q", "$controller", "thesaurusService",
