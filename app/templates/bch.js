@@ -2,12 +2,13 @@ define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
         'bootstrap', 'routes/bch', 'ng-breadcrumbs','toastr','angular-animate', 
         'components/scbd-branding/directives/header/header',
         'components/scbd-branding/directives/footer',
-        'components/scbd-angularjs-services/services/locale'], function (app, angular, footerHtml) { 'use strict';
+        'components/scbd-angularjs-services/services/locale',
+        'services/app-config-service'], function (app, angular, footerHtml) { 'use strict';
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
 
-    app.controller('BchTemplateController', ['$rootScope', '$location', '$window', '$scope', 'locale',
-        function ($rootScope, $location, $window, $scope, locale) {
+    app.controller('BchTemplateController', ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm',
+        function ($rootScope, $location, $window, $scope, locale, realm) {
 
             $rootScope.pageTitle = { text: "" };
 
@@ -62,8 +63,7 @@ define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
             });
             $rootScope.$on('event:server-pushNotification', function (evt, pushNotification) {
                 if (pushNotification.type == 'documentNotification') {
-                    // toastr.info(data.message);
-                    if (pushNotification.data && pushNotification.data.realm == appConfigService.currentRealm) {
+                    if (pushNotification.data && pushNotification.data.realm == realm.value) {
                         localStorageService.remove('governmentFacets');
                         localStorageService.remove('searchFilters');
                     }

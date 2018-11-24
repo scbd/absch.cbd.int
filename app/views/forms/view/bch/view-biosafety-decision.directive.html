@@ -23,7 +23,7 @@
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >						
-						<view-contact-reference ng-model='item.identifier' locale="locale"></view-contact-reference>
+						<view-contact-reference ng-model='item' locale="locale"></view-contact-reference>
 					</li>
 				</ul>
 			</div>
@@ -45,7 +45,7 @@
 				<km-value-bool value="document.takenPriorEntryIntoForce" locales="locale"></km-value-bool>
 			</div>
 		</div>
-		<div ng-show="document.jurisdictions">
+		<div ng-show="document.jurisdictions.length">
 			<label>Jurisdiction</label>
 			<div class="km-value">
 				<ul>
@@ -84,7 +84,7 @@
 			</div>
 			<div>
 				<label>This decision has been amended by following decision</label>
-				<view-reference-records ng-model="document.header.identifier"></view-reference-records>
+				<view-default-reference ng-model="document.header.identifier"></view-default-reference>
 			</div>
 		</div>
 
@@ -133,7 +133,7 @@
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.exporters">
-						<view-contact-reference ng-model='item.identifier' locale="locale"></view-contact-reference>
+						<view-contact-reference ng-model='item' locale="locale"></view-contact-reference>
 					</li>
 				</ul>
 			</div>
@@ -143,7 +143,7 @@
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.importers">
-						<view-contact-reference ng-model='item.identifier' locale="locale"></view-contact-reference>
+						<view-contact-reference ng-model='item' locale="locale"></view-contact-reference>
 					</li>
 				</ul>
 			</div>
@@ -226,7 +226,7 @@
 			<div  class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.modifiedOrganisms">
-						<view-reference-records ng-model="item.identifier"></view-reference-records>
+						<view-default-reference ng-model="item.identifier"></view-default-reference>
 					</li>
 				</ul>
 			</div>
@@ -236,7 +236,7 @@
 			<div  class="km-value">
 				<ul>
 					<li ng-repeat="item in document.riskAssessments">
-						<view-reference-records ng-model="item.identifier"></view-reference-records>
+						<view-default-reference ng-model="item.identifier"></view-default-reference>
 					</li>
 				</ul>
 			</div>
