@@ -56,7 +56,7 @@ define(['app', 'lodash', 'moment'],
             }
 
             function notificationUrl(notification) {
-                var url = ''
+                var url = '';
                 switch (notification.data.documentInfo.realm.toUpperCase()) {
                     case 'ABS':
                         url = 'https://absch.cbd.int'; break;
@@ -76,6 +76,16 @@ define(['app', 'lodash', 'moment'],
                         else
                             url = 'https://chm-dev.cbd.int'; break;
                     }
+                    case 'BCH':
+                        url = 'https://bch.cbd.int'; break;
+                    case 'BCH-TRG':
+                        url = 'https://bch-demo.cbd.int'; break;
+                    case 'BCH-DEV': {
+                        if ($location.absUrl().indexOf('http://localhost:') >= 0)
+                            url = 'http://localhost:2000'
+                        else
+                            url = 'https://bch.cbddev.xyz'; break;
+                    }
                 }
 
                 //if same realm url avoid using window redirect
@@ -83,7 +93,7 @@ define(['app', 'lodash', 'moment'],
                     url = '';
 
                 var path;
-                if (_.contains(['ABS', 'ABS-DEV', 'ABS-TRG'], notification.data.documentInfo.realm.toUpperCase())) {
+                if (_.contains(['ABS', 'ABS-DEV', 'ABS-TRG', 'BCH-TRG', 'BCH-DEV', 'BCH'], notification.data.documentInfo.realm.toUpperCase())) {
                     if(notification.type == 'documentNotification')
                         path = "/register/" + $filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier + "/view";
                     else
