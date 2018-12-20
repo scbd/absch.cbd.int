@@ -1,4 +1,4 @@
-﻿<div id="RegisterPage" >
+﻿<div id="RegisterPage">
     <link href="/app/css/register.css" rel="stylesheet">
     <link href="/app/css/record.css" rel="stylesheet">
     <style>
@@ -40,21 +40,31 @@
                 <!--help info---------------------------->
                 <div ng-if="showInfo" class="well well-help">
                     <div ng-if="user.government">
-                        The Dashbaord allows registered ABS-CH users to find information about your CH account, your role and permissions in the
-                        ABS-CH. Here you can also update your profile or change your password. This page also provides an
-                        overview of all the records prepared by the authorized users of your country and their different
-                        status: published, drafts and pending requests. Click on the category of record you wish to view
+                        The Dashbaord allows registered ABS-CH users to find information about your CH account, your
+                        role and permissions in the
+                        ABS-CH. Here you can also update your profile or change your password. This page also provides
+                        an
+                        overview of all the records prepared by the authorized users of your country and their
+                        different
+                        status: published, drafts and pending requests. Click on the category of record you wish to
+                        view
                         for more details or add a new record.
                         <br>
-                        <br> Upon request a training site is also available to help ABS-CH users familiarize themselves with
+                        <br> Upon request a training site is also available to help ABS-CH users familiarize themselves
+                        with
                         the functioning of the ABS-CH without altering the content of the official ABS-CH.
                     </div>
                     <div ng-if="!user.government">
-                        The Dashbaord allows registered ABS-CH users to find information about your CH account, your role and permissions in the
-                        ABS-CH. Here you can also update your profile or change your password. This page also provides an
-                        overview of all your records their different status: published, drafts and pending requests. Click
-                        on the category of record you wish to view for more details or add a new record. Upon request a training
-                        site is also available to help ABS-CH users familiarize themselves with the functioning of the ABS-CH
+                        The Dashbaord allows registered ABS-CH users to find information about your CH account, your
+                        role and permissions in the
+                        ABS-CH. Here you can also update your profile or change your password. This page also provides
+                        an
+                        overview of all your records their different status: published, drafts and pending requests.
+                        Click
+                        on the category of record you wish to view for more details or add a new record. Upon request a
+                        training
+                        site is also available to help ABS-CH users familiarize themselves with the functioning of the
+                        ABS-CH
                         without altering the content of the official ABS-CH.
                     </div>
 
@@ -66,16 +76,18 @@
             <div style="margin:10px 0 20px 0;">
 
                 <h4 style="margin-top:0; margin-bottom:0; padding:0 0 5px 0;border-bottom:1px solid #ddd;">
-                        <i class="fa fa-chevron-circle-down cursor" ng-show="!showProfileInfo" aria-hidden="true" ng-click="showProfileInfo=true"></i>
-                        <i class="fa fa-chevron-circle-up cursor"   ng-show="showProfileInfo" aria-hidden="true" ng-click="showProfileInfo=false"></i>
-                        <span class="hidden-xs">Welcome </span> 
-                        <span class="color-black bold">{{user.name}}
-                            <span ng-if="roles.isAbsPublishingAuthority" style="font-weight: normal;"> (Publishing Authority)</span>
-                            <span ng-if="roles.isAbsNationalAuthorizedUser" style="font-weight: normal;"> (Authorized User)</span>
-                        </span>
+                    <i class="fa fa-chevron-circle-down cursor" ng-show="!showProfileInfo" aria-hidden="true" ng-click="showProfileInfo=true"></i>
+                    <i class="fa fa-chevron-circle-up cursor" ng-show="showProfileInfo" aria-hidden="true" ng-click="showProfileInfo=false"></i>
+                    <span class="hidden-xs">Welcome </span>
+                    <span class="color-black bold">{{user.name}}
+                        <span ng-if="roles.isAbsPublishingAuthority" style="font-weight: normal;"> (Publishing
+                            Authority)</span>
+                        <span ng-if="roles.isAbsNationalAuthorizedUser" style="font-weight: normal;"> (Authorized User)</span>
+                    </span>
                 </h4>
 
-                <div class="row" style="background-color: #f9f9f9;border:1px solid #ddd; border-top: 0; margin:0px; padding:10px 0 10px 0; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px; " ng-if="showProfileInfo">
+                <div class="row" style="background-color: #f9f9f9;border:1px solid #ddd; border-top: 0; margin:0px; padding:10px 0 10px 0; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px; "
+                    ng-if="showProfileInfo">
                     <div class="col-md-6 cp-header">
                         <table>
                             <tr>
@@ -116,27 +128,31 @@
                             </td>
                             <td>
                                 <span class="comma" ng-if="roles.isAbsNationalFocalPoint">
-                                    ABS National Focal Point 
-                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="The ABS National Focal Point is responsible for liason with the Secretariat as well as to designate themselves or another user as the Publishing Authority (PA) for the ABSCH."
+                                    ABS National Focal Point
+                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true"
+                                        data-title="The ABS National Focal Point is responsible for liason with the Secretariat as well as to designate themselves or another user as the Publishing Authority (PA) for the ABSCH."
                                         data-container="body"></span>
                                 </span>
 
                                 <span class="comma" ng-if="roles.isAbsPublishingAuthority">
                                     Publishing Authority (PA)
-                                    <span class="helpinfoInline fa fa-info-circle " data-toggle="tooltip" data-html="true" data-title="Each country can designate only one PA for the ABSCH. The PA's job is to make information publically available on the ABSCH by verifing and publishing records.
+                                    <span class="helpinfoInline fa fa-info-circle " data-toggle="tooltip" data-html="true"
+                                        data-title="Each country can designate only one PA for the ABSCH. The PA's job is to make information publically available on the ABSCH by verifing and publishing records.
                                     PAs can also designate National Authorized Users (NAUs) who are allowed to submit draft records for their country."
                                         data-container="body"></span>
                                 </span>
 
                                 <span class="comma" ng-if="roles.isAbsNationalAuthorizedUser">
                                     National Authorized User (NAU)
-                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="The ABS National Focal Point has the responsiblity to designate themselves or another user as the Publishing Authority (PA) as well as be the liason with the Secretariat."
+                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true"
+                                        data-title="The ABS National Focal Point has the responsiblity to designate themselves or another user as the Publishing Authority (PA) as well as be the liason with the Secretariat."
                                         data-container="body"></span>
                                 </span>
 
                                 <span class="comma" ng-if="roles.isUser">
                                     Registered User
-                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true" data-title="Regular users can create draft reference records and request their publication from the SCBD."
+                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true"
+                                        data-title="Regular users can create draft reference records and request their publication from the SCBD."
                                         data-container="body"></span>
                                 </span>
 
@@ -166,7 +182,7 @@
                                 </td>
                                 <td>
                                     <a translation-url href="https://accounts.cbd.int/password" target="_new">
-                                       accounts.cbd.int/password
+                                        accounts.cbd.int/password
                                     </a>
                                 </td>
 
@@ -174,155 +190,186 @@
                         </table>
                     </div>
                 </div>
-            </div>         
+            </div>
 
             <top-requests view-all-url="/register/pending-requests"></top-requests>
-            
+
             <div id="SubmitPage" style="background-color:#f9f9f9;">
 
                 <div id="menuPlaceholder" ng-if="roles.isUser" class="bg-white">
                     <div class="row" style="padding:0;margin:0 0 5px 0;">
-                            <table class="overview table" style="width:100%;">
-                                    <thead></thead>
-                                    <tbody>
-                                    <tr>
-                                        <td style="min-width:250px;" class="bold" >
-                                            <h4 style="padding:0;margin:0;" >
-                                               Record overview</h4>
-                                        </td>
-                                        <td style="width:7%;font-size: 12px;" class="hidden-xs text-center bold"> <span class="label label-success"></span> Published</td>
-                                        <td style="width:7%;font-size: 12px;" class="hidden-xs text-center bold"> <span class="label label-default"></span> Drafts</td>
-                                        <td style="width:7%;font-size: 12px;" class="hidden-xs text-center bold"> <span class="label label-danger"></span> Requests</td>
-                                    </tr>
-                                    </tbody>
-                                </table> 
-                    </div>    
+                        <table class="overview table" style="width:100%;">
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <td style="min-width:250px;" class="bold">
+                                        <h4 style="padding:0;margin:0;">
+                                            Record overview</h4>
+                                    </td>
+                                    <td style="width:7%;font-size: 12px;" class="hidden-xs text-center bold"> <span
+                                            class="label label-success"></span> Published</td>
+                                    <td style="width:7%;font-size: 12px;" class="hidden-xs text-center bold"> <span
+                                            class="label label-default"></span> Drafts</td>
+                                    <td style="width:7%;font-size: 12px;" class="hidden-xs text-center bold"> <span
+                                            class="label label-danger"></span> Requests</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div>
 
-                <div id="menuPlaceholder" ng-if="isNationalUser" style="margin:10px 0 20px 0;" >
+                    <div id="menuPlaceholder" ng-if="isNationalUser" style="margin:10px 0 20px 0;">
 
-                    <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; ">
+                        <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; ">
                             <span class="color-blue">National records</span>
-                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-title="National records contain information that is typically required to be reported as part of a Party’s obligations under the Nagoya
+                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
+                                data-html="true" data-title="National records contain information that is typically required to be reported as part of a Party’s obligations under the Nagoya
                                 Protocol on Access and Benefit-sharing and must be validated by the ABS-CH Publishing Authority prior to being made available in the ABS Clearing-House."
                                 data-container="body"></span>
-                    </div>
+                        </div>
 
 
-                    <table class="overview table" style="width:100%;">
+                        <table class="overview table" style="width:100%;">
                             <thead></thead>
                             <tbody>
-                            <tr>
-                                    <td style="width:70px;"> 
-                                            <div class="btn-group btn-group-xs" style="width:70px;" role="group" >
-                                                    <button type="button" class="btn btn-xs btn-default" ng-click="showTopRecords($event,'contact')">
-                                                            <i class="fa fa-chevron-circle-down cursor" ng-class="{'fa-chevron-circle-down':!topRecords['contact'], 'fa-chevron-circle-up':topRecords['contact']}"
-                                                            aria-hidden="true"></i>
-                                                    <button type="button" class="btn btn-xs btn-default" ng-click="gotoNew($event,'contact')"><i class="fa fa-plus"></i></button>
-                                                    <button type="button" class="btn btn-xs btn-default" ng-click="gotoList($event,'contact')"><i class="fa fa-list"></i></button>
-                                            </div>
+                                <tr>
+                                    <td style="width:70px;">
+                                        <div class="btn-group btn-group-xs" style="width:70px;" role="group">
+                                            <button type="button" class="btn btn-xs btn-default" ng-click="showTopRecords($event,'contact')">
+                                                <i class="fa fa-chevron-circle-down cursor" ng-class="{'fa-chevron-circle-down':!topRecords['contact'], 'fa-chevron-circle-up':topRecords['contact']}"
+                                                    aria-hidden="true"></i>
+                                                <button type="button" class="btn btn-xs btn-default" ng-click="gotoNew($event,'contact')"><i
+                                                        class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-xs btn-default" ng-click="gotoList($event,'contact')"><i
+                                                        class="fa fa-list"></i></button>
+                                        </div>
                                     </td>
                                     <td style="min-width:180px!important;">
-                                        <a translation-url href="#" ng-click="gotoList($event,'contact')" class="color-darkgrey" style="font-weight:500;">
-                                        Contacts <span class="hidden-xs">- people and organizations</span> (CON)</a>
-                                              
-                                    </td>
-                                    <td  style="width:7%;" class="text-center hidden-xs"><a translation-url ng-href="/register/CON/status/published" class="label label-success" ng-class="{'bg-litegrey': facets('contact','publish')===0}">{{facets('contact','publish')}}</a>  </td>
+                                        <a translation-url href="#" ng-click="gotoList($event,'contact')" class="color-darkgrey"
+                                            style="font-weight:500;">
+                                            Contacts <span class="hidden-xs">- people and organizations</span> (CON)</a>
 
-                                    <td   style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/CON/status/drafts" class="label label-default" ng-class="{'bg-litegrey': Math.max(0, facets('contact','draft') - facets('contact','request'))===0}">{{Math.max(0, facets('contact','draft') - facets('contact','request'))}}</a> </td>
-
-                                    <td  style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/CON/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets('contact','request')===0}">{{facets('contact','request')}}</a></div>
                                     </td>
-                                </tr>
-                                </tbody>
+                                    <td style="width:7%;" class="text-center hidden-xs"><a translation-url ng-href="/register/CON/status/published"
+                                            class="label label-success" ng-class="{'bg-litegrey': facets('contact','publish')===0}">{{facets('contact','publish')}}</a>
+                                    </td>
+
+                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/CON/status/drafts"
+                                            class="label label-default" ng-class="{'bg-litegrey': Math.max(0, facets('contact','draft') - facets('contact','request'))===0}">{{Math.max(0,
+                                            facets('contact','draft') - facets('contact','request'))}}</a> </td>
+
+                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/CON/status/requests"
+                                            class="label label-danger" ng-class="{'bg-litegrey': facets('contact','request')===0}">{{facets('contact','request')}}</a>
+                    </div>
+                    </td>
+                    </tr>
+                    </tbody>
                     </table>
                     <div ng-if="topRecords['contact']" style="position: relative;top:-5px;">
                         <top-records schema="contact" top="10" style="padding-top:5px;" show-schema-name="false"></top-records>
                     </div>
 
 
-                    <div ng-repeat="schema in nationalSchemas">                    
+                    <div ng-repeat="schema in nationalSchemas">
                         <table class="overview table table-hover" style="width:100%;">
                             <thead></thead>
                             <tbody>
-                            <tr>
-                                <td style="width:70px;"> 
-                                        <div class="btn-group btn-group-xs" style="width:70px;" role="group" >
-                                                <button type="button" class="btn btn-xs btn-default" ng-click="showTopRecords($event,schema)">
-                                                        <i class="fa fa-chevron-circle-down cursor" ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
-                                                        aria-hidden="true"></i>
-                                                <button type="button" class="btn btn-xs btn-default" ng-click="gotoNew($event,schema)"><i class="fa fa-plus"></i></button>
-                                                <button type="button" class="btn btn-xs btn-default" ng-click="gotoList($event,schema)"><i class="fa fa-list"></i></button>
+                                <tr>
+                                    <td style="width:70px;">
+                                        <div class="btn-group btn-group-xs" style="width:70px;" role="group">
+                                            <button type="button" class="btn btn-xs btn-default" ng-click="showTopRecords($event,schema)">
+                                                <i class="fa fa-chevron-circle-down cursor" ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
+                                                    aria-hidden="true"></i>
+                                                <button type="button" class="btn btn-xs btn-default" ng-click="gotoNew($event,schema)"><i
+                                                        class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-xs btn-default" ng-click="gotoList($event,schema)"><i
+                                                        class="fa fa-list"></i></button>
                                         </div>
-                                </td>
-                                <td style="min-width:180px!important;">
-                                     <a translation-url href="#" ng-click="gotoList($event,schema)" class="color-darkgrey" style="font-weight:500;">
+                                    </td>
+                                    <td style="min-width:180px!important;">
+                                        <a translation-url href="#" ng-click="gotoList($event,schema)" class="color-darkgrey"
+                                            style="font-weight:500;">
                                             {{schema|schemaName}} ({{schema|urlSchemaShortName}})</a>
-                                </td>
-                                <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/published" class="label label-success" ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>  </td>
+                                    </td>
+                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/published"
+                                            class="label label-success" ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>
+                                    </td>
 
-                                <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/drafts" class="label label-default" ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}">{{Math.max(0, facets(schema,'draft') - facets(schema,'request'))}}</a> </td>
+                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/drafts"
+                                            class="label label-default" ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}">{{Math.max(0,
+                                            facets(schema,'draft') - facets(schema,'request'))}}</a> </td>
 
-                                <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a></div>
-                                </td>
-                            </tr>
-                        </tbody>
-                        </table>
-                        <div ng-if="topRecords[schema]" style="width:100%">
-                            <top-records schema="{{schema}}" top="10" style="padding-top:5px;" show-schema-name="false"></top-records>
-                        </div>
+                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/requests"
+                                            class="label label-danger" ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a>
                     </div>
-
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    <div ng-if="topRecords[schema]" style="width:100%">
+                        <top-records schema="{{schema}}" top="10" style="padding-top:5px;" show-schema-name="false"></top-records>
+                    </div>
                 </div>
 
-                <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; ">
-                        <span class="color-orange"> Reference records
-                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-title="Reference records contain information relevant to the Protocol (but not reported as part of a Party’s obligations under the
+            </div>
+
+            <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; ">
+                <span class="color-orange"> Reference records
+                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
+                        data-html="true" data-title="Reference records contain information relevant to the Protocol (but not reported as part of a Party’s obligations under the
                             Protocol). This information can be made available to the ABS Clearing-House by any registered user
                             (including representatives of Governments, indigenous and local communities, academia, nongovernmental organizations, research
                             institutions, business representatives, etc.). All reference records are validated by the Secretariat prior to being made available in the ABS
-                            Clearing-House." data-container="body"></span>
-                        </span>
-                </div>
-               
+                            Clearing-House."
+                        data-container="body"></span>
+                </span>
+            </div>
 
-                <div ng-repeat="schema in referenceSchemas">                    
-                        <table class="overview table table-hover" style="width:100%;">
-                            <thead></thead>
-                            <tbody>
-                            <tr>
-                                <td style="width:70px;"> 
-                                        <div class="btn-group btn-group-xs" style="width:70px;" role="group" >
-                                                <button type="button" class="btn btn-xs btn-default" ng-click="showTopRecords($event,schema)">
-                                                        <i class="fa fa-chevron-circle-down cursor" ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
-                                                        aria-hidden="true"></i>
-                                                <button type="button" class="btn btn-xs btn-default" ng-click="gotoNew($event,schema)"><i class="fa fa-plus"></i></button>
-                                                <button type="button" class="btn btn-xs btn-default" ng-click="gotoList($event,schema)"><i class="fa fa-list"></i></button>
-                                        </div>
-                                </td>
-                                <td style="min-width:180px!important;">
-                                     <a translation-url href="#" ng-click="gotoList($event,schema)" class="color-darkgrey" style="font-weight:500;">
-                                            {{schema|schemaName}} ({{schema|urlSchemaShortName}})</a>
-                                </td>
-                                <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/published" class="label label-success" ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>  </td>
 
-                                <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/drafts" class="label label-default" ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}">{{Math.max(0, facets(schema,'draft') - facets(schema,'request'))}}</a> </td>
+            <div ng-repeat="schema in referenceSchemas">
+                <table class="overview table table-hover" style="width:100%;">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <td style="width:70px;">
+                                <div class="btn-group btn-group-xs" style="width:70px;" role="group">
+                                    <button type="button" class="btn btn-xs btn-default" ng-click="showTopRecords($event,schema)">
+                                        <i class="fa fa-chevron-circle-down cursor" ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
+                                            aria-hidden="true"></i>
+                                        <button type="button" class="btn btn-xs btn-default" ng-click="gotoNew($event,schema)"><i
+                                                class="fa fa-plus"></i></button>
+                                        <button type="button" class="btn btn-xs btn-default" ng-click="gotoList($event,schema)"><i
+                                                class="fa fa-list"></i></button>
+                                </div>
+                            </td>
+                            <td style="min-width:180px!important;">
+                                <a translation-url href="#" ng-click="gotoList($event,schema)" class="color-darkgrey"
+                                    style="font-weight:500;">
+                                    {{schema|schemaName}} ({{schema|urlSchemaShortName}})</a>
+                            </td>
+                            <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/published"
+                                    class="label label-success" ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>
+                            </td>
 
-                                <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/requests" class="label label-danger" ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a></div>
-                                </td>
-                            </tr>
-                        </tbody>
-                        </table>
-                        <div ng-if="topRecords[schema]" style="width:100%">
-                            <top-records schema="{{schema}}" top="10" style="padding-top:5px;" show-schema-name="false"></top-records>
-                        </div>
-                    </div>
+                            <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/drafts"
+                                    class="label label-default" ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}">{{Math.max(0,
+                                    facets(schema,'draft') - facets(schema,'request'))}}</a> </td>
 
+                            <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/requests"
+                                    class="label label-danger" ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a>
+            </div>
+            </td>
+            </tr>
+            </tbody>
+            </table>
+            <div ng-if="topRecords[schema]" style="width:100%">
+                <top-records schema="{{schema}}" top="10" style="padding-top:5px;" show-schema-name="false"></top-records>
             </div>
         </div>
-    </div>
+
     </div>
 </div>
+
 <!-- controller -->

@@ -1,7 +1,7 @@
 define(['app', "text!views/register/directives/register-top-menu.html",
 'underscore', 'services/role-service'], function(app, template, _) {
 
-    app.directive("registerTopMenu", ['roleService', '$rootScope', 'realm', function(roleService, $rootScope, realm) {
+    app.directive("registerTopMenu", ['roleService', '$rootScope', '$location', 'realm', function(roleService, $rootScope, $location, realm) {
 
         return {
             restrict: "EA",
@@ -16,8 +16,11 @@ define(['app', "text!views/register/directives/register-top-menu.html",
                     isAbsAdministrator: roleService.isAbsAdministrator()
                 };
                 $scope.user = $rootScope.user;
-                $scope.isBCH = realm.is('BCH')
-                $scope.isABS = realm.is('ABS')
+                $scope.isBCH = realm.is('BCH');
+                $scope.isABS = realm.is('ABS');
+
+                $scope.path = $location.absUrl();
+
             }
         };
     }]);
