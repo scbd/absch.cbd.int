@@ -1587,11 +1587,16 @@ div.recordDefault:hover {
     margin: 0 0 5px 0;
    
 }
+
 #RegisterPage .register-content-content,
 #SubmitPage .register-content-content,
 #PreferncesPage .register-content-content {
-    padding: 20px;
+    padding: 10px;
 }
+
+
+
+
 #RegisterPage .cp-header label,
 #SubmitPage .cp-header label,
 #PreferncesPage .cp-header label {

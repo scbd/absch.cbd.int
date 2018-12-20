@@ -2,7 +2,7 @@ define(['app', 'underscore','text!views/directives/task-id-directive.html',
 	'../forms/view/record-loader.directive', 'toastr', , 'ngDialog',
 	'views/directives/document-reference-history',
 	'services/local-storage-service', './block-region-directive',
-	'../forms/view/record-loader.directive'
+	'../forms/view/record-loader.directive','services/role-service',
 ], function (app, _, template) {
 
 	app.directive('taskId', function () {
@@ -16,10 +16,10 @@ define(['app', 'underscore','text!views/directives/task-id-directive.html',
                 onActivityUpdate: '&', //used in case if the directive parent needs to be refreshed else the workflow details will be fetched.
                 showDetails: "="
             },
-            controller: ["$rootScope", "$scope", "$timeout", "$http", "$route", "IStorage", "IWorkflows", "authentication",
-				"$filter", '$element', 'toastr', '$window', 'ngDialog', 'localStorageService', "$location",
-				function ($rootScope, $scope, $timeout, $http, $route, IStorage, IWorkflows, authentication,
-					$filter, $element, toastr, $window, ngDialog, localStorageService, $location) {
+            controller: ["$rootScope", "$scope",  "$route", "IStorage", "IWorkflows",
+				"$filter", 'toastr',  'ngDialog', 'localStorageService', "$location", 'roleService',
+				function ($rootScope, $scope,  $route, IStorage, IWorkflows,
+					$filter, toastr, ngDialog, localStorageService, $location, roleService) {
 					
 					//==================================================
 					//
@@ -123,7 +123,14 @@ define(['app', 'underscore','text!views/directives/task-id-directive.html',
 					$scope.isAssignedToMe = function (activity) {
 						return activity && _.contains(activity.assignedTo || [], $scope.$root.user.userID || -1);
 					};
-
+					//==================================================
+					//
+					//
+					//==================================================
+					$scope.isAdmin = function(){
+						return roleService.isAbsAdministrator() ||
+						roleService.isAdministrator()
+					};
 					//==================================================
 					//
 					//

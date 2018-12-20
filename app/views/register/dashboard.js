@@ -14,6 +14,7 @@ function(app, _, ng) {
             $scope.referenceSchemas = _.without(appConfigService.referenceSchemas, 'capacityBuildingResource');
             $scope.topRecords = {};
             $scope.user = $rootScope.user;
+            $scope.showRecords= true;
 
             var schemaFacets = {};
 

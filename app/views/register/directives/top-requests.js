@@ -1,56 +1,109 @@
-﻿define(['app', 'text!./top-requests.html', 'lodash','components/scbd-angularjs-services/services/storage'], function(app, template, _) {
+﻿define(['app', 
+'text!./top-requests.html', 
+'lodash',
+'js/common',  
+'services/role-service'], function(app, template, _) {
 
-    app.directive("topRequests", ['IStorage', '$q', function(storage, $q) {
-
+    app.directive("topRequests", ['$q', "IWorkflows", "realm", '$rootScope', 'roleService', "$location", "$filter",
+    function($q, IWorkflows, realm, $rootScope, roleService, $location, $filter) {
         return {
             restrict: "EA",
             template: template, 
             replace: true,
             transclude: false,
             scope: {
-                title: '@',
-                schema: '@',
-                filter: '@',
-                top: '@',
                 viewAllUrl: '@'
             },
-            link: function($scope, element, attrs) {
+            link: function($scope, element, attrs ) {
                                 
-                $scope.self = $scope
-
-                $scope.showSchemaName = attrs.showSchemaName;
-
-                var qAnd = [];
-                if($scope.schema)
-                    qAnd.push("(type eq '" + $scope.schema + "')");
-                if($scope.filter)
-                    qAnd.push("(" + $scope.filter + ")");
-
-                var qRecords = storage.drafts.query(qAnd.join(" and ") || undefined, {$top:$scope.top||10});
+                $scope.sortTerm = 'createdOn';
+                $scope.orderList = true;
+                $scope.today = new Date();
+                $scope.tasks = null;
+                $scope.sortTerm = 'workflow.createdOn';
+                $scope.orderList = true;
+                $scope.sort = { createdOn: -1 };
+                load(null);
                 $scope.loading = true;
-                var records;
-                $q.when(qRecords)
-                .then(function(result){
-                    records = result.data;
+                $scope.showAll= true;
 
-                    var remainingCount = ($scope.top||10)-result.data.Count;
-                    if(remainingCount > 0 ){
-                        var qRecords = storage.documents.query(["(type eq '" + $scope.schema + "')"], 'my', {$top:remainingCount});                        
-                        return $q.when(qRecords)
-                                    .then(function(result){
-                                        _.each(result.data.Items, function(item){
-                                            if(!_.findWhere(records.Items, {identifier: item.identifier}))
-                                                records.Items.push(item);
+                //==================================
+                function load(query) {
+
+                        if(!query)
+                            query = buildQuery();
+
+                        $scope.loading = true;
+
+                        IWorkflows.query(query, null).then(function (workflows) {
+                            var tasks = [];
+                            workflows.forEach(function (workflow) {
+                                if (workflow.activities.length > 0) {
+                                    workflow.activities.forEach(function (activity) {
+                                        tasks.push({
+                                            workflow: workflow, activity: activity,
+                                            identifier: workflow.data.identifier
                                         });
-                                        records.Count += result.data.Count
-                                    })
+                                    });
+                                }
+                                else {
+                                    tasks.push({ workflow: workflow, identifier: workflow.data.identifier });
+                                }
+
+                                if (!workflow.workflowAge) {
+                                    workflow.workflowAge = { 'age': 12, 'type': 'weeks' };
+                                }
+                                workflow.workflowExpiryDate = moment.utc(workflow.createdOn)
+                                    .add(workflow.workflowAge.age, workflow.workflowAge.type);
+
+                            });
+
+                            $scope.tasks = _.union($scope.tasks, tasks);
+
+                        }).finally(function () {
+                            $scope.loading = false;
+                        });
+                }
+
+                //==================================
+                function buildQuery(){
+                    var queries = {
+                        $and: [
+                            { "data.realm": realm.value }
+                        ]
+                    };
+
+                    var expired = moment.utc(new Date()).subtract("12", "weeks");
+
+                    if((roleService.isAbsPublishingAuthority() ||  roleService.isAbsNationalFocalPoint()) && $rootScope.user.government ){
+                        queries.$and.push({$or : [
+                            {"createdBy": $rootScope.user.userID}, 
+                            {"activities.assignedTo": $rootScope.user.userID},
+                            {"data.metadata.government": $rootScope.user.government}
+                            ] });
                     }
-                })
-                .finally(function(){
-                    if(records)
-                        $scope.self.records = records;
-                    $scope.loading=false;
-                })
+                    else{
+                        queries.$and.push({$or : [
+                            {"createdBy": $rootScope.user.userID}, 
+                            {"activities.assignedTo": $rootScope.user.userID},
+                            ] });
+                    }
+
+                    queries.$and.push( {"$and" : [ { "state": 'running'}, {"createdOn": {"$gte": expired }} ] });
+                
+                    return queries;
+                }
+                    //==================================================
+					//
+					//
+					//==================================================
+					$scope.isPA = function(){
+						return roleService.isAbsPublishingAuthority() 
+                    };
+                    $scope.gotoRequest = function(type, id) {
+                        $location.url('/register/'+ $filter("urlSchemaShortName")(type)+'/'+id+'/view');
+                    }
+
 
             }
         };
