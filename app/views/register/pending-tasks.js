@@ -1,12 +1,16 @@
-define(['app', 'underscore', 'js/common',  'moment', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
-    'views/register/directives/register-top-menu', 'services/role-service',
-    'views/directives/task-id-directive',
-    'views/forms/view/record-loader.directive'], function (app) {
+define(['app', 
+'underscore', 
+'js/common',  
+'moment', 
+'components/scbd-angularjs-controls/form-control-directives/all-controls',
+'views/register/directives/register-top-menu', 
+'services/role-service',
+'views/directives/task-id-directive',
+'views/forms/view/record-loader.directive'], function (app) {
 
         "use strict";
-        app.controller("pendingTasksCotroller", ["$scope",  "$timeout", "IWorkflows", "realm", "commonjs", '$rootScope', 'roleService', 'locale',
-            function ($scope, $timeout, IWorkflows, realm, commonjs, $rootScope, roleService, locale) {
-                
+        app.controller("pendingTasksController", ["$scope", "IWorkflows", "realm", '$rootScope', 'roleService', 
+            function ($scope, IWorkflows, realm, $rootScope, roleService) {
 
                 $scope.sortTerm = 'createdOn';
                 $scope.orderList = true;
@@ -16,6 +20,8 @@ define(['app', 'underscore', 'js/common',  'moment', 'components/scbd-angularjs-
                 $scope.orderList = true;
                 $scope.sort = { createdOn: -1 };
                 load(null);
+                $scope.loading = true;
+                $scope.filterStatus = "Pending";
 
                 //==================================
                 $scope.sortTable = function (term) {
@@ -48,7 +54,7 @@ define(['app', 'underscore', 'js/common',  'moment', 'components/scbd-angularjs-
                         if(!query)
                             query = buildQuery();
 
-                        $scope.loadingTasks = true;
+                        $scope.loading = true;
 
                         IWorkflows.query(query, null).then(function (workflows) {
                            
@@ -72,13 +78,14 @@ define(['app', 'underscore', 'js/common',  'moment', 'components/scbd-angularjs-
                                 }
                                 workflow.workflowExpiryDate = moment.utc(workflow.createdOn)
                                     .add(workflow.workflowAge.age, workflow.workflowAge.type);
+
                             });
 
                             $scope.tasks = _.union($scope.tasks, tasks);
 
 
                         }).finally(function () {
-                            $scope.loadingTasks = false;
+                            $scope.loading = false;
                         });
                 }
 
@@ -89,40 +96,55 @@ define(['app', 'underscore', 'js/common',  'moment', 'components/scbd-angularjs-
                             { "data.realm": realm.value }
                         ]
                     };
-                    if(!roleService.isAdministrator()){
-                        var status = $scope.filterStatus || 'Pending';
 
-                            if(status == 'Pending'){
-                                queries.$and.push({ "state": 'running'})
-                                queries.$and.push({$or : [{"createdBy": $rootScope.user.userID}, {"activities.assignedTo": $rootScope.user.userID}] });
-                            }
-                            else if(status == 'Approved' ){
-                                queries.$and.push({ "state": 'completed'})
-                                queries.$and.push({$or : [{ "activities.result.action": 'approve'}, {"activities.result.action": 'approved'}] });
-                                queries.$and.push({$or : [{"createdBy": $rootScope.user.userID}, {"activities.completedBy": $rootScope.user.userID}] });
-                            }
-                            else if(status == 'Rejected'){
-                                queries.$and.push({"state": 'completed'})
-                                queries.$and.push({$or : [{"activities.result.action": 'reject'}, {"activities.result.action": 'rejected'}] });
-                                queries.$and.push({$or : [{"createdBy": $rootScope.user.userID}, {"activities.completedBy": $rootScope.user.userID}] });
-                            }
-                            else if(status == 'TimedOut' ){
-                                queries.$and.push({"state": 'timedOut'})
-                                queries.$and.push({$or : [{"createdBy": $rootScope.user.userID}, {"activities.assignedTo": $rootScope.user.userID}] });
-                            }
-                            else if(status == 'Canceled' ){
-                                queries.$and.push({"state": 'canceled'})
-                                queries.$and.push({"activities.assignedTo": $rootScope.user.userID});
-                            }
-                            else if(status == 'All' ){
-                                queries.$and.push({$or : [{"createdBy": $rootScope.user.userID}, 
-                                {"activities.assignedTo": $rootScope.user.userID},
-                                {"activities.canceledBy": $rootScope.user.userID},
-                                {"activities.completedBy": $rootScope.user.userID},
-                                {"activities.terminatedBy": $rootScope.user.userID}
-                                ] });
-                            }
+                    var expired = moment.utc(new Date()).subtract("12", "weeks");
+                    console.log(expired);
+
+                    var status = $scope.filterStatus || 'Pending';
+
+                    if((roleService.isAbsPublishingAuthority() || roleService.isAbsNationalAuthorizedUser() || roleService.isAbsNationalFocalPoint()) && $rootScope.user.government ){
+                        queries.$and.push({$or : [
+                            {"createdBy": $rootScope.user.userID}, 
+                            {"activities.assignedTo": $rootScope.user.userID},
+                            {"activities.canceledBy": $rootScope.user.userID},
+                            {"activities.completedBy": $rootScope.user.userID},
+                            {"activities.terminatedBy": $rootScope.user.userID},
+                            {"data.metadata.government": $rootScope.user.government}
+                            ] });
                     }
+                    else{
+                        queries.$and.push({$or : [
+                            {"createdBy": $rootScope.user.userID}, 
+                            {"activities.assignedTo": $rootScope.user.userID},
+                            {"activities.canceledBy": $rootScope.user.userID},
+                            {"activities.completedBy": $rootScope.user.userID},
+                            {"activities.terminatedBy": $rootScope.user.userID},
+                            ] });
+                    }
+
+                    if(status == 'Pending'){
+                        queries.$and.push( {"$and" : [ { "state": 'running'}, {"createdOn": {"$gte": expired }} ] });
+                    }
+                    else if(status == 'Approved' ){
+                        queries.$and.push({ "state": 'completed'})
+                        queries.$and.push({$or : [{ "activities.result.action": 'approve'}, {"activities.result.action": 'approved'}] });
+                    }
+                    else if(status == 'Rejected'){
+                        queries.$and.push({"state": 'completed'})
+                        queries.$and.push({$or : [{"activities.result.action": 'reject'}, {"activities.result.action": 'rejected'}] });
+                    }
+                    else if(status == 'Expired' ){
+                        queries.$and.push({ "state": {'$ne' : 'completed'}});
+                        queries.$and.push({ "state": {'$ne' : 'canceled'}})
+                        queries.$and.push( {"$and" : [{"createdOn": {"$lt": expired }} ] });
+                    }
+                    else if(status == 'Canceled' ){
+                        queries.$and.push({"state": 'canceled'})
+                    }
+                    else if(status == 'All' ){
+                        
+                    }
+                    
                     return queries;
                 }
 
