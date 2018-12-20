@@ -448,7 +448,7 @@ app.filter("schemaShortName", [function() {
 
         if (!schema) return schema;
         if (schema.toLowerCase() == "absprocedure") return "PRO";
-        if (schema.toLowerCase() == "absnationalmodelcontractualclause") return "NMCC;
+        if (schema.toLowerCase() == "absnationalmodelcontractualclause") return "NMCC";
         if (schema.toLowerCase() == "focalpoint") return "NFP";
         if (schema.toLowerCase() == "authority") return "CNA";
         if (schema.toLowerCase() == "contact") return "CON";
