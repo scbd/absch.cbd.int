@@ -1,0 +1,179 @@
+﻿<div id="userAlerts">
+
+
+
+    <style>
+        .ngdialog-content #searchFilterTab, .ngdialog-content .help-tour {
+            display: none!important;
+         }
+        .ngdialog.ngdialog-theme-default.wide .ngdialog-content {
+            width: 70% !important;
+        }
+    </style>
+
+    <div class="container-fluid">
+
+        <div ng-if="showSystemAlerts">
+            <div class="row" style="padding:10px 0;background-color:#eee;">
+                <div class="col-xs-7 col-sm-8">
+                    <small class="bold">system alert</small><br>
+                    <span class="bold">Email me when a certificate (IRCC) is constituted indicating that prior informed
+                        consent (PIC)has been granted to a user within my jurisdiction</span>
+                </div>
+                <div class="col-xs-1 text-center color-darkgray">
+                    <small class="hidden-xs">Email</small>
+                    <div ng-click="subscribe('absPermit')" class="color-white" ng-if="!hasUserSubscribed('absPermit')"
+                        style="cursor:pointer">
+                        <i class="fa fa-square fa-2x"></i></div>
+                    <div ng-click="unsubscribe('absPermit')" class="color-darkgray" ng-if="hasUserSubscribed('absPermit')"
+                        style="cursor:pointer">
+                        <i class="fa fa-check-square fa-2x"></i> </div>
+                </div>
+                <div class="col-xs-1 text-center color-darkgray">
+                    <small class="hidden-xs">Search</small>
+                    <div style="cursor:pointer">
+                        <i class="fa fa-play fa-2x"></i> </div>
+                </div>
+                <div class="col-xs-1 text-center color-white">
+                    <small class="hidden-xs">Edit</small>
+                    <div style="cursor:pointer">
+                        <i class="fa fa-edit fa-2x"></i></div>
+                </div>
+                <div class="col-xs-1 text-center color-white">
+                    <small class="hidden-xs">Delete</small>
+                    <div style="cursor:pointer">
+                        <i class="fa fa-trash-o fa-2x"></i></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div ng-repeat="record in userFilters | orderBy:'meta.createdOn':'desc'">
+            <div class="row" ng-hide="record.pendingStatus || del" style="padding:10px 0;background-color:#eee;margin-top:10px;">
+                <div class="col-xs-7 col-sm-8">
+                    <span class="bold">{{record.queryTitle}}
+                    </span>
+                    <br>
+                    <span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
+                        <span class="label label-info">
+                            <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
+                            {{filter.name}}
+                            <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
+                        </span>
+                    </span>
+                </div>
+                <div class="col-xs-1 text-center color-darkgray">
+                    <small class="hidden-xs">Email</small>
+                    <div ng-click="subscribe(record._id)" class="color-white" ng-if="!hasUserSubscribed('record._id')"
+                        style="cursor:pointer">
+                        <i class="fa fa-square fa-2x"></i></div>
+                    <div ng-click="unsubscribe(record._id)" class="color-darkgray" ng-if="hasUserSubscribed(record._id)"
+                        style="cursor:pointer">
+                        <i class="fa fa-check-square fa-2x"></i> </div>
+                </div>
+                <div class="col-xs-1 text-center color-darkgray">
+                    <small class="hidden-xs">Search</small>
+                    <div style="cursor:pointer" ng-hide="del" ng-click="runUserQuery(record)" >
+                        <i class="fa fa-play fa-2x"></i> </div>
+                </div>
+                <div class="col-xs-1 text-center color-darkgray">
+                    <small class="hidden-xs">Edit</small>
+                    <div style="cursor:pointer" ng-hide="del" ng-click="addEdit(record)" ng-disabled="!record._id">
+                        <i class="fa fa-edit fa-2x"></i></div>
+                </div>
+                <div class="col-xs-1 text-center color-darkgray">
+                    <small class="hidden-xs">Delete</small>
+                    <div style="cursor:pointer" ng-hide="del" ng-click="del=!!record._id;confirmDelete(record)" ng-disabled="!record._id">
+                        <i class="fa fa-trash-o fa-2x"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <button class="btn btn-primary pull-right" ng-click="addEdit()"><i class="fa fa-plus-circle"></i> Add new</button>
+    <div class="clearfix"></div>
+
+    <!-- <div style="width:100%" >
+       
+        <div class="table table-striped" ng-show="userFilters.length>0">
+            
+            <div ng-repeat="record in userFilters | orderBy:'meta.createdOn':'desc'" class="row" style="border-bottom:1px solid #e5e5e5; padding-top:5px">
+
+
+                
+                <div ng-class="{'col-md-3':record._id, 'col-md-9':!record._id}">
+                    <b>
+                        <a class="text-bold mb0" ng-click="runUserQuery(record)">{{record.queryTitle}}</a>
+                    </b>
+                </div>
+                <div class="col-md-6" ng-if="record._id">
+                    <span ng-if="record._id" ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
+                        <span class="label label-info">
+                            <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span> {{filter.name}}
+                            <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
+                        </span>
+                    </span>
+                </div>
+                <div class="col-md-3">
+                    <div class="pull-right btn-group" ng-hide="record.pendingStatus">
+                        <a type="button" class="btn" ng-hide="del" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'">
+                            <i class="fa fa-play-circle"></i>
+                            <br> run query</a>
+                        <a type="button" class="btn" ng-hide="del" ng-click="addEdit(record)" ng-disabled="!record._id">
+                            <i class="fa fa-edit"></i>
+                            <br> edit</a>
+                        <a type="button" class="btn" ng-hide="del" ng-click="del=!!record._id;" ng-disabled="!record._id">
+                            <i class="fa fa-trash-o"></i>
+                            <br> delete</a>
+                        <a type="button" class="btn color-red bold" ng-show="del" ng-click="confirmDelete(record);del=false;">
+                            <i class="fa fa-trash-o"></i>
+                            <br> confirm delete?</a>
+                        <a type="button" class="btn" ng-show="del" ng-click="del=false;">
+                            <i class="fa fa-times-circle"></i>
+                            <br> cancel</a>
+                    </div>
+                    <div ng-if="record.pendingStatus" class="pull-right">
+                        <i class="fa fa-spin fa-spinner" /> pending status..</div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div ng-show="!loading && (!userFilters || userFilters.length==0)">
+        <div class="alert alert-info" role="alert">
+            <span ng-if="user.isAuthenticated">You do not have any saved
+                <span ng-if="collection=='subscriptions'"> email alerts</span>
+                <span ng-if="collection=='search-queries'">searches.</span></span>
+            <span ng-if="!user.isAuthenticated">Please log in to view your saved searches.</span>
+        </div>
+    </div>
+
+    <script type="text/ng-template" trados-translation="true" id="newFilterDialog">
+        <div class="modal-header">
+            <h3 class="modal-title">
+                Add/Edit filter
+            </h3>
+        </div>
+        <div class="modal-body">
+            <label for="filterTitle">Select search filters:</label>
+            <search-directive skip-results="true" skip-save-filter="true" skip-date-filter="true" skip-keywords-filter="{{skipKeywordsFilter}}"
+                skip-text-filter="{{skipTextFilter}}">
+            </search-directive>
+            <br>
+            <div class="form-group">
+                <label for="filterTitle">Title:</label>
+                <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Search title">
+            </div>
+            <div>
+                <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
+                    <p ng-repeat="error in errors">{{error}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
+            <button type="button" class="btn btn-primary pull-left" aria-label="Save" ng-click="save(document)" ng-disabled="loading">Save</button>
+        </div>
+    </script>
+</div>

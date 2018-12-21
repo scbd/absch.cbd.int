@@ -11,7 +11,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 'views/search/search-results/result-default',
 'views/search/search-results/national-records-country',
 'services/app-config-service', 'ngDialog',
-'views/register/user-preferences/user-preference-filter',
+'views/register/user-preferences/user-alerts',
 'views/directives/export-directive',
 'services/thesaurus-service', 'angular-animate', 'angular-joyride',
 'components/scbd-angularjs-services/services/locale',

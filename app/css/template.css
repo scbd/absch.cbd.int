@@ -1575,14 +1575,14 @@ div.recordDefault:hover {
 }
 #RegisterPage .register-content,
 #SubmitPage .register-content,
-#PreferncesPage .register-content {
+#PreferencesPage .register-content {
     background-color: #FFF;
     margin: 20px 0;
     
 }
 #RegisterPage .register-content-header h3,
 #SubmitPage .register-content-header h3,
-#PreferncesPage .register-content-header h3 {
+#PreferencesPage .register-content-header h3 {
     padding: 0;
     margin: 0 0 5px 0;
    
@@ -1590,7 +1590,7 @@ div.recordDefault:hover {
 
 #RegisterPage .register-content-content,
 #SubmitPage .register-content-content,
-#PreferncesPage .register-content-content {
+#PreferencesPage .register-content-content {
     padding: 10px;
 }
 
@@ -1599,7 +1599,7 @@ div.recordDefault:hover {
 
 #RegisterPage .cp-header label,
 #SubmitPage .cp-header label,
-#PreferncesPage .cp-header label {
+#PreferencesPage .cp-header label {
     margin-right: 10px;
     width: 140px;
     color: #999;

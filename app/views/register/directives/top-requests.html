@@ -17,7 +17,7 @@
     <div style="font-size:12px; padding-bottom:10px;" ng-show="showAll">
         <span ng-show="loading"> <i class="fa fa-cog fa-spin fa-lg" /> loading...</span>
 
-        <div class="row" style="background-color:#f9f9f9;border:1px solid #ddd; margin:5px 1px 5px 1px; cursor: pointer; border-radius: 5px;"
+        <div class="row" style="background-color:#f9f9f9;border:1px solid #ddd; margin:5px 1px 5px 1px; cursor: pointer; border-radius: 3px;"
             ng-click="gotoRequest(task.workflow.data.metadata.schema, task.identifier)" ng-repeat="task in tasks|filter:keywords|orderBy:sortTerm:orderList"
             id="{{task.workflow._id}}">
 
