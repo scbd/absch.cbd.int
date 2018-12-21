@@ -106,8 +106,11 @@ define(['app',
 
                     //==============================================================
                     $scope.runFilter = function (filter) {
-                        localStorageService.set("run-query", filter.filters)
-                        $location.path('/search/run-query')
+                        localStorageService.set("run-query", filter.filters);
+                        window.open(
+                            '/search/run-query',
+                            '_blank' 
+                          );
                     };
 
              
