@@ -52,6 +52,8 @@
             <div class="row" ng-hide="record.pendingStatus || del" style="padding:10px 0;background-color:#eee;margin-top:10px;">
                 <div class="col-xs-7 col-sm-8">
                     <span class="bold">{{record.queryTitle}}
+
+                        {{record}}
                     </span>
                     <br>
                     <span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
@@ -65,10 +67,10 @@
                 <div class="col-xs-1 text-center color-darkgray">
                     <small class="hidden-xs">Email</small>
                     <div ng-click="subscribe(record._id)" class="color-white" ng-show="!hasUserSubscribed('record._id')" style="cursor:pointer">
-                        <i class="fa fa-square fa-2x"></i>
+                        <i class="fa fa-square fa-2x" ng-click="subscribe(record._id)" ng-show="!hasUserSubscribed('record._id')"></i>
                     </div>
                     <div ng-click="unsubscribe(record._id)" class="color-darkgray" ng-show="hasUserSubscribed(record._id)" style="cursor:pointer">
-                        <i class="fa fa-check-square fa-2x"></i> 
+                        <i class="fa fa-check-square fa-2x" ng-click="unsubscribe(record._id)"  ng-show="hasUserSubscribed('record._id')"></i> 
                     </div>
                 </div>
                 <div class="col-xs-1 text-center color-darkgray">
