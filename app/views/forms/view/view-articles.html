@@ -44,24 +44,26 @@
         </div>
     </div>  
        
-        <div class="row" style="margin:10px 5px 10px 5px;" ng-if="articles">
-            <div ng-repeat="article in articles | orderBy:'meta.createdOn':true" style="cursor:pointer"  >
-                        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2" ng-click="loadArticle(article._id)">
-                        
-                                <div  style="background-color:#f9f9f9;border-top:1px solid #ddd; border-bottom:1px solid #ddd;height:200px;margin-bottom:10px;">
-                                        <div  class="news-image" style="background-image: url({{::getSizedImage(article.coverImage.url, '400x400')}});" ng-class="{'sized':article.coverImage.url,'small-sized':!article.coverImage.url}"> 
-                                                <span class="bg-red color-white news-date">{{article.meta.createdOn | formatDateWithUtc}}</span>
-                                        </div>
-                                        <div style="margin:5px;" ng-class="{'noimagetable':!article.coverImage.url}" >
-                                            
-                                            <h4  ng-class="{'noimage':!article.coverImage.url}">
-                                                <span style="display:block;font-size: 10px; text-transform: uppercase;" class="color-blue bold">{{article.summary | lstring:locale}}</span>
-                                                {{article.title | lstring:locale}}</h4>
-                                        </div>
-                                    </div>
-                    </div>  
+        <div class="row"  ng-if="articles">
+            <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:9" style="cursor:pointer;" class="col-xs-12 col-md-6 col-lg-4"  >
+                <div  class='row' style="margin:0px 0px;">
+                        <table  style="width:100%;height:100px;background-color:#f9f9f9;border-top:1px solid #ddd; border-bottom:1px solid #ddd;margin:5px 0px;" ng-click="loadArticle(article._id)">
+                            <tr>
+                                <td style="width:160px;vertical-align: top; height:100px;overflow: hidden; background-image: url({{getSizedImage(article.coverImage.url, '160x100')}});background-position: center;  background-repeat: no-repeat"> 
+                                    <img src=""  style="width:100%;height:auto;" height="42" width="42"></img>
+                                </td>
+                                <td style="vertical-align: top;">
+                                        <span class="news-date">{{article.meta.createdOn | formatDateWithUtc}}</span>
+                                        <h4 style="font-size:18px;padding:15px 3px 3px 10px;margin:0;" ng-class="{'noimage':!article.coverImage.url}">
+                                        <span style="display:block;font-size: 10px; text-transform: uppercase;" class="color-blue ">{{article.summary | lstring:locale}}</span>
+                                        {{article.title | lstring:locale}}</h4>
+                                </td>
+                            </tr>
+                        </table>
+                </div>
             </div>
         </div>
+
 
       
   
