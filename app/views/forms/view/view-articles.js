@@ -43,7 +43,7 @@ define(['app','underscore',
       function loadArticles(tag){
         var ag = [];
         ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent(tag)}]}});
-        ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1}});
+        ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "summary":1}});
         var qs = {
           "ag" : JSON.stringify(ag)
         };
