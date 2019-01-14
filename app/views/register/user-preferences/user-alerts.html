@@ -155,9 +155,11 @@
         </div>
         <div class="modal-body">
             <label for="filterTitle">Select search filters:</label>
-            <search-directive skip-results="true" skip-save-filter="true" skip-date-filter="true" skip-keywords-filter="{{skipKeywordsFilter}}"
-                skip-text-filter="{{skipTextFilter}}">
-            </search-directive>
+            <div class="bg-white" style="border:1px solid #ccc; border-radius: 5px;">
+                <search-directive skip-results="true" skip-save-filter="true" skip-date-filter="true" skip-keywords-filter="{{skipKeywordsFilter}}"
+                    skip-text-filter="{{skipTextFilter}}">
+                </search-directive>
+             </div>
             <br>
             <div class="form-group">
                 <label for="filterTitle">Title:</label>
@@ -170,8 +172,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
-            <button type="button" class="btn btn-primary pull-left" aria-label="Save" ng-click="save(document)" ng-disabled="loading">Save</button>
+            <button type="button" class="btn btn-primiary pull-left" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save(document)" ng-disabled="loading">Save</button>
         </div>
     </script>
 </div>
