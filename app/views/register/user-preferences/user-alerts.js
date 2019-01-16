@@ -43,7 +43,7 @@ define(['app',
                         "filters": [{
                             "type": "custom",
                             "isSystemAlert":"true",
-                            "name": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+                            "name": "Certificates (IRCC) constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
                             "id": "entitiesToWhomPICGrantedCountry",
                             "query": 'entitiesToWhomPICGrantedCountry_ss:'
                         }],
