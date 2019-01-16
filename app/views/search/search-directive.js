@@ -471,9 +471,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                               qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
                               qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
 
-
-
-
                         }
 
                         if(queryType === 'reference'){
@@ -1212,6 +1209,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 
                     //===============================================================================================================================
                     loadFilters();
+
+
                     if(!$scope.skipResults && $routeParams.recordType){
                         if($routeParams.recordType == 'run-query'){
                             var queryFilter = localStorageService.get("run-query");                            
@@ -1270,12 +1269,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                                             $scope.record = {filters : _.values(filters) }
                                         
                                         $scope.record.realm = realm.value;
+                                        $scope.record.isSystemAlert = false;
 
                                         $scope.saveFilter = function(){
                                             $scope.loading = true;                                            
-                                            var operation = $http.post('/api/v2016/me/search-queries', $scope.record);
+                                            var operation = $http.post('/api/v2016/me/subscriptions', $scope.record);
                                             if($scope.record._id)
-                                                operation = $http.put('/api/v2016/me/search-queries/' + $scope.record._id, $scope.record);
+                                                operation = $http.put('/api/v2016/me/subscriptions/' + $scope.record._id, $scope.record);
                                             operation.then(function (data) {
                                                 record = data.data;
                                                 $scope.closeDialog();
