@@ -42,6 +42,7 @@ define(['app',
                         system: true,
                         "filters": [{
                             "type": "custom",
+                            "isSystemAlert":"true",
                             "name": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
                             "id": "entitiesToWhomPICGrantedCountry",
                             "query": 'entitiesToWhomPICGrantedCountry_ss:'
@@ -106,21 +107,25 @@ define(['app',
 
                      //==============================================================
                      $scope.runSystemFilter = function () {
-                        $scope.runFilter(systemSearches);
+                        $scope.runFilter(systemSearches[0].filters);
                      }
                     //==============================================================
-                    $scope.runFilter = function (filter) {
-                        localStorageService.set("run-query", filter.filters);
+                    $scope.runFilter = function (filters) {
+                        
+                        if(filters) {
+                            
+                            localStorageService.set("run-query", filters);
 
-                        if(!$scope.runQueryInPage){
-                            window.open(
-                                    '/search/run-query',
-                                    '_blank' 
-                                ); 
-                        }
-                        else
-                        {
-                            window.location.href =  '/search/run-query';
+                            if(!$scope.runQueryInPage){
+                                window.open(
+                                        '/search/run-query/',
+                                        '_blank' 
+                                    ); 
+                            }
+                            else
+                            {
+                                window.location.href =  '/search/run-query';
+                            }
                         }
                     };
 
