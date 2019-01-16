@@ -22,6 +22,7 @@ define(['app',
             scope: {
                 runQuery: '&',
                 collection: '@',
+                runQueryInPage: '@',
                 collectionFilter: '@?'
             },
             link: function ($scope, element, attrs) {},
@@ -34,24 +35,23 @@ define(['app',
                     $scope.skipTextFilter = false;
                     $scope.systemAlertsSubscription = [];
 
-                    if ($scope.collection == "subscriptions") {
-                        $scope.skipKeywordsFilter = true;
-                        $scope.skipTextFilter = true;
-                    } else {
-                        systemSearches = [{
-                            system: true,
-                            "filters": [{
-                                "type": "custom",
-                                "name": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
-                                "id": "entitiesToWhomPICGrantedCountry",
-                                "query": 'entitiesToWhomPICGrantedCountry_ss:'
-                            }],
-                            "queryTitle": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
-                            "meta": {
-                                "createdOn": moment.utc().format()
-                            }
-                        }];
-                    }
+                    $scope.skipKeywordsFilter = true;
+                    $scope.skipTextFilter = true;
+                
+                    systemSearches = [{
+                        system: true,
+                        "filters": [{
+                            "type": "custom",
+                            "name": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+                            "id": "entitiesToWhomPICGrantedCountry",
+                            "query": 'entitiesToWhomPICGrantedCountry_ss:'
+                        }],
+                        "queryTitle": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+                        "meta": {
+                            "createdOn": moment.utc().format()
+                        }
+                    }];
+                    
 
                     if ($scope.user.government) {
                         if (roleService.isAbsPublishingAuthority() ||
@@ -79,12 +79,12 @@ define(['app',
                                 query = JSON.parse($scope.collectionFilter);
 
                             query.realm = realm.value;
-                            IGenericService.query('v2016', 'me/' + $scope.collection, query)
+                            IGenericService.query('v2016', 'me/subscriptions', query)
                                 .then(function (data) {
-                                    if ($scope.collection == "search-queries" && $scope.user.government) {
-                                        _.first(systemSearches).filters[0].query += $scope.user.government;
-                                        $scope.userFilters = _.union(systemSearches, data);
-                                    } else
+                                    // if ($scope.collection == "search-queries" && $scope.user.government) {
+                                    //     _.first(systemSearches).filters[0].query += $scope.user.government;
+                                    //     $scope.userFilters = _.union(systemSearches, data);
+                                    // } else
                                         $scope.userFilters = data;
                                 });
                         }
@@ -104,13 +104,24 @@ define(['app',
                             });
                     };
 
+                     //==============================================================
+                     $scope.runSystemFilter = function () {
+                        $scope.runFilter(systemSearches);
+                     }
                     //==============================================================
                     $scope.runFilter = function (filter) {
                         localStorageService.set("run-query", filter.filters);
-                        window.open(
-                            '/search/run-query',
-                            '_blank' 
-                          );
+
+                        if(!$scope.runQueryInPage){
+                            window.open(
+                                    '/search/run-query',
+                                    '_blank' 
+                                ); 
+                        }
+                        else
+                        {
+                            window.location.href =  '/search/run-query';
+                        }
                     };
 
              
@@ -130,6 +141,7 @@ define(['app',
                             queryTitle: event + " system alert",
                             isSystemAlert: true,
                             realm: realm.value,
+                            sendEmail: true,
                             filters: [{
                                     "type": "national",
                                     "id": event
@@ -143,9 +155,42 @@ define(['app',
                         IGenericService.create('v2016', 'me/subscriptions', document)
                             .then(function (data) {
                                 document._id = data.id;
+                                console.log("ID=" + data.id)
                                 $scope.systemAlertsSubscription.push(document);
                             });
                     };
+
+                    //==============================================================
+                    $scope.emailSubscribe = function (record, flag) {
+                     
+                        if (record) {
+                            
+                            record.sendEmail = flag;
+
+                            operation = IGenericService.update('v2016', 'me/subscriptions', record._id, record);
+
+                            operation.then(function (data) {
+                                
+                                if (!record._id)
+                                    record._id = data.id;
+
+                                //updateRecord(record);
+                            });
+                        }
+                    };
+
+                    //==============================================================
+                    $scope.hasUserEmailSubscribed = function (record) {
+                     
+                        if (record) {
+                            
+                            if(record.sendEmail){
+                                return true;
+                            }
+                        }
+                        return false;
+                    };
+
 
                     //==============================================================
                     $scope.unsubscribe = function (event) {
@@ -165,7 +210,7 @@ define(['app',
                     //==============================================================
                     $scope.confirmDelete = function (record) {
                         $scope.loading = true;
-                        $http.delete('/api/v2016/me/' + $scope.collection + '/' + record._id)
+                        $http.delete('/api/v2016/me/subscriptions/' + record._id)
                             .then(function () {
                                 $scope.userFilters.splice($scope.userFilters.indexOf(record), 1);
                             });
@@ -220,9 +265,9 @@ define(['app',
                                         document.filters = _.values($scope.setFilters);
                                         document.realm = realm.value;
                                         if (!document._id)
-                                            operation = IGenericService.create('v2016', 'me/' + collection, document);
+                                            operation = IGenericService.create('v2016', 'me/subscriptions', document);
                                         else
-                                            operation = IGenericService.update('v2016', 'me/' + collection, document._id, document);
+                                            operation = IGenericService.update('v2016', 'me/subscriptions', document._id, document);
 
                                         operation.then(function (data) {
                                             $scope.closeDialog();
@@ -237,7 +282,8 @@ define(['app',
 
                                 }]
                             });
-
+                            
+                            //==============================================================
                             function updateRecord(document, delay) {
                                 if (!$scope.userFilters)
                                     $scope.userFilters = [];
@@ -249,7 +295,7 @@ define(['app',
                                     existing = document;
                                 }
                                 existing.pendingStatus = true;
-                                IGenericService.get('v2016', 'me/' + $scope.collection, document._id)
+                                IGenericService.get('v2016', 'me/subscriptions', document._id)
                                     .then(function (data) {
                                         existing = _.extend(existing, data);
                                         existing.pendingStatus = false;
@@ -263,6 +309,7 @@ define(['app',
                             }
                         }
                     };
+
 
                     loadSavedFilters();
                 }
