@@ -1,0 +1,162 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-blue">
+		<h4>
+			Biosafety Law, Regulation, Guidelines and Agreements
+			<span class="color-black"> (LAW) </span>
+		</h4>
+	</div>
+	<div class="record-body panel-body">
+
+
+
+		<document-date></document-date>
+		<legend>General information</legend>
+
+		<div ng-show="document.government">
+			<label name="country">Country</label>
+			<div class="km-value">
+				<a ng-href="/countries/{{document.government.identifier}}" target={{target}}>{{document.government|term:locale}}</a>
+				<span ng-party-status government="document.government" id="government"></span>
+			</div>
+		</div>
+
+		<div ng-show="document.title">
+			<label>Title</label>
+			<div class="km-value">
+				<strong>{{document.title | lstring:locale}}</strong>
+			</div>
+		</div>
+
+		<div ng-show="document.jurisdictions">
+			<label>Jurisdiction</label>
+			<div class="km-value">
+				<ul>
+					<li ng-repeat="item in document.jurisdictions">
+						<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+						<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<legend>Legislative details</legend>
+		<div>
+			<div ng-show="document.type">
+				<label>Type of document</label>
+				<div class="km-value">
+					<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type|term:locale"></span>
+					<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type.customValue|lstring:locale"></span>
+				</div>
+			</div>
+
+			<div ng-show="document.cpbSubjectAreas">
+				<label>Subject areas</label>
+				<div class="km-value">
+					<ul class="list">
+						<li ng-repeat="item in document.cpbSubjectAreas">
+							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+							<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div ng-show="document.cpbOrganismTypes">
+				<label>Types of LMOs addressed</label>
+				<div class="km-value">
+					<ul class="list">
+						<li ng-repeat="item in document.cpbOrganismTypes">
+							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+							<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div ng-show="document.description">
+				<label>Brief description of the document including objective and scope</label>
+				<div>
+					<km-value-ml value="document.description" html locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-show="document.entryIntoForce">
+				<label>Date of entry into force</label>
+				<div class="km-value">
+					<span ng-bind="document.entryIntoForce"></span>
+				</div>
+			</div>
+		</div>
+
+
+		<div ng-show="document.date">
+				<label>Date of the decision</label>
+				<div class="km-value" ng-bind-html="document.date | formatDate"></div>
+			</div>
+			<div ng-show="document.takenPriorEntryIntoForce!==undefined">
+				<label>Is the decision taken prior to entry into force of the Protocol?</label>
+				<div  class="km-value">
+					<km-value-bool value="document.takenPriorEntryIntoForce" locales="locale"></km-value-bool>
+				</div>
+			</div>
+			<div ng-if="document.isAmendment">
+				<div ng-show="document.isAmendment">
+					<label>Is this an amendment to a previous decision / communication?</label>
+					<div  class="km-value">
+						<km-value-bool value="document.isAmendment" locales="locale"></km-value-bool>
+					</div>
+				</div>
+				<div ng-show="document.amendedDecisions">
+					<label>BCH decision amended</label>
+					<div class="km-value">
+						<ul class="list">
+							<li ng-repeat="item in document.amendedDecisions">
+								<view-default-reference ng-model='item.identifier' locale="locale"></view-default-reference>
+							</li>
+						</ul>						
+					</div>
+				</div>
+				<div ng-show="document.amendmentReason">
+					<label>Reasons for the amendment</label>
+					<div class="km-value">
+						<km-value-ml value="document.amendmentReason" locales="locale"></km-value-ml>
+					</div>
+				</div>
+				<div>
+					<label>This decision has been amended by following decision</label>
+					<view-default-reference ng-model="document.header.identifier"></view-default-reference>
+				</div>
+			</div>
+
+		<div ng-show="document.authorities">
+			<label>Competent National Authority(ies) responsible for the decision or communication</label>
+			<div class="km-value">
+				<ul class="list">
+					<li ng-repeat="item in document.authorities" >						
+						<view-contact-reference ng-model='item' locale="locale"></view-contact-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div ng-show="document.description">
+			<label>Description</label>
+			<div class="km-value km-pre" ng-bind-html="document.description | lstring:locale"></div>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>Additional Information</legend>
+
+			<div ng-show="document.relevantInformation">
+				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>Other relevant website address or attached documents</label>
+				<div class="km-value" ng-repeat="item in document.relevantDocuments">
+					<a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>

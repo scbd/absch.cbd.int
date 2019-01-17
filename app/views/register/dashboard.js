@@ -8,7 +8,8 @@ function(app, _, ng) {
                     'IWorkflows',
         function($rootScope, $scope, storage, roleService, $compile, realm, $q, $routeParams, 
                 $location, $filter, $http, $timeout, toastr, appConfigService, IWorkflows) {
-
+            
+            $scope.Math = window.Math;
             $scope.nationalSchemas = _.without(appConfigService.nationalSchemas, 'contact', 'focalPoint');
             $scope.referenceSchemas = _.without(appConfigService.referenceSchemas, 'capacityBuildingResource');
             $scope.topRecords = {};

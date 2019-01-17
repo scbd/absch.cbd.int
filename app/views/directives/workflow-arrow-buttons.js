@@ -628,6 +628,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                     var absHosts = ['https://absch.cbddev.xyz/', 'https://training-absch.cbd.int/',
                        'http://localhost:2010/', 'https://absch.cbd.int/', 'https://absch.cbddev.xyz/',
+                       'https://bch-demo.cbd.int'
                    ]
                    $timeout(function() {
                        if($route.current.params.workflow){
@@ -734,7 +735,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     };
 
                     articlesService.getArticles(qs, true).then(function(data){
-                        $scope.article = data[0];
+                        if(data)
+                            $scope.article = data[0];
                     })
                     .finally(function(){
                         $scope.loading = false;

@@ -21,7 +21,7 @@
                },
                controller : ["$scope", 'realm', "IStorage", function ($scope, realm, storage)
                {
-                   $scope.schema = realm.schemas.absProcedure
+                   $scope.schema = realm.schemas.absNationalModelContractualClause;
                    //====================
                    //
                    //====================

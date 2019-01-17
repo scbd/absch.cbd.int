@@ -216,6 +216,9 @@
                                 font-size: 20px!important;
                                 font-weight: bold;
                             }
+                            .bch-height{
+                                height: 400px!important;
+                            }
                         </style>
                 <!-- <div class="map-filters-bg" ></div> -->
                 <div class="map-container"  ng-style="{'height': isBCH ? '450px' : '350px'}">
@@ -234,7 +237,7 @@
 
                             </div>
                         </div>
-                        <div class="map-filters-bg map-container-mainbody" ng-class="{'reduced-height':reduceDetailsHeight}">
+                        <div class="map-filters-bg map-container-mainbody" ng-class="{'reduced-height':reduceDetailsHeight, 'bch-height':isBCH}" >
                             <div ng-if="isBCH && currentCountry"> 
                                 <ng-include  onload="country=countryMapScope.currentCountry" 
                                     src="'/app/views/countries/pin-popup-bch.html'" ></ng-include>

@@ -13,6 +13,13 @@ define(['app', 'underscore'], function (app, _) {
                 return fn_getDomainTerms(termIdentifier, includeOthers);
             };
 
+            this.getTerms = function(term){
+                return $http.get('/api/v2013/thesaurus/terms/' + terms[term] , {cache:true})
+                .then(function(termData){
+                    return termData.data;
+                });;
+            };
+
             function fn_getDomainTerms(termIdentifier, includeOthers){
                 if(!termIdentifier)
                     throw "Domain term is missing";
@@ -41,6 +48,9 @@ define(['app', 'underscore'], function (app, _) {
                                 return data.data;
                             });
             }
+            var terms = {
+                others                   : "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+            }
             var domainTerms = {
                 countries                : "countries",
                 regions                  : "regions",
@@ -65,7 +75,14 @@ define(['app', 'underscore'], function (app, _) {
                 decisionResults          :  'DecisionResults',
                 riskAssessmentScope      :  'RiskAssessmentScope',
                 dnaSequenceFamily        :  '82DAAF04-6698-4CA6-81D5-F200AE64C63A',
-                dnaSequenceTraits        :  'B8EB2261-7695-4DC5-9C4E-026D380DA7CB'
+                dnaSequenceTraits        :  'B8EB2261-7695-4DC5-9C4E-026D380DA7CB',
+                legislationAgreementTypes:  'Legislation And Agreement Types',
+                subjectAreas             :  'Subject Areas',
+                typeOfOrganisms          :  'TypeOfOrganisms',
+                domestication            :  'B89720B8-81BF-4A6B-8084-8D464403C25A',
+                OrganismCommonUses       :  'OrganismCommonUses',
+                techniqueUsed            :  'ABE9DCE3-92BA-4D5D-8948-7F7E541EEC6B'
+                
             }
         }
     }]);

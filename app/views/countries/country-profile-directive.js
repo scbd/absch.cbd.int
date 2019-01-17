@@ -15,8 +15,8 @@
                 api : '=?',
                 code : '='
             },
-            controller: ["$scope", "$routeParams",  "realm", '$element', '$timeout','searchService',
-                function($scope, $routeParams, realm, $element, $timeout, searchService) {
+            controller: ["$scope", "$routeParams",  "realm", '$element', '$timeout','searchService', '$filter',
+                function($scope, $routeParams, realm, $element, $timeout, searchService, $filter) {
 
                 $scope.api = {
                     loadCountryDetails : loadCountryRecords
@@ -80,9 +80,9 @@
                             countryRecords[schema]     = _.extend(countryRecords[schema], group.doclist);
 
                         });
-
-                        if($routeParams.code && $routeParams.schema && $routeParams.schema == countryRecords[schema].shortCode){                            
-                            countryRecords[schema].display = true;
+                        var schemaName = $filter('mapSchema')($routeParams.schema);
+                        if($routeParams.code && $routeParams.schema && $routeParams.schema == countryRecords[schemaName].shortCode){                            
+                            countryRecords[schemaName].display = true;
 
                             $timeout(function(){                    
                                 var div = $element.find('#div'+$routeParams.schema.toUpperCase());

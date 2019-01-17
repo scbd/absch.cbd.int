@@ -77,7 +77,8 @@ define(['app', 'lodash', 'linqjs'], function(app, _, Enumerable) {
             var trainingRealms = {
                 urls: [
                     'https://training-absch.cbd.int', 
-                    'https://training-bch.cbd.int' 
+                    'https://training-bch.cbd.int' , 
+                    'https://bch-demo.cbd.int' 
                 ],
                 realms: ['ABS-TRG', 'BCH-TRG']
             };

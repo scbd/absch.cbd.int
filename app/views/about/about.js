@@ -1,5 +1,5 @@
 define(['app','underscore',
-  '/components/scbd-angularjs-services/services/locale',
+  'components/scbd-angularjs-services/services/locale',
   './article-search.directive',
   './article-guides.directive',
   'components/scbd-angularjs-services/filters/scbd-filters',

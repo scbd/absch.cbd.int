@@ -253,6 +253,13 @@ background-color: white;
     background-color: #1FA65D!important;
 }
 
+.bch-map-bg{
+    background-color: #d8e3f7!important;
+}
+.bch-map-text-color{
+    color:#585972!important;
+}
+
 .bg-black {
     background-color: #111!important;
     color: white!important;
@@ -1050,7 +1057,7 @@ footer .logo {
     z-index: 80;
 }
 #anchorTop {
-    z-index: 1001;
+    z-index: 1001!important;
 }
 .label {
     padding: .2em .6em .2em!important;

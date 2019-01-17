@@ -390,6 +390,7 @@ define([
         $scope.$emit("loadDocument", {identifier:doc.header.identifier,schema:doc.header.schema, document:doc});
 
         $scope.status = "ready";
+        return $scope.document;
 
       }).catch(function(err) {
 

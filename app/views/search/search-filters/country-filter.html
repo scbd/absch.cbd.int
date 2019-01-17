@@ -25,11 +25,11 @@
             <div ng-if="cf_showCountry(doc)">
             <a translation-url  class="filter"  ng-click="saveFilter(doc)" >
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
-                <span  class="bold" ng-class="{'color-party': doc.isNPParty, 'color-inbetween':doc.isNPInbetweenParty, 'color-nonparty':!doc.isNPParty && !doc.isNPInbetweenParty }">{{doc.name}}</span>
+                <span  class="bold" ng-class="{'color-party': doc.isAppProtocolParty, 'color-inbetween':doc.isNPInbetweenParty, 'color-nonparty':!doc.isAppProtocolParty && !doc.isNPInbetweenParty }">{{doc.name}}</span>
             </a>
             <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon"></i>
-                <span ng-class="{'color-party': doc.isNPParty}">
-                   {{doc.isNPParty ? "Party to the Nagoya Protocol since " : "Non-Party"}}
+                <span ng-class="{'color-party': doc.isAppProtocolParty}">
+                   {{doc.isAppProtocolParty ? "Party to the Nagoya Protocol since " : "Non-Party"}}
                     <span class="date" ng-if="doc.entryIntoForce">{{doc.entryIntoForce | formatDate}}</span>
                 </span>
             </p>-->

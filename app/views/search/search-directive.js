@@ -65,7 +65,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                                            '5831C357-95CA-4F09-963B-DF9E8AFD8C88', '5054AC52-E738-4694-A403-6490FE7D4CF4']
                         }
                     }
-                            
+                    
+                    var isABS = realm.is('ABS');
+                    var isBCH = realm.is('BCH');
+
                     var schemaTemplate = {};
                     var index=0;        
                     _(realm.schemas).map(function(schema, key){ 
@@ -73,7 +76,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                             schemaTemplate[key] = { title : schema.title, shortCode : schema.shortCode, index: index++, docs:[], numFound:0};
                         }
                     }).value();
-
+                    $scope.recordCount = [{count:0},{count:0},{count:0}];
                     $scope.skipResults          = $attrs.skipResults;
                     $scope.skipDateFilter       = $attrs.skipDateFilter;
                     $scope.skipSaveFilter       = $attrs.skipSaveFilter;
@@ -680,7 +683,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                             $scope.searchFilters = {};
                             loadSchemaFilters();
                             loadCountryFilters();
-                            loadKeywordFilters();
+                            if(isABS)
+                                loadABSKeywordFilters();
+                            else if(isBCH)
+                                loadBCHKeywordFilters();
                             loadRegionsFilters();
                             loadDateFilters();
                             localStorageService.set("searchFilters", $scope.searchFilters);
@@ -697,28 +703,19 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                                 var countries = data;
 
                                 _.each(countries, function(country, index){
-                                addFilter(country.code.toLowerCase(), {'sort': index, 'type':'country', 'name':country.name[locale||en], 'id':country.code.toLowerCase(), 'description':'', "isCBDParty": country.isCBDParty,"isNPParty":country.isNPParty,"isNPSignatory": country.isNPSignatory,"isNPRatified": country.isNPRatified ,"isNPInbetweenParty":country.isNPInbetweenParty,"entryIntoForce": country.entryIntoForce});
+                                    addFilter(country.code.toLowerCase(), {'sort': index, 'type':'country', 'name':country.name[locale||en], 'id':country.code.toLowerCase(), 'description':'', "isCBDParty": country.isCBDParty,"isNPParty":country.isNPParty,
+                                        "isAppProtocolParty": country.isAppProtocolParty, "isNPSignatory": country.isNPSignatory,"isNPRatified": country.isNPRatified ,"isNPInbetweenParty":country.isNPInbetweenParty,"entryIntoForce": country.entryIntoForce});
                                 });
                         });
                     };
 
                   //===============================================================================================================================
-                    function loadKeywordFilters() {
+                    function loadABSKeywordFilters() {
 
-                    //   $q.when(commonjs.getThematicAreas(), function(keywords) {
-                    //             _.each(keywords, function(keyword, index){
-                    //                 addKeywordFilter(keyword, '', 'ABS Thematic Areas');
-                    //             });
-                    //     });
-                            
                         //IRCC filters
                         addKeywordFilter(customKeywords.commercial, 'absPermit', 'IRCC usages');
                         addKeywordFilter(customKeywords.nonCommercial, 'absPermit', 'IRCC usages');
-                        // $q.when(thesaurusService.getDomainTerms('usage'), function(keywords) {
-                        //         _.each(keywords, function(keyword, index){
-                        //             addKeywordFilter(keyword, 'absPermit', 'IRCC usages');
-                        //         });
-                        // });                        
+                                             
                         $q.when(thesaurusService.getDomainTerms('keywords'), function(keywords) {
                                 _.each(keywords, function(keyword, index){
                                     addKeywordFilter(keyword, 'absPermit', 'IRCC keywords');
@@ -912,6 +909,39 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                         });
 
                     };
+
+                    function loadBCHKeywordFilters(){
+
+                        var bchTerms = [
+                            'decisionTypes',            
+                            'decisionLMOFFPSubject',    
+                            'decisionResults',          
+                            'riskAssessmentScope',      
+                            'dnaSequenceFamily',        
+                            'dnaSequenceTraits',        
+                            'legislationAgreementTypes',
+                            'subjectAreas',             
+                            'typeOfOrganisms',          
+                            'domestication',            
+                            'OrganismCommonUses',       
+                            'techniqueUsed',            
+                            'cnaJurisdictions',
+                        ]
+
+                        $q.all(_.map(bchTerms, thesaurusService.getDomainTerms))
+                        .then(function(results){
+                            console.log(results);
+                            _.each(results, function(terms){
+                                _.each(terms, function(term){
+                                    addKeywordFilter(term, 'bchTerm', "ABS Thematic Areas");
+                                })
+                            })
+                            console.log($scope.searchFilters)
+                        })
+                        
+
+                    }
+
                     function isIdentifierDuplicate(keyword){                      
                         var duplicate;
                         _.reduce(customKeywords, function(memo, value, key){
@@ -928,10 +958,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                         
                          var dupIdentifier = isIdentifierDuplicate(keyword);
                          if(dupIdentifier)
-                             addFilter(dupIdentifier.identifier + "@" +  related, {'type':'keyword', 'name':dupIdentifier.title[locale||en], 'id':dupIdentifier.identifier,
+                             addFilter(dupIdentifier.identifier + "@" +  related, {'type':'keyword', 'name':dupIdentifier.title[locale||'en'], 'id':dupIdentifier.identifier,
                             'description':'',  'parent' : parent, 'related' : related, filterID: dupIdentifier.identifier + "@" +  related, 'level':level, 'broader': broader, isDuplicate : true});
                          else
-                            addFilter(keyword.identifier + "@" +  related, {'type':'keyword', 'name':keyword.title[locale||en], 'id':keyword.identifier,
+                            addFilter(keyword.identifier + "@" +  related, {'type':'keyword', 'name':keyword.title[locale||'en'], 'id':keyword.identifier,
                             'description':'',  'parent' : parent, 'related' : related, filterID: keyword.identifier + "@" +  related, 'level':level, 'broader': broader});
 
                          //_.each(keyword.narrowerTerms,function(narrower){
@@ -1102,6 +1132,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                                 nationalCurrentPage = 0;
                                 referenceCurrentPage = 0;
                                 scbdCurrentPage = 0;
+                                
+                                $scope.tabs['nationalRecords'].currentPage = 0;
+                                $scope.tabs['referenceRecords'].currentPage = 0;
+                                $scope.tabs['scbdRecords'].currentPage = 0;
                                 load();
                                 loadTabFacets();
                                 $scope.refresh = false;
