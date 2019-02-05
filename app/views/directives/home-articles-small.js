@@ -21,15 +21,28 @@ define(['app',
                         //---------------------------------------------------------------------
                         function loadArticles(){
                             var ag = [];
+                            var agLimit = [];
                             ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent($scope.tags||"ABSCH-Announcement")}]}});
                             ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "summary":1}});
-                            
-                            var qs = {
-                              "ag" : JSON.stringify(ag)
-                            };
+                            ag.push({"$sort" : {"meta.modifiedOn":-1}});
 
+                            agLimit = JSON.parse(JSON.stringify(ag))
+                            agLimit.push({"$limit" : 6});
+
+                            var qs = {
+                              "ag" : JSON.stringify(agLimit)
+                            };
                             articlesService.getArticles(qs).then(function(data){
                                 $scope.articles = data;
+                            })
+                          
+                            ag.push({"$count" : "mycount"});
+                            var qsCount = {
+                                "ag" : JSON.stringify(ag) 
+                             };
+                            
+                            articlesService.getArticles(qsCount).then(function(data){
+                                $scope.articlesCount = (data[0]||{}).mycount||0;
                               })
 
                           }
