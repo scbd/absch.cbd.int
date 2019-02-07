@@ -47,7 +47,12 @@
                 <div style="font-size: 12px;" ng-if="task.workflow.workflowExpiryDate >= today" class='bold'>
                     <span ng-if="task.workflow.type.name == 'publish-reference-record'" class="color-orange"> PENDING
                         SCBD REVIEW </span>
-                    <span ng-if="task.workflow.type.name != 'publish-reference-record'"> PENDING PA APPROVAL </span>
+                    <span ng-if="task.workflow.type.name != 'publish-reference-record'" ng-class="{'color-red': roles.isAbsPublishingAuthority }"> 
+                        PENDING    
+                        <span ng-if="roles.isAbsPublishingAuthority"> YOUR </span>
+                        <span ng-if="!roles.isAbsPublishingAuthority"> PA </span>
+                        APPROVAL
+                    </span>
                 </div>
                 <div ng-if="task.workflow.workflowExpiryDate >= today && !task.activity.isUpdating">
                     <span style="color:#888; font-size: 12px;">Expires on

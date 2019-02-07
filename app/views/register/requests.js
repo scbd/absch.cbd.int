@@ -9,7 +9,7 @@ define(['app',
 'views/forms/view/record-loader.directive'], function (app) {
 
         "use strict";
-        app.controller("pendingTasksController", ["$scope", "IWorkflows", "realm", '$rootScope', 'roleService', 
+        app.controller("requestsController", ["$scope", "IWorkflows", "realm", '$rootScope', 'roleService', 
             function ($scope, IWorkflows, realm, $rootScope, roleService) {
 
                 $scope.sortTerm = 'createdOn';
@@ -22,6 +22,20 @@ define(['app',
                 load(null);
                 $scope.loading = true;
                 $scope.filterStatus = "Pending";
+                $scope.user = $rootScope.user;
+
+                if ($scope.user.isAuthenticated) {
+                    $scope.roles = {
+                        is                       : roleService.is.bind(roleService),
+                        isAbsPublishingAuthority : roleService.isAbsPublishingAuthority(),
+                        isAbsNationalFocalPoint  : roleService.isAbsNationalFocalPoint(),
+                        isAbsAdministrator       : roleService.isAbsAdministrator(),
+                        isAdministrator          : roleService.isAdministrator(),
+                        isAbsNationalAuthorizedUser : roleService.isAbsNationalAuthorizedUser(),
+                        isUser                      : roleService.isUser()
+                    };
+                }
+    
 
                 //==================================
                 $scope.sortTable = function (term) {
