@@ -26,6 +26,19 @@
                 load(null);
                 $scope.loading = true;
                 $scope.showAll= true;
+                $scope.user = $rootScope.user;
+
+                 if ($scope.user.isAuthenticated) {
+                    $scope.roles = {
+                        is                       : roleService.is.bind(roleService),
+                        isAbsPublishingAuthority : roleService.isAbsPublishingAuthority(),
+                        isAbsNationalFocalPoint  : roleService.isAbsNationalFocalPoint(),
+                        isAbsAdministrator       : roleService.isAbsAdministrator(),
+                        isAdministrator          : roleService.isAdministrator(),
+                        isAbsNationalAuthorizedUser : roleService.isAbsNationalAuthorizedUser(),
+                        isUser                      : roleService.isUser()
+                    };
+                }
 
                 //==================================
                 function load(query) {

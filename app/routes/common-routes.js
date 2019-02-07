@@ -52,11 +52,10 @@
                 whenAsync('/register',                                           { templateUrl: 'views/register/dashboard.html',         label:'Dashboard',  param:'true', resolveController: true, resolve : { securized : securize() }}).
                 whenAsync('/dashboard',                                          { redirectTo:  '/register/dashboard'}).
                 whenAsync('/register/dashboard',                                 { templateUrl: 'views/register/dashboard.html',         label:'Dashboard',  param:'true', resolveController: true, resolve : { securized : securize() }}).
-                whenAsync('/register/pending-requests',                          { templateUrl: 'views/register/pending-tasks.html',            label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize() }}).
+                whenAsync('/register/requests',                          { templateUrl: 'views/register/requests.html',            label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize() }}).
                 whenAsync('/register/user-preferences/:tab?',                    { templateUrl: 'views/register/user-preferences/preferences.html',          label:'ABSCH Admin',    param:'true', resolveController: true,resolve : { securized : securize() }}).
                 whenAsync('/register/admin',                                     { templateUrl: 'views/register/admin.html',          label:'ABSCH Admin',    param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                 whenAsync('/register/notifications',                             { templateUrl: 'views/register/notifications.html',  label:'Notifications',  param:'true', resolveController: true,resolve : { securized : securize() }}).
-                whenAsync('/register/requests',                                  { redirectTo:'/register/notifications' }).
                 whenAsync('/register/stats',                                     { templateUrl: 'views/register/manage/stats.html',   label:'Statistics',  param:'true', resolveController: true,resolve : { securized : securize() }}).
 
                 whenAsync('/register/:document_type/status/:status',             {templateUrl: 'views/register/record-list.html',          param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
@@ -77,7 +76,7 @@
  
                 whenAsync('/register/:document_type/:documentID/view',           {templateUrl: 'views/register/record-details.html',    label:'View',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
-                whenAsync('/register/admin/pending-requests',         { templateUrl: 'views/register/pending-tasks.html',            label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+                whenAsync('/register/admin/requests',         { templateUrl: 'views/register/requests.html',            label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                 whenAsync('/register/admin/reported-records',         { templateUrl: 'views/register/admin/reported-records.html',   label:'Reported Records',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                 whenAsync('/register/admin/reported-records/:id',     { templateUrl: 'views/register/admin/reported-records.html',   label:'Record',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                 whenAsync('/register/admin/report-counts',            { templateUrl: 'views/register/admin/report-count.html',       label:'Report Counts',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
