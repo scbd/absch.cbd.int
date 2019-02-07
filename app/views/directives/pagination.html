@@ -1,0 +1,5 @@
+<div class="pagination btn-group">
+    <button class="btn btn-default" ng-disabled="currentPage == 0" translation-url href ng-click="actionSetPage(currentPage-1)">« Prev</button>
+    <button class="btn btn-default" ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)" translation-url href>{{n+1}}</button>
+    <button class="btn btn-default" ng-disabled="currentPage >= pageCount - 1" translation-url href ng-click="actionSetPage(currentPage+1)">Next »</button>
+</div>
