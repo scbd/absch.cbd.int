@@ -155,43 +155,7 @@
             </div>
         </div>
     </div>
-     <style>
-        .ngdialog.ngdialog-theme-default.wide .ngdialog-content {
-            width: 70% !important;
-        }
-    </style>
-     <script type="text/ng-template" trados-translation="true" id="saveFilterDialog">
-
-        <div class="modal-header">
-            <h2 class="modal-title">
-               Save this search
-            </h2>
-        </div>
-        <div class="modal-body">
-            <form>
-                <fieldset>
-                    <div class="form-group">
-                        <label for="filterTitle">Search title</label>
-                        <input if="filterTitle" type="text" ng-model="record.queryTitle" class="form-control" placeholder="">
-                        <br>
-                        <label for="filters">Search filters:</label><br>
-                        <span id="filters" ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
-                            <span class="label label-info">
-                                <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>{{filter.name}}
-                                <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
-                            </span>
-                        </span>
-                        <br><br>
-                        <input type="checkbox"if="sendEmail" type="text" ng-model="record.sendEmail">
-                        <label for="sendEmail"> Send me an email when new records relevant to this search are added or updated.</label>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default bold pull-left" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
-            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="saveFilter()" ng-disabled="loading">Save</button>
-        </div>
-    </script>
+  
+     
  <joyride ng-if="tourOn"></joyride>
 </div>
