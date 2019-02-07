@@ -52,23 +52,11 @@ define(['app','underscore',
         var ag = [];
         var agLimit = [];
         var agCount = [];
+        var itemCountQuery;
+
         ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent(tag)}]}});
         ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "summary":1}});
-               
-        if(page==0 && $scope.itemCount == 0){
-            agCount = JSON.parse(JSON.stringify(ag))
-            agCount.push({"$count" : "mycount"});
-            var qsCount = {
-                "ag" : JSON.stringify(agCount) 
-            };
-            
-            articlesService.getArticles(qsCount).then(function(data){
-                $scope.itemCount = (data[0]||{}).mycount||0;
-              })
-        }
-        if($scope.itemCount == 0)
-          $scope.itemCount == $scope.itemsPerPage;
-        
+
         agLimit = JSON.parse(JSON.stringify(ag))
         agLimit.push({"$sort" : {"meta.modifiedOn":-1}});
         agLimit.push({"$skip" : (page||0)*$scope.itemsPerPage});
@@ -77,10 +65,27 @@ define(['app','underscore',
         var qsLimit = {
             "ag" : JSON.stringify(agLimit)
         };
+               
+        if($scope.itemCount == 0){
 
-        articlesService.getArticles(qsLimit).then(function(result){
-            $scope.articles      = result;
-            $scope.pageCount     = Math.ceil(9 / $scope.itemsPerPage);
+            agCount = JSON.parse(JSON.stringify(ag))
+            agCount.push({"$count" : "mycount"});
+            var qsCount = {
+                "ag" : JSON.stringify(agCount) 
+            };
+            
+            itemCountQuery = articlesService.getArticles(qsCount).then(function(data){
+                return (data[0]||{}).mycount||0;
+              })
+        } 
+        else{
+          itemCountQuery = $scope.itemCount;
+        }     
+       
+        $q.all([articlesService.getArticles(qsLimit), itemCountQuery]).then(function(results){
+            $scope.articles      = results[0];
+            $scope.itemCount     = results[1];
+            $scope.pageCount     = Math.ceil( $scope.itemCount / $scope.itemsPerPage);
             $scope.currentPage   = page;
         })
       }
