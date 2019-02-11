@@ -52,11 +52,11 @@ define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
             //    whenAsync('/workshops/lac',               { templateUrl: 'views/workshops/lac.html',            label:'Workshops',            resolveController: true, resolveUser: true}).
             //    whenAsync('/workshops/caribbean',         { templateUrl: 'views/workshops/caribbean.html',      label:'Workshops',        resolveController: true, resolveUser: true}).
                
-               whenAsync('/guides',                      {redirectTo: '/about/guides'}).
-               whenAsync('/faqs',                        {redirectTo: '/about/faqs'}).
-               whenAsync('/commonformats',               {redirectTo: '/about/offline'}).
-               whenAsync('/common-formats',              {redirectTo: '/about/offline'}).
-               whenAsync('/nationalreport',              {redirectTo: '/about/interimReport'}).               
+               whenAsync('/guides',                      {redirectTo  : '/about/guides'}).
+               whenAsync('/faqs',                        {redirectTo  : '/about/faqs'}).
+               whenAsync('/commonformats',               {redirectTo  : '/about/offline'}).
+               whenAsync('/common-formats',              {redirectTo  : '/about/offline'}).
+               whenAsync('/nationalreport',              {redirectTo  : '/about/interimReport'}).               
                whenAsync('/help',                        {redirectTo  : '/about'}).
                whenAsync('/help/faq',                    {redirectTo  : '/about/faqs'}).
                whenAsync('/help/guides',                 {redirectTo  : '/about/guides'}).
@@ -65,9 +65,9 @@ define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
                whenAsync('/help/guides/:guideId?',       {redirectTo  : '/about/guide/:guideId?'}).
                whenAsync('/about/getting-started',       {redirectTo  : '/about/gettingStartedGovernments'}).
                whenAsync('/about/developer',             {redirectTo  : '/about/api'}).
-               whenAsync('/about/videos',            {redirectTo  : '/help/videos'}).
-               whenAsync('/about/commonformats',               {redirectTo: '/about/offline'}).
-               whenAsync('/about/common-formats',              {redirectTo: '/about/offline'}).
+               whenAsync('/about/videos',                {redirectTo  : '/help/videos'}).
+               whenAsync('/about/commonformats',         {redirectTo  : '/about/offline'}).
+               whenAsync('/about/common-formats',        {redirectTo  : '/about/offline'}).
 
                whenAsync('/help/videos/:videoId?',   {templateUrl: 'views/about/videos.html', resolveController: true, resolveUser: false, label:'ABSCH Videos'}).
                whenAsync('/help/common-formats/:commonFormat?',     {templateUrl: 'views/about/common-formats.html', resolveController: true, resolveUser: true, label:'Common formats'}).
@@ -76,6 +76,11 @@ define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
                whenAsync('/about/:id',        { templateUrl: 'views/about/about.html',   label:'aboutCode',       param:'true',  resolveController:true, resolveUser : false}).
                whenAsync('/about/:id/:type', { templateUrl: 'views/about/about.html',   param:'true',   resolveController:true, resolveUser : false}).
                
+               whenAsync('/pdf-templates/contacts/:schema',         {templateUrl: 'views/pdf-templates/abs-contacts-pdf.html', resolveController: true, resolveUser: false, label:'ABSCH Contact'}).
+               whenAsync('/pdf-templates/checkpoint-communique/:documentId',    {templateUrl: 'views/pdf-templates/checkpoint-communique.html', resolveController: true, resolveUser: false, label:'Checkpoint Commnunique'}).
+               whenAsync('/pdf-templates/ircc/:documentId',                     {templateUrl: 'views/pdf-templates/ircc.html'          , resolveController: true, resolveUser: false, label:'IRCC'}).
+
+
                otherwise({templateUrl: commonRoutes.baseUrl+'views/shared/404.html', label:'404 Error'});
 
     }]);
