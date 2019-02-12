@@ -36,8 +36,7 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a translation-url href="#" ng-click="filterByStatus('Pending')">Pending
-                                            Approval</a></li>
+                                    <li><a translation-url href="#" ng-click="filterByStatus('Pending')">Pending Approval</a></li>
                                     <li><a translation-url href="#" ng-click="filterByStatus('Approved')">Approved</a></li>
                                     <li><a translation-url href="#" ng-click="filterByStatus('Rejected')">Rejected</a></li>
                                     <li><a translation-url href="#" ng-click="filterByStatus('Canceled')">Canceled</a></li>
@@ -47,11 +46,16 @@
                             </div>
                         </td>
                         <td style="width:100%">
-                            <input type="text" class="form-control" ng-model="keywords" placeholder="Search"></input>
+                            <div class="form-inline">
+                                <input type="text" size="100%" class="form-control" ng-model="keywords" placeholder="keywords"></input>
+                                <button type="submit" class="btn btn-primary" ng-click="search()">Search</button>
+                            </div>
                         </td>
                     </tr>
                 </table>
-                <br>
+
+                <div class="text-center" style="margin: 20px  0; text-transform: lowercase;" ><span class="badge">{{itemCount}}</span> {{filterStatus == "All" ? "" : filterStatus}} requests</div>
+
                 <div class="table" style="padding:5px;">
 
                     <div class="row header1 bold" style="padding:5px;border-bottom:1px solid #999;background-color:#EEE;">
@@ -77,9 +81,9 @@
 
                         <span ng-show="loading"> <i class="fa fa-cog fa-spin fa-lg" /> loading...</span>
 
-                        <div ng-repeat="task  in tasks|filter:keywords|orderBy:sortTerm:orderList" id="{{task.workflow._id}}">
+                        <div ng-repeat="task  in tasks| orderBy:sortTerm:orderList" id="{{task.workflow._id}}">
                             <div class="row" style="border-bottom:1px solid #ddd;padding:5px;">
-
+                                {{task}}
                                 <div class="col-xs-12 col-sm-6 col-md-6"">
                                     <!-- TITLE -->
                                     <a translation-url href="#" class="color-grey bold" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;">
@@ -167,10 +171,10 @@
                                                     class="color-orange"> PENDING SCBD REVIEW </span>
                                             
                                                 <span ng-if="task.workflow.type.name != 'publish-reference-record'" ng-class="{'color-red': roles.isAbsPublishingAuthority }"> 
-                                                        PENDING    
+                                                        <i class="fa fa-star" ng-if="roles.isAbsPublishingAuthority"/> PENDING    
                                                         <span ng-if="roles.isAbsPublishingAuthority"> YOUR </span>
                                                         <span ng-if="!roles.isAbsPublishingAuthority"> PA </span>
-                                                        APPROVAL
+                                                        APPROVAL 
                                                     </span>
                                             </div>
                                             <div ng-if="task.workflow.workflowExpiryDate >= today && !task.activity.isUpdating">
@@ -249,6 +253,8 @@
                         </h4>
                     </div>
                 </div>
+
+                <div pagination  ng-if="itemCount > itemsPerPage" class="text-center"  current-page="currentPage"  page-count="pageCount" on-page-change="onPageChange(page)"></div> 
 
 
             </div>
