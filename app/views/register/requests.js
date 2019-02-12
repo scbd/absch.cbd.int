@@ -7,11 +7,12 @@ define(['app',
 'services/role-service',
 'views/directives/task-id-directive',
 'views/directives/pagination',
+'components/scbd-angularjs-services/services/locale',
 'views/forms/view/record-loader.directive'], function (app) {
 
         "use strict";
-        app.controller("requestsController", ["$scope", "IWorkflows", "realm", '$rootScope', 'roleService', "$q",
-            function ($scope, IWorkflows, realm, $rootScope, roleService, $q) {
+        app.controller("requestsController", ["$scope", "IWorkflows", "realm", '$rootScope', 'roleService', "$q", "locale",
+            function ($scope, IWorkflows, realm, $rootScope, roleService, $q, locale) {
 
                 $scope.sortTerm = 'createdOn';
                 $scope.orderList = true;
@@ -27,6 +28,14 @@ define(['app',
                 $scope.currentPage=0;
                 $scope.itemCount=0;
                 $scope.itemsPerPage=15;
+
+                $scope.options = {
+                    filterTypes: function () {
+                        return _.sortBy(_.map(realm.schemas, function(schema, key){
+                            return {identifier: key, name: schema.title[locale]}
+                        }), "name");
+                    }
+                }
 
                 if ($scope.user.isAuthenticated) {
                     $scope.roles = {
@@ -73,6 +82,12 @@ define(['app',
                     load (query, 0)
 
                  };
+                 //==================================
+                 $scope.$watch('filterType', function(old, newVal){
+                    if(old != newVal)
+                        $scope.search();
+                }, true);
+
 
                 //==================================
                 function load(query, page) {
@@ -144,7 +159,7 @@ define(['app',
                     };
 
                     if($scope.filterType && $scope.filterType.length > 0)
-                        queries.$and.push({ "data.metadata.schema": { $in: $scope.filters.filterType }})
+                        queries.$and.push({ "data.metadata.schema": { $in: $scope.filterType }})
 
                     var expired = moment.utc(new Date()).subtract("12", "weeks");
                     console.log(expired);

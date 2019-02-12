@@ -45,16 +45,24 @@
                                 </ul>
                             </div>
                         </td>
+                        <td>
+                                <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="pull-left">
+   
+                                                <div km-select ng-model="filterType" multiple binding-type="string" placeholder="Record Type" items="options.filterTypes()"></div>
+                
+                                            </div>
+                                        </div>
+                                    </div>
+                        </td>
                         <td style="width:100%">
-                            <div class="form-inline">
-                                <input type="text" size="100%" class="form-control" ng-model="keywords" placeholder="keywords"></input>
-                                <button type="submit" class="btn btn-primary" ng-click="search()">Search</button>
-                            </div>
+                                <div style="margin: 5px 0 0 20px; text-transform: lowercase;" ><span class="badge">{{itemCount}}</span> {{filterStatus == "All" ? "" : filterStatus}} requests found</div>
                         </td>
                     </tr>
                 </table>
 
-                <div class="text-center" style="margin: 20px  0; text-transform: lowercase;" ><span class="badge">{{itemCount}}</span> {{filterStatus == "All" ? "" : filterStatus}} requests</div>
+             
 
                 <div class="table" style="padding:5px;">
 
@@ -83,7 +91,6 @@
 
                         <div ng-repeat="task  in tasks| orderBy:sortTerm:orderList" id="{{task.workflow._id}}">
                             <div class="row" style="border-bottom:1px solid #ddd;padding:5px;">
-                                {{task}}
                                 <div class="col-xs-12 col-sm-6 col-md-6"">
                                     <!-- TITLE -->
                                     <a translation-url href="#" class="color-grey bold" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;">
