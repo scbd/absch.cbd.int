@@ -48,10 +48,10 @@
                     <span ng-if="task.workflow.type.name == 'publish-reference-record'" class="color-orange"> PENDING
                         SCBD REVIEW </span>
                     <span ng-if="task.workflow.type.name != 'publish-reference-record'" ng-class="{'color-red': roles.isAbsPublishingAuthority }"> 
-                        PENDING    
+                            <i class="fa fa-star" ng-if="roles.isAbsPublishingAuthority"/> PENDING    
                         <span ng-if="roles.isAbsPublishingAuthority"> YOUR </span>
                         <span ng-if="!roles.isAbsPublishingAuthority"> PA </span>
-                        APPROVAL
+                        APPROVAL 
                     </span>
                 </div>
                 <div ng-if="task.workflow.workflowExpiryDate >= today && !task.activity.isUpdating">
