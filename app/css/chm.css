@@ -8,7 +8,10 @@
     font-weight: normal;
     font-style: normal;
 }*/
-
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 .navlist {margin:0;padding:0; display: inline;}
 .navlist li
 {
