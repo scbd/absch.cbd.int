@@ -15,6 +15,7 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                 multiple: '@?',
                 ngDisabledFn: "&ngDisabled",
                 windowsScrollbarCompatible: '@?',
+                ngChange:'&'
             },
             template: template,
             controller: function($scope, $element, $attrs, $compile, $timeout, $q, locale, $filter) {
@@ -320,6 +321,7 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                         else
                             $scope.bindingDisplay = $scope.binding;
                     }
+                    $scope.ngChange(newValue);
                 });
 
 
