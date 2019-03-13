@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/bch/view-national-report3.directive.html", 	'views/directives/record-options'], function (app, template) {
+define(['app', "text!views/forms/view/bch/view-national-report-3.directive.html", 	'views/directives/record-options'], function (app, template) {
 
 app.directive("viewNationalReport3", [function () {
 	return {
