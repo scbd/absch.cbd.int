@@ -15,14 +15,17 @@
 		</div>
 
 
-		<div ng-show="hasErrors() && show" class="alert alert-warning"  >
-			<button type="button" class="close" ng-click="show=!show" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<strong>Your document contains errors.</strong>
+		<div ng-show="hasErrors() && show" class="alert alert-warning">
+			<button type="button" class="close" ng-click="show=!show" aria-label="Close"><span
+					aria-hidden="true">&times;</span>
+			</button>
+			<strong>Your document contains {{::report.errors.length}} errors.</strong>
 			<ul>
-				<li ng-repeat="error in report.errors" title="{{error.parameters}}">
-					{{getTranslation(error.code, error.property, error.parameters)}} / <a href="#" ng-click="jumpTo(error.property)">{{getLabel(error.property)}}</a>
+				<li ng-repeat="error in ::report.errors" title="{{::error.parameters}}">
+					{{::getTranslation(error.code, error.property, error.parameters)}} / <a href="#"
+						ng-click="jumpTo(error.property)">{{::getLabel(error.property)}}</a>
 				</li>
 			</ul>
 		</div>
 
-</div>
+	</div>
