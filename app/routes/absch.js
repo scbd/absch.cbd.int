@@ -80,8 +80,8 @@ define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
                whenAsync('/pdf-templates/checkpoint-communique/:documentId',    {templateUrl: 'views/pdf-templates/checkpoint-communique.html', resolveController: true, resolveUser: false, label:'Checkpoint Commnunique'}).
                whenAsync('/pdf-templates/ircc/:documentId',                     {templateUrl: 'views/pdf-templates/ircc.html'          , resolveController: true, resolveUser: false, label:'IRCC'}).
 
-               whenAsync('/game',              { templateUrl: 'views/game/start.html',           label:'Game',             resolveController: true, resolveUser: false}).
-               whenAsync('/game/:tag',              { templateUrl: 'views/game/start.html',              resolveController: true, resolveUser: false}).
+               whenAsync('/game',              { templateUrl: 'views/game/start.html', label:'Game', resolveController: true, resolveUser: false}).
+               whenAsync('/game/:tag/:option?',{ templateUrl: 'views/game/start.html', resolveController: true, resolveUser: false}).
 
                otherwise({templateUrl: commonRoutes.baseUrl+'views/shared/404.html', label:'404 Error'});
 

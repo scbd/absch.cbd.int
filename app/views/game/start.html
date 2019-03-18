@@ -1,35 +1,184 @@
 ﻿<div ng-controller="GameController" id="game" class="container">
 
-   <style>
-      @import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP');
-
-      #game * {
-         font-family: 'Noto Serif JP', serif;
-         -webkit-font-smoothing: antialiased;
-         -moz-osx-font-smoothing: grayscale;
-         color: #111;
-      }
-
-      .well {
-         background-color: #fff;
-      }
-      table tr td {border: 1px solid #666; padding:10px;}
-      a {color:#428bca!important;}
-      blockquote {border:0;margin:0;padding:0;}
-      blockquote p {background-color: #ddd;padding:10px;}
-      blockquote p:before {content:"option >>    "}
-
-   </style>
-
-   <div class="text-right">
-      <a href="/game" ng-click="load('start')" class="btn bg-white text-center">start</a>
+      <style>
+         @import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP');
+   
+         #game * {
+            font-family: 'Noto Serif JP', serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: #111;
+         }
+   
+         #game .well {
+            background-color: #fff;
+            font-size: 16px;
+         }
+   
+         #game table tr td {
+            border: 1px solid #666;
+            padding: 10px;
+            font-size: 16px;
+         }
+   
+         #game a {
+            color: #428bca !important;
+         }
+   
+         #game a > strong {
+            color: #428bca !important;
+         }
+   
+         #game a.btn {
+            color: #000 !important;
+         }
+   
+         #game blockquote {
+            border: 0;
+            margin: 30px 0 0 0;
+            padding: 10px 0 0 0;
+            border-top: 1px solid #EEE;
+         }
+   
+         #game blockquote p {
+            background-color: #ddd;
+            padding: 10px;
+         }
+   
+         #game blockquote:before {
+            content: "You must choose:"
+         }
+   
+         #game blockquote p:before {
+            content: "option >>    "
+         }
+   
+         #game .well p,
+         h1,
+         h2,
+         h3,
+         h4,
+         h5 {
+            line-height: 1.5 !important;
+         }
+   
+         #game .well img {
+            max-height: 450px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+         }
+   
+         #game blockquote strong {
+            color: #428bca;
+         }
+   
+         .image.image-style-align-left {
+            float: left;
+            margin-right: 20px;
+         }
+   
+         .image.image-style-align-left {
+            max-width: 75%;
+            width:auto;
+            height:auto;
+            float:left;
+         }
+         .image.image-style-align-right {
+            max-width: 75%;
+            width:auto;
+            height:auto;
+            float:right;
+         }
+         figcaption {color:black; font-size:10px; font-weight:bold; text-align: center;padding:0; margin:0 0 5px 0;}
+         
+      </style>
+   
+      <h3><span class="color-red bold">Choose your own adventure:</span> <span class="color-blue  bold">The Nagoya
+            Protocol</span></h3>
+      <div class="text-right">
+         <a ng-show="pagetag != 'start'" href="/game" ng-click="load('start')" class="btn bg-white  text-left">restart the game</a>
+      </div>
+   
+      <!-- {{storage}} -->
+   
+      <div class="well">
+         <h1>{{article.title | lstring:locale}}</h1>
+         <hr>
+         <p ng-bind-html="article.content | lstring:locale | toTrusted"> </p>
+         <hr>
+   
+         <div id="absch" ng-hide="pagetag == 'start' || pagetag == 'userIntro' || pagetag == 'pcIntro' || pagetag == 'ucIntro'" >
+            <a href="#" ng-click="showABSCH=!showABSCH" style="position:relative; top:2px;background-color:#009B48;color:white!important;" class="btn text-center bold"> Check the ABS Clearing-House </a>
+            <div ng-show="showABSCH" style="padding:10px;border:5px solid #009B48;">
+               <div class="row" >
+                  <div class="col-xs-6" >
+                     <h3>User country</h3>
+                     <span ng-if="!storage['game-uc-absch']" class="color-red"> No information has been made available </span>
+                     <ul ng-if="storage['game-uc-absch']=='true'">
+                        <li><span ng-if="storage['game-uc-party']=='true'" class="bold "> Party to the Nagoya Protocol</span>
+                           <span ng-if="!storage['game-uc-party'] || storage['game-uc-party']=='false'">NOT A Party to the Nagoya Protocol</span></li>
+                        <li ng-if="storage['game-uc-nfp']=='true'" class=" bold""> ABS National Focal Point designated</li>
+                        <li ng-if="storage['game-uc-nfp']=='false'"> NO ABS National Focal Point</li>
+                        <li ng-if="storage['game-uc-pa']=='true'"  class=" bold""> Publishing Authority designated</li>
+                        <li ng-if="storage['game-uc-pa']=='false'"> NO Publishing Authority</li>
+                        <li ng-if="storage['game-uc-cna']=='true'"  class=" bold""> Competent National Authority established </li>
+                        <li ng-if="storage['game-uc-cna']=='false'"> NO Competent National Authority </li>
+                        <li ng-if="storage['game-uc-msr']=='true'"  class=" bold""> ABS legal framework established </li>
+                        <li ng-if="storage['game-uc-msr']=='false'"> NO ABS legal framework </li>
+                        <li ng-if="storage['game-uc-pro']=='true'"  class=" bold""> Clear and straightforward ABS Procedures established</li>
+                        <li ng-if="storage['game-uc-pro']=='false'"> NO ABS Procedures</li>
+   
+                        <li ng-if="torage['game-uc-cp-border']=='true' ||storage['game-uc-cp-funding']=='true' || storage['game-uc-cp-pub']=='true' || storage['game-uc-cp-patent']=='true' || storage['game-uc-cp-market']=='true'"  class=" bold""> Checkpoints established: 
+                              <ul>
+                                 <li ng-if="storage['game-uc-cp-funding']=='true'" class="unbold"> Scientific research funding institution </li> 
+                                 <li ng-if="storage['game-uc-cp-pub']=='true'" class="unbold"> Scientific publishers</li> 
+                                 <li ng-if="storage['game-uc-cp-patent']=='true'" class="unbold"> Patent office </li> 
+                                 <li ng-if="storage['game-uc-cp-market']=='true'" class="unbold"> Market authorization authority</li> 
+                                 <li ng-if="storage['game-uc-cp-border']=='true'" class="unbold"> Border control</li> 
+                              </ul>
+                        </li>
+                    
+                        
+                     </ul>
+                  </div>
+                  <div class="col-xs-6">
+                     <h3>Provider country</h3>
+                     <span ng-if="!storage['game-pc-absch']" class="color-red"> No information has been made available </span>
+                     <ul ng-if="storage['game-pc-absch']=='true'">
+                        <li><span ng-if="storage['game-pc-party']=='true'" class="bold "> Party to the Nagoya Protocol</span>
+                           <span ng-if="!storage['game-pc-party'] || storage['game-pc-party']=='false'"> NOT A Party to the Nagoya Protocol</span></li>
+                        <li ng-if="storage['game-pc-nfp']=='true'"  class=" bold""> ABS National Focal Point designated</li>
+                        <li ng-if="storage['game-pc-nfp']=='false'"> NO ABS National Focal Point</li>
+                        <li ng-if="storage['game-pc-pa']=='true'" class=" bold""> Publishing Authority designated</li>
+                        <li ng-if="storage['game-pc-pa']=='false'"> NO Publishing Authority</li>
+                        <li ng-if="storage['game-pc-cna']=='true'"  class=" bold"> Competent National Authority established </li>
+                        <li ng-if="storage['game-pc-cna']=='false'"> NO Competent National Authority </li>
+                        <li ng-if="storage['game-pc-msr']=='true'" class=" bold"> ABS legal framework established </li>
+                        <li ng-if="storage['game-pc-msr']=='false'"> NO ABS legal framework </li>
+                        <li ng-if="storage['game-pc-pro']=='true'"  class=" bold""> Clear and straightforward ABS Procedures established</li>
+                        <li ng-if="storage['game-pc-pro']=='false'"> NO ABS Procedures</li>
+   
+                        <li ng-if="torage['game-pc-cp-border']=='true' ||storage['game-pc-cp-funding']=='true' || storage['game-pc-cp-pub']=='true' || storage['game-pc-cp-patent']=='true' || storage['game-pc-cp-market']=='true'"  class=" bold""> Checkpoints established: 
+                              <ul>
+                                 <li ng-if="storage['game-pc-cp-funding']=='true'" class="unbold"> Scientific research funding institution </li> 
+                                 <li ng-if="storage['game-pc-cp-pub']=='true'" class="unbold"> Scientific publishers</li> 
+                                 <li ng-if="storage['game-pc-cp-patent']=='true'" class="unbold"> Patent office </li> 
+                                 <li ng-if="storage['game-pc-cp-market']=='true'" class="unbold"> Market authorization authority</li> 
+                                 <li ng-if="storage['game-pc-cp-border']=='true'" class="unbold"> Border control</li> 
+                              </ul>
+                           </li>
+                        
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+   
+      </div>
+   
+   
+   
+   
+   
    </div>
-
-   <h1>Choose your own adventure: <span class="color-blue">The Nagoya Protocol</span> </h1>
-
-   <div class="well">
-      <h3>{{article.title | lstring:locale}}</h3>
-      <p ng-bind-html="article.content | lstring:locale | toTrusted"> </p>
-   </div>
-   {{article}}
-</div>
