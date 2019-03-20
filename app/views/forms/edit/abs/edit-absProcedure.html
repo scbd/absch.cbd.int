@@ -57,7 +57,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="jurisdiction" caption="3. Area of jurisdiction:" >
+                                        <div class="km-control-group" name="jurisdiction" required caption="3. Area of jurisdiction:" >
                                             <div class="help-info indent">Jurisdiction where this ABS procedure is relevant</div>
                                             <div class="indent" style="max-width:300px;">
                                                 <div afc-autocomplete name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter"
@@ -91,7 +91,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="contactsOrLinks" caption="4. Where should applications for access be made?">
+                                        <div class="km-control-group" required name="contactsOrLinks" caption="4. Where should applications for access be made?">
                                             <div class="indent help-info"> Please provide relevant contacts or links. </div>
                                             <div class="indent">
                                                 <div document-selector ng-model="document.contacts" question="contacts" government="document.government" schema="(authority contact)" locales="document.header.languages"></div>
@@ -185,7 +185,7 @@
                                         <div class="km-control-group" name="relevantMeasures" caption="10. Relevant ABS measure(s):">
                                             <div class="indent">
                                                 <div document-selector ng-model="document.relevantMeasures" question="relevantMeasures" government="document.government"
-                                                    schema="(measures)"></div>
+                                                    schema="(measure)"></div>
                                             </div>
                                         </div>
                                     </div>
