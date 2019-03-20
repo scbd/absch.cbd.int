@@ -14,7 +14,7 @@
         ng-click="showHideRecords(key, schema)"
         ng-class="{'color-litegrey': schema.numFound == 0}">
             <i class="fa" ng-class="{'fa-plus':!schema.display, 'fa-minus':schema.display}" style="font-size:14px;font-weight:normal;"></i> 
-            <span ng-bind="schema.title|lstring:locale"></span>(<span ng-bind="schema.shortCode"></span>)
+            <span ng-bind="schema.title|lstring:locale"></span> (<span ng-bind="schema.shortCode"></span>)
             <span class="badge pull-right" ng-class="{'bg-grey3': schema.numFound==0, 'bg-black': schema.numFound > 0}" ng-bind="schema.numFound"></span>
         </h4>
         <div ng-if="schema.display && schema.numFound > 0" class="well bg-white">
