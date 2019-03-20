@@ -13,13 +13,14 @@
         <div ng-show="!showDoc" ng-click="showDoc=!showDoc" style="padding:0!important;margin:0!important;">
             <div class="{{type}}">
 
-                <div class="title bold">{{doc.rec_title}}
+       
+                <div class="title bold" style="font-size:108%;" >{{doc.rec_title}}
                     <span ng-if="doc.publicationYear_i">({{doc.publicationYear_i}})</span>
                 </div>
+                <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.rec_summary">{{doc.rec_summary|limitTo:250}}
+                    <span ng-if="doc.rec_summary.length > 250">...</span>
+                </div>
 
-                <span class="description hidden-xs descriptionSpan" ng-if="doc.rec_summary">{{doc.rec_summary|limitTo:250}}
-                <span ng-if="doc.rec_summary.length > 250">...</span>
-                </span>
                 <div ng-if="doc.schema_s=='capacityBuildingInitiative'">
                      <span ng-if="doc.implementingAgencies_EN_txt">
                         <strong>Implemented by</strong>  

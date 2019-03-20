@@ -19,11 +19,11 @@
     <div class="recordDefault nationalRecords card card-1 easing" style="margin-bottom:10px;" ng-show="!showDoc" ng-click="showDoc=!showDoc">
 
        
-        <div class="title bold">{{doc.rec_title}}</div>
-        <span class="description hidden-xs descriptionSpan" ng-if="doc.rec_summary">
+        <div class="title bold"  style="font-size:108%;" >{{doc.rec_title}}</div>
+        <div class="description hidden-xs descriptionSpan"  style="margin: 5px 0;" ng-if="doc.rec_summary">
             {{doc.rec_summary|limitTo:250}}
-            <span ng-if="doc.rec_summary.length > 250">...</span>
-        </span>
+            <span ng-if="doc.rec_summary.length > 350">...</span>
+        </div>
 
         <ul class="metadata bold" style="padding-top:0;margin-top:0;">
             <li class="hidden-xs">
