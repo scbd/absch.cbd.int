@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'moment', 'angular', 'toastr', 'bootstrap', 'routes/absch',  'angular-animate', 'components/scbd-branding/directives/header/xuser-notification-config-service'
+define(['app', 'underscore', 'moment', 'angular', 'toastr', 'bootstrap', 'routes/absch',  'angular-animate', 'components/scbd-branding/directives/header/xuser-notification-config-service' ,'views/directives/scroll-to-top',
 ], function (app, _, moment, angular) {
     'use strict';
 
