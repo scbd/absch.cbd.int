@@ -216,7 +216,6 @@ define(['app', 'underscore', 'moment', 'angular', 'toastr', 'bootstrap', 'routes
 
                     if (!_slaask.initialized) {
                         _slaask.init('8b989bd6ee0cf49384761d4f86ddd945');
-                        _slaask.initialized = true;
                     }
                 });
 
