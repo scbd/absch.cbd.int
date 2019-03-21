@@ -59,7 +59,9 @@
                     </span>
                 </div>
                 <div class="col-xs-1 text-center color-darkgray">
+
                     <small class="hidden-xs">Email&nbsp;me</small>
+
                     <div ng-click="emailSubscribe(record, true)" class="color-white" ng-show="!hasUserEmailSubscribed(record)" style="cursor:pointer">
                         <i class="fa fa-square fa-2x" ></i>
                     </div>
@@ -132,6 +134,7 @@
 
     <div ng-show="!loading && (!userFilters || userFilters.length==0) && !showSystemAlerts">
         <div class="alert  bg-grey" role="alert" style="margin-top:20px;">
+
             <span ng-if="user.isAuthenticated">You do not have any saved alerts.
             <span ng-if="!user.isAuthenticated">Please log in to view your saved alerts.</span>
         </div>
@@ -161,7 +164,9 @@
              </div>
              <br>
                 <input type="checkbox"if="sendEmail" type="text" ng-model="document.sendEmail">
+
                 <label for="sendEmail"> Send me an email when records relevant to this search are added or updated.</label>
+
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primiary pull-left bold" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>

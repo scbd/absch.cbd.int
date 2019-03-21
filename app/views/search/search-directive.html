@@ -82,7 +82,9 @@
                 <region-filter ng-if="showFilters==='regionFilter' || (searchKeyword && !showFilters)"></region-filter>
                 <date-filter ng-if="showFilters==='dateFilter' && !skipDateFilter"></date-filter>
                  <div ng-if="showFilters==='userSearchFilter' && !skipSaveFilter">
+
                     <h4>Your predefined searches <small> - keep up to date when records are published </small></h4> 
+
                     <user-alerts run-query-in-page="true"></user-alerts>
                 </div>
             </div>
