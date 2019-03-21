@@ -58,19 +58,20 @@
 		</div>
 
 		<div ng-if="document.informAllAuthorities || document.contactsToInform" >
-			<legend>Authority/ies to receive courtesy copies of checkpoint communiqués of the information collected or received from this checkpoint</legend>
+			<legend>Authority/ies to receive courtesy copies of checkpoint communiqués</legend>
 
-			<div class="help-info" style="padding-top:10px;">All national authorities and contacts indicated below will receive email copies of checkpoint communiqués containing the information collected or received and published from this checkpoint. Please note that the national authorities providing prior informed consent (PIC) will also automatically receive email copies of all published checkpoint communiqués (CPC). The ABSCH can not guarantee that emails have been received or read.</div>
+			<div class="help-info" style="padding-top:10px;">The contacts indicated below will receive email copies of checkpoint communiqués containing the information collected or received and published from this checkpoint.</div>
 			<div class="km-value" ng-show="document.informAllAuthorities">
+					 All Competent National Authorities designated for <strong>{{document.government|term:locale}}</strong> have been selected to automatically receive checkpoint communiqués by email published from this checkpoint.</li>
 
-				<a translation-url  href="/countries/{{document.government.identifier|uppercase}}" target="_new"> All national competent authorities (<a ng-href="/countries/{{document.government.identifier}}" target={{target}}>{{document.government|term:locale}}</a>) </a> have been selected to automatically receive checkpoint communiqués by email published from this checkpoint.
 			</div>
           
-			<div ng-show="document.contactsToInform">
-				<div class="km-value" ng-repeat="authority in document.contactsToInform">
-                    <div view-contact-reference ng-model="authority" locale="locale"></div>
+			
+			<div  ng-show="document.contactsToInform">
+					<div class="km-value"  ng-repeat="authority in document.contactsToInform" >
+						<span view-contact-reference ng-model="authority" locale="locale"></span>
+					</div>
 				</div>
-			</div>
 			<!--<div ng-show="document.contactsToInform" class="row">
 				<div ng-repeat="contact in document.contactsToInform">
 					<div class="col-xs-12">
