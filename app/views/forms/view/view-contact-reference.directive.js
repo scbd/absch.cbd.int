@@ -10,7 +10,8 @@ define(['app', "text!views/forms/view/view-contact-reference.directive.html",'un
 			scope: {
 				model: "=ngModel",
 				locale: "=",
-				target: "@linkTarget"
+				target: "@linkTarget",
+				collapse:"@"
 			},
 			controller: ["$scope", "IStorage", "$filter", "commonjs", function ($scope, storage, $filter, commonjs) {
 
@@ -18,6 +19,11 @@ define(['app', "text!views/forms/view/view-contact-reference.directive.html",'un
 				$scope.isPerson = false;
 				$scope.isOrganization= false;
 				$scope.isNFP = false;
+
+				if(!$scope.collapse)
+					$scope.showContact = false;
+				else
+					$scope.showContact = true;
 
 				//==================================================
 				function checkCNA(doc) {
