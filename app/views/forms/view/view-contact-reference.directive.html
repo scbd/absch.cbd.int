@@ -1,68 +1,104 @@
 ﻿<div ng-show="document">
-    <div ng-if="isOrganization">
-        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="!isCNA" style="">Organization</div>
-        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="isCNA">
-            Competent National Authority</div>
-        <div>
-            <span style="font-weight:500;">{{(document.name||document.organization) | lstring:locale}}</span>
+
+
+    <div ng-click="showContact=!showContact" style="cursor: pointer;">
+        
+        <span ng-if="!showContact" class="bold"> + </span>
+        <span ng-if="showContact" class="bold"> - </span>
+
+        <span ng-if="isCNA"> <span class="color-blue"> Competent National Authority:</span>
+            {{(documentForUID || document) | uniqueID}} </span>
+        <span ng-if="isNFP"><span class="color-blue uppercase">National Focal Point:</span>
+            {{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}}
+            {{document.lastName}}</span>
+        <span ng-if="isPerson && !isNFP"><span class="color-blue uppercase-sm">Person:</span>
+            {{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}}
+            {{document.lastName}}</span>
+        <span ng-if="isOrganization && !isCNA"><span class="color-blue">Organization:</span>
+            {{(document.name||document.organization) | lstring:locale}}
             <span ng-show="document.acronym">({{(document.acronym||document.organizationAcronym) | lstring:locale}})</span>
-        </div>
-        <div ng-if="document.organizationType">
-            {{document.organizationType|term}}
-        </div>
-        <div ng-if="document.firstName||document.lastName">
-            {{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}
-        </div>
-        <div ng-if="document.designation || document.department">
-            {{document.designation | lstring:locale}}<span ng-show="document.designation && document.department">, </span> {{document.department | lstring:locale}}
-        </div>
-    </div>
-
-    <div ng-if="isPerson||isNFP">
-        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="!isCNA && !isNFP" style="">Person</div>
-         <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;" ng-if="!isCNA && isNFP" style="">National Focal Point</div>
-        <div>
-            <span style="font-weight:500;">{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</span>
-        </div>
-        <div>
-            {{document.designation | lstring:locale}}<span ng-show="document.designation && document.department">, </span> {{document.department | lstring:locale}}
-        </div>
-
-        <div>
-            {{document.organization | lstring:locale}} <i ng-show="document.organizationAcronym">
-				({{document.organizationAcronym | lstring:locale}})</i>
-        </div>
-
-    </div>
-    <!--<span onload="otherElements = otherTerms[term.identifier]" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>-->
-    <span ng-if="document" onload="document=document" ng-include="'/app/views/forms/view/contact-reference/address'"></span>
-
-    <div ng-if="isPerson && document.contactOrganization">
-        <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;">
-            Related Organization
-        </div>
-
-        <div ng-if="document.contactOrganization">
-            <b>{{document.contactOrganization.organization | lstring:locale}}</b>
-            <span ng-show="document.contactOrganization.organizationAcronym">
-					 ({{document.contactOrganization.organizationAcronym | lstring:locale}})
-				 </span>
-        </div>
-        <div ng-if="document.contactOrganization.organizationType">
-            {{document.contactOrganization.organizationType|term}}
-        </div>
-        <span ng-if="document.contactOrganization" onload="document=document.contactOrganization" ng-include="'/app/views/forms/view/contact-reference/address'"></span>
+        </span>
 
     </div>
 
-    <script id="/app/views/forms/view/contact-reference/address" type="text/ng-template" trados-translation="true">
-        <address style="margin-bottom:2px!important">
+    <blockquote ng-show="showContact">
+
+        <div ng-if="isOrganization">
+            <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;"
+                ng-if="!isCNA">Organization</div>
+            <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;"
+                ng-if="isCNA">Competent National Authority</div>
+            <div>
+                <span style="font-weight:500;">{{(document.name||document.organization) | lstring:locale}}</span>
+                <span
+                    ng-show="document.acronym">({{(document.acronym||document.organizationAcronym) | lstring:locale}})</span>
+            </div>
+            <div ng-if="document.organizationType">
+                {{document.organizationType|term}}
+            </div>
+            <div ng-if="document.firstName||document.lastName">
+                {{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}}
+                {{document.lastName}}
+            </div>
+            <div ng-if="document.designation || document.department">
+                {{document.designation | lstring:locale}}<span ng-show="document.designation && document.department">,
+                </span> {{document.department | lstring:locale}}
+            </div>
+        </div>
+
+        <div ng-if="isPerson||isNFP">
+            <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;"
+                ng-if="!isCNA && !isNFP">Person</div>
+            <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;"
+                ng-if="!isCNA && isNFP">National Focal Point</div>
+            <div>
+                <span style="font-weight:500;">{{document.prefix | lstring:locale}} {{document.firstName}}
+                    {{document.middleName}} {{document.lastName}}</span>
+            </div>
+            <div ng-if="document.designation || document.department">
+                {{document.designation | lstring:locale}}<span ng-show="document.designation && document.department">,
+                </span> {{document.department | lstring:locale}}
+            </div>
+
+            <div ng-if="document.organization">
+                {{document.organization | lstring:locale}} <i ng-show="document.organizationAcronym">
+                    ({{document.organizationAcronym | lstring:locale}})</i>
+            </div>
+
+        </div>
+
+        <!--<span onload="otherElements = otherTerms[term.identifier]" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>-->
+        <span ng-if="document" onload="document=document"
+            ng-include="'/app/views/forms/view/contact-reference/address'"></span>
+
+        <div ng-if="isPerson && document.contactOrganization">
+            <div
+                style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-top:10px;margin-bottom:5px;color:#999;">
+                Related Organization
+            </div>
+
+            <div ng-if="document.contactOrganization">
+                <b>{{document.contactOrganization.organization | lstring:locale}}</b>
+                <span ng-show="document.contactOrganization.organizationAcronym">
+                    ({{document.contactOrganization.organizationAcronym | lstring:locale}})
+                </span>
+            </div>
+            <div ng-if="document.contactOrganization.organizationType">
+                {{document.contactOrganization.organizationType|term}}
+            </div>
+            <span ng-if="document.contactOrganization" onload="document=document.contactOrganization"
+                ng-include="'/app/views/forms/view/contact-reference/address'"></span>
+
+        </div>
+
+        <script id="/app/views/forms/view/contact-reference/address" type="text/ng-template" trados-translation="true">
+            <address ng-if="document.address || document.city || document.state || document.postalCode" style="margin-bottom:2px!important">
                 <span ng-show="document.addressHTML" ng-bind-html="document.addressHTML | lstring:locale"></span>
                 {{document.address | lstring:locale}}</div>
                 {{document.city | lstring:locale}}<span ng-show="document.city && document.state">, </span>
                 {{document.state | lstring:locale}}<br ng-show="document.city || document.state" />
-                {{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
-                <span style="font-weight:500;"><br ng-show="!document.postalCode" />{{document.country|term}}</span>
+                {{document.postalCode | lstring:locale}}<span ng-show="document.postalCode && document.country">, </span>
+                <div style="font-weight:500;" ng-show="document.country" >{{document.country|term}}</div>
         </address>
 
         <div ng-show="document.phones">
@@ -87,5 +123,7 @@
         {{document | uniqueID}}{{document}}-->
         </div>
     </script>
+
+    </blockquote>
 
 </div>
