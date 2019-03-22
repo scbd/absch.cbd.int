@@ -1,5 +1,5 @@
-define(['app', 'underscore', 'moment', 'angular', 'toastr', 'bootstrap', 'routes/absch',  'angular-animate', 'components/scbd-branding/directives/header/xuser-notification-config-service' ,'views/directives/scroll-to-top',
-], function (app, _, moment, angular) {
+define(['app', 'underscore', 'moment', 'angular', 'toastr', 'bootstrap', 'routes/absch',  'angular-animate', 'components/scbd-branding/directives/header/xuser-notification-config-service'], 
+function (app, _, moment, angular) {
     'use strict';
 
     app.config(["toastrConfig", function(toastrConfig) {
@@ -24,7 +24,6 @@ define(['app', 'underscore', 'moment', 'angular', 'toastr', 'bootstrap', 'routes
             $window, $element, localStorageService, appConfigService, logglyLogger, locale, $compile
         ) {
 
-            //$scope.ACCOUNTS_URL = apiUrl.devAccountsUrl();
 
             $scope.controller = "TemplateController";
             $scope.$root.pageTitle = {
@@ -49,8 +48,7 @@ define(['app', 'underscore', 'moment', 'angular', 'toastr', 'bootstrap', 'routes
                 $window.ga('set', 'page', basePath + $location.path());
                 $window.ga('send', 'pageview');
             });
-            // $scope.goHome               = function() { $location.path('/'); };
-            // $scope.currentPath          = function() { return $location.path(); };.
+
             //============================================================
             //
             //
@@ -78,6 +76,10 @@ define(['app', 'underscore', 'moment', 'angular', 'toastr', 'bootstrap', 'routes
                 }
             };
 
+            $scope.scrollToTop = function(){
+                $('html, body').animate({scrollTop:0},'50');
+            }
+
             $scope.$root.getRoleName = function (roleName) {
                 console.warn('Depriciated, use appConfigService.getRoleName');
                 if (roleName) {
@@ -85,11 +87,6 @@ define(['app', 'underscore', 'moment', 'angular', 'toastr', 'bootstrap', 'routes
                 }
             };
 
-            //            $scope.updateStorage = function(){
-            //                localStorageService.set('hideDisclaimer', true);
-            //                $scope.hideDisclaimer=true;
-            //            };
-            //    	    $scope.hideDisclaimer = localStorageService.get('hideDisclaimer');
             //============================================================
             //
             //
@@ -110,13 +107,7 @@ define(['app', 'underscore', 'moment', 'angular', 'toastr', 'bootstrap', 'routes
             $scope.production_env = true;
             $scope.development_env = false;
             $scope.training_env = false;
-
-            // if ($location.absUrl().toLowerCase().indexOf("://absch.cbddev.xyz") > 0 || $location.absUrl().toLowerCase().indexOf("localhost:2010") > 0) {
-            //     $scope.development_env = true;
-            //     $scope.training_env = false;
-            //     $scope.production_env = false;
-            //     $scope.env_name = "DEVELOPMENT";
-            // }
+            
             if ($location.absUrl().toLowerCase().indexOf("://training-absch.cbd.int") > 0) {
                 $scope.development_env = false;
                 $scope.training_env = true;
@@ -155,15 +146,6 @@ define(['app', 'underscore', 'moment', 'angular', 'toastr', 'bootstrap', 'routes
             $scope.$on('signOut', function (evt, data) {
                 $window.location.reload();
             });
-
-            // if(cfgUserNotification){
-            //     cfgUserNotification
-            //     .notificationUrls = {
-            //                         documentNotificationUrl     : '/register/requests/',
-            //                         viewAllNotificationUrl      : '/register/requests',
-            //                         documentMessageUrl          : '/mailbox/'
-            //                     };
-            // }
 
             function showSimpleToast(msg) {
                 toastr.info(msg);
