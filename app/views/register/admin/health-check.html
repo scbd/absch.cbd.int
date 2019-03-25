@@ -1,0 +1,23 @@
+﻿<div ng-controller="healthCheck" id="RegisterPage">
+   
+
+<h1> Health Check </h1>
+
+
+<h3>Records that have ABS measures with National Model Contractual Clauses</h3>
+
+<!-- {{rawDocuments.docs}} -->
+<i ng-show="isLoadingNMCC == true" class="fa fa-spinner fa-spin"></i>
+
+<div ng-repeat="doc in records">
+    <div ng-if="doc.isModelContractualClause">
+        Warning : {{doc.title.en}}
+        <hr>
+        {{doc}}
+    </div>
+</div>
+
+
+
+
+</div>

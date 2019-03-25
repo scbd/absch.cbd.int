@@ -23,6 +23,8 @@ define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
                whenAsync('/forums/art10_groups/:threadId',    { templateUrl: 'views/forums/post-list-view.html'   ,label:'Thread-Subject'  ,resolveController: true, resolve : { securized : commonRoutes.securize() }, forumId:17316, forumListUrl:'/forums/art10_groups/', text:'Forum on Article 10' }).
                
                whenAsync('/register/admin/ircc-counts',       { templateUrl: 'views/register/admin/ircc-counts.html',   label:'IRCC counts',  param:'true', resolveController: true,resolve : { securized : commonRoutes.securize(['Administrator']) }}).
+
+               whenAsync('/register/admin/health-check',       { templateUrl: 'views/register/admin/health-check.html',   label:'Health Check',  param:'true', resolveController: true,resolve : { securized : commonRoutes.securize(['Administrator']) }}).
     
                whenAsync('/register/MSR/new',           {templateUrl: 'views/forms/edit/abs/edit-measure.html',                   label:'New',  param:'true', resolveController: true,documentType :'MSR' , resolve : { securized : commonRoutes.securize(null,true, true) }, }).
                whenAsync('/register/NDB/new',           {templateUrl: 'views/forms/edit/edit-database.html',                  label:'New',  param:'true', resolveController: true,documentType :'NDB' , resolve : { securized : commonRoutes.securize(null,true, true) }, }).
