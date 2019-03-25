@@ -315,73 +315,78 @@
             <!-- <div ng-show="versions && false"> -->
             <legend>Amendment History</legend>
             <div class="row top-border bg-litegreen">
+                
+                <table class="table">
+                    <tr>
+                        <td class="col-xs-2">
+                            <label>Date</label>
+                        </td>
+                        <td class="col-xs-2">
+                            <label>Action</label>
+                        </td>
+        
+                        <td class="col-xs-4">
+                            <label>Comment</label>
+                        </td>
+                        <td class="col-xs-4">
+                            <label>Unique identifier</label>
+                        </td>
+                    </tr>
+                    
+                    <tr ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text" style="border-color:#FFF;margin:3;padding:3;">                       
+                        <!-- <hr style="border-color:#FFF;margin:3;padding:3;"> -->
+                        <td class="col-xs-2 history-text-date" >
+                            <strong>{{document.createdOn |formatDateWithTime}}</strong>
+                        </td>
+                        <td class="col-xs-2">
+                            <span ng-show="document.body.amendmentIntent==1">
+                                <span class="bold color-red"> REVOKED</span>
+                            </span>
+                            <span ng-show="((versions.length>1 && document.body.amendmentIntent!=1 && document.revision < versions.length))">
+                                <span class="bold color-green"> OLD VERSION</span>
+                            </span>
+                            <span ng-show="versions.length==1 || (versions.length>1 && versions.length == document.revision && document.body.amendmentIntent!=1)">
+                                <span class="bold color-green"> CURRENT VERSION</span>
+                            </span>
+                        </td>
+                        <td class="col-xs-4">
+                            <span ng-bind-html="document.body.amendmentDescription| lstring:locale"></span>
+                            <span ng-show="document.body.amendmentIntent==undefined">Permit information published to the ABS clearing-house and certificate constituted.</span>
+                        </td>
+                        <td class="col-xs-4">
+                            {{document | uniqueID}}
+                        </td>
+                    </tr>
 
-                <div class="col-xs-2">
-                    <label>Date</label>
-                </div>
-                <div class="col-xs-2">
-                    <label>Action</label>
-                </div>
-
-                <div class="col-xs-4">
-                    <label>Comment</label>
-                </div>
-                <div class="col-xs-4">
-                    <label>Unique identifier</label>
-                </div>
-
-                <div ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text">
-                    <div class="clearfix"></div>
-                    <hr style="border-color:#FFF;margin:3;padding:3;">
-                    <div class="col-xs-2 history-text-date">
-                        <strong>{{document.createdOn |formatDateWithTime}}</strong>
-                    </div>
-                    <div class="col-xs-2">
-                        <span ng-show="document.body.amendmentIntent==1">
-                            <span class="bold color-red"> REVOKED</span>
-                        </span>
-                        <span ng-show="((versions.length>1 && document.body.amendmentIntent!=1 && document.revision < versions.length))">
-                            <span class="bold color-green"> OLD VERSION</span>
-                        </span>
-                        <span ng-show="versions.length==1 || (versions.length>1 && versions.length == document.revision && document.body.amendmentIntent!=1)">
-                            <span class="bold color-green"> CURRENT VERSION</span>
-                        </span>
-                    </div>
-                    <div class="col-xs-4">
-                        <span ng-bind-html="document.body.amendmentDescription| lstring:locale"></span>
-                        <span ng-show="document.body.amendmentIntent==undefined">Permit information published to the ABS clearing-house and certificate constituted.</span>
-                    </div>
-                    <div class="col-xs-4">
-                        {{document | uniqueID}}
-                    </div>
-                </div>
+                </table>
             </div>
             <!-- </div> -->
 
             <legend>Further Information</legend>
-            <div class="row top-border">
-                <div class="clearfix"></div>
-                <div class="col-xs-6" style="font-size:12px;text-align: justify">
-                    Questions about the permit or its equivalent constituting an internationally recognized certificate of compliance should
-                    be addressed to the competent national authority issuing the permit or its equivalent. Additional information
-                    about the permit or its equivalent may be available in the Access and Benefit-Sharing Clearing House
-                    (
-                    <a href="https://absch.cbd.int/">https://absch.cbd.int/</a>).
-                    <br>
-                    <br> Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and
-                    Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
-                </div>
-                <div class="col-xs-6" style="font-size:12px;">
-                    <strong>Secretariat of the Convention on Biological Diversity</strong>
-                    <br/> 413 rue Saint-Jacques, suite 800
-                    <br/> Montreal, Québec, H2Y 1N9
-                    <br/> Canada
-                    <br/> Fax: +1 514 288-6588
-                    <br/> Email:
-                    <a href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a>
+            <table class="top-border">
+                <tr>
+                    <td class="col-md-6" width="50%" style="font-size:12px;text-align: justify">
+                        Questions about the permit or its equivalent constituting an internationally recognized certificate of compliance should
+                        be addressed to the competent national authority issuing the permit or its equivalent. Additional information
+                        about the permit or its equivalent may be available in the Access and Benefit-Sharing Clearing House
+                        (
+                        <a href="https://absch.cbd.int/">https://absch.cbd.int/</a>).
+                        <br>
+                        <br> Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and
+                        Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
+                    </td>
+                    <td class="col-md-6" style="font-size:12px;vertical-align: top">
+                        <strong>Secretariat of the Convention on Biological Diversity</strong>
+                        <br/> 413 rue Saint-Jacques, suite 800
+                        <br/> Montreal, Québec, H2Y 1N9
+                        <br/> Canada
+                        <br/> Fax: +1 514 288-6588
+                        <br/> Email:
+                        <a href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a>
 
-                </div>
-            </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
