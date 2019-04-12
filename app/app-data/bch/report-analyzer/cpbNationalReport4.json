@@ -2,9 +2,39 @@
   {
       "key": "General",
       "title": "Party to the Cartagena Protocol on Biosafety",
-      "questions": [
-          {
-              "key": "Q012_party",
+      "questions": [        
+        {
+            "key": "Q012_party",
+            "section": "General",
+            "number": "11",
+            "type": "option",
+            "title": "Is your country a Party to the Cartagena Protocol on Biosafety (CPB)?",
+            "multiple": false,
+            "options": [
+                {
+                    "value": "true",
+                    "title": "Yes"
+                },
+                {
+                    "value": "false",
+                    "title": "No"
+                }
+            ],
+            "validationMappings": [
+                {
+                    "question": "Q012_partyInProgress",
+                    "value": "true",
+                    "type": "boolean"
+                },
+                {
+                    "question": "Q013",
+                    "value": "true",
+                    "type": "boolean"
+                }
+            ]
+        },
+        {
+              "key": "Q012_partyInProgress",
               "section": "General",
               "number": "12",
               "type": "option",
@@ -158,6 +188,13 @@
                       "value": "false",
                       "title": "No"
                   }
+              ],
+              "validationMappings": [
+                  {
+                      "question": "Q019",
+                      "type": "boolean",
+                      "value": "true"
+                  }
               ]
           },
           {
@@ -183,9 +220,8 @@
               ],
               "validationMappings": [
                   {
-                      "dependentQuestion": "Q018",
-                      "dependentQuestionValue": "true",
-                      "type": "boolean"
+                    "question": "Q019_adq",
+                    "type": "hasValue"
                   }
               ]
           },
@@ -204,12 +240,6 @@
                   {
                       "value": "false",
                       "title": "No"
-                  }
-              ],
-              "validationMappings": [
-                  {
-                      "dependentQuestion": "Q019",
-                      "type": "hasValue"
                   }
               ]
           },
@@ -435,8 +465,8 @@
               "mandatory": true,
               "validationMappings": [
                   {
-                      "dependentQuestion": "Q029",
-                      "dependentQuestionValue": "true",
+                      "question": "Q029",
+                      "value": "true",
                       "type": "boolean"
                   }
               ]
@@ -465,8 +495,8 @@
               "mandatory": true,
               "validationMappings": [
                   {
-                      "dependentQuestion": "Q029",
-                      "dependentQuestionValue": "true",
+                      "question": "Q029",
+                      "value": "true",
                       "type": "boolean"
                   }
               ]
@@ -2277,9 +2307,9 @@
           {
               "key": "Q101_b",
               "section": "Article18",
-              "number": "101b",
+              "number": "",
               "type": "option",
-              "title": "How many customs officers in your country have received training in the identification of LMOs?\n\rIs this number adequate",
+              "title": "Is this number adequate",
               "multiple": false,
               "options": [
                   {
@@ -3855,9 +3885,9 @@
           {
               "key": "Q146_b",
               "section": "Article23",
-              "number": "146b",
+              "number": "",
               "type": "option",
-              "title": "How many educational materials and/or online modules on biosafety are available and accessible to the public in your country?\n\rIs this number adequate",
+              "title": "Is this number adequate",
               "multiple": false,
               "options": [
                   {
@@ -4277,9 +4307,9 @@
           {
               "key": "Q164_b",
               "section": "Article26",
-              "number": "164b",
+              "number": "",
               "type": "option",
-              "title": "How many peer-reviewed published materials has your country used for the purpose of elaborating or determining national actions with regard to socioeconomic considerations?\n\rIs this number adequate",
+              "title": "Is this number adequate",
               "multiple": false,
               "options": [
                   {
