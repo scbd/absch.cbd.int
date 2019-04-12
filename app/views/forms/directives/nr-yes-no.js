@@ -21,7 +21,7 @@
                     var additionalInformation = $scope.answer.additionalInformation;
                     var value = $scope.question.options[$scope.answer.value].value;
 
-                    if($scope.hasAdditionalInformation.value != value){
+                    if(($scope.hasAdditionalInformation||{}).value != value){
                         additionalInformation = $scope.answer.additionalInformation = undefined;
                     }
 

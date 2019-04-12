@@ -4,6 +4,9 @@
         .disabled {
             -moz-opacity:.50;filter:alpha(opacity=50);opacity:.50;
         }
+        .inverted.dimmer {
+            background-color: rgba(255, 255, 255, .85);
+        }
     </style>
     <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
 
@@ -41,9 +44,9 @@
                                                     <div class="panel-body" style="padding:0px">
 
                                                         <div ng-repeat="question in section.questions" style="border:1px solid #eee;margin:5px"
-                                                            class="row" ng-class="{'disabled': question.disabled}" ng-if="question.visible">
+                                                            class="row" ng-class="{'disabled': question.disabled}" ng-if="question.visible" >
 
-                                                            <div class="col-md-12" style="padding:10px;">
+                                                            <div class="col-md-12" style="padding:10px;position: relative;" block-region activate="question.disabled" skip-loading-icon="true">
 
                                                                 <div class="col-md-12" style="padding-left:0px;padding-right: 0px;">
                                                                     <strong>
@@ -156,47 +159,47 @@
         <script type="text/ng-template" id="question" trados-translation="true">
             <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
                 <div class="col-md-8" style="padding-left: 5px;">
-                        <div ng-switch="question.type">
-                            <div ng-switch-when="option|term" ng-switch-when-separator="|">
+                    <div ng-switch="question.type">
+                        <div ng-switch-when="option|term" ng-switch-when-separator="|">
 
-                                <div ng-switch="question.multiple">
-                                    <div ng-switch-when="false">
-                                        <div nr-yes-no question="question" ng-model="document[question.key]" ng-change="updateAnswer(question)"
-                                        locales="document.header.languages"></div>
-                                    </div>
-                                    <div ng-switch-when="true">
-                                        <div km-term-check name="{{question.key}}" 
-                                        ng-model="document[question.key]" terms="question.optionsMapping" binding-type="string[]"></div>
-                                    </div>
+                            <div ng-switch="question.multiple">
+                                <div ng-switch-when="false">
+                                    <div nr-yes-no question="question" ng-model="document[question.key]" ng-change="updateAnswer(question)"
+                                    locales="document.header.languages"></div>
                                 </div>
+                                <div ng-switch-when="true">
+                                    <div km-term-check name="{{question.key}}" 
+                                    ng-model="document[question.key]" terms="question.optionsMapping" binding-type="string[]"></div>
+                                </div>
+                            </div>
 
-                            </div>
-                            <div ng-switch-when="text">
-                                <div km-textbox-ml rows=4 name="question.key" 
-                                    ng-model="document[question.key]" locales="document.header.languages" ></div>
-                            </div>
-                            <div ng-switch-default>
-                                {{question}}
-                            </div>
+                        </div>
+                        <div ng-switch-when="text">
+                            <div km-textbox-ml rows=4 name="question.key" 
+                                ng-model="document[question.key]" locales="document.header.languages" ></div>
+                        </div>
+                        <div ng-switch-default>
+                            {{question}}
                         </div>
                     </div>
-                    <div class="col-md-4" ng-if="question.showPrevious">
-                        <div style="border: 2px solid #fff;padding:5px">
-                            <div class="alert alert-info" ng-if="previousAnswerMapping[question.key].showMessage">
-                                * Please note that the period covered by this question is different in each reporting format.  
-                            </div>
-                            <div>
-                                <strong ng-bind="previousAnswerMapping[question.key].prevQuestion + '. ' + previousAnswerMapping[question.key].previousQuestion.title"></strong>
-                            </div>
-                            <div class="well well-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type!='array' && previousAnswerMapping[question.key].previousQuestion.answer"
-                                ng-bind="previousAnswerMapping[question.key].previousQuestion.answer|lstring"></div>
-                            <div class="well well-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type=='array' && previousAnswerMapping[question.key].previousQuestion.answer">
-                                <ul class="list">
-                                    <li ng-repeat="val in previousAnswerMapping[question.key].previousQuestion.answer" ng-bind="val|lstring"></li>
-                                </ul>
-                            </div>
+                </div>
+                <div class="col-md-4" ng-if="question.showPrevious">
+                    <div style="border: 2px solid #fff;padding:5px">
+                        <div class="alert alert-info" ng-if="previousAnswerMapping[question.key].showMessage">
+                            * Please note that the period covered by this question is different in each reporting format.  
+                        </div>
+                        <div>
+                            <strong ng-bind="previousAnswerMapping[question.key].prevQuestion + '. ' + previousAnswerMapping[question.key].previousQuestion.title"></strong>
+                        </div>
+                        <div class="well well-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type!='array' && previousAnswerMapping[question.key].previousQuestion.answer"
+                            ng-bind="previousAnswerMapping[question.key].previousQuestion.answer|lstring"></div>
+                        <div class="well well-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type=='array' && previousAnswerMapping[question.key].previousQuestion.answer">
+                            <ul class="list">
+                                <li ng-repeat="val in previousAnswerMapping[question.key].previousQuestion.answer" ng-bind="val|lstring"></li>
+                            </ul>
                         </div>
                     </div>
+                </div>
             </div>
         </script>
     </div>
