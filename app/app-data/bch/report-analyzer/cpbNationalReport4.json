@@ -193,7 +193,7 @@
                   {
                       "question": "Q019",
                       "type": "boolean",
-                      "value": "true"
+                      "value": "false"
                   }
               ]
           },
@@ -439,7 +439,19 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q030",
+                      "value": "false",
+                      "type": "boolean"
+                  },
+                  {
+                    "question": "Q031",
+                    "value": "false",
+                    "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q030",
@@ -462,14 +474,7 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true,
-              "validationMappings": [
-                  {
-                      "question": "Q029",
-                      "value": "true",
-                      "type": "boolean"
-                  }
-              ]
+              "mandatory": true
           },
           {
               "key": "Q031",
@@ -492,14 +497,7 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true,
-              "validationMappings": [
-                  {
-                      "question": "Q029",
-                      "value": "true",
-                      "type": "boolean"
-                  }
-              ]
+              "mandatory": true
           },
           {
               "key": "Q032",
