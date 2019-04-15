@@ -168,8 +168,8 @@
                                     locales="document.header.languages"></div>
                                 </div>
                                 <div ng-switch-when="true">
-                                    <div km-term-check name="{{question.key}}" 
-                                    ng-model="document[question.key]" terms="question.optionsMapping" binding-type="string[]"></div>
+                                    <div km-term-check name="{{question.key}}" ng-change="updateAnswer(question)"
+                                    ng-model="multiTermModel[question.key]" terms="question.optionsMapping" binding-type="string[]"></div>
                                 </div>
                             </div>
 
