@@ -8,6 +8,10 @@ function (app, _, nr4Data, nr3Data) {
 	app.controller("editBchNationalReport4", ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 'commonjs',
 	function($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs) {
         
+        // since it was decided to use string type for terms fields in schema
+        // map string to ETerm ({identifier:'xxxx-xxx'}) type which is the type expected by term-checkbox.
+        $scope.multiTermModel = {};
+
         var user = $rootScope.user;
         $scope.activeTab = 1
         $scope.nr4Tabs = [{
@@ -66,6 +70,7 @@ function (app, _, nr4Data, nr3Data) {
             }
         ];
 
+        // TODO: read from mapping file
         var previousAnswerMapping = $scope.previousAnswerMapping = {
             "Q012"        : { prevQuestion : "Q013",   showMessage: false },
             "Q012_partyInProgress"  : { prevQuestion : "Q012",   showMessage: false },
@@ -254,6 +259,14 @@ function (app, _, nr4Data, nr3Data) {
 
         $scope.updateAnswer = function(question, baseQuestionNumber){
 
+            if(question.multiple){
+                if(!$scope.multiTermModel[question.key])
+                    $scope.document[question.key] = undefined;
+                else{
+                    $scope.document[question.key] = _.map($scope.multiTermModel[question.key], function(t){return { value : t}})
+                }
+            }
+
             var lQuestion = question;
             if(question.validationMappings){
 
@@ -363,8 +376,8 @@ function (app, _, nr4Data, nr3Data) {
         function loadPreviousReport(){
             if(!$scope.document)
                 return;
-                
-            $http.get('https://api.cbd.int/api/v2015/national-reports-cpb-3', {params : { q: {'government.identifier':$scope.document.government.identifier}}})
+            var params = { q: {'government.identifier':$scope.document.government.identifier }};
+            $http.get('https://api.cbd.int/api/v2015/national-reports-cpb-3', { params : params} )
                  .then(function(result){
                      var prevReportAnswers = result.data[0];
                      var prevReportQuestions = _(nr3Data).pluck('questions').compact().flatten().value();
@@ -412,8 +425,15 @@ function (app, _, nr4Data, nr3Data) {
         }, 200);
 
         $scope.setDocument({}).then(function(document){
-            if(document && document.header.identifier)
+            if(document && document.header.identifier){
+                _.each(document, function(element, key){
+                    if(/^Q/.test(key) && _.isArray(element)){//only fields starting with Q
+                        $scope.multiTermModel[key] = _.map(element, 'value');
+                    }
+                })
                 transformNr4Data();//workaround as in the first call not all questions are built so the disable/visible clause does not work.
+
+            }
         });
    }]);
 
