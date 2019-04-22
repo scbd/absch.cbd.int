@@ -15,9 +15,10 @@
             },
             link: function ($scope) {
                 $scope.answer = {}
-                $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'text'})
                 
                 $scope.updateAnswer = function(val){
+                    
+
                     var additionalInformation = $scope.answer.additionalInformation;
                     var value = $scope.question.options[$scope.answer.value].value;
 
@@ -27,6 +28,8 @@
 
                     $scope.binding = {  value : value, additionalInformation : additionalInformation };
 
+                    $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'text', value:value})
+
                     $timeout(function(){$scope.ngChange()}, 200);
 
                 }
@@ -35,6 +38,8 @@
                     if($scope.binding!== undefined){
                         $scope.answer.value          = _.indexOf($scope.question.options, _.find($scope.question.options, { value: $scope.binding.value}));
                         $scope.answer.additionalInformation = $scope.binding.additionalInformation;
+
+                        $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'text', value:$scope.binding.value})
                     }
                     else{
                         $scope.answer = {}
