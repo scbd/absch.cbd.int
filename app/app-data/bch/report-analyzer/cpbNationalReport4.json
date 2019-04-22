@@ -890,26 +890,21 @@
               ],
               "mandatory": true,
               "validationMappings": [
-                  {
-                      "question": "Q047",
-                      "value":"true",
-                      "type": "boolean"
-                  },
-                  {
+                {
                     "question": "Q047",
                     "value":"true",
                     "type": "boolean"
                 },
                 {
-                  "question": "Q048",
-                  "value":"true",
-                  "type": "boolean"
-              },
+                    "question": "Q048",
+                    "value":"true",
+                    "type": "boolean"
+                },
                 {
-                  "question": "Q050",
-                  "value":"true",
-                  "type": "boolean"
-              }
+                    "question": "Q050",
+                    "value":"true",
+                    "type": "boolean"
+                }
             ]
           },
           {
@@ -1267,7 +1262,7 @@
               "mandatory": true,
               "validationMappings": [
                   {
-                      "question": "Q061",
+                      "question": "Q062",
                       "value":"true",
                       "type": "boolean"
                   }
@@ -1329,7 +1324,7 @@
               ],
               "validationMappings": [
                   {
-                      "question": "Q063",
+                      "question": "Q064",
                       "value":"true",
                       "type": "boolean"
                   }
@@ -3499,7 +3494,7 @@
               "mandatory": true,
               "validationMappings": [
                   {
-                      "question": "Q127",
+                      "question": "Q128",
                       "value":"true",
                       "type": "boolean"
                   }
@@ -3549,7 +3544,7 @@
               "mandatory": true,
               "validationMappings": [
                   {
-                      "question": "Q129",
+                      "question": "Q130",
                       "value":"true",
                       "type": "boolean"
                   }
@@ -4731,7 +4726,7 @@
               ]
           },
           {
-              "key": "Q0173",
+              "key": "Q173",
               "section": "LiabilityRedress",
               "number": "173",
               "type": "sub-section",
@@ -4765,12 +4760,7 @@
                             "question": "Q175",
                             "value":"true",
                             "type": "boolean"
-                          },
-                          {
-                            "question": "Q176-skip",
-                            "value":"true",
-                            "type": "boolean"
-                         }
+                          }
                       ]
                   },
                   {
