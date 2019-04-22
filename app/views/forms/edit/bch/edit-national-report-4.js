@@ -350,7 +350,7 @@ function (app, _, nr4Data, nr3Data) {
                         else{
                             question.visible    =   true;
                             _.each(question.questions, function(subQuestion){
-                                transformQuestion(subQuestion, question.key);
+                                transformQuestion(subQuestion);//, question.key1
                             })
                         }
                         
