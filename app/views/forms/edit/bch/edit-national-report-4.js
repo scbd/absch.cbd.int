@@ -288,7 +288,7 @@ function (app, _, nr4Data, nr3Data) {
                         }
                         if(mapping.type === 'boolean'){
                             var answer           = $scope.document[lQuestion.key];
-                            keepDisabled         = !answer || mapping.value == (answer||{}).value
+                            keepDisabled         = !answer || mapping.value != (answer||{}).value
                             mapQuestion.disabled = keepDisabled;
                             if(baseQuestion)
                                 baseQuestion.disabled = keepDisabled;

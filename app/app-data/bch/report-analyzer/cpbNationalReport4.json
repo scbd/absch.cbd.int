@@ -23,12 +23,12 @@
             "validationMappings": [
                 {
                     "question": "Q012_partyInProgress",
-                    "value": "true",
+                    "value": "false",
                     "type": "boolean"
                 },
                 {
                     "question": "Q013",
-                    "value": "true",
+                    "value": "false",
                     "type": "boolean"
                 }
             ]
@@ -164,7 +164,8 @@
                   },
                   {
                       "value": "true.some",
-                      "title": "Yes, to some extent"
+                      "title": "Yes, to some extent",
+                      "type": "text"
                   },
                   {
                       "value": "false",
@@ -193,7 +194,7 @@
                   {
                       "question": "Q019",
                       "type": "boolean",
-                      "value": "false"
+                      "value": "true"
                   }
               ]
           },
@@ -443,12 +444,17 @@
               "validationMappings": [
                   {
                       "question": "Q030",
-                      "value": "false",
+                      "value": "true",
                       "type": "boolean"
                   },
                   {
                     "question": "Q031",
-                    "value": "false",
+                    "value": "true",
+                    "type": "boolean"
+                  },
+                  {
+                    "question": "Q032",
+                    "value": "true",
                     "type": "boolean"
                   }
               ]
@@ -570,7 +576,19 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q034",
+                      "value": "true",
+                      "type": "boolean"
+                  },
+                  {
+                    "question": "Q036",
+                    "value": "true",
+                    "type": "boolean"
+                }
+              ]
           },
           {
               "key": "Q034",
@@ -597,7 +615,13 @@
                       "title": "10 or more"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q035",
+                      "type": "hasValue"
+                  }
+              ]
           },
           {
               "key": "Q035",
@@ -648,6 +672,12 @@
                   {
                       "value": "19F9F13E-195E-45B5-88DD-058A07E0D6F6",
                       "title": "Inform the notifier that the period for communicating the decision has been extended"
+                  }
+              ],
+              "validationMappings": [
+                  {
+                      "question": "Q037",
+                      "type": "hasValue"
                   }
               ]
           },
@@ -858,7 +888,29 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q047",
+                      "value":"true",
+                      "type": "boolean"
+                  },
+                  {
+                    "question": "Q047",
+                    "value":"true",
+                    "type": "boolean"
+                },
+                {
+                  "question": "Q048",
+                  "value":"true",
+                  "type": "boolean"
+              },
+                {
+                  "question": "Q050",
+                  "value":"true",
+                  "type": "boolean"
+              }
+            ]
           },
           {
               "key": "Q047",
@@ -898,6 +950,13 @@
                   {
                       "value": "false",
                       "title": "No"
+                  }
+              ],
+              "validationMappings": [
+                  {
+                      "question": "Q049",
+                      "value":"true",
+                      "type": "boolean"
                   }
               ]
           },
@@ -939,6 +998,20 @@
                       "value": "false",
                       "title": "No"
                   }
+              ],
+              "validationMappings": [
+                  {
+                      "baseQuestion":"Q051",
+                      "question": "Q051_a",
+                      "value":"true",
+                      "type": "boolean"
+                  },
+                  {
+                    "baseQuestion":"Q051",
+                    "question": "Q051_b",
+                    "value":"true",
+                    "type": "boolean"
+                }
               ]
           },
           {
@@ -1049,7 +1122,19 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q055",
+                      "value":"true",
+                      "type": "boolean"
+                  },
+                  {
+                    "question": "Q056",
+                    "value":"true",
+                    "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q055",
@@ -1132,7 +1217,13 @@
                       "title": "10 or more"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q059",
+                      "type": "hasValue"
+                  }
+              ]
           },
           {
               "key": "Q059",
@@ -1173,7 +1264,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q061",
+                      "value":"true",
+                      "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q062",
@@ -1227,6 +1325,13 @@
                   {
                       "value": "false",
                       "title": "No"
+                  }
+              ],
+              "validationMappings": [
+                  {
+                      "question": "Q063",
+                      "value":"true",
+                      "type": "boolean"
                   }
               ]
           },
@@ -1426,14 +1531,26 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q067",
+                      "value":"true",
+                      "type": "boolean"
+                  },
+                  {
+                    "question": "Q068",
+                    "value":"true",
+                    "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q067",
               "section": "Article15_16",
               "number": "67",
               "type": "option",
-              "title": "Is your country using the \"Manual on Risk Assessment of LMOs\" (developed by CBD Secretariat) for training in risk assessment?",
+              "title": "If you answered Yes to question 66, is your country using the “Manual on Risk Assessment of LMOs” (developed by the CBD Secretariat) for training in risk assessment?",
               "multiple": false,
               "options": [
                   {
@@ -1452,7 +1569,7 @@
               "section": "Article15_16",
               "number": "68",
               "type": "option",
-              "title": "Is your country using the \"Guidance on Risk Assessment of LMOs\" (developed by the Online Forum and the AHTEG on Risk Assessment and Risk Management) for training in risk assessment?",
+              "title": "If you answered Yes to question 66, is your country using the “Guidance on Risk Assessment of LMOs” (developed by the Online Forum and the AHTEG on Risk Assessment and Risk Management) for training in risk assessment?",
               "multiple": false,
               "options": [
                   {
@@ -1625,7 +1742,7 @@
               "section": "Article15_16",
               "number": "72",
               "type": "option",
-              "title": "Is your country using the “Guidance on Risk Assessment of LMOs” (developed by the Online Forum and the AHTEG on Risk Assessment and Risk Management) for conducting  risk assessment or risk management, or for evaluating risk assessment reports submitted by notifiers?",
+              "title": "If you answered Yes to question 71, is your country using the “Guidance on Risk Assessment of LMOs” (developed by the Online Forum and the AHTEG on Risk Assessment and Risk Management) for conducting  risk assessment or risk management, or for evaluating risk assessment reports submitted by notifiers?",
               "multiple": false,
               "options": [
                   {
@@ -1694,14 +1811,31 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q076",
+                      "value":"true",
+                      "type": "boolean"
+                  },
+                  {
+                    "question": "Q077",
+                    "value":"true",
+                    "type": "boolean"
+                  },
+                  {
+                    "question": "Q078",
+                    "value":"true",
+                    "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q076",
               "section": "Article15_16",
               "number": "76",
               "type": "option",
-              "title": "How many risk assessments were conducted?",
+              "title": "If you answered Yes to question 75, how many risk assessments were conducted?",
               "multiple": false,
               "options": [
                   {
@@ -1731,7 +1865,7 @@
               "section": "Article15_16",
               "number": "77",
               "type": "term",
-              "title": "Please indicate the scope of the risk assessments (select all that apply)",
+              "title": "If you answered Yes to question 75, please indicate the scope of the risk assessments (select all that apply):",
               "multiple": true,
               "options": [
                   {
@@ -1952,6 +2086,12 @@
                       "value": "10+",
                       "title": "10 or more"
                   }
+              ],
+              "validationMappings": [
+                  {
+                      "question": "Q087",                      
+                      "type": "hasValue"
+                  }
               ]
           },
           {
@@ -2154,7 +2294,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q096",
+                      "value":"true",
+                      "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q096",
@@ -2201,7 +2348,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q098",
+                      "value":"true",
+                      "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q098",
@@ -2427,7 +2581,14 @@
                       "title": "50 or more"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q106",
+                      "value":"true",
+                      "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q106",
@@ -3281,7 +3442,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q126",
+                      "value":"true",
+                      "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q126",
@@ -3328,7 +3496,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q127",
+                      "value":"true",
+                      "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q128",
@@ -3371,7 +3546,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q129",
+                      "value":"true",
+                      "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q130",
@@ -3426,7 +3608,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q132",
+                      "value":"true",
+                      "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q132",
@@ -3543,7 +3732,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q135",
+                      "value":"true",
+                      "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q135",
@@ -3944,7 +4140,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q149",
+                      "value":"true",
+                      "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q149",
@@ -4081,7 +4284,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q156",
+                      "value":"true",
+                      "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q155",
@@ -4434,7 +4644,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validationMappings": [
+                  {
+                      "question": "Q171",
+                      "value":"false",
+                      "type": "boolean"
+                  }
+              ]
           },
           {
               "key": "Q170",
@@ -4537,6 +4754,23 @@
                               "value": "false",
                               "title": "No"
                           }
+                      ],
+                      "validationMappings": [
+                          {
+                              "question": "Q174",
+                              "value":"true",
+                              "type": "boolean"
+                          },
+                          {
+                            "question": "Q175",
+                            "value":"true",
+                            "type": "boolean"
+                          },
+                          {
+                            "question": "Q176-skip",
+                            "value":"true",
+                            "type": "boolean"
+                         }
                       ]
                   },
                   {
@@ -4624,6 +4858,13 @@
                       "value": "false",
                       "title": "No"
                   }
+              ],
+              "validationMappings": [
+                  {
+                      "question": "Q177",
+                      "value":"true",
+                      "type": "boolean"
+                  }
               ]
           },
           {
@@ -4694,6 +4935,13 @@
                       "value": "false",
                       "title": "No"
                   }
+              ],
+              "validationMappings": [
+                  {
+                      "question": "Q179",
+                      "value":"true",
+                      "type": "boolean"
+                  }
               ]
           },
           {
@@ -4747,6 +4995,13 @@
                   {
                       "value": "false",
                       "title": "No"
+                  }
+              ],
+              "validationMappings": [
+                  {
+                      "question": "Q181",
+                      "value":"true",
+                      "type": "boolean"
                   }
               ]
           },
@@ -4819,6 +5074,13 @@
                   {
                       "value": "false",
                       "title": "No"
+                  }
+              ],
+              "validationMappings": [
+                  {
+                      "question": "Q184",
+                      "value":"true",
+                      "type": "boolean"
                   }
               ]
           },
