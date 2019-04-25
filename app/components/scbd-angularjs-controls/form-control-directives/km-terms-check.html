@@ -33,8 +33,11 @@
 			<ul>
 				<script type="text/ng-template" id="term-check-tree-renderer.html">
 					<label>
-						<input type="checkbox" ng-model="identifiers[term.identifier]" ng-change="save()" ng-required="IsRequired()" value="{{term.identifier}}"
-						/> {{term.title||term.name | lstring:locale}}
+						<input type="checkbox" ng-model="identifiers[term.identifier]" ng-change="save()" 
+							ng-required="IsRequired()" value="{{term.identifier}}" /> 
+						{{term.title||term.name | lstring:locale}}
+						<input ng-if="identifiers[term.identifier] && term.type=='int'" type="number" 
+						ng-model="additionalInfo[term.identifier]" class="km-terms-check-add-input-int" />
 					</label>
 					<div class="km-select-description" ng-if="showDescription && term.description" style="padding: 3px 25px;">
 						{{term.description}}
