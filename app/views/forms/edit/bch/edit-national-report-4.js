@@ -40,7 +40,7 @@ function (app, _, nr4Data, nr3Data) {
             },
             {
                 "tab":6,
-                "title":"Question 61 - 84",
+                "title":"Question 61 - 90",
                 "sections" : [{key:"Article15_16"}, {key:"Article17"}]
             },
             {
@@ -268,16 +268,16 @@ function (app, _, nr4Data, nr3Data) {
             }
 
             var lQuestion = question;
-            if(question.validationMappings){
+            if(question.validations){
 
-                var mappings = question.validationMappings||[];
+                var mappings = question.validations||[];
                     
                 _.each(mappings, function(mapping){
 
                     var dataSection = _.find(nr4Data, {key:mapping.key||question.section});
                     if(dataSection){
                         var mapQuestion; 
-                        var keepDisabled;
+                        var validationPositive = false;
                         var baseQuestion;
                         if(baseQuestionNumber || mapping.baseQuestion){
                             baseQuestion          = _.find(dataSection.questions, {key:baseQuestionNumber||mapping.baseQuestion});
@@ -286,20 +286,60 @@ function (app, _, nr4Data, nr3Data) {
                         else{
                             mapQuestion          = _.find(dataSection.questions, {key:mapping.question});
                         }
-                        if(mapping.type === 'boolean'){
-                            var answer           = $scope.document[lQuestion.key];
-                            keepDisabled         = !answer || mapping.value != (answer||{}).value
-                            mapQuestion.disabled = keepDisabled;
-                            if(baseQuestion)
-                                baseQuestion.disabled = keepDisabled;
-                            if(mapQuestion.disabled)
-                                $scope.document[mapQuestion.key] = undefined;
+
+                        var answer      = $scope.document[lQuestion.key];
+
+                        if(/&[a-z]*/.test(mapping.type)){
+                            validationPositive   =$scope.customValidations[mapping.type.repalce(/^&/, '')];
                         }
-                        else if(mapping.type === 'hasValue'){
-                            mapQuestion.visible = ($scope.document[lQuestion.key]||{}).value!==undefined;
+                        else if(mapping.type === '@hasValues' || mapping.type === '@hasAdditionalValues'){
+                            if(mapping.values){
+                                var answeredValues = [];
+                                if(question.multiple)
+                                    answeredValues = _.map(answer, 'value');
+                                else
+                                    answeredValues = [(answer||{}).value];
+
+                                validationPositive   = ~_.intersection(mapping.values, answeredValues).length;
+                            }
+                            else
+                                validationPositive   = !_.isEmpty(answer)
+                            
+                            if(mapping.type === '@hasAdditionalValues' && validationPositive){
+                               
+                                var additionalInformation = [];
+                                if(question.multiple)
+                                    additionalInformation = _.map(answer, 'additionalInformation');
+                                else
+                                    additionalInformation = [(answer||{}).additionalInformation];
+                                
+                                if(_.compact(additionalInformation||[]).length==0)
+                                    validationPositive = false;
+                            }
+                        }
+                        else if(mapping.type === '@hasValuesExcept' && mapping.values){
+                            validationPositive   = answer && mapping.values.indexOf((answer||{}).value)<0;
+                        }
+                        else{
+                            console.log(mapping)
                         }
 
-                        if(mapQuestion && mapQuestion.validationMappings){
+                        if(!mapQuestion)
+                            console.log(mapping)
+                        mapQuestion.hasValidation = true;
+                        if(validationPositive){
+                            mapQuestion[mapping.trigger] = true;                            
+                            if(baseQuestion)
+                                baseQuestion[mapping.trigger] = true;
+                        }
+                        else{
+                            $scope.document[mapQuestion.key] = undefined;
+                            mapQuestion[mapping.trigger] = false
+                            if(baseQuestion)
+                                baseQuestion[mapping.trigger] = false;
+                        }   
+
+                        if(mapQuestion && mapQuestion.validations){
                             $scope.updateAnswer(mapQuestion, mapQuestion.baseQuestion);
                         }
                     }
@@ -319,19 +359,35 @@ function (app, _, nr4Data, nr3Data) {
         }
         $scope.onGovernmentChange = function(government){
             if(government && $scope.document){
-                console.log(government)
+
                 commonjs.getCountry(government.identifier).then(function(country){
                     $scope.document['Q012_party'] = { value : country.isCPParty.toString() };
                     if(country.isCPParty){
                         $scope.document['Q012_progressForParty'] = undefined;
                         $scope.document['Q013'] = undefined;
                     }
-                    $scope.nr4Tabs[1].sections[0].questions[0].disabled = true;
-                    $scope.updateAnswer($scope.nr4Tabs[1].sections[0].questions[0]);
+                    var question = $scope.nr4Tabs[1].sections[0].questions[0];
+                    question.hasValidation = true;
+                    question.enable = false;
+                    $scope.updateAnswer(question);
                     loadPreviousReport();
                 })
             }
         }
+
+        $scope.isQuestionDisabled = function(question){
+            if(question.hasValidation){
+
+                if(question.visible && !question.hasOwnProperty("enable"))
+                    return false;
+
+                if(!question.enable )
+                    return true;
+            }
+            
+            return false;
+        }
+
 
         function transformNr4Data(){
 
@@ -364,12 +420,12 @@ function (app, _, nr4Data, nr3Data) {
             if(question.multiple){
                 question.optionsMapping =  _.map(question.options, function(option){
                     return { identifier: option.value, 
-                        title: option.title }
+                        title: option.title, type:option.type }
                 });
             }
             if(question.visible===undefined)
                 question.visible    =   true;
-            if(question.validationMappings)
+            if(question.validations)
                 $scope.updateAnswer(question, baseQuestion);
         }
 

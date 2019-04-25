@@ -20,16 +20,18 @@
                     "title": "No"
                 }
             ],
-            "validationMappings": [
+            "validations": [
                 {
                     "question": "Q012_partyInProgress",
-                    "value": "false",
-                    "type": "boolean"
+                    "values": ["false"],
+                    "type": "@hasValues",
+                    "trigger":"enable"
                 },
                 {
                     "question": "Q013",
-                    "value": "false",
-                    "type": "boolean"
+                    "values": ["false"],
+                    "type": "@hasValues",
+                    "trigger":"enable"
                 }
             ]
         },
@@ -55,7 +57,7 @@
               "key": "Q013",
               "section": "General",
               "number": "13",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details",
               "multiple": false
           }
@@ -64,6 +66,7 @@
   {
       "key": "Article2",
       "title": "Article 2 – General provisions",
+      "description" : "<i>Article 2 requires each Party to take the necessary and appropriate legal, administrative and other measures to implement its obligations under the Protocol</i>",
       "questions": [
           {
               "key": "Q014",
@@ -137,7 +140,7 @@
                   {
                       "value": "true",
                       "title": "Yes",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -146,7 +149,7 @@
                   {
                       "value": "false.other",
                       "title": "Other",
-                      "type": "text"
+                      "type": "lstring"
                   }
               ]
           },
@@ -165,7 +168,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -190,11 +193,12 @@
                       "title": "No"
                   }
               ],
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q019",
-                      "type": "boolean",
-                      "value": "true"
+                      "type": "@hasValues",
+                      "values": ["true"],
+                      "trigger":"enable"                      
                   }
               ]
           },
@@ -203,7 +207,7 @@
               "section": "Article2",
               "number": "19",
               "type": "option",
-              "title": "If you answered Yes to question 18, how many permanent staff members are in place whose functions are directly related to  biosafety ? ",
+              "title": "If you answered <i>Yes</i> to question 18, how many permanent staff members are in place whose functions are directly related to  biosafety ? ",
               "multiple": false,
               "options": [
                   {
@@ -219,10 +223,11 @@
                       "title": "10 or more"
                   }
               ],
-              "validationMappings": [
+              "validations": [
                   {
                     "question": "Q019_adq",
-                    "type": "hasValue"
+                    "type": "@hasValues",
+                    "trigger":"visible"
                   }
               ]
           },
@@ -248,7 +253,7 @@
               "key": "Q020",
               "section": "Article2",
               "number": "20",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 2 in your country",
               "multiple": false
           }
@@ -273,7 +278,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -286,7 +291,7 @@
               "key": "Q022",
               "section": "Article5",
               "number": "22",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 5 in your country:",
               "multiple": false
           }
@@ -311,7 +316,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -361,7 +366,7 @@
               "key": "Q026",
               "section": "Article6",
               "number": "26",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 6 in your country:",
               "multiple": false
           }
@@ -386,7 +391,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -410,7 +415,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -441,21 +446,24 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q030",
-                      "value": "true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   },
                   {
                     "question": "Q031",
-                    "value": "true",
-                    "type": "boolean"
+                    "values"  : ["true"],
+                    "type"    : "@hasValues",
+                    "trigger" : "enable"
                   },
                   {
                     "question": "Q032",
-                    "value": "true",
-                    "type": "boolean"
+                    "values"  : ["true"],
+                    "type"    : "@hasValues",
+                    "trigger" : "enable"
                   }
               ]
           },
@@ -464,7 +472,7 @@
               "section": "Articles7-10",
               "number": "30",
               "type": "option",
-              "title": "If you answered Yes to question 29, did the notification(s) contain complete information (at a minimum the information specified in Annex I to the Cartagena Protocol on Biosafety)?",
+              "title": "If you answered <i>Yes</i> to question 29, did the notification(s) contain complete information (at a minimum the information specified in Annex I to the Cartagena Protocol on Biosafety)?",
               "multiple": false,
               "options": [
                   {
@@ -487,7 +495,7 @@
               "section": "Articles7-10",
               "number": "31",
               "type": "option",
-              "title": "If you answered Yes to question 29, has your country acknowledged receipt of the notification(s) to the notifier within ninety days of receipt?",
+              "title": "If you answered <i>Yes</i> to question 29, has your country acknowledged receipt of the notification(s) to the notifier within ninety days of receipt?",
               "multiple": false,
               "options": [
                   {
@@ -510,7 +518,7 @@
               "section": "Articles7-10",
               "number": "32",
               "type": "sub-section",
-              "title": "If you answered Yes to question 29, has your country informed of its decision(s)",
+              "title": "If you answered <i>Yes</i> to question 29, has your country informed of its decision(s)",
               "multiple": false,
               "questions": [
                   {
@@ -577,16 +585,18 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q034",
-                      "value": "true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   },
                   {
                     "question": "Q036",
-                    "value": "true",
-                    "type": "boolean"
+                    "values"  : ["true"],
+                    "type"    : "@hasValues",
+                    "trigger" : "enable"
                 }
               ]
           },
@@ -595,7 +605,7 @@
               "section": "Articles7-10",
               "number": "34",
               "type": "option",
-              "title": "If you answered Yes to question 33, how many LMOs has your country approved for import for intentional introduction into the environment?",
+              "title": "If you answered <i>Yes</i> to question 33, how many LMOs has your country approved for import for intentional introduction into the environment?",
               "multiple": false,
               "options": [
                   {
@@ -616,10 +626,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q035",
-                      "type": "hasValue"
+                      "values"  : ["1+","5+","10+"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -650,34 +662,40 @@
               "section": "Articles7-10",
               "number": "36",
               "type": "option",
-              "title": "If you answered under question 34 that LMOs were approved, have all these LMOs actually been imported into your country?",
+              "title": "If you answered <i>Yes</i> to question 33, what percentage of your country’s decisions fall into the following categories?",
               "multiple": true,
               "options": [
                   {
                       "value": "3B9ECE67-B35C-40FF-8C06-4EA5FF762899",
-                      "title": "Approval of the import/use of the LMO(s) without conditions"
+                      "title": "Approval of the import/use of the LMO(s) without conditions",
+                      "type": "int"
                   },
                   {
                       "value": "3EFF4792-A896-4DC7-9945-04FE9C8B5B4F",
-                      "title": "Approval of the import/use of the LMO(s) with conditions"
+                      "title": "Approval of the import/use of the LMO(s) with conditions",
+                      "type": "int"
                   },
                   {
                       "value": "6DD1B161-4CDB-4900-BD31-DBB97E86B2AE",
-                      "title": "Prohibition of the import/use of the LMO(s)"
+                      "title": "Prohibition of the import/use of the LMO(s)",
+                      "type": "int"
                   },
                   {
                       "value": "8D91ACEE-C6B3-4204-8FE6-00AE424013FF",
-                      "title": "Request for additional relevant information"
+                      "title": "Request for additional relevant information",
+                      "type": "int"
                   },
                   {
                       "value": "19F9F13E-195E-45B5-88DD-058A07E0D6F6",
-                      "title": "Inform the notifier that the period for communicating the decision has been extended"
+                      "title": "Inform the notifier that the period for communicating the decision has been extended",
+                      "type": "int"
                   }
               ],
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q037",
-                      "type": "hasValue"
+                      "type"    : "@hasAdditionalValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -708,7 +726,7 @@
               "key": "Q038",
               "section": "Articles7-10",
               "number": "38",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Articles 7 to 10 in your country, including measures in case of lack of scientific certainty on potential adverse effects of LMOs for intentional introduction to the environment",
               "multiple": false
           }
@@ -752,7 +770,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -766,7 +784,7 @@
               "section": "Article11",
               "number": "41",
               "type": "option",
-              "title": "Has your country established a mechanism to ensure that decisions regarding LMOs-FFP that may be subject to transboundary movement will be communicated to the Parties through the BCH?",
+              "title": "In the current reporting period, how many decisions has your country taken <u>regarding domestic use</u>, including placing on the market, of LMOs that may be subject to transboundary movement for direct use as food or feed, or for processing?",
               "multiple": false,
               "options": [
                   {
@@ -812,7 +830,7 @@
               "section": "Article11",
               "number": "43",
               "type": "option",
-              "title": "In the current reporting period, how many decisions has your country taken regarding the import of LMOs for direct use as food or feed, or for processing?",
+              "title": "In the current reporting period, how many decisions has your country taken <u>regarding the import</u> of LMOs for direct use as food or feed, or for processing?",
               "multiple": false,
               "options": [
                   {
@@ -838,7 +856,7 @@
               "key": "Q044",
               "section": "Article11",
               "number": "44",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 11 in your country, including measures in case of lack of scientific certainty on potential adverse effects of LMOs that may be subject to transboundary movement for direct use as food or feed, or for processing",
               "multiple": false
           }
@@ -863,7 +881,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -889,21 +907,24 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                 {
                     "question": "Q047",
-                    "value":"true",
-                    "type": "boolean"
+                    "values"  : ["true"],
+                    "type"    : "@hasValues",
+                    "trigger" : "enable"
                 },
                 {
                     "question": "Q048",
-                    "value":"true",
-                    "type": "boolean"
+                    "values"  : ["true"],
+                    "type"    : "@hasValues",
+                    "trigger" : "enable"
                 },
                 {
                     "question": "Q050",
-                    "value":"true",
-                    "type": "boolean"
+                    "values"  : ["true"],
+                    "type"    : "@hasValues",
+                    "trigger" : "enable"
                 }
             ]
           },
@@ -912,7 +933,7 @@
               "section": "Article12",
               "number": "47",
               "type": "option",
-              "title": "If you answered Yes to question 46, how many decisions were reviewed and/or changed?",
+              "title": "If you answered <i>Yes</i> to question 46, how many decisions were reviewed and/or changed?",
               "multiple": false,
               "options": [
                   {
@@ -935,7 +956,7 @@
               "section": "Article12",
               "number": "48",
               "type": "option",
-              "title": "If you answered Yes to question 46, were any of the reviews triggered by a request from the Party of export or the notifier?",
+              "title": "If you answered <i>Yes</i> to question 46, were any of the reviews triggered by a request from the Party of export or the notifier?",
               "multiple": false,
               "options": [
                   {
@@ -947,11 +968,12 @@
                       "title": "No"
                   }
               ],
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q049",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -960,7 +982,7 @@
               "section": "Article12",
               "number": "49",
               "type": "option",
-              "title": "If you answered Yes to question 48, did your country provide a response within ninety days setting out the reasons for the decision?",
+              "title": "If you answered <i>Yes</i> to question 48, did your country provide a response within ninety days setting out the reasons for the decision?",
               "multiple": false,
               "options": [
                   {
@@ -982,7 +1004,7 @@
               "section": "Article12",
               "number": "50",
               "type": "option",
-              "title": "If you answered Yes to question 46, were any of the reviews initiated by your country as the Party of import?",
+              "title": "If you answered <i>Yes</i> to question 46, were any of the reviews initiated by your country as the Party of import?",
               "multiple": false,
               "options": [
                   {
@@ -994,18 +1016,20 @@
                       "title": "No"
                   }
               ],
-              "validationMappings": [
+              "validations": [
                   {
                       "baseQuestion":"Q051",
                       "question": "Q051_a",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   },
                   {
                     "baseQuestion":"Q051",
                     "question": "Q051_b",
-                    "value":"true",
-                    "type": "boolean"
+                    "values"  : ["true"],
+                    "type"    : "@hasValues",
+                    "trigger" : "enable"
                 }
               ]
           },
@@ -1014,7 +1038,7 @@
               "section": "Articles12",
               "number": "51",
               "type": "sub-section",
-              "title": "If you answered Yes to question 50, did your country, within thirty days, set out the reasons for the decision and inform",
+              "title": "If you answered <i>Yes</i> to question 50, did your country, within thirty days, set out the reasons for the decision and inform",
               "multiple": false,
               "questions": [
                   {
@@ -1067,7 +1091,7 @@
               "key": "Q052",
               "section": "Article12",
               "number": "52",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 12 in your country",
               "multiple": false
           }
@@ -1092,7 +1116,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -1118,16 +1142,18 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q055",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   },
                   {
                     "question": "Q056",
-                    "value":"true",
-                    "type": "boolean"
+                    "values"  : ["true"],
+                    "type"    : "@hasValues",
+                    "trigger" : "enable"
                   }
               ]
           },
@@ -1136,7 +1162,7 @@
               "section": "Article13",
               "number": "55",
               "type": "option",
-              "title": "If you answered Yes to question 54, for how many LMOs has your country applied the simplified procedure?",
+              "title": "If you answered <i>Yes</i> to question 54, for how many LMOs has your country applied the simplified procedure?",
               "multiple": false,
               "options": [
                   {
@@ -1159,7 +1185,7 @@
               "section": "Article13",
               "number": "56",
               "type": "option",
-              "title": "If you answered Yes to question 54, has your country informed the Parties through the BCH of the cases where the simplified procedure was applied?",
+              "title": "If you answered <i>Yes</i> to question 54, has your country informed the Parties through the BCH of the cases where the simplified procedure was applied?",
               "multiple": false,
               "options": [
                   {
@@ -1181,7 +1207,7 @@
               "key": "Q057",
               "section": "Article13",
               "number": "57",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 13 in your country",
               "multiple": false
           }
@@ -1199,7 +1225,10 @@
               "title": "How many bilateral, regional or multilateral agreements or arrangements relevant to biosafety has your country established with other Parties/non-Parties?",
               "multiple": false,
               "options": [
-                  {
+                {
+                    "value": "none",
+                    "title": "None"
+                },{
                       "value": "1+",
                       "title": "1 to 4"
                   },
@@ -1213,10 +1242,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q059",
-                      "type": "hasValue"
+                      "values"  : ["0"],
+                      "type"    : "@hasValuesExcept",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -1224,7 +1255,7 @@
               "key": "Q059",
               "section": "Article14",
               "number": "59",
-              "type": "text",
+              "type": "lstring",
               "title": "If you answered under question 58 that agreements or arrangements were established, please provide a brief description of their scope and objective",
               "multiple": false
           },
@@ -1232,7 +1263,7 @@
               "key": "Q060",
               "section": "Article14",
               "number": "60",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 14 in your country",
               "multiple": false
           }
@@ -1260,11 +1291,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q062",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -1273,7 +1305,7 @@
               "section": "Article15_16",
               "number": "62",
               "type": "option",
-              "title": "If you answered Yes to question 61, with regard to which LMOs does the requirement apply (select all that apply)?",
+              "title": "If you answered <i>Yes</i> to question 61, with regard to which LMOs does the requirement apply (select all that apply)?",
               "multiple": true,
               "options": [
                   {
@@ -1295,7 +1327,7 @@
                   {
                       "value": "",
                       "title": "Other",
-                      "type": "text"
+                      "type": "lstring"
                   }
               ],
               "mandatory": true
@@ -1315,18 +1347,19 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
                       "title": "No"
                   }
               ],
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q064",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -1335,7 +1368,7 @@
               "section": "Article15_16",
               "number": "64",
               "type": "option",
-              "title": "If you answered Yes to question 63, does the mechanism include procedures to identify and/or train national experts to conduct risk assessments?",
+              "title": "If you answered <i>Yes</i> to question 63, does the mechanism include procedures to identify and/or train national experts to conduct risk assessments?",
               "multiple": false,
               "options": [
                   {
@@ -1353,7 +1386,7 @@
               "section": "Article15_16",
               "number": "",
               "type": "legend",
-              "title": "Capacity-building in risk assessment or risk management"
+              "title": "<i>Capacity-building in risk assessment or risk management</i>"
           },
           {
               "key": "Q065",
@@ -1377,7 +1410,7 @@
                           },
                           {
                               "value": "1+",
-                              "title": "One to 9"
+                              "title": "1 to 9"
                           },
                           {
                               "value": "10+",
@@ -1390,6 +1423,15 @@
                           {
                               "value": "100+",
                               "title": "100 or more"
+                          }
+                      ],
+                      "validations": [
+                          {
+                            "baseQuestion" : "Q065",
+                            "question"  : "Q065_a_adq",
+                            "values"    : ["0"],
+                            "type"      : "@hasValuesExcept",
+                            "trigger"   :"visible"
                           }
                       ]
                   },
@@ -1425,7 +1467,7 @@
                           },
                           {
                               "value": "1+",
-                              "title": "One to 9"
+                              "title": "1 to 9"
                           },
                           {
                               "value": "10+",
@@ -1438,6 +1480,15 @@
                           {
                               "value": "100+",
                               "title": "100 or more"
+                          }
+                      ],
+                      "validations": [
+                          {
+                            "baseQuestion" : "Q065",
+                            "question"  : "Q065_b_adq",
+                            "values"    : ["0"],
+                            "type"      : "@hasValuesExcept",
+                            "trigger"   :"visible"
                           }
                       ]
                   },
@@ -1473,7 +1524,7 @@
                           },
                           {
                               "value": "1+",
-                              "title": "One to 9"
+                              "title": "1 to 9"
                           },
                           {
                               "value": "10+",
@@ -1486,6 +1537,15 @@
                           {
                               "value": "100+",
                               "title": "100 or more"
+                          }
+                      ],
+                      "validations": [
+                          {
+                            "baseQuestion" : "Q065",
+                            "question"  : "Q065_c_adq",
+                            "values"    : ["0"],
+                            "type"      : "@hasValuesExcept",
+                            "trigger"   :"visible"
                           }
                       ]
                   },
@@ -1527,16 +1587,18 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q067",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   },
                   {
                     "question": "Q068",
-                    "value":"true",
-                    "type": "boolean"
+                    "values"  : ["true"],
+                    "type"    : "@hasValues",
+                    "trigger" : "enable"
                   }
               ]
           },
@@ -1545,7 +1607,7 @@
               "section": "Article15_16",
               "number": "67",
               "type": "option",
-              "title": "If you answered Yes to question 66, is your country using the “Manual on Risk Assessment of LMOs” (developed by the CBD Secretariat) for training in risk assessment?",
+              "title": "If you answered <i>Yes</i> to question 66, is your country using the “Manual on Risk Assessment of LMOs” (developed by the CBD Secretariat) for training in risk assessment?",
               "multiple": false,
               "options": [
                   {
@@ -1564,7 +1626,7 @@
               "section": "Article15_16",
               "number": "68",
               "type": "option",
-              "title": "If you answered Yes to question 66, is your country using the “Guidance on Risk Assessment of LMOs” (developed by the Online Forum and the AHTEG on Risk Assessment and Risk Management) for training in risk assessment?",
+              "title": "If you answered <i>Yes</i> to question 66, is your country using the “Guidance on Risk Assessment of LMOs” (developed by the Online Forum and the AHTEG on Risk Assessment and Risk Management) for training in risk assessment?",
               "multiple": false,
               "options": [
                   {
@@ -1589,7 +1651,7 @@
                   {
                       "value": "true",
                       "title": "Yes",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -1602,7 +1664,7 @@
               "section": "Article15_16",
               "number": "70",
               "type": "sub-section",
-              "title": "Does your country have the capacity to detect, identify, assess and/or monitor living modified organisms or specific traits that may have adverse effects on the conservation and sustainable use of biological diversity, taking into account risks to human health?",
+              "title": "Does your country have the capacity to detect, identify, assess the risk of and/or monitor living modified organisms or specific traits that may have adverse effects on the conservation and sustainable use of biological diversity, taking into account risks to human health?",
               "multiple": false,
               "questions": [
                   {
@@ -1646,7 +1708,7 @@
                       "section": "Article15_16",
                       "number": "70c",
                       "type": "option",
-                      "title": "Assess:",
+                      "title": "Assess the risk:",
                       "multiple": false,
                       "options": [
                           {
@@ -1737,7 +1799,7 @@
               "section": "Article15_16",
               "number": "72",
               "type": "option",
-              "title": "If you answered Yes to question 71, is your country using the “Guidance on Risk Assessment of LMOs” (developed by the Online Forum and the AHTEG on Risk Assessment and Risk Management) for conducting  risk assessment or risk management, or for evaluating risk assessment reports submitted by notifiers?",
+              "title": "If you answered <i>Yes</i> to question 71, is your country using the “Guidance on Risk Assessment of LMOs” (developed by the Online Forum and the AHTEG on Risk Assessment and Risk Management) for conducting  risk assessment or risk management, or for evaluating risk assessment reports submitted by notifiers?",
               "multiple": false,
               "options": [
                   {
@@ -1756,7 +1818,7 @@
               "section": "Article15_16",
               "number": "73",
               "type": "option",
-              "title": "Has your country adopted any common approaches to risk assessment with other countries?",
+              "title": "Has your country adopted common approaches or methodologies to risk assessment in coordination with other countries?",
               "multiple": false,
               "options": [
                   {
@@ -1807,21 +1869,24 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q076",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   },
                   {
                     "question": "Q077",
-                    "value":"true",
-                    "type": "boolean"
+                    "values"  : ["true"],
+                    "type"    : "@hasValues",
+                    "trigger" : "enable"
                   },
                   {
                     "question": "Q078",
-                    "value":"true",
-                    "type": "boolean"
+                    "values"  : ["true"],
+                    "type"    : "@hasValues",
+                    "trigger" : "enable"
                   }
               ]
           },
@@ -1830,7 +1895,7 @@
               "section": "Article15_16",
               "number": "76",
               "type": "option",
-              "title": "If you answered Yes to question 75, how many risk assessments were conducted?",
+              "title": "If you answered <i>Yes</i> to question 75, how many risk assessments were conducted?",
               "multiple": false,
               "options": [
                   {
@@ -1839,7 +1904,7 @@
                   },
                   {
                       "value": "1+",
-                      "title": "One to 9"
+                      "title": "1 to 9"
                   },
                   {
                       "value": "10+",
@@ -1860,7 +1925,7 @@
               "section": "Article15_16",
               "number": "77",
               "type": "term",
-              "title": "If you answered Yes to question 75, please indicate the scope of the risk assessments (select all that apply):",
+              "title": "If you answered <i>Yes</i> to question 75, please indicate the scope of the risk assessments (select all that apply):",
               "multiple": true,
               "options": [
                   {
@@ -1890,7 +1955,7 @@
                   {
                       "value": "",
                       "title": "Other",
-                      "type": "text"
+                      "type": "lstring"
                   }
               ]
           },
@@ -1899,7 +1964,7 @@
               "section": "Article15_16",
               "number": "78",
               "type": "option",
-              "title": "If you answered Yes to question 75, were risk assessments conducted for all decisions taken on LMOs for intentional introduction into the environment or on domestic use of LMOs that may be subject to transboundary movement for direct use as food or feed, or for processing?",
+              "title": "If you answered <i>Yes</i> to question 75, were risk assessments conducted for all decisions taken on LMOs for intentional introduction into the environment or on domestic use of LMOs that may be subject to transboundary movement for direct use as food or feed, or for processing?",
               "multiple": false,
               "options": [
                   {
@@ -1969,7 +2034,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -1993,7 +2058,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -2006,7 +2071,7 @@
               "section": "Article15_16",
               "number": "83",
               "type": "option",
-              "title": "Does your country have the infrastructure (e.g. laboratory facilities) for monitoring or managing LMOs?",
+              "title": "Does your country have the necessary infrastructure (e.g. laboratory facilities) for monitoring or managing LMOs?",
               "multiple": false,
               "options": [
                   {
@@ -2024,7 +2089,7 @@
               "key": "Q084",
               "section": "Article15_16",
               "number": "84",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Articles 15 and 16 in your country",
               "multiple": false
           }
@@ -2049,7 +2114,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -2082,10 +2147,12 @@
                       "title": "10 or more"
                   }
               ],
-              "validationMappings": [
+              "validations": [
                   {
-                      "question": "Q087",                      
-                      "type": "hasValue"
+                      "question": "Q087",  
+                      "values"  : ["0"],
+                      "type"    : "@hasValuesExcept",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -2162,7 +2229,7 @@
               "key": "Q090",
               "section": "Article17",
               "number": "90",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 17 in your country",
               "multiple": false
           }
@@ -2187,7 +2254,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -2201,7 +2268,7 @@
               "section": "Article18",
               "number": "92",
               "type": "option",
-              "title": "Has your country taken measures to require that documentation accompanying LMOs-FFP, in cases where the identity of the LMOs is not known, clearly identifies that they may contain LMOs and are not intended for intentional introduction into the environment, as well as a contact point for further information?",
+              "title": "Has your country taken measures to require that documentation accompanying LMOs-FFP, in cases where the identity of the LMOs <i>is not known</i>, clearly identifies that they may contain LMOs and are not intended for intentional introduction into the environment, as well as a contact point for further information?",
               "multiple": false,
               "options": [
                   {
@@ -2211,7 +2278,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -2225,7 +2292,7 @@
               "section": "Article18",
               "number": "93",
               "type": "option",
-              "title": "Has your country taken measures to require that documentation accompanying LMOs-FFP, in cases where the identity of the LMOs is known, clearly identifies that they contain LMOs and are not intended for intentional introduction into the environment, as well as a contact point for further information?",
+              "title": "Has your country taken measures to require that documentation accompanying LMOs-FFP, in cases where the identity of the LMOs <i>is known</i>, clearly identifies that they contain LMOs and are not intended for intentional introduction into the environment, as well as a contact point for further information?",
               "multiple": false,
               "options": [
                   {
@@ -2235,7 +2302,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -2249,7 +2316,7 @@
               "section": "Article18",
               "number": "94",
               "type": "option",
-              "title": "If you answered Yes to question(s) 91, 92 and/or 93, what type of documentation accompanying LMOs does your country require?",
+              "title": "If you answered <i>Yes</i> to question(s) 91, 92 and/or 93, what type of documentation accompanying LMOs does your country require?",
               "multiple": false,
               "options": [
                   {
@@ -2263,7 +2330,7 @@
                   {
                       "value": "other",
                       "title": "Other",
-                      "type": "text"
+                      "type": "lstring"
                   }
               ]
           },
@@ -2282,7 +2349,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -2290,11 +2357,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q096",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -2303,7 +2371,7 @@
               "section": "Article18",
               "number": "96",
               "type": "option",
-              "title": "If you answered Yes to question 95, what type of documentation does your country require for the identification of LMOs that are destined for contained use?",
+              "title": "If you answered <i>Yes</i> to question 95, what type of documentation does your country require for the identification of LMOs that are destined for contained use?",
               "multiple": false,
               "options": [
                   {
@@ -2317,7 +2385,7 @@
                   {
                       "value": "other",
                       "title": "Other",
-                      "type": "text"
+                      "type": "lstring"
                   }
               ]
           },
@@ -2336,7 +2404,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -2344,11 +2412,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q098",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -2357,7 +2426,7 @@
               "section": "Article18",
               "number": "98",
               "type": "option",
-              "title": "If you answered Yes to question 97, what type of documentation does your country require for the identification of LMOs that are intended for intentional introduction into the environment?",
+              "title": "If you answered <i>Yes</i> to question 97, what type of documentation does your country require for the identification of LMOs that are intended for intentional introduction into the environment?",
               "multiple": false,
               "options": [
                   {
@@ -2371,7 +2440,7 @@
                   {
                       "value": "other",
                       "title": "Other",
-                      "type": "text"
+                      "type": "lstring"
                   }
               ]
           },
@@ -2409,7 +2478,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -2418,9 +2487,9 @@
               ]
           },
           {
-              "key": "Q101_a",
+              "key": "Q101",
               "section": "Article18",
-              "number": "101a",
+              "number": "",
               "type": "option",
               "title": "How many customs officers in your country have received training in the identification of LMOs?",
               "multiple": false,
@@ -2449,10 +2518,18 @@
                       "value": "100+",
                       "title": "100 or more"
                   }
+              ],
+              "validations": [
+                  {
+                      "question": "Q101_adq",
+                      "values"  : ["0"],
+                      "type"    : "@hasValuesExcept",
+                      "trigger" : "visible"
+                  }
               ]
           },
           {
-              "key": "Q101_b",
+              "key": "Q101_adq",
               "section": "Article18",
               "number": "",
               "type": "option",
@@ -2484,7 +2561,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -2526,7 +2603,33 @@
                       "title": "100 or more"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validations": [
+                  {
+                      "question": "Q103_adq",
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "visible"
+                  }
+              ]
+          },
+          {
+              "key": "Q103_adq",
+              "section": "Article18",
+              "number": "",
+              "type": "option",
+              "title": "Is this number adequate",
+              "multiple": false,
+              "options": [
+                  {
+                      "value": "true",
+                      "title": "Yes"
+                  },
+                  {
+                      "value": "false",
+                      "title": "No"
+                  }
+              ]
           },
           {
               "key": "Q104",
@@ -2577,11 +2680,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q106",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -2620,7 +2724,7 @@
               "key": "Q107",
               "section": "Article18",
               "number": "107",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 18 in your country:",
               "multiple": false
           }
@@ -2671,7 +2775,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -2690,7 +2794,7 @@
                   {
                       "value": "true",
                       "title": "Yes",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -2702,7 +2806,7 @@
               "key": "Q111",
               "section": "Article19",
               "number": "125",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 19 in your country",
               "multiple": false
           }
@@ -2713,452 +2817,461 @@
       "title": "Article 20 – Information Sharing and the Biosafety Clearing-House (BCH)",
       "questions": [
           {
-              "key": "Q112_a",
-              "section": "Article20",
-              "number": "112a",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nExisting legislation, regulations and guidelines for implementing the Protocol, as well as information required by Parties for the advance informed agreement procedure (Article 20, paragraph 3 (a))",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_b",
-              "section": "Article20",
-              "number": "112b",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nLegislation, regulations and guidelines applicable to the import of LMOs intended for direct use as food or feed, or for processing (Article 11, paragraph 5)",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_c",
-              "section": "Article20",
-              "number": "112c",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nBilateral, multilateral and regional agreements and arrangements (Articles 14, paragraph 2 and 20, paragraph 3 (b))",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_d",
-              "section": "Article20",
-              "number": "112d",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nContact details for competent national authorities (Article 19, paragraphs 2 and 3), national focal points (Article 19, paragraphs 1 and 3), and emergency contacts (Article 17, paragraph 3 (e))",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_e",
-              "section": "Article20",
-              "number": "112e",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nDecisions by a Party regarding transit of LMOs (Article 6, paragraph 1)",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_f",
-              "section": "Article20",
-              "number": "112f",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nDecisions by a Party regarding import of LMOs for contained use (Article 6, paragraph 2)",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_g",
-              "section": "Article20",
-              "number": "112g",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nNotifications regarding the release under your country’s jurisdiction that leads, or may lead, to an unintentional transboundary movement of a LMO that is likely to have significant adverse effects on biological diversity (Article 17, paragraph 1)",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_h",
-              "section": "Article20",
-              "number": "112h",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nInformation concerning cases of illegal transboundary movements of LMOs (Article 25, paragraph 3)",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_i",
-              "section": "Article20",
-              "number": "112i",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nDecisions regarding the importation of LMOs for intentional introduction into the environment (Article 10, paragraph 3)",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_j",
-              "section": "Article20",
-              "number": "112j",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nInformation on the application of domestic regulations to specific imports of LMOs (Article 14, paragraph 4)",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_k",
-              "section": "Article20",
-              "number": "112k",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nDecisions regarding the domestic use of LMOs that may be subject to transboundary movement for direct use as food or feed, or for processing (Article 11, paragraph 1)",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_l",
-              "section": "Article20",
-              "number": "112l",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nDecisions regarding the import of LMOs intended for direct use as food or feed, or for processing that are taken under domestic regulatory frameworks (Article 11, paragraph 4) or in accordance with Annex III to the Protocol (Article 11, paragraph 6)",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_m",
-              "section": "Article20",
-              "number": "112m",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nDeclarations regarding the framework to be used for LMOs intended for direct use as food or feed, or for processing (Article 11, paragraph 6)",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_n",
-              "section": "Article20",
-              "number": "112n",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nReview and change of decisions regarding intentional transboundary movements of LMOs (Article 12, paragraph 1)",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_o",
-              "section": "Article20",
-              "number": "112o",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nCases where intentional transboundary movement may take place at the same time as the movement is notified to the Party of import (Article 13, paragraph 1 (a))",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_p",
-              "section": "Article20",
-              "number": "112p",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nLMOs granted exemption status by each Party (Article 13, paragraph 1 (b))",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
-          },
-          {
-              "key": "Q112_q",
-              "section": "Article20",
-              "number": "112q",
-              "type": "option",
-              "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.\r\nSummaries of risk assessments or environmental reviews of LMOs generated by regulatory processes and relevant information regarding products thereof (Article 20, paragraph 3 (c))",
-              "multiple": false,
-              "options": [
-                  {
-                      "value": "true.availableOnBch",
-                      "title": "Information available and in the BCH"
-                  },
-                  {
-                      "value": "true.availableNotOnBch",
-                      "title": "Information available but not in the BCH"
-                  },
-                  {
-                      "value": "true.availablePartialyOnBch",
-                      "title": "Information available but only partially available in the BCH"
-                  },
-                  {
-                      "value": "false.notAvailable",
-                      "title": "Information not available"
-                  }
-              ]
+            "key": "Q112",
+            "section": "Article20",
+            "number": "112",
+            "type": "sub-section",
+            "title": "Please provide an overview of the status of the mandatory information provided by your country to the BCH by specifying for each category of information whether it is available and whether it has been submitted to the BCH.",
+            "questions":[
+                {
+                    "key": "Q112_a",
+                    "section": "Article20",
+                    "number": "a",
+                    "type": "option",
+                    "title": "Existing legislation, regulations and guidelines for implementing the Protocol, as well as information required by Parties for the advance informed agreement procedure (Article 20, paragraph 3 (a))",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_b",
+                    "section": "Article20",
+                    "number": "b",
+                    "type": "option",
+                    "title": "Legislation, regulations and guidelines applicable to the import of LMOs intended for direct use as food or feed, or for processing (Article 11, paragraph 5)",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_c",
+                    "section": "Article20",
+                    "number": "c",
+                    "type": "option",
+                    "title": "Bilateral, multilateral and regional agreements and arrangements (Articles 14, paragraph 2 and 20, paragraph 3 (b))",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_d",
+                    "section": "Article20",
+                    "number": "d",
+                    "type": "option",
+                    "title": "Contact details for competent national authorities (Article 19, paragraphs 2 and 3), national focal points (Article 19, paragraphs 1 and 3), and emergency contacts (Article 17, paragraph 3 (e))",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_e",
+                    "section": "Article20",
+                    "number": "e",
+                    "type": "option",
+                    "title": "Decisions by a Party regarding transit of LMOs (Article 6, paragraph 1)",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_f",
+                    "section": "Article20",
+                    "number": "f",
+                    "type": "option",
+                    "title": "Decisions by a Party regarding import of LMOs for contained use (Article 6, paragraph 2)",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_g",
+                    "section": "Article20",
+                    "number": "g",
+                    "type": "option",
+                    "title": "Notifications regarding the release under your country’s jurisdiction that leads, or may lead, to an unintentional transboundary movement of a LMO that is likely to have significant adverse effects on biological diversity (Article 17, paragraph 1)",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_h",
+                    "section": "Article20",
+                    "number": "h",
+                    "type": "option",
+                    "title": "Information concerning cases of illegal transboundary movements of LMOs (Article 25, paragraph 3)",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_i",
+                    "section": "Article20",
+                    "number": "i",
+                    "type": "option",
+                    "title": "Decisions regarding the importation of LMOs for intentional introduction into the environment (Article 10, paragraph 3)",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_j",
+                    "section": "Article20",
+                    "number": "j",
+                    "type": "option",
+                    "title": "Information on the application of domestic regulations to specific imports of LMOs (Article 14, paragraph 4)",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_k",
+                    "section": "Article20",
+                    "number": "k",
+                    "type": "option",
+                    "title": "Decisions regarding the domestic use of LMOs that may be subject to transboundary movement for direct use as food or feed, or for processing (Article 11, paragraph 1)",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_l",
+                    "section": "Article20",
+                    "number": "l",
+                    "type": "option",
+                    "title": "Decisions regarding the import of LMOs intended for direct use as food or feed, or for processing that are taken under domestic regulatory frameworks (Article 11, paragraph 4) or in accordance with Annex III to the Protocol (Article 11, paragraph 6)",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_m",
+                    "section": "Article20",
+                    "number": "m",
+                    "type": "option",
+                    "title": "Declarations regarding the framework to be used for LMOs intended for direct use as food or feed, or for processing (Article 11, paragraph 6)",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_n",
+                    "section": "Article20",
+                    "number": "n",
+                    "type": "option",
+                    "title": "Review and change of decisions regarding intentional transboundary movements of LMOs (Article 12, paragraph 1)",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_o",
+                    "section": "Article20",
+                    "number": "o",
+                    "type": "option",
+                    "title": "Cases where intentional transboundary movement may take place at the same time as the movement is notified to the Party of import (Article 13, paragraph 1 (a))",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_p",
+                    "section": "Article20",
+                    "number": "p",
+                    "type": "option",
+                    "title": "LMOs granted exemption status by each Party (Article 13, paragraph 1 (b))",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                },
+                {
+                    "key": "Q112_q",
+                    "section": "Article20",
+                    "number": "q",
+                    "type": "option",
+                    "title": "Summaries of risk assessments or environmental reviews of LMOs generated by regulatory processes and relevant information regarding products thereof (Article 20, paragraph 3 (c))",
+                    "multiple": false,
+                    "options": [
+                        {
+                            "value": "true.availableOnBch",
+                            "title": "Information available and in the BCH"
+                        },
+                        {
+                            "value": "true.availableNotOnBch",
+                            "title": "Information available but not in the BCH"
+                        },
+                        {
+                            "value": "true.availablePartialyOnBch",
+                            "title": "Information available but only partially available in the BCH"
+                        },
+                        {
+                            "value": "false.notAvailable",
+                            "title": "Information not available"
+                        }
+                    ]
+                }
+            ]
           },
           {
               "key": "Q113",
               "section": "Article20",
               "number": "113",
-              "type": "text",
+              "type": "lstring",
               "title": "Please provide a brief explanation if you answered that the information is available but not in the BCH or only partially available in the BCH to any item under question 112",
               "multiple": false
           },
@@ -3177,7 +3290,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3201,7 +3314,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3247,7 +3360,7 @@
                   {
                       "value": "true",
                       "title": "Yes",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3300,11 +3413,7 @@
                   },
                   {
                       "value": "1+",
-                      "title": "1 to 4"
-                  },
-                  {
-                      "value": "5+",
-                      "title": "5 to 9"
+                      "title": "1 to 9"
                   },
                   {
                       "value": "10+",
@@ -3312,7 +3421,11 @@
                   },
                   {
                       "value": "50+",
-                      "title": "50 or more"
+                      "title": "50 to 99"
+                  },
+                  {
+                      "value": "100+",
+                      "title": "100 or more"
                   }
               ]
           },
@@ -3320,7 +3433,7 @@
               "key": "Q120",
               "section": "Article20",
               "number": "120",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 20 in your country",
               "multiple": false
           }
@@ -3345,7 +3458,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3381,7 +3494,7 @@
               "key": "Q123",
               "section": "Article21",
               "number": "123",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 21 in your country",
               "multiple": false
           }
@@ -3406,7 +3519,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3430,7 +3543,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3438,11 +3551,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q126",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -3451,7 +3565,7 @@
               "section": "Article22",
               "number": "126",
               "type": "option",
-              "title": "If you answered Yes to question 125, how were these resources made available?",
+              "title": "If you answered <i>Yes</i> to question 125, how were these resources made available?",
               "multiple": false,
               "options": [
                   {
@@ -3484,7 +3598,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3492,11 +3606,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q128",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -3505,7 +3620,7 @@
               "section": "Article22",
               "number": "128",
               "type": "option",
-              "title": "If you answered Yes to question 127, how were these resources made available?",
+              "title": "If you answered <i>Yes</i> to question 127, how were these resources made available?",
               "multiple": false,
               "options": [
                   {
@@ -3534,7 +3649,7 @@
                   {
                       "value": "true",
                       "title": "Yes",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3542,11 +3657,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q130",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -3555,7 +3671,7 @@
               "section": "Article22",
               "number": "130",
               "type": "option",
-              "title": "If you answered Yes to question 129, how would you characterize the process?",
+              "title": "If you answered <i>Yes</i> to question 129, how would you characterize the process?",
               "multiple": false,
               "options": [
                   {
@@ -3596,7 +3712,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3604,11 +3720,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q132",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -3617,7 +3734,7 @@
               "section": "Article22",
               "number": "132",
               "type": "term",
-              "title": "If you answered Yes to question 147, in which of the following areas were these activities undertaken?",
+              "title": "If you answered <i>Yes</i> to question 131, in which of the following areas were these activities undertaken? (select all that apply)” ",
               "multiple": true,
               "options": [
                   {
@@ -3687,7 +3804,7 @@
                   {
                       "value": "123UY9B1-4571-4C2A-A459-F78E004D9Q84",
                       "title": "Other",
-                      "type": "text"
+                      "type": "lstring"
                   }
               ]
           },
@@ -3728,11 +3845,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q135",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -3741,7 +3859,7 @@
               "section": "Article22",
               "number": "135",
               "type": "term",
-              "title": "If you answered Yes to question 134, which of the following areas still need capacity-building (select all that apply)?",
+              "title": "If you answered <i>Yes</i> to question 134, which of the following areas still need capacity-building (select all that apply)?",
               "multiple": true,
               "options": [
                   {
@@ -3778,7 +3896,7 @@
                   },
                   {
                       "value": "0FF8F112-C0E9-4A18-83E1-40D4EF61503E",
-                      "title": "Identification of LMOs, including their detection"
+                      "title": "Sampling, detection and identification of LMOs"
                   },
                   {
                       "value": "76DB23A3-F880-4AC8-8602-DF9DC45EECAF",
@@ -3786,7 +3904,7 @@
                   },
                   {
                       "value": "A16727EE-FE61-43FF-8530-35A9C7261247",
-                      "title": "Implementation of the documentation requirements under Article 18.2 of the Protocol"
+                      "title": "Implementation of the documentation requirements for handling, transport, packaging and identification"
                   },
                   {
                       "value": "3E7615C5-7DFC-4E04-9D26-6C80B4B1DED8",
@@ -3811,7 +3929,7 @@
                   {
                       "value": "123UY9B1-4571-4C2A-A459-F78E004D9Q84",
                       "title": "Other",
-                      "type": "text"
+                      "type": "lstring"
                   }
               ]
           },
@@ -3857,7 +3975,7 @@
               "key": "Q138",
               "section": "Article22",
               "number": "138",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 22 in your country, including further details about your experience in accessing GEF funds",
               "multiple": false
           }
@@ -3882,7 +4000,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3901,7 +4019,7 @@
                   {
                       "value": "true",
                       "title": "Yes",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3925,7 +4043,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3945,7 +4063,7 @@
                   {
                       "value": "true",
                       "title": "Yes",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3965,7 +4083,7 @@
                   {
                       "value": "true",
                       "title": "Yes",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -3994,7 +4112,7 @@
               "mandatory": true
           },
           {
-              "key": "Q145_a",
+              "key": "Q145",
               "section": "Article23",
               "number": "145",
               "type": "option",
@@ -4017,12 +4135,20 @@
                       "value": "10+",
                       "title": "10 or more"
                   }
+              ],
+              "validations": [
+                  {
+                    "question"  : "Q145_adq",
+                    "values"    : ["0"],
+                    "type"      : "@hasValuesExcept",
+                    "trigger"   :"visible"
+                  }
               ]
           },
           {
-              "key": "Q145_b",
+              "key": "Q145_adq",
               "section": "Article23",
-              "number": "145b",
+              "number": "",
               "type": "option",
               "title": "Is this number adequate",
               "multiple": false,
@@ -4038,7 +4164,7 @@
               ]
           },
           {
-              "key": "Q146_a",
+              "key": "Q146",
               "section": "Article23",
               "number": "146a",
               "type": "option",
@@ -4069,10 +4195,18 @@
                       "value": "100+",
                       "title": "100 or more"
                   }
+              ],
+              "validations": [
+                  {
+                    "question"  : "Q146_adq",
+                    "values"    : ["0"],
+                    "type"      : "@hasValuesExcept",
+                    "trigger"   :"visible"
+                  }
               ]
           },
           {
-              "key": "Q146_b",
+              "key": "Q146_adq",
               "section": "Article23",
               "number": "",
               "type": "option",
@@ -4104,7 +4238,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -4128,7 +4262,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -4136,11 +4270,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q149",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -4149,7 +4284,7 @@
               "section": "Article23",
               "number": "149",
               "type": "term",
-              "title": "If you answered Yes to question 148, please indicate the modalities used to inform the public:",
+              "title": "If you answered <i>Yes</i> to question 148, please indicate the modalities used to inform the public:",
               "multiple": true,
               "options": [
                   {
@@ -4179,7 +4314,7 @@
                   {
                       "value": "123UY9B1-4571-4C2A-A459-F78E004D9Q84",
                       "title": "Other",
-                      "type": "text"
+                      "type": "lstring"
                   }
               ]
           },
@@ -4233,7 +4368,7 @@
               "key": "Q152",
               "section": "Article23",
               "number": "152",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 23 in your country",
               "multiple": false
           }
@@ -4280,11 +4415,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q156",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -4312,7 +4448,7 @@
               "section": "Article24",
               "number": "156",
               "type": "option",
-              "title": "If you answered Yes to question 154 and/or 155, were the transboundary movements of LMOs consistent with the objective of the Cartagena Protocol on Biosafety?",
+              "title": "If you answered <i>Yes</i> to question 154 and/or 155, were the transboundary movements of LMOs consistent with the objective of the Cartagena Protocol on Biosafety?",
               "multiple": false,
               "options": [
                   {
@@ -4334,7 +4470,7 @@
               "key": "Q157",
               "section": "Article24",
               "number": "157",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 24 in your country:",
               "multiple": false
           }
@@ -4359,7 +4495,7 @@
                   {
                       "value": "true.some",
                       "title": "Yes, to some extent",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -4421,7 +4557,7 @@
               "key": "Q161",
               "section": "Article25",
               "number": "161",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 25 in your country",
               "multiple": false
           }
@@ -4478,7 +4614,7 @@
               "mandatory": true
           },
           {
-              "key": "Q164_a",
+              "key": "Q164",
               "section": "Article26",
               "number": "164a",
               "type": "option",
@@ -4505,10 +4641,18 @@
                       "value": "50+",
                       "title": "50 or more"
                   }
+              ],
+              "validations": [
+                  {
+                    "question"  : "Q164_adq",
+                    "values"    : ["0"],
+                    "type"      : "@hasValuesExcept",
+                    "trigger"   :"visible"
+                  }
               ]
           },
           {
-              "key": "Q164_b",
+              "key": "Q164_adq",
               "section": "Article26",
               "number": "",
               "type": "option",
@@ -4548,7 +4692,7 @@
               "key": "Q166",
               "section": "Article26",
               "number": "166",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 26 in your country",
               "multiple": false
           }
@@ -4640,11 +4784,12 @@
                   }
               ],
               "mandatory": true,
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q171",
-                      "value":"false",
-                      "type": "boolean"
+                      "values"  : ["false"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -4707,17 +4852,17 @@
                   {
                       "value": "6BAF09B7-6331-04E6-479D-C1C1B0D55ECD",
                       "title": "One or more national laws",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "0D3A9BB1-B378-174D-F4DD-1217D79D8B21",
                       "title": "One or more national regulations",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "BA743C79-B202-4611-16C4-2C7D4678ACEB",
                       "title": "One or more sets of guidelines",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "9067DB5B-E33B-655D-83A3-32D4D562618F",
@@ -4750,16 +4895,18 @@
                               "title": "No"
                           }
                       ],
-                      "validationMappings": [
+                      "validations": [
                           {
                               "question": "Q174",
-                              "value":"true",
-                              "type": "boolean"
+                              "values"  : ["true"],
+                              "type"    : "@hasValues",
+                              "trigger" : "enable"
                           },
                           {
                             "question": "Q175",
-                            "value":"true",
-                            "type": "boolean"
+                            "values"  : ["true"],
+                            "type"    : "@hasValues",
+                            "trigger" : "enable"
                           }
                       ]
                   },
@@ -4788,7 +4935,7 @@
               "section": "LiabilityRedress",
               "number": "174",
               "type": "term",
-              "title": "If you answered Yes to question 173a, do these instruments impose requirements on an operator (select all that apply)?",
+              "title": "If you answered <i>Yes</i> to question 173a, do these instruments impose requirements on an operator (select all that apply)?",
               "multiple": true,
               "options": [
                   {
@@ -4806,7 +4953,7 @@
                   {
                       "value": "true.other",
                       "title": "Yes, other requirements",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -4819,7 +4966,7 @@
               "section": "LiabilityRedress",
               "number": "175",
               "type": "option",
-              "title": "If you answered Yes to question 173a, do these instruments require the operator to take response measures to avoid damage?",
+              "title": "If you answered <i>Yes</i> to question 173a, do these instruments require the operator to take response measures to avoid damage?",
               "multiple": false,
               "options": [
                   {
@@ -4837,7 +4984,7 @@
               "section": "LiabilityRedress",
               "number": "176",
               "type": "option",
-              "title": "If you answered Yes to question 173a or 173b, do these instruments provide for a definition of “operator”?",
+              "title": "If you answered <i>Yes</i> to question 173a or 173b, do these instruments provide for a definition of “operator”?",
               "multiple": false,
               "options": [
                   {
@@ -4849,11 +4996,12 @@
                       "title": "No"
                   }
               ],
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q177",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -4862,7 +5010,7 @@
               "section": "LiabilityRedress",
               "number": "177",
               "type": "term",
-              "title": "If you answered Yes to question 176, which of the following could be an ‘operator’ (select all that apply)?",
+              "title": "If you answered <i>Yes</i> to question 176, which of the following could be an ‘operator’ (select all that apply)?",
               "multiple": true,
               "options": [
                   {
@@ -4904,7 +5052,7 @@
                   {
                       "value": "CD72939E-3399-0D39-C438-B7B73D704D7B",
                       "title": "Other",
-                      "type": "text"
+                      "type": "lstring"
                   }
               ]
           },
@@ -4919,18 +5067,19 @@
                   {
                       "value": "true",
                       "title": "Yes",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
                       "title": "No"
                   }
               ],
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q179",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -4939,7 +5088,7 @@
               "section": "LiabilityRedress",
               "number": "179",
               "type": "term",
-              "title": "If you answered Yes to question 178, what measures may the competent authority take (select all that apply)?",
+              "title": "If you answered <i>Yes</i> to question 178, what measures may the competent authority take (select all that apply)?",
               "multiple": true,
               "options": [
                   {
@@ -4965,7 +5114,7 @@
                   {
                       "value": "CA21AB86-788A-4877-C0BC-5C0E2884ADE2",
                       "title": "Other",
-                      "type": "text"
+                      "type": "lstring"
                   }
               ]
           },
@@ -4980,18 +5129,19 @@
                   {
                       "value": "true",
                       "title": "Yes",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
                       "title": "No"
                   }
               ],
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q181",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -5000,7 +5150,7 @@
               "section": "LiabilityRedress",
               "number": "181",
               "type": "term",
-              "title": "If you answered Yes to question 180, what type of financial security measures are in place (select all that apply)?",
+              "title": "If you answered <i>Yes</i> to question 180, what type of financial security measures are in place (select all that apply)?",
               "multiple": true,
               "options": [
                   {
@@ -5018,7 +5168,7 @@
                   {
                       "value": "",
                       "title": "Other",
-                      "type": "text"
+                      "type": "lstring"
                   }
               ]
           },
@@ -5059,18 +5209,19 @@
                   {
                       "value": "true",
                       "title": "Yes",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
                       "title": "No"
                   }
               ],
-              "validationMappings": [
+              "validations": [
                   {
                       "question": "Q184",
-                      "value":"true",
-                      "type": "boolean"
+                      "values"  : ["true"],
+                      "type"    : "@hasValues",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -5079,13 +5230,13 @@
               "section": "LiabilityRedress",
               "number": "184",
               "type": "term",
-              "title": "If you answered Yes to question 183, have response measures been taken?",
+              "title": "If you answered <i>Yes</i> to question 183, have response measures been taken?",
               "multiple": false,
               "options": [
                   {
                       "value": "true",
                       "title": "Yes",
-                      "type": "text"
+                      "type": "lstring"
                   },
                   {
                       "value": "false",
@@ -5097,7 +5248,7 @@
               "key": "Q185",
               "section": "LiabilityRedress",
               "number": "185",
-              "type": "text",
+              "type": "lstring",
               "title": "Here you may provide further details on any activities undertaken in your country towards the implementation of the Nagoya-Kuala Lumpur Supplementary Protocol on Liability and Redress",
               "multiple": false
           }
@@ -5111,7 +5262,7 @@
               "key": "Q186",
               "section": "AdditionalInformation",
               "number": "186",
-              "type": "text",
+              "type": "lstring",
               "title": "Please use this field to provide any other information on issues related to national implementation of the Protocol, including any obstacles or impediments encountered.",
               "multiple": false
           }
@@ -5125,7 +5276,7 @@
               "key": "Q187",
               "section": "Comments",
               "number": "187",
-              "type": "text",
+              "type": "lstring",
               "title": "Please use this field to provide any other information on difficulties that you have encountered in filling in this report",
               "multiple": false
           }
