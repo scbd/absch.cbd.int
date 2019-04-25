@@ -144,7 +144,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                         if (($scope.layout || "tree") == "tree") //Default layout
                             $scope.rootTerms = thesaurus.buildTree(refTerms);
                         else
-                            $scope.rootTerms = Enumerable.from(refTerms).select("o=>{identifier : o.identifier, name : o.name, title : o.title}").toArray();
+                            $scope.rootTerms = Enumerable.from(refTerms).select("o=>{identifier : o.identifier, name : o.name, title : o.title, type:o.type}").toArray();
                         
                         buildSearchList($scope.rootTerms)
                     }
