@@ -28,7 +28,7 @@
 
                     $scope.binding = {  value : value, additionalInformation : additionalInformation };
 
-                    $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'text', value:value})
+                    $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'lstring', value:value})
 
                     $timeout(function(){$scope.ngChange()}, 200);
 
@@ -39,7 +39,7 @@
                         $scope.answer.value          = _.indexOf($scope.question.options, _.find($scope.question.options, { value: $scope.binding.value}));
                         $scope.answer.additionalInformation = $scope.binding.additionalInformation;
 
-                        $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'text', value:$scope.binding.value})
+                        $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'lstring', value:$scope.binding.value})
                     }
                     else{
                         $scope.answer = {}
