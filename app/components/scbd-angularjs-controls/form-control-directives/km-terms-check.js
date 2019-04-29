@@ -17,10 +17,12 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                 bindingType: '@',
                 termsFn: '&terms',
                 required: "@",
-                layout: "@"
+                layout: "@",
+                locales: '=?'
             },
             link: function($scope, $element, $attr, ngModelController) {
 
+                $scope.selectedItems = null;
 				$scope.showDescription = $attr.showDescription == 'true';
                 $scope.identifiers = null;
                 $scope.terms = null;
@@ -84,14 +86,20 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                             throw "Type must be array";
 
                         for (var i = 0; i < $scope.binding.length; ++i) {
-                            if ($scope.bindingType == "string[]") oNewIdentifiers[$scope.binding[i]] = true;
-                            else if ($scope.bindingType == "term[]") oNewIdentifiers[$scope.binding[i].identifier] = true;
+                            if ($scope.bindingType == "string[]") 
+                                oNewIdentifiers[$scope.binding[i]] = {selected : true};
+                            else if($scope.bindingType == "term[]")
+                                oNewIdentifiers[$scope.binding[i].identifier] = {selected : true, customValue:$scope.binding[i].customValue};
                             else throw "bindingType not supported";
+
+                            // if ($scope.bindingType == "string[]") oNewIdentifiers[$scope.binding[i]] = true;
+                            // else if ($scope.bindingType == "term[]") oNewIdentifiers[$scope.binding[i].identifier] = true;
+                            // else throw "bindingType not supported";
                         }
                     }
 
-                    if (!angular.equals(oNewIdentifiers, $scope.identifiers))
-                        $scope.identifiers = oNewIdentifiers;
+                    if (!angular.equals(oNewIdentifiers, $scope.selectedItems))
+                        $scope.selectedItems = oNewIdentifiers;
                     
                     save();
                 };
@@ -100,7 +108,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                 //
                 //==============================
                 function save() {
-                    if (!$scope.identifiers)
+                    if (!$scope.selectedItems)
                         return;
 
                     var oNewBinding = [];
@@ -108,10 +116,10 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     angular.forEach($scope.terms, function(term, i) {
                         if (term === undefined) return; //IE8 BUG
 
-                        if ($scope.identifiers[term.identifier]) {
+                        if ($scope.selectedItems[term.identifier] && $scope.selectedItems[term.identifier].selected) {
                             if ($scope.bindingType == "string[]") oNewBinding.push(term.identifier);
                             else if ($scope.bindingType == "term[]") oNewBinding.push({
-                                identifier: term.identifier
+                                identifier: term.identifier, customValue : $scope.selectedItems[term.identifier].customValue
                             });
                             else throw "bindingType not supported";
                         }
@@ -166,7 +174,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                 };
                 //==============================
                 function clear(){
-                    $scope.identifiers=[];
+                    $scope.selectedItems=[];
                     save();
                 }
                 //==============================

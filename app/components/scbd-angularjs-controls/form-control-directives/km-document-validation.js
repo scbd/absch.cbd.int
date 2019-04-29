@@ -57,10 +57,29 @@ define(['app', 'text!./km-document-validation.html','jquery'], function(app, tem
                     }
                 };
 
+
+                $scope.$watch('report', function(newVal, oldVal) {
+                    if (newVal || oldVal)
+                        $scope.onLoad = false;
+                    
+                    if(newVal && (newVal.errors||{}).length >0){
+
+                        for (var index = 0; index < newVal.errors.length; index++) {
+                            var error = newVal.errors[index];
+                            error.typeLabel     = getTranslation(error.code, error.property, error.parameters)
+                            error.propertyLabel = getLabel(error.property)
+                        }    
+                    }
+                    
+                        
+                    $scope.show=true;
+                });
+
+
                 //====================
                 //
                 //====================
-                $scope.getLabel = function(field) {
+                function getLabel(field) {
 
                     var qLabel = $element.parents().find("[km-tab]:last").parent().find("form[name='editForm'] label[for='" + field + "']:first");
 
@@ -73,12 +92,19 @@ define(['app', 'text!./km-document-validation.html','jquery'], function(app, tem
                     return field;
                 };
 
-                $scope.$watch('report', function(newVal, oldVal) {
-                    if (newVal || oldVal)
-                        $scope.onLoad = false;
-
-                    $scope.show=true;
-                });
+                //====================
+                //
+                //====================
+                function getTranslation(code, property, param) {
+                    if (code === null || code === "") return "Unknown error";
+                    if (code == "Error.Mandatory") return "Field is mandatory";
+                    if (code == "Error.InvalidValue") return "The value specified is invalid";
+                    if (code == "Error.InvalidProperty") return "This value cannot be specified";
+                    if (code == "Error.UnspecifiedLocale") return "A language is use but not speficied in your document";
+                    if (code == "Error.UnexpectedTerm") return "A specified term cannot be used";
+                    if (code == "Error.InvalidType") return "The fields type is invalid";
+                    return code;
+                };
 
             },
             controller: ["$scope", function($scope) {
@@ -104,19 +130,6 @@ define(['app', 'text!./km-document-validation.html','jquery'], function(app, tem
                     return $scope.report && $scope.report.errors && $scope.report.errors.length !== 0;
                 };
 
-                //====================
-                //
-                //====================
-                $scope.getTranslation = function(code, property, param) {
-                    if (code === null || code === "") return "Unknown error";
-                    if (code == "Error.Mandatory") return "Field is mandatory";
-                    if (code == "Error.InvalidValue") return "The value specified is invalid";
-                    if (code == "Error.InvalidProperty") return "This value cannot be specified";
-                    if (code == "Error.UnspecifiedLocale") return "A language is use but not speficied in your document";
-                    if (code == "Error.UnexpectedTerm") return "A specified term cannot be used";
-                    if (code == "Error.InvalidType") return "The fields type is invalid";
-                    return code;
-                };
             }]
         };
     }]);
