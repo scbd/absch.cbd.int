@@ -65,7 +65,13 @@
         
         function getPdfSrc(pdfLocale){
             $scope.pdf.fileName = uniqueId + '-' + pdfLocale + '.pdf';
-            var src = 'https://api-direct.cbd.int/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?documentID={{documentId}}&revision={{revision}}&schema={{schema}}';
+            
+            var devRealm = /-DEV$/
+            var baseApiUrl = 'https://api-direct.cbd.int'
+            if(devRealm.test(realm.value))
+                baseApiUrl = '';
+
+            var src = baseApiUrl + '/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?documentID={{documentId}}&revision={{revision}}&schema={{schema}}';
             return src .replace("{{realm}}", realm.value)
                                  .replace("{{locale}}", pdfLocale)
                                  .replace("{{type}}", $route.current.params.type)
