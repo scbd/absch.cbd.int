@@ -629,8 +629,8 @@
               "validations": [
                   {
                       "question": "Q035",
-                      "values"  : ["1+","5+","10+"],
-                      "type"    : "@hasValues",
+                      "values"  : ["0"],
+                      "type"    : "@hasValuesExcept",
                       "trigger" : "enable"
                   }
               ]
@@ -694,6 +694,7 @@
               "validations": [
                   {
                       "question": "Q037",
+                      "values"  : ["3EFF4792-A896-4DC7-9945-04FE9C8B5B4F", "6DD1B161-4CDB-4900-BD31-DBB97E86B2AE"],
                       "type"    : "@hasAdditionalValues",
                       "trigger" : "enable"
                   }
@@ -1226,7 +1227,7 @@
               "multiple": false,
               "options": [
                 {
-                    "value": "none",
+                    "value": "0",
                     "title": "None"
                 },{
                       "value": "1+",
@@ -1309,23 +1310,23 @@
               "multiple": true,
               "options": [
                   {
-                      "value": "",
+                      "value": "014054D1-2B72-7ABD-E615-D0A374590A95",
                       "title": "For imports of LMOs for intentional introduction into the environment"
                   },
                   {
-                      "value": "",
+                      "value": "94C9FDC9-49C0-7F7C-9A36-90571DBA6442",
                       "title": "For imports of LMOs intended for direct use as food or feed, or for processing"
                   },
                   {
-                      "value": "",
+                      "value": "29B97F6B-066E-BE64-0FA3-66060DEE737D",
                       "title": "For decisions regarding domestic use, including placing on the market, of LMOs that may be subject to transboundary movements for direct use as food or feed, or for processing"
                   },
                   {
-                      "value": "",
+                      "value": "2314EDF6-3B1D-D44D-253D-18B14EFC5C67",
                       "title": "For imports of LMOs for contained use"
                   },
                   {
-                      "value": "",
+                      "value": "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                       "title": "Other",
                       "type": "lstring"
                   }
@@ -1953,7 +1954,7 @@
                       "title": "LMOs for processing"
                   },
                   {
-                      "value": "",
+                      "value": "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                       "title": "Other",
                       "type": "lstring"
                   }
@@ -2097,7 +2098,8 @@
   },
   {
       "key": "Article17",
-      "title": "Article 17 – Unintentional transboundary movements and emergency measures",
+      "title": "Article 17 – Unintentional transboundary movements<sup>2</sup>  and emergency measures",
+      "footnote": "<sup>2</sup> In accordance with the operational definition adopted in decision CP-VIII/16, “‘Unintentional transboundary movement’ is a transboundary movement of a living modified organism that has inadvertently crossed the national borders of a Party where the living modified organism was released, and the requirements of Article 17 of the Protocol apply to such transboundary movements only if the living modified organism involved is likely to have significant adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, in the affected or potentially affected States.”",
       "questions": [
           {
               "key": "Q085",
@@ -2261,7 +2263,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validations": [                  
+                  {
+                    "question": "Q094",
+                    "type"    : "&is91Or92Or93",
+                    "trigger" : "enable"
+                  }
+              ]
           },
           {
               "key": "Q092",
@@ -2285,7 +2294,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validations": [                  
+                  {
+                    "question": "Q094",
+                    "type"    : "&is91Or92Or93",
+                    "trigger" : "enable"
+                  }
+              ]
           },
           {
               "key": "Q093",
@@ -2309,7 +2325,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validations": [                  
+                  {
+                    "question": "Q094",
+                    "type"    : "&is91Or92Or93",
+                    "trigger" : "enable"
+                  }
+              ]
           },
           {
               "key": "Q094",
@@ -2607,8 +2630,8 @@
               "validations": [
                   {
                       "question": "Q103_adq",
-                      "values"  : ["true"],
-                      "type"    : "@hasValues",
+                      "values"  : ["0"],
+                      "type"    : "@hasValuesExcept",
                       "trigger" : "visible"
                   }
               ]
@@ -2683,8 +2706,8 @@
               "validations": [
                   {
                       "question": "Q106",
-                      "values"  : ["true"],
-                      "type"    : "@hasValues",
+                      "values"  : ["0"],
+                      "type"    : "@hasValuesExcept",
                       "trigger" : "enable"
                   }
               ]
@@ -2805,7 +2828,7 @@
           {
               "key": "Q111",
               "section": "Article19",
-              "number": "125",
+              "number": "111",
               "type": "lstring",
               "title": "Here you may provide further details on the implementation of Article 19 in your country",
               "multiple": false
@@ -3554,7 +3577,7 @@
               "validations": [
                   {
                       "question": "Q126",
-                      "values"  : ["true"],
+                      "values"  : ["true", "true.some"],
                       "type"    : "@hasValues",
                       "trigger" : "enable"
                   }
@@ -3703,7 +3726,7 @@
               "number": "131",
               "type": "term",
               "title": "In the current reporting period, has your country undertaken activities for the development and/or strengthening of human resources and institutional capacities in biosafety?",
-              "multiple": true,
+              "multiple": false,
               "options": [
                   {
                       "value": "true",
@@ -3802,7 +3825,7 @@
                       "title": "Liability and redress"
                   },
                   {
-                      "value": "123UY9B1-4571-4C2A-A459-F78E004D9Q84",
+                      "value": "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                       "title": "Other",
                       "type": "lstring"
                   }
@@ -3927,7 +3950,7 @@
                       "title": "Liability and redress"
                   },
                   {
-                      "value": "123UY9B1-4571-4C2A-A459-F78E004D9Q84",
+                      "value": "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                       "title": "Other",
                       "type": "lstring"
                   }
@@ -4166,7 +4189,7 @@
           {
               "key": "Q146",
               "section": "Article23",
-              "number": "146a",
+              "number": "146",
               "type": "option",
               "title": "How many educational materials and/or online modules on biosafety are available and accessible to the public in your country?",
               "multiple": false,
@@ -4289,7 +4312,7 @@
               "options": [
                   {
                       "value": "4E205CD9-9958-497F-A760-F8321771AB3A",
-                      "title": "National website"
+                      "title": "National websites"
                   },
                   {
                       "value": "6400c117-0d9a-4e5d-a0df-ac696f7c0611",
@@ -4312,7 +4335,7 @@
                       "title": "Social media"
                   },
                   {
-                      "value": "123UY9B1-4571-4C2A-A459-F78E004D9Q84",
+                      "value": "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                       "title": "Other",
                       "type": "lstring"
                   }
@@ -4415,12 +4438,11 @@
                   }
               ],
               "mandatory": true,
-              "validations": [
+              "validations": [                  
                   {
-                      "question": "Q156",
-                      "values"  : ["true"],
-                      "type"    : "@hasValues",
-                      "trigger" : "enable"
+                    "question": "Q156",
+                    "type"    : "&is154Or155",
+                    "trigger" : "enable"
                   }
               ]
           },
@@ -4441,7 +4463,14 @@
                       "title": "No"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validations": [                  
+                  {
+                    "question": "Q156",
+                    "type"    : "&is154Or155",
+                    "trigger" : "enable"
+                  }
+              ]
           },
           {
               "key": "Q156",
@@ -4478,7 +4507,8 @@
   },
   {
       "key": "Article25",
-      "title": "Article 25 – Illegal transboundary movements",
+      "title": "Article 25 – Illegal transboundary movements<sup>3</sup>",
+      "footnote": "<sup>3</sup>In accordance with the operational definition adopted in decision CP VIII/16, “‘Illegal transboundary movement’ is a transboundary movement of living modified organisms carried out in contravention of the domestic measures to implement the Protocol that have been adopted by the Party concerned”.",
       "questions": [
           {
               "key": "Q158",
@@ -4514,7 +4544,7 @@
               "options": [
                   {
                       "value": "0",
-                      "title": "Never"
+                      "title": "None"
                   },
                   {
                       "value": "1+",
@@ -4529,7 +4559,15 @@
                       "title": "More than 10"
                   }
               ],
-              "mandatory": true
+              "mandatory": true,
+              "validations": [
+                  {
+                    "question"  : "Q160",
+                    "values"    : ["0"],
+                    "type"      : "@hasValuesExcept",
+                    "trigger"   :"enable"
+                  }
+              ]
           },
           {
               "key": "Q160",
@@ -4545,7 +4583,7 @@
                   },
                   {
                       "value": "true.some",
-                      "title": "Only in some cases"
+                      "title": "Yes, some cases"
                   },
                   {
                       "value": "false",
@@ -4600,7 +4638,7 @@
                   },
                   {
                       "value": "true.some",
-                      "title": "Only in some cases"
+                      "title": "Yes, some cases"
                   },
                   {
                       "value": "false",
@@ -4616,7 +4654,7 @@
           {
               "key": "Q164",
               "section": "Article26",
-              "number": "164a",
+              "number": "164",
               "type": "option",
               "title": "How many peer-reviewed published materials has your country used for the purpose of elaborating or determining national actions with regard to socioeconomic considerations?",
               "multiple": false,
@@ -4707,7 +4745,7 @@
               "section": "Article28",
               "number": "167",
               "type": "option",
-              "title": "How much additional funding (in the equivalent of US dollars) has your country mobilized in the last four years to support implementation of the Biosafety Protocol, beyond the regular national budgetary allocation?",
+              "title": "In the current reporting period, how much funding (in the equivalent of US dollars) has your country mobilized to support implementation of the Cartagena Protocol beyond the regular national budgetary allocation?",
               "multiple": false,
               "options": [
                   {
@@ -4741,6 +4779,7 @@
   {
       "key": "Article33",
       "title": "Article 33 – Monitoring and reporting",
+      "description" : "<i>Article 33 requires Parties to monitor the <u>implementation of its obligations</u> under the Cartagena Protocol and to report to the Conference of the Parties serving as the meeting of the Parties to the Cartagena Protocol on measures taken to implement the Protocol</i>",
       "questions": [
           {
               "key": "Q168",
@@ -4765,6 +4804,7 @@
   {
       "key": "LiabilityRedress",
       "title": "Nagoya-Kuala Lumpur Supplementary Protocol on Liability and Redress",
+      "description": "<i>Parties to the Cartagena Protocol that are not yet Party to the Supplementary Protocol are also invited to respond to the questions below</i>",
       "questions": [
           {
               "key": "Q169",
@@ -4907,6 +4947,12 @@
                             "values"  : ["true"],
                             "type"    : "@hasValues",
                             "trigger" : "enable"
+                          },
+                          {
+                            "question": "Q176",
+                            "values"  : ["true"],
+                            "type"    : "&is173aOr173b",
+                            "trigger" : "enable"
                           }
                       ]
                   },
@@ -4925,6 +4971,14 @@
                           {
                               "value": "false",
                               "title": "No"
+                          }
+                      ],
+                      "validations": [
+                          {
+                            "question": "Q176",
+                            "values"  : ["true"],
+                            "type"    : "&is173aOr173b",
+                            "trigger" : "enable"
                           }
                       ]
                   }
@@ -5050,7 +5104,7 @@
                       "title": "Supplier"
                   },
                   {
-                      "value": "CD72939E-3399-0D39-C438-B7B73D704D7B",
+                      "value": "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                       "title": "Other",
                       "type": "lstring"
                   }
@@ -5112,7 +5166,7 @@
                       "title": "Recover costs and expenses of the evaluation of the damage and the implementation of any response measures from the operator"
                   },
                   {
-                      "value": "CA21AB86-788A-4877-C0BC-5C0E2884ADE2",
+                      "value": "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                       "title": "Other",
                       "type": "lstring"
                   }
@@ -5154,19 +5208,19 @@
               "multiple": true,
               "options": [
                   {
-                      "value": "",
+                      "value": "69C39AF0-E97E-A277-5741-BC14BB5FFCB7",
                       "title": "Requirement to provide evidence for secure source of funding"
                   },
                   {
-                      "value": "",
+                      "value": "D12679C3-AE57-50EA-648E-9F0DC02B18E8",
                       "title": "Mandatory insurance"
                   },
                   {
-                      "value": "",
+                      "value": "89B8212D-4CB0-FF9E-2107-F1D8D77C86D5",
                       "title": "Government schemes, including funds"
                   },
                   {
-                      "value": "",
+                      "value": "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                       "title": "Other",
                       "type": "lstring"
                   }
@@ -5181,19 +5235,20 @@
               "multiple": false,
               "options": [
                   {
-                      "value": "",
+                      "value": "878DF5F5-0B5E-48E1-6A42-80867A101675",
                       "title": "Yes, in a civil liability instrument"
                   },
                   {
-                      "value": "",
+                      "value": "0FC0DC50-EFAE-1C83-74F5-7A7D0205DB0A",
                       "title": "Yes, in court rulings"
                   },
                   {
-                      "value": "",
-                      "title": "Yes, in other instruments"
+                      "value": "true",
+                      "title": "Yes, in other instruments",
+                      "type": "lstring"
                   },
                   {
-                      "value": "",
+                      "value": "false",
                       "title": "No"
                   }
               ]
