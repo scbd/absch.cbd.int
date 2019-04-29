@@ -17,7 +17,7 @@
 				<tr ng-repeat="term in filteredList = (searchList|filter:hasMatch)">
 					<td  ng-class="{'no-border':$first}"> 
 						<label>
-							<input type="checkbox" ng-model="identifiers[term.identifier]" ng-change="save()" 
+							<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save()" 
 								ng-required="IsRequired()" value="{{term.identifier}}"/> <span class="color-litegrey" ng-bind-html="term.displayTitle | lstring:locale"></span>
 						</label>
 					</td>
@@ -33,11 +33,15 @@
 			<ul>
 				<script type="text/ng-template" id="term-check-tree-renderer.html">
 					<label>
-						<input type="checkbox" ng-model="identifiers[term.identifier]" ng-change="save()" 
+						<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save()" 
 							ng-required="IsRequired()" value="{{term.identifier}}" /> 
 						{{term.title||term.name | lstring:locale}}
-						<input ng-if="identifiers[term.identifier] && term.type=='int'" type="number" 
-						ng-model="additionalInfo[term.identifier]" class="km-terms-check-add-input-int" />
+
+						<input ng-if="selectedItems[term.identifier].selected && term.type=='int'" type="number" 
+						ng-model="selectedItems[term.identifier].customValue" class="km-terms-check-add-input-int" ng-change="save()" />
+
+						<div ng-if="selectedItems[term.identifier].selected && term.type=='lstring'" km-textbox-ml name="custom value" 
+							required ng-model="selectedItems[term.identifier].customValue" locales="locales"  ng-change="save()"></div>
 					</label>
 					<div class="km-select-description" ng-if="showDescription && term.description" style="padding: 3px 25px;">
 						{{term.description}}
