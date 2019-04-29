@@ -70,6 +70,11 @@ function (app, _, nr4Data, nr3Data) {
             }
         ];
 
+        $scope.customValidations = {
+            is173aOr173b : is173aOr173b,
+            is154Or155   : is154Or155,
+            is91Or92Or93 : is91Or92Or93
+        } 
         // TODO: read from mapping file
         var previousAnswerMapping = $scope.previousAnswerMapping = {
             "Q012"        : { prevQuestion : "Q013",   showMessage: false },
@@ -263,7 +268,7 @@ function (app, _, nr4Data, nr3Data) {
                 if(!$scope.multiTermModel[question.key])
                     $scope.document[question.key] = undefined;
                 else{
-                    $scope.document[question.key] = _.map($scope.multiTermModel[question.key], function(t){return { value : t}})
+                    $scope.document[question.key] = _.map($scope.multiTermModel[question.key], function(t){return { value : t.identifier, additionalInformation: t.customValue}})
                 }
             }
 
@@ -290,9 +295,17 @@ function (app, _, nr4Data, nr3Data) {
                         var answer      = $scope.document[lQuestion.key];
 
                         if(/&[a-z]*/.test(mapping.type)){
-                            validationPositive   =$scope.customValidations[mapping.type.repalce(/^&/, '')];
+                            validationPositive   =$scope.customValidations[mapping.type.replace(/^&/, '')]();
                         }
-                        else if(mapping.type === '@hasValues' || mapping.type === '@hasAdditionalValues'){
+                        else if(mapping.type === '@hasAdditionalValues'){
+                               
+                            var answers = answer;
+                            if(!question.multiple)
+                                additionalInformation = [(answer||{})];
+                            
+                            validationPositive = _.some(answers, function(a){ return a.additionalInformation && mapping.values.indexOf(a.value)>=0});
+                        }
+                        else if(mapping.type === '@hasValues'){
                             if(mapping.values){
                                 var answeredValues = [];
                                 if(question.multiple)
@@ -300,22 +313,10 @@ function (app, _, nr4Data, nr3Data) {
                                 else
                                     answeredValues = [(answer||{}).value];
 
-                                validationPositive   = ~_.intersection(mapping.values, answeredValues).length;
+                                validationPositive   = _.intersection(mapping.values, answeredValues).length>0;
                             }
                             else
-                                validationPositive   = !_.isEmpty(answer)
-                            
-                            if(mapping.type === '@hasAdditionalValues' && validationPositive){
-                               
-                                var additionalInformation = [];
-                                if(question.multiple)
-                                    additionalInformation = _.map(answer, 'additionalInformation');
-                                else
-                                    additionalInformation = [(answer||{}).additionalInformation];
-                                
-                                if(_.compact(additionalInformation||[]).length==0)
-                                    validationPositive = false;
-                            }
+                                validationPositive   = !_.isEmpty(answer);                            
                         }
                         else if(mapping.type === '@hasValuesExcept' && mapping.values){
                             validationPositive   = answer && mapping.values.indexOf((answer||{}).value)<0;
@@ -329,13 +330,13 @@ function (app, _, nr4Data, nr3Data) {
                         mapQuestion.hasValidation = true;
                         if(validationPositive){
                             mapQuestion[mapping.trigger] = true;                            
-                            if(baseQuestion)
+                            if(baseQuestion && mapping.trigger!='visible')
                                 baseQuestion[mapping.trigger] = true;
                         }
                         else{
                             $scope.document[mapQuestion.key] = undefined;
                             mapQuestion[mapping.trigger] = false
-                            if(baseQuestion)
+                            if(baseQuestion && mapping.trigger!='visible')
                                 baseQuestion[mapping.trigger] = false;
                         }   
 
@@ -388,6 +389,33 @@ function (app, _, nr4Data, nr3Data) {
             return false;
         }
 
+        $scope.hasError = function(name) {  //default behavior
+
+            var validationReport = $scope.validationReport
+            if(validationReport && validationReport.errors) {
+                return !!_.find(validationReport.errors, { property : name });
+            }
+
+            return false;
+        };
+
+        
+        function is173aOr173b(){
+            return ($scope.document['Q173_a']||{}).value == 'true' || ($scope.document['Q173_b']||{}).value == 'true';
+        }
+        function is154Or155(){
+            return ($scope.document['Q154']||{}).value == 'true' || ($scope.document['Q155']||{}).value == 'true';
+        }
+        function is91Or92Or93(){
+            var selectedValues = [
+                                  ($scope.document['Q091']||{}).value,
+                                  ($scope.document['Q092']||{}).value,
+                                  ($scope.document['Q093']||{}).value
+                                ]
+            return _.intersection(_.compact(selectedValues), ['true', 'true.some']).length > 0;
+        }
+        
+        
 
         function transformNr4Data(){
 

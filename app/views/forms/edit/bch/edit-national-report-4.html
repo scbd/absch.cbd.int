@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <ul class="pagination" id="nrTabs">
-                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==0}" ng-click="setTab($index)">
+                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)">
                                     <a translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-bind="tab.title"></a>
                                 </li>
                             </ul>
@@ -48,6 +48,7 @@
                                                         <div ng-bind-html="section.description" ng-if="section.description"></div>
                                                     </div>
                                                     <div class="panel-body" style="padding:0px">
+                                                        <div ng-if="section.footnote" ng-bind-html="section.footnote" style="font-size:10px;padding:10px"></div>
 
                                                         <div ng-repeat="question in section.questions" style="border:1px solid #eee;margin:5px"
                                                             class="row" ng-class="{'disabled': isQuestionDisabled(question) }" ng-if="question.visible" >
@@ -55,26 +56,33 @@
                                                             <div class="col-md-12" style="padding:10px;position: relative;" block-region activate="isQuestionDisabled(question)" skip-loading-icon="true">
 
                                                                 <div class="col-md-12" style="padding-left:0px;padding-right: 0px;">
-                                                                    <strong>
-                                                                        <label name="{{question.key}}" for="{{question.key}}"
-                                                                             ng-bind-html="::spaceSubQuestion(question.number) + question.title" ng-required="question.mandatory"></l>
-                                                                    </strong>
-                                                                    <div class="pull-right" style="margin-bottom:5px;">
-                                                                        <button ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
-                                                                        <button ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
-                                                                    </div>
+                                                                    <div class="form-group" ng-class="{'has-error' : hasError(question.key) }" style="margin-bottom:5px">
+
+                                                                        <label name="{{question.key}}" for="{{question.key}}" class="control-label bold" 
+                                                                            ng-bind-html="::spaceSubQuestion(question.number) + question.title" ng-required="question.mandatory">
+                                                                        </label>                                                          
+                                                                        <div class="pull-right" style="margin-bottom:5px;">
+                                                                            <button ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
+                                                                            <button ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
+                                                                        </div>
+                                                                    </div>         
                                                                 </div>
 
                                                                 <div ng-if="question.type !='legend'">
                                                                     <!-- Incase of subquestion wrap questions inside new section -->
                                                                     <div ng-if="question.type=='sub-section'" style="padding:20px">
                                                                         <div ng-repeat="subQuestion in question.questions" style="border:1px solid #eee;margin:5px;padding:10px"
-                                                                            class="row" ng-class="{'disabled': subQuestion.hasValidation && (!subQuestion.enable || !subQuestion.visible)}"  ng-if="subQuestion.visible">
-                                                                            <div class="col-md-12" style="padding-left:0px;padding-right: 0px;">
-                                                                                <strong><span ng-bind-html="::spaceSubQuestion(subQuestion.number) + subQuestion.title"></span></strong>
-                                                                                <div class="pull-right" style="margin-bottom:5px;">
-                                                                                    <button ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
-                                                                                    <button ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"  ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
+                                                                            class="row" ng-class="{'disabled': isQuestionDisabled(subQuestion)}"  ng-if="subQuestion.visible">
+                                                                            <div class="col-md-12" style="padding-left:0px;padding-right: 0px;" block-region activate="isQuestionDisabled(subQuestion)" skip-loading-icon="true">
+
+                                                                                <div class="form-group" ng-class="{'has-error' : hasError(subQuestion.key) }" style="margin-bottom:5px">
+                                                                                    <label name="{{subQuestion.key}}" for="{{subQuestion.key}}" class="control-label bold" 
+                                                                                        ng-bind-html="::spaceSubQuestion(subQuestion.number) + subQuestion.title" ng-required="subQuestion.mandatory">
+                                                                                    </label>        
+                                                                                    <div class="pull-right" style="margin-bottom:5px;">
+                                                                                        <button ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
+                                                                                        <button ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"  ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div ng-include="'question'" onload="question=subQuestion"></div>
@@ -109,7 +117,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <ul class="pagination" id="nrTabs">
-                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==0}" ng-click="setTab($index)">
+                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)">
                                     <a translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-bind="tab.title"></a>
                                 </li>
                             </ul>
@@ -167,13 +175,13 @@
                         <div class="col-sm-6">
                             <div class="km-control-group" required name="stakeholders" caption="10.	Time period covered by this report">
                                 <div class="col-sm-5">
-                                    <div km-textbox-ml name="stakeholders" required ng-model="document.stakeholders" locales="document.header.languages"></div> 
+                                    <div km-date placeholder="YYYY-MM-DD" name="reportPeriodStartDate" required ng-model="document.reportPeriodStartDate"></div>
                                 </div> 
                                 <div class="col-sm-1">
-                                    TO
+                                    <strong>TO</strong>
                                 </div>
                                 <div class="col-sm-5">
-                                    <div km-textbox-ml name="stakeholders" required ng-model="document.stakeholders" locales="document.header.languages"></div>
+                                    <div km-date placeholder="YYYY-MM-DD" name="reportPeriodEndDate" required ng-model="document.reportPeriodEndDate"></div>
                                 </div>                                
                             </div>
                         </div>
@@ -194,7 +202,8 @@
                                 </div>
                                 <div ng-switch-when="true">
                                     <div km-term-check name="{{question.key}}" ng-change="updateAnswer(question)"
-                                    ng-model="multiTermModel[question.key]" terms="question.optionsMapping" binding-type="string[]"></div>
+                                    ng-model="multiTermModel[question.key]" terms="question.optionsMapping" binding-type="term[]"
+                                    locales="document.header.languages"></div>
                                 </div>
                             </div>
 
