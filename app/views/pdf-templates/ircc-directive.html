@@ -76,7 +76,7 @@
             <div class="row top-border bg-litegreen">
                 <div class="col-xs-12">
                     <div class="text">
-                        <div view-contact-reference ng-model="document.absCNA" locale="locale"></div>
+                        <div view-contact-reference ng-model="document.absCNA" locale="locale" collapse="false"></div>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                 <div ng-show="document.relatedIRCCs">
                     <label>Unique identifier(s) of related internationally recognized certificate(s) of compliance</label>
                     <div class="text" ng-repeat="item in document.relatedIRCCs">
-                        <span view-default-reference ng-model="item.identifier" locale="locale"></span>
+                        <span view-default-reference ng-model="item.identifier" locale="locale" collapse="false"></span>
                     </div>
                 </div>
 
@@ -134,7 +134,7 @@
                             with domestic legislation.</span>
                     </label>
                     <div class="text" ng-show="!document.providersConfidential" ng-repeat="provider in document.providers">
-                        <div view-contact-reference ng-model="provider" locale="locale"></div>
+                        <div view-contact-reference ng-model="provider" locale="locale" collapse="false"></div>
                     </div>
                     <div ng-show="document.providersConfidential">
                         <div class="text confidential">Confidential information</div>
@@ -145,7 +145,7 @@
                 <div class="col-xs-12">
                     <label>Entity to whom PIC was granted </label>
                     <div class="text" ng-repeat="consent in document.entitiesToWhomPICGranted" ng-show="!document.entitiesToWhomPICGrantedConfidential">
-                        <div view-contact-reference ng-model="consent" locale="locale"></div>
+                        <div view-contact-reference ng-model="consent" locale="locale" collapse="false"></div>
                     </div>
                     <div ng-show="document.entitiesToWhomPICGrantedConfidential">
                         <div class="text confidential">Confidential information</div>

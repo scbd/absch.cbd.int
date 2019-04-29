@@ -227,3 +227,7 @@ md-toast{
 md-toast.md-default-theme .md-button.md-highlight {
   color:inherit;
 }
+
+blockquote{
+    font-size: 12px!important;
+}

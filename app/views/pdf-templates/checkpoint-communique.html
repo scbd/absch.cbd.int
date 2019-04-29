@@ -67,7 +67,7 @@
                     <div class="col-xs-12">
                         <label>Checkpoint(s) that collected or received this information:</label>
                         <div class="text" ng-repeat="item in document.absCheckpoints">
-                            <span view-default-reference ng-model="item.identifier" locale="locale"></span>
+                            <span view-default-reference ng-model="item.identifier" locale="locale" collapse="false"></span>
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                     <div ng-repeat="contact in emailList">
                         <div class="col-xs-12">
                             <div class="text">
-                                <div view-contact-reference ng-model="contact" locale="locale"></div>
+                                <div view-contact-reference ng-model="contact" locale="locale" collapse="false"></div>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                     <div class="col-xs-12" ng-if="!document.absIRCCsNotAvailable || document.absIRCCs">
                         <label>INTERNATIONAL RECOGNIZED CERTIFICATE(s) OF COMPLIANCE</label>
                         <div class="text" ng-repeat="item in document.absIRCCs">
-                            <span view-default-reference ng-model="item.identifier" locale="locale"></span>
+                            <span view-default-reference ng-model="item.identifier" locale="locale" collapse="false"></span>
                         </div>
                     </div>
 
@@ -176,14 +176,14 @@
                         <div class="col-xs-6">
                             <label>Person or entity who granted prior informed consent (PIC)</label>
                             <div class="text">
-                                <div view-contact-reference ng-model="document.entityWhoGrantedPIC" locale="locale"></div>
+                                <div view-contact-reference ng-model="document.entityWhoGrantedPIC" locale="locale" collapse="false"></div>
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <label>Person or entity making information available to the checkpoint on the utilization
                                 of the genetic resource</label>
                             <div class="text">
-                                <div view-contact-reference ng-model="document.entityToWhomPICGranted" locale="locale"></div>
+                                <div view-contact-reference ng-model="document.entityToWhomPICGranted" locale="locale" collapse="false"></div>
                             </div>
                         </div>
 
@@ -225,7 +225,7 @@
                     <div class="col-xs-12">
                         <div ng-repeat="user in document.personsAtCheckpoint" style="padding-left:0px;">
                             <div class="text">
-                                <div view-contact-reference ng-model="user" locale="locale"></div>
+                                <div view-contact-reference ng-model="user" locale="locale" collapse="false"></div>
                             </div>
                         </div>
                     </div>

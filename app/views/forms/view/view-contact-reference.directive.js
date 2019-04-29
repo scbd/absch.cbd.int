@@ -19,11 +19,11 @@ define(['app', "text!views/forms/view/view-contact-reference.directive.html",'un
 				$scope.isPerson = false;
 				$scope.isOrganization= false;
 				$scope.isNFP = false;
-
-				if(!$scope.collapse)
+				
+				$scope.showContact = true;
+				if($scope.collapse==='true')
 					$scope.showContact = false;
-				else
-					$scope.showContact = true;
+				
 
 				//==================================================
 				function checkCNA(doc) {
