@@ -21,9 +21,9 @@
 			</button>
 			<strong>Your document contains {{::report.errors.length}} errors.</strong>
 			<ul>
-				<li ng-repeat="error in ::report.errors" title="{{::error.parameters}}">
-					{{::getTranslation(error.code, error.property, error.parameters)}} / <a href="#"
-						ng-click="jumpTo(error.property)">{{::getLabel(error.property)}}</a>
+				<li ng-repeat="error in report.errors" title="{{::error.parameters}}">
+					{{::error.typeLabel}} / <a href="#"
+						ng-click="jumpTo(error.property)">{{::error.propertyLabel}}</a>
 				</li>
 			</ul>
 		</div>

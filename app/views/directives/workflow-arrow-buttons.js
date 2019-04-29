@@ -267,9 +267,10 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				//====================
 				$scope.review = function()
 				{
-					$scope.loading = true;                    
+                    $scope.loading = true;
+                    $scope.validationReport = undefined;                    
 					$scope.validationReport = {isAnalyzing:true};
-                   $scope.errorMessage              = null;
+                    $scope.errorMessage              = null;
 					var qReport   = validate($scope.getDocumentFn());
 
 					return $q.when(qReport).then(function(validation) {
