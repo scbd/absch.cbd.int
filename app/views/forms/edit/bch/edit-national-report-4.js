@@ -294,36 +294,38 @@ function (app, _, nr4Data, nr3Data) {
 
                         var answer      = $scope.document[lQuestion.key];
 
-                        if(/&[a-z]*/.test(mapping.type)){
-                            validationPositive   =$scope.customValidations[mapping.type.replace(/^&/, '')]();
-                        }
-                        else if(mapping.type === '@hasAdditionalValues'){
-                               
-                            var answers = answer;
-                            if(!question.multiple)
-                                additionalInformation = [(answer||{})];
-                            
-                            validationPositive = _.some(answers, function(a){ return a.additionalInformation && mapping.values.indexOf(a.value)>=0});
-                        }
-                        else if(mapping.type === '@hasValues'){
-                            if(mapping.values){
-                                var answeredValues = [];
-                                if(question.multiple)
-                                    answeredValues = _.map(answer, 'value');
-                                else
-                                    answeredValues = [(answer||{}).value];
+                        var answers = answer;
+                        if(!question.multiple)
+                            answers = [(answer||{})];
 
-                                validationPositive   = _.intersection(mapping.values, answeredValues).length>0;
+                        answers = _.compact(answers);
+
+                        if((answers||[]).length>0){
+                            if(/&[a-z]*/.test(mapping.type)){
+                                validationPositive   =$scope.customValidations[mapping.type.replace(/^&/, '')]();
                             }
-                            else
-                                validationPositive   = !_.isEmpty(answer);                            
+                            else if(mapping.type === '@hasAdditionalValues'){   
+
+                                validationPositive = _.some(answers, function(a){ return a && a.additionalInformation && mapping.values.indexOf(a.value)>=0});
+                            }
+                            else if(mapping.type === '@hasValues'){
+
+                                if(mapping.values){
+                                    validationPositive   = _.some(answers, function(a){ return a && mapping.values.indexOf(a.value)>=0});
+                                }
+                                else
+                                    validationPositive   = !_.isEmpty(answer);                            
+                            }
+                            else if(mapping.type === '@hasValuesExcept'){
+                                validationPositive   = !_.some(answers, function(a){ return a && mapping.values.indexOf(a.value)>=0});
+                            }
+                            // else{
+                            //     console.log(mapping)
+                            // }
                         }
-                        else if(mapping.type === '@hasValuesExcept' && mapping.values){
-                            validationPositive   = answer && mapping.values.indexOf((answer||{}).value)<0;
-                        }
-                        else{
-                            console.log(mapping)
-                        }
+                        // else{
+                        //     console.log(mapping)
+                        // }
 
                         if(!mapQuestion)
                             console.log(mapping)
