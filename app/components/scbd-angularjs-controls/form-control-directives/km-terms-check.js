@@ -119,7 +119,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                         if ($scope.selectedItems[term.identifier] && $scope.selectedItems[term.identifier].selected) {
                             if ($scope.bindingType == "string[]") oNewBinding.push(term.identifier);
                             else if ($scope.bindingType == "term[]") oNewBinding.push({
-                                identifier: term.identifier, customValue : $scope.selectedItems[term.identifier].customValue
+                                identifier: term.identifier, customValue : $scope.selectedItems[term.identifier].customValue||undefined
                             });
                             else throw "bindingType not supported";
                         }
