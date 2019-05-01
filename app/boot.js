@@ -24,14 +24,14 @@ require.config({
         'underscore'                : cdnHost + 'underscore@1.7.0/underscore-min',
         'lodash'                    : cdnHost + 'lodash@3.9.3/index',
         'moment'                    : cdnHost + 'moment@2.7.0/min/moment-with-langs.min',
-        'cbd-forums'                : cdnHost + 'libs/cbd-forums/cbd-forums',
+        'cbd-forums'                :           'libs/cbd-forums/cbd-forums',
         'ng-breadcrumbs'            : cdnHost + 'angular-breadcrumbs@0.5.3/dist/ng-breadcrumbs.min',
         'ngSmoothScroll'            : cdnHost + 'ngSmoothScroll@2.0.1/dist/angular-smooth-scroll.min',
         'angular-joyride'           : cdnHost + 'angular-joyride@1.0.2/dist/joyride',
         'toastr'                    : cdnHost + 'angular-toastr@1.5.0/dist/angular-toastr.tpls.min',
         'ngStorage'                 : cdnHost + 'ngstorage@0.3.11/ngStorage.min',
         'ngDialog'                  : cdnHost + 'ng-dialog@0.5.8/js/ngDialog.min',
-        'socket.io'                 : 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min',
+        'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min',
         'ngInfiniteScroll'          : cdnHost + 'ng-infinite-scroll@1.3.0/build/ng-infinite-scroll.min',  
         'tableexport'               : cdnHost + 'tableexport@4.0.10/dist/js/tableexport',
         'blobjs'                    : cdnHost + 'blobjs@1.1.1/Blob.min',
@@ -48,11 +48,11 @@ require.config({
         'angular-trix'              : cdnHost + 'angular-trix@1.0.2/dist/angular-trix.min',
         'trix'                      : cdnHost + 'trix@0.12.0/dist/trix',
 
-        'shim'                      : 'libs/require-shim/src/shim',
-        'angular-localizer'         : 'libs/angular-localizer/localizer',
-        'view-abs-checkpoint'       : 'views/forms/view/abs/view-abs-checkpoint.directive', 
-        'angular-flex'              : 'libs/angular-flex/angular-flex',
-        'angular-loggly-logger'     : 'libs/angular-loggly-logger/angular-loggly-logger'     
+        'shim'                      :           'libs/require-shim/src/shim',
+        'angular-localizer'         :           'libs/angular-localizer/localizer',
+        'view-abs-checkpoint'       :           'views/forms/view/abs/view-abs-checkpoint.directive', 
+        'angular-flex'              :           'libs/angular-flex/angular-flex',
+        'angular-loggly-logger'     :           'libs/angular-loggly-logger/angular-loggly-logger'     
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
