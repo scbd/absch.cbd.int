@@ -179,7 +179,7 @@
     </div>
     <div ng-show="tab=='publish'" km-tab="publish">
         <div ng-transclude-slot="publishForm"></div>
-        <div class="row margin-bottom-20">
+        <div class="row margin-bottom-20" ng-if="!validationReport.isAnalyzing">
             <div class="clearfix"></div>
 
             <div class="col-xs-12">
