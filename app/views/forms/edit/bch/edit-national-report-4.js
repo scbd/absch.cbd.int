@@ -16,7 +16,8 @@ function (app, _, nr4Data, nr3Data) {
         $scope.activeTab = 1
         $scope.nr4Tabs = [{
                 "tab":1,
-                "title":"Question 1 - 11"
+                "title":"Question 1 - 11",
+                render:true
             },
             {
                 "tab":2,
@@ -260,6 +261,7 @@ function (app, _, nr4Data, nr3Data) {
             $(".tab-pane").removeClass("active");
             $('#tab'+index).tab('show');
             $scope.activeTab = index + 1;
+            $scope.nr4Tabs[index].render=true
         }
 
         $scope.updateAnswer = function(question, baseQuestionNumber){
@@ -401,6 +403,12 @@ function (app, _, nr4Data, nr3Data) {
             return false;
         };
 
+        $scope.onStepChange = function(tab){
+            if(tab == 'review' || tab == 'publish'){
+                //render all tabs so that validation mesaages can be rendered.
+                _.each($scope.nr4Tabs, function(t){ t.render=true})
+            }
+        }
         
         function is173aOr173b(){
             return ($scope.document['Q173_a']||{}).value == 'true' || ($scope.document['Q173_b']||{}).value == 'true';
@@ -506,8 +514,7 @@ function (app, _, nr4Data, nr3Data) {
         }
 
         $timeout(function(){
-            transformNr4Data();
-            // loadPreviousReport();
+            transformNr4Data();            
         }, 200);
 
         $scope.setDocument({}).then(function(document){
@@ -520,6 +527,12 @@ function (app, _, nr4Data, nr3Data) {
                 transformNr4Data();//workaround as in the first call not all questions are built so the disable/visible clause does not work.
 
             }
+            //render remaining tabs
+            var timeout = 2000;
+            _.each($scope.nr4Tabs, function(t){                 
+                $timeout(function(){ t.render=true}, timeout );
+                timeout += 500;
+            })
         });
    }]);
 

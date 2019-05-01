@@ -524,7 +524,7 @@
                   {
                       "key": "Q032_a",
                       "section": "Articles7-10",
-                      "number": "32a",
+                      "number": "a",
                       "type": "option",
                       "title": "The notifier?",
                       "multiple": false,
@@ -546,7 +546,7 @@
                   {
                       "key": "Q032_b",
                       "section": "Articles7-10",
-                      "number": "32b",
+                      "number": "b",
                       "type": "option",
                       "title": "The Biosafety Clearing-House (BCH)?",
                       "multiple": false,
@@ -1045,7 +1045,7 @@
                   {
                       "key": "Q051_a",
                       "section": "Article12",
-                      "number": "51a",
+                      "number": "a",
                       "type": "option",
                       "title": "The notifier",
                       "multiple": false,
@@ -1067,7 +1067,7 @@
                   {
                       "key": "Q051_b",
                       "section": "Article12",
-                      "number": "51b",
+                      "number": "b",
                       "type": "option",
                       "title": "The BCH?",
                       "multiple": false,
@@ -1400,7 +1400,7 @@
                   {
                       "key": "Q065_a",
                       "section": "Article15_16",
-                      "number": "65a",
+                      "number": "a",
                       "type": "option",
                       "title": "Risk assessment:",
                       "multiple": false,
@@ -1457,7 +1457,7 @@
                   {
                       "key": "Q065_b",
                       "section": "Article15_16",
-                      "number": "65b",
+                      "number": "b",
                       "type": "option",
                       "title": "Risk management",
                       "multiple": false,
@@ -1514,7 +1514,7 @@
                   {
                       "key": "Q065_c",
                       "section": "Article15_16",
-                      "number": "65c",
+                      "number": "c",
                       "type": "option",
                       "title": "Monitoring:",
                       "multiple": false,
@@ -1671,7 +1671,7 @@
                   {
                       "key": "Q070_a",
                       "section": "Article15_16",
-                      "number": "70a",
+                      "number": "a",
                       "type": "option",
                       "title": "Detect:",
                       "multiple": false,
@@ -1689,7 +1689,7 @@
                   {
                       "key": "Q070_b",
                       "section": "Article15_16",
-                      "number": "70b",
+                      "number": "b",
                       "type": "option",
                       "title": "Identify:",
                       "multiple": false,
@@ -1707,7 +1707,7 @@
                   {
                       "key": "Q070_c",
                       "section": "Article15_16",
-                      "number": "70c",
+                      "number": "c",
                       "type": "option",
                       "title": "Assess the risk:",
                       "multiple": false,
@@ -1725,7 +1725,7 @@
                   {
                       "key": "Q070_d",
                       "section": "Article15_16",
-                      "number": "70d",
+                      "number": "d",
                       "type": "option",
                       "title": "Monitor:",
                       "multiple": false,
@@ -1760,7 +1760,7 @@
                   {
                       "key": "Q071_a",
                       "section": "Article15_16",
-                      "number": "71a",
+                      "number": "a",
                       "type": "option",
                       "title": "Risk assessment:",
                       "multiple": false,
@@ -1778,7 +1778,7 @@
                   {
                       "key": "Q071_b",
                       "section": "Article15_16",
-                      "number": "71b",
+                      "number": "b",
                       "type": "option",
                       "title": "Risk management:",
                       "multiple": false,
@@ -4921,7 +4921,7 @@
                   {
                       "key": "Q173_a",
                       "section": "LiabilityRedress",
-                      "number": "173a",
+                      "number": "a",
                       "type": "option",
                       "title": "In case of damage resulting from LMOs?",
                       "multiple": false,
@@ -4959,7 +4959,7 @@
                   {
                       "key": "Q173_b",
                       "section": "LiabilityRedress",
-                      "number": "173b",
+                      "number": "b",
                       "type": "option",
                       "title": "In case there is sufficient likelihood that damage will result if response measures are not taken?",
                       "multiple": false,

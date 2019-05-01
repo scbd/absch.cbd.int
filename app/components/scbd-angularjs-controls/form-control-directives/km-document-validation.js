@@ -116,7 +116,7 @@ define(['app', 'text!./km-document-validation.html','jquery'], function(app, tem
                     if ($scope.report && $scope.report.clearErrors)
                         return false;
 
-                    return $scope.report && (!$scope.report.errors || $scope.report.errors.length === 0);
+                    return $scope.report && (($scope.report.errors||[]).length === 0);
                 };
 
                 //====================
