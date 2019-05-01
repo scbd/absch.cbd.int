@@ -42,9 +42,13 @@
 		<div class="section-pane panel panel-default" ng-repeat="section in nr4Data" id="section{{$index+1}}"
 			style="margin-bottom:3px!important">
 
-			<div class="panel-heading" ng-bind="section.title"></div>
+			<div class="panel-heading">
+				<strong  ng-bind-html="section.title"></strong>
+                <div ng-bind-html="section.description" ng-if="section.description"></div>
+			</div>
 			<div class="panel-body" style="padding:0px">
 
+				<div ng-if="section.footnote" ng-bind-html="section.footnote" style="font-size:10px;padding:10px"></div>
 				<div ng-repeat="question in section.questions" style="border:1px solid #eee;margin:5px" class="row"
 					ng-class="{'disabled': !document[question.key] && question.type!= 'legend' && !question.questions}">
 
@@ -64,7 +68,7 @@
 					<div style="padding-left:0px;padding-right: 0px;">
 						<strong>
 							<label name="{{question.key}}" for="{{question.key}}"
-									ng-bind="::spaceSubQuestion(question.number) + question.title" ></l>
+									ng-bind-html="::spaceSubQuestion(question.number) + question.title" ></l>
 						</strong>
 					</div>
 					<div ng-if="document[question.key]">

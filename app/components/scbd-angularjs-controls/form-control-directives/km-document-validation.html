@@ -1,8 +1,4 @@
 ﻿<div>
-
-	<!-- <div ng-hide="!report.isAnalyzing && (report || onLoad)" class="alert alert-info">
-		<i class="fa fa-cog fa-spin"></i> Analyzing your document...
-	</div> -->
 	<div ng-show="report.isAnalyzing" class="alert alert-info">
 		<i class="fa fa-cog fa-spin"></i> Analyzing your document...
 	</div>
@@ -10,10 +6,10 @@
 		<i class="fa fa-cog fa-spin"></i> Saving your document...
 	</div>
 	<div ng-show="report && !report.isAnalyzing">
+
 		<div ng-show="isValid()" class="alert alert-success">
 			Your document is valid.
 		</div>
-
 
 		<div ng-show="hasErrors() && show" class="alert alert-warning">
 			<button type="button" class="close" ng-click="show=!show" aria-label="Close"><span
