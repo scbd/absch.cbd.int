@@ -32,7 +32,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				onPostRequestFn   : "&onPostRequest",
 				onPrePublishFn    : "&onPrePublish",
 				onPostPublishFn   : "&onPostPublish",
-                onErrorFn: "&onError",
+                onErrorFn         : "&onError",
+				onStepChangeFn    : "&onStepChange",
                 validationReport    : '=?'
     		},
             link : function($scope, $element, $attr){
@@ -554,6 +555,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         return;
 
                     $scope.tab = tab;
+                    $scope.onStepChangeFn({tab : tab})
 
                     if(tab == "review" || tab == "edit" || tab == "intro" || tab == "publish")
                         $scope.updateStep(tab);
@@ -568,7 +570,6 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                     if(tab == "publish")
                         $scope.disableNextBtn = true;
-
                 }
 
                 $scope.updateStep = function(tab){
@@ -786,7 +787,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                             $scope.error  = "You are not authorized to modify this record";
                             }
                         }).catch(function(err) {
-                            $scope.onError(err.data, err.status)
+                            $scope.onErrorFn({ error : err.data, code : err.status})
                             throw err;
                         });
                     }

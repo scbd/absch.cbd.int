@@ -18,13 +18,13 @@
 
                 <!-- <view-bch-national-report-4 ng-model="document" locale="review.locale" allow-drafts="true"></view-bch-national-report-4> -->
             <workflow-arrow-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
-                tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)">
+                tab="tab" on-step-change="onStepChange(tab)" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)">
                 <edit-form>
                     <div class="row">
                         <div class="col-xs-12">
                             <ul class="pagination" id="nrTabs">
                                 <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)">
-                                    <a translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-bind="tab.title"></a>
+                                    <a translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-bind="::tab.title" ng-class="{'disabled': !tab.render}"></a>
                                 </li>
                             </ul>
                         </div>
@@ -36,7 +36,7 @@
                                 <div class="col-xs-12">
                                     <div class="tab-content">
 
-                                        <div class="tab-pane" ng-repeat="tab in nr4Tabs" id="tab{{$index+1}}" ng-class="{'active': $index==0}" >
+                                        <div class="tab-pane" ng-repeat="tab in nr4Tabs" id="tab{{$index+1}}" ng-class="{'active': $index==0}" ng-if="tab.render" >
                                             <!-- ng-if="activeTab==$index+1" -->
                                             <div style="margin-bottom:20px;">
 
@@ -44,11 +44,11 @@
                                                     id="section{{$index+1}}" style="margin-bottom:3px!important">
 
                                                     <div class="panel-heading">
-                                                        <strong  ng-bind-html="section.title"></strong>
-                                                        <div ng-bind-html="section.description" ng-if="section.description"></div>
+                                                        <strong  ng-bind-html="::section.title"></strong>
+                                                        <div ng-bind-html="::section.description" ng-if="section.description"></div>
                                                     </div>
                                                     <div class="panel-body" style="padding:0px">
-                                                        <div ng-if="section.footnote" ng-bind-html="section.footnote" style="font-size:10px;padding:10px"></div>
+                                                        <div ng-if="section.footnote" ng-bind-html="::section.footnote" style="font-size:10px;padding:10px"></div>
 
                                                         <div ng-repeat="question in section.questions" style="border:1px solid #eee;margin:5px"
                                                             class="row" ng-class="{'disabled': isQuestionDisabled(question) }" ng-if="question.visible" >
@@ -58,8 +58,8 @@
                                                                 <div class="col-md-12" style="padding-left:0px;padding-right: 0px;">
                                                                     <div class="form-group" ng-class="{'has-error' : hasError(question.key) }" style="margin-bottom:5px">
 
-                                                                        <label name="{{question.key}}" for="{{question.key}}" class="control-label bold" 
-                                                                            ng-bind-html="::spaceSubQuestion(question.number) + question.title" ng-required="question.mandatory">
+                                                                        <label name="{{::question.key}}" for="{{::question.key}}" class="control-label bold" 
+                                                                            ng-bind-html="::(spaceSubQuestion(question.number) + question.title)" ng-required="question.mandatory">
                                                                         </label>                                                          
                                                                         <div class="pull-right" style="margin-bottom:5px;">
                                                                             <button ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
@@ -76,8 +76,8 @@
                                                                             <div class="col-md-12" style="padding-left:0px;padding-right: 0px;" block-region activate="isQuestionDisabled(subQuestion)" skip-loading-icon="true">
 
                                                                                 <div class="form-group" ng-class="{'has-error' : hasError(subQuestion.key) }" style="margin-bottom:5px">
-                                                                                    <label name="{{subQuestion.key}}" for="{{subQuestion.key}}" class="control-label bold" 
-                                                                                        ng-bind-html="::spaceSubQuestion(subQuestion.number) + subQuestion.title" ng-required="subQuestion.mandatory">
+                                                                                    <label name="{{::subQuestion.key}}" for="{{::subQuestion.key}}" class="control-label bold" 
+                                                                                        ng-bind-html="::(spaceSubQuestion(subQuestion.number) + subQuestion.title)" ng-required="subQuestion.mandatory">
                                                                                     </label>        
                                                                                     <div class="pull-right" style="margin-bottom:5px;">
                                                                                         <button ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
@@ -118,14 +118,11 @@
                         <div class="col-xs-12">
                             <ul class="pagination" id="nrTabs">
                                 <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)">
-                                    <a translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-bind="tab.title"></a>
+                                    <a translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-bind="::tab.title"  ng-class="{'disabled': !tab.render}"></a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <pre>
-                        {{document|json}}
-                    </pre>
                 </edit-form>
                 <review-form>
                     <view-bch-national-report-4 ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></view-bch-national-report-4>
@@ -223,13 +220,13 @@
                             * Please note that the period covered by this question is different in each reporting format.  
                         </div>
                         <div>
-                            <strong ng-bind="previousAnswerMapping[question.key].prevQuestion + '. ' + previousAnswerMapping[question.key].previousQuestion.title"></strong>
+                            <strong ng-bind="::(previousAnswerMapping[question.key].prevQuestion + '. ' + previousAnswerMapping[question.key].previousQuestion.title)"></strong>
                         </div>
                         <div class="well well-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type!='array' && previousAnswerMapping[question.key].previousQuestion.answer"
-                            ng-bind="previousAnswerMapping[question.key].previousQuestion.answer|lstring"></div>
+                            ng-bind="::(previousAnswerMapping[question.key].previousQuestion.answer|lstring)"></div>
                         <div class="well well-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type=='array' && previousAnswerMapping[question.key].previousQuestion.answer">
                             <ul class="list">
-                                <li ng-repeat="val in previousAnswerMapping[question.key].previousQuestion.answer" ng-bind="val|lstring"></li>
+                                <li ng-repeat="val in previousAnswerMapping[question.key].previousQuestion.answer" ng-bind="::(val|lstring)"></li>
                             </ul>
                         </div>
                     </div>

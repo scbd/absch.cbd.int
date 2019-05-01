@@ -604,7 +604,7 @@ span {
 
 
 /*.set-languages {
-	/*color:#287FCB!important;*/
+	color:#287FCB!important;
 
 color:#333;
 font-size: 12px;
@@ -2021,4 +2021,7 @@ legend+ .help-info {
 .animate-if.ng-leave,
 .animate-if.ng-enter.ng-enter-active {
     opacity:1;
+}
+sup {
+    font-size: 8px;;
 }
