@@ -541,7 +541,8 @@
                               "value": "false",
                               "title": "No"
                           }
-                      ]
+                      ],
+                      "mandatory": true
                   },
                   {
                       "key": "Q032_b",
@@ -563,7 +564,8 @@
                               "value": "false",
                               "title": "No"
                           }
-                      ]
+                      ],
+                      "mandatory": true
                   }
               ]
           },
@@ -640,7 +642,7 @@
               "section": "Articles7-10",
               "number": "35",
               "type": "option",
-              "title": "If you answered under question 34 that LMOs were approved, have all these LMOs actually been imported into your country?",
+              "title": "If you answered <i>under question 34<i> that <i>LMOs were approved<i>, have all these LMOs actually been imported into your country?",
               "multiple": false,
               "options": [
                   {
@@ -655,7 +657,8 @@
                       "value": "false",
                       "title": "No"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q036",
@@ -705,7 +708,7 @@
               "section": "Articles7-10",
               "number": "37",
               "type": "option",
-              "title": "If you answered under question 36 that your country has taken a decision to approve the import with conditions or to prohibit the import, were the reasons provided?",
+              "title": "If you answered <i>under question 36</i> that your country has taken a decision to <i>approve the import with conditions</i> or to <i>prohibit the import</i>, were the reasons provided?",
               "multiple": false,
               "options": [
                   {
@@ -976,7 +979,8 @@
                       "type"    : "@hasValues",
                       "trigger" : "enable"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q049",
@@ -998,7 +1002,8 @@
                       "value": "false",
                       "title": "No"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q050",
@@ -1010,7 +1015,7 @@
               "options": [
                   {
                       "value": "true",
-                      "title": "Yes, always"
+                      "title": "Yes"
                   },
                   {
                       "value": "false",
@@ -1032,7 +1037,8 @@
                     "type"    : "@hasValues",
                     "trigger" : "enable"
                 }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q051",
@@ -1062,7 +1068,8 @@
                               "value": "false",
                               "title": "No"
                           }
-                      ]
+                      ],
+                      "mandatory": true
                   },
                   {
                       "key": "Q051_b",
@@ -1084,7 +1091,8 @@
                               "value": "false",
                               "title": "No"
                           }
-                      ]
+                      ],
+                      "mandatory": true
                   }
               ]
           },
@@ -1257,8 +1265,9 @@
               "section": "Article14",
               "number": "59",
               "type": "lstring",
-              "title": "If you answered under question 58 that agreements or arrangements were established, please provide a brief description of their scope and objective",
-              "multiple": false
+              "title": "If you answered <i>under question 58</i> that <i>agreements or arrangements were established</i>, please provide a brief description of their scope and objective",
+              "multiple": false,
+              "mandatory": true
           },
           {
               "key": "Q060",
@@ -1394,7 +1403,7 @@
               "section": "Articles12",
               "number": "65",
               "type": "sub-section",
-              "title": "How many people in your country have been trained in risk assessment, monitoring, management and control of LMOs?",
+              "title": "How many people in your country have been trained in risk assessment, risk management and monitoring of LMOs?",
               "multiple": false,
               "questions": [
                   {
@@ -1434,7 +1443,8 @@
                             "type"      : "@hasValuesExcept",
                             "trigger"   :"visible"
                           }
-                      ]
+                      ],
+                      "mandatory": true
                   },
                   {
                       "key": "Q065_a_adq",
@@ -1491,7 +1501,8 @@
                             "type"      : "@hasValuesExcept",
                             "trigger"   :"visible"
                           }
-                      ]
+                      ],
+                      "mandatory": true
                   },
                   {
                       "key": "Q065_b_adq",
@@ -1548,7 +1559,8 @@
                             "type"      : "@hasValuesExcept",
                             "trigger"   :"visible"
                           }
-                      ]
+                      ],
+                      "mandatory": true
                   },
                   {
                       "key": "Q065_c_adq",
@@ -1658,7 +1670,8 @@
                       "value": "false",
                       "title": "No"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q070",
@@ -1673,7 +1686,7 @@
                       "section": "Article15_16",
                       "number": "a",
                       "type": "option",
-                      "title": "Detect:",
+                      "title": "Detect",
                       "multiple": false,
                       "options": [
                           {
@@ -1691,7 +1704,7 @@
                       "section": "Article15_16",
                       "number": "b",
                       "type": "option",
-                      "title": "Identify:",
+                      "title": "Identify",
                       "multiple": false,
                       "options": [
                           {
@@ -1709,7 +1722,7 @@
                       "section": "Article15_16",
                       "number": "c",
                       "type": "option",
-                      "title": "Assess the risk:",
+                      "title": "Assess the risk",
                       "multiple": false,
                       "options": [
                           {
@@ -1727,7 +1740,7 @@
                       "section": "Article15_16",
                       "number": "d",
                       "type": "option",
-                      "title": "Monitor:",
+                      "title": "Monitor",
                       "multiple": false,
                       "options": [
                           {
@@ -1747,7 +1760,7 @@
               "section": "Article15_16",
               "number": "",
               "type": "legend",
-              "title": "Conducting risk assessment or risk management"
+              "title": "<i>Conducting risk assessment or risk management</i>"
           },
           {
               "key": "Q071",
@@ -1762,7 +1775,7 @@
                       "section": "Article15_16",
                       "number": "a",
                       "type": "option",
-                      "title": "Risk assessment:",
+                      "title": "Risk assessment",
                       "multiple": false,
                       "options": [
                           {
@@ -1773,6 +1786,14 @@
                               "value": "false",
                               "title": "No"
                           }
+                      ],
+                      "mandatory": true,
+                      "validations": [                  
+                          {
+                            "question": "Q072",
+                            "type"    : "&is71aOr71b",
+                            "trigger" : "enable"
+                          }
                       ]
                   },
                   {
@@ -1780,7 +1801,7 @@
                       "section": "Article15_16",
                       "number": "b",
                       "type": "option",
-                      "title": "Risk management:",
+                      "title": "Risk management",
                       "multiple": false,
                       "options": [
                           {
@@ -1790,6 +1811,14 @@
                           {
                               "value": "false",
                               "title": "No"
+                          }
+                      ],
+                      "mandatory": true,
+                      "validations": [                  
+                          {
+                            "question": "Q072",
+                            "type"    : "&is71aOr71b",
+                            "trigger" : "enable"
                           }
                       ]
                   }
@@ -1899,10 +1928,6 @@
               "title": "If you answered <i>Yes</i> to question 75, how many risk assessments were conducted?",
               "multiple": false,
               "options": [
-                  {
-                      "value": "0",
-                      "title": "None"
-                  },
                   {
                       "value": "1+",
                       "title": "1 to 9"
@@ -2122,7 +2147,8 @@
                       "value": "false",
                       "title": "No"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q086",
@@ -2163,7 +2189,7 @@
               "section": "Article17",
               "number": "87",
               "type": "option",
-              "title": "If you answered under question 86 that a release occurred, has your country notified affected or potentially affected States, the Biosafety Clearing-House and, where appropriate, relevant international organizations?",
+              "title": "If you answered <i>under question 86</i> that a <i>release occurred</i>, has your country notified affected or potentially affected States, the Biosafety Clearing-House and, where appropriate, relevant international organizations?",
               "multiple": false,
               "options": [
                   {
@@ -2246,7 +2272,7 @@
               "section": "Article18",
               "number": "91",
               "type": "option",
-              "title": "Has your country taken measures to require that LMOs that are subject to transboundary movement are handled, packaged and transported under conditions of safety, taking into account relevant international rules and standards?",
+              "title": "Has your country taken measures to require that <u>LMOs that are subject to transboundary movement</u> are handled, packaged and transported under conditions of safety, taking into account relevant international rules and standards?",
               "multiple": false,
               "options": [
                   {
@@ -2277,7 +2303,7 @@
               "section": "Article18",
               "number": "92",
               "type": "option",
-              "title": "Has your country taken measures to require that documentation accompanying LMOs-FFP, in cases where the identity of the LMOs <i>is not known</i>, clearly identifies that they may contain LMOs and are not intended for intentional introduction into the environment, as well as a contact point for further information?",
+              "title": "Has your country taken measures to require that documentation accompanying LMOs-FFP, <i>in cases where the identity of the LMOs <u>is not known</u></i>, clearly identifies that they <i>may contain LMOs</i> and are not intended for intentional introduction into the environment, as well as a contact point for further information?",
               "multiple": false,
               "options": [
                   {
@@ -2308,7 +2334,7 @@
               "section": "Article18",
               "number": "93",
               "type": "option",
-              "title": "Has your country taken measures to require that documentation accompanying LMOs-FFP, in cases where the identity of the LMOs <i>is known</i>, clearly identifies that they contain LMOs and are not intended for intentional introduction into the environment, as well as a contact point for further information?",
+              "title": "Has your country taken measures to require that documentation accompanying LMOs-FFP, <i>in cases where the identity of the LMOs <u>is known</u></i>, clearly identifies that they <i>contain LMOs</i> and are not intended for intentional introduction into the environment, as well as a contact point for further information?",
               "multiple": false,
               "options": [
                   {
@@ -2355,14 +2381,15 @@
                       "title": "Other",
                       "type": "lstring"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q095",
               "section": "Article18",
               "number": "95",
               "type": "option",
-              "title": "Has your country taken measures to require that documentation accompanying LMOs that are destined for contained use clearly identifies them as LMOs and specifies any requirements for the safe handling, storage, transport and use, the contact point for further information, including the name and address of the individual and institution to whom the LMO are consigned?",
+              "title": "Has your country taken measures to require that documentation accompanying LMOs <i>that are destined for contained use clearly identifies</i> them as <i>LMOs</i> and specifies any requirements for the safe handling, storage, transport and use, the contact point for further information, including the name and address of the individual and institution to whom the LMO are consigned?",
               "multiple": false,
               "options": [
                   {
@@ -2410,14 +2437,15 @@
                       "title": "Other",
                       "type": "lstring"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q097",
               "section": "Article18",
               "number": "97",
               "type": "option",
-              "title": "Has your country taken measures to require that documentation accompanying LMOs that are intended for intentional introduction into the environment of the Party of import, clearly identifies them as living modified organisms; specifies the identity and relevant traits and/or characteristics, any requirements for the safe handling, storage, transport and use, the contact point for further information and, as appropriate, the name and address of the importer and exporter; and contains a declaration that the movement is in conformity with the requirements of this Protocol applicable to the exporter?",
+              "title": "Has your country taken measures to require that documentation accompanying <i>LMOs that are intended for intentional introduction into the environment of the Party of import, clearly identifies them as living modified organisms</i>; specifies the identity and relevant traits and/or characteristics, any requirements for the safe handling, storage, transport and use, the contact point for further information and, as appropriate, the name and address of the importer and exporter; and contains a declaration that the movement is in conformity with the requirements of this Protocol applicable to the exporter?",
               "multiple": false,
               "options": [
                   {
@@ -2465,7 +2493,8 @@
                       "title": "Other",
                       "type": "lstring"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q099",
@@ -2512,7 +2541,7 @@
           {
               "key": "Q101",
               "section": "Article18",
-              "number": "",
+              "number": "101",
               "type": "option",
               "title": "How many customs officers in your country have received training in the identification of LMOs?",
               "multiple": false,
@@ -2549,7 +2578,8 @@
                       "type"    : "@hasValuesExcept",
                       "trigger" : "visible"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q101_adq",
@@ -2717,7 +2747,7 @@
               "section": "Article18",
               "number": "106",
               "type": "option",
-              "title": "If you answered under question 105 that certified laboratories exist in your country, how many of them are currently operating in the detection of LMOs?",
+              "title": "If you answered under question <i>105</i> that <i>certified laboratories exist in your country</i>, how many of them are currently operating in the detection of LMOs?",
               "multiple": false,
               "options": [
                   {
@@ -2870,7 +2900,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_b",
@@ -2896,7 +2927,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_c",
@@ -2922,7 +2954,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_d",
@@ -2948,7 +2981,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_e",
@@ -2974,7 +3008,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_f",
@@ -3000,7 +3035,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_g",
@@ -3026,7 +3062,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_h",
@@ -3052,7 +3089,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_i",
@@ -3078,7 +3116,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_j",
@@ -3104,7 +3143,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_k",
@@ -3130,7 +3170,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_l",
@@ -3156,7 +3197,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_m",
@@ -3182,7 +3224,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_n",
@@ -3208,7 +3251,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_o",
@@ -3234,7 +3278,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_p",
@@ -3260,7 +3305,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 },
                 {
                     "key": "Q112_q",
@@ -3286,7 +3332,8 @@
                             "value": "false.notAvailable",
                             "title": "Information not available"
                         }
-                    ]
+                    ],
+                    "mandatory": true
                 }
             ]
           },
@@ -3295,7 +3342,7 @@
               "section": "Article20",
               "number": "113",
               "type": "lstring",
-              "title": "Please provide a brief explanation if you answered that the information is available but not in the BCH or only partially available in the BCH to any item under question 112",
+              "title": "Please provide a brief explanation if you answered that the information is available <i>but not in the BCH or only partially available in the</i> BCH to any item under question 112",
               "multiple": false
           },
           {
@@ -3420,7 +3467,8 @@
                       "value": "25+",
                       "title": "25 or more"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q119",
@@ -3450,7 +3498,8 @@
                       "value": "100+",
                       "title": "100 or more"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q120",
@@ -3746,7 +3795,7 @@
               "validations": [
                   {
                       "question": "Q132",
-                      "values"  : ["true"],
+                      "values"  : ["true.some", "true"],
                       "type"    : "@hasValues",
                       "trigger" : "enable"
                   }
@@ -3829,7 +3878,8 @@
                       "title": "Other",
                       "type": "lstring"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q133",
@@ -3954,7 +4004,8 @@
                       "title": "Other",
                       "type": "lstring"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q136",
@@ -4166,7 +4217,8 @@
                     "type"      : "@hasValuesExcept",
                     "trigger"   :"visible"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q145_adq",
@@ -4208,11 +4260,11 @@
                   },
                   {
                       "value": "10+",
-                      "title": "10 to 49"
+                      "title": "10 to 24"
                   },
                   {
-                      "value": "50+",
-                      "title": "50 to 99"
+                      "value": "25+",
+                      "title": "25 to 99"
                   },
                   {
                       "value": "100+",
@@ -4226,7 +4278,8 @@
                     "type"      : "@hasValuesExcept",
                     "trigger"   :"visible"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q146_adq",
@@ -4339,7 +4392,8 @@
                       "title": "Other",
                       "type": "lstring"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q150",
@@ -4574,7 +4628,7 @@
               "section": "Article25",
               "number": "160",
               "type": "option",
-              "title": "If you indicated under question 159 that your country became aware of cases of illegal transboundary movements, has the origin of the LMO(s) been established?",
+              "title": "If you indicated <i>under question 159<i> that <i>your country became aware of cases of illegal transboundary movements</i>, has the origin of the LMO(s) been established?",
               "multiple": false,
               "options": [
                   {
@@ -4638,7 +4692,7 @@
                   },
                   {
                       "value": "true.some",
-                      "title": "Yes, some cases"
+                      "title": "In some cases only"
                   },
                   {
                       "value": "false",
@@ -4687,7 +4741,8 @@
                     "type"      : "@hasValuesExcept",
                     "trigger"   :"visible"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q164_adq",
@@ -4772,7 +4827,8 @@
                       "value": "USD500000+",
                       "title": "500,000 USD or more"
                   }
-              ]
+              ],
+              "mandatory": true
           }
       ]
   },
@@ -4797,7 +4853,8 @@
                       "value": "false",
                       "title": "No"
                   }
-              ]
+              ],
+              "mandatory": true
           }
       ]
   },
@@ -4838,7 +4895,7 @@
               "section": "LiabilityRedress",
               "number": "170",
               "type": "option",
-              "title": "If you answered No to question 169, is there any national process in place towards becoming a Party to the Supplementary Protocol?",
+              "title": "If you answered <i>No</i> to question 169, is there any national process in place towards becoming a Party to the Supplementary Protocol?",
               "multiple": false,
               "options": [
                   {
@@ -4954,7 +5011,8 @@
                             "type"    : "&is173aOr173b",
                             "trigger" : "enable"
                           }
-                      ]
+                      ],
+                      "mandatory": true
                   },
                   {
                       "key": "Q173_b",
@@ -4980,7 +5038,8 @@
                             "type"    : "&is173aOr173b",
                             "trigger" : "enable"
                           }
-                      ]
+                      ],
+                      "mandatory": true
                   }
               ]
           },
