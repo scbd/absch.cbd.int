@@ -118,18 +118,12 @@ define(['app',
                         var tasks = [];
                     
                         workflows.forEach(function (workflow) {
+                            var activity;
                             if (workflow.activities.length > 0) {
-                                workflow.activities.forEach(function (activity) {
-                                    tasks.push({
-                                        workflow: workflow, activity: activity,
-                                        identifier: workflow.data.identifier
-                                    });
-                                });
+                                activity = _.last(_.sortBy(workflow.activities, ['createdOn']));
                             }
-                            else {
-                                tasks.push({ workflow: workflow, identifier: workflow.data.identifier });
-                            }
-
+                            tasks.push({ workflow: workflow, activity: activity, identifier: workflow.data.identifier });
+                            
                             if (!workflow.workflowAge) {
                                 workflow.workflowAge = { 'age': 12, 'type': 'weeks' };
                             }
@@ -154,7 +148,8 @@ define(['app',
                     
                     var queries = {
                         $and: [
-                            { "data.realm": realm.value }
+                            { "data.realm"  : realm.value }, 
+                            { activities    : { $gt: []  }}
                         ]
                     };
 

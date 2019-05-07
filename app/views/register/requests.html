@@ -92,15 +92,15 @@
                                     <a translation-url href="#" class="color-grey bold" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;">
                                         <i ng-class="{'glyphicon glyphicon-plus-sign': !tasksDisplay, 'glyphicon glyphicon-minus-sign': tasksDisplay}"></i>
                                         <span style="text-transform: uppercase;font-size:12px;font-weight: 450; padding-left:10px;">
-                                            <span ng-if="task.workflow.type.name =='publish-reference-record'" style="color:#888;">
+                                            <span ng-if="task.workflow.type.name =='publishReferenceRecord'" style="color:#888;">
                                                 PUBLISH
                                             </span>
-                                            <span ng-if="task.workflow.type.name =='publish-national-record' " style="color:#888;">
+                                            <span ng-if="task.workflow.type.name =='publishNationalRecord' " style="color:#888;">
                                                 PUBLISH
                                             </span>
-                                            <span ng-if="task.workflow.type.name=='delete-record'" class=" color-red">
+                                            <span ng-if="task.workflow.type.name=='deleteRecord'" class=" color-red">
                                                 DELETE </span>
-                                            <span ng-class="{'color-orange' : task.workflow.type.name == 'publish-reference-record', 'color-blue' : task.workflow.type.name != 'publish-reference-record'}">
+                                            <span ng-class="{'color-orange' : task.workflow.type.name == 'publishReferenceRecord', 'color-blue' : task.workflow.type.name != 'publishReferenceRecord'}">
                                                 <span> - {{task.workflow.data.metadata.schema|schemaName}}</span>
                                             </span>
                                         </span>
@@ -170,10 +170,10 @@
                                                 EXPIRED
                                             </div>
                                             <div ng-if="task.workflow.workflowExpiryDate >= today" class='bold'>
-                                                <span ng-if="task.workflow.type.name == 'publish-reference-record'"
+                                                <span ng-if="task.workflow.type.name == 'publishReferenceRecord'"
                                                     class="color-orange"> PENDING SCBD REVIEW </span>
                                             
-                                                <span ng-if="task.workflow.type.name != 'publish-reference-record'" ng-class="{'color-red': roles.isAbsPublishingAuthority }"> 
+                                                <span ng-if="task.workflow.type.name != 'publishReferenceRecord'" ng-class="{'color-red': roles.isAbsPublishingAuthority }"> 
                                                         <i class="fa fa-star" ng-if="roles.isAbsPublishingAuthority"/> PENDING    
                                                         <span ng-if="roles.isAbsPublishingAuthority"> YOUR </span>
                                                         <span ng-if="!roles.isAbsPublishingAuthority"> PA </span>

@@ -52,12 +52,13 @@
                             var tasks = [];
                             workflows.forEach(function (workflow) {
                                 if (workflow.activities.length > 0) {
-                                    workflow.activities.forEach(function (activity) {
+                                    var activity = _.last(_.sortBy(workflow.activities, ['createdOn']));
+                                    if(activity && (!activity.timedOutOn || !activity.closedOn)){
                                         tasks.push({
                                             workflow: workflow, activity: activity,
                                             identifier: workflow.data.identifier
                                         });
-                                    });
+                                    }
                                 }
                                 else {
                                     tasks.push({ workflow: workflow, identifier: workflow.data.identifier });
@@ -101,8 +102,8 @@
                             {"activities.assignedTo": $rootScope.user.userID},
                             ] });
                     }
-
-                    queries.$and.push( {"$and" : [ { "state": 'running'}, {"createdOn": {"$gte": expired }} ] });
+                    //only get workflow with activities
+                    queries.$and.push( {"$and" : [ { "state": 'running'}, {activities : {$gt: []}}, {"createdOn": {"$gte": expired }} ] });
                 
                     return queries;
                 }
