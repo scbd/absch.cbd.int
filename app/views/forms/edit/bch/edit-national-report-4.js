@@ -16,12 +16,12 @@ function (app, _, nr4Data, nr3Data) {
         $scope.activeTab = 1
         $scope.nr4Tabs = [{
                 "tab":1,
-                "title":"Question 1 - 11",
+                "title":"Question 1 - 10",
                 render:true
             },
             {
                 "tab":2,
-                "title":"Question 12 - 25",
+                "title":"Question 11 - 25",
                 "sections" : [{key:"General"}, {key:"Article2"}, {key:"Article5"}, {key:"Article6"}]
             },
             {
@@ -72,6 +72,7 @@ function (app, _, nr4Data, nr3Data) {
         ];
 
         $scope.customValidations = {
+            is71aOr71b   : is71aOr71b,
             is173aOr173b : is173aOr173b,
             is154Or155   : is154Or155,
             is91Or92Or93 : is91Or92Or93
@@ -298,7 +299,7 @@ function (app, _, nr4Data, nr3Data) {
 
                         var answers = answer;
                         if(!question.multiple)
-                            answers = [(answer||{})];
+                            answers = [answer];
 
                         answers = _.compact(answers);
 
@@ -405,11 +406,14 @@ function (app, _, nr4Data, nr3Data) {
 
         $scope.onStepChange = function(tab){
             if(tab == 'review' || tab == 'publish'){
-                //render all tabs so that validation mesaages can be rendered.
+                //render all tabs so that validation messages can be rendered.
                 _.each($scope.nr4Tabs, function(t){ t.render=true})
             }
         }
-        
+        function is71aOr71b(){
+            return ($scope.document['Q071_a']||{}).value == 'true' || ($scope.document['Q071_b']||{}).value == 'true';
+        }
+
         function is173aOr173b(){
             return ($scope.document['Q173_a']||{}).value == 'true' || ($scope.document['Q173_b']||{}).value == 'true';
         }
