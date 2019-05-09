@@ -268,6 +268,10 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
 
   app.filter("lstring", function () {
     return function (ltext, locale) {
+      
+      if(angular.isNumber(ltext)) //is number to handle generic implementation of NR
+        return ltext;
+        
       if (!ltext)
         return "";
 
