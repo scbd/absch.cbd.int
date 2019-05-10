@@ -41,7 +41,7 @@ require.config({
         'webui-popover'             : cdnHost + 'webui-popover@1.2.15/dist/jquery.webui-popover.min',
         'chart-js'                  : cdnHost + 'chart.js@1.1.1/Chart.min',
         'printThis'                 : cdnHost + 'print-this@1.9.0/printThis',
-        'diacritics'                : cdnHost + 'diacritics@0.0.5/index',
+        'diacritics'                : cdnHost + 'diacritic@0.0.2//diacritics',
         'pdfjs-dist/build/pdf'      : cdnHost + 'pdfjs-dist@2.0.489/build/pdf.min',
        'pdfjs-dist/build/pdf.worker': cdnHost + 'pdfjs-dist@2.0.489/build/pdf.worker.min ',       
         'pdf-object'                : cdnHost + 'pdfobject@2.0.201604172/pdfobject.min',
@@ -84,7 +84,8 @@ require.config({
         'pdfjs-dist/build/pdf'          : { 'deps': ['angular']}, 
         'pdf-object'                    : { 'deps': ['angular']}  ,
         'angular-trix'                  : { 'deps': ['angular', 'trix', 'css!'+cdnHost+'trix@0.12.0/dist/'+'trix.css']},
-        'trix'                          : { 'deps': ['angular']}
+        'trix'                          : { 'deps': ['angular']},
+        'diacritics'                    : { 'deps': ['angular']}
     },
     urlArgs: function(id, url){
         
