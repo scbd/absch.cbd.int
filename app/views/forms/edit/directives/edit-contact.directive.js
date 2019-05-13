@@ -19,9 +19,10 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
 		},
 		link : function($scope, $element, $attr){
 
-            $scope.container    = $attr.container
-            $scope.isDialog     = $attr.isDialog;
-            $scope.isNationalUser = roleService.hasAbsRoles();
+            $scope.container        = $attr.container
+            $scope.isDialog         = $attr.isDialog;
+            $scope.isNationalUser   = roleService.hasAbsRoles();
+            $scope.canEitGovernment = roleService.isAdministrator();
 
             $scope.options = {            
                 countries         : function() {
