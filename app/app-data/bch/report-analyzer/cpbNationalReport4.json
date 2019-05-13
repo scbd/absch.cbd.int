@@ -642,7 +642,7 @@
               "section": "Articles7-10",
               "number": "35",
               "type": "option",
-              "title": "If you answered <i>under question 34<i> that <i>LMOs were approved<i>, have all these LMOs actually been imported into your country?",
+              "title": "If you answered <i>under question 34<i> that <i>LMOs were approved</i>, have all these LMOs actually been imported into your country?",
               "multiple": false,
               "options": [
                   {
@@ -2272,7 +2272,7 @@
               "section": "Article18",
               "number": "91",
               "type": "option",
-              "title": "Has your country taken measures to require that <u>LMOs that are subject to transboundary movement</u> are handled, packaged and transported under conditions of safety, taking into account relevant international rules and standards?",
+              "title": "Has your country taken measures to require that <i>LMOs that are subject to transboundary movement</i> are handled, packaged and transported under conditions of safety, taking into account relevant international rules and standards?",
               "multiple": false,
               "options": [
                   {
@@ -4628,7 +4628,7 @@
               "section": "Article25",
               "number": "160",
               "type": "option",
-              "title": "If you indicated <i>under question 159<i> that <i>your country became aware of cases of illegal transboundary movements</i>, has the origin of the LMO(s) been established?",
+              "title": "If you indicated <i>under question 159</i> that <i>your country became aware of cases of illegal transboundary movements</i>, has the origin of the LMO(s) been established?",
               "multiple": false,
               "options": [
                   {
@@ -4906,7 +4906,8 @@
                       "value": "false",
                       "title": "No"
                   }
-              ]
+              ],
+              "mandatory": true
           },
           {
               "key": "Q171",
