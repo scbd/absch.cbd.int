@@ -30,14 +30,13 @@
 										<div class="row" ng-if="isNationalUser">
 											<div class="col-sm-12">
 												<div class="km-control-group" name="government" required caption="Government">
-													<div afc-autocomplete required name="government" ng-disabled="isNationalUser" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+													<div afc-autocomplete required name="government" ng-disabled="!canEitGovernment" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
 												</div>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-xs-12">
-												<legend name="contactType">Contact Type</legend>
-												<div class="km-control-group" >
+												<div class="km-control-group" name="type" caption="Contact Type">												
 													<label class="radio-inline">
 														<input type="radio" ng-model="document.type" value="organization" name="editionContactType" />Organization</label>
 													<label class="radio-inline">
