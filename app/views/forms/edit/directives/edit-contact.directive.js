@@ -25,9 +25,14 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
             $scope.canEitGovernment = roleService.isAdministrator();
 
             $scope.options = {            
-                countries         : function() {
-                    return $http.get("/api/v2013/thesaurus/domains/countries/terms",            { cache: true })
-                            .then(function(o){ return $filter("orderBy")(o.data, "name"); });
+                countries		: function() {
+                    return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function(o){
+                      var countries = $filter("orderBy")(o.data, "name");
+                      _.each(countries, function(element) {
+                        element.__value = element.name;
+                      });
+                      return countries;
+                    });
                 },
                 organizationTypes : function() {
                     return $q.all([$http.get("/api/v2013/thesaurus/domains/Organization%20Types/terms", { cache: true })

@@ -525,7 +525,7 @@ function (app, _, nr4Data, nr3Data) {
             if(document && document.header.identifier){
                 _.each(document, function(element, key){
                     if(/^Q/.test(key) && _.isArray(element)){//only fields starting with Q
-                        $scope.multiTermModel[key] = _.map(element, 'value');
+                        $scope.multiTermModel[key] = _.map(element, function(e){ return { identifier : e.value }});
                     }
                 })
                 transformNr4Data();//workaround as in the first call not all questions are built so the disable/visible clause does not work.
