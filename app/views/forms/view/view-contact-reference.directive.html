@@ -108,7 +108,7 @@
             Fax: <span ng-repeat="item in document.faxes">{{item}}<span ng-show="!$last">, </span></span>
         </div>
         <div ng-show="document.emails">
-            Email: <span ng-repeat="item in document.emails"><a translation-url  ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
+            Email: <span ng-repeat="item in document.emails track by $index"><a translation-url  ng-href="mailto:{{item}}">{{item}}</a><span ng-show="!$last">, </span></span>
         </div>
         <div ng-show="document.websites">
             Website: <span ng-repeat="item in document.websites"><a translation-url  target="_new" ng-href="{{item.url}}">{{item.url}}</a><span ng-show="!$last">, </span></span>
