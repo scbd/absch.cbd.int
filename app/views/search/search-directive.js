@@ -87,9 +87,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                     var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
 
                     var queryCanceler = null;
-                    $scope.rawDocs = [];
-                    $scope.refDocs = [];
-                    $scope.scbdDocs = [];
+                    $scope.searchResult = {
+                        rawDocs  : [],
+                        refDocs  : [],
+                        scbdDocs : []
+                    }
 
                     var natSchemas = _.without(appConfigService.nationalSchemas, "contact");                   
                     var refSchemas = _.without(appConfigService.referenceSchemas, "organization");
@@ -329,8 +331,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 
                                     $scope.recordCount[0].count = data.data.grouped.governmentSchemaIdentifier_s.matches;
                                     $scope.tabs['nationalRecords'].pageCount = Math.ceil(data.data.grouped.governmentSchemaIdentifier_s.ngroups / $scope.itemsPerPage);
-
-                                    $scope.rawDocs = {groups:[]}; 
+                                    
+                                    $scope.searchResult.rawDocs = []; 
                                     
                                     var countryRecords = {}
                                     _.each(data.data.grouped.governmentSchemaIdentifier_s.groups, function(record){
@@ -347,7 +349,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                                         countryRecords[country].schemas[schema]     = _.extend(countryRecords[country].schemas[schema], record.doclist);
 
                                     });
-                                    $scope.rawDocs = countryRecords;
+                                    $scope.searchResult.rawDocs = _.values(countryRecords);
 
                                 }).catch(function(error) {
                                     console.log('ERROR: ' + error);
@@ -393,7 +395,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                                 queryCanceler = null;
 
                                 $scope.tabs['referenceRecords'].pageCount = Math.ceil(data.data.response.numFound / $scope.itemsPerPage);
-                                $scope.refDocs = data.data.response;
+                                $scope.searchResult.refDocs = data.data.response;
                                 $scope.recordCount[1].count = data.data.response.numFound;
 
                             }).catch(function(error) {
@@ -436,7 +438,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                                 queryCanceler = null;
                                 
                                 $scope.tabs['scbdRecords'].pageCount = Math.ceil(data.data.response.numFound / $scope.itemsPerPage);
-                                $scope.scbdDocs = data.data.response;
+                                $scope.searchResult.scbdDocs = data.data.response;
                                 $scope.recordCount[2].count = data.data.response.numFound;
                                
                             }).catch(function(error) {
@@ -1173,7 +1175,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                     $scope.updateScrollPage = function() {
 
                         if($scope.currentTab == 'nationalRecords'){
-                            var documents = _.pluck($scope.rawDocs.groups, 'doclist');
+                            var documents = _.pluck($scope.searchResult.rawDocs.groups, 'doclist');
                             var docCount = getRecordCount(documents);
                             
                             //nationalCurrentPage cannot be more than 200 as No. parties are 196 to CBD
@@ -1185,14 +1187,14 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                             nationalQuery();
                         }
                         else if($scope.currentTab == 'referenceRecords'){
-                            if(referenceCurrentPage > 1000 && $scope.referenceLoading || !$scope.recordCount || ($scope.refDocs.docs||[]).length == $scope.recordCount[1].count)
+                            if(referenceCurrentPage > 1000 && $scope.referenceLoading || !$scope.recordCount || ($scope.searchResult.refDocs.docs||[]).length == $scope.recordCount[1].count)
                                 return;
                             $scope.referenceLoading = true;
                             referenceCurrentPage += 1;
                             referenceQuery();
                         }
                         else if($scope.currentTab == 'scbdRecords'){
-                            if(referenceCurrentPage > 1000 && $scope.scbdLoading || !$scope.recordCount || ($scope.scbdDocs.docs||[]).length == $scope.recordCount[2].count)
+                            if(referenceCurrentPage > 1000 && $scope.scbdLoading || !$scope.recordCount || ($scope.searchResult.scbdDocs.docs||[]).length == $scope.recordCount[2].count)
                                 return;
 
                             $scope.scbdLoading = true;

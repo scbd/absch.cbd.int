@@ -110,28 +110,34 @@
                  
                 <div class="text-center" ng-if="tabs[currentTab].pageCount>0" pagination current-page="tabs[currentTab].currentPage" 
                      page-count="tabs[currentTab].pageCount" on-page-change="onPageChange(page)"></div> 
-                
+               
                 <div class="tab-pane bg-white" ng-class="{'active':currentTab==='nationalRecords'}" ng-if="currentTab==='nationalRecords'">                     
-                        <!-- <div block-region activate="nationalLoading"></div> -->
-                        <div ng-repeat="country in rawDocs" id="search-country-group">
+                        <!-- <div block-region activate="nationalLoading"></div> -->                       
+                        <div ng-if="nationalLoading">
+                            <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
+                        </div>
+                        <div ng-repeat="country in searchResult.rawDocs" id="search-country-group">
                             <national-records-country group='country'></national-records-country>
                         </div>
                         <div ng-if="nationalLoading">
-                            <i class="fa fa-spin fa-spinner"  style="margin-left:50%" /> loading..
+                            <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
                         </div>
-                        <h4 class="bg-white" ng-if="!nationalLoading && rawDocs.groups.length === 0"><br>no records found</h4>
+                        <h4 class="bg-white" ng-if="!nationalLoading && !searchResult.rawDocs.groups.length"><br>no records found</h4>
                 </div>
                 <div class="tab-pane bg-white" ng-class="{'active':currentTab==='referenceRecords'}" ng-if="currentTab=='referenceRecords'">
                          <!-- <div block-region activate="referenceLoading"></div> -->
                     <div class="row">  
                         <div class="col-md-12">
-                            <div ng-repeat="rec in refDocs.docs">
+                            <div ng-if="referenceLoading">
+                                <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
+                            </div>
+                            <div ng-repeat="rec in searchResult.refDocs.docs">
                                 <result-default doc=rec type="referenceRecords"></result-default>
                             </div>
                             <div ng-if="referenceLoading">
-                                <i class="fa fa-spin fa-spinner"  style="margin-left:50%" /> loading..
+                                <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
                             </div>
-                            <h4 class="bg-white" ng-if="!referenceLoading && refDocs.docs.length === 0">no records found</h4>
+                            <h4 class="bg-white" ng-if="!referenceLoading && searchResult.refDocs.docs.length === 0">no records found</h4>
                         </div>
                     </div>
                 </div>
@@ -139,13 +145,16 @@
                     <!-- <div block-region activate="scbdLoading"></div> -->
                     <div class="row">  
                         <div class="col-md-12">
-                            <div ng-repeat="rec in scbdDocs.docs">
+                            <div ng-if="scbdLoading">
+                                <i class="fa fa-spin fa-spinner "  style="margin-left:50%"></i> loading..
+                            </div>
+                            <div ng-repeat="rec in searchResult.scbdDocs.docs">
                                 <result-default doc=rec type="scbdRecords"></result-default>
                             </div>
                             <div ng-if="scbdLoading">
-                                <i class="fa fa-spin fa-spinner "  style="margin-left:50%" /> loading..
+                                <i class="fa fa-spin fa-spinner "  style="margin-left:50%"></i> loading..
                             </div>
-                            <h4 class="bg-white" ng-if="!scbdLoading && scbdDocs.docs.length === 0">no records found</h4>
+                            <h4 class="bg-white" ng-if="!scbdLoading && searchResult.scbdDocs.docs.length === 0">no records found</h4>
                         </div>
                     </div>
                 </div>
