@@ -665,7 +665,7 @@
               "section": "Articles7-10",
               "number": "36",
               "type": "option",
-              "title": "If you answered <i>Yes</i> to question 33, what percentage of your country’s decisions fall into the following categories?",
+              "title": "If you answered <i>Yes</i> to question 33, what percentage of your country’s decisions fall into the following categories? (select all that apply)",
               "multiple": true,
               "options": [
                   {
@@ -701,7 +701,8 @@
                       "type"    : "@hasAdditionalValues",
                       "trigger" : "enable"
                   }
-              ]
+              ],
+              "customValuePlaceholder" : "%"
           },
           {
               "key": "Q037",
@@ -3374,7 +3375,7 @@
               "section": "Article20",
               "number": "115",
               "type": "option",
-              "title": "Has your country established a mechanism for the coordination among the BCH National Focal Point, the Cartagena Protocol focal point, and the competent national authority(ies) for making information available to the BCH?",
+              "title": "Has your country established a mechanism for the coordination among the BCH National Focal Point, the Cartagena Protocol focal point, and the competent national authority(ies) for making information available to the BCH? (select all that apply)",
               "multiple": false,
               "options": [
                   {
@@ -3637,8 +3638,8 @@
               "section": "Article22",
               "number": "126",
               "type": "option",
-              "title": "If you answered <i>Yes</i> to question 125, how were these resources made available?",
-              "multiple": false,
+              "title": "If you answered <i>Yes</i> to question 125, how were these resources made available? (select all that apply)",
+              "multiple": true,
               "options": [
                   {
                       "value": "channels.bilateral",
@@ -3692,8 +3693,8 @@
               "section": "Article22",
               "number": "128",
               "type": "option",
-              "title": "If you answered <i>Yes</i> to question 127, how were these resources made available?",
-              "multiple": false,
+              "title": "If you answered <i>Yes</i> to question 127, how were these resources made available? (select all that apply)",
+              "multiple": true,
               "options": [
                   {
                       "value": "channels.bilateral",
@@ -4360,7 +4361,7 @@
               "section": "Article23",
               "number": "149",
               "type": "term",
-              "title": "If you answered <i>Yes</i> to question 148, please indicate the modalities used to inform the public:",
+              "title": "If you answered <i>Yes</i> to question 148, please indicate the modalities used to inform the public: (select all that apply)",
               "multiple": true,
               "options": [
                   {
@@ -4883,7 +4884,7 @@
               "mandatory": true,
               "validations": [
                   {
-                      "question": "Q171",
+                      "question": "Q170",
                       "values"  : ["false"],
                       "type"    : "@hasValues",
                       "trigger" : "enable"
@@ -4936,6 +4937,14 @@
                   {
                       "value": "C9B01C6D-6B40-1A67-B5A0-DDB7FF6B9CE9",
                       "title": "No measures have yet been taken"
+                  }
+              ],
+              "validations": [
+                  {
+                      "question": "Q172",
+                      "values"  : ["C9B01C6D-6B40-1A67-B5A0-DDB7FF6B9CE9"],
+                      "type"    : "@hasValuesExcept",
+                      "trigger" : "enable"
                   }
               ]
           },
@@ -5292,7 +5301,7 @@
               "number": "182",
               "type": "term",
               "title": "Does your country have rules and procedures on civil liability that address damage resulting from LMOs, or has such damage been recognized in court rulings (select all that apply)?",
-              "multiple": false,
+              "multiple": true,
               "options": [
                   {
                       "value": "878DF5F5-0B5E-48E1-6A42-80867A101675",
