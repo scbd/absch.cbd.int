@@ -2,11 +2,13 @@
     'json!app-data/bch/report-analyzer/cpbNationalReport3.json',
     'views/forms/edit/edit', 'services/thesaurus-service', 'views/forms/directives/nr-yes-no',
 	'views/forms/edit/document-selector', 'js/common', 'views/directives/block-region-directive',
-    'views/forms/view/bch/view-national-report-4.directive'], 
+    'views/forms/view/bch/view-national-report-4.directive', 'components/scbd-angularjs-services/services/storage',
+    'ngDialog'], 
 function (app, _, nr4Data, nr3Data) {
     
-	app.controller("editBchNationalReport4", ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 'commonjs',
-	function($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs) {
+    app.controller("editBchNationalReport4", ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 
+    'commonjs', 'IStorage', '$routeParams', 'ngDialog',
+	function($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog) {
         
         // since it was decided to use string type for terms fields in schema
         // map string to ETerm ({identifier:'xxxx-xxx'}) type which is the type expected by term-checkbox.
@@ -366,6 +368,7 @@ function (app, _, nr4Data, nr3Data) {
         $scope.onGovernmentChange = function(government){
             if(government && $scope.document){
 
+                verifyCountryHasReport();
                 commonjs.getCountry(government.identifier).then(function(country){
                     $scope.document['Q012_party'] = { value : country.isCPParty.toString() };
                     if(country.isCPParty){
@@ -517,27 +520,81 @@ function (app, _, nr4Data, nr3Data) {
                 })
         }
 
-        $timeout(function(){
-            transformNr4Data();            
-        }, 200);
+        function init(){
 
-        $scope.setDocument({}).then(function(document){
-            if(document && document.header.identifier){
-                _.each(document, function(element, key){
-                    if(/^Q/.test(key) && _.isArray(element)){//only fields starting with Q
-                        $scope.multiTermModel[key] = _.map(element, function(e){ return { identifier : e.value }});
-                    }
+
+            $timeout(function(){
+                transformNr4Data();            
+            }, 200);
+
+            $scope.setDocument({}).then(function(document){
+                if(document && document.header.identifier){
+                    _.each(document, function(element, key){
+                        if(/^Q/.test(key) && _.isArray(element)){//only fields starting with Q
+                            $scope.multiTermModel[key] = _.map(element, function(e){ return { identifier : e.value }});
+                        }
+                    })
+                    transformNr4Data();//workaround as in the first call not all questions are built so the disable/visible clause does not work.
+
+                }
+                //render remaining tabs
+                var timeout = 2000;
+                _.each($scope.nr4Tabs, function(t){                 
+                    $timeout(function(){ t.render=true}, timeout );
+                    timeout += 1000;
                 })
-                transformNr4Data();//workaround as in the first call not all questions are built so the disable/visible clause does not work.
+            });
 
-            }
-            //render remaining tabs
-            var timeout = 2000;
-            _.each($scope.nr4Tabs, function(t){                 
-                $timeout(function(){ t.render=true}, timeout );
-                timeout += 500;
-            })
-        });
+        }
+
+        function verifyCountryHasReport(){
+            $q.all([
+                storage.documents.query("(type eq 'cpbNationalReport4')", "my", {$top:10}),
+                storage.drafts.query("(type eq 'cpbNationalReport4')", {$top:10})
+            ])
+            .then(function(nationalRecords) {
+                var filterByGovernment = function(item){
+                    return item && (item.metadata||{}).government == $scope.document.government.identifier
+                }              
+                var published   = _.find((nationalRecords[0].data||{}).Items,  filterByGovernment);
+                var draft       = _.find((nationalRecords[1].data||{}).Items,  filterByGovernment);
+
+                if (((published || draft) && (!$routeParams.identifier || $routeParams.identifier != (draft||published).identifier))) {
+                    ngDialog.open({
+                        template: 'recordExistsTemplate.html',													
+                        closeByDocument: false,
+                        closeByEscape: false,
+                        showClose: false,
+                        closeByNavigation: false,
+                        controller: ['$scope', '$timeout', '$location', function($scope, $timeout, $location) {
+                            $scope.alertSeconds = 10;
+                            time();
+
+                            function time(){
+                                $timeout(function(){
+                                    if($scope.alertSeconds == 1){																	
+                                        $scope.openExisting();
+                                    }
+                                    else{
+                                        $scope.alertSeconds--;																
+                                        time()
+                                    }
+                                }, 1000)
+                            }
+                            $scope.openExisting = function() {
+                                ngDialog.close();
+                                $location.path('register/NR4/' + (draft||published).identifier+'/edit');
+                            }
+                        }]
+                    });
+                }
+                else{
+
+                }
+            });
+        }
+
+        init();
    }]);
 
 
