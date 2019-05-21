@@ -1,6 +1,6 @@
 define(['app', "text!views/forms/view/bch/view-national-report-2.directive.html", 
 'lodash', 'json!app-data/bch/report-analyzer/cpbNationalReport2.json', 'views/forms/view/bch/view-national-report.directive',
- 	'views/directives/record-options'], function (app, template, _, nr4Data) {
+ 	'views/directives/record-options'], function (app, template, _, nr2Data) {
 
 	app.directive("viewCpbNationalReport2", [function () {
 		return {
@@ -16,7 +16,12 @@ define(['app', "text!views/forms/view/bch/view-national-report-2.directive.html"
 			},
 			link : function ($scope){
 				
-				$scope.nr3Data = nr4Data;			
+				if(($scope.document["Q012"]||{}).value == "true"){
+						
+					nr2Data[0].questions.splice(1, 2);  //Q013, Q014
+
+				}
+				$scope.nr2Data = nr2Data;			
 			}
 		};
 	}]);
