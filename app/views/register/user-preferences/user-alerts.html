@@ -89,47 +89,6 @@
     <button class="btn btn-primary pull-right" ng-click="addEdit()"><i class="fa fa-plus-circle"></i> Add new</button>
     <div class="clearfix"></div>
 
-    <!-- <div style="width:100%" >
-        <div class="table table-striped" ng-show="userFilters.length>0">
-            <div ng-repeat="record in userFilters | orderBy:'meta.createdOn':'desc'" class="row" style="border-bottom:1px solid #e5e5e5; padding-top:5px">
-                <div ng-class="{'col-md-3':record._id, 'col-md-9':!record._id}">
-                    <b>
-                        <a class="text-bold mb0" ng-click="runUserQuery(record)">{{record.queryTitle}}</a>
-                    </b>
-                </div>
-                <div class="col-md-6" ng-if="record._id">
-                    <span ng-if="record._id" ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
-                        <span class="label label-info">
-                            <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span> {{filter.name}}
-                            <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
-                        </span>
-                    </span>
-                </div>
-                <div class="col-md-3">
-                    <div class="pull-right btn-group" ng-hide="record.pendingStatus">
-                        <a type="button" class="btn" ng-hide="del" ng-click="runUserQuery(record)" ng-show="collection!='subscriptions'">
-                            <i class="fa fa-play-circle"></i>
-                            <br> run query</a>
-                        <a type="button" class="btn" ng-hide="del" ng-click="addEdit(record)" ng-disabled="!record._id">
-                            <i class="fa fa-edit"></i>
-                            <br> edit</a>
-                        <a type="button" class="btn" ng-hide="del" ng-click="del=!!record._id;" ng-disabled="!record._id">
-                            <i class="fa fa-trash-o"></i>
-                            <br> delete</a>
-                        <a type="button" class="btn color-red bold" ng-show="del" ng-click="confirmDelete(record);del=false;">
-                            <i class="fa fa-trash-o"></i>
-                            <br> confirm delete?</a>
-                        <a type="button" class="btn" ng-show="del" ng-click="del=false;">
-                            <i class="fa fa-times-circle"></i>
-                            <br> cancel</a>
-                    </div>
-                    <div ng-if="record.pendingStatus" class="pull-right">
-                        <i class="fa fa-spin fa-spinner" /> pending status..</div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
     <div ng-show="!loading && (!userFilters || userFilters.length==0) && !showSystemAlerts">
         <div class="alert  bg-grey" role="alert" style="margin-top:20px;">
             <span ng-if="user.isAuthenticated">You do not have any saved alerts.
