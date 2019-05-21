@@ -14,6 +14,7 @@ app.directive("viewNationalReport", [function () {
 			target          : "@linkTarget",
         },
         link : function($scope){
+			
             //====================
 			//
 			//====================
