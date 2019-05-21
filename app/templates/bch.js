@@ -7,8 +7,8 @@ define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
 
-    app.controller('BchTemplateController', ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm',
-        function ($rootScope, $location, $window, $scope, locale, realm) {
+    app.controller('BchTemplateController', ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm', 'localStorageService',
+        function ($rootScope, $location, $window, $scope, locale, realm, localStorageService) {
 
             $rootScope.pageTitle = { text: "" };
 
