@@ -16,6 +16,11 @@ define(['app', "text!views/forms/view/bch/view-national-report-4.directive.html"
 			},
 			link : function ($scope){
 				
+				if(($scope.document && $scope.document["Q012_party"]||{}).value == "true"){
+						
+					nr4Data[0].questions.splice(1, 2);  //Q012_partyInProgress, Q013
+
+				}
 				$scope.nr4Data = nr4Data;			
 			}
 		};
