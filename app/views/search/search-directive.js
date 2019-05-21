@@ -1125,24 +1125,27 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                   if(!$scope.skipResults){
                         $scope.$watch('refresh', function(newVal, oldVal){
                             if(newVal && newVal !== oldVal){
-                                refresh_nat = true;
-                                refresh_ref = true;
-                                refresh_scbd = true;
-                                nationalCurrentPage = 0;
-                                referenceCurrentPage = 0;
-                                scbdCurrentPage = 0;
-                                
-                                $scope.tabs['nationalRecords'].currentPage = 0;
-                                $scope.tabs['referenceRecords'].currentPage = 0;
-                                $scope.tabs['scbdRecords'].currentPage = 0;
-                                load();
-                                loadTabFacets();
-                                $scope.refresh = false;
+                                refreshResult();                                
                                 $scope.getRelatedKeywords();
                             }
                         });
                   }
 
+                  function refreshResult(){
+                    refresh_nat = true;
+                    refresh_ref = true;
+                    refresh_scbd = true;
+                    nationalCurrentPage = 0;
+                    referenceCurrentPage = 0;
+                    scbdCurrentPage = 0;
+                    
+                    $scope.tabs['nationalRecords'].currentPage = 0;
+                    $scope.tabs['referenceRecords'].currentPage = 0;
+                    $scope.tabs['scbdRecords'].currentPage = 0;
+                    load();
+                    loadTabFacets();
+                    $scope.refresh = false;
+                  }
 
                     //===============================================================================================================================
                     $scope.getRelatedKeywords = function() {
@@ -1301,7 +1304,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 
                     $scope.clearFilter = function(){
                         $scope.setFilters = {};
-                        $scope.refresh = !!$scope.refresh;
+                        // $scope.refresh = !$scope.refresh;
+                        refreshResult();
                     };
                     
                     if(!$scope.skipResults){ 
