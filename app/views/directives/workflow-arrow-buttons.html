@@ -163,6 +163,7 @@
         <div ng-transclude="introForm" class="well bg-white">
             <i ng-if="tab=='intro' && loading" class="fa fa-spinner fa-spin"></i>
             <div>
+                <a class="btn btn-primary pull-right" ng-if="isAdmin" ng-href="https://www.cbd.int/management/articles/{{article._id}}/edit">Edit</a>
                 <h2>{{article.title|lstring}}</h2>
                 <br>
                 <p ng-bind-html="article.content| lstring | toTrusted"></p>
