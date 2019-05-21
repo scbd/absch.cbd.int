@@ -4,9 +4,10 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 ], function (app, template) {
     
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
-    'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 'localStorageService', 'articlesService',
+    'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
+    'localStorageService', 'articlesService', 'roleService',
     function ($rootScope,  storage, editFormUtility, $route, IWorkflows, toastr, $location, $filter, 
-            $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, articlesService){
+            $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, articlesService, roleService){
 
     	return{
     		restrict: 'EA',
@@ -53,7 +54,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 $scope.AdditionalInfoDialogDefered = [];
                 $scope.WorkflowDraftDialogDefered  = [];
                 $scope.workflowScope               = $scope;
-                
+                $scope.isAdmin                     = roleService.isUserInRoles(['Administrator', 'oasisArticleEditor'])
                 if(!$scope.tab)
                     $scope.tab = 'edit';
 
@@ -727,10 +728,10 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     $scope.loading = true;
                     var ag = [];
                     ag.push({"$match":{"adminTags.title.en": { "$all" :
-                        [   encodeURIComponent('edit-form'), encodeURIComponent(realm.value),
+                        [   encodeURIComponent('edit-form'), encodeURIComponent(realm.value.replace(/(\-[a-zA-Z]{1,5})/, '')),
                             encodeURIComponent($filter("urlSchemaShortName")(document_type))]}}
                     });
-                    ag.push({"$project" : {"title":1, "content":1}});
+                    ag.push({"$project" : {"title":1, "content":1, "_id":1}});
                     
                     var qs = {
                       "ag" : JSON.stringify(ag)
