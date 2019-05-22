@@ -503,11 +503,11 @@ function (app, _, nr4Data, nr3Data) {
 
                 }
                 //render remaining tabs
-                var timeout = 2000;
-                _.each($scope.nr4Tabs, function(t){                 
-                    $timeout(function(){ t.render=true}, timeout );
-                    timeout += 1000;
-                })
+                // var timeout = 2000;
+                // _.each($scope.nr4Tabs, function(t){                 
+                //     $timeout(function(){ t.render=true}, timeout );
+                //     timeout += 1000;
+                // })
             });
 
         }
@@ -525,6 +525,7 @@ function (app, _, nr4Data, nr3Data) {
                 var draft       = _.find((nationalRecords[1].data||{}).Items,  filterByGovernment);
 
                 if (((published || draft) && (!$routeParams.identifier || $routeParams.identifier != (draft||published).identifier))) {
+                    $scope.blockEditForm = true;
                     ngDialog.open({
                         template: 'recordExistsTemplate.html',													
                         closeByDocument: false,
