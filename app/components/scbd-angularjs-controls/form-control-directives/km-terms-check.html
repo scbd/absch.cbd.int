@@ -39,9 +39,10 @@
 
 						<input ng-if="selectedItems[term.identifier].selected && term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"
 						ng-model="selectedItems[term.identifier].customValue" class="km-terms-check-add-input-int" ng-change="save()" />
-
-						<div ng-if="selectedItems[term.identifier].selected && term.type=='lstring'" km-textbox-ml name="custom value"  placeholder="{{::customValuePlaceholder}}"
-							required ng-model="selectedItems[term.identifier].customValue" locales="locales"  ng-change="save()"></div>
+						<div  ng-if="selectedItems[term.identifier].selected && term.type=='lstring'"> <strong>Please specify </strong>
+							<div km-textbox-ml name="custom value"  placeholder="{{::customValuePlaceholder}}"
+								required ng-model="selectedItems[term.identifier].customValue" locales="locales"  ng-change="save()"></div>
+						</div>
 					</label>
 					<div class="km-select-description" ng-if="showDescription && term.description" style="padding: 3px 25px;">
 						{{term.description}}
