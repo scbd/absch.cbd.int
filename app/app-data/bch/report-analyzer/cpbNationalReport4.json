@@ -1200,11 +1200,11 @@
               "options": [
                   {
                       "value": "true",
-                      "title": "Yes"
+                      "title": "Yes, always"
                   },
                   {
                       "value": "true.some",
-                      "title": "Yes, to some extent"
+                      "title": "In some cases only"
                   },
                   {
                       "value": "false",
@@ -2390,7 +2390,7 @@
               "section": "Article18",
               "number": "95",
               "type": "option",
-              "title": "Has your country taken measures to require that documentation accompanying LMOs <i>that are destined for contained use clearly identifies</i> them as <i>LMOs</i> and specifies any requirements for the safe handling, storage, transport and use, the contact point for further information, including the name and address of the individual and institution to whom the LMO are consigned?",
+              "title": "Has your country taken measures to require that documentation accompanying <i>LMOs that are destined for contained use clearly identifies</i> them as <i>LMOs</i> and specifies any requirements for the safe handling, storage, transport and use, the contact point for further information, including the name and address of the individual and institution to whom the LMO are consigned?",
               "multiple": false,
               "options": [
                   {
@@ -2553,11 +2553,7 @@
                   },
                   {
                       "value": "1+",
-                      "title": "1 to 4"
-                  },
-                  {
-                      "value": "5+",
-                      "title": "5 to 9"
+                      "title": "1 to 9"
                   },
                   {
                       "value": "10+",
@@ -2638,11 +2634,7 @@
                   },
                   {
                       "value": "1+",
-                      "title": "1 to 4"
-                  },
-                  {
-                      "value": "5+",
-                      "title": "5 to 9"
+                      "title": "1 to 9"
                   },
                   {
                       "value": "10+",
@@ -2748,7 +2740,7 @@
               "section": "Article18",
               "number": "106",
               "type": "option",
-              "title": "If you answered under question <i>105</i> that <i>certified laboratories exist in your country</i>, how many of them are currently operating in the detection of LMOs?",
+              "title": "If you answered <i>under question 105</i> that <i>certified laboratories exist in your country</i>, how many of them are currently operating in the detection of LMOs?",
               "multiple": false,
               "options": [
                   {
@@ -4537,7 +4529,7 @@
               "options": [
                   {
                       "value": "true",
-                      "title": "Yes"
+                      "title": "Yes, always"
                   },
                   {
                       "value": "true.some",
@@ -4611,7 +4603,7 @@
                   },
                   {
                       "value": "10+",
-                      "title": "More than 10"
+                      "title": "10 or more"
                   }
               ],
               "mandatory": true,
@@ -4638,7 +4630,7 @@
                   },
                   {
                       "value": "true.some",
-                      "title": "Yes, some cases"
+                      "title": "Yes, in some cases"
                   },
                   {
                       "value": "false",
@@ -4689,7 +4681,7 @@
               "options": [
                   {
                       "value": "true",
-                      "title": "Yes"
+                      "title": "Yes, always"
                   },
                   {
                       "value": "true.some",
