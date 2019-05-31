@@ -61,15 +61,33 @@
     <div class="device-size visible-lg" size="lg" style="height:0px;width:0px"></div>
 
     <script src="https://cdn.cbd.int/requirejs@2.2.0/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>
-    <script>window.appTemplate = 'templates/bch'
     
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script>
+        window.appTemplate = 'templates/bch'
+        function addLoadEvent(func) {
+            var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } 
+        }
+        addLoadEvent(function() {
+            var langARRegex = /^\/ar\//;
+            var location = window.location;
+            if(langARRegex.test(location.pathname)){
+             document.getElementsByTagName("body")[0].setAttribute("dir", "rtl");   
+            }
+
+        });
+        if(domain == 'cbd.int'){
+            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+            ga('create', 'UA-1996573-11', 'auto');
+            ga('set',    'hostname', window.location.hostname);
+            ga('set',    'location', undefined);
+        }
+
         window.clearingHouseHost = '<%=clearingHouseHost%>';
         window.appVersion = document.documentElement.attributes['app-version'].value;
         window.lang = '<%=baseUrl%>'//.replace('/','')
     </script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
-    <!-- <script async src="https://cdn.slaask.com/chat.js" onload=" window._slaask.createScriptTag = function (url) { var t = {}; require([url], function() { t.onload(); }); return t; }; "></script> 
-     --> 
+
 
 </body>
 

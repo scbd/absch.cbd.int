@@ -49,7 +49,9 @@ define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
             if (lang != 'en')
                 require(['css!/app/css/translation.css']);
             if (lang == 'ar') {
-                require(['css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-rtl.min.css']);
+                require(['css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-flipped.min.css',
+                'css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-rtl.min.css',
+                ]);
             }
 
             var basePath = (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
