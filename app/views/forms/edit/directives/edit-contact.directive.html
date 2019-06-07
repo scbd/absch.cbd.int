@@ -30,7 +30,7 @@
 										<div class="row" ng-if="isNationalUser">
 											<div class="col-sm-12">
 												<div class="km-control-group" name="government" required caption="Government">
-													<div afc-autocomplete required name="government" ng-disabled="!canEitGovernment" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+													<div afc-autocomplete required name="government" ng-disabled="!canEditGovernment" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
 												</div>
 											</div>
 										</div>
