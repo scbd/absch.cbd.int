@@ -17,7 +17,7 @@ define(['app', 'text!views/search/search-results/national-records-country.html',
                         $scope.norecords = true;
 
                    $scope.name      = $scope.group.country;
-                   $scope.numFound  = _.reduce($scope.group.schemas, function(sum, schema){return sum + schema.numFound}, 0);
+                   $scope.numFound  = _.reduce($scope.group.schemas, function(sum, schema){return sum + (schema||{}).numFound}, 0);
                    $scope.schemas   = $scope.group.schemas;
                    $scope.getFilter = searchDirectiveCtrl.getFilter;
                 
