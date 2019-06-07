@@ -164,9 +164,9 @@
             <i ng-if="tab=='intro' && loading" class="fa fa-spinner fa-spin"></i>
             <div>
                 <a class="btn btn-primary pull-right" ng-if="isAdmin" ng-href="https://www.cbd.int/management/articles/{{article._id}}/edit">Edit</a>
-                <h2>{{article.title|lstring}}</h2>
+                <h2>{{article.title|lstring:locale}}</h2>
                 <br>
-                <p ng-bind-html="article.content| lstring | toTrusted"></p>
+                <p ng-bind-html="article.content| lstring:locale | toTrusted"></p>
             </div>
         </div>
     </div>
