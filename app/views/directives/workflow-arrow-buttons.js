@@ -5,9 +5,9 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
     
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
-    'localStorageService', 'articlesService', 'roleService',
+    'localStorageService', 'articlesService', 'roleService', 'locale',
     function ($rootScope,  storage, editFormUtility, $route, IWorkflows, toastr, $location, $filter, 
-            $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, articlesService, roleService){
+            $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, articlesService, roleService, locale){
 
     	return{
     		restrict: 'EA',
@@ -54,7 +54,9 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 $scope.AdditionalInfoDialogDefered = [];
                 $scope.WorkflowDraftDialogDefered  = [];
                 $scope.workflowScope               = $scope;
-                $scope.isAdmin                     = roleService.isUserInRoles(['Administrator', 'oasisArticleEditor'])
+                $scope.isAdmin                     = roleService.isUserInRoles(['Administrator', 'oasisArticleEditor']);
+                $scope.locale                      = locale;
+
                 if(!$scope.tab)
                     $scope.tab = 'edit';
 
