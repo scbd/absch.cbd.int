@@ -32,7 +32,7 @@ function(templateHtml, app, _, require) {
             },
             link: function ($scope) {
                 
-                $scope.selectedReportType = $scope.selectedReportType || $scope.reportData[0].type;
+                $scope.selectedReportType = $scope.selectedReportType || _.find($scope.reportData, function(r){return r.dataUrl}).type;
                 
                 $scope.selectedRegions    = $scope.selectedRegions    || DefaultRegions.concat();
                 $scope.allSelected = true;
@@ -338,6 +338,11 @@ function(templateHtml, app, _, require) {
                     });
 
                     return (on && off) ? null : !!on;
+                }
+
+
+                $scope.hasAnalyzer = function(data){
+                    return !data.stats;
                 }
             }
         };

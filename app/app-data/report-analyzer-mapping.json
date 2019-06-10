@@ -8,6 +8,7 @@
             "dataUrl"      : "/api/v2017/national-reports-np-1",
             "infoBlockUrl"  : "views/report-analyzer/includes/npInterimNationalReport1.html",
             "year"          : "2016",
+            "deadline"      : "31-12-2016",
             "offlineFormats": [
                 {"lang": "en", "url":"http://www.cbd.int/abs/en/commonformats/NR-en.doc"},
                 {"lang": "fr", "url":"http://www.cbd.int/abs/fr/commonformats/NR-fr.doc"},
@@ -20,22 +21,70 @@
     ],
     "bch" : [
         {
+            "type"          : "cpbInterimNationalReport",
+            "title"         : "CPB - Interim National Report",
+            "year"          : "2005",
+            "deadline"      : "2005-09-11",
+            "stats"         : {
+                "partyCount"       : 121,  
+                "partyReportCount" : 121,
+                "nonPartyReportCount": "",
+                "regionMapping" : {
+                    "D50FE62D-8A5E-4407-83F8-AFCAAF708EA4" : { "count" :9 },
+                    "5E5B7AA4-2420-4147-825B-0820F7EC5A4B" : { "count" :7 },
+                    "942E40CA-4C23-4D3A-A0B4-736CD0EFCD54" : { "count" :12 },
+                    "3D0CCC9A-A0A1-4399-8FA2-41D4D649DB0E" : { "count" :9 },
+                    "0EC2E5AE-25F3-4D3A-B71F-8019BB62ED4B" : { "count" :18 } 
+                }
+            }
+        },
+        {
+            "type"          : "cpbNationalReport1",
+            "title"         : "CPB - First National Report",
+            "year"          : "2007",
+            "deadline"      : "2007-09-11",
+            "stats"         : {
+                "partyCount"       : 141,  
+                "partyReportCount" : 141,
+                "nonPartyReportCount": "",
+                "regionMapping" : {
+                    "D50FE62D-8A5E-4407-83F8-AFCAAF708EA4" : { "count" :25 },
+                    "5E5B7AA4-2420-4147-825B-0820F7EC5A4B" : { "count" :20 },
+                    "942E40CA-4C23-4D3A-A0B4-736CD0EFCD54" : { "count" :16 },
+                    "3D0CCC9A-A0A1-4399-8FA2-41D4D649DB0E" : { "count" :12 },
+                    "0EC2E5AE-25F3-4D3A-B71F-8019BB62ED4B" : { "count" :18 }
+                }
+            }
+        },
+        {
             "type"          : "cpbNationalReport2",
             "title"         : "CPB - Second National Report",
             "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport2.json",
             "mappingsUrl"   : "app-data/bch/report-analyzer/mapping/cpbNationalReport2.json",
-            "dataUrl"       : "/api/v2015/national-reports-cpb-2",
+            "dataUrl"       : "https://api.cbd.int/api/v2015/national-reports-cpb-2",
             "infoBlockUrl"  : "views/report-analyzer/includes/cpbNationalReport2.html",
-            "year"          : "2016",
-            "offlineFormats": []
+            "year"          : "2011",
+            "deadline"      : "2011-09-30"
         },
         {   
             "type"          : "cpbNationalReport3",
             "title"         : "CPB - Third National Report",
             "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport3.json",
             "mappingsUrl"   : "app-data/bch/report-analyzer/mapping/cpbNationalReport3.json",
-            "dataUrl"       : "/api/v2015/national-reports-cpb-3",
-            "infoBlockUrl"  : "views/report-analyzer/includes/cpbNationalReport3.html"
+            "dataUrl"       : "https://api.cbd.int/api/v2015/national-reports-cpb-3",
+            "infoBlockUrl"  : "views/report-analyzer/includes/cpbNationalReport3.html",
+            "year"          : "2015",
+            "deadline"      : "2015-10-31"
+        },
+        {   
+            "type"          : "cpbNationalReport4",
+            "title"         : "CPB - Fourth National Report",
+            "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport4.json",
+            "mappingsUrl"   : "app-data/bch/report-analyzer/mapping/cpbNationalReport4.json",
+            "dataUrl"       : "/api/v2015/national-reports-cpb-4",
+            "infoBlockUrl"  : "views/report-analyzer/includes/cpbNationalReport4.html",
+            "year"          : "2019",
+            "deadline"      : "2019-10-01"
         }
     ]
 }

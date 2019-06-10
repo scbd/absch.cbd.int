@@ -22,7 +22,7 @@ require.config({
         'jquery'                    : cdnHost + 'jquery@2.2.4/dist/jquery.min',
         'bootstrap'                 : cdnHost + 'bootstrap@3.3.0/dist/js/bootstrap.min',
         'underscore'                : cdnHost + 'underscore@1.7.0/underscore-min',
-        'lodash'                    : cdnHost + 'lodash@3.9.3/index',
+        'lodash'                    : cdnHost + 'lodash@3.10.1/index',
         'moment'                    : cdnHost + 'moment@2.7.0/min/moment-with-langs.min',
         'cbd-forums'                :           'libs/cbd-forums/cbd-forums',
         'ng-breadcrumbs'            : cdnHost + 'angular-breadcrumbs@0.5.3/dist/ng-breadcrumbs.min',
