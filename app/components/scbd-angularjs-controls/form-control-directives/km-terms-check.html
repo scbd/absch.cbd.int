@@ -34,8 +34,7 @@
 				<script type="text/ng-template" id="term-check-tree-renderer.html">
 					<label>
 						<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save()" 
-							ng-required="IsRequired()" value="{{term.identifier}}" /> 
-						{{term.title||term.name | lstring:locale}}
+							ng-required="IsRequired()" value="{{term.identifier}}" /> {{term.title||term.name | lstring:locale}}
 
 						<input ng-if="selectedItems[term.identifier].selected && term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"
 						ng-model="selectedItems[term.identifier].customValue" class="km-terms-check-add-input-int" ng-change="save()" />
