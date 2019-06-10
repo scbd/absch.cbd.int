@@ -1,16 +1,20 @@
-<div >    
+<div class="col-md-12">    
     <link href="/app/css/index.css" rel="stylesheet">
-    <div id="Jumbotron" style="border-top:1px solid #555;border-bottom:2px solid #ddd;" >
+    <!-- <div id="Jumbotron" style="border-top:1px solid #555;border-bottom:2px solid #ddd;" >
        <home-map></home-map>
+    </div> -->
+    <div >
+        <h1 class="color-green bold" style="margin-bottom:30px;"  ng-bind-html="betaArticle.title | lstring:locale"></h1>
+        <div ng-bind-html="betaArticle.content | lstring:locale | toTrusted"></div>
     </div>
 
     <div>
         <home-articles tags="BCH-Announcement"></home-articles>
     </div>
 
-    <div>
+    <!-- <div>
         <home-country-dashboard></home-country-dashboard>
-    </div>
+    </div> -->
 
     <div class="clearfix"></div>
 

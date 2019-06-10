@@ -34,7 +34,7 @@
 
 scbd-header, nav, .navbar.navbar-portal, #PortalLinks1, .footer, scbd-footer, .slaask-button, .hidden-print, .pdf-download-buttons,
 .slaask-alert-overlay, .slaask-alert, .hidden-print, .lang-alert, .expander, .fa-chevron-circle-up, .fa-chevron-circle-down,
-bch-footer  {
+bch-footer,.bch-header  {
     display: none!important
 }
 .training-bg {

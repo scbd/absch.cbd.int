@@ -43,7 +43,7 @@
 				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
 					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows, appLocale) {
 					
-
+					$scope.realm = realm;
 					if(!$scope.locale)
 						$scope.locale = appLocale;
 					
