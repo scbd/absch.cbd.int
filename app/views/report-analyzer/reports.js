@@ -1,10 +1,8 @@
-﻿define(['lodash', 
-'views/report-analyzer/directives/national-reports/questions-selector'
-], function (_) {
+﻿define(['lodash', 'moment', 'views/report-analyzer/directives/national-reports/questions-selector'], function (_, moment) {
     'use strict';
     
-    return ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', '$sce',
-    function($scope, $location, commonjs, $q, $http, realm, $sce) {
+    return ['$scope', '$location', 'commonjs', '$q', '$http', 'realm',
+    function($scope, $location, commonjs, $q, $http, realm) {
 
         var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
         $scope.overview = {};
@@ -56,7 +54,10 @@
                 })
                 .then(function(){
                     _.each($scope.reportData, function(report){
-                        report.regionMapping = angular.copy(regionMapping);                       
+                        if(report.stats)
+                            report.stats.regionMapping =  _.defaultsDeep({}, report.stats.regionMapping, regionMapping);
+                        else
+                            report.regionMapping = angular.copy(regionMapping);                       
                         getReportCount(report.type);
                     })
                 });
@@ -73,30 +74,55 @@
                 var fields = '{"government":1}'
         
                 var activeReport = _.find($scope.reportData, {type:reportType});                
-              
-                return $http.get(activeReport.dataUrl, {  params: { q : query, f : fields }, cache : true })
-                        .then(function(result){
-                            _.each(activeReport.regionMapping, function(region){
-                                region.count = 0;
-                                region.reportCountries = [];
-                            });
-
-                            var reportCountries = [];
-                            _.map(result.data, function(report) {                  
-                                var region = _.find(_.values(activeReport.regionMapping), function(region){
-                                    return _.contains(region.countries, report.government.identifier);
+                if(activeReport.dataUrl){
+                    return $http.get(activeReport.dataUrl, {  params: { q : query, f : fields }, cache : true })
+                            .then(function(result){
+                                _.each(activeReport.regionMapping, function(region){
+                                    region.count = 0;
+                                    region.reportCountries = [];
                                 });
-                                reportCountries.push(report.government.identifier.toUpperCase());
-                                activeReport.regionMapping[region.identifier].count += 1;
+
+                                var reportCountries = [];
+                                _.map(result.data, function(report) {                  
+                                    var region = _.find(_.values(activeReport.regionMapping), function(region){
+                                        return _.contains(region.countries, report.government.identifier);
+                                    });
+                                    reportCountries.push(report.government.identifier.toUpperCase());
+                                    activeReport.regionMapping[region.identifier].count += 1;
+                                });
+                                $q.when(commonjs.getCountries())
+                                .then(function(data){
+                                    var parties                          = _.map(_.filter(data, function(country){return wasPartyOnDate(activeReport.deadline, country);}), 'code');
+                                    var nonParties                       = _.map(_.filter(data, function(country){return !wasPartyOnDate(activeReport.deadline, country);}), 'code');
+                                        activeReport.partyCount          = parties.length;
+                                        activeReport.partyReportCount    = _.intersection(parties, reportCountries).length;
+                                        activeReport.nonPartyReportCount = _.intersection(nonParties, reportCountries).length;
+                                });
                             });
-                            $q.when(commonjs.getCountries())
-                            .then(function(data){
-                                var parties  = _.map(_.filter(data, function(country){return country.isAppProtocolParty;}), 'code');
-                                var nonParties =  _.map(_.filter(data, function(country){return !country.isAppProtocolParty;}), 'code');
-                                activeReport.interimNationalReportByPartiesCount = _.intersection(parties, reportCountries).length;
-                                activeReport.interimNationalReportByNonPartiesCount = _.intersection(nonParties, reportCountries).length;
-                            });
-                        });
+                }
+                else if(activeReport.stats){
+                    activeReport = _.extend(activeReport, activeReport.stats)
+                }
+            }
+
+            function wasPartyOnDate(date, entity){
+                var appName = realm.value.replace(/-.*/,'').toLowerCase();
+                var treaty;
+                if(appName == 'abs')
+                    treaty = 'XXVII8b';
+                else if(appName == 'bch')
+                    treaty = 'XXVII8a';
+                else
+                    throw 'Unknonw application';
+
+                return     entity
+                        && _.includes(["ratification","accession", "acceptance", "approval"], entity.treaties[treaty].instrument)
+                        && entity.treaties[treaty].party
+                        && (moment.utc(entity.treaties[treaty].party) <= moment.utc(date));
+            }
+
+            $scope.hasAnalyzer = function(data){
+                return !data.stats;
             }
         }
     ];
