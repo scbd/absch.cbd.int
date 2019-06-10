@@ -1,4 +1,4 @@
-define(['app',
+define(['app', 'angular-cookies',
 		'components/scbd-angularjs-services/services/locale', 'services/local-storage-service'
         ], function (app, moment) {
     return ["$scope", "$location", "locale","$timeout", "$window", "$routeParams", "$cookies", 'localStorageService',
