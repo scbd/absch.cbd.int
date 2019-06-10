@@ -642,7 +642,7 @@
               "section": "Articles7-10",
               "number": "35",
               "type": "option",
-              "title": "If you answered <i>under question 34<i> that <i>LMOs were approved</i>, have all these LMOs actually been imported into your country?",
+              "title": "If you answered <i>under question 34</i> that <i>LMOs were approved</i>, have all these LMOs actually been imported into your country?",
               "multiple": false,
               "options": [
                   {
@@ -3335,7 +3335,7 @@
               "section": "Article20",
               "number": "113",
               "type": "lstring",
-              "title": "Please provide a brief explanation if you answered that the information is available <i>but not in the BCH or only partially available in the</i> BCH to any item under question 112",
+              "title": "Please provide a brief explanation if you answered that the information is available <i>but not in the BCH or only partially available in the BCH</i> to any item under question 112",
               "multiple": false
           },
           {
@@ -3367,7 +3367,7 @@
               "section": "Article20",
               "number": "115",
               "type": "option",
-              "title": "Has your country established a mechanism for the coordination among the BCH National Focal Point, the Cartagena Protocol focal point, and the competent national authority(ies) for making information available to the BCH? (select all that apply)",
+              "title": "Has your country established a mechanism for the coordination among the BCH National Focal Point, the Cartagena Protocol focal point, and the competent national authority(ies) for making information available to the BCH?",
               "multiple": false,
               "options": [
                   {
