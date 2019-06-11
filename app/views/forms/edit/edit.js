@@ -36,7 +36,8 @@ define([
       
     $scope.status   = "loading";
     $scope.error    = null;
-    $scope.tab      = "edit";
+    if(!$scope.tab)
+      $scope.tab      = "edit";
     $scope.review   = { locale: locale };
 
     var breadcrumb = {    
@@ -104,18 +105,6 @@ define([
     $scope.isDefined = function(obj) {
       return angular.isDefined(obj);
     };
-
-    //==================================
-    //
-    //==================================
-    // $scope.$on("documentInvalid", function(evt, data){
-    //    $scope.tab = "review";
-    //    $scope.validationReport = data;
-    // });
-
-    // $scope.$on("clearDocumentErrors", function(){
-    //   $scope.validationReport = {clearErrors:[]};
-    // });
 
     //==================================
     //
@@ -375,8 +364,8 @@ define([
       */
 
       return $q.when(qDocument).then(function(doc) {
-
-        $scope.tab    = "edit";
+        if(!$scope.tab)
+          $scope.tab    = "edit";
         $scope.document = doc;
 
         $scope.origanalDocument = angular.copy(doc);
