@@ -1,20 +1,21 @@
-define(['app', 'underscore', 'angular', 
+define(['app', 'underscore', 'angular', 'services/articles-service', 
  'services/role-service', 'services/app-config-service',
  'views/register/directives/register-top-menu', 'toastr','components/scbd-angularjs-services/services/main', 'views/register/directives/top-records', 'views/register/directives/top-requests'],
 function(app, _, ng) {
     "use strict";
-    return ["$rootScope", "$scope", "IStorage", "roleService", "$compile", "realm", "$q",
+    return ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
                     "$routeParams", '$location', "$filter", "$http", "$timeout", 'toastr', 'appConfigService',
                     'IWorkflows',
-        function($rootScope, $scope, storage, roleService, $compile, realm, $q, $routeParams, 
+        function($rootScope, $scope, storage, roleService, articlesService, realm, $q, $routeParams, 
                 $location, $filter, $http, $timeout, toastr, appConfigService, IWorkflows) {
             
-            $scope.Math = window.Math;
-            $scope.nationalSchemas = _.without(appConfigService.nationalSchemas, 'contact', 'focalPoint');
+            $scope.Math             = window.Math;
+            $scope.nationalSchemas  = _.without(appConfigService.nationalSchemas, 'contact', 'focalPoint');
             $scope.referenceSchemas = _.without(appConfigService.referenceSchemas, 'capacityBuildingResource');
-            $scope.topRecords = {};
-            $scope.user = $rootScope.user;
-            $scope.showRecords= true;
+            $scope.topRecords       = {};
+            $scope.user             = $rootScope.user;
+            $scope.showRecords      = true;
+            $scope.isBch            = realm.is('BCH');
 
             var schemaFacets = {};
 
@@ -71,6 +72,8 @@ function(app, _, ng) {
             function init(){
                 $scope.isNationalUser = roleService.hasAbsRoles();
                 loadFacets();
+                if($scope.isBch)
+                    loadArticle();
             }
 
             function loadFacets() {
@@ -113,7 +116,8 @@ function(app, _, ng) {
                     console.log(error);
                 })
             }
-             function loadmyTaskFacets(){
+            
+            function loadmyTaskFacets(){
                    var taskQuery = [];
                    var referenceApproverRoles =
                             {"resource"                 : ["AbsRequestApprovalNotification", "AbsRequestApprovalNotification-trg", "AbsRequestApprovalNotification-dev"],
@@ -146,7 +150,15 @@ function(app, _, ng) {
                     })
                     
                     return taskQuery;
-                }
+            }
+            
+            function loadArticle(){
+                articlesService.getArticle('5ce467f7452a5c00015e3406')
+                .then(function(article){
+                    $scope.betaArticle = article;
+                })
+            }
+
             init();
         }
     ];
