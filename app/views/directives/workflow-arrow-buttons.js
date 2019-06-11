@@ -434,8 +434,6 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                 $scope.continuePublishRequest = function(){
                     var qDocument = $scope.getDocumentFn();
-
-
                 }
 
 				//====================
@@ -549,12 +547,12 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     });
                 };
 
-                $scope.switchTab = function(tab){
+                $scope.switchTab = function(tab, initial){
                     
                     $scope.disablePreviousBtn = false;
                     $scope.disableNextBtn = false;
                     
-                    if(tab==$scope.tab)
+                    if(!initial && tab==$scope.tab)
                         return;
 
                     $scope.tab = tab;
@@ -834,6 +832,9 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                 //////////////////////////////////////////////////////////////////////
 
+
+                if($scope.tab!='edit') 
+                    $scope.switchTab($scope.tab, true)
             }
     	};
 

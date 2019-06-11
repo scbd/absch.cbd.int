@@ -18,15 +18,18 @@
 
         <div class="registerpage-content" style="padding-bottom:30px;" ng-class="{'block-position' : blockEditForm || isLoading()}">
 
-            <div block-region activate="blockEditForm || isLoading()"></div>            
+            <div block-region activate="blockEditForm || isLoading()"></div>      
             <workflow-arrow-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
-                tab="tab" on-step-change="onStepChange(tab)" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)">
+                tab="tab" on-step-change="onStepChange(tab)" validation-report="validationReport" on-post-close="onPostClose()" 
+                on-error="onError(error, errorCode)">
                 <edit-form>
                     <div class="row">
                         <div class="col-xs-12">
                             <ul class="pagination" id="nrTabs">
-                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)">
-                                    <a translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-bind="::tab.title" ng-class="{'disabled': !tab.render}"></a>
+                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
+                                    <a translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-class="{'disabled': !tab.render}" >
+                                        Question <span ng-bind="::tab.title"></span>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -119,8 +122,10 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <ul class="pagination" id="nrTabs">
-                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)">
-                                    <a translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-bind="::tab.title"  ng-class="{'disabled': !tab.render}"></a>
+                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
+                                    <a translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-class="{'disabled': !tab.render}">
+                                        Question <span ng-bind="::tab.title"></span>
+                                    </a>
                                 </li>
                             </ul>
                         </div>

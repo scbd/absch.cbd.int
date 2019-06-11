@@ -292,7 +292,7 @@
               "section": "Article5",
               "number": "22",
               "type": "lstring",
-              "title": "Here you may provide further details on the implementation of Article 5 in your country:",
+              "title": "Here you may provide further details on the implementation of Article 5 in your country",
               "multiple": false
           }
       ]
@@ -367,7 +367,7 @@
               "section": "Article6",
               "number": "26",
               "type": "lstring",
-              "title": "Here you may provide further details on the implementation of Article 6 in your country:",
+              "title": "Here you may provide further details on the implementation of Article 6 in your country",
               "multiple": false
           }
       ]
@@ -477,7 +477,7 @@
               "options": [
                   {
                       "value": "true",
-                      "title": "Yes"
+                      "title": "Yes, always"
                   },
                   {
                       "value": "true.some",
@@ -500,7 +500,7 @@
               "options": [
                   {
                       "value": "true",
-                      "title": "Yes"
+                      "title": "Yes, always"
                   },
                   {
                       "value": "true.some",
@@ -1412,7 +1412,7 @@
                       "section": "Article15_16",
                       "number": "a",
                       "type": "option",
-                      "title": "Risk assessment:",
+                      "title": "Risk assessment",
                       "multiple": false,
                       "options": [
                           {
@@ -1528,7 +1528,7 @@
                       "section": "Article15_16",
                       "number": "c",
                       "type": "option",
-                      "title": "Monitoring:",
+                      "title": "Monitoring",
                       "multiple": false,
                       "options": [
                           {
@@ -1952,7 +1952,7 @@
               "section": "Article15_16",
               "number": "77",
               "type": "term",
-              "title": "If you answered <i>Yes</i> to question 75, please indicate the scope of the risk assessments (select all that apply):",
+              "title": "If you answered <i>Yes</i> to question 75, please indicate the scope of the risk assessments (select all that apply)",
               "multiple": true,
               "options": [
                   {
@@ -2771,7 +2771,7 @@
               "section": "Article18",
               "number": "107",
               "type": "lstring",
-              "title": "Here you may provide further details on the implementation of Article 18 in your country:",
+              "title": "Here you may provide further details on the implementation of Article 18 in your country",
               "multiple": false
           }
       ]
@@ -3799,7 +3799,7 @@
               "section": "Article22",
               "number": "132",
               "type": "term",
-              "title": "If you answered <i>Yes</i> to question 131, in which of the following areas were these activities undertaken? (select all that apply)” ",
+              "title": "If you answered <i>Yes</i> to question 131, in which of the following areas were these activities undertaken (select all that apply)?",
               "multiple": true,
               "options": [
                   {
@@ -4547,7 +4547,7 @@
               "section": "Article24",
               "number": "157",
               "type": "lstring",
-              "title": "Here you may provide further details on the implementation of Article 24 in your country:",
+              "title": "Here you may provide further details on the implementation of Article 24 in your country",
               "multiple": false
           }
       ]

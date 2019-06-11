@@ -13,62 +13,63 @@ function (app, _, nr4Data, nr3Data) {
         // since it was decided to use string type for terms fields in schema
         // map string to ETerm ({identifier:'xxxx-xxx'}) type which is the type expected by term-checkbox.
         $scope.multiTermModel = {};
-
+        
+        $scope.tab = 'intro';
         var user = $rootScope.user;
         $scope.activeTab = 1
         $scope.nr4Tabs = [{
                 "tab":1,
-                "title":"Question 1 - 10",
+                "title":"1 - 10",
                 render:true
             },
             {
                 "tab":2,
-                "title":"Question 11 - 25",
+                "title":"11 - 25",
                 "sections" : [{key:"General"}, {key:"Article2"}, {key:"Article5"}, {key:"Article6"}]
             },
             {
                 "tab":3,
-                "title":"Question 26 - 38",
+                "title":"26 - 38",
                 "sections" : [{key:"Articles7-10"}]
             },
             {
                 "tab":4,
-                "title":"Question 39 - 52",
+                "title":"39 - 52",
                 "sections" : [{key:"Article11"}, {key:"Article12"}]
             },
             {
                 "tab":5,
-                "title":"Question 53 - 60",
+                "title":"53 - 60",
                 "sections" : [{key:"Article13"}, {key:"Article14"}]
             },
             {
                 "tab":6,
-                "title":"Question 61 - 90",
+                "title":"61 - 90",
                 "sections" : [{key:"Article15_16"}, {key:"Article17"}]
             },
             {
                 "tab":7,
-                "title":"Question 91 - 111",
+                "title":"91 - 111",
                 "sections" : [{key:"Article18"}, {key:"Article19"}]
             },
             {
                 "tab":8,
-                "title":"Question 112 - 138",
+                "title":"112 - 138",
                 "sections" : [{key:"Article20"},{key:"Article21"}, {key:"Article22"}]
             },
             {
                 "tab":9,
-                "title":"Question 139 - 161",
+                "title":"139 - 161",
                 "sections" : [{key:"Article23"}, {key:"Article24"}, {key:"Article25"}]
             },
             {
                 "tab":10,
-                "title":"Question 161 - 188",
+                "title":"161 - 188",
                 "sections" : [{key:"Article26"}, {key:"Article28"}, {key:"Article33"}, {key:"LiabilityRedress"} ]
             },
             {
                 "tab":11,
-                "title":"Question 186 - 187",
+                "title":"186 - 187",
                 "sections" : [{key:"AdditionalInformation"}, {key:"Comments"}]
             }
         ];
