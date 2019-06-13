@@ -41,19 +41,19 @@
                         </a>
                     </li>
                     <li>
-                        <a translation-url  ng-href="http://bch.cbd.int/about/" ng-click="activeMenu='about'"
+                        <a translation-url  ng-href="https://bch.cbd.int/about/" ng-click="activeMenu='about'"
                         ng-class="{'active-menu' : activeMenu == 'about'}"> <i class="icon fa fa-question-circle  visible-xs "></i>
                             <span class="hidden-xs "> About</span>
                         </a>
                     </li>
                     <li>
-                        <a  translation-url href="http://bch.cbd.int/protocol" ng-click="activeMenu='protocol'"
+                        <a  translation-url href="https://bch.cbd.int/protocol" ng-click="activeMenu='protocol'"
                         ng-class="{'active-menu' : activeMenu == 'protocol'}">
                             <i class="icon fa fa-book visible-xs"></i><span class="hidden-xs">Protocol</span>
                         </a>
                     </li>
                     <li>
-                        <a translation-url  ng-href="search" ng-click="activeMenu='search'"
+                        <a translation-url  ng-href="https://bch.cbd.int/database/" ng-click="activeMenu='search'"
                         ng-class="{'active-menu' : activeMenu == 'search'}"> <i class="icon fa fa-search visible-xs "></i>
                             <span class="hidden-xs "> Search</span>
                         </a>
@@ -81,7 +81,7 @@
                             <li style="border:0!important;"> <a style="color:#111!important;font-size:16px;" ng-href="countries"> Overview - List all countries </a></li>
                             <hr> -->
                             <li  style="border:0!important;" ng-repeat="c in list = (countries | orderBy:'name' ) track by c.name.en" >
-                                <a style="color:#666!important;font-size:14px;" ng-href="http://bch.cbd.int/about/countryprofile.shtml?country={{c.code}}" >
+                                <a style="color:#666!important;font-size:14px;" ng-href="https://bch.cbd.int/about/countryprofile.shtml?country={{c.code}}" >
                                     <span class="bold" ng-class="{'color-party': c.isNPParty, 'color-grey':!c.isNPParty, 'color-inbetween': c.isNPInbetweenParty}">
                                         {{c.name | lstring:locale}}
                                         </span>
@@ -95,12 +95,12 @@
                         </a>
                     </li>
                     <li>
-                        <a translation-url  href="http://bch.cbd.int/onlineconferences/" ng-class="{'active-menu' : activeMenu == 'forums'}" ng-click="activeMenu='forums'">
+                        <a translation-url  href="https://bch.cbd.int/onlineconferences/" ng-class="{'active-menu' : activeMenu == 'forums'}" ng-click="activeMenu='forums'">
                             <i class="fa fa-comments visible-xs"></i><span class="hidden-xs">&nbsp;Forums</span>
                         </a>
                     </li>
                     <li>
-                        <a translation-url  href="http://bch.cbd.int/resources/" ng-class="{'active-menu' : activeMenu == 'resources'}" ng-click="activeMenu='resources'">
+                        <a translation-url  href="https://bch.cbd.int/resources/" ng-class="{'active-menu' : activeMenu == 'resources'}" ng-click="activeMenu='resources'">
                             <i class="fa fa-comments visible-xs"></i><span class="hidden-xs">&nbsp;Resources</span>
                         </a>
                     </li>
@@ -124,7 +124,7 @@
     <nav class="navbar navbar-breadcrumbs navbar-default navbar-static-top"  ng-hide="breadcrumbs.get().length == 1" >
             <div class="container-fluid container-breadcrumbs">
                 <div class="color-litegrey" >
-                        <a translation-url  href="http://www.cbd.int" class="margin-right-xs">CBD</a>
+                        <a translation-url  href="https://www.cbd.int" class="margin-right-xs">CBD</a>
                         <span ng-repeat="breadcrumb in breadcrumbs.get()" >
                             &nbsp;&nbsp;<i class="fa fa-chevron-right color-litegrey"></i>&nbsp;&nbsp;
                             <span ng-if="!breadcrumb.param">
