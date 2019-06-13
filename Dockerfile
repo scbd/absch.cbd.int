@@ -42,7 +42,7 @@ RUN mv -f /usr/tmp/i18n/en/* ./
 
 COPY package.json .npmrc ./
 
-RUN yarn install --flat --production
+RUN yarn install --production
 
 
 #copy touched files from Other UN lang version
