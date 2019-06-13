@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" app-version="<%=appVersion%>">
+<html lang="<%=preferredLanguage||'en'%>" app-version="<%=appVersion%>">
 
 <head>
     <base href="<%=baseUrl%>">
@@ -61,6 +61,7 @@
     <div class="device-size visible-lg" size="lg" style="height:0px;width:0px"></div>
 
     <script src="https://cdn.cbd.int/requirejs@2.2.0/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>
+    
     
     <script async src='https://www.google-analytics.com/analytics.js'></script>
     <script>
