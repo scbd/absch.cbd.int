@@ -2,8 +2,7 @@ define(['app', 'underscore', 'services/local-storage-service', 'components/scbd-
 
     app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 
     'localStorageService', 'Thesaurus', 'realm',
-        function($http, $rootScope, realm, storage, $filter, $q, 
-            localStorageService, thesaurus, realm) {
+        function($http, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus, realm) {
             return new function() {
 
                 var appName = realm.value.replace(/-.*/,'').toLowerCase();
@@ -47,14 +46,19 @@ define(['app', 'underscore', 'services/local-storage-service', 'components/scbd-
                         });
                 }
                 //==================================================================================
-                this.getCountries = function() {
+                this.getCountries = function(sort) {
 
                     var fromStorage = localStorageService.get('countries');
-                    if(fromStorage)//&& fromStorage.expiry < new date())
+                    if(fromStorage){//&& fromStorage.expiry < new date())
+                        if(sort){
+                            return $filter('orderBy')(fromStorage, sort)
+                        }
                         return fromStorage;
+                    }
 
+                    var sortField = sort||'name.en';
                     return $http.get('/api/v2013/countries', {
-                            cache: true, params : {s:{ 'name.en':1}}
+                            cache: true, params : {s:{ [sortField]:1}}
                         })
                         .then(function(response) {
                             var countries = _.map(response.data,formatCountry);

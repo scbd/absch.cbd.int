@@ -1,6 +1,6 @@
-define(['app', 'text!./bch-header.html','ng-breadcrumbs'], function (app, html) { 'use strict';
+define(['app', 'text!./bch-header.html','ng-breadcrumbs', 'js/common', 'components/scbd-angularjs-services/services/locale'], function (app, html) { 'use strict';
 
-    app.directive('bchHeader', ['$http', '$location','breadcrumbs', function ($http, $location, breadcrumbs) {
+    app.directive('bchHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q',  function (locale, $location, breadcrumbs, commonjs, $q) {
         return {
             restrict: 'E',
             template: html,
@@ -8,8 +8,10 @@ define(['app', 'text!./bch-header.html','ng-breadcrumbs'], function (app, html) 
 
                 $scope.breadcrumbs     = breadcrumbs;
                 
-                $http.get('/api/v2015/countries', {params: { f: { code:1, name:1 } }, cache:1 }).then(function(res){
-                    $scope.countries = res.data;
+                var sortField = 'name.'+(locale||'en');
+                $q.when(commonjs.getCountries(sortField))
+                .then(function(res){
+                    $scope.countries = res;
                 });
 
                 $scope.isEnterPressed = function($event){
