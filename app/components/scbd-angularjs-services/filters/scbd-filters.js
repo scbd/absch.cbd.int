@@ -432,6 +432,12 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
       };
   }]);
 
+  app.filter("encode", function(){
+    return function(val) {
+      return encodeURIComponent(val);
+    };
+  });
+
   function normalizeText(text) {
 
 		if(!text) return null;

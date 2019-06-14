@@ -8,7 +8,7 @@
             "dataUrl"      : "/api/v2017/national-reports-np-1",
             "infoBlockUrl"  : "views/report-analyzer/includes/npInterimNationalReport1.html",
             "year"          : "2016",
-            "deadline"      : "31-12-2016",
+            "deadline"      : "2016-12-31",
             "offlineFormats": [
                 {"lang": "en", "url":"http://www.cbd.int/abs/en/commonformats/NR-en.doc"},
                 {"lang": "fr", "url":"http://www.cbd.int/abs/fr/commonformats/NR-fr.doc"},
