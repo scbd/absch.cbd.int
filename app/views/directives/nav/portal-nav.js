@@ -1,36 +1,31 @@
-define(['app', 'text!views/directives/nav/portal-nav.html', 'underscore','ng-breadcrumbs','jquery', 'services/help-service', 'js/common'],
- function (app, template, _, showHelp, $) {
-app.directive('portalNav', function () {
+define(['app', 'text!views/directives/nav/portal-nav.html', 'ng-breadcrumbs',
+'services/help-service', 'js/common', 'components/scbd-angularjs-services/services/locale'],
+ function (app, template) {
+
+app.directive('portalNav', ['$scope','locale', '$q','breadcrumbs', 'helpService', 'commonjs',
+function ($scope, locale, $q, breadcrumbs, helpService, commonjs) {
     return {
-    restrict: 'EAC',
-    replace: true,
-    // transclude: true,
-    template: template,
-    // scope: {
-    //         uid: '@',
-    // },
-    link: ['$scope', '$q', '$element', function ($scope, $q, $element) {
-        
-    }]
-    , controller: ['$scope','$rootScope', '$q','$element','$http', '$filter','breadcrumbs', 'helpService', 'commonjs',
-            function ($scope, $rootScope, $q, $element, $http, $filter, breadcrumbs, helpService, commonjs) {
+        restrict: 'EAC',
+        replace: true,
+        template: template,
+        link: ['$scope', function ($scope) {
+            
+            var sortField = 'name.'+(locale||'en');
+            $q.when(commonjs.getCountries(sortField))
+            .then(function(res){
+                $scope.countries = res;
+            });
 
+            $scope.breadcrumbs     = breadcrumbs;
+            $scope.$root.pageTitle = { text: "" };
 
-        $q.when(commonjs.getCountries())
-                .then(function(data){
-                    $scope.countries = data;
-                })
+            $scope.showHelp = helpService.getHelp();
 
-      $scope.breadcrumbs     = breadcrumbs;
-      $scope.$root.pageTitle = { text: "" };
-
-      $scope.showHelp = helpService.getHelp();
-
-       $scope.toggleHelp = function(){
-           $scope.showHelp = !$scope.showHelp;
-           helpService.toggleHelp();
-       };
-
-      }]};//end controller
-  });
+            $scope.toggleHelp = function(){
+                $scope.showHelp = !$scope.showHelp;
+                helpService.toggleHelp();
+            };
+        }]
+    }
+  }]);
 });
