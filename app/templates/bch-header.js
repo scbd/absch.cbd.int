@@ -5,7 +5,7 @@ define(['app', 'text!./bch-header.html','ng-breadcrumbs', 'js/common', 'componen
             restrict: 'E',
             template: html,
             link: function($scope) {
-
+                $scope.locale = locale
                 $scope.breadcrumbs     = breadcrumbs;
                 
                 var sortField = 'name.'+(locale||'en');
