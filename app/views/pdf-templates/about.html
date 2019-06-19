@@ -1,0 +1,53 @@
+﻿<div ng-controller="aboutPDF">
+    <style>
+        blockquote {
+            background: #f9f9f9;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        blockquote>h4 {
+            color: #1FA65D;
+        }
+
+        p.list-title {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        #article-content img {
+            width: 100%
+        }
+
+        #link-content p {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <div class="container">
+        <div class="row" style="border-bottom:1px solid #999;">
+            <div class="col-xs-8" style="vertical-align: bottom!important;">
+                <h1 class="color-green">Guide to the ABS Clearing-House</h1>
+            </div>
+
+            <div class="col-xs-4">
+                <img class="pull-right" src="app/img/cbd-logo-green-en.svg" style="height:60px;" />
+            </div>
+        </div> 
+        <!-- <div class="row">
+            <div class="col-xs-12">
+                <div id="link-content" ng-bind-html="links.content | lstring:locale | toTrusted"></div>
+            </div>
+        </div> -->
+        
+            <div class="row">
+            <div class="col-xs-12">
+                    <div ng-repeat="article in articles track by $index"> 
+                            <br/>
+                            <h2 ng-bind-html="article.title | lstring:locale | toTrusted"></h2>
+                            <hr>
+                            <div ng-bind-html="article.content | lstring:locale | toTrusted"></div>
+                        </div>
+            </div>
+        </div>
+    </div>

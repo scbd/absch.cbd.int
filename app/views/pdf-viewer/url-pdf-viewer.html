@@ -1,5 +1,4 @@
-﻿<div ng-controller="pdfViewer" style="margin-left:10%;margin-right:10%">
-
+﻿<div ng-controller="urlPdfViewer" style="margin-left:10%;margin-right:10%">
     <style>
         pdfviewer canvas {
             margin: auto;
@@ -15,8 +14,8 @@
     <br>
     <div class="row">
         <div class="col-xs-12 col-md-9">
-            <h1 style="padding:0;margin:0;"><a ng-href="{{pdf.src}}">{{pdf.fileName|uppercase}}</a> </h1>
-
+            <h1 style="padding:0;margin:0;"><a class="color-black" ng-href="{{pdf.src}}">{{pdf.fileName|uppercase}}</a>
+            </h1>
             <div style="font-size:18px;">Language: <span style="font-weight:normal!important;"> | </span><span
                     style="font-weight:normal!important;" ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']">
                     <a ng-href="#" ng-click="loadLangPdf(lang)">{{lang}}</a> | </span>
@@ -27,11 +26,9 @@
                 <i class="fa fa-download"></i> Download
             </a>
         </div>
-
     </div>
     <br>
     <div class="row">
-
         <div class="col-md-12" style="border-right: 1px solid #ddd">
             <div class="file-viewer-preview file-preview">
                 <div style="margin-left:50%;margin-top:5%;" ng-if="loading">
@@ -45,6 +42,4 @@
             </div>
         </div>
     </div>
-</div>
-
 </div>
