@@ -50,8 +50,18 @@
     
     <iframe id="authenticationFrame" style="display:none"></iframe>
     <script>
-        var domain = document.location.hostname.replace(/[^\.]+\./, '');
-         if(domain=='localhost') domain = 'cbddev.xyz';
+        var domainRegex = /(?:.*\.)?([a-z]+\.[a-z]+)/;
+        var domain = document.location.hostname
+        if(domain=='localhost') 
+            domain = 'cbddev.xyz'
+        else if(/staging\.cbd\.int/.test(document.location.hostname))//if domain is on staging
+            domain = 'staging.cbd.int';
+        else{
+            var match = domain.match(domainRegex);
+            if(match && match.length == 2)
+                domain = match[1];
+        }
+
         document.getElementById('authenticationFrame').src = 'https://accounts.'+domain+'/app/authorize.html';
     </script>
     
@@ -83,7 +93,7 @@
             ga('set',    'hostname', window.location.hostname);
             ga('set',    'location', undefined);
         }
-        
+
         window.clearingHouseHost = '<%=clearingHouseHost%>';
         window.appVersion = document.documentElement.attributes['app-version'].value;
         window.lang = '<%=baseUrl%>'//.replace('/','')
