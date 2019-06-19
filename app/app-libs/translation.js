@@ -62,9 +62,9 @@ async function renderLanguageFile(req, res, next) {
     var options = { baseUrl: urlPreferredLang || (req.headers.base_url ||  (preferredLang ? ('/'+preferredLang+'/') : '/')),
                     appVersion       : global.app.version,
                     clearingHouseHost: process.env.CLEARINGHOUSE_HOST,
-                    preferredLanguage: preferredLang
+                    preferredLanguage: preferredLang,
+                    googleAnalyticsCode : process.env.GOOGLE_ANALYTICS_CODE
                 };
-    
     if(langFilepath){
         return res.render(langFilepath, options);
     } 

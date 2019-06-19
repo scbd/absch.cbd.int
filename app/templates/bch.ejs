@@ -77,13 +77,13 @@
             }
 
         });
-        if(domain == 'cbd.int'){
+        if(domain == 'cbd.int' && '<%=googleAnalyticsCode%>'!=''){
             window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-            ga('create', 'UA-1996573-11', 'auto');
+            ga('create', '<%=googleAnalyticsCode%>', 'auto');
             ga('set',    'hostname', window.location.hostname);
             ga('set',    'location', undefined);
         }
-
+        
         window.clearingHouseHost = '<%=clearingHouseHost%>';
         window.appVersion = document.documentElement.attributes['app-version'].value;
         window.lang = '<%=baseUrl%>'//.replace('/','')
