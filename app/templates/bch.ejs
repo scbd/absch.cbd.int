@@ -45,26 +45,7 @@
 
         <scbd-footer></scbd-footer>
     </div>
-    
-    <!-- LOGIC -->
-    
-    <iframe id="authenticationFrame" style="display:none"></iframe>
-    <script>
-        var domainRegex = /(?:.*\.)?([a-z]+\.[a-z]+)/;
-        var domain = document.location.hostname
-        if(domain=='localhost') 
-            domain = 'cbddev.xyz'
-        else if(/staging\.cbd\.int/.test(document.location.hostname))//if domain is on staging
-            domain = 'staging.cbd.int';
-        else{
-            var match = domain.match(domainRegex);
-            if(match && match.length == 2)
-                domain = match[1];
-        }
-
-        document.getElementById('authenticationFrame').src = 'https://accounts.'+domain+'/app/authorize.html';
-    </script>
-    
+        
     <div class="device-size visible-xs" size="xs" style="height:0px;width:0px"></div>
     <div class="device-size visible-sm" size="sm" style="height:0px;width:0px"></div>
     <div class="device-size visible-md" size="md" style="height:0px;width:0px"></div>
@@ -87,7 +68,7 @@
             }
 
         });
-        if(domain == 'cbd.int' && '<%=googleAnalyticsCode%>'!=''){
+        if('<%=googleAnalyticsCode%>'!=''){
             window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
             ga('create', '<%=googleAnalyticsCode%>', 'auto');
             ga('set',    'hostname', window.location.hostname);

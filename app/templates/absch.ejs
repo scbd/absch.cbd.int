@@ -99,24 +99,6 @@
         <!-- END: Actual animated container. -->
 
     </div>
-    <iframe   id="authenticationFrame" style="display:none"></iframe>
-    <script>
-
-        var domainRegex = /(?:.*\.)?([a-z]+\.[a-z]+)/;
-        var domain = document.location.hostname
-        if(domain=='localhost') 
-            domain = 'cbddev.xyz'
-        else if(/staging\.cbd\.int/.test(document.location.hostname))//if domain is on staging
-            domain = 'staging.cbd.int';
-        else{
-            var match = domain.match(domainRegex);
-            if(match && match.length == 2)
-                domain = match[1];
-        }
-
-        document.getElementById('authenticationFrame').src = 'https://accounts.'+domain+'/app/authorize.html';
-
-    </script>
     <div class="alert alert-info alert-dismissible lang-alert" ng-if="lang!='en'" style="margin-bottom:1px">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
          <strong>Please note that the translation of the ABS Clearing-House is in progress.</strong>
@@ -175,7 +157,7 @@
             }
 
         });
-        if(domain == 'cbd.int' && '<%=googleAnalyticsCode%>'!=''){
+        if('<%=googleAnalyticsCode%>'!=''){
             window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
             ga('create', '<%=googleAnalyticsCode%>', 'auto');
             ga('set',    'hostname', window.location.hostname);
