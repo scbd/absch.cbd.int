@@ -17,20 +17,22 @@
         .popover.right>.arrow:after {
             border-right-color: #d9534f;
         }
-        .cursor{
+
+        .cursor {
             cursor: pointer;
         }
-        .overview>tbody>tr>td{
-            padding:3px!important;
-            border:0;
+
+        .overview>tbody>tr>td {
+            padding: 3px !important;
+            border: 0;
         }
-        
     </style>
     <span register-top-menu></span>
     <div class="register-content card card-1-notrans">
-        
+
         <div ng-if="isBch" style="margin:10px;">
-            <h1 class="color-green bold" style="margin-bottom:30px;padding-top:15px;"  ng-bind-html="betaArticle.title | lstring:locale"></h1>
+            <h1 class="color-green bold" style="margin-bottom:30px;padding-top:15px;"
+                ng-bind-html="betaArticle.title | lstring:locale"></h1>
             <div ng-bind-html="betaArticle.content | lstring:locale | toTrusted"></div>
         </div>
 
@@ -43,17 +45,21 @@
             <div style="margin:10px 0 20px 0;">
 
                 <h4 style="margin-top:0; margin-bottom:0; padding:0 0 5px 0;border-bottom:1px solid #ddd;">
-                    <i class="fa fa-chevron-circle-down cursor" ng-show="!showProfileInfo" aria-hidden="true" ng-click="showProfileInfo=true"></i>
-                    <i class="fa fa-chevron-circle-up cursor" ng-show="showProfileInfo" aria-hidden="true" ng-click="showProfileInfo=false"></i>
+                    <i class="fa fa-chevron-circle-down cursor" ng-show="!showProfileInfo" aria-hidden="true"
+                        ng-click="showProfileInfo=true"></i>
+                    <i class="fa fa-chevron-circle-up cursor" ng-show="showProfileInfo" aria-hidden="true"
+                        ng-click="showProfileInfo=false"></i>
                     <span class="hidden-xs">Welcome </span>
                     <span class="color-black bold">{{user.name}}
                         <span ng-if="roles.isAbsPublishingAuthority" style="font-weight: normal;"> (Publishing
                             Authority)</span>
-                        <span ng-if="roles.isAbsNationalAuthorizedUser" style="font-weight: normal;"> (Authorized User)</span>
+                        <span ng-if="roles.isAbsNationalAuthorizedUser" style="font-weight: normal;"> (Authorized
+                            User)</span>
                     </span>
                 </h4>
 
-                <div class="row" style="background-color: #f9f9f9;border:1px solid #ddd; border-top: 0; margin:0px; padding:10px 0 10px 0; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px; "
+                <div class="row"
+                    style="background-color: #f9f9f9;border:1px solid #ddd; border-top: 0; margin:0px; padding:10px 0 10px 0; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px; "
                     ng-if="showProfileInfo">
                     <div class="col-md-6 cp-header">
                         <table>
@@ -96,28 +102,32 @@
                             <td>
                                 <span class="comma" ng-if="roles.isAbsNationalFocalPoint">
                                     ABS National Focal Point
-                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true"
+                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip"
+                                        data-html="true"
                                         data-title="The National Focal Point is responsible for liason with the Secretariat as well as to designate themselves or another user as the Publishing Authority (PA)."
                                         data-container="body"></span>
                                 </span>
 
                                 <span class="comma" ng-if="roles.isAbsPublishingAuthority">
                                     Publishing Authority (PA)
-                                    <span class="helpinfoInline fa fa-info-circle " data-toggle="tooltip" data-html="true"
+                                    <span class="helpinfoInline fa fa-info-circle " data-toggle="tooltip"
+                                        data-html="true"
                                         data-title="Each country can designate only one Publishing Authority (PA). The PA's job is to make information publically available by verifing and publishing records. A PA can also designate National Authorized Users (NAUs) who are allowed to submit draft records for their country."
                                         data-container="body"></span>
                                 </span>
 
                                 <span class="comma" ng-if="roles.isAbsNationalAuthorizedUser">
                                     National Authorized User (NAU)
-                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true"
+                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip"
+                                        data-html="true"
                                         data-title="National Authorized User (NAUs) can create draft national record  and submit them to the PA for approval."
                                         data-container="body"></span>
                                 </span>
 
                                 <span class="comma" ng-if="roles.isUser">
                                     Registered User
-                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip" data-html="true"
+                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip"
+                                        data-html="true"
                                         data-title="Regular users can create draft reference records and request their publication from the SCBD."
                                         data-container="body"></span>
                                 </span>
@@ -191,7 +201,8 @@
                         <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; ">
                             <span class="color-blue">National records</span>
                             <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
-                                data-html="true" data-title="National records contain information that is typically required to be reported as part of a Party’s obligations and must be approved by the Publishing Authority prior to being made publically available."
+                                data-html="true"
+                                data-title="National records contain information that is typically required to be reported as part of a Party’s obligations and must be approved by the Publishing Authority prior to being made publically available."
                                 data-container="body"></span>
                         </div>
 
@@ -202,132 +213,163 @@
                                 <tr>
                                     <td style="width:70px;">
                                         <div class="btn-group btn-group-xs" style="width:70px;" role="group">
-                                            <button type="button" class="btn btn-xs btn-default" ng-click="showTopRecords($event,'contact')">
-                                                <i class="fa fa-chevron-circle-down cursor" ng-class="{'fa-chevron-circle-down':!topRecords['contact'], 'fa-chevron-circle-up':topRecords['contact']}"
+                                            <button type="button" class="btn btn-xs btn-default"
+                                                ng-click="showTopRecords($event,'contact')">
+                                                <i class="fa fa-chevron-circle-down cursor"
+                                                    ng-class="{'fa-chevron-circle-down':!topRecords['contact'], 'fa-chevron-circle-up':topRecords['contact']}"
                                                     aria-hidden="true"></i>
-                                                <button type="button" class="btn btn-xs btn-default" ng-click="gotoNew($event,'contact')"><i
+                                                <button type="button" class="btn btn-xs btn-default"
+                                                    ng-click="gotoNew($event,'contact')"><i
                                                         class="fa fa-plus"></i></button>
-                                                <button type="button" class="btn btn-xs btn-default" ng-click="gotoList($event,'contact')"><i
+                                                <button type="button" class="btn btn-xs btn-default"
+                                                    ng-click="gotoList($event,'contact')"><i
                                                         class="fa fa-list"></i></button>
                                         </div>
                                     </td>
                                     <td style="min-width:180px!important;">
-                                        <a translation-url href="#" ng-click="gotoList($event,'contact')" class="color-darkgrey"
-                                            style="font-weight:500;">
+                                        <a translation-url href="#" ng-click="gotoList($event,'contact')"
+                                            class="color-darkgrey" style="font-weight:500;">
                                             National contacts (CON)</a>
 
                                     </td>
-                                    <td style="width:7%;" class="text-center hidden-xs"><a translation-url ng-href="/register/CON/status/published"
-                                            class="label label-success" ng-class="{'bg-litegrey': facets('contact','publish')===0}">{{facets('contact','publish')}}</a>
+                                    <td style="width:7%;" class="text-center hidden-xs"><a translation-url
+                                            ng-href="/register/CON/status/published" class="label label-success"
+                                            ng-class="{'bg-litegrey': facets('contact','publish')===0}">{{facets('contact','publish')}}</a>
                                     </td>
 
-                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/CON/status/drafts"
-                                            class="label label-default" ng-class="{'bg-litegrey': Math.max(0, facets('contact','draft') - facets('contact','request'))===0}">{{Math.max(0,
+                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
+                                            ng-href="/register/CON/status/drafts" class="label label-default"
+                                            ng-class="{'bg-litegrey': Math.max(0, facets('contact','draft') - facets('contact','request'))===0}">{{Math.max(0,
                                             facets('contact','draft') - facets('contact','request'))}}</a> </td>
 
-                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/CON/status/requests"
-                                            class="label label-danger" ng-class="{'bg-litegrey': facets('contact','request')===0}">{{facets('contact','request')}}</a>
+                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
+                                            ng-href="/register/CON/status/requests" class="label label-danger"
+                                            ng-class="{'bg-litegrey': facets('contact','request')===0}">{{facets('contact','request')}}</a>
 
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div ng-if="topRecords['contact']" style="position: relative;top:-5px;">
-                            <top-records schema="contact" top="10" style="padding-top:5px;" show-schema-name="false"></top-records>
+                            <top-records schema="contact" top="10" style="padding-top:5px;" show-schema-name="false">
+                            </top-records>
                         </div>
 
 
                         <div ng-repeat="schema in nationalSchemas">
                             <table class="overview table table-hover" style="width:100%;">
-                                <thead></thead>
                                 <tbody>
                                     <tr>
                                         <td style="width:70px;">
                                             <div class="btn-group btn-group-xs" style="width:70px;" role="group">
-                                                <button type="button" class="btn btn-xs btn-default" ng-click="showTopRecords($event,schema)">
-                                                    <i class="fa fa-chevron-circle-down cursor" ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
+                                                <button type="button" class="btn btn-xs btn-default"
+                                                    ng-click="showTopRecords($event,schema)">
+                                                    <i class="fa fa-chevron-circle-down cursor"
+                                                        ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
                                                         aria-hidden="true"></i>
-                                                    <button type="button" class="btn btn-xs btn-default" ng-click="gotoNew($event,schema)"><i
+                                                    <button type="button" class="btn btn-xs btn-default"
+                                                        ng-click="gotoNew($event,schema)"><i
                                                             class="fa fa-plus"></i></button>
-                                                    <button type="button" class="btn btn-xs btn-default" ng-click="gotoList($event,schema)"><i
+                                                    <button type="button" class="btn btn-xs btn-default"
+                                                        ng-click="gotoList($event,schema)"><i
                                                             class="fa fa-list"></i></button>
                                             </div>
                                         </td>
                                         <td style="min-width:180px!important;">
-                                            <a translation-url href="#" ng-click="gotoList($event,schema)" class="color-darkgrey"
-                                                style="font-weight:500;">
+                                            <a translation-url href="#" ng-click="gotoList($event,schema)"
+                                                class="color-darkgrey" style="font-weight:500;">
                                                 {{schema|schemaName}} ({{schema|urlSchemaShortName}})</a>
                                         </td>
-                                        <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/published"
-                                                class="label label-success" ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>
+                                        <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
+                                                ng-href="/register/{{schema|urlSchemaShortName}}/status/published"
+                                                class="label label-success"
+                                                ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>
                                         </td>
 
-                                        <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/drafts"
-                                                class="label label-default" ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}">{{Math.max(0,
+                                        <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
+                                                ng-href="/register/{{schema|urlSchemaShortName}}/status/drafts"
+                                                class="label label-default"
+                                                ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}">{{Math.max(0,
                                                 facets(schema,'draft') - facets(schema,'request'))}}</a> </td>
 
-                                        <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/requests"
-                                                class="label label-danger" ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a>
-                        </div>
-                        </td>
-                        </tr>
-                        </tbody>
-                        </table>
-                        <div ng-if="topRecords[schema]" style="width:100%">
-                            <top-records schema="{{schema}}" top="10" style="padding-top:5px;" show-schema-name="false"></top-records>
+                                        <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
+                                                ng-href="/register/{{schema|urlSchemaShortName}}/status/requests"
+                                                class="label label-danger"
+                                                ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div ng-if="topRecords[schema]" style="width:100%">
+                                <top-records schema="{{schema}}" top="10" style="padding-top:5px;"
+                                    show-schema-name="false">
+                                </top-records>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; ">
-                    <span class="color-orange"> Reference records
-                        <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
-                            data-html="true" data-title="Reference records contain information relevant to the Protocol's implemenation. This information can be made available by any registered user (including representatives of Governments, indigenous and local communities, academia, nongovernmental organizations, research institutions, business representatives, etc.). All reference records are validated by the Secretariat prior to being made publically available."
-                            data-container="body"></span>
-                    </span>
-                </div>
+                    <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; " ng-if="!isBch">
+                        <span class="color-orange"> Reference records
+                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
+                                data-html="true"
+                                data-title="Reference records contain information relevant to the Protocol's implemenation. This information can be made available by any registered user (including representatives of Governments, indigenous and local communities, academia, nongovernmental organizations, research institutions, business representatives, etc.). All reference records are validated by the Secretariat prior to being made publically available."
+                                data-container="body"></span>
+                        </span>
+                    </div>
 
-                <div ng-repeat="schema in referenceSchemas">
-                    <table class="overview table table-hover" style="width:100%;">
-                        <thead></thead>
-                        <tbody>
-                            <tr>
-                                <td style="width:70px;">
-                                    <div class="btn-group btn-group-xs" style="width:70px;" role="group">
-                                        <button type="button" class="btn btn-xs btn-default" ng-click="showTopRecords($event,schema)">
-                                            <i class="fa fa-chevron-circle-down cursor" ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
-                                                aria-hidden="true"></i>
-                                            <button type="button" class="btn btn-xs btn-default" ng-click="gotoNew($event,schema)"><i
-                                                    class="fa fa-plus"></i></button>
-                                            <button type="button" class="btn btn-xs btn-default" ng-click="gotoList($event,schema)"><i
-                                                    class="fa fa-list"></i></button>
-                                    </div>
-                                </td>
-                                <td style="min-width:180px!important;">
-                                    <a translation-url href="#" ng-click="gotoList($event,schema)" class="color-darkgrey"
-                                        style="font-weight:500;">
-                                        {{schema|schemaName}} ({{schema|urlSchemaShortName}})</a>
-                                </td>
-                                <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/published"
-                                        class="label label-success" ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>
-                                </td>
+                    <div ng-repeat="schema in referenceSchemas">
+                        <table class="overview table table-hover" style="width:100%;">
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <td style="width:70px;">
+                                        <div class="btn-group btn-group-xs" style="width:70px;" role="group">
+                                            <button type="button" class="btn btn-xs btn-default"
+                                                ng-click="showTopRecords($event,schema)">
+                                                <i class="fa fa-chevron-circle-down cursor"
+                                                    ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
+                                                    aria-hidden="true"></i>
+                                                <button type="button" class="btn btn-xs btn-default"
+                                                    ng-click="gotoNew($event,schema)"><i
+                                                        class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-xs btn-default"
+                                                    ng-click="gotoList($event,schema)"><i
+                                                        class="fa fa-list"></i></button>
+                                        </div>
+                                    </td>
+                                    <td style="min-width:180px!important;">
+                                        <a translation-url href="#" ng-click="gotoList($event,schema)"
+                                            class="color-darkgrey" style="font-weight:500;">
+                                            {{schema|schemaName}} ({{schema|urlSchemaShortName}})</a>
+                                    </td>
+                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
+                                            ng-href="/register/{{schema|urlSchemaShortName}}/status/published"
+                                            class="label label-success"
+                                            ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>
+                                    </td>
 
-                                <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/drafts"
-                                        class="label label-default" ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}">{{Math.max(0,
+                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
+                                            ng-href="/register/{{schema|urlSchemaShortName}}/status/drafts"
+                                            class="label label-default"
+                                            ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}">{{Math.max(0,
                                         facets(schema,'draft') - facets(schema,'request'))}}</a> </td>
 
-                                <td style="width:7%;" class="text-center  hidden-xs"><a translation-url ng-href="/register/{{schema|urlSchemaShortName}}/status/requests"
-                                        class="label label-danger" ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div ng-if="topRecords[schema]" style="width:100%">
-                        <top-records schema="{{schema}}" top="10" style="padding-top:5px;" show-schema-name="false"></top-records>
+                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
+                                            ng-href="/register/{{schema|urlSchemaShortName}}/status/requests"
+                                            class="label label-danger"
+                                            ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div ng-if="topRecords[schema]" style="width:100%">
+                            <top-records schema="{{schema}}" top="10" style="padding-top:5px;" show-schema-name="false">
+                            </top-records>
+                        </div>
                     </div>
+
                 </div>
-
             </div>
-        </div>
 
-        <!-- controller -->
+            <!-- controller -->
