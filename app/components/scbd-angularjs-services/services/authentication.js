@@ -123,7 +123,7 @@ define(['app', './apiUrl'], function(app) {
             else
                 pToken = undefined;
 
-            var authenticationFrame = $document.find('#authenticationFrame')[0];
+            return $q.when(authenticationFrameQ).then(function(authenticationFrame){
 
             if (authenticationFrame) {
 
@@ -140,6 +140,7 @@ define(['app', './apiUrl'], function(app) {
             if (email) {
                 $rootScope.lastLoginEmail = email;
             }
+            });
         }
 
         function checkTokenExpiration(authenticationToken){
