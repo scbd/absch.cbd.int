@@ -83,6 +83,9 @@
                 whenAsync('/register/admin/error-logs',               { templateUrl: 'views/register/admin/error-logs.html',         label:'Error Logs',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                 whenAsync('/register/admin/subscriptions',            { templateUrl: 'views/register/admin/subscriptions.html',      label:'Subscriptions',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
                 whenAsync('/register/admin/user-role-report',         { templateUrl: 'views/register/admin/user-role-report.html',   label:'user Role Report',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+
+                whenAsync('/register/admin/common-issues',         { templateUrl: 'views/register/admin/common-issues.html',   label:'Common issues',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
+
     
                 whenAsync('/oauth2/callback',             { templateUrl: 'views/oauth2/callback.html',          resolveController: true, resolveUser: true})
            
