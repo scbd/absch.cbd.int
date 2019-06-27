@@ -45,16 +45,7 @@
 
         <scbd-footer></scbd-footer>
     </div>
-    
-    <!-- LOGIC -->
-    
-    <iframe id="authenticationFrame" style="display:none"></iframe>
-    <script>
-        var domain = document.location.hostname.replace(/[^\.]+\./, '');
-         if(domain=='localhost') domain = 'cbddev.xyz';
-        document.getElementById('authenticationFrame').src = 'https://accounts.'+domain+'/app/authorize.html';
-    </script>
-    
+        
     <div class="device-size visible-xs" size="xs" style="height:0px;width:0px"></div>
     <div class="device-size visible-sm" size="sm" style="height:0px;width:0px"></div>
     <div class="device-size visible-md" size="md" style="height:0px;width:0px"></div>
@@ -77,9 +68,9 @@
             }
 
         });
-        if(domain == 'cbd.int'){
+        if('<%=googleAnalyticsCode%>'!=''){
             window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-            ga('create', 'UA-1996573-11', 'auto');
+            ga('create', '<%=googleAnalyticsCode%>', 'auto');
             ga('set',    'hostname', window.location.hostname);
             ga('set',    'location', undefined);
         }

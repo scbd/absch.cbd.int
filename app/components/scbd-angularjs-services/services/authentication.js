@@ -1,11 +1,39 @@
 define(['app', './apiUrl'], function(app) {
+    var ACCOUNTS_URL = (function(){
 
-    app.factory('apiToken', ["$q", "$rootScope", "$window", "$document", "apiUrl", function($q, $rootScope, $window, $document, apiUrl) {
+        var domainRegex = /(?:.*\.)?([a-z]+\.[a-z]+)/;
+        var domain = document.location.hostname
+        if(domain=='localhost') 
+            domain = 'cbddev.xyz'
+        else if(/staging\.cbd\.int/.test(document.location.hostname))//if domain is on staging
+            domain = 'staging.cbd.int';
+        else{
+            var match = domain.match(domainRegex);
+            if(match && match.length == 2)
+                domain = match[1];
+        }
+        
+        return 'https://accounts.'+domain;
 
-        var domain = document.location.hostname.replace(/^[^\.]+\./, '');
-        if(domain=='localhost') domain = 'cbddev.xyz';
+    })()
+
+    app.factory('apiToken', ["$q", "$rootScope", "$window", "$document", "$timeout", function($q, $rootScope, $window, $document, $timeout) {
+
         var pToken;
-        var ACCOUNTS_URL = apiUrl.devAccountsUrl() || 'https://accounts.'+domain;
+        var authenticationFrameQ = $q(function(resolve, reject){
+
+			var frame = $('<iframe src="'+ACCOUNTS_URL+'/app/authorize.html'+'" style="display:none"></iframe>');
+
+			$("head").prepend(frame);
+
+			frame.on("load", function(evt){
+				resolve(evt.target || evt.srcElement);
+			});
+
+			$timeout(function(){
+				reject('accounts is not available / call is made from an unauthorized domain');
+			}, 5000);
+		});
 
         //============================================================
         //
@@ -13,7 +41,7 @@ define(['app', './apiUrl'], function(app) {
         //============================================================
         function getToken() {
 
-            var authenticationFrame = $document.find('#authenticationFrame')[0];
+            return $q.when(authenticationFrameQ).then(function(authenticationFrame){
 
             if (!authenticationFrame) {
                 pToken = pToken || null;
@@ -78,6 +106,7 @@ define(['app', './apiUrl'], function(app) {
             }), ACCOUNTS_URL);
 
             return pToken;
+        });
         }
 
         //============================================================
@@ -94,7 +123,7 @@ define(['app', './apiUrl'], function(app) {
             else
                 pToken = undefined;
 
-            var authenticationFrame = $document.find('#authenticationFrame')[0];
+            return $q.when(authenticationFrameQ).then(function(authenticationFrame){
 
             if (authenticationFrame) {
 
@@ -111,6 +140,7 @@ define(['app', './apiUrl'], function(app) {
             if (email) {
                 $rootScope.lastLoginEmail = email;
             }
+            });
         }
 
         function checkTokenExpiration(authenticationToken){

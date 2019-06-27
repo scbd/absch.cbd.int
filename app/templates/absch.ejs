@@ -99,16 +99,6 @@
         <!-- END: Actual animated container. -->
 
     </div>
-    <iframe   id="authenticationFrame" style="display:none"></iframe>
-    <script>
-
-        var domain = document.location.hostname.replace(/[^\.]+\./, '');
-
-         if(domain=='localhost') domain = 'cbddev.xyz';
-
-        document.getElementById('authenticationFrame').src = 'https://accounts.'+domain+'/app/authorize.html';
-
-    </script>
     <div class="alert alert-info alert-dismissible lang-alert" ng-if="lang!='en'" style="margin-bottom:1px">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
          <strong>Please note that the translation of the ABS Clearing-House is in progress.</strong>
@@ -167,9 +157,9 @@
             }
 
         });
-        if(domain == 'cbd.int'){
+        if('<%=googleAnalyticsCode%>'!=''){
             window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-            ga('create', 'UA-1996573-11', 'auto');
+            ga('create', '<%=googleAnalyticsCode%>', 'auto');
             ga('set',    'hostname', window.location.hostname);
             ga('set',    'location', undefined);
         }
