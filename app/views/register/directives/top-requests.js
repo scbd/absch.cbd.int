@@ -31,11 +31,10 @@
                  if ($scope.user.isAuthenticated) {
                     $scope.roles = {
                         is                       : roleService.is.bind(roleService),
-                        isAbsPublishingAuthority : roleService.isAbsPublishingAuthority(),
-                        isAbsNationalFocalPoint  : roleService.isAbsNationalFocalPoint(),
-                        isAbsAdministrator       : roleService.isAbsAdministrator(),
-                        isAdministrator          : roleService.isAdministrator(),
-                        isAbsNationalAuthorizedUser : roleService.isAbsNationalAuthorizedUser(),
+                        isPublishingAuthority : roleService.isPublishingAuthority(),
+                        isNationalFocalPoint  : roleService.isNationalFocalPoint(),
+                        isAdministrator       : roleService.isAdministrator(),
+                        isNationalAuthorizedUser : roleService.isNationalAuthorizedUser(),
                         isUser                      : roleService.isUser()
                     };
                 }
@@ -89,7 +88,7 @@
 
                     var expired = moment.utc(new Date()).subtract("12", "weeks");
 
-                    if((roleService.isAbsPublishingAuthority() ||  roleService.isAbsNationalFocalPoint()) && $rootScope.user.government ){
+                    if((roleService.isPublishingAuthority() ||  roleService.isNationalFocalPoint()) && $rootScope.user.government ){
                         queries.$and.push({$or : [
                             {"createdBy": $rootScope.user.userID}, 
                             {"activities.assignedTo": $rootScope.user.userID},
@@ -112,7 +111,7 @@
 					//
 					//==================================================
 					$scope.isPA = function(){
-						return roleService.isAbsPublishingAuthority() 
+						return roleService.isPublishingAuthority() 
                     };
                     $scope.gotoRequest = function(type, id) {
                         $location.url('/register/'+ $filter("urlSchemaShortName")(type)+'/'+id+'/view');

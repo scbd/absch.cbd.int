@@ -26,7 +26,7 @@ define(['angular', 'app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate
 
 
           $scope.canEdit = function () {
-            return commonjs.isAbsAdministrator();
+            return commonjs.isAdministrator();
           }
           $scope.loadGlossarys = function () {
             var params = {};

@@ -55,9 +55,9 @@ define(['app',
                     
 
                     if ($scope.user.government) {
-                        if (roleService.isAbsPublishingAuthority() ||
-                            roleService.isAbsNationalAuthorizedUser() ||
-                            roleService.isAbsNationalFocalPoint()) {
+                        if (roleService.isPublishingAuthority() ||
+                            roleService.isNationalAuthorizedUser() ||
+                            roleService.isNationalFocalPoint()) {
 
                             $scope.showSystemAlerts = true;
                             var query = {

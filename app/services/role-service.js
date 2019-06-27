@@ -32,18 +32,15 @@ define(['app', 'underscore', './app-config-service'], function (app, _) { 'use s
 			this.isAdministrator = function() {
 				return this.isUserInRoles(realm.getRole('administrator'));
 			}
-			this.isAbsAdministrator = function() {
-				return this.isUserInRoles(realm.getRole('administrator'));
-			}
 
-			this.isAbsPublishingAuthority = function() {
+			this.isPublishingAuthority = function() {
 				return this.isUserInRoles(realm.getRole('publishingAuthorities'));
 			}
-			this.isAbsNationalAuthorizedUser = function() {
+			this.isNationalAuthorizedUser = function() {
 				return this.isUserInRole(realm.getRole('nationalAuthorizedUser'));
 			}
 
-			this.isAbsNationalFocalPoint = function() {
+			this.isNationalFocalPoint = function() {
 				return this.isUserInRoles(realm.getRole('nationalFocalPoint'));
 			}
 
@@ -54,15 +51,14 @@ define(['app', 'underscore', './app-config-service'], function (app, _) { 'use s
 
 			this.isAnyOtherRoleThanIAC = function() {
 
-				return this.isAbsPublishingAuthority() ||
-					this.isAbsNationalAuthorizedUser() ||
-					this.isAbsNationalFocalPoint() ||
-					this.isAbsAdministrator() ||
+				return this.isPublishingAuthority() ||
+					this.isNationalAuthorizedUser() ||
+					this.isNationalFocalPoint() ||
 					this.isAdministrator()
 
 			}
 			this.hasAbsRoles = function() {
-				return this.isAbsAdministrator() || this.isAnyOtherRoleThanIAC() || this.isIAC();
+				return this.isAdministrator() || this.isAnyOtherRoleThanIAC() || this.isIAC();
 			}
 		}
 

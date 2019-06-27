@@ -4,8 +4,7 @@ define(['app','views/directives/help-directive', '/app/services/role-service'], 
 
 
 		$scope.isAdmin = function(){
-				return roleService.isAbsAdministrator() ||
-				roleService.isAdministrator()
+				return roleService.isAdministrator();
 
 			};
 

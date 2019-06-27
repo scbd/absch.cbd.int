@@ -65,11 +65,10 @@ define(['app', 'underscore', 'views/forms/view/record-loader.directive',
 
             $scope.showButton = function () {
 
-                return roleService.isAbsPublishingAuthority() ||
-                    roleService.isAbsNationalAuthorizedUser() ||
-                    roleService.isAbsNationalFocalPoint() ||
-                    roleService.isabschiac() ||
-                    roleService.isAbsAdministrator() ||
+                return roleService.isPublishingAuthority() ||
+                    roleService.isNationalAuthorizedUser() ||
+                    roleService.isNationalFocalPoint() ||
+                    roleService.isIAC() ||
                     roleService.isAdministrator() ||
                     _.contains(['resource', 'modelContractualClause', 'communityProtocol', 'capacityBuildingResource', 'capacityBuildingInitiative'], $scope.schema);
 
@@ -77,8 +76,7 @@ define(['app', 'underscore', 'views/forms/view/record-loader.directive',
 
             $scope.askDelete = function (record) {
 
-                if (!(roleService.isAbsPublishingAuthority() || roleService.isAbsNationalFocalPoint() ||
-                    roleService.isAbsAdministrator() || roleService.isAdministrator())) {
+                if (!(roleService.isPublishingAuthority() || roleService.isNationalFocalPoint() || roleService.isAdministrator())) {
                     $scope.cantDelete = false;
                     $scope.iacCantDelete = true;
                     $scope.recordToDelete = "0";
