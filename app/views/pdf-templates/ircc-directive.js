@@ -9,12 +9,13 @@
             scope: {
                 documentId: "="
             },
-            controller: ['$scope', '$http', '$location', '$filter',
-                function($scope, $http, $location, $filter) {
+            controller: ['$scope', '$http', '$location', '$filter', 'realm',
+                function($scope, $http, $location, $filter, realm) {
     
                     var sLocale = "en";
                     $scope.locale = sLocale;
-    
+                    $scope.realm = realm;
+                    
                     $scope.load = function() {
                         $http.get('/api/v2013/documents/' + $scope.documentId, {}).then(function(res) {
     

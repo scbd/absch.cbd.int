@@ -1,12 +1,12 @@
 define(['app', 'services/app-config-service', './ircc-directive',
 'css!/app/css/print-friendly.css', 'css!/app/css/pdf-communique.css'], function (app) {
 
-	app.controller('cpcPdfView', ['$scope','$http','$sce','$filter','$q', '$routeParams',
-	 function($scope,$http, $sce, $filter, $q, $routeParams) {
+	app.controller('cpcPdfView', ['$scope','$http','$sce','$filter','$q', '$routeParams', 'realm',
+	 function($scope,$http, $sce, $filter, $q, $routeParams, realm) {
 
 		var sLocale      = "en";
 		$scope.locale = sLocale;
-
+		$scope.realm = realm;
 		var params = {};
 		params.identifier = $routeParams.documentId;
 		if (params.identifier && /^absch/.test(params.identifier.toLowerCase())){
