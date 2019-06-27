@@ -30,8 +30,6 @@ function (app, _, moment, angular) {
                 text: ""
             };
 
-            //html body attributes lang
-            $scope.lang = locale;
             //set default moment lang
             var lang = locale;
             if (lang == 'zh')

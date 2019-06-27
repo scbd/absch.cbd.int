@@ -43,7 +43,7 @@ app.all('/api/*', (req, res) => proxy.web(req, res, { target: apiUrl, changeOrig
 
 app.use(require('./app/app-libs/prerender')); // set env PRERENDER_SERVICE_URL
 
-app.get('/?:lang(ar|en|es|fr|ru|zh)?/*', 
+app.get('/?:lang(ar|en|es|fr|ru|zh)?/?*', 
     function(req, res, next){
         global.app.version = appVersion;
         res.setHeader('Cache-Control', 'public, max-age=0');    
