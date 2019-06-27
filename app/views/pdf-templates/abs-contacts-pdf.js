@@ -5,7 +5,7 @@ define(['app', 'services/app-config-service', 'css!/app/css/print-friendly.css',
 
         var sLocale = "en";
         $scope.locale = sLocale;
-
+        $scope.realm = realm;
         var realm = realm.value;
         var schemaQuery = '';
         $scope.schema = $routeParams.schema;
