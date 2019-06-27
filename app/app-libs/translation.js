@@ -47,23 +47,18 @@ async function renderLanguageFile(req, res, next) {
     var urlPreferredLang;
    
     if(req.params.lang)
-      urlPreferredLang = ('/'+req.params.lang+'/');
-    else{ //temp because the above regex does not work for absch.cbd.int/fr case
-         var lang = _.first(_.values(_.omitBy(req.params, _.isNil)))
-         var langRegex = /^(ar|en|es|fr|ru|zh)$/
-         if(langRegex.test(lang))
-             urlPreferredLang = ('/'+lang+'/')
-    } 
+      urlPreferredLang = req.params.lang;
    
     req.url = `/templates/${process.env.CLEARINGHOUSE}.ejs`;
  
     var preferredLang = getPreferredLanguage(req);
     var langFilepath = await getLanguageFile(req, preferredLang);
-    var options = { baseUrl: urlPreferredLang || (req.headers.base_url ||  (preferredLang ? ('/'+preferredLang+'/') : '/')),
-                    appVersion       : global.app.version,
-                    clearingHouseHost: process.env.CLEARINGHOUSE_HOST,
-                    preferredLanguage: preferredLang,
-                    googleAnalyticsCode : process.env.GOOGLE_ANALYTICS_CODE
+    var options = { 
+                    baseUrl            : ('/' + (urlPreferredLang || preferredLang || '') + '/').replace("//", '/'),
+                    appVersion         : global.app.version,
+                    clearingHouseHost  : process.env.CLEARINGHOUSE_HOST,
+                    preferredLanguage  : preferredLang||'en',
+                    googleAnalyticsCode: process.env.GOOGLE_ANALYTICS_CODE
                 };
     if(langFilepath){
         return res.render(langFilepath, options);

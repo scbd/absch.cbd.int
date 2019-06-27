@@ -2,10 +2,11 @@
 
 if(/Safari/.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)) { console.log = function(){}; }
 var cdnHost = 'https://cdn.cbd.int/';
+var nameToUrl = require.s.contexts._.nameToUrl;
 
 require.config({
     waitSeconds: 120,
-    baseUrl : (window.lang||'')+'app/',
+    baseUrl : '/app/',
     'paths': {
         'angular'                   : cdnHost + 'angular@1.7.4/angular.min',
         'angular-route'             : cdnHost + 'angular-route@1.7.4/angular-route.min',
@@ -99,5 +100,14 @@ require.config({
     }
 });
 
+require.s.contexts._.nameToUrl = function (moduleName, ext, skipExt) {
+
+    var url = nameToUrl(moduleName, ext, skipExt);
+    if(/^\//.test(url) && (url.indexOf('.html')>0 || url.indexOf('.json')>0)) {
+            url = '/'+window.lang + url;
+    }
+
+    return url;
+}
 if(window.appTemplate)
     require([window.appTemplate])

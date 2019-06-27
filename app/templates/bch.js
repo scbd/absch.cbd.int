@@ -38,9 +38,6 @@ define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
             
             angular.element($window).on('resize', updateSize);
 
-
-            //html body attributes lang
-            $scope.lang = locale;
             //set default moment lang
             var lang = locale;
             if (lang == 'zh')

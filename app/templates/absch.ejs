@@ -26,7 +26,7 @@
     <![endif]-->
 
 </head>
-<body ng-controller="TemplateController" id="top" lang="{{lang}}">
+<body ng-controller="TemplateController" id="top" lang="<%=preferredLanguage||'en'%>">
     <span id="appBaseUrl" style="display:none"><%=baseUrl%></span>
     <div class="m-app-loading" ng-animate-children>
         <!--
@@ -166,7 +166,7 @@
 
         window.clearingHouseHost = '<%=clearingHouseHost%>';
         window.appVersion = document.documentElement.attributes['app-version'].value;
-        window.lang = '<%=baseUrl%>'//.replace('/','')
+        window.lang = '<%=preferredLanguage%>'//.replace('/','')
     </script>
 
 </body>

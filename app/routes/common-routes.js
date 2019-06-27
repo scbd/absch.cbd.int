@@ -4,7 +4,8 @@
 'components/scbd-angularjs-services/services/main'], function (require, app, _) { 'use strict';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
-    
+    var lang    = window.lang;
+
     app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         
         $locationProvider.html5Mode(true);
@@ -201,13 +202,14 @@
     function whenAsync(path, route) {
 
         route = route || {};
+        var localBaseUrl = '/' + lang + baseUrl;
 
         if(route.templateUrl && !/^\//.test(route.templateUrl)) {
-            route.templateUrl = baseUrl+route.templateUrl;
+            route.templateUrl = localBaseUrl+route.templateUrl;
         }
         
         if(!route.controller && route.resolveController) { // Legacy
-            var module = route.templateUrl.replace(new RegExp('^'+baseUrl.replace(/\//g, '\\/')), '').replace(/\.html$/, '');
+            var module = route.templateUrl.replace(new RegExp('^'+localBaseUrl.replace(/\//g, '\\/')), '').replace(/\.html$/, '');
             route.controller = importQ(module);
         }
         
