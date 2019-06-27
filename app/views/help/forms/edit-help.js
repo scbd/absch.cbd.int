@@ -20,7 +20,7 @@ define(['app', 'underscore', 'ngMaterial', 'ngAria', 'angular-animate', 'compone
 					}
 					
 					$scope.canEdit = function(){						
-						return commonjs.isAbsAdministrator();												
+						return commonjs.isAdministrator();												
 					}
 					
 					$scope.options = {

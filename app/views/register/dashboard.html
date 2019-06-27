@@ -51,9 +51,9 @@
                         ng-click="showProfileInfo=false"></i>
                     <span class="hidden-xs">Welcome </span>
                     <span class="color-black bold">{{user.name}}
-                        <span ng-if="roles.isAbsPublishingAuthority" style="font-weight: normal;"> (Publishing
+                        <span ng-if="roles.isPublishingAuthority" style="font-weight: normal;"> (Publishing
                             Authority)</span>
-                        <span ng-if="roles.isAbsNationalAuthorizedUser" style="font-weight: normal;"> (Authorized
+                        <span ng-if="roles.isNationalAuthorizedUser" style="font-weight: normal;"> (Authorized
                             User)</span>
                     </span>
                 </h4>
@@ -100,7 +100,7 @@
                                 <label>Role(s):</label>
                             </td>
                             <td>
-                                <span class="comma" ng-if="roles.isAbsNationalFocalPoint">
+                                <span class="comma" ng-if="roles.isNationalFocalPoint">
                                     ABS National Focal Point
                                     <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip"
                                         data-html="true"
@@ -108,7 +108,7 @@
                                         data-container="body"></span>
                                 </span>
 
-                                <span class="comma" ng-if="roles.isAbsPublishingAuthority">
+                                <span class="comma" ng-if="roles.isPublishingAuthority">
                                     Publishing Authority (PA)
                                     <span class="helpinfoInline fa fa-info-circle " data-toggle="tooltip"
                                         data-html="true"
@@ -116,7 +116,7 @@
                                         data-container="body"></span>
                                 </span>
 
-                                <span class="comma" ng-if="roles.isAbsNationalAuthorizedUser">
+                                <span class="comma" ng-if="roles.isNationalAuthorizedUser">
                                     National Authorized User (NAU)
                                     <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip"
                                         data-html="true"
@@ -132,7 +132,7 @@
                                         data-container="body"></span>
                                 </span>
 
-                                <span class="comma" ng-if="roles.isAbsAdministrator">
+                                <span class="comma" ng-if="roles.isAdministrator">
                                     <strong class="color-pink">ABSCH Admin</strong>
                                 </span>
 

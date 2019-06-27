@@ -269,7 +269,7 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
 
                 $scope.isPublishingAuthority = function (entity) {
                     return entity && entity.workingDocumentLock &&
-                        (roleService.isAbsPublishingAuthority() || roleService.isAbsNationalFocalPoint());
+                        (roleService.isPublishingAuthority() || roleService.isNationalFocalPoint());
                 };
                 //============================================================
                 //
@@ -305,11 +305,10 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
 
                 $scope.showAddButton = function () {
 
-                    return roleService.isAbsPublishingAuthority() ||
-                        roleService.isAbsNationalAuthorizedUser() ||
-                        roleService.isAbsNationalFocalPoint() ||
+                    return roleService.isPublishingAuthority() ||
+                        roleService.isNationalAuthorizedUser() ||
+                        roleService.isNationalFocalPoint() ||
                         roleService.isIAC() ||
-                        roleService.isAbsAdministrator() ||
                         roleService.isAdministrator() ||
                         _.contains(['contact', 'resource', 'modelContractualClause', 'communityProtocol', 'capacityBuildingResource', 'capacityBuildingInitiative'], $scope.schema);
 

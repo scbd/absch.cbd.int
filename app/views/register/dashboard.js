@@ -32,11 +32,10 @@ function(app, _, ng) {
             if ($scope.user.isAuthenticated) {
                 $scope.roles = {
                     is                       : roleService.is.bind(roleService),
-                    isAbsPublishingAuthority : roleService.isAbsPublishingAuthority(),
-                    isAbsNationalFocalPoint  : roleService.isAbsNationalFocalPoint(),
-                    isAbsAdministrator       : roleService.isAbsAdministrator(),
-                    isAdministrator          : roleService.isAdministrator(),
-                    isAbsNationalAuthorizedUser : roleService.isAbsNationalAuthorizedUser(),
+                    isPublishingAuthority : roleService.isPublishingAuthority(),
+                    isNationalFocalPoint  : roleService.isNationalFocalPoint(),
+                    isAdministrator       : roleService.isAdministrator(),
+                    isNationalAuthorizedUser : roleService.isNationalAuthorizedUser(),
                     isUser                      : roleService.isUser()
                 };
 

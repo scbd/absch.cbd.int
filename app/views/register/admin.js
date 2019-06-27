@@ -7,8 +7,7 @@ define(['app',
 
             if ($rootScope.user.isAuthenticated) {
                 $scope.roles = {
-                    isAbsAdministrator       : roleService.isAbsAdministrator(),
-                    isAdministrator          : roleService.isAdministrator()
+                    isAdministrator       : roleService.isAdministrator()
                 };
                
             }

@@ -128,8 +128,7 @@ define(['app', 'underscore','text!views/directives/task-id-directive.html',
 					//
 					//==================================================
 					$scope.isAdmin = function(){
-						return roleService.isAbsAdministrator() ||
-						roleService.isAdministrator()
+						return roleService.isAdministrator();
 					};
 					//==================================================
 					//

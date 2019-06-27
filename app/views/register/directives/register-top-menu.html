@@ -48,10 +48,10 @@
                  <span ng-if="isABS"> Notifications </span>
                  <span ng-if="isBCH"> Alerts </span>
                 </a></li>
-            <li ng-if="user.government || roles.isAbsAdministrator || roles.isAdministrator"><a translation-url  ng-class="{'tabactivated':path.indexOf('national-users')>0}" href="/register/national-users"> User Management </a></li>
+            <li ng-if="user.government || roles.isAdministrator"><a translation-url  ng-class="{'tabactivated':path.indexOf('national-users')>0}" href="/register/national-users"> User Management </a></li>
             <li><a translation-url  href="/register/user-preferences" ng-class="{'tabactivated':path.indexOf('user-preferences') > 0}"> Preferences </a></li>
-            <li ng-if="roles.isAbsAdministrator || roles.isAdministrator"><a translation-url  href="/register/admin" class="bg-pink linkDark"><span class="color-white "> ADMIN </span></a></li>
-            <!--<li ng-if="user.government || roles.isAbsAdministrator || roles.isAdministrator"><a translation-url  ng-class="{'tabactivated':path.indexOf('stats')>0}" href="/register/stats"> Country Statistics <span class="label label-danger">New</span></a> </li>-->
+            <li ng-if="roles.isAdministrator"><a translation-url  href="/register/admin" class="bg-pink linkDark"><span class="color-white "> ADMIN </span></a></li>
+            <!--<li ng-if="user.government || roles.isAdministrator"><a translation-url  ng-class="{'tabactivated':path.indexOf('stats')>0}" href="/register/stats"> Country Statistics <span class="label label-danger">New</span></a> </li>-->
         </ul>
     </div>
 
@@ -67,10 +67,10 @@
                      <span ng-if="isABS"> Notifications </span>
                      <span ng-if="isBCH"> Alerts </span>
                     </a></li>
-                <li ng-if="user.government || roles.isAbsAdministrator || roles.isAdministrator"><a translation-url  ng-class="{'tabactivated':path.indexOf('national-users')>0}" href="/register/national-users"> User Management </a></li>
+                <li ng-if="user.government || roles.isAdministrator"><a translation-url  ng-class="{'tabactivated':path.indexOf('national-users')>0}" href="/register/national-users"> User Management </a></li>
                 <li><a translation-url  href="/register/user-preferences" ng-class="{'tabactivated':path.indexOf('user-preferences') > 0}"> Preferences </a></li>
-                <li ng-if="roles.isAbsAdministrator || roles.isAdministrator"><a translation-url  href="/register/admin" class="bg-pink linkDark"><span class="color-white "> ADMIN </span></a></li>
-                <!--<li ng-if="user.government || roles.isAbsAdministrator || roles.isAdministrator"><a translation-url  ng-class="{'tabactivated':path.indexOf('stats')>0}" href="/register/stats"> Country Statistics <span class="label label-danger">New</span></a> </li>-->
+                <li ng-if="roles.isAdministrator"><a translation-url  href="/register/admin" class="bg-pink linkDark"><span class="color-white "> ADMIN </span></a></li>
+                <!--<li ng-if="user.government || roles.isAdministrator"><a translation-url  ng-class="{'tabactivated':path.indexOf('stats')>0}" href="/register/stats"> Country Statistics <span class="label label-danger">New</span></a> </li>-->
         </ul>
       </div>
     </div>

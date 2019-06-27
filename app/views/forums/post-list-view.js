@@ -26,8 +26,7 @@ define(['app', 'underscore','ng-breadcrumbs', 'cbd-forums',
         });
 
         $scope.isAdmin = function(){
-            return roleService.isAbsAdministrator() ||
-            roleService.isAdministrator()
+            return roleService.isAdministrator();
 
         }
 

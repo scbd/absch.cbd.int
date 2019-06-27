@@ -12,8 +12,7 @@ define(['app', "text!views/register/directives/register-top-menu.html",
             link: function($scope, element, attrs) {
 
                 $scope.roles = {
-                    isAdministrator: roleService.isAdministrator(),
-                    isAbsAdministrator: roleService.isAbsAdministrator()
+                    isAdministrator: roleService.isAdministrator()
                 };
                 $scope.user = $rootScope.user;
                 $scope.isBCH = realm.is('BCH');
@@ -21,7 +20,7 @@ define(['app', "text!views/register/directives/register-top-menu.html",
                 $scope.path = $location.absUrl();
                 $scope.isPA = false;
                     
-            //    if(roleService.isAbsPublishingAuthority() && !$scope.pendingCount ){
+            //    if(roleService.isPublishingAuthority() && !$scope.pendingCount ){
             //         $scope.isPA = true;
             //         var expired = moment.utc(new Date()).subtract("12", "weeks");
             //         var query = []; 
