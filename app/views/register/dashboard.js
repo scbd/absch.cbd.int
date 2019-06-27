@@ -1,13 +1,14 @@
 define(['app', 'underscore', 'angular', 'services/articles-service', 
  'services/role-service', 'services/app-config-service',
- 'views/register/directives/register-top-menu', 'toastr','components/scbd-angularjs-services/services/main', 'views/register/directives/top-records', 'views/register/directives/top-requests'],
+ 'views/register/directives/register-top-menu', 'toastr','components/scbd-angularjs-services/services/main', 
+ 'views/register/directives/top-records', 'views/register/directives/top-requests', 'ngDialog'],
 function(app, _, ng) {
     "use strict";
     return ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
-                    "$routeParams", '$location', "$filter", "$http", "$timeout", 'toastr', 'appConfigService',
+                    "$routeParams", '$location', "$filter", "ngDialog", "$timeout", 'toastr', 'appConfigService',
                     'IWorkflows',
         function($rootScope, $scope, storage, roleService, articlesService, realm, $q, $routeParams, 
-                $location, $filter, $http, $timeout, toastr, appConfigService, IWorkflows) {
+                $location, $filter, ngDialog, $timeout, toastr, appConfigService, IWorkflows) {
             
             $scope.Math             = window.Math;
             $scope.nationalSchemas  = _.without(appConfigService.nationalSchemas, 'contact', 'focalPoint');
@@ -67,6 +68,27 @@ function(app, _, ng) {
                 }
                 else return 0;
             };
+
+            $scope.showUserRoles = function(){
+                var user = $scope.user;
+                ngDialog.open({
+                    name     : 'rolesDialog',
+                    className : 'ngdialog-theme-default',
+                    template : 'rolesDialog',
+                    controller : ['$scope', '$http', function($scope, $http){
+                        var roleQuery = {roles : user.roles };
+                        $http.get('/api/v2013/roles' , {params : {q : roleQuery}})
+                        .then(function(data){
+                            $scope.userRoles = data.data;
+                        })
+
+                        $scope.closeDialog = function(){
+                            ngDialog.close();
+                        }
+                    }]
+                })
+
+            }
 
             function init(){
                 $scope.isNationalUser = roleService.hasAbsRoles();
