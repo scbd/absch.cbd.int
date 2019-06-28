@@ -47,9 +47,14 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost
                     return realmRe.test(realmConfig.realm);
                 },
 
-                getRole : function(roleName) {
-                    
-                    var roles = realmConfig.roles[patchRoleName(roleName)];
+                getRole : function(roleName, schema) {
+                    var patchedRoleName = patchRoleName(roleName);
+                    var roles;
+
+                    if(schema)
+                        roles = realmConfig.schemas[schema][patchedRoleName]
+
+                    roles = roles || realmConfig.roles[patchedRoleName];
                     
                     if(!roles)
                         console.warn(roleName + ' role is not configured for realm ' + realmConfig.realm + ', please update realm-configuration');
@@ -57,8 +62,20 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost
                     return roles || [roleName];
                 },
                 
-                nationalRoles : function() {
-                    return _(realmConfig.roles).values().flatten().compact().uniq().without('User', 'user').value();
+                nationalRoles : function(skipSchemaRoles) {
+                    return _(skipSchemaRoles ? [] : this.nationalSchemaRoles())
+                            .union(_(realmConfig.roles).values().value())
+                            .flatten().compact().uniq().without('User', 'user').value();
+                },
+                nationalSchemaRoles : function(schema){
+                    var schemas = realmConfig.schemas[schema] ? [realmConfig.schemas[schema]] : realmConfig.schemas;
+                    return _(schemas)
+                            .map(function(schema){
+                                if(schema.type == 'national')
+                                    return _.union(schema.publishingAuthorities||[], schema.nationalAuthorizedUser||[])
+                            })
+                            .flatten().compact().uniq().value();
+    
                 }
             };
         }];
