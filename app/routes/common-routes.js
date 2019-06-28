@@ -209,7 +209,7 @@
         }
         
         if(!route.controller && route.resolveController) { // Legacy
-            var module = route.templateUrl.replace(new RegExp('^'+localBaseUrl.replace(/\//g, '\\/')), '').replace(/\.html$/, '');
+            var module = route.templateUrl.replace(new RegExp('^'+escapeRegExp(localBaseUrl)), '').replace(/\.html$/, '');
             route.controller = importQ(module);
         }
         
@@ -260,5 +260,9 @@
 
         return this;
     }
+
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+      }
     
 });
