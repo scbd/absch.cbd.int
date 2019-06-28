@@ -149,8 +149,15 @@
                         schema = path;
 
                     var schemaName = $filter('mapSchema')(schema);
-                    if(!_.contains(_.union(['contact'], realm.referenceSchemas), schemaName))
-                        roles = (roles || []).concat(realm.nationalRoles());
+                    if(!_.contains(_.union(['contact'], realm.referenceSchemas), schemaName)){
+                        var rolesToAppend = [];
+
+                        rolesToAppend = realm.nationalSchemaRoles(schemaName);
+                        if(rolesToAppend.length == 0)//if there are not schema roles fallback to national roles
+                            rolesToAppend = realm.nationalRoles(true);//skip schema roles from national roles
+
+                        roles = (roles || []).concat(rolesToAppend);
+                    }
                 }
                 if (!user.isAuthenticated) {
 

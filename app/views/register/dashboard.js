@@ -89,9 +89,12 @@ function(app, _, ng) {
                 })
 
             }
-
+            $scope.isNationalSchemaUser = function(schema){
+                return roleService.isNationalSchemaUser(schema);
+            }
+            
             function init(){
-                $scope.isNationalUser = roleService.hasAbsRoles();
+                $scope.isNationalUser       = roleService.isNationalUser();                
                 loadFacets();
                 if($scope.isBch)
                     loadArticle();

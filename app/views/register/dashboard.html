@@ -253,7 +253,7 @@
                         </div>
 
 
-                        <div ng-repeat="schema in nationalSchemas">
+                        <div ng-repeat="schema in nationalSchemas" ng-if="::isNationalSchemaUser(schema)">
                             <table class="overview table table-hover" style="width:100%;">
                                 <tbody>
                                     <tr>

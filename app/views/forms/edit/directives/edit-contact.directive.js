@@ -21,7 +21,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
 
             $scope.container        = $attr.container
             $scope.isDialog         = $attr.isDialog;
-            $scope.isNationalUser   = roleService.hasAbsRoles();
+            $scope.isNationalUser   = roleService.isNationalUser();
             $scope.canEditGovernment = roleService.isAdministrator();
 
             $scope.options = {            
