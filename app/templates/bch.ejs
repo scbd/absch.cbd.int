@@ -51,6 +51,13 @@
     <div class="device-size visible-md" size="md" style="height:0px;width:0px"></div>
     <div class="device-size visible-lg" size="lg" style="height:0px;width:0px"></div>
 
+    <script>
+        // In IE boot.js is executing before this script was executed so move it before boot.js        
+        window.clearingHouseHost = '<%=clearingHouseHost%>';
+        window.appVersion = '<%=appVersion%>';
+        window.lang = '<%=preferredLanguage%>'//.replace('/','')
+
+    </script>
     <script src="https://cdn.cbd.int/requirejs@2.2.0/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>
     
     
@@ -74,10 +81,7 @@
             ga('set',    'hostname', window.location.hostname);
             ga('set',    'location', undefined);
         }
-
-        window.clearingHouseHost = '<%=clearingHouseHost%>';
-        window.appVersion = document.documentElement.attributes['app-version'].value;
-        window.lang = '<%=preferredLanguage%>'//.replace('/','')
+        
     </script>
 
 

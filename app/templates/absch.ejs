@@ -126,7 +126,13 @@
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    
+    <script>
+        // In IE boot.js is executing before this script was executed so move it before boot.js
+        window.clearingHouseHost = '<%=clearingHouseHost%>';
+        window.appVersion = '<%=appVersion%>';
+        window.lang = '<%=preferredLanguage%>'//.replace('/','')
+
+    </script>
     <script src="https://cdn.cbd.int/requirejs@2.2.0/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>    
     <script>window.appTemplate = 'templates/absch'</script>
     <script src="https://cdn.cbd.int/outdated-browser@1.0.2/outdatedbrowser/outdatedbrowser.min.js"></script>
@@ -164,9 +170,6 @@
             ga('set',    'location', undefined);
         }
 
-        window.clearingHouseHost = '<%=clearingHouseHost%>';
-        window.appVersion = document.documentElement.attributes['app-version'].value;
-        window.lang = '<%=preferredLanguage%>'//.replace('/','')
     </script>
 
 </body>
