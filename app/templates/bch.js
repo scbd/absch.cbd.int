@@ -3,8 +3,8 @@ define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
         'components/scbd-branding/directives/header/header',
         'components/scbd-branding/directives/footer',
         'components/scbd-angularjs-services/services/locale',
-        'services/local-storage-service',
-        'services/app-config-service'], function (app, angular, footerHtml) { 'use strict';
+        'services/local-storage-service', 'services/app-config-service'], 
+function (app, angular, footerHtml) { 'use strict';
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
 

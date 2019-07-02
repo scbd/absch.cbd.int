@@ -57,8 +57,10 @@ define(['app', 'underscore', 'services/local-storage-service', 'components/scbd-
                     }
 
                     var sortField = sort||'name.en';
+                    var sortBy = {};
+                    sortBy[sortField] = 1;
                     return $http.get('/api/v2013/countries', {
-                            cache: true, params : {s:{ [sortField]:1}}
+                            cache: true, params : { s : sortBy }
                         })
                         .then(function(response) {
                             var countries = _.map(response.data,formatCountry);
