@@ -11,6 +11,7 @@ var cookieParser = require('cookie-parser');
 var translation  = require('./app/app-libs/translation');
 var _            = require('lodash');
 
+let cacheControl = require('./app/app-libs/cache-control')
 
 // Initialize constants
 var appVersion          = process.env.TAG;
@@ -27,12 +28,12 @@ app.set('view engine', 'ejs');
 app.use(cookieParser());
 
 // Set routes
-app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: setCustomCacheControl , maxAge: 86400000*365 }) );
-app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: setCustomCacheControl }));
-app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',          translation.renderLanguageFile, express.static(__dirname + '/app', { setHeaders: setCustomCacheControl }));
+app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: cacheControl.setCustomCacheControl , maxAge: 86400000*365 }) );
+app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',          translation.renderLanguageFile, express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
 
-app.use('/cbd-forums',      express.static(__dirname + '/node_modules/@bower_components/cbd-forums', { setHeaders: setCustomCacheControl }));
-app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: setCustomCacheControl , maxAge: oneDay }));
+app.use('/cbd-forums',      express.static(__dirname + '/node_modules/@bower_components/cbd-forums', { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: cacheControl.setCustomCacheControl , maxAge: oneDay }));
 
 app.all('/sitemap.xml',     (req, res) => require('superagent').get(`https://attachments.cbd.int/sitemap-${process.env.CLEARINGHOUSE.toLowerCase()}.xml`).pipe(res));
 
@@ -60,26 +61,3 @@ app.listen(process.env.PORT || 2010, '0.0.0.0',function () {
 
 proxy.on('error', function(err) {}); // ignore proxy errors
 process.on('SIGTERM', ()=>process.exit());
-
-
-//============================================================
-//
-//
-//============================================================
-function setCustomCacheControl(res, path) {
-
-	var versionWrong = false;
-	var versionMatch = false;
-    var localhostRegex = /^http:\/\/localhost:([0-9]{4})\//;
-    if(res.req.headers && !localhostRegex.test(res.req.headers.referer)){
-        versionWrong |= res.req.query && res.req.query.v && res.req.query.v!=appVersion;
-        versionWrong |= res.req.cookies && res.req.cookies.VERSION && res.req.cookies.VERSION!=appVersion;
-        versionMatch |= res.req.query && res.req.query.v && res.req.query.v==appVersion;
-        versionMatch |= res.req.cookies && res.req.cookies.VERSION && res.req.cookies.VERSION==appVersion;
-    }
-
-	if(versionWrong || !versionMatch)
-		return res.setHeader('Cache-Control', 'public, max-age=0');
-
-	res.setHeader('Cache-Control', 'public, max-age=86400000');
-}
