@@ -1,0 +1,115 @@
+﻿<div>
+
+
+    <div class="row">  
+        <div class="col-md-12">
+            <div ng-if="loading">
+                <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
+            </div>
+            <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
+                page-count="searchResult.pageCount" on-page-change="onPageChange(page)"></pagination> 
+            <div ng-repeat="doc in searchResult.docs">
+                 <!-- <a ng-href="" style="display: none"></a> -->
+                <div style="padding:0!important;margin:0 0 20px 0!important;">
+
+                    <div class="pull-right" style="padding-right:15px;position:relative;top:5px;"  ng-show="doc.showDoc" >
+                            <span style="color:#ddd" > | </span> &nbsp; 
+                        <a translation-url class="bold"  style="position:relative;top:2px;color:#FFF;font-size:20px;cursor:pointer;z-index:99999999;width:100%;" ng-click="doc.showDoc=false">
+                            &times;</a>
+                    </div>
+                    <div ng-if="doc.showDoc" class="animate-if" style="padding:5px 0px 10px 0px!important;margin:0 0 0 0!important;">
+                        <record-loader class="card card-3" api="recordLoader.api" show-details="false" hide-buttons="true" link-target="_new"></record-loader>
+                    </div>
+                    <div id="record1" class="recordDefault card card-1" style="padding:0!important;margin:0!important;">
+                       
+                            <div ng-show="!doc.showDoc" ng-click="loadDocument(doc)" style="padding:0!important;margin:0!important;">
+                                <div class="{{searchResult.schemas[doc.schema_s].type}}">
+                    
+                        
+                                    <div class="title bold" style="font-size:108%;" >{{doc.rec_title}}
+                                        <span ng-if="doc.publicationYear_i">({{doc.publicationYear_i}})</span>
+                                    </div>
+                                    <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.rec_summary">{{doc.rec_summary|limitTo:250}}
+                                        <span ng-if="doc.rec_summary.length > 250">...</span>
+                                    </div>
+                    
+                                    <div ng-if="doc.schema_s=='capacityBuildingInitiative'">
+                                        <span ng-if="doc.implementingAgencies_EN_txt">
+                                            <strong>Implemented by</strong>  
+                                                <span ng-repeat="item in doc.implementingAgencies_EN_txt">{{item}}
+                                                    <span ng-if="!$last">|</span>
+                                                </span>
+                                        </span> 
+                                        <span ng-if="doc.executingAgencies_EN_txt">
+                                            <strong>executed by</strong>
+                                                <span ng-repeat="item in doc.executingAgencies_EN_txt">{{item}}
+                                                    <span ng-if="!$last">|</span>
+                                                </span>
+                                        </span>
+                                        <span ng-if="doc.collaboratingPartners_EN_txt">
+                                        <strong> with the collaboration of </strong> 
+                                                <span ng-repeat="item in doc.collaboratingPartners_EN_txt">{{item}}
+                                                    <span ng-if="!$last">|</span>
+                                                </span>
+                                        </span>
+                                    </div>
+                                    <div ng-if="doc.schema_s=='resource'">
+                                        <span ng-if="doc.authors_t">Author(s): {{doc.authors_t}}</span>
+                                        <span ng-if="doc.organizations_EN_txt">
+                                            <strong>Organizations </strong>  
+                                                <span ng-repeat="item in doc.organizations_EN_txt">{{item}}
+                                                    <span ng-if="!$last">|</span>
+                                                </span>
+                                        </span> 
+                                    </div> 
+                    
+                                        
+                                    <ul class="metadata bold">
+                                        <li>
+                                            <span class="schema bold">{{doc.schema_s | schemaName}}</span>
+                                        </li>
+                    
+                                        <li ng-if="doc.rec_countryName && searchResult.schemas[doc.schema_s].type != reference" class="hidden-xs">
+                                            <span>{{doc.rec_countryName}}</span>
+                                        </li>
+                                        <li ng-if="doc.uniqueIdentifier_s">
+                                            <span>{{doc.uniqueIdentifier_s}}</span>
+                                        </li>
+                                        <li class="hidden-xs" ng-if="doc.rec_meta1 && doc.schema_s !=='database' && searchResult.schemas[doc.schema_s].type != reference" id="meta1">
+                                            <span ng-if="doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;">CP:</span>
+                                            <span ng-repeat="meta in doc.rec_meta1">{{meta}}{{$last ? '':', '}}</span>
+                                        </li>
+                                        <li class="hidden-xs" ng-if="doc.rec_meta2 && doc.schema_s !=='absPermit' && searchResult.schemas[doc.schema_s].type != reference" id="meta2">
+                                            <span ng-if="doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;">SOURCE:</span>
+                                            <span ng-repeat="meta in doc.rec_meta2">{{meta}}{{$last ? '':', '}}</span>
+                                        </li>
+                                        <li class="hidden-xs" ng-if="doc.rec_meta3 && searchResult.schemas[doc.schema_s].type != reference" id="meta3">
+                                            <span ng-repeat="meta in doc.rec_meta3" ng-class="{'color-red':meta==='Revoked'}">{{meta}}{{$last ? '':', '}}</span>
+                                        </li>
+                    
+                                        <li ng-if="doc.schema_s !=='meeting'">
+                                            <span class="last-span" ng-if="searchResult.schemas[doc.schema_s].type!='scbd'">{{doc.rec_date | formatDate}}</span>
+                                            <span class="last-span" ng-if="searchResult.schemas[doc.schema_s].type=='scbd'">{{doc.rec_creationDate | formatDate}}</span>
+                                        </li>
+                                        <li ng-if="doc.schema_s =='meeting'">
+                                            <span class="last-span"> 
+                                                {{doc.startDate_dt | moment:'utc' | formatDate}} - {{doc.endDate_dt | moment:'utc' | formatDate}} 
+                                                | {{doc.eventCity_s}} | {{doc.eventCountry_EN_t}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                       
+                    </div>
+                
+                </div>
+                
+            </div>
+            <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
+                page-count="searchResult.pageCount" on-page-change="onPageChange(page)"></pagination> 
+            <h4 class="bg-white" ng-if="!loading && searchResult.docs.length === 0">no records found</h4>
+        </div>
+    </div>
+
+    
+</div>

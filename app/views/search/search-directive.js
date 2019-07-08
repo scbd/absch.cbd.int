@@ -15,7 +15,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 'views/directives/export-directive',
 'services/thesaurus-service', 'angular-animate', 'angular-joyride',
 'components/scbd-angularjs-services/services/locale',
-'components/scbd-angularjs-controls/form-control-directives/pagination'
+'components/scbd-angularjs-controls/form-control-directives/pagination',
+'views/search/search-results/list-view'
 ], function(app, template, _, schemaNames, joyRideText) {
 
     app.directive('searchDirective', function() {
@@ -82,6 +83,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                     $scope.skipSaveFilter       = $attrs.skipSaveFilter;
                     $scope.skipTextFilter       = $attrs.skipTextFilter;
                     $scope.skipKeywordsFilter   = $attrs.skipKeywordsFilter;
+
+                    $scope.viewType = 'list';
+                    $scope.search = {
+                        viewType : 'list'
+                    }
 
                     var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
                     var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
@@ -301,6 +307,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 
                   //===============================================================================================================================
                     function nationalQuery(currentPage, itemsPerPage) {
+
+
+                        var q = queryFilterBuilder("national");
+                        return q;
 
                         var searchOperation;
 
@@ -1039,33 +1049,37 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                   /////////
 
                     function load(){
-                        //console.log("loading queries");
-                        switch ($scope.currentTab) {
-                            case "nationalRecords":
-                                if(refresh_nat)
-                                    nationalQuery();
-                                    refresh_nat = false;
-                                break;
-                           case "referenceRecords":
-                                if(refresh_ref)
-                                    referenceQuery();
-                                    refresh_ref = false;
-                                break;
-                           case "scbdRecords":
-                                if(refresh_scbd){
-                                    scbdQuery();
-                                    refresh_scbd = false;
-                                }
-                                break;
-                            default:
-                                nationalQuery();
-                                referenceQuery();
-                                scbdQuery();
-                                refresh_nat = false;
-                                refresh_ref = false;
-                                refresh_scbd = false;
-                                break;
+
+                        if($scope.viewType == 'list'){
+                            $scope.search.listViewApi.updateResult(nationalQuery())
                         }
+                        //console.log("loading queries");
+                        // switch ($scope.currentTab) {
+                        //     case "nationalRecords":
+                        //         if(refresh_nat)
+                        //             nationalQuery();
+                        //             refresh_nat = false;
+                        //         break;
+                        //    case "referenceRecords":
+                        //         if(refresh_ref)
+                        //             referenceQuery();
+                        //             refresh_ref = false;
+                        //         break;
+                        //    case "scbdRecords":
+                        //         if(refresh_scbd){
+                        //             scbdQuery();
+                        //             refresh_scbd = false;
+                        //         }
+                        //         break;
+                        //     default:
+                        //         nationalQuery();
+                        //         referenceQuery();
+                        //         scbdQuery();
+                        //         refresh_nat = false;
+                        //         refresh_ref = false;
+                        //         refresh_scbd = false;
+                        //         break;
+                        // }
                     };
 
                     //===============================================================================================================================
@@ -1106,14 +1120,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 
                     this.getFilter = getFilter;
                     this.getSearchFiltersByParent = getSearchFiltersByParent;
-
-                   //===============================================================================================================================
-                   if(!$scope.skipResults){
-                     $scope.$watch('currentTab', function(newVal, oldVal){
-                       if(newVal != oldVal)
-                            load();
-				      });
-                   }
 
                     //===============================================================================================================================
                     $scope.$watch('searchKeyword', function(){
@@ -1174,43 +1180,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 
                     }
 
-                    //===============================================================================================================================
-                    $scope.updateScrollPage = function() {
-
-                        if($scope.currentTab == 'nationalRecords'){
-                            var documents = _.pluck($scope.searchResult.rawDocs.groups, 'doclist');
-                            var docCount = getRecordCount(documents);
-                            
-                            //nationalCurrentPage cannot be more than 200 as No. parties are 196 to CBD
-                            if(nationalCurrentPage > 200 || $scope.nationalLoading || !$scope.recordCount || docCount == $scope.recordCount[0].count)
-                                return;
-
-                            $scope.nationalLoading = true;
-                            nationalCurrentPage += 1;
-                            nationalQuery();
-                        }
-                        else if($scope.currentTab == 'referenceRecords'){
-                            if(referenceCurrentPage > 1000 && $scope.referenceLoading || !$scope.recordCount || ($scope.searchResult.refDocs.docs||[]).length == $scope.recordCount[1].count)
-                                return;
-                            $scope.referenceLoading = true;
-                            referenceCurrentPage += 1;
-                            referenceQuery();
-                        }
-                        else if($scope.currentTab == 'scbdRecords'){
-                            if(referenceCurrentPage > 1000 && $scope.scbdLoading || !$scope.recordCount || ($scope.searchResult.scbdDocs.docs||[]).length == $scope.recordCount[2].count)
-                                return;
-
-                            $scope.scbdLoading = true;
-                            scbdCurrentPage += 1;
-                            scbdQuery();
-                        }
-
-                    };
-
-                    //===============================================================================================================================
-                    function getRecordCount(documents){
-                        return _.reduce(_.pluck(documents, 'numFound'), function(mem,d){ return mem + d;},0);
-                    }
 
                     //===============================================================================================================================
                     loadFilters();
@@ -1308,10 +1277,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                         refreshResult();
                     };
                     
-                    if(!$scope.skipResults){ 
-                        load();
-                        loadTabFacets();
-                    }
 
                     $scope.getExportQuery = function(){
                        
@@ -1448,10 +1413,16 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                         }
                         else if($scope.currentTab==='scbdRecords'){
                             scbdQuery()
-                        }
-                        
-
+                        }  
                     }
+
+                    $timeout(function(){
+
+                        if(!$scope.skipResults){ 
+                            load();
+                            // loadTabFacets();
+                        }
+                    }, 200)
 
 
 
