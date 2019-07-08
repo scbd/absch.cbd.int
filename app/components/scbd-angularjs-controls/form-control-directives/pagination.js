@@ -1,7 +1,7 @@
 ﻿define(['text!./pagination.html', 'app'], function (template, app) {
     'use strict';
 
-    app.directive('pagination', function () {
+    app.directive('pagination', ['$location', function ($location) {
         return {
             restrict: 'EA',
             template: template,
@@ -41,13 +41,15 @@
                 };
 
                 $scope.actionSetPage = function (n) {
+                    if(n<1 || n>$scope.pageCount)
+                        return;
                     $scope.onPageChange({
                         page: n
-                    });
+                    });                   
                 }
 
             }
         }
-    })
+    }])
 
 });

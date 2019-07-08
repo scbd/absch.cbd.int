@@ -1160,31 +1160,31 @@ footer .logo {
     background-color: #FFF!important;
     cursor: pointer;
 }
-#search-new .nationalRecords {
+#search-new .national {
     margin: 0;
     padding: 5px;
     border-left: 3px #428bca solid;
     cursor: pointer;
 }
-#search-new .nationalRecords .schema {
+#search-new .national .schema {
     color: #428bca;
 }
-#search-new .referenceRecords .schema {
+#search-new .reference .schema {
     color: #fa6938;
 }
-#search-new .scbdRecords .schema {
+#search-new .scbd .schema {
     color: #000;
 }
-#search-new .scbdRecords .title {
+#search-new .scbd .title {
     color: #666;
 }
-#search-new .referenceRecords {
+#search-new .reference {
     margin-bottom: 15px;
     padding: 5px;
     border-left: 3px #fa6938 solid;
     cursor: pointer;
 }
-#search-new .scbdRecords {
+#search-new .scbd {
     margin-bottom: 15px;
     padding: 5px;
     border-left: 3px #666 solid;
@@ -1523,9 +1523,7 @@ div.recordDefault:hover {
     border-bottom: 0;
 }
 #search-new .tab-content {
-    border-bottom: 1px solid #e3e3e3;
-    border-left: 1px solid #e3e3e3;
-    border-right: 1px solid #e3e3e3;
+    border: 1px solid #e3e3e3;
 }
 #search-new .nav-tabs>li {
     margin-bottom: 0;
