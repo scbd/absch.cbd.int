@@ -8,7 +8,9 @@
             scope: {
                 currentPage: '=',
                 pageCount: '=',
-                onPageChange: '&'
+                onPageChange: '&',
+                pageSize    : '=',
+                numFound    : '='
             },
             link: function ($scope, $element, $attr) {
 

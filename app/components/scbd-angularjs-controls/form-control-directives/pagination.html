@@ -1,5 +1,10 @@
 ﻿<div>
     <ul class="pagination">
+        <li class="hidden-xs disabled">
+            <a disabled>
+                <strong>Page <span ng-bind="currentPage"></span> of <span ng-bind="pageCount"></span></strong>
+            </a>
+        </li>
         <li ng-class="{disabled: currentPage-1 == 0}" class="hidden-xs">
             <a ng-disabled="currentPage-1 == 0" 
                 translation-url href ng-click="actionSetPage(1)">« First</a>
@@ -19,6 +24,13 @@
         <li ng-class="{disabled: currentPage-1 >= pageCount - 1}"  class="hidden-xs">
             <a  ng-disabled="currentPage-1 >= pageCount - 1"
                 translation-url href ng-click="actionSetPage(pageCount)">Last »</a>
+        </li>
+        <li class="hidden-xs disabled">
+            <a disabled>
+                <strong> <span ng-bind='((currentPage-1)*pageSize)+1 + " - " + (currentPage*pageSize>numFound ? numFound:currentPage*pageSize)'></span> of 
+                         <span ng-bind="(pageCount*pageSize)>numFound ? numFound:pageCount*pageSize"></span>
+                </strong>
+            </a>
         </li>
     </ul>
 </div>

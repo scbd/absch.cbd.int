@@ -7,7 +7,8 @@
                 <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
             </div>
             <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
-                page-count="searchResult.pageCount" on-page-change="onPageChange(page)"></pagination> 
+                page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
+                num-found="searchResult.numFound"></pagination> 
             <div ng-repeat="doc in searchResult.docs">
                  <!-- <a ng-href="" style="display: none"></a> -->
                 <div style="padding:0!important;margin:0 0 20px 0!important;">
@@ -106,7 +107,8 @@
                 
             </div>
             <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
-                page-count="searchResult.pageCount" on-page-change="onPageChange(page)"></pagination> 
+                page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
+                num-found="searchResult.numFound"></pagination> 
             <h4 class="bg-white" ng-if="!loading && searchResult.docs.length === 0">no records found</h4>
         </div>
     </div>
