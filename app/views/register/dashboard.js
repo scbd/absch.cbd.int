@@ -32,12 +32,14 @@ function(app, _, ng) {
 
             if ($scope.user.isAuthenticated) {
                 $scope.roles = {
-                    is                       : roleService.is.bind(roleService),
-                    isPublishingAuthority : roleService.isPublishingAuthority(),
-                    isNationalFocalPoint  : roleService.isNationalFocalPoint(),
-                    isAdministrator       : roleService.isAdministrator(),
-                    isNationalAuthorizedUser : roleService.isNationalAuthorizedUser(),
-                    isUser                      : roleService.isUser()
+                    is                      : roleService.is.bind(roleService),
+                    isPublishingAuthority   : roleService.isPublishingAuthority(),
+                    isNationalFocalPoint    : roleService.isNationalFocalPoint(),
+                    isAdministrator         : roleService.isAdministrator(),
+                    isNationalAuthorizedUser: roleService.isNationalAuthorizedUser(),
+                    isUser                  : roleService.isUser(),
+                    isNationalSchemaUser    : roleService.isNationalSchemaUser,
+                    isNationalUser          : roleService.isNationalUser()
                 };
 
                 if($scope.user.government)
@@ -89,12 +91,8 @@ function(app, _, ng) {
                 })
 
             }
-            $scope.isNationalSchemaUser = function(schema){
-                return roleService.isNationalSchemaUser(schema);
-            }
             
-            function init(){
-                $scope.isNationalUser       = roleService.isNationalUser();                
+            function init(){                      
                 loadFacets();
                 if($scope.isBch)
                     loadArticle();

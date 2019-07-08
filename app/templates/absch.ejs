@@ -99,7 +99,7 @@
         <!-- END: Actual animated container. -->
 
     </div>
-    <div class="alert alert-info alert-dismissible lang-alert" ng-if="lang!='en'" style="margin-bottom:1px">
+    <div class="alert alert-info alert-dismissible lang-alert" ng-if="'<%=preferredLanguage%>'!='en'" style="margin-bottom:1px">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
          <strong>Please note that the translation of the ABS Clearing-House is in progress.</strong>
     </div>
@@ -126,7 +126,13 @@
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    
+    <script>
+        // In IE boot.js is executing before this script was executed so move it before boot.js
+        window.clearingHouseHost = '<%=clearingHouseHost%>';
+        window.appVersion = '<%=appVersion%>';
+        window.lang = '<%=preferredLanguage%>'
+
+    </script>
     <script src="https://cdn.cbd.int/requirejs@2.2.0/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>    
     <script>window.appTemplate = 'templates/absch'</script>
     <script src="https://cdn.cbd.int/outdated-browser@1.0.2/outdatedbrowser/outdatedbrowser.min.js"></script>
@@ -164,9 +170,6 @@
             ga('set',    'location', undefined);
         }
 
-        window.clearingHouseHost = '<%=clearingHouseHost%>';
-        window.appVersion = document.documentElement.attributes['app-version'].value;
-        window.lang = '<%=preferredLanguage%>'//.replace('/','')
     </script>
 
 </body>
