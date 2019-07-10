@@ -1,15 +1,15 @@
 define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
         'bootstrap', 'routes/bch', 'ng-breadcrumbs','toastr','angular-animate', 
         'components/scbd-branding/directives/header/header',
-        'components/scbd-branding/directives/footer',
+        'components/scbd-branding/directives/footer','angular-loggly-logger',
         'components/scbd-angularjs-services/services/locale',
         'services/local-storage-service', 'services/app-config-service'], 
 function (app, angular, footerHtml) { 'use strict';
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
 
-    app.controller('BchTemplateController', ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm', 'localStorageService',
-        function ($rootScope, $location, $window, $scope, locale, realm, localStorageService) {
+    app.controller('BchTemplateController', ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm', 'localStorageService', 'LogglyLogger',
+        function ($rootScope, $location, $window, $scope, locale, realm, localStorageService, logglyLogger) {
 
             $rootScope.pageTitle = { text: "" };
 
@@ -98,6 +98,10 @@ function (app, angular, footerHtml) { 'use strict';
                         _slaask.init('8b989bd6ee0cf49384761d4f86ddd945');
                     }
                 });
+
+                var fields = logglyLogger.fields()
+                fields.user = user.userID;
+                logglyLogger.fields(fields);
 
             }, 1000));
         }

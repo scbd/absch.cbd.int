@@ -15,9 +15,23 @@ define(['angular-flex', 'angular-animate', 'angular-sanitize', 'angular-loggly-l
                 .includeUserAgent(true)
                 .includeTimestamp(true)
                 .sendConsoleErrors(true)
-                .endpoint('/api/v2016/error-logs');
+                .endpoint('/error-logs');
 
         }]);
+
+        app.factory('$exceptionHandler', ['$log', function($log) {
+            return function myExceptionHandler(exception, cause) {
+                if(typeof(exception) == 'string' && /^Possibly unhandled rejection: /.test(exception)){
+                    try{
+                        exception = exception.replace(/^Possibly unhandled rejection: /, '');
+                        exception = JSON.parse(exception);
+                        exception = JSON.stringify(exception.data || exception);
+                    }
+                    catch(e){}
+                }
+                $log.warn(exception);
+            };
+        }])
 
        app.run(['LogglyLogger', 'realm', '$window', function (logglyLogger, realm, $window) {
 
