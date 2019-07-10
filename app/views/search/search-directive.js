@@ -65,6 +65,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             schemaTemplate[key] = { title : schema.title, shortCode : schema.shortCode, index: index++, docs:[], numFound:0};
                         }
                     }).value();
+
+                    $scope.realm = realm
                     $scope.recordCount = [{count:0},{count:0},{count:0}];
                     $scope.skipResults          = $attrs.skipResults;
                     $scope.skipDateFilter       = $attrs.skipDateFilter;
@@ -1015,17 +1017,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         addFilter('npNonParty',   {'sort': 3,'type':'partyStatus','name':'Not a Party to the Protocol ', 'id':'npNonParty', 'description':''});
                         addFilter('npSignatory',  {'sort': 4,'type':'partyStatus','name':'Signatory to the Protocol', 'id':'npSignatory', 'description':''});
 
-
-                        //TODO get from scbd.json
                         //SCBD
-                        addFilter('news',  {'sort': 1,'type':'scbd', 'name':scbdSchemas.news, 'id':'news', 'description':'ABS related news'});
-                        addFilter('notification',  {'sort': 2,'type':'scbd',  'name':scbdSchemas.notification, 'id':'notification', 'description':'ABS related notifications'});
-
-                        addFilter('new',  {'sort': 3,'type':'scbd', 'name':scbdSchemas.new, 'id':'new', 'description':'What\'s new'});
-                        addFilter('meeting',  {'sort': 4,'type':'scbd',  'name':scbdSchemas.meeting, 'id':'meeting', 'description':'ABS related meetings'});
-
-                        addFilter('statement',  {'sort': 3,'type':'scbd', 'name':scbdSchemas.statement, 'id':'statement', 'description':'ABS related statements'});
-                        addFilter('pressRelease',  {'sort': 4,'type':'scbd',  'name':scbdSchemas.pressrelease, 'id':'pressRelease', 'description':'ABS related press release'});
+                        _.each(scbdSchemas, function(schema, key){
+                            addFilter(key,  {'sort': schema.sort,'type':'scbd',  'name':schema.title, 
+                                    'id':key, 'description':(schema.description||{})}); 
+                        });
                     };
 
                   ///////////////

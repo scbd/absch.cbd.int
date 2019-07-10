@@ -4,12 +4,12 @@
             <hr class="heading"  ng-if="sf_filters.length">
 
         <p class="helpinfo" ng-if="sf_filters.length"><i class="fa fa-info-circle helpicon" ></i> 
-        ABS related information from the SCBD</p>
+        {{realm.uIdPrefix}} related information from the SCBD</p>
         
         <div ng-repeat="doc in sf_filters = (sf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])">
                 <a translation-url  class="filter"  ng-click="saveFilter(doc)">
                     <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> 
-                    {{doc.name}}
+                    {{doc.name|lstring:locale}}
                     <!--<span class="badge">100</span>-->
                 </a>
                 <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon" ng-if="doc.description"></i> {{doc.description}} </p>-->

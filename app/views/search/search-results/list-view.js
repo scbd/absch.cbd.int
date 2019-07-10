@@ -27,7 +27,7 @@
 
                 function updateResult(query, sort, pageNumber){
                    
-                    $scope.isLoading = true;
+                    $scope.loading = true;
                     if(pageNumber==undefined)
                         pageNumber = $scope.searchResult.currentPage;
 
@@ -50,7 +50,7 @@
                         return $scope.searchResult;
                     })
                     .finally(function(){
-                        $scope.isLoading = false;
+                        $scope.loading = false;
                     })
                 }
 
