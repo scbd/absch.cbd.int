@@ -156,7 +156,7 @@
                         if(rolesToAppend.length == 0)//if there are not schema roles fallback to national roles
                             rolesToAppend = realm.nationalRoles(true);//skip schema roles from national roles
 
-                        roles = (roles || []).concat(rolesToAppend);
+                        roles = (roles || []).concat(rolesToAppend).concat(realm.getRole("Administrator")||[]);
                     }
                 }
                 if (!user.isAuthenticated) {
