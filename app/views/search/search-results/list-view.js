@@ -61,6 +61,11 @@
                     })
                 }
 
+                $scope.onPageSizeChanged = function(size){
+                    $scope.searchResult.rowsPerPage = size;
+                    $scope.onPageChange();
+                }
+
                 $scope.loadDocument = function(doc){
                     doc.showDoc =!doc.showDoc;
                     $timeout(function(){

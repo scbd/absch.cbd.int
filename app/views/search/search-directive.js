@@ -1,29 +1,17 @@
-define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-data/schema-name-plural.json', 'json!app-data/search-tour.json',
-'js/common',
-'services/search-service',
-'views/search/search-filters/keyword-filter',
-'views/search/search-filters/national-filter',
-'views/search/search-filters/reference-filter',
-'views/search/search-filters/scbd-filter',
-'views/search/search-filters/country-filter',
-'views/search/search-filters/region-filter',
-'views/search/search-filters/date-filter',
-'views/search/search-results/result-default',
-'views/search/search-results/national-records-country',
-'services/app-config-service', 'ngDialog',
-'views/register/user-preferences/user-alerts',
-'views/directives/export-directive',
-'services/thesaurus-service', 'angular-animate', 'angular-joyride',
-'components/scbd-angularjs-services/services/locale',
-'components/scbd-angularjs-controls/form-control-directives/pagination',
-'views/search/search-results/list-view'
-], function(app, template, _, schemaNames, joyRideText) {
+define(['app', 'text!views/search/search-directive.html','lodash', 'json!components/scbd-angularjs-services/filters/schema-name.json', 
+'json!app-data/search-tour.json','js/common','services/search-service','views/search/search-filters/keyword-filter',
+'views/search/search-filters/national-filter','views/search/search-filters/reference-filter','views/search/search-filters/scbd-filter',
+'views/search/search-filters/country-filter','views/search/search-filters/region-filter','views/search/search-filters/date-filter',
+'views/search/search-results/result-default','views/search/search-results/national-records-country','services/app-config-service',
+ 'ngDialog','views/register/user-preferences/user-alerts','views/directives/export-directive','services/thesaurus-service', 'angular-animate', 
+ 'angular-joyride','components/scbd-angularjs-services/services/locale',
+ 'components/scbd-angularjs-controls/form-control-directives/pagination','views/search/search-results/list-view'
+], function(app, template, _, scbdSchemas, joyRideText) {
 
     app.directive('searchDirective', function() {
         return {
             restrict: 'EAC',
             replace: true,
-            // transclude: true,
             template: template, 
             controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService','$rootScope',
@@ -98,10 +86,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                         refDocs  : [],
                         scbdDocs : []
                     }
-
-                    var natSchemas = _.without(appConfigService.nationalSchemas, "contact");                   
-                    var refSchemas = _.without(appConfigService.referenceSchemas, "organization");
-                    var scbdSchemas = appConfigService.scbdSchemas;
                     
                     $scope.currentTab = "nationalRecords";
                     $scope.refresh = false;
@@ -309,7 +293,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                     function nationalQuery(currentPage, itemsPerPage) {
 
 
-                        var q = queryFilterBuilder("national");
+                        var q = buildSchemaQuery();//queryFilterBuilder("national");
                         return q;
 
                         var searchOperation;
@@ -470,50 +454,50 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 
 
 
-                        if(queryType === 'national'){
-                              qAnd.push(buildFieldQuery('schema_s', 'national', natSchemas.join(' ')));
-                              qAnd.push(buildFieldQuery('government_s', 'country', "*"));
-                              qAnd.push(buildCountryQuery('government_s'    ,'partyStatus', null));
-                              qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'  , null));
-                              qOr.push(buildFieldQuery('government_REL_ss','region'  , null));
-                              //qOr.push(buildTextQuery('text_EN_txt'    ,'reference', null));
-                             // qOr.push(buildFieldQuery('all_terms_ss'    ,'reference', null));
-                              qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
-                              qOr.push(buildFieldQuery('all_terms_ss'    ,'scbd', null));
-                              qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
-                              qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
+                        // if(queryType === 'national'){
+                        //       qAnd.push(buildFieldQuery('schema_s', 'national', natSchemas.join(' ')));
+                        //       qAnd.push(buildFieldQuery('government_s', 'country', "*"));
+                        //       qAnd.push(buildCountryQuery('government_s'    ,'partyStatus', null));
+                        //       qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'  , null));
+                        //       qOr.push(buildFieldQuery('government_REL_ss','region'  , null));
+                        //       //qOr.push(buildTextQuery('text_EN_txt'    ,'reference', null));
+                        //      // qOr.push(buildFieldQuery('all_terms_ss'    ,'reference', null));
+                        //       qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
+                        //       qOr.push(buildFieldQuery('all_terms_ss'    ,'scbd', null));
+                        //       qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
+                        //       qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
 
-                        }
+                        // }
 
-                        if(queryType === 'reference'){
-                               qAnd.push(buildFieldQuery('schema_s','reference', refSchemas.join(' ')));
-                              // qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
-                               //qOr.push(buildFieldQuery('all_terms_ss'  ,'scbd', null));
-                              // qOr.push(buildTextQuery('text_EN_txt'     ,'national', null));
-                              // qOr.push(buildFieldQuery('all_terms_ss'   ,'national', null));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'country', null));
-                               qOr.push(buildFieldQuery('all_terms_ss'  ,'country', null));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'freeText', null));
-                               qOr.push(buildTextQuery('all_terms_ss'  ,'freeText', null));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'region', null));
-                               qOr.push(buildFieldQuery('all_terms_ss'  ,'region', null));
-                               qOr.push(buildFieldQuery('regions_REL_ss','country', null));
-                               qOr.push(buildFieldQuery('regions_REL_ss','region', null));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
-                               qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
+                        // if(queryType === 'reference'){
+                        //        qAnd.push(buildFieldQuery('schema_s','reference', refSchemas.join(' ')));
+                        //       // qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
+                        //        //qOr.push(buildFieldQuery('all_terms_ss'  ,'scbd', null));
+                        //       // qOr.push(buildTextQuery('text_EN_txt'     ,'national', null));
+                        //       // qOr.push(buildFieldQuery('all_terms_ss'   ,'national', null));
+                        //        qOr.push(buildTextQuery('text_EN_txt'    ,'country', null));
+                        //        qOr.push(buildFieldQuery('all_terms_ss'  ,'country', null));
+                        //        qOr.push(buildTextQuery('text_EN_txt'    ,'freeText', null));
+                        //        qOr.push(buildTextQuery('all_terms_ss'  ,'freeText', null));
+                        //        qOr.push(buildTextQuery('text_EN_txt'    ,'region', null));
+                        //        qOr.push(buildFieldQuery('all_terms_ss'  ,'region', null));
+                        //        qOr.push(buildFieldQuery('regions_REL_ss','country', null));
+                        //        qOr.push(buildFieldQuery('regions_REL_ss','region', null));
+                        //        qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
+                        //        qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
 
-                        }
+                        // }
 
-                        if(queryType === 'scbd'){
-                               qAnd.push(buildFieldQuery('schema_s','scbd', scbdSchemas.join(' ')));
-                               //qOr.push(buildTextQuery('text_EN_txt'      ,'national'  , null));
-                               //qOr.push(buildTextQuery('text_EN_txt'      ,'reference' , null));
-                               qOr.push(buildTextQuery('text_EN_txt'      ,'country'   , null));
-                               qOr.push(buildTextQuery('text_EN_txt'      ,'region', null));
-                               qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'   , null));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'partyStatus', null));
-                        }
+                        // if(queryType === 'scbd'){
+                        //        qAnd.push(buildFieldQuery('schema_s','scbd', scbdSchemas.join(' ')));
+                        //        //qOr.push(buildTextQuery('text_EN_txt'      ,'national'  , null));
+                        //        //qOr.push(buildTextQuery('text_EN_txt'      ,'reference' , null));
+                        //        qOr.push(buildTextQuery('text_EN_txt'      ,'country'   , null));
+                        //        qOr.push(buildTextQuery('text_EN_txt'      ,'region', null));
+                        //        qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'   , null));
+                        //        qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
+                        //        qOr.push(buildTextQuery('text_EN_txt'    ,'partyStatus', null));
+                        // }
                         //custom queries
                         _.map(_.filter($scope.setFilters, {type:'custom'}), function(custom){
                             if(custom.query)
@@ -1026,22 +1010,22 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                             }
                         })                        
 
-                        addFilter('npParty',  {'sort': 1,'type':'partyStatus','name':'Party to the Protocol', 'id':'npParty', 'description':''});
+                        addFilter('npParty',      {'sort': 1,'type':'partyStatus','name':'Party to the Protocol', 'id':'npParty', 'description':''});
                         addFilter('npInbetween',  {'sort': 2,'type':'partyStatus','name':'Ratified, not yet Party to the Protocol', 'id':'npInbetween', 'description':''});
-                        addFilter('npNonParty',  {'sort': 3,'type':'partyStatus','name':'Not a Party to the Protocol ', 'id':'npNonParty', 'description':''});
+                        addFilter('npNonParty',   {'sort': 3,'type':'partyStatus','name':'Not a Party to the Protocol ', 'id':'npNonParty', 'description':''});
                         addFilter('npSignatory',  {'sort': 4,'type':'partyStatus','name':'Signatory to the Protocol', 'id':'npSignatory', 'description':''});
 
 
                         //TODO get from scbd.json
                         //SCBD
-                        addFilter('news',  {'sort': 1,'type':'scbd', 'name':schemaNames.news, 'id':'news', 'description':'ABS related news'});
-                        addFilter('notification',  {'sort': 2,'type':'scbd',  'name':schemaNames.notification, 'id':'notification', 'description':'ABS related notifications'});
+                        addFilter('news',  {'sort': 1,'type':'scbd', 'name':scbdSchemas.news, 'id':'news', 'description':'ABS related news'});
+                        addFilter('notification',  {'sort': 2,'type':'scbd',  'name':scbdSchemas.notification, 'id':'notification', 'description':'ABS related notifications'});
 
-                        addFilter('new',  {'sort': 3,'type':'scbd', 'name':schemaNames.new, 'id':'new', 'description':'What\'s new'});
-                        addFilter('meeting',  {'sort': 4,'type':'scbd',  'name':schemaNames.meeting, 'id':'meeting', 'description':'ABS related meetings'});
+                        addFilter('new',  {'sort': 3,'type':'scbd', 'name':scbdSchemas.new, 'id':'new', 'description':'What\'s new'});
+                        addFilter('meeting',  {'sort': 4,'type':'scbd',  'name':scbdSchemas.meeting, 'id':'meeting', 'description':'ABS related meetings'});
 
-                        addFilter('statement',  {'sort': 3,'type':'scbd', 'name':schemaNames.statement, 'id':'statement', 'description':'ABS related statements'});
-                        addFilter('pressRelease',  {'sort': 4,'type':'scbd',  'name':schemaNames.pressrelease, 'id':'pressRelease', 'description':'ABS related press release'});
+                        addFilter('statement',  {'sort': 3,'type':'scbd', 'name':scbdSchemas.statement, 'id':'statement', 'description':'ABS related statements'});
+                        addFilter('pressRelease',  {'sort': 4,'type':'scbd',  'name':scbdSchemas.pressrelease, 'id':'pressRelease', 'description':'ABS related press release'});
                     };
 
                   ///////////////
@@ -1081,6 +1065,20 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                         //         break;
                         // }
                     };
+
+                    function buildSchemaQuery(){
+
+                        var natSchemas = _.without(appConfigService.nationalSchemas, "contact");                   
+                        var refSchemas = _.without(appConfigService.referenceSchemas, "organization");
+                        var scbdSchemas = appConfigService.scbdSchemas;
+
+                        var query = buildFieldQuery('schema_s', 'schema')
+                        if(query == null){                            
+                            query = "NOT schema_s:(contact)"
+                        }
+
+                        return query;
+                    }
 
                     //===============================================================================================================================
                     function loadTabFacets(){
