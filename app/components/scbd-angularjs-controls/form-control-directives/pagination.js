@@ -10,10 +10,10 @@
                 pageCount: '=',
                 onPageChange: '&',
                 pageSize    : '=',
-                numFound    : '='
+                numFound    : '=',
+                onPageSizeChanged: '&?'
             },
             link: function ($scope, $element, $attr) {
-
 
                 $scope.range = function (start, end) {
                     if(end<1)
