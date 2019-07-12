@@ -58,6 +58,9 @@
                             <i ng-if="showFilters=='userSearchFilter'" class="fa fa-times-circle"></i>
                             <i ng-if="!showFilters || showFilters!='userSearchFilter'" class="fa fa-caret-down"></i>
                             &nbsp; My saved searches</a> </li>
+                    <li class="pull-right">
+                        <result-view-options sort-fields="search.sortFields" on-sort-by-change="onSortByChange(fields)"></result-view-options>
+                    </li>
                 </ul>
             </div>
             
@@ -94,7 +97,7 @@
                 <country-filter ng-if="showFilters==='countryFilter' || (searchKeyword && !showFilters)"></country-filter>
                 <region-filter ng-if="showFilters==='regionFilter' || (searchKeyword && !showFilters)"></region-filter>
                 <date-filter ng-if="showFilters==='dateFilter' && !skipDateFilter"></date-filter>
-                 <div ng-if="showFilters==='userSearchFilter' && !skipSaveFilter">
+                <div ng-if="showFilters==='userSearchFilter' && !skipSaveFilter">
                     <h4>Your predefined searches <small> - keep up to date when records are published </small></h4> 
                     <user-alerts run-query-in-page="true"></user-alerts>
                 </div>

@@ -5,7 +5,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 'views/search/search-results/result-default','views/search/search-results/national-records-country','services/app-config-service',
  'ngDialog','views/register/user-preferences/user-alerts','views/directives/export-directive','services/thesaurus-service', 'angular-animate', 
  'angular-joyride','components/scbd-angularjs-services/services/locale',
- 'components/scbd-angularjs-controls/form-control-directives/pagination','views/search/search-results/list-view'
+ 'components/scbd-angularjs-controls/form-control-directives/pagination','views/search/search-results/list-view',
+ 'views/search/directives/result-view-options'
 ], function(app, template, _, scbdSchemas, joyRideText) {
 
     app.directive('searchDirective', function() {
@@ -67,6 +68,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }).value();
 
                     $scope.realm = realm
+
+
+
                     $scope.recordCount = [{count:0},{count:0},{count:0}];
                     $scope.skipResults          = $attrs.skipResults;
                     $scope.skipDateFilter       = $attrs.skipDateFilter;
@@ -76,7 +80,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     $scope.viewType = 'list';
                     $scope.search = {
-                        viewType : 'list'
+                        viewType : 'list',
+                        sortFields: ['updatedDate_dt']
                     }
 
                     var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';

@@ -1,4 +1,4 @@
-define(['app', 'underscore',
+define(['app', 'lodash',
     'views/search/search-directive'
 ], function(app, exportExcel) {
     "use strict";
