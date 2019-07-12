@@ -17,7 +17,6 @@ let cacheControl = require('./app/app-libs/cache-control')
 var appVersion          = process.env.TAG;
 var oneDay              = 86400000;
 let apiUrl              = process.env.API_URL||'https://api.cbddev.xyz';
-let logServerUrl        = process.env.LOG_SERVER_URL||`${apiUrl}/api/v2016`; //for development keep api endpoint
     global.app          = _.extend((global.app||{}), {});
     global.app.rootPath = __dirname; //to use in subfolders
 
@@ -40,11 +39,11 @@ app.all('/sitemap.xml',     (req, res) => require('superagent').get(`https://att
 
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
-app.post('/error-logs', (req, res) => {
-    delete req.headers.authorization;
-    req.cookies = '';
-    proxy.web(req, res, { target: logServerUrl, changeOrigin: true, secure:true });
+app.post('/error-logs', (req, res) => {   
+    proxy.web(req, res, { target: `${apiUrl}/api/v2016/error-logs?type=client-app-errors&serverAppVersion=${encodeURIComponent(appVersion)}`, 
+                            secure:false, ignorePath:true, xfwd:true });
 });
+
 
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
 app.all('/api/*', (req, res) => proxy.web(req, res, { target: apiUrl, changeOrigin: true, secure:false }));
