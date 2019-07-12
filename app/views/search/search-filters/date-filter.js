@@ -1,4 +1,4 @@
-define(['app', 'text!views/search/search-filters/date-filter.html','underscore', 'js/common', 'components/scbd-angularjs-controls/form-control-directives/all-controls','bootstrap-datepicker'
+define(['app', 'text!views/search/search-filters/date-filter.html','lodash', 'js/common', 'components/scbd-angularjs-controls/form-control-directives/all-controls','bootstrap-datepicker'
 ], function(app, template, _) {
 
     app.directive('dateFilter', function() {

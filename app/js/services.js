@@ -1,5 +1,5 @@
 ﻿
-define(['app', 'underscore', 'linqjs'], function (app, _, Enumerable) {
+define(['app', 'lodash', 'linqjs'], function (app, _, Enumerable) {
 
 	app.factory("htmlUtility", function() {
 		return {
