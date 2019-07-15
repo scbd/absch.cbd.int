@@ -19,7 +19,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
              'joyrideService', '$timeout', 'locale',
             function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
                     appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, $timeout, locale) {
-                    
+                   
+                    var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
+                    var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
+
+                    var queryCanceler = null;
                     var customKeywords = {
                         commercial : {
                             identifier  : 'commercial',
@@ -55,10 +59,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                            '5831C357-95CA-4F09-963B-DF9E8AFD8C88', '5054AC52-E738-4694-A403-6490FE7D4CF4']
                         }
                     }
-                    
                     var isABS = realm.is('ABS');
                     var isBCH = realm.is('BCH');
-
                     var schemaTemplate = {};
                     var index=0;        
                     _(realm.schemas).map(function(schema, key){ 
@@ -68,68 +70,26 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }).value();
 
                     $scope.realm = realm
-
-
-
-                    $scope.recordCount = [{count:0},{count:0},{count:0}];
-                    $scope.skipResults          = $attrs.skipResults;
-                    $scope.skipDateFilter       = $attrs.skipDateFilter;
-                    $scope.skipSaveFilter       = $attrs.skipSaveFilter;
-                    $scope.skipTextFilter       = $attrs.skipTextFilter;
-                    $scope.skipKeywordsFilter   = $attrs.skipKeywordsFilter;
-
-                    $scope.viewType = 'list';
-                    $scope.search = {
-                        viewType : 'list',
-                        sortFields: ['updatedDate_dt']
-                    }
-
-                    var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
-                    var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
-
-                    var queryCanceler = null;
+                   
                     $scope.searchResult = {
-                        rawDocs  : [],
-                        refDocs  : [],
-                        scbdDocs : []
-                    }
-                    
-                    $scope.currentTab = "nationalRecords";
-                    $scope.refresh = false;
-                    var refresh_nat = true;
-                    var refresh_ref = true;
-                    var refresh_scbd = true;
+                        viewType  : 'list',
+                        sortFields: ['updatedDate_dt'],
 
-                    $scope.searchFilters = {};
-                    $scope.countriesFilters = {};
-                    $scope.regionsFilter = {};
-                    $scope.searchKeyword = '';
+                        skipResults       : $attrs.skipResults,
+                        skipDateFilter    : $attrs.skipDateFilter,
+                        skipSaveFilter    : $attrs.skipSaveFilter,
+                        skipTextFilter    : $attrs.skipTextFilter,
+                        skipKeywordsFilter: $attrs.skipKeywordsFilter,
+
+                        searchFilters   : {},
+                        countriesFilters: {},
+                        regionsFilter   : {},
+                        searchKeyword   : '',
+                    }                    
 
                     $scope.setFilters = {};
-                    $scope.test = '';
-                    $scope.itemsPerPage = 25;
-                    $scope.nationalLoading = false;
-                    $scope.referenceLoading = false;
-                    $scope.scbdLoading = false;
-                    // $scope.currentPage = 0;
-                    var nationalCurrentPage = 0;
-                    var referenceCurrentPage = 0;
-                    var scbdCurrentPage = 0;
-
                     $scope.relatedKeywords = {};
-
-                    $scope.tabs = {
-                        nationalRecords : {currentPage : 0, pageCount   : 0},
-                        referenceRecords : {currentPage : 0, pageCount   : 0},
-                        scbdRecords : {currentPage : 0, pageCount   : 0}
-                    }
-
-                    //===============================================================================================================================
-                    $scope.isFreeTextFilterOn = function(filterID) {
-                          return false;
-                    };
-
-                    //===============================================================================================================================
+                                       
                     $scope.saveFreeTextFilter = function(text) {
 
                         if(!text && text.length <= 0)
@@ -148,7 +108,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         $scope.refresh = true;
                     };
-                    //===============================================================================================================================
+                    
                     $scope.saveCustomFilter = function(filter) {
                         
                         if(!filter)
@@ -164,27 +124,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         $scope.refresh = true;
                     };
-                    //===============================================================================================================================
+                    
                     function getFilter(id) {
                          //console.log($scope.searchFilters[id]);
                          return $scope.searchFilters[id];
 
-                    };
-                    //===============================================================================================================================
-                    $scope.updateCurrentTab = function(tabname) {
-                           $scope.currentTab = tabname;
-                           $scope.showFilters= false;
-
-                        //  if(tabname=='nationalRecords')
-                        //     nationalCurrentPage = 0;
-                        //  if(tabname=='referenceRecords')
-                        //     referenceCurrentPage = 0;
-                        //  if(tabname=='scbdRecords')
-                        //     scbdCurrentPage = 0;
-                    };
-
-
-                    //===============================================================================================================================
+                    };                    
+                    
                     function addFilter(filterID, filterInfo ) {
 
                             //if(!$scope.searchFilters[filterID])
@@ -192,7 +138,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             //console.log(filterID);
                     };
 
-                    //===============================================================================================================================
+                    
                     function getSearchFilters(type) {
                             if(!type)
                                 return $scope.searchFilters;
@@ -216,7 +162,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     };
 
-                    //===============================================================================================================================
+                    
                     function getSearchFiltersByParent(parent) {
                             if(!parent)
                                 return $scope.searchFilters;
@@ -224,17 +170,12 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             return _.filter($scope.searchFilters, function(item){if(item.parent === parent) return item;});
                     };
 
-                    //===============================================================================================================================
+                    
                     function getSetFilters() {
                             return $scope.setFilters;
                     };
 
-                   //===============================================================================================================================
-                   // function getSearchKeyWord() {
-                   //       return $scope.searchKeyword;
-                   // };
-
-                   //===============================================================================================================================
+                   
                     $scope.removeFilter = function(filterID) {
                             delete $scope.setFilters[filterID];
 
@@ -249,7 +190,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             $scope.refresh=true;
                     };
 
-                  //===============================================================================================================================
+                  
                     $scope.isFilterOn  = function(filterID) {
                           if(!filterID)
                                 return false;
@@ -257,7 +198,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                           return $scope.setFilters[filterID] ? true : false;
                     };
 
-                  //===============================================================================================================================
+                  
                     $scope.saveFilter = function(doc) {
 
                         //TODO: if free text check to see if there is a UID and convert to indenifier
@@ -287,7 +228,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         $scope.refresh = true;
                     };
 
-                    //===============================================================================================================================
+                    
                     $scope.saveDateFilter = function(filterID, query) {
 
                         $scope.setFilters[filterID] = {type:$scope.searchFilters[filterID].type, query:query, name:$scope.searchFilters[filterID].name, id:$scope.searchFilters[filterID].id};
@@ -296,7 +237,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     };
 
 
-                  //===============================================================================================================================
+                  
                     function nationalQuery(currentPage, itemsPerPage) {
 
 
@@ -362,7 +303,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     };
 
-                  //===============================================================================================================================
+                  
                     function referenceQuery() {
 
                         var searchOperation;
@@ -408,7 +349,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             });
                         }
                     };
-                  //===============================================================================================================================
+                  
                     function scbdQuery() {
 
                         var searchOperation;
@@ -452,7 +393,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         }
                     };
 
-                  //===============================================================================================================================
+                  
                     function queryFilterBuilder(queryType){
                         var qAnd=[];
                         var qOr =[];
@@ -519,12 +460,12 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         return q1 ? q + " AND (" + q1 + ")" : q;
                      };
 
-                  //===============================================================================================================================
+                  
                     function checkSetFilters(type){
                        return  _.find($scope.setFilters, function(item){if(item.type === type) return true;});
                     }
 
-                     //===============================================================================================================================
+                     
                     function buildTextQuery(field, type, boost){
                         var q = '';
                         var values = [];
@@ -543,7 +484,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                        return  q ? q : null;
                     }
 
-                    //===============================================================================================================================
+                    
                     function buildCustomQuery(field, type, boost){
                         var q = '';
                         var values = [];
@@ -561,7 +502,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         }
                     return  q ? q : null;
                     }
-                  //===============================================================================================================================
+                  
                     function buildCountryQuery(field, type, boost){
                         var q = '';
                         var values = '';
@@ -580,7 +521,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                        return  q ? q : null;
                     }
-                      //===============================================================================================================================
+                      
                     function getCountryList(id, list){
 
                         var templist = _.filter(list, function(item){
@@ -601,7 +542,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         return govs.join(" ");
                     }
 
-                  //===============================================================================================================================
+                  
                     function buildFieldQuery(field, type, allFilters){
                         var q = '';
                         var capacityBuildingResource;
@@ -643,7 +584,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         return null;
                     }
 
-                  //===============================================================================================================================
+                  
                     function addORCondition(field, values, boost){
                         var q ="";
                         var conditions = [];
@@ -653,7 +594,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         return q;
                     }
 
-                    //===============================================================================================================================
+                    
                     function addANDConditionText(field, values, boost){
                         var q ="";
                         var conditions = [];
@@ -662,14 +603,14 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         return q;
                     }
 
-                  //===============================================================================================================================
+                  
                     function combineQuery(qCondition, op1 ){
                         var q ='';
                         _.each(qCondition, function (val){ if(val) q = q + (q ? op1 : "") + "(" + val + ")" } );
                         return q ? q : '';
                     }
 
-                  //===============================================================================================================================
+                  
                     function loadFilters() {
 
                          //console.log('load filters');
@@ -696,7 +637,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         $scope.test = $scope.searchFilters.length;
                     };
 
-                  //===============================================================================================================================
+                  
                     function loadCountryFilters() {
 
                         $q.when(commonjs.getCountries(), function(data) {
@@ -709,7 +650,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         });
                     };
 
-                  //===============================================================================================================================
+                  
                     function loadABSKeywordFilters() {
 
                         //IRCC filters
@@ -951,7 +892,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         },{})
                         return duplicate;
                     }
-                    //===============================================================================================================================
+                    
                      function addKeywordFilter(keyword, related, parent, level, broader){
                         if(!level)
                             level=0;
@@ -968,7 +909,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         //    addKeywordFilter(narrower, keyword.identifier);
                         //});
                     }
-                    // //===============================================================================================================================
+                    // 
                     //  function addThematicAreaFilter(keyword,related, parent){
 
                     //     addFilter(keyword.identifier, {'type':'keyword', 'name':keyword.title[locale||en], 'id':keyword.identifier,
@@ -980,7 +921,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     // }
 
 
-                  //===============================================================================================================================
+                  
                     function loadRegionsFilters(){
 
                         $q.when(commonjs.getRegions(), function(regions) {
@@ -991,7 +932,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 });
                         });
                     };
-                    //===============================================================================================================================
+                    
                     function addRegionFilter(region, parent){
 
                         addFilter(region.identifier, {'type':'region', 'name':region.title[locale||en], 'id':region.identifier,
@@ -1001,12 +942,12 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             addRegionFilter(narrower, region.identifier);
                         });
                     }
-                    //===============================================================================================================================
+                    
                     function loadDateFilters(){
                         addFilter('publishedOn',  {'sort': 1,'type':'date',  'name':'Published On', 'id':'publishedOn', 'description':'Date range when the record was published'});
                     };
 
-                  //===============================================================================================================================
+                  
                     function loadSchemaFilters() {
                        
                         
@@ -1030,7 +971,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     };
 
                   ///////////////
-                  ////===============================================================================================================================
+                  //
                   /////////
 
                     function load(){
@@ -1081,7 +1022,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         return query;
                     }
 
-                    //===============================================================================================================================
+                    
                     function loadTabFacets(){
                             var qNational  = queryFilterBuilder("national");
                             var qReference = queryFilterBuilder("reference");
@@ -1120,13 +1061,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     this.getFilter = getFilter;
                     this.getSearchFiltersByParent = getSearchFiltersByParent;
 
-                    //===============================================================================================================================
+                    
                     $scope.$watch('searchKeyword', function(){
                         this.searchKeyword = $scope.searchKeyword;
 				    });
 
 
-                  //===============================================================================================================================
+                  
                   if(!$scope.skipResults){
                         $scope.$watch('refresh', function(newVal, oldVal){
                             if(newVal && newVal !== oldVal){
@@ -1152,7 +1093,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     $scope.refresh = false;
                   }
 
-                    //===============================================================================================================================
+                    
                     $scope.getRelatedKeywords = function() {
                        $scope.relatedKeywords ={};
                        var relatedKeywords = {};
@@ -1180,7 +1121,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
 
 
-                    //===============================================================================================================================
+                    
                     loadFilters();
 
 
@@ -1423,7 +1364,23 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         }
                     }, 200)
 
+                    ////////////////////////////////////////////
+                    ////// $scope functions
+                    ////////////////////////////////////////////
 
+                    ////////////////////////////////////////////
+                    ////// end $scope functions
+                    ////////////////////////////////////////////
+
+                    ////////////////////////////////////////////
+                    ////// internal functions
+                    ////////////////////////////////////////////
+
+
+                    ////////////////////////////////////////////
+                    ////// end internal functions
+                    ////////////////////////////////////////////
+                    init();
 
             }]//controller
         };
