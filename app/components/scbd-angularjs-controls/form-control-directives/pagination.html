@@ -5,23 +5,23 @@
                 <strong>Page <span ng-bind="currentPage"></span> of <span ng-bind="pageCount"></span></strong>
             </a>
         </li>
-        <li ng-class="{disabled: currentPage-1 == 0}" class="hidden-xs">
+        <li ng-class="{'disabled': currentPage-1 == 0}" class="hidden-xs">
             <a ng-disabled="currentPage-1 == 0" 
                 translation-url href ng-click="actionSetPage(1)">« First</a>
         </li>
-        <li ng-class="{disabled: currentPage-1 == 0}" >
+        <li ng-class="{'disabled': currentPage-1 == 0}" >
             <a ng-disabled="currentPage-1 == 0" 
                 translation-url href ng-click="actionSetPage(currentPage-1)">‹ <span class="hidden-xs">Prev</span></a>
         </li>
         <li ng-repeat="n in range(pageCount)" ng-class="{active: n+1 == currentPage}" ng-click="actionSetPage(n+1)">
             <a translation-url href>{{n+1}}</a>
         </li>
-        <li ng-class="{disabled: currentPage-1 >= pageCount - 1}">
+        <li ng-class="{'disabled': currentPage-1 >= pageCount - 1}">
             <a ng-disabled="currentPage-1 >= pageCount - 1" 
                 translation-url href ng-click="actionSetPage(currentPage+1)">
                 <span  class="hidden-xs">Next</span> ›</a>
         </li>
-        <li ng-class="{disabled: currentPage-1 >= pageCount - 1}"  class="hidden-xs">
+        <li ng-class="{'disabled': currentPage-1 >= pageCount - 1}"  class="hidden-xs">
             <a  ng-disabled="currentPage-1 >= pageCount - 1"
                 translation-url href ng-click="actionSetPage(pageCount)">Last »</a>
         </li>

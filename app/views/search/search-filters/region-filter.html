@@ -8,6 +8,7 @@
                 <a translation-url  class="filter"  ng-click="saveFilter(doc)" >
                     <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                     {{doc.name.substring(22)}}
+                    <strong>({{$parent.searchResult.data.facets[doc.id]||0}})</strong>
                 </a>
         </div>
     </div>
@@ -22,6 +23,7 @@
             <a translation-url  class="filter"  ng-click="saveFilter(doc)" >
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                 {{doc.name}}
+                <strong>({{$parent.searchResult.data.facets[doc.id]||0}})</strong>
             </a>
           </div>
         </div>

@@ -26,22 +26,35 @@
                         template : 'sortByDialog',
                         controller: ['$scope', function($scope){
                             $scope.sortByFields = [
-                                {field:'relevance'    , title: 'Relevance' },
-                                {field:'updatedDate_dt', title: 'Last Updated On' },
-                                {field:'recordType'   , title: 'Record Type' },
-                                {field:'country'      , title: 'Country'}
+                                {field:'relevance'      , title: 'Relevance'       ,direction: 'asc'},
+                                {field:'updatedDate_dt' , title: 'Last Updated On' ,direction: 'asc'},
+                                {field:'schema_s'       , title: 'Record Type'     ,direction: 'asc'},
+                                {field:'government_s'   , title: 'Country'         ,direction: 'asc'}
                             ]
-                            $scope.selectedFields = _.filter($scope.sortByFields, function(field){
-                                var has = _.includes(selectedFields, field.field)
-                                if(has)
-                                    field.selected = true;
-                                return has;
-                            });// || [];
-                            $scope.selectField = function(field){                                
-                                field.selected=!field.selected;
 
-                                if(field.selected)
-                                    $scope.selectedFields.push(field)
+                            _.each(selectedFields, function(field){
+                                var splitField = field.split(' ')
+                                var existing = _.find($scope.sortByFields, {field: splitField[0]})
+                                if(existing){
+                                    existing.selected = true;
+                                    existing.direction = splitField[1];
+                                    if(!$scope.selectedFields) $scope.selectedFields = [];
+                                    $scope.selectedFields.push(existing)
+                                }
+                            });
+
+                            $scope.selectField = function(field,direction){  
+                                if(!direction)                              
+                                    field.selected=!field.selected;
+
+                                field.direction=direction||'asc';
+                                if(field.selected){
+                                    var existing = _.find($scope.selectedFields, {field: field.field})
+                                    if(existing)
+                                        existing.direction = field.direction
+                                    else
+                                        $scope.selectedFields.push(field)
+                                }
                                 else{
                                     var index = _.indexOf($scope.selectedFields, _.find($scope.selectedFields, {field: field.field}));
                                     $scope.selectedFields.splice(index, 1);
@@ -60,7 +73,7 @@
                 }
 
                 function onSortByChange(selectedFields){
-                    $scope.sortFields = _.map(selectedFields, 'field');
+                    $scope.sortFields = _.map(selectedFields, function(field){return field.field + ' ' + field.direction });
                     $scope.onSortByChange({fields:$scope.sortFields})
                 }
 

@@ -21,10 +21,9 @@
                     schemas    : realm.schemas,
                     currentPage: 1,
                     pageCount  : 0,
-                    rowsPerPage: 25,
-                    sortBy     : 'updatedDate_dt desc'
+                    rowsPerPage: 25
                 } 
-
+                // ,                    sortBy     : 'updatedDate_dt desc'
                 function updateResult(query, sort, pageNumber){
                    
                     $scope.loading = true;
@@ -33,19 +32,27 @@
 
                     var lQuery = {
                         query   : query,
-                        sort    : sort||$scope.searchResult.sortBy,
                         rowsPerPage    : $scope.searchResult.rowsPerPage,
-                        currentPage    : pageNumber - 1
+                        currentPage    : pageNumber - 1,
+                        facet:true,
+                        facetFields : ['all_terms_ss', 'government_REL_ss']
                     }
+                    //'schema_s', 'government_s', 
+                    if(sort)
+                        lQuery.sort    = $scope.searchResult.sort = sort;
+
                     return searchService.list(lQuery)
                     .then(function(result){            
 
-                        $scope.searchResult.docs        = result.data.response.docs
+                        $scope.searchResult.docs        = result.data.response.docs;
                         $scope.searchResult.numFound    = result.data.response.numFound;
                         $scope.searchResult.pageCount   = Math.ceil(result.data.response.numFound / $scope.searchResult.rowsPerPage);
                         $scope.searchResult.query       = lQuery.query;
                         $scope.searchResult.sortBy      = lQuery.sort;
                         $scope.searchResult.currentPage = pageNumber;
+                        
+                        $scope.searchResult.facets      = _.extend(result.data.facet_counts.facet_fields['all_terms_ss'], 
+                                                                   result.data.facet_counts.facet_fields['government_REL_ss'])
                         
                         return $scope.searchResult;
                     })
