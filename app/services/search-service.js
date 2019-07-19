@@ -11,13 +11,14 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                 var searchDefaults = {
                     currentPage: 0,
                     rowsPerPage: 25,
-                    sort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
                     fields: base_fields + en_fields,
                     query: '*:*',
-                    groupSort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
                     groupField: 'government_s',
                     groupLimit: 100000
                 }
+
+                // groupSort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
+                // sort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
                 var q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
 
                 //================================================================================================================
@@ -35,12 +36,33 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                         'rows': searchQuery.rowsPerPage,
                     };
 
+                    if(searchQuery.facet){
+                        queryListParameters.facet = true
+                        queryListParameters['facet.field']  = searchQuery.facetFields
+                        queryListParameters['facet.mincount'] = 1,
+                        queryListParameters['facet.limit'] =  512
+                    }
+
                     // console.log("list:" + q + searchQuery.query);
 
                     return $http.get('/api/v2013/index/select', {
-                        params: queryListParameters,
-                        timeout: queryCanceler
-                    });
+                            params: queryListParameters, timeout: queryCanceler
+                           }).then(function(data){
+                                if(searchQuery.facet){
+                                    /// Normalize Facets
+                                    var facets = {};
+                                    if(_.isArray(searchQuery.facetFields)){
+                                        _.each(searchQuery.facetFields, function(field){
+                                            facets[field] = facetsToObject(data.data.facet_counts.facet_fields[field])
+                                        })
+                                    }
+                                    else
+                                        facets[searchQuery.facetFields] = facetsToObject(data.data.facet_counts.facet_fields[searchQuery.facetFields])
+                                    
+                                    data.data.facet_counts.facet_fields = facets
+                                }
+                                return data;
+                           });
 
 
                 }
@@ -101,7 +123,7 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                         });
                         return $q.when(queryAction)
                             .then(function(data) {
-                                var facets = readFacets2(data.data.facet_counts.facet_fields[facetQuery.fields]);
+                                var facets = readFacets2(data.data.facet_counts.facet_fields);
 
                                 if (localStorageKey)
                                     localStorageService.set(localStorageKey, facets);
@@ -195,6 +217,16 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                                 title: facet,
                                 count: solrArray[i + 1]
                             });
+                        }
+                    }
+                    return facets;
+                };
+                function facetsToObject(solrArray) {
+
+                    var facets = {};
+                    if (solrArray) {
+                        for (var i = 0; i < solrArray.length; i += 2) {
+                            facets[solrArray[i]] = solrArray[i + 1];
                         }
                     }
                     return facets;

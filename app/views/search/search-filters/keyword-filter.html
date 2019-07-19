@@ -18,6 +18,7 @@
                     <a translation-url  class="filter" ng-show="doc.level===0 || isFilterOn(doc.broader)" ng-click="saveFilter(doc)" ng-class="{'level0':level===0,'level1':doc.level===1,'level2':doc.level===2,'level3':doc.level===3, }">
                         <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                         {{doc.name}}
+                        <strong>({{$parent.searchResult.data.facets[doc.id]||0}})</strong>
                     </a>
             </div>
         </div>
@@ -35,6 +36,7 @@
                     <a translation-url  class="filter"  ng-click="saveFilter(doc)">
                         <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                         {{doc.name}}
+                        <strong>({{$parent.searchResult.data.facets[doc.id]||0}})</strong>
                     </a>
                     
             </div>
