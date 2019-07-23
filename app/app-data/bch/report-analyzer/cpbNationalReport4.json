@@ -460,7 +460,15 @@
                     "trigger" : "enable"
                   },
                   {
-                    "question": "Q032",
+                    "baseQuestion":"Q032",
+                    "question": "Q032_a",
+                    "values"  : ["true"],
+                    "type"    : "@hasValues",
+                    "trigger" : "enable"
+                  },
+                  {
+                    "baseQuestion":"Q032",
+                    "question": "Q032_b",
                     "values"  : ["true"],
                     "type"    : "@hasValues",
                     "trigger" : "enable"
