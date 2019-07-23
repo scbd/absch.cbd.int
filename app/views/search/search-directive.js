@@ -92,6 +92,24 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     ////////////////////////////////////////////
                     ////// $scope functions
                     ////////////////////////////////////////////
+                    $scope.saveFreeTextFilter = function(text) {
+
+                        if(!text && text.length <= 0)
+                            return;
+
+                        var fid = 'freeText_' + text;
+                        var id = undefined;
+
+                         if($scope.setFilters[fid] )
+                           delete $scope.setFilters[fid];
+                        else{
+                           $scope.setFilters[fid] = {'type':'freeText', 'name': ""+text+"", 'id':fid};
+
+                           $scope.searchKeyword = "";
+                        }
+
+                        $scope.refresh = true;
+                    };
 
                     $scope.isFilterOn = function (filterID) {
                         if (!filterID)
@@ -102,6 +120,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     $scope.saveFilter = function (doc) {
 
+                        
+                        if(!$scope.searchResult.data.facets[doc.id])
+                            return;
                         //TODO: if free text check to see if there is a UID and convert to identifier
                         console.debug("addfilter:" + doc);
 
@@ -186,6 +207,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     function init(){
 
+                        loadGlobalFacets();
                         loadFilters();
 
                         if(!$scope.skipResults && $routeParams.recordType){
@@ -222,6 +244,15 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         //         }
                         //     });
                         // }
+                    }
+
+                    function loadGlobalFacets(){
+                        searchService.facets({fields: ['all_terms_ss', 'government_REL_ss']}).then(function(result){
+                            
+                            var facets = _.extend(result['all_terms_ss'], 
+                                                  result['government_REL_ss']);
+                            $scope.searchResult.globalFacets = facets;
+                        })
                     }
 
                     function loadFilters() {

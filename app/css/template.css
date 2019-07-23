@@ -2027,3 +2027,6 @@ legend+ .help-info {
 sup {
     font-size: 8px;;
 }
+a.disabled{
+    color:#BBB!important;
+}

@@ -48,18 +48,8 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     return $http.get('/api/v2013/index/select', {
                             params: queryListParameters, timeout: queryCanceler
                            }).then(function(data){
-                                if(searchQuery.facet){
-                                    /// Normalize Facets
-                                    var facets = {};
-                                    if(_.isArray(searchQuery.facetFields)){
-                                        _.each(searchQuery.facetFields, function(field){
-                                            facets[field] = facetsToObject(data.data.facet_counts.facet_fields[field])
-                                        })
-                                    }
-                                    else
-                                        facets[searchQuery.facetFields] = facetsToObject(data.data.facet_counts.facet_fields[searchQuery.facetFields])
-                                    
-                                    data.data.facet_counts.facet_fields = facets
+                                if(searchQuery.facet){ /// Normalize Facets                                   
+                                    data.data.facet_counts.facet_fields = facetsToObject(data.data.facet_counts.facet_fields, searchQuery.facetFields)
                                 }
                                 return data;
                            });
@@ -123,7 +113,8 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                         });
                         return $q.when(queryAction)
                             .then(function(data) {
-                                var facets = readFacets2(data.data.facet_counts.facet_fields);
+                                var facets;                               
+                                facets = facetsToObject(data.data.facet_counts.facet_fields, facetQuery.fields);
 
                                 if (localStorageKey)
                                     localStorageService.set(localStorageKey, facets);
@@ -221,14 +212,23 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     }
                     return facets;
                 };
-                function facetsToObject(solrArray) {
+                function facetsToObject(solrArray, facetFields) {
 
                     var facets = {};
-                    if (solrArray) {
-                        for (var i = 0; i < solrArray.length; i += 2) {
-                            facets[solrArray[i]] = solrArray[i + 1];
-                        }
+                    if(!_.isArray(facetFields)){
+                        facetFields = [facetFields]
                     }
+
+                    _.each(facetFields, function(field){
+                        if (solrArray){
+                            for (var i = 0; i < solrArray[field].length; i += 2) {
+                                if(!facets[field])
+                                    facets[field] = {};
+                                facets[field][solrArray[field][i]] = solrArray[field][i + 1];
+                            }
+                        }
+                    });
+                                                           
                     return facets;
                 };
 
