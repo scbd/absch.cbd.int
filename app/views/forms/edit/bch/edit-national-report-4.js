@@ -24,12 +24,12 @@ function (app, _, nr4Data, nr3Data) {
             },
             {
                 "tab":2,
-                "title":"11 - 25",
+                "title":"11 - 26",
                 "sections" : [{key:"General"}, {key:"Article2"}, {key:"Article5"}, {key:"Article6"}]
             },
             {
                 "tab":3,
-                "title":"26 - 38",
+                "title":"27 - 38",
                 "sections" : [{key:"Articles7-10"}]
             },
             {
@@ -64,7 +64,7 @@ function (app, _, nr4Data, nr3Data) {
             },
             {
                 "tab":10,
-                "title":"161 - 188",
+                "title":"162 - 185",
                 "sections" : [{key:"Article26"}, {key:"Article28"}, {key:"Article33"}, {key:"LiabilityRedress"} ]
             },
             {
@@ -497,7 +497,7 @@ function (app, _, nr4Data, nr3Data) {
                 if(document && document.header.identifier){
                     _.each(document, function(element, key){
                         if(/^Q/.test(key) && _.isArray(element)){//only fields starting with Q
-                            $scope.multiTermModel[key] = _.map(element, function(e){ return { identifier : e.value }});
+                            $scope.multiTermModel[key] = _.map(element, function(e){ return { identifier : e.value, customValue: e.additionalInformation }});
                         }
                     })
                     transformNr4Data();//workaround as in the first call not all questions are built so the disable/visible clause does not work.
