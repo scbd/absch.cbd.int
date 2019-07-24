@@ -99,10 +99,11 @@ define(['app','text!views/directives/home-country-dashboard-directive.html', 'lo
                         searchService.group(referenceRecordsQuery)
                             .then(function(data) {
                                 _.each(data.data.grouped.schema_s.groups, function(group){
-                                    referenceRecords[group.groupValue] = {
-                                        recordCount : group.doclist.numFound,
-                                        docs        : group.doclist.docs
-                                    };
+                                    var refRecords = _.find(referenceRecords, {schema:group.groupValue});
+                                    if(refRecords){
+                                        refRecords.recordCount = group.doclist.numFound;
+                                        refRecords.docs        = group.doclist.docs;
+                                    }
                                 });
                                 $scope.referenceRecords = referenceRecords;
                             })
