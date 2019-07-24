@@ -139,7 +139,7 @@
                 </h5>
             </a>
 
-            <div ng-repeat="doc in referenceRecords[schema.schema].docs" ng-show="doc.title_t && $index < 5"  class="link1 ref-type-doc">
+            <div ng-repeat="doc in schema.docs" ng-show="doc.title_t && $index < 5"  class="link1 ref-type-doc">
                 <div style="border-left:#fa6938 solid 3px;">
                     <div style="padding:0 5px 0 5px;">
                         <a translation-url  href="/database/{{doc.schema_s}}/{{doc.identifier_s}}" >
@@ -173,7 +173,7 @@
                     {{schema.title|lstring:locale}}
                 </h5>
             </a>
-            <div ng-repeat="doc in referenceRecords[schema.schema].docs" ng-show="doc.title_t && $index < 5" class="link1 ref-type-doc">
+            <div ng-repeat="doc in schema.docs" ng-show="doc.title_t && $index < 5" class="link1 ref-type-doc">
                 <div style="border-left:#666 solid 3px;">
                     <div style="padding:0 5px 0 5px;">
                         <a translation-url  href="/database/{{doc.schema_s}}/{{hexToInteger(doc.identifier_s)}}" >
