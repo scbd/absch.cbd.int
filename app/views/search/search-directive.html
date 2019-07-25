@@ -59,7 +59,7 @@
                             <i ng-if="!showFilters || showFilters!='userSearchFilter'" class="fa fa-caret-down"></i>
                             &nbsp; My saved searches</a> </li>
                     <li class="pull-right">
-                        <result-view-options sort-fields="searchResult.sortFields" on-sort-by-change="onSortByChange(fields)"></result-view-options>
+                        <result-view-options sort-fields="searchResult.sortFields" view-type="searchResult.viewType" on-sort-by-change="onSortByChange(fields)"></result-view-options>
                     </li>
                 </ul>
             </div>
@@ -115,8 +115,12 @@
                     <div ng-switch-when="list">
                         <div search-result-list-view api="searchResult.listViewApi"></div>
                     </div>
-                    <div ng-switch-when="group"></div>
-                    <div ng-switch-when="matrix"></div>
+                    <div ng-switch-when="group">
+                        Grouping.... selectedddd                        
+                    </div>
+                    <div ng-switch-when="matrix">
+                        Matrix.... selectedddd         
+                    </div>
                 </div>
                
             </div>

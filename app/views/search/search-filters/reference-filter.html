@@ -6,10 +6,10 @@
         Reference records include a number of ABS relevant resources and information. They can be submitted by any registered user of the ABS Clearing-House (Parties, Non-Parties, governments, international organizations, indigenous and local communities, and relevant stakeholders.</p>
         
     <div ng-repeat="doc in rf_filters = (rf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])">
-            <a translation-url  class="filter"  ng-click="saveFilter(doc)" ng-class="{'disabled':!$parent.searchResult.data.facets[doc.id]}">
+            <a translation-url  class="filter"  ng-click="saveFilter(doc)" ng-class="::{'disabled':!$parent.searchResult.data.facets[doc.id]}">
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> 
                 {{doc.name}}
-                <strong>({{$parent.searchResult.data.facets[doc.id]||0}})</strong>
+                <strong>({{::$parent.searchResult.data.facets[doc.id]||0}})</strong>
             </a>
             <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon" ng-if="doc.description"></i> {{doc.description}} </p>-->
            <span ng-if="doc.description" href="#" class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{doc.description}}" data-container="body"></span>
