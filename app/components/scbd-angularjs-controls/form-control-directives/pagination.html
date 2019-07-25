@@ -32,11 +32,16 @@
                 </strong>
             </a>
         </li>
-        <li class="hidden-xs disabled">
+        <li class="hidden-xs ">
                 <a disabled>
-                Items per page 
-                <select ng-model="pageSize" ng-options="k as v for (k,v) in {25:25, 50:50, 100:100, 200:200}"
-                    ng-change="onPageSizeChanged({size:pageSize})"></select>
+                Items per page
+                <select ng-model="pageSize" ng-change="onPageSizeChanged({size:pageSize});">
+                    <option ng-value="25">25</option>
+                    <option ng-value="50">50</option>
+                    <option ng-value="100">100</option>
+                    <option ng-value="200">200</option>
+                    <option ng-value="300">300</option>
+                </select>
             </a>
         </li>
     </ul>

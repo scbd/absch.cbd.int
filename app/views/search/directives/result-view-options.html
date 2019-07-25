@@ -2,8 +2,11 @@
     <ul class="pagination">        
         <li class="disabled">
             <a disabled>View Type
-                <select ng-model="viewType" ng-options="k as v for (k,v) in {list:'List', group:'Group', matrix:'Matrix'}"
-                ng-change="onViewTypeChanged({viewType:viewType})"></select>
+                <select ng-model="viewType" ng-change="viewTypeChange(viewType);">
+                    <option ng-value="'list'">List</option>
+                    <option ng-value="'group'">Group</option>
+                    <option ng-value="'matrix'">Matrix</option>
+                </select>
             </a>
         </li>        
         <li>
@@ -54,6 +57,40 @@
                         <ul class="pagination">                         
                             <li ng-repeat-start="field in selectedFields track by $index">                                                             
                                 <span ng-bind="field.title + ' (' + field.direction + ')'"></span>
+                            </li>
+                            <li ng-repeat-end>
+                                <span ng-if="!$last"> then by</span>
+                            </li>
+                        </ul> 
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
+                <button type="button" class="btn btn-primary pull-left" ng-click="apply()">Apply</button>
+            </div>
+        </script>
+
+        <script type="text/ng-template" trados-translation="true" id="groupByDialog">
+            <div class="modal-header">
+                <h3 class="modal-title">
+                    Group by fields
+                </h3>
+            </div>
+            <div class="modal-body">		
+                <div id="divTable"  style="max-height:300px;overflow:scroll; font-size:11px; ">
+                    <div>                         
+                        <li ng-repeat="field in groupByFields" class="btn-group" style="margin:5px">
+                            <button  ng-bind="field.title"  ng-click="selectField(field)" class="btn btn-sm" 
+                                ng-class="{'btn-primary':field.selected}"></button>                            
+                        </li>
+                    </div>
+                    <div ng-if="selectedFields.length">  
+                        <div>Group By </div>
+                        <ul class="pagination">                         
+                            <li ng-repeat-start="field in selectedFields track by $index">                                                             
+                                <span ng-bind="field.title"></span>
                             </li>
                             <li ng-repeat-end>
                                 <span ng-if="!$last"> then by</span>

@@ -121,8 +121,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     $scope.saveFilter = function (doc) {
 
                         
-                        if(!$scope.searchResult.data.facets[doc.id])
-                            return;
+                        // if(!$scope.searchResult.data.facets[doc.id])
+                        //     return;
                         //TODO: if free text check to see if there is a UID and convert to identifier
                         console.debug("addfilter:" + doc);
 
