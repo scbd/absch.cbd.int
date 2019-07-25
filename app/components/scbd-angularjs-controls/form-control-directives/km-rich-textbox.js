@@ -73,6 +73,9 @@ define(['app','text!./km-rich-textbox.html','angular','angular-trix'], function(
 									});
 
 									$scope.binding = !$.isEmptyObject(oNewBinding) ? oNewBinding : undefined;
+									// https://docs.angularjs.org/api/ng/directive/ngChange
+									// if the model is changed programmatically and not by a change to the input value 
+									// so manually raise onchange manually
 									$scope.ngChange();
 							};
 
