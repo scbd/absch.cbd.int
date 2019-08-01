@@ -12,7 +12,8 @@
                 api:'='
             },
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-                  
+                var queryCanceler;
+                
                 $scope.recordLoader = {};
                 $scope.api = {
                     updateResult : updateResult
@@ -35,30 +36,48 @@
                         rowsPerPage    : $scope.searchResult.rowsPerPage,
                         currentPage    : pageNumber - 1,
                         facet:true,
-                        facetFields : ['all_terms_ss', 'government_REL_ss']
+                        facetFields : ['all_terms_ss', 'government_REL_ss'],
+                        groupField: 'governmentSchemaIdentifier_s',
+                        groupLimit: 10
                     }
                     //'schema_s', 'government_s', 
                     if(sort)
                         lQuery.sort    = $scope.searchResult.sort = sort;
 
-                    return searchService.list(lQuery)
-                    .then(function(result){            
-
-                        $scope.searchResult.docs        = result.data.response.docs;
-                        $scope.searchResult.numFound    = result.data.response.numFound;
-                        $scope.searchResult.pageCount   = Math.ceil(result.data.response.numFound / $scope.searchResult.rowsPerPage);
-                        $scope.searchResult.query       = lQuery.query;
-                        $scope.searchResult.sortBy      = lQuery.sort;
-                        $scope.searchResult.currentPage = pageNumber;
-                        
-                        $scope.searchResult.facets      = _.extend(result.data.facet_counts.facet_fields['all_terms_ss'], 
-                                                                   result.data.facet_counts.facet_fields['government_REL_ss'])
-                        
-                        return $scope.searchResult;
-                    })
-                    .finally(function(){
-                        $scope.loading = false;
-                    })
+                    queryCanceler = $q.defer();
+        
+                    searchService.group(lQuery, queryCanceler)
+                        .then(function (data) {
+                            queryCanceler = null;
+    
+                            $scope.recordCount[0].count = data.data.grouped.governmentSchemaIdentifier_s.matches;
+                            $scope.tabs['nationalRecords'].pageCount = Math.ceil(data.data.grouped.governmentSchemaIdentifier_s.ngroups / $scope.itemsPerPage);
+    
+                            $scope.searchResult.rawDocs = [];
+    
+                            var countryRecords = {}
+                            _.each(data.data.grouped.governmentSchemaIdentifier_s.groups, function (record) {
+    
+                                var gpDetails = (record.groupValue || '').split('_');
+                                if (!gpDetails.length)
+                                    return;
+                                var schema = gpDetails[1];
+                                var country = gpDetails[0];
+                                if (!countryRecords[country])
+                                    countryRecords[country] = {
+                                        schemas: angular.copy(schemaTemplate)
+                                    };
+                                countryRecords[country].country = country;
+    
+                                countryRecords[country].schemas[schema] = _.extend(countryRecords[country].schemas[schema], record.doclist);
+    
+                            });
+                            $scope.searchResult.rawDocs = _.values(countryRecords);
+    
+                        })
+                        .finally(function(){
+                            $scope.loading = false;
+                        })
                 }
 
                 $scope.onPageChange = function(pageNumber){
@@ -79,6 +98,7 @@
                         $scope.recordLoader.api.loadDocument(doc.schema_s, doc.identifier_s);
                     },10)
                 };
+
             },
         };
     }]);
