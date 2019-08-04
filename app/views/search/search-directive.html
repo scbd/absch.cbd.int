@@ -109,7 +109,10 @@
         <!-- ng-if="!skipResults" -->
         <div class="row" style="padding:10px 0 0 0;margin:0px;">
             <!-- Search Result -->
-            <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;" id="recordsContent">
+            <div class="bg-white hidden-xs" ng-class="{'col-xs-2':leftMenuFilters}" style="border:1px solid #eee">
+                <div left-side-filter></div>
+            </div>
+            <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;" id="recordsContent" ng-class="{'col-xs-10':leftMenuFilters}">
               
                 <div ng-switch="searchResult.viewType">
                     <div ng-switch-when="list">

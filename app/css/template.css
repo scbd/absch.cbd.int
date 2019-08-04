@@ -2030,3 +2030,11 @@ sup {
 a.disabled{
     color:#BBB!important;
 }
+
+
+.search-filters.ngdialog.ngdialog-theme-default .ngdialog-content{padding:0;}
+        
+.search-filters.ngdialog-theme-default.wide .ngdialog-content{
+    min-width:70% !important;
+}
+.search-filters .modal-body{background-color:#FFF;}

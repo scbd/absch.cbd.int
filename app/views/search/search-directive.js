@@ -6,7 +6,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
  'ngDialog','views/register/user-preferences/user-alerts','views/directives/export-directive','services/thesaurus-service', 'angular-animate', 
  'angular-joyride','components/scbd-angularjs-services/services/locale',
  'components/scbd-angularjs-controls/form-control-directives/pagination','views/search/search-results/list-view',
- 'views/search/directives/result-view-options'
+ 'views/search/directives/result-view-options', 'views/search/search-filters/left-side-filter'
 ], function(app, template, _, scbdSchemas, joyRideText) {
 
     app.directive('searchDirective', function() {
@@ -141,8 +141,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             var broader = $scope.searchFilters[filterID].broader;
                         }
 
-                        if ($scope.setFilters[termID])
+                        if ($scope.setFilters[termID]){
                             delete $scope.setFilters[termID];
+                        }
                         else {
                             $scope.setFilters[termID] = {
                                 type     : $scope  .searchFilters[filterID].type,
@@ -152,6 +153,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 broader  : broader ,
                                 filterID : filterID
                             };
+                        }
+                        if($scope .searchFilters[filterID].otherType == 'schema'){
+                            $scope.leftMenuEnabled = true;
+                            $scope.onSchemaFilterChanged(termID, $scope.setFilters[termID])
                         }
 
                         // if(!_.isEmpty($scope.setFilters)){ 
@@ -178,6 +183,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     $scope.removeFilter = function (filterID) {
                         delete $scope.setFilters[filterID];
 
+                        if($scope .searchFilters[filterID].otherType == 'schema'){
+                            $scope.onSchemaFilterChanged(filterID, $scope.setFilters[filterID])
+                        }
                         //remove children
                         var dels = {};
                         var toDelete = _.each($scope.setFilters, function (filter) {
@@ -443,27 +451,43 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     
                     function loadBCHKeywordFilters() {
                     
-                        var bchTerms = [
-                            'decisionTypes', 'decisionLMOFFPSubject', 'decisionResults', 'riskAssessmentScope', 'dnaSequenceFamily',
-                            'dnaSequenceTraits', 'legislationAgreementTypes', 'subjectAreas', 'typeOfOrganisms', 'domestication', 'OrganismCommonUses',
-                            'techniqueUsed', 'cnaJurisdictions'
-                        ]
+
+                        thesaurusService.getDomainTerms('decisionTypes'            ).then(function(keywords){loopKeywords(keywords, 'biosafetyLaw' , 'Type of Document')});
+                        thesaurusService.getDomainTerms('subjectAreas'            ).then(function(keywords){loopKeywords(keywords, 'biosafetyLaw' , 'Subject area')});
+                        thesaurusService.getDomainTerms('decisionLMOFFPSubject'    ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
+                        thesaurusService.getDomainTerms('decisionResults'          ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
+                        thesaurusService.getDomainTerms('riskAssessmentScope'      ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
+                        thesaurusService.getDomainTerms('dnaSequenceFamily'        ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
+                        thesaurusService.getDomainTerms('dnaSequenceTraits'        ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
+                        thesaurusService.getDomainTerms('legislationAgreementTypes').then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
+                        thesaurusService.getDomainTerms('subjectAreas'             ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
+                        thesaurusService.getDomainTerms('typeOfOrganisms'          ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
+                        thesaurusService.getDomainTerms('domestication'            ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
+                        thesaurusService.getDomainTerms('OrganismCommonUses'       ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
+                        thesaurusService.getDomainTerms('techniqueUsed'            ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
+                        thesaurusService.getDomainTerms('cnaJurisdictions'         ).then(function(keywords){loopKeywords(keywords, 'authority' , 'Title')});
+                        
+                        // var bchTerms = [
+                        //     'decisionTypes', 'decisionLMOFFPSubject', 'decisionResults', 'riskAssessmentScope', 'dnaSequenceFamily',
+                        //     'dnaSequenceTraits', 'legislationAgreementTypes', 'subjectAreas', 'typeOfOrganisms', 'domestication', 'OrganismCommonUses',
+                        //     'techniqueUsed', 'cnaJurisdictions'
+                        // ]
                     
-                        $q.all(_.map(bchTerms, thesaurusService.getDomainTerms))
-                            .then(function (results) {
-                                _.each(results, function (terms) {
-                                    _.each(terms, function (term) {
-                                        addKeywordFilter(term, 'bchTerm', "ABS Thematic Areas");
-                                    })
-                                });
-                            })
+                        // $q.all(_.map(bchTerms, thesaurusService.getDomainTerms))
+                        //     .then(function (results) {
+                        //         _.each(results, function (terms) {
+                        //             _.each(terms, function (term) {
+                        //                 addKeywordFilter(term, 'bchTerm', "ABS Thematic Areas");
+                        //             })
+                        //         });
+                        //     })
                     
                     }
 
                     function loopKeywords(keywords, related, parent, level, broader){
                         if((keywords||[]).length){
                             _.each(keywords, function (keyword, index) {
-                                addKeywordFilter(keyword, related, parent, level, broader);
+                                addKeywordFilter(keyword, related, parent, level, broader||keyword.broader);
                             });
                         }
                     }
@@ -669,17 +693,18 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var q = '';
                         var capacityBuildingResource;
                         if ($scope.setFilters[type]) {
-                            q = field + ":(" + allFilters + ")"
+                            q = field + ":(" + encodeURIComponent(allFilters) + ")"
                         } else {
                             _.each($scope.setFilters, function (item) {
                                 if (item.type == type || item.otherType==type) {
                                     if (customKeywords[item.id] && item.id == 'capacityBuildingResource') {
                                         capacityBuildingResource = true;
                                         q = q + 'resource' + ' '
-                                    } else if (customKeywords[item.id] && item.id != 'capacityBuildingResource')
-                                        q = q + customKeywords[item.id].identifiers.join(' ') + ' ';
+                                    } 
+                                    else if (customKeywords[item.id] && item.id != 'capacityBuildingResource')
+                                        q = q + encodeURIComponent(customKeywords[item.id].identifiers.join(' ')) + ' ';
                                     else
-                                        q = q + item.id + ' ';
+                                        q = q + encodeURIComponent(item.id) + ' ';
 
                                 }
                             });
@@ -688,10 +713,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if (q) {
                             var newQuery = field + ":(" + q + ")";
                             if (capacityBuildingResource)
-                                newQuery += ' AND all_terms_ss:(' + customKeywords['capacityBuildingResource'].identifiers.join(' ') + ') ';
+                                newQuery += ' AND all_terms_ss:(' + encodeURIComponent(customKeywords['capacityBuildingResource'].identifiers.join(' ')) + ') ';
                             return newQuery;
                         } else if (allFilters)
-                            return field + ":(" + allFilters + ")";
+                            return field + ":(" + encodeURIComponent(allFilters) + ")";
                         else
                             return null;
                     }
@@ -734,6 +759,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         return q ? q : '';
                     }
 
+                    // function onSchemaFilterChanged(schema)
 
                     ////////////////////////////////////////////
                     ////// end internal functions
