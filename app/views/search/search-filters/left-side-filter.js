@@ -14,7 +14,8 @@
                 $scope.onSchemaFilterChanged = function(schema, selected){
                     console.log(schema);
                     if(!selected){
-                        $scope.leftMenuFilters[schema] = undefined;
+                        if($scope.leftMenuFilters)
+                            $scope.leftMenuFilters[schema] = undefined;
                         $scope.leftMenuFilters = _.omit($scope.leftMenuFilters, _.isUndefined);
                         if(_.isEmpty($scope.leftMenuFilters))
                             $scope.leftMenuFilters = undefined;
@@ -27,6 +28,9 @@
                                 // filter.facet = $scope.$parent.searchResult.data.facets[filter.id];
                                 if(!filters[filter.parent])
                                     filters[filter.parent] = [];
+
+                                filter.selected = $scope.isFilterOn(filter.id);
+                                filter.facet    = ($scope.searchResult.data.facets||{})[filter.id]||0;
                                 filters[filter.parent].push(filter);
                             }
                         });
@@ -107,6 +111,12 @@
                                         selectedItems[item.identifier] = true;
                                     })        
                                 }
+                                
+                                _.each(selectedItems, function(item, key){//skip already selected filters
+                                    if(item && setFilters[key])
+                                        selectedItems[key] = undefined;
+                                });
+
                                 updateBaseFilter(selectedItems);
                                 ngDialog.close();
                             }
@@ -117,12 +127,35 @@
                     function updateBaseFilter(selectedItems){
 
                         _.each(selectedItems, function(item, key){ 
-                            var filter = _.find(options, {id:key})
-                            $scope.saveFilter(filter);
+                            if(item!==undefined){
+                                var filter = _.find(options, {id:key})
+                                $scope.saveFilter(filter);
+                            }
                         })
                     }
                 }
 
+                $scope.updateLeftFilterStatus = function(termID, selected){
+
+                    filterMenu:
+                        for (var menu in $scope.leftMenuFilters) {
+                            for (var filter in $scope.leftMenuFilters[menu]) {
+                                var options = $scope.leftMenuFilters[menu][filter];
+                                for (var i=0; i<options.length; i++) {
+                                    if(options[i].id == termID){
+                                        options[i].selected = selected;
+                                        // break filterMenu; //TODO loop for each schema
+                                    }
+                                }
+                            }
+                        }
+                  
+                }
+
+                $scope.sortFilterOptions = function(item){
+                    return $scope.setFilters[item.id];
+                    // return $scope.isFilterOn(item.id)
+                }
             }
         };
     }]);

@@ -14,12 +14,12 @@
             <div ng-repeat="(filterKey, filter) in filters"  style="padding-left:10px;padding-top:5px" ng-show="!state[schema]">
                 <!-- {{filter}} -->
                 <div class="bold color-darkgrey">{{filterKey}}</div>
-                <div ng-repeat="option in filter | limitTo:5" style="padding-left:10px">
+                <div ng-repeat="option in filter | orderBy:['-selected', '-facet'] | limitTo:5" style="padding-left:10px">
                     <a class="filter" ng-click="saveFilter(option)" ng-class="{'level0':option.level===0,'level1':option.level===1,'level2':option.level===2,'level3':option.level===3, 
-                        'disabled':(!$parent.searchResult.data.facets[option.id])}">
-                        <i class="fa check" ng-class="{'fa-check-square':isFilterOn(option.id),'fa-square':!isFilterOn(option.id)}"></i>
+                        'disabled':(!option.facet)}">
+                        <i class="fa check" ng-class="{'fa-check-square':option.selected,'fa-square':!option.selected}"></i>
                         {{option.name}}
-                        <strong class="pull-right">({{$parent.searchResult.data.facets[option.id]||0}})</strong>
+                        <strong class="pull-right">({{option.facet}})</strong>
                     </a>
                 </div>
                 <div ng-if="filter.length>5"  style="padding-left:10px">
@@ -50,9 +50,15 @@
 
             <div id="divTable"  style="max-height:300px;overflow:scroll; font-size:11px; ">
                
-                <div class="col-md-12" >
-                    <i class="fa fa-2x fa-list-ul pull-right" style="cursor:pointer" ng-click="showListView()"></i>
-                    <i class="fa fa-2x fa-sitemap pull-right" style="cursor:pointer" ng-click="showTree()"></i>
+                <div class="col-md-12">
+                    <div  class="btn-group pull-right" role="group">
+                        <button class="btn btn-default" ng-class="{'btn-primary': view=='list'}" ng-click="showListView()">
+                            <i class="fa fa-list-ul" style="cursor:pointer"></i>
+                        </button>
+                        <button class="btn btn-default" ng-class="{'btn-primary': view!='list'}" ng-click="showTree()">
+                            <i class="fa fa-sitemap" style="cursor:pointer"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="col-md-12">
                     <ul class="horizontal-list" ng-show="view=='list'">                         
