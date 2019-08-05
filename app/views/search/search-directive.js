@@ -72,6 +72,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     $scope.realm         = realm
                     $scope.searchFilters = {};
                     $scope.setFilters    = {};
+                    $scope.relatedKeywords = {};
                     $scope.searchResult = {
                         viewType  : 'list',
                         sortFields: ['updatedDate_dt desc'],
@@ -155,10 +156,15 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             };
                         }
                         if($scope .searchFilters[filterID].otherType == 'schema'){
+                            $scope.getRelatedKeywords();
                             $scope.leftMenuEnabled = true;
-                            $scope.onSchemaFilterChanged(termID, $scope.setFilters[termID])
+                            if($scope.onSchemaFilterChanged)
+                                $scope.onSchemaFilterChanged(termID, $scope.setFilters[termID])
                         }
-
+                        else if($scope .searchFilters[filterID].type == 'keyword'){
+                            $scope.updateLeftFilterStatus(termID, $scope.setFilters[termID])
+                        }
+                        
                         // if(!_.isEmpty($scope.setFilters)){ 
                         //     //if not empty and the default sort is not set by the user then remove sort to default to relevance
                         //     if($scope.searchResult.sortFields.length == 1 && $scope.searchResult.sortFields[0]=='updatedDate_dt')
@@ -181,10 +187,16 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     };
 
                     $scope.removeFilter = function (filterID) {
+
+                        var id = $scope.setFilters[filterID].filterID
                         delete $scope.setFilters[filterID];
 
-                        if($scope .searchFilters[filterID].otherType == 'schema'){
-                            $scope.onSchemaFilterChanged(filterID, $scope.setFilters[filterID])
+                        if($scope.searchFilters[filterID] && $scope.searchFilters[filterID].otherType == 'schema' && $scope.onSchemaFilterChanged){
+                            $scope.onSchemaFilterChanged(filterID, $scope.setFilters[filterID]);
+                            $scope.getRelatedKeywords();
+                        }
+                        else if($scope.searchFilters[id].type == 'keyword'){
+                            $scope.updateLeftFilterStatus(filterID, $scope.setFilters[filterID])
                         }
                         //remove children
                         var dels = {};
@@ -202,6 +214,33 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         $scope.searchResult.sortFields = fields;
                         updateQueryResult();
                     }
+
+                    $scope.getRelatedKeywords = function () {
+                        
+                        var relatedKeywords = $scope.relatedKeywords = {};
+                        var setIds = {};
+                        var keywords = getSearchFilters("keyword");
+
+                        if ($scope.setFilters) {
+
+                            _.each($scope.setFilters, function (set) {
+
+                                relatedKeywords = _.filter(keywords, function (item) {
+
+                                    if (item.related.toLowerCase().indexOf(set.id.toLowerCase()) >= 0)
+                                        return item;
+                                    else
+                                        return null;
+                                });
+                                if (!_.isEmpty(relatedKeywords))
+                                    $scope.relatedKeywords[set.id] = relatedKeywords;
+                            });
+                        }
+
+
+
+                    }
+
 
                     ////////////////////////////////////////////
                     ////// end $scope functions
@@ -242,6 +281,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         $timeout(function(){
                             if(!$scope.skipResults)updateQueryResult();
+
                         }, 200)
 
                         // if(!$scope.skipResults){
@@ -575,7 +615,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         resultQuery.then(function(data){
                             $scope.searchResult.data = data;
                         })
-
+ 
                     }
 
                     function buildSearchQuery(){
