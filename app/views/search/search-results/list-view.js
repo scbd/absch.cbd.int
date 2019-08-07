@@ -38,7 +38,7 @@
                         facetFields : ['all_terms_ss', 'government_REL_ss']
                     }
                     //'schema_s', 'government_s', 
-                    if(sort)
+                    if(sort && sort != 'relevance asc')
                         lQuery.sort    = $scope.searchResult.sort = sort;
 
                     return searchService.list(lQuery)

@@ -79,7 +79,7 @@
 
                 $scope.viewTypeChange = function(type){
                     if(type == 'list'){
-                        $scope.onViewTypeChange({viewType:type})
+                        $scope.onViewTypeChange({options:{viewType:type}})
                     }
                     if(type == 'group'){
                         showGroupByDialog()
@@ -96,9 +96,9 @@
                         controller: ['$scope', function($scope){
                             $scope.groupByFields = [
                                 {field:'government_s'     , title: 'Government'         },
-                                {field:'schema_s'         , title: 'Type of record'     },
-                                {field:'submissionYear_s' , title: 'Year of submission' }
+                                {field:'schema_s'         , title: 'Type of record'     }
                             ]
+                            // ,{field:'submissionYear_s' , title: 'Year of submission' }
 
                             _.each(selectedFields, function(field){
                                 var splitField = field.split(' ')
@@ -142,7 +142,7 @@
                 }
                 function onGroupByChange(selectedFields){
                     $scope.groupByFields = _.map(selectedFields, function(field){return field.field});
-                    $scope.onViewTypeChange('group', {fields:$scope.sortFields})
+                    $scope.onViewTypeChange({options:{ viewType:'group', fields:$scope.groupByFields}})
                 }
             }
         }

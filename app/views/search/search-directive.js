@@ -3,10 +3,12 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 'views/search/search-filters/national-filter','views/search/search-filters/reference-filter','views/search/search-filters/scbd-filter',
 'views/search/search-filters/country-filter','views/search/search-filters/region-filter','views/search/search-filters/date-filter',
 'views/search/search-results/result-default','views/search/search-results/national-records-country','services/app-config-service',
- 'ngDialog','views/register/user-preferences/user-alerts','views/directives/export-directive','services/thesaurus-service', 'angular-animate', 
- 'angular-joyride','components/scbd-angularjs-services/services/locale',
- 'components/scbd-angularjs-controls/form-control-directives/pagination','views/search/search-results/list-view',
- 'views/search/directives/result-view-options', 'views/search/search-filters/left-side-filter'
+'ngDialog','views/register/user-preferences/user-alerts','views/directives/export-directive','services/thesaurus-service', 'angular-animate', 
+'angular-joyride','components/scbd-angularjs-services/services/locale',
+'components/scbd-angularjs-controls/form-control-directives/pagination',
+'views/search/directives/result-view-options', 'views/search/search-filters/left-side-filter',
+'views/search/search-results/list-view','views/search/search-results/group-view'
+
 ], function(app, template, _, scbdSchemas, joyRideText) {
 
     app.directive('searchDirective', function() {
@@ -212,6 +214,14 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     $scope.onSortByChange = function(fields){
                         $scope.searchResult.sortFields = fields;
                         $scope.searchResult.sortFields = fields;
+                        updateQueryResult();
+                    }
+
+                    $scope.onViewTypeChange = function(options){
+                        console.log(options);
+                        $scope.searchResult.viewType = options.viewType;
+                        if(options.viewType == 'group')
+                            $scope.searchResult.groupByFields = options.fields;
                         updateQueryResult();
                     }
 
@@ -607,7 +617,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                            resultQuery = $scope.searchResult.listViewApi.updateResult(query, sortFields, pageNumber||1);
                         }
                         else if($scope.searchResult.viewType == 'group'){
-                            
+                            var options = {
+                                query : query,
+                                groupByFields : $scope.searchResult.groupByFields
+                            }
+                            resultQuery = $scope.searchResult.groupViewApi.updateResult(options, sortFields, pageNumber||1);
                         }
                         else if($scope.searchResult.viewType == 'matrix'){
                             
