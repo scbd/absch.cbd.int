@@ -101,20 +101,17 @@
                             // ,{field:'submissionYear_s' , title: 'Year of submission' }
 
                             _.each(selectedFields, function(field){
-                                var splitField = field.split(' ')
-                                var existing = _.find($scope.sortByFields, {field: splitField[0]})
+                                var existing = _.find($scope.groupByFields, {field: field})
                                 if(existing){
                                     existing.selected = true;
-                                    existing.direction = splitField[1];
                                     if(!$scope.selectedFields) $scope.selectedFields = [];
-                                    $scope.selectedFields.push(existing)
+                                        $scope.selectedFields.push(existing)
                                 }
                             });
 
-                            $scope.selectField = function(field,direction){  
-                                if(!direction)                              
-                                    field.selected=!field.selected;
-
+                            $scope.selectField = function(field){
+                                
+                                field.selected=!field.selected;
                                 if(field.selected){
                                     if(!$scope.selectedFields) $scope.selectedFields = [];
                                     $scope.selectedFields.push(field)
@@ -125,6 +122,8 @@
                                 }
                             }
                             $scope.closeDialog = function(){
+                                if(($scope.selectedFields||[]).length == 0)                                    
+                                    onGroupByChange([{field:'government_s'}, {field:'schema_s'}]) //default to this grouping when nothing is selected
                                 ngDialog.close();
                             }
                             $scope.apply = function(){

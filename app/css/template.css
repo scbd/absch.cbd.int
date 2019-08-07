@@ -1502,8 +1502,8 @@ div.recordDefault:hover {
 }
 
 
-#search-new .active .badge {
-    background-color: #333;
+#search-new .badge {
+    background-color: #333!important;
     color: white;
 }
 #search-new .section-title {
@@ -1522,7 +1522,7 @@ div.recordDefault:hover {
     border: 1px solid #e3e3e3;
     border-bottom: 0;
 }
-#search-new .tab-content {
+/* #search-new .tab-content {
     border: 1px solid #e3e3e3;
 }
 #search-new .nav-tabs>li {
@@ -1546,7 +1546,7 @@ div.recordDefault:hover {
     margin-left: 0!important;
     padding-right: 0!important;
     margin-right: 0!important;
-}
+} */
 .tooltip {
     font-size: 14px;
 }

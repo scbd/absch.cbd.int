@@ -32,8 +32,8 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
 
                     var queryListParameters = {
                         'q': q + searchQuery.query,
-                        'sort': searchQuery.sort,
-                        'fl': localeFields(searchQuery.fields),
+                        'sort': localizeFields(searchQuery.sort),
+                        'fl': localizeFields(searchQuery.fields),
                         'wt': 'json',
                         'start': searchQuery.start || (searchQuery.currentPage * searchQuery.rowsPerPage),
                         'rows': searchQuery.rowsPerPage,
@@ -71,8 +71,8 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
 
                     var queryGroupParameters = {
                         'q': q + searchQuery.query,
-                        'sort': searchQuery.sort,
-                        'fl': localeFields(searchQuery.fields),
+                        'sort': localizeFields(searchQuery.sort),
+                        'fl': localizeFields(searchQuery.fields),
                         'wt': 'json',
                         'start': searchQuery.start || (searchQuery.currentPage * searchQuery.rowsPerPage),
                         'rows': searchQuery.rowsPerPage,
@@ -80,15 +80,24 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                         'group.ngroups': true,
                         'group.field': searchQuery.groupField,
                         'group.limit': searchQuery.groupLimit,
-                        'group.sort': searchQuery.groupSort
+                        'group.sort': localizeFields(searchQuery.groupSort)
                     };
 
+                    if(searchQuery.facet){
+                        queryGroupParameters.facet = true
+                        queryGroupParameters['facet.field']  = searchQuery.facetFields
+                        queryGroupParameters['facet.mincount'] = 1,
+                        queryGroupParameters['facet.limit'] =  512
+                    }
                     // console.log("group:" + q + searchQuery.query);
 
-                    return $http.get('/api/v2013/index/select', {
-                        params: queryGroupParameters,
-                        timeout: queryCanceler
-                    });
+                    return $http.get('/api/v2013/index/select', { params: queryGroupParameters, timeout: queryCanceler})
+                                .then(function(data){
+                                    if(searchQuery.facet){ /// Normalize Facets                                   
+                                        data.data.facet_counts.facet_fields = facetsToObject(data.data.facet_counts.facet_fields, searchQuery.facetFields)
+                                    }
+                                    return data;
+                            });
                 }
 
                 //================================================================================================================
@@ -238,7 +247,7 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     return facets;
                 };
 
-                function localeFields(fields){
+                function localizeFields(fields){
 
                     if(locale && locale!='en'){
                         return fields.replace(/_EN/ig, '_'+(locale||'en').toUpperCase())
