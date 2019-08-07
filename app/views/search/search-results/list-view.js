@@ -64,13 +64,14 @@
                 $scope.onPageChange = function(pageNumber){
                     updateResult($scope.searchResult.query, $scope.searchResult.sort, pageNumber);
                     $location.search({
-                        currentPage:pageNumber
+                        currentPage:pageNumber,
+                        rowsPerPage:$scope.searchResult.rowsPerPage
                     })
                 }
 
                 $scope.onPageSizeChanged = function(size){
-                    $scope.searchResult.rowsPerPage = size;
-                    $scope.onPageChange();
+                    $scope.searchResult.rowsPerPage = size;                    
+                    $scope.onPageChange($scope.searchResult.currentPage);
                 }
 
                 $scope.loadDocument = function(doc){

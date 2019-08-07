@@ -267,14 +267,15 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         loadGlobalFacets();
                         loadFilters();
 
+                        var query =  $location.search();
+                        var currentpage = query.currentPage||1;
+                        
                         if(!$scope.skipResults && $routeParams.recordType){
                             if($routeParams.recordType == 'run-query'){
                                 var queryFilter = localStorageService.get("run-query");                            
                                 setSearchFilters(queryFilter);
                             }
                             else{
-
-                                var query =  $location.search();
                                 if(query){
                                     if(query.text){
                                         $scope.saveFreeTextFilter(query.text);
@@ -290,7 +291,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         }
 
                         $timeout(function(){
-                            if(!$scope.skipResults)updateQueryResult();
+                            if(!$scope.skipResults)updateQueryResult(currentpage);
 
                         }, 200)
 
