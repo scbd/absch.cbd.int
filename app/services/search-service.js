@@ -25,6 +25,9 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                 this.list = function(searchQuery, queryCanceler) {
 
                     _.defaults(searchQuery, searchDefaults);
+                    if(searchQuery.additionalFields)
+                        searchQuery.fields += ',' + searchQuery.additionalFields;
+                           
                     q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
 
                     var queryListParameters = {
@@ -61,6 +64,9 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                 this.group = function(searchQuery, queryCanceler) {
 
                     _.defaults(searchQuery, searchDefaults);
+                    if(searchQuery.additionalFields)
+                        searchQuery.fields += ',' + searchQuery.additionalFields;
+
                     q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
 
                     var queryGroupParameters = {

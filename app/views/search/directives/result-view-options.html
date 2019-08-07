@@ -1,12 +1,13 @@
 ﻿<div>
     <ul class="pagination">        
-        <li class="disabled">
-            <a disabled>View Type
+        <li class="disabled1">
+            <a href="#">View Type
                 <select ng-model="viewType" ng-change="viewTypeChange(viewType);">
                     <option ng-value="'list'">List</option>
                     <option ng-value="'group'">Group</option>
                     <option ng-value="'matrix'">Matrix</option>
                 </select>
+                <i class="fa fa-cog" ng-if="viewType=='group'" ng-click="viewTypeChange(viewType);"></i>
             </a>
         </li>        
         <li>
