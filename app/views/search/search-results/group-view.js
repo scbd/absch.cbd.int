@@ -78,6 +78,7 @@
                                         var groupValue = gpDetails[i];
                                         group[groupValue] = {}
                                         group[groupValue].levelKey = groupValue;
+                                        group[groupValue].field = fieldMapping[i];
                                         group[groupValue].level = i+1;
                                         group[groupValue].title = record.doclist.docs[0][fieldMapping[i]+'_groupTitle'];
 
@@ -91,6 +92,7 @@
                                         }
                                         if(i>0){
                                             var prevLevel = group[gpDetails[i-1]] //get prev group and add the current as sub-level
+                                            group[groupValue].parent = prevLevel; //set parent for future traversing.
                                             prevLevel.subLevels = [group[groupValue]];
                                         }                                       
                                     }
@@ -112,25 +114,30 @@
                                 }
     
                             });
-                            console.log(_.values(countryRecords));
                             $scope.searchResult.docs        = _.values(countryRecords);
                             $scope.searchResult.recordsFound= result.data.grouped[groupField].matches;
                             $scope.searchResult.numFound    = result.data.grouped[groupField].ngroups;
-                            $scope.searchResult.pageCount   = Math.ceil(result.data.grouped[groupField].ngroups / $scope.itemsPerPage);
+                            $scope.searchResult.pageCount   = Math.ceil(result.data.grouped[groupField].ngroups / $scope.searchResult.rowsPerPage);
                             $scope.searchResult.query       = lQuery.query;
                             $scope.searchResult.sortBy      = lQuery.sort;
                             $scope.searchResult.currentPage = pageNumber;
                             
-                            // $scope.searchResult.facets      = _.extend(result.data.facet_counts.facet_fields['all_terms_ss'], 
-                            //                                         result.data.facet_counts.facet_fields['government_REL_ss'])
+                            $scope.searchResult.groupOptions= options;
+                            $scope.searchResult.groupSort = lQuery.groupSort
+
+                            $scope.searchResult.facets      = _.extend(result.data.facet_counts.facet_fields['all_terms_ss'], 
+                                                                    result.data.facet_counts.facet_fields['government_REL_ss'])
                             
                             return $scope.searchResult;
     
                         })
+                        .finally(function(){
+                            $scope.loading = false;
+                        })
                 }
 
                 $scope.onPageChange = function(pageNumber){
-                    updateResult($scope.searchResult.query, $scope.searchResult.sort, pageNumber);
+                    updateResult($scope.searchResult.groupOptions, $scope.searchResult.sort, pageNumber);
                     $location.search({
                         currentPage:pageNumber
                     })
@@ -148,7 +155,39 @@
                     },10)
                 };
 
-            },
+
+                $scope.loadRecords = function(group, number){
+                    console.log(group, number)
+                    group.isLoading = true;
+                    var query = {
+                        query   : $scope.searchResult.query + ' AND (' + groupFieldQuery(group) + ')',
+                        sort    : $scope.searchResult.groupSort,
+                        rowsPerPage    : number||5000,
+                        start          : number ? undefined : (group.start==0 ? 10 : group.start),
+                        currentPage    : group.start==0 ? 1 : Math.ceil((group.start+number)/10)
+                    }
+                    return searchService.list(query)
+                    .then(function(result){
+                        group.start = query.currentPage*10;
+                        
+                        group.docs = group.docs.concat(result.data.response.docs)
+                    })
+                    .finally(function(){
+                        group.isLoading = false;
+                    })
+
+                }
+
+                function groupFieldQuery(group){
+                    var parentField = '';
+                    if(group.parent)
+                        parentField = ' AND ' + groupFieldQuery(group.parent);
+
+                    return (group.field + ':' + group.levelKey + parentField)||'';
+
+                }
+
+            }
         };
     }]);
 });
