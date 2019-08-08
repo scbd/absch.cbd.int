@@ -217,8 +217,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         updateQueryResult();
                     }
 
-                    $scope.onViewTypeChange = function(options){
-                        console.log(options);
+                    $scope.onViewTypeChange = function(options){                        
                         $scope.searchResult.viewType = options.viewType;
                         if(options.viewType == 'group')
                             $scope.searchResult.groupByFields = options.fields;
@@ -269,7 +268,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         var query =  $location.search();
                         var currentpage = query.currentPage||1;
-                        
+
                         if(!$scope.skipResults && $routeParams.recordType){
                             if($routeParams.recordType == 'run-query'){
                                 var queryFilter = localStorageService.get("run-query");                            
@@ -322,17 +321,17 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         }
                         if (_.isEmpty($scope.searchFilters)) {
                             $scope.searchFilters = {};
-                            loadSchemaFilters();
-                            loadCountryFilters();
-                            loadRegionsFilters();
-                            loadDateFilters();
-
+                            
+                            var chKeywordsFilter;
                             if (isABS)
-                                loadABSKeywordFilters();
+                                chKeywordsFilter = loadABSKeywordFilters();
                             else if (isBCH)
-                                loadBCHKeywordFilters();
-                                
-                            localStorageService.set("searchFilters", $scope.searchFilters);
+                                chKeywordsFilter = loadBCHKeywordFilters();
+
+                            $q.all([loadSchemaFilters(), loadCountryFilters(), loadRegionsFilters(), loadDateFilters(), chKeywordsFilter])
+                            .then(function(){
+                                localStorageService.set("searchFilters", $scope.searchFilters);
+                            })
                         }                
                     };
 
@@ -349,10 +348,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                         'description': (schema.description || {}).en, otherType:'schema' });
                         })
 
-                        addFilter('npParty'    , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Protocol'                  , 'id': 'npParty'    , 'description': '' });
-                        addFilter('npInbetween', { 'sort': 2, 'type': 'partyStatus', 'name': 'Ratified, not yet Party to the Protocol', 'id': 'npInbetween', 'description': '' });
-                        addFilter('npNonParty' , { 'sort': 3, 'type': 'partyStatus', 'name': 'Not a Party to the Protocol '           , 'id': 'npNonParty' , 'description': '' });
-                        addFilter('npSignatory', { 'sort': 4, 'type': 'partyStatus', 'name': 'Signatory to the Protocol'              , 'id': 'npSignatory', 'description': '' });
+                        addFilter('partyToProtocol'     , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Protocol'                   , 'id': 'partyToProtocol'     , 'description': '' });
+                        addFilter('inbetween'           , { 'sort': 2, 'type': 'partyStatus', 'name': 'Ratified, not yet Party to the Protocol' , 'id': 'inbetween'           , 'description': '' });
+                        addFilter('nonParty'            , { 'sort': 3, 'type': 'partyStatus', 'name': 'Not a Party to the Protocol '            , 'id': 'nonParty'            , 'description': '' });
+                        addFilter('signatoryToProtocol' , { 'sort': 4, 'type': 'partyStatus', 'name': 'Signatory to the Protocol'               , 'id': 'signatoryToProtocol' , 'description': '' });
 
                         //SCBD
                         _.each(scbdSchemas, function (schema, key) {
@@ -402,30 +401,31 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     function loadABSKeywordFilters() {
 
+                        var promises = [];
                         //IRCC filters
                         addKeywordFilter(customKeywords.commercial, 'absPermit', 'IRCC usages');
                         addKeywordFilter(customKeywords.nonCommercial, 'absPermit', 'IRCC usages');
                     
-                        $q.when(thesaurusService.getDomainTerms('keywords'), function (keywords) {
+                        promises.push(thesaurusService.getDomainTerms('keywords'), function (keywords) {
                             _.each(keywords, function (keyword, index) {
                                 addKeywordFilter(keyword, 'absPermit', 'IRCC keywords');
                             });
                         });
                     
                         //CP
-                        $q.when(thesaurusService.getDomainTerms('cpJurisdictions'), function (keywords) {
+                        promises.push(thesaurusService.getDomainTerms('cpJurisdictions'), function (keywords) {
                             _.each(keywords, function (keyword, index) {
                                 addKeywordFilter(keyword, 'absCheckpoint', 'Checkpoint jurisdiction');
                             });
                         });
                         //CPC
-                        $q.when(thesaurusService.getDomainTerms('keywords'), function (keywords) {
+                        promises.push(thesaurusService.getDomainTerms('keywords'), function (keywords) {
                             _.each(keywords, function (keyword, index) {
                                 addKeywordFilter(keyword, 'absCheckpointCommunique', 'Checkpoint communique keywords');
                             });
                         });
 
-                        $q.when(commonjs.getThematicAreas(), function (keywords) {
+                        promises.push(commonjs.getThematicAreas(), function (keywords) {
                             var levels = [];
                             var parents = [];
                             var level = 0;
@@ -451,7 +451,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     
                         });                                        
                     
-                        $q.when(commonjs.getMSR_elements(), function (keywords) {
+                        promises.push(commonjs.getMSR_elements(), function (keywords) {
                             var levels = [];
                             var parents = [];
                             var level = 0;
@@ -477,47 +477,67 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     
                         });
                     
-                        commonjs.getKeyAreas          ().then(function(keywords){loopKeywords(keywords, ''                                                             , ''                                  )});
-                        commonjs.getCBI_audience      ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative resource capacitybuildingresource' , 'Target Audience'                   )});
-                        commonjs.getMSR_types         ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Type'                              )});
-                        commonjs.getMSR_status        ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Legal Status'                      )});
-                        commonjs.getMSR_modelcontract ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Contains model contractual clause' )});
-                        commonjs.getCNA_scope         ().then(function(keywords){loopKeywords(keywords, 'authority'                                                    , 'Scope of responsibilities'         )});
-                        commonjs.getMSR_jurisdictions ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Jurisdiction'                      )});
-                        commonjs.getCNA_jurisdictions ().then(function(keywords){loopKeywords(keywords, 'authority'                                                    , 'Jurisdiction'                      )});
-                        commonjs.getMCC_keywords      ().then(function(keywords){loopKeywords(keywords, 'modelcontractualclause'                                       , 'Keyword'                           )});
-                        commonjs.getMCC_types         ().then(function(keywords){loopKeywords(keywords, 'modelcontractualclause'                                       , 'Type'                              )});
-                        commonjs.getCBI_cats          ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Category'                          )});
-                        commonjs.getCBI_types         ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Type'                              )});
-                        commonjs.getCBI_fundingsrc    ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Funding Source'                    )});
-                        commonjs.getCBI_status        ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Status'                            )});
-                        commonjs.getCBI_status        ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Status'                            )});
-                        commonjs.getCBR_level         ().then(function(keywords){loopKeywords(keywords, 'resource capacitybuildingresource'                            , 'Level'                             )});
-                        commonjs.getCBR_purpose       ().then(function(keywords){loopKeywords(keywords, 'resource capacitybuildingresource'                            , 'Purpose'                           )});
-                        commonjs.getCBR_formats       ().then(function(keywords){loopKeywords(keywords, 'resource capacitybuildingresource'                            , 'Format'                            )});
-                        commonjs.getCPP_types         ().then(function(keywords){loopKeywords(keywords, 'communityprotocol'                                            , 'Type'                              )});
-                        commonjs.getAichiTargets      ().then(function(keywords){loopKeywords(keywords, ''                                                             , 'Aichi Targets'                     )});
-                    
+                        promises.push(commonjs.getKeyAreas          ().then(function(keywords){loopKeywords(keywords, ''                                                             , ''                                  )}));
+                        promises.push(commonjs.getCBI_audience      ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative resource capacitybuildingresource' , 'Target Audience'                   )}));
+                        promises.push(commonjs.getMSR_types         ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Type'                              )}));
+                        promises.push(commonjs.getMSR_status        ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Legal Status'                      )}));
+                        promises.push(commonjs.getMSR_modelcontract ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Contains model contractual clause' )}));
+                        promises.push(commonjs.getCNA_scope         ().then(function(keywords){loopKeywords(keywords, 'authority'                                                    , 'Scope of responsibilities'         )}));
+                        promises.push(commonjs.getMSR_jurisdictions ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Jurisdiction'                      )}));
+                        promises.push(commonjs.getCNA_jurisdictions ().then(function(keywords){loopKeywords(keywords, 'authority'                                                    , 'Jurisdiction'                      )}));
+                        promises.push(commonjs.getMCC_keywords      ().then(function(keywords){loopKeywords(keywords, 'modelcontractualclause'                                       , 'Keyword'                           )}));
+                        promises.push(commonjs.getMCC_types         ().then(function(keywords){loopKeywords(keywords, 'modelcontractualclause'                                       , 'Type'                              )}));
+                        promises.push(commonjs.getCBI_cats          ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Category'                          )}));
+                        promises.push(commonjs.getCBI_types         ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Type'                              )}));
+                        promises.push(commonjs.getCBI_fundingsrc    ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Funding Source'                    )}));
+                        promises.push(commonjs.getCBI_status        ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Status'                            )}));
+                        promises.push(commonjs.getCBI_status        ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Status'                            )}));
+                        promises.push(commonjs.getCBR_level         ().then(function(keywords){loopKeywords(keywords, 'resource capacitybuildingresource'                            , 'Level'                             )}));
+                        promises.push(commonjs.getCBR_purpose       ().then(function(keywords){loopKeywords(keywords, 'resource capacitybuildingresource'                            , 'Purpose'                           )}));
+                        promises.push(commonjs.getCBR_formats       ().then(function(keywords){loopKeywords(keywords, 'resource capacitybuildingresource'                            , 'Format'                            )}));
+                        promises.push(commonjs.getCPP_types         ().then(function(keywords){loopKeywords(keywords, 'communityprotocol'                                            , 'Type'                              )}));
+                        promises.push(commonjs.getAichiTargets      ().then(function(keywords){loopKeywords(keywords, ''                                                             , 'Aichi Targets'                     )}));
+                        
+
+                        return $q.all(promises)
                     };
                     
                     function loadBCHKeywordFilters() {
-                    
+                        var promises = []
+                        promises.push(loadJsonFile('/app/app-data/bch/focalpoint-category.json').then(function(keywords){
+                            _.each(keywords, function (title, key) {
+                                var keyword = { identifier:key };
+                                keyword.title = {};
+                                keyword.title[locale] = title;
+                                addKeywordFilter(keyword, 'focalPoint', 'Type of Focal point');
+                            });
+                        }));
 
-                        thesaurusService.getDomainTerms('decisionTypes'            ).then(function(keywords){loopKeywords(keywords, 'biosafetyLaw' , 'Type of Document')});
-                        thesaurusService.getDomainTerms('subjectAreas'            ).then(function(keywords){loopKeywords(keywords, 'biosafetyLaw' , 'Subject area')});
-                        thesaurusService.getDomainTerms('decisionLMOFFPSubject'    ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
-                        thesaurusService.getDomainTerms('decisionResults'          ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
-                        thesaurusService.getDomainTerms('riskAssessmentScope'      ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
-                        thesaurusService.getDomainTerms('dnaSequenceFamily'        ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
-                        thesaurusService.getDomainTerms('dnaSequenceTraits'        ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
-                        thesaurusService.getDomainTerms('legislationAgreementTypes').then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
-                        thesaurusService.getDomainTerms('subjectAreas'             ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
-                        thesaurusService.getDomainTerms('typeOfOrganisms'          ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
-                        thesaurusService.getDomainTerms('domestication'            ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
-                        thesaurusService.getDomainTerms('OrganismCommonUses'       ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
-                        thesaurusService.getDomainTerms('techniqueUsed'            ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')});
-                        thesaurusService.getDomainTerms('cnaJurisdictions'         ).then(function(keywords){loopKeywords(keywords, 'authority' , 'Title')});
+                        promises.push(thesaurusService.getDomainTerms('decisionTypes'             ).then(function(keywords){loopKeywords(keywords, 'biosafetyDecision'                                , 'Type of Document'                            )}));
+                        promises.push(thesaurusService.getDomainTerms('legislationAgreementTypes' ).then(function(keywords){loopKeywords(keywords, 'biosafetyLaw'                                     , 'Type of document'                            )}));
+                        promises.push(thesaurusService.getDomainTerms('subjectAreas'              ).then(function(keywords){loopKeywords(keywords, 'biosafetyLaw authority'                           , 'Subject Areas / Regulatory Functions'        )}));
+                        promises.push(thesaurusService.getDomainTerms('cnaJurisdictions'          ).then(function(keywords){loopKeywords(keywords, 'authority'                                        , 'Jurisdictions'                               )}));
+                        promises.push(thesaurusService.getDomainTerms('riskAssessmentScope'       ).then(function(keywords){loopKeywords(keywords, 'nationalRiskAssessment independentRiskAssessment' , 'Scope of the risk assessment'                )}));
+                        promises.push(thesaurusService.getDomainTerms('organizationTypes'         ).then(function(keywords){loopKeywords(keywords, 'expert organization'                              , 'Type of Organization'                        )}));
+                        promises.push(thesaurusService.getDomainTerms('expertiseArea'             ).then(function(keywords){loopKeywords(keywords, 'expert'                                           , 'Areas of Expertise'                          )}));
+                        promises.push(thesaurusService.getDomainTerms('resourceTypes'             ).then(function(keywords){loopKeywords(keywords, 'resource'                                         , 'Type of resource'                            )}));
+                        promises.push(thesaurusService.getDomainTerms('languages'                 ).then(function(keywords){loopKeywords(keywords, 'resource'                                         , 'Language'                                    )}));
+                        promises.push(thesaurusService.getDomainTerms('typeOfOrganisms'           ).then(function(keywords){loopKeywords(keywords, 'organism'                                         , 'Type of organism(s)'                         )}));
+                        promises.push(thesaurusService.getDomainTerms('domestication'             ).then(function(keywords){loopKeywords(keywords, 'organism'                                         , 'Organism domesticatio'                       )}));
+                        promises.push(thesaurusService.getDomainTerms('OrganismCommonUses'        ).then(function(keywords){loopKeywords(keywords, 'organism modifiedOrganism'                        , 'Common use(s)'                               )}));
+                        promises.push(thesaurusService.getDomainTerms('dnaSequenceFamily'         ).then(function(keywords){loopKeywords(keywords, 'dnaSequence'                                      , 'Category'                                    )}));
+                        promises.push(thesaurusService.getDomainTerms('dnaSequenceTraits'         ).then(function(keywords){
+                            loopKeywords(keywords, 'dnaSequence modifiedOrganism'                     , 'Related trait(s) or use(s) in biotechnology' )
+                        }
+                            ));
+                        promises.push(thesaurusService.getDomainTerms('techniqueUsed'             ).then(function(keywords){loopKeywords(keywords, 'modifiedOrganism'                                 , 'Techniques used for the modification'        )}));
+
+                        promises.push(thesaurusService.getDomainTerms('decisionLMOFFPSubject'    ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')}));
+                        promises.push(thesaurusService.getDomainTerms('decisionResults'          ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')}));
                         
+                        
+                        
+                        return $q.all(promises);
                         // var bchTerms = [
                         //     'decisionTypes', 'decisionLMOFFPSubject', 'decisionResults', 'riskAssessmentScope', 'dnaSequenceFamily',
                         //     'dnaSequenceTraits', 'legislationAgreementTypes', 'subjectAreas', 'typeOfOrganisms', 'domestication', 'OrganismCommonUses',
@@ -535,10 +555,18 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     
                     }
 
+                    function loadJsonFile(filePath){
+                        var deferred = $q.defer();                        
+                        require(['json!'+filePath], function(res){
+                            deferred.resolve(res);
+                        });
+
+                        return deferred.promise;
+                    }
                     function loopKeywords(keywords, related, parent, level, broader){
                         if((keywords||[]).length){
                             _.each(keywords, function (keyword, index) {
-                                addKeywordFilter(keyword, related, parent, level, broader||keyword.broader);
+                                addKeywordFilter(keyword, related, parent, level, broader||keyword.broader||keyword.broaderTerms);
                             });
                         }
                     }
@@ -719,13 +747,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         var templist = _.filter(list, function (item) {
 
-                            if (id === 'party' && item.isAppProtocolParty === true)
+                            if (id === 'partyToProtocol' && item.isAppProtocolParty === true)
                                 return item;
                             else if (id === 'nonParty' && item.isAppProtocolParty === false)
                                 return item;
                             else if (id === 'inbetween' && item.isNPInbetweenParty === true)
                                 return item;
-                            else if (id === 'signatory' && item.isNPSignatory === true)
+                            else if (id === 'signatoryToProtocol' && item.isNPSignatory === true)
                                 return item;
                         });
 
