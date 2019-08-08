@@ -2,7 +2,7 @@
 
 	<b>{{document.name | lstring:locale}} <i ng-show="document.acronym">({{document.acronym | lstring:locale}})</i></b>
 	<div class="value">
-		<a ng-href="/countries/{{document.government.identifier}}" target={{target}}>{{document.government|term:locale}}</a>
+		<a ng-href="/countries/{{document.government.identifier|uppercase}}" target={{target}}>{{document.government|term:locale}}</a>
 	</div>
 
 	<address style="margin-top: 5px; margin-bottom: 5px">
