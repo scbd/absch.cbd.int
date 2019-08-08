@@ -58,7 +58,7 @@
                             <i ng-if="showFilters=='userSearchFilter'" class="fa fa-times-circle"></i>
                             <i ng-if="!showFilters || showFilters!='userSearchFilter'" class="fa fa-caret-down"></i>
                             &nbsp; My saved searches</a> </li>
-                    <li class="pull-right">
+                    <li class="pull-right" style="line-height: 5px">
                         <result-view-options sort-fields="searchResult.sortFields" view-type="searchResult.viewType" group-by-fields="searchResult.groupByFields"
                          on-sort-by-change="onSortByChange(fields)"  on-view-type-change="onViewTypeChange(options)"></result-view-options>
                     </li>
@@ -110,7 +110,7 @@
         <!-- ng-if="!skipResults" -->
         <div class="row" style="padding:10px 0 0 0;margin:0px;">
             <!-- Search Result -->
-            <div class="bg-white hidden-xs" ng-class="{'col-xs-2':leftMenuFilters}" style="border:1px solid #eee">
+            <div class="bg-white hidden-xs" ng-class="{'col-xs-2':leftMenuFilters}" style="border:1px solid #eee" ng-show="leftMenuFilters">
                 <div left-side-filter></div>
             </div>
             <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;border: 1px solid #eee;" id="recordsContent" ng-class="{'col-xs-10':leftMenuFilters}">

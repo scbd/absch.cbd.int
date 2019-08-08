@@ -1479,7 +1479,7 @@ div.recordDefault:hover {
 }
 #search-new .search> ul li> a:hover,
 #search-new .search> ul li> a:focus {
-    background-color: #DDD;
+    background-color: #f5f5f5;
     border: 1px solid #e3e3e3;
 }
 #search-new .search> ul li> a.active {
@@ -1488,7 +1488,7 @@ div.recordDefault:hover {
     border: 1px solid #e3e3e3;
     border-bottom: 0;
     padding-bottom: 10px;
-    background-color: #DDD;
+    background-color: #f5f5f5;
     box-shadow: none!important;
 }
 #search-new label {
@@ -2038,3 +2038,15 @@ a.disabled{
     min-width:70% !important;
 }
 .search-filters .modal-body{background-color:#FFF;}
+.search-filters #divTable ul.horizontal-list {
+    display: block;
+    list-style: none;
+}
+
+.search-filters #divTable ul.horizontal-list li {
+    float: left;
+    width: 33%;
+}
+.search-filters #divTable ul.horizontal-list li{
+    list-style-type: none;
+}
