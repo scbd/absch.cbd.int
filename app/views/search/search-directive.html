@@ -113,7 +113,7 @@
             <div class="bg-white hidden-xs" ng-class="{'col-xs-2':leftMenuFilters}" style="border:1px solid #eee">
                 <div left-side-filter></div>
             </div>
-            <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;" id="recordsContent" ng-class="{'col-xs-10':leftMenuFilters}">
+            <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;border: 1px solid #eee;" id="recordsContent" ng-class="{'col-xs-10':leftMenuFilters}">
               
                 <div ng-switch="searchResult.viewType">
                     <div ng-switch-when="list">
@@ -123,7 +123,7 @@
                         <div search-result-group-view api="searchResult.groupViewApi"></div>                       
                     </div>
                     <div ng-switch-when="matrix">
-                        Matrix.... selectedddd         
+                        Matrix view coming soon      
                     </div>
                 </div>
                

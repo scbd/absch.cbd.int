@@ -5,7 +5,6 @@
     "@bower_components/ammap3": "amcharts/ammap3#3.21.6",
     "@bower_components/angular-flex": "scbd/angular-flex.git#2.2.0",
     "@bower_components/angular-localizer": "funkjunky/ngLocalizer.git",
-    "@bower_components/angular-loggly-logger": "scbd/angular-loggly-logger#2c67428b49951e18bd03cbdd4834d939ba8fba74",
     "@bower_components/cbd-forums": "scbd/forums#818a1c4082d5db4ac0c5d4b9f7c422e898516e4a",
     "@bower_components/jquery": "jquery/jquery-dist#3.3.1",
     "@bower_components/ngstorage": "gsklee/ngStorage#0.3.11",
@@ -20,6 +19,7 @@
     "superagent": "^5.0.8"
   },
   "devDependencies": {
+    "@bower_components/angular-loggly-logger": "@scbd/angular-loggly-logger:03.2",
     "@bower_components/Chart.js": "chartjs/Chart.js#1.1.1",
     "@bower_components/SHA-1": "linkgod/SHA-1",
     "@bower_components/angucomplete": "darylrowland/angucomplete#3bf6ab2da56d514c22800f9dbdfeced66cff03f4",
@@ -31,7 +31,6 @@
     "@bower_components/angular-intro.js": "mendhak/angular-intro.js#1.2.4",
     "@bower_components/angular-joyride": "ahmed-wagdi/angular-joyride#1.0.2",
     "@bower_components/angular-loader": "angular/bower-angular-loader#1.5.6",
-    "@bower_components/angular-loggly-logger": "scbd/angular-loggly-logger#2c67428b49951e18bd03cbdd4834d939ba8fba74",
     "@bower_components/angular-material": "angular/bower-material#0.9.8",
     "@bower_components/angular-mocks": "angular/bower-angular-mocks#1.5.6",
     "@bower_components/angular-route": "angular/bower-angular-route#1.5",

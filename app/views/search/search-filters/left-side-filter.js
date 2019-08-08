@@ -85,7 +85,8 @@
 
                             $scope.treeOptions = function(){ 
                                 var treeStructure = _.map(options, function(option){
-                                    var narrowerTerms = _.filter(options, {broader:option.id})
+                                    //opt.broader == option.id || 
+                                    var narrowerTerms = _.filter(options, function(opt){return ~opt.broader.indexOf(option.id)})
                                     return {
                                         identifier: option.id, title: option.name, 
                                         narrowerTerms: _.map(narrowerTerms, 'id')

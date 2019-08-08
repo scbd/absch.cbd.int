@@ -40,7 +40,7 @@
 
                 <ng-party-status ng-if="group.partyStatus" code="group.levelKey" style="margin-left:10px;"></ng-party-status>
                 <div class="btn-group pull-right">
-                    <button class="btn btn-default btn-xs">            
+                    <button class="btn btn-default btn-xs" ng-click="group.isClosed=!group.isClosed">            
                         <span class="badge " ng-bind="group.numFound" ng-class="{'color-darkgrey':group.level>1}"></span>
                     </button>
                     <button class="btn btn-default btn-xs" ng-click="group.isClosed=!group.isClosed" >
