@@ -18,19 +18,21 @@
                 
                 $scope.updateAnswer = function(val){
                     
+                    $timeout(function(){
+                        var additionalInformation = $scope.answer.additionalInformation;
+                        var value = $scope.question.options[$scope.answer.value].value;
 
-                    var additionalInformation = $scope.answer.additionalInformation;
-                    var value = $scope.question.options[$scope.answer.value].value;
+                        if(($scope.hasAdditionalInformation||{}).value != value){
+                            additionalInformation = $scope.answer.additionalInformation = undefined;
+                        }
 
-                    if(($scope.hasAdditionalInformation||{}).value != value){
-                        additionalInformation = $scope.answer.additionalInformation = undefined;
-                    }
+                        $scope.binding = {  value : value, additionalInformation : additionalInformation };
 
-                    $scope.binding = {  value : value, additionalInformation : additionalInformation };
+                        $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'lstring', value:value})
 
-                    $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'lstring', value:value})
+                        $scope.ngChange();
 
-                    $timeout(function(){$scope.ngChange()}, 200);
+                    }, 200);
 
                 }
 
