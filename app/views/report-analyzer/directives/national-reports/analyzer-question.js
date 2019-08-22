@@ -21,6 +21,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 previousQuestionsMapping : '='
             },
             link: function ($scope, el, attr, nrAnalyzer) {
+                $scope.selectedMapping = _.keys($scope.previousQuestionsMapping)[0];
 
                 $scope.realm = realm.value
                 initTooltips();
@@ -188,7 +189,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                             text =  (text.details || text[field]);
                         else if(!!text.number && type == 'number')
                             text =  text.number;         
-                        else if(!field && isLString(text))
+                        else if(!field && (isLString(text) || type == 'lstring'))
                             text = text          
                         else if((!field && (type == 'text' || type == 'string')))
                             text = text
@@ -281,19 +282,13 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 //
                 //
                 //==============================================
-                $scope.toggleCompare = function() {
-
-                    if($scope.previousReports) {
-
-                        delete $scope.previousReports;
-                        analyze();
-
-                        return;
-                    }
-
+                $scope.toggleCompare = function(selectedMapping) {
+                   
+                    $scope.selectedMapping = selectedMapping.schema;
+                    
                     var reports = $scope.reports;
                     var question = $scope.question;
-                    var previousQuestionsMapping = $scope.previousQuestionsMapping;
+                    var previousQuestionsMapping = $scope.previousQuestionsMapping[$scope.selectedMapping];
 
                     if(!previousQuestionsMapping)
                         return;
@@ -313,6 +308,15 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                         $timeout(initTooltips, 250);
                     });
                 };
+
+                $scope.removeCompare = function(){
+                    if($scope.previousReports) {
+                        delete $scope.previousReports;
+                        analyze();
+
+                        return;
+                    }
+                }
 
                 //==============================================
                 //
@@ -349,7 +353,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                     if(!$scope.regions) return;
                     if(!$scope.question) return;
 
-                    if(_.includes(['text', 'number'], $scope.question.type)) {
+                    if(_.includes(['text', 'number', 'lstring'], $scope.question.type)) {
                         $scope.question.options = [{ value: $scope.question.type }];  // text responses don't have predefine values; Simulate a fake one
                     }
 
@@ -357,7 +361,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                     var regions  = $scope.regions;
                     var reports  = $scope.reports;
                     var previousReports = $scope.previousReports;
-                    var questionsMapping = $scope.previousQuestionsMapping;
+                    var questionsMapping = $scope.previousQuestionsMapping[$scope.selectedMapping];
 
                     // Only allow countries who answered to this question
                     var restrictedCountries = _(reports)
@@ -601,9 +605,12 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                     if(_.isEmpty(answers))
                         answers = undefined;
 
+                    if(answers && $scope.question.type=='lstring' && !!answers)
+                        answers = 'lstring';
+
                     if(answers && $scope.question.type=='text' && !!answers)
                         answers = 'text';
-
+                        
                     if(answers && $scope.question.type=='number' && !!answers.number)
                         answers = 'number';
 
@@ -660,7 +667,9 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 }
                 
                 function isLString(element){
-                    return element.ar || element.en || element.fr || element.es || element.ru || element.zh;
+                    return  element.hasOwnProperty('ar') || element.hasOwnProperty('en') ||
+                            element.hasOwnProperty('fr') || element.hasOwnProperty('es') || 
+                            element.hasOwnProperty('ru') || element.hasOwnProperty('zh');
                 }
 
             }

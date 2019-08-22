@@ -82,7 +82,7 @@ function (app, _, nr4Data, nr3Data) {
         } 
         // TODO: read from mapping file
         var previousAnswerMapping = $scope.previousAnswerMapping = {
-            "Q012"        : { prevQuestion : "Q013",   showMessage: false },
+            "Q012_party"        : { prevQuestion : "Q013",   showMessage: false },
             "Q012_partyInProgress"  : { prevQuestion : "Q012",   showMessage: false },
             "Q014"        : { prevQuestion : "Q014",   showMessage: false },
             "Q015"        : { prevQuestion : "Q016",   showMessage: false },

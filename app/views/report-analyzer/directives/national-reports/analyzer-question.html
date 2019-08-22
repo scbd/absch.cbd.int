@@ -1,10 +1,34 @@
-<div class="question" style="margin-bottom:10px;overflow-y:scroll" ng-class="{ highlight : previousReports }" ng-disabled="realm!= 'ABS' && !fullSum && question.type!='header'">
+<div class="question" style="margin-bottom:10px;overflow-y:scroll" ng-class="{ highlight : previousReports }" 
+    ng-disabled="realm!= 'ABS' && !fullSum && question.type!='header'">
 
-    <span class="pull-right"  ng-if="::previousQuestionsMapping[question.key]">
-        <span ng-switch="::previousQuestionsMapping[question.key][0]">
-            <a ng-switch-when="S" class="compare" ng-class="{ on : previousReports }" href="#" ng-click="toggleCompare()" data-toggle="popover" data-placement="top" data-content="Compare with Survey on indicators of the Strategic Plan (2014) Question {{::cleanupQuestionNumber(previousQuestionsMapping[question.key])}}"></a>
-            <a ng-switch-default  class="compare" ng-class="{ on : previousReports }" href="#" ng-click="toggleCompare()" data-toggle="popover" data-placement="top" data-content="Compare with 2nd National Report Question {{::cleanupQuestionNumber(previousQuestionsMapping[question.key])}}"></a>
-        </span>
+    <span class="pull-right"  ng-if="::previousQuestionsMapping[selectedMapping][question.key]">
+        <div class="btn-group">
+            
+            <button type="button" class="btn btn-default" ng-if="previousReports" ng-click="removeCompare()">
+                <i class="fa fa-close"></i>
+            </button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+            ng-click1="toggleCompare(selectedMapping)" >
+                <img src="/app/views/report-analyzer/resources/compare-off.png" class="prev-question-compare"></img> 
+                <span ng-if="!previousReports">Compare with previous report(s)</span>
+                <span ng-if="previousReports" ng-switch="previousQuestionsMapping[selectedMapping][question.key][0]">
+                    <span ng-switch-when="S" ng-bind="Compare with Survey on indicators of the Strategic Plan (2014) Question {{::cleanupQuestionNumber(previousQuestionsMapping[selectedMapping][question.key])}}"></span>
+                    <span ng-switch-default  ng-bind="(previousQuestionsMapping[selectedMapping].title + ' ' + cleanupQuestionNumber(previousQuestionsMapping[selectedMapping][question.key]))"></span>
+                </span>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li ng-repeat="compare in ::previousQuestionsMapping" style="padding:5px" ng-if="::compare[question.key]">
+                    <img src="/app/views/report-analyzer/resources/compare-off.png"  class="prev-question-compare"></img>
+                    <span ng-switch="::compare[question.key][0]">
+                        <a ng-switch-when="S" class="compare1" ng-class="{ on1 : previousReports }" href="#" ng-click="toggleCompare(compare)" 
+                            data-toggle="popover" data-placement="top" data-content="Compare with Survey on indicators of the Strategic Plan (2014) Question {{::cleanupQuestionNumber(compare[question.key])}}"></a>
+                        <a ng-switch-default  class="compare1" ng-class="{ on1 : previousReports }" href="#" ng-click="toggleCompare(compare)" 
+                            ng-bind="::(compare.title + ' ' + cleanupQuestionNumber(compare[question.key]))"></a>
+                    </span>
+                </li>
+            </ul>
+        </div>
     </span>
 
     <span ng-switch="::question.key[0]">
@@ -12,7 +36,7 @@
         <b ng-switch-default> Question {{::cleanupQuestionNumber(question.number)}}</b>
     </span>
 
-    <div><b style="white-space:pre-line">{{::question.title}}</b></div>
+    <div><b style="white-space:pre-line" ng-bind-html="::question.title"></b></div>
 
     <table class="table table-hover" ng-if="::question.type!='header'">
         <tr>
@@ -36,7 +60,7 @@
         </tr>
 
         <!-- OPTIONS + TERMS -->
-        <tr ng-if="::question.type!='text' && question.type!='number'" class="option {{sumType}}" ng-repeat="row in rows" ng-class="{ 'first': $first, 'last' : $last, 'info': row.filterOn, 'filter-on': row.filterOn, 'filter': filter }">
+        <tr ng-if="::question.type!='text' && question.type!='lstring' && question.type!='number'" class="option {{sumType}}" ng-repeat="row in rows" ng-class="{ 'first': $first, 'last' : $last, 'info': row.filterOn, 'filter-on': row.filterOn, 'filter': filter }">
             <td class="filter">
                 <i ng-if="::row.fullSum"  class="fa fa-filter fa-lg" style="cursor:pointer" ng-click="toggleFilter(row)" data-toggle="popover" data-placement="top" data-content="Filter: Include only reports which have this answer selected."></i>
                 <i ng-if="::!row.fullSum" class="fa fa-filter fa-lg" disabled title="This filter is disabled"></i>
@@ -67,9 +91,9 @@
                     <img ng-if="::hasCustomText(reportsMap[country.identifier][question.key], row.value)" src="/app/views/report-analyzer/resources/nr-document.png" 
                     ng-click="showCustomText(country.identifier, reportsMap[country.identifier][question.key], row.value)" style="cursor:pointer">
                 </div>
-                <div style="font-size:18px;line-height:inherit" ng-if="previousReports && testAnswer(previousReportsMap[country.identifier][previousQuestionsMapping[question.key]], row.value)">
+                <div style="font-size:18px;line-height:inherit" ng-if="previousReports && testAnswer(previousReportsMap[country.identifier][previousQuestionsMapping[selectedMapping][question.key]], row.value)">
                     &#x25CB;
-                    <img ng-if="::previousReportsMap[country.identifier][previousQuestionsMapping[question.key]].details" src="/app/views/report-analyzer/resources/nr-document.png" ng-click="showText(country.identifier, previousReportsMap[country.identifier][previousQuestionsMapping[question.key]].details)" style="cursor:pointer">
+                    <img ng-if="::previousReportsMap[country.identifier][previousQuestionsMapping[selectedMapping][question.key]].details" src="/app/views/report-analyzer/resources/nr-document.png" ng-click="showText(country.identifier, previousReportsMap[country.identifier][previousQuestionsMapping[selectedMapping][question.key]].details)" style="cursor:pointer">
                 </div>
             </td>
             <td ng-repeat-end ng-show="::false"></th>
@@ -77,7 +101,7 @@
         </tr>
 
         <!-- FREE TEXT -->
-        <tr ng-if="::question.type=='text' || question.type=='number'">
+        <tr ng-if="::question.type=='text' || question.type=='lstring' ||question.type=='number'">
             <td class="filter">
                 <i class="fa fa-filter fa-lg" disabled title="This filter is disabled"></i>
             </td>
