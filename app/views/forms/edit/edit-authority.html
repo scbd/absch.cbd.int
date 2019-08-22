@@ -149,7 +149,7 @@
                                 </div>
                                 </section>
 
-                                <section>
+                                <section ng-if="realm.is('ABS')">
                                     <legend name="policyBasis">Legal, administrative or policy basis for the competence
                                         of the CNA</legend>
                                     <div class="help-info">In this section, a reference to the related ABS measure
@@ -177,7 +177,7 @@
                                 </section>
 
 
-                                <section>
+                                <section ng-if="realm.is('ABS')">
                                     <legend name="responsibilities">Responsibilities</legend>
                                     <div class="help-info">
                                         Article 13, paragraph 4 provides that "Where a Party designates more than one
@@ -293,9 +293,43 @@
                                     <!-- END IF NO SECTION -->
                                 </section>
 
+                                <section ng-if="realm.is('BCH')">
+                                    <legend>Regulatory function</legend>
+                                    <div class="help-info">
+                                        This section provides relevant information on the responsibilities of the Competent National Authority to assist in searching and translation (a full description of the functions of the Authority may be provided in a later section). You may select multiple categories from either or both of the two categories available, i.e. administrative or subject area covered by the authority, and/or for which type of LMO it is responsible.
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="administrativeFunctions" caption="Administrative functions">
+                                                <div class="help-info">
+                                                    If there is only one Authority responsible for all functions required by the Protocol, please select "All functions pursuant to the Cartagena Protocol on Biosafety".
+                                                </div>
+                                                <div km-term-check name="administrativeFunctions" required ng-model="document.administrativeFunctions" 
+                                                terms="options.administrativeFunctions()" binding-type="term[]"></div>
+                                            </div>
+                                            <div class="km-control-group" name="typeOfOrganisms" caption="Types of LMOs under its jurisdiction">
+                                                <div class="help-info">If there is only one Authority responsible for all functions required by the Protocol, please select "All LMOs".</div>
+                                                <div km-term-check name="typeOfOrganisms" required ng-model="document.typeOfOrganisms" 
+                                                terms="options.typeOfOrganisms()" binding-type="term[]"></div>
+                                            </div>
 
-
-
+                                            <div class="km-control-group" name="responsibilities"
+                                                caption="Detailed description of the regulatory functions"required>
+                                                <div class="help-info">
+                                                    Outline the administrative functions for which the Authority is responsible and authorized to act on. Where more than one competent national authority is designated, this information should, at a minimum, specify which competent national authority is responsible for which type of LMO.
+                                                </div>
+                                                <div km-rich-textbox name="responsibilities" ng-model="document.responsibilities"
+                                                    rows="6" placeholder="" locales="document.header.languages" required></div>
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </section>
+                                <section ng-if="realm.is('BCH')">
+                                    <legend>Timeframe for confirmation or updating of information</legend>
+                                    <div class="help-info">
+                                            Please note that this category of information requires confirmation or updating after one year from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Not Confirmed”.
+                                    </div>
+                                </section>
                                 <section>
                                     <legend>Additional Information</legend>
                                     <div class="row">

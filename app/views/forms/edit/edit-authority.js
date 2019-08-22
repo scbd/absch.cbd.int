@@ -54,20 +54,23 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
                     return o.data;
                 });
             },
-            cpbFunctions: function() {
-                return $http.get("/api/v2013/thesaurus/domains/Subject Areas/terms", {
+            administrativeFunctions: function() {
+                var functionDomain = 'Subject Areas'
+                if($scope.type=='authoritySupplementary')
+                    functionDomain = 'CD613FCE-7A2A-475C-85A1-C2D1C208EC0C'
+                return $http.get("/api/v2013/thesaurus/domains/"+functionDomain+"/terms", {
                     cache: true
                 }).then(function(o) {
                     return o.data;
                 });
             },
-            cpbOrganismTypes: function() {
+            typeOfOrganisms: function() {
                 return $http.get("/api/v2013/thesaurus/domains/TypeOfOrganisms/terms", {
                     cache: true
                 }).then(function(o) {
                     return o.data;
                 });
-            },
+            },           
             absFunctions: function() {
                 return $http.get("/api/v2013/thesaurus/domains/8102E184-E282-47F7-A49F-4C219B0EE235/terms", {
                     cache: true
