@@ -1,5 +1,5 @@
 define(['text!./questions-selector.html', 'app', 'lodash', 'require', '../selectors/terms-dialog', '../intermediate', 
-'components/scbd-angularjs-services/services/locale', 'js/common'], 
+'components/scbd-angularjs-services/services/locale', 'js/common', 'views/report-analyzer/reportAnalyzerService'], 
 function(templateHtml, app, _, require) {
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
@@ -16,8 +16,8 @@ function(templateHtml, app, _, require) {
     //
     //
     //==============================================
-    app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs', '$q', '$timeout', 'realm',
-     function($http, locale, commonjs, $q, $timeout, realm) {
+    app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs', '$q', '$timeout', 'realm', 'reportAnalyzerService',
+     function($http, locale, commonjs, $q, $timeout, realm, reportAnalyzerService) {
         return {
             restrict : 'E',
             replace : true,
@@ -32,7 +32,7 @@ function(templateHtml, app, _, require) {
             },
             link: function ($scope) {
                 
-                $scope.selectedReportType = $scope.selectedReportType || _.find($scope.reportData, function(r){return r.dataUrl}).type;
+                $scope.selectedReportType = $scope.selectedReportType || _.last($scope.reportData, function(r){return r.dataUrl}).type;
                 
                 $scope.selectedRegions    = $scope.selectedRegions    || DefaultRegions.concat();
                 $scope.allSelected = true;
@@ -68,9 +68,9 @@ function(templateHtml, app, _, require) {
                     
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
                     require(['json!'+baseUrl+reportTypeDetails.questionsUrl], function(res){
-
+                        
                         $timeout(function(){
-                            $scope.sections = res;
+                            $scope.sections = reportAnalyzerService.flattenQuestions(res);
 
                             if($scope.selectedQuestions) {
 

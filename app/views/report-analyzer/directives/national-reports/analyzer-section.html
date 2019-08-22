@@ -6,7 +6,7 @@
           <i class="fa fa-caret-up"    ng-if="!loading &&  section.expanded"></i>
           <i class="fa fa-cog fa-spin" ng-if="loading"></i>
       </span>
-      <h4 style="display:inline">{{::section.title}}</h4>
+      <h4 style="display:inline" ng-bind-html="::section.title"></h4>
       <i style="white-space:nowrap" ng-if="::section.questions.length==1">(Question {{::section.questions[0].number}})</i>
       <i style="white-space:nowrap" ng-if="::section.questions.length>1" >(Questions {{::section.questions[0].number}} - {{::(section.questions|limitTo:-1)[0].number}})</i>
   </div>

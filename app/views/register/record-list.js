@@ -371,10 +371,10 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
                     $('html, body').animate({
                         scrollTop: 0
                     }, 1000);
-                    $(obj).toggleClass('highlight');
+                    $(obj).toggleClass('record-highlight');
                     setTimeout(function () {
                         $(obj).toggle('fade');
-                        $(obj).toggleClass('highlight');
+                        $(obj).toggleClass('record-highlight');
                         $(obj).toggle('fade');
                     }, 2000);
 

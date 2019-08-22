@@ -6,20 +6,20 @@
                     <h3 class="panel-title">Overview </h3>
                 </div>
     
-                <div class="panel-body">
-                    <table class="table" cellspacing="0" cellpadding="0" style="width:100%;">
-                            <thead>
+                <div class="panel-body" style="padding: 0px;">
+                    <table class="table" cellspacing="0" cellpadding="0" style="width:100%;margin-bottom: 0px;">
+                        <thead>
                             <tr>
                                 <th>Report</th>
-                                <th style="text-align:center;" class="hidden-xs">Year </th>
-                                <th style="text-align:center;">Party count <br/>on due date </th>
+                                <th style="text-align:center;" class="hidden-xs">Deadline </th>
+                                <th style="text-align:center;">Number of Parties <br/>at the deadline</th>
                                 <th style="text-align:center;" class="hidden-xs" ng-repeat="region in reportData[0].regionMapping">{{(region.shortTitle|lstring:locale).replace('CBD - ', '')}} </th>                                
-                                <th style="text-align:center;" class="hidden-xs">By Parties </th>
-                                <th style="text-align:center;" class="hidden-xs">By Non-Parties </th>
-                                <th style="text-align:center;">Reports</th>
+                                <th style="text-align:center;" class="hidden-xs">By Parties* </th>
+                                <th style="text-align:center;" class="hidden-xs">By Non-Parties* </th>
+                                <th style="text-align:center;">Total</th>
                             </tr>
-                            </thead>
-                            <tbody>
+                        </thead>
+                        <tbody>
                             <tr ng-repeat="activeReport in reportData ">
                                 <td>
                                     <span style="margin-right:10px;">{{activeReport.title}}</span>
@@ -31,7 +31,7 @@
                                         </span>
                                     </span>
                                 </td>
-                                <td style="text-align:center;" class="hidden-xs">{{activeReport.year}}</td>
+                                <td style="text-align:center;" class="hidden-xs">{{activeReport.deadline|formatDate}}</td>
                                 <td style="text-align:center;">{{activeReport.partyCount}} </td>
                                 <td style="text-align:center;" class="hidden-xs" ng-repeat="region in activeReport.regionMapping">{{region.count}} </td>
                                 <td style="text-align:center;" class="hidden-xs">{{activeReport.partyReportCount}} </td>
@@ -43,6 +43,13 @@
                                 </td>
                             </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="11">
+                                    <span class="pull-right"> * Party status at the time of submission of the report</span>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

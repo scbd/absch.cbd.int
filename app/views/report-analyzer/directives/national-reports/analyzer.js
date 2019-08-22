@@ -1,5 +1,6 @@
 define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 'components/scbd-angularjs-services/filters/scbd-filters', 
-'../../filters/cases', 'components/scbd-angularjs-services/services/locale', 'views/directives/view-reference-document', 'components/scbd-angularjs-services/services/authentication'],
+'../../filters/cases', 'components/scbd-angularjs-services/services/locale', 'views/directives/view-reference-document', 'components/scbd-angularjs-services/services/authentication',
+'views/report-analyzer/reportAnalyzerService'],
 function(templateHtml, app, _, require, $) { 'use strict';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
@@ -24,8 +25,8 @@ function(templateHtml, app, _, require, $) { 'use strict';
     //
     //
     //==============================================
-    app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$timeout', 'authentication', 'realm',
-     function($http, $q, locale, $filter, $timeout, authentication, realm) {
+    app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$timeout', 'authentication', 'realm', 'reportAnalyzerService',
+     function($http, $q, locale, $filter, $timeout, authentication, realm, reportAnalyzerService) {
         return {
             restrict : 'E',
             replace : true,
@@ -82,7 +83,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                         var regions  = results[0];
                         var sections = results[1];
                         var reports  = results[2];
-                        var previousQuestionsMapping = results[3];
+                        var previousQuestionsMappings = results[3];
 
                         var reportsCountriesMap = _(reports).pluck('government').sortBy().map(function(id) {
 
@@ -107,7 +108,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
 
                         $scope.regions = regions;
                         $scope.sections = sections;
-                        $scope.previousQuestionsMapping = previousQuestionsMapping;
+                        $scope.previousQuestionsMapping = previousQuestionsMappings;
 
                     }).then(function(){
 
@@ -158,9 +159,29 @@ function(templateHtml, app, _, require, $) { 'use strict';
                 function loadPreviousReportQuestionsMapping() {
 
                     var reportType = $scope.selectedReportType;
+                    var fileQuery = _.map($scope.activeReport.compare, function(file){return loadJsonFile(file.url);})
+                    return $q.all(fileQuery).then(function(response){                        
+                        var mappings = {};
+                        _.each(response, function(res, index){                            
+                            var mapping = _.extend({}, $scope.activeReport.compare[index], res)
+                            mappings[res.schema] = mapping;
+                        });
+                        return mappings;
+                    })
+
                     var deferred = $q.defer();
                     
-                    require(['json!'+baseUrl+$scope.activeReport.mappingsUrl], function(res){
+                    require(['json!'+baseUrl+$scope.activeReport.compare[0].url], function(res){
+                        deferred.resolve(res);
+                    });
+
+                    return deferred.promise;
+                }
+                
+                function loadJsonFile(path){
+                    var deferred = $q.defer();
+                    
+                    require(['json!'+path], function(res){
                         deferred.resolve(res);
                     });
 
@@ -178,6 +199,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                     
                     require(['json!'+baseUrl+$scope.activeReport.questionsUrl], function(res){
 
+                        res = reportAnalyzerService.flattenQuestions(res);
                         var selection = _($scope.selectedQuestions).reduce(mapReduce(), {});
                         var data =  _.filter(angular.copy(res), function(section) {
 
@@ -488,8 +510,12 @@ function(templateHtml, app, _, require, $) { 'use strict';
                     if(options.maxDate) {
                         query.date = { $lt : { $date :  options.maxDate } };
                     }
+                    var url = $scope.activeReport.dataUrl;
+                    if($scope.activeReport.type != options.reportType){
+                        url = (_.find($scope.reportData, {type:options.reportType})||{}).dataUrl;
+                    }
 
-                    return $http.get($scope.activeReport.dataUrl, {  params: { q : query, f : fields }, cache : true }).then(function(res) {
+                    return $http.get(url, {  params: { q : query, f : fields }, cache : true }).then(function(res) {
                         return _.map(res.data, function(report) {
                             report.government = nrAnalyzer.normalizeAnswer(report.government);
                             return report;

@@ -54,7 +54,7 @@
                 })
                 .then(function(){
                     _.each($scope.reportData, function(report){
-                        if(report.stats)
+                        if(report.stats && report.stats.regionMapping)
                             report.stats.regionMapping =  _.defaultsDeep({}, report.stats.regionMapping, regionMapping);
                         else
                             report.regionMapping = angular.copy(regionMapping);                       
@@ -96,7 +96,11 @@
                                     var nonParties                       = _.map(_.filter(data, function(country){return !wasPartyOnDate(activeReport.deadline, country);}), 'code');
                                         activeReport.partyCount          = parties.length;
                                         activeReport.partyReportCount    = _.intersection(parties, reportCountries).length;
-                                        activeReport.nonPartyReportCount = _.intersection(nonParties, reportCountries).length;
+                                        activeReport.nonPartyReportCount = _.intersection(nonParties, reportCountries).length;                                        
+
+                                        if(reportType == 'cpbNationalReport2'){ //special case for BCH NR2
+                                            activeReport.nonPartyReportCount = 0
+                                        }
                                 });
                             });
                 }
@@ -116,7 +120,7 @@
                     throw 'Unknonw application';
 
                 return     entity
-                        && _.includes(["ratification","accession", "acceptance", "approval"], entity.treaties[treaty].instrument)
+                        && _.includes(["ratification","accession", "acceptance", "approval", "succession"], entity.treaties[treaty].instrument)
                         && entity.treaties[treaty].party
                         && (moment.utc(entity.treaties[treaty].party) <= moment.utc(date));
             }
