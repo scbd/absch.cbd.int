@@ -2,6 +2,7 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
     app.directive('afcAutocomplete', function() {
         return {
             restrict: 'AEC',
+			require: "?ngModel",
             scope: {
                 binding: '=ngModel',
                 source: '=',

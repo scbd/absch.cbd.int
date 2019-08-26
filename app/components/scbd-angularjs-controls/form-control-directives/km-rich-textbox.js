@@ -23,11 +23,6 @@ define(['app','text!./km-rich-textbox.html','angular','angular-trix'], function(
 							$scope.text = {};
 							$scope.$watch('locales', $scope.watchLocales);
 							$scope.$watch('binding', $scope.watchBinding);
-							$scope.$watch('binding', function() {
-									try {
-											ngModelController.$setViewValue($scope.binding);
-									} catch (e) {}
-							});
 
 					},
 					controller: ["$scope", function($scope) {
@@ -73,10 +68,8 @@ define(['app','text!./km-rich-textbox.html','angular','angular-trix'], function(
 									});
 
 									$scope.binding = !$.isEmptyObject(oNewBinding) ? oNewBinding : undefined;
-									// https://docs.angularjs.org/api/ng/directive/ngChange
-									// if the model is changed programmatically and not by a change to the input value 
-									// so manually raise onchange manually
-									$scope.ngChange();
+
+									ngModelController.$setViewValue($scope.binding);
 							};
 
 							//==============================

@@ -9,14 +9,14 @@ define(['app', 'text!./km-date.html', 'bootstrap-datepicker'], function(app, tem
       restrict: 'EAC',
       template: template,
       replace: true,
+      require: "?ngModel",
       transclude: false,
       scope: {
         binding: '=ngModel',
         placeholder: '@',
-        ngDisabledFn: '&ngDisabled',
-        ngChange: '&'
+        ngDisabledFn: '&ngDisabled'
       },
-      link: function($scope, $element, $attr) {
+      link: function($scope, $element, $attr, ngModelController) {
         $element.datepicker({
           format: "yyyy-mm-dd",
           autoclose: true
@@ -24,8 +24,7 @@ define(['app', 'text!./km-date.html', 'bootstrap-datepicker'], function(app, tem
           $element.find('input').focus();
         });
         $scope.$watch('binding', function(newVal) {
-          if ($scope.ngChange)
-            $scope.ngChange();
+          ngModelController.$setViewValue($scope.binding);
         });
       },
       controller: ["$scope", function($scope) {}]

@@ -242,7 +242,6 @@ function (app, _, nr4Data, nr3Data) {
                     $scope.document[question.key] = _.map($scope.multiTermModel[question.key], function(t){return { value : t.identifier, additionalInformation: t.customValue}})
                 }
             }
-
             var lQuestion = question;
             if(question.validations){
 
@@ -319,7 +318,6 @@ function (app, _, nr4Data, nr3Data) {
                     }
                 })
             }
-
         }
 
         $scope.spaceSubQuestion = function(number){
