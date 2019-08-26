@@ -56,15 +56,9 @@
 		</div>
 
 
-		<legend ng-if="contacts.length > 0">Contact(s)</legend>
-		<div ng-show="contacts.length > 0" class="row">
-				<div  ng-repeat="contact in contacts" >
-					<div class="col-xs-12">
-		                        <div class="km-value">
-		                            <div view-contact-reference ng-model="contact" locale="locale"></div>
-		                        </div>
-		                    </div>
-				</div>
+		<div ng-show="document.contacts">
+			<legend ng-if="document.contacts">Contact(s)</legend>
+			<view-contact-reference ng-repeat="contact in document.contacts" ng-model="contact" locale="locale" class="km-value"></view-contact-reference>
 		</div>
 
 		<div ng-show="document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef ">
@@ -87,7 +81,7 @@
             
 		</div>
 
-		<div ng-if="document.responsibilities ||document.absResponsibleForAll || document.absFunctions|| document.absJurisdiction||document.absGeneticResourceTypes ">
+		<div ng-if="isABS && (document.responsibilities ||document.absResponsibleForAll || document.absFunctions|| document.absJurisdiction||document.absGeneticResourceTypes)">
 			<legend name="ABSResponsibilities">Summary of ABS Responsibilities </legend>
 
 			<div ng-show="document.responsibilities">
@@ -103,18 +97,6 @@
 				<div class="km-value km-pre">{{document.absFunctions | lstring:locale}}</div>
 			</div>
 
-			<!--<div ng-show="document.absJurisdiction">
-				<label>Jurisdiction(s) covered by this CNA</label>
-				<div class="km-value">
-					<li ng-repeat="term in document.absJurisdiction">{{term|term}} </li>
-				</div>
-			</div>
-
-			<div ng-show="document.absJurisdictionName">
-				<label>Sub-national or community jurisdiction(s) covered by this CNA</label>
-				<div class="km-value">{{document.absJurisdictionName | lstring:locale}}</div>
-			</div>-->
-
 			<div ng-show="document.absJurisdiction">
 				<label>Jurisdiction(s) covered by this CNA</label>
 				<div class="km-value" ng-if="document.absJurisdiction" >
@@ -123,22 +105,6 @@
 				</div>
 
 			</div>
-
-
-			<!-- <div ng-show="document.absGeneticResourceTypes">
-				<label>According to the type of organism</label>
-				<ul class="km-value">
-					<li ng-repeat="term in document.absGeneticResourceTypes">{{term|term}} </li>
-				</ul>
-			</div> -->
-
-			<!-- <div ng-show="document.absGeneticResourceAreas">
-				<label>According to the area where the genetic resource is found</label>
-				<ul class="km-value">
-					<li ng-repeat="term in document.absGeneticResourceAreas">{{term|term}} </li>
-				</ul>
-			</div> -->
-
 
 			<div ng-show="document.absGeneticResourceTypes ">
 				<label>Keywords to help describe the responsibilities of the competent national authority</label>
@@ -150,6 +116,29 @@
 			</div>
 
 		</div>
+		<div ng-if="isBCH && (document.bchFunctions || document.responsibilities)">
+			<legend>Regulatory function</legend>
+			<div ng-show="document.bchFunctions">
+				<label>Administrative functions</label>
+				<div class="km-value">
+					<li ng-repeat="term in document.bchFunctions">{{term|term}} </li>
+				</div>
+			</div>
+
+			<div ng-show="document.bchOrganismTypes">
+				<label>Types of LMOs under its jurisdiction</label>
+				<div class="km-value">
+					<li ng-repeat="term in document.bchOrganismTypes">{{term|term}} </li>
+				</div>
+			</div>
+			
+			<div ng-show="document.responsibilities">
+				<label>Detailed description of the regulatory functions</label>
+				<div class="km-value" ng-bind-html="document.responsibilities | lstring:locale"></div>
+			</div>
+		</div>
+
+
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
 			<legend>Additional Information</legend>
 

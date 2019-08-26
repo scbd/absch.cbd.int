@@ -1,8 +1,9 @@
 define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js/common',
-'views/forms/edit/document-selector', 'views/forms/edit/warning-message-cna', '../view/view-authority.directive' ], function(app, _) {
+'views/forms/edit/document-selector', 'views/forms/edit/warning-message-cna', '../view/view-authority.directive',
+'services/thesaurus-service' ], function(app, _) {
 
-    app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "$location", "IStorage", "commonjs",'searchService',
-     function($scope, $http, $filter, Thesaurus, $q, $controller, $location, storage, commonjs,searchService) {
+    app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "$location", "IStorage", "commonjs",'thesaurusService',
+     function($scope, $http, $filter, Thesaurus, $q, $controller, $location, storage, commonjs,thesaurusService) {
         $controller('editController', {
             $scope: $scope
         });
@@ -54,22 +55,15 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
                     return o.data;
                 });
             },
-            administrativeFunctions: function() {
-                var functionDomain = 'Subject Areas'
-                if($scope.type=='authoritySupplementary')
-                    functionDomain = 'CD613FCE-7A2A-475C-85A1-C2D1C208EC0C'
-                return $http.get("/api/v2013/thesaurus/domains/"+functionDomain+"/terms", {
-                    cache: true
-                }).then(function(o) {
-                    return o.data;
-                });
+            bchFunctions: function() {
+                var functionDomain = 'subjectAreas';
+                if($scope.type=='SPCNA')//supplementaryAuthority
+                    functionDomain = 'supplementaryProtocolFunctions';
+
+                return thesaurusService.getDomainTerms(functionDomain, {other:true, otherType:'lstring'});
             },
-            typeOfOrganisms: function() {
-                return $http.get("/api/v2013/thesaurus/domains/TypeOfOrganisms/terms", {
-                    cache: true
-                }).then(function(o) {
-                    return o.data;
-                });
+            bchOrganismTypes: function() {
+                return thesaurusService.getDomainTerms('typeOfOrganisms', {other:true, otherType:'lstring'});
             },           
             absFunctions: function() {
                 return $http.get("/api/v2013/thesaurus/domains/8102E184-E282-47F7-A49F-4C219B0EE235/terms", {
@@ -165,11 +159,7 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
             return document;
         };
         //==================================
-        $scope.setDocument({
-            libraries: [{
-                identifier: "cbdLibrary:abs-ch"
-            }]
-        });
+        $scope.setDocument({});
 
         //==================================
         $scope.showJurisdictionName = function() {

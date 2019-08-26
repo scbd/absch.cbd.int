@@ -9,8 +9,8 @@ define(['app', 'underscore'], function (app, _) {
                 return $http.get('/api/v2013/thesaurus/domains/' + domainIdentifier , {cache:true});
             };
 
-            this.getDomainTerms = function(termIdentifier, includeOthers){
-                return fn_getDomainTerms(termIdentifier, includeOthers);
+            this.getDomainTerms = function(termIdentifier, options){
+                return fn_getDomainTerms(termIdentifier, options);
             };
 
             this.getTerms = function(term){
@@ -20,18 +20,21 @@ define(['app', 'underscore'], function (app, _) {
                 });;
             };
 
-            function fn_getDomainTerms(termIdentifier, includeOthers){
+            function fn_getDomainTerms(termIdentifier, options){
                 if(!termIdentifier)
                     throw "Domain term is missing";
 
+                options = options || {};
                 var url = '/api/v2013/thesaurus/domains/' + domainTerms[termIdentifier] + '/terms';
 
-                if(includeOthers){
+                if(options.other){
                     var urlOther = '/api/v2013/thesaurus/terms/' + domainTerms['others'];
                     return $q.all([$http.get(url, {cache:true}),$http.get(urlOther), {cache:true}])
                                 .then(function(termData){
-                                    var data = termData[0].data;
-                                    data.push(termData[1].data);
+                                    var data   = termData[0].data;
+                                    var other  = termData[1].data;
+                                    other.type = options.otherType; //lstring or int etc
+                                    data.push(other);
                                     return data;
                                 });
                 }
@@ -83,7 +86,8 @@ define(['app', 'underscore'], function (app, _) {
                 OrganismCommonUses       :  'OrganismCommonUses',
                 techniqueUsed            :  'ABE9DCE3-92BA-4D5D-8948-7F7E541EEC6B',
                 organizationTypes        :  'Organization Types',
-                expertiseArea            :  '31855BDF-ADFF-460A-8FB8-975C8C325DAA'
+                expertiseArea            :  '31855BDF-ADFF-460A-8FB8-975C8C325DAA',
+                supplementaryProtocolFunctions: 'CD613FCE-7A2A-475C-85A1-C2D1C208EC0C'
                 
             }
         }

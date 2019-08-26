@@ -300,17 +300,17 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="administrativeFunctions" caption="Administrative functions">
+                                            <div class="km-control-group" name="bchFunctions" caption="Administrative functions" required>
                                                 <div class="help-info">
                                                     If there is only one Authority responsible for all functions required by the Protocol, please select "All functions pursuant to the Cartagena Protocol on Biosafety".
                                                 </div>
-                                                <div km-term-check name="administrativeFunctions" required ng-model="document.administrativeFunctions" 
-                                                terms="options.administrativeFunctions()" binding-type="term[]"></div>
+                                                <div km-term-check name="bchFunctions" required ng-model="document.bchFunctions" locales="document.header.languages"
+                                                terms="options.bchFunctions()" binding-type="term[]"></div>
                                             </div>
-                                            <div class="km-control-group" name="typeOfOrganisms" caption="Types of LMOs under its jurisdiction">
+                                            <div class="km-control-group" name="bchOrganismTypes" caption="Types of LMOs under its jurisdiction" required>
                                                 <div class="help-info">If there is only one Authority responsible for all functions required by the Protocol, please select "All LMOs".</div>
-                                                <div km-term-check name="typeOfOrganisms" required ng-model="document.typeOfOrganisms" 
-                                                terms="options.typeOfOrganisms()" binding-type="term[]"></div>
+                                                <div km-term-check name="bchOrganismTypes" required ng-model="document.bchOrganismTypes" locales="document.header.languages"
+                                                terms="options.bchOrganismTypes()" binding-type="term[]"></div>
                                             </div>
 
                                             <div class="km-control-group" name="responsibilities"
