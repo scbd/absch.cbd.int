@@ -5,34 +5,31 @@
             restrict: 'EA',
             template: nrYesNoTemplate,
             replace: true,
+            require: "?ngModel",
             scope:{
                 binding: '=ngModel',
                 question:'=',
                 ngDisabledFn: '&ngDisabled',
-                ngChange: "&",
                 required: "@",
                 locales: "="
             },
-            link: function ($scope) {
+            link: function($scope, $element, $attr, ngModelController) {
                 $scope.answer = {}
                 
-                $scope.updateAnswer = function(val){
+                $scope.updateAnswer = function(){
                     
-                    $timeout(function(){
-                        var additionalInformation = $scope.answer.additionalInformation;
-                        var value = $scope.question.options[$scope.answer.value].value;
+                    var additionalInformation = $scope.answer.additionalInformation;
+                    var value = $scope.question.options[$scope.answer.value].value;
 
-                        if(($scope.hasAdditionalInformation||{}).value != value){
-                            additionalInformation = $scope.answer.additionalInformation = undefined;
-                        }
+                    if(($scope.hasAdditionalInformation||{}).value != value){
+                        additionalInformation = $scope.answer.additionalInformation = undefined;
+                    }
 
-                        $scope.binding = {  value : value, additionalInformation : additionalInformation };
+                    $scope.binding = {  value : value, additionalInformation : additionalInformation };
 
-                        $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'lstring', value:value})
-
-                        $scope.ngChange();
-
-                    }, 200);
+                    $scope.hasAdditionalInformation = _.find(($scope.question.options||[]), {type:'lstring', value:value})
+                    
+                    ngModelController.$setViewValue($scope.binding);                      
 
                 }
 

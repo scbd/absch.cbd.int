@@ -15,25 +15,17 @@ define(['app','text!./km-inputtext-ml.html','angular'], function(app,template,an
         binding: '=ngModel',
         locales: '=',
         rows: '=',
-        required: "@",
-        ngChange: "&"
+        required: "@"
       },
       link: function($scope, element, attrs, ngModelController) {
         $scope.text = {};
-        $scope.$watch('locales', $scope.watchLocales);
-        $scope.$watch('binding', $scope.watchBinding);
-        $scope.$watch('binding', function() {
-          try {
-            ngModelController.$setViewValue($scope.binding);
-          } catch (e) {}
-        });
-
-      },
-      controller: ["$scope", function($scope) {
+        $scope.$watch('locales', watchLocales);
+        $scope.$watch('binding', watchBinding);
+        
         //==============================
         //Remove value of not selected languages/empty languages
         //==============================
-        $scope.watchLocales = function() {
+         function watchLocales() {
           var oLocales = $scope.locales || [];
           var oBinding = $scope.binding || {};
           var oText = $scope.text;
@@ -46,7 +38,7 @@ define(['app','text!./km-inputtext-ml.html','angular'], function(app,template,an
         //==============================
         //Remove value of not selected languages/empty languages
         //==============================
-        $scope.watchBinding = function() {
+        function watchBinding() {
           var oLocales = $scope.locales || [];
           var oBinding = $scope.binding || {};
           var oText = $scope.text;
@@ -70,10 +62,8 @@ define(['app','text!./km-inputtext-ml.html','angular'], function(app,template,an
           });
 
           $scope.binding = !$.isEmptyObject(oNewBinding) ? oNewBinding : undefined;
-          // https://docs.angularjs.org/api/ng/directive/ngChange
-          // if the model is changed programmatically and not by a change to the input value 
-          // so manually raise onchange manually
-          $scope.ngChange();
+
+          ngModelController.$setViewValue($scope.binding);
         };
 
         //==============================
@@ -89,7 +79,7 @@ define(['app','text!./km-inputtext-ml.html','angular'], function(app,template,an
         $scope.isShowLocale = function() {
           return $scope.locales && $scope.locales.length > 1;
         };
-      }]
+      }      
     };
   });
 });

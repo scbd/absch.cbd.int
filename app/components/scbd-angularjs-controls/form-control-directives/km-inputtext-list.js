@@ -21,10 +21,8 @@ define(['app','text!./km-inputtext-list.html','angular'], function(app,template,
 							$scope.texts = [];
 							$scope.$watch('binding', $scope.load);
 							$scope.$watch('binding', function() {
-									ngModelController.$setViewValue($scope.binding);
+									
 							});
-					},
-					controller: ["$scope", function($scope) {
 							//==============================
 							//
 							//==============================
@@ -68,6 +66,7 @@ define(['app','text!./km-inputtext-list.html','angular'], function(app,template,
 
 									$scope.binding = !$.isEmptyObject(oNewBinding) ? oNewBinding : undefined;
 									$scope.skipLoad = true;
+									ngModelController.$setViewValue($scope.binding);
 							};
 
 							//==============================
@@ -96,7 +95,7 @@ define(['app','text!./km-inputtext-list.html','angular'], function(app,template,
 							$scope.isRequired = function() {
 									return $scope.required !== undefined && $.isEmptyObject($scope.binding);
 							};
-					}]
+					}
 			};
 	});
 });
