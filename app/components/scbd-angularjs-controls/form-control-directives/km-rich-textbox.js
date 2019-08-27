@@ -1,4 +1,4 @@
-define(['app','text!./km-rich-textbox.html','angular','angular-trix'], function(app,template,angular) {
+﻿define(['app','text!./km-rich-textbox.html','angular','angular-trix'], function(app,template,angular) {
 	//============================================================
 	//
 	//
@@ -24,8 +24,6 @@ define(['app','text!./km-rich-textbox.html','angular','angular-trix'], function(
 							$scope.$watch('locales', $scope.watchLocales);
 							$scope.$watch('binding', $scope.watchBinding);
 
-					},
-					controller: ["$scope", function($scope) {
 							if(!$scope.toolbar)
 									$scope.toolbar = "[['bold', 'italics', 'ul', 'ol', 'redo', 'undo', 'clear']]";
 							//==============================
@@ -85,7 +83,7 @@ define(['app','text!./km-rich-textbox.html','angular','angular-trix'], function(
 							$scope.isShowLocale = function() {
 									return $scope.locales && $scope.locales.length > 1;
 							};
-					}]
+					}
 			};
 	});
 });

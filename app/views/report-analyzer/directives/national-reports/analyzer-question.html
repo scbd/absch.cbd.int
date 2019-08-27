@@ -7,8 +7,7 @@
             <button type="button" class="btn btn-default" ng-if="previousReports" ng-click="removeCompare()">
                 <i class="fa fa-close"></i>
             </button>
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
-            ng-click1="toggleCompare(selectedMapping)" >
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="/app/views/report-analyzer/resources/compare-off.png" class="prev-question-compare"></img> 
                 <span ng-if="!previousReports">Compare with previous report(s)</span>
                 <span ng-if="previousReports" ng-switch="previousQuestionsMapping[selectedMapping][question.key][0]">
@@ -23,10 +22,10 @@
                 <li ng-repeat="compare in ::previousQuestionsMapping" style="padding:5px" ng-if="::compare[question.key]">
                     <img src="/app/views/report-analyzer/resources/compare-off.png"  class="prev-question-compare"></img>
                     <span ng-switch="::compare[question.key][0]">
-                        <a ng-switch-when="S" class="compare1" ng-class="{ on1 : previousReports }" href="#" ng-click="toggleCompare(compare)">
+                        <a ng-switch-when="S" href="#" ng-click="toggleCompare(compare)">
                             Compare with Survey on indicators of the Strategic Plan (2014) Question <span ng-bind="::cleanupQuestionNumber(compare[question.key])"></span>
                         </a>
-                        <a ng-switch-default  class="compare1" ng-class="{ on1 : previousReports }" href="#" ng-click="toggleCompare(compare)" 
+                        <a ng-switch-default href="#" ng-click="toggleCompare(compare)" 
                             ng-bind="::(compare.title + ' ' + cleanupQuestionNumber(compare[question.key]))"></a>
                     </span>
                 </li>

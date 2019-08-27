@@ -326,8 +326,10 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
 
                     q = (q||'').toString().replace(/^[SQ0]*/, '');
 
-                    if(/[a-z]$/.test(q))
-                        q = q.replace(/^(\d*).*?([a-z]*)$/, '$1 ($2)');
+                    if(/\d*_[a-z0-9]+_/i.test(q))
+                        q = q.replace(/^(\d*)_([a-z0-9]+)_([a-z]*)$/i, '$1 ($2) ($3)');
+                    else if(/[a-z]$/.test(q))
+                        q = q.replace(/^(\d*).*?([a-z]*)$/i, '$1 ($2)');
 
                     return q;
                 };
