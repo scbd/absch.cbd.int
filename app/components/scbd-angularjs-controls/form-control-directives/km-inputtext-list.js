@@ -1,4 +1,4 @@
-define(['app','text!./km-inputtext-list.html','angular'], function(app,template,angular) {
+﻿define(['app','text!./km-inputtext-list.html','angular'], function(app,template,angular) {
 	//============================================================
 	//
 	//
@@ -20,9 +20,6 @@ define(['app','text!./km-inputtext-list.html','angular'], function(app,template,
 							$scope.skipLoad = false;
 							$scope.texts = [];
 							$scope.$watch('binding', $scope.load);
-							$scope.$watch('binding', function() {
-									
-							});
 							//==============================
 							//
 							//==============================
