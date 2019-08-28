@@ -3,7 +3,6 @@
 process.env.CLEARINGHOUSE = process.env.CLEARINGHOUSE || 'ABS';
 
 // Create HTTP server and proxy
-var co           = require('co');
 var express      = require('express');
 var proxy        = require('http-proxy').createProxyServer({});
 var app          = express();
