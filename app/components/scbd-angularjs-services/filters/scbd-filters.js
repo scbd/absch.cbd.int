@@ -12,7 +12,7 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
         if(!$attrs.ngClick){
           $attrs.$observe('href', function(){
             // console.log($attrs)        			
-            var langRegex 			= new RegExp('^\/(ar|en|es|fr|ru|zh)');
+            var langRegex 			= new RegExp('^\/(ar|en|es|fr|ru|zh)(\/|$)');
             var externalUrlRegex 	= new RegExp('^(http|https|mailto)');
             var startWithRegex	 	= new RegExp('^\/');
             var startWithAPIRegex         = new RegExp('^\/api\/v20');

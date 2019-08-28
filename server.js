@@ -28,9 +28,9 @@ app.set('view engine', 'ejs');
 app.use(cookieParser());
 
 // Set routes
-app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: cacheControl.setCustomCacheControl , maxAge: 86400000*365 }) );
-app.use('/?:lang(ar|en|es|fr|ru|zh)?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
-app.use('/?:lang(ar|en|es|fr|ru|zh)?/app',          translation.renderLanguageFile, express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: cacheControl.setCustomCacheControl , maxAge: 86400000*365 }) );
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          translation.renderLanguageFile, express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
 
 app.use('/cbd-forums',      express.static(__dirname + '/node_modules/@bower_components/cbd-forums', { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: cacheControl.setCustomCacheControl , maxAge: oneDay }));
@@ -50,7 +50,7 @@ app.all('/api/*', (req, res) => proxy.web(req, res, { target: apiUrl, changeOrig
 
 app.use(require('./app/app-libs/prerender')); // set env PRERENDER_SERVICE_URL
 
-app.get('/?:lang(ar|en|es|fr|ru|zh)?/?*', 
+app.get('/(:lang(ar|en|es|fr|ru|zh)(/|$))?*', 
     function(req, res, next){
         global.app.version = appVersion;
         res.setHeader('Cache-Control', 'public, max-age=0');    
