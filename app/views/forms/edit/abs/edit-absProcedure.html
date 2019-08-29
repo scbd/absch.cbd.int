@@ -12,7 +12,7 @@
         <span block-region activate="isLoading()" ng-if="isLoading()"></span>
         <div class="registerpage-content">
 
-            <div workflow-arrow-buttons document="getCleanDocument()" 
+            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
             languages="document.header.languages" hide-timer="false" tab="tab">
                 <!-- <intro-form></intro-form> -->
                 <edit-form>

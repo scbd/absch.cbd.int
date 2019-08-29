@@ -12,7 +12,7 @@
                 <strong>{{msg}}</strong>
             </div>
 
-            <div workflow-arrow-buttons document="getCleanDocument()" 
+            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
                 languages="document.header.languages" tab="tab">
                     <!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required -->
                     <edit-form>

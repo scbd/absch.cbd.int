@@ -9,15 +9,6 @@ define([
     'components/scbd-angularjs-services/services/locale',
     'views/directives/workflow-arrow-buttons'
 ], function (app, _, Enumerable) {
-
-
-  // 'views/directives/workflow-std-buttons',
-  // 'views/forms/edit/organization-selector',
-  // 'views/forms/view/view-contact-reference.directive',
-  // 'views/forms/view/view-default-reference.directive',
-  // 'views/forms/view/view-organization-reference.directive',
-  // 'views/forms/view/view-organization.directive',
-  // 'views/forms/view/view-organization-reference.directive',
   
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
@@ -389,7 +380,9 @@ define([
       });
     };
 
-
+    $scope.onReviewLanguageChange = function(lang){
+      $scope.review.locale = lang;
+    }
 
   }]);
 });

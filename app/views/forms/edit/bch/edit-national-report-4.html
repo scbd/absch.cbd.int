@@ -20,7 +20,7 @@
         <div class="registerpage-content" style="padding-bottom:30px;" ng-class="{'block-position' : blockEditForm || isLoading()}">
 
             <div block-region activate="blockEditForm || isLoading()"></div>      
-            <workflow-arrow-buttons document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
                 tab="tab" on-step-change="onStepChange(tab)" validation-report="validationReport" on-post-close="onPostClose()" 
                 on-error="onError(error, errorCode)">
                 <edit-form>
