@@ -28,11 +28,13 @@ define(['app','text!./km-inputtext-ml.html','angular'], function(app,template,an
          function watchLocales() {
           var oLocales = $scope.locales || [];
           var oBinding = $scope.binding || {};
-          var oText = $scope.text;
+          var oText = {};
 
           angular.forEach(oLocales, function(locale, i) {
             oText[locale] = oBinding[locale] || oText[locale];
           });
+          $scope.text = oText;
+          $scope.onchange();
         };
 
         //==============================
