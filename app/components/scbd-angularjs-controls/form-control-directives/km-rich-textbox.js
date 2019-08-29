@@ -20,36 +20,39 @@
 							toolbar : "@?"
 					},
 					link: function($scope, element, attrs, ngModelController) {
-							$scope.text = {};
-							$scope.$watch('locales', $scope.watchLocales);
-							$scope.$watch('binding', $scope.watchBinding);
-
+							$scope.text = {};	
 							if(!$scope.toolbar)
 									$scope.toolbar = "[['bold', 'italics', 'ul', 'ol', 'redo', 'undo', 'clear']]";
+
+							$scope.$watch('locales', watchLocales);
+							$scope.$watch('binding', watchBinding);
+							
 							//==============================
 							//Remove value of not selected languages/empty languages
 							//==============================
-							$scope.watchLocales = function() {
-									var oLocales = $scope.locales || [];
-									var oBinding = $scope.binding || {};
-									var oText = $scope.text;
+							function watchLocales() {
+								var oLocales = $scope.locales || [];
+								var oBinding = $scope.binding || {};
+								var oText = {};
 
-									angular.forEach(oLocales, function(locale, i) {
-											oText[locale] = oBinding[locale] || oText[locale];
-									});
+								angular.forEach(oLocales, function(locale, i) {
+									oText[locale] = oBinding[locale] || oText[locale];
+								});
+								$scope.text = oText;
+								$scope.onchange();
 							};
 
 							//==============================
 							//Remove value of not selected languages/empty languages
 							//==============================
-							$scope.watchBinding = function() {
-									var oLocales = $scope.locales || [];
-									var oBinding = $scope.binding || {};
-									var oText = $scope.text;
+							function watchBinding() {
+								var oLocales = $scope.locales || [];
+								var oBinding = $scope.binding || {};
+								var oText = $scope.text;
 
-									angular.forEach(oLocales, function(locale, i) {
-											oText[locale] = oBinding[locale];
-									});
+								angular.forEach(oLocales, function(locale, i) {
+									oText[locale] = oBinding[locale];
+								});
 							};
 
 							//==============================

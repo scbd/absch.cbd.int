@@ -40,7 +40,8 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                 
                 $scope.$watch('terms', onTerms);
                 $scope.$watch('identifier', save);
-                $scope.$watch('binding', load);  
+                $scope.$watch('binding', load); 
+                $scope.$watch('locales', load);   
 
                 if (!$attr["class"])
                     $element.find('ul:first').addClass("list-unstyled");
