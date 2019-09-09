@@ -24,18 +24,19 @@
                     rowsPerPage: 25
                 } 
                 // ,                    sortBy     : 'updatedDate_dt desc'
-                function updateResult(query, sort, pageNumber){
+                function updateResult(queryOptions, sort, pageNumber){
                    
                     $scope.loading = true;
                     if(pageNumber==undefined)
                         pageNumber = $scope.searchResult.currentPage;
 
                     var lQuery = {
-                        query   : query,
+                        fieldQuery     : queryOptions.tagQueries,
+                        query          : queryOptions.query||undefined,
                         rowsPerPage    : $scope.searchResult.rowsPerPage,
                         currentPage    : pageNumber - 1,
-                        facet:true,
-                        facetFields : ['all_terms_ss', 'government_REL_ss']
+                        facet          : true,
+                        facetFields    : ['{!ex=sch}schema_s', '{!ex=gov}government_s', '{!ex=key}all_terms_ss', '{!ex=reg}government_REL_ss']
                     }
                     //'schema_s', 'government_s', 
                     if(sort && sort != 'relevance asc')
@@ -51,8 +52,12 @@
                         $scope.searchResult.sortBy      = lQuery.sort;
                         $scope.searchResult.currentPage = pageNumber;
                         
-                        $scope.searchResult.facets      = _.extend(result.data.facet_counts.facet_fields['all_terms_ss'], 
-                                                                   result.data.facet_counts.facet_fields['government_REL_ss'])
+                        $scope.searchResult.facets   = {
+                            schemas   : result.data.facet_counts.facet_fields['schema_s'], 
+                            keywords  : result.data.facet_counts.facet_fields['all_terms_ss'],
+                            countries : result.data.facet_counts.facet_fields['government_s'], 
+                            regions   : result.data.facet_counts.facet_fields['government_REL_ss']
+                        }
                         
                         return $scope.searchResult;
                     })

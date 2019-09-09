@@ -18,12 +18,7 @@ define(['app','text!views/search/search-filters/keyword-filter.html', 'lodash'],
 
                $scope.relatedFilters = {};
 
-            },// link
-            controller: function($scope){
-                 
-               
-                
-            },// controller
+            }
         };
     });
 });
