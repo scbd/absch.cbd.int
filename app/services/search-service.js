@@ -9,34 +9,34 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                 var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
 
                 var searchDefaults = {
-                    currentPage: 0,
-                    rowsPerPage: 25,
-                    fields: base_fields + en_fields,
-                    query: '*:*',
-                    groupField: 'government_s',
-                    groupLimit: 100000
+                    currentPage : 0,
+                    rowsPerPage : 25,
+                    fields      : base_fields + en_fields,
+                    groupField  : 'government_s',
+                    groupLimit  : 100000,
+                    fieldQuery  : [],
+                    query       : "''"
                 }
 
                 // groupSort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
                 // sort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
-                var q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
-
+                
                 //================================================================================================================
                 this.list = function(searchQuery, queryCanceler) {
 
                     _.defaults(searchQuery, searchDefaults);
                     if(searchQuery.additionalFields)
-                        searchQuery.fields += ',' + searchQuery.additionalFields;
-                           
-                    q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
+                        searchQuery.fields += ',' + searchQuery.additionalFields;                                               
 
+                    searchQuery.fieldQuery.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
                     var queryListParameters = {
-                        'q': q + searchQuery.query,
-                        'sort': localizeFields(searchQuery.sort),
-                        'fl': localizeFields(searchQuery.fields),
-                        'wt': 'json',
-                        'start': searchQuery.start || (searchQuery.currentPage * searchQuery.rowsPerPage),
-                        'rows': searchQuery.rowsPerPage,
+                        fq    : searchQuery.fieldQuery,
+                        q     : searchQuery.query,
+                        sort  : localizeFields(searchQuery.sort),
+                        fl    : localizeFields(searchQuery.fields),
+                        wt    : 'json',
+                        start : searchQuery.start || (searchQuery.currentPage * searchQuery.rowsPerPage),
+                        rows  : searchQuery.rowsPerPage,
                     };
 
                     if(searchQuery.facet){
@@ -66,11 +66,11 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     _.defaults(searchQuery, searchDefaults);
                     if(searchQuery.additionalFields)
                         searchQuery.fields += ',' + searchQuery.additionalFields;
-
-                    q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
-
+                        
+                    searchQuery.fieldQuery.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
                     var queryGroupParameters = {
-                        'q': q + searchQuery.query,
+                        fq    : searchQuery.fieldQuery,
+                        'q': searchQuery.query,
                         'sort': localizeFields(searchQuery.sort),
                         'fl': localizeFields(searchQuery.fields),
                         'wt': 'json',
@@ -111,10 +111,9 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     _.defaults(facetQuery, searchDefaults);
 
                     if (facetQuery) {
-                        q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
                         var queryFacetsParameters = {
-                            'q': q + facetQuery.query,
-                            'fl': '',
+                            fq    : facetQuery.fieldQuery,
+                            'q': facetQuery.query,
                             'wt': 'json',
                             'rows': 0,
                             'facet': true,
@@ -154,9 +153,10 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     _.defaults(facetQuery, searchDefaults);
 
                     if (facetQuery) {
-                        q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
+
                         var queryFacetsParameters = {
-                            'q': q + facetQuery.query,
+                            fq    : facetQuery.fieldQuery,
+                            'q': facetQuery.query,
                             'fl': '',
                             'wt': 'json',
                             'rows': 0,
@@ -236,10 +236,11 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
 
                     _.each(facetFields, function(field){
                         if (solrArray){
-                            for (var i = 0; i < solrArray[field].length; i += 2) {
-                                if(!facets[field])
-                                    facets[field] = {};
-                                facets[field][solrArray[field][i]] = solrArray[field][i + 1];
+                            var mField = field.replace(/{.*}/, ''); //remove tags(${!ex=xxx}) is specified in field names
+                            for (var i = 0; i < solrArray[mField].length; i += 2) {
+                                if(!facets[mField])
+                                    facets[mField] = {};
+                                facets[mField][solrArray[mField][i]] = solrArray[mField][i + 1];
                             }
                         }
                     });

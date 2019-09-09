@@ -30,7 +30,7 @@
                                     filters[filter.parent] = [];
 
                                 filter.selected = $scope.isFilterOn(filter.id);
-                                filter.facet    = ($scope.searchResult.data.facets||{})[filter.id]||0;
+                                filter.facet    = ($scope.searchResult.data.facets.keywords||{})[filter.id]||0;
                                 filters[filter.parent].push(filter);
                             }
                         });

@@ -16,14 +16,16 @@
                 <div class="bold color-darkgrey">{{filterKey}}</div>
                 <div ng-repeat="option in filter | orderBy:['-selected', '-facet'] | limitTo:5" style="padding-left:10px">
                     <a class="filter" ng-click="saveFilter(option)" ng-class="{'level0':option.level===0,'level1':option.level===1,'level2':option.level===2,'level3':option.level===3, 
-                        'disabled':(!option.facet)}">
+                        'disabled':(!searchResult.data.facets.keywords[option.id])}">
                         <i class="fa check" ng-class="{'fa-check-square':option.selected,'fa-square':!option.selected}"></i>
                         {{option.name}}
-                        <strong class="pull-right">({{option.facet}})</strong>
+                        <strong class="pull-right">
+                            ({{searchResult.data.facets.keywords[option.id]||0}})
+                        </strong>
                     </a>
                 </div>
                 <div ng-if="filter.length>5"  style="padding-left:10px">
-                    <a ng-click="showFilterDialog(schema, filterKey, filter, $parent.searchResult.data.facets, setFilters)" href="#">Show more</a>
+                    <a ng-click="showFilterDialog(schema, filterKey, filter, searchResult.data.facets.keywords, setFilters)" href="#">Show more</a>
                 </div>
             </div>
         </div>

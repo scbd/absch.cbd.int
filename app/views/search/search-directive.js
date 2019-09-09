@@ -21,7 +21,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
              'joyrideService', '$timeout', 'locale',
             function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
                     appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, $timeout, locale) {
-                   
+                    
+                    var activeFilter;
                     var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
                     var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
 
@@ -123,12 +124,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     $scope.saveFilter = function (doc) {
 
-                        
                         // if(!$scope.searchResult.data.facets[doc.id])
                         //     return;
                         //TODO: if free text check to see if there is a UID and convert to identifier
-                        console.debug("addfilter:" + doc);
-
+                        activeFilter = doc.otherType||doc.type
                         var filterID = doc.id;
                         var termID = doc.id;
                         var broader = null;
@@ -263,7 +262,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     function init(){
 
-                        loadGlobalFacets();
+                        // loadGlobalFacets();
                         loadFilters();
 
                         var query =  $location.search();
@@ -636,21 +635,18 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     function updateQueryResult(pageNumber){
 
-                        var query = buildSearchQuery()
+                        var queryOptions = buildSearchQuery()
                         var sortFields = ''
                         var resultQuery;
                         if(($scope.searchResult.sortFields||[]).length > 0)
                             sortFields = $scope.searchResult.sortFields.join(', ');
 
                         if($scope.searchResult.viewType == 'list'){
-                           resultQuery = $scope.searchResult.listViewApi.updateResult(query, sortFields, pageNumber||1);
+                           resultQuery = $scope.searchResult.listViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
                         }
                         else if($scope.searchResult.viewType == 'group'){
-                            var options = {
-                                query : query,
-                                groupByFields : $scope.searchResult.groupByFields
-                            }
-                            resultQuery = $scope.searchResult.groupViewApi.updateResult(options, sortFields, pageNumber||1);
+                            queryOptions.groupByFields = $scope.searchResult.groupByFields;
+                            resultQuery = $scope.searchResult.groupViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
                         }
                         else if($scope.searchResult.viewType == 'matrix'){
                             
@@ -662,18 +658,22 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
 
                     function buildSearchQuery(){
+                        var tagQueries = {};
                         var qAnd = [];
                         var qOr  = [];
                         var q    = '';
                         var q1   = '';
 
-                        qAnd .push(buildSchemaQuery());
-                        qAnd .push(buildFieldQuery   ('government_s'      , 'country'     , null                 ));
-                        qAnd .push(buildCountryQuery ('government_s'      , 'partyStatus' , null                ));
-                        qAnd .push(buildFieldQuery   ('government_REL_ss' , 'region'      , null                ));
-                        qOr  .push(buildFieldQuery   ('all_terms_ss'      , 'keyword'     , null                ));
-                        qOr  .push(buildTextQuery    ('text_EN_txt'       , 'keyword'     , null                ));
-                        qOr  .push(buildTextQuery    ('text_EN_txt'       , 'freeText'    , null                ));
+                        tagQueries.sch = buildSchemaQuery  ();
+                        tagQueries.gov = buildFieldQuery   ('government_s'      , 'country'     , null );
+                        tagQueries.pst = buildCountryQuery ('government_s'      , 'partyStatus' , null );
+                        tagQueries.reg = buildFieldQuery   ('government_REL_ss' , 'region'      , null );
+                        var termsQ     = buildFieldQuery   ('all_terms_ss'      , 'keyword'     , null );
+                        var termsTxtQ  = buildTextQuery    ('text_EN_txt'       , 'keyword'     , null );
+                        if(termsQ)
+                            tagQueries.key = '('+ termsQ + ' OR ' + termsTxtQ + ')';
+
+                        qAnd .push(buildTextQuery    ('text_EN_txt'       , 'freeText'    , null ));
 
                         _.map(_.filter($scope.setFilters, {type:'custom'}), function(custom){
                             if(custom.query)
@@ -684,8 +684,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         q = combineQuery(qAnd, "AND");
                         q1 = combineQuery(qOr, "OR");
-
-                        return q1 ? q + " AND (" + q1 + ")" : q;
+                        
+                        return {
+                            activeFilter : activeFilter,
+                            query      :  (q1 ? q + " AND (" + q1 + ")" : q),
+                            tagQueries : _(tagQueries).map(function(f, t){if(f) return '{!tag='+t+'}' + f;}).compact().value()
+                        }
+                        ;
                     }
 
                     function buildTextQuery(field, type, boost) {

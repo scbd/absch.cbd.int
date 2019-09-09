@@ -15,6 +15,6 @@
 
         <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
             page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
-            num-found="searchResult.numFound"></pagination> 
+            num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)"></pagination> 
     </div>
 </div>
