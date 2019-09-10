@@ -4,7 +4,7 @@
 
     app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$location', function(searchService, realm, $timeout, $location) {
         return {
-            restrict: 'EAC',
+            restrict: 'EA',
             replace: true,
             require:'^searchDirective',
             template: template, 
@@ -12,7 +12,7 @@
                 api:'='
             },
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-                  
+                
                 $scope.recordLoader = {};
                 $scope.api = {
                     updateResult : updateResult
@@ -31,7 +31,7 @@
                         pageNumber = $scope.searchResult.currentPage;
 
                     var lQuery = {
-                        fieldQuery     : queryOptions.tagQueries,
+                        fieldQuery     : _.uniq(queryOptions.tagQueries),
                         query          : queryOptions.query||undefined,
                         rowsPerPage    : $scope.searchResult.rowsPerPage,
                         currentPage    : pageNumber - 1,
@@ -48,7 +48,8 @@
                         $scope.searchResult.docs        = result.data.response.docs;
                         $scope.searchResult.numFound    = result.data.response.numFound;
                         $scope.searchResult.pageCount   = Math.ceil(result.data.response.numFound / $scope.searchResult.rowsPerPage);
-                        $scope.searchResult.query       = lQuery.query;
+                        $scope.searchResult.query       = queryOptions.tagQueries.query;
+                        $scope.searchResult.tagQueries  = queryOptions.tagQueries;
                         $scope.searchResult.sortBy      = lQuery.sort;
                         $scope.searchResult.currentPage = pageNumber;
                         
@@ -67,7 +68,7 @@
                 }
 
                 $scope.onPageChange = function(pageNumber){
-                    updateResult($scope.searchResult.query, $scope.searchResult.sort, pageNumber);
+                    updateResult($scope.searchResult, $scope.searchResult.sort, pageNumber);
                     $location.search({
                         currentPage:pageNumber,
                         rowsPerPage:$scope.searchResult.rowsPerPage
