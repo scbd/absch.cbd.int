@@ -262,7 +262,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     function init(){
 
-                        // loadGlobalFacets();
                         loadFilters();
 
                         var query =  $location.search();
@@ -301,15 +300,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         //         }
                         //     });
                         // }
-                    }
-
-                    function loadGlobalFacets(){
-                        searchService.facets({fields: ['all_terms_ss', 'government_REL_ss']}).then(function(result){
-                            
-                            var facets = _.extend(result['all_terms_ss'], 
-                                                  result['government_REL_ss']);
-                            $scope.searchResult.globalFacets = facets;
-                        })
                     }
 
                     function loadFilters() {
@@ -634,27 +624,27 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     };
 
                     function updateQueryResult(pageNumber){
+                        $timeout(function(){//call digest cycle to update the directive api params
+                            var queryOptions = buildSearchQuery()
+                            var sortFields = ''
+                            var resultQuery;
+                            if(($scope.searchResult.sortFields||[]).length > 0)
+                                sortFields = $scope.searchResult.sortFields.join(', ');
 
-                        var queryOptions = buildSearchQuery()
-                        var sortFields = ''
-                        var resultQuery;
-                        if(($scope.searchResult.sortFields||[]).length > 0)
-                            sortFields = $scope.searchResult.sortFields.join(', ');
-
-                        if($scope.searchResult.viewType == 'list'){
-                           resultQuery = $scope.searchResult.listViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
-                        }
-                        else if($scope.searchResult.viewType == 'group'){
-                            queryOptions.groupByFields = $scope.searchResult.groupByFields;
-                            resultQuery = $scope.searchResult.groupViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
-                        }
-                        else if($scope.searchResult.viewType == 'matrix'){
-                            
-                        }
-                        resultQuery.then(function(data){
-                            $scope.searchResult.data = data;
-                        })
- 
+                            if($scope.searchResult.viewType == 'list'){
+                            resultQuery = $scope.searchResult.listViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
+                            }
+                            else if($scope.searchResult.viewType == 'group'){
+                                queryOptions.groupByFields = $scope.searchResult.groupByFields;
+                                resultQuery = $scope.searchResult.groupViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
+                            }
+                            else if($scope.searchResult.viewType == 'matrix'){
+                                
+                            }
+                            resultQuery.then(function(data){
+                                $scope.searchResult.data = data;
+                            })
+                        }, 0)
                     }
 
                     function buildSearchQuery(){

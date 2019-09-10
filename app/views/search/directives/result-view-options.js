@@ -1,7 +1,7 @@
 ﻿define(['text!./result-view-options.html', 'app', 'lodash', 'ngDialog'], function (template, app, _) {
     'use strict';
 
-    app.directive('resultViewOptions', ['$location', 'ngDialog', function ($location, ngDialog) {
+    app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', function ($location, ngDialog, locale) {
         return {
             restrict: 'EA',
             template: template,
@@ -31,10 +31,10 @@
                         template : 'sortByDialog',
                         controller: ['$scope', function($scope){
                             $scope.sortByFields = [
-                                {field:'relevance'      , title: 'Relevance'       ,direction: 'asc'},
-                                {field:'updatedDate_dt' , title: 'Last Updated On' ,direction: 'asc'},
-                                {field:'schema_s'       , title: 'Record Type'     ,direction: 'asc'},
-                                {field:'government_s'   , title: 'Country'         ,direction: 'asc'}
+                                {field:'relevance'                            , title: 'Relevance'       ,direction: 'asc'},
+                                {field:'updatedDate_dt'                       , title: 'Last Updated On' ,direction: 'asc'},
+                                {field:'schema_EN_s'.replace('EN', locale.toUpperCase())    , title: 'Record Type'     ,direction: 'asc'},
+                                {field:'government_EN_s'.replace('EN', locale.toUpperCase()), title: 'Country'         ,direction: 'asc'}
                             ]
 
                             _.each(selectedFields, function(field){
@@ -51,6 +51,19 @@
                             $scope.selectField = function(field,direction){  
                                 if(!direction)                              
                                     field.selected=!field.selected;
+
+                                if(field.field == 'relevance'){
+                                    $scope.selectedFields = [];
+                                    _.each($scope.sortByFields, function(f){f.selected=f.field == 'relevance'});
+                                }
+                                else{
+                                    var relevance = _.find($scope.selectedFields, {field: 'relevance'})
+                                    var index = _.indexOf($scope.selectedFields, relevance);
+                                    if(index>=0){
+                                        relevance.selected = false;
+                                        $scope.selectedFields.splice(index, 1);
+                                    }
+                                }
 
                                 field.direction=direction||'asc';
                                 if(field.selected){
@@ -95,8 +108,8 @@
                         template : 'groupByDialog',
                         controller: ['$scope', function($scope){
                             $scope.groupByFields = [
-                                {field:'government_s'     , title: 'Government'         },
-                                {field:'schema_s'         , title: 'Type of record'     }
+                                {field:'government_EN_s'.replace('EN', locale.toUpperCase())     , title: 'Government'         },
+                                {field:'schema_EN_s'.replace('EN', locale.toUpperCase())         , title: 'Type of record'     }
                             ]
                             // ,{field:'submissionYear_s' , title: 'Year of submission' }
 
