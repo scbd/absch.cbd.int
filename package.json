@@ -10,8 +10,6 @@
     "@bower_components/jquery": "jquery/jquery-dist#3.3.1",
     "@bower_components/ngstorage": "gsklee/ngStorage#0.3.11",
     "@bower_components/require-shim": "zetlen/require-shim#95b5aaea4530fb2861cc475497c7b4c62204628d",
-    "co": "4.6.0",
-    "co-fs": "1.2.0",
     "cookie-parser": "1.4.3",
     "ejs": "2.5.5",
     "express": "4.16.3",

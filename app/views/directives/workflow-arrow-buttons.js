@@ -35,7 +35,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				onPostPublishFn   : "&onPostPublish",
                 onErrorFn         : "&onError",
 				onStepChangeFn    : "&onStepChange",
-                validationReport    : '=?'
+                validationReport    : '=?',
+				onReviewLanguageChangeFn  : "&onReviewLanguageChange"
     		},
             link : function($scope, $element, $attr){
 
@@ -566,8 +567,10 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         $scope.disablePreviousBtn = true;
                     }
 
-                    if(tab == "review" || tab == "publish")
+                    if(tab == "review" || tab == "publish"){
                         $scope.review();
+                        updateDocumentViewLanguage();
+                    }
 
                     if(tab == "publish")
                         $scope.disableNextBtn = true;
@@ -579,6 +582,10 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     $(".step" + tab).prevAll().addClass('active');
 
                 }
+                $scope.onReviewLanguageChange = function(lang){
+                    $scope.selectedLanguage=lang;
+                    $scope.onReviewLanguageChangeFn({lang:lang})
+                } 
 
                 $scope.$on("documentError", showError);
                 function showError(evt, data){
@@ -746,6 +753,11 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     })
                 }
 
+                function updateDocumentViewLanguage(){
+                    $scope.selectedLanguage = locale;
+                    if($scope.languages.indexOf(locale)<0)
+                        $scope.selectedLanguage = $scope.languages[0]
+                }
                 //============================================================
                 $scope.loadSecurity();
 

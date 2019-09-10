@@ -11,7 +11,7 @@ define(['app', 'angular-cookies',
 				localStorageService.remove("searchFilters");
 				
 				$timeout(function(){
-					var langRegex = new RegExp('^\/(ar|en|es|fr|ru|zh)');
+					var langRegex = new RegExp('^\/(ar|en|es|fr|ru|zh)(\/|$)');
 					var returnUrl = $location.search().returnUrl;
 
 					if(!langRegex.test(returnUrl)){
