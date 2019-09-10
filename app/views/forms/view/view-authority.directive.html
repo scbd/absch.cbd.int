@@ -27,7 +27,7 @@
 		</div>
 
 		<div ng-if="document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0 " >
-			<label name="name">Competent National Authority</label>
+			<label name="name">Competent <span ng-if="document.header.schema!=='supplementaryAuthority'">National </span>Authority</label>
 			<div class="km-value">
 				<div><strong>{{document.name | lstring:locale}}</strong></div>
 				<div ng-show="document.address">{{document.address | lstring:locale}}</div>
@@ -116,19 +116,19 @@
 			</div>
 
 		</div>
-		<div ng-if="isBCH && (document.bchFunctions || document.responsibilities)">
+		<div ng-if="isBCH && (document.cpbFunctions || document.functions || document.responsibilities || document.cpbOrganismTypes)">
 			<legend>Regulatory function</legend>
-			<div ng-show="document.bchFunctions">
+			<div ng-show="document.cpbFunctions||document.functions">
 				<label>Administrative functions</label>
 				<div class="km-value">
-					<li ng-repeat="term in document.bchFunctions">{{term|term}} </li>
+					<li ng-repeat="term in (document.cpbFunctions||document.functions)">{{term|term}} </li>
 				</div>
 			</div>
 
-			<div ng-show="document.bchOrganismTypes">
+			<div ng-show="document.cpbOrganismTypes">
 				<label>Types of LMOs under its jurisdiction</label>
 				<div class="km-value">
-					<li ng-repeat="term in document.bchOrganismTypes">{{term|term}} </li>
+					<li ng-repeat="term in document.cpbOrganismTypes">{{term|term}} </li>
 				</div>
 			</div>
 			

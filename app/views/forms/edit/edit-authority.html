@@ -9,7 +9,6 @@
                 <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" tab="tab">
                     <edit-form>
                         <form class="editForm" name="editForm">
-
                             <div ng-show="tab=='edit'" km-tab="edit">
                                 <legend name="formInfo" style="display:none"></legend>
 			
@@ -40,10 +39,9 @@
 
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="name" required caption="Name of the Competent National Authority">
-                                                <div class="help-info"> Provide the name of the responsible entity e.g.
-                                                    Ministry of Environment. Bear in mind that the name of the CNA will
-                                                    help to identify the record in the ABS Clearing-House.</div>
+                                            <div class="km-control-group" name="name" required caption="Name of the Competent {{type!=='SPCA' ? 'National' : ''}} Authority">
+                                                <div class="help-info"> Provide the specific name of the responsible entity e.g. Ministry of Environment. 
+                                                    <span ng-if="realm.is('ABS')">Bear in mind that the name of the CNA will help to identify the record in the ABS Clearing-House.</span></div>
                                                 <div km-textbox-ml name="name" required ng-model="document.name" rows="1"
                                                     placeholder="" locales="document.header.languages"></div>
                                             </div>
@@ -53,7 +51,7 @@
 
                                 <section>
                                     <legend name="coordinates">Coordinates</legend>
-                                    <div class="help-info">The coordinates will help users of genetic resources to get
+                                    <div class="help-info" ng-if="realm.is('ABS')">The coordinates will help users of genetic resources to get
                                         in contact with the CNA. It is important to keep this information up to date in
                                         order to provide users with recent and accurate information.</div>
 
@@ -295,27 +293,28 @@
 
                                 <section ng-if="realm.is('BCH')">
                                     <legend>Regulatory function</legend>
-                                    <div class="help-info">
+                                    <div class="help-info" ng-if="realm.is('ABS')">
                                         This section provides relevant information on the responsibilities of the Competent National Authority to assist in searching and translation (a full description of the functions of the Authority may be provided in a later section). You may select multiple categories from either or both of the two categories available, i.e. administrative or subject area covered by the authority, and/or for which type of LMO it is responsible.
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="bchFunctions" caption="Administrative functions" required>
+                                            <div class="km-control-group" name="functions" caption="Administrative functions" required>
                                                 <div class="help-info">
-                                                    If there is only one Authority responsible for all functions required by the Protocol, please select "All functions pursuant to the Cartagena Protocol on Biosafety".
+                                                    <span ng-if="type=='CNA'">If there is only one Authority responsible for all functions required by the Protocol, please select "All functions pursuant to the Cartagena Protocol on Biosafety".</span>                                                    
+                                                    <span ng-if="type=='SPCA'">If there is more than one competent authority responsible for the functions under Article 5 of the Supplementary Protocol, please specify for which functions each competent authority is responsible.</span>
                                                 </div>
-                                                <div km-term-check name="bchFunctions" required ng-model="document.bchFunctions" locales="document.header.languages"
-                                                terms="options.bchFunctions()" binding-type="term[]"></div>
+                                                <div km-term-check name="functions" required ng-model="document.functions" locales="document.header.languages"
+                                                terms="options.functions()" binding-type="term[]"></div>
                                             </div>
-                                            <div class="km-control-group" name="bchOrganismTypes" caption="Types of LMOs under its jurisdiction" required>
+                                            <div ng-if="type=='CNA'" class="km-control-group" name="organismTypes" caption="Types of LMOs under its jurisdiction" required>
                                                 <div class="help-info">If there is only one Authority responsible for all functions required by the Protocol, please select "All LMOs".</div>
-                                                <div km-term-check name="bchOrganismTypes" required ng-model="document.bchOrganismTypes" locales="document.header.languages"
-                                                terms="options.bchOrganismTypes()" binding-type="term[]"></div>
+                                                <div km-term-check name="organismTypes" required ng-model="document.organismTypes" locales="document.header.languages"
+                                                terms="options.organismTypes()" binding-type="term[]"></div>
                                             </div>
 
                                             <div class="km-control-group" name="responsibilities"
                                                 caption="Detailed description of the regulatory functions"required>
-                                                <div class="help-info">
+                                                <div class="help-info" ng-if="type!=='SPCA'">
                                                     Outline the administrative functions for which the Authority is responsible and authorized to act on. Where more than one competent national authority is designated, this information should, at a minimum, specify which competent national authority is responsible for which type of LMO.
                                                 </div>
                                                 <div km-rich-textbox name="responsibilities" ng-model="document.responsibilities"
@@ -360,8 +359,8 @@
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="notes">
                                                 <div class="help-info">The “Notes” field is for your personal notes or
-                                                    comments and will be hidden when viewing the record. This field is
-                                                    not meant to be used for confidential information.</div>
+                                                    comments and will be hidden when viewing the record. 
+                                                    <span ng-if="realm.is('ABS')">This field is not meant to be used for confidential information.</span></div>
                                                 <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
                                             </div>
                                         </div>

@@ -7,7 +7,7 @@
 
 	<address style="margin-top: 5px; margin-bottom: 5px">
 		<div class="km-pre">{{document.address | lstring:locale}}</div>
-		{{document.city | lstring:locale}}<span ng-show="document.city">, </span>
+		{{document.city | lstring:locale}}<span ng-show="document.city && document.state">, </span>
 		{{document.state | lstring:locale}}<br ng-show="document.city || document.state" />
 		{{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
 		<b>{{document.country|term}}</b>
