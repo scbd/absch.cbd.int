@@ -19,7 +19,7 @@
     "superagent": "^5.0.8"
   },
   "devDependencies": {
-    "@bower_components/angular-loggly-logger": "@scbd/angular-loggly-logger:03.2",
+    "@bower_components/angular-loggly-logger": "scbd/angular-loggly-logger#42683db9ffdc0e06380f5c217511414a42d8531f",
     "@bower_components/Chart.js": "chartjs/Chart.js#1.1.1",
     "@bower_components/SHA-1": "linkgod/SHA-1",
     "@bower_components/angucomplete": "darylrowland/angucomplete#3bf6ab2da56d514c22800f9dbdfeced66cff03f4",
