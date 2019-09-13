@@ -28,6 +28,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                 $scope.terms = null;
                 $scope.searchKeyword = '';
                 $scope.rootTerms = [];
+                $scope.otherElements = {};
                 if($scope.showDescription === undefined)
                     $scope.showDescription = 'false';
 
@@ -78,7 +79,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                         return;
 
                     var oNewIdentifiers = {};
-
+                    var oNewOthers = {};
                     if (!$.isArray($scope.terms))
                         throw "Type must be array";
 
@@ -90,26 +91,43 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                         for (var i = 0; i < $scope.binding.length; ++i) {
                             if ($scope.bindingType == "string[]") 
                                 oNewIdentifiers[$scope.binding[i]] = {selected : true};
-                            else if($scope.bindingType == "term[]")
+                            else if($scope.bindingType == "term[]"){
                                 oNewIdentifiers[$scope.binding[i].identifier] = {selected : true, customValue:$scope.binding[i].customValue};
+
+                                if($scope.terms){
+                                    var term = _.find($scope.terms, {identifier:$scope.binding[i].identifier})
+                                    if(term && term.multiple){
+                                        if(!oNewOthers[term.identifier])
+                                            oNewOthers[term.identifier] = [];
+
+                                        oNewOthers[term.identifier].push({customValue :$scope.binding[i].customValue});                                        
+                                    }
+                                }
+                            }
                             else throw "bindingType not supported";
 
                             // if ($scope.bindingType == "string[]") oNewIdentifiers[$scope.binding[i]] = true;
                             // else if ($scope.bindingType == "term[]") oNewIdentifiers[$scope.binding[i].identifier] = true;
                             // else throw "bindingType not supported";
-                        }
+                        }                        
                     }
 
-                    if (!angular.equals(oNewIdentifiers, $scope.selectedItems))
+                    if (!angular.equals(oNewIdentifiers, $scope.selectedItems)){
                         $scope.selectedItems = oNewIdentifiers;
+                    }
                     
+                    _.each(oNewOthers, function(customValues, key){
+                        if (!angular.equals(customValues, $scope.otherElements[key]))
+                            $scope.otherElements[key] = customValues;
+                    })
+
                     save();
                 };
 
                 //==============================
                 //
                 //==============================
-                function save() {
+                function save(onOtherElementsChange) {
                     if (!$scope.selectedItems)
                         return;
 
@@ -119,21 +137,37 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                         if (term === undefined) return; //IE8 BUG
 
                         if ($scope.selectedItems[term.identifier] && $scope.selectedItems[term.identifier].selected) {
-                            if ($scope.bindingType == "string[]") oNewBinding.push(term.identifier);
-                            else if ($scope.bindingType == "term[]") oNewBinding.push({
-                                identifier: term.identifier, customValue : $scope.selectedItems[term.identifier].customValue||undefined
-                            });
+                            
+                            if ($scope.bindingType == "string[]") 
+                                oNewBinding.push(term.identifier);
+                            else if ($scope.bindingType == "term[]"){
+                                
+                                if(term.multiple){
+                                    if(!onOtherElementsChange)
+                                        initializeOther(term.identifier)
+                                    _.each($scope.otherElements[term.identifier], function(elm){
+                                        oNewBinding.push({ identifier: term.identifier, customValue : elm.customValue||undefined });
+                                    })
+                                }
+                                else
+                                    oNewBinding.push({ identifier: term.identifier, customValue : $scope.selectedItems[term.identifier].customValue||undefined });
+                            }
                             else throw "bindingType not supported";
+                        }
+                        else{ //clear other
+                            if(term.multiple){
+                               $scope.otherElements[term.identifier] = []
+                            }
                         }
                     });
 
                     if ($.isEmptyObject(oNewBinding))
                         oNewBinding = undefined;
 
-                    if (!angular.equals(oNewBinding, $scope.binding))
+                    if (!angular.equals(oNewBinding, $scope.binding)){
                         $scope.binding = oNewBinding;
-
-                    ngModelController.$setViewValue($scope.binding);
+                        ngModelController.$setViewValue($scope.binding);
+                    }
                 };
 
                 //==============================
@@ -154,7 +188,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                         if (($scope.layout || "tree") == "tree") //Default layout
                             $scope.rootTerms = thesaurus.buildTree(refTerms);
                         else
-                            $scope.rootTerms = Enumerable.from(refTerms).select("o=>{identifier : o.identifier, name : o.name, title : o.title, type:o.type}").toArray();
+                            $scope.rootTerms = Enumerable.from(refTerms).select("o=>{identifier : o.identifier, name : o.name, title : o.title, type:o.type, multiple:o.multiple}").toArray();
                         
                         buildSearchList($scope.rootTerms)
                     }
@@ -258,6 +292,29 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     }
                     
                     return mergedTitle;
+                }
+
+                $scope.deleteOtherElement = function (element, otherElements, $event) {
+                    otherElements.splice(otherElements.indexOf(element), 1);
+                    $scope.save(true);
+                };
+
+                $scope.appendEmptyOther = function (otherElements, skipSave) {                    
+                        var lastItem = otherElements[otherElements.length - 1];
+                        if (!angular.equals(lastItem, {}) && lastItem.name != "")
+                            otherElements.push({});
+
+                        if(!skipSave)
+                            $scope.save(true);
+                }
+                function initializeOther(identifier) {
+                    if(!$scope.otherElements[identifier])
+                        $scope.otherElements[identifier] = [];
+
+                    var otherElements = $scope.otherElements[identifier];
+                    var lastItem = otherElements[otherElements.length - 1];
+                    if (!lastItem || (!angular.equals(lastItem, {}) && lastItem.customValue != ""))
+                        otherElements.push({});
                 }
 
                 init();
