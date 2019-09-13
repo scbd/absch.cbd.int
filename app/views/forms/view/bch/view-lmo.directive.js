@@ -3,7 +3,7 @@ define(['app', "text!views/forms/view/bch/view-lmo.directive.html",
 'views/forms/view/view-default-reference.directive'
 ], function (app, template) {
 
-app.directive("viewModifiedOrganism", [function () {
+app.directive("viewLmo", [function () {
 	return {
 		restrict   : "EAC",
 		template: template ,

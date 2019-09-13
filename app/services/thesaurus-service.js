@@ -28,7 +28,7 @@ define(['app', 'underscore'], function (app, _) {
                 var url = '/api/v2013/thesaurus/domains/' + domainTerms[termIdentifier] + '/terms';
 
                 if(options.other){
-                    var urlOther = '/api/v2013/thesaurus/terms/' + domainTerms['others'];
+                    var urlOther = '/api/v2013/thesaurus/terms/' + domainTerms['other'];
                     return $q.all([$http.get(url, {cache:true}),$http.get(urlOther), {cache:true}])
                                 .then(function(termData){
                                     var data   = termData[0].data;
@@ -38,8 +38,8 @@ define(['app', 'underscore'], function (app, _) {
                                     return data;
                                 });
                 }
-                if(termIdentifier == 'others'){
-                    url = '/api/v2013/thesaurus/terms/' + domainTerms.others;
+                if(termIdentifier == 'other'){
+                    url = '/api/v2013/thesaurus/terms/' + domainTerms.other;
                     return $q.when($http.get(url, {cache:true}))
                              .then(function(data){
                                 return data.data;
@@ -52,12 +52,12 @@ define(['app', 'underscore'], function (app, _) {
                             });
             }
             var terms = {
-                others                   : "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                other                   : "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
             }
             var domainTerms = {
                 countries                : "countries",
                 regions                  : "regions",
-                others                   : "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                other                    : "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                 jurisdiction             : "7A56954F-7430-4B8B-B733-54B8A5E7FF40",
                 status                   : "ED7CDBD8-7762-4A84-82DD-30C01458A799",
                 typeOfDocuments          : "144CF550-7629-43F3-817E-CACDED34837E",                
