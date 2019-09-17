@@ -89,6 +89,9 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                             throw "Type must be array";
 
                         for (var i = 0; i < $scope.binding.length; ++i) {
+                            if(!$scope.binding[i])
+                                continue;
+                                
                             if ($scope.bindingType == "string[]") 
                                 oNewIdentifiers[$scope.binding[i]] = {selected : true};
                             else if($scope.bindingType == "term[]"){

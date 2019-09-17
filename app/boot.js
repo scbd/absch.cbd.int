@@ -47,6 +47,7 @@ require.config({
         'angular-trix'              : cdnHost + 'angular-trix@1.0.2/dist/angular-trix.min',
         'trix'                      : cdnHost + 'trix@0.12.0/dist/trix',
         'angular-loggly-logger'     : cdnHost + '@scbd/angular-loggly-logger@0.3.2/angular-loggly-logger.min',
+        'drag-and-drop'             : cdnHost + 'angular-drag-and-drop-lists@2.1.0/angular-drag-and-drop-lists.min',
 
         'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min',
         'cbd-forums'                :           'libs/cbd-forums/cbd-forums',
@@ -86,7 +87,8 @@ require.config({
         'pdf-object'                    : { 'deps': ['angular']}  ,
         'angular-trix'                  : { 'deps': ['angular', 'trix', 'css!'+cdnHost+'trix@0.12.0/dist/trix.css']},
         'trix'                          : { 'deps': ['angular']},
-        'diacritics'                    : { 'deps': ['angular']}
+        'diacritics'                    : { 'deps': ['angular']},
+        'drag-and-drop'                 : { 'deps': ['angular']}
     },
     urlArgs: function(id, url){
         

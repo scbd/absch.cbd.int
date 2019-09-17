@@ -28,9 +28,9 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     if(searchQuery.additionalFields)
                         searchQuery.fields += ',' + searchQuery.additionalFields;                                               
 
-                    searchQuery.fieldQuery.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
+                    // searchQuery.fieldQuery.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
                     var queryListParameters = {
-                        fq    : searchQuery.fieldQuery,
+                        fq    : _.union(['realm_ss:' + appConfigService.currentRealm.toLowerCase()], searchQuery.fieldQuery),
                         q     : searchQuery.query,
                         sort  : localizeFields(searchQuery.sort),
                         fl    : localizeFields(searchQuery.fields),
@@ -48,9 +48,8 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
 
                     // console.log("list:" + q + searchQuery.query);
 
-                    return $http.get('/api/v2013/index/select', {
-                            params: queryListParameters, timeout: queryCanceler
-                           }).then(function(data){
+                    return $http.get('/api/v2013/index/select', { params: queryListParameters, timeout: queryCanceler })
+                            .then(function(data){
                                 if(searchQuery.facet){ /// Normalize Facets                                   
                                     data.data.facet_counts.facet_fields = facetsToObject(data.data.facet_counts.facet_fields, searchQuery.facetFields)
                                 }
@@ -67,9 +66,9 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     if(searchQuery.additionalFields)
                         searchQuery.fields += ',' + searchQuery.additionalFields;
                         
-                    searchQuery.fieldQuery.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
+                    // searchQuery.fieldQuery.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
                     var queryGroupParameters = {
-                        fq    : searchQuery.fieldQuery,
+                        fq    : _.union(['realm_ss:' + appConfigService.currentRealm.toLowerCase()], searchQuery.fieldQuery),
                         'q': searchQuery.query,
                         'sort': localizeFields(searchQuery.sort),
                         'fl': localizeFields(searchQuery.fields),
@@ -112,7 +111,7 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
 
                     if (facetQuery) {
                         var queryFacetsParameters = {
-                            fq    : facetQuery.fieldQuery,
+                            fq    : _.union(['realm_ss:' + appConfigService.currentRealm.toLowerCase()], facetQuery.fieldQuery),
                             'q': facetQuery.query,
                             'wt': 'json',
                             'rows': 0,
@@ -155,7 +154,7 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     if (facetQuery) {
 
                         var queryFacetsParameters = {
-                            fq    : facetQuery.fieldQuery,
+                            fq    : _.union(['realm_ss:' + appConfigService.currentRealm.toLowerCase()], facetQuery.fieldQuery),
                             'q': facetQuery.query,
                             'fl': '',
                             'wt': 'json',

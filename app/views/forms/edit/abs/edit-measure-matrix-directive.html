@@ -405,7 +405,7 @@
         <table class="table table-hover others" style="padding:0;margin:0;width:100%;">
             <tr ng-repeat="element in otherElements">
                 <td ng-show="otherElements.length > 1" class="text-center" style="vertical-align:middle;width:30px;">
-                    <i class="fa fa-remove color-red" style="cursor:pointer" ng-if="otherElements.length > 1 && !$last" ng-click="deleteOtherElement(element, otherElements)" />
+                    <i class="fa fa-remove color-red" style="cursor:pointer" ng-if="otherElements.length > 1 && !$last" ng-click="deleteOtherElement(element, otherElements)"></i>
                 </td>
                 <td>
                     <div style="max-width:300px" km-textbox-ml ng-model="element.name" locales="locales" required="true" placeholder="other element" ng-change="appendEmptyOther(otherElements)">

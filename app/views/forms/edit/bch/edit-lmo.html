@@ -119,7 +119,7 @@
 										</div>
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="geneConstructs" caption="Genetic elements construct">
-												<div class="help-block">The construct is not yet available</div>
+												<lmo-construct ng-model="document.geneConstructs" ng-change="onConstructChange()"></lmo-construct>
 											</div>
 										</div>
 										<div class="col-xs-12">
@@ -353,10 +353,14 @@
 					</form>
 				</edit-form>
 				<review-form>
-					<div view-lmo ng-model="document" locale="review.locale" allow-drafts="true"></div>
+					<div view-modified-organism ng-model="document" locale="review.locale" allow-drafts="true"></div>
 				</review-form>
 			</workflow-arrow-buttons>
 		</div>
 	</div>
-</div>
+	<div id="constructSection">
+		<script type="text/ng-template" trados-translation="true" id="geneConstructModal">
+			<lmo-construct ng-model="geneConstruct" close-dialog="closeDialog(updatedConstruct)"></lmo-construct>
+		</script>
+	</div>
 </div>

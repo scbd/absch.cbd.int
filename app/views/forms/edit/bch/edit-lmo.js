@@ -1,9 +1,10 @@
-define(['app', 'lodash', 'views/forms/edit/edit', 'services/thesaurus-service',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-lmo.directive"], 
+define(['app', 'lodash', 'views/forms/edit/edit', 'services/thesaurus-service','views/forms/directives/lmo-construct',
+	'views/forms/edit/document-selector', "views/forms/view/bch/view-lmo.directive", 'ngDialog'], 
 function (app, _) {
 
-	app.controller("editLmo", ["$scope", "$routeParams", "$route", "Thesaurus", "$q", "$controller", "thesaurusService",
-	function($scope, $routeParams, $route, Thesaurus, $q, $controller, thesaurusService) {
+	app.controller("editLmo", ["$scope", "$routeParams", "$route", "Thesaurus", "$q", "$controller", "thesaurusService", 'ngDialog', '$element', '$compile',
+	function($scope, $routeParams, $route, Thesaurus, $q, $controller, thesaurusService, ngDialog, $element, $compile) {
+
 		$scope.traits = {
 			'81799D15-669E-4346-9AEC-6834893D2BE4':[],
 			'0C74FEB2-78E8-4163-81EF-2D410FB2FBBC':[],
@@ -100,6 +101,10 @@ function (app, _) {
 					});
 			});
 		});
+
+		$scope.onConstructChange = function(){
+			document.genes = _.union(document.genes||[], _.map(document.geneConstructs, function(cons){return { identifier:cons.identifier }}))	;
+		}
 
    }]);
 
