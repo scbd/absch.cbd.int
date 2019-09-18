@@ -261,7 +261,7 @@ function(require, template, app, _) {
                 $timeout(function(){
                     $scope.reduceDetailsHeight = false;
                     if(code){
-                        $scope.currentCountry = _.extend(countries[code], facets);
+                        $scope.currentCountry = _.extend(countries[code.toUpperCase()], facets);
                         if(($scope.currentCountry.name[locale]||'').length > 25)
                             $scope.reduceDetailsHeight = true;
                        

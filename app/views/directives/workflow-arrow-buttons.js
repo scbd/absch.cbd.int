@@ -609,6 +609,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         else if(data.error && data.error.data)
                             $scope.errorMessage += data.error.data;
 
+                        if(!$scope.validationReport)
+                            $scope.validationReport = {};
                         $scope.validationReport.isSaving=false;
                     }
                 }
