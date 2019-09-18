@@ -95,32 +95,44 @@
 
                 $scope.moveDown = function($index){
                     if($index==$scope.binding.length)return;
-
-                    var item                 = $scope.binding[$index+1];
-                    $scope.binding[$index+1] = $scope.binding[$index];
-                    $scope.binding[$index]   = item;
+                    var binding = angular.copy($scope.binding)
+                    var item                 = binding[$index+1];
+                    binding[$index+1] = binding[$index];
+                    binding[$index]   = item;
+                    setViewValue(binding);
                 }
                 $scope.moveUp = function($index){
                     if($index==0)return;
-                    var item                 = $scope.binding[$index-1];
-                    $scope.binding[$index-1] = $scope.binding[$index];
-                    $scope.binding[$index]   = item;
+                    var binding = angular.copy($scope.binding)
+                    var item                 = binding[$index-1];
+                    binding[$index-1] = binding[$index];
+                    binding[$index]   = item;
+                    setViewValue(binding);
                 }
 
                 $scope.deleteConstruct = function($index){
-                    $scope.binding.splice($index, 1)
+                    var binding = angular.copy($scope.binding)
+                    binding.splice($index, 1)
+                    setViewValue(binding);
                 }
 
                 function updateBinding(newBinding, existingConstruct, $index){
                     if(!angular.equals(newBinding, existingConstruct)){
-                        if(!$scope.binding)
-                            $scope.binding = [];
+
+                        var binding = angular.copy($scope.binding)
+                        if(!binding)
+                            binding = [];
                         if(existingConstruct)
-                            $scope.binding[$index] = newBinding;
+                            binding[$index] = newBinding;
                         else
-                            $scope.binding.push(newBinding);
-                        ngModelController.$setViewValue($scope.binding);
+                            binding.push(newBinding);
+                        setViewValue(binding);
                     }
+                }
+
+                function setViewValue(value){
+                    $scope.binding = !_.isEmpty(value) ? value : undefined;
+                    ngModelController.$setViewValue($scope.binding);
                 }
                 
             }

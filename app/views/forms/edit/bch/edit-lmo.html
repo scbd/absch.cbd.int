@@ -54,9 +54,9 @@
 												<div km-yes-no required ng-model="document.hasUniqueIdentification" locales="document.header.languages"></div>
 											</div>
 										</div>
-										<div class="col-sm-12" ng-if="hasUniqueIdentification">
+										<div class="col-sm-12" ng-if="document.hasUniqueIdentification">
 											<div class="km-control-group" required name="uniqueIdentification" caption="Unique identifier">
-												<input type="text" class="form-control" name="uniqueIdentification" required ng-model="document.transformationEvent"/>
+												<input type="text" class="form-control" name="uniqueIdentification" required ng-model="document.uniqueIdentification"/>
 											</div>
 										</div>
 										<div class="col-xs-12">
@@ -145,117 +145,90 @@
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="traits" caption="Modified Traits">
-												<div class="row" style="margin-bottom:10px">
-													<div class="col-sm-12">
-														<div class="panel panel-default">
-															<div class="panel-heading">Resistance to diseases and pests</div>
-															<div class="panel-body">
-																<div km-term-check name="traits" locales="document.header.languages" required
-																	ng-model="traits['81799D15-669E-4346-9AEC-6834893D2BE4']"
-																	terms="options.traits('81799D15-669E-4346-9AEC-6834893D2BE4')"
-																	binding-type="term[]"></div>
+											<div class="km-control-group" required name="traits" caption="">												
+												<table class="table table-bordered">
+													<tr>
+														<th colspan="2">Modified Traits</th>
+													</tr>
+													<tr>
+														<td colspan="2">
+															<legend>Resistance to diseases and pests</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['81799D15-669E-4346-9AEC-6834893D2BE4']"
+																terms="options.traits('81799D15-669E-4346-9AEC-6834893D2BE4')" binding-type="term[]"></div>
+														</td>
+													</tr>
+													<tr>
+														<td width="50%">
+															<legend>Resistance to herbicides</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['0C74FEB2-78E8-4163-81EF-2D410FB2FBBC']"
+																terms="options.traits('0C74FEB2-78E8-4163-81EF-2D410FB2FBBC')" binding-type="term[]"></div>
+														</td>
+														<td>
+															<legend>Resistance to antibiotics</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['87D98E42-4757-42DE-9C3F-815BFAA35218']"
+																terms="options.traits('87D98E42-4757-42DE-9C3F-815BFAA35218')" binding-type="term[]"></div>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<legend>Tolerance to abiotic stress</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['31396BD1-9E3E-4EB3-A29E-9A22B7230221']"
+																terms="options.traits('31396BD1-9E3E-4EB3-A29E-9A22B7230221')" binding-type="term[]"></div>
 															</div>
-														</div>
-													</div>
-												</div>
-												<div class="row" style="margin-bottom:10px">
-													<div class="col-sm-6">
-														<div class="panel panel-default">
-															<div class="panel-heading">Resistance to herbicides</div>
-															<div class="panel-body">
-																<div km-term-check name="traits" locales="document.header.languages" required
-																	ng-model="traits['0C74FEB2-78E8-4163-81EF-2D410FB2FBBC']"
-																	terms="options.traits('0C74FEB2-78E8-4163-81EF-2D410FB2FBBC')"
-																	binding-type="term[]"></div>
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-6">
-														<div class="panel panel-default">
-															<div class="panel-heading">Resistance to antibiotics</div>
-															<div class="panel-body">
-																<div km-term-check name="traits" locales="document.header.languages" required
-																	ng-model="traits['87D98E42-4757-42DE-9C3F-815BFAA35218']"
-																	terms="options.traits('87D98E42-4757-42DE-9C3F-815BFAA35218')"
-																	binding-type="term[]"></div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="row" style="margin-bottom:10px">
-													<div class="col-sm-6">
-														<div class="panel panel-default">
-															<div class="panel-heading">Tolerance to abiotic stress</div>
-															<div class="panel-body">
-																<div km-term-check name="traits" locales="document.header.languages" required
-																	ng-model="traits['31396BD1-9E3E-4EB3-A29E-9A22B7230221']"
-																	terms="options.traits('31396BD1-9E3E-4EB3-A29E-9A22B7230221')"
-																	binding-type="term[]"></div>
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-6">
-														<div class="panel panel-default">
-															<div class="panel-heading">Changes in physiology and/or production</div>
-															<div class="panel-body">
-																<div km-term-check name="traits" locales="document.header.languages" required
-																	ng-model="traits['337747E5-522D-42DF-8C57-FE626C1572EC']"
-																	terms="options.traits('337747E5-522D-42DF-8C57-FE626C1572EC')"
-																	binding-type="term[]"></div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="row" style="margin-bottom:10px">
-													<div class="col-sm-6">
-														<div class="panel panel-default">
-															<div class="panel-heading">Reproduction</div>
-															<div class="panel-body">
-																<div km-term-check name="traits" locales="document.header.languages" required
-																	ng-model="traits['F888811E-3A27-4806-B424-2C6557A396C9']"
-																	terms="options.traits('F888811E-3A27-4806-B424-2C6557A396C9')"
-																	binding-type="term[]"></div>
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-6">
-														<div class="panel panel-default">
-															<div class="panel-heading">Changes in quality and/or metabolite content</div>
-															<div class="panel-body">
-																<div km-term-check name="traits" locales="document.header.languages" required
-																	ng-model="traits['3B427EA6-5260-47F1-B424-FAAA5960FB52']"
-																	terms="options.traits('3B427EA6-5260-47F1-B424-FAAA5960FB52')"
-																	binding-type="term[]"></div>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="row" style="margin-bottom:10px">
-													<div class="col-sm-6">
-														<div class="panel panel-default">
-															<div class="panel-heading">Production of medical or pharmaceutical compounds (human
-																or animal)</div>
-															<div class="panel-body">
-																<div km-term-check name="traits" locales="document.header.languages" required
-																	ng-model="traits['5B9DB3B4-90A1-451A-A10C-E3A47995344F']"
-																	terms="options.traits('5B9DB3B4-90A1-451A-A10C-E3A47995344F')"
-																	binding-type="term[]"></div>
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-6">
-														<div class="panel panel-default">
-															<div class="panel-heading">Use in industrial applications</div>
-															<div class="panel-body">
-																<div km-term-check name="traits" locales="document.header.languages" required
-																	ng-model="traits['C8C662E2-D633-4C69-96EA-C9853997A3A5']"
-																	terms="options.traits('C8C662E2-D633-4C69-96EA-C9853997A3A5')"
-																	binding-type="term[]"></div>
-															</div>
-														</div>
-													</div>
-												</div>
+														</td>
+														<td>
+															<legend>Changes in physiology and/or production</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['337747E5-522D-42DF-8C57-FE626C1572EC']"
+																terms="options.traits('337747E5-522D-42DF-8C57-FE626C1572EC')" binding-type="term[]"></div>
+														</td>
+													</tr>
+													<tr>
+														
+														<td>
+															<legend>Changes in quality and/or metabolite content</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['3B427EA6-5260-47F1-B424-FAAA5960FB52']"
+																terms="options.traits('3B427EA6-5260-47F1-B424-FAAA5960FB52')" binding-type="term[]"></div>
+														</td>
+														<td>
+															<legend>Production of medical or pharmaceutical compounds (human
+																or animal)</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['5B9DB3B4-90A1-451A-A10C-E3A47995344F']"
+																terms="options.traits('5B9DB3B4-90A1-451A-A10C-E3A47995344F')" binding-type="term[]"></div>
+														</td>
+													</tr>
+													<tr>														
+														<td>
+															<legend>Use in industrial applications</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['C8C662E2-D633-4C69-96EA-C9853997A3A5']"
+																terms="options.traits('C8C662E2-D633-4C69-96EA-C9853997A3A5')" binding-type="term[]"></div>
+														</td>
+														<td>
+															<legend>Engineered (gene drive application)</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['Engineered']"
+																terms="options.traits('Engineered')" binding-type="term[]"></div>
+														</td>
+													</tr>
+													<tr>														
+														<td>
+															<!-- <legend></legend> -->
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['traitsOtherSection']"
+																terms="options.traitsOtherSection()" binding-type="term[]"></div>
+														</td>
+														<td>															
+														</td>
+													</tr>
+												</table>
+													
 											</div>
 										</div>
 										<div class="col-xs-12">

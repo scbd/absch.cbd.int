@@ -14,7 +14,7 @@ define(['app', 'underscore'], function (app, _) {
             };
 
             this.getTerms = function(term){
-                return $http.get('/api/v2013/thesaurus/terms/' + terms[term] , {cache:true})
+                return $http.get('/api/v2013/thesaurus/terms/' + (terms[term]||term) , {cache:true})
                 .then(function(termData){
                     return termData.data;
                 });;
