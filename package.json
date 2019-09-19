@@ -78,7 +78,7 @@
     "@bower_components/trix": "basecamp/trix",
     "@bower_components/underscore": "jashkenas/underscore#1.7.0",
     "@bower_components/webui-popover": "sandywalker/webui-popover#2.1.15",
-    "@bower_components/angular-drag-and-drop-lists": "angular-drag-and-drop-lists#2.1.0"
+    "@bower_components/angular-drag-and-drop-lists": "marceljuenemann/angular-drag-and-drop-lists#2.1.0"
   },
   "engine": "node >= 4.2",
   "private": true,
