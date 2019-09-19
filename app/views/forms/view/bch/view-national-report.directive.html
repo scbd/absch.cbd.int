@@ -81,7 +81,7 @@
                 </div>
                 <div ng-if="document[question.key]">
                     <div ng-if="question.type!='text' && question.type!='lstring'">
-                        <km-value-ml ng-if="document[question.key].value"
+                        <km-value-ml ng-if="document[question.key].value" 
                             value="displayText(document[question.key].value, question)" locales="locale"></km-value-ml>
                         <div ng-if="question.multiple" class="km-value">
                             <ul class="list">
@@ -93,11 +93,11 @@
                         </div>
                         <div ng-if="document[question.key].additionalInformation">
                             <label>Additional Information</label>
-                            <km-value-ml value="::document[question.key].additionalInformation" locales="locale"></km-value-ml>
+                            <km-value-ml value="::document[question.key].additionalInformation" locales="locale" km-pre="true"></km-value-ml>
                         </div>
                     </div>
                     <div ng-if="question.type=='text' || question.type=='lstring'">
-                        <km-value-ml value="document[question.key]" locales="locale"></km-value-ml>
+                        <km-value-ml value="document[question.key]" locales="locale" km-pre="true"></km-value-ml>
                     </div>
                 </div>
                 <!-- <div ng-if="!document[question.key] && question.type!= 'legend' && !question.questions">
