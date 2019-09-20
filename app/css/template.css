@@ -2027,16 +2027,15 @@ legend+ .help-info {
 sup {
     font-size: 8px;;
 }
+a.disabled{
+    color:#BBB!important;
+}
 
 .route-loading .medium.loader{
     color:white;
     top: 3.5%;
     left: 45%;
 }
-a.disabled{
-    color:#BBB!important;
-}
-
 
 .search-filters.ngdialog.ngdialog-theme-default .ngdialog-content{padding:0;}
         

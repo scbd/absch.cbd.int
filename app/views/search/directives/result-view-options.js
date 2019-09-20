@@ -108,8 +108,8 @@
                         template : 'groupByDialog',
                         controller: ['$scope', function($scope){
                             $scope.groupByFields = [
-                                {field:'government_s'.replace('EN', locale.toUpperCase())     , title: 'Government'         },
-                                {field:'schema_s'.replace('EN', locale.toUpperCase())         , title: 'Type of record'     }
+                                {field:'government_EN_s'.replace('EN', locale.toUpperCase())     , title: 'Government'         },
+                                {field:'schema_EN_s'.replace('EN', locale.toUpperCase())         , title: 'Type of record'     }
                             ]
                             // ,{field:'submissionYear_s' , title: 'Year of submission' }
 
