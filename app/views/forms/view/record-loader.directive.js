@@ -64,6 +64,7 @@
 						contact						: 'views/forms/view/view-contact.directive',
 						contactreference			: 'views/forms/view/view-contact-reference.directive',
 						authority					: 'views/forms/view/view-authority.directive',
+						supplementaryAuthority		: 'views/forms/view/view-supplementary-authority.directive',
 						database					: 'views/forms/view/view-database.directive',						
 						organization				: 'views/forms/view/view-organization.directive',
 						organizationreference		: 'views/forms/view/view-organization-reference.directive',
