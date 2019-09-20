@@ -35,14 +35,28 @@
 					<label>
 						<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save()" 
 							ng-required="IsRequired()" value="{{term.identifier}}" /> {{term.title||term.name | lstring:locale}}
-
-						<input ng-if="selectedItems[term.identifier].selected && term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"
+					</label>
+					<div ng-if="!term.multiple && selectedItems[term.identifier].selected">
+						<input ng-if="term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"
 						ng-model="selectedItems[term.identifier].customValue" class="km-terms-check-add-input-int" ng-change="save()" />
-						<div  ng-if="selectedItems[term.identifier].selected && term.type=='lstring'"> <strong>Please specify </strong>
+						<div ng-if="term.type=='lstring'" style="padding-left:50px;"> 
+							<strong>(Please specify) </strong>
 							<div km-textbox-ml name="custom value"  placeholder="{{::customValuePlaceholder}}"
 								required ng-model="selectedItems[term.identifier].customValue" locales="locales"  ng-change="save()"></div>
 						</div>
-					</label>
+					</div>
+					<span ng-if="term.multiple && selectedItems[term.identifier].selected">
+						<table class="table table-hover others" style="padding:0;margin:0;width:100%;">
+							<tr ng-repeat="element in otherElements[term.identifier]">
+								<td ng-show="otherElements[term.identifier].length > 1" class="text-center" style="vertical-align:middle;width:30px;">
+									<i class="fa fa-remove color-red" style="cursor:pointer" ng-if="otherElements[term.identifier].length > 1 && !$last" ng-click="deleteOtherElement(element, otherElements[term.identifier]);"></i>
+								</td>
+								<td>
+									<div km-textbox-ml ng-model="element.customValue" locales="locales" required="true" placeholder="other element" ng-change="appendEmptyOther(otherElements[term.identifier])"></div>
+								</td>
+							</tr>
+						</table>
+					</span>
 					<div class="km-select-description" ng-if="showDescription && term.description" style="padding: 3px 25px;">
 						{{term.description}}
 					</div>
@@ -71,6 +85,7 @@
 					.searchbox {overflow: scroll;padding:10px; background-color: #eee; border-top:1px solid #ddd;border-bottom:1px solid #ddd;}
 					.no-border{border-top:none!important;}
 				</style>
+				
 			</ul>
 		</div>
 	</div>
