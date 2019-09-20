@@ -34,7 +34,8 @@ app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          translation.renderLanguageF
 app.use('/cbd-forums',      express.static(__dirname + '/node_modules/@bower_components/cbd-forums', { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: cacheControl.setCustomCacheControl , maxAge: oneDay }));
 
-app.all('/sitemap.xml',     (req, res) => require('superagent').get(`https://attachments.cbd.int/sitemap-${process.env.CLEARINGHOUSE.toLowerCase()}.xml`).pipe(res));
+app.get('/robots.txt' , require('./app/app-libs/middlewares').robots);
+app.all('/sitemap.xml', require('./app/app-libs/middlewares').sitemap);
 
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
