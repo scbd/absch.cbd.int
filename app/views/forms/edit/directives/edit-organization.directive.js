@@ -91,8 +91,7 @@ app.directive("editOrganization", [ "$http", "$filter", "$q", 'guid', 'editFormU
                                     identifier : guid(),
                                     schema   : "organization",
                                     languages: ["en"]
-                                },
-                        libraries: [{ identifier: "cbdLibrary:abs-ch" }]
+                                }
                     };        
                 }                
         
