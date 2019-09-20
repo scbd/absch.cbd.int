@@ -13,8 +13,8 @@ app.directive('loginAccount', [function() {
             scope: {
                  user: '=',
             },
-            controller: ['$scope', '$http', '$window', '$location', '$browser','authentication','$rootScope','$timeout',
-             function ($scope, $http, $window, $location, $browser, authentication, $rootScope,$timeout) {
+            controller: ['$scope', '$http', '$window', '$location', '$browser','authentication','$rootScope','$timeout', '$route',
+             function ($scope, $http, $window, $location, $browser, authentication, $rootScope,$timeout, $route) {
               
               $scope.sessionExpiredAlert = false
               $scope.email = null;
@@ -55,11 +55,11 @@ app.directive('loginAccount', [function() {
                   $window.location.href = 'https://accounts.cbd.int/signup?redirect_uri='+redirect_uri;
               };
 
-              $rootScope.$on('event:auth-sessionExpired', function(evt, data){
-                 
+              $rootScope.$on('event:auth-sessionExpired', function(evt, data){                
                   $scope.user = undefined;
                   $scope.sessionExpiredAlert = true;
-                  $('#loginDialog').modal({backdrop: "static", keyboard:false});
+                  if($route.current.$$route.resolve.securized) //show login dialog only when the route is required signin. probably a bad hack.
+                    $('#loginDialog').modal({backdrop: "static", keyboard:false});
               })
 
             }]
