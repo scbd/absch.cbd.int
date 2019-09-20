@@ -1,8 +1,9 @@
 define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js/common',
-'views/forms/edit/document-selector', 'views/forms/edit/warning-message-cna', '../view/view-authority.directive' ], function(app, _) {
+'views/forms/edit/document-selector', 'views/forms/edit/warning-message-cna', '../view/view-authority.directive',
+'services/thesaurus-service' ], function(app, _) {
 
-    app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "$location", "IStorage", "commonjs",'searchService',
-     function($scope, $http, $filter, Thesaurus, $q, $controller, $location, storage, commonjs,searchService) {
+    app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "$location", "IStorage", "commonjs",'thesaurusService',
+     function($scope, $http, $filter, Thesaurus, $q, $controller, $location, storage, commonjs,thesaurusService) {
         $controller('editController', {
             $scope: $scope
         });
@@ -54,20 +55,16 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
                     return o.data;
                 });
             },
-            cpbFunctions: function() {
-                return $http.get("/api/v2013/thesaurus/domains/Subject Areas/terms", {
-                    cache: true
-                }).then(function(o) {
-                    return o.data;
-                });
+            functions: function() {
+                var functionDomain = 'subjectAreas';
+                if($scope.type=='SPCA')//supplementaryAuthority
+                    functionDomain = 'supplementaryProtocolFunctions';
+
+                return thesaurusService.getDomainTerms(functionDomain, {other:true, otherType:'lstring'});
             },
-            cpbOrganismTypes: function() {
-                return $http.get("/api/v2013/thesaurus/domains/TypeOfOrganisms/terms", {
-                    cache: true
-                }).then(function(o) {
-                    return o.data;
-                });
-            },
+            bchOrganismTypes: function() {
+                return thesaurusService.getDomainTerms('typeOfOrganisms', {other:true, otherType:'lstring'});
+            },           
             absFunctions: function() {
                 return $http.get("/api/v2013/thesaurus/domains/8102E184-E282-47F7-A49F-4C219B0EE235/terms", {
                     cache: true
@@ -104,47 +101,11 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
         $scope.getCleanDocument = function(document) {
 
             document = document || $scope.document;
-
+            document.bchFunctions = undefined;
+            document.bchOrganismTypes = undefined;
             if (!document)
                 return undefined;
-
-            //document = angular.fromJson(angular.toJson(document));
-
-            if (!document.consentGranted) {
-                document.consentInformation = undefined;
-                document.consentDocuments = undefined;
-            }
-
-            if (!document.mutuallyAgreedTermsInformation) {
-                document.mutuallyAgreedTermsInformation = undefined;
-                document.mutuallyAgreedTermsDocuments = undefined;
-            }
-
-            if (document.gisFiles && document.gisFiles.length === 0) {
-                document.gisFiles = undefined;
-            }
-
-            if (document.amendedPermits && document.amendedPermits.length === 0) {
-                document.amendedPermits = undefined;
-            }
-
-            if (!document.amendedPermits) {
-                document.consentedAmendment = undefined;
-                document.amendmentsDescription = undefined;
-            }
-            if (document.providerConfidential) {
-                document.provider = undefined;
-            }
-            if (document.informedConsentConfidential) {
-                document.informedConsents = undefined;
-            }
-            if (document.geneticResourcesConfidential) {
-                document.geneticResources = undefined;
-                document.specimen = undefined;
-                document.taxonomy = undefined;
-                document.gisFiles = undefined;
-                document.gisMapCenter = undefined;
-            }
+            
             if (document.absResponsibleForAll) {
                 document.responsibilities = undefined;
                 document.absJurisdiction = undefined;
@@ -156,17 +117,28 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
                     document.absJurisdictionName = undefined;
             }
 
+            if($scope.realm.is('BCH')){
+                document.absResponsibleForAll = undefined;
+                document.absJurisdiction = undefined;
+                document.absJurisdictionName = undefined;
+                document.absGeneticResourceTypes = undefined;
+                document.absPolicyBasisForCompetencyRef = undefined;
+                document.absPolicyBasisForCompetency = undefined;
+                if($scope.type == 'SPCA') //Suuplementary protocol
+                    document.cpbOrganismTypes = undefined;
+            }
+            else{
+                document.functions = undefined;
+                document.cpbOrganismTypes = undefined;
+            }
+
             if (/^\s*$/g.test(document.notes))
                 document.notes = undefined;
 
             return document;
         };
         //==================================
-        $scope.setDocument({
-            libraries: [{
-                identifier: "cbdLibrary:abs-ch"
-            }]
-        });
+        $scope.setDocument({});
 
         //==================================
         $scope.showJurisdictionName = function() {
