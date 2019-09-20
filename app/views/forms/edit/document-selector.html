@@ -11,51 +11,53 @@
 
 
     <!-- existing documents display -->
-    <div class="row">
-        <div class="col-xs-12">
+    <div ng-transclude="selectRecords">   
+        <div class="row">
+            <div class="col-xs-12">             
+                <button style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled"><i class="fa fa-plus"></i> {{caption || 'Add record'}}{{type!=='radio' ? "(s)" : ""}}</button>
 
-            <button style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled"><i class="fa fa-plus"></i> {{caption || 'Add record'}}{{type!=='radio' ? "(s)" : ""}}</button>
+                <span ng-show="model.length==0 || !model"> <i class="color-blue"> No records have been linked. </i> </span>
 
-            <span ng-show="model.length==0 || !model"> <i class="color-blue"> No records have been linked. </i> </span>
+                <a translation-url  class="bold" href="#" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords">
+                    <i class="fa fa-chevron-circle-right"></i> {{model.length}} linked records.
+                </a>
+                <a translation-url  class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0 ">
+                    <i class="fa fa-chevron-circle-down"></i> {{model.length}} linked records.
+                </a>
+            </div>
+        </div>
+    </div>
 
-            <a translation-url  class="bold" href="#" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords">
-                <i class="fa fa-chevron-circle-right"></i> {{model.length}} linked records.
-            </a>
-            <a translation-url  class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0 ">
-                <i class="fa fa-chevron-circle-down"></i> {{model.length}} linked records.
-            </a>
+    <div ng-transclude="selectedRecords">   
+        <div class="row" ng-show="areVisible && !disabled">
+            <div class="col-xs-12">
+                <br />
+                <table class="table" id="search-new" style="padding-bottom:3px;width:100%;">
+                    <tr ng-repeat="doc in model" ng-if="type!='radio'">
+                        <td style="margin-bottom:15px;width:15px;">
+                            <a translation-url  class="btn btn-default" ng-click="removeDocument(doc)" class="link color-red">
+                                <i class="fa fa-times"></i></a>
+                        </td>
+                        <td style="margin-bottom:20px;">
+                            <div ng-if="isContact(doc) || isAuthority(doc) || isFocalPoint(doc)" view-contact-reference ng-model="doc" locale="locale" class="km-value"></div>
+                            <div ng-if="!isContact(doc) && !isAuthority(doc) && !isFocalPoint(doc)" view-default-reference ng-model="doc.identifier" locale="locale"></div>
+                        </td>
+                    </tr>
+                    <tr ng-if="type=='radio' && model">
+                        <td style="margin-bottom:15px;width:15px;">
+                            <a translation-url  class="btn btn-default" ng-click="removeDocument(model)" class="link color-red">
+                                <i class="fa fa-times"></i></a>
+                        </td>
+                        <td style="margin-bottom:20px;">
+                            <div ng-if="isContact(model) || isAuthority(model) || isFocalPoint(model)" view-contact-reference ng-model="model" locale="locale" class="km-value"></div>
+                            <div ng-if="!isContact(model) && !isAuthority(model) && !isFocalPoint(model)" view-default-reference ng-model="model.identifier" locale="locale"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
         </div>
     </div>
-    <div class="row" ng-show="areVisible && !disabled">
-        <div class="col-xs-12">
-            <br />
-            <table class="table" id="search-new" style="padding-bottom:3px;width:100%;">
-                <tr ng-repeat="doc in model" ng-if="type!='radio'">
-                    <td style="margin-bottom:15px;width:15px;">
-                        <a translation-url  class="btn btn-default" ng-click="removeDocument(doc)" class="link color-red">
-                            <i class="fa fa-times"></i></a>
-                    </td>
-                    <td style="margin-bottom:20px;">
-                        <div ng-if="isContact(doc) || isAuthority(doc) || isFocalPoint(doc)" view-contact-reference ng-model="doc" locale="locale" class="km-value"></div>
-                        <div ng-if="!isContact(doc) && !isAuthority(doc) && !isFocalPoint(doc)" view-default-reference ng-model="doc.identifier" locale="locale"></div>
-                    </td>
-                </tr>
-                <tr ng-if="type=='radio' && model">
-                    <td style="margin-bottom:15px;width:15px;">
-                        <a translation-url  class="btn btn-default" ng-click="removeDocument(model)" class="link color-red">
-                            <i class="fa fa-times"></i></a>
-                    </td>
-                    <td style="margin-bottom:20px;">
-                        <div ng-if="isContact(model) || isAuthority(model) || isFocalPoint(model)" view-contact-reference ng-model="model" locale="locale" class="km-value"></div>
-                        <div ng-if="!isContact(model) && !isAuthority(model) && !isFocalPoint(model)" view-default-reference ng-model="model.identifier" locale="locale"></div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-    </div>
-
     <!-- Modal -->
 
     <script type="text/ng-template" trados-translation="true" id="documentSelectionModal">
