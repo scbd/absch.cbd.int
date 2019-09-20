@@ -67,7 +67,7 @@ define(['app', 'underscore', 'views/forms/edit/edit' , 'views/forms/edit/documen
         return document;
     };
 
-    $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});
+    $scope.setDocument({});
 
     //==================================
     //

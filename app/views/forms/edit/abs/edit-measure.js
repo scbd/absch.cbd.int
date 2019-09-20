@@ -224,11 +224,7 @@ define(['app', 'underscore', 'angular', 'views/forms/edit/edit', 'js/common', 'v
                 return document;
             };
 
-            $scope.setDocument({
-                libraries: [{
-                    identifier: "cbdLibrary:abs-ch"
-                }]
-            });
+            $scope.setDocument({});
 
             //==================================
             //
