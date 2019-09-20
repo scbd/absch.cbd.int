@@ -1,4 +1,4 @@
-define(['app','lodash', "text!views/forms/view/bch/view-lmo-gene.directive.html", 
+define(['app','lodash', "text!views/forms/view/bch/view-lmo-gene.directive.html", 'css!/app/css/bch/lmo-construct.css', 
 'components/scbd-angularjs-services/services/storage', 'services/search-service'], function (app, _, template) {
 
 app.directive("viewLmoGene", [function () {
@@ -20,10 +20,13 @@ app.directive("viewLmoGene", [function () {
 		    $scope.$watch('model', function(newValue, oldValue){
 		        if(newValue){
 
-					var geneIdentifiers = _.map(_.flatten(newValue), "identifier");
+					var geneIdentifiers = _(newValue).map(function(val){return val.identifier && val.identifier.replace(/@.*/, '') }).flatten().compact().value();
+					if(geneIdentifiers.length==0)
+						return;
+
 					var searchQuery = {
 						query 	: "identifier_s:(" +geneIdentifiers.join(' ') + ")",
-						fields	: 'identifier_s,identity:identity_EN_s, uniqueIdentifier:uniqueIdentifier_s, urls:url_ss'
+						fields	: 'identifier_s,identity:identity_EN_s, uniqueIdentifier:uniqueIdentifier_s, urls:url_ss, title:title_t'
 					}
 					$scope.dnaDetails = {};
 					$q.when(searchService.list(searchQuery))
@@ -36,6 +39,9 @@ app.directive("viewLmoGene", [function () {
 		        }
 		    });
 
+			$scope.removeRevsion = function(identifier){
+				return identifier && identifier.replace(/@.*/, '');
+			}
 		 }] //controller
 	};
 }]);
