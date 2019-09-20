@@ -37,6 +37,6 @@ define(['app', 'views/forms/edit/edit',
       return document;
     };
 
-    $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});
+    $scope.setDocument({});
   }]);
 });

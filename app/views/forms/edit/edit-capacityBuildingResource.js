@@ -64,6 +64,6 @@ define(['app', 'views/forms/edit/edit', '../view/view-capacity-building-resource
         return document;
       };
 
-    $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});
+    $scope.setDocument({});
   }]);
 });
