@@ -16,7 +16,8 @@ function(app, template) {
                 model: "=ngModel",
                 locales: "=locales",
                 caption: "@caption",
-                subFilter : "=?"
+                subFilter : "=?",
+				disabled  : '=ngDisabled'
             },
             link: function($scope, $element, $attrs) {
 
