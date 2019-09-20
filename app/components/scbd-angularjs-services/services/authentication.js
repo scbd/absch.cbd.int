@@ -310,8 +310,7 @@ define(['app', './apiUrl'], function(app) {
 
         }
 
-        $rootScope.$on('event:auth-sessionExpired', function(){
-            console.log('1')
+        $rootScope.$on('event:auth-sessionExpired', function(){            
             apiToken.set(null);
             
             setUser(null);

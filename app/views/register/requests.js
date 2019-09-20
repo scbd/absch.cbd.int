@@ -6,7 +6,7 @@ define(['app',
 'views/register/directives/register-top-menu', 
 'services/role-service',
 'views/directives/task-id-directive',
-'views/directives/pagination',
+'components/scbd-angularjs-controls/form-control-directives/pagination',
 'components/scbd-angularjs-services/services/locale',
 'views/forms/view/record-loader.directive'], function (app) {
 

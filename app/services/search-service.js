@@ -9,38 +9,52 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                 var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
 
                 var searchDefaults = {
-                    currentPage: 0,
-                    rowsPerPage: 25,
-                    sort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
-                    fields: base_fields + en_fields,
-                    query: '*:*',
-                    groupSort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
-                    groupField: 'government_s',
-                    groupLimit: 100000
+                    currentPage : 0,
+                    rowsPerPage : 25,
+                    fields      : base_fields + en_fields,
+                    groupField  : 'government_s',
+                    groupLimit  : 100000,
+                    fieldQuery  : [],
+                    query       : "''"
                 }
-                var q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
 
+                // groupSort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
+                // sort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
+                
                 //================================================================================================================
                 this.list = function(searchQuery, queryCanceler) {
 
                     _.defaults(searchQuery, searchDefaults);
-                    q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
+                    if(searchQuery.additionalFields)
+                        searchQuery.fields += ',' + searchQuery.additionalFields;                                               
 
+                    // searchQuery.fieldQuery.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
                     var queryListParameters = {
-                        'q': q + searchQuery.query,
-                        'sort': searchQuery.sort,
-                        'fl': localeFields(searchQuery.fields),
-                        'wt': 'json',
-                        'start': searchQuery.start || (searchQuery.currentPage * searchQuery.rowsPerPage),
-                        'rows': searchQuery.rowsPerPage,
+                        fq    : _.union(['realm_ss:' + appConfigService.currentRealm.toLowerCase()], searchQuery.fieldQuery),
+                        q     : searchQuery.query,
+                        sort  : localizeFields(searchQuery.sort),
+                        fl    : localizeFields(searchQuery.fields),
+                        wt    : 'json',
+                        start : searchQuery.start || (searchQuery.currentPage * searchQuery.rowsPerPage),
+                        rows  : searchQuery.rowsPerPage,
                     };
+
+                    if(searchQuery.facet){
+                        queryListParameters.facet = true
+                        queryListParameters['facet.field']  = searchQuery.facetFields
+                        queryListParameters['facet.mincount'] = 1,
+                        queryListParameters['facet.limit'] =  512
+                    }
 
                     // console.log("list:" + q + searchQuery.query);
 
-                    return $http.get('/api/v2013/index/select', {
-                        params: queryListParameters,
-                        timeout: queryCanceler
-                    });
+                    return $http.get('/api/v2013/index/select', { params: queryListParameters, timeout: queryCanceler })
+                            .then(function(data){
+                                if(searchQuery.facet){ /// Normalize Facets                                   
+                                    data.data.facet_counts.facet_fields = facetsToObject(data.data.facet_counts.facet_fields, searchQuery.facetFields)
+                                }
+                                return data;
+                           });
 
 
                 }
@@ -49,12 +63,15 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                 this.group = function(searchQuery, queryCanceler) {
 
                     _.defaults(searchQuery, searchDefaults);
-                    q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
-
+                    if(searchQuery.additionalFields)
+                        searchQuery.fields += ',' + searchQuery.additionalFields;
+                        
+                    // searchQuery.fieldQuery.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
                     var queryGroupParameters = {
-                        'q': q + searchQuery.query,
-                        'sort': searchQuery.sort,
-                        'fl': localeFields(searchQuery.fields),
+                        fq    : _.union(['realm_ss:' + appConfigService.currentRealm.toLowerCase()], searchQuery.fieldQuery),
+                        'q': searchQuery.query,
+                        'sort': localizeFields(searchQuery.sort),
+                        'fl': localizeFields(searchQuery.fields),
                         'wt': 'json',
                         'start': searchQuery.start || (searchQuery.currentPage * searchQuery.rowsPerPage),
                         'rows': searchQuery.rowsPerPage,
@@ -62,15 +79,24 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                         'group.ngroups': true,
                         'group.field': searchQuery.groupField,
                         'group.limit': searchQuery.groupLimit,
-                        'group.sort': searchQuery.groupSort
+                        'group.sort': localizeFields(searchQuery.groupSort)
                     };
 
+                    if(searchQuery.facet){
+                        queryGroupParameters.facet = true
+                        queryGroupParameters['facet.field']  = searchQuery.facetFields
+                        queryGroupParameters['facet.mincount'] = 1,
+                        queryGroupParameters['facet.limit'] =  512
+                    }
                     // console.log("group:" + q + searchQuery.query);
 
-                    return $http.get('/api/v2013/index/select', {
-                        params: queryGroupParameters,
-                        timeout: queryCanceler
-                    });
+                    return $http.get('/api/v2013/index/select', { params: queryGroupParameters, timeout: queryCanceler})
+                                .then(function(data){
+                                    if(searchQuery.facet){ /// Normalize Facets                                   
+                                        data.data.facet_counts.facet_fields = facetsToObject(data.data.facet_counts.facet_fields, searchQuery.facetFields)
+                                    }
+                                    return data;
+                            });
                 }
 
                 //================================================================================================================
@@ -84,10 +110,9 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     _.defaults(facetQuery, searchDefaults);
 
                     if (facetQuery) {
-                        q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
                         var queryFacetsParameters = {
-                            'q': q + facetQuery.query,
-                            'fl': '',
+                            fq    : _.union(['realm_ss:' + appConfigService.currentRealm.toLowerCase()], facetQuery.fieldQuery),
+                            'q': facetQuery.query,
                             'wt': 'json',
                             'rows': 0,
                             'facet': true,
@@ -101,7 +126,8 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                         });
                         return $q.when(queryAction)
                             .then(function(data) {
-                                var facets = readFacets2(data.data.facet_counts.facet_fields[facetQuery.fields]);
+                                var facets;                               
+                                facets = facetsToObject(data.data.facet_counts.facet_fields, facetQuery.fields);
 
                                 if (localStorageKey)
                                     localStorageService.set(localStorageKey, facets);
@@ -126,9 +152,10 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     _.defaults(facetQuery, searchDefaults);
 
                     if (facetQuery) {
-                        q = '(realm_ss:' + appConfigService.currentRealm.toLowerCase() + ') AND NOT version_s:* AND ';
+
                         var queryFacetsParameters = {
-                            'q': q + facetQuery.query,
+                            fq    : _.union(['realm_ss:' + appConfigService.currentRealm.toLowerCase()], facetQuery.fieldQuery),
+                            'q': facetQuery.query,
                             'fl': '',
                             'wt': 'json',
                             'rows': 0,
@@ -199,8 +226,28 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     }
                     return facets;
                 };
+                function facetsToObject(solrArray, facetFields) {
 
-                function localeFields(fields){
+                    var facets = {};
+                    if(!_.isArray(facetFields)){
+                        facetFields = [facetFields]
+                    }
+
+                    _.each(facetFields, function(field){
+                        if (solrArray){
+                            var mField = field.replace(/{.*}/, ''); //remove tags(${!ex=xxx}) is specified in field names
+                            for (var i = 0; i < solrArray[mField].length; i += 2) {
+                                if(!facets[mField])
+                                    facets[mField] = {};
+                                facets[mField][solrArray[mField][i]] = solrArray[mField][i + 1];
+                            }
+                        }
+                    });
+                                                           
+                    return facets;
+                };
+
+                function localizeFields(fields){
 
                     if(locale && locale!='en'){
                         return fields.replace(/_EN/ig, '_'+(locale||'en').toUpperCase())

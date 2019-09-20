@@ -24,8 +24,8 @@
 
                 whenAsync('/search/countries/:countryCode?',                        { redirectTo:'/countries/:countryCode' }).
                 whenAsync('/search/countries/:countryCode/:documentType',           { redirectTo:'/countries/:countryCode/:documentType' }).
-                whenAsync('/search/:recordType',                     { templateUrl: 'views/search/search-page.html',   label:'SEARCH',         resolveController: true}).
-                whenAsync('/search',                                 { templateUrl: 'views/search/search-page.html',   label:'SEARCH',         resolveController: true}).
+                whenAsync('/search/:recordType',                     { templateUrl: 'views/search/search-page.html',   label:'SEARCH',         resolveController: true, reloadOnSearch:false}).
+                whenAsync('/search',                                 { templateUrl: 'views/search/search-page.html',   label:'SEARCH',         resolveController: true, reloadOnSearch:false}).
                 whenAsync('/search/national-records/:documentSchema?',              { redirectTo:'/search' }).
                 whenAsync('/search/reference-records/:documentSchema?',             { redirectTo:'/search' }).
 
