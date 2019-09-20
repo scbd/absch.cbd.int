@@ -1,28 +1,20 @@
-define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-data/schema-name-plural.json', 'json!app-data/search-tour.json',
-'js/common',
-'services/search-service',
-'views/search/search-filters/keyword-filter',
-'views/search/search-filters/national-filter',
-'views/search/search-filters/reference-filter',
-'views/search/search-filters/scbd-filter',
-'views/search/search-filters/country-filter',
-'views/search/search-filters/region-filter',
-'views/search/search-filters/date-filter',
-'views/search/search-results/result-default',
-'views/search/search-results/national-records-country',
-'services/app-config-service', 'ngDialog',
-'views/register/user-preferences/user-alerts',
-'views/directives/export-directive',
-'services/thesaurus-service', 'angular-animate', 'angular-joyride',
-'components/scbd-angularjs-services/services/locale',
-'components/scbd-angularjs-controls/form-control-directives/pagination'
-], function(app, template, _, schemaNames, joyRideText) {
+define(['app', 'text!views/search/search-directive.html','lodash', 'json!components/scbd-angularjs-services/filters/schema-name.json', 
+'json!app-data/search-tour.json','js/common','services/search-service','views/search/search-filters/keyword-filter',
+'views/search/search-filters/national-filter','views/search/search-filters/reference-filter','views/search/search-filters/scbd-filter',
+'views/search/search-filters/country-filter','views/search/search-filters/region-filter','views/search/search-filters/date-filter',
+'views/search/search-results/result-default','views/search/search-results/national-records-country','services/app-config-service',
+'ngDialog','views/register/user-preferences/user-alerts','views/directives/export-directive','services/thesaurus-service', 'angular-animate', 
+'angular-joyride','components/scbd-angularjs-services/services/locale',
+'components/scbd-angularjs-controls/form-control-directives/pagination',
+'views/search/directives/result-view-options', 'views/search/search-filters/left-side-filter',
+'views/search/search-results/list-view','views/search/search-results/group-view'
+
+], function(app, template, _, scbdSchemas, joyRideText) {
 
     app.directive('searchDirective', function() {
         return {
             restrict: 'EAC',
             replace: true,
-            // transclude: true,
             template: template, 
             controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService','$rootScope',
@@ -30,6 +22,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
             function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
                     appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, $timeout, locale) {
                     
+                    var activeFilter;
+                    var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
+                    var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
+
+                    var queryCanceler = null;
                     var customKeywords = {
                         commercial : {
                             identifier  : 'commercial',
@@ -65,10 +62,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                                            '5831C357-95CA-4F09-963B-DF9E8AFD8C88', '5054AC52-E738-4694-A403-6490FE7D4CF4']
                         }
                     }
-                    
                     var isABS = realm.is('ABS');
                     var isBCH = realm.is('BCH');
-
                     var schemaTemplate = {};
                     var index=0;        
                     _(realm.schemas).map(function(schema, key){ 
@@ -76,63 +71,31 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                             schemaTemplate[key] = { title : schema.title, shortCode : schema.shortCode, index: index++, docs:[], numFound:0};
                         }
                     }).value();
-                    $scope.recordCount = [{count:0},{count:0},{count:0}];
-                    $scope.skipResults          = $attrs.skipResults;
-                    $scope.skipDateFilter       = $attrs.skipDateFilter;
-                    $scope.skipSaveFilter       = $attrs.skipSaveFilter;
-                    $scope.skipTextFilter       = $attrs.skipTextFilter;
-                    $scope.skipKeywordsFilter   = $attrs.skipKeywordsFilter;
 
-                    var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
-                    var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
-
-                    var queryCanceler = null;
-                    $scope.searchResult = {
-                        rawDocs  : [],
-                        refDocs  : [],
-                        scbdDocs : []
-                    }
-
-                    var natSchemas = _.without(appConfigService.nationalSchemas, "contact");                   
-                    var refSchemas = _.without(appConfigService.referenceSchemas, "organization");
-                    var scbdSchemas = appConfigService.scbdSchemas;
-                    
-                    $scope.currentTab = "nationalRecords";
-                    $scope.refresh = false;
-                    var refresh_nat = true;
-                    var refresh_ref = true;
-                    var refresh_scbd = true;
-
+                    $scope.realm         = realm
                     $scope.searchFilters = {};
-                    $scope.countriesFilters = {};
-                    $scope.regionsFilter = {};
-                    $scope.searchKeyword = '';
-
-                    $scope.setFilters = {};
-                    $scope.test = '';
-                    $scope.itemsPerPage = 25;
-                    $scope.nationalLoading = false;
-                    $scope.referenceLoading = false;
-                    $scope.scbdLoading = false;
-                    // $scope.currentPage = 0;
-                    var nationalCurrentPage = 0;
-                    var referenceCurrentPage = 0;
-                    var scbdCurrentPage = 0;
-
+                    $scope.setFilters    = {};
                     $scope.relatedKeywords = {};
+                    $scope.searchResult = {
+                        viewType  : 'list',
+                        sortFields: ['updatedDate_dt desc'],
 
-                    $scope.tabs = {
-                        nationalRecords : {currentPage : 0, pageCount   : 0},
-                        referenceRecords : {currentPage : 0, pageCount   : 0},
-                        scbdRecords : {currentPage : 0, pageCount   : 0}
-                    }
+                        skipResults       : $attrs.skipResults,
+                        skipDateFilter    : $attrs.skipDateFilter,
+                        skipSaveFilter    : $attrs.skipSaveFilter,
+                        skipTextFilter    : $attrs.skipTextFilter,
+                        skipKeywordsFilter: $attrs.skipKeywordsFilter,
 
-                    //===============================================================================================================================
-                    $scope.isFreeTextFilterOn = function(filterID) {
-                          return false;
-                    };
+                        searchFilters   : {},
+                        countriesFilters: {},
+                        regionsFilter   : {},
+                        searchKeyword   : ''
+                    }                    
 
-                    //===============================================================================================================================
+
+                    ////////////////////////////////////////////
+                    ////// $scope functions
+                    ////////////////////////////////////////////
                     $scope.saveFreeTextFilter = function(text) {
 
                         if(!text && text.length <= 0)
@@ -151,360 +114,557 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 
                         $scope.refresh = true;
                     };
-                    //===============================================================================================================================
-                    $scope.saveCustomFilter = function(filter) {
-                        
-                        if(!filter)
-                            return;
 
-                        var fid = 'custom_' + filter.id;
+                    $scope.isFilterOn = function (filterID) {
+                        if (!filterID)
+                            return false;
 
-                        if($scope.setFilters[fid] )
-                            delete $scope.setFilters[fid];
-                        else{
-                            $scope.setFilters[fid] = {'type':filter.type, 'query': filter.query, 'id':fid, name:filter.name};
-                        }
-
-                        $scope.refresh = true;
-                    };
-                    //===============================================================================================================================
-                    function getFilter(id) {
-                         //console.log($scope.searchFilters[id]);
-                         return $scope.searchFilters[id];
-
-                    };
-                    //===============================================================================================================================
-                    $scope.updateCurrentTab = function(tabname) {
-                           $scope.currentTab = tabname;
-                           $scope.showFilters= false;
-
-                        //  if(tabname=='nationalRecords')
-                        //     nationalCurrentPage = 0;
-                        //  if(tabname=='referenceRecords')
-                        //     referenceCurrentPage = 0;
-                        //  if(tabname=='scbdRecords')
-                        //     scbdCurrentPage = 0;
+                        return $scope.setFilters[filterID] ? true : false;
                     };
 
+                    $scope.saveFilter = function (doc) {
 
-                    //===============================================================================================================================
-                    function addFilter(filterID, filterInfo ) {
-
-                            //if(!$scope.searchFilters[filterID])
-                            $scope.searchFilters[filterID] = filterInfo;
-                            //console.log(filterID);
-                    };
-
-                    //===============================================================================================================================
-                    function getSearchFilters(type) {
-                            if(!type)
-                                return $scope.searchFilters;
-
-                            return _.filter($scope.searchFilters, function(item){if(item.type === type) return item;});
-                    };
-
-                    function setSearchFilters(filters) {
-                        $scope.setFilters = {};
-                        _.map(filters, function(query){
-                            if(query.type == 'text'){
-                                $scope.saveFreeTextFilter(query);
-                            }
-                            else if(query.type == 'custom'){
-                                $scope.saveCustomFilter(query);
-                            }
-                            else{
-                                $scope.saveFilter(query);
-                            }
-                        });
-
-                    };
-
-                    //===============================================================================================================================
-                    function getSearchFiltersByParent(parent) {
-                            if(!parent)
-                                return $scope.searchFilters;
-
-                            return _.filter($scope.searchFilters, function(item){if(item.parent === parent) return item;});
-                    };
-
-                    //===============================================================================================================================
-                    function getSetFilters() {
-                            return $scope.setFilters;
-                    };
-
-                   //===============================================================================================================================
-                   // function getSearchKeyWord() {
-                   //       return $scope.searchKeyword;
-                   // };
-
-                   //===============================================================================================================================
-                    $scope.removeFilter = function(filterID) {
-                            delete $scope.setFilters[filterID];
-
-                            //remove children
-                            var dels={};
-                            var toDelete =  _.each($scope.setFilters, function(filter){
-                                 if(filter.broader === filterID){
-                                     $scope.removeFilter(filter.id);
-                                 }
-                             });
-
-                            $scope.refresh=true;
-                    };
-
-                  //===============================================================================================================================
-                    $scope.isFilterOn  = function(filterID) {
-                          if(!filterID)
-                                return false;
-
-                          return $scope.setFilters[filterID] ? true : false;
-                    };
-
-                  //===============================================================================================================================
-                    $scope.saveFilter = function(doc) {
-
-                        //TODO: if free text check to see if there is a UID and convert to indenifier
-                        console.debug("addfilter:" + doc);
-
+                        // if(!$scope.searchResult.data.facets[doc.id])
+                        //     return;
+                        //TODO: if free text check to see if there is a UID and convert to identifier
+                        activeFilter = doc.otherType||doc.type
                         var filterID = doc.id;
                         var termID = doc.id;
                         var broader = null;
 
-                        if(doc.filterID){
+                        if (doc.filterID) {
                             filterID = doc.filterID;
                             termID = $scope.searchFilters[filterID].id;
-                            var broader =  $scope.searchFilters[filterID].broader ;
-                         }
-                        if(typeof doc ==='string') {
+                            var broader = $scope.searchFilters[filterID].broader;
+                        }
+                        if (typeof doc === 'string') {
                             filterID = doc;
                             termID = $scope.searchFilters[filterID].id;
-                            var broader =  $scope.searchFilters[filterID].broader ;
-                         }
-
-                        if($scope.setFilters[termID])
-                           delete $scope.setFilters[termID];
-                        else{
-                           $scope.setFilters[termID] = {type:$scope.searchFilters[filterID].type, name:$scope.searchFilters[filterID].name, id:termID, broader: broader,  filterID:filterID};
+                            var broader = $scope.searchFilters[filterID].broader;
                         }
 
-                        $scope.refresh = true;
-                    };
-
-                    //===============================================================================================================================
-                    $scope.saveDateFilter = function(filterID, query) {
-
-                        $scope.setFilters[filterID] = {type:$scope.searchFilters[filterID].type, query:query, name:$scope.searchFilters[filterID].name, id:$scope.searchFilters[filterID].id};
-
-                        $scope.refresh = true;
-                    };
-
-
-                  //===============================================================================================================================
-                    function nationalQuery(currentPage, itemsPerPage) {
-
-                        var searchOperation;
-
-                        if (queryCanceler) {
-                            queryCanceler.resolve(true);
+                        if ($scope.setFilters[termID]){
+                            delete $scope.setFilters[termID];
                         }
-
-                        var q = queryFilterBuilder("national");
-
-                        queryCanceler = $q.defer();
-
-                        var groupQuery = {
-                            query       : q,
-                            sort: 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
-                            currentPage     : currentPage   || $scope.tabs['nationalRecords'].currentPage,
-                            rowsPerPage     : itemsPerPage  || $scope.itemsPerPage,
-                            groupField      : 'governmentSchemaIdentifier_s',
-                            groupLimit      : 10
-                        };
-                        $scope.exportNationalQuery = groupQuery;
-                        $scope.nationalLoading = true;
-                        searchOperation = searchService.group(groupQuery, queryCanceler);
-
-                        if(!$scope.skipResults){
-                            $q.when(searchOperation)
-                                .then(function(data) {
-                                    queryCanceler = null;
-
-                                    $scope.recordCount[0].count = data.data.grouped.governmentSchemaIdentifier_s.matches;
-                                    $scope.tabs['nationalRecords'].pageCount = Math.ceil(data.data.grouped.governmentSchemaIdentifier_s.ngroups / $scope.itemsPerPage);
-                                    
-                                    $scope.searchResult.rawDocs = []; 
-                                    
-                                    var countryRecords = {}
-                                    _.each(data.data.grouped.governmentSchemaIdentifier_s.groups, function(record){
-
-                                        var gpDetails = (record.groupValue||'').split('_');
-                                        if(!gpDetails.length)
-                                            return;
-                                        var schema              = gpDetails[1];
-                                        var country             = gpDetails[0];
-                                        if(!countryRecords[country])
-                                            countryRecords[country] = { schemas : angular.copy(schemaTemplate) };
-                                        countryRecords[country].country = country;
-
-                                        countryRecords[country].schemas[schema]     = _.extend(countryRecords[country].schemas[schema], record.doclist);
-
-                                    });
-                                    $scope.searchResult.rawDocs = _.values(countryRecords);
-
-                                }).catch(function(error) {
-                                    console.log('ERROR: ' + error);
-                                })
-                                .finally(function(){
-                                    $scope.nationalLoading = false;
-                                });
+                        else {
+                            $scope.setFilters[termID] = {
+                                type     : $scope  .searchFilters[filterID].type,
+                                otherType: $scope  .searchFilters[filterID].otherType,
+                                name     : $scope  .searchFilters[filterID].name,
+                                id       : termID  ,
+                                broader  : broader ,
+                                filterID : filterID
+                            };
                         }
-
-                    };
-
-                  //===============================================================================================================================
-                    function referenceQuery() {
-
-                        var searchOperation;
-
-                        if (queryCanceler) {
-                            console.log('trying to abort pending request...');
-                            queryCanceler.resolve(true);
+                        if($scope .searchFilters[filterID].otherType == 'schema'){
+                            $scope.getRelatedKeywords();
+                            $scope.leftMenuEnabled = true;
+                            if($scope.onSchemaFilterChanged)
+                                $scope.onSchemaFilterChanged(termID, $scope.setFilters[termID])
                         }
-                        var fields = base_fields + en_fields + 
-                        ', implementingAgencies_EN_txt, executingAgencies_EN_txt, collaboratingPartners_EN_txt, authors_t, organizations_EN_txt, publicationYear_i';
+                        else if($scope .searchFilters[filterID].type == 'keyword'){
+                            $scope.updateLeftFilterStatus(termID, $scope.setFilters[termID])
+                        }
                         
+                        // if(!_.isEmpty($scope.setFilters)){ 
+                        //     //if not empty and the default sort is not set by the user then remove sort to default to relevance
+                        //     if($scope.searchResult.sortFields.length == 1 && $scope.searchResult.sortFields[0]=='updatedDate_dt')
+                        //         $scope.searchResult.sortFields = [];
+                        // }
+                        updateQueryResult();
+                    };
 
-                        var q = queryFilterBuilder("reference");
 
-                        queryCanceler = $q.defer();
+                    $scope.saveDateFilter = function (filterID, query) {
 
-                        var listQuery = {
-                            fields      : fields,
-                            query       : q,
-                            sort        : _.isEmpty($scope.setFilters) ? 'updatedDate_dt desc' : undefined,
-                            currentPage     : $scope.tabs['referenceRecords'].currentPage,
-                            rowsPerPage     : $scope.itemsPerPage,
+                        $scope.setFilters[filterID] = {
+                            type: $scope.searchFilters[filterID].type,
+                            query: query,
+                            name: $scope.searchFilters[filterID].name,
+                            id: $scope.searchFilters[filterID].id
                         };
 
-                        $scope.exportReferenceQuery = listQuery;
-                        searchOperation = searchService.list(listQuery, queryCanceler);
+                        updateQueryResult();
+                    };
 
-                        if(!$scope.skipResults){
-                            $q.when(searchOperation)
-                            .then(function(data) {
-                                queryCanceler = null;
+                    $scope.removeFilter = function (filterID) {
 
-                                $scope.tabs['referenceRecords'].pageCount = Math.ceil(data.data.response.numFound / $scope.itemsPerPage);
-                                $scope.searchResult.refDocs = data.data.response;
-                                $scope.recordCount[1].count = data.data.response.numFound;
+                        var id = $scope.setFilters[filterID].filterID
+                        delete $scope.setFilters[filterID];
 
-                            }).catch(function(error) {
-                                referenceCurrentPage -= 1;
-                                console.log('ERROR: ' + error);
-                            })
-                            .finally(function(){
-                                $scope.referenceLoading = false;
+                        if($scope.searchFilters[filterID] && $scope.searchFilters[filterID].otherType == 'schema' && $scope.onSchemaFilterChanged){
+                            $scope.onSchemaFilterChanged(filterID, $scope.setFilters[filterID]);
+                            $scope.getRelatedKeywords();
+                        }
+                        else if($scope.searchFilters[id].type == 'keyword'){
+                            $scope.updateLeftFilterStatus(filterID, $scope.setFilters[filterID])
+                        }
+                        //remove children
+                        var dels = {};
+                        var toDelete = _.each($scope.setFilters, function (filter) {
+                            if (filter.broader === filterID) {
+                                $scope.removeFilter(filter.id);
+                            }
+                        });
+
+                        updateQueryResult();
+                    };
+
+                    $scope.onSortByChange = function(fields){
+                        $scope.searchResult.sortFields = fields;
+                        $scope.searchResult.sortFields = fields;
+                        updateQueryResult();
+                    }
+
+                    $scope.onViewTypeChange = function(options){                        
+                        $scope.searchResult.viewType = options.viewType;
+                        if(options.viewType == 'group')
+                            $scope.searchResult.groupByFields = options.fields;
+                        updateQueryResult();
+                    }
+
+                    $scope.getRelatedKeywords = function () {
+                        
+                        var relatedKeywords = $scope.relatedKeywords = {};
+                        var setIds = {};
+                        var keywords = getSearchFilters("keyword");
+
+                        if ($scope.setFilters) {
+
+                            _.each($scope.setFilters, function (set) {
+
+                                relatedKeywords = _.filter(keywords, function (item) {
+
+                                    if (item.related.toLowerCase().indexOf(set.id.toLowerCase()) >= 0)
+                                        return item;
+                                    else
+                                        return null;
+                                });
+                                if (!_.isEmpty(relatedKeywords))
+                                    $scope.relatedKeywords[set.id] = relatedKeywords;
                             });
                         }
-                    };
-                  //===============================================================================================================================
-                    function scbdQuery() {
 
-                        var searchOperation;
 
-                        if (queryCanceler) {
-                            console.log('trying to abort pending request...');
-                            queryCanceler.resolve(true);
+
+                    }
+
+
+                    ////////////////////////////////////////////
+                    ////// end $scope functions
+                    ////////////////////////////////////////////
+
+                    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    
+                    ////////////////////////////////////////////
+                    ////// internal functions
+                    ////////////////////////////////////////////
+
+                    function init(){
+
+                        loadFilters();
+
+                        var query =  $location.search();
+                        var currentpage = query.currentPage||1;
+
+                        if(!$scope.skipResults && $routeParams.recordType){
+                            if($routeParams.recordType == 'run-query'){
+                                var queryFilter = localStorageService.get("run-query");                            
+                                setSearchFilters(queryFilter);
+                            }
+                            else{
+                                if(query){
+                                    if(query.text){
+                                        $scope.saveFreeTextFilter(query.text);
+                                    }
+                                    if(query.country){
+                                        $scope.saveFilter(query.country);
+                                    }
+                                    if(query.schema){
+                                        $scope.saveFilter(query.schema);
+                                    }
+                                }
+                            }
                         }
-                        var fields = base_fields + en_fields + ', startDate_dt,endDate_dt,url_ss, uniqueIdentifier_s, eventCity_s, eventCountry_EN_t';
-                        var q = queryFilterBuilder("scbd");
 
-                        queryCanceler = $q.defer();
+                        $timeout(function(){
+                            if(!$scope.skipResults)updateQueryResult(currentpage);
 
-                        var listQuery = {
-                            query       : q,
-                            fields      : fields,
-                            sort        : _.isEmpty($scope.setFilters) ? 'sort1_dt desc, updatedDate_dt desc' : undefined,
-                            currentPage     : $scope.tabs['scbdRecords'].currentPage,
-                            rowsPerPage     : $scope.itemsPerPage,
-                        };
+                        }, 200)
 
-                        $scope.exportScbdQuery = listQuery;
-                        searchOperation = searchService.list(listQuery, queryCanceler);
+                        // if(!$scope.skipResults){
+                        //     $scope.$watch('refresh', function(newVal, oldVal){
+                        //         if(newVal && newVal !== oldVal){
+                        //             refreshResult();                                
+                        //             $scope.getRelatedKeywords();
+                        //         }
+                        //     });
+                        // }
+                    }
 
-                        if(!$scope.skipResults){
-                            $q.when(searchOperation)
-                            .then(function(data) {
-                                queryCanceler = null;
-                                
-                                $scope.tabs['scbdRecords'].pageCount = Math.ceil(data.data.response.numFound / $scope.itemsPerPage);
-                                $scope.searchResult.scbdDocs = data.data.response;
-                                $scope.recordCount[2].count = data.data.response.numFound;
-                               
-                            }).catch(function(error) {
-                                scbdCurrentPage -= 1;
-                                console.log('ERROR: ' + error);
+                    function loadFilters() {
+                
+                        if (_.isEmpty($scope.searchFilters)) {
+                            $scope.searchFilters = {};
+                            $scope.searchFilters = localStorageService.get("searchFilters");
+                        }
+                        if (_.isEmpty($scope.searchFilters)) {
+                            $scope.searchFilters = {};
+                            
+                            var chKeywordsFilter;
+                            if (isABS)
+                                chKeywordsFilter = loadABSKeywordFilters();
+                            else if (isBCH)
+                                chKeywordsFilter = loadBCHKeywordFilters();
+
+                            $q.all([loadSchemaFilters(), loadCountryFilters(), loadRegionsFilters(), loadDateFilters(), chKeywordsFilter])
+                            .then(function(){
+                                localStorageService.set("searchFilters", $scope.searchFilters);
                             })
-                            .finally(function(){
-                                $scope.scbdLoading = false;
-                            });;
-                        }
+                        }                
                     };
 
-                  //===============================================================================================================================
-                    function queryFilterBuilder(queryType){
-                        var qAnd=[];
-                        var qOr =[];
-                        var q   ='';
-                        var q1   ='';
+
+                    function addFilter(filterID, filterInfo) {                        
+                        $scope.searchFilters[filterID] = filterInfo;
+                    };
+
+                    function loadSchemaFilters() {
+
+                        _.each(realm.schemas, function (schema, key) {
+                            if (!_.includes(['contact'], key))
+                                addFilter(key, { 'sort': schema.sort, 'type': schema.type, 'name': schema.title.en, 'id': key, 
+                                        'description': (schema.description || {}).en, otherType:'schema' });
+                        })
+
+                        addFilter('partyToProtocol'     , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Protocol'                   , 'id': 'partyToProtocol'     , 'description': '' });
+                        addFilter('inbetween'           , { 'sort': 2, 'type': 'partyStatus', 'name': 'Ratified, not yet Party to the Protocol' , 'id': 'inbetween'           , 'description': '' });
+                        addFilter('nonParty'            , { 'sort': 3, 'type': 'partyStatus', 'name': 'Not a Party to the Protocol '            , 'id': 'nonParty'            , 'description': '' });
+                        addFilter('signatoryToProtocol' , { 'sort': 4, 'type': 'partyStatus', 'name': 'Signatory to the Protocol'               , 'id': 'signatoryToProtocol' , 'description': '' });
+
+                        //SCBD
+                        _.each(scbdSchemas, function (schema, key) {
+                            addFilter(key, { 'sort': schema.sort, 'type': 'scbd', 'name': schema.title, 'id': key, 
+                                    'description': (schema.description || {}), otherType:'schema' });
+                        });
+                    };
 
 
+                    function loadCountryFilters() {
 
-                        if(queryType === 'national'){
-                              qAnd.push(buildFieldQuery('schema_s', 'national', natSchemas.join(' ')));
-                              qAnd.push(buildFieldQuery('government_s', 'country', "*"));
-                              qAnd.push(buildCountryQuery('government_s'    ,'partyStatus', null));
-                              qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'  , null));
-                              qOr.push(buildFieldQuery('government_REL_ss','region'  , null));
-                              //qOr.push(buildTextQuery('text_EN_txt'    ,'reference', null));
-                             // qOr.push(buildFieldQuery('all_terms_ss'    ,'reference', null));
-                              qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
-                              qOr.push(buildFieldQuery('all_terms_ss'    ,'scbd', null));
-                              qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
-                              qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
+                        return $q.when(commonjs.getCountries(), function (data) {
+                            var countries = data;
 
+                            _.each(countries, function (country, index) {
+                                addFilter(country.code.toLowerCase(), { 'sort': index, 'type': 'country', 'name': country.name[locale || en], 
+                                'id': country.code.toLowerCase(), 'description': '', "isCBDParty": country.isCBDParty, "isNPParty": country.isNPParty, 
+                                "isAppProtocolParty": country.isAppProtocolParty, "isNPSignatory": country.isNPSignatory, "isNPRatified": country.isNPRatified, 
+                                "isNPInbetweenParty": country.isNPInbetweenParty, "entryIntoForce": country.entryIntoForce });
+                            });
+                        });
+                    };
+
+                    function loadRegionsFilters() {
+
+                        return $q.when(commonjs.getRegions(), function (regions) {
+                            _.each(regions, function (region, index) {
+                                addRegionFilter(region);
+                            });
+                        });
+                    };
+
+                    function addRegionFilter(region, parent) {
+
+                        addFilter(region.identifier, { 'type': 'region', 'name': region.title[locale || en], 'id': region.identifier, 
+                        'description': '', 'parent': parent });
+
+                        _.each(region.narrowerTerms, function (narrower) {
+                            addRegionFilter(narrower, region.identifier);
+                        });
+                    }
+                    
+                    function loadDateFilters() {
+                        addFilter('publishedOn', { 'sort': 1, 'type': 'date', 'name': 'Published On', 'id': 'publishedOn', 
+                        'description': 'Date range when the record was published' });
+                    };
+
+                    function loadABSKeywordFilters() {
+
+                        var promises = [];
+                        //IRCC filters
+                        addKeywordFilter(customKeywords.commercial, 'absPermit', 'IRCC usages');
+                        addKeywordFilter(customKeywords.nonCommercial, 'absPermit', 'IRCC usages');
+                    
+                        promises.push(thesaurusService.getDomainTerms('keywords'), function (keywords) {
+                            _.each(keywords, function (keyword, index) {
+                                addKeywordFilter(keyword, 'absPermit', 'IRCC keywords');
+                            });
+                        });
+                    
+                        //CP
+                        promises.push(thesaurusService.getDomainTerms('cpJurisdictions'), function (keywords) {
+                            _.each(keywords, function (keyword, index) {
+                                addKeywordFilter(keyword, 'absCheckpoint', 'Checkpoint jurisdiction');
+                            });
+                        });
+                        //CPC
+                        promises.push(thesaurusService.getDomainTerms('keywords'), function (keywords) {
+                            _.each(keywords, function (keyword, index) {
+                                addKeywordFilter(keyword, 'absCheckpointCommunique', 'Checkpoint communique keywords');
+                            });
+                        });
+
+                        promises.push(commonjs.getThematicAreas(), function (keywords) {
+                            var levels = [];
+                            var parents = [];
+                            var level = 0;
+                    
+                            _.each(keywords, function (keyword, index) {
+                    
+                                levels[keyword.identifier] = 1;
+                                parents[keyword.identifier] = '';
+                    
+                                if (keyword.broaderTerms.length === 0)
+                                    levels[keyword.identifier] = 0;
+                    
+                                if (keyword.broaderTerms.length > 0) {
+                                    levels[keyword.identifier] = levels[keyword.broaderTerms] + 1;
+                                    parents[keyword.identifier] = keyword.broaderTerms.join();
+                                }
+                    
+                            });
+                    
+                            _.each(keywords, function (keyword, index) {
+                                addKeywordFilter(keyword, '', 'ABS Thematic Areas', levels[keyword.identifier], parents[keyword.identifier]);
+                            });
+                    
+                        });                                        
+                    
+                        promises.push(commonjs.getMSR_elements(), function (keywords) {
+                            var levels = [];
+                            var parents = [];
+                            var level = 0;
+                    
+                            _.each(keywords, function (keyword, index) {
+                    
+                                levels[keyword.identifier] = 1;
+                                parents[keyword.identifier] = '';
+                    
+                                if (keyword.broaderTerms.length === 0)
+                                    levels[keyword.identifier] = 0;
+                    
+                                if (keyword.broaderTerms.length > 0) {
+                                    levels[keyword.identifier] = levels[keyword.broaderTerms] + 1;
+                                    parents[keyword.identifier] = keyword.broaderTerms.join();
+                                }
+                    
+                            });
+                    
+                            _.each(keywords, function (keyword, index) {
+                                addKeywordFilter(keyword, 'measure', 'Key elements', levels[keyword.identifier], parents[keyword.identifier]);
+                            });
+                    
+                        });
+                    
+                        promises.push(commonjs.getKeyAreas          ().then(function(keywords){loopKeywords(keywords, ''                                                             , ''                                  )}));
+                        promises.push(commonjs.getCBI_audience      ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative resource capacitybuildingresource' , 'Target Audience'                   )}));
+                        promises.push(commonjs.getMSR_types         ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Type'                              )}));
+                        promises.push(commonjs.getMSR_status        ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Legal Status'                      )}));
+                        promises.push(commonjs.getMSR_modelcontract ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Contains model contractual clause' )}));
+                        promises.push(commonjs.getCNA_scope         ().then(function(keywords){loopKeywords(keywords, 'authority'                                                    , 'Scope of responsibilities'         )}));
+                        promises.push(commonjs.getMSR_jurisdictions ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Jurisdiction'                      )}));
+                        promises.push(commonjs.getCNA_jurisdictions ().then(function(keywords){loopKeywords(keywords, 'authority'                                                    , 'Jurisdiction'                      )}));
+                        promises.push(commonjs.getMCC_keywords      ().then(function(keywords){loopKeywords(keywords, 'modelcontractualclause'                                       , 'Keyword'                           )}));
+                        promises.push(commonjs.getMCC_types         ().then(function(keywords){loopKeywords(keywords, 'modelcontractualclause'                                       , 'Type'                              )}));
+                        promises.push(commonjs.getCBI_cats          ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Category'                          )}));
+                        promises.push(commonjs.getCBI_types         ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Type'                              )}));
+                        promises.push(commonjs.getCBI_fundingsrc    ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Funding Source'                    )}));
+                        promises.push(commonjs.getCBI_status        ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Status'                            )}));
+                        promises.push(commonjs.getCBI_status        ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Status'                            )}));
+                        promises.push(commonjs.getCBR_level         ().then(function(keywords){loopKeywords(keywords, 'resource capacitybuildingresource'                            , 'Level'                             )}));
+                        promises.push(commonjs.getCBR_purpose       ().then(function(keywords){loopKeywords(keywords, 'resource capacitybuildingresource'                            , 'Purpose'                           )}));
+                        promises.push(commonjs.getCBR_formats       ().then(function(keywords){loopKeywords(keywords, 'resource capacitybuildingresource'                            , 'Format'                            )}));
+                        promises.push(commonjs.getCPP_types         ().then(function(keywords){loopKeywords(keywords, 'communityprotocol'                                            , 'Type'                              )}));
+                        promises.push(commonjs.getAichiTargets      ().then(function(keywords){loopKeywords(keywords, ''                                                             , 'Aichi Targets'                     )}));
+                        
+
+                        return $q.all(promises)
+                    };
+                    
+                    function loadBCHKeywordFilters() {
+                        var promises = []
+                        promises.push(loadJsonFile('/app/app-data/bch/focalpoint-category.json').then(function(keywords){
+                            _.each(keywords, function (title, key) {
+                                var keyword = { identifier:key };
+                                keyword.title = {};
+                                keyword.title[locale] = title;
+                                addKeywordFilter(keyword, 'focalPoint', 'Type of Focal point');
+                            });
+                        }));
+
+                        promises.push(thesaurusService.getDomainTerms('decisionTypes'             ).then(function(keywords){loopKeywords(keywords, 'biosafetyDecision'                                , 'Type of Document'                            )}));
+                        promises.push(thesaurusService.getDomainTerms('legislationAgreementTypes' ).then(function(keywords){loopKeywords(keywords, 'biosafetyLaw'                                     , 'Type of document'                            )}));
+                        promises.push(thesaurusService.getDomainTerms('subjectAreas'              ).then(function(keywords){loopKeywords(keywords, 'biosafetyLaw authority'                           , 'Subject Areas / Regulatory Functions'        )}));
+                        promises.push(thesaurusService.getDomainTerms('cnaJurisdictions'          ).then(function(keywords){loopKeywords(keywords, 'authority'                                        , 'Jurisdictions'                               )}));
+                        promises.push(thesaurusService.getDomainTerms('riskAssessmentScope'       ).then(function(keywords){loopKeywords(keywords, 'nationalRiskAssessment independentRiskAssessment' , 'Scope of the risk assessment'                )}));
+                        promises.push(thesaurusService.getDomainTerms('organizationTypes'         ).then(function(keywords){loopKeywords(keywords, 'expert organization'                              , 'Type of Organization'                        )}));
+                        promises.push(thesaurusService.getDomainTerms('expertiseArea'             ).then(function(keywords){loopKeywords(keywords, 'expert'                                           , 'Areas of Expertise'                          )}));
+                        promises.push(thesaurusService.getDomainTerms('resourceTypes'             ).then(function(keywords){loopKeywords(keywords, 'resource'                                         , 'Type of resource'                            )}));
+                        promises.push(thesaurusService.getDomainTerms('languages'                 ).then(function(keywords){loopKeywords(keywords, 'resource'                                         , 'Language'                                    )}));
+                        promises.push(thesaurusService.getDomainTerms('typeOfOrganisms'           ).then(function(keywords){loopKeywords(keywords, 'organism'                                         , 'Type of organism(s)'                         )}));
+                        promises.push(thesaurusService.getDomainTerms('domestication'             ).then(function(keywords){loopKeywords(keywords, 'organism'                                         , 'Organism domesticatio'                       )}));
+                        promises.push(thesaurusService.getDomainTerms('OrganismCommonUses'        ).then(function(keywords){loopKeywords(keywords, 'organism modifiedOrganism'                        , 'Common use(s)'                               )}));
+                        promises.push(thesaurusService.getDomainTerms('dnaSequenceFamily'         ).then(function(keywords){loopKeywords(keywords, 'dnaSequence'                                      , 'Category'                                    )}));
+                        promises.push(thesaurusService.getDomainTerms('dnaSequenceTraits'         ).then(function(keywords){
+                            loopKeywords(keywords, 'dnaSequence modifiedOrganism'                     , 'Related trait(s) or use(s) in biotechnology' )
                         }
+                            ));
+                        promises.push(thesaurusService.getDomainTerms('techniqueUsed'             ).then(function(keywords){loopKeywords(keywords, 'modifiedOrganism'                                 , 'Techniques used for the modification'        )}));
 
-                        if(queryType === 'reference'){
-                               qAnd.push(buildFieldQuery('schema_s','reference', refSchemas.join(' ')));
-                              // qOr.push(buildTextQuery('text_EN_txt'    ,'scbd', null));
-                               //qOr.push(buildFieldQuery('all_terms_ss'  ,'scbd', null));
-                              // qOr.push(buildTextQuery('text_EN_txt'     ,'national', null));
-                              // qOr.push(buildFieldQuery('all_terms_ss'   ,'national', null));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'country', null));
-                               qOr.push(buildFieldQuery('all_terms_ss'  ,'country', null));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'freeText', null));
-                               qOr.push(buildTextQuery('all_terms_ss'  ,'freeText', null));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'region', null));
-                               qOr.push(buildFieldQuery('all_terms_ss'  ,'region', null));
-                               qOr.push(buildFieldQuery('regions_REL_ss','country', null));
-                               qOr.push(buildFieldQuery('regions_REL_ss','region', null));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
-                               qOr.push(buildFieldQuery('all_terms_ss'    ,'keyword', null));
+                        promises.push(thesaurusService.getDomainTerms('decisionLMOFFPSubject'    ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')}));
+                        promises.push(thesaurusService.getDomainTerms('decisionResults'          ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')}));
+                        
+                        
+                        
+                        return $q.all(promises);
+                        // var bchTerms = [
+                        //     'decisionTypes', 'decisionLMOFFPSubject', 'decisionResults', 'riskAssessmentScope', 'dnaSequenceFamily',
+                        //     'dnaSequenceTraits', 'legislationAgreementTypes', 'subjectAreas', 'typeOfOrganisms', 'domestication', 'OrganismCommonUses',
+                        //     'techniqueUsed', 'cnaJurisdictions'
+                        // ]
+                    
+                        // $q.all(_.map(bchTerms, thesaurusService.getDomainTerms))
+                        //     .then(function (results) {
+                        //         _.each(results, function (terms) {
+                        //             _.each(terms, function (term) {
+                        //                 addKeywordFilter(term, 'bchTerm', "ABS Thematic Areas");
+                        //             })
+                        //         });
+                        //     })
+                    
+                    }
 
+                    function loadJsonFile(filePath){
+                        var deferred = $q.defer();                        
+                        require(['json!'+filePath], function(res){
+                            deferred.resolve(res);
+                        });
+
+                        return deferred.promise;
+                    }
+                    function loopKeywords(keywords, related, parent, level, broader){
+                        if((keywords||[]).length){
+                            _.each(keywords, function (keyword, index) {
+                                addKeywordFilter(keyword, related, parent, level, broader||keyword.broader||keyword.broaderTerms);
+                            });
                         }
+                    }
 
-                        if(queryType === 'scbd'){
-                               qAnd.push(buildFieldQuery('schema_s','scbd', scbdSchemas.join(' ')));
-                               //qOr.push(buildTextQuery('text_EN_txt'      ,'national'  , null));
-                               //qOr.push(buildTextQuery('text_EN_txt'      ,'reference' , null));
-                               qOr.push(buildTextQuery('text_EN_txt'      ,'country'   , null));
-                               qOr.push(buildTextQuery('text_EN_txt'      ,'region', null));
-                               qOr.push(buildTextQuery('text_EN_txt'      ,'freeText'   , null));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'keyword', null));
-                               qOr.push(buildTextQuery('text_EN_txt'    ,'partyStatus', null));
-                        }
-                        //custom queries
+                    function addKeywordFilter(keyword, related, parent, level, broader) {
+                        if (!level)
+                            level = 0;
+
+                        var dupIdentifier = isIdentifierDuplicate(keyword);
+                        if (dupIdentifier)
+                            addFilter(dupIdentifier.identifier + "@" + related, { 'type': 'keyword', 'name': dupIdentifier.title[locale || 'en'], 'id': dupIdentifier.identifier, 'description': '', 'parent': parent, 'related': related, filterID: dupIdentifier.identifier + "@" + related, 'level': level, 'broader': broader, isDuplicate: true });
+                        else
+                            addFilter(keyword.identifier + "@" + related, { 'type': 'keyword', 'name': keyword.title[locale || 'en'], 'id': keyword.identifier, 'description': '', 'parent': parent, 'related': related, filterID: keyword.identifier + "@" + related, 'level': level, 'broader': broader });
+
+                    }
+
+                    function isIdentifierDuplicate(keyword) {
+                        var duplicate;
+                        _.reduce(customKeywords, function (memo, value, key) {
+                            if (_.contains(value.identifiers, keyword.identifier)) {
+                                duplicate = value;
+                            }
+                        }, {})
+                        return duplicate;
+                    }
+
+
+                    function getSearchFilters(type) {
+                        if (!type)
+                            return $scope.searchFilters;
+
+                        return _.filter($scope.searchFilters, function (item) {
+                            if (item.type === type) return item;
+                        });
+                    };
+
+
+                    function getSearchFiltersByParent(parent) {
+                        if (!parent)
+                            return $scope.searchFilters;
+
+                        return _.filter($scope.searchFilters, function (item) {
+                            if (item.parent === parent) return item;
+                        });
+                    };
+
+                    function setSearchFilters(filters) {
+                        $scope.setFilters = {};
+                        _.map(filters, function (query) {
+                            if (query.type == 'text') {
+                                $scope.saveFreeTextFilter(query);
+                            } else if (query.type == 'custom') {
+                                $scope.saveCustomFilter(query);
+                            } else {
+                                $scope.saveFilter(query);
+                            }
+                        });
+                    };
+
+                    function getSetFilters() {
+                        return $scope.setFilters;
+                    };
+
+                    function getFilter(id) {
+                        return $scope.searchFilters[id];
+                    };
+
+                    function updateQueryResult(pageNumber){
+                        $timeout(function(){//call digest cycle to update the directive api params
+                            var queryOptions = buildSearchQuery()
+                            var sortFields = ''
+                            var resultQuery;
+                            if(($scope.searchResult.sortFields||[]).length > 0)
+                                sortFields = $scope.searchResult.sortFields.join(', ');
+
+                            if($scope.searchResult.viewType == 'list'){
+                            resultQuery = $scope.searchResult.listViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
+                            }
+                            else if($scope.searchResult.viewType == 'group'){
+                                queryOptions.groupByFields = $scope.searchResult.groupByFields;
+                                resultQuery = $scope.searchResult.groupViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
+                            }
+                            else if($scope.searchResult.viewType == 'matrix'){
+                                
+                            }
+                            resultQuery.then(function(data){
+                                $scope.searchResult.data = data;
+                            })
+                        }, 0)
+                    }
+
+                    function buildSearchQuery(){
+                        var tagQueries = {};
+                        var qAnd = [];
+                        var qOr  = [];
+                        var q    = '';
+                        var q1   = '';
+
+                        tagQueries.sch = buildSchemaQuery  ();
+                        tagQueries.gov = buildFieldQuery   ('government_s'      , 'country'     , null );
+                        tagQueries.pst = buildCountryQuery ('government_s'      , 'partyStatus' , null );
+                        tagQueries.reg = buildFieldQuery   ('government_REL_ss' , 'region'      , null );
+                        var termsQ     = buildFieldQuery   ('all_terms_ss'      , 'keyword'     , null );
+                        var termsTxtQ  = buildTextQuery    ('text_EN_txt'       , 'keyword'     , null );
+                        if(termsQ)
+                            tagQueries.key = '('+ termsQ + ' OR ' + termsTxtQ + ')';
+
+                        qAnd .push(buildTextQuery    ('text_EN_txt'       , 'freeText'    , null ));
+
                         _.map(_.filter($scope.setFilters, {type:'custom'}), function(custom){
                             if(custom.query)
                                 qAnd.push(custom.query)
@@ -514,946 +674,182 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
 
                         q = combineQuery(qAnd, "AND");
                         q1 = combineQuery(qOr, "OR");
-
-                        return q1 ? q + " AND (" + q1 + ")" : q;
-                     };
-
-                  //===============================================================================================================================
-                    function checkSetFilters(type){
-                       return  _.find($scope.setFilters, function(item){if(item.type === type) return true;});
+                        
+                        return {
+                            activeFilter : activeFilter,
+                            query      :  (q1 ? q + " AND (" + q1 + ")" : q),
+                            tagQueries : _(tagQueries).map(function(f, t){if(f) return '{!tag='+t+'}' + f;}).compact().value()
+                        }
+                        ;
                     }
 
-                     //===============================================================================================================================
-                    function buildTextQuery(field, type, boost){
+                    function buildTextQuery(field, type, boost) {
                         var q = '';
                         var values = [];
 
-                        if($scope.setFilters){
-                            _.each($scope.setFilters, function(item){
+                        if ($scope.setFilters) {
+                            _.each($scope.setFilters, function (item) {
 
-                                if(item.type == type){
+                                if (item.type == type) {
                                     values.push($scope.setFilters[item.id].name.toLowerCase());
                                 }
 
                             });
-                            if(values.length)
+                            if (values.length)
                                 q = addORCondition(field, values, boost)
                         }
-                       return  q ? q : null;
+                        return q ? q : null;
                     }
 
-                    //===============================================================================================================================
-                    function buildCustomQuery(field, type, boost){
+                    function buildCustomQuery(field, type, boost) {
                         var q = '';
                         var values = [];
 
-                        if($scope.setFilters){
-                            _.each($scope.setFilters, function(item){
+                        if ($scope.setFilters) {
+                            _.each($scope.setFilters, function (item) {
 
-                                if(item.type == type){
+                                if (item.type == type) {
                                     values.push($scope.setFilters[item.id].name.toLowerCase());
                                 }
 
                             });
-                            if(values.length)
+                            if (values.length)
                                 q = addORCondition(field, values, boost)
                         }
-                    return  q ? q : null;
+                        return q ? q : null;
                     }
-                  //===============================================================================================================================
-                    function buildCountryQuery(field, type, boost){
+
+                    function buildCountryQuery(field, type, boost) {
                         var q = '';
                         var values = '';
                         var countries = getSearchFilters("country");
 
-                        if($scope.setFilters){
-                            _.each($scope.setFilters, function(item){
-                               if(item.type === type){
+                        if ($scope.setFilters) {
+                            _.each($scope.setFilters, function (item) {
+                                if (item.type === type) {
                                     values = values + " " + getCountryList(item.id, countries);
-                               }
+                                }
                             });
 
-                             if(values.length)
-                                 q = addANDConditionText(field, values, boost)
+                            if (values.length)
+                                q = addANDConditionText(field, values, boost)
                         }
 
-                       return  q ? q : null;
+                        return q ? q : null;
                     }
-                      //===============================================================================================================================
-                    function getCountryList(id, list){
 
-                        var templist = _.filter(list, function(item){
+                    function getCountryList(id, list) {
 
-                             if(id ==='npParty' && item.isNPParty===true)
+                        var templist = _.filter(list, function (item) {
+
+                            if (id === 'partyToProtocol' && item.isAppProtocolParty === true)
                                 return item;
-                             if(id ==='npNonParty' && item.isNPParty===false)
+                            else if (id === 'nonParty' && item.isAppProtocolParty === false)
                                 return item;
-                             if(id ==='npInbetween' && item.isNPInbetweenParty===true)
+                            else if (id === 'inbetween' && item.isNPInbetweenParty === true)
                                 return item;
-                             if(id ==='npSignatory' && item.isNPSignatory===true)
+                            else if (id === 'signatoryToProtocol' && item.isNPSignatory === true)
                                 return item;
                         });
 
-                        var govs  =  _.pluck(templist, 'id');
-                        //console.log(govs);
+                        var govs = _.pluck(templist, 'id');
 
                         return govs.join(" ");
                     }
 
-                  //===============================================================================================================================
-                    function buildFieldQuery(field, type, allFilters){
+                    function buildSchemaQuery() {
+                    
+                        var query = buildFieldQuery('schema_s', 'schema')
+                        if (query == null) {
+                            query = "schema_s:* AND NOT schema_s:(contact organization)"
+                        }
+                    
+                        return query;
+                    }
+
+                    function buildFieldQuery(field, type, allFilters) {
                         var q = '';
                         var capacityBuildingResource;
-                        if($scope.setFilters[type]){
-                            q = field + ":(" + allFilters + ")"
-                        }
-                        else{
-                            _.each($scope.setFilters, function(item){
-                                if(item.type == type){
-                                    if(customKeywords[item.id] && item.id == 'capacityBuildingResource'){
+                        if ($scope.setFilters[type]) {
+                            q = field + ":(" + encodeURIComponent(allFilters) + ")"
+                        } else {
+                            _.each($scope.setFilters, function (item) {
+                                if (item.type == type || item.otherType==type) {
+                                    if (customKeywords[item.id] && item.id == 'capacityBuildingResource') {
                                         capacityBuildingResource = true;
-                                        q =  q + 'resource' + ' '
-                                    }
-                                    else if(customKeywords[item.id] && item.id != 'capacityBuildingResource')
-                                        q =  q + customKeywords[item.id].identifiers.join(' ') + ' ';
+                                        q = q + 'resource' + ' '
+                                    } 
+                                    else if (customKeywords[item.id] && item.id != 'capacityBuildingResource')
+                                        q = q + encodeURIComponent(customKeywords[item.id].identifiers.join(' ')) + ' ';
                                     else
-                                        q =  q + item.id + ' ';
-                                    
+                                        q = q + encodeURIComponent(item.id) + ' ';
+
                                 }
                             });
                         }
 
-                        if(q){
-                             var newQuery = field + ":(" + q + ")";
-                             if(capacityBuildingResource)
-                                newQuery += ' AND all_terms_ss:(' +  customKeywords['capacityBuildingResource'].identifiers.join(' ') + ') ';
-                             return newQuery;
-                        }
-                        else if(allFilters)
-                             return field + ":(" + allFilters + ")";
+                        if (q) {
+                            var newQuery = field + ":(" + q + ")";
+                            if (capacityBuildingResource)
+                                newQuery += ' AND all_terms_ss:(' + encodeURIComponent(customKeywords['capacityBuildingResource'].identifiers.join(' ')) + ') ';
+                            return newQuery;
+                        } else if (allFilters)
+                            return field + ":(" + encodeURIComponent(allFilters) + ")";
                         else
-                             return null;
+                            return null;
                     }
-                    function buildDateFieldQuery(field, type){
 
-                        if($scope.setFilters[type] && $scope.setFilters[type].query != '*:*'){
+                    function buildDateFieldQuery(field, type) {
+
+                        if ($scope.setFilters[type] && $scope.setFilters[type].query != '*:*') {
                             return field + ":" + $scope.setFilters[type].query;
                         }
                         return null;
                     }
 
-                  //===============================================================================================================================
-                    function addORCondition(field, values, boost){
-                        var q ="";
+                    function addORCondition(field, values, boost) {
+                        var q = "";
                         var conditions = [];
-                        _.each(values, function (val){conditions.push(""+field+":\"*"+val + "*\"" + (boost ? "^" + boost : ""))});
-                        _.each(conditions, function (condition) { q = q + (q=='' ? '(' : ' OR ') + condition; });
-                        q = q +")";
+                        _.each(values, function (val) {
+                            conditions.push("" + field + ":\"*" + val + "*\"" + (boost ? "^" + boost : ""))
+                        });
+                        _.each(conditions, function (condition) {
+                            q = q + (q == '' ? '(' : ' OR ') + condition;
+                        });
+                        q = q + ")";
                         return q;
                     }
 
-                    //===============================================================================================================================
-                    function addANDConditionText(field, values, boost){
-                        var q ="";
+                    function addANDConditionText(field, values, boost) {
+                        var q = "";
                         var conditions = [];
 
-                        q = "(" + field +":("+ values +"))";
+                        q = "(" + field + ":(" + values + "))";
                         return q;
                     }
 
-                  //===============================================================================================================================
-                    function combineQuery(qCondition, op1 ){
-                        var q ='';
-                        _.each(qCondition, function (val){ if(val) q = q + (q ? op1 : "") + "(" + val + ")" } );
+
+                    function combineQuery(qCondition, op1) {
+                        var q = '';
+                        _.each(qCondition, function (val) {
+                            if (val) q = q + (q ? op1 : "") + "(" + val + ")"
+                        });
                         return q ? q : '';
                     }
 
-                  //===============================================================================================================================
-                    function loadFilters() {
-
-                         //console.log('load filters');
-
-                        if( _.isEmpty($scope.searchFilters) ){
-                            $scope.searchFilters = {};
-                            $scope.searchFilters = localStorageService.get("searchFilters");
-                            //console.log('getting filters from local storage');
-                        }
-                        if( _.isEmpty($scope.searchFilters) ){
-                            $scope.searchFilters = {};
-                            loadSchemaFilters();
-                            loadCountryFilters();
-                            if(isABS)
-                                loadABSKeywordFilters();
-                            else if(isBCH)
-                                loadBCHKeywordFilters();
-                            loadRegionsFilters();
-                            loadDateFilters();
-                            localStorageService.set("searchFilters", $scope.searchFilters);
-                            //console.log('getting new filters');
-                       }
-
-                        $scope.test = $scope.searchFilters.length;
-                    };
-
-                  //===============================================================================================================================
-                    function loadCountryFilters() {
-
-                        $q.when(commonjs.getCountries(), function(data) {
-                                var countries = data;
-
-                                _.each(countries, function(country, index){
-                                    addFilter(country.code.toLowerCase(), {'sort': index, 'type':'country', 'name':country.name[locale||en], 'id':country.code.toLowerCase(), 'description':'', "isCBDParty": country.isCBDParty,"isNPParty":country.isNPParty,
-                                        "isAppProtocolParty": country.isAppProtocolParty, "isNPSignatory": country.isNPSignatory,"isNPRatified": country.isNPRatified ,"isNPInbetweenParty":country.isNPInbetweenParty,"entryIntoForce": country.entryIntoForce});
-                                });
-                        });
-                    };
-
-                  //===============================================================================================================================
-                    function loadABSKeywordFilters() {
-
-                        //IRCC filters
-                        addKeywordFilter(customKeywords.commercial, 'absPermit', 'IRCC usages');
-                        addKeywordFilter(customKeywords.nonCommercial, 'absPermit', 'IRCC usages');
-                                             
-                        $q.when(thesaurusService.getDomainTerms('keywords'), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, 'absPermit', 'IRCC keywords');
-                                });
-                        });
-
-                        //CP
-                         $q.when(thesaurusService.getDomainTerms('cpJurisdictions'), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, 'absCheckpoint', 'Checkpoint jurisdiction');
-                                });
-                        });
-                        //CPC
-                         $q.when(thesaurusService.getDomainTerms('keywords'), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, 'absCheckpointCommunique', 'Checkpoint communique keywords');
-                                });
-                        });
-                        ///////////////
-                         $q.when(commonjs.getThematicAreas(), function(keywords) {
-                                 var levels = [];
-                                 var parents = [];
-                                 var level=0;
-
-                                 _.each(keywords, function(keyword, index){
-
-                                   levels[keyword.identifier] = 1;
-                                   parents[keyword.identifier] = '';
-
-                                   if(keyword.broaderTerms.length === 0)
-                                        levels[keyword.identifier] = 0;
-
-                                    if(keyword.broaderTerms.length > 0){
-                                       levels[keyword.identifier] =  levels[keyword.broaderTerms] + 1;
-                                        parents[keyword.identifier] = keyword.broaderTerms.join();
-                                    }
-
-                                });
-
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, '', 'ABS Thematic Areas', levels[keyword.identifier], parents[keyword.identifier] );
-                                });
-
-                        });
-
-
-                        $q.when(commonjs.getKeyAreas(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, '', '');
-                                });
-                        });
-
-                        $q.when(commonjs.getCBI_audience(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, 'capacitybuildinginitiative resource capacitybuildingresource', 'Target Audience');
-                                });
-                        });
-
-                        $q.when(commonjs.getMSR_types(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, 'measure', 'Type');
-                                });
-                        });
-
-                        $q.when(commonjs.getMSR_status(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, 'measure', 'Legal Status');
-                                });
-                        });
-
-                         $q.when(commonjs.getMSR_elements(), function(keywords) {
-                                 var levels = [];
-                                 var parents = [];
-                                 var level=0;
-
-                                 _.each(keywords, function(keyword, index){
-
-                                   levels[keyword.identifier] = 1;
-                                   parents[keyword.identifier] = '';
-
-                                   if(keyword.broaderTerms.length === 0)
-                                        levels[keyword.identifier] = 0;
-
-                                    if(keyword.broaderTerms.length > 0){
-                                       levels[keyword.identifier] =  levels[keyword.broaderTerms] + 1;
-                                        parents[keyword.identifier] = keyword.broaderTerms.join();
-                                    }
-
-                                });
-
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, 'measure', 'Key elements', levels[keyword.identifier], parents[keyword.identifier] );
-                                });
-
-                        });
-
-                        //use term filter instead.
-                        $q.when(commonjs.getMSR_modelcontract(), function(keyword) {
-                              //  _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, 'measure', 'Contains model contractual clause');
-                               // });
-                        });
-
-                        $q.when(commonjs.getCNA_scope(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, 'authority', 'Scope of responsibilities');
-                                });
-                        });
-
-                         $q.when(commonjs.getMSR_jurisdictions(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword,  'measure', 'Jurisdiction');
-                                });
-                        });
-
-                         $q.when(commonjs.getCNA_jurisdictions(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword,  'authority', 'Jurisdiction');
-                                });
-                        });
-
-                        $q.when(commonjs.getMCC_keywords(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword,  'modelcontractualclause', 'Keyword');
-                                });
-                        });
-
-                        $q.when(commonjs.getMCC_types(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword,  'modelcontractualclause', 'Type');
-                                });
-                        });
-
-                        $q.when(commonjs.getCBI_cats(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Category');
-                                });
-                        });
-
-                        $q.when(commonjs.getCBI_types(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Type');
-                                });
-                        });
-                        $q.when(commonjs.getCBI_fundingsrc(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Funding Source');
-                                });
-                        });
-
-                        $q.when(commonjs.getCBI_status(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword,  'capacitybuildinginitiative', 'Status');
-                                });
-                        });
-
-                        $q.when(commonjs.getCBI_status(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, 'capacitybuildinginitiative', 'Status');
-                                });
-                        });
-
-                        $q.when(commonjs.getCBR_level(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword,  'resource capacitybuildingresource', 'Level');
-                                });
-                        });
-
-                        $q.when(commonjs.getCBR_purpose(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword,  'resource capacitybuildingresource', 'Purpose');
-                                });
-                        });
-
-                         $q.when(commonjs.getCBR_formats(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, 'resource capacitybuildingresource', 'Format');
-                                });
-                        });
-
-                        $q.when(commonjs.getCPP_types(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword,  'communityprotocol', 'Type');
-                                });
-                        });
-
-                         $q.when(commonjs.getAichiTargets(), function(keywords) {
-                                _.each(keywords, function(keyword, index){
-                                    addKeywordFilter(keyword, '', 'Aichi Targets');
-                                });
-                        });
-
-                    };
-
-                    function loadBCHKeywordFilters(){
-
-                        var bchTerms = [
-                            'decisionTypes',            
-                            'decisionLMOFFPSubject',    
-                            'decisionResults',          
-                            'riskAssessmentScope',      
-                            'dnaSequenceFamily',        
-                            'dnaSequenceTraits',        
-                            'legislationAgreementTypes',
-                            'subjectAreas',             
-                            'typeOfOrganisms',          
-                            'domestication',            
-                            'OrganismCommonUses',       
-                            'techniqueUsed',            
-                            'cnaJurisdictions',
-                        ]
-
-                        $q.all(_.map(bchTerms, thesaurusService.getDomainTerms))
-                        .then(function(results){
-                            console.log(results);
-                            _.each(results, function(terms){
-                                _.each(terms, function(term){
-                                    addKeywordFilter(term, 'bchTerm', "ABS Thematic Areas");
-                                })
-                            })
-                            console.log($scope.searchFilters)
-                        })
-                        
-
-                    }
-
-                    function isIdentifierDuplicate(keyword){                      
-                        var duplicate;
-                        _.reduce(customKeywords, function(memo, value, key){
-                            if(_.contains(value.identifiers, keyword.identifier)){
-                                duplicate = value;
-                            }
-                        },{})
-                        return duplicate;
-                    }
-                    //===============================================================================================================================
-                     function addKeywordFilter(keyword, related, parent, level, broader){
-                        if(!level)
-                            level=0;
-                        
-                         var dupIdentifier = isIdentifierDuplicate(keyword);
-                         if(dupIdentifier)
-                             addFilter(dupIdentifier.identifier + "@" +  related, {'type':'keyword', 'name':dupIdentifier.title[locale||'en'], 'id':dupIdentifier.identifier,
-                            'description':'',  'parent' : parent, 'related' : related, filterID: dupIdentifier.identifier + "@" +  related, 'level':level, 'broader': broader, isDuplicate : true});
-                         else
-                            addFilter(keyword.identifier + "@" +  related, {'type':'keyword', 'name':keyword.title[locale||'en'], 'id':keyword.identifier,
-                            'description':'',  'parent' : parent, 'related' : related, filterID: keyword.identifier + "@" +  related, 'level':level, 'broader': broader});
-
-                         //_.each(keyword.narrowerTerms,function(narrower){
-                        //    addKeywordFilter(narrower, keyword.identifier);
-                        //});
-                    }
-                    // //===============================================================================================================================
-                    //  function addThematicAreaFilter(keyword,related, parent){
-
-                    //     addFilter(keyword.identifier, {'type':'keyword', 'name':keyword.title[locale||en], 'id':keyword.identifier,
-                    //         'description':'', 'parent' : parent, 'related' : related});
-
-                    //     //_.each(keyword.narrowerTerms,function(narrower){
-                    //     //    addThematicAreaFilter(narrower, related, parent);
-                    //     //});
-                    // }
-
-
-                  //===============================================================================================================================
-                    function loadRegionsFilters(){
-
-                        $q.when(commonjs.getRegions(), function(regions) {
-                                //console.log(regions);
-                                _.each(regions, function(region, index){
-                                    //console.log(region);
-                                    addRegionFilter(region);
-                                });
-                        });
-                    };
-                    //===============================================================================================================================
-                    function addRegionFilter(region, parent){
-
-                        addFilter(region.identifier, {'type':'region', 'name':region.title[locale||en], 'id':region.identifier,
-                            'description':'', 'parent' : parent});
-
-                        _.each(region.narrowerTerms,function(narrower){
-                            addRegionFilter(narrower, region.identifier);
-                        });
-                    }
-                    //===============================================================================================================================
-                    function loadDateFilters(){
-                        addFilter('publishedOn',  {'sort': 1,'type':'date',  'name':'Published On', 'id':'publishedOn', 'description':'Date range when the record was published'});
-                    };
-
-                  //===============================================================================================================================
-                    function loadSchemaFilters() {
-                       
-                        
-                        _.each(realm.schemas, function(schema, key){
-                            if(!_.includes(['contact'], key)){
-                                addFilter(key,  {'sort': schema.sort,'type':schema.type,  'name':schema.title.en, 
-                                    'id':key, 'description':(schema.description||{}).en}); 
-                            }
-                        })                        
-
-                        addFilter('npParty',  {'sort': 1,'type':'partyStatus','name':'Party to the Protocol', 'id':'npParty', 'description':''});
-                        addFilter('npInbetween',  {'sort': 2,'type':'partyStatus','name':'Ratified, not yet Party to the Protocol', 'id':'npInbetween', 'description':''});
-                        addFilter('npNonParty',  {'sort': 3,'type':'partyStatus','name':'Not a Party to the Protocol ', 'id':'npNonParty', 'description':''});
-                        addFilter('npSignatory',  {'sort': 4,'type':'partyStatus','name':'Signatory to the Protocol', 'id':'npSignatory', 'description':''});
-
-
-                        //TODO get from scbd.json
-                        //SCBD
-                        addFilter('news',  {'sort': 1,'type':'scbd', 'name':schemaNames.news, 'id':'news', 'description':'ABS related news'});
-                        addFilter('notification',  {'sort': 2,'type':'scbd',  'name':schemaNames.notification, 'id':'notification', 'description':'ABS related notifications'});
-
-                        addFilter('new',  {'sort': 3,'type':'scbd', 'name':schemaNames.new, 'id':'new', 'description':'What\'s new'});
-                        addFilter('meeting',  {'sort': 4,'type':'scbd',  'name':schemaNames.meeting, 'id':'meeting', 'description':'ABS related meetings'});
-
-                        addFilter('statement',  {'sort': 3,'type':'scbd', 'name':schemaNames.statement, 'id':'statement', 'description':'ABS related statements'});
-                        addFilter('pressRelease',  {'sort': 4,'type':'scbd',  'name':schemaNames.pressrelease, 'id':'pressRelease', 'description':'ABS related press release'});
-                    };
-
-                  ///////////////
-                  ////===============================================================================================================================
-                  /////////
-
-                    function load(){
-                        //console.log("loading queries");
-                        switch ($scope.currentTab) {
-                            case "nationalRecords":
-                                if(refresh_nat)
-                                    nationalQuery();
-                                    refresh_nat = false;
-                                break;
-                           case "referenceRecords":
-                                if(refresh_ref)
-                                    referenceQuery();
-                                    refresh_ref = false;
-                                break;
-                           case "scbdRecords":
-                                if(refresh_scbd){
-                                    scbdQuery();
-                                    refresh_scbd = false;
-                                }
-                                break;
-                            default:
-                                nationalQuery();
-                                referenceQuery();
-                                scbdQuery();
-                                refresh_nat = false;
-                                refresh_ref = false;
-                                refresh_scbd = false;
-                                break;
-                        }
-                    };
-
-                    //===============================================================================================================================
-                    function loadTabFacets(){
-                            var qNational  = queryFilterBuilder("national");
-                            var qReference = queryFilterBuilder("reference");
-                            var qSCBD      = queryFilterBuilder("scbd");
-
-                            var query = {
-                                fields      : '_latest_s',
-                                currentPage : 0,
-                                rowsPerPage : 0
-                            };
-
-                            $q.all([searchService.list(_.extend({query : qNational  }, query), queryCanceler),
-                                    searchService.list(_.extend({query : qReference }, query), queryCanceler),
-                                    searchService.list(_.extend({query : qSCBD      }, query), queryCanceler)
-                            ])
-                            .then(function(results){
-                                //console.log(results);
-                                $scope.recordCount = _.map(results, function(data, index){
-                                                        return {
-                                                            //type : index == 1 ? 'national' : (index == 2 ? 'reference' : 'scbd'),
-                                                            count : data.data.response.numFound
-                                                        };
-                                                    });
-                            });
-                    }
-
-                    this.addFilter = addFilter;
-                    this.nationalQuery = nationalQuery;
-                    this.referenceQuery = referenceQuery;
-                    this.scbdQuery = scbdQuery;
-                    this.getSearchFilters = getSearchFilters;
-                    $scope.getSearchFilters = getSearchFilters;
-                    this.setSearchFilters = setSearchFilters;
-                    $scope.setSearchFilters = setSearchFilters;
-
-                    this.getFilter = getFilter;
+                    // function onSchemaFilterChanged(schema)
+
+                    ////////////////////////////////////////////
+                    ////// end internal functions
+                    ////////////////////////////////////////////
+                    init();
+                    
+                    this.getSearchFilters         = getSearchFilters        ;
                     this.getSearchFiltersByParent = getSearchFiltersByParent;
-
-                   //===============================================================================================================================
-                   if(!$scope.skipResults){
-                     $scope.$watch('currentTab', function(newVal, oldVal){
-                       if(newVal != oldVal)
-                            load();
-				      });
-                   }
-
-                    //===============================================================================================================================
-                    $scope.$watch('searchKeyword', function(){
-                        this.searchKeyword = $scope.searchKeyword;
-				    });
-
-
-                  //===============================================================================================================================
-                  if(!$scope.skipResults){
-                        $scope.$watch('refresh', function(newVal, oldVal){
-                            if(newVal && newVal !== oldVal){
-                                refreshResult();                                
-                                $scope.getRelatedKeywords();
-                            }
-                        });
-                  }
-
-                  function refreshResult(){
-                    refresh_nat = true;
-                    refresh_ref = true;
-                    refresh_scbd = true;
-                    nationalCurrentPage = 0;
-                    referenceCurrentPage = 0;
-                    scbdCurrentPage = 0;
-                    
-                    $scope.tabs['nationalRecords'].currentPage = 0;
-                    $scope.tabs['referenceRecords'].currentPage = 0;
-                    $scope.tabs['scbdRecords'].currentPage = 0;
-                    load();
-                    loadTabFacets();
-                    $scope.refresh = false;
-                  }
-
-                    //===============================================================================================================================
-                    $scope.getRelatedKeywords = function() {
-                       $scope.relatedKeywords ={};
-                       var relatedKeywords = {};
-                       var setIds = {};
-                       var keywords = getSearchFilters("keyword");
-
-                       if($scope.setFilters){
-
-                         _.each($scope.setFilters, function(set){
-
-                            relatedKeywords  =  _.filter(keywords, function(item){
-
-                                if(item.related.toLowerCase().indexOf(set.id.toLowerCase()) >= 0)
-                                    return item;
-                                else
-                                    return null;
-                             });
-                             if(!_.isEmpty(relatedKeywords))
-                                $scope.relatedKeywords[set.id] = relatedKeywords;
-                         });
-                       }
-
-
-
-                    }
-
-                    //===============================================================================================================================
-                    $scope.updateScrollPage = function() {
-
-                        if($scope.currentTab == 'nationalRecords'){
-                            var documents = _.pluck($scope.searchResult.rawDocs.groups, 'doclist');
-                            var docCount = getRecordCount(documents);
-                            
-                            //nationalCurrentPage cannot be more than 200 as No. parties are 196 to CBD
-                            if(nationalCurrentPage > 200 || $scope.nationalLoading || !$scope.recordCount || docCount == $scope.recordCount[0].count)
-                                return;
-
-                            $scope.nationalLoading = true;
-                            nationalCurrentPage += 1;
-                            nationalQuery();
-                        }
-                        else if($scope.currentTab == 'referenceRecords'){
-                            if(referenceCurrentPage > 1000 && $scope.referenceLoading || !$scope.recordCount || ($scope.searchResult.refDocs.docs||[]).length == $scope.recordCount[1].count)
-                                return;
-                            $scope.referenceLoading = true;
-                            referenceCurrentPage += 1;
-                            referenceQuery();
-                        }
-                        else if($scope.currentTab == 'scbdRecords'){
-                            if(referenceCurrentPage > 1000 && $scope.scbdLoading || !$scope.recordCount || ($scope.searchResult.scbdDocs.docs||[]).length == $scope.recordCount[2].count)
-                                return;
-
-                            $scope.scbdLoading = true;
-                            scbdCurrentPage += 1;
-                            scbdQuery();
-                        }
-
-                    };
-
-                    //===============================================================================================================================
-                    function getRecordCount(documents){
-                        return _.reduce(_.pluck(documents, 'numFound'), function(mem,d){ return mem + d;},0);
-                    }
-
-                    //===============================================================================================================================
-                    loadFilters();
-
-
-                    if(!$scope.skipResults && $routeParams.recordType){
-                        if($routeParams.recordType == 'run-query'){
-                            var queryFilter = localStorageService.get("run-query");                            
-                            setSearchFilters(queryFilter);
-                            $scope.refresh = false;
-                        }
-                        else{
-                            $scope.currentTab = $routeParams.recordType;
-
-                            var query =  $location.search();
-
-                            if(query){
-
-                                if(query.text){
-                                    $scope.saveFreeTextFilter(query.text);
-                                }
-                                if(query.country){
-                                    $scope.saveFilter(query.country);
-                                }
-                                if(query.schema){
-                                    $scope.saveFilter(query.schema);
-                                }
-                                $scope.refresh = false;
-                            }
-                        }
-                    }
-
-                    $scope.canShowSaveFilter = function(){
-                        return !$scope.skipSaveFilter && !_.isEmpty($scope.setFilters);
-                    }
-
-                    $scope.isUserAuthenticated = function() {
-                        //console.log("user = " + $rootScope.user.isAuthenticated);
-                        return $rootScope.user && $rootScope.user.isAuthenticated;
-                    }
-
-                    $scope.showSaveFilter = function(existingFilter){
-                        if($rootScope.user && !$rootScope.user.isAuthenticated){
-                            var signIn = $scope.$on('signIn', function(evt, data){
-                                 $scope.showSaveFilter();
-                                 signIn();
-                            });
-                            $('#loginDialog').modal("show");
-                        }
-                        else{
-
-                            var filters = $scope.setFilters;
-
-                            ngDialog.open({
-                                className : 'ngdialog-theme-default wide',
-                                template : 'saveFilterDialog',
-                                controller : ['$scope', '$http','realm', function($scope, $http, realm){
-                                        if(existingFilter)
-                                            $scope.record = existingFilter;
-                                        else
-                                            $scope.record = {filters : _.values(filters) }
-                                        
-                                        $scope.record.realm = realm.value;
-                                        $scope.record.isSystemAlert = false;
-
-                                        $scope.saveFilter = function(){
-                                            $scope.loading = true;                                            
-                                            var operation = $http.post('/api/v2016/me/subscriptions', $scope.record);
-                                            if($scope.record._id)
-                                                operation = $http.put('/api/v2016/me/subscriptions/' + $scope.record._id, $scope.record);
-                                            operation.then(function (data) {
-                                                record = data.data;
-                                                $scope.closeDialog();
-                                            });
-                                        }
-                                        $scope.closeDialog = function(){
-                                            ngDialog.close();                                            
-                                        }
-
-                                }]
-                            })
-                        }
-                    } 
-
-                    $scope.runFilter = function(filter){
-
-                        if(filter.filters){
-                            setSearchFilters(filter.filters);
-                        }
-                    }
-
-                    $scope.clearFilter = function(){
-                        $scope.setFilters = {};
-                        // $scope.refresh = !$scope.refresh;
-                        refreshResult();
-                    };
-                    
-                    if(!$scope.skipResults){ 
-                        load();
-                        loadTabFacets();
-                    }
-
-                    $scope.getExportQuery = function(){
-                       
-                       if($scope.currentTab =='nationalRecords')
-                            return $scope.exportNationalQuery;
-                       if($scope.currentTab =='referenceRecords')
-                            return $scope.exportReferenceQuery;
-                       if($scope.currentTab =='scbdRecords')
-                            return $scope.exportScbdQuery;
-                    
-                    }
-                    $scope.getRecordType = function(){
-                        return $scope.currentTab==='nationalRecords' ? 'group' : 'list';
-                    }
-                   
-                    
-                    $scope.tour = function(){
-                        $scope.tourOn = true;
-                        var joyride = joyrideService;
-                        
-                        joyride.config = {
-                            onStepChange: function(){  },
-                            onStart: function(){  },
-                            onFinish: function(){ 
-                                joyride.start = false;
-                                $scope.tourOn = false; 
-                                $scope.showFilters = false;                                
-                                $scope.showDownloadDialog = false;                                
-                                $('#recordsContent').removeClass('active jr_target'); 
-                                // $timeout(function(){
-                                // // $scope.updateCurrentTab('nationalRecords');
-                                // }, 100)
-                            },
-                            steps : [
-                                
-                                  {   appendToBody:true,
-                                      title: joyRideText.step1.title,
-                                      content: joyRideText.step1.content,
-                                  },
-                                 
-                                  {
-                                      type: 'element',
-                                      selector: "#freeText",
-                                      title: joyRideText.step2.title,
-                                      content: joyRideText.step2.title
-                                  },
-                                  {   appendToBody:true,
-                                      type: 'element',
-                                      selector: "#recordTypesFilterTab",
-                                      title: joyRideText.step3.title,
-                                      content: joyRideText.step3.content,
-                                      placement: 'top',
-                                      beforeStep: openFilterTab
-                                  },
-                                  {
-                                      appendToBody:true,
-                                      type: 'element',
-                                      selector: "#keywordsFilterTab",
-                                      title: joyRideText.step4.title,
-                                      content: joyRideText.step4.content,
-                                      placement: 'top',
-                                      beforeStep: openFilterTab
-                                  },
-                                  {
-                                      appendToBody:true,
-                                      type: 'element',
-                                      selector: "#referenceRecordsTab",
-                                      title: joyRideText.step5.title,
-                                      content: joyRideText.step5.content,
-                                      placement: 'top',
-                                      beforeStep: openRecordsTab
-                                  },
-                                  {
-                                      appendToBody:true,
-                                      type: 'element',
-                                      selector: "#exportRecords",
-                                      title: joyRideText.step6.title,
-                                      content: joyRideText.step6.content,
-                                      placement: 'left'
-                                  },
-                                  {
-                                       appendToBody:true,
-                                      type: 'element',
-                                      selector: "#record1",
-                                      title: joyRideText.step7.title,
-                                      content: joyRideText.step7.content,
-                                      placement: 'top',
-                                      beforeStep: gotoFirstRefRecord
-                                  }
-                              ]
-                        };
-                        joyride.start = true;
-
-                        function openFilterTab(resumeJoyride){
-                            var step = joyride.config.steps[joyride.current];
-                            $scope.showFilters = step.selector.replace('#','').replace('Tab', '');
-                            resumeJoyride();
-                        }
-
-                        function openRecordsTab(resumeJoyride){
-                            var step = joyride.config.steps[joyride.current];
-                            $scope.updateCurrentTab(step.selector.replace('#','').replace('Tab', ''));
-                            $('#recordsContent').addClass('active jr_target');
-                            resumeJoyride();
-                        }
-
-                        function gotoFirstRefRecord(resumeJoyride){
-                            var step = joyride.config.steps[joyride.current];
-                            $scope.updateCurrentTab("referenceRecords");
-                            $('#record1').addClass('active jr_target');
-                            resumeJoyride();
-                        }
-
-                        function openExportDialog(resumeJoyride){
-                            var step = joyride.config.steps[joyride.current];
-                            $scope.showDownloadDialog = true;   
-                            $timeout(function(){
-                                resumeJoyride();
-                            }, 200);
-                            $timeout(function(){
-                                $('.jr_container').css('z-index', 10000); 
-                            }, 500);
-                            
-                        }                        
-                    }
-
-                    $scope.onPageChange = function(page){
-                        $scope.tabs[$scope.currentTab].currentPage = page;
-                        if($scope.currentTab==='nationalRecords'){
-                            nationalQuery()
-                        }
-                        else if($scope.currentTab==='referenceRecords'){
-                            referenceQuery()
-                        }
-                        else if($scope.currentTab==='scbdRecords'){
-                            scbdQuery()
-                        }
-                        
-
-                    }
-
-
+                    this.addFilter                = addFilter               ;
+                    this.getSearchFilters         = getSearchFilters        ;
+                    this.setSearchFilters         = setSearchFilters        ;
+                    this.getFilter                = getFilter               ;
 
             }]//controller
         };
