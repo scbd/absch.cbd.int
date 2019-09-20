@@ -5,7 +5,7 @@ define(['angular-flex', 'angular-animate', 'angular-sanitize', 'angular-loggly-l
             'ngAnimate', 'ngSanitize', 'ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'toastr',
             'angular-intro', 'scbdControls', 'ngLocalizer', 'angularTrix', 'cbd-forums',
             'ng-breadcrumbs', 'scbdServices', 'scbdFilters', 'smoothScroll', 'ngMessages', 'ngStorage', 'ngDialog',
-            'infinite-scroll', 'logglyLogger', 'angular-joyride', 'ngMeta'
+            'infinite-scroll', 'logglyLogger', 'angular-joyride', 'ngMeta', 'dndLists'
         ]));
 
         app.config(["LogglyLoggerProvider", 'ngMetaProvider',  function (LogglyLoggerProvider, ngMetaProvider) {
