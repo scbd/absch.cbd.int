@@ -9,34 +9,37 @@ define(['app', 'underscore'], function (app, _) {
                 return $http.get('/api/v2013/thesaurus/domains/' + domainIdentifier , {cache:true});
             };
 
-            this.getDomainTerms = function(termIdentifier, includeOthers){
-                return fn_getDomainTerms(termIdentifier, includeOthers);
+            this.getDomainTerms = function(termIdentifier, options){
+                return fn_getDomainTerms(termIdentifier, options);
             };
 
             this.getTerms = function(term){
-                return $http.get('/api/v2013/thesaurus/terms/' + terms[term] , {cache:true})
+                return $http.get('/api/v2013/thesaurus/terms/' + (terms[term]||term) , {cache:true})
                 .then(function(termData){
                     return termData.data;
                 });;
             };
 
-            function fn_getDomainTerms(termIdentifier, includeOthers){
+            function fn_getDomainTerms(termIdentifier, options){
                 if(!termIdentifier)
                     throw "Domain term is missing";
 
+                options = options || {};
                 var url = '/api/v2013/thesaurus/domains/' + domainTerms[termIdentifier] + '/terms';
 
-                if(includeOthers){
-                    var urlOther = '/api/v2013/thesaurus/terms/' + domainTerms['others'];
+                if(options.other){
+                    var urlOther = '/api/v2013/thesaurus/terms/' + domainTerms['other'];
                     return $q.all([$http.get(url, {cache:true}),$http.get(urlOther), {cache:true}])
                                 .then(function(termData){
-                                    var data = termData[0].data;
-                                    data.push(termData[1].data);
+                                    var data   = termData[0].data;
+                                    var other  = termData[1].data;
+                                    other.type = options.otherType; //lstring or int etc
+                                    data.push(other);
                                     return data;
                                 });
                 }
-                if(termIdentifier == 'others'){
-                    url = '/api/v2013/thesaurus/terms/' + domainTerms.others;
+                if(termIdentifier == 'other'){
+                    url = '/api/v2013/thesaurus/terms/' + domainTerms.other;
                     return $q.when($http.get(url, {cache:true}))
                              .then(function(data){
                                 return data.data;
@@ -49,12 +52,12 @@ define(['app', 'underscore'], function (app, _) {
                             });
             }
             var terms = {
-                others                   : "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                other                   : "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
             }
             var domainTerms = {
                 countries                : "countries",
                 regions                  : "regions",
-                others                   : "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                other                    : "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
                 jurisdiction             : "7A56954F-7430-4B8B-B733-54B8A5E7FF40",
                 status                   : "ED7CDBD8-7762-4A84-82DD-30C01458A799",
                 typeOfDocuments          : "144CF550-7629-43F3-817E-CACDED34837E",                
@@ -81,7 +84,10 @@ define(['app', 'underscore'], function (app, _) {
                 typeOfOrganisms          :  'TypeOfOrganisms',
                 domestication            :  'B89720B8-81BF-4A6B-8084-8D464403C25A',
                 OrganismCommonUses       :  'OrganismCommonUses',
-                techniqueUsed            :  'ABE9DCE3-92BA-4D5D-8948-7F7E541EEC6B'
+                techniqueUsed            :  'ABE9DCE3-92BA-4D5D-8948-7F7E541EEC6B',
+                organizationTypes        :  'Organization Types',
+                expertiseArea            :  '31855BDF-ADFF-460A-8FB8-975C8C325DAA',
+                supplementaryProtocolFunctions: 'CD613FCE-7A2A-475C-85A1-C2D1C208EC0C'
                 
             }
         }
