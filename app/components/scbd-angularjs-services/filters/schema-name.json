@@ -1,30 +1,4 @@
 ﻿{
-    "meetingDocument": {
-        "type": "scbd",
-        "title": {
-            "en": "Meeting Document"
-        },
-        "description": {
-            "en": "Meeting Document"
-        },
-        "shortCode": "MTD",
-        "titlePlural": {
-            "en": "Meeting Document"
-        }
-    },
-    "pressRelease": {
-        "type": "scbd",
-        "title": {
-            "en": "Press Release"
-        },
-        "description": {
-            "en": "Press Release"
-        },
-        "shortCode": "PR",
-        "titlePlural": {
-            "en": "Press Releases"
-        }
-    },
     "news": {
         "type": "scbd",
         "title": {
@@ -36,6 +10,19 @@
         "shortCode": "NEWS",
         "titlePlural": {
             "en": "News"
+        }
+    },
+    "notification": {
+        "type": "scbd",
+        "title": {
+            "en": "Notification"
+        },
+        "description": {
+            "en": "Notification"
+        },
+        "shortCode": "NT",
+        "titlePlural": {
+            "en": "Notifications"
         }
     },
     "new": {
@@ -51,19 +38,6 @@
             "en": "What's New"
         }
     },
-    "statement": {
-        "type": "scbd",
-        "title": {
-            "en": "Statement"
-        },
-        "description": {
-            "en": "Statements"
-        },
-        "shortCode": "ST",
-        "titlePlural": {
-            "en": "Statement"
-        }
-    },
     "meeting": {
         "type": "scbd",
         "title": {
@@ -77,17 +51,43 @@
             "en": "Meetings"
         }
     },
-    "notification": {
+    "statement": {
         "type": "scbd",
         "title": {
-            "en": "Notification"
+            "en": "Statement"
         },
         "description": {
-            "en": "Notification"
+            "en": "Statements"
         },
-        "shortCode": "NT",
+        "shortCode": "ST",
         "titlePlural": {
-            "en": "Notifications"
+            "en": "Statement"
+        }
+    },
+    "pressRelease": {
+        "type": "scbd",
+        "title": {
+            "en": "Press Release"
+        },
+        "description": {
+            "en": "Press Release"
+        },
+        "shortCode": "PR",
+        "titlePlural": {
+            "en": "Press Releases"
+        }
+    },
+    "meetingDocument": {
+        "type": "scbd",
+        "title": {
+            "en": "Meeting Document"
+        },
+        "description": {
+            "en": "Meeting Document"
+        },
+        "shortCode": "MTD",
+        "titlePlural": {
+            "en": "Meeting Document"
         }
     }
 }
