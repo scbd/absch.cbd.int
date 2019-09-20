@@ -51,12 +51,12 @@
 											<div class="km-control-group" name="hasUniqueIdentification" required caption="Does this LMO have a unique identifier?">
 												<div class="help-block">The BCH is currently using the Unique Identifier system as set out in the OECD Guidance for the Designation of Unique Identifiers for Transgenic Plants (example MON-ØØ81Ø-6). 
 													For more information see <a href="http://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml">http://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml</a>.</div>
-												<div km-yes-no required ng-model="hasUniqueIdentification" locales="document.header.languages"></div>
+												<div km-yes-no required ng-model="document.hasUniqueIdentification" locales="document.header.languages"></div>
 											</div>
 										</div>
-										<div class="col-sm-12" ng-if="hasUniqueIdentification">
+										<div class="col-sm-12" ng-if="document.hasUniqueIdentification">
 											<div class="km-control-group" required name="uniqueIdentification" caption="Unique identifier">
-												<input type="text" class="form-control" name="uniqueIdentification" required ng-model="document.transformationEvent"/>
+												<input type="text" class="form-control" name="uniqueIdentification" required ng-model="document.uniqueIdentification"/>
 											</div>
 										</div>
 										<div class="col-xs-12">
@@ -107,7 +107,7 @@
 										</div>
 										<div class="col-sm-12">
 											<div class="km-control-group"  name="techniqueUsed" caption="Techniques used for the modification">
-												<div km-term-check name="techniqueUsed" required ng-model="document.techniqueUsed" terms="options.techniqueUsed" binding-type="term[]"></div>
+												<div km-term-check name="techniqueUsed" required layout="list" locales="document.header.languages" ng-model="document.techniqueUsed" terms="options.techniqueUsed" binding-type="term[]"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
@@ -119,7 +119,7 @@
 										</div>
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="geneConstructs" caption="Genetic elements construct">
-												<div class="help-block"></div>
+												<lmo-construct ng-model="document.geneConstructs" ng-change="onConstructChange()"></lmo-construct>
 											</div>
 										</div>
 										<div class="col-xs-12">
@@ -137,27 +137,122 @@
 								<div class="well no-shadow bg-white">
 									<legend>LMO characteristics</legend>
 									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="isGeneEdited" required
+												caption="Was this LMO produced through a gene editing technique?">
+												<div km-yes-no required ng-model="document.isGeneEdited" locales="document.header.languages">
+												</div>
+											</div>
+										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="traits" caption="Modified Traits">
-												<div km-term-check name="traits" required ng-model="document.traits" terms="options.traits" binding-type="term[]"></div>
+											<div class="km-control-group" required name="traits" caption="">												
+												<table class="table table-bordered">
+													<tr>
+														<th colspan="2">Modified Traits</th>
+													</tr>
+													<tr>
+														<td colspan="2">
+															<legend>Resistance to diseases and pests</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['81799D15-669E-4346-9AEC-6834893D2BE4']"
+																terms="options.traits('81799D15-669E-4346-9AEC-6834893D2BE4')" binding-type="term[]"></div>
+														</td>
+													</tr>
+													<tr>
+														<td width="50%">
+															<legend>Resistance to herbicides</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['0C74FEB2-78E8-4163-81EF-2D410FB2FBBC']"
+																terms="options.traits('0C74FEB2-78E8-4163-81EF-2D410FB2FBBC')" binding-type="term[]"></div>
+														</td>
+														<td>
+															<legend>Resistance to antibiotics</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['87D98E42-4757-42DE-9C3F-815BFAA35218']"
+																terms="options.traits('87D98E42-4757-42DE-9C3F-815BFAA35218')" binding-type="term[]"></div>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<legend>Tolerance to abiotic stress</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['31396BD1-9E3E-4EB3-A29E-9A22B7230221']"
+																terms="options.traits('31396BD1-9E3E-4EB3-A29E-9A22B7230221')" binding-type="term[]"></div>
+															</div>
+														</td>
+														<td>
+															<legend>Changes in physiology and/or production</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['337747E5-522D-42DF-8C57-FE626C1572EC']"
+																terms="options.traits('337747E5-522D-42DF-8C57-FE626C1572EC')" binding-type="term[]"></div>
+														</td>
+													</tr>
+													<tr>
+														
+														<td>
+															<legend>Changes in quality and/or metabolite content</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['3B427EA6-5260-47F1-B424-FAAA5960FB52']"
+																terms="options.traits('3B427EA6-5260-47F1-B424-FAAA5960FB52')" binding-type="term[]"></div>
+														</td>
+														<td>
+															<legend>Production of medical or pharmaceutical compounds (human
+																or animal)</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['5B9DB3B4-90A1-451A-A10C-E3A47995344F']"
+																terms="options.traits('5B9DB3B4-90A1-451A-A10C-E3A47995344F')" binding-type="term[]"></div>
+														</td>
+													</tr>
+													<tr>														
+														<td>
+															<legend>Use in industrial applications</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['C8C662E2-D633-4C69-96EA-C9853997A3A5']"
+																terms="options.traits('C8C662E2-D633-4C69-96EA-C9853997A3A5')" binding-type="term[]"></div>
+														</td>
+														<td>
+															<legend>Engineered (gene drive application)</legend>
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['Engineered']"
+																terms="options.traits('Engineered')" binding-type="term[]"></div>
+														</td>
+													</tr>
+													<tr>														
+														<td>
+															<!-- <legend></legend> -->
+															<div km-term-check name="traits" locales="document.header.languages" required
+																ng-model="traits['traitsOtherSection']"
+																terms="options.traitsOtherSection()" binding-type="term[]"></div>
+														</td>
+														<td>															
+														</td>
+													</tr>
+												</table>
+													
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="affectedGenes" caption="Other gene(s) whose expression was affected by the transformation">	
-												<div class="help-block">This section should be used to specify changes in the expression of genes other than those that were inserted into the LMO; for example, gene silencing or induction.</div>
+											<div class="km-control-group" required name="affectedGenes"
+												caption="Other gene(s) whose expression was affected by the transformation">
+												<div class="help-block">This section should be used to specify changes in the expression of
+													genes other than those that were inserted into the LMO; for example, gene silencing or
+													induction.</div>
 												<div document-selector ng-model="document.affectedGenes" question="affectedGenes"
-													schema="(dnaSequence)" caption="Gene and DNA Sequence"></div>			
+													schema="(dnaSequence)" caption="Gene and DNA Sequence"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="geneNotes" caption="Please describe how the expression of the gene(s) was affected">	
-												<div km-textbox-ml name="geneNotes"  ng-model="document.geneNotes" locales="document.header.languages"></div>	
+											<div class="km-control-group" name="geneNotes"
+												caption="Please describe how the expression of the gene(s) was affected">
+												<div km-textbox-ml name="geneNotes" ng-model="document.geneNotes"
+													locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="commonUses" caption="LMO's common use(s)">
+											<div class="km-control-group" name="commonUses" caption="LMO's common use(s)">
 												<div class="help-block">Choose as many options as applicable.</div>
-												<div km-term-check name="commonUses" required ng-model="document.commonUses" terms="options.commonUses" binding-type="term[]"></div>
+												<div km-term-check name="commonUses" required ng-model="document.commonUses"
+													terms="options.commonUses" binding-type="term[]"></div>
 											</div>
 										</div>
 									</div>
@@ -231,10 +326,14 @@
 					</form>
 				</edit-form>
 				<review-form>
-					<div view-lmo ng-model="document" locale="review.locale" allow-drafts="true"></div>
+					<div view-modified-organism ng-model="document" locale="review.locale" allow-drafts="true"></div>
 				</review-form>
 			</workflow-arrow-buttons>
 		</div>
 	</div>
-</div>
+	<div id="constructSection">
+		<script type="text/ng-template" trados-translation="true" id="geneConstructModal">
+			<lmo-construct ng-model="geneConstruct" close-dialog="closeDialog(updatedConstruct)"></lmo-construct>
+		</script>
+	</div>
 </div>
