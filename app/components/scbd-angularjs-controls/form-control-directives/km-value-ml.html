@@ -1,5 +1,5 @@
 ﻿<div id="km-value-ml">	
-		<div ng-repeat="locale in self.localesToDisplay" class="input-group" ng-class="{ 'multiple-languages' : self.localesToDisplay.length>1 && !last }"
+		<div ng-repeat="locale in self.localesToDisplay" class="input-group input-lang-{{locale}}" ng-class="{ 'multiple-languages' : self.localesToDisplay.length>1 && !last }"
 				ng-if="self.localesToDisplay.length ==1 || (self.localesToDisplay.length>1 && self.value[locale])">
 	
 			<div ng-if="!html" class="km-value km-value-ml-div" ng-style="{ direction : (self.value|direction:locale)}" 
