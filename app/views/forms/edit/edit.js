@@ -7,17 +7,17 @@ define([
     'views/forms/edit/document-selector',
     'views/register/directives/register-top-menu',
     'components/scbd-angularjs-services/services/locale',
-    'views/directives/workflow-arrow-buttons'
+    'views/directives/workflow-arrow-buttons', 'services/app-config-service'
 ], function (app, _, Enumerable) {
   
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
-                                   "breadcrumbs", "appConfigService", "locale", 'ngMeta',
+                                   "breadcrumbs", "appConfigService", "locale", 'ngMeta', "realm",
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
                                               authentication, editFormUtility, $routeParams, $timeout, $route, 
-                                              breadcrumbs, appConfigService, locale, ngMeta) {
+                                              breadcrumbs, appConfigService, locale, ngMeta, realm) {
 
-
+    $scope.realm = realm;
     $scope.type = $route.current.$$route.documentType;
     
     if(_.includes(appConfigService.nationalSchemas, $filter('mapSchema')($scope.type)))
