@@ -1,4 +1,5 @@
-define(['app', 'text!./km-document-validation.html','jquery'], function(app, template,$) { 'use strict';
+define(['app', 'text!./km-document-validation.html','jquery',
+'json!app-data/validation-errors.json'], function(app, template,$, messages) { 'use strict';
 
     //============================================================
     //
@@ -66,8 +67,21 @@ define(['app', 'text!./km-document-validation.html','jquery'], function(app, tem
 
                         for (var index = 0; index < newVal.errors.length; index++) {
                             var error = newVal.errors[index];
-                            error.typeLabel     = getTranslation(error.code, error.property, error.parameters)
-                            error.propertyLabel = getLabel(error.property)
+                            error.typeLabel     = getTranslation(error.code);
+
+                            if(error.properties){
+                                for (var i in error.properties) {
+                                    var field = error.properties[i];
+                                    var property = {};
+                                    property.typeLabel     = getTranslation(error.code);
+                                    property.propertyLabel = getLabel(field);
+                                    property.property      = field;
+                                    error.properties[i] = property;
+                                }
+                            }
+                            else{
+                                error.propertyLabel = getLabel(error.property);
+                            }
                         }    
                     }
                     
@@ -96,13 +110,14 @@ define(['app', 'text!./km-document-validation.html','jquery'], function(app, tem
                 //
                 //====================
                 function getTranslation(code, property, param) {
-                    if (code === null || code === "") return "Unknown error";
-                    if (code == "Error.Mandatory") return "Field is mandatory";
-                    if (code == "Error.InvalidValue") return "The value specified is invalid";
-                    if (code == "Error.InvalidProperty") return "This value cannot be specified";
-                    if (code == "Error.UnspecifiedLocale") return "A language is use but not speficied in your document";
-                    if (code == "Error.UnexpectedTerm") return "A specified term cannot be used";
-                    if (code == "Error.InvalidType") return "The fields type is invalid";
+                    if (code === null || code === ""        ) return messages.unknown;
+                    if (code == "Error.Mandatory"           ) return messages.mandatory
+					if (code == "Error.MandatoryAnyOf"      ) return messages.mandatoryAnyOf
+                    if (code == "Error.InvalidValue"        ) return messages.invalidValue
+                    if (code == "Error.InvalidProperty"     ) return messages.invalidProperty
+                    if (code == "Error.UnspecifiedLocale"   ) return messages.unspecifiedLocale
+                    if (code == "Error.UnexpectedTerm"      ) return messages.unexpectedTerm
+                    if (code == "Error.InvalidType"         ) return messages.invalidType
                     return code;
                 };
 
