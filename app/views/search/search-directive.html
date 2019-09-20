@@ -58,6 +58,10 @@
                             <i ng-if="showFilters=='userSearchFilter'" class="fa fa-times-circle"></i>
                             <i ng-if="!showFilters || showFilters!='userSearchFilter'" class="fa fa-caret-down"></i>
                             &nbsp; My saved searches</a> </li>
+                    <li class="pull-right" style="line-height: 5px">
+                        <result-view-options sort-fields="searchResult.sortFields" view-type="searchResult.viewType" group-by-fields="searchResult.groupByFields"
+                         on-sort-by-change="onSortByChange(fields)"  on-view-type-change="onViewTypeChange(options)"></result-view-options>
+                    </li>
                 </ul>
             </div>
             
@@ -94,7 +98,7 @@
                 <country-filter ng-if="showFilters==='countryFilter' || (searchKeyword && !showFilters)"></country-filter>
                 <region-filter ng-if="showFilters==='regionFilter' || (searchKeyword && !showFilters)"></region-filter>
                 <date-filter ng-if="showFilters==='dateFilter' && !skipDateFilter"></date-filter>
-                 <div ng-if="showFilters==='userSearchFilter' && !skipSaveFilter">
+                <div ng-if="showFilters==='userSearchFilter' && !skipSaveFilter">
                     <h4>Your predefined searches <small> - keep up to date when records are published </small></h4> 
                     <user-alerts run-query-in-page="true"></user-alerts>
                 </div>
@@ -102,77 +106,26 @@
         </div>
     </div>
 
-    <div class="container-fluid" style="margin-top:10px;" ng-if="!skipResults">
+    <div class="container-fluid" style="margin-top:10px;" >
+        <!-- ng-if="!skipResults" -->
         <div class="row" style="padding:10px 0 0 0;margin:0px;">
-            <div class="col-xs-12" style="padding:0;margin:0;">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs search-tab-title" >
-                    <li id="nationalRecordsTab" ng-class="{'active':currentTab==='nationalRecords'}">
-                        <a translation-url  href="#" class="color-blue" ng-click="updateCurrentTab('nationalRecords')">
-                            National <span class="hidden-xs">records</span> <span class="badge bg-blue" style="margin-left:10px;">{{recordCount[0].count}}</span></a></li>
-                    <li id="referenceRecordsTab" ng-class="{'active':currentTab==='referenceRecords'}"><a translation-url  href="#" class="color-orange" ng-click="updateCurrentTab('referenceRecords')">Reference <span class="hidden-xs">records</span> <span class=" badge bg-orange" style="margin-left:10px;">{{recordCount[1].count}}</span></a></li>
-                    <li id="scbdRecordsTab" ng-class="{'active':currentTab==='scbdRecords'}"><a translation-url  href="#" class="color-darkgrey" ng-click="updateCurrentTab('scbdRecords')">SCBD <span class="hidden-xs">records</span> <span class="badge" style="margin-left:10px;">{{recordCount[2].count}}</span></a></li>
-                    <!--<li class="pull-left">Download</li>-->
-                </ul>
+            <!-- Search Result -->
+            <div class="bg-white hidden-xs" ng-class="{'col-xs-2':leftMenuFilters}" style="border:1px solid #eee" ng-show="leftMenuFilters">
+                <div left-side-filter></div>
             </div>
-            <!-- Tab panes -->
-            <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;" id="recordsContent">
-                <div  class="pull-right btn"  ng-if="tabs[currentTab].pageCount>0" style="border:1px solid #eee" id="exportRecords" 
-                    export export-query="getExportQuery()" query-type="getRecordType()" help-title="Export result from this tab to excel/csv" 
-                    open-dialog="showDownloadDialog"></div>
-                 
-                <div class="text-center" ng-if="tabs[currentTab].pageCount>0" pagination current-page="tabs[currentTab].currentPage" 
-                     page-count="tabs[currentTab].pageCount" on-page-change="onPageChange(page)"></div> 
-               
-                <div class="tab-pane bg-white" ng-class="{'active':currentTab==='nationalRecords'}" ng-if="currentTab==='nationalRecords'">                     
-                        <!-- <div block-region activate="nationalLoading"></div> -->                       
-                        <div ng-if="nationalLoading">
-                            <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
-                        </div>
-                        <div ng-repeat="country in searchResult.rawDocs" id="search-country-group">
-                            <national-records-country group='country'></national-records-country>
-                        </div>
-                        <div ng-if="nationalLoading">
-                            <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
-                        </div>
-                        <h4 class="bg-white" ng-if="!nationalLoading && !searchResult.rawDocs.groups.length"><br>no records found</h4>
-                </div>
-                <div class="tab-pane bg-white" ng-class="{'active':currentTab==='referenceRecords'}" ng-if="currentTab=='referenceRecords'">
-                         <!-- <div block-region activate="referenceLoading"></div> -->
-                    <div class="row">  
-                        <div class="col-md-12">
-                            <div ng-if="referenceLoading">
-                                <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
-                            </div>
-                            <div ng-repeat="rec in searchResult.refDocs.docs">
-                                <result-default doc=rec type="referenceRecords"></result-default>
-                            </div>
-                            <div ng-if="referenceLoading">
-                                <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
-                            </div>
-                            <h4 class="bg-white" ng-if="!referenceLoading && searchResult.refDocs.docs.length === 0">no records found</h4>
-                        </div>
+            <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;border: 1px solid #eee;" id="recordsContent" ng-class="{'col-xs-10':leftMenuFilters}">
+              
+                <div ng-switch="searchResult.viewType">
+                    <div ng-switch-when="list">
+                        <div search-result-list-view api="searchResult.listViewApi"></div>
+                    </div>
+                    <div ng-switch-when="group">
+                        <div search-result-group-view api="searchResult.groupViewApi"></div>                       
+                    </div>
+                    <div ng-switch-when="matrix">
+                        Matrix view coming soon      
                     </div>
                 </div>
-                <div class="tab-pane bg-white" ng-class="{'active':currentTab==='scbdRecords'}" ng-if="currentTab=='scbdRecords'">
-                    <!-- <div block-region activate="scbdLoading"></div> -->
-                    <div class="row">  
-                        <div class="col-md-12">
-                            <div ng-if="scbdLoading">
-                                <i class="fa fa-spin fa-spinner "  style="margin-left:50%"></i> loading..
-                            </div>
-                            <div ng-repeat="rec in searchResult.scbdDocs.docs">
-                                <result-default doc=rec type="scbdRecords"></result-default>
-                            </div>
-                            <div ng-if="scbdLoading">
-                                <i class="fa fa-spin fa-spinner "  style="margin-left:50%"></i> loading..
-                            </div>
-                            <h4 class="bg-white" ng-if="!scbdLoading && searchResult.scbdDocs.docs.length === 0">no records found</h4>
-                        </div>
-                    </div>
-                </div>
-                <div  class="text-center" ng-if="tabs[currentTab].pageCount>0" pagination current-page="tabs[currentTab].currentPage" 
-                    page-count="tabs[currentTab].pageCount" on-page-change="onPageChange(page)"></div> 
                
             </div>
         </div>

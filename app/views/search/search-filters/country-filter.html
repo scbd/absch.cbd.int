@@ -23,9 +23,12 @@
         <div ng-repeat="doc in cf_filters = (cf_countries | filter:searchKeyword | orderBy:'name')">
 
             <div ng-if="cf_showCountry(doc)">
-            <a translation-url  class="filter"  ng-click="saveFilter(doc)" >
+            <a translation-url  class="filter"  ng-click="saveFilter(doc, $parent.searchResult.data.facets.countries[doc.id])" 
+            ng-class="::{'disabled':!$parent.searchResult.data.facets.countries[doc.id]}">
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
-                <span  class="bold" ng-class="{'color-party': doc.isAppProtocolParty, 'color-inbetween':doc.isNPInbetweenParty, 'color-nonparty':!doc.isAppProtocolParty && !doc.isNPInbetweenParty }">{{doc.name}}</span>
+                <span  class="bold" ng-class="{'color-party': doc.isAppProtocolParty, 'color-inbetween':doc.isNPInbetweenParty,
+                 'color-nonparty':!doc.isAppProtocolParty && !doc.isNPInbetweenParty }">{{::doc.name}}</span>
+                 <strong>({{$parent.searchResult.data.facets.countries[doc.id]||0}})</strong>
             </a>
             <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon"></i>
                 <span ng-class="{'color-party': doc.isAppProtocolParty}">

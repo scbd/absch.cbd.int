@@ -57,27 +57,27 @@
                         <span class="schema bold">{{doc.schema_s | schemaName}}</span>
                     </li>
 
-                    <li ng-if="doc.rec_countryName && type != referenceRecords" class="hidden-xs">
+                    <li ng-if="doc.rec_countryName && type != reference" class="hidden-xs">
                         <span>{{doc.rec_countryName}}</span>
                     </li>
                     <li ng-if="doc.uniqueIdentifier_s">
                         <span>{{doc.uniqueIdentifier_s}}</span>
                     </li>
-                    <li class="hidden-xs" ng-if="doc.rec_meta1 && doc.schema_s !=='database' && type != referenceRecords" id="meta1">
+                    <li class="hidden-xs" ng-if="doc.rec_meta1 && doc.schema_s !=='database' && type != reference" id="meta1">
                         <span ng-if="doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;">CP:</span>
                         <span ng-repeat="meta in doc.rec_meta1">{{meta}}{{$last ? '':', '}}</span>
                     </li>
-                    <li class="hidden-xs" ng-if="doc.rec_meta2 && doc.schema_s !=='absPermit' && type != referenceRecords" id="meta2">
+                    <li class="hidden-xs" ng-if="doc.rec_meta2 && doc.schema_s !=='absPermit' && type != reference" id="meta2">
                         <span ng-if="doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;">SOURCE:</span>
                         <span ng-repeat="meta in doc.rec_meta2">{{meta}}{{$last ? '':', '}}</span>
                     </li>
-                    <li class="hidden-xs" ng-if="doc.rec_meta3 && type != referenceRecords" id="meta3">
+                    <li class="hidden-xs" ng-if="doc.rec_meta3 && type != reference" id="meta3">
                         <span ng-repeat="meta in doc.rec_meta3" ng-class="{'color-red':meta==='Revoked'}">{{meta}}{{$last ? '':', '}}</span>
                     </li>
 
                     <li ng-if="doc.schema_s !=='meeting'">
-                        <span class="last-span" ng-if="type!='scbdRecords'">{{doc.rec_date | formatDate}}</span>
-                        <span class="last-span" ng-if="type=='scbdRecords'">{{doc.rec_creationDate | formatDate}}</span>
+                        <span class="last-span" ng-if="type!='scbd'">{{doc.rec_date | formatDate}}</span>
+                        <span class="last-span" ng-if="type=='scbd'">{{doc.rec_creationDate | formatDate}}</span>
                     </li>
                      <li ng-if="doc.schema_s =='meeting'">
                         <span class="last-span"> 
