@@ -8,7 +8,7 @@
 		<div ng-show="document.government">
 			<label>Country</label>
 			<span class="km-value">
-				<a ng-href="/countries/{{document.government.identifier}}" target={{target}}>{{document.government|term:locale}}</a>
+				<a ng-href="/countries/{{document.government.identifier|uppercase}}" target={{target}}>{{document.government|term:locale}}</a>
                 <span ng-party-status code="document.government.identifier" id="government"></span>
 			</span>
 		</div>
