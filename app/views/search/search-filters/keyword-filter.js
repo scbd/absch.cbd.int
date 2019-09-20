@@ -1,4 +1,4 @@
-define(['app','text!views/search/search-filters/keyword-filter.html',],  function(app, template, _) {
+define(['app','text!views/search/search-filters/keyword-filter.html', 'lodash'],  function(app, template, _) {
 
     app.directive('keywordFilter', function() {
         return {
@@ -11,17 +11,14 @@ define(['app','text!views/search/search-filters/keyword-filter.html',],  functio
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
               
                $scope.keywordSearchFilters = searchDirectiveCtrl.getSearchFilters("keyword");
-                              
-               $scope.keywordSearchFiltersNoDups =   searchDirectiveCtrl.getSearchFiltersByParent("ABS Thematic Areas");
+                if($scope.realm.is('BCH'))
+                    $scope.keywordSearchFiltersNoDups =   searchDirectiveCtrl.getSearchFilters("keyword");
+                else
+                    $scope.keywordSearchFiltersNoDups =   searchDirectiveCtrl.getSearchFiltersByParent("ABS Thematic Areas");
 
                $scope.relatedFilters = {};
 
-            },// link
-            controller: function($scope){
-                 
-               
-                
-            },// controller
+            }
         };
     });
 });
