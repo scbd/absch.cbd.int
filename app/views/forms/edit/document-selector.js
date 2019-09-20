@@ -10,7 +10,11 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 		restrict   : "EA",
 		template: template,
 		replace    : true,
-		transclude : false,
+        require    : '?ngModel',
+		transclude : {
+            selectRecords   : '?selectRecords',
+            selectedRecords : '?selectedRecords'
+        },
 		scope      : {
 			model     : "=ngModel",
 			locales   : "=locales",
@@ -23,7 +27,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             filter : "@filter",
             hideSelf : "=hideSelf",
 		},
-		link : function($scope, $element, $attr) {
+		link : function($scope, $element, $attr, ngModelController) {
             var dialogId;
             var focalPointRegex = /^52000000cbd022/;
             $scope.rawDocuments = [];
@@ -48,6 +52,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 			$scope.saveDocuments = function(){
 
                 //$scope.model=undefined;
+                var oldModel = angular.copy($scope.model);
 
                 _.forEach($scope.rawDocuments.docs, function (doc) {
 
@@ -72,6 +77,10 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                     }
 
                 });
+
+                if(!angular.equals(oldModel, $scope.model)){
+                    ngModelController.$setViewValue($scope.model);
+                }
 
                 $scope.syncDocuments();
 
@@ -368,7 +377,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 
 			function removeRevisonNumber(identifier){
                 
-                if(identifier.indexOf('@')>=0)
+                if(identifier && identifier.indexOf('@')>=0)
 				    return identifier.substr(0, identifier.indexOf('@'))
                 
                 return identifier;
