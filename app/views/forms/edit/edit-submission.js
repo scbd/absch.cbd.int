@@ -1,11 +1,8 @@
 ﻿define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-submission.directive',
         'views/forms/edit/organization-selector'], function (app, _) {
 
-  app.controller("editSubmission", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
-                function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller, storage, $location) {
+  app.controller("editSubmission", ["$scope", "$http", "$controller", "IStorage", function ($scope, $http, $controller, storage) {
 
-
-    $scope.path=$location.path();
 
     //$scope.organizationsRef = [];
     $controller('editController', {$scope: $scope});
