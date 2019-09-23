@@ -24,11 +24,15 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
             link: function($scope, $element, $attr, ngModelController) {
 
                 $scope.uniqueId = (Math.random()).toString().split('.')[1];
-                $scope.description = true;
+                $scope.description = $scope.description!== undefined ? $scope.description : true;
+
+                if($attr.showDescription!= undefined)
+                    $scope.description = $attr.showDescription == 'true';
+
                 $scope.selection = null;
                 $scope.terms = null;
                 $scope.rootTerms = [];
-                $scope.showOther = $scope.bindingType == "term" && $attr.showOther;
+                $scope.showOther = $scope.bindingType == "term" && $attr.showOther=="true";
                 $scope.other = { identifier : '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'}
                 $scope.onTerms  = onTerms;
                 $scope.save     = save;
