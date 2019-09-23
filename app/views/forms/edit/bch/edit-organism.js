@@ -13,9 +13,23 @@ function (app, _) {
 		});
 
 		_.extend($scope.options, {	
-			organismType 	: thesaurusService.getDomainTerms('typeOfOrganisms'),	
+			organismType 	: function(){
+				return thesaurusService.getDomainTerms('typeOfOrganisms').then(function(data){
+					var terms = [];
+					_.each(data, function(d){
+						 if( _.includes(d.broaderTerms, '8DAB2400-CF00-44B2-ADCF-49AABF66B9B0'))
+							 terms.push(d);
+						else{
+							var parentIds = _.map(terms,  'identifier')
+							if(_.intersection(parentIds, d.broaderTerms).length)
+								terms.push(d);
+						}
+					});
+					return terms;
+				})
+			},	
 			domestication 	: thesaurusService.getDomainTerms('domestication'),	
-			commonUses 		: thesaurusService.getDomainTerms('OrganismCommonUses'),	
+			commonUses 		: thesaurusService.getDomainTerms('OrganismCommonUses', {other:true, otherType:'lstring', multiple:true}),	
 		});
 		
 		//==================================

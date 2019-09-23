@@ -34,12 +34,24 @@
 								<div class="well no-shadow bg-white">
 									<legend>Organism information</legend>
 									<div class="row">
+										
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="scientificName" caption="Scientific name">
 												<div class="help-block">The scientific name of an organism is typically composed of the name of the genus followed by its specific denomination. For example: Oryza sativa is the scientific name for rice.</div>
 												<input type="text" class="form-control" name="scientificName" required ng-model="document.scientificName"/>
 											</div>
 										</div>
+
+										<div class="col-sm-12">
+											<div class="km-control-group"  name="realm" caption="Realm">
+												<input type="text" class="form-control" name="realm" ng-model="document.realm"/>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="subRealm" caption="Subrealm">
+												<input type="text" class="form-control" name="subRealm" ng-model="document.subRealm" />
+											</div>
+										</div>										
 										<div class="col-sm-12">
 											<div class="km-control-group" name="kingdom" caption="Kingdom">
 												<input type="text" class="form-control" name="kingdom" ng-model="document.kingdom" />
@@ -61,8 +73,18 @@
 											</div>
 										</div>
 										<div class="col-sm-12">
+											<div class="km-control-group" name="subOrder" caption="Suborder">
+												<input type="text" class="form-control" name="subOrder" ng-model="document.subOrder" />
+											</div>
+										</div>
+										<div class="col-sm-12">
 											<div class="km-control-group" name="family" caption="Family">
 												<input type="text" class="form-control" name="family" ng-model="document.family" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="subFamily" caption="Subfamily">
+												<input type="text" class="form-control" name="subFamily" ng-model="document.subFamily" />
 											</div>
 										</div>
 										<div class="col-sm-12">
@@ -89,7 +111,8 @@
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="commonNames" caption="Alternate scientific name (synonyms)">
+											<div class="km-control-group" name="commonNames" caption="Common name(s)">
+												<div class="help-block">A common name is used to refer to an organism in everyday language and may include synonyms. Example: maize / corn.</div>
 												<div ng-repeat="commonName in commonNames" style="padding-bottom:5px;">
 													<div km-textbox-ml name="commonNames{{$index}}" ng-model="commonName.value" locales="document.header.languages"></div>
 												</div>
@@ -126,11 +149,11 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="organismType"  caption="Type of organism">
 												<div km-term-radio  ng-model="document.organismType" locales="document.header.languages"
-													terms="options.organismType" binding-type="term" show-other="true"></div>
+													terms="options.organismType()" binding-type="term" show-other="true" show-description="false"></div>
 											</div>	
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="domestication"  caption="Organism domestication">
+											<div class="km-control-group" name="domestication"  caption="Domestication">
 												<div km-term-radio  ng-model="document.domestication" locales="document.header.languages"
 													terms="options.domestication" binding-type="term"></div>
 											</div>	
@@ -146,19 +169,19 @@
 										<div class="col-sm-12">
 											<div class="km-control-group" name="originCentre" caption="Centre(s) of origin">
 												<div class="help-block">max 200 characters</div>
-												<div km-rich-textbox ng-model="document.originCentre" rows="4" placeholder="" locales="document.header.languages"></div>
+												<div km-rich-textbox ng-model="document.originCentre" rows="4" max-length="200" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="diversityCentre" caption="Centre(s) of genetic diversity">
 												<div class="help-block">max 200 characters</div>
-												<div km-rich-textbox ng-model="document.diversityCentre" rows="4" placeholder="" locales="document.header.languages"></div>
+												<div km-rich-textbox ng-model="document.diversityCentre" rows="4" max-length="200" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="habitat" caption="Habitat range">
 												<div class="help-block">max 200 characters</div>
-												<div km-rich-textbox ng-model="document.habitat" rows="4" placeholder="" locales="document.header.languages"></div>
+												<div km-rich-textbox ng-model="document.habitat" rows="4" max-length="200" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 
@@ -170,10 +193,10 @@
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="donorOrganism" caption="Cross-compatible species">
+											<div class="km-control-group" name="compatibleSpecies" caption="Cross-compatible species">
 												<div class="hel-block">Provide a list of species using the taxonomic classification (genus and species names) that
 													are known to cross-fertilize with the organism in the record.</div>
-												<div document-selector ng-model="document.donorOrganism" question="donorOrganism" schema="(organism)"></div>
+												<div document-selector ng-model="document.compatibleSpecies" question="compatibleSpecies" schema="organism"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
@@ -183,8 +206,9 @@
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="commonUses" caption="Common use(s)">
-												<div km-term-check name="commonUses" required ng-model="document.commonUses" terms="options.commonUses" binding-type="term[]"></div>
+											<div class="km-control-group"  name="commonUses" caption="Common use(s)">
+												<div km-term-check name="commonUses"  ng-model="document.commonUses" terms="options.commonUses" binding-type="term[]"
+												locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
