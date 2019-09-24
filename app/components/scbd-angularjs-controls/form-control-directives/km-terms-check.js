@@ -58,7 +58,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     var qData = $scope.termsFn();
 
                     if (qData === undefined)
-                        $timeout($scope.init, 250); // MEGA UGLY PATCH
+                        return $timeout(init, 250); // MEGA UGLY PATCH
 
                     $q.when(qData,
                         function(data) { // on success
