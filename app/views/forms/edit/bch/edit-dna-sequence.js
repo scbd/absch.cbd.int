@@ -1,18 +1,19 @@
-define(['app', 'lodash', 'views/forms/edit/edit', 'services/thesaurus-service',
+define(['app', 'lodash', 'views/forms/edit/edit', 'services/thesaurus-service', 'views/forms/directives/traits-selector.directive',
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-dna-sequence.directive"], 
 function (app, _) {
 
 	app.controller("editDnaSequence", ["$scope", "$routeParams", "$route", "Thesaurus", "$q", "$controller", "thesaurusService",
 	function($scope, $routeParams, $route, Thesaurus, $q, $controller, thesaurusService) {
 		
-		$scope.synonymNames = [{}]
 		$controller('editController', {
 			$scope: $scope
 		});
+		
+		$scope.synonymNames = [{}];
+
 
 		_.extend($scope.options, {	
-			family : thesaurusService.getDomainTerms('dnaSequenceFamily'),
-			traits : thesaurusService.getDomainTerms('traits')
+			family : thesaurusService.getDomainTerms('dnaSequenceFamily')
 		});
 		
 		//==================================
@@ -31,16 +32,23 @@ function (app, _) {
 			if(!_.isEmpty($scope.synonymNames))
 				document.synonymNames = _($scope.synonymNames).pluck('value').compact().value();
 			if(_.isEmpty(document.synonymNames))
-				document.synonymNames = undefined;
+				document.synonymNames = undefined;		
+			
 				
 			return document;
 		};
 
-		$q.when($scope.setDocument({}, true))
+		$scope.setDocument({}, true)
 		.then(function(doc){
+			
 			if(doc.synonymNames)
 				$scope.synonymNames = _.map(doc.synonymNames, function(t){return { value: t}});
+
 		});
+
+		$scope.isDonorMandatory = function(){
+			return !!$scope.document.isSynthetic;
+		}
 
    }]);
 
