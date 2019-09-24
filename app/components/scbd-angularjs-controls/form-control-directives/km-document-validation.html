@@ -18,8 +18,15 @@
 			<strong>Your document contains {{report.errors.length}} errors.</strong>
 			<ul>
 				<li ng-repeat="error in report.errors" title="{{::error.parameters}}">
-					{{::error.typeLabel}} / <a href="#"
-						ng-click="jumpTo(error.property)">{{::error.propertyLabel}}</a>
+					{{::error.typeLabel}} / 
+					<ul ng-if="error.properties">
+						<li ng-repeat="property in error.properties" title="{{::error.parameters}}">					
+							<a translation-url href="#" ng-click="jumpTo(property.property)">{{::property.propertyLabel}}</a>
+						</li>
+					</ul>
+					<span ng-if="!error.properties">
+						<a translation-url href="#" ng-click="jumpTo(error.property)">{{::error.propertyLabel}}</a>
+					</span>
 				</li>
 			</ul>
 		</div>

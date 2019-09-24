@@ -93,3 +93,7 @@ trix-toolbar .trix-button-group button:hover {
 trix-toolbar .trix-button-row {
     display: inherit!important;
 }
+
+.input-lang-ar input, .input-lang-ar textarea{
+    direction: rtl;
+}
