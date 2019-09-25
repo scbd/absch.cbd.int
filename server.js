@@ -7,10 +7,9 @@ var express      = require('express');
 var proxy        = require('http-proxy').createProxyServer({});
 var app          = express();
 var cookieParser = require('cookie-parser');
-var translation  = require('./app/app-libs/translation');
 var _            = require('lodash');
-
-let cacheControl = require('./app/app-libs/cache-control')
+var translation  = require('./middlewares/translation');
+let cacheControl = require('./middlewares/cache-control')
 
 // Initialize constants
 var appVersion          = process.env.TAG;
@@ -34,21 +33,18 @@ app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          translation.renderLanguageF
 app.use('/cbd-forums',      express.static(__dirname + '/node_modules/@bower_components/cbd-forums', { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: cacheControl.setCustomCacheControl , maxAge: oneDay }));
 
-app.get('/robots.txt' , require('./app/app-libs/middlewares').robots);
-app.all('/sitemap(:num([0-9]{1,3})?).xml', require('./app/app-libs/middlewares').sitemap);
+app.get('/robots.txt' , require('./middlewares/robots'));
+app.all('/sitemap(:num([0-9]{1,3})?).xml', require('./middlewares/sitemap'));
 
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
-app.post('/error-logs', (req, res) => {   
-    proxy.web(req, res, { target: `${apiUrl}/api/v2016/error-logs?type=client-app-errors&serverAppVersion=${encodeURIComponent(appVersion)}`, 
-                            secure:false, ignorePath:true, xfwd:true });
-});
+app.post('/error-logs', require('./middlewares/error-logs')(proxy));
 
 
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
 app.all('/api/*', (req, res) => proxy.web(req, res, { target: apiUrl, changeOrigin: true, secure:false }));
 
-app.use(require('./app/app-libs/prerender')); // set env PRERENDER_SERVICE_URL
+app.use(require('./middlewares/prerender')); // set env PRERENDER_SERVICE_URL
 
 app.get('/(:lang(ar|en|es|fr|ru|zh)(/|$))?*', 
     function(req, res, next){
