@@ -32,7 +32,9 @@ RUN ./i18n.sh
 WORKDIR /usr/src/app
 
 #copy touched files from EN version
-RUN mv -f /usr/tmp/i18n/en/* ./
+RUN rm -rf /usr/tmp/i18n/en/.git \
+ && cp -r  /usr/tmp/i18n/en/* ./ \
+ && rm -rf /usr/tmp/i18n/en
 
 COPY package.json .npmrc ./
 
