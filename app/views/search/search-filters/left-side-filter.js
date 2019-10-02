@@ -55,7 +55,7 @@
                             $scope.schema = schema;
                             $scope.filterKey = filterKey;
                             $scope.facets = facets;
-                            $scope.view = 'list';
+                            $scope.view = 'tree';
 
                             _.each(options, function(option){
                                 if(setFilters[option.id])
@@ -156,6 +156,14 @@
                 $scope.sortFilterOptions = function(item){
                     return $scope.setFilters[item.id];
                     // return $scope.isFilterOn(item.id)
+                }
+
+                $scope.isSelected = function(item){
+                    return item.selected;
+                }
+                
+                $scope.ngRepeatFinished = function(){
+                    $element.find('[data-toggle="tooltip"]').tooltip();
                 }
             }
         };
