@@ -1,34 +1,77 @@
 ﻿<div>
     <div ng-if="leftMenuFilters" id="Search-Filter">
-       
+       <style>
+            .label-selected-facet {
+                position: relative;
+                display: block;
+                background-color: #12496B;
+                margin: 4px 0;
+                padding-right: 20px;
+                text-align: left;
+                height: 20px;
+                padding-top: 6px;
+                border-radius: 3px;
+            }
+            .truncate {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+       </style>
         <div style="border-bottom: 1px solid #eee">
             <h1>Filters</h1>
         </div>
-
-        <div ng-repeat="(schema, filters) in leftMenuFilters" ng-if="filters" style="padding-top:10px">
+        <ul class="list-group">
+            <li class="list-group-item" style="background-color: rgb(250, 250, 250); cursor: pointer;padding:0px;padding-top: 10px;"
+                ng-repeat="(schema, filters) in leftMenuFilters" ng-if="filters" >
+                    <div class="bold color-darkgrey" style="cursor: pointer;padding-left:2px;padding-right:2px;padding-bottom:5px;" ng-click="state[schema]=!state[schema]">
+                        {{schema | schemaName}}
+                        <i class="fa pull-right" style="font-size:1.5em; " 
+                        ng-class="{'fa-sort-down':state[schema], 'fa-sort-up':!state[schema]}"></i>
+                    </div>
+                    <div class="list-group-item" ng-repeat="(filterKey, filterKeys) in filters"  
+                        style="border-right: unset;border-left: unset;" ng-show="!state[schema]">
+                        <div class="color-darkgrey not" style="cursor: pointer;" 
+                            ng-click="showFilterDialog(schema, filterKey, filterKeys, searchResult.data.facets.keywords, setFilters)">
+                            {{filterKey}}
+                            <div style="position:absolute;right:6px;top:6px" style="margin-top:5px" class="fa fa-chevron-right"></div>    
+                            <!-- <i class="fa fa-chevron-right pull-right" style="margin-top:5px" aria-hidden="true"></i>           -->
+                        </div>
+                        <div ng-repeat="option in filterKeys| filter:isSelected" ng-click="saveFilter(option)" class="list-group-item-expand filter" role="button"
+                            data-toggle="tooltip" data-title="{{option.name}}" data-container="body" data-placement="right">                            
+                            <div class="label label-selected-facet" aria-hidden="false" style="">
+                                <div style="position:absolute;right:6px;top:6px" class="fa fa-remove"></div>                                                    
+                                <span class="truncate">
+                                    ({{searchResult.data.facets.keywords[option.id]||0}}) {{option.name|limitTo:40}}
+                                    <span ng-if="option.name.length>40">...</span>                                    
+                                </span>
+                            </div>
+                            <div ng-if="$last" ng-init="ngRepeatFinished()" style="display:none"></div> 
+                        </div>
+                    <div>
+            </li>
+        </ul>
+        <!-- <div ng-repeat="(schema, filters) in leftMenuFilters" ng-if="filters" style="padding-top:10px">
             <div class="bold color-darkgrey" style="border-bottom:1px solid #eee;cursor: pointer;" ng-click="state[schema]=!state[schema]">
                 {{schema | schemaName}}
                 <i class="fa pull-right" style="font-size:1.5em; " 
                  ng-class="{'fa-sort-down':state[schema], 'fa-sort-up':!state[schema]}"></i>
             </div>
-            <div ng-repeat="(filterKey, filter) in filters"  style="padding-left:10px;padding-top:5px" ng-show="!state[schema]">
-                <!-- {{filter}} -->
-                <div class="bold color-darkgrey">{{filterKey}}</div>
-                <div ng-repeat="option in filter | orderBy:['-selected', '-facet'] | limitTo:5" style="padding-left:10px">
-                    <a class="filter" ng-click="saveFilter(option)" ng-class="{'level0':option.level===0,'level1':option.level===1,'level2':option.level===2,'level3':option.level===3, 
-                        'disabled':(!searchResult.data.facets.keywords[option.id])}">
-                        <i class="fa check" ng-class="{'fa-check-square':option.selected,'fa-square':!option.selected}"></i>
-                        {{option.name}}
+            <div ng-repeat="(filterKey, filterKeys) in filters"  style="padding-left:10px;padding-top:5px" ng-show="!state[schema]">
+          
+                <div class="bold color-darkgrey">
+                   <a ng-click="showFilterDialog(schema, filterKey, filterKeys, searchResult.data.facets.keywords, setFilters)" href="#" ng-bind="filterKey"></a>
+                </div>
+                <div ng-repeat="option in filterKeys | filter:isSelected" style="padding-left:10px">
+                    <a class="filter" ng-click="saveFilter(option)">                        
+                        ({{searchResult.data.facets.keywords[option.id]||0}}) {{option.name}}
                         <strong class="pull-right">
-                            ({{searchResult.data.facets.keywords[option.id]||0}})
+                            <i class="fa fa-times"></i>
                         </strong>
                     </a>
                 </div>
-                <div ng-if="filter.length>5"  style="padding-left:10px">
-                    <a ng-click="showFilterDialog(schema, filterKey, filter, searchResult.data.facets.keywords, setFilters)" href="#">Show more</a>
-                </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <br/>
     <script type="text/ng-template" trados-translation="true" id="filtersDialog">
@@ -39,33 +82,9 @@
         </div>
         <div class="modal-body">	
            
-            <div id="divTable"  style="max-height:300px;overflow:scroll; font-size:11px; ">
-               
+            <div id="divTable"  style="max-height:300px;overflow:scroll; font-size:11px; ">               
                 <div class="col-md-12">
-                    <div  class="btn-group pull-right" role="group">
-                        <button class="btn btn-default" ng-class="{'btn-primary': view=='list'}" ng-click="showListView()">
-                            <i class="fa fa-list-ul" style="cursor:pointer"></i>
-                        </button>
-                        <button class="btn btn-default" ng-class="{'btn-primary': view!='list'}" ng-click="showTree()">
-                            <i class="fa fa-sitemap" style="cursor:pointer"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <ul class="horizontal-list" ng-show="view=='list'">                         
-                        <li ng-repeat="option in options">
-                                <a class="filter" ng-click="saveFilter(option)" ng-class="{'level0':option.level===0,'level1':option.level===1,'level2':option.level===2,'level3':option.level===3, 
-                                        'disabled':(!facets[option.id])}" href="#">
-                                    <i class="fa check"
-                                        ng-class="{'fa-check-square':selected[option.id],'fa-square':!selected[option.id]}"></i>
-                                    {{option.name}}
-                                    <strong>({{facets[option.id]||0}})</strong>
-                                </a>
-                        </li>
-                    </ul>
-                    <div ng-show="view=='tree'">
-                        <div km-term-check ng-model="treeViewSelected" terms="treeOptions()" binding-type="term[]" enable-search></div>
-                    </div>                  
+                    <div km-term-check ng-model="treeViewSelected" terms="treeOptions()" binding-type="term[]" enable-search></div>
                 </div>
             </div>
         </div>
