@@ -89,7 +89,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         searchFilters   : {},
                         countriesFilters: {},
                         regionsFilter   : {},
-                        searchKeyword   : ''
+                        searchKeyword   : '',
+                        currentTab      : 'allRecords'
                     }                    
 
 
@@ -220,7 +221,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         $scope.searchResult.viewType = options.viewType;
                         if(options.viewType == 'group')
                             $scope.searchResult.groupByFields = options.fields;
-                        updateQueryResult();
+                        if($scope.searchResult.currentTab == 'allRecords')
+                            updateQueryResult();
                     }
 
                     $scope.getRelatedKeywords = function () {
@@ -244,9 +246,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                     $scope.relatedKeywords[set.id] = relatedKeywords;
                             });
                         }
+                    }
 
-
-
+                    $scope.switchTab = function(tab){
+                        $scope.searchResult.currentTab = tab;
+                        updateQueryResult();
                     }
 
 
@@ -625,16 +629,23 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     function updateQueryResult(pageNumber){
                         $timeout(function(){//call digest cycle to update the directive api params
+                            $scope.searchResult.loading = true;
                             var queryOptions = buildSearchQuery()
                             var sortFields = ''
                             var resultQuery;
                             if(($scope.searchResult.sortFields||[]).length > 0)
                                 sortFields = $scope.searchResult.sortFields.join(', ');
 
-                            if($scope.searchResult.viewType == 'list'){
-                            resultQuery = $scope.searchResult.listViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
+                            var viewType = $scope.searchResult.viewType;
+                            if($scope.searchResult.currentTab == 'nationalRecords')
+                                viewType = 'group'
+                            else if($scope.searchResult.currentTab == 'referenceRecords' || $scope.searchResult.currentTab == 'scbdRecords')
+                                viewType = 'list'
+
+                            if(viewType == 'list'){
+                                resultQuery = $scope.searchResult.listViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
                             }
-                            else if($scope.searchResult.viewType == 'group'){
+                            else if(viewType == 'group'){
                                 queryOptions.groupByFields = $scope.searchResult.groupByFields;
                                 resultQuery = $scope.searchResult.groupViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
                             }
@@ -644,6 +655,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             resultQuery.then(function(data){
                                 $scope.searchResult.data = data;
                             })
+                            .finally(function(){$scope.searchResult.loading = false;})
                         }, 0)
                     }
 
@@ -761,7 +773,18 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     
                         var query = buildFieldQuery('schema_s', 'schema')
                         if (query == null) {
-                            query = "schema_s:* AND NOT schema_s:(contact organization)"
+                            var tab = $scope.searchResult.currentTab;
+                            var tabQuery;
+                            if(tab == 'allRecords')
+                                return "NOT schema_s:(contact organization)"
+                            else if(tab == 'nationalRecords')
+                                tabQuery = _($scope.searchFilters).values().filter({otherType:'schema', type:'national'}).map('id').without('contact').value().join(' ')
+                            else if(tab == 'referenceRecords')
+                                tabQuery = _($scope.searchFilters).values().filter({otherType:'schema', type:'reference'}).map('id').without('organization').value().join(' ')  
+                            else if(tab == 'scbdRecords')
+                                tabQuery = _($scope.searchFilters).values().filter({otherType:'schema', type:'scbd'}).map('id').value().join(' ') 
+
+                            query = "schema_s:(" + tabQuery + ")"
                         }
                     
                         return query;
