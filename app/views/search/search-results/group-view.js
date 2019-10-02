@@ -51,11 +51,11 @@
                         groupField : groupField,
                         groupLimit : 10,
                         groupSort  : groupField + ' asc',
-                        sort       : groupField + ' asc',
+                        sort       : 'government_EN_s asc',
                         additionalFields     : 'schema_s_groupTitle:schema_EN_t, government_s_groupTitle:government_EN_t'
                     }
                     //'schema_s', 'government_s', 
-                    if(sort)
+                    if((sort||'') != 'updatedDate_dt desc' && $scope.searchResult.sort)
                         lQuery.sort    = $scope.searchResult.sort = sort;
 
                     queryCanceler = $q.defer();
