@@ -18,6 +18,14 @@ define(['app','text!views/search/search-filters/keyword-filter.html', 'lodash'],
 
                $scope.relatedFilters = {};
 
+                $scope.hasCounts  = function(item){
+                    if($scope.$parent.searchResult.data)
+                        return $scope.$parent.searchResult.data.facets.keywords[item.id] > 0
+                }
+
+                $scope.ngRepeatFinished = function(){
+                    $element.find('[data-toggle="tooltip"]').tooltip();
+                }
             }
         };
     });
