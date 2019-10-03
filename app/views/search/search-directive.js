@@ -77,8 +77,14 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     $scope.setFilters    = {};
                     $scope.relatedKeywords = {};
                     $scope.searchResult = {
-                        viewType  : 'list',
-                        sortFields: ['updatedDate_dt desc'],
+                        viewType        : 'list',
+                        sortFields      : ['updatedDate_dt desc'],
+                        currentTab      : 'allRecords',
+                        currentPage     : 1,
+                        rowsPerPage     : 25,
+                        groupByFields   : [],
+                        sortFields      : [],
+                        viewType        : 'list',
 
                         skipResults       : $attrs.skipResults,
                         skipDateFilter    : $attrs.skipDateFilter,
@@ -89,8 +95,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         searchFilters   : {},
                         countriesFilters: {},
                         regionsFilter   : {},
-                        searchKeyword   : '',
-                        currentTab      : 'allRecords'
+                        searchKeyword   : ''
                     }                    
 
 
@@ -214,13 +219,17 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     $scope.onSortByChange = function(fields){
                         $scope.searchResult.sortFields = fields;
                         $scope.searchResult.sortFields = fields;
+                        updateQueryString('sort',fields);
                         updateQueryResult();
                     }
 
                     $scope.onViewTypeChange = function(options){                        
                         $scope.searchResult.viewType = options.viewType;
+                        updateQueryString('viewType',options.viewType);
+
                         if(options.viewType == 'group')
                             $scope.searchResult.groupByFields = options.fields;
+
                         if($scope.searchResult.currentTab == 'allRecords')
                             updateQueryResult();
                     }
@@ -250,6 +259,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     $scope.switchTab = function(tab){
                         $scope.searchResult.currentTab = tab;
+                        updateQueryString('tab',tab);
                         updateQueryResult();
                     }
 
@@ -270,6 +280,24 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         var query =  $location.search();
                         var currentpage = query.currentPage||1;
+                        if(query.currentpage)
+                            $scope.searchResult.currentpage = currentpage;
+                        if(query.rowsPerPage)
+                            $scope.searchResult.rowsPerPage = query.rowsPerPage;
+                        if(query.tab)
+                            $scope.searchResult.currentTab = query.tab;
+                        if(query.group){
+                            if(typeof query.group == 'string')
+                                query.group = [query.group]
+                            $scope.searchResult.groupByFields = query.group;
+                        }
+                        if(query.sort){
+                            if(typeof query.sort == 'string')
+                                query.sort = [query.sort]
+                            $scope.searchResult.sortFields = query.sort;
+                        }
+                        if(query.viewType)
+                            $scope.searchResult.viewType = query.viewType;
 
                         if(!$scope.skipResults && $routeParams.recordType){
                             if($routeParams.recordType == 'run-query'){
@@ -646,7 +674,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 resultQuery = $scope.searchResult.listViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
                             }
                             else if(viewType == 'group'){
-                                queryOptions.groupByFields = $scope.searchResult.groupByFields;
+                                queryOptions.groupByFields = $scope.searchResult.groupByFields;                                
+                                updateQueryString('group', queryOptions.groupByFields);
                                 resultQuery = $scope.searchResult.groupViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
                             }
                             else if($scope.searchResult.viewType == 'matrix'){
@@ -858,6 +887,15 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             if (val) q = q + (q ? op1 : "") + "(" + val + ")"
                         });
                         return q ? q : '';
+                    }
+
+                    function updateQueryString(field, values){
+                        if(field!='sort'){
+                            $location.search('currentPage', 1);
+                            $scope.searchResult.currentPage = 1;
+                        }
+                        $location.search(field, values)
+
                     }
 
                     // function onSchemaFilterChanged(schema)
