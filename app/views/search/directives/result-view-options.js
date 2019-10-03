@@ -26,7 +26,9 @@
                 }
 
                 $scope.showSortDialog = function(){
-                    var selectedFields = $scope.sortFields
+                    var selectedFields = $scope.sortFields;
+                    if(typeof selectedFields == 'string')
+                        selectedFields = [selectedFields]
                     ngDialog.open({
                         template : 'sortByDialog',
                         controller: ['$scope', function($scope){
