@@ -1,8 +1,8 @@
 ﻿<div id="Search-Filter"  style="margin-bottom:30px;" >
      <div>
-        <span class="country-heading">Published Date</span>
+        <span class="country-heading">Date</span>
         <hr class="heading" />
-         <p class="helpinfo"><i class="fa fa-info-circle helpicon"></i> Filter for record published within a date range</p>
+         <p class="helpinfo"><i class="fa fa-info-circle helpicon"></i> Filter for record published/updated within a date range</p>
         
     </div>
     <div style="max-height:400px;">
@@ -10,13 +10,14 @@
             <div class="filter col-lg-3">
                 
                 <div class="row" style="margin-top:6px">
-                    <div class="col-md-6">
-                        <div style="font-size:10px;font-weight:bold;text-transform: uppercase;">From</div>
-                        <div class="km-date" ng-model="dateFilter.since"></div>
+                    <div class="col-md-4">
+                        <select class="form-control" ng-model="dateFilter.field">
+                            <option value="lastUpdatedDate_dt" selected="selected">Published on</option>
+                            <option value="createdDate_dt">Created on</option>
+                        </select>
                     </div>
-                    <div class="col-md-6">
-                        <div style="font-size:10px;font-weight:bold;text-transform: uppercase;">To</div>
-                        <div class="km-date" ng-model="dateFilter.until"></div>
+                    <div class="col-md-8 pull-right">
+                        <div km-date-range ng-model="dateFilter.value" ng-change="onChange()"></div>
                     </div>
                 </div>
                

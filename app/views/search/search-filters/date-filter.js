@@ -5,50 +5,31 @@ define(['app', 'text!views/search/search-filters/date-filter.html','lodash', 'js
         return {
             restrict: 'EAC',
             replace: true,
-            // transclude: true,
             require:'^searchDirective',
             template: template, 
             scope: false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-                // $scope.since = {};
 
                 $scope.df_filters = searchDirectiveCtrl.getSearchFilters("date");
 
-            },//link
-            controller  : ['$scope', function($scope){
-
-                $scope.dateFilter = {since : null,
-                                 until : null};
-                                 
-                $scope.$watch('dateFilter.since', function(newVal){
-                    if(newVal)
-                        saveQuery();
-                });
-
-                $scope.$watch('dateFilter.until', function(newVal){
-                    if(newVal)
-                        saveQuery();
-                });
-
-                function saveQuery(){
+                $scope.dateFilter = {
+                    field:'lastUpdatedDate_dt',
+                    value:{start : null, end : null}
+                };
+                       
+                $scope.onChange = function(){
                     var query;
 
-                    if($scope.dateFilter.since || $scope.dateFilter.until) {
-                        var since = $scope.dateFilter.since ? $scope.dateFilter.since + 'T00:00:00.000Z' : '*';
-                        var until = $scope.dateFilter.until ? $scope.dateFilter.until + 'T23:59:59.999Z' : '*';
+                    if($scope.dateFilter.value.start || $scope.dateFilter.value.end) {
+                        var start = $scope.dateFilter.value.start ? $scope.dateFilter.value.start + 'T00:00:00.000Z' : '*';
+                        var end = $scope.dateFilter.value.end ? $scope.dateFilter.value.end + 'T23:59:59.999Z' : '*';
 
-                        query = '[ ' + since + ' TO ' + until + ' ]';
-                    } else {
-                        query = '*:*';
-                    }
-                    $scope.saveDateFilter($scope.df_filters[0].id, query);
+                        query = '[ ' + start + ' TO ' + end + ' ]';
+                    } 
+                    $scope.saveDateFilter($scope.df_filters[0].id, query, $scope.dateFilter);
                 }
 
-                // if($scope.df_filters.length > 0){
-                // //    if($scope.df_filters[0])
-                // console.log($scope.df_filters);
-                // }
-            }]
+            }
         };
     });
 });
