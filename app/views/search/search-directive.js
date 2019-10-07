@@ -181,12 +181,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     };
 
 
-                    $scope.saveDateFilter = function (filterID, query) {
-
+                    $scope.saveDateFilter = function (filterID, query, dateVal) {
+                        var name = dateVal.field.replace('_dt', '').replace(/[A-Z]/g, ' $&') + ' (' +
+                                    dateVal.value.start + ' - ' + dateVal.value.end + ')' 
                         $scope.setFilters[filterID] = {
                             type: $scope.searchFilters[filterID].type,
                             query: query,
-                            name: $scope.searchFilters[filterID].name,
+                            name: name,
                             id: $scope.searchFilters[filterID].id
                         };
 
