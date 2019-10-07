@@ -5,6 +5,7 @@
         return {
             restrict: 'EA',
             template: template,
+            require:'^searchDirective',
             scope: {
                 viewType        : '=' ,
                 sortFields      : '=' ,
@@ -12,7 +13,7 @@
                 onSortByChange  : '&?',
                 onViewTypeChange: '&?'
             },
-            link: function ($scope, $element, $attr) {
+            link: function ($scope, $element, $attr, searchDirectiveCtrl) {
                
             //    if(!$scope.viewType)
             //         $scope.viewType = 'list';
@@ -106,14 +107,12 @@
 
                 function showGroupByDialog(){
                     var selectedFields = $scope.groupByFields
+                    if(typeof selectedFields == 'string')
+                        selectedFields = [selectedFields]
                     ngDialog.open({
                         template : 'groupByDialog',
                         controller: ['$scope', function($scope){
-                            $scope.groupByFields = [
-                                {field:'government_s'.replace('EN', locale.toUpperCase())     , title: 'Government'         },
-                                {field:'schema_s'.replace('EN', locale.toUpperCase())         , title: 'Type of record'     }
-                            ]
-                            // ,{field:'submissionYear_s' , title: 'Year of submission' }
+                            $scope.groupByFields = searchDirectiveCtrl.groupByFields();
 
                             _.each(selectedFields, function(field){
                                 var existing = _.find($scope.groupByFields, {field: field})

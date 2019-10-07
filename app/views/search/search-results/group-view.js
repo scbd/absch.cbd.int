@@ -31,16 +31,23 @@
                     if(pageNumber==undefined)
                         pageNumber = $scope.searchResult.currentPage;
 
-                    var groupField = 'government_s';//'governmentSchemaIdentifier_s'
-                    if(options.groupByFields){
-                        if(~options.groupByFields.indexOf('government_s') && ~options.groupByFields.indexOf('schema_s'))
-                            groupField = 'governmentSchemaIdentifier_s';
-                        else if(~options.groupByFields.indexOf('government_s'))
-                            groupField = 'government_s';
-                        else if(~options.groupByFields.indexOf('schema_s'))
-                            groupField = 'schema_s';
+                    // TODO create mapping, need to be redone
+                    var groupMapping
+                    var groupFieldMapping = searchDirectiveCtrl.combinationField(options.groupByFields);
+                    var groupField = groupFieldMapping.groupField;
+
+                    var sortBy = 'government_EN_s asc';
+                    var sortFields = sort||$scope.searchResult.sortFields||[];
+                    if(typeof sortFields == 'string')
+                        sortFields = [sortFields];
+
+                    if(sortFields.length <= 1){
+                        var field = _.first(sortFields)
+                        if(!field || field.indexOf('updatedDate_dt')>0){
+                            sortFields = groupFieldMapping.sortFields;
+                        }
+                        
                     }
-                   
                     var lQuery = {
                         fieldQuery     : options.tagQueries,
                         query          : options.query||undefined,
@@ -50,13 +57,11 @@
                         facetFields : ['{!ex=sch}schema_s', '{!ex=gov}government_s', '{!ex=key}all_terms_ss', '{!ex=reg}government_REL_ss'],
                         groupField : groupField,
                         groupLimit : 10,
-                        groupSort  : groupField + ' asc',
-                        sort       : 'government_EN_s asc',
+                        groupSort  : sortFields.join(', '),
+                        sort       : sortFields.join(', '),
                         additionalFields     : 'schema_s_groupTitle:schema_EN_t, government_s_groupTitle:government_EN_t'
                     }
                     //'schema_s', 'government_s', 
-                    if((sort||'') != 'updatedDate_dt desc' && $scope.searchResult.sort)
-                        lQuery.sort    = $scope.searchResult.sort = sort;
 
                     queryCanceler = $q.defer();
         
@@ -68,7 +73,7 @@
     
                             var countryRecords = {}
                             _.each(result.data.grouped[groupField].groups, function (record) {
-                                if(groupField == 'governmentSchemaIdentifier_s'){
+                                if(groupField == 'government_schema_s'){
                                     var fieldMapping = ['government_s', 'schema_s']
                                     var gpDetails = (record.groupValue || '').split('_');
                                     if (!gpDetails.length)
