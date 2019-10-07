@@ -12,7 +12,6 @@
                 // $scope.leftMenuFilters = {}
                 
                 $scope.onSchemaFilterChanged = function(schema, selected){
-                    console.log(schema);
                     if(!selected){
                         if($scope.leftMenuFilters)
                             $scope.leftMenuFilters[schema] = undefined;

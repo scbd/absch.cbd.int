@@ -7,7 +7,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 'angular-joyride','components/scbd-angularjs-services/services/locale',
 'components/scbd-angularjs-controls/form-control-directives/pagination',
 'views/search/directives/result-view-options', 'views/search/search-filters/left-side-filter',
-'views/search/search-results/list-view','views/search/search-results/group-view'
+'views/search/search-results/list-view','views/search/search-results/group-view', 'components/scbd-angularjs-controls/form-control-directives/km-date-range'
 
 ], function(app, template, _, scbdSchemas, joyRideText) {
 
@@ -25,6 +25,21 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     var activeFilter;
                     var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
                     var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
+
+                    var groupFieldMapping = [
+                        {
+                            field:'government', 
+                            sortFields:['government_EN_s asc']
+                        },
+                        {
+                            field:'schema', 
+                            sortFields:['schema_EN_s asc']
+                        },
+                        {
+                            field:'submissionYear', 
+                            sortFields:['submissionYear_s asc']
+                        }
+                    ];
 
                     var queryCanceler = null;
                     var customKeywords = {
@@ -263,6 +278,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         updateQueryString('tab',tab);
                         updateQueryResult();
                     }
+
+                    $scope.clearFilter = function(){
+                        $scope.setFilters = {};$scope.leftMenuFilters = {}
+                        updateQueryResult();
+                    };
 
 
                     ////////////////////////////////////////////
@@ -545,7 +565,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         promises.push(thesaurusService.getDomainTerms('resourceTypes'             ).then(function(keywords){loopKeywords(keywords, 'resource'                                         , 'Type of resource'                            )}));
                         promises.push(thesaurusService.getDomainTerms('languages'                 ).then(function(keywords){loopKeywords(keywords, 'resource'                                         , 'Language'                                    )}));
                         promises.push(thesaurusService.getDomainTerms('typeOfOrganisms'           ).then(function(keywords){loopKeywords(keywords, 'organism'                                         , 'Type of organism(s)'                         )}));
-                        promises.push(thesaurusService.getDomainTerms('domestication'             ).then(function(keywords){loopKeywords(keywords, 'organism'                                         , 'Organism domesticatio'                       )}));
+                        promises.push(thesaurusService.getDomainTerms('domestication'             ).then(function(keywords){loopKeywords(keywords, 'organism'                                         , 'Organism domestication'                      )}));
                         promises.push(thesaurusService.getDomainTerms('OrganismCommonUses'        ).then(function(keywords){loopKeywords(keywords, 'organism modifiedOrganism'                        , 'Common use(s)'                               )}));
                         promises.push(thesaurusService.getDomainTerms('dnaSequenceFamily'         ).then(function(keywords){loopKeywords(keywords, 'dnaSequence'                                      , 'Category'                                    )}));
                         promises.push(thesaurusService.getDomainTerms('dnaSequenceTraits'         ).then(function(keywords){
@@ -800,34 +820,42 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
 
                     function buildSchemaQuery() {
-                    
-                        var query = buildFieldQuery('schema_s', 'schema')
-                        if (query == null) {
-                            var tab = $scope.searchResult.currentTab;
-                            var tabQuery;
-                            if(tab == 'allRecords')
-                                return "NOT schema_s:(contact organization)"
-                            else if(tab == 'nationalRecords')
-                                tabQuery = _($scope.searchFilters).values().filter({otherType:'schema', type:'national'}).map('id').without('contact').value().join(' ')
-                            else if(tab == 'referenceRecords')
-                                tabQuery = _($scope.searchFilters).values().filter({otherType:'schema', type:'reference'}).map('id').without('organization').value().join(' ')  
-                            else if(tab == 'scbdRecords')
-                                tabQuery = _($scope.searchFilters).values().filter({otherType:'schema', type:'scbd'}).map('id').value().join(' ') 
+                        
+                        var tab = $scope.searchResult.currentTab; 
+                        var tabSchemas;
+                        if(tab == 'nationalRecords')
+                            tabSchemas = _($scope.searchFilters).values().filter({otherType:'schema', type:'national'}).map('id').without('contact').value()
+                        else if(tab == 'referenceRecords')
+                            tabSchemas = _($scope.searchFilters).values().filter({otherType:'schema', type:'reference'}).map('id').without('organization').value()
+                        else if(tab == 'scbdRecords')
+                            tabSchemas = _($scope.searchFilters).values().filter({otherType:'schema', type:'scbd'}).map('id').value()
 
-                            query = "schema_s:(" + tabQuery + ")"
+                        var tabValidation = function(item){
+                            return item.otherType == 'schema' && 
+                                (tab == 'allRecords' || ~_.indexOf(tabSchemas, item.id))
+                        }
+
+                        var query = buildFieldQuery('schema_s', 'schema', null, tabValidation)
+                        if (query == null) {                           
+                            if(tab == 'allRecords')
+                                return "NOT schema_s:(contact organization)";
+
+                            query = "schema_s:(" + tabSchemas.join(' ') + ")"
                         }
                     
                         return query;
                     }
 
-                    function buildFieldQuery(field, type, allFilters) {
+                    function buildFieldQuery(field, type, allFilters, validationfn) {
                         var q = '';
                         var capacityBuildingResource;
                         if ($scope.setFilters[type]) {
                             q = field + ":(" + encodeURIComponent(allFilters) + ")"
                         } else {
                             _.each($scope.setFilters, function (item) {
-                                if (item.type == type || item.otherType==type) {
+
+                                if ((validationfn !== undefined && validationfn(item)) || (validationfn === undefined && item.type == type )) {
+
                                     if (customKeywords[item.id] && item.id == 'capacityBuildingResource') {
                                         capacityBuildingResource = true;
                                         q = q + 'resource' + ' '
@@ -899,6 +927,44 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     }
 
+                    function groupByFields(){
+                        return groupFieldMapping;
+                    }
+
+                    function groupingCombination(mappings){
+                        var combinations = []
+                        mappings = mappings || groupFieldMapping;
+
+                        _.each(mappings, function(group){                            
+                            var groupField = group.field
+                            var others = _.without(mappings, group)
+
+                            var otherComb = _.map(others, function(field){
+                                                var lfield = field.field
+                                                combinations.push(groupField + '_' + lfield)
+                                                return lfield
+                                            }).join('_');
+                                            
+                            combinations.push(group.field)
+                            combinations.push(groupField + '_' + otherComb)
+                            combinations = _.union(combinations, otherComb);
+                        })   
+                        return combinations
+                    }
+
+                    function combinationField(fields){                        
+                        var map = {
+                            groupField : fields.join('_') + '_s',
+                            sortFields:[]
+                        };
+                        _.each(fields, function(field){
+                            var group = _.find(groupFieldMapping, {field:field})
+                            map.sortFields.push(group.sortFields)
+                        })
+                        map.sortFields = _.flatten(map.sortFields);
+                        return map
+                    }
+
                     // function onSchemaFilterChanged(schema)
 
                     ////////////////////////////////////////////
@@ -913,6 +979,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     this.setSearchFilters         = setSearchFilters        ;
                     this.getFilter                = getFilter               ;
 
+                    this.groupByFields            = groupByFields           ;
+                    this.groupingCombination      = groupingCombination     ;
+                    this.combinationField         = combinationField        ;
+                    
             }]//controller
         };
     });
