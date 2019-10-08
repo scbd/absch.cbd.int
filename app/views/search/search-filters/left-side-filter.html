@@ -37,7 +37,8 @@
                             <div style="position:absolute;right:6px;top:6px" style="margin-top:5px" class="fa fa-chevron-right"></div>    
                             <!-- <i class="fa fa-chevron-right pull-right" style="margin-top:5px" aria-hidden="true"></i>           -->
                         </div>
-                        <div ng-repeat="option in filterKeys| filter:isSelected" ng-click="saveFilter(option)" class="list-group-item-expand filter" role="button"
+                        <div ng-repeat="option in filterKeys| filter:isSelected" ng-click="updateFilter(option, $event)" 
+                            class="list-group-item-expand filter" role="button" id="{{option.id}}"
                             data-toggle="tooltip" data-title="{{option.name}}" data-container="body" data-placement="right">                            
                             <div class="label label-selected-facet" aria-hidden="false" style="">
                                 <div style="position:absolute;right:6px;top:6px" class="fa fa-remove"></div>                                                    

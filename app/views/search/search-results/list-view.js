@@ -36,7 +36,7 @@
                         rowsPerPage    : $scope.searchResult.rowsPerPage,
                         currentPage    : pageNumber - 1,
                         facet          : true,
-                        facetFields    : ['{!ex=sch}schema_s', '{!ex=gov}government_s', '{!ex=key}all_terms_ss', '{!ex=reg}government_REL_ss']
+                        facetFields    : ['{!ex=sct}schemaType_s', '{!ex=sch,sct}schema_s', '{!ex=gov}government_s', '{!ex=key}all_terms_ss', '{!ex=reg}government_REL_ss']
                     }
                     //'schema_s', 'government_s', 
                     if(sort && sort != 'relevance asc')
@@ -53,12 +53,7 @@
                         $scope.searchResult.sortBy      = lQuery.sort;
                         $scope.searchResult.currentPage = pageNumber;
                         
-                        $scope.searchResult.facets   = {
-                            schemas   : result.data.facet_counts.facet_fields['schema_s'], 
-                            keywords  : result.data.facet_counts.facet_fields['all_terms_ss'],
-                            countries : result.data.facet_counts.facet_fields['government_s'], 
-                            regions   : result.data.facet_counts.facet_fields['government_REL_ss']
-                        }
+                        $scope.searchResult.facets   = searchDirectiveCtrl.sanitizeFacets(result.data.facet_counts)
                         
                         return $scope.searchResult;
                     })

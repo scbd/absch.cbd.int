@@ -164,6 +164,12 @@
                 $scope.ngRepeatFinished = function(){
                     $element.find('[data-toggle="tooltip"]').tooltip();
                 }
+
+                $scope.updateFilter = function(option, $event){
+                    $element.find('#'+option.id).tooltip('hide')
+                    console.log(option)
+                    $scope.saveFilter(option)
+                }
             }
         };
     }]);

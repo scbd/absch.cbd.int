@@ -36,7 +36,7 @@ function (app, _, moment, angular) {
             var lang = locale;
             if (lang == 'zh')
                 lang = 'zh-cn'; //moment has two ZH, use ZH-CN
-            moment.lang(lang);
+            moment.locale(lang);
             if (lang != 'en')
                 require(['css!/app/css/translation.css']);
             if (lang == 'ar') {
