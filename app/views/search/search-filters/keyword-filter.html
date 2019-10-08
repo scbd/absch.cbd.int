@@ -1,47 +1,4 @@
 ﻿<div id="Search-Filter">
-
-    <style>
-        .level0 {
-            margin-top: 10px;
-        }
-
-        .level1 {
-            margin-left: 20px;
-        }
-
-        .level2 {
-            margin-left: 40px;
-        }
-
-        .level3 {
-            margin-left: 65px;
-        }
-    </style>
-    <div ng-repeat="(key,related) in relatedKeywords">
-        <div style="margin-bottom:30px;" id="divTable">
-            <div ng-if="relatedkeywords.length">
-                <span class="country-heading"> Keywords related to: <span
-                        class="color-darkgrey">{{searchFilters[key].name}}</span> </span>
-                <hr class="heading" />
-            </div>
-            <div ng-repeat="doc in relatedkeywords = (related | filter:searchKeyword | orderBy:'parent' )">
-                <div ng-if="doc.parent != relatedkeywords[$index-1].parent && $index > 0" style="margin-top:10px;">
-                </div>
-                <div class="bold color-darkgrey" ng-if="doc.parent != relatedkeywords[$index-1].parent">{{doc.parent}}
-                </div>
-                <a translation-url class="filter" ng-show="doc.level===0 || isFilterOn(doc.broader)"
-                    ng-click="saveFilter(doc)" ng-class="{'level0':level===0,'level1':doc.level===1,'level2':doc.level===2,'level3':doc.level===3, 
-                    'disabled':(!$parent.searchResult.data.facets.keywords[doc.id])}">
-                    <i class="fa check"  ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
-                    {{doc.name}}
-                    <strong>({{$parent.searchResult.data.facets.keywords[doc.id]||0}})</strong>
-                </a>
-            </div>
-        </div>
-    </div>
-
-
-
     <div style="margin-bottom:30px;">
         <div ng-if="kfilters.length">
             <span class="country-heading">All Keywords ({{kfilters.length}})</span>

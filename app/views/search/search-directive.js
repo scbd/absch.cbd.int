@@ -92,14 +92,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     $scope.setFilters    = {};
                     $scope.relatedKeywords = {};
                     $scope.searchResult = {
-                        viewType        : 'list',
                         sortFields      : ['updatedDate_dt desc'],
                         currentTab      : 'allRecords',
                         currentPage     : 1,
                         rowsPerPage     : 25,
-                        groupByFields   : [],
+                        groupByFields   : ['government', 'schema'],
                         sortFields      : [],
-                        viewType        : 'list',
+                        viewType        : 'default',
 
                         skipResults       : $attrs.skipResults,
                         skipDateFilter    : $attrs.skipDateFilter,
@@ -386,8 +385,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         _.each(realm.schemas, function (schema, key) {
                             if (!_.includes(['contact'], key))
-                                addFilter(key, { 'sort': schema.sort, 'type': schema.type, 'name': schema.title.en, 'id': key, 
-                                        'description': (schema.description || {}).en, otherType:'schema' });
+                                addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': schema.title.en, 'id': key, 
+                                        'description': (schema.description || {}).en, otherType:schema.type });
                         })
 
                         addFilter('partyToProtocol'     , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Protocol'                   , 'id': 'partyToProtocol'     , 'description': '' });
@@ -397,8 +396,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         //SCBD
                         _.each(scbdSchemas, function (schema, key) {
-                            addFilter(key, { 'sort': schema.sort, 'type': 'scbd', 'name': schema.title, 'id': key, 
-                                    'description': (schema.description || {}), otherType:'schema' });
+                            addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': schema.title, 'id': key, 
+                                    'description': (schema.description || {}), otherType:'scbd' });
                         });
                     };
 
@@ -580,20 +579,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         
                         
                         return $q.all(promises);
-                        // var bchTerms = [
-                        //     'decisionTypes', 'decisionLMOFFPSubject', 'decisionResults', 'riskAssessmentScope', 'dnaSequenceFamily',
-                        //     'dnaSequenceTraits', 'legislationAgreementTypes', 'subjectAreas', 'typeOfOrganisms', 'domestication', 'OrganismCommonUses',
-                        //     'techniqueUsed', 'cnaJurisdictions'
-                        // ]
-                    
-                        // $q.all(_.map(bchTerms, thesaurusService.getDomainTerms))
-                        //     .then(function (results) {
-                        //         _.each(results, function (terms) {
-                        //             _.each(terms, function (term) {
-                        //                 addKeywordFilter(term, 'bchTerm', "ABS Thematic Areas");
-                        //             })
-                        //         });
-                        //     })
                     
                     }
 
@@ -605,23 +590,36 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         return deferred.promise;
                     }
-                    function loopKeywords(keywords, related, parent, level, broader){
+                    function loopKeywords(keywords, key, parent, level, broader){
                         if((keywords||[]).length){
                             _.each(keywords, function (keyword, index) {
-                                addKeywordFilter(keyword, related, parent, level, broader||keyword.broader||keyword.broaderTerms);
+                                addKeywordFilter(keyword, key, parent, level, broader||keyword.broader||keyword.broaderTerms);
                             });
                         }
                     }
 
                     function addKeywordFilter(keyword, related, parent, level, broader) {
-                        if (!level)
-                            level = 0;
-
-                        var dupIdentifier = isIdentifierDuplicate(keyword);
-                        if (dupIdentifier)
-                            addFilter(dupIdentifier.identifier + "@" + related, { 'type': 'keyword', 'name': dupIdentifier.title[locale || 'en'], 'id': dupIdentifier.identifier, 'description': '', 'parent': parent, 'related': related, filterID: dupIdentifier.identifier + "@" + related, 'level': level, 'broader': broader, isDuplicate: true });
-                        else
-                            addFilter(keyword.identifier + "@" + related, { 'type': 'keyword', 'name': keyword.title[locale || 'en'], 'id': keyword.identifier, 'description': '', 'parent': parent, 'related': related, filterID: keyword.identifier + "@" + related, 'level': level, 'broader': broader });
+                        
+                        // var dupIdentifier = isIdentifierDuplicate(keyword);
+                        // if (dupIdentifier)
+                        //     addFilter(dupIdentifier.identifier + "@" + related, 
+                        //     { 'type': 'keyword', 'name': dupIdentifier.title[locale || 'en'], 'id': dupIdentifier.identifier, 
+                        //         'description': '', 'parent': parent, 'related': related, filterID: dupIdentifier.identifier + "@" + related, 
+                        //         'level': level, 'broader': broader, isDuplicate: true });
+                        // else
+                        var existingFilter = _.find($scope.searchFilters, function(fil){
+                            return fil.name.en == keyword.title.en
+                        })
+                        if(existingFilter){
+                            existingFilter.identifiers = _.union([keyword.identifier], existingFilter.identifiers||[])
+                        }
+                        else{
+                            var filter = {  'type': 'keyword', 'name': keyword.title, 'id': keyword.identifier, 'description': '', 
+                                            'parent': parent, 'related': related, filterID: keyword.identifier + "@" + related, 'level': level, 
+                                            'broader': broader 
+                            };
+                            addFilter(keyword.identifier, filter);
+                        }
 
                     }
 
@@ -686,9 +684,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 sortFields = $scope.searchResult.sortFields.join(', ');
 
                             var viewType = $scope.searchResult.viewType;
-                            if($scope.searchResult.currentTab == 'nationalRecords')
+                            if(viewType=='default' && $scope.searchResult.currentTab == 'allRecords')
+                                viewType = 'list'
+                            else if(viewType=='default' && $scope.searchResult.currentTab == 'nationalRecords')
                                 viewType = 'group'
-                            else if($scope.searchResult.currentTab == 'referenceRecords' || $scope.searchResult.currentTab == 'scbdRecords')
+                            else if(viewType=='default' && ($scope.searchResult.currentTab == 'referenceRecords' || $scope.searchResult.currentTab == 'scbdRecords'))
                                 viewType = 'list'
 
                             if(viewType == 'list'){
@@ -715,15 +715,18 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var qOr  = [];
                         var q    = '';
                         var q1   = '';
+                        
+                        if($scope.searchResult.currentTab != 'allRecords')
+                            tagQueries.sct = 'schemaType_s:' + $scope.searchResult.currentTab.replace('Records', '')
 
                         tagQueries.sch = buildSchemaQuery  ();
                         tagQueries.gov = buildFieldQuery   ('government_s'      , 'country'     , null );
                         tagQueries.pst = buildCountryQuery ('government_s'      , 'partyStatus' , null );
                         tagQueries.reg = buildFieldQuery   ('government_REL_ss' , 'region'      , null );
                         var termsQ     = buildFieldQuery   ('all_terms_ss'      , 'keyword'     , null );
-                        var termsTxtQ  = buildTextQuery    ('text_EN_txt'       , 'keyword'     , null );
-                        if(termsQ)
-                            tagQueries.key = '('+ termsQ + ' OR ' + termsTxtQ + ')';
+                        // var termsTxtQ  = buildTextQuery    ('text_EN_txt'       , 'keyword'     , null );
+                        // if(termsQ)
+                        tagQueries.key = termsQ //'('+ termsQ + ' OR ' + termsTxtQ + ')';
 
                         qAnd .push(buildTextQuery    ('text_EN_txt'       , 'freeText'    , null ));
 
@@ -822,25 +825,18 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     function buildSchemaQuery() {
                         
                         var tab = $scope.searchResult.currentTab; 
-                        var tabSchemas;
-                        if(tab == 'nationalRecords')
-                            tabSchemas = _($scope.searchFilters).values().filter({otherType:'schema', type:'national'}).map('id').without('contact').value()
-                        else if(tab == 'referenceRecords')
-                            tabSchemas = _($scope.searchFilters).values().filter({otherType:'schema', type:'reference'}).map('id').without('organization').value()
-                        else if(tab == 'scbdRecords')
-                            tabSchemas = _($scope.searchFilters).values().filter({otherType:'schema', type:'scbd'}).map('id').value()
-
+                        
                         var tabValidation = function(item){
-                            return item.otherType == 'schema' && 
-                                (tab == 'allRecords' || ~_.indexOf(tabSchemas, item.id))
+                            return item.otherType == 'schema'
                         }
 
                         var query = buildFieldQuery('schema_s', 'schema', null, tabValidation)
                         if (query == null) {                           
-                            if(tab == 'allRecords')
+                            // if(tab == 'allRecords')
                                 return "NOT schema_s:(contact organization)";
-
-                            query = "schema_s:(" + tabSchemas.join(' ') + ")"
+                            
+                            // var schemas = _($scope.searchFilters).values().filter({otherType:'schema'}).map('id').without(['contact', 'organization']).value();                        
+                            // query = "schema_s:(" + schemas.join(' ') + ")"
                         }
                     
                         return query;
@@ -849,9 +845,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     function buildFieldQuery(field, type, allFilters, validationfn) {
                         var q = '';
                         var capacityBuildingResource;
-                        if ($scope.setFilters[type]) {
-                            q = field + ":(" + encodeURIComponent(allFilters) + ")"
-                        } else {
+                        
                             _.each($scope.setFilters, function (item) {
 
                                 if ((validationfn !== undefined && validationfn(item)) || (validationfn === undefined && item.type == type )) {
@@ -867,15 +861,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                                 }
                             });
-                        }
 
                         if (q) {
                             var newQuery = field + ":(" + q + ")";
                             if (capacityBuildingResource)
                                 newQuery += ' AND all_terms_ss:(' + encodeURIComponent(customKeywords['capacityBuildingResource'].identifiers.join(' ')) + ') ';
                             return newQuery;
-                        } else if (allFilters)
-                            return field + ":(" + encodeURIComponent(allFilters) + ")";
+                        }
                         else
                             return null;
                     }
@@ -965,8 +957,40 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         return map
                     }
 
-                    // function onSchemaFilterChanged(schema)
-
+                    function sanitizeFacets(facets){
+                        var schemaTypes = {all:0}
+                        _.each((facets.facet_fields['schemaType_s']||[]), function(facet, key){
+                            schemaTypes[key] = facet;
+                            schemaTypes.all = schemaTypes.all + (schemaTypes[key]||0);
+                        });
+                        
+                        return {
+                                    schemaTypes: schemaTypes, 
+                                    schemas   : facets.facet_fields['schema_s'], 
+                                    keywords  : facets.facet_fields['all_terms_ss'],
+                                    countries : facets.facet_fields['government_s'], 
+                                    regions   : facets.facet_fields['government_REL_ss']
+                                };
+                    }
+                    var bchSchemaFieldMapping = {
+                        'decisionTypes'             : [{ key:'biosafetyDecision', title:'Type of Document' , field:''}],
+                        'legislationAgreementTypes' : [{ key:'biosafetyLaw', title:'Type of document', field:''}],
+                        'subjectAreas'              : [{ key:'biosafetyLaw', title:'Subject Areas', field:''},
+                                                        { key:'authority', title:'Regulatory Functions', field:''}],
+                        'cnaJurisdictions'          : [{ key:'authority', title:'Jurisdictions' , field:''}],
+                        'riskAssessmentScope'       : [{ key:'nationalRiskAssessment',title:'Scope of the risk assessment', field:''},
+                                                        { key:'independentRiskAssessment',title:'Scope of the risk assessment', field:''}],
+                        'organizationTypes'         : [{ key:'expert', title:'Type of Organization', field:''},
+                                                        { key:'organization', title:'Type of Organization', field:''}],
+                        'expertiseArea'             : [{ key:'expert', title:'Areas of Expertise', field:''}],
+                        'resourceTypes'             : [{ key:'resource', title:'Type of resource', field:''}],
+                        'languages'                 : [{ key:'resource', title:'Language' , field:''}],
+                        'typeOfOrganisms'           : [{ key:'organism', title:'Type of organism(s)', field:''}],
+                        'domestication'             : [{ key:'organism', title:'Organism domestication', field:''}],
+                        'OrganismCommonUses'        : [{ key:'modifiedOrganism', title:'Common use(s)', field:''},
+                                                        { key:'organism', title:'Common use(s)', field:''}],
+                        'dnaSequenceFamily'         : [{ key:'dnaSequence', title:'Category', field:''}]
+                    }
                     ////////////////////////////////////////////
                     ////// end internal functions
                     ////////////////////////////////////////////
@@ -982,6 +1006,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     this.groupByFields            = groupByFields           ;
                     this.groupingCombination      = groupingCombination     ;
                     this.combinationField         = combinationField        ;
+
+                    this.sanitizeFacets           = sanitizeFacets          ;
                     
             }]//controller
         };

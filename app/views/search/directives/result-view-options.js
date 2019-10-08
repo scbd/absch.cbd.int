@@ -94,7 +94,10 @@
                 }
 
                 $scope.viewTypeChange = function(type){
-                    if(type == 'list'){
+                    if(type == 'default'){
+                        $scope.groupByFields = ['government', 'schema'];
+                        $scope.onViewTypeChange({options:{viewType:type}})
+                    }if(type == 'list'){
                         $scope.onViewTypeChange({options:{viewType:type}})
                     }
                     if(type == 'group'){
