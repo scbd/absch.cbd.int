@@ -11,7 +11,7 @@
                      <button class="btn btn-xs btn-info bold" style="margin-top:5px;"
                          ng-click="removeFilter(filter.id)">
                          <span
-                             ng-if="filter.type === 'freeText' || filter.type === 'UID' || filter.type === 'custom'">&#34;</span>{{filter.name}}<span
+                             ng-if="filter.type === 'freeText' || filter.type === 'UID' || filter.type === 'custom'">&#34;</span>{{filter.name|lstring:locale}}<span
                              ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
                          <span aria-hidden="true">x</span>
                      </button>
