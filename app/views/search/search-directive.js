@@ -7,7 +7,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 'angular-joyride','components/scbd-angularjs-services/services/locale',
 'components/scbd-angularjs-controls/form-control-directives/pagination',
 'views/search/directives/result-view-options', 'views/search/search-filters/left-side-filter',
-'views/search/search-results/list-view','views/search/search-results/group-view', 'components/scbd-angularjs-controls/form-control-directives/km-date-range'
+'views/search/search-results/list-view','views/search/search-results/group-view', 
+'components/scbd-angularjs-controls/form-control-directives/km-date-range', 'services/solr'
 
 ], function(app, template, _, scbdSchemas, joyRideText) {
 
@@ -18,104 +19,102 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
             template: template, 
             controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService','$rootScope',
-             'joyrideService', '$timeout', 'locale',
+             'joyrideService', '$timeout', 'locale', 'solr',
             function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
-                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, $timeout, locale) {
+                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, 
+                    $timeout, locale, solr) {
                     
-                    var activeFilter;
-                    var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
-                    var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
-
-                    var groupFieldMapping = [
-                        {
-                            field:'government', 
-                            sortFields:['government_EN_s asc']
-                        },
-                        {
-                            field:'schema', 
-                            sortFields:['schema_EN_s asc']
-                        },
-                        {
-                            field:'submissionYear', 
-                            sortFields:['submissionYear_s asc']
-                        }
-                    ];
-
-                    var queryCanceler = null;
-                    var customKeywords = {
-                        commercial : {
-                            identifier  : 'commercial',
-                            "title": {
-                                "en": "Commercial",
-                                "es": "Comercial",
-                                "fr": "Commercial",
-                                "ar": "تجاري",
-                                "ru": "Коммерческое",
-                                "zh": "商业"
+                        var activeFilter;
+                        var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
+                        var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
+    
+                        var groupFieldMapping = [
+                            {
+                                field:'government', 
+                                sortFields:['government_EN_s asc']
                             },
-                            identifiers : [ 'A50D6E64BC6042428FF79C23E8FA3CF2', '7CAC5B93-7E27-441F-BFEB-9E416D48B1BE',
-                                            '3AC68883-4DD9-4F07-A941-30F7B910D24C']
-                        },
-                        nonCommercial : {
-                            identifier  : 'nonCommercial',
-                            "title":{
-                                "en":"Non-Commercial",
-                                "es":"No comercial",
-                                "fr":"Non-commercial",
-                                "ar":"غير تجاري",
-                                "ru":"Некоммерческое",
-                                "zh":"非商业"
+                            {
+                                field:'schema', 
+                                sortFields:['schema_EN_s asc']
                             },
-                            identifiers : [ 'A7769659-17DB-4ED4-B1CA-A3ADD9CBD3A4',
-                                            '7E3ECD30-1972-487B-A920-DDB439DC2DF6', '71E387A85A644CCCB1C2D6DDFA8493DD']
-                        },
-                        capacityBuildingResource : {
-                            identifier  : 'capacityBuildingResource',
-                            title : {en:'Capacity building resource'},
-                            identifiers : [ 'A5C5ADE8-2061-4AB8-8E2D-1E6CFF5DD793', '3813BA1A-2DE7-4DD5-8415-3B2C6737E567',
-                                           '9F48AEA0-EE28-4B6F-AB91-E0E088A8C6B7', '05FA6F66-F942-4713-BB4C-DA032C111188', 
-                                           '5831C357-95CA-4F09-963B-DF9E8AFD8C88', '5054AC52-E738-4694-A403-6490FE7D4CF4']
-                        }
-                    }
-                    var isABS = realm.is('ABS');
-                    var isBCH = realm.is('BCH');
-                    var schemaTemplate = {};
-                    var index=0;        
-                    _(realm.schemas).map(function(schema, key){ 
-                        if(schema.type=='national' && key!= 'contact'){
-                            schemaTemplate[key] = { title : schema.title, shortCode : schema.shortCode, index: index++, docs:[], numFound:0};
-                        }
-                    }).value();
-
-                    $scope.realm         = realm
-                    $scope.searchFilters = {};
-                    $scope.setFilters    = {};
-                    $scope.relatedKeywords = {};
-                    $scope.searchResult = {
-                        sortFields      : ['updatedDate_dt desc'],
-                        currentTab      : 'allRecords',
-                        currentPage     : 1,
-                        rowsPerPage     : 25,
-                        groupByFields   : ['government', 'schema'],
-                        sortFields      : [],
-                        viewType        : 'default',
-
-                        skipResults       : $attrs.skipResults,
-                        skipDateFilter    : $attrs.skipDateFilter,
-                        skipSaveFilter    : $attrs.skipSaveFilter,
-                        skipTextFilter    : $attrs.skipTextFilter,
-                        skipKeywordsFilter: $attrs.skipKeywordsFilter,
-
-                        searchFilters   : {},
-                        countriesFilters: {},
-                        regionsFilter   : {},
-                        searchKeyword   : ''
-                    }                    
-
+                            {
+                                field:'submissionYear', 
+                                sortFields:['submissionYear_s asc']
+                            }
+                        ];    
+                        var queryCanceler = null;                        
+                        var isABS = realm.is('ABS');
+                        var isBCH = realm.is('BCH');   
+                        leftMenuFilters      = [];
+                        $scope.realm         = realm
+                        $scope.searchFilters = {};
+                        $scope.setFilters    = {};
+                        $scope.relatedKeywords = {};
+                        $scope.searchResult = {
+                            sortFields      : ['updatedDate_dt desc'],
+                            currentTab      : 'allRecords',
+                            currentPage     : 1,
+                            rowsPerPage     : 25,
+                            groupByFields   : ['government', 'schema'],
+                            sortFields      : [],
+                            viewType        : 'default',
+    
+                            skipResults       : $attrs.skipResults,
+                            skipDateFilter    : $attrs.skipDateFilter,
+                            skipSaveFilter    : $attrs.skipSaveFilter,
+                            skipTextFilter    : $attrs.skipTextFilter,
+                            skipKeywordsFilter: $attrs.skipKeywordsFilter,
+    
+                            searchFilters   : {},
+                            countriesFilters: {},
+                            regionsFilter   : {},
+                            searchKeyword   : ''
+                        }   
 
                     ////////////////////////////////////////////
-                    ////// $scope functions
+                    ////// scope functions
                     ////////////////////////////////////////////
+
+                    $scope.saveFilter = function (doc) {
+
+                        // if(!$scope.searchResult.data.facets[doc.id])
+                        //     return;
+                        //TODO: if free text check to see if there is a UID and convert to identifier                    
+                        
+                        // if (typeof doc === 'string') {
+                        //     filterID = doc;
+                        //     termID = $scope.searchFilters[filterID].id;
+                        //     var broader = $scope.searchFilters[filterID].broader;
+                        // }
+
+                        if ($scope.setFilters[doc.id]){
+                            delete $scope.setFilters[doc.id];
+                        }
+                        else {
+                            $scope.setFilters[doc.id] = {
+                                type     : doc.type,
+                                otherType: doc.otherType,
+                                name     : doc.name,
+                                id       : doc.id
+                            };
+                        }
+                        if($scope.setFilters[doc.id].type == 'schema'){
+                            $scope.leftMenuEnabled = true;
+                            if($scope.onSchemaFilterChanged){
+                                var leftFilters = $scope.onSchemaFilterChanged(doc.id, $scope.setFilters[doc.id])
+                                leftMenuFilters = leftFilters
+                            }
+                        }
+                        
+                        // if(!_.isEmpty($scope.setFilters)){ 
+                        //     //if not empty and the default sort is not set by the user then remove sort to default to relevance
+                        //     if($scope.searchResult.sortFields.length == 1 && $scope.searchResult.sortFields[0]=='updatedDate_dt')
+                        //         $scope.searchResult.sortFields = [];
+                        // }
+                        console.log($scope.setFilters);
+                        updateQueryResult();
+                    };
+
                     $scope.saveFreeTextFilter = function(text) {
 
                         if(!text && text.length <= 0)
@@ -135,66 +134,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         $scope.refresh = true;
                     };
 
-                    $scope.isFilterOn = function (filterID) {
-                        if (!filterID)
-                            return false;
-
-                        return $scope.setFilters[filterID] ? true : false;
-                    };
-
-                    $scope.saveFilter = function (doc) {
-
-                        // if(!$scope.searchResult.data.facets[doc.id])
-                        //     return;
-                        //TODO: if free text check to see if there is a UID and convert to identifier
-                        activeFilter = doc.otherType||doc.type
-                        var filterID = doc.id;
-                        var termID = doc.id;
-                        var broader = null;
-
-                        if (doc.filterID) {
-                            filterID = doc.filterID;
-                            termID = $scope.searchFilters[filterID].id;
-                            var broader = $scope.searchFilters[filterID].broader;
-                        }
-                        if (typeof doc === 'string') {
-                            filterID = doc;
-                            termID = $scope.searchFilters[filterID].id;
-                            var broader = $scope.searchFilters[filterID].broader;
-                        }
-
-                        if ($scope.setFilters[termID]){
-                            delete $scope.setFilters[termID];
-                        }
-                        else {
-                            $scope.setFilters[termID] = {
-                                type     : $scope  .searchFilters[filterID].type,
-                                otherType: $scope  .searchFilters[filterID].otherType,
-                                name     : $scope  .searchFilters[filterID].name,
-                                id       : termID  ,
-                                broader  : broader ,
-                                filterID : filterID
-                            };
-                        }
-                        if($scope .searchFilters[filterID].otherType == 'schema'){
-                            $scope.getRelatedKeywords();
-                            $scope.leftMenuEnabled = true;
-                            if($scope.onSchemaFilterChanged)
-                                $scope.onSchemaFilterChanged(termID, $scope.setFilters[termID])
-                        }
-                        else if($scope .searchFilters[filterID].type == 'keyword'){
-                            $scope.updateLeftFilterStatus(termID, $scope.setFilters[termID])
-                        }
-                        
-                        // if(!_.isEmpty($scope.setFilters)){ 
-                        //     //if not empty and the default sort is not set by the user then remove sort to default to relevance
-                        //     if($scope.searchResult.sortFields.length == 1 && $scope.searchResult.sortFields[0]=='updatedDate_dt')
-                        //         $scope.searchResult.sortFields = [];
-                        // }
-                        updateQueryResult();
-                    };
-
-
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
                         var name = dateVal.field.replace('_dt', '').replace(/[A-Z]/g, ' $&') + ' (' +
                                     dateVal.value.start + ' - ' + dateVal.value.end + ')' 
@@ -213,12 +152,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var id = $scope.setFilters[filterID].filterID
                         delete $scope.setFilters[filterID];
 
-                        if($scope.searchFilters[filterID] && $scope.searchFilters[filterID].otherType == 'schema' && $scope.onSchemaFilterChanged){
-                            $scope.onSchemaFilterChanged(filterID, $scope.setFilters[filterID]);
-                            $scope.getRelatedKeywords();
-                        }
-                        else if($scope.searchFilters[id].type == 'keyword'){
-                            $scope.updateLeftFilterStatus(filterID, $scope.setFilters[filterID])
+                        if($scope.searchFilters[filterID] && $scope.searchFilters[filterID].type == 'schema' && $scope.onSchemaFilterChanged){
+                            var leftFilters = $scope.onSchemaFilterChanged(filterID, $scope.setFilters[filterID])
+                            leftMenuFilters = leftFilters;
                         }
                         //remove children
                         var dels = {};
@@ -249,28 +185,12 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             updateQueryResult();
                     }
 
-                    $scope.getRelatedKeywords = function () {
-                        
-                        var relatedKeywords = $scope.relatedKeywords = {};
-                        var setIds = {};
-                        var keywords = getSearchFilters("keyword");
+                    $scope.isFilterOn = function (filterID) {
+                        if (!filterID)
+                            return false;
 
-                        if ($scope.setFilters) {
-
-                            _.each($scope.setFilters, function (set) {
-
-                                relatedKeywords = _.filter(keywords, function (item) {
-
-                                    if (item.related.toLowerCase().indexOf(set.id.toLowerCase()) >= 0)
-                                        return item;
-                                    else
-                                        return null;
-                                });
-                                if (!_.isEmpty(relatedKeywords))
-                                    $scope.relatedKeywords[set.id] = relatedKeywords;
-                            });
-                        }
-                    }
+                        return $scope.setFilters[filterID] ? true : false;
+                    };
 
                     $scope.switchTab = function(tab){
                         $scope.searchResult.currentTab = tab;
@@ -279,10 +199,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
 
                     $scope.clearFilter = function(){
-                        $scope.setFilters = {};$scope.leftMenuFilters = {}
+                        $scope.setFilters = {};leftMenuFilters = []
                         updateQueryResult();
                     };
-
 
                     ////////////////////////////////////////////
                     ////// end $scope functions
@@ -319,7 +238,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if(query.viewType)
                             $scope.searchResult.viewType = query.viewType;
 
-                        if(!$scope.skipResults && $routeParams.recordType){
+                        if($routeParams.recordType){
                             if($routeParams.recordType == 'run-query'){
                                 var queryFilter = localStorageService.get("run-query");                            
                                 setSearchFilters(queryFilter);
@@ -339,21 +258,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             }
                         }
 
-                        $timeout(function(){
-                            if(!$scope.skipResults)updateQueryResult(currentpage);
-
-                        }, 200)
-
-                        // if(!$scope.skipResults){
-                        //     $scope.$watch('refresh', function(newVal, oldVal){
-                        //         if(newVal && newVal !== oldVal){
-                        //             refreshResult();                                
-                        //             $scope.getRelatedKeywords();
-                        //         }
-                        //     });
-                        // }
+                        $timeout(function(){updateQueryResult(currentpage);}, 200)
                     }
 
+                    
                     function loadFilters() {
                 
                         if (_.isEmpty($scope.searchFilters)) {
@@ -371,15 +279,38 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                             $q.all([loadSchemaFilters(), loadCountryFilters(), loadRegionsFilters(), loadDateFilters(), chKeywordsFilter])
                             .then(function(){
-                                localStorageService.set("searchFilters", $scope.searchFilters);
+                                console.log($scope.searchFilters)
+                                // localStorageService.set("searchFilters", $scope.searchFilters);
                             })
                         }                
                     };
 
-
-                    function addFilter(filterID, filterInfo) {                        
-                        $scope.searchFilters[filterID] = filterInfo;
+                    function addFilter(filterKey, filterInfo) {                        
+                        $scope.searchFilters[filterKey] = filterInfo;
                     };
+
+                    function getSearchFilters(type, fn) {
+                        if (!type)
+                            return $scope.searchFilters;
+
+                        return _.filter($scope.searchFilters, function (item) {
+                            if (item.type === type && (fn==undefined || fn(item)))  return item;
+                        });
+                    };
+                    
+                    function getSelectedFilters(type, fn) {
+                        if (!type)
+                            return $scope.setFilters;
+
+                        return _.filter($scope.setFilters, function (item) {
+                            if (item.type === type && (fn==undefined || fn(item)))  return item;
+                        });
+                    };
+
+                    function getFilter(id) {
+                        return $scope.searchFilters[id];
+                    };
+
 
                     function loadSchemaFilters() {
 
@@ -401,17 +332,16 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         });
                     };
 
-
                     function loadCountryFilters() {
 
                         return $q.when(commonjs.getCountries(), function (data) {
                             var countries = data;
 
                             _.each(countries, function (country, index) {
-                                addFilter(country.code.toLowerCase(), { 'sort': index, 'type': 'country', 'name': country.name[locale || en], 
+                                addFilter(country.code.toLowerCase(), { 'sort': index, 'type': 'country', 'name': country.name, 
                                 'id': country.code.toLowerCase(), 'description': '', "isCBDParty": country.isCBDParty, "isNPParty": country.isNPParty, 
                                 "isAppProtocolParty": country.isAppProtocolParty, "isNPSignatory": country.isNPSignatory, "isNPRatified": country.isNPRatified, 
-                                "isNPInbetweenParty": country.isNPInbetweenParty, "entryIntoForce": country.entryIntoForce });
+                                "isNPInbetweenParty": country.isNPInbetweenParty, "entryIntoForce": country.entryIntoForce});
                             });
                         });
                     };
@@ -427,7 +357,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     function addRegionFilter(region, parent) {
 
-                        addFilter(region.identifier, { 'type': 'region', 'name': region.title[locale || en], 'id': region.identifier, 
+                        addFilter(region.identifier, { 'type': 'region', 'name': region.title, 'id': region.identifier, 
                         'description': '', 'parent': parent });
 
                         _.each(region.narrowerTerms, function (narrower) {
@@ -440,141 +370,26 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         'description': 'Date range when the record was published' });
                     };
 
-                    function loadABSKeywordFilters() {
-
-                        var promises = [];
-                        //IRCC filters
-                        addKeywordFilter(customKeywords.commercial, 'absPermit', 'IRCC usages');
-                        addKeywordFilter(customKeywords.nonCommercial, 'absPermit', 'IRCC usages');
-                    
-                        promises.push(thesaurusService.getDomainTerms('keywords'), function (keywords) {
-                            _.each(keywords, function (keyword, index) {
-                                addKeywordFilter(keyword, 'absPermit', 'IRCC keywords');
-                            });
-                        });
-                    
-                        //CP
-                        promises.push(thesaurusService.getDomainTerms('cpJurisdictions'), function (keywords) {
-                            _.each(keywords, function (keyword, index) {
-                                addKeywordFilter(keyword, 'absCheckpoint', 'Checkpoint jurisdiction');
-                            });
-                        });
-                        //CPC
-                        promises.push(thesaurusService.getDomainTerms('keywords'), function (keywords) {
-                            _.each(keywords, function (keyword, index) {
-                                addKeywordFilter(keyword, 'absCheckpointCommunique', 'Checkpoint communique keywords');
-                            });
-                        });
-
-                        promises.push(commonjs.getThematicAreas(), function (keywords) {
-                            var levels = [];
-                            var parents = [];
-                            var level = 0;
-                    
-                            _.each(keywords, function (keyword, index) {
-                    
-                                levels[keyword.identifier] = 1;
-                                parents[keyword.identifier] = '';
-                    
-                                if (keyword.broaderTerms.length === 0)
-                                    levels[keyword.identifier] = 0;
-                    
-                                if (keyword.broaderTerms.length > 0) {
-                                    levels[keyword.identifier] = levels[keyword.broaderTerms] + 1;
-                                    parents[keyword.identifier] = keyword.broaderTerms.join();
-                                }
-                    
-                            });
-                    
-                            _.each(keywords, function (keyword, index) {
-                                addKeywordFilter(keyword, '', 'ABS Thematic Areas', levels[keyword.identifier], parents[keyword.identifier]);
-                            });
-                    
-                        });                                        
-                    
-                        promises.push(commonjs.getMSR_elements(), function (keywords) {
-                            var levels = [];
-                            var parents = [];
-                            var level = 0;
-                    
-                            _.each(keywords, function (keyword, index) {
-                    
-                                levels[keyword.identifier] = 1;
-                                parents[keyword.identifier] = '';
-                    
-                                if (keyword.broaderTerms.length === 0)
-                                    levels[keyword.identifier] = 0;
-                    
-                                if (keyword.broaderTerms.length > 0) {
-                                    levels[keyword.identifier] = levels[keyword.broaderTerms] + 1;
-                                    parents[keyword.identifier] = keyword.broaderTerms.join();
-                                }
-                    
-                            });
-                    
-                            _.each(keywords, function (keyword, index) {
-                                addKeywordFilter(keyword, 'measure', 'Key elements', levels[keyword.identifier], parents[keyword.identifier]);
-                            });
-                    
-                        });
-                    
-                        promises.push(commonjs.getKeyAreas          ().then(function(keywords){loopKeywords(keywords, ''                                                             , ''                                  )}));
-                        promises.push(commonjs.getCBI_audience      ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative resource capacitybuildingresource' , 'Target Audience'                   )}));
-                        promises.push(commonjs.getMSR_types         ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Type'                              )}));
-                        promises.push(commonjs.getMSR_status        ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Legal Status'                      )}));
-                        promises.push(commonjs.getMSR_modelcontract ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Contains model contractual clause' )}));
-                        promises.push(commonjs.getCNA_scope         ().then(function(keywords){loopKeywords(keywords, 'authority'                                                    , 'Scope of responsibilities'         )}));
-                        promises.push(commonjs.getMSR_jurisdictions ().then(function(keywords){loopKeywords(keywords, 'measure'                                                      , 'Jurisdiction'                      )}));
-                        promises.push(commonjs.getCNA_jurisdictions ().then(function(keywords){loopKeywords(keywords, 'authority'                                                    , 'Jurisdiction'                      )}));
-                        promises.push(commonjs.getMCC_keywords      ().then(function(keywords){loopKeywords(keywords, 'modelcontractualclause'                                       , 'Keyword'                           )}));
-                        promises.push(commonjs.getMCC_types         ().then(function(keywords){loopKeywords(keywords, 'modelcontractualclause'                                       , 'Type'                              )}));
-                        promises.push(commonjs.getCBI_cats          ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Category'                          )}));
-                        promises.push(commonjs.getCBI_types         ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Type'                              )}));
-                        promises.push(commonjs.getCBI_fundingsrc    ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Funding Source'                    )}));
-                        promises.push(commonjs.getCBI_status        ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Status'                            )}));
-                        promises.push(commonjs.getCBI_status        ().then(function(keywords){loopKeywords(keywords, 'capacitybuildinginitiative'                                   , 'Status'                            )}));
-                        promises.push(commonjs.getCBR_level         ().then(function(keywords){loopKeywords(keywords, 'resource capacitybuildingresource'                            , 'Level'                             )}));
-                        promises.push(commonjs.getCBR_purpose       ().then(function(keywords){loopKeywords(keywords, 'resource capacitybuildingresource'                            , 'Purpose'                           )}));
-                        promises.push(commonjs.getCBR_formats       ().then(function(keywords){loopKeywords(keywords, 'resource capacitybuildingresource'                            , 'Format'                            )}));
-                        promises.push(commonjs.getCPP_types         ().then(function(keywords){loopKeywords(keywords, 'communityprotocol'                                            , 'Type'                              )}));
-                        promises.push(commonjs.getAichiTargets      ().then(function(keywords){loopKeywords(keywords, ''                                                             , 'Aichi Targets'                     )}));
-                        
-
-                        return $q.all(promises)
-                    };
-                    
                     function loadBCHKeywordFilters() {
                         var promises = []
-                        promises.push(loadJsonFile('/app/app-data/bch/focalpoint-category.json').then(function(keywords){
-                            _.each(keywords, function (title, key) {
-                                var keyword = { identifier:key };
-                                keyword.title = {};
-                                keyword.title[locale] = title;
-                                addKeywordFilter(keyword, 'focalPoint', 'Type of Focal point');
-                            });
-                        }));
-
-                        promises.push(thesaurusService.getDomainTerms('decisionTypes'             ).then(function(keywords){loopKeywords(keywords, 'biosafetyDecision'                                , 'Type of Document'                            )}));
-                        promises.push(thesaurusService.getDomainTerms('legislationAgreementTypes' ).then(function(keywords){loopKeywords(keywords, 'biosafetyLaw'                                     , 'Type of document'                            )}));
-                        promises.push(thesaurusService.getDomainTerms('subjectAreas'              ).then(function(keywords){loopKeywords(keywords, 'biosafetyLaw authority'                           , 'Subject Areas / Regulatory Functions'        )}));
-                        promises.push(thesaurusService.getDomainTerms('cnaJurisdictions'          ).then(function(keywords){loopKeywords(keywords, 'authority'                                        , 'Jurisdictions'                               )}));
-                        promises.push(thesaurusService.getDomainTerms('riskAssessmentScope'       ).then(function(keywords){loopKeywords(keywords, 'nationalRiskAssessment independentRiskAssessment' , 'Scope of the risk assessment'                )}));
-                        promises.push(thesaurusService.getDomainTerms('organizationTypes'         ).then(function(keywords){loopKeywords(keywords, 'expert organization'                              , 'Type of Organization'                        )}));
-                        promises.push(thesaurusService.getDomainTerms('expertiseArea'             ).then(function(keywords){loopKeywords(keywords, 'expert'                                           , 'Areas of Expertise'                          )}));
-                        promises.push(thesaurusService.getDomainTerms('resourceTypes'             ).then(function(keywords){loopKeywords(keywords, 'resource'                                         , 'Type of resource'                            )}));
-                        promises.push(thesaurusService.getDomainTerms('languages'                 ).then(function(keywords){loopKeywords(keywords, 'resource'                                         , 'Language'                                    )}));
-                        promises.push(thesaurusService.getDomainTerms('typeOfOrganisms'           ).then(function(keywords){loopKeywords(keywords, 'organism'                                         , 'Type of organism(s)'                         )}));
-                        promises.push(thesaurusService.getDomainTerms('domestication'             ).then(function(keywords){loopKeywords(keywords, 'organism'                                         , 'Organism domestication'                      )}));
-                        promises.push(thesaurusService.getDomainTerms('OrganismCommonUses'        ).then(function(keywords){loopKeywords(keywords, 'organism modifiedOrganism'                        , 'Common use(s)'                               )}));
-                        promises.push(thesaurusService.getDomainTerms('dnaSequenceFamily'         ).then(function(keywords){loopKeywords(keywords, 'dnaSequence'                                      , 'Category'                                    )}));
-                        promises.push(thesaurusService.getDomainTerms('dnaSequenceTraits'         ).then(function(keywords){
-                            loopKeywords(keywords, 'dnaSequence modifiedOrganism'                     , 'Related trait(s) or use(s) in biotechnology' )
-                        }
-                            ));
-                        promises.push(thesaurusService.getDomainTerms('techniqueUsed'             ).then(function(keywords){loopKeywords(keywords, 'modifiedOrganism'                                 , 'Techniques used for the modification'        )}));
-
-                        promises.push(thesaurusService.getDomainTerms('decisionLMOFFPSubject'    ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')}));
-                        promises.push(thesaurusService.getDomainTerms('decisionResults'          ).then(function(keywords){loopKeywords(keywords, 'relatedschema' , 'Title')}));
+                        promises.push(focalPointTypes().then(function(keywords){loopKeywords(keywords);}));
+                        promises.push(thesaurusService.getDomainTerms('decisionTypes'             ).then(function(keywords){loopKeywords(keywords, 'decisionTypes'             )}));
+                        promises.push(thesaurusService.getDomainTerms('legislationAgreementTypes' ).then(function(keywords){loopKeywords(keywords, 'legislationAgreementTypes' )}));
+                        promises.push(thesaurusService.getDomainTerms('subjectAreas'              ).then(function(keywords){loopKeywords(keywords, 'subjectAreas'              )}));
+                        promises.push(thesaurusService.getDomainTerms('cnaJurisdictions'          ).then(function(keywords){loopKeywords(keywords, 'cnaJurisdictions'          )}));
+                        promises.push(thesaurusService.getDomainTerms('riskAssessmentScope'       ).then(function(keywords){loopKeywords(keywords, 'riskAssessmentScope'       )}));
+                        promises.push(thesaurusService.getDomainTerms('organizationTypes'         ).then(function(keywords){loopKeywords(keywords, 'organizationTypes'         )}));
+                        promises.push(thesaurusService.getDomainTerms('expertiseArea'             ).then(function(keywords){loopKeywords(keywords, 'expertiseArea'             )}));
+                        promises.push(thesaurusService.getDomainTerms('resourceTypes'             ).then(function(keywords){loopKeywords(keywords, 'resourceTypes'             )}));
+                        promises.push(thesaurusService.getDomainTerms('languages'                 ).then(function(keywords){loopKeywords(keywords, 'languages'                 )}));
+                        promises.push(thesaurusService.getDomainTerms('typeOfOrganisms'           ).then(function(keywords){loopKeywords(keywords, 'typeOfOrganisms'           )}));
+                        promises.push(thesaurusService.getDomainTerms('domestication'             ).then(function(keywords){loopKeywords(keywords, 'domestication'             )}));
+                        promises.push(thesaurusService.getDomainTerms('OrganismCommonUses'        ).then(function(keywords){loopKeywords(keywords, 'OrganismCommonUses'        )}));
+                        promises.push(thesaurusService.getDomainTerms('dnaSequenceFamily'         ).then(function(keywords){loopKeywords(keywords, 'dnaSequenceFamily'         )})); 
+                        promises.push(thesaurusService.getDomainTerms('dnaSequenceTraits'         ).then(function(keywords){loopKeywords(keywords, 'dnaSequenceTraits'         )}));
+                        promises.push(thesaurusService.getDomainTerms('techniqueUsed'             ).then(function(keywords){loopKeywords(keywords, 'techniqueUsed'             )}));
+                        promises.push(thesaurusService.getDomainTerms('decisionLMOFFPSubject'     ).then(function(keywords){loopKeywords(keywords, 'decisionLMOFFPSubject'     )}));
+                        promises.push(thesaurusService.getDomainTerms('decisionResults'           ).then(function(keywords){loopKeywords(keywords, 'decisionResults'           )}));
                         
                         
                         
@@ -582,6 +397,17 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     
                     }
 
+                    function focalPointTypes(){
+                        return loadJsonFile('/app/app-data/bch/focalpoint-category.json')
+                                .then(function(keywords){
+                                    return _.map(keywords, function (title, key) {
+                                        var keyword = { identifier:key };
+                                        keyword.title = {};
+                                        keyword.title[locale] = title;
+                                        return keyword;
+                                    });
+                                })
+                    }
                     function loadJsonFile(filePath){
                         var deferred = $q.defer();                        
                         require(['json!'+filePath], function(res){
@@ -590,325 +416,36 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         return deferred.promise;
                     }
-                    function loopKeywords(keywords, key, parent, level, broader){
+
+                    function loopKeywords(keywords, schemaFieldKey){
                         if((keywords||[]).length){
                             _.each(keywords, function (keyword, index) {
-                                addKeywordFilter(keyword, key, parent, level, broader||keyword.broader||keyword.broaderTerms);
+                                addKeywordFilter(keyword, schemaFieldKey, keyword.broader||keyword.broaderTerms);
                             });
                         }
                     }
 
-                    function addKeywordFilter(keyword, related, parent, level, broader) {
+                    function addKeywordFilter(keyword, schemaFieldKey, broader) {
                         
-                        // var dupIdentifier = isIdentifierDuplicate(keyword);
-                        // if (dupIdentifier)
-                        //     addFilter(dupIdentifier.identifier + "@" + related, 
-                        //     { 'type': 'keyword', 'name': dupIdentifier.title[locale || 'en'], 'id': dupIdentifier.identifier, 
-                        //         'description': '', 'parent': parent, 'related': related, filterID: dupIdentifier.identifier + "@" + related, 
-                        //         'level': level, 'broader': broader, isDuplicate: true });
-                        // else
+                        // var schemaFieldMap = _.cloneDeep(bchSchemaFieldMapping[schemaFieldKey]);
+
                         var existingFilter = _.find($scope.searchFilters, function(fil){
                             return fil.name.en == keyword.title.en
                         })
-                        if(existingFilter){
-                            existingFilter.identifiers = _.union([keyword.identifier], existingFilter.identifiers||[])
+                        if(existingFilter){                           
+                            // _.each(schemaFieldMap, function(field){
+                            //     field.identifier = keyword.identifier
+                            // })
+                            existingFilter.identifiers  = _([existingFilter.id]).union([keyword.identifier], existingFilter.identifiers||[]).compact().uniq().value()
+                            // existingFilter.schemaFields = _.union(schemaFieldMap, existingFilter.schemaFields||[])                            
                         }
                         else{
-                            var filter = {  'type': 'keyword', 'name': keyword.title, 'id': keyword.identifier, 'description': '', 
-                                            'parent': parent, 'related': related, filterID: keyword.identifier + "@" + related, 'level': level, 
-                                            'broader': broader 
-                            };
+                            var filter = {  'type': 'keyword', 'name': keyword.title, 'id': keyword.identifier, 'description': '', 'broader': broader };
                             addFilter(keyword.identifier, filter);
                         }
 
                     }
 
-                    function isIdentifierDuplicate(keyword) {
-                        var duplicate;
-                        _.reduce(customKeywords, function (memo, value, key) {
-                            if (_.contains(value.identifiers, keyword.identifier)) {
-                                duplicate = value;
-                            }
-                        }, {})
-                        return duplicate;
-                    }
-
-
-                    function getSearchFilters(type) {
-                        if (!type)
-                            return $scope.searchFilters;
-
-                        return _.filter($scope.searchFilters, function (item) {
-                            if (item.type === type) return item;
-                        });
-                    };
-
-
-                    function getSearchFiltersByParent(parent) {
-                        if (!parent)
-                            return $scope.searchFilters;
-
-                        return _.filter($scope.searchFilters, function (item) {
-                            if (item.parent === parent) return item;
-                        });
-                    };
-
-                    function setSearchFilters(filters) {
-                        $scope.setFilters = {};
-                        _.map(filters, function (query) {
-                            if (query.type == 'text') {
-                                $scope.saveFreeTextFilter(query);
-                            } else if (query.type == 'custom') {
-                                $scope.saveCustomFilter(query);
-                            } else {
-                                $scope.saveFilter(query);
-                            }
-                        });
-                    };
-
-                    function getSetFilters() {
-                        return $scope.setFilters;
-                    };
-
-                    function getFilter(id) {
-                        return $scope.searchFilters[id];
-                    };
-
-                    function updateQueryResult(pageNumber){
-                        $timeout(function(){//call digest cycle to update the directive api params
-                            $scope.searchResult.loading = true;
-                            var queryOptions = buildSearchQuery()
-                            var sortFields = ''
-                            var resultQuery;
-                            if(($scope.searchResult.sortFields||[]).length > 0)
-                                sortFields = $scope.searchResult.sortFields.join(', ');
-
-                            var viewType = $scope.searchResult.viewType;
-                            if(viewType=='default' && $scope.searchResult.currentTab == 'allRecords')
-                                viewType = 'list'
-                            else if(viewType=='default' && $scope.searchResult.currentTab == 'nationalRecords')
-                                viewType = 'group'
-                            else if(viewType=='default' && ($scope.searchResult.currentTab == 'referenceRecords' || $scope.searchResult.currentTab == 'scbdRecords'))
-                                viewType = 'list'
-
-                            if(viewType == 'list'){
-                                resultQuery = $scope.searchResult.listViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
-                            }
-                            else if(viewType == 'group'){
-                                queryOptions.groupByFields = $scope.searchResult.groupByFields;                                
-                                updateQueryString('group', queryOptions.groupByFields);
-                                resultQuery = $scope.searchResult.groupViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
-                            }
-                            else if($scope.searchResult.viewType == 'matrix'){
-                                
-                            }
-                            resultQuery.then(function(data){
-                                $scope.searchResult.data = data;
-                            })
-                            .finally(function(){$scope.searchResult.loading = false;})
-                        }, 0)
-                    }
-
-                    function buildSearchQuery(){
-                        var tagQueries = {};
-                        var qAnd = [];
-                        var qOr  = [];
-                        var q    = '';
-                        var q1   = '';
-                        
-                        if($scope.searchResult.currentTab != 'allRecords')
-                            tagQueries.sct = 'schemaType_s:' + $scope.searchResult.currentTab.replace('Records', '')
-
-                        tagQueries.sch = buildSchemaQuery  ();
-                        tagQueries.gov = buildFieldQuery   ('government_s'      , 'country'     , null );
-                        tagQueries.pst = buildCountryQuery ('government_s'      , 'partyStatus' , null );
-                        tagQueries.reg = buildFieldQuery   ('government_REL_ss' , 'region'      , null );
-                        var termsQ     = buildFieldQuery   ('all_terms_ss'      , 'keyword'     , null );
-                        // var termsTxtQ  = buildTextQuery    ('text_EN_txt'       , 'keyword'     , null );
-                        // if(termsQ)
-                        tagQueries.key = termsQ //'('+ termsQ + ' OR ' + termsTxtQ + ')';
-
-                        qAnd .push(buildTextQuery    ('text_EN_txt'       , 'freeText'    , null ));
-
-                        _.map(_.filter($scope.setFilters, {type:'custom'}), function(custom){
-                            if(custom.query)
-                                qAnd.push(custom.query)
-                        });
-
-                        qAnd.push(buildDateFieldQuery('updatedDate_dt','publishedOn'));
-
-                        q = combineQuery(qAnd, "AND");
-                        q1 = combineQuery(qOr, "OR");
-                        
-                        return {
-                            activeFilter : activeFilter,
-                            query      :  (q1 ? q + " AND (" + q1 + ")" : q),
-                            tagQueries : _(tagQueries).map(function(f, t){if(f) return '{!tag='+t+'}' + f;}).compact().value()
-                        }
-                        ;
-                    }
-
-                    function buildTextQuery(field, type, boost) {
-                        var q = '';
-                        var values = [];
-
-                        if ($scope.setFilters) {
-                            _.each($scope.setFilters, function (item) {
-
-                                if (item.type == type) {
-                                    values.push($scope.setFilters[item.id].name.toLowerCase());
-                                }
-
-                            });
-                            if (values.length)
-                                q = addORCondition(field, values, boost)
-                        }
-                        return q ? q : null;
-                    }
-
-                    function buildCustomQuery(field, type, boost) {
-                        var q = '';
-                        var values = [];
-
-                        if ($scope.setFilters) {
-                            _.each($scope.setFilters, function (item) {
-
-                                if (item.type == type) {
-                                    values.push($scope.setFilters[item.id].name.toLowerCase());
-                                }
-
-                            });
-                            if (values.length)
-                                q = addORCondition(field, values, boost)
-                        }
-                        return q ? q : null;
-                    }
-
-                    function buildCountryQuery(field, type, boost) {
-                        var q = '';
-                        var values = '';
-                        var countries = getSearchFilters("country");
-
-                        if ($scope.setFilters) {
-                            _.each($scope.setFilters, function (item) {
-                                if (item.type === type) {
-                                    values = values + " " + getCountryList(item.id, countries);
-                                }
-                            });
-
-                            if (values.length)
-                                q = addANDConditionText(field, values, boost)
-                        }
-
-                        return q ? q : null;
-                    }
-
-                    function getCountryList(id, list) {
-
-                        var templist = _.filter(list, function (item) {
-
-                            if (id === 'partyToProtocol' && item.isAppProtocolParty === true)
-                                return item;
-                            else if (id === 'nonParty' && item.isAppProtocolParty === false)
-                                return item;
-                            else if (id === 'inbetween' && item.isNPInbetweenParty === true)
-                                return item;
-                            else if (id === 'signatoryToProtocol' && item.isNPSignatory === true)
-                                return item;
-                        });
-
-                        var govs = _.pluck(templist, 'id');
-
-                        return govs.join(" ");
-                    }
-
-                    function buildSchemaQuery() {
-                        
-                        var tab = $scope.searchResult.currentTab; 
-                        
-                        var tabValidation = function(item){
-                            return item.otherType == 'schema'
-                        }
-
-                        var query = buildFieldQuery('schema_s', 'schema', null, tabValidation)
-                        if (query == null) {                           
-                            // if(tab == 'allRecords')
-                                return "NOT schema_s:(contact organization)";
-                            
-                            // var schemas = _($scope.searchFilters).values().filter({otherType:'schema'}).map('id').without(['contact', 'organization']).value();                        
-                            // query = "schema_s:(" + schemas.join(' ') + ")"
-                        }
-                    
-                        return query;
-                    }
-
-                    function buildFieldQuery(field, type, allFilters, validationfn) {
-                        var q = '';
-                        var capacityBuildingResource;
-                        
-                            _.each($scope.setFilters, function (item) {
-
-                                if ((validationfn !== undefined && validationfn(item)) || (validationfn === undefined && item.type == type )) {
-
-                                    if (customKeywords[item.id] && item.id == 'capacityBuildingResource') {
-                                        capacityBuildingResource = true;
-                                        q = q + 'resource' + ' '
-                                    } 
-                                    else if (customKeywords[item.id] && item.id != 'capacityBuildingResource')
-                                        q = q + encodeURIComponent(customKeywords[item.id].identifiers.join(' ')) + ' ';
-                                    else
-                                        q = q + encodeURIComponent(item.id) + ' ';
-
-                                }
-                            });
-
-                        if (q) {
-                            var newQuery = field + ":(" + q + ")";
-                            if (capacityBuildingResource)
-                                newQuery += ' AND all_terms_ss:(' + encodeURIComponent(customKeywords['capacityBuildingResource'].identifiers.join(' ')) + ') ';
-                            return newQuery;
-                        }
-                        else
-                            return null;
-                    }
-
-                    function buildDateFieldQuery(field, type) {
-
-                        if ($scope.setFilters[type] && $scope.setFilters[type].query != '*:*') {
-                            return field + ":" + $scope.setFilters[type].query;
-                        }
-                        return null;
-                    }
-
-                    function addORCondition(field, values, boost) {
-                        var q = "";
-                        var conditions = [];
-                        _.each(values, function (val) {
-                            conditions.push("" + field + ":\"*" + val + "*\"" + (boost ? "^" + boost : ""))
-                        });
-                        _.each(conditions, function (condition) {
-                            q = q + (q == '' ? '(' : ' OR ') + condition;
-                        });
-                        q = q + ")";
-                        return q;
-                    }
-
-                    function addANDConditionText(field, values, boost) {
-                        var q = "";
-                        var conditions = [];
-
-                        q = "(" + field + ":(" + values + "))";
-                        return q;
-                    }
-
-
-                    function combineQuery(qCondition, op1) {
-                        var q = '';
-                        _.each(qCondition, function (val) {
-                            if (val) q = q + (q ? op1 : "") + "(" + val + ")"
-                        });
-                        return q ? q : '';
-                    }
 
                     function updateQueryString(field, values){
                         if(field!='sort'){
@@ -972,43 +509,209 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                     regions   : facets.facet_fields['government_REL_ss']
                                 };
                     }
-                    var bchSchemaFieldMapping = {
-                        'decisionTypes'             : [{ key:'biosafetyDecision', title:'Type of Document' , field:''}],
-                        'legislationAgreementTypes' : [{ key:'biosafetyLaw', title:'Type of document', field:''}],
-                        'subjectAreas'              : [{ key:'biosafetyLaw', title:'Subject Areas', field:''},
-                                                        { key:'authority', title:'Regulatory Functions', field:''}],
-                        'cnaJurisdictions'          : [{ key:'authority', title:'Jurisdictions' , field:''}],
-                        'riskAssessmentScope'       : [{ key:'nationalRiskAssessment',title:'Scope of the risk assessment', field:''},
-                                                        { key:'independentRiskAssessment',title:'Scope of the risk assessment', field:''}],
-                        'organizationTypes'         : [{ key:'expert', title:'Type of Organization', field:''},
-                                                        { key:'organization', title:'Type of Organization', field:''}],
-                        'expertiseArea'             : [{ key:'expert', title:'Areas of Expertise', field:''}],
-                        'resourceTypes'             : [{ key:'resource', title:'Type of resource', field:''}],
-                        'languages'                 : [{ key:'resource', title:'Language' , field:''}],
-                        'typeOfOrganisms'           : [{ key:'organism', title:'Type of organism(s)', field:''}],
-                        'domestication'             : [{ key:'organism', title:'Organism domestication', field:''}],
-                        'OrganismCommonUses'        : [{ key:'modifiedOrganism', title:'Common use(s)', field:''},
-                                                        { key:'organism', title:'Common use(s)', field:''}],
-                        'dnaSequenceFamily'         : [{ key:'dnaSequence', title:'Category', field:''}]
+
+                    function updateQueryResult(pageNumber){
+                        $timeout(function(){//call digest cycle to update the directive api params
+                            $scope.searchResult.loading = true;
+                            var queryOptions = buildSearchQuery()
+                            var sortFields = ''
+                            var resultQuery;
+                            if(($scope.searchResult.sortFields||[]).length > 0)
+                                sortFields = $scope.searchResult.sortFields.join(', ');
+
+                            var viewType = $scope.searchResult.viewType;
+                            if(viewType=='default' && $scope.searchResult.currentTab == 'allRecords')
+                                viewType = 'list'
+                            else if(viewType=='default' && $scope.searchResult.currentTab == 'nationalRecords')
+                                viewType = 'group'
+                            else if(viewType=='default' && ($scope.searchResult.currentTab == 'referenceRecords' || $scope.searchResult.currentTab == 'scbdRecords'))
+                                viewType = 'list'
+
+                            if(viewType == 'list'){
+                                resultQuery = $scope.searchResult.listViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
+                            }
+                            else if(viewType == 'group'){
+                                queryOptions.groupByFields = $scope.searchResult.groupByFields;                                
+                                updateQueryString('group', queryOptions.groupByFields);
+                                resultQuery = $scope.searchResult.groupViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
+                            }
+                            else if($scope.searchResult.viewType == 'matrix'){
+                                
+                            }
+                            resultQuery.then(function(data){
+                                $scope.searchResult.data = data;
+                            })
+                            .finally(function(){$scope.searchResult.loading = false;})
+                        }, 0)
                     }
-                    ////////////////////////////////////////////
-                    ////// end internal functions
-                    ////////////////////////////////////////////
-                    init();
+
+                    function buildSearchQuery(){
+                        var tagQueries      = [];
+                        var schemaQuery     = buildSchemaQuery();                        
+                        keywordQuery        = buildFieldQuery('keyword',      'all_terms_ss')
+                        countryQuery        = buildFieldQuery('country',      'government_s')
+                        partyStatusQuery    = buildPartyStatusQuery();
+                        regionQuery         = buildFieldQuery('region',       'government_REL_ss')
+                        var queries         = _.compact([schemaQuery, keywordQuery, countryQuery, partyStatusQuery, regionQuery]);
+                        var query = solr.andOr(queries, 'AND')
+                        console.log(query)
+
+
+                        return {
+                            query      :  query,
+                            tagQueries : _(tagQueries).map(function(f, t){if(f) return '{!tag='+t+'}' + f;}).compact().value()
+                        };
+                    }
+
+                    function buildSchemaQuery() {
+                        
+                        var tab = $scope.searchResult.currentTab; 
+                        
+                        var tabValidation = function(item){
+                            return item.otherType == 'schema'
+                        }
+
+                        var filters = getSelectedFilters('schema')
+                        if (!(filters||[]).length){     
+                            return "(*:* NOT schema_s:(contact organization))";
+                        }
+
+                        var query = 'schema_s:(' + _.map(filters, 'id').join(' ') + ')'
+                        //since the left side filter has to apply locally to the schema only
+                        // loop and add or conditions on schemas when sub filters exists else just make schema array query
+                        if(!_.isEmpty(leftMenuFilters)){
+                            var schemaQueries = []
+                            _.each(leftMenuFilters, function(filters, key){
+                                var subQueries = []
+                                _.each(filters, function(filter){
+                                    subQueries.push('schema_s:'+ key)
+                                    if(!_.isEmpty(filter.selectedItems)){
+                                        var ids = _.map(filter.selectedItems, 'identifier');
+                                        subQueries.push(filter.field + ':(' + ids.join(' ') + ')') 
+                                    }
+                                });
+                                if(subQueries.length){
+                                    subQueries = _.uniq(subQueries)                                       
+                                    schemaQueries.push(solr.andOr(subQueries, 'AND'))
+                                }
+                            })
+                            if(schemaQueries.length){
+                                query = solr.andOr(schemaQueries, 'OR')
+                            }
+                        }
                     
+                        return query;
+                    }
+
+                    function buildPartyStatusQuery() {                        
+                        
+                        var filters = getSelectedFilters('partyStatus')
+                        if (!(filters||[]).length){     
+                            return;
+                        }
+                        var values;
+                        var countries = getSearchFilters('country')
+                        _.each(filters, function (item) {
+                            values = (values||'') + " " + getCountryList(item.id, countries);
+                        });
+                        if(values)
+                            return 'government_s:(' + values + ')';
+                    }
+
+                    function buildFieldQuery(filterType, field) {
+                        
+                        var filters = getSelectedFilters(filterType)
+                        if (!(filters||[]).length){     
+                            return;
+                        }
+
+                        query = field + ':(' + _.map(filters, 'id').join(' ') + ')';
+
+                        return query;
+                    }
+
+                    function getCountryList(id, list){
+
+                        var templist = _.filter(list, function (item) {
+
+                            if (id === 'partyToProtocol' && item.isAppProtocolParty === true)
+                                return item;
+                            else if (id === 'nonParty' && item.isAppProtocolParty === false)
+                                return item;
+                            else if (id === 'inbetween' && item.isNPInbetweenParty === true)
+                                return item;
+                            else if (id === 'signatoryToProtocol' && item.isNPSignatory === true)
+                                return item;
+                        });
+
+                        var govs = _.pluck(templist, 'id');
+
+                        return govs.join(" ");
+                    }
+
+                    function getSchemaFieldMapping(schema){
+                        return bchSchemaFieldMapping[schema];
+                    }
+
+                    function onLeftFilterUpdate(filters){
+                        leftMenuFilters = filters;
+                        updateQueryResult();
+                    }
+
+                    var bchSchemaFieldMapping = {
+                        authority                 : [{ type:'thesaurus', term:'subjectAreas', title:'Administrative functions', field:'functions_REL_ss'},
+                                                     { type:'thesaurus', term:'typeOfOrganisms', title:'Types of LMOs under its jurisdiction' , field:'cpbOrganismTypes_REL_ss'}],
+                        bchNews                   : [],
+                        biosafetyDecision         : [{ type:'thesaurus', term:'decisionTypes', title:'Type of Document' , field:''},
+                                                        { type:'thesaurus', term:'decisionLMOFFPSubject', title:'TODO Update Title', field:''},
+                                                        { type:'thesaurus', term:'decisionResults', title:'TODO Update Title', field:''}],
+                        biosafetyLaw              : [{ type:'thesaurus', term:'subjectAreas', title:'Subject Areas', field:''},
+                                                        { type:'thesaurus', term:'legislationAgreementTypes', title:'Type of document', field:''}],
+                        capacityBuildingActivities: [],
+                        capacityBuildingNeeds     : [],
+                        contact                   : [],
+                        cpbNationalReport1        : [],
+                        cpbNationalReport2        : [],
+                        cpbNationalReport3        : [],
+                        cpbNationalReport4        : [],
+                        cpbNationalReportInterim  : [],
+                        database                  : [],
+                        dnaSequence               : [{ type:'thesaurus', term:'dnaSequenceFamily', title:'Category', field:''},
+                                                        { type:'thesaurus', term:'dnaSequenceTraits', title:'Related trait(s)', field:''},],
+                        expert                    : [{ type:'thesaurus', term:'organizationTypes', title:'Type of Organization', field:''},
+                                                        { type:'thesaurus', term:'expertiseArea', title:'Areas of Expertise', field:''}],
+                        expertAssignment          : [],
+                        focalPoint                : [{ type:'customFn',  fn:'focalPointTypes', title:'Type of Focal point' , field:''}],
+                        independentRiskAssessment : [{ type:'thesaurus', term:'riskAssessmentScope',title:'Scope of the risk assessment', field:''}],
+                        modifiedOrganism          : [{ type:'thesaurus', term:'OrganismCommonUses', title:'Common use(s)', field:''},
+                                                        { type:'thesaurus', term:'dnaSequenceTraits', title:'use(s) in biotechnology', field:''},
+                                                        { type:'thesaurus', term:'techniqueUsed', title:'Techniques used for the modification', field:''}],
+                        nationalRiskAssessment    : [{ type:'thesaurus', term:'riskAssessmentScope',title:'Scope of the risk assessment', field:''},],
+                        organism                  : [{ type:'thesaurus', term:'typeOfOrganisms', title:'Type of organism(s)', field:''},
+                                                        { type:'thesaurus', term:'domestication', title:'Organism domestication', field:''},
+                                                        { type:'thesaurus', term:'OrganismCommonUses', title:'Common use(s)', field:''}],
+                        organization              : [{ type:'thesaurus', term:'organizationTypes', title:'Type of Organization', field:''}],
+                        resource                  : [{ type:'thesaurus', term:'resourceTypes', title:'Type of resource', field:''},
+                                                        { type:'thesaurus', term:'languages', title:'Language' , field:''}],
+                        submission                : [],
+                        supplementaryAuthority    : []
+                    }
+
+
+                    init();
+
                     this.getSearchFilters         = getSearchFilters        ;
-                    this.getSearchFiltersByParent = getSearchFiltersByParent;
                     this.addFilter                = addFilter               ;
-                    this.getSearchFilters         = getSearchFilters        ;
-                    this.setSearchFilters         = setSearchFilters        ;
                     this.getFilter                = getFilter               ;
+                    this.getSchemaFieldMapping    = getSchemaFieldMapping   ;
+                    this.onLeftFilterUpdate       = onLeftFilterUpdate      ;
 
                     this.groupByFields            = groupByFields           ;
                     this.groupingCombination      = groupingCombination     ;
                     this.combinationField         = combinationField        ;
-
                     this.sanitizeFacets           = sanitizeFacets          ;
-                    
+
+                    this.focalPointTypes          = focalPointTypes
             }]//controller
         };
     });
