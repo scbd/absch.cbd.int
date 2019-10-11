@@ -10,7 +10,9 @@ define(['app',
             template: template, 
             scope:false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-               $scope.rf_searchFilters = searchDirectiveCtrl.getSearchFilters('reference');
+               $scope.rf_searchFilters = searchDirectiveCtrl.getSearchFilters('schema', function(item){
+                return item.otherType == 'reference'
+            })
                
                
                   $timeout(function(){
