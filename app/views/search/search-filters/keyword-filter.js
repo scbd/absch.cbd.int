@@ -11,11 +11,6 @@ define(['app','text!views/search/search-filters/keyword-filter.html', 'lodash'],
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
               
                $scope.keywordSearchFilters = searchDirectiveCtrl.getSearchFilters("keyword");
-                if($scope.realm.is('BCH'))
-                    $scope.keywordSearchFiltersNoDups =   searchDirectiveCtrl.getSearchFilters("keyword");
-                else
-                    $scope.keywordSearchFiltersNoDups =   searchDirectiveCtrl.getSearchFiltersByParent("ABS Thematic Areas");
-
                $scope.relatedFilters = {};
 
                 $scope.hasCounts  = function(item){
