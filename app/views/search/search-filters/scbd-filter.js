@@ -10,7 +10,9 @@ define(['app','text!views/search/search-filters/scbd-filter.html'
             template: template, 
             scope:false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-               $scope.sf_searchFilters = searchDirectiveCtrl.getSearchFilters('scbd');
+               $scope.sf_searchFilters = searchDirectiveCtrl.getSearchFilters('schema', function(item){
+                return item.otherType == 'scbd'
+            })
             }//link
         };
     });

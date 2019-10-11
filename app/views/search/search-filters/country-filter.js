@@ -1,7 +1,7 @@
 define(['app', 'text!views/search/search-filters/country-filter.html','lodash', 'js/common',
 ], function(app, template, _) {
 
-    app.directive('countryFilter', function() {
+    app.directive('countryFilter', ['locale', function(locale) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -62,5 +62,5 @@ define(['app', 'text!views/search/search-filters/country-filter.html','lodash', 
 
             }//link
         };
-    });
+    }]);
 });

@@ -309,7 +309,7 @@
                                             <div ng-if="type=='CNA'" class="km-control-group" name="organismTypes" caption="Types of LMOs under its jurisdiction" required>
                                                 <div class="help-info">If there is only one Authority responsible for all functions required by the Protocol, please select "All LMOs".</div>
                                                 <div km-term-check name="organismTypes" required ng-model="document.organismTypes" locales="document.header.languages"
-                                                terms="options.organismTypes()" binding-type="term[]"></div>
+                                                terms="options.bchOrganismTypes()" binding-type="term[]"></div>
                                             </div>
 
                                             <div class="km-control-group" name="responsibilities"
