@@ -44,6 +44,9 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                         queryListParameters['facet.field']  = searchQuery.facetFields
                         queryListParameters['facet.mincount'] = 1,
                         queryListParameters['facet.limit'] =  512
+
+                        if(searchQuery.pivotFacetFields)
+                            queryListParameters['facet.pivot']  = searchQuery.pivotFacetFields;
                     }
 
                     // console.log("list:" + q + searchQuery.query);
