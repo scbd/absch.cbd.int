@@ -13,10 +13,14 @@ define(['app', 'text!views/search/search-filters/date-filter.html','lodash', 'js
                 $scope.df_filters = searchDirectiveCtrl.getSearchFilters("date");
 
                 $scope.dateFilter = {
-                    field:'lastUpdatedDate_dt',
+                    field:'updatedDate_dt',
                     value:{start : null, end : null}
                 };
-                       
+                
+                $scope.onFiedlChange = function(){
+                    $scope.dateFilter.value = {start : null, end : null}
+                }
+
                 $scope.onChange = function(){
                     var query;
 
@@ -26,7 +30,7 @@ define(['app', 'text!views/search/search-filters/date-filter.html','lodash', 'js
 
                         query = '[ ' + start + ' TO ' + end + ' ]';
                     } 
-                    $scope.saveDateFilter($scope.df_filters[0].id, query, $scope.dateFilter);
+                    $scope.saveDateFilter($scope.dateFilter.field, query, $scope.dateFilter);
                 }
 
             }

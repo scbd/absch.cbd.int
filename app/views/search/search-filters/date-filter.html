@@ -6,13 +6,12 @@
         
     </div>
     <div style="max-height:400px;">
-        <div ng-repeat="doc in df_filters | filter:searchKeyword">
             <div class="filter col-lg-3">
                 
                 <div class="row" style="margin-top:6px">
                     <div class="col-md-4">
-                        <select class="form-control" ng-model="dateFilter.field">
-                            <option value="lastUpdatedDate_dt" selected="selected">Published on</option>
+                        <select class="form-control" ng-model="dateFilter.field" ng-change="onFiedlChange()">
+                            <option value="updatedDate_dt" selected="selected">Published on</option>
                             <option value="createdDate_dt">Created on</option>
                         </select>
                     </div>
@@ -22,6 +21,5 @@
                 </div>
                
             </div>
-        </div>
     </div>
 </div>
