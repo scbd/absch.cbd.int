@@ -31,15 +31,22 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var groupFieldMapping = [
                             {
                                 field:'government', 
-                                sortFields:['government_EN_s asc']
+                                sortFields:['government_EN_s asc'],
+                                tabs: ['nationalRecords', 'allRecords'],
+                                solrField:'government_s',
+                                titleField:'government_'+locale.toUpperCase()+'_s'
                             },
                             {
                                 field:'schema', 
-                                sortFields:['schema_EN_s asc']
+                                sortFields:['schema_EN_s asc'],
+                                solrField:'schema_s',
+                                titleField:'schema_'+locale.toUpperCase()+'_s'
                             },
                             {
                                 field:'submissionYear', 
-                                sortFields:['submissionYear_s asc']
+                                sortFields:['submissionYear_s asc'],
+                                solrField:'submissionYear_s',
+                                titleField:'submissionYear_s'
                             }
                         ];    
                         var queryCanceler = null;                        
@@ -86,22 +93,22 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         //     termID = $scope.searchFilters[filterID].id;
                         //     var broader = $scope.searchFilters[filterID].broader;
                         // }
-
+                        var filter = $scope.setFilters[doc.id];
                         if ($scope.setFilters[doc.id]){
                             delete $scope.setFilters[doc.id];
                         }
                         else {
-                            $scope.setFilters[doc.id] = {
+                            $scope.setFilters[doc.id] = filter = {
                                 type     : doc.type,
                                 otherType: doc.otherType,
                                 name     : doc.name,
                                 id       : doc.id
                             };
                         }
-                        if($scope.setFilters[doc.id].type == 'schema'){
+                        if((filter||{}).type == 'schema'){
                             $scope.leftMenuEnabled = true;
                             if($scope.onSchemaFilterChanged){
-                                var leftFilters = $scope.onSchemaFilterChanged(doc.id, $scope.setFilters[doc.id])
+                                var leftFilters = $scope.onSchemaFilterChanged(doc.id, filter)
                                 leftMenuFilters = leftFilters
                             }
                         }
@@ -141,7 +148,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             type: $scope.searchFilters[filterID].type,
                             query: query,
                             name: name,
-                            id: $scope.searchFilters[filterID].id
+                            id: $scope.searchFilters[filterID].id,
+                            dateField:dateVal.field
                         };
 
                         updateQueryResult();
@@ -181,8 +189,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if(options.viewType == 'group')
                             $scope.searchResult.groupByFields = options.fields;
 
-                        if($scope.searchResult.currentTab == 'allRecords')
-                            updateQueryResult();
+                        updateQueryResult();
                     }
 
                     $scope.isFilterOn = function (filterID) {
@@ -193,13 +200,18 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     };
 
                     $scope.switchTab = function(tab){
+                        if($scope.searchResult.currentTab == tab)
+                            return;
+
                         $scope.searchResult.currentTab = tab;
                         updateQueryString('tab',tab);
                         updateQueryResult();
                     }
 
                     $scope.clearFilter = function(){
-                        $scope.setFilters = {};leftMenuFilters = []
+                        $scope.setFilters = {};
+                        leftMenuFilters = [];
+                        $scope.clearLeftMenuFilters()
                         updateQueryResult();
                     };
 
@@ -366,8 +378,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
                     
                     function loadDateFilters() {
-                        addFilter('publishedOn', { 'sort': 1, 'type': 'date', 'name': 'Published On', 'id': 'publishedOn', 
+                        addFilter('updatedDate_dt', { 'sort': 1, 'type': 'date', 'name': 'Published On', 'id': 'updatedDate_dt', 
                         'description': 'Date range when the record was published' });
+                        addFilter('createdDate_dt', { 'sort': 1, 'type': 'date', 'name': 'Created On', 'id': 'createdDate_dt', 
+                        'description': 'Date range when the record was created' });
                     };
 
                     function loadBCHKeywordFilters() {
@@ -481,7 +495,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         return combinations
                     }
 
-                    function combinationField(fields){                        
+                    function combinationField(fields){      
+                        fields = _.filter(fields, function(f){
+                            var groupMap = _.find(groupFieldMapping, {field:f})
+                            return groupMap && (!groupMap.tabs || ~groupMap.tabs.indexOf($scope.searchResult.currentTab))
+                        })
                         var map = {
                             groupField : fields.join('_') + '_s',
                             sortFields:[]
@@ -546,37 +564,53 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
 
                     function buildSearchQuery(){
-                        var tagQueries      = [];
-                        var schemaQuery     = buildSchemaQuery();                        
-                        keywordQuery        = buildFieldQuery('keyword',      'all_terms_ss')
-                        countryQuery        = buildFieldQuery('country',      'government_s')
-                        partyStatusQuery    = buildPartyStatusQuery();
-                        regionQuery         = buildFieldQuery('region',       'government_REL_ss')
-                        var queries         = _.compact([schemaQuery, keywordQuery, countryQuery, partyStatusQuery, regionQuery]);
-                        var query = solr.andOr(queries, 'AND')
+                        var tagQueries          = {};
+                        var tabQuery            = buildTabQuery();
+                        var schemaQuery         = buildSchemaQuery();                        
+                        var schemaSubQuery      = buildSchemaSubQuery();                        
+                        var keywordQuery        = buildFieldQuery('keyword', 'all_terms_ss')
+                        var countryQuery        = buildFieldQuery('country', 'government_s')
+                        var partyStatusQuery    = buildPartyStatusQuery();
+                        var regionQuery         = buildFieldQuery('region',  'government_REL_ss');
+
+                        var dateQuery           = buildDateQuery();
+
+                        var queries             = _.compact([dateQuery]);
+                        var query               = '';
+                        if(queries.length)
+                            query               = solr.andOr(queries, 'AND')
                         console.log(query)
 
+                        tagQueries.schema      =  schemaQuery;
+                        tagQueries.schemaSub   =  schemaSubQuery;
+                        tagQueries.schemaType  =  tabQuery;
+                        tagQueries.partyStatus =  partyStatusQuery;
+                        tagQueries.keywords    =  keywordQuery;
+                        tagQueries.government  =  countryQuery;
+                        tagQueries.region      =  regionQuery;
 
                         return {
-                            query      :  query,
-                            tagQueries : _(tagQueries).map(function(f, t){if(f) return '{!tag='+t+'}' + f;}).compact().value()
+                            query      :  query||'',
+                            tagQueries : _(tagQueries).map(function(f, t){if(f) return '{!tag='+t+'}' + f;}).compact().value(),
+                            facetFields : ['{!ex=schemaType}schemaType_s', '{!ex=schema,schemaType,schemaSub}schema_s', 
+                                           '{!ex=government}government_s', '{!ex=keywords}all_terms_ss', '{!ex=region}government_REL_ss'],
+                            pivotFacetFields : 'schema_s, all_Terms_ss'
                         };
                     }
 
                     function buildSchemaQuery() {
                         
-                        var tab = $scope.searchResult.currentTab; 
-                        
-                        var tabValidation = function(item){
-                            return item.otherType == 'schema'
-                        }
-
                         var filters = getSelectedFilters('schema')
                         if (!(filters||[]).length){     
                             return "(*:* NOT schema_s:(contact organization))";
                         }
 
                         var query = 'schema_s:(' + _.map(filters, 'id').join(' ') + ')'
+                        
+                        return query;
+                    }
+
+                    function buildSchemaSubQuery(){
                         //since the left side filter has to apply locally to the schema only
                         // loop and add or conditions on schemas when sub filters exists else just make schema array query
                         if(!_.isEmpty(leftMenuFilters)){
@@ -585,10 +619,15 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 var subQueries = []
                                 _.each(filters, function(filter){
                                     subQueries.push('schema_s:'+ key)
+
                                     if(!_.isEmpty(filter.selectedItems)){
                                         var ids = _.map(filter.selectedItems, 'identifier');
                                         subQueries.push(filter.field + ':(' + ids.join(' ') + ')') 
                                     }
+                                    else if(filter.type == 'date' && filter.filterValue){
+                                        subQueries.push(buildDateFieldQuery(filter.field, filter.filterValue))
+                                    }
+
                                 });
                                 if(subQueries.length){
                                     subQueries = _.uniq(subQueries)                                       
@@ -596,11 +635,42 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 }
                             })
                             if(schemaQueries.length){
-                                query = solr.andOr(schemaQueries, 'OR')
+                                return solr.andOr(schemaQueries, 'OR')
                             }
                         }
-                    
-                        return query;
+                    }
+
+                    function buildTabQuery(){
+                        var tab = $scope.searchResult.currentTab; 
+                        if(tab == 'nationalRecords')
+                            return 'schemaType_s:national'
+                        if(tab == 'referenceRecords')
+                            return 'schemaType_s:reference'
+                        if(tab == 'scbdRecords')
+                            return 'schemaType_s:scbd'
+                    }
+
+                    function buildDateQuery(){
+                        var filters = getSelectedFilters('date')
+                        if (!(filters||[]).length){     
+                            return;
+                        }
+                        var values = [];
+                        _.each(filters, function (item) {
+                            values.push(item.dateField+':' + item.query)
+                        });
+                        if(values.length)
+                            return solr.andOr(values, 'AND')
+                    }
+
+                    function buildDateFieldQuery(field, date) {
+
+                        if(date.start || date.end) {
+                            var start   = date.start ? date.start   + 'T00:00:00.000Z' : '*';
+                            var end     = date.end   ? date.end     + 'T23:59:59.999Z' : '*';
+    
+                            return  field + ':[ ' + start + ' TO ' + end + ' ]';
+                        } 
                     }
 
                     function buildPartyStatusQuery() {                        
@@ -658,44 +728,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         updateQueryResult();
                     }
 
-                    var bchSchemaFieldMapping = {
-                        authority                 : [{ type:'thesaurus', term:'subjectAreas', title:'Administrative functions', field:'functions_REL_ss'},
-                                                     { type:'thesaurus', term:'typeOfOrganisms', title:'Types of LMOs under its jurisdiction' , field:'cpbOrganismTypes_REL_ss'}],
-                        bchNews                   : [],
-                        biosafetyDecision         : [{ type:'thesaurus', term:'decisionTypes', title:'Type of Document' , field:''},
-                                                        { type:'thesaurus', term:'decisionLMOFFPSubject', title:'TODO Update Title', field:''},
-                                                        { type:'thesaurus', term:'decisionResults', title:'TODO Update Title', field:''}],
-                        biosafetyLaw              : [{ type:'thesaurus', term:'subjectAreas', title:'Subject Areas', field:''},
-                                                        { type:'thesaurus', term:'legislationAgreementTypes', title:'Type of document', field:''}],
-                        capacityBuildingActivities: [],
-                        capacityBuildingNeeds     : [],
-                        contact                   : [],
-                        cpbNationalReport1        : [],
-                        cpbNationalReport2        : [],
-                        cpbNationalReport3        : [],
-                        cpbNationalReport4        : [],
-                        cpbNationalReportInterim  : [],
-                        database                  : [],
-                        dnaSequence               : [{ type:'thesaurus', term:'dnaSequenceFamily', title:'Category', field:''},
-                                                        { type:'thesaurus', term:'dnaSequenceTraits', title:'Related trait(s)', field:''},],
-                        expert                    : [{ type:'thesaurus', term:'organizationTypes', title:'Type of Organization', field:''},
-                                                        { type:'thesaurus', term:'expertiseArea', title:'Areas of Expertise', field:''}],
-                        expertAssignment          : [],
-                        focalPoint                : [{ type:'customFn',  fn:'focalPointTypes', title:'Type of Focal point' , field:''}],
-                        independentRiskAssessment : [{ type:'thesaurus', term:'riskAssessmentScope',title:'Scope of the risk assessment', field:''}],
-                        modifiedOrganism          : [{ type:'thesaurus', term:'OrganismCommonUses', title:'Common use(s)', field:''},
-                                                        { type:'thesaurus', term:'dnaSequenceTraits', title:'use(s) in biotechnology', field:''},
-                                                        { type:'thesaurus', term:'techniqueUsed', title:'Techniques used for the modification', field:''}],
-                        nationalRiskAssessment    : [{ type:'thesaurus', term:'riskAssessmentScope',title:'Scope of the risk assessment', field:''},],
-                        organism                  : [{ type:'thesaurus', term:'typeOfOrganisms', title:'Type of organism(s)', field:''},
-                                                        { type:'thesaurus', term:'domestication', title:'Organism domestication', field:''},
-                                                        { type:'thesaurus', term:'OrganismCommonUses', title:'Common use(s)', field:''}],
-                        organization              : [{ type:'thesaurus', term:'organizationTypes', title:'Type of Organization', field:''}],
-                        resource                  : [{ type:'thesaurus', term:'resourceTypes', title:'Type of resource', field:''},
-                                                        { type:'thesaurus', term:'languages', title:'Language' , field:''}],
-                        submission                : [],
-                        supplementaryAuthority    : []
-                    }
+                    var bchSchemaFieldMapping;
+                    $q.when(loadJsonFile('views/search/search-filters/bch-left-menu-filters.json'))
+                    .then(function(mapping){
+                        bchSchemaFieldMapping = mapping;
+                    })
 
 
                     init();

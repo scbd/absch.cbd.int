@@ -31,12 +31,15 @@
                     }
                     return $scope.leftMenuFilters;
                 }
+                $scope.clearLeftMenuFilters = function(){
+                    $scope.leftMenuFilters = undefined;
+                }
 
                 $scope.showFilterDialog = function(schema, filter, facets){
                     ngDialog.open({
                         template : 'filtersDialog',
                         className: 'search-filters ngdialog-theme-default wide',
-                        controller: ['$scope', '$timeout', 'thesaurusService', function($scope, $timeout, thesaurusService){
+                        controller: ['$scope', '$timeout', 'thesaurusService', 'searchService', function($scope, $timeout, thesaurusService, searchService){
                             
                             $scope.treeViewSelected = [];
                             $scope.schema = schema;
@@ -52,6 +55,9 @@
                                 var dataSource;
                                 if(filter.type == "thesaurus"){
                                     dataSource = thesaurusService.getDomainTerms(filter.term)
+                                }
+                                else if(filter.type == 'solr'){
+                                    dataSource = runSolrQuery(filter.query);
                                 }
                                 else if(filter.type == 'customFn')
                                     dataSource = searchDirectiveCtrl[filter.fn]();
@@ -70,6 +76,24 @@
                                 })
                                 updateBaseFilter(selectedItems, schema, filter);
                                 ngDialog.close();
+                            }
+
+                            function runSolrQuery(query){
+                                var lQuery = {
+                                    query          : query.q,
+                                    fields         : query.fl,
+                                    rowsPerPage    : 100,
+                                    currentPage    : 0
+                                }
+                                return searchService.list(lQuery)
+                                .then(function(result){    
+                                    return _.map(result.data.response.docs, function(item){
+                                            return {
+                                                identifier:item.identifier,
+                                                title : {en: item.title}
+                                            }
+                                        })
+                                });  
                             }
 
                         }]
@@ -91,6 +115,16 @@
                     delete filter.selectedItems[option.identifier];
 
                     searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters)
+                }
+
+                $scope.onFilterDateChange = function(val){
+                    console.log(val)   
+                    searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters);
+                }
+
+                $scope.clearFilterDate = function(filter){
+                    filter.filterValue = undefined;
+                    searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters);
                 }
             }
         };

@@ -31,19 +31,26 @@
                     </div>
                     <div class="list-group-item" ng-repeat="filter in filters"  
                         style="border-right: unset;border-left: unset;" ng-show="!state[schema]">
-                        <div class="color-darkgrey not" style="cursor: pointer;" 
-                            ng-click="showFilterDialog(schema, filter, searchResult.data.facets.keywords)">
+                        
+                        <div ng-if="filter.type!='date'" class="color-darkgrey not" style="cursor: pointer;" ng-click="showFilterDialog(schema, filter, searchResult.data.facets.keywords)">
                             {{filter.title}}
                             <div style="position:absolute;right:6px;top:6px" style="margin-top:5px" class="fa fa-chevron-right"></div>    
                             <!-- <i class="fa fa-chevron-right pull-right" style="margin-top:5px" aria-hidden="true"></i>           -->
                         </div>
+                        <div ng-if="filter.type=='date'" >
+                            <label ng-bind="filter.title"></label>
+                            <button ng-if="filter.filterValue" class="btn btn-xs btn-default pull-right" ng-click="clearFilterDate(filter)">clear</button>
+                            <div km-date-range ng-model="filter.filterValue" ng-change="onFilterDateChange(filter)"></div>
+                        </div>
+
                         <div ng-repeat="option in filter.selectedItems" ng-click="removeSchemaFilters(option, filter)" 
                             class="list-group-item-expand filter" role="button" id="{{option.identifier}}"
                             data-toggle="tooltip" data-title="{{option.title|lstring:locale}}" data-container="body" data-placement="right">                            
                             <div class="label label-selected-facet" aria-hidden="false">
                                 <div style="position:absolute;right:6px;top:6px" class="fa fa-remove"></div>                                                    
                                 <span class="truncate">
-                                    ({{searchResult.data.facets.keywords[option.id]||0}}) {{option.title|lstring:locale|limitTo:40}}
+                                    <!-- ({{searchResult.data.facets.keywords[option.id]||0}})  -->
+                                    {{option.title|lstring:locale|limitTo:40}}
                                     <span ng-if="(option.title|lstring:locale).length>40">...</span>                                    
                                 </span>
                             </div>

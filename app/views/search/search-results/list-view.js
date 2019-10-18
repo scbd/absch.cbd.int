@@ -36,7 +36,8 @@
                         rowsPerPage    : $scope.searchResult.rowsPerPage,
                         currentPage    : pageNumber - 1,
                         facet          : true,
-                        facetFields    : ['{!ex=sct}schemaType_s', '{!ex=sch,sct}schema_s', '{!ex=gov}government_s', '{!ex=key}all_terms_ss', '{!ex=reg}government_REL_ss']
+                        facetFields    : queryOptions.facetFields,
+                        pivotFacetFields : queryOptions.pivotFacetFields
                     }
                     //'schema_s', 'government_s', 
                     if(sort && sort != 'relevance asc')
@@ -50,6 +51,7 @@
                         $scope.searchResult.pageCount   = Math.ceil(result.data.response.numFound / $scope.searchResult.rowsPerPage);
                         $scope.searchResult.query       = queryOptions.tagQueries.query;
                         $scope.searchResult.tagQueries  = queryOptions.tagQueries;
+                        $scope.searchResult.facetFields = queryOptions.facetFields;
                         $scope.searchResult.sortBy      = lQuery.sort;
                         $scope.searchResult.currentPage = pageNumber;
                         

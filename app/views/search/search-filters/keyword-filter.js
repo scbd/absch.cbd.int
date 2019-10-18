@@ -14,7 +14,7 @@ define(['app','text!views/search/search-filters/keyword-filter.html', 'lodash'],
                $scope.relatedFilters = {};
 
                 $scope.hasCounts  = function(item){
-                    if($scope.$parent.searchResult.data)
+                    if((($scope.$parent.searchResult.data||{}).facets||{}).keywords)
                         return $scope.$parent.searchResult.data.facets.keywords[item.id] > 0
                 }
 

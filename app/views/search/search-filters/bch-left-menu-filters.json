@@ -1,0 +1,268 @@
+﻿{
+	"authority": [{
+			"type": "thesaurus",
+			"term": "subjectAreas",
+			"title": "Administrative functions",
+			"field": "functions_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "typeOfOrganisms",
+			"title": "Types of LMOs under its jurisdiction",
+			"field": "cpbOrganismTypes_REL_ss"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:identifier_s,title:title_s",
+				"q": "schema_s:biosafetyDecision"
+			},
+			"title": "Solr query",
+			"field": "cpbOrganismTypes_REL_ss"
+		}
+	],
+	"bchNews": [],
+	"biosafetyDecision": [{
+			"type": "thesaurus",
+			"term": "decisionTypes",
+			"title": "Type of Decision/Document",
+			"field": "decisionTypes_ss"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
+				"q": "schema_s:modifiedOrganism"
+			},
+			"title": "Unique Identifier",
+			"field": "uniqueIdentification_s"
+        },
+        {
+			"type": "thesaurus",
+			"term": "dnaSequenceTraits",
+			"title": "Related trait(s) or use(s) in biotechnology",
+			"field": "lmoTraits_ss"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:name_s,title:name_s",
+				"q": "schema_s:dnaSequence"
+			},
+			"title": "Gene name",
+			"field": "lmoGeneNames_txt"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:scientificName_s,title:scientificName_s",
+				"q": "schema_s:modifiedOrganism"
+			},
+			"title": "scientific name",
+			"field": "lmoScientificNames_ss"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:commonNames_ss,title:commonNames_ss",
+				"q": "schema_s:modifiedOrganism"
+			},
+			"title": "Common name",
+			"field": "lmoCommonNames_txt"
+		},
+		{
+			"type": "date",
+			"title": "Date of the decision",
+			"field": "entryIntoForce_dt"
+		}
+	],
+	"biosafetyLaw": [{
+			"type": "thesaurus",
+			"term": "subjectAreas",
+			"title": "Subject Areas",
+			"field": "cpbSubjectAreas_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "legislationAgreementTypes",
+			"title": "Type of document",
+			"field": "cpbOrganismTypes_REl_ss"
+		}
+	],
+	"capacityBuildingActivities": [],
+	"capacityBuildingNeeds": [],
+	"cpbNationalReportInterim": [],
+	"database": [],
+	"dnaSequence": [{
+			"type": "thesaurus",
+			"term": "dnaSequenceFamily",
+			"title": "Category",
+			"field": ""
+		},
+		{
+			"type": "thesaurus",
+			"term": "dnaSequenceTraits",
+			"title": "Related trait(s)",
+			"field": ""
+		}
+	],
+	"expert": [{
+			"type": "thesaurus",
+			"term": "organizationTypes",
+			"title": "Type of Organization",
+			"field": ""
+		},
+		{
+			"type": "thesaurus",
+			"term": "expertiseArea",
+			"title": "Areas of Expertise",
+			"field": ""
+		}
+	],
+	"expertAssignment": [],
+	"focalPoint": [{
+		"type": "thesaurus",
+		"term": "focalPointTypes",
+		"title": "Type of Focal point",
+		"field": "type_ss"
+	}],
+	"independentRiskAssessment": [{
+		"type": "thesaurus",
+		"term": "riskAssessmentScope",
+		"title": "Scope of the risk assessment",
+		"field": ""
+	}],
+	"modifiedOrganism": [{
+			"type": "thesaurus",
+			"term": "OrganismCommonUses",
+			"title": "Common use(s)",
+			"field": "commonUses_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "techniqueUsed",
+			"title": "Techniques used for the modification",
+			"field": "techniqueUsed_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "dnaSequenceTraits",
+			"title": "Related trait(s) or use(s) in biotechnology",
+			"field": "trait_ss"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
+				"q": "schema_s:modifiedOrganism"
+			},
+			"title": "Unique Identifier",
+			"field": "uniqueIdentification_s"
+		}
+	],
+	"nationalRiskAssessment": [{
+			"type": "thesaurus",
+			"term": "riskAssessmentScope",
+			"title": "Scope of the risk assessment",
+			"field": "scopes_ss"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
+				"q": "schema_s:modifiedOrganism"
+			},
+			"title": "Unique Identifier",
+			"field": "uniqueIdentification_s"
+        },
+        {
+			"type": "thesaurus",
+			"term": "dnaSequenceTraits",
+			"title": "Related trait(s) or use(s) in biotechnology",
+			"field": "lmoTraits_ss"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:name_s,title:name_s",
+				"q": "schema_s:dnaSequence"
+			},
+			"title": "Gene name",
+			"field": "lmoGeneNames_txt"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:scientificName_s,title:scientificName_s",
+				"q": "schema_s:modifiedOrganism"
+			},
+			"title": "scientific name",
+			"field": "lmoScientificNames_ss"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:commonNames_ss,title:commonNames_ss",
+				"q": "schema_s:modifiedOrganism"
+			},
+			"title": "Common name",
+			"field": "lmoCommonNames_txt"
+		},
+		{
+			"type": "date",
+			"title": "Date of risk assessment ",
+			"field": "riskAssessmentDate_dt"
+		}
+	],
+	"organism": [{
+			"type": "thesaurus",
+			"term": "typeOfOrganisms",
+			"title": "Type of organism(s)",
+			"field": ""
+		},
+		{
+			"type": "thesaurus",
+			"term": "domestication",
+			"title": "Organism domestication",
+			"field": ""
+		},
+		{
+			"type": "thesaurus",
+			"term": "OrganismCommonUses",
+			"title": "Common use(s)",
+			"field": ""
+		}
+	],
+	"organization": [{
+		"type": "thesaurus",
+		"term": "organizationTypes",
+		"title": "Type of Organization",
+		"field": ""
+	}],
+	"resource": [{
+			"type": "thesaurus",
+			"term": "resourceTypes",
+			"title": "Type of resource",
+			"field": "resourceTypes_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "languages",
+			"title": "Language",
+			"field": "language_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "thematicArea",
+			"title": "Thematic Area",
+			"field": "bchSubjects_REL_ss"
+		},
+		{
+			"type": "date",
+			"title": "Publication Date",
+			"field": "publicationDate_dt"
+		}
+	],
+	"submission": [],
+	"supplementaryAuthority": []
+}

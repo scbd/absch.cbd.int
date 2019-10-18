@@ -87,7 +87,8 @@ define(['app', 'underscore'], function (app, _) {
                 techniqueUsed            :  'ABE9DCE3-92BA-4D5D-8948-7F7E541EEC6B',
                 organizationTypes        :  'Organization Types',
                 expertiseArea            :  '31855BDF-ADFF-460A-8FB8-975C8C325DAA',
-                supplementaryProtocolFunctions: 'CD613FCE-7A2A-475C-85A1-C2D1C208EC0C'
+                supplementaryProtocolFunctions: 'CD613FCE-7A2A-475C-85A1-C2D1C208EC0C',
+                focalPointTypes          :  'FocalPoint Types'
                 
             }
         }
