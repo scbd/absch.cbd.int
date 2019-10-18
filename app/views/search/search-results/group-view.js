@@ -35,6 +35,7 @@
                     var groupMapping
                     var groupFieldMapping = searchDirectiveCtrl.combinationField(options.groupByFields);
                     var groupField = groupFieldMapping.groupField;
+                    var fieldMapping = groupFieldMappings(groupField);
 
                     var sortBy = 'government_EN_s asc';
                     var sortFields = sort||$scope.searchResult.sortFields||[];
@@ -45,21 +46,23 @@
                         var field = _.first(sortFields)
                         if(!field || field.indexOf('updatedDate_dt')>0){
                             sortFields = groupFieldMapping.sortFields;
-                        }
-                        
+                        }                        
                     }
+                    var additionalFields = _.map(fieldMapping, function(f){return f.titleField+'_groupTitle:'+f.titleField}).join(', ')
+                    //'schema_s_groupTitle:schema_EN_t, government_s_groupTitle:government_EN_t';
+
                     var lQuery = {
                         fieldQuery     : options.tagQueries,
                         query          : options.query||undefined,
                         rowsPerPage    : $scope.searchResult.rowsPerPage,
                         currentPage : pageNumber - 1,
                         facet       :true,
-                        facetFields : ['{!ex=sct}schemaType_s', '{!ex=sch,sct}schema_s', '{!ex=gov}government_s', '{!ex=key}all_terms_ss', '{!ex=reg}government_REL_ss'],
+                        facetFields : options.facetFields,
                         groupField : groupField,
                         groupLimit : 10,
                         groupSort  : sortFields.join(', '),
                         sort       : sortFields.join(', '),
-                        additionalFields     : 'schema_s_groupTitle:schema_EN_t, government_s_groupTitle:government_EN_t'
+                        additionalFields     : additionalFields
                     }
                     //'schema_s', 'government_s', 
 
@@ -72,10 +75,10 @@
                             $scope.searchResult.rawDocs = [];
     
                             var countryRecords = {}
+                            
                             _.each(result.data.grouped[groupField].groups, function (record) {
-                                if(groupField == 'government_schema_s'){
-                                    var fieldMapping = ['government_s', 'schema_s']
-                                    var gpDetails = (record.groupValue || '').split('_');
+                                // if(groupField == 'government_schema_s'){
+                                    var gpDetails = (record.groupValue || 'other').split('_');
                                     if (!gpDetails.length)
                                         return;
                                     
@@ -84,11 +87,11 @@
                                         var groupValue = gpDetails[i];
                                         group[groupValue] = {}
                                         group[groupValue].levelKey = groupValue;
-                                        group[groupValue].field = fieldMapping[i];
+                                        group[groupValue].field = fieldMapping[i].field;
                                         group[groupValue].level = i+1;
-                                        group[groupValue].title = record.doclist.docs[0][fieldMapping[i]+'_groupTitle'];
+                                        group[groupValue].title = record.doclist.docs[0][fieldMapping[i].titleField + '_groupTitle']||groupValue;
 
-                                        if(i==0){
+                                        if(fieldMapping[i].field == 'government' && (groupValue!='reference' && groupValue!='scbd')){
                                             group[groupValue].partyStatus = true;
                                             group[groupValue].href = '/countries/' + (groupValue||'').toUpperCase()
                                         }
@@ -109,15 +112,18 @@
                                     else{                                        
                                         countryRecords[groupLevels.levelKey].subLevels = _(countryRecords[groupLevels.levelKey].subLevels||[]).concat(groupLevels.subLevels||[]).value();
                                     }
-                                    countryRecords[groupLevels.levelKey].numFound  = _.reduce(countryRecords[groupLevels.levelKey].subLevels, function(count, level){return count + level.numFound}, 0)
-                                }
-                                else{                                    
-                                    countryRecords[record.groupValue] = {}
-                                    countryRecords[record.groupValue].levelKey = record.groupValue;
+                                    if(gpDetails.length > 1)
+                                        countryRecords[groupLevels.levelKey].numFound  = _.reduce(countryRecords[groupLevels.levelKey].subLevels, function(count, level){return count + level.numFound}, 0)
+                                    else
+                                        countryRecords[groupLevels.levelKey].numFound  = groupLevels.numFound;
+                                // }
+                                // else{                                    
+                                //     countryRecords[record.groupValue] = {}
+                                //     countryRecords[record.groupValue].levelKey = record.groupValue;
     
-                                    countryRecords[record.groupValue].title = record.doclist.docs[0][groupField+'_groupTitle'];
-                                    countryRecords[record.groupValue] = _.extend(countryRecords[record.groupValue], record.doclist);
-                                }
+                                //     countryRecords[record.groupValue].title = record.doclist.docs[0][groupField+'_groupTitle'];
+                                //     countryRecords[record.groupValue] = _.extend(countryRecords[record.groupValue], record.doclist);
+                                // }
     
                             });
                             $scope.searchResult.docs        = _.values(countryRecords);
@@ -126,6 +132,7 @@
                             $scope.searchResult.pageCount   = Math.ceil(result.data.grouped[groupField].ngroups / $scope.searchResult.rowsPerPage);
                             $scope.searchResult.query       = lQuery.query;
                             $scope.searchResult.sortBy      = lQuery.sort;
+                            $scope.searchResult.facetFields = lQuery.facetFields;
                             $scope.searchResult.currentPage = pageNumber;
                             
                             $scope.searchResult.groupOptions= options;
@@ -163,8 +170,14 @@
                 $scope.loadRecords = function(group, number){
                     console.log(group, number)
                     group.isLoading = true;
+                    var recQuery = $scope.searchResult.query;
+                    
+                    if(recQuery=="''") 
+                        recQuery = groupFieldQuery(group)
+                    else 
+                        recQuery += ' AND (' + groupFieldQuery(group) + ')'
                     var query = {
-                        query   : $scope.searchResult.query + ' AND (' + groupFieldQuery(group) + ')',
+                        query   : recQuery,
                         sort    : $scope.searchResult.groupSort,
                         rowsPerPage    : number||5000,
                         start          : number ? undefined : (group.start==0 ? 10 : group.start),
@@ -185,10 +198,26 @@
                 function groupFieldQuery(group){
                     var parentField = '';
                     if(group.parent)
-                        parentField = ' AND ' + groupFieldQuery(group.parent);
+                        parentField =  groupFieldQuery(group.parent);
+                    
+                    if(group.levelKey!='reference' && group.levelKey!='scbd')
+                        return (group.field + '_s:' + group.levelKey + (parentField.length ? ' AND ': '') + parentField)||'';
+                    
+                    return parentField;
 
-                    return (group.field + ':' + group.levelKey + parentField)||'';
+                }
 
+                function groupFieldMappings(groupField){
+                    var fieldMapping = [];
+                    var groupFields = groupField.replace(/_s$/, '').split('_')
+                    groupFieldMapping = searchDirectiveCtrl.groupByFields();
+                    _.each(groupFields, function(f){
+                        field = _.find(groupFieldMapping, {field:f})
+                        if(field)
+                            fieldMapping.push(field);
+                    })
+
+                    return fieldMapping;
                 }
 
             }
