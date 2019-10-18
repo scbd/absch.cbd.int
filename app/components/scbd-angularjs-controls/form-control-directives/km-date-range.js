@@ -10,7 +10,7 @@ define(['app', 'text!./km-date-range.html', 'moment', 'datepicker-range'], funct
       template: template,
       replace: true,
       require: "ngModel",
-      transclude: false,
+      transclude: true,
       scope: {
         binding: '=ngModel',
         placeholder: '@',
