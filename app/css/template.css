@@ -2029,3 +2029,9 @@ legend+ .help-info {
 sup {
     font-size: 8px;;
 }
+
+.route-loading .medium.loader{
+    color:white;
+    top: 3.5%;
+    left: 45%;
+}
