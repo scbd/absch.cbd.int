@@ -25,7 +25,11 @@ function prerender(req, res, next) {
         prerenderNode.set('beforeRender', function(req, done) {
                 client.get(req.url, done);
         }).set('afterRender', function(err, req, prerender_res) {
+            if(prerender_res)
                 client.set(req.url, prerender_res.body)
+            else{
+                console.error(`No body returned by url2html for ${req.url}`)
+            }
         });
 
 
