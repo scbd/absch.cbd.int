@@ -110,7 +110,9 @@
     <div class="device-size visible-lg" size="lg" style="height:0px;width:0px"></div>
     <div id="divHeader"></div>
 
-    <div class="container-full page-content" style="min-height:650px;" ng-class="{'training-bg':!production_env}">
+    <div class="container-full page-content" style="min-height:650px;" 
+    ng-class="{'training-bg':!production_env}">
+        <route-loading></route-loading>
         <ng-view autoscroll="true"></ng-view>
     </div>
 
