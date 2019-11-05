@@ -163,6 +163,8 @@ define(['app', 'underscore', 'js/common', 'moment', 'components/scbd-angularjs-c
                                                           };
 
                                     _.each(results[2], function(schema){
+                                        if(!referenceRecords[schema.symbol])
+                                            referenceRecords[schema.symbol] = {}
                                         referenceRecords[schema.symbol].recordCount = schema.count||0;                                        
                                     });
                                     $scope.referenceRecords = referenceRecords;
