@@ -26,6 +26,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             type     : "@type",
             filter : "@filter",
             hideSelf : "=hideSelf",
+            query    : "="
 		},
 		link : function($scope, $element, $attr, ngModelController) {
             var dialogId;
@@ -53,13 +54,14 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 
                 //$scope.model=undefined;
                 var oldModel = angular.copy($scope.model);
-
+                $scope.selectedRawDocuments = [];
                 _.forEach($scope.rawDocuments.docs, function (doc) {
 
                     if(doc.__checked === true)
                     {
                         if(!$scope.model && $scope.type != 'radio')
                             $scope.model=[];
+                        $scope.selectedRawDocuments.push(doc);
 
                         if(!$scope.isInModel(doc.identifier_s)){
                             var document = {identifier: doc.identifier_s};
@@ -70,7 +72,8 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 								$scope.model = document;
 							else
                             	$scope.model.push(document);
-                        }
+                        }                       
+                        
                     }
                     if(!doc.__checked && $scope.isInModel(doc.identifier_s)){
                         	$scope.removeDocument(doc)
@@ -131,6 +134,11 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 							$scope.selectedDocuments = _.map(results, function(result){
                                                             return result.data || {};
                                                         });
+                            var selectedDocuments = _.map($scope.model, function(d){return removeRevisonNumber(d.identifier)});
+                            $scope.selectedRawDocuments = _.filter($scope.rawDocuments.docs, function(doc){
+                                return _.contains(selectedDocuments, doc.identifier_s);
+                            });
+                                                        
 					});
 
                     if($scope.model.length === 0 || _.isEmpty($scope.model))
@@ -189,6 +197,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             //
             //==================================
 			$scope.removeDocument = function(document){
+                var oldModel = $scope.model;
 
                 var removeId;
 				 if(document.identifier)
@@ -212,6 +221,11 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                         return doc;
                         }
                     });
+                    $scope.selectedRawDocuments =  _.filter($scope.selectedRawDocuments, function (doc) {
+                        if(doc.identifier_s !== removeRevisonNumber(removeId) ){
+                        return doc;
+                        }
+                    });
                 }
 			   if($scope.type != 'radio')
 	               $scope.model =  _.filter($scope.model, function (doc) {
@@ -227,6 +241,9 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                     if($scope.model.length===0)
                         $scope.model = undefined;
                 }
+                if(!angular.equals(oldModel, $scope.model)){
+                    ngModelController.$setViewValue($scope.model);
+                }
 
 			};
 
@@ -241,6 +258,10 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                     schema = $scope.schema;
 
                 var q  = "schema_s:"+ schema;
+
+                if($scope.query){ //if query is mentions ignore schem field in query
+                    q = $scope.query;
+                }
 
                 if(!$attr.skipGovernment){
                     if($scope.government)
