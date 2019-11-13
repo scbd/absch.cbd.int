@@ -32,7 +32,8 @@
                     <div class="list-group-item" ng-repeat="filter in filters"  
                         style="border-right: unset;border-left: unset;" ng-show="!state[schema]">
                         
-                        <div ng-if="filter.type!='date'" class="color-darkgrey not" style="cursor: pointer;" ng-click="showFilterDialog(schema, filter, searchResult.data.facets.keywords)">
+                        <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='freeText' && filter.type!='yesNo'" class="color-darkgrey not" style="cursor: pointer;" 
+                            ng-click="showFilterDialog(schema, filter, searchResult.data.facets.keywords)">
                             {{filter.title}}
                             <div style="position:absolute;right:6px;top:6px" style="margin-top:5px" class="fa fa-chevron-right"></div>    
                             <!-- <i class="fa fa-chevron-right pull-right" style="margin-top:5px" aria-hidden="true"></i>           -->
@@ -42,8 +43,39 @@
                             <button ng-if="filter.filterValue" class="btn btn-xs btn-default pull-right" ng-click="clearFilterDate(filter)">clear</button>
                             <div km-date-range ng-model="filter.filterValue" ng-change="onFilterDateChange(filter)"></div>
                         </div>
+                        <div ng-if="filter.type=='freeText'">
+                            <form ng-submit="saveSchemaFreeText(filter, filter.searchKeyword)" class="input-group">
+                                <input type="text" ng-model="filter.searchKeyword" class="form-control" placeholder="Search in {{schema | schemaName}}"
+                                    style="font-weight:bold;">
+                                <span type="submit" style="cursor:pointer" ng-click="" class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
+                            </form>
+                        </div>
+                        <div ng-if="filter.type=='yesNo'" >
+                            <label ng-bind="filter.title"></label>
+                            <button ng-if="filter.filterValue!==undefined" class="btn btn-xs btn-default pull-right" ng-click="clearFilterDate(filter)">clear</button>
+                            <label class="radio-inline"><input type="radio" ng-model="filter.filterValue" ng-value="true"   ng-change="onFilterDateChange(filter)"/> Yes </label>
+	                        <label class="radio-inline"><input type="radio" ng-model="filter.filterValue" ng-value="false"  ng-change="onFilterDateChange(filter)"/> No </label>
+                        </div>
+                        <div ng-if="filter.type=='solrRecords'">
+                            <div document-selector ng-model="filter.selectedItems" question="searchResult" caption="(sense)" type="checkbox"
+                                query="filter.query.q" filter="true" ng-change="recordSelected(item, filter)">
+                                <select-records>
+                                    <div class="color-darkgrey not" style="cursor: pointer;" ng-click="$parent.openAddDialog();">
+                                        <span ng-bind="filter.title"></span>
+                                        <div style="position:absolute;right:6px;top:6px" style="margin-top:5px" class="fa fa-chevron-right"></div> 
+                                    </div>
+                                </select-records>
+                                <selected-records>
+                                    <div class="label label-selected-facet" aria-hidden="false" ng-repeat="doc in $parent.selectedRawDocuments"
+                                    ng-click="removeSchemaFilters(doc, filter);$parent.$parent.removeDocument(doc);" >
+                                        <div style="position:absolute;right:6px;top:6px" class="fa fa-remove"></div>
+                                        {{doc.rec_title}}
+                                    </div>
+                                </selected-records>
+                            </div>
+                        </div>
 
-                        <div ng-repeat="option in filter.selectedItems" ng-click="removeSchemaFilters(option, filter)" 
+                        <div ng-if="filter.type!='solrRecords'" ng-repeat="option in filter.selectedItems" ng-click="removeSchemaFilters(option, filter)" 
                             class="list-group-item-expand filter" role="button" id="{{option.identifier}}"
                             data-toggle="tooltip" data-title="{{option.title|lstring:locale}}" data-container="body" data-placement="right">                            
                             <div class="label label-selected-facet" aria-hidden="false">

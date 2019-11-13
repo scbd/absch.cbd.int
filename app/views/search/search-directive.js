@@ -23,7 +23,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
             function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
                     appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, 
                     $timeout, locale, solr) {
-                    
+                        var customQueryFn = {
+                            buildExpiredPermitQuery : buildExpiredPermitQuery
+                        }
+                        var lefteMenuSchemaFieldMapping;
                         var activeFilter;
                         var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
                         var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
@@ -127,7 +130,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if(!text && text.length <= 0)
                             return;
 
-                        var fid = 'freeText_' + text;
+                        var fid = text;
                         var id = undefined;
 
                          if($scope.setFilters[fid] )
@@ -138,7 +141,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                            $scope.searchKeyword = "";
                         }
 
-                        $scope.refresh = true;
+                        updateQueryResult();
                     };
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
@@ -155,7 +158,12 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         updateQueryResult();
                     };
 
-                    $scope.removeFilter = function (filterID) {
+                    $scope.removeFilter = function (filter) {
+                        var filterID = filter.id;
+                        if(filter.type == 'rawQuery'){
+                            filterID='rawQuery';
+                            updateQueryString('raw-query',undefined);
+                        }
 
                         var id = $scope.setFilters[filterID].filterID
                         delete $scope.setFilters[filterID];
@@ -168,7 +176,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var dels = {};
                         var toDelete = _.each($scope.setFilters, function (filter) {
                             if (filter.broader === filterID) {
-                                $scope.removeFilter(filter.id);
+                                $scope.removeFilter(filter);
                             }
                         });
 
@@ -269,8 +277,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 }
                             }
                         }
+                        if(query["raw-query"]){
+                            saveRawQueryFilter(query["raw-query"]);
+                        }
 
                         $timeout(function(){updateQueryResult(currentpage);}, 200)
+
+                        loadleftMenuFieldMapping();
                     }
 
                     
@@ -296,6 +309,14 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             })
                         }                
                     };
+
+                    function saveRawQueryFilter(query){
+                        $scope.setFilters['rawQuery'] = {
+                            type     : 'rawQuery',
+                            name     : 'Custom query',
+                            id       : query
+                        };
+                    }
 
                     function addFilter(filterKey, filterInfo) {                        
                         $scope.searchFilters[filterKey] = filterInfo;
@@ -407,6 +428,22 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         
                         
                         
+                        return $q.all(promises);
+                    
+                    }
+
+                    function loadABSKeywordFilters() {
+                        var promises = []
+                        promises.push(thesaurusService.getDomainTerms('keywords'            ).then(function(keywords){loopKeywords(keywords, 'keywords'             )}));
+                        promises.push(thesaurusService.getDomainTerms('thematicAreas'       ).then(function(keywords){loopKeywords(keywords, 'thematicAreas'        )}));
+                        promises.push(thesaurusService.getDomainTerms('keyAreas'            ).then(function(keywords){loopKeywords(keywords, 'keyAreas'             )}));
+                        promises.push(thesaurusService.getDomainTerms('cnaJurisdictions'    ).then(function(keywords){loopKeywords(keywords, 'cnaJurisdictions'     )}));
+                        promises.push(thesaurusService.getDomainTerms('aBSkeyareas'         ).then(function(keywords){loopKeywords(keywords, 'aBSkeyareas'          )}));
+                        promises.push(thesaurusService.getDomainTerms('allKeywords'         ).then(function(keywords){loopKeywords(keywords, 'allKeywords'          )}));
+
+
+                        promises.push(thesaurusService.getDomainTerms('mSR_elements'         ).then(function(keywords){loopKeywords(keywords, 'mSR_elements'          )}));
+                                                                        
                         return $q.all(promises);
                     
                     }
@@ -568,14 +605,16 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var tabQuery            = buildTabQuery();
                         var schemaQuery         = buildSchemaQuery();                        
                         var schemaSubQuery      = buildSchemaSubQuery();                        
-                        var keywordQuery        = buildFieldQuery('keyword', 'all_terms_ss')
-                        var countryQuery        = buildFieldQuery('country', 'government_s')
+                        var keywordQuery        = buildFieldQuery('keyword',  'all_terms_ss')
+                        var countryQuery        = buildFieldQuery('country',  'government_s')
                         var partyStatusQuery    = buildPartyStatusQuery();
-                        var regionQuery         = buildFieldQuery('region',  'government_REL_ss');
+                        var regionQuery         = buildFieldQuery('region',   'government_REL_ss');
+                        var textQuery           = buildFieldQuery('freeText', 'text_EN_txt');
+                        var rawQuery            = buildRawQuery();
 
                         var dateQuery           = buildDateQuery();
 
-                        var queries             = _.compact([dateQuery]);
+                        var queries             = _.compact([dateQuery, textQuery, rawQuery]);
                         var query               = '';
                         if(queries.length)
                             query               = solr.andOr(queries, 'AND')
@@ -622,10 +661,21 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                                     if(!_.isEmpty(filter.selectedItems)){
                                         var ids = _.map(filter.selectedItems, 'identifier');
+                                        if(filter.type == 'freeText')
+                                            ids = _.map(filter.selectedItems, 'title');
                                         subQueries.push(filter.field + ':(' + ids.join(' ') + ')') 
                                     }
                                     else if(filter.type == 'date' && filter.filterValue){
                                         subQueries.push(buildDateFieldQuery(filter.field, filter.filterValue))
+                                    }
+                                    else if(filter.type == 'yesNo' && filter.filterValue!== undefined){
+                                        if(filter.fieldfn!=undefined){ //custom function                                            
+                                            var q = customQueryFn[filter.fieldfn](filter);
+                                            if(q)
+                                                subQueries.push(q);
+                                        }
+                                        else
+                                            subQueries.push(filter.field + ':' + filter.filterValue)
                                     }
 
                                 });
@@ -700,6 +750,20 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         return query;
                     }
 
+                    function buildExpiredPermitQuery(filter){
+                        if(filter.filterValue == true){
+                            return 'dateOfExpiry_dt:[* TO NOW]'
+                        }
+                        else if(filter.filterValue == false)
+                            return 'dateOfExpiry_dt:[NOW TO *]'
+
+                        
+                    }
+
+                    function buildRawQuery(){
+                        return ($scope.setFilters['rawQuery']||{}).id;
+                    }
+
                     function getCountryList(id, list){
 
                         var templist = _.filter(list, function (item) {
@@ -720,7 +784,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
 
                     function getSchemaFieldMapping(schema){
-                        return bchSchemaFieldMapping[schema];
+                        return lefteMenuSchemaFieldMapping[schema];
                     }
 
                     function onLeftFilterUpdate(filters){
@@ -728,11 +792,15 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         updateQueryResult();
                     }
 
-                    var bchSchemaFieldMapping;
-                    $q.when(loadJsonFile('views/search/search-filters/bch-left-menu-filters.json'))
-                    .then(function(mapping){
-                        bchSchemaFieldMapping = mapping;
-                    })
+                    function loadleftMenuFieldMapping(){
+                        var file = 'views/search/search-filters/bch-left-menu-filters.json';
+                        if(isABS)
+                            file = 'views/search/search-filters/abs-left-menu-filters.json';
+
+                        $q.when(loadJsonFile(file)).then(function(mapping){
+                            lefteMenuSchemaFieldMapping = mapping;
+                        })
+                    }
 
 
                     init();

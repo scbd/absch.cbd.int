@@ -9,7 +9,7 @@
              <div class="col-md-12" style="padding-bottom:10px;">
                  <span ng-repeat="filter in setFilters" style="margin-bottom:10px;">
                      <button class="btn btn-xs btn-info bold" style="margin-top:5px;"
-                         ng-click="removeFilter(filter.id)">
+                         ng-click="removeFilter(filter)">
                          <span
                              ng-if="filter.type === 'freeText' || filter.type === 'UID' || filter.type === 'custom'">&#34;</span>{{filter.name|lstring:locale}}<span
                              ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
