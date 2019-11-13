@@ -66,10 +66,8 @@
 
                 $scope.onPageChange = function(pageNumber){
                     updateResult($scope.searchResult, $scope.searchResult.sort, pageNumber);
-                    $location.search({
-                        currentPage:pageNumber,
-                        rowsPerPage:$scope.searchResult.rowsPerPage
-                    })
+                    $location.search('currentPage', pageNumber)
+                    $location.search('rowsPerPage', $scope.searchResult.rowsPerPage)
                 }
 
                 $scope.onPageSizeChanged = function(size){

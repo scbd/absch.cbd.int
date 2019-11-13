@@ -10,7 +10,8 @@
 	'services/search-service',
 	'views/directives/block-region-directive',
 	'views/directives/record-options','components/scbd-angularjs-services/services/locale',
-	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/form-control-directives/km-value-ml'
+	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/form-control-directives/km-value-ml',
+	'views/forms/view/view-reference-records.directive'
 ], function (app, template) {
 
 	app.directive('recordLoader', [function () {

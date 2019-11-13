@@ -1,9 +1,9 @@
-define(['app','lodash', "text!views/forms/view/view-default-reference.directive.html", 
+define(['app','lodash', "text!views/forms/view/view-reference-records.directive.html", 
 'components/scbd-angularjs-services/services/storage', 'services/search-service'], function (app, _, template) {
 
-app.directive("viewReferenceRecords", [function () {
+app.directive("viewReferencedRecords", [function () {
 	return {
-		restrict: "EAC",
+		restrict: "EA",
 		template: template ,
 		replace: true,
 		transclude: false,
@@ -22,26 +22,36 @@ app.directive("viewReferenceRecords", [function () {
 
 					var searchQuery = {
 						query 	: "referenceRecord_ss:" + $scope.model,
-						fields	: 'referenceRecord_ss, referenceRecord_info_ss'
+						fields	: 'referenceRecord_ss, referenceRecord_info_ss, schema:schema_EN_s, identifier:idenfifier_s, uniqueId:uniqueIdentifier_s'
 					}
 					$q.when(searchService.list(searchQuery))
 					.then(function(data) {
 
-						if(data.data.response.docs.length > 0){
-							$scope.referenceRecords = {};
+						if(data.data.response.docs.length > 0){							
 							_.each(data.data.response.docs, function(record){
-								var details = JSON.parse(record.referenceRecord_info_ss);
-								_.each(details, function(detail){
-									if(_.includes(detail.identifier, $scope.identifier))
-										$scope.referenceRecords[details.field] = ($scope.referenceRecords[detail.field]||0) + 1;
-								})
-								
+								_.each(record.referenceRecord_info_ss, function(info){
+									info = JSON.parse(info);
+									_.each(info.identifiers, function(identifier){
+										if(removeRevisonNumber(identifier) == $scope.model){
+											if(!$scope.referenceRecords)
+												$scope.referenceRecords = {};
+											$scope.referenceRecords[info.field] = $scope.referenceRecords[info.field] || {count:0, docs:[], schema:record.schema}
+											
+											$scope.referenceRecords[info.field].count += 1;
+											$scope.referenceRecords[info.field].docs.push({uniqueId:record.uniqueId})
+										}
+									})
+								});								
 							})
 						}
 					});
 
 		        }
-		    });
+			});
+			
+			function removeRevisonNumber(identifier){
+				return identifier.replace(/@[0-9]+$/, '');
+			}
 
 		 }] //controller
 	};

@@ -1,5 +1,33 @@
-﻿<div ng-if="referenceRecords" class="km-value">
-    <legend>Reference records</legend>
-    {{referenceRecords|json}}
+﻿<div ng-show="referenceRecords">
+    <legend>
+        Reference records
+        <a target="_blank" ng-href="/search?raw-query=referenceRecord_ss:{{model}}" class="pull-right btn btn-primary btn-xs">Show in search</a>
+    </legend>
+    <table class="table table-bordered">
+        <tr>
+            <th></th>
+            <th>Schema</th>
+            <th>Field</th>
+            <th>Count</th>
+        </tr>
+        <tr ng-repeat-start="(key, record) in referenceRecords">
+            <td><button class="btn btn-primary btn-xs" ng-click="record.showRecords=!record.showRecords">Show records</button></td>
+            <td ng-bind="record.schema"></td>
+            <td ng-bind="key"></td>
+            <td ng-bind="record.count"></td>
+        </tr>
+        <tr ng-if="record.showRecords">
+            <td colspan="4" style="padding:0px">
+                <table class="table table-bordered">
+                    <tr ng-repeat="doc in record.docs">
+                        <td>
+                            <a target="_blank" ng-href="/database/{{doc.uniqueId|uppercase}}" ng-bind="doc.uniqueId|uppercase" ></a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr ng-repeat-end="(key, record) in referenceRecords"></tr>
 
+    </table>
 </div>
