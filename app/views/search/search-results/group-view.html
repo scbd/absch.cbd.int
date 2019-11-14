@@ -37,20 +37,21 @@
             <div class="search-result-heading level_{{::group.level||1}}" ng-if="::group.levelKey">
                 <span class="schemaTitle color-darkgrey" class="animate-if" ng-if="::!group.href" ng-bind="::group.title"></span>
                 <a translation-url ng-if="::group.href" ng-href="{{group.href}}" class="color-black link" ng-bind="::group.title"></a>
-
+                 (<span ng-bind="::group.numFound" ng-class="::{'color-darkgrey':group.level>1}"></span>)
                 <ng-party-status ng-if="::group.partyStatus" code="group.levelKey" style="margin-left:10px;"></ng-party-status>
-                <div class="btn-group pull-right">
+                <!-- <div class="btn-group pull-right">
                     <button class="btn btn-default btn-xs" ng-click="group.isClosed=!group.isClosed">            
                         <span class="badge " ng-bind="::group.numFound" ng-class="::{'color-darkgrey':group.level>1}"></span>
                     </button>
                     <button class="btn btn-default btn-xs" ng-click="group.isClosed=!group.isClosed" >
                         <i class="fa" ng-class="{'fa-sort-down':group.isClosed, 'fa-sort-up':!group.isClosed}"></i>
                     </button>
-                </div>
+                </div> -->
             </div>
             <div class="search-result-body" ng-if="!group.isClosed && group.docs">
                 <div ng-repeat="doc in group.docs">
-                    <div ng-include="'/app/views/search/search-results/record-view.html'"></div>         
+                    <div ng-include="'/app/views/search/search-results/record-view.html'"></div>   
+                          
                 </div>
                 <div class="btn-group" ng-if="group.numFound >  group.docs.length">
                     <button class="btn btn-default bold" style="font-size: 10px;text-transform: uppercase;"  ng-click="loadRecords(group,10)" ng-disabled="group.isLoading">

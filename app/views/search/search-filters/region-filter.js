@@ -1,7 +1,7 @@
 define(['app', 'text!views/search/search-filters/region-filter.html','lodash', 'js/common',
 ], function(app, template, _) {
 
-    app.directive('regionFilter', function() {
+    app.directive('regionFilter', ['locale', function(locale) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -26,7 +26,7 @@ define(['app', 'text!views/search/search-filters/region-filter.html','lodash', '
                
                 //===================================================================
                $scope.IsCBDRegion = function(item) {
-                  if(item.name && item.name.indexOf("CBD Regional Groups") >= 0 ){
+                  if(item.name && item.name['en'].indexOf("CBD Regional Groups") >= 0 ){
                       
                       return true;
                   }
@@ -38,9 +38,9 @@ define(['app', 'text!views/search/search-filters/region-filter.html','lodash', '
                    if(!$scope.regionAlphabetFilter)
                     return true;
                     
-                   return item && item.name.startsWith($scope.regionAlphabetFilter);
+                   return item && item.name[locale].startsWith($scope.regionAlphabetFilter);
                };
             }//link
         };
-    });
+    }]);
 });

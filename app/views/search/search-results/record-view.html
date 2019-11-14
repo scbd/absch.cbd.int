@@ -1,6 +1,10 @@
 ﻿<div>
     <div style="padding:0!important;margin:0 0 20px 0!important;">
 
+        <a translation-url target="_blank" ng-href="/database/{{::doc.schema_s|schemaShortName}}/{{doc.uniqueIdentifier_s}}" 
+        class="pull-right link" ng-show="!doc.showDoc" title="open in new tab">
+            <i class="fa fa-external-link"></i>
+        </a>
         <div class="pull-right" style="padding-right:15px;position:relative;top:5px;"  ng-show="doc.showDoc" >
                 <span style="color:#ddd" > | </span> &nbsp; 
             <a translation-url class="bold"  style="position:relative;top:2px;color:#FFF;font-size:20px;cursor:pointer;z-index:99999999;width:100%;" ng-click="doc.showDoc=false">

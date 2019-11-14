@@ -36,7 +36,8 @@
                         rowsPerPage    : $scope.searchResult.rowsPerPage,
                         currentPage    : pageNumber - 1,
                         facet          : true,
-                        facetFields    : ['{!ex=sch}schema_s', '{!ex=gov}government_s', '{!ex=key}all_terms_ss', '{!ex=reg}government_REL_ss']
+                        facetFields    : queryOptions.facetFields,
+                        pivotFacetFields : queryOptions.pivotFacetFields
                     }
                     //'schema_s', 'government_s', 
                     if(sort && sort != 'relevance asc')
@@ -50,15 +51,11 @@
                         $scope.searchResult.pageCount   = Math.ceil(result.data.response.numFound / $scope.searchResult.rowsPerPage);
                         $scope.searchResult.query       = queryOptions.tagQueries.query;
                         $scope.searchResult.tagQueries  = queryOptions.tagQueries;
+                        $scope.searchResult.facetFields = queryOptions.facetFields;
                         $scope.searchResult.sortBy      = lQuery.sort;
                         $scope.searchResult.currentPage = pageNumber;
                         
-                        $scope.searchResult.facets   = {
-                            schemas   : result.data.facet_counts.facet_fields['schema_s'], 
-                            keywords  : result.data.facet_counts.facet_fields['all_terms_ss'],
-                            countries : result.data.facet_counts.facet_fields['government_s'], 
-                            regions   : result.data.facet_counts.facet_fields['government_REL_ss']
-                        }
+                        $scope.searchResult.facets   = searchDirectiveCtrl.sanitizeFacets(result.data.facet_counts)
                         
                         return $scope.searchResult;
                     })
@@ -69,10 +66,8 @@
 
                 $scope.onPageChange = function(pageNumber){
                     updateResult($scope.searchResult, $scope.searchResult.sort, pageNumber);
-                    $location.search({
-                        currentPage:pageNumber,
-                        rowsPerPage:$scope.searchResult.rowsPerPage
-                    })
+                    $location.search('currentPage', pageNumber)
+                    $location.search('rowsPerPage', $scope.searchResult.rowsPerPage)
                 }
 
                 $scope.onPageSizeChanged = function(size){

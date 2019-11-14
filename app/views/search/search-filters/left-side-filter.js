@@ -1,171 +1,154 @@
-﻿define(['app', 'text!views/search/search-filters/left-side-filter.html','lodash', 'ngDialog',
-'components/scbd-angularjs-services/services/utilities'],  function(app, template, _) {
+﻿define(['app', 'text!views/search/search-filters/left-side-filter.html', 'lodash', 'ngDialog',
+    'components/scbd-angularjs-services/services/utilities'], function (app, template, _) {
 
-    app.directive('leftSideFilter', ['ngDialog', 'Thesaurus', function(ngDialog, thesaurus) {
-        return {
-            restrict: 'EA',
-            replace: true,
-            require:'^searchDirective',
-            template: template, 
-            scope: false,
-            link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-                // $scope.leftMenuFilters = {}
-                
-                $scope.onSchemaFilterChanged = function(schema, selected){
-                    console.log(schema);
-                    if(!selected){
-                        if($scope.leftMenuFilters)
-                            $scope.leftMenuFilters[schema] = undefined;
-                        $scope.leftMenuFilters = _.omit($scope.leftMenuFilters, _.isUndefined);
-                        if(_.isEmpty($scope.leftMenuFilters))
-                            $scope.leftMenuFilters = undefined;
-                    }
-                    else{
-
-                        var filters = {};
-                        _.each($scope.searchFilters, function(filter){ 
-                            if(filter.related && ~filter.related.indexOf(schema)){
-                                // filter.facet = $scope.$parent.searchResult.data.facets[filter.id];
-                                if(!filters[filter.parent])
-                                    filters[filter.parent] = [];
-
-                                filter.selected = $scope.isFilterOn(filter.id);
-                                filter.facet    = ($scope.searchResult.data.facets.keywords||{})[filter.id]||0;
-                                filters[filter.parent].push(filter);
-                            }
-                        });
-                        if(!_.isEmpty(filters)){
-                            if(!$scope.leftMenuFilters)
-                                $scope.leftMenuFilters = {};
-                            $scope.leftMenuFilters[schema] = filters
+        app.directive('leftSideFilter', ['ngDialog', 'Thesaurus', 'locale', function (ngDialog, thesaurus, locale) {
+            return {
+                restrict: 'EA',
+                replace: true,
+                require: '^searchDirective',
+                template: template,
+                scope: false,
+                link: function ($scope, $element, $attrs, searchDirectiveCtrl) {
+                    // $scope.leftMenuFilters = {}
+                    $scope.locale = locale;
+                    $scope.onSchemaFilterChanged = function (schema, selected) {
+                        if (!selected) {
+                            if ($scope.leftMenuFilters)
+                                $scope.leftMenuFilters[schema] = undefined;
+                            $scope.leftMenuFilters = _.omit($scope.leftMenuFilters, _.isUndefined);
+                            if (_.isEmpty($scope.leftMenuFilters))
+                                $scope.leftMenuFilters = undefined;
                         }
+                        else {
+
+                            var fieldMappings = angular.copy(searchDirectiveCtrl.getSchemaFieldMapping(schema));
+
+                            if (!_.isEmpty(fieldMappings)) {
+                                if (!$scope.leftMenuFilters)
+                                    $scope.leftMenuFilters = {};
+                                $scope.leftMenuFilters[schema] = fieldMappings
+                            }
+                        }
+                        return $scope.leftMenuFilters;
+                    }
+                    $scope.clearLeftMenuFilters = function () {
+                        $scope.leftMenuFilters = undefined;
                     }
 
-                }
+                    $scope.showFilterDialog = function (schema, filter, facets) {
+                        ngDialog.open({
+                            template: 'filtersDialog',
+                            className: 'search-filters ngdialog-theme-default wide',
+                            controller: ['$scope', '$timeout', 'thesaurusService', 'searchService', function ($scope, $timeout, thesaurusService, searchService) {
 
-                $scope.showFilterDialog = function(schema, filterKey, options, facets, setFilters){
-                    
-                    ngDialog.open({
-                        template : 'filtersDialog',
-                        className: 'search-filters ngdialog-theme-default wide',
-                        controller: ['$scope', '$timeout', function($scope, $timeout){
-                            
-                            $scope.selected = {};
-                            $scope.options = options;
-                            $scope.schema = schema;
-                            $scope.filterKey = filterKey;
-                            $scope.facets = facets;
-                            $scope.view = 'tree';
+                                $scope.treeViewSelected = [];
+                                $scope.schema = schema;
+                                $scope.filter = filter;
+                                $scope.facets = facets;
+                                var options;
+                                _.each(filter.selectedItems, function (option) {
+                                    if (filter.type == 'thesaurus' || filter.type == 'customListFn')
+                                        $scope.treeViewSelected.push({ identifier: option.identifier });
+                                });
 
-                            _.each(options, function(option){
-                                if(setFilters[option.id])
-                                    $scope.selected[option.id] = true;
-                            });
+                                $scope.treeOptions = function () {
+                                    var dataSource;
+                                    if (filter.type == "thesaurus") {
+                                        dataSource = thesaurusService.getDomainTerms(filter.term)
+                                    }
+                                    else if (filter.type == 'solr') {
+                                        dataSource = runSolrQuery(filter.query);
+                                    }
+                                    else if (filter.type == 'customListFn')
+                                        dataSource = searchDirectiveCtrl[filter.fn]();
 
-                            $scope.showTree = function(){
-                                if($scope.view == 'tree')
-                                    return;
+                                    return dataSource.then(function (data) { return options = data; })
+                                };
 
-                                $scope.view = 'tree';
-                                $scope.treeViewSelected = _.map($scope.selected, function(sel, key){return {identifier:key}});                                
+                                $scope.closeDialog = function () {
+                                    ngDialog.close();
+                                }
+                                $scope.apply = function () {
 
-                            }
-
-                            $scope.showListView = function(){
-                                if($scope.view == 'list')
-                                    return;
-                                $timeout(function(){
-                                    $scope.view = 'list';
-                                    $scope.selected = {};
-                                    _.each($scope.treeViewSelected, function(item){ 
-                                        $scope.selected[item.identifier] = true;
+                                    var selectedItems = {};
+                                    _.each($scope.treeViewSelected, function (item) {
+                                        selectedItems[item.identifier] = _.find(options, { identifier: item.identifier });
                                     })
-                                }, 200);
-                            }
-
-                            $scope.treeOptions = function(){ 
-                                var treeStructure = _.map(options, function(option){
-                                    //opt.broader == option.id || 
-                                    var narrowerTerms = _.filter(options, function(opt){return ~opt.broader.indexOf(option.id)})
-                                    return {
-                                        identifier: option.id, title: option.name, 
-                                        narrowerTerms: _.map(narrowerTerms, 'id')
-                                    }
-                                });
-                                return treeStructure
-                            };
-
-                            $scope.saveFilter = function(filter){
-                                $scope.selected[filter.id] = !$scope.selected[filter.id]
-                            }
-
-                            $scope.closeDialog = function(){
-                                ngDialog.close();
-                            }
-                            $scope.apply = function(){
-                                // onSortByChange($scope.selectedFields)
-                                var selectedItems = {};
-                                if($scope.view == 'list')
-                                    selectedItems = $scope.selected
-                                else{
-                                    _.each($scope.treeViewSelected, function(item){ 
-                                        selectedItems[item.identifier] = true;
-                                    })        
+                                    updateBaseFilter(selectedItems, schema, filter);
+                                    ngDialog.close();
                                 }
-                                
-                                _.each(selectedItems, function(item, key){//skip already selected filters
-                                    if(item && setFilters[key])
-                                        selectedItems[key] = undefined;
-                                });
 
-                                updateBaseFilter(selectedItems);
-                                ngDialog.close();
-                            }
+                                function runSolrQuery(query) {
+                                    var lQuery = {
+                                        query: query.q,
+                                        fields: query.fl,
+                                        rowsPerPage: 100,
+                                        currentPage: 0
+                                    }
+                                    return searchService.list(lQuery)
+                                        .then(function (result) {
+                                            return _.map(result.data.response.docs, function (item) {
+                                                return {
+                                                    identifier: item.identifier,
+                                                    title: { en: item.title }
+                                                }
+                                            })
+                                        });
+                                }
 
-                        }]
-                    })
-
-                    function updateBaseFilter(selectedItems){
-
-                        _.each(selectedItems, function(item, key){ 
-                            if(item!==undefined){
-                                var filter = _.find(options, {id:key})
-                                $scope.saveFilter(filter);
-                            }
+                            }]
                         })
-                    }
-                }
 
-                $scope.updateLeftFilterStatus = function(termID, selected){
-
-                    filterMenu:
-                        for (var menu in $scope.leftMenuFilters) {
-                            for (var filter in $scope.leftMenuFilters[menu]) {
-                                var options = $scope.leftMenuFilters[menu][filter];
-                                for (var i=0; i<options.length; i++) {
-                                    if(options[i].id == termID){
-                                        options[i].selected = selected;
-                                        // break filterMenu; //TODO loop for each schema
-                                    }
-                                }
-                            }
+                        function updateBaseFilter(selectedItems, schema, field) {
+                            var filter = _.find($scope.leftMenuFilters[schema], { title: field.title })
+                            filter.selectedItems = selectedItems;
+                            searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters)
                         }
-                  
-                }
+                    }
 
-                $scope.sortFilterOptions = function(item){
-                    return $scope.setFilters[item.id];
-                    // return $scope.isFilterOn(item.id)
-                }
+                    $scope.ngRepeatFinished = function () {
+                        $element.find('[data-toggle="tooltip"]').tooltip();
+                    }
 
-                $scope.isSelected = function(item){
-                    return item.selected;
+                    $scope.removeSchemaFilters = function (option, filter) {
+                        if(filter.type=='solrRecords'){
+                            var index = _.findIndex(filter.selectedItems, function(item){ return item.identifier == option.identifier_s + '@' + option._revision_i });
+                            filter.selectedItems.splice(index, 1);
+                        }
+                        else{
+                            $element.find('#' + option.identifier).tooltip('hide')
+                            delete filter.selectedItems[option.identifier];
+                        }
+
+                        searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters)
+                    }
+
+                    $scope.onFilterDateChange = function (val) {                        
+                        searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters);
+                    }
+
+                    $scope.clearFilterDate = function (filter) {
+                        filter.filterValue = undefined;
+                        searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters);
+                    }
+
+                    $scope.saveSchemaFreeText = function (filter, text) {
+                        if (!filter.selectedItems)
+                            filter.selectedItems = {};
+                        var key = _.keys(filter.selectedItems).length + 1
+                        filter.selectedItems[key] = { title: text, identifier: key };
+                        searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters)
+                        filter.searchKeyword = '';
+                    }
+
+                    $scope.recordSelected = function(item, filter){                        
+                        searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters)
+                    }
+
+
+                    //load dependant directive
+                    require(['views/forms/edit/document-selector'])
                 }
-                
-                $scope.ngRepeatFinished = function(){
-                    $element.find('[data-toggle="tooltip"]').tooltip();
-                }
-            }
-        };
-    }]);
-});
+            };
+        }]);
+    });

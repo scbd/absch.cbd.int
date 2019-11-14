@@ -29,49 +29,68 @@
                         <i class="fa pull-right" style="font-size:1.5em; " 
                         ng-class="{'fa-sort-down':state[schema], 'fa-sort-up':!state[schema]}"></i>
                     </div>
-                    <div class="list-group-item" ng-repeat="(filterKey, filterKeys) in filters"  
+                    <div class="list-group-item" ng-repeat="filter in filters"  
                         style="border-right: unset;border-left: unset;" ng-show="!state[schema]">
-                        <div class="color-darkgrey not" style="cursor: pointer;" 
-                            ng-click="showFilterDialog(schema, filterKey, filterKeys, searchResult.data.facets.keywords, setFilters)">
-                            {{filterKey}}
+                        
+                        <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='freeText' && filter.type!='yesNo'" class="color-darkgrey not" style="cursor: pointer;" 
+                            ng-click="showFilterDialog(schema, filter, searchResult.data.facets.keywords)">
+                            {{filter.title}}
                             <div style="position:absolute;right:6px;top:6px" style="margin-top:5px" class="fa fa-chevron-right"></div>    
                             <!-- <i class="fa fa-chevron-right pull-right" style="margin-top:5px" aria-hidden="true"></i>           -->
                         </div>
-                        <div ng-repeat="option in filterKeys| filter:isSelected" ng-click="saveFilter(option)" class="list-group-item-expand filter" role="button"
-                            data-toggle="tooltip" data-title="{{option.name}}" data-container="body" data-placement="right">                            
-                            <div class="label label-selected-facet" aria-hidden="false" style="">
+                        <div ng-if="filter.type=='date'" >
+                            <label ng-bind="filter.title"></label>
+                            <button ng-if="filter.filterValue" class="btn btn-xs btn-default pull-right" ng-click="clearFilterDate(filter)">clear</button>
+                            <div km-date-range ng-model="filter.filterValue" ng-change="onFilterDateChange(filter)"></div>
+                        </div>
+                        <div ng-if="filter.type=='freeText'">
+                            <form ng-submit="saveSchemaFreeText(filter, filter.searchKeyword)" class="input-group">
+                                <input type="text" ng-model="filter.searchKeyword" class="form-control" placeholder="Search in {{schema | schemaName}}"
+                                    style="font-weight:bold;">
+                                <span type="submit" style="cursor:pointer" ng-click="" class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
+                            </form>
+                        </div>
+                        <div ng-if="filter.type=='yesNo'" >
+                            <label ng-bind="filter.title"></label>
+                            <button ng-if="filter.filterValue!==undefined" class="btn btn-xs btn-default pull-right" ng-click="clearFilterDate(filter)">clear</button>
+                            <label class="radio-inline"><input type="radio" ng-model="filter.filterValue" ng-value="true"   ng-change="onFilterDateChange(filter)"/> Yes </label>
+	                        <label class="radio-inline"><input type="radio" ng-model="filter.filterValue" ng-value="false"  ng-change="onFilterDateChange(filter)"/> No </label>
+                        </div>
+                        <div ng-if="filter.type=='solrRecords'">
+                            <div document-selector ng-model="filter.selectedItems" question="searchResult" caption="(sense)" type="checkbox"
+                                query="filter.query.q" filter="true" ng-change="recordSelected(item, filter)">
+                                <select-records>
+                                    <div class="color-darkgrey not" style="cursor: pointer;" ng-click="$parent.openAddDialog();">
+                                        <span ng-bind="filter.title"></span>
+                                        <div style="position:absolute;right:6px;top:6px" style="margin-top:5px" class="fa fa-chevron-right"></div> 
+                                    </div>
+                                </select-records>
+                                <selected-records>
+                                    <div class="label label-selected-facet" aria-hidden="false" ng-repeat="doc in $parent.selectedRawDocuments"
+                                    ng-click="removeSchemaFilters(doc, filter);$parent.$parent.removeDocument(doc);" >
+                                        <div style="position:absolute;right:6px;top:6px" class="fa fa-remove"></div>
+                                        {{doc.rec_title}}
+                                    </div>
+                                </selected-records>
+                            </div>
+                        </div>
+
+                        <div ng-if="filter.type!='solrRecords'" ng-repeat="option in filter.selectedItems" ng-click="removeSchemaFilters(option, filter)" 
+                            class="list-group-item-expand filter" role="button" id="{{option.identifier}}"
+                            data-toggle="tooltip" data-title="{{option.title|lstring:locale}}" data-container="body" data-placement="right">                            
+                            <div class="label label-selected-facet" aria-hidden="false">
                                 <div style="position:absolute;right:6px;top:6px" class="fa fa-remove"></div>                                                    
                                 <span class="truncate">
-                                    ({{searchResult.data.facets.keywords[option.id]||0}}) {{option.name|limitTo:40}}
-                                    <span ng-if="option.name.length>40">...</span>                                    
+                                    <!-- ({{searchResult.data.facets.keywords[option.id]||0}})  -->
+                                    {{option.title|lstring:locale|limitTo:40}}
+                                    <span ng-if="(option.title|lstring:locale).length>40">...</span>                                    
                                 </span>
                             </div>
                             <div ng-if="$last" ng-init="ngRepeatFinished()" style="display:none"></div> 
                         </div>
                     <div>
             </li>
-        </ul>
-        <!-- <div ng-repeat="(schema, filters) in leftMenuFilters" ng-if="filters" style="padding-top:10px">
-            <div class="bold color-darkgrey" style="border-bottom:1px solid #eee;cursor: pointer;" ng-click="state[schema]=!state[schema]">
-                {{schema | schemaName}}
-                <i class="fa pull-right" style="font-size:1.5em; " 
-                 ng-class="{'fa-sort-down':state[schema], 'fa-sort-up':!state[schema]}"></i>
-            </div>
-            <div ng-repeat="(filterKey, filterKeys) in filters"  style="padding-left:10px;padding-top:5px" ng-show="!state[schema]">
-          
-                <div class="bold color-darkgrey">
-                   <a ng-click="showFilterDialog(schema, filterKey, filterKeys, searchResult.data.facets.keywords, setFilters)" href="#" ng-bind="filterKey"></a>
-                </div>
-                <div ng-repeat="option in filterKeys | filter:isSelected" style="padding-left:10px">
-                    <a class="filter" ng-click="saveFilter(option)">                        
-                        ({{searchResult.data.facets.keywords[option.id]||0}}) {{option.name}}
-                        <strong class="pull-right">
-                            <i class="fa fa-times"></i>
-                        </strong>
-                    </a>
-                </div>
-            </div>
-        </div> -->
+        </ul>        
     </div>
     <br/>
     <script type="text/ng-template" trados-translation="true" id="filtersDialog">

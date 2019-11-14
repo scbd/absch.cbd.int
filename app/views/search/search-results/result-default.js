@@ -21,6 +21,9 @@ define(['app', 'text!views/search/search-results/result-default.html','lodash', 
                         }, 10);
                     } 
                 });
+
+
+                
             },
         };
     }]);

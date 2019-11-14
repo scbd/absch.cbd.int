@@ -7,7 +7,7 @@
         <div ng-repeat="doc in  cf_filters = (cf_regions | filter:IsCBDRegion | filter:searchKeyword)">
                 <a translation-url  class="filter"  ng-click="saveFilter(doc)" ng-class="{'disabled':!$parent.searchResult.data.facets.regions[doc.id]}">
                     <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
-                    {{doc.name.substring(22)}}
+                    {{(doc.name|lstring:locale).substring(22)}}
                     <strong>({{$parent.searchResult.data.facets.regions[doc.id]||0}})</strong>
                 </a>
         </div>
@@ -22,7 +22,7 @@
          <div ng-repeat="doc in cf_filters_all = (cf_regions | filter:searchKeyword | filter:alphabetFilter | orderBy:'name')">
             <a translation-url  class="filter"  ng-click="saveFilter(doc)" ng-class="{'disabled':!$parent.searchResult.data.facets.regions[doc.id]}">
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
-                {{doc.name}}
+                {{doc.name|lstring:locale}}
                 <strong>({{$parent.searchResult.data.facets.regions[doc.id]||0}})</strong>
             </a>
           </div>
