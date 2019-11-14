@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'js/common', 'moment', 
+define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'components/scbd-angularjs-services/services/main',
     'views/register/directives/register-top-menu','chart-js',
     'services/search-service','services/app-config-service',
 ], function (app) {
@@ -20,17 +20,7 @@ define(['app', 'lodash', 'js/common', 'moment',
                 $scope.filters = {startDate: '2014-10-12'};
                 
                 $scope.options = {
-                    filterTypes: function () {
-                        var types = [];
-                        types.push({ 'identifier': 'authority', 'name': 'Competent National Authority' });
-                        types.push({ 'identifier': 'measure', 'name': 'Legislative, administrative or policy measures' });
-                        types.push({ 'identifier': 'database', 'name': 'National Websites and Databases' });
-                        types.push({ 'identifier': 'absPermit', 'name': 'Internationally Recognized Certificate of Compliance' });
-                        types.push({ 'identifier': 'absCheckpoint', 'name': 'Checkpoints' });
-                        types.push({ 'identifier': 'absCheckpointCommunique', 'name': 'Checkpoint Communiqués' });
-                        types.push({ 'identifier': 'resource', 'name': 'Virtual Library Record' });
-                        return types;
-                    },
+                    
                     filterCountries: function () {
                        return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function(o){
                             var countries = $filter("orderBy")(o.data, "name");
@@ -63,6 +53,8 @@ define(['app', 'lodash', 'js/common', 'moment',
                         fields: 'government_s,government_EN_s,schema_s,dateOfExpiry_dt,usages_EN_ss,entitiesToWhomPICGrantedConfidential_b,usagesConfidential_b,keywords_EN_ss,entitiesToWhomPICGrantedCountry_ss,entitiesToWhomPICGrantedCountry_EN_ss',
                         query: 'schema_s:(schema_s:absPermit )'
                     };
+
+                    
                     var dateType = 'createdDate_dt:'
                     if($scope.filters.dateType){
                         dateType = $scope.filters.dateType;
@@ -92,15 +84,15 @@ define(['app', 'lodash', 'js/common', 'moment',
                                     };
                                     var data = results.data.response.docs;
 
-                                    nationalRecords.irccCount = data.length;
+                                    nationalRecords.irccCount = results.data.response.numFound;
                                     /////////////////////////////
                                     ///////NumberOfIRCC
                                     //////////////////////////////
                                     nationalRecords.NumberOfIRCC.commercial         =  countIncludes(data, 'usages_EN_ss', 'Commercial');
                                     nationalRecords.NumberOfIRCC.nonCommercial      =  countIncludes(data, 'usages_EN_ss', 'Non-Commercial');
                                     nationalRecords.NumberOfIRCC.commercialAndNonCommercial = _.filter(data, function(doc){
-                                                            return _.includes(doc.usages_EN_ss, 'Commercial')
-                                                                && _.includes(doc.usages_EN_ss, 'Non-Commercial');
+                                                            return _.contains(doc.usages_EN_ss, 'Commercial')
+                                                                && _.contains(doc.usages_EN_ss, 'Non-Commercial');
                                                         }).length
                                     nationalRecords.NumberOfIRCC.confidential       =  count(data, 'usagesConfidential_b', true);
                                     nationalRecords.NumberOfIRCC.nonConfidential    =  count(data, 'usagesConfidential_b', false);
@@ -109,11 +101,8 @@ define(['app', 'lodash', 'js/common', 'moment',
                                     ///////GrantedTo
                                     //////////////////////////////
                                     nationalRecords.GrantedTo.national = _.filter(data, function(doc){
-                                                            return _.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s);
+                                                            return _.contains(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s);
                                                         }).length
-                                    nationalRecords.GrantedTo.foreign = _.filter(data, function(doc){
-                                                            return !_.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s);
-                                                        }).length;                                    
                                     nationalRecords.GrantedTo.confidential       =  count(data, 'entitiesToWhomPICGrantedConfidential_b', true);
                                     nationalRecords.GrantedTo.nonConfidential    =  count(data, 'entitiesToWhomPICGrantedConfidential_b', false);
                                             
@@ -121,20 +110,20 @@ define(['app', 'lodash', 'js/common', 'moment',
                                     ///////UsageAndGranted
                                     //////////////////////////////
                                     nationalRecords.UsageAndGranted.commercialNational = _.filter(data, function(doc){
-                                        return _.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
-                                                && _.includes(doc.usages_EN_ss, 'Commercial');
+                                        return _.contains(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                                && _.contains(doc.usages_EN_ss, 'Commercial');
                                     }).length
                                     nationalRecords.UsageAndGranted.nonCommercialNational = _.filter(data, function(doc){
-                                        return _.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
-                                            && _.includes(doc.usages_EN_ss, 'Non-Commercial');
+                                        return _.contains(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                            && _.contains(doc.usages_EN_ss, 'Non-Commercial');
                                     }).length;            
                                     nationalRecords.UsageAndGranted.commercialForeign = _.filter(data, function(doc){
-                                        return !_.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
-                                                && _.includes(doc.usages_EN_ss, 'Commercial');
+                                        return !_.contains(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                                && _.contains(doc.usages_EN_ss, 'Commercial');
                                     }).length
                                     nationalRecords.UsageAndGranted.nonCommercialForeign = _.filter(data, function(doc){
-                                        return !_.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
-                                            && _.includes(doc.usages_EN_ss, 'Non-Commercial');
+                                        return !_.contains(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                            && _.contains(doc.usages_EN_ss, 'Non-Commercial');
                                     }).length;
                                     
                                     ///////////////////////////
@@ -148,14 +137,37 @@ define(['app', 'lodash', 'js/common', 'moment',
                                         })
                                     })
                                     
-                                    ///////////////////////////
-                                    ///////Countries
-                                    //////////////////////////
+                                    nationalRecords.userCountries = {};
+                                    nationalRecords.GrantedTo.foreign = 0;
                                     _.each(data, function(doc){
+                                            ///////////////////////////
+                                            ///////Top Countries
+                                            //////////////////////////
                                             if(!nationalRecords.countries[doc.government_EN_s])
                                                 nationalRecords.countries[doc.government_EN_s]=0;
                                             nationalRecords.countries[doc.government_EN_s] +=1;
+
+                                            ///////////////////////////
+                                            ///////Top user countries
+                                            //////////////////////////
+                                            if(doc.entitiesToWhomPICGrantedCountry_EN_ss){
+                                                _.each(doc.entitiesToWhomPICGrantedCountry_EN_ss, function(country){
+
+                                                    if( doc.government_EN_s!=country){
+                                                        if(!nationalRecords.userCountries[country])
+                                                            nationalRecords.userCountries[country]=0;
+                                                        
+                                                        nationalRecords.userCountries[country] += 1;
+                                                        nationalRecords.GrantedTo.foreign += 1;    
+                                                    }
+                                                })
+                                            }
                                     })
+
+
+                                    
+
+
 
                                     $scope.irccCounts = nationalRecords
                                 })
@@ -171,7 +183,7 @@ define(['app', 'lodash', 'js/common', 'moment',
 
                 function countIncludes(data, field, value){
                     return _.filter(data, function(doc){
-                        return _.includes(doc[field], value);
+                        return _.contains(doc[field], value);
                     }).length
                 }
                 function count(data, field, value){

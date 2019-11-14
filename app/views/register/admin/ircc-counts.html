@@ -119,7 +119,7 @@
                 <div class="alert alert-danger" ng-show="__error">
                     <strong>Error: </strong>{{__error}}
                 </div>
-                <div class="box box-info" ng-if="1==2">
+                <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title"> Filters</h3>
                     </div>
@@ -148,10 +148,6 @@
                                     <div km-select ng-model="filters.countries" multiple binding-type="string" placeholder="Countries" items="options.filterCountries()"></div>
                                     <!-- <strong>Status:</strong> -->
                                     <div km-select ng-model="filters.partyStatus" binding-type="string" placeholder="Party Status" items="options.filterPartyStatus()"></div>
-                                    <label class="checkbox-inline"><input type="checkbox" ng-model="filters.regionalMeasures" /> Include Regional Virtual Measures</label>
-                                    <label class="checkbox-inline"><input type="checkbox" ng-model="filters.excludeNFP" /> Exclude NFP</label>
-                                    <label class="checkbox-inline"><input type="checkbox" ng-model="filters.cumulative" /> Cumulative Graph</label>
-                                    <label class="checkbox-inline"><input type="checkbox" ng-model="filters.excludeTotalCount" />Exclude total count line</label>
                                 </div>
                                 <div class="pull-right">
                                     <input type="button" class="btn btn-primary" ng-click="loadFacets()" value="Filter">
@@ -271,6 +267,25 @@
                                     <table class="table table-hover" style="text-align: left">
                                         <tbody>
                                             <tr ng-repeat="(key, count) in irccCounts.countries">
+                                                <td>{{key}}</td><td>{{count}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div ng-class="{'overlay':loadingFacets}" ng-if="loadingFacets">
+                                    <i class="fa fa-refresh fa-spin"></i>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+
+                            <div class="box box-info">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title"> Top countries to whom PIC granted</h3>
+                                </div>
+                                <div class="box-body">
+                                    <table class="table table-hover" style="text-align: left">
+                                        <tbody>
+                                            <tr ng-repeat="(key, count) in irccCounts.userCountries">
                                                 <td>{{key}}</td><td>{{count}}</td>
                                             </tr>
                                         </tbody>

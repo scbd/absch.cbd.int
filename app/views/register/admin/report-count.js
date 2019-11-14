@@ -162,9 +162,10 @@ define(['app', 'underscore', 'js/common', 'moment', 'components/scbd-angularjs-c
                                                             capacityBuildingInitiative  : { recordCount : 0, color: '#808000' },
                                                           };
 
-                                    _.each(results[2].schema_s, function(count, key){
-                                        if(!referenceRecords[key])referenceRecords[key] = {}
-                                        referenceRecords[key].recordCount = count||0;                                        
+                                    _.each(results[2], function(schema){
+                                        if(!referenceRecords[schema.symbol])
+                                            referenceRecords[schema.symbol] = {}
+                                        referenceRecords[schema.symbol].recordCount = schema.count||0;                                        
                                     });
                                     $scope.referenceRecords = referenceRecords;
 
