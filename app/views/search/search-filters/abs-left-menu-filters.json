@@ -1,4 +1,16 @@
 ﻿{
+	"contact" : [{
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "countries",
+			"title": "Country of the person/entity to whom PIC was granted",
+			"fieldfn": "buildContactsUserCountryfn"
+		}
+	],
 	"focalPoint" : [{
 		"type": "freeText",
 		"title": "Free Text",
