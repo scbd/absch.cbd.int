@@ -24,7 +24,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, 
                     $timeout, locale, solr) {
                         var customQueryFn = {
-                            buildExpiredPermitQuery : buildExpiredPermitQuery
+                            buildExpiredPermitQuery : buildExpiredPermitQuery,
+                            buildContactsUserCountryfn : buildContactsUserCountryfn
                         }
                         var lefteMenuSchemaFieldMapping;
                         var activeFilter;
@@ -348,7 +349,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     function loadSchemaFilters() {
 
                         _.each(realm.schemas, function (schema, key) {
-                            if (!_.includes(['contact'], key))
+                            // if (!_.includes(['contact'], key))
                                 addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': schema.title.en, 'id': key, 
                                         'description': (schema.description || {}).en, otherType:schema.type });
                         })
@@ -641,7 +642,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         
                         var filters = getSelectedFilters('schema')
                         if (!(filters||[]).length){     
-                            return "(*:* NOT schema_s:(contact organization))";
+                            return "(*:* NOT schema_s:(organization))";
                         }
 
                         var query = 'schema_s:(' + _.map(filters, 'id').join(' ') + ')'
@@ -659,7 +660,12 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 _.each(filters, function(filter){
                                     subQueries.push('schema_s:'+ key)
 
-                                    if(!_.isEmpty(filter.selectedItems)){
+                                    if(filter.fieldfn!=undefined){ //custom function                                            
+                                        var q = customQueryFn[filter.fieldfn](filter);
+                                        if(q)
+                                            subQueries.push(q);
+                                    }
+                                    else if(!_.isEmpty(filter.selectedItems)){
                                         var ids = _.map(filter.selectedItems, 'identifier');
                                         if(filter.type == 'freeText')
                                             ids = _.map(filter.selectedItems, 'title');
@@ -669,13 +675,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                         subQueries.push(buildDateFieldQuery(filter.field, filter.filterValue))
                                     }
                                     else if(filter.type == 'yesNo' && filter.filterValue!== undefined){
-                                        if(filter.fieldfn!=undefined){ //custom function                                            
-                                            var q = customQueryFn[filter.fieldfn](filter);
-                                            if(q)
-                                                subQueries.push(q);
-                                        }
-                                        else
-                                            subQueries.push(filter.field + ':' + filter.filterValue)
+                                        subQueries.push(filter.field + ':' + filter.filterValue)
                                     }
 
                                 });
@@ -756,8 +756,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         }
                         else if(filter.filterValue == false)
                             return 'dateOfExpiry_dt:[NOW TO *]'
-
                         
+                    }
+                    function buildContactsUserCountryfn(filter){
+                        var countries =  _.map(filter.selectedItems, 'identifier') 
+                        if(countries.length){
+                            return 'country_s:(' + countries.join(' ') + ') AND referencedPermits_ss:*';
+                        }
                     }
 
                     function buildRawQuery(){
