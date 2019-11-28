@@ -47,13 +47,15 @@ async function renderLanguageFile(req, res, next) {
 
  async function renderApplicationTemplate(req, res){
     let urlPreferredLang;
-   
+    let preferredLang = getPreferredLanguage(req);
+
     if(req.params.lang)
       urlPreferredLang = req.params.lang;
    
+    if(!urlPreferredLang && preferredLang)//&& preferredLang!= 'en'
+        return res.redirect('/'+preferredLang + (req.originalUrl||''))
     req.url = `/templates/${process.env.CLEARINGHOUSE}.ejs`;
  
-    let preferredLang = getPreferredLanguage(req);
     let langFilepath = await getLanguageFile(req, preferredLang);
     let options = { 
                     baseUrl            : ('/' + (urlPreferredLang || preferredLang || '') + '/').replace("//", '/'),
@@ -75,16 +77,16 @@ async function renderLanguageFile(req, res, next) {
      let langRegex       = /^(ar|fr|es|ru|zh)/;
      let requestedUrl    = url.parse(req.url).pathname;
  
-     if(!htmlRegex.test(requestedUrl))
-         return;
+    //  if(!htmlRegex.test(requestedUrl))
+    //      return;
  
      if(req.params.lang)
          return req.params.lang;
      
-     if(req.headers['preferred-language']){
+     if(req.cookies.locale || req.headers['preferred-language']){
  
          let validLanguages = ['ar', 'fr', 'es', 'ru', 'zh']
-         let language = req.headers['preferred-language'];
+         let language = req.cookies.locale || req.headers['preferred-language'];
          
          if(_.includes(validLanguages, language.toLowerCase())){
              return language;
