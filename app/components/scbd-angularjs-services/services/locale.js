@@ -1,9 +1,9 @@
-define(['app'], function(app) { 'use strict';
+define(['app', 'angular-cookies'], function(app) { 'use strict';
 
     var urlLangRegex       = /^\/(en|ar|fr|es|ru|zh)(\/|$)/;
     app.provider('locale', [function() {
 
-        this.$get = ['$window', function($window) {
+        this.$get = ['$window', '$cookies', function($window, $cookies) {
         
             var location = $window.location;
             var lang = location.pathname.match(urlLangRegex);
@@ -11,7 +11,9 @@ define(['app'], function(app) { 'use strict';
             if(lang)
                 return lang[1];
 
-            return 'en';
+            lang = $cookies.get("locale");
+
+            return lang || 'en';
 
         }];
     }]);
