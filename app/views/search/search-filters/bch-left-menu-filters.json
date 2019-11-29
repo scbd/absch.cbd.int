@@ -8,7 +8,7 @@
 		{
 			"type": "thesaurus",
 			"term": "typeOfOrganisms",
-			"title": "Types of LMOs under its jurisdiction",
+			"title": "Types of organism(s) under its responsibility",
 			"field": "cpbOrganismTypes_REL_ss"
 		},
 		{
@@ -17,7 +17,7 @@
 				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:biosafetyDecision"
 			},
-			"title": "Solr query",
+			"title": "Country's Decision or any other Communication",
 			"field": "cpbOrganismTypes_REL_ss"
 		}
 	],
