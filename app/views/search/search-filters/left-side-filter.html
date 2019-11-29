@@ -17,12 +17,17 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
+            .no-left-right-bottom-border{
+                border-left: none;
+                border-right: none;
+                border-bottom: none;
+            }
        </style>
         <div style="border-bottom: 1px solid #eee">
             <h1>Filters</h1>
         </div>
         <ul class="list-group">
-            <li class="list-group-item" style="background-color: rgb(250, 250, 250); cursor: pointer;padding:0px;padding-top: 10px;"
+            <li class="list-group-item no-left-right-bottom-border" style="background-color: rgb(250, 250, 250); cursor: pointer;padding:0px;padding-top: 10px;"
                 ng-repeat="(schema, filters) in leftMenuFilters" ng-if="filters" >
                     <div class="bold color-darkgrey" style="cursor: pointer;padding-left:2px;padding-right:2px;padding-bottom:5px;" ng-click="state[schema]=!state[schema]">
                         {{schema | schemaName}}
