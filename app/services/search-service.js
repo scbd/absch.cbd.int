@@ -251,7 +251,9 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                 };
 
                 function localizeFields(fields){
-
+                    if(!fields)
+                        return;
+                        
                     if(locale && locale!='en'){
                         return fields.replace(/_EN/ig, '_'+(locale||'en').toUpperCase())
                     }
