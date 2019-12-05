@@ -10,7 +10,8 @@
 	'services/search-service',
 	'views/directives/block-region-directive',
 	'views/directives/record-options','components/scbd-angularjs-services/services/locale',
-	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/form-control-directives/km-value-ml'
+	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/form-control-directives/km-value-ml',
+	'views/forms/view/view-reference-records.directive', 'views/forms/directives/compare-val'
 ], function (app, template) {
 
 	app.directive('recordLoader', [function () {
@@ -42,7 +43,8 @@
 				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows", "locale",
 				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
 					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows, appLocale) {
-					
+					var htmlDiff;
+
 					$scope.realm = realm;
 					if(!$scope.locale)
 						$scope.locale = appLocale;
@@ -242,6 +244,8 @@
 										else
 											$scope.workflowRequestType = "publishing";
 									});
+								if($scope.internalDocumentInfo.revision > 1)
+									$scope.showDifferenceButton = true
 							}				
 							if (version)
 								$scope.revisionNo = version
@@ -345,7 +349,58 @@
 
 					});
 
-					function loadViewDirective(schema) {
+					$scope.showDifference = function(){
+						if($scope.isComparing)return;
+
+						if(!$scope.showDifferenceOn){
+							$scope.isComparing = true;							
+							$scope.showDifferenceOn = true;
+							require(['js/html-difference'], function(diffParser){
+								htmlDiff = diffParser;
+								loadViewDirective($scope.internalDocumentInfo.type, function(directiveHtml){
+									return  { 
+										divSelector 	: '#compareSchemaView',
+										directiveHtml 	: directiveHtml.replace("ng-model='internalDocument'", "ng-model='prevDocument'")
+									}
+								})
+								storage.documents.get($scope.internalDocumentInfo.identifier + '@' + $scope.internalDocumentInfo.latestRevision)
+									.then(function (result) { 
+										$scope.prevDocument = result.data
+									}).then(compareWithPrev)	
+							})
+						}	
+						else{
+							$scope.showDifferenceOn = false;
+							loadViewDirective($scope.internalDocumentInfo.type);
+						}					
+					}
+					$scope.updateComparision = function(){
+						if($scope.showDifferenceButton && $scope.showDifferenceOn)
+							loadViewDirective($scope.internalDocumentInfo.type).then(compareWithPrev);
+					}
+
+					function compareWithPrev(){
+						//timeout so that the directive is rendered.
+						$timeout(function(){
+										
+							var view1 = $element.find('#compareSchemaView .compare-diff');
+
+							_.each(view1, function(e, i){
+								var cssClasses = e.className.split(' ')
+								var compareClass = _.find(cssClasses, function(c){
+									if(/^compare_/.test(c))
+										return c;
+								})
+								var newHtml = $element.find('#schemaView .compare-diff.' + compareClass);
+								// console.log(newHtml.html())
+								let output = htmlDiff(e.innerHTML, newHtml.html());
+								newHtml.html(output);
+							});
+							$scope.isComparing = false;
+						}, 300)
+					}
+
+					function loadViewDirective(schema, beforeReplace) {
 
 						if (!schema)
 							return;
@@ -361,18 +416,26 @@
 							lschema = $filter("mapSchema")(lschema);
 
 						var schemaDetails = schemaMapping[lschema];
-
+						var defer = $q.defer();
 						require([schemaDetails], function () {
-							var name = snake_case(lschema);
+							var divSelector = '#schemaView'
+							var name 		= snake_case(lschema);
 							var directiveHtml =
 								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}} locale='locale'></DIRECTIVE>"
 									.replace(/DIRECTIVE/g, 'view-' + name);
 							$scope.$apply(function () {
-								$element.find('#schemaView')
-									.empty()
-									.append($compile(directiveHtml)($scope));
+								if(typeof beforeReplace == 'function'){
+									var dirInfo 	= beforeReplace(directiveHtml)
+									divSelector 	= dirInfo.divSelector || divSelector;
+									directiveHtml 	= dirInfo.directiveHtml || directiveHtml;
+								}
+								$element.find(divSelector).empty()
+										.append($compile(directiveHtml)($scope));
+								defer.resolve('')
 							});
 						});
+
+						return defer.promise
 
 					}
 					function snake_case(name, separator) {
