@@ -60,8 +60,7 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
     return function (date, formart) {
       if (formart === undefined)
         formart = 'DD MMM YYYY';
-
-      return $filter("moment")(date, 'format',formart);
+        return $filter("moment")(date, 'format',formart);
     };
   }]);
 
@@ -87,7 +86,8 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
   app.filter('moment', [function() {
 
         return function(datetime, method, arg1, arg2, arg3) {
-            return moment.utc(datetime)[method](arg1, arg2, arg3);
+            if(datetime)
+              return moment.utc(datetime)[method](arg1, arg2, arg3);
         };
   }]);
 
