@@ -349,9 +349,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     function loadSchemaFilters() {
 
                         _.each(realm.schemas, function (schema, key) {
-                            // if (!_.includes(['contact'], key))
+                            if (!isBCH || (isBCH && !_.includes(['contact'], key))){
                                 addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': schema.title.en, 'id': key, 
                                         'description': (schema.description || {}).en, otherType:schema.type });
+                                        
+                            }
                         })
 
                         addFilter('partyToProtocol'     , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Protocol'                   , 'id': 'partyToProtocol'     , 'description': '' });
@@ -642,7 +644,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         
                         var filters = getSelectedFilters('schema')
                         if (!(filters||[]).length){     
-                            return "(*:* NOT schema_s:(organization))";
+                            var ignoreSchemas = ['organization'];
+                            if(isBCH)
+                                ignoreSchemas.push('contact');
+
+                            return "(*:* NOT schema_s:(" + ignoreSchemas.join(' ') + "))";
                         }
 
                         var query = 'schema_s:(' + _.map(filters, 'id').join(' ') + ')'
