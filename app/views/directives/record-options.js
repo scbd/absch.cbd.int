@@ -42,6 +42,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                     $scope.currentLocale=loc
                     $scope.locale=loc
                     $scope.downloadLocale = loc;
+                    $scope.updateComparision();
                 }
 
 
