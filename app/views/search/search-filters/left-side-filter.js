@@ -47,7 +47,7 @@
                                 $scope.facets = facets;
                                 var options;
                                 _.each(filter.selectedItems, function (option) {
-                                    if (filter.type == 'thesaurus' || filter.type == 'customListFn')
+                                    if (filter.type == 'thesaurus' || filter.type == 'solr' || filter.type == 'customListFn')
                                         $scope.treeViewSelected.push({ identifier: option.identifier });
                                 });
 
@@ -82,17 +82,21 @@
                                     var lQuery = {
                                         query: query.q,
                                         fields: query.fl,
-                                        rowsPerPage: 100,
+                                        sort: query.s,
+                                        rowsPerPage: 3000,
                                         currentPage: 0
                                     }
                                     return searchService.list(lQuery)
                                         .then(function (result) {
-                                            return _.map(result.data.response.docs, function (item) {
+                                            return _(result.data.response.docs).map(function (item) {
+                                                if(_.isArray(item.title)){
+                                                    item.title = item.title.join(' | ')
+                                                }
                                                 return {
                                                     identifier: item.identifier,
                                                     title: { en: item.title }
                                                 }
-                                            })
+                                            }).sortBy('title.en').value()
                                         });
                                 }
 
