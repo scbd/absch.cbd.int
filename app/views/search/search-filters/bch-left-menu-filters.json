@@ -64,11 +64,11 @@
 		{
 			"type": "solr",
 			"query": {
-				"fl": "identifier:commonNames_ss,title:commonNames_ss",
+				"fl": "identifier:commonNames_EN_txt,title:commonNames_EN_txt",
 				"q": "schema_s:modifiedOrganism"
 			},
 			"title": "Common name",
-			"field": "lmoCommonNames_txt"
+			"field": "lmocommonNames_EN_txt"
 		},
 		{
 			"type": "date",
@@ -148,7 +148,7 @@
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
 			"title": "Related trait(s) or use(s) in biotechnology",
-			"field": "trait_ss"
+			"field": "trait_REL_ss"
 		},
 		{
 			"type": "solr",
@@ -158,6 +158,65 @@
 			},
 			"title": "Unique Identifier",
 			"field": "uniqueIdentification_s"
+		},
+		{
+			"type": "freeText",
+			"title": "Transformation event ",
+			"field": "transformationEvent_t"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:identifier_s,title:name_s",
+				"q": "schema_s:dnaSequence AND name_s:*",
+				"s":"name_s asc"
+			},
+			"title": "Gene name",
+			"field": "geneIdentifiers_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "dnaSequenceTraits",
+			"title": "Gene Traits",
+			"field": "geneTrait_REL_ss"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:identifier_s,title:commonNames_EN_txt",
+				"q": "schema_s:organism AND commonNames_EN_txt:*"
+			},
+			"title": "Recipient organism common name",
+			"field": "lmoIdentifiers_ss"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:identifier_s,title:scientificName_s",
+				"q": "schema_s:organism AND scientificName_s:*",
+				"s":"scientificName_s asc"
+			},
+			"title": "Recipient organism scientific name",
+			"field": "lmoIdentifiers_ss"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:identifier_s,title:commonNames_EN_txt",
+				"q": "schema_s:organism AND commonNames_EN_txt:*"
+			},
+			"title": "Donor organism common name",
+			"field": "geneDonorIdentifiers_ss"
+		},
+		{
+			"type": "solr",
+			"query": {
+				"fl": "identifier:identifier_s,title:scientificName_s",
+				"q": "schema_s:organism AND scientificName_s:*",
+				"s":"scientificName_s asc"
+			},
+			"title": "Donor organism scientific name",
+			"field": "geneDonorIdentifiers_ss"
 		}
 	],
 	"nationalRiskAssessment": [{
@@ -202,11 +261,11 @@
 		{
 			"type": "solr",
 			"query": {
-				"fl": "identifier:commonNames_ss,title:commonNames_ss",
+				"fl": "identifier:commonNames_EN_txt,title:commonNames_EN_txt",
 				"q": "schema_s:modifiedOrganism"
 			},
 			"title": "Common name",
-			"field": "lmoCommonNames_txt"
+			"field": "lmocommonNames_EN_txt"
 		},
 		{
 			"type": "date",
