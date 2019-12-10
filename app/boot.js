@@ -101,8 +101,9 @@ require.config({
 
         if(url.indexOf('worldEUHigh.js')>0)
             return '';
-        
-        return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version
+            
+        if(/^\//.test(url))            
+            return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.appVersion
     }
 });
 
