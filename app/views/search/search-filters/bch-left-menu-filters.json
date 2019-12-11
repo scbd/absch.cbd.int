@@ -26,7 +26,12 @@
 			"type": "thesaurus",
 			"term": "decisionTypes",
 			"title": "Type of Decision/Document",
-			"field": "decisionTypes_ss"
+			"field": "decisionTypes_REL_ss"
+		},
+		{
+			"type": "date",
+			"title": "Date of the decision",
+			"field": "decisionDate_dt"
 		},
 		{
 			"type": "solr",
@@ -36,44 +41,47 @@
 			},
 			"title": "Unique Identifier",
 			"field": "uniqueIdentification_s"
-        },
-        {
+		},
+		{
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
-			"title": "Related trait(s) or use(s) in biotechnology",
-			"field": "lmoTraits_ss"
+			"title": "Introduced or modified traits",
+			"field": "lmoTraits_REL_ss"
 		},
 		{
 			"type": "solr",
 			"query": {
-				"fl": "identifier:name_s,title:name_s",
-				"q": "schema_s:dnaSequence"
+				"fl": "identifier:identifier_s,title:name_s",
+				"q": "schema_s:dnaSequence AND name_s:*",
+				"s":"name_s asc"
 			},
 			"title": "Gene name",
-			"field": "lmoGeneNames_txt"
+			"field": "geneIdentifiers_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "techniqueUsed",
+			"title": "Techniques Used",
+			"field": "lmoTechniquesUsed_ss"
 		},
 		{
 			"type": "solr",
 			"query": {
-				"fl": "identifier:scientificName_s,title:scientificName_s",
-				"q": "schema_s:modifiedOrganism"
+				"fl": "identifier:identifier_s,title:commonNames_EN_txt",
+				"q": "schema_s:organism AND commonNames_EN_txt:*"
 			},
-			"title": "scientific name",
-			"field": "lmoScientificNames_ss"
+			"title": "Parental organism (common name)",
+			"field": "geneDononOrganismIdentifiers_ss"
 		},
 		{
 			"type": "solr",
 			"query": {
-				"fl": "identifier:commonNames_EN_txt,title:commonNames_EN_txt",
-				"q": "schema_s:modifiedOrganism"
+				"fl": "identifier:identifier_s,title:scientificName_s",
+				"q": "schema_s:organism AND scientificName_s:*",
+				"s":"scientificName_s asc"
 			},
-			"title": "Common name",
-			"field": "lmocommonNames_EN_txt"
-		},
-		{
-			"type": "date",
-			"title": "Date of the decision",
-			"field": "entryIntoForce_dt"
+			"title": "Parental organism (scientific name)",
+			"field": "geneDononOrganismIdentifiers_ss"
 		}
 	],
 	"biosafetyLaw": [{
