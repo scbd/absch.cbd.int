@@ -6,7 +6,7 @@ function(app, _, ng) {
     "use strict";
     return ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
                     "$routeParams", '$location', "$filter", "ngDialog", "$timeout", 'toastr', 'appConfigService',
-                    'IWorkflows', "$http"
+                    'IWorkflows', "$http",
         function($rootScope, $scope, storage, roleService, articlesService, realm, $q, $routeParams, 
                 $location, $filter, ngDialog, $timeout, toastr, appConfigService, IWorkflows, $http) {
             
@@ -17,6 +17,7 @@ function(app, _, ng) {
             $scope.user             = $rootScope.user;
             $scope.showRecords      = true;
             $scope.isBch            = realm.is('BCH');
+            $scope.iacThreads       =  0;
 
             var schemaFacets = {};
 
@@ -39,15 +40,22 @@ function(app, _, ng) {
                     isNationalAuthorizedUser: roleService.isNationalAuthorizedUser(),
                     isUser                  : roleService.isUser(),
                     isNationalSchemaUser    : roleService.isNationalSchemaUser,
-                    isNationalUser          : roleService.isNationalUser()
-                    isIAC         : roleService.isIAC()
+                    isNationalUser          : roleService.isNationalUser(),
+                    isIAC                   : roleService.isIAC()
                 };
 
                 if($scope.user.government)
                     $scope.userCountry = {identifier:$scope.user.government };
 
                 if($scope.roles.isIAC)
-                    $scope.iac = $http.get('/api/v2014/discussions/forums/17415/threads');
+                    var iac = $http.get('/api/v2014/discussions/forums/17433/threads');
+
+                    $q.when(iac).then(function(response) {
+                        $scope.iacThreads = response.data.length;
+                    })
+                    .catch(function(error){
+                       console.log(error);
+                   });
 
             }
 
