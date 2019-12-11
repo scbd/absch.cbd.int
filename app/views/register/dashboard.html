@@ -366,6 +366,37 @@
                         </div>
                     </div>
                 </div>
+
+
+
+
+                <div ng-if="!isBch && roles.isIAC">
+                    <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; ">
+                        <span class="color-gray"> Forums
+                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
+                                data-html="true"
+                                data-title="Forums you are registered to access."
+                                data-container="body"></span>
+                        </span>
+                    </div>
+
+                 
+                        <table class="overview table table-hover" style="width:100%;">
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <td style="width:70px;">
+                                       <a href="/forums/iac" class="btn btn-default btn-small" style="padding:1px 15px;"> open </a>
+                                    </td>
+                                    <td style="min-width:180px!important;">
+                                        <a translation-url href="/forums/iac" class="color-darkgrey" style="font-weight:500;">
+                                           ABS Clearing-House Informal Advisory Committee (ABSCH-IAC) Forum</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+           
             </div>
 
             <script type="text/ng-template" trados-translation="true" id="rolesDialog">

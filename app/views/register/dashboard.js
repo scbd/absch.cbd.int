@@ -6,9 +6,9 @@ function(app, _, ng) {
     "use strict";
     return ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
                     "$routeParams", '$location', "$filter", "ngDialog", "$timeout", 'toastr', 'appConfigService',
-                    'IWorkflows',
+                    'IWorkflows', "$http"
         function($rootScope, $scope, storage, roleService, articlesService, realm, $q, $routeParams, 
-                $location, $filter, ngDialog, $timeout, toastr, appConfigService, IWorkflows) {
+                $location, $filter, ngDialog, $timeout, toastr, appConfigService, IWorkflows, $http) {
             
             $scope.Math             = window.Math;
             $scope.nationalSchemas  = _.without(appConfigService.nationalSchemas, 'contact', 'focalPoint');
@@ -40,10 +40,14 @@ function(app, _, ng) {
                     isUser                  : roleService.isUser(),
                     isNationalSchemaUser    : roleService.isNationalSchemaUser,
                     isNationalUser          : roleService.isNationalUser()
+                    isIAC         : roleService.isIAC()
                 };
 
                 if($scope.user.government)
                     $scope.userCountry = {identifier:$scope.user.government };
+
+                if($scope.roles.isIAC)
+                    $scope.iac = $http.get('/api/v2014/discussions/forums/17415/threads');
 
             }
 
