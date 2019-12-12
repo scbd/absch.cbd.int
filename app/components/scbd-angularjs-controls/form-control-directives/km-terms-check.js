@@ -229,7 +229,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     if(!title)
                         title = term.searchTitle['en'];
 
-                    if(title.toLowerCase().indexOf($scope.searchKeyword.toLowerCase())>=0)
+                    if(title && title.toLowerCase().indexOf($scope.searchKeyword.toLowerCase())>=0)
                         return true;
                 }
                 //==============================
