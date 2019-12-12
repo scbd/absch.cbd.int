@@ -94,7 +94,7 @@
 			"type": "thesaurus",
 			"term": "legislationAgreementTypes",
 			"title": "Type of document",
-			"field": "cpbOrganismTypes_REl_ss"
+			"field": "type_s"
 		}
 	],
 	"capacityBuildingActivities": [],
