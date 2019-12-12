@@ -112,7 +112,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if((filter||{}).type == 'schema'){
                             $scope.leftMenuEnabled = true;
                             if($scope.onSchemaFilterChanged){
-                                var leftFilters = $scope.onSchemaFilterChanged(doc.id, filter)
+                                var leftFilters = $scope.onSchemaFilterChanged(doc.id, $scope.setFilters[doc.id])
                                 leftMenuFilters = leftFilters
                             }
                         }
@@ -122,7 +122,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         //     if($scope.searchResult.sortFields.length == 1 && $scope.searchResult.sortFields[0]=='updatedDate_dt')
                         //         $scope.searchResult.sortFields = [];
                         // }
-                        console.log($scope.setFilters);
                         updateQueryResult();
                     };
 
@@ -305,7 +304,18 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                             $q.all([loadSchemaFilters(), loadCountryFilters(), loadRegionsFilters(), loadDateFilters(), chKeywordsFilter])
                             .then(function(){
-                                console.log($scope.searchFilters)
+                                var query =  $location.search();
+                                if(query.schema){
+                                    schemaFilters = getSearchFilters('schema')
+                                    if(!_.isArray(query.schema))
+                                        query.schema = [query.schema];
+
+                                    _.each(query.schema, function(s){
+                                        var sch = _.find(schemaFilters, {id:s});
+                                        $scope.saveFilter(sch)
+                                    })
+                                }
+                                // console.log($scope.searchFilters)
                                 // localStorageService.set("searchFilters", $scope.searchFilters);
                             })
                         }                
@@ -621,7 +631,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var query               = '';
                         if(queries.length)
                             query               = solr.andOr(queries, 'AND')
-                        console.log(query)
+                        // console.log(query)
 
                         tagQueries.schema      =  schemaQuery;
                         tagQueries.schemaSub   =  schemaSubQuery;
@@ -650,9 +660,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                             return "(*:* NOT schema_s:(" + ignoreSchemas.join(' ') + "))";
                         }
+                        var selectedSchemas = _.map(filters, 'id')
+                        var query = 'schema_s:(' + selectedSchemas.join(' ') + ')'
+                        updateQueryString('schema', selectedSchemas);
 
-                        var query = 'schema_s:(' + _.map(filters, 'id').join(' ') + ')'
-                        
                         return query;
                     }
 
@@ -662,9 +673,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if(!_.isEmpty(leftMenuFilters)){
                             var schemaQueries = []
                             _.each(leftMenuFilters, function(filters, key){
-                                var subQueries = []
+                                var subQueries = []                                
+                                subQueries.push('schema_s:'+ key)
                                 _.each(filters, function(filter){
-                                    subQueries.push('schema_s:'+ key)
 
                                     if(filter.fieldfn!=undefined){ //custom function                                            
                                         var q = customQueryFn[filter.fieldfn](filter);
@@ -683,9 +694,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                     else if(filter.type == 'yesNo' && filter.filterValue!== undefined){
                                         subQueries.push(filter.field + ':' + filter.filterValue)
                                     }
-
                                 });
-                                if(subQueries.length){
+                                if(subQueries.length>1){
                                     subQueries = _.uniq(subQueries)                                       
                                     schemaQueries.push(solr.andOr(subQueries, 'AND'))
                                 }
