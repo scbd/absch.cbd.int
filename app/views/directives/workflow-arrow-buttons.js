@@ -36,7 +36,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 onErrorFn         : "&onError",
 				onStepChangeFn    : "&onStepChange",
                 validationReport    : '=?',
-				onReviewLanguageChangeFn  : "&onReviewLanguageChange"
+				onReviewLanguageChangeFn  : "&onReviewLanguageChange",
+				onPreSaveDraftVersionFn	  : "&onPreSaveDraftVersion"
     		},
             link : function($scope, $element, $attr){
 
@@ -44,7 +45,9 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 var next_fs
                 var document_type = $filter("mapSchema")($route.current.$$route.documentType);
                 var isDialog      = $attr.isDialog||false;
-
+                var saveDraftVersionTimer;
+                var previousDraftVersion;
+                
                 //BOOTSTRAP Dialog handling
 				var qCancelDialog         = $element.find("#dialogCancel");
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
@@ -354,7 +357,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                                 $('form').filter('.dirty').removeClass('dirty');
     							documentPublished(document, documentInfo._id);
-                                originalDocument =  document;
+                                originalDocument =  angular.copy(document);
 
                                 $scope.onPostPublishFn({ data: documentInfo });
     							return documentInfo;
@@ -408,7 +411,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                                     $('form').filter('.dirty').removeClass('dirty');
                                     documentPublishRequested(document, workflowInfo._id);
-                                    originalDocument = document;
+                                    originalDocument = angular.copy(document);
                                     $scope.onPostRequestFn({ data: workflowInfo });
                                     return workflowInfo;
 
@@ -488,7 +491,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                             toastr.info($element.find('#msgDraftSaveMessage').text());
 
                             $('form').filter('.dirty').removeClass('dirty');
-                            originalDocument = $scope.getDocumentFn();
+                            originalDocument = angular.copy($scope.getDocumentFn());
                             documentDraftSaved(draftInfo);
                             if(!isDialog)
                                 $location.path($location.path().replace(/\/new/, '/'+ draftInfo.identifier + '/edit'));
@@ -587,6 +590,11 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     $scope.onReviewLanguageChangeFn({lang:lang})
                 } 
 
+                $scope.$on('$destroy', function(){
+					$timeout.cancel(saveDraftVersionTimer);
+					window.removeEventListener('beforeunload', onBeforeUnload)
+                });
+                
                 $scope.$on("documentError", showError);
                 function showError(evt, data){
 
@@ -760,6 +768,42 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     if($scope.languages.indexOf(locale)<0)
                         $scope.selectedLanguage = $scope.languages[0]
                 }
+
+
+                function saveDraftVersion(){
+					
+					$q.when($scope.onPreSaveDraftVersionFn())
+					.then(function(doc){
+
+						doc = doc || $scope.getDocumentFn();
+
+						$q.when(doc).then(function(document){
+					
+							if(document && !angular.equals(document, previousDraftVersion)){
+								var userId = $rootScope.user.userID;
+								var identifier = document.header.identifier;
+								var schema     = document.header.schema;
+
+								var key = schema+'_'+identifier+'_'+userId;
+
+								$http.put('/api/v2018/temporary-documents/'+key, {data: document})
+								.then(function(result){
+									previousDraftVersion = angular.copy(document);
+									saveDraftVersionTimer = $timeout(function(){saveDraftVersion();},100000);
+								})
+								.catch(function(err){
+									console.log(err);
+									saveDraftVersionTimer = $timeout(function(){saveDraftVersion();},5000);
+								});
+							}
+							else{
+								saveDraftVersionTimer = $timeout(function(){saveDraftVersion();},100000);
+							}
+						});
+					});
+				}
+
+
                 //============================================================
                 $scope.loadSecurity();
 
@@ -807,8 +851,9 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         });
                     }
                     $rootScope.$on("loadDocument", function(event, data) {
-                        console.log(data)
-                        originalDocument = data.document;
+                        originalDocument = angular.copy(data.document);
+                        if(!saveDraftVersionTimer)
+                            saveDraftVersion();
                     });
 
                     $rootScope.$on('$includeContentLoaded', function(event) {
@@ -837,6 +882,19 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     $scope.$on('$locationChangeSuccess', function(evt, data){
                         $rootScope.next_url = undefined;
                     });
+
+                    window.addEventListener('beforeunload', onBeforeUnload);
+
+                    function onBeforeUnload(e) {
+                        if($rootScope.isFormLeaving)
+                            return;
+                        var formChanged = !angular.equals($scope.getDocumentFn(), originalDocument);
+                        if(!originalDocument || !formChanged){
+                            return;
+                        }
+                        e.preventDefault();	// Cancel the event as stated by the standard.					
+                        e.returnValue = '';// Chrome requires returnValue to be set.
+                    }
 
                     $rootScope.$on('event:sessionExpired-signIn', function(evt, data){
                         $scope.error = null;
