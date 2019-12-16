@@ -9,6 +9,7 @@
                 template: template,
                 scope: false,
                 link: function ($scope, $element, $attrs, searchDirectiveCtrl) {
+                    var freeTextKeys = 0;
                     // $scope.leftMenuFilters = {}
                     $scope.locale = locale;
                     $scope.onSchemaFilterChanged = function (schema, selected) {
@@ -54,7 +55,7 @@
                                 $scope.treeOptions = function () {
                                     var dataSource;
                                     if (filter.type == "thesaurus") {
-                                        dataSource = thesaurusService.getDomainTerms(filter.term)
+                                        dataSource = thesaurusService.getDomainTerms(filter.term, {other:true})
                                     }
                                     else if (filter.type == 'solr') {
                                         dataSource = runSolrQuery(filter.query);
@@ -139,8 +140,8 @@
                     $scope.saveSchemaFreeText = function (filter, text) {
                         if (!filter.selectedItems)
                             filter.selectedItems = {};
-                        var key = _.keys(filter.selectedItems).length + 1
-                        filter.selectedItems[key] = { title: text, identifier: key };
+                        freeTextKeys++;
+                        filter.selectedItems[freeTextKeys] = { title: text, identifier: freeTextKeys };
                         searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters)
                         filter.searchKeyword = '';
                     }
