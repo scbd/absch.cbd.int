@@ -87,7 +87,7 @@
 						"cpbNationalReport4" 		: 'views/forms/view/bch/view-national-report-4.directive',
 						"expert" 					: 'views/forms/view/bch/view-expert.directive',
 						"expertAssignment" 			: 'views/forms/view/bch/view-expert-assignment.directive',
-						"riskAssessment" 			: 'views/forms/view/bch/view-risk-assessment.directive',
+						"independentRiskAssessment" : 'views/forms/view/bch/view-risk-assessment.directive',
 						"modifiedOrganism" 			: 'views/forms/view/bch/view-lmo.directive',
 						"dnaSequence" 				: 'views/forms/view/bch/view-dna-sequence.directive',
 						"organism" 					: 'views/forms/view/bch/view-organism.directive'
