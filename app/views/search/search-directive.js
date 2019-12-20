@@ -217,6 +217,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
 
                     $scope.clearFilter = function(){
+                        updateQueryString('schema');
                         $scope.setFilters = {};
                         leftMenuFilters = [];
                         $scope.clearLeftMenuFilters()
@@ -654,7 +655,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         
                         var filters = getSelectedFilters('schema')
                         if (!(filters||[]).length){     
-                            updateQueryString('schema');
+                            // updateQueryString('schema');
                             var ignoreSchemas = ['organization'];
                             if(isBCH)
                                 ignoreSchemas.push('contact');

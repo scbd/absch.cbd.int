@@ -3,7 +3,7 @@ define(['app', "text!views/forms/view/bch/view-risk-assessment.directive.html",
 'views/forms/view/view-contact-reference.directive'], function (app, template) {
 
 app.directive("viewNationalRiskAssessment", viewRiskAssessment);
-app.directive("viewRiskAssessment", viewRiskAssessment);
+app.directive("viewIndependentRiskAssessment", viewRiskAssessment);
 
 function viewRiskAssessment() {
 	return {
