@@ -14,7 +14,8 @@ define(['text!./analyzer-section.html', 'app', './analyzer-question'], function(
                 regions: '=',
                 section: '=',
                 sumType: '=',
-                previousQuestionsMapping : '='
+                previousQuestionsMapping : '=',
+                previousQuestionsValueMapping : '='
             },
             link: function ($scope, el, attr, nrAnalyzer) {
 

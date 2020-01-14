@@ -18,12 +18,15 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 reports : '=',
                 regionList : '=regions',
                 sumType : '=',
-                previousQuestionsMapping : '='
+                previousQuestionsMapping : '=',
+                previousQuestionsValueMapping : '='
             },
             link: function ($scope, el, attr, nrAnalyzer) {
+
                 $scope.selectedMapping = _.keys($scope.previousQuestionsMapping)[0];
 
                 $scope.realm = realm.value
+                $scope.getReportType = function() { return nrAnalyzer.getReportType(); }
                 initTooltips();
 
                 //==============================================
@@ -70,7 +73,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 //
                 //
                 //==============================================
-                $scope.$watch("::previousReports", function(previousReports) {
+                $scope.$watch("previousReports", function(previousReports) {
 
                     $scope.previousReportsMap = _(previousReports).reduce(function(previousReportsMap, report){
 
@@ -85,9 +88,13 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 //
                 //
                 //==============================================
-                $scope.testAnswer = function(answer, value) {
+                $scope.testAnswer = function(answer, value, valueMapping) {
 
+                    valueMapping = valueMapping||{};
+                    
+                    value  = nrAnalyzer.normalizeAnswer(value);
                     answer = nrAnalyzer.normalizeAnswer(answer);
+                    answer = valueMapping[answer] || answer;
 
                     if(answer === value)     return true;
                     if(answer === undefined) return false;
@@ -324,6 +331,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 //==============================================
                 $scope.cleanupQuestionNumber = function(q) {
 
+                    q = (q||{}).question || q;
                     q = (q||'').toString().replace(/^[SQ0]*/, '');
 
                     if(/\d*_[a-z0-9]+_/i.test(q))
@@ -364,6 +372,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                     var reports  = $scope.reports;
                     var previousReports = $scope.previousReports;
                     var questionsMapping = $scope.previousQuestionsMapping[$scope.selectedMapping];
+                    var questionsValueMapping = $scope.previousQuestionsValueMapping[$scope.selectedMapping];
 
                     // Only allow countries who answered to this question
                     var restrictedCountries = _(reports)
@@ -401,6 +410,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
 
                         var prevData = analyzeReports(previousReports, {
                             key: questionsMapping[question.key],
+                            valueMapping: questionsValueMapping[question.key],
                             countriesMap: restrictedCountriesMap
                         });
 
@@ -449,6 +459,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                     var filter   = nrAnalyzer.filter();
 
                     var key = (options||{}).key || question.key;
+                    var valueMapping = (options||{}).valueMapping || {};
                     var countriesMap = (options||{}).countriesMap;
 
                     var data = {
@@ -506,7 +517,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                             data.reports[report.government] = report;
 
                         var answers      = getNormalizedAnswers(report, key);
-                        var answeredRows = _(answers).map(function(value) { return data.rows[value]; }).compact().value();
+                        var answeredRows = _(answers).map(function(value) { return data.rows[valueMapping[value] || value]; }).compact().value();
 
                         answeredRows.forEach(function(row){
 

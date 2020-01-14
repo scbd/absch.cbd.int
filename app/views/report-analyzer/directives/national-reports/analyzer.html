@@ -7,8 +7,8 @@
         .nr-analyzer .question table.table tr > td.country    { border:1px solid #ddd }
         .nr-analyzer .question table.table tr:last-child > td { border-bottom:1px solid #ddd }
         .nr-analyzer .question table.table tr > td:last-child { border-bottom:none;border-top:none;border-right:none; }
-        .nr-analyzer #filterBox.affix     { top:50px;right:10px; max-width:600px;z-index: 100; }
-        .nr-analyzer #sumTypeButton.affix { top:10px;right:10px;z-index: 100; }
+        .nr-analyzer #filterBox           { top:50px; position: -webkit-sticky; position: sticky; z-index: 100; }
+        .nr-analyzer #sumTypeButton       { top:10px; position: -webkit-sticky; position: sticky; z-index: 100; }
         .nr-analyzer #textsDialog.modal .locale.selected { font-weight: bold; }
         .nr-analyzer tr.filter > td.filter > i { color:#777; }
         .nr-analyzer tr.filter.filter-on > td.filter > i { color:#337ab7; }
@@ -52,12 +52,13 @@
         .nr-analyzer tr.option.percentRow > td:last-child   { border-left:   solid 2px #777 !important; }
 
         .nr-analyzer .question .cell-percent::after,
-        .nr-analyzer .question .option.percentGlobal .cell-value::after,
-        .nr-analyzer .question .option.percentColumn .cell-value::after,
-        .nr-analyzer .question .option.percentRow    .cell-value::after,
-        .nr-analyzer .question .option.percentGlobal .cell-delta::after,
-        .nr-analyzer .question .option.percentColumn .cell-delta::after,
-        .nr-analyzer .question .option.percentRow    .cell-delta::after { content: '%' }
+        .nr-analyzer .question .option.percentGlobal .cell-value:not(.value)::after,
+        .nr-analyzer .question .option.percentColumn .cell-value:not(.value)::after,
+        .nr-analyzer .question .option.percentRow    .cell-value:not(.value)::after,
+        .nr-analyzer .question .option.percentGlobal .cell-delta:not(.value)::after,
+        .nr-analyzer .question .option.percentColumn .cell-delta:not(.value)::after,
+        .nr-analyzer .question .option.percentRow    .cell-delta:not(.value)::after,
+        .nr-analyzer .question                       .cell-delta.percent::after  { content: '%' } 
 
 
         .nr-analyzer .cell-delta.inc    { color:#008000;white-space: nowrap;cursor:help}
@@ -130,11 +131,6 @@
  
     <div class="clearfix"></div>
 
-    <div ng-show="sections" style="margin-bottom:5px" id="nrAnalyzer " class="analyzer-buttons">
-
-        <button type="button" class="btn btn-default"  ng-click="showSettings();" id="returnQuestions">
-            « Back to settings
-        </button>
 
         <!-- <h3 style="padding:0;margin:0; display:inline" ng-switch="selectedRegionsPreset" >
                 <span ng-switch-when="cbdRegions">Breakdown by CBD regions</span>
@@ -144,7 +140,7 @@
                 <span ng-switch-when="npNonParties">Breakdown by Nagoya Protocol Non-Parties</span>
         </h3> -->
 
-        <div id="sumTypeButton" class="btn-group pull-right" title="Change how numbers are calculated">
+        <div ng-show="sections" id="sumTypeButton" class="btn-group pull-right" title="Change how numbers are calculated">
             <button type="button" class="btn btn-primary" ng-click="showSumTypeSelector()">∑
                 <span ng-switch="sumType">
                     <span ng-switch-when="sum">Count of responses</span>
@@ -172,7 +168,12 @@
                 </li>
             </ul>
         </div>
-    </div>
+
+        <button ng-show="sections" type="button" class="btn btn-default"  ng-click="showSettings();" id="returnQuestions">
+            « Back to settings
+        </button>
+
+        <div class="clearfix"></div>
 
     <div id="filterBox" class="filter panel panel-primary" ng-show="filter">
         <div class="panel-heading">
@@ -206,7 +207,7 @@
 
     <br>
 
-    <national-report-analyzer-section sum-type="sumType" regions="::regions" section="::section" previous-questions-mapping="previousQuestionsMapping" ng-repeat="section in sections"></national-report-analyzer-section>
+    <national-report-analyzer-section sum-type="sumType" regions="::regions" section="::section" previous-questions-mapping="previousQuestionsMapping" previous-questions-value-mapping="previousQuestionsValueMapping" ng-repeat="section in sections"></national-report-analyzer-section>
 
     <!-- SUM SELECTOR -->
     <div class="modal fade" id="sumTypeDialog">

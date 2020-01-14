@@ -1,7 +1,16 @@
 ﻿{
     "Q012_party": "Q012_party",
     "Q012_partyInProgress": "Q012",
-    "Q014" : "Q014",
+    "Q014" : { 
+      "question": "Q014",
+      "valueMapping" : {
+        "implementation.fullFramwork":      "implementation.fullInPlace",
+        "implementation.partialFramwork":   "implementation.partiallyInPlace",
+        "implementation.temporaryMeasures": "implementation.temporaryMeasures",
+        "implementation.draftFramwork":     "implementation.draftMeasures",
+        "implementation.none":              "implementation.none"
+      }
+    },
     "Q015" : "Q016",
     "Q017" : "Q017",
     "Q018" : "Q018",

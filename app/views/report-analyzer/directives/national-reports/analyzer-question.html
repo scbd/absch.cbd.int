@@ -71,13 +71,13 @@
             <td class="text-center" >
                 <span>{{row.sum}}</span>
                 <div ng-if="row.previous">
-                    <span class="cell-delta"  ng-class="{ 'inc' : row.previous.sum.delta>0, 'dec' : row.previous.sum.delta<0, 'stable' : row.previous.sum.delta==0 }" data-toggle="tooltip" data-original-title="{{row.previous.sum.value}}">{{row.previous.sum.delta}}</span>
+                    <span class="cell-delta value"  ng-class="{ 'inc' : row.previous.sum.delta>0, 'dec' : row.previous.sum.delta<0, 'stable' : row.previous.sum.delta==0 }" data-toggle="tooltip" data-original-title="{{row.previous.sum.value}}">{{row.previous.sum.delta}}</span>
                 </div>
             </td>
             <td class="text-center">
                 <span class="cell-percent">{{row.percent}}</span>
                 <div ng-if="row.previous">
-                    <span class="cell-delta"  ng-class="{ 'inc' : row.previous.percent.delta>0, 'dec' : row.previous.percent.delta<0, 'stable' : row.previous.percent.delta==0 }" data-toggle="tooltip" data-original-title="{{row.previous.percent.value}}%">{{row.previous.percent.delta}}</span>
+                    <span class="cell-delta percent"  ng-class="{ 'inc' : row.previous.percent.delta>0, 'dec' : row.previous.percent.delta<0, 'stable' : row.previous.percent.delta==0 }" data-toggle="tooltip" data-original-title="{{row.previous.percent.value}}%">{{row.previous.percent.delta}}</span>
                 </div>
             </td>
             <td class="text-center region" ng-class="{ first: $first, last: $last, expanded: expanded[cell.identifier] }" ng-style="  { 'background-color': cell.backgroundColor[sumType], 'color' : cell.textColor[sumType] }" ng-repeat-start="cell in ::row.cells" >
@@ -93,7 +93,7 @@
                     <img ng-if="::hasCustomText(reportsMap[country.identifier][question.key], row.value)" src="/app/views/report-analyzer/resources/nr-document.png" 
                     ng-click="showCustomText(country.identifier, reportsMap[country.identifier][question.key], row.value)" style="cursor:pointer">
                 </div>
-                <div style="font-size:18px;line-height:inherit" ng-if="previousReports && testAnswer(previousReportsMap[country.identifier][previousQuestionsMapping[selectedMapping][question.key]], row.value)">
+                <div style="font-size:18px;line-height:inherit" ng-if="previousReports && testAnswer(previousReportsMap[country.identifier][previousQuestionsMapping[selectedMapping][question.key]], row.value, previousQuestionsValueMapping[selectedMapping][question.key])">
                     &#x25CB;
                     <img ng-if="::previousReportsMap[country.identifier][previousQuestionsMapping[selectedMapping][question.key]].details" src="/app/views/report-analyzer/resources/nr-document.png" ng-click="showText(country.identifier, previousReportsMap[country.identifier][previousQuestionsMapping[selectedMapping][question.key]].details)" style="cursor:pointer">
                 </div>
@@ -153,12 +153,22 @@
     <div ng-if="previousReports" style="margin-top:-15px">
 
         <div ng-show="expanded" class="pull-right" style="margin-right:18px;margin-left:18px;">
-            <span style="font-size:18px;line-height:inherit">&#x25CF;</span> 3rd NR &nbsp; &nbsp;
-            <span style="font-size:18px;line-height:inherit">&#x25CB;</span> 2nd NR
+            <span style="font-size:18px;line-height:inherit">&#x25CF;</span> <span ng-switch="::getReportType()">
+                <span ng-switch-when="cpbNationalReport1"> 1st NR</span>
+                <span ng-switch-when="cpbNationalReport2"> 2nd NR</span>
+                <span ng-switch-when="cpbNationalReport3"> 3rd NR</span>
+                <span ng-switch-when="cpbNationalReport4"> 4th NR</span>
+            </span>
+            &nbsp; &nbsp;
+            <span style="font-size:18px;line-height:inherit">&#x25CB;</span>  <span ng-switch="selectedMapping">
+                <span ng-switch-when="cpbNationalReport1"> 1st NR</span>
+                <span ng-switch-when="cpbNationalReport2"> 2nd NR</span>
+                <span ng-switch-when="cpbNationalReport3"> 3rd NR</span>
+                <span ng-switch-when="cpbNationalReport4"> 4th NR</span>
+            </span>
         </div>
 
-        <b>Note:</b> The comparison tool only includes those countries that have answered this question in the 3rd and 2nd National Reports. Accordingly, the total counts and percentages may change when applying the comparison tool.
+        <b>Note:</b> The comparison tool only includes those countries that have answered this question in both National Reports. Accordingly, the total counts and percentages may change when applying the comparison tool.
 
     </div>
-
 </div>

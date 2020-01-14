@@ -83,7 +83,8 @@ function(templateHtml, app, _, require, $) { 'use strict';
                         var regions  = results[0];
                         var sections = results[1];
                         var reports  = results[2];
-                        var previousQuestionsMappings = results[3];
+                        var previousQuestionsMappings      = _.mapValues(results[3], function(nr) { return _.mapValues(nr, function(v) { return v.question || v }) });
+                        var previousQuestionsValueMappings = _.mapValues(results[3], function(nr) { return _.mapValues(nr, function(v) { return v.valueMapping  }) });
 
                         var reportsCountriesMap = _(reports).pluck('government').sortBy().map(function(id) {
 
@@ -108,7 +109,8 @@ function(templateHtml, app, _, require, $) { 'use strict';
 
                         $scope.regions = regions;
                         $scope.sections = sections;
-                        $scope.previousQuestionsMapping = previousQuestionsMappings;
+                        $scope.previousQuestionsMapping      = previousQuestionsMappings;
+                        $scope.previousQuestionsValueMapping = previousQuestionsValueMappings;
 
                     }).then(function(){
 
@@ -377,6 +379,15 @@ function(templateHtml, app, _, require, $) { 'use strict';
                 authentication.getUser().then(function(res){
                     isScbd = !!~res.roles.indexOf('ScbdStaff');
                 });
+
+                //====================================
+                //
+                //
+                //====================================
+                nrAnalyzer.getReportType = function() {
+
+                    return $scope.selectedReportType;
+                };
 
                 //====================================
                 //
