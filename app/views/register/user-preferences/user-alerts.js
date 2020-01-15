@@ -45,7 +45,7 @@ define(['app',
                             "isSystemAlert":"true",
                             "name": "Certificates (IRCC) published indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
                             "id": "entitiesToWhomPICGrantedCountry",
-                            "query": 'entitiesToWhomPICGrantedCountry_ss:'
+                            "query": 'entitiesToWhomPICGrantedCountry_ss:' + $scope.user.government,
                         }],
                         "queryTitle": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
                         "meta": {
