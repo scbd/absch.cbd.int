@@ -25,6 +25,8 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
 
                 $scope.selectedMapping = _.keys($scope.previousQuestionsMapping)[0];
 
+                $scope.digits = 0;
+                $scope.analyze = analyze;
                 $scope.realm = realm.value
                 $scope.getReportType = function() { return nrAnalyzer.getReportType(); }
                 initTooltips();
@@ -34,6 +36,15 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 //
                 //==============================================
                 $scope.$on('nr.analyzer.filter', analyze);
+
+                //==============================================
+                //
+                //
+                //==============================================
+                $scope.incrementDigits = function() { 
+                    $scope.digits = ($scope.digits+1)%3 
+                    analyze();
+                }
 
                 //==============================================
                 //
@@ -359,6 +370,8 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 //==============================================
                 function analyze() {
 
+                    console.log($scope.digits)
+
                     if(!$scope.reports) return;
                     if(!$scope.regions) return;
                     if(!$scope.question) return;
@@ -575,16 +588,20 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                         }
                     });
 
+                    var digitPow = Math.pow(10, $scope.digits);
+
                     _.forEach(data.columns, function(column, identifier){
 
                         _.values(data.rows).forEach(function(row) {
 
                             var cell = row.cells[identifier];
 
-                            row .percent       = data  .sum ? round((row .sum*100) / data.sum   ) : 0;
-                            cell.percentGlobal = data  .sum ? round((cell.sum*100) / data.sum   ) : 0;
-                            cell.percentColumn = column.sum ? round((cell.sum*100) / column.sum ) : 0;
-                            cell.percentRow    = row   .sum ? round((cell.sum*100) / row.sum    ) : 0;
+
+
+                            row .percent       = data  .sum ? round((row .sum*100) / data.sum   *digitPow)/digitPow : 0;
+                            cell.percentGlobal = data  .sum ? round((cell.sum*100) / data.sum   *digitPow)/digitPow : 0;
+                            cell.percentColumn = column.sum ? round((cell.sum*100) / column.sum *digitPow)/digitPow : 0;
+                            cell.percentRow    = row   .sum ? round((cell.sum*100) / row.sum    *digitPow)/digitPow : 0;
 
                             cell.backgroundColor = {
                                 sum           : htmlColor(blendColor(WHITE, SHADE_BASE, cell.percentGlobal/100)),
