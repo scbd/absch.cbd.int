@@ -581,10 +581,10 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
 
                             var cell = row.cells[identifier];
 
-                            row .percent       = data  .sum ? Math.round((row .sum*100) / data.sum)   : 0;
-                            cell.percentGlobal = data  .sum ? Math.round((cell.sum*100) / data.sum)   : 0;
-                            cell.percentColumn = column.sum ? Math.round((cell.sum*100) / column.sum) : 0;
-                            cell.percentRow    = row   .sum ? Math.round((cell.sum*100) / row.sum)    : 0;
+                            row .percent       = data  .sum ? round((row .sum*100) / data.sum   ) : 0;
+                            cell.percentGlobal = data  .sum ? round((cell.sum*100) / data.sum   ) : 0;
+                            cell.percentColumn = column.sum ? round((cell.sum*100) / column.sum ) : 0;
+                            cell.percentRow    = row   .sum ? round((cell.sum*100) / row.sum    ) : 0;
 
                             cell.backgroundColor = {
                                 sum           : htmlColor(blendColor(WHITE, SHADE_BASE, cell.percentGlobal/100)),
@@ -688,4 +688,11 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
             }
         };
     }]);
+
+    function round(v, digits) {
+
+        let sign = v<0 ? -1 : 1;
+
+        return sign * Math.round(Math.abs(v));
+    }
 });
