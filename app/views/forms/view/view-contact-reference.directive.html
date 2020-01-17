@@ -92,7 +92,7 @@
         </div>
 
         <script id="/app/views/forms/view/contact-reference/address" type="text/ng-template" trados-translation="true">
-            <address ng-if="document.address || document.city || document.state || document.postalCode" style="margin-bottom:2px!important">
+            <address ng-if="document.address || document.country || document.city || document.state || document.postalCode" style="margin-bottom:2px!important">
                 <span ng-show="document.addressHTML" ng-bind-html="document.addressHTML | lstring:locale"></span>
                 {{document.address | lstring:locale}}</div>
                 {{document.city | lstring:locale}}<span ng-show="document.city && document.state">, </span>
