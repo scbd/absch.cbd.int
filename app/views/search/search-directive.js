@@ -217,6 +217,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
 
                     $scope.clearFilter = function(){
+                        updateQueryString('schema');
                         $scope.setFilters = {};
                         leftMenuFilters = [];
                         $scope.clearLeftMenuFilters()
@@ -654,6 +655,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         
                         var filters = getSelectedFilters('schema')
                         if (!(filters||[]).length){     
+                            // updateQueryString('schema');
                             var ignoreSchemas = ['organization'];
                             if(isBCH)
                                 ignoreSchemas.push('contact');
@@ -684,9 +686,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                     }
                                     else if(!_.isEmpty(filter.selectedItems)){
                                         var ids = _.map(filter.selectedItems, 'identifier');
-                                        if(filter.type == 'freeText')
+                                        if(filter.type == 'freeText'){
                                             ids = _.map(filter.selectedItems, 'title');
-                                        subQueries.push(filter.field + ':(' + ids.join(' ') + ')') 
+                                            subQueries.push(filter.field + ':(' + ids.join(' AND ') + ')') 
+                                        }
+                                        else{
+                                            subQueries.push(filter.field + ':(' + ids.join(' ') + ')') 
+                                        }
                                     }
                                     else if(filter.type == 'date' && filter.filterValue){
                                         subQueries.push(buildDateFieldQuery(filter.field, filter.filterValue))
