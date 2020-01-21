@@ -134,7 +134,15 @@
     "Q159"   :   "Q170",
     "Q160"   :   "Q172",
     "Q162"   :   "S015",
-    "Q163"   :   "Q176",
+    "Q163" : { 
+        "question": "Q176",
+        "valueMapping" : {
+          "true":       "true",
+          "true.some":  "true.some",
+          "false":      "false",
+          "n/a":        "false.na"
+        }
+    },
     "Q164"   :   "S016",
     "Q165"   :   "Q177",
     "Q167" : { 
