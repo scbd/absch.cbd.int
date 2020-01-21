@@ -1,4 +1,4 @@
-﻿{
+{
     "Q012_party": "Q012_party",
     "Q012_partyInProgress": "Q012",
     "Q014" : { 
@@ -157,7 +157,15 @@
     "Q160" : "Q188",
     "Q161" : "Q191",
     "Q162" : "Q192",
-    "Q163" : "Q193",
+    "Q163" : { 
+      "question": "Q193",
+      "valueMapping" : {
+        "true":       "true",
+        "true.some":  "true.some",
+        "false":      "false",
+        "n/a":        "false.na"
+      }
+    },
     "Q164" : "Q194",
     "Q165" : "Q196",
     "Q166" : "Q197",
