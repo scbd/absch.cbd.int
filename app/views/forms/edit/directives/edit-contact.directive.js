@@ -80,14 +80,18 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
 
                 if(document.type == "organization"){
                     document.firstName = document.middleName = document.lastName = undefined;
-                    document.contactOrganization = undefined;
+                    document.contactOrganization = document.addressType = undefined;
                 }
                 else{
                     document.organization = undefined;
                     document.organizationType = undefined;
 
-                    if(!document.addressType)
-                        document.addressType = 'organization';
+                    if(!document.addressType){
+                        if(document.contactOrganization)
+                            document.addressType = 'organization';
+                        else
+                            document.addressType = 'person';
+                    }
 
                     if(document.contactOrganization && document.addressType == 'organization'){
                         document.address = undefined;
@@ -104,8 +108,8 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
         
             $scope.$watch('document.organizationType', function(newValue){
                 if(newValue && newValue.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
-                    if(document.organizationType && document.organizationType.customValue)
-                        document.organizationType.customValue = undefined;
+                    if($scope.document.organizationType && $scope.document.organizationType.customValue)
+                    $scope.document.organizationType.customValue = undefined;
                 }
             });
     
@@ -125,10 +129,15 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                         document.country	= undefined;
                     }
                 }
-                else
+                else if(document.addressType == 'organization')
                     document.addressType = undefined;
 
             };
+
+            $scope.setAddressType = function(){
+                if(!$scope.document.addressType)
+                    $scope.document.addressType = 'person';
+            }
             
             $scope.onPostPublishOrRequest = function(documentInfo){
                 $scope.onPostPublishFn({ data: documentInfo });
