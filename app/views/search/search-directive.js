@@ -360,11 +360,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     function loadSchemaFilters() {
 
                         _.each(realm.schemas, function (schema, key) {
-                            if (!isBCH || (isBCH && !_.includes(['contact'], key))){
+                            // if (!isBCH || (isBCH && !_.includes(['contact'], key))){
                                 addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': schema.title.en, 'id': key, 
                                         'description': (schema.description || {}).en, otherType:schema.type });
                                         
-                            }
+                            // }
                         })
 
                         addFilter('partyToProtocol'     , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Protocol'                   , 'id': 'partyToProtocol'     , 'description': '' });
@@ -641,6 +641,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         tagQueries.keywords    =  keywordQuery;
                         tagQueries.government  =  countryQuery;
                         tagQueries.region      =  regionQuery;
+                        
+                        //special query for Contact as only records which have reference contact are searchable.
+                        tagQueries.contact     =  '(schema_s:contact AND (refReferenceRecords_ss:* OR refNationalRecords_ss:*)) OR (NOT schema_s:contact)';
 
                         return {
                             query      :  query||'',
@@ -656,11 +659,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var filters = getSelectedFilters('schema')
                         if (!(filters||[]).length){     
                             // updateQueryString('schema');
-                            var ignoreSchemas = ['organization'];
-                            if(isBCH)
-                                ignoreSchemas.push('contact');
+                            // var ignoreSchemas = ['organization'];
+                            // if(isBCH)
+                            //     ignoreSchemas.push('contact');
 
-                            return "(*:* NOT schema_s:(" + ignoreSchemas.join(' ') + "))";
+                            return "(*:*)";// NOT schema_s:(" + ignoreSchemas.join(' ') + "))";
                         }
                         var selectedSchemas = _.map(filters, 'id')
                         var query = 'schema_s:(' + selectedSchemas.join(' ') + ')'
