@@ -202,56 +202,6 @@
                                 data-container="body"></span>
                         </div>
 
-
-                        <table class="overview table" style="width:100%;">
-                            <thead></thead>
-                            <tbody>
-                                <tr>
-                                    <td style="width:70px;">
-                                        <div class="btn-group btn-group-xs" style="width:70px;" role="group">
-                                            <button type="button" class="btn btn-xs btn-default"
-                                                ng-click="showTopRecords($event,'contact')">
-                                                <i class="fa fa-chevron-circle-down cursor"
-                                                    ng-class="{'fa-chevron-circle-down':!topRecords['contact'], 'fa-chevron-circle-up':topRecords['contact']}"
-                                                    aria-hidden="true"></i>
-                                                <button type="button" class="btn btn-xs btn-default"
-                                                    ng-click="gotoNew($event,'contact')"><i
-                                                        class="fa fa-plus"></i></button>
-                                                <button type="button" class="btn btn-xs btn-default"
-                                                    ng-click="gotoList($event,'contact')"><i
-                                                        class="fa fa-list"></i></button>
-                                        </div>
-                                    </td>
-                                    <td style="min-width:180px!important;">
-                                        <a translation-url href="#" ng-click="gotoList($event,'contact')"
-                                            class="color-darkgrey" style="font-weight:500;">
-                                            National contacts (CON)</a>
-
-                                    </td>
-                                    <td style="width:7%;" class="text-center hidden-xs"><a translation-url
-                                            ng-href="/register/CON/status/published" class="label label-success"
-                                            ng-class="{'bg-litegrey': facets('contact','publish')===0}">{{facets('contact','publish')}}</a>
-                                    </td>
-
-                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
-                                            ng-href="/register/CON/status/drafts" class="label label-default"
-                                            ng-class="{'bg-litegrey': Math.max(0, facets('contact','draft') - facets('contact','request'))===0}">{{Math.max(0,
-                                            facets('contact','draft') - facets('contact','request'))}}</a> </td>
-
-                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
-                                            ng-href="/register/CON/status/requests" class="label label-danger"
-                                            ng-class="{'bg-litegrey': facets('contact','request')===0}">{{facets('contact','request')}}</a>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div ng-if="topRecords['contact']" style="position: relative;top:-5px;">
-                            <top-records schema="contact" top="10" style="padding-top:5px;" show-schema-name="false">
-                            </top-records>
-                        </div>
-
-
                         <div ng-repeat="schema in nationalSchemas" ng-if="::roles.isNationalSchemaUser(schema) || roles.is('Administrator')">
                             <table class="overview table table-hover" style="width:100%;">
                                 <tbody>
@@ -304,6 +254,58 @@
                             </div>
                         </div>
                     </div>
+
+                    <div style="padding-bottom: 20px;">
+                        <table class="overview table" style="width:100%;">
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <td style="width:70px;">
+                                        <div class="btn-group btn-group-xs" style="width:70px;" role="group">
+                                            <button type="button" class="btn btn-xs btn-default"
+                                                ng-click="showTopRecords($event,'contact')">
+                                                <i class="fa fa-chevron-circle-down cursor"
+                                                    ng-class="{'fa-chevron-circle-down':!topRecords['contact'], 'fa-chevron-circle-up':topRecords['contact']}"
+                                                    aria-hidden="true"></i>
+                                                <button type="button" class="btn btn-xs btn-default"
+                                                    ng-click="gotoNew($event,'contact')"><i
+                                                        class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-xs btn-default"
+                                                    ng-click="gotoList($event,'contact')"><i
+                                                        class="fa fa-list"></i></button>
+                                        </div>
+                                    </td>
+                                    <td style="min-width:180px!important;">
+                                        <a translation-url href="#" ng-click="gotoList($event,'contact')"
+                                            class="color-darkgrey" style="font-weight:500;">
+                                            Contacts (CON)</a>
+
+                                    </td>
+                                    <td style="width:7%;" class="text-center hidden-xs"><a translation-url
+                                            ng-href="/register/CON/status/published" class="label label-success"
+                                            ng-class="{'bg-litegrey': facets('contact','publish')===0}">{{facets('contact','publish')}}</a>
+                                    </td>
+
+                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
+                                            ng-href="/register/CON/status/drafts" class="label label-default"
+                                            ng-class="{'bg-litegrey': Math.max(0, facets('contact','draft') - facets('contact','request'))===0}">{{Math.max(0,
+                                            facets('contact','draft') - facets('contact','request'))}}</a> </td>
+
+                                    <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
+                                            ng-href="/register/CON/status/requests" class="label label-danger"
+                                            ng-class="{'bg-litegrey': facets('contact','request')===0}">{{facets('contact','request')}}</a>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div ng-if="topRecords['contact']" style="position: relative;top:-5px;">
+                            <top-records schema="contact" top="10" style="padding-top:5px;" show-schema-name="false">
+                            </top-records>
+                        </div>
+
+                    </div>
+
                     <div>
                         <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; ">
                             <span class="color-orange"> Reference records
