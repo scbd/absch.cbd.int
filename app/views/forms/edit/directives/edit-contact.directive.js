@@ -85,7 +85,11 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                 else{
                     document.organization = undefined;
                     document.organizationType = undefined;
-                    if(document.contactOrganization){
+
+                    if(!document.addressType)
+                        document.addressType = 'organization';
+
+                    if(document.contactOrganization && document.addressType == 'organization'){
                         document.address = undefined;
                         document.city	 = undefined;
                         document.state	 = undefined;
@@ -105,15 +109,26 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                 }
             });
     
-            $scope.$watch('document.contactOrganization', function(newValue){
-                if(newValue ){
-                    document.address	= undefined;
-                    document.city		= undefined;
-                    document.state		= undefined;
-                    document.postalCode	= undefined;
-                    document.country	= undefined;
+            $scope.contactOrganizationChanged = function(newValue){
+                var document = $scope.document;
+
+                if(document.contactOrganization){
+                    
+                    if(!document.addressType)
+                        document.addressType = 'organization'
+
+                    if(document.addressType == 'organization'){
+                        document.address	= undefined;
+                        document.city		= undefined;
+                        document.state		= undefined;
+                        document.postalCode	= undefined;
+                        document.country	= undefined;
+                    }
                 }
-            });
+                else
+                    document.addressType = undefined;
+
+            };
             
             $scope.onPostPublishOrRequest = function(documentInfo){
                 $scope.onPostPublishFn({ data: documentInfo });
