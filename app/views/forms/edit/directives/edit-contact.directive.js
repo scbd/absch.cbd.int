@@ -19,10 +19,12 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
 		},
 		link : function($scope, $element, $attr){
 
+            $scope.allowNew         = $attr.allowNew||true
             $scope.container        = $attr.container
             $scope.isDialog         = $attr.isDialog;
             $scope.isNationalUser   = roleService.isNationalUser();
             $scope.canEditGovernment = roleService.isAdministrator();
+            $scope.prefilledContactType = $attr.contactType
 
             $scope.options = {            
                 countries		: function() {
@@ -101,7 +103,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                         document.country	 = undefined;
                     }
                 }
-
+                $scope.reviewDocument = document;
                 return document;
             };
 
@@ -128,6 +130,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                         document.postalCode	= undefined;
                         document.country	= undefined;
                     }
+                    loadOrganizationAddress();
                 }
                 else if(document.addressType == 'organization')
                     document.addressType = undefined;
@@ -143,6 +146,16 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                 $scope.onPostPublishFn({ data: documentInfo });
             };
             
+            $scope.loadOrganizationAddress = function(){
+                var document = $scope.document;
+                if(document.contactOrganization && document.addressType == 'organization' && 
+                    (!$scope.organization || document.contactOrganization.identifier!= $scope.organization.identifier)){
+
+                    storage.documents.get(document.contactOrganization.identifier, {info:false}).then(function(org){
+                        $scope.organization = org.data;
+                    })
+                }
+            }
             function setDocument() {
 
                 $scope.status = "loading";
@@ -159,6 +172,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                         languages   : $scope.locales|| [locale]
                         },
                         government: $rootScope.user.government ? { identifier: $rootScope.user.government } : undefined,
+                        type        : $scope.prefilledContactType? $scope.prefilledContactType: undefined
                     };        
                 }                
         
@@ -167,6 +181,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                     $scope.tab    = "edit";
                     $scope.document = doc;            
                     $scope.status = "ready";
+                    $scope.loadOrganizationAddress();
         
                 });
             };

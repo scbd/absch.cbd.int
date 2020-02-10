@@ -41,7 +41,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 
             if(!$scope.type) $scope.type = "checkbox";
 
-            $scope.hideAddContact = $attr.allowNew || ($scope.schema||'').indexOf('contact')<0 
+            $scope.hideAddContact = $attr.allowNew!='true';// || ($scope.schema||'').indexOf('contact')<0 
 
             if($attr.listView){
                 $scope.listView = true;
@@ -376,10 +376,11 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                 $scope.addNewContact = true;
                 require(['views/forms/edit/directives/edit-contact.directive'], function(){
                     
-                    var directiveHtml = "<DIRECTIVE on-post-publish='onNewContactPublish(data)' is-dialog='true' container='.ngdialog' link-target={{linkTarget}} locales='locales'></DIRECTIVE>"
+                    var directiveHtml = "<DIRECTIVE on-post-publish='onNewContactPublish(data)' contact-type='organization' allow-new='false' is-dialog='true' container='.ngdialog' link-target={{linkTarget}} locales='locales'></DIRECTIVE>"
                             .replace(/DIRECTIVE/g, 'edit-contact');
                     $scope.$apply(function () {
-                        $('#divNewContact').empty().append($compile(directiveHtml)($scope));
+                        // 
+                        $('#'+dialogId).find('#divNewContact').empty().append($compile(directiveHtml)($scope));
                     });
                 })
             }
