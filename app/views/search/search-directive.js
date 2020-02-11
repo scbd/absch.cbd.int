@@ -169,8 +169,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         delete $scope.setFilters[filterID];
 
                         if($scope.searchFilters[filterID] && $scope.searchFilters[filterID].type == 'schema' && $scope.onSchemaFilterChanged){
-                            var leftFilters = $scope.onSchemaFilterChanged(filterID, $scope.setFilters[filterID])
+                            var leftFilters = $scope.onSchemaFilterChanged(filterID, $scope.setFilters[filterID]);                            
                             leftMenuFilters = leftFilters;
+                            updateQueryString('schema');
                         }
                         //remove children
                         var dels = {};
@@ -633,8 +634,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if(queries.length)
                             query               = solr.andOr(queries, 'AND')
                         // console.log(query)
-
-                        tagQueries.schema      =  schemaQuery;
+                        if(schemaQuery != '(*:*)')
+                            tagQueries.schema      =  schemaQuery;
                         tagQueries.schemaSub   =  schemaSubQuery;
                         tagQueries.schemaType  =  tabQuery;
                         tagQueries.partyStatus =  partyStatusQuery;
