@@ -1,5 +1,5 @@
 define(['app', 'lodash', 'views/forms/edit/edit', 'services/thesaurus-service','views/forms/directives/lmo-construct',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-lmo.directive", 'ngDialog'], 
+	'views/forms/edit/document-selector', "views/forms/view/bch/view-lmo.directive", 'ngDialog', 'views/forms/directives/traits-selector.directive'], 
 function (app, _) {
 
 	app.controller("editLmo", ["$scope", "$routeParams", "$route", "Thesaurus", "$q", "$controller", "thesaurusService", 'ngDialog', '$element', '$compile',
