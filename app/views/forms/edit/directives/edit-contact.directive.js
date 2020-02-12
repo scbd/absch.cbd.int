@@ -3,8 +3,8 @@
 'components/scbd-angularjs-services/services/locale', 'views/forms/edit/editFormUtility'],
 function (app, template) {
 
-app.directive("editContact", [ "$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'guid', 'editFormUtility', 'locale',
-function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, editFormUtility, locale){
+app.directive("editContact", [ "$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'guid', 'editFormUtility', 'locale', '$controller',
+function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, editFormUtility, locale, $controller){
 
 	return {
 		restrict   : "E",
@@ -18,7 +18,9 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
             onPostPublishFn   : "&onPostPublish"
 		},
 		link : function($scope, $element, $attr){
-
+            $controller('editController', {
+                $scope: $scope
+            });
             $scope.allowNew         = $attr.allowNew||true
             $scope.container        = $attr.container
             $scope.isDialog         = $attr.isDialog;
@@ -81,8 +83,11 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                     document.government = undefined;
 
                 if(document.type == "organization"){
-                    document.firstName = document.middleName = document.lastName = undefined;
-                    document.contactOrganization = document.addressType = undefined;
+                    document.firstName = undefined; 
+                    document.middleName = undefined;
+                    document.lastName = undefined;
+                    document.contactOrganization = undefined;
+                    document.addressType = undefined;
                 }
                 else{
                     document.organization = undefined;
@@ -103,7 +108,6 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                         document.country	 = undefined;
                     }
                 }
-                $scope.reviewDocument = document;
                 return document;
             };
 
@@ -130,7 +134,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                         document.postalCode	= undefined;
                         document.country	= undefined;
                     }
-                    loadOrganizationAddress();
+                    $scope.loadOrganizationAddress();
                 }
                 else if(document.addressType == 'organization')
                     document.addressType = undefined;
@@ -188,7 +192,10 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
             
             setDocument();
 
-		}
+        },
+        controller: function(){
+            
+        }
 	};
 }]);
 
