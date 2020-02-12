@@ -6,15 +6,14 @@
 		</h4>
 	</div>
 	<div class="record-body panel-body">
-
-			<document-date></document-date>
+		<document-date></document-date>
 		<div ng-show="document.type=='organization'">
 
 
 
             <legend>Organization</legend>
 			<div ng-show="document.government">
-				<label>Government</label>
+				<label>Country</label>
 				<div class="km-value">
 					{{document.government | term}}
 					<span ng-party-status government="document.government" id="government"></span>
@@ -39,7 +38,7 @@
 		<div ng-show="document.type=='person'">
              <legend>Person</legend>
 			 <div ng-show="document.government">
-  			   <label>Government</label>
+  			   <label>Country</label>
   			   <div class="km-value">
   				   {{document.government | term}}
 				   <span ng-party-status government="document.government" id="government"></span>
@@ -71,13 +70,13 @@
             <div ng-show="document.contactOrganization">
 				<legend>Organization</legend>
 				<div class="km-value">
-					<view-contact-reference ng-model='document.contactOrganization' locale="document.header.languages"></view-contact-reference>
+					<view-contact-reference ng-model='document.contactOrganization' locale="locale"></view-contact-reference>
 				</div>
 			</div>
 
 		</div>
 		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
-			<label>Address</label>
+			<label>Address of Contact</label>
 			<address class="km-value">
 				<div class="km-pre">{{document.address | lstring:locale}}</div>
 				{{document.city | lstring:locale}}
