@@ -156,7 +156,7 @@
 													</div>
 												</div>
 											</div>
-											<div ng-if="document.contactOrganization && document.addressType=='person'">
+											<div ng-if="!document.contactOrganization || (document.contactOrganization && document.addressType=='person')">
 												<div class="row">
 													<div class="col-md-12">
 														<div class="km-control-group" name="address" caption="Street address">
@@ -188,7 +188,7 @@
 													</div>
 				
 													<div class="col-md-6">
-														<div class="km-control-group" name="country" ng-required="!form.contact_country.$valid" caption="Country address">
+														<div class="km-control-group" name="country" ng-required="!form.contact_country.$valid" caption="Country of Contact">
 															<div km-select name="country" ng-model="document.country" items="options.countries()"  ng-change="setAddressType()"></div>
 														</div>
 													</div>
@@ -199,7 +199,7 @@
 													<div class="row">
 														<div class="col-md-12">
 															<div class="km-control-group" name="address" caption="Street address">
-																<div km-textbox-ml ng-disabled="true" name="address" ng-model="organization.address" rows="2" locales="organization.header.languages"></div>
+																<div km-value-ml value="organization.address||'&nbsp;'" html km-pre locales="organization.header.languages"></div>
 															</div>
 														</div>
 													</div>
@@ -207,13 +207,13 @@
 													<div class="row">
 														<div class="col-md-6">
 															<div class="km-control-group" name="city" caption="City" >
-																<div km-textbox-ml ng-disabled="true" name="city" ng-model="organization.city" locales="organization.header.languages"></div>
+																<div km-value-ml value="organization.city||'&nbsp;'" locales="organization.header.languages"></div>
 															</div>
 														</div>
 					
 														<div class="col-md-6">
 															<div class="km-control-group" name="state" caption="State or Province">
-																<div km-textbox-ml ng-disabled="true" name="state" ng-model="organization.state" locales="organization.header.languages" ></div>
+																<div km-value-ml value="organization.state||'&nbsp;'" locales="organization.header.languages" ></div>
 															</div>
 														</div>
 													</div>
@@ -222,13 +222,14 @@
 					
 														<div class="col-md-6">
 															<div class="km-control-group" name="postalCode" caption="Postal Code or Zip">
-																<div km-textbox-ml ng-disabled="true" name="postalCode" ng-model="organization.postalCode" locales="organization.header.languages"></div>
+																<div km-value-ml value="organization.postalCode||'&nbsp;'" locales="organization.header.languages"></div>
 															</div>
 														</div>
 					
 														<div class="col-md-6">
-															<div class="km-control-group" name="country" ng-required="!form.contact_country.$valid" caption="Country address">
-																<div km-select ng-disabled="true" name="country" ng-model="organization.country" items="options.countries()" ></div>
+															<div class="km-control-group" name="country" ng-required="!form.contact_country.$valid" caption="Country of Contact">
+																<div class="km-value" ng-bind="organization.country | term">
+																</div>
 															</div>
 														</div>
 													</div>

@@ -1,4 +1,4 @@
-﻿<div>
+<div>
 
         <style>
                 #rec {font-size:12px;}
@@ -115,9 +115,9 @@
                                         <tbody>
                                           <tr ng-repeat="doc in docs = (rawDocuments.docs | orderBy:sortType:sortReverse  | filter:keyword)" id="rec">
                                             <td style="width:0;"><span class="bold">{{$index+1}}.</span></td>
-                                            <td  style="width:0;">  
+                                            <td  style="width:0;">
                                                 <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" />
-                                                <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" />
+                                                <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" ng-change="onRadioClick(doc)" />
                                             </td>
                                             <td class="type"> {{doc.schema_s | schemaShortName}}</td>
                                             <td style="min-width:30%" class="title"> <a href="{{doc.url_ss}}" target="_new">{{doc.rec_title}}</a></td>

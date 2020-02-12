@@ -47,6 +47,14 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                 $scope.listView = true;
             }
 
+            $scope.onRadioClick = function(doc){
+                if($scope.type == "radio"){
+                    _.each($scope.rawDocuments.docs, function(d){
+                        if(d.identifier_s!=doc.identifier_s && d.__checked)
+                            d.__checked = false;
+                    })
+                }
+            }
             //==================================
             //
             //==================================
