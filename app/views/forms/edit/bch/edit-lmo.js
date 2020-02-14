@@ -46,6 +46,19 @@ function (app, _) {
 			
 		}
 
+		$scope.onConstructChange = function(){
+			var constructIds = _($scope.document.geneConstructs).flatten().compact().value();
+
+			if(constructIds.length>0 && !$scope.document.genes)
+				$scope.document.genes = [];
+			
+			_.each(constructIds, function(cons){
+				if(!_.find($scope.document.genes, {identifier: cons.identifier}))
+					$scope.document.genes.push({ identifier:cons.identifier })
+			});
+			
+		}
+
    }]);
 
 });
