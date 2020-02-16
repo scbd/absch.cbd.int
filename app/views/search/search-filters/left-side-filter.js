@@ -32,13 +32,13 @@
                         }
                         return $scope.leftMenuFilters;
                     }
-                    $scope.clearLeftMenuFilters = function () {
-                        $scope.leftMenuFilters = undefined;
-                    }
+                    // $scope.clearLeftMenuFilters = function () {
+                    //     $scope.leftMenuFilters = undefined;
+                    // }
 
                     $scope.showFilterDialog = function (schema, filter, facets) {
                         ngDialog.open({
-                            template: 'filtersDialog',
+                            template: 'filtersDialog', height:'100%',
                             className: 'search-filters ngdialog-theme-default wide',
                             controller: ['$scope', '$timeout', 'thesaurusService', 'searchService', function ($scope, $timeout, thesaurusService, searchService) {
 
@@ -46,6 +46,7 @@
                                 $scope.schema = schema;
                                 $scope.filter = filter;
                                 $scope.facets = facets;
+                                $scope.searchRelated = filter.searchRelated;
                                 var options;
                                 _.each(filter.selectedItems, function (option) {
                                     if (filter.type == 'thesaurus' || filter.type == 'solr' || filter.type == 'customListFn')
@@ -69,14 +70,18 @@
                                 $scope.closeDialog = function () {
                                     ngDialog.close();
                                 }
-                                $scope.apply = function () {
+                                $scope.applyFilter = function () {
 
                                     var selectedItems = {};
                                     _.each($scope.treeViewSelected, function (item) {
                                         selectedItems[item.identifier] = _.find(options, { identifier: item.identifier });
                                     })
-                                    updateBaseFilter(selectedItems, schema, filter);
+                                    updateBaseFilter(selectedItems, schema, filter, $scope.searchRelated);
                                     ngDialog.close();
+                                }
+                                $scope.onBeforeSearch = function(keyword){
+                                    keyword = keyword.replace(/[0]/g, "Ø");
+                                    return keyword;
                                 }
 
                                 function runSolrQuery(query) {
@@ -104,9 +109,10 @@
                             }]
                         })
 
-                        function updateBaseFilter(selectedItems, schema, field) {
+                        function updateBaseFilter(selectedItems, schema, field, searchRelated) {
                             var filter = _.find($scope.leftMenuFilters[schema], { title: field.title })
                             filter.selectedItems = selectedItems;
+                            filter.searchRelated = searchRelated;
                             searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters)
                         }
                     }
@@ -125,6 +131,15 @@
                             delete filter.selectedItems[option.identifier];
                         }
 
+                        searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters)
+                    }
+                    $scope.clearLeftMenuFilters = function (filter) {
+                        if(filter.type!='solrRecords'){
+                            _.each(filter.selectedItems, function(item){
+                                $element.find('#' + item.identifier).tooltip('hide')
+                            })
+                        }                            
+                        filter.selectedItems = {};
                         searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters)
                     }
 
@@ -150,7 +165,9 @@
                         searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters)
                     }
 
-
+                    $scope.hasItems = function(items){
+                        return items && _.keys(items).length;
+                    }
                     //load dependant directive
                     require(['views/forms/edit/document-selector'])
                 }

@@ -9,13 +9,15 @@
 			"type": "thesaurus",
 			"term": "subjectAreas",
 			"title": "Administrative functions",
-			"field": "functions_REL_ss"
+			"field": "functions_ss",
+			"relatedField":"functions_REL_ss"
 		},
 		{
 			"type": "thesaurus",
 			"term": "typeOfOrganisms",
 			"title": "Types of organism(s) under its responsibility",
-			"field": "cpbOrganismTypes_REL_ss"
+			"field": "cpbOrganismTypes_ss",
+			"relatedField":"cpbOrganismTypes_REL_ss"
 		},
 		{
 			"type": "solr",
@@ -24,7 +26,8 @@
 				"q": "schema_s:biosafetyDecision"
 			},
 			"title": "Country's Decision or any other Communication",
-			"field": "cpbOrganismTypes_REL_ss"
+			"field": "cpbOrganismTypes_ss",
+			"relatedField":"cpbOrganismTypes_REL_ss"
 		}
 	],
 	"bchNews": [],
@@ -38,7 +41,8 @@
 			"type": "thesaurus",
 			"term": "decisionTypes",
 			"title": "Type of Decision/Document",
-			"field": "decisionTypes_REL_ss"
+			"field": "decisionTypes_ss",
+			"relatedField":"decisionTypes_REL_ss"
 		},
 		{
 			"type": "date",
@@ -49,7 +53,7 @@
 			"type": "solr",
 			"query": {
 				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
-				"q": "schema_s:modifiedOrganism"
+				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
 			},
 			"title": "Unique Identifier",
 			"field": "uniqueIdentification_s"
@@ -58,7 +62,8 @@
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
 			"title": "Introduced or modified traits",
-			"field": "lmoTraits_REL_ss"
+			"field": "lmoTraits_ss",
+			"relatedField":"lmoTraits_REL_ss"
 		},
 		{
 			"type": "solr",
@@ -106,7 +111,8 @@
 			"type": "thesaurus",
 			"term": "subjectAreas",
 			"title": "Subject Areas",
-			"field": "cpbSubjectAreas_REL_ss"
+			"field": "cpbSubjectAreas_ss",
+			"relatedField":"cpbSubjectAreas_REL_ss"
 		},
 		{
 			"type": "thesaurus",
@@ -139,8 +145,9 @@
 		{
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
-			"title": "Introduced or modified traits",
-			"field": "traits_REL_ss"
+			"title": "Related trait(s) or use(s) in biotechnology",
+			"field": "traits_ss",
+			"relatedField":"traits_REL_ss"
 		},
 		{
 			"type": "solr",
@@ -221,7 +228,7 @@
 			"type": "solr",
 			"query": {
 				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
-				"q": "schema_s:modifiedOrganism"
+				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
 			},
 			"title": "Unique Identifier",
 			"field": "uniqueIdentification_s"
@@ -230,7 +237,8 @@
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
 			"title": "Introduced or modified traits",
-			"field": "lmoTraits_REL_ss"
+			"field": "lmoTraits_ss",
+			"relatedField":"lmoTraits_REL_ss"
 		},
 		{
 			"type": "solr",
@@ -295,16 +303,17 @@
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
 			"title": "Related trait(s) or use(s) in biotechnology",
-			"field": "trait_REL_ss"
+			"field": "trait_ss",
+			"relatedField":"trait_REL_ss"
 		},
 		{
 			"type": "solr",
 			"query": {
 				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
-				"q": "schema_s:modifiedOrganism"
+				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
 			},
 			"title": "Unique Identifier",
-			"field": "uniqueIdentification_s"
+			"field": "uniqueIdentifications_ss"
 		},
 		{
 			"type": "solr",
@@ -365,13 +374,14 @@
 			"type": "thesaurus",
 			"term": "riskAssessmentScope",
 			"title": "Scope of the risk assessment",
-			"field": "scopes_REL_ss"
+			"field": "scopes_ss",
+			"relatedField":"scopes_REL_ss"
 		},
 		{
 			"type": "solr",
 			"query": {
 				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
-				"q": "schema_s:modifiedOrganism"
+				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
 			},
 			"title": "Unique Identifier",
 			"field": "uniqueIdentification_s"
@@ -380,7 +390,8 @@
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
 			"title": "Introduced or modified traits",
-			"field": "lmoTraits_REL_ss"
+			"field": "lmoTraits_ss",
+			"relatedField":"lmoTraits_REL_ss"
 		},
 		{
 			"type": "solr",
@@ -433,19 +444,22 @@
 			"type": "thesaurus",
 			"term": "typeOfOrganisms",
 			"title": "Type of organism(s)",
-			"field": ""
+			"field": "organismType_s",
+			"relatedField":"organismType_REL_ss"
 		},
 		{
 			"type": "thesaurus",
 			"term": "domestication",
-			"title": "Organism domestication",
-			"field": ""
+			"title": "Domestication",
+			"field": "domestication_s",
+			"relatedField":"domestication_REL_ss"
 		},
 		{
 			"type": "thesaurus",
 			"term": "OrganismCommonUses",
 			"title": "Common use(s)",
-			"field": ""
+			"field": "commonUses_s",
+			"relatedField":"commonUses_REL_ss"
 		}
 	],
 	"organization": [
@@ -471,7 +485,8 @@
 			"type": "thesaurus",
 			"term": "resourceTypes",
 			"title": "Type of resource",
-			"field": "resourceTypes_REL_ss"
+			"field": "resourceTypes_ss",
+			"relatedField":"resourceTypes_REL_ss"
 		},
 		{
 			"type": "thesaurus",
@@ -483,7 +498,8 @@
 			"type": "thesaurus",
 			"term": "thematicArea",
 			"title": "Thematic Area",
-			"field": "bchSubjects_REL_ss"
+			"field": "bchSubjects_ss",
+			"relatedField":"bchSubjects_REL_ss"
 		},
 		{
 			"type": "date",
