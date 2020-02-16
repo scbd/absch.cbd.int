@@ -1,4 +1,4 @@
-<div>
+﻿<div>
 
         <style>
                 #rec {font-size:12px;}
@@ -147,6 +147,7 @@
                     <div class="col-xs-12">
 
                         <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="addNewContact"   ng-click="saveDocuments()">Select</a>
+                        <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-click="clearSelectedDocuments()">Clear selected records</a>
 
                         <a translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-hide="hideAddContact || addNewContact"   ng-click="addNewContact=!addNewContact;loadContactDirective()">Create Contact</a>
                         <a translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-show="addNewContact"   ng-click="addNewContact=!addNewContact">Show Existing Contacts</a>

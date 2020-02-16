@@ -6,7 +6,7 @@
 				<label>
 					<input type="radio" ng-model="selection.identifier" ng-change="save()" ng-required="IsRequired()" ng-value="term.identifier" name="bindingName_{{uniqueId}}"/>
 						{{term.title||term.name | lstring:locale}}
-							<span ng-show="description" class="km-term-radio-description">{{term.description | lstring:locale}}</span>
+							<span ng-if="showDescription" class="km-term-radio-description">{{term.description | lstring:locale}}</span>
 				</label>
 
 				<ul style="list-style:none">
@@ -18,11 +18,13 @@
 				<table>
 					<tr>
 						<td style="width:5%">
-							<input type="radio" ng-model="selection.identifier" ng-change="save()" ng-required="IsRequired()" value="{{other.identifier}}" name="bindingName_{{uniqueId}}"/>
-							{{other | term:locale}} {{locale}}
+							<label>
+								<input type="radio" ng-model="selection.identifier" ng-change="save()" ng-required="IsRequired()" value="{{other.identifier}}" name="bindingName_{{uniqueId}}"/>
+								{{other | term:locale}} {{locale}}
+							</label>
 						</td>
-						<td>
-							<div km-textbox-ml name="otherTerm" required ng-model="selection.customValue" locales="locales"  ng-change="save()"></div>
+						<td >
+							<div ng-if="selection.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" km-textbox-ml name="otherTerm" required ng-model="selection.customValue" locales="locales"  ng-change="save()"></div>
 						</td>
 					</tr>
 				</table>
