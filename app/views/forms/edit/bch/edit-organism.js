@@ -58,6 +58,10 @@ function (app, _) {
 
 			return document;
 		};
+
+		$scope.addItem = function(type){
+			type.push({})
+		}
 		
 		$q.when($scope.setDocument({}, true))
 		.then(function(doc){
@@ -67,6 +71,8 @@ function (app, _) {
 				$scope.commonNames = _.map(doc.commonNames, function(t){return { value: t}});
 				
 		});
+
+
 
    }]);
 

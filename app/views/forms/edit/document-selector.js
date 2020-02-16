@@ -99,6 +99,11 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 				$scope.areVisible = true;
 			};
 
+            $scope.clearSelectedDocuments = function(){
+                _.forEach($scope.rawDocuments.docs,function(docs){
+                    doc.__checked = false;
+                });
+            }
 
              //==================================
             //
