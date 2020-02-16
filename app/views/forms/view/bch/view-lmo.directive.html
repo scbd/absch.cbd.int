@@ -41,7 +41,7 @@
 		
 		<div ng-show="document.description">
 			<label>Description</label>
-			<km-value-ml value="document.description" locales="locale"></km-value-ml>
+			<km-value-ml html value="document.description" locales="locale"></km-value-ml>
 		</div>
 
 		<div ng-show="document.recipientOrganisms">
@@ -109,7 +109,7 @@
 
 		<div ng-show="document.geneNotes">
 			<label>Notes regarding the genetic elements introduced or modified in this LMO</label>
-			<km-value-ml value="document.geneNotes" locales="locale"></km-value-ml>
+			<km-value-ml html value="document.geneNotes" locales="locale"></km-value-ml>
 		</div>
 
 
@@ -159,7 +159,7 @@
 			</div>
 			<div ng-show="document.detectionMethod">
 				<label>Additional Information</label>
-				<div class="km-value" ng-bind-html="document.detectionMethod | lstring:locale"></div>
+				<km-value-ml value="document.detectionMethod" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.relevantInformation||document.relevantDocuments">

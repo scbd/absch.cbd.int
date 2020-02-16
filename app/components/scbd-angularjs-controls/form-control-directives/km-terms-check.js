@@ -137,15 +137,12 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
 
                     var oNewBinding = [];
 
-                    if(termIdentifier){
+                    if($scope.layout == 'tree' && termIdentifier){
                         var selectedTerm = _.find($scope.terms, {identifier:termIdentifier});
                         var selected     = ($scope.selectedItems[selectedTerm.identifier]||{}).selected;
-                        // if ($scope.selectedItems[selectedTerm.identifier] && $scope.selectedItems[selectedTerm.identifier].selected) {
-                            // console.log(term)
-                            if(selectedTerm.narrowerTerms){
-                                selectChildTerms(selectedTerm.narrowerTerms, selected, 'narrowerTerms')
-                            }
-                        // }
+                        if(selectedTerm.narrowerTerms){
+                            selectChildTerms(selectedTerm.narrowerTerms, selected, 'narrowerTerms')
+                        }
                         if(selectedTerm.broaderTerms){
                             if(!selected)//if unchecked then set parents unchecked.
                                 selectChildTerms(selectedTerm.broaderTerms, false, 'broaderTerms');

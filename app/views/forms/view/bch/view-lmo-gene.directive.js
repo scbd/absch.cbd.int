@@ -42,6 +42,12 @@ app.directive("viewLmoGene", [function () {
 			$scope.removeRevsion = function(identifier){
 				return identifier && identifier.replace(/@.*/, '');
 			}
+
+
+			$scope.parseSize = function(size){
+				size = size||0;
+				return Number.parseFloat(size).toFixed(3);
+			}
 		 }] //controller
 	};
 }]);

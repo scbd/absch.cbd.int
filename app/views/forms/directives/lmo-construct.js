@@ -111,9 +111,11 @@
                 }
 
                 $scope.deleteConstruct = function($index){
-                    var binding = angular.copy($scope.binding)
-                    binding.splice($index, 1)
-                    setViewValue(binding);
+                    if(confirm('Are you sure you want to delete this construct?')){
+                        var binding = angular.copy($scope.binding);
+                        binding.splice($index, 1)
+                        setViewValue(binding);
+                    }
                 }
 
                 function updateBinding(newBinding, existingConstruct, $index){
