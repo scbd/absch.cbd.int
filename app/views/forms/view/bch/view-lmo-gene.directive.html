@@ -1,6 +1,7 @@
 ﻿<div class="lmo-gene-construct-viewer" style="display:inline">
-   
-    <table cellspacing="0px" ng-repeat="gene in model" class="lmo-transcript {{gene.type}}">                
+
+    <table cellspacing="0px" ng-repeat="gene in model" class="lmo-transcript {{gene.type}}"
+    ng-style="{'margin-left:5px':!$first}">                
             <tr>
                 <td class="left" >&nbsp;</td>
                 <td class="middle">
@@ -8,11 +9,12 @@
                         {{dnaDetails[removeRevsion(gene.identifier)].identity}}
                     </div>
                     <div >
+                        <!-- dnaDetails[removeRevsion(gene.identifier)].uniqueIdentifier|| -->
                         <a target="_blank" ng-href="{{dnaDetails[removeRevsion(gene.identifier)].urls[0]}}">
-                            {{dnaDetails[removeRevsion(gene.identifier)].uniqueIdentifier||dnaDetails[removeRevsion(gene.identifier)].title}}</a>
+                            {{dnaDetails[removeRevsion(gene.identifier)].title}}</a>
                     </div>
                     <div >
-                        <span >{{(gene.size||0).toFixed(2)}} kb</span>
+                       <span >{{parseSize(gene.size)}} kb</span>
                     </div>
                 </td>
                 <td class="right" >

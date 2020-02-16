@@ -29,6 +29,9 @@ function (app, _) {
 			if (/^\s*$/g.test(document.notes))
 				document.notes = undefined;
 
+			if((document.traits||[]).length == 0)
+				document.traits = undefined;
+				
 			if(!_.isEmpty($scope.synonymNames))
 				document.synonymNames = _($scope.synonymNames).pluck('value').compact().value();
 			if(_.isEmpty(document.synonymNames))

@@ -60,19 +60,19 @@
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="developers" caption="Developer(s)">	
+											<div class="km-control-group" required name="developers" caption="Developer(s)">	
 												<div document-selector ng-model="document.developers" question="developers"
 													schema="(contact)" caption="Contacts"></div>			
 											</div>
 										</div>
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="description" caption="Description">
-												<div km-textbox-ml name="description" required ng-model="document.description" locales="document.header.languages"></div>
+												<div km-rich-textbox rows="4" name="description" required ng-model="document.description" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="recipientOrganisms" caption="Recipient Organism or Parental Organisms">	
-												<div class="help-block">The term Recipient organism refers to an organism (either already modified or non-modified) that was subjected to genetic modification, whereas Parental organisms refers to those that were involved in cross breeding or cell fusion.</div>
+											<div class="km-control-group" required name="recipientOrganisms" caption="“Recipient Organism” or “Parental Organisms”">	
+												<div class="help-block">The term “Recipient organism” refers to an organism (either already modified or non-modified) that was subjected to genetic modification, whereas “Parental organisms” refers to those that were involved in cross breeding or cell fusion.</div>
 												<div document-selector required ng-model="document.recipientOrganisms" question="recipientOrganisms"
 													schema="(organism modifiedOrganism)" caption="Add Organism / Modified Organism"></div>			
 											</div>
@@ -100,13 +100,13 @@
 									<legend>Characteristics of the modification process</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group"  name="vector" caption="Vector">
+											<div class="km-control-group" required name="vector" caption="Vector">
 												<div class="help-block">Vectors are used to incorporate a DNA sequence (typically the promoter-gene-terminator construct) to assist its transfer into the recipient organism. Examples: Agrobacterium Ti plasmid and pBIN19.</div>
 												<div km-textbox-ml name="vector"  ng-model="document.vector" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group"  name="techniqueUsed" caption="Techniques used for the modification">
+											<div class="km-control-group" required name="techniqueUsed" caption="Techniques used for the modification">
 												<div km-term-check name="techniqueUsed" required layout="list" locales="document.header.languages" ng-model="document.techniqueUsed" terms="options.techniqueUsed" binding-type="term[]"></div>
 											</div>
 										</div>
@@ -124,8 +124,8 @@
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="geneNotes" caption="Notes regarding the genetic elements present in this LMO">	
-												<div class="help-block">Please specify if any of these elements has been modified from the sequence registered in the BCH Genetic Element Registry and how they relate to each other in this LMO, for instance “epsps protein coding sequence under control of the 35S promoter and nos terminator”.</div>
-												<div km-textbox-ml name="geneNotes"  ng-model="document.geneNotes" locales="document.header.languages"></div>	
+												<div class="help-block">Please specify if any of these elements have been modified from the sequence registered in the BCH Genetic Element Registry and how they relate to each other in this LMO, for instance “epsps protein coding sequence under control of the 35S promoter and nos terminator”.</div>
+												<div km-rich-textbox name="geneNotes" rows="4"  ng-model="document.geneNotes" locales="document.header.languages"></div>	
 											</div>
 										</div>
 									</div>
@@ -137,20 +137,20 @@
 								<div class="well no-shadow bg-white">
 									<legend>LMO characteristics</legend>
 									<div class="row">
-										<div class="col-xs-12">
+										<!-- <div class="col-xs-12">
 											<div class="km-control-group" name="isGeneEdited" required
 												caption="Was this LMO produced through a gene editing technique?">
 												<div km-yes-no required ng-model="document.isGeneEdited" locales="document.header.languages">
 												</div>
 											</div>
-										</div>
+										</div> -->
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="traits" caption="Modified Traits">												
+											<div class="km-control-group" required name="traits" caption="Related trait(s) or use(s) in biotechnology">												
 												<traits-selector ng-model="document.traits" locales="document.header.languages"></traits-selector>													
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="affectedGenes"
+											<div class="km-control-group" name="affectedGenes"
 												caption="Other gene(s) whose expression was affected by the transformation">
 												<div class="help-block">This section should be used to specify changes in the expression of
 													genes other than those that were inserted into the LMO; for example, gene silencing or
@@ -162,8 +162,8 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="geneNotes"
 												caption="Please describe how the expression of the gene(s) was affected">
-												<div km-textbox-ml name="geneNotes" ng-model="document.geneNotes"
-													locales="document.header.languages"></div>
+												<div km-rich-textbox name="geneNotes" ng-model="document.geneNotes"
+													locales="document.header.languages" rows="4"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">

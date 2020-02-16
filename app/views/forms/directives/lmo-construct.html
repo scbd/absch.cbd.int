@@ -10,7 +10,7 @@
 			<div class="km-value">
                 <table class="table">
                     <tr ng-repeat="construct in binding" style="margin-bottom:5px;">
-                        <td style="vertical-align: middle;">
+                        <td style="vertical-align: middle;width:3%">
                             <a title="Edit construct" ng-href="#" ng-click="openContructDialog(construct, $index)"><i class="fa fa-edit"></i></a>
                             <a title="Delete Construct" ng-href="#" ng-click="deleteConstruct($index)"><i class="fa fa-trash-o"></i></a>
                             <a title="Move up" ng-if="!$first" ng-href="#" ng-click="moveUp($index)"><i class="fa fa-arrow-up"></i></a>
@@ -243,7 +243,8 @@
                                 <selected-records>
                                     <div ng-show="$parent.$parent.item.gene">
                                         #<span ng-bind="$parent.$parent.item.gene.documentID"></span>
-                                        &nbsp; <input type="number" ng-model="item.size" style="width:45px"/> KB
+                                        &nbsp; 
+                                        <input type="number" ng-model="item.size" style="width:50px" min="0"/> KB
                                     </div>
                                 </selected-records>
                             </div>
