@@ -18,7 +18,8 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                 termsFn: '&terms',
                 required: "@",
                 layout: "@",
-                locales: '=?'
+                locales: '=?',
+                beforeSearch: '&?'
             },
             link: function($scope, $element, $attr, ngModelController) {
 
@@ -130,17 +131,33 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                 //==============================
                 //
                 //==============================
-                function save(onOtherElementsChange) {
+                function save(termIdentifier, onOtherElementsChange) {
                     if (!$scope.selectedItems)
                         return;
 
                     var oNewBinding = [];
 
+                    if(termIdentifier){
+                        var selectedTerm = _.find($scope.terms, {identifier:termIdentifier});
+                        var selected     = ($scope.selectedItems[selectedTerm.identifier]||{}).selected;
+                        // if ($scope.selectedItems[selectedTerm.identifier] && $scope.selectedItems[selectedTerm.identifier].selected) {
+                            // console.log(term)
+                            if(selectedTerm.narrowerTerms){
+                                selectChildTerms(selectedTerm.narrowerTerms, selected, 'narrowerTerms')
+                            }
+                        // }
+                        if(selectedTerm.broaderTerms){
+                            if(!selected)//if unchecked then set parents unchecked.
+                                selectChildTerms(selectedTerm.broaderTerms, false, 'broaderTerms');
+                            else
+                                selectChildTerms(selectedTerm.broaderTerms, true, 'broaderTerms', true);
+                            setIndeterminanteParents(selectedTerm.broaderTerms, selected)
+                        }
+                    }
                     angular.forEach($scope.terms, function(term, i) {
                         if (term === undefined) return; //IE8 BUG
 
                         if ($scope.selectedItems[term.identifier] && $scope.selectedItems[term.identifier].selected) {
-                            
                             if ($scope.bindingType == "string[]") 
                                 oNewBinding.push(term.identifier);
                             else if ($scope.bindingType == "term[]"){
@@ -180,6 +197,56 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     return $scope.required !== undefined && $.isEmptyObject($scope.binding);
                 };
 
+                function selectChildTerms(terms, selected, type, allChildSelected){
+                    if(!terms.length)
+                        return;
+
+                    _.each(terms, function(identifier){
+                            var term = _.find($scope.terms, {identifier:identifier});
+                            if(!$scope.selectedItems[identifier])
+                                $scope.selectedItems[identifier] = {};
+                            
+                            var mySelectedChildren =_.filter(term.narrowerTerms, function(identifier){ 
+                                return ($scope.selectedItems[identifier]||{}).selected
+                            });
+                            if(allChildSelected){
+                                if(mySelectedChildren.length == term.narrowerTerms.length){
+                                    $scope.selectedItems[identifier].selected = true;
+                                    $element.find('#chk_'+identifier).prop('indeterminate', false)
+                                }
+                            }
+                            else{ 
+                                $scope.selectedItems[identifier].selected = selected;
+                                if($scope.selectedItems[identifier].selected)
+                                    $element.find('#chk_'+identifier).prop('indeterminate', false)
+                            }
+
+                            if(term && term[type])//narrowerTerms||broaderTerms
+                                selectChildTerms(term[type], selected, type, allChildSelected);
+                    })
+                }
+                function setIndeterminanteParents(terms, val){
+                    if(!terms.length)
+                        return;
+
+                    _.each(terms, function(identifier){
+                            var term = _.find($scope.terms, {identifier:identifier});
+                            if(!$scope.selectedItems[identifier].selected){
+                                var hasChildSelected = isSelectedOrIndertiminante(term.narrowerTerms);
+                                $element.find('#chk_'+identifier).prop('indeterminate', hasChildSelected||val);
+                            }
+                            if(term && term.broaderTerms)
+                                setIndeterminanteParents(term.broaderTerms, val);
+                    })
+                    // $scope.save(termIdentifier, undefined, true)
+                }
+
+                function isSelectedOrIndertiminante(terms){
+                    var has = _.find(terms, function(identifier){ 
+                        return ($scope.selectedItems[identifier]||{}).selected||$element.find('#chk_'+identifier).prop('indeterminate')==true
+                    });
+                    return has != undefined;
+                }
                 //==============================
                 //
                 //==============================
@@ -224,12 +291,14 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                 $scope.hasMatch = function(term){
                     if(!$scope.searchKeyword)
                         return;
-
+                    var keyword = $scope.searchKeyword;
+                    if($scope.beforeSearch)
+                        keyword     = $scope.beforeSearch({keyword:keyword})||keywords;
                     var title = term.searchTitle[locale]
                     if(!title)
                         title = term.searchTitle['en'];
 
-                    if(title && title.toLowerCase().indexOf($scope.searchKeyword.toLowerCase())>=0)
+                    if(title && title.toLowerCase().indexOf(keyword.toLowerCase())>=0)
                         return true;
                 }
                 //==============================
@@ -299,7 +368,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
 
                 $scope.deleteOtherElement = function (element, otherElements, $event) {
                     otherElements.splice(otherElements.indexOf(element), 1);
-                    $scope.save(true);
+                    $scope.save(undefined, true);
                 };
 
                 $scope.appendEmptyOther = function (otherElements, skipSave) {                    
@@ -308,7 +377,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                             otherElements.push({});
 
                         if(!skipSave)
-                            $scope.save(true);
+                            $scope.save(undefined, true);
                 }
                 function initializeOther(identifier) {
                     if(!$scope.otherElements[identifier])

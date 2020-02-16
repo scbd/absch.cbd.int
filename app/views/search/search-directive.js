@@ -675,27 +675,37 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 var subQueries = []                                
                                 subQueries.push('schema_s:'+ key)
                                 _.each(filters, function(filter){
-
+                                    var subQuery;
+                                    if(filter.disabled)
+                                        return;
                                     if(filter.fieldfn!=undefined){ //custom function                                            
                                         var q = customQueryFn[filter.fieldfn](filter);
                                         if(q)
-                                            subQueries.push(q);
+                                            subQuery = q;
                                     }
                                     else if(!_.isEmpty(filter.selectedItems)){
                                         var ids = _.map(filter.selectedItems, 'identifier');
                                         if(filter.type == 'freeText'){
                                             ids = _.map(filter.selectedItems, 'title');
-                                            subQueries.push(filter.field + ':(' + ids.join(' AND ') + ')') 
+                                            subQuery = filter.field + ':(' + ids.join(' AND ') + ')';
                                         }
                                         else{
-                                            subQueries.push(filter.field + ':(' + ids.join(' ') + ')') 
+                                            var field = filter.field;
+                                            if(filter.searchRelated && filter.relatedField)
+                                                field = filter.relatedField;
+                                            subQuery = field + ':(' + ids.join(' ') + ')';
                                         }
                                     }
                                     else if(filter.type == 'date' && filter.filterValue){
-                                        subQueries.push(buildDateFieldQuery(filter.field, filter.filterValue))
+                                        subQuery = buildDateFieldQuery(filter.field, filter.filterValue);
                                     }
                                     else if(filter.type == 'yesNo' && filter.filterValue!== undefined){
-                                        subQueries.push(filter.field + ':' + filter.filterValue)
+                                        subQuery = filter.field + ':' + filter.filterValue;
+                                    }
+                                    if(subQuery){
+                                        if(filter.excludeResult)
+                                            subQuery = '(*:* NOT (' + subQuery + '))'
+                                        subQueries.push(subQuery);
                                     }
                                 });
                                 if(subQueries.length>1){
