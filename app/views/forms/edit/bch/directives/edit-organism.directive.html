@@ -1,0 +1,272 @@
+﻿<div>
+
+	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+
+		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
+		<div class="registerpage-content">
+
+			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
+			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+			 on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+			 data-container="{{container}}" is-dialog="{{isDialog}}">
+				<edit-form>
+					<form class="editForm" name="editForm" style="margin-top:10px">
+						<div>
+
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>General information</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
+												<div class="indent">
+													<div km-form-languages required name="languages" ng-model="document.header.languages"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Organism information</legend>
+									<div class="row">
+										
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="scientificName" caption="Scientific name">
+												<div class="help-block">The scientific name of an organism is typically composed of the name of the genus followed by its specific denomination. For example: Oryza sativa is the scientific name for rice.</div>
+												<input type="text" class="form-control" name="scientificName" required ng-model="document.scientificName"/>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<label>Taxonomic classification</label>
+											<div class="help-block">The taxonomic classification is a formal designation of an organism. Example: genus: Oryza; species: sativa.</div>
+											<hr/>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group"  name="realm" caption="Realm">
+												<input type="text" class="form-control" name="realm" ng-model="document.realm"/>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="subRealm" caption="Subrealm">
+												<input type="text" class="form-control" name="subRealm" ng-model="document.subRealm" />
+											</div>
+										</div>										
+										<div class="col-sm-12">
+											<div class="km-control-group" name="kingdom" caption="Kingdom">
+												<input type="text" class="form-control" name="kingdom" ng-model="document.kingdom" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="phylum" caption="Phylum">
+												<input type="text" class="form-control" name="phylum" ng-model="document.phylum" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="_class" caption="Class">
+												<input type="text" class="form-control" name="_class" ng-model="document._class" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="order" caption="Order">
+												<input type="text" class="form-control" name="order" ng-model="document.order" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="subOrder" caption="Suborder">
+												<input type="text" class="form-control" name="subOrder" ng-model="document.subOrder" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="family" caption="Family">
+												<input type="text" class="form-control" name="family" ng-model="document.family" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="subFamily" caption="Subfamily">
+												<input type="text" class="form-control" name="subFamily" ng-model="document.subFamily" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="genus" caption="Genus">
+												<input type="text" class="form-control" name="genus" ng-model="document.genus" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="species" caption="Species">
+												<input type="text" class="form-control" name="species" ng-model="document.species" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="subSpecies" caption="Sub-species">
+												<input type="text" class="form-control" name="subSpecies" ng-model="document.subSpecies" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="scientificNameSynonyms" caption="Alternate scientific name (synonyms)">
+												<div ng-repeat="synonym in scientificNameSynonyms" style="padding-bottom:5px;">
+													<input type="text" class="form-control" name="scientificNameSynonyms{{$index}}" ng-model="synonym.value" />
+												</div>
+												<button class="btn btn-primary" ng-click="addItem(scientificNameSynonyms)">Add item</button>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="commonNames" caption="Common name(s)">
+												<div class="help-block">A common name is used to refer to an organism in everyday language and may include synonyms. Example: maize / corn.</div>
+												<div ng-repeat="commonName in commonNames" style="padding-bottom:5px;">
+													<div km-textbox-ml name="commonNames{{$index}}" ng-model="commonName.value" locales="document.header.languages"></div>
+												</div>
+												<button class="btn btn-primary" ng-click="addItem(commonNames)">Add item</button>
+											</div>
+										</div>
+									</div>
+
+									<section>
+										<div class="well no-shadow bg-white">
+											<label>Additional Classification</label>
+											<hr/>
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="km-control-group" name="plantCultivar" caption="Cultivar / variety (plants)">
+														<input type="text" class="form-control" name="plantCultivar"  ng-model="document.plantCultivar"/>
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="km-control-group" name="microorganismStrain" caption="Strain / isolate / serotype (microorganisms)">
+														<input type="text" class="form-control" name="microorganismStrain" ng-model="document.microorganismStrain" />
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="km-control-group" name="bacteriaPathovar" caption="Pathovar (bacteria)">
+														<input type="text" class="form-control" name="bacteriaPathovar" ng-model="document.bacteriaPathovar" />
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="km-control-group" name="virusGroup" caption="Group (virus)">
+														<input type="text" class="form-control" name="virusGroup" ng-model="document.virusGroup" />
+													</div>
+												</div>
+												<div class="col-xs-12">
+													<div class="km-control-group" name="organismType"  caption="Type of organism">
+														<div km-term-radio  ng-model="document.organismType" locales="document.header.languages"
+															terms="options.organismType()" binding-type="term" show-other="true" show-description="false"></div>
+													</div>	
+												</div>
+												<div class="col-xs-12">
+													<div class="km-control-group" name="domestication"  caption="Domestication">
+														<div km-term-radio  ng-model="document.domestication" locales="document.header.languages"
+															terms="options.domestication" binding-type="term"></div>
+													</div>	
+												</div>
+											</div>
+										</div>
+									</section>
+								</div>
+							</section>
+							
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Characteristics related to biosafety</legend>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="originCentre" caption="Centre(s) of origin">
+												<div class="help-block">max 200 characters</div>
+												<div km-rich-textbox ng-model="document.originCentre" rows="4" max-length="200" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="diversityCentre" caption="Centre(s) of genetic diversity">
+												<div class="help-block">max 200 characters</div>
+												<div km-rich-textbox ng-model="document.diversityCentre" rows="4" max-length="200" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="habitat" caption="Habitat range">
+												<div class="help-block">Describe the type of environments where the organism may persist or proliferate. Max 200 characters</div>
+												<div km-rich-textbox ng-model="document.habitat" rows="4" max-length="200" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+
+										<div class="col-xs-12">
+											<div class="km-control-group" name="geographicalDistribution" caption="Geographical distribution">
+												<div class="help-block">Example: eastern cottonwood (Populus deltoides) occurs in North America from Alberta in the
+													west to Quebec in the east and Florida, Texas, Arizona and northern Mexico in the south. (max 200 characters)</div>
+												<div km-rich-textbox ng-model="document.geographicalDistribution" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="compatibleSpecies" caption="Cross-compatible species">
+												<div class="hel-block">Provide a list of species using the taxonomic classification (genus and species names) that
+													are known to cross-fertilize with the organism in the record.</div>
+												<div document-selector ng-model="document.compatibleSpecies" question="compatibleSpecies" schema="organism" allow-new-schema="organism"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="pathogenicity" caption="Known pathogenicity and/or allergenicity">
+												<div class="help-block">max 200 characters</div>
+												<div km-rich-textbox ng-model="document.pathogenicity" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group"  name="commonUses" caption="Common use(s)">
+												<div km-term-check name="commonUses"  ng-model="document.commonUses" terms="options.commonUses" binding-type="term[]"
+												locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>	
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Additional information</legend>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="address" caption="Any other relevant information">
+												<div class="help-block">Please use this field to provide any other relevant information that may not have
+													been addressed elsewhere in
+													the record.</div>
+												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+												<div class="help-block">
+													Please use this field to provide any other relevant website addresses and/or one or more
+													relevant documents that will be stored in the database for users to download.
+												</div>
+												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
+												 identifier="document.header.identifier"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section>
+								<legend>Notes</legend>								
+								<div class="row">
+									<div class="col-md-12">
+										<div class="km-control-group" name="notes">
+											<span class="help-block">
+												The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.
+											</span>
+											<div km-notes name="notes" ng-model="document.notes"></div>
+										</div>
+									</div>
+								</div>
+							</section>
+
+						</div>
+					</form>
+				</edit-form>
+				<review-form>
+					<div view-organism ng-model="document" locale="review.locale" allow-drafts="true"></div>
+				</review-form>
+			</workflow-arrow-buttons>
+		</div>
+	</div>
+</div>

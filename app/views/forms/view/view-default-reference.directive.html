@@ -8,8 +8,9 @@
             </a>
         </div>
         <div class="selected-reference-name">{{document.body.header.schema | schemaName}} </div>
+        <div class="selected-reference-title" ng-if="document.workingDocumentTitle||document.title">{{(document.workingDocumentTitle||document.title) | lstring:locale}} </div> 
         <div class="selected-reference-title" ng-if="document.body.title">{{document.body.title | lstring:locale}} </div> 
-        <div class="selected-reference-title"  ng-if="!document.body.title && document.body.name ">{{document.body.name | lstring:locale}} </div>
+        <div class="selected-reference-title" ng-if="!document.body.title && document.body.name ">{{document.body.name | lstring:locale}} </div>
 
         <div class="selected-reference-title" ng-if="document.body.scientificName">
             {{document.body.scientificName}} 
