@@ -23,6 +23,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
             },
             link: function($scope, $element, $attr, ngModelController) {
 
+                var hasNarrowerTerms = false;
                 $scope.selectedItems = null;
 				$scope.showDescription = $attr.showDescription == 'true';
                 $scope.identifiers = null;
@@ -137,7 +138,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
 
                     var oNewBinding = [];
 
-                    if($scope.layout == 'tree' && termIdentifier){
+                    if(hasNarrowerTerms && termIdentifier){
                         var selectedTerm = _.find($scope.terms, {identifier:termIdentifier});
                         var selected     = ($scope.selectedItems[selectedTerm.identifier]||{}).selected;
                         if(selectedTerm.narrowerTerms){
@@ -309,7 +310,8 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                             identifier: term.identifier, searchTitle: term.title,
                             displayTitle: buildDisplayTitle(term, 1)
                         });
-                        if(term.narrowerTerms){                            
+                        if(term.narrowerTerms){
+                            hasNarrowerTerms = true;                            
                             buildSearchList(term.narrowerTerms, searchList)
                          }
                     })
