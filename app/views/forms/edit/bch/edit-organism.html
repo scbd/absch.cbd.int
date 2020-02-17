@@ -41,7 +41,11 @@
 												<input type="text" class="form-control" name="scientificName" required ng-model="document.scientificName"/>
 											</div>
 										</div>
-
+										<div class="col-sm-12">
+											<label>Taxonomic classification</label>
+											<div class="help-block">The taxonomic classification is a formal designation of an organism. Example: genus: Oryza; species: sativa.</div>
+											<hr/>
+										</div>
 										<div class="col-sm-12">
 											<div class="km-control-group"  name="realm" caption="Realm">
 												<input type="text" class="form-control" name="realm" ng-model="document.realm"/>
@@ -107,7 +111,7 @@
 												<div ng-repeat="synonym in scientificNameSynonyms" style="padding-bottom:5px;">
 													<input type="text" class="form-control" name="scientificNameSynonyms{{$index}}" ng-model="synonym.value" />
 												</div>
-												<button class="btn btn-primary" ng-click="scientificNameSynonyms.push({})">Add a item</button>
+												<button class="btn btn-primary" ng-click="addItem(scientificNameSynonyms)">Add item</button>
 											</div>
 										</div>
 										<div class="col-sm-12">
@@ -116,49 +120,51 @@
 												<div ng-repeat="commonName in commonNames" style="padding-bottom:5px;">
 													<div km-textbox-ml name="commonNames{{$index}}" ng-model="commonName.value" locales="document.header.languages"></div>
 												</div>
-												<button class="btn btn-primary" ng-click="commonNames.push({})">Add a item</button>
+												<button class="btn btn-primary" ng-click="addItem(commonNames)">Add item</button>
 											</div>
 										</div>
 									</div>
-								</div>
-							</section>
-							<section>
-								<div class="well no-shadow bg-white">
-									<legend>Additional Classification</legend>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="km-control-group" name="plantCultivar" caption="Cultivar / variety (plants)">
-												<input type="text" class="form-control" name="plantCultivar"  ng-model="document.plantCultivar"/>
+
+									<section>
+										<div class="well no-shadow bg-white">
+											<label>Additional Classification</label>
+											<hr/>
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="km-control-group" name="plantCultivar" caption="Cultivar / variety (plants)">
+														<input type="text" class="form-control" name="plantCultivar"  ng-model="document.plantCultivar"/>
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="km-control-group" name="microorganismStrain" caption="Strain / isolate / serotype (microorganisms)">
+														<input type="text" class="form-control" name="microorganismStrain" ng-model="document.microorganismStrain" />
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="km-control-group" name="bacteriaPathovar" caption="Pathovar (bacteria)">
+														<input type="text" class="form-control" name="bacteriaPathovar" ng-model="document.bacteriaPathovar" />
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="km-control-group" name="virusGroup" caption="Group (virus)">
+														<input type="text" class="form-control" name="virusGroup" ng-model="document.virusGroup" />
+													</div>
+												</div>
+												<div class="col-xs-12">
+													<div class="km-control-group" name="organismType"  caption="Type of organism">
+														<div km-term-radio  ng-model="document.organismType" locales="document.header.languages"
+															terms="options.organismType()" binding-type="term" show-other="true" show-description="false"></div>
+													</div>	
+												</div>
+												<div class="col-xs-12">
+													<div class="km-control-group" name="domestication"  caption="Domestication">
+														<div km-term-radio  ng-model="document.domestication" locales="document.header.languages"
+															terms="options.domestication" binding-type="term"></div>
+													</div>	
+												</div>
 											</div>
 										</div>
-										<div class="col-sm-12">
-											<div class="km-control-group" name="microorganismStrain" caption="Strain / isolate / serotype (microorganisms)">
-												<input type="text" class="form-control" name="microorganismStrain" ng-model="document.microorganismStrain" />
-											</div>
-										</div>
-										<div class="col-sm-12">
-											<div class="km-control-group" name="bacteriaPathovar" caption="Pathovar (bacteria)">
-												<input type="text" class="form-control" name="bacteriaPathovar" ng-model="document.bacteriaPathovar" />
-											</div>
-										</div>
-										<div class="col-sm-12">
-											<div class="km-control-group" name="virusGroup" caption="Group (virus)">
-												<input type="text" class="form-control" name="virusGroup" ng-model="document.virusGroup" />
-											</div>
-										</div>
-										<div class="col-xs-12">
-											<div class="km-control-group" name="organismType"  caption="Type of organism">
-												<div km-term-radio  ng-model="document.organismType" locales="document.header.languages"
-													terms="options.organismType()" binding-type="term" show-other="true" show-description="false"></div>
-											</div>	
-										</div>
-										<div class="col-xs-12">
-											<div class="km-control-group" name="domestication"  caption="Domestication">
-												<div km-term-radio  ng-model="document.domestication" locales="document.header.languages"
-													terms="options.domestication" binding-type="term"></div>
-											</div>	
-										</div>
-									</div>
+									</section>
 								</div>
 							</section>
 							
@@ -180,7 +186,7 @@
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="habitat" caption="Habitat range">
-												<div class="help-block">max 200 characters</div>
+												<div class="help-block">Describe the type of environments where the organism may persist or proliferate. Max 200 characters</div>
 												<div km-rich-textbox ng-model="document.habitat" rows="4" max-length="200" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -243,15 +249,14 @@
 								</div>
 							</section>
 							<section>
-								<legend>Notes</legend>
-
+								<legend>Notes</legend>								
 								<div class="row">
-									<div class="col-sm-12">
+									<div class="col-md-12">
 										<div class="km-control-group" name="notes">
-											<div class="help-block">The “Notes” field is for your personal notes or comments and will be hidden when
-												viewing the record. This field
-												is not meant to be used for confidential information.</div>
-											<textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
+											<span class="help-block">
+												The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.
+											</span>
+											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
 									</div>
 								</div>

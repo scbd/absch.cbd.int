@@ -56,7 +56,7 @@
 															<!-- <div ng-repeat="jurisdiction in jurisdictionNames" style="padding-bottom:5px;"> {{$index}}-->
 																<div km-textbox-ml name="jurisdictionNames" ng-model="otherJurisdictionValue" locales="document.header.languages"></div>
 															<!-- </div>
-															<button class="btn btn-primary" ng-click="jurisdictionNames.push({})">Add a item</button> -->
+															<button class="btn btn-primary" ng-click="jurisdictionNames.push({})">Add item</button> -->
 														</div>
 													</div>
 												</div>
@@ -251,7 +251,7 @@
 									<div class="col-sm-12">
 										<div class="km-control-group" name="notes">
 											<div class="help-block">The notes field is for your personal use only: you can see it when you edit the record, but it is not visible to others when the record is viewed through search pages.</div>
-											<textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
+											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
 									</div>
 								</div>

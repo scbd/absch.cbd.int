@@ -24,7 +24,8 @@ function (app, _) {
 			if (!document)
 				return undefined;
 			
-			
+			if((document.traits||[]).length == 0)
+				document.traits = undefined;
 			if (/^\s*$/g.test(document.notes))
 				document.notes = undefined;
 

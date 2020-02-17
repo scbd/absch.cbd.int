@@ -27,7 +27,7 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
                 $scope.description = $scope.description!== undefined ? $scope.description : true;
 
                 if($attr.showDescription!= undefined)
-                    $scope.description = $attr.showDescription == 'true';
+                    $scope.showDescription = $attr.showDescription == 'true';
 
                 $scope.selection = null;
                 $scope.terms = null;

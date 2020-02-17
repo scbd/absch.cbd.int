@@ -17,7 +17,7 @@
 				<tr ng-repeat="term in filteredList = (searchList|filter:hasMatch)">
 					<td  ng-class="{'no-border':$first}"> 
 						<label>
-							<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save()" 
+							<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save(term.identifier)" 
 								ng-required="IsRequired()" value="{{term.identifier}}"/> <span class="color-litegrey" ng-bind-html="term.displayTitle | lstring:locale"></span>
 						</label>
 					</td>
@@ -33,8 +33,9 @@
 			<ul>
 				<script type="text/ng-template" id="term-check-tree-renderer.html">
 					<label>
-						<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save()" 
-							ng-required="IsRequired()" value="{{term.identifier}}" /> {{term.title||term.name | lstring:locale}}
+						<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save(term.identifier)" 
+							ng-required="IsRequired()" value="{{term.identifier}}" id="chk_{{term.identifier}}"/> 
+							{{term.title||term.name | lstring:locale}}
 					</label>
 					<div ng-if="!term.multiple && selectedItems[term.identifier].selected">
 						<input ng-if="term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"
