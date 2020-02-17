@@ -12,10 +12,8 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
 		replace    : true,
 		transclude : false,
 		scope      : {
-            identifier  : '=',
-			locales     : "=locales",
 			form        : "=form",
-            onPostPublishFn   : "&onPostPublish"
+            onPostSubmitFn   : "&onPostSubmit"
 		},
 		link : function($scope, $element, $attr){
             $controller('editController', {
@@ -145,11 +143,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                 if(!$scope.document.addressType)
                     $scope.document.addressType = 'person';
             }
-            
-            $scope.onPostPublishOrRequest = function(documentInfo){
-                $scope.onPostPublishFn({ data: documentInfo });
-            };
-            
+                        
             $scope.loadOrganizationAddress = function(){
                 var document = $scope.document;
                 if(document.contactOrganization && document.addressType == 'organization' && 
@@ -160,41 +154,12 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                     })
                 }
             }
-            function setDocument() {
 
-                $scope.status = "loading";
-        
-                var qDocument = {};
-                $scope.document = {};
-                if($scope.identifier)
-                    qDocument = editFormUtility.load($scope.identifier, 'contact');
-                else {
-                    qDocument = {
-                        header: {
-                        identifier  : guid(),
-                        schema      : 'contact',
-                        languages   : $scope.locales|| [locale]
-                        },
-                        government: $rootScope.user.government ? { identifier: $rootScope.user.government } : undefined,
-                        type        : $scope.prefilledContactType? $scope.prefilledContactType: undefined
-                    };        
-                }                
-        
-                return $q.when(qDocument).then(function(doc) {
-        
-                    $scope.tab    = "edit";
-                    $scope.document = doc;            
-                    $scope.status = "ready";
-                    $scope.loadOrganizationAddress();
-        
-                });
-            };
-            
-            setDocument();
+            var doc = {
+                type : $scope.prefilledContactType? $scope.prefilledContactType: undefined
+            }
+            $scope.setDocument(doc, !$rootScope.user.government).then($scope.loadOrganizationAddress);
 
-        },
-        controller: function(){
-            
         }
 	};
 }]);
