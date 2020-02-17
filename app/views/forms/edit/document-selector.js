@@ -40,8 +40,12 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             $scope.sortReverse  = false;  
 
             if(!$scope.type) $scope.type = "checkbox";
-
-            $scope.hideAddContact = $attr.allowNew!='true';// || ($scope.schema||'').indexOf('contact')<0 
+            
+            $scope.allowNew = {
+                show   : $attr.allowNew=='true',
+                schema : $attr.allowNewSchema,
+                title  : $attr.allowNewButtonTitle,
+            };     
 
             if($attr.listView){
                 $scope.listView = true;
@@ -334,7 +338,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             //
             //==================================
 			$scope.openAddDialog = function(){
-                $scope.addNewContact = false;
+                $scope.allowNew.editingOn = false;
                 var dialog = ngDialog.open({
                     template: 'documentSelectionModal',
                     closeByDocument: false,
@@ -384,28 +388,15 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                 $('body').removeClass('modal-open')
             };
 
-            $scope.loadContactDirective = function(){
-
-                $scope.addNewContact = true;
-                require(['views/forms/edit/directives/edit-contact.directive'], function(){
-                    
-                    var directiveHtml = "<DIRECTIVE on-post-publish='onNewContactPublish(data)' contact-type='organization' allow-new='false' is-dialog='true' container='.ngdialog' link-target={{linkTarget}} locales='locales'></DIRECTIVE>"
-                            .replace(/DIRECTIVE/g, 'edit-contact');
-                    $scope.$apply(function () {
-                        // 
-                        $('#'+dialogId).find('#divNewContact').empty().append($compile(directiveHtml)($scope));
-                    });
-                })
-            }
-
-            $scope.onNewContactPublish = function(data){
+            $scope.onNewRecordSubmitted = function(data){
                 
                 if(!$scope.rawDocuments.docs)
                     $scope.rawDocuments.docs = [];
                 
                 $scope.rawDocuments.docs.push({                   
-                    _revision_i: 1,
-                    identifier_s: data.identifier,__checked : true
+                    _revision_i     : 1,
+                    identifier_s    : (data.identifier||data.data.identifier),
+                    __checked       : true
                 })
                 $scope.saveDocuments();
             }
@@ -418,6 +409,47 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                 return identifier;
 			}
 
+
+            $scope.loadEditDirective = function(schema){
+
+                if (!schema)
+                    return;
+
+                var lschema = _.clone(schema);
+                var schemaMapping = {
+                    "modifiedOrganism" 			: 'views/forms/edit/bch/directives/edit-modified-organism.directive',
+                    "dnaSequence" 				: 'views/forms/edit/bch/directives/edit-dna-sequence.directive',
+                    "organism" 					: 'views/forms/edit/bch/directives/edit-organism.directive',
+                    'contact'                   : 'views/forms/edit/directives/edit-contact.directive'
+                }
+                var schemaDetails = schemaMapping[lschema];
+
+                var defer = $q.defer();
+                require([schemaDetails], function () {
+                    var divSelector = ' #divNewRecord'
+                    var name 		= snake_case(lschema);
+                    var directiveHtml =
+                        "<DIRECTIVE on-post-submit='onNewRecordSubmitted(data)' contact-type='organization' allow-new='false' is-dialog='true' container='.ngdialog' link-target={{linkTarget}} locales='locales'></DIRECTIVE>"
+                            .replace(/DIRECTIVE/g, 'edit-' + name)
+                            .replace(/\.ngdialog/, '#'+dialogId);;
+
+                    $scope.$apply(function () {                        
+                        $('#'+dialogId + divSelector).empty()
+                                .append($compile(directiveHtml)($scope));
+                        defer.resolve('')
+                    });
+                });
+
+                return defer.promise
+
+            }
+            function snake_case(name, separator) {
+
+                separator = separator || '-';
+                return name.replace(/[A-Z]/g, function (letter, pos) {
+                    return (pos ? separator : '') + letter.toLowerCase();
+                });
+            }
 		},
 
 	};

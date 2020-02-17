@@ -131,7 +131,7 @@ define([
       if(name=="ebsa" ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:ebsa";   });
 
       return false;
-  };
+    };
 
     //==================================
     //
@@ -168,7 +168,7 @@ define([
       var qJurisdiction = Enumerable.from([document.jurisdiction]);
 
       return qJurisdiction.any(function (o) { return o.identifier == "528B1187-F1BD-4479-9FB3-ADBD9076D361"; });
-  };
+    };
 
     //==================================
     //
@@ -325,12 +325,12 @@ define([
     }
 
     $scope.setDocument = function(additionalParams, excludeGovernment) {
-
+      
       $scope.status = "loading";
 
       var qDocument = {};
       $scope.document = {};
-      if($routeParams.identifier)
+      if(!$scope.isDialog && $routeParams.identifier)
         qDocument = editFormUtility.load($routeParams.identifier, $filter("mapSchema")($scope.type));
       else {
         qDocument = {
@@ -361,7 +361,7 @@ define([
 
         $scope.origanalDocument = angular.copy(doc);
 
-        if($routeParams.tour)
+        if(!$scope.isDialog && $routeParams.tour)
         {
             $scope.startTour=true;
             $location.search("tour", null);
@@ -383,6 +383,11 @@ define([
     $scope.onReviewLanguageChange = function(lang){
       $scope.review.locale = lang;
     }
+
+    $scope.onPostPublishOrRequest = function(documentInfo){
+      if($scope.onPostSubmitFn)
+        $scope.onPostSubmitFn({ data: documentInfo });
+    };
 
     function setMetaTags(){
       ngMeta.resetMeta();   
