@@ -32,9 +32,6 @@
                         }
                         return $scope.leftMenuFilters;
                     }
-                    // $scope.clearLeftMenuFilters = function () {
-                    //     $scope.leftMenuFilters = undefined;
-                    // }
 
                     $scope.showFilterDialog = function (schema, filter, facets) {
                         ngDialog.open({
@@ -133,14 +130,19 @@
 
                         searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters)
                     }
-                    $scope.clearLeftMenuFilters = function (filter) {
-                        if(filter.type!='solrRecords'){
-                            _.each(filter.selectedItems, function(item){
-                                $element.find('#' + item.identifier).tooltip('hide')
-                            })
-                        }                            
-                        filter.selectedItems = {};
+                    $scope.RemoveLeftMenuFilters = function(){
+                        $scope.leftMenuFilters = undefined;
                         searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters)
+                    }
+                    $scope.clearFilterOptions = function (schema, filter) {
+                        if(filter){
+                            clearFilterOptions(filter)
+                        }
+                        else{
+                            var filters = $scope.leftMenuFilters[schema]
+                            _.each(filters, clearFilterOptions);
+                        }
+                        searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters);
                     }
 
                     $scope.onFilterDateChange = function (val) {                        
@@ -168,6 +170,16 @@
                     $scope.hasItems = function(items){
                         return items && _.keys(items).length;
                     }
+
+                    function clearFilterOptions(filter){
+                        if(filter.type!='solrRecords'){
+                            _.each(filter.selectedItems, function(item){
+                                $element.find('#' + item.identifier).tooltip('hide')
+                            })
+                        }                            
+                        filter.selectedItems = {};
+                    }
+
                     //load dependant directive
                     require(['views/forms/edit/document-selector'])
                 }

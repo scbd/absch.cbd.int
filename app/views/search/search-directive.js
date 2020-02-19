@@ -221,7 +221,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         updateQueryString('schema');
                         $scope.setFilters = {};
                         leftMenuFilters = [];
-                        $scope.clearLeftMenuFilters()
+                        $scope.RemoveLeftMenuFilters()
                         updateQueryResult();
                     };
 
