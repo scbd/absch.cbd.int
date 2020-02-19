@@ -37,7 +37,10 @@
             #Search-Filter .bring-to-front{
                 z-index: 1000000;
             }
-            .ngdialog-open #Search-Filter .bring-to-front{
+            #Search-Filter .bring-to-front1{
+                z-index: 10000001;
+            }
+            .ngdialog-open #Search-Filter .bring-to-front, .ngdialog-open #Search-Filter .bring-to-front1{
                 z-index: 10;
             }
 
@@ -56,7 +59,7 @@
             <li class="list-group-item no-left-right-bottom-border" style="background-color: rgb(250, 250, 250); cursor: pointer;padding:0px;padding-top: 10px;"
                 ng-repeat="(schema, filters) in leftMenuFilters" ng-if="filters" >
                     
-                    <div class="dropdown pull-left">
+                    <div class="dropdown pull-left bring-to-front1">
                         <button class="btn btn-xs btn-default dropdown-toggle" type="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="border: none;vertical-align: unset;">
                             <i class="fa fa-cog" aria-hidden="true"></i>
@@ -66,7 +69,7 @@
                                 <i class="fa fa-eye" aria-hidden="true"></i> Temporarily disable</a></li>
                             <li><a href="#" ng-if="filter.disabled" ng-click="filter.disabled=false">
                                 <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a></li>
-                            <li><a href="#">
+                            <li><a href="#" ng-click="clearFilterOptions(schema)">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i> Clear all filters</a></li>
                             <li><a href="#">
                                 <i class="fa fa-trash" aria-hidden="true"></i> Remove</a></li>
@@ -95,7 +98,7 @@
                                     <i class="fa fa-minus-square-o" aria-hidden="true"></i> Exclude results</a></li>
                                 <li><a href="#" ng-if="filter.excludeResult" ng-click="filter.excludeResult=false;recordSelected();">
                                     <i class="fa fa-plus-square-o" aria-hidden="true"></i> Include results</a></li>
-                                <li><a href="#" ng-click="clearLeftMenuFilters(filter);filter.disabled=false;filter.excludeResult=false;">
+                                <li><a href="#" ng-click="clearFilterOptions(schema, filter);filter.disabled=false;filter.excludeResult=false;">
                                     <i class="fa fa-times-circle" aria-hidden="true"></i> Clear filters</a></li>
                             </ul>
                         </div>

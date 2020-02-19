@@ -21,6 +21,9 @@
                 <table class="table table-bordered">
                     <tr ng-repeat="doc in record.docs">
                         <td>
+                            <span ng-bind="doc.title"></span>
+                        </td>
+                        <td>
                             <a target="_blank" ng-href="/database/{{doc.uniqueId|uppercase}}" ng-bind="doc.uniqueId|uppercase" ></a>
                         </td>
                     </tr>
