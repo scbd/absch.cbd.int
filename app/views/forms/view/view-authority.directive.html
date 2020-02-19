@@ -57,22 +57,22 @@
 
 
 		<div ng-show="document.contacts">
-			<legend ng-if="document.contacts">Contact(s)</legend>
+			<legend ng-if="document.contacts">Additional Contact(s)</legend>
 			<view-contact-reference ng-repeat="contact in document.contacts" ng-model="contact" locale="locale" class="km-value"></view-contact-reference>
 		</div>
 
-		<div ng-show="document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef ">
+		<div ng-show="document.policyBasisForCompetency || document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef">
 			<legend>Legislative, administrative or policy basis for the competence of the CNA</legend>
-			<div ng-show="document.absPolicyBasisForCompetency">
+			<div ng-show="document.policyBasisForCompetency || document.absPolicyBasisForCompetency">
 				<!--<label>Information on the legal, administrative or policy basis for the competence of the CNA</label>-->
-				<div class="km-value" ng-bind-html="document.absPolicyBasisForCompetency | lstring:locale">
+				<div class="km-value" ng-bind-html="(document.policyBasisForCompetency || document.absPolicyBasisForCompetency) | lstring:locale">
 				</div>
 			</div>
-			<div ng-if="document.absPolicyBasisForCompetencyRef">
+			<div ng-if="document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef">
 				<label>Links to relevant legislative, administrative or policy measure(s) </label>
 						<div class="km-value">
 							<ul class="list">
-								<li ng-repeat="item in document.absPolicyBasisForCompetencyRef" >
+								<li ng-repeat="item in (document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef)" >
 									<div view-default-reference ng-model="item.identifier" locale="locale"></div>
 								</li>
 							</ul>
@@ -81,14 +81,14 @@
             
 		</div>
 
-		<div ng-if="isABS && (document.responsibilities ||document.absResponsibleForAll || document.absFunctions|| document.absJurisdiction||document.absGeneticResourceTypes)">
+		<div ng-if="isABS && (document.responsibilities ||document.responsibleForAll ||document.absResponsibleForAll || document.absFunctions|| document.absJurisdiction||document.absGeneticResourceTypes)">
 			<legend name="ABSResponsibilities">Summary of ABS Responsibilities </legend>
 
 			<div ng-show="document.responsibilities">
 				<div class="km-value" ng-bind-html="document.responsibilities | lstring:locale"></div>
 			</div>
 
-			<div ng-if="document.absResponsibleForAll">
+			<div ng-if="document.responsibleForAll||document.absResponsibleForAll">
 				<div class="km-value">Responsible for all genetic resources. Only designated competent national authority (CNA) for the country.</div>
 			</div>
 

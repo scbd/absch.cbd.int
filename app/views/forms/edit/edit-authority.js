@@ -86,11 +86,11 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
         $scope.showResponsibleforAllMsg = function() {
 
             //TODO: you need to gain access to the promise in order to do this correctly.a Otherwise the document won't be loaded when angular evaluated the ng-show.
-            if (!$scope.document || (!$scope.document.absResponsibleForAll || !$scope.validationReport))
+            if (!$scope.document || (!$scope.document.responsibleForAll || !$scope.validationReport))
                 return false;
 
             return _.some($scope.validationReport.errors, function(error) {
-                return error.property == 'absResponsibleForAllNot';
+                return error.property == 'responsibleForAllNot';
             });
         };
 
@@ -101,12 +101,22 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
         $scope.getCleanDocument = function(document) {
 
             document = document || $scope.document;
+            ///////for legacy records////////////////
             document.bchFunctions = undefined;
             document.bchOrganismTypes = undefined;
+            ////////////////////////
             if (!document)
                 return undefined;
             
-            if (document.absResponsibleForAll) {
+            //update from legacy fields
+            document.policyBasisForCompetencyRef = document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetencyRef;
+            document.policyBasisForCompetency    = document.policyBasisForCompetency || document.absPolicyBasisForCompetency;
+            document.responsibleForAll           = document.responsibleForAll || document.absResponsibleForAll;
+            //delete obsolete fields
+            document.absPolicyBasisForCompetencyRef = undefined;
+            document.absPolicyBasisForCompetency = undefined;
+
+            if (document.responsibleForAll) {
                 document.responsibilities = undefined;
                 document.absJurisdiction = undefined;
                 document.absJurisdictionName = undefined;
@@ -117,13 +127,15 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
                     document.absJurisdictionName = undefined;
             }
 
+
             if($scope.realm.is('BCH')){
-                document.absResponsibleForAll = undefined;
+
+                if($scope.type != 'SPCA') //Not Suuplementary protocol
+                    document.responsibleForAll = undefined;
+                    
                 document.absJurisdiction = undefined;
                 document.absJurisdictionName = undefined;
                 document.absGeneticResourceTypes = undefined;
-                document.absPolicyBasisForCompetencyRef = undefined;
-                document.absPolicyBasisForCompetency = undefined;
                 if($scope.type == 'SPCA') //Suuplementary protocol
                     document.cpbOrganismTypes = undefined;
             }
@@ -138,7 +150,13 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
             return document;
         };
         //==================================
-        $scope.setDocument({});
+        $scope.setDocument({}).then(function(document){
+            
+            document.policyBasisForCompetencyRef = document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetencyRef;
+            document.policyBasisForCompetency = document.policyBasisForCompetency || document.absPolicyBasisForCompetency;
+            document.absPolicyBasisForCompetencyRef = undefined;
+            document.absPolicyBasisForCompetency = undefined;
+        });
 
         //==================================
         $scope.showJurisdictionName = function() {
