@@ -648,7 +648,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                     var absHosts = ['https://absch.cbddev.xyz/', 'https://training-absch.cbd.int/',
                        'http://localhost:2010/', 'https://absch.cbd.int/', 'https://absch.cbddev.xyz/',
-                       'https://bch-demo.cbd.int'
+                       'https://bch-demo.cbd.int', 'https://bch.cbddev.xyz/'
                    ]
                    $timeout(function() {
                        if($route.current.params.workflow){
