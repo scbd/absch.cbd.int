@@ -241,7 +241,7 @@
                                                     <div class="km-control-group" name="entityWhoGrantedPIC" caption="Person or entity who granted prior informed consent (PIC)">
                                                         <div document-selector ng-model="document.entityWhoGrantedPIC" type="radio" skip-government="true" list-view="true"
                                                             question="entityWhoGrantedPIC" schema="(contact authority)" government="document.government"
-                                                            filter="true"></div>
+                                                            filter="true" allow-new="true" allow-new-schema="contact"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -252,7 +252,7 @@
                                                             entity to whom prior informed consent was granted.</span>
                                                         <div document-selector ng-model="document.entityToWhomPICGranted" type="radio" skip-government="true" list-view="true"
                                                             question="entityToWhomPICGranted" schema="(contact authority)"
-                                                            government="document.government" filter="true"></div>
+                                                            government="document.government" filter="true" allow-new="true" allow-new-schema="contact"></div>
             
                                                     </div>
                                                 </div>
@@ -306,7 +306,7 @@
                                                         checkpoint. In case of discrepancy, providers can verify information and
                                                         conditions related to third party transfer.</div>
                                                     <div document-selector ng-model="document.personsAtCheckpoint" question="personsAtCheckpoint"
-                                                        schema="(contact authority)" government="document.government" filter="true"></div>
+                                                        schema="(contact authority)" government="document.government" filter="true" allow-new="true" allow-new-schema="contact"></div>
                                                 </div>
                                             </div>
                                         </div>
