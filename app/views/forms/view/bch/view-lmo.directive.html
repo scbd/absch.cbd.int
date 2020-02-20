@@ -152,7 +152,8 @@
 					<ul>
 						<li ng-repeat="item in document.detectionMethodLinks">
 							<a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+							<i ng-show="item.language">({{item.language|uppercase}})</i>
+							<!-- <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i> -->
 						</li>
 					</ul>
 				</div>

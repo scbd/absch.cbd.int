@@ -67,7 +67,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             currentPage     : 1,
                             rowsPerPage     : 25,
                             groupByFields   : ['government', 'schema'],
-                            sortFields      : [],
                             viewType        : 'default',
     
                             skipResults       : $attrs.skipResults,

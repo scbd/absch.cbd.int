@@ -54,6 +54,9 @@
                             $scope.selectField = function(field,direction){  
                                 if(!direction)                              
                                     field.selected=!field.selected;
+                                
+                                if(!$scope.selectedFields)
+                                    $scope.selectedFields = [];
 
                                 if(field.field == 'relevance'){
                                     $scope.selectedFields = [];
