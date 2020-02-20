@@ -96,15 +96,15 @@
 									<legend>Characteristics of the protein coding sequence</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="proteinName" caption="Name of the protein expressed by the coding sequence">
-												<div km-textbox-ml name="proteinName" required ng-model="document.proteinName" locales="document.header.languages"></div>
+											<div class="km-control-group" name="proteinName" caption="Name of the protein expressed by the coding sequence">
+												<div km-textbox-ml name="proteinName" ng-model="document.proteinName" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="biologicalFunction" caption="Biological function of the protein">
-												<div km-textbox-ml name="biologicalFunction" rows="3" required ng-model="document.biologicalFunction" locales="document.header.languages"></div>
+											<div class="km-control-group" name="biologicalFunction" caption="Biological function of the protein">
+												<div km-textbox-ml name="biologicalFunction" rows="3" ng-model="document.biologicalFunction" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
@@ -153,8 +153,7 @@
 									<div class="col-sm-12">
 										<div class="km-control-group" name="notes">
 											<div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.
-												viewing the record. This field
-												is not meant to be used for confidential information.</div>
+												viewing the record.</div>
 											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
 									</div>

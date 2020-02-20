@@ -68,8 +68,8 @@
 		{
 			"type": "solr",
 			"query": {
-				"fl": "identifier:identifier_s,title:name_s",
-				"q": "schema_s:dnaSequence AND name_s:*",
+				"fl": "identifier:identifier_s,title:nametitle_EN_t_s",
+				"q": "schema_s:dnaSequence AND title_EN_t:*",
 				"s": "name_s asc"
 			},
 			"title": "Gene name",
@@ -88,7 +88,7 @@
 				"q": "schema_s:organism AND commonNames_EN_txt:*"
 			},
 			"title": "Parental organism (common name)",
-			"field": "geneDononOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismIdentifiers_ss"
 		},
 		{
 			"type": "solr",
@@ -98,7 +98,7 @@
 				"s": "scientificName_s asc"
 			},
 			"title": "Parental organism (scientific name)",
-			"field": "geneDononOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismIdentifiers_ss"
 		}
 	],
 	"biosafetyLaw": [
@@ -152,8 +152,8 @@
 		{
 			"type": "solr",
 			"query": {
-				"fl": "identifier:identifier_s,title:name_s",
-				"q": "schema_s:dnaSequence AND name_s:*",
+				"fl": "identifier:identifier_s,title:title_EN_t",
+				"q": "schema_s:dnaSequence AND title_EN_t:*",
 				"s": "name_s asc"
 			},
 			"title": "Gene name",
@@ -243,8 +243,8 @@
 		{
 			"type": "solr",
 			"query": {
-				"fl": "identifier:identifier_s,title:name_s",
-				"q": "schema_s:dnaSequence AND name_s:*",
+				"fl": "identifier:identifier_s,title:title_EN_t",
+				"q": "schema_s:dnaSequence AND title_EN_t:*",
 				"s": "name_s asc"
 			},
 			"title": "Gene name",
@@ -263,7 +263,7 @@
 				"q": "schema_s:organism AND commonNames_EN_txt:*"
 			},
 			"title": "Parental organism (common name)",
-			"field": "geneDononOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismIdentifiers_ss"
 		},
 		{
 			"type": "solr",
@@ -273,7 +273,7 @@
 				"s": "scientificName_s asc"
 			},
 			"title": "Parental organism (scientific name)",
-			"field": "geneDononOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismIdentifiers_ss"
 		},
 		{
 			"type": "date",
@@ -291,7 +291,7 @@
 			"type": "thesaurus",
 			"term": "OrganismCommonUses",
 			"title": "Common use(s)",
-			"field": "commonUses_ss"
+			"field": "commonUses_sss"
 		},
 		{
 			"type": "thesaurus",
@@ -318,8 +318,8 @@
 		{
 			"type": "solr",
 			"query": {
-				"fl": "identifier:identifier_s,title:name_s",
-				"q": "schema_s:dnaSequence AND name_s:*",
+				"fl": "identifier:identifier_s,title:title_EN_t",
+				"q": "schema_s:dnaSequence AND title_EN_t:*",
 				"s": "name_s asc"
 			},
 			"title": "Gene name",
@@ -351,7 +351,7 @@
 				"q": "schema_s:organism AND commonNames_EN_txt:*"
 			},
 			"title": "Donor organism common name",
-			"field": "geneDonorIdentifiers_ss"
+			"field": "geneDonorOrganismIdentifiers_ss"
 		},
 		{
 			"type": "solr",
@@ -361,7 +361,7 @@
 				"s": "scientificName_s asc"
 			},
 			"title": "Donor organism scientific name",
-			"field": "geneDonorIdentifiers_ss"
+			"field": "geneDonorOrganismIdentifiers_ss"
 		}
 	],
 	"nationalRiskAssessment": [
@@ -396,8 +396,8 @@
 		{
 			"type": "solr",
 			"query": {
-				"fl": "identifier:identifier_s,title:name_s",
-				"q": "schema_s:dnaSequence AND name_s:*",
+				"fl": "identifier:identifier_s,title:title_EN_t",
+				"q": "schema_s:dnaSequence AND title_EN_t:*",
 				"s": "name_s asc"
 			},
 			"title": "Gene name",
@@ -416,7 +416,7 @@
 				"q": "schema_s:organism AND commonNames_EN_txt:*"
 			},
 			"title": "Parental organism (common name)",
-			"field": "geneDononOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismIdentifiers_ss"
 		},
 		{
 			"type": "solr",
@@ -426,7 +426,7 @@
 				"s": "scientificName_s asc"
 			},
 			"title": "Parental organism (scientific name)",
-			"field": "geneDononOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismIdentifiers_ss"
 		},
 		{
 			"type": "date",
@@ -458,7 +458,7 @@
 			"type": "thesaurus",
 			"term": "OrganismCommonUses",
 			"title": "Common use(s)",
-			"field": "commonUses_s",
+			"field": "commonUses_ss",
 			"relatedField":"commonUses_REL_ss"
 		}
 	],

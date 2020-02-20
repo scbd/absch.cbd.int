@@ -104,7 +104,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 			};
 
             $scope.clearSelectedDocuments = function(){
-                _.forEach($scope.rawDocuments.docs,function(docs){
+                _.forEach($scope.rawDocuments.docs,function(doc){
                     doc.__checked = false;
                 });
             }
