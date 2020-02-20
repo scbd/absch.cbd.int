@@ -142,7 +142,7 @@
         
         <div class="row">
             <div class="col-md-9" >
-                    <div class="zoom" ng-if="isBCH">
+                    <!-- <div class="zoom" ng-if="isBCH">
                         <div style="border-bottom:1px solid #eee">Filters</div>
                         <div class="col-md-12">
                             <label class="checkbox-inline"><input ng-model="options.showLmos" type="checkbox" value="" ng-change="showLmos_changed()">Show LMO's</label>
@@ -151,7 +151,7 @@
                             <select ng-model="options.lmo" class="form-control" ng-options="lmo.identifier as lmo.title for lmo in lmos" ng-change="lmo_changed()">
                             </select>
                         </div>
-                    </div>
+                    </div> -->
                 <div id="chartdiv" style="height:350px;" ng-style="{'height': isBCH ? '450px' : '350px'}"></div>
             </div>
             
