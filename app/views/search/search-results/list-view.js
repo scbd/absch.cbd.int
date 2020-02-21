@@ -39,6 +39,8 @@
                         facetFields    : queryOptions.facetFields,
                         pivotFacetFields : queryOptions.pivotFacetFields
                     }
+                    // if(lQuery=='*:*' || lQuery) TODO: add this fields only when req
+                        lQuery.additionalFields = 'diseasesResistance_b,herbicidesResistance_b,physiologyChanges_b,qualityChanges_b,medicalProduction_b,traitsOther_b'
                     //'schema_s', 'government_s', 
                     if(sort && sort != 'relevance asc')
                         lQuery.sort    = $scope.searchResult.sort = sort;

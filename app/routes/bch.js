@@ -29,7 +29,9 @@ define(['app', './common-routes', 'angular-route'], function (app,commonRoutes) 
                whenAsync('/register/BIRC/:identifier/edit',     {templateUrl: 'views/forms/edit/edit-resource.html',        label:'Edit',  param:'true', resolveController: true, documentType :'BIRC',  resolve : { securized : commonRoutes.securize(null, null, true) }, }).
                whenAsync('/register/NR4/:identifier/edit',      {templateUrl: 'views/forms/edit/bch/edit-national-report-4.html',label:'Edit',  param:'true', resolveController: true, documentType :'NR4',   resolve : { securized : commonRoutes.securize(null, null, true) }, }).
                whenAsync('/register/SPCA/:identifier/edit',     {templateUrl: 'views/forms/edit/edit-authority.html',            label:'Edit',  param:'true', resolveController: true,documentType :'SPCA',    resolve : { securized : commonRoutes.securize(null,true, true) }, }).
- 
+
+               whenAsync('/reports/lmo-decisions/:documentId',  { templateUrl: 'views/reports/lmos/lmo-decisions.html',  label:'Edit',  param:'true', resolveController: true,    resolve : {  },  }).
+
                // BCH4 PAGES
                whenAsync('/about/countryprofile.shtml',      { redirectTo:  '/countries/:country' }).
                whenAsync('/countries/:country',              { templateUrl: 'views/shared/cms-content.html', target:'https://bch.cbd.int/about/countryprofile.shtml?country=:country', controller: function() { return commonRoutes.importQ('views/shared/cms-content'); } }).
