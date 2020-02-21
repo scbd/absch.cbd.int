@@ -5,8 +5,12 @@
 		</h4>
 	</div>
 	<div class="record-body panel-body">
-
-		<document-date></document-date>
+		<div class="pull-right">
+			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo-decisions/{{document.info.documentID}}" class="btn btn-primary btn-xs">View Decisions on LMO</a>
+			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo-decisions/{{document.info.documentID}}" class="btn btn-primary btn-xs">View releated Risk Assessments </a>
+			<document-date></document-date>
+		</div>
+		
 		<legend>Living Modified Organism identity</legend>
 		<div ng-show="document.info.documentID" style="text-align: center">
 			<div class="help-info">
