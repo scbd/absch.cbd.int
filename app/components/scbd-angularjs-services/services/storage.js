@@ -76,7 +76,11 @@
                 params.identifier = identifier;
 
                 var useCache = !!params.cache;
-
+                if(!useCache){//special logic for records with revision @[0-9]{1,3} cache them as there will be no change
+                    var revisionRegex =  /@([0-9]{1,3})/;
+                    if(revisionRegex.test(identifier))
+                        useCache = true;
+                }
                 var oTrans = transformPath(serviceUrls.documentUrl(), params);
 
                 return $http.get(oTrans.url, getConfig(config, oTrans.params, useCache));
