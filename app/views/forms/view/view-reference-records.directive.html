@@ -1,7 +1,7 @@
 ﻿<div ng-show="referenceRecords">
     <legend>
         Reference records
-        <a target="_blank" ng-href="/search?raw-query=referenceRecord_ss:{{model}}" class="pull-right btn btn-primary btn-xs">Show in search</a>
+        <a target="_blank" ng-href="/search?raw-query={{ encode('referenceRecord_ss:' + model) }}" class="pull-right btn btn-primary btn-xs">Show in search</a>
     </legend>
     <table class="table table-bordered">
         <tr>

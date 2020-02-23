@@ -1,0 +1,50 @@
+<div ng-controller="RiskAssessmentReportController">
+	
+	<div class="register-content card card-1-notrans bg-white">
+
+		<div class="register-content-header bg-darkgrey color-white">
+			<div style="padding:10px 10px;">
+				<h3>LMO Risk Assessments</h3>
+			</div>
+		</div>
+        <div class="register-content-content " style="margin: 10px;">
+            <div style="border: 1px solid #eee;padding: 15px;">
+                <strong>Search LMO</strong>
+                <angucomplete-alt id="lmos" placeholder="Search LMOs" pause="400" selected-object="newLmo" remote-api-handler="loadLMos" 
+                    data-field="suggestions" title-field="title" description-field="summary" 
+                    input-class="form-control form-control-small"></angucomplete-alt>
+            </div>
+            <br/>
+            <div  block-region activate="loading">
+                <div style="border: 1px solid #eee;padding: 15px;">
+                        <view-lmo-reference ng-model="identifier" taret="_blank"></view-lmo-reference>
+                </div>
+                <table  class="table table-bordered" cellpadding="0" cellspacing="0" id="E8509" style="border-top: solid 1px #888; width: 100%;">
+                    <tr>
+                        <th class="tableHeaderTop tableHeaderBottom back80 countryName">Id</th>
+                        <th class="tableHeaderTop tableHeaderBottom">Description</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                    <tr ng-repeat="doc in riskAssessments.docs">
+                        <td style="width:5%" class="tableRow back80 countryName">
+                            <a ng-href="{{doc.url_ss[0]}}" target="_self">{{doc.id}}</a>
+                        </td>
+                        <td style="width:60%">
+                            <div>
+                                <strong ng-bind="doc.government_EN_t"></strong>
+                            </div>
+                            {{doc.rec_title}}
+                        </td>
+                        <td style="width:20%">{{doc.lmoTransformationEvents_ss.join(' ')}}</td>
+                        <td>
+                            <div ng-include="'app/views/forms/view/bch/icons.html'"></div>
+                        </td>				
+                    </tr>
+                </table>
+                <br/><br/>
+            </div>
+		</div>
+	</div>
+</div>

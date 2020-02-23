@@ -7,7 +7,7 @@
 	<div class="record-body panel-body">
 		<div class="pull-right">
 			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo-decisions/{{document.info.documentID}}" class="btn btn-primary btn-xs">View Decisions on LMO</a>
-			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo-decisions/{{document.info.documentID}}" class="btn btn-primary btn-xs">View releated Risk Assessments </a>
+			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo-risk-assessments/{{document.info.identifier}}" class="btn btn-primary btn-xs">View releated Risk Assessments </a>
 			<document-date></document-date>
 		</div>
 		
@@ -119,7 +119,7 @@
 
 		<legend>LMO characteristics</legend>		
 		<div ng-show="document.traits">
-			<label>Modified traits</label>
+			<label>Related trait(s) or use(s) in biotechnology</label>
 			<div class="km-value">
 				<ul>
 					<li ng-repeat="trait in document.traits" ng-bind="trait | term:locale"></li>

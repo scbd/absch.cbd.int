@@ -2055,3 +2055,13 @@ a.disabled{
 .search-filters #divTable ul.horizontal-list li{
     list-style-type: none;
 }
+
+.angucomplete-dropdown{
+    width: 100%!important;
+}
+.angucomplete-description {
+    font-size: 10px!important;
+}
+.angucomplete-row {
+    border-bottom: 1px solid #eee;
+}
