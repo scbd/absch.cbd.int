@@ -1,5 +1,6 @@
 ﻿define(['app', 'text!views/search/search-results/list-view.html','lodash',
 'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status',
+'views/search/search-results/result-default'
 ], function(app, template, _) {
 
     app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$location', function(searchService, realm, $timeout, $location) {
@@ -40,8 +41,9 @@
                         pivotFacetFields : queryOptions.pivotFacetFields
                     }
                     // if(lQuery=='*:*' || lQuery) TODO: add this fields only when req
-                        lQuery.additionalFields = 'diseasesResistance_b,herbicidesResistance_b,physiologyChanges_b,qualityChanges_b,medicalProduction_b,traitsOther_b'
-                    //'schema_s', 'government_s', 
+                        lQuery.additionalFields  = 'diseasesResistance_b,herbicidesResistance_b,physiologyChanges_b,qualityChanges_b,medicalProduction_b,traitsOther_b'
+                        lQuery.additionalFields += ',scopeRelease_b,scopeFood_b,scopeFeed_b,scopeProcessing_b,scopeConfined_b'
+                        //'schema_s', 'government_s', 
                     if(sort && sort != 'relevance asc')
                         lQuery.sort    = $scope.searchResult.sort = sort;
 
