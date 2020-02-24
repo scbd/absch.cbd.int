@@ -121,9 +121,7 @@
 		<div ng-show="document.traits">
 			<label>Related trait(s) or use(s) in biotechnology</label>
 			<div class="km-value">
-				<ul>
-					<li ng-repeat="trait in document.traits" ng-bind="trait | term:locale"></li>
-				</ul>
+				<view-terms-hierarchy ng-model="document.traits" locale="locale" term-domain="dnaSequenceTraits"></view-terms-hierarchy>
 			</div>
 		</div>
 		<div ng-show="document.affectedGenes">
