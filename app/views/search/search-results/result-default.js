@@ -22,6 +22,9 @@ define(['app', 'text!views/search/search-results/result-default.html','lodash', 
                     } 
                 });
 
+                $scope.canShowIcons = function(schema){
+                    return _.includes(['modifiedOrganism', 'nationalRiskAssessment', 'independentRiskAssessment'], schema);
+                }
 
                 
             },

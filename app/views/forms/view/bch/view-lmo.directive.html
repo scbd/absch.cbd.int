@@ -5,15 +5,19 @@
 		</h4>
 	</div>
 	<div class="record-body panel-body">
-
-		<document-date></document-date>
+		<div class="pull-right">
+			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo-decisions/{{document.info.documentID}}" class="btn btn-primary btn-xs">View Decisions on LMO</a>
+			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo-risk-assessments/{{document.info.identifier}}" class="btn btn-primary btn-xs">View releated Risk Assessments </a>
+			<document-date></document-date>
+		</div>
+		
 		<legend>Living Modified Organism identity</legend>
 		<div ng-show="document.info.documentID" style="text-align: center">
 			<div class="help-info">
 					The image below identifies the LMO through its unique identifier, trade name and a link to this page of the BCH. Click on it to download a larger image on your computer. For help on how to use it go to the LMO quick-links page. 
 			</div>		
-			<a ng-href="https://bch.cbd.int/Bch.Images.DynamicImages.LmoQuickLink.dyn.png?documentid={{document.info.documentID}}&amp;download">
-				<img width="100%" style="max-width:1100px;"class="responsive" border="none" ng-src="https://bch.cbd.int/Bch.Images.DynamicImages.LmoQuickLink.dyn.png?documentid={{document.info.documentID}}">
+			<a ng-href="/api/v2020/bch/lmo-qrcode/{{document.header.identifier}}?download=true">
+				<img width="100%" style="max-width:1100px;"class="responsive" border="none" ng-src="/api/v2020/bch/lmo-qrcode/{{document.header.identifier}}">
 			</a>
 		</div>
 		<div ng-show="document.identity">
@@ -115,11 +119,9 @@
 
 		<legend>LMO characteristics</legend>		
 		<div ng-show="document.traits">
-			<label>Modified traits</label>
+			<label>Related trait(s) or use(s) in biotechnology</label>
 			<div class="km-value">
-				<ul>
-					<li ng-repeat="trait in document.traits" ng-bind="trait | term:locale"></li>
-				</ul>
+				<view-terms-hierarchy ng-model="document.traits" locale="locale" term-domain="dnaSequenceTraits"></view-terms-hierarchy>
 			</div>
 		</div>
 		<div ng-show="document.affectedGenes">

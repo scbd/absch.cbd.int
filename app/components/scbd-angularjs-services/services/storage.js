@@ -1,7 +1,7 @@
-﻿define(['app', 'lodash'], function(app, _) {
+﻿define(['app', 'lodash','services/cache-service'], function(app, _) {
     'use strict';
 
-    app.factory("IStorage", ["$http", "$q", "authentication", "realm", function($http, $q, authentication, defaultRealm) {
+    app.factory("IStorage", ["$http", "$q", "authentication", "realm", 'cacheService', function($http, $q, authentication, defaultRealm, cacheService) {
         //		return new function()
         //		{
         var serviceUrls = { // Add Https if not .local
@@ -41,6 +41,8 @@
             },
         };
 
+        var storageDocumentCacheFactory = cacheService.getCacheFactory({name:'storageDocument', storageMode:'localStorage', maxAge:30*60*1000})//1/2 hr cache for terms
+
         //==================================================
         //
         // Documents
@@ -76,7 +78,14 @@
                 params.identifier = identifier;
 
                 var useCache = !!params.cache;
-
+                if(!useCache){//special logic for records with revision @[0-9]{1,3} cache them as there will be no change
+                    var revisionRegex =  /@([0-9]{1,3})/;
+                    if(revisionRegex.test(identifier))
+                        useCache = true;
+                }
+                if(useCache)
+                    useCache = storageDocumentCacheFactory;
+                    
                 var oTrans = transformPath(serviceUrls.documentUrl(), params);
 
                 return $http.get(oTrans.url, getConfig(config, oTrans.params, useCache));

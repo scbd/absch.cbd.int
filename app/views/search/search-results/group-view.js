@@ -1,5 +1,6 @@
 ﻿define(['app', 'text!views/search/search-results/group-view.html','lodash',
 'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status',
+'views/search/search-results/result-default'
 ], function(app, template, _) {
 
     app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$location', '$q', function(searchService, realm, $timeout, $location, $q) {

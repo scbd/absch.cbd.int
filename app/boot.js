@@ -49,13 +49,15 @@ require.config({
         'trix'                      : cdnHost + 'trix@0.12.0/dist/trix',
         'angular-loggly-logger'     : cdnHost + '@scbd/angular-loggly-logger@0.3.2/angular-loggly-logger.min',
         'drag-and-drop'             : cdnHost + 'angular-drag-and-drop-lists@2.1.0/angular-drag-and-drop-lists.min',
+        'angucomplete-alt'          : cdnHost + 'angucomplete-alt@3.0.0/angucomplete-alt',
+        'angular-cache'             : cdnHost + 'angular-cache@4.6.0/dist/angular-cache.min',
 
         'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min',
         'cbd-forums'                :           'libs/cbd-forums/cbd-forums',
         'shim'                      :           'libs/require-shim/src/shim',
         'angular-localizer'         :           'libs/angular-localizer/localizer',
         'view-abs-checkpoint'       :           'views/forms/view/abs/view-abs-checkpoint.directive', 
-        'angular-flex'              :           'libs/angular-flex/angular-flex', 
+        'angular-flex'              :           'libs/angular-flex/angular-flex'            
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -90,7 +92,9 @@ require.config({
         'angular-trix'                  : { 'deps': ['angular', 'trix', 'css!'+cdnHost+'trix@0.12.0/dist/trix.css']},
         'trix'                          : { 'deps': ['angular']},
         'diacritics'                    : { 'deps': ['angular']},
-        'drag-and-drop'                 : { 'deps': ['angular']}
+        'drag-and-drop'                 : { 'deps': ['angular']},
+        'angucomplete-alt'              : { 'deps': ['angular', 'css!'+cdnHost+'angucomplete-alt@3.0.0/angucomplete-alt.css']},
+        'angular-cache'                 : { 'deps' : ['angular'] }
     },
     urlArgs: function(id, url){
         

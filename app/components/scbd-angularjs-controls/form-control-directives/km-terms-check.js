@@ -201,26 +201,28 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
 
                     _.each(terms, function(identifier){
                             var term = _.find($scope.terms, {identifier:identifier});
-                            if(!$scope.selectedItems[identifier])
-                                $scope.selectedItems[identifier] = {};
-                            
-                            var mySelectedChildren =_.filter(term.narrowerTerms, function(identifier){ 
-                                return ($scope.selectedItems[identifier]||{}).selected
-                            });
-                            if(allChildSelected){
-                                if(mySelectedChildren.length == term.narrowerTerms.length){
-                                    $scope.selectedItems[identifier].selected = true;
-                                    $element.find('#chk_'+identifier).prop('indeterminate', false)
+                            if(term){
+                                if(!$scope.selectedItems[identifier])
+                                    $scope.selectedItems[identifier] = {};
+                                
+                                var mySelectedChildren =_.filter(term.narrowerTerms, function(identifier){ 
+                                    return ($scope.selectedItems[identifier]||{}).selected
+                                });
+                                if(allChildSelected){
+                                    if(mySelectedChildren.length == term.narrowerTerms.length){
+                                        $scope.selectedItems[identifier].selected = true;
+                                        $element.find('#chk_'+identifier).prop('indeterminate', false)
+                                    }
                                 }
-                            }
-                            else{ 
-                                $scope.selectedItems[identifier].selected = selected;
-                                if($scope.selectedItems[identifier].selected)
-                                    $element.find('#chk_'+identifier).prop('indeterminate', false)
-                            }
+                                else{ 
+                                    $scope.selectedItems[identifier].selected = selected;
+                                    if($scope.selectedItems[identifier].selected)
+                                        $element.find('#chk_'+identifier).prop('indeterminate', false)
+                                }
 
-                            if(term && term[type])//narrowerTerms||broaderTerms
-                                selectChildTerms(term[type], selected, type, allChildSelected);
+                                if(term && term[type])//narrowerTerms||broaderTerms
+                                    selectChildTerms(term[type], selected, type, allChildSelected);
+                            }
                     })
                 }
                 function setIndeterminanteParents(terms, val){

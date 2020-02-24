@@ -96,6 +96,7 @@
 
 					$scope.$watch("document", function (_new) {
 						$scope.error = null;
+						if(!_new)return;// due to cache loaddocument calls first before the first watch on documents gets called.
 						$scope.internalDocument = _new;
 						if ($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)) {
 							loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
@@ -133,27 +134,14 @@
 							var documentID = $route.current.params.documentNumber;
 
 						if (documentID && (/^bch/i.test(documentID) || /^abs/i.test(documentID))) {
+							documentID = documentID.replace(/-(dev|trg)/i, '');
 							var docNum = documentID.split('-');
 							if (docNum.length == 5) {
-								documentID = documentID.toLowerCase();//.replace('absch','ABSCH');
-								$scope.documentUID = documentID.toUpperCase();
-								var schemaFolder = $filter("mapSchema")(docNum[1]);
-								$scope.documentUrl = "https://s3.amazonaws.com/absch.documents." + realm.value.toLowerCase() + "/" + schemaFolder + '/' + documentID + '-en.pdf?id=' + new Date();
-
-								$httpAWS.head($scope.documentUrl, { cache: false }).then(function (success) {
-									$scope.documentSuccess = true;
-									window.location.href = $scope.documentUrl;
-									closeWindow();
-								},
-									function (error) {
-										$scope.documentError = true;
-										console.log(error);
-									});
-
-								return;
+								documentID 		 = docNum[3];
+								documentRevision = docNum[4];
 							}
-							if (docNum.length <= 4)
-								documentID = docNum[docNum.length - 1];
+							else if (docNum.length == 4)
+								documentID = docNum[3];
 
 						}
 						documentID = commonjs.integerToHex(documentID, documentSchema);

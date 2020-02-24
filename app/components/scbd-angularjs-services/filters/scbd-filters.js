@@ -1,7 +1,6 @@
-define(['app', 'lodash', 'moment', 'json!./schema-name.json', 'components/scbd-angularjs-services/services/locale'], 
+define(['app', 'lodash', 'moment', 'json!./schema-name.json', 'components/scbd-angularjs-services/services/locale','services/cache-service'], 
 function (app, _, moment, scbdSchemaDetails, schemaShortName) {
-
-
+    
   app.directive("translationUrl", ['$browser', function($browser){
     return {
       restrict : 'A',
@@ -226,8 +225,9 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
   //
   //
   //============================================================
-  app.filter("term", ["$http", '$filter', 'locale', function ($http, $filter, websiteLocale) {
+  app.filter("term", ["$http", '$filter', 'locale', 'cacheService', function ($http, $filter, websiteLocale, cacheService) {
     var cacheMap = {};
+    var termsCacheFactory = cacheService.getCacheFactory({name:'terms', storageMode:'localStorage', maxAge:24*60*60*1000})//one day cache for terms
 
     return function (term, locale) {
 
@@ -248,7 +248,7 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
           (term.customValue ? (' ('+$filter("lstring")(term.customValue, locale) + ')') : '');
 
       cacheMap[term.identifier] = $http.get("/api/v2013/thesaurus/terms?termCode=" + encodeURIComponent(term.identifier), {
-        cache: true
+        cache: termsCacheFactory
       }).then(function (result) {
 
         cacheMap[term.identifier] = result.data;

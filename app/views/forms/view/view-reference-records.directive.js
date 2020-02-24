@@ -49,6 +49,10 @@ app.directive("viewReferencedRecords", [function () {
 		        }
 			});
 			
+			$scope.encode = function(query){
+				return encodeURIComponent(query);
+			}
+
 			function removeRevisonNumber(identifier){
 				return identifier.replace(/@[0-9]+$/, '');
 			}

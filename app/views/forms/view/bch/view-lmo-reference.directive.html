@@ -3,7 +3,7 @@
     <span ng-if="errorCode==404" class="label label-warning">Reference record not found ({{model}})</span>
 	<div ng-if="!errorCode">					
         <div class="selected-reference-uid">
-            <a translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_new">
+            <a translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="{{target||'_blank'}}">
                 <i class="fa fa-external-link-square" aria-hidden="true"></i> {{document | uniqueID}}
             </a>
         </div>
