@@ -50,8 +50,7 @@
             </div>
             <div class="search-result-body" ng-if="!group.isClosed && group.docs">
                 <div ng-repeat="doc in group.docs">
-                    <div ng-include="'/app/views/search/search-results/record-view.html'"></div>   
-                          
+                    <result-default doc="doc" type="{{::searchResult.schemas[doc.schema_s].type}}"></result-default>                             
                 </div>
                 <div class="btn-group" ng-if="group.numFound >  group.docs.length">
                     <button class="btn btn-default bold" style="font-size: 10px;text-transform: uppercase;"  ng-click="loadRecords(group,10)" ng-disabled="group.isLoading">

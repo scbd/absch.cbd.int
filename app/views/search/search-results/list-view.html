@@ -8,7 +8,7 @@
             <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
         </div>
         <div ng-repeat="doc in searchResult.docs">
-            <div ng-include="'/app/views/search/search-results/record-view.html'"></div> 
+            <result-default doc="doc" type="{{::searchResult.schemas[doc.schema_s].type}}"></result-default>  
         </div>
         <h4 class="bg-white" ng-if="!loading && searchResult.docs.length === 0">no records found</h4>
 

@@ -58,7 +58,8 @@ app.controller("LmoDesicionsReportController", ['$scope', '$http', '$route', '$c
 			var query = {
 				fieldQuery: ['schema_s:modifiedOrganism'],
 				query : userInputString,
-				fields: 'id,title:title_EN_t,summary:summary_EN_t'
+				fields: 'id,title:title_EN_t,summary:summary_EN_t',
+				sort  : 'government_EN_t asc'
 			}
 		    return searchService.list(query).then(function(r) {
 				return {data : r.data.response.docs};

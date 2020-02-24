@@ -7,8 +7,9 @@ app.controller("RiskAssessmentReportController", ['$scope', '$http', '$route', '
 
 		function loadLMORiskAssessments(documentId){
 			var query = {
-				query : 'schema_s:biosafetyDecision AND referenceRecord_ss:' + documentId,
-				additionalFields : 'lmoTransformationEvents_ss,scopeRelease_b,scopeConfined_b,scopeFood_b,scopeFeed_b,scopeProcessing _b'
+				query : 'schema_s:nationalRiskAssessment AND referenceRecord_ss:' + documentId,
+				additionalFields : 'lmoTransformationEvents_ss,scopeRelease_b,scopeConfined_b,scopeFood_b,scopeFeed_b,scopeProcessing _b',
+				sort: 'government_EN_t asc'
 			}
 			//  AND scopes_ss:*
 			$scope.identifier = documentId
