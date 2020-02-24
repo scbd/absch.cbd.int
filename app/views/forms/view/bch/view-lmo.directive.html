@@ -16,8 +16,8 @@
 			<div class="help-info">
 					The image below identifies the LMO through its unique identifier, trade name and a link to this page of the BCH. Click on it to download a larger image on your computer. For help on how to use it go to the LMO quick-links page. 
 			</div>		
-			<a ng-href="https://bch.cbd.int/Bch.Images.DynamicImages.LmoQuickLink.dyn.png?documentid={{document.info.documentID}}&amp;download">
-				<img width="100%" style="max-width:1100px;"class="responsive" border="none" ng-src="https://bch.cbd.int/Bch.Images.DynamicImages.LmoQuickLink.dyn.png?documentid={{document.info.documentID}}">
+			<a ng-href="/api/v2020/bch/lmo-qrcode/{{document.header.identifier}}?download=true">
+				<img width="100%" style="max-width:1100px;"class="responsive" border="none" ng-src="/api/v2020/bch/lmo-qrcode/{{document.header.identifier}}">
 			</a>
 		</div>
 		<div ng-show="document.identity">
