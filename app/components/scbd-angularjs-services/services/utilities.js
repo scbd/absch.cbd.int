@@ -13,7 +13,8 @@ define(['app', 'lodash', 'linqjs'], function(app, _, Enumerable) {
                         title: value.title,
                         description: value.description,
                         type:value.type,
-                        multiple:value.multiple
+                        multiple:value.multiple,
+                        originalObject:value
                     }
 
                     oTerms.push(oTerm);
