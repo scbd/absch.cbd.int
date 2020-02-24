@@ -1,7 +1,7 @@
-﻿define(['app', 'lodash'], function(app, _) {
+﻿define(['app', 'lodash','services/cache-service'], function(app, _) {
     'use strict';
 
-    app.factory("IStorage", ["$http", "$q", "authentication", "realm", function($http, $q, authentication, defaultRealm) {
+    app.factory("IStorage", ["$http", "$q", "authentication", "realm", 'cacheService', function($http, $q, authentication, defaultRealm, cacheService) {
         //		return new function()
         //		{
         var serviceUrls = { // Add Https if not .local
@@ -40,6 +40,8 @@
                 return "/api/v2013/documents/query/facets";
             },
         };
+
+        var storageDocumentCacheFactory = cacheService.getCacheFactory({name:'storageDocument', storageMode:'localStorage', maxAge:30*60*1000})//1/2 hr cache for terms
 
         //==================================================
         //
@@ -81,6 +83,9 @@
                     if(revisionRegex.test(identifier))
                         useCache = true;
                 }
+                if(useCache)
+                    useCache = storageDocumentCacheFactory;
+                    
                 var oTrans = transformPath(serviceUrls.documentUrl(), params);
 
                 return $http.get(oTrans.url, getConfig(config, oTrans.params, useCache));
