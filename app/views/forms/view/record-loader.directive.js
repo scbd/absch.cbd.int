@@ -96,6 +96,7 @@
 
 					$scope.$watch("document", function (_new) {
 						$scope.error = null;
+						if(!_new)return;// due to cache loaddocument calls first before the first watch on documents gets called.
 						$scope.internalDocument = _new;
 						if ($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)) {
 							loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
