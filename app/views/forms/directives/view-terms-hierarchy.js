@@ -16,7 +16,7 @@ define(['app', 'lodash', 'text!./view-terms-hierarchy.html',
                 
                 $scope.$watch('binding', function(newVal, oldVal){
 					// console.log($scope.document.traits);
-					if(newVal){
+					if(newVal && (newVal.traits||[]).length){
 						thesaurusService.getDomainTerms($scope.termDomain, {other:true})
 						.then(function(terms){
 							_.each(newVal, function(trait){
@@ -34,7 +34,6 @@ define(['app', 'lodash', 'text!./view-terms-hierarchy.html',
 								findTerm(trait.identifier, terms);
 							})
 							$scope.rootTerms = thesaurus.buildTree(terms);
-							console.log($scope.rootTerms)
 						});
 					}
 			})
