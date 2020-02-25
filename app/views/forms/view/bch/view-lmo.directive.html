@@ -6,8 +6,14 @@
 	</div>
 	<div class="record-body panel-body">
 		<div class="pull-right">
-			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo-decisions/{{document.info.documentID}}" class="btn btn-primary btn-xs">View Decisions on LMO</a>
-			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo-risk-assessments/{{document.info.identifier}}" class="btn btn-primary btn-xs">View releated Risk Assessments </a>
+			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo-decisions/{{document.info.documentID}}">
+				<i class="fa fa-external-link"></i> 
+				Decisions on LMO
+			</a>
+			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo-risk-assessments/{{document.info.identifier}}" >
+				<i class="fa fa-external-link"></i> 
+				Risk Assessments
+			</a> &nbsp;
 			<document-date></document-date>
 		</div>
 		
