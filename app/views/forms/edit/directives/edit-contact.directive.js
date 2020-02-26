@@ -16,9 +16,8 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
             onPostSubmitFn   : "&onPostSubmit"
 		},
 		link : function($scope, $element, $attr){
-            $controller('editController', {
-                $scope: $scope
-            });
+            $scope.type = $attr.documentType;
+            $controller('editController', {$scope: $scope});
             $scope.allowNew         = $attr.allowNew||true
             $scope.container        = $attr.container
             $scope.isDialog         = $attr.isDialog;
@@ -153,6 +152,10 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                         $scope.organization = org.data;
                     })
                 }
+            }
+
+            $scope.newDialogAttributes = function(){
+                return "contact-type='organization'";
             }
 
             var doc = {

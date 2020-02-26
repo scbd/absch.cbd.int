@@ -18,7 +18,8 @@ define([
                                               breadcrumbs, appConfigService, locale, ngMeta, realm) {
 
     $scope.realm = realm;
-    $scope.type = $route.current.$$route.documentType;
+    //incase if open from dialog use the type passed by the dialog
+    $scope.type = $scope.type || $route.current.$$route.documentType;
     
     if(_.includes(appConfigService.nationalSchemas, $filter('mapSchema')($scope.type)))
       $scope.schemaType = 'nationalRecords';

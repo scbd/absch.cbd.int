@@ -17,7 +17,8 @@ function (app, _, template) {
 				$scope.scientificNameSynonyms = [{}];
 				$scope.commonNames = [{}];
 				$scope.container        = $attr.container;
-    			$scope.isDialog         = $attr.isDialog;      
+    			$scope.isDialog         = $attr.isDialog;  
+				$scope.type 			= $attr.documentType;    
 				$controller('editController', {
 					$scope: $scope
 				});
