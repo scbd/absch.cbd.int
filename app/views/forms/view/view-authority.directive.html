@@ -27,7 +27,8 @@
 		</div>
 
 		<div ng-if="document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0 " >
-			<label name="name">Competent <span ng-if="document.header.schema!=='supplementaryAuthority'">National </span>Authority</label>
+			<label ng-if="document.header.schema!='supplementaryAuthority'" name="name">Name of the Competent National Authority</label>
+			<label ng-if="document.header.schema=='supplementaryAuthority'">Name of the Competent Authority</label>
 			<div class="km-value">
 				<div><strong>{{document.name | lstring:locale}}</strong></div>
 				<div ng-show="document.address">{{document.address | lstring:locale}}</div>
@@ -57,12 +58,13 @@
 
 
 		<div ng-show="document.contacts">
-			<legend ng-if="document.contacts">Additional Contact(s)</legend>
+			<legend ng-if="document.contacts">Additional Contact Information</legend>
 			<view-contact-reference ng-repeat="contact in document.contacts" ng-model="contact" locale="locale" class="km-value"></view-contact-reference>
 		</div>
 
 		<div ng-show="document.policyBasisForCompetency || document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef">
-			<legend>Legislative, administrative or policy basis for the competence of the CNA</legend>
+			<legend ng-if="document.header.schema!='supplementaryAuthority'" >Legislative, administrative or policy basis for the competence of the Competent National Authority</legend>
+			<legend ng-if="document.header.schema=='supplementaryAuthority'" >Legislative, administrative or policy basis for the competence of the Competent Authority</legend>
 			<div ng-if="document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef">
 				<label>Links to relevant legislative, administrative or policy measure(s) </label>
 				<div class="km-value">
@@ -74,7 +76,8 @@
 				</div>
 			</div>
 			<div ng-show="document.policyBasisForCompetency || document.absPolicyBasisForCompetency">
-				<!--<label>Information on the legal, administrative or policy basis for the competence of the CNA</label>-->
+				<label ng-if="document.header.schema!='supplementaryAuthority'">Additional information on the legal, administrative or policy basis for the competence of the Competent National Authority</label>
+				<label ng-if="document.header.schema=='supplementaryAuthority'">Additional information on the legal, administrative or policy basis for the competence of the Competent Authority</label>
 				<div class="km-value" ng-bind-html="(document.policyBasisForCompetency || document.absPolicyBasisForCompetency) | lstring:locale">
 				</div>
 			</div>
@@ -117,24 +120,35 @@
 
 		</div>
 		<div ng-if="isBCH && (document.cpbFunctions || document.functions || document.responsibilities || document.cpbOrganismTypes)">
-			<legend>Regulatory function</legend>
-			<div ng-show="document.cpbFunctions||document.functions">
+			<legend>Responsibilities</legend>
+			<div ng-show="document.header.schema!='supplementaryAuthority' && (document.cpbFunctions||document.functions)">
 				<label>Administrative functions</label>
 				<div class="km-value">
 					<li ng-repeat="term in (document.cpbFunctions||document.functions)">{{term|term}} </li>
 				</div>
 			</div>
 
-			<div ng-show="document.cpbOrganismTypes">
+			<div ng-show="document.header.schema!='supplementaryAuthority' && document.cpbOrganismTypes">
 				<label>Types of organism(s) under its responsibility</label>
 				<div class="km-value">
 					<li ng-repeat="term in document.cpbOrganismTypes">{{term|term}} </li>
 				</div>
 			</div>
 			
-			<div ng-show="document.responsibilities">
-				<label>Detailed description of the regulatory functions</label>
-				<div class="km-value" ng-bind-html="document.responsibilities | lstring:locale"></div>
+			<div ng-show="document.header.schema=='supplementaryAuthority'">
+				<div ng-if="document.responsibleForAll!==undefined">
+					<div class="km-value">
+						This is the only designated Competent Authority for the Supplementary Protocol in this country: 
+						<span ng-if="document.responsibleForAll">Yes</span>
+						<span ng-if="!document.responsibleForAll">No</span>
+					</div>
+				</div>
+				<div ng-show="document.header.schema=='supplementaryAuthority' && document.responsibilities">
+
+					<label ng-if="document.header.schema!='supplementaryAuthority'">Detailed description of the regulatory functions</label>
+					<label ng-if="document.header.schema=='supplementaryAuthority'">Description of the responsibilities of the Competent Authority</label>
+					<div class="km-value" ng-bind-html="document.responsibilities | lstring:locale"></div>
+				</div>
 			</div>
 		</div>
 

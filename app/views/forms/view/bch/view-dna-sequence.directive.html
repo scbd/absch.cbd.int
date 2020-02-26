@@ -20,7 +20,7 @@
 		</div>
 
 		<div ng-show="document.name">
-			<label>Name of the gene or DNA sequence</label>
+			<label>Name</label>
 			<km-value-ml value="document.name" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.synonymNames">
@@ -37,12 +37,12 @@
 			<km-value-ml value="document.abbreviation" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.family">
-			<label>Category of DNA sequence</label>
+			<label>Category</label>
 			<div class="km-value" ng-bind="document.family | term:locale"></div>
 		</div>
 
 		<div ng-show="document.isSynthetic!=undefined">
-			<label>Is the gene / DNA sequence is a synthetic molecule?</label>
+			<label>Is this genetic element a synthetic molecule?</label>
 			<div class="km-value" ng-if="document.isSynthetic">Yes</div>
 			<div class="km-value" ng-if="!document.isSynthetic">No</div>
 		</div>
@@ -57,7 +57,7 @@
 		</div>
 
 		<div ng-show="document.donorOrganismCollectionPoint">
-			<label>Donor organism point of collection</label>
+			<label>Point of collection or acquisition of the donor organism(s)</label>
 			<div class="km-value">
 				<km-value-ml value="document.donorOrganismCollectionPoint"  html locales="locale"></km-value-ml>
 			</div>
@@ -74,7 +74,7 @@
 		</div>
 
 		<div ng-show="document.biologicalFunction">
-			<label>Biological function</label>
+			<label>Biological function of the protein</label>
 			<div class="km-value">
 				<km-value-ml value="document.biologicalFunction" html locales="locale"></km-value-ml>
 			</div>
