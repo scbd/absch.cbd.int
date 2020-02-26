@@ -428,10 +428,18 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                 require([schemaDetails], function () {
                     var divSelector = ' #divNewRecord'
                     var name 		= snake_case(lschema);
-                    var directiveHtml =
-                        "<DIRECTIVE on-post-submit='onNewRecordSubmitted(data)' contact-type='organization' allow-new='false' is-dialog='true' container='.ngdialog' link-target={{linkTarget}} locales='locales'></DIRECTIVE>"
+                    
+                    var additionalAttributes = '';
+                    if($attr.allowNewAttributes)
+                        additionalAttributes = $attr.allowNewAttributes;
+
+                    var directiveHtml = ("<DIRECTIVE on-post-submit='onNewRecordSubmitted(data)' additionalAttributes document-type='documentType'" +
+                                         " allow-new='false' is-dialog='true' container='.ngdialog' link-target={{linkTarget}} locales='locales'>"  +
+                                         "</DIRECTIVE>")
                             .replace(/DIRECTIVE/g, 'edit-' + name)
-                            .replace(/\.ngdialog/, '#'+dialogId);;
+                            .replace(/\.ngdialog/, '#'+dialogId)
+                            .replace('documentType', $filter("schemaShortName")(schema))
+                            .replace('additionalAttributes', additionalAttributes);
 
                     $scope.$apply(function () {                        
                         $('#'+dialogId + divSelector).empty()

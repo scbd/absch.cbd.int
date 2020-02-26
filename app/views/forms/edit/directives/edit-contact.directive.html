@@ -11,6 +11,7 @@
                 <edit-form>
                         <form name="editForm" class="editForm" style="margin-top:10px">
 								<div ng-show="tab=='edit'" km-tab="edit">
+									{{document}}
 									<legend name="formInfo" style="display:none"></legend>
                                     <section>
 											<br>
@@ -91,7 +92,7 @@
 																					 question="contactOrganization" allow-new="{{allowNew}}"
 																					 government="document.government" ng-change="contactOrganizationChanged()"
 																					 schema="contact AND type_s:organization"
-																					 allow-new-schema="contact"></div>
+																					 allow-new-schema="contact" allow-new-attributes="{{::newDialogAttributes()}}"></div>
 													</div>
 												</div>
 											</div>

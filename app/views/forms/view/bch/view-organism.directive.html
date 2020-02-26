@@ -11,7 +11,7 @@
 		<legend>Organism information</legend>
 		
 		<div ng-show="document.scientificName">
-			<label>Scientific name</label>
+			<label>Alternate scientific name (synonyms)</label>
 			<div class="km-value" ng-bind="document.scientificName"> 
 				<span ng-if="document.scientificNameSynonyms">({{document.scientificNameSynonyms}})</span></div>
 		</div>
@@ -63,7 +63,7 @@
 			</div>
 		</div>
 
-		<legend>Additional Classification</legend>
+		<label>Additional Classification</label>
 		
 		<div ng-show="document.plantCultivar">
 				<label>Cultivar / variety (plants)</label>
@@ -85,12 +85,12 @@
 		</div>
 
 		<div ng-show="document.organismType">
-			<label>Type of organism</label>
+			<label>Type of organism(s)</label>
 			<div class="km-value" ng-bind="document.organismType | term:locale"></div>
 		</div>
 
 		<div ng-show="document.domestication">
-			<label>Organism domestication</label>
+			<label>Domestication</label>
 			<div class="km-value" ng-bind="document.domestication | term:locale"></div>
 		</div>
 

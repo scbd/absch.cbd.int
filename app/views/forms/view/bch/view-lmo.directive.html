@@ -27,7 +27,7 @@
 			</a>
 		</div>
 		<div ng-show="document.identity">
-			<label>LMO name</label>
+			<label>Name</label>
 			<km-value-ml value="document.identity" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.transformationEvent">
@@ -56,9 +56,7 @@
 
 		<div ng-show="document.recipientOrganisms">
 			<label>Recipient Organism or Parental Organisms</label>
-			<div class="help-info">The term Recipient organism refers to an organism (either already modified or non-modified) 
-				that was subjected to genetic modification, whereas Parental organisms refers to those that were involved in 
-				cross breeding or cell fusion.
+			<div class="help-info" style="font-size: 10px;">The term “Recipient organism” refers to an organism (either already modified or non-modified) that was subjected to genetic modification, whereas “Parental organisms” refers to those that were involved in cross breeding or cell fusion.
 			</div>
 			<div class="km-value">
 				<ul class="list">
@@ -70,7 +68,7 @@
 		</div>
 
 		<div ng-show="document.recipientOrganismCollectionPoint">
-			<label>Point of collection or acquisition of the recipient organism</label>			
+			<label>Point of collection or acquisition of the recipient organism or parental organisms</label>			
 			<km-value-ml value="document.recipientOrganismCollectionPoint" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.linkedModifiedOrganisms">
@@ -84,7 +82,7 @@
 			</div>
 		</div>
 		
-		<legend>Characteristics of the transformation process</legend>
+		<legend>Characteristics of the modification process</legend>
 		
 		<div ng-show="document.vector">
 			<label>Vector</label>
@@ -106,7 +104,7 @@
 		</div>
 		<div ng-show="document.genes">
 			<label>Introduced or modified genetic elements</label>
-			<div class="help-info">Some of these genetic elements may be present as fragments or truncated 
+			<div class="help-info" style="font-size: 10px;">Some of these genetic elements may be present as fragments or truncated 
 					forms. Please see notes below, where applicable.</div>
 			<div class="km-value">
 				<ul class="list">
@@ -118,7 +116,7 @@
 		</div>
 
 		<div ng-show="document.geneNotes">
-			<label>Notes regarding the genetic elements introduced or modified in this LMO</label>
+			<label>Notes regarding the genetic elements present in this LMO</label>
 			<km-value-ml html value="document.geneNotes" locales="locale"></km-value-ml>
 		</div>
 
