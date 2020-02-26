@@ -2,8 +2,8 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
 'views/forms/edit/document-selector', 'views/forms/edit/warning-message-cna', '../view/view-authority.directive',
 'services/thesaurus-service' ], function(app, _) {
 
-    app.controller("editAuthority", ["$scope", "$http", "$filter", "Thesaurus", "$q", "$controller", "$location", "IStorage", "commonjs",'thesaurusService',
-     function($scope, $http, $filter, Thesaurus, $q, $controller, $location, storage, commonjs,thesaurusService) {
+    app.controller("editAuthority", ["$scope", "$http", "$element", "Thesaurus", "$q", "$controller", "$location", "IStorage", "commonjs",'thesaurusService',
+     function($scope, $http, $element, Thesaurus, $q, $controller, $location, storage, commonjs,thesaurusService) {
         $controller('editController', {
             $scope: $scope
         });
@@ -136,8 +136,10 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
                 document.absJurisdiction = undefined;
                 document.absJurisdictionName = undefined;
                 document.absGeneticResourceTypes = undefined;
-                if($scope.type == 'SPCA') //Suuplementary protocol
+                if($scope.type == 'SPCA'){ //Suuplementary protocol
                     document.cpbOrganismTypes = undefined;
+                    document.functions = undefined;
+                }
             }
             else{
                 document.functions = undefined;
@@ -156,6 +158,11 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
             document.policyBasisForCompetency = document.policyBasisForCompetency || document.absPolicyBasisForCompetency;
             document.absPolicyBasisForCompetencyRef = undefined;
             document.absPolicyBasisForCompetency = undefined;
+
+            if($scope.type != 'SPCA')
+                $scope.cnaNameTitle = $element.find('#titleCNA').text()
+            else if($scope.type == 'SPCA')
+                $scope.cnaNameTitle = $element.find('#titleSPCA').text()
         });
 
         //==================================

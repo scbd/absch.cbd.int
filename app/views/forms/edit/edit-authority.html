@@ -1,4 +1,4 @@
-﻿<div ng-controller="editAuthority">
+<div ng-controller="editAuthority">
     <div>
         <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
         <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
@@ -39,7 +39,12 @@
 
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="name" required caption="Name of the Competent {{type!=='SPCA' ? 'National' : ''}} Authority">
+                                            <div style="display: none;"> 
+                                                <!-- title for CNA Name -->
+                                                <span id="titleCNA" >Name of the Competent National Authority</span>
+                                                <span id="titleSPCA">Name of the Competent Authority</span>
+                                            </div>
+                                            <div class="km-control-group" name="name" required caption="{{cnaNameTitle}}">
                                                 <div class="help-info"> Provide the specific name of the responsible entity e.g. Ministry of Environment. 
                                                     <span ng-if="realm.is('ABS')">Bear in mind that the name of the CNA will help to identify the record in the ABS Clearing-House.</span></div>
                                                 <div km-textbox-ml name="name" required ng-model="document.name" rows="1"
@@ -152,14 +157,17 @@
 
                                 <section>
                                     <legend name="policyBasis">Legal, administrative or policy basis for the competence
-                                        of the Competent National Authority</legend>
+                                        of the Competent <span ng-if="type!='SPCA'">National </span>Authority</legend>
                                     <div class="help-info" ng-if="realm.is('ABS')">In this section, a reference to the related ABS measure
                                         granting the competence of the CNA can be included. In order to link the CNA to
                                         a relevant ABS measure, the record of the ABS measure needs to be entered
                                         first. Therefore, if you have not yet submitted the relevant ABS measure, you
                                         may wish to save the CNA as a draft and publish the ABS measure before.</div>
-                                    <div class="help-info" ng-if="realm.is('BCH')">
+                                    <div class="help-info" ng-if="type=='CNA'">
                                         In this section, a reference to the related measure granting the competence of the competent national authority for the Cartagena Protocol can be included. In order to link the competent authority to a relevant measure, the record of the measure needs to be entered first. Therefore, if you have not yet submitted the relevant measure, you may wish to save the competent national authority for the Cartagena Protocol as a draft and publish the measure first.
+                                    </div>
+                                    <div class="help-info" ng-if="type=='SPCA'">
+                                        In this section, a reference to the related measure granting the competence of the competent authority for the Supplementary Protocol can be included. In order to link the competent authority to a relevant measure, the record of the measure needs to be entered first. Therefore, if you have not yet submitted the relevant measure, you may wish to save the competent authority for the Supplementary Protocol as a draft and publish the measure first.
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
@@ -173,7 +181,8 @@
 
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="policyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the CNA:"></div>
+                                            <div ng-if="type=='SPCA'" class="km-control-group" name="policyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the competent authority"></div>
+                                            <div ng-if="type!='SPCA'" class="km-control-group" name="policyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the CNA"></div>
                                             <div km-rich-textbox ng-model="document.policyBasisForCompetency" rows="6"
                                                 placeholder="" locales="document.header.languages"></div>
                                         </div>
@@ -300,30 +309,38 @@
                                 <section ng-if="realm.is('BCH')">
                                     <legend>Responsibilities</legend>
                                     <div class="help-info">
-                                        Article 19, paragraph 2 provides that “Where a Party designates more than one competent national authority, it shall convey to the Secretariat, with its notification thereof, relevant information on the respective responsibilities of those authorities. Where applicable, such information shall, at a minimum, specify which competent authority is responsible for which type of living modified organism”.
+                                        <span ng-if="type!='SPCA'">
+                                            Article 19, paragraph 2 provides that “Where a Party designates more than one competent national authority, it shall convey to the Secretariat, with its notification thereof, relevant information on the respective responsibilities of those authorities. Where applicable, such information shall, at a minimum, specify which competent authority is responsible for which type of living modified organism”.
+                                        </span>
+                                        <span ng-if="type=='SPCA'">
+                                            If there is more than one competent authority responsible for the functions under Article 5 of the Supplementary Protocol, please specify for which functions each competent authority is responsible.<br/>
+                                            If the competent authority exercises other functions related to liability and redress beyond those set out in Article 5 of the NKLSP, you may also provide a description of those functions below.
+                                        </span>                                        
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="functions" caption="Administrative functions" required>
+                                            <div  ng-if="type!='SPCA'" class="km-control-group" name="functions" caption="Administrative functions" required>
                                                 <div class="help-info">
-                                                    <span ng-if="type=='CNA'">If there is more than one competent national authority, please complete a different common format for each authority.</span>                                                    
+                                                    <span ng-if="type=='CNA'">
+                                                        If there is more than one competent national authority, please complete a different common format for each authority.
+                                                        If there is only one Authority responsible for all functions required by the Protocol, please select "All functions pursuant to the Cartagena Protocol on Biosafety".
+                                                    </span>                                                    
                                                     <span ng-if="type=='SPCA'">If there is more than one competent authority responsible for the functions under Article 5 of the Supplementary Protocol, please specify for which functions each competent authority is responsible. <br/>
                                                         If the competent authority exercises other functions related to liability and redress beyond those set out in Article 5 of the NKLSP, you may also provide a description of those functions below.
                                                     </span>
                                                 </div>
                                                 <div km-term-check name="functions" required ng-model="document.functions" locales="document.header.languages"
-                                                terms="options.functions()" binding-type="term[]"></div>
+                                                terms="options.functions()" binding-type="term[]" show-description="true"></div>
                                             </div>
-                                            <div ng-if="type=='CNA'" class="km-control-group" name="cpbOrganismTypes" caption="Types of LMOs under its jurisdiction" required>
-                                                <div class="help-info">If there is only one Authority responsible for all functions required by the Protocol, please select "All LMOs".</div>
+                                            <div ng-if="type=='CNA'" class="km-control-group" name="cpbOrganismTypes" caption="Types of organism(s) under its responsibility*" required>
+                                                <div class="help-info">If there is only one Authority responsible for all functions required by the Protocol, please select "All types of organisms".</div>
                                                 <div km-term-check name="cpbOrganismTypes" required ng-model="document.cpbOrganismTypes" locales="document.header.languages"
                                                 terms="options.bchOrganismTypes()" binding-type="term[]"></div>
                                             </div>
 
-                                            <div class="km-control-group" name="responsibilities"
-                                                caption="Detailed description of the regulatory functions"required>
+                                            <div  ng-if="type!='SPCA'" class="km-control-group" name="responsibilities" caption="Detailed description of the regulatory functions"required>
                                                 <div class="help-info" ng-if="type!=='SPCA'">
-                                                    Outline the administrative functions for which the Authority is responsible and authorized to act on. Where more than one competent national authority is designated, this information should, at a minimum, specify which competent national authority is responsible for which type of LMO.
+                                                    If needed, provide additional information on regulatory functions and responsibilities of the competent national authority.
                                                 </div>
                                                 <div km-rich-textbox name="responsibilities" ng-model="document.responsibilities"
                                                     rows="6" placeholder="" locales="document.header.languages" required></div>
@@ -334,21 +351,21 @@
                                 <section  ng-if="realm.is('BCH') && type=='SPCA'">
                                     <div class="row">
                                         <div class="col-xs-12">                                            
-                                            <div class="km-control-group" name="responsibleForAll" required caption="Is this the only designated competent national authority (CNA) for the Supplementry Protocol in your country?">
+                                            <div class="km-control-group" name="responsibleForAll" required caption="Is this the only designated competent authority for the Supplementry Protocol in your country?">
                                                 <div class="help-info">
                                                     If “no”, please describe the responsibilities of this competent authority and complete 
-                                                    a different common format for each competent national authority
+                                                    a different common format for each competent authority
                                                 </div>
                                                 <div km-yes-no required ng-model="document.responsibleForAll" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="responsibilities" required 
-                                            caption="Short description of Competent National Authority (CNA) responsibilities (maximum 300 characters)." >
-                                            <div class="help-info">This information is required when there is more than one competent authority.  </div>
+                                            <div class="km-control-group" name="responsibilities" required="{{!document.responsibleForAll}}"
+                                            caption="Short description of Competent Authority responsibilities (maximum 300 characters)." >
+                                            <div class="help-info">This information is required when there is more than one competent authority. Outline the administrative functions for which the Authority is responsible and authorized to act on. </div>
                                             <div km-rich-textbox name="responsibilities" ng-model="document.responsibilities"
                                                 rows="6" placeholder="" locales="document.header.languages"
-                                                required></div>
+                                                required="{{!document.responsibleForAll}}"></div>
                                         </div>
                                         </div>
                                     </div>

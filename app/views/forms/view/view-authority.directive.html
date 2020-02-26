@@ -63,20 +63,20 @@
 
 		<div ng-show="document.policyBasisForCompetency || document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef">
 			<legend>Legislative, administrative or policy basis for the competence of the CNA</legend>
+			<div ng-if="document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef">
+				<label>Links to relevant legislative, administrative or policy measure(s) </label>
+				<div class="km-value">
+					<ul class="list">
+						<li ng-repeat="item in (document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef)" >
+							<div view-default-reference ng-model="item.identifier" locale="locale"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
 			<div ng-show="document.policyBasisForCompetency || document.absPolicyBasisForCompetency">
 				<!--<label>Information on the legal, administrative or policy basis for the competence of the CNA</label>-->
 				<div class="km-value" ng-bind-html="(document.policyBasisForCompetency || document.absPolicyBasisForCompetency) | lstring:locale">
 				</div>
-			</div>
-			<div ng-if="document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef">
-				<label>Links to relevant legislative, administrative or policy measure(s) </label>
-						<div class="km-value">
-							<ul class="list">
-								<li ng-repeat="item in (document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef)" >
-									<div view-default-reference ng-model="item.identifier" locale="locale"></div>
-								</li>
-							</ul>
-						</div>
 			</div>
             
 		</div>
@@ -126,7 +126,7 @@
 			</div>
 
 			<div ng-show="document.cpbOrganismTypes">
-				<label>Types of LMOs under its jurisdiction</label>
+				<label>Types of organism(s) under its responsibility</label>
 				<div class="km-value">
 					<li ng-repeat="term in document.cpbOrganismTypes">{{term|term}} </li>
 				</div>
