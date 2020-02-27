@@ -179,6 +179,8 @@
                                         <h4 style="padding:0;margin:0;">
                                             Record overview</h4>
                                     </td>
+                                    <td style="max-width:10%;" class="hidden-xs bold">
+                                        <span class="pull-right">Offline formats</span></td>
                                     <td style="width:7%;font-size: 12px;" class="hidden-xs text-center bold"> <span
                                             class="label label-success"></span> Published</td>
                                     <td style="width:7%;font-size: 12px;" class="hidden-xs text-center bold"> <span
@@ -202,6 +204,35 @@
                                 data-container="body"></span>
                         </div>
 
+                        <div>
+                            <table class="overview table  table-hover" style="width:100%;">
+                                <thead></thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="width:70px;">
+                                            <div class="btn-group btn-group-xs" style="width:70px;" role="group">
+                                                <button disabled type="button" class="btn btn-xs btn-default"><i class="fa fa-chevron-circle-down cursor" aria-hidden="true"></i>
+                                                <button disabled type="button" class="btn btn-xs btn-default"><i class="fa fa-plus"></i></button>
+                                                <button disabled type="button" class="btn btn-xs btn-default"><i class="fa fa-list"></i></button>
+                                            </div>
+                                        </td>
+                                        <td style="min-width:180px!important;">
+                                            <a translation-url href="/search" class="color-darkgrey" style="font-weight:500;">
+                                               National Focal Points (NFP)</a>
+                                        </td>
+                                        <td style="max-width:10%">
+                                            <span class="hidden-xs pull-right" ng-include="'offline-formats'" onload="schema='focalPoint'"></span>
+                                        </td>
+                                        <td style="width:21%;" colspan="3" class="text-center hidden-xs">
+                                            <a href="http://bch.cbd.int/managementcentre/nfps.shtml" target="_blank" ng-if="isBch">
+                                                Explanatory Note on the appointment of NFPs <i class="fa fa-external-link"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
                         <div ng-repeat="schema in nationalSchemas" ng-if="::roles.isNationalSchemaUser(schema) || roles.is('Administrator')">
                             <table class="overview table table-hover" style="width:100%;">
                                 <tbody>
@@ -225,6 +256,9 @@
                                             <a translation-url href="#" ng-click="gotoList($event,schema)"
                                                 class="color-darkgrey" style="font-weight:500;">
                                                 {{schema|schemaNamePlural}} ({{schema|urlSchemaShortName}})</a>
+                                        </td>
+                                        <td style="max-width:10%">
+                                            <span class="hidden-xs pull-right" ng-include="'offline-formats'"></span>
                                         </td>
                                         <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
                                                 ng-href="/register/{{schema|urlSchemaShortName}}/status/published"
@@ -256,7 +290,7 @@
                     </div>
 
                     <div style="padding-bottom: 20px;">
-                        <table class="overview table" style="width:100%;">
+                        <table class="overview table table-hover" style="width:100%;">
                             <thead></thead>
                             <tbody>
                                 <tr>
@@ -280,6 +314,9 @@
                                             class="color-darkgrey" style="font-weight:500;">
                                             Contacts (CON)</a>
 
+                                    </td>
+                                    <td style="max-width:10%">
+                                        <span class="hidden-xs pull-right" ng-include="'offline-formats'" onload="schema='contact'"></span>
                                     </td>
                                     <td style="width:7%;" class="text-center hidden-xs"><a translation-url
                                             ng-href="/register/CON/status/published" class="label label-success"
@@ -341,6 +378,9 @@
                                                 class="color-darkgrey" style="font-weight:500;">
                                                 {{schema|schemaNamePlural}} ({{schema|urlSchemaShortName}})</a>
                                         </td>
+                                        <td style="max-width:10%">
+                                            <span class="hidden-xs pull-right" ng-include="'offline-formats'"></span>
+                                        </td>
                                         <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
                                                 ng-href="/register/{{schema|urlSchemaShortName}}/status/published"
                                                 class="label label-success"
@@ -386,6 +426,14 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Close</button>
                 </div>
+            </script>
+
+            <script type="text/ng-template" trados-translation="true" id="offline-formats">                
+                <span ng-repeat="(code, lang) in ::languages" data-title="{{::lang}}" data-toggle="tooltip" data-container="body" 
+                    ng-show="::offlineFormats[schema][code]">
+                    <a target="_blank" ng-href="{{::offlineFormats[schema][code]}}" ng-bind="::code"></a>
+                    <span ng-if="::!$last"> | </span>
+                </span>
             </script>
         </div>
         

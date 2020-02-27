@@ -11,9 +11,10 @@ define(['app', 'text!views/search/search-results/result-default.html','lodash', 
                 doc:'=',
                 type:'@'
             },
-            link: function($scope, $element) {
-
-               $scope.api = {};
+            link: function($scope, $attr, $element) {
+                
+                $scope.showExternalLink = $attr.externalLink=='true'
+                $scope.api = {};
                 $scope.$watch('showDoc', function(newVal){
                     if(newVal && $scope.doc){
                         $timeout(function(){

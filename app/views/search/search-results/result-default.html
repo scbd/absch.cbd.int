@@ -1,5 +1,5 @@
 ﻿<div style="padding:0!important;margin:0 0 20px 0!important;">
-    <a translation-url target="_blank" ng-href="/database/{{::doc.schema_s|schemaShortName}}/{{doc.uniqueIdentifier_s}}" 
+    <a ng-if="showExternalLink" translation-url target="_blank" ng-href="/database/{{::doc.schema_s|schemaShortName}}/{{doc.uniqueIdentifier_s}}" 
         class="pull-right link" ng-show="!doc.showDoc" title="open in new tab">
         <i class="fa fa-external-link"></i>
     </a>
