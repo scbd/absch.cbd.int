@@ -504,6 +504,26 @@ define(['app', 'underscore', 'services/local-storage-service', 'components/scbd-
 
                 }
 
+                this.loadJsonFile = function(filePath){
+                    var deferred = $q.defer();  
+
+                    require(['json!'+filePath], function(res){
+
+                        deferred.resolve(res);
+
+                    });
+
+                    return deferred.promise;
+                }
+
+                this.languages = {
+                    ar : "Arabic",
+                    en : "English",
+                    es : "Spanish",
+                    fr : "French",
+                    ru : "Russian",
+                    zh : "Chinese"
+                }
 
 
 

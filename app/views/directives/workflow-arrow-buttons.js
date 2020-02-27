@@ -1,13 +1,13 @@
 define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore',
-        'views/directives/workflow-history-directive',
+        'views/directives/workflow-history-directive', 'js/common',
         'toastr', 'services/local-storage-service', 'services/app-config-service', 'services/articles-service',
 ], function (app, template) {
     
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
-    'localStorageService', 'articlesService', 'roleService', 'locale',
+    'localStorageService', 'articlesService', 'roleService', 'locale', 'commonjs',
     function ($rootScope,  storage, editFormUtility, $route, IWorkflows, toastr, $location, $filter, 
-            $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, articlesService, roleService, locale){
+            $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, articlesService, roleService, locale, commonjs){
 
     	return{
     		restrict: 'EA',
@@ -42,8 +42,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
             link : function($scope, $element, $attr){
 
                 var originalDocument;
-                var next_fs
-                var document_type = $filter("mapSchema")($route.current.$$route.documentType);
+                var next_fs;                
                 var isDialog      = $attr.isDialog||false;
                 var saveDraftVersionTimer;
                 var previousDraftVersion;
@@ -52,7 +51,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				var qCancelDialog         = $element.find("#dialogCancel");
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
 				var qWorkflowDraftDialog  = $element.find("#divWorkflowDraft");
-
+                $scope.documentType = $filter("mapSchema")($route.current.$$route.documentType);
                 $scope.container                   = $attr.container;
                 $scope.cancelDialogDefered         = [];
                 $scope.AdditionalInfoDialogDefered = [];
@@ -60,6 +59,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 $scope.workflowScope               = $scope;
                 $scope.isAdmin                     = roleService.isUserInRoles(['Administrator', 'oasisArticleEditor']);
                 $scope.locale                      = locale;
+                $scope.offlineLanguages            = commonjs.languages;
 
                 if(!$scope.tab)
                     $scope.tab = 'edit';
@@ -566,7 +566,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         $scope.updateStep(tab);
                     
                     if(tab == "intro"){
-                        loadArticle(document_type);
+                        loadArticle($scope.documentType);
                         $scope.disablePreviousBtn = true;
                     }
 
@@ -653,7 +653,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                    $timeout(function() {
                        if($route.current.params.workflow){
                            $timeout(function() {
-                               $location.url('/register/' + $filter("urlSchemaShortName")(document_type)+'/' + $route.current.params.identifier + '/view');
+                               $location.url('/register/' + $filter("urlSchemaShortName")($scope.documentType)+'/' + $route.current.params.identifier + '/view');
                            }, 100);
                        }
                        else if ($rootScope.next_url) {
@@ -668,7 +668,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                            }, 100)
                        } else {
                            $timeout(function() {
-                               $location.url('/register/' + $filter("urlSchemaShortName")(document_type));
+                               $location.url('/register/' + $filter("urlSchemaShortName")($scope.documentType));
                            }, 100);
                        }
                    }, 100);
@@ -707,7 +707,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                     if(!isDialog){
                         $timeout(function() {
-                            $location.path('/register/' + $filter("urlSchemaShortName")(document_type));
+                            $location.path('/register/' + $filter("urlSchemaShortName")($scope.documentType));
                         }, 1000);
                     }
 
@@ -730,7 +730,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     }
                     if(!isDialog){
                         $timeout(function() {
-                            $location.path('/register/' + $filter("urlSchemaShortName")(document_type));
+                            $location.path('/register/' + $filter("urlSchemaShortName")($scope.documentType));
                         }, 1000);
                     }
 
@@ -746,7 +746,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     var ag = [];
                     ag.push({"$match":{"adminTags.title.en": { "$all" :
                         [   encodeURIComponent('edit-form'), encodeURIComponent(realm.value.replace(/(\-[a-zA-Z]{1,5})/, '')),
-                            encodeURIComponent($filter("urlSchemaShortName")(document_type))]}}
+                            encodeURIComponent($filter("urlSchemaShortName")($scope.documentType))]}}
                     });
                     ag.push({"$project" : {"title":1, "content":1, "_id":1}});
                     
@@ -803,9 +803,22 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 					});
 				}
 
-
+                function loadOfflineFormatDetails(){
+                    if(realm.is('BCH')){
+                        commonjs.loadJsonFile('/app/app-data/bch/offline-formats.json')
+                        .then(function(data){
+                            $scope.offlineFormats = data;
+                            $timeout(function(){
+                                $element.find("[data-toggle='tooltip']").tooltip({
+                                    trigger: 'hover'
+                                });
+                            }, 100)
+                        })
+                    }
+                }
                 //============================================================
                 $scope.loadSecurity();
+                loadOfflineFormatDetails();
 
 
 
