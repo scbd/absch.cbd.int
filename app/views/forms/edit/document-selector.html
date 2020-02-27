@@ -66,7 +66,7 @@
                 <div ng-if="!allowNew.editingOn">
                     <h3>Please select from the list of <span class="bold color-blue">{{docs.length}}</span>  published record(s) below:</h3>
                     <div class="help-info">If the record is not listed, please create a new record.</div>
-                    <input type="textbox" ng-model="keyword" placeholder="filter records by keywords or unique identifier" class="form-control">
+                    <input type="textbox" ng-model="search.keyword" placeholder="filter records by keywords or unique identifier" class="form-control">
                 </div>
                 <div ng-if="allowNew.editingOn">
                     <h3>
@@ -79,8 +79,7 @@
                 
                 <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new" ng-hide="allowNew.editingOn">
                         <div class="row" style="margin:0;padding:0;" ng-show="!isLoading" >
-                                
-                            <div ng-if="allowNew.show && !listView" ng-repeat="doc in docs = (rawDocuments.docs | filter:keyword)">
+                            <div ng-if="allowNew.show && !listView" ng-repeat="doc in docs = (rawDocuments.docs | filter:search.keyword)">
                                     <div class="col-xs-1 text-right">
                                         <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" style="width: 16px; height: 16px;" />
                                         <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" 
@@ -118,7 +117,7 @@
                                     </tr>
                                 </thead>
                                         <tbody>
-                                          <tr ng-repeat="doc in docs = (rawDocuments.docs | orderBy:sortType:sortReverse  | filter:keyword)" id="rec">
+                                          <tr ng-repeat="doc in docs = (rawDocuments.docs  | filter:search.keyword | orderBy:sortType:sortReverse)" id="rec">
                                             <td style="width:0;"><span class="bold">{{$index+1}}.</span></td>
                                             <td  style="width:0;">
                                                 <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" />
