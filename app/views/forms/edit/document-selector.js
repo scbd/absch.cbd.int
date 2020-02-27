@@ -38,7 +38,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             $scope.showAddButton = false;
             $scope.sortType     = 'rec_title'; 
             $scope.sortReverse  = false;  
-
+            $scope.search       = {keyword:''}
             if(!$scope.type) $scope.type = "checkbox";
             
             $scope.allowNew = {

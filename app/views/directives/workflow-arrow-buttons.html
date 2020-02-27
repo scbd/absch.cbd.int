@@ -137,7 +137,7 @@
 
     <span block-region activate="loading" ng-if="loading" update-parent-position="true" block-text="processing..."></span>
     <div class="workflow-arrows margin-bottom-20"  >
-        <ng-include onload="workflowScope=workflowScope" src="'template/workflow-arrows'"></ng-include>
+        <ng-include onload="workflowScope=workflowScope;schema=documentType;languages=languages" src="'template/workflow-arrows'"></ng-include>
     </div>
 
     <div class="workflow-validation-error" >
@@ -227,14 +227,21 @@
     </div>
     <br/>
     <div class="workflow-tabs">
-        <ng-include onload="workflowScope=workflowScope" src="'template/workflow-arrows'"></ng-include>
+        <ng-include onload="workflowScope=workflowScope;" src="'template/workflow-arrows'"></ng-include>
     </div>
 
     <script type="text/ng-template" trados-translation="true" id="template/workflow-arrows">
         <div class="hidden-xs">
 
             <div class="pull-right">
-                <!--  -->
+                <div class="btn" style="border: 1px solid #ccc;" ng-if="offlineFormats">
+                    Offline format:
+                    <span ng-repeat="(code, lang) in ::offlineLanguages" data-title="{{::lang}}" data-toggle="tooltip" data-container="body" 
+                        ng-show="::offlineFormats[documentType][code]">
+                        <a target="_blank" ng-href="{{::offlineFormats[documentType][code]}}" ng-bind="::code"></a>
+                        <span ng-if="::!$last"> | </span>
+                    </span>
+                </div>
                 <button type="button" class="btn  btn-default bg-draft" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()" 
                 ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
                     <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
