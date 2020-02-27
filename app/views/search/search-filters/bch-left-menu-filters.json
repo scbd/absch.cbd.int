@@ -18,16 +18,6 @@
 			"title": "Types of organism(s) under its responsibility",
 			"field": "cpbOrganismTypes_ss",
 			"relatedField":"cpbOrganismTypes_REL_ss"
-		},
-		{
-			"type": "solr",
-			"query": {
-				"fl": "identifier:identifier_s,title:title_s",
-				"q": "schema_s:biosafetyDecision"
-			},
-			"title": "Country's Decision or any other Communication",
-			"field": "cpbOrganismTypes_ss",
-			"relatedField":"cpbOrganismTypes_REL_ss"
 		}
 	],
 	"bchNews": [],

@@ -324,9 +324,6 @@
                                                     <span ng-if="type=='CNA'">
                                                         If there is more than one competent national authority, please complete a different common format for each authority.
                                                         If there is only one Authority responsible for all functions required by the Protocol, please select "All functions pursuant to the Cartagena Protocol on Biosafety".
-                                                    </span>                                                    
-                                                    <span ng-if="type=='SPCA'">If there is more than one competent authority responsible for the functions under Article 5 of the Supplementary Protocol, please specify for which functions each competent authority is responsible. <br/>
-                                                        If the competent authority exercises other functions related to liability and redress beyond those set out in Article 5 of the NKLSP, you may also provide a description of those functions below.
                                                     </span>
                                                 </div>
                                                 <div km-term-check name="functions" required ng-model="document.functions" locales="document.header.languages"
@@ -350,8 +347,8 @@
                                 </section>
                                 <section  ng-if="realm.is('BCH') && type=='SPCA'">
                                     <div class="row">
-                                        <div class="col-xs-12">                                            
-                                            <div class="km-control-group" name="responsibleForAll" required caption="Is this the only designated competent authority for the Supplementry Protocol in your country?">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="responsibleForAll" required caption="Is this the only designated competent authority for the Supplementary Protocol in your country?">
                                                 <div class="help-info">
                                                     If “no”, please describe the responsibilities of this competent authority and complete 
                                                     a different common format for each competent authority
