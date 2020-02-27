@@ -111,13 +111,13 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
             //update from legacy fields
             document.policyBasisForCompetencyRef = document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetencyRef;
             document.policyBasisForCompetency    = document.policyBasisForCompetency || document.absPolicyBasisForCompetency;
-            document.responsibleForAll           = document.responsibleForAll || document.absResponsibleForAll;
+            if(!document.hasOwnProperty('responsibleForAll'))
+                document.responsibleForAll       = document.absResponsibleForAll;
             //delete obsolete fields
             document.absPolicyBasisForCompetencyRef = undefined;
             document.absPolicyBasisForCompetency = undefined;
 
-            if (document.responsibleForAll) {
-                document.responsibilities = undefined;
+            if ($scope.type == 'SPCA' || document.responsibleForAll) {
                 document.absJurisdiction = undefined;
                 document.absJurisdictionName = undefined;
                 document.absGeneticResourceTypes = undefined;
@@ -130,8 +130,10 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
 
             if($scope.realm.is('BCH')){
 
-                if($scope.type != 'SPCA') //Not Suuplementary protocol
+                if($scope.type != 'SPCA'){ //Not Suuplementary protocol
                     document.responsibleForAll = undefined;
+                    document.responsibilities = undefined;
+                }
                     
                 document.absJurisdiction = undefined;
                 document.absJurisdictionName = undefined;
