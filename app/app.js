@@ -40,7 +40,7 @@ define(['angular-flex', 'angular-animate', 'angular-sanitize', 'angular-loggly-l
 
        app.run(['ngMeta', 'LogglyLogger', 'realm', '$window', function (ngMeta, logglyLogger, realm, $window) {
 
-            var appVersion = $window.scbdAppVersion||'localhost';
+            var appVersion = $window.scbdApp.version||'localhost';
             logglyLogger.fields({ realm: realm.value, appVersion: appVersion });
 
             ngMeta.init();
