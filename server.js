@@ -38,7 +38,8 @@ app.all('/sitemap(:num([0-9]{1,3})?).xml',     (req, res) =>{
     let sitemapName = process.env.CLEARINGHOUSE.toLowerCase();
     if(req.params.num)
         sitemapName += req.params.num;
-     require('superagent').get(`https://attachments.cbd.int/sitemap-${sitemapName}.xml`).pipe(res)
+     require('superagent').get(`https://attachments.cbd.int/sitemap-${sitemapName}.xml`)
+                          .query({bust:new Date().getTime()}).pipe(res)
 });
 
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
