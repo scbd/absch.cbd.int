@@ -28,7 +28,7 @@ define(['app',
 
                 $scope.init();
                 $scope.$watch("document", $scope.onTerms);
-                $scope.$watch("binding", $scope.load);
+                $scope.$watch("binding", function() {$scope.load()});
                 $scope.$watch("binding", function() {
                     ngModelController.$setViewValue($scope.binding);
                 });
