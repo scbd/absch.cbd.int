@@ -48,11 +48,9 @@ app.directive("articleGuides", [ function () {
               for(var i=0;i < data.length;++i){
 
                   var admintags = JSON.stringify(data[i].adminTags);
-                  console.log("a="+admintags);
 
                   if(admintags.indexOf("ABSCHIntroduction") > 0 ){
                     $scope.introABSCH = data[i];
-                    $scope.onFinishLoading({title:data[i].title[$scope.locale]})
                     continue;
                   }
                   
@@ -89,6 +87,7 @@ app.directive("articleGuides", [ function () {
 
                   if(admintags.indexOf(("ABSCH-Guide-" + $scope.type.toUpperCase())) > 0){
                     $scope.format = data[i];
+                    $scope.onFinishLoading({title:data[i].summary[$scope.locale]})
                     continue;
                   }
 
