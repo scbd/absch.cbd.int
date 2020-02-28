@@ -12,10 +12,10 @@ define([
   
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
-                                   "breadcrumbs", "appConfigService", "locale",
+                                   "breadcrumbs", "appConfigService", "locale", 'ngMeta',
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
                                               authentication, editFormUtility, $routeParams, $timeout, $route, 
-                                              breadcrumbs, appConfigService, locale) {
+                                              breadcrumbs, appConfigService, locale, ngMeta) {
 
 
     $scope.type = $route.current.$$route.documentType;
@@ -383,6 +383,17 @@ define([
     $scope.onReviewLanguageChange = function(lang){
       $scope.review.locale = lang;
     }
+
+    function setMetaTags(){
+      ngMeta.resetMeta();   
+      var formOpenFor = 'New';
+      var schemaName = $filter('schemaName')($filter('mapSchema')($scope.type));
+      if($routeParams.identifier)   
+        formOpenFor = 'Edit'
+      ngMeta.setTitle(formOpenFor, ' | ' + schemaName);
+    } 
+    
+    setMetaTags();
 
   }]);
 });

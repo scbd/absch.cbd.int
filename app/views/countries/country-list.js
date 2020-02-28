@@ -7,10 +7,10 @@
     'components/scbd-angularjs-controls/form-control-directives/km-select'
 ], function (app, _) {
 
-    app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$filter', 
-    '$routeParams', '$compile', '$timeout', 'locale', 'realm',
-        function ($http, $scope, $element, $location, commonjs, $q, searchService, $filter, $routeParams, $compile, 
-            $timeout, locale, realm) {
+    app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$sce', 
+    '$routeParams', '$compile', '$timeout', 'locale', 'realm', 'ngMeta',
+        function ($http, $scope, $element, $location, commonjs, $q, searchService, $sce, $routeParams, $compile, 
+            $timeout, locale, realm, ngMeta) {
             var regionRelations = {};            
             $scope.isBCH        = realm.is('BCH');
             $scope.isABS        = realm.is('ABS');    
@@ -63,6 +63,12 @@
                     $scope.countries
                     $scope.allcountries = _.clone($scope.countries);
                     $timeout(function(){$element.find('[data-toggle="tooltip"]').tooltip()}, 300);
+
+
+                    ngMeta.resetMeta();  
+                    var url   = realm.originalObject.baseURL + '/countries'
+                    // ngMeta.setTag('description', summary || window.scbdApp.title);
+                    ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
                 });
 
            //*************************************************************************************************************************************
