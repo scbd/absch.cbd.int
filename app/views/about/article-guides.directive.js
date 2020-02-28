@@ -12,7 +12,8 @@ app.directive("articleGuides", [ function () {
             type  : '@',
             locale: '@',
             title:  '@',
-            showFaqs:  '@'
+            showFaqs:  '@',
+            onFinishLoading: '&'
         },
 		controller : ["$scope", "articlesService",
         function($scope,  articlesService)
@@ -51,6 +52,7 @@ app.directive("articleGuides", [ function () {
 
                   if(admintags.indexOf("ABSCHIntroduction") > 0 ){
                     $scope.introABSCH = data[i];
+                    $scope.onFinishLoading({title:data[i].title[$scope.locale]})
                     continue;
                   }
                   
@@ -120,6 +122,7 @@ app.directive("articleGuides", [ function () {
             $scope.show_review = expand;
             $scope.show_publish = expand;
           }
+          
          
 		}]
 	};

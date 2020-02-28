@@ -30,11 +30,11 @@ p.list-title{ margin-bottom:0;padding-bottom:0;}
 
                         <div  id="faq-content" ng-if="show=='faqs'">
                             <br>
-                            <article-search admin-tags="{{faqs}}" locale="{{locale}}"  title="Frequently Asked Questions (FAQs)" search="showSearch"></article-search>
+                            <article-search admin-tags="{{faqs}}" locale="{{locale}}"  title="Frequently Asked Questions (FAQs)" search="showSearch" on-finish-loading="updateMetaTags(title)"></article-search>
                         </div>
 
                         <div  id="guides-content" ng-if="show=='guides'">
-                            <article-guides type="{{type}}" locale="{{locale}}"  title="Step-by-step guide" show-faqs="true"></article-guides>
+                            <article-guides type="{{type}}" locale="{{locale}}"  title="Step-by-step guide" show-faqs="true" on-finish-loading="setMetaTags(title)"></article-guides>
                         </div>
 
                         <div  id="search-content" ng-if="show=='search'">

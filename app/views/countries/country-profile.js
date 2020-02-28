@@ -7,8 +7,8 @@ define(['app','underscore',
 ], function(app, _) {
 
   app.controller("countryProfileController",
-  ["$scope","$route", "$http", "$timeout", "$location","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm',
-    function($scope,$route, $http, $timeout, $location,locale, commonjs, $q, breadcrumbs, $element, $compile, realm) {
+  ["$scope","$route", "$sce", "$timeout", "$location","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm', 'ngMeta',
+    function($scope,$route, $sce, $timeout, $location,locale, commonjs, $q, breadcrumbs, $element, $compile, realm, ngMeta) {
       $scope.code      = $route.current.params.code;
       
       $scope.isBCH          = realm.is('BCH');
@@ -21,6 +21,14 @@ define(['app','underscore',
           $scope.country.name = $scope.country.name[locale];
           $scope.country.cssClass='flag-icon-'+$scope.country.code;
           breadcrumbs.options = { 'Country Profile': $scope.country.name };
+
+          ngMeta.resetMeta();  
+          var title = $scope.country.name + ' | Country Profile';
+          var url   = realm.originalObject.baseURL + '/countries/' + $scope.country.code.toUpperCase()
+          ngMeta.setTitle(title);
+          // ngMeta.setTag('description', summary || window.scbdApp.title);
+          ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
+
       });
       if($scope.code.toUpperCase == 'GB')
             $element.find('[data-toggle="tooltip"]').tooltip(); 

@@ -52,18 +52,31 @@
     <div class="device-size visible-lg" size="lg" style="height:0px;width:0px"></div>
 
     <script>
-        // In IE boot.js is executing before this script was executed so move it before boot.js        
-        window.clearingHouseHost = '<%=clearingHouseHost%>';
-        window.appVersion = '<%=appVersion%>';
-        window.lang = '<%=preferredLanguage%>'//.replace('/','')
-
+        // In IE boot.js is executing before this script was executed so move it before boot.js       
+        
+        window.scbdApp = {
+            host             : '<%=clearingHouseHost%>',
+            version          : '<%=appVersion%>',
+            lang             : '<%=preferredLanguage%>',
+            title            : document.title,
+            description      : getMetaTag('description')
+        }
+        
+        function getMetaTag(name){
+            var metas = document.getElementsByTagName('meta');
+            for (let i = 0; i < metas.length; i++) {
+                if (metas[i].getAttribute('name') === name) {
+                    return metas[i].getAttribute('content');
+                }
+            }
+        }
     </script>
     <script src="https://cdn.cbd.int/requirejs@2.2.0/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>
     
     
     <script async src='https://www.google-analytics.com/analytics.js'></script>
     <script>
-        window.appTemplate = 'templates/bch'
+        window.scbdApp.template = 'templates/bch'
         function addLoadEvent(func) {
             var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } 
         }
