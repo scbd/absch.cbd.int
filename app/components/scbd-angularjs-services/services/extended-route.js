@@ -24,7 +24,7 @@ define(['require', 'app', 'angular', 'angular-route'], function(require, app, an
                 else {
                     templateModule = changeExtension(templateUrl, '.js');
                 }
-                // route.templateUrl += '?v='+window.appVersion;
+                // route.templateUrl += '?v='+window.scbdApp.version;
             }
 
             var ext = { resolve: route.resolve || {} };

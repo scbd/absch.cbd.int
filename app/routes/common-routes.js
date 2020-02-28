@@ -4,7 +4,7 @@
 'components/scbd-angularjs-services/services/main'], function (require, app, _) { 'use strict';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
-    var lang    = window.lang;
+    var lang    = window.scbdApp.lang;
 
     app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         
@@ -259,8 +259,8 @@
             }];
         }
 
-        if((route.templateUrl||'').length > 0 && window.appVersion){
-            route.templateUrl += (route.templateUrl.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.appVersion;
+        if((route.templateUrl||'').length > 0 && window.scbdApp.version){
+            route.templateUrl += (route.templateUrl.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version;
         }
 
         this.when(path, route);
