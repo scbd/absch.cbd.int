@@ -66,7 +66,7 @@
 
 
                     ngMeta.resetMeta();  
-                    var url   = realm.originalObject.baseURL + '/countries'
+                    var url   = realm.originalObject.baseURL + '/' + locale  + '/countries'
                     // ngMeta.setTag('description', summary || window.scbdApp.title);
                     ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
                 });

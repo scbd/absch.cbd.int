@@ -1,10 +1,8 @@
-define(['app',
-'./record-loader.directive',
-], function (app) {
+define(['app','components/scbd-angularjs-services/services/locale','./record-loader.directive'], function (app) {
 
     app.controller("recordsViewController", ['$scope', "$sce", "commonjs", "$timeout", "$filter", 
-        "realm", "$element", 'searchService', 'ngMeta',
-    function ($scope, $sce, commonjs, $timeout, $filter, realm, $element, searchService, ngMeta){
+        "realm", "$element", 'searchService', 'ngMeta', 'locale',
+    function ($scope, $sce, commonjs, $timeout, $filter, realm, $element, searchService, ngMeta, locale){
 
         function setMetaTags(){
             var document;
@@ -41,7 +39,7 @@ define(['app',
                         // }
                         if(indexDoc.uniqueIdentifier_s){
                             var uniqueId = indexDoc.uniqueIdentifier_s.replace(/\-[0-9]{1,2}$/, '').toUpperCase()
-                            var url = realm.originalObject.baseURL + '/' + schemaShortCode + '/' + uniqueId
+                            var url = realm.originalObject.baseURL + '/' + locale  + '/' + schemaShortCode + '/' + uniqueId
                             ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
                         }
                     })

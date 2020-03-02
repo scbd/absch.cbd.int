@@ -24,7 +24,7 @@ define(['app','underscore',
 
           ngMeta.resetMeta();  
           var title = $scope.country.name + ' | Country Profile';
-          var url   = realm.originalObject.baseURL + '/countries/' + $scope.country.code.toUpperCase()
+          var url   = realm.originalObject.baseURL + '/' + locale  + '/countries/' + $scope.country.code.toUpperCase()
           ngMeta.setTitle(title);
           // ngMeta.setTag('description', summary || window.scbdApp.title);
           ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
