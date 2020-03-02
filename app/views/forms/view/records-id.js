@@ -15,15 +15,18 @@ define(['app','components/scbd-angularjs-services/services/locale','./record-loa
                     })
                     .then(function(result){
                         var schemaName      = $filter('schemaName')(document.header.schema);	
-                        var schemaShortCode = $filter('schemaShortName')(document.header.schema);	
-                        var indexDoc = result.data.response.docs[0];
-                        var title = indexDoc.rec_countryName;
-                        title = title ? (title + ' | ') : '';
-                        title += schemaName;
-                        var summary = indexDoc.rec_title
+                        var schemaShortCode = $filter('schemaShortName')(document.header.schema);
 
-                        if(indexDoc.rec_summary)
-                            summary += ' | ' + indexDoc.rec_summary;
+                        var indexDoc    = result.data.response.docs[0];
+                        var summary     = indexDoc.rec_countryName ? indexDoc.rec_title : undefined;
+                        var title       = ((indexDoc.rec_countryName||indexDoc.rec_title) + ' | ') || '';
+                        title          += indexDoc.uniqueIdentifier_s ? (indexDoc.uniqueIdentifier_s.toUpperCase().replace(/\-[0-9]{1,2}$/, '') + ' | ') : '';
+                        title          += schemaName;
+
+                        if(indexDoc.rec_summary){
+                            summary = summary ? (summary + ' | ') : ''
+                            summary += indexDoc.rec_summary;
+                        }
 
                         ngMeta.resetMeta();   
                         ngMeta.setTitle(title);
