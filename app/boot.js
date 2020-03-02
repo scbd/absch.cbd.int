@@ -93,7 +93,7 @@ require.config({
         'angular-trix'                  : { 'deps': ['angular', 'trix', 'css!'+cdnHost+'trix@0.12.0/dist/trix.css']},
         'trix'                          : { 'deps': ['angular']},
         'diacritics'                    : { 'deps': ['angular']},
-        'ngMeta'                        : { 'deps': ['angular']}
+        'ngMeta'                        : { 'deps': ['angular']},
         'drag-and-drop'                 : { 'deps': ['angular']},
         'angucomplete-alt'              : { 'deps': ['angular', 'css!'+cdnHost+'angucomplete-alt@3.0.0/angucomplete-alt.css']},
         'angular-cache'                 : { 'deps' : ['angular'] }
