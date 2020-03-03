@@ -1,4 +1,4 @@
-<div id="Record" class="record panel panel-default">
+﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading  bg-blue">
 		<h4>
 		<span >{{::document.header.schema|schemaName}} <span class="color-black"> ({{::document.header.schema|schemaShortName}}) </span> </span>
@@ -49,8 +49,7 @@
 
 				<ul  ng-show="document.websites" class="list" style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;">
 					<li ng-repeat="item in document.websites">
-                        <a translation-url  target="_new_" ng-href="{{item.url}}"> <i class="fa fa-external-link"></i> {{item.name||item.url}}</a>
-						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+                        <a translation-url  target="_blank" ng-href="{{item.url}}"> <i class="fa fa-external-link"></i> {{item.name||item.url}}</a>
 					</li>
 				</ul>
 			</div>
@@ -164,7 +163,6 @@
 				<label>Links and documents</label>
 				<div class="km-value" ng-repeat="item in document.relevantDocuments">
 					<a translation-url  target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 				</div>
 			</div>
 		</div>
