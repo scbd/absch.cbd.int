@@ -1,4 +1,4 @@
-﻿<div id="Record" class="record panel panel-default">
+<div id="Record" class="record panel panel-default">
 	<div class="panel-heading  bg-blue">
 		<h4>
 		<span >{{::document.header.schema|schemaName}} <span class="color-black"> ({{::document.header.schema|schemaShortName}}) </span> </span>
@@ -145,8 +145,8 @@
 				</div>
 				<div ng-show="document.header.schema=='supplementaryAuthority' && document.responsibilities">
 
-					<label ng-if="document.header.schema!='supplementaryAuthority'">Detailed description of the regulatory functions</label>
-					<label ng-if="document.header.schema=='supplementaryAuthority'">Description of the responsibilities of the Competent Authority</label>
+					<label ng-if="document.header.schema!='supplementaryAuthority'">Short description of the regulatory functions</label>
+					<label ng-if="document.header.schema=='supplementaryAuthority'">Short description of the responsibilities of the Competent Authority</label>
 					<div class="km-value" ng-bind-html="document.responsibilities | lstring:locale"></div>
 				</div>
 			</div>
