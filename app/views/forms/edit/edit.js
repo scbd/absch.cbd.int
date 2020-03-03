@@ -12,11 +12,11 @@ define([
   
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
-                                   "breadcrumbs", "appConfigService", "locale", "realm", 
+                                   "breadcrumbs", "appConfigService", "locale", 'ngMeta', "realm",
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
                                               authentication, editFormUtility, $routeParams, $timeout, $route, 
-                                              breadcrumbs, appConfigService, locale, realm) {
-                                   
+                                              breadcrumbs, appConfigService, locale, ngMeta, realm) {
+
     $scope.realm = realm;
     //incase if open from dialog use the type passed by the dialog
     $scope.type = $scope.type || $route.current.$$route.documentType;
@@ -389,6 +389,17 @@ define([
       if($scope.onPostSubmitFn)
         $scope.onPostSubmitFn({ data: documentInfo });
     };
+
+    function setMetaTags(){
+      ngMeta.resetMeta();   
+      var formOpenFor = 'New';
+      var schemaName = $filter('schemaName')($filter('mapSchema')($scope.type));
+      if($routeParams.identifier)   
+        formOpenFor = 'Edit'
+      ngMeta.setTitle(formOpenFor, ' | ' + schemaName);
+    } 
+    
+    setMetaTags();
 
   }]);
 });

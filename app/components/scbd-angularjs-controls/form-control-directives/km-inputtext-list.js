@@ -19,7 +19,9 @@
 					link: function($scope, $element, attrs, ngModelController) {
 							$scope.skipLoad = false;
 							$scope.texts = [];
-							$scope.$watch('binding', $scope.load);
+							$scope.$watch('binding', function(){
+								$scope.load()
+							});
 							//==============================
 							//
 							//==============================

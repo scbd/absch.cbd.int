@@ -4,8 +4,9 @@
 <head>
     <base href="<%=baseUrl%>">
     <meta charset="utf-8">
-    <title>Access and Benefit-Sharing Clearing-House</title>
-    <meta name="description" content="Access and Benefit-Sharing Clearing-House">
+    <title ng-bind="ngMeta.title"></title>
+    <meta name="description" content="{{ngMeta.description}}">
+    <link name="canonical" rel="canonical" href="{{ngMeta.canonical}}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="/app/img/favicon.png">
@@ -27,6 +28,8 @@
 
 </head>
 <body ng-controller="TemplateController" id="top" lang="<%=preferredLanguage||'en'%>">
+    <span style='display:none' id="appTitle">Access and Benefit-Sharing Clearing-House</span>
+    <span style='display:none' id="appDescription">Access and Benefit-Sharing Clearing-House</span>
     <span id="appBaseUrl" style="display:none"><%=baseUrl%></span>
     <div class="m-app-loading" ng-animate-children>
         <!--
@@ -130,13 +133,16 @@
     ================================================== -->
     <script>
         // In IE boot.js is executing before this script was executed so move it before boot.js
-        window.clearingHouseHost = '<%=clearingHouseHost%>';
-        window.appVersion = '<%=appVersion%>';
-        window.lang = '<%=preferredLanguage%>'
-
+        window.scbdApp = {
+            host             : '<%=clearingHouseHost%>',
+            version          : '<%=appVersion%>',
+            lang             : '<%=preferredLanguage%>',
+            title            : document.getElementById('appTitle').innerText,
+            description      : document.getElementById('appDescription').innerText
+        }
     </script>
     <script src="https://cdn.cbd.int/requirejs@2.2.0/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>    
-    <script>window.appTemplate = 'templates/absch'</script>
+    <script>window.scbdApp.template = 'templates/absch'</script>
     <script src="https://cdn.cbd.int/outdated-browser@1.0.2/outdatedbrowser/outdatedbrowser.min.js"></script>
     <link rel="stylesheet" href="https://cdn.cbd.int/outdated-browser@1.0.2/outdatedbrowser/outdatedbrowser.min.css">
     <div id="outdated"></div>

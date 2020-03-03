@@ -5,24 +5,28 @@
         
         <span ng-if="!showContact" class="bold"> + </span>
         <span ng-if="showContact" class="bold"> - </span>
-
-        <span ng-if="isCNA"> <span class="color-blue"> Competent National Authority:</span>
-            {{(documentForUID || document) | uniqueID}} </span>
-        <span ng-if="isNFP"><span class="color-blue uppercase">National Focal Point:</span>
-            {{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}}
-            {{document.lastName}}</span>
-        <span ng-if="isPerson && !isNFP"><span class="color-blue uppercase-sm">Person:</span>
-            {{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}}
-            {{document.lastName}}</span>
-        <span ng-if="isOrganization && !isCNA"><span class="color-blue">Organization:</span>
-            {{(document.name||document.organization) | lstring:locale}}
-            <span ng-show="document.acronym">({{(document.acronym||document.organizationAcronym) | lstring:locale}})</span>
+        <span class="selected-reference-uid">
+            
+            <span ng-if="isCNA"> <span class="color-blue"> Competent National Authority:</span>
+                {{(documentForUID || document) | uniqueID}} </span>
+            <span ng-if="isNFP"><span class="color-blue uppercase">National Focal Point:</span>
+                {{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}}
+                {{document.lastName}}</span>
+            <span ng-if="isPerson && !isNFP"><span class="color-blue uppercase-sm">Person:</span>
+                {{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}}
+                {{document.lastName}}</span>
+            <span ng-if="isOrganization && !isCNA"><span class="color-blue">Organization:</span>
+                {{(document.name||document.organization) | lstring:locale}}
+                <span ng-show="document.acronym">({{(document.acronym||document.organizationAcronym) | lstring:locale}})</span>
+            </span>
+            | 
+            <a translation-url  ng-href="/database/{{document.header.schema | urlSchemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_new">
+                {{document | uniqueID}} <i class="fa fa-external-link-square" aria-hidden="true"></i> 
+            </a>           
         </span>
-
     </div>
 
     <blockquote ng-show="showContact">
-
         <div ng-if="isOrganization">
             <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;"
                 ng-if="!isCNA">Organization</div>

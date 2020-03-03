@@ -31,7 +31,7 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
                 $scope.geneticResource = {types: [], areas:[]};
 
                 $scope.$watch("terms", $scope.onTerms);
-                $scope.$watch("binding", $scope.load);
+                $scope.$watch("binding", function() {$scope.load()});
                 $scope.$watch("binding", function () {
                     ngModelController.$setViewValue($scope.binding);
                 });

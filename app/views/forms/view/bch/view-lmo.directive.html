@@ -6,11 +6,11 @@
 	</div>
 	<div class="record-body panel-body">
 		<div class="pull-right">
-			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo-decisions/{{document.info.documentID}}">
+			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo/{{document.info.documentID}}/decisions">
 				<i class="fa fa-external-link"></i> 
 				Decisions on LMO
 			</a>
-			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo-risk-assessments/{{document.info.identifier}}" >
+			<a ng-if="document.info.documentID" target="_new" ng-href="reports/lmo/{{document.info.identifier}}/risk-assessments" >
 				<i class="fa fa-external-link"></i> 
 				Risk Assessments
 			</a> &nbsp;
@@ -159,7 +159,6 @@
 						<li ng-repeat="item in document.detectionMethodLinks">
 							<a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
 							<i ng-show="item.language">({{item.language|uppercase}})</i>
-							<!-- <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i> -->
 						</li>
 					</ul>
 				</div>
@@ -183,7 +182,7 @@
 					<ul>
 						<li ng-repeat="item in document.relevantDocuments">
 							<a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+							<i ng-show="item.language">({{item.language|uppercase}})</i>
 						</li>
 					</ul>
 				</div>

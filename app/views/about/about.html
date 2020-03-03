@@ -34,7 +34,7 @@ p.list-title{ margin-bottom:0;padding-bottom:0;}
                         </div>
 
                         <div  id="guides-content" ng-if="show=='guides'">
-                            <article-guides type="{{type}}" locale="{{locale}}"  title="Step-by-step guide" show-faqs="true"></article-guides>
+                            <article-guides type="{{type}}" locale="{{locale}}"  title="Step-by-step guide" show-faqs="true" on-finish-loading="setMetaTags(title)"></article-guides>
                         </div>
 
                         <div  id="search-content" ng-if="show=='search'">

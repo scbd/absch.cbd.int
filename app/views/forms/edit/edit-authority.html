@@ -313,8 +313,8 @@
                                             Article 19, paragraph 2 provides that “Where a Party designates more than one competent national authority, it shall convey to the Secretariat, with its notification thereof, relevant information on the respective responsibilities of those authorities. Where applicable, such information shall, at a minimum, specify which competent authority is responsible for which type of living modified organism”.
                                         </span>
                                         <span ng-if="type=='SPCA'">
-                                            If there is more than one competent authority responsible for the functions under Article 5 of the Supplementary Protocol, please specify for which functions each competent authority is responsible.<br/>
-                                            If the competent authority exercises other functions related to liability and redress beyond those set out in Article 5 of the NKLSP, you may also provide a description of those functions below.
+                                            If there is more than one competent authority responsible for the functions under Article 5 of the Nagoya – Kuala Lumpur Supplementary Protocol on Liability and Redress, please specify for which functions each competent authority is responsible.<br/>
+                                            If the competent authority exercises other functions related to liability and redress beyond those set out in Article 5 of the Supplementary Protocol, you may also provide a description of those functions below.
                                         </span>                                        
                                     </div>
                                     <div class="row">
@@ -350,16 +350,15 @@
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="responsibleForAll" required caption="Is this the only designated competent authority for the Supplementary Protocol in your country?">
                                                 <div class="help-info">
-                                                    If “no”, please describe the responsibilities of this competent authority and complete 
-                                                    a different common format for each competent authority
+                                                    If “no”, please describe the responsibilities of the competent authority in the box below. Please complete a different common format for each competent authority.
                                                 </div>
                                                 <div km-yes-no required ng-model="document.responsibleForAll" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="responsibilities" required="{{!document.responsibleForAll}}"
-                                            caption="Short description of Competent Authority responsibilities (maximum 300 characters)." >
-                                            <div class="help-info">This information is required when there is more than one competent authority. Outline the administrative functions for which the Authority is responsible and authorized to act on. </div>
+                                            caption="Short description of the responsibilities of the Competent Authority responsibilities (maximum 300 characters)." >
+                                            <div class="help-info">This information is required when there is more than one competent authority.</div>
                                             <div km-rich-textbox name="responsibilities" ng-model="document.responsibilities"
                                                 rows="6" placeholder="" locales="document.header.languages"
                                                 required="{{!document.responsibleForAll}}"></div>

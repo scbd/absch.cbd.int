@@ -33,7 +33,7 @@ app.use('/cbd-forums',      express.static(__dirname + '/node_modules/@bower_com
 app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: cacheControl.setCustomCacheControl}));
 
 app.get('/robots.txt' , require('./middlewares/robots'));
-app.all('/sitemap.xml', require('./middlewares/sitemap'));
+app.all('/sitemap(:num([0-9]{1,3})?).xml', require('./middlewares/sitemap'));
 
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
 

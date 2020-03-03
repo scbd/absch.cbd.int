@@ -46,11 +46,11 @@ app.directive('kmLink', ['IStorage', function (storage)
 				if ($attr.mimeTypes)
 					$scope.editor.mimeTypes = $attr.mimeTypes.split(";");
 
-				//Watchers
-				$scope.$watch("binding", $scope.load);
-				$scope.$watch('binding', function() {
-					ngModelController.$setViewValue($scope.binding);
-				});
+						//Watchers
+						$scope.$watch("binding", function() {$scope.load()});
+						$scope.$watch('binding', function() {
+								ngModelController.$setViewValue($scope.binding);
+						});
 
 
 				$scope.$watch("editor.visible", function(_new, _old)

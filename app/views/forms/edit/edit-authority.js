@@ -108,9 +108,9 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
             if (!document)
                 return undefined;
             
-            //update from legacy fields
-            document.policyBasisForCompetencyRef = document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetencyRef;
-            document.policyBasisForCompetency    = document.policyBasisForCompetency || document.absPolicyBasisForCompetency;
+            ///////for legacy records////////////////            
+            resolveLegacyFields(document)
+
             if(!document.hasOwnProperty('responsibleForAll'))
                 document.responsibleForAll       = document.absResponsibleForAll;
             //delete obsolete fields
@@ -155,12 +155,7 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
         };
         //==================================
         $scope.setDocument({}).then(function(document){
-            
-            document.policyBasisForCompetencyRef = document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetencyRef;
-            document.policyBasisForCompetency = document.policyBasisForCompetency || document.absPolicyBasisForCompetency;
-            document.absPolicyBasisForCompetencyRef = undefined;
-            document.absPolicyBasisForCompetency = undefined;
-
+            resolveLegacyFields(document)
             if($scope.type != 'SPCA')
                 $scope.cnaNameTitle = $element.find('#titleCNA').text()
             else if($scope.type == 'SPCA')
@@ -176,6 +171,17 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
             //var jurisdictions = $scope.document.absJurisdiction
             return _.intersection(_.map($scope.document.absJurisdiction, 'identifier'),
                                 ['DEBB019D-8647-40EC-8AE5-10CA88572F6E', 'DEEEDB35-A34B-4755-BF77-D713017195E3', '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED']).length > 0;
+        }
+
+        function resolveLegacyFields(document){
+
+            document.policyBasisForCompetencyRef    = document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetencyRef;
+            document.policyBasisForCompetency       = document.policyBasisForCompetency || document.absPolicyBasisForCompetency;
+            document.functions                      = document.functions || document.cpbFunctions || document.bchFunctions;
+            document.bchFunctions                   = document.cpbFunctions = undefined;
+            document.absPolicyBasisForCompetencyRef = undefined;
+            document.absPolicyBasisForCompetency    = undefined;        
+            document.bchOrganismTypes               = undefined;
         }
 
     }]);

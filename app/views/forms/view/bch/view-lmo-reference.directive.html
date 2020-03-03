@@ -8,11 +8,11 @@
             </a>
         </div>
         <div class="selected-reference-title" ng-if="document.body.identity">{{document.body.identity | lstring:locale}} </div>
-        <div class="selected-reference-title" style="display: block;margin-bottom:1px;" ng-if="document.summary">{{document.summary | lstring:locale}} </div> 
-        <div class="selected-reference-title" style="display: block"  ng-if="document.body.detectionMethodLinks">
-            <label>LMO Detection method(s)</label>
+        <span ng-if="document.summary"> | {{document.summary | lstring:locale}} </span> 
+        <div ng-if="document.body.detectionMethodLinks" style="padding-left:15px">
+            <label style="border-bottom: 1px solid #eee;">LMO Detection method(s)</label>
             <div ng-repeat="item in document.body.detectionMethodLinks">
-                <a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                <a translation-url target="_blank" ng-href="{{item.url}}">{{item.name||item.url}}</a>
                 <i ng-show="item.language">({{item.language|uppercase}})</i>
             </div>
         </div>

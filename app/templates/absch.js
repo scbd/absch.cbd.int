@@ -21,9 +21,9 @@ function (app, _, moment, angular) {
 
     app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
         '$location', '$anchorScroll', 'toastr', '$route',
-        '$window', '$element', 'localStorageService', 'appConfigService', 'LogglyLogger', 'locale', '$compile',
+        '$window', '$element', 'localStorageService', 'appConfigService', 'LogglyLogger', 'locale', '$compile', 'ngMeta',
         function ($scope, $rootScope, showHelp, $location, $anchorScroll, toastr, $route,
-            $window, $element, localStorageService, appConfigService, logglyLogger, locale, $compile
+            $window, $element, localStorageService, appConfigService, logglyLogger, locale, $compile, ngMeta
         ) {
 
 
@@ -44,9 +44,15 @@ function (app, _, moment, angular) {
             }
 
             var basePath = (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
-            $rootScope.$on('$routeChangeSuccess', function () {
+            $rootScope.$on('$routeChangeSuccess', function (evt, current) {
                 $window.ga('set', 'page', basePath + $location.path());
                 $window.ga('send', 'pageview');
+
+                ngMeta.resetMeta();
+                if(current.$$route && current.$$route.label)
+                    ngMeta.setTitle(current.$$route.label)
+                
+                ngMeta.setTag('canonical', $window.location.href)
             });
 
             //============================================================

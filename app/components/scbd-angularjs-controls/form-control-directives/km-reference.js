@@ -40,7 +40,7 @@ define(['app', 'angular','lodash', 'jquery', 'text!./km-reference.html','angular
 
                 //Watchers
 
-                $scope.$watch("binding", $scope.load);
+                $scope.$watch("binding", function() {$scope.load()});
                 $scope.$watch('binding', function() {
                     ngModelController.$setViewValue($scope.binding);
                 });

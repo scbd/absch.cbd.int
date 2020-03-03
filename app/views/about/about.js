@@ -8,8 +8,8 @@ define(['app','underscore',
 ], function(app, _) {
 
   app.controller("newAbout",
-  ["$scope","$route", "$location", "locale", 'breadcrumbs', '$location', 'articlesService',
-    function($scope,$route, $location, locale, breadcrumbs,  $location, articlesService) {
+  ["$scope","$route", "$location", "locale", 'breadcrumbs', '$location', 'articlesService', 'ngMeta', 'realm',
+    function($scope,$route, $location, locale, breadcrumbs,  $location, articlesService, ngMeta, realm) {
       
       $scope.status   = "loading";
       $scope.error    = null;
@@ -30,24 +30,26 @@ define(['app','underscore',
       $scope.type = $route.current.params.type;
       $scope.faqType = $route.current.params.faqType;
 
-      if($scope.id == "guides" && $scope.type){
-        $scope.show = "guides";
-        breadcrumbs.options = {'aboutCode': "Step-by-step guides" };
-      }
-      else if($scope.id == "faqs"){
-        //$scope.faqs = "ABSCH-About, faqs"; 
-        //$scope.showSearch = true;
-        //$scope.show = "faqs";
-        loadFaqs($scope.type);
-      }
-      else if($scope.id == "feedback"){
-        $scope.show = "feedback";
-      }
-      else if($scope.id){
-        loadArticles(["ABSCH-About", $scope.id]);
-      }
-      else{
-        loadArticles(["ABSCH-About", "Introduction"]);
+      function init(){
+        if($scope.id == "guides" && $scope.type){
+          $scope.show = "guides";
+          breadcrumbs.options = {'aboutCode': "Step-by-step guides" };
+        }
+        else if($scope.id == "faqs"){
+          //$scope.faqs = "ABSCH-About, faqs"; 
+          //$scope.showSearch = true;
+          //$scope.show = "faqs";
+          loadFaqs($scope.type);
+        }
+        else if($scope.id == "feedback"){
+          $scope.show = "feedback";
+        }
+        else if($scope.id){
+          loadArticles(["ABSCH-About", $scope.id]);
+        }
+        else{
+          loadArticles(["ABSCH-About", "Introduction"]);
+        }
       }
      
        //---------------------------------------------------------------------
@@ -75,8 +77,10 @@ define(['app','underscore',
         articlesService.getArticles(qs).then(function(data){
           $scope.articles = data;
 
-          if($scope.articles)
-           breadcrumbs.options = {'aboutCode': $scope.articles[0].title[locale] };
+          if($scope.articles){
+            breadcrumbs.options = {'aboutCode': $scope.articles[0].title[locale] };
+            $scope.setMetaTags()
+          }
         })
       }
 
@@ -95,19 +99,6 @@ define(['app','underscore',
       }
 
       //---------------------------------------------------------------------
-      function loadFaqs(faqType){
-        $scope.faqs = "ABSCH-About, faqs"; 
-        $scope.showSearch = true;
-
-        if(faqType){
-          $scope.faqs = "ABSCH-About, faqs, " + faqType; 
-          $scope.showSearch = false;
-        }
-        $scope.show = "faqs";
-        breadcrumbs.options = {'aboutCode': "FAQs" };
-      }
-
-      //---------------------------------------------------------------------
       $scope.loadGuides = function(){
         $scope.show = "guides";
         breadcrumbs.options = {'aboutCode': "Step-by-step guides" };
@@ -119,7 +110,32 @@ define(['app','underscore',
           $scope.show = "search";
         }
       });
-     
+
+      $scope.setMetaTags = function(title){
+          title = title||'';          
+          if(title!='')
+            title += ' | ';
+          title += breadcrumbs.options.aboutCode + ' | About ' + realm.chShortName;
+
+          ngMeta.resetMeta();  
+          ngMeta.setTitle(title);
+          // ngMeta.setTag('description', summary || window.scbdApp.title);
+      }     
+
+      function loadFaqs(faqType){
+        $scope.faqs = "ABSCH-About, faqs"; 
+        $scope.showSearch = true;
+
+        if(faqType){
+          $scope.faqs = "ABSCH-About, faqs, " + faqType; 
+          $scope.showSearch = false;
+        }
+        $scope.show = "faqs";
+        breadcrumbs.options = {'aboutCode': "FAQs" };
+        $scope.setMetaTags();
+      }
+
+      init();
     }
   ]);
 
