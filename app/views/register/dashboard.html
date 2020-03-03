@@ -219,6 +219,8 @@
                                         <td style="min-width:180px!important;">
                                             <a translation-url href="/search" class="color-darkgrey" style="font-weight:500;">
                                                National Focal Points (NFP)</a>
+                                            <span ng-if="schemas['focalPoint'].description" href="#" class="helpinfoInline fa fa-info-circle" 
+                                            data-toggle="tooltip" data-html="true" data-title="{{schemas['focalPoint'].description|lstring:locale}}" data-container="body"></span>
                                         </td>
                                         <td style="max-width:10%">
                                             <span class="hidden-xs pull-right" ng-include="'offline-formats'" onload="schema='focalPoint'"></span>
@@ -256,6 +258,8 @@
                                             <a translation-url href="#" ng-click="gotoList($event,schema)"
                                                 class="color-darkgrey" style="font-weight:500;">
                                                 {{schema|schemaNamePlural}} ({{schema|urlSchemaShortName}})</a>
+                                            <span ng-if="schemas[schema].description" href="#" class="helpinfoInline fa fa-info-circle" 
+                                                data-toggle="tooltip" data-html="true" data-title="{{schemas[schema].description|lstring:locale}}" data-container="body"></span>
                                         </td>
                                         <td style="max-width:10%">
                                             <span class="hidden-xs pull-right" ng-include="'offline-formats'"></span>
@@ -313,6 +317,8 @@
                                         <a translation-url href="#" ng-click="gotoList($event,'contact')"
                                             class="color-darkgrey" style="font-weight:500;">
                                             Contacts (CON)</a>
+                                            <span ng-if="schemas['contact'].description" href="#" class="helpinfoInline fa fa-info-circle" 
+                                            data-toggle="tooltip" data-html="true" data-title="{{schemas['contact'].description|lstring:locale}}" data-container="body"></span>
 
                                     </td>
                                     <td style="max-width:10%">
@@ -377,6 +383,9 @@
                                             <a translation-url href="#" ng-click="gotoList($event,schema)"
                                                 class="color-darkgrey" style="font-weight:500;">
                                                 {{schema|schemaNamePlural}} ({{schema|urlSchemaShortName}})</a>
+
+                                            <span ng-if="schemas[schema].description" href="#" class="helpinfoInline fa fa-info-circle" 
+                                            data-toggle="tooltip" data-html="true" data-title="{{schemas[schema].description|lstring:locale}}" data-container="body"></span>
                                         </td>
                                         <td style="max-width:10%">
                                             <span class="hidden-xs pull-right" ng-include="'offline-formats'"></span>
