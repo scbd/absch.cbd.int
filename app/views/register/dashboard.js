@@ -5,15 +5,16 @@ define(['app', 'underscore', 'angular', 'services/articles-service',
 function(app, _, ng) {
     "use strict";
     return ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
-                    "$routeParams", '$location', "$filter", "ngDialog", "$timeout", 'toastr', 'appConfigService',
+                    "$routeParams", '$location', "$filter", "ngDialog", "$timeout", 'toastr',
                     'IWorkflows', 'commonjs',
         function($rootScope, $scope, storage, roleService, articlesService, realm, $q, $routeParams, 
-                $location, $filter, ngDialog, $timeout, toastr, appConfigService, IWorkflows, commonjs) {
+                $location, $filter, ngDialog, $timeout, toastr, IWorkflows, commonjs) {
             
+            $scope.schemas          = realm.schemas        
             $scope.languages        = commonjs.languages;
             $scope.Math             = window.Math;
-            $scope.nationalSchemas  = _.without(appConfigService.nationalSchemas, 'contact', 'focalPoint');
-            $scope.referenceSchemas = _.without(appConfigService.referenceSchemas, 'capacityBuildingResource');
+            $scope.nationalSchemas  = _.without(realm.nationalSchemas, 'contact', 'focalPoint');
+            $scope.referenceSchemas = _.without(realm.referenceSchemas, 'capacityBuildingResource');
             $scope.topRecords       = {};
             $scope.user             = $rootScope.user;
             $scope.showRecords      = true;
@@ -158,7 +159,7 @@ function(app, _, ng) {
                                 $and : [
                                     { "activities.assignedTo": myUserID } ,
                                     { "closedOn"             : { $exists : false } },
-                                    { "data.realm"           : appConfigService.currentRealm },
+                                    { "data.realm"           : realm.value },
                                     { "data.metadata.schema" : schema }
                                 ]
                             };
