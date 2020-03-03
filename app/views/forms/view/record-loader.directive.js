@@ -123,7 +123,7 @@
 						var documentSchema = $route.current.params.documentSchema;
 						var documentRevision = $route.current.params.revision;
 
-						var documentID = $route.current.params.documentID
+						var documentID = $route.current.params.documentID||$route.current.params.documentId
 						//documentSchema ? commonjs.integerToHex($route.current.params.documentID, documentSchema) : $route.current.params.documentID;
 
 						if ($scope.revisionNo)

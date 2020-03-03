@@ -1,6 +1,10 @@
 ﻿<div>
 
 	<b>{{document.name | lstring:locale}} <i ng-show="document.acronym">({{document.acronym | lstring:locale}})</i></b>
+	 | 
+	<a translation-url  ng-href="/database/{{document.header.schema | urlSchemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_new">
+		{{document | uniqueID}} <i class="fa fa-external-link-square" aria-hidden="true"></i> 
+	</a>   
 	<div class="value">
 		<a ng-href="/countries/{{document.government.identifier|uppercase}}" target={{target}}>{{document.government|term:locale}}</a>
 	</div>

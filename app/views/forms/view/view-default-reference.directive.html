@@ -12,10 +12,10 @@
         <div class="selected-reference-title" ng-if="document.body.title">{{document.body.title | lstring:locale}} </div> 
         <div class="selected-reference-title" ng-if="!document.body.title && document.body.name ">{{document.body.name | lstring:locale}} </div>
 
-        <div class="selected-reference-title" ng-if="document.body.scientificName">
+        <span  ng-if="document.body.scientificName">
             {{document.body.scientificName}} 
             <span ng-if="document.body.commonNames" ng-repeat="name in document.body.commonNames" 
                 ng-bind="' - ' + (name|lstring:locale) + ($last ? '' : ', ')"></span>
-        </div> 
+        </span> 
     </div>     
 </div>

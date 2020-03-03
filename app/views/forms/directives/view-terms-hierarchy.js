@@ -15,23 +15,23 @@ define(['app', 'lodash', 'text!./view-terms-hierarchy.html',
             link: function ($scope, $attr, $element) {
                 
                 $scope.$watch('binding', function(newVal, oldVal){
-					// console.log($scope.document.traits);
-					if(newVal && (newVal.traits||[]).length){
+					//console.log(newVal);
+					if(newVal && (newVal||[]).length){
 						thesaurusService.getDomainTerms($scope.termDomain, {other:true})
 						.then(function(terms){
-							_.each(newVal, function(trait){
-								if(trait.customValue){
+							_.each(newVal, function(term){
+								if(term.customValue){
 									var otherTerm = angular.copy(_.find(terms, {identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'}));
-									var parentTerm = _.find(terms, {identifier:trait.identifier});
+									var parentTerm = _.find(terms, {identifier:term.identifier});
 									
 									otherTerm.identifier = otherTerm.identifier + '#' + parentTerm.identifier
 									parentTerm.narrowerTerms.push(otherTerm.identifier);
 									otherTerm.broaderTerms.push(parentTerm.identifier);
-									trait.identifier = otherTerm.identifier;
-									otherTerm.customValue = trait.customValue
+									term.identifier = otherTerm.identifier;
+									otherTerm.customValue = term.customValue
 									terms.push(otherTerm)
 								}
-								findTerm(trait.identifier, terms);
+								findTerm(term.identifier, terms);
 							})
 							$scope.rootTerms = thesaurus.buildTree(terms);
 						});
