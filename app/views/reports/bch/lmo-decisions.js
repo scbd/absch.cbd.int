@@ -10,11 +10,10 @@ app.directive("lmoDecisions", [ '$http', '$route', '$cookies', 'searchService', 
 			restrict:'EA',
 			replace:true,
 			scope:{
-				documentId:'@'
+				identifier:'@'
 			},
 			link($scope){
 
-				var documentId = $scope.identifier = parseInt($scope.documentId || '');
 				var countries  = {};
 
 				//============================================================
@@ -50,42 +49,27 @@ app.directive("lmoDecisions", [ '$http', '$route', '$cookies', 'searchService', 
 						($scope.showDatabase=='showBiostradestatus' && country.biotrade && country.biotrade.length);
 				};
 
-				
-				$scope.$watch('newLmo', function(newVal){
-					if(newVal){
-						$scope.identifier = commonjs.hexToInteger(newVal.originalObject.id);
-						lmoDecisions(bchStorageIdToObjectId($scope.identifier));
-						
-					}
-				})
-				
 				$scope.getCountryName = function(o) {
 					return countries[o.country] || o.country;
 				};
 
-				$scope.loadLMos = function(userInputString, timeoutPromise){
-					$scope.loadingData=true;
+				function lmoDecisions(identifier){
 					var query = {
-						fieldQuery: ['schema_s:modifiedOrganism'],
-						query : userInputString,
-						fields: 'id,title:title_EN_t,summary:summary_EN_t',
-						sort  : 'government_EN_t asc'
+						query : 'identifier_s:' + identifier,
+						fields: 'id'
 					}
-					return searchService.list(query).then(function(r) {
-						return {data : r.data.response.docs};
+					searchService.list(query)
+					.then(function(r) {
+						return commonjs.hexToInteger(r.data.response.docs[0].id);
 					})
-					.finally(function(){$scope.loadingData=false;});
-				}
-
-				function lmoDecisions(documentId){
-					$scope.lmo = undefined;
-					$http.get('/api/v2013/lmos/' + documentId + '/decisions').then(function(r) {
-
-						$scope.lmo = r.data;
-			
-					}).catch(function(error) {
-						console.log('ERROR:', error);
-					});
+					.then(function(id){		
+						$scope.lmo = undefined;
+						$http.get('/api/v2013/lmos/' + bchStorageIdToObjectId(id) + '/decisions').then(function(r) {
+							$scope.lmo = r.data;					
+						}).catch(function(error) {
+							console.log('ERROR:', error);
+						});
+					})
 			
 				}
 
@@ -95,7 +79,7 @@ app.directive("lmoDecisions", [ '$http', '$route', '$cookies', 'searchService', 
 					return '52000000CBD0900000000000'.substr(0, 24 - hex.length) + hex;
 				}
 
-				lmoDecisions(bchStorageIdToObjectId(documentId));
+				lmoDecisions($scope.identifier);
 			}
 		}
 		

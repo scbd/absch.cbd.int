@@ -36,10 +36,10 @@
                         <div record-loader api="recordApi"></div>
                     </div>
                     <div id="decisions" class="tab-pane fade bg-white"  ng-class="{'in active' : tab=='decisions'}" ng-if="tab=='decisions'">
-                        <lmo-decisions document-id="{{identifier}}"></lmo-decisions>
+                        <lmo-decisions identifier="{{identifier}}"></lmo-decisions>
                     </div>
                     <div id="risk-assessments" class="tab-pane fade bg-white"  ng-class="{'in active' : tab=='risk-assessments'}" ng-if="tab=='risk-assessments'">
-                        <lmo-risk-assessments document-id="{{identifier}}"></lmo-risk-assessments>
+                        <lmo-risk-assessments identifier="{{identifier}}"></lmo-risk-assessments>
                     </div>
                 </div>
 				<br/><br/>

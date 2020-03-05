@@ -7,44 +7,26 @@ app.directive("lmoRiskAssessments", ['searchService', function(searchService) {
 		restrict:'EA',
 		replace:true,
 		scope:{
-			documentId:'@'
+			identifier:'@'
 		},
 		link($scope){
-			var documentId = $scope.documentId;
 
-			function loadLMORiskAssessments(documentId){
+			function loadLMORiskAssessments(identifier){			
 				var query = {
-					query : 'schema_s:nationalRiskAssessment AND referenceRecord_ss:' + documentId,
+					query : 'schema_s:nationalRiskAssessment AND referenceRecord_ss:' + identifier,
 					additionalFields : 'lmoTransformationEvents_ss,scopeRelease_b,scopeConfined_b,scopeFood_b,scopeFeed_b,scopeProcessing _b',
 					sort: 'government_EN_t asc'
 				}
 				//  AND scopes_ss:*
-				$scope.identifier = documentId
+				$scope.identifier = identifier
 				searchService.list(query).then(function(r) {
 					$scope.riskAssessments = r.data.response;
 				}).catch(function(error) {
 					console.log('ERROR:', error);
 				});
 			}
-
-			$scope.loadLMos = function(userInputString, timeoutPromise){
-				$scope.loadingData=true;
-				var query = {
-					fieldQuery: ['schema_s:modifiedOrganism'],
-					query : userInputString,
-					fields: 'identifier_s,title:title_EN_t,summary:summary_EN_t'
-				}
-				return searchService.list(query).then(function(r) {
-					return {data : r.data.response.docs};
-				})
-				.finally(function(){$scope.loadingData=false;});
-			}
-			$scope.$watch('newLmo', function(newVal){
-				if(newVal)
-					loadLMORiskAssessments(newVal.originalObject.identifier_s)
-			})
-
-			loadLMORiskAssessments(documentId);
+						
+			loadLMORiskAssessments($scope.identifier);
 		}
 	}
 
