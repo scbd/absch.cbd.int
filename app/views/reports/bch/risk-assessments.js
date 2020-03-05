@@ -14,7 +14,7 @@ app.directive("lmoRiskAssessments", ['searchService', function(searchService) {
 			function loadLMORiskAssessments(identifier){			
 				var query = {
 					query : 'schema_s:nationalRiskAssessment AND referenceRecord_ss:' + identifier,
-					additionalFields : 'lmoTransformationEvents_ss,scopeRelease_b,scopeConfined_b,scopeFood_b,scopeFeed_b,scopeProcessing _b',
+					additionalFields : 'lmoTransformationEvents_ss,scopeRelease_b,scopeConfined_b,scopeFood_b,scopeFeed_b,scopeProcessing _b,scopeOther_b',
 					sort: 'government_EN_t asc'
 				}
 				//  AND scopes_ss:*
@@ -25,7 +25,7 @@ app.directive("lmoRiskAssessments", ['searchService', function(searchService) {
 					console.log('ERROR:', error);
 				});
 			}
-						
+
 			loadLMORiskAssessments($scope.identifier);
 		}
 	}
