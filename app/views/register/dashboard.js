@@ -88,6 +88,12 @@ function(app, _, ng) {
                 })
 
             }
+
+            $scope.toggleTooTip = function(){
+                $timeout(function(){
+                    ng.element('#welcomeSection').find('[data-toggle="tooltip"]').tooltip();  
+                }, 200)
+            }
             
             function init(){                      
                 loadFacets();
@@ -186,7 +192,7 @@ function(app, _, ng) {
             init();
 
             $timeout(function(){
-                ng.element('ng-view').find('[data-toggle="tooltip"]').tooltip();                
+                ng.element('#RegisterPage').find('[data-toggle="tooltip"]').tooltip();                
             },100);
         }
     ];
