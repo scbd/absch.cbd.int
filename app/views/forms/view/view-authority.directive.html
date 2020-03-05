@@ -136,11 +136,10 @@
 			
 			<div ng-show="document.header.schema=='supplementaryAuthority'">
 				<div ng-if="document.responsibleForAll!==undefined">
-					<div class="km-value">
-						This is the only designated Competent Authority for the Supplementary Protocol in this country: 
-						<strong ng-if="document.responsibleForAll">Yes</strong>
-						<strong ng-if="!document.responsibleForAll">No</strong>
-					</div>
+					<label>Is thi the only designated Competent Authority for the Supplementary Protocol in the country</label>
+					<div class="km-value" ng-if="document.responsibleForAll">Yes</div>
+					<div class="km-value" ng-if="!document.responsibleForAll">No</div>
+					
 				</div>
 				<div ng-show="document.header.schema=='supplementaryAuthority' && document.responsibilities">
 

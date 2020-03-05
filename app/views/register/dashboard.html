@@ -46,7 +46,7 @@
 
                 <h4 style="margin-top:0; margin-bottom:0; padding:0 0 5px 0;border-bottom:1px solid #ddd;">
                     <i class="fa fa-chevron-circle-down cursor" ng-show="!showProfileInfo" aria-hidden="true"
-                        ng-click="showProfileInfo=true"></i>
+                        ng-click="showProfileInfo=true;toggleTooTip()"></i>
                     <i class="fa fa-chevron-circle-up cursor" ng-show="showProfileInfo" aria-hidden="true"
                         ng-click="showProfileInfo=false"></i>
                     <span class="hidden-xs">Welcome </span>
@@ -58,7 +58,7 @@
                     </span>
                 </h4>
 
-                <div class="row"
+                <div class="row" id="welcomeSection"
                     style="background-color: #f9f9f9;border:1px solid #ddd; border-top: 0; margin:0px; padding:10px 0 10px 0; border-bottom-left-radius: 5px;border-bottom-right-radius: 5px; "
                     ng-if="showProfileInfo">
                     <div class="col-md-6 cp-header">
@@ -103,7 +103,7 @@
                             <td>
                                 <span class="comma" ng-if="roles.isNationalFocalPoint">
                                     National Focal Point
-                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip"
+                                    <span class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
                                         data-html="true"
                                         data-title="The National Focal Point is responsible for liason with the Secretariat as well as to designate themselves or another user as the Publishing Authority (PA)."
                                         data-container="body"></span>
@@ -111,7 +111,7 @@
 
                                 <span class="comma" ng-if="roles.isPublishingAuthority">
                                     Publishing Authority (PA)
-                                    <span class="helpinfoInline fa fa-info-circle " data-toggle="tooltip"
+                                    <span class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
                                         data-html="true"
                                         data-title="Each country can designate only one Publishing Authority (PA). The PA's job is to make information publically available by verifing and publishing records. A PA can also designate National Authorized Users (NAUs) who are allowed to submit draft records for their country."
                                         data-container="body"></span>
@@ -119,7 +119,7 @@
 
                                 <span class="comma" ng-if="roles.isNationalAuthorizedUser">
                                     National Authorized User (NAU)
-                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip"
+                                    <span class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
                                         data-html="true"
                                         data-title="National Authorized User (NAUs) can create draft national record  and submit them to the PA for approval."
                                         data-container="body"></span>
@@ -127,7 +127,7 @@
 
                                 <span class="comma" ng-if="roles.isUser">
                                     Registered User
-                                    <span class="helpinfoInline fa fa-info-circle" data-toggle="tooltip"
+                                    <span class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
                                         data-html="true"
                                         data-title="Regular users can create draft reference records and request their publication from the SCBD."
                                         data-container="body"></span>
@@ -219,7 +219,7 @@
                                         <td style="min-width:180px!important;">
                                             <a translation-url href="/search" class="color-darkgrey" style="font-weight:500;">
                                                National Focal Points (NFP)</a>
-                                            <span ng-if="schemas['focalPoint'].description" href="#" class="helpinfoInline fa fa-info-circle" 
+                                            <span ng-if="schemas['focalPoint'].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
                                             data-toggle="tooltip" data-html="true" data-title="{{schemas['focalPoint'].description|lstring:locale}}" data-container="body"></span>
                                         </td>
                                         <td style="max-width:10%">
@@ -258,7 +258,7 @@
                                             <a translation-url href="#" ng-click="gotoList($event,schema)"
                                                 class="color-darkgrey" style="font-weight:500;">
                                                 {{schema|schemaNamePlural}} ({{schema|urlSchemaShortName}})</a>
-                                            <span ng-if="schemas[schema].description" href="#" class="helpinfoInline fa fa-info-circle" 
+                                            <span ng-if="schemas[schema].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
                                                 data-toggle="tooltip" data-html="true" data-title="{{schemas[schema].description|lstring:locale}}" data-container="body"></span>
                                         </td>
                                         <td style="max-width:10%">
@@ -317,7 +317,7 @@
                                         <a translation-url href="#" ng-click="gotoList($event,'contact')"
                                             class="color-darkgrey" style="font-weight:500;">
                                             Contacts (CON)</a>
-                                            <span ng-if="schemas['contact'].description" href="#" class="helpinfoInline fa fa-info-circle" 
+                                            <span ng-if="schemas['contact'].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
                                             data-toggle="tooltip" data-html="true" data-title="{{schemas['contact'].description|lstring:locale}}" data-container="body"></span>
 
                                     </td>
@@ -384,7 +384,7 @@
                                                 class="color-darkgrey" style="font-weight:500;">
                                                 {{schema|schemaNamePlural}} ({{schema|urlSchemaShortName}})</a>
 
-                                            <span ng-if="schemas[schema].description" href="#" class="helpinfoInline fa fa-info-circle" 
+                                            <span ng-if="schemas[schema].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
                                             data-toggle="tooltip" data-html="true" data-title="{{schemas[schema].description|lstring:locale}}" data-container="body"></span>
                                         </td>
                                         <td style="max-width:10%">
