@@ -231,7 +231,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
 
                     _.each(terms, function(identifier){
                             var term = _.find($scope.terms, {identifier:identifier});
-                            if(!$scope.selectedItems[identifier].selected){
+                            if(term && !($scope.selectedItems[identifier]||{}).selected){
                                 var hasChildSelected = isSelectedOrIndertiminante(term.narrowerTerms);
                                 $element.find('#chk_'+identifier).prop('indeterminate', hasChildSelected||val);
                             }
