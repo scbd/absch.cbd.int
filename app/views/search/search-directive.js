@@ -607,6 +607,14 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             resultQuery.then(function(data){
                                 $scope.searchResult.data = data;
                             })
+                            .catch(function(e){
+                                toastr.error('There was an error running search query.')
+                                var exception = {
+                                    data :  e.data||e.message, status:e.status,
+                                    url : (e.config||{}).url, params: (e.config||{}).params
+                                }                                
+                                $log.error(JSON.stringify(exception))
+                            })
                             .finally(function(){$scope.searchResult.loading = false;})
                         }, 0)
                     }
