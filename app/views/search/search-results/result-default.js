@@ -11,7 +11,7 @@ define(['app', 'text!views/search/search-results/result-default.html','lodash', 
                 doc:'=',
                 type:'@'
             },
-            link: function($scope, $attr, $element) {
+            link: function($scope, $element, $attr) {
                 
                 $scope.showExternalLink = $attr.externalLink=='true'
                 $scope.api = {};

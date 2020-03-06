@@ -58,7 +58,7 @@
 
 		<div ng-show="document.donorOrganismCollectionPoint">
 			<label>Point of collection or acquisition of the donor organism(s)</label>
-			<div class="km-value">
+			<div>
 				<km-value-ml value="document.donorOrganismCollectionPoint"  html locales="locale"></km-value-ml>
 			</div>
 		</div>
@@ -68,25 +68,21 @@
 
 		<div ng-show="document.proteinName">
 			<label>Name of the protein expressed by the coding sequence</label>
-			<div class="km-value">
+			<div>
 					<km-value-ml value="document.proteinName" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-show="document.biologicalFunction">
 			<label>Biological function of the protein</label>
-			<div class="km-value">
+			<div>
 				<km-value-ml value="document.biologicalFunction" html locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-show="document.traits">
 			<label>Related trait(s) or use(s) in biotechnology</label>
-			<div class="km-value">
-				<ul class="list">
-					<li ng-repeat="use in document.traits" ng-bind="use | term:locale"></li>
-				</ul>
-			</div>
+			<view-terms-hierarchy class="km-value" ng-model="document.traits" locale="locale" term-domain="dnaSequenceTraits"></view-terms-hierarchy>
 		</div>
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
 			<legend>Additional Information</legend>
