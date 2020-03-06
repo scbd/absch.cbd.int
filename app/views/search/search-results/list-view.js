@@ -41,8 +41,8 @@
                         pivotFacetFields : queryOptions.pivotFacetFields
                     }
                     // if(lQuery=='*:*' || lQuery) TODO: add this fields only when req
-                        lQuery.additionalFields  = 'diseasesResistance_b,herbicidesResistance_b,physiologyChanges_b,qualityChanges_b,medicalProduction_b,traitsOther_b'
-                        lQuery.additionalFields += ',scopeRelease_b,scopeFood_b,scopeFeed_b,scopeProcessing_b,scopeConfined_b'
+                        lQuery.additionalFields  = 'traitDiseasesResistance_b,traitHerbicidesResistance_b,traitPhysiologyChanges_b,traitQualityChanges_b,traitMedicalProduction_b,traitOther_b'
+                        lQuery.additionalFields += ',scopeRelease_b,scopeFood_b,scopeFeed_b,scopeProcessing_b,scopeConfined_b,scopeOther_b'
                         //'schema_s', 'government_s', 
                     if(sort && sort != 'relevance asc')
                         lQuery.sort    = $scope.searchResult.sort = sort;
@@ -63,6 +63,13 @@
                         
                         return $scope.searchResult;
                     })
+                    .catch(function(e){
+                        $scope.searchResult.docs     = []
+                        $scope.searchResult.numFound = 0
+                        $scope.searchResult.pageCount= 0
+                        $scope.searchResult.facets   = undefined;
+                        throw e;
+                    })
                     .finally(function(){
                         $scope.loading = false;
                     })
@@ -75,7 +82,8 @@
                 }
 
                 $scope.onPageSizeChanged = function(size){
-                    $scope.searchResult.rowsPerPage = size;                    
+                    $scope.searchResult.rowsPerPage = size;  
+                    $scope.searchResult.currentPage = 1; //reset to page 1                   
                     $scope.onPageChange($scope.searchResult.currentPage);
                 }
 

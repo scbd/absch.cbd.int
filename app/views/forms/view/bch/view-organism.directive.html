@@ -22,18 +22,18 @@
 					<tbody>
 						<tr ng-repeat="(key, taxonomy) in classification">
 							<td style="width:10%">
-								<span ng-if="key == 'realm'"		ng-style="{'padding-left' : (5*$index)+'px' }">Realm		</span>
-								<span ng-if="key == 'subRealm'"		ng-style="{'padding-left' : (5*$index)+'px' }">Subrealm	</span>
-								<span ng-if="key == 'kingdom'"		ng-style="{'padding-left' : (5*$index)+'px' }">Kingdom	</span>
-								<span ng-if="key == 'phylum'"		ng-style="{'padding-left' : (5*$index)+'px' }">Phylum	</span>
-								<span ng-if="key == '_class'"		ng-style="{'padding-left' : (5*$index)+'px' }">Class		</span>
-								<span ng-if="key == 'order'"		ng-style="{'padding-left' : (5*$index)+'px' }">Order		</span>
-								<span ng-if="key == 'subOrder'"		ng-style="{'padding-left' : (5*$index)+'px' }">Suborder	</span>
-								<span ng-if="key == 'family'"		ng-style="{'padding-left' : (5*$index)+'px' }">Family	</span>
-								<span ng-if="key == 'subFamily'"	ng-style="{'padding-left' : (5*$index)+'px' }">Subfamily	</span>
-								<span ng-if="key == 'genus'"		ng-style="{'padding-left' : (5*$index)+'px' }">Genus		</span>
-								<span ng-if="key == 'species'"		ng-style="{'padding-left' : (5*$index)+'px' }">Species	</span>
-								<span ng-if="key == 'subSpecies'"	ng-style="{'padding-left' : (5*$index)+'px' }">Species	</span>
+								<span ng-if="key == 'realm'"		ng-style="{'padding-left' : (8*$index)+'px' }">Realm		</span>
+								<span ng-if="key == 'subRealm'"		ng-style="{'padding-left' : (8*$index)+'px' }">Subrealm	</span>
+								<span ng-if="key == 'kingdom'"		ng-style="{'padding-left' : (8*$index)+'px' }">Kingdom	</span>
+								<span ng-if="key == 'phylum'"		ng-style="{'padding-left' : (8*$index)+'px' }">Phylum	</span>
+								<span ng-if="key == '_class'"		ng-style="{'padding-left' : (8*$index)+'px' }">Class		</span>
+								<span ng-if="key == 'order'"		ng-style="{'padding-left' : (8*$index)+'px' }">Order		</span>
+								<span ng-if="key == 'subOrder'"		ng-style="{'padding-left' : (8*$index)+'px' }">Suborder	</span>
+								<span ng-if="key == 'family'"		ng-style="{'padding-left' : (8*$index)+'px' }">Family	</span>
+								<span ng-if="key == 'subFamily'"	ng-style="{'padding-left' : (8*$index)+'px' }">Subfamily	</span>
+								<span ng-if="key == 'genus'"		ng-style="{'padding-left' : (8*$index)+'px' }">Genus		</span>
+								<span ng-if="key == 'species'"		ng-style="{'padding-left' : (8*$index)+'px' }">Species	</span>
+								<span ng-if="key == 'subSpecies'"	ng-style="{'padding-left' : (8*$index)+'px' }">Species	</span>
 							</td>
 							<td ng-bind="taxonomy" style="text-align:left">
 							</td>
@@ -86,7 +86,7 @@
 
 		<div ng-show="document.organismType">
 			<label>Type of organism(s)</label>
-			<div class="km-value" ng-bind="document.organismType | term:locale"></div>
+			<view-terms-hierarchy  class="km-value" ng-model="document.organismType" locale="locale" term-domain="typeOfOrganisms"></view-terms-hierarchy>
 		</div>
 
 		<div ng-show="document.domestication">

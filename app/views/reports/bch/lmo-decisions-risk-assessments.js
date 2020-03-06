@@ -6,28 +6,24 @@ app.controller("LmoReportController", ['$scope', '$routeParams', '$route', '$loc
 	function($scope, $routeParams, $route, $location, searchService, commonjs) {
 
         $scope.tab = $routeParams.tab;
-		$scope.identifier = parseInt($route.current.params.documentId || '');		
+		$scope.identifier = $route.current.params.documentId;		
 		
 		$scope.$watch('newLmo', function(newVal){
 			if(newVal){
-                $scope.identifier = commonjs.hexToInteger(newVal.originalObject.id);
+                $scope.identifier = commonjs.hexToInteger(newVal.originalObject.identifier_s);
                 var tab = $scope.tab;
                 $scope.tab = undefined;	
                 $scope.tab = tab;
-                $route.updateParams({documentId:$scope.identifier})			
+                $route.updateParams({documentId:newVal.originalObject.identifier_s})			
 			}
 		})
 		
-		$scope.getCountryName = function(o) {
-			return countries[o.country] || o.country;
-		};
-
 		$scope.loadLMos = function(userInputString, timeoutPromise){
 			$scope.loadingData=true;
 			var query = {
 				fieldQuery: ['schema_s:modifiedOrganism'],
 				query : userInputString,
-				fields: 'id,title:title_EN_t,summary:summary_EN_t',
+				fields: 'id,identifier_s,title:title_EN_t,summary:summary_EN_t',
 				sort  : 'government_EN_t asc'
 			}
 		    return searchService.list(query).then(function(r) {

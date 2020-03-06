@@ -144,6 +144,14 @@
                             return $scope.searchResult;
     
                         })
+                        .catch(function(e){
+                            $scope.searchResult.docs     = []
+                            $scope.searchResult.numFound = 0
+                            $scope.searchResult.pageCount= 0
+                            $scope.searchResult.facets   = undefined;
+                            scope.searchResult.recordsFound= 0
+                            throw e;
+                        })
                         .finally(function(){
                             $scope.loading = false;
                         })
@@ -156,7 +164,8 @@
                 }
 
                 $scope.onPageSizeChanged = function(size){
-                    $scope.searchResult.rowsPerPage = size;                    
+                    $scope.searchResult.rowsPerPage = size;        
+                    $scope.searchResult.currentPage = 1; //reset to page 1              
                     $scope.onPageChange($scope.searchResult.currentPage);
                 }
 
@@ -169,7 +178,6 @@
 
 
                 $scope.loadRecords = function(group, number){
-                    console.log(group, number)
                     group.isLoading = true;
                     var recQuery = $scope.searchResult.query;
                     
