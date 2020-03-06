@@ -63,6 +63,13 @@
                         
                         return $scope.searchResult;
                     })
+                    .catch(function(e){
+                        $scope.searchResult.docs     = []
+                        $scope.searchResult.numFound = 0
+                        $scope.searchResult.pageCount= 0
+                        $scope.searchResult.facets   = undefined;
+                        throw e;
+                    })
                     .finally(function(){
                         $scope.loading = false;
                     })
@@ -75,7 +82,8 @@
                 }
 
                 $scope.onPageSizeChanged = function(size){
-                    $scope.searchResult.rowsPerPage = size;                    
+                    $scope.searchResult.rowsPerPage = size;  
+                    $scope.searchResult.currentPage = 1; //reset to page 1                   
                     $scope.onPageChange($scope.searchResult.currentPage);
                 }
 

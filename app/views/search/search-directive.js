@@ -8,7 +8,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 'components/scbd-angularjs-controls/form-control-directives/pagination',
 'views/search/directives/result-view-options', 'views/search/search-filters/left-side-filter',
 'views/search/search-results/list-view','views/search/search-results/group-view', 
-'components/scbd-angularjs-controls/form-control-directives/km-date-range', 'services/solr'
+'components/scbd-angularjs-controls/form-control-directives/km-date-range', 'services/solr', 'toastr'
 
 ], function(app, template, _, scbdSchemas, joyRideText) {
 
@@ -19,10 +19,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
             template: template, 
             controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService','$rootScope',
-             'joyrideService', '$timeout', 'locale', 'solr',
+             'joyrideService', '$timeout', 'locale', 'solr', 'toastr','$log',
             function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
                     appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, 
-                    $timeout, locale, solr) {
+                    $timeout, locale, solr, toastr, $log) {
                         var customQueryFn = {
                             buildExpiredPermitQuery : buildExpiredPermitQuery,
                             buildContactsUserCountryfn : buildContactsUserCountryfn
