@@ -24,6 +24,10 @@ function (app, _) {
 			if (!document)
 				return undefined;
 			
+			//temp
+			if(document.hasUniqueIdentification==undefined && document.uniqueIdentification)
+				document.hasUniqueIdentification = true;
+
 			if((document.traits||[]).length == 0)
 				document.traits = undefined;
 			if (/^\s*$/g.test(document.notes))
@@ -66,7 +70,7 @@ function (app, _) {
 
 			$scope.lookingupDetections =true
 
-			$http.get('http://localhost:8000/api/v2020/bch/lmo-detection-methods/'+uniqueIdentifier)
+			$http.get('/api/v2020/bch/lmo-detection-methods/'+uniqueIdentifier)
 			.then(function(result){
 				if(result.data){
 					var exists = _.find($scope.document.detectionMethodLinks, {url: decodeURIComponent(result.data.url)})
