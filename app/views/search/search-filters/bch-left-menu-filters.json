@@ -281,7 +281,7 @@
 			"type": "thesaurus",
 			"term": "OrganismCommonUses",
 			"title": "Common use(s)",
-			"field": "commonUses_sss"
+			"field": "commonUses_ss"
 		},
 		{
 			"type": "thesaurus",
