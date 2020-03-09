@@ -1,32 +1,26 @@
 define(['app','underscore', "text!views/forms/view/view-default-reference.directive.html", 
 'components/scbd-angularjs-services/services/main'], function (app, _, template) {
 
-app.directive("viewDefaultReference", [function () {
+app.directive("viewDefaultReference", ["IStorage", function (storage) {
 	return {
 		restrict: "EAC",
 		template: template ,
 		replace: true,
-		transclude: false,
+		transclude: {
+			default:'?default',
+			extra:'?extra'
+		},
 		scope: {
 			model: "=ngModel",
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: ["$scope", "IStorage", "$filter", '$q', function ($scope, storage, $filter, $q) {
+		link:function($scope, $element, $attr){
 
-
-			// $scope.document = $scope.model;
-			
-			
-			
-
-            // //==================================
-		    // //
-		    // //==================================
-		    $scope.$watch('model', function(newValue, oldValue){
+			$scope.hideSchema = $attr.hideSchema=='true'
+			$scope.$watch('model', function(newValue, oldValue){
 		        if(newValue){
-					$q.when(loadReferenceDocument($scope.model))
-					.then(function(data) {
+					loadReferenceDocument($scope.model).then(function(data) {
 						$scope.document = data;
 					});
 
@@ -52,7 +46,7 @@ app.directive("viewDefaultReference", [function () {
 						});
 			}
 
-		 }] //controller
+		 }
 	};
 }]);
 });
