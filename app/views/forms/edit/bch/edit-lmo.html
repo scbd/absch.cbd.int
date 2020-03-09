@@ -192,6 +192,11 @@
 											<div class="km-control-group" name="detectionMethodLinks" caption="Additional information">
 												<div km-link name="detectionMethodLinks" ng-model="document.detectionMethodLinks" allow-link="true" allow-file="true"
 													identifier="document.header.identifier"></div>
+													<button class="btn btn-default" ng-click="lookupDetections(document.uniqueIdentification, document.detectionMethodLinks)" ng-disabled="lookingupDetections">
+														<i ng-if="lookingupDetections" class="fa fa-spinner fa-spin"></i> 
+														<i class="fa fa-database" aria-hidden="true"></i> 
+														Lookup Detection methods 
+													</button>
 											</div>
 										</div>
 									</div>
