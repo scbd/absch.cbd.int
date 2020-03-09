@@ -114,7 +114,11 @@
 											<div class="km-control-group" required name="genes" caption="Introduced or modified genetic elements">	
 												<div class="help-block">Preferably all genetic elements that were introduced into this LMO, such as promoters, protein coding sequences and terminators, must be referenced in this section. At least ALL protein coding sequences are mandatory.</div>
 												<div document-selector ng-model="document.genes" question="genes"
-													schema="(dnaSequence)" caption="Gene and DNA Sequence"></div>			
+													schema="(dnaSequence)" caption="Gene and DNA Sequence">
+													<selected-records>
+														<div ng-include="'lmo-reference-display'" onload="docSelector=$parent"></div>
+													</selected-records>
+												</div>			
 											</div>
 										</div>
 										<div class="col-sm-12">
@@ -156,7 +160,11 @@
 													genes other than those that were inserted into the LMO; for example, gene silencing or
 													induction.</div>
 												<div document-selector ng-model="document.affectedGenes" question="affectedGenes"
-													schema="(dnaSequence)" caption="Gene and DNA Sequence"></div>
+													schema="(dnaSequence)" caption="Gene and DNA Sequence">
+													<selected-records>
+														<div ng-include="'lmo-reference-display'" onload="docSelector=$parent"></div>
+													</selected-records>
+												</div>
 											</div>
 										</div>
 										<div class="col-xs-12">
@@ -256,6 +264,27 @@
 	<div id="constructSection">
 		<script type="text/ng-template" trados-translation="true" id="geneConstructModal">
 			<lmo-construct ng-model="geneConstruct" close-dialog="closeDialog(updatedConstruct)"></lmo-construct>
+		</script>
+		<script type="text/ng-template" trados-translation="true" id="lmo-reference-display">			
+			<table class="table" id="search-new" style="padding-bottom:3px;width:100%;">
+				<tr ng-repeat="doc in docSelector.selectedDocuments"  >
+					<td style="margin-bottom:15px;width:15px;">
+						<a translation-url  class="btn btn-default" ng-click="$parent.$parent.$parent.removeDocument(doc);" class="link color-red">
+							<i class="fa fa-times"></i></a>
+					</td>
+					<td style="margin-bottom:20px;">
+						<div view-default-reference ng-model="doc.header.identifier" locale="locale" hide-schema="true">
+							<extra>
+								<span ng-repeat="trait in $parent.$parent.document.body.traits" >
+									<span ng-if="$first"> | </span>
+									<span ng-bind="trait|term:locale" class="selected-reference-title"></span>
+									<span ng-if="!$last"> | </span>
+								</span>							
+							</extra>
+						</div>
+					</td>
+				</tr>
+			</table>
 		</script>
 	</div>
 </div>
