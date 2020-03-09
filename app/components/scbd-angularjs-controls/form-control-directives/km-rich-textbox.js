@@ -86,6 +86,22 @@
 							$scope.isShowLocale = function() {
 									return $scope.locales && $scope.locales.length > 1;
 							};
+
+							/// Add underline button to the toolbar.
+							$scope.trixInitialize = function(e, ed){
+
+								Trix.config.textAttributes.underline = { 
+									style: { 'text-decoration': "underline" },
+								  parser: function(element) {
+									return element.style['text-decoration'] === "underline"
+								  },
+								  inheritable: true
+								 }
+								
+								var buttonHTML = '<button type="button" class="trix-button trix-button--icon-underline" data-trix-attribute="underline" data-trix-key="u" title="Underline" tabindex="-1">U</button>'
+								e.target.toolbarElement.querySelector(".trix-button-group.trix-button-group--text-tools")
+									.insertAdjacentHTML("beforeend", buttonHTML)
+							}
 					}
 			};
 	});
