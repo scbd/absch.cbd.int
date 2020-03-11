@@ -7,7 +7,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
             restrict: 'EAC',
             template : template,
             link: function ($scope, $element, attrs) {              
-
+                $scope.termLocales = {};
                 if(!$scope.currentLocale){
                     $scope.currentLocale = appLocale;
                     $scope.downloadLocale = appLocale;
@@ -16,6 +16,9 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                 $scope.$watch('::internalDocument', function(newVal){
                     if(!newVal)
                         return;
+                    _.each($scope.internalDocument.header.languages, function(l){
+                        $scope.termLocales[l] =  { identifier:'lang-'+l };
+                    })
                     //if document does not contain application selected locale, then select one 
                     if(!_.contains($scope.internalDocument.header.languages, appLocale)){
 
@@ -34,7 +37,8 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                             $scope.hidePdf = true;
                     }
                     $timeout(function(){
-                        $scope.pdfUrl = getPdfUrl();
+                        $scope.pdfUrl = getPdfUrl();                        
+                        $element.find('.lang-tooltip').tooltip()
                     }, 200);
                 })
 
