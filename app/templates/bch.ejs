@@ -4,8 +4,9 @@
 <head>
     <base href="<%=baseUrl%>">
     <meta charset="utf-8">
-    <title>Biosafety Clearing-House</title>
-    <meta name="description" content="The Biosafety Clearing-House">
+    <title ng-bind="ngMeta.title"></title>
+    <meta name="description" content="{{ngMeta.description}}">
+    <link name="canonical" rel="canonical" href="{{ngMeta.canonical}}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="/app/img/favicon.png">
@@ -30,7 +31,9 @@
 
 </head>
 <body ng-controller="BchTemplateController" id="top" lang="<%=preferredLanguage||'en'%>">
-
+    
+    <span style='display:none' id="appTitle">Biosafety Clearing-House</span>
+    <span style='display:none' id="appDescription">The Biosafety Clearing-House</span>
     <!-- PAGE -->
     <div>
         <scbd-header></scbd-header>
@@ -58,18 +61,9 @@
             host             : '<%=clearingHouseHost%>',
             version          : '<%=appVersion%>',
             lang             : '<%=preferredLanguage%>',
-            title            : document.title,
-            description      : getMetaTag('description')
-        }
-        
-        function getMetaTag(name){
-            var metas = document.getElementsByTagName('meta');
-            for (let i = 0; i < metas.length; i++) {
-                if (metas[i].getAttribute('name') === name) {
-                    return metas[i].getAttribute('content');
-                }
-            }
-        }
+            title            : document.getElementById('appTitle').innerText,
+            description      : document.getElementById('appDescription').innerText
+        }        
     </script>
     <script src="https://cdn.cbd.int/requirejs@2.2.0/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>
     
