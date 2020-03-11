@@ -109,7 +109,15 @@
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.genes" >						
-						<view-default-reference ng-model='item.identifier' locale="locale"></view-default-reference>
+						<view-default-reference ng-model='item.identifier' locale="locale" hide-schema='true'>
+							<extra>
+								<span ng-repeat="trait in $parent.$parent.document.body.traits" >
+									<span ng-if="$first"> | </span>
+									<span ng-bind="trait|term:locale" class="selected-reference-title"></span>
+									<span ng-if="!$last"> | </span>
+								</span>							
+							</extra>
+						</view-default-reference>
 					</li>
 				</ul>
 			</div>
@@ -133,7 +141,15 @@
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.affectedGenes" >						
-						<view-default-reference ng-model='item.identifier' locale="locale"></view-default-reference>
+						<view-default-reference ng-model='item.identifier' locale="locale" hide-schema='true'>
+							<extra>
+								<span ng-repeat="trait in $parent.$parent.document.body.traits" >
+									<span ng-if="$first"> | </span>
+									<span ng-bind="trait|term:locale" class="selected-reference-title"></span>
+									<span ng-if="!$last"> | </span>
+								</span>							
+							</extra>
+						</view-default-reference>
 					</li>
 				</ul>
 			</div>

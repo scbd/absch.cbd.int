@@ -23,11 +23,13 @@ function(app, angular, $, _, template) {
         minimumFn: "&minimum",
         maximumFn: "&maximum",
         api: "=?",
-        showDescription: '@?'
+        showDescription: '@?',
+        showOthersFn: '&?showOthers'
         // ,locale: '@?'
       },
       link: function($scope, $element, $attrs, ngModelController) {
        
+        $scope.hasOtherSource = $attrs.showOthers!=undefined;
         $scope.identifier = null;
         $scope.rootItems = null;
         $scope.attr = $attrs;
@@ -126,10 +128,11 @@ function(app, angular, $, _, template) {
 
         $scope.api = {
           unSelectItem: onUnSelectItem,
-          unSelectAll: onUnSelectAll,
-          getItem: onGetItem,
-          selectItem: onSelectItem,
-          selectAll: onSelectAll,
+          unSelectAll : onUnSelectAll,
+          getItem     : onGetItem,
+          selectItem  : onSelectItem,
+          selectAll   : onSelectAll,
+          loadOtherSource : showOtherSource
         };
 
         function onUnSelectItem(item) {
@@ -309,9 +312,11 @@ function(app, angular, $, _, template) {
         // in tree order /deep first
         //==============================
         $scope.getSelectedItems = function() {
-          return _.where($scope.allItems || [], {
-            selected: true
-          });
+          var mainSource = $scope.allItems || [];
+          if($scope.secondaySource)
+            mainSource = _.union(mainSource, $scope.secondaySource);
+
+          return _.where(mainSource, { selected: true });
         };
 
         //==============================
@@ -441,6 +446,22 @@ function(app, angular, $, _, template) {
         $(document).on('click', '#filterText input', function(e) {
           e.stopPropagation();
         });
+
+        function showOtherSource($evt){
+          if($evt)
+            $evt.stopPropagation();
+
+          $scope.loadingOtherSource = true
+          $scope.showOthersFn().then(function(data){
+            $scope.secondaySource = _.filter(data, function(d){
+              if(_.contains($scope.binding, d.identifier))
+                d.selected = true
+              return !_.find($scope.allItems, {identifier:d.identifier})
+            });
+          })
+          .finally(function(){$scope.loadingOtherSource = false})
+        }
+        $scope.showOtherSource = showOtherSource;
 
       }]
     };

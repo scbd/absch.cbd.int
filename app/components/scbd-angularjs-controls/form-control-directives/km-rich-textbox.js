@@ -1,9 +1,6 @@
 ﻿define(['app','text!./km-rich-textbox.html','angular','angular-trix'], function(app,template,angular) {
-	//============================================================
-	//
-	//
-	//============================================================
-	app.directive('kmRichTextbox', function() {
+
+	app.directive('kmRichTextbox', ['$filter', '$timeout', function($filter, $timeout) {
 			return {
 					restrict: 'EAC',
 					template: template,
@@ -20,7 +17,8 @@
 							toolbar : "@?"
 					},
 					link: function($scope, element, attrs, ngModelController) {
-							$scope.text = {};	
+						$scope.termLocales = {};	
+						$scope.text = {};	
 							if(!$scope.toolbar)
 									$scope.toolbar = "[['bold', 'italics', 'ul', 'ol', 'redo', 'undo', 'clear']]";
 
@@ -37,9 +35,13 @@
 
 								angular.forEach(oLocales, function(locale, i) {
 									oText[locale] = oBinding[locale] || oText[locale];
+									if(!$scope.termLocales[locale]){
+										$scope.termLocales[locale] = { identifier: 'lang-'+locale };
+									}
 								});
 								$scope.text = oText;
 								$scope.onchange();
+								$timeout(function(){element.find('.lang-tooltip').tooltip()}, 300)
 							};
 
 							//==============================
@@ -86,7 +88,23 @@
 							$scope.isShowLocale = function() {
 									return $scope.locales && $scope.locales.length > 1;
 							};
+
+							/// Add underline button to the toolbar.
+							$scope.trixInitialize = function(e, ed){
+
+								Trix.config.textAttributes.underline = { 
+									style: { 'text-decoration': "underline" },
+								  parser: function(element) {
+									return element.style['text-decoration'] === "underline"
+								  },
+								  inheritable: true
+								 }
+								
+								var buttonHTML = '<button type="button" class="trix-button trix-button--icon-underline" data-trix-attribute="underline" data-trix-key="u" title="Underline" tabindex="-1">U</button>'
+								e.target.toolbarElement.querySelector(".trix-button-group.trix-button-group--text-tools")
+									.insertAdjacentHTML("beforeend", buttonHTML)
+							}
 					}
 			};
-	});
+	}]);
 });

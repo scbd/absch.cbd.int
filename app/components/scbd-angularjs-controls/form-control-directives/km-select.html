@@ -22,7 +22,7 @@
 
 	<span>
 		<div class="btn-group" >
-			<button style="button" class="btn btn-default dropdown-toggle" ng-click="autoInit()" ng-class="{disabled:ngDisabledFn(), 'btn-info' : hasSelectedItems() }" data-toggle="dropdown">
+			<button class="btn btn-default dropdown-toggle" ng-click="autoInit()" ng-class="{disabled:ngDisabledFn(), 'btn-info' : hasSelectedItems() }" data-toggle="dropdown">
 				{{getTitle(displayCount, true)}}
 				<span class="caret"></span>
 			</button>
@@ -40,6 +40,14 @@
 					<button class="btn btn-xs btn-default" ng-show="allowOther == 'true'" type="button" ng-click="chooseOther()"    ng-show="allowOther">Specify another value</button>
 				</li>
 				<li ng:repeat="item in rootItems | filter:filterText" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" style="position:relative">
+				</li>
+				<li style="margin-top:5px;border-top: 1px solid #eee;" ng-if="hasOtherSource">
+					<a ng-click="showOtherSource($event)" style="cursor: pointer;">
+						<i class="fa fa-spin fa-spinner" ng-if="loadingOtherSource"></i>
+						<span ng-if="!secondaySource">Show others</span>
+					</a>
+				</li>
+				<li ng-if="hasOtherSource && secondaySource" ng:repeat="item in secondaySource | filter:filterText" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" style="position:relative">
 				</li>
 			</ul>
 		</div>

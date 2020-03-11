@@ -1,9 +1,8 @@
-define(['app', 'views/forms/edit/edit',
-        '../view/view-database.directive'], function (app) {
+define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-database.directive'], function (app, _) {
 
   app.controller("editDatabase", ["$scope", "$http", "$filter", "$controller", "$location", function ($scope, $http, $filter, $controller,$location) {
     $controller('editController', {$scope: $scope});
-
+    $scope.formFields = {};
     //==================================
     //
     //==================================
@@ -15,6 +14,11 @@ define(['app', 'views/forms/edit/edit',
 
       if (!document)
         return undefined;
+      
+      if(($scope.formFields.websites||[]).length)
+        document.websites = _.map($scope.formFields.websites, function(url){ return { url:url } });      
+      document.websites = document.websites || (document.website ? [document.website] : undefined);
+      document.website = undefined //obsolete field
 
       document = angular.fromJson(angular.toJson(document));
 
@@ -37,6 +41,11 @@ define(['app', 'views/forms/edit/edit',
       return document;
     };
 
-    $scope.setDocument({});
+    $scope.setDocument({}).then(function(document){
+      $scope.websites = []
+      if((document.websites||[]).length){
+        $scope.websites = _.map(document.websites, 'url');
+      }
+    });
   }]);
 });

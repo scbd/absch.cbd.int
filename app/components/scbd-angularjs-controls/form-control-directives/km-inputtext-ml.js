@@ -3,7 +3,7 @@ define(['app','text!./km-inputtext-ml.html','angular'], function(app,template,an
   //
   //
   //============================================================
-  app.directive('kmTextboxMl', function() {
+  app.directive('kmTextboxMl', ['$filter', '$timeout', function($filter, $timeout) {
     return {
       restrict: 'EAC',
       template: template,
@@ -19,6 +19,7 @@ define(['app','text!./km-inputtext-ml.html','angular'], function(app,template,an
       },
       link: function($scope, element, attrs, ngModelController) {
         $scope.text = {};
+        $scope.termLocales={};
         $scope.$watch('locales', watchLocales);
         $scope.$watch('binding', watchBinding);
         
@@ -32,9 +33,13 @@ define(['app','text!./km-inputtext-ml.html','angular'], function(app,template,an
 
           angular.forEach(oLocales, function(locale, i) {
             oText[locale] = oBinding[locale] || oText[locale];
+            if(!$scope.termLocales[locale]){
+              $scope.termLocales[locale] = { identifier: 'lang-'+locale };
+            }
           });
           $scope.text = oText;
           $scope.onchange();
+          $timeout(function(){element.find('.lang-tooltip').tooltip()}, 300)
         };
 
         //==============================
@@ -83,5 +88,5 @@ define(['app','text!./km-inputtext-ml.html','angular'], function(app,template,an
         };
       }      
     };
-  });
+  }]);
 });
