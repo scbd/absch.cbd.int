@@ -41,9 +41,11 @@
                         pivotFacetFields : queryOptions.pivotFacetFields
                     }
                     // if(lQuery=='*:*' || lQuery) TODO: add this fields only when req
+                    if(realm.is('BCH')){
                         lQuery.additionalFields  = 'traitDiseasesResistance_b,traitHerbicidesResistance_b,traitPhysiologyChanges_b,traitQualityChanges_b,traitMedicalProduction_b,traitOther_b'
                         lQuery.additionalFields += ',scopeRelease_b,scopeFood_b,scopeFeed_b,scopeProcessing_b,scopeConfined_b,scopeOther_b'
                         //'schema_s', 'government_s', 
+                    }
                     if(sort && sort != 'relevance asc')
                         lQuery.sort    = $scope.searchResult.sort = sort;
 
