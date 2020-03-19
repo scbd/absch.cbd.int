@@ -12,7 +12,7 @@ app.directive("viewReferencedRecords", [function () {
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: ["$scope", "IStorage", "$filter", '$q', 'searchService', function ($scope, storage, $filter, $q, searchService) {
+		controller: ["$scope", "IStorage", "$filter", '$q', 'searchService', 'realm', function ($scope, storage, $filter, $q, searchService, realm) {
 
 			// //==================================
 		    // //
@@ -21,9 +21,12 @@ app.directive("viewReferencedRecords", [function () {
 		        if(newValue){
 
 					var searchQuery = {
+						rowsPerPage:5000,
 						query 	: "referenceRecord_ss:" + $scope.model,
-						fields	: 'title:title_EN_t, referenceRecord_ss, referenceRecord_info_ss,schemaCode:schema_s,schema:schema_EN_s, identifier:idenfifier_s, uniqueId:uniqueIdentifier_s,'+
-								  'scopeRelease_b,scopeConfined_b,scopeFood_b,scopeFeed_b,scopeProcessing _b,scopeOther_b,traitDiseasesResistance_b,traitHerbicidesResistance_b,traitPhysiologyChanges_b,traitQualityChanges_b,traitMedicalProduction_b,traitOther_b',
+						fields	: 'title:title_EN_t, referenceRecord_ss, referenceRecord_info_ss,schemaCode:schema_s,schema:schema_EN_s, identifier:idenfifier_s, uniqueId:uniqueIdentifier_s,'
+					}
+					if(realm.is('BCH')){
+						searchQuery.fields += 'scopeRelease_b,scopeConfined_b,scopeFood_b,scopeFeed_b,scopeProcessing _b,scopeOther_b,traitDiseasesResistance_b,traitHerbicidesResistance_b,traitPhysiologyChanges_b,traitQualityChanges_b,traitMedicalProduction_b,traitOther_b'
 					}
 					$q.when(searchService.list(searchQuery))
 					.then(function(data) {

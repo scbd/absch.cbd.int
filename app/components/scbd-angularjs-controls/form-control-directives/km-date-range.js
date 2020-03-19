@@ -17,6 +17,7 @@ define(['app', 'text!./km-date-range.html', 'moment', 'datepicker-range'], funct
         ngDisabledFn: '&ngDisabled'
       },
       link: function($scope, $element, $attr, ngModelController) {
+        
          $element.daterangepicker({
             showDropdowns: true,
             alwaysShowCalendars:true,
@@ -29,16 +30,16 @@ define(['app', 'text!./km-date-range.html', 'moment', 'datepicker-range'], funct
               'Last 2 years'    : [moment().subtract(2,   'year'  ).startOf('month'), moment()],
               'Last 5 years'    : [moment().subtract(5,   'year'  ).startOf('month'), moment()]
             }
-        }, function(start, end, label) {
-          $scope.binding = {
-            start : start.format('YYYY-MM-DD'),
-            end   : end.format('YYYY-MM-DD'),
-            label : label
-          }
-          ngModelController.$setViewValue($scope.binding);
-          // $scope.formatedDate = start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD')
-          // console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
         });
+        $element.on('apply.daterangepicker', function(ev, picker) {
+            $scope.binding = {
+                  start : picker.startDate.format('YYYY-MM-DD'),
+                  end   : picker.endDate.format('YYYY-MM-DD'),
+                  label : picker.chosenLabel
+                }
+                ngModelController.$setViewValue($scope.binding);
+        });
+
         $scope.$watch('binding', function(newVal, old) {
             var newVal = newVal || {}
             var format;
