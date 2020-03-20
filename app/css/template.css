@@ -1088,6 +1088,10 @@ footer .logo {
 .active.dimmer {
     display: block;
     opacity: 0.3;
+    color: #fff;
+}
+.active.dimmer .block-text{
+    font-size: larger;
 }
 .dimmer {
     display: none;
