@@ -6,7 +6,7 @@ define(['app'], function(app) {
             replace: true,
             scope: {
                 activate : '=',
-                blockText: '=?'
+                dynamicText: '=?'
             },
             link: function($scope, $element, attrs) {
 
@@ -14,10 +14,10 @@ define(['app'], function(app) {
                     var blockText = ''; 
                     if(!attrs.skipLoadingIcon){
                         blockText = 'Loading...';
-                        if($scope.blockText)
-                            blockText = $scope.blockText;
-                        if(!$scope.blockText && attrs.defaultText)
-                            blockText = attrs.defaultText;
+                        if($scope.dynamicText)
+                            blockText = $scope.dynamicText;
+                        else if(attrs.blockText)
+                            blockText = attrs.blockText;
                             
                         blockText = '<i class="fa fa-spin fa-cog fa-3x" /> <strong>' + blockText + '</strong>';
                     }
@@ -40,7 +40,7 @@ define(['app'], function(app) {
                             $element.parent().removeClass('blockRegion-parent-position')
                     }
                 });
-                $scope.$watch('blockText', function(newVal){
+                $scope.$watch('dynamicText', function(newVal){
                     buildBlockText();
                 });
 

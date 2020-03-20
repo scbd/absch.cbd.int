@@ -134,8 +134,7 @@
             margin: 20px 0px;
         }
     </style>
-
-    <span block-region activate="loading" ng-if="loading" update-parent-position="true" block-text="blockText" default-text="Processing..."></span>
+    <span block-region activate="loading" ng-if="loading" update-parent-position="true" dynamic-text="blockText" block-text="Processing..."></span>
     <div class="workflow-arrows margin-bottom-20"  >
         <ng-include onload="workflowScope=workflowScope;schema=documentType;languages=languages" src="'template/workflow-arrows'"></ng-include>
     </div>
