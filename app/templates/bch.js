@@ -2,14 +2,14 @@ define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
         'bootstrap', 'routes/bch', 'ng-breadcrumbs','toastr','angular-animate', 
         'components/scbd-branding/directives/header/header',
         'components/scbd-branding/directives/footer','angular-loggly-logger',
-        'components/scbd-angularjs-services/services/locale',
+        'components/scbd-angularjs-services/services/locale', 'views/directives/route-loading-directive',
         'services/local-storage-service', 'services/app-config-service'], 
 function (app, angular, footerHtml) { 'use strict';
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
 
-    app.controller('BchTemplateController', ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm', 'localStorageService', 'LogglyLogger',
-        function ($rootScope, $location, $window, $scope, locale, realm, localStorageService, logglyLogger) {
+    app.controller('BchTemplateController', ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm', 'localStorageService', 'LogglyLogger','ngMeta',
+        function ($rootScope, $location, $window, $scope, locale, realm, localStorageService, logglyLogger, ngMeta) {
 
             $rootScope.pageTitle = { text: "" };
 
@@ -53,9 +53,15 @@ function (app, angular, footerHtml) { 'use strict';
             }
 
             var basePath = (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
-            $rootScope.$on('$routeChangeSuccess', function () {
+            $rootScope.$on('$routeChangeSuccess', function (evt, current) {
                 $window.ga('set', 'page', basePath + $location.path());
                 $window.ga('send', 'pageview');
+
+                ngMeta.resetMeta();
+                if(current.$$route && current.$$route.label)
+                    ngMeta.setTitle(current.$$route.label)
+                
+                ngMeta.setTag('canonical', $window.location.href)
             });
 
             $scope.$on('signOut', function (evt, data) {
@@ -106,6 +112,21 @@ function (app, angular, footerHtml) { 'use strict';
             }, 1000));
         }
     ]);
-    
+    app.directive("mAppLoading", function ($animate) {
+            // Return the directive configuration.
+            return ({
+                link: link,
+                restrict: "C"
+            });
+            function link(scope, element, attributes) {
+                $animate.leave(element.children().eq(1)).then(
+                    function cleanupAfterAnimation() {
+                        element.remove();
+                        scope = element = attributes = null;
+                    }
+                );
+            }
+        }
+    );
     angular.bootstrap(document, [app.name]);
 });
