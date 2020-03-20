@@ -14,7 +14,7 @@ function (app, _) {
 		_.extend($scope.options, {
 
 			riskAssessmentScope: function() {
-				return thesaurusService.getDomainTerms('riskAssessmentScope');
+				return thesaurusService.getDomainTerms('riskAssessmentScope', {other:true, otherType:'lstring'});
 			}
 			
 		});

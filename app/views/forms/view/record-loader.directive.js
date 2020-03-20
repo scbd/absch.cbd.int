@@ -79,18 +79,18 @@
 						notification				: 'views/forms/view/scbd/view-notification.directive',
 						news						: 'views/forms/view/scbd/view-news.directive',
 
-						"biosafetyLaw" 				: 'views/forms/view/bch/view-biosafety-law.directive',
-						"biosafetyDecision" 		: 'views/forms/view/bch/view-biosafety-decision.directive',
-						"nationalRiskAssessment" 	: 'views/forms/view/bch/view-risk-assessment.directive',
-						"cpbNationalReport2" 		: 'views/forms/view/bch/view-national-report-2.directive',
-						"cpbNationalReport3" 		: 'views/forms/view/bch/view-national-report-3.directive',
-						"cpbNationalReport4" 		: 'views/forms/view/bch/view-national-report-4.directive',
-						"expert" 					: 'views/forms/view/bch/view-expert.directive',
-						"expertAssignment" 			: 'views/forms/view/bch/view-expert-assignment.directive',
-						"independentRiskAssessment" : 'views/forms/view/bch/view-risk-assessment.directive',
-						"modifiedOrganism" 			: 'views/forms/view/bch/view-lmo.directive',
-						"dnaSequence" 				: 'views/forms/view/bch/view-dna-sequence.directive',
-						"organism" 					: 'views/forms/view/bch/view-organism.directive'
+						biosafetyLaw				: 'views/forms/view/bch/view-biosafety-law.directive',
+						biosafetyDecision	 		: 'views/forms/view/bch/view-biosafety-decision.directive',
+						nationalRiskAssessment	 	: 'views/forms/view/bch/view-risk-assessment.directive',
+						cpbNationalReport2	 		: 'views/forms/view/bch/view-national-report-2.directive',
+						cpbNationalReport3	 		: 'views/forms/view/bch/view-national-report-3.directive',
+						cpbNationalReport4	 		: 'views/forms/view/bch/view-national-report-4.directive',
+						expert	 					: 'views/forms/view/bch/view-expert.directive',
+						expertAssignment			: 'views/forms/view/bch/view-expert-assignment.directive',
+						independentRiskAssessment	: 'views/forms/view/bch/view-risk-assessment.directive',
+						modifiedOrganism	 		: 'views/forms/view/bch/view-lmo.directive',
+						dnaSequence	 				: 'views/forms/view/bch/view-dna-sequence.directive',
+						organism	 				: 'views/forms/view/bch/view-organism.directive'
 					}
 
 					$scope.$watch("document", function (_new) {
