@@ -30,7 +30,7 @@
 											</div>
 											<div class="row" ng-if="isNational">
 												<div class="col-sm-12">
-													<div class="km-control-group" name="government" required caption="Country submitting the decision or communication">
+													<div class="km-control-group" name="government" required caption="Country">
 														<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
 															filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
 													</div>
@@ -47,7 +47,7 @@
 		
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group" name="date" caption="Date of the risk assessment">
+													<div class="km-control-group" name="date" required caption="Date of the risk assessment">
 														<div km-date placeholder="YYYY-MM-DD" name="date" required ng-model="document.date"></div>
 													</div>
 												</div>
@@ -55,7 +55,7 @@
 		
 											<div class="row">
 												<div class="col-xs-12">
-													<div class="km-control-group" name="authorities" caption="Competent National Authority(ies) responsible for the risk assessment">											
+													<div class="km-control-group" name="authorities" required caption="Competent National Authority(ies) responsible for the risk assessment">											
 														<div document-selector ng-model="document.authorities" question="authorities"
 															government="document.government" schema="(authority)"></div>			
 													</div>
@@ -78,7 +78,7 @@
 											<legend>Risk assessment details</legend>
 											<div class="row">
 												<div class="col-xs-12">
-													<div class="km-control-group" name="modifiedOrganisms" required caption="Living modified organism">											
+													<div class="km-control-group" name="modifiedOrganisms" required caption="Living modified organism(s)">											
 														<div document-selector ng-model="document.modifiedOrganisms" question="modifiedOrganisms"
 															government="document.government" schema="(modifiedOrganism)" skip-government="true"></div>			
 													</div>
@@ -96,11 +96,12 @@
 												<div class="col-sm-12">
 													<div class="km-control-group" name="documents" required caption="Risk assessment report / summary">
 														<div class="help-block">
-															An attachment is preferred. Otherwise, provide the location of the document (i.e. web address including the URL of the website 
-															(e.g. http://bch.biodiv.org) and the name of the website (e.g. "Biosafety Clearing-House"). Only use text entry to provide details 
-															of how to obtain a copy of the document if it is not available as an attachment or online.
+															An attachment is preferred. Otherwise, provide the location of the document (i.e. web address including the URL of the website (e.g. http://bch.biodiv.org) and the name of the website (e.g. "Biosafety Clearing-House"). 
 														</div>
 														<div km-link name="documents" ng-model="document.documents" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+													</div>
+													<div class="km-control-group"  name="adverseEffects" caption="Please use this field to provide a summary of the risk assessment.">
+														<div km-rich-textbox name="adverseEffects"  ng-model="document.documentSummary" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
@@ -110,7 +111,9 @@
 									<section>
 										<div class="well no-shadow bg-white">
 											<legend>Methodology and points to consider</legend>
-											
+											<div class="help-block">
+												Refer to Annex III, paragraphs 8 and 9 of the Cartagena Protocol on Biosafety.
+											</div>
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="km-control-group"  name="adverseEffects" caption="Potential adverse effects identified in the risk assessment">
@@ -232,7 +235,8 @@
 							</form>	
 				</edit-form>
 				<review-form>
-					<div view-risk-assessment ng-model="document" locale="review.locale" allow-drafts="true"></div>
+					<div ng-if="isNational"  view-national-risk-assessment ng-model="document" locale="review.locale" allow-drafts="true"></div>
+					<div ng-if="!isNational" view-independent-risk-assessment ng-model="document" locale="review.locale" allow-drafts="true"></div>
 				</review-form>
 			</workflow-arrow-buttons>			
 		</div>

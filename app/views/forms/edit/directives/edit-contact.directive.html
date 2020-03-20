@@ -11,7 +11,6 @@
                 <edit-form>
                         <form name="editForm" class="editForm" style="margin-top:10px">
 								<div ng-show="tab=='edit'" km-tab="edit">
-									{{document}}
 									<legend name="formInfo" style="display:none"></legend>
                                     <section>
 											<br>
@@ -266,7 +265,7 @@
 			
 											<div class="col-md-6 col-xs-12">
 												<div class="km-control-group" name="websites" caption="Website address(es)">
-													<div km-inputtext-list name="websites" type="url" ng-model="document.websites" placeholder="example: http://www.cbd.int"></div>
+													<div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="example: http://www.cbd.int"></div>
 												</div>
 											</div>
 										</div>

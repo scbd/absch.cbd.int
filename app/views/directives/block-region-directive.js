@@ -5,22 +5,28 @@ define(['app'], function(app) {
             restrict: 'EA',
             replace: true,
             scope: {
-                activate : '='
+                activate : '=',
+                dynamicText: '=?'
             },
             link: function($scope, $element, attrs) {
-                var blockText = ''; 
-                if(!attrs.skipLoadingIcon){
-                    blockText = 'Loading...';                                   
-                    if(attrs.blockText)
-                        blockText = attrs.blockText;
 
-                    blockText = '<i class="fa fa-spin fa-cog" /> <strong>' + blockText + '</strong>';
+                function buildBlockText(){
+                    var blockText = ''; 
+                    if(!attrs.skipLoadingIcon){
+                        blockText = 'Loading...';
+                        if($scope.dynamicText)
+                            blockText = $scope.dynamicText;
+                        else if(attrs.blockText)
+                            blockText = attrs.blockText;
+                            
+                        blockText = '<i class="fa fa-spin fa-cog fa-3x" /> <strong>' + blockText + '</strong>';
+                    }
+
+                    $element.addClass('blockRegion');
+                    var loadtHtml = '<div class="inverted dimmer" ng-class="{\'active\': activate}"><div class="medium loader block-text">'+ blockText + ' </div></div>';
+
+                    $element.empty().append($compile(loadtHtml)($scope));
                 }
-
-                $element.addClass('blockRegion');
-                var loadtHtml = '<div class="inverted dimmer" ng-class="{\'active\': activate}"><div class="medium loader">'+ blockText + ' </div></div>';
-
-                $element.append($compile(loadtHtml)($scope));
 
                 $scope.$watch('activate', function(newVal){
                     if(newVal){
@@ -34,11 +40,16 @@ define(['app'], function(app) {
                             $element.parent().removeClass('blockRegion-parent-position')
                     }
                 });
+                $scope.$watch('dynamicText', function(newVal){
+                    buildBlockText();
+                });
 
                 $scope.$on('$destroy', function(){
                     if(attrs.updateParentPosition)
                         $element.parent().removeClass('blockRegion-parent-position')
                 })
+
+                buildBlockText();
             }
         }
     }]);

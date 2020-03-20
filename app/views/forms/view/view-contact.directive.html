@@ -15,7 +15,7 @@
 			<div ng-show="document.government">
 				<label>Country</label>
 				<div class="km-value">
-					{{document.government | term}}
+					{{document.government | term:locale}}
 					<span ng-party-status government="document.government" id="government"></span>
 				</div>
 			</div>
@@ -28,7 +28,7 @@
 			<div ng-show="document.organizationType">
 				<label>Type of organization</label>
 				<div class="km-value">
-					{{document.organizationType | term}}
+					{{document.organizationType | term:locale}}
 				</div>
 			</div>
 
@@ -40,7 +40,7 @@
 			 <div ng-show="document.government">
   			   <label>Country</label>
   			   <div class="km-value">
-  				   {{document.government | term}}
+  				   {{document.government | term:locale}}
 				   <span ng-party-status government="document.government" id="government"></span>
   			   </div>
   		   </div>
@@ -84,7 +84,7 @@
 				{{document.state | lstring:locale}}
 				<br ng-show="document.city || document.state" /> {{document.postalCode | lstring:locale}}
 				<span ng-show="document.postalCode">, </span>
-				<b>{{document.country|term}}</b>
+				<b>{{document.country|term:locale}}</b>
 			</address>
 		</div>
         <div ng-show="document.phones" >

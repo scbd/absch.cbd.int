@@ -60,7 +60,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 $scope.isAdmin                     = roleService.isUserInRoles(['Administrator', 'oasisArticleEditor']);
                 $scope.locale                      = locale;
                 $scope.offlineLanguages            = commonjs.languages;
-
+                $scope.blockText                   = 'loading form...'
                 if(!$scope.tab)
                     $scope.tab = 'edit';
 
@@ -224,7 +224,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.updateSecurity = function()
 				{
 
-					$scope.loading = true;
+                    $scope.loading = true;
+                    $scope.blockText = 'verifying user roles...'
                     if(!$scope.getDocumentFn().header || !$scope.getDocumentFn().header.languages)
                         return $scope.loadSecurity();
 
@@ -266,7 +267,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
 					}).finally(function(){
 
-						$scope.loading = false;
+                        $scope.loading = false;
+                        $scope.blockText = undefined;
 					});
 				}
 
@@ -276,6 +278,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.review = function()
 				{
                     $scope.loading = true;
+                    $scope.blockText = 'Analyzing your document...'
                     $scope.validationReport = undefined;                    
 					$scope.validationReport = {isAnalyzing:true};
                     $scope.errorMessage              = null;
@@ -298,7 +301,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 						showError(null, { action: "review", error: error });
                         $scope.validationReport = undefined;
 					}).finally(function(){
-						$scope.loading = false;
+                        $scope.loading = false;
+                        $scope.blockText = undefined;
 					});
                 }
 				//====================
@@ -306,7 +310,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				//====================
 				$scope.publish = function()
 				{
-					    $scope.loading          = true;
+                        $scope.loading          = true;
+                        $scope.blockText = 'Analyzing your document...'
 					    $scope.validationReport = {isAnalyzing:true};
 					    $scope.errorMessage     = null;
 					var qDocument               = $scope.getDocumentFn();
@@ -331,6 +336,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                             var processRequest;
                             if($route.current.params.workflow){
                                 var metadata = {};
+                                $scope.blockText        = 'reseting workflow...'
                                 processRequest =  storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata)
                                                     .then(function(edit){
                                                         return storage.drafts.locks.get(document.header.identifier,{lockID:''})
@@ -345,10 +351,12 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                                                                 })
                                                     })
                                                     .then(function(data){
+                                                        $scope.blockText        = 'Publishing document'
                                                         return IWorkflows.updateActivity($route.current.params.workflow, 'publishRecord', { action : 'approve' })
                                                     });
                             }
                             else{
+                                $scope.blockText        = 'Publishing document'
                                 processRequest = editFormUtility.publish(document);
                             }
 
@@ -370,8 +378,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 					    $scope.validationReport = undefined;
 
 					}).finally(function(){
-                            $scope.loading = false;
-                            
+                        $scope.loading = false;
+                        $scope.blockText = undefined;
 					});
 				};
 
@@ -380,7 +388,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				//====================
 				$scope.publishRequest = function()
 				{
-					$scope.loading = true;					
+                    $scope.loading = true;
+                    $scope.blockText = 'Analyzing your document...'					
 					$scope.validationReport = {isAnalyzing:true};
                    $scope.errorMessage              = null;
 					var qDocument = $scope.getDocumentFn();
@@ -406,6 +415,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 					            $scope.validationReport = {isSaving:true};
                                 $scope.closeAddInfoDialog(true);
                                 $scope.loading = true;
+                                $scope.blockText        = 'Requesting publication'
                                 $q.when(editFormUtility.publishRequest(document,$scope.InfoDoc ? $scope.InfoDoc.additionalInfo:''))
                                 .then(function(workflowInfo) {
 
@@ -420,7 +430,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                                 }).finally(function(){
                                         $scope.loading = false;
-                                   //closeDocument()
+                                        $scope.blockText        = undefined
                                 });
 
                             });
@@ -432,6 +442,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         $scope.validationReport = undefined;
 					}).finally(function(){
                             $scope.loading = false;
+                            $scope.blockText        = undefined;
                     });
 
 				};
@@ -446,7 +457,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.saveDraft = function()
 				{
                     $scope.tab = 'edit';
-					$scope.loading = true;
+                    $scope.loading = true;
+                    $scope.blockText        = 'Saving draft document'
                    $scope.errorMessage              = null;
 					return $q.when($scope.getDocumentFn()).then(function(document)
 					{
@@ -501,7 +513,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 					}).catch(function(error){
 						showError(null,  { action: "saveDraft", error: error });
 					}).finally(function(){
-						    $scope.loading = false;
+                            $scope.loading = false;
+                            $scope.blockText        = undefined;
 					});
 				};				
 
@@ -533,7 +546,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.closeDialog = function()
 				{
 					return $q.all([$scope.showCancelDialog(false)]).finally(function(){
-						$scope.loading = false;
+                        $scope.loading = false;
+                        $scope.blockText        = undefined;
 					});
 				};
 
@@ -541,6 +555,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 {
                     return $q.all([$scope.showAdditionalInfoDialog(false)]).finally(function(){
                         $scope.loading = changeLoading;
+                        $scope.blockText        = undefined;
                     });
                 };
 
@@ -548,6 +563,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 {
                     return $q.all([$scope.showWorkflowDraftDialog(false)]).finally(function(){
                         $scope.loading = changeLoading;
+                        $scope.blockText        = undefined;
                     });
                 };
 
@@ -721,7 +737,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 //============================================================
                 function documentPublished(documentInfo, workflowId) {
 
-                    toastr.info('Record published. The record will be now publicly accessible on ABSCH.');
+                    toastr.info('Record published. The record will be now publicly accessible on the Clearing-House.');
                     if(documentInfo.header.schema!= 'contact'){
                         localStorageService.set('workflow-activity-status', {
                             identifier : documentInfo.header.identifier, type:'publish',
@@ -743,6 +759,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         return;
 
                     $scope.loading = true;
+                    $scope.blockText        = 'loading Information about the form';
                     var ag = [];
                     ag.push({"$match":{"adminTags.title.en": { "$all" :
                         [   encodeURIComponent('edit-form'), encodeURIComponent(realm.value.replace(/(\-[a-zA-Z]{1,5})/, '')),
@@ -760,6 +777,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     })
                     .finally(function(){
                         $scope.loading = false;
+                        $scope.blockText        = undefined;
                     })
                 }
 
