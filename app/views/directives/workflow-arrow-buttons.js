@@ -737,7 +737,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 //============================================================
                 function documentPublished(documentInfo, workflowId) {
 
-                    toastr.info('Record published. The record will be now publicly accessible on ABSCH.');
+                    toastr.info('Record published. The record will be now publicly accessible on the Clearing-House.');
                     if(documentInfo.header.schema!= 'contact'){
                         localStorageService.set('workflow-activity-status', {
                             identifier : documentInfo.header.identifier, type:'publish',
