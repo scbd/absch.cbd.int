@@ -22,19 +22,6 @@ define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-database.directi
 
       document = angular.fromJson(angular.toJson(document));
 
-      if (document.website) {
-
-        var oWebSite = document.website;
-
-        if (_.isEmpty(oWebSite))       oWebSite = undefined;
-        if (oWebSite && !oWebSite.url) oWebSite = undefined;
-
-        if (oWebSite)
-          oWebSite = _.pick(oWebSite, "url", "name");
-
-        document.website = oWebSite;
-      }
-
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
 
@@ -42,9 +29,9 @@ define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-database.directi
     };
 
     $scope.setDocument({}).then(function(document){
-      $scope.websites = []
+      $scope.formFields.websites = []
       if((document.websites||[]).length){
-        $scope.websites = _.map(document.websites, 'url');
+        $scope.formFields.websites = _.map(document.websites, 'url');
       }
     });
   }]);

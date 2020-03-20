@@ -16,6 +16,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
             onPostSubmitFn   : "&onPostSubmit"
 		},
 		link : function($scope, $element, $attr){
+            $scope.formFields = {};
             $scope.type = $attr.documentType;
             $controller('editController', {$scope: $scope});
             $scope.allowNew         = $attr.allowNew||true
@@ -75,6 +76,9 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                 if (/^\s*$/g.test(document.middleName)) document.middleName = undefined;
                 if (/^\s*$/g.test(document.lastName)) document.lastName = undefined;
                 if (/^\s*$/g.test(document.notes)) document.notes = undefined;
+
+                if(($scope.formFields.websites||[]).length)
+                    document.websites = _.map($scope.formFields.websites, function(url){ return { url:url } });
 
                 if(!$scope.isNationalUser)
                     document.government = undefined;
@@ -161,7 +165,14 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
             var doc = {
                 type : $scope.prefilledContactType? $scope.prefilledContactType: undefined
             }
-            $scope.setDocument(doc, !$rootScope.user.government).then($scope.loadOrganizationAddress);
+            $scope.setDocument(doc, !$rootScope.user.government)
+            .then(function(document){
+                $scope.formFields.websites = []
+                if((document.websites||[]).length){
+                  $scope.formFields.websites = _.map(document.websites, 'url');
+                }
+            })
+            .then($scope.loadOrganizationAddress);
 
         }
 	};
