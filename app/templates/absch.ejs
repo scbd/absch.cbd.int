@@ -138,7 +138,8 @@
             version          : '<%=appVersion%>',
             lang             : '<%=preferredLanguage%>',
             title            : document.getElementById('appTitle').innerText,
-            description      : document.getElementById('appDescription').innerText
+            description      : document.getElementById('appDescription').innerText,
+            analytics        : '<%=googleAnalyticsCode%>'
         }
     </script>
     <script src="https://cdn.cbd.int/requirejs@2.2.0/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>    
