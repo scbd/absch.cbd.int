@@ -227,6 +227,8 @@ function(require, template, app, _) {
                   else
                       mapCountry.colorReal = mapCountry.baseSettings.color = "#333";
               } else {
+                    console.log(country, mapCountry)
+                    if(mapCountry)//not sure if this is correct
                       mapCountry.colorReal = mapCountry.baseSettings.color = "#333";
               }
   
