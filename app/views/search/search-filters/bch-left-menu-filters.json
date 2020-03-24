@@ -51,7 +51,7 @@
 		{
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
-			"title": "Introduced or modified traits",
+			"title": "Related trait(s) or use(s) in biotechnology",
 			"field": "lmoTraits_ss",
 			"relatedField":"lmoTraits_REL_ss"
 		},
@@ -68,7 +68,7 @@
 		{
 			"type": "thesaurus",
 			"term": "techniqueUsed",
-			"title": "Techniques Used",
+			"title": "Techniques used for the modification",
 			"field": "lmoTechniquesUsed_ss"
 		},
 		{
@@ -226,7 +226,7 @@
 		{
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
-			"title": "Introduced or modified traits",
+			"title": "Related trait(s) or use(s) in biotechnology",
 			"field": "lmoTraits_ss",
 			"relatedField":"lmoTraits_REL_ss"
 		},
@@ -243,7 +243,7 @@
 		{
 			"type": "thesaurus",
 			"term": "techniqueUsed",
-			"title": "Techniques Used",
+			"title": "Techniques used for the modification",
 			"field": "lmoTechniquesUsed_ss"
 		},
 		{
@@ -379,7 +379,7 @@
 		{
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
-			"title": "Introduced or modified traits",
+			"title": "Related trait(s) or use(s) in biotechnology",
 			"field": "lmoTraits_ss",
 			"relatedField":"lmoTraits_REL_ss"
 		},
@@ -396,7 +396,7 @@
 		{
 			"type": "thesaurus",
 			"term": "techniqueUsed",
-			"title": "Techniques Used",
+			"title": "Techniques used for the modification",
 			"field": "lmoTechniquesUsed_ss"
 		},
 		{

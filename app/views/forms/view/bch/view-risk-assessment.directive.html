@@ -28,8 +28,11 @@
 				<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
 		</div>
-
-		<div ng-show="document.authorities">
+		<div ng-show="document.date">
+			<label>Date of the risk assessment </label>
+			<div class="km-value" ng-bind-html="document.date | formatDate"></div>
+		</div>
+		<div ng-show="document.authorities" ng-if="document.header.schema=='nationalRiskAssessment'">
 			<label>Competent National Authority(ies) responsible for the decision or communication</label>
 			<div class="km-value">
 				<ul class="list">
@@ -39,103 +42,107 @@
 				</ul>
 			</div>
 		</div>
-		<div ng-show="document.authorities">
+		<div ng-show="document.organizations" ng-if="document.header.schema=='independentRiskAssessment'">
 			<label>Institution responsible for the risk assessment</label>
 			<div class="km-value">
 				<ul class="list">
-					<li ng-repeat="item in document.authorities" >						
-						<view-contact-reference ng-model='item' locale="locale"></view-contact-reference>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div ng-show="document.contacts || document.organizations">
-			<label>Contact details of the main responsible risk assessor</label>
-			<div class="km-value">
-				<ul class="list">
-					<li ng-repeat="item in document.contacts" >						
-						<view-contact-reference ng-model='item' locale="locale"></view-contact-reference>
-					</li>
 					<li ng-repeat="item in document.organizations" >						
 						<view-contact-reference ng-model='item' locale="locale"></view-contact-reference>
 					</li>
 				</ul>
 			</div>
 		</div>
-
-		<legend>Risk assessment details</legend>
-		<div ng-show="document.modifiedOrganisms">
-			<label>Living modified organism</label>
+		<div ng-show="document.contacts">
+			<label>Contact details of the main responsible risk assessor</label>
 			<div class="km-value">
 				<ul class="list">
-					<li ng-repeat="item in document.modifiedOrganisms" >						
-						<view-lmo-reference ng-model='item.identifier' locale="locale"></view-lmo-reference>
+					<li ng-repeat="item in document.contacts" >						
+						<view-contact-reference ng-model='item' locale="locale"></view-contact-reference>
 					</li>
 				</ul>
 			</div>
 		</div>
-		<div ng-show="document.scopes">
-			<label>Scope of the risk assessment</label>
-			<div class="km-value">
-				<ul class="list">
-					<li ng-repeat="item in document.scopes" ng-bind="item|term:locale"></li>
-				</ul>
+
+		<div ng-if="document.modifiedOrganisms || document.scopes || document.documents || document.documentsSummary">
+			<legend>Risk assessment details</legend>
+			<div ng-show="document.modifiedOrganisms">
+				<label>Living modified organism(s)</label>
+				<div class="km-value">
+					<ul class="list">
+						<li ng-repeat="item in document.modifiedOrganisms" >						
+							<view-lmo-reference ng-model='item.identifier' locale="locale"></view-lmo-reference>
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.documents">
-			<label>Risk assessment report / Summary</label>
-			<div class="km-value" ng-repeat="item in document.documents">
-				<a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+			<div ng-show="document.scopes">
+				<label>Scope of the risk assessment</label>
+				<div class="km-value">
+					<view-terms-hierarchy ng-model="document.scopes" locale="locale" term-domain="riskAssessmentScope"></view-terms-hierarchy>				
+				</div>
+			</div>
+			<div ng-show="document.documents">
+				<label>Risk assessment report / Summary</label>
+				<div class="km-value" ng-repeat="item in document.documents">
+					<a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+				</div>
+				<div ng-if="document.documentsSummary">
+					<km-value-ml  html value="document.documentsSummary" locales="locale"></km-value-ml>
+				</div>
 			</div>
 		</div>
 		
-		<legend>Risk assessment details</legend>
-		<div ng-show="document.adverseEffects">
-			<label>Potential adverse effects identified in the risk assessment</label>
-			<div>
-				<km-value-ml  html value="document.adverseEffects" locales="locale"></km-value-ml>
+		<div ng-if="document.adverseEffects || document.adverseEffectsLikelihood || document.adverseEffectsConsequence ||
+			document.adverseEffectsOverallRisk || document.adverseEffectsRecommendation || document.riskManagementStrategies ||
+			document.receivingEnvironment || document.detectionMethod">
+			<legend>Methodology and points to consider</legend>
+			<div ng-show="document.adverseEffects">
+				<label>Potential adverse effects identified in the risk assessment</label>
+				<div>
+					<km-value-ml  html value="document.adverseEffects" locales="locale"></km-value-ml>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.adverseEffectsLikelihood">
-			<label>Likelihood that the potential adverse effects will be realized</label>
-			<div>
-				<km-value-ml  html value="document.adverseEffectsLikelihood" locales="locale"></km-value-ml>
+			<div ng-show="document.adverseEffectsLikelihood">
+				<label>Likelihood that the potential adverse effects will be realized</label>
+				<div>
+					<km-value-ml  html value="document.adverseEffectsLikelihood" locales="locale"></km-value-ml>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.adverseEffectsConsequence">
-			<label>Possible consequences:	</label>
-			<div>
-				<km-value-ml  html value="document.adverseEffectsConsequence" locales="locale"></km-value-ml>
+			<div ng-show="document.adverseEffectsConsequence">
+				<label>Possible consequences:	</label>
+				<div>
+					<km-value-ml  html value="document.adverseEffectsConsequence" locales="locale"></km-value-ml>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.adverseEffectsOverallRisk">
-			<label>Estimation of the overall risk</label>
-			<div>
-				<km-value-ml  html value="document.adverseEffectsOverallRisk" locales="locale"></km-value-ml>
+			<div ng-show="document.adverseEffectsOverallRisk">
+				<label>Estimation of the overall risk</label>
+				<div>
+					<km-value-ml  html value="document.adverseEffectsOverallRisk" locales="locale"></km-value-ml>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.adverseEffectsRecommendation">
-			<label>Recommendation(s)</label>
-			<div>
-				<km-value-ml  html value="document.adverseEffectsRecommendation" locales="locale"></km-value-ml>
+			<div ng-show="document.adverseEffectsRecommendation">
+				<label>Recommendation(s) on whether the risks are acceptable/manageable and any management strategies</label>
+				<div>
+					<km-value-ml  html value="document.adverseEffectsRecommendation" locales="locale"></km-value-ml>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.riskManagementStrategies">
-			<label>Need(s) for further information on specific issues of concern</label>
-			<div>
-				<km-value-ml  html value="document.riskManagementStrategies" locales="locale"></km-value-ml>
+			<div ng-show="document.riskManagementStrategies">
+				<label>Need(s) for further information on specific issues of concern</label>
+				<div>
+					<km-value-ml  html value="document.riskManagementStrategies" locales="locale"></km-value-ml>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.receivingEnvironment">
-			<label>Receiving environment(s) considered</label>
-			<div>
-				<km-value-ml html  value="document.receivingEnvironment" locales="locale"></km-value-ml>
+			<div ng-show="document.receivingEnvironment">
+				<label>Receiving environment(s) considered</label>
+				<div>
+					<km-value-ml html  value="document.receivingEnvironment" locales="locale"></km-value-ml>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.detectionMethod">
-			<label>LMO detection and identification methods proposed</label>
-			<div>
-				<km-value-ml html value="document.detectionMethod" locales="locale"></km-value-ml>
+			<div ng-show="document.detectionMethod">
+				<label>LMO detection and identification methods proposed</label>
+				<div>
+					<km-value-ml html value="document.detectionMethod" locales="locale"></km-value-ml>
+				</div>
 			</div>
 		</div>
 

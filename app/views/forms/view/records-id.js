@@ -1,4 +1,4 @@
-define(['app','components/scbd-angularjs-services/services/locale','./record-loader.directive'], function (app) {
+define(['app','components/scbd-angularjs-services/services/locale','./record-loader.directive', 'services/search-service'], function (app) {
 
     app.controller("recordsViewController", ['$scope', "$sce", "commonjs", "$timeout", "$filter", 
         "realm", "$element", 'searchService', 'ngMeta', 'locale',

@@ -45,8 +45,10 @@ function (app, _, moment, angular) {
 
             var basePath = (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
             $rootScope.$on('$routeChangeSuccess', function (evt, current) {
-                $window.ga('set', 'page', basePath + $location.path());
-                $window.ga('send', 'pageview');
+                if($window.scbdApp.analytics){
+                    $window.ga('set', 'page', basePath + $location.path());
+                    $window.ga('send', 'pageview');
+                }
 
                 ngMeta.resetMeta();
                 if(current.$$route && current.$$route.label)
