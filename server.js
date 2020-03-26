@@ -24,6 +24,12 @@ if(!appVersion || appVersion.trim()==''){
 app.set('view engine', 'ejs');
 app.use(cookieParser());
 
+//special case for compression as prod files are compressed from cloud-front.
+//use express compress when compress varibale is true. 
+if(process.env.COMPRESS=='true'){
+    app.use(require('compression')())
+}
+
 // Set routes
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: cacheControl.setCustomCacheControl}) );
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
