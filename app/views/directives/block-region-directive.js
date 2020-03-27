@@ -25,7 +25,8 @@ define(['app'], function(app) {
                     $element.addClass('blockRegion');
                     var loadtHtml = '<div class="inverted dimmer" ng-class="{\'active\': activate}"><div class="medium loader block-text">'+ blockText + ' </div></div>';
 
-                    $element.empty().append($compile(loadtHtml)($scope));
+                    $element.remove('.inverted.dimmer');
+                    $element.append($compile(loadtHtml)($scope));
                 }
 
                 $scope.$watch('activate', function(newVal){
