@@ -107,7 +107,7 @@ require.config({
             return '';
             
         if(/^\//.test(url))            
-            return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.appVersion;
+            return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.appVersion;
 
         return '';
     }
