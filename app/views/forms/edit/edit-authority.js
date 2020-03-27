@@ -129,7 +129,6 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
 
                 if($scope.type != 'SPCA'){ //Not Suuplementary protocol
                     document.responsibleForAll = undefined;
-                    document.responsibilities = undefined;
                 }
                     
                 document.absJurisdiction = undefined;

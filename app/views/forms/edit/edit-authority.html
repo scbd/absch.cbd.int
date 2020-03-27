@@ -335,12 +335,12 @@
                                                 terms="options.bchOrganismTypes()" binding-type="term[]"></div>
                                             </div>
 
-                                            <div  ng-if="type!='SPCA'" class="km-control-group" name="responsibilities" caption="Detailed description of the regulatory functions"required>
+                                            <div  ng-if="type!='SPCA'" class="km-control-group" name="responsibilities" caption="Detailed description of the regulatory functions">
                                                 <div class="help-info" ng-if="type!=='SPCA'">
                                                     If needed, provide additional information on regulatory functions and responsibilities of the competent national authority.
                                                 </div>
                                                 <div km-rich-textbox name="responsibilities" ng-model="document.responsibilities"
-                                                    rows="6" placeholder="" locales="document.header.languages" required></div>
+                                                    rows="6" placeholder="" locales="document.header.languages"></div>
                                             </div>
                                         </div>                                        
                                     </div>

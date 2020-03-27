@@ -488,7 +488,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
 
                     function addKeywordFilter(keyword, schemaFieldKey, broader) {
-                        
+                        // for future lookup
+                        // https://github.com/scbd/absch.cbd.int/commit/0823ab3e6a9aaa68dd59fca379b8158b83a348ba#diff-a8418aa523a6be485d60f93925c4c38dL975
+
                         // var schemaFieldMap = _.cloneDeep(bchSchemaFieldMapping[schemaFieldKey]);
 
                         var existingFilter = _.find($scope.searchFilters, function(fil){
