@@ -9,9 +9,9 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
 
         app.controller("registerRecordList", ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
             'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", 
-            "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm',
+            "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm', 'ngMeta',
             function ($timeout, commonjs, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
-                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, realm) {
+                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, realm, ngMeta) {
 
                 $scope.languages = commonjs.languages;
                 $scope.orderBy = ['-updatedOn'];
@@ -27,6 +27,8 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
                     breadcrumbs.options = {
                         'document_type': $filter("schemaName")(type)
                     };
+                    ngMeta.resetMeta();                       
+                    ngMeta.setTitle('List | ', $filter("schemaName")(type));
                 }
                 $scope.toggleOrderBy = function (key) {
                     if (key == $scope.orderBy[0].substr(1))
