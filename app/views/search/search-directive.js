@@ -135,7 +135,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                          if($scope.setFilters[fid] )
                            delete $scope.setFilters[fid];
                         else{
-                           $scope.setFilters[fid] = {'type':'freeText', 'name': ""+text+"", 'id':fid};
+                           $scope.setFilters[fid] = {'type':'freeText', 'name': text, 'id':fid};
 
                            $scope.searchKeyword = "";
                         }
@@ -696,7 +696,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                         var ids = _.map(filter.selectedItems, 'identifier');
                                         if(filter.type == 'freeText'){
                                             ids = _.map(filter.selectedItems, 'title');
-                                            subQuery = filter.field + ':(' + ids.join(' AND ') + ')';
+                                            subQuery = filter.field + ':("' + ids.join('" AND "') + '")';
                                         }
                                         else{
                                             var field = filter.field;
@@ -782,8 +782,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if (!(filters||[]).length){     
                             return;
                         }
-
-                        query = field + ':(' + _.map(filters, 'id').join(' ') + ')';
+                        if(filterType == 'freeText')
+                            query = field + ':("' + _.map(filters, 'id').join('" "') + '")';
+                        else
+                            query = field + ':(' + _.map(filters, 'id').join(' ') + ')';
 
                         return query;
                     }
