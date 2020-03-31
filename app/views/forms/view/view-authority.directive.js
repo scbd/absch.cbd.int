@@ -1,6 +1,6 @@
 define(['app', "text!views/forms/view/view-authority.directive.html", 'views/forms/view/view-contact-reference.directive',
 'views/directives/record-options','views/directives/party-status', 'services/app-config-service',
-'views/forms/view/view-reference-records.directive'], function (app, template) {
+'views/forms/view/view-reference-records.directive', 'views/forms/directives/view-terms-hierarchy'], function (app, template) {
 
 	app.directive("viewAuthority", ["IStorage", "realm", function (storage, realm) {
 		return {
