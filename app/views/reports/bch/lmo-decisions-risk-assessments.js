@@ -2,19 +2,20 @@ define(['app', 'lodash', 'views/forms/view/bch/view-lmo-reference.directive',
 'angucomplete-alt','views/directives/block-region-directive', 'services/search-service', 'js/common',
 './lmo-decisions', './risk-assessments', 'views/forms/view/record-loader.directive'], function(app, _) { 'use strict';
 
-app.controller("LmoReportController", ['$scope', '$routeParams', '$route', '$location', 'searchService', 'commonjs',
-	function($scope, $routeParams, $route, $location, searchService, commonjs) {
+app.controller("LmoReportController", ['$scope', '$routeParams', '$route', '$location', 'searchService', '$timeout',
+	function($scope, $routeParams, $route, $location, searchService, $timeout) {
 
         $scope.tab = $routeParams.tab;
 		$scope.identifier = $route.current.params.documentId;		
 		
 		$scope.$watch('newLmo', function(newVal){
 			if(newVal){
-                $scope.identifier = commonjs.hexToInteger(newVal.originalObject.identifier_s);
+				$scope.identifier = newVal.originalObject.identifier_s;
+				//commonjs.hexToInteger();
                 var tab = $scope.tab;
                 $scope.tab = undefined;	
-                $scope.tab = tab;
-                $route.updateParams({documentId:newVal.originalObject.identifier_s})			
+                $route.updateParams({documentId:newVal.originalObject.identifier_s})
+                $timeout(function(){$scope.tab = tab}, 100);			
 			}
 		})
 		

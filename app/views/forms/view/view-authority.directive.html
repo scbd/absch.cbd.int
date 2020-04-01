@@ -118,20 +118,20 @@
 			</div>
 
 		</div>
-		<div ng-if="isBCH && (document.cpbFunctions || document.functions || document.responsibilities || document.responsibleForAll!=undefined || document.cpbOrganismTypes)">
+		<div ng-if="isBCH && (document.functions || document.responsibilities || document.responsibleForAll!=undefined || document.cpbOrganismTypes)">
 			<legend>Responsibilities</legend>
-			<div ng-show="document.header.schema!='supplementaryAuthority' && (document.cpbFunctions||document.functions)">
+			<div ng-show="document.header.schema!='supplementaryAuthority' && (document.functions)">
 				<label>Administrative functions</label>
-				<div class="km-value">
-					<li ng-repeat="term in (document.cpbFunctions||document.functions)">{{term|term}} </li>
-				</div>
+				<view-terms-hierarchy ng-if="document.header.schema!='supplementaryAuthority'" class="km-value" 
+				ng-model="(document.functions)" locale="locale" term-domain="subjectAreas"></view-terms-hierarchy>
+				<view-terms-hierarchy ng-if="document.header.schema=='supplementaryAuthority'" class="km-value" 
+				ng-model="(document.functions)" locale="locale" term-domain="supplementaryProtocolFunctions"></view-terms-hierarchy>
 			</div>
 
 			<div ng-show="document.header.schema!='supplementaryAuthority' && document.cpbOrganismTypes">
 				<label>Types of organism(s) under its responsibility</label>
-				<div class="km-value">
-					<li ng-repeat="term in document.cpbOrganismTypes">{{term|term}} </li>
-				</div>
+				<view-terms-hierarchy class="km-value" ng-model="document.cpbOrganismTypes" locale="locale" 
+				term-domain="typeOfOrganisms"></view-terms-hierarchy>
 			</div>
 			
 			<div ng-show="document.header.schema=='supplementaryAuthority'">
@@ -141,12 +141,11 @@
 					<div class="km-value" ng-if="!document.responsibleForAll">No</div>
 					
 				</div>
-				<div ng-show="document.header.schema=='supplementaryAuthority' && document.responsibilities">
-
-					<label ng-if="document.header.schema!='supplementaryAuthority'">Short description of the regulatory functions</label>
-					<label ng-if="document.header.schema=='supplementaryAuthority'">Short description of the responsibilities of the Competent Authority</label>
-					<div class="km-value" ng-bind-html="document.responsibilities | lstring:locale"></div>
-				</div>
+			</div>
+			<div ng-show="document.responsibilities">
+				<label ng-if="document.header.schema!='supplementaryAuthority'">Short description of the regulatory functions</label>
+				<label ng-if="document.header.schema=='supplementaryAuthority'">Short description of the responsibilities of the Competent Authority</label>
+				<div class="km-value" ng-bind-html="document.responsibilities | lstring:locale"></div>
 			</div>
 		</div>
 

@@ -2069,3 +2069,29 @@ a.disabled{
 .angucomplete-row {
     border-bottom: 1px solid #eee;
 }
+
+.ngdialog.ngdialog-theme-default{
+    padding-top: 20px!important;
+}
+.ngdialog-open {
+    height: auto !important;
+    overflow: inherit !important;
+}
+/* .ngdialog.ngdialog-theme-default .ngdialog-content {
+    z-index: 1  
+}
+
+.ngdialog-content .modal-body::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.ngdialog-content .modal-body::-webkit-scrollbar:vertical,
+.ngdialog-content .modal-body::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+.ngdialog-content .modal-body::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(0, 0, 0, .5);
+} */

@@ -27,7 +27,17 @@ app.use(cookieParser());
 //special case for compression as prod files are compressed from cloud-front.
 //use express compress when compress varibale is true. 
 if(process.env.COMPRESS=='true'){
-    app.use(require('compression')())
+    app.use(require('compression')({ filter: shouldCompress }));
+
+    function shouldCompress (req, res) {
+        if (/\/api\/*/.test(req.path)) {
+          // don't compress responses with this request header
+          return false
+        }
+        const compression = require('compression')
+        // fallback to standard filter function
+        return compression.filter(req, res)
+    }
 }
 
 // Set routes
