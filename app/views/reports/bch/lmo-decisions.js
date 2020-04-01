@@ -76,7 +76,7 @@ app.directive("lmoDecisions", [ '$http', '$route', '$cookies', 'searchService', 
 				function bchStorageIdToObjectId(d) {
 					var hex = Number(d).toString(16);
 
-					return '52000000CBD0900000000000'.substr(0, 24 - hex.length) + hex;
+					return '52000000cbd0900000000000'.substr(0, 24 - hex.length) + hex;
 				}
 
 				lmoDecisions($scope.identifier);
