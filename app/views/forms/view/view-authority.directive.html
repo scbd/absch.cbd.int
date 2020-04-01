@@ -118,14 +118,14 @@
 			</div>
 
 		</div>
-		<div ng-if="isBCH && (document.cpbFunctions || document.functions || document.responsibilities || document.responsibleForAll!=undefined || document.cpbOrganismTypes)">
+		<div ng-if="isBCH && (document.functions || document.responsibilities || document.responsibleForAll!=undefined || document.cpbOrganismTypes)">
 			<legend>Responsibilities</legend>
-			<div ng-show="document.header.schema!='supplementaryAuthority' && (document.cpbFunctions||document.functions)">
+			<div ng-show="document.header.schema!='supplementaryAuthority' && (document.functions)">
 				<label>Administrative functions</label>
 				<view-terms-hierarchy ng-if="document.header.schema!='supplementaryAuthority'" class="km-value" 
-				ng-model="(document.cpbFunctions||document.functions)" locale="locale" term-domain="subjectAreas"></view-terms-hierarchy>
+				ng-model="(document.functions)" locale="locale" term-domain="subjectAreas"></view-terms-hierarchy>
 				<view-terms-hierarchy ng-if="document.header.schema=='supplementaryAuthority'" class="km-value" 
-				ng-model="(document.cpbFunctions||document.functions)" locale="locale" term-domain="supplementaryProtocolFunctions"></view-terms-hierarchy>
+				ng-model="(document.functions)" locale="locale" term-domain="supplementaryProtocolFunctions"></view-terms-hierarchy>
 			</div>
 
 			<div ng-show="document.header.schema!='supplementaryAuthority' && document.cpbOrganismTypes">
