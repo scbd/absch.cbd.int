@@ -1,13 +1,14 @@
 define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore',
-        'views/directives/workflow-history-directive', 'js/common',
+        'views/directives/workflow-history-directive', 'js/common', 'ngDialog',
         'toastr', 'services/local-storage-service', 'services/app-config-service', 'services/articles-service',
 ], function (app, template) {
     
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
-    'localStorageService', 'articlesService', 'roleService', 'locale', 'commonjs',
+    'localStorageService', 'articlesService', 'roleService', 'locale', 'commonjs', 'ngDialog',
     function ($rootScope,  storage, editFormUtility, $route, IWorkflows, toastr, $location, $filter, 
-            $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, articlesService, roleService, locale, commonjs){
+            $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, 
+            articlesService, roleService, locale, commonjs, ngDialog){
 
     	return{
     		restrict: 'EA',
@@ -265,7 +266,12 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
 						return $q.all([a,b]);
 
-					}).finally(function(){
+                    })
+                    .then(function(){
+                        if($scope.security.canSaveDraft==false)
+                            openUnAuthorizedDialog();
+                    })
+                    .finally(function(){
 
                         $scope.loading = false;
                         $scope.blockText = undefined;
@@ -641,7 +647,24 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
 				//====================
 				//
-				//====================
+                //====================
+                
+                function openUnAuthorizedDialog(){
+                    ngDialog.open({
+                        template: 'dialogUnauthorise',
+                        closeByDocument: false, showClose:false,
+                        closeByNavigation:false, closeByEscape:false,
+                        className:'ngdialog ngdialog-theme-default unauthorized-access-dialog',
+                        controller: function($scope){
+
+                                $scope.closeAccessDialog = function(){
+                                    ngDialog.close();
+                                    closeDocument(true);
+                                }
+                        }
+                    })
+                }
+
 				function validate(document) {
                     
 					return $q.when(document).then(function(document){
@@ -894,6 +917,9 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         }
                     });
                     function confirmLeaving(evt, next, current) {
+                        if($scope.security.canSaveDraft==false)
+                            return;
+
                         var formChanged = !angular.equals($scope.getDocumentFn(), originalDocument);
 
                         if(formChanged)
