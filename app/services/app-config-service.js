@@ -97,11 +97,9 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.scbdApp.host||'')
                         roles = roles || this.fallbackRoles(schemaDetails.type, roleName);
                     }
                     else {
-                        roles = _.union(schemaDetails.publishingAuthorities||[], schemaDetails.nationalAuthorizedUser||[]);
-                        if(!roles || roles.length==0)
-                            roles = _.union(
-                                this.fallbackRoles(schemaDetails.type, 'publishingAuthorities'), 
-                                this.fallbackRoles(schemaDetails.type, 'nationalAuthorizedUser'))
+                        roles = _.union(schemaDetails.publishingAuthorities||this.fallbackRoles(schemaDetails.type, 'publishingAuthorities'), 
+                                        schemaDetails.nationalAuthorizedUser||this.fallbackRoles(schemaDetails.type, 'nationalAuthorizedUser'));
+                        
                     }
                     
                     return _(roles).flatten().compact().uniq().value();
