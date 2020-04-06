@@ -36,7 +36,8 @@ function(app, _, ng) {
                     isNationalAuthorizedUser: roleService.isNationalAuthorizedUser(),
                     isUser                  : roleService.isUser(),
                     isNationalSchemaUser    : roleService.isNationalSchemaUser,
-                    isNationalUser          : roleService.isNationalUser()
+                    isNationalUser          : roleService.isNationalUser(),
+                    isSchemaUser            : roleService.isSchemaUser
                 };
 
                 if($scope.user.government)

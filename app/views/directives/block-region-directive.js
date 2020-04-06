@@ -11,15 +11,15 @@ define(['app'], function(app) {
             link: function($scope, $element, attrs) {
 
                 function buildBlockText(){
-                    var blockText = ''; 
+                    var blockText = 'Loading...';
+                    if($scope.dynamicText)
+                        blockText = $scope.dynamicText;
+                    else if(attrs.blockText)
+                        blockText = attrs.blockText;
+                        
+                    blockText = '<strong>' + blockText + '</strong>';
                     if(!attrs.skipLoadingIcon){
-                        blockText = 'Loading...';
-                        if($scope.dynamicText)
-                            blockText = $scope.dynamicText;
-                        else if(attrs.blockText)
-                            blockText = attrs.blockText;
-                            
-                        blockText = '<i class="fa fa-spin fa-cog fa-3x" /> <strong>' + blockText + '</strong>';
+                        blockText = '<i class="fa fa-spin fa-cog fa-3x" />' + blockText;
                     }
 
                     $element.addClass('blockRegion');

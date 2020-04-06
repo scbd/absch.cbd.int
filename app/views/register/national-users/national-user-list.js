@@ -69,7 +69,7 @@ app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog
                     return ret;
                 }, {});
 
-                var contextRoleCodes = _.map(appConfigService.nationalRoles(), function(code) { return code.toLowerCase(); });
+                var contextRoleCodes = _.map(realm.nationalRoles(), function(code) { return code.toLowerCase(); });
 
                 contextRoles = _.reduce(res.data, function(ret, role) {
 
@@ -86,7 +86,7 @@ app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog
 
             var query = {
                 isManageable : true,
-                roles : appConfigService.nationalRoles()
+                roles : realm.nationalRoles()
             };
 
             var q2 = $http.get('/api/v2013/roles', { params : { q : query } }).then(function (res) {

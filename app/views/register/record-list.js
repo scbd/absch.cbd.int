@@ -312,8 +312,9 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
                         roleService.isNationalAuthorizedUser() ||
                         roleService.isNationalFocalPoint() ||
                         roleService.isIAC() ||
-                        roleService.isAdministrator() ||
-                        _.contains(['contact', 'resource', 'modelContractualClause', 'communityProtocol', 'capacityBuildingResource', 'capacityBuildingInitiative'], $scope.schema);
+                        roleService.isAdministrator()|| 
+                        roleService.isPublishingAuthority($scope.schema) ||
+                        roleService.isNationalAuthorizedUser($scope.schema);
 
                 }
 
