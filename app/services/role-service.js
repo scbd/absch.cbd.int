@@ -15,6 +15,8 @@ define(['app', 'lodash', './app-config-service'], function (app, _) { 'use stric
 			this.isUser                   = isUser;
 			this.isNationalSchemaUser     = isNationalSchemaUser;
 			this.isNationalUser           = isNationalUser;
+
+			this.isSchemaUser             = isSchemaUser;
 			
 			function isUserInRole(role) {				
 				return isUserInRoles([role]);
@@ -28,8 +30,8 @@ define(['app', 'lodash', './app-config-service'], function (app, _) { 'use stric
 				return _.intersection($rootScope.user.roles, roles).length > 0;
 			};
 
-			function is(role, schema) {
-				return isUserInRoles(realm.getRole(role, schema));
+			function is(role, schema, schemaType) {
+				return isUserInRoles(realm.getRole(role, schema, schemaType));
 			}
 			
 			function isIAC() {
@@ -40,16 +42,16 @@ define(['app', 'lodash', './app-config-service'], function (app, _) { 'use stric
 				return isUserInRoles(realm.getRole('administrator'));
 			}
 
-			function isPublishingAuthority(schema) {
-				return isUserInRoles(realm.getRole('publishingAuthorities', schema));
+			function isPublishingAuthority(schema, schemaType) {
+				return isUserInRoles(realm.getRole('publishingAuthorities', schema, schemaType));
 			}
 			
-			function isNationalAuthorizedUser(schema) {
-				return isUserInRoles(realm.getRole('nationalAuthorizedUser', schema));
+			function isNationalAuthorizedUser(schema, schemaType) {
+				return isUserInRoles(realm.getRole('nationalAuthorizedUser', schema, schemaType));
 			}
 
 			function isNationalFocalPoint() {
-				return isUserInRoles(realm.getRole('nationalFocalPoint'));
+				return isUserInRoles(realm.getRole('nationalFocalPoint', undefined, 'national'));
 			}
 
 			function isUser() {
@@ -58,19 +60,23 @@ define(['app', 'lodash', './app-config-service'], function (app, _) { 'use stric
 
 			// verifies if the user has roles at schema level, fallback to govt level otherwise
 			function isNationalSchemaUser(schema) {				
-				return isPublishingAuthority(schema) || isNationalAuthorizedUser(schema) || isNationalFocalPoint();
+				return isPublishingAuthority(schema, 'national') || isNationalAuthorizedUser(schema, 'national') || isNationalFocalPoint();
 			}
 
 			// verifies if the user is in any roles object or roles overwritten at schema 
 			function isNationalUser(skipSchemaRoles) {
-				var hasNationalRole = isPublishingAuthority() || isNationalAuthorizedUser() || isNationalFocalPoint();
+				var hasNationalRole = isPublishingAuthority(undefined, 'national') || isNationalAuthorizedUser(undefined, 'national') || isNationalFocalPoint();
 				
 				if(!skipSchemaRoles && !hasNationalRole){//check if the user has roles at schema level 
-					var schemaNationalRoles = realm.nationalSchemaRoles();
+					var schemaNationalRoles = realm.nationalRoles();
 					hasNationalRole = isUserInRoles(schemaNationalRoles)
 				}
 				
 				return hasNationalRole;
+			}
+
+			function isSchemaUser(schema, schemaType){
+				return isPublishingAuthority(schema, schemaType) || isNationalAuthorizedUser(schema, schemaType) || isNationalFocalPoint();
 			}
 		}
 

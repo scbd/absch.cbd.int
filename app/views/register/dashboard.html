@@ -204,7 +204,7 @@
                                 data-container="body"></span>
                         </div>
 
-                        <div>
+                        <div ng-if="::roles.isNationalSchemaUser('focalPoint') || roles.is('Administrator')">
                             <table class="overview table  table-hover" style="width:100%;">
                                 <thead></thead>
                                 <tbody>
@@ -233,7 +233,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-
                         </div>
                         <div ng-repeat="schema in nationalSchemas" ng-if="::roles.isNationalSchemaUser(schema) || roles.is('Administrator')">
                             <table class="overview table table-hover" style="width:100%;">
@@ -293,7 +292,7 @@
                         </div>
                     </div>
 
-                    <div style="padding-bottom: 20px;">
+                    <div style="padding-bottom: 20px;"  ng-if="::roles.isSchemaUser('contact') || roles.is('Administrator')">
                         <table class="overview table table-hover" style="width:100%;">
                             <thead></thead>
                             <tbody>
@@ -359,7 +358,7 @@
                             </span>
                         </div>
 
-                        <div ng-repeat="schema in referenceSchemas">
+                        <div ng-repeat="schema in referenceSchemas"   ng-if="::roles.isSchemaUser(schema) || roles.is('Administrator')">
                             <table class="overview table table-hover" style="width:100%;">
                                 <thead></thead>
                                 <tbody>

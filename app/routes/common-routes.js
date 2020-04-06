@@ -66,19 +66,19 @@
                 whenAsync('/register/national-users',                            {templateUrl: 'views/register/national-users/national-user-list.html', label:'Manage user roles',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
                 whenAsync('/register/:document_type',                            {templateUrl: 'views/register/record-list.html',       label:'document_type',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
-                whenAsync('/register/CON/new',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'New',  param:'true', resolveController: true,documentType :'CON' , resolve : { securized : securize(null,null, true) }, }).
+                whenAsync('/register/CON/new',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'New',  param:'true', resolveController: true,documentType :'CON' , resolve : { securized : securize(null,true, true) }, }).
                 whenAsync('/register/CNA/new',           {templateUrl: 'views/forms/edit/edit-authority.html',                 label:'New',  param:'true', resolveController: true,documentType :'CNA' , resolve : { securized : securize(null,true, true) }, }).
                 whenAsync('/register/NDB/new',           {templateUrl: 'views/forms/edit/edit-database.html',                  label:'New',  param:'true', resolveController: true,documentType :'NDB' , resolve : { securized : securize(null,true, true) }, }).
-                whenAsync('/register/VLR/new',           {templateUrl: 'views/forms/edit/edit-resource.html',                  label:'New',  param:'true', resolveController: true,documentType :'VLR' , resolve : { securized : securize(null, null, true) }, }).
-                whenAsync('/register/ORG/new',           {templateUrl: 'views/forms/edit/edit-organization.html',              label:'New',  param:'true', resolveController: true,documentType :'ORG' , resolve : { securized : securize(null, null, true) }, }).
-                whenAsync('/register/SUB/new',           {templateUrl: 'views/forms/edit/edit-submission.html',                label:'New',  param:'true', resolveController: true,documentType :'SUB' , resolve : { securized : securize(null, null, true) }, }).
+                whenAsync('/register/VLR/new',           {templateUrl: 'views/forms/edit/edit-resource.html',                  label:'New',  param:'true', resolveController: true,documentType :'VLR' , resolve : { securized : securize(null, true, true) }, }).
+                whenAsync('/register/ORG/new',           {templateUrl: 'views/forms/edit/edit-organization.html',              label:'New',  param:'true', resolveController: true,documentType :'ORG' , resolve : { securized : securize(null, true, true) }, }).
+                whenAsync('/register/SUB/new',           {templateUrl: 'views/forms/edit/edit-submission.html',                label:'New',  param:'true', resolveController: true,documentType :'SUB' , resolve : { securized : securize(null, true, true) }, }).
                
                 whenAsync('/register/CNA/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-authority.html',                 label:'Edit',  param:'true', resolveController: true, documentType :'CNA' , resolve : { securized : securize(null,true, true) }, }).
-                whenAsync('/register/CON/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { securized : securize(null,null, true) }, }).
+                whenAsync('/register/CON/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { securized : securize(null,true, true) }, }).
                 whenAsync('/register/NDB/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-database.html',                  label:'Edit',  param:'true', resolveController: true, documentType :'NDB' , resolve : { securized : securize(null,true, true) }, }).
-                whenAsync('/register/ORG/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-organization.html',              label:'Edit',  param:'true', resolveController: true, documentType :'ORG' , resolve : { securized : securize(null, null, true) }, }).
-                whenAsync('/register/VLR/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-resource.html',                  label:'Edit',  param:'true', resolveController: true, documentType :'VLR' , resolve : { securized : securize(null, null, true) }, }).
-                whenAsync('/register/SUB/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-submission.html',                label:'Edit',  param:'true', resolveController: true, documentType :'SUB' , resolve : { securized : securize(null, null, true) }, }).
+                whenAsync('/register/ORG/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-organization.html',              label:'Edit',  param:'true', resolveController: true, documentType :'ORG' , resolve : { securized : securize(null, true, true) }, }).
+                whenAsync('/register/VLR/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-resource.html',                  label:'Edit',  param:'true', resolveController: true, documentType :'VLR' , resolve : { securized : securize(null, true, true) }, }).
+                whenAsync('/register/SUB/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-submission.html',                label:'Edit',  param:'true', resolveController: true, documentType :'SUB' , resolve : { securized : securize(null, true, true) }, }).
  
                 whenAsync('/register/:document_type/:documentID/view',           {templateUrl: 'views/register/record-details.html',    label:'View',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
@@ -129,7 +129,7 @@
     //
     //
     //============================================================
-    function securize(roleList, useNationalRoles, checkEmailVerified)
+    function securize(roleList, useSchemaRoles, checkEmailVerified)
     {
         return ["$location", "authentication", "appConfigService", "$filter", "$route", "realm",
          function ($location, authentication, appConfigService, $filter, $route, realm) {
@@ -146,7 +146,7 @@
                 if (roles && !_.isEmpty(roles)) {
                     roles = _.flatten(_.map(roles, realm.getRole));
                 }
-                if(useNationalRoles){
+                if(useSchemaRoles){
                     var path = $location.$$url.replace('/register/','');
                     var schema;
 
@@ -156,15 +156,16 @@
                         schema = path;
 
                     var schemaName = $filter('mapSchema')(schema);
-                    if(!_.contains(_.union(['contact'], realm.referenceSchemas), schemaName)){
-                        var rolesToAppend = [];
+                    // var rolesToAppend = [realm.getRole("Administrator")];
+                    // if(!_.contains(_.union(['contact'], realm.referenceSchemas), schemaName)){
+                        
+                        // rolesToAppend = realm.nationalSchemaRoles(schemaName);
+                        // if(rolesToAppend.length == 0)//if there are not schema roles fallback to national roles
+                        //     rolesToAppend = realm.nationalRoles(true);//skip schema roles from national roles
 
-                        rolesToAppend = realm.nationalSchemaRoles(schemaName);
-                        if(rolesToAppend.length == 0)//if there are not schema roles fallback to national roles
-                            rolesToAppend = realm.nationalRoles(true);//skip schema roles from national roles
-
-                        roles = (roles || []).concat(rolesToAppend).concat(realm.getRole("Administrator")||[]);
-                    }
+                        roles = (roles || []).concat(realm.schemaRoles(schemaName))
+                                             .concat(realm.getRole("Administrator")||[]);
+                    // }
                 }
                 if (!user.isAuthenticated) {
 

@@ -88,13 +88,6 @@ function (app, _, moment, angular) {
                 $('html, body').animate({scrollTop:0},'50');
             }
 
-            $scope.$root.getRoleName = function (roleName) {
-                console.warn('Depriciated, use appConfigService.getRoleName');
-                if (roleName) {
-                    return appConfigService.getRoleName(roleName);
-                }
-            };
-
             //============================================================
             //
             //
