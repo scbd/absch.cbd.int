@@ -190,7 +190,9 @@
 				
 													<div class="col-md-6">
 														<div class="km-control-group" name="country" ng-required="!form.contact_country.$valid" caption="Country of Contact">
-															<div km-select name="country" ng-model="document.country" items="options.countries()"  ng-change="setAddressType()"></div>
+															<!-- <div km-select name="country" ng-model="document.country" items="options.countries()"  ng-change="setAddressType()"></div> -->
+															<div afc-autocomplete name="country" ng-model="document.country" source="options.countries" 
+															filter="startsWithFilter" mapping="genericMapping" maxmatches="50" selectbox="true" placeholder="Please select a country..." ng-change="setAddressType()"></div>
 														</div>
 													</div>
 												</div>

@@ -1,10 +1,10 @@
-﻿define(['app',"text!./edit-contact.directive.html", 'views/directives/workflow-arrow-buttons', 
+﻿define(['app',"text!./edit-contact.directive.html", 'lodash', 'views/directives/workflow-arrow-buttons', 
 "views/forms/view/view-contact.directive", 'services/role-service',
 'components/scbd-angularjs-services/services/locale', 'views/forms/edit/editFormUtility'],
-function (app, template) {
+function (app, template, _) {
 
-app.directive("editContact", [ "$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'guid', 'editFormUtility', 'locale', '$controller',
-function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, editFormUtility, locale, $controller){
+app.directive("editContact", [ "$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'thesaurusService', 'editFormUtility', 'locale', '$controller',
+function($http, $filter, $rootScope, $location, $q, storage, roleService, thesaurusService, editFormUtility, locale, $controller){
 
 	return {
 		restrict   : "E",
@@ -28,37 +28,28 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
 
             $scope.options = {            
                 countries		: function() {
-                    return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function(o){
-                      var countries = $filter("orderBy")(o.data, "name");
+                    return thesaurusService.getDomainTerms('countries').then(function(o){
+                      var countries = $filter("orderBy")(o, "name");
                       _.each(countries, function(element) {
-                        element.__value = element.name;
+                        element.__value = $filter('lstring')(element.title, locale);
                       });
                       return countries;
                     });
                 },
                 organizationTypes : function() {
-                    return $q.all([$http.get("/api/v2013/thesaurus/domains/Organization%20Types/terms", { cache: true })
-                            ,$http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })])
-                    .then(function(o){
-                        var orgs = o[0].data;
-                        orgs.push(o[1].data);
-                        return orgs;
-                    });
+                    return thesaurusService.getDomainTerms('Organization Types', {other:true, otherType:'lstring'})
                 }
             };           
             
-            $scope.genericFilter = function($query, items) {
+            $scope.startsWithFilter = function($query, items) {
                 var matchedOptions = [];
                 for(var i=0; i!=items.length; ++i)
-                if(items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
-                    matchedOptions.push(items[i]);
+                    if(_.startsWith(items[i].__value.toLowerCase(), $query.toLowerCase()))
+                        matchedOptions.push(items[i]);
         
                 return matchedOptions;
             };
         
-            $scope.genericMapping = function(item) {
-                return {identifier: item.identifier};
-            };
             //==================================
             //
             //==================================
