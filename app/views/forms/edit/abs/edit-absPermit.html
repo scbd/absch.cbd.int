@@ -181,7 +181,8 @@
                                                         <div class="km-control-group " name="providers" required caption="The provider" style="margin-top:0;">
                                                             <span class="help-info">Please provide the name and contact details of the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
                                                             <div ng-show="!document.providersConfidential">
-                                                                <div document-selector ng-model="document.providers" question="providers" government="document.government" schema="(contact authority)"></div>
+                                                                <div document-selector ng-model="document.providers" question="providers" government="document.government"
+                                                                allow-new="true" allow-new-schema="contact" schema="(contact authority)"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -233,7 +234,8 @@
                                                             <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
                                                                 <div class="help-info">Please provide the name and contact details of the person or entity to whom prior informed consent was granted. If the information is marked as confidential that person will not be able to receive the
                                                                     courtesy copy of the IRCC or the CPC. </div>
-                                                                <div document-selector ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted" government="document.government" schema="(contact authority)"></div>
+                                                                <div document-selector ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted" 
+                                                                allow-new="true" allow-new-schema="contact" government="document.government" schema="(contact authority)"></div>
                                                             </div>
                                                         </div>
                                                     </div>

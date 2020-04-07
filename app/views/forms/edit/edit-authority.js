@@ -101,7 +101,10 @@ define(['app', 'lodash', 'services/search-service', 'views/forms/edit/edit', 'js
         $scope.getCleanDocument = function(document) {
 
             document = document || $scope.document;
-
+            ///////for legacy records////////////////
+            document.bchFunctions = undefined;
+            document.bchOrganismTypes = undefined;
+            ////////////////////////
             if (!document)
                 return undefined;
             
