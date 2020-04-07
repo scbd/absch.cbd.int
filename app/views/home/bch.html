@@ -3,12 +3,18 @@
     <div id="Jumbotron" style="border-top:1px solid #555;border-bottom:2px solid #ddd;" >
        <home-map></home-map>
     </div>
-    <div >
+    <div style="color:#fff">
         <h1 class="color-green bold" style="margin-bottom:30px;"  ng-bind-html="betaArticle.title | lstring:locale"></h1>
         <div ng-bind-html="betaArticle.content | lstring:locale | toTrusted"></div>
     </div>
 
     <div>
+        <style>
+            #Announcements > h4{
+                margin-bottom:10px!important;
+                color:#fff;
+            }
+        </style>
         <home-articles tags="BCH-Announcement"></home-articles>
     </div>
 

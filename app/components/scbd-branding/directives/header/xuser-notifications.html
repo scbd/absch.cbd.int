@@ -130,10 +130,13 @@
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
                         <div class="hidden-xs notification-spacing5">
+                            
                             <span class="notification-label">Rejected by: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
-                            <span> {{notification.createdOn | formatDateWithTime}} </span>
+                            <span> {{notification.createdOn | formatDateWithTime}}</span>
+                            <span class="notification-label" ng-if="notification.data.info">, Reason :</span>
+                            <span ng-if="notification.data.info" ng-bind="notification.data.info"></span>
                         </div>
                     </div>
                 </div>
