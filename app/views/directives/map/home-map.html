@@ -4,12 +4,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>The <span ng-bind="options.chLongName"></span> (<span ng-bind="options.chShortName"></span>) 
+                    <h3 ng-if="options.isAbs">The <span ng-bind="options.chLongName"></span> (<span ng-bind="options.chShortName"></span>) 
                         is a platform for exchanging information on <span ng-bind="options.protocolShortName"></span> and a key tool for 
                         facilitating the implementation of the <span ng-bind="options.protocol"></span>.
                         <a translation-url  href="/about" ng-click="toggleTooltip()"> 
                             <i class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" 
                             data-title="Click here to find out more about the Clearing-house" data-container="body"></i></a>
+                    </h3>
+                    <h3 ng-if="options.isBch">
+                        The Biosafety Clearing-House (BCH) is an online platform for exchanging information and a key tool for facilitating the implementation of the Cartagena Protocol on Biosafety
                     </h3>
                 </div>
             </div>
