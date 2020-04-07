@@ -211,9 +211,9 @@
                                     <tr>
                                         <td style="width:70px;">
                                             <div class="btn-group btn-group-xs" style="width:70px;" role="group">
-                                                <button disabled type="button" class="btn btn-xs btn-default"><i class="fa fa-chevron-circle-down cursor" aria-hidden="true"></i>
-                                                <button disabled type="button" class="btn btn-xs btn-default"><i class="fa fa-plus"></i></button>
-                                                <button disabled type="button" class="btn btn-xs btn-default"><i class="fa fa-list"></i></button>
+                                                <button disabled type="button" class="btn btn-xs btn-default" data-title="Quick view latest 10 records" data-toggle="tooltip" ><i class="fa fa-chevron-circle-down cursor"></i>
+                                                <button disabled type="button" class="btn btn-xs btn-default" data-title="Add new record" data-toggle="tooltip" ><i class="fa fa-plus"></i></button>
+                                                <button disabled type="button" class="btn btn-xs btn-default" data-title="View list of all records" data-toggle="tooltip" ><i class="fa fa-list"></i></button>
                                             </div>
                                         </td>
                                         <td style="min-width:180px!important;">
@@ -240,15 +240,15 @@
                                     <tr>
                                         <td style="width:70px;">
                                             <div class="btn-group btn-group-xs" style="width:70px;" role="group">
-                                                <button type="button" class="btn btn-xs btn-default"
+                                                <button type="button" class="btn btn-xs btn-default" data-title="Quick view latest 10 records" data-toggle="tooltip"
                                                     ng-click="showTopRecords($event,schema)">
                                                     <i class="fa fa-chevron-circle-down cursor"
                                                         ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
                                                         aria-hidden="true"></i>
-                                                    <button type="button" class="btn btn-xs btn-default"
+                                                    <button type="button" class="btn btn-xs btn-default" data-title="Add new record" data-toggle="tooltip"
                                                         ng-click="gotoNew($event,schema)"><i
                                                             class="fa fa-plus"></i></button>
-                                                    <button type="button" class="btn btn-xs btn-default"
+                                                    <button type="button" class="btn btn-xs btn-default" data-title="View list of all records" data-toggle="tooltip"
                                                         ng-click="gotoList($event,schema)"><i
                                                             class="fa fa-list"></i></button>
                                             </div>
@@ -299,15 +299,15 @@
                                 <tr>
                                     <td style="width:70px;">
                                         <div class="btn-group btn-group-xs" style="width:70px;" role="group">
-                                            <button type="button" class="btn btn-xs btn-default"
+                                            <button type="button" class="btn btn-xs btn-default" data-title="Quick view latest 10 records" data-toggle="tooltip"
                                                 ng-click="showTopRecords($event,'contact')">
                                                 <i class="fa fa-chevron-circle-down cursor"
                                                     ng-class="{'fa-chevron-circle-down':!topRecords['contact'], 'fa-chevron-circle-up':topRecords['contact']}"
                                                     aria-hidden="true"></i>
-                                                <button type="button" class="btn btn-xs btn-default"
+                                                <button type="button" class="btn btn-xs btn-default" data-title="Add new record" data-toggle="tooltip"
                                                     ng-click="gotoNew($event,'contact')"><i
                                                         class="fa fa-plus"></i></button>
-                                                <button type="button" class="btn btn-xs btn-default"
+                                                <button type="button" class="btn btn-xs btn-default" data-title="View list of all records" data-toggle="tooltip"
                                                     ng-click="gotoList($event,'contact')"><i
                                                         class="fa fa-list"></i></button>
                                         </div>
@@ -365,15 +365,15 @@
                                     <tr>
                                         <td style="width:70px;">
                                             <div class="btn-group btn-group-xs" style="width:70px;" role="group">
-                                                <button type="button" class="btn btn-xs btn-default"
+                                                <button type="button" class="btn btn-xs btn-default" data-title="Quick view latest 10 records" data-toggle="tooltip"
                                                     ng-click="showTopRecords($event,schema)">
                                                     <i class="fa fa-chevron-circle-down cursor"
                                                         ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
                                                         aria-hidden="true"></i>
-                                                    <button type="button" class="btn btn-xs btn-default"
+                                                    <button type="button" class="btn btn-xs btn-default" data-title="Add new record" data-toggle="tooltip"
                                                         ng-click="gotoNew($event,schema)"><i
                                                             class="fa fa-plus"></i></button>
-                                                    <button type="button" class="btn btn-xs btn-default"
+                                                    <button type="button" class="btn btn-xs btn-default" data-title="View list of all records" data-toggle="tooltip"
                                                         ng-click="gotoList($event,schema)"><i
                                                             class="fa fa-list"></i></button>
                                             </div>

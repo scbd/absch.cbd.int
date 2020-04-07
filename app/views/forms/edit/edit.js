@@ -7,7 +7,8 @@ define([
     'views/forms/edit/document-selector',
     'views/register/directives/register-top-menu',
     'components/scbd-angularjs-services/services/locale',
-    'views/directives/workflow-arrow-buttons', 'services/app-config-service'
+    'views/directives/workflow-arrow-buttons', 'services/app-config-service',
+    'services/thesaurus-service'
 ], function (app, _, Enumerable) {
   
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
@@ -72,6 +73,8 @@ define([
     };
 
     $scope.genericFilter = function($query, items) {
+      if(!items)
+        return;
       var matchedOptions = [];
       for(var i=0; i!=items.length; ++i)
         if(items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
