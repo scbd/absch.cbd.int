@@ -440,6 +440,7 @@
 		{
 			"type": "thesaurus",
 			"term": "domestication",
+			"otherTerm":false,
 			"title": "Domestication",
 			"field": "domestication_s",
 			"relatedField":"domestication_REL_ss"

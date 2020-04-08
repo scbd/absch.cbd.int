@@ -73,6 +73,10 @@ function (app, _, template) {
 				$scope.addItem = function(type){
 					type.push({})
 				}
+				$scope.removeItem = function(type, $index){
+					if(type.length>1)
+						type.splice($index, 1)
+				}
 				
 				$q.when($scope.setDocument({}, true))
 				.then(function(doc){

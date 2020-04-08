@@ -36,7 +36,7 @@
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="scientificName" caption="Scientific name">
 												<div class="help-block">The scientific name of an organism is typically composed of the name of the genus followed by its specific denomination. For example: <i>Oryza sativa</i> is the scientific name for rice.</div>
-												<input type="text" class="form-control" name="scientificName" required ng-model="document.scientificName"/>
+												<input type="text" class="form-control" name="scientificName" ng-model="document.scientificName"/>
 											</div>
 										</div>
 										<div class="col-sm-12">
@@ -106,17 +106,26 @@
 										</div>
 										<div class="col-sm-12">
 											<div class="km-control-group" name="scientificNameSynonyms" caption="Alternate scientific name (synonyms)">
-												<div ng-repeat="synonym in scientificNameSynonyms" style="padding-bottom:5px;">
-													<input type="text" class="form-control" name="scientificNameSynonyms{{$index}}" ng-model="synonym.value" />
+												<div ng-repeat="synonym in scientificNameSynonyms" style="padding-bottom:5px;" class="input-group">
+													<input type="text" class="form-control" name="scientificNameSynonyms{{$index}}" ng-model="synonym.value" />													
+													<span ng-class="{'disable':scientificNameSynonyms.length==1}" class="input-group-addon" style="cursor:pointer" 
+													 ng-click="removeItem(scientificNameSynonyms, $index)">
+														<i class="fa fa-trash-o icon"></i>
+													</span>
 												</div>
 												<button class="btn btn-primary" ng-click="addItem(scientificNameSynonyms)">Add item</button>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="commonNames" caption="Common name(s)">
+											<div class="km-control-group common-names" name="commonNames" caption="Common name(s)">
+												
 												<div class="help-block">A common name is used to refer to an organism in everyday language and may include synonyms. Example: maize / corn.</div>
-												<div ng-repeat="commonName in commonNames" style="padding-bottom:5px;">
-													<div km-textbox-ml name="commonNames{{$index}}" ng-model="commonName.value" locales="document.header.languages"></div>
+												<div ng-repeat="commonName in commonNames" style="padding-bottom:5px;" class="input-group">
+													<div km-textbox-ml name="commonNames{{$index}}" class="common-name-input" ng-model="commonName.value" locales="document.header.languages"></div>
+													<span ng-class="{'disable':commonNames.length==1}" class="input-group-addon" style="cursor:pointer" 
+													 ng-click="removeItem(commonNames, $index)">
+														<i class="fa fa-trash-o icon"></i>
+													</span>
 												</div>
 												<button class="btn btn-primary" ng-click="addItem(commonNames)">Add item</button>
 											</div>
@@ -200,7 +209,8 @@
 											<div class="km-control-group" name="compatibleSpecies" caption="Cross-compatible species">
 												<div class="hel-block">Provide a list of species using the taxonomic classification (genus and species names) that
 													are known to cross-fertilize with the organism in the record.</div>
-												<div document-selector ng-model="document.compatibleSpecies" question="compatibleSpecies" schema="organism" allow-new-schema="organism"></div>
+												<div document-selector ng-model="document.compatibleSpecies" question="compatibleSpecies" 
+													schema="organism" allow-new-schema="organism" skip-government="true"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">

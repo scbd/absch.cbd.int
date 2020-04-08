@@ -53,7 +53,10 @@
                                 $scope.treeOptions = function () {
                                     var dataSource;
                                     if (filter.type == "thesaurus") {
-                                        dataSource = thesaurusService.getDomainTerms(filter.term, {other:true})
+                                        var otherTerm = filter.otherTerm;
+                                        if(otherTerm == undefined)
+                                            otherTerm = true;
+                                        dataSource = thesaurusService.getDomainTerms(filter.term, {other:otherTerm})
                                     }
                                     else if (filter.type == 'solr') {
                                         dataSource = runSolrQuery(filter.query);

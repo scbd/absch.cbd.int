@@ -52,6 +52,10 @@ function (app, _) {
 		$scope.isDonorMandatory = function(){
 			return !!$scope.document.isSynthetic;
 		}
+		$scope.removeItem = function(type, $index){
+			if(type.length>1)
+				type.splice($index, 1)
+		}
 
    }]);
 

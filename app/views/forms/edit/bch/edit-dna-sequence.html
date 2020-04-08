@@ -31,15 +31,19 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="name" caption="Name">
-												<div km-textbox-ml name="name" required ng-model="document.name" locales="document.header.languages"></div>
+												<div km-textbox-ml name="name" ng-model="document.name" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="synonymNames" caption="Alternate Genetic Element Name (synonyms)">
-												<div ng-repeat="synonym in synonymNames" style="padding-bottom:5px;">
-													<div km-textbox-ml name="synonymNames_{{$index}}" ng-model="synonym.value" locales="document.header.languages"></div>
+												<div ng-repeat="synonym in synonymNames" style="padding-bottom:5px;"  class="input-group">
+													<div km-textbox-ml name="synonymNames_{{$index}}" class="synonym-name-input" ng-model="synonym.value" locales="document.header.languages"></div>
+													<span ng-class="{'disable':synonymNames.length==1}" class="input-group-addon" style="cursor:pointer" 
+													 ng-click="removeItem(synonymNames, $index)">
+														<i class="fa fa-trash-o icon"></i>
+													</span>
 												</div>
 												<button class="btn btn-primary" ng-click="synonymNames.push({})">Add item</button>
 											</div>
@@ -48,7 +52,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="abbreviation" caption="Abbreviation">
-												<div km-textbox-ml name="abbreviation" required ng-model="document.abbreviation" locales="document.header.languages"></div>
+												<div km-textbox-ml name="abbreviation" ng-model="document.abbreviation" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
@@ -152,8 +156,7 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="km-control-group" name="notes">
-											<div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.
-												viewing the record.</div>
+											<div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
 											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
 									</div>

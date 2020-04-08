@@ -11,10 +11,10 @@
 		<legend>Organism information</legend>
 		
 		<div ng-show="document.scientificName">
-			<label>Alternate scientific name (synonyms)</label>
-			<div class="km-value" ng-bind="document.scientificName"> 
-				<span ng-if="document.scientificNameSynonyms">({{document.scientificNameSynonyms}})</span></div>
+			<label>Scientific name</label>
+			<div class="km-value" ng-bind="document.scientificName"></div>
 		</div>
+		
 		<div ng-if="classification">
 			<label>Taxonomic Classification</label>
 			<div class="km-value">
@@ -22,18 +22,18 @@
 					<tbody>
 						<tr ng-repeat="(key, taxonomy) in classification">
 							<td style="width:10%">
-								<span ng-if="key == 'realm'"		ng-style="{'padding-left' : (8*$index)+'px' }">Realm		</span>
-								<span ng-if="key == 'subRealm'"		ng-style="{'padding-left' : (8*$index)+'px' }">Subrealm	</span>
-								<span ng-if="key == 'kingdom'"		ng-style="{'padding-left' : (8*$index)+'px' }">Kingdom	</span>
-								<span ng-if="key == 'phylum'"		ng-style="{'padding-left' : (8*$index)+'px' }">Phylum	</span>
-								<span ng-if="key == '_class'"		ng-style="{'padding-left' : (8*$index)+'px' }">Class		</span>
-								<span ng-if="key == 'order'"		ng-style="{'padding-left' : (8*$index)+'px' }">Order		</span>
-								<span ng-if="key == 'subOrder'"		ng-style="{'padding-left' : (8*$index)+'px' }">Suborder	</span>
-								<span ng-if="key == 'family'"		ng-style="{'padding-left' : (8*$index)+'px' }">Family	</span>
-								<span ng-if="key == 'subFamily'"	ng-style="{'padding-left' : (8*$index)+'px' }">Subfamily	</span>
-								<span ng-if="key == 'genus'"		ng-style="{'padding-left' : (8*$index)+'px' }">Genus		</span>
-								<span ng-if="key == 'species'"		ng-style="{'padding-left' : (8*$index)+'px' }">Species	</span>
-								<span ng-if="key == 'subSpecies'"	ng-style="{'padding-left' : (8*$index)+'px' }">Species	</span>
+								<span ng-if="key == 'realm'"		ng-style="{'padding-left' : (10*$index)+'px' }">Realm		</span>
+								<span ng-if="key == 'subRealm'"		ng-style="{'padding-left' : (10*$index)+'px' }">Subrealm	</span>
+								<span ng-if="key == 'kingdom'"		ng-style="{'padding-left' : (10*$index)+'px' }">Kingdom	</span>
+								<span ng-if="key == 'phylum'"		ng-style="{'padding-left' : (10*$index)+'px' }">Phylum	</span>
+								<span ng-if="key == '_class'"		ng-style="{'padding-left' : (10*$index)+'px' }">Class		</span>
+								<span ng-if="key == 'order'"		ng-style="{'padding-left' : (10*$index)+'px' }">Order		</span>
+								<span ng-if="key == 'subOrder'"		ng-style="{'padding-left' : (10*$index)+'px' }">Suborder	</span>
+								<span ng-if="key == 'family'"		ng-style="{'padding-left' : (10*$index)+'px' }">Family	</span>
+								<span ng-if="key == 'subFamily'"	ng-style="{'padding-left' : (10*$index)+'px' }">Subfamily	</span>
+								<span ng-if="key == 'genus'"		ng-style="{'padding-left' : (10*$index)+'px' }">Genus		</span>
+								<span ng-if="key == 'species'"		ng-style="{'padding-left' : (10*$index)+'px' }">Species	</span>
+								<span ng-if="key == 'subSpecies'"	ng-style="{'padding-left' : (10*$index)+'px' }">Species	</span>
 							</td>
 							<td ng-bind="taxonomy" style="text-align:left">
 							</td>
@@ -117,9 +117,14 @@
 		</div>
 
 		<div ng-show="document.compatibleSpecies">
-				<label>Cross-compatible species</label>
-				<view-default-reference ng-model="document.compatibleSpecies.identifier" locale="locale" target="target"></view-default-reference>
-				<div class="km-value" ng-bind="document.compatibleSpecies"></div>
+			<label>Cross-compatible species</label>
+			<div class="km-value">
+				<ul>
+					<li ng-repeat="item in document.compatibleSpecies">
+						<view-default-reference ng-model="item.identifier" locale="locale" target="target"></view-default-reference>
+					</li>
+				</ul>
+			</div>				
 		</div>
 
 		<div ng-show="document.pathogenicity">
