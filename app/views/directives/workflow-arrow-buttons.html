@@ -175,6 +175,18 @@
     </div>
 
     <div ng-show="tab=='edit'" km-tab="edit" class="edit-form editForm">
+        <div class="alert alert-danger" role="alert" ng-if="rejectedWorkflow">
+            <h4 class="alert-heading"><i class="fa fa-warning"></i> Information!</h4>
+            <p>
+                This draft version request for publishing was rejected by 
+                <span ng-bind="rejectedWorkflow.completedBy_info.firstName + ' ' + rejectedWorkflow.completedBy_info.lastName"></span>
+                on <span ng-bind="rejectedWorkflow.completedOn | formatDateWithTime"></span>
+            </p>
+            <p ng-if="rejectedWorkflow.result.reason">
+                <strong>Reason :</strong>
+                <span  ng-bind="rejectedWorkflow.result.reason"></span>
+            </p>
+        </div>
         <div ng-transclude="editForm"></div>
     </div>
 

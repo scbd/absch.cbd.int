@@ -270,6 +270,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     .then(function(){
                         if($scope.security.canSaveDraft==false)
                             openUnAuthorizedDialog();
+                        else
+                            loadReviousWorkflow($scope.documentUID)
                     })
                     .finally(function(){
 
@@ -661,6 +663,21 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                                     ngDialog.close();
                                     closeDocument(true);
                                 }
+                        }
+                    })
+                }
+
+                function loadReviousWorkflow(identifier){
+                    if($route.current.params.workflow)
+                        return;
+
+                    var query = {'data.identifier':identifier}
+                    IWorkflows.query(query, undefined, 1).then(function(workflows){
+                        if(workflows.length>0){
+                            var workflow = workflows[0];
+                            if((workflow.result||{}).action=='rejected'){
+                                $scope.rejectedWorkflow = _.find(workflow.activities, function(activity){return activity.result.action == 'reject'});
+                            }
                         }
                     })
                 }
