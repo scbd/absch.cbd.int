@@ -17,7 +17,7 @@ define(['app', 'lodash', 'text!./view-terms-hierarchy.html',
                 $scope.$watch('binding', function(newVal, oldVal){
                     //console.log(newVal);                   
                     var newTerms = angular.copy(newVal);                    
-                    if(_.isObject(newVal) == 'object')
+                    if(_.isObject(newVal))
                         newTerms = [newTerms];
 
 					if($scope.termDomain && newTerms && (newTerms||[]).length){
