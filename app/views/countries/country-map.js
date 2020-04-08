@@ -32,7 +32,7 @@ function(require, template, app, _) {
         var mapOptions = {
             "type": "map",
             "theme": "light",
-            "projection": "winkel3",
+            "projection": "equirectangular",
             "zoomDuration": 0.1,
             "responsive": {
             "enabled": true
