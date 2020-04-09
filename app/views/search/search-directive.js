@@ -783,9 +783,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             return;
                         }
                         if(filterType == 'freeText')
-                            query = field + ':("' + _.map(filters, 'id').join('" "') + '")';
+                            query = field + ':("' + _.map(filters, function(filter){ return _.trim(filter.id)}).join('" "') + '")';
                         else
-                            query = field + ':(' + _.map(filters, 'id').join(' ') + ')';
+                            query = field + ':(' + _.map(filters, function(filter){ return _.trim(filter.id)}).join(' ') + ')';
 
                         return query;
                     }
