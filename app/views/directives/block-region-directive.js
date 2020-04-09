@@ -25,7 +25,7 @@ define(['app'], function(app) {
                     $element.addClass('blockRegion');
                     var loadtHtml = '<div class="inverted dimmer" ng-class="{\'active\': activate}"><div class="medium loader block-text">'+ blockText + ' </div></div>';
 
-                    $element.empty();//.remove('.inverted.dimmer');
+                    $element.find('.inverted.dimmer').remove();
                     $element.append($compile(loadtHtml)($scope));
                 }
 
