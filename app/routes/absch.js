@@ -10,7 +10,11 @@ define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
                whenAsync('/partners/idlo/events',              { templateUrl: 'views/partners/idlo.html',           label:'IDLO',             resolveController: false, resolveUser: false}).
 
                whenAsync('/forums',                        { templateUrl: 'views/forums/forum-list-view.html',         label:'Forums',       resolveController: true, resolve : { securized : commonRoutes.securize() } }).
-               whenAsync('/forums/iac-trg',          { redirectTo:'/forums/iac', resolve : { securized : commonRoutes.securize() }}).
+              
+               whenAsync('/forums/cc',              { templateUrl: 'views/forums/thread-list-view.html'   ,label:'Compliance Committee 3', resolveController: true, resolve : { securized : commonRoutes.securize() }, forumId:17451, postUrl:'/forums/cc', text:'Compliance Committee 3' }).
+               whenAsync('/forums/cc/:threadId',    { templateUrl: 'views/forums/post-list-view.html'     ,label:'Thread-Subject', resolveController: true, resolve : { securized : commonRoutes.securize() }, forumId:17451, forumListUrl:'/forums/cc/', text:'Compliance Committee 3'}).
+               whenAsync('/forums/iac4',              { templateUrl: 'views/forums/thread-list-view.html'   ,label:'IAC 4', resolveController: true, resolve : { securized : commonRoutes.securize() }, forumId:17607, postUrl:'/forums/iac4', text:'IAC 4' }).
+               whenAsync('/forums/iac4/:threadId',    { templateUrl: 'views/forums/post-list-view.html'     ,label:'Thread-Subject', resolveController: true, resolve : { securized : commonRoutes.securize() }, forumId:17607, forumListUrl:'/forums/iac4/', text:'IAC 4'}).
                whenAsync('/forums/iac',              { templateUrl: 'views/forums/thread-list-view.html'   ,label:'IAC', resolveController: true, resolve : { securized : commonRoutes.securize() }, forumId:17433, postUrl:'/forums/iac', text:'IAC' }).
                whenAsync('/forums/iac/:threadId',    { templateUrl: 'views/forums/post-list-view.html'     ,label:'Thread-Subject', resolveController: true, resolve : { securized : commonRoutes.securize() }, forumId:17433, forumListUrl:'/forums/iac/', text:'IAC'}).
                whenAsync('/forums/ahteg-dsi',              { templateUrl: 'views/forums/thread-list-view.html'   ,label:'AHTEG on DSI', resolveController: true, resolve : { securized : commonRoutes.securize() }, forumId:17446, postUrl:'/forums/ahteg-dsi', text:'AHTEG on DSI' }).
