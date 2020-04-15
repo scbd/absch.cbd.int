@@ -1,9 +1,7 @@
-define(['app', 'lodash', 'views/forms/edit/edit', 'services/thesaurus-service',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-risk-assessment.directive"], 
+define(['app', 'lodash', './directives/edit-risk-assessment.directive'], 
 function (app, _) {
 
-	app.controller("editRiskAssessment", ["$scope", "$routeParams", "$route", "Thesaurus", "$q", "$controller", "thesaurusService",
-	function($scope, $routeParams, $route, Thesaurus, $q, $controller, thesaurusService) {
+	app.controller("editRiskAssessmentController", ["$scope", "$controller", function($scope, $controller) {
 		
 		$scope.isNational = $routeParams.isNational;
 		

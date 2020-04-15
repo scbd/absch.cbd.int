@@ -26,30 +26,12 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, thesau
             $scope.canEditGovernment = roleService.isAdministrator();
             $scope.prefilledContactType = $attr.contactType
 
-            $scope.options = {            
-                countries		: function() {
-                    return thesaurusService.getDomainTerms('countries').then(function(o){
-                      var countries = $filter("orderBy")(o, "name");
-                      _.each(countries, function(element) {
-                        element.__value = $filter('lstring')(element.title, locale);
-                      });
-                      return countries;
-                    });
-                },
+            _.extend($scope.options, {            
                 organizationTypes : function() {
                     return thesaurusService.getDomainTerms('Organization Types', {other:true, otherType:'lstring'})
                 }
-            };           
+            });           
             
-            $scope.startsWithFilter = function($query, items) {
-                var matchedOptions = [];
-                for(var i=0; i!=items.length; ++i)
-                    if(_.startsWith(items[i].__value.toLowerCase(), $query.toLowerCase()))
-                        matchedOptions.push(items[i]);
-        
-                return matchedOptions;
-            };
-        
             //==================================
             //
             //==================================

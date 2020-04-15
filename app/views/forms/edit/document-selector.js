@@ -45,6 +45,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                 show   : $attr.allowNew=='true',
                 schema : $attr.allowNewSchema,
                 title  : $attr.allowNewButtonTitle,
+                schemas : $attr.allowNewSchema.split(','),
             };     
 
             if($attr.listView){
@@ -420,14 +421,21 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                     "modifiedOrganism" 			: 'views/forms/edit/bch/directives/edit-modified-organism.directive',
                     "dnaSequence" 				: 'views/forms/edit/bch/directives/edit-dna-sequence.directive',
                     "organism" 					: 'views/forms/edit/bch/directives/edit-organism.directive',
+
+                    "biosafetyDecision" 		: 'views/forms/edit/bch/directives/edit-biosafety-decision.directive',
+                    "biosafetyLaw" 				: 'views/forms/edit/bch/directives/edit-law.directive',
+                    "nationalRiskAssessment"    : 'views/forms/edit/bch/directives/edit-risk-asswssment.directive',
+                    "independentRiskAssessment" : 'views/forms/edit/bch/directives/edit-risk-asswssment.directive',
+
                     'contact'                   : 'views/forms/edit/directives/edit-contact.directive'
                 }
+                $scope.allowNew.activeSchema = lschema;
                 var schemaDetails = schemaMapping[lschema];
-
+                var divSelector = ' #divNewRecord'
+                var name 		= snake_case(lschema);
+                $('#'+dialogId + divSelector).empty()
                 var defer = $q.defer();
                 require([schemaDetails], function () {
-                    var divSelector = ' #divNewRecord'
-                    var name 		= snake_case(lschema);
                     
                     var additionalAttributes = '';
                     if($attr.allowNewAttributes)

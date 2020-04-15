@@ -271,13 +271,19 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         if($scope.security.canSaveDraft==false)
                             openUnAuthorizedDialog();
                         else
-                            loadReviousWorkflow($scope.documentUID)
-                    })
-                    .finally(function(){
-
+                            loadReviousWorkflow($scope.documentUID);
                         $scope.loading = false;
                         $scope.blockText = undefined;
-					});
+                    })
+                    .catch(function(e){
+                        $scope.loading = true;
+                        $scope.blockText = 'Error occurred, please try again';
+                    })
+                    // .finally(function(){
+
+                    //     $scope.loading = false;
+                    //     $scope.blockText = undefined;
+					// });
 				}
 
                 //====================

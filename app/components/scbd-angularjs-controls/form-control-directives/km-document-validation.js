@@ -50,9 +50,18 @@ define(['app', 'text!./km-document-validation.html','jquery',
                             // inner tabs
                             if(sTabName && sPagerName)
                                 $('#'+sPagerName + ' a[href="#' + sTabName + '"]').tab('show');
+                            var scrollNum = qLabel.offset().top
+                            
+                            if(container!= 'body,html'){
+                                //its a dialog calculate scrollTop
+                                var dialogContainer = $(container)
+                                scrollNum = scrollNum - dialogContainer.offset().top + dialogContainer.scrollTop();
+                            }
+                            else
+                                scrollNum -= 10; //forms 
 
                             qBody.stop().animate({
-                                scrollTop: qLabel.offset().top - 50
+                                scrollTop: scrollNum
                             }, 1000);
                         });
                     }

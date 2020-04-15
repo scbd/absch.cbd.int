@@ -11,10 +11,10 @@ define([
     'services/thesaurus-service'
 ], function (app, _, Enumerable) {
   
-  app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
+  app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "thesaurusService", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
                                    "breadcrumbs", "appConfigService", "locale", 'ngMeta', "realm",
-                                    function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
+                                    function ($rootScope, $scope, $http, $window, guid, $filter, thesaurusService, $q, $location, storage,
                                               authentication, editFormUtility, $routeParams, $timeout, $route, 
                                               breadcrumbs, appConfigService, locale, ngMeta, realm) {
 
@@ -33,20 +33,22 @@ define([
       $scope.tab      = "edit";
     $scope.review   = { locale: locale };
 
-    var breadcrumb = {    
-        label : $filter('schemaName')($filter('mapSchema')($scope.type)),
-        originalPath : "/register/:document_type",
-        param:$scope.type,
-        path:"/register/" + $scope.type
+    if(!$scope.isDialog){
+      var breadcrumb = {    
+          label : $filter('schemaName')($filter('mapSchema')($scope.type)),
+          originalPath : "/register/:document_type",
+          param:$scope.type,
+          path:"/register/" + $scope.type
+      }
+      breadcrumbs.breadcrumbs.splice(2, 0 , breadcrumb);
     }
-    breadcrumbs.breadcrumbs.splice(2, 0 , breadcrumb);
-
-    $scope.options  = {
+    
+    $scope.options  = {                
       countries		: function() {
-        return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function(o){
-          var countries = $filter("orderBy")(o.data, "name");
+        return thesaurusService.getDomainTerms('countries').then(function(o){
+          var countries = $filter("orderBy")(o, "name");
           _.each(countries, function(element) {
-            element.__value = element.name;
+            element.__value = $filter('lstring')(element.title, locale);
           });
           return countries;
         });
@@ -68,10 +70,6 @@ define([
       },
     };
 
-    $scope.ac_countries = function() {
-      return $scope.options.countries();
-    };
-
     $scope.genericFilter = function($query, items) {
       if(!items)
         return;
@@ -83,6 +81,15 @@ define([
       return matchedOptions;
     };
 
+    $scope.startsWithFilter = function($query, items) {
+      var matchedOptions = [];
+      for(var i=0; i!=items.length; ++i)
+          if(_.startsWith(items[i].__value.toLowerCase(), $query.toLowerCase()))
+              matchedOptions.push(items[i]);
+
+      return matchedOptions;
+    };
+    
     $scope.genericMapping = function(item) {
       return {identifier: item.identifier};
     };

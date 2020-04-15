@@ -2077,6 +2077,9 @@ a.disabled{
     height: auto !important;
     overflow: inherit !important;
 }
+.ngdialog-overlay{
+    pointer-events: none;
+}
 /* .ngdialog.ngdialog-theme-default .ngdialog-content {
     z-index: 1  
 }

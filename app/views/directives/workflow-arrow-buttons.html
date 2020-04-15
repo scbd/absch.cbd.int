@@ -254,7 +254,7 @@
 
             <div class="pull-right">
                 <div class="btn" style="border: 1px solid #ccc;" ng-if="offlineFormats">
-                    Offline format:
+                    <span ng-if="!container">Offline format:</span>
                     <span ng-repeat="(code, lang) in ::offlineLanguages" data-title="{{::lang}}" data-toggle="tooltip" data-container="body" 
                         ng-show="::offlineFormats[documentType][code]">
                         <a target="_blank" ng-href="{{::offlineFormats[documentType][code]}}" ng-bind="::code"></a>

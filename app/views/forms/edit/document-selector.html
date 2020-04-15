@@ -70,7 +70,7 @@
                 </div>
                 <div ng-if="allowNew.editingOn">
                     <h3>
-                        Create new <span ng-bind="allowNew.schema|schemaName"></span>
+                        Create new <span ng-bind="allowNew.activeSchema|schemaName"></span>
                     </h3>
                 </div>
             </div>
@@ -153,11 +153,20 @@
                         <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="allowNew.editingOn" ng-click="saveDocuments()">Select</a>
                         <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="allowNew.editingOn" ng-click="clearSelectedDocuments()">Clear selected records</a>
 
-
-                        <a translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-hide="!allowNew.schema || allowNew.editingOn" ng-click="allowNew.editingOn=!allowNew.editingOn;loadEditDirective(allowNew.schema)">
+                        <div class="dropdown  pull-left"  ng-hide="!allowNew.schema || allowNew.editingOn" style="margin-left:5px;">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                             <span ng-if="!allowNew.title">Create</span>
                             <span ng-if="allowNew.title" ng-bind="allowNew.title"></span>
-                        </a>
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                              <li ng-repeat="schema in allowNew.schemas">
+                                  <a href="#" ng-click="allowNew.editingOn=!allowNew.editingOn;loadEditDirective(schema)">
+                                      <span ng-bind="schema|schemaName"></span>
+                                  </a>
+                                </li>
+                            </ul>
+                        </div>
+
                         <a translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-show="allowNew.editingOn"   ng-click="allowNew.editingOn=!allowNew.editingOn">Show Existing</a>
                        
                         <a translation-url  type="button" class="btn btn-warning bold" data-dismiss="modal" ng-click="closeDialog()">Close</a>
