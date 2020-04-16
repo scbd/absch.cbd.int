@@ -29,48 +29,11 @@ function (app, _, template) {
                 
 
                 _.extend($scope.options, {
-                    organizationTypes: function() {
-                        return $http.get("/api/v2013/thesaurus/domains/Organization%20Types/terms", {
-                            cache: true
-                        }).then(function(o) {
-                            return o.data;
-                        });
-                    },
-                    cbdSubjects: function() {
-                        return $http.get("/api/v2013/thesaurus/domains/CBD-SUBJECTS/terms", {
-                            cache: true
-                        }).then(function(o) {
-                            return o.data;
-                        });
-                    },
-                    jurisdictions: function() {
-                        return $q.all([
-                            $http.get("/api/v2013/thesaurus/domains/D7BD5BDE-A6B9-4261-B788-16839CCC4F7E/terms", {
-                                cache: true
-                            }),
-                            $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED", {
-                                cache: true
-                            })
-                        ]).then(function(o) {
-                            var jurisdictions = o[0].data;
-                            jurisdictions.push(o[1].data);
-                            return jurisdictions;
-                        });
-                    },
-                    absGeneticResourceTypes: function() {
-                        return $http.get("/api/v2013/thesaurus/domains/20945FA8-C24C-4AF6-B3D9-367592AFDF48/terms", {
-                            cache: true
-                        }).then(function(o) {
-                            return o.data;
-                        });
-                    },
-                    absGeneticResourceAreas: function() {
-                        return $http.get("/api/v2013/thesaurus/domains/545CD54C-CFF3-41E8-A003-FDD278426A3A/terms", {
-                            cache: true
-                        }).then(function(o) {
-                            return o.data;
-                        });
-                    },
+                    organizationTypes: function() { return thesaurusService.getDomainTerms('organizationTypes') },
+                    cbdSubjects: function() {return thesaurusService.getDomainTerms('cbdSubjects')},
+                    jurisdictions: function() {return thesaurusService.getDomainTerms('cnaJurisdictions', {other:true})},
+                    absGeneticResourceTypes: function() {return thesaurusService.getDomainTerms('absGeneticResourceTypes')},
+                    absGeneticResourceAreas: function() {return thesaurusService.getDomainTerms('absGeneticResourceAreas')},
                     functions: function() {
                         var functionDomain = 'subjectAreas';
                         if($scope.type=='SPCA')//supplementaryAuthority
@@ -78,23 +41,9 @@ function (app, _, template) {
 
                         return thesaurusService.getDomainTerms(functionDomain, {other:true, otherType:'lstring'});
                     },
-                    bchOrganismTypes: function() {
-                        return thesaurusService.getDomainTerms('typeOfOrganisms', {other:true, otherType:'lstring'});
-                    },           
-                    absFunctions: function() {
-                        return $http.get("/api/v2013/thesaurus/domains/8102E184-E282-47F7-A49F-4C219B0EE235/terms", {
-                            cache: true
-                        }).then(function(o) {
-                            return o.data;
-                        });
-                    },
-                    keywords: function() {
-                        return $http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", {
-                            cache: true
-                        }).then(function(o) {
-                            return Thesaurus.buildTree(o.data);
-                        });
-                    },
+                    bchOrganismTypes: function() { return thesaurusService.getDomainTerms('typeOfOrganisms', {other:true, otherType:'lstring'})},
+                    absFunctions: function() {return thesaurusService.getDomainTerms('absFunctions');},
+                    keywords: function() { return thesaurusService.getDomainTerms('keywords');},
 
                 });
 

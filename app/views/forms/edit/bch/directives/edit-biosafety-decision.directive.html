@@ -116,7 +116,7 @@
 								<legend>Subject of the decision / notification / communication</legend>								
 								<div class="row">
 									<div class="col-xs-12">
-										<div block-region activate="decisions.otherDecisions.identifier" skip-loading-icon="true" >
+										<div block-region activate="decisions.otherDecisions.identifier" skip-loading-icon="true" block-text=" ">
 											<div class="km-control-group" name="commonDecisions" required caption="Common decisions">
 													<div km-term-check required ng-model="decisions.commonDecisions" locales="document.header.languages"
 													terms="options.commonDecisions()"  binding-type="term[]" ng-change="onCommonDecisionChanged()"  ></div>
@@ -124,7 +124,7 @@
 										</div>
 									</div>
 									<div class="col-xs-12">
-										<div block-region activate="decisions.commonDecisions.length > 0" skip-loading-icon="true" >
+										<div block-region activate="decisions.commonDecisions.length > 0" skip-loading-icon="true" block-text=" ">
 											<div class="km-control-group" name="otherDecisions" required caption="Other decisions, notifications and communications">
 												
 												<div km-term-radio required ng-model="decisions.otherDecisions" locales="document.header.languages"

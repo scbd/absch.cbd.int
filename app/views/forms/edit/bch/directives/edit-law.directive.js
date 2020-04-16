@@ -2,7 +2,7 @@ define(['app', 'lodash', 'text!./edit-law.directive.html', 'views/forms/edit/edi
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-law.directive"], 
 function (app, _, template) {
 
-	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", function($controller, thesaurusService, $q) {
+	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter", function($controller, thesaurusService, $q, $filter) {
 		return {
 			restrict   : "EA",
 			template: template,

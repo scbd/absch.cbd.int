@@ -18,7 +18,7 @@ define(['app'], function(app) {
                         blockText = attrs.blockText;
                         
                     blockText = '<strong>' + blockText + '</strong>';
-                    if(!attrs.skipLoadingIcon){
+                    if(attrs.skipLoadingIcon!= 'true'){
                         blockText = '<i class="fa fa-spin fa-cog fa-3x" />' + blockText;
                     }
 

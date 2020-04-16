@@ -2,7 +2,7 @@ define(['app', 'lodash', 'text!./edit-risk-assessment.directive.html', 'views/fo
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-risk-assessment.directive"], 
 function (app, _, template) {
 
-	app.directive("editRiskAssessment", ["$controller", "thesaurusService", function($controller, thesaurusService) {
+	app.directive("editRiskAssessment", ["$controller", "thesaurusService", "$routeParams", function($controller, thesaurusService, $routeParams) {
 		return {
 			restrict   : "EA",
 			template: template,

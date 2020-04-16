@@ -18,7 +18,7 @@ function (app, _, template) {
 				$scope.container        = $attr.container;
     			$scope.isDialog         = $attr.isDialog;  
 				$scope.type 			= $attr.documentType; 
-                
+                $scope.decisions        = {};
                 $controller('editController', {
                     $scope: $scope
                 });
@@ -84,7 +84,8 @@ function (app, _, template) {
                     //////////////////////////////////
 
                     var decisionTypes = [];
-                    decisionTypes	=	_.compact($scope.decisions.commonDecisions||[$scope.decisions.otherDecisions]||[]);
+                    if($scope.decisions)
+                        decisionTypes	=	_.compact($scope.decisions.commonDecisions||[$scope.decisions.otherDecisions]||[]);
 
                     if($scope.isLmoDecisionForIntentionalIntroduction && document.addressesTransboundaryMovement)
                         decisionTypes = _.union(decisionTypes, [$scope.decisions.intentionDecisions]);
@@ -103,7 +104,7 @@ function (app, _, template) {
                     return document;
                 };
                 
-                $q.when($scope.setDocument({}))
+                $scope.setDocument({})
                 .then(function(){
                     var document = $scope.document;
                     if(document.decisionTypes && document.decisionTypes.length > 0){
@@ -117,7 +118,7 @@ function (app, _, template) {
                             $scope.decisions.commonDecisions.push({identifier:commonDecisionsIdentifiers[1]});
                             $scope.isLmoDecisionForDirectUse = true
                         }
-                        $q.when($scope.options.intentionDecisions())
+                        $scope.options.intentionDecisions()
                         .then(function(options){
                             var selectedOption = _.find(options, function(o){
                                 return _.includes(decisionTypesIdentifiers, o.identifier);
@@ -125,7 +126,7 @@ function (app, _, template) {
                             if(selectedOption)
                                 $scope.decisions.intentionDecisions = {identifier:selectedOption.identifier}
                         })
-                        $q.when($scope.options.directUseDecisions())
+                        $scope.options.directUseDecisions()
                         .then(function(options){
                             var selectedOption =  _.find(options, function(o){
                                 return _.includes(decisionTypesIdentifiers, o.identifier);

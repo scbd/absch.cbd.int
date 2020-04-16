@@ -56,6 +56,7 @@ define(['app', 'services/cache-service'], function (app) {
             var terms = {
                 other: "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
             }
+
             var domainTerms = {
                 countries              : "countries",
                 regions                : "regions",
@@ -64,7 +65,9 @@ define(['app', 'services/cache-service'], function (app) {
                 status                 : "ED7CDBD8-7762-4A84-82DD-30C01458A799",
                 typeOfDocuments        : "144CF550-7629-43F3-817E-CACDED34837E",
                 cnaJurisdictions       : "D7BD5BDE-A6B9-4261-B788-16839CCC4F7E",
-                absGeneticResourceTypes: "1A22EAAB-9BBC-4543-890E-DEF913F59E98",
+                absGeneticResourceTypes: '20945FA8-C24C-4AF6-B3D9-367592AFDF48',
+                absGeneticResourceAreas: '545CD54C-CFF3-41E8-A003-FDD278426A3A',
+                absFunctions           : '8102E184-E282-47F7-A49F-4C219B0EE235',
                 keywords               : "1A22EAAB-9BBC-4543-890E-DEF913F59E98",   //duplicate?
                 usage                  : "A7B77788-8C90-4849-9327-E181E9522F3A",
                 cpJurisdictions        : "D7BD5BDE-A6B9-4261-B788-16839CCC4F7E",
@@ -100,6 +103,8 @@ define(['app', 'services/cache-service'], function (app) {
                 aichiTargets     : 'AICHI-TARGETS',
                 allKeywords      : 'CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924',
                 aBSkeyareas      : '2B2A5166-F949-4B1E-888F-A7976E76320B',
+
+                cbdSubjects      : 'CBD-SUBJECTS',
 
 
                 decisionTypes                 : 'DecisionTypes',
