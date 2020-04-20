@@ -51,7 +51,7 @@ define(['app', 'text!views/search/search-filters/country-filter.html','lodash', 
                     if(!$scope.cf_countryFilter) 
                         return cf_filterParty(item);
                     else{
-                        if(item.name[0] === $scope.cf_countryFilter)
+                        if(item.name[locale].charAt(0) === $scope.cf_countryFilter)
                             return cf_filterParty(item);
                     }
                };
