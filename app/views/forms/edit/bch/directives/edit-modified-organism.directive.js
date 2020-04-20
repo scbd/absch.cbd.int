@@ -1,5 +1,5 @@
 define(['app', 'lodash', 'text!./edit-modified-organism.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-lmo.directive"], 
+	'views/forms/edit/document-selector', "views/forms/view/bch/view-lmo.directive", 'views/forms/directives/traits-selector.directive'], 
 function (app, _, template) {
 
 	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", function($http, $controller, thesaurusService) {
