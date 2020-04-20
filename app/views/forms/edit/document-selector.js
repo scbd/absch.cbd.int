@@ -424,10 +424,12 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 
                     "biosafetyDecision" 		: 'views/forms/edit/bch/directives/edit-biosafety-decision.directive',
                     "biosafetyLaw" 				: 'views/forms/edit/bch/directives/edit-law.directive',
-                    "nationalRiskAssessment"    : 'views/forms/edit/bch/directives/edit-risk-asswssment.directive',
-                    "independentRiskAssessment" : 'views/forms/edit/bch/directives/edit-risk-asswssment.directive',
+                    "nationalRiskAssessment"    : 'views/forms/edit/bch/directives/edit-risk-assessment.directive',
+                    "independentRiskAssessment" : 'views/forms/edit/bch/directives/edit-risk-assessment.directive',
 
-                    'contact'                   : 'views/forms/edit/directives/edit-contact.directive'
+                    'authority'                 : 'views/forms/edit/directives/edit-authority.directive',
+                    'contact'                   : 'views/forms/edit/directives/edit-contact.directive',
+                    'organization'              : 'views/forms/edit/directives/edit-organization.directive'
                 }
                 $scope.allowNew.activeSchema = lschema;
                 var schemaDetails = schemaMapping[lschema];

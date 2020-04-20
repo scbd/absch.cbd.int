@@ -122,7 +122,10 @@ define(['app', 'services/cache-service'], function (app) {
                 organizationTypes             : 'Organization Types',
                 expertiseArea                 : '31855BDF-ADFF-460A-8FB8-975C8C325DAA',
                 supplementaryProtocolFunctions: 'CD613FCE-7A2A-475C-85A1-C2D1C208EC0C',
-                focalPointTypes               : 'FocalPoint Types'
+                focalPointTypes               : 'FocalPoint Types',
+                geographicRegions             : 'geographic-regions',
+                services                      : 'DE2D1321-AD01-4C49-8D48-E7BD4EA14226',
+                detectionMethods              : '81EE782D-810C-4107-8E8F-F7A6EE4CD1B5'
                 
             }
         }

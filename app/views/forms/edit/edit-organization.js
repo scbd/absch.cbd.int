@@ -7,8 +7,6 @@ define(['app', 'views/forms/edit/edit', 'views/forms/edit/directives/edit-organi
             $scope: $scope
         });
 
-		$scope.identifier = $routeParams.identifier;
-
 
      }]);
      
