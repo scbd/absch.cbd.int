@@ -241,8 +241,8 @@
 							</form>	
 				</edit-form>
 				<review-form>
-					<div ng-if="isNational"  view-national-risk-assessment ng-model="document" locale="review.locale" allow-drafts="true"></div>
-					<div ng-if="!isNational" view-independent-risk-assessment ng-model="document" locale="review.locale" allow-drafts="true"></div>
+					<div ng-if="isNational"  view-national-risk-assessment ng-model="review.document" locale="review.locale" allow-drafts="true"></div>
+					<div ng-if="!isNational" view-independent-risk-assessment ng-model="review.document" locale="review.locale" allow-drafts="true"></div>
 				</review-form>
 			</workflow-arrow-buttons>			
 		</div>

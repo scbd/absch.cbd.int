@@ -113,7 +113,7 @@ define([
     //==================================
     $scope.$watch("tab", function(tab) {
       if(tab == "review" || tab=='publish')
-       $scope.reviewDocument = $scope.getCleanDocument();
+       $scope.review.document = $scope.getCleanDocument();
     });
 
 
