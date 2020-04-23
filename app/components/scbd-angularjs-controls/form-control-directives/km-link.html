@@ -1,25 +1,29 @@
 ﻿<div style="margin-bottom:20px">
 	<div>
+		<div ng-transclude="linkControls" style="padding-bottom: 5px;">
 			<button type="button" class="btn btn-default" ng-click="addLink()" ng-show="isAllowLink()"><i class="fa fa-globe"></i> Add link</button>
-		<button type="button" class="btn btn-default" ng-click="addFile()" ng-show="isAllowFile()" ng-disabled="!identifier"><i class="fa fa-file-o"></i> Add file</button>
+			<button type="button" class="btn btn-default" ng-click="addFile()" ng-show="isAllowFile()" ng-disabled="!identifier"><i class="fa fa-file-o"></i> Add file</button>
+		</div>
 
-		<ul class="list-group" ng-if="links||links.length">
-			<li class="list-group-item" ng-repeat="link in links">
-				<table style="width:100%">
-					<tr>
-						<td>
-							<span ng-show="link.language">{{locales[link.language]||locales['lang-'+link.language]}} | </span>
-							<a translation-url target="_blank" ng-href="{{link.url}}">{{link.name||link.url}}</a>
-							<span ng-show="link.tag">({{link.tag}})</span>
-						</td>
-						<td style="white-space:nowrap;text-align:right;vertical-align:top">
-							<button type="button" class="btn btn-default" ng-click="edit(link)"><i class="fa fa-edit"></i></button>
-							<button type="button" class="btn btn-default" ng-click="remove(link)"><i class="fa fa-trash-o"></i></button>
-						</td>
-					</tr>
-				</table>
-			</li>
-		</ul>
+		<div ng-transclude="linkDisplay">
+			<ul class="list-group" ng-if="links||links.length">
+				<li class="list-group-item" ng-repeat="link in links">
+					<table style="width:100%">
+						<tr>
+							<td>
+								<span ng-show="link.language">{{locales[link.language]||locales['lang-'+link.language]}} | </span>
+								<a translation-url target="_blank" ng-href="{{link.url}}">{{link.name||link.url}}</a>
+								<span ng-show="link.tag">({{link.tag}})</span>
+							</td>
+							<td style="white-space:nowrap;text-align:right;vertical-align:top">
+								<button type="button" class="btn btn-default" ng-click="edit(link)"><i class="fa fa-edit"></i></button>
+								<button type="button" class="btn btn-default" ng-click="remove(link)"><i class="fa fa-trash-o"></i></button>
+							</td>
+						</tr>
+					</table>
+				</li>
+			</ul>
+		</div>
 
 	</div>
 

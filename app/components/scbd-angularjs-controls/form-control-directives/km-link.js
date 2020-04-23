@@ -9,7 +9,10 @@ app.directive('kmLink', ['IStorage', function (storage)
 			restrict: 'EAC',
 			template : template,
 			replace: true,
-			transclude: false,
+			transclude: {
+				linkControls: '?linkControls',
+				linkDisplay:  '?linkDisplay'
+			},
 			require : "?ngModel",
 			scope: {
 				binding    : '=ngModel',
