@@ -79,7 +79,8 @@ function (app, _, template) {
 					
 				}
 
-				$scope.lookupDetections = function(uniqueIdentifier){
+				$scope.lookupDetections = function(){
+					var uniqueIdentifier = $scope.document.uniqueIdentification;
 					if(!uniqueIdentifier)
 						return;
 

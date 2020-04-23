@@ -188,22 +188,29 @@
 									<legend>Detection method(s)</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="detectionMethod" caption="External link(s)">
-												<div km-rich-textbox ng-model="document.detectionMethod" rows="4" placeholder="" locales="document.header.languages"></div>
+											<div class="km-control-group" name="detectionMethodLinks" caption="Additional information">
+												<div km-link name="detectionMethodLinks" ng-model="document.detectionMethodLinks" allow-link="true" allow-file="true"
+													identifier="document.header.identifier">
+													<link-controls>												
+														<button type="button" class="btn btn-default" ng-click="$parent.addLink()"><i class="fa fa-globe"></i> Add link</button>
+														<button type="button" class="btn btn-default" ng-click="$parent.addFile()"><i class="fa fa-file-o"></i> Add file</button>
+														
+														<!-- TODO: find better way to get parent func incase of transclude -->
+														<button class="btn btn-default" ng-click="$parent.$parent.$parent.$parent.$parent.$parent.lookupDetections()" 
+															ng-disabled="$parent.$parent.$parent.$parent.$parent.$parent.lookingupDetections">
+															<i ng-if="lookingupDetections" class="fa fa-spinner fa-spin"></i> 
+															<i class="fa fa-database" aria-hidden="true"></i> 
+															Lookup Detection methods 
+														</button>
+													</link-controls>
+												</div>
 											</div>
 										</div>
 									</div>
-
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="detectionMethodLinks" caption="Additional information">
-												<div km-link name="detectionMethodLinks" ng-model="document.detectionMethodLinks" allow-link="true" allow-file="true"
-													identifier="document.header.identifier"></div>
-													<button class="btn btn-default" ng-click="lookupDetections(document.uniqueIdentification, document.detectionMethodLinks)" ng-disabled="lookingupDetections">
-														<i ng-if="lookingupDetections" class="fa fa-spinner fa-spin"></i> 
-														<i class="fa fa-database" aria-hidden="true"></i> 
-														Lookup Detection methods 
-													</button>
+											<div class="km-control-group" name="detectionMethod" caption="External link(s)">
+												<div km-rich-textbox ng-model="document.detectionMethod" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
