@@ -2098,3 +2098,10 @@ a.disabled{
     border: 2px solid white;
     background-color: rgba(0, 0, 0, .5);
 } */
+
+.record-loader-loading{
+    display: none;
+}
+#search-new .record-loader-loading{
+    display: block;
+}

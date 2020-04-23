@@ -1,7 +1,14 @@
 ﻿<div>
     <div class="record-Options-div" style="display:inline-block;margin-right:5px;margin-bottom:5px;">
-        <div class="pull-right">            
+        <div class="pull-right">
+            <span class="hidden-xs">
+                <a translation-url ng-href="/database/{{::internalDocument.header.schema|urlSchemaShortName}}/{{internalDocumentInfo|uniqueID}}" 
+				    target="_blank" class="record-link-style color-white">
+                    <i class="fa fa-external-link-square"></i> <span ng-bind="internalDocumentInfo|uniqueID"></span> 
+                </a>
+            </span>            
             <span class="hidden-print" ng-if="!hidePdf">
+                &nbsp; | &nbsp; 
                 <a href="{{pdfUrl}}" target="_blank" class="record-link-style color-white">                    
                     <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     PDF
@@ -10,7 +17,7 @@
                 <span style="color:#ddd" class="hidden-print"> | </span> &nbsp;
             </span>
             <a href="#" ng-click="print()" class="record-link-style color-white hidden-print">
-                <i class="fa fa-spin fa-spinner" ng-if="printing" />
+                <i class="fa fa-spin fa-spinner" ng-if="printing"></i>
                 <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
                 Print
             </a>
