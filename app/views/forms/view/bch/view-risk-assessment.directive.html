@@ -1,5 +1,5 @@
 ﻿<div id="Record" class="record panel panel-default">
-	<div class="panel-heading bg-blue">
+	<div class="panel-heading" ng-class="::{'bg-orange':document.header.schema!='nationalRiskAssessment', 'bg-blue':document.header.schema=='nationalRiskAssessment'}">
 		<h4>
 			<span ng-bind="document.header.schema|schemaName"></span>
 			<span class="color-black">

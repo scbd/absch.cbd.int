@@ -108,10 +108,10 @@
                 <div id="compareSchemaView"></div>
             </div>
         </div>
-        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;">
+        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;" ng-if="!loading">
             <div record-options></div>
         </div>
-
+        <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> loading...</span>
         <div id="schemaView" ng-show="internalDocument"></div>
     </div>
     <div id="printContentFooter" ng-if="printMode" ng-include="'/app/views/forms/view/print-footer.html'"></div>
