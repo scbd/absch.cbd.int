@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'text!./edit-modified-organism.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
+define(['app', 'lodash', 'text!./edit-modified-organism.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service','./lmo-construct',
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-lmo.directive", 'views/forms/directives/traits-selector.directive'], 
 function (app, _, template) {
 
@@ -73,7 +73,7 @@ function (app, _, template) {
 						$scope.document.genes = [];
 					
 					_.each(constructIds, function(cons){
-						if(!_.find($scope.document.genes, {identifier: cons.identifier}))
+						if(cons.identifier && !_.find($scope.document.genes, {identifier: cons.identifier}))
 							$scope.document.genes.push({ identifier:cons.identifier })
 					});
 					

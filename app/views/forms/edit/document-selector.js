@@ -42,10 +42,10 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             if(!$scope.type) $scope.type = "checkbox";
             
             $scope.allowNew = {
-                show   : $attr.allowNew=='true',
-                schema : $attr.allowNewSchema,
-                title  : $attr.allowNewButtonTitle,
-                schemas : $attr.allowNewSchema.split(','),
+                show    : $attr.allowNew=='true',
+                schema  : $attr.allowNewSchema,
+                title   : $attr.allowNewButtonTitle,
+                schemas : ($attr.allowNewSchema||'').split(','),
             };     
 
             if($attr.listView){

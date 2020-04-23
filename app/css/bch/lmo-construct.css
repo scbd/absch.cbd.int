@@ -34,12 +34,14 @@
             margin-left:-8px;
         }
 
-        table.lmo-transcript.antisense,
-        table.lmo-transcript.antisenseStop
+        table.lmo-transcript.antisense
         {
             margin-right: -33px;
         }
-
+        table.lmo-transcript.antisenseStop
+        {
+            margin-right: -25px;
+        }
 
         table.lmo-transcript.senseStart,
         table.lmo-transcript.antisenseStop
