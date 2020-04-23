@@ -2,7 +2,7 @@
     <div ng-class="{'alert alert-danger':showLanguageError}">
         <div ng-if="showLanguageError" >Please select atleast one UN Language to continue</div>
         <span km-select multiple ng-model="binding" binding-type="string"
-            placeholder="Available Languages" items="locales|orderBy:'name'" minimum="1"
-            show-others="showOthers()" ng-change="validateUNLanguage()" api="selectApi"></span>
+            placeholder="Available Languages" items="options.locales()" minimum="1"
+            show-others="options.otherLocales()" ng-change="validateUNLanguage()" api="selectApi"></span>
     </div>
 </span>

@@ -125,7 +125,8 @@ define(['app', 'services/cache-service'], function (app) {
                 focalPointTypes               : 'FocalPoint Types',
                 geographicRegions             : 'geographic-regions',
                 services                      : 'DE2D1321-AD01-4C49-8D48-E7BD4EA14226',
-                detectionMethods              : '81EE782D-810C-4107-8E8F-F7A6EE4CD1B5'
+                detectionMethods              : '81EE782D-810C-4107-8E8F-F7A6EE4CD1B5',
+                unLanguages                   : '52AFC0EE-7A02-4EFA-9277-8B6C327CE21F'
                 
             }
         }

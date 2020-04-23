@@ -1,4 +1,4 @@
-define(['app', 'text!./km-form-languages.html', 'lodash'], function(app, template, _) {
+define(['app', 'text!./km-form-languages.html', 'lodash', 'services/thesaurus-service'], function(app, template, _) {
   'use strict';
   //============================================================
   //
@@ -14,46 +14,52 @@ define(['app', 'text!./km-form-languages.html', 'lodash'], function(app, templat
           scope: {
               binding: '=ngModel',
           },
-          controller: ["$scope", '$http', function($scope, $http) {
+          controller: ["$scope", '$http', 'thesaurusService', function($scope, $http, thesaurusService) {
             $scope.selectApi = {};
-            $scope.locales = [
-                { identifier: "ar", name: "Arabic"    }, 
-                { identifier: "en", name: "English"   }, 
-                { identifier: "es", name: "Spanish"   },
-                { identifier: "fr", name: "French"    }, 
-                { identifier: "ru", name: "Russian"   }, 
-                { identifier: "zh", name: "Chinese"   }
-            ];
+            var unLanguages = ['ar', 'en', 'fr', 'es', 'ru', 'zh']
+            $scope.options = {
+                locales : function(){
+                    return thesaurusService.getDomainTerms('unLanguages').then(formatLocales).then(function(locales){
+                        return $scope.locales = locales;
+                    })
+                },
+                otherLocales : function(){
+                    return thesaurusService.getDomainTerms('languages').then(formatLocales).then(function(locales){                        
+                        if($scope.locales) unLanguages = _.map($scope.locales, 'identifier');
+                        return _(locales).map(function(lang){
+                            if(!_.contains(unLanguages, lang.identifier))return lang;
+                        }).compact().value()
+                    })
+                }
+            }
 
-            $scope.isVisible = function() {
-                return $scope.binding !== undefined && $scope.binding !== null;
-            };
+            function formatLocales(locales){
 
-            $scope.showOthers = function(){
-            return $http.get('/api/v2013/thesaurus/domains/ISO639-2/terms').then(function(result){
-                return _(result.data).map(function(lang){
+                return _(locales).map(function(lang){
+                    var langLocale = lang.identifier.replace('lang-', '');                    
                     if(/^lang\-/.test(lang.identifier)){
                         return {
-                            identifier  : lang.identifier.replace('lang-', ''),
+                            identifier  : langLocale,
                             title       : lang.title
                         }
                     }
                 }).compact().value()
-            })
             }
+            $scope.isVisible = function() {
+                return $scope.binding !== undefined && $scope.binding !== null;
+            };
 
             $scope.validateUNLanguage = function(){
                 var unLang = _.map($scope.locales, 'identifier')
                 if(!_.intersection($scope.binding, unLang).length)
-                $scope.showLanguageError = true;
+                    $scope.showLanguageError = true;
                 else
-                $scope.showLanguageError = false;
+                    $scope.showLanguageError = false;
             }
 
             var bindingWatch = $scope.$watch('binding', function(newVal){
                 if(newVal){
-                    var unLang = _.map($scope.locales, 'identifier')
-                    if(_.difference($scope.binding, unLang).length){
+                    if(_.difference($scope.binding, unLanguages).length){
                         $scope.selectApi.loadOtherSource();
                         bindingWatch();
                     }
