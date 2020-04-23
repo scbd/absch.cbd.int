@@ -1,4 +1,4 @@
-﻿define(['app', 'text!views/forms/view/record-loader.directive.html', 
+define(['app', 'text!views/forms/view/record-loader.directive.html', 
 	'components/scbd-angularjs-services/services/main', 'ngSmoothScroll',
 	'components/scbd-angularjs-services/filters/scbd-filters',
 	'./view-history-directive',
@@ -90,7 +90,8 @@
 						independentRiskAssessment	: 'views/forms/view/bch/view-risk-assessment.directive',
 						modifiedOrganism	 		: 'views/forms/view/bch/view-lmo.directive',
 						dnaSequence	 				: 'views/forms/view/bch/view-dna-sequence.directive',
-						organism	 				: 'views/forms/view/bch/view-organism.directive'
+						organism	 				: 'views/forms/view/bch/view-organism.directive',
+						laboratoryDetection	 		: 'views/forms/view/bch/view-laboratory-detection.directive'
 					}
 
 					$scope.$watch("document", function (_new) {
@@ -244,9 +245,9 @@
 								$scope.load(identifier, 'draft');
 							}
 						})
-							.finally(function () {
-								$scope.loading = false;
-							})
+						.finally(function () {
+							$scope.loading = false;
+						})
 
 					};
 
