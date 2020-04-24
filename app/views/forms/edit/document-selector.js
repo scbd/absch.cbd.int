@@ -390,7 +390,11 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             };
 
             $scope.onNewRecordSubmitted = function(data){
-                
+                if(data.state == 'running'){
+                    if(!$scope.runningWorklfows)
+                        $scope.runningWorklfows={};
+                    $scope.runningWorklfows[data.data.identifier+'@1'] = true;
+                }
                 if(!$scope.rawDocuments.docs)
                     $scope.rawDocuments.docs = [];
                 

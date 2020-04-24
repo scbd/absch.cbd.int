@@ -17,6 +17,8 @@ app.directive("viewOrganism", [function () {
 		{
 			
 			$scope.$watch('document', function(){
+				if(!$scope.document)return;
+				
 				var document = $scope.document;
 				var classification = {};
 				if(document.realm		) classification['realm']	   	= 	document.realm	

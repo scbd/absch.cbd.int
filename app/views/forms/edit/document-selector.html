@@ -39,8 +39,10 @@
                                 <i class="fa fa-times"></i></a>
                         </td>
                         <td style="margin-bottom:20px;">
-                            <div ng-if="isContact(doc) || isAuthority(doc) || isFocalPoint(doc)" view-contact-reference ng-model="doc" locale="locale" class="km-value"></div>
-                            <div ng-if="!isContact(doc) && !isAuthority(doc) && !isFocalPoint(doc)" view-default-reference ng-model="doc.identifier" locale="locale"></div>
+                            <div ng-if="isContact(doc) || isAuthority(doc) || isFocalPoint(doc)" view-contact-reference ng-model="doc" 
+                                locale="locale" class="km-value" wait-for-workflow="{{runningWorklfows[doc.identifier] ? 'true':'false'}}"></div>
+                            <div ng-if="!isContact(doc) && !isAuthority(doc) && !isFocalPoint(doc)" view-default-reference ng-model="doc.identifier" 
+                                locale="locale" wait-for-workflow="{{runningWorklfows[doc.identifier] ? 'true':'false'}}"></div>
                         </td>
                     </tr>
                     <tr ng-if="type=='radio' && model">
@@ -49,8 +51,10 @@
                                 <i class="fa fa-times"></i></a>
                         </td>
                         <td style="margin-bottom:20px;">
-                            <div ng-if="isContact(model) || isAuthority(model) || isFocalPoint(model)" view-contact-reference ng-model="model" locale="locale" class="km-value"></div>
-                            <div ng-if="!isContact(model) && !isAuthority(model) && !isFocalPoint(model)" view-default-reference ng-model="model.identifier" locale="locale"></div>
+                            <div ng-if="isContact(model) || isAuthority(model) || isFocalPoint(model)" view-contact-reference ng-model="model" 
+                                locale="locale" class="km-value"  wait-for-workflow="{{runningWorklfows[model.identifier] ? 'true':'false'}}"></div>
+                            <div ng-if="!isContact(model) && !isAuthority(model) && !isFocalPoint(model)" view-default-reference ng-model="model.identifier" 
+                                locale="locale"  wait-for-workflow="{{runningWorklfows[model.identifier] ? 'true':'false'}}"></div>
                         </td>
                     </tr>
                 </table>
