@@ -10,7 +10,7 @@
                 binding: '=ngModel',
                 locales: '='
             },
-            link: function ($scope, $attr, $element, ngModelController) {
+            link: function ($scope, $element, $attr, ngModelController) {
                 
                 $scope.rootTraits = [];
                 $scope.traits = {

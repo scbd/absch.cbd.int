@@ -12,8 +12,8 @@ define(['app', 'lodash', 'text!./view-terms-hierarchy.html',
                 locales: '=',
                 termDomain:'@'
             },
-            link: function ($scope, $attr, $element) {
-                
+            link: function ($scope, $element, $attr) {
+                $scope.view = $attr.view||'tree';
                 $scope.$watch('binding', function(newVal, oldVal){
                     //console.log(newVal);                   
                     var newTerms = angular.copy(newVal);                    

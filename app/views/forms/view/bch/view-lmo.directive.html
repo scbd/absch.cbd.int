@@ -112,11 +112,8 @@
 					<li ng-repeat="item in document.genes" >						
 						<view-default-reference ng-model='item.identifier' locale="locale" hide-schema='true'>
 							<extra>
-								<span ng-repeat="trait in $parent.$parent.document.body.traits" >
-									<span ng-if="$first"> | </span>
-									<span ng-bind="trait|term:locale" class="selected-reference-title"></span>
-									<span ng-if="!$last"> | </span>
-								</span>							
+								<view-terms-hierarchy class="selected-reference-title" ng-model="$parent.$parent.document.body.traits" locale="locale" 
+									term-domain="dnaSequenceTraits" view="list" style="display: inline-block;"><view-terms-hierarchy>							
 							</extra>
 						</view-default-reference>
 					</li>
@@ -144,11 +141,8 @@
 					<li ng-repeat="item in document.affectedGenes" >						
 						<view-default-reference ng-model='item.identifier' locale="locale" hide-schema='true'>
 							<extra>
-								<span ng-repeat="trait in $parent.$parent.document.body.traits" >
-									<span ng-if="$first"> | </span>
-									<span ng-bind="trait|term:locale" class="selected-reference-title"></span>
-									<span ng-if="!$last"> | </span>
-								</span>							
+								<view-terms-hierarchy class="selected-reference-title" ng-model="$parent.$parent.document.body.traits" locale="locale" 
+									term-domain="dnaSequenceTraits" view="list" style="display: inline-block;"><view-terms-hierarchy>							
 							</extra>
 						</view-default-reference>
 					</li>

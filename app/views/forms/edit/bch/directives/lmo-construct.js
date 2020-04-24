@@ -11,7 +11,7 @@
             scope:{
                 binding: '=ngModel'
             },
-            link: function ($scope, $attr, $element, ngModelController) {
+            link: function ($scope, $element, $attr, ngModelController) {
                 var genes = {};   
 
                 $scope.openContructDialog = function(existingConstruct, $index){

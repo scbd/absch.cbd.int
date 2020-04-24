@@ -1,5 +1,6 @@
 define(['app', 'lodash', 'text!./edit-laboratory-detection.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-laboratory-detection.directive"], 
+	'views/forms/edit/document-selector', "views/forms/view/bch/view-laboratory-detection.directive",
+	'views/forms/directives/view-terms-hierarchy'], 
 function (app, _, template) {
 
 	app.directive("editLaboratoryDetection", ["$controller", "thesaurusService", function($controller, thesaurusService) {
