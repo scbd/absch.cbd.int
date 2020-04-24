@@ -198,10 +198,12 @@
 
                         <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; ">
                             <span class="color-blue">National records</span>
-                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
-                                data-html="true"
-                                data-title="National records contain information that is typically required to be reported as part of a Party’s obligations and must be approved by the Publishing Authority prior to being made publically available."
-                                data-container="body"></span>
+                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" ng-if="isAbs"
+                                data-title="National records contain information that is typically required to be reported as part of a Party’s obligations and must be approved by the Publishing Authority prior to being made publically available.">
+                            </span>
+                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" ng-if="isBch"
+                                data-title="National records are submitted and published by Governments and contain information that is part of a Party’s obligations under the Cartagena Protocol on Biosafety, as mandated by Article 20, and is relevant to the implementation of the Protocol.">
+                            </span>                            
                         </div>
 
                         <div ng-if="::roles.isNationalSchemaUser('focalPoint') || roles.is('Administrator')">
@@ -351,10 +353,10 @@
                     <div>
                         <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; ">
                             <span class="color-orange"> Reference records
-                                <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
-                                    data-html="true"
-                                    data-title="Reference records contain information relevant to the Protocol's implemenation. This information can be made available by any registered user (including representatives of Governments, indigenous and local communities, academia, nongovernmental organizations, research institutions, business representatives, etc.). All reference records are validated by the Secretariat prior to being made publically available."
-                                    data-container="body"></span>
+                                <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" ng-if="isAbs"
+                                    data-title="Reference records contain information relevant to the Protocol's implemenation. This information can be made available by any registered user (including representatives of Governments, indigenous and local communities, academia, nongovernmental organizations, research institutions, business representatives, etc.). All reference records are validated by the Secretariat prior to being made publically available." ></span>
+                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body"  ng-if="isBch"
+                                    data-title="Reference records include a number of categories of biosafety-related resources and information. They can be submitted by any registered BCH user but must be validated by the Secretariat prior to their publication." ></span>
                             </span>
                         </div>
 

@@ -19,6 +19,7 @@ function(app, _, ng) {
             $scope.user             = $rootScope.user;
             $scope.showRecords      = true;
             $scope.isBch            = realm.is('BCH');
+            $scope.isAbs            = realm.is('ABS');
 
             var schemaFacets = {};
 
