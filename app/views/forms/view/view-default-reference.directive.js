@@ -20,16 +20,21 @@ app.directive("viewDefaultReference", ["IStorage", '$timeout', function (storage
 			$scope.hideSchema = $attr.hideSchema=='true'
 			$scope.$watch('model', function(newValue, oldValue){
 		        if(newValue){
-					$scope.loading = true;
-					loadReferenceDocument($scope.model)
-					.then(function(data) {
-						$scope.document = data;
-					})
-					.finally(function(){$scope.loading = false;});
-
+					$scope.refreshRecord($scope.model);
 		        }
 		    });
 
+			$scope.refreshRecord = function(identifier){
+				$scope.loading = true;
+					loadReferenceDocument(identifier)
+					.then(function(data) {
+						$scope.document = data;
+						if(data.workingDocumentLock){
+							$timeout(function(){$element.find("[data-toggle='tooltip']").tooltip({trigger: 'hover'})}, 100);
+						}
+					})
+					.finally(function(){$scope.loading = false;});
+			}
 
 			function loadReferenceDocument(identifier){
 

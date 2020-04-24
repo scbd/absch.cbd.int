@@ -13,11 +13,13 @@
             </div>
             <div class="selected-reference-name" ng-if="!hideSchema">{{document.body.header.schema | schemaName}} </div>
             <div class="selected-reference-title" ng-if="document.workingDocumentTitle||document.title">{{(document.workingDocumentTitle||document.title) | lstring:locale}} </div> 
-            <div class="selected-reference-title" ng-if="document.body.title">{{document.body.title | lstring:locale}} </div> 
-            <div class="selected-reference-title" ng-if="!document.body.title && document.body.name ">{{document.body.name | lstring:locale}} </div>
+            <div ng-if="!(document.workingDocumentTitle||document.title)">
+                <div class="selected-reference-title" ng-if="document.body.title">{{document.body.title | lstring:locale}} </div> 
+                <div class="selected-reference-title" ng-if="!document.body.title && document.body.name ">{{document.body.name | lstring:locale}} </div>
+            </div>
 
             <span  ng-if="document.body.scientificName">
-                {{document.body.scientificName}} 
+                <span ng-if="!document.workingDocumentTitle" ng-bind="document.body.scientificName"></span>
                 <span ng-if="document.body.commonNames" ng-repeat="name in document.body.commonNames" 
                     ng-bind="' - ' + (name|lstring:locale) + ($last ? '' : ', ')"></span>
             </span> 
@@ -26,6 +28,7 @@
                 <a translation-url  ng-href="/register/{{document.body.header.schema | urlSchemaShortName}}/{{document.identifier}}/view" target="_blank">
                     <i class="fa fa-external-link-square" aria-hidden="true"></i> View Request
                 </a>
+                &nbsp <a ng-href="#" ng-click="refreshRecord(document.identifier)" data-toggle="tooltip" data-title="Click to refresh status of the record."><i class="fa fa-refresh"></i></a>
             </span>
         </span>		
         <span ng-transclude="extra"></span>
