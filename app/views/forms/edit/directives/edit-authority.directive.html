@@ -149,8 +149,8 @@
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="contacts" caption="Contact person">
                                         <div document-selector ng-model="document.contacts" question="contacts"
-                                            government="document.government" schema="(contact authority)" filter="true" allow-new="true"
-                                            allow-new-schema="contact,authority"></div>
+                                            government="document.government" schema="(contact {{isAbs ? 'authority':''}})" filter="true" allow-new="true"
+                                            allow-new-schema="contact{{isAbs ? ',authority':''}})"></div>
 
                                     </div>
                                 </div>
