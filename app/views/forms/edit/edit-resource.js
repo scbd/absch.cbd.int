@@ -75,7 +75,7 @@ define(['app', 'underscore', 'views/forms/edit/edit','views/forms/edit/edit-reso
 
         delete documentCopy.organizationsRef;
 
-      return documentCopy;
+        return $scope.sanitizeDocument(documentCopy);
     };
 
 

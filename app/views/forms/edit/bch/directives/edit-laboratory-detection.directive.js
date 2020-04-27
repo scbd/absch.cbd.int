@@ -54,7 +54,7 @@ function (app, _, template) {
 						document.synonymNames = undefined;		
 					
 						
-					return document;
+					return $scope.sanitizeDocument(document);
 				};
 
 				$scope.setDocument({}, true)

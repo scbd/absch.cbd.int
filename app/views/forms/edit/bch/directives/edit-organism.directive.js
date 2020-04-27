@@ -67,7 +67,7 @@ function (app, _, template) {
 					if(_.isEmpty(document.commonNames))
 						document.commonNames = undefined;
 
-					return document;
+					return $scope.sanitizeDocument(document);
 				};
 
 				$scope.addItem = function(type){

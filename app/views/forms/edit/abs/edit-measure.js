@@ -221,7 +221,7 @@ define(['app', 'underscore', 'angular', 'views/forms/edit/edit', 'js/common', 'v
                 if(document.absMeasuresForDelete)
                     document.absMeasuresForDelete = undefined;
 
-                return document;
+                return $scope.sanitizeDocument(document);
             };
 
             $scope.setDocument({});

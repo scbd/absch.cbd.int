@@ -111,7 +111,7 @@ define(['app', 'views/forms/edit/edit',
                 document.checkpointSelected = undefined;
                 document.informationDocuments = undefined;
 
-                return document;
+                return $scope.sanitizeDocument(document);
             };
 
             //==================================

@@ -72,7 +72,7 @@ function (app, _, template) {
 					// if(_.isEmpty(document.jurisdictionNames))
 					// 	document.jurisdictionNames = undefined;
 						
-					return document;
+					return $scope.sanitizeDocument(document);
 				};
 
 				// $scope.addSynonymName = function(){

@@ -211,7 +211,7 @@ define(['app', 'underscore', 'views/forms/edit/edit', '../view/view-capacity-bui
         if(document.typeInfo)
             delete document.typeInfo;
             
-        return document;
+        return $scope.sanitizeDocument(document);
       };
 
     $scope.setDocument({});

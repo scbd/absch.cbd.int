@@ -223,7 +223,7 @@ function (app, _, nr4Data, nr3Data) {
 			if (/^\s*$/g.test(document.notes))
 				document.notes = undefined;
 
-			return document;
+			return $scope.sanitizeDocument(document);
 		};
         
         $scope.setTab = function(index){

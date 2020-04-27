@@ -61,7 +61,7 @@ define(['app', 'views/forms/edit/edit', '../view/view-capacity-building-resource
         if (/^\s*$/g.test(document.notes))
           document.notes = undefined;
 
-        return document;
+        return $scope.sanitizeDocument(document);
       };
 
     $scope.setDocument({});

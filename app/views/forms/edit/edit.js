@@ -400,6 +400,40 @@ define([
         $scope.onPostSubmitFn({ data: documentInfo });
     };
 
+    $scope.sanitizeDocument = function(document){
+
+      if(!document) return;
+
+      document = sanitize(document);
+      return document;
+
+      function sanitize(doc){
+        _.each(doc, function(fieldValue, key){
+          
+          if(_.isString(fieldValue) && _.trim(fieldValue||'') == ''){
+            doc[key] = undefined;
+          }
+          else if(_.isArray(fieldValue)){
+            fieldValue = sanitize(fieldValue);
+            doc[key] = _.compact(doc[key]);
+            
+            if(_.isEmpty(doc[key]))
+              doc[key] = undefined;
+          }
+          else if(_.isPlainObject(fieldValue)){
+            fieldValue = sanitize(fieldValue);
+            doc[key] = _.omit(doc[key], isNullOrUndefinedOrEmpty);
+          }
+
+        });
+        
+        return _.omit(doc, isNullOrUndefinedOrEmpty);
+      }
+      function isNullOrUndefinedOrEmpty(v){
+        return v === undefined || v === null || (_.isObject(v) && _.isEmpty(v));
+      }
+    }
+
     function setMetaTags(){
       ngMeta.resetMeta();   
       var formOpenFor = 'New';

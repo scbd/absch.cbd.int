@@ -82,7 +82,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, thesau
                         document.country	 = undefined;
                     }
                 }
-                return document;
+                return $scope.sanitizeDocument(document);
             };
 
         

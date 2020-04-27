@@ -101,7 +101,7 @@ function (app, _, template) {
                     if (/^\s*$/g.test(document.notes))
                         document.notes = undefined;
 
-                    return document;
+                    return $scope.sanitizeDocument(document);
                 };
                 
                 $scope.setDocument({})

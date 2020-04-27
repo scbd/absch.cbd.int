@@ -64,7 +64,7 @@ define(['app', 'underscore', 'views/forms/edit/edit' , 'views/forms/edit/documen
             updateRecords(document.government);
         }
 
-        return document;
+        return $scope.sanitizeDocument(document);
     };
 
     $scope.setDocument({});
