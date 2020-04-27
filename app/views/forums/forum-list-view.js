@@ -1,53 +1,48 @@
-define(['app', 'cbd-forums'], function(app) {
-    return["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route",
-        function($scope, $http, $q, $filter, $timeout, $location, $route) {
+define(['app', 'cbd-forums'], function (app) {
+    return ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route",
+        function ($scope, $http, $q, $filter, $timeout, $location, $route) {
 
             //TODO : need a API to get facets
-            var iac = $http.get('/api/v2014/discussions/forums/17415/threads');
-            var jointIac = $http.get('/api/v2014/discussions/forums/17446/threads');
-            var vlr = $http.get('/api/v2014/discussions/forums/17384/threads');
-            var car = $http.get('/api/v2014/discussions/forums/17378/threads');
-            var art13 = $http.get('/api/v2014/discussions/forums/17316/threads');
+            var iac3_threads = $http.get('/api/v2014/discussions/forums/17415/threads');
+            var iac4_threads = $http.get('/api/v2014/discussions/forums/17607/threads');
+            var ahtegDSI_threads = $http.get('/api/v2014/discussions/forums/17446/threads');
+            var art10_threads = $http.get('/api/v2014/discussions/forums/17316/threads');
+            var cc_threads = $http.get('/api/v2014/discussions/forums/17451/threads');
 
-            //
-            if($scope.training_env || $scope.development_env)
-                iac = $http.get('/api/v2014/discussions/forums/17433/threads');
-                jointIac = $http.get('/api/v2014/discussions/forums/17446/threads');
-
-    	     $q.when(iac).then(function(response) {
-                 $scope.iacThreads = response.data.length;
-             })
-             .catch(function(error){
-                console.log(error);
-            });
-            
-            $q.when(jointIac).then(function(response) {
-                 $scope.jointIacThreads = response.data.length;
-             })
-             .catch(function(error){
-                console.log(error);
-            });
-
-            $q.when(vlr).then(function(response) {
-                 $scope.vlrThreads = response.data.length;
-             })
-             .catch(function(error){
-                console.log(error);
-            });
-            $q.when(car).then(function(response) {
-                $scope.carThreads = response.data.length;
+            $q.when(iac3_threads).then(function (response) {
+                $scope.iac3_threads = response.data.length;
             })
-            .catch(function(error){
-                console.log(error);
-            });
+                .catch(function (error) {
+                    console.log(error);
+                });
 
-            $q.when(art13).then(function(response) {
-                $scope.art10Threads = response.data.length;
+            $q.when(iac4_threads).then(function (response) {
+                $scope.iac4_threads = response.data.length;
             })
-            .catch(function(error){
-                console.log(error);
-            });
+                .catch(function (error) {
+                    console.log(error);
+                });
 
+            $q.when(ahtegDSI_threads).then(function (response) {
+                $scope.ahtegDSI_threads = response.data.length;
+            })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+            $q.when(art10_threads).then(function (response) {
+                $scope.art10_threads = response.data.length;
+            })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+            $q.when(cc_threads).then(function (response) {
+                $scope.cc_threads = response.data.length;
+            })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
         }];
 });
