@@ -227,63 +227,67 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                     $scope.loading = true;
                     $scope.blockText = 'verifying user roles...'
-                    if(!$scope.getDocumentFn().header || !$scope.getDocumentFn().header.languages)
-                        return $scope.loadSecurity();
 
 					$scope.security = {};
-					$q.when($scope.getDocumentFn()).then(function(document){
+                    $q.when($scope.getDocumentFn())
+                    .then(function(document){
 
-						if(!document || !document.header)
-							return;
+						if(!document || !document.header || !document.header.languages)
+                            return $scope.loadSecurity();
+                            
+                        $q.when(document)
+                        .then(function(document){
+                            
+                            $scope.languages = document.header.languages;
+                            var identifier = document.header.identifier;
+                            var schema     = document.header.schema;
 
-                        $scope.languages = document.header.languages;
-						var identifier = document.header.identifier;
-						var schema     = document.header.schema;
+                            var a = storage.documents.exists(identifier).then(function(exist){
 
-						var a = storage.documents.exists(identifier).then(function(exist){
+                                var q = exist
+                                    ? storage.documents.security.canUpdate(document.header.identifier, schema)
+                                    : storage.documents.security.canCreate(document.header.identifier, schema);
 
-							var q = exist
-								  ? storage.documents.security.canUpdate(document.header.identifier, schema)
-								  : storage.documents.security.canCreate(document.header.identifier, schema);
+                                return q.then(function(allowed) {
+                                    $scope.security.canSave = allowed
+                                });
+                            })
 
-							return q.then(function(allowed) {
-								$scope.security.canSave = allowed
-							});
-						})
+                            var b = storage.drafts.exists(identifier).then(function(exist){
 
-						var b = storage.drafts.exists(identifier).then(function(exist){
+                                var q = exist
+                                    ? storage.drafts.security.canUpdate(document.header.identifier, schema)
+                                    : storage.drafts.security.canCreate(document.header.identifier, schema);
 
-							var q = exist
-								  ? storage.drafts.security.canUpdate(document.header.identifier, schema)
-								  : storage.drafts.security.canCreate(document.header.identifier, schema);
+                                return q.then(function(allowed) {
+                                    $scope.security.canSaveDraft = allowed
+                                });
+                            })
 
-							return q.then(function(allowed) {
-								$scope.security.canSaveDraft = allowed
-							});
-						})
+                            $scope.documentUID = document.header.identifier;
 
-                        $scope.documentUID = document.header.identifier;
+                            return $q.all([a,b]);
 
-						return $q.all([a,b]);
+                        })
+                        .then(function(){
+                            if($scope.security.canSaveDraft==false)
+                                openUnAuthorizedDialog();
+                            else
+                                loadReviousWorkflow($scope.documentUID);
+                            $scope.loading = false;
+                            $scope.blockText = undefined;
+                        })
+                        .catch(function(e){
+                            $scope.loading = true;
+                            $scope.blockText = 'Error occurred, please try again';
+                        })
+                        // .finally(function(){
+
+                        //     $scope.loading = false;
+                        //     $scope.blockText = undefined;
+                        // });
 
                     })
-                    .then(function(){
-                        if($scope.security.canSaveDraft==false)
-                            openUnAuthorizedDialog();
-                        else
-                            loadReviousWorkflow($scope.documentUID);
-                        $scope.loading = false;
-                        $scope.blockText = undefined;
-                    })
-                    .catch(function(e){
-                        $scope.loading = true;
-                        $scope.blockText = 'Error occurred, please try again';
-                    })
-                    // .finally(function(){
-
-                    //     $scope.loading = false;
-                    //     $scope.blockText = undefined;
-					// });
 				}
 
                 //====================

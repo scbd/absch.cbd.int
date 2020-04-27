@@ -411,23 +411,30 @@ define([
         _.each(doc, function(fieldValue, key){
           
           if(_.isString(fieldValue) && _.trim(fieldValue||'') == ''){
-            doc[key] = undefined;
+            fieldValue = undefined;
           }
           else if(_.isArray(fieldValue)){
             fieldValue = sanitize(fieldValue);
-            doc[key] = _.compact(doc[key]);
+            fieldValue = _.compact(fieldValue);
             
-            if(_.isEmpty(doc[key]))
-              doc[key] = undefined;
+            if(_.isEmpty(fieldValue))
+              fieldValue = undefined;
           }
           else if(_.isPlainObject(fieldValue)){
             fieldValue = sanitize(fieldValue);
-            doc[key] = _.omit(doc[key], isNullOrUndefinedOrEmpty);
+            fieldValue = _.omit(fieldValue, isNullOrUndefinedOrEmpty);
           }
+
+          doc[key] = fieldValue;
 
         });
         
-        return _.omit(doc, isNullOrUndefinedOrEmpty);
+        if(_.isArray(doc))
+          doc = _.compact(doc)
+        else if(_.isPlainObject(doc))
+          doc = _.omit(doc, isNullOrUndefinedOrEmpty);
+        
+        return doc;
       }
       function isNullOrUndefinedOrEmpty(v){
         return v === undefined || v === null || (_.isObject(v) && _.isEmpty(v));
