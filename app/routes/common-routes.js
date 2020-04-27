@@ -147,7 +147,7 @@
                     roles = _.flatten(_.map(roles, realm.getRole));
                 }
                 if(useSchemaRoles){
-                    var path = $location.$$url.replace('/register/','');
+                    var path = $location.path().replace('/register/','');
                     var schema;
 
                     if(path.indexOf('/')>0)
