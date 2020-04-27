@@ -6,17 +6,17 @@
 	<div ng-if="!loading && !errorCode && !error">	
         <span ng-transclude="default">		
 
-            <div class="selected-reference-uid">
+            <span class="selected-reference-uid">
                 <a translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_blank">
                     <i class="fa fa-external-link-square" aria-hidden="true"></i> {{document | uniqueID}}
                 </a>
-            </div>
-            <div class="selected-reference-name" ng-if="!hideSchema">{{document.body.header.schema | schemaName}} </div>
-            <div class="selected-reference-title" ng-if="document.workingDocumentTitle||document.title">{{(document.workingDocumentTitle||document.title) | lstring:locale}} </div> 
-            <div ng-if="!(document.workingDocumentTitle||document.title)">
-                <div class="selected-reference-title" ng-if="document.body.title">{{document.body.title | lstring:locale}} </div> 
-                <div class="selected-reference-title" ng-if="!document.body.title && document.body.name ">{{document.body.name | lstring:locale}} </div>
-            </div>
+            </span>
+            <span class="selected-reference-name" ng-if="!hideSchema">{{document.body.header.schema | schemaName}} </span>
+            <span class="selected-reference-title" ng-if="document.workingDocumentTitle||document.title">{{(document.workingDocumentTitle||document.title) | lstring:locale}} </span> 
+            <span ng-if="!(document.workingDocumentTitle||document.title)">
+                <span class="selected-reference-title" ng-if="document.body.title">{{document.body.title | lstring:locale}} </span> 
+                <span class="selected-reference-title" ng-if="!document.body.title && document.body.name ">{{document.body.name | lstring:locale}} </span>
+            </span>
 
             <span  ng-if="document.body.scientificName">
                 <span ng-if="!document.workingDocumentTitle" ng-bind="document.body.scientificName"></span>
