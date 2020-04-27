@@ -48,6 +48,7 @@ require.config({
         'pdf-object'                : cdnHost + 'pdfobject@2.0.201604172/pdfobject.min',
         'angular-trix'              : cdnHost + 'angular-trix@1.0.2/dist/angular-trix.min',
         'trix'                      : cdnHost + 'trix@0.12.0/dist/trix',
+        'ngMeta'                    : cdnHost + 'ng-meta@1.0.3/dist/ngMeta.min',
 
         'shim'                      :           'libs/require-shim/src/shim',
         'angular-localizer'         :           'libs/angular-localizer/localizer',
@@ -86,17 +87,18 @@ require.config({
         'pdf-object'                    : { 'deps': ['angular']}  ,
         'angular-trix'                  : { 'deps': ['angular', 'trix', 'css!'+cdnHost+'trix@0.12.0/dist/'+'trix.css']},
         'trix'                          : { 'deps': ['angular']},
-        'diacritics'                    : { 'deps': ['angular']}
+        'diacritics'                    : { 'deps': ['angular']},
+        'ngMeta'                        : { 'deps': ['angular']}
     },
     urlArgs: function(id, url){
         
-        if(!window.appVersion || window.appVersion === '-')
+        if(!window.scbdApp.version || window.scbdApp.version === '-')
             return '';
 
         if(url.indexOf('worldEUHigh.js')>0)
             return '';
         
-        return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.appVersion
+        return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version
     }
 });
 
@@ -104,10 +106,10 @@ require.s.contexts._.nameToUrl = function (moduleName, ext, skipExt) {
 
     var url = nameToUrl(moduleName, ext, skipExt);
     if(/^\//.test(url) && (url.indexOf('.html')>0 || url.indexOf('.json')>0)) {
-            url = '/'+window.lang + url;
+            url = '/'+window.scbdApp.lang + url;
     }
 
     return url;
 }
-if(window.appTemplate)
-    require([window.appTemplate])
+if(window.scbdApp.template)
+    require([window.scbdApp.template])

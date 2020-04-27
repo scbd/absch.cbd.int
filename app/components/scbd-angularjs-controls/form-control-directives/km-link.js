@@ -69,7 +69,7 @@ app.directive('kmLink', function() {
 								$scope.editor.mimeTypes = $attr.mimeTypes.split(";");
 
 						//Watchers
-						$scope.$watch("binding", $scope.load);
+						$scope.$watch("binding", function() {$scope.load()});
 						$scope.$watch('binding', function() {
 								ngModelController.$setViewValue($scope.binding);
 						});

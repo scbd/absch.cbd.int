@@ -1,24 +1,11 @@
-﻿<div>
-    <div class="container">
+﻿<div class="container">
+    <br/>
+    <div ng-show="user.isAuthenticated">
+        <div forum-id="forumId" show-details="true" type="forum" forum-details show-forum-properties="isAdmin()"></div>
         <br/>
-        <div ng-show="user.isAuthenticated">
-            <div class="row">
-                <div class="col-lg-12 well">
-                    <div forum-id="forumId" show-details="true" type="forum" forum-details  show-forum-properties="isAdmin()"></div>
-                </div>
-            </div>
-            <br/>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div forum-threads forum-id="forumId" post-url="postUrl" />
-                </div>
-            </div>
-        </div>
-        <div ng-show="!user.isAuthenticated" class="bg-green">
-            <div login></div>
-        </div>
+        <div forum-threads forum-id="forumId" post-url="postUrl" />
     </div>
-    <br/>
-    <br/>
-    <br/>
+    <div ng-show="!user.isAuthenticated" class="bg-green">
+        <div login></div>
+    </div>
 </div>

@@ -39,9 +39,9 @@
 					$scope.init();
 			},
 			controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows", "locale",
+				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta',
 				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows, appLocale) {
+					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows, appLocale, ngMeta) {
 					
 					$scope.realm = realm;
 					if(!$scope.locale)
@@ -246,6 +246,7 @@
 								$scope.revisionNo = version
 
 							loadViewDirective($scope.internalDocument.header.schema);
+							// setMetaTags($scope.internalDocument);
 
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
@@ -389,6 +390,17 @@
 								$scope.isIRCCRevoked = true;
 						}
 					}
+
+					function setMetaTags(document){
+						ngMeta.resetMeta();   
+						searchService.list({query:'identifier_s:'+document.header.identifier})
+						.then(function(result){
+							var indexDoc = result.data.response.docs[0];
+							var schemaName = $filter('mapSchema')(document.header.schema);							
+							ngMeta.setTitle(indexDoc.rec_countryName, ' | ' + schemaName);
+							ngMeta.setTag('description', indexDoc.rec_summary || window.scbdApp.title);
+						})
+					} 
 
 					$scope.api = {
 						loadDocument: $scope.loadDocument,

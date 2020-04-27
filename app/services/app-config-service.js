@@ -1,10 +1,10 @@
-define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost||''),
+define(['app', 'json!/api/v2018/realm-configurations/'+(window.scbdApp.host||''),
 		'lodash', 'json!components/scbd-angularjs-services/filters/schema-name.json'], function (app, realmConfigurations, _, scbdSchemas) { 'use strict';
     
 	var realmConfig = _.findWhere(realmConfigurations,{ host : window.location.host}) || _.head(realmConfigurations);
     
     if(!realmConfig)
-        throw new Error("Unknow realm for host: "+window.location.host + ' clearingHouseHost: ' + window.clearingHouseHost);
+        throw new Error("Unknow realm for host: "+window.location.host + ' clearingHouseHost: ' + window.scbdApp.host);
 
 	var nationalSchemas  = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='national'  ? key : undefined; }));
 	var referenceSchemas = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='reference' ? key : undefined; }));
@@ -38,6 +38,8 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.clearingHouseHost
                 nationalSchemas     :   nationalSchemas,
                 referenceSchemas    :   referenceSchemas,
                 scbdSchemas			:   scbdSchemas,
+
+                originalObject      : realmConfig,
 
                 is : function(realm, strict) {
                     
