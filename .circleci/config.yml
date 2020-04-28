@@ -1,8 +1,12 @@
 ﻿version: 2
 
 _defaults: &defaults
-  docker:
-    - image: docker:17.05.0-ce
+  # docker:
+  #   - image: docker:17.05.0-ce
+  machine:
+    enabled: true
+    # Use Ubuntu 14.04 with bleeding edge Docker daemon 17.06.0-ce.
+    image: circleci/classic:edge
   working_directory: ~/scbd/absch.cbd.int
   parallelism: 1
 
@@ -10,8 +14,11 @@ _run:
   buildDocker: &buildDocker
     name: Build docker image
     command: |
+      # Restart Docker with experimental features to enable `docker build --squash` option
+      sudo sh -c 'echo '\''DOCKER_OPTS="--experimental=true"'\'' >> /etc/default/docker'
+      sudo service docker restart
       docker info
-      docker build -t output --build-arg VERSION=$CIRCLE_SHA1 --build-arg BRANCH=${CIRCLE_BRANCH:-master} --build-arg TAG=$CIRCLE_TAG .
+      docker build --squash -t output --build-arg VERSION=$CIRCLE_SHA1 --build-arg BRANCH=${CIRCLE_BRANCH:-master} --build-arg TAG=$CIRCLE_TAG .
   testImage: &testImage
     name: Test docker image 
     command:  |
@@ -23,7 +30,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - setup_remote_docker
       - run: *buildDocker
       - run: *testImage
 
@@ -31,7 +37,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - setup_remote_docker
       - run: *buildDocker
       - run: *testImage
       - deploy:
@@ -45,7 +50,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - setup_remote_docker
       - run: *buildDocker
       - run: *testImage
       - deploy:
@@ -59,7 +63,6 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - setup_remote_docker
       - run: *buildDocker
       - run: *testImage
       - deploy:
