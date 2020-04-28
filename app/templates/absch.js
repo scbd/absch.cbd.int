@@ -36,7 +36,7 @@ function (app, _, moment, angular) {
             var lang = locale;
             if (lang == 'zh')
                 lang = 'zh-cn'; //moment has two ZH, use ZH-CN
-            moment.lang(lang);
+            moment.locale(lang);
             if (lang != 'en')
                 require(['css!/app/css/translation.css']);
             if (lang == 'ar') {
@@ -45,8 +45,10 @@ function (app, _, moment, angular) {
 
             var basePath = (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
             $rootScope.$on('$routeChangeSuccess', function (evt, current) {
-                $window.ga('set', 'page', basePath + $location.path());
-                $window.ga('send', 'pageview');
+                if($window.scbdApp.analytics){
+                    $window.ga('set', 'page', basePath + $location.path());
+                    $window.ga('send', 'pageview');
+                }
 
                 ngMeta.resetMeta();
                 if(current.$$route && current.$$route.label)
@@ -85,13 +87,6 @@ function (app, _, moment, angular) {
             $scope.scrollToTop = function(){
                 $('html, body').animate({scrollTop:0},'50');
             }
-
-            $scope.$root.getRoleName = function (roleName) {
-                console.warn('Depriciated, use appConfigService.getRoleName');
-                if (roleName) {
-                    return appConfigService.getRoleName(roleName);
-                }
-            };
 
             //============================================================
             //

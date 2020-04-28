@@ -1,5 +1,10 @@
 ﻿<div>
-	<b>{{organization.name | lstring:locale}} <i ng-show="organization.acronym">({{organization.acronym | lstring:locale}})</i></b>
+	<div class="selected-reference-uid">
+		<b>{{organization.name | lstring:locale}} <i ng-show="organization.acronym">({{organization.acronym | lstring:locale}})</i></b>&nbsp;		
+		<a translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_blank">
+			<i class="fa fa-external-link-square" aria-hidden="true"></i> {{document | uniqueID}}
+		</a>
+	</div>	
 	<div km-terms ng-model="organization.organizationType">
 		<span ng-repeat="term in terms">{{term.name}}</span>
 	</div>

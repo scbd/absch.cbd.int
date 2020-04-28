@@ -1,25 +1,9 @@
-﻿{
-	"focalpoint"				    :  "ABS National Focal Points" ,
-	"authority"				        :  "Competent National Authorities" ,
-	"contact"					    :  "Contact" ,
-	"database"					    :  "National Websites or Databases" ,
-	"resource"					    :  "Virtual Library Resources" ,
-	"organization"				    :  "Organizations" ,
-	"measure" 					    :  "Legislative, Administrative or Policy Measures" ,
-	"abscheckpoint"			        :  "Checkpoints" ,
-	"abscheckpointcommunique"       :  "Checkpoint Communiqués" ,
-	"abspermit"				        :  "Internationally Recognized Certificates of Compliance" ,
+﻿{	
 	"meetingdocument"			    :  "Meeting Documents" ,
 	"pressrelease"				    :  "Press Releases" ,
 	"news"						    :  "News" ,
 	"new"						    :  "What's New" ,
-	"statement"			            :  "Statement" ,
-	"absnationalreport"		        :  "Interim National Reports on the Implementation of the Nagoya Protocol" ,
-	"modelcontractualclause"	    :  "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards" ,
-	"communityprotocol"		        :  "Community Protocols and Procedures and Customary Laws" ,
+	"statement"			            :  "Statement" ,	
 	"meeting"					    :  "Meetings" ,
-	"notification"				    :  "Notifications" ,
-	"capacitybuildinginitiative"    :  "Capacity-building Initiatives" ,
-	"capacitybuildingresource"      :  "Capacity-building Resources" ,
-	"endorsement"				    :  "Endorsements"
+	"notification"				    :  "Notifications" 	
 }

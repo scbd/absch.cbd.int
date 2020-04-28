@@ -1,0 +1,169 @@
+﻿        .lmo-gene-construct-viewer *{
+            font-size:10px!important;
+        }              
+        table.lmo-transcript.senseStart,
+        table.lmo-transcript.sense,
+        table.lmo-transcript.senseStop,
+        table.lmo-transcript.antisenseStart,
+        table.lmo-transcript.antisense,
+        table.lmo-transcript.antisenseStop
+        {
+            direction:ltr;
+            font-family:Verdana;
+            font-size:10px!important;
+            line-height:14px;
+            text-align:center;
+            display:inline-block;
+            /* IE6 / IE7 hack */
+            *display:inline;
+        }
+                
+        table.lmo-transcript.senseStart,
+        table.lmo-transcript.sense,
+        table.lmo-transcript.antisense,
+        table.lmo-transcript.antisenseStop
+        {
+            margin-right:-8px;
+        }
+
+        table.lmo-transcript.sense,
+        table.lmo-transcript.senseStop,
+        table.lmo-transcript.antisenseStart,
+        table.lmo-transcript.antisense
+        {
+            margin-left:-8px;
+        }
+
+        table.lmo-transcript.antisense
+        {
+            margin-right: -33px;
+        }
+        table.lmo-transcript.antisenseStop
+        {
+            margin-right: -25px;
+        }
+
+        table.lmo-transcript.senseStart,
+        table.lmo-transcript.antisenseStop
+        {
+            margin-left:10px;
+        }
+
+        table.lmo-transcript.senseStop,
+        table.lmo-transcript.antisenseStart
+        {
+            margin-right:10px;
+        }
+                
+        table.lmo-transcript.senseStart     td.middle,
+        table.lmo-transcript.sense           td.middle,
+        table.lmo-transcript.senseStop      td.middle,
+        table.lmo-transcript.antisenseStart td.middle,
+        table.lmo-transcript.antisense       td.middle,
+        table.lmo-transcript.antisenseStop  td.middle
+        {
+            background-color: #CBDDEF;
+            padding:4px 4px;
+            white-space:nowrap;
+        }
+
+        table.lmo-transcript.sense           td.middle,
+        table.lmo-transcript.senseStop      td.middle
+        {
+            padding-left:5px;
+        }
+
+        table.lmo-transcript.antisense       td.middle,
+        table.lmo-transcript.antisenseStop  td.middle
+        {
+            padding-right:5px
+        }
+                
+        table.lmo-transcript.senseStart    td.left,
+        table.lmo-transcript.antisenseStop td.left
+        {
+            width: 8px;
+            height: 0px;
+            background-color: #CBDDEF;
+            line-height:0px;
+            font-size  :0px;
+        }
+                
+        table.lmo-transcript.sense      td.left,
+        table.lmo-transcript.senseStop td.left
+        {
+            width:  25px;
+            height: 50px;
+            /*border-top:    25px solid #CBDDEF;
+            border-bottom: 25px solid #CBDDEF;
+            border-left:   25px solid transparent;*/			
+            background:url('https://bch.cbd.int/bch/images/LmoConstruct/right.svg') 5px 0px no-repeat;
+            line-height:0px;
+            font-size  :0px;
+            /* IE6 Hack */
+            *border-left-color:   #ABCDEF;			
+            *filter: chroma(color=#ABCDEF);
+        }
+
+        table.lmo-transcript.antisenseStart td.left,
+        table.lmo-transcript.antisense       td.left
+        {
+            width:  25px;
+            height: 50px;
+            /*border-top:    25px solid transparent;
+            border-bottom: 25px solid transparent;
+            border-right:  25px solid #CBDDEF;*/			
+            background:url('https://bch.cbd.int/bch/images/LmoConstruct/left.svg') -1px 0px no-repeat;
+            line-height:0px;
+            font-size  :0px;
+            /* IE6 Hack */
+            *border-top-color:    #ABCDEF;			
+            *border-bottom-color: #ABCDEF;			
+            *filter: chroma(color=#ABCDEF);
+        }
+                
+        table.lmo-transcript.senseStop      td.right,
+        table.lmo-transcript.antisenseStart td.right
+        {
+            width: 8px;
+            height: 0px;
+            background-color: #CBDDEF;
+            line-height:0px;
+            font-size  :0px;
+        }
+                
+        table.lmo-transcript.antisense      td.right,
+        table.lmo-transcript.antisenseStop td.right
+        {
+            width:  50px;
+            height: 50px;
+            /*border-top:    25px solid #CBDDEF;
+            border-bottom: 25px solid #CBDDEF;
+            border-right:  25px solid transparent;*/			
+            background:url('https://bch.cbd.int/bch/images/LmoConstruct/left.svg') -30px 0px no-repeat;
+            line-height:0px;
+            font-size  :0px;
+            /* IE6 Hack */
+            *border-right-color:  #ABCDEF;			
+            *filter: chroma(color=#ABCDEF);
+        }
+                
+        table.lmo-transcript.senseStart td.right,
+        table.lmo-transcript.sense       td.right
+        {
+            width:  25px;
+            height: 50px;
+            /*border-top:    25px solid transparent;
+            border-bottom: 25px solid transparent;
+            border-left:   25px solid #CBDDEF;*/
+            background:url('https://bch.cbd.int/bch/images/LmoConstruct/right.svg') -32px 0px no-repeat;
+            line-height:0px;
+            font-size  :0px;
+            /* IE6 Hack */
+            *border-top-color:    #ABCDEF;			
+            *border-bottom-color: #ABCDEF;			
+            *filter: chroma(color=#ABCDEF);
+        }		
+        .lmo-gene-construct-viewer div {
+            margin-bottom:0px!important;
+        }

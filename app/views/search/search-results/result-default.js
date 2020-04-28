@@ -1,4 +1,4 @@
-define(['app', 'text!views/search/search-results/result-default.html','underscore', 'js/common',
+define(['app', 'text!views/search/search-results/result-default.html','lodash', 'js/common',
 'views/forms/view/record-loader.directive'
 ], function(app, template, _) {
 
@@ -11,9 +11,10 @@ define(['app', 'text!views/search/search-results/result-default.html','underscor
                 doc:'=',
                 type:'@'
             },
-            link: function($scope, $element) {
-
-               $scope.api = {};
+            link: function($scope, $element, $attr) {
+                
+                $scope.showExternalLink = $attr.externalLink=='true'
+                $scope.api = {};
                 $scope.$watch('showDoc', function(newVal){
                     if(newVal && $scope.doc){
                         $timeout(function(){
@@ -21,6 +22,12 @@ define(['app', 'text!views/search/search-results/result-default.html','underscor
                         }, 10);
                     } 
                 });
+
+                $scope.canShowIcons = function(schema){
+                    return _.includes(['modifiedOrganism', 'nationalRiskAssessment', 'independentRiskAssessment'], schema);
+                }
+
+                
             },
         };
     }]);

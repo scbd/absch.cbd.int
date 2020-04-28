@@ -3,7 +3,7 @@
   <div class="km-value">
     <ul>
       <li ng-repeat="cpc in referenceCheckpointCommunique">
-        <a translation-url  target="_new_" href="/database/record?documentID={{cpc.documentID}}">
+        <a translation-url  target="_blank" href="/database/record?documentID={{cpc.documentID}}">
           Checkpoint Communiqué {{cpc | uniqueIDWithoutRevision}} - {{cpc.createdOn | formatDateWithTime }}
         </a>
       </li>

@@ -11,73 +11,83 @@
 
 
     <!-- existing documents display -->
-    <div class="row">
-        <div class="col-xs-12">
+    <div ng-transclude="selectRecords">   
+        <div class="row">
+            <div class="col-xs-12">             
+                <button style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled"><i class="fa fa-plus"></i> {{caption || 'Add record'}}{{type!=='radio' ? "(s)" : ""}}</button>
 
-            <button style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled"><i class="fa fa-plus"></i> {{caption || 'Add record'}}{{type!=='radio' ? "(s)" : ""}}</button>
+                <span ng-show="model.length==0 || !model"> <i class="color-blue"> No records have been linked. </i> </span>
 
-            <span ng-show="model.length==0 || !model"> <i class="color-blue"> No records have been linked. </i> </span>
+                <a translation-url  class="bold" href="#" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords">
+                    <i class="fa fa-chevron-circle-right"></i> {{model.length}} linked records.
+                </a>
+                <a translation-url  class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0 ">
+                    <i class="fa fa-chevron-circle-down"></i> {{model.length}} linked records.
+                </a>
+            </div>
+        </div>
+    </div>
 
-            <a translation-url  class="bold" href="#" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords">
-                <i class="fa fa-chevron-circle-right"></i> {{model.length}} linked records.
-            </a>
-            <a translation-url  class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0 ">
-                <i class="fa fa-chevron-circle-down"></i> {{model.length}} linked records.
-            </a>
+    <div ng-transclude="selectedRecords">   
+        <div class="row" ng-show="areVisible && !disabled">
+            <div class="col-xs-12">
+                <br />
+                <table class="table" id="search-new" style="padding-bottom:3px;width:100%;">
+                    <tr ng-repeat="doc in model" ng-if="type!='radio'">
+                        <td style="margin-bottom:15px;width:15px;">
+                            <a translation-url  class="btn btn-default" ng-click="removeDocument(doc)" class="link color-red">
+                                <i class="fa fa-times"></i></a>
+                        </td>
+                        <td style="margin-bottom:20px;">
+                            <div ng-if="isContact(doc) || isAuthority(doc) || isFocalPoint(doc)" view-contact-reference ng-model="doc" 
+                                locale="locale" class="km-value" wait-for-workflow="{{runningWorklfows[doc.identifier] ? 'true':'false'}}"></div>
+                            <div ng-if="!isContact(doc) && !isAuthority(doc) && !isFocalPoint(doc)" view-default-reference ng-model="doc.identifier" 
+                                locale="locale" wait-for-workflow="{{runningWorklfows[doc.identifier] ? 'true':'false'}}"></div>
+                        </td>
+                    </tr>
+                    <tr ng-if="type=='radio' && model">
+                        <td style="margin-bottom:15px;width:15px;">
+                            <a translation-url  class="btn btn-default" ng-click="removeDocument(model)" class="link color-red">
+                                <i class="fa fa-times"></i></a>
+                        </td>
+                        <td style="margin-bottom:20px;">
+                            <div ng-if="isContact(model) || isAuthority(model) || isFocalPoint(model)" view-contact-reference ng-model="model" 
+                                locale="locale" class="km-value"  wait-for-workflow="{{runningWorklfows[model.identifier] ? 'true':'false'}}"></div>
+                            <div ng-if="!isContact(model) && !isAuthority(model) && !isFocalPoint(model)" view-default-reference ng-model="model.identifier" 
+                                locale="locale"  wait-for-workflow="{{runningWorklfows[model.identifier] ? 'true':'false'}}"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
         </div>
     </div>
-    <div class="row" ng-show="areVisible && !disabled">
-        <div class="col-xs-12">
-            <br />
-            <table class="table" id="search-new" style="padding-bottom:3px;width:100%;">
-                <tr ng-repeat="doc in model" ng-if="type!='radio'">
-                    <td style="margin-bottom:15px;width:15px;">
-                        <a translation-url  class="btn btn-default" ng-click="removeDocument(doc)" class="link color-red">
-                            <i class="fa fa-times"></i></a>
-                    </td>
-                    <td style="margin-bottom:20px;">
-                        <div ng-if="isContact(doc) || isAuthority(doc) || isFocalPoint(doc)" view-contact-reference ng-model="doc" locale="locale" class="km-value"></div>
-                        <div ng-if="!isContact(doc) && !isAuthority(doc) && !isFocalPoint(doc)" view-default-reference ng-model="doc.identifier" locale="locale"></div>
-                    </td>
-                </tr>
-                <tr ng-if="type=='radio' && model">
-                    <td style="margin-bottom:15px;width:15px;">
-                        <a translation-url  class="btn btn-default" ng-click="removeDocument(model)" class="link color-red">
-                            <i class="fa fa-times"></i></a>
-                    </td>
-                    <td style="margin-bottom:20px;">
-                        <div ng-if="isContact(model) || isAuthority(model) || isFocalPoint(model)" view-contact-reference ng-model="model" locale="locale" class="km-value"></div>
-                        <div ng-if="!isContact(model) && !isAuthority(model) && !isFocalPoint(model)" view-default-reference ng-model="model.identifier" locale="locale"></div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-
-    </div>
-
     <!-- Modal -->
 
     <script type="text/ng-template" trados-translation="true" id="documentSelectionModal">
         <div class="rounded bg-dropshadow" id="{{question}}">
             <div class="modal-header bg-grey ">
-                <h3>Please select from the list of <span class="bold color-blue">{{docs.length}}</span>  published record(s) below:</h3>
-                <div ng-if="hideAddContact" class="help-info">If the record is not listed, please save your current draft and go to the ‘Dashboard’ and create a new record.</div>
-                <div ng-if="!hideAddContact" class="help-info">If the contact you are looking for is not listed, please create a new record by clicking the <a style="cursor:pointer;" ng-click="addNewContact=!addNewContact;loadContactDirective()">'create contact'</a> button below.</div>
-                <!-- <div ng-show="filter"> -->
-                    <input type="textbox" ng-model="keyword" placeholder="filter records by keywords or unique identifier" class="form-control">
-                <!-- </div> -->
+                <div ng-if="!allowNew.editingOn">
+                    <h3>Please select from the list of <span class="bold color-blue">{{docs.length}}</span>  published record(s) below:</h3>
+                    <div class="help-info">If the record is not listed, please create a new record.</div>
+                    <input type="textbox" ng-model="search.keyword" placeholder="filter records by keywords or unique identifier" class="form-control">
+                </div>
+                <div ng-if="allowNew.editingOn">
+                    <h3>
+                        Create new <span ng-bind="allowNew.activeSchema|schemaName"></span>
+                    </h3>
+                </div>
             </div>
             
             <div class="modal-body" >
                 
-                <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new" ng-hide="addNewContact">
+                <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new" ng-hide="allowNew.editingOn">
                         <div class="row" style="margin:0;padding:0;" ng-show="!isLoading" >
-                                
-                            <div ng-if="hideAddContact && !listView" ng-repeat="doc in docs = (rawDocuments.docs | filter:keyword)">
+                            <div ng-if="allowNew.show && !listView" ng-repeat="doc in docs = (rawDocuments.docs | filter:search.keyword)">
                                     <div class="col-xs-1 text-right">
                                         <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" style="width: 16px; height: 16px;" />
-                                        <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" style="width: 16px; height: 16px;" />
+                                        <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" 
+                                            ng-change="onRadioClick(doc)" style="width: 16px; height: 16px;" />
                                     </div>
                                     <div class="col-xs-11">
                                         <result-default doc='doc' type="nationalRecords"></result-default>
@@ -85,7 +95,7 @@
                                 </div>
                             
                             
-                            <table ng-if="!hideAddContact || listView" class="table table-condensed table-striped" style="width:100%;" >
+                            <table ng-if="!allowNew.show || listView" class="table table-condensed table-striped" style="width:100%;" >
                                 <thead>
                                     <tr>
                                         <th></th>
@@ -111,11 +121,11 @@
                                     </tr>
                                 </thead>
                                         <tbody>
-                                          <tr ng-repeat="doc in docs = (rawDocuments.docs | orderBy:sortType:sortReverse  | filter:keyword)" id="rec">
+                                          <tr ng-repeat="doc in docs = (rawDocuments.docs  | filter:search.keyword | orderBy:sortType:sortReverse)" id="rec">
                                             <td style="width:0;"><span class="bold">{{$index+1}}.</span></td>
-                                            <td  style="width:0;">  
+                                            <td  style="width:0;">
                                                 <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" />
-                                                <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" />
+                                                <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" ng-change="onRadioClick(doc)" />
                                             </td>
                                             <td class="type"> {{doc.schema_s | schemaShortName}}</td>
                                             <td style="min-width:30%" class="title"> <a href="{{doc.url_ss}}" target="_new">{{doc.rec_title}}</a></td>
@@ -135,8 +145,8 @@
                     <div ng-if="isLoading"> <i class="fa fa-spinner fa-spin"></i> Loading...</div>
                     <div ng-if="rawDocuments.numFound===0"> no records found.</div>
                 </div>
-                <div  ng-show="addNewContact" class="row" style="max-width:100%">
-                    <div id="divNewContact" class="col-lg-12" style="margin:20px"></div>
+                <div  ng-show="allowNew.editingOn" class="row" style="max-width:100%">
+                    <div id="divNewRecord" class="col-lg-12" style="margin:20px"></div>
                 </div>
             </div> 
 
@@ -144,10 +154,24 @@
                 <div class="row">
                     <div class="col-xs-12">
 
-                        <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="addNewContact"   ng-click="saveDocuments()">Select</a>
+                        <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="allowNew.editingOn" ng-click="saveDocuments()">Select</a>
+                        <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="allowNew.editingOn" ng-click="clearSelectedDocuments()">Clear selected records</a>
 
-                        <a translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-hide="hideAddContact || addNewContact"   ng-click="addNewContact=!addNewContact;loadContactDirective()">Create Contact</a>
-                        <a translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-show="addNewContact"   ng-click="addNewContact=!addNewContact">Show Existing Contacts</a>
+                        <div class="dropdown  pull-left"  ng-hide="!allowNew.schema || allowNew.editingOn" style="margin-left:5px;">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            <span ng-if="!allowNew.title">Create</span>
+                            <span ng-if="allowNew.title" ng-bind="allowNew.title"></span>
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                              <li ng-repeat="schema in allowNew.schemas">
+                                  <a href="#" ng-click="allowNew.editingOn=!allowNew.editingOn;loadEditDirective(schema)">
+                                      <span ng-bind="schema|schemaName"></span>
+                                  </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <a translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-show="allowNew.editingOn"   ng-click="allowNew.editingOn=!allowNew.editingOn">Show Existing</a>
                        
                         <a translation-url  type="button" class="btn btn-warning bold" data-dismiss="modal" ng-click="closeDialog()">Close</a>
                     </div>

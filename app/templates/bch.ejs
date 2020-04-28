@@ -4,8 +4,9 @@
 <head>
     <base href="<%=baseUrl%>">
     <meta charset="utf-8">
-    <title>Biosafety Clearing-House</title>
-    <meta name="description" content="The Biosafety Clearing-House">
+    <title ng-bind="ngMeta.title"></title>
+    <meta name="description" content="{{ngMeta.description}}">
+    <link name="canonical" rel="canonical" href="{{ngMeta.canonical}}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="shortcut icon" href="/app/img/favicon.png">
@@ -16,9 +17,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.cbd.int/font-awesome@4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.cbd.int/bootstrap-datepicker@1.8.0/dist/css/bootstrap-datepicker.min.css" >
     <link rel="stylesheet" type="text/css" href="https://cdn.cbd.int/angular-toastr@1.5.0/dist/angular-toastr.min.css" />
-    <link rel="stylesheet" type="text/css" href="/app/css/km.css">
-    <link rel="stylesheet" type="text/css" href="/app/css/template.css">
-    <link rel="stylesheet" type="text/css" href="/app/css/bch/template.css">
+    <link rel="stylesheet" type="text/css" href="/app/css/km.css?v=<%=appVersion%>">
+    <link rel="stylesheet" type="text/css" href="/app/css/template.css?v=<%=appVersion%>">
+    <link rel="stylesheet" type="text/css" href="/app/css/bch/template.css?v=<%=appVersion%>">
+    <link rel="stylesheet" type="text/css" href="/app/css/colors.css?v=<%=appVersion%>" >
 
 
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -30,7 +32,80 @@
 
 </head>
 <body ng-controller="BchTemplateController" id="top" lang="<%=preferredLanguage||'en'%>">
+    
+    <span style='display:none' id="appTitle">Biosafety Clearing-House</span>
+    <span style='display:none' id="appDescription">The Biosafety Clearing-House</span>
+    <div class="m-app-loading" ng-animate-children>
+        <!--
+            HACKY CODE WARNING: I'm putting Style block inside directive so that it
+            will be removed from the DOM when we remove the directive container.
+        -->
+        <style type="text/css">
+            div.m-app-loading {
+                position: fixed ;
+            }
+            div.m-app-loading div.animated-container {
+                background-color: #FFFFFF ;
+                bottom: 0px ;
+                left: 0px ;
+                opacity: 1.0 ;
+                position: fixed ;
+                right: 0px ;
+                top: 0px ;
+                z-index: 999999 ;
+            }
+            /* Used to initialize the ng-leave animation state. */
+            div.m-app-loading div.animated-container.ng-leave {
+                opacity: 1.0 ;
+                transition: all linear 200ms ;
+                    -webkit-transition: all linear 200ms ;
+            }
+            /* Used to set the end properties of the ng-leave animation state. */
+            div.m-app-loading div.animated-container.ng-leave-active {
+                opacity: 0 ;
+            }
+            div.m-app-loading div.messaging {
+                color: #1FA65D ;
+                font-family: monospace ;
+                left: 0px ;
+                margin-top: -37px ;
+                position: absolute ;
+                right: 0px ;
+                text-align: center ;
+                top: 30% ;
+            }
+            div.m-app-loading h1 {
+                font-size: 26px ;
+                line-height: 35px ;
+                margin: 0px 0px 20px 0px ;
+            }
+            div.m-app-loading p {
+                font-size: 18px ;
+                line-height: 14px ;
+                margin: 0px 0px 0px 0px ;
+            }
+        </style>
 
+
+        <!-- BEGIN: Actual animated container. -->
+        <div class="animated-container">
+            <div class="messaging">
+                <span class="color-orange ng-scope" ng-if="development_env" style="font-size:48px;font-weight:bold;"> 
+                    <img src="https://absch.cbd.int/app/img/cbd-logo-green-en.svg" style="height:80px;">
+                </span>
+               
+                <h1>
+                 <br>
+                   <span class="color-black">loading the <br>Biosafety Clearing-House   </span>
+                   <br> version <%=appVersion%>
+                   <br> <br>
+                    <i class="fa fa-spin fa-3x fa-circle-o-notch"></i> 
+                </h1>
+            </div>
+        </div>
+        <!-- END: Actual animated container. -->
+
+    </div>
     <!-- PAGE -->
     <div>
         <scbd-header></scbd-header>
@@ -38,6 +113,7 @@
         <bch-header></bch-header>
 
         <div class="container-full page-content">
+            <route-loading></route-loading>
             <ng-view autoscroll="true"></ng-view>
         </div>
 
@@ -58,18 +134,10 @@
             host             : '<%=clearingHouseHost%>',
             version          : '<%=appVersion%>',
             lang             : '<%=preferredLanguage%>',
-            title            : document.title,
-            description      : getMetaTag('description')
-        }
-        
-        function getMetaTag(name){
-            var metas = document.getElementsByTagName('meta');
-            for (let i = 0; i < metas.length; i++) {
-                if (metas[i].getAttribute('name') === name) {
-                    return metas[i].getAttribute('content');
-                }
-            }
-        }
+            title            : document.getElementById('appTitle').innerText,
+            description      : document.getElementById('appDescription').innerText,
+            analytics        : '<%=googleAnalyticsCode%>'
+        }        
     </script>
     <script src="https://cdn.cbd.int/requirejs@2.2.0/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>
     

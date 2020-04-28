@@ -1,0 +1,199 @@
+<div>
+    <div ng-if="leftMenuFilters" id="Search-Filter">
+       <style>
+            #Search-Filter .label-selected-facet {
+                position: relative;
+                display: block;
+                background-color: #12496B;
+                margin: 4px 0;
+                padding-right: 20px;
+                text-align: left;
+                height: 20px;
+                padding-top: 6px;
+                border-radius: 3px;
+            }
+            #Search-Filter .truncate {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            #Search-Filter .truncate span{
+                vertical-align: middle;
+            }
+            #Search-Filter .no-left-right-bottom-border{
+                border-left: none;
+                border-right: none;
+                border-bottom: none;
+            }
+            #Search-Filter .search-filter-settings > li{
+                margin: 5px;
+            }
+            #Search-Filter .search-filter-settings li > a{
+                padding-left: 3px;
+            }
+            #Search-Filter .strikeout{
+                text-decoration: line-through;
+            }
+            #Search-Filter .bring-to-front{
+                z-index: 1000000;
+            }
+            #Search-Filter .bring-to-front1{
+                z-index: 10000001;
+            }
+            .ngdialog-open #Search-Filter .bring-to-front, .ngdialog-open #Search-Filter .bring-to-front1{
+                z-index: 10;
+            }
+
+            #Search-Filter .exclude-filter{
+                border: 1px solid #d95350;;
+                padding: 5px;
+            }
+            #Search-Filter .ngdialog-theme-default.wide{
+                height: 500px;
+            }
+       </style>
+        <div style="border-bottom: 1px solid #eee">
+            <h1>Filters</h1>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item no-left-right-bottom-border" style="background-color: rgb(250, 250, 250); cursor: pointer;padding:0px;padding-top: 10px;"
+                ng-repeat="(schema, filters) in leftMenuFilters" ng-if="filters" >
+                    
+                    <div class="dropdown pull-left bring-to-front1">
+                        <button class="btn btn-xs btn-default dropdown-toggle" type="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="border: none;vertical-align: unset;">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                        </button>
+                        <ul class="dropdown-menu search-filter-settings" aria-labelledby="dropdownMenu1">                            
+                            <li><a href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true">
+                                <i class="fa fa-eye" aria-hidden="true"></i> Temporarily disable</a></li>
+                            <li><a href="#" ng-if="filter.disabled" ng-click="filter.disabled=false">
+                                <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a></li>
+                            <li><a href="#" ng-click="clearFilterOptions(schema)">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i> Clear all filters</a></li>
+                            <li><a href="#">
+                                <i class="fa fa-trash" aria-hidden="true"></i> Remove</a></li>
+                        </ul>
+                    </div>
+                    <div class="bold color-darkgrey" style="cursor: pointer;padding-left:2px;padding-right:2px;padding-bottom:5px;" 
+                    ng-click="state[schema]=!state[schema]">
+                        <span ng-bind="schema | schemaName"></span>
+                        <i class="fa pull-right" style="font-size:1.5em; " 
+                        ng-class="{'fa-sort-down':state[schema], 'fa-sort-up':!state[schema]}"></i>
+                    </div>
+                    <div class="list-group-item" ng-repeat="filter in filters"  
+                        style="border-right: unset;border-left: unset;" ng-show="!state[schema]">
+                        
+                        <div class="dropdown pull-left bring-to-front" ng-if="filter.filterValue!=undefined||hasItems(filter.selectedItems)">
+                            <button class="btn btn-xs btn-default dropdown-toggle" type="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="border: none;vertical-align: unset;">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                            </button>
+                            <ul class="dropdown-menu search-filter-settings">
+                                <li><a href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true;recordSelected();">
+                                    <i class="fa fa-eye" aria-hidden="true"></i> Temporarily disable</a></li>
+                                <li><a href="#" ng-if="filter.disabled" ng-click="filter.disabled=false;recordSelected();">
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a></li>
+                                <li><a href="#" ng-if="!filter.excludeResult" ng-click="filter.excludeResult=true;recordSelected();">
+                                    <i class="fa fa-minus-square-o" aria-hidden="true"></i> Exclude results</a></li>
+                                <li><a href="#" ng-if="filter.excludeResult" ng-click="filter.excludeResult=false;recordSelected();">
+                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i> Include results</a></li>
+                                <li><a href="#" ng-click="clearFilterOptions(schema, filter);filter.disabled=false;filter.excludeResult=false;">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Clear filters</a></li>
+                            </ul>
+                        </div>
+                        <div >
+                            <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='freeText' && filter.type!='yesNo'" class="color-darkgrey not" style="cursor: pointer;" 
+                                ng-click="showFilterDialog(schema, filter, searchResult.data.facets.keywords)" ng-class="{'disabled strikeout':filter.disabled}">
+                                <span ng-bind="filter.title"></span>
+                                <div style="position:absolute;right:6px;top:6px" style="margin-top:5px" class="fa fa-chevron-right"></div>    
+                                <!-- <i class="fa fa-chevron-right pull-right" style="margin-top:5px" aria-hidden="true"></i>           -->
+                            </div>
+                            <div ng-if="filter.type=='date'" >
+                                <label ng-bind="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
+                                <button ng-if="filter.filterValue" class="btn btn-xs btn-default pull-right" ng-click="clearFilterDate(filter)">clear</button>
+                                <div km-date-range ng-model="filter.filterValue" ng-change="onFilterDateChange(filter)"></div>
+                            </div>
+                            <div ng-if="filter.type=='freeText'">
+                                    <label ng-bind="filter.title" ng-if="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
+                                <form ng-submit="saveSchemaFreeText(filter, filter.searchKeyword)" class="input-group" >
+                                    <input type="text" ng-model="filter.searchKeyword" class="form-control" placeholder="Search in {{schema | schemaName}}"
+                                        style="font-weight:bold;" ng-disabled="filter.disabled">
+                                    <span type="submit" style="cursor:pointer" ng-click="saveSchemaFreeText(filter, filter.searchKeyword)" class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
+                                </form>
+                            </div>
+                            <div ng-if="filter.type=='yesNo'" >
+                                <label ng-bind="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
+                                <button ng-disabled="filter.disabled" ng-if="filter.filterValue!==undefined" class="btn btn-xs btn-default pull-right" ng-click="clearFilterDate(filter)">clear</button>
+                                <label  class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" ng-value="true"   ng-change="onFilterDateChange(filter)"/> Yes </label>
+                                <label  class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" ng-value="false"  ng-change="onFilterDateChange(filter)"/> No </label>
+                            </div>
+                            <div ng-if="filter.type=='solrRecords'">
+                                <div document-selector ng-model="filter.selectedItems" question="searchResult" caption="(sense)" type="checkbox"
+                                    query="filter.query.q" filter="true" ng-change="recordSelected(item, filter)"
+                                    block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">
+                                    <select-records>
+                                        <div class="color-darkgrey not" style="cursor: pointer;" ng-click="$parent.openAddDialog();">
+                                            <span ng-bind="filter.title"></span>
+                                            <div style="position:absolute;right:6px;top:6px" style="margin-top:5px" class="fa fa-chevron-right"></div> 
+                                        </div>
+                                    </select-records>
+                                    <selected-records>
+                                        <div class="label label-selected-facet" aria-hidden="false" ng-repeat="doc in $parent.selectedRawDocuments"
+                                        ng-click="removeSchemaFilters(doc, filter);$parent.$parent.removeDocument(doc);" >
+                                            <div style="position:absolute;right:6px;top:6px" class="fa fa-remove"></div>
+                                            <span ng-bind="doc.rec_title"></span>
+                                        </div>
+                                    </selected-records>
+                                </div>
+                            </div>
+                            <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='yesNo'" block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">
+                                <div ng-class="{'exclude-filter':filter.excludeResult}">
+                                    <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
+                                    <span class="label label-info pull-right" ng-if="filter.searchRelated && hasItems(filter.selectedItems)">Search in Relation</span>
+                                    <div  ng-repeat="option in filter.selectedItems" ng-click="removeSchemaFilters(option, filter)" 
+                                        class="list-group-item-expand filter" role="button" id="{{option.identifier}}"
+                                        data-toggle="tooltip" data-title="{{option.title|lstring:locale}}" data-container="body" data-placement="right">                            
+                                        <div class="label label-selected-facet" aria-hidden="false">
+                                            <div style="position:absolute;right:6px;top:6px" class="fa fa-remove"></div>                                                    
+                                            <span class="truncate">
+                                                <!-- ({{searchResult.data.facets.keywords[option.id]||0}})  -->
+                                                <span ng-bind="option.title|lstring:locale|limitTo:40"></span>
+                                                <span ng-if="(option.title|lstring:locale).length>40">...</span>                                    
+                                            </span>
+                                        </div>
+                                        <div ng-if="$last" ng-init="ngRepeatFinished()" style="display:none"></div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div>
+            </li>
+        </ul>        
+    </div>
+    <br/>
+    <script type="text/ng-template" trados-translation="true" id="filtersDialog">
+        <div class="modal-header">
+            <h3 class="modal-title">
+                <!-- {{schema|schemaName}} filter options for  -->
+                <span ng-bind="filter.title"></span>
+            </h3>
+        </div>
+        <div class="modal-body">	
+           
+            <div id="divTable"  style="max-height:480px;overflow:scroll; font-size:11px; ">               
+                <div class="col-md-12">
+                    <label class="pull-right">
+                        <input type="checkbox" ng-model="searchRelated"> Search releated
+                    </label>
+                    <div km-term-check ng-model="treeViewSelected" terms="treeOptions()" binding-type="term[]" enable-search="false" before-search="onBeforeSearch(keyword)"></div>
+                    <!--  -->
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
+            <button type="button" class="btn btn-primary pull-left" ng-click="applyFilter()">Apply</button>
+        </div>
+    </script>
+</div>

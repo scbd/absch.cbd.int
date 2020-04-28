@@ -1,13 +1,14 @@
 define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore',
-        'views/directives/workflow-history-directive',
+        'views/directives/workflow-history-directive', 'js/common', 'ngDialog',
         'toastr', 'services/local-storage-service', 'services/app-config-service', 'services/articles-service',
 ], function (app, template) {
     
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
-    'localStorageService', 'articlesService', 'roleService', 'locale',
+    'localStorageService', 'articlesService', 'roleService', 'locale', 'commonjs', 'ngDialog',
     function ($rootScope,  storage, editFormUtility, $route, IWorkflows, toastr, $location, $filter, 
-            $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, articlesService, roleService, locale){
+            $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, 
+            articlesService, roleService, locale, commonjs, ngDialog){
 
     	return{
     		restrict: 'EA',
@@ -42,8 +43,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
             link : function($scope, $element, $attr){
 
                 var originalDocument;
-                var next_fs
-                var document_type = $filter("mapSchema")($route.current.$$route.documentType);
+                var next_fs;                
                 var isDialog      = $attr.isDialog||false;
                 var saveDraftVersionTimer;
                 var previousDraftVersion;
@@ -52,7 +52,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				var qCancelDialog         = $element.find("#dialogCancel");
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
 				var qWorkflowDraftDialog  = $element.find("#divWorkflowDraft");
-
+                $scope.documentType = $filter("mapSchema")($route.current.$$route.documentType);
                 $scope.container                   = $attr.container;
                 $scope.cancelDialogDefered         = [];
                 $scope.AdditionalInfoDialogDefered = [];
@@ -60,7 +60,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 $scope.workflowScope               = $scope;
                 $scope.isAdmin                     = roleService.isUserInRoles(['Administrator', 'oasisArticleEditor']);
                 $scope.locale                      = locale;
-
+                $scope.offlineLanguages            = commonjs.languages;
+                $scope.blockText                   = 'loading form...'
                 if(!$scope.tab)
                     $scope.tab = 'edit';
 
@@ -224,50 +225,69 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.updateSecurity = function()
 				{
 
-					$scope.loading = true;
-                    if(!$scope.getDocumentFn().header || !$scope.getDocumentFn().header.languages)
-                        return $scope.loadSecurity();
+                    $scope.loading = true;
+                    $scope.blockText = 'verifying user roles...'
 
 					$scope.security = {};
-					$q.when($scope.getDocumentFn()).then(function(document){
+                    $q.when($scope.getDocumentFn())
+                    .then(function(document){
 
-						if(!document || !document.header)
-							return;
+						if(!document || !document.header || !document.header.languages)
+                            return $scope.loadSecurity();
+                            
+                        $q.when(document)
+                        .then(function(document){
+                            
+                            $scope.languages = document.header.languages;
+                            var identifier = document.header.identifier;
+                            var schema     = document.header.schema;
 
-                        $scope.languages = document.header.languages;
-						var identifier = document.header.identifier;
-						var schema     = document.header.schema;
+                            var a = storage.documents.exists(identifier).then(function(exist){
 
-						var a = storage.documents.exists(identifier).then(function(exist){
+                                var q = exist
+                                    ? storage.documents.security.canUpdate(document.header.identifier, schema)
+                                    : storage.documents.security.canCreate(document.header.identifier, schema);
 
-							var q = exist
-								  ? storage.documents.security.canUpdate(document.header.identifier, schema)
-								  : storage.documents.security.canCreate(document.header.identifier, schema);
+                                return q.then(function(allowed) {
+                                    $scope.security.canSave = allowed
+                                });
+                            })
 
-							return q.then(function(allowed) {
-								$scope.security.canSave = allowed
-							});
-						})
+                            var b = storage.drafts.exists(identifier).then(function(exist){
 
-						var b = storage.drafts.exists(identifier).then(function(exist){
+                                var q = exist
+                                    ? storage.drafts.security.canUpdate(document.header.identifier, schema)
+                                    : storage.drafts.security.canCreate(document.header.identifier, schema);
 
-							var q = exist
-								  ? storage.drafts.security.canUpdate(document.header.identifier, schema)
-								  : storage.drafts.security.canCreate(document.header.identifier, schema);
+                                return q.then(function(allowed) {
+                                    $scope.security.canSaveDraft = allowed
+                                });
+                            })
 
-							return q.then(function(allowed) {
-								$scope.security.canSaveDraft = allowed
-							});
-						})
+                            $scope.documentUID = document.header.identifier;
 
-                        $scope.documentUID = document.header.identifier;
+                            return $q.all([a,b]);
 
-						return $q.all([a,b]);
+                        })
+                        .then(function(){
+                            if($scope.security.canSaveDraft==false)
+                                openUnAuthorizedDialog();
+                            else
+                                loadReviousWorkflow($scope.documentUID);
+                            $scope.loading = false;
+                            $scope.blockText = undefined;
+                        })
+                        .catch(function(e){
+                            $scope.loading = true;
+                            $scope.blockText = 'Error occurred, please try again';
+                        })
+                        // .finally(function(){
 
-					}).finally(function(){
+                        //     $scope.loading = false;
+                        //     $scope.blockText = undefined;
+                        // });
 
-						$scope.loading = false;
-					});
+                    })
 				}
 
                 //====================
@@ -276,6 +296,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.review = function()
 				{
                     $scope.loading = true;
+                    $scope.blockText = 'Analyzing your document...'
                     $scope.validationReport = undefined;                    
 					$scope.validationReport = {isAnalyzing:true};
                     $scope.errorMessage              = null;
@@ -298,7 +319,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 						showError(null, { action: "review", error: error });
                         $scope.validationReport = undefined;
 					}).finally(function(){
-						$scope.loading = false;
+                        $scope.loading = false;
+                        $scope.blockText = undefined;
 					});
                 }
 				//====================
@@ -306,7 +328,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				//====================
 				$scope.publish = function()
 				{
-					    $scope.loading          = true;
+                        $scope.loading          = true;
+                        $scope.blockText = 'Analyzing your document...'
 					    $scope.validationReport = {isAnalyzing:true};
 					    $scope.errorMessage     = null;
 					var qDocument               = $scope.getDocumentFn();
@@ -331,6 +354,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                             var processRequest;
                             if($route.current.params.workflow){
                                 var metadata = {};
+                                $scope.blockText        = 'reseting workflow...'
                                 processRequest =  storage.drafts.security.canUpdate(document.header.identifier, document.header.schema, metadata)
                                                     .then(function(edit){
                                                         return storage.drafts.locks.get(document.header.identifier,{lockID:''})
@@ -345,10 +369,12 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                                                                 })
                                                     })
                                                     .then(function(data){
+                                                        $scope.blockText        = 'Publishing document'
                                                         return IWorkflows.updateActivity($route.current.params.workflow, 'publishRecord', { action : 'approve' })
                                                     });
                             }
                             else{
+                                $scope.blockText        = 'Publishing document'
                                 processRequest = editFormUtility.publish(document);
                             }
 
@@ -370,8 +396,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 					    $scope.validationReport = undefined;
 
 					}).finally(function(){
-                            $scope.loading = false;
-                            
+                        $scope.loading = false;
+                        $scope.blockText = undefined;
 					});
 				};
 
@@ -380,7 +406,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				//====================
 				$scope.publishRequest = function()
 				{
-					$scope.loading = true;					
+                    $scope.loading = true;
+                    $scope.blockText = 'Analyzing your document...'					
 					$scope.validationReport = {isAnalyzing:true};
                    $scope.errorMessage              = null;
 					var qDocument = $scope.getDocumentFn();
@@ -406,6 +433,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 					            $scope.validationReport = {isSaving:true};
                                 $scope.closeAddInfoDialog(true);
                                 $scope.loading = true;
+                                $scope.blockText        = 'Requesting publication'
                                 $q.when(editFormUtility.publishRequest(document,$scope.InfoDoc ? $scope.InfoDoc.additionalInfo:''))
                                 .then(function(workflowInfo) {
 
@@ -420,7 +448,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                                 }).finally(function(){
                                         $scope.loading = false;
-                                   //closeDocument()
+                                        $scope.blockText        = undefined
                                 });
 
                             });
@@ -432,6 +460,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         $scope.validationReport = undefined;
 					}).finally(function(){
                             $scope.loading = false;
+                            $scope.blockText        = undefined;
                     });
 
 				};
@@ -446,7 +475,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.saveDraft = function()
 				{
                     $scope.tab = 'edit';
-					$scope.loading = true;
+                    $scope.loading = true;
+                    $scope.blockText        = 'Saving draft document'
                    $scope.errorMessage              = null;
 					return $q.when($scope.getDocumentFn()).then(function(document)
 					{
@@ -501,7 +531,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 					}).catch(function(error){
 						showError(null,  { action: "saveDraft", error: error });
 					}).finally(function(){
-						    $scope.loading = false;
+                            $scope.loading = false;
+                            $scope.blockText        = undefined;
 					});
 				};				
 
@@ -533,7 +564,8 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 				$scope.closeDialog = function()
 				{
 					return $q.all([$scope.showCancelDialog(false)]).finally(function(){
-						$scope.loading = false;
+                        $scope.loading = false;
+                        $scope.blockText        = undefined;
 					});
 				};
 
@@ -541,6 +573,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 {
                     return $q.all([$scope.showAdditionalInfoDialog(false)]).finally(function(){
                         $scope.loading = changeLoading;
+                        $scope.blockText        = undefined;
                     });
                 };
 
@@ -548,6 +581,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 {
                     return $q.all([$scope.showWorkflowDraftDialog(false)]).finally(function(){
                         $scope.loading = changeLoading;
+                        $scope.blockText        = undefined;
                     });
                 };
 
@@ -566,7 +600,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         $scope.updateStep(tab);
                     
                     if(tab == "intro"){
-                        loadArticle(document_type);
+                        loadArticle($scope.documentType);
                         $scope.disablePreviousBtn = true;
                     }
 
@@ -625,7 +659,39 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
 				//====================
 				//
-				//====================
+                //====================
+                
+                function openUnAuthorizedDialog(){
+                    ngDialog.open({
+                        template: 'dialogUnauthorise',
+                        closeByDocument: false, showClose:false,
+                        closeByNavigation:false, closeByEscape:false,
+                        className:'ngdialog ngdialog-theme-default unauthorized-access-dialog',
+                        controller: function($scope){
+
+                                $scope.closeAccessDialog = function(){
+                                    ngDialog.close();
+                                    closeDocument(true);
+                                }
+                        }
+                    })
+                }
+
+                function loadReviousWorkflow(identifier){
+                    if($route.current.params.workflow)
+                        return;
+
+                    var query = {'data.identifier':identifier}
+                    IWorkflows.query(query, undefined, 1).then(function(workflows){
+                        if(workflows.length>0){
+                            var workflow = workflows[0];
+                            if((workflow.result||{}).action=='rejected'){
+                                $scope.rejectedWorkflow = _.find(workflow.activities, function(activity){return activity.result.action == 'reject'});
+                            }
+                        }
+                    })
+                }
+
 				function validate(document) {
                     
 					return $q.when(document).then(function(document){
@@ -648,12 +714,12 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                     var absHosts = ['https://absch.cbddev.xyz/', 'https://training-absch.cbd.int/',
                        'http://localhost:2010/', 'https://absch.cbd.int/', 'https://absch.cbddev.xyz/',
-                       'https://bch-demo.cbd.int'
+                       'https://bch-demo.cbd.int', 'https://bch.cbddev.xyz/'
                    ]
                    $timeout(function() {
                        if($route.current.params.workflow){
                            $timeout(function() {
-                               $location.url('/register/' + $filter("urlSchemaShortName")(document_type)+'/' + $route.current.params.identifier + '/view');
+                               $location.url('/register/' + $filter("urlSchemaShortName")($scope.documentType)+'/' + $route.current.params.identifier + '/view');
                            }, 100);
                        }
                        else if ($rootScope.next_url) {
@@ -668,7 +734,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                            }, 100)
                        } else {
                            $timeout(function() {
-                               $location.url('/register/' + $filter("urlSchemaShortName")(document_type));
+                               $location.url('/register/' + $filter("urlSchemaShortName")($scope.documentType));
                            }, 100);
                        }
                    }, 100);
@@ -707,7 +773,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 
                     if(!isDialog){
                         $timeout(function() {
-                            $location.path('/register/' + $filter("urlSchemaShortName")(document_type));
+                            $location.path('/register/' + $filter("urlSchemaShortName")($scope.documentType));
                         }, 1000);
                     }
 
@@ -721,7 +787,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 //============================================================
                 function documentPublished(documentInfo, workflowId) {
 
-                    toastr.info('Record published. The record will be now publicly accessible on ABSCH.');
+                    toastr.info('Record published. The record will be now publicly accessible on the Clearing-House.');
                     if(documentInfo.header.schema!= 'contact'){
                         localStorageService.set('workflow-activity-status', {
                             identifier : documentInfo.header.identifier, type:'publish',
@@ -730,7 +796,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     }
                     if(!isDialog){
                         $timeout(function() {
-                            $location.path('/register/' + $filter("urlSchemaShortName")(document_type));
+                            $location.path('/register/' + $filter("urlSchemaShortName")($scope.documentType));
                         }, 1000);
                     }
 
@@ -743,10 +809,11 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         return;
 
                     $scope.loading = true;
+                    $scope.blockText        = 'loading Information about the form';
                     var ag = [];
                     ag.push({"$match":{"adminTags.title.en": { "$all" :
                         [   encodeURIComponent('edit-form'), encodeURIComponent(realm.value.replace(/(\-[a-zA-Z]{1,5})/, '')),
-                            encodeURIComponent($filter("urlSchemaShortName")(document_type))]}}
+                            encodeURIComponent($filter("urlSchemaShortName")($scope.documentType))]}}
                     });
                     ag.push({"$project" : {"title":1, "content":1, "_id":1}});
                     
@@ -760,6 +827,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     })
                     .finally(function(){
                         $scope.loading = false;
+                        $scope.blockText        = undefined;
                     })
                 }
 
@@ -803,9 +871,22 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
 					});
 				}
 
-
+                function loadOfflineFormatDetails(){
+                    if(realm.is('BCH')){
+                        commonjs.loadJsonFile('/app/app-data/bch/offline-formats.json')
+                        .then(function(data){
+                            $scope.offlineFormats = data;
+                            $timeout(function(){
+                                $element.find("[data-toggle='tooltip']").tooltip({
+                                    trigger: 'hover'
+                                });
+                            }, 100)
+                        })
+                    }
+                }
                 //============================================================
                 $scope.loadSecurity();
+                loadOfflineFormatDetails();
 
 
 
@@ -863,6 +944,9 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         }
                     });
                     function confirmLeaving(evt, next, current) {
+                        if($scope.security.canSaveDraft==false)
+                            return;
+
                         var formChanged = !angular.equals($scope.getDocumentFn(), originalDocument);
 
                         if(formChanged)

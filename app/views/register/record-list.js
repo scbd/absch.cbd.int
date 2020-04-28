@@ -9,10 +9,11 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
 
         app.controller("registerRecordList", ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
             'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", 
-            "$element", "breadcrumbs", "localStorageService", "ngDialog", "appConfigService",
+            "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm', 'ngMeta',
             function ($timeout, commonjs, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
-                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, appConfigService) {
+                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, realm, ngMeta) {
 
+                $scope.languages = commonjs.languages;
                 $scope.orderBy = ['-updatedOn'];
                 $scope.amendmentDocument = {locales:['en']};
 
@@ -26,6 +27,8 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
                     breadcrumbs.options = {
                         'document_type': $filter("schemaName")(type)
                     };
+                    ngMeta.resetMeta();                       
+                    ngMeta.setTitle('List | ', $filter("schemaName")(type));
                 }
                 $scope.toggleOrderBy = function (key) {
                     if (key == $scope.orderBy[0].substr(1))
@@ -38,7 +41,7 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
                     $('#' + key.split('|')[0] + 'Header').append(' <span class="ordericon glyphicon glyphicon-chevron-' + direction + ' text-primary"></span>');
                 };
 
-                if(_.includes(appConfigService.nationalSchemas, $filter('mapSchema')($scope.schema)))
+                if(_.includes(realm.nationalSchemas, $filter('mapSchema')($scope.schema)))
                 $scope.schemaType = 'nationalRecords';
                 else
                 $scope.schemaType = 'referenceRecords';
@@ -309,8 +312,9 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
                         roleService.isNationalAuthorizedUser() ||
                         roleService.isNationalFocalPoint() ||
                         roleService.isIAC() ||
-                        roleService.isAdministrator() ||
-                        _.contains(['contact', 'resource', 'modelContractualClause', 'communityProtocol', 'capacityBuildingResource', 'capacityBuildingInitiative'], $scope.schema);
+                        roleService.isAdministrator()|| 
+                        roleService.isPublishingAuthority($scope.schema) ||
+                        roleService.isNationalAuthorizedUser($scope.schema);
 
                 }
 
@@ -467,9 +471,9 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
 
                         return $scope.records;
                     })
-                        .finally(function () {
-                            $scope.loading = false;
-                        });
+                    .finally(function () {
+                        $scope.loading = false;
+                    });
                 }
                 
                 function recordDeleted(doc, isDraft) {
@@ -576,7 +580,7 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
 
                 function loadmyTasks(schema){
 
-                    if(!_.contains(appConfigService.referenceSchemas, schema)){
+                    if(!_.contains(realm.referenceSchemas, schema)){
 
                         var defer = $q.defer();
                         defer.resolve([]);
@@ -588,7 +592,7 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
                             $and : [
                                 { "activities.assignedTo" : myUserID } ,
                                 { "closedOn"             : { $exists : false } },
-                                { "data.realm"           : appConfigService.currentRealm },
+                                { "data.realm"           : realm.value },
                                 { "data.metadata.schema" : schema }
                             ]
                         };
@@ -597,7 +601,19 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
 
                 }
 
+                function loadOfflineFormatDetails(){
+                    if(realm.is('BCH')){
+                        commonjs.loadJsonFile('/app/app-data/bch/offline-formats.json')
+                        .then(function(data){
+                            $scope.offlineFormats = data;
+                            $element.find("[data-toggle='tooltip']").tooltip({
+                                trigger: 'hover'
+                            });
+                        })
+                    }
+                }
                 loadRecords();
+                loadOfflineFormatDetails();
 
             }]);
 

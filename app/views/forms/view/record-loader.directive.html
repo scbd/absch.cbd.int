@@ -1,9 +1,21 @@
 ﻿<div>
+    <link rel="stylesheet" href="/app/css/record.css">
     <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'" ng-if="printMode"></div>
-    
+    <style>
+        ins {
+                text-decoration: none;
+                background-color: #d4fcbc;
+        }
+
+        del {
+                text-decoration: line-through;
+                background-color: #fbb6c2;
+                color: #555;
+        }
+    </style>
     <div id="recordContent">
         <div smooth-scroll duration="100" offset="200" scroll-if="{{!$root.stopSmoothScroll}}"></div>
-        <div block-region activate="loading"></div>
+        <div block-region activate="loading||isComparing"></div>
 
         <div class="alert alert-danger text-center" ng-show="error" ng-if="error">
             <strong>Error as occured...</strong>
@@ -87,10 +99,19 @@
             </div>
         </div>
 
-        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;">
+        <div ng-if="showDifferenceButton" class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;">
+            <button ng-disabled="isComparing" class="btn btn-success btn-xs" ng-click="showDifference()">
+                <i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> Show Difference
+            </button>
+            <!-- for comparing with older versions -->
+            <div ng-if="showDifferenceButton" style="display: none;">
+                <div id="compareSchemaView"></div>
+            </div>
+        </div>
+        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;" ng-if="!loading">
             <div record-options></div>
         </div>
-
+        <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> loading...</span>
         <div id="schemaView" ng-show="internalDocument"></div>
     </div>
     <div id="printContentFooter" ng-if="printMode" ng-include="'/app/views/forms/view/print-footer.html'"></div>

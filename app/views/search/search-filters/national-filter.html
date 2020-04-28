@@ -3,14 +3,26 @@
       <div  class="col-md-6" ng-show="nf_filters.length" style="margin-bottom:30px;" >
         <div class="heading color-blue" ng-if="nf_filters.length">National Records </div>
         <hr  class="heading" ng-if="nf_filters.length">
-        <p class="helpinfo" ng-if="nf_filters.length" ><i class="fa fa-info-circle helpicon" ></i> National records are published by Governments and include national information relevant for the implementation of the Nagoya Protocol as well as information Parties are obliged to provide in accordance with the Protocol.</p>
-        
-        <div ng-repeat="doc in nf_filters = (nf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])">
+        <p class="helpinfo" ng-if="nf_filters.length" >
+          <i class="fa fa-info-circle helpicon" ></i> 
+          <span ng-if="realm.is('ABS')">
+            National records are published by Governments and include national information relevant for the implementation of the Nagoya Protocol as well as information Parties are obliged to provide in accordance with the Protocol.
+          </span>
+          <span ng-if="realm.is('BCH')">
+            National records are submitted and published by Governments and contain information that is part of a Party’s obligations under the Cartagena Protocol on Biosafety, as mandated by Article 20, and is relevant to the implementation of the Protocol.
+          </span>
+        </p>
+        <style>
+            .contact-spacing{
+              margin-top: 25px;
+            }          
+        </style>
+        <div ng-repeat="doc in nf_filters = (nf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])" ng-class="{'contact-spacing': doc.id=='contact'}">
             
-            <a translation-url  class="filter"  ng-click="saveFilter(doc)">
+            <a translation-url  class="filter"  ng-click="saveFilter(doc)" ng-class="{'disabled':!$parent.searchResult.data.facets.schemas[doc.id]}">
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> 
                 {{doc.name}}
-                <!--<span class="badge">100</span>-->
+                <strong>({{$parent.searchResult.data.facets.schemas[doc.id]||0}})</strong>
             </a>
             <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon" ng-if="doc.description"></i> {{doc.description}} </p>-->
             
@@ -26,7 +38,7 @@
         <div ng-repeat="doc in nf_status = (nf_partyStatus | filter:searchKeyword | orderBy:['filterSort', 'sort'])">
             
             <a translation-url  class="filter"  ng-click="saveFilter(doc)">
-                <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id), 'color-party':doc.id==='npParty', 'color-litegrey':doc.id==='npNonParty', 'color-inbetween':doc.id==='npInbetween'}"></i> 
+                <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id), 'color-party':doc.id==='partyToProtocol', 'color-litegrey':doc.id==='nonParty', 'color-inbetween':doc.id==='inbetween'}"></i> 
                 {{doc.name}}
                 <!--<span class="badge">100</span>-->
             </a>

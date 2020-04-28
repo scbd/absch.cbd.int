@@ -7,18 +7,20 @@ define([
     'views/forms/edit/document-selector',
     'views/register/directives/register-top-menu',
     'components/scbd-angularjs-services/services/locale',
-    'views/directives/workflow-arrow-buttons'
+    'views/directives/workflow-arrow-buttons', 'services/app-config-service',
+    'services/thesaurus-service'
 ], function (app, _, Enumerable) {
   
-  app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "Thesaurus", "$q", "$location", "IStorage",
+  app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "thesaurusService", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
-                                   "breadcrumbs", "appConfigService", "locale", 'ngMeta',
-                                    function ($rootScope, $scope, $http, $window, guid, $filter, thesaurus, $q, $location, storage,
+                                   "breadcrumbs", "appConfigService", "locale", 'ngMeta', "realm",
+                                    function ($rootScope, $scope, $http, $window, guid, $filter, thesaurusService, $q, $location, storage,
                                               authentication, editFormUtility, $routeParams, $timeout, $route, 
-                                              breadcrumbs, appConfigService, locale, ngMeta) {
+                                              breadcrumbs, appConfigService, locale, ngMeta, realm) {
 
-
-    $scope.type = $route.current.$$route.documentType;
+    $scope.realm = realm;
+    //incase if open from dialog use the type passed by the dialog
+    $scope.type = $scope.type || $route.current.$$route.documentType;
     
     if(_.includes(appConfigService.nationalSchemas, $filter('mapSchema')($scope.type)))
       $scope.schemaType = 'nationalRecords';
@@ -31,20 +33,22 @@ define([
       $scope.tab      = "edit";
     $scope.review   = { locale: locale };
 
-    var breadcrumb = {    
-        label : $filter('schemaName')($filter('mapSchema')($scope.type)),
-        originalPath : "/register/:document_type",
-        param:$scope.type,
-        path:"/register/" + $scope.type
+    if(!$scope.isDialog){
+      var breadcrumb = {    
+          label : $filter('schemaName')($filter('mapSchema')($scope.type)),
+          originalPath : "/register/:document_type",
+          param:$scope.type,
+          path:"/register/" + $scope.type
+      }
+      breadcrumbs.breadcrumbs.splice(2, 0 , breadcrumb);
     }
-    breadcrumbs.breadcrumbs.splice(2, 0 , breadcrumb);
-
-    $scope.options  = {
+    
+    $scope.options  = {                
       countries		: function() {
-        return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function(o){
-          var countries = $filter("orderBy")(o.data, "name");
+        return thesaurusService.getDomainTerms('countries').then(function(o){
+          var countries = $filter("orderBy")(o, "name");
           _.each(countries, function(element) {
-            element.__value = element.name;
+            element.__value = $filter('lstring')(element.title, locale);
           });
           return countries;
         });
@@ -66,11 +70,9 @@ define([
       },
     };
 
-    $scope.ac_countries = function() {
-      return $scope.options.countries();
-    };
-
     $scope.genericFilter = function($query, items) {
+      if(!items)
+        return;
       var matchedOptions = [];
       for(var i=0; i!=items.length; ++i)
         if(items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
@@ -79,6 +81,15 @@ define([
       return matchedOptions;
     };
 
+    $scope.startsWithFilter = function($query, items) {
+      var matchedOptions = [];
+      for(var i=0; i!=items.length; ++i)
+          if(_.startsWith(items[i].__value.toLowerCase(), $query.toLowerCase()))
+              matchedOptions.push(items[i]);
+
+      return matchedOptions;
+    };
+    
     $scope.genericMapping = function(item) {
       return {identifier: item.identifier};
     };
@@ -102,7 +113,7 @@ define([
     //==================================
     $scope.$watch("tab", function(tab) {
       if(tab == "review" || tab=='publish')
-       $scope.reviewDocument = $scope.getCleanDocument();
+       $scope.review.document = $scope.getCleanDocument();
     });
 
 
@@ -131,7 +142,7 @@ define([
       if(name=="ebsa" ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:ebsa";   });
 
       return false;
-  };
+    };
 
     //==================================
     //
@@ -168,7 +179,7 @@ define([
       var qJurisdiction = Enumerable.from([document.jurisdiction]);
 
       return qJurisdiction.any(function (o) { return o.identifier == "528B1187-F1BD-4479-9FB3-ADBD9076D361"; });
-  };
+    };
 
     //==================================
     //
@@ -325,12 +336,12 @@ define([
     }
 
     $scope.setDocument = function(additionalParams, excludeGovernment) {
-
+      
       $scope.status = "loading";
 
       var qDocument = {};
       $scope.document = {};
-      if($routeParams.identifier)
+      if(!$scope.isDialog && $routeParams.identifier)
         qDocument = editFormUtility.load($routeParams.identifier, $filter("mapSchema")($scope.type));
       else {
         qDocument = {
@@ -361,7 +372,7 @@ define([
 
         $scope.origanalDocument = angular.copy(doc);
 
-        if($routeParams.tour)
+        if(!$scope.isDialog && $routeParams.tour)
         {
             $scope.startTour=true;
             $location.search("tour", null);
@@ -382,6 +393,52 @@ define([
 
     $scope.onReviewLanguageChange = function(lang){
       $scope.review.locale = lang;
+    }
+
+    $scope.onPostPublishOrRequest = function(documentInfo){
+      if($scope.onPostSubmitFn)
+        $scope.onPostSubmitFn({ data: documentInfo });
+    };
+
+    $scope.sanitizeDocument = function(document){
+
+      if(!document) return;
+
+      document = sanitize(document);
+      return document;
+
+      function sanitize(doc){
+        _.each(doc, function(fieldValue, key){
+          
+          if(_.isString(fieldValue) && _.trim(fieldValue||'') == ''){
+            fieldValue = undefined;
+          }
+          else if(_.isArray(fieldValue)){
+            fieldValue = sanitize(fieldValue);
+            fieldValue = _.compact(fieldValue);
+            
+            if(_.isEmpty(fieldValue))
+              fieldValue = undefined;
+          }
+          else if(_.isPlainObject(fieldValue)){
+            fieldValue = sanitize(fieldValue);
+            fieldValue = _.omit(fieldValue, isNullOrUndefinedOrEmpty);
+          }
+
+          doc[key] = fieldValue;
+
+        });
+        
+        if(_.isArray(doc))
+          doc = _.compact(doc)
+        else if(_.isPlainObject(doc))
+          doc = _.omit(doc, isNullOrUndefinedOrEmpty);
+        
+        return doc;
+      }
+      function isNullOrUndefinedOrEmpty(v){
+        return v === undefined || v === null || (_.isObject(v) && _.isEmpty(v));
+      }
     }
 
     function setMetaTags(){

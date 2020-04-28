@@ -1,13 +1,53 @@
 ﻿<div>
-    <ul class="pagination ">
-        <li ng-class="{disabled: currentPage == 0}">
-            <a translation-url href ng-click="actionSetPage(currentPage-1)">« Prev</a>
+    <ul class="pagination">
+        <li class="hidden-xs disabled">
+            <a disabled>
+                <strong>Page <span ng-bind="currentPage"></span> of <span ng-bind="pageCount"></span></strong>
+            </a>
         </li>
-        <li ng-repeat="n in range(pageCount)" ng-class="{active: n == currentPage}" ng-click="actionSetPage(n)">
+        <li ng-class="{'disabled': currentPage-1 == 0}" class="hidden-xs">
+            <a ng-disabled="currentPage-1 == 0" 
+                translation-url href ng-click="actionSetPage(1)">« First</a>
+        </li>
+        <li ng-class="{'disabled': currentPage-1 == 0}" >
+            <a ng-disabled="currentPage-1 == 0" 
+                translation-url href ng-click="actionSetPage(currentPage-1)">‹ <span class="hidden-xs">Prev</span></a>
+        </li>
+        <li ng-repeat="n in range(pageCount)" ng-class="{active: n+1 == currentPage}" ng-click="actionSetPage(n+1)">
             <a translation-url href>{{n+1}}</a>
         </li>
-        <li ng-class="{disabled: currentPage >= pageCount - 1}">
-            <a translation-url href ng-click="actionSetPage(currentPage+1)">Next »</a>
+        <li ng-class="{'disabled': currentPage-1 >= pageCount - 1}">
+            <a ng-disabled="currentPage-1 >= pageCount - 1" 
+                translation-url href ng-click="actionSetPage(currentPage+1)">
+                <span  class="hidden-xs">Next</span> ›</a>
+        </li>
+        <li ng-class="{'disabled': currentPage-1 >= pageCount - 1}"  class="hidden-xs">
+            <a  ng-disabled="currentPage-1 >= pageCount - 1"
+                translation-url href ng-click="actionSetPage(pageCount)">Last »</a>
+        </li>
+        <li class="hidden-xs disabled">
+            <a disabled>
+                <strong> <span ng-bind='((currentPage-1)*pageSize)+1 + " - " + (currentPage*pageSize>numFound ? numFound:currentPage*pageSize)'></span> of 
+                         <span ng-bind="(pageCount*pageSize)>numFound ? numFound:pageCount*pageSize"></span>
+                </strong>
+            </a>
+        </li>
+        <li class="hidden-xs ">
+                <a disabled>
+                Items per page
+                <select ng-model="pageSize" ng-change="onPageSizeChanged({size:pageSize});">
+                    <option ng-value="25">25</option>
+                    <option ng-value="50">50</option>
+                    <option ng-value="100">100</option>
+                    <option ng-value="200">200</option>
+                    <option ng-value="300">300</option>
+                </select>
+            </a>
         </li>
     </ul>
+
+    <!-- For Search crawlers create hidden href -->
+    <div style="display: none">
+        <a ng-repeat="n in range(pageCount)" ng-href="/search?currentPage={{n+1}}" translation-url ng-bind="n+1"></a>
+    </div>
 </div>

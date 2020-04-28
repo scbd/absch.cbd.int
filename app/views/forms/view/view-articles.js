@@ -3,7 +3,7 @@ define(['app','underscore',
   'components/scbd-angularjs-services/services/locale',
   'services/articles-service',
   'ng-breadcrumbs',
-  'views/directives/pagination'
+  'components/scbd-angularjs-controls/form-control-directives/pagination'
 ], function(app, _) {
 
   app.controller("viewArticles",

@@ -211,11 +211,12 @@ define(['app', 'underscore', 'views/forms/edit/edit', '../view/view-capacity-bui
         if(document.typeInfo)
             delete document.typeInfo;
             
-        return document;
+        return $scope.sanitizeDocument(document);
       };
 
-    $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});
-    $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
+    $scope.setDocument({});
+    if($scope.realm.is('ABS'))
+        $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
 
   }]);
 });

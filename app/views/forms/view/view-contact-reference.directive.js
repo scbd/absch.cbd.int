@@ -29,7 +29,7 @@ define(['app', "text!views/forms/view/view-contact-reference.directive.html",'un
 				function checkCNA(doc) {
 					if(!doc)
 						return false;
-				if(!doc.type && doc.header){
+					if(!doc.type && doc.header){
 						if(doc.header.schema==='authority') {
 							doc.type = "CNA";
 							return true;

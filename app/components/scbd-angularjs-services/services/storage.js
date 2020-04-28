@@ -1,7 +1,7 @@
-﻿define(['app', 'lodash'], function(app, _) {
+﻿define(['app', 'lodash','services/cache-service'], function(app, _) {
     'use strict';
 
-    app.factory("IStorage", ["$http", "$q", "authentication", "realm", function($http, $q, authentication, defaultRealm) {
+    app.factory("IStorage", ["$http", "$q", "authentication", "realm", 'cacheService', function($http, $q, authentication, defaultRealm, cacheService) {
         //		return new function()
         //		{
         var serviceUrls = { // Add Https if not .local
@@ -41,6 +41,8 @@
             },
         };
 
+        var storageDocumentCacheFactory = cacheService.getCacheFactory({name:'storageDocument', storageMode:'localStorage', maxAge:30*60*1000})//1/2 hr cache for terms
+
         //==================================================
         //
         // Documents
@@ -76,7 +78,14 @@
                 params.identifier = identifier;
 
                 var useCache = !!params.cache;
-
+                if(!useCache){//special logic for records with revision @[0-9]{1,3} cache them as there will be no change
+                    var revisionRegex =  /@([0-9]{1,3})/;
+                    if(revisionRegex.test(identifier))
+                        useCache = true;
+                }
+                if(useCache)
+                    useCache = storageDocumentCacheFactory;
+                    
                 var oTrans = transformPath(serviceUrls.documentUrl(), params);
 
                 return $http.get(oTrans.url, getConfig(config, oTrans.params, useCache));
@@ -406,7 +415,19 @@
 
             "getMimeType": function(file) {
                 return getMimeTypes(file.name, file.type || "application/octet-stream");
-            }
+            },
+
+            mimeTypeWhitelist : [
+                "application/json","application/ogg","application/pdf","application/xml","application/zip",
+                "application/x-zip","application/x-zip-compressed","audio/mpeg","audio/x-ms-wma","audio/x-wav",
+                "image/gif","image/jpeg", "image/png","image/bmp",
+                "image/tiff",
+                "text/csv","text/html","text/plain","text/xml","video/mpeg","video/mp4","video/quicktime",
+                "video/x-ms-wmv","video/x-msvideo","video/x-flv","application/vnd.oasis.opendocument.text",
+                "application/vnd.oasis.opendocument.spreadsheet","application/vnd.oasis.opendocument.presentation","application/vnd.oasis.opendocument.graphics",
+                "application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","application/vnd.ms-powerpoint","application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            ]
         };
 
         //==================================================

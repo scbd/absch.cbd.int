@@ -56,11 +56,18 @@
 								</div>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="website" required caption="Website address">
+										<div class="km-control-group" name="websites" required caption="Website address">
 											<div class="help-info">Please provide the full URL of the website (e.g. http://www.cbd.int).</div>
-											<input type="url" ng-model="document.website.url" required class="form-control" placeholder="example: http://www.cbd.int" />
+											<div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="example: http://www.cbd.int"></div>
 										</div>
 									</div>
+								</div>
+							</section>
+
+							<section ng-if="realm.is('BCH')">
+								<legend>Timeframe for confirmation or updating of information</legend>
+								<div class="help-info">
+									Please note that this category of information requires confirmation or updating after one year from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Not Confirmed”.
 								</div>
 							</section>
 
@@ -94,9 +101,8 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="km-control-group" name="notes">
-											<div class="help-info">The “Notes” field is for your personal notes or comments and will be hidden when
-												viewing the record. This field is not meant to be used for confidential information.</div>
-											<textarea class="form-control" name="notes" ng-model="document.notes" rows="4"></textarea>
+											<div class="help-info">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
 									</div>
 								</div>
@@ -106,7 +112,7 @@
 					</form>
 				</edit-form>
 				<review-form>
-					<view-database ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></view-database>
+					<view-database ng-model="review.document" locale="review.locale" allow-drafts="true"></view-database>
 				</review-form>
 				<!-- <publish-form></publish-form> -->
 				<!-- use when you wan to display more than publish buttons -->

@@ -49,14 +49,20 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.scbdApp.host||'')
                     return realmRe.test(realmConfig.realm);
                 },
 
-                getRole : function(roleName, schema) {
+                getRole : function(roleName, schema, schemaType) {
                     var patchedRoleName = patchRoleName(roleName);
                     var roles;
-
-                    if(schema)
-                        roles = realmConfig.schemas[schema][patchedRoleName]
-
-                    roles = roles || realmConfig.roles[patchedRoleName];
+                    if(schema){
+                        var schemaDetails = realmConfig.schemas[schema];
+                        roles = schemaDetails[patchedRoleName]; //get specific role [PA, NAU, NFP]
+                        
+                        // if roles are not overridden then apply fallback roles National/Reference
+                        roles = roles || this.fallbackRoles(schemaDetails.type, patchedRoleName);
+                    }
+                    else if(schemaType)
+                        roles = this.fallbackRoles(schemaType, patchedRoleName);
+                    else 
+                        roles = realmConfig.roles[patchedRoleName];
                     
                     if(!roles)
                         console.warn(roleName + ' role is not configured for realm ' + realmConfig.realm + ', please update realm-configuration');
@@ -64,20 +70,54 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.scbdApp.host||'')
                     return roles || [roleName];
                 },
                 
-                nationalRoles : function(skipSchemaRoles) {
-                    return _(skipSchemaRoles ? [] : this.nationalSchemaRoles())
-                            .union(_(realmConfig.roles).values().value())
+                nationalRoles : function(schema) {
+                    var nationalfallbackRoles = _(realmConfig.roles).map('publishingAuthorities','nationalAuthorizedUser','nationalFocalPoint').values().value();
+                    
+                    var schemas = realmConfig.schemas[schema] ? [realmConfig.schemas[schema]] : realmConfig.schemas;
+                    var nationalSchemRoles    =  _(schemas)
+                            .map(function(schema, key){
+                                if(schema.type == 'national' && key != 'contact')
+                                    return _.union(schema.publishingAuthorities||[], schema.nationalAuthorizedUser||[])
+                            }).flatten().compact().uniq().value();
+
+                    return _(nationalSchemRoles).union(nationalfallbackRoles)
                             .flatten().compact().uniq().without('User', 'user').value();
                 },
                 nationalSchemaRoles : function(schema){
-                    var schemas = realmConfig.schemas[schema] ? [realmConfig.schemas[schema]] : realmConfig.schemas;
-                    return _(schemas)
-                            .map(function(schema){
-                                if(schema.type == 'national')
-                                    return _.union(schema.publishingAuthorities||[], schema.nationalAuthorizedUser||[])
-                            })
-                            .flatten().compact().uniq().value();
+                    console.warn("OBSOLETE: use realm.nationalRoles();");
+                    
+                    return this.nationalRoles(schema);    
+                },
+                schemaRoles : function(schema, roleName){
+                    var schemaDetails = realmConfig.schemas[schema];
+                    var roles = [];
+                    
+                    if(roleName){
+                        roles = schemaDetails[role]; //get specific role PA OR NAU oR NFP                    
+                        roles = roles || this.fallbackRoles(schemaDetails.type, roleName);
+                    }
+                    else {
+                        roles = _.union(schemaDetails.publishingAuthorities||this.fallbackRoles(schemaDetails.type, 'publishingAuthorities'), 
+                                        schemaDetails.nationalAuthorizedUser||this.fallbackRoles(schemaDetails.type, 'nationalAuthorizedUser'));
+                        
+                    }
+                    
+                    return _(roles).flatten().compact().uniq().value();
     
+                },
+                fallbackRoles: function(schemaType, roleName){
+                    if(schemaType == 'national')
+                        return realmConfig.roles[roleName];
+                    else if(schemaType == 'reference'){
+                        if(roleName == 'publishingAuthorities')//For all other type SCBD should be Admin
+                            return realmConfig.roles['scbdPublishingAuthorities'] || realmConfig.adminRoles; 
+                        else
+                            return ['User'];// Any registered user can submit request
+                    }
+                    else
+                        console.warn(schemaType + ' is invalid schemaType for role' + roleName);
+                    
+                    return [roleName];
                 }
             };
         }];

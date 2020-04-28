@@ -1,29 +1,27 @@
 define(['app', 'underscore', 'angular', 'services/articles-service', 
- 'services/role-service', 'services/app-config-service',
+ 'services/role-service', 'services/app-config-service', 'js/common',
  'views/register/directives/register-top-menu', 'toastr','components/scbd-angularjs-services/services/main', 
  'views/register/directives/top-records', 'views/register/directives/top-requests', 'ngDialog'],
 function(app, _, ng) {
     "use strict";
     return ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
-                    "$routeParams", '$location', "$filter", "ngDialog", "$timeout", 'toastr', 'appConfigService',
-                    'IWorkflows',
+                    "$routeParams", '$location', "$filter", "ngDialog", "$timeout", 'toastr',
+                    'IWorkflows', 'commonjs',
         function($rootScope, $scope, storage, roleService, articlesService, realm, $q, $routeParams, 
-                $location, $filter, ngDialog, $timeout, toastr, appConfigService, IWorkflows) {
+                $location, $filter, ngDialog, $timeout, toastr, IWorkflows, commonjs) {
             
+            $scope.schemas          = realm.schemas        
+            $scope.languages        = commonjs.languages;
             $scope.Math             = window.Math;
-            $scope.nationalSchemas  = _.without(appConfigService.nationalSchemas, 'contact', 'focalPoint');
-            $scope.referenceSchemas = _.without(appConfigService.referenceSchemas, 'capacityBuildingResource');
+            $scope.nationalSchemas  = _.without(realm.nationalSchemas, 'contact', 'focalPoint');
+            $scope.referenceSchemas = _.without(realm.referenceSchemas, 'capacityBuildingResource');
             $scope.topRecords       = {};
             $scope.user             = $rootScope.user;
             $scope.showRecords      = true;
             $scope.isBch            = realm.is('BCH');
+            $scope.isAbs            = realm.is('ABS');
 
             var schemaFacets = {};
-
-            $timeout(function(){
-                ng.element('ng-view').find('[data-toggle="tooltip"]').tooltip();                
-            },50);
-
 
             //====================================================================================
             $scope.isFilter = function(filter) {
@@ -39,7 +37,8 @@ function(app, _, ng) {
                     isNationalAuthorizedUser: roleService.isNationalAuthorizedUser(),
                     isUser                  : roleService.isUser(),
                     isNationalSchemaUser    : roleService.isNationalSchemaUser,
-                    isNationalUser          : roleService.isNationalUser()
+                    isNationalUser          : roleService.isNationalUser(),
+                    isSchemaUser            : roleService.isSchemaUser
                 };
 
                 if($scope.user.government)
@@ -91,11 +90,22 @@ function(app, _, ng) {
                 })
 
             }
+
+            $scope.toggleTooTip = function(){
+                $timeout(function(){
+                    ng.element('#welcomeSection').find('[data-toggle="tooltip"]').tooltip();  
+                }, 200)
+            }
             
             function init(){                      
                 loadFacets();
-                if($scope.isBch)
+                if($scope.isBch){
+                    commonjs.loadJsonFile('/app/app-data/bch/offline-formats.json')
+                    .then(function(data){
+                        $scope.offlineFormats = data;
+                    })
                     loadArticle();
+                }
             }
 
             function loadFacets() {
@@ -157,7 +167,7 @@ function(app, _, ng) {
                                 $and : [
                                     { "activities.assignedTo": myUserID } ,
                                     { "closedOn"             : { $exists : false } },
-                                    { "data.realm"           : appConfigService.currentRealm },
+                                    { "data.realm"           : realm.value },
                                     { "data.metadata.schema" : schema }
                                 ]
                             };
@@ -182,6 +192,10 @@ function(app, _, ng) {
             }
 
             init();
+
+            $timeout(function(){
+                ng.element('#RegisterPage').find('[data-toggle="tooltip"]').tooltip();                
+            },100);
         }
     ];
 });

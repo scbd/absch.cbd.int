@@ -6,17 +6,16 @@
 		</h4>
 	</div>
 	<div class="record-body panel-body">
-
-			<document-date></document-date>
+		<document-date></document-date>
 		<div ng-show="document.type=='organization'">
 
 
 
             <legend>Organization</legend>
 			<div ng-show="document.government">
-				<label>Government</label>
+				<label>Country</label>
 				<div class="km-value">
-					{{document.government | term}}
+					{{document.government | term:locale}}
 					<span ng-party-status government="document.government" id="government"></span>
 				</div>
 			</div>
@@ -29,7 +28,7 @@
 			<div ng-show="document.organizationType">
 				<label>Type of organization</label>
 				<div class="km-value">
-					{{document.organizationType | term}}
+					{{document.organizationType | term:locale}}
 				</div>
 			</div>
 
@@ -39,9 +38,9 @@
 		<div ng-show="document.type=='person'">
              <legend>Person</legend>
 			 <div ng-show="document.government">
-  			   <label>Government</label>
+  			   <label>Country</label>
   			   <div class="km-value">
-  				   {{document.government | term}}
+  				   {{document.government | term:locale}}
 				   <span ng-party-status government="document.government" id="government"></span>
   			   </div>
   		   </div>
@@ -71,13 +70,13 @@
             <div ng-show="document.contactOrganization">
 				<legend>Organization</legend>
 				<div class="km-value">
-					<view-contact-reference ng-model='document.contactOrganization' locale="document.header.languages"></view-contact-reference>
+					<view-contact-reference ng-model='document.contactOrganization' locale="locale"></view-contact-reference>
 				</div>
 			</div>
 
 		</div>
 		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
-			<label>Address</label>
+			<label>Address of Contact</label>
 			<address class="km-value">
 				<div class="km-pre">{{document.address | lstring:locale}}</div>
 				{{document.city | lstring:locale}}
@@ -85,7 +84,7 @@
 				{{document.state | lstring:locale}}
 				<br ng-show="document.city || document.state" /> {{document.postalCode | lstring:locale}}
 				<span ng-show="document.postalCode">, </span>
-				<b>{{document.country|term}}</b>
+				<b>{{document.country|term:locale}}</b>
 			</address>
 		</div>
         <div ng-show="document.phones" >
@@ -120,7 +119,6 @@
             <label>Web Sites</label>
             <div class="km-value" ng-repeat="item in document.websites">
                 <a translation-url  target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-                <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
             </div>
         </div>
 
@@ -136,11 +134,13 @@
 					<label>Other relevant website address or attached documents</label>
 					<div class="km-value" ng-repeat="item in document.relevantDocuments">
 						<a translation-url  target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 					</div>
 				</div>
 			</div>
 
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
 		</div>
 
 

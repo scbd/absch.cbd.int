@@ -1,7 +1,7 @@
-define(['app', 'text!views/search/search-filters/country-filter.html','underscore', 'js/common',
+define(['app', 'text!views/search/search-filters/country-filter.html','lodash', 'js/common',
 ], function(app, template, _) {
 
-    app.directive('countryFilter', function() {
+    app.directive('countryFilter', ['locale', function(locale) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -51,7 +51,7 @@ define(['app', 'text!views/search/search-filters/country-filter.html','underscor
                     if(!$scope.cf_countryFilter) 
                         return cf_filterParty(item);
                     else{
-                        if(item.name[0] === $scope.cf_countryFilter)
+                        if(item.name[locale].charAt(0) === $scope.cf_countryFilter)
                             return cf_filterParty(item);
                     }
                };
@@ -62,5 +62,5 @@ define(['app', 'text!views/search/search-filters/country-filter.html','underscor
 
             }//link
         };
-    });
+    }]);
 });

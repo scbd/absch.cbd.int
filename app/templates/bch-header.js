@@ -1,4 +1,4 @@
-define(['app', 'text!./bch-header.html','ng-breadcrumbs', 'js/common', 'components/scbd-angularjs-services/services/locale'], function (app, html) { 'use strict';
+define(['app', 'text!./bch-header.html','lodash', 'ng-breadcrumbs', 'js/common', 'components/scbd-angularjs-services/services/locale'], function (app, html, _) { 'use strict';
 
     app.directive('bchHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q',  function (locale, $location, breadcrumbs, commonjs, $q) {
         return {
@@ -20,6 +20,14 @@ define(['app', 'text!./bch-header.html','ng-breadcrumbs', 'js/common', 'componen
                         $location.path('/search/nationalRecords').search({text : ($scope.searchQuery||'')})
                         $scope.searchQuery='';
                     }
+                }
+
+                $scope.countrySearch = function($event){
+                    $event.stopPropagation()
+                }
+
+                $scope.startsWith = function(item){
+                   return !$scope.countrySearchQuery || _.startsWith(item.name[locale].toLowerCase(), $scope.countrySearchQuery.toLowerCase());
                 }
             }
         };

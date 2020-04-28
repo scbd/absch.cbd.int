@@ -73,7 +73,7 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                         if (query.length >= minchars && $scope.filteredLength <= maxmatches || $scope.buttonActivated) //buttonActivated => only using arrow keys. Display hasn't changed
                             $scope.showOptions();
                         else
-                            $element.find('.list-group').hide();
+                            $scope.hideOptions();//$element.find('.list-group').hide();
                     });
                 };
 
@@ -210,29 +210,40 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
 
                 //////Visual Functions//
                 $scope.removeSpan = function(index) {
+                    
                     $scope.binding.splice(index, 1);
                     $scope.displaySpans.splice(index, 1);
                 };
 
                 //Toggle whether or not to show the all options
                 $scope.toggleAllOptions = function(buttonActivate) {
-                    if (buttonActivate)
-                    //TODO: rename to 'showAll' or something
+                    
+                    if (buttonActivate) //TODO: rename to 'showAll' or something                   
                         $scope.buttonActivated = true;
-                    if ($element.find('.list-group').is(':hidden') || $element.find('#' + $scope.title).is(':focus')) {
+
+                    if (buttonActivate ||$element.find('.list-group').is(':hidden') || $element.find('#' + $scope.title).is(':focus')) {
                         $scope.showOptions();
                     } else
                         $scope.hideOptions();
                 };
                 $scope.showOptions = function() {
-                    $element.find('.list-group').show();
+                    
+                    $scope.showList = true;
+                    $timeout(function(){
+                        $element.find('.list-group').show();
+                    }, 200)
                 };
                 $scope.hideOptions = function() {
+                    
                     $element.find('.list-group').hide();
                     $scope.buttonActivated = false;
+                    $timeout(function(){
+                        $scope.showList =false;
+                    }, 200)
                 };
 
                 $scope.delayHideOptions = function() {
+                    
                     if (!$scope.windowsScrollbarCompatible)
                         $timeout(function() {
                             $scope.hideOptions();
@@ -240,10 +251,11 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                 };
 
                 $scope.updateHideOptions = function() {
+                    
                     //TODO: do this somehow with promises... this is just hacking around the event model with timeouts
                     $timeout(function() {
                         $scope.buttonActivated = false;
-                    }, 150);
+                    }, 350);
                     //Honestly... the browser should trigger all events, before evaluating them, and an event should definitely be able to trigger while it has display: none... grrr....
                     $timeout(function() {
                         if (!$scope.buttonActivated)
@@ -279,10 +291,11 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                             if (string !== '') //we'll allow any option, but empty string.
                                 $scope.binding.push(string);
                         }
-                    }, 250);
+                    }, 450);
                 };
 
                 $scope.updateSpan = function(index, string) {
+                    
                     $timeout(function() {
                         if ($scope.selectbox) {
                             //if the display no longer represents the binding, then the binding is now invalidated, so clear.

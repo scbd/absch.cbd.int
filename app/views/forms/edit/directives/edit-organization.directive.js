@@ -3,8 +3,8 @@
 'components/scbd-angularjs-services/services/locale', 'views/forms/edit/editFormUtility'],
 function (app, template) {
 
-app.directive("editOrganization", [ "$http", "$filter", "$q", 'guid', 'editFormUtility', 'locale',
-                function($http, $filter, $q, guid, editFormUtility, locale) {
+app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'editFormUtility', 'locale', 'thesaurusService', 'realm',
+                function($controller, $filter, $q, guid, editFormUtility, locale, thesaurusService, realm) {
 
 	return {
 		restrict   : "E",
@@ -12,41 +12,24 @@ app.directive("editOrganization", [ "$http", "$filter", "$q", 'guid', 'editFormU
 		replace    : true,
 		transclude : false,
 		scope      : {
-            identifier  : '=',
-			locales     : "=locales",
 			form        : "=form",
             onPostPublishFn   : "&onPostPublish",
 		},
 		link : function($scope, $element, $attr){
 
-            $scope.container    = $attr.container
-            $scope.isDialog     = $attr.isDialog;
+            $scope.container        = $attr.container;
+            $scope.isDialog         = $attr.isDialog;  
+            $scope.type 			= $attr.documentType;
+            $scope.isBch        = realm.is('BCH');
+            $scope.isAbs        = realm.is('ABS');
+            $controller('editController', { $scope: $scope });
 
-            $scope.options = {            
-                countries         : function() { return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function(o){ return $filter("orderBy")(o.data, "name"); }); },
-				organizationTypes: function() {
-                    return $q.all([$http.get("/api/v2013/thesaurus/domains/Organization%20Types/terms", {cache: true}), 
-                                   $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED", { cache: true })])
-                        .then(function(o) {
-                            var orgs = o[0].data;
-                            orgs.push(o[1].data);
-                            return orgs;
-                        });
-                }
-            };           
+            _.extend($scope.options, {            
+				organizationTypes: function() { return thesaurusService.getDomainTerms('organizationTypes', {other:true}) },
+                cpbThematicAreas   : function() { return thesaurusService.getDomainTerms('cbdSubjects') },
+                geographicRegions  : function() { return thesaurusService.getDomainTerms('geographicRegions') }
+            });           
             
-            $scope.genericFilter = function($query, items) {
-                var matchedOptions = [];
-                for(var i=0; i!=items.length; ++i)
-                if(items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
-                    matchedOptions.push(items[i]);
-        
-                return matchedOptions;
-            };
-        
-            $scope.genericMapping = function(item) {
-                return {identifier: item.identifier};
-            };
             //==================================
             //
             //==================================
@@ -62,7 +45,7 @@ app.directive("editOrganization", [ "$http", "$filter", "$q", 'guid', 'editFormU
                 if (/^\s*$/g.test(document.notes))
                     document.notes = undefined;
 
-                return document;
+                return $scope.sanitizeDocument(document);
             };
 
         
@@ -77,35 +60,7 @@ app.directive("editOrganization", [ "$http", "$filter", "$q", 'guid', 'editFormU
                 $scope.onPostPublishFn({ data: documentInfo });
             };
             
-            function setDocument() {
-
-                $scope.status = "loading";
-        
-                var qDocument = {};
-                $scope.document = {};
-                if($scope.identifier)
-                    qDocument = editFormUtility.load($scope.identifier, 'organization');
-                else {
-                    qDocument = {
-                        header: {
-                                    identifier : guid(),
-                                    schema   : "organization",
-                                    languages: ["en"]
-                                },
-                        libraries: [{ identifier: "cbdLibrary:abs-ch" }]
-                    };        
-                }                
-        
-                return $q.when(qDocument).then(function(doc) {
-        
-                    $scope.tab    = "edit";
-                    $scope.document = doc;            
-                    $scope.status = "ready";
-        
-                });
-            };
-            
-            setDocument();
+            $scope.setDocument({}, true)
 
 		}
 	};

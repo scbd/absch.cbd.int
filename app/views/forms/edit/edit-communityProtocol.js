@@ -45,10 +45,11 @@ define(['app', 'underscore', 'views/forms/edit/edit','views/forms/edit/edit-reso
       if(document.organizations && document.organizations.length <=0)
           document.organizations = undefined;
 
-        var documentCopy = _.clone(document)
+      var documentCopy = _.clone(document)
 
-        delete documentCopy.organizationsRef;
-      return documentCopy;
+      delete documentCopy.organizationsRef;
+
+      return $scope.sanitizeDocument(documentCopy);
     };
 
 

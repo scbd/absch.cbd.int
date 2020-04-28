@@ -263,7 +263,11 @@
                             <span class="notification-label">Rejected by: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
-                            <span> {{notification.createdOn | formatDateWithTime}} </span>
+                            <span> {{notification.createdOn | formatDateWithTime}}</span>
+                            <div ng-if="notification.data.info">
+                                <span class="notification-label" ng-if="notification.data.info">Reason :</span>
+                                <span  ng-bind="notification.data.info"></span>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,261 @@
+﻿<div>
+
+    <div>
+        <div ng-show="binding">
+            <style>
+                table.lmo-transcript{
+                    display: inline!important;
+                }
+            </style>
+			<div class="km-value">
+                <table class="table">
+                    <tr ng-repeat="construct in binding" style="margin-bottom:5px;">
+                        <td style="vertical-align: middle;width:3%">
+                            <a title="Edit construct" ng-href="#" ng-click="openContructDialog(construct, $index)"><i class="fa fa-edit"></i></a>
+                            <a title="Delete Construct" ng-href="#" ng-click="deleteConstruct($index)"><i class="fa fa-trash-o"></i></a>
+                            <a title="Move up" ng-if="!$first" ng-href="#" ng-click="moveUp($index)"><i class="fa fa-arrow-up"></i></a>
+                            <a title="Move down" ng-if="!$last" ng-href="#" ng-click="moveDown($index)"><i class="fa fa-arrow-down"></i></a>
+                        </td>
+                        <td>
+                            <view-lmo-gene ng-model="construct"></view-lmo-gene>
+                        </td>
+                    </tr>
+                </table>
+			</div>
+		</div>
+
+        <button class="btn btn-primary" ng-click="openContructDialog()">Add Construct</button>
+    
+    </div>
+
+    <script type="text/ng-template" id="gene-construct-dialog" trados-translation="true">
+
+        <style>
+            /**
+            * The dnd-list should always have a min-height,
+            * otherwise you can't drop to it once it's empty
+            */
+            .gene-construct ul {
+                min-height: 42px;
+                padding-left: 0px;
+            }
+
+            /**
+            * The dndDraggingSource class will be applied to
+            * the source element of a drag operation. It makes
+            * sense to hide it to give the user the feeling
+            * that he's actually moving it.
+            */
+            .gene-construct ul .dndDraggingSource {
+                display: none;
+            }
+
+            /**
+            * An element with .dndPlaceholder class will be
+            * added to the dnd-list while the user is dragging
+            * over it.
+            */
+            .gene-construct ul .dndPlaceholder {
+                background-color: #ddd;
+                display: block;
+                min-height: 42px;
+            }
+
+            .gene-construct ul li {
+                background-color: #fff;
+                border: 1px solid #ddd;
+                border-top-right-radius: 4px;
+                border-top-left-radius: 4px;
+                display: block;
+                padding: 10px 15px;
+                margin-bottom: -1px;
+            }
+
+            /**
+            * Show selected elements in green
+            */
+            .gene-construct ul li.selected {
+                background-color: #dff0d8;
+                color: #3c763d;
+            }
+
+            /***************************** Dropzone Styling *****************************/
+
+            /**
+            * The dnd-list should always have a min-height,
+            * otherwise you can't drop to it once it's empty
+            */
+            .gene-construct .dropzone ul {
+                min-height: 42px;
+                margin: 0px;
+                padding-left: 0px;
+            }
+
+            .gene-construct .dropzone li {
+                display: block;
+            }
+
+            /**
+            * Reduce opacity of elements during the drag operation. This allows the user
+            * to see where he is dropping his element, even if the element is huge. The
+            * .dndDragging class is automatically set during the drag operation.
+            */
+            .gene-construct .dropzone .dndDragging {
+                opacity: 0.7;
+            }
+
+            /**
+            * The dndDraggingSource class will be applied to the source element of a drag
+            * operation.
+            */
+            .gene-construct .dropzone .dndDraggingSource {
+                opacity: 0.5;
+            }
+
+            /**
+            * An element with .dndPlaceholder class will be added as child of the dnd-list
+            * while the user is dragging over it.
+            */
+            .gene-construct .dropzone .dndPlaceholder {
+                background-color: #ddd !important;
+                display: block;
+                min-height: 42px;
+            }
+
+            .gene-construct .dropzone .itemlist {
+                min-height: 120px !important;
+            }
+
+            .gene-construct .dropzone .itemlist > li {
+                border: none;            
+                float: left;
+                height: 50px;
+                margin: 5px;
+                padding: 3px;
+            }
+            .gene-construct .dropzone .itemlist > li.dndPlaceholder {
+                width: 150px;            
+            }
+
+            .gene-construct .dropzone .container-element {
+                margin: 10px;
+            }
+
+            .gene-construct .trashcan ul {
+                list-style: none;
+                padding-left: 0px;
+            }
+
+            .gene-construct .trashcan img {
+                -webkit-filter: grayscale(100%);
+                -moz-filter: grayscale(100%);
+                filter: grayscale(100%);
+            }
+
+            .gene-construct .trashcan .dndDragover img {
+                -webkit-filter: none;
+                -moz-filter: none;
+                filter: none;
+            }
+
+            .gene-construct .trashcan .dndPlaceholder {
+                display: none;
+                
+            }
+
+        </style>
+        <div class="modal-header">
+            <h3 class="modal-title">
+                Gene Construct
+            </h3>
+        </div>
+        <div class="modal-body" >   
+            <div class="help-info">
+                Please use the mouse to drag the a shape to add to the construct on a drop location 
+            </div>
+            <div class="gene-construct">
+                <div class="dropzone">
+                    <div class="row">
+                        <div class="col-sm-8">             
+                            <div class="container-element">
+                                <ul class="itemlist">
+
+                                    <li ng-repeat="item in constructOptions" dnd-draggable="item" dnd-type="'item'"
+                                        dnd-effect-allowed="copy" dnd-dragend="moved($index,'elements')" dnd-moved="constructOptions.splice($index, 1)">
+                                        <div ng-include="'gene-construct'" onload="showAdd=false">
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 pull-right">       
+                            <div class="trashcan">   
+                                <div class="help-info">
+                                    Drag the shape here to remove the construct 
+                                </div>                             
+                                <ul dnd-list="[]">
+                                    <li><img src="https://bch.cbd.int/bch/images/lmoconstruct/trash-over.png"></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="col-sm-12">
+                            <strong>Drop location</legend>                
+                            <div class="container-element" style="border:1px solid #eee">
+                                <ul dnd-list="newConstruct" class="itemlist">
+                                    <li ng-repeat="item in newConstruct" dnd-draggable="item" dnd-type="'item'" dnd-effect-allowed="move"
+                                        dnd-dragend="moved($index,'dropLocation')" dnd-moved="newConstruct.splice($index, 1)">
+                                        <div ng-include="'gene-construct'" onload="showAdd=true">
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading||forTour">Cancel</button>
+            <button type="button" class="btn btn-primary pull-left" aria-label="Save" ng-click="saveConstruct()" >Save</button>   
+        </div>
+
+    </script>
+    <script type="text/ng-template" id="gene-construct"  trados-translation="true">
+        <table cellspacing="0px" class="lmo-transcript {{item.type}}">                
+            <tr>
+                <td class="left" >&nbsp;</td>
+                <td class="middle">
+                    <div ng-show="!item.gene">
+                        <span ng-if="item.type=='senseStart'"    >transcription start</span>
+                        <span ng-if="item.type=='sense'"         >transcription element</span>
+                        <span ng-if="item.type=='senseStop'"     >transcription stop</span>
+                        <span ng-if="item.type=='antisenseStart'">transcription start</span>
+                        <span ng-if="item.type=='antisense'"     >transcription element</span>
+                        <span ng-if="item.type=='antisenseStop'" >transcription stop</span>
+                    </div>
+                    <div>                            
+                            <div ng-if="showAdd" document-selector ng-model="item.selectedGene" question="contacts" caption="(sense)" type="radio"
+                                schema="(dnaSequence)" filter="true" ng-change="geneSelected(item)">
+                                <select-records>
+                                    <a ng-show="!$parent.$parent.item.gene" ng-href="#" ng-click="$parent.openAddDialog();">select gene</a>
+                                    <a ng-show="$parent.$parent.item.gene"  ng-href="#" ng-click="$parent.openAddDialog();" ng-bind="$parent.$parent.item.gene.body.name|lstring:locale"></a>
+                                </select-records>
+                                <selected-records>
+                                    <div ng-show="$parent.$parent.item.gene">
+                                        #<span ng-bind="$parent.$parent.item.gene.documentID"></span>
+                                        &nbsp; 
+                                        <input type="number" ng-model="item.size" style="width:50px" min="0"/> KB
+                                    </div>
+                                </selected-records>
+                            </div>
+                            <span ng-if="!showAdd" ng-bind="(item.subType)"></span>
+                    </div>
+                </td>
+                <td class="right">
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+    </script>
+
+</div>

@@ -183,7 +183,7 @@
                                                         caption="2. Contact person">
                                                         <div document-selector ng-model="document.contact" ng-disabled="!document.government"
                                                             question="contact" government="document.government" schema="(contact authority focalPoint)"
-                                                            filter="true" type="radio">
+                                                            filter="true" type="radio" allow-new="true" allow-new-schema="contact">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2411,7 +2411,7 @@
                     </form>
                 </edit-form>
                 <review-form>
-                    <view-abs-national-report ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></view-abs-national-report>
+                    <view-abs-national-report ng-model="review.document" locale="review.locale" allow-drafts="true"></view-abs-national-report>
                 </review-form>
                 <!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons -->
             </div>

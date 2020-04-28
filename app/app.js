@@ -5,16 +5,17 @@ define(['angular-flex', 'angular-animate', 'angular-sanitize', 'angular-loggly-l
             'ngAnimate', 'ngSanitize', 'ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'toastr',
             'angular-intro', 'scbdControls', 'ngLocalizer', 'angularTrix', 'cbd-forums',
             'ng-breadcrumbs', 'scbdServices', 'scbdFilters', 'smoothScroll', 'ngMessages', 'ngStorage', 'ngDialog',
-            'infinite-scroll', 'logglyLogger', 'angular-joyride', 'ngMeta'
+            'infinite-scroll', 'logglyLogger', 'angular-joyride', 'ngMeta', 'dndLists', 'angucomplete-alt', 'angular-cache'
         ]));
 
         app.config(["LogglyLoggerProvider", 'ngMetaProvider',  function (LogglyLoggerProvider, ngMetaProvider) {
-
+            var logToConsole = true;
             LogglyLoggerProvider
                 .includeUrl(true)
                 .includeUserAgent(true)
                 .includeTimestamp(true)
                 .sendConsoleErrors(true)
+                .logToConsole(logToConsole)
                 .endpoint('/error-logs');
 
        
@@ -30,12 +31,19 @@ define(['angular-flex', 'angular-animate', 'angular-sanitize', 'angular-loggly-l
                     try{
                         exception = exception.replace(/^Possibly unhandled rejection: /, '');
                         exception = JSON.parse(exception);
-                        exception = JSON.stringify(exception.data || exception);
+                        var parsedException = {
+                            data    : exception.data||exception.message, 
+                            status  : exception.status,
+                            url     : (exception.config||{}).url, 
+                            params  : (exception.config||{}).params
+                        }  
+                        exception = JSON.stringify(parsedException || exception);
                     }
                     catch(e){}
                 }
-                $log.warn(exception);
+                $log.error(exception);
             };
+
         }])
 
        app.run(['ngMeta', 'LogglyLogger', 'realm', '$window', function (ngMeta, logglyLogger, realm, $window) {

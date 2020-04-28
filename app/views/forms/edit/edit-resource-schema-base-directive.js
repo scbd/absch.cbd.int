@@ -27,7 +27,7 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 				$scope.isNationalUser = false;
 
 				if ($scope.user.isAuthenticated) {
-					$scope.isNationalUser =  roleService.isPublishingAuthority() || roleService.isNationalAuthorizedUser();
+					$scope.isNationalUser =  roleService.isNationalUser();
 				}
 
 				$scope.displayMCCWarning = false;

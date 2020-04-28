@@ -233,7 +233,7 @@
 											<div class="col-md-12">
 												<div class="km-control-group" name="contacts" caption="8. Contact person(s)">
 				
-													 <div document-selector ng-model="document.contacts"
+													 <div document-selector ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
 																						question="contacts"
 																						schema="((schema_s:contact AND type_s:person))"
 																						filter="true" skip-government="true"></div>
@@ -445,7 +445,7 @@
 								</form>
                     </edit-form>
                     <review-form>
-                        <view-capacity-building-initiative ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></view-capacity-building-initiative>
+                        <view-capacity-building-initiative ng-model="review.document" locale="review.locale" allow-drafts="true"></view-capacity-building-initiative>
                     </review-form>
                     <!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons -->
                 </div>

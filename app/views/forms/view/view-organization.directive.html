@@ -7,32 +7,55 @@
 	</div>
 	<div class="record-body panel-body">
 
-			
 		<document-date></document-date><br>
-		<h2>{{document.name | lstring:locale}} <i ng-show="document.acronym">({{document.acronym | lstring:locale}})</i></h2>
+		<legend>{{document.name | lstring:locale}} <i ng-show="document.acronym">({{document.acronym | lstring:locale}})</i></legend>
+		</br>
+		<div ng-show="document.name">
+			<label>Organization name</label>
+			<km-value-ml value="document.name" locales="locale"></km-value-ml>
+		</div>
+		<div ng-show="document.acronym">
+			<label>Acronym</label>
+			<km-value-ml value="document.acronym" locales="locale"></km-value-ml>
+		</div>
 
 		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
 			<label>Address</label>
 			<address class="km-value">
-			<div class="km-pre">{{document.address | lstring:locale}}</div>
-			{{document.city | lstring:locale}}<span ng-show="document.city">, </span>
-			{{document.state | lstring:locale}}<br ng-show="document.city || document.state" />
-			{{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
-			<b>{{document.country|term}}</b>
-		</address>
+				<div class="km-pre">{{document.address | lstring:locale}}</div>
+				{{document.city | lstring:locale}}<span ng-show="document.city">, </span>
+				{{document.state | lstring:locale}}<br ng-show="document.city || document.state" />
+				{{document.postalCode | lstring:locale}}<span ng-show="document.postalCode">, </span>
+				<b>{{document.country|term}}</b>
+			</address>
+		</div>
+
+		<div ng-if="document.contacts">
+			<label>Contact person in the organization</label>
+			<div class="km-value">
+				<ul class="list">
+					<li ng-repeat="item in document.contacts" >
+						<div view-contact-reference ng-model="item" locale="locale"></div>
+					</li>
+				</ul>
+			</div>
 		</div>
 
 		<div ng-show="document.phones">
 			<label>Phone numbers</label>
-			<div class="km-value">
-				<li ng-repeat="item in document.phones">{{item}}</li>
+			<div  class="km-value">
+				<ul class="list">
+					<li ng-repeat="item in document.phones">{{item}}</li>
+				</ul>
 			</div>
 		</div>
 
 		<div ng-show="document.faxes">
 			<label>Fax Numbers</label>
-			<div class="km-value">
-				<li ng-repeat="item in document.faxes">{{item}}</li>
+			<div  class="km-value">
+				<ul class="list">
+					<li ng-repeat="item in document.faxes">{{item}}</li>
+				</ul>
 			</div>
 		</div>
 
@@ -71,28 +94,36 @@
 					</ul>
 				</div>
 			</div>
+			<div ng-if="document.cpbThematicAreas">
+				<label>Biosafety Thematic areas</label>
+				<div  class="km-value">
+					<ul class="list">
+						<li ng-repeat="term in document.cpbThematicAreas" ng-bind="term"></li>
+					</ul>
+				</div>
+			</div>			
 
-
-			<div ng-show="document.profileLink">
+			<div ng-if="document.profile || document.profileLink">
 				<label>Organization’s profile</label>
-				<div class="km-value" ng-repeat="item in document.profileLink">
-					<a translation-url  target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+				<div ng-if="document.profile">
+					<km-value-ml value="document.profile" locales="locale"></km-value-ml>
+				</div>
+				<div class="km-value" ng-if="document.profileLink" style="margin-top: 5px;">
+					<div ng-repeat="item in document.profileLink">
+						<a translation-url  target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+					</div>
 				</div>
 			</div>
 		</div>
 
 		<div ng-show="linkedOrganizations">
 			<legend>Linked organizations</legend>
-			<div class="km-value" ng-repeat="organization in linkedOrganizations">
-				<div class="cbdViewOrganizationReference" ng-model="organization.document" locale="locale"></div>
-			</div>
-		</div>
-
-		<div ng-show="contacts">
-			<legend>Contact person in the organization</legend>
-			<div class="km-value" ng-repeat="contact in contacts">
-				<div class="cbdViewContactReference" ng-model="contact.document" locale="locale"></div>
+			<div class="km-value">
+				<ul class="list">
+					<li ng-repeat="item in document.linkedOrganizations" >
+						<div view-organization-reference ng-model="item" locale="locale"></div>
+					</li>
+				</ul>
 			</div>
 		</div>
 
@@ -100,16 +131,18 @@
 			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">
-				<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
+				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
 			</div>
 
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website address or attached documents</label>
 				<div class="km-value" ng-repeat="item in document.relevantDocuments">
 					<a translation-url  target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 				</div>
 			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
 		</div>
 
 	</div>

@@ -1,38 +1,40 @@
 define(['app','underscore', "text!views/forms/view/view-default-reference.directive.html", 
 'components/scbd-angularjs-services/services/main'], function (app, _, template) {
 
-app.directive("viewDefaultReference", [function () {
+app.directive("viewDefaultReference", ["IStorage", '$timeout', function (storage, $timeout) {
 	return {
 		restrict: "EAC",
 		template: template ,
 		replace: true,
-		transclude: false,
+		transclude: {
+			default:'?default',
+			extra:'?extra'
+		},
 		scope: {
 			model: "=ngModel",
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: ["$scope", "IStorage", "$filter", '$q', function ($scope, storage, $filter, $q) {
+		link:function($scope, $element, $attr){
 
-
-			// $scope.document = $scope.model;
-			
-			
-			
-
-            // //==================================
-		    // //
-		    // //==================================
-		    $scope.$watch('model', function(newValue, oldValue){
+			$scope.hideSchema = $attr.hideSchema=='true'
+			$scope.$watch('model', function(newValue, oldValue){
 		        if(newValue){
-					$q.when(loadReferenceDocument($scope.model))
-					.then(function(data) {
-						$scope.document = data;
-					});
-
+					$scope.refreshRecord($scope.model);
 		        }
 		    });
 
+			$scope.refreshRecord = function(identifier){
+				$scope.loading = true;
+					loadReferenceDocument(identifier)
+					.then(function(data) {
+						$scope.document = data;
+						if(data.workingDocumentLock){
+							$timeout(function(){$element.find("[data-toggle='tooltip']").tooltip({trigger: 'hover'})}, 100);
+						}
+					})
+					.finally(function(){$scope.loading = false;});
+			}
 
 			function loadReferenceDocument(identifier){
 
@@ -42,17 +44,35 @@ app.directive("viewDefaultReference", [function () {
 						})
 						.catch(function(error, code){
 							if (error.status == 404) {
-								$scope.errorCode = 404;
-								return storage.drafts.get(identifier, { info : true})
-									.then(function(result){
-										$scope.errorCode = undefined;
-										return result.data;
-									});
+								return loadDraftDocument(identifier);
 							};
 						});
 			}
 
-		 }] //controller
+			function loadDraftDocument(identifier, count){
+				return storage.drafts.get(identifier, { info : true})
+						.then(function(result){
+							$scope.errorCode = undefined;
+							var document = result.data;
+							count = count||1
+							if($attr.waitForWorkflow=='true' && !document.workingDocumentLock && count <= 5){
+								return $timeout(function(){return loadDraftDocument(identifier, count++);}, 2000);
+							}
+							else{
+								document.body = {
+									header : { schema: result.data.type}
+								}
+								return document;
+							}
+						})
+						.catch(function(error, code){
+							if (error.status == 404)$scope.errorCode = 404;
+							else
+								$scope.error = true;
+						});
+			}
+
+		 }
 	};
 }]);
 });

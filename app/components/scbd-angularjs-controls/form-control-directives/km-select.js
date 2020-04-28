@@ -23,11 +23,13 @@ function(app, angular, $, _, template) {
         minimumFn: "&minimum",
         maximumFn: "&maximum",
         api: "=?",
-        showDescription: '@?'
+        showDescription: '@?',
+        showOthersFn: '&?showOthers'
         // ,locale: '@?'
       },
       link: function($scope, $element, $attrs, ngModelController) {
        
+        $scope.hasOtherSource = $attrs.showOthers!=undefined;
         $scope.identifier = null;
         $scope.rootItems = null;
         $scope.attr = $attrs;
@@ -42,12 +44,9 @@ function(app, angular, $, _, template) {
         $scope.$watch('items', $scope.load);
 
         $scope.$watch('binding', function(newBinding) {
-          ngModelController.$setViewValue($scope.binding);
+          
           if (newBinding)
-            $scope.autoInit().then($scope.load);
-          // else {
-          //     $scope.clearSelection();
-          // }
+            $scope.autoInit().then($scope.load);          
         });
 
         if ($scope.watchItems)
@@ -79,9 +78,46 @@ function(app, angular, $, _, template) {
           });
 
 
+        
         $scope.$on('clearSelectSelection', function(info) {
           $scope.clearSelection(info && info.data ? info.data.identifier : undefined);
         });
+
+        //==============================
+        //
+        //==============================
+        $scope.save = function() {
+          if (!$scope.allItems) // Not initialized
+            return;
+          var retObj={};
+          var oBindings = _.map($scope.getSelectedItems(), function(o) {
+
+            if(o.customValue)
+              retObj={
+                identifier: o.identifier,
+                customValue: o.customValue
+              };
+              else
+              retObj={
+                identifier: o.identifier,
+              };
+            return retObj;
+          });
+
+          if ($scope.bindingType == "string" || $scope.bindingType == "string[]")
+            oBindings = _.pluck(oBindings, 'identifier');
+
+          if (!$scope.multiple)
+            oBindings = _.first(oBindings);
+
+          if ($.isEmptyObject(oBindings))
+            oBindings = undefined;
+
+          $scope.binding = oBindings;
+          ngModelController.$setViewValue($scope.binding, 'change');
+          
+        };
+
       },
       controller: ["$scope", "$q", "$filter", "$timeout", "locale", function($scope, $q, $filter, $timeout, locale) {
 
@@ -92,10 +128,11 @@ function(app, angular, $, _, template) {
 
         $scope.api = {
           unSelectItem: onUnSelectItem,
-          unSelectAll: onUnSelectAll,
-          getItem: onGetItem,
-          selectItem: onSelectItem,
-          selectAll: onSelectAll,
+          unSelectAll : onUnSelectAll,
+          getItem     : onGetItem,
+          selectItem  : onSelectItem,
+          selectAll   : onSelectAll,
+          loadOtherSource : showOtherSource
         };
 
         function onUnSelectItem(item) {
@@ -275,9 +312,11 @@ function(app, angular, $, _, template) {
         // in tree order /deep first
         //==============================
         $scope.getSelectedItems = function() {
-          return _.where($scope.allItems || [], {
-            selected: true
-          });
+          var mainSource = $scope.allItems || [];
+          if($scope.secondaySource)
+            mainSource = _.union(mainSource, $scope.secondaySource);
+
+          return _.where(mainSource, { selected: true });
         };
 
         //==============================
@@ -319,38 +358,7 @@ function(app, angular, $, _, template) {
           });
         };
 
-        //==============================
-        //
-        //==============================
-        $scope.save = function() {
-          if (!$scope.allItems) // Not initialized
-            return;
-          var retObj={};
-          var oBindings = _.map($scope.getSelectedItems(), function(o) {
-
-            if(o.customValue)
-              retObj={
-                identifier: o.identifier,
-                customValue: o.customValue
-              };
-              else
-              retObj={
-                identifier: o.identifier,
-              };
-            return retObj;
-          });
-
-          if ($scope.bindingType == "string" || $scope.bindingType == "string[]")
-            oBindings = _.pluck(oBindings, 'identifier');
-
-          if (!$scope.multiple)
-            oBindings = _.first(oBindings);
-
-          if ($.isEmptyObject(oBindings))
-            oBindings = undefined;
-
-          $scope.binding = oBindings;
-        };
+        
 
         //==============================
         //
@@ -438,6 +446,22 @@ function(app, angular, $, _, template) {
         $(document).on('click', '#filterText input', function(e) {
           e.stopPropagation();
         });
+
+        function showOtherSource($evt){
+          if($evt)
+            $evt.stopPropagation();
+
+          $scope.loadingOtherSource = true
+          $scope.showOthersFn().then(function(data){
+            $scope.secondaySource = _.filter(data, function(d){
+              if(_.contains($scope.binding, d.identifier))
+                d.selected = true
+              return !_.find($scope.allItems, {identifier:d.identifier})
+            });
+          })
+          .finally(function(){$scope.loadingOtherSource = false})
+        }
+        $scope.showOtherSource = showOtherSource;
 
       }]
     };

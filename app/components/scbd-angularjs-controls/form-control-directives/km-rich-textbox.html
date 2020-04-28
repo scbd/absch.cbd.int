@@ -1,10 +1,12 @@
 ﻿<div class="km-rtl">
 	<link rel="stylesheet" type="text/css" href="/app/components/scbd-angularjs-controls/form-control-directives/km-control.css">
-	<div ng-repeat="locale in locales" class="trix-content input-group input-rich-text" ng-class="{ 'multiple-languages' : isShowLocale() && !last }"
+	<div ng-repeat="locale in locales" class="trix-content input-group input-rich-text  input-lang-{{locale}}" ng-class="{ 'multiple-languages' : isShowLocale() && !last }"
 	    ng-switch="rows">
 		<trix-editor angular-trix ng-switch-default ng-required="isRequired()" ng-model="text[locale]" ng-change="onchange()" ng-disabled="ngDisabledFn()"
-		    placeholder="{{placeholder}}" rows="{{rows}}" style="display:inline-block;width:100%">
+		    placeholder="{{placeholder}}" rows="{{rows}}" style="display:inline-block;width:100%" trix-initialize="trixInitialize(e, ed)">
 		</trix-editor>
-		<span class="input-group-addon" disabled-ng-show="isShowLocale()" style="cursor:default">{{locale | uppercase }}</span>
+		<span class="input-group-addon lang-tooltip" disabled-ng-show="isShowLocale()" style="cursor:default" data-toggle="tooltip" data-title="{{termLocales[locale]|term}}" >
+			<span ng-bind="locale | uppercase"></span>
+		</span>
 	</div>
 </div>

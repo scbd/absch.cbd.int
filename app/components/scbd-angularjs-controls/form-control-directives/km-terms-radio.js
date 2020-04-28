@@ -4,7 +4,7 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
     //
     //
     //============================================================
-    app.directive('kmTermRadio', ["$q","Thesaurus", function($q,thesaurus){
+    app.directive('kmTermRadio', ["$q","Thesaurus", "$timeout", function($q,thesaurus, $timeout){
         return {
             restrict: 'EAC',
             template: template,
@@ -24,11 +24,15 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
             link: function($scope, $element, $attr, ngModelController) {
 
                 $scope.uniqueId = (Math.random()).toString().split('.')[1];
-                $scope.description = true;
+                $scope.description = $scope.description!== undefined ? $scope.description : true;
+
+                if($attr.showDescription!= undefined)
+                    $scope.showDescription = $attr.showDescription == 'true';
+
                 $scope.selection = null;
                 $scope.terms = null;
                 $scope.rootTerms = [];
-                $scope.showOther = $scope.bindingType == "term" && $attr.showOther;
+                $scope.showOther = $scope.bindingType == "term" && $attr.showOther=="true";
                 $scope.other = { identifier : '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'}
                 $scope.onTerms  = onTerms;
                 $scope.save     = save;
@@ -82,7 +86,12 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
                     $scope.setError(null);
                     $scope.__loading = true;
 
-                    $q.when($scope.termsFn(),
+                    var qData = $scope.termsFn();
+
+                    if (qData === undefined)
+                        return $timeout(init, 250); // MEGA UGLY PATCH
+
+                    $q.when(qData,
                         function(data) { // on success
                             $scope.__loading = false;
                             $scope.terms = data;
@@ -92,6 +101,7 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
                             $scope.setError(error);
                         });
                 };
+
 
                 //==============================
                 //

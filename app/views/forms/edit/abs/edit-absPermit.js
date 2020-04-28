@@ -136,7 +136,7 @@ define(['app', 'views/forms/edit/edit', 'js/common',
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
 
-      return document;
+      return $scope.sanitizeDocument(document);
     };
 
 

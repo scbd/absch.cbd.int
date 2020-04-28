@@ -133,7 +133,7 @@
                                             <div class="km-control-group" name="contactsToInform" caption="Please select any national authorities whom you wish to send a copy of the communiqué">
                                                 
                                                 <div document-selector ng-model="document.contactsToInform"
-                                                                             question="contactsToInform"
+                                                                             question="contactsToInform" allow-new="true" allow-new-schema="contact"
                                                                              government="document.government"
                                                                              schema="(authority contact)"></div>
                                                 
@@ -170,9 +170,8 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="notes">
-                                                            <div class="help-info">The “Notes” field is for your personal notes or comments and will be hidden when
-                                                          viewing the record. This field is not meant to be used for confidential information.</div>
-                                                <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
+                                                <div class="help-info">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>                                                
+											    <div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -182,7 +181,7 @@
                             </form>
                 </edit-form>
                 <review-form>
-                    <view-abs-checkpoint ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></view-abs-checkpoint>
+                    <view-abs-checkpoint ng-model="review.document" locale="review.locale" allow-drafts="true"></view-abs-checkpoint>
                 </review-form>
                 <!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons -->
             </div>

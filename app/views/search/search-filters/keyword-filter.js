@@ -1,4 +1,4 @@
-define(['app','text!views/search/search-filters/keyword-filter.html',],  function(app, template, _) {
+define(['app','text!views/search/search-filters/keyword-filter.html', 'lodash'],  function(app, template, _) {
 
     app.directive('keywordFilter', function() {
         return {
@@ -11,17 +11,17 @@ define(['app','text!views/search/search-filters/keyword-filter.html',],  functio
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
               
                $scope.keywordSearchFilters = searchDirectiveCtrl.getSearchFilters("keyword");
-                              
-               $scope.keywordSearchFiltersNoDups =   searchDirectiveCtrl.getSearchFiltersByParent("ABS Thematic Areas");
-
                $scope.relatedFilters = {};
 
-            },// link
-            controller: function($scope){
-                 
-               
-                
-            },// controller
+                $scope.hasCounts  = function(item){
+                    if((($scope.$parent.searchResult.data||{}).facets||{}).keywords)
+                        return $scope.$parent.searchResult.data.facets.keywords[item.id] > 0
+                }
+
+                $scope.ngRepeatFinished = function(){
+                    $element.find('[data-toggle="tooltip"]').tooltip();
+                }
+            }
         };
     });
 });

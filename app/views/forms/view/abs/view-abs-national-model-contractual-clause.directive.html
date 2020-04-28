@@ -15,7 +15,7 @@
             <div ng-show="document.government">
                 <label name="country">Country</label>
                 <div class="km-value" >
-                    <a ng-href="/countries/{{document.government.identifier}}" target={{target}}>{{document.government|term:locale}}</a>
+                    <a ng-href="/countries/{{document.government.identifier|uppercase}}" target={{target}}>{{document.government|term:locale}}</a>
                     <span ng-party-status government="document.government" id="government"></span>
                 </div>
             </div>
@@ -82,6 +82,9 @@
                     </div>
                 </div>
             </div>
+			<div>
+				<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+			</div>
     
         </div>
         

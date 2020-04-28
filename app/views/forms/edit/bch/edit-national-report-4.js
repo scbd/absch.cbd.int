@@ -6,7 +6,7 @@
     'ngDialog'], 
 function (app, _, nr4Data, nr3Data) {
     
-    app.controller("editBchNationalReport4", ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 
+    app.controller("editBchNationalReport4Controller", ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 
     'commonjs', 'IStorage', '$routeParams', 'ngDialog',
 	function($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog) {
         
@@ -223,7 +223,7 @@ function (app, _, nr4Data, nr3Data) {
 			if (/^\s*$/g.test(document.notes))
 				document.notes = undefined;
 
-			return document;
+			return $scope.sanitizeDocument(document);
 		};
         
         $scope.setTab = function(index){

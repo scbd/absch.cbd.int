@@ -20,19 +20,18 @@ require.config({
         'async'                     : cdnHost + 'requirejs-text@1.0.2/lib/async',
         'domReady'                  : cdnHost + 'requirejs-domready@2.0.1/domReady',
         'bootstrap-datepicker'      : cdnHost + 'bootstrap-datepicker@1.8.0/js/bootstrap-datepicker',
+        'datepicker-range'          : cdnHost + 'daterangepicker@3.0.5/daterangepicker',
         'jquery'                    : cdnHost + 'jquery@2.2.4/dist/jquery.min',
         'bootstrap'                 : cdnHost + 'bootstrap@3.3.0/dist/js/bootstrap.min',
         'underscore'                : cdnHost + 'underscore@1.7.0/underscore-min',
         'lodash'                    : cdnHost + 'lodash@3.10.1/index',
-        'moment'                    : cdnHost + 'moment@2.7.0/min/moment-with-langs.min',
-        'cbd-forums'                :           'libs/cbd-forums/cbd-forums',
+        'moment'                    : cdnHost + 'moment@2.9.0/min/moment-with-locales.min',
         'ng-breadcrumbs'            : cdnHost + 'angular-breadcrumbs@0.5.3/dist/ng-breadcrumbs.min',
         'ngSmoothScroll'            : cdnHost + 'ngSmoothScroll@2.0.1/dist/angular-smooth-scroll.min',
         'angular-joyride'           : cdnHost + 'angular-joyride@1.0.2/dist/joyride',
         'toastr'                    : cdnHost + 'angular-toastr@1.5.0/dist/angular-toastr.tpls.min',
         'ngStorage'                 : cdnHost + 'ngstorage@0.3.11/ngStorage.min',
         'ngDialog'                  : cdnHost + 'ng-dialog@0.5.8/js/ngDialog.min',
-        'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min',
         'ngInfiniteScroll'          : cdnHost + 'ng-infinite-scroll@1.3.0/build/ng-infinite-scroll.min',  
         'tableexport'               : cdnHost + 'tableexport@4.0.10/dist/js/tableexport',
         'blobjs'                    : cdnHost + 'blobjs@1.1.1/Blob.min',
@@ -49,12 +48,17 @@ require.config({
         'angular-trix'              : cdnHost + 'angular-trix@1.0.2/dist/angular-trix.min',
         'trix'                      : cdnHost + 'trix@0.12.0/dist/trix',
         'ngMeta'                    : cdnHost + 'ng-meta@1.0.3/dist/ngMeta.min',
+        'angular-loggly-logger'     : cdnHost + '@scbd/angular-loggly-logger@0.3.2/angular-loggly-logger.min',
+        'drag-and-drop'             : cdnHost + 'angular-drag-and-drop-lists@2.1.0/angular-drag-and-drop-lists.min',
+        'angucomplete-alt'          : cdnHost + 'angucomplete-alt@3.0.0/angucomplete-alt',
+        'angular-cache'             : cdnHost + 'angular-cache@4.6.0/dist/angular-cache.min',
 
+        'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min',
+        'cbd-forums'                :           'libs/cbd-forums/cbd-forums',
         'shim'                      :           'libs/require-shim/src/shim',
         'angular-localizer'         :           'libs/angular-localizer/localizer',
         'view-abs-checkpoint'       :           'views/forms/view/abs/view-abs-checkpoint.directive', 
-        'angular-flex'              :           'libs/angular-flex/angular-flex',
-        'angular-loggly-logger'     :           'libs/angular-loggly-logger/angular-loggly-logger'     
+        'angular-flex'              :           'libs/angular-flex/angular-flex'            
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -63,6 +67,7 @@ require.config({
         'angular-sanitize'              : { 'deps': ['angular'] },
         'bootstrap'                     : { 'deps': ['jquery'] },
         'bootstrap-datepicker'          : { 'deps': ['jquery'] },
+        'datepicker-range'              : { 'deps': ['jquery', 'css!'+cdnHost+'daterangepicker@3.0.5/daterangepicker.css'] },   
         'underscore'                    : { 'exports': '_' },
         'angular-animate'               : { 'deps': ['angular']},
         'angular-localizer'             : { 'deps':['angular', 'angular-cookies']},
@@ -85,10 +90,13 @@ require.config({
         'xlsx'                          : { 'deps': ['jszip'],'exports': 'XLSX'},
         'pdfjs-dist/build/pdf'          : { 'deps': ['angular']}, 
         'pdf-object'                    : { 'deps': ['angular']}  ,
-        'angular-trix'                  : { 'deps': ['angular', 'trix', 'css!'+cdnHost+'trix@0.12.0/dist/'+'trix.css']},
+        'angular-trix'                  : { 'deps': ['angular', 'trix', 'css!'+cdnHost+'trix@0.12.0/dist/trix.css']},
         'trix'                          : { 'deps': ['angular']},
         'diacritics'                    : { 'deps': ['angular']},
-        'ngMeta'                        : { 'deps': ['angular']}
+        'ngMeta'                        : { 'deps': ['angular']},
+        'drag-and-drop'                 : { 'deps': ['angular']},
+        'angucomplete-alt'              : { 'deps': ['angular', 'css!'+cdnHost+'angucomplete-alt@3.0.0/angucomplete-alt.css']},
+        'angular-cache'                 : { 'deps' : ['angular'] }
     },
     urlArgs: function(id, url){
         
@@ -97,8 +105,11 @@ require.config({
 
         if(url.indexOf('worldEUHigh.js')>0)
             return '';
-        
-        return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version
+            
+        if(/^\//.test(url))            
+            return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.appVersion;
+
+        return '';
     }
 });
 

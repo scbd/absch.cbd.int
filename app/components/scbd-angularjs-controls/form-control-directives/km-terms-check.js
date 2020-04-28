@@ -18,16 +18,19 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                 termsFn: '&terms',
                 required: "@",
                 layout: "@",
-                locales: '=?'
+                locales: '=?',
+                beforeSearch: '&?'
             },
             link: function($scope, $element, $attr, ngModelController) {
 
+                var hasNarrowerTerms = false;
                 $scope.selectedItems = null;
 				$scope.showDescription = $attr.showDescription == 'true';
                 $scope.identifiers = null;
                 $scope.terms = null;
                 $scope.searchKeyword = '';
                 $scope.rootTerms = [];
+                $scope.otherElements = {};
                 if($scope.showDescription === undefined)
                     $scope.showDescription = 'false';
 
@@ -57,7 +60,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     var qData = $scope.termsFn();
 
                     if (qData === undefined)
-                        $timeout($scope.init, 250); // MEGA UGLY PATCH
+                        return $timeout(init, 250); // MEGA UGLY PATCH
 
                     $q.when(qData,
                         function(data) { // on success
@@ -78,7 +81,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                         return;
 
                     var oNewIdentifiers = {};
-
+                    var oNewOthers = {};
                     if (!$.isArray($scope.terms))
                         throw "Type must be array";
 
@@ -88,52 +91,101 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                             throw "Type must be array";
 
                         for (var i = 0; i < $scope.binding.length; ++i) {
+                            if(!$scope.binding[i])
+                                continue;
+                                
                             if ($scope.bindingType == "string[]") 
                                 oNewIdentifiers[$scope.binding[i]] = {selected : true};
-                            else if($scope.bindingType == "term[]")
+                            else if($scope.bindingType == "term[]"){
                                 oNewIdentifiers[$scope.binding[i].identifier] = {selected : true, customValue:$scope.binding[i].customValue};
+
+                                if($scope.terms){
+                                    var term = _.find($scope.terms, {identifier:$scope.binding[i].identifier})
+                                    if(term && term.multiple){
+                                        if(!oNewOthers[term.identifier])
+                                            oNewOthers[term.identifier] = [];
+
+                                        oNewOthers[term.identifier].push({customValue :$scope.binding[i].customValue});                                        
+                                    }
+                                }
+                            }
                             else throw "bindingType not supported";
 
                             // if ($scope.bindingType == "string[]") oNewIdentifiers[$scope.binding[i]] = true;
                             // else if ($scope.bindingType == "term[]") oNewIdentifiers[$scope.binding[i].identifier] = true;
                             // else throw "bindingType not supported";
-                        }
+                        }                        
                     }
 
-                    if (!angular.equals(oNewIdentifiers, $scope.selectedItems))
+                    if (!angular.equals(oNewIdentifiers, $scope.selectedItems)){
                         $scope.selectedItems = oNewIdentifiers;
+                    }
                     
+                    _.each(oNewOthers, function(customValues, key){
+                        if (!angular.equals(customValues, $scope.otherElements[key]))
+                            $scope.otherElements[key] = customValues;
+                    })
+
                     save();
                 };
 
                 //==============================
                 //
                 //==============================
-                function save() {
+                function save(termIdentifier, onOtherElementsChange) {
                     if (!$scope.selectedItems)
                         return;
 
                     var oNewBinding = [];
 
+                    if(hasNarrowerTerms && termIdentifier){
+                        var selectedTerm = _.find($scope.terms, {identifier:termIdentifier});
+                        var selected     = ($scope.selectedItems[selectedTerm.identifier]||{}).selected;
+                        if(selectedTerm.narrowerTerms){
+                            selectChildTerms(selectedTerm.narrowerTerms, selected, 'narrowerTerms')
+                        }
+                        if(selectedTerm.broaderTerms){
+                            if(!selected)//if unchecked then set parents unchecked.
+                                selectChildTerms(selectedTerm.broaderTerms, false, 'broaderTerms');
+                            else
+                                selectChildTerms(selectedTerm.broaderTerms, true, 'broaderTerms', true);
+                            setIndeterminanteParents(selectedTerm.broaderTerms, selected)
+                        }
+                    }
                     angular.forEach($scope.terms, function(term, i) {
                         if (term === undefined) return; //IE8 BUG
 
                         if ($scope.selectedItems[term.identifier] && $scope.selectedItems[term.identifier].selected) {
-                            if ($scope.bindingType == "string[]") oNewBinding.push(term.identifier);
-                            else if ($scope.bindingType == "term[]") oNewBinding.push({
-                                identifier: term.identifier, customValue : $scope.selectedItems[term.identifier].customValue||undefined
-                            });
+                            if ($scope.bindingType == "string[]") 
+                                oNewBinding.push(term.identifier);
+                            else if ($scope.bindingType == "term[]"){
+                                
+                                if(term.multiple){
+                                    if(!onOtherElementsChange)
+                                        initializeOther(term.identifier)
+                                    _.each($scope.otherElements[term.identifier], function(elm){
+                                        oNewBinding.push({ identifier: term.identifier, customValue : elm.customValue||undefined });
+                                    })
+                                }
+                                else
+                                    oNewBinding.push({ identifier: term.identifier, customValue : $scope.selectedItems[term.identifier].customValue||undefined });
+                            }
                             else throw "bindingType not supported";
+                        }
+                        else{ //clear other
+                            if(term.multiple){
+                               $scope.otherElements[term.identifier] = []
+                            }
                         }
                     });
 
                     if ($.isEmptyObject(oNewBinding))
                         oNewBinding = undefined;
 
-                    if (!angular.equals(oNewBinding, $scope.binding))
+                    if (!angular.equals(oNewBinding, $scope.binding)){
                         $scope.binding = oNewBinding;
-
-                    ngModelController.$setViewValue($scope.binding);
+                        ngModelController.$setViewValue($scope.binding);
+                    }
                 };
 
                 //==============================
@@ -143,6 +195,58 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     return $scope.required !== undefined && $.isEmptyObject($scope.binding);
                 };
 
+                function selectChildTerms(terms, selected, type, allChildSelected){
+                    if(!terms.length)
+                        return;
+
+                    _.each(terms, function(identifier){
+                            var term = _.find($scope.terms, {identifier:identifier});
+                            if(term){
+                                if(!$scope.selectedItems[identifier])
+                                    $scope.selectedItems[identifier] = {};
+                                
+                                var mySelectedChildren =_.filter(term.narrowerTerms, function(identifier){ 
+                                    return ($scope.selectedItems[identifier]||{}).selected
+                                });
+                                if(allChildSelected){
+                                    if(mySelectedChildren.length == term.narrowerTerms.length){
+                                        $scope.selectedItems[identifier].selected = true;
+                                        $element.find('#chk_'+identifier).prop('indeterminate', false)
+                                    }
+                                }
+                                else{ 
+                                    $scope.selectedItems[identifier].selected = selected;
+                                    if($scope.selectedItems[identifier].selected)
+                                        $element.find('#chk_'+identifier).prop('indeterminate', false)
+                                }
+
+                                if(term && term[type])//narrowerTerms||broaderTerms
+                                    selectChildTerms(term[type], selected, type, allChildSelected);
+                            }
+                    })
+                }
+                function setIndeterminanteParents(terms, val){
+                    if(!terms.length)
+                        return;
+
+                    _.each(terms, function(identifier){
+                            var term = _.find($scope.terms, {identifier:identifier});
+                            if(term && !($scope.selectedItems[identifier]||{}).selected){
+                                var hasChildSelected = isSelectedOrIndertiminante(term.narrowerTerms);
+                                $element.find('#chk_'+identifier).prop('indeterminate', hasChildSelected||val);
+                            }
+                            if(term && term.broaderTerms)
+                                setIndeterminanteParents(term.broaderTerms, val);
+                    })
+                    // $scope.save(termIdentifier, undefined, true)
+                }
+
+                function isSelectedOrIndertiminante(terms){
+                    var has = _.find(terms, function(identifier){ 
+                        return ($scope.selectedItems[identifier]||{}).selected||$element.find('#chk_'+identifier).prop('indeterminate')==true
+                    });
+                    return has != undefined;
+                }
                 //==============================
                 //
                 //==============================
@@ -154,7 +258,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                         if (($scope.layout || "tree") == "tree") //Default layout
                             $scope.rootTerms = thesaurus.buildTree(refTerms);
                         else
-                            $scope.rootTerms = Enumerable.from(refTerms).select("o=>{identifier : o.identifier, name : o.name, title : o.title, type:o.type}").toArray();
+                            $scope.rootTerms = Enumerable.from(refTerms).select("o=>{identifier : o.identifier, name : o.name, title : o.title, type:o.type, multiple:o.multiple}").toArray();
                         
                         buildSearchList($scope.rootTerms)
                     }
@@ -187,12 +291,14 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                 $scope.hasMatch = function(term){
                     if(!$scope.searchKeyword)
                         return;
-
+                    var keyword = $scope.searchKeyword;
+                    if($scope.beforeSearch)
+                        keyword     = $scope.beforeSearch({keyword:keyword})||keywords;
                     var title = term.searchTitle[locale]
                     if(!title)
                         title = term.searchTitle['en'];
 
-                    if(title.toLowerCase().indexOf($scope.searchKeyword.toLowerCase())>=0)
+                    if(title && title.toLowerCase().indexOf(keyword.toLowerCase())>=0)
                         return true;
                 }
                 //==============================
@@ -206,7 +312,8 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                             identifier: term.identifier, searchTitle: term.title,
                             displayTitle: buildDisplayTitle(term, 1)
                         });
-                        if(term.narrowerTerms){                            
+                        if(term.narrowerTerms){
+                            hasNarrowerTerms = true;                            
                             buildSearchList(term.narrowerTerms, searchList)
                          }
                     })
@@ -258,6 +365,29 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     }
                     
                     return mergedTitle;
+                }
+
+                $scope.deleteOtherElement = function (element, otherElements, $event) {
+                    otherElements.splice(otherElements.indexOf(element), 1);
+                    $scope.save(undefined, true);
+                };
+
+                $scope.appendEmptyOther = function (otherElements, skipSave) {                    
+                        var lastItem = otherElements[otherElements.length - 1];
+                        if (!angular.equals(lastItem, {}) && lastItem.name != "")
+                            otherElements.push({});
+
+                        if(!skipSave)
+                            $scope.save(undefined, true);
+                }
+                function initializeOther(identifier) {
+                    if(!$scope.otherElements[identifier])
+                        $scope.otherElements[identifier] = [];
+
+                    var otherElements = $scope.otherElements[identifier];
+                    var lastItem = otherElements[otherElements.length - 1];
+                    if (!lastItem || (!angular.equals(lastItem, {}) && lastItem.customValue != ""))
+                        otherElements.push({});
                 }
 
                 init();

@@ -1,10 +1,10 @@
-﻿define(['app',"text!./edit-contact.directive.html", 'views/directives/workflow-arrow-buttons', 
+﻿define(['app',"text!./edit-contact.directive.html", 'lodash', 'views/directives/workflow-arrow-buttons', 
 "views/forms/view/view-contact.directive", 'services/role-service',
 'components/scbd-angularjs-services/services/locale', 'views/forms/edit/editFormUtility'],
-function (app, template) {
+function (app, template, _) {
 
-app.directive("editContact", [ "$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'guid', 'editFormUtility', 'locale',
-function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, editFormUtility, locale){
+app.directive("editContact", [ "$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'thesaurusService', 'editFormUtility', 'locale', '$controller',
+function($http, $filter, $rootScope, $location, $q, storage, roleService, thesaurusService, editFormUtility, locale, $controller){
 
 	return {
 		restrict   : "E",
@@ -12,51 +12,26 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
 		replace    : true,
 		transclude : false,
 		scope      : {
-            identifier  : '=',
-			locales     : "=locales",
 			form        : "=form",
-            onPostPublishFn   : "&onPostPublish"
+            onPostSubmitFn   : "&onPostSubmit"
 		},
 		link : function($scope, $element, $attr){
-
+            $scope.formFields = {};
+            $scope.type = $attr.documentType;
+            $controller('editController', {$scope: $scope});
+            $scope.allowNew         = $attr.allowNew||true
             $scope.container        = $attr.container
             $scope.isDialog         = $attr.isDialog;
             $scope.isNationalUser   = roleService.isNationalUser();
             $scope.canEditGovernment = roleService.isAdministrator();
+            $scope.prefilledContactType = $attr.contactType
 
-            $scope.options = {            
-                countries		: function() {
-                    return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }).then(function(o){
-                      var countries = $filter("orderBy")(o.data, "name");
-                      _.each(countries, function(element) {
-                        element.__value = element.name;
-                      });
-                      return countries;
-                    });
-                },
+            _.extend($scope.options, {            
                 organizationTypes : function() {
-                    return $q.all([$http.get("/api/v2013/thesaurus/domains/Organization%20Types/terms", { cache: true })
-                            ,$http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",   { cache: true })])
-                    .then(function(o){
-                        var orgs = o[0].data;
-                        orgs.push(o[1].data);
-                        return orgs;
-                    });
+                    return thesaurusService.getDomainTerms('Organization Types', {other:true, otherType:'lstring'})
                 }
-            };           
+            });           
             
-            $scope.genericFilter = function($query, items) {
-                var matchedOptions = [];
-                for(var i=0; i!=items.length; ++i)
-                if(items[i].__value.toLowerCase().indexOf($query.toLowerCase()) !== -1)
-                    matchedOptions.push(items[i]);
-        
-                return matchedOptions;
-            };
-        
-            $scope.genericMapping = function(item) {
-                return {identifier: item.identifier};
-            };
             //==================================
             //
             //==================================
@@ -75,17 +50,31 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                 if (/^\s*$/g.test(document.lastName)) document.lastName = undefined;
                 if (/^\s*$/g.test(document.notes)) document.notes = undefined;
 
+                if(($scope.formFields.websites||[]).length)
+                    document.websites = _.map($scope.formFields.websites, function(url){ return { url:url } });
+
                 if(!$scope.isNationalUser)
                     document.government = undefined;
 
                 if(document.type == "organization"){
-                    document.firstName = document.middleName = document.lastName = undefined;
+                    document.firstName = undefined; 
+                    document.middleName = undefined;
+                    document.lastName = undefined;
                     document.contactOrganization = undefined;
+                    document.addressType = undefined;
                 }
                 else{
                     document.organization = undefined;
                     document.organizationType = undefined;
-                    if(document.contactOrganization){
+
+                    if(!document.addressType){
+                        if(document.contactOrganization)
+                            document.addressType = 'organization';
+                        else
+                            document.addressType = 'person';
+                    }
+
+                    if(document.contactOrganization && document.addressType == 'organization'){
                         document.address = undefined;
                         document.city	 = undefined;
                         document.state	 = undefined;
@@ -93,63 +82,72 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, guid, 
                         document.country	 = undefined;
                     }
                 }
-
-                return document;
+                return $scope.sanitizeDocument(document);
             };
 
         
             $scope.$watch('document.organizationType', function(newValue){
                 if(newValue && newValue.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
-                    if(document.organizationType && document.organizationType.customValue)
-                        document.organizationType.customValue = undefined;
+                    if($scope.document.organizationType && $scope.document.organizationType.customValue)
+                    $scope.document.organizationType.customValue = undefined;
                 }
             });
     
-            $scope.$watch('document.contactOrganization', function(newValue){
-                if(newValue ){
-                    document.address	= undefined;
-                    document.city		= undefined;
-                    document.state		= undefined;
-                    document.postalCode	= undefined;
-                    document.country	= undefined;
+            $scope.contactOrganizationChanged = function(newValue){
+                var document = $scope.document;
+
+                if(document.contactOrganization){
+                    
+                    if(!document.addressType)
+                        document.addressType = 'organization'
+
+                    if(document.addressType == 'organization'){
+                        document.address	= undefined;
+                        document.city		= undefined;
+                        document.state		= undefined;
+                        document.postalCode	= undefined;
+                        document.country	= undefined;
+                    }
+                    $scope.loadOrganizationAddress();
                 }
-            });
-            
-            $scope.onPostPublishOrRequest = function(documentInfo){
-                $scope.onPostPublishFn({ data: documentInfo });
-            };
-            
-            function setDocument() {
+                else if(document.addressType == 'organization')
+                    document.addressType = undefined;
 
-                $scope.status = "loading";
-        
-                var qDocument = {};
-                $scope.document = {};
-                if($scope.identifier)
-                    qDocument = editFormUtility.load($scope.identifier, 'contact');
-                else {
-                    qDocument = {
-                        header: {
-                        identifier  : guid(),
-                        schema      : 'contact',
-                        languages   : $scope.locales|| [locale]
-                        },
-                        government: $rootScope.user.government ? { identifier: $rootScope.user.government } : undefined,
-                    };        
-                }                
-        
-                return $q.when(qDocument).then(function(doc) {
-        
-                    $scope.tab    = "edit";
-                    $scope.document = doc;            
-                    $scope.status = "ready";
-        
-                });
             };
-            
-            setDocument();
 
-		}
+            $scope.setAddressType = function(){
+                if(!$scope.document.addressType)
+                    $scope.document.addressType = 'person';
+            }
+                        
+            $scope.loadOrganizationAddress = function(){
+                var document = $scope.document;
+                if(document.contactOrganization && document.addressType == 'organization' && 
+                    (!$scope.organization || document.contactOrganization.identifier!= $scope.organization.identifier)){
+
+                    storage.documents.get(document.contactOrganization.identifier, {info:false}).then(function(org){
+                        $scope.organization = org.data;
+                    })
+                }
+            }
+
+            $scope.newDialogAttributes = function(){
+                return "contact-type='organization'";
+            }
+
+            var doc = {
+                type : $scope.prefilledContactType? $scope.prefilledContactType: undefined
+            }
+            $scope.setDocument(doc, !$rootScope.user.government)
+            .then(function(document){
+                $scope.formFields.websites = []
+                if((document.websites||[]).length){
+                  $scope.formFields.websites = _.map(document.websites, 'url');
+                }
+            })
+            .then($scope.loadOrganizationAddress);
+
+        }
 	};
 }]);
 

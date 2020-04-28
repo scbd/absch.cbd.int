@@ -209,13 +209,30 @@ function (app, schemaNamePlural) {
 	//
 	//
 	//============================================================
-	app.filter("schemaNamePlural", [function() {
+	app.filter("schemaNamePlural", ['realm', 'locale', '$filter', function(realm, locale, $filter) {
 
-		return function( schema ) {
-			if(!schema)
-				return schema;
+		return function( schemaName ) {
+			if(!schemaName)return schemaName;
 			
-			return schemaNamePlural[schema.toLowerCase()]|| schema;
+			var pluralTitle;
+			var schema = realm.schemas[schemaName]||{};
+			
+			if(schema.titlePlural)
+				pluralTitle = schema.titlePlural;
+
+			if(!pluralTitle)
+				pluralTitle = schema.title;
+
+			if(!pluralTitle)
+				pluralTitle = schemaNamePlural[schemaName];
+
+			var result = $filter('lstring')(pluralTitle, locale);
+
+			if(!result || result == '')
+				result = schemaName;//legacy
+
+			return result;
+			
 		};
 	}]);
 

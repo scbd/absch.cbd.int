@@ -1,0 +1,30 @@
+
+<div>
+    <div ng-if="view=='list'">
+        <span ng:repeat="term in rootTerms" ng-if="term.originalObject.showTerm" ng-include="'view-term-list-renderer.html'"></span>
+        <script type="text/ng-template" id="view-term-list-renderer.html">
+            <span ng-if="term.broaderTerms.length">≫</span> 
+            <label ng-bind="term.title||term.name | lstring:locale"></label>
+            <label ng-if="term.originalObject.customValue">
+                (<span ng-bind="term.originalObject.customValue | lstring:locale"></span>)
+            </label>
+            <span ng-if="term.narrowerTerms.length">
+                <span ng:repeat="term in term.narrowerTerms" ng-if="term.originalObject.showTerm" ng-include="'view-term-list-renderer.html'"></span>
+            </span>
+        </script>
+    </div>
+    <div ng-if="view=='tree'">
+        <ul style="list-style: circle;margin: 0px 10px 10px 10px;">
+            <li ng:repeat="term in rootTerms" ng-if="term.originalObject.showTerm" ng-include="'view-term-check-tree-renderer.html'"></li>
+        </ul>    
+        <script type="text/ng-template" id="view-term-check-tree-renderer.html">
+            <label ng-bind="term.title||term.name | lstring:locale"></label>
+            <label ng-if="term.originalObject.customValue">
+                (<span ng-bind="term.originalObject.customValue | lstring:locale"></span>)
+            </label>
+            <ul style="list-style:circle;padding-left:10px">
+                <li ng:repeat="term in term.narrowerTerms" ng-if="term.originalObject.showTerm" ng-include="'view-term-check-tree-renderer.html'"></li>
+            </ul>
+        </script>
+    </div>
+</div>

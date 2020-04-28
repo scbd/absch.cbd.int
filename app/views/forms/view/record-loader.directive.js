@@ -1,4 +1,4 @@
-﻿define(['app', 'text!views/forms/view/record-loader.directive.html', 
+define(['app', 'text!views/forms/view/record-loader.directive.html', 
 	'components/scbd-angularjs-services/services/main', 'ngSmoothScroll',
 	'components/scbd-angularjs-services/filters/scbd-filters',
 	'./view-history-directive',
@@ -10,7 +10,8 @@
 	'services/search-service',
 	'views/directives/block-region-directive',
 	'views/directives/record-options','components/scbd-angularjs-services/services/locale',
-	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/form-control-directives/km-value-ml'
+	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/form-control-directives/km-value-ml',
+	'views/forms/view/view-reference-records.directive', 'views/forms/directives/compare-val'
 ], function (app, template) {
 
 	app.directive('recordLoader', [function () {
@@ -42,7 +43,7 @@
 				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta',
 				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
 					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows, appLocale, ngMeta) {
-					
+					var htmlDiff;
 					$scope.realm = realm;
 					if(!$scope.locale)
 						$scope.locale = appLocale;
@@ -64,6 +65,7 @@
 						contact						: 'views/forms/view/view-contact.directive',
 						contactreference			: 'views/forms/view/view-contact-reference.directive',
 						authority					: 'views/forms/view/view-authority.directive',
+						supplementaryAuthority		: 'views/forms/view/view-supplementary-authority.directive',
 						database					: 'views/forms/view/view-database.directive',						
 						organization				: 'views/forms/view/view-organization.directive',
 						organizationreference		: 'views/forms/view/view-organization-reference.directive',
@@ -77,22 +79,24 @@
 						notification				: 'views/forms/view/scbd/view-notification.directive',
 						news						: 'views/forms/view/scbd/view-news.directive',
 
-						"biosafetyLaw" 				: 'views/forms/view/bch/view-biosafety-law.directive',
-						"biosafetyDecision" 		: 'views/forms/view/bch/view-biosafety-decision.directive',
-						"riskAssessment" 			: 'views/forms/view/bch/view-risk-assessment.directive',
-						"cpbNationalReport2" 		: 'views/forms/view/bch/view-national-report-2.directive',
-						"cpbNationalReport3" 		: 'views/forms/view/bch/view-national-report-3.directive',
-						"cpbNationalReport4" 		: 'views/forms/view/bch/view-national-report-4.directive',
-						"expert" 					: 'views/forms/view/bch/view-expert.directive',
-						"expertAssignment" 			: 'views/forms/view/bch/view-expert-assignment.directive',
-						"riskAssessment" 			: 'views/forms/view/bch/view-risk-assessment.directive',
-						"modifiedOrganism" 			: 'views/forms/view/bch/view-lmo.directive',
-						"dnaSequence" 				: 'views/forms/view/bch/view-dna-sequence.directive',
-						"organism" 					: 'views/forms/view/bch/view-organism.directive'
+						biosafetyLaw				: 'views/forms/view/bch/view-biosafety-law.directive',
+						biosafetyDecision	 		: 'views/forms/view/bch/view-biosafety-decision.directive',
+						nationalRiskAssessment	 	: 'views/forms/view/bch/view-risk-assessment.directive',
+						cpbNationalReport2	 		: 'views/forms/view/bch/view-national-report-2.directive',
+						cpbNationalReport3	 		: 'views/forms/view/bch/view-national-report-3.directive',
+						cpbNationalReport4	 		: 'views/forms/view/bch/view-national-report-4.directive',
+						expert	 					: 'views/forms/view/bch/view-expert.directive',
+						expertAssignment			: 'views/forms/view/bch/view-expert-assignment.directive',
+						independentRiskAssessment	: 'views/forms/view/bch/view-risk-assessment.directive',
+						modifiedOrganism	 		: 'views/forms/view/bch/view-lmo.directive',
+						dnaSequence	 				: 'views/forms/view/bch/view-dna-sequence.directive',
+						organism	 				: 'views/forms/view/bch/view-organism.directive',
+						laboratoryDetection	 		: 'views/forms/view/bch/view-laboratory-detection.directive'
 					}
 
 					$scope.$watch("document", function (_new) {
 						$scope.error = null;
+						if(!_new)return;// due to cache loaddocument calls first before the first watch on documents gets called.
 						$scope.internalDocument = _new;
 						if ($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)) {
 							loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
@@ -120,7 +124,7 @@
 						var documentSchema = $route.current.params.documentSchema;
 						var documentRevision = $route.current.params.revision;
 
-						var documentID = $route.current.params.documentID
+						var documentID = $route.current.params.documentID||$route.current.params.documentId
 						//documentSchema ? commonjs.integerToHex($route.current.params.documentID, documentSchema) : $route.current.params.documentID;
 
 						if ($scope.revisionNo)
@@ -130,27 +134,14 @@
 							var documentID = $route.current.params.documentNumber;
 
 						if (documentID && (/^bch/i.test(documentID) || /^abs/i.test(documentID))) {
+							documentID = documentID.replace(/-(dev|trg)/i, '');
 							var docNum = documentID.split('-');
 							if (docNum.length == 5) {
-								documentID = documentID.toLowerCase();//.replace('absch','ABSCH');
-								$scope.documentUID = documentID.toUpperCase();
-								var schemaFolder = $filter("mapSchema")(docNum[1]);
-								$scope.documentUrl = "https://s3.amazonaws.com/absch.documents." + realm.value.toLowerCase() + "/" + schemaFolder + '/' + documentID + '-en.pdf?id=' + new Date();
-
-								$httpAWS.head($scope.documentUrl, { cache: false }).then(function (success) {
-									$scope.documentSuccess = true;
-									window.location.href = $scope.documentUrl;
-									closeWindow();
-								},
-									function (error) {
-										$scope.documentError = true;
-										console.log(error);
-									});
-
-								return;
+								documentID 		 = docNum[3];
+								documentRevision = docNum[4];
 							}
-							if (docNum.length <= 4)
-								documentID = docNum[docNum.length - 1];
+							else if (docNum.length == 4)
+								documentID = docNum[3];
 
 						}
 						documentID = commonjs.integerToHex(documentID, documentSchema);
@@ -241,21 +232,22 @@
 										else
 											$scope.workflowRequestType = "publishing";
 									});
+								if($scope.internalDocumentInfo.revision > 1)
+									$scope.showDifferenceButton = true
 							}				
 							if (version)
 								$scope.revisionNo = version
 
 							loadViewDirective($scope.internalDocument.header.schema);
-							// setMetaTags($scope.internalDocument);
 
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
 								$scope.load(identifier, 'draft');
 							}
 						})
-							.finally(function () {
-								$scope.loading = false;
-							})
+						.finally(function () {
+							$scope.loading = false;
+						})
 
 					};
 
@@ -345,7 +337,58 @@
 
 					});
 
-					function loadViewDirective(schema) {
+					$scope.showDifference = function(){
+						if($scope.isComparing)return;
+
+						if(!$scope.showDifferenceOn){
+							$scope.isComparing = true;							
+							$scope.showDifferenceOn = true;
+							require(['js/html-difference'], function(diffParser){
+								htmlDiff = diffParser;
+								loadViewDirective($scope.internalDocumentInfo.type, function(directiveHtml){
+									return  { 
+										divSelector 	: '#compareSchemaView',
+										directiveHtml 	: directiveHtml.replace("ng-model='internalDocument'", "ng-model='prevDocument'")
+									}
+								})
+								storage.documents.get($scope.internalDocumentInfo.identifier + '@' + $scope.internalDocumentInfo.latestRevision)
+									.then(function (result) { 
+										$scope.prevDocument = result.data
+									}).then(compareWithPrev)	
+							})
+						}	
+						else{
+							$scope.showDifferenceOn = false;
+							loadViewDirective($scope.internalDocumentInfo.type);
+						}					
+					}
+					$scope.updateComparision = function(){
+						if($scope.showDifferenceButton && $scope.showDifferenceOn)
+							loadViewDirective($scope.internalDocumentInfo.type).then(compareWithPrev);
+					}
+
+					function compareWithPrev(){
+						//timeout so that the directive is rendered.
+						$timeout(function(){
+										
+							var view1 = $element.find('#compareSchemaView .compare-diff');
+
+							_.each(view1, function(e, i){
+								var cssClasses = e.className.split(' ')
+								var compareClass = _.find(cssClasses, function(c){
+									if(/^compare_/.test(c))
+										return c;
+								})
+								var newHtml = $element.find('#schemaView .compare-diff.' + compareClass);
+								// console.log(newHtml.html())
+								let output = htmlDiff(e.innerHTML, newHtml.html());
+								newHtml.html(output);
+							});
+							$scope.isComparing = false;
+						}, 300)
+					}
+
+					function loadViewDirective(schema, beforeReplace) {
 
 						if (!schema)
 							return;
@@ -361,18 +404,26 @@
 							lschema = $filter("mapSchema")(lschema);
 
 						var schemaDetails = schemaMapping[lschema];
-
+						var defer = $q.defer();
 						require([schemaDetails], function () {
-							var name = snake_case(lschema);
+							var divSelector = '#schemaView'
+							var name 		= snake_case(lschema);
 							var directiveHtml =
 								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}} locale='locale'></DIRECTIVE>"
 									.replace(/DIRECTIVE/g, 'view-' + name);
 							$scope.$apply(function () {
-								$element.find('#schemaView')
-									.empty()
-									.append($compile(directiveHtml)($scope));
+								if(typeof beforeReplace == 'function'){
+									var dirInfo 	= beforeReplace(directiveHtml)
+									divSelector 	= dirInfo.divSelector || divSelector;
+									directiveHtml 	= dirInfo.directiveHtml || directiveHtml;
+								}
+								$element.find(divSelector).empty()
+										.append($compile(directiveHtml)($scope));
+								defer.resolve('')
 							});
 						});
+
+						return defer.promise
 
 					}
 					function snake_case(name, separator) {
@@ -390,17 +441,6 @@
 								$scope.isIRCCRevoked = true;
 						}
 					}
-
-					function setMetaTags(document){
-						ngMeta.resetMeta();   
-						searchService.list({query:'identifier_s:'+document.header.identifier})
-						.then(function(result){
-							var indexDoc = result.data.response.docs[0];
-							var schemaName = $filter('mapSchema')(document.header.schema);							
-							ngMeta.setTitle(indexDoc.rec_countryName, ' | ' + schemaName);
-							ngMeta.setTag('description', indexDoc.rec_summary || window.scbdApp.title);
-						})
-					} 
 
 					$scope.api = {
 						loadDocument: $scope.loadDocument,

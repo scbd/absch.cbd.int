@@ -1,6 +1,6 @@
 define(['app', "text!views/forms/view/bch/view-lmo.directive.html", 
 'views/directives/record-options', './view-lmo-reference.directive', './view-lmo-gene.directive',
-'views/forms/view/view-default-reference.directive'
+'views/forms/view/view-default-reference.directive', 'views/forms/directives/view-terms-hierarchy'
 ], function (app, template) {
 
 app.directive("viewModifiedOrganism", [function () {
@@ -29,6 +29,7 @@ app.directive("viewModifiedOrganism", [function () {
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			}
+
 		}]
 	};
 }]);

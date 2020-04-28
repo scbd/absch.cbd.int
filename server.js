@@ -7,14 +7,12 @@ var express      = require('express');
 var proxy        = require('http-proxy').createProxyServer({});
 var app          = express();
 var cookieParser = require('cookie-parser');
-var translation  = require('./app/app-libs/translation');
 var _            = require('lodash');
-
-let cacheControl = require('./app/app-libs/cache-control')
+var translation  = require('./middlewares/translation');
+let cacheControl = require('./middlewares/cache-control')
 
 // Initialize constants
 var appVersion          = process.env.TAG;
-var oneDay              = 86400000;
 let apiUrl              = process.env.API_URL||'https://api.cbddev.xyz';
     global.app          = _.extend((global.app||{}), {});
     global.app.rootPath = __dirname; //to use in subfolders
@@ -26,39 +24,47 @@ if(!appVersion || appVersion.trim()==''){
 app.set('view engine', 'ejs');
 app.use(cookieParser());
 
+//special case for compression as prod files are compressed from cloud-front.
+//use express compress when compress varibale is true. 
+if(process.env.COMPRESS=='true'){
+    app.use(require('compression')({ filter: shouldCompress }));
+
+    function shouldCompress (req, res) {
+        if (/\/api\/*/.test(req.path)) {
+          // don't compress responses with this request header
+          return false
+        }
+        const compression = require('compression')
+        // fallback to standard filter function
+        return compression.filter(req, res)
+    }
+}
+
 // Set routes
-app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: cacheControl.setCustomCacheControl , maxAge: 86400000*365 }) );
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: cacheControl.setCustomCacheControl}) );
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          translation.renderLanguageFile, express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
 
 app.use('/cbd-forums',      express.static(__dirname + '/node_modules/@bower_components/cbd-forums', { setHeaders: cacheControl.setCustomCacheControl }));
-app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: cacheControl.setCustomCacheControl , maxAge: oneDay }));
+app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: cacheControl.setCustomCacheControl}));
 
-app.all('/sitemap(:num([0-9]{1,3})?).xml',     (req, res) =>{
-    let sitemapName = process.env.CLEARINGHOUSE.toLowerCase();
-    if(req.params.num)
-        sitemapName += req.params.num;
-     require('superagent').get(`https://attachments.cbd.int/sitemap-${sitemapName}.xml`)
-                          .query({bust:new Date().getTime()}).pipe(res)
-});
+app.get('/robots.txt' , require('./middlewares/robots'));
+app.all('/sitemap(:num([0-9]{1,3})?).xml', require('./middlewares/sitemap'));
 
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
-app.post('/error-logs', (req, res) => {   
-    proxy.web(req, res, { target: `${apiUrl}/api/v2016/error-logs?type=client-app-errors&serverAppVersion=${encodeURIComponent(appVersion)}`, 
-                            secure:false, ignorePath:true, xfwd:true });
-});
+app.post('/error-logs', require('./middlewares/error-logs')(proxy, {apiUrl:apiUrl, appVersion:appVersion}));
 
 
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
 app.all('/api/*', (req, res) => proxy.web(req, res, { target: apiUrl, changeOrigin: true, secure:false }));
 
-app.use(require('./app/app-libs/prerender')); // set env PRERENDER_SERVICE_URL
+app.use(require('./middlewares/prerender')); // set env PRERENDER_SERVICE_URL
 
 app.get('/(:lang(ar|en|es|fr|ru|zh)(/|$))?*', 
     function(req, res, next){
         global.app.version = appVersion;
-        res.setHeader('Cache-Control', 'public, max-age=0');    
+        res.setHeader('Cache-Control', 'public');    
         res.cookie('VERSION', appVersion);
         next();
     },  

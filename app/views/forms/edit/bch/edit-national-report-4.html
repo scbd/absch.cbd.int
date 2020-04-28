@@ -1,4 +1,4 @@
-﻿<div ng-controller="editBchNationalReport4">
+﻿<div ng-controller="editBchNationalReport4Controller">
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
     <style>
         .disabled {
@@ -133,7 +133,7 @@
                     </div>
                 </edit-form>
                 <review-form>
-                    <view-cpb-national-report-4 ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></view-cpb-national-report-4>
+                    <view-cpb-national-report-4 ng-model="review.document" locale="review.locale" allow-drafts="true"></view-cpb-national-report-4>
                 </review-form>
             </workflow-arrow-buttons>
         </div>
@@ -164,7 +164,7 @@
                     <div class="col-xs-12">
                         <div class="km-control-group" name="contact" caption="Contact person submitting the report" required>											
                             <div document-selector ng-model="document.contact" question="contact"  type="radio"
-                                government="document.government" schema="(contact focalPoint)"></div>			
+                                government="document.government" schema="(contact focalPoint)" allow-new="true" allow-new-schema="contact"></div>			
                         </div>
                     </div>
                 </div>

@@ -6,8 +6,5 @@ define(['app', 'views/forms/edit/edit', 'views/forms/edit/directives/edit-contac
             $scope: $scope
         });
 
-		$scope.identifier = $routeParams.identifier;
-
-
 	 }]);
 });

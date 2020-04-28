@@ -181,7 +181,8 @@
                                                         <div class="km-control-group " name="providers" required caption="The provider" style="margin-top:0;">
                                                             <span class="help-info">Please provide the name and contact details of the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
                                                             <div ng-show="!document.providersConfidential">
-                                                                <div document-selector ng-model="document.providers" question="providers" government="document.government" schema="(contact authority)"></div>
+                                                                <div document-selector ng-model="document.providers" question="providers" government="document.government"
+                                                                allow-new="true" allow-new-schema="contact" schema="(contact authority)"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -233,7 +234,8 @@
                                                             <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
                                                                 <div class="help-info">Please provide the name and contact details of the person or entity to whom prior informed consent was granted. If the information is marked as confidential that person will not be able to receive the
                                                                     courtesy copy of the IRCC or the CPC. </div>
-                                                                <div document-selector ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted" government="document.government" schema="(contact authority)"></div>
+                                                                <div document-selector ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted" 
+                                                                allow-new="true" allow-new-schema="contact" government="document.government" schema="(contact authority)"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -332,7 +334,7 @@
                                             <div class="col-xs-12" ng-class="{'warning':isInvalid('gisFiles')}">
                                                 <div class="km-control-group">
                                                     <label class="control-label" for="gisFiles">Geographic coordinates</label>
-                                                    <span class="help-info">Limited to .geojson files (<a target="_new_" href="http://www.geojson.org/">http://www.geojson.org/</a>)</span>
+                                                    <span class="help-info">Limited to .geojson files (<a target="_blank" href="http://www.geojson.org/">http://www.geojson.org/</a>)</span>
                                                     <div km-link required name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
                                                 </div>
             
@@ -467,8 +469,8 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="notes">
-                                                    <div class="help-info">The “Notes” field is for your personal notes or comments and will be hidden when viewing the record. This field is not meant to be used for confidential information.</div>
-                                                    <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
+                                                    <div class="help-info">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+                                                    <div km-notes name="notes" ng-model="document.notes"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -477,7 +479,7 @@
                             </form>
                 </edit-form>
                 <review-form>
-                    <view-abs-permit ng-model="reviewDocument" locale="review.locale" allow-drafts="true"></view-abs-permit>
+                    <view-abs-permit ng-model="review.document" locale="review.locale" allow-drafts="true"></view-abs-permit>
                 </review-form>
                 <!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons -->
             </div>

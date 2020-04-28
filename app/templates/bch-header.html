@@ -53,14 +53,14 @@
                         </a>
                     </li>
                     <li>
-                        <a translation-url  ng-href="https://bch.cbd.int/database/" ng-click="activeMenu='search'"
+                        <a translation-url  ng-href="/search" ng-click="activeMenu='search'"
                         ng-class="{'active-menu' : activeMenu == 'search'}"> <i class="icon fa fa-search visible-xs "></i>
                             <span class="hidden-xs "> Search</span>
                         </a>
                     </li>
                     <li>
                         <a translation-url  ng-href="register"  ng-click="activeMenu='submit'"
-                         ng-class="{'active-menu' : activeMenu == 'submit'}"> <i class="icon fa fa-lock"></i>
+                         ng-class="{'active-menu' : activeMenu == 'submit'}"> <i class="icon fa fa-edit visible-xs"></i>
                          <span class="hidden-xs "> Submit</span>
                         </a>
                     </li>
@@ -72,18 +72,23 @@
                     </li> -->
                     <li>
                         <a href="#" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
-                        ng-class="{'active-menu' : activeMenu == 'countryProfile'}" ng-click="activeMenu='countryProfile'">
+                        ng-class="{'active-menu' : activeMenu == 'countryProfile'}" ng-click="activeMenu='countryProfile';countrySearchQuery=''">
                             <span  ng-href="countries">Country Profiles <span class="caret"></span></span>
                         </a>
                         <a ng-href="countries" class="visible-xs"> <i class="icon fa fa-globe "></i></a>
                         <ul class="dropdown-menu hidden-xs"  style="padding:10px;max-height:380px;overflow-y:scroll; border:0;margin-top:11px;">
-                            <!-- <br>
-                            <li style="border:0!important;"> <a style="color:#111!important;font-size:16px;" ng-href="countries"> Overview - List all countries </a></li>
-                            <hr> -->
-                            <li  style="border:0!important;" ng-repeat="c in countries track by c.code" >
-                                <a style="color:#666!important;font-size:14px;" ng-href="https://bch.cbd.int/about/countryprofile.shtml?country={{c.code|encode}}" >
-                                    <span class="bold" ng-class="{'color-party': c.isNPParty, 'color-grey':!c.isNPParty, 'color-inbetween': c.isNPInbetweenParty}">
-                                        {{c.name | lstring:locale}}
+                            <li style="border:0!important;"> <a style="color:#111!important;font-size:16px;" ng-href="/countries"> Overview - List all countries </a></li>
+                            <hr style="margin: 5px;">
+                            <!-- <li style="border:0!important;" class="input-group"> 
+                                <input type="text" class="form-control" ng-click="countrySearch($event)" ng-model="countrySearchQuery"/>
+                                <span type="submit" style="cursor:pointer" ng-click="saveSchemaFreeText(filter, filter.searchKeyword)" 
+                                    class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
+                            </li>
+                            |filter:startsWith -->
+                            <li  style="border:0!important;" ng-repeat="c in ::countries track by c.code" >
+                                <a style="color:#666!important;font-size:14px;" ng-href="/countries/{{::c.code|encode}}" >
+                                    <span class="bold" ng-class="{'color-party': c.isCPParty, 'color-grey':!c.isCPParty}">
+                                        {{::c.name | lstring:locale}}
                                     </span>
                                 </a>
                             </li>

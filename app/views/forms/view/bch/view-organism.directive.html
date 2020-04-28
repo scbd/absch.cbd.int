@@ -1,8 +1,8 @@
 ﻿<div id="Record" class="record panel panel-default">
-	<div class="panel-heading bg-blue">
+	<div class="panel-heading bg-orange">
 		<h4>
 			Organism
-			<span class="color-black"> (ORSM) </span>
+			<span class="color-black"> (ORGA) </span>
 		</h4>
 	</div>
 	<div class="record-body panel-body">
@@ -12,21 +12,32 @@
 		
 		<div ng-show="document.scientificName">
 			<label>Scientific name</label>
-			<div class="km-value" ng-bind="document.scientificName"> 
-				<span ng-if="document.scientificNameSynonyms">({{document.scientificNameSynonyms}})</span></div>
+			<div class="km-value" ng-bind="document.scientificName"></div>
 		</div>
-		<div>
+		
+		<div ng-if="classification">
 			<label>Taxonomic Classification</label>
 			<div class="km-value">
 				<table cellpadding="0" cellspacing="0">
 					<tbody>
-						<tr ng-if="document.kingdom"><td  style="padding: 2px 3px 2px 2px;padding-left: 5px;">Kingdom</td><td id="E6884729" style="padding: 2px 2px 2px 3px;" 	ng-bind="document.kingdom"	></td></td>
-						<tr ng-if="document.phylum"><td  style="padding: 2px 3px 2px 2px;padding-left: 10px;">Phylum</td><td id="E6884732" style="padding: 2px 2px 2px 3px;" 	ng-bind="document.phylum"	></td></tr>
-						<tr ng-if="document._class"><td  style="padding: 2px 3px 2px 2px;padding-left: 15px;">Class</td><td id="E6884735" style="padding: 2px 2px 2px 3px;" 	ng-bind="document._class"	></td></tr>
-						<tr ng-if="document.order"><td  style="padding: 2px 3px 2px 2px;padding-left: 20px;">Order</td><td id="E6884738" style="padding: 2px 2px 2px 3px;" 	ng-bind="document.order"	></td></tr>
-						<tr ng-if="document.family"><td  style="padding: 2px 3px 2px 2px;padding-left: 25px;">Family</td><td id="E6884741" style="padding: 2px 2px 2px 3px;" 	ng-bind="document.family"	><!-- ng-bind="document.subFamily " --></td></tr>
-						<tr ng-if="document.genus"><td  style="padding: 2px 3px 2px 2px;padding-left: 30px;">Genus</td><td id="E6884744" style="padding: 2px 2px 2px 3px;"		ng-bind="document.genus"	></td></tr>
-						<tr ng-if="document.species"><td  style="padding: 2px 3px 2px 2px;padding-left: 35px;">Species</td><td id="E6884747" style="padding: 2px 2px 2px 3px;"	ng-bind="document.species"	><!-- ng-bind="document.subSpecies" --></td></tr>
+						<tr ng-repeat="(key, taxonomy) in classification">
+							<td style="width:10%">
+								<span ng-if="key == 'realm'"		ng-style="{'padding-left' : (5*$index)+'px' }">Realm		</span>
+								<span ng-if="key == 'subRealm'"		ng-style="{'padding-left' : (5*$index)+'px' }">Subrealm	</span>
+								<span ng-if="key == 'kingdom'"		ng-style="{'padding-left' : (5*$index)+'px' }">Kingdom	</span>
+								<span ng-if="key == 'phylum'"		ng-style="{'padding-left' : (5*$index)+'px' }">Phylum	</span>
+								<span ng-if="key == '_class'"		ng-style="{'padding-left' : (5*$index)+'px' }">Class		</span>
+								<span ng-if="key == 'order'"		ng-style="{'padding-left' : (5*$index)+'px' }">Order		</span>
+								<span ng-if="key == 'subOrder'"		ng-style="{'padding-left' : (5*$index)+'px' }">Suborder	</span>
+								<span ng-if="key == 'family'"		ng-style="{'padding-left' : (5*$index)+'px' }">Family	</span>
+								<span ng-if="key == 'subFamily'"	ng-style="{'padding-left' : (5*$index)+'px' }">Subfamily	</span>
+								<span ng-if="key == 'genus'"		ng-style="{'padding-left' : (5*$index)+'px' }">Genus		</span>
+								<span ng-if="key == 'species'"		ng-style="{'padding-left' : (5*$index)+'px' }">Species	</span>
+								<span ng-if="key == 'subSpecies'"	ng-style="{'padding-left' : (5*$index)+'px' }">Species	</span>
+							</td>
+							<td ng-bind="taxonomy" style="text-align:left;padding-left:5px">
+							</td>
+						</tr>						
 					</tbody>
 				</table>
 			</div>
@@ -52,7 +63,7 @@
 			</div>
 		</div>
 
-		<legend>Additional Classification</legend>
+		<label>Additional Classification</label>
 		
 		<div ng-show="document.plantCultivar">
 				<label>Cultivar / variety (plants)</label>
@@ -74,12 +85,12 @@
 		</div>
 
 		<div ng-show="document.organismType">
-			<label>Type of organism</label>
-			<div class="km-value" ng-bind="document.organismType | term:locale"></div>
+			<label>Type of organism(s)</label>
+			<view-terms-hierarchy  class="km-value" ng-model="document.organismType" locale="locale" term-domain="typeOfOrganisms"></view-terms-hierarchy>
 		</div>
 
 		<div ng-show="document.domestication">
-			<label>Organism domestication</label>
+			<label>Domestication</label>
 			<div class="km-value" ng-bind="document.domestication | term:locale"></div>
 		</div>
 
@@ -106,9 +117,14 @@
 		</div>
 
 		<div ng-show="document.compatibleSpecies">
-				<label>Cross-compatible species</label>
-				<view-default-reference ng-model="document.compatibleSpecies.identifier" locale="locale" target="target"></view-default-reference>
-				<div class="km-value" ng-bind="document.compatibleSpecies"></div>
+			<label>Cross-compatible species</label>
+			<div class="km-value">
+				<ul>
+					<li ng-repeat="item in document.compatibleSpecies">
+						<view-default-reference ng-model="item.identifier" locale="locale" target="target"></view-default-reference>
+					</li>
+				</ul>
+			</div>				
 		</div>
 
 		<div ng-show="document.pathogenicity">
@@ -143,6 +159,9 @@
 					</ul>
 				</div>
 			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
 		</div>
 	</div>
 	<div document-metadata class="panel-footer"></div>
