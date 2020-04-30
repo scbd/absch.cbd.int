@@ -14,7 +14,7 @@
             <button class="btn btn-xs btn-default"  type ="button" ng-click="clearSelection()" ng-disabled="!hasSelectedItems()">Clear selection</button>
             <div class="list-group-item active">{{title}}</div>
             <div class="list-group-item dropdowndate" >   
-                <select class="form-control" ng-model="selectedDate" ng-change-"onSelectedDate()" ng-options="date.text for date in dates"></select>
+                <select class="form-control" ng-model="selectedDate" ng-change="onSelectedDate()" ng-options="date.text for date in dates"></select>
                 <div class="row" style="margin-top:6px">
                     <div class="col-md-6">
                         <div style="font-size:10px;font-weight:bold">SINCE</div>
