@@ -385,6 +385,8 @@ define([
 
       }).catch(function(err) {
 
+        if(err.status == 403)
+          $location.path('/help/403')
         $scope.onError(err.data, err.status)
         throw err;
 

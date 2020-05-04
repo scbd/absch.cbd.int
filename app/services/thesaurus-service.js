@@ -31,7 +31,7 @@ define(['app', 'services/cache-service'], function (app) {
 
                 if(options.other){
                     var urlOther = '/api/v2013/thesaurus/terms/' + domainTerms['other'];
-                    return $q.all([$http.get(url, {cache:termsCacheFactory}),$http.get(urlOther), {cache:termsCacheFactory}])
+                    return $q.all([$http.get(url, {cache:termsCacheFactory}),$http.get(urlOther, {cache:termsCacheFactory})])
                                 .then(function(termData){
                                     var data       = termData[0].data;
                                     var other      = termData[1].data;
