@@ -3,7 +3,8 @@ define(['app', 'lodash', 'text!./edit-modified-organism.directive.html', 'views/
 	'views/forms/directives/view-terms-hierarchy'], 
 function (app, _, template) {
 
-	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", function($http, $controller, thesaurusService) {
+	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q',
+		 function($http, $controller, thesaurusService, storage, $q) {
 		
 		return {
 			restrict   : "EA",
@@ -14,7 +15,7 @@ function (app, _, template) {
 				onPostSubmitFn   : "&onPostSubmit"
 			},
 			link: function($scope, $element, $attr){
-
+				var oldGenes = [];
 				$scope.scientificNameSynonyms = [{}];
 				$scope.commonNames = [{}];
 				$scope.container        = $attr.container;
@@ -52,19 +53,33 @@ function (app, _, template) {
 					return $scope.sanitizeDocument(document);
 				};
 				
-				$scope.setDocument({}, true);
-
-				$scope.onConstructChange = function(){
-					var constructIds = _($scope.document.geneConstructs).flatten().compact().value();
-
-					if(constructIds.length>0 && !$scope.document.genes)
-						$scope.document.genes = [];
+				$scope.onModifiedGeneChange = function(genes){
+					var geneIdentifiers = _.map(genes||[], 'identifier');
+					var newGenes = _.filter(geneIdentifiers, function(identifier){ return !_.includes(oldGenes, identifier) });				
 					
-					_.each(constructIds, function(cons){
-						if(!_.find($scope.document.genes, {identifier: cons.identifier}))
-							$scope.document.genes.push({ identifier:cons.identifier })
-					});
-					
+					if(newGenes.length){
+						updateOldGenes($scope.document);
+						$scope.loadingGeneTraits = true;
+						var queries = _.map(newGenes, function(identifier){return loadReferenceDocment(identifier).then(function(result){return result.data;})});
+						$q.all(queries)
+						.then(function(documents){
+							var newTraits = _(documents).map('body').map('traits').flatten().compact().flatten().uniq().value();
+							if(newTraits.length){
+
+								var newDocumentTraits = angular.copy($scope.document.traits||[]);
+								_.each(newTraits, function(trait){
+									if(trait.customValue || !_.find(newDocumentTraits, trait)){
+										newDocumentTraits.push(trait);
+									}
+								})
+								if(newDocumentTraits.length)
+									$scope.document.traits = _.union($scope.document.traits, newDocumentTraits);
+							}
+						})
+						.finally(function(){
+							$scope.loadingGeneTraits = false;
+						})
+					}
 				}
 
 				$scope.onConstructChange = function(){
@@ -107,6 +122,19 @@ function (app, _, template) {
 					.finally(function(){
 						$scope.lookingupDetections = false;
 					})
+				}
+
+				$scope.setDocument({}, true).then(updateOldGenes);
+
+				function updateOldGenes(document){
+					oldGenes = _.map(document.genes||[], 'identifier');
+				}
+				function loadReferenceDocment(identifier){
+					return storage.drafts.get(identifier, { info: true })					
+					.catch(function(e){
+						if (e.status == 404)
+							return storage.documents.get(identifier, { info: true });
+					});
 				}
 			}
 		}

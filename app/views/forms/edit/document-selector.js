@@ -67,13 +67,14 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 
                 //$scope.model=undefined;
                 var oldModel = angular.copy($scope.model);
+                var currentModel = angular.copy($scope.model)
                 $scope.selectedRawDocuments = [];
                 _.forEach($scope.rawDocuments.docs, function (doc) {
 
                     if(doc.__checked === true)
                     {
-                        if(!$scope.model && $scope.type != 'radio')
-                            $scope.model=[];
+                        if(!currentModel && $scope.type != 'radio')
+                            currentModel=[];
                         $scope.selectedRawDocuments.push(doc);
 
                         if(!$scope.isInModel(doc.identifier_s)){
@@ -82,9 +83,9 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                             document.identifier += "@"+ doc._revision_i;
 
 							if($scope.type == 'radio')
-								$scope.model = document;
+                                currentModel = document;
 							else
-                            	$scope.model.push(document);
+                                currentModel.push(document);
                         }                       
                         
                     }
@@ -94,7 +95,8 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 
                 });
 
-                if(!angular.equals(oldModel, $scope.model)){
+                if(!angular.equals(oldModel, currentModel)){
+                    $scope.model = currentModel;
                     ngModelController.$setViewValue($scope.model);
                 }
 

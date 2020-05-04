@@ -74,7 +74,7 @@
                     }
                 }
 
-                var bindingWatcher = $scope.$watch('binding', updateFromBinding)
+                $scope.$watch('binding', updateFromBinding)
 
                 $scope.onRootTraitsChange = function(){
                     var rootTraits = _.map($scope.rootTraits, 'identifier');
@@ -124,8 +124,8 @@
 
                 function updateFromBinding( newV, old){
                     var traitsIds = _.map($scope.binding, 'identifier');
-                    if(traitsIds.length)
-                        bindingWatcher();
+                    // if(traitsIds.length)
+                    //     bindingWatcher();
                     _.each($scope.traits, function(trait, key){
                         var items = []
                         // if(trait.selected){
