@@ -71,7 +71,6 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="recipientOrganisms" caption="“Recipient Organism” or “Parental Organisms”">	
 												<div class="help-block">The term “Recipient organism” refers to an organism (either already modified or non-modified) that was subjected to genetic modification, whereas “Parental organisms” refers to those that were involved in cross breeding or cell fusion.</div>
-												<!-- TODO:add logic to handle multiple schema addtions -->
 												<div document-selector required ng-model="document.recipientOrganisms" question="recipientOrganisms" skip-government="true"
 													schema="(organism modifiedOrganism)" caption="Add Organism / Modified Organism" allow-new="true" allow-new-schema="organism,modifiedOrganism"></div>			
 											</div>
@@ -112,7 +111,7 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="genes" caption="Introduced or modified genetic elements">	
 												<div class="help-block">Preferably all genetic elements that were introduced into this LMO, such as promoters, protein coding sequences and terminators, must be referenced in this section. At least ALL protein coding sequences are mandatory.</div>
-												<div document-selector ng-model="document.genes" question="genes" skip-government="true"
+												<div document-selector ng-model="document.genes" question="genes" skip-government="true" ng-change="onModifiedGeneChange(document.genes)"
 													schema="(dnaSequence)" caption="Gene and DNA Sequence" allow-new="true" allow-new-schema="dnaSequence">
 													<selected-records>
 														<div ng-include="'lmo-reference-display'" onload="docSelector=$parent"></div>
@@ -121,7 +120,7 @@
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="geneConstructs" caption="Genetic elements construct">
+											<div class="km-control-group" name="geneConstructs" caption="Genetic elements construct">
 												<lmo-construct ng-model="document.geneConstructs" ng-change="onConstructChange()"></lmo-construct>
 											</div>
 										</div>
@@ -148,8 +147,10 @@
 											</div>
 										</div> -->
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="traits" caption="Related trait(s) or use(s) in biotechnology">												
-												<traits-selector ng-model="document.traits" locales="document.header.languages"></traits-selector>													
+											<div  block-region activate="loadingGeneTraits" block-text="Updating trait...">
+												<div class="km-control-group" required name="traits" caption="Related trait(s) or use(s) in biotechnology">												
+													<traits-selector ng-model="document.traits" locales="document.header.languages"></traits-selector>													
+												</div>
 											</div>
 										</div>
 										<div class="col-xs-12">
@@ -188,7 +189,7 @@
 									<legend>Detection method(s)</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="detectionMethodLinks" caption="Additional information">
+											<div class="km-control-group" name="detectionMethodLinks" caption="External link(s)">
 												<div km-link name="detectionMethodLinks" ng-model="document.detectionMethodLinks" allow-link="true" allow-file="true"
 													identifier="document.header.identifier">
 													<link-controls>												
@@ -209,7 +210,7 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="detectionMethod" caption="External link(s)">
+											<div class="km-control-group" name="detectionMethod" caption="Additional information">
 												<div km-rich-textbox ng-model="document.detectionMethod" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
