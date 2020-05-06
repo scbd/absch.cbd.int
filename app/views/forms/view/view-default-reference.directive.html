@@ -27,7 +27,7 @@
             </a>
             &nbsp <a ng-href="#" ng-click="refreshRecord(document.identifier)" data-toggle="tooltip" data-title="Click to refresh status of the record."><i class="fa fa-refresh"></i></a>
         </span>
-        <div class="document-summary" ng-if="document.workingDocumentSummary||document.summary" 
+        <div class="help-block" ng-if="document.workingDocumentSummary||document.summary" 
             ng-bind="(document.workingDocumentSummary||document.summary)|lstring:locale"></div>
     </div>     
 </div>
