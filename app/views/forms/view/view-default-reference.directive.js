@@ -13,7 +13,8 @@ app.directive("viewDefaultReference", ["IStorage", '$timeout', function (storage
 		scope: {
 			model: "=ngModel",
 			locale: "=",
-			target: "@linkTarget"
+			target: "@linkTarget",
+			onDocumentLoadFn: '&onDocumentLoad'
 		},
 		link:function($scope, $element, $attr){
 
@@ -26,14 +27,21 @@ app.directive("viewDefaultReference", ["IStorage", '$timeout', function (storage
 
 			$scope.refreshRecord = function(identifier){
 				$scope.loading = true;
-					loadReferenceDocument(identifier)
-					.then(function(data) {
-						$scope.document = data;
-						if(data.workingDocumentLock){
-							$timeout(function(){$element.find("[data-toggle='tooltip']").tooltip({trigger: 'hover'})}, 100);
-						}
-					})
-					.finally(function(){$scope.loading = false;});
+				loadReferenceDocument(identifier)
+				.then(function(data) {
+					$scope.document = data;
+					if(_.isEmpty($scope.document.workingDocumentSummary))
+						$scope.document.workingDocumentSummary = undefined;
+					if(_.isEmpty($scope.document.summary))
+						$scope.document.summary = undefined;
+
+					if(data.workingDocumentLock){
+						$timeout(function(){$element.find("[data-toggle='tooltip']").tooltip({trigger: 'hover'})}, 100);
+					}
+					if($scope.onDocumentLoadFn)
+						$scope.onDocumentLoadFn({document:data})
+				})
+				.finally(function(){$scope.loading = false;});
 			}
 
 			function loadReferenceDocument(identifier){

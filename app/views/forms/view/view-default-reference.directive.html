@@ -1,36 +1,33 @@
 ﻿
 <div class="default-reference-viewer">
     <span ng-if="loading"><i class="fa fa-spin fa-spinner" aria-hidden="true"></i> loading record details...</span>
-    <span ng-if="errorCode==404" class="label label-warning">Reference record not found ({{model}})</span>
-    <span ng-if="error" class="label label-warning">Error loading details for ({{model}})</span>
+    <span ng-if="errorCode==404" class="label label-warning">Reference record not found (<span ng-bind="model"></span>)</span>
+    <span ng-if="error" class="label label-warning">Error loading details for (<span ng-bind="model"></span>)</span>
 	<div ng-if="!loading && !errorCode && !error">	
         <span ng-transclude="default">		
 
             <span class="selected-reference-uid">
                 <a translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_blank">
-                    <i class="fa fa-external-link-square" aria-hidden="true"></i> {{document | uniqueID}}
+                    <i class="fa fa-external-link-square" aria-hidden="true"></i> <span ng-bind="document | uniqueID"></span>
                 </a>
             </span>
-            <span class="selected-reference-name" ng-if="!hideSchema">{{document.body.header.schema | schemaName}} </span>
-            <span class="selected-reference-title" ng-if="document.workingDocumentTitle||document.title">{{(document.workingDocumentTitle||document.title) | lstring:locale}} </span> 
+            <span class="selected-reference-name" ng-if="!hideSchema" ng-bind="document.body.header.schema | schemaName"></span>
+            <span class="selected-reference-title" ng-if="document.workingDocumentTitle||document.title"
+                ng-bind="(document.workingDocumentTitle||document.title) | lstring:locale"></span> 
             <span ng-if="!(document.workingDocumentTitle||document.title)">
-                <span class="selected-reference-title" ng-if="document.body.title">{{document.body.title | lstring:locale}} </span> 
-                <span class="selected-reference-title" ng-if="!document.body.title && document.body.name ">{{document.body.name | lstring:locale}} </span>
-            </span>
-
-            <span  ng-if="document.body.scientificName">
-                <span ng-if="!document.workingDocumentTitle" ng-bind="document.body.scientificName"></span>
-                <span ng-if="document.body.commonNames" ng-repeat="name in document.body.commonNames" 
-                    ng-bind="' - ' + (name|lstring:locale) + ($last ? '' : ', ')"></span>
-            </span> 
-            <span ng-if="document.workingDocumentLock">
-                | <span class="label label-danger">The record is pending approval</span> | 
-                <a translation-url  ng-href="/register/{{document.body.header.schema | urlSchemaShortName}}/{{document.identifier}}/view" target="_blank">
-                    <i class="fa fa-external-link-square" aria-hidden="true"></i> View Request
-                </a>
-                &nbsp <a ng-href="#" ng-click="refreshRecord(document.identifier)" data-toggle="tooltip" data-title="Click to refresh status of the record."><i class="fa fa-refresh"></i></a>
+                <span class="selected-reference-title" ng-if="document.body.title" ng-bind="document.body.title | lstring:locale"></span> 
+                <span class="selected-reference-title" ng-if="!document.body.title && document.body.name" ng-bind="document.body.name | lstring:locale"></span>
             </span>
         </span>		
         <span ng-transclude="extra"></span>
+        <span ng-if="document.workingDocumentLock">
+            | <span class="label label-danger">The record is pending approval</span> | 
+            <a translation-url  ng-href="/register/{{document.body.header.schema | urlSchemaShortName}}/{{document.identifier}}/view" target="_blank">
+                <i class="fa fa-external-link-square" aria-hidden="true"></i> View Request
+            </a>
+            &nbsp <a ng-href="#" ng-click="refreshRecord(document.identifier)" data-toggle="tooltip" data-title="Click to refresh status of the record."><i class="fa fa-refresh"></i></a>
+        </span>
+        <div class="help-block" ng-if="document.workingDocumentSummary||document.summary" 
+            ng-bind="(document.workingDocumentSummary||document.summary)|lstring:locale"></div>
     </div>     
 </div>
