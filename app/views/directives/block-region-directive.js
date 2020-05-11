@@ -19,7 +19,7 @@ define(['app'], function(app) {
                         
                     blockText = '<strong>' + blockText + '</strong>';
                     if(attrs.skipLoadingIcon!= 'true'){
-                        blockText = '<i class="fa fa-spin fa-cog fa-3x" />' + blockText;
+                        blockText = '<i class="fa fa-spin fa-cog fa-3x" ></i>' + blockText;
                     }
 
                     $element.addClass('blockRegion');

@@ -606,9 +606,11 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
                         commonjs.loadJsonFile('/app/app-data/bch/offline-formats.json')
                         .then(function(data){
                             $scope.offlineFormats = data;
-                            $element.find("[data-toggle='tooltip']").tooltip({
-                                trigger: 'hover'
-                            });
+                            $timeout(function(){
+                                $element.find("[data-toggle='tooltip']").tooltip({
+                                    trigger: 'hover'
+                                });
+                            }, 100)
                         })
                     }
                 }

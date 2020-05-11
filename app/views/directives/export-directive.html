@@ -35,7 +35,7 @@
                 <label for="filterTitle">Fields</label>
                 
                     <button type="button" class="btn btn-info" ng-class="{'btn-primary' : field.checked}" ng-repeat="field in fields" ng-click="field.checked = !field.checked">
-                        <i class="fa"  ng-class="{'a-check-square-o' : field.checked, 'fa-square-o' : !field.checked }"/>
+                        <i class="fa"  ng-class="{'a-check-square-o' : field.checked, 'fa-square-o' : !field.checked }"></i>
                         {{field.name}}
                     </button>
             </div>-->
@@ -83,11 +83,11 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading||forTour">Cancel</button>
             <button type="button" class="btn btn-primary pull-left" aria-label="Download" ng-click="downloadData()"  ng-disabled="loading||forTour" id="downloadDataFile">
-                <i class="fa fa-spin fa-spinner" ng-if="loading" /> Download
+                <i class="fa fa-spin fa-spinner" ng-if="loading" ></i> Download
             </button>
             
             <button ng-if="isAdministrator" type="button" class="btn btn-success pull-left" aria-label="Custom Fields" ng-click="customFields()"  ng-disabled="loading" id="customFields">
-                <i class="fa fa-spin fa-spinner" ng-if="loading" /> Custom Fields
+                <i class="fa fa-spin fa-spinner" ng-if="loading" ></i> Custom Fields
             </button>      
         </div>
     </script>
@@ -124,7 +124,7 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
             <button type="button" class="btn btn-primary pull-left" ng-click="done()" id="downloadDataFile">
-                <i class="fa fa-spin fa-spinner" ng-if="loading" /> Done
+                <i class="fa fa-spin fa-spinner" ng-if="loading" ></i> Done
             </button>
         </div>
     </script>
