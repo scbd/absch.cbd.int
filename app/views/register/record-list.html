@@ -46,21 +46,21 @@
                         <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword input-group" style="width:160px;display:inline;font-size:12px;height:31px;">
                     </div>
                 </div>
-                <div class="col-xs-5 " ng-show="showAddButton()">
+                <div class="col-xs-5 ">
                     <div class="btn-group-sm pull-right">
-                        <div class="btn" style="border: 1px solid #ccc;" ng-if="offlineFormats">
-                            Offline format:
+                        <div class="btn margin-left-2" style="border: 1px solid #ccc;" ng-if="offlineFormats">Offline format:
                             <span ng-repeat="(code, lang) in ::languages" data-title="{{::lang}}" data-toggle="tooltip" data-container="body" 
-                                ng-show="::offlineFormats[schema][code]">
+                                ng-show="::offlineFormats[schema][code]" class="padding-left-right-2">
                                 <a target="_blank" ng-href="{{::offlineFormats[schema][code]}}" ng-bind="::code"></a>
-                                <span ng-if="::!$last"> | </span>
+                                <span ng-if="::!$last">|</span>
                             </span>
                         </div>
                         <!--<a translation-url  ng-href="#" class="btn btn-sm btn-primary" ng-click="showReference(schema);">
                         <span class="glyphicon glyphicon-random"></span> Show Reference</a>-->
-                        <a translation-url  href="#" class="btn btn-sm btn-default" ng-click="refreshList(schema);">
-                            <i class="fa fa-refresh"></i> Refresh</a>
-                        <a translation-url  ng-href="/register/{{schema|urlSchemaShortName}}/new" class="btn btn-sm btn-primary bold" style="color:#fff;" id="new_button">
+                        <button class="btn btn-sm btn-default margin-left-2" ng-click="refreshList(schema);" ng-if="showAddButton()">
+                            <i class="fa fa-refresh"></i> Refresh</button>
+                        <a translation-url  ng-href="/register/{{schema|urlSchemaShortName}}/new" class="btn btn-sm btn-primary bold" 
+                            style="color:#fff;" id="new_button" ng-if="showAddButton()">
                             <i class="fa fa-plus-square"></i> Add New </a>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                     </tr>
                 </thead>
                 <tr ng-cloak ng-show="loading">
-                    <td colspan="6" style="text-align:center;padding:30px;"><i class="fa fa-spin fa-cog" /> loading...</td>
+                    <td colspan="6" style="text-align:center;padding:30px;"><i class="fa fa-spin fa-cog" ></i> loading...</td>
                 </tr>
                 <tr ng-cloak ng-show="!loading && filteredRecords.length <= 0">
                     <td colspan="6" style="text-align:center;padding:30px;"> <strong>No records found.</strong></td>
@@ -163,7 +163,7 @@
                         <td>
                             <span ng-if="record.workflowActivityStatus == 'pending'" >
                                 <div class="btn btn-primary color-white" >
-                                     <i class="fa fa-spin fa-spinner"/> Processing...
+                                     <i class="fa fa-spin fa-spinner"></i> Processing...
                                 </div>
                             </span>
                             <div ng-show="record.workflowActivityStatus!='pending'">

@@ -83,7 +83,7 @@
 
                     <div id="taskList">
 
-                        <span ng-show="loading"> <i class="fa fa-cog fa-spin fa-lg" /> loading...</span>
+                        <span ng-show="loading"> <i class="fa fa-cog fa-spin fa-lg" ></i> loading...</span>
 
                         <div ng-repeat="task  in tasks| orderBy:sortTerm:orderList" id="{{task.workflow._id}}">
                             <div class="row" style="border-bottom:1px solid #ddd;padding:5px;">
@@ -174,7 +174,7 @@
                                                     class="color-orange"> PENDING SCBD REVIEW </span>
                                             
                                                 <span ng-if="task.workflow.type.name != 'publishReferenceRecord'" ng-class="{'color-red': roles.isPublishingAuthority }"> 
-                                                        <i class="fa fa-star" ng-if="roles.isPublishingAuthority"/> PENDING    
+                                                        <i class="fa fa-star" ng-if="roles.isPublishingAuthority"></i> PENDING    
                                                         <span ng-if="roles.isPublishingAuthority"> YOUR </span>
                                                         <span ng-if="!roles.isPublishingAuthority"> PA </span>
                                                         APPROVAL 

@@ -15,7 +15,7 @@
     </h4>
 
     <div style="font-size:12px; padding-bottom:10px;" ng-show="showAll">
-        <span ng-show="loading"> <i class="fa fa-cog fa-spin fa-lg" /> loading...</span>
+        <span ng-show="loading"> <i class="fa fa-cog fa-spin fa-lg" ></i> loading...</span>
 
         <div class="row" style="background-color:#f9f9f9;border:1px solid #ddd; margin:5px 1px 5px 1px; cursor: pointer; border-radius: 3px;"
             ng-click="gotoRequest(task.workflow.data.metadata.schema, task.identifier)" ng-repeat="task in tasks|filter:keywords|orderBy:sortTerm:orderList"
@@ -48,7 +48,7 @@
                     <span ng-if="task.workflow.type.name == 'publishReferenceRecord'" class="color-orange"> PENDING
                         SCBD REVIEW </span>
                     <span ng-if="task.workflow.type.name != 'publishReferenceRecord'" ng-class="{'color-red': roles.isPublishingAuthority }"> 
-                            <i class="fa fa-star" ng-if="roles.isPublishingAuthority"/> PENDING    
+                            <i class="fa fa-star" ng-if="roles.isPublishingAuthority"></i> PENDING    
                         <span ng-if="roles.isPublishingAuthority"> YOUR </span>
                         <span ng-if="!roles.isPublishingAuthority"> PA </span>
                         APPROVAL 
