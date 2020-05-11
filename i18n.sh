@@ -40,15 +40,15 @@ updateFileTimeStamp()
 {
 
 	allowedFiles="\.(js|html|css|json)$"
-	if [[ $2 =~ $allowedFiles ]]; then 
+	if [[ $1 =~ $allowedFiles ]]; then 
 
-		# Extract the file revision
-		FILE_REVISION_HASH=`getFileLastRevision "$1"`
+		# # Extract the file revision
+		# FILE_REVISION_HASH=`getFileLastRevision "$1"`
 
-		# Get the File last modified time
-		FILE_MODIFIED_TIME=`git show --pretty=format:%at --abbrev-commit ${FILE_REVISION_HASH} | head -n 1`
+		# # Get the File last modified time
+		# FILE_MODIFIED_TIME=`git show --pretty=format:%at --abbrev-commit ${FILE_REVISION_HASH} | head -n 1`
 		# FILE_MODIFIED_DATE=`git show --pretty=format:%ai --abbrev-commit ${FILE_REVISION_HASH} | head -n 1`
-		
+		FILE_MODIFIED_TIME=$2
 		# Extract the last modified timestamp, differently for Linux, FreeBSD and Mac OS X
 		if [ "$OS" = 'Linux' ]
 		then			
@@ -56,9 +56,9 @@ updateFileTimeStamp()
 			NEWFORMAT=`date -d @"${FILE_MODIFIED_TIME}" +'%Y%m%d%H%M.%S'`
 			# for displaying the date in readable format			
 			#	# FORMATTED_TIMESTAMP=`date --date="${FILE_MODIFIED_TIME}" +'%d-%m-%Y %H:%M:%S %z'`
-			# echo "Modified: ${NEWFORMAT} | ${FILE_MODIFIED_DATE} > ${2}" 
+			# echo "Modified: ${NEWFORMAT} | ${FILE_MODIFIED_DATE} > ${1}" 		
 			# Modify the last modified timestamp
-			touch -t "${NEWFORMAT}" $2
+			touch -t "${NEWFORMAT}" $1
 		
 		elif [ "$OS" = 'Darwin' ] || [ "$OS" = 'FreeBSD' ]
 		then
@@ -67,7 +67,7 @@ updateFileTimeStamp()
 			#echo "Modified: ${FILE_MODIFIED_TIME} | ${FORMATTED_TIMESTAMP} > ${1}"
 			echo "other > ${2}"
 			# Modify the last modified timestamp
-			touch -d  "${FORMATTED_TIMESTAMP}" $2
+			touch -d  "${FORMATTED_TIMESTAMP}" $1
 		else
 			echo "Unknown Operating System to perform timestamp update" >&2
 			exit 1
@@ -81,10 +81,42 @@ updateFileTimeStamp()
 IFS_BAK=$IFS
 IFS="
 "
+declare -A fileRevision
 # Loop through and fix timestamps on all files in our checked-out repository
+echo 'Reading last modified date'
 for file in $(git ls-files)
 do
-	updateFileTimeStamp "${file}" "${file}"
+	minifyRegex="\.(js|html|css)$"
+	ignorePaths="^(\/app\/server\.js|\/app\/middlewares|\/app\/scripts)"
+	if [[ ${file} =~ $minifyRegex ]]; then 
+		if [[ ! ${file} =~ $ignorePaths ]]; then
+			
+			# updateFileTimeStamp "${file}" "${file}"
+			# Extract the file revision
+			FILE_REVISION_HASH=`getFileLastRevision "${file}"`
+
+			# Get the File last modified time
+			FILE_MODIFIED_TIME=`git show --pretty=format:%at --abbrev-commit ${FILE_REVISION_HASH} | head -n 1`
+			
+			# echo "${file}" "$FILE_MODIFIED_TIME"
+
+			fileRevision[${file}]=$FILE_MODIFIED_TIME
+
+		fi
+	fi
+	
+done
+
+echo 'Finish read lat modified date'
+currentDir="$(pwd)"
+echo "Starting minification " "$currentDir"
+node /usr/src/app/scripts/process-files  "$currentDir"
+echo "Current dir: $currentDir"
+
+for k in "${!fileRevision[@]}"
+do
+    # echo "$k" "${fileRevision[$k]}"
+	updateFileTimeStamp "$k" "${fileRevision[$k]}"
 done
 
 # Revert the default delimiter
