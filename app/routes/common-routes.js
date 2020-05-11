@@ -144,7 +144,7 @@
                 var roles = _.clone(roleList||[]);
 
                 if (roles && !_.isEmpty(roles)) {
-                    roles = _.flatten(_.map(roles, realm.getRole));
+                    roles = _.flatten(_.map(roles, function(role){ return realm.getRole(role)}));
                 }
                 if(useSchemaRoles){
                     var path = $location.path().replace('/register/','');
@@ -156,16 +156,16 @@
                         schema = path;
 
                     var schemaName = $filter('mapSchema')(schema);
-                    // var rolesToAppend = [realm.getRole("Administrator")];
-                    // if(!_.contains(_.union(['contact'], realm.referenceSchemas), schemaName)){
-                        
-                        // rolesToAppend = realm.nationalSchemaRoles(schemaName);
-                        // if(rolesToAppend.length == 0)//if there are not schema roles fallback to national roles
-                        //     rolesToAppend = realm.nationalRoles(true);//skip schema roles from national roles
+                    var appSchemas = ([]).concat(realm.nationalSchemas, realm.referenceSchemas).concat(realm.scbdSchemas);
 
-                        roles = (roles || []).concat(realm.schemaRoles(schemaName))
-                                             .concat(realm.getRole("Administrator")||[]);
-                    // }
+                    if(_.contains(appSchemas, realm.referenceSchemas)){
+                        roles = (roles || []).concat(realm.schemaRoles(schemaName));
+                    }
+                    else{
+                        roles = (roles || []).concat(realm.nationalRoles());
+                    }
+
+                    roles = (roles || []).concat(realm.getRole("Administrator")||[]);
                 }
                 if (!user.isAuthenticated) {
 
@@ -187,6 +187,10 @@
                 }
 
                 return user;
+            })
+            .catch(function(e){
+                console.log(e)
+                $location.path(appConfigService.getSiteMapUrls().errors.notAuthorized);
             });
         }];
     }

@@ -1,5 +1,5 @@
 define(['app', 'json!/api/v2018/realm-configurations/'+(window.scbdApp.host||''),
-		'lodash', 'json!components/scbd-angularjs-services/filters/schema-name.json'], function (app, realmConfigurations, _, scbdSchemas) { 'use strict';
+		'lodash', 'json!components/scbd-angularjs-services/filters/schema-name.json'], function (app, realmConfigurations, _, scbdJSonSchemas) { 'use strict';
     
 	var realmConfig = _.findWhere(realmConfigurations,{ host : window.location.host}) || _.head(realmConfigurations);
     
@@ -8,7 +8,7 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.scbdApp.host||'')
 
 	var nationalSchemas  = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='national'  ? key : undefined; }));
 	var referenceSchemas = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='reference' ? key : undefined; }));
-    var scbdSchemas      = _.compact(_.map(scbdSchemas, function(schema, key){ 
+    var scbdSchemas      = _.compact(_.map(scbdJSonSchemas, function(schema, key){ 
         realmConfig.schemas[key] = schema;
         return key; 
     }));
@@ -71,7 +71,11 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.scbdApp.host||'')
                 },
                 
                 nationalRoles : function(schema) {
-                    var nationalfallbackRoles = _(realmConfig.roles).map('publishingAuthorities','nationalAuthorizedUser','nationalFocalPoint').values().value();
+                    var nationalfallbackRoles = _(realmConfig.roles)
+                                                .map(function(roles, key){
+                                                    if(_.contains(['publishingAuthorities','nationalAuthorizedUser','nationalFocalPoint'], key))
+                                                        return roles;
+                                                }).flatten().compact().uniq().value();
                     
                     var schemas = realmConfig.schemas[schema] ? [realmConfig.schemas[schema]] : realmConfig.schemas;
                     var nationalSchemRoles    =  _(schemas)
