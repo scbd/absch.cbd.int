@@ -112,6 +112,16 @@ function (app, angular, footerHtml) { 'use strict';
                 logglyLogger.fields(fields);
 
             }, 1000));
+
+
+            function setupTranslationValidation(){
+                var validate = localStorageService.get('validateTranslation');
+                if(validate)    
+                    $('body#top').addClass('validate-translation')
+                else
+                    $('body#top').removeClass('validate-translation')
+            }
+            setupTranslationValidation();
         }
     ]);
     app.directive("mAppLoading", function ($animate) {

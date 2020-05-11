@@ -6,3 +6,63 @@
 .km-value-ml-div{    
     border-radius: 0px 3px 3px 0px!important;
 }
+
+body.validate-translation [lang~="en"] { 
+    border: 3px dashed red!important;
+    padding: 2px!important;
+} 
+body.validate-translation [lang~="en"]:before {
+    content: "EN";
+    top: -1px;
+    left: -1px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #f70707;
+    border: 1px solid #f50b0b;
+    color: #fff;
+    -webkit-border-radius: 4px 0 4px 0;
+    -moz-border-radius: 4px 0 4px 0;
+    border-radius: 4px 0 4px 0;
+}
+
+body.validate-translation [lang~="ar"],
+body.validate-translation [lang~="es"],
+body.validate-translation [lang~="fr"],
+body.validate-translation [lang~="ru"],
+body.validate-translation [lang~="zh"] { 
+    border: 3px dashed green!important;
+    padding: 2px!important;
+} 
+body.validate-translation [lang~="ar"]:before,
+body.validate-translation [lang~="es"]:before,
+body.validate-translation [lang~="fr"]:before,
+body.validate-translation [lang~="ru"]:before,
+body.validate-translation [lang~="zh"]:before {    
+    top: -1px;
+    left: -1px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: green;
+    border: 1px solid green;
+    color: #fff;
+    -webkit-border-radius: 4px 0 4px 0;
+    -moz-border-radius: 4px 0 4px 0;
+    border-radius: 4px 0 4px 0;
+}
+body.validate-translation [lang~="ar"]:before {   
+    content: "AR";
+}
+body.validate-translation [lang~="es"]:before {   
+    content: "ES";
+}
+body.validate-translation [lang~="fr"]:before { 
+    content: "FR";  
+}
+body.validate-translation [lang~="ru"]:before {  
+    content: "RU"; 
+}
+body.validate-translation [lang~="zh"]:before {  
+    content: "ZH"; 
+}
