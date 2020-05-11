@@ -10,11 +10,17 @@ ENV BRANCH $BRANCH
 ARG VERSION
 ENV VERSION $VERSION
 
-RUN echo 'running on branch ' $VERSION
+WORKDIR /usr/src/app
+COPY package.json .npmrc ./
+COPY ./scripts ./scripts
+
+RUN yarn install --production && \
+    echo 'running on branch ' $VERSION
 
 WORKDIR /usr/tmp/i18n
+
 # clone primary repo
-RUN git clone -n https://github.com/scbd/absch.cbd.int.git /usr/tmp/i18n/en 
+RUN git clone -n https://github.com/scbd/absch.cbd.int.git /usr/tmp/i18n/en
 
 WORKDIR /usr/tmp/i18n/en
 RUN git checkout $VERSION
@@ -34,15 +40,11 @@ RUN chmod 700 i18n.sh && \
 
 WORKDIR /usr/src/app
 
-
 #copy touched files from EN version
 RUN rm -rf /usr/tmp/i18n/en/.git \
     && cp -r  /usr/tmp/i18n/en/* ./ \
     && rm -rf /usr/tmp/i18n/en
 
-COPY package.json .npmrc ./
-
-RUN yarn install --production
 
 #copy touched files from Other UN lang version and REMOVE CACHE files
 RUN mkdir ./i18n && mv /usr/tmp/i18n/others/zh ./i18n && \
