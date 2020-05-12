@@ -2126,3 +2126,12 @@ a.disabled{
 .margin-right-2{
     margin-right: 2px;
 }
+
+.default-reference-viewer .document-summary{
+    font-size: 11px;
+    color: #999;
+    padding: 0 0 0 3px;
+    margin: 0 0 5px 0;
+    font-weight: 500;
+    text-transform: none;
+}
