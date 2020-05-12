@@ -89,9 +89,13 @@
 			<label>Vector</label>
 			<km-value-ml value="document.vector" locales="locale"></km-value-ml>
 		</div>
-		<div ng-show="document.transformationEvent">
+		<div ng-show="document.techniqueUsed">
 			<label>Techniques used for the modification</label>
-			<div ng-bind="document.transformationEvent" class="km-value"></div>
+			<div class="km-value">
+				<ul>
+					<li ng-repeat="use in document.techniqueUsed" ng-bind="use | term:locale"></li>
+				</ul>
+			</div>
 		</div>
 
 		<div ng-show="document.geneConstructs">
@@ -110,12 +114,7 @@
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.genes" >						
-						<view-default-reference ng-model='item.identifier' locale="locale" hide-schema='true'>
-							<extra>
-								<view-terms-hierarchy class="selected-reference-title" ng-model="$parent.$parent.document.body.traits" locale="locale" 
-									term-domain="dnaSequenceTraits" view="list" style="display: inline-block;"><view-terms-hierarchy>							
-							</extra>
-						</view-default-reference>
+						<view-default-reference ng-model='item.identifier' locale="locale" hide-schema='true'></view-default-reference>
 					</li>
 				</ul>
 			</div>
@@ -139,12 +138,7 @@
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.affectedGenes" >						
-						<view-default-reference ng-model='item.identifier' locale="locale" hide-schema='true'>
-							<extra>
-								<view-terms-hierarchy class="selected-reference-title" ng-model="$parent.$parent.document.body.traits" locale="locale" 
-									term-domain="dnaSequenceTraits" view="list" style="display: inline-block;"><view-terms-hierarchy>							
-							</extra>
-						</view-default-reference>
+						<view-default-reference ng-model='item.identifier' locale="locale" hide-schema='true'></view-default-reference>
 					</li>
 				</ul>
 			</div>

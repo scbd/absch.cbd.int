@@ -10,8 +10,11 @@
         <div class="selected-reference-title" ng-if="document.body.identity">{{document.body.identity | lstring:locale}} </div>
         <span ng-if="document.summary"> | {{document.summary | lstring:locale}} </span> 
         <div ng-if="document.body.detectionMethodLinks" style="padding-left:15px">
-            <label style="border-bottom: 1px solid #eee;">LMO Detection method(s)</label>
-            <div ng-repeat="item in document.body.detectionMethodLinks">
+            <a translation-url ng-click="showDetections=!showDetections" style="cursor:pointer">
+                <span ng-if="!showDetections">Show detection method(s)</span> 
+                <span ng-if="showDetections" >Hide detection method(s)</span>
+            </a>
+            <div ng-repeat="item in document.body.detectionMethodLinks" ng-if="showDetections">
                 <a translation-url target="_blank" ng-href="{{item.url}}">{{item.name||item.url}}</a>
                 <i ng-show="item.language">({{item.language|uppercase}})</i>
             </div>
