@@ -159,14 +159,7 @@
 			<legend>Detection method(s)</legend>
 			<div ng-show="document.detectionMethodLinks">
 				<label>External link(s)</label>
-				<div class="km-value">
-					<ul>
-						<li ng-repeat="item in document.detectionMethodLinks">
-							<a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-							<i ng-show="item.language">({{item.language|uppercase}})</i>
-						</li>
-					</ul>
-				</div>
+				<km-link-list ng-model="document.detectionMethodLinks"></km-link-list>
 			</div>
 			<div ng-show="document.detectionMethod">
 				<label>Additional Information</label>
