@@ -1,4 +1,4 @@
-define(['app', 'text!views/forms/view/record-loader.directive.html', 
+﻿define(['app', 'text!views/forms/view/record-loader.directive.html', 
 	'components/scbd-angularjs-services/services/main', 'ngSmoothScroll',
 	'components/scbd-angularjs-services/filters/scbd-filters',
 	'./view-history-directive',
@@ -11,6 +11,7 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 	'views/directives/block-region-directive',
 	'views/directives/record-options','components/scbd-angularjs-services/services/locale',
 	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/form-control-directives/km-value-ml',
+	'components/scbd-angularjs-controls/form-control-directives/km-link-list',
 	'views/forms/view/view-reference-records.directive', 'views/forms/directives/compare-val'
 ], function (app, template) {
 
