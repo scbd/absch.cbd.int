@@ -130,7 +130,7 @@
                             </div>
                             <div ng-if="filter.type=='solrRecords'">
                                 <div document-selector ng-model="filter.selectedItems" question="searchResult" caption="(sense)" type="checkbox"
-                                    query="filter.query.q" filter="true" ng-change="recordSelected(item, filter)"
+                                    query="filter.query.q" filter="true" ng-change="recordSelected(item, filter)"   skip-government="true"
                                     block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">
                                     <select-records>
                                         <div class="color-darkgrey not" style="cursor: pointer;" ng-click="$parent.openAddDialog();">
