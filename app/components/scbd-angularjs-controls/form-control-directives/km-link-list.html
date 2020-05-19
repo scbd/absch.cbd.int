@@ -4,7 +4,7 @@
             <li ng-repeat="item in ::ngModel">
                 <i class="fa {{::getIcon(item)}}"></i>
                 <a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-                <i ng-if="item.language">({{item.language|uppercase}})</i>
+                <i ng-if="item.language">(<span ng-bind="item.language|uppercase"></span>)</i>
             </li>
         </ul>
     </div>
