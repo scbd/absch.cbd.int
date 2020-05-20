@@ -15,6 +15,14 @@ app.directive('kmLinkList', ['MimeService', function (MimeService){
 			},
 			link: function ($scope, $element, $attr)
 			{
+				$scope.locales = {
+					"lang-ar" :"Arabic"  ,
+					"lang-en" :"English" ,
+					"lang-es" :"Spanish" ,
+					"lang-fr" :"French"  ,
+					"lang-ru" :"Russian" ,
+					"lang-zh" :"Chinese" 
+				};
                 $scope.target = $attr.target||'_blank'
                 // storage.attachments.mimeTypeWhitelist
 
