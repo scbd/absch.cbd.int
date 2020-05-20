@@ -235,7 +235,8 @@
                     </div>
                     <div>                            
                             <div ng-if="showAdd" document-selector ng-model="item.selectedGene" question="contacts" caption="(sense)" type="radio"
-                                schema="(dnaSequence)" filter="true" ng-change="geneSelected(item)" skip-government="true">
+                                schema="(dnaSequence)" filter="true" ng-change="geneSelected(item)" skip-government="true" 
+                                allow-new="true" allow-new-schema="dnaSequence">
                                 <select-records>
                                     <a ng-show="!$parent.$parent.item.gene" ng-href="#" ng-click="$parent.openAddDialog();">select gene</a>
                                     <a ng-show="$parent.$parent.item.gene"  ng-href="#" ng-click="$parent.openAddDialog();" ng-bind="$parent.$parent.item.gene.body.name|lstring:locale"></a>
