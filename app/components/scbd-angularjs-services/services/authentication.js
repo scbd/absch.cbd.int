@@ -402,7 +402,7 @@ define(['app', './apiUrl'], function(app) {
         };
     }]);
 
-    app.factory('apiURLHttpIntercepter', ["apiUrl", function(apiUrl) {
+    app.factory('apiURLHttpIntercepter', ["apiUrl", "$window", function(apiUrl, $window) {
 
             return {
                 request: function(config) {
@@ -414,6 +414,17 @@ define(['app', './apiUrl'], function(app) {
                         var devUrl = apiUrl.devApiUrl(config.url);
                         if(devUrl)
                             config.url =  devUrl + config.url;
+                    }
+
+                    //Special case for url that are in ng-include need to burst the cache for version change.
+                    if(/^\//.test(url) && (config.url.indexOf('.html')>0 || config.url.indexOf('.json')>0)){   
+                        var url = config.url;     
+                        if(url.indexOf('v=')<0){    
+                            url += (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + $window.scbdApp.version;
+                            if(!/^\/?(en|ar|es|fr|ru|zh)\//.test(url))
+                                url = '/'+ $window.scbdApp.lang + '/' + url;
+                        }
+                        config.url = url;
                     }
 
                     return config;
