@@ -21,17 +21,19 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-8 col-xs-12">
+                        <div class="col-md-7 col-xs-12">
                             <div class="km-control-group" name="name" required caption="Name of the organization">
-                                <div km-textbox-ml name="name" required ng-model="document.name" placeholder="text entry"
+                                <div class="help-block">Please provide the name of the organization as you would like it to appear in the title of the record. For example, United Nations Environment Programme.</div>
+                                <div km-textbox-ml name="name" required ng-model="document.name" placeholder="For eg. United Nations Environment Programme"
                                     locales="document.header.languages"></div>
                             </div>
                         </div>
 
-                        <div class="col-md-4 col-xs-12">
+                        <div class="col-md-5 col-xs-12">
                             <div class="km-control-group" name="acronym" caption="Acronym">
+                                <div class="help-block">If applicable, please provide an acronym commonly used to refer to the organization. For example, UNEP.</div>
                                 <div km-textbox-ml name="acronym" ng-model="document.acronym"
-                                    placeholder="text entry" locales="document.header.languages"></div>
+                                    placeholder="For eg. UNEP" locales="document.header.languages"></div>
                             </div>
                         </div>
                     </div>
@@ -45,22 +47,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="km-control-group" name="contact_organizationType" caption="Type of organization">
-                                <div km-select name="contact_organizationType" ng-model="document.organizationType"
-                                    items="options.organizationTypes()"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-                            <div class="km-control-group" name="contact_organizationTypeName" caption="Other organization type">
-                                <div km-textbox-ml name="contact_organizationTypeName" ng-model="document.organizationType.customValue"
-                                    placeholder="example: SCBD" locales="document.header.languages"></div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <legend>Organization Coordinates</legend>
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="km-control-group" name="address" caption="Address">
@@ -137,21 +125,61 @@
                         </div>
                     </div>
 
+                    <legend>Detailed information</legend>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="km-control-group" name="contact_organizationType" required caption="Type of organization">
+                                <div km-select name="contact_organizationType" required ng-model="document.organizationType"
+                                    items="options.organizationTypes()"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
+                            <div class="km-control-group" name="contact_organizationTypeName" required caption="Other organization type">
+                                <div km-textbox-ml name="contact_organizationTypeName" required ng-model="document.organizationType.customValue"
+                                    placeholder="example: SCBD" locales="document.header.languages"></div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div ng-if="isBch">
-                        <legend>Detailed information</legend>
 
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="km-control-group" name="linkedOrganizations" caption="Linked organizations">
-                                    <div document-selector ng-model="document.linkedOrganizations" allow-new="true" allow-new-schema="organization"
-                                        question="linkedOrganizations" schema="organization" filter="true" skip-government="true" hide-self="true"></div>
+                            <div class="col-sm-12">
+                                <div class="km-control-group" name="areasOfWork" caption="Areas of work">                                
+                                    <div class="help-block"> please provide keywords only. </div>
+                                    <div ng-repeat="areaOfWork in areasOfWork" style="padding-bottom:5px;" class="input-group">
+                                        <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input" ng-model="areaOfWork.value" locales="document.header.languages"></div>
+                                        <span ng-class="{'disable':areasOfWork.length==1}" class="input-group-addon" style="cursor:pointer" 
+                                        ng-click="removeItem(areasOfWork, $index)">
+                                            <i class="fa fa-trash-o icon"></i>
+                                        </span>
+                                    </div>
+                                    <button class="btn btn-primary" ng-click="addItem(areasOfWork)">Add item</button>
                                 </div>
                             </div>
                         </div>
-
+                        <!-- <div class="row">
+                            <div class="col-xs-12">
+                                <div class="km-control-group" required name="cpbThematicAreas" caption="Thematic areas(s)">
+                                    <div km-term-check name="cpbThematicAreas" required ng-model="document.cpbThematicAreas" terms="options.cpbThematicAreas()"
+                                    binding-type="term[]"></div>
+                                </div>
+                            </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="profile" caption="Organization’s profile">
+                                <div class="km-control-group"  name="operationalRegions" caption="Geographical or political/economic group(s)">
+                                    <div km-select multiple required name="operationalRegions" 
+                                    ng-model="document.operationalRegions" placeholder="Please select" 
+                                    items="options.geographicRegions()"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="profile" required caption="Organization’s profile">
+                                    <div class="help-text">Please provide or attach a short profile of the organization and its relevance to biosafety.</div>
                                     <div km-textbox-ml ng-model="document.profile" rows="2" placeholder="Organization’s profile"
                                     locales="document.header.languages"></div>
                                     <br/>
@@ -162,22 +190,19 @@
                         
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group"  name="operationalRegions" caption="Geographical or political/economic group(s)">
-                                    <div km-select multiple required name="operationalRegions" 
-                                    ng-model="document.operationalRegions" placeholder="Please select" 
-                                    items="options.geographicRegions()"></div>
+                                <div class="km-control-group" name="linkedOrganizations" caption="Linked organizations">
+                                    <div class="help-block">Please use this field to link to any other related organizations that may be in the database (e.g. GEF and UNEP-GEF).</div>
+                                    <div document-selector ng-model="document.linkedOrganizations" allow-new="true" allow-new-schema="organization"
+                                        question="linkedOrganizations" schema="organization" filter="true" skip-government="true" hide-self="true"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- <div class="row">
-                            <div class="col-xs-12">
-                                <div class="km-control-group" required name="cpbThematicAreas" caption="Thematic areas(s)">
-                                    <div km-term-check name="cpbThematicAreas" required ng-model="document.cpbThematicAreas" terms="options.cpbThematicAreas()"
-                                    binding-type="term[]"></div>
-                                </div>
-                            </div>
-                        </div> -->
+                        <legend>Timeframe for confirmation or updating of information</legend>
+                        <div class="help-info">
+                            Please note that this category of information requires confirmation or updating after one year from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Non-confirmed”. 
+                        </div>
+
                     </div>
 
                         <div class="well no-shadow bg-white">
