@@ -43,8 +43,12 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                 
                 $scope.$watch('terms', onTerms);
                 $scope.$watch('identifier', save);
-                $scope.$watch('binding', load); 
-                $scope.$watch('locales', load);   
+                $scope.$watch('binding', function(newV, oldVal){ 
+                    if(!angular.equals(newV, oldVal))load()
+                }); 
+                $scope.$watch('locales', function(newV, oldVal){ 
+                    if(!angular.equals(newV, oldVal))load()
+                }); 
 
                 if (!$attr["class"])
                     $element.find('ul:first').addClass("list-unstyled");
@@ -101,7 +105,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
 
                                 if($scope.terms){
                                     var term = _.find($scope.terms, {identifier:$scope.binding[i].identifier})
-                                    if(term && term.multiple){
+                                    if(term && term.multiple && term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
                                         if(!oNewOthers[term.identifier])
                                             oNewOthers[term.identifier] = [];
 
@@ -122,7 +126,8 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     }
                     
                     _.each(oNewOthers, function(customValues, key){
-                        if (!angular.equals(customValues, $scope.otherElements[key]))
+                        var lOtherElements = _.filter($scope.otherElements[key], function(term){return term.customValue});
+                        if (!angular.equals(customValues, lOtherElements))
                             $scope.otherElements[key] = customValues;
                     })
 
@@ -160,15 +165,16 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                                 oNewBinding.push(term.identifier);
                             else if ($scope.bindingType == "term[]"){
                                 
-                                if(term.multiple){
+                                if(term.multiple && term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
                                     if(!onOtherElementsChange)
                                         initializeOther(term.identifier)
                                     _.each($scope.otherElements[term.identifier], function(elm){
-                                        oNewBinding.push({ identifier: term.identifier, customValue : elm.customValue||undefined });
+                                        if(elm.customValue)
+                                            oNewBinding.push({ identifier: term.identifier, customValue : elm.customValue });
                                     })
                                 }
                                 else
-                                    oNewBinding.push({ identifier: term.identifier, customValue : $scope.selectedItems[term.identifier].customValue||undefined });
+                                    oNewBinding.push({ identifier: term.identifier, customValue : $scope.selectedItems[term.identifier].customValue });
                             }
                             else throw "bindingType not supported";
                         }
