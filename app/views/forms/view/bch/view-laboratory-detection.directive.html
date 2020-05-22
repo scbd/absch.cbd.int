@@ -10,12 +10,17 @@
 		<document-date></document-date>
 		<legend>General information</legend>
 		<div ng-if="document.organization">
-			<legend>Related Organizations</legend>
+			<legend>Laboratory name and cordinates</legend>
 			<div class="km-value">
 				<div view-organization-reference ng-model="document.organization" locale="locale"></div>
 			</div>
 		</div>
-
+		<div ng-if="document.relatedOrganization">
+			<legend>Related Organizations</legend>
+			<div class="km-value">
+				<div view-organization-reference ng-model="document.relatedOrganization" locale="locale"></div>
+			</div>
+		</div>
 		<div ng-if="document.services">
 			<label>Services and activities performed</label>
 			<div  class="km-value">
@@ -79,9 +84,8 @@
 
 			<div ng-if="document.relevantDocuments">
 				<label>Other relevant website address or attached documents</label>
-				<div class="km-value" ng-repeat="item in document.relevantDocuments">
-					<a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-				</div>
+				<div class="km-value" ng-if="document.relevantDocuments" km-link-list 
+					ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>				
 			</div>
 		</div>
 		

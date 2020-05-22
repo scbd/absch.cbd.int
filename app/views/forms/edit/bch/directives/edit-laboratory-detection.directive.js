@@ -29,7 +29,7 @@ function (app, _, template) {
 				_.extend($scope.options, {	
 					services 			: function(){ return thesaurusService.getDomainTerms('services', {other:true, otherType:'lstring'}) },
 					detectionMethods 	: function(){ return thesaurusService.getDomainTerms('detectionMethods', {other:true, otherType:'lstring'}) },
-					lmoTypes 			: function(){ return thesaurusService.getDomainTerms('typeOfOrganisms', {other:true, otherType:'lstring'}) }					
+					lmoTypes 			: function(){ return thesaurusService.getDomainTerms('typeOfOrganisms', {other:true, otherType:'lstring', narrowerOf:'8DAB2400-CF00-44B2-ADCF-49AABF66B9B0'}) }					
 				});
 				
 				//==================================
