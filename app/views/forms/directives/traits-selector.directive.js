@@ -123,7 +123,7 @@
 
 
                 function updateFromBinding( newV, old){
-                    if($scope.rootTraits.length && angular.equals(newV, old))
+                    if(($scope.rootTraits||[]).length && angular.equals(newV, old))
                         return;
                     var traitsIds = _.map($scope.binding, 'identifier');
                     // if(traitsIds.length)
@@ -155,7 +155,6 @@
                         // }
                     });
 
-                    var lselectedTraits = _.filter(($scope.rootTraits||[]), function(trait){return $scope.traits[trait.identifier]})
                     $scope.rootTraits = _($scope.binding)
                                          .filter(function(bind){ return bind.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'})
                                          .union(_.filter(($scope.rootTraits||[]), function(trait){return $scope.traits[trait.identifier]}))
