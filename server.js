@@ -40,10 +40,12 @@ if(process.env.COMPRESS=='true'){
     }
 }
 
+// app.use(require('./middlewares/local-minification')());
+const localMinify = require('./middlewares/local-minification');
 // Set routes
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: cacheControl.setCustomCacheControl}) );
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
-app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          translation.renderLanguageFile, express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          translation.renderLanguageFile, localMinify(), express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
 
 app.use('/cbd-forums',      express.static(__dirname + '/node_modules/@bower_components/cbd-forums', { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: cacheControl.setCustomCacheControl}));
@@ -71,7 +73,7 @@ app.get('/(:lang(ar|en|es|fr|ru|zh)(/|$))?*',
 
 // Start server
 app.listen(process.env.PORT || 2010, '0.0.0.0',function () {
-    console.log('Server listening on %j', this.address());
+    console.log('Server listening on ', this.address());
     console.log(`               VERSION: ${appVersion}`);
     console.log(`               API Url: ${apiUrl}`);
     console.log(`      Node environment: ${process.env.NODE_ENV||'-'}`);
