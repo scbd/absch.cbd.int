@@ -67,8 +67,8 @@
 					<tr ng-repeat="country in list = (countries | filter:hasCountries | filter: hasStatus | filter: hasRegions | orderBy:sortTermFilter:orderList) track by country.name.en">
 						<td>{{country.name|lstring:locale}}</td>
 						<td>
-							<span ng-if="!country.isAppProtocolParty" class="color-grey" style="font-size:10px;margin-right:10px;">Non-Party</span>
-							<span ng-if="country.isAppProtocolParty" class="color-party" style="font-size:10px;margin-right:10px;">Party</span>
+							<span ng-if="!country.isParty" class="color-grey" style="font-size:10px;margin-right:10px;">Non-Party</span>
+							<span ng-if="country.isParty" class="color-party" style="font-size:10px;margin-right:10px;">Party</span>
 						</td>
 						<td ng-if="regions.length>0">{{::getRegions(country.code)}}</td>
 						<td ng-repeat="schema in country.schemas">{{schema.count }}</td>		
@@ -146,20 +146,20 @@
 				<div style="text-align:left;width:30px;display:inline-block;"> {{$index+1}} </div>
 
 				<div style="display:inline;">
-					<span style="font-size:18px;font-weight:500;" ng-class="{'color-party': country.isAppProtocolParty, 'color-grey':!country.isAppProtocolParty, 'color-inbetween': country.isNPInbetweenParty}">
+					<span style="font-size:18px;font-weight:500;" ng-class="{'color-party': country.isParty, 'color-grey':!country.isParty, 'color-inbetween': country.isInbetweenParty}">
                                     {{country.name|lstring:locale}}</span>
 				</div>
 				<div style="margin-left:35px;text-transform:uppercase;font-weight:500;">
 					<div ng-if="isABS">
-						<span ng-if="!country.isAppProtocolParty && !country.isNPInbetweenParty" class="color-grey" style="font-size:10px;margin-right:10px;">Non-Party</span>
-						<span ng-if="country.isAppProtocolParty" class="color-party" style="font-size:10px;margin-right:10px;">Party to the Nagoya Protocol</span>
-						<span ng-if="country.isNPInbetweenParty" class="color-inbetween" style="font-size:10px;margin-right:10px;">Ratified, not yet Party</span>
-						<span ng-if="country.isNPSignatory" style="font-size:10px;margin-right:10px;">Signatory</span>
+						<span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey" style="font-size:10px;margin-right:10px;">Non-Party</span>
+						<span ng-if="country.isParty" class="color-party" style="font-size:10px;margin-right:10px;">Party to the Nagoya Protocol</span>
+						<span ng-if="country.isInbetweenParty" class="color-inbetween" style="font-size:10px;margin-right:10px;">Ratified, not yet Party</span>
+						<span ng-if="country.isSignatory" style="font-size:10px;margin-right:10px;">Signatory</span>
 						<span ng-if="country.entryIntoForce" class="color-grey" style="font-size:10px;margin-right:20px;">Entry into force: {{country.entryIntoForce|formatDate}}</span>
 					</div>
 					<div ng-if="isBCH">
-						<span ng-if="!country.isCPParty" class="color-grey" style="font-size:10px;margin-right:10px;">Non-Party</span>
-						<span ng-if="country.isCPParty" class="color-party" style="font-size:10px;margin-right:10px;">Party to the Cartagena Protocol</span>
+						<span ng-if="!country.isParty" class="color-grey" style="font-size:10px;margin-right:10px;">Non-Party</span>
+						<span ng-if="country.isParty" class="color-party" style="font-size:10px;margin-right:10px;">Party to the Cartagena Protocol</span>
 					</div>
 				</div>
 			</div>

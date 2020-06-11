@@ -220,19 +220,18 @@ function(require, template, app, _) {
   
               
               if (country && mapCountry) {
-                  if (($scope.isABS && country.isNPInbetweenParty))
+                  if (($scope.isABS && country.isInbetweenParty))
                       mapCountry.colorReal = mapCountry.baseSettings.color = "#EC971F";
-                  else if (($scope.isABS && country.isNPParty) || ($scope.isBCH && country.isCPParty))
+                  else if (country.isParty)
                       mapCountry.colorReal = mapCountry.baseSettings.color = "#5F4586";
                   else
                       mapCountry.colorReal = mapCountry.baseSettings.color = "#333";
               } else {
-                    console.log(country, mapCountry)
                     if(mapCountry)//not sure if this is correct
                       mapCountry.colorReal = mapCountry.baseSettings.color = "#333";
               }
   
-              if(country.code == 'RS' && $scope.isBCH && country.isCPParty){
+              if(country.code == 'RS' && $scope.isBCH && country.isParty){
                 var xkMapCountry = getMapObject('XK');
                 xkMapCountry.colorReal = "#5F4586";
               }

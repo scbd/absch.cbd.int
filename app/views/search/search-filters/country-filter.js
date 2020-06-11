@@ -35,13 +35,13 @@ define(['app', 'text!views/search/search-filters/country-filter.html','lodash', 
                     if(!$scope.cf_partyFilter) 
                         return true;
                     if($scope.cf_partyFilter ==='party'){
-                        return item.isAppProtocolParty;
+                        return item.isParty;
                     }  
                     if($scope.cf_partyFilter ==='nonparty'){
-                        return !item.isAppProtocolParty;
+                        return !item.isParty;
                     } 
                     if($scope.cf_partyFilter ==='inbetween'){
-                        return item.isNPInbetweenParty;
+                        return item.isInbetweenParty;
                     }     
                };
                

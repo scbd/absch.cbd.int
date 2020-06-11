@@ -6,7 +6,14 @@ define(['app', 'underscore', 'services/local-storage-service', 'components/scbd-
             return new function() {
 
                 var appName = realm.value.replace(/-.*/,'').toLowerCase();
-               
+                var appTreaties = {
+                    abs: 'XXVII8b',
+                    bch: 'XXVII8a'
+                }
+                // {"_id":"560c75ffc99b3c1b0b91c4ba","code":"XXVII8","name":"Convention on Biological Diversity","acronym":"CBD"},
+                // {"_id":"560c7620c99b3c1b0b91c4bb","code":"XXVII8a","name":"Cartagena Protocol on Biosafety","acronym":"CP"},
+                // {"_id":"560c768ec99b3c1b0b91c4bc","code":"XXVII8b","name":"Nagoya Protocol on Access and Benefit-sharing","acronym":"NP"},
+                // {"_id":"560c76d3c99b3c1b0b91c4bd","code":"XXVII8c","name":"Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress","acronym":"NKLSP"}
                 //==================================================================================
                 this.getReferenceRecordIndex = function(schema, documentId) {
 
@@ -83,8 +90,8 @@ define(['app', 'underscore', 'services/local-storage-service', 'components/scbd-
                         });
                 }
                 //==================================================================================
-                this.isNPParty = function(entity) {
-                    return isNPParty(entity);
+                this.isParty = function(entity) {
+                    return isParty(entity);
                 }
                 //==================================================================================
                 this.isPartyToCBD = function(entity) {
@@ -540,63 +547,52 @@ define(['app', 'underscore', 'services/local-storage-service', 'components/scbd-
                 }
                 //==================================================================================
                 function formatCountry(countryDetails){
+                    
                     var country = {};
                     var treaties = countryDetails.treaties;
                     country.name = countryDetails.name;
                     country.code = countryDetails.code;
 
                     country.isCBDParty = isPartyToCBD(countryDetails) || country.code == 'EU';
-                    country.isNPParty = isNPParty(countryDetails) || country.code == 'EU';
-                    country.isNPSignatory = isSignatory(countryDetails) || country.code == 'EU';
-                    country.isNPRatified = isRatified(countryDetails) || country.code == 'EU';
-                    country.isNPInbetweenParty = moment.utc().diff(moment.utc(treaties.XXVII8b.deposit), 'days') < 90;
-                    
-                    country.isCPParty = isCPParty(countryDetails);
-                    if(appName == 'abs')
-                        country.isAppProtocolParty   = country.isNPParty
-                    else if(appName == 'bch')
-                        country.isAppProtocolParty   = country.isCPParty
-                        
-                    country.dateDeposit =  countryDetails.treaties.XXVII8b.deposit;
-                    country.instrument  = countryDetails.treaties.XXVII8b.instrument;
-                    country.dateSigned  = countryDetails.treaties.XXVII8b.signature;
+                    country.isParty = isParty(countryDetails) || country.code == 'EU';
+                    country.isSignatory = isSignatory(countryDetails) || country.code == 'EU';
+                    country.isRatified = isRatified(countryDetails) || country.code == 'EU';
+                    country.isInbetweenParty = moment.utc().diff(moment.utc(treaties[appTreaties[appName]].deposit), 'days') < 90;
+                                            
+                    country.dateDeposit = countryDetails.treaties[appTreaties[appName]].deposit;
+                    country.instrument  = countryDetails.treaties[appTreaties[appName]].instrument;
+                    country.dateSigned  = countryDetails.treaties[appTreaties[appName]].signature;
                     country.treaties    = countryDetails.treaties;
                     
-                    if (country.isNPInbetweenParty)
-                        country.entryIntoForce = moment.utc(treaties.XXVII8b.deposit).add(90, 'day');
+                    if (country.isInbetweenParty)
+                        country.entryIntoForce = moment.utc(treaties[appTreaties[appName]].deposit).add(90, 'day');
                     else
-                        country.entryIntoForce = treaties.XXVII8b.party;
+                        country.entryIntoForce = treaties[appTreaties[appName]].party;
 
                     return country;
-                }
-
-
-                //==================================================================================
-                function isCPParty(entity) {
-
-                    if (entity && entity.isCPParty != undefined)
-                        return entity.isCPParty;
-
-                    return entity && entity.treaties.XXVII8a.party!=null;
-                    // (moment.utc().diff(moment.utc(entity.treaties.XXVII8a.deposit), 'days') >= 90) 
-                    // && (entity.treaties.XXVII8a.instrument == "ratification" ||
-                    //     entity.treaties.XXVII8a.instrument == "accession" ||
-                    //     entity.treaties.XXVII8a.instrument == "acceptance" || 
-                    //     entity.treaties.XXVII8a.instrument == "approval");
-                }
+                }                
 
                 //==================================================================================
-                function isNPParty(entity) {
+                function isParty(entity) {
 
-                    if (entity && entity.isNPParty != undefined)
-                        return entity.isNPParty;
+                    if (entity && entity.isParty != undefined)
+                        return entity.isParty;
 
-                    if (entity && entity.isNPInbetweenParty != undefined)
-                        return entity.isNPInbetweenParty;
+                    if (entity && entity.isInbetweenParty != undefined)
+                        return entity.isInbetweenParty;
 
-                    return entity && (moment.utc().diff(moment.utc(entity.treaties.XXVII8b.deposit), 'days') >= 90) && (entity.treaties.XXVII8b.instrument == "ratification" ||
-                        entity.treaties.XXVII8b.instrument == "accession" ||
-                        entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
+                    return entity &&                         
+                        (   
+                            moment.utc().diff(moment.utc(entity.treaties[appTreaties[appName]].deposit), 'days') >= 90 || 
+                            moment.utc(entity.treaties[appTreaties[appName]].party <= moment.utc())
+                        ) && 
+                        (
+                            entity.treaties[appTreaties[appName]].instrument == "ratification"  ||
+                            entity.treaties[appTreaties[appName]].instrument == "accession"     ||
+                            entity.treaties[appTreaties[appName]].instrument == "acceptance"    || 
+                            entity.treaties[appTreaties[appName]].instrument == "approval"      ||
+                            entity.treaties[appTreaties[appName]].instrument == "succession"
+                        );
                 }
                 //==================================================================================
                 function isPartyToCBD(entity) {
@@ -609,20 +605,20 @@ define(['app', 'underscore', 'services/local-storage-service', 'components/scbd-
                 //==================================================================================
                 function isSignatory(entity) {
 
-                    if (entity && entity.isNPSignatory != undefined)
-                        return entity.isNPSignatory;
+                    if (entity && entity.isSignatory != undefined)
+                        return entity.isSignatory;
 
-                    return entity && entity.treaties.XXVII8b.signature != null;
+                    return entity && entity.treaties[appTreaties[appName]].signature != null;
                 }
                 //==================================================================================
                 function isRatified(entity) {
 
-                    if (entity && entity.isNPRatified != undefined)
-                        return entity.isNPRatified;
+                    if (entity && entity.isRatified != undefined)
+                        return entity.isRatified;
 
-                    return entity && (entity.treaties.XXVII8b.instrument == "ratification" ||
-                        entity.treaties.XXVII8b.instrument == "accession" ||
-                        entity.treaties.XXVII8b.instrument == "acceptance" || entity.treaties.XXVII8b.instrument == "approval");
+                    return entity && (entity.treaties[appTreaties[appName]].instrument == "ratification" ||
+                        entity.treaties[appTreaties[appName]].instrument == "accession" ||
+                        entity.treaties[appTreaties[appName]].instrument == "acceptance" || entity.treaties[appTreaties[appName]].instrument == "approval");
                 }
 
                 //==================================================================================

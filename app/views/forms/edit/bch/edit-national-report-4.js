@@ -334,8 +334,8 @@ function (app, _, nr4Data, nr3Data) {
 
                 verifyCountryHasReport();
                 commonjs.getCountry(government.identifier).then(function(country){
-                    $scope.document['Q012_party'] = { value : country.isCPParty.toString() };
-                    if(country.isCPParty){
+                    $scope.document['Q012_party'] = { value : country.isParty.toString() };
+                    if(country.isParty){
                         $scope.document['Q012_progressForParty'] = undefined;
                         $scope.document['Q013'] = undefined;
                     }

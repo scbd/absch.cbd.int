@@ -143,9 +143,9 @@
                     <ul class="list-group">
                         <li class="row list-group-item" style="min-width:300px;" ng-click="navigateCountry(country.code)"
                         ng-repeat="country in countries | filter:countryFilter | filter:searchFilter | orderBy:'name.en'"
-                        ng-class="{'list-group-item-info':country.isNPSignatory && !country.isNPParty,
-                                'list-group-item-primary':country.isNPParty,
-                                'list-group-item-default':!country.isNPParty && !country.isNPSignatory}">
+                        ng-class="{'list-group-item-info':country.isSignatory && !country.isParty,
+                                'list-group-item-primary':country.isParty,
+                                'list-group-item-default':!country.isParty && !country.isSignatory}">
     
                             <div class="col-xs-12">{{country.name |lstring}}</div>
                         </li>

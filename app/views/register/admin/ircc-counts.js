@@ -209,11 +209,11 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                              var countries = _.filter(data, function(country){
 
                                  if($scope.filters.partyStatus==2)
-                                    return country.isNPParty;
+                                    return country.isParty;
                                 else if($scope.filters.partyStatus==3)
-                                    return !country.isNPParty;
+                                    return !country.isParty;
                                 else if($scope.filters.partyStatus==4)
-                                    return country.isNPInbetweenParty;
+                                    return country.isInbetweenParty;
 
                              });
                             var countryCodes = _.pluck(countries, 'code');

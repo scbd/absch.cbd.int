@@ -26,13 +26,13 @@
             <a translation-url  class="filter"  ng-click="saveFilter(doc, $parent.searchResult.data.facets.countries[doc.id])" 
             ng-class="::{'disabled':!$parent.searchResult.data.facets.countries[doc.id]}">
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
-                <span  class="bold" ng-class="{'color-party': doc.isAppProtocolParty, 'color-inbetween':doc.isNPInbetweenParty,
-                 'color-nonparty':!doc.isAppProtocolParty && !doc.isNPInbetweenParty }">{{::doc.name|lstring:locale}}</span>
+                <span  class="bold" ng-class="{'color-party': doc.isParty, 'color-inbetween':doc.isInbetweenParty,
+                 'color-nonparty':!doc.isParty && !doc.isInbetweenParty }">{{::doc.name|lstring:locale}}</span>
                  <strong>({{$parent.searchResult.data.facets.countries[doc.id]||0}})</strong>
             </a>
             <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon"></i>
-                <span ng-class="{'color-party': doc.isAppProtocolParty}">
-                   {{doc.isAppProtocolParty ? "Party to the Nagoya Protocol since " : "Non-Party"}}
+                <span ng-class="{'color-party': doc.isParty}">
+                   {{doc.isParty ? "Party to the Nagoya Protocol since " : "Non-Party"}}
                     <span class="date" ng-if="doc.entryIntoForce">{{doc.entryIntoForce | formatDate}}</span>
                 </span>
             </p>-->
