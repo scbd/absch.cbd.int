@@ -55,7 +55,7 @@
                             <hr>
                             <li  style="border:0!important;" ng-repeat="c in countries track by c.code" >
                                 <a style="color:#666!important;font-size:14px;" ng-href="countries/{{c.code|encode|uppercase}}" >
-                                    <span class="bold" ng-class="{'color-party': c.isNPParty, 'color-grey':!c.isNPParty, 'color-inbetween': c.isNPInbetweenParty}">
+                                    <span class="bold" ng-class="{'color-party': c.isParty, 'color-grey':!c.isParty, 'color-inbetween': c.isInbetweenParty}">
                                         {{c.name | lstring:locale}}
                                     </span>
                                 </a>

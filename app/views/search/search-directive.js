@@ -383,9 +383,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                             _.each(countries, function (country, index) {
                                 addFilter(country.code.toLowerCase(), { 'sort': index, 'type': 'country', 'name': country.name, 
-                                'id': country.code.toLowerCase(), 'description': '', "isCBDParty": country.isCBDParty, "isNPParty": country.isNPParty, 
-                                "isAppProtocolParty": country.isAppProtocolParty, "isNPSignatory": country.isNPSignatory, "isNPRatified": country.isNPRatified, 
-                                "isNPInbetweenParty": country.isNPInbetweenParty, "entryIntoForce": country.entryIntoForce});
+                                'id': country.code.toLowerCase(), 'description': '', "isCBDParty": country.isCBDParty, "isParty": country.isParty, 
+                                "isParty": country.isParty, "isSignatory": country.isSignatory, "isRatified": country.isRatified, 
+                                "isInbetweenParty": country.isInbetweenParty, "entryIntoForce": country.entryIntoForce});
                             });
                         });
                     };
@@ -813,13 +813,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         var templist = _.filter(list, function (item) {
 
-                            if (id === 'partyToProtocol' && item.isAppProtocolParty === true)
+                            if (id === 'partyToProtocol' && item.isParty === true)
                                 return item;
-                            else if (id === 'nonParty' && item.isAppProtocolParty === false)
+                            else if (id === 'nonParty' && item.isParty === false)
                                 return item;
-                            else if (id === 'inbetween' && item.isNPInbetweenParty === true)
+                            else if (id === 'inbetween' && item.isInbetweenParty === true)
                                 return item;
-                            else if (id === 'signatoryToProtocol' && item.isNPSignatory === true)
+                            else if (id === 'signatoryToProtocol' && item.isSignatory === true)
                                 return item;
                         });
 

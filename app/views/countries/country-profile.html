@@ -15,11 +15,11 @@
             <h1 style="font-size:280%;"><i class="flag-icon" ng-class="country.cssClass"></i> <strong> {{country.name}} </strong>
             </h1>
             <div class="well bg-white cp-header">
-                    <div style="margin-bottom:5px;">
+                    <div style="margin-bottom:5px;" ng-if="isABS">
                         <label >Party Status:</label>
-                        <span ng-if="!country.isNPParty && !country.isNPInbetweenParty" class="color-grey bold">Not a Party to the Nagoya Protocol</span>
-                        <span ng-if="country.isNPParty" class="color-party bold">Party to the Nagoya Protocol</span>
-                        <span ng-if="country.isNPInbetweenParty" class="color-inbetween bold">Ratified, not yet Party to the Nagoya Protocol</span>
+                        <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey bold">Not a Party to the Nagoya Protocol</span>
+                        <span ng-if="country.isParty" class="color-party bold">Party to the Nagoya Protocol</span>
+                        <span ng-if="country.isInbetweenParty" class="color-inbetween bold">Ratified, not yet Party to the Nagoya Protocol</span>
                         <div ng-if="country.code==='dk'" style="margin-left:194px;"class="bold"><i class="fa fa-info-circle"></i> Denmark’s ratification of the Nagoya Protocol does not apply in respect of Greenland and the Faroe Islands.</div>
                          <div ng-if="country.code==='gb'" style="margin-left:194px;"class="bold">
                              <i class="fa fa-info-circle"></i> 
@@ -29,20 +29,25 @@
                             title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
                         </div>
                     </div>
-                     <div ng-if="country.isNPParty || country.isNPInbetweenParty" style="margin-bottom:5px;">
-                        <label>Enter<span ng-if="country.isNPInbetweenParty">s</span><span ng-if="country.isNPParty">ed</span> into force on:</label>
+                    <div style="margin-bottom:5px;" ng-if="isBCH">
+                        <label >Party Status:</label>
+                        <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey bold">Not a Party to the Cartagena Protocol on Biosafety</span>
+                        <span ng-if="country.isParty" class="color-party bold">Party to the Cartagena Protocol on Biosafety</span>
+                    </div>
+                     <div ng-if="country.isParty || country.isInbetweenParty" style="margin-bottom:5px;">
+                        <label>Enter<span ng-if="country.isInbetweenParty">s</span><span ng-if="country.isParty">ed</span> into force on:</label>
                         <span class="color-grey bold">{{country.entryIntoForce|formatDate}}</span>
                     </div>
-                    <div ng-if="country.isNPRatified && country.dateDeposit"  style="margin-bottom:5px;">
+                    <div ng-if="(country.isRatified) && country.dateDeposit"  style="margin-bottom:5px;">
                         <label ng-if="country.instrument" ><span style="text-transform:capitalize;">{{country.instrument}}</span> on:</label>
                         <label ng-if="!country.instrument">Ratification on:</label>
                         <span class="color-grey bold">{{country.dateDeposit|formatDate}}</span>
                     </div>
                     <div style="margin-bottom:5px;">
                         <label>Signatory:</label>
-                        <span ng-if="country.isNPSignatory && !country.dateSigned" class="bold">Signatory</span>
-                        <span ng-if="country.isNPSignatory && country.dateSigned" class="bold">Signed on {{country.dateSigned|formatDate}} </span>
-                        <span ng-if="!country.isNPSignatory" class="color-grey bold">No</span>
+                        <span ng-if="country.isSignatory && !country.dateSigned" class="bold">Signatory</span>
+                        <span ng-if="country.isSignatory && country.dateSigned" class="bold">Signed on {{country.dateSigned|formatDate}} </span>
+                        <span ng-if="!country.isSignatory" class="color-grey bold">No</span>
                     </div>
                    
                     <div style="white-space:nowrap;overflow-x:hidden;margin-bottom:5px;">

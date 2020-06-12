@@ -105,7 +105,7 @@ define(['app','text!views/directives/export-directive.html', 'underscore',
                                                                                 document[field] = document[field] && document[field].length > 0
                                                                             else if(field == 'partyStatus'){
                                                                                 var status = _.findWhere(partyStatusData, {code: document.government_s.toUpperCase()})
-                                                                                if(status.isNPParty)
+                                                                                if(status.isParty)
                                                                                     document[field] =  'Party';
                                                                                 else
                                                                                     document[field] =  'Non Party';

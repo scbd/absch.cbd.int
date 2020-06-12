@@ -213,7 +213,7 @@ function(templateHtml, app, _, require) {
                        $scope.protocolCountries = [];
                        _.each(data, function(country){
                             $scope.protocolCountries[country.code.toLowerCase()] = {
-                                title : country.name, isProtocolParty : country.isAppProtocolParty, code : country.code.toLowerCase()
+                                title : country.name, isProtocolParty : country.isParty, code : country.code.toLowerCase()
                             }
                        });
                    })

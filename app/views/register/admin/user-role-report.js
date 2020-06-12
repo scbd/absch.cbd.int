@@ -91,9 +91,9 @@
                         var countries = [];
 
                         if($scope.filters.partyStatus == 'party')
-                            countries = _.map(_.where($scope.countries, {isNPParty:true}), function(country){return country.code.toLowerCase()})
+                            countries = _.map(_.where($scope.countries, {isParty:true}), function(country){return country.code.toLowerCase()})
                         else if($scope.filters.partyStatus == 'nonparty')
-                            countries = _.map(_.where($scope.countries, {isNPParty:false}), function(country){return country.code.toLowerCase()})
+                            countries = _.map(_.where($scope.countries, {isParty:false}), function(country){return country.code.toLowerCase()})
                         else 
                             countries = _.map($scope.countries, function(country){return country.code.toLowerCase()})
 

@@ -26,9 +26,9 @@ define(['app','text!views/countries/countries-left-menu-directive.html',
 
                         $scope.countries = countries;
 
-                        $scope.npParty = _.where($scope.countries,{isNPParty:true}).length;
-                        $scope.npSignatory = _.where($scope.countries,{isNPSignatory:true}).length;
-                        $scope.nonParty = _.where($scope.countries,{isNPParty:false}).length;
+                        $scope.npParty = _.where($scope.countries,{isParty:true}).length;
+                        $scope.npSignatory = _.where($scope.countries,{isSignatory:true}).length;
+                        $scope.nonParty = _.where($scope.countries,{isParty:false}).length;
 
                     });
 
@@ -36,11 +36,11 @@ define(['app','text!views/countries/countries-left-menu-directive.html',
 
                          $scope.type = type;
                          if(type=='party')
-                             $scope.searchFilter=commonjs.isNPParty;
+                             $scope.searchFilter=commonjs.isParty;
                          else if(type=='signatory')
                              $scope.searchFilter=commonjs.isSignatory;
                          else if(type=='nonParties')
-                             $scope.searchFilter=function(entity){ return !commonjs.isNPParty(entity) && !commonjs.isSignatory(entity);};
+                             $scope.searchFilter=function(entity){ return !commonjs.isParty(entity) && !commonjs.isSignatory(entity);};
                          else if(type=='all')
                              $scope.searchFilter=function(entity){return entity;};
 

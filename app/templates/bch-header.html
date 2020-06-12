@@ -87,7 +87,7 @@
                             |filter:startsWith -->
                             <li  style="border:0!important;" ng-repeat="c in ::countries track by c.code" >
                                 <a style="color:#666!important;font-size:14px;" ng-href="/countries/{{::c.code|encode}}" >
-                                    <span class="bold" ng-class="{'color-party': c.isCPParty, 'color-grey':!c.isCPParty}">
+                                    <span class="bold" ng-class="{'color-party': c.isParty, 'color-grey':!c.isParty}">
                                         {{::c.name | lstring:locale}}
                                     </span>
                                 </a>
