@@ -23,7 +23,7 @@
 		</div>
 
 		<div ng-show="document.title">
-			<label>Title of risk assessment</label>
+			<label>Title of the risk assessment</label>
 			<div>
 				<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
@@ -33,7 +33,7 @@
 			<div class="km-value" ng-bind-html="document.date | formatDate"></div>
 		</div>
 		<div ng-show="document.authorities" ng-if="document.header.schema=='nationalRiskAssessment'">
-			<label>Competent National Authority(ies) responsible for the decision or communication</label>
+			<label>Competent National Authority(ies) responsible for the risk assessment</label>
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >						
@@ -65,7 +65,7 @@
 
 		<div ng-if="document.modifiedOrganisms || document.scopes || document.documents || document.documentsSummary">
 			<legend>Risk assessment details</legend>
-			<div ng-show="document.modifiedOrganisms">
+			<div ng-if="document.modifiedOrganisms">
 				<label>Living modified organism(s)</label>
 				<div class="km-value">
 					<ul class="list">
@@ -75,14 +75,14 @@
 					</ul>
 				</div>
 			</div>
-			<div ng-show="document.scopes">
+			<div ng-if="document.scopes">
 				<label>Scope of the risk assessment</label>
 				<div class="km-value">
 					<view-terms-hierarchy ng-model="document.scopes" locale="locale" term-domain="riskAssessmentScope"></view-terms-hierarchy>				
 				</div>
 			</div>
-			<div ng-show="document.documents">
-				<label>Risk assessment report / Summary</label>
+			<div ng-if="document.documents||document.documentsSummary">
+				<label>Risk assessment report / summary</label>
 				<div class="km-value" ng-repeat="item in document.documents">
 					<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 				</div>
