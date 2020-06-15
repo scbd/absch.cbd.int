@@ -48,7 +48,7 @@ require.config({
         'angular-trix'              : cdnHost + 'angular-trix@1.0.2/dist/angular-trix.min',
         'trix'                      : cdnHost + 'trix@0.12.0/dist/trix',
         'ngMeta'                    : cdnHost + 'ng-meta@1.0.3/dist/ngMeta.min',
-        'angular-loggly-logger'     : cdnHost + '@scbd/angular-loggly-logger@0.3.2/angular-loggly-logger.min',
+        'angular-loggly-logger'     : cdnHost + '@scbd/angular-loggly-logger@0.3.3/angular-loggly-logger.min',
         'drag-and-drop'             : cdnHost + 'angular-drag-and-drop-lists@2.1.0/angular-drag-and-drop-lists.min',
         'angucomplete-alt'          : cdnHost + 'angucomplete-alt@3.0.0/angucomplete-alt',
         'angular-cache'             : cdnHost + 'angular-cache@4.6.0/dist/angular-cache.min',
