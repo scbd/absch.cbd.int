@@ -1,7 +1,11 @@
 'use strict';
 
-const minify = require('minify');
-const cheerio = require('cheerio');
+const minify    = require('minify');
+const cheerio   = require('cheerio');
+const _         = require('lodash');
+const terser = require('terser');
+const {readFile, writeFile, mkdir} = require('fs').promises;
+const path = require('path');
 
 const minifyOptions = {
     html: {
@@ -21,9 +25,33 @@ const minifyOptions = {
     }
 }
 
-async function minifyFile(file){
+async function minifyFile(file, options){
+    options = options || {};
+    let newOptions = _.defaultsDeep({...options}, minifyOptions)
 
-    const minifiedResult = await minify(file, minifyOptions);
+    if(/\.js/.test(file)){
+        //special case for JS, since the lib does not generate map files (even not return the map data)
+        //minfy and generate map file locally
+        const data = await readFile(file, 'utf8');
+
+        const { error, code, map } = terser.minify(data, options.js);
+        
+        if (error)
+            throw error;
+
+        if(options.js.sourceMap){
+            try {
+                await createDir(options.js.sourceMap.filename)
+                await writeFile(options.js.sourceMap.filename, map)
+            } catch (error) {
+                console.log('error writin js map file', error)
+            }
+        }
+
+        return code;
+    }
+
+    const minifiedResult = await minify(file, newOptions);
 
     return minifiedResult
 }
@@ -50,4 +78,9 @@ function addLanguageAttribute(content, filePath){
     return content;
 }
 
+
+const createDir = async (filePath)=>{
+    const dirName = path.dirname(filePath);
+    await mkdir(dirName, {recursive:true});   
+}
 module.exports = { minifyFile, addLanguageAttribute }
