@@ -16,7 +16,19 @@ function localMinify(options){
             let path = `/app${requestedUrl}`;   
 
             if(/.(html|js|css)$/.test(path)){
-                const result = await minify.minifyFile(global.app.rootPath + path)
+                let options = {};
+                let filePath = global.app.rootPath + path;
+                if(/.js$/.test(path)){
+                    options = { 
+                        js:{
+                            sourceMap:{
+                                filename: `${global.app.rootPath}/sourceMap${path}.map`,
+                                url: `/sourceMap${path}.map`
+                            }
+                        }
+                    }
+                }
+                const result = await minify.minifyFile(filePath, options)
 
                 var type = mime.lookup(path)             
                 var charset = mime.charsets.lookup(type)

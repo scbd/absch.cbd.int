@@ -46,6 +46,7 @@ const localMinify = require('./middlewares/local-minification');
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: cacheControl.setCustomCacheControl}) );
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          translation.renderLanguageFile, localMinify(), express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/sourceMap/app',                            express.static(__dirname + '/sourceMap/app'));
 
 app.use('/cbd-forums',      express.static(__dirname + '/node_modules/@bower_components/cbd-forums', { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: cacheControl.setCustomCacheControl}));

@@ -46,7 +46,19 @@ async function processFiles() {
                         
                         if(file && minifyRegex.test(file) && validFolder.test(file)){
                             
-                            let minifiedResult = await minification.minifyFile(file);
+                            let options = {};
+                            if(/.js$/.test(file)){
+                                const mapFile = file.replace(/\/app\//, '/sourceMap/app/')
+                                options = { 
+                                    js:{
+                                        sourceMap:{
+                                            filename: mapFile,
+                                            url: mapFile.replace(/.*\/sourceMap/, '/sourceMap')
+                                        }
+                                    }
+                                }                                
+                            }
+                            let minifiedResult = await minification.minifyFile(file, options);
                             minifiedResult     = minification.addLanguageAttribute(minifiedResult, file)
                             await writeFile(file, minifiedResult);
 

@@ -16,6 +16,7 @@ define(['angular-flex', 'angular-animate', 'angular-sanitize', 'angular-loggly-l
                 .includeTimestamp(true)
                 .sendConsoleErrors(true)
                 .logToConsole(logToConsole)
+                .ignoreMessageRegex(/\bDocument not found in the specified realm\b/)
                 .endpoint('/error-logs');
 
        
