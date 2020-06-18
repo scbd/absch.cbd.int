@@ -158,7 +158,7 @@
                     var schemaName = $filter('mapSchema')(schema);
                     var appSchemas = ([]).concat(realm.nationalSchemas, realm.referenceSchemas).concat(realm.scbdSchemas);
 
-                    if(_.contains(appSchemas, realm.referenceSchemas)){
+                    if(_.intersection(realm.referenceSchemas, appSchemas).length){
                         roles = (roles || []).concat(realm.schemaRoles(schemaName));
                     }
                     else{
