@@ -34,6 +34,14 @@ define(['app', 'services/cache-service'], function (app) {
                     return $q.all([$http.get(url, {cache:termsCacheFactory}),$http.get(urlOther, {cache:termsCacheFactory})])
                                 .then(function(termData){
                                     var data       = termData[0].data;
+
+                                    if(options.narrowerOf){//
+                                        var narrowerOf = _.find(data, {identifier:options.narrowerOf})
+                                        data = _.filter(data, function(term){
+                                            return _.contains(narrowerOf.narrowerTerms, term.identifier)
+                                        });
+                                    }
+
                                     var other      = termData[1].data;
                                         other.type = options.otherType;  //lstring or int etc
                                     data.push(other);

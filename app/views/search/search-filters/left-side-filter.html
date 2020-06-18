@@ -43,13 +43,24 @@
             .ngdialog-open #Search-Filter .bring-to-front, .ngdialog-open #Search-Filter .bring-to-front1{
                 z-index: 10;
             }
-
+            .ngdialog.ngdialog-theme-default .ngdialog-content .modal-body{
+                background:#fff;
+            }
             #Search-Filter .exclude-filter{
                 border: 1px solid #d95350;;
                 padding: 5px;
             }
             #Search-Filter .ngdialog-theme-default.wide{
                 height: 500px;
+            }
+            #Search-Filter .filter-item{
+                border-right: unset;
+                border-left: unset;
+                padding-left: 5px;
+                padding-right: 13px;
+            }
+            #Search-Filter .filter-item:hover{
+                background:#ddd;
             }
        </style>
         <div style="border-bottom: 1px solid #eee">
@@ -81,8 +92,7 @@
                         <i class="fa pull-right" style="font-size:1.5em; " 
                         ng-class="{'fa-sort-down':state[schema], 'fa-sort-up':!state[schema]}"></i>
                     </div>
-                    <div class="list-group-item" ng-repeat="filter in filters"  
-                        style="border-right: unset;border-left: unset;" ng-show="!state[schema]">
+                    <div class="list-group-item filter-item" ng-repeat="filter in filters"  ng-show="!state[schema]">
                         
                         <div class="dropdown pull-left bring-to-front" ng-if="filter.filterValue!=undefined||hasItems(filter.selectedItems)">
                             <button class="btn btn-xs btn-default dropdown-toggle" type="button"
@@ -105,9 +115,12 @@
                         <div >
                             <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='freeText' && filter.type!='yesNo'" class="color-darkgrey not" style="cursor: pointer;" 
                                 ng-click="showFilterDialog(schema, filter, searchResult.data.facets.keywords)" ng-class="{'disabled strikeout':filter.disabled}">
-                                <span ng-bind="filter.title"></span>
-                                <div style="position:absolute;right:6px;top:6px" style="margin-top:5px" class="fa fa-chevron-right"></div>    
-                                <!-- <i class="fa fa-chevron-right pull-right" style="margin-top:5px" aria-hidden="true"></i>           -->
+                                <div ng-class="{'exclude-filter':filter.excludeResult}">
+                                    <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
+                                    <span ng-bind="filter.title"></span>
+                                    <span class="fa fa-chevron-right pull-right"></span>    
+                                    <!-- <i class="fa fa-chevron-right pull-right" style="margin-top:5px" aria-hidden="true"></i>           -->
+                                </div>
                             </div>
                             <div ng-if="filter.type=='date'" >
                                 <label ng-bind="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
@@ -129,22 +142,34 @@
                                 <label  class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" ng-value="false"  ng-change="onFilterDateChange(filter)"/> No </label>
                             </div>
                             <div ng-if="filter.type=='solrRecords'">
-                                <div document-selector ng-model="filter.selectedItems" question="searchResult" caption="(sense)" type="checkbox"
-                                    query="filter.query.q" filter="true" ng-change="recordSelected(item, filter)"   skip-government="true"
-                                    block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">
-                                    <select-records>
-                                        <div class="color-darkgrey not" style="cursor: pointer;" ng-click="$parent.openAddDialog();">
-                                            <span ng-bind="filter.title"></span>
-                                            <div style="position:absolute;right:6px;top:6px" style="margin-top:5px" class="fa fa-chevron-right"></div> 
+                                <div block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">
+                                    <div ng-class="{'exclude-filter':filter.excludeResult}">
+                                        <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
+                                        <div document-selector identifier-without-revision="true" ng-model="filter.selectedItems" question="searchResult" type="checkbox"
+                                            query="filter.query.q" filter="true" ng-change="recordSelected(item, filter)"   skip-government="true" list-view="false">
+                                            <select-records>
+                                                <div class="color-darkgrey not" style="cursor: pointer;" ng-click="$parent.openAddDialog();">
+                                                    <span ng-bind="filter.title"></span>
+                                                    <span  class="fa fa-chevron-right pull-right"></span> 
+                                                </div>
+                                            </select-records>
+                                            <selected-records>
+                                                <div  ng-repeat="option in $parent.selectedRawDocuments" ng-click="removeSchemaFilters(option, filter);$parent.$parent.removeDocument(option);" 
+                                                    class="list-group-item-expand filter" role="button" id="{{option.identifier_s}}"
+                                                    data-toggle="tooltip" data-title="{{option.rec_title|lstring:locale}}" data-container="body" data-placement="right"> 
+                                                    <label class="label label-selected-facet" aria-hidden="false" style="display:inline-flex;cursor: pointer;">                                      
+                                                        <span class="truncate">
+                                                            <!-- ({{searchResult.data.facets.keywords[option.id]||0}})  -->
+                                                            <span ng-bind="option.rec_title|lstring:locale|limitTo:40"></span>
+                                                            <span ng-if="(option.rec_title|lstring:locale).length>40">...</span>                                    
+                                                        </span>
+                                                        <div class="fa fa-remove"></div>                             
+                                                    </label>            
+                                                    <div ng-if="$last" ng-init="ngRepeatFinished()" style="display:none"></div> 
+                                                </div>
+                                            </selected-records>
                                         </div>
-                                    </select-records>
-                                    <selected-records>
-                                        <div class="label label-selected-facet" aria-hidden="false" ng-repeat="doc in $parent.selectedRawDocuments"
-                                        ng-click="removeSchemaFilters(doc, filter);$parent.$parent.removeDocument(doc);" >
-                                            <div style="position:absolute;right:6px;top:6px" class="fa fa-remove"></div>
-                                            <span ng-bind="doc.rec_title"></span>
-                                        </div>
-                                    </selected-records>
+                                    </div>
                                 </div>
                             </div>
                             <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='yesNo'" block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">
@@ -155,7 +180,7 @@
                                         class="list-group-item-expand filter" role="button" id="{{option.identifier}}"
                                         data-toggle="tooltip" data-title="{{option.title|lstring:locale}}" data-container="body" data-placement="right">                            
                                         <div class="label label-selected-facet" aria-hidden="false">
-                                            <div style="position:absolute;right:6px;top:6px" class="fa fa-remove"></div>                                                    
+                                            <div class="fa fa-remove pull-right"></div>                                                    
                                             <span class="truncate">
                                                 <!-- ({{searchResult.data.facets.keywords[option.id]||0}})  -->
                                                 <span ng-bind="option.title|lstring:locale|limitTo:40"></span>
@@ -191,7 +216,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" style=" background:#f0f0f0">
             <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
             <button type="button" class="btn btn-primary pull-left" ng-click="applyFilter()">Apply</button>
         </div>

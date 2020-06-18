@@ -40,7 +40,7 @@
 			"field": "decisionDate_dt"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
 				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
 				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
@@ -463,7 +463,51 @@
 			"type": "thesaurus",
 			"term": "organizationTypes",
 			"title": "Type of Organization",
-			"field": ""
+			"field": "organizationType_s"
+		}
+	],
+	"laboratoryDetection": [
+		{
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "services",
+			"title": "Services and activities performed",
+			"field": "services_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "typeOfOrganisms",
+			"narrowerOf":"8DAB2400-CF00-44B2-ADCF-49AABF66B9B0",
+			"title": "Types of LMOs",
+			"field": "lmoTypes_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "detectionMethods",
+			"title": "Type of detection/ identification method(s) available for use in the laboratory",
+			"field": "detectionMethods_ss"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"fl": "identifier:identifier_s,title:title_s",
+				"q": "schema_s:modifiedOrganism"
+			},
+			"title": "LMO(s) detectable by the laboratory",
+			"field": "detectableLmos_ss"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"fl": "identifier:identifier_s,title:title_s",
+				"q": "schema_s:dnaSequence"
+			},
+			"title": "Genetic elements(s) detectable by the laboratory",
+			"field": "detectableGenes_ss"
 		}
 	],
 	"resource": [
