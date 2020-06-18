@@ -30,7 +30,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var lefteMenuSchemaFieldMapping;
                         var activeFilter;
                         var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
-                        var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
+                        var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,summary_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
     
                         var groupFieldMapping = [
                             {
@@ -627,9 +627,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var schemaQuery         = buildSchemaQuery();                        
                         var schemaSubQuery      = buildSchemaSubQuery();                        
                         var keywordQuery        = buildFieldQuery('keyword',  'all_terms_ss')
-                        var countryQuery        = buildFieldQuery('country',  'government_s')
+                        var countryQuery        = _.compact([buildFieldQuery('country',  'government_s'), buildFieldQuery('country',   'country_s')]).join(' OR ');
                         var partyStatusQuery    = buildPartyStatusQuery();
-                        var regionQuery         = buildFieldQuery('region',   'government_REL_ss');
+                        var regionQuery         = _.compact([buildFieldQuery('region',   'government_REL_ss'), buildFieldQuery('region',   'country_REL_ss')]).join(' OR ');
                         var textQuery           = buildFieldQuery('freeText', 'text_EN_txt');
                         var rawQuery            = buildRawQuery();
 
@@ -648,7 +648,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         tagQueries.keywords    =  keywordQuery;
                         tagQueries.government  =  countryQuery;
                         tagQueries.region      =  regionQuery;
-                        
+                        console.log(tagQueries)
                         //special query for Contact as only records which have reference contact are searchable.
                         tagQueries.contact     =  '(*:* NOT schema_s:contact) OR (schema_s:contact AND (refReferenceRecords_ss:* OR refNationalRecords_ss:*))';
                        
@@ -696,9 +696,15 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                     }
                                     else if(!_.isEmpty(filter.selectedItems)){
                                         var ids = _.map(filter.selectedItems, 'identifier');
-                                        if(filter.type == 'freeText'){
-                                            ids = _.map(filter.selectedItems, 'title');
-                                            subQuery = filter.field + ':("' + ids.join('" AND "') + '")';
+                                        if(filter.type == 'freeText'){                                          
+                                            ids = _.map(filter.selectedItems,  function(filter){ 
+                                                // || _.trim(filter.title).split(' ').length>1
+                                                if(filter.title.indexOf('-')>0) 
+                                                    return '"' + _.trim(filter.title) + '"'; 
+                                                return _.trim(filter.title)
+                                            });
+                                            subQuery = '(' + filter.field + ':' + ids.join(' AND ' + filter.field + ':') + ')';
+                                            
                                         }
                                         else{
                                             var field = filter.field;
@@ -784,8 +790,14 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if (!(filters||[]).length){     
                             return;
                         }
-                        if(filterType == 'freeText')
-                            query = field + ':("' + _.map(filters, function(filter){ return _.trim(filter.id)}).join('" "') + '")';
+                        if(filterType == 'freeText'){
+                            var freeTextVals = _.map(filters, function(filter){ 
+                                    if(filter.id.indexOf('-')>0) 
+                                        return '"' + _.trim(filter.id) + '"'; 
+                                    return _.trim(filter.id)
+                                })
+                            query = '(' + field + ':' + freeTextVals.join(' AND ' + field + ':') + ')';
+                        }
                         else
                             query = field + ':(' + _.map(filters, function(filter){ return _.trim(filter.id)}).join(' ') + ')';
 

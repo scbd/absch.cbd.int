@@ -1,7 +1,7 @@
 ﻿define(['app', 'text!views/search/search-filters/left-side-filter.html', 'lodash', 'ngDialog',
     'components/scbd-angularjs-services/services/utilities'], function (app, template, _) {
 
-        app.directive('leftSideFilter', ['ngDialog', 'Thesaurus', 'locale', function (ngDialog, thesaurus, locale) {
+        app.directive('leftSideFilter', ['ngDialog', 'Thesaurus', 'locale', '$timeout', function (ngDialog, thesaurus, locale, $timeout) {
             return {
                 restrict: 'EA',
                 replace: true,
@@ -35,7 +35,7 @@
 
                     $scope.showFilterDialog = function (schema, filter, facets) {
                         ngDialog.open({
-                            template: 'filtersDialog', height:'100%',
+                            template: 'filtersDialog', 
                             className: 'search-filters ngdialog-theme-default wide',
                             controller: ['$scope', '$timeout', 'thesaurusService', 'searchService', function ($scope, $timeout, thesaurusService, searchService) {
 
@@ -56,7 +56,7 @@
                                         var otherTerm = filter.otherTerm;
                                         if(otherTerm == undefined)
                                             otherTerm = true;
-                                        dataSource = thesaurusService.getDomainTerms(filter.term, {other:otherTerm})
+                                        dataSource = thesaurusService.getDomainTerms(filter.term, {other:otherTerm, narrowerOf: filter.narrowerOf})
                                     }
                                     else if (filter.type == 'solr') {
                                         dataSource = runSolrQuery(filter.query);
@@ -117,21 +117,25 @@
                         }
                     }
 
-                    $scope.ngRepeatFinished = function () {
-                        $element.find('[data-toggle="tooltip"]').tooltip();
+                    $scope.ngRepeatFinished = function () {                        
+                        $element.find('[data-toggle="tooltip"]').tooltip();                       
                     }
 
                     $scope.removeSchemaFilters = function (option, filter) {
-                        if(filter.type=='solrRecords'){
-                            var index = _.findIndex(filter.selectedItems, function(item){ return item.identifier == option.identifier_s + '@' + option._revision_i });
-                            filter.selectedItems.splice(index, 1);
-                        }
-                        else{
-                            $element.find('#' + option.identifier).tooltip('hide')
-                            delete filter.selectedItems[option.identifier];
-                        }
+                        // $scope.ngRepeatFinished();
+                        $element.find('#' + (option.identifier||option.identifier_s)).tooltip('destroy')
+                        // $timeout(function(){
+                            if(filter.type=='solrRecords'){
+                                var index = _.findIndex(filter.selectedItems, function(item){ return item.identifier == option.identifier_s });//+ '@' + option._revision_i
+                                filter.selectedItems.splice(index, 1);
+                            }
+                            else{
+                                delete filter.selectedItems[option.identifier];
+                            }
 
-                        searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters)
+                            searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters);
+                        // }, 300)
+                        
                     }
                     $scope.RemoveLeftMenuFilters = function(){
                         $scope.leftMenuFilters = undefined;
