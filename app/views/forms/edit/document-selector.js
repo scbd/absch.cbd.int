@@ -1,10 +1,11 @@
 define(['app',"text!views/forms/edit/document-selector.html",
-'underscore','js/common', 'views/directives/search-filter-dates.partial',
-'views/search/search-results/result-default', 'services/search-service','services/app-config-service', 'ngDialog'
+'lodash','js/common', 'views/directives/search-filter-dates.partial',
+'views/search/search-results/result-default', 'services/search-service','services/app-config-service', 
+'components/scbd-angularjs-controls/form-control-directives/pagination','ngDialog'
 ], function (app, template, _) { // jshint ignore:line
 
-app.directive("documentSelector", ["$http",'$rootScope', "$filter", "$q", "searchService", "appConfigService", "IStorage", 'ngDialog', 'commonjs','$compile',
-function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStorage, ngDialog, commonjs, $compile) {
+app.directive("documentSelector", ["$timeout",'$rootScope', "$filter", "$q", "searchService", "appConfigService", "IStorage", 'ngDialog', 'commonjs','$compile',
+function ($timeout, $rootScope, $filter, $q, searchService, appConfigService, IStorage, ngDialog, commonjs, $compile) {
 
 	return {
 		restrict   : "EA",
@@ -33,14 +34,21 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             var focalPointRegex = /^52000000cbd022/;
             $scope.rawDocuments = [];
             $scope.selectedDocuments=[];
+            $scope.tempSelectedDocuments=[];
 			$scope.areVisible = false;
             $scope.userGov = $scope.$root.user.government;
             $scope.showAddButton = false;
             $scope.sortType     = 'rec_title'; 
             $scope.sortReverse  = false;  
+            $scope.listView     = $attr.listView=="true";
             $scope.search       = {keyword:''}
+            $scope.activeTab    ='allRecords';
             if(!$scope.type) $scope.type = "checkbox";
             
+            $scope.searchResult = {
+                rowsPerPage:25,
+                currentPage:1
+            }
             $scope.allowNew = {
                 show    : $attr.allowNew=='true',
                 schema  : $attr.allowNewSchema,
@@ -48,28 +56,15 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                 schemas : ($attr.allowNewSchema||'').split(','),
             };     
 
-            if($attr.listView){
-                $scope.listView = true;
-            }
-
-            $scope.onRadioClick = function(doc){
-                if($scope.type == "radio"){
-                    _.each($scope.rawDocuments.docs, function(d){
-                        if(d.identifier_s!=doc.identifier_s && d.__checked)
-                            d.__checked = false;
-                    })
-                }
-            }
             //==================================
             //
             //==================================
 			$scope.saveDocuments = function(){
-
-                //$scope.model=undefined;
+                $scope.isDialogOpen = false;
                 var oldModel = angular.copy($scope.model);
-                var currentModel = angular.copy($scope.model)
+                var currentModel;
                 $scope.selectedRawDocuments = [];
-                _.forEach($scope.rawDocuments.docs, function (doc) {
+                _.forEach($scope.tempSelectedDocuments, function (doc) {
 
                     if(doc.__checked === true)
                     {
@@ -77,20 +72,15 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                             currentModel=[];
                         $scope.selectedRawDocuments.push(doc);
 
-                        if(!$scope.isInModel(doc.identifier_s)){
-                            var document = {identifier: doc.identifier_s};
-                            
+                        var document = {identifier: doc.identifier_s};
+                        if($attr.identifierWithoutRevision!='true')
                             document.identifier += "@"+ doc._revision_i;
 
-							if($scope.type == 'radio')
-                                currentModel = document;
-							else
-                                currentModel.push(document);
-                        }                       
+                        if($scope.type == 'radio')
+                            currentModel = document;
+                        else
+                            currentModel.push(document);
                         
-                    }
-                    if(!doc.__checked && $scope.isInModel(doc.identifier_s)){
-                        	$scope.removeDocument(doc)
                     }
 
                 });
@@ -107,6 +97,8 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 			};
 
             $scope.clearSelectedDocuments = function(){
+                $scope.tempSelectedDocuments = [];
+                $scope.selectedDocuments = [];
                 _.forEach($scope.rawDocuments.docs,function(doc){
                     doc.__checked = false;
                 });
@@ -116,18 +108,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             //
             //==================================
 			$scope.syncDocuments = function(){
-
-               $scope.rawDocuments.docs =  _.filter($scope.rawDocuments.docs, function (doc) {
-                    doc.__checked = false;
-
-                    if($scope.hideSelf && $scope.hideSelf === doc.identifier_s)
-                    {
-                        return false;
-                    }
-                    return doc;
-
-                });
-
+               
 
 				var docs = []
                 if ($scope.model){
@@ -237,7 +218,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 
                 if($scope.selectedDocuments){
                     $scope.selectedDocuments =  _.filter($scope.selectedDocuments, function (doc) {
-                        if(doc.header.identifier !== removeId ){
+                        if(doc.header.identifier !== removeRevisonNumber(removeId) ){
                         return doc;
                         }
                     });
@@ -270,41 +251,68 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
              //==================================
             //
             //==================================
-            function getDocs () {
+            function getDocs (options) {
+                options = options||{};
+
                 var searchOperation;
 				$scope.isLoading = true;
                 var schema = "*";
                 if ($scope.schema)
                     schema = $scope.schema;
 
-                var q  = "schema_s:"+ schema;
+                var fieldQueries = ["schema_s:"+ schema]
 
-                if($scope.query){ //if query is mentions ignore schem field in query
-                    q = $scope.query;
+                if($scope.query){ //if query is mentioned ignore schem field in query
+                    fieldQueries = [$scope.query];
                 }
 
                 if(!$attr.skipGovernment){
                     if($scope.government)
-                        q  = q + " AND government_s:" + $scope.government.identifier;
+                        fieldQueries.push("government_s:" + $scope.government.identifier);
                     if(!$scope.government &&  $scope.userGov)
-                        q  = q + " AND government_s:" + $scope.userGov;
+                        fieldQueries.push("government_s:" + $scope.userGov);
                 }
 
                 if($scope.hideSelf){
-                    q  = q + " AND NOT (identifier_s:" + $scope.hideSelf + ")";
+                    fieldQueries.push("NOT (identifier_s:" + $scope.hideSelf + ")");
                 }
 
+                if($scope.activeTab == 'myRecords'){
+                    var myRecordsQuery = '_contributor_is:' + $scope.$root.user.userID
+                    if($scope.userGov)
+                        myRecordsQuery = ' OR _ownership_s:'+$scope.userGov.toLowerCase()
+                    fieldQueries.push(myRecordsQuery)
+                }
+
+                options.freeTextQuery = options.freeTextQuery||'*:*';
                 var queryParameters = {
-                    'query'    : q,
-                    'currentPage' : 0,
-                    'rowsPerPage': 1000
+                    fieldQuery: fieldQueries,
+                    'query'    : options.freeTextQuery,
+                    'currentPage' : $scope.searchResult.currentPage-1,
+                    'rowsPerPage': $scope.searchResult.rowsPerPage                    
                 };
+                if(!options.freeTextQuery && !options.sort)
+                    queryParameters.sort = 'updatedDate_dt desc';
+                else if(options.sort)
+                    queryParameters.sort = options.sort;
 
                 searchOperation = searchService.list(queryParameters, null);
 
                 return $q.when(searchOperation)
                     .then(function(data) {
                        $scope.rawDocuments = data.data.response;
+                       $scope.rawDocuments.pageCount = Math.ceil($scope.rawDocuments.numFound / $scope.searchResult.rowsPerPage)
+                       
+                       var selectedRecords = _($scope.tempSelectedDocuments||[])
+                            .map(function(doc){ return doc.header && doc.header.identifier || doc.identifier || doc.identifier_s }).value();
+   
+                        _.each(selectedRecords, function(identifier){
+                            var newDocument = _.find($scope.rawDocuments.docs, {identifier_s:removeRevisonNumber(identifier)});
+                            if(newDocument)
+                                newDocument.__checked = true
+                        })
+
+
                     }).catch(function(error) {
                         console.log('ERROR: ' + error);
                     })
@@ -325,7 +333,87 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             };
 
 
+            $scope.onPageChange = function(page){
+                $scope.searchResult.currentPage = page;
+               getDocs();
+            } 
+            
+            $scope.onPageSizeChanged = function(size){
+                $scope.searchResult.rowsPerPage = size;
+                $scope.searchResult.currentPage = 1;
+                getDocs();
+            }
 
+            $scope.onSelectAction = function(doc, action){
+                // console.log(doc)
+                if($scope.type == "radio"){
+                    _.each($scope.rawDocuments.docs, function(d){
+                        if(d.identifier_s!=doc.identifier_s && d.__checked)
+                            d.__checked = false;
+                        if(d.identifier_s==doc.identifier_s){
+                            console.log(d);
+                        }
+                    })
+                }
+                if(doc.__checked===true){
+                    if($scope.type == "checkbox")
+                        $scope.tempSelectedDocuments.push(angular.copy(doc));
+                    else 
+                        $scope.tempSelectedDocuments = [angular.copy(doc)];
+                }
+                else{
+                    if($scope.type == "checkbox"){
+                        var index = _.findIndex($scope.tempSelectedDocuments, function(temp){return temp.identifier_s==doc.identifier_s})
+                        if(index>=0)
+                            $scope.tempSelectedDocuments.splice(index, 1);
+                    }
+                    // else for type radio uncheck will never raise so ignore.
+                }
+            }
+
+            $scope.changeTab = function(tab){
+                $scope.activeTab = tab;
+                if(tab=='allRecords' || tab=='myRecords'){
+                    showToolTip();
+                    $scope.searchFreeText($scope.search.keyword)
+                }
+            }
+
+            $scope.changeDisplay = function(type){
+                $scope.listView = type=='list';
+            }
+
+            $scope.searchFreeText = function(searchKeyword){
+                // if(!searchKeyword)return;
+
+                $scope.searchResult.currentPage = 1;
+                var queryText = searchKeyword;
+                if(queryText.indexOf('-')>0) queryText = '"' + searchKeyword + '"' // Add quotes if text contains - especially if search is by uid
+                getDocs({freeTextQuery:queryText});
+            }
+
+            function loadSelectedDocumentDetails(){
+                                
+                if(!$scope.model || ($scope.type == "checkbox" && !$scope.model.length))
+                    return;
+
+                var identifiers = [];
+                if($scope.type == "checkbox")
+                    identifiers = _.map($scope.model, function(item){return removeRevisonNumber(item.identifier)});
+                else
+                    identifiers = [removeRevisonNumber($scope.model.identifier)];
+                
+                var queryParameters = {
+                    'query'    : 'identifier_s:(' + identifiers.join(' ') +')',
+                    'rowsPerPage': $scope.searchResult.rowsPerPage                    
+                };
+                searchService.list(queryParameters, null).then(function(result){                    
+                    $scope.tempSelectedDocuments = _.map(result.data.response.docs, function(doc){
+                        doc.__checked=true;
+                        return doc;
+                    });
+                });
+            }
 			//==================================
 		    //
 		    //==================================
@@ -341,37 +429,47 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
             //
             //==================================
 			$scope.openAddDialog = function(){
+                $scope.openingDialog=true
+                $scope.activeTab = 'allRecords';
                 $scope.allowNew.editingOn = false;
+                $scope.search.keyword = '';
+                $scope.searchResult = {
+                    rowsPerPage:25,
+                    currentPage:1
+                }
+                $scope.tempSelectedDocuments = $scope.selectedDocuments||[]
                 var dialog = ngDialog.open({
                     template: 'documentSelectionModal',
                     closeByDocument: false,
-                    scope: $scope
+                    scope: $scope,
+                    controller:['$scope', '$q', '$timeout', function($scope, $q, $timeout){
+                        $scope.isDialogOpen = true;
+                        load(true).then(function(){showToolTip()});
+                        loadSelectedDocumentDetails();                        
+                    }],
+                    onOpenCallback: onDialogOpened
                 });
-                dialogId = dialog.id
-
-                 $q.when(load(true))
-                    .then(function (){                        
-                        //$scope.syncDocuments();
-                        _.forEach($scope.rawDocuments.docs, function (doc) {
-                            doc.__checked = false;
-                            if($scope.isInModel(doc.identifier_s)){
-                                doc.__checked = true;
-                            }
-
-                        });
-                    });
+                dialogId = dialog.id;
+                dialog.closePromise.then(function(data){
+                    $scope.isDialogOpen = false;
+                    console.log(data)
+                })
+                
+                function onDialogOpened(name){
+                    $scope.openingDialog = false;
+                }
 			};
 
 
 
 			$scope.isContact = function(document){
 				return document && _.some($scope.selectedDocuments, function(doc){
-						return doc.header.identifier==removeRevisonNumber(document.identifier) && doc.header.schema == "contact"
+						return (doc.identifier_s||doc.header.identifier)==removeRevisonNumber(document.identifier) && (doc.schema_s||(document.header||{}).schema) == "contact"
 				});
 			}
 			$scope.isAuthority = function(document){
 				return document && _.some($scope.selectedDocuments, function(doc){
-						return doc.header.identifier==removeRevisonNumber(document.identifier) && doc.header.schema == "authority"
+						return (doc.identifier_s||doc.header.identifier)==removeRevisonNumber(document.identifier) && (doc.schema_s||(document.header||{}).schema) == "authority"
 				});
 			}
 
@@ -381,11 +479,12 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
 
 			$scope.isMeasure = function(document){
 				return document && _.some($scope.selectedDocuments, function(doc){
-						return doc.header.identifier==removeRevisonNumber(document.identifier) && doc.header.schema == "measure"
+						return (doc.identifier_s||doc.header.identifier)==removeRevisonNumber(document.identifier) && (doc.schema_s||(document.header||{}).schema) == "measure"
 				});
 			}
 
             $scope.closeDialog = function () {
+                $scope.isDialogOpen = false;
                 $scope.syncDocuments();
                 ngDialog.close(dialogId);
                 $('body').removeClass('modal-open')
@@ -399,13 +498,32 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                 }
                 if(!$scope.rawDocuments.docs)
                     $scope.rawDocuments.docs = [];
-                
-                $scope.rawDocuments.docs.push({                   
+                if(!$scope.tempSelectedDocuments)
+                    $scope.tempSelectedDocuments = [];
+
+                var newDoc = {                   
                     _revision_i     : 1,
                     identifier_s    : (data.identifier||data.data.identifier),
                     __checked       : true
-                })
+                }
+                $scope.rawDocuments.docs.push(newDoc);
+                $scope.tempSelectedDocuments.push(newDoc);
                 $scope.saveDocuments();
+            }
+
+            function updateSelectedDocumentStatus(docs){
+                _.forEach(docs, function (doc) {
+                    doc.__checked = false;
+                    if(_.find($scope.tempSelectedDocuments, {identifier_s:doc.identifier_s})){
+                        doc.__checked = true;
+                    }
+                });
+            }
+
+            function showToolTip(){
+                $timeout(function(){              
+                    $('#' + dialogId + ' [data-toggle="tooltip"]').tooltip()
+                }, 300); 
             }
 
 			function removeRevisonNumber(identifier){

@@ -7,6 +7,7 @@
                 #rec .title {color:#111;font-size:12px; font-weight:bold;}
                 #rec .meta {max-width:20%;}
                 .col-title {color:#333; text-transform: uppercase; font-size: 12px; font-weight: bold;}
+                ul.pagination{margin: 0px;}                
         </style>
 
 
@@ -14,7 +15,10 @@
     <div ng-transclude="selectRecords">   
         <div class="row">
             <div class="col-xs-12">             
-                <button style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled"><i class="fa fa-plus"></i> {{caption || 'Add record'}}{{type!=='radio' ? "(s)" : ""}}</button>
+                <button style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled">
+                    <i class="fa fa-plus" ng-if="!openingDialog"></i>
+                    <i class="fa fa-spin fa-spinner" ng-if="openingDialog"></i> {{caption || 'Add record'}}{{type!=='radio' ? "(s)" : ""}}
+                </button>
 
                 <span ng-show="model.length==0 || !model"> <i class="color-blue"> No records have been linked. </i> </span>
 
@@ -68,9 +72,30 @@
         <div class="rounded bg-dropshadow" id="{{question}}">
             <div class="modal-header bg-grey ">
                 <div ng-if="!allowNew.editingOn">
-                    <h3>Please select from the list of <span class="bold color-blue">{{docs.length}}</span>  published record(s) below:</h3>
+                    <h3>Please select from the list of published record(s) below:</h3>
                     <div class="help-info">If the record is not listed, please create a new record.</div>
-                    <input type="textbox" ng-model="search.keyword" placeholder="filter records by keywords or unique identifier" class="form-control">
+                    <div>
+                        <ul class="nav nav-tabs pull-left" style="width:100%">                            
+                            <li class="nav-item active">
+                                <a data-toggle="tab" class="nav-link" href="#allRecords" ng-click="changeTab('allRecords')">All</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">My Records</a>
+                            </li>
+                            <li class="nav-item"style="padding-right: 25px;">
+                                <a data-toggle="tab" class="nav-link" href="#selectedRecords" ng-click="changeTab('selectedRecords');loadSelectedRecordDetails()">Selected <span ng-if="recordCount"></span></a>
+                            </li>
+                            <li  class="pull-right" style="max-width:40%">                                
+                                 <form ng-submit="searchFreeText(search.keyword)" class="input-group">
+                                    <input type="textbox" ng-model="search.keyword" placeholder="filter records by keywords or unique identifier or any other text"
+                                        class="pull-right form-control">
+                                    <span type="submit" style="cursor:pointer" ng-click="searchFreeText(search.keyword)" class="input-group-addon" id="basic-addon2">
+                                        <i class="fa fa-search"></i> Search</span>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <br/>
                 </div>
                 <div ng-if="allowNew.editingOn">
                     <h3>
@@ -79,71 +104,71 @@
                 </div>
             </div>
             
-            <div class="modal-body" >
+            <div class="modal-body" ng-if="isDialogOpen">
                 
-                <div style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new" ng-hide="allowNew.editingOn">
-                        <div class="row" style="margin:0;padding:0;" ng-show="!isLoading" >
-                            <div ng-if="allowNew.show && !listView" ng-repeat="doc in docs = (rawDocuments.docs | filter:search.keyword)">
-                                    <div class="col-xs-1 text-right">
-                                        <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" style="width: 16px; height: 16px;" />
-                                        <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" 
-                                            ng-change="onRadioClick(doc)" style="width: 16px; height: 16px;" />
-                                    </div>
-                                    <div class="col-xs-11">
-                                        <result-default doc='doc' type="nationalRecords"></result-default>
-                                    </div>
-                                </div>
-                            
-                            
-                            <table ng-if="!allowNew.show || listView" class="table table-condensed table-striped" style="width:100%;" >
+                <div class="tab-content" style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new" ng-if="!allowNew.editingOn">
+                  
+                    <div id="allRecords" class="tab-pane fade in active" style="background-color:#fff">
+                        <div ng-if="activeTab=='allRecords'">
+                            <div ng-include="'documentSelectionRecordDisplay'"></div>
+                        </div>
+                    </div>
+                    <div id="myRecords" class="tab-pane fade in" style="background-color:#fff">
+                        <div ng-if="activeTab=='myRecords'">
+                            <div ng-include="'documentSelectionRecordDisplay'"></div>
+                        </div>                        
+                    </div>
+                    <div id="selectedRecords" class="tab-pane fade in" style="background-color:#fff">  
+                        <div ng-if="activeTab=='selectedRecords'">        
+                                  
+                            <table ng-if="tempSelectedDocuments.length" class="table table-condensed table-striped" style="width:100%;" >
                                 <thead>
                                     <tr>
                                         <th></th>
                                         <th></th>
-                                        <th style="white-space:nowrap;"><a href="#" class="col-title" ng-click="sortType = 'schema_s'; sortReverse = !sortReverse">type</a>  
+                                        <th style="white-space:nowrap;"><a href="#" class="col-title" ng-click="sortType = 'schema_s'; sortReverse = !sortReverse">Type</a>  
                                             <span ng-show="sortType == 'schema_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_title'; sortReverse = !sortReverse">name</a> 
+                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_title'; sortReverse = !sortReverse">Title</a> 
                                             <span ng-show="sortType == 'rec_title'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_countryName'; sortReverse = !sortReverse">owner</a>
+                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_countryName'; sortReverse = !sortReverse">Owner</a>
                                             <span ng-show="sortType == 'rec_countryName'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'uniqueIdentifier_s'; sortReverse = !sortReverse">unique identifier</a>
+                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'uniqueIdentifier_s'; sortReverse = !sortReverse">Unique Identifier</a>
                                             <span ng-show="sortType == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">summary</a>
+                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">Smmary</a>
                                             <span ng-show="sortType == 'rec_summary'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
-
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
+                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">Meta Information</a>
+                                            <span ng-show="sortType == 'rec_summary'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
                                     </tr>
                                 </thead>
-                                        <tbody>
-                                          <tr ng-repeat="doc in docs = (rawDocuments.docs  | filter:search.keyword | orderBy:sortType:sortReverse)" id="rec">
-                                            <td style="width:0;"><span class="bold">{{$index+1}}.</span></td>
-                                            <td  style="width:0;">
-                                                <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" />
-                                                <input ng-if="type==='radio'" type="radio" name="{{question}}_selected" ng-model="doc.__checked" ng-value="true" ng-change="onRadioClick(doc)" />
-                                            </td>
-                                            <td class="type"> {{doc.schema_s | schemaShortName}}</td>
-                                            <td style="min-width:30%" class="title"> <a href="{{doc.url_ss}}" target="_new">{{doc.rec_title}}</a></td>
-                                            <td > {{doc.rec_countryName}}</td>
-                                            <td class="id color-blue"> <a href="{{doc.url_ss}}" target="_blank">{{doc.uniqueIdentifier_s}}</a></td>
-                                            <td class="summary"> {{doc.rec_summary | limitTo:20 }}</td>
-                                            <td class="meta"> <span ng-repeat="meta in doc.rec_meta1">{{meta}}{{$last ? '':', '}}</span></td>
-                                            <td class="meta"> <span ng-repeat="meta1 in doc.rec_meta2">{{meta1}}{{$last ? '':', '}}</span></td>
-                                            <td class="meta"> <span ng-repeat="meta2 in doc.rec_meta3">{{meta2}}{{$last ? '':', '}}</span></td>
-                                        </tr>
-                                        </tbody>
-                                      </table>
-                                      
-
-                        </div> 
-
-                    <div ng-if="isLoading"> <i class="fa fa-spinner fa-spin"></i> Loading...</div>
-                    <div ng-if="rawDocuments.numFound===0"> no records found.</div>
+                                <tbody>
+                                    <tr ng-repeat="doc in tempSelectedDocuments" id="rec">
+                                        <td style="width:0;"><span class="bold">{{$index+1}}.</span></td>
+                                        <td  style="width:0;">
+                                            <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)" style="width: 16px; height: 16px;" />
+                                            <input ng-if="type==='radio'" type="radio" name="{{question}}_selected"   ng-change="onSelectAction(doc)" ng-model="doc.__checked" ng-value="true" 
+                                                style="width: 16px; height: 16px;" />
+                                        </td>
+                                        <td class="type"> {{doc.schema_s | schemaShortName}}</td>
+                                        <td style="min-width:30%" class="title"> <a href="{{doc.url_ss}}" target="_new">{{doc.rec_title}}</a></td>
+                                        <td > {{doc.rec_countryName}}</td>
+                                        <td class="id color-blue"> <a href="{{doc.url_ss}}" target="_blank">{{doc.uniqueIdentifier_s}}</a></td>
+                                        <td class="summary"> {{doc.rec_summary | limitTo:20 }}</td>
+                                        <td class="meta"  data-title="doc.rec_summary"> 
+                                            <span ng-repeat="meta in doc.rec_meta1">{{meta}}{{$last ? '':', '}}</span>
+                                            <span ng-repeat="meta1 in doc.rec_meta2">, {{meta1}}</span>
+                                            <span ng-repeat="meta2 in doc.rec_meta3">, {{meta2}}</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div ng-if="!$parent.tempSelectedDocuments.length"> You have not selected records.</div>
+                        </div>
+                    </div>
+                
                 </div>
                 <div  ng-show="allowNew.editingOn" class="row" style="max-width:100%">
                     <div id="divNewRecord" class="col-lg-12" style="margin:20px"></div>
@@ -173,10 +198,95 @@
 
                         <a translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-show="allowNew.editingOn"   ng-click="allowNew.editingOn=!allowNew.editingOn">Show Existing</a>
                        
-                        <a translation-url  type="button" class="btn btn-warning bold" data-dismiss="modal" ng-click="closeDialog()">Close</a>
+                        <a translation-url  type="button" class="btn btn-warning bold" data-dismiss="modal" ng-click="closeDialog()">Cancel</a>
                     </div>
                 </div>
             </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" trados-translation="true" id="documentSelectionRecordDisplay">
+        <div class="col-md-12">
+            <div class="pull-right btn-group" ng-if="rawDocuments.docs.length">
+                <button class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
+                <button class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
+            </div>
+            <div pagination  class="text-center" ng-if="rawDocuments.pageCount>1" current-page="searchResult.currentPage" 
+                page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
+                num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"></div> 
+        </div>
+        <div class="row" style="margin:0;padding:0;margin-bottom:10px" ng-show="!isLoading" >
+            <div ng-if="isDialogOpen && !allowNew.editingOn && !listView">
+                <div ng-repeat="doc in rawDocuments.docs">
+                        <div class="col-xs-1 text-right">
+                            <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)" style="width: 16px; height: 16px;" />
+                            <input ng-if="type==='radio'" type="radio" name="{{question}}_selected"   ng-change="onSelectAction(doc)" ng-model="doc.__checked" ng-value="true" 
+                                style="width: 16px; height: 16px;" />
+                        </div>
+                        <div class="col-xs-11">
+                            <result-default doc='doc' type="nationalRecords"></result-default>
+                        </div>
+                    </div>
+                
+                
+            </div> 
+            <table ng-if="isDialogOpen && !allowNew.editingOn && listView" class="table table-condensed table-striped" style="width:100%;" >
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th style="white-space:nowrap;"><a href="#" class="col-title" ng-click="sortType = 'schema_s'; sortReverse = !sortReverse">type</a>  
+                            <span ng-show="sortType == 'schema_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+
+                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_title'; sortReverse = !sortReverse">name</a> 
+                            <span ng-show="sortType == 'rec_title'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+
+                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_countryName'; sortReverse = !sortReverse">owner</a>
+                            <span ng-show="sortType == 'rec_countryName'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+
+                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'uniqueIdentifier_s'; sortReverse = !sortReverse">unique identifier</a>
+                            <span ng-show="sortType == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+
+                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">summary</a>
+                            <span ng-show="sortType == 'rec_summary'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+
+                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">Meta Information</a>
+                            <span ng-show="sortType == 'rec_summary'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="doc in rawDocuments.docs" id="rec">
+                        <td style="width:0;"><span class="bold">{{$index+1}}.</span></td>
+                        <td  style="width:0;">                                                
+                            <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)" />
+                            <input ng-if="type==='radio'" type="radio" name="{{question}}_selected"   ng-change="onSelectAction(doc)" ng-model="doc.__checked" ng-value="true" />
+                        </td>
+                        <td class="type"> {{doc.schema_s | schemaShortName}}</td>
+                        <td style="min-width:30%" class="title"> <a href="{{doc.url_ss}}" target="_new">{{doc.rec_title}}</a></td>
+                        <td > {{doc.rec_countryName}}</td>
+                        <td class="id color-blue"> <a href="{{doc.url_ss}}" target="_blank">{{doc.uniqueIdentifier_s}}</a></td>
+                        <td class="summary" data-title="doc.rec_summary"> {{doc.rec_summary | limitTo:20 }}</td>
+                        <td class="meta"> 
+                            <span ng-repeat="meta in doc.rec_meta1">{{meta}}{{$last ? '':', '}}</span>
+                            <span ng-repeat="meta1 in doc.rec_meta2">, {{meta1}}</span>
+                            <span ng-repeat="meta2 in doc.rec_meta3">, {{meta2}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+        <div ng-if="isLoading" class="text-center"> <i class="fa fa-spinner fa-spin"></i> Loading...</div>
+        <div ng-if="!isLoading && rawDocuments.numFound===0" class="text-center"> no records found.</div>
+
+        <div class="col-md-12">
+            <div class="pull-right btn-group" ng-if="rawDocuments.docs.length">
+                <button class="btn btn-default" data-toggle="tooltip" data-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
+                <button class="btn btn-default" data-toggle="tooltip" data-title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
+            </div>
+            <div pagination  class="text-center" ng-if="rawDocuments.pageCount>1" current-page="searchResult.currentPage" 
+                page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
+                num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"></div> 
         </div>
     </script>
 </div>
