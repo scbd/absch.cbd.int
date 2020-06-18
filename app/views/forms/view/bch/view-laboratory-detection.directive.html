@@ -10,12 +10,17 @@
 		<document-date></document-date>
 		<legend>General information</legend>
 		<div ng-if="document.organization">
-			<legend>Related Organizations</legend>
+			<legend>Laboratory name and coordinates</legend>
 			<div class="km-value">
 				<div view-organization-reference ng-model="document.organization" locale="locale"></div>
 			</div>
 		</div>
-
+		<div ng-if="document.relatedOrganization">
+			<legend>Related Organization</legend>
+			<div class="km-value">
+				<div view-organization-reference ng-model="document.relatedOrganization" locale="locale"></div>
+			</div>
+		</div>
 		<div ng-if="document.services">
 			<label>Services and activities performed</label>
 			<div  class="km-value">
@@ -40,11 +45,7 @@
 		</div>
 		<div ng-if="document.detectionMethods">
 			<label>Type of detection/ identification method(s) available for use in the laboratory</label>
-			<div  class="km-value">
-				<ul class="list">
-					<li ng-repeat="term in document.detectionMethods" ng-bind="term|term"></li>
-				</ul>
-			</div>
+			<view-terms-hierarchy class="km-value" ng-model="document.detectionMethods" locale="locale" term-domain="detectionMethods"></view-terms-hierarchy>			
 		</div>			
 
 		<div ng-if="document.lmoTypes">
@@ -59,14 +60,27 @@
 		<div ng-if="document.detectableLmos">
 			<label>LMO(s) detectable by the laboratory</label>
 			<div class="km-value">
-				<view-lmo-reference ng-model="item.identifier" locale="locale" target="target" ng-repeat="item in document.detectableLmos"></view-lmo-reference>
+				<table class="table table-stripped">
+					<tr ng-repeat="item in document.detectableLmos">
+						<td>
+							<view-lmo-reference ng-model="item.identifier" locale="locale" target="target" ></view-lmo-reference>
+						</td>
+					</tr>
+				</table>
+				
 			</div>
 		</div>
 
 		<div ng-if="document.detectableGenes">
 			<label>Genetic element(s) detectable by the laboratory</label>
 			<div class="km-value">
-				<view-default-reference ng-model="item.identifier" locale="locale" target="target" ng-repeat="item in document.detectableGenes"></view-default-reference>
+				<table class="table table-stripped">
+					<tr ng-repeat="item in document.detectableGenes">
+						<td>
+							<view-default-reference ng-model="item.identifier" locale="locale" target="target" ></view-default-reference>
+						</td>
+					</tr>
+				</table>				
 			</div>
 		</div>
 
@@ -79,9 +93,8 @@
 
 			<div ng-if="document.relevantDocuments">
 				<label>Other relevant website address or attached documents</label>
-				<div class="km-value" ng-repeat="item in document.relevantDocuments">
-					<a translation-url target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
-				</div>
+				<div class="km-value" ng-if="document.relevantDocuments" km-link-list 
+					ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>				
 			</div>
 		</div>
 		
