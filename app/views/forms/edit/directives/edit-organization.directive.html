@@ -10,196 +10,231 @@
             data-container="{{container}}" is-dialog="{{isDialog}}">
             <edit-form>
                 <form name="editForm" class="editForm" style="margin-top:10px">
-                    <legend>General information</legend>
-                    <div class="row">
-                        <div class="col-xs-12" >
-                            <div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
-                                <div class="indent">
-                                    <div km-form-languages required name="languages" ng-model="document.header.languages"></div>
+                    <div class="well no-shadow bg-white">
+                        <legend>General information</legend>
+                        <div class="row">
+                            <div class="col-xs-12" >
+                                <div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                    <div class="indent">
+                                        <div km-form-languages required name="languages" ng-model="document.header.languages"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7 col-xs-12">
+                                <div class="km-control-group" name="name" required caption="Name of the organization">
+                                    <div class="help-block">Please provide the name of the organization as you would like it to appear in the title of the record. For example, United Nations Environment Programme.</div>
+                                    <div km-textbox-ml name="name" required ng-model="document.name" placeholder="For eg. United Nations Environment Programme"
+                                        locales="document.header.languages"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5 col-xs-12">
+                                <div class="km-control-group" name="acronym" caption="Acronym">
+                                    <div class="help-block">If applicable, please provide an acronym commonly used to refer to the organization. For example, UNEP.</div>
+                                    <div km-textbox-ml name="acronym" ng-model="document.acronym"
+                                        placeholder="For eg. UNEP" locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="contacts" caption="Contact person(s)">
+                                    <div document-selector ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
+                                                                        question="contacts"
+                                                                        schema="((schema_s:contact AND type_s:person))"
+                                                                        filter="true" skip-government="true"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-8 col-xs-12">
-                            <div class="km-control-group" name="name" required caption="Name of the organization">
-                                <div km-textbox-ml name="name" required ng-model="document.name" placeholder="text entry"
-                                    locales="document.header.languages"></div>
+
+                    <div class="well no-shadow bg-white">
+                        <legend>Organization Coordinates</legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="address" caption="Address">
+                                    <div km-textbox-ml ng-model="document.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800"
+                                        locales="document.header.languages"></div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-4 col-xs-12">
-                            <div class="km-control-group" name="acronym" caption="Acronym">
-                                <div km-textbox-ml name="acronym" ng-model="document.acronym"
-                                    placeholder="text entry" locales="document.header.languages"></div>
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="city" required caption="City">
+                                    <div km-textbox-ml required name="city" ng-model="document.city" locales="document.header.languages"
+                                        placeholder="example: Montreal"></div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="km-control-group" name="contacts" caption="Contact person(s)">
-                                 <div document-selector ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
-                                                                    question="contacts"
-                                                                    schema="((schema_s:contact AND type_s:person))"
-                                                                    filter="true" skip-government="true"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="km-control-group" name="contact_organizationType" caption="Type of organization">
-                                <div km-select name="contact_organizationType" ng-model="document.organizationType"
-                                    items="options.organizationTypes()"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-4" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-                            <div class="km-control-group" name="contact_organizationTypeName" caption="Other organization type">
-                                <div km-textbox-ml name="contact_organizationTypeName" ng-model="document.organizationType.customValue"
-                                    placeholder="example: SCBD" locales="document.header.languages"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <legend>Organization Coordinates</legend>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="km-control-group" name="address" caption="Address">
-                                <div km-textbox-ml ng-model="document.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800"
-                                    locales="document.header.languages"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 col-xs-12">
-                            <div class="km-control-group" name="city" required caption="City">
-                                <div km-textbox-ml required name="city" ng-model="document.city" locales="document.header.languages"
-                                    placeholder="example: Montreal"></div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="state" caption="State or Province">
+                                    <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
+                                        placeholder="example: Quebec"></div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-xs-12">
-                            <div class="km-control-group" name="state" caption="State or Province">
-                                <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
-                                    placeholder="example: Quebec"></div>
+                        <div class="row">
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="postalCode" caption="Postal Code or Zip">
+                                    <div km-textbox-ml name="postalCode" ng-model="document.postalCode" locales="document.header.languages"
+                                        placeholder="example: H2Y 1N9"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="country" required caption="Country">
+                                    <div km-select required name="country" ng-model="document.country" items="options.countries()"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="phones" required caption="Phone numbers">
+                                    <div class="help-info">Please use the following format: +[country code] [city code]
+                                        [telephone number] [extension, if necessary].</div>
+                                    <div km-inputtext-list required name="phones" ng-model="document.phones"
+                                        placeholder="example: +1 514.288.2220"></div>
+                                </div>
+                            </div>
 
-                        <div class="col-md-6 col-xs-12">
-                            <div class="km-control-group" name="postalCode" caption="Postal Code or Zip">
-                                <div km-textbox-ml name="postalCode" ng-model="document.postalCode" locales="document.header.languages"
-                                    placeholder="example: H2Y 1N9"></div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="faxes" caption="Fax numbers">
+                                    <div class="help-info">Please use the following format: +[country code] [city code]
+                                        [telephone number] [extension, if necessary].</div>
+                                    <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 col-xs-12">
-                            <div class="km-control-group" name="country" required caption="Country">
-                                <div km-select required name="country" ng-model="document.country" items="options.countries()"></div>
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="emails" required caption="Emails">
+                                    <div km-inputtext-list required name="emails" ng-model="document.emails"
+                                        placeholder="example: secretariat@cbd.int"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="websites" caption="Websites">
+                                    <div km-link name="websites" ng-model="document.websites" allow-link="true"
+                                        allow-file="false"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-6 col-xs-12">
-                            <div class="km-control-group" name="phones" required caption="Phone numbers">
-                                <div class="help-info">Please use the following format: +[country code] [city code]
-                                    [telephone number] [extension, if necessary].</div>
-                                <div km-inputtext-list required name="phones" ng-model="document.phones"
-                                    placeholder="example: +1 514.288.2220"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-xs-12">
-                            <div class="km-control-group" name="faxes" caption="Fax Numbers">
-                                <div class="help-info">Please use the following format: +[country code] [city code]
-                                    [telephone number] [extension, if necessary].</div>
-                                <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 col-xs-12">
-                            <div class="km-control-group" name="emails" required caption="Emails">
-                                <div km-inputtext-list required name="emails" ng-model="document.emails"
-                                    placeholder="example: secretariat@cbd.int"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-xs-12">
-                            <div class="km-control-group" name="websites" caption="Web Sites">
-                                <div km-link name="websites" ng-model="document.websites" allow-link="true"
-                                    allow-file="false"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div ng-if="isBch">
+                    <div class="well no-shadow bg-white">
                         <legend>Detailed information</legend>
-
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="km-control-group" name="linkedOrganizations" caption="Linked organizations">
-                                    <div document-selector ng-model="document.linkedOrganizations" allow-new="true" allow-new-schema="organization"
-                                        question="linkedOrganizations" schema="organization" filter="true" skip-government="true" hide-self="true"></div>
+                            <div class="col-md-8">
+                                <div class="km-control-group" name="contact_organizationType" required caption="Type of organization">
+                                    <div km-select name="contact_organizationType" required ng-model="document.organizationType"
+                                        items="options.organizationTypes()"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
+                                <div class="km-control-group" name="contact_organizationTypeName" required caption="Other organization type">
+                                    <div km-textbox-ml name="contact_organizationTypeName" required ng-model="document.organizationType.customValue"
+                                        placeholder="example: SCBD" locales="document.header.languages"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="km-control-group" name="profile" caption="Organization’s profile">
-                                    <div km-textbox-ml ng-model="document.profile" rows="2" placeholder="Organization’s profile"
-                                    locales="document.header.languages"></div>
-                                    <br/>
-                                    <div km-link name="profileLink" ng-model="document.profileLink" identifier="document.header.identifier"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="km-control-group"  name="operationalRegions" caption="Geographical or political/economic group(s)">
-                                    <div km-select multiple required name="operationalRegions" 
-                                    ng-model="document.operationalRegions" placeholder="Please select" 
-                                    items="options.geographicRegions()"></div>
-                                </div>
-                            </div>
-                        </div>
+                        <div ng-if="isBch">
 
-                        <!-- <div class="row">
-                            <div class="col-xs-12">
-                                <div class="km-control-group" required name="cpbThematicAreas" caption="Thematic areas(s)">
-                                    <div km-term-check name="cpbThematicAreas" required ng-model="document.cpbThematicAreas" terms="options.cpbThematicAreas()"
-                                    binding-type="term[]"></div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="km-control-group" name="areasOfWork" caption="Areas of work">                                
+                                        <div class="help-block">Please provide keywords only.</div>
+                                        <div ng-repeat="areaOfWork in areasOfWork" style="padding-bottom:5px;" class="input-group">
+                                            <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input" ng-model="areaOfWork.value" locales="document.header.languages"></div>
+                                            <span ng-class="{'disable':areasOfWork.length==1}" class="input-group-addon" style="cursor:pointer" 
+                                            ng-click="removeItem(areasOfWork, $index)">
+                                                <i class="fa fa-trash-o icon"></i>
+                                            </span>
+                                        </div>
+                                        <button class="btn btn-primary" ng-click="addItem(areasOfWork)">Add item</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div> -->
+                            <!-- <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" required name="cpbThematicAreas" caption="Thematic areas(s)">
+                                        <div km-term-check name="cpbThematicAreas" required ng-model="document.cpbThematicAreas" terms="options.cpbThematicAreas()"
+                                        binding-type="term[]"></div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="km-control-group"  name="operationalRegions" caption="Regional area(s) of operations or political/economic group(s)">
+                                        <div km-select multiple required name="operationalRegions" 
+                                        ng-model="document.operationalRegions" placeholder="Please select" 
+                                        items="options.geographicRegions()"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="km-control-group" name="profile" required caption="Organization’s profile">
+                                        <div class="help-block">Please provide or attach a short profile of the organization and its relevance to biosafety.</div>
+                                        <div km-rich-textbox ng-model="document.profile" rows="2" placeholder="Organization’s profile"
+                                        locales="document.header.languages"></div>
+                                        <br/>
+                                        <div km-link name="profileLink" ng-model="document.profileLink" identifier="document.header.identifier"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="km-control-group" name="linkedOrganizations" caption="Linked organizations">
+                                        <div class="help-block">Please use this field to link to any other related organizations that may be in the database (e.g. GEF and UNEP-GEF).</div>
+                                        <div document-selector ng-model="document.linkedOrganizations" allow-new="true" allow-new-schema="organization"
+                                            question="linkedOrganizations" schema="organization" filter="true" skip-government="true" hide-self="true"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    
+                    <div class="well no-shadow bg-white">
+                        <legend>Timeframe for confirmation or updating of information</legend>
+                        <div class="help-info">
+                            Please note that this category of information requires confirmation or updating after one year from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Non-confirmed”. 
+                        </div>
                     </div>
 
-                        <div class="well no-shadow bg-white">
-                            <legend>Additional information</legend>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="km-control-group" name="address" caption="Any other relevant information">
-                                        <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in
-                                            the record.</div>
-                                        <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-                                        <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-                                    </div>
+                    <div class="well no-shadow bg-white">
+                        <legend>Additional information</legend>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="km-control-group" name="address" caption="Any other relevant information">
+                                    <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in
+                                        the record.</div>
+                                    <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+                                    <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="well no-shadow bg-white">
                         <legend>Notes</legend>								
                         <div class="row">
                             <div class="col-md-12">
@@ -211,6 +246,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </form>
             </edit-form>
             <review-form>

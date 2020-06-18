@@ -1,7 +1,7 @@
-﻿define(['app',"text!./edit-organization.directive.html", 'views/directives/workflow-arrow-buttons', 
+﻿define(['app',"text!./edit-organization.directive.html", 'lodash', 'views/directives/workflow-arrow-buttons', 
 "views/forms/view/view-organization.directive", 'services/role-service',
 'components/scbd-angularjs-services/services/locale', 'views/forms/edit/editFormUtility'],
-function (app, template) {
+function (app, template, _) {
 
 app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'editFormUtility', 'locale', 'thesaurusService', 'realm',
                 function($controller, $filter, $q, guid, editFormUtility, locale, thesaurusService, realm) {
@@ -13,13 +13,13 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
 		transclude : false,
 		scope      : {
 			form        : "=form",
-            onPostPublishFn   : "&onPostPublish",
+            onPostSubmitFn   : "&onPostSubmit"
 		},
 		link : function($scope, $element, $attr){
-
-            $scope.container        = $attr.container;
-            $scope.isDialog         = $attr.isDialog;  
-            $scope.type 			= $attr.documentType;
+            $scope.areasOfWork  = [{}];
+            $scope.container    = $attr.container;
+            $scope.isDialog     = $attr.isDialog;  
+            $scope.type 		= $attr.documentType;
             $scope.isBch        = realm.is('BCH');
             $scope.isAbs        = realm.is('ABS');
             $controller('editController', { $scope: $scope });
@@ -27,7 +27,7 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
             _.extend($scope.options, {            
 				organizationTypes: function() { return thesaurusService.getDomainTerms('organizationTypes', {other:true}) },
                 cpbThematicAreas   : function() { return thesaurusService.getDomainTerms('cbdSubjects') },
-                geographicRegions  : function() { return thesaurusService.getDomainTerms('geographicRegions') }
+                geographicRegions  : function() { return thesaurusService.getDomainTerms('regions', {other:true}) }
             });           
             
             //==================================
@@ -45,6 +45,11 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
                 if (/^\s*$/g.test(document.notes))
                     document.notes = undefined;
 
+                if(!_.isEmpty($scope.areasOfWork))
+                    document.areasOfWork = _($scope.areasOfWork).pluck('value').compact().value();
+                if(_.isEmpty(document.areasOfWork))
+                    document.areasOfWork = undefined;
+
                 return $scope.sanitizeDocument(document);
             };
 
@@ -56,10 +61,19 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
                 }
             });
 
-            $scope.onPostPublishOrRequest = function(documentInfo){
-                $scope.onPostPublishFn({ data: documentInfo });
-            };
+            $scope.addItem = function(type){
+                type.push({})
+            }
+            $scope.removeItem = function(type, $index){
+                if(type.length>1)
+                    type.splice($index, 1)
+            }
             
+            $q.when($scope.setDocument({}, true))
+            .then(function(doc){
+                if(doc.areasOfWork)
+                    $scope.areasOfWork = _.map(doc.areasOfWork, function(t){return { value: t}});                
+            });
             $scope.setDocument({}, true)
 
 		}

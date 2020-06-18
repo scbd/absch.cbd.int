@@ -13,7 +13,9 @@ function (app, _, template) {
 				onPostSubmitFn   : "&onPostSubmit"
 			},
 			link: function($scope, $element, $attr){
+				$scope.self = $scope;
 
+				$scope.self.detectionMethods = [];
 				$scope.scientificNameSynonyms = [{}];
 				$scope.commonNames = [{}];
 				$scope.container        = $attr.container;
@@ -28,8 +30,27 @@ function (app, _, template) {
 
 				_.extend($scope.options, {	
 					services 			: function(){ return thesaurusService.getDomainTerms('services', {other:true, otherType:'lstring'}) },
-					detectionMethods 	: function(){ return thesaurusService.getDomainTerms('detectionMethods', {other:true, otherType:'lstring'}) },
-					lmoTypes 			: function(){ return thesaurusService.getDomainTerms('typeOfOrganisms', {other:true, otherType:'lstring'}) }					
+					lmoTypes 			: function(){ return thesaurusService.getDomainTerms('typeOfOrganisms', {other:true, otherType:'lstring', narrowerOf:'8DAB2400-CF00-44B2-ADCF-49AABF66B9B0'}) },
+					detectionMethods 	: function(){ 
+						return thesaurusService.getDomainTerms('detectionMethods', {other:true, otherType:'lstring'})
+						.then(function(detectionMethods){
+							return thesaurusService.getTerms('other')
+							.then(function(otherTerm){
+								_.each(detectionMethods, function(method){
+
+									if(method.narrowerTerms.length){
+										var otherTermCopy = angular.copy(otherTerm);
+										otherTermCopy.identifier = method.identifier + '#' + otherTermCopy.identifier
+										otherTermCopy.type = 'lstring';
+										otherTermCopy.multiple = true;
+										method.narrowerTerms.push(otherTermCopy.identifier)
+										detectionMethods.push(otherTermCopy);
+									}
+								})
+								return detectionMethods;
+							})
+						})
+					}				
 				});
 				
 				//==================================
@@ -53,6 +74,17 @@ function (app, _, template) {
 					if(_.isEmpty(document.synonymNames))
 						document.synonymNames = undefined;		
 					
+					if($scope.detectionMethods){
+						document.detectionMethods = [];
+						_.each($scope.detectionMethods, function(method){
+							var newMethod = _.extend({}, method);
+							if(newMethod.customValue && newMethod.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
+								newMethod.identifier = newMethod.identifier.replace(/\#.*/, '')
+							}
+							
+							document.detectionMethods.push(newMethod);
+						})
+					}
 						
 					return $scope.sanitizeDocument(document);
 				};
@@ -63,6 +95,16 @@ function (app, _, template) {
 					if(doc.synonymNames)
 						$scope.synonymNames = _.map(doc.synonymNames, function(t){return { value: t}});
 
+					if(doc.detectionMethods){
+						$scope.detectionMethods=[];
+						_.each(doc.detectionMethods, function(method){
+							if(method.customValue && method.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
+								method.identifier += '#5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'
+							}
+
+							$scope.detectionMethods.push(method);
+						})
+					}
 				});
 
 				$scope.isDonorMandatory = function(){
