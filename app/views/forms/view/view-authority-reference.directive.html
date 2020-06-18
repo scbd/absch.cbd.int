@@ -1,6 +1,6 @@
 ﻿<div>
 
-	<b>{{document.name | lstring:locale}} <i ng-show="document.acronym">({{document.acronym | lstring:locale}})</i></b>
+	<b>{{document.name | lstring:locale}} <span ng-show="document.acronym" ng-bind="'(' + (document.acronym | lstring:locale) + ')'"></span></b>
 	 | 
 	<a translation-url  ng-href="/database/{{document.header.schema | urlSchemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_new">
 		{{document | uniqueID}} <i class="fa fa-external-link-square" aria-hidden="true"></i> 

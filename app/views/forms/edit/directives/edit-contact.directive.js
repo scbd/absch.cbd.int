@@ -28,7 +28,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, thesau
 
             _.extend($scope.options, {            
                 organizationTypes : function() {
-                    return thesaurusService.getDomainTerms('Organization Types', {other:true, otherType:'lstring'})
+                    return thesaurusService.getDomainTerms('organizationTypes', {other:true, otherType:'lstring'})
                 }
             });           
             
