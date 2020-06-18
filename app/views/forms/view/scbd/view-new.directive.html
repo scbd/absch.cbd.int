@@ -41,7 +41,7 @@
 		<div ng-show="document.url_ss">
 			<label>Document Link</label>
 			<span class="km-value">
-				<a translation-url  ng-href="{{document.url_ss | lstring:locale}}" target="_">{{document.url_ss | lstring:locale}}</a>
+				<a translation-url  ng-href="{{document.url_ss | lstring:locale|encodeURIComponent}}" target="_">{{document.url_ss | lstring:locale}}</a>
 			</span>
 		</div>
 

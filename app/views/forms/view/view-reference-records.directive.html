@@ -1,7 +1,7 @@
 ﻿<div ng-show="referenceRecords">
     <legend>
         Reference records
-        <a target="_blank" ng-href="/search?raw-query={{ encode('referenceRecord_ss:' + model) }}" class="pull-right btn btn-primary btn-xs">Show in search</a>
+        <a target="_blank" ng-href="/search?raw-query={{('referenceRecord_ss:' + model)| encodeURIComponent }}" class="pull-right btn btn-primary btn-xs">Show in search</a>
     </legend>
     <table class="table table-bordered">
         <tr>
@@ -25,7 +25,7 @@
                             <div class="pull-right" ng-if="doc.showIcons" ng-include="'/app/views/forms/view/bch/icons.html'"></div>
                         </td>
                         <td width="20%">
-                            <a target="_blank" ng-href="/database/{{doc.uniqueId|uppercase}}" ng-bind="doc.uniqueId|uppercase" ></a>
+                            <a target="_blank" ng-href="/database/{{doc.uniqueId|uppercase|encodeURIComponent}}" ng-bind="doc.uniqueId|uppercase" ></a>
                         </td>
                     </tr>
                 </table>

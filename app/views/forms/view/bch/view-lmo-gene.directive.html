@@ -10,7 +10,7 @@
                     </div>
                     <div >
                         <!-- dnaDetails[removeRevsion(gene.identifier)].uniqueIdentifier|| -->
-                        <a target="_blank" ng-href="{{dnaDetails[removeRevsion(gene.identifier)].urls[0]}}">
+                        <a target="_blank" ng-href="{{dnaDetails[removeRevsion(gene.identifier)].urls[0]|encodeURIComponent}}">
                             {{dnaDetails[removeRevsion(gene.identifier)].title}}</a>
                     </div>
                     <div >

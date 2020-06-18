@@ -194,7 +194,7 @@
                             <span ng-if="term.measureType=='linked'">Related to</span>
                             <span ng-if="term.measureType=='amended'">Amended by</span>
                             <span class="color-blue">
-                                <a translation-url  target="new" ng-href="/database/record/{{term.measure|uniqueIDWithoutRevision}}/{{term.measure.revision}}" >{{term.title||term.name | lstring:locale}} </a>
+                                <a translation-url  target="new" ng-href="/database/record/{{term.measure|uniqueIDWithoutRevision|encodeURIComponent}}/{{term.measure.revision|encodeURIComponent}}" >{{term.title||term.name | lstring:locale}} </a>
                                 <span class="color-blue bold" ng-if="otherCustomValues[term.identifier]">: {{otherCustomValues[term.identifier]| lstring:locale}}</span>
                             </span>
                         </span>

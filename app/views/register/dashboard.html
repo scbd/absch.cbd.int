@@ -266,19 +266,19 @@
                                             <span class="hidden-xs pull-right" ng-include="'offline-formats'"></span>
                                         </td>
                                         <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
-                                                ng-href="/register/{{schema|urlSchemaShortName}}/status/published"
+                                                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/published"
                                                 class="label label-success"
                                                 ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>
                                         </td>
 
                                         <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
-                                                ng-href="/register/{{schema|urlSchemaShortName}}/status/drafts"
+                                                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/drafts"
                                                 class="label label-default"
                                                 ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}">{{Math.max(0,
                                                 facets(schema,'draft') - facets(schema,'request'))}}</a> </td>
 
                                         <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
-                                                ng-href="/register/{{schema|urlSchemaShortName}}/status/requests"
+                                                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/requests"
                                                 class="label label-danger"
                                                 ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a>
 
@@ -392,19 +392,19 @@
                                             <span class="hidden-xs pull-right" ng-include="'offline-formats'"></span>
                                         </td>
                                         <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
-                                                ng-href="/register/{{schema|urlSchemaShortName}}/status/published"
+                                                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/published"
                                                 class="label label-success"
                                                 ng-class="{'bg-litegrey': facets(schema,'publish')===0}">{{facets(schema,'publish')}}</a>
                                         </td>
 
                                         <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
-                                                ng-href="/register/{{schema|urlSchemaShortName}}/status/drafts"
+                                                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/drafts"
                                                 class="label label-default"
                                                 ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}">{{Math.max(0,
                                             facets(schema,'draft') - facets(schema,'request'))}}</a> </td>
 
                                         <td style="width:7%;" class="text-center  hidden-xs"><a translation-url
-                                                ng-href="/register/{{schema|urlSchemaShortName}}/status/requests"
+                                                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/requests"
                                                 class="label label-danger"
                                                 ng-class="{'bg-litegrey': facets(schema,'request')===0}">{{facets(schema,'request')}}</a>
                                         </td>
@@ -440,8 +440,8 @@
 
             <script type="text/ng-template" trados-translation="true" id="offline-formats">                
                 <span ng-repeat="(code, lang) in ::languages" data-title="{{::lang}}" data-toggle="tooltip" data-container="body" 
-                    ng-show="::offlineFormats[schema][code]">
-                    <a target="_blank" ng-href="{{::offlineFormats[schema][code]}}" ng-bind="::code"></a>
+                    ng-if="::offlineFormats[schema][code]">
+                    <a target="_blank" ng-href="{{::offlineFormats[schema][code]|encodeURI}}" ng-bind="::code"></a>
                     <span ng-if="::!$last"> | </span>
                 </span>
             </script>

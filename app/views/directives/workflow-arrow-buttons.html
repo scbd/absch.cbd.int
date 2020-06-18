@@ -166,7 +166,7 @@
         <div ng-transclude="introForm" class="well bg-white">
             <i ng-if="tab=='intro' && loading" class="fa fa-spinner fa-spin"></i>
             <div>
-                <a class="btn btn-primary pull-right" ng-if="isAdmin" ng-href="https://www.cbd.int/management/articles/{{article._id}}/edit">Edit</a>
+                <a class="btn btn-primary pull-right" ng-if="isAdmin" ng-href="https://www.cbd.int/management/articles/{{article._id|encodeURIComponent}}/edit">Edit</a>
                 <h2>{{article.title|lstring:locale}}</h2>
                 <br>
                 <p ng-bind-html="article.content| lstring:locale | toTrusted"></p>
@@ -257,7 +257,7 @@
                     <span ng-if="!container">Offline format:</span>
                     <span ng-repeat="(code, lang) in ::offlineLanguages" data-title="{{::lang}}" data-toggle="tooltip" data-container="body" 
                         ng-show="::offlineFormats[documentType][code]">
-                        <a target="_blank" ng-href="{{::offlineFormats[documentType][code]}}" ng-bind="::code"></a>
+                        <a target="_blank" ng-href="{{::offlineFormats[documentType][code]|encodeURI}}" ng-bind="::code"></a>
                         <span ng-if="::!$last"> | </span>
                     </span>
                 </div>

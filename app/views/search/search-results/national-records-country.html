@@ -1,7 +1,7 @@
 ﻿<div id="national-records-country" class="row">
     <div class="col-md-12">
         <h4 style="border-bottom:#ddd solid 1px;">
-            <a translation-url ng-href="/countries/{{name|uppercase}}" class="color-black link">{{getFilter(name).name}}
+            <a translation-url ng-href="/countries/{{name|uppercase|encodeURIComponent}}" class="color-black link">{{getFilter(name).name}}
             </a>
             <ng-party-status code="name" style="margin-left:10px;"></ng-party-status>
 

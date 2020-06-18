@@ -7,7 +7,7 @@
         <span ng-transclude="default">		
 
             <span class="selected-reference-uid">
-                <a translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_blank">
+                <a translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
                     <i class="fa fa-external-link-square" aria-hidden="true"></i> <span ng-bind="document | uniqueID"></span>
                 </a>
             </span>
@@ -25,7 +25,7 @@
         </span>
         <span ng-if="document.workingDocumentLock">
             | <span class="label label-danger">The record is pending approval</span> | 
-            <a translation-url  ng-href="/register/{{document.body.header.schema | urlSchemaShortName}}/{{document.identifier}}/view" target="_blank">
+            <a translation-url  ng-href="/register/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document.identifier|encodeURIComponent}}/view" target="_blank">
                 <i class="fa fa-external-link-square" aria-hidden="true"></i> View Request
             </a>
             &nbsp <a ng-href="#" ng-click="refreshRecord(document.identifier)" data-toggle="tooltip" data-title="Click to refresh status of the record."><i class="fa fa-refresh"></i></a>

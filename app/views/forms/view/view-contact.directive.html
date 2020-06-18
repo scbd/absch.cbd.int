@@ -108,7 +108,7 @@
             <div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.emails">
-						<a translation-url  ng-href="mailto:{{item}}">{{item}}</a></li>
+						<a translation-url  ng-href="mailto:{{item|encodeURIComponent}}">{{item}}</a></li>
 				</ul>
 			</div>
         </div>
@@ -116,7 +116,7 @@
         <div ng-show="document.websites">
             <label>Websites</label>
             <div class="km-value" ng-repeat="item in document.websites">
-                <a translation-url  target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                <a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
             </div>
         </div>
 
@@ -131,7 +131,7 @@
 				<div ng-show="document.relevantDocuments">
 					<label>Other relevant website address or attached documents</label>
 					<div class="km-value" ng-repeat="item in document.relevantDocuments">
-						<a translation-url  target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+						<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 					</div>
 				</div>
 			</div>

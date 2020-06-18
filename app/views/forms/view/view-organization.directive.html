@@ -67,7 +67,7 @@
 			<label>Emails</label>
 			<div  class="km-value">
 				<ul class="list">
-					<li ng-repeat="item in document.emails"><a translation-url  ng-href="mailto:{{item}}">
+					<li ng-repeat="item in document.emails"><a translation-url  ng-href="mailto:{{item|encodeURIComponent}}">
 						<span ng-bind="item"></span></a></li>
 				</ul>
 			</div>
@@ -76,7 +76,7 @@
 		<div ng-show="document.websites">
 			<label>Websites</label>
 			<div class="km-value" ng-repeat="item in document.websites">
-				<a translation-url  target="{{target}}" ng-href="{{item.url}}"><span ng-bind="item.name||item.url"></span></a>
+				<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><span ng-bind="item.name||item.url"></span></a>
 			</div>
 		</div>
 

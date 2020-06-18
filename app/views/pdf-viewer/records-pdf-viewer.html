@@ -32,7 +32,7 @@
                     <br> File Name : {{pdf.fileName|uppercase}}
                     <br>
                     <br>
-                    <a ng-href="{{pdf.src}}" download="{{pdf.fileName}}" class="btn btn-success" target="_blank">
+                    <a ng-href="{{pdf.src|encodeURIComponent}}" download="{{pdf.fileName|encodeURIComponent}}" class="btn btn-success" target="_blank">
                         <i class="fa fa-download"></i> Download
                     </a>
                     <br>

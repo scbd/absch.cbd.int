@@ -208,7 +208,7 @@
                                         <div class="col-xs-6">
                                             <div class="col-sm-6 col-md-4 flex" style="vertical-align:middle!important" ng-repeat="(key, schema) in nationalRecords"
                                             ng-hide="filters.excludeNFP && key=='focalPoint'">
-                                                <a translation-url class="statsBox color-white" ng-href="/search/nationalRecords/?schema={{key}}">
+                                                <a translation-url class="statsBox color-white" ng-href="/search/nationalRecords/?schema={{key|encodeURIComponent}}">
                                                     <div style="vertical-align:middle!important;">
                                                         <span class="countryCount badge bg-white">{{schema.countryCount}}</span> &nbsp;
                                                         <span class="countryText">Countries</span>
@@ -292,7 +292,7 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="col-sm-6 col-md-4 flex" style="vertical-align:middle!important;margin-bottom:5px" ng-repeat="(key, schema) in referenceRecords">
-                                                <a translation-url class="statsBox color-white" ng-href="/search/referenceRecords/?schema={{key}}">                                                    
+                                                <a translation-url class="statsBox color-white" ng-href="/search/referenceRecords/?schema={{key|encodeURIComponent}}">                                                    
                                                     <div style="vertical-align:middle!important;">
                                                         <span class="countryCount badge bg-white">{{schema.recordCount}}</span> 
                                                     </div>                                                   

@@ -434,10 +434,30 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
 
   app.filter("encode", function(){
     return function(val) {
+      console.warn('encode filter is OBSOLETE, use encodeURIComponent');
       return encodeURIComponent(val);
     };
   });
 
+  app.filter("encodeURIComponent", ["$window", function($window){    
+    return function(val) {
+      if(val){
+        return $window.encodeURIComponent(val);
+      }
+      return '';
+    };
+
+  }]);
+  app.filter("encodeURI", ["$window", "$filter", function($window, $filter){    
+    return function(val) {
+      if(val){
+          return $window.encodeURI($window.decodeURI(val));
+      }
+      return '';
+    };
+
+  }]);
+  
   function normalizeText(text) {
 
 		if(!text) return null;

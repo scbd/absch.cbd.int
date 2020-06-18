@@ -130,7 +130,7 @@
                             <div class="text">
                                 <ul class="list">
                                     <li ng-repeat="item in document.specimens">
-                                        <a ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                                        <a ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
                                         <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                                     </li>
                                 </ul>
@@ -141,7 +141,7 @@
                             <div class="text">
                                 <ul class="list">
                                     <li ng-repeat="item in document.taxonomies">
-                                        <a ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                                        <a ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
                                         <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                                     </li>
                                 </ul>
@@ -161,7 +161,7 @@
                             <div class="text">
                                 <ul class="list">
                                     <li ng-repeat="item in document.gisFiles">
-                                        <a ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                                        <a ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
                                         <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                                     </li>
                                 </ul>
@@ -246,10 +246,10 @@
                         <label>Attached documents</label>
                         <ul style="list-style-type: none;" class="text">
                             <li ng-repeat="item in document.informationDocuments">
-                                <strong><a ng-href="https://absch.cbd.int/{{item.url}}">{{item.name}}</strong>
+                                <strong><a ng-href="https://absch.cbd.int/{{item.url|encodeURI}}">{{item.name}}</strong>
                             </li>
                             <li ng-repeat="item in document.relevantDocuments">
-                                <strong><a ng-href="https://absch.cbd.int/{{item.url}}">{{item.name}}</strong>
+                                <strong><a ng-href="https://absch.cbd.int/{{item.url|encodeURI}}">{{item.name}}</strong>
                             </li>
                         </ul>
                     </div>
