@@ -6,7 +6,7 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
             return new function() {
 
                 var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
-                var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
+                var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,summary_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
 
                 var searchDefaults = {
                     currentPage : 0,
@@ -36,9 +36,14 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                         fl    : localizeFields(searchQuery.fields),
                         wt    : 'json',
                         start : searchQuery.start || (searchQuery.currentPage * searchQuery.rowsPerPage),
-                        rows  : searchQuery.rowsPerPage,
+                        rows  : searchQuery.rowsPerPage
                     };
 
+                    if(searchQuery.highlight){
+                        queryListParameters.hl      = true;
+                        queryListParameters['hl.snippets'] = 5;
+                        queryListParameters['hl.fl']= searchQuery.highlightFields||'text_EN_txt';
+                    }
                     if(searchQuery.facet){
                         queryListParameters.facet = true
                         queryListParameters['facet.field']  = searchQuery.facetFields
@@ -84,6 +89,12 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                         'group.limit': searchQuery.groupLimit,
                         'group.sort': localizeFields(searchQuery.groupSort)
                     };
+
+                    if(searchQuery.highlight){
+                        queryGroupParameters.hl      = true;
+                        queryGroupParameters['hl.snippets'] = 5;
+                        queryGroupParameters['hl.fl']= searchQuery.highlightFields||'text_EN_txt';
+                    }
 
                     if(searchQuery.facet){
                         queryGroupParameters.facet = true

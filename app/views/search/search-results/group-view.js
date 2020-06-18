@@ -55,6 +55,7 @@
                         additionalFields    += ',scopeRelease_b,scopeFood_b,scopeFeed_b,scopeProcessing_b,scopeConfined_b,scopeOther_b'
                     }
                     //'schema_s_groupTitle:schema_EN_t, government_s_groupTitle:government_EN_t';
+                    //'schema_s', 'government_s', 
 
                     var lQuery = {
                         fieldQuery     : options.tagQueries,
@@ -65,11 +66,15 @@
                         facetFields : options.facetFields,
                         groupField : groupField,
                         groupLimit : 10,
-                        groupSort  : sortFields.join(', '),
-                        sort       : sortFields.join(', '),
-                        additionalFields     : additionalFields
+                        additionalFields     : additionalFields,
+                        highlight           : options.highlight,
+                        highlightFields     : options.highlightFields
                     }
-                    //'schema_s', 'government_s', 
+
+                    if(sortFields && !_.contains(sortFields, 'relevance asc')){
+                        lQuery.sort         = sortFields.join(', ');
+                        lQuery.groupSort    = sortFields.join(', ');
+                    }
 
                     queryCanceler = $q.defer();
         
@@ -103,6 +108,12 @@
 
                                         if(gpDetails.length-1 == i){ //add docs to the last group field
                                             group[groupValue] = _.extend(group[groupValue], record.doclist);
+                                            if(result.data.highlighting){
+                                                _.each(group[groupValue].docs, function(doc){
+                                                    if(!_.isEmpty(result.data.highlighting[doc.id]))
+                                                        doc.highlight = result.data.highlighting[doc.id];
+                                                });
+                                            }
                                         }
                                         if(i>0){
                                             var prevLevel = group[gpDetails[i-1]] //get prev group and add the current as sub-level
@@ -145,6 +156,8 @@
 
                             $scope.searchResult.facets      = searchDirectiveCtrl.sanitizeFacets(result.data.facet_counts)
                             
+                            
+
                             return $scope.searchResult;
     
                         })
@@ -194,11 +207,21 @@
                         sort    : $scope.searchResult.groupSort,
                         rowsPerPage    : number||5000,
                         start          : number ? undefined : (group.start==0 ? 10 : group.start),
-                        currentPage    : group.start==0 ? 1 : Math.ceil((group.start+number)/10)
+                        currentPage    : group.start==0 ? 1 : Math.ceil((group.start+number)/10),
+                        highlight           : $scope.searchResult.groupOptions.highlight,
+                        highlightFields     : $scope.searchResult.groupOptions.highlightFields
+                        
                     }
                     return searchService.list(query)
                     .then(function(result){
                         group.start = query.currentPage*10;
+
+                        if(result.data.highlighting){
+                            _.each(result.data.response.docs, function(doc){
+                                if(!_.isEmpty(result.data.highlighting[doc.id]))
+                                    doc.highlight = result.data.highlighting[doc.id];
+                            });
+                        }
                         
                         group.docs = group.docs.concat(result.data.response.docs)
                     })

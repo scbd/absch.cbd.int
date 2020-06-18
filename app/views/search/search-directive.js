@@ -658,7 +658,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             tagQueries : _(tagQueries).map(function(f, t){if(f) return '{!tag='+t+'}' + f;}).compact().value(),
                             facetFields : ['{!ex=schemaType}schemaType_s', '{!ex=schema,schemaType,schemaSub}schema_s', 
                                            '{!ex=government}government_s', '{!ex=keywords}all_terms_ss', '{!ex=region}government_REL_ss'],
-                            pivotFacetFields : 'schema_s, all_Terms_ss'
+                            pivotFacetFields : 'schema_s, all_Terms_ss',
+                            highlight:true,
+                            highlightFields:'text_EN_txt'
                         };
                     }
 

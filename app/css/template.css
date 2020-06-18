@@ -2135,3 +2135,17 @@ a.disabled{
     font-weight: 500;
     text-transform: none;
 }
+
+#search-new .metadata.bold li:not(:first-child){
+    padding-left: 5px;
+}
+
+.space-left-right{
+    padding-left:5px;
+    padding-right: 5px;;
+}
+em {
+    background-color: yellow;
+    font-weight: bold;
+    color: black;
+}

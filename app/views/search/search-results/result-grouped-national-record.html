@@ -19,12 +19,25 @@
     <div class="recordDefault nationalRecords card card-1 easing" style="margin-bottom:10px;" ng-show="!showDoc" ng-click="showDoc=!showDoc">
 
        
-        <div class="title bold"  style="font-size:108%;" >{{doc.rec_title}}</div>
-        <div class="description hidden-xs descriptionSpan"  style="margin: 5px 0;" ng-if="doc.rec_summary">
-            {{doc.rec_summary|limitTo:250}}
-            <span ng-if="doc.rec_summary.length > 350">...</span>
+        <div class="title bold"  style="font-size:108%;" >{{doc.rec_title}}</div>        
+        <!-- TODO: need to remove description field from index and use summary -->
+        <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.summary_t">{{doc.summary_t|limitTo:500}}
+            <span ng-if="doc.summary_t.length > 500">...</span>
+        </div>
+        <!-- TODO: record summary copied descriptioninto rec_summary which needs to be replaced by summary_t in frontend and backend -->
+        <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="!doc.summary_t && doc.rec_summary">{{doc.rec_summary|limitTo:500}}
+            <span ng-if="doc.rec_summary.length > 500">...</span>
         </div>
 
+        <div ng-if="doc.highlight" class="help-block" >
+            <strong>Matched content </strong>:- 
+            <span ng-repeat="highlight in doc.highlight track by $index" style="display: inline;padding-left:0px;">
+                <span ng-repeat="match in highlight track by $index">
+                    <span ng-bind-html="match"></span>
+                    <span ng-if="!$last" class="space-left-right"> | </span>
+                </span>
+            </span>
+        </div>
         <ul class="metadata bold" style="padding-top:0;margin-top:0;">
             <li class="hidden-xs">
              <span class="color-blue">{{doc.rec_type ? doc.rec_type + " ("+ (doc.schema_s | schemaShortName) +")": (doc.schema_s | schemaName) }}</span>
