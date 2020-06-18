@@ -944,7 +944,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                         }
                     });
                     function confirmLeaving(evt, next, current) {
-                        if($scope.security.canSaveDraft==false)
+                        if(($scope.security||{}).canSaveDraft==false)
                             return;
 
                         var formChanged = !angular.equals($scope.getDocumentFn(), originalDocument);
