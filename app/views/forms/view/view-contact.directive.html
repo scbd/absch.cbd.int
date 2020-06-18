@@ -8,9 +8,7 @@
 	<div class="record-body panel-body">
 		<document-date></document-date>
 		<div ng-show="document.type=='organization'">
-
-
-
+			
             <legend>Organization</legend>
 			<div ng-show="document.government">
 				<label>Country</label>
@@ -97,7 +95,7 @@
         </div>
 
         <div ng-show="document.faxes">
-            <label>Fax Numbers</label>
+            <label>Fax numbers</label>
             	<div class="km-value">
 					<ul class="list">
 						<li ng-repeat="item in document.faxes">{{item}}</li>
@@ -116,7 +114,7 @@
         </div>
 
         <div ng-show="document.websites">
-            <label>Web Sites</label>
+            <label>Websites</label>
             <div class="km-value" ng-repeat="item in document.websites">
                 <a translation-url  target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
             </div>
@@ -143,6 +141,6 @@
 			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
 		</div>
 
-
 	</div>
+	<div document-metadata class="panel-footer" ></div>
 </div>

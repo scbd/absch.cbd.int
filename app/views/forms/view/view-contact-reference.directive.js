@@ -75,9 +75,10 @@ define(['app', "text!views/forms/view/view-contact-reference.directive.html",'un
 										$scope.document.info = data.data;
 										if($scope.document && $scope.document.contactOrganization){
 											storage.documents
-													.get($scope.document.contactOrganization.identifier)
+													.get($scope.document.contactOrganization.identifier, {info:true, body:true})
 													.then(function(data){
-														_.extend($scope.document.contactOrganization, data.data);
+														$scope.document.contactOrganizationInfo = data.data;
+														_.extend($scope.document.contactOrganization, data.data.body);
 													});
 										}
 
