@@ -77,7 +77,7 @@
 
         <!--<span onload="otherElements = otherTerms[term.identifier]" ng-include="'/app/views/forms/edit/edit-measure.directive/abs/inner/other'"></span>-->
         <span ng-if="document" onload="document=document"
-            ng-include="'refernce-contact-address'"></span>
+            ng-include="'reference-contact-address'"></span>
 
         <div ng-if="isPerson && document.contactOrganization">
             <div
@@ -98,11 +98,10 @@
                 {{document.contactOrganization.organizationType|term}}
             </div>
             <span ng-if="document.contactOrganization" onload="document=document.contactOrganization"
-                ng-include="'refernce-contact-address'"></span>
-
+                ng-include="'reference-contact-address'"></span>
         </div>
 
-        <script id="refernce-contact-address" type="text/ng-template" trados-translation="true">
+        <script id="reference-contact-address" type="text/ng-template" trados-translation="true">
             <address ng-if="document.address || document.country || document.city || document.state || document.postalCode" style="margin-bottom:2px!important">
                 <span ng-show="document.addressHTML" ng-bind-html="document.addressHTML | lstring:locale"></span>
                 <div ng-bind-html="document.address | lstring:locale"></div>
