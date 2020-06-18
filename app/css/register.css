@@ -634,7 +634,8 @@ label{
   } 
 
 
-  .editForm .synonym-name-input > .input-group,
-  .editForm .common-name-input > .input-group  {
+  .editForm .synonym-name-input  > .input-group,
+  .editForm .common-name-input 	 > .input-group,
+  .editForm .areas-of-work-input > .input-group {
 	width: 100%;
 }

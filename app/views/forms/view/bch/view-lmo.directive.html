@@ -145,7 +145,7 @@
 		</div>
 		<div ng-show="document.affectedGeneNotes">
 			<label>How the expression of the gene(s) was affected</label>
-			<div ng-bind="document.affectedGeneNotes" class="km-value"></div>
+			<km-value-ml value="document.affectedGeneNotes" html locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.commonUses">
 			<label>Common use(s)</label>
@@ -159,11 +159,11 @@
 			<legend>Detection method(s)</legend>
 			<div ng-show="document.detectionMethodLinks">
 				<label>External link(s)</label>
-				<km-link-list ng-model="document.detectionMethodLinks"></km-link-list>
+				<km-link-list class="km-value" ng-model="document.detectionMethodLinks"></km-link-list>
 			</div>
 			<div ng-show="document.detectionMethod">
 				<label>Additional Information</label>
-				<km-value-ml value="document.detectionMethod" locales="locale"></km-value-ml>
+				<km-value-ml value="document.detectionMethod" html locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.relevantInformation||document.relevantDocuments">

@@ -12,7 +12,8 @@
 
 
 #Record .list{
-	margin:0;padding:0;padding-left:15px;
+	margin:0;padding:0;
+	/* padding-left:15px; BF*/ 
 	list-style-type: none;
 }
 

@@ -7,10 +7,10 @@
                 <i class="fa fa-external-link-square" aria-hidden="true"></i> {{document | uniqueID}}
             </a>
         </div>
-        <div class="selected-reference-title" ng-if="document.body.identity">{{document.body.identity | lstring:locale}} </div>
+        <div class="selected-reference-title" ng-if="document.title">{{document.title | lstring:locale}} </div>
         <span ng-if="document.summary"> | {{document.summary | lstring:locale}} </span> 
-        <div ng-if="document.body.detectionMethodLinks" style="padding-left:15px">
-            <a translation-url ng-click="showDetections=!showDetections" style="cursor:pointer">
+        <div ng-if="document.body.detectionMethodLinks">
+            <a translation-url ng-click="showDetections=!showDetections" style="cursor:pointer;text-decoration: underline;">
                 <span ng-if="!showDetections">Show detection method(s)</span> 
                 <span ng-if="showDetections" >Hide detection method(s)</span>
             </a>

@@ -82,7 +82,8 @@ function (app, schemaNamePlural) {
                 return;
 
 			cacheMap[term.identifier] = $q.when(document).then(function(document) {
-
+				var isDeletedRecord = document.deletedOn!=null;
+				
                 if(document.data)
                     document = document.data;
                 else
@@ -130,6 +131,9 @@ function (app, schemaNamePlural) {
                 if( document.revision)
 					unique = unique + '-' + document.revision;
 
+				if(isDeletedRecord)
+					unique = '[DELETED] ' + unique;
+					
 				cacheMap[term.identifier] = unique;
 
 				return unique;
