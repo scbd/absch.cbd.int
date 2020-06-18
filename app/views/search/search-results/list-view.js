@@ -1,4 +1,4 @@
-﻿define(['app', 'text!views/search/search-results/list-view.html','lodash',
+define(['app', 'text!views/search/search-results/list-view.html','lodash',
 'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status',
 'views/search/search-results/result-default'
 ], function(app, template, _) {
@@ -38,7 +38,9 @@
                         currentPage    : pageNumber - 1,
                         facet          : true,
                         facetFields    : queryOptions.facetFields,
-                        pivotFacetFields : queryOptions.pivotFacetFields
+                        pivotFacetFields    : queryOptions.pivotFacetFields,
+                        highlight           : queryOptions.highlight,
+                        highlightFields     : queryOptions.highlightFields
                     }
                     // if(lQuery=='*:*' || lQuery) TODO: add this fields only when req
                     if(realm.is('BCH')){
@@ -55,14 +57,22 @@
                         $scope.searchResult.docs        = result.data.response.docs;
                         $scope.searchResult.numFound    = result.data.response.numFound;
                         $scope.searchResult.pageCount   = Math.ceil(result.data.response.numFound / $scope.searchResult.rowsPerPage);
+                        
                         $scope.searchResult.query       = queryOptions.tagQueries.query;
                         $scope.searchResult.tagQueries  = queryOptions.tagQueries;
                         $scope.searchResult.facetFields = queryOptions.facetFields;
+                        $scope.searchResult.queryOptions = queryOptions;
+
                         $scope.searchResult.sortBy      = lQuery.sort;
                         $scope.searchResult.currentPage = pageNumber;
-                        
-                        $scope.searchResult.facets   = searchDirectiveCtrl.sanitizeFacets(result.data.facet_counts)
-                        
+                        $scope.searchResult.facets   = searchDirectiveCtrl.sanitizeFacets(result.data.facet_counts);
+
+                        if(result.data.highlighting){
+                            _.each($scope.searchResult.docs, function(doc){
+                                if(!_.isEmpty(result.data.highlighting[doc.id]))
+                                    doc.highlight = result.data.highlighting[doc.id];
+                            });
+                        }
                         return $scope.searchResult;
                     })
                     .catch(function(e){
@@ -70,6 +80,7 @@
                         $scope.searchResult.numFound = 0
                         $scope.searchResult.pageCount= 0
                         $scope.searchResult.facets   = undefined;
+                        $scope.searchResult.highlighting = undefined;
                         throw e;
                     })
                     .finally(function(){
@@ -78,7 +89,7 @@
                 }
 
                 $scope.onPageChange = function(pageNumber){
-                    updateResult($scope.searchResult, $scope.searchResult.sort, pageNumber);
+                    updateResult($scope.searchResult.queryOptions, $scope.searchResult.sort, pageNumber);
                     $location.search('currentPage', pageNumber)
                     $location.search('rowsPerPage', $scope.searchResult.rowsPerPage)
                 }

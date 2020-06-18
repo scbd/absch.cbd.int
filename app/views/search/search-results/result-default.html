@@ -19,8 +19,13 @@
                 <div class="title bold" style="font-size:108%;" >{{doc.rec_title}}
                     <span ng-if="doc.publicationYear_i">({{doc.publicationYear_i}})</span>
                 </div>
-                <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.rec_summary">{{doc.rec_summary|limitTo:250}}
-                    <span ng-if="doc.rec_summary.length > 250">...</span>
+                <!-- TODO: need to remove description field from index and use summary -->
+                <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.summary_t">{{doc.summary_t|limitTo:500}}
+                    <span ng-if="doc.summary_t.length > 500">...</span>
+                </div>
+                <!-- TODO: record summary copied descriptioninto rec_summary which needs to be replaced by summary_t in frontend and backend -->
+                <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="!doc.summary_t && doc.rec_summary">{{doc.rec_summary|limitTo:500}}
+                    <span ng-if="doc.rec_summary.length > 500">...</span>
                 </div>
 
                 <div ng-if="doc.schema_s=='capacityBuildingInitiative'">
@@ -52,7 +57,15 @@
                             </span>
                     </span> 
                 </div> 
-
+                <div ng-if="doc.highlight">
+                    <strong>Matched content </strong>:- 
+                    <span ng-repeat="highlight in doc.highlight track by $index" class="help-block" style="display: inline;padding-left:0px;">
+                        <span ng-repeat="match in highlight track by $index">
+                            <span ng-bind-html="match"></span>
+                            <span ng-if="!$last" class="space-left-right"> | </span>
+                        </span>
+                    </span>
+                </div>
                     
                 <ul class="metadata bold">
                     <li>
