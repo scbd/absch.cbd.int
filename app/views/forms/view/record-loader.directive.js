@@ -418,8 +418,8 @@
 									divSelector 	= dirInfo.divSelector || divSelector;
 									directiveHtml 	= dirInfo.directiveHtml || directiveHtml;
 								}
-								$element.find(divSelector).empty()
-										.append($compile(directiveHtml)($scope));
+								$element.find(divSelector).empty().append($compile(directiveHtml)($scope));
+								$timeout(function(){$scope.canEdit()}, 1000) //verify if user can edit to show edit button
 								defer.resolve('')
 							});
 						});

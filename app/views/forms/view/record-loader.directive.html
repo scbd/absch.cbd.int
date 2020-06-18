@@ -77,8 +77,14 @@
             </div>
         </div>
 
+        <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.deletedOn">
+            <h3>
+                You are viewing a DELETED record. 
+            </h3>
+            <p>This record information is displayed for reference purpose only and should be not used.</p>
+        </div>
 
-        <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.latestRevision != internalDocumentInfo.revision && revisionNo != 'draft'">
+        <div class="alert alert-danger" role="alert" ng-show="!internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision != internalDocumentInfo.revision && revisionNo != 'draft'">
             <h3>
                 This document has been updated. This is not the latest published version.
                 <a translation-url ng-href="/database/{{internalDocument.header.schema | urlSchemaShortName}}/{{internalDocument | uniqueIDWithoutRevision}}"
@@ -87,10 +93,10 @@
         </div>
 
 
-        <div style="float:right; position:relative;top:1px;right:1px;" ng-if="!isIRCCRevoked && showDetails">
+        <div style="float:right; position:relative;top:7px;right:3px;" ng-if="!isIRCCRevoked && internalCanEdit">
             <div>
                 <a translation-url title="Edit" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
-                    class="btn btn-default" ng-href="/register/{{internalDocument.header.schema|urlSchemaShortName}}/{{internalDocument.header.identifier}}/edit">
+                    class="btn btn-default btn-xs" ng-href="/register/{{internalDocument.header.schema|urlSchemaShortName}}/{{internalDocument.header.identifier}}/edit">
                     <i class="fa fa-edit"></i> edit </a>
                 <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}"
                     type="button" class="btn btn-default" ng-click="askDelete(record)">
@@ -108,7 +114,7 @@
                 <div id="compareSchemaView"></div>
             </div>
         </div>
-        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;" ng-if="!loading">
+        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;" ng-show="!loading">            
             <div record-options></div>
         </div>
         <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> loading...</span>
