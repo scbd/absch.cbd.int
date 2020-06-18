@@ -12,33 +12,35 @@ app.directive("viewOrganizationReference", [function () {
 			target: "@linkTarget"
 		},
 		controller: ["$scope", "IStorage", function ($scope, storage){
-
 			
-			
-
 			$scope.$watch("document", function(newVal)
 			{
-				if(newVal && newVal.identifier)
-					loadReferences(newVal);
+				if(newVal && newVal.identifier){
+					if(!$scope.loading){
+						$scope.loading=true;					
+						loadReferences(newVal).finally(function(){
+							$scope.loading=false;
+						});
+					}
+				}
 				else
 					$scope.organization = newVal;
 			});
 			function loadReferences(ref) {
-
-				storage.documents.get(ref.identifier, { cache : true})
-					.then(function(res){
-						$scope.organization = res.data;
-					})
-					.catch(function(error){
-						if (error.status == 404) {
-
-							storage.drafts.get(ref.identifier, { cache : true})
-								.then(function(res){
-									$scope.organization = res.data;
-								});
-						};
-
-					});
+				return storage.documents.get(ref.identifier, { info : true, body:true})
+				.then(function(res){
+					$scope.organization 	= res.data.body;
+					$scope.organizationInfo = res.data;
+				})
+				.catch(function(error){
+					if (error.status == 404) {
+						return storage.drafts.get(ref.identifier, { info : true, body:true})
+							.then(function(res){
+								$scope.organization 	= res.data.workingDocumentBody||res.data.body;
+								$scope.organizationInfo = res.data;
+							});
+					};
+				})
 			};
 
 		}]

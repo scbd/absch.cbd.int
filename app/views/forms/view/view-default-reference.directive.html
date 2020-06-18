@@ -20,6 +20,9 @@
             </span>
         </span>		
         <span ng-transclude="extra"></span>
+        <span ng-if="document.deletedOn">
+            | <span class="label label-danger">This linked record has been deleted.</span>
+        </span>
         <span ng-if="document.workingDocumentLock">
             | <span class="label label-danger">The record is pending approval</span> | 
             <a translation-url  ng-href="/register/{{document.body.header.schema | urlSchemaShortName}}/{{document.identifier}}/view" target="_blank">
