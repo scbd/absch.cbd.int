@@ -51,7 +51,7 @@
                         <div class="btn margin-left-2" style="border: 1px solid #ccc;" ng-if="offlineFormats">Offline format:
                             <span ng-repeat="(code, lang) in ::languages" data-title="{{::lang}}" data-toggle="tooltip" data-container="body" 
                                 ng-show="::offlineFormats[schema][code]" class="padding-left-right-2">
-                                <a target="_blank" ng-href="{{::offlineFormats[schema][code]}}" ng-bind="::code"></a>
+                                <a target="_blank" ng-href="{{::offlineFormats[schema][code]|encodeURI}}" ng-bind="::code"></a>
                                 <span ng-if="::!$last">|</span>
                             </span>
                         </div>
@@ -59,7 +59,7 @@
                         <span class="glyphicon glyphicon-random"></span> Show Reference</a>-->
                         <button class="btn btn-sm btn-default margin-left-2" ng-click="refreshList(schema);" ng-if="showAddButton()">
                             <i class="fa fa-refresh"></i> Refresh</button>
-                        <a translation-url  ng-href="/register/{{schema|urlSchemaShortName}}/new" class="btn btn-sm btn-primary bold" 
+                        <a translation-url  ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/new" class="btn btn-sm btn-primary bold" 
                             style="color:#fff;" id="new_button" ng-if="showAddButton()">
                             <i class="fa fa-plus-square"></i> Add New </a>
                     </div>
@@ -90,18 +90,18 @@
 
                         <td style="width:40%; padding-left:10px;">
                             <span ng-show="isPublished(record) && !isDraft(record) && !isRequest(record)">
-                            <a translation-url  ng-href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/view" ng-show="record.documentID">
+                            <a translation-url  ng-href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view" ng-show="record.documentID">
                                 {{(record.workingDocumentTitle||record.title)|lstring}}
                             </a>
                         </span>
                             <span ng-show="isRequest(record)">
-                            <a translation-url  ng-href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/view">
+                            <a translation-url  ng-href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view">
                                 {{(record.workingDocumentTitle||record.title)|lstring}}
                             </a>
                         </span>
 
                             <span ng-show="isDraft(record)  && !isRequest(record)">
-                            <a translation-url  href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/edit">
+                            <a translation-url  href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/edit">
                                 {{(record.workingDocumentTitle||record.title)|lstring}}
                             </a>
                         </span>
@@ -114,14 +114,14 @@
                         </td>
                         <td>
                             <div ng-if="record.updatedBy && isPublished(record)">
-                                <a translation-url  style="color:#666" href="mailto:{{record.updatedBy.email}}">
+                                <a translation-url  style="color:#666" href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
                                     <strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong>
                                 </a>
                                 </br>
                                 <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | formatDateWithTime }}</span>
                             </div>
                             <div ng-if="record.createdBy && !record.updatedBy && isPublished(record)">
-                                <a translation-url  style="color:#666" href="mailto:{{record.createdBy.email}}">
+                                <a translation-url  style="color:#666" href="mailto:{{record.createdBy.email|encodeURIComponent}}">
                                     <strong>{{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong>
                                 </a>
                                 </br>
@@ -130,14 +130,14 @@
                         </td>
                         <td>
                             <div ng-if="record.workingDocumentUpdatedBy">
-                                <a translation-url  style="color:#666" href="mailto:{{record.workingDocumentUpdatedBy.email}}">
+                                <a translation-url  style="color:#666" href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}">
                                     <strong>{{record.workingDocumentUpdatedBy.firstName}} {{record.workingDocumentUpdatedBy.lastName}}</strong>
                                 </a>
                                 </br>
                                 <span style="font-size:10px;white-space:nowrap;">{{record.workingDocumentUpdatedOn | formatDateWithTime }}</span>
                             </div>
                             <div ng-if="record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
-                                <a translation-url  style="color:#666" href="mailto:{{record.workingDocumentCreatedBy.email}}">
+                                <a translation-url  style="color:#666" href="mailto:{{record.workingDocumentCreatedBy.email|encodeURIComponent}}">
                                     <strong>{{record.workingDocumentCreatedBy.firstName}} {{record.workingDocumentCreatedBy.lastName}}</strong>
                                 </a>
                                 </br>
@@ -145,14 +145,14 @@
                             </div>
                             <div ng-if="!record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
                                 <div ng-show="record.updatedBy">
-                                    <a translation-url  style="color:#666" href="mailto:{{record.updatedBy.email}}">
+                                    <a translation-url  style="color:#666" href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
                                         <strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong>
                                     </a>
                                     </br>
                                     <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | formatDateWithTime }}</span>
                                 </div>
                                 <div ng-show="record.createdBy && !record.updatedBy">
-                                    <a translation-url  style="color:#666" href="mailto:{{record.createdBy.email}}">
+                                    <a translation-url  style="color:#666" href="mailto:{{record.createdBy.email|encodeURIComponent}}">
                                         <strong>{{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong>
                                     </a>
                                     </br>
@@ -171,7 +171,7 @@
                                 <div ng-show="!record.revoked && isPublished(record) && !isRequest(record)" class="color-published-green bold"> Published </div>
                                 <div ng-show="!record.revoked && isDraft(record) && !isRequest(record)" class="color-litegrey bold"> Draft </div>
                                 <span class="color-red bold" ng-show="record.revoked">Revoked</span>
-                                <a translation-url  class="btn btn-danger color-white" ng-show="!record.revoked  && isRequest(record) && !record.isUpdating " ng-href="/register/{{record.metadata.schema | urlSchemaShortName}}/{{record.identifier}}/view">
+                                <a translation-url  class="btn btn-danger color-white" ng-show="!record.revoked  && isRequest(record) && !record.isUpdating " ng-href="/register/{{record.metadata.schema | urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view">
                                     Pending approval
                                 </a>
                                 <div class="color-red bold" ng-show="!record.revoked && isRequest(record) && record.isUpdating">

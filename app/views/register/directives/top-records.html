@@ -21,7 +21,7 @@
                 <th style="font-weight: normal;font-size:12px;"> Updated</th>
                 <th style="font-weight: normal;font-size:12px;"> <span class="hidden-xs">Status</span>
                     <span ng-if="self.records.Count > 0"  class="pull-right" >
-                        <a  class="bold"  style="white-space:nowrap;padding-left:10px;padding-right:10px;font-weight: normal;font-size:12px;" translation-url ng-href="/register/{{schema|urlSchemaShortName}}" ng-if="!self.viewAllUrl">View all</a>
+                        <a  class="bold"  style="white-space:nowrap;padding-left:10px;padding-right:10px;font-weight: normal;font-size:12px;" translation-url ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}" ng-if="!self.viewAllUrl">View all</a>
                         <a  class="bold"  style="white-space:nowrap;padding-left:5px;padding-right:10px;font-weight: normal;font-size:12px;" translation-url ng-href="{{self.viewAllUrl}}" ng-if="self.viewAllUrl">View all</a>
                     </span>
                 </th>
@@ -33,41 +33,41 @@
                     <span style="padding-left:3px;padding-right:15px;">
                         <span ng-if="!showSchemaName">{{record.type|schemaName}}</span>
                         <div class="btn-group document_buttons btn-group-xs" ng-show="record.workflowActivityStatus!='pending'">
-                            <a translation-url  title="View" ng-show="record.documentID" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/view"><i class="glyphicon glyphicon-search"></i></a>  
-                            <a translation-url  title="Lock" ng-show="record.workingDocumentLock" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/view"><i class="glyphicon glyphicon-lock"></i></a>                          
-                            <a translation-url  title="Edit" ng-show="!record.workingDocumentLock" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>                        
+                            <a translation-url  title="View" ng-show="record.documentID" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view"><i class="glyphicon glyphicon-search"></i></a>  
+                            <a translation-url  title="Lock" ng-show="record.workingDocumentLock" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view"><i class="glyphicon glyphicon-lock"></i></a>                          
+                            <a translation-url  title="Edit" ng-show="!record.workingDocumentLock" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/edit"><i class="fa fa-edit"></i></a>                        
                         </div>
                         </span>
                     </td>       
                 <td style="width:40%;">                   
                     <span>
-                        <a translation-url ng-href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/view">
+                        <a translation-url ng-href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view">
                             {{(record.workingDocumentTitle||record.title)|lstring}}
                         </a>
                     </span>
                 </td>
                 <td>                    
                     <div ng-if="record.workingDocumentUpdatedBy">
-                        <a translation-url  style="color:#666" href="mailto:{{record.workingDocumentUpdatedBy.email}}">
+                        <a translation-url  style="color:#666" href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}">
                             <strong>{{record.workingDocumentUpdatedBy.firstName}} {{record.workingDocumentUpdatedBy.lastName}}</strong>
                         </a>
                         <span style="font-size:10px;white-space:nowrap;">{{record.workingDocumentUpdatedOn | formatDateWithTime }}</span>
                     </div>
                     <div ng-if="record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
-                        <a translation-url  style="color:#666" href="mailto:{{record.workingDocumentCreatedBy.email}}">
+                        <a translation-url  style="color:#666" href="mailto:{{record.workingDocumentCreatedBy.email|encodeURIComponent}}">
                             <strong>{{record.workingDocumentCreatedBy.firstName}} {{record.workingDocumentCreatedBy.lastName}}</strong>
                         </a>
                         <span style="font-size:10px;white-space:nowrap;">{{record.workingDocumentCreatedBy | formatDateWithTime }}</span>
                     </div>
                     <div ng-if="!record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
                             <div ng-show="record.updatedBy">
-                                <a translation-url  style="color:#666" href="mailto:{{record.updatedBy.email}}">
+                                <a translation-url  style="color:#666" href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
                                     <strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong>
                                 </a>
                                 <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | formatDateWithTime }}</span>
                             </div>
                             <div ng-show="record.createdBy && !record.updatedBy">
-                                <a translation-url  style="color:#666" href="mailto:{{record.createdBy.email}}">
+                                <a translation-url  style="color:#666" href="mailto:{{record.createdBy.email|encodeURIComponent}}">
                                     <strong>{{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong>
                                 </a>
                                 <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | formatDateWithTime }}</span>

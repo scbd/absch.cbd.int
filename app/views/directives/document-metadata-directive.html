@@ -3,7 +3,7 @@
 			<div class="col-xs-12">
 
                 <a translation-url  
-                ng-href="/database/{{(document.schema_s||document.header.schema)|urlSchemaShortName}}/{{getUniqueIDForUrl(document)}}" 
+                ng-href="/database/{{(document.schema_s||document.header.schema)|urlSchemaShortName|encodeURIComponent}}/{{getUniqueIDForUrl(document)|encodeURIComponent}}" 
 				target="_blank" class="uid">
                 <i class="fa fa-external-link-square"></i> {{getUniqueID(document)}} 
                 </a>

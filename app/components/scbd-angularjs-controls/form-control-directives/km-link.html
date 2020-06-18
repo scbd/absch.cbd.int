@@ -12,7 +12,7 @@
 						<tr>
 							<td>
 								<span ng-show="link.language">{{locales[link.language]||locales['lang-'+link.language]}} | </span>
-								<a translation-url target="_blank" ng-href="{{link.url}}">{{link.name||link.url}}</a>
+								<a translation-url target="_blank" ng-href="{{link.url|encodeURI}}">{{link.name||link.url}}</a>
 								<span ng-show="link.tag">({{link.tag}})</span>
 							</td>
 							<td style="white-space:nowrap;text-align:right;vertical-align:top">

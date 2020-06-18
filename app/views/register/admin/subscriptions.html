@@ -62,7 +62,7 @@
 								ng-repeat="record in subscriptions | orderBy:'reportedOn':'desc'">
 									<h4>
 										<a class="text-bold mb0 color-blue"  >{{record.queryTitle}}</a>
-										<a class="label label-warning" target="_blank" ng-href="https://accounts.cbd.int/admin/users/{{record.meta.createdBy}}" >{{record.meta.createdBy}}</a>
+										<a class="label label-warning" target="_blank" ng-href="https://accounts.cbd.int/admin/users/{{record.meta.createdBy|encodeURIComponent}}" >{{record.meta.createdBy}}</a>
 										<span class="label label-danger" ng-if="record.isSystemAlert"> System alert</span>
 									</h4>
 									<span style="color:#bbb;">FILTERS:</span><span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">

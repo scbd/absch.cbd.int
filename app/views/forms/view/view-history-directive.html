@@ -15,7 +15,7 @@
         <tbody ng-repeat="document in documents | orderBy:'updatedOn':true" style="font-size:12px;" >
             <tr>
                 <td style="white-space:nowrap;">
-                    <a translation-url  ng-href="/database/{{document.type | urlSchemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="_blank">
+                    <a translation-url  ng-href="/database/{{document.type | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
                         <strong>{{document | uniqueID}}</strong>
                     </a>
                 </td>

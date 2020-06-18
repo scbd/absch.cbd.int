@@ -99,7 +99,7 @@
                                                     <td>{{country.count}}</td>
                                                     <td>{{country.region}}</td>
                                                     <td><span ng-repeat="user in country.users">
-                                                        <a target="_new" ng-href="https://accounts.cbd.int/admin/users/{{user.userID}}">{{user.firstName }} {{user.lastName}} ({{user.email}})</a>,</span></td>
+                                                        <a target="_new" ng-href="https://accounts.cbd.int/admin/users/{{user.userID|encodeURIComponent}}">{{user.firstName }} {{user.lastName}} ({{user.email}})</a>,</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>

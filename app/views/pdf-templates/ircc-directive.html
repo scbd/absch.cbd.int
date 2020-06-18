@@ -167,7 +167,7 @@
                         <div class="text">
                             <ul style="list-style-type: none;padding-left:3px;">
                                 <li ng-repeat="item in document.picDocuments">
-                                    <a target="{{target}}" ng-href="{{item.url}}">
+                                    <a target="{{target}}" ng-href="{{item.url|encodeURI}}">
                                         <i class="fa fa-file"></i> {{item.name||item.url}}</a>
                                     <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                                 </li>
@@ -200,7 +200,7 @@
                         <div class="text">
                             <ul style="list-style-type: none;padding-left:3px;">
                                 <li ng-repeat="item in document.matDocuments">
-                                    <a target="{{target}}" ng-href="{{item.url}}">
+                                    <a target="{{target}}" ng-href="{{item.url|encodeURI}}">
                                         <i class="fa fa-file"></i> {{item.name||item.url}}</a>
                                     <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                                 </li>
@@ -231,7 +231,7 @@
                         <div class="inner-label" ng-show="document.specimens">Specmin data:</div>
                         <ul>
                             <li ng-repeat="item in document.specimens">
-                                <a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                                <a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
                                 <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                             </li>
                         </ul>
@@ -239,14 +239,14 @@
                         <div class="inner-label" ng-show="document.taxonomies">Taxomony data</div>
                         <ul>
                             <li ng-repeat="item in document.taxonomies">
-                                <a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                                <a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
                                 <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                             </li>
                         </ul>
                         <div class="inner-label" ng-show="document.gisFiles">geographic coordinate data</div>
                         <ul>
                             <li ng-repeat="item in document.gisFiles">
-                                <a target="{{target}}" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                                <a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
                                 <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                             </li>
                         </ul>

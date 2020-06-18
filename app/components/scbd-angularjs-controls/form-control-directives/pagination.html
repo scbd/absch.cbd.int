@@ -50,6 +50,6 @@
 
     <!-- For Search crawlers create hidden href -->
     <div style="display: none">
-        <a ng-repeat="n in range(pageCount)" ng-href="/search?currentPage={{n+1}}" translation-url ng-bind="n+1"></a>
+        <a ng-repeat="n in range(pageCount)" ng-href="/search?currentPage={{n+1|encodeURIComponent}}" translation-url ng-bind="n+1"></a>
     </div>
 </div>

@@ -27,11 +27,11 @@
                                                                     'panel-info':contact.schema_s=='authority'||contact.schema_s=='database'}">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a ng-href="/countries/{{contact.government_s}}" ng-bind="contact.government_EN_t"></a>
+                                        <a ng-href="/countries/{{contact.government_s|encodeURIComponent}}" ng-bind="contact.government_EN_t"></a>
                                     </h4>
                                 </div>
                                 <div class="panel-body">
-                                    <a ng-href="/database/{{schema}}/{{contact.uniqueIdentifier_s|uppercase}}">{{contact.title_t}}</a>
+                                    <a ng-href="/database/{{schema}}/{{contact.uniqueIdentifier_s|uppercase|encodeURIComponent}}">{{contact.title_t}}</a>
                                     <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
                                     <ul ng-show="contact.telephones || contact.telephone_ss || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">                                        
                                         <li ng-show="contact.telephone_ss" ng-repeat="item in contact.telephone_ss">
@@ -41,7 +41,7 @@
                                         <li ng-show="contact.fax_ss" ng-repeat="item in contact.fax_ss"> {{item}}</li>
                                     </ul>
                                     <ul ng-show="contact.emails || contact.email_ss" style="list-style-type: none;padding:0;margin:0;">
-                                        <li ng-repeat="item in contact.emails || contact.email_ss"><a ng-href="mailto:{{item}}">
+                                        <li ng-repeat="item in contact.emails || contact.email_ss"><a ng-href="mailto:{{item|encodeURIComponent}}">
                                                 {{item}}</a>
                                         </li>
                                     </ul>

@@ -3,7 +3,7 @@
     <span ng-if="errorCode==404" class="label label-warning">Reference record not found ({{model}})</span>
 	<div ng-if="!errorCode">					
         <div class="selected-reference-uid">
-            <a translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName}}/{{document | uniqueIDWithoutRevision}}/{{document.revision}}" target="{{target||'_blank'}}">
+            <a translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="{{target||'_blank'}}">
                 <i class="fa fa-external-link-square" aria-hidden="true"></i> {{document | uniqueID}}
             </a>
         </div>
@@ -15,7 +15,7 @@
                 <span ng-if="showDetections" >Hide detection method(s)</span>
             </a>
             <div ng-repeat="item in document.body.detectionMethodLinks" ng-if="showDetections">
-                <a translation-url target="_blank" ng-href="{{item.url}}">{{item.name||item.url}}</a>
+                <a translation-url target="_blank" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
                 <i ng-show="item.language">({{item.language|uppercase}})</i>
             </div>
         </div>

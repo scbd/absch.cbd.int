@@ -289,7 +289,7 @@
                         </pre>
                         <div class="km-value" ng-style="{ direction : (item.text|direction:item.locale) }" ng-if="item.field=='relevantDocuments'"> 
                             <div ng-repeat="file in item.text">
-                                <a target="_new" ng-href="{{file.url}}"><i class="fa fa-file"></i> {{file.name||file.url}}</a>
+                                <a target="_new" ng-href="{{file.url|encodeURI}}"><i class="fa fa-file"></i> {{file.name||file.url}}</a>
                                 <i ng-show="file.name && file.url.indexOf('/api/v2013/documents/')<0">({{file.url}})</i>
                             </div>
                         </div> 
@@ -329,7 +329,7 @@
                                             </pre>
                                             <div class="km-value" ng-style="{ direction : (item.text|direction:lang) }" ng-if="item.field=='relevantDocuments'"> 
                                                 <div ng-repeat="file in item.text">
-                                                    <a target="_new" ng-href="{{file.url}}"><i class="fa fa-file"></i> {{file.name||file.url}}</a>
+                                                    <a target="_new" ng-href="{{file.url|encodeURI}}"><i class="fa fa-file"></i> {{file.name||file.url}}</a>
                                                     <i ng-show="file.name && file.url.indexOf('/api/v2013/documents/')<0">({{file.url}})</i>
                                                 </div>
                                             </div> 

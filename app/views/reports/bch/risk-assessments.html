@@ -11,7 +11,7 @@
 
         <tr ng-repeat="doc in riskAssessments.docs">
             <td style="width:5%" class="tableRow back80 countryName">
-                <a ng-href="{{doc.url_ss[0]}}" target="_self">{{doc.id}}</a>
+                <a ng-href="{{doc.url_ss[0]|encodeURIComponent}}" target="_self">{{doc.id}}</a>
             </td>
             <td style="width:60%">
                 <div>
