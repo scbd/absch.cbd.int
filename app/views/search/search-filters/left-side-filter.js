@@ -1,7 +1,7 @@
 ﻿define(['app', 'text!views/search/search-filters/left-side-filter.html', 'lodash', 'ngDialog',
     'components/scbd-angularjs-services/services/utilities'], function (app, template, _) {
 
-        app.directive('leftSideFilter', ['ngDialog', 'Thesaurus', 'locale', '$timeout', function (ngDialog, thesaurus, locale, $timeout) {
+        app.directive('leftSideFilter', ['ngDialog', 'locale', function (ngDialog, locale) {
             return {
                 restrict: 'EA',
                 replace: true,
@@ -37,7 +37,7 @@
                         ngDialog.open({
                             template: 'filtersDialog', 
                             className: 'search-filters ngdialog-theme-default wide',
-                            controller: ['$scope', '$timeout', 'thesaurusService', 'searchService', function ($scope, $timeout, thesaurusService, searchService) {
+                            controller: ['$scope', 'thesaurusService', 'searchService', function ($scope, thesaurusService, searchService) {
 
                                 $scope.treeViewSelected = [];
                                 $scope.schema = schema;
