@@ -1,18 +1,18 @@
-﻿define(['app', 'text!views/forms/view/record-loader.directive.html', 
+define(['app', 'text!views/forms/view/record-loader.directive.html', 
 	'components/scbd-angularjs-services/services/main', 'ngSmoothScroll',
 	'components/scbd-angularjs-services/filters/scbd-filters',
 	'./view-history-directive',
     'js/common',
     'views/directives/document-metadata-directive',
     'views/directives/party-status',
-    'views/forms/view/view-default-reference.directive',
-    'views/forms/view/view-contact-reference.directive',
+    'views/forms/view/directives/view-default-reference.directive',
+    'views/forms/view/directives/view-contact-reference.directive',
 	'services/search-service',
 	'views/directives/block-region-directive',
 	'views/directives/record-options','components/scbd-angularjs-services/services/locale',
 	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/form-control-directives/km-value-ml',
 	'components/scbd-angularjs-controls/form-control-directives/km-link-list',
-	'views/forms/view/view-reference-records.directive', 'views/forms/directives/compare-val'
+	'views/forms/view/directives/view-reference-records.directive', 'views/forms/directives/compare-val'
 ], function (app, template) {
 
 	app.directive('recordLoader', [function () {
@@ -64,12 +64,12 @@
 						capacityBuildingResource	: 'views/forms/view/view-capacity-building-resource.directive',
 
 						contact						: 'views/forms/view/view-contact.directive',
-						contactreference			: 'views/forms/view/view-contact-reference.directive',
+						contactreference			: 'views/forms/view/directives/view-contact-reference.directive',
 						authority					: 'views/forms/view/view-authority.directive',
 						supplementaryAuthority		: 'views/forms/view/view-supplementary-authority.directive',
 						database					: 'views/forms/view/view-database.directive',						
 						organization				: 'views/forms/view/view-organization.directive',
-						organizationreference		: 'views/forms/view/view-organization-reference.directive',
+						organizationreference		: 'views/forms/view/directives/view-organization-reference.directive',
 						resource					: 'views/forms/view/view-resource.directive',
 
 						focalPoint					: 'views/forms/view/scbd/view-focalpoint.directive',

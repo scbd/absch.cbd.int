@@ -86,7 +86,7 @@
 
         <div class="alert alert-danger" role="alert" ng-show="!internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision != internalDocumentInfo.revision && revisionNo != 'draft'">
             <h3>
-                This document has been updated. This is not the latest published version.
+                This document has been updated. This is not the latest published version. 
                 <a rel="noopener" translation-url ng-href="/database/{{internalDocument.header.schema | urlSchemaShortName|encodeURIComponent}}/{{internalDocument | uniqueIDWithoutRevision|encodeURIComponent}}"
                     target="new">Click here to view the latest version of the record.</a>
             </h3>

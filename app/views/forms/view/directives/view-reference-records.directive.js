@@ -1,4 +1,4 @@
-define(['app','lodash', "text!views/forms/view/view-reference-records.directive.html", 
+define(['app','lodash', "text!views/forms/view/directives/view-reference-records.directive.html", 
 'components/scbd-angularjs-services/services/storage', 'services/search-service'], function (app, _, template) {
 
 app.directive("viewReferencedRecords", [function () {

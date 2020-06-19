@@ -1,5 +1,5 @@
-﻿define(['app', "text!views/forms/view/bch/view-national-report.directive.html", 
-'views/forms/view/view-default-reference.directive'
+define(['app', "text!views/forms/view/bch/view-national-report.directive.html", 
+'views/forms/view/directives/view-default-reference.directive'
 ], function (app, template) {
 
 app.directive("viewNationalReport", [function () {

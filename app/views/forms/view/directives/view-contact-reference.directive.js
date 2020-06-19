@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/view-contact-reference.directive.html",'underscore', 
+define(['app', "text!views/forms/view/directives/view-contact-reference.directive.html",'underscore', 
 'components/scbd-angularjs-services/services/main', 'js/common'], function (app, template, _) {
 
 	app.directive("viewContactReference", [function () {

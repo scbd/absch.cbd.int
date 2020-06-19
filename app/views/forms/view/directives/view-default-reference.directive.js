@@ -1,4 +1,4 @@
-define(['app','underscore', "text!views/forms/view/view-default-reference.directive.html", 
+define(['app','underscore', "text!views/forms/view/directives/view-default-reference.directive.html", 
 'components/scbd-angularjs-services/services/main'], function (app, _, template) {
 
 app.directive("viewDefaultReference", ["IStorage", '$timeout', function (storage, $timeout) {
