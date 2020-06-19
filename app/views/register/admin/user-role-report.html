@@ -93,13 +93,13 @@
                                                 <tr ng-repeat="country in countriesToShow | orderBy:sortByField:reverse">
                                                     <td>{{$index+1}}</td>
                                                     <td>
-                                                        <a target="_blank" href="https://accounts.cbd.int/admin/users?government={{country.code}}&role={{role}}">
+                                                        <a rel="noopener" target="_blank" href="https://accounts.cbd.int/admin/users?government={{country.code}}&role={{role}}">
                                                             {{country.name|lstring:locale}}</a>
                                                     </td>
                                                     <td>{{country.count}}</td>
                                                     <td>{{country.region}}</td>
                                                     <td><span ng-repeat="user in country.users">
-                                                        <a target="_new" ng-href="https://accounts.cbd.int/admin/users/{{user.userID|encodeURIComponent}}">{{user.firstName }} {{user.lastName}} ({{user.email}})</a>,</span></td>
+                                                        <a rel="noopener" target="_blank" ng-href="https://accounts.cbd.int/admin/users/{{user.userID|encodeURIComponent}}">{{user.firstName }} {{user.lastName}} ({{user.email}})</a>,</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>

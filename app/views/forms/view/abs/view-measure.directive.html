@@ -15,7 +15,7 @@
 		<div ng-show="document.government">
 			<label name="country">Country</label>
 			<div class="km-value">
-				<a ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
+				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
 				<span ng-party-status government="document.government" id="government"></span>
 			</div>
 		</div>
@@ -102,7 +102,7 @@
 			<div class="km-value" compare-val>
 				<ul>
 					<li ng-repeat="item in document.documents">
-						<a translation-url  target="_blank" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
+						<a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
 						<i ng-show="item.language">({{getTerm(item.language)|term:locale}})</i>
 						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 					</li>
@@ -115,7 +115,7 @@
 			<div class="km-value" compare-val>
 				<ul>
 					<li ng-repeat="item in document.documentTranslations">
-						<a translation-url  target="_blank" ng-href="{{item.url|encodeURI}}">
+						<a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}">
 							<i class="fa fa-external-link-square" aria-hidden="true"></i> {{item.name||item.url}}
 						</a>
 						<i ng-show="item.language">({{getTerm(item.language)|term:locale}})</i>
@@ -214,7 +214,7 @@
 					<ul>
 						<li ng-repeat="item in document.relevantDocuments">
 							<i class="fa fa-external-link-square" aria-hidden="true"></i>
-							<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+							<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 						</li>
 					</ul>

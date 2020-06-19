@@ -26,7 +26,7 @@
                                     <span style="display:inline-block;" ng-if="activeReport.offlineFormats && activeReport.offlineFormats.length>0">    
                                         <i class="fa fa-file-word-o" aria-hidden="true"></i>  | 
                                         <span ng-repeat="format in activeReport.offlineFormats">
-                                            <a ng-href="{{format.url|encodeURI}}" target="_new">{{format.lang}}</a> 
+                                            <a rel="noopener" ng-href="{{format.url|encodeURI}}" target="_blank">{{format.lang}}</a> 
                                             <i ng-if="!$last">|</i> 
                                         </span>
                                     </span>
@@ -37,7 +37,7 @@
                                 <td style="text-align:center;" class="hidden-xs">{{activeReport.partyReportCount}} </td>
                                 <td style="text-align:center;" class="hidden-xs">{{activeReport.nonPartyReportCount}} </td>
                                 <td style="text-align:center;">
-                                    <!-- <a href="/search/nationalRecords?schema=absNationalReport"> -->
+                                    <!-- <a rel="noopener" href="/search/nationalRecords?schema=absNationalReport"> -->
                                         <b>{{activeReport.partyReportCount + activeReport.nonPartyReportCount}}</b>
                                     <!-- </a> -->
                                 </td>

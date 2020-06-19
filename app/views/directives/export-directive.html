@@ -66,7 +66,7 @@
                         
                         <tr ng-repeat="row in downloadDocs">
                             <td class="tableexport-string">{{row.schema_s|schemaName}}</td>
-                            <td class="tableexport-string"><a ng-href="https://absch.cbd.int/database/{{row.uniqueIdentifier_s|uppercase|encodeURIComponent}}">{{row.uniqueIdentifier_s|uppercase}}</a></td>
+                            <td class="tableexport-string"><a rel="noopener" ng-href="https://absch.cbd.int/database/{{row.uniqueIdentifier_s|uppercase|encodeURIComponent}}">{{row.uniqueIdentifier_s|uppercase}}</a></td>
                             <td class="tableexport-string">{{row.government}}</td>
                             <td class="tableexport-string">{{row.rec_title}}</td>
                             <td class="tableexport-string">{{getMeta(row.rec_meta1)}}</td>

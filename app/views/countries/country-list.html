@@ -92,10 +92,10 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li><a translation-url  href="#" ng-click="sortTable('name.en', 'ASC')"><i class=" fa fa-sort-alpha-asc" style="width:20px;"></i> Sort alphabetical A-Z </a></li>
-                        <li><a translation-url  href="#" ng-click="sortTable('name.en', 'DESC')"><i class=" fa fa-sort-alpha-desc" style="width:20px;"></i> Sort alphabetical Z-A</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="sortTable('name.en', 'ASC')"><i class=" fa fa-sort-alpha-asc" style="width:20px;"></i> Sort alphabetical A-Z </a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="sortTable('name.en', 'DESC')"><i class=" fa fa-sort-alpha-desc" style="width:20px;"></i> Sort alphabetical Z-A</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a translation-url  href="#" ng-repeat="header in headerCount" ng-click="sortTable(header.schema)"> {{ header.schema |schemaNamePlural}} </a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-repeat="header in headerCount" ng-click="sortTable(header.schema)"> {{ header.schema |schemaNamePlural}} </a></li>
                     </ul>
                     </div>
 
@@ -113,11 +113,11 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <li><a translation-url  href="#" ng-click="setPartyFilter('All');" > Show all </a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('All');" > Show all </a></li>
 						<li role="separator" class="divider"></li>
-						<li><a translation-url  href="#" ng-click="setPartyFilter('party');" > <i class="color-party fa fa-square"></i> Parties</a></li>
-						<li><a translation-url  href="#" ng-click="setPartyFilter('inbetween');" >  <i class="color-inbetween fa fa-square"></i> Ratified, not yet Party</a></li>
-						<li><a translation-url  href="#" ng-click="setPartyFilter('nonparty');" > <i class="color-nonparty fa fa-square"></i> Non-Parties</a></li>
+						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('party');" > <i class="color-party fa fa-square"></i> Parties</a></li>
+						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('inbetween');" >  <i class="color-inbetween fa fa-square"></i> Ratified, not yet Party</a></li>
+						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('nonparty');" > <i class="color-nonparty fa fa-square"></i> Non-Parties</a></li>
                     </ul>
                     </div>
 

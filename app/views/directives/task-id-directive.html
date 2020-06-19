@@ -22,7 +22,7 @@
                 <span style="font-size:12px">Requested by: </span>
                 <span class="color-black">
                     <span class="bold">{{workflow.createdBy_info.firstName + ' ' + workflow.createdBy_info.lastName}} </span>
-                    <a translation-url  ng-href="mailTo:{{workflow.createdBy_info.email|encodeURIComponent}}" class="color-blue">
+                    <a rel="noopener" translation-url  ng-href="mailTo:{{workflow.createdBy_info.email|encodeURIComponent}}" class="color-blue">
                        ({{workflow.createdBy_info.email}})</a>
                     <span> on </span> <span  style="text-transform: uppercase; font-size:12px" class="bold"> {{workflow.createdOn | formatDateWithTime}} </span>
                     <span ng-if="document.amendmentIntent == 1" class="bold color-red"> has requested to revoke this record.</span>

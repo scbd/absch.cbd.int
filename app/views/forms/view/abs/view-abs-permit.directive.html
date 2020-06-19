@@ -28,7 +28,7 @@
 			<div ng-show="document.government">
 				<label>Country</label>
 				<div class="km-value" >
-					<a ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
+					<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
                     <span ng-party-status government="document.government" id="government"></span>
 				</div>
 			</div>
@@ -129,14 +129,14 @@
 				<div ng-show="document.picDocuments">
 					<label>Additional documents or links about the prior informed consent</label>
 					<!-- <div class="km-value" ng-repeat="item in document.picDocuments">
-						<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+						<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 					</div> -->
 
                     <div class="km-value">
 						<ul style="list-style-type: none;padding-left:3px;">
 							<li ng-repeat="item in document.picDocuments">
-								<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
+								<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
 						       <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</li>
 						</ul>
@@ -156,14 +156,14 @@
     				<div ng-show="document.matDocuments">
     					<label>Additional documents or links about the mutually agreed terms</label>
     					<!-- <div class="km-value" ng-repeat="item in document.matDocuments">
-    						<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+    						<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
     						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
     					</div> -->
 
                             <div class="km-value">
     						<ul style="list-style-type: none;padding-left:3px;">
     							<li ng-repeat="item in document.matDocuments">
-    								<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
+    								<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
     						       <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
     							</li>
     						</ul>
@@ -188,14 +188,14 @@
 					<div ng-show="document.specimens">
 						<label>Specimen data</label>
 						<!-- <div class="km-value" ng-repeat="item in document.specimens">
-							<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+							<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 						</div> -->
 
                         <div class="km-value">
 						  <ul>
 							<li ng-repeat="item in document.specimens">
-								<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"> {{item.name||item.url}}</a>
+								<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"> {{item.name||item.url}}</a>
 						       <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</li>
 						</ul>
@@ -207,7 +207,7 @@
                         <div class="km-value">
 						  <ul>
 							<li ng-repeat="item in document.taxonomies">
-								<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"> {{item.name||item.url}}</a>
+								<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"> {{item.name||item.url}}</a>
 						       <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</li>
 						</ul>
@@ -218,14 +218,14 @@
 					<div ng-show="document.gisFiles">
 						<label>Geographic coordinates</label>
 						<!-- <div class="km-value" ng-repeat="item in document.gisFiles">
-							<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+							<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 						</div> -->
 
                         <div class="km-value">
 						  <ul style="list-style-type: none;padding-left:3px;">
 							<li ng-repeat="item in document.gisFiles">
-								<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
+								<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
 						       <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</li>
 						</ul>
@@ -271,7 +271,7 @@
                     <div class="km-value">
 						<ul style="list-style-type: none;padding-left:3px;">
 							<li ng-repeat="item in document.permitFiles">
-								<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
+								<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
 						       <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</li>
 						</ul>
@@ -294,14 +294,14 @@
 				<div ng-show="document.relevantDocuments">
 					<label>Other relevant website address or attached documents</label>
 					<!-- <div class="km-value" ng-repeat="item in document.relevantDocuments">
-						<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+						<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 					</div> -->
 
                     <div class="km-value">
 						<ul style="list-style-type: none;padding-left:3px;">
 							<li ng-repeat="item in document.relevantDocuments">
-								<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
+								<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
 						       <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</li>
 						</ul>

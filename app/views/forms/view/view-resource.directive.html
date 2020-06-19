@@ -28,7 +28,7 @@
 			<div class="km-value">
 				<ul>
 					<li ng-repeat="item in document.resourceLinks">
-						<a translation-url  target="_new" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+						<a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 						<i ng-if="item.language" class="color-blue">({{getTerm(item.language)|term:locale}})</i>
 						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 					</li>
@@ -64,7 +64,7 @@
 			<div class="km-value">
 				<ul>
 					<li ng-repeat="link in document.covers">
-						<a translation-url  ng-href="{{link.url|encodeURI}}" target="_blank">
+						<a rel="noopener" translation-url  ng-href="{{link.url|encodeURI}}" target="_blank">
 							<img class="img-polaroid" ng-src="{{link.url.replace('attachments/','attachments/thumbnail/')|encodeURIComponent}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
 						</a>
 					</li>
@@ -189,7 +189,7 @@
 				<div class="km-value">
 					<ul>
 						<li ng-repeat="item in document.relevantDocuments">
-							<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+							<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 						</li>
 					</ul>
@@ -205,7 +205,7 @@
 		</div>
 
 		<!-- <legend>Link to this record</legend>
-		<div class="km-value"><a translation-url  href="/database/record?documentID={{document.header.identifier}}">
+		<div class="km-value"><a rel="noopener" translation-url  href="/database/record?documentID={{document.header.identifier}}">
 		http://absch.cbd.int/database/record?documentID={{document.header.identifier}}</a></div> -->
 	</div>
 	<div document-metadata class="panel-footer"></div>

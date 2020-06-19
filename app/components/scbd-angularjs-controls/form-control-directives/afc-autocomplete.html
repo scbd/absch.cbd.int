@@ -11,7 +11,7 @@
 			<input type="text" ng-model="displaySpans[i]" tabindex="-1" ng-focus="this.select()"
 				ng-keydown="keydown($event)" ng-keyup="spansKeyup(i)" ng-blur="updateSpan(i, displaySpans[i]);"
 				autocomplete="off">
-			<a ng-click="removeSpan(i)" class="glyphicon glyphicon-remove"></a>
+			<a rel="noopener" ng-click="removeSpan(i)" class="glyphicon glyphicon-remove"></a>
 		</span>
 		<input {{required}} type="{{type||'text'}}" class="form-control" id="{{title}}"
 			placeholder="{{placeholder | localize}}" autocomplete="off" ng-model="bindingDisplay"

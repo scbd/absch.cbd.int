@@ -1,13 +1,13 @@
 ﻿<div class="pull-right" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated">
 
-    <a id="dLabel" class="notification-btn hidden-sm hidden-md hidden-lg" ng-href="{{viewAllUrl}}">
+    <a rel="noopener" id="dLabel" class="notification-btn hidden-sm hidden-md hidden-lg" ng-href="{{viewAllUrl}}">
          <span>
            <i class="fa " ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey fa-stack-1x':notificationUnreadCount}"></i>
                     <span ng-show="notificationUnreadCount > 0" class="fa-badge fa-stack-2x" style="top:5px;position:relative;" data-badge="{{notificationUnreadCount}}"></span>
         </span>
     </a>
 
-    <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs" ng-click="enableInfiniteScroll=!enableInfiniteScroll">
+    <a rel="noopener" id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs" ng-click="enableInfiniteScroll=!enableInfiniteScroll">
         <span>
            <i class="fa " ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey fa-stack-1x':notificationUnreadCount}"></i>
                     <span ng-show="notificationUnreadCount > 0" class="fa-badge fa-stack-2x" style="top:5px;position:relative;" data-badge="{{notificationUnreadCount}}"></span>
@@ -25,7 +25,7 @@
                  </div>
             
                 <div>
-                    <a translation-url ng-href="{{viewAllUrl}}" style="cursor:pointer;">
+                    <a rel="noopener" translation-url ng-href="{{viewAllUrl}}" style="cursor:pointer;">
                         <h5 class="color-cbdgrey"><i class="glyphicon glyphicon-circle-arrow-right"></i> view all notifications </h5>
                     </a>
                 </div>

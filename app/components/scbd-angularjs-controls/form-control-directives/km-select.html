@@ -1,6 +1,6 @@
 ﻿<span>
 	<script type="text/ng-template"  id="select-tree-renderer.html">
-		<a ng-click="clicked(item)" href="">
+		<a rel="noopener" ng-click="clicked(item)" href="">
 		{{item.title||item.name | lstring:currentLocale | truncate:120:'...'}}
 		</a>
 		<div class="km-select-description" ng-if="showDescription=='true' && item.description" 
@@ -28,10 +28,10 @@
 			</button>
 			<ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
 				<li ng-hide="!!rootItems">
-					<a href><i class="fa fa-spinner fa-spin"></i> <em>Loading...</em></a>
+					<a rel="noopener" href><i class="fa fa-spinner fa-spin"></i> <em>Loading...</em></a>
 				</li>
 				<li ng-show="rootItems.length==0">
-					<a href><em>Nothing to select...</em></a>
+					<a rel="noopener" href><em>Nothing to select...</em></a>
 				</li>
 				<li ng-show="!!rootItems && (getMinimum()==0 || allowOther == 'true')" style="padding:2px 20px;" id="filterText">
 					<input type="textbox"  ng-show="getMinimum()==0 && rootItems.length!=0" ng-model="filterText" style="width:95% !important" class="form-control" />
@@ -42,7 +42,7 @@
 				<li ng:repeat="item in rootItems | filter:filterText" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" style="position:relative">
 				</li>
 				<li style="margin-top:5px;border-top: 1px solid #eee;" ng-if="hasOtherSource">
-					<a ng-click="showOtherSource($event)" style="cursor: pointer;">
+					<a rel="noopener" ng-click="showOtherSource($event)" style="cursor: pointer;">
 						<i class="fa fa-spin fa-spinner" ng-if="loadingOtherSource"></i>
 						<span ng-if="!secondaySource">Show others</span>
 					</a>

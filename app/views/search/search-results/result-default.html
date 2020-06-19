@@ -1,14 +1,14 @@
 ﻿<div style="padding:0!important;margin:0 0 20px 0!important;">
-    <a ng-if="showExternalLink && !showDoc" translation-url target="_blank" ng-href="/database/{{::doc.schema_s|schemaShortName|encodeURIComponent}}/{{doc.uniqueIdentifier_s|uppercase|encodeURIComponent}}" 
+    <a rel="noopener" ng-if="showExternalLink && !showDoc" translation-url target="_blank" ng-href="/database/{{::doc.schema_s|schemaShortName|encodeURIComponent}}/{{doc.uniqueIdentifier_s|uppercase|encodeURIComponent}}" 
         class="pull-right link" ng-show="!doc.showDoc" title="open in new tab">
         <i class="fa fa-external-link"></i>
     </a>
     <div class="pull-right" style="padding-right:15px;position:relative;top:5px;"  ng-show="showDoc" >
         <span style="color:#ddd" > | </span> &nbsp; 
-        <a translation-url class="bold"  style="position:relative;top:2px;color:#FFF;font-size:20px;cursor:pointer;z-index:99999999;width:100%;" ng-click="showDoc=false">&times;</a>
+        <a rel="noopener" translation-url class="bold"  style="position:relative;top:2px;color:#FFF;font-size:20px;cursor:pointer;z-index:99999999;width:100%;" ng-click="showDoc=false">&times;</a>
     </div>
     <div ng-if="showDoc" class="animate-if" style="padding:5px 0px 10px 0px!important;margin:0 0 0 0!important;">
-        <record-loader class="card card-3" api="api.recordLoaderApi" show-details="false" hide-buttons="true" link-target="_new"></record-loader>
+        <record-loader class="card card-3" api="api.recordLoaderApi" show-details="false" hide-buttons="true" link-target="_blank"></record-loader>
     </div>
     <div id="record1" class="recordDefault card card-1" style="padding:0!important;margin:0!important;">
 

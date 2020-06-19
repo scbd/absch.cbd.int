@@ -10,13 +10,13 @@
         <div class="col-xs-4 well" ng-show="help">
         <h3>Help with Checkpoints</h3>
         <ul>
-            <li><a translation-url  href="http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-17" target="_new">
+            <li><a rel="noopener" translation-url  href="http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-17" target="_blank">
             Learn more about what the Protocol says on monitoring the utilization of genetic resources</a>
 
-            <li><a translation-url  href="/app/views/help/presentations/sim/help/Checkpoints_Study.pdf" target="_new">
+            <li><a rel="noopener" translation-url  href="/app/views/help/presentations/sim/help/Checkpoints_Study.pdf" target="_blank">
             Read a recent study of Options for Implementation of Checkpoints</a>
 
-            <li><a translation-url  href="/app/views/help/presentations/sim/help/cp_patents.png" target="_new">
+            <li><a rel="noopener" translation-url  href="/app/views/help/presentations/sim/help/cp_patents.png" target="_blank">
             See an example of a mock Checkpoint record</a>
 
         </ul>
@@ -87,18 +87,18 @@
         </div>
 
         <div class="continue"  ng-show="!hasParam('CP_patent')">
-            <a translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/notCP" ng-show="hasParam('picmat_research') || hasParam('picmat_commercial')" ng-click="addParam('patent_done')">Continue</a>
-            <a translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/userResearch" ng-show="!hasParam('picmat_research') && !hasParam('picmat_commercial')" ng-click="addParam('patent_done')">Continue</a>
+            <a rel="noopener" translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/notCP" ng-show="hasParam('picmat_research') || hasParam('picmat_commercial')" ng-click="addParam('patent_done')">Continue</a>
+            <a rel="noopener" translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/userResearch" ng-show="!hasParam('picmat_research') && !hasParam('picmat_commercial')" ng-click="addParam('patent_done')">Continue</a>
         </div>
 
         <div class="continue"  ng-show="hasParam('CP_patent') && hasParam('CP_no_exam')">
-            <a translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/sendCPC" ng-show="(checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3))" ng-click="addParam('patent_done')">Continue</a>
-            <a translation-url  class="btn btn-default btn-lg" href="" ng-show="!(checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3))">Please make your choice</a>
+            <a rel="noopener" translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/sendCPC" ng-show="(checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3))" ng-click="addParam('patent_done')">Continue</a>
+            <a rel="noopener" translation-url  class="btn btn-default btn-lg" href="" ng-show="!(checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3))">Please make your choice</a>
         </div>
 
         <div class="continue" ng-show="hasParam('CP_patent') && hasParam('CP_exam')">
-            <a translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/sendCPC" ng-show="hasParam('CP_patent') && ((checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3)) && (checkLastParam('cp_patent_accepts',3) || checkLastParam('cp_patent_rejects',3)))" ng-click="addParam('patent_done')">Continue</a>
-            <a translation-url  class="btn btn-default btn-lg" href="" ng-show="hasParam('CP_patent') && !((checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3)) && (checkLastParam('cp_patent_accepts',3) || checkLastParam('cp_patent_rejects',3))) ">Please make your choice</a>
+            <a rel="noopener" translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/sendCPC" ng-show="hasParam('CP_patent') && ((checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3)) && (checkLastParam('cp_patent_accepts',3) || checkLastParam('cp_patent_rejects',3)))" ng-click="addParam('patent_done')">Continue</a>
+            <a rel="noopener" translation-url  class="btn btn-default btn-lg" href="" ng-show="hasParam('CP_patent') && !((checkLastParam('user_provides_ircc',3)|| checkLastParam('user_provides_np',3)|| checkLastParam('user_provides_pcountry',3)) && (checkLastParam('cp_patent_accepts',3) || checkLastParam('cp_patent_rejects',3))) ">Please make your choice</a>
         </div>
 
     </div>

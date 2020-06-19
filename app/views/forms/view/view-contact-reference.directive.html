@@ -24,7 +24,7 @@
                 <span ng-show="document.acronym">({{(document.acronym||document.organizationAcronym) | lstring:locale}})</span>
             </span>
             | 
-            <a translation-url  ng-href="/database/{{document.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_new">
+            <a rel="noopener" translation-url  ng-href="/database/{{document.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
                 {{document | uniqueID}} <i class="fa fa-external-link-square" aria-hidden="true"></i> 
             </a>           
         </span>
@@ -118,14 +118,14 @@
                 Fax: <span ng-repeat="item in document.faxes">{{item}}<span ng-show="!$last">, </span></span>
             </div>
             <div ng-show="document.emails">
-                Email: <span ng-repeat="item in document.emails track by $index"><a translation-url  ng-href="mailto:{{item|encodeURIComponent}}">{{item}}</a><span ng-show="!$last">, </span></span>
+                Email: <span ng-repeat="item in document.emails track by $index"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}">{{item}}</a><span ng-show="!$last">, </span></span>
             </div>
             <div ng-show="document.websites">
-                Website: <span ng-repeat="item in document.websites"><a translation-url  target="_new" ng-href="{{item.url|encodeURI}}">{{item.url}}</a><span ng-show="!$last">, </span></span>
+                Website: <span ng-repeat="item in document.websites"><a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}">{{item.url}}</a><span ng-show="!$last">, </span></span>
             </div>
             <div ng-if="isCNA">
                 <!--website url is used when generating certificates-->
-                <a translation-url  ng-href="{{websiteUrl}}/database/{{document.header.schema | urlSchemaShortName|encodeURIComponent}}/{{(documentForUID || document) | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.info.revision|encodeURIComponent}}" target="_new">
+                <a rel="noopener" translation-url  ng-href="{{websiteUrl}}/database/{{document.header.schema | urlSchemaShortName|encodeURIComponent}}/{{(documentForUID || document) | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.info.revision|encodeURIComponent}}" target="_blank">
                     <i class="fa fa-external-link-square" aria-hidden="true"></i> 
                     {{(documentForUID || document) | uniqueID}}
                 </a>

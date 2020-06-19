@@ -14,14 +14,14 @@
 		
 		<document-date></document-date>
 
-		<!-- <a ng-href="/countries/{{document.government.identifier|uppercase}}" target={{target}}>{{document.government|term:locale}}</a> -->
+		<!-- <a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase}}" target={{target}}>{{document.government|term:locale}}</a> -->
 	<div name="article-13-2"></div>
 		<legend ng-if="document.government || document.name || document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0">General information</legend>
 
 		<div ng-show="document.government" >
 			<label name="country">Country</label>
 			<div class="km-value">
-				<span><a ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a></span>
+				<span><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a></span>
 				<span ng-party-status government="document.government" id="government"></span>
 			</div>
 		</div>
@@ -44,12 +44,12 @@
 				</ul>
 				<ul  ng-show="document.emails" class="list" style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;">
 					<li ng-repeat="item in document.emails">
-                        <a translation-url  ng-href="mailto:{{item|encodeURIComponent}}"><i class="fa fa-envelope-o"></i> {{item}}</a></li>
+                        <a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}"><i class="fa fa-envelope-o"></i> {{item}}</a></li>
 				</ul>
 
 				<ul  ng-show="document.websites" class="list" style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;">
 					<li ng-repeat="item in document.websites">
-                        <a translation-url  target="_blank" ng-href="{{item.url|encodeURI}}"> <i class="fa fa-external-link"></i> {{item.name||item.url}}</a>
+                        <a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}"> <i class="fa fa-external-link"></i> {{item.name||item.url}}</a>
 					</li>
 				</ul>
 			</div>
@@ -160,7 +160,7 @@
 			<div ng-show="document.relevantDocuments">
 				<label>Links and documents</label>
 				<div class="km-value" ng-repeat="item in document.relevantDocuments">
-					<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 				</div>
 			</div>
 		</div>

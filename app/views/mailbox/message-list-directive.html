@@ -36,8 +36,8 @@
                <tr ng-repeat="mail in mails" class="notification-item" ng-class="{'notification-read':mail.state=='read','notification-unread':mail.state=='unread' }">
    <!--                           ng-class="{'active': mail.state == 'unread'}"-->
                  <td><input type="checkbox" ng-model="mail.mailSelected"/></td>
-                 <td class="mailbox-star"><a translation-url  href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                 <td class="mailbox-name"><a translation-url  ng-click="messageSelection('mailMessage', mail)">{{mail.createdBy_info.firstName+ ' ' + mail.createdBy_info.lastName}}</a></td>
+                 <td class="mailbox-star"><a rel="noopener" translation-url  href="#"><i class="fa fa-star text-yellow"></i></a></td>
+                 <td class="mailbox-name"><a rel="noopener" translation-url  ng-click="messageSelection('mailMessage', mail)">{{mail.createdBy_info.firstName+ ' ' + mail.createdBy_info.lastName}}</a></td>
                  <td class="mailbox-subject"><b>{{mail.data.subject}}</b> - {{mail.data.message | limitTo:100}}...</td>
                  <td class="mailbox-date">{{mail.createdOn|formatDate}}</td>
                </tr>

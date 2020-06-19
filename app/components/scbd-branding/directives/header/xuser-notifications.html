@@ -14,12 +14,12 @@
     </style>
      <div class="notification-heading">
          <h4 class="menu-title color-grey">Notifications</h4>
-         <a ng-click="markAllRead($event)" class="color-blue pull-right" style="cursor:pointer;padding-top: 7px;"> mark all read </a>
+         <a rel="noopener" ng-click="markAllRead($event)" class="color-blue pull-right" style="cursor:pointer;padding-top: 7px;"> mark all read </a>
     </div>
     <div class="divider"></div>
     <div style="padding-left:30%;padding-top: 5px;">
-        <a style="cursor:pointer" ng-click="loadRecords($event, 'unread')"><span class="badge" ng-class="{'bg-primary':!activeLink || activeLink=='unread'}" style="border-top-right-radius: 0px;border-bottom-right-radius: 0px;">Unread</span></a>
-        <a style="cursor:pointer" ng-click="loadRecords($event, 'all')"><span class="badge" ng-class="{'bg-primary':activeLink=='all'}" style="border-top-left-radius: 0px;border-bottom-left-radius: 0px;">All Messages</span></a>
+        <a rel="noopener" style="cursor:pointer" ng-click="loadRecords($event, 'unread')"><span class="badge" ng-class="{'bg-primary':!activeLink || activeLink=='unread'}" style="border-top-right-radius: 0px;border-bottom-right-radius: 0px;">Unread</span></a>
+        <a rel="noopener" style="cursor:pointer" ng-click="loadRecords($event, 'all')"><span class="badge" ng-class="{'bg-primary':activeLink=='all'}" style="border-top-left-radius: 0px;border-bottom-left-radius: 0px;">All Messages</span></a>
     </div>
     <div style="padding-top:10px" infinite-scroll="loadNotifications()" infinite-scroll-disabled="loading" infinite-scroll-distance="12" infinite-scroll-parent="true">
 

@@ -11,10 +11,10 @@
                 <table class="table">
                     <tr ng-repeat="construct in binding" style="margin-bottom:5px;">
                         <td style="vertical-align: middle;width:3%">
-                            <a title="Edit construct" ng-href="#" ng-click="openContructDialog(construct, $index)"><i class="fa fa-edit"></i></a>
-                            <a title="Delete Construct" ng-href="#" ng-click="deleteConstruct($index)"><i class="fa fa-trash-o"></i></a>
-                            <a title="Move up" ng-if="!$first" ng-href="#" ng-click="moveUp($index)"><i class="fa fa-arrow-up"></i></a>
-                            <a title="Move down" ng-if="!$last" ng-href="#" ng-click="moveDown($index)"><i class="fa fa-arrow-down"></i></a>
+                            <a rel="noopener" title="Edit construct" ng-href="#" ng-click="openContructDialog(construct, $index)"><i class="fa fa-edit"></i></a>
+                            <a rel="noopener" title="Delete Construct" ng-href="#" ng-click="deleteConstruct($index)"><i class="fa fa-trash-o"></i></a>
+                            <a rel="noopener" title="Move up" ng-if="!$first" ng-href="#" ng-click="moveUp($index)"><i class="fa fa-arrow-up"></i></a>
+                            <a rel="noopener" title="Move down" ng-if="!$last" ng-href="#" ng-click="moveDown($index)"><i class="fa fa-arrow-down"></i></a>
                         </td>
                         <td>
                             <view-lmo-gene ng-model="construct"></view-lmo-gene>
@@ -238,8 +238,8 @@
                                 schema="(dnaSequence)" filter="true" ng-change="geneSelected(item)" skip-government="true" 
                                 allow-new="true" allow-new-schema="dnaSequence">
                                 <select-records>
-                                    <a ng-show="!$parent.$parent.item.gene" ng-href="#" ng-click="$parent.openAddDialog();">select gene</a>
-                                    <a ng-show="$parent.$parent.item.gene"  ng-href="#" ng-click="$parent.openAddDialog();" ng-bind="$parent.$parent.item.gene.body.name|lstring:locale"></a>
+                                    <a rel="noopener" ng-show="!$parent.$parent.item.gene" ng-href="#" ng-click="$parent.openAddDialog();">select gene</a>
+                                    <a rel="noopener" ng-show="$parent.$parent.item.gene"  ng-href="#" ng-click="$parent.openAddDialog();" ng-bind="$parent.$parent.item.gene.body.name|lstring:locale"></a>
                                 </select-records>
                                 <selected-records>
                                     <div ng-show="$parent.$parent.item.gene">

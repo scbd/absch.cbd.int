@@ -57,7 +57,7 @@
                                 <td><label>Last Published by: </label></td>
                                 <td class="bold">
                                     {{docInfo.updatedBy.firstName}}  {{docInfo.updatedBy.lastName}} 
-                                    (<a translation-url  ng-href="mailto:{{docInfo.updatedBy.email}}">{{docInfo.updatedBy.email}} </a>)
+                                    (<a rel="noopener" translation-url  ng-href="mailto:{{docInfo.updatedBy.email}}">{{docInfo.updatedBy.email}} </a>)
                                     <span class="unbold"> on </span>
                                     {{docInfo.updatedOn | formatDateWithTime}}
                                 </td>
@@ -72,7 +72,7 @@
                 <div class="pull-right" >
                     <button title="Cancel request" ng-show="canRecall && showAddButton()"
                     type="button" class="btn btn-warning color-white" ng-click="askRecallWorkflowRequest()"><i class="fa fa-undo"></i> Recall</button>
-                    <a translation-url  title="Edit" ng-show="!canRecall && !showRequestHistory && showButton()" type="button" class="btn btn-default"
+                    <a rel="noopener" translation-url  title="Edit" ng-show="!canRecall && !showRequestHistory && showButton()" type="button" class="btn btn-default"
                     href="/register/{{document.schema|mapSchema}}/{{document.identifier}}/edit"><i class="fa fa-edit"></i> Edit</a>
                     <button title="Delete" ng-show="!canRecall && !showRequestHistory && showButton()"
                     ng-class="{'red':(documemt.schema == 'MSR' &&  !showRequestHistory)}"

@@ -131,8 +131,8 @@
 <legend>
     {{title}}
 
-    <a translation-url  class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
-    <a translation-url  class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
+    <a rel="noopener" translation-url  class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
+    <a rel="noopener" translation-url  class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
 
 </legend>
 
@@ -194,7 +194,7 @@
                             <span ng-if="term.measureType=='linked'">Related to</span>
                             <span ng-if="term.measureType=='amended'">Amended by</span>
                             <span class="color-blue">
-                                <a translation-url  target="new" ng-href="/database/record/{{term.measure|uniqueIDWithoutRevision|encodeURIComponent}}/{{term.measure.revision|encodeURIComponent}}" >{{term.title||term.name | lstring:locale}} </a>
+                                <a rel="noopener" translation-url  target="new" ng-href="/database/record/{{term.measure|uniqueIDWithoutRevision|encodeURIComponent}}/{{term.measure.revision|encodeURIComponent}}" >{{term.title||term.name | lstring:locale}} </a>
                                 <span class="color-blue bold" ng-if="otherCustomValues[term.identifier]">: {{otherCustomValues[term.identifier]| lstring:locale}}</span>
                             </span>
                         </span>

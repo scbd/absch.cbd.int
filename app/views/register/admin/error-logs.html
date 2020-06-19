@@ -83,7 +83,7 @@
 										<td>{{recordCount - $index}}</td>
 										<td>
 											<!--https://github.com/scbd/absch.cbd.int/releases/tag/2016.49.3-->
-											<a target="_new" ng-href="https://github.com/scbd/absch.cbd.int/commit/{{getGitHash(error.appVersion)|encodeURIComponent}}">
+											<a rel="noopener" target="_blank" ng-href="https://github.com/scbd/absch.cbd.int/commit/{{getGitHash(error.appVersion)|encodeURIComponent}}">
 										{{error.appVersion|limitTo:20}}...
 									</a>
 										</td>
@@ -102,7 +102,7 @@
 													</span><br>
 													<span class="">
 														<b>User:</b> 
-														<a ng-if="error.user != 1" ng-href="https://accounts.cbd.int/admin/users/{{error.user|encodeURIComponent}}">{{error.user}}</a>
+														<a rel="noopener" ng-if="error.user != 1" ng-href="https://accounts.cbd.int/admin/users/{{error.user|encodeURIComponent}}">{{error.user}}</a>
 													<span ng-if="error.user == 1">Anonymous</span>
 														</span><br><br>
 													<span class="">

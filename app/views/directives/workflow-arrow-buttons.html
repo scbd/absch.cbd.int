@@ -166,7 +166,7 @@
         <div ng-transclude="introForm" class="well bg-white">
             <i ng-if="tab=='intro' && loading" class="fa fa-spinner fa-spin"></i>
             <div>
-                <a class="btn btn-primary pull-right" ng-if="isAdmin" ng-href="https://www.cbd.int/management/articles/{{article._id|encodeURIComponent}}/edit">Edit</a>
+                <a rel="noopener" class="btn btn-primary pull-right" ng-if="isAdmin" ng-href="https://www.cbd.int/management/articles/{{article._id|encodeURIComponent}}/edit">Edit</a>
                 <h2>{{article.title|lstring:locale}}</h2>
                 <br>
                 <p ng-bind-html="article.content| lstring:locale | toTrusted"></p>
@@ -257,7 +257,7 @@
                     <span ng-if="!container">Offline format:</span>
                     <span ng-repeat="(code, lang) in ::offlineLanguages" data-title="{{::lang}}" data-toggle="tooltip" data-container="body" 
                         ng-show="::offlineFormats[documentType][code]">
-                        <a target="_blank" ng-href="{{::offlineFormats[documentType][code]|encodeURI}}" ng-bind="::code"></a>
+                        <a rel="noopener" target="_blank" ng-href="{{::offlineFormats[documentType][code]|encodeURI}}" ng-bind="::code"></a>
                         <span ng-if="::!$last"> | </span>
                     </span>
                 </div>
@@ -278,16 +278,16 @@
                 <div class="col-xs-10">
                     <ul class="steps">
                         <li ng-class="{'arrowSelected': workflowScope.tab=='intro'}">
-                            <a href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Introduction</a>
+                            <a rel="noopener" href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Introduction</a>
                         </li>
                         <li ng-class="{'arrowSelected': workflowScope.tab=='edit'}">
-                            <a href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Submission form</a>
+                            <a rel="noopener" href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Submission form</a>
                         </li>
                         <li ng-class="{'arrowSelected': workflowScope.tab=='review'}">
-                            <a href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Review</a>
+                            <a rel="noopener" href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Review</a>
                         </li>
                         <li class="publish" ng-class="{'publish arrowSelected': workflowScope.tab=='publish'}">
-                            <a href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</a>
+                            <a rel="noopener" href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</a>
                         </li>
                     </ul>
                 </div>
