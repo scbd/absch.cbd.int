@@ -1,6 +1,6 @@
  define(["app", "text!views/forms/view/abs/view-abs-procedure.directive.html", 
- 	'views/directives/record-options', 'views/forms/view/view-default-reference.directive',
-	'views/forms/view/view-contact-reference.directive'], function(app, template){
+ 	'views/directives/record-options', 'views/forms/view/directives/view-default-reference.directive',
+	'views/forms/view/directives/view-contact-reference.directive'], function(app, template){
 
 			app.directive("viewAbsProcedure", [function () {
 					

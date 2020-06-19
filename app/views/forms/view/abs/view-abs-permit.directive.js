@@ -1,5 +1,5 @@
 define(['app', "text!views/forms/view/abs/view-abs-permit.directive.html", 'views/directives/record-options',
-'views/forms/view/view-reference-records.directive'], function (app, template) {
+'views/forms/view/directives/view-reference-records.directive'], function (app, template) {
 //,'views/forms/view/view-releated-checkpoint-communique-directive.html'
 app.directive("viewAbsPermit", [function () {
 

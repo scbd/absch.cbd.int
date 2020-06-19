@@ -1,6 +1,6 @@
 ﻿define(['app', "text!views/forms/edit/organization-selector.html", 'js/common', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
-'views/forms/view/view-contact-reference.directive', 'ngDialog',
-'views/forms/view/view-organization-reference.directive',
+'views/forms/view/directives/view-contact-reference.directive', 'ngDialog',
+'views/forms/view/directives/view-organization-reference.directive',
 'services/search-service','ngInfiniteScroll'
 ],
 function(app, template) {

@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/view-organization-reference.directive.html",], function (app, template) {
+define(['app', "text!views/forms/view/directives/view-organization-reference.directive.html",], function (app, template) {
 
 app.directive("viewOrganizationReference", [function () {
 	return {
