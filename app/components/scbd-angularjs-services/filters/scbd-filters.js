@@ -451,7 +451,12 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
   app.filter("encodeURI", ["$window", "$filter", function($window, $filter){    
     return function(val) {
       if(val){
-          return $window.encodeURI($window.decodeURI(val));
+          var decodedVal = val;
+          try{
+            decodedVal = $window.decodeURI(val);
+          }catch(e){}
+          
+          return $window.encodeURI(decodedVal);
       }
       return '';
     };
