@@ -49,7 +49,7 @@
                     <label>Documents</label>
                     <div class="km-value" ng-repeat="item in document.relevantDocuments" style="margin-bottom:5px;">
                         <span ng-if="item.language">{{langIdentifier(item.language)|term:locale}} | </span>
-                        <a translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+                        <a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
                     </div>
                 </div>
                 <div ng-show="document.relevantInformation">

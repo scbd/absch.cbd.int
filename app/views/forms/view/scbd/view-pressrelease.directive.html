@@ -49,7 +49,7 @@
 		<div ng-show="document.url_ss">
 			<label>Document</label>
 			<span class="km-value">
-				<a translation-url  ng-href="http://www.cbd.int/doc/press/{{document.date_s| formatDate:'YYYY'|encodeURIComponent}}/{{document.url_ss | lstring:locale|encodeURIComponent}}" target="_">http://www.cbd.int/doc/press/{{document.date_s| formatDate:'YYYY'}}/{{document.url_ss | lstring:locale}}</a>
+				<a rel="noopener" translation-url  ng-href="http://www.cbd.int/doc/press/{{document.date_s| formatDate:'YYYY'|encodeURIComponent}}/{{document.url_ss | lstring:locale|encodeURIComponent}}" target="_">http://www.cbd.int/doc/press/{{document.date_s| formatDate:'YYYY'}}/{{document.url_ss | lstring:locale}}</a>
 			</span>
 		</div>
 	</div>

@@ -43,7 +43,7 @@
                        ,'bg-othermsr':measure.rec_meta1[0] === 'Other' }">
                         <div> 
                             <input type="checkbox"  ng-model="measure.measureMatrix" style="margin-left:5px;" />
-                            <a translation-url  target="_new" ng-href="database/record/{{measure|uniqueID|encodeURIComponent}}"> 
+                            <a rel="noopener" translation-url  target="_blank" ng-href="database/record/{{measure|uniqueID|encodeURIComponent}}"> 
                                <span class="color-black" style="margin-left:10px;">{{$index+1}}.</span>
                                <span class="bold">{{measure.rec_title}} </span> 
                             </a>
@@ -65,7 +65,7 @@
                            </ul>
                         </div>
                     </div>
-                       <!--<a translation-url  class="link" style="margin-top:20px;" ng-click="selectAllForMatrix()" > select <span ng-if="!measureMatrixDocuments.selectAll">all</span><span ng-if="measureMatrixDocuments.selectAll">none</span></a>-->
+                       <!--<a rel="noopener" translation-url  class="link" style="margin-top:20px;" ng-click="selectAllForMatrix()" > select <span ng-if="!measureMatrixDocuments.selectAll">all</span><span ng-if="measureMatrixDocuments.selectAll">none</span></a>-->
                    </div>    
                        
                    <div style="margin-bottom:20px;">

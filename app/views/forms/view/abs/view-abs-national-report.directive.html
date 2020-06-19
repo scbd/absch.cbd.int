@@ -17,7 +17,7 @@
 
 				<div>
 					<label>Country</label>
-					<div class="km-value"  ng-show="document.government"><a ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a></div>
+					<div class="km-value"  ng-show="document.government"><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a></div>
 					<div class="km-value"  ng-hide="document.government">No country selected</div>
 				</div>
 
@@ -74,7 +74,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question4.documentReferenceIDs">
-										<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -100,7 +100,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question5.documentReferenceIDs">
-										<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -126,7 +126,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question6.documentReferenceIDs">
-										<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -153,7 +153,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question7.documentReferenceIDs">
-										<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -176,7 +176,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question8.documentReferenceIDs">
-										<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -202,7 +202,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question9.documentReferenceIDs">
-										<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -224,7 +224,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question10.documentReferenceIDs">
-										<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -233,7 +233,7 @@
 						<div ng-show="document.question10.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question10.relevantDocuments">
-								<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+								<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
 						</div>
@@ -269,7 +269,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question11.documentReferenceIDs">
-												<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -291,7 +291,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question12.documentReferenceIDs">
-												<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -313,7 +313,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question13.documentReferenceIDs">
-												<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -335,7 +335,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question14.documentReferenceIDs">
-												<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -357,7 +357,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question15.documentReferenceIDs">
-												<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -380,7 +380,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question16.documentReferenceIDs">
-												<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -402,7 +402,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question17.documentReferenceIDs">
-												<a translation-url  target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" translation-url  target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -467,7 +467,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question18.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -489,7 +489,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question19.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -498,7 +498,7 @@
 								<div ng-show="document.question19.relevantDocuments">
 				                	<label>Any other relevant documents</label>
 									<div class="km-value" ng-repeat="item in document.question19.relevantDocuments">
-										<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+										<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 									</div>
 								</div>
@@ -526,7 +526,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question20.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -548,7 +548,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question21.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -570,7 +570,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question22.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -592,7 +592,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question23.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -601,7 +601,7 @@
 								<div ng-show="document.question23.relevantDocuments">
 				                	<label>Any other relevant documents</label>
 									<div class="km-value" ng-repeat="item in document.question23.relevantDocuments">
-										<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+										<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 									</div>
 								</div>
@@ -653,7 +653,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question24.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -690,7 +690,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question25.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -730,7 +730,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question26.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -766,7 +766,7 @@
 				            	<div ng-show="document.question27.relevantDocuments">
 				                	<label>Any other relevant documents</label>
 									<div class="km-value" ng-repeat="item in document.question27.relevantDocuments">
-										<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+										<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 									</div>
 								</div>
@@ -786,7 +786,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question28.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -812,7 +812,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question29.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -834,7 +834,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question30.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -843,7 +843,7 @@
 								<div ng-show="document.question30.relevantDocuments">
 				                	<label>Any other relevant documents</label>
 									<div class="km-value" ng-repeat="item in document.question30.relevantDocuments">
-										<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+										<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 									</div>
 								</div>
@@ -871,7 +871,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question31.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -893,7 +893,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question32.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -922,7 +922,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question33.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -944,7 +944,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question34.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -953,7 +953,7 @@
 								<div ng-show="document.question34.relevantDocuments">
 				                	<label>Any other relevant documents</label>
 									<div class="km-value" ng-repeat="item in document.question34.relevantDocuments">
-										<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+										<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 										<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 									</div>
 								</div>
@@ -984,7 +984,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question35.research.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1001,7 +1001,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question35.emergencies.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1018,7 +1018,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question35.access.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1035,7 +1035,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question35.importance.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1057,7 +1057,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question36.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1066,7 +1066,7 @@
 						<div ng-show="document.question36.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question36.relevantDocuments">
-								<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+								<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
 						</div>
@@ -1093,7 +1093,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question37.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1118,7 +1118,7 @@
 										<div class="km-value">
 											<ul class="list">
 												<li ng-repeat="reference in document.question38.law.documentReferenceIDs">
-													<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+													<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 												</li>
 											</ul>
 
@@ -1154,7 +1154,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question38.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1176,7 +1176,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question39.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1198,7 +1198,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question40.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1220,7 +1220,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question41.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1247,7 +1247,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question42.community.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -1269,7 +1269,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question42.mat.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -1291,7 +1291,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question42.mcc.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -1315,7 +1315,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question43.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1338,7 +1338,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question44.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1347,7 +1347,7 @@
 						<div ng-show="document.question44.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question44.relevantDocuments">
-								<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+								<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
 						</div>
@@ -1375,7 +1375,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question45.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1396,7 +1396,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question46.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1418,7 +1418,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question47.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1427,7 +1427,7 @@
 						<div ng-show="document.question47.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question47.relevantDocuments">
-								<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+								<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
 						</div>
@@ -1458,7 +1458,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question48.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1481,7 +1481,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question49.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1503,7 +1503,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question50.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1512,7 +1512,7 @@
 						<div ng-show="document.question50.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question50.relevantDocuments">
-								<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+								<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
 						</div>
@@ -1539,7 +1539,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question51.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1560,7 +1560,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question52.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1581,7 +1581,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question53.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1590,7 +1590,7 @@
 						<div ng-show="document.question53.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question53.relevantDocuments">
-								<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+								<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
 						</div>
@@ -1621,7 +1621,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question54.measures.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -1638,7 +1638,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question54.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1664,7 +1664,7 @@
 									<div class="km-value">
 										<ul class="list">
 											<li ng-repeat="reference in document.question55.measures.documentReferenceIDs">
-												<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+												<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 											</li>
 										</ul>
 
@@ -1681,7 +1681,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question55.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1703,7 +1703,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question56.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1725,7 +1725,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question57.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1747,7 +1747,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question58.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1756,7 +1756,7 @@
 						<div ng-show="document.question58.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question58.relevantDocuments">
-								<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+								<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
 						</div>
@@ -1788,7 +1788,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question59.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1816,7 +1816,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question60.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1846,7 +1846,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question61.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1921,7 +1921,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question62.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1937,7 +1937,7 @@
 						No information provided</div>
 					<div class="km-value pre-wrap" ng-if="document.question63new.relevantInformation">{{document.question63new.relevantInformation | lstring:locale}}</div>
 					<div class="km-value" ng-repeat="item in document.question63new.relevantDocuments">
-						<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+						<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 					</div>
 				</div>
@@ -1948,7 +1948,7 @@
 						ng-if="!document.question64new.relevantInformation && !document.question64new.relevantDocuments">No information provided</div>
 					<div class="km-value pre-wrap" ng-if="document.question64new.relevantInformation">{{document.question64new.relevantInformation | lstring:locale}}</div>
 					<div class="km-value" ng-repeat="item in document.question64new.relevantDocuments">
-						<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+						<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 					</div>
 				</div>
@@ -1976,7 +1976,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question63.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -1994,7 +1994,7 @@
 							<div class="km-value">
 								<ul class="list">
 									<li ng-repeat="reference in document.question64.documentReferenceIDs">
-										<a target="_new" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
+										<a rel="noopener" target="_blank" ng-href="{{getLink(reference)|encodeURIComponent}}">{{getLinkText(reference)}}</a>
 									</li>
 								</ul>
 
@@ -2004,7 +2004,7 @@
 						<div ng-show="document.question64.relevantDocuments">
 		                	<label>Any other relevant documents</label>
 							<div class="km-value" ng-repeat="item in document.question64.relevantDocuments">
-								<a target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+								<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 								<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 							</div>
 						</div>

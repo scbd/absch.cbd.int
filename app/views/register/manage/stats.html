@@ -79,7 +79,7 @@
 											<span class="progress-description">
 												You have <span ng-if="!hasPublishingAuthority">not </span>
 												designated publishing authority in ABS-CH
-												 <a href="/register/national-users"  class="link-color"> Click to add</a>
+												 <a rel="noopener" href="/register/national-users"  class="link-color"> Click to add</a>
 											</span>
 										</div>
 										<!-- /.info-box-content -->
@@ -101,7 +101,7 @@
 													<div ng-if="schema.value>0 && schema.schema=='measure' && measureElementMissing && measureElementMissing.length > 0">
 														You have {{measureElementMissing.length}} MSR which are missing ABS elements of measures
 														<span class="pull-right text-black">
-															<a class="link-color" role="button" data-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}_Elm" 
+															<a rel="noopener" class="link-color" role="button" data-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}_Elm" 
 															aria-expanded="false" aria-controls="list{{schema.schema}}_Elm"> 
 																<i class="fa fa-angle-down"></i> view
 															</a>
@@ -125,7 +125,7 @@
 													<div ng-if="schema.value>0 && getDocumentsForUpdate(schema.schema).length > 0">
 														You have {{schema.value}} {{schema.schema|schemaShortName}}, {{getDocumentsForUpdate(schema.schema).length}} of which require updates
 														<span class="pull-right text-black">
-															<a class="link-color" role="button" data-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}" 
+															<a rel="noopener" class="link-color" role="button" data-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}" 
 															aria-expanded="false" aria-controls="list{{schema.schema}}"> 
 																<i class="fa fa-angle-down"></i> view
 															</a>
@@ -133,7 +133,7 @@
 													</div>
 													<div ng-if="schema.value==0">
 														You have not published any {{schema.schema|schemaShortName}} in ABS-CH 
-														<a ng-href="/register/{{schema.schema|schemaShortName|encodeURIComponent}}/new" class="pull-right link-color"> 
+														<a rel="noopener" ng-href="/register/{{schema.schema|schemaShortName|encodeURIComponent}}/new" class="pull-right link-color"> 
 															click to add
 														</a>
 													</div>
@@ -143,7 +143,7 @@
 												
 												<ul class="nav nav-pills nav-stacked">
 													<li ng-repeat="document in getDocumentsForUpdate(schema.schema)">
-															<a href="/database/{{document.uniqueIdentifier_s|uppercase|encodeURIComponent}}" target="_new">  
+															<a rel="noopener" href="/database/{{document.uniqueIdentifier_s|uppercase|encodeURIComponent}}" target="_blank">  
 																<div>
 																	<span class=" text-green">{{document.uniqueIdentifier_s|uppercase}}</span>
 																	{{document.title_t}}
@@ -198,7 +198,7 @@
 						<!-- /.box-body -->
 						<div class="box-footer no-padding">
 							<ul class="nav nav-pills nav-stacked">
-								<li ng-repeat="schema in schemas"><a href="#"> {{schema.label}}
+								<li ng-repeat="schema in schemas"><a rel="noopener" href="#"> {{schema.label}}
                   					<span class="pull-right text-red"><i class="fa fa-search"></i> {{schema.value}}</span></a>
 								</li>
 							</ul>

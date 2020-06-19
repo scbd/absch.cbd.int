@@ -7,7 +7,7 @@
         {{realm.uIdPrefix}} related information from the SCBD</p>
         
         <div ng-repeat="doc in sf_filters = (sf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])">
-                <a translation-url  class="filter"  ng-click="saveFilter(doc)" ng-class="{'disabled':!$parent.searchResult.data.facets.schemas[doc.id]}">
+                <a rel="noopener" translation-url  class="filter"  ng-click="saveFilter(doc)" ng-class="{'disabled':!$parent.searchResult.data.facets.schemas[doc.id]}">
                     <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> 
                     {{doc.name|lstring:locale}}
                     <strong>({{$parent.searchResult.data.facets.schemas[doc.id]||0}})</strong>

@@ -1,5 +1,5 @@
 ﻿<div class="locale" id="{{idname}}" >
-    <a  ng-href="#"class="set-languages" data-toggle="dropdown">
+    <a rel="noopener"  ng-href="#"class="set-languages" data-toggle="dropdown">
       <span class="badge badge-default color-white">
         {{currentLanguage|uppercase}}<span class="caret"></span>
       </span>
@@ -12,11 +12,11 @@
     <ul id="dropdown-menu" class="dropdown-menu locale-menu" role="menu" ng-class="{'arabic-locale-menu':currentLanguage=='ar'}">
       <li class="disabled" style="font-weight:bold;color:#BBB;">LANGUAGES</li>
       <hr style="padding;0;margin:0;">
-      <li><a translation-url ng-class="{'bold':currentLanguage=='ar'}" ng-click="changeLanguage('ar')"  ng-href="#">لعربية</a></li>      <!--ng-click="changeLanguage('ar')"-->
-      <li><a translation-url ng-class="{'bold':currentLanguage=='zh'}" ng-click="changeLanguage('zh')" ng-href="#">中文</a></li>
-      <li><a translation-url ng-class="{'bold':currentLanguage=='en'}" ng-click="changeLanguage('en')" ng-href="#">English</a></li>
-      <li><a translation-url ng-class="{'bold':currentLanguage=='es'}" ng-click="changeLanguage('es')" ng-href="#">Español</a></li>
-      <li><a translation-url ng-class="{'bold':currentLanguage=='fr'}" ng-click="changeLanguage('fr')" ng-href="#">Français</a></li>
-      <li><a translation-url ng-class="{'bold':currentLanguage=='ru'}" ng-click="changeLanguage('ru')" ng-href="#">Русский</a></li>
+      <li><a rel="noopener" translation-url ng-class="{'bold':currentLanguage=='ar'}" ng-click="changeLanguage('ar')"  ng-href="#">لعربية</a></li>      <!--ng-click="changeLanguage('ar')"-->
+      <li><a rel="noopener" translation-url ng-class="{'bold':currentLanguage=='zh'}" ng-click="changeLanguage('zh')" ng-href="#">中文</a></li>
+      <li><a rel="noopener" translation-url ng-class="{'bold':currentLanguage=='en'}" ng-click="changeLanguage('en')" ng-href="#">English</a></li>
+      <li><a rel="noopener" translation-url ng-class="{'bold':currentLanguage=='es'}" ng-click="changeLanguage('es')" ng-href="#">Español</a></li>
+      <li><a rel="noopener" translation-url ng-class="{'bold':currentLanguage=='fr'}" ng-click="changeLanguage('fr')" ng-href="#">Français</a></li>
+      <li><a rel="noopener" translation-url ng-class="{'bold':currentLanguage=='ru'}" ng-click="changeLanguage('ru')" ng-href="#">Русский</a></li>
     </ul>
 </div>

@@ -11,13 +11,13 @@
 
         <h3>Helpful links</h3>
         <ul>
-            <li><a translation-url  href="http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-17" target="_new">
+            <li><a rel="noopener" translation-url  href="http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-17" target="_blank">
             Learn more about what the Protocol says on monitoring the utilization of genetic resources</a>
 
-            <li><a translation-url  href="/app/views/help/presentations/sim/help/Checkpoints_Study.pdf" target="_new">
+            <li><a rel="noopener" translation-url  href="/app/views/help/presentations/sim/help/Checkpoints_Study.pdf" target="_blank">
             Read a recent study of Options for Implementation of Checkpoints</a>
 
-            <li><a translation-url  href="http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-02" target="_new">
+            <li><a rel="noopener" translation-url  href="http://www.cbd.int/abs/text/articles/default.shtml?sec=abs-02" target="_blank">
             Check how “utilization” is defined in the Protocol</a>
 
         </ul>
@@ -75,18 +75,18 @@
         </div>
 
         <div class="continue">
-            <a translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/contactCNA" ng-show="checkLastParam('user_check_absch');" >Continue</a>
+            <a rel="noopener" translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/contactCNA" ng-show="checkLastParam('user_check_absch');" >Continue</a>
 
 
-            <a translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/notCP" ng-show="hasParam('user_finalize') && (!hasParam('patent_done') && !hasParam('journal_done') && !hasParam('market_done') &&  !hasParam('grants_done'))" ng-click="calcPoints();">Continue</a>
-            <a translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/points" ng-show="hasParam('user_finalize') && (hasParam('patent_done') || hasParam('journal_done') || hasParam('market_done') || hasParam('grants_done'))" ng-click="calcPoints();">Continue</a>
+            <a rel="noopener" translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/notCP" ng-show="hasParam('user_finalize') && (!hasParam('patent_done') && !hasParam('journal_done') && !hasParam('market_done') &&  !hasParam('grants_done'))" ng-click="calcPoints();">Continue</a>
+            <a rel="noopener" translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/points" ng-show="hasParam('user_finalize') && (hasParam('patent_done') || hasParam('journal_done') || hasParam('market_done') || hasParam('grants_done'))" ng-click="calcPoints();">Continue</a>
 
 
-            <a translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/cpGrants" ng-show="hasParam('user_ask_funding') && !hasParam('grants_done')">Continue</a>
-            <a translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/cpJournal" ng-show="hasParam('user_ask_publish') && !hasParam('journal_done')">Continue</a>
-            <a translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/cpPatent" ng-show="hasParam('user_ask_patent') && !hasParam('patent_done')">Continue</a>
-            <a translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/cpMarket" ng-show="hasParam('user_ask_commercial') && !hasParam('market_done')">Continue</a>
-            <a translation-url  class="btn btn-default btn-lg" href="" ng-show="  !hasParam('user_check_absch') && (!hasParam('user_ask_funding') || hasParam('grants_done')) && (!hasParam('user_ask_publish') || hasParam('journal_done')) &&  (!hasParam('user_ask_patent') || hasParam('patent_done')) && (!hasParam('user_ask_commercial') || hasParam('market_done')) && !hasParam('user_finalize')">Please make your choice</a>
+            <a rel="noopener" translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/cpGrants" ng-show="hasParam('user_ask_funding') && !hasParam('grants_done')">Continue</a>
+            <a rel="noopener" translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/cpJournal" ng-show="hasParam('user_ask_publish') && !hasParam('journal_done')">Continue</a>
+            <a rel="noopener" translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/cpPatent" ng-show="hasParam('user_ask_patent') && !hasParam('patent_done')">Continue</a>
+            <a rel="noopener" translation-url  class="btn btn-primary btn-lg" href="/help/presentations/sim/cpMarket" ng-show="hasParam('user_ask_commercial') && !hasParam('market_done')">Continue</a>
+            <a rel="noopener" translation-url  class="btn btn-default btn-lg" href="" ng-show="  !hasParam('user_check_absch') && (!hasParam('user_ask_funding') || hasParam('grants_done')) && (!hasParam('user_ask_publish') || hasParam('journal_done')) &&  (!hasParam('user_ask_patent') || hasParam('patent_done')) && (!hasParam('user_ask_commercial') || hasParam('market_done')) && !hasParam('user_finalize')">Please make your choice</a>
         </div>
 
     </div>

@@ -22,10 +22,10 @@
 
                 <span ng-show="model.length==0 || !model"> <i class="color-blue"> No records have been linked. </i> </span>
 
-                <a translation-url  class="bold" href="#" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords">
+                <a rel="noopener" translation-url  class="bold" href="#" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords">
                     <i class="fa fa-chevron-circle-right"></i> {{model.length}} linked records.
                 </a>
-                <a translation-url  class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0 ">
+                <a rel="noopener" translation-url  class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0 ">
                     <i class="fa fa-chevron-circle-down"></i> {{model.length}} linked records.
                 </a>
             </div>
@@ -39,7 +39,7 @@
                 <table class="table" id="search-new" style="padding-bottom:3px;width:100%;">
                     <tr ng-repeat="doc in model" ng-if="type!='radio'">
                         <td style="margin-bottom:15px;width:15px;">
-                            <a translation-url  class="btn btn-default" ng-click="removeDocument(doc)" class="link color-red">
+                            <a rel="noopener" translation-url  class="btn btn-default" ng-click="removeDocument(doc)" class="link color-red">
                                 <i class="fa fa-times"></i></a>
                         </td>
                         <td style="margin-bottom:20px;">
@@ -51,7 +51,7 @@
                     </tr>
                     <tr ng-if="type=='radio' && model">
                         <td style="margin-bottom:15px;width:15px;">
-                            <a translation-url  class="btn btn-default" ng-click="removeDocument(model)" class="link color-red">
+                            <a rel="noopener" translation-url  class="btn btn-default" ng-click="removeDocument(model)" class="link color-red">
                                 <i class="fa fa-times"></i></a>
                         </td>
                         <td style="margin-bottom:20px;">
@@ -77,13 +77,13 @@
                     <div>
                         <ul class="nav nav-tabs pull-left" style="width:100%">                            
                             <li class="nav-item active">
-                                <a data-toggle="tab" class="nav-link" href="#allRecords" ng-click="changeTab('allRecords')">All</a>
+                                <a rel="noopener" data-toggle="tab" class="nav-link" href="#allRecords" ng-click="changeTab('allRecords')">All</a>
                             </li>
                             <li class="nav-item">
-                                <a data-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">My Records</a>
+                                <a rel="noopener" data-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">My Records</a>
                             </li>
                             <li class="nav-item"style="padding-right: 25px;">
-                                <a data-toggle="tab" class="nav-link" href="#selectedRecords" ng-click="changeTab('selectedRecords');loadSelectedRecordDetails()">Selected <span ng-if="recordCount"></span></a>
+                                <a rel="noopener" data-toggle="tab" class="nav-link" href="#selectedRecords" ng-click="changeTab('selectedRecords');loadSelectedRecordDetails()">Selected <span ng-if="recordCount"></span></a>
                             </li>
                             <li  class="pull-right" style="max-width:40%">                                
                                  <form ng-submit="searchFreeText(search.keyword)" class="input-group">
@@ -126,21 +126,21 @@
                                     <tr>
                                         <th></th>
                                         <th></th>
-                                        <th style="white-space:nowrap;"><a href="#" class="col-title" ng-click="sortType = 'schema_s'; sortReverse = !sortReverse">Type</a>  
+                                        <th style="white-space:nowrap;"><a rel="noopener" href="#" class="col-title" ng-click="sortType = 'schema_s'; sortReverse = !sortReverse">Type</a>  
                                             <span ng-show="sortType == 'schema_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_title'; sortReverse = !sortReverse">Title</a> 
+                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_title'; sortReverse = !sortReverse">Title</a> 
                                             <span ng-show="sortType == 'rec_title'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_countryName'; sortReverse = !sortReverse">Owner</a>
+                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_countryName'; sortReverse = !sortReverse">Owner</a>
                                             <span ng-show="sortType == 'rec_countryName'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'uniqueIdentifier_s'; sortReverse = !sortReverse">Unique Identifier</a>
+                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'uniqueIdentifier_s'; sortReverse = !sortReverse">Unique Identifier</a>
                                             <span ng-show="sortType == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">Smmary</a>
+                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">Smmary</a>
                                             <span ng-show="sortType == 'rec_summary'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
-                                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">Meta Information</a>
+                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">Meta Information</a>
                                             <span ng-show="sortType == 'rec_summary'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
                                     </tr>
                                 </thead>
@@ -153,9 +153,9 @@
                                                 style="width: 16px; height: 16px;" />
                                         </td>
                                         <td class="type"> {{doc.schema_s | schemaShortName}}</td>
-                                        <td style="min-width:30%" class="title"> <a href="{{doc.url_ss}}" target="_new">{{doc.rec_title}}</a></td>
+                                        <td style="min-width:30%" class="title"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank">{{doc.rec_title}}</a></td>
                                         <td > {{doc.rec_countryName}}</td>
-                                        <td class="id color-blue"> <a href="{{doc.url_ss}}" target="_blank">{{doc.uniqueIdentifier_s}}</a></td>
+                                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank">{{doc.uniqueIdentifier_s}}</a></td>
                                         <td class="summary"> {{doc.rec_summary | limitTo:20 }}</td>
                                         <td class="meta"  data-title="doc.rec_summary"> 
                                             <span ng-repeat="meta in doc.rec_meta1">{{meta}}{{$last ? '':', '}}</span>
@@ -179,8 +179,8 @@
                 <div class="row">
                     <div class="col-xs-12">
 
-                        <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="allowNew.editingOn" ng-click="saveDocuments()">Select</a>
-                        <a translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="allowNew.editingOn" ng-click="clearSelectedDocuments()">Clear selected records</a>
+                        <a rel="noopener" translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="allowNew.editingOn" ng-click="saveDocuments()">Select</a>
+                        <a rel="noopener" translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="allowNew.editingOn" ng-click="clearSelectedDocuments()">Clear selected records</a>
 
                         <div class="dropdown  pull-left"  ng-hide="!allowNew.schema || allowNew.editingOn" style="margin-left:5px;">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -189,16 +189,16 @@
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                               <li ng-repeat="schema in allowNew.schemas">
-                                  <a href="#" ng-click="allowNew.editingOn=!allowNew.editingOn;loadEditDirective(schema)">
+                                  <a rel="noopener" href="#" ng-click="allowNew.editingOn=!allowNew.editingOn;loadEditDirective(schema)">
                                       <span ng-bind="schema|schemaName"></span>
                                   </a>
                                 </li>
                             </ul>
                         </div>
 
-                        <a translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-show="allowNew.editingOn"   ng-click="allowNew.editingOn=!allowNew.editingOn">Show Existing</a>
+                        <a rel="noopener" translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-show="allowNew.editingOn"   ng-click="allowNew.editingOn=!allowNew.editingOn">Show Existing</a>
                        
-                        <a translation-url  type="button" class="btn btn-warning bold" data-dismiss="modal" ng-click="closeDialog()">Cancel</a>
+                        <a rel="noopener" translation-url  type="button" class="btn btn-warning bold" data-dismiss="modal" ng-click="closeDialog()">Cancel</a>
                     </div>
                 </div>
             </div>
@@ -235,22 +235,22 @@
                     <tr>
                         <th></th>
                         <th></th>
-                        <th style="white-space:nowrap;"><a href="#" class="col-title" ng-click="sortType = 'schema_s'; sortReverse = !sortReverse">type</a>  
+                        <th style="white-space:nowrap;"><a rel="noopener" href="#" class="col-title" ng-click="sortType = 'schema_s'; sortReverse = !sortReverse">type</a>  
                             <span ng-show="sortType == 'schema_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_title'; sortReverse = !sortReverse">name</a> 
+                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_title'; sortReverse = !sortReverse">name</a> 
                             <span ng-show="sortType == 'rec_title'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_countryName'; sortReverse = !sortReverse">owner</a>
+                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_countryName'; sortReverse = !sortReverse">owner</a>
                             <span ng-show="sortType == 'rec_countryName'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'uniqueIdentifier_s'; sortReverse = !sortReverse">unique identifier</a>
+                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'uniqueIdentifier_s'; sortReverse = !sortReverse">unique identifier</a>
                             <span ng-show="sortType == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">summary</a>
+                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">summary</a>
                             <span ng-show="sortType == 'rec_summary'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">Meta Information</a>
+                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">Meta Information</a>
                             <span ng-show="sortType == 'rec_summary'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
                        
                     </tr>
@@ -263,9 +263,9 @@
                             <input ng-if="type==='radio'" type="radio" name="{{question}}_selected"   ng-change="onSelectAction(doc)" ng-model="doc.__checked" ng-value="true" />
                         </td>
                         <td class="type"> {{doc.schema_s | schemaShortName}}</td>
-                        <td style="min-width:30%" class="title"> <a href="{{doc.url_ss}}" target="_new">{{doc.rec_title}}</a></td>
+                        <td style="min-width:30%" class="title"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank">{{doc.rec_title}}</a></td>
                         <td > {{doc.rec_countryName}}</td>
-                        <td class="id color-blue"> <a href="{{doc.url_ss}}" target="_blank">{{doc.uniqueIdentifier_s}}</a></td>
+                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank">{{doc.uniqueIdentifier_s}}</a></td>
                         <td class="summary" data-title="doc.rec_summary"> {{doc.rec_summary | limitTo:20 }}</td>
                         <td class="meta"> 
                             <span ng-repeat="meta in doc.rec_meta1">{{meta}}{{$last ? '':', '}}</span>

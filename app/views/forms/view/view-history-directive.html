@@ -15,7 +15,7 @@
         <tbody ng-repeat="document in documents | orderBy:'updatedOn':true" style="font-size:12px;" >
             <tr>
                 <td style="white-space:nowrap;">
-                    <a translation-url  ng-href="/database/{{document.type | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
+                    <a rel="noopener" translation-url  ng-href="/database/{{document.type | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
                         <strong>{{document | uniqueID}}</strong>
                     </a>
                 </td>
@@ -47,14 +47,14 @@
                         <span ng-show="document.body.amendmentDescription">
 						  		<div ng-show="!more">
                                     <span ng-bind-html="document.body.amendmentDescription| lstring:locale | limitTo:200"></span>
-                                    <a translation-url  ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentDescription| lstring:locale).length > 200">
+                                    <a rel="noopener" translation-url  ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentDescription| lstring:locale).length > 200">
                                         <strong>...more</strong> 
                                     </a>
                                 </div>
                                 <div ng-show="more"> 
                                     <span ng-bind-html="document.body.amendmentDescription| lstring:locale">
                                     </span>
-                                    <a translation-url  ng-href="#" ng-click="more=!more"> <strong>...less</strong></a>
+                                    <a rel="noopener" translation-url  ng-href="#" ng-click="more=!more"> <strong>...less</strong></a>
                                 </div>
                         </span>
                     </div>

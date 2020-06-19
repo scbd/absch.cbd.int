@@ -9,7 +9,7 @@
 
         <div class="pull-right" style="padding-right:15px;position:relative;top:5px;"  ng-show="showDoc" >
                 <span style="color:#ddd" > | </span> &nbsp; 
-                <a translation-url class="bold"  style="position:relative;top:2px;color:#FFF;font-size:20px;cursor:pointer;z-index:99999999;width:100%;" ng-click="showDoc=false">
+                <a rel="noopener" translation-url class="bold"  style="position:relative;top:2px;color:#FFF;font-size:20px;cursor:pointer;z-index:99999999;width:100%;" ng-click="showDoc=false">
                     &times;</a>
             </div>
 
@@ -30,7 +30,7 @@
             </ul>
         </div>
         <div ng-if="showDoc" style="padding:5px 0px 10px 0px!important;margin:0 0 0 0!important;" class="easing">
-            <record-loader class="card card-3" document="document" show-details="false" hide-buttons="true" link-target="_new"></record-loader>
+            <record-loader class="card card-3" document="document" show-details="false" hide-buttons="true" link-target="_blank"></record-loader>
         </div>
     </div>
 </div>

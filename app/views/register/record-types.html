@@ -14,7 +14,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="s in ::recordTypesCtrl.schemas.national" >
                 <h3 style="font-size:auto">{{::s.title}}</h3>
                 <p style="min-height:100px">{{::s.description}}</p>
-                <a ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Submit</a>
+                <a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Submit</a>
             </div>
         </div>
         
@@ -28,7 +28,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="s in ::recordTypesCtrl.schemas.reference" >
                 <h3 style="font-size:auto">{{::s.title}}</h3>
                 <p style="min-height:100px">{{::s.description}}</p>
-                <a ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Submit</a>
+                <a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Submit</a>
             </div>
         </div>
     </div>

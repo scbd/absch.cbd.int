@@ -1,7 +1,7 @@
 ﻿<div>
     <ul class="pagination" style="margin-bottom:0px">        
         <li>
-            <a href="#" style="max-height:38px;">
+            <a rel="noopener" href="#" style="max-height:38px;">
                 <i class="fa fa-eye" aria-hidden="true"></i> View Type
                 <select ng-model="viewType" ng-change="viewTypeChange(viewType);">
                     <option ng-value="'default'">Default</option>
@@ -13,20 +13,20 @@
             </a>
         </li>        
         <li>
-            <a href ng-click="showSortDialog()">
+            <a rel="noopener" href ng-click="showSortDialog()">
                 <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Sort By
             </a>
         </li>     
         <li>
-            <a > <i class="fa fa-paper-plane" aria-hidden="true"></i> Send              
+            <a rel="noopener" > <i class="fa fa-paper-plane" aria-hidden="true"></i> Send              
             </a>
         </li>     
         <li>
-            <a > <i class="fa fa-print" aria-hidden="true"></i> Print
+            <a rel="noopener" > <i class="fa fa-print" aria-hidden="true"></i> Print
             </a>
         </li>   
         <li>
-            <a ><i class="fa fa-download" aria-hidden="true"></i> Export
+            <a rel="noopener" ><i class="fa fa-download" aria-hidden="true"></i> Export
             </a>
         </li>
     </ul>
@@ -53,8 +53,8 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" style="min-width: 100%;">
-                                    <li><a href="#" ng-click="selectField(field, 'asc')">Asc</a></li>
-                                    <li><a href="#" ng-click="selectField(field, 'desc')">Desc</a></li>
+                                    <li><a rel="noopener" href="#" ng-click="selectField(field, 'asc')">Asc</a></li>
+                                    <li><a rel="noopener" href="#" ng-click="selectField(field, 'desc')">Desc</a></li>
                                 </ul>
                             </div>
                         </li>

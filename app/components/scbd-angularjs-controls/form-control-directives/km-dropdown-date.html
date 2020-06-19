@@ -1,7 +1,7 @@
 ﻿<span>
 
 	<script type="text/ng-template"  id="select-tree-renderer.html">
-		<a ng-click="clicked(item)" href="">{{item.title||item.name | lstring:locale | truncate:120:'...'}}</a>
+		<a rel="noopener" ng-click="clicked(item)" href="">{{item.title||item.name | lstring:locale | truncate:120:'...'}}</a>
 		<i class="glyphicon glyphicon-ok" ng-show="item.selected" style="position:absolute;top:5px;left:3px;"></i>
 		<ul class="dropdown-inline-submenu">
 			<li ng:repeat="item in item.children" ng-include="'select-tree-renderer.html'" style="position:relative">
@@ -25,7 +25,7 @@
 
 <ul class="nav nav-pills">
   <li class="dropdown">
-    <a class="dropdown-toggle"
+    <a rel="noopener" class="dropdown-toggle"
        data-toggle="dropdown"
        href="#">
         Dropdown

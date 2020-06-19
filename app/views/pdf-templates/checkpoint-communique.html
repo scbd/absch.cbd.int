@@ -130,7 +130,7 @@
                             <div class="text">
                                 <ul class="list">
                                     <li ng-repeat="item in document.specimens">
-                                        <a ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+                                        <a rel="noopener" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
                                         <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                                     </li>
                                 </ul>
@@ -141,7 +141,7 @@
                             <div class="text">
                                 <ul class="list">
                                     <li ng-repeat="item in document.taxonomies">
-                                        <a ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+                                        <a rel="noopener" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
                                         <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                                     </li>
                                 </ul>
@@ -161,7 +161,7 @@
                             <div class="text">
                                 <ul class="list">
                                     <li ng-repeat="item in document.gisFiles">
-                                        <a ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+                                        <a rel="noopener" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
                                         <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
                                     </li>
                                 </ul>
@@ -246,10 +246,10 @@
                         <label>Attached documents</label>
                         <ul style="list-style-type: none;" class="text">
                             <li ng-repeat="item in document.informationDocuments">
-                                <strong><a ng-href="https://absch.cbd.int/{{item.url|encodeURI}}">{{item.name}}</strong>
+                                <strong><a rel="noopener" ng-href="https://absch.cbd.int/{{item.url|encodeURI}}">{{item.name}}</strong>
                             </li>
                             <li ng-repeat="item in document.relevantDocuments">
-                                <strong><a ng-href="https://absch.cbd.int/{{item.url|encodeURI}}">{{item.name}}</strong>
+                                <strong><a rel="noopener" ng-href="https://absch.cbd.int/{{item.url|encodeURI}}">{{item.name}}</strong>
                             </li>
                         </ul>
                     </div>
@@ -265,7 +265,7 @@
                             be addressed to the competent national authority issuing the permit or its equivalent. Additional information
                             about the permit or its equivalent may be available in the Access and Benefit-Sharing Clearing House
                             (
-                            <a href="https://absch.cbd.int/">https://absch.cbd.int/</a>).
+                            <a rel="noopener" href="https://absch.cbd.int/">https://absch.cbd.int/</a>).
                             <br>
                             <br> Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and
                             Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
@@ -277,7 +277,7 @@
                             <br/> Canada
                             <br/> Fax: +1 514 288-6588
                             <br/> Email:
-                            <a href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a>
+                            <a rel="noopener" href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a>
 
                         </td>
                     </tr>

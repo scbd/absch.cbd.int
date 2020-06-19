@@ -6,7 +6,7 @@
 	<div ng-if="!loading && !errorCode && !error">	
 		<div ng-if="organizationInfo.workingDocumentLock">
             <span class="label label-danger">The record is pending approval</span> | 
-            <a translation-url  ng-href="/register/{{organization.header.schema | urlSchemaShortName| encodeURIComponent}}/{{organization.header.identifier|encodeURIComponent}}/view" target="_blank">
+            <a rel="noopener" translation-url  ng-href="/register/{{organization.header.schema | urlSchemaShortName| encodeURIComponent}}/{{organization.header.identifier|encodeURIComponent}}/view" target="_blank">
                 <i class="fa fa-external-link-square" aria-hidden="true"></i> View Request
             </a>            
 		</div>
@@ -15,7 +15,7 @@
 				<span ng-bind="organization.name | lstring:locale"></span>
 				<span ng-show="organization.acronym" ng-bind="'(' + (organization.acronym | lstring:locale) + ')'"></span>
 			</b>&nbsp;	
-			<a translation-url  ng-href="/database/{{organization.header.schema | urlSchemaShortName|encodeURIComponent}}/{{organizationInfo | uniqueIDWithoutRevision|encodeURIComponent}}/{{organizationInfo.revision|encodeURIComponent}}" target="_blank">
+			<a rel="noopener" translation-url  ng-href="/database/{{organization.header.schema | urlSchemaShortName|encodeURIComponent}}/{{organizationInfo | uniqueIDWithoutRevision|encodeURIComponent}}/{{organizationInfo.revision|encodeURIComponent}}" target="_blank">
 				<i class="fa fa-external-link-square" aria-hidden="true"></i> {{organizationInfo | uniqueID}}
 			</a>
 			<span ng-if="organizationInfo.deletedOn">
@@ -41,10 +41,10 @@
 			Fax: <span ng-repeat="item in organization.faxes">{{item}}<span ng-show="!$last">, </span></span>
 		</div>
 		<div ng-show="organization.emails">
-			Emails: <span ng-repeat="item in organization.emails"><a translation-url  ng-href="mailto:{{item|encodeURIComponent}}">{{item}}</a><span ng-show="!$last">, </span></span>
+			Emails: <span ng-repeat="item in organization.emails"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}">{{item}}</a><span ng-show="!$last">, </span></span>
 		</div>
 		<div ng-show="organization.websites">
-			Websites: <span ng-repeat="item in organization.websites"><a translation-url  ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a><span ng-show="!$last">, </span></span>
+			Websites: <span ng-repeat="item in organization.websites"><a rel="noopener" translation-url  ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a><span ng-show="!$last">, </span></span>
 		</div>
 	</div>
 </div>

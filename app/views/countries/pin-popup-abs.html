@@ -27,9 +27,9 @@
             </div>
             <div class="small  {{(country.exceptionCountry.toLowerCase()=='gb'||country.code.toLowerCase()=='gb') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;padding:3px;">
                 The UK’s ratification of the Nagoya Protocol does not extend to the
-                <a ng-href="#"  class=" color-litegrey gb-territories" data-toggle="tooltip" data-placement="bottom" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Gibraltar; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands">14 Overseas Territories </a>
+                <a rel="noopener" ng-href="#"  class=" color-litegrey gb-territories" data-toggle="tooltip" data-placement="bottom" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Gibraltar; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands">14 Overseas Territories </a>
                 or
-                <a ng-href="#" class=" color-litegrey gb-territories" data-toggle="tooltip" data-placement="right" title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
+                <a rel="noopener" ng-href="#" class=" color-litegrey gb-territories" data-toggle="tooltip" data-placement="right" title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
             </div>
         </div>
     </div>
@@ -41,10 +41,10 @@
                     <span class="badge bg-black">{{schema.count}}</span>
                 </td>
                 <td>
-                    <a ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff">
+                    <a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff">
                         {{schema.title | lstring:locale}}
                     </a>
-                    <a ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search/nationalRecords"  style="color:#fff">
+                    <a rel="noopener" ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search/nationalRecords"  style="color:#fff">
                         {{schema.title | lstring:locale}}
                     </a>
                 </td>

@@ -76,13 +76,13 @@
                             <i class="fa fa-cog" aria-hidden="true"></i>
                         </button>
                         <ul class="dropdown-menu search-filter-settings" aria-labelledby="dropdownMenu1">                            
-                            <li><a href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true">
+                            <li><a rel="noopener" href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true">
                                 <i class="fa fa-eye" aria-hidden="true"></i> Temporarily disable</a></li>
-                            <li><a href="#" ng-if="filter.disabled" ng-click="filter.disabled=false">
+                            <li><a rel="noopener" href="#" ng-if="filter.disabled" ng-click="filter.disabled=false">
                                 <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a></li>
-                            <li><a href="#" ng-click="clearFilterOptions(schema)">
+                            <li><a rel="noopener" href="#" ng-click="clearFilterOptions(schema)">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i> Clear all filters</a></li>
-                            <li><a href="#">
+                            <li><a rel="noopener" href="#">
                                 <i class="fa fa-trash" aria-hidden="true"></i> Remove</a></li>
                         </ul>
                     </div>
@@ -100,15 +100,15 @@
                                 <i class="fa fa-cog" aria-hidden="true"></i>
                             </button>
                             <ul class="dropdown-menu search-filter-settings">
-                                <li><a href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true;recordSelected();">
+                                <li><a rel="noopener" href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true;recordSelected();">
                                     <i class="fa fa-eye" aria-hidden="true"></i> Temporarily disable</a></li>
-                                <li><a href="#" ng-if="filter.disabled" ng-click="filter.disabled=false;recordSelected();">
+                                <li><a rel="noopener" href="#" ng-if="filter.disabled" ng-click="filter.disabled=false;recordSelected();">
                                     <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a></li>
-                                <li><a href="#" ng-if="!filter.excludeResult" ng-click="filter.excludeResult=true;recordSelected();">
+                                <li><a rel="noopener" href="#" ng-if="!filter.excludeResult" ng-click="filter.excludeResult=true;recordSelected();">
                                     <i class="fa fa-minus-square-o" aria-hidden="true"></i> Exclude results</a></li>
-                                <li><a href="#" ng-if="filter.excludeResult" ng-click="filter.excludeResult=false;recordSelected();">
+                                <li><a rel="noopener" href="#" ng-if="filter.excludeResult" ng-click="filter.excludeResult=false;recordSelected();">
                                     <i class="fa fa-plus-square-o" aria-hidden="true"></i> Include results</a></li>
-                                <li><a href="#" ng-click="clearFilterOptions(schema, filter);filter.disabled=false;filter.excludeResult=false;">
+                                <li><a rel="noopener" href="#" ng-click="clearFilterOptions(schema, filter);filter.disabled=false;filter.excludeResult=false;">
                                     <i class="fa fa-times-circle" aria-hidden="true"></i> Clear filters</a></li>
                             </ul>
                         </div>

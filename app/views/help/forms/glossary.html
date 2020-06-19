@@ -14,7 +14,7 @@
                     <input type="text" ng-model="search" placeholder="search" class="form-control">
                 </md-list-item>
                 <md-list-item ng-repeat="term in glossarys|filter:search">
-                    <a translation-url  href="/help/glossary/{{term._id}}">
+                    <a rel="noopener" translation-url  href="/help/glossary/{{term._id}}">
                         {{term.title}}
                     </a>
                     <md-divider ng-if="!$last"></md-divider>
@@ -46,14 +46,14 @@
                     <div>
                         <!--<div style="padding-top:5px;font-size:20px;">
                             <span ng-repeat="letter in alphabet">
-                                <a translation-url  ng-href="#" ng-click="setCountryFilter(letter)" class="letter" ng-class="{'letter-active':countryFilter == letter}">{{letter}}</a>
+                                <a rel="noopener" translation-url  ng-href="#" ng-click="setCountryFilter(letter)" class="letter" ng-class="{'letter-active':countryFilter == letter}">{{letter}}</a>
                             </span>
                         </div>-->
 
                         <table class="table table-hover">
                             <tr ng-repeat="term in glossarys" id="{{replaceSpace(term.title)}}">
                                 <td width="25%">
-                                    <a translation-url  href="/help/glossary/{{term._id}}">
+                                    <a rel="noopener" translation-url  href="/help/glossary/{{term._id}}">
                                         {{term.title}}
                                     </a>
                                 </td>

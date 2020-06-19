@@ -16,7 +16,7 @@ style="max-width:90%">
                     <md-divider></md-divider>
                 </md-list-item>
                 <md-list-item ng-repeat="term in glossarys|filter:search|orderBy:'title'" ng-click="viewGlossary(term)">
-                    <!--<a translation-url  href="/help/glossary/{{term._id}}">-->
+                    <!--<a rel="noopener" translation-url  href="/help/glossary/{{term._id}}">-->
                         {{term.title}}
                     <!--</a>-->
                     <md-divider ng-if="!$last"></md-divider>
@@ -117,7 +117,7 @@ style="max-width:90%">
                                 <div class="col-xs-12">
                                     <md-list >
                                         <md-list-item ng-repeat="term in relatedFAQ">
-                                            <a translation-url  href="/help/faq/{{term._id}}">
+                                            <a rel="noopener" translation-url  href="/help/faq/{{term._id}}">
                                                 {{term.title}}
                                             </a>
                                             <md-divider ng-if="!$last"></md-divider>
@@ -134,7 +134,7 @@ style="max-width:90%">
 
                                         <md-chips ng-model="document.tags" readonly="true">
                                             <md-chip-template>
-                                                <a translation-url  href="/help/{{helptype.toLowerCase()}}/tags/{{$chip}}">
+                                                <a rel="noopener" translation-url  href="/help/{{helptype.toLowerCase()}}/tags/{{$chip}}">
                                                     {{$chip}}
                                                 </a>
                                             </md-chip-template>

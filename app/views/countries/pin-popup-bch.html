@@ -14,10 +14,10 @@
                     <span class="badge bg-black">{{schema.count}}</span>
                 </td>
                 <td>
-                    <a ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff">
+                    <a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff">
                         {{schema.title | lstring:locale}}
                     </a>
-                    <a ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search/nationalRecords"  style="color:#fff">
+                    <a rel="noopener" ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search/nationalRecords"  style="color:#fff">
                         {{schema.title | lstring:locale}}
                     </a>
                 </td>

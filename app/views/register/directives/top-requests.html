@@ -8,7 +8,7 @@
             <span class="badge" ng-class="{'color-white bg-red': isPA() }" style="position:relative;top:-2px;font-size:14px;">{{tasks.length}}</span>
         </span>
         <span class="pull-right hidden-xs" style="padding-right:5px">
-            <a translation-url style="color:#999;" href="{{viewAllUrl}}">
+            <a rel="noopener" translation-url style="color:#999;" href="{{viewAllUrl}}">
                 view all requests
             </a>
         </span>
@@ -38,7 +38,7 @@
             <div class="col-xs-4  hidden-xs">
                 <div style="text-transform: uppercase;font-weight: bold; font-size:12px; ">{{task.workflow.createdOn |
                     moment:'fromNow'}}</div>
-                <a style="color:#888; font-size: 12px;" href="mailto:{{task.workflow.createdBy_info.email}}">
+                <a rel="noopener" style="color:#888; font-size: 12px;" href="mailto:{{task.workflow.createdBy_info.email}}">
                     by {{task.workflow.createdBy_info.firstName}} {{task.workflow.createdBy_info.lastName}}
                     ({{task.workflow.createdBy_info.email}})
                 </a>

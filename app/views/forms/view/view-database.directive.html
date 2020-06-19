@@ -13,7 +13,7 @@
 		<div ng-show="document.government">
 			<label name="country">Country</label>
 			<div class="km-value">
-				<a ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
+				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
                 <span ng-party-status government="document.government" id="government"></span>
 			</div>
 		</div>
@@ -34,7 +34,7 @@
 		<div ng-show="document.website">
 			<label>URL of the website</label>
 			<div class="km-value">
-				<a translation-url  target="{{target}}" target="_new" ng-href="{{document.website.url|encodeURI}}">{{document.website.name||document.website.url}}</a>
+				<a rel="noopener" translation-url  target="{{target}}" target="_blank" ng-href="{{document.website.url|encodeURI}}">{{document.website.name||document.website.url}}</a>
 				<i ng-show="document.website.name">({{document.website.url}})</i>
 			</div>
 		</div>
@@ -42,7 +42,7 @@
 			<label>URL of the website</label>
 			<div class="km-value">
 				<div ng-repeat="site in document.websites">
-					<a translation-url  target="{{target}}" target="_new" ng-href="{{site.url|encodeURI}}">{{site.name||site.url}}</a>
+					<a rel="noopener" translation-url  target="{{target}}" target="_blank" ng-href="{{site.url|encodeURI}}">{{site.name||site.url}}</a>
 					<i ng-show="site.name">({{site.url}})</i>
 				</div>
 			</div>
@@ -60,7 +60,7 @@
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website address or attached documents</label>
 				<div class="km-value" ng-repeat="item in document.relevantDocuments">
-					<a translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 				</div>
 			</div>
 		</div>

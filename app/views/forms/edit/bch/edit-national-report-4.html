@@ -28,7 +28,7 @@
                         <div class="col-xs-12">
                             <ul class="pagination" id="nrTabs">
                                 <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
-                                    <a translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-class="{'disabled': !tab.render}" >
+                                    <a rel="noopener" translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-class="{'disabled': !tab.render}" >
                                         Question <span ng-bind="::tab.title"></span>
                                     </a>
                                 </li>
@@ -124,7 +124,7 @@
                         <div class="col-xs-12">
                             <ul class="pagination" id="nrTabs">
                                 <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
-                                    <a translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-class="{'disabled': !tab.render}">
+                                    <a rel="noopener" translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-class="{'disabled': !tab.render}">
                                         Question <span ng-bind="::tab.title"></span>
                                     </a>
                                 </li>

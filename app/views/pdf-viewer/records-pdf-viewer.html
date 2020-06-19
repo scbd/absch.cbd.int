@@ -32,13 +32,13 @@
                     <br> File Name : {{pdf.fileName|uppercase}}
                     <br>
                     <br>
-                    <a ng-href="{{pdf.src|encodeURIComponent}}" download="{{pdf.fileName|encodeURIComponent}}" class="btn btn-success" target="_blank">
+                    <a rel="noopener" ng-href="{{pdf.src|encodeURIComponent}}" download="{{pdf.fileName|encodeURIComponent}}" class="btn btn-success" target="_blank">
                         <i class="fa fa-download"></i> Download
                     </a>
                     <br>
                     <br> View in
                     <span ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']">
-                        <a ng-href="#" ng-click="loadLangPdf(lang)">{{lang}}</a> | </span>
+                        <a rel="noopener" ng-href="#" ng-click="loadLangPdf(lang)">{{lang}}</a> | </span>
                 </div>
             </div>
             <div class="col-md-10" style="padding:0px;border-right: 1px solid #ddd">

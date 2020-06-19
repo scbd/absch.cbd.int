@@ -101,7 +101,7 @@
                             <td>
                                 <b>{{u.firstName}} {{u.lastName}}</b>
                                 <br>
-                                <a translation-url  href="mailto:{{u.email}}">{{u.email}}</a>
+                                <a rel="noopener" translation-url  href="mailto:{{u.email}}">{{u.email}}</a>
                             </td>
                             <td>
                                 {{u.organization}}
@@ -112,7 +112,7 @@
                                 <br>
                                 </span>
 
-                                <a translation-url  href="#" style="font-size:75%" ng-click="u.showExtraRoles=!u.showExtraRoles" ng-show="(u.roles|filter:isNotContextRole).length">
+                                <a rel="noopener" translation-url  href="#" style="font-size:75%" ng-click="u.showExtraRoles=!u.showExtraRoles" ng-show="(u.roles|filter:isNotContextRole).length">
                                     <span ng-show="!u.showExtraRoles">Show additional roles <i class="fa fa-caret-down"></i></span>
                                     <span ng-show=" u.showExtraRoles">Hide additional roles <i class="fa fa-caret-up"></i></span>
                                 </a>
@@ -140,8 +140,8 @@
                         <tr ng-if="!!users">
                             <td colspan="3">
                                 {{(users | filter:defaultFilter | filter:searchText).length}} of {{users.length}} |
-                                <a translation-url  href="#" ng-show="!$parent.showAll" ng-click="$parent.showAll=true;$parent.searchText={}">Show more <i class="fa fa-caret-down"></i></a>
-                                <a translation-url  href="#" ng-show=" $parent.showAll" ng-click="$parent.showAll=false;$parent.searchText={}">Show less <i class="fa fa-caret-up"></i></a>
+                                <a rel="noopener" translation-url  href="#" ng-show="!$parent.showAll" ng-click="$parent.showAll=true;$parent.searchText={}">Show more <i class="fa fa-caret-down"></i></a>
+                                <a rel="noopener" translation-url  href="#" ng-show=" $parent.showAll" ng-click="$parent.showAll=false;$parent.searchText={}">Show less <i class="fa fa-caret-up"></i></a>
                             </td>
                             <td class="text-right">
                                 <button class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">Add Authorized User <i class="fa fa-plus-circle"></i></button>
