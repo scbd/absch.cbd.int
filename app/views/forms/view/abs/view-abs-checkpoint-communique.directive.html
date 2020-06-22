@@ -52,7 +52,7 @@
 		                <div ng-repeat="contact in emailList track by $index" class="">
 		                    <div class="col-xs-12">
 		                        <div class="km-value">
-		                            <div view-contact-reference ng-model="contact" locale="locale"></div>
+		                            <div view-default-reference ng-model="contact" locale="locale"></div>
 		                        </div>
 		                    </div>
 		                </div>
@@ -94,7 +94,7 @@
 					<div ng-show="document.entityWhoGrantedPIC">
 						<label>Person or entity who granted prior informed consent</label>
 						<div class="km-value">
-							<div view-contact-reference ng-model="document.entityWhoGrantedPIC" locale="locale"></div>
+							<div view-default-reference ng-model="document.entityWhoGrantedPIC" locale="locale"></div>
 						</div>
 					</div>
 					<div ng-show="document.subjectMatter">
@@ -156,7 +156,7 @@
 					<div ng-show="document.entityToWhomGrantedPIC">
 						<label>Person or entity to whom prior informed consent was granted</label>
 						<div class="km-value">
-							<div view-contact-reference ng-model="document.entityToWhomGrantedPIC" locale="locale"></div>
+							<div view-default-reference ng-model="document.entityToWhomGrantedPIC" locale="locale"></div>
 						</div>
 					</div>
 
@@ -181,7 +181,7 @@
 				<div ng-show="document.personsAtCheckpoint">
 					<label>Person or entity making information available to the checkpoint on the utilization of the genetic resource</label>
 					<div class="km-value" ng-repeat="user in document.personsAtCheckpoint">
-						<div view-contact-reference ng-model="user" locale="locale"></div>
+						<div view-default-reference ng-model="user" locale="locale"></div>
 					</div>
 				</div>
 				<div ng-show="document.dateCollected">

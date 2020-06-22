@@ -1,5 +1,5 @@
-define(['app', "text!views/forms/view/view-organization.directive.html", './view-contact-reference.directive',
-'views/directives/record-options', './view-organization-reference.directive'], function (app, template) {
+define(['app', "text!views/forms/view/view-organization.directive.html", './directives/view-default-reference.directive',
+'views/directives/record-options'], function (app, template) {
 
 app.directive("viewOrganization", [function () {
 	return {

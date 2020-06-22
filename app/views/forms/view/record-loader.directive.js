@@ -6,7 +6,6 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
     'views/directives/document-metadata-directive',
     'views/directives/party-status',
     'views/forms/view/directives/view-default-reference.directive',
-    'views/forms/view/directives/view-contact-reference.directive',
 	'services/search-service',
 	'views/directives/block-region-directive',
 	'views/directives/record-options','components/scbd-angularjs-services/services/locale',
@@ -55,7 +54,6 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 						absCheckpoint				: 'views/forms/view/abs/view-abs-checkpoint.directive',
 						absCheckpointCommunique		: 'views/forms/view/abs/view-abs-checkpoint-communique.directive',
 						absPermit					: 'views/forms/view/abs/view-abs-permit.directive',
-						authorityreference			: 'views/forms/view/abs/view-authority-reference.directive',
 						measure						: 'views/forms/view/abs/view-measure.directive',	
 						absNationalModelContractualClause	: 'views/forms/view/abs/view-abs-national-model-contractual-clause.directive',
 						absProcedure						: 'views/forms/view/abs/view-abs-procedure.directive',		
@@ -64,12 +62,10 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 						capacityBuildingResource	: 'views/forms/view/view-capacity-building-resource.directive',
 
 						contact						: 'views/forms/view/view-contact.directive',
-						contactreference			: 'views/forms/view/directives/view-contact-reference.directive',
 						authority					: 'views/forms/view/view-authority.directive',
 						supplementaryAuthority		: 'views/forms/view/view-supplementary-authority.directive',
 						database					: 'views/forms/view/view-database.directive',						
 						organization				: 'views/forms/view/view-organization.directive',
-						organizationreference		: 'views/forms/view/directives/view-organization-reference.directive',
 						resource					: 'views/forms/view/view-resource.directive',
 
 						focalPoint					: 'views/forms/view/scbd/view-focalpoint.directive',
@@ -283,7 +279,8 @@ define(['app', 'text!views/forms/view/record-loader.directive.html',
 					//==================================
 					$scope.canEdit = function () {
 
-						if ($scope.getUser() && !$scope.getUser().isAuthenticated)
+						var user = $scope.getUser();
+						if (!user || !user.isAuthenticated)
 							return false;
 
 						if (!$scope.internalDocumentInfo && $scope.internalDocument && $scope.internalDocument.info) {
