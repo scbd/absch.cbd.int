@@ -80,7 +80,7 @@
                     <div ng-repeat="contact in emailList">
                         <div class="col-xs-12">
                             <div class="text">
-                                <div view-contact-reference ng-model="contact" locale="locale" collapse="false"></div>
+                                <div view-default-reference ng-model="contact" locale="locale" collapse="false"></div>
                             </div>
                         </div>
                     </div>
@@ -176,14 +176,14 @@
                         <div class="col-xs-6">
                             <label>Person or entity who granted prior informed consent (PIC)</label>
                             <div class="text">
-                                <div view-contact-reference ng-model="document.entityWhoGrantedPIC" locale="locale" collapse="false"></div>
+                                <div view-default-reference ng-model="document.entityWhoGrantedPIC" locale="locale" collapse="false"></div>
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <label>Person or entity making information available to the checkpoint on the utilization
                                 of the genetic resource</label>
                             <div class="text">
-                                <div view-contact-reference ng-model="document.entityToWhomPICGranted" locale="locale" collapse="false"></div>
+                                <div view-default-reference ng-model="document.entityToWhomPICGranted" locale="locale" collapse="false"></div>
                             </div>
                         </div>
 
@@ -225,7 +225,7 @@
                     <div class="col-xs-12">
                         <div ng-repeat="user in document.personsAtCheckpoint" style="padding-left:0px;">
                             <div class="text">
-                                <div view-contact-reference ng-model="user" locale="locale" collapse="false"></div>
+                                <div view-default-reference ng-model="user" locale="locale" collapse="false"></div>
                             </div>
                         </div>
                     </div>

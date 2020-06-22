@@ -2144,7 +2144,7 @@ a.disabled{
     padding-left:5px;
     padding-right: 5px;;
 }
-em {
+.search-result-highlight em {
     background-color: yellow;
     font-weight: bold;
     color: black;

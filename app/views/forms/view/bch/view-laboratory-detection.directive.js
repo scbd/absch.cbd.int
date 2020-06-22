@@ -1,5 +1,5 @@
 define(['app', "text!views/forms/view/bch/view-laboratory-detection.directive.html", 	'views/directives/record-options',
-'views/forms/view/directives/view-organization-reference.directive', './view-lmo.directive'], function (app, template) {
+'views/forms/view/directives/view-default-reference.directive', './view-lmo.directive'], function (app, template) {
     
     app.directive("viewLaboratoryDetection", [function () {
         return {

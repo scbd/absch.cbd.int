@@ -58,7 +58,7 @@
 
 		<div ng-show="document.contacts">
 			<legend ng-if="document.contacts">Additional Contact Information</legend>
-			<view-contact-reference ng-repeat="contact in document.contacts" ng-model="contact" locale="locale" class="km-value"></view-contact-reference>
+			<view-default-reference ng-repeat="contact in document.contacts" ng-model="contact" locale="locale" class="km-value"></view-default-reference>
 		</div>
 
 		<div ng-show="document.policyBasisForCompetency || document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef">

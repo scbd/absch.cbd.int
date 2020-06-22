@@ -60,7 +60,7 @@
 			<div ng-show="document.absCNA">
 				<label>Issuing Authority (the authority responsible for issuing this permit)</label>
 				<div class="km-value">
-					<div view-contact-reference ng-model="document.absCNA" locale="locale"></div>
+					<div view-default-reference ng-model="document.absCNA" locale="locale"></div>
 				</div>
 			</div>
 			<div ng-show="document.referenceToNationalPermit || document.title ||
@@ -104,7 +104,7 @@
 					<label>The provider (the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation)</span>
 					</label>
 					<div class="km-value" ng-show="!document.providersConfidential" ng-repeat="provider in document.providers">
-						<div view-contact-reference ng-model="provider" locale="locale"></div>
+						<div view-default-reference ng-model="provider" locale="locale"></div>
 					</div>
 					<div ng-show="document.providersConfidential">
 						<div class="km-value km-pre confidential">Confidential information</div>
@@ -114,7 +114,7 @@
 				<div ng-show="document.entitiesToWhomPICGranted || document.entitiesToWhomPICGrantedConfidential">
 					<label>Person or entity to whom prior informed consent was granted</label>
 						<div class="km-value" ng-repeat="consent in document.entitiesToWhomPICGranted" ng-show="!document.entitiesToWhomPICGrantedConfidential">
-			                 <div view-contact-reference ng-model="consent" locale="locale"></div>
+			                 <div view-default-reference ng-model="consent" locale="locale"></div>
 						</div>
 						<div ng-show="document.entitiesToWhomPICGrantedConfidential">
 							<div class="km-value km-pre confidential">Confidential information</div>

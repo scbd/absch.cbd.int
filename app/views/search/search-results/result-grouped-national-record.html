@@ -29,7 +29,7 @@
             <span ng-if="doc.rec_summary.length > 500">...</span>
         </div>
 
-        <div ng-if="doc.highlight" class="help-block" >
+        <div ng-if="doc.highlight" class="search-result-highlight">
             <strong>Matched content </strong>:- 
             <span ng-repeat="highlight in doc.highlight track by $index" style="display: inline;padding-left:0px;">
                 <span ng-repeat="match in highlight track by $index">

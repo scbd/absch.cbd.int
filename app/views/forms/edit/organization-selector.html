@@ -6,7 +6,7 @@
                 <button type="button" class="btn btn-warning" ng-click="deleteOrganization($index, true)"><i class="fa fa-times"></i>
                 </button>
             </div>
-            <view-organization-reference ng-model='contact' locale="edition.contact.header.languages"></view-organization-reference>
+            <view-default-reference ng-model='contact' locale="edition.contact.header.languages"></view-default-reference>
         </div>
     </div>
 
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="col-xs-11"> 
                                     <span class="label label-warning" ng-if="contact._state_s=='workflow'">Pending Approval</span>
-                                    <view-organization-reference ng-model='contact' locale="edition.contact.header.languagesen"></view-organization-reference>
+                                    <view-default-reference ng-model='contact' locale="edition.contact.header.languagesen"></view-default-reference>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
