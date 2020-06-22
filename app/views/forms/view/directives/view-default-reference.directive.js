@@ -1,4 +1,4 @@
-define(['app','underscore', "text!views/forms/view/directives/view-default-reference.directive.html", 
+define(['app','lodash', "text!views/forms/view/directives/view-default-reference.directive.html", 
 'components/scbd-angularjs-services/services/main'], function (app, _, template) {
 
 app.directive("viewDefaultReference", ["IStorage", '$timeout', function (storage, $timeout) {
@@ -18,10 +18,22 @@ app.directive("viewDefaultReference", ["IStorage", '$timeout', function (storage
 		},
 		link:function($scope, $element, $attr){
 
+			$scope.self = $scope;
 			$scope.hideSchema = $attr.hideSchema=='true'
+
+			$scope.options = {
+				hideSchema 					: $attr.hideSchema=='true',
+				isNFP 	   					: false,
+				isCNA 	   					: false,
+				isContactTypePerson   		: false,
+				isContactTypeOrganization 	: false,
+				showContact					: $attr.collapse==='true' ? false:true
+			}
+				
 			$scope.$watch('model', function(newValue, oldValue){
 		        if(newValue){
-					$scope.refreshRecord($scope.model);
+
+					$scope.refreshRecord($scope.model.identifier||$scope.model);
 		        }
 		    });
 
@@ -30,16 +42,27 @@ app.directive("viewDefaultReference", ["IStorage", '$timeout', function (storage
 				loadReferenceDocument(identifier)
 				.then(function(data) {
 					$scope.document = data;
-					if(_.isEmpty($scope.document.workingDocumentSummary))
-						$scope.document.workingDocumentSummary = undefined;
-					if(_.isEmpty($scope.document.summary))
-						$scope.document.summary = undefined;
+					
+					if($scope.document){
+						$scope.options.isNFP 	   					= $scope.document.schema_s == 'focalPoint';
+						$scope.options.isCNA 	   					= isCNA(data);
+						$scope.options.isContactTypePerson   		= isContactTypePerson(data) && !$scope.isNFP;
+						$scope.options.isContactTypeOrganization 	= !$scope.isContactTypePerson && !$scope.isNFP;
 
-					if(data.workingDocumentLock){
-						$timeout(function(){$element.find("[data-toggle='tooltip']").tooltip({trigger: 'hover'})}, 100);
+						if(_.isEmpty($scope.document.workingDocumentSummary))
+							$scope.document.workingDocumentSummary = undefined;
+						if(_.isEmpty($scope.document.summary))
+							$scope.document.summary = undefined;
+
+						if(data.workingDocumentLock){
+							$timeout(function(){$element.find("[data-toggle='tooltip']").tooltip({trigger: 'hover'})}, 100);
+						}
+						if($scope.onDocumentLoadFn)
+							$scope.onDocumentLoadFn({document:data});
+
+						if(data.type && !_.includes(["organization", "contact"  , "authority"], data.type))
+							$scope.showSummary = true;
 					}
-					if($scope.onDocumentLoadFn)
-						$scope.onDocumentLoadFn({document:data})
 				})
 				.finally(function(){$scope.loading = false;});
 			}
@@ -58,7 +81,7 @@ app.directive("viewDefaultReference", ["IStorage", '$timeout', function (storage
 			}
 
 			function loadDraftDocument(identifier, count){
-				return storage.drafts.get(identifier, { info : true})
+				return storage.drafts.get(identifier, { info : true, body:true})
 						.then(function(result){
 							$scope.errorCode = undefined;
 							var document = result.data;
@@ -67,8 +90,8 @@ app.directive("viewDefaultReference", ["IStorage", '$timeout', function (storage
 								return $timeout(function(){return loadDraftDocument(identifier, count++);}, 2000);
 							}
 							else{
-								document.body = {
-									header : { schema: result.data.type}
+								if(!document.body){
+									document.body = { header : { schema: result.data.type} }
 								}
 								return document;
 							}
@@ -79,6 +102,30 @@ app.directive("viewDefaultReference", ["IStorage", '$timeout', function (storage
 								$scope.error = true;
 						});
 			}
+
+
+			function isCNA(doc) {
+				if(!doc)
+					return false;
+				if(!doc.type && doc.header){
+					if(doc.header.schema==='authority') {
+						doc.type = "CNA";
+						return true;
+					}
+				}
+
+				return false;
+			};
+
+			function isContactTypePerson(doc) {
+				if(!doc)
+					return false;
+				if(doc.type==="person")
+					return true;
+				if(!doc.type && (doc.firstName))
+					return true; //default behaviour
+				return false;
+			};
 
 		 }
 	};
