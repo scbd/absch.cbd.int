@@ -2145,7 +2145,7 @@ a.disabled{
     padding-right: 5px;;
 }
 .search-result-highlight em {
-    background-color: yellow;
+    /* background-color: yellow; */
     font-weight: bold;
     color: black;
 }

@@ -1,5 +1,4 @@
 define(['app', 'text!./ircc-directive.html', 'css!/app/css/pdf-ircc.css',
-'views/forms/view/directives/view-contact-reference.directive',
 'views/forms/view/directives/view-default-reference.directive'], function (app, template) {
 
     app.directive("pdfIrccPartialView", [function() {
