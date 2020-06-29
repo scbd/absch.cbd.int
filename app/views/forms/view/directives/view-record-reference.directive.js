@@ -1,9 +1,9 @@
-define(['app','lodash', "text!views/forms/view/directives/view-default-reference.directive.html", 
+define(['app','lodash', "text!views/forms/view/directives/view-record-reference.directive.html", 
 'components/scbd-angularjs-services/services/main'], function (app, _, template) {
 
-app.directive("viewDefaultReference", ["IStorage", '$timeout', function (storage, $timeout) {
+app.directive("viewRecordReference", ["IStorage", '$timeout', function (storage, $timeout) {
 	return {
-		restrict: "EAC",
+		restrict: "EA",
 		template: template ,
 		replace: true,
 		transclude: {
