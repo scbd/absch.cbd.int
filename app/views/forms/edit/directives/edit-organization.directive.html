@@ -133,14 +133,14 @@
                         <legend>Detailed information</legend>
                         <div class="row">
                             <div class="col-md-8">
-                                <div class="km-control-group" name="contact_organizationType" required caption="Type of organization">
-                                    <div km-select name="contact_organizationType" required ng-model="document.organizationType"
+                                <div class="km-control-group" name="organizationType" required caption="Type of organization">
+                                    <div km-select name="organizationType" required ng-model="document.organizationType"
                                         items="options.organizationTypes()"></div>
                                 </div>
                             </div>
                             <div class="col-md-4" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-                                <div class="km-control-group" name="contact_organizationTypeName" required caption="Other organization type">
-                                    <div km-textbox-ml name="contact_organizationTypeName" required ng-model="document.organizationType.customValue"
+                                <div class="km-control-group" name="organizationTypeName" required caption="Other organization type">
+                                    <div km-textbox-ml name="organizationTypeName" required ng-model="document.organizationType.customValue"
                                         placeholder="example: SCBD" locales="document.header.languages"></div>
                                 </div>
                             </div>
