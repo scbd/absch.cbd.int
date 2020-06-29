@@ -625,7 +625,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var tagQueries          = {};
                         var tabQuery            = buildTabQuery();
                         var schemaQuery         = buildSchemaQuery();                        
-                        var schemaSubQuery      = buildSchemaSubQuery();                        
+                        var schemaSubQuery      = buildSchemaSubQuery()||{};                        
                         var keywordQuery        = buildFieldQuery('keyword',  'all_terms_ss')
                         var countryQuery        = _.compact([buildFieldQuery('country',  'government_s'), buildFieldQuery('country',   'country_s')]).join(' OR ');
                         var partyStatusQuery    = buildPartyStatusQuery();
@@ -635,6 +635,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         var dateQuery           = buildDateQuery();
 
+                        if(schemaSubQuery.freeTextQuery){ //append subquery freeText query to general query to benefit highlighting
+                            textQuery = solr.andOr(_.compact([textQuery, schemaSubQuery.freeTextQuery]), 'AND')
+                        }
                         var queries             = _.compact([dateQuery, textQuery, rawQuery]);
                         var query               = '';
                         if(queries.length)
@@ -642,7 +645,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         // console.log(query)
                         if(schemaQuery != '(*:*)')
                             tagQueries.schema      =  schemaQuery;
-                        tagQueries.schemaSub   =  schemaSubQuery;
+                        tagQueries.version     =  'NOT version_s:*'
+                        tagQueries.schemaSub   =  schemaSubQuery.query;
                         tagQueries.schemaType  =  tabQuery;
                         tagQueries.partyStatus =  partyStatusQuery;
                         tagQueries.keywords    =  keywordQuery;
@@ -682,8 +686,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         // loop and add or conditions on schemas when sub filters exists else just make schema array query
                         if(!_.isEmpty(leftMenuFilters)){
                             var schemaQueries = []
+                            var freeTexQueries = []    
                             _.each(leftMenuFilters, function(filters, key){
-                                var subQueries = []                                
+                                var subQueries = [];                            
                                 subQueries.push('schema_s:'+ key)
                                 _.each(filters, function(filter){
                                     var subQuery;
@@ -704,7 +709,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                                 return _.trim(filter.title)
                                             });
                                             subQuery = '(' + filter.field + ':' + ids.join(' AND ' + filter.field + ':') + ')';
-                                            
+                                            freeTexQueries.push(subQuery)
                                         }
                                         else{
                                             var field = filter.field;
@@ -731,7 +736,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 }
                             })
                             if(schemaQueries.length){
-                                return solr.andOr(schemaQueries, 'OR')
+                                return {
+                                    query          : solr.andOr(schemaQueries,  'OR'),
+                                    freeTextQuery  : solr.andOr(freeTexQueries, 'OR')
+                                }
                             }
                         }
                     }
