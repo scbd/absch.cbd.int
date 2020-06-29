@@ -475,6 +475,7 @@
 		{
 			"type": "thesaurus",
 			"term": "services",
+			"otherTerm":true,
 			"title": "Services and activities performed",
 			"field": "services_ss"
 		},
@@ -488,6 +489,7 @@
 		{
 			"type": "thesaurus",
 			"term": "detectionMethods",
+			"otherTerm":true,
 			"title": "Type of detection/ identification method(s) available for use in the laboratory",
 			"field": "detectionMethods_ss"
 		},
