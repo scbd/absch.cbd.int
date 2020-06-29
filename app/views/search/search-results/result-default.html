@@ -19,46 +19,47 @@
                 <div class="title bold" style="font-size:108%;" >{{doc.rec_title}}
                     <span ng-if="doc.publicationYear_i">({{doc.publicationYear_i}})</span>
                 </div>
-                <!-- TODO: need to remove description field from index and use summary -->
-                <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.summary_t">{{doc.summary_t|limitTo:500}}
-                    <span ng-if="doc.summary_t.length > 500">...</span>
-                </div>
-                <!-- TODO: record summary copied descriptioninto rec_summary which needs to be replaced by summary_t in frontend and backend -->
-                <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="!doc.summary_t && doc.rec_summary">{{doc.rec_summary|limitTo:500}}
-                    <span ng-if="doc.rec_summary.length > 500">...</span>
-                </div>
+                <div ng-if="!doc.highlight">
+                    <!-- TODO: need to remove description field from index and use summary -->
+                    <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.summary_t">{{doc.summary_t|limitTo:500}}
+                        <span ng-if="doc.summary_t.length > 500">...</span>
+                    </div>
+                    <!-- TODO: record summary copied description into rec_summary which needs to be replaced by summary_t in frontend and backend -->
+                    <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="!doc.summary_t && doc.rec_summary">{{doc.rec_summary|limitTo:500}}
+                        <span ng-if="doc.rec_summary.length > 500">...</span>
+                    </div>
 
-                <div ng-if="doc.schema_s=='capacityBuildingInitiative'">
-                     <span ng-if="doc.implementingAgencies_EN_txt">
-                        <strong>Implemented by</strong>  
-                            <span ng-repeat="item in doc.implementingAgencies_EN_txt">{{item}}
-                                <span ng-if="!$last">|</span>
-                            </span>
-                    </span> 
-                    <span ng-if="doc.executingAgencies_EN_txt">
-                        <strong>executed by</strong>
-                            <span ng-repeat="item in doc.executingAgencies_EN_txt">{{item}}
-                                <span ng-if="!$last">|</span>
-                            </span>
-                    </span>
-                     <span ng-if="doc.collaboratingPartners_EN_txt">
-                       <strong> with the collaboration of </strong> 
-                            <span ng-repeat="item in doc.collaboratingPartners_EN_txt">{{item}}
-                                <span ng-if="!$last">|</span>
-                            </span>
-                    </span>
+                    <div ng-if="doc.schema_s=='capacityBuildingInitiative'">
+                        <span ng-if="doc.implementingAgencies_EN_txt">
+                            <strong>Implemented by</strong>  
+                                <span ng-repeat="item in doc.implementingAgencies_EN_txt">{{item}}
+                                    <span ng-if="!$last">|</span>
+                                </span>
+                        </span> 
+                        <span ng-if="doc.executingAgencies_EN_txt">
+                            <strong>executed by</strong>
+                                <span ng-repeat="item in doc.executingAgencies_EN_txt">{{item}}
+                                    <span ng-if="!$last">|</span>
+                                </span>
+                        </span>
+                        <span ng-if="doc.collaboratingPartners_EN_txt">
+                        <strong> with the collaboration of </strong> 
+                                <span ng-repeat="item in doc.collaboratingPartners_EN_txt">{{item}}
+                                    <span ng-if="!$last">|</span>
+                                </span>
+                        </span>
+                    </div>
+                    <div ng-if="doc.schema_s=='resource'">
+                        <span ng-if="doc.authors_t">Author(s): {{doc.authors_t}}</span>
+                        <span ng-if="doc.organizations_EN_txt">
+                            <strong>Organizations </strong>  
+                                <span ng-repeat="item in doc.organizations_EN_txt">{{item}}
+                                    <span ng-if="!$last">|</span>
+                                </span>
+                        </span> 
+                    </div> 
                 </div>
-                 <div ng-if="doc.schema_s=='resource'">
-                     <span ng-if="doc.authors_t">Author(s): {{doc.authors_t}}</span>
-                     <span ng-if="doc.organizations_EN_txt">
-                        <strong>Organizations </strong>  
-                            <span ng-repeat="item in doc.organizations_EN_txt">{{item}}
-                                <span ng-if="!$last">|</span>
-                            </span>
-                    </span> 
-                </div> 
-                <div ng-if="doc.highlight">
-                    <strong>Matched content </strong>:- 
+                <div ng-if="doc.highlight" class="search-result-highlight">                    
                     <span ng-repeat="highlight in doc.highlight track by $index" class="help-block" style="display: inline;padding-left:0px;">
                         <span ng-repeat="match in highlight track by $index">
                             <span ng-bind-html="match"></span>
