@@ -248,72 +248,6 @@
 
 					};
 
-					//==================================
-					//
-					//==================================
-					$scope.getUser = function () {
-
-						if (!$scope.user)
-							$q.when(authentication.getUser(), function (user) { $scope.user = user; });
-
-						return $scope.user
-					};
-
-					//==================================
-					//
-					//==================================
-					$scope.edit = function () {
-						if (!$scope.canEdit())
-							throw "Cannot edit form";
-
-						var schema = $scope.internalDocumentInfo.type;
-						var identifier = $scope.internalDocumentInfo.identifier;
-						$timeout(function () {
-							$location.path("/register/" + $filter("urlSchemaShortName")(schema) + "/" + identifier + '/edit');
-						}, 1);
-
-					}
-
-					//==================================
-					//
-					//==================================
-					$scope.canEdit = function () {
-
-						var user = $scope.getUser();
-						if (!user || !user.isAuthenticated)
-							return false;
-
-						if (!$scope.internalDocumentInfo && $scope.internalDocument && $scope.internalDocument.info) {
-							$scope.internalDocumentInfo = $scope.internalDocument.info;
-						}
-
-						if (!$scope.internalDocumentInfo)
-							return false;
-						if ($scope.internalCanEdit === undefined) {
-
-							$scope.internalCanEdit = null; // avoid recall => null !== undefined
-
-							var hasDraft = !!$scope.internalDocumentInfo.workingDocumentCreatedOn;
-							var identifier = $scope.internalDocumentInfo.identifier;
-							var schema = $scope.internalDocumentInfo.type;
-
-							var qCanEdit = hasDraft
-								? storage.drafts.security.canUpdate(identifier, schema)  // has draft
-								: storage.drafts.security.canCreate(identifier, schema); // has no draft
-
-							qCanEdit.then(function (isAllowed) {
-
-								$scope.internalCanEdit = isAllowed || false;
-
-							}).then(null, function (error) {
-
-								$scope.internalCanEdit = false;
-							});
-						}
-
-						return $scope.internalCanEdit === true;
-					};
-
 					$scope.loadRevision = function (val) {
 
 						if ($scope.revisionNo != val) {
@@ -364,6 +298,48 @@
 						if($scope.showDifferenceButton && $scope.showDifferenceOn)
 							loadViewDirective($scope.internalDocumentInfo.type).then(compareWithPrev);
 					}
+
+					//==================================
+					//
+					//==================================
+					function canEdit() {
+
+						return authentication.getUser()
+						.then(function(user){
+							if (!user || !user.isAuthenticated)
+								return false;
+
+							if (!$scope.internalDocumentInfo && $scope.internalDocument && $scope.internalDocument.info) {
+								$scope.internalDocumentInfo = $scope.internalDocument.info;
+							}
+
+							if (!$scope.internalDocumentInfo)
+								return false;
+							if ($scope.internalCanEdit === undefined) {
+
+								$scope.internalCanEdit = null; // avoid recall => null !== undefined
+
+								var hasDraft = !!$scope.internalDocumentInfo.workingDocumentCreatedOn;
+								var identifier = $scope.internalDocumentInfo.identifier;
+								var schema = $scope.internalDocumentInfo.type;
+
+								var qCanEdit = hasDraft
+									? storage.drafts.security.canUpdate(identifier, schema)  // has draft
+									: storage.drafts.security.canCreate(identifier, schema); // has no draft
+
+								qCanEdit.then(function (isAllowed) {
+
+									$scope.internalCanEdit = isAllowed || false;
+
+								}).then(null, function (error) {
+
+									$scope.internalCanEdit = false;
+								});
+							}
+
+							return $scope.internalCanEdit === true;
+						})
+					};
 
 					function compareWithPrev(){
 						//timeout so that the directive is rendered.
@@ -416,7 +392,7 @@
 									directiveHtml 	= dirInfo.directiveHtml || directiveHtml;
 								}
 								$element.find(divSelector).empty().append($compile(directiveHtml)($scope));
-								$timeout(function(){$scope.canEdit()}, 1000) //verify if user can edit to show edit button
+								$timeout(function(){canEdit()}, 1000) //verify if user can edit to show edit button
 								defer.resolve('')
 							});
 						});
