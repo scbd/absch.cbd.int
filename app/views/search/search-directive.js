@@ -424,7 +424,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         promises.push(thesaurusService.getDomainTerms('subjectAreas'              ).then(function(keywords){loopKeywords(keywords, 'subjectAreas'              )}));
                         promises.push(thesaurusService.getDomainTerms('cnaJurisdictions'          ).then(function(keywords){loopKeywords(keywords, 'cnaJurisdictions'          )}));
                         promises.push(thesaurusService.getDomainTerms('riskAssessmentScope'       ).then(function(keywords){loopKeywords(keywords, 'riskAssessmentScope'       )}));
-                        promises.push(thesaurusService.getDomainTerms('organizationTypes'         ).then(function(keywords){loopKeywords(keywords, 'organizationTypes'         )}));
                         promises.push(thesaurusService.getDomainTerms('expertiseArea'             ).then(function(keywords){loopKeywords(keywords, 'expertiseArea'             )}));
                         promises.push(thesaurusService.getDomainTerms('resourceTypes'             ).then(function(keywords){loopKeywords(keywords, 'resourceTypes'             )}));
                         promises.push(thesaurusService.getDomainTerms('languages'                 ).then(function(keywords){loopKeywords(keywords, 'languages'                 )}));
@@ -436,6 +435,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         promises.push(thesaurusService.getDomainTerms('techniqueUsed'             ).then(function(keywords){loopKeywords(keywords, 'techniqueUsed'             )}));
                         promises.push(thesaurusService.getDomainTerms('decisionLMOFFPSubject'     ).then(function(keywords){loopKeywords(keywords, 'decisionLMOFFPSubject'     )}));
                         promises.push(thesaurusService.getDomainTerms('decisionResults'           ).then(function(keywords){loopKeywords(keywords, 'decisionResults'           )}));
+                        promises.push(thesaurusService.getDomainTerms('organizationTypes'         ).then(function(types){ return _.filter(types, function(type){return type.identifier!='B3699A74-EF2E-467A-A82F-EF2149A2EFC5'}); })
+                                                      .then(function(keywords){loopKeywords(keywords, 'organizationTypes'         )}));
                         
                         
                         
@@ -738,7 +739,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             if(schemaQueries.length){
                                 return {
                                     query          : solr.andOr(schemaQueries,  'OR'),
-                                    freeTextQuery  : solr.andOr(freeTexQueries, 'OR')
+                                    freeTextQuery  : freeTexQueries.length ? solr.andOr(freeTexQueries, 'OR') : undefined
                                 }
                             }
                         }

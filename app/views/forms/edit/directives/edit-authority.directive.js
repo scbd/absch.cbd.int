@@ -29,7 +29,8 @@ function (app, _, template) {
                 
 
                 _.extend($scope.options, {
-                    organizationTypes: function() { return thesaurusService.getDomainTerms('organizationTypes') },
+                    organizationTypes: function() { return thesaurusService.getDomainTerms('organizationTypes')
+                        .then(function(types){ return _.filter(types, function(type){return type.identifier!='B3699A74-EF2E-467A-A82F-EF2149A2EFC5'}); }) },
                     cbdSubjects: function() {return thesaurusService.getDomainTerms('cbdSubjects')},
                     jurisdictions: function() {return thesaurusService.getDomainTerms('cnaJurisdictions', {other:true})},
                     absGeneticResourceTypes: function() {return thesaurusService.getDomainTerms('absGeneticResourceTypes')},

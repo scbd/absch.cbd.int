@@ -29,6 +29,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, thesau
             _.extend($scope.options, {            
                 organizationTypes : function() {
                     return thesaurusService.getDomainTerms('organizationTypes', {other:true, otherType:'lstring'})
+                    .then(function(types){ return _.filter(types, function(type){return type.identifier!='B3699A74-EF2E-467A-A82F-EF2149A2EFC5'}); }) 
                 }
             });           
             
@@ -56,6 +57,8 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, thesau
                 if(!$scope.isNationalUser)
                     document.government = undefined;
 
+                if(document.organizationType && document.organizationType.identifier=='B3699A74-EF2E-467A-A82F-EF2149A2EFC5')
+                    document.organizationType = undefined;
                 if(document.type == "organization"){
                     document.firstName = undefined; 
                     document.middleName = undefined;

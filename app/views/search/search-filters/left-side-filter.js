@@ -57,6 +57,13 @@
                                         if(otherTerm == undefined)
                                             otherTerm = true;
                                         dataSource = thesaurusService.getDomainTerms(filter.term, {other:otherTerm, narrowerOf: filter.narrowerOf})
+                                                        .then(function(terms){ 
+                                                            if(filter.without)
+                                                                return _.filter(terms, function(type){return type.identifier!='B3699A74-EF2E-467A-A82F-EF2149A2EFC5'}); 
+                                                            
+                                                            return terms;
+                                                        })
+                                            
                                     }
                                     else if (filter.type == 'solr') {
                                         dataSource = runSolrQuery(filter.query);
