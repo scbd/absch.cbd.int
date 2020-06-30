@@ -653,7 +653,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         tagQueries.keywords    =  keywordQuery;
                         tagQueries.government  =  countryQuery;
                         tagQueries.region      =  regionQuery;
-                        console.log(tagQueries)
                         //special query for Contact as only records which have reference contact are searchable.
                         tagQueries.contact     =  '(*:* NOT schema_s:contact) OR (schema_s:contact AND (refReferenceRecords_ss:* OR refNationalRecords_ss:*))';
                        
