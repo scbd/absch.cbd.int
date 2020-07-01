@@ -23,7 +23,7 @@
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >						
-						<view-default-reference ng-model='item' locale="locale"></view-default-reference>
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
 					</li>
 				</ul>
 			</div>
@@ -71,7 +71,7 @@
 				<div class="km-value">
 					<ul class="list">
 						<li ng-repeat="item in document.amendedDecisions">
-							<view-default-reference ng-model='item.identifier' locale="locale"></view-default-reference>
+							<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
 						</li>
 					</ul>						
 				</div>
@@ -84,7 +84,7 @@
 			</div>
 			<div>
 				<label>This decision has been amended by following decision</label>
-				<view-default-reference ng-model="document.header.identifier"></view-default-reference>
+				<view-record-reference ng-model="document.header.identifier"></view-record-reference>
 			</div>
 		</div>
 
@@ -133,7 +133,7 @@
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.exporters">
-						<view-default-reference ng-model='item' locale="locale"></view-default-reference>
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
 					</li>
 				</ul>
 			</div>
@@ -143,7 +143,7 @@
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.importers">
-						<view-default-reference ng-model='item' locale="locale"></view-default-reference>
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
 					</li>
 				</ul>
 			</div>
@@ -226,7 +226,7 @@
 			<div  class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.modifiedOrganisms">
-						<view-default-reference ng-model="item.identifier"></view-default-reference>
+						<view-record-reference ng-model="item.identifier"></view-record-reference>
 					</li>
 				</ul>
 			</div>
@@ -236,7 +236,7 @@
 			<div  class="km-value">
 				<ul>
 					<li ng-repeat="item in document.riskAssessments">
-						<view-default-reference ng-model="item.identifier"></view-default-reference>
+						<view-record-reference ng-model="item.identifier"></view-record-reference>
 					</li>
 				</ul>
 			</div>

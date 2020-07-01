@@ -12,13 +12,13 @@
 		<div ng-if="document.organization">
 			<legend>Laboratory name and coordinates</legend>
 			<div class="km-value">
-				<div view-default-reference ng-model="document.organization" locale="locale"></div>
+				<div view-record-reference ng-model="document.organization" locale="locale"></div>
 			</div>
 		</div>
 		<div ng-if="document.relatedOrganization">
 			<legend>Related Organization</legend>
 			<div class="km-value">
-				<div view-default-reference ng-model="document.relatedOrganization" locale="locale"></div>
+				<div view-record-reference ng-model="document.relatedOrganization" locale="locale"></div>
 			</div>
 		</div>
 		<div ng-if="document.services">
@@ -77,7 +77,7 @@
 				<table class="table table-stripped">
 					<tr ng-repeat="item in document.detectableGenes">
 						<td>
-							<view-default-reference ng-model="item.identifier" locale="locale" target="target" ></view-default-reference>
+							<view-record-reference ng-model="item.identifier" locale="locale" target="target" ></view-record-reference>
 						</td>
 					</tr>
 				</table>				
