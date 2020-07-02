@@ -424,7 +424,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         promises.push(thesaurusService.getDomainTerms('subjectAreas'              ).then(function(keywords){loopKeywords(keywords, 'subjectAreas'              )}));
                         promises.push(thesaurusService.getDomainTerms('cnaJurisdictions'          ).then(function(keywords){loopKeywords(keywords, 'cnaJurisdictions'          )}));
                         promises.push(thesaurusService.getDomainTerms('riskAssessmentScope'       ).then(function(keywords){loopKeywords(keywords, 'riskAssessmentScope'       )}));
-                        promises.push(thesaurusService.getDomainTerms('organizationTypes'         ).then(function(keywords){loopKeywords(keywords, 'organizationTypes'         )}));
                         promises.push(thesaurusService.getDomainTerms('expertiseArea'             ).then(function(keywords){loopKeywords(keywords, 'expertiseArea'             )}));
                         promises.push(thesaurusService.getDomainTerms('resourceTypes'             ).then(function(keywords){loopKeywords(keywords, 'resourceTypes'             )}));
                         promises.push(thesaurusService.getDomainTerms('languages'                 ).then(function(keywords){loopKeywords(keywords, 'languages'                 )}));
@@ -436,6 +435,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         promises.push(thesaurusService.getDomainTerms('techniqueUsed'             ).then(function(keywords){loopKeywords(keywords, 'techniqueUsed'             )}));
                         promises.push(thesaurusService.getDomainTerms('decisionLMOFFPSubject'     ).then(function(keywords){loopKeywords(keywords, 'decisionLMOFFPSubject'     )}));
                         promises.push(thesaurusService.getDomainTerms('decisionResults'           ).then(function(keywords){loopKeywords(keywords, 'decisionResults'           )}));
+                        promises.push(thesaurusService.getDomainTerms('organizationTypes'         ).then(function(types){ return _.filter(types, function(type){return type.identifier!='B3699A74-EF2E-467A-A82F-EF2149A2EFC5'}); })
+                                                      .then(function(keywords){loopKeywords(keywords, 'organizationTypes'         )}));
                         
                         
                         
@@ -625,7 +626,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var tagQueries          = {};
                         var tabQuery            = buildTabQuery();
                         var schemaQuery         = buildSchemaQuery();                        
-                        var schemaSubQuery      = buildSchemaSubQuery();                        
+                        var schemaSubQuery      = buildSchemaSubQuery()||{};                        
                         var keywordQuery        = buildFieldQuery('keyword',  'all_terms_ss')
                         var countryQuery        = _.compact([buildFieldQuery('country',  'government_s'), buildFieldQuery('country',   'country_s')]).join(' OR ');
                         var partyStatusQuery    = buildPartyStatusQuery();
@@ -635,6 +636,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         var dateQuery           = buildDateQuery();
 
+                        if(schemaSubQuery.freeTextQuery){ //append subquery freeText query to general query to benefit highlighting
+                            textQuery = solr.andOr(_.compact([textQuery, schemaSubQuery.freeTextQuery]), 'AND')
+                        }
                         var queries             = _.compact([dateQuery, textQuery, rawQuery]);
                         var query               = '';
                         if(queries.length)
@@ -642,13 +646,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         // console.log(query)
                         if(schemaQuery != '(*:*)')
                             tagQueries.schema      =  schemaQuery;
-                        tagQueries.schemaSub   =  schemaSubQuery;
+                        tagQueries.version     =  'NOT version_s:*'
+                        tagQueries.schemaSub   =  schemaSubQuery.query;
                         tagQueries.schemaType  =  tabQuery;
                         tagQueries.partyStatus =  partyStatusQuery;
                         tagQueries.keywords    =  keywordQuery;
                         tagQueries.government  =  countryQuery;
                         tagQueries.region      =  regionQuery;
-                        console.log(tagQueries)
                         //special query for Contact as only records which have reference contact are searchable.
                         tagQueries.contact     =  '(*:* NOT schema_s:contact) OR (schema_s:contact AND (refReferenceRecords_ss:* OR refNationalRecords_ss:*))';
                        
@@ -682,8 +686,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         // loop and add or conditions on schemas when sub filters exists else just make schema array query
                         if(!_.isEmpty(leftMenuFilters)){
                             var schemaQueries = []
+                            var freeTexQueries = []    
                             _.each(leftMenuFilters, function(filters, key){
-                                var subQueries = []                                
+                                var subQueries = [];                            
                                 subQueries.push('schema_s:'+ key)
                                 _.each(filters, function(filter){
                                     var subQuery;
@@ -704,7 +709,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                                 return _.trim(filter.title)
                                             });
                                             subQuery = '(' + filter.field + ':' + ids.join(' AND ' + filter.field + ':') + ')';
-                                            
+                                            freeTexQueries.push(subQuery)
                                         }
                                         else{
                                             var field = filter.field;
@@ -731,7 +736,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 }
                             })
                             if(schemaQueries.length){
-                                return solr.andOr(schemaQueries, 'OR')
+                                return {
+                                    query          : solr.andOr(schemaQueries,  'OR'),
+                                    freeTextQuery  : freeTexQueries.length ? solr.andOr(freeTexQueries, 'OR') : undefined
+                                }
                             }
                         }
                     }

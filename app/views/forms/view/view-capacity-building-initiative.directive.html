@@ -61,7 +61,7 @@
 						<div class="km-value">
 							<ul class="list">
 								<li ng-repeat="item in document.capacityBuildingType.broaderProjects">
-									<div view-default-reference ng-model="item.identifier" locale="locale"></div>
+									<div view-record-reference ng-model="item.identifier" locale="locale"></div>
 								</li>
 							</ul>
 						</div>
@@ -103,21 +103,21 @@
 			<div ng-show="document.isImplementedByAgencies && document.implementingAgencies">
 			  	<label>Implementing agency(ies) or organization(s)</label>
 				<div class="km-value" ng-repeat="contact in document.implementingAgencies">
-					<div view-default-reference ng-model="contact" locale="locale"></div>
+					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
 			</div>
 
 			<div ng-show="document.isImplementedByAgencies && document.executingAgencies">
 			  	<label>Executing agency(ies) or organization(s)</label>
 				<div class="km-value" ng-repeat="contact in document.executingAgencies">
-					<div view-default-reference ng-model="contact" locale="locale"></div>
+					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
 			</div>
 
 			<div ng-show="document.collaboratingPartners && document.collaboratingPartners">
 				<label>Collaborating partner(s)</label>
 				<div class="km-value" ng-repeat="contact in document.collaboratingPartners">
-					<div view-default-reference ng-model="contact" locale="locale"></div>
+					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
 			</div>
 
@@ -126,7 +126,7 @@
 		<div ng-show="document.contacts">
 			<label>Contact person(s)</label>
 			<div class="km-value" ng-repeat="contact in document.contacts">
-				<div view-default-reference ng-model="contact" locale="locale"></div>
+				<div view-record-reference ng-model="contact" locale="locale"></div>
 			</div>
 		</div>
 
@@ -177,14 +177,14 @@
 		<div ng-show="document.coreFundingSources">
 			<label>Core funding-source(s)</label>
 			<div class="km-value" ng-repeat="contact in document.coreFundingSources">
-				<div view-default-reference ng-model="contact" locale="locale"></div>
+				<div view-record-reference ng-model="contact" locale="locale"></div>
 			</div>
 		</div>
 
 		<div ng-show="document.coFinancingSources">
 			<label>Co-financing source(s)</label>
 			<div class="km-value" ng-repeat="contact in document.coFinancingSources">
-				<div view-default-reference ng-model="contact" locale="locale"></div>
+				<div view-record-reference ng-model="contact" locale="locale"></div>
 			</div>
 		</div>
 

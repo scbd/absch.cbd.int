@@ -130,7 +130,7 @@
 			<div class="km-value">
 				<ul>
 					<li ng-repeat="item in document.linkedMeasures">
-						<div view-default-reference ng-model="item.identifier" locale="locale"></div>
+						<div view-record-reference ng-model="item.identifier" locale="locale"></div>
 					</li>
 				</ul>
 			</div>
@@ -145,7 +145,7 @@
 				<div class="km-value" compare-val>
 					<ul>
 						<li ng-repeat="item in document.amendedMeasures">
-							<div view-default-reference ng-model="item.identifier" locale="locale"></div>
+							<div view-record-reference ng-model="item.identifier" locale="locale"></div>
 						</li>
 					</ul>
 				</div>
@@ -160,7 +160,7 @@
 		<div ng-show="document.authorities ">
 			<legend>Regulatory contact information</legend>
 			<div ng-repeat="item in document.authorities">
-				<div view-default-reference ng-model="item" locale="locale" class="km-value"></div>
+				<div view-record-reference ng-model="item" locale="locale" class="km-value"></div>
 			</div>
 		</div>
 
@@ -170,7 +170,7 @@
 			<div class="km-value" compare-val>
 				<ul>
 					<li ng-repeat="item in document.measureAmendedBy">
-						<div view-default-reference ng-model="item.identifier_s" locale="locale"></div>
+						<div view-record-reference ng-model="item.identifier_s" locale="locale"></div>
 					</li>
 				</ul>
 			</div>
@@ -182,7 +182,7 @@
 				<label>This measure is related to:</label>
 				<ul>
 					<li ng-repeat="item in document.linkedMeasures">
-						<div view-default-reference ng-model="item.identifier" locale="locale"></div>
+						<div view-record-reference ng-model="item.identifier" locale="locale"></div>
 					</li>
 				</ul>
 			</div>

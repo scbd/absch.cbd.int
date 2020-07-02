@@ -177,9 +177,10 @@
 		},
 		{
 			"type": "thesaurus",
-			"term": "organizationTypes",
+			"term": "organizationTypes_ss",
 			"title": "Type of Organization",
-			"field": ""
+			"field": "",
+			"without":["B3699A74-EF2E-467A-A82F-EF2149A2EFC5"]
 		},
 		{
 			"type": "thesaurus",
@@ -463,7 +464,8 @@
 			"type": "thesaurus",
 			"term": "organizationTypes",
 			"title": "Type of Organization",
-			"field": "organizationType_s"
+			"field": "organizationTypes_ss",
+			"without":["B3699A74-EF2E-467A-A82F-EF2149A2EFC5"]
 		}
 	],
 	"laboratoryDetection": [
@@ -475,6 +477,7 @@
 		{
 			"type": "thesaurus",
 			"term": "services",
+			"otherTerm":true,
 			"title": "Services and activities performed",
 			"field": "services_ss"
 		},
@@ -488,6 +491,7 @@
 		{
 			"type": "thesaurus",
 			"term": "detectionMethods",
+			"otherTerm":true,
 			"title": "Type of detection/ identification method(s) available for use in the laboratory",
 			"field": "detectionMethods_ss"
 		},

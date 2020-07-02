@@ -43,9 +43,9 @@
                                 <i class="fa fa-times"></i></a>
                         </td>
                         <td style="margin-bottom:20px;">
-                            <div ng-if="isContact(doc) || isAuthority(doc) || isFocalPoint(doc)" view-default-reference ng-model="doc" 
+                            <div ng-if="isContact(doc) || isAuthority(doc) || isFocalPoint(doc)" view-record-reference ng-model="doc" 
                                 locale="locale" class="km-value" wait-for-workflow="{{runningWorklfows[doc.identifier] ? 'true':'false'}}"></div>
-                            <div ng-if="!isContact(doc) && !isAuthority(doc) && !isFocalPoint(doc)" view-default-reference ng-model="doc.identifier" 
+                            <div ng-if="!isContact(doc) && !isAuthority(doc) && !isFocalPoint(doc)" view-record-reference ng-model="doc.identifier" 
                                 locale="locale" wait-for-workflow="{{runningWorklfows[doc.identifier] ? 'true':'false'}}"></div>
                         </td>
                     </tr>
@@ -55,9 +55,9 @@
                                 <i class="fa fa-times"></i></a>
                         </td>
                         <td style="margin-bottom:20px;">
-                            <div ng-if="isContact(model) || isAuthority(model) || isFocalPoint(model)" view-default-reference ng-model="model" 
+                            <div ng-if="isContact(model) || isAuthority(model) || isFocalPoint(model)" view-record-reference ng-model="model" 
                                 locale="locale" class="km-value"  wait-for-workflow="{{runningWorklfows[model.identifier] ? 'true':'false'}}"></div>
-                            <div ng-if="!isContact(model) && !isAuthority(model) && !isFocalPoint(model)" view-default-reference ng-model="model.identifier" 
+                            <div ng-if="!isContact(model) && !isAuthority(model) && !isFocalPoint(model)" view-record-reference ng-model="model.identifier" 
                                 locale="locale"  wait-for-workflow="{{runningWorklfows[model.identifier] ? 'true':'false'}}"></div>
                         </td>
                     </tr>

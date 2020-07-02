@@ -1,4 +1,4 @@
-﻿define(['app',"text!./edit-organization.directive.html", 'lodash', 'views/directives/workflow-arrow-buttons', 
+define(['app',"text!./edit-organization.directive.html", 'lodash', 'views/directives/workflow-arrow-buttons', 
 "views/forms/view/view-organization.directive", 'services/role-service',
 'components/scbd-angularjs-services/services/locale', 'views/forms/edit/editFormUtility'],
 function (app, template, _) {
@@ -25,7 +25,8 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
             $controller('editController', { $scope: $scope });
 
             _.extend($scope.options, {            
-				organizationTypes: function() { return thesaurusService.getDomainTerms('organizationTypes', {other:true}) },
+                organizationTypes: function() { return thesaurusService.getDomainTerms('organizationTypes', {other:true})
+                    .then(function(types){ return _.filter(types, function(type){return type.identifier!='B3699A74-EF2E-467A-A82F-EF2149A2EFC5'}); }) },
                 cpbThematicAreas   : function() { return thesaurusService.getDomainTerms('cbdSubjects') },
                 geographicRegions  : function() { return thesaurusService.getDomainTerms('regions', {other:true}) }
             });           
@@ -49,6 +50,9 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
                     document.areasOfWork = _($scope.areasOfWork).pluck('value').compact().value();
                 if(_.isEmpty(document.areasOfWork))
                     document.areasOfWork = undefined;
+                    
+                if(document.organizationType && document.organizationType.identifier=='B3699A74-EF2E-467A-A82F-EF2149A2EFC5')
+                    document.organizationType = undefined;
 
                 return $scope.sanitizeDocument(document);
             };
