@@ -4,8 +4,8 @@ define(['app',"text!views/forms/edit/document-selector.html",
 'components/scbd-angularjs-controls/form-control-directives/pagination','ngDialog'
 ], function (app, template, _) { // jshint ignore:line
 
-app.directive("documentSelector", ["$timeout",'$rootScope', "$filter", "$q", "searchService", "appConfigService", "IStorage", 'ngDialog', 'commonjs','$compile',
-function ($timeout, $rootScope, $filter, $q, searchService, appConfigService, IStorage, ngDialog, commonjs, $compile) {
+app.directive("documentSelector", ["$timeout",'locale', "$filter", "$q", "searchService", "appConfigService", "IStorage", 'ngDialog', 'commonjs','$compile',
+function ($timeout, locale, $filter, $q, searchService, appConfigService, IStorage, ngDialog, commonjs, $compile) {
 
 	return {
 		restrict   : "EA",
@@ -284,12 +284,16 @@ function ($timeout, $rootScope, $filter, $q, searchService, appConfigService, IS
                     fieldQueries.push(myRecordsQuery)
                 }
 
-                options.freeTextQuery = options.freeTextQuery||'*:*';
+                var query = '*:*';
+                
+                if(options.freeTextQuery)
+                    query = 'text_'+(locale||'en').toUpperCase()+'_txt:' + options.freeTextQuery;
+
                 var queryParameters = {
-                    fieldQuery: fieldQueries,
-                    'query'    : options.freeTextQuery,
-                    'currentPage' : $scope.searchResult.currentPage-1,
-                    'rowsPerPage': $scope.searchResult.rowsPerPage                    
+                    fieldQuery      : fieldQueries,
+                    'query'         : query,
+                    'currentPage'   : $scope.searchResult.currentPage-1,
+                    'rowsPerPage'   : $scope.searchResult.rowsPerPage                    
                 };
                 if(!options.freeTextQuery && !options.sort)
                     queryParameters.sort = 'updatedDate_dt desc';
