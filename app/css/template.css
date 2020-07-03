@@ -1723,10 +1723,10 @@ div.recordDefault:hover {
     color: #666!important;
     text-transform: uppercase;
 }
-#Record ul {
+/* #Record ul {
     margin: 0;
     padding: 0;
-}
+} */
 #Record tr {
     background-color: transparent;
 }
