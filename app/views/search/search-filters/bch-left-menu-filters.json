@@ -42,11 +42,11 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
-				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
+				"fl": "identifier:identifier_s,title:title_s",
+				"q": "schema_s:modifiedOrganism"
 			},
-			"title": "Unique Identifier",
-			"field": "uniqueIdentification_s"
+			"title": "LMO(s) detectable by the laboratory",
+			"field": "modifiedOrganisms_ss"
 		},
 		{
 			"type": "thesaurus",
@@ -216,13 +216,13 @@
 			"field": ""
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
-				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
+				"fl": "identifier:identifier_s,title:title_s",
+				"q": "schema_s:modifiedOrganism"
 			},
-			"title": "Unique Identifier",
-			"field": "uniqueIdentification_s"
+			"title": "LMO(s) detectable by the laboratory",
+			"field": "modifiedOrganisms_ss"
 		},
 		{
 			"type": "thesaurus",
@@ -369,13 +369,13 @@
 			"relatedField":"scopes_REL_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
-				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
+				"fl": "identifier:identifier_s,title:title_s",
+				"q": "schema_s:modifiedOrganism"
 			},
-			"title": "Unique Identifier",
-			"field": "uniqueIdentification_s"
+			"title": "LMO(s) detectable by the laboratory",
+			"field": "modifiedOrganisms_ss"
 		},
 		{
 			"type": "thesaurus",
