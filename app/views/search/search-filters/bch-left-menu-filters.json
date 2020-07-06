@@ -45,7 +45,7 @@
 				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
-			"title": "Living modified organism",
+			"title": "LMO(s) detectable by the laboratory",
 			"field": "modifiedOrganisms_ss"
 		},
 		{
@@ -222,17 +222,8 @@
 				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
-			"title": "Living modified organism",
+			"title": "LMO(s) detectable by the laboratory",
 			"field": "modifiedOrganisms_ss"
-		},
-		{
-			"type": "solr",
-			"query": {
-				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
-				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
-			},
-			"title": "Unique Identifier",
-			"field": "uniqueIdentification_s"
 		},
 		{
 			"type": "thesaurus",
@@ -384,17 +375,8 @@
 				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
-			"title": "Living modified organism",
+			"title": "LMO(s) detectable by the laboratory",
 			"field": "modifiedOrganisms_ss"
-		},
-		{
-			"type": "solr",
-			"query": {
-				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
-				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
-			},
-			"title": "Unique Identifier",
-			"field": "uniqueIdentification_s"
 		},
 		{
 			"type": "thesaurus",
