@@ -587,6 +587,12 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             var resultQuery;
                             if(($scope.searchResult.sortFields||[]).length > 0)
                                 sortFields = $scope.searchResult.sortFields.join(', ');
+                            
+                            if(queryOptions.highlight){ 
+                                //if highlight is enabled that means there is freetext, if the sort is by only lastUpdated use relevance
+                                if(sortFields == 'updatedDate_dt desc')
+                                    sortFields   = ['relevance asc'];
+                            }
 
                             var viewType = $scope.searchResult.viewType;
                             if(viewType=='default' && $scope.searchResult.currentTab == 'allRecords')
