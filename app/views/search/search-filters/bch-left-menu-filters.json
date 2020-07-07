@@ -45,7 +45,7 @@
 				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
-			"title": "LMO(s) detectable by the laboratory",
+			"title": "Living modified organism",
 			"field": "modifiedOrganisms_ss"
 		},
 		{
@@ -222,7 +222,7 @@
 				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
-			"title": "LMO(s) detectable by the laboratory",
+			"title": "Living modified organism",
 			"field": "modifiedOrganisms_ss"
 		},
 		{
@@ -375,7 +375,7 @@
 				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
-			"title": "LMO(s) detectable by the laboratory",
+			"title": "Living modified organism",
 			"field": "modifiedOrganisms_ss"
 		},
 		{
