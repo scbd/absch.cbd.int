@@ -135,10 +135,18 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
 							$scope.selectedDocuments = _.map(results, function(result){
                                                             return result.data || {};
                                                         });
-                            var selectedDocuments = _.map($scope.model, function(d){return removeRevisonNumber(d.identifier)});
-                            $scope.selectedRawDocuments = _.filter($scope.rawDocuments.docs, function(doc){
+                            var selectedDocuments = _.map($scope.model, function(d){return removeRevisionNumber(d.identifier)});
+                            var selectedRawDocuments = _.filter($scope.rawDocuments.docs, function(doc){
                                 return _.contains(selectedDocuments, doc.identifier_s);
                             });
+                            //possible that the existing raw doc is not in rawDocuments.doc since it might be from difference page/search query just append
+                            _.each($scope.selectedRawDocuments, function(doc){
+                                var identifier =  removeRevisionNumber(doc.identifier_s||doc.identifier);
+                                var rawDocument = _.find(selectedRawDocuments, function(d){return removeRevisionNumber(d.identifier||d.identifier_s)==identifier})
+                                if(rawDocument)
+                                    doc = _.extend(doc, rawDocument)
+                            })
+                            // $scope.selectedRawDocuments = _.union(selectedRawDocuments||[], missingDocs||[]);
                                                         
 					});
 
@@ -160,10 +168,10 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
 					return false;
 
 				if($scope.type == 'radio')
-					return removeRevisonNumber($scope.model.identifier) === id
+					return removeRevisionNumber($scope.model.identifier) === id
 
 				return  _.find($scope.model, function (mod) {
-		                    return removeRevisonNumber(mod.identifier) === id
+		                    return removeRevisionNumber(mod.identifier) === id
 		                });
 
 			};
@@ -218,12 +226,12 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
 
                 if($scope.selectedDocuments){
                     $scope.selectedDocuments =  _.filter($scope.selectedDocuments, function (doc) {
-                        if(doc.header.identifier !== removeRevisonNumber(removeId) ){
+                        if(doc.header.identifier !== removeRevisionNumber(removeId) ){
                         return doc;
                         }
                     });
                     $scope.selectedRawDocuments =  _.filter($scope.selectedRawDocuments, function (doc) {
-                        if(doc.identifier_s !== removeRevisonNumber(removeId) ){
+                        if(doc.identifier_s !== removeRevisionNumber(removeId) ){
                         return doc;
                         }
                     });
@@ -231,7 +239,7 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
 			   if($scope.type != 'radio')
 	               $scope.model =  _.filter($scope.model, function (doc) {
 	                    if((doc.identifier !== removeId && removeId.indexOf('@')>=0) || 
-                           (removeId.indexOf('@')<0 && removeRevisonNumber(doc.identifier) !== removeRevisonNumber(removeId))){
+                           (removeId.indexOf('@')<0 && removeRevisionNumber(doc.identifier) !== removeRevisionNumber(removeId))){
 	                     return doc;
 	                    }
 	                });
@@ -311,7 +319,7 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
                             .map(function(doc){ return doc.header && doc.header.identifier || doc.identifier || doc.identifier_s }).value();
    
                         _.each(selectedRecords, function(identifier){
-                            var newDocument = _.find($scope.rawDocuments.docs, {identifier_s:removeRevisonNumber(identifier)});
+                            var newDocument = _.find($scope.rawDocuments.docs, {identifier_s:removeRevisionNumber(identifier)});
                             if(newDocument)
                                 newDocument.__checked = true
                         })
@@ -403,9 +411,9 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
 
                 var identifiers = [];
                 if($scope.type == "checkbox")
-                    identifiers = _.map($scope.model, function(item){return removeRevisonNumber(item.identifier)});
+                    identifiers = _.map($scope.model, function(item){return removeRevisionNumber(item.identifier)});
                 else
-                    identifiers = [removeRevisonNumber($scope.model.identifier)];
+                    identifiers = [removeRevisionNumber($scope.model.identifier)];
                 
                 var queryParameters = {
                     'query'    : 'identifier_s:(' + identifiers.join(' ') +')',
@@ -468,12 +476,12 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
 
 			$scope.isContact = function(document){
 				return document && _.some($scope.selectedDocuments, function(doc){
-						return (doc.identifier_s||doc.header.identifier)==removeRevisonNumber(document.identifier) && (doc.schema_s||(document.header||{}).schema) == "contact"
+						return (doc.identifier_s||doc.header.identifier)==removeRevisionNumber(document.identifier) && (doc.schema_s||(document.header||{}).schema) == "contact"
 				});
 			}
 			$scope.isAuthority = function(document){
 				return document && _.some($scope.selectedDocuments, function(doc){
-						return (doc.identifier_s||doc.header.identifier)==removeRevisonNumber(document.identifier) && (doc.schema_s||(document.header||{}).schema) == "authority"
+						return (doc.identifier_s||doc.header.identifier)==removeRevisionNumber(document.identifier) && (doc.schema_s||(document.header||{}).schema) == "authority"
 				});
 			}
 
@@ -483,7 +491,7 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
 
 			$scope.isMeasure = function(document){
 				return document && _.some($scope.selectedDocuments, function(doc){
-						return (doc.identifier_s||doc.header.identifier)==removeRevisonNumber(document.identifier) && (doc.schema_s||(document.header||{}).schema) == "measure"
+						return (doc.identifier_s||doc.header.identifier)==removeRevisionNumber(document.identifier) && (doc.schema_s||(document.header||{}).schema) == "measure"
 				});
 			}
 
@@ -530,7 +538,7 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
                 }, 300); 
             }
 
-			function removeRevisonNumber(identifier){
+			function removeRevisionNumber(identifier){
                 
                 if(identifier && identifier.indexOf('@')>=0)
 				    return identifier.substr(0, identifier.indexOf('@'))
