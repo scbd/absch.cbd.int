@@ -3,8 +3,9 @@ define(['require', 'text!./country-map.html', 'app', 'lodash',  'libs/ammap3/amm
 'shim!libs/ammap3/ammap/themes/light[libs/ammap3/ammap/ammap]',
 'js/common', 'services/search-service', 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css',
 'components/scbd-angularjs-services/services/locale'], 
-function(require, template, app, _) {
+function(require, template, app, _, ammap, worldEUHigh) {
   'use strict';
+
 
   app.directive('countryMap', ['$timeout', function($timeout) {
     return {
@@ -35,7 +36,7 @@ function(require, template, app, _) {
             "projection": "equirectangular",
             "zoomDuration": 0.1,
             "responsive": {
-            "enabled": true
+              "enabled": true
             },
             "dataProvider": {
               "map": "worldEUHigh",
@@ -65,6 +66,7 @@ function(require, template, app, _) {
           };
         var lmoDecisions;
         var countries         = {};
+        var prevCountryColor  = {clicked:{}, mouseOver:{}};
         // var lmoDecisions;
         var latlong           = {};
         $scope.isBCH          = realm.is('BCH');
@@ -128,11 +130,11 @@ function(require, template, app, _) {
         $scope.options = {lmo:'all'};
         $scope.self = $scope;
 
-        if($scope.zoomTo)
-            mapOptions.dataProvider.linkToObject = $scope.zoomTo;
+        // if($scope.zoomTo)
+        //     mapOptions.dataProvider.linkToObject = $scope.zoomTo;
 
         var map = AmCharts.makeChart( "chartdiv", mapOptions );
-
+        
           // add events to recalculate map position when the map is moved or zoomed
           // map.addListener( "positionChanged", updateCustomMarkers );
 
@@ -151,29 +153,62 @@ function(require, template, app, _) {
 
             return $q.when(commonjs.getCountries()).then(function(lcountries) {                  
 
-                        _.map(lcountries, function(country){
-                          
-                          countries[country.code] = country;                            
-                          changeAreaColor(country);
-                          if(!$scope.zoomTo){
-                            if(_.invert(exceptionRegionMapping)[country.code])
-                              addExceptionRegionsImage(country)
-                          }
-                        });
-                        addImageData({name : {en : 'Western Sahara'}, code:'EH'})
-                        //change for Taiwan, set party color as China
-                        var twCountry = getMapObject('TW'); 
-                        twCountry.colorReal = twCountry.baseSettings.color = "#5F4586";
+                _.map(lcountries, function(country){
+                  
+                  countries[country.code] = country;                            
+                  changeAreaColor(country);
+                  if(!$scope.zoomTo){
+                    if(_.invert(exceptionRegionMapping)[country.code])
+                      addExceptionRegionsImage(country)
+                  }
+                  var mapObject = getMapObject(country.code);
+                  if(mapObject){
+                    mapObject.title = country.name[locale]
+                  }
+                });
+                addImageData({name : {en : 'Western Sahara'}, code:'EH'})
+                //change for Taiwan, set party color as China
+                var twCountry = getMapObject('TW'); 
+                twCountry.colorReal = twCountry.baseSettings.color = "#5F4586";
 
-                        map.validateData();
-                        map.addListener("clickMapObject", showCountryDetails);
-                        // map.addListener("click", closePopovers);
-                        if($routeParams.code){
-                          showCountryDetails({mapObject: { id: $routeParams.code}});
-                        }
-                        else{
-                            showCountryDetails({mapObject: {}});
-                        }
+                map.validateData();
+                map.addListener("homeButtonClicked", function(){
+                  if(!$routeParams.code){
+                    $scope.currentCountry = null;
+                    showCountryDetails({mapObject: {}});
+                  }
+                })
+                map.addListener("clickMapObject", function(evt){
+
+                  if($scope.zoomTo){
+                    var url = '/countries/'+(exceptionRegionMapping[evt.mapObject.id]||evt.mapObject.id);
+                    $scope.$apply(function(){$location.url(url)});
+                  }
+                  else
+                    showCountryDetails(evt)
+                });
+                // map.addListener("click", closePopovers);
+                map.addListener( "rollOverMapObject", function(a,b,c){
+                  // if($scope.currentCountry && $scope.currentCountry.code == a.mapObject.id)
+                  //   return;
+                  dynamicColor(a.mapObject.id, a.mapObject.rollOverColorReal, 'mouseOver')
+                } );
+                map.addListener( "rollOutMapObject", function(a,b,c){
+                  // if($scope.currentCountry && $scope.currentCountry.code == a.mapObject.id)
+                  //   return;
+                  dynamicColor(a.mapObject.id, a.mapObject.rollOverColorReal, 'mouseOver')
+                } );
+                if($routeParams.code){
+                  showCountryDetails({mapObject: { id: $routeParams.code}});
+                }
+                else{
+                    showCountryDetails({mapObject: {}});
+                }
+                if($scope.zoomTo){
+                  var countryObj = getMapObject($scope.zoomTo)
+                  map.selectObject(countryObj);
+                  map.zoomToObject(countryObj)
+                }
             });
           
           // });
@@ -231,10 +266,21 @@ function(require, template, app, _) {
                       mapCountry.colorReal = mapCountry.baseSettings.color = "#333";
               }
   
-              if(country.code == 'RS' && $scope.isBCH && country.isParty){
-                var xkMapCountry = getMapObject('XK');
+              if( $scope.isBCH && country.isParty && _.includes(['RS','GB'], country.code)){
+                var territoryCode =  country.code == 'RS' ? 'XK' : 'GI' 
+                var xkMapCountry = getMapObject(territoryCode);
                 xkMapCountry.colorReal = "#5F4586";
               }
+        }
+        function changeSelectedColor(code, color) {
+          var mapCountry = getMapObject(code);
+          
+          // mapCountry.rollOverColorReal= "#000000"
+          // mapCountry.rollOverOutlineColorReal= "#FFFFFF"
+           mapCountry.colorReal = mapCountry.baseSettings.color = color//"#428BCA"
+
+           map.returnInitialColor(mapCountry);
+          
         }
 
         function getMapObject(id) {
@@ -246,17 +292,15 @@ function(require, template, app, _) {
             if($scope.currentCountry && $scope.currentCountry.code== code)
                 return;
 
-          
             if(exceptionRegionMapping[code]){
-                code = exceptionRegionMapping[code];
+              code = exceptionRegionMapping[code];
+            }
+            if(code){
+              //reset color of the base country because color is changed on mouseover evt
+              // changeAreaColor(countries[code])
+              dynamicColor(code, '#428bca', 'clicked')            
             }
 
-            if($scope.zoomTo){
-                if($routeParams.schema)
-                    $location.path('/countries/'+code+'/'+$routeParams.schema)
-                else
-                    $location.path('/countries/'+code)
-            }
             $q.when(countryFacets((code ? code.toLowerCase() : code)), function(facets){
                 $scope.currentCountry = undefined;
                 $timeout(function(){
@@ -362,6 +406,35 @@ function(require, template, app, _) {
           return holder;
         }
 
+        // this function changes the color of the exception regions to color same as the base country for eg. 
+        // when China is clicked or hovered Hongkong color is set to same as china. 
+        function dynamicColor(code, color, type){
+
+          if(exceptionRegionMapping[code]){
+            code = exceptionRegionMapping[code];
+          }
+          if(prevCountryColor[type] && prevCountryColor[type].code){
+            var prevSelTerritories = _(exceptionRegionMapping).keys().filter(function(k){return exceptionRegionMapping[k] == prevCountryColor[type].code}).value();
+            if(prevSelTerritories.length){
+              changeSelectedColor(prevCountryColor[type].code, prevCountryColor[type].colorReal);
+              _.each(prevSelTerritories, function(territory){
+                changeSelectedColor(territory,  prevCountryColor[type].colorReal)
+              })
+            }
+          }
+          prevCountryColor[type] = { code : code };
+          var otherTerritories = _(exceptionRegionMapping).keys().filter(function(k){return exceptionRegionMapping[k] == code}).value()
+          if(code){
+            if(otherTerritories.length){
+              prevCountryColor[type].colorReal = getMapObject(prevCountryColor[type].code).colorReal;
+              changeSelectedColor(code, color);
+            }
+
+            _.each(otherTerritories, function(territory){
+              changeSelectedColor(territory, color)
+            })
+          }
+        }
 
         function loadLmoMap(lmoDecisions){         
 
@@ -406,6 +479,8 @@ function(require, template, app, _) {
           map.validateData();
           // add events to recalculate map position when the map is moved or zoomed
           map.addListener( "positionChanged", updateCustomMarkers );
+          
+
           updateCustomMarkers({chart:map});
         }
 
@@ -467,6 +542,7 @@ function(require, template, app, _) {
         }
 
         loadCountries();
+        
       }],
     }; // return
   }]); //app.directive('searchFilterCountries
