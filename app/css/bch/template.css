@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,600,900');
 
 body, .footer-cbd {
-    background-color: #585971 !important;
+    /* background-color: #585971 !important; */
 }
 
 body > div:first-child, .page-content {
-    background-color: white;
+    /* background-color: white; */
 }
 
 .bch-brand { 
@@ -21,7 +21,9 @@ body > div:first-child, .page-content {
         background-size:contain;
     }
 }
-
+.bch-header{
+    background-color: #585971 !important; 
+}
 .bch-header > h1 {
     margin: 0px;
     color:white;
