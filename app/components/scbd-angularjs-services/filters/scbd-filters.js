@@ -266,7 +266,7 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
     };
   }]);
 
-  app.filter("lstring", function () {
+  app.filter("lstring", ["locale", function (appLocale) {
     return function (ltext, locale) {
       
       if(angular.isNumber(ltext)) //is number to handle generic implementation of NR
@@ -279,7 +279,8 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
         return ltext;
 
       var sText;
-
+      locale = locale||appLocale;
+      
       if (!sText && locale)
         sText = ltext[locale];
 
@@ -301,7 +302,7 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
 
       return sText || "";
     };
-  });
+  }]);
 
 
   //============================================================
