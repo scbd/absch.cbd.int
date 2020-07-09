@@ -43,7 +43,7 @@
                         <label ng-if="!country.instrument">Ratification on:</label>
                         <span class="color-grey bold">{{country.dateDeposit|formatDate}}</span>
                     </div>
-                    <div style="margin-bottom:5px;">
+                    <div style="margin-bottom:5px;" ng-if="isABS">
                         <label>Signatory:</label>
                         <span ng-if="country.isSignatory && !country.dateSigned" class="bold">Signatory</span>
                         <span ng-if="country.isSignatory && country.dateSigned" class="bold">Signed on {{country.dateSigned|formatDate}} </span>
