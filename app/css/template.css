@@ -1575,6 +1575,7 @@ div.recordDefault:hover {
     margin-top: 3px;
     font-weight: bold;
 }
+#searchPage .register-content,
 #RegisterPage .register-content,
 #SubmitPage .register-content,
 #PreferencesPage .register-content {
@@ -1582,6 +1583,7 @@ div.recordDefault:hover {
     margin: 20px 0;
     
 }
+#searchPage .register-content h3,
 #RegisterPage .register-content-header h3,
 #SubmitPage .register-content-header h3,
 #PreferencesPage .register-content-header h3 {
@@ -1590,6 +1592,7 @@ div.recordDefault:hover {
    
 }
 
+#searchPage .register-content-content,
 #RegisterPage .register-content-content,
 #SubmitPage .register-content-content,
 #PreferencesPage .register-content-content {
@@ -2148,4 +2151,9 @@ a.disabled{
     /* background-color: yellow; */
     font-weight: bold;
     color: black;
+}
+
+#search-new .container-fluid { 
+    padding-left: 0px; 
+    padding-right: 0px; 
 }
