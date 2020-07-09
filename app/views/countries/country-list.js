@@ -234,7 +234,11 @@
             };
 
             //==================================================================================
-            $scope.gotoCountryProfile = function (code) {
+            $scope.gotoCountryProfile = function (code, schema, evt) {
+                if(schema){
+                    evt.stopPropagation();
+                    return $location.path('/countries/' + code.toUpperCase() + '/'+schema.shortCode);
+                }
                 $location.path('/countries/' + code.toUpperCase());
             };
             

@@ -8,7 +8,7 @@
     </div>
     <br/>
     <br/> -->
-    <div ng-repeat="(key, schema) in countryRecords">
+    <div ng-repeat="(key, schema) in countryRecords" ng-if="schema">
 
         <h4 id="div{{schema.shortCode}}" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" 
         ng-click="showHideRecords(key, schema)"
