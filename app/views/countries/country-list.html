@@ -56,22 +56,25 @@
 	block-region activate="loadingMap"  ng-style="{'height': isBCH ? '450px' : '350px'}">	
 	</div>
 	<div block-region activate="loading" block-text=" Loading country details">
-		<div style="height:0px;width:0px;" ng-if="readyForExport">
+		<div style="height:0px;width:0px;opacity: 0;" ng-if="readyForExport">
 			<table id="forExport" style="height:0px;width:0px">
 					<tr>
 						<th>Country</th>
 						<th>Status</th>
 						<th ng-if="regions.length>0">Regions</th>
-						<th ng-repeat="header in headerCount">{{header.shortCode}}</th>
+						<th ng-repeat="header in headerCount">
+							<span ng-bind="header.title|lstring"></span>
+							(<span ng-bind="header.shortCode"></span>)
+						</th>
 					</tr>
 					<tr ng-repeat="country in list = (countries | filter:hasCountries | filter: hasStatus | filter: hasRegions | orderBy:sortTermFilter:orderList) track by country.name.en">
-						<td>{{country.name|lstring:locale}}</td>
+						<td ng-bind="country.name|lstring:locale"></td>
 						<td>
 							<span ng-if="!country.isParty" class="color-grey" style="font-size:10px;margin-right:10px;">Non-Party</span>
 							<span ng-if="country.isParty" class="color-party" style="font-size:10px;margin-right:10px;">Party</span>
 						</td>
-						<td ng-if="regions.length>0">{{::getRegions(country.code)}}</td>
-						<td ng-repeat="schema in country.schemas">{{schema.count }}</td>		
+						<td ng-if="regions.length>0" ng-bind="::getRegions(country.code)"></td>
+						<td ng-repeat="schema in country.schemas" ng-bind="schema.count"></td>		
 					<tr>
 
 			</table>	
@@ -100,15 +103,24 @@
                     </div>
 
 					<div  km-select required name="countryFilter" ng-model="countryFilter" items="options.countries()"
-						 multiple placeholder="Countries" display-count="0" show-selection-pop-over="true"></div>
+						 multiple placeholder="Countries" display-count="0" show-selection-pop-over="true" icon="fa-globe"></div>
 
 				   <div class="dropdown" style="display:inline;">
 					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 						<span>
-							<strong ng-if="partyFilter==='All' || !partyFilter" >Party Status</strong>
-							<strong ng-if="partyFilter == 'party'" ><i class="color-party fa fa-square"></i> Parties</strong>
-							<strong ng-if="partyFilter == 'inbetween'" ><i class="color-inbetween fa fa-square"></i> Ratified, not yet Party</strong>
-							<strong ng-if="partyFilter == 'nonparty'" ><i class="color-nonparty fa fa-square"></i> Non-Parties</strong>
+							<strong ng-if="partyFilter==='All' || !partyFilter" >
+								<span class="hidden-sm hidden-xs">Party Status</span>
+								<span class="visible-sm visible-xs">PS</span>
+							</strong>
+							<strong ng-if="partyFilter == 'party'" ><i class="color-party fa fa-square"></i> 
+								<span class="hidden-sm hidden-xs">Parties</span>
+							</strong>
+							<strong ng-if="partyFilter == 'inbetween'" ><i class="color-inbetween fa fa-square"></i> 
+								<span class="hidden-sm hidden-xs">Ratified, not yet Party</span>
+							</strong>
+							<strong ng-if="partyFilter == 'nonparty'" ><i class="color-nonparty fa fa-square"></i> 
+								<span class="hidden-sm hidden-xs">Non-Parties</span>
+							</strong>
 						</span>
                         <span class="caret"></span>
                     </button>
@@ -122,10 +134,11 @@
                     </div>
 
 					<div  km-select required name="regions" ng-model="regions" items="options.regions()"
-						 multiple placeholder="Regions" display-count="0" show-selection-pop-over="true"></div>
+						 multiple placeholder="Regions" display-count="0" show-selection-pop-over="true" icon="fa-object-group"></div>
 					
 					<button class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="readyForExport||loading">					
-						<i class="fa fa-table" ></i> Export
+						<i class="fa fa-download" ></i> 
+						<span class="hidden-sm hidden-xs">Export</span>
 				</button>
               </div>
               <div class="col-xs-6 evenly-spaced center-text hidden-xs hidden-sm" >                            
