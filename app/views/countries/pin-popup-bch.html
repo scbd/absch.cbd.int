@@ -1,13 +1,30 @@
 ﻿<div >
-    <!-- <table class="table">
-        <tr ng-repeat="schema in country.schemas">
-            <td>
-                <span class="badge">{{schema.count}}</span>
-            </td>
-            <td>{{schema.title|lstring:locale}}</td>
-        </tr>
-    </table> -->
+    
+    <div ng-if="currentCountry.code" style="padding:5px;"
+     ng-class="{'bg-party': currentCountry.isParty, 'bg-darkgrey':!currentCountry.isParty, 
+                'bg-inbetween': currentCountry.isInbetweenParty}">
+        <div>
+            <span ng-if="currentCountry.isParty"
+                >Party to the Biosafety Protocol</span>
+            <span ng-if="currentCountry.isInbetweenParty"
+                >Ratified, not yet Party</span>
+            <span ng-if="!currentCountry.isParty && !currentCountry.isInbetweenParty"
+                >Not a Party to the Biosafety Protocol</span>
+        </div>
 
+        <div class="row abs-exception-tooltip"
+        ng-if="country.exceptionCountry=='dk'||country.code.toLowerCase()=='dk'||
+                country.code.toLowerCase()=='fk'||country.code.toLowerCase()=='eh'||
+                country.exceptionCountry=='gb'||country.code.toLowerCase()=='gb'">
+            <div class="col-lg-12">
+                <div class="small  {{(country.exceptionCountry.toLowerCase()=='dk' || country.code.toLowerCase()=='dk') ? 'show' : 'hide'}}"
+                    style="margin-top:5px;white-space: normal;padding:3px;">
+                    Denmark’s ratification of the Protocol does not apply in respect of Greenland and the Faroe Islands.
+                </div>
+                
+            </div>
+        </div>
+    </div>
     <table class="table table-map table-condensed" >
             <tr ng-repeat="schema in country.schemas" style="border:none;">
                 <td >
@@ -17,7 +34,7 @@
                     <a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff">
                         {{schema.title | lstring:locale}}
                     </a>
-                    <a rel="noopener" ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search/nationalRecords"  style="color:#fff">
+                    <a rel="noopener" ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search?schema={{schema.shortCode|mapSchema}}&tab=nationalRecords"  style="color:#fff">
                         {{schema.title | lstring:locale}}
                     </a>
                 </td>
