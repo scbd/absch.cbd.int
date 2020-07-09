@@ -27,6 +27,23 @@
         .color-litegrey{
             color: #999!important;
         }
+        .country-list-dd li{
+            list-style: none;            
+        }
+        .country-list-dd>li>a{
+            display: block;
+            padding: 3px 20px;
+            clear: both;
+            font-weight: 400;
+            line-height: 1.42857143;
+            color: #333;
+            white-space: nowrap;
+        }
+        @media (max-width: 767px){
+            .xs-padding {
+                padding-right: 5px!important;
+            }
+        }
     </style>
     <nav class="navbar navbar-links navbar-default navbar-static-top" style="margin-bottom:0px;">
         <div class="container-fluid container-links color-grey" style="margin-bottom:5px">           
@@ -36,78 +53,80 @@
                 <ul class="nav navbar-nav pull-left" style="width:100%">
                     <li>
                         <a rel="noopener"  translation-url href="." ng-click="activeMenu='home'"
-                        ng-class="{'active-menu' : activeMenu == 'home'}">
+                        ng-class="{'active-menu' : activeMenu == 'home'}" class="xs-padding">
                             <i class="icon fa fa-home"></i><span class="hidden-xs">BCH</span>
                         </a>
                     </li>
                     <li>
                         <a rel="noopener" translation-url  ng-href="https://bch.cbd.int/about/" ng-click="activeMenu='about'"
-                        ng-class="{'active-menu' : activeMenu == 'about'}"> <i class="icon fa fa-question-circle  visible-xs "></i>
+                        ng-class="{'active-menu' : activeMenu == 'about'}" class="xs-padding"> <i class="icon fa fa-question-circle  visible-xs "></i>
                             <span class="hidden-xs "> About</span>
                         </a>
                     </li>
                     <li>
                         <a rel="noopener"  translation-url href="https://bch.cbd.int/protocol" ng-click="activeMenu='protocol'"
-                        ng-class="{'active-menu' : activeMenu == 'protocol'}">
+                        ng-class="{'active-menu' : activeMenu == 'protocol'}" class="xs-padding">
                             <i class="icon fa fa-book visible-xs"></i><span class="hidden-xs">Protocol</span>
                         </a>
                     </li>
                     <li>
-                        <a rel="noopener" translation-url  ng-href="/search" ng-click="activeMenu='search'"
-                        ng-class="{'active-menu' : activeMenu == 'search'}"> <i class="icon fa fa-search visible-xs "></i>
+                        <a rel="noopener" translation-url  ng-href="search" ng-click="activeMenu='search'"
+                        ng-class="{'active-menu' : activeMenu == 'search'}" class="xs-padding"> <i class="icon fa fa-search visible-xs "></i>
                             <span class="hidden-xs "> Search</span>
                         </a>
                     </li>
                     <li>
                         <a rel="noopener" translation-url  ng-href="register"  ng-click="activeMenu='submit'"
-                         ng-class="{'active-menu' : activeMenu == 'submit'}"> <i class="icon fa fa-edit visible-xs"></i>
+                         ng-class="{'active-menu' : activeMenu == 'submit'}" class="xs-padding"> <i class="icon fa fa-edit visible-xs"></i>
                          <span class="hidden-xs "> Submit</span>
                         </a>
                     </li>
                     <!-- <li>
                         <a rel="noopener" translation-url  ng-href="register" ng-click="activeMenu='manage'"
-                        ng-class="{'active-menu' : activeMenu == 'manage'}"> <i class="icon fa fa-list-alt visible-xs"></i>
+                        ng-class="{'active-menu' : activeMenu == 'manage'}" class="xs-padding"> <i class="icon fa fa-list-alt visible-xs"></i>
                             <span class="hidden-xs "><i class="icon fa fa-lock"></i> Manage </span>
                         </a>
                     </li> -->
-                    <li>
+                    <li class="country-dropdown">
                         <a rel="noopener" href="#" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
-                        ng-class="{'active-menu' : activeMenu == 'countryProfile'}" ng-click="activeMenu='countryProfile';countrySearchQuery=''">
+                        ng-class="{'active-menu' : activeMenu == 'countryProfile'}" ng-click="activeMenu='countryProfile';countrySearchQuery=''" class="xs-padding">
                             <span  ng-href="countries">Country Profiles <span class="caret"></span></span>
                         </a>
-                        <a rel="noopener" ng-href="countries" class="visible-xs"> <i class="icon fa fa-globe "></i></a>
-                        <ul class="dropdown-menu hidden-xs"  style="padding:10px;max-height:380px;overflow-y:scroll; border:0;margin-top:11px;">
-                            <li style="border:0!important;"> <a rel="noopener" style="color:#111!important;font-size:16px;" ng-href="/countries"> Overview - List all countries </a></li>
-                            <hr style="margin: 5px;">
-                            <!-- <li style="border:0!important;" class="input-group"> 
+                        <a rel="noopener" ng-href="countries" class="visible-xs" class="xs-padding"> <i class="icon fa fa-globe "></i></a>
+                        <ul class="dropdown-menu hidden-xs"  style="border:0;margin-top:11px;">
+                            <li style="border-bottom: 1px solid #eee;"> <a rel="noopener" style="color:#111!important;font-size:16px;" ng-href="/countries"> Overview - List all countries </a></li>                            
+                            <li style="padding:5px;border-bottom: 1px solid #eee;" class="input-group"> 
                                 <input type="text" class="form-control" ng-click="countrySearch($event)" ng-model="countrySearchQuery"/>
-                                <span type="submit" style="cursor:pointer" ng-click="saveSchemaFreeText(filter, filter.searchKeyword)" 
+                                <span type="submit" style="cursor:pointer" 
                                     class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
                             </li>
-                            |filter:startsWith -->
-                            <li  style="border:0!important;" ng-repeat="c in ::countries track by c.code" >
-                                <a rel="noopener" style="color:#666!important;font-size:14px;" ng-href="/countries/{{::c.code|encodeURIComponent}}" >
-                                    <span class="bold" ng-class="{'color-party': c.isParty, 'color-grey':!c.isParty}">
-                                        {{::c.name | lstring:locale}}
-                                    </span>
-                                </a>
-                            </li>
+                            <li >
+                                <ul class="country-list-dd" style="padding-left: 10px;max-height:340px;overflow-y:scroll; ">                                                                    
+                                    <li  style="border:0!important;" ng-repeat="c in countries | filter:startsWith track by c.code" >
+                                        <a rel="noopener" translation-url style="color:#666!important;font-size:14px;" ng-href="/countries/{{::c.code|encodeURIComponent}}" >
+                                            <span class="bold" ng-class="{'color-party': c.isParty, 'color-grey':!c.isParty}">
+                                                {{::c.name | lstring:locale}}
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>  
                         </ul>
                     </li>
     
                     <li>
-                        <a rel="noopener" translation-url  href="reports" ng-class="{'active-menu' : activeMenu == 'reports'}" ng-click="activeMenu='reports'">
-                            <i class="fa fa-comments visible-xs"></i><span class="hidden-xs">&nbsp;National Reports</span>
+                        <a rel="noopener" translation-url  href="reports" ng-class="{'active-menu' : activeMenu == 'reports'}" ng-click="activeMenu='reports'" class="xs-padding">
+                            <i class="fa fa-file-text visible-xs"></i><span class="hidden-xs">&nbsp;National Reports</span>
                         </a>
                     </li>
                     <li>
-                        <a rel="noopener" translation-url  href="https://bch.cbd.int/onlineconferences/" ng-class="{'active-menu' : activeMenu == 'forums'}" ng-click="activeMenu='forums'">
-                            <i class="fa fa-comments visible-xs"></i><span class="hidden-xs">&nbsp;Forums</span>
+                        <a rel="noopener" translation-url  href="https://bch.cbd.int/onlineconferences/" ng-class="{'active-menu' : activeMenu == 'forums'}" ng-click="activeMenu='forums'" class="xs-padding">
+                            <i class="fa fa-forumbee visible-xs"></i><span class="hidden-xs">&nbsp;Forums</span>
                         </a>
                     </li>
                     <li>
-                        <a rel="noopener" translation-url  href="https://bch.cbd.int/resources/" ng-class="{'active-menu' : activeMenu == 'resources'}" ng-click="activeMenu='resources'">
-                            <i class="fa fa-comments visible-xs"></i><span class="hidden-xs">&nbsp;Resources</span>
+                        <a rel="noopener" translation-url  href="https://bch.cbd.int/resources/" ng-class="{'active-menu' : activeMenu == 'resources'}" ng-click="activeMenu='resources'" class="xs-padding">
+                            <i class="fa fa-telegram visible-xs"></i><span class="hidden-xs">&nbsp;Resources</span>
                         </a>
                     </li>
                     <!-- <li class="dropdown pull-right">

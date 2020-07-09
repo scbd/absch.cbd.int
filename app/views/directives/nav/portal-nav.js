@@ -26,6 +26,15 @@ function (locale, $q, breadcrumbs, helpService, commonjs) {
                 $scope.showHelp = !$scope.showHelp;
                 helpService.toggleHelp();
             };
+
+
+            $scope.countrySearch = function($event){
+                $event.stopPropagation()
+            }
+
+            $scope.startsWith = function(item){
+               return !$scope.countrySearchQuery || _.startsWith(item.name[locale].toLowerCase(), $scope.countrySearchQuery.toLowerCase());
+            }
         }
     }
   }]);

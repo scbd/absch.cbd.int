@@ -31,7 +31,7 @@
 
                 whenAsync('/countries',                   { templateUrl: 'views/countries/country-list.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
                 whenAsync('/countries/status/:status',    { templateUrl: 'views/countries/country-list.html',       label:'Country Profiles',      resolveController: true, resolveUser: true}).
-                whenAsync('/countries/:code/:schema?',             { templateUrl: 'views/countries/country-profile.html',       label:'Country Profile', param:'true',      resolveController: true, resolveUser: true}).
+                whenAsync('/countries/:code/:schema?',    { templateUrl: 'views/countries/country-profile.html',    label:'Country Profile', param:'true',      resolveController: true, resolveUser: true, reloadOnSearch:false}).
                                 
                 whenAsync('/reports',                     { templateUrl: 'views/report-analyzer/reports.html',    label:'Reports',      resolveController: true}).
                 whenAsync('/reports/analyzer',    { templateUrl: 'views/report-analyzer/analyzer.html',  label:'Analyzer',      resolveController: true}).
