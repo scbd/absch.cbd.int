@@ -241,7 +241,7 @@ function (app, _, moment, scbdSchemaDetails, schemaShortName) {
       
       if(locale && _.isArray(locale))
         locale = websiteLocale;
-      locale = locale || "en";
+      locale = locale || websiteLocale || "en";
 
       if (cacheMap[term.identifier])
         return $filter("lstring")(cacheMap[term.identifier].title, locale) + 
