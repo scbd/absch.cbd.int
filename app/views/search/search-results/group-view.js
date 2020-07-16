@@ -166,7 +166,7 @@
                             $scope.searchResult.numFound = 0
                             $scope.searchResult.pageCount= 0
                             $scope.searchResult.facets   = undefined;
-                            scope.searchResult.recordsFound= 0
+                            $scope.searchResult.recordsFound= 0
                             throw e;
                         })
                         .finally(function(){
