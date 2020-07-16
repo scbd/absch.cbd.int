@@ -569,14 +569,29 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             schemaTypes[key] = facet;
                             schemaTypes.all = schemaTypes.all + (schemaTypes[key]||0);
                         });
-                        
-                        return {
-                                    schemaTypes: schemaTypes, 
-                                    schemas   : facets.facet_fields['schema_s'], 
-                                    keywords  : facets.facet_fields['all_terms_ss'],
-                                    countries : facets.facet_fields['government_s'], 
-                                    regions   : facets.facet_fields['government_REL_ss']
-                                };
+                        var facets = {
+                                        schemaTypes: schemaTypes, 
+                                        schemas   : facets.facet_fields['schema_s'], 
+                                        keywords  : facets.facet_fields['all_terms_ss'],
+                                        countries : facets.facet_fields['countryRegions_ss'], 
+                                        regions   : facets.facet_fields['countryRegions_REL_ss']
+                                    };
+                        //combine regions and countries facets to match the count.
+                        // if any fields has regions than selecting any country from that region should return result
+                        if(facets.regions){
+                            _.each(facets.countries, function(con, key){
+                                if(facets.regions[key])
+                                    facets.countries[key] = (facets.countries[key]||0) + facets.regions[key];
+                            })
+                        }
+                        if(facets.countries){
+                            _.each(facets.regions, function(reg, key){
+                                if(facets.countries[key])
+                                    facets.regions[key] = (facets.regions[key]||0) + facets.countries[key];
+                            })
+                        }
+
+                        return facets;
                     }
 
                     function updateQueryResult(pageNumber){
@@ -619,8 +634,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             .catch(function(e){
                                 toastr.error('There was an error running search query.')
                                 var exception = {
-                                    data :  e.data||e.message, status:e.status,
-                                    url : (e.config||{}).url, params: (e.config||{}).params
+                                    data    :  e.data||e.message, status:e.status,
+                                    url     : (e.config||{}).url, params: (e.config||{}).params,
+                                    stack   : e.stack
                                 }                                
                                 $log.error(JSON.stringify(exception))
                             })
@@ -634,9 +650,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var schemaQuery         = buildSchemaQuery();                        
                         var schemaSubQuery      = buildSchemaSubQuery()||{};                        
                         var keywordQuery        = buildFieldQuery('keyword',  'all_terms_ss')
-                        var countryQuery        = _.compact([buildFieldQuery('country',  'government_s'), buildFieldQuery('country',   'country_s')]).join(' OR ');
+                        var countryQuery        = _.compact([buildFieldQuery('country',  'countryRegions_ss'), buildFieldQuery('country',  'countryRegions_REL_ss')]).join(' OR ');
                         var partyStatusQuery    = buildPartyStatusQuery();
-                        var regionQuery         = _.compact([buildFieldQuery('region',   'government_REL_ss'), buildFieldQuery('region',   'country_REL_ss')]).join(' OR ');
+                        var regionQuery         = _.compact([buildFieldQuery('region',   'countryRegions_ss'), buildFieldQuery('region',   'countryRegions_REL_ss')]).join(' OR ');
                         var textQuery           = buildFieldQuery('freeText', 'text_EN_txt');
                         var rawQuery            = buildRawQuery();
 
@@ -666,8 +682,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         return {
                             query      :  query||'',
                             tagQueries : _(tagQueries).map(function(f, t){if(f) return '{!tag='+t+'}' + f;}).compact().value(),
-                            facetFields : ['{!ex=schemaType}schemaType_s', '{!ex=schema,schemaType,schemaSub}schema_s', 
-                                           '{!ex=government}government_s', '{!ex=keywords}all_terms_ss', '{!ex=region}government_REL_ss'],
+                            facetFields : [
+                                '{!ex=schemaType}schemaType_s', 
+                                '{!ex=schema,schemaType,schemaSub}schema_s', 
+                                '{!ex=government}countryRegions_ss', 
+                                '{!ex=keywords}all_terms_ss', 
+                                '{!ex=region}countryRegions_REL_ss'
+                            ],
                             pivotFacetFields : 'schema_s, all_Terms_ss',
                             highlight:textQuery ? true : false,
                             highlightFields:'text_EN_txt'
