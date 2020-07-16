@@ -213,7 +213,8 @@
 			"type": "thesaurus",
 			"term": "riskAssessmentScope",
 			"title": "Scope of the risk assessment",
-			"field": ""
+			"field": "scopes_ss",
+			"relatedField":"scopes_REL_ss"
 		},
 		{
 			"type": "solrRecords",
