@@ -226,6 +226,15 @@
 			"field": "modifiedOrganisms_ss"
 		},
 		{
+			"type": "solrRecords",
+			"query": {
+				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
+				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
+			},
+			"title": "Unique Identifier",
+			"field": "uniqueIdentification_s"
+		},
+		{
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
 			"title": "Related trait(s) or use(s) in biotechnology",
@@ -377,6 +386,15 @@
 			},
 			"title": "Living modified organism",
 			"field": "modifiedOrganisms_ss"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
+				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
+			},
+			"title": "Unique Identifier",
+			"field": "uniqueIdentification_s"
 		},
 		{
 			"type": "thesaurus",
