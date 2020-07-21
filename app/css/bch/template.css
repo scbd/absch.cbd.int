@@ -9,7 +9,7 @@ body > div:first-child, .page-content {
 }
 
 .bch-brand { 
-    background-image:url('/app/img/bch.svg');
+    /* background-image:url('/app/img/bch.svg'); */
     background-repeat:no-repeat;
     background-size:contain;
 }
@@ -22,7 +22,7 @@ body > div:first-child, .page-content {
     }
 }
 .bch-header{
-    background-color: #585971 !important; 
+    background-color: #A05800 !important; 
 }
 .bch-header > h1 {
     margin: 0px;
@@ -40,7 +40,7 @@ body > div:first-child, .page-content {
     font-family: Lato, Arial;
     font-weight: 400;
     font-size: 18px;
-    background-color: #585971;
+    background-color: #A05800;
     border: none;
     border-radius: 0px;
 }
@@ -53,16 +53,49 @@ body > div:first-child, .page-content {
     color: white;
 }
 
-.bch-header > .navbar-default .navbar-nav>.active {
+.bch-header > .navbar-default.navbar-static-top {
+    box-shadow: 0 -2px 5px -5px #333;
 }
 .active-menu,
 .bch-header > .navbar-default .navbar-brand.active, 
 .bch-header > .navbar-default .navbar-nav>.active>a {
     font-weight: 600;
-    background-color: #0b0b3e!important;
+    background-color: #9e6621!important;
 }
 
 .bch-header > .navbar-default .navbar-brand:hover, 
 .bch-header > .navbar-default .navbar-nav>li>a:hover {
-    background-color: #0b0b3e;
+    background-color: #9e6621;
+    color:#fff;
+}
+
+#CBD-Branding .footer-cbd{
+    background-color: #00483A!important;
+}
+/* .party-container, */
+.protocol-map-header-bg{
+    background-color: #00405C!important;
+}
+
+#government .color-party,
+.color-party{
+    color:#00405C!important;
+}
+#government .color-non-party,
+.color-non-party{
+    color:#9e6621!important;
+}
+.label-party,
+.bg-party {
+    background-color: #00405C!important;
+}
+.label-non-party,
+.bg-non-party{
+    background-color: #9e6621!important;
+}
+.bg-inbetween{
+
+}
+.app-bg-texture{
+    background-color: #7FC2DA!important;
 }

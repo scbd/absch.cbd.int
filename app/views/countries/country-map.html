@@ -5,16 +5,15 @@
                 max-width: 500px;
             }
             .map-disclaimer {
-                position: relative;
+                position: absolute;
                 font-family: Verdana;
                 font-size: 11px;
-                opacity: 0.7;
+                opacity: .7;
                 display: block;
-                float: left;
-                bottom: 20px;
-                right: 5px;
+                bottom: 30px;
+                right: 0px;
                 cursor: pointer;
-                left:10%
+                left: 70%;
             }
             /* .amcharts-main-div, .amcharts-chart-div{
                 position: static!important;
@@ -155,7 +154,7 @@
                 <div id="chartdiv" style="height:350px;" ng-style="{'height': isBCH ? '450px' : '350px'}"></div>
             </div>
             
-            <div class="col-md-3" style="height:350px;padding-right: 0px!important; margin-left: 0px;padding-left: 0px;"
+            <div class="col-md-3 protocol-map-header-bg" style="height:350px;padding-right: 0px!important; margin-left: 0px;padding-left: 0px;"
             ng-style="{'height': isBCH ? '450px' : '350px'}">
                     <style>
                             .party-status {
@@ -253,7 +252,7 @@
                     </div>
             </div>
         </div>
-        <div class="map-disclaimer pull-left" data-toggle="modal" href="#dialogDisclaimer">Disclaimer</div>
+        <div class="map-disclaimer pull-right" data-toggle="modal" href="#dialogDisclaimer">Disclaimer</div>
 
         <div id="dialogDisclaimer" class="modal fade">
             <div class="modal-dialog">

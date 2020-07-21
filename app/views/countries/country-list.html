@@ -51,7 +51,7 @@
 	</style>
 
 
-	<div id="Jumbotron" class="bg-texture-green color-black hidden-sm hidden-xs" 
+	<div id="Jumbotron" class="bg-texture-green app-bg-texture color-black hidden-sm hidden-xs" 
 	style="border-top:1px solid #555;border-bottom:2px solid #ddd;position:relative;" 
 	block-region activate="loadingMap"  ng-style="{'height': isBCH ? '450px' : '350px'}">	
 	</div>
@@ -70,7 +70,7 @@
 					<tr ng-repeat="country in list = (countries | filter:hasCountries | filter: hasStatus | filter: hasRegions | orderBy:sortTermFilter:orderList) track by country.name.en">
 						<td ng-bind="country.name|lstring:locale"></td>
 						<td>
-							<span ng-if="!country.isParty" class="color-grey" style="font-size:10px;margin-right:10px;">Non-Party</span>
+							<span ng-if="!country.isParty" class="color-grey color-non-party" style="font-size:10px;margin-right:10px;">Non-Party</span>
 							<span ng-if="country.isParty" class="color-party" style="font-size:10px;margin-right:10px;">Party</span>
 						</td>
 						<td ng-if="regions.length>0" ng-bind="::getRegions(country.code)"></td>
@@ -118,7 +118,7 @@
 							<strong ng-if="partyFilter == 'inbetween'" ><i class="color-inbetween fa fa-square"></i> 
 								<span class="hidden-sm hidden-xs">Ratified, not yet Party</span>
 							</strong>
-							<strong ng-if="partyFilter == 'nonparty'" ><i class="color-nonparty fa fa-square"></i> 
+							<strong ng-if="partyFilter == 'nonparty'" ><i class="color-non-party fa fa-square"></i> 
 								<span class="hidden-sm hidden-xs">Non-Parties</span>
 							</strong>
 						</span>
@@ -129,7 +129,7 @@
 						<li role="separator" class="divider"></li>
 						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('party');" > <i class="color-party fa fa-square"></i> Parties</a></li>
 						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('inbetween');" >  <i class="color-inbetween fa fa-square"></i> Ratified, not yet Party</a></li>
-						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('nonparty');" > <i class="color-nonparty fa fa-square"></i> Non-Parties</a></li>
+						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('nonparty');" > <i class="color-non-party fa fa-square"></i> Non-Parties</a></li>
                     </ul>
                     </div>
 
@@ -159,19 +159,19 @@
 				<div style="text-align:left;width:30px;display:inline-block;"> {{$index+1}} </div>
 
 				<div style="display:inline;">
-					<span style="font-size:18px;font-weight:500;" ng-class="{'color-party': country.isParty, 'color-grey':!country.isParty, 'color-inbetween': country.isInbetweenParty}">
+					<span style="font-size:18px;font-weight:500;" ng-class="{'color-party': country.isParty, 'color-grey color-non-party':!country.isParty, 'color-inbetween': country.isInbetweenParty}">
                                     {{country.name|lstring:locale}}</span>
 				</div>
 				<div style="margin-left:35px;text-transform:uppercase;font-weight:500;">
 					<div ng-if="isABS">
-						<span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey" style="font-size:10px;margin-right:10px;">Non-Party</span>
+						<span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party" style="font-size:10px;margin-right:10px;">Non-Party</span>
 						<span ng-if="country.isParty" class="color-party" style="font-size:10px;margin-right:10px;">Party to the Nagoya Protocol</span>
 						<span ng-if="country.isInbetweenParty" class="color-inbetween" style="font-size:10px;margin-right:10px;">Ratified, not yet Party</span>
 						<span ng-if="country.isSignatory" style="font-size:10px;margin-right:10px;">Signatory</span>
-						<span ng-if="country.entryIntoForce" class="color-grey" style="font-size:10px;margin-right:20px;">Entry into force: {{country.entryIntoForce|formatDate}}</span>
+						<span ng-if="country.entryIntoForce" class="color-grey color-non-party" style="font-size:10px;margin-right:20px;">Entry into force: {{country.entryIntoForce|formatDate}}</span>
 					</div>
 					<div ng-if="isBCH">
-						<span ng-if="!country.isParty" class="color-grey" style="font-size:10px;margin-right:10px;">Non-Party</span>
+						<span ng-if="!country.isParty" class="color-grey color-non-party" style="font-size:10px;margin-right:10px;">Non-Party</span>
 						<span ng-if="country.isParty" class="color-party" style="font-size:10px;margin-right:10px;">Party to the Cartagena Protocol</span>
 					</div>
 				</div>

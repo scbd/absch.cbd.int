@@ -1,15 +1,13 @@
 .map-disclaimer {
-  position: relative;
-
-
+  position: absolute;
   font-family: Verdana;
   font-size: 11px;
-  opacity: 0.7;
+  opacity: .7;
   display: block;
-  float:right;
-  bottom:20px;
-  right:5px;
+  bottom: 30px;
+  right: 0px;
   cursor: pointer;
+  left: 70%;
 }
 .tag-line {
   position: relative;
