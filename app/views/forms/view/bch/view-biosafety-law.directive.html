@@ -30,7 +30,7 @@
 		<div ng-show="document.jurisdictions">
 			<label>Jurisdiction</label>
 			<div class="km-value">
-				<ul>
+				<ul class="list">
 					<li ng-repeat="item in document.jurisdictions">
 						<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
 						<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>

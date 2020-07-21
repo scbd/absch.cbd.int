@@ -62,19 +62,19 @@
                 <legend>Thematic areas(s)</legend>
                 <div ng-if="document.cbdThematicAreas">
                     <label>CBD Related </label>
-                    <ul class="km-value">
+                    <ul  class="list km-value">
                         <li ng-repeat="term in document.cbdThematicAreas">{{term | term:locale}}</li>
                     </ul>
                 </div>
                 <div ng-if="document.absThematicAreas">
                     <label>ABS Related </label>
-                    <ul class="km-value">
+                    <ul  class="list km-value">
                         <li ng-repeat="term in document.absThematicAreas">{{term | term:locale}}</li>
                     </ul>
                 </div>
                 <div ng-if="document.cpbThematicAreas">
                     <label>BCH Related </label>
-                    <ul class="km-value">
+                    <ul  class="list km-value">
                         <li ng-repeat="term in document.cpbThematicAreas">{{term | term:locale}}</li>
                     </ul>
                 </div>
