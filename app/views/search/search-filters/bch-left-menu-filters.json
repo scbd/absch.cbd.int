@@ -226,7 +226,7 @@
 			"field": "modifiedOrganisms_ss"
 		},
 		{
-			"type": "solrRecords",
+			"type": "solr",
 			"query": {
 				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
 				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
@@ -388,7 +388,7 @@
 			"field": "modifiedOrganisms_ss"
 		},
 		{
-			"type": "solrRecords",
+			"type": "solr",
 			"query": {
 				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
 				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
