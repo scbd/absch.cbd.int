@@ -24,8 +24,8 @@
                         start = 0;
                     }
 
-                    var maxCount = 6;
-                    var middle = 3;
+                    var maxCount = $attr.maxPageCount || 6;
+                    var middle = maxCount/2;
                     var count = end - start;
 
                     if (count > maxCount) {

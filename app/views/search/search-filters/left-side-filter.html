@@ -146,7 +146,7 @@
                                     <div ng-class="{'exclude-filter':filter.excludeResult}">
                                         <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
                                         <div document-selector identifier-without-revision="true" ng-model="filter.selectedItems" question="searchResult" type="checkbox"
-                                            query="filter.query.q" filter="true" ng-change="recordSelected(item, filter)"   skip-government="true" list-view="false">
+                                            query="filter.query.q" filter="true" ng-change="recordSelected(item, filter)"   skip-government="true" list-view="true">
                                             <select-records>
                                                 <div class="color-darkgrey not" style="cursor: pointer;" ng-click="$parent.openAddDialog();">
                                                     <span ng-bind="filter.title"></span>

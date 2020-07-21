@@ -213,7 +213,8 @@
             </div>
             <div pagination  class="text-center" ng-if="rawDocuments.pageCount>1" current-page="searchResult.currentPage" 
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
-                num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"></div> 
+                num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"
+                max-page-count="4"></div> 
         </div>
         <div class="row" style="margin:0;padding:0;margin-bottom:10px" ng-show="!isLoading" >
             <div ng-if="isDialogOpen && !allowNew.editingOn && !listView">
@@ -244,7 +245,10 @@
                         <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_countryName'; sortReverse = !sortReverse">owner</a>
                             <span ng-show="sortType == 'rec_countryName'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'uniqueIdentifier_s'; sortReverse = !sortReverse">unique record id</a>
+                        <th style="white-space:nowrap;">
+                            <a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'uniqueIdentifier_s'; sortReverse = !sortReverse">
+                                record uid
+                            </a>
                             <span ng-show="sortType == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
                         <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">summary</a>
@@ -286,7 +290,8 @@
             </div>
             <div pagination  class="text-center" ng-if="rawDocuments.pageCount>1" current-page="searchResult.currentPage" 
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
-                num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"></div> 
+                num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"
+                max-page-count="4"></div> 
         </div>
     </script>
 </div>
