@@ -4,7 +4,7 @@
 </style>
 <div smooth-scroll duration="100" offset="200"></div>
   
-    <div id="Jumbotron" class="bg-texture-green color-black hidden-sm hidden-xs" selected-color="#FFFFFF" 
+    <div id="Jumbotron" class="bg-texture-green app-bg-texture color-black hidden-sm hidden-xs" selected-color="#FFFFFF" 
     style="border-top:1px solid #555;border-bottom:2px solid #ddd;height: 353px;" block-region activate="loadingMap"
     ng-style="{'height': isBCH ? '450px' : '350px'}"> 
                
@@ -17,7 +17,7 @@
             <div class="well bg-white cp-header">
                     <div style="margin-bottom:5px;" ng-if="isABS">
                         <label >Party Status:</label>
-                        <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey bold">Not a Party to the Nagoya Protocol</span>
+                        <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">Not a Party to the Nagoya Protocol</span>
                         <span ng-if="country.isParty" class="color-party bold">Party to the Nagoya Protocol</span>
                         <span ng-if="country.isInbetweenParty" class="color-inbetween bold">Ratified, not yet Party to the Nagoya Protocol</span>
                         <div ng-if="country.code==='dk'" style="margin-left:194px;"class="bold"><i class="fa fa-info-circle"></i> Denmark’s ratification of the Nagoya Protocol does not apply in respect of Greenland and the Faroe Islands.</div>
@@ -31,23 +31,23 @@
                     </div>
                     <div style="margin-bottom:5px;" ng-if="isBCH">
                         <label >Party Status:</label>
-                        <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey bold">Not a Party to the Cartagena Protocol on Biosafety</span>
+                        <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">Not a Party to the Cartagena Protocol on Biosafety</span>
                         <span ng-if="country.isParty" class="color-party bold">Party to the Cartagena Protocol on Biosafety</span>
                     </div>
                      <div ng-if="country.isParty || country.isInbetweenParty" style="margin-bottom:5px;">
                         <label>Enter<span ng-if="country.isInbetweenParty">s</span><span ng-if="country.isParty">ed</span> into force on:</label>
-                        <span class="color-grey bold">{{country.entryIntoForce|formatDate}}</span>
+                        <span class="color-grey color-non-party bold">{{country.entryIntoForce|formatDate}}</span>
                     </div>
                     <div ng-if="(country.isRatified) && country.dateDeposit"  style="margin-bottom:5px;">
                         <label ng-if="country.instrument" ><span style="text-transform:capitalize;">{{country.instrument}}</span> on:</label>
                         <label ng-if="!country.instrument">Ratification on:</label>
-                        <span class="color-grey bold">{{country.dateDeposit|formatDate}}</span>
+                        <span class="color-grey color-non-party bold">{{country.dateDeposit|formatDate}}</span>
                     </div>
                     <div style="margin-bottom:5px;" ng-if="isABS">
                         <label>Signatory:</label>
                         <span ng-if="country.isSignatory && !country.dateSigned" class="bold">Signatory</span>
                         <span ng-if="country.isSignatory && country.dateSigned" class="bold">Signed on {{country.dateSigned|formatDate}} </span>
-                        <span ng-if="!country.isSignatory" class="color-grey bold">No</span>
+                        <span ng-if="!country.isSignatory" class="color-grey color-non-party bold">No</span>
                     </div>
                    
                     <div style="white-space:nowrap;overflow-x:hidden;margin-bottom:5px;">

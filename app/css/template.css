@@ -1797,7 +1797,7 @@ div.recordDefault:hover {
     color: #fff!important;
     border: 1px solid #333;
 }
-#search-country-group .color-nonparty {
+#search-country-group .color-non-party {
     background-color: #666!important;
     color: #fff!important;
     border: 1px solid #333;
@@ -1825,7 +1825,7 @@ div.recordDefault:hover {
 #government .color-party {
     color: #5F4586!important;
 }
-#government .color-nonparty {
+#government .color-non-party {
     color: #333!important;
 }
 #government .color-inbetween {
@@ -2156,4 +2156,9 @@ a.disabled{
 #search-new .container-fluid { 
     padding-left: 0px; 
     padding-right: 0px; 
+}
+
+.amcharts-chart-div a{
+    top: unset!important;
+    bottom: 10px!important;
 }

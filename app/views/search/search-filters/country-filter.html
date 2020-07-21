@@ -11,8 +11,8 @@
         <a rel="noopener" translation-url  ng-href="#" ng-click="cf_setPartyFilter('party')" style="padding-left:10px;white-space:nowrap;" class="letter color-party" ng-class="{'letter-active':cf_partyFilter == 'party'}"> 
             <!--<i ng-class="{'fa-check-square':cf_partyFilter == 'party'}" class="fa fa-square color-party"></i> -->
             Parties</a>
-        <a rel="noopener" translation-url  ng-href="#" ng-click="cf_setPartyFilter('nonparty')" style="padding-left:10px;white-space:nowrap;" class="letter color-nonparty" ng-class="{'letter-active':cf_partyFilter == 'nonparty'}" >
-            <!--<i ng-class="{'fa-check-square':cf_partyFilter == 'nonparty'}" class="fa fa-square color-nonparty"></i> -->
+        <a rel="noopener" translation-url  ng-href="#" ng-click="cf_setPartyFilter('nonparty')" style="padding-left:10px;white-space:nowrap;" class="letter color-non-party" ng-class="{'letter-active':cf_partyFilter == 'nonparty'}" >
+            <!--<i ng-class="{'fa-check-square':cf_partyFilter == 'nonparty'}" class="fa fa-square color-non-party"></i> -->
              Non-Parties</a>
         <a rel="noopener" translation-url  ng-href="#" ng-click="cf_setPartyFilter('inbetween')" style="padding-left:10px;white-space:nowrap;" class="letter color-inbetween" ng-class="{'letter-active':cf_partyFilter == 'inbetween'}" >
             <!--<i ng-class="{'fa-check-square':cf_partyFilter == 'inbetween'}" class="fa fa-square color-inbetween"></i>  -->
@@ -27,7 +27,7 @@
             ng-class="::{'disabled':!$parent.searchResult.data.facets.countries[doc.id]}">
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                 <span  class="bold" ng-class="{'color-party': doc.isParty, 'color-inbetween':doc.isInbetweenParty,
-                 'color-nonparty':!doc.isParty && !doc.isInbetweenParty }">{{::doc.name|lstring:locale}}</span>
+                 'color-non-party':!doc.isParty && !doc.isInbetweenParty }">{{::doc.name|lstring:locale}}</span>
                  <strong>({{$parent.searchResult.data.facets.countries[doc.id]||0}})</strong>
             </a>
             <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon"></i>

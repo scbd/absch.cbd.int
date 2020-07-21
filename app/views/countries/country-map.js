@@ -67,10 +67,24 @@ function(require, template, app, _, ammap, worldEUHigh) {
         var lmoDecisions;
         var countries         = {};
         var prevCountryColor  = {clicked:{}, mouseOver:{}};
-        // var lmoDecisions;
         var latlong           = {};
-        $scope.isBCH          = realm.is('BCH');
-        $scope.isABS          = realm.is('ABS');
+        var mapColors = {
+          party          : '#5F4586',
+          nonParty       : '#333',
+          inBetweenParty : '#EC971F'
+        };
+        if(realm.is('BCH')){
+          $scope.isBCH          = true;
+          mapColors = {
+            party          : '#00405C',
+            nonParty       : '#9e6621',
+            inBetweenParty : '#EC971F'
+          }
+        }
+        else if(realm.is('ABS')){
+          $scope.isABS          = true;
+        }
+
         $scope.countryMapScope= $scope;
 
         var exceptionRegionMapping = {
@@ -130,21 +144,13 @@ function(require, template, app, _, ammap, worldEUHigh) {
         $scope.options = {lmo:'all'};
         $scope.self = $scope;
 
-        // if($scope.zoomTo)
-        //     mapOptions.dataProvider.linkToObject = $scope.zoomTo;
 
         var map = AmCharts.makeChart( "chartdiv", mapOptions );
         
-          // add events to recalculate map position when the map is moved or zoomed
-          // map.addListener( "positionChanged", updateCustomMarkers );
+        ////////////////scope functions///////////////////
 
 
-
-
-          ////////////////scope functions///////////////////
-
-
-          ///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////
 
 
         /////////////////////local function////////////////
@@ -169,7 +175,7 @@ function(require, template, app, _, ammap, worldEUHigh) {
                 addImageData({name : {en : 'Western Sahara'}, code:'EH'})
                 //change for Taiwan, set party color as China
                 var twCountry = getMapObject('TW'); 
-                twCountry.colorReal = twCountry.baseSettings.color = "#5F4586";
+                twCountry.colorReal = twCountry.baseSettings.color = mapColors.party;
 
                 map.validateData();
                 map.addListener("homeButtonClicked", function(){
@@ -256,20 +262,20 @@ function(require, template, app, _, ammap, worldEUHigh) {
               
               if (country && mapCountry) {
                   if (($scope.isABS && country.isInbetweenParty))
-                      mapCountry.colorReal = mapCountry.baseSettings.color = "#EC971F";
+                      mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.inBetweenParty;
                   else if (country.isParty)
-                      mapCountry.colorReal = mapCountry.baseSettings.color = "#5F4586";
+                      mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.party;
                   else
-                      mapCountry.colorReal = mapCountry.baseSettings.color = "#333";
+                      mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.nonParty;
               } else {
                     if(mapCountry)//not sure if this is correct
-                      mapCountry.colorReal = mapCountry.baseSettings.color = "#333";
+                      mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.nonParty;
               }
   
               if( $scope.isBCH && country.isParty && _.includes(['RS','GB'], country.code)){
                 var territoryCode =  country.code == 'RS' ? 'XK' : 'GI' 
                 var xkMapCountry = getMapObject(territoryCode);
-                xkMapCountry.colorReal = "#5F4586";
+                xkMapCountry.colorReal = mapColors.party;
               }
         }
         function changeSelectedColor(code, color) {

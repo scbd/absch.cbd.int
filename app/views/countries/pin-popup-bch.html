@@ -1,7 +1,7 @@
 ﻿<div >
     
     <div ng-if="currentCountry.code" style="padding:5px;"
-     ng-class="{'bg-party': currentCountry.isParty, 'bg-darkgrey':!currentCountry.isParty, 
+     ng-class="{'bg-party': currentCountry.isParty, 'bg-non-party':!currentCountry.isParty, 
                 'bg-inbetween': currentCountry.isInbetweenParty}">
         <div>
             <span ng-if="currentCountry.isParty"
