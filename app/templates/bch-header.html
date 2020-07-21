@@ -95,16 +95,14 @@
                         <a rel="noopener" ng-href="countries" class="visible-xs" class="xs-padding"> <i class="icon fa fa-globe "></i></a>
                         <ul class="dropdown-menu hidden-xs"  style="border:0;margin-top:11px;">
                             <li style="border-bottom: 1px solid #eee;"> <a rel="noopener" style="color:#111!important;font-size:16px;" ng-href="/countries"> Overview - List all countries </a></li>                            
-                            <li style="padding:5px;border-bottom: 1px solid #eee;" class="input-group"> 
+                            <li style="padding:5px;border-bottom: 1px solid #eee;"> 
                                 <input type="text" class="form-control" ng-click="countrySearch($event)" ng-model="countrySearchQuery"/>
-                                <span type="submit" style="cursor:pointer" 
-                                    class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
                             </li>
                             <li >
                                 <ul class="country-list-dd" style="padding-left: 10px;max-height:340px;overflow-y:scroll; ">                                                                    
                                     <li  style="border:0!important;" ng-repeat="c in countries | filter:startsWith track by c.code" >
                                         <a rel="noopener" translation-url style="color:#666!important;font-size:14px;" ng-href="/countries/{{::c.code|encodeURIComponent}}" >
-                                            <span class="bold" ng-class="{'color-party': c.isParty, 'color-grey':!c.isParty}">
+                                            <span class="bold" ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
                                                 {{::c.name | lstring:locale}}
                                             </span>
                                         </a>
