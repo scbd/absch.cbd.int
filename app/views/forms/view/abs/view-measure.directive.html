@@ -44,7 +44,7 @@
 		<div ng-show="document.jurisdictionRegions">
 			<label>Country name and/or Geographical or political/economic group(s)</label>
 			<div class="km-value" compare-val>
-				<ul>
+				<ul class="list">
 					<li ng-repeat="term in document.jurisdictionRegions">{{term|term:locale}}</li>
 				</ul>
 			</div>
@@ -100,7 +100,7 @@
 			<legend>Document details</legend>
 			<label>Document text</label>
 			<div class="km-value" compare-val>
-				<ul>
+				<ul class="list">
 					<li ng-repeat="item in document.documents">
 						<a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
 						<i ng-show="item.language">({{getTerm(item.language)|term:locale}})</i>
@@ -113,7 +113,7 @@
 		<div ng-show="document.documentTranslations">
 			<label>Translation</label>
 			<div class="km-value" compare-val>
-				<ul>
+				<ul class="list">
 					<li ng-repeat="item in document.documentTranslations">
 						<a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}">
 							<i class="fa fa-external-link-square" aria-hidden="true"></i> {{item.name||item.url}}
@@ -143,7 +143,7 @@
 				<label>This measure is amending the following:</label>
 
 				<div class="km-value" compare-val>
-					<ul>
+					<ul class="list">
 						<li ng-repeat="item in document.amendedMeasures">
 							<div view-record-reference ng-model="item.identifier" locale="locale"></div>
 						</li>
@@ -168,7 +168,7 @@
 			<legend>Amendments</legend>
 			<label>This measure has been amended by:</label>
 			<div class="km-value" compare-val>
-				<ul>
+				<ul class="list">
 					<li ng-repeat="item in document.measureAmendedBy">
 						<div view-record-reference ng-model="item.identifier_s" locale="locale"></div>
 					</li>
@@ -180,7 +180,7 @@
 			<legend>Relationships</legend>			
 			<div class="km-value" ng-show="document.linkedMeasures && document.linkedMeasures.length>0">
 				<label>This measure is related to:</label>
-				<ul>
+				<ul class="list">
 					<li ng-repeat="item in document.linkedMeasures">
 						<div view-record-reference ng-model="item.identifier" locale="locale"></div>
 					</li>
@@ -211,7 +211,7 @@
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website address or attached documents</label>
 				<div class="km-value" compare-val="relevantDocuments">
-					<ul>
+					<ul class="list">
 						<li ng-repeat="item in document.relevantDocuments">
 							<i class="fa fa-external-link-square" aria-hidden="true"></i>
 							<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>

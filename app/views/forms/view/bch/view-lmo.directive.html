@@ -92,7 +92,7 @@
 		<div ng-show="document.techniqueUsed">
 			<label>Techniques used for the modification</label>
 			<div class="km-value">
-				<ul>
+				<ul class="list">
 					<li ng-repeat="use in document.techniqueUsed" ng-bind="use | term:locale"></li>
 				</ul>
 			</div>
@@ -150,7 +150,7 @@
 		<div ng-show="document.commonUses">
 			<label>Common use(s)</label>
 			<div class="km-value">
-				<ul>
+				<ul class="list">
 					<li ng-repeat="use in document.commonUses" ng-bind="use | term:locale"></li>
 				</ul>
 			</div>
@@ -177,7 +177,7 @@
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website address or attached documents</label>
 				<div class="km-value">
-					<ul>
+					<ul class="list">
 						<li ng-repeat="item in document.relevantDocuments">
 							<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 							<i ng-show="item.language">({{item.language|uppercase}})</i>

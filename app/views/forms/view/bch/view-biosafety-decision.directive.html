@@ -48,7 +48,7 @@
 		<div ng-show="document.jurisdictions.length">
 			<label>Jurisdiction</label>
 			<div class="km-value">
-				<ul>
+				<ul class="list">
 					<li ng-repeat="item in document.jurisdictions" ng-bind="item|term:locale"></li>
 				</ul>
 			</div>
@@ -234,7 +234,7 @@
 		<div ng-show="document.riskAssessments">
 			<label>Risk assessment</label>
 			<div  class="km-value">
-				<ul>
+				<ul class="list">
 					<li ng-repeat="item in document.riskAssessments">
 						<view-record-reference ng-model="item.identifier"></view-record-reference>
 					</li>
@@ -246,7 +246,7 @@
 		<div ng-show="document.documents">
 			<legend>Decision document</legend>
 			<div class="km-value">
-				<ul>
+				<ul class="list">
 					<li ng-repeat="item in document.documents">
 						<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 					</li>
@@ -263,7 +263,7 @@
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website address or attached documents</label>
 				<div class="km-value">
-					<ul>
+					<ul class="list">
 						<li ng-repeat="item in document.relevantDocuments">
 							<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 						</li>

@@ -43,7 +43,7 @@
         	     <div ng-show="document.relatedIRCCs">
 					<label>Reference number(s) to other internationally recognized certificate(s) of compliance that relate(s) to this permit</label>
 					<div class="km-value">
-						<ul>
+						<ul class="list">
 							<li ng-repeat="item in document.relatedIRCCs">
                             <div view-record-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
@@ -134,7 +134,7 @@
 					</div> -->
 
                     <div class="km-value">
-						<ul style="list-style-type: none;padding-left:3px;">
+						<ul  class="list">
 							<li ng-repeat="item in document.picDocuments">
 								<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
 						       <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
@@ -161,7 +161,7 @@
     					</div> -->
 
                             <div class="km-value">
-    						<ul style="list-style-type: none;padding-left:3px;">
+    						<ul  class="list">
     							<li ng-repeat="item in document.matDocuments">
     								<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
     						       <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
@@ -193,7 +193,7 @@
 						</div> -->
 
                         <div class="km-value">
-						  <ul>
+						  <ul class="list">
 							<li ng-repeat="item in document.specimens">
 								<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"> {{item.name||item.url}}</a>
 						       <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
@@ -205,7 +205,7 @@
 					<div ng-show="document.taxonomies">
 						<label>Taxonomy data</label>
                         <div class="km-value">
-						  <ul>
+						  <ul class="list">
 							<li ng-repeat="item in document.taxonomies">
 								<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"> {{item.name||item.url}}</a>
 						       <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
@@ -269,7 +269,7 @@
 			<div ng-show="document.permitFiles">
 				<label>Copy of permit or its equivalent, or other relevant open-access document</label>
                     <div class="km-value">
-						<ul style="list-style-type: none;padding-left:3px;">
+						<ul  class="list">
 							<li ng-repeat="item in document.permitFiles">
 								<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
 						       <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
