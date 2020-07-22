@@ -76,8 +76,8 @@ function(require, template, app, _, ammap, worldEUHigh) {
         if(realm.is('BCH')){
           $scope.isBCH          = true;
           mapColors = {
-            party          : '#00405C',
-            nonParty       : '#9e6621',
+            party          : '#9e6621',
+            nonParty       : '#00405C',
             inBetweenParty : '#EC971F'
           }
         }
