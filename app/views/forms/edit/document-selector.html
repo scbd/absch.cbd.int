@@ -1,4 +1,4 @@
-<div>
+﻿<div>
 
         <style>
                 #rec {font-size:12px;}
@@ -239,7 +239,7 @@
                         <th style="white-space:nowrap;"><a rel="noopener" href="#" class="col-title" ng-click="sortType = 'schema_s'; sortReverse = !sortReverse">type</a>  
                             <span ng-show="sortType == 'schema_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_title'; sortReverse = !sortReverse">name</a> 
+                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_title'; sortReverse = !sortReverse">title</a> 
                             <span ng-show="sortType == 'rec_title'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
 
                         <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_countryName'; sortReverse = !sortReverse">owner</a>
@@ -261,7 +261,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="doc in rawDocuments.docs" id="rec">
-                        <td style="width:0;"><span class="bold">{{$index+1}}.</span></td>
+                        <td style="width:0;"><span class="bold" ng-bind="(($index+1) + ((searchResult.currentPage-1)*searchResult.rowsPerPage))"></span></td>
                         <td  style="width:0;">                                                
                             <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)" />
                             <input ng-if="type==='radio'" type="radio" name="{{question}}_selected"   ng-change="onSelectAction(doc)" ng-model="doc.__checked" ng-value="true" />
