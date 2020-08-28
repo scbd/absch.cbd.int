@@ -62,6 +62,13 @@
             #Search-Filter .filter-item:hover{
                 background:#ddd;
             }
+
+            @media (max-width: 480px) {
+                .pagination-items-per-page, .pagination-page-count, .pagination-btn-first,
+                .pagination-record-count, .pagination-btn-last{
+                    display: none!important;
+                }
+            }
        </style>
         <div style="border-bottom: 1px solid #eee">
             <h1>Filters</h1>
