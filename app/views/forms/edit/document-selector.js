@@ -110,9 +110,9 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
 			$scope.syncDocuments = function(){
                
 
-				var docs = []
-                if ($scope.model){
+                if ($attr.skipSyncDocuments!='true' && $scope.model){
                     
+				    var docs = []
 					if($scope.type == 'radio'){
                         var config;                            
                          if(focalPointRegex.test($scope.model.identifier))
@@ -209,11 +209,11 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
                 var oldModel = $scope.model;
 
                 var removeId;
-				 if(document.identifier)
-				   removeId = document.identifier;
-                 else if(document.header)
+                if(document.identifier)
+                    removeId = document.identifier;
+                else if(document.header)
                     removeId = document.header.identifier;
-                 else
+                else
                     removeId = document.identifier_s;
 
                  if($scope.rawDocuments){
@@ -226,8 +226,8 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
 
                 if($scope.selectedDocuments){
                     $scope.selectedDocuments =  _.filter($scope.selectedDocuments, function (doc) {
-                        if(doc.header.identifier !== removeRevisionNumber(removeId) ){
-                        return doc;
+                        if(((doc.header||{}).identifier||doc.identifier_s) !== removeRevisionNumber(removeId) ){
+                            return doc;
                         }
                     });
                     $scope.selectedRawDocuments =  _.filter($scope.selectedRawDocuments, function (doc) {
@@ -235,6 +235,7 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
                         return doc;
                         }
                     });
+                    // $scope.tempSelectedRawDocuments = angular.copy($scope.selectedRawDocuments);
                 }
 			   if($scope.type != 'radio')
 	               $scope.model =  _.filter($scope.model, function (doc) {
@@ -288,16 +289,20 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
                 if($scope.activeTab == 'myRecords'){
                     var myRecordsQuery = '_contributor_is:' + $scope.$root.user.userID
                     if($scope.userGov)
-                        myRecordsQuery = ' OR _ownership_s:'+$scope.userGov.toLowerCase()
+                        myRecordsQuery += ' OR _ownership_s:'+$scope.userGov.toLowerCase()
                     fieldQueries.push(myRecordsQuery)
                 }
 
                 var query = '*:*';
                 
                 if(options.freeTextQuery)
-                    query = 'text_'+(locale||'en').toUpperCase()+'_txt:' + options.freeTextQuery;
+                    if(($attr.freeTextQueryField||'')!='')
+                        query = $attr.freeTextQueryField + ':' + options.freeTextQuery;
+                    else
+                        query = 'text_'+(locale||'en').toUpperCase()+'_txt:' + options.freeTextQuery;
 
                 var queryParameters = {
+                    fields          : ($attr.displayFields||'')!= '' ? $attr.displayFields : undefined,
                     fieldQuery      : fieldQueries,
                     'query'         : query,
                     'currentPage'   : $scope.searchResult.currentPage-1,
@@ -362,9 +367,9 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
                     _.each($scope.rawDocuments.docs, function(d){
                         if(d.identifier_s!=doc.identifier_s && d.__checked)
                             d.__checked = false;
-                        if(d.identifier_s==doc.identifier_s){
-                            console.log(d);
-                        }
+                        // if(d.identifier_s==doc.identifier_s){
+                        //     console.log(d);
+                        // }
                     })
                 }
                 if(doc.__checked===true){
@@ -415,8 +420,13 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
                 else
                     identifiers = [removeRevisionNumber($scope.model.identifier)];
                 
+                var queryField = 'identifier_s'
+                if(($attr.lookupField||'')!='')
+                    queryField = $attr.lookupField;
+
                 var queryParameters = {
-                    'query'    : 'identifier_s:(' + identifiers.join(' ') +')',
+                    fields       : ($attr.displayFields||'')!= '' ? $attr.displayFields : undefined,
+                    'query'      : queryField + ':("' + identifiers.join('" "') +'")',
                     'rowsPerPage': $scope.searchResult.rowsPerPage                    
                 };
                 searchService.list(queryParameters, null).then(function(result){                    
