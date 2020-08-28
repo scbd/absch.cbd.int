@@ -42,7 +42,6 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
 			"title": "Living modified organism",
@@ -212,17 +211,18 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
 			"title": "Living modified organism",
 			"field": "modifiedOrganisms_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
-				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
+				"fl": "identifier_s:uniqueIdentification_s,rec_title:uniqueIdentification_s",
+				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*",
+				"searchField":"uniqueIdentificationVariants_ss",
+				"lookupField":"uniqueIdentification_s"
 			},
 			"title": "Unique Identifier",
 			"field": "uniqueIdentifications_ss"
@@ -301,10 +301,12 @@
 			"relatedField":"trait_REL_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
-				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
+				"fl": "identifier_s:uniqueIdentification_s,rec_title:uniqueIdentification_s",
+				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*",
+				"searchField":"uniqueIdentificationVariants_ss",
+				"lookupField":"uniqueIdentification_s"
 			},
 			"title": "Unique Identifier",
 			"field": "uniqueIdentifications_ss"
@@ -374,17 +376,18 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
 			"title": "Living modified organism",
 			"field": "modifiedOrganisms_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
-				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
+				"fl": "identifier_s:uniqueIdentification_s,rec_title:uniqueIdentification_s",
+				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*",
+				"searchField":"uniqueIdentificationVariants_ss",
+				"lookupField":"uniqueIdentification_s"
 			},
 			"title": "Unique Identifier",
 			"field": "uniqueIdentifications_ss"
@@ -510,7 +513,6 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
 			"title": "LMO(s) detectable by the laboratory",
@@ -519,7 +521,6 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:dnaSequence"
 			},
 			"title": "Genetic elements(s) detectable by the laboratory",
