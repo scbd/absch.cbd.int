@@ -209,6 +209,13 @@
 			"relatedField":"scopes_REL_ss"
 		},
 		{
+			"type": "thesaurus",
+			"term": "regions",
+			"title": "Geographical region",
+			"field": "operationalRegions_ss",
+			"relatedField":"operationalRegions_REL_ss"
+		},
+		{
 			"type": "solrRecords",
 			"query": {
 				"q": "schema_s:modifiedOrganism"
@@ -477,6 +484,13 @@
 		},
 		{
 			"type": "thesaurus",
+			"term": "regions",
+			"title": "Geographical region",
+			"field": "operationalRegions_ss",
+			"relatedField":"operationalRegions_REL_ss"
+		},
+		{
+			"type": "thesaurus",
 			"term": "organizationTypes",
 			"title": "Type of Organization",
 			"field": "organizationTypes_ss",
@@ -502,6 +516,13 @@
 			"narrowerOf":"8DAB2400-CF00-44B2-ADCF-49AABF66B9B0",
 			"title": "Types of LMOs",
 			"field": "lmoTypes_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "regions",
+			"title": "Geographical region",
+			"field": "operationalRegions_ss",
+			"relatedField":"operationalRegions_REL_ss"
 		},
 		{
 			"type": "thesaurus",
