@@ -295,11 +295,16 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
 
                 var query = '*:*';
                 
-                if(options.freeTextQuery)
+                if($scope.search.keyword){
+                    var queryText = $scope.search.keyword;
+                    if(queryText.indexOf('-')>0) 
+                        queryText = '"' + queryText + '"' // Add quotes if text contains - especially if search is by uid
+                
                     if(($attr.freeTextQueryField||'')!='')
-                        query = $attr.freeTextQueryField + ':' + options.freeTextQuery;
+                        query = $attr.freeTextQueryField + ':' + queryText;
                     else
-                        query = 'text_'+(locale||'en').toUpperCase()+'_txt:' + options.freeTextQuery;
+                        query = 'text_'+(locale||'en').toUpperCase()+'_txt:' + queryText;
+                }
 
                 var queryParameters = {
                     fields          : ($attr.displayFields||'')!= '' ? $attr.displayFields : undefined,
@@ -404,9 +409,7 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
                 // if(!searchKeyword)return;
 
                 $scope.searchResult.currentPage = 1;
-                var queryText = searchKeyword;
-                if(queryText.indexOf('-')>0) queryText = '"' + searchKeyword + '"' // Add quotes if text contains - especially if search is by uid
-                getDocs({freeTextQuery:queryText});
+                getDocs();
             }
 
             function loadSelectedDocumentDetails(){
