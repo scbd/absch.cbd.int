@@ -107,11 +107,16 @@
 														<span style="display:none">4. Atleast one question should be answered yes</span>
 													</label>
 													<div style="padding-left:20px" class="well">
-														<div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="a. Is this a dedicated ABS capacity-building project/programme? ">
-															<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.capacityBuildingType.isProjectProgramme"></div>
+														<div class="help-block">Only one question can be answered yes.</div>
+														<div class="km-control-group"  bold="true" required name="isProjectProgramme" 
+															caption="a. Is this a dedicated ABS capacity-building project/programme? ">
+															<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.capacityBuildingType.isProjectProgramme" 
+															ng-change="updateCapacityType('isProjectProgramme', document.capacityBuildingType.isProjectProgramme)"></div>
 														</div>
-														<div class="km-control-group"  bold="true" required name="isBroaderProjectPart" caption="b. Is this an ABS activity or component which is part of a broader capacity-building project or programme?">
-															<div class="km-yes-no" required name="isBroaderProjectPart" ng-model="document.capacityBuildingType.isBroaderProjectPart"></div>
+														<div class="km-control-group"  bold="true" required name="isBroaderProjectPart" 
+															caption="b. Is this an ABS activity or component which is part of a broader capacity-building project or programme?">
+															<div class="km-yes-no" required name="isBroaderProjectPart" ng-model="document.capacityBuildingType.isBroaderProjectPart"
+															 ng-change="updateCapacityType('isBroaderProjectPart', document.capacityBuildingType.isBroaderProjectPart)"></div>
 														</div>
 														<div class="km-control-group" name="broaderProjects" caption="Please identify the broader project" ng-show="document.capacityBuildingType.isBroaderProjectPart">
 																
@@ -119,8 +124,10 @@
 																							question="capacityBuildingInitiative"
 																							schema="capacityBuildingInitiative" filter="true" skip-government="true"></div>
 														</div>
-														<div class="km-control-group"  bold="true" required name="isStandaloneProject" caption="c. Is this a stand-alone ABS activity that is not part of a broader capacity-building project or programme? ">
-															<div class="km-yes-no" required name="isStandaloneProject" ng-model="document.capacityBuildingType.isStandaloneProject"></div>
+														<div class="km-control-group"  bold="true" required name="isStandaloneProject" 
+															caption="c. Is this a stand-alone ABS activity that is not part of a broader capacity-building project or programme? ">
+															<div class="km-yes-no" required name="isStandaloneProject" ng-model="document.capacityBuildingType.isStandaloneProject" 
+															 ng-change="updateCapacityType('isStandaloneProject', document.capacityBuildingType.isStandaloneProject)"></div>
 														</div>
 													</div>
 												</div>

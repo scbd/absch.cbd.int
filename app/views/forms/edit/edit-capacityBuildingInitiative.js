@@ -212,10 +212,25 @@ define(['app', 'underscore', 'views/forms/edit/edit', '../view/view-capacity-bui
             delete document.typeInfo;
             
         return document;
-      };
-
-    $scope.setDocument({libraries: [{ identifier: "cbdLibrary:abs-ch" }]});
-    $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
+    };
+    
+    $scope.updateCapacityType = function(type, val){        
+        if(val==true){
+            if(type!='isProjectProgramme')
+                $scope.document.capacityBuildingType.isProjectProgramme = false;
+            if(type!='isBroaderProjectPart'){
+                $scope.document.capacityBuildingType.isBroaderProjectPart = false;
+                $scope.document.capacityBuildingType.broaderProjects= undefined;
+            }
+            if(type!='isStandaloneProject')
+                $scope.document.capacityBuildingType.isStandaloneProject = false;
+        }
+    }
+    
+    $scope.setDocument({
+        libraries: [{ identifier: "cbdLibrary:abs-ch" }],
+        aichiTargets: [{identifier: "AICHI-TARGET-16"}]
+    }, true);
 
   }]);
 });
