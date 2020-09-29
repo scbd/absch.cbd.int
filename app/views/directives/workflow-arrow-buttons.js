@@ -933,8 +933,10 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                     }
                     $rootScope.$on("loadDocument", function(event, data) {
                         originalDocument = angular.copy(data.document);
-                        if(!saveDraftVersionTimer)
-                            saveDraftVersion();
+                        $timeout(function(){
+                            if(!saveDraftVersionTimer)
+                                saveDraftVersion();
+                        }, 5000);
                     });
 
                     $rootScope.$on('$includeContentLoaded', function(event) {
