@@ -28,14 +28,12 @@
 
 	<div style="display: none; position: absolute; z-index: 9999; background-color: white; max-height: 300px; overflow: auto;"
 		class="list-group">
-		<div ng-if="showList">
 			<div ng-repeat="item in buttonOverrideFilter(bindingDisplay, items)" ng-click="clickSelected($index)"
 				ng-mouseover="updateSelected($index)" class="list-group-item" style="cursor: pointer;"
 				ng-class="{'list-group-item-info': selected == $index, 'list-group-item-success': displaySpans.indexOf(item.__value)!=-1}">
 				{{item.title | lstring:currentLocale}}&nbsp;
 				<span ng-show="displaySpans.indexOf(item.__value) != -1" class="glyphicon glyphicon-ok"></span>
 			</div>
-		</div>
 	</div>
 	<div ng-show="!hidePreview" compile="preview"></div>	
 </div>
