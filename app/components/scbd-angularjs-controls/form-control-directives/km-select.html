@@ -21,7 +21,7 @@
 	</div>
 
 	<span>
-		<div class="btn-group" >
+		<div class="btn-group" id="select-dropdown">
 			<button class="btn btn-default dropdown-toggle" ng-click="autoInit()" ng-class="{disabled:ngDisabledFn(), 'btn-info' : hasSelectedItems() }" data-toggle="dropdown">
 				{{getTitle(displayCount, true)}}
 				<span class="caret"></span>
@@ -34,29 +34,30 @@
 					<a rel="noopener" href><em>Nothing to select...</em></a>
 				</li>
 				<li ng-show="!!rootItems && (getMinimum()==0 || allowOther == 'true')" style="padding:2px 20px;" id="filterText">
-					<input type="textbox"  ng-show="getMinimum()==0 && rootItems.length!=0" ng-model="filterText" style="width:95% !important" class="form-control" />
-					<i title="Clear search text" ng-show="filterText" ng-click="filterText='';" class="glyphicon glyphicon-remove" style="height:1px !important;width:1px !important;cursor:pointer"></i>
-					<button class="btn btn-xs btn-default" ng-show="hasSelectedItems()"type ="button" ng-click="clearSelection()" ng-disabled="!hasSelectedItems()">Clear selection</button>
-					<button class="btn btn-xs btn-default" ng-show="allowOther == 'true'" type="button" ng-click="chooseOther()"    ng-show="allowOther">Specify another value</button>
+					<div class="input-group" style="margin-bottom: 5px;">
+						<input type="textbox"  ng-show="getMinimum()==0 && rootItems.length!=0" ng-model="filterText" class="form-control" />
+						<span class="input-group-addon" title="Clear search text" ng-click="clearFilter($event)" style="cursor:pointer">
+							<i  class="fa" ng-class="{'fa-remove color-red' : filterText, 'fa-search': !filterText}"></i>
+						</span>
+					</div>
+					<div>
+						<button class="btn btn-xs btn-default" ng-show="hasSelectedItems()"type ="button" ng-click="clearSelection()" ng-disabled="!hasSelectedItems()">Clear selection</button>
+						<button class="btn btn-xs btn-default" ng-show="allowOther == 'true'" type="button" ng-click="chooseOther()"    ng-show="allowOther">Specify another value</button>
+					</div>
 				</li>
-				<li ng:repeat="item in rootItems | filter:filterText" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" style="position:relative">
+				<li ng:repeat="item in rootItems | filter:filterList" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" style="position:relative">
 				</li>
 				<li style="margin-top:5px;border-top: 1px solid #eee;" ng-if="hasOtherSource">
 					<a rel="noopener" ng-click="showOtherSource($event)" style="cursor: pointer;">
 						<i class="fa fa-spin fa-spinner" ng-if="loadingOtherSource"></i>
-						<span ng-if="!secondaySource">Show others</span>
+						<span ng-if="!secondarySource">Show others</span>
 					</a>
 				</li>
-				<li ng-if="hasOtherSource && secondaySource" ng:repeat="item in secondaySource | filter:filterText" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" style="position:relative">
+				<li ng-if="hasOtherSource && secondarySource" ng:repeat="item in secondarySource | filter:filterText" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" style="position:relative">
 				</li>
 			</ul>
 		</div>
 
 	</span>
-	<style type="text/css">
-		#filterText i:before{
-			height: 1px !important;
-			width:  1px !important;
-		}
-	</style>
+	
 </span>

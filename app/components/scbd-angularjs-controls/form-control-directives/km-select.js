@@ -36,6 +36,7 @@ function(app, angular, $, _, template) {
         $scope.multiple = $attrs.multiple !== undefined && $attrs.multiple !== null;
         $scope.watchItems = $attrs.watchItems !== undefined && $attrs.watchItems !== null;
         $scope.displayCount = $attrs.displayCount || 3;
+        $scope.filterType   = $attrs.filterType || 'contains';
 
         if ($scope.showDescription === undefined)
           $scope.showDescription = 'false';
@@ -83,6 +84,9 @@ function(app, angular, $, _, template) {
           $scope.clearSelection(info && info.data ? info.data.identifier : undefined);
         });
 
+        $element.find('#select-dropdown').on('hidden.bs.dropdown', function(){
+          $scope.filterText = '';
+        })
         //==============================
         //
         //==============================
@@ -313,8 +317,8 @@ function(app, angular, $, _, template) {
         //==============================
         $scope.getSelectedItems = function() {
           var mainSource = $scope.allItems || [];
-          if($scope.secondaySource)
-            mainSource = _.union(mainSource, $scope.secondaySource);
+          if($scope.secondarySource)
+            mainSource = _.union(mainSource, $scope.secondarySource);
 
           return _.where(mainSource, { selected: true });
         };
@@ -440,6 +444,27 @@ function(app, angular, $, _, template) {
 
           $scope.save();
         };
+
+        $scope.filterList = function(item){
+          if($scope.filterText){
+            var title = $filter('lstring')(item.title, $scope.currentLocale)
+            if(!title)
+              title = $filter('lstring')(item.name, $scope.currentLocale)
+                        
+            if($scope.filterType == 'startsWith')
+              return _.startsWith(title.toLowerCase(), $scope.filterText.toLowerCase());
+
+            return _.contains(title.toLowerCase(), $scope.filterText.toLowerCase())
+            
+          }
+          return true;
+        }
+
+        $scope.clearFilter = function($evt){
+          $scope.filterText='';
+          $evt.stopPropagation();
+        }
+
         $('#filterText').on("click", "*", function(e) {
           e.stopPropagation();
         });
@@ -453,7 +478,7 @@ function(app, angular, $, _, template) {
 
           $scope.loadingOtherSource = true
           $scope.showOthersFn().then(function(data){
-            $scope.secondaySource = _.filter(data, function(d){
+            $scope.secondarySource = _.filter(data, function(d){
               if(_.contains($scope.binding, d.identifier))
                 d.selected = true
               return !_.find($scope.allItems, {identifier:d.identifier})
