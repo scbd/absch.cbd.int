@@ -30,8 +30,8 @@ define(['app','underscore',
           ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
 
       });
-      if($scope.code.toUpperCase == 'GB')
-            $element.find('[data-toggle="tooltip"]').tooltip(); 
+      if($scope.code.toUpperCase() == 'GB')
+            $timeout(function(){$element.find('[data-toggle="tooltip"]').tooltip()}, 300); 
       
       if($scope.$root.deviceSize !== 'sm' && $scope.$root.deviceSize !== 'xs'){
         $scope.loadingMap = true;

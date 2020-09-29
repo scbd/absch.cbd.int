@@ -229,7 +229,7 @@
                                         <span ng-if="!currentCountry.code"> National Records </span>
                                     </a>
                                     <a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}"  style="color:#fff">
-                                        <i  class="flag-icon flag-icon-{{currentCountry.exceptionCountry||currentCountry.code.toLowerCase()}}"></i> 
+                                        <i  class="flag-icon flag-icon-{{currentCountry.code.toLowerCase()}}"></i> 
                                         {{currentCountry.name|lstring}}
                                     </a>
                                 </h3>
