@@ -194,15 +194,11 @@ function(require, template, app, _, ammap, worldEUHigh) {
                     showCountryDetails(evt)
                 });
                 // map.addListener("click", closePopovers);
-                map.addListener( "rollOverMapObject", function(a,b,c){
-                  // if($scope.currentCountry && $scope.currentCountry.code == a.mapObject.id)
-                  //   return;
-                  dynamicColor(a.mapObject.id, a.mapObject.rollOverColorReal, 'mouseOver')
-                } );
-                map.addListener( "rollOutMapObject", function(a,b,c){
-                  // if($scope.currentCountry && $scope.currentCountry.code == a.mapObject.id)
-                  //   return;
-                  dynamicColor(a.mapObject.id, a.mapObject.rollOverColorReal, 'mouseOver')
+                map.addListener( "rollOverMapObject", function(evt){
+                  dynamicColor(evt.mapObject.id, evt.mapObject.rollOverColorReal, 'mouseOver')
+                });
+                map.addListener( "rollOutMapObject", function(evt){
+                  dynamicColor(evt.mapObject.id, evt.mapObject.rollOverColorReal, 'mouseOver')
                 } );
                 if($routeParams.code){
                   showCountryDetails({mapObject: { id: $routeParams.code}});
@@ -271,12 +267,15 @@ function(require, template, app, _, ammap, worldEUHigh) {
                     if(mapCountry)//not sure if this is correct
                       mapCountry.colorReal = mapCountry.baseSettings.color = mapColors.nonParty;
               }
+              mapCountry.originalColorReal = mapCountry.colorReal;
   
               if( $scope.isBCH && country.isParty && _.includes(['RS','GB'], country.code)){
                 var territoryCode =  country.code == 'RS' ? 'XK' : 'GI' 
                 var xkMapCountry = getMapObject(territoryCode);
                 xkMapCountry.colorReal = mapColors.party;
+                mapCountry.originalColorReal = xkMapCountry.colorReal
               }
+
         }
         function changeSelectedColor(code, color) {
           var mapCountry = getMapObject(code);
@@ -294,11 +293,13 @@ function(require, template, app, _, ammap, worldEUHigh) {
         }
         function showCountryDetails(event) {
 
+            var exceptionRegion;
             var code = event.mapObject.id;
             if($scope.currentCountry && $scope.currentCountry.code== code)
                 return;
 
             if(exceptionRegionMapping[code]){
+              exceptionRegion = code;
               code = exceptionRegionMapping[code];
             }
             if(code){
@@ -306,16 +307,20 @@ function(require, template, app, _, ammap, worldEUHigh) {
               // changeAreaColor(countries[code])
               dynamicColor(code, '#428bca', 'clicked')            
             }
-
+            // {exceptionRegion:exceptionRegion}
             $q.when(countryFacets((code ? code.toLowerCase() : code)), function(facets){
                 $scope.currentCountry = undefined;
                 $timeout(function(){
                     $scope.reduceDetailsHeight = false;
                     if(code){
                         $scope.currentCountry = _.extend(countries[code.toUpperCase()], facets);
+                        if(code == 'EH')
+                          $scope.currentCountry = {name:{en:'Western Sahara'}, code:code}
                         if(($scope.currentCountry.name[locale]||'').length > 25)
                             $scope.reduceDetailsHeight = true;
-                       
+                        if(!$scope.currentCountry.exceptionCountry && exceptionRegion)
+                          $scope.currentCountry.exceptionCountry = exceptionRegion;
+
                         if(($scope.currentCountry.exceptionCountry||'').toLowerCase()=='gb' || ($scope.currentCountry.code||'').toLowerCase() == 'gb'){
                             $timeout(function(){
                                 $element.find('[data-toggle="tooltip"]').tooltip(); 
@@ -324,7 +329,7 @@ function(require, template, app, _, ammap, worldEUHigh) {
                         return;
                     }
                     
-                    $scope.currentCountry = { schemas : facets };
+                    $scope.currentCountry = { schemas : facets, code:code };
                     
                     
                 },100)
@@ -420,19 +425,20 @@ function(require, template, app, _, ammap, worldEUHigh) {
             code = exceptionRegionMapping[code];
           }
           if(prevCountryColor[type] && prevCountryColor[type].code){
-            var prevSelTerritories = _(exceptionRegionMapping).keys().filter(function(k){return exceptionRegionMapping[k] == prevCountryColor[type].code}).value();
-            if(prevSelTerritories.length){
-              changeSelectedColor(prevCountryColor[type].code, prevCountryColor[type].colorReal);
-              _.each(prevSelTerritories, function(territory){
-                changeSelectedColor(territory,  prevCountryColor[type].colorReal)
-              })
-            }
+              var prevSelTerritories = _(exceptionRegionMapping).keys().filter(function(k){return exceptionRegionMapping[k] == prevCountryColor[type].code}).value();
+              if(prevSelTerritories.length){
+                changeSelectedColor(prevCountryColor[type].code, prevCountryColor[type].colorReal);
+                _.each(prevSelTerritories, function(territory){
+                  changeSelectedColor(territory,  prevCountryColor[type].colorReal)
+                })
+              }
+            
           }
           prevCountryColor[type] = { code : code };
           var otherTerritories = _(exceptionRegionMapping).keys().filter(function(k){return exceptionRegionMapping[k] == code}).value()
           if(code){
             if(otherTerritories.length){
-              prevCountryColor[type].colorReal = getMapObject(prevCountryColor[type].code).colorReal;
+              prevCountryColor[type].colorReal = getMapObject(prevCountryColor[type].code).originalColorReal;
               changeSelectedColor(code, color);
             }
 
@@ -440,6 +446,7 @@ function(require, template, app, _, ammap, worldEUHigh) {
               changeSelectedColor(territory, color)
             })
           }
+
         }
 
         function loadLmoMap(lmoDecisions){         
