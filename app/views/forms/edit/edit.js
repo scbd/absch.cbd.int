@@ -58,14 +58,15 @@ define([
           return o.data;
         });
       },
-      regions			: function() {
+      countryRegions			: function() {
         return $q.all([
-          $http.get("/api/v2013/thesaurus/domains/regions/terms", { cache: true }),
-          $http.get("/api/v2013/thesaurus/domains/countries/terms",   { cache: true })
+          thesaurusService.getDomainTerms('regions'),
+          thesaurusService.getDomainTerms('countries')
         ]).then(function(o) {
-          return Enumerable.from($filter("orderBy")(o[0].data, "name")).union(
-            Enumerable.from($filter("orderBy")(o[1].data, "name"))
-          ).toArray();
+          var regions   = $filter("orderBy")(o[0], "name");
+          var countries = $filter("orderBy")(o[1], "name");
+          var countryRegions = _.union(regions, countries);
+          return countryRegions;
         });
       },
     };
