@@ -44,6 +44,7 @@ define(['app', 'services/cache-service'], function (app) {
 
                                     var other      = termData[1].data;
                                         other.type = options.otherType;  //lstring or int etc
+                                    other.multiple = options.multiple;  //lstring or int etc
                                     data.push(other);
                                     return data;
                                 });
@@ -134,8 +135,10 @@ define(['app', 'services/cache-service'], function (app) {
                 geographicRegions             : 'geographic-regions',
                 services                      : 'DE2D1321-AD01-4C49-8D48-E7BD4EA14226',
                 detectionMethods              : '81EE782D-810C-4107-8E8F-F7A6EE4CD1B5',
-                unLanguages                   : '52AFC0EE-7A02-4EFA-9277-8B6C327CE21F'
-                
+                unLanguages                   : '52AFC0EE-7A02-4EFA-9277-8B6C327CE21F',
+                nationalities                 : 'Nationalities',
+                genders                       : 'Genders',
+                areasOfExpertise              : 'E4D79BA6-12F8-48D5-B396-25951FA1E07E'
             }
         }
     }]);
