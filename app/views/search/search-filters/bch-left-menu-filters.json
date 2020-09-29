@@ -1,4 +1,4 @@
-﻿{
+{
 	"authority": [
 		{
 			"type": "freeText",
@@ -169,7 +169,7 @@
 			"field": "geneDonorOrganismIdentifiers_ss"
 		}
 	],
-	"expert": [
+	"biosafetyExpert": [
 		{
 			"type": "freeText",
 			"title": "Free Text",
