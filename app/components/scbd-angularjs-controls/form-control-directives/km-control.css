@@ -104,3 +104,56 @@ trix-toolbar .trix-button--icon-underline{
 .input-lang-ar input, .input-lang-ar textarea{
     direction: rtl;
 }
+
+
+.webui-popover-content {
+    max-width: 500px;
+    max-height: 300px;
+    text-align: justify;
+    color: #fff;
+    background: #000;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+}
+
+.webui-popover {
+    text-align: left;
+    background-color: #000;
+    padding: 0px!important;
+    background: #000!important;
+}
+
+.webui-popover-content a {
+    border-bottom: 1px solid red;
+}
+
+.webui-popover-title,
+.webui-popover-inner .close {
+    border-bottom: 0px solid #f2f2f2!important;
+    background-color: #000!important;
+    color: #fff!important;
+}
+
+.webui-popover.top> .webui-arrow:after,
+.webui-popover.top-right> .webui-arrow:after,
+.webui-popover.top-left> .webui-arrow:after {
+    border-top-color: #000!important;
+}
+
+.webui-popover.right> .webui-arrow:after,
+.webui-popover.right-top> .webui-arrow:after,
+.webui-popover.right-bottom> .webui-arrow:after {
+    border-right-color: #000!important;
+}
+
+.webui-popover.bottom> .webui-arrow:after,
+.webui-popover.bottom-right> .webui-arrow:after,
+.webui-popover.bottom-left> .webui-arrow:after {
+    border-bottom-color: #000!important;
+}
+
+.webui-popover.left> .webui-arrow:after,
+.webui-popover.left-top> .webui-arrow:after,
+.webui-popover.left-bottom> .webui-arrow:after {
+    border-left-color: #000!important;
+}
