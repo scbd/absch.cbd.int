@@ -91,6 +91,31 @@
 			"field": "geneDonorOrganismIdentifiers_ss"
 		}
 	],
+	"biosafetyNews": [
+		{
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "country",
+			"title": "Country",
+			"field": "country_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "title",
+			"title": "Title of the record",
+			"field": "title_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "newsText",
+			"title": "News text",
+			"field": "newsText_ss"
+		}
+	],
 	"biosafetyLaw": [
 		{
 			"type": "freeText",

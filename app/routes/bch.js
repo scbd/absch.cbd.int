@@ -7,7 +7,7 @@ define(['app', './common-routes', 'angular-route'], function (app,commonRoutes) 
                whenAsync('/submit',                     {templateUrl: 'views/register/record-types.html',                     controller: function() { return commonRoutes.importQ('views/register/record-types'); }, label:'Submit', resolve : { user : commonRoutes.currentUser() }}).
                
                whenAsync('/database/reports*',               { redirectTo:  '/reports' }).
-
+               whenAsync('/register/BCHN/new',                 {templateUrl: 'views/forms/edit/bch/edit-biosafety-news.html', label:'New', param:'true', resolveController: true,documentType :'biosafetyNews' , resolve : { securized : commonRoutes.securize(null,true, true) }, }).
                whenAsync('/register/DEC/new',                   {templateUrl: 'views/forms/edit/bch/edit-biosafety-decision.html',  label:'New',  param:'true', resolveController: true,documentType :'DEC' ,   resolve : { securized : commonRoutes.securize(null,true, true) }, }).
                whenAsync('/register/RA/new',                    {templateUrl: 'views/forms/edit/bch/edit-risk-assessment.html',     label:'New',  param:'true', resolveController: true,documentType :'RA' ,    resolve : { securized : commonRoutes.securize(null,true, true), routePrams: commonRoutes.injectRouteParams({ isNational:true})} }).
                whenAsync('/register/IRA/new',                   {templateUrl: 'views/forms/edit/bch/edit-risk-assessment.html',     label:'New',  param:'true', resolveController: true,documentType :'IRA' ,   resolve : { securized : commonRoutes.securize(null,true, true) }, }).

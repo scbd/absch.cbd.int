@@ -1,0 +1,102 @@
+<div>
+	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
+		<div class="registerpage-content">
+			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)"
+				document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
+				validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+				on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()"
+				on-pre-save-draft="onPreSaveDraft()" on-post-save-draft="onPostSaveDraft(data)"
+				on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+				data-container="{{container}}" is-dialog="{{isDialog}}">
+				<edit-form>
+					<form class="editForm" name="editForm" style="margin-top:10px">
+						<div ng-show="tab=='edit'" km-tab="edit">
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>General information</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="languages" required
+												caption=" Please select in which language(s) you wish to submit this record:">
+												<div class="indent">
+													<div km-form-languages required name="languages"
+														ng-model="document.header.languages"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="country" required
+												caption="Country">
+												<div afc-autocomplete required name="country"
+													ng-model="document.country" source="options.countries"
+													filter="genericFilter" mapping="genericMapping" selectbox="true"
+													placeholder="Please select a country..."></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="title"
+												caption="Title of the record">
+												<div km-textbox-ml name="title" required ng-model="document.title"
+													locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="nodeAddress"
+												caption="BCH node address
+                                        			Please provide the URL of the website (e.g. http://bch.cbd.int) and the name of the website (e.g. ‘Biosafety Clearing-House’).">
+												<div km-link name="nodeAddress" ng-model="document.nodeAddress"
+													allow-link="true" allow-file="false"></div>
+											</div>
+										</div>
+									</div> 
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="newsAbstract" caption="Abstracts">
+												<div class="help-block">(max. 80 words)</div>
+												<div km-rich-textbox ng-model="document.newsAbstract" rows="4"
+													placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div> 
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="newsText" caption="News text">
+												<div class="help-block">(max. 300 words)</div>
+												<div km-rich-textbox required ng-model="document.newsText" rows="4"
+													placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div> 
+									<legend>Notes</legend>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="notes">
+												<span class="help-block">
+													The “Notes” field is for personal reference and can be seen only
+													when the record is being edited. It will be hidden once the
+													record is published. This field is not meant to be used for
+													confidential information.
+												</span>
+												<div km-notes name="notes" ng-model="document.notes"></div>
+											</div>
+										</div>
+									</div> 
+							</section> 
+						</div>
+					</form>
+				</edit-form>
+				<review-form>
+					<view-biosafety-news ng-model="review.document" locale="review.locale" >
+					</view-biosafety-news>
+				</review-form>
+			</workflow-arrow-buttons>
+		</div>
+	</div> 
+</div>
