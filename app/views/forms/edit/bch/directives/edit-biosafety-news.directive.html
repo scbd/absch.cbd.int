@@ -32,7 +32,7 @@
 												caption="Country">
 												<div afc-autocomplete required name="country"
 													ng-model="document.country" source="options.countries"
-													filter="genericFilter" mapping="genericMapping" selectbox="true"
+													filter="startsWithFilter" mapping="genericMapping" selectbox="true"
 													placeholder="Please select a country..."></div>
 											</div>
 										</div>
@@ -49,8 +49,11 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="nodeAddress"
-												caption="BCH node address
-                                        			Please provide the URL of the website (e.g. http://bch.cbd.int) and the name of the website (e.g. ‘Biosafety Clearing-House’).">
+												caption="BCH node address">
+												<div class="help-info">
+													Please provide the URL of the website (e.g. http://bch.cbd.int) and the name of the website (e.g. ‘Biosafety Clearing-House’). 
+												</div>
+                                        			
 												<div km-link name="nodeAddress" ng-model="document.nodeAddress"
 													allow-link="true" allow-file="false"></div>
 											</div>
