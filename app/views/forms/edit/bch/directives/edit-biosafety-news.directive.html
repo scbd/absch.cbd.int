@@ -76,7 +76,26 @@
 													placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
+									</div>  
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="relevantInformation" caption="Any other relevant information">
+												<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
 									</div> 
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+												<div class="help-block">
+														Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.
+												</div>
+												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
+												 identifier="document.header.identifier"></div>
+											</div>
+										</div>
+									</div>  
 									<legend>Notes</legend>
 									<div class="row">
 										<div class="col-md-12">
