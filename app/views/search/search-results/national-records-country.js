@@ -1,8 +1,8 @@
 define(['app', 'text!views/search/search-results/national-records-country.html','lodash',
-'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status',
+'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status', 'services/solr',
 ], function(app, template, _) {
 
-    app.directive('nationalRecordsCountry', ['searchService', function(searchService) {
+    app.directive('nationalRecordsCountry', ['searchService', 'solr', function(searchService, solr) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -26,7 +26,8 @@ define(['app', 'text!views/search/search-results/national-records-country.html',
 
                         schema.isLoading = true;
                         var query = {
-                            query   : 'schema_s:(' + key +') AND government_s:' + $scope.group.country.toLowerCase(),
+                            query   : 'schema_s:(' + solr.escape(key) +') AND government_s:' + 
+                                        solr.escape($scope.group.country.toLowerCase()),
                             sort    : 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
                             rowsPerPage    : number||5000,
                             start          : number ? undefined : (schema.start==0 ? 10 : schema.start),

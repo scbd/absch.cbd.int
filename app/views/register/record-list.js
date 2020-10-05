@@ -2,16 +2,16 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
     'services/search-service', 'services/role-service','components/scbd-angularjs-controls/form-control-directives/all-controls',
     'views/register/directives/register-top-menu', 'views/directives/block-region-directive',
 	'views/forms/edit/editFormUtility', 
-    'services/local-storage-service', 'ngDialog', 'services/app-config-service'
+    'services/local-storage-service', 'ngDialog', 'services/app-config-service', 'services/solr'
 ],
     function (app, _) {
         "use strict";
 
         app.controller("registerRecordList", ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
             'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", 
-            "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm', 'ngMeta',
+            "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm', 'ngMeta', 'solr',
             function ($timeout, commonjs, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
-                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, realm, ngMeta) {
+                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, realm, ngMeta, solr) {
 
                 $scope.languages = commonjs.languages;
                 $scope.orderBy = ['-updatedOn'];
@@ -501,12 +501,11 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
 
                     var filter;
                     if(!$rootScope.user.government)
-                        filter = '_ownership_s:("' + ($rootScope.user.userGroups||[]).join('" "') + '")'
+                        filter = '_ownership_s:("' + solr.escape(($rootScope.user.userGroups||[]).join('" "')) + '")'
                     else
-                        filter = 'government_s:'+$rootScope.user.government;
+                        filter = 'government_s:'+solr.escape($rootScope.user.government);
 
                     var queryParameters = {
-                        //
                         'query': 'amendmentIntent_i:1 AND ' + filter,
                         'rowsPerPage': 100,
                         fields: 'identifier_s'

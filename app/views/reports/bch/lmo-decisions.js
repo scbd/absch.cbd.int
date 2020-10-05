@@ -1,9 +1,9 @@
 define(['app', 'lodash', 'text!./lmo-decisions.html', 'angular-cookies','views/forms/view/bch/view-lmo-reference.directive',
-'angucomplete-alt','views/directives/block-region-directive', 'services/search-service', 'js/common'], 
+'angucomplete-alt','views/directives/block-region-directive', 'services/search-service', 'js/common', 'services/solr'], 
 function(app, _, template) { 'use strict';
 
-app.directive("lmoDecisions", [ '$http', '$route', '$cookies', 'searchService', 'commonjs', '$q',
-	function($http, $route, $cookies, searchService, commonjs, $q) {
+app.directive("lmoDecisions", [ '$http', 'solr', '$cookies', 'searchService', 'commonjs', '$q',
+	function($http, solr, $cookies, searchService, commonjs, $q) {
 	
 		return{
 			template:template,
@@ -55,7 +55,7 @@ app.directive("lmoDecisions", [ '$http', '$route', '$cookies', 'searchService', 
 
 				function lmoDecisions(identifier){
 					var query = {
-						query : 'identifier_s:' + identifier,
+						query : 'identifier_s:' + solr.escape(identifier),
 						fields: 'id'
 					}
 					searchService.list(query)

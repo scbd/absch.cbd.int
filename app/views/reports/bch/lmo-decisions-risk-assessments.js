@@ -1,9 +1,9 @@
-define(['app', 'lodash', 'views/forms/view/bch/view-lmo-reference.directive',
+define(['app', 'lodash', 'views/forms/view/bch/view-lmo-reference.directive', 'services/solr',
 'angucomplete-alt','views/directives/block-region-directive', 'services/search-service', 'js/common',
 './lmo-decisions', './risk-assessments', 'views/forms/view/record-loader.directive'], function(app, _) { 'use strict';
 
-app.controller("LmoReportController", ['$scope', '$routeParams', '$route', '$location', 'searchService', '$timeout',
-	function($scope, $routeParams, $route, $location, searchService, $timeout) {
+app.controller("LmoReportController", ['$scope', '$routeParams', '$route', 'solr', 'searchService', '$timeout',
+	function($scope, $routeParams, $route, solr, searchService, $timeout) {
 
         $scope.tab = $routeParams.tab;
 		$scope.identifier = $route.current.params.documentId;		
@@ -21,11 +21,12 @@ app.controller("LmoReportController", ['$scope', '$routeParams', '$route', '$loc
 		
 		$scope.loadLMos = function(userInputString, timeoutPromise){
 			$scope.loadingData=true;
+			var searchQuery = solr.escape(userInputString);
+			searchQuery		= solr.unescapeCaret(searchQuery);
 			var query = {
 				fieldQuery: ['schema_s:modifiedOrganism'],
-				query : userInputString,
-				fields: 'id,identifier_s,title:title_EN_t,summary:summary_EN_t',
-				sort  : 'government_EN_t asc'
+				query : 'text_EN_txt:(' + searchQuery + ')',
+				fields: 'id,identifier_s,title:title_EN_t,summary:summary_EN_t'
 			}
 		    return searchService.list(query).then(function(r) {
 				return {data : r.data.response.docs};

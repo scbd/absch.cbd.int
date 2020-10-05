@@ -1,4 +1,4 @@
-define(['app','text!views/directives/endorsement-directive.html', 'services/search-service'
+define(['app','text!views/directives/endorsement-directive.html', 'services/search-service', 'services/solr'
     ], function (app, template) {
 	app.directive('endorsement', function($http){
 		return{
@@ -9,13 +9,13 @@ define(['app','text!views/directives/endorsement-directive.html', 'services/sear
                 identifier  : '=',
                 schema      : '='
             },
-			controller: ['$scope', 'searchService', function($scope, searchService){
+			controller: ['$scope', 'searchService', 'solr', function($scope, searchService, solr){
 
                 $scope.loadEndorsments = function(identifier){
 
                     var searchQuery = {
                         fields: 'government_s, government_EN_s, createdDate_dt',
-                        query : 'schema_s:endorsement AND endorsedDocument_s :' + identifier
+                        query : 'schema_s:endorsement AND endorsedDocument_s :' + solr.escape(identifier)
                     };
 
                     searchService.list(searchQuery)

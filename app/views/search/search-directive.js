@@ -658,16 +658,15 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         var dateQuery           = buildDateQuery();
 
-                        if(schemaSubQuery.freeTextQuery){ //append subquery freeText query to general query to benefit highlighting
-                            textQuery = solr.andOr(_.compact([textQuery, schemaSubQuery.freeTextQuery]), 'AND')
-                        }
-                        var queries             = _.compact([dateQuery, textQuery, rawQuery]);
-                        var query               = '';
+                        // if(schemaSubQuery.freeTextQuery){ //append subquery freeText query to general query to benefit highlighting
+                        //     textQuery = solr.andOr(_.compact([textQuery, schemaSubQuery.freeTextQuery]), 'AND')
+                        // }
+                        var queries            = _.compact([dateQuery, textQuery, rawQuery]);
+                        var query              = '';
                         if(queries.length)
-                            query               = solr.andOr(queries, 'AND')
-                        // console.log(query)
+                            query              = solr.andOr(queries, 'AND');
                         if(schemaQuery != '(*:*)')
-                            tagQueries.schema      =  schemaQuery;
+                            tagQueries.schema  =  schemaQuery;
                         tagQueries.version     =  'NOT version_s:*'
                         tagQueries.schemaSub   =  schemaSubQuery.query;
                         tagQueries.schemaType  =  tabQuery;
@@ -683,7 +682,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             query      :  query||'',
                             tagQueries : _(tagQueries).map(function(f, t){if(f) return '{!tag='+t+'}' + f;}).compact().value(),
                             facetFields : [
-                                '{!ex=schemaType}schemaType_s', 
+                                '{!ex=schemaType}schemaType_s',
                                 '{!ex=schema,schemaType,schemaSub}schema_s', 
                                 '{!ex=government}countryRegions_ss', 
                                 '{!ex=keywords}all_terms_ss', 
@@ -732,24 +731,26 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                             ids = _.map(filter.selectedItems,  function(filter){ 
                                                 // || _.trim(filter.title).split(' ').length>1
                                                 if(filter.title.indexOf('-')>0) 
-                                                    return '"' + _.trim(filter.title) + '"'; 
-                                                return _.trim(filter.title)
+                                                    return '"' + solr.escape(_.trim(filter.title)) + '"'; 
+                                                return solr.escape(_.trim(filter.title))
                                             });
                                             subQuery = '(' + filter.field + ':' + ids.join(' AND ' + filter.field + ':') + ')';
-                                            freeTexQueries.push(subQuery)
+                                            
+                                            if(!filter.excludeResult)
+                                                freeTexQueries.push(subQuery)
                                         }
                                         else{
                                             var field = filter.field;
                                             if(filter.searchRelated && filter.relatedField)
                                                 field = filter.relatedField;
-                                            subQuery = field + ':(' + ids.join(' ') + ')';
+                                            subQuery = field + ':(' + solr.escape(ids.join(' ')) + ')';
                                         }
                                     }
                                     else if(filter.type == 'date' && filter.filterValue){
                                         subQuery = buildDateFieldQuery(filter.field, filter.filterValue);
                                     }
                                     else if(filter.type == 'yesNo' && filter.filterValue!== undefined){
-                                        subQuery = filter.field + ':' + filter.filterValue;
+                                        subQuery = filter.field + ':' + solr.escape(filter.filterValue);
                                     }
                                     if(subQuery){
                                         if(filter.excludeResult)
@@ -757,10 +758,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                         subQueries.push(subQuery);
                                     }
                                 });
-                                if(subQueries.length>1){
+                                // if(subQueries.length>1){
                                     subQueries = _.uniq(subQueries)                                       
                                     schemaQueries.push(solr.andOr(subQueries, 'AND'))
-                                }
+                                // }
                             })
                             if(schemaQueries.length){
                                 return {
@@ -788,7 +789,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         }
                         var values = [];
                         _.each(filters, function (item) {
-                            values.push(item.dateField+':' + item.query)
+                            values.push(item.dateField+':' + solr.escape(item.query))
                         });
                         if(values.length)
                             return solr.andOr(values, 'AND')
@@ -800,7 +801,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             var start   = date.start ? date.start   + 'T00:00:00.000Z' : '*';
                             var end     = date.end   ? date.end     + 'T23:59:59.999Z' : '*';
     
-                            return  field + ':[ ' + start + ' TO ' + end + ' ]';
+                            return  field + ':[ ' + solr.escape(start) + ' TO ' + solr.escape(end) + ' ]';
                         } 
                     }
 
@@ -816,7 +817,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             values = (values||'') + " " + getCountryList(item.id, countries);
                         });
                         if(values)
-                            return 'government_s:(' + values + ')';
+                            return 'government_s:(' + solr.escape(values) + ')';
                     }
 
                     function buildFieldQuery(filterType, field) {
@@ -828,13 +829,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if(filterType == 'freeText'){
                             var freeTextVals = _.map(filters, function(filter){ 
                                     if(filter.id.indexOf('-')>0) 
-                                        return '"' + _.trim(filter.id) + '"'; 
-                                    return _.trim(filter.id)
+                                        return '"' + solr.escape(_.trim(filter.id)) + '"'; 
+                                    return solr.escape(_.trim(filter.id))
                                 })
                             query = '(' + field + ':' + freeTextVals.join(' AND ' + field + ':') + ')';
                         }
                         else
-                            query = field + ':(' + _.map(filters, function(filter){ return _.trim(filter.id)}).join(' ') + ')';
+                            query = field + ':(' + _.map(filters, function(filter){ return solr.escape(_.trim(filter.id))}).join(' ') + ')';
 
                         return query;
                     }
@@ -850,12 +851,12 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     function buildContactsUserCountryfn(filter){
                         var countries =  _.map(filter.selectedItems, 'identifier') 
                         if(countries.length){
-                            return 'country_s:(' + countries.join(' ') + ') AND referencedPermits_ss:*';
+                            return 'country_s:(' + solr.escape(countries.join(' ')) + ') AND referencedPermits_ss:*';
                         }
                     }
 
                     function buildRawQuery(){
-                        return ($scope.setFilters['rawQuery']||{}).id;
+                        return solr.escape(($scope.setFilters['rawQuery']||{}).id);
                     }
 
                     function getCountryList(id, list){

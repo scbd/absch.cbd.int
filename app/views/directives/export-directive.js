@@ -1,5 +1,5 @@
 define(['app','text!views/directives/export-directive.html', 'underscore',
-'services/search-service', 'ngDialog', 'services/role-service',
+'services/search-service', 'ngDialog', 'services/role-service', 'services/solr'
 ], function (app, template, _) {
     app.directive('export', function () {
         return {
@@ -21,8 +21,8 @@ define(['app','text!views/directives/export-directive.html', 'underscore',
                         $scope.closeDialog();
                 })
             },
-            controller: ["$scope", '$rootScope', '$filter', '$timeout', 'commonjs', '$q', 'searchService', 'ngDialog', '$element', 'locale', 'roleService',
-                function ($scope, $rootScope, $filter, $timeout, commonjs, $q, searchService, ngDialog, $element, locale, roleService) {
+            controller: ["$scope", 'solr', '$filter', '$timeout', 'commonjs', '$q', 'searchService', 'ngDialog', '$element', 'locale', 'roleService',
+                function ($scope, solr, $filter, $timeout, commonjs, $q, searchService, ngDialog, $element, locale, roleService) {
                     
                     var language = (locale || 'en').toUpperCase();
 
