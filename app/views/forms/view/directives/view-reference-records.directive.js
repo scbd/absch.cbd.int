@@ -1,5 +1,5 @@
 define(['app','lodash', "text!views/forms/view/directives/view-reference-records.directive.html", 
-'components/scbd-angularjs-services/services/storage', 'services/search-service'], function (app, _, template) {
+'components/scbd-angularjs-services/services/storage', 'services/search-service', 'services/solr'], function (app, _, template) {
 
 app.directive("viewReferencedRecords", [function () {
 	return {
@@ -12,7 +12,7 @@ app.directive("viewReferencedRecords", [function () {
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: ["$scope", "IStorage", "$filter", '$q', 'searchService', 'realm', function ($scope, storage, $filter, $q, searchService, realm) {
+		controller: ["$scope", "solr", '$q', 'searchService', 'realm', function ($scope, solr, $q, searchService, realm) {
 
 			// //==================================
 		    // //
@@ -22,7 +22,7 @@ app.directive("viewReferencedRecords", [function () {
 
 					var searchQuery = {
 						rowsPerPage:5000,
-						query 	: "referenceRecord_ss:" + $scope.model,
+						query 	: "referenceRecord_ss:" + solr.escape($scope.model),
 						fields	: 'title:title_EN_t, referenceRecord_ss, referenceRecord_info_ss,schemaCode:schema_s,schema:schema_EN_s, identifier:idenfifier_s, uniqueId:uniqueIdentifier_s,'
 					}
 					if(realm.is('BCH')){

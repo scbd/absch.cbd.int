@@ -1,11 +1,11 @@
 define(['app',"text!views/forms/edit/document-selector.html",
-'lodash','js/common', 'views/directives/search-filter-dates.partial',
+'lodash', 'views/directives/search-filter-dates.partial',
 'views/search/search-results/result-default', 'services/search-service','services/app-config-service', 
-'components/scbd-angularjs-controls/form-control-directives/pagination','ngDialog'
+'components/scbd-angularjs-controls/form-control-directives/pagination','ngDialog', 'services/solr'
 ], function (app, template, _) { // jshint ignore:line
 
-app.directive("documentSelector", ["$timeout",'locale', "$filter", "$q", "searchService", "appConfigService", "IStorage", 'ngDialog', 'commonjs','$compile',
-function ($timeout, locale, $filter, $q, searchService, appConfigService, IStorage, ngDialog, commonjs, $compile) {
+app.directive("documentSelector", ["$timeout",'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile',
+function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile) {
 
 	return {
 		restrict   : "EA",
@@ -269,27 +269,27 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
                 if ($scope.schema)
                     schema = $scope.schema;
 
-                var fieldQueries = ["schema_s:"+ schema]
+                var fieldQueries = ["schema_s:"+ schema] // cannot escape for backward compatibility
 
-                if($scope.query){ //if query is mentioned ignore schem field in query
+                if($scope.query){ //if query is mentioned ignore schema field in query
                     fieldQueries = [$scope.query];
                 }
 
                 if(!$attr.skipGovernment){
                     if($scope.government)
-                        fieldQueries.push("government_s:" + $scope.government.identifier);
+                        fieldQueries.push("government_s:" + solr.escape($scope.government.identifier));
                     if(!$scope.government &&  $scope.userGov)
-                        fieldQueries.push("government_s:" + $scope.userGov);
+                        fieldQueries.push("government_s:" + solr.escape($scope.userGov));
                 }
 
                 if($scope.hideSelf){
-                    fieldQueries.push("NOT (identifier_s:" + $scope.hideSelf + ")");
+                    fieldQueries.push("NOT (identifier_s:" + solr.escape($scope.hideSelf) + ")");
                 }
 
                 if($scope.activeTab == 'myRecords'){
-                    var myRecordsQuery = '_contributor_is:' + $scope.$root.user.userID
+                    var myRecordsQuery = '_contributor_is:' + solr.escape($scope.$root.user.userID);
                     if($scope.userGov)
-                        myRecordsQuery += ' OR _ownership_s:'+$scope.userGov.toLowerCase()
+                        myRecordsQuery += ' OR _ownership_s:'+solr.escape($scope.userGov.toLowerCase());
                     fieldQueries.push(myRecordsQuery)
                 }
 
@@ -301,9 +301,9 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
                         queryText = '"' + queryText + '"' // Add quotes if text contains - especially if search is by uid
                 
                     if(($attr.freeTextQueryField||'')!='')
-                        query = $attr.freeTextQueryField + ':' + queryText;
+                        query = $attr.freeTextQueryField + ':' + solr.escape(queryText);
                     else
-                        query = 'text_'+(locale||'en').toUpperCase()+'_txt:' + queryText;
+                        query = 'text_'+(locale||'en').toUpperCase()+'_txt:' + solr.escape(queryText);
                 }
 
                 var queryParameters = {
@@ -429,7 +429,7 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
 
                 var queryParameters = {
                     fields       : ($attr.displayFields||'')!= '' ? $attr.displayFields : undefined,
-                    'query'      : queryField + ':("' + identifiers.join('" "') +'")',
+                    'query'      : queryField + ':("' + solr.escape(identifiers.join('" "')) +'")',
                     'rowsPerPage': $scope.searchResult.rowsPerPage                    
                 };
                 searchService.list(queryParameters, null).then(function(result){                    

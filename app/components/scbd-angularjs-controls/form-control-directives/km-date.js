@@ -19,7 +19,7 @@ define(['app', 'text!./km-date.html', 'bootstrap-datepicker'], function(app, tem
       link: function($scope, $element, $attr, ngModelController) {
 
         var options = {
-          format      : $attr.format      ||"yyyy-mm",
+          format      : $attr.format      ||"yyyy-mm-dd",
           startView   : $attr.startView   ||"days", 
           minViewMode : $attr.minViewMode ||"days",
           autoclose   : true

@@ -1,5 +1,5 @@
 define(['app', 'text!views/directives/document-reference-history.html',,'services/search-service',
-'views/search/search-results/result-default',
+'views/search/search-results/result-default', 'services/solr'
 ], function (app, template) {
     app.directive('documentReferenceHistory', function ($http) {
         return {
@@ -9,12 +9,12 @@ define(['app', 'text!views/directives/document-reference-history.html',,'service
             scope: {
                 'identifier': '@'
             },
-            controller: ['$scope', '$filter', 'searchService', '$q', function ($scope, $filter, searchService, $q) {
+            controller: ['$scope', 'solr', 'searchService', '$q', function ($scope, solr, searchService, $q) {
 
                 $scope.loadRecordReferenceHistory = function (identifier) {
                     var searchOperation;
                     $scope.isLoading = true;
-                    var q = " (identifier_s:" + $scope.identifier + ")";
+                    var q = " (identifier_s:" + solr.escape($scope.identifier) + ")";
 
                     var queryParameters = {
                         'query': q,
@@ -28,8 +28,8 @@ define(['app', 'text!views/directives/document-reference-history.html',,'service
 
                         var searchOperation;
                         $scope.isLoading = true;
-                        var q = "text_AR_txt:" + data.uniqueIdentifier_s;
-                        q = q + " AND NOT (identifier_s:" + $scope.identifier + ")";
+                        var q = "text_AR_txt:" + solr.escape(data.uniqueIdentifier_s);
+                        q = q + " AND NOT (identifier_s:" + solr.escape($scope.identifier) + ")";
 
                         var queryParameters = {
                             'query': q,

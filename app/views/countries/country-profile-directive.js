@@ -1,6 +1,6 @@
  define(['app', 'text!views/countries/country-profile-directive.html', 'lodash',
    'views/measure-matrix/measure-matrix-countries-directive',
-   'js/common',
+   'js/common', 'services/solr',
    'views/search/search-results/result-grouped-national-record',
    'services/search-service', 'services/app-config-service',
     'views/directives/export-directive'
@@ -15,8 +15,8 @@
                 api : '=?',
                 code : '='
             },
-            controller: ["$scope", "$routeParams",  "realm", '$element', '$timeout','searchService', '$filter',
-                function($scope, $routeParams, realm, $element, $timeout, searchService, $filter) {
+            controller: ["$scope", "$routeParams",  "realm", '$element', '$timeout','searchService', '$filter', 'solr',
+                function($scope, $routeParams, realm, $element, $timeout, searchService, $filter, solr) {
 
                 $scope.api = {
                     loadCountryDetails : loadCountryRecords
@@ -56,7 +56,7 @@
 
                     var searchQuery = $scope.exportQuery = {
                         fields  : 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,summary_t,rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt, entryIntoForce_dt,adoption_dt,retired_dt,limitedApplication_dt',
-                        query   : 'schema_s:(' + nationalSchemas.join(' ') +') AND government_s:' + code,
+                        query   : 'schema_s:(' + solr.escape(nationalSchemas.join(' ')) +') AND government_s:' + solr.escape(code),
                         rowsPerPage    : 500,
                         groupField      : 'governmentSchemaIdentifier_s',
                         groupLimit      : 10

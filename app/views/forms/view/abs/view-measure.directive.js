@@ -2,7 +2,7 @@ define(['app', "text!views/forms/view/abs/view-measure.directive.html",
         'views/measure-matrix/measure-matrix-elements-derective',
         'services/search-service', 'services/app-config-service','views/directives/party-status',
 	'views/forms/view/directives/view-record-reference.directive',
-	'views/directives/record-options',
+	'views/directives/record-options', 'services/solr'
     ], function (app, template) {
 
 app.directive("viewMeasure", [function () {
@@ -18,8 +18,8 @@ app.directive("viewMeasure", [function () {
 			allowDrafts : "@",
 			hide		: "@"
 		},
-		controller : ["$scope", "IStorage","$filter", "searchService", "$q", "appConfigService",
-         function ($scope, storage, $filter, searchService, $q, appConfigService)
+		controller : ["$scope", "solr","$filter", "searchService", "$q", "appConfigService",
+         function ($scope, solr, $filter, searchService, $q, appConfigService)
 		{
 			//====================
 			//
@@ -37,8 +37,9 @@ app.directive("viewMeasure", [function () {
                         var queries = [];
                         if(!$scope.document.measureAmendedBy){
                             var listQuery = {
-                                query: 'realm_ss:' + appConfigService.currentRealm.toLowerCase() +
-                                 ' AND schema_s:measure AND NOT virtual_b:* AND amendedMeasures_ss:'  + $scope.document.header.identifier+'*'
+                                query: 'realm_ss:' + solr.escape(appConfigService.currentRealm.toLowerCase()) +
+								 ' AND schema_s:measure AND NOT virtual_b:* AND amendedMeasures_ss:' + 
+								 solr.escape($scope.document.header.identifier)+'*'
                             };
                             queries.push(searchService.list(listQuery));
                         }

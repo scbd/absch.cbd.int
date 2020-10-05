@@ -1,7 +1,7 @@
 define(['app', 'lodash', 'text!./risk-assessments.html', 'services/search-service','views/forms/view/bch/view-lmo-reference.directive',
-'angucomplete-alt','views/directives/block-region-directive'], function(app, _, template) { 'use strict';
+'angucomplete-alt','views/directives/block-region-directive', 'services/solr'], function(app, _, template) { 'use strict';
 
-app.directive("lmoRiskAssessments", ['searchService', function(searchService) {
+app.directive("lmoRiskAssessments", ['searchService', 'solr', function(searchService, solr) {
 	return{
 		template:template,
 		restrict:'EA',
@@ -13,7 +13,7 @@ app.directive("lmoRiskAssessments", ['searchService', function(searchService) {
 
 			function loadLMORiskAssessments(identifier){			
 				var query = {
-					query : 'schema_s:nationalRiskAssessment AND referenceRecord_ss:' + identifier,
+					query : 'schema_s:nationalRiskAssessment AND referenceRecord_ss:' + solr.escape(identifier),
 					additionalFields : 'lmoTransformationEvents_ss,scopeRelease_b,scopeConfined_b,scopeFood_b,scopeFeed_b,scopeProcessing _b,scopeOther_b',
 					sort: 'government_EN_t asc'
 				}

@@ -13,7 +13,7 @@ function (app, _) {
             "3D0CCC9A-A0A1-4399-8FA2-41D4D649DB0E", // CBD Regional Groups - Latin America and the Caribbean
             "0EC2E5AE-25F3-4D3A-B71F-8019BB62ED4B"  // CBD Regional Groups - Western Europe and Others
         ];
-        var regionsQuery = _.map(DefaultRegions, function(region){return $http.get('/api/v2013/thesaurus/terms/'+region+'?relations')})
+        var regionsQuery = _.map(DefaultRegions, function(region){return $http.get('/api/v2013/thesaurus/terms/'+encodeURIComponent(region)+'?relations')})
         
         var query = {
             fields  : 'Country:government_EN_t,RecordType:schema_EN_t, Year:government_submissionYear_s, government_s',

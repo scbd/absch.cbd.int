@@ -3,15 +3,16 @@
 app.factory('solr', [function() {
 
 	return {
-		escape : escape,
-		andOr : andOr
+		escape       : escape,
+		unescapeCaret: unescapeCaret,
+		andOr        : andOr
 	};
 
 	function escape(value) {
 
-		if(value===undefined) throw "Value is undefined";
-		if(value===null)      throw "Value is null";
-		if(value==="")        throw "Value is null";
+		if(value===undefined) return;
+		if(value===null)      return;
+		if(value==="")        return;
 
 		if(_.isNumber(value)) value = value.toString();
 		if(_.isDate  (value)) value = value.toISOString();
@@ -63,6 +64,18 @@ app.factory('solr', [function() {
 		return query;
 	}
 
+	function unescapeCaret(value) {
+
+		if(value===undefined) throw "Value is undefined";
+		if(value===null)      throw "Value is null";
+		if(value==="")        throw "Value is null";
+
+		if(!_.isString(value)) return value;
+
+		value = value.replace(/\\^\d+(\s|$)/g,   '^');
+		
+		return value;
+	}
 
 
 }]);

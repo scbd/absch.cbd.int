@@ -1,11 +1,11 @@
 define(['app', 'underscore', 'views/forms/edit/edit' , 'views/forms/edit/document-selector',
         'views/forms/view/abs/view-abs-national-report.directive',
-        'services/search-service','services/app-config-service'
+        'services/search-service','services/app-config-service', 'services/solr'
 ], function (app, _) {
 
   app.controller("editAbsNationalReport",
-  ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "searchService","appConfigService",
-  function ($scope, $http, $filter, $controller,$location, $q, realm, searchService, appConfigService) {
+  ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "searchService","appConfigService", 'solr',
+  function ($scope, $http, $filter, $controller,$location, $q, realm, searchService, appConfigService, solr) {
 
     $controller('editController', {$scope: $scope});
     $scope.showHelp = { hasHelp : true };
@@ -561,7 +561,9 @@ define(['app', 'underscore', 'views/forms/edit/edit' , 'views/forms/edit/documen
     //==================================
     function getAbsDocuments (government) {
         var natSchemas = appConfigService.nationalSchemas;
-        var q  = '(realm_ss:' + realm.value.toLowerCase() + ' ) AND NOT version_s:* AND government_s:'+ government.identifier + " AND schema_s:(" + natSchemas.join(' ') + ")";
+        var q  = '(realm_ss:' + solr.escape(realm.value.toLowerCase()) + 
+                 ' ) AND NOT version_s:* AND government_s:'+ solr.escape(government.identifier) + 
+                 ' AND schema_s:(' + solr.escape(natSchemas.join(' ')) + ')';
         var queryParameters = {
             'query'    : q,
              currentPage : 0,

@@ -1,8 +1,9 @@
-define(['app','components/scbd-angularjs-services/services/locale','./record-loader.directive', 'services/search-service'], function (app) {
+define(['app','components/scbd-angularjs-services/services/locale',
+    './record-loader.directive', 'services/search-service', 'services/solr'], function (app) {
 
-    app.controller("recordsViewController", ['$scope', "$sce", "commonjs", "$timeout", "$filter", 
-        "realm", "$element", 'searchService', 'ngMeta', 'locale',
-    function ($scope, $sce, commonjs, $timeout, $filter, realm, $element, searchService, ngMeta, locale){
+    app.controller("recordsViewController", ['$scope', "$sce", "solr", "$timeout", "$filter", 
+        "realm", 'searchService', 'ngMeta', 'locale',
+    function ($scope, $sce, solr, $timeout, $filter, realm, searchService, ngMeta, locale){
 
         function setMetaTags(){
             var document;
@@ -11,7 +12,7 @@ define(['app','components/scbd-angularjs-services/services/locale','./record-loa
                 if(document){
                     searchService.list({
                         fields:'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_EN_t,uniqueIdentifier_s,url_ss',
-                        query:'identifier_s:'+document.header.identifier
+                        query:'identifier_s:'+solr.escape(document.header.identifier)
                     })
                     .then(function(result){
                         var schemaName      = $filter('schemaName')(document.header.schema);	

@@ -2,7 +2,7 @@
 define(['app', 'underscore', "text!views/forms/edit/warning-message-cna.html", 'js/common',
 'views/search/search-results/result-default', 
 'services/search-service',
-'services/app-config-service'
+'services/app-config-service', 'services/solr'
 ], function(app, _, template) {
 
     app.directive('warningMessageCna', function() {
@@ -13,8 +13,8 @@ define(['app', 'underscore', "text!views/forms/edit/warning-message-cna.html", '
            scope: {
                 doc:'='
            },
-           controller: ["$scope", "underscore", "searchService", "appConfigService","$q",
-                function($scope,  _, searchService, appConfigService, $q) {
+           controller: ["$scope", "underscore", "searchService", "solr","$q",
+                function($scope,  _, searchService, solr, $q) {
 
                  $scope.responsibleCNA = [];
                  $scope.showWarning = false;
@@ -31,7 +31,8 @@ define(['app', 'underscore', "text!views/forms/edit/warning-message-cna.html", '
                     }
                     
                     var searchOperation;
-                    var q  = "government_s:" + $scope.doc.government.identifier + " AND schema_s:authority AND absResposibleForAll_b:true"
+                    var q  = "government_s:" + solr.escape($scope.doc.government.identifier) + 
+                             " AND schema_s:authority AND absResposibleForAll_b:true"
                     
                     var queryParameters = {
                         'query'    : q,
