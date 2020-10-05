@@ -1,5 +1,5 @@
 define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localizer', 'components/scbd-angularjs-services/services/locale'], function(app,template,$,_) { 'use strict';
-    app.directive('afcAutocomplete', function() {
+    app.directive('afcAutocomplete', ['$compile', '$timeout', '$q', 'locale', '$filter', function($compile, $timeout, $q, locale, $filter) {
         return {
             restrict: 'AEC',
 			require: "?ngModel",
@@ -15,11 +15,10 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                 selectbox: '@?',
                 multiple: '@?',
                 ngDisabledFn: "&ngDisabled",
-                windowsScrollbarCompatible: '@?',
-                ngChange:'&'
+                windowsScrollbarCompatible: '@?'
             },
             template: template,
-            controller: function($scope, $element, $attrs, $compile, $timeout, $q, locale, $filter) {
+            link : function($scope, $element, $attrs, ngModelController){
                 
                 $scope.currentLocale = locale;
 
@@ -121,8 +120,17 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                     if ($scope.multiple) {
                         toggleOption(element);
                         $scope.bindingDisplay = '';
-                    } else
-                        $scope.binding = $scope.mapping(element);
+                    } else{
+                        var oNewBinding = $scope.mapping(element);
+                    
+                        if (!angular.equals(oNewBinding, $scope.binding))
+                            $scope.binding = oNewBinding;
+
+                        if ($.isEmptyObject($scope.binding))
+                            $scope.binding = undefined;
+                            
+                        ngModelController.$setViewValue($scope.binding);
+                    }
 
                     $scope.updateSelected(-1);
                 }
@@ -142,7 +150,7 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                 }
                 ////////////END ENTER CODE
                 function indexOfPredicate(array, predicate) {
-                    for (var i = 0; i != array.length; ++i)
+                    for (var i = 0; i < array.length; ++i)
                         if (predicate(array[i]))
                             return i;
 
@@ -156,10 +164,11 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
 
                 function filterOptions(query) {
                     //Do nothing if the value hasn't changed.
+                        deferred = $q.defer();
                     if (prevValue === query) {
+                        $scope.displayItems
                         return deferred.promise; //old promise
                     } else {
-                        deferred = $q.defer();
                         prevValue = query;
                     }
 
@@ -171,7 +180,7 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                         if ($scope.selected != -1) {
                             var i;
                             for (i = 0; i != $scope.displayItems.length; ++i) {
-                                if ($scope.displayItems[i].__value == $scope.current.__value) {
+                                if (($scope.displayItems[i]||{}).__value == $scope.current.__value) {
                                     $scope.updateSelected(i);
                                     break;
                                 }
@@ -190,17 +199,33 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                     return deferred.promise; //the promise we used.
                 }
 
-                function GetSourceItems() {
-                    if (typeof $scope.source == 'function')
-                        return $scope.source();
-                    else {
+                function GetSourceItems(recount) {
+                    if(!$scope.source){ //wait for the source to attach retry after few seconds
+                        
+                        if(recount<=5)
+                            return $timeout(function(){
+                                recount = recount||0;
+                                recount += 1;
+                                return GetSourceItems(recount)
+                            }, 1000)
+                    }
+                    if(($scope.items||[]).length>0){
                         var def = $q.defer();
-                        def.resolve($scope.source);
+                        def.resolve($scope.items);
                         return def.promise;
+                    }
+                    else{
+                        if (typeof $scope.source == 'function')
+                            return $scope.source();
+                        else {
+                            var def = $q.defer();
+                            def.resolve($scope.source);
+                            return def.promise;
+                        }
                     }
                 }
                 $scope.buttonOverrideFilter = function() {
-                    //console.log('button override: ', $scope.buttonActivated);
+                    // console.log('button override: ', $scope.buttonActivated, $scope.items, $scope.displayItems);
                     if ($scope.buttonActivated)
                         return $scope.items;
                     else
@@ -221,14 +246,13 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                     if (buttonActivate) //TODO: rename to 'showAll' or something                   
                         $scope.buttonActivated = true;
 
-                    if (buttonActivate ||$element.find('.list-group').is(':hidden') || $element.find('#' + $scope.title).is(':focus')) {
+                    if ($element.find('.list-group').is(':hidden') || $element.find('#' + $scope.title).is(':focus')) {
                         $scope.showOptions();
                     } else
                         $scope.hideOptions();
                 };
                 $scope.showOptions = function() {
                     
-                    $scope.showList = true;
                     $timeout(function(){
                         $element.find('.list-group').show();
                     }, 200)
@@ -237,9 +261,6 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                     
                     $element.find('.list-group').hide();
                     $scope.buttonActivated = false;
-                    $timeout(function(){
-                        $scope.showList =false;
-                    }, 200)
                 };
 
                 $scope.delayHideOptions = function() {
@@ -279,7 +300,7 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                         } else { //Multiple
                             if ($scope.selectbox)
                                 GetSourceItems().then(function(results) {
-                                    for (var i = 0; i != results.length; ++i)
+                                    for (var i = 0; i < results.length; ++i)
                                         if (results[i].__value == string) {
                                             $scope.binding.push(results[i]);
                                             $scope.displaySpans.push($filter("lstring")(results[0].title, $scope.currentLocale));
@@ -318,12 +339,12 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                         //if multiepl select box, then we need to revers map the displaySpan texts
                         if ($scope.selectbox)
                             GetSourceItems().then(function(items) {
-                                for (var i = 0; i != $scope.binding.length; ++i)
+                                for (var i = 0; i < $scope.binding.length; ++i)
                                     $scope.displaySpans[i] = reverseMap($scope.binding[i], items);
                             });
                         else {
                             //if regular multiple, then just directly put the displaySpans in as the bindings
-                            for (var i = 0; i != $scope.binding.length; ++i)
+                            for (var i = 0; i < $scope.binding.length; ++i)
                                 $scope.displaySpans[i] = $scope.binding[i];
                         }
 
@@ -335,15 +356,19 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                         else
                             $scope.bindingDisplay = $scope.binding;
                     }
-                    $scope.ngChange(newValue);
+                    // ngModelController.$setViewValue(newValue);
+                    // $scope.ngChange(newValue);
                 });
 
 
                 function reverseMap(value, items) {
                     var foundItem = '';
                     _.each(items, function(item) {
-                        if (JSON.stringify($scope.mapping(item)) == JSON.stringify(value))
+                        var mapItem = $scope.mapping(item);
+                        if((mapItem && value && mapItem.identifier && value.identifier && mapItem.identifier == value.identifier) || 
+                          JSON.stringify(mapItem) == JSON.stringify(value)){
                             foundItem = $filter("lstring")(item.title, $scope.currentLocale);
+                        }
                     });
                     //TODO: add error, for if no item matched
 
@@ -351,10 +376,8 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                 }
 
                 //////Initializing//////
-                $scope.items = []; //start empty, but then attempt to fill it.
-                //console.log(GetSourceItems());
-                GetSourceItems().then(function(items) {
-                    //console.log(items , '2975');
+                $scope.items = []; //start empty, but then attempt to fill it.                
+                GetSourceItems(0).then(function(items) {                    
                     $scope.items = items;
                 });
 
@@ -370,18 +393,15 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                     };
                 if (!$scope.filter)
                     $scope.filter = function($query, items) {
-                        // console.log('items: ', items);
-                        // console.log('query: ', $query);
                         var matchedOptions = [];
-                        for (var i = 0; i != items.length; ++i) //_value is always there.
+                        for (var i = 0; i < items.length; ++i) //_value is always there.
                             if (items[i].__value.toLowerCase().indexOf($query.toLowerCase()) != -1)
                                 matchedOptions.push(items[i]);
 
-                            // console.log('matched: ', matchedOptions);
                         return matchedOptions;
                     };
 
-                if (typeof $scope.maxmatches == 'undefined') $scope.maxmatches = 7;
+                if (typeof $scope.maxmatches == 'undefined') $scope.maxmatches = 20;
                 else if ($scope.maxmatches <= 0) $scope.maxmatches = 999999;
                 if (typeof $scope.minchars == 'undefined') $scope.minchars = 1;
                 if (typeof $scope.selectbox == 'undefined') $scope.selectbox = false;
@@ -403,5 +423,5 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
                 ////////////////////////END INIT
             },
         };
-    });
+    }]);
 });

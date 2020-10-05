@@ -2108,6 +2108,9 @@ a.disabled{
 #search-new .record-loader-loading{
     display: block;
 }
+.padding-top-10{
+    padding-top: 10px;
+}
 
 .padding-left-right-2{
     padding-left: 2px;

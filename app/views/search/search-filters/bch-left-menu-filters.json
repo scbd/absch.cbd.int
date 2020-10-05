@@ -1,4 +1,4 @@
-﻿{
+{
 	"authority": [
 		{
 			"type": "freeText",
@@ -42,7 +42,6 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
 			"title": "Living modified organism",
@@ -176,7 +175,7 @@
 			"field": "geneDonorOrganismIdentifiers_ss"
 		}
 	],
-	"expert": [
+	"biosafetyExpert": [
 		{
 			"type": "freeText",
 			"title": "Free Text",
@@ -184,16 +183,9 @@
 		},
 		{
 			"type": "thesaurus",
-			"term": "organizationTypes_ss",
-			"title": "Type of Organization",
-			"field": "",
-			"without":["B3699A74-EF2E-467A-A82F-EF2149A2EFC5"]
-		},
-		{
-			"type": "thesaurus",
-			"term": "expertiseArea",
+			"term": "areasOfExpertise",
 			"title": "Areas of Expertise",
-			"field": ""
+			"field": "expertise_ss"
 		}
 	],
 	"expertAssignment": [],
@@ -224,13 +216,30 @@
 			"relatedField":"scopes_REL_ss"
 		},
 		{
+			"type": "thesaurus",
+			"term": "regions",
+			"title": "Geographical region",
+			"field": "operationalRegions_ss",
+			"relatedField":"operationalRegions_REL_ss"
+		},
+		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
 			"title": "Living modified organism",
 			"field": "modifiedOrganisms_ss"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"fl": "identifier_s:uniqueIdentification_s,rec_title:uniqueIdentification_s",
+				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*",
+				"searchField":"uniqueIdentificationVariants_ss",
+				"lookupField":"uniqueIdentification_s"
+			},
+			"title": "Unique Identifier",
+			"field": "uniqueIdentifications_ss"
 		},
 		{
 			"type": "thesaurus",
@@ -306,10 +315,12 @@
 			"relatedField":"trait_REL_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:uniqueIdentification_s,title:uniqueIdentification_s",
-				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*"
+				"fl": "identifier_s:uniqueIdentification_s,rec_title:uniqueIdentification_s",
+				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*",
+				"searchField":"uniqueIdentificationVariants_ss",
+				"lookupField":"uniqueIdentification_s"
 			},
 			"title": "Unique Identifier",
 			"field": "uniqueIdentifications_ss"
@@ -379,11 +390,21 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
 			"title": "Living modified organism",
 			"field": "modifiedOrganisms_ss"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"fl": "identifier_s:uniqueIdentification_s,rec_title:uniqueIdentification_s",
+				"q": "schema_s:modifiedOrganism AND uniqueIdentification_s:*",
+				"searchField":"uniqueIdentificationVariants_ss",
+				"lookupField":"uniqueIdentification_s"
+			},
+			"title": "Unique Identifier",
+			"field": "uniqueIdentifications_ss"
 		},
 		{
 			"type": "thesaurus",
@@ -470,6 +491,13 @@
 		},
 		{
 			"type": "thesaurus",
+			"term": "regions",
+			"title": "Geographical region",
+			"field": "operationalRegions_ss",
+			"relatedField":"operationalRegions_REL_ss"
+		},
+		{
+			"type": "thesaurus",
 			"term": "organizationTypes",
 			"title": "Type of Organization",
 			"field": "organizationTypes_ss",
@@ -498,6 +526,13 @@
 		},
 		{
 			"type": "thesaurus",
+			"term": "regions",
+			"title": "Geographical region",
+			"field": "operationalRegions_ss",
+			"relatedField":"operationalRegions_REL_ss"
+		},
+		{
+			"type": "thesaurus",
 			"term": "detectionMethods",
 			"otherTerm":true,
 			"title": "Type of detection/ identification method(s) available for use in the laboratory",
@@ -506,7 +541,6 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:modifiedOrganism"
 			},
 			"title": "LMO(s) detectable by the laboratory",
@@ -515,7 +549,6 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_s",
 				"q": "schema_s:dnaSequence"
 			},
 			"title": "Genetic elements(s) detectable by the laboratory",

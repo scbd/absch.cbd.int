@@ -14,9 +14,10 @@
 							placeholder: "@",
 							binding: "=ngModel",
 							type: "@type",
-							required: "@"
+							required: "@",
+							locales:"=?"
 					},
-					link: function($scope, $element, attrs, ngModelController) {
+					link: function($scope, $element, $attr, ngModelController) {
 							$scope.skipLoad = false;
 							$scope.texts = [];
 							$scope.$watch('binding', function(){
@@ -59,8 +60,14 @@
 									var oText = $scope.texts;
 
 									angular.forEach(oText, function(text, i) {
+										if($scope.type!='lstring'){
 											if ($.trim(text.value) !== "")
 													oNewBinding.push($.trim(text.value));
+										}
+										else{
+											if (!_.isEmpty(text.value))
+													oNewBinding.push(text.value);
+										}
 									});
 
 									$scope.binding = !$.isEmptyObject(oNewBinding) ? oNewBinding : undefined;
@@ -72,17 +79,21 @@
 							//
 							//==============================
 							$scope.getTexts = function() {
+
+								var maxEntries = $attr.maxEntries;
 									if ($scope.texts.length === 0)
 											$scope.texts.push({
-													value: ""
+													value: $scope.type!='lstring' ? "" : {}
 											});
 
 									var sLastValue = $scope.texts[$scope.texts.length - 1].value;
 
 									//NOTE: IE can set value to 'undefined' for a moment
-									if (sLastValue && sLastValue !== "")
+									if (sLastValue && 
+										(($scope.type!='lstring' && sLastValue !== "") || $scope.type=='lstring' && !_.isEmpty(sLastValue))
+										&& (!maxEntries || $scope.texts.length<maxEntries))
 											$scope.texts.push({
-													value: ""
+													value: $scope.type!='lstring' ? "" : {}
 											});
 
 									return $scope.texts;

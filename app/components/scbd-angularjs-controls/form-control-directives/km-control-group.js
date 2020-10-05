@@ -1,4 +1,4 @@
-define(['app', 'text!./km-control-group.html', 'jquery','lodash'], function(app, template,$, _) { 'use strict';
+define(['app', 'text!./km-control-group.html', 'jquery','lodash', './km-info-tip'], function(app, template,$, _) { 'use strict';
 
 	app.directive('kmControlGroup', [function ()
 	{
@@ -15,6 +15,13 @@ define(['app', 'text!./km-control-group.html', 'jquery','lodash'], function(app,
 			},
 			link: function ($scope, $element, $attr)
 			{
+				if($attr.helpContent){
+					$scope.infoTip = {
+						title	: $attr.helpTitle,
+						content : $attr.helpContent
+					}
+				}
+
 				if ($attr.isValid) {
 					$scope.hasError = function() { return false; };
 					$scope.hasWarning = function() {
