@@ -1,9 +1,10 @@
 ﻿define(['app', 'text!views/search/search-results/group-view.html','lodash',
 'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status',
-'views/search/search-results/result-default'
+'views/search/search-results/result-default', 'services/solr'
 ], function(app, template, _) {
 
-    app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$location', '$q', function(searchService, realm, $timeout, $location, $q) {
+    app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$location', '$q', 'solr', 
+    function(searchService, realm, $timeout, $location, $q, solr) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -203,13 +204,14 @@
                     else 
                         recQuery += ' AND (' + groupFieldQuery(group) + ')'
                     var query = {
-                        query   : recQuery,
-                        sort    : $scope.searchResult.groupSort,
+                        fieldQuery     : _.uniq(queryOptions.tagQueries),
+                        query          : recQuery,
+                        sort           : $scope.searchResult.groupSort,
                         rowsPerPage    : number||5000,
                         start          : number ? undefined : (group.start==0 ? 10 : group.start),
                         currentPage    : group.start==0 ? 1 : Math.ceil((group.start+number)/10),
-                        highlight           : $scope.searchResult.groupOptions.highlight,
-                        highlightFields     : $scope.searchResult.groupOptions.highlightFields
+                        highlight      : $scope.searchResult.groupOptions.highlight,
+                        highlightFields: $scope.searchResult.groupOptions.highlightFields
                         
                     }
                     return searchService.list(query)
