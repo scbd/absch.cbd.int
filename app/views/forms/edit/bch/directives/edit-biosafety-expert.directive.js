@@ -1,9 +1,10 @@
 define(['app', 'lodash', 'text!./edit-biosafety-expert.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-expert.directive"], 
+	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-expert.directive", 'services/search-service',
+	'components/scbd-angularjs-controls/form-control-directives/km-inputtext-ac.html', 'services/solr'], 
 function (app, _, template) {
 
-	app.directive("editBiosafetyExpert", ["locale", "$filter", "$timeout", "$q", "$controller", "thesaurusService",
-	function(locale, $filter, $timeout, $q, $controller, thesaurusService) {
+	app.directive("editBiosafetyExpert", ["locale", "$filter", "searchService", "$q", "$controller", "thesaurusService", 'solr',
+	function(locale, $filter, searchService, $q, $controller, thesaurusService, solr) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -130,6 +131,23 @@ function (app, _, template) {
 				$scope.removeItem = function(type, $index){
 					if(type.length>0)
 						type.splice($index, 1)
+				}
+
+				$scope.searchOrganizations = function(userInputString, timeoutPromise, fieldLocale){
+					$scope.loadingData=true;
+					var searchQuery = solr.escape(userInputString);
+					var queryField = 'title_EN_t'.replace(/EN/, (fieldLocale||locale).toUpperCase());
+					var fields     = 'title:title_EN_t'.replace(/EN/, (fieldLocale||locale).toUpperCase());
+					$scope.loadingData=true;
+					var query = {
+						fieldQuery: ['schema_s:organization'],
+						query : queryField + ':(' + searchQuery + ')',
+						fields: fields
+					}
+					return searchService.list(query).then(function(r) {
+						return {data : r.data.response.docs};
+					})
+					.finally(function(){$scope.loadingData=false;});
 				}
 
 				$q.when($scope.setDocument({}))

@@ -1,4 +1,4 @@
-define(['app','text!./km-inputtext-ac.html','angular', 'angucomplete-alt'], function(app,template,angular) {
+define(['app','text!./km-inputtext-ac.html','angular', 'angucomplete-alt','css!./km-control.css'], function(app,template,angular) {
   //============================================================
   //
   //
