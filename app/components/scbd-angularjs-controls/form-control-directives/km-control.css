@@ -157,3 +157,10 @@ trix-toolbar .trix-button--icon-underline{
 .webui-popover.left-bottom> .webui-arrow:after {
     border-left-color: #000!important;
 }
+
+.km-inputtext-ac .angucomplete-dropdown{
+    top:40px;
+    overflow-y: auto;
+    max-height: 200px
+}
+.multiple-languages { margin-bottom: 3px; }
