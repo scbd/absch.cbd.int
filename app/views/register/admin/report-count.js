@@ -307,7 +307,7 @@ define(['app', 'underscore', 'js/common', 'moment', 'components/scbd-angularjs-c
                         'facet.limit': 1012,
                         'facet.range' : 'createdDate_dt',
                         'facet.range.gap' : '+1MONTH',
-                        'facet.range.start' : 'NOW/MONTH-' + (monthsDifference("2014-10-12")) + 'MONTH',
+                        'facet.range.start' : 'NOW/MONTH-' + (monthsDifference(new Date())) + 'MONTH',
                         'facet.range.end' : 'NOW+1MONTH/MONTH'
                     };
 

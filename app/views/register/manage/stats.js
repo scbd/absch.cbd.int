@@ -1,12 +1,12 @@
 define(['app', 'underscore', 'chart-js', 'components/scbd-angularjs-services/services/generic-service', 'js/common', 'moment',
     'views/register/directives/register-top-menu', 'services/search-service', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'services/app-config-service',
-    'components/scbd-angularjs-services/services/storage'
+    'components/scbd-angularjs-services/services/storage', 'services/solr'
     ], function (app, _) {
 
         "use strict";
-        app.controller("statsController", ["$scope", "$timeout", "IGenericService", "realm", "commonjs", "searchService", "$rootScope", 
+        app.controller("statsController", ["$scope", "$timeout", "IGenericService", "solr", "commonjs", "searchService", "$rootScope", 
         "$q", "$filter", "appConfigService", "IStorage",
-            function ($scope, $timeout, IGenericService, realm, commonjs, searchService, $rootScope,
+            function ($scope, $timeout, IGenericService, solr, commonjs, searchService, $rootScope,
              $q, $filter, appConfigService, storage) {
                     var pieObject;
 
@@ -130,7 +130,8 @@ define(['app', 'underscore', 'chart-js', 'components/scbd-angularjs-services/ser
 
                         var searchQuery = {
                             fields: 'id,schema_s, title_t, uniqueIdentifier_s,uniqueIdentifierRevisions_ss, updatedDate_dt, _revision_i',
-                            query : 'government_s:' + government + ' AND schema_s:(' + _.without(appConfigService.nationalSchemas, "contact", "focalPoint").join(' ') + 
+                            query : 'government_s:' + solr.escape(government) + ' AND schema_s:(' + 
+                                    solr.escape(_.without(appConfigService.nationalSchemas, "contact", "focalPoint").join(' ')) + 
                                     ') AND linkedRecordUniqueIdentifier_ss:* AND NOT virtual_b',
                             rowsPerPage : 1000
                         };
@@ -150,7 +151,7 @@ define(['app', 'underscore', 'chart-js', 'components/scbd-angularjs-services/ser
 
                                 var solrIds = _.uniq((_.pluck(documentNumbers, "solrId")));
                                 if(solrIds.length > 0){
-                                    searchQuery.query = "id:(" + solrIds.join(' ') + ') AND NOT virtual_b';
+                                    searchQuery.query = "id:(" + solr.escape(solrIds.join(' ')) + ') AND NOT virtual_b';
                                     searchService.list(searchQuery)
                                     .then(function(referenceRecords){
                                         console.log(referenceRecords);

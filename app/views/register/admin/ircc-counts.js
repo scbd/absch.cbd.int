@@ -1,11 +1,11 @@
 define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'components/scbd-angularjs-services/services/main',
     'views/register/directives/register-top-menu','chart-js',
-    'services/search-service','services/app-config-service',
+    'services/search-service','services/app-config-service', 'services/solr'
 ], function (app) {
 
         "use strict";
-        app.controller("adminIrccCountController", ["$scope", "$timeout", "searchService", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter",
-            function ($scope, $timeout, searchService, realm, commonjs, $q, appConfigService, $http, $filter) {
+        app.controller("adminIrccCountController", ["$scope", "solr", "searchService", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter",
+            function ($scope, solr, searchService, realm, commonjs, $q, appConfigService, $http, $filter) {
                 
                 var chartObjects = {};
 
@@ -61,13 +61,13 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                     }
 
                     if($scope.filters.startDate || $scope.filters.endDate) {
-                        var startDate = $scope.filters.startDate ? $scope.filters.startDate + 'T00:00:00.000Z' : '*';
-                        var endDate = $scope.filters.endDate ? $scope.filters.endDate + 'T23:59:59.999Z' : '*';
+                        var startDate   = solr.escape($scope.filters.startDate ? $scope.filters.startDate + 'T00:00:00.000Z' : '*');
+                        var endDate     = solr.escape($scope.filters.endDate ? $scope.filters.endDate + 'T23:59:59.999Z' : '*');
                         nationalRecordsQuery.query += ' AND ' + dateType + ' [ ' + startDate + ' TO ' + endDate + ' ]';
                     }                    
                     
                      if($scope.filters.countries)
-                        nationalRecordsQuery.query += ' AND government_s:(' + $scope.filters.countries.join(' ') + ')';
+                        nationalRecordsQuery.query += ' AND government_s:(' + solr.escape($scope.filters.countries.join(' ')) + ')';
 
                     $q.when(partyStatusQuery(), function(data){
                         
