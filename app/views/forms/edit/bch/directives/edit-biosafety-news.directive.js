@@ -18,13 +18,13 @@ function (app, _, template) {
                     $scope: $scope
                 }); 
                 $scope.getCleanDocument = function(document) {
-                     document = document || $scope.document; 
-                     delete document['government']
+                     document = document || $scope.document;  
                     if (!document)
 						return undefined; 
+						
 					return $scope.sanitizeDocument(document);
 				}; 
-                $scope.setDocument({}) 
+                $scope.setDocument({},true) 
 			}
 		} 
    }]);

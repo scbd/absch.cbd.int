@@ -31,7 +31,8 @@ define(['app', './common-routes', 'angular-route'], function (app,commonRoutes) 
                whenAsync('/register/NR4/:identifier/edit',      {templateUrl: 'views/forms/edit/bch/edit-national-report-4.html',    label:'Edit',  param:'true', resolveController: true, documentType :'NR4',  resolve : { securized : commonRoutes.securize(null, true, true) }, }).
                whenAsync('/register/SPCA/:identifier/edit',     {templateUrl: 'views/forms/edit/edit-authority.html',                label:'Edit',  param:'true', resolveController: true,documentType :'SPCA',  resolve : { securized : commonRoutes.securize(null,true, true) }, }).
                whenAsync('/register/LAB/:identifier/edit',      {templateUrl: 'views/forms/edit/bch/edit-laboratory-detection.html', label:'Edit',  param:'true', resolveController: true,documentType :'LAB',   resolve : { securized : commonRoutes.securize(null,true, true) }, }).
-
+               whenAsync('/register/BCHN/:identifier/edit',           {templateUrl: 'views/forms/edit/bch/edit-biosafety-news.html',                label:'Edit',  param:'true', resolveController: true, documentType :'biosafetyNews' , resolve : { securized : commonRoutes.securize(null, true, true) }, }).
+              
                whenAsync('/reports/lmo/:documentId/:tab',         { templateUrl: 'views/reports/bch/lmo-decisions-risk-assessments.html',  label:'LMO Decisions',  param:'true', resolveController: true, reloadOnUrl:false, resolve : { },  }).               
 
                // BCH4 PAGES

@@ -96,12 +96,7 @@
 			"type": "freeText",
 			"title": "Free Text",
 			"field": "text_EN_txt"
-		},
-		{
-			"type": "thesaurus",
-			"term": "country",
-			"title": "Country"
-		}
+		} 
 	],
 	"biosafetyLaw": [
 		{

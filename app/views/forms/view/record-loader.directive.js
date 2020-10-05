@@ -75,7 +75,7 @@
 						new							: 'views/forms/view/scbd/view-new.directive',
 						notification				: 'views/forms/view/scbd/view-notification.directive',
 						news						: 'views/forms/view/scbd/view-news.directive',
-						biosafetyNews				: 'views/forms/view/bchn/view-biosafety-news.directive',
+						biosafetyNews				: 'views/forms/view/bch/view-biosafety-news.directive',
 						biosafetyLaw				: 'views/forms/view/bch/view-biosafety-law.directive',
 						biosafetyDecision	 		: 'views/forms/view/bch/view-biosafety-decision.directive',
 						nationalRiskAssessment	 	: 'views/forms/view/bch/view-risk-assessment.directive',

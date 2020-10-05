@@ -9,36 +9,27 @@
 		<document-date></document-date>
 		<legend>General information</legend>
 		<div ng-if="document.country">
-			<label name="country">Country</label>
-			<div class="km-value">
+			<label name="country">Country</label> 
 				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}"
 					target={{target}}>{{document.government|term:locale}}</a>
-				<span ng-party-status government="document.country" id="country"></span>
-			</div>
+				<span ng-party-status government="document.country" id="country"></span> 
 		</div>
 		<div ng-if="document.title">
-			<label>Title</label>
-			<div class="km-value">
-				<km-value-ml value="document.title" locales="locale"></km-value-ml>
-			</div>
+			<label>Title</label> 
+				<km-value-ml value="document.title" locales="locale"></km-value-ml> 
 		</div>
 		<div ng-if="document.nodeAddress">
 			<label>Node Address</label>
 				<div class="km-value" ng-if="document.nodeAddress" km-link-list 
-				ng-model="document.nodeAddress" style="margin-top: 5px;"></div>	 
-		 
+				ng-model="document.nodeAddress" style="margin-top: 5px;"></div>	  
 		</div>
 		<div ng-if="document.newsText">
-			<label>News Text</label>
-			<div class="km-value">
-				<km-value-ml value="document.newsText" locales="locale" html></km-value-ml> 
-			</div>
+			<label>News Text</label> 
+				<km-value-ml value="document.newsText" locales="locale" html></km-value-ml>  
 		</div>
 		<div ng-if="document.newsAbstract">
-			<label>Abstract</label> 
-			<div class="km-value">
-				<km-value-ml value="document.newsAbstract" locales="locale" html></km-value-ml>  
-			</div>
+			<label>Abstract</label>  
+				<km-value-ml value="document.newsAbstract" locales="locale" html></km-value-ml>   
 		</div>
 		
 		<div>
