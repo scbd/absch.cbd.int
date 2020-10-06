@@ -90,6 +90,13 @@
 			"field": "geneDonorOrganismIdentifiers_ss"
 		}
 	],
+	"biosafetyNews": [
+		{
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		} 
+	],
 	"biosafetyLaw": [
 		{
 			"type": "freeText",

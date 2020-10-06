@@ -578,7 +578,8 @@ function ($timeout, locale, $filter, $q, searchService, appConfigService, IStora
 
                     'authority'                 : 'views/forms/edit/directives/edit-authority.directive',
                     'contact'                   : 'views/forms/edit/directives/edit-contact.directive',
-                    'organization'              : 'views/forms/edit/directives/edit-organization.directive'
+                    'organization'              : 'views/forms/edit/directives/edit-organization.directive',
+                    'biosafetyNews'             : 'views/forms/edit/directives/edit-biosafety-news.directive'
                 }
                 $scope.allowNew.activeSchema = lschema;
                 var schemaDetails = schemaMapping[lschema];

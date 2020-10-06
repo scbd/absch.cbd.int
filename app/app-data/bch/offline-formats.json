@@ -168,5 +168,14 @@
         "fr": "http://bch.cbd.int/resources/common%20formats/referencerecord_04_birc_fr.doc?download",
         "ru": "http://bch.cbd.int/resources/common%20formats/referencerecord_04_birc_ru.doc?download",
         "zh": "http://bch.cbd.int/resources/common%20formats/referencerecord_04_birc_zh.doc?download"
+    },
+    "biosafetyNews": {
+        "ar" :" http://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_ar.doc?download",
+        "en" : "http://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_en.doc?download",
+        "es" : "http://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_es.doc?download",
+        "fr" : "http://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_fr.doc?download",
+        "ru" : "http://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_ru.doc?download",
+        "zh" : "http://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_zh.doc?download"
     }
+
 }
