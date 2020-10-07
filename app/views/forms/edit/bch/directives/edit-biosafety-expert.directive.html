@@ -191,7 +191,7 @@
 														<div class="km-control-group" required name="currentEmployment.name" caption="Name of Employer / Organization / Company">
 															<div km-textbox-ac name="currentEmployment.name" required ng-model="document.currentEmployment.name" locales="document.header.languages"
 																placeholder="example: University of Montreal" pause="400" 
-																ng-remote-api-handler="searchOrganizations(userInputString, timeoutPromise, fieldLocale)" 
+																ng-on-search="onSearchOrganizations(text, locale)" 
 																data-field="suggestions" title-field="title" description-field="summary" 
 																input-class="form-control-small"></div>
 														</div>
@@ -253,7 +253,7 @@
                                                 <div class="row">
 													<div class="col-xs-12">
 														<div class="km-control-group" name="countriesWorkedIn" caption="Countries or regions where you have worked">
-															<div km-textbox-ac name="countriesWorkedIn" required ng-model="document.countriesWorkedIn" locales="document.header.languages"
+															<div km-textbox-ml name="countriesWorkedIn" required ng-model="document.countriesWorkedIn" locales="document.header.languages"
 															placeholder="example: Canada, Austria" ></div>
 														</div>
 													</div>
@@ -264,9 +264,9 @@
 													</div>
 													<div class="col-xs-6">
 														<div class="km-control-group" required name="previousEmployment.name" caption="Name of Previous Employer / Organization / Company">
-															<div km-textbox-ml name="previousEmployment.name" required ng-model="document.previousEmployment.name" locales="document.header.languages"
+															<div km-textbox-ac name="previousEmployment.name" required ng-model="document.previousEmployment.name" locales="document.header.languages"
 															placeholder="example: University of Montreal" pause="400" 
-															ng-remote-api-handler="searchOrganizations(userInputString, timeoutPromise, fieldLocale)" 
+															ng-on-search="onSearchOrganizations(text, locale)" 
 															data-field="suggestions" title-field="title" description-field="summary" 
 															input-class="form-control-small"></div>
 														</div>
@@ -345,7 +345,7 @@
 																		<div class="km-control-group" required name="primaryEducation.institution" caption="Name of academic institution">
 																			<div km-textbox-ac name="primaryEducation.institution" required ng-model="document.primaryEducation.institution"  
 																			placeholder="example: University of Montreal" locales="document.header.languages" pause="400" 
-																			ng-remote-api-handler="searchOrganizations(userInputString, timeoutPromise, fieldLocale)" 
+																			ng-on-search="onSearchOrganizations(text, locale)" 
 																			data-field="suggestions" title-field="title" description-field="summary" 
 																			input-class="form-control-small"></div>
 																		</div>
@@ -386,7 +386,7 @@
 																		<div class="km-control-group"  name="secondaryEducation.institution" caption="Name of academic institution">
 																			<div km-textbox-ac name="secondaryEducation.institution"  ng-model="document.secondaryEducation.institution"  
 																			placeholder="example: University of Montreal" locales="document.header.languages" pause="400" 
-																			ng-remote-api-handler="searchOrganizations(userInputString, timeoutPromise, fieldLocale)" 
+																			ng-on-search="onSearchOrganizations(text, locale)" 
 																			data-field="suggestions" title-field="title" description-field="summary" 
 																			input-class="form-control-small"></div>
 																		</div>
@@ -427,7 +427,7 @@
 																		<div class="km-control-group"  name="thirdEducation.institution" caption="Name of academic institution">
 																			<div km-textbox-ac name="thirdEducation.institution"  ng-model="document.thirdEducation.institution" 
 																			 placeholder="example: University of Montreal" locales="document.header.languages" pause="400" 
-																			 ng-remote-api-handler="searchOrganizations(userInputString, timeoutPromise, fieldLocale)" 
+																			 ng-on-search="onSearchOrganizations(text, locale)" 
 																			 data-field="suggestions" title-field="title" description-field="summary" 
 																			 input-class="form-control-small"></div>
 																		</div>

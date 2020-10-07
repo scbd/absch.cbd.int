@@ -4,7 +4,7 @@ define(['app', 'lodash', 'text!./edit-biosafety-expert.directive.html', 'views/f
 function (app, _, template) {
 
 	app.directive("editBiosafetyExpert", ["locale", "$filter", "searchService", "$q", "$controller", "thesaurusService", 'solr',
-	function(locale, $filter, searchService, $q, $controller, thesaurusService, solr) {
+	function(appLocale, $filter, searchService, $q, $controller, thesaurusService, solr) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -46,14 +46,14 @@ function (app, _, template) {
 						return thesaurusService.getDomainTerms('nationalities')
 						.then(function(nationalities){
 							return _.sortBy(nationalities, function(nation){
-								return nation.title[locale]});
+								return nation.title[appLocale]});
 						})
 					},
                 	areaOfExpertise	: thesaurusService.getDomainTerms('areasOfExpertise', {other:true, otherType:'lstring', multiple:true}),	
 					languages 		: thesaurusService.getDomainTerms('unLanguages'),
 					otherLanguages 	: thesaurusService.getDomainTerms('languages').then(function(languages){
 						return _.map(languages, function(element) {
-									element.__value = $filter('lstring')(element.title, locale);
+									element.__value = $filter('lstring')(element.title, appLocale);
 									return element
 								});
 					}),
@@ -133,12 +133,13 @@ function (app, _, template) {
 						type.splice($index, 1)
 				}
 
-				$scope.searchOrganizations = function(userInputString, timeoutPromise, fieldLocale){
+				$scope.onSearchOrganizations = function(text, locale){
+
 					$scope.loadingData=true;
-					var searchQuery = solr.escape(userInputString);
-					var queryField = 'title_EN_t'.replace(/EN/, (fieldLocale||locale).toUpperCase());
-					var fields     = 'title:title_EN_t'.replace(/EN/, (fieldLocale||locale).toUpperCase());
-					$scope.loadingData=true;
+					var queryField = 'title_EN_t'.replace(/EN/, (locale||appLocale).toUpperCase());
+					var fields     = 'title:title_EN_t'.replace(/EN/, (locale||appLocale).toUpperCase());
+					var searchQuery = solr.escape(text);
+					
 					var query = {
 						fieldQuery: ['schema_s:organization'],
 						query : queryField + ':(' + searchQuery + ')',

@@ -15,7 +15,7 @@ define(['app','text!./km-inputtext-ac.html','angular', 'angucomplete-alt','css!.
         locales             : '=',
         required            : "@",
         ngDisabledFn        : '&ngDisabled',
-        ngRemoteApiHandlerFn: '&ngRemoteApiHandler'
+        ngOnSearchFn        : '&ngOnSearch'
       },
       link: function($scope, element, $attr, ngModelController) {
 
@@ -48,7 +48,7 @@ define(['app','text!./km-inputtext-ac.html','angular', 'angucomplete-alt','css!.
             }
           });
           $scope.text = oText;
-          $scope.onchange();
+          onchange();
           $timeout(function(){element.find('.lang-tooltip').tooltip()}, 300)
         };
 
@@ -68,8 +68,7 @@ define(['app','text!./km-inputtext-ac.html','angular', 'angucomplete-alt','css!.
         //==============================
         //Remove value of not selected languages/empty languages
         //==============================
-        $scope.onchange = function(val) {
-          console.log(val)
+        function onchange() {
           var oLocales = $scope.locales || [];
           var oText = $scope.text || {};
           var oNewBinding = {};
@@ -98,21 +97,24 @@ define(['app','text!./km-inputtext-ac.html','angular', 'angucomplete-alt','css!.
           return $scope.locales && $scope.locales.length > 1;
         };
 
-        $scope.remoteApiHandler = function(userInputString, timeoutPromise){
+        $scope.remoteApiHandler = function(text, timeout){
           var fieldLocale = this.$parent.locale;
-          return $scope.ngRemoteApiHandlerFn({userInputString:userInputString, timeoutPromise:timeoutPromise, fieldLocale:fieldLocale})
+          return $scope.ngOnSearchFn({text:text, locale:fieldLocale, timeout:timeout})
         }
 
+        // the binding is type = so we do not have control over the parameters
         $scope.onInputChange = function(text){
           var fieldLocale = this.$parent.locale; // gets the locale from parent as there can be multiple locale
           $scope.text[fieldLocale] = text;
-          $scope.onchange();
+          onchange();
         }
+
+        // the binding is type = so we do not have control over the parameters
         $scope.onObjectSelected = function(item){
           var fieldLocale = this.$parent.locale; // gets the locale from parent as there can be multiple locale
           if(item){
             $scope.text[fieldLocale] = item.title;
-            $scope.onchange();
+            onchange();
           }
         }
       }      
