@@ -15,7 +15,7 @@ define(['app','text!./km-inputtext-ac.html','angular', 'angucomplete-alt','css!.
         locales             : '=',
         required            : "@",
         ngDisabledFn        : '&ngDisabled',
-        ngOnSearchFn        : '&ngOnSearch'
+        onSearchFn          : '&onSearch'
       },
       link: function($scope, element, $attr, ngModelController) {
 
@@ -99,7 +99,7 @@ define(['app','text!./km-inputtext-ac.html','angular', 'angucomplete-alt','css!.
 
         $scope.remoteApiHandler = function(text, timeout){
           var fieldLocale = this.$parent.locale;
-          return $scope.ngOnSearchFn({text:text, locale:fieldLocale, timeout:timeout})
+          return $scope.onSearchFn({text:text, locale:fieldLocale, timeout:timeout})
         }
 
         // the binding is type = so we do not have control over the parameters
