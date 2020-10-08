@@ -1,8 +1,8 @@
 <div id="Record" class="record panel panel-default">
-	<div class="panel-heading bg-blue">
+	<div class="panel-heading bg-orange">
 		<h4>
 			BCH Country Profile
-			<span class="color-black"> (BCP) </span>
+			<span  > (BCP) </span>
 		</h4>
 	</div>
 	<div class="record-body panel-body">
@@ -27,7 +27,7 @@
 			</div>
 
 			<div ng-if="document.relevantDocuments">
-				<label>Other relevant website address or attached documents</label>
+				<label>Other relevant website addresses or attached documents</label>
 				<div class="km-value" ng-repeat="item in document.relevantDocuments">
 					<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 				</div>
