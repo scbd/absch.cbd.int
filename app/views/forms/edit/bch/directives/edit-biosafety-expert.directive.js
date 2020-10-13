@@ -1,9 +1,10 @@
 define(['app', 'lodash', 'text!./edit-biosafety-expert.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-expert.directive"], 
+	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-expert.directive", 'services/search-service',
+	'components/scbd-angularjs-controls/form-control-directives/km-inputtext-ac.html', 'services/solr'], 
 function (app, _, template) {
 
-	app.directive("editBiosafetyExpert", ["locale", "$filter", "$timeout", "$q", "$controller", "thesaurusService",
-	function(locale, $filter, $timeout, $q, $controller, thesaurusService) {
+	app.directive("editBiosafetyExpert", ["locale", "$filter", "searchService", "$q", "$controller", "thesaurusService", 'solr',
+	function(appLocale, $filter, searchService, $q, $controller, thesaurusService, solr) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -45,14 +46,14 @@ function (app, _, template) {
 						return thesaurusService.getDomainTerms('nationalities')
 						.then(function(nationalities){
 							return _.sortBy(nationalities, function(nation){
-								return nation.title[locale]});
+								return nation.title[appLocale]});
 						})
 					},
                 	areaOfExpertise	: thesaurusService.getDomainTerms('areasOfExpertise', {other:true, otherType:'lstring', multiple:true}),	
 					languages 		: thesaurusService.getDomainTerms('unLanguages'),
 					otherLanguages 	: thesaurusService.getDomainTerms('languages').then(function(languages){
 						return _.map(languages, function(element) {
-									element.__value = $filter('lstring')(element.title, locale);
+									element.__value = $filter('lstring')(element.title, appLocale);
 									return element
 								});
 					}),
@@ -130,6 +131,24 @@ function (app, _, template) {
 				$scope.removeItem = function(type, $index){
 					if(type.length>0)
 						type.splice($index, 1)
+				}
+
+				$scope.onSearchOrganizations = function(text, locale){
+
+					$scope.loadingData=true;
+					var queryField = 'title_EN_t'.replace(/EN/, (locale||appLocale).toUpperCase());
+					var fields     = 'title:title_EN_t'.replace(/EN/, (locale||appLocale).toUpperCase());
+					var searchQuery = solr.escape(text);
+					
+					var query = {
+						fieldQuery: ['schema_s:organization'],
+						query : queryField + ':(' + searchQuery + ')',
+						fields: fields
+					}
+					return searchService.list(query).then(function(r) {
+						return {data : r.data.response.docs};
+					})
+					.finally(function(){$scope.loadingData=false;});
 				}
 
 				$q.when($scope.setDocument({}))
