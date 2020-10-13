@@ -10,9 +10,11 @@
 		<legend>General information</legend>
 		<div ng-if="document.country">
 			<label name="country">Country</label> 
+			<div class="km-value">
 				<a rel="noopener" ng-href="/countries/{{document.country.identifier|uppercase|encodeURIComponent}}"
 					target={{target}}>{{document.country|term:locale}}</a>
-				<span ng-party-status government="document.country" id="country"></span> 
+				<span ng-party-status government="document.country" id="government"></span> 
+			</div>
 		</div>
 		<div ng-if="document.title">
 			<label>Title</label> 
@@ -20,7 +22,7 @@
 		</div>
 		<div ng-if="document.nodeAddress">
 			<label>Relevant link(s)</label>
-			<km-link-list ng-if="document.nodeAddress" ng-model="document.nodeAddress" style="margin-top: 5px;"></km-link-list>
+			<km-link-list class="km-value"  ng-if="document.nodeAddress" ng-model="document.nodeAddress" style="margin-top: 5px;"></km-link-list>
 		</div>
 		<div ng-if="document.newsAbstract">
 			<label>Abstract</label>  
@@ -37,13 +39,10 @@
 			</div>
 
 			<div ng-if="document.relevantDocuments">
-				<label>Other relevant website addresses or attached documents</label>
-				<div class="km-value" ng-repeat="item in document.relevantDocuments">
-					<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-				</div>
+				<label>Other relevant website addresses and/or attached documents</label>
+				<km-link-list class="km-value"  ng-if="document.relevantDocuments" ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
 			</div>
 		</div>
-		
 		<div>
 			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
 		</div>
