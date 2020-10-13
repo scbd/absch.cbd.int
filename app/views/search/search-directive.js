@@ -8,8 +8,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 'components/scbd-angularjs-controls/form-control-directives/pagination',
 'views/search/directives/result-view-options', 'views/search/search-filters/left-side-filter',
 'views/search/search-results/list-view','views/search/search-results/group-view', 
-'components/scbd-angularjs-controls/form-control-directives/km-date-range', 'services/solr', 'toastr'
-
+'components/scbd-angularjs-controls/form-control-directives/km-date-range', 'services/solr', 'toastr',
+'views/reports/matrix/data-matrix.directive'
 ], function(app, template, _, scbdSchemas, joyRideText) {
 
     app.directive('searchDirective', function() {
@@ -626,7 +626,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 resultQuery = $scope.searchResult.groupViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
                             }
                             else if($scope.searchResult.viewType == 'matrix'){
-                                
+                                resultQuery = $scope.searchResult.matrixViewApi.updateResult(queryOptions);
                             }
                             resultQuery.then(function(data){
                                 $scope.searchResult.data = data;

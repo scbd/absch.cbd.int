@@ -107,7 +107,7 @@
                         showGroupByDialog()
                     }
                     else{
-                        
+                        $scope.onViewTypeChange({options:{viewType:type}})
                     }
                 }
 

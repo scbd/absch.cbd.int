@@ -2165,3 +2165,6 @@ a.disabled{
     top: unset!important;
     bottom: 10px!important;
 }
+#search-new .searchMatrixContent .inverted.dimmer{
+    background-color: #000;
+}
