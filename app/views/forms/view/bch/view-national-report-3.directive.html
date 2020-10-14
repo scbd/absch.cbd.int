@@ -1,8 +1,8 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-blue">
 		<h4>
-			Third National Report on the Implementation of the Cartagena Protocol on Biosafety
-			<span class="color-black"> (NR3) </span>
+			<span ng-bind="::document.header.schema|schemaName"></span>
+			<span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span>
 		</h4>
 	</div>
 	<div class="record-body panel-body">
