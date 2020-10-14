@@ -313,10 +313,9 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     'currentPage'   : $scope.searchResult.currentPage-1,
                     'rowsPerPage'   : $scope.searchResult.rowsPerPage                    
                 };
-                if(!options.freeTextQuery && !options.sort)
-                    queryParameters.sort = 'updatedDate_dt desc';
-                else if(options.sort)
-                    queryParameters.sort = options.sort;
+                if(!$scope.search.keyword){
+                    queryParameters.sort = options.sort||'updatedDate_dt desc';
+                }
 
                 searchOperation = searchService.list(queryParameters, null);
 
