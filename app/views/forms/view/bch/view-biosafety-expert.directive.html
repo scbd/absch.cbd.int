@@ -47,7 +47,7 @@
 			</div>
 
 			<div ng-show="document.phones"   class="padding-top-10">
-				<label>Telephone(s)</label>
+				<label>Phone number(s)</label>
 				<div class="km-value">
 					<ul class="list">
 						<li ng-repeat="item in document.phones">{{item}}</li>
@@ -341,7 +341,7 @@
 			</div>
 
 			<div ng-if="document.additionalDocuments" class="padding-top-10">
-				<label>Other relevant website address or attached documents</label>
+				<label>Other relevant website addresses and/or attached documents</label>
 				<div class="km-value" ng-if="document.additionalDocuments" km-link-list 
 					ng-model="document.additionalDocuments" style="margin-top: 5px;"></div>	
 			</div>

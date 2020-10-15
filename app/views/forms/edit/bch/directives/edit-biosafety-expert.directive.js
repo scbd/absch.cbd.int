@@ -50,7 +50,10 @@ function (app, _, template) {
 						})
 					},
                 	areaOfExpertise	: thesaurusService.getDomainTerms('areasOfExpertise', {other:true, otherType:'lstring', multiple:true}),	
-					languages 		: thesaurusService.getDomainTerms('unLanguages'),
+					//languages 		: thesaurusService.getDomainTerms('unLanguages'),
+					languages 		: thesaurusService.getDomainTerms('unLanguages').then(function(lang){
+						return _.sortBy( lang, 'name' );
+					}),
 					otherLanguages 	: thesaurusService.getDomainTerms('languages').then(function(languages){
 						return _.map(languages, function(element) {
 									element.__value = $filter('lstring')(element.title, appLocale);

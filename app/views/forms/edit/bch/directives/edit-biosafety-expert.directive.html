@@ -134,7 +134,7 @@
 											
 											<div class="row">
 												<div class="col-md-6 col-xs-12">
-													<div class="km-control-group" required name="phones" caption="Telephone(s)">
+													<div class="km-control-group" required name="phones" caption="Phone number(s)">
 														<div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
 														<div km-inputtext-list required name="phones" ng-model="document.phones" placeholder="example: +1 514.288.2220"></div>
 													</div>
@@ -540,7 +540,7 @@
 														<div class="km-control-group" name="motherTongue" required caption="Mother tongue">
 															<div km-term-check required ng-model="motherTongue.unLanguages" locales="document.header.languages"
 																terms="options.languages" show-other="false" binding-type="term[]"></div>
-															<div ng-repeat="lang in motherTongue.otherLanguages" style="max-width: 200px;padding-left: 15px;padding-bottom: 10px;">
+															<div ng-repeat="lang in motherTongue.otherLanguages | orderBy:'name'" style="max-width: 200px;padding-left: 15px;padding-bottom: 10px;">
 																<div afc-autocomplete name="otherMotherTongue{{$index}}" ng-model="motherTongue.otherLanguages[$index]" source="options.otherLanguages" style="display: inline-block;"
 																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a language..." ng-change="onLangChange()"></div>
 																<button class="btn btn-danger btn-xs" ng-click="removeItem(motherTongue.otherLanguages, $index)" style="position: absolute;margin-left: 5px;">Remove</button>
@@ -556,7 +556,7 @@
 														<div class="km-control-group" name="otherTongue" caption="Other languages">
 															<div>
 																<table>
-																	<tr ng-repeat="language in languageRating">																		
+																	<tr ng-repeat="language in languageRating | orderBy:'name'">																		
 																		<td style="width:250px">
 																			<span ng-if="language.isUNLanguage" ng-bind="language.title|lstring:locale"></span>
 																			<div  ng-if="!language.isUNLanguage" class="input-group">
@@ -625,7 +625,8 @@
 
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="additionalDocuments" caption="Other relevant website address or attached documents">
+														<div class="km-control-group" name="additionalDocuments" caption="Any other relevant documents">
+															<div class="help-info">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
 															<div km-link name="additionalDocuments" ng-model="document.additionalDocuments"
 																identifier="document.header.identifier"></div>
 														</div>
