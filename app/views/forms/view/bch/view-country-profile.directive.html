@@ -1,13 +1,8 @@
 <div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-orange">
 		<h4>
-<<<<<<< HEAD
 			<span ng-bind="::document.header.schema|schemaName"></span>
 			<span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span>
-=======
-			BCH Country Profile
-			<span  > (BCP) </span>
->>>>>>> 0feaa702f5bd427493cfbb946f94c0a1166f25dc
 		</h4>
 	</div>
 	<div class="record-body panel-body">
@@ -15,50 +10,26 @@
 		<legend>General information</legend>
 		<div ng-if="document.government">
 			<label name="government">Country</label> 
-<<<<<<< HEAD
 			<div class="km-value">
 				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}"
 					target={{target}}>{{document.government|term:locale}}</a>
 				<span ng-party-status government="document.government" id="government"></span> 
 			</div>
 		</div>	
-=======
-				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}"
-					target={{target}}>{{document.government|term:locale}}</a>
-				<span ng-party-status government="document.government" id="government"></span> 
-		</div>
-		
->>>>>>> 0feaa702f5bd427493cfbb946f94c0a1166f25dc
 		<div ng-if="document.profile">
 			<label>Profile</label>  
 			 <km-value-ml value="document.profile" locales="locale" html></km-value-ml>   
 		</div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 0feaa702f5bd427493cfbb946f94c0a1166f25dc
 		<div ng-if="document.relevantInformation||document.relevantDocuments">
 			<div ng-if="document.relevantInformation">
 				<label>Additional information</label>
 				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
 			</div>
-<<<<<<< HEAD
 			<div ng-if="document.relevantDocuments">
 				<label>Other relevant website addresses and/or attached documents</label>
 				<km-link-list class="km-value"  ng-if="document.relevantDocuments" ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
 			</div>
 		</div>
-=======
-
-			<div ng-if="document.relevantDocuments">
-				<label>Other relevant website addresses or attached documents</label>
-				<div class="km-value" ng-repeat="item in document.relevantDocuments">
-					<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-				</div>
-			</div>
-		</div>
-		
->>>>>>> 0feaa702f5bd427493cfbb946f94c0a1166f25dc
 		<div>
 			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
 		</div>
