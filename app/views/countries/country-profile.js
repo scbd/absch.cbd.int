@@ -1,17 +1,19 @@
-define(['app','underscore',
+define(['app',
   'views/countries/country-profile-directive',
   'views/directives/block-region-directive',
   'js/common','components/scbd-angularjs-services/services/locale','ng-breadcrumbs',
   'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css',
-  'css!./country-profile'
-], function(app, _) {
+  'css!./country-profile', 'components/scbd-angularjs-services/services/storage'
+], function(app) {
 
   app.controller("countryProfileController",
-  ["$scope","$route", "$sce", "$timeout", "$location","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm', 'ngMeta','searchService',
-    function($scope,$route, $sce, $timeout, $location,locale, commonjs, $q, breadcrumbs, $element, $compile, realm, ngMeta,searchService) {
+  ["$scope","$route", "$sce", "$timeout", "IStorage","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm', 'ngMeta','searchService',
+    function($scope,$route, $sce, $timeout, IStorage, locale, commonjs, $q, breadcrumbs, $element, $compile, realm, ngMeta,searchService) {
       $scope.code      = $route.current.params.code;
-      $scope.isBCH          = realm.is('BCH');
-      $scope.isABS          = realm.is('ABS');   
+      $scope.isBCH     = realm.is('BCH');
+      $scope.isABS     = realm.is('ABS');
+      $scope.locale    = locale;
+
       $q.when(commonjs.getCountry($scope.code.toUpperCase()))
       .then(function(country){ 
           $scope.country = country;
@@ -33,15 +35,18 @@ define(['app','underscore',
       function loadCountryProfile(code){
 
         var searchQuery = $scope.exportQuery = {
-            fields  : 'id, profile:profile_EN_t',
+            fields  : 'identifier_s',
             query   : 'schema_s:countryProfile AND government_s:' + code 
         };
 
         searchService.list(searchQuery)
         .then(function(result){   
-            _.each(result.data.response.docs, function(doc){ 
-                $scope.countryProfile = doc  
+          if(result.data.response.docs.length){
+            IStorage.documents.get(result.data.response.docs[0].identifier_s)
+            .then(function (document) {
+              $scope.countryProfile = document.data;
             });
+          }
         });
       } 
 

@@ -65,7 +65,7 @@
                             
                 </div>
                 <div class="well bg-white cp-header" ng-if="countryProfile && countryProfile.profile"> 
-                    {{countryProfile.profile}} 
+                    <span ng-bind-html="countryProfile.profile|lstring:locale|toTrusted"></span> 
                 </div>
             </div>
         </div>
