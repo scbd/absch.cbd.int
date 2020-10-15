@@ -1,4 +1,22 @@
 <div ng-controller="editCountryProfileController">
 	<div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
-	<edit-country-profile></edit-country-profile>
+	 
+	<div ng-class="{'block-position' : blockEditForm }">
+		<div block-region activate="blockEditForm"></div>      
+		<edit-country-profile></edit-country-profile>
+	</div>
+	<script type="text/ng-template" id="recordExistsTemplate.html" trados-translation="true">
+		<div style="margin:10px;">
+			<h1>Country Profile for Biosafety Clearing-House</h1>
+			<hr>
+			<div class=" alert alert-danger">
+				<div class="glyphicon glyphicon-exclamation-sign" style="display:inline-block"></div>
+				<div style="display:inline-block">Only one record of the country profile for biosafety clearing-house is allowed for each government, the country profile for biosafety clearing-house already exists
+					for your government, you will be redirected to the record in {{alertSeconds}} seconds.</div>
+			</div>
+			<div class="ngdialog-buttons" >
+				<button type="button" style="margin:5px;" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">Redirect now</button>
+			</div>
+		</div>
+	</script>
 </div>
