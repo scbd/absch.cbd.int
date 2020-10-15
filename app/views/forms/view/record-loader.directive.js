@@ -89,7 +89,8 @@
 						dnaSequence	 				: 'views/forms/view/bch/view-dna-sequence.directive',
 						organism	 				: 'views/forms/view/bch/view-organism.directive',
 						laboratoryDetection	 		: 'views/forms/view/bch/view-laboratory-detection.directive',
-						biosafetyExpert		 		: 'views/forms/view/bch/view-biosafety-expert.directive'
+						biosafetyExpert		 		: 'views/forms/view/bch/view-biosafety-expert.directive',
+						countryProfile		 		: 'views/forms/view/bch/view-country-profile.directive'
 					}
 
 					$scope.$watch("document", function (_new) {
