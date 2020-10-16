@@ -79,7 +79,7 @@
 				<div class="km-pre">{{document.address | lstring:locale}}</div>
 				{{document.city | lstring:locale}}
 				<span ng-show="document.city">,</span>
-				{{document.state | lstring:locale}}
+				<span ng-bind="document.state | lstring:locale"></span>
 				<br ng-show="document.city || document.state" />
 				<span ng-bing="document.postalCode | lstring:locale"></span>
 				<span ng-show="document.postalCode">,</span>
