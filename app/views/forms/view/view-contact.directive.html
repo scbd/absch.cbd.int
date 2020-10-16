@@ -83,7 +83,7 @@
 				<br ng-show="document.city || document.state" />
 				<span ng-bing="document.postalCode | lstring:locale"></span>
 				<span ng-show="document.postalCode">,</span>
-				<b>{{document.country|term:locale}}</b>
+				<b ng-bind="document.country|term:locale"></b>
 			</address>
 		</div>
         <div ng-show="document.phones" >
