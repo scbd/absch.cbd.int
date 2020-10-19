@@ -1,6 +1,9 @@
 <div>
 	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
 		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
+		<div ng-class="{'block-position' : blockEditForm }">
+			<div block-region activate="blockEditForm"></div> 
+		</div>   
 		<div class="registerpage-content">
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)"
 				document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
@@ -28,55 +31,21 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="country" required
-												caption="Country">
-												<div afc-autocomplete required name="country"
-													ng-model="document.country" source="options.countries"
-													filter="startsWithFilter" mapping="genericMapping" selectbox="true"
-													placeholder="Please select a country..."></div>
+											<div class="km-control-group" name="government" required caption="Country">
+												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
+													filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="title"
-												caption="Title of the record">
-												<div km-textbox-ml name="title" required ng-model="document.title"
-													locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="km-control-group" name="nodeAddress"
-												caption="BCH node address(es)">
-												<div class="help-info">
-													Please provide the URL of the website (e.g. http://www.cbd.int) and the name of the website (e.g. ‘Convention on Biological Diversity’). 
-												</div>
-                                        			
-												<div km-link name="nodeAddress" ng-model="document.nodeAddress"
-													allow-link="true" allow-file="false"></div>
-											</div>
-										</div>
-									</div> 
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="km-control-group" name="newsAbstract" caption="Abstract">
-												<div class="help-block">(max. 80 words)</div>
-												<div km-rich-textbox ng-model="document.newsAbstract" rows="4"
+											<div class="km-control-group" required name="profile" caption="Profile">
+												<div km-rich-textbox required ng-model="document.profile" rows="4"
 													placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div> 
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="km-control-group" required name="newsText" caption="News text">
-												<div class="help-block">(max. 300 words)</div>
-												<div km-rich-textbox required ng-model="document.newsText" rows="4"
-													placeholder="" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>  
+
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="relevantInformation" caption="Any other relevant information">
@@ -95,7 +64,7 @@
 												 identifier="document.header.identifier"></div>
 											</div>
 										</div>
-									</div>  
+									</div>
 									<legend>Notes</legend>
 									<div class="row">
 										<div class="col-md-12">
@@ -115,10 +84,24 @@
 					</form>
 				</edit-form>
 				<review-form>
-					<view-biosafety-news ng-model="review.document" locale="review.locale" >
-					</view-biosafety-news>
+					<view-country-profile ng-model="review.document" locale="review.locale" >
+					</view-country-profile>
 				</review-form>
 			</workflow-arrow-buttons>
 		</div>
+		<script type="text/ng-template" id="recordExistsTemplate.html" trados-translation="true">
+			<div style="margin:10px;">
+				<h1>Country Profile for Biosafety Clearing-House</h1>
+				<hr>
+				<div class=" alert alert-danger">
+					<div class="glyphicon glyphicon-exclamation-sign" style="display:inline-block"></div>
+					<div style="display:inline-block">Only one record of the country profile for biosafety clearing-house is allowed for each government, the country profile for biosafety clearing-house already exists
+						for your government, you will be redirected to the record in {{alertSeconds}} seconds.</div>
+				</div>
+				<div class="ngdialog-buttons" >
+					<button type="button" style="margin:5px;" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">Redirect now</button>
+				</div>
+			</div>
+		</script>
 	</div> 
 </div>

@@ -28,7 +28,7 @@
                 var nationalSchemas = []
                 var index=0;
                 _(realm.schemas).map(function(schema, key){ 
-                    if(schema.type=='national' && key!= 'contact'){
+                    if(schema.type=='national' && key!= 'contact' && key!= 'countryProfile'){
                         countryRecords[key] = { title : schema.title, shortCode : schema.shortCode, index: index++, docs:[], numFound:0};
                         nationalSchemas.push(key);
                     }
