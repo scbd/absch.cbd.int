@@ -846,8 +846,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if(filterType == 'freeText'){
                             var freeTextVals = _.map(filters, function(filter){ 
                                     if(filter.id.indexOf('-')>0) 
-                                        return '"' + solr.escape(_.trim(filter.id)) + '"'; 
-                                    return solr.escape(_.trim(filter.id))
+                                        return '"' + _.trim(filter.id) + '"'; 
+                                    // to avoid solr falling back to default field when 
+                                    // search has multiple words put text inside ()
+                                    return _.trim(filter.id)
                                 })
                             query = '(' + field + ':' + freeTextVals.join(' AND ' + field + ':') + ')';
                         }
