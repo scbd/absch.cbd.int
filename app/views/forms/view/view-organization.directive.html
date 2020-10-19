@@ -46,7 +46,7 @@
 
 
 		<div ng-show="document.phones">
-			<label>Phone numbers</label>
+			<label>Phone number(s)</label>
 			<div  class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.phones" ng-bind="item"></li>
@@ -55,7 +55,7 @@
 		</div>
 
 		<div ng-show="document.faxes">
-			<label>Fax Numbers</label>
+			<label>Fax Number(s)</label>
 			<div  class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.faxes" ng-bind="item"></li>
@@ -64,7 +64,7 @@
 		</div>
 
 		<div ng-show="document.emails">
-			<label>Emails</label>
+			<label>Email(s)</label>
 			<div  class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.emails"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}">
@@ -74,7 +74,7 @@
 		</div>
 
 		<div ng-show="document.websites">
-			<label>Websites</label>
+			<label>Website address(es)</label>
 			<div class="km-value" ng-repeat="item in document.websites">
 				<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><span ng-bind="item.name||item.url"></span></a>
 			</div>
@@ -152,7 +152,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website address or attached documents</label>
+				<label>Other relevant website addresses and/or attached documents</label>
 				<div class="km-value" ng-if="document.relevantDocuments" km-link-list 
 					ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>				
 			</div>

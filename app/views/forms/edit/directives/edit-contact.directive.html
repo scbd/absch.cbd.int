@@ -72,7 +72,7 @@
 												</div>
 			
 												<div class="col-md-4 col-sm-4 col-xs-12">
-													<div class="km-control-group" name="middleName" caption="Middle Name">
+													<div class="km-control-group" name="middleName" caption="Middle name">
 														<input type="text" class="form-control" name="middleName" ng-model="document.middleName" />
 													</div>
 												</div>
@@ -115,7 +115,7 @@
 											<div class="row">
 												<div class="col-md-7 col-xs-12">
 													<div class="km-control-group" name="organization" ng-required="!form.organization.$valid && document.type!='person'" caption="Organization">
-														<div class="help-info">Fullname without abbreviation</div>
+														<div class="help-info">Full name without abbreviation</div>
 														<div ng-if="document.header.schema=='organization'" km-textbox-ml name="organization" ng-model="document.name" required locales="document.header.languages"></div>
 														<div ng-if="document.type=='organization' && document.header.schema=='contact'" km-textbox-ml name="organization" ng-model="document.organization" locales="document.header.languages"></div>
 													</div>
@@ -243,14 +243,14 @@
 			
 										<div class="row">
 											<div class="col-md-6 col-xs-12">
-												<div class="km-control-group" name="phones" caption="Phone numbers">
+												<div class="km-control-group" name="phones" caption="Phone number(s)">
 													<div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
 													<div km-inputtext-list name="phones" ng-model="document.phones" placeholder="example: +1 514.288.2220"></div>
 												</div>
 											</div>
 			
 											<div class="col-md-6 col-xs-12">
-												<div class="km-control-group" name="faxes" caption="Fax numbers">
+												<div class="km-control-group" name="faxes" caption="Fax number(s)">
 													<div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
 													<div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
 												</div>
@@ -259,7 +259,7 @@
 			
 										<div class="row">
 											<div class="col-md-6 col-xs-12">
-												<div class="km-control-group" name="emails" caption="Emails" required>
+												<div class="km-control-group" name="emails" caption="Email(s)" required>
 													<div km-inputtext-list name="emails" type="email" ng-model="document.emails" placeholder="example: secretariat@cbd.int"></div>
 												</div>
 											</div>

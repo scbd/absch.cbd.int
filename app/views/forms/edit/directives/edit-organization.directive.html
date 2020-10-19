@@ -97,7 +97,7 @@
 
                         <div class="row">
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="phones" required caption="Phone numbers">
+                                <div class="km-control-group" name="phones" required caption="Phone number(s)">
                                     <div class="help-info">Please use the following format: +[country code] [city code]
                                         [telephone number] [extension, if necessary].</div>
                                     <div km-inputtext-list required name="phones" ng-model="document.phones"
@@ -106,7 +106,7 @@
                             </div>
 
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="faxes" caption="Fax numbers">
+                                <div class="km-control-group" name="faxes" caption="Fax number(s)">
                                     <div class="help-info">Please use the following format: +[country code] [city code]
                                         [telephone number] [extension, if necessary].</div>
                                     <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
@@ -116,14 +116,14 @@
 
                         <div class="row">
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="emails" required caption="Emails">
+                                <div class="km-control-group" name="emails" required caption="Email(s)">
                                     <div km-inputtext-list required name="emails" ng-model="document.emails"
                                         placeholder="example: secretariat@cbd.int"></div>
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="websites" caption="Websites">
+                                <div class="km-control-group" name="websites" caption="Website address(es)">
                                     <div km-link name="websites" ng-model="document.websites" allow-link="true"
                                         allow-file="false"></div>
                                 </div>
@@ -231,6 +231,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+                                    <div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more 
+                                        relevant documents that will be stored in the database for users to download.</div>
                                     <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                 </div>
                             </div>
