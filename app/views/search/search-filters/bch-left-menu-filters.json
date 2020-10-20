@@ -312,7 +312,7 @@
 				"lookupField":"uniqueIdentification_s"
 			},
 			"title": "Unique Identifier",
-			"field": "uniqueIdentifications_ss"
+			"field": "uniqueIdentification_s"
 		},
 		{
 			"type": "solr",
