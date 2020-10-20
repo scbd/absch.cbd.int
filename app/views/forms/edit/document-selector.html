@@ -126,22 +126,22 @@
                                     <tr>
                                         <th></th>
                                         <th></th>
-                                        <th style="white-space:nowrap;"><a rel="noopener" href="#" class="col-title" ng-click="sortType = 'schema_s'; sortReverse = !sortReverse">Type</a>  
-                                            <span ng-show="sortType == 'schema_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+                                        <th style="white-space:nowrap;"><a rel="noopener" href="#" class="col-title" ng-click="onSort('schema_s', search.sortSequence)">Type</a>  
+                                            <span ng-show="search.sort == 'schema_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_title'; sortReverse = !sortReverse">Title</a> 
-                                            <span ng-show="sortType == 'rec_title'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_title', search.sortSequence)">Title</a> 
+                                            <span ng-show="search.sort == 'rec_title'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_countryName'; sortReverse = !sortReverse">Owner</a>
-                                            <span ng-show="sortType == 'rec_countryName'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_countryName', search.sortSequence)">Owner</a>
+                                            <span ng-show="search.sort == 'rec_countryName'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'uniqueIdentifier_s'; sortReverse = !sortReverse">Unique Identifier</a>
-                                            <span ng-show="sortType == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('uniqueIdentifier_s', search.sortSequence)">Unique Identifier</a>
+                                            <span ng-show="search.sort == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">Smmary</a>
-                                            <span ng-show="sortType == 'rec_summary'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
-                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">Meta Information</a>
-                                            <span ng-show="sortType == 'rec_summary'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_summary', search.sortSequence)">Smmary</a>
+                                            <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
+                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_meta', search.sortSequence)">Meta Information</a>
+                                            <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -236,26 +236,26 @@
                     <tr>
                         <th></th>
                         <th></th>
-                        <th style="white-space:nowrap;"><a rel="noopener" href="#" class="col-title" ng-click="sortType = 'schema_s'; sortReverse = !sortReverse">type</a>  
-                            <span ng-show="sortType == 'schema_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+                        <th style="white-space:nowrap;"><a rel="noopener" href="#" class="col-title" ng-click="onSort('schema_s', search.sortSequence)">type</a>  
+                            <span ng-show="search.sort == 'schema_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_title'; sortReverse = !sortReverse">title</a> 
-                            <span ng-show="sortType == 'rec_title'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_title', search.sortSequence)">title</a> 
+                            <span ng-show="search.sort == 'rec_title'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_countryName'; sortReverse = !sortReverse">owner</a>
-                            <span ng-show="sortType == 'rec_countryName'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_countryName', search.sortSequence)">owner</a>
+                            <span ng-show="search.sort == 'rec_countryName'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
                         <th style="white-space:nowrap;">
-                            <a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'uniqueIdentifier_s'; sortReverse = !sortReverse">
+                            <a rel="noopener" href="#"class="col-title"  ng-click="onSort('uniqueIdentifier_s', search.sortSequence)">
                                 record uid
                             </a>
-                            <span ng-show="sortType == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+                            <span ng-show="search.sort == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">summary</a>
-                            <span ng-show="sortType == 'rec_summary'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_summary', search.sortSequence)">summary</a>
+                            <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="sortType = 'rec_summary'; sortReverse = !sortReverse">Meta Information</a>
-                            <span ng-show="sortType == 'rec_summary'" ng-class="{'fa-caret-down': !sortReverse , 'fa-caret-up': sortReverse}" class="fa"></span></th>
+                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_meta', search.sortSequence)">Meta Information</a>
+                            <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
                        
                     </tr>
                 </thead>
