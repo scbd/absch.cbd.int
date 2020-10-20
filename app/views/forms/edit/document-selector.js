@@ -38,16 +38,16 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 			$scope.areVisible = false;
             $scope.userGov = $scope.$root.user.government;
             $scope.showAddButton = false;
-            $scope.sortType     = 'rec_title'; 
-            $scope.sortReverse  = false;  
             $scope.listView     = $attr.listView=="true";
             $scope.search       = {keyword:''}
             $scope.activeTab    ='allRecords';
             if(!$scope.type) $scope.type = "checkbox";
             
             $scope.searchResult = {
-                rowsPerPage:25,
-                currentPage:1
+                rowsPerPage :25,
+                currentPage :1,
+                sortBy      :$attr.sortByField||'updatedDate_dt',
+                sortSequence:' asc'  
             }
             $scope.allowNew = {
                 show    : $attr.allowNew=='true',
@@ -298,12 +298,19 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                 if($scope.search.keyword){
                     var queryText = $scope.search.keyword;
                     if(queryText.indexOf('-')>0) 
-                        queryText = '"' + queryText + '"' // Add quotes if text contains - especially if search is by uid
-                
+                        queryText = '"' + queryText + '"'; // Add quotes if text contains - especially if search is by uid
+                    else
+                        queryText = '(' + queryText + ')';
+
                     if(($attr.freeTextQueryField||'')!='')
                         query = $attr.freeTextQueryField + ':' + solr.escape(queryText);
                     else
                         query = 'text_'+(locale||'en').toUpperCase()+'_txt:' + solr.escape(queryText);
+                        
+                    // // Add boost query give more boost to title and summary fields
+                    // var boostQuery = 'title_'+(locale||'en').toUpperCase()+'_txt:' + queryText+'*^10';
+
+                    // query = boostQuery + ' OR ' + query;
                 }
 
                 var queryParameters = {
@@ -313,8 +320,10 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     'currentPage'   : $scope.searchResult.currentPage-1,
                     'rowsPerPage'   : $scope.searchResult.rowsPerPage                    
                 };
-                if(!$scope.search.keyword){
-                    queryParameters.sort = options.sort||'updatedDate_dt desc';
+                if(!$scope.search.keyword || options.sorting){
+                    var sortExpression   = getSortField()            ||'updatedDate_dt';
+                    sortExpression      += $scope.search.sortSequence||' asc';
+                    queryParameters.sort = sortExpression;
                 }
 
                 searchOperation = searchService.list(queryParameters, null);
@@ -353,6 +362,11 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                 }
             };
 
+            $scope.onSort = function(sortField, sortSequence){
+                $scope.search.sortSequence  = sortSequence == ' desc' ? ' asc' : ' desc';
+                $scope.search.sort          = sortField;
+                getDocs({sorting:true});
+            } 
 
             $scope.onPageChange = function(page){
                 $scope.searchResult.currentPage = page;
@@ -437,6 +451,19 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                         return doc;
                     });
                 });
+            }
+
+            function getSortField(){
+                //, rec_meta:meta1_EN_txt, rec_meta:meta2_EN_txt, rec_meta:meta3_EN_txt
+                var field  = $scope.search.sort;
+                var fields = $attr.displayFields||'rec_date:updatedDate_dt,uniqueIdentifier_s:uniqueIdentifier_s,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,rec_type:type_EN_t'
+                if(~fields.indexOf(field)){
+                    var sortField = _(fields.split(',')).map(function(f){
+                                        if(~f.indexOf(field))
+                                            return f.split(':')[1]
+                                    }).compact().join($scope.search.sortSequence + ' ')
+                    return sortField;
+                }
             }
 			//==================================
 		    //
