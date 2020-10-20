@@ -247,7 +247,7 @@ function ($http, $rootScope, $filter, $q, searchService, appConfigService, IStor
                 var queryParameters = {
                     'query'    : q,
                     'currentPage' : 0,
-                    'rowsPerPage': 1000
+                    'rowsPerPage': 5000
                 };
 
                 searchOperation = searchService.list(queryParameters, null);
