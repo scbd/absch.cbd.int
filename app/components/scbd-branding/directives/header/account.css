@@ -20,9 +20,9 @@
   left: -16px;
 }
 @media screen and (max-width: 480px) {
-  #CBD-Branding.drop-menu-position {
+  #CBD-Branding .drop-menu-position {
     position: absolute;
-    left: -150px;
+    left: -80px;
     top: 23px;
   }
 }
