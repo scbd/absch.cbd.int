@@ -164,3 +164,11 @@ trix-toolbar .trix-button--icon-underline{
     max-height: 200px
 }
 .multiple-languages { margin-bottom: 3px; }
+.trix-dialog-error {
+    display: none;
+    position: absolute;
+    top: 4px;
+    font-size: 12px;
+    color: red;
+}
+trix-toolbar [data-trix-dialog] [data-trix-validate]:invalid + .trix-dialog-error {display: block;}
