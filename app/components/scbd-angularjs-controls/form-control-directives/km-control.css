@@ -172,3 +172,7 @@ trix-toolbar .trix-button--icon-underline{
     color: red;
 }
 trix-toolbar [data-trix-dialog] [data-trix-validate]:invalid + .trix-dialog-error {display: block;}
+trix-toolbar .trix-dialog .trix-dialog__link-fields {
+    align-items: end;
+    margin-top: 8px;
+}
