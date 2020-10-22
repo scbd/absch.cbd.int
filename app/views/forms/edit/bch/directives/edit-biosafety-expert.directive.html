@@ -557,7 +557,7 @@
 															<div>
 																<table>
 																	<tr ng-repeat="language in languageRating | orderBy:'name'">																		
-																		<td style="width:250px">
+																		<td style="width:250px; vertical-align: middle;">
 																			<span ng-if="language.isUNLanguage" ng-bind="language.title|lstring:locale"></span>
 																			<div  ng-if="!language.isUNLanguage" class="input-group">
 																				<div afc-autocomplete name="otherLanguageRating{{$index}}" ng-model="languageRating[$index]" source="options.otherLanguages" style="display: inline-block;"
