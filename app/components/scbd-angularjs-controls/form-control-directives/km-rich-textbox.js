@@ -103,7 +103,7 @@
 								var buttonHTML = '<button type="button" class="trix-button trix-button--icon-underline" data-trix-attribute="underline" data-trix-key="u" title="Underline" tabindex="-1">U</button>'
 								e.target.toolbarElement.querySelector(".trix-button-group.trix-button-group--text-tools")
 									.insertAdjacentHTML("beforeend", buttonHTML)
-									var errorMessage = "<p class='trix-dialog-error'>Please enter a valid URL starting with https:// | http://</p>";
+									var errorMessage = "<p class='trix-dialog-error'>Please enter a valid URL starting with https:// or http://</p>";
 								e.target.toolbarElement.querySelector(".trix-input").insertAdjacentHTML("afterend", errorMessage);
 							}
 					}
