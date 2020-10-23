@@ -22,7 +22,7 @@ app.controller("LmoReportController", ['$scope', '$routeParams', '$route', 'solr
 		$scope.loadLMos = function(userInputString, timeoutPromise){
 			$scope.loadingData=true;
 			var searchQuery = solr.escape(userInputString);
-			searchQuery		= solr.unescapeCaret(searchQuery);
+			searchQuery		= searchQuery.replace(/\\^\d+(\s|$)/g,   '^');
 			var query = {
 				fieldQuery: ['schema_s:modifiedOrganism'],
 				query : 'text_EN_txt:(' + searchQuery + ')',
