@@ -1,7 +1,8 @@
-define(['app', 'text!views/search/search-filters/date-filter.html','lodash', 'js/common', 'components/scbd-angularjs-controls/form-control-directives/all-controls','bootstrap-datepicker'
+define(['app', 'text!views/search/search-filters/date-filter.html','lodash', 'js/common', 
+'components/scbd-angularjs-controls/form-control-directives/all-controls','bootstrap-datepicker', 'services/solr'
 ], function(app, template, _) {
 
-    app.directive('dateFilter', function() {
+    app.directive('dateFilter', ['solr', function(solr) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -25,8 +26,8 @@ define(['app', 'text!views/search/search-filters/date-filter.html','lodash', 'js
                     var query;
 
                     if($scope.dateFilter.value.start || $scope.dateFilter.value.end) {
-                        var start = $scope.dateFilter.value.start ? $scope.dateFilter.value.start + 'T00:00:00.000Z' : '*';
-                        var end = $scope.dateFilter.value.end ? $scope.dateFilter.value.end + 'T23:59:59.999Z' : '*';
+                        var start = $scope.dateFilter.value.start ? solr.escape($scope.dateFilter.value.start + 'T00:00:00.000Z') : '*';
+                        var end = $scope.dateFilter.value.end ? solr.escape($scope.dateFilter.value.end + 'T23:59:59.999Z') : '*';
 
                         query = '[ ' + start + ' TO ' + end + ' ]';
                     } 
@@ -35,5 +36,5 @@ define(['app', 'text!views/search/search-filters/date-filter.html','lodash', 'js
 
             }
         };
-    });
+    }]);
 });

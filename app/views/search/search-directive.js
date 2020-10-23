@@ -789,7 +789,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         }
                         var values = [];
                         _.each(filters, function (item) {
-                            values.push(item.dateField+':' + solr.escape(item.query))
+                            values.push(item.dateField+':' + item.query)
                         });
                         if(values.length)
                             return solr.andOr(values, 'AND')
@@ -798,10 +798,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     function buildDateFieldQuery(field, date) {
 
                         if(date.start || date.end) {
-                            var start   = date.start ? date.start   + 'T00:00:00.000Z' : '*';
-                            var end     = date.end   ? date.end     + 'T23:59:59.999Z' : '*';
+                            var start   = date.start ? solr.escape(date.start   + 'T00:00:00.000Z')  : '*';
+                            var end     = date.end   ? solr.escape(date.end     + 'T23:59:59.999Z') : '*';
     
-                            return  field + ':[ ' + solr.escape(start) + ' TO ' + solr.escape(end) + ' ]';
+                            return  field + ':[ ' + start + ' TO ' + end + ' ]';
                         } 
                     }
 
