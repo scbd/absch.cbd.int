@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'chart-js', 'components/scbd-angularjs-services/services/generic-service', 'js/common', 'moment',
+define(['app', 'lodash', 'chart-js', 'components/scbd-angularjs-services/services/generic-service', 'js/common', 'moment',
     'views/register/directives/register-top-menu', 'services/search-service', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'services/app-config-service',
     'components/scbd-angularjs-services/services/storage', 'services/solr'
     ], function (app, _) {
@@ -92,7 +92,7 @@ define(['app', 'underscore', 'chart-js', 'components/scbd-angularjs-services/ser
                                         .then(function (result) {
                                             $scope.pendingTasks = result;
 
-                                            _.each(result, function(task){
+                                            _.forEach(result, function(task){
                                                 if(task.hasOwnProperty('hasABSPA')){
                                                     $scope.hasPublishingAuthority = task.hasABSPA;
                                                 }
@@ -102,7 +102,7 @@ define(['app', 'underscore', 'chart-js', 'components/scbd-angularjs-services/ser
                         .then(function(data){
                             console.log(data);
                             // if(data){
-                                _.each($scope.schemas, function(schema){
+                                _.forEach($scope.schemas, function(schema){
                                     if(data && data.schemas)
                                         schema.value = data.schemas[schema.schema]||0;
                                     else
@@ -117,7 +117,7 @@ define(['app', 'underscore', 'chart-js', 'components/scbd-angularjs-services/ser
                         $q.when(loadRecords('measure'))
                         .then(function(documents){
                             $scope.measureElementMissing = [];
-                            _.each(documents, function(document){
+                            _.forEach(documents, function(document){
                                 if((document.absMesasureNotApplicable===undefined || document.absMesasureNotApplicable===false)
                                     && document.absMesasure===undefined){
                                         $scope.measureElementMissing.push(document);

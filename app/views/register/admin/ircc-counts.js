@@ -1,7 +1,7 @@
 define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'components/scbd-angularjs-services/services/main',
     'views/register/directives/register-top-menu','chart-js',
     'services/search-service','services/app-config-service', 'services/solr'
-], function (app) {
+], function (app, _) {
 
         "use strict";
         app.controller("adminIrccCountController", ["$scope", "solr", "searchService", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter",
