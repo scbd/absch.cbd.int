@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'views/forms/edit/edit' , 'views/forms/edit/document-selector',
+define(['app', 'lodash', 'views/forms/edit/edit' , 'views/forms/edit/document-selector',
         'views/forms/view/abs/view-abs-national-report.directive',
         'services/search-service','services/app-config-service', 'services/solr'
 ], function (app, _) {
@@ -563,7 +563,7 @@ define(['app', 'underscore', 'views/forms/edit/edit' , 'views/forms/edit/documen
         var natSchemas = appConfigService.nationalSchemas;
         var q  = '(realm_ss:' + solr.escape(realm.value.toLowerCase()) + 
                  ' ) AND NOT version_s:* AND government_s:'+ solr.escape(government.identifier) + 
-                 ' AND schema_s:(' + solr.escape(natSchemas.join(' ')) + ')';
+                 ' AND schema_s:(' + _.map(natSchemas, solr.escape).join(' ') + ')';
         var queryParameters = {
             'query'    : q,
              currentPage : 0,

@@ -25,7 +25,7 @@ app.directive("viewLmoGene", [function () {
 						return;
 
 					var searchQuery = {
-						query 	: "identifier_s:(" +solr.escape(geneIdentifiers.join(' ')) + ")",
+						query 	: "identifier_s:(" +_.map(geneIdentifiers, solr.escape).join(' ') + ")",
 						fields	: 'identifier_s,identity:identity_EN_s, uniqueIdentifier:uniqueIdentifier_s, urls:url_ss, title:name_EN_t'
 					}
 					$scope.dnaDetails = {};

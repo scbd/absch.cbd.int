@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'js/common', 'js/filters',
+define(['app', 'lodash', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'js/common', 'js/filters',
     'services/search-service', 'services/role-service','components/scbd-angularjs-controls/form-control-directives/all-controls',
     'views/register/directives/register-top-menu', 'views/directives/block-region-directive',
 	'views/forms/edit/editFormUtility', 
@@ -501,7 +501,7 @@ define(['app', 'lodash', 'underscore','components/scbd-angularjs-services/servic
 
                     var filter;
                     if(!$rootScope.user.government)
-                        filter = '_ownership_s:("' + solr.escape(($rootScope.user.userGroups||[]).join('" "')) + '")'
+                        filter = '_ownership_s:("' + _.map($rootScope.user.userGroups||[], solr.escape).join('" "') + '")'
                     else
                         filter = 'government_s:'+solr.escape($rootScope.user.government);
 

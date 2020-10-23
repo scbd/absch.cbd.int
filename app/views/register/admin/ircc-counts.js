@@ -61,13 +61,13 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                     }
 
                     if($scope.filters.startDate || $scope.filters.endDate) {
-                        var startDate   = solr.escape($scope.filters.startDate ? $scope.filters.startDate + 'T00:00:00.000Z' : '*');
-                        var endDate     = solr.escape($scope.filters.endDate ? $scope.filters.endDate + 'T23:59:59.999Z' : '*');
+                        var startDate   = $scope.filters.startDate ? solr.escape($scope.filters.startDate + 'T00:00:00.000Z') : '*';
+                        var endDate     = $scope.filters.endDate ?  solr.escape($scope.filters.endDate + 'T23:59:59.999Z') : '*';
                         nationalRecordsQuery.query += ' AND ' + dateType + ' [ ' + startDate + ' TO ' + endDate + ' ]';
                     }                    
                     
                      if($scope.filters.countries)
-                        nationalRecordsQuery.query += ' AND government_s:(' + solr.escape($scope.filters.countries.join(' ')) + ')';
+                        nationalRecordsQuery.query += ' AND government_s:(' +_.map($scope.filters.countries, solr.escape).join(' ') + ')';
 
                     $q.when(partyStatusQuery(), function(data){
                         
