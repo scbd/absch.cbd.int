@@ -743,7 +743,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                             var field = filter.field;
                                             if(filter.searchRelated && filter.relatedField)
                                                 field = filter.relatedField;
-                                            subQuery = field + ':(' + solr.escape(ids.join(' ')) + ')';
+                                            subQuery = field + ':(' + _.map(ids, solr.escape).join(' ') + ')';
                                         }
                                     }
                                     else if(filter.type == 'date' && filter.filterValue){

@@ -429,7 +429,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
                 var queryParameters = {
                     fields       : ($attr.displayFields||'')!= '' ? $attr.displayFields : undefined,
-                    'query'      : queryField + ':("' + solr.escape(identifiers.join('" "')) +'")',
+                    'query'      : queryField + ':("' +_.map(identifiers,solr.escape).join('" "') +'")',
                     'rowsPerPage': $scope.searchResult.rowsPerPage                    
                 };
                 searchService.list(queryParameters, null).then(function(result){                    
