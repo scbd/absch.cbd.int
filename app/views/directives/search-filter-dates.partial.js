@@ -1,4 +1,5 @@
-define(['app', 'text!views/directives/search-filter-dates.partial.html', 'components/scbd-angularjs-controls/form-control-directives/all-controls','bootstrap-datepicker'], function (app, template) {
+define(['app', 'text!views/directives/search-filter-dates.partial.html', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
+'bootstrap-datepicker', 'services/solr'], function (app, template) {
 
 app.directive('searchFilterDates', function ($http) {
     return {
@@ -16,7 +17,7 @@ app.directive('searchFilterDates', function ($http) {
         },
         link: function ($scope, element, attrs, ngModelController) {
         },
-        controller : ["$scope", "$filter", function ($scope, $filter) {
+        controller : ["$scope", "$filter", "solr", function ($scope, $filter, solr) {
 
             $scope.api = {
                 getDateString : getDateString,
@@ -62,8 +63,8 @@ app.directive('searchFilterDates', function ($http) {
             function updateQuery () {
 
                 if($scope.since || $scope.until) {
-                    var since = $scope.since ? $scope.since + 'T00:00:00.000Z' : '*';
-                    var until = $scope.until ? $scope.until + 'T23:59:59.999Z' : '*';
+                    var since = $scope.since ? solr.escape($scope.since + 'T00:00:00.000Z') : '*';
+                    var until = $scope.until ? solr.escape($scope.until + 'T23:59:59.999Z') : '*';
 
                     $scope.query = ' (' + $scope.field +':[ ' + since + ' TO ' + until + ' ] ) ';
                 } else {

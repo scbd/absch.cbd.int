@@ -61,8 +61,8 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                     }
 
                     if($scope.filters.startDate || $scope.filters.endDate) {
-                        var startDate   = $scope.filters.startDate ? $scope.filters.startDate + 'T00:00:00.000Z' : '*';
-                        var endDate     = $scope.filters.endDate ?  $scope.filters.endDate + 'T23:59:59.999Z' : '*';
+                        var startDate   = $scope.filters.startDate ? solr.escape($scope.filters.startDate + 'T00:00:00.000Z') : '*';
+                        var endDate     = $scope.filters.endDate ?  solr.escape($scope.filters.endDate + 'T23:59:59.999Z') : '*';
                         nationalRecordsQuery.query += ' AND ' + dateType + ' [ ' + startDate + ' TO ' + endDate + ' ]';
                     }                    
                     
@@ -320,8 +320,8 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                     }
 
                     if($scope.filters.startDate || $scope.filters.endDate) {
-                        var startDate = $scope.filters.startDate ? $scope.filters.startDate + 'T00:00:00.000Z' : '*';
-                        var endDate = $scope.filters.endDate ? $scope.filters.endDate + 'T23:59:59.999Z' : '*';
+                        var startDate = $scope.filters.startDate ? solr.escape($scope.filters.startDate + 'T00:00:00.000Z') : '*';
+                        var endDate = $scope.filters.endDate ? solr.escape($scope.filters.endDate + 'T23:59:59.999Z') : '*';
 
                         if(startDate!='*')
                             queryFacetsParameters['facet.range.start'] = 'NOW+1MONTH/MONTH-' + monthsDifference(startDate) + 'MONTH';
