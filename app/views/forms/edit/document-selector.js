@@ -333,6 +333,15 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                        $scope.rawDocuments = data.data.response;
                        $scope.rawDocuments.pageCount = Math.ceil($scope.rawDocuments.numFound / $scope.searchResult.rowsPerPage)
                        
+                       _.each($scope.rawDocuments.docs, function(doc){
+                           //incase if the directive receives fl list from view, convert _txt to string 
+                           _.each(doc, function(val, key){
+                                if(_.isArray(val)) 
+                                    doc[key] = val.join(', ');
+                            })
+                            return doc;
+                       });
+                       
                        var selectedRecords = _($scope.tempSelectedDocuments||[])
                             .map(function(doc){ return doc.header && doc.header.identifier || doc.identifier || doc.identifier_s }).value();
    
