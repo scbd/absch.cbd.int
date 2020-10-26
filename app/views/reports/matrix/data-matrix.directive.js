@@ -30,7 +30,7 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
                     queryOptions.query   = queryOptions.query||'government_submissionYear_s:*';
 
                     var query = {
-                        fields      : 'Government:government_EN_t,RecordType:schema_EN_t, Year:government_submissionYear_s, government_s',
+                        fields      : 'Government:government_EN_t,RecordType:schema_EN_t, Year:government_submissionYear_s, government_s,schemaType:schemaType_s',
                         fieldQuery  : _.uniq(queryOptions.tagQueries),
                         query       : queryOptions.query||undefined,
                         
@@ -56,7 +56,8 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
                                     Government  :   row.Government||'x - Reference record',
                                     Year        :   row.Year,
                                     RecordType  :   row.RecordType,
-                                    Region      :   region ? region.title[locale] : 'No Region'
+                                    Region      :   region ? region.title[locale] : 'No Region',
+                                    SchemaType  :   row.schemaType
                                 }
                             });
             
