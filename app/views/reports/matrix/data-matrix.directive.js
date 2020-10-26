@@ -53,7 +53,7 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
                                 })
             
                                 return {
-                                    Government  :   row.Government,
+                                    Government  :   row.Government||'x - Reference record',
                                     Year        :   row.Year,
                                     RecordType  :   row.RecordType,
                                     Region      :   region ? region.title[locale] : 'No Region'
@@ -88,7 +88,7 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
                     
                     return $q.all(regionsQuery)
                             .then(function(regionData){
-                                regions = _.map(regions, function(region){return region.data;})
+                                regions = _.map(regionData, function(region){return region.data;})
                             });
                 }
 
