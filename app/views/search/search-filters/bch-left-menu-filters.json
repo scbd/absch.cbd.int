@@ -55,11 +55,12 @@
 			"relatedField":"lmoTraits_REL_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:nametitle_EN_t_s",
+				"fl": "identifier_s,rec_title:title_EN_t",
 				"q": "schema_s:dnaSequence AND title_EN_t:*",
-				"s": "name_s asc"
+				"searchField":"title_EN_t",
+				"s": "title_EN_t asc"
 			},
 			"title": "Genetic element",
 			"field": "geneIdentifiers_ss"
@@ -71,20 +72,21 @@
 			"field": "lmoTechniquesUsed_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:commonNames_EN_txt",
-				"q": "schema_s:organism AND commonNames_EN_txt:*"
+				"fl": "identifier_s,rec_title:commonNames_EN_txt",
+				"q": "schema_s:organism AND commonNames_EN_txt:*",
+				"searchField":"commonNames_EN_txt"
 			},
 			"title": "Parental organism (common name)",
 			"field": "geneDonorOrganismIdentifiers_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:scientificName_s",
+				"fl": "identifier:identifier_s,rec_title:scientificName_s",
 				"q": "schema_s:organism AND scientificName_s:*",
-				"s": "scientificName_s asc"
+				"searchField":"scientificName_s"
 			},
 			"title": "Parental organism (scientific name)",
 			"field": "geneDonorOrganismIdentifiers_ss"
@@ -146,30 +148,32 @@
 			"relatedField":"traits_REL_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_EN_t",
+				"fl": "identifier_s,rec_title:title_EN_t",
 				"q": "schema_s:dnaSequence AND title_EN_t:*",
-				"s": "name_s asc"
+				"searchField":"title_EN_t",
+				"s": "title_EN_t asc"
 			},
 			"title": "Genetic element",
 			"field": "identifier_s"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:commonNames_EN_txt",
-				"q": "schema_s:organism AND commonNames_EN_txt:*"
+				"fl": "identifier_s,rec_title:commonNames_EN_txt",
+				"q": "schema_s:organism AND commonNames_EN_txt:*",
+				"searchField":"commonNames_EN_txt"
 			},
 			"title": "Donor organism common name",
 			"field": "geneDonorOrganismIdentifiers_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:scientificName_s",
+				"fl": "identifier:identifier_s,rec_title:scientificName_s",
 				"q": "schema_s:organism AND scientificName_s:*",
-				"s": "scientificName_s asc"
+				"searchField":"scientificName_s"
 			},
 			"title": "Donor organism scientific name",
 			"field": "geneDonorOrganismIdentifiers_ss"
@@ -238,11 +242,12 @@
 			"relatedField":"lmoTraits_REL_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_EN_t",
+				"fl": "identifier_s,rec_title:title_EN_t",
 				"q": "schema_s:dnaSequence AND title_EN_t:*",
-				"s": "name_s asc"
+				"searchField":"title_EN_t",
+				"s": "title_EN_t asc"
 			},
 			"title": "Genetic element",
 			"field": "geneIdentifiers_ss"
@@ -254,20 +259,21 @@
 			"field": "lmoTechniquesUsed_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:commonNames_EN_txt",
-				"q": "schema_s:organism AND commonNames_EN_txt:*"
+				"fl": "identifier_s,rec_title:commonNames_EN_txt",
+				"q": "schema_s:organism AND commonNames_EN_txt:*",
+				"searchField":"commonNames_EN_txt"
 			},
 			"title": "Parental organism (common name)",
 			"field": "geneDonorOrganismIdentifiers_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:scientificName_s",
+				"fl": "identifier:identifier_s,rec_title:scientificName_s",
 				"q": "schema_s:organism AND scientificName_s:*",
-				"s": "scientificName_s asc"
+				"searchField":"scientificName_s"
 			},
 			"title": "Parental organism (scientific name)",
 			"field": "geneDonorOrganismIdentifiers_ss"
@@ -315,49 +321,52 @@
 			"field": "uniqueIdentification_s"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_EN_t",
+				"fl": "identifier_s,rec_title:title_EN_t",
 				"q": "schema_s:dnaSequence AND title_EN_t:*",
-				"s": "name_s asc"
+				"searchField":"title_EN_t",
+				"s": "title_EN_t asc"
 			},
 			"title": "Genetic element",
 			"field": "geneIdentifiers_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:commonNames_EN_txt",
-				"q": "schema_s:organism AND commonNames_EN_txt:*"
+				"fl": "identifier_s,rec_title:commonNames_EN_txt",
+				"q": "schema_s:organism AND commonNames_EN_txt:*",
+				"searchField":"commonNames_EN_txt"
 			},
 			"title": "Recipient organism common name",
 			"field": "lmoIdentifiers_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:scientificName_s",
+				"fl": "identifier:identifier_s,rec_title:scientificName_s",
 				"q": "schema_s:organism AND scientificName_s:*",
-				"s": "scientificName_s asc"
+				"searchField":"scientificName_s"
 			},
 			"title": "Recipient organism scientific name",
 			"field": "lmoIdentifiers_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:commonNames_EN_txt",
-				"q": "schema_s:organism AND commonNames_EN_txt:*"
+				"fl": "identifier_s,rec_title:commonNames_EN_txt",
+				"q": "schema_s:organism AND commonNames_EN_txt:*",
+				"searchField":"commonNames_EN_txt"
 			},
 			"title": "Donor organism common name",
 			"field": "geneDonorOrganismIdentifiers_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:scientificName_s",
+				"fl": "identifier:identifier_s,rec_title:scientificName_s",
 				"q": "schema_s:organism AND scientificName_s:*",
-				"s": "scientificName_s asc"
+				"searchField":"scientificName_s"
 			},
 			"title": "Donor organism scientific name",
 			"field": "geneDonorOrganismIdentifiers_ss"
@@ -392,11 +401,12 @@
 			"relatedField":"lmoTraits_REL_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:title_EN_t",
+				"fl": "identifier_s,rec_title:title_EN_t",
 				"q": "schema_s:dnaSequence AND title_EN_t:*",
-				"s": "name_s asc"
+				"searchField":"title_EN_t",
+				"s": "title_EN_t asc"
 			},
 			"title": "Genetic element",
 			"field": "geneIdentifiers_ss"
@@ -408,20 +418,21 @@
 			"field": "lmoTechniquesUsed_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:commonNames_EN_txt",
-				"q": "schema_s:organism AND commonNames_EN_txt:*"
+				"fl": "identifier_s,rec_title:commonNames_EN_txt",
+				"q": "schema_s:organism AND commonNames_EN_txt:*",
+				"searchField":"commonNames_EN_txt"
 			},
 			"title": "Parental organism (common name)",
 			"field": "geneDonorOrganismIdentifiers_ss"
 		},
 		{
-			"type": "solr",
+			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,title:scientificName_s",
+				"fl": "identifier:identifier_s,rec_title:scientificName_s",
 				"q": "schema_s:organism AND scientificName_s:*",
-				"s": "scientificName_s asc"
+				"searchField":"scientificName_s"
 			},
 			"title": "Parental organism (scientific name)",
 			"field": "geneDonorOrganismIdentifiers_ss"
