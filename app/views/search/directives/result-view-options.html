@@ -70,6 +70,15 @@
                             </li>
                         </ul> 
                     </div>
+                    <div  ng-if="selectedFields.length && selectedFields[0].field=='relevance'">
+                        <div class="alert alert-info">
+                            <strong>Relevance:</strong>
+                            Relevancy ranking is the process of sorting the document results so that those documents 
+                            which are most likely to be relevant to your query are shown at the top.
+                            <br/>
+                            <strong>Relevance cannot be used with other fields<strong>
+                        </div>
+                    </div>
                     
                 </div>
             </div>
