@@ -22,6 +22,7 @@ app.controller("LmoReportController", ['$scope', '$routeParams', '$route', 'solr
 		$scope.loadLMos = function(userInputString, timeoutPromise){
 			$scope.loadingData=true;
 			var searchQuery = solr.escape(userInputString);
+// unescape ^ so that users can add boosting to the query using solr syntax
 			searchQuery		= searchQuery.replace(/\\^\d+(\s|$)/g,   '^');
 			var query = {
 				fieldQuery: ['schema_s:modifiedOrganism'],
