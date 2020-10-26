@@ -6,7 +6,7 @@ define(['app','lodash','angular'], function(app,_,angular) {
         },
         restrict: 'A',
         link: function (scope, element) {
-            if(scope.hoverEffect==undefined || scope.hoverEffect.length==0) return;
+            if(!scope.hoverEffect) return;
             element.on( 'mouseenter', function () {
                 if (window.innerWidth > 800) {
                     element.children(scope.hoverEffect).addClass("show");
