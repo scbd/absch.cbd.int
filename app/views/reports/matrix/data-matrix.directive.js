@@ -1,7 +1,4 @@
 define(['app', 'lodash', 'text!./data-matrix.directive.html', 
-'https://cdn.cbd.int/jqueryui@1.11.1/jquery-ui.min',
-'https://cdn.cbd.int/pivottable@2.23.0/dist/pivot.min',
-'css!https://cdn.cbd.int/pivottable@2.23.0/dist/pivot.min.css',
 'components/scbd-angularjs-services/services/locale','services/search-service',
 'views/directives/block-region-directive'], 
 function(app, _, template) { 'use strict';
@@ -18,7 +15,9 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
                 'onRecordFormatting'    : '&'
             },
 			link($scope, $element){
-
+                
+                require(['pivottable', 'plotly.js', 'plotly-renderers']);
+                
 				var regions      = []
                 $scope.api = {
                     updateResult : updateResult
@@ -60,13 +59,18 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
                                     SchemaType  :   row.schemaType
                                 }
                             });
-            
+                            
+                            var derivers = $.pivotUtilities.derivers;
+                            var renderers = $.extend($.pivotUtilities.renderers, $.pivotUtilities.plotly_renderers);
                             $element.find("#output").pivotUI(
-                                data, {
-                                rows: ["Government"],
-                                cols: ["RecordType"],
-                                aggregatorName: "Count"
-                            });
+                                data, 
+                                {
+                                    renderers: renderers,
+                                    rows: ["Government"],
+                                    cols: ["RecordType"],
+                                    aggregatorName: "Count"
+                                }
+                            );
 
                             return data;
                         })
