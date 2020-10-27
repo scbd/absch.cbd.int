@@ -1,0 +1,73 @@
+<div ng-controller="RegistryReportController">
+	<link href="/app/css/register.css" rel="stylesheet">
+	<link href="/app/css/record.css" rel="stylesheet">
+	<link href="./registries.css" rel="stylesheet">
+	<span register-top-menu></span>
+	<style>
+		.card.sub-card {
+			box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+			transition: 0.3s;
+			width: 100%;
+		}
+
+		.card:hover {
+			box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+		}
+		.display-content {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			grid-gap: 3%;
+			padding: 10px 0px 10px 0px;
+		}
+		.registry-summary-title {font-weight: 700;padding: 12px;background-color : #ffff;}
+		.registry-summary-description {
+			background-color: #ffff;
+			line-height: 1.5;
+			padding: 10px;
+			min-height: 200px;
+		}
+		.end-card {
+			margin-left:10px;display: flow-root;
+		}
+		.end-card h4 {float: left;}
+		.end-card p {float: right;margin: 8px;}
+	</style>
+	<div class="register-content card card-1-notrans">
+		<div class="register-content-header bg-darkgrey color-white">
+			<div style="padding:1px 10px;">
+				<h3>Compiled Information </h3>
+			</div>
+		</div>
+		<div class="register-content-content bg-white">
+			<div class="display-content">
+				<div class="cp-header">
+					<div class="card sub-card">
+						<p class="registry-summary-title">Living Modified Organism (LMO) Registry</p>
+						<p class="registry-summary-description">The LMO-Unique Identifiers (LMO-UIds) Registry provides summary information on all living modified organisms registered in the BCH including transformation events, genetic modifications, and the unique identification code (if available) for each record. Links to all decisions and Risk assessment reports that refer to these organisms are accessible through the registry.
+							The BCH modalities of operation require the BCH to make use of existing <a href="/database/organisms/uniqueidentifiers/about.shtml">unique identification systems</a> for living modified organisms, as appropriate, to facilitate searching and retrieval of information.</p>
+						<div class="end-card">
+							<h4><b><a rel="noopener" href="/registries/lmo">View complete records </a></h4>
+						</div>
+					</div>
+				</div>
+				<div class="cp-header">
+					<div class="card sub-card">
+						<p class="registry-summary-title">Organism Registry</p>
+						<p class="registry-summary-description">The BCH Organisms Registry includes those organisms that have been registered with the BCH as parental, recipient or donor organisms. Each record provides further information about relevant biological characteristics, including information on taxonomic status, common name, origin, centre of origin and centre of genetic diversity. Links to relevant LMO records are provided at the bottom of each individual record.</p>
+						<div class="end-card">
+							<h4><b><a rel="noopener" href="/registries/orga">View complete records</a></h4></div>
+					</div>
+				</div>
+				<div class="cp-header">
+					<div class="card sub-card">
+						<p class="registry-summary-title">Gene and DNA Sequence Registry</p>
+						<p class="registry-summary-description">The BCH Gene Registry provides summary information on gene inserts and characteristics of the genetic modifications of the LMOs registered in the BCH..</p>
+						<div class="end-card">
+							<h4><b><a rel="noopener" href="/registries/gene">View complete records</a></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

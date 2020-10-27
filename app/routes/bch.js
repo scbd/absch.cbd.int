@@ -37,6 +37,11 @@ define(['app', './common-routes', 'angular-route'], function (app,commonRoutes) 
                whenAsync('/register/EXP/:identifier/edit',      {templateUrl: 'views/forms/edit/bch/edit-biosafety-expert.html',     label:'Edit',  param:'true', resolveController: true,documentType :'EXP',   resolve : { securized : commonRoutes.securize(null,true, true) }, }).
                whenAsync('/reports/lmo/:documentId/:tab',         { templateUrl: 'views/reports/bch/lmo-decisions-risk-assessments.html',  label:'LMO Decisions',  param:'true', resolveController: true, reloadOnUrl:false, resolve : { },  }).               
                whenAsync('/register/BCP/:identifier/edit',      {templateUrl: 'views/forms/edit/bch/edit-country-profile.html',       label:'Edit',  param:'true', resolveController: true, documentType :'BCP' , resolve : { securized : commonRoutes.securize(null, true, true) }, }).
+               
+               whenAsync('/registries/lmo',    { templateUrl: 'views/reports/bch/registries/view-lmo-registry.html',  label:'Registry',    param:'true',   resolveController: true}). 
+               whenAsync('/registries/orga',    { templateUrl: 'views/reports/bch/registries/view-orga-registry.html',  label:'Registry',    param:'true',   resolveController: true}). 
+               whenAsync('/registries/report',    { templateUrl: 'views/reports/bch/registries/view-report.html',  label:'Registry',    param:'true',   resolveController: true}).
+             // whenAsync('/registries/:registry',    { templateUrl: 'views/reports/bch/registries/view-registry.html',  label:'Registry',    param:'true',   resolveController: true}).
                // BCH4 PAGES
                whenAsync('/about/countryprofile.shtml',      { redirectTo:  '/countries/:country' }).
                whenAsync('/countries/:country',              { templateUrl: 'views/shared/cms-content.html', target:'https://bch.cbd.int/about/countryprofile.shtml?country=:country', controller: function() { return commonRoutes.importQ('views/shared/cms-content'); } }).
