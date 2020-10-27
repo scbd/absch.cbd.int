@@ -1,0 +1,23 @@
+<div class="panel-body" style="padding: 0px;">
+    <table class="table" cellspacing="0" cellpadding="0" style="width:100%;margin-bottom: 0px;">
+        <thead>
+        <tr class="head-bar">
+            <th class="tableHeaderTop tableHeaderBottom"  ng-repeat="(key, val) in data[0]" ng-if="key!=url">
+                {{ key }} </th>
+        </tr>
+        </thead>
+        <tbody> 
+        <tr ng-repeat="row in data">
+            <td class="tableRow" ng-repeat="(key,column) in row" ng-if="key!=url">
+                <span ng-if="key==url || key == caption">
+                    <a rel="noopener" href="{{row.url_ss}}" target="_blank">{{row[caption]}}</a>
+                 </span>
+                 <span ng-if="key!=url && key != caption">
+                    {{ isArray(column)?column.join(', '):column }}  
+                 </span>
+               
+            </td>
+        </tr>
+        </tbody> 
+    </table>
+</div>
