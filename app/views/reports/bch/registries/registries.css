@@ -24,6 +24,7 @@
   text-decoration: none;
   cursor: pointer;
 }
+.info-links a {color: #999;}
 .head-bar {
   padding-right: 4px;
   border-top: #6a6c99 1px solid;
@@ -62,10 +63,17 @@
   background-color: #ffff;
   line-height: 1.5;
   padding: 10px;
-  min-height: 200px;
+  min-height: 230px;
 }
 .end-card {
   margin-left:10px;display: flow-root;
 }
 .end-card h4 {float: left;}
 .end-card p {float: right;margin: 8px;}
+.panel-default p {padding: 10px;}
+.panel-default .panel-heading {background-color: #666;}
+.panel-default .panel-heading h2{color: #ffffff;}
+.export-button {text-transform: uppercase;padding: 3px;}
+.container-sections {background-color: #ffffff;display: inline-flex;}
+.container-sections table {width: 230px;margin-right: 5px;}
+.register-content-header > div {padding:1px 10px;}

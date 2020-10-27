@@ -40,6 +40,7 @@ define(['app', './common-routes', 'angular-route'], function (app,commonRoutes) 
                
                whenAsync('/registries/lmo',    { templateUrl: 'views/reports/bch/registries/view-lmo-registry.html',  label:'Registry',    param:'true',   resolveController: true}). 
                whenAsync('/registries/orga',    { templateUrl: 'views/reports/bch/registries/view-orga-registry.html',  label:'Registry',    param:'true',   resolveController: true}). 
+               whenAsync('/registries/gene',    { templateUrl: 'views/reports/bch/registries/view-gene-registry.html',  label:'Registry',    param:'true',   resolveController: true}). 
                whenAsync('/registries/report',    { templateUrl: 'views/reports/bch/registries/view-report.html',  label:'Registry',    param:'true',   resolveController: true}).
              // whenAsync('/registries/:registry',    { templateUrl: 'views/reports/bch/registries/view-registry.html',  label:'Registry',    param:'true',   resolveController: true}).
                // BCH4 PAGES

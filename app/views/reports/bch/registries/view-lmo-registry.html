@@ -1,7 +1,7 @@
 <div ng-controller="lmoRegistryController">
-	<link href="./registries.css" rel="stylesheet">
+	<link href="/app/views/reports/bch/registries/registries.css" rel="stylesheet">
 	<div class="container-fluid">
-		<div class="" style="background-color: #ffffff;display: inline-flex;">
+		<div class="container-sections">
 
 			<table cellpadding="0" ellspacing="0" style="width: 230px;margin-right: 5px;">
 				<tbody>
@@ -24,11 +24,11 @@
 			</table>
 			<div class="panel panel-default">
 				<!--		<p block-region activate="loading"></p>-->
-				<div class="panel-heading" style="background-color: #666">
+				<div class="panel-heading">
 
-					<h2 style="color: #ffffff">Living Modified Organism (LMO) Registry</h2>
+					<h2>Living Modified Organism (LMO) Registry</h2>
 					<div class="pull-right">
-						<button class="btn btn-default" style="text-transform: uppercase;margin-top: 50px"
+						<button class="btn btn-default" style="text-transform: uppercase;margin-top: 150px"
 							ng-click="export()" ng-disabled="!data.length || readyForExport">
 							<i class="fa fa-table"></i> Export
 						</button>
@@ -40,15 +40,15 @@
 					The LMO-Unique Identifiers (LMO-UIds) Registry provides summary information on all living modified
 					organisms registered in the BCH including transformation events, genetic modifications, and the
 					unique identification code (if available) for each record. Links to all decisions and Risk
-					assessment reports that refer to these organisms are accessible through the registry.
-				<p></p>
+					assessment reports that refer to these organisms are accessible through the registry.</p>
+					<p>
 				The BCH modalities of operation require the BCH to make use of existing <a
 					href="/database/organisms/uniqueidentifiers/about.shtml">unique identification systems</a> for
 				living modified organisms, as appropriate, to facilitate searching and retrieval of information.
 				</p>
 
-				<registry-directive schema="modifiedOrganism" caption="UniqueIdentification" url="url_ss" rowsPerPage="10"
-					fields="UniqueIdentification:uniqueIdentifier_s,Identity:identity_s,TransformationEvent:transformationEvent_s,CommonNames:lmoCommonNames_EN_txt,Summary:summary_t,numFound,url_ss">
+				<registry-directive schema="modifiedOrganism" caption="Unique_Identification" url="url_ss" rowsPerPage="1000"
+					fields="Unique_Identification:uniqueIdentifier_s,Identity:identity_s,Transformation_Event:transformationEvent_s,Organism:lmoCommonNames_EN_txt,Description:summary_t,numFound,url_ss">
 				</registry-directive>
 			</div>
 		</div>
