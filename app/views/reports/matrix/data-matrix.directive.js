@@ -18,12 +18,18 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
                 
                 require(['pivottable', 'plotly.js', 'plotly-renderers']);
                 
-				var regions      = []
-                $scope.api = {
+                var pageSize        = 1000;
+                var queryCanceler   = undefined;
+				var regions         = []
+                $scope.api          = {
                     updateResult : updateResult
                 };
 
                 function updateResult(queryOptions){
+                    if(queryCanceler)
+                        queryCanceler.resolve();
+                    queryCanceler = $q.defer();
+
                     $scope.loading = true;
                     queryOptions = queryOptions||{};
                     queryOptions.query   = queryOptions.query||'government_submissionYear_s:*';
@@ -33,52 +39,81 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
                         fieldQuery  : _.uniq(queryOptions.tagQueries),
                         query       : queryOptions.query||undefined,
                         
-                        rowsPerPage    : 100000
+                        rowsPerPage    : pageSize
                     }
-                    
-                    return $timeout(function(){
-                        console.log('starting')
-                        searchService.list(query)
+                    return fetchRemainingRecords(query, {rows:[], pageNumber:0})
                         .then(function(result){
-                            var data = (result.data.response.docs);        
-                            data = _.map(data, function(row){
+                                queryCanceler = null;
+                                console.log(result);
+                                var derivers = $.pivotUtilities.derivers;
+                                var renderers = $.extend($.pivotUtilities.renderers, $.pivotUtilities.plotly_renderers);
+                                $element.find("#output").pivotUI(
+                                    result.rows, 
+                                    {
+                                        renderers: renderers,
+                                        rows: ["Government"],
+                                        cols: ["RecordType"],
+                                        aggregatorName: "Count"
+                                    }
+                                );
 
-                                // $scope.onRecordFormatting({row:row});
-                                if(row.Year)
-                                    row.Year = row.Year.replace(/([a-z]+)?_/i, '')
-                                
-                                var region = _.find(regions, function(reg){
-                                    return _.contains(reg.narrowerTerms, row.government_s)
-                                })
-            
-                                return {
-                                    Government  :   row.Government||'x - Reference record',
-                                    Year        :   row.Year,
-                                    RecordType  :   row.RecordType,
-                                    Region      :   region ? region.title[locale] : 'No Region',
-                                    SchemaType  :   row.schemaType
-                                }
-                            });
-                            
-                            var derivers = $.pivotUtilities.derivers;
-                            var renderers = $.extend($.pivotUtilities.renderers, $.pivotUtilities.plotly_renderers);
-                            $element.find("#output").pivotUI(
-                                data, 
-                                {
-                                    renderers: renderers,
-                                    rows: ["Government"],
-                                    cols: ["RecordType"],
-                                    aggregatorName: "Count"
-                                }
-                            );
+                                return result.rows;
 
-                            return data;
+                        })
+                        .catch(function(err){
+                            if(err.xhrStatus!="abort")
+                                throw err;
                         })
                         .finally(function(){
-                            $scope.loading = false;
-                            console.log('ending')
-                        });    
-                    }, 5000)
+                            if(!queryCanceler)
+                                $scope.loading = false;
+                        });   
+                }
+
+                function executeQuery(query){
+                    return searchService.list(query, queryCanceler.promise)
+                    .then(function(result){
+                        var data = (result.data.response.docs);        
+                        data = _.map(data, function(row){
+
+                            // $scope.onRecordFormatting({row:row});
+                            if(row.Year)
+                                row.Year = row.Year.replace(/([a-z]+)?_/i, '')
+                            
+                            var region = _.find(regions, function(reg){
+                                return _.contains(reg.narrowerTerms, row.government_s)
+                            })
+        
+                            return {
+                                Government  :   row.Government||'x - Reference record',
+                                Year        :   row.Year,
+                                RecordType  :   row.RecordType,
+                                Region      :   region ? region.title[locale] : 'No Region',
+                                SchemaType  :   row.schemaType
+                            }
+                        });
+
+                        return { rows : data, numFound:result.data.response.numFound };
+                    }); 
+                }
+
+                function fetchRemainingRecords(query, result){
+                    query.start = result.pageNumber * pageSize;
+                    return executeQuery(query)
+                            .then(function(data){
+                                result.rows         = _.union(result.rows, data.rows);
+                                result.numFound     = data.numFound;
+                                result.pageNumber  += 1;
+                                if(result.rows.length < result.numFound){
+                                    return fetchRemainingRecords(query, result);
+                                }
+
+                                return result;
+                            })
+                            // .catch(function(err){
+                            //     if(err.xhrStatus!="abort")
+                            //         throw err;
+                            // });
                 }
 
                 function loadRegions(){
@@ -110,6 +145,36 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
 			}
 		}
 		
-	}]);
+    }]);
+                    // return executeQuery(query, queryCanceler.promise)
+                    // .then(function(result){
+                    //     queryCanceler = null;
+                    //     data = result.rows;
+                    //     var cursor = $q.defer();
+
+                    //     if(result.rows<= data.length)
+                    //         cursor.resolve();
+                    //     else 
+                    //         cursor = fetchRemainingRecords(query, queryCanceler.promise, result);
+
+                    //     return cursor.then(function(){
+                            
+                    //         console.log(result);
+                    //         var derivers = $.pivotUtilities.derivers;
+                    //         var renderers = $.extend($.pivotUtilities.renderers, $.pivotUtilities.plotly_renderers);
+                    //         $element.find("#output").pivotUI(
+                    //             data, 
+                    //             {
+                    //                 renderers: renderers,
+                    //                 rows: ["Government"],
+                    //                 cols: ["RecordType"],
+                    //                 aggregatorName: "Count"
+                    //             }
+                    //         );
+
+                    //         return data;
+
+                    //     })
+                    // })
 	
 });
