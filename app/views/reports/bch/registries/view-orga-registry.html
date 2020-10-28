@@ -3,22 +3,22 @@
 	<div class="container-fluid">
 		<div class="container-sections">
 
-			<table cellpadding="0" ellspacing="0" style="width: 230px;margin-right: 5px;">
+			<table cellpadding="0" ellspacing="0">
 				<tbody>
 					<tr>
 						<td class="info-header-links">Compiled Information </td>
 					</tr>
 					<tr>
-						<td class="info-links"><a rel="noopener" translation-url href="registries/lmo">LMO Registry </a>
+						<td class="info-links"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry </a>
 						</td>
 					</tr>
 					<tr>
-						<td class="info-links"><a rel="noopener" translation-url href="registries/orga">Organism
-								Registry</a> </td>
+						<td class="info-links"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a>
+						</td>
 					</tr>
 					<tr>
-						<td class="info-links"><a rel="noopener" translation-url href="registries/gene">Gene
-								Registry</a> </td>
+						<td class="info-links"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -27,14 +27,7 @@
 				<div class="panel-heading">
 
 					<h2>Organism Registry</h2>
-					<div class="pull-right">
-						<button class="btn btn-default" style="text-transform: uppercase;margin-top: 50px"
-							ng-click="export()" ng-disabled="!data.length || readyForExport">
-							<i class="fa fa-table"></i> Export
-						</button>
-					</div>
-
-
+					
 				</div>
 				<p>
 					The BCH Organisms Registry includes those organisms that have been registered with the BCH as parental, recipient or donor organisms.
@@ -42,10 +35,15 @@
 					 common name, origin, centre of origin and centre of genetic diversity. 
 					Links to relevant LMO records are provided at the bottom of each individual record.
 				</p>
-
-				<registry-directive schema="organism" caption="Unique_Identification" url="url_ss" rowsPerPage="1000"
+				<div class="export-button">
+                    <button class="btn btn-default"
+                            ng-click="export()" ng-disabled="!data.length || readyForExport">
+                        <i class="fa fa-table"></i> Export
+                    </button>
+                </div>
+				<registry schema="organism" caption="Unique_Identification" url="url_ss"
 					fields="Unique_Identification:uniqueIdentifier_s,Identity:identity_s,Taxonomic-Status:title_s,Common_Name:commonNames_EN_txt,Description:summary_s,url_ss">
-				</registry-directive>
+				</registry>
 			</div>
 		</div>
 	</div>

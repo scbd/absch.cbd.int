@@ -3,46 +3,43 @@
 	<div class="container-fluid">
 		<div class="container-sections">
 
-			<table cellpadding="0" ellspacing="0" style="width: 230px;margin-right: 5px;">
+			<table cellpadding="0" ellspacing="0">
 				<tbody>
 					<tr>
 						<td class="info-header-links">Compiled Information </td>
 					</tr>
 					<tr>
-						<td class="info-links"><a rel="noopener" translation-url href="registries/lmo">LMO Registry </a>
+						<td class="info-links"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry </a>
 						</td>
 					</tr>
 					<tr>
-						<td class="info-links"><a rel="noopener" translation-url href="registries/orga">Organism
-								Registry</a> </td>
+						<td class="info-links"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a>
+						</td>
 					</tr>
 					<tr>
-						<td class="info-links"><a rel="noopener" translation-url href="registries/gene">Gene
-								Registry</a> </td>
+						<td class="info-links"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
 			<div class="panel panel-default">
-				<!--		<p block-region activate="loading"></p>-->
 				<div class="panel-heading">
 
 					<h2>Gene and DNA Sequence Registry</h2>
-					<div class="pull-right">
-						<button class="btn btn-default" style="text-transform: uppercase;margin-top: 50px"
-							ng-click="export()" ng-disabled="!data.length || readyForExport">
-							<i class="fa fa-table"></i> Export
-						</button>
-					</div>
-
-
+					
 				</div>
 				<p>The BCH Gene Registry provides summary information on gene inserts and characteristics 
 					of the genetic modifications of the LMOs registered in the BCH.
 				</p>
-
-				<registry-directive schema="dnaSequence" caption="Unique_Identification" url="url_ss" rowsPerPage="10000"
-					fields="Unique_Identification:uniqueIdentifier_s,Name:name_s,Trait:summary_t,Donor_organism:geneDonorOrganismCommonNames_EN_txt,url_ss">
-				</registry-directive>
+				<div class="export-button">
+                    <button class="btn btn-default"
+                            ng-click="export()" ng-disabled="!data.length || readyForExport">
+                        <i class="fa fa-table"></i> Export
+                    </button>
+                </div>
+				<registry schema="dnaSequence" caption="Record_ID" url="url_ss"
+					fields="Record_ID:uniqueIdentifier_s,Name:name_s,Trait:summary_t,Donor_organism:geneDonorOrganismCommonNames_EN_txt,url_ss">
+				</registry>
 			</div>
 		</div>
 	</div>

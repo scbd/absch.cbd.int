@@ -1,6 +1,6 @@
-define(['app', 'text!views/reports/bch/registries/view-registry.directive.html','services/role-service'], function(app, template, searchService) {
+define(['app', 'text!views/reports/bch/registries/view-registry.directive.html','services/role-service'], function(app, template) {
 
-    app.directive('registryDirective', function() {
+    app.directive('registry', function() {
         return {
             restrict: 'EA',
             template: template,
@@ -11,8 +11,7 @@ define(['app', 'text!views/reports/bch/registries/view-registry.directive.html',
                 url:"@",
                 rowsPerPage:"@"
             },
-            controller: ['$q', '$scope','$http','searchService', function($q, $scope, $http, searchService) { 
-                $scope.isArray = angular.isArray;
+            controller: [ '$scope','searchService', function($scope,searchService) {  
                 loadRecords();
                 function loadRecords( ){
                     $scope.isLoading = true;
@@ -22,9 +21,19 @@ define(['app', 'text!views/reports/bch/registries/view-registry.directive.html',
                         rowsPerPage:$scope.rowsPerPage
                     };
                     return searchService.list(searchQuery)
-                        .then(function(result){
-                            $scope.data =result.data.response.docs; 
-                            console.log($scope.data);
+                        .then(function(result){ 
+                          $scope.data = [];
+                          result.data.response.docs.forEach(function(item) {
+                            Object.entries(item).forEach(([k,v]) => {  
+                                    if(Array.isArray(v)){
+                                        if(k != $scope.url){
+                                            item[k]= v.join(', ')
+                                        }
+                                    }
+                            }) 
+                            $scope.data.push(item);
+                          });
+
                         })
                         .finally(function(){
                             $scope.isLoading = false;

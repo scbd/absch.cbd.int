@@ -5,21 +5,6 @@ define(['app', 'lodash', 'services/search-service', 'js/common',
 		function($scope, $routeParams,  searchService,$element ) { 
 			$scope.isArray = angular.isArray;
  
-			// $scope.export = function(){
-
-			// 	$scope.dataToExport = $scope.data;
-			// 	$scope.readyForExport = true;
-			// 	require(['tableexport'], function(){
-			// 		$element.find('#forExport').tableExport({
-			// 			formats: ["xlsx", "xls", "csv"],
-			// 			filename: "ABSCH-registeries-List",
-			// 		});
-			// 		$element.find('.xlsx').click();
-			// 		$timeout(function(){
-			// 			$scope.readyForExport = false;
-			// 		}, 200)
-			// 	});
-			// }
 		}]);
 
 });

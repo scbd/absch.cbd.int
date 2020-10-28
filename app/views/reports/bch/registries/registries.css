@@ -1,36 +1,30 @@
 .info-header-links {
   line-height: 30px;
   font-family: Tahoma;
-  font-size: 13pt;
   font-weight: 700;
   color: #0a4527;
-  text-decoration: none;
   padding-top: 4px;
   padding-bottom: 4px;
   background: #ddd;
   padding-left: 10px;
 }
 .info-links {
-  vertical-align: top;
-  line-height: 20px;
   padding-top: 4px;
   padding-bottom: 4px;
   background: #edece8;
   padding-left: 10px;
   border-top: 4px solid #fff;
-  color: #496610;
   font-family: Tahoma;
-  font-size: 11pt;
-  text-decoration: none;
   cursor: pointer;
 }
-.info-links a {color: #999;}
+.info-links a {
+  color: #999;
+}
 .head-bar {
   padding-right: 4px;
   border-top: #6a6c99 1px solid;
   padding-left: 4px;
   font-weight: bold;
-  font-size: 11px;
   padding-bottom: 1px;
   padding-top: 1px;
   border-bottom: #6a6c99 1px solid;
@@ -44,13 +38,13 @@
 }
 
 .card.sub-card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 100%;
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 .display-content {
   display: grid;
@@ -58,7 +52,11 @@
   grid-gap: 3%;
   padding: 10px 0px 10px 0px;
 }
-.registry-summary-title {font-weight: 700;padding: 12px;background-color : #ffff;}
+.registry-summary-title {
+  font-weight: 700;
+  padding: 12px;
+  background-color: #ffff;
+}
 .registry-summary-description {
   background-color: #ffff;
   line-height: 1.5;
@@ -66,14 +64,38 @@
   min-height: 230px;
 }
 .end-card {
-  margin-left:10px;display: flow-root;
+  margin-left: 10px;
+  display: flow-root;
 }
-.end-card h4 {float: left;}
-.end-card p {float: right;margin: 8px;}
-.panel-default p {padding: 10px;}
-.panel-default .panel-heading {background-color: #666;}
-.panel-default .panel-heading h2{color: #ffffff;}
-.export-button {text-transform: uppercase;padding: 3px;}
-.container-sections {background-color: #ffffff;display: inline-flex;}
-.container-sections table {width: 230px;margin-right: 5px;}
-.register-content-header > div {padding:1px 10px;}
+.end-card h4 {
+  float: left;
+}
+.end-card p {
+  float: right;
+  margin: 8px;
+}
+.panel-default p {
+  padding: 10px 10px 0px 10px;
+}
+.panel-default .panel-heading {
+  background-color: #666;
+}
+.panel-default .panel-heading h2 {
+  color: #ffffff;
+}
+.container-sections {
+  background-color: #ffffff;
+  display: inline-flex;
+}
+.container-sections table {
+  width: 230px;
+  margin-right: 5px;
+}
+.register-content-header > div {
+  padding: 1px 10px;
+}
+.export-button {
+  text-transform: uppercase;
+  padding: 0px 5px 5px 0px;
+  float: right;
+}
