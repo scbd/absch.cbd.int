@@ -17,7 +17,8 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
 			link($scope, $element){
                 
                 require(['pivottable', 'plotly.js', 'plotly-renderers']);
-                
+                var defaultMessage      = $element.find('#loadingMessage').text()
+                $scope.matrixProgress   = defaultMessage;
                 var pageSize        = 1000;
                 var queryCanceler   = undefined;
 				var regions         = []
@@ -26,8 +27,14 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
                 };
 
                 function updateResult(queryOptions){
-                    if(queryCanceler)
+                    if(queryCanceler){
                         queryCanceler.resolve();
+                        $scope.matrixProgress   = defaultMessage;
+                        $scope.matrixProgress  += '<br/>' + $element.find('#resetFilterMessage').text()
+                    }
+                    else{
+                        $scope.matrixProgress   = defaultMessage;
+                    }
                     queryCanceler = $q.defer();
 
                     $scope.loading = true;
@@ -41,7 +48,7 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
                         
                         rowsPerPage    : pageSize
                     }
-                    return fetchRemainingRecords(query, {rows:[], pageNumber:0})
+                    return fetchRecords(query, {rows:[], pageNumber:0})
                         .then(function(result){
                                 queryCanceler = null;
                                 console.log(result);
@@ -97,23 +104,25 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
                     }); 
                 }
 
-                function fetchRemainingRecords(query, result){
+                function fetchRecords(query, result){
+                    var message = '';
+                    if(result.numFound>0)
+                        message = query.start + " of " + result.numFound;
+                    $scope.matrixProgress += '<br/>' + message;
+                         
                     query.start = result.pageNumber * pageSize;
+                    
                     return executeQuery(query)
                             .then(function(data){
                                 result.rows         = _.union(result.rows, data.rows);
                                 result.numFound     = data.numFound;
                                 result.pageNumber  += 1;
                                 if(result.rows.length < result.numFound){
-                                    return fetchRemainingRecords(query, result);
+                                    return fetchRecords(query, result);
                                 }
 
                                 return result;
-                            })
-                            // .catch(function(err){
-                            //     if(err.xhrStatus!="abort")
-                            //         throw err;
-                            // });
+                            });
                 }
 
                 function loadRegions(){
@@ -134,9 +143,7 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
 
                 function init(){
 
-                    // $scope.loading = true;
                     loadRegions()
-                    // .then(updateResult)
                                     
                 }
 
@@ -146,35 +153,5 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
 		}
 		
     }]);
-                    // return executeQuery(query, queryCanceler.promise)
-                    // .then(function(result){
-                    //     queryCanceler = null;
-                    //     data = result.rows;
-                    //     var cursor = $q.defer();
 
-                    //     if(result.rows<= data.length)
-                    //         cursor.resolve();
-                    //     else 
-                    //         cursor = fetchRemainingRecords(query, queryCanceler.promise, result);
-
-                    //     return cursor.then(function(){
-                            
-                    //         console.log(result);
-                    //         var derivers = $.pivotUtilities.derivers;
-                    //         var renderers = $.extend($.pivotUtilities.renderers, $.pivotUtilities.plotly_renderers);
-                    //         $element.find("#output").pivotUI(
-                    //             data, 
-                    //             {
-                    //                 renderers: renderers,
-                    //                 rows: ["Government"],
-                    //                 cols: ["RecordType"],
-                    //                 aggregatorName: "Count"
-                    //             }
-                    //         );
-
-                    //         return data;
-
-                    //     })
-                    // })
-	
 });
