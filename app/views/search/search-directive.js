@@ -17,10 +17,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
             restrict: 'EAC',
             replace: true,
             template: template, 
-            controller: ['$scope','$q', 'realm', 'searchService', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
+            controller: ['$scope','$q', 'realm', '$element', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService','$rootScope',
              'joyrideService', '$timeout', 'locale', 'solr', 'toastr','$log',
-            function($scope, $q, realm, searchService, commonjs, localStorageService, $http, thesaurus, 
+            function($scope, $q, realm, $element, commonjs, localStorageService, $http, thesaurus, 
                     appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, 
                     $timeout, locale, solr, toastr, $log) {
                         var customQueryFn = {
@@ -223,6 +223,23 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         $scope.RemoveLeftMenuFilters()
                         updateQueryResult();
                     };
+
+                    $scope.onExportClick = function(){
+                        
+                        var viewType = $scope.searchResult.viewType;
+                        if(viewType == 'list'){
+                            // $scope.searchResult.listViewApi.export(queryOptions, sortFields, pageNumber||1);
+                        }
+                        else if(viewType == 'group'){
+                            // resultQuery = $scope.searchResult.groupViewApi.export(queryOptions, sortFields, pageNumber||1);
+                        }
+                        else if($scope.searchResult.viewType == 'matrix'){
+                            if($scope.searchResult.matrixViewApi.isBusy)
+                                toastr.info($element.find('#exportDisabledMessage').text())
+                            else 
+                                $scope.searchResult.matrixViewApi.onExport();
+                        }
+                    }
 
                     ////////////////////////////////////////////
                     ////// end $scope functions

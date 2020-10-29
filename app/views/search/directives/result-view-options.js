@@ -11,7 +11,8 @@
                 sortFields      : '=' ,
                 groupByFields   : '=' ,
                 onSortByChange  : '&?',
-                onViewTypeChange: '&?'
+                onViewTypeChange: '&?',
+                onExport        : '&?'
             },
             link: function ($scope, $element, $attr, searchDirectiveCtrl) {
                
@@ -109,6 +110,10 @@
                     else{
                         $scope.onViewTypeChange({options:{viewType:type}})
                     }
+                }
+
+                $scope.onExportClick = function(){
+                    $scope.onExport()
                 }
 
                 function showGroupByDialog(){

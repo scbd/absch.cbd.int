@@ -87,7 +87,7 @@
                      <li class="pull-right" style="line-height: 5px">
                          <result-view-options sort-fields="searchResult.sortFields" view-type="searchResult.viewType"
                              group-by-fields="searchResult.groupByFields" on-sort-by-change="onSortByChange(fields)"
-                             on-view-type-change="onViewTypeChange(options)"></result-view-options>
+                             on-view-type-change="onViewTypeChange(options)" on-export="onExportClick()"></result-view-options>
                      </li>
                  </ul>
              </div>
@@ -311,5 +311,8 @@
         </div>
     </script>
 
+    <div style="display: none;">
+        <span id="exportDisabledMessage">Please wait for the query to finish before exporting.</span>
+    </div>
      <joyride ng-if="tourOn"></joyride>
  </div>

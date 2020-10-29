@@ -17,13 +17,17 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout) {
 			link($scope, $element){
                 
                 require(['pivottable', 'plotly.js', 'plotly-renderers']);
+
                 var defaultMessage      = $element.find('#loadingMessage').text()
                 $scope.matrixProgress   = defaultMessage;
                 var pageSize        = 1000;
                 var queryCanceler   = undefined;
-				var regions         = []
+                var regions         = [];
+                
                 $scope.api          = {
-                    updateResult : updateResult
+                    updateResult : updateResult,
+                    onExport     : onExport,
+                    isBusy       : false
                 };
 
                 function updateResult(queryOptions){
@@ -37,12 +41,12 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout) {
                     }
                     queryCanceler = $q.defer();
 
-                    $scope.loading = true;
+                    $scope.api.isBusy = $scope.loading = true;
                     queryOptions = queryOptions||{};
                     queryOptions.query   = queryOptions.query||'government_submissionYear_s:*';
 
                     var query = {
-                        fields      : 'Government:government_EN_t,RecordType:schema_EN_t, Year:government_submissionYear_s, government_s,schemaType:schemaType_s',
+                        fields      : 'Government:government_EN_t,RecordType:schema_EN_t, Year:government_submissionYear_s, government_s,schemaType:schemaType_s,countryRegions_ss',
                         fieldQuery  : _.uniq(queryOptions.tagQueries),
                         query       : queryOptions.query||undefined,
                         
@@ -73,7 +77,7 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout) {
                         })
                         .finally(function(){
                             if(!queryCanceler)
-                                $scope.loading = false;
+                                $scope.api.isBusy = $scope.loading = false;
                         });   
                 }
 
@@ -87,10 +91,13 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout) {
                             if(row.Year)
                                 row.Year = row.Year.replace(/([a-z]+)?_/i, '')
                             
-                            var region = _.find(regions, function(reg){
-                                return _.contains(reg.narrowerTerms, row.government_s)
-                            })
-        
+                            var region;
+                            if(row.government_s){
+                                region = _.find(regions, function(reg){
+                                    return _.contains(reg.narrowerTerms, row.government_s)
+                                });
+                            }
+
                             return {
                                 Government       :   row.Government||'x - Reference record',
                                 Year             :   row.Year,
