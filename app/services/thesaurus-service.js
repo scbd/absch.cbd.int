@@ -6,17 +6,17 @@ define(['app', 'services/cache-service'], function (app) {
         return new function () {
 
 
-            this.getDomains = function(domainIdentifier){
+            this.getDomains = function(domainIdentifier, params){
 
-                return $http.get('/api/v2013/thesaurus/domains/' + domainIdentifier , {cache:termsCacheFactory});
+                return $http.get('/api/v2013/thesaurus/domains/' + encodeURIComponent(domainIdentifier) , {params:params, cache:termsCacheFactory});
             };
 
             this.getDomainTerms = function(termIdentifier, options){
                 return fn_getDomainTerms(termIdentifier, options);
             };
 
-            this.getTerms = function(term){
-                return $http.get('/api/v2013/thesaurus/terms/' + (terms[term]||term) , {cache:termsCacheFactory})
+            this.getTerms = function(term, params){
+                return $http.get('/api/v2013/thesaurus/terms/' + encodeURIComponent((terms[term]||term)) , {params:params, cache:termsCacheFactory})
                 .then(function(termData){
                     return termData.data;
                 });;
@@ -27,11 +27,11 @@ define(['app', 'services/cache-service'], function (app) {
                     throw "Domain term is missing";
 
                     options = options || {};
-                var url     = '/api/v2013/thesaurus/domains/' + domainTerms[termIdentifier] + '/terms';
+                var url     = '/api/v2013/thesaurus/domains/' + encodeURIComponent(domainTerms[termIdentifier]) + '/terms';
 
                 if(options.other){
-                    var urlOther = '/api/v2013/thesaurus/terms/' + domainTerms['other'];
-                    return $q.all([$http.get(url, {cache:termsCacheFactory}),$http.get(urlOther, {cache:termsCacheFactory})])
+                    var urlOther = '/api/v2013/thesaurus/terms/' + encodeURIComponent(domainTerms['other']);
+                    return $q.all([$http.get(url, {params:options.params, cache:termsCacheFactory}),$http.get(urlOther, {cache:termsCacheFactory})])
                                 .then(function(termData){
                                     var data       = termData[0].data;
 
@@ -50,7 +50,7 @@ define(['app', 'services/cache-service'], function (app) {
                                 });
                 }
                 if(termIdentifier == 'other'){
-                    url = '/api/v2013/thesaurus/terms/' + domainTerms.other;
+                    url = '/api/v2013/thesaurus/terms/' + encodeURIComponent(domainTerms.other);
                     return $q.when($http.get(url, {cache:termsCacheFactory}))
                              .then(function(data){
                                 return data.data;

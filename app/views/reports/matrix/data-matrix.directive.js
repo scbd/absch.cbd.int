@@ -1,10 +1,10 @@
 define(['app', 'lodash', 'text!./data-matrix.directive.html', 
 'components/scbd-angularjs-services/services/locale','services/search-service',
-'views/directives/block-region-directive'], 
+'views/directives/block-region-directive', 'services/thesaurus-service'], 
 function(app, _, template) { 'use strict';
 
-app.directive("matrixView", ["$q", "searchService", '$http', 'locale', '$route', 'realm', '$timeout',
-function ($q, searchService, $http, locale, $route, realm, $timeout) {
+app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout',
+function ($q, searchService, $http, locale, thesaurusService, realm, $timeout) {
 	
 		return{
 			template:template,
@@ -133,22 +133,32 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
                         "3D0CCC9A-A0A1-4399-8FA2-41D4D649DB0E", // CBD Regional Groups - Latin America and the Caribbean
                         "0EC2E5AE-25F3-4D3A-B71F-8019BB62ED4B"  // CBD Regional Groups - Western Europe and Others
                     ];
-                    var regionsQuery = _.map(DefaultRegions, function(region){return $http.get('/api/v2013/thesaurus/terms/'+region+'?relations')})
+                    var regionsQuery = _.map(DefaultRegions, function(region){return thesaurusService.getTerms(region, {relations:true})})
                     
                     return $q.all(regionsQuery)
                             .then(function(regionData){
-                                regions = _.map(regionData, function(region){return region.data;})
+                                regions = regionData;
                             });
                 }
 
                 function init(){
+                    loadRegions()     
+                }
 
-                    loadRegions()
-                                    
+                function onExport(){
+                    if($scope.loading)
+                        return;
+                    require(['tableexport'], function(){
+                        var tableExport = $element.find('.pvtTable').tableExport({
+                                                formats: ["xlsx", "xls", "csv"],
+                                                filename: "Matrix-view",
+                                            });
+                        $element.find('.xlsx').click();
+                        tableExport.remove();
+                    });  
                 }
 
                 init();
-
 			}
 		}
 		
