@@ -92,11 +92,11 @@ function ($q, searchService, $http, locale, $route, realm, $timeout) {
                             })
         
                             return {
-                                Government  :   row.Government||'x - Reference record',
-                                Year        :   row.Year,
-                                RecordType  :   row.RecordType,
-                                Region      :   region ? region.title[locale] : 'No Region',
-                                SchemaType  :   row.schemaType
+                                Government       :   row.Government||'x - Reference record',
+                                Year             :   row.Year,
+                                ["Record Type"]  :   row.RecordType,
+                                Region           :   region ? region.title[locale] : 'No Region',
+                                ["Schema Type"]  :   row.schemaType.replace(/[a-z]/, function(match){ return match.toUpperCase()})
                             }
                         });
 
