@@ -18,6 +18,7 @@ _run:
       sudo sh -c 'echo '\''DOCKER_OPTS="--experimental=true"'\'' >> /etc/default/docker'
       sudo service docker restart
       docker info
+      docker login -u $DOCKER_USER -p $DOCKER_PASS
       docker build --squash -t output --build-arg VERSION=$CIRCLE_SHA1 --build-arg BRANCH=${CIRCLE_BRANCH:-master} --build-arg TAG=$CIRCLE_TAG .
   testImage: &testImage
     name: Test docker image 
