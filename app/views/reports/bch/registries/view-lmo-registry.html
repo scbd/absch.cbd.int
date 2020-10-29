@@ -1,52 +1,38 @@
 <div ng-controller="lmoRegistryController">
 	<link href="/app/views/reports/bch/registries/registries.css" rel="stylesheet">
 	<div class="container-fluid">
-		<div class="container-sections">
-
-			<table cellpadding="0" ellspacing="0">
-				<tbody>
-					<tr>
-						<td class="info-header-links">Compiled Information </td>
-					</tr>
-					<tr>
-						<td class="info-links"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry </a>
-						</td>
-					</tr>
-					<tr>
-						<td class="info-links"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a>
-						</td>
-					</tr>
-					<tr>
-						<td class="info-links"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="panel panel-default">
-				<!--		<p block-region activate="loading"></p>-->
-				<div class="panel-heading">
-
-					<h2>Living Modified Organism (LMO) Registry</h2>
-
+		<div class="panel panel-default">
+			<!--		<p block-region activate="loading"></p>-->
+			<div class="panel-heading">
+				<h2>Living Modified Organism (LMO) Registry</h2>
+			</div>
+			<div class="row">
+				<div class="col-md-2 padding-right-2"> 
+					<ul class="list-group">
+						<li class="list-group-item"><b>Registries</b></li>
+						<li class="list-group-item"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry </a></li>
+						<li class="list-group-item"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
+						<li class="list-group-item"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
+					</ul>
 				</div>
-				<p>
-					The LMO-Unique Identifiers (LMO-UIds) Registry provides summary information on all living modified
-					organisms registered in the BCH including transformation events, genetic modifications, and the
-					unique identification code (if available) for each record. Links to all decisions and Risk
-					assessment reports that refer to these organisms are accessible through the registry.</p>
+				<div class="col-md-10 ">
 					<p>
-				The BCH modalities of operation require the BCH to make use of existing <a
-					href="/database/organisms/uniqueidentifiers/about.shtml">unique identification systems</a> for
-				living modified organisms, as appropriate, to facilitate searching and retrieval of information.
-				</p>
-				<div class="export-button">
-                    <button class="btn btn-default" ng-click="export()" ng-disabled="!data.length || readyForExport">
-                        <i class="fa fa-table"></i> Export
-                    </button>
-                </div>
-				<registry schema="modifiedOrganism" caption="Unique_Identification" url="url_ss"
-					fields="Unique_Identification:uniqueIdentifier_s,Identity:identity_s,Transformation_Event:transformationEvent_s,Organism:lmoCommonNames_EN_txt,Description:summary_t,url_ss">
-				</registry>
+						The LMO-Unique Identifiers (LMO-UIds) Registry provides summary information on all living
+						modified
+						organisms registered in the BCH including transformation events, genetic modifications, and the
+						unique identification code (if available) for each record. Links to all decisions and Risk
+						assessment reports that refer to these organisms are accessible through the registry.</p>
+					<p>
+						The BCH modalities of operation require the BCH to make use of existing <a
+							href="/database/organisms/uniqueidentifiers/about.shtml">unique identification systems</a>
+						for
+						living modified organisms, as appropriate, to facilitate searching and retrieval of information.
+					</p>
+
+					<registry schema="modifiedOrganism" caption="Record_ID" url="url_ss"
+						fields="Record_ID:uniqueIdentifier_s,Identity:identity_s,Transformation_event:transformationEvent_s,Organism:lmoCommonNames_EN_txt,Description:summary_t,url_ss">
+					</registry>
+				</div>
 			</div>
 		</div>
 	</div>

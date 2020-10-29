@@ -1,45 +1,28 @@
 <div ng-controller="geneRegistryController">
 	<link href="/app/views/reports/bch/registries/registries.css" rel="stylesheet">
+
 	<div class="container-fluid">
-		<div class="container-sections">
-
-			<table cellpadding="0" ellspacing="0">
-				<tbody>
-					<tr>
-						<td class="info-header-links">Compiled Information </td>
-					</tr>
-					<tr>
-						<td class="info-links"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry </a>
-						</td>
-					</tr>
-					<tr>
-						<td class="info-links"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a>
-						</td>
-					</tr>
-					<tr>
-						<td class="info-links"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-
-					<h2>Gene and DNA Sequence Registry</h2>
-					
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2>Gene and DNA Sequence Registry</h2>
+			</div>
+		<div class="row">
+			<div class="col-md-2 padding-right-2">
+				<ul class="list-group">
+					<li class="list-group-item"><b>Registries</b></li>
+					<li class="list-group-item"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry </a></li>
+					<li class="list-group-item"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
+					<li class="list-group-item"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
+				</ul>
+			</div>
+			<div class="col-md-10 padding-left-2">
+					<p>The BCH Gene Registry provides summary information on gene inserts and characteristics
+						of the genetic modifications of the LMOs registered in the BCH.
+					</p>
+					<registry schema="dnaSequence" caption="Record_ID" url="url_ss"
+							  fields="Record_ID:uniqueIdentifier_s,Name:name_s,Trait:summary_t,Donor_organism:geneDonorOrganismCommonNames_EN_txt,url_ss">
+					</registry>
 				</div>
-				<p>The BCH Gene Registry provides summary information on gene inserts and characteristics 
-					of the genetic modifications of the LMOs registered in the BCH.
-				</p>
-				<div class="export-button">
-                    <button class="btn btn-default"
-                            ng-click="export()" ng-disabled="!data.length || readyForExport">
-                        <i class="fa fa-table"></i> Export
-                    </button>
-                </div>
-				<registry schema="dnaSequence" caption="Record_ID" url="url_ss"
-					fields="Record_ID:uniqueIdentifier_s,Name:name_s,Trait:summary_t,Donor_organism:geneDonorOrganismCommonNames_EN_txt,url_ss">
-				</registry>
 			</div>
 		</div>
 	</div>
