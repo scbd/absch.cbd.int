@@ -1,3 +1,14 @@
+<style>
+	.tableexport-caption{
+		display: none;       
+	}
+	thead th {
+	background-color: #f5f5f5;
+	color: #333;
+	}
+	.list-group-item{margin-bottom: 5px;}
+	.list-group-item:first-child{color: #ffffff;}
+</style>
 <div ng-controller="orgaRegistryController">
 	<div class="container-fluid">
 		<div class="panel panel-default">
@@ -7,22 +18,57 @@
 		<div class="row">
 			<div class="col-md-2 padding-right-2">
 				<ul class="list-group">
-					<li class="list-group-item"><b>Registries</b></li>
-					<li class="list-group-item"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry</a></li>
-					<li class="list-group-item"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
-					<li class="list-group-item"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
+					<li class="list-group-item bg-darkgrey"><b>Registries</b></li>
+					<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry</a></li>
+					<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
+					<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
 				</ul>
 			</div>
-			<div class="col-md-10 padding-left-2">
-				<p style="padding-top: 10px;">
+			<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
+			<div ng-if="!isLoading" class="col-md-10 padding-left-2">
+				<p style="padding-top:10px;border-bottom: 2px solid #cce;padding-bottom: 10px;">
 					The BCH Organisms Registry includes those organisms that have been registered with the BCH as parental, recipient or donor organisms.
 					 Each record provides further information about relevant biological characteristics, including information on taxonomic status, 
 					 common name, origin, centre of origin and centre of genetic diversity. 
 					Links to relevant LMO records are provided at the bottom of each individual record.
 				</p>
-				<registry schema="organism" caption="Record_ID" url="url_ss"
-					fields="Record_ID:uniqueIdentifier_s,Identity:identity_s,Taxonomic_status:title_s,Common_name:commonNames_EN_txt,Description:summary_s,url_ss">
-				</registry>
+				<div class="row">
+					<div class="col-md-9 text-left">
+						<h4><strong>Total records:  <span ng-bind="::numFound" class="text-bold"></span></strong></h4>
+					</div>
+					<div class="col-md-3 text-right">
+						<button class="btn btn-default" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!orgaRecords.length || readyForExport">
+							<i class="fa fa-table"></i> Export
+						</button>
+					</div>
+				</div>
+				<div>
+					<table class="table" id="forExport">     
+						<thead>
+							<tr>
+								<th style="width: 20%;">Record ID</th>
+								<th style="width: 20%;">Taxonomic status</th>
+								<th style="width: 15%;">Common name</th>
+								<th style="width: 45%;">Description</th>									
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="row in ::orgaRecords">
+								<td class="tableexport-string">
+									<a ng-if="::row.url_ss.length" rel="noopener" href="{{::row.url_ss[0]}}" target="_blank" ><span class="text-uppercase" ng-bind="::row.Record_ID"></span></a>
+								</td>
+								<td>
+									<span ng-bind="::row.Taxonomic_status"></span>
+								</td>
+								<td>
+									<div ng-repeat="col in ::row.Common_name"><div ng-bind="::col"></div></div>
+								</td>
+								<td><span ng-bind-html="::row.Description"></span></td>
+								
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
