@@ -87,7 +87,7 @@
                      <li class="pull-right" style="line-height: 5px">
                          <result-view-options sort-fields="searchResult.sortFields" view-type="searchResult.viewType"
                              group-by-fields="searchResult.groupByFields" on-sort-by-change="onSortByChange(fields)"
-                             on-view-type-change="onViewTypeChange(options)"></result-view-options>
+                             on-view-type-change="onViewTypeChange(options)" on-export="onExportClick()"></result-view-options>
                      </li>
                  </ul>
              </div>
@@ -160,10 +160,11 @@
          <!-- ng-if="!skipResults" -->
          <div class="row" style="padding:10px 0 0 0;margin:0px;">
              <!-- Search Result -->
-             <div class="bg-white hidden-xs" ng-class="{'col-xs-2':leftMenuFilters}" style="border:1px solid #eee;padding:0px"
-                 ng-show="leftMenuFilters">
+             <div class="bg-white hidden-xs" ng-class="{'col-xs-2':leftMenuFilters}" 
+             style="border:1px solid #eee;padding:0px" ng-show="leftMenuFilters ">
                  <div left-side-filter></div>
              </div>
+             <!-- Different view for list/group -->
              <div class="col-xs-12" style="margin:0;border: 1px solid #eee;"
                  id="recordsContent" ng-class="{'col-xs-10':leftMenuFilters}">
                  <div class="col-xs-12" style="padding:0;margin:0;">
@@ -194,7 +195,8 @@
                  </div>
                  <!-- Tab panes -->
                 <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;" id="recordsContent">
-                    <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='allRecords'}" ng-if="searchResult.currentTab==='allRecords'">                             
+                    <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='allRecords'}" 
+                    ng-if="searchResult.currentTab==='allRecords'">                             
                         <div ng-switch="searchResult.viewType">
                             <div ng-switch-when="default">
                                 <div search-result-list-view api="searchResult.listViewApi"></div>
@@ -205,54 +207,63 @@
                             <div ng-switch-when="group">
                                 <div search-result-group-view api="searchResult.groupViewApi"></div>
                             </div>
-                            <!-- <div ng-switch-when="matrix">
-                                Matrix view coming soon
-                            </div> -->
+                            <div class="searchMatrixContent" ng-switch-when="matrix">
+                                <matrix-view api="searchResult.matrixViewApi"></matrix-view>
+                            </div>
                         </div>
                     </div>
                    
-                    <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='nationalRecords'}" ng-if="searchResult.currentTab==='nationalRecords'">                     
-                        <div ng-switch="searchResult.viewType">
-                            <div ng-switch-when="default">
-                                <div search-result-group-view api="searchResult.groupViewApi"></div>
-                            </div>
-                            <div ng-switch-when="list">
-                                <div search-result-list-view api="searchResult.listViewApi"></div>
-                            </div>
-                            <div ng-switch-when="group">
-                                <div search-result-group-view api="searchResult.groupViewApi"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='referenceRecords'}" ng-if="searchResult.currentTab=='referenceRecords'">
-                        <div ng-switch="searchResult.viewType">
-                            <div ng-switch-when="default">
-                                <div search-result-list-view api="searchResult.listViewApi"></div>
-                            </div>
-                            <div ng-switch-when="list">
-                                <div search-result-list-view api="searchResult.listViewApi"></div>
-                            </div>
-                            <div ng-switch-when="group">
-                                <div search-result-group-view api="searchResult.groupViewApi"></div>
+                    <div>
+                        <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='nationalRecords'}" ng-if="searchResult.currentTab==='nationalRecords'">                     
+                            <div ng-switch="searchResult.viewType">
+                                <div ng-switch-when="default">
+                                    <div search-result-group-view api="searchResult.groupViewApi"></div>
+                                </div>
+                                <div ng-switch-when="list">
+                                    <div search-result-list-view api="searchResult.listViewApi"></div>
+                                </div>
+                                <div ng-switch-when="group">
+                                    <div search-result-group-view api="searchResult.groupViewApi"></div>
+                                </div>
+                                <div class="searchMatrixContent" ng-switch-when="matrix">
+                                    <matrix-view api="searchResult.matrixViewApi"></matrix-view>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='scbdRecords'}" ng-if="searchResult.currentTab=='scbdRecords'">
-                        <div ng-switch="searchResult.viewType">
-                            <div ng-switch-when="default">
-                                <div search-result-list-view api="searchResult.listViewApi"></div>
-                            </div>
-                            <div ng-switch-when="list">
-                                <div search-result-list-view api="searchResult.listViewApi"></div>
-                            </div>
-                            <div ng-switch-when="group">
-                                <div search-result-group-view api="searchResult.groupViewApi"></div>
+                        <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='referenceRecords'}" ng-if="searchResult.currentTab=='referenceRecords'">
+                            <div ng-switch="searchResult.viewType">
+                                <div ng-switch-when="default">
+                                    <div search-result-list-view api="searchResult.listViewApi"></div>
+                                </div>
+                                <div ng-switch-when="list">
+                                    <div search-result-list-view api="searchResult.listViewApi"></div>
+                                </div>
+                                <div ng-switch-when="group">
+                                    <div search-result-group-view api="searchResult.groupViewApi"></div>
+                                </div>
+                                <div class="searchMatrixContent" ng-switch-when="matrix">
+                                    <matrix-view api="searchResult.matrixViewApi"></matrix-view>
+                                </div>
                             </div>
                         </div>
-                    </div>                    
-                   
+                        <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='scbdRecords'}" ng-if="searchResult.currentTab=='scbdRecords'">
+                            <div ng-switch="searchResult.viewType">
+                                <div ng-switch-when="default">
+                                    <div search-result-list-view api="searchResult.listViewApi"></div>
+                                </div>
+                                <div ng-switch-when="list">
+                                    <div search-result-list-view api="searchResult.listViewApi"></div>
+                                </div>
+                                <div ng-switch-when="group">
+                                    <div search-result-group-view api="searchResult.groupViewApi"></div>
+                                </div>
+                                <div class="searchMatrixContent" ng-switch-when="matrix">
+                                    <matrix-view api="searchResult.matrixViewApi"></matrix-view>
+                                </div>
+                            </div>
+                        </div>                    
+                   </div>
                 </div>
-
              </div>
          </div>
      </div>
@@ -300,5 +311,8 @@
         </div>
     </script>
 
+    <div style="display: none;">
+        <span id="exportDisabledMessage">Please wait for the query to finish before exporting.</span>
+    </div>
      <joyride ng-if="tourOn"></joyride>
  </div>

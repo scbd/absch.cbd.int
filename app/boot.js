@@ -33,11 +33,11 @@ require.config({
         'ngStorage'                 : cdnHost + 'ngstorage@0.3.11/ngStorage.min',
         'ngDialog'                  : cdnHost + 'ng-dialog@1.4.0/js/ngDialog',
         'ngInfiniteScroll'          : cdnHost + 'ng-infinite-scroll@1.3.0/build/ng-infinite-scroll.min',  
-        'tableexport'               : cdnHost + 'tableexport@4.0.10/dist/js/tableexport',
+        'tableexport'               : cdnHost + 'tableexport@5.2.0/dist/js/tableexport',
         'blobjs'                    : cdnHost + 'blobjs@1.1.1/Blob.min',
         'file-saverjs'              : cdnHost + 'file-saverjs@1.3.6/FileSaver.min',
-        'xlsx'                      : cdnHost + 'xlsx@0.13.4/dist/xlsx',
-        'jszip'                     : cdnHost + 'xlsx@0.13.4/dist/jszip',
+        'xlsx'                      : cdnHost + 'xlsx@0.14.0/dist/xlsx',
+        'jszip'                     : cdnHost + 'xlsx@0.14.0/dist/jszip',
         'webui-popover'             : cdnHost + 'webui-popover@1.2.18/dist/jquery.webui-popover.min',
         'chart-js'                  : cdnHost + 'chart.js@1.1.1/Chart.min',
         'printThis'                 : cdnHost + 'print-this@1.9.0/printThis',
@@ -52,6 +52,10 @@ require.config({
         'drag-and-drop'             : cdnHost + 'angular-drag-and-drop-lists@2.1.0/angular-drag-and-drop-lists.min',
         'angucomplete-alt'          : cdnHost + 'angucomplete-alt@3.0.0/angucomplete-alt',
         'angular-cache'             : cdnHost + 'angular-cache@4.6.0/dist/angular-cache.min',
+
+        'jquery-ui'                 : cdnHost + 'jqueryui@1.11.1/jquery-ui.min',
+        'pivottable'                : cdnHost + 'pivottable@2.23.0/dist/pivot.min',
+        'plotly-renderers'          : cdnHost + 'pivottable@2.23.0/dist/plotly_renderers',
 
         'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min',
         'cbd-forums'                :           'libs/cbd-forums/cbd-forums',
@@ -96,7 +100,11 @@ require.config({
         'ngMeta'                        : { 'deps': ['angular']},
         'drag-and-drop'                 : { 'deps': ['angular']},
         'angucomplete-alt'              : { 'deps': ['angular', 'css!'+cdnHost+'angucomplete-alt@3.0.0/angucomplete-alt.css']},
-        'angular-cache'                 : { 'deps' : ['angular'] }
+        'angular-cache'                 : { 'deps' : ['angular'] },
+
+        'pivottable'                    : { 'deps': ['jquery', 'jquery-ui', 'angular', 'css!'+cdnHost+'pivottable@2.23.0/dist/pivot.min.css']},
+        'plotly-renderers'              : { 'deps': ['jquery', 'jquery-ui', 'plotly.js']},
+        
     },
     urlArgs: function(id, url){
         
@@ -122,5 +130,10 @@ require.s.contexts._.nameToUrl = function (moduleName, ext, skipExt) {
 
     return url;
 }
+
+define('plotly.js', [cdnHost + 'plotly.js-basic-dist-min@1.57.1/plotly-basic.min'], function(Plotly){
+    return Plotly;
+});
+
 if(window.scbdApp.template)
     require([window.scbdApp.template])
