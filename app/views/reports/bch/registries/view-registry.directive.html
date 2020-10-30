@@ -1,0 +1,40 @@
+<style>
+    .tableexport-caption{
+        display: none;       
+    }
+    thead th {
+    background-color: #f5f5f5;
+    color: #333;
+    }
+</style>
+<div class="row">
+    <div class="col-md-9 text-left">
+        <h4>Total records:  <span ng-bind="::numFound" class="text-bold"></span></h4>
+    </div>
+    <div class="col-md-3 text-right">
+        <button class="btn btn-default" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!data.length || readyForExport">
+            <i class="fa fa-table"></i> Export
+        </button>
+    </div>
+</div>
+<div>
+    <table class="table" cellspacing="0" cellpadding="0" style="width:100%; margin-bottom: 0px;" id="forExport">     
+        <thead>
+            <tr>
+                <th style="min-width: 120px;" ng-repeat="(key, val) in ::data[0]" ng-if="key!=url">
+                    <span ng-bind="::key.replace('_',' ')"></span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="row in ::data">
+                <td class="tableRow" ng-repeat="(key,column) in ::row" ng-if="key!=url">
+                    <span ng-if="key==url || key == caption">
+                        <a rel="noopener" href="{{::row.url_ss[0]}}" target="_blank" ng-bind="::row[caption].toUpperCase()"></a>
+                    </span>
+                    <span ng-if="key!=url && key !=caption" ng-bind="::column"></span> 
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
