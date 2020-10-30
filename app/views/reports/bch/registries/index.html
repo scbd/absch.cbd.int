@@ -1,25 +1,28 @@
 <style>
 	.card-box{
-		min-height: 220px;
+		min-height: 240px;
+		border-top: 1px solid #ccc;
+		border-bottom: 1px solid #ccc;
+		padding-bottom: 10px;
+		padding-top: 10px;
 	}
 </style>
-<div ng-controller="RegistryReportController">
+<div ng-controller="registryReportController">
 	<link href="/app/css/register.css" rel="stylesheet">
 	<link href="/app/css/record.css" rel="stylesheet">
 	<span register-top-menu></span>
 	<div class="register-content card card-1-notrans">
 		<div class="panel panel-default">
-			<!--		<p block-region activate="loading"></p>-->
 			<div class="panel-heading">
 				<h3>Registries</h3>
 			</div>
 			<div class="container-fluid bg-white">
 				<div class="row" style="padding-top:10px">
 
-					<div class="col-md-4 card-box">
+					<div class="col-md-4">
 						<ul class="list-group ">
 							<li class="list-group-item">
-								<h3>Living Modified Organism (LMO) Registry <span class="badge" ng-bind="::modifiedOrganismRecords"></span></h3>
+								<h4><strong>Modified Organism (LMO) Registry <span class="badge pull-right" ng-bind="::modifiedOrganismRecords"></span></strong></h4>
 								<p class="card-box">The LMO-Unique Identifiers (LMO-UIds) Registry provides summary information on all
 									living modified organisms registered in the BCH including transformation events,
 									genetic modifications, and the unique identification code (if available) for each
@@ -30,35 +33,40 @@
 									for living modified organisms, as appropriate, to facilitate
 									searching and retrieval of information.
 								</p>
- 								<a class="btn btn-default" href="/registries/living-modified-organisms" role="button">View details </a>	 
+								<div>
+ 								<a class="btn btn-default" href="/registries/living-modified-organisms" role="button">View registry </a>
+								</div>
 							</li>
 						</ul>
 
 					</div>
-					<div class="col-md-4 card-box">
+					<div class="col-md-4">
 						<ul class="list-group ">
 							<li class="list-group-item">
-								<h3>Organism Registry <span class="badge" ng-bind="::organismRecords"> </span></h3>
+								<h4><strong>Organism Registry <span class="badge pull-right" ng-bind="::organismRecords"> </span></strong></h4>
 								<p class="card-box">The BCH Organisms Registry includes those organisms that have been registered with
 									the BCH as parental, recipient or donor organisms. Each record provides further
 									information about relevant biological characteristics, including information on
 									taxonomic status, common name, origin, centre of origin and centre of genetic
 									diversity. Links to relevant LMO records are provided at the bottom of each
 									individual record.
-								</p> 
-								 <a class="btn btn-default" href="/registries/organisms" role="button">View details</a>
-									
+								</p>
+								<div>
+								 <a class="btn btn-default" href="/registries/organisms" role="button">View registry</a>
+								</div>
 							</li>
 						</ul>
 					</div>
-					<div class="col-md-4 card-box">
+					<div class="col-md-4">
 						<ul class="list-group ">
 							<li class="list-group-item">
-								<h3>Gene and DNA Sequence Registry <span class="badge" ng-bind="::dnaSequenceRecords"> </span></h3>
-								<p class="card-box">The BCH Gene Registry provides summary information on gene inserts and characteristics of the 
+								<h4><strong>Gene and DNA Sequence Registry <span class="badge pull-right" ng-bind="::dnaSequenceRecords"> </span></strong></h4>
+								<p class="card-box">The BCH Gene Registry provides summary information on gene inserts and characteristics of the
 								genetic modifications of the LMOs registered in the BCH.
-								</p> 
-								<a class="btn btn-default" href="/registries/genetic-elements" role="button">View details</a>								 						 
+								</p>
+								<div>
+								<a class="btn btn-default" href="/registries/genetic-elements" role="button">View registry</a>
+								</div>
 							</li>
 						</ul>
 					</div>
