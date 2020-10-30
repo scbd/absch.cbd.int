@@ -85,6 +85,33 @@
 
                                 </section>
 
+                                <section ng-if="isAbs">
+                                    <legend>Thematic areas(s)</legend>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="absThematicAreas">
+                                                <div km-term-check name="absThematicAreas" ng-model="document.absThematicAreas"
+                                                            terms="options.absThematicAreas()" binding-type="term[]"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section ng-if="isBch">
+                                    <legend>Thematic areas(s)</legend>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="cpbThematicAreas" caption="">
+                                                <div km-term-check name="cpbThematicAreas"
+                                                            ng-model="document.cpbThematicAreas" terms="options.bchThematicAreas()"
+                                                            binding-type="term[]"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
                                 <section>
                                     <legend>Documents</legend>
                                     <div class="row">
@@ -92,7 +119,7 @@
                                             <div class="km-control-group" required name="relevantDocuments"
                                                 caption="Documents">
                                                 <div km-link name="relevantDocuments"
-                                                    ng-model="document.relevantDocuments" allow-link="false"
+                                                    ng-model="document.relevantDocuments" allow-link="true"
                                                     allow-file="true" identifier="document.header.identifier"></div>
                                             </div>
                                         </div>
@@ -104,33 +131,6 @@
                                                     the record.</div>
                                                 <div km-textbox-ml ng-model="document.relevantInformation" rows="4"
                                                     placeholder="" locales="document.header.languages"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-
-                                <section ng-if="isAbs">
-                                    <legend>ABS Thematic areas(s)</legend>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="km-control-group" name="absThematicAreas">
-                                                <!-- <div km-term-check name="absThematicAreas" ng-model="document.absThematicAreas"
-                                                            terms="options.absThematicAreas()" binding-type="term[]"></div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-
-                                <section ng-if="isBch">
-                                    <legend>BCH Thematic areas(s)</legend>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="km-control-group" name="cpbThematicAreas" caption="">
-                                                <!-- <div km-term-check name="cpbThematicAreas"
-                                                            ng-model="document.cpbThematicAreas" terms="options.bchThematicAreas()"
-                                                            binding-type="term[]"></div> -->
                                             </div>
                                         </div>
                                     </div>
