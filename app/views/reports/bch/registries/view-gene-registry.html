@@ -1,0 +1,28 @@
+<div ng-controller="geneRegistryController">
+	<div class="container-fluid">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2>Gene and DNA Sequence Registry</h2>
+			</div>
+		<div class="row">
+			<div class="col-md-2 padding-right-2">
+				<ul class="list-group">
+					<li class="list-group-item"><b>Registries</b></li>
+					<li class="list-group-item"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry</a></li>
+					<li class="list-group-item"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
+					<li class="list-group-item"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
+				</ul>
+			</div>
+			<div class="col-md-10 padding-left-2">
+					<p style="padding-top: 10px;">
+						The BCH Gene Registry provides summary information on gene inserts and characteristics
+						of the genetic modifications of the LMOs registered in the BCH.
+					</p>
+					<registry schema="dnaSequence" caption="Record_ID" url="url_ss"
+							  fields="Record_ID:uniqueIdentifier_s,Name:name_s,Trait:summary_t,Donor_organism:geneDonorOrganismCommonNames_EN_txt,url_ss">
+					</registry>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

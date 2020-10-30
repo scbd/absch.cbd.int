@@ -2,6 +2,7 @@
     <img class="hidden-xs pull-right" style="height:60px;margin:10px" src="/app/img/cbd-logo-white-en.svg">
     <h1 class="hidden-xs bch-brand">Biosafety Clearing-House</h1>
     <style>
+        .dropdown-menu:hover{display: block;}
         .navbar-nav>li {
             float: left;
         }
@@ -69,11 +70,15 @@
                             <i class="icon fa fa-book visible-xs"></i><span class="hidden-xs">Protocol</span>
                         </a>
                     </li>
-                    <li>
-                        <a rel="noopener" translation-url  ng-href="search" ng-click="activeMenu='search'"
-                        ng-class="{'active-menu' : activeMenu == 'search'}" class="xs-padding"> <i class="icon fa fa-search visible-xs "></i>
-                            <span class="hidden-xs "> Search</span>
+                     <li hover-effect=".dropdown-menu">
+                      <a rel="noopener" href="#" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                        ng-click="activeMenu='search'" ng-class="{'active-menu' : activeMenu == 'search'}" class="xs-padding">
+                            <span class="hidden-xs ">Search <span class="caret"></span></span>
                         </a>
+                        <ul class="dropdown-menu"  style="border:0;margin-top:5px;">
+                            <li><a rel="noopener" ng-href="search" ng-click="activeMenu='search'""> Search </a></li>
+                            <li> <a rel="noopener" ng-href="/registries">Registries</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a rel="noopener" translation-url  ng-href="register"  ng-click="activeMenu='submit'"
