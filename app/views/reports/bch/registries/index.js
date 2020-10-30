@@ -1,7 +1,7 @@
 define(['app', 'lodash', 'services/search-service', 'js/common',
 	'./index'], function(app, _) { 'use strict';
 
-	app.controller("RegistryReportController", ['$scope',    'searchService',  
+	app.controller("registryReportController", ['$scope',    'searchService',  
 		function($scope,searchService) { 
 			var schemas = ["organism","modifiedOrganism","dnaSequence"];
 			schemas.forEach(function(schema){ 
