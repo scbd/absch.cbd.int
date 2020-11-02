@@ -10,7 +10,7 @@
 						<li class="list-group-item  bg-darkgrey"><b>Registries</b></li>
 						<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry</a></li>
 						<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
-						<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
+						<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
 					</ul>
 				</div>
 				<div class="col-md-10 ">
@@ -19,7 +19,8 @@
 						of the genetic modifications of the LMOs registered in the BCH.
 					</p>
 					<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
-				<div ng-if="!isLoading">						
+					<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> Error loading registry records, please try again.</h3></div>
+					<div ng-if="!isLoading && !isError">						
 					<div class="row">
 						<div class="col-md-9 text-left">
 							<h4><strong>Total records:  <span ng-bind="::numFound" class="text-bold"></span></strong></h4>
@@ -44,7 +45,7 @@
 							<tbody>
 								<tr ng-repeat="row in ::geneRecords">
 									<td class="tableexport-string">
-										<a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" href="{{::row.url_ss[0]}}">
+										<a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}">
 											<span class="text-uppercase" ng-bind="::row.recordId"></span>
 										</a>
 									</td>
