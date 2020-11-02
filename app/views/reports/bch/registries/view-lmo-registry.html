@@ -1,17 +1,6 @@
-<style>
-	.tableexport-caption{
-		display: none;       
-	}
-	thead th {
-	background-color: #f5f5f5;
-	color: #333;
-	}
-	.list-group-item{margin-bottom: 5px;}
-	.list-group-item:first-child{color: #ffffff;}
-</style>
 <div ng-controller="lmoRegistryController">
 	<div class="container-fluid">
-		<div class="panel panel-default">
+		<div class="panel panel-default registry-details">
 			<div class="panel-heading">
 				<h2>Living Modified Organism (LMO) Registry</h2>
 			</div>
@@ -24,26 +13,26 @@
 						<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
 					</ul>
 				</div>
-				<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
-				<div ng-if="!isLoading" class="col-md-10 ">
-					<p style="padding-top: 10px;">
+				<div class="col-md-10">
+					<p class="padding-top-10">
 						The LMO-Unique Identifiers (LMO-UIds) Registry provides summary information on all living modified
 						organisms registered in the BCH including transformation events, genetic modifications, and the
 						unique identification code (if available) for each record. Links to all decisions and Risk
 						assessment reports that refer to these organisms are accessible through the registry.
 					</p>
-					<p style="padding-top:10px;border-bottom: 2px solid #cce;padding-bottom: 10px;">
+					<p class="p-borders">
 						The BCH modalities of operation require the BCH to make use of existing 
 						<a href="/database/organisms/uniqueidentifiers/about.shtml">unique identification systems</a>
 						for living modified organisms, as appropriate, to facilitate searching and retrieval of information.
 					</p>
-										
+					<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
+				<div ng-if="!isLoading">						
 					<div class="row">
 						<div class="col-md-9 text-left">
 							<h4><strong>Total records:  <span ng-bind="::numFound" class="text-bold"></span></strong></h4>
 						</div>
 						<div class="col-md-3 text-right">
-							<button class="btn btn-default" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!lmoRecords.length || readyForExport">
+							<button class="btn btn-default export-btn" ng-click="export()" ng-disabled="!lmoRecords.length || readyForExport">
 								<i class="fa fa-table"></i> Export
 							</button>
 						</div>
@@ -52,31 +41,31 @@
 						<table class="table" id="forExport">
 							<thead>
 								<tr>
-									<th style="width: 17%;">Record ID</th>
-									<th style="width: 25%;">Identity & transformation event</th>
-									<th style="width: 18%;">Organism</th>
-									<th style="width: 40%;">Description</th>									
+									<th class="display-18">Record ID</th>
+									<th class="display-25">Identity & transformation event</th>
+									<th class="display-17">Organism</th>
+									<th class="display-40">Description</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr ng-repeat="row in ::lmoRecords">
 									<td class="tableexport-string">
-										<a ng-if="::row.url_ss.length" rel="noopener" href="{{::row.url_ss[0]}}" target="_blank" ><span class="text-uppercase" ng-bind="::row.Record_ID"></span></a>
+										<a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" href="{{::row.url_ss[0]}}">
+											<span class="text-uppercase" ng-bind="::row.recordId"></span>
+										</a>
 									</td>
-									<td>
-										<span ng-bind="::row.Identity"></span><br>
-										<span ng-bind="::row.Transformation_event"></span>
+									<td class="tableexport-string">
+										<span ng-bind="::row.identity"></span><br>
+										<span ng-bind="::row.transformationEvent"></span>
 									</td>
-									<td>
-										<div ng-repeat="col in ::row.Organism"><div ng-bind="::col"></div></div>
-									</td>
-									<td><span ng-bind-html="::row.Description"></span></td>
+									<td class="tableexport-string"><span ng-bind="::row.organism.join(', ')"></span></td>
+									<td class="tableexport-string"></td><span ng-bind-html="::row.description"></span></td>
 									
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					
+				</div>	
 				</div>
 			</div>
 		</div>
