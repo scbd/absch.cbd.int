@@ -9,7 +9,7 @@ function($scope,searchService,$element,$timeout, toastr, $log) {
 		var searchQuery = {
 			fields:  'recordId:uniqueIdentifier_s,name:name_s,trait:summary_t,donorOrganism:geneDonorOrganism,geneFunction:biologicalFunction_EN_t,url_ss',
 			query:  'schema_s:dnaSequence',
-			rowsPerPage: 10
+			rowsPerPage: 10000
 			
 		};
 			return searchService.list(searchQuery)
