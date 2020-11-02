@@ -29,3 +29,5 @@ jobs:
           MERGE_METHOD: "squash"
           MERGE_COMMIT_MESSAGE: "pull-request-title"
           MERGE_COMMIT_MESSAGE_REGEX: "(.*?)(?:-?(DEVDESK|bDevdesk|devdesk)-\\d+)"
+          UPDATE_LABELS: ""
+          UPDATE_METHOD: "rebase"
