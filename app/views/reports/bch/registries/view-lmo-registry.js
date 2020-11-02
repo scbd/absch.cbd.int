@@ -9,7 +9,7 @@ define(['app','css!/app/css/registry.css', 'services/search-service'], function(
 				var searchQuery = {
 					fields:  'recordId:uniqueIdentifier_s,identity:identity_s,transformationEvent:transformationEvent_s,organism:lmoCommonNames_EN_txt,description:summary_t,url_ss',
 					query:  'schema_s:modifiedOrganism',
-					rowsPerPage: 1000
+					rowsPerPage: 10000
 					
 				};
 					return searchService.list(searchQuery)
