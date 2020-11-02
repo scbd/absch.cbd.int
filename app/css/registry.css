@@ -1,0 +1,22 @@
+.registry-sections .card-box{
+	min-height: 240px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+.tableexport-caption{
+	display: none;       
+}
+.registry-details thead th {background-color: #f5f5f5;color: #333;}
+.registry-details .export-btn{margin-right: 5px; margin-bottom: 5px;}
+.registry-details .list-group-item{margin-bottom: 5px;}
+.registry-details .list-group-item:first-child{color: #ffffff;}
+.registry-details .p-borders{padding-top:10px;border-bottom: 2px solid #eee;padding-bottom:10px;}
+.registry-details .display-15 {width: 15%;}
+.registry-details .display-15 {width: 15%;}
+.registry-details .display-45 {width: 45%;}
+.registry-details .display-17 {width: 17%;}
+.registry-details .display-18 {width: 18%;}
+.registry-details .display-25 {width: 25%;}
+.registry-details .display-50 {width: 40%;}
