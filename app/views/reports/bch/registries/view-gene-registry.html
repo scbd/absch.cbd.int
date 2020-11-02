@@ -1,77 +1,63 @@
-<style>
-	.tableexport-caption{
-		display: none;       
-	}
-	thead th {
-	background-color: #f5f5f5;
-	color: #333;
-	}
-	.list-group-item{margin-bottom: 5px;}
-	.list-group-item:first-child{color: #ffffff;}
-</style>
 <div ng-controller="geneRegistryController">
 	<div class="container-fluid">
-		<div class="panel panel-default">
+		<div class="panel panel-default registry-details">
 			<div class="panel-heading">
 				<h2>Gene and DNA Sequence Registry</h2>
 			</div>
-		<div class="row">
-			<div class="col-md-2 padding-right-2">
-				<ul class="list-group">
-					<li class="list-group-item bg-darkgrey"><b>Registries</b></li>
-					<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry</a></li>
-					<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
-					<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
-				</ul>
-			</div>
-			<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
-			<div ng-if="!isLoading" class="col-md-10 padding-left-2">
-					<p style="padding-top:10px;border-bottom: 2px solid #cce;padding-bottom: 10px;">
+			<div class="row">
+				<div class="col-md-2 padding-right-2"> 
+					<ul class="list-group">
+						<li class="list-group-item  bg-darkgrey"><b>Registries</b></li>
+						<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry</a></li>
+						<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
+						<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
+					</ul>
+				</div>
+				<div class="col-md-10 ">
+					<p class="p-borders padding-top-10">
 						The BCH Gene Registry provides summary information on gene inserts and characteristics
 						of the genetic modifications of the LMOs registered in the BCH.
 					</p>
+					<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
+				<div ng-if="!isLoading">						
 					<div class="row">
 						<div class="col-md-9 text-left">
 							<h4><strong>Total records:  <span ng-bind="::numFound" class="text-bold"></span></strong></h4>
 						</div>
 						<div class="col-md-3 text-right">
-							<button class="btn btn-default" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!lmoRecords.length || readyForExport">
+							<button class="btn btn-default" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!geneRecords.length || readyForExport">
 								<i class="fa fa-table"></i> Export
-							</button>
+							</button> 
 						</div>
 					</div>
 					<div>
-						
 						<table class="table" id="forExport">
 							<thead>
 								<tr>
-									<th style="width: 15%;">Record ID</th>
-									<th style="width: 15%;">Name</th>
-									<th style="width: 15%;">Trait(s)</th>
-									<th style="width: 15%;">Donor organism</th>	
-									<th style="width: 20%;">Function</th>									
+									<th class="display-15">Record ID</th>
+									<th class="display-15">Name</th>
+									<th class="display-15">Trait(s)</th>
+									<th class="display-15">Donor organism</th>
+									<th class="display-15">Function</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr ng-repeat="row in ::geneRecords">
 									<td class="tableexport-string">
-										<a ng-if="::row.url_ss.length" rel="noopener" href="{{::row.url_ss[0]}}" target="_blank" ><span class="text-uppercase" ng-bind="::row.Record_ID"></span></a>
+										<a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" href="{{::row.url_ss[0]}}">
+											<span class="text-uppercase" ng-bind="::row.recordId"></span>
+										</a>
 									</td>
-									<td>
-										<span ng-bind="::row.Name"></span>
-									</td>
-									<td>
-										<span ng-bind="::row.Trait"></span>
-									</td>
-									<td>
-										<div ng-repeat="col in ::row.Donor_organism"><div ng-bind="::col"></div></div>
-									</td>
-									<td><span ng-bind-html="::row.geneFunction"></span></td>
+									<td class="tableexport-string"><span ng-bind="::row.name"></span></td>
+									<td class="tableexport-string"><span ng-bind="::row.trait"></span></td>
+									<td class="tableexport-string"><span ng-bind="::row.donorOrganism.join(', ')"></span></td>
+									<td class="tableexport-string"><span ng-bind="::row.geneFunction"></span></td>
 									
 								</tr>
 							</tbody>
 						</table>
 					</div>
+				</div>	
 				</div>
 			</div>
 		</div>

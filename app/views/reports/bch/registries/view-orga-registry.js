@@ -1,13 +1,13 @@
-define(['app', 'services/search-service'], function(app) { 'use strict';
+define(['app', 'css!/app/css/registry.css','services/search-service'], function(app) { 'use strict';
 
-	app.controller("orgaRegistryController", ['$scope','searchService','$element', '$timeout',
-		function($scope,searchService,$element,$timeout) { 
+	app.controller("orgaRegistryController", ['$scope','searchService','$element', '$timeout', 'toastr', '$log',
+		function($scope,searchService,$element,$timeout, toastr, $log) { 
 				$scope.isLoading = false;
 				loadRecords();
 				function loadRecords(){ 
 					$scope.isLoading = true;
 				var searchQuery = {
-					fields:  'Record_ID:uniqueIdentifier_s,Identity:identity_s,Taxonomic_status:title_s,Common_name:commonNames_EN_txt,Description:relevantInformation_EN_t,url_ss',
+					fields:  'recordId:uniqueIdentifier_s,identity:identity_s,taxonomicStatus:title_s,commonName:commonNames_EN_txt,description:relevantInformation_EN_t,url_ss',
 					query:  'schema_s:organism',
 					rowsPerPage: 10000
 					
@@ -20,9 +20,19 @@ define(['app', 'services/search-service'], function(app) { 'use strict';
 							$scope.orgaRecords = result.data.response.docs;
 							$scope.numFound = result.data.response.numFound;
 						}
-						$scope.isLoading = false;
 					  }) 
-					  
+					.catch(function(e){
+						toastr.error('There was an error running search query.')
+						var exception = {
+							data    :  e.data||e.message, status:e.status,
+							url     : (e.config||{}).url, params: (e.config||{}).params,
+							stack   : e.stack
+						}                                
+						$log.error(JSON.stringify(exception))
+					})
+					.finally(function(){
+                        $scope.isLoading = false;
+                    })	  
 			}
 			$scope.export = function () {
 				$scope.dataToExport = $scope.data;
