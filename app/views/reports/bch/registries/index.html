@@ -1,40 +1,29 @@
-<style>
-	.card-box{
-		min-height: 240px;
-		border-top: 1px solid #ccc;
-		border-bottom: 1px solid #ccc;
-		padding-bottom: 10px;
-		padding-top: 10px;
-	}
-</style>
 <div ng-controller="registryReportController">
-	<link href="/app/css/register.css" rel="stylesheet">
-	<link href="/app/css/record.css" rel="stylesheet">
-	<span register-top-menu></span>
+	<span register-top-menu style="margin-bottom: 5px"></span>
 	<div class="register-content card card-1-notrans">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3>Registries</h3>
 			</div>
-			<div class="container-fluid bg-white">
+			<div class="container-fluid bg-white registry-sections">
 				<div class="row" style="padding-top:10px">
 
 					<div class="col-md-4">
 						<ul class="list-group ">
 							<li class="list-group-item">
-								<h4><strong>Modified Organism (LMO) Registry <span class="badge pull-right" ng-bind="::modifiedOrganismRecords"></span></strong></h4>
+								<h4><strong>Modified Organism (LMO) Registry <span class="badge pull-right" ng-bind="::count.modifiedOrganism"></span></strong></h4>
 								<p class="card-box">The LMO-Unique Identifiers (LMO-UIds) Registry provides summary information on all
 									living modified organisms registered in the BCH including transformation events,
 									genetic modifications, and the unique identification code (if available) for each
 									record. Links to all decisions and Risk assessment reports that refer to these
 									organisms are accessible through the registry.
 									The BCH modalities of operation require the BCH to make use of existing 
-									<a href="/database/organisms/uniqueidentifiers/about.shtml">unique identification systems</a> 
+									<a rel="noopener" translation-url href="/database/organisms/uniqueidentifiers/about.shtml">unique identification systems</a> 
 									for living modified organisms, as appropriate, to facilitate
 									searching and retrieval of information.
 								</p>
 								<div>
- 								<a class="btn btn-default" href="/registries/living-modified-organisms" role="button">View registry </a>
+									<a rel="noopener" translation-url class="btn btn-default" href="/registries/living-modified-organisms" role="button">View registry </a>
 								</div>
 							</li>
 						</ul>
@@ -43,7 +32,7 @@
 					<div class="col-md-4">
 						<ul class="list-group ">
 							<li class="list-group-item">
-								<h4><strong>Organism Registry <span class="badge pull-right" ng-bind="::organismRecords"> </span></strong></h4>
+								<h4><strong>Organism Registry <span class="badge pull-right" ng-bind="::count.organism"> </span></strong></h4>
 								<p class="card-box">The BCH Organisms Registry includes those organisms that have been registered with
 									the BCH as parental, recipient or donor organisms. Each record provides further
 									information about relevant biological characteristics, including information on
@@ -52,7 +41,7 @@
 									individual record.
 								</p>
 								<div>
-								 <a class="btn btn-default" href="/registries/organisms" role="button">View registry</a>
+									<a rel="noopener" translation-url class="btn btn-default" href="/registries/organisms" role="button">View registry</a>
 								</div>
 							</li>
 						</ul>
@@ -60,12 +49,12 @@
 					<div class="col-md-4">
 						<ul class="list-group ">
 							<li class="list-group-item">
-								<h4><strong>Gene and DNA Sequence Registry <span class="badge pull-right" ng-bind="::dnaSequenceRecords"> </span></strong></h4>
+								<h4><strong>Gene and DNA Sequence Registry <span class="badge pull-right" ng-bind="::count.dnaSequence"> </span></strong></h4>
 								<p class="card-box">The BCH Gene Registry provides summary information on gene inserts and characteristics of the
 								genetic modifications of the LMOs registered in the BCH.
 								</p>
 								<div>
-								<a class="btn btn-default" href="/registries/genetic-elements" role="button">View registry</a>
+									<a rel="noopener" translation-url class="btn btn-default" href="/registries/genetic-elements" role="button">View registry</a>
 								</div>
 							</li>
 						</ul>
