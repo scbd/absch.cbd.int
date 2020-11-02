@@ -44,6 +44,12 @@
             .xs-padding {
                 padding-right: 5px!important;
             }
+            .search.dropdown-menu {
+                margin-top: 5px !important;
+                position: absolute !important;
+                background-color: #ffff !important;
+            }
+            .search.dropdown-menu li{ color: #333 !important;}
         }
     </style>
     <nav class="navbar navbar-links navbar-default navbar-static-top" style="margin-bottom:0px;">
@@ -70,16 +76,16 @@
                             <i class="icon fa fa-book visible-xs"></i><span class="hidden-xs">Protocol</span>
                         </a>
                     </li>
-                     <li hover-effect=".dropdown-menu">
-                      <a rel="noopener" href="#" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
-                        ng-click="activeMenu='search'" ng-class="{'active-menu' : activeMenu == 'search'}" class="xs-padding">
-                            <span class="hidden-xs ">Search <span class="caret"></span></span>
-                        </a>
-                        <ul class="dropdown-menu"  style="border:0;margin-top:5px;">
-                            <li><a rel="noopener" translation-url ng-href="search" ng-click="activeMenu='search'""> Search </a></li>
-                            <li> <a rel="noopener" translation-url ng-href="/registries">Registries</a></li>
-                        </ul>
-                    </li>
+                    <li hover-effect=".dropdown-menu">
+                        <a rel="noopener" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                          ng-click="activeMenu='search'" ng-class="{'active-menu' : activeMenu == 'search'}" class="xs-padding">
+                            <i class="icon fa fa-search visible-xs "></i><span class="hidden-xs ">Search <span class="caret"></span></span>
+                          </a>
+                          <ul class="search dropdown-menu"  style="border:0;margin-top:5px;">
+                              <li><a rel="noopener" translation-url ng-href="search" ng-click="activeMenu='search'"> Search </a></li>
+                              <li> <a rel="noopener" translation-url ng-href="/registries">Registries</a></li>
+                          </ul>
+                      </li>
                     <li>
                         <a rel="noopener" translation-url  ng-href="register"  ng-click="activeMenu='submit'"
                          ng-class="{'active-menu' : activeMenu == 'submit'}" class="xs-padding"> <i class="icon fa fa-edit visible-xs"></i>
