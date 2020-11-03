@@ -41,9 +41,9 @@ function($scope,searchService,$element,$timeout, $rootScope, $log) {
 					filename: 'LMO-registry',
 				});
 				$element.find('.xlsx').click();
-				$timeout(function () {
+				$scope.$applyAsync(function () {
 					$scope.readyForExport = false;
-				}, 200)
+				})
 			});
 		}
 
