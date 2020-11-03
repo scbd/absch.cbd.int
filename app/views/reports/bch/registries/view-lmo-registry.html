@@ -4,70 +4,74 @@
 			<div class="panel-heading">
 				<h2>Living Modified Organism (LMO) Registry</h2>
 			</div>
-			<div class="row">
-				<div class="col-md-2 padding-right-2"> 
-					<ul class="list-group">
-						<li class="list-group-item  bg-darkgrey"><b>Registries</b></li>
-						<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry</a></li>
-						<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
-						<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
-					</ul>
-				</div>
-				<div class="col-md-10">
-					<p class="padding-top-10">
-						The LMO-Unique Identifiers (LMO-UIds) Registry provides summary information on all living modified
-						organisms registered in the BCH including transformation events, genetic modifications, and the
-						unique identification code (if available) for each record. Links to all decisions and Risk
-						assessment reports that refer to these organisms are accessible through the registry.
-					</p>
-					<p class="p-borders">
-						The BCH modalities of operation require the BCH to make use of existing 
-						<a href="https://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml">unique identification systems</a>
-						for living modified organisms, as appropriate, to facilitate searching and retrieval of information.
-					</p>
-					<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
-					<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> Error loading registry records, please try again.</h3></div>
-				<div ng-if="!isLoading && !isError">
-											
-					<div class="row">
-						<div class="col-md-9 text-left">
-							<h4><strong>Total records:  <span ng-bind="::numFound" class="text-bold"></span></strong></h4>
-						</div>
-						<div class="col-md-3 text-right">
-							<button class="btn btn-default export-btn" ng-click="export()" ng-disabled="!lmoRecords.length || readyForExport">
-								<i class="fa fa-table"></i> Export
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-2 col-xs-12"> 
+						<div ng-class="{'btn-group':deviceSize=='xs'}" style="width:100%;">
+							<button ng-if="deviceSize=='xs'" type="button"  style="width:100%;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="fa fa-bars"></i> Registries <span class="caret"></span>
 							</button>
+							<ul class="list-group" ng-class="{'dropdown-menu':deviceSize=='xs'}">
+								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>Registries</b></li>
+								<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
+							</ul>
 						</div>
 					</div>
-					<div>
-						<table class="table" id="forExport">
-							<thead>
-								<tr>
-									<th class="display-18">Record ID</th>
-									<th class="display-25">Identity & transformation event</th>
-									<th class="display-17">Organism</th>
-									<th class="display-40">Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="row in ::lmoRecords">
-									<td class="tableexport-string">
-										<a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}">
-											<span class="text-uppercase" ng-bind="::row.recordId"></span>
-										</a>
-									</td>
-									<td class="tableexport-string">
-										<span ng-bind="::row.identity"></span><br>
-										<span ng-bind="::row.transformationEvent"></span>
-									</td>
-									<td class="tableexport-string"><span ng-bind="::row.organism.join(', ')"></span></td>
-									<td class="tableexport-string"></td><span ng-bind-html="::row.description"></span></td>
-									
-								</tr>
-							</tbody>
-						</table>
+					<div class="col-md-10  col-xs-12">
+						<p class="padding-top-10">
+							The LMO-Unique Identifiers (LMO-UIds) Registry provides summary information on all living modified
+							organisms registered in the BCH including transformation events, genetic modifications, and the
+							unique identification code (if available) for each record. Links to all decisions and Risk
+							assessment reports that refer to these organisms are accessible through the registry.
+						</p>
+						<p class="p-borders">
+							The BCH modalities of operation require the BCH to make use of existing 
+							<a href="https://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml">unique identification systems</a>
+							for living modified organisms, as appropriate, to facilitate searching and retrieval of information.
+						</p>
+						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
+						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> Error loading registry records, please try again.</h3></div>
+						<div ng-if="!isLoading && !isError">						
+						<div class="row">
+							<div class="col-md-12">
+								<strong>Total records:  <span ng-bind="::numFound" class="text-bold"></span></strong>							
+								<button class="btn btn-default pull-right" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!lmoRecords.length || readyForExport">
+									<i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> Export
+								</button>
+							</div>
+						</div>
+						<div>
+							<table class="table" id="forExport">
+								<thead>
+									<tr>
+										<th class="display-18">Record ID</th>
+										<th class="display-25">Identity & transformation event</th>
+										<th class="display-17 hidden-xs">Organism</th>
+										<th class="display-40 hidden-xs">Description</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="row in ::lmoRecords">
+										<td class="tableexport-string">
+											<a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}">
+												<span class="text-uppercase" ng-bind="::row.recordId"></span>
+											</a>
+										</td>
+										<td class="tableexport-string">
+											<span ng-bind="::row.identity"></span><br>
+											<span ng-bind="::row.transformationEvent"></span>
+										</td>
+										<td class="tableexport-string hidden-xs"><span ng-bind="::row.organism.join(', ')"></span></td>
+										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.description"></span></td>
+										
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>	
 					</div>
-				</div>	
 				</div>
 			</div>
 		</div>

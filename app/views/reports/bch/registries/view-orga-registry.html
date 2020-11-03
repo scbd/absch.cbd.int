@@ -4,63 +4,68 @@
 			<div class="panel-heading">
 				<h2>Organism Registry</h2>
 			</div>
-		<div class="row">
-			<div class="col-md-2 padding-right-2">
-				<ul class="list-group">
-					<li class="list-group-item bg-darkgrey"><b>Registries</b></li>
-					<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry</a></li>
-					<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
-					<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
-				</ul>
-			</div>
-			<div class="col-md-10">
-				<p class="p-borders padding-top-10">
-					The BCH Organisms Registry includes those organisms that have been registered with the BCH as parental, recipient or donor organisms.
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-2 col-xs-12"> 
+						<div ng-class="{'btn-group':deviceSize=='xs'}" style="width:100%;">
+							<button ng-if="deviceSize=='xs'" type="button"  style="width:100%;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="fa fa-bars"></i> Registries <span class="caret"></span>
+							</button>
+							<ul class="list-group" ng-class="{'dropdown-menu':deviceSize=='xs'}">
+								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>Registries</b></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry</a></li>
+								<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-10  col-xs-12">
+						<p class="p-borders padding-top-10">
+							The BCH Organisms Registry includes those organisms that have been registered with the BCH as parental, recipient or donor organisms.
 					 Each record provides further information about relevant biological characteristics, including information on taxonomic status, 
 					 common name, origin, centre of origin and centre of genetic diversity. 
 					Links to relevant LMO records are provided at the bottom of each individual record.
-				</p>
-				<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
-				<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> Error loading registry records, please try again.</h3></div>
-				<div ng-if="!isLoading && !isError">
-				<div class="row">
-					<div class="col-md-9 text-left">
-						<h4><strong>Total records:  <span ng-bind="::numFound" class="text-bold"></span></strong></h4>
-					</div>
-					<div class="col-md-3 text-right">
-						<button class="btn btn-default export-btn" ng-click="export()" ng-disabled="!orgaRecords.length || readyForExport">
-							<i class="fa fa-table"></i> Export
-						</button>
+						</p>
+						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
+						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> Error loading registry records, please try again.</h3></div>
+						<div ng-if="!isLoading && !isError">						
+						<div class="row">
+							<div class="col-md-12">
+								<strong>Total records:  <span ng-bind="::numFound" class="text-bold"></span></strong>							
+								<button class="btn btn-default pull-right" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!orgaRecords.length || readyForExport">
+									<i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> Export
+								</button>
+							</div>
+						</div>
+						<div>
+							<table class="table" id="forExport">
+								<thead>
+									<tr>
+										<th class="display-18">Record ID</th>
+										<th class="display-20">Taxonomic status</th>
+										<th class="display-17 hidden-xs">Common name</th>
+										<th class="display-45 hidden-xs">Description</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="row in ::orgaRecords">
+										<td class="tableexport-string">
+											<a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}">
+												<span class="text-uppercase" ng-bind="::row.recordId"></span>
+											</a>
+										</td>
+										<td class="tableexport-string"><span ng-bind="::row.taxonomicStatus"></span></td>
+										<td class="tableexport-string hidden-xs"><span ng-bind="::row.commonName.join(', ')"></span></td>
+										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.description"></span></td>
+										
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>	
 					</div>
 				</div>
-				<div>
-					<table class="table" id="forExport">     
-						<thead>
-							<tr>
-								<th class="display-18">Record ID</th>
-								<th class="display-20">Taxonomic status</th>
-								<th class="display-17">Common name</th>
-								<th class="display-45">Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="row in ::orgaRecords">
-								<td class="tableexport-string">
-									<a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}">
-										<span class="text-uppercase" ng-bind="::row.recordId"></span>
-									</a>
-								</td>
-								<td class="tableexport-string"><span ng-bind="::row.taxonomicStatus"></span></td>
-								<td class="tableexport-string"><span ng-bind="::row.commonName.join(', ')"></span></td>
-								<td class="tableexport-string"><span ng-bind="::row.description"></span></td>
-								
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </div>
