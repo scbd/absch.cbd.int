@@ -22,3 +22,11 @@
 .registry-details .display-25 {width: 25%;}
 .registry-details .display-40 {width: 40%;}
 .registry-details .display-45 {width: 45%;}
+.registry-details .truncate-description {
+	overflow: hidden;
+	max-height: 8em;
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	
+}
