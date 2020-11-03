@@ -37,8 +37,6 @@
       if (!document)
         return undefined;
 
-      document = angular.fromJson(angular.toJson(document));
-
       if (/^\s*$/g.test(document.notes))
         document.notes = undefined;
 
