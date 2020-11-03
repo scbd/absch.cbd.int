@@ -13,7 +13,6 @@
 .registry-details .list-group{margin: 10px 0px 0px 10px;}
 .registry-details .list-group-item.active {background-color: #bbb; border-color: #bbb;}
 .registry-details .list-group-item.active a{color: #ffffff;}
-.registry-details .list-group-item{margin-bottom: 5px;}
 .registry-details .list-group-item:first-child{color: #ffffff;}
 .registry-details .p-borders{padding-top:10px;border-bottom: 2px solid #eee;padding-bottom:10px;}
 .registry-details .display-15 {width: 15%;}

@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'css!/app/css/registry.css', 'services/search-service', 'js/common', 'views/register/directives/register-top-menu', 'services/solr',
+define(['app', 'lodash', 'css!/app/css/registry.css', 'services/search-service', 'js/common', 'services/solr',
 		'./index'], function(app, _) { 'use strict';
 
 		app.controller("registryReportController", ['$scope', 'searchService', 'toastr', '$log', 'solr',
