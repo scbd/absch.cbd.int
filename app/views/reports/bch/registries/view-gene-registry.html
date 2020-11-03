@@ -39,11 +39,11 @@
 							<table class="table" id="forExport">
 								<thead>
 									<tr>
-										<th class="display-15">Record ID</th>
-										<th class="display-15">Name</th>
-										<th class="display-15 hidden-xs">Trait(s)</th>
+										<th class="display-17">Record ID</th>
+										<th class="display-18">Name</th>
+										<th class="display-25 hidden-xs">Trait(s)</th>
 										<th class="display-15 hidden-xs">Donor organism</th>
-										<th class="display-15 hidden-xs">Function</th>
+										<th class="display-25 hidden-xs">Function</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -56,7 +56,7 @@
 										<td class="tableexport-string"><span ng-bind="::row.name"></span></td>
 										<td class="tableexport-string hidden-xs"><span ng-bind="::row.trait"></span></td>
 										<td class="tableexport-string hidden-xs"><span ng-bind="::row.donorOrganism.join(', ')"></span></td>
-										<td class="tableexport-string hidden-xs"><span ng-bind="::row.geneFunction"></span></td>
+										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.geneFunction"></span></td>
 										
 									</tr>
 								</tbody>
