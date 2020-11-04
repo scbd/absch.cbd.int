@@ -76,7 +76,7 @@
 		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
 			<label>Address of Contact</label>
 			<address class="km-value">
-				<div class="km-pre" ng-bind-html="document.address | lstring:locale"></div>
+				<div class="km-pre" ng-bind="document.address | lstring:locale"></div>
 				<span ng-bind="document.city | lstring:locale"></span><span ng-show="document.city">,</span><span ng-bind="document.state | lstring:locale"></span>
 				<br ng-show="document.city || document.state" />
 				<span ng-bind="document.postalCode | lstring:locale"></span><span ng-show="document.postalCode">, </span><b ng-bind="document.country|term:locale"></b>
