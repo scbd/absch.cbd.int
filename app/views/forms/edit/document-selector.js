@@ -331,7 +331,10 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
                 return $q.when(searchOperation)
                     .then(function(data) {
-                       $scope.rawDocuments = $scope.onRecordsFetched({data:data.data.response})||data.data.response;
+                       if(!$scope.onRecordsFetched) 
+                            $scope.rawDocuments = data.data.response;
+                       else 
+                            $scope.rawDocuments = $scope.onRecordsFetched({data:data.data.response})||data.data.response;
 
                        $scope.rawDocuments.pageCount = Math.ceil($scope.rawDocuments.numFound / $scope.searchResult.rowsPerPage)
                        

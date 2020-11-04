@@ -138,7 +138,8 @@ define(['app', 'services/cache-service'], function (app) {
                 unLanguages                   : '52AFC0EE-7A02-4EFA-9277-8B6C327CE21F',
                 nationalities                 : 'Nationalities',
                 genders                       : 'Genders',
-                areasOfExpertise              : 'E4D79BA6-12F8-48D5-B396-25951FA1E07E'
+                areasOfExpertise              : 'E4D79BA6-12F8-48D5-B396-25951FA1E07E',
+                cpbThematicAreas              : '043C7F0D-2226-4E54-A56F-EE0B74CCC984'
             }
         }
     }]);
