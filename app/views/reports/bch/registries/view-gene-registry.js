@@ -1,6 +1,6 @@
 define(['app','css!/app/css/registry.css','services/search-service'], function(app) { 'use strict';
 
-app.controller("geneRegistryController", ['$scope','searchService','$element', '$rootScope',
+return ['$scope','searchService','$element', '$rootScope',
 function($scope,searchService,$element, $rootScope) {  
 		$scope.isLoading = false;
 		$scope.isError = false;
@@ -48,6 +48,6 @@ function($scope,searchService,$element, $rootScope) {
 		}
 
 		loadRecords();
-}]);
+}];
 
 });
