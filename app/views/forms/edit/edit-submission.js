@@ -13,20 +13,12 @@
     $controller('editController', {$scope: $scope});
 
     _.extend($scope.options, {  
-        bchThematicAreas: function () {
-            return $http.get("/api/v2013/thesaurus/domains/043C7F0D-2226-4E54-A56F-EE0B74CCC984/terms", {
-                cache: true
-            }).then(function (o) {
-                return o.data;
-            });
+        bchThematicAreas: function() {
+            return thesaurusService.getDomainTerms('cpbThematicAreas');
         },
-        absThematicAreas: function () {
-            return $http.get("/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms", {
-                cache: true
-            }).then(function (o) {
-                return o.data;
-            });
-        }
+        absThematicAreas: function() {
+            return thesaurusService.getDomainTerms('absSubjects');
+        },
     });
 
     //==================================
