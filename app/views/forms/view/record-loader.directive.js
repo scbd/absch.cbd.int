@@ -90,7 +90,8 @@
 						organism	 				: 'views/forms/view/bch/view-organism.directive',
 						laboratoryDetection	 		: 'views/forms/view/bch/view-laboratory-detection.directive',
 						biosafetyExpert		 		: 'views/forms/view/bch/view-biosafety-expert.directive',
-						countryProfile		 		: 'views/forms/view/bch/view-country-profile.directive'
+						countryProfile		 		: 'views/forms/view/bch/view-country-profile.directive',
+						submission	 				: 'views/forms/view/view-submission.directive',
 					}
 
 					$scope.$watch("document", function (_new) {
