@@ -339,11 +339,23 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                        $scope.rawDocuments.pageCount = Math.ceil($scope.rawDocuments.numFound / $scope.searchResult.rowsPerPage)
                        
                        _.each($scope.rawDocuments.docs, function(doc){
-                           //incase if the directive receives fl list from view, convert _txt to string 
-                           _.each(doc, function(val, key){
-                                if(_.isArray(val)) 
-                                    doc[key] = val.join(', ');
-                            })
+                           //convert meta fields to [] if it is of type string
+                            
+                           if(doc.rec_meta1 || doc.rec_meta2 || doc.rec_meta3){
+                               if(_.isString(doc.rec_meta1))
+                                    doc.rec_meta1 = [doc.rec_meta1];
+                                if(_.isString(doc.rec_meta2))
+                                    doc.rec_meta2 = [doc.rec_meta2];
+                                if(_.isString(doc.rec_meta3))
+                                    doc.rec_meta3 = [doc.rec_meta3];
+                           }
+                           else{
+                                //incase if the directive receives fl list from view, convert _txt to string 
+                                _.each(doc, function(val, key){
+                                    if(_.isArray(val)) 
+                                        doc[key] = val.join(', ');
+                                })
+                            }
                             return doc;
                        });
                        
