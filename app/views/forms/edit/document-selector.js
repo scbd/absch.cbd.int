@@ -27,7 +27,8 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
             type     : "@type",
             filter : "@filter",
             hideSelf : "=hideSelf",
-            query    : "="
+            query    : "=",
+            onRecordsFetched    : '&?'
 		},
 		link : function($scope, $element, $attr, ngModelController) {
             var dialogId;
@@ -322,7 +323,8 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
                 return $q.when(searchOperation)
                     .then(function(data) {
-                       $scope.rawDocuments = data.data.response;
+                       $scope.rawDocuments = $scope.onRecordsFetched({data:data.data.response})||data.data.response;
+
                        $scope.rawDocuments.pageCount = Math.ceil($scope.rawDocuments.numFound / $scope.searchResult.rowsPerPage)
                        
                        var selectedRecords = _($scope.tempSelectedDocuments||[])
