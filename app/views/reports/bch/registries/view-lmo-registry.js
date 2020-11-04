@@ -1,7 +1,7 @@
 define(['app','css!/app/css/registry.css','services/search-service'], function(app) { 'use strict';
 
-app.controller("lmoRegistryController", ['$scope','searchService','$element', '$timeout', '$rootScope', '$log',
-function($scope,searchService,$element,$timeout, $rootScope, $log) { 
+app.controller("lmoRegistryController", ['$scope','searchService','$element', '$rootScope',
+function($scope,searchService,$element, $rootScope) { 
 		$scope.isLoading = false;
 		$scope.isError = false;
 		$scope.deviceSize = $rootScope.deviceSize;
