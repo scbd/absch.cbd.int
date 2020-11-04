@@ -1,7 +1,7 @@
 define(['app', 'lodash', 'css!/app/css/registry.css', 'services/search-service', 'js/common', 'services/solr',
 		'./index'], function(app, _) { 'use strict';
 
-		app.controller("registryReportController", ['$scope', 'searchService', 'toastr', '$log', 'solr',
+	return ['$scope', 'searchService', 'toastr', '$log', 'solr',
 			function ($scope, searchService, toastr, $log, solr) {
 				var schemas = ["organism", "modifiedOrganism", "dnaSequence"];
 				
@@ -21,6 +21,6 @@ define(['app', 'lodash', 'css!/app/css/registry.css', 'services/search-service',
        					 throw e;
 					})
 				}
-			}]);
+		}];
 
 	});

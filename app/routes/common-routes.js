@@ -264,8 +264,8 @@
             route.controller = ['$injector', '$scope', '$route', 'lazyController', function ($injector, $scope, $route, lazyController) {
 
                 if(!lazyController) return;
-
-                var locals = angular.extend({}, $route.current.locals, { $scope: $scope });
+                var $element = angular.element(document).find('ng-view > :first-child');
+                var locals = angular.extend({}, $route.current.locals, { $scope: $scope, $element:$element });
 
                 return $injector.instantiate(lazyController, locals);
             }];
