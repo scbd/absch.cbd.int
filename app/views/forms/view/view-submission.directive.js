@@ -16,14 +16,14 @@
 
                 $scope.$watch("document.notifications", function(newVal, oldVal)
 				{
-					if(newVal){
+					if(newVal!=oldVal){
 						if(~($scope.notifications||[]).length || newVal!=oldVal){
 							var query = {
 								query: "symbol_s:(" + _.map(newVal, 'identifier').map(solr.escape).join(' ') + ')',
 								fields: "identifier_s,title_s,acronym_s,reference_s, symbol_s"
 							};
 							searchService.list(query).then(function(data){
-								$scope.notifications  = data;
+								$scope.notifications  = data.data.response.docs;
 							});
 						}
 					}
