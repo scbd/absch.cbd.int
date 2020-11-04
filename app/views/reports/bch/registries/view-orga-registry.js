@@ -1,7 +1,7 @@
 define(['app','css!/app/css/registry.css','services/search-service'], function(app) { 'use strict';
 
-app.controller("orgaRegistryController", ['$scope','searchService','$element', '$timeout', '$rootScope', '$log',
-function($scope,searchService,$element,$timeout, $rootScope, $log) { 
+app.controller("orgaRegistryController", ['$scope','searchService','$element', '$rootScope',
+function($scope,searchService,$element, $rootScope) { 
 		$scope.isLoading = false;
 		$scope.isError = false;
 		$scope.deviceSize = $rootScope.deviceSize;
@@ -41,7 +41,7 @@ function($scope,searchService,$element,$timeout, $rootScope, $log) {
 					filename: 'ORGA-registry',
 				});
 				$element.find('.xlsx').click();
-				$timeout(function () {
+				$scope.$applyAsync(function () {
 					$scope.readyForExport = false;
 				}, 200)
 			});
