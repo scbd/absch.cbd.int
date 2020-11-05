@@ -24,26 +24,33 @@ function (app, _, template) {
 						
 					return $scope.sanitizeDocument(document);
 				}; 
-				$scope.setDocument({})  
-				checkRecordAlreadyExists();
-				function checkRecordAlreadyExists(){
-					if($routeParams.identifier){ 
-						return;
-					}  
-					var searchQuery  = {
-						fields  : 'identifier_s',
-						query   : 'schema_s:countryProfile AND government_s:' + $scope.userGovernment().toLowerCase() 
-					}; 
-					searchService.list(searchQuery) 
-					.then(function(result) { 
-						if(result.data.response.docs.length){ 
-							var identifier = result.data.response.docs[0].identifier_s;
-							if(identifier){
-							  validateCountryProfileExists(identifier)
-							}
-						  }
-						
+				$scope.onGovernmentChange = function(){
+					if($scope.document.government)
+						checkRecordAlreadyExists($scope.document.government.identifier);
+				}	
+				$scope.setDocument({})
+				.then(function(doc){
+					checkRecordAlreadyExists(doc.government.identifier);
 					});
+				function checkRecordAlreadyExists(government){
+						if($routeParams.identifier){ 
+							return;
+						}  
+						government  = government || $rootScope.user.government;
+						var searchQuery  = {
+							fields  : 'identifier_s',
+							query   : 'schema_s:countryProfile AND government_s:' + government.toLowerCase() 
+						}; 
+						searchService.list(searchQuery) 
+						.then(function(result) { 
+							if(result.data.response.docs.length){ 
+								var identifier = result.data.response.docs[0].identifier_s;
+								if(identifier){
+									validateCountryProfileExists(identifier)
+								}
+							}
+							
+						});
 				}  
 				function validateCountryProfileExists(identifier){ 
 					if (identifier) {
