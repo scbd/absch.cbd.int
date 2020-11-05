@@ -1,5 +1,16 @@
 ﻿<div id="search-new">
-
+    <style>
+        .link1 .label {
+            font-weight: inherit;
+            color: #555;
+        }
+        @media (max-width: 767px){
+            .link1 .label {
+                display: contents;
+            }
+            .link1 .badge{margin-right: -15px;}
+        }
+    </style>
     <div ng-show="!countryRecords" style="padding-left:50%">
         <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" ></i>
     </div>
@@ -16,7 +27,7 @@
             <i class="fa" ng-class="{'fa-plus':!schema.display, 'fa-minus':schema.display}" style="font-size:14px;font-weight:normal;"></i> 
             <span ng-bind="schema.title|lstring:locale"></span> (<span ng-bind="schema.shortCode"></span>)  
             <span class="badge pull-right" ng-class="{'bg-grey3': schema.numFound==0, 'bg-black': schema.numFound > 0}" ng-bind="schema.numFound"></span>
-            <div ng-if="schema.docs[0].rec_date" class="pull-right label color-black" style="font-weight: 300;"> 
+            <div ng-if="schema.docs[0].rec_date" class="pull-right label">
                 Last updated on: <span ng-bind="schema.docs[0].rec_date|formatDate"></span>
             </div>
         </h4>
