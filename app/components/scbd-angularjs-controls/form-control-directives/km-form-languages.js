@@ -1,5 +1,3 @@
-const { bind } = require("lodash");
-
 define(['app', 'text!./km-form-languages.html', 'lodash', './km-select', 'services/thesaurus-service'], function(app, template, _) {
   'use strict';
   //============================================================

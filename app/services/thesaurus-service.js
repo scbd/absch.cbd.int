@@ -139,7 +139,8 @@ define(['app', 'services/cache-service'], function (app) {
                 nationalities                 : 'Nationalities',
                 genders                       : 'Genders',
                 areasOfExpertise              : 'E4D79BA6-12F8-48D5-B396-25951FA1E07E',
-                cpbThematicAreas              : '043C7F0D-2226-4E54-A56F-EE0B74CCC984'
+                cpbThematicAreas              : '043C7F0D-2226-4E54-A56F-EE0B74CCC984',
+                lawJurisdictions              : '7A56954F-7430-4B8B-B733-54B8A5E7FF40' //contains extra term which is in use for abs, need to removed for bch
             }
         }
     }]);
