@@ -1,22 +1,25 @@
-define(['app', 'text!./km-form-languages.html', 'lodash', 'services/thesaurus-service'], function(app, template, _) {
+define(['app', 'text!./km-form-languages.html', 'lodash', './km-select', 'services/thesaurus-service'], function(app, template, _) {
   'use strict';
   //============================================================
   //
   //
   //============================================================
   //TODO: out of date, needs to be updated with current select, or select needs to be updated.
-  app.directive('kmFormLanguages', [ function() {
+  app.directive('kmFormLanguages', ['thesaurusService', '$timeout', function(thesaurusService, $timeout) {
       return {
-          restrict: 'EAC',
+          restrict: 'EA',
           template: template,
           replace: true,
-          transclude: true,
+          require: "ngModel",
           scope: {
               binding: '=ngModel',
           },
-          controller: ["$scope", '$http', 'thesaurusService', function($scope, $http, thesaurusService) {
-            $scope.selectApi = {};
-            var unLanguages = ['ar', 'en', 'fr', 'es', 'ru', 'zh']
+          link:  function($scope, $element, $attr, ngModelController) {
+
+            var unLanguages  = ['ar', 'en', 'fr', 'es', 'ru', 'zh'];
+            $scope.ctrl      = $scope;
+            $scope.multiple  = $attr.multiple=='true' || $attr.multiple==""; // incase if empty is defined
+
             $scope.options = {
                 locales : function(){
                     return thesaurusService.getDomainTerms('unLanguages').then(formatLocales).then(function(locales){
@@ -50,23 +53,36 @@ define(['app', 'text!./km-form-languages.html', 'lodash', 'services/thesaurus-se
             };
 
             $scope.validateUNLanguage = function(){
+                
+                ngModelController.$setViewValue($scope.binding, 'change');
+                
+                if($attr.requireUnLanguage=='false')
+                    return;
                 var unLang = _.map($scope.locales, 'identifier')
-                if(!_.intersection($scope.binding, unLang).length)
+                var selectedLanguage = $scope.binding;
+                if(!$scope.multiple)
+                    selectedLanguage = [selectedLanguage];
+                if(!_.intersection(selectedLanguage, unLang).length)
                     $scope.showLanguageError = true;
                 else
                     $scope.showLanguageError = false;
+                
             }
 
             var bindingWatch = $scope.$watch('binding', function(newVal){
                 if(newVal){
-                    if(_.difference($scope.binding, unLanguages).length){
-                        $scope.selectApi.loadOtherSource();
-                        bindingWatch();
-                    }
+                    $timeout(function(){
+                        var binding = $scope.binding;
+                        if(_.isString(binding))
+                            binding = [binding];
+                        if(_.difference(binding, unLanguages).length){
+                            $scope.selectApi.loadOtherSource();
+                            bindingWatch();
+                        }
+                    }, 500)//delay while the km-select directive is initialized
                 }
-            })
-
-          }]
+            });
+          }
       };
   }]);
 });

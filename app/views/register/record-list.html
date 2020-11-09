@@ -278,7 +278,7 @@
 
                               <div class="row" ng-show="isIRCC"> 
                                    <div class="col-xs-12">
-                                        <div km-form-languages ng-model="recordToDelete.document.header.languages" class="pull-right"></div><br>
+                                        <div km-form-languages multiple ng-model="recordToDelete.document.header.languages" class="pull-right"></div><br>
                                         <div class="km-control-group">
                                             <div class="km-control-group" name="amendmentDescription" required caption="Provide a summary of the reason for revoking this IRCC">
                                             <div km-textbox-ml ng-model="recordToDelete.document.amendmentDescription" rows="3" placeholder="" locales="recordToDelete.document.header.languages" />
