@@ -78,7 +78,6 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
                 if(doc.areasOfWork)
                     $scope.areasOfWork = _.map(doc.areasOfWork, function(t){return { value: t}});                
             });
-            $scope.setDocument({}, true)
 
 		}
 	};

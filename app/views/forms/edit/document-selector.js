@@ -27,7 +27,8 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
             type     : "@type",
             filter : "@filter",
             hideSelf : "=hideSelf",
-            query    : "="
+            query    : "=",
+            onRecordsFetched    : '&?'
 		},
 		link : function($scope, $element, $attr, ngModelController) {
             var dialogId;
@@ -330,15 +331,31 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
                 return $q.when(searchOperation)
                     .then(function(data) {
-                       $scope.rawDocuments = data.data.response;
+                       if(!$scope.onRecordsFetched) 
+                            $scope.rawDocuments = data.data.response;
+                       else 
+                            $scope.rawDocuments = $scope.onRecordsFetched({data:data.data.response})||data.data.response;
+
                        $scope.rawDocuments.pageCount = Math.ceil($scope.rawDocuments.numFound / $scope.searchResult.rowsPerPage)
                        
                        _.each($scope.rawDocuments.docs, function(doc){
-                           //incase if the directive receives fl list from view, convert _txt to string 
-                           _.each(doc, function(val, key){
-                                if(_.isArray(val)) 
-                                    doc[key] = val.join(', ');
-                            })
+                           //convert meta fields to [] if it is of type string
+                            
+                           if(doc.rec_meta1 || doc.rec_meta2 || doc.rec_meta3){
+                               if(_.isString(doc.rec_meta1))
+                                    doc.rec_meta1 = [doc.rec_meta1];
+                                if(_.isString(doc.rec_meta2))
+                                    doc.rec_meta2 = [doc.rec_meta2];
+                                if(_.isString(doc.rec_meta3))
+                                    doc.rec_meta3 = [doc.rec_meta3];
+                           }
+                           else{
+                                //incase if the directive receives fl list from view, convert _txt to string 
+                                _.each(doc, function(val, key){
+                                    if(_.isArray(val)) 
+                                        doc[key] = val.join(', ');
+                                })
+                            }
                             return doc;
                        });
                        

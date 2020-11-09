@@ -76,7 +76,9 @@ define(['app', 'lodash', './app-config-service'], function (app, _) { 'use stric
 			}
 
 			function isSchemaUser(schema, schemaType){
-				return isPublishingAuthority(schema, schemaType) || isNationalAuthorizedUser(schema, schemaType) || isNationalFocalPoint();
+				return 	isPublishingAuthority(schema, schemaType) || 
+						isNationalAuthorizedUser(schema, schemaType) || 
+						(isNationalFocalPoint() && realm.schemas[schema].type=='national');
 			}
 		}
 

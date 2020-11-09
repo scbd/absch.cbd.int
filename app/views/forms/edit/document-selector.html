@@ -158,9 +158,9 @@
                                         <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank">{{doc.uniqueIdentifier_s}}</a></td>
                                         <td class="summary"> {{doc.rec_summary | limitTo:20 }}</td>
                                         <td class="meta"  data-title="doc.rec_summary"> 
-                                            <span ng-repeat="meta in doc.rec_meta1">{{meta}}{{$last ? '':', '}}</span>
-                                            <span ng-repeat="meta1 in doc.rec_meta2">, {{meta1}}</span>
-                                            <span ng-repeat="meta2 in doc.rec_meta3">, {{meta2}}</span>
+                                            <span ng-repeat="meta  in doc.rec_meta1 track by $index"  >{{meta}}{{$last ? '':', '}}</span>
+                                            <span ng-repeat="meta1 in doc.rec_meta2 track by $index">, {{meta1}}</span>
+                                            <span ng-repeat="meta2 in doc.rec_meta3 track by $index">, {{meta2}}</span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -272,9 +272,9 @@
                         <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank">{{doc.uniqueIdentifier_s}}</a></td>
                         <td class="summary" data-title="doc.rec_summary"> {{doc.rec_summary | limitTo:20 }}</td>
                         <td class="meta"> 
-                            <span ng-repeat="meta in doc.rec_meta1">{{meta}}{{$last ? '':', '}}</span>
-                            <span ng-repeat="meta1 in doc.rec_meta2">, {{meta1}}</span>
-                            <span ng-repeat="meta2 in doc.rec_meta3">, {{meta2}}</span>
+                            <span ng-repeat="meta in doc.rec_meta1  track by $index">{{meta}}{{$last ? '':', '}}</span>
+                            <span ng-repeat="meta1 in doc.rec_meta2 track by $index">, {{meta1}}</span>
+                            <span ng-repeat="meta2 in doc.rec_meta3 track by $index">, {{meta2}}</span>
                         </td>
                     </tr>
                 </tbody>

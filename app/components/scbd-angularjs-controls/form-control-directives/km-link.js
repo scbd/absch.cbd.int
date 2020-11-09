@@ -1,4 +1,6 @@
-define(['app', 'angular', 'jquery', 'text!./km-link.html','lodash'], function(app, angular, $, template,_) { 'use strict';
+define(['app', 'angular', 'jquery', 'text!./km-link.html', 'lodash', './km-form-languages'], 
+function(app, angular, $, template,_) { 'use strict';
+
 //============================================================
 //
 //
@@ -62,7 +64,7 @@ app.directive('kmLink', ['IStorage', function (storage)
 					if(_new!=_old && !_new) $element.find("#editFile,#editLink").modal("hide");
 				});
 			},
-			controller: ["$scope", function ($scope)
+			controller: ["$scope", "$timeout", function ($scope, $timeout)
 			{
 				$scope.editor = {};
 
@@ -191,7 +193,7 @@ app.directive('kmLink', ['IStorage', function (storage)
 					$scope.editor.name    = link.name;
 					$scope.editor.type    = "link";
 					$scope.editor.tag 	  = link.tag;
-					$scope.editor.language = link.language;
+					$scope.editor.language = link.language||"";
 					$scope.editor.visible = true;
 				};
 				//==============================
@@ -221,7 +223,7 @@ app.directive('kmLink', ['IStorage', function (storage)
 						$scope.editor.visible = true;
 					}
 				};
-
+				
 				//==============================
 				//
 				//==============================
@@ -390,6 +392,10 @@ app.directive('kmLink', ['IStorage', function (storage)
 						this.$apply(fn);
 					}
 				};
+
+				$scope.stringToETerm = function(val){
+					return {identifier:val};
+				}
 
 			}]
 		};

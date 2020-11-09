@@ -20,7 +20,7 @@
                                             <div class="km-control-group" name="languages" required
                                                 caption=" Please select in which language(s) you wish to submit this record:">
                                                 <div class="indent">
-                                                    <div km-form-languages required name="languages"
+                                                    <div km-form-languages multiple required name="languages"
                                                         ng-model="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -52,7 +52,7 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" required name="title" caption="Title">
+                                            <div class="km-control-group" required name="title" caption="Title of the submission">
                                                 <div km-textbox-ml ng-model="document.title" placeholder=""
                                                     locales="document.header.languages"></div>
                                             </div>
@@ -68,8 +68,28 @@
                                         <div class="col-md-5">
                                             <div class="km-control-group" required name="notifications"
                                                 caption="Notifications">
-                                                <div document-selector ng-model="document.notifications"  skip-government="true"
-                                                    question="notifications" schema="(notification)" filter="true">
+                                                
+                                                <div document-selector identifier-without-revision="true" question="notifications" type="checkbox"
+                                                    query="notificationQuery.q" display-fields="{{::notificationQuery.fl}}" free-text-query-field="symbol_s"
+                                                    lookup-field="symbol_s" skip-sync-documents="true" ng-change="onNotificationSelected()"
+                                                    filter="true" ng-change="recordSelected(item, filter)" skip-government="true"
+                                                    ng-model="document.notifications" on-records-fetched="onRecordsFetched(data)" list-view="view">
+                                                
+                                                    <selected-records>
+                                                        <table class="table" id="search-new" style="padding-bottom:3px;width:100%;padding-top: 5ps;">
+                                                            <tr ng-repeat="doc in notifications">
+                                                                <td style="margin-bottom:15px;width:15px;">
+                                                                    <a rel="noopener" translation-url  class="btn btn-default" ng-click="$parent.$parent.removeDocument(doc)" class="link color-red">
+                                                                        <i class="fa fa-times"></i></a>
+                                                                </td>
+                                                                <td style="margin-bottom:20px;">
+                                                                    <span ng-bind="doc.rec_title"></span>
+                                                                    <div ng-bind="doc.rec_summary"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </selected-records>
+
                                                 </div>
                                             </div>                                            
                                         </div>
@@ -85,6 +105,33 @@
 
                                 </section>
 
+                                <section ng-if="isAbs">
+                                    <legend>Thematic areas(s)</legend>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="absThematicAreas">
+                                                <div km-term-check name="absThematicAreas" ng-model="document.absThematicAreas"
+                                                            terms="options.absThematicAreas()" binding-type="term[]"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section ng-if="isBch">
+                                    <legend>Thematic areas(s)</legend>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="cpbThematicAreas" caption="">
+                                                <div km-term-check name="cpbThematicAreas"
+                                                            ng-model="document.cpbThematicAreas" terms="options.bchThematicAreas()"
+                                                            binding-type="term[]"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
                                 <section>
                                     <legend>Documents</legend>
                                     <div class="row">
@@ -92,7 +139,7 @@
                                             <div class="km-control-group" required name="relevantDocuments"
                                                 caption="Documents">
                                                 <div km-link name="relevantDocuments"
-                                                    ng-model="document.relevantDocuments" allow-link="false"
+                                                    ng-model="document.relevantDocuments" allow-link="true"
                                                     allow-file="true" identifier="document.header.identifier"></div>
                                             </div>
                                         </div>
@@ -102,35 +149,7 @@
                                                 <div class="help-block">Please use this field to provide any other
                                                     relevant information that may not have been addressed elsewhere in
                                                     the record.</div>
-                                                <div km-textbox-ml ng-model="document.relevantInformation" rows="4"
-                                                    placeholder="" locales="document.header.languages"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-
-                                <section ng-if="isAbs">
-                                    <legend>ABS Thematic areas(s)</legend>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="km-control-group" name="absThematicAreas">
-                                                <!-- <div km-term-check name="absThematicAreas" ng-model="document.absThematicAreas"
-                                                            terms="options.absThematicAreas()" binding-type="term[]"></div> -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
-
-                                <section ng-if="isBch">
-                                    <legend>BCH Thematic areas(s)</legend>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="km-control-group" name="cpbThematicAreas" caption="">
-                                                <!-- <div km-term-check name="cpbThematicAreas"
-                                                            ng-model="document.cpbThematicAreas" terms="options.bchThematicAreas()"
-                                                            binding-type="term[]"></div> -->
+                                                    <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                     </div>
