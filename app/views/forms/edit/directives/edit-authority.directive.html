@@ -16,7 +16,7 @@
                             <legend name="formInfo" style="display:none"></legend>
         
                             <section>
-                                <legend name="generalInfo">General information</legend>
+                                <legend name="generalInfo">General Information</legend>
 
                                 <div class="row">
                                     <div class="col-xs-12" >
@@ -166,14 +166,14 @@
                                     first. Therefore, if you have not yet submitted the relevant ABS measure, you
                                     may wish to save the CNA as a draft and publish the ABS measure before.</div>
                                 <div class="help-info" ng-if="type=='CNA'">
-                                    In this section, a reference to the related measure granting the competence of the competent national authority for the Cartagena Protocol can be included. In order to link the competent authority to a relevant measure, the record of the measure needs to be entered first. Therefore, if you have not yet submitted the relevant measure, you may wish to save the competent national authority for the Cartagena Protocol as a draft and publish the measure first.
+                                    In this section, a reference to the related measure granting the competence of the competent national authority for the Cartagena Protocol can be included. In order to link the competent authority to a relevant measure, the record of the measure needs to be entered first. Therefore, if you have not yet submitted the relevant measure, you may wish to save the competent national authority for the Cartagena Protocol as a draft and publish the measure first, or you can create the measure inline.
                                 </div>
                                 <div class="help-info" ng-if="type=='SPCA'">
                                     In this section, a reference to the related measure granting the competence of the competent authority for the Supplementary Protocol can be included. In order to link the competent authority to a relevant measure, the record of the measure needs to be entered first. Therefore, if you have not yet submitted the relevant measure, you may wish to save the competent authority for the Supplementary Protocol as a draft and publish the measure first.
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12" ng-if="isBch || isAbs">
-                                        <div class="km-control-group" name="policyBasisForCompetencyRef" caption="Provide a link to any relevant legal, administrative or policy measures">
+                                        <div class="km-control-group" name="policyBasisForCompetencyRef" caption="Provide a link to any relevant legal, administrative or policy measures.">
                                             <div document-selector ng-model="document.policyBasisForCompetencyRef"
                                                 question="policyBasisForCompetencyRef" government="document.government"
                                                 schema="{{isBch ? 'biosafetyLaw': 'measure'}}" filter="true"
@@ -184,8 +184,8 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div ng-if="type=='SPCA'" class="km-control-group" name="policyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the competent authority"></div>
-                                        <div ng-if="type!='SPCA'" class="km-control-group" name="policyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the CNA"></div>
+                                        <div ng-if="type=='SPCA'" class="km-control-group" name="policyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the competent authority."></div>
+                                        <div ng-if="type!='SPCA'" class="km-control-group" name="policyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the CNA."></div>
                                         <div km-rich-textbox ng-model="document.policyBasisForCompetency" rows="6"
                                             placeholder="" locales="document.header.languages"></div>
                                     </div>
