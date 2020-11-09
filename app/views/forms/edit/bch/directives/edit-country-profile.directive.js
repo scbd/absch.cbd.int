@@ -1,7 +1,7 @@
 define(['app', 'lodash', 'text!./edit-country-profile.directive.html', 'views/forms/edit/edit',
-	"views/forms/view/bch/view-country-profile.directive"], 
+	"views/forms/view/bch/view-country-profile.directive",'services/solr'], 
 function (app, _, template) { 
-	app.directive("editCountryProfile", ["$controller", '$routeParams', 'ngDialog',"searchService", function($controller, $routeParams, ngDialog,searchService) {
+	app.directive("editCountryProfile", ["$controller", '$routeParams', 'ngDialog',"searchService", 'solr', function($controller, $routeParams, ngDialog,searchService,solr) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -39,7 +39,7 @@ function (app, _, template) {
 						government  = government || $rootScope.user.government;
 						var searchQuery  = {
 							fields  : 'identifier_s',
-							query   : 'schema_s:countryProfile AND government_s:' + government.toLowerCase() 
+							query   : 'schema_s:countryProfile AND government_s:' + solr.escape(government.toLowerCase())
 						}; 
 						searchService.list(searchQuery) 
 						.then(function(result) { 
@@ -82,9 +82,7 @@ function (app, _, template) {
 							}]
 						});
 					}
-					else{
-		
-					} 
+
 				}
 			}
 			
