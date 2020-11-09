@@ -1,16 +1,4 @@
 ﻿<div id="search-new">
-    <style>
-        .link1 .label {
-            font-weight: inherit;
-            color: #555;
-        }
-        @media (max-width: 767px){
-            .link1 .label {
-                display: contents;
-            }
-            .link1 .badge{margin-right: -15px;}
-        }
-    </style>
     <div ng-show="!countryRecords" style="padding-left:50%">
         <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" ></i>
     </div>
@@ -19,7 +7,7 @@
     </div>
     <br/>
     <br/> -->
-    <div ng-repeat="(key, schema) in countryRecords" ng-if="schema">
+    <div class="country-profile-list" ng-repeat="(key, schema) in countryRecords" ng-if="schema">
 
         <h4 id="div{{schema.shortCode}}" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" 
         ng-click="showHideRecords(key, schema)"
