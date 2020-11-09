@@ -169,7 +169,7 @@
                                     In this section, a reference to the related measure granting the competence of the competent national authority for the Cartagena Protocol can be included. In order to link the competent authority to a relevant measure, the record of the measure needs to be entered first. Therefore, if you have not yet submitted the relevant measure, you may wish to save the competent national authority for the Cartagena Protocol as a draft and publish the measure first, or you can create the measure inline.
                                 </div>
                                 <div class="help-info" ng-if="type=='SPCA'">
-                                    In this section, a reference to the related measure granting the competence of the competent authority for the Supplementary Protocol can be included. In order to link the competent authority to a relevant measure, the record of the measure needs to be entered first. Therefore, if you have not yet submitted the relevant measure, you may wish to save the competent authority for the Supplementary Protocol as a draft and publish the measure first.
+                                    In this section, a reference to the related measure granting the competence of the competent authority for the Supplementary Protocol can be included. In order to link the competent authority to a relevant measure, the record of the measure needs to be entered first. Therefore, if you have not yet submitted the relevant measure, you may wish to save the competent authority for the Supplementary Protocol as a draft and publish the measure first, or you can create the measure inline.
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12" ng-if="isBch || isAbs">
@@ -391,9 +391,12 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="relevantDocuments" caption="Other relevant website address or attached documents">
-                                            <div km-link name="relevantDocuments" ng-model="document.relevantDocuments"
-                                                identifier="document.header.identifier"></div>
+                                        <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+                                            <div class="help-block">
+                                                    Please use this field to provide any other relevant website addresses and/or one or more 
+                                                    relevant documents that will be stored in the database for users to download.
+                                            </div>
+                                            <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                         </div>
                                     </div>
                                 </div>
