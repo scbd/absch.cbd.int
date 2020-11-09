@@ -33,7 +33,7 @@ function(app, angular, $, _, template) {
         $scope.identifier = null;
         $scope.rootItems = null;
         $scope.attr = $attrs;
-        $scope.multiple = $attrs.multiple !== undefined && $attrs.multiple !== null;
+        $scope.multiple = $attrs.multiple !== undefined && $attrs.multiple !== 'false';
         $scope.watchItems = $attrs.watchItems !== undefined && $attrs.watchItems !== null;
         $scope.displayCount = $attrs.displayCount || 3;
         $scope.filterType   = $attrs.filterType || 'contains';
@@ -437,7 +437,9 @@ function(app, angular, $, _, template) {
             clickedItem.selected = !clickedItem.selected;
 
           if (!$scope.multiple || !clickedItem) {
-            _.each($scope.allItems || [], function(item) {
+            var source = $scope.allItems;
+            var source = _.union(source, $scope.secondarySource||[]);
+            _.each(source||[], function(item) {
               item.selected = (item == clickedItem);
             });
           }
