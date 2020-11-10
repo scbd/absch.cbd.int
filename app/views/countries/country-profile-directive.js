@@ -1,4 +1,5 @@
- define(['app', 'text!views/countries/country-profile-directive.html', 'lodash',
+ define(['app', 'text!views/countries/country-profile-directive.html', 'lodash', 
+   'css!/country-profile.css',
    'views/measure-matrix/measure-matrix-countries-directive',
    'js/common', 'services/solr',
    'views/search/search-results/result-grouped-national-record',
@@ -58,14 +59,15 @@
                         fields  : 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,summary_t,rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt, entryIntoForce_dt,adoption_dt,retired_dt,limitedApplication_dt',
                         query   : 'schema_s:(' +_.map(nationalSchemas, solr.escape).join(' ') +') AND government_s:' + solr.escape(code),
                         rowsPerPage    : 500,
-                        groupField      : 'governmentSchemaIdentifier_s',
-                        groupLimit      : 10
+                        sort           : 'updatedDate_dt desc',
+                        groupField     : 'government_schema_s',
+                        groupLimit     : 10
                     };
 
                     searchService.group(searchQuery)
                     .then(function(result){
 
-                        var countryResult   = result.data.grouped.governmentSchemaIdentifier_s;
+                        var countryResult   = result.data.grouped.government_schema_s;
                         totalCount          = countryResult.ngroups;
 
                         _.each(countryResult.groups, function(group){
@@ -102,6 +104,7 @@
                         fields  : 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,summary_t,rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt, entryIntoForce_dt,adoption_dt,retired_dt,limitedApplication_dt',
                         query   : 'schema_s:(' + key +') AND government_s:' + $scope.code.toLowerCase(),
                         rowsPerPage    : number||5000,
+                        sort           : 'updatedDate_dt desc',
                         start          : number ? undefined : (schema.start==0 ? 10 : schema.start),
                         currentPage    : schema.start==0 ? 1 : Math.ceil((schema.start+number)/10)
                     }

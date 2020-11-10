@@ -1,8 +1,9 @@
-<span ng-show="isVisible()">
-    <div ng-class="{'alert alert-danger':showLanguageError}">
-        <div ng-if="showLanguageError" >Please select at least one UN language to continue.</div>
-        <span km-select multiple ng-model="binding" binding-type="string"
-            placeholder="Available Languages" items="options.locales()" minimum="1"
-            show-others="options.otherLocales()" ng-change="validateUNLanguage()" api="selectApi"></span>
+<span>   
+    <div ng-class="{'alert alert-danger':ctrl.showLanguageError}" ng-if="ctrl.isVisible()">
+        <div ng-if="ctrl.showLanguageError" >Please select at least one UN language to continue.</div>
+        <span km-select data-multiple="{{ctrl.multiple}}" ng-model="ctrl.binding" binding-type="string"
+            placeholder="Available Languages" items="ctrl.options.locales()" minimum="1"
+            show-others="ctrl.options.otherLocales()" ng-change="ctrl.validateUNLanguage()" 
+            api="ctrl.selectApi"></span>
     </div>
 </span>
