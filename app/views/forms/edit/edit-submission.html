@@ -39,9 +39,9 @@
                                         <div class="col-md-6">                                            
                                             <div class="km-control-group" name="organization"
                                                 caption="Relevant Organization(s) " required>
-                                                <organization-selector multiple ng-model="document.organizations"
-                                                    organization-only locales="document.header.languages" required
-                                                    caption="Add organizations »" ng-disabled="document.government">
+                                                <div document-selector ng-disabled="document.government" question="organization" type="radio"
+                                                    query="organizationQuery" ng-change="onNotificationSelected()"
+                                                    skip-government="true" ng-model="document.organization" allow-new-schema="organization">
                                             </div>
                                         </div>
                                     </div>
