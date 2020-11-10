@@ -4,6 +4,7 @@
 	border-bottom: 1px solid #ccc;
 	padding-bottom: 10px;
 	padding-top: 10px;
+	text-align: justify;
 }
 .tableexport-caption{
 	display: none;       
@@ -29,4 +30,7 @@
 	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
 	
+}
+.registry-title {
+	font-size: 16px;
 }
