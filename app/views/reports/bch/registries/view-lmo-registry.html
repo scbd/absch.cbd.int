@@ -47,9 +47,10 @@
 								<thead>
 									<tr>
 										<th class="display-18">Record ID</th>
-										<th class="display-25">Identity & transformation event</th>
+										<th class="display-17">Unique identification</th>
+										<th class="display-18 hidden-xs">Identity & transformation event</th>
 										<th class="display-17 hidden-xs">Organism</th>
-										<th class="display-40 hidden-xs">Description</th>
+										<th class="display-30 hidden-xs">Description</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -59,7 +60,8 @@
 												<span class="text-uppercase" ng-bind="::row.recordId"></span>
 											</a>
 										</td>
-										<td class="tableexport-string">
+										<td class="tableexport-string"><span ng-bind="::row.uniqueIdentification_s"></span></td>
+										<td class="tableexport-string hidden-xs">
 											<span ng-bind="::row.identity"></span><br>
 											<span ng-bind="::row.transformationEvent"></span>
 										</td>
