@@ -2,12 +2,21 @@ name: "Build and Deploy"
  
 on:
   push:
+    branches:
+      - master
+      - dev
+      - stg
   pull_request:
     types: 
       - opened
+    branches:
+      - master
+      - dev
+      - stg
+      - release/**
   release:
     types:
-      - published
+      - created
 
 jobs:
   build:
@@ -28,8 +37,8 @@ jobs:
 
       - name: Dump context
         run: | 
-          echo BRANCH: ${{ steps.refs.outputs.branch }}"
-          echo TAG:    ${{ steps.refs.outputs.tag }}"
+          echo -e "BRANCH: ${{ steps.refs.outputs.branch }}"
+          echo -e "TAG:    ${{ steps.refs.outputs.tag }}"
 
       - name: "Checkout"
         uses: actions/checkout@v1
