@@ -36,9 +36,12 @@ jobs:
           echo ::set-output name=tag::${REF_TAG-}
 
       - name: Dump context
+        env: 
+          GITHUB_CONTEXT : ${{ toJson(github) }}
         run: | 
           echo -e "BRANCH: ${{ steps.refs.outputs.branch }}"
           echo -e "TAG:    ${{ steps.refs.outputs.tag }}"
+          echo $GITHUB_CONTEXT
 
       - name: "Checkout"
         uses: actions/checkout@v1
