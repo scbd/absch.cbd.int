@@ -64,7 +64,7 @@ jobs:
           docker kill absch
 
       - name: Deploy branches
-        if: contains('master dev stg deploy-github-actions', steps.refs.outputs.branch)
+        if: contains('master dev stg', steps.refs.outputs.branch)
         run: |
           docker tag output $GITHUB_REPOSITORY:${{steps.refs.outputs.branch}}
           docker push $GITHUB_REPOSITORY:${{steps.refs.outputs.branch}}
