@@ -19,7 +19,8 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Bad guy 
-        run: echo -e "Bad guy: ${{ secrets.DOCKERHUB_USERNAME }}"
+        run: |
+          echo -e "Bad guy: ${{ secrets.DOCKERHUB_USERNAME }}"
          
       - name: Extract Branch / Tag name
         id: refs
