@@ -2,10 +2,6 @@ name: "Build and Deploy"
  
 on:
   push:
-    branches:
-      - master
-      - dev
-      - stg
   pull_request:
     types: 
       - opened
@@ -20,7 +16,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - name: Extract Branch / Tag name
         id: refs
