@@ -5,11 +5,8 @@ on:
   pull_request:
     types: 
       - opened
-    branches:
-      - master
-      - dev
-      - stg
-      - release/**
+      - synchronize
+
   release:
     types:
       - created
