@@ -35,34 +35,24 @@
 										</div>
 									</div>
 
-
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="jurisdiction" required caption="Jurisdiction">
-												<div class="help-block">
-													Provide the jurisdiction where the law, regulation, guideline or agreement applies if this is different from the country name. Example: Country: Denmark, Jurisdiction: "With territorial exclusion in respect of the Faroe Islands and Greenland".
-													<br/>
-													<strong>
-														Important note for EU Members only: if the law, regulation, guideline or agreement applies to all EU Member States please select "European Union" in the 'Jurisdiction' field.
-													</strong>
-												</div>
-												<div km-select multiple required name="jurisdiction" ng-model="document.jurisdictions"
-												 items="options.jurisdiction()" placeholder="Please select a Jurisdiction..."></div>
-												 <div class="row">
-													<div class="col-sm-12" ng-if="hasOther(document.jurisdictions)">
-														<div class="km-control-group" name="otherJurisdiction" caption="Other jurisdiction">
-															<!-- <div ng-repeat="jurisdiction in jurisdictionNames" style="padding-bottom:5px;"> {{$index}}-->
-																<div km-textbox-ml name="jurisdictionNames" ng-model="otherJurisdictionValue" locales="document.header.languages"></div>
-															<!-- </div>
-															<button class="btn btn-primary" ng-click="jurisdictionNames.push({})">Add item</button> -->
-														</div>
-													</div>
-												</div>
+											<div class="km-control-group" required caption="Area of jurisdiction">
+												<div km-select name="jurisdiction" locales="document.header.languages" required ng-model="document.jurisdictions" items="options.lawJurisdictions"></div>
 											</div>
+											<div  style="padding-top: 5px;;">
+												<div class="km-control-group" required ng-if="document.jurisdictions.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" name="jurisdiction.other" caption="Other (specify)">
+													<div km-textbox-ml name="customValueOther" ng-model="document.jurisdictions.customValue" placeholder="" locales="document.header.languages"></div>
+												</div>
+												<div class="km-control-group" required ng-if="document.jurisdictions.identifier=='DEBB019D-8647-40EC-8AE5-10CA88572F6E'" name="jurisdiction.subNational" caption="Name of the sub-national jurisdiction">
+													<div km-textbox-ml name="customValueSubNational" ng-model="document.jurisdictions.customValue" placeholder="" locales="document.header.languages"></div>
+												</div>
+												<div class="km-control-group" required ng-if="document.jurisdictions.identifier=='528B1187-F1BD-4479-9FB3-ADBD9076D361'" name="countries" caption="Geographical or political/economic group(s)">
+													<div km-select multiple required name="geographicalCountries" ng-model="document.jurisdictionScope" placeholder="Please select one option" items="options.chmregions()"></div>
+												</div>
+											</div>																			 
 										</div>
 									</div>
-
-
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="title" caption="Title of document">
@@ -70,8 +60,6 @@
 											</div>
 										</div>
 									</div>
-
-									
 								</div>
 							</section>
 							<section>
@@ -194,7 +182,7 @@
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="authorities" caption="Competent National Authorities" required>	
 												<div document-selector ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
-													government="document.government" schema="(authority)"></div>			
+													government="document.government" schema="(authority supplementaryAuthority)"></div>			
 											</div>
 										</div>
 									</div>

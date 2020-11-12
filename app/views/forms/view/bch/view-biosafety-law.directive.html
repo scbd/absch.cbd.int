@@ -27,7 +27,7 @@
 			</div>
 		</div>
 
-		<div ng-show="document.jurisdictions">
+		<!-- <div ng-show="document.jurisdictions">
 			<label>Jurisdiction</label>
 			<div class="km-value">
 				<ul class="list">
@@ -37,8 +37,23 @@
 					</li>
 				</ul>
 			</div>
+		</div> -->
+		<div ng-show="document.jurisdictions.customValue">
+			<label>Jurisdiction</label>
+			<km-value-ml value="document.jurisdictions.customValue" locales="locale"></km-value-ml>
 		</div>
 
+		<div ng-show="document.jurisdictionScope">
+			<label>Jurisdiction Scope</label>
+			<div class="km-value">
+				<ul class="list">
+					<li ng-repeat="item in document.jurisdictionScope">
+						<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+						<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
+					</li>
+				</ul>
+			</div>
+		</div>
 		<legend>Legislative details</legend>
 		<div>
 			<div ng-show="document.type">

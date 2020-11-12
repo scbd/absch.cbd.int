@@ -2,7 +2,7 @@ define(['app', 'lodash', 'text!./edit-law.directive.html', 'views/forms/edit/edi
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-law.directive"], 
 function (app, _, template) {
 
-	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter", function($controller, thesaurusService, $q, $filter) {
+	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter","Enumerable", function($controller, thesaurusService, $q, $filter,Enumerable) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -23,13 +23,11 @@ function (app, _, template) {
 				});
 
 				_.extend($scope.options, {	
-					jurisdiction : 	function(){
-						return $q.all([thesaurusService.getDomainTerms('countries'),
-									thesaurusService.getTerms('other')])
-						.then(function(result){
-							var filtered = $filter('orderBy')(result[0], 'title.en');
-							filtered.push(result[1]);
-							return filtered;
+					lawJurisdictions:  thesaurusService.getDomainTerms('lawJurisdictions', {other:true, otherType:'lstring'}),				 
+					chmregions: function() { return $q.all([thesaurusService.getDomainTerms('regions'),thesaurusService.getDomainTerms('countries')])
+						.then(function(data) { 
+							return Enumerable.from($filter('orderBy')(data[0], 'title.en')).union(
+							Enumerable.from($filter('orderBy')(data[1], 'title.en'))).toArray();
 						});
 					},
 					legislationAgreementTypes : 	function(){
@@ -41,14 +39,7 @@ function (app, _, template) {
 					typeOfOrganisms: 	function(){
 						return thesaurusService.getDomainTerms('typeOfOrganisms')
 					},
-
 				});
-				
-				$scope.hasOther = function(selectedTerms){
-					return selectedTerms && _(selectedTerms).map('identifier').some('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'); 
-				}
-				//==================================
-				//
 				//==================================
 				$scope.getCleanDocument = function(document) {
 
