@@ -38,16 +38,16 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" required caption="Area of jurisdiction">
-												<div km-select name="jurisdiction" locales="document.header.languages" required ng-model="document.jurisdictions" items="options.lawJurisdictions"></div>
+												<div km-select name="jurisdiction" locales="document.header.languages" required ng-model="document.jurisdiction" items="options.lawJurisdictions"></div>
 											</div>
 											<div  style="padding-top: 5px;;">
-												<div class="km-control-group" required ng-if="document.jurisdictions.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" name="jurisdiction.other" caption="Other (specify)">
-													<div km-textbox-ml name="customValueOther" ng-model="document.jurisdictions.customValue" placeholder="" locales="document.header.languages"></div>
+												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" name="jurisdiction.other" caption="Other jurisdiction(specify)">
+													<div km-textbox-ml name="customValueOther" ng-model="document.jurisdiction.customValue" placeholder="" locales="document.header.languages"></div>
 												</div>
-												<div class="km-control-group" required ng-if="document.jurisdictions.identifier=='DEBB019D-8647-40EC-8AE5-10CA88572F6E'" name="jurisdiction.subNational" caption="Name of the sub-national jurisdiction">
-													<div km-textbox-ml name="customValueSubNational" ng-model="document.jurisdictions.customValue" placeholder="" locales="document.header.languages"></div>
+												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='DEBB019D-8647-40EC-8AE5-10CA88572F6E'" name="jurisdiction.subNational" caption="Name of the sub-national jurisdiction">
+													<div km-textbox-ml name="customValueSubNational" ng-model="document.jurisdiction.customValue" placeholder="Eg. Lower Austria" locales="document.header.languages"></div>
 												</div>
-												<div class="km-control-group" required ng-if="document.jurisdictions.identifier=='528B1187-F1BD-4479-9FB3-ADBD9076D361'" name="countries" caption="Geographical or political/economic group(s)">
+												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='528B1187-F1BD-4479-9FB3-ADBD9076D361'" name="jurisdictionScope" caption="Geographical or political/economic group(s)">
 													<div km-select multiple required name="geographicalCountries" ng-model="document.jurisdictionScope" placeholder="Please select one option" items="options.chmregions()"></div>
 												</div>
 											</div>																			 
