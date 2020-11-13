@@ -24,7 +24,7 @@ function (app, _, template) {
 
 				_.extend($scope.options, {	
 					lawJurisdictions:  thesaurusService.getDomainTerms('lawJurisdictions', {other:true, otherType:'lstring'}),				 
-					chmregions: function() { return $q.all([thesaurusService.getDomainTerms('regions'),thesaurusService.getDomainTerms('countries')])
+					chmregions: function() { return $q.all([thesaurusService.getDomainTerms('countries'), thesaurusService.getDomainTerms('geographicRegions')])
 						.then(function(data) { 
 							return Enumerable.from($filter('orderBy')(data[0], 'title.en')).union(
 							Enumerable.from($filter('orderBy')(data[1], 'title.en'))).toArray();
@@ -58,10 +58,16 @@ function (app, _, template) {
 						else{
 							document.isAmendment = true;
 						}
-					// if(!_.isEmpty($scope.jurisdictionNames))
-					// 	document.jurisdictionNames = _($scope.jurisdictionNames).pluck('value').compact().value();
-					// if(_.isEmpty(document.jurisdictionNames))
-					// 	document.jurisdictionNames = undefined;
+						if(document.jurisdiction){
+							if(document.jurisdiction.identifier !=  "528B1187-F1BD-4479-9FB3-ADBD9076D361") // Regional
+							{
+								document.jurisdictionScope = undefined;
+							}
+							if(!_.includes(["DEBB019D-8647-40EC-8AE5-10CA88572F6E", "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED"], document.jurisdiction.identifier))// sub-national, other
+							{
+								document.jurisdiction.customValue = undefined;
+							}
+						}
 						
 					return $scope.sanitizeDocument(document);
 				};
