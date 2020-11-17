@@ -4,6 +4,7 @@
 	border-bottom: 1px solid #ccc;
 	padding-bottom: 10px;
 	padding-top: 10px;
+	text-align: justify;
 }
 .tableexport-caption{
 	display: none;       
@@ -20,6 +21,7 @@
 .registry-details .display-18 {width: 18%;}
 .registry-details .display-20 {width: 20%;}
 .registry-details .display-25 {width: 25%;}
+.registry-details .display-30 {width: 30%;}
 .registry-details .display-40 {width: 40%;}
 .registry-details .display-45 {width: 45%;}
 .registry-details .truncate-description {
@@ -29,4 +31,7 @@
 	-webkit-line-clamp: 5;
 	-webkit-box-orient: vertical;
 	
+}
+.registry-title {
+	font-size: 16px;
 }

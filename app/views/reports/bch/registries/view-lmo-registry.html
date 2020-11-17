@@ -21,10 +21,10 @@
 					</div>
 					<div class="col-md-10  col-xs-12">
 						<p class="padding-top-10">
-							The LMO-Unique Identifiers (LMO-UIds) Registry provides summary information on all living modified
+							The LMO-Unique Identifiers (LMO-UIDs) Registry provides summary information on all living modified
 							organisms registered in the BCH including transformation events, genetic modifications, and the
-							unique identification code (if available) for each record. Links to all decisions and Risk
-							assessment reports that refer to these organisms are accessible through the registry.
+							unique identification code (if available) for each record. Links to all decisions and risk 
+							assessment reports that refer to these organisms are accessible through the records in the registry.
 						</p>
 						<p class="p-borders">
 							The BCH modalities of operation require the BCH to make use of existing 
@@ -47,9 +47,10 @@
 								<thead>
 									<tr>
 										<th class="display-18">Record ID</th>
-										<th class="display-25">Identity & transformation event</th>
+										<th class="display-17">Unique identification</th>
+										<th class="display-18 hidden-xs">Identity & transformation event</th>
 										<th class="display-17 hidden-xs">Organism</th>
-										<th class="display-40 hidden-xs">Description</th>
+										<th class="display-30 hidden-xs">Description</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -59,7 +60,8 @@
 												<span class="text-uppercase" ng-bind="::row.recordId"></span>
 											</a>
 										</td>
-										<td class="tableexport-string">
+										<td class="tableexport-string"><span ng-bind="::row.uniqueIdentification_s"></span></td>
+										<td class="tableexport-string hidden-xs">
 											<span ng-bind="::row.identity"></span><br>
 											<span ng-bind="::row.transformationEvent"></span>
 										</td>

@@ -16,7 +16,7 @@
                             <legend name="formInfo" style="display:none"></legend>
         
                             <section>
-                                <legend name="generalInfo">General information</legend>
+                                <legend name="generalInfo">General Information</legend>
 
                                 <div class="row">
                                     <div class="col-xs-12" >
@@ -110,7 +110,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <div class="km-control-group" name="phones" required caption="Phone numbers">
+                                        <div class="km-control-group" name="phones" required caption="Phone number(s)">
                                             <div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
                                             <div km-inputtext-list name="phones" ng-model="document.phones"
                                                 required placeholder="example: +1 514.288.2220"></div>
@@ -118,7 +118,7 @@
                                     </div>
 
                                     <div class="col-xs-6">
-                                        <div class="km-control-group" name="faxes" caption="Fax numbers">
+                                        <div class="km-control-group" name="faxes" caption="Fax number(s)">
                                             <div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
                                             <div km-inputtext-list name="faxes" ng-model="document.faxes"
                                                 placeholder="example: +1 514.288.6588"></div>
@@ -128,14 +128,14 @@
 
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <div class="km-control-group" name="emails" required caption="Emails">
+                                        <div class="km-control-group" name="emails" required caption="Email(s)">
                                             <div km-inputtext-list name="emails" required type="email" ng-model="document.emails"
                                                 placeholder="example: secretariat@cbd.int"></div>
                                         </div>
                                     </div>
 
                                     <div class="col-xs-6">
-                                        <div class="km-control-group" name="websites" caption="Website address">
+                                        <div class="km-control-group" name="websites" caption="Website address(es)">
                                             <div km-link name="websites" ng-model="document.websites" allow-link="true"
                                                 allow-file="false"></div>
                                         </div>
@@ -166,14 +166,14 @@
                                     first. Therefore, if you have not yet submitted the relevant ABS measure, you
                                     may wish to save the CNA as a draft and publish the ABS measure before.</div>
                                 <div class="help-info" ng-if="type=='CNA'">
-                                    In this section, a reference to the related measure granting the competence of the competent national authority for the Cartagena Protocol can be included. In order to link the competent authority to a relevant measure, the record of the measure needs to be entered first. Therefore, if you have not yet submitted the relevant measure, you may wish to save the competent national authority for the Cartagena Protocol as a draft and publish the measure first.
+                                    In this section, a reference to the related measure granting the competence of the competent national authority for the Cartagena Protocol can be included. In order to link the competent authority to a relevant measure, the record of the measure needs to be entered first. Therefore, if you have not yet submitted the relevant measure, you may wish to save the competent national authority for the Cartagena Protocol as a draft and publish the measure first, or you can create the measure inline.
                                 </div>
                                 <div class="help-info" ng-if="type=='SPCA'">
-                                    In this section, a reference to the related measure granting the competence of the competent authority for the Supplementary Protocol can be included. In order to link the competent authority to a relevant measure, the record of the measure needs to be entered first. Therefore, if you have not yet submitted the relevant measure, you may wish to save the competent authority for the Supplementary Protocol as a draft and publish the measure first.
+                                    In this section, a reference to the related measure granting the competence of the competent authority for the Supplementary Protocol can be included. In order to link the competent authority to a relevant measure, the record of the measure needs to be entered first. Therefore, if you have not yet submitted the relevant measure, you may wish to save the competent authority for the Supplementary Protocol as a draft and publish the measure first, or you can create the measure inline.
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12" ng-if="isBch || isAbs">
-                                        <div class="km-control-group" name="policyBasisForCompetencyRef" caption="Provide a link to any relevant legal, administrative or policy measures">
+                                        <div class="km-control-group" name="policyBasisForCompetencyRef" caption="Provide a link to any relevant legal, administrative or policy measures.">
                                             <div document-selector ng-model="document.policyBasisForCompetencyRef"
                                                 question="policyBasisForCompetencyRef" government="document.government"
                                                 schema="{{isBch ? 'biosafetyLaw': 'measure'}}" filter="true"
@@ -184,8 +184,8 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div ng-if="type=='SPCA'" class="km-control-group" name="policyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the competent authority"></div>
-                                        <div ng-if="type!='SPCA'" class="km-control-group" name="policyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the CNA"></div>
+                                        <div ng-if="type=='SPCA'" class="km-control-group" name="policyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the competent authority."></div>
+                                        <div ng-if="type!='SPCA'" class="km-control-group" name="policyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the CNA."></div>
                                         <div km-rich-textbox ng-model="document.policyBasisForCompetency" rows="6"
                                             placeholder="" locales="document.header.languages"></div>
                                     </div>
@@ -391,9 +391,12 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="relevantDocuments" caption="Other relevant website address or attached documents">
-                                            <div km-link name="relevantDocuments" ng-model="document.relevantDocuments"
-                                                identifier="document.header.identifier"></div>
+                                        <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+                                            <div class="help-block">
+                                                    Please use this field to provide any other relevant website addresses and/or one or more 
+                                                    relevant documents that will be stored in the database for users to download.
+                                            </div>
+                                            <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                         </div>
                                     </div>
                                 </div>

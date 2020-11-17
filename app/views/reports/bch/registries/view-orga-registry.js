@@ -10,8 +10,9 @@ function($scope,searchService,$element, $rootScope) {
 
 			$scope.isLoading = true;
 			var searchQuery = {
-				fields:  'recordId:uniqueIdentifier_s,identity:identity_s,taxonomicStatus:title_s,commonName:commonNames_EN_txt,description:relevantInformation_EN_t,url_ss',
+				fields:  'recordId:uniqueIdentifier_s,taxonomicStatus:scientificName_s,commonName:commonNames_EN_txt,description:relevantInformation_EN_t,url_ss',
 				query:  'schema_s:organism',
+				sort:	'scientificName_s asc',
 				rowsPerPage: 10000
 				
 			};
