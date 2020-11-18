@@ -34,7 +34,30 @@
 											</div>
 										</div>
 									</div>
-
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="title" caption="Title of document">
+												<div km-textbox-ml name="title" required ng-model="document.title" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</section>
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Legislative details</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="type" required caption="Type of Law / Regulation">
+												<div class="help-block">
+													A law is usually legislation (a statute) enacted by a state government. A regulation is usually an act or process of controlling by rule or restriction, having legal force, issued by an administrative agency or a local government. A guideline is usually a document that announces the policy an agency intends to implement in future decision-making, or which will otherwise guide the agency in the exercise of its administrative discretion. A regulatory summary is a text summary of the national biosafety regulatory framework in place, or being developed in a country.
+												</div>
+												<div km-term-radio required ng-model="document.type" locales="document.header.languages"
+													terms="options.legislationAgreementTypes()" binding-type="term" show-other="true"></div>
+											</div>
+										</div>
+									</div>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" required caption="Area of jurisdiction">
@@ -54,30 +77,6 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-sm-12">
-											<div class="km-control-group" required name="title" caption="Title of document">
-												<div km-textbox-ml name="title" required ng-model="document.title" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-							<section>
-								<div class="well no-shadow bg-white">
-									<legend>Legislative details</legend>
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="type" required caption="Type of document">
-												<div class="help-block">
-													A law is usually legislation (a statute) enacted by a state government. A regulation is usually an act or process of controlling by rule or restriction, having legal force, issued by an administrative agency or a local government. A guideline is usually a document that announces the policy an agency intends to implement in future decision-making, or which will otherwise guide the agency in the exercise of its administrative discretion. A regulatory summary is a text summary of the national biosafety regulatory framework in place, or being developed in a country.
-												</div>
-												<div km-term-radio required ng-model="document.type" locales="document.header.languages"
-													terms="options.legislationAgreementTypes()" binding-type="term" show-other="true"></div>
-											</div>
-										</div>
-									</div>
-
-									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="cpbSubjectAreas" required caption="Subject areas">
 												<div class="help-block">
@@ -90,7 +89,7 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="type" required caption="Types of LMOs addressed">
+											<div class="km-control-group" name="type" required caption="Types of organisms addressed">
 												<div class="help-block">
 													This section provides keywords relevant to the categories of LMOs addressed to assist in searching for and translation of the record (a full description may be provided elsewhere in the record).
 												</div>
@@ -180,7 +179,7 @@
 									<legend>Regulatory contact information</legend>
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="authorities" caption="Competent National Authorities" required>	
+											<div class="km-control-group" name="authorities" caption="Competent National Authority(es):" required>	
 												<div document-selector ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
 													government="document.government" schema="(authority supplementaryAuthority)"></div>			
 											</div>
