@@ -1,24 +1,62 @@
 ﻿ <div id="search-new">
      <style>
-         .pagination {
-             margin-top: 0px;
-         }
+         
+
      </style>
      <div class="container-fluid">
          <div class="row">
              <div class="col-md-12" style="padding-bottom:10px;">
-                 <span ng-repeat="filter in setFilters" style="margin-bottom:10px;">
-                     <button class="btn btn-xs btn-info bold" style="margin-top:5px;"
-                         ng-click="removeFilter(filter)">
-                         <span
-                             ng-if="filter.type === 'freeText' || filter.type === 'UID' || filter.type === 'custom'">&#34;</span>{{filter.name|lstring:locale}}<span
-                             ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
-                         <span aria-hidden="true">x</span>
-                     </button>
-                    <button ng-href="#" ng-if="$last" class="btn btn-xs btn-default bold"
-                     style="cursor:pointer;margin-top:5px;" ng-click="clearFilter()"> <i class="fa fa-times-circle"
-                         aria-hidden="true"></i> Clear filters </button>
+                 <span ng-repeat="filter in setFilters">
+                    <span class="btn-group filter-chip" ng-class="{'exclude-filter':filter.excludeResult}">
+                        <span class="filter-chip-text dropdown bring-to-front" >
+                            <span ng-if="filter.edit" class="input-group edit">
+                                <input type="textbox" ng-model="filter.editValue" ng-keydown="onKeyDown($event, filter)" class="form-control form-control-small">
+                                <span class="btn btn-xs bold filter-chips-edit-addon input-group-addon" title="Save filter"     ng-click="onEditFreeTextFilterDone(filter)">
+                                    <i class="fa fa-check"></i>
+                                </span>
+                                <span class="btn btn-xs bold filter-chips-edit-addon input-group-addon" title="Close editing"   ng-click="onEditFreeTextFilterCanceled(filter)">
+                                    <i class="fa fa-times"></i>
+                                </span>
+                            </span>
+                            <span class="btn btn-xs  bold filter-chip-text dropdown bring-to-front" style="cursor: pointer"type="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-if="!filter.edit"  ng-class="{'strikeout':filter.disabled}">
+                                <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
+                                <span ng-bind="filter.name|lstring:locale"></span>                                
+                            </span>
+                            <ul class="dropdown-menu filter-chip-settings" ng-if="!filter.edit && filter.type!='date'" >
+                                <li ng-if="filter.type=='freeText'" >
+                                    <a rel="noopener" href="#" ng-click="onEditFreeTextFilter(filter)"><i class="fa fa-edit" aria-hidden="true"></i> Edit filter</a>
+                                </li>
+                                <li>
+                                    <a rel="noopener" href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true;recordSelected();">
+                                        <i class="fa fa-eye" aria-hidden="true"></i> Temporarily disable</a>
+                                </li>
+                                <li>
+                                    <a rel="noopener" href="#" ng-if="filter.disabled" ng-click="filter.disabled=false;recordSelected();">
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a>
+                                </li>
+                                <li>
+                                    <a rel="noopener" href="#" ng-if="!filter.excludeResult" ng-click="filter.excludeResult=true;recordSelected();">
+                                    <i class="fa fa-minus-square-o" aria-hidden="true"></i> Exclude results</a>
+                                </li>
+                                <li>
+                                    <a rel="noopener" href="#" ng-if="filter.excludeResult" ng-click="filter.excludeResult=false;recordSelected();">
+                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i> Include results</a>
+                                </li>
+                                <li>
+                                    <a rel="noopener" href="#" ng-click="removeFilter(filter)">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Delete filter</a>
+                                </li>
+                            </ul>
+                        </span>
+                        <button class="btn btn-xs bold filter-chips-remove"  ng-click="removeFilter(filter)">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </span>
+                     
+                    
                  </span>
+                 
                  <span class="btn-group pull-right">
 
                      <a rel="noopener" ng-href="#" class="help-tour link2"

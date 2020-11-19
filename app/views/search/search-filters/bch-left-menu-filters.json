@@ -20,7 +20,6 @@
 			"relatedField":"cpbOrganismTypes_REL_ss"
 		}
 	],
-	"bchNews": [],
 	"biosafetyDecision": [
 		{
 			"type": "freeText",
@@ -119,10 +118,34 @@
 			"field": "type_s"
 		}
 	],
-	"capacityBuildingActivities": [],
-	"capacityBuildingNeeds": [],
-	"cpbNationalReportInterim": [],
-	"database": [],
+	"capacityBuildingActivities": [
+		{
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		}
+	],
+	"capacityBuildingNeeds": [
+		{
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		}
+	],
+	"cpbNationalReportInterim": [
+		{
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		}
+	],
+	"database": [
+		{
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		}
+	],
 	"dnaSequence": [
 		{
 			"type": "freeText",
@@ -192,7 +215,13 @@
 			"field": "expertise_ss"
 		}
 	],
-	"expertAssignment": [],
+	"expertAssignment": [
+		{
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		}
+	],
 	"focalPoint": [
 		{
 			"type": "freeText",
@@ -612,5 +641,11 @@
 			"field": "date_dt"
 		}
 	],
-	"supplementaryAuthority": []
+	"supplementaryAuthority": [
+		{
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		}
+	]
 }
