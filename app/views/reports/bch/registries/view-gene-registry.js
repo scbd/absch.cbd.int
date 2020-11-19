@@ -10,7 +10,7 @@ function($scope,searchService,$element, $rootScope) {
 
 			$scope.isLoading = true;
 			var searchQuery = {
-				fields:  'recordId:uniqueIdentifier_s,name:name_s,trait:summary_t,donorOrganism:geneDonorOrganismCommonNames_EN_txt,geneFunction:biologicalFunction_EN_t,url_ss',
+				fields:  'recordId:uniqueIdentifier_s,name:name_s,trait:summary_t,organismCommonNames:geneDonorOrganismCommonNames_EN_txt,organismScientificNames:geneDonorOrganismScientificNames_ss,geneFunction:biologicalFunction_EN_t,url_ss',
 				query:  'schema_s:dnaSequence',
 				sort:	'name_s asc',
 				rowsPerPage: 10000

@@ -56,7 +56,10 @@
 										</td>
 										<td class="tableexport-string"><span ng-bind="::row.name"></span></td>
 										<td class="tableexport-string hidden-xs"><span ng-bind="::row.trait"></span></td>
-										<td class="tableexport-string hidden-xs"><span ng-bind="::row.donorOrganism.join(', ')"></span></td>
+										<td class="tableexport-string hidden-xs">
+											<span ng-bind="::row.organismScientificNames.join(', ')"></span> -
+											<span ng-bind="::row.organismCommonNames.join(', ')"></span>	
+										</td>
 										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.geneFunction"></span></td>
 										
 									</tr>
