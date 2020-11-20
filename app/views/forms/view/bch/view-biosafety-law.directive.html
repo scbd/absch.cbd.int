@@ -35,19 +35,19 @@
 					<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type.customValue|lstring:locale"></span>
 				</div>
 			</div>
-			<div ng-show="document.jurisdiction && !document.jurisdictionScope">
+			<div ng-if="document.jurisdiction && !document.jurisdictionScope">
 				<label>Area of jurisdiction</label>
 				<div class="km-value">
-					<span ng-show="!document.jurisdiction.customValue" ng-bind="::document.jurisdiction|term:locale"></span>
-					<span ng-show="document.jurisdiction.customValue" ng-bind="::document.jurisdiction.customValue|lstring:locale"></span>
+					<span ng-show="!document.jurisdiction.customValue" ng-bind="document.jurisdiction|term:locale"></span>
+					<span ng-show="document.jurisdiction.customValue" ng-bind="document.jurisdiction.customValue|lstring:locale"></span>
 				</div>
 			</div>
 			<div ng-show="document.jurisdictionScope">
 				<label>Area of jurisdiction</label>
 				<div class="km-value">
 					<ul class="list">
-						<li ng-repeat="item in ::document.jurisdictionScope">
-							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="::item|term:locale"></span>
+						<li ng-repeat="item in document.jurisdictionScope">
+							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
 						</li>
 					</ul>
 				</div>
