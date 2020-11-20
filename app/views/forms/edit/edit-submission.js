@@ -1,15 +1,16 @@
 ﻿define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-submission.directive',
-        'views/forms/edit/organization-selector', 'services/solr', 'services/search-service'], function (app, _) {
+        'views/forms/edit/organization-selector', 'services/solr', 'services/search-service', 'services/thesaurus-service'], function (app, _) {
 
-  app.controller("editSubmission", ["$scope", "$http", "$controller", "realm", 'searchService', 'solr',
-   function ($scope, $http, $controller, realm, searchService, solr) {
+  app.controller("editSubmission", ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService',
+   function ($scope, $http, $controller, realm, searchService, solr, thesaurusService) {
 
     $scope.isBch = realm.is('BCH');
     $scope.isAbs = realm.is('ABS');
     $scope.notificationQuery = {
         q   : "schema_s:notification",
         fl  : "identifier_s:symbol_s,rec_title:title_s,reference_s,symbol_s,rec_date:updatedDate_dt,schema_s"
-    }; 
+    };
+    $scope.organizationQuery = 'schema_s:organization OR (schema_s:contact AND type_s:organization)' 
     $controller('editController', {$scope: $scope});
 
     _.extend($scope.options, {  
