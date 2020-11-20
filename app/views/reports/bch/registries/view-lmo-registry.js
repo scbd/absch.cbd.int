@@ -10,7 +10,7 @@ function($scope,searchService,$element, $rootScope) {
 
 			$scope.isLoading = true;
 			var searchQuery = {
-				fields:  'recordId:uniqueIdentifier_s,uniqueIdentification_s,identity:identity_s,transformationEvent:transformationEvent_s,lmoScientificName:lmoScientificNames_ss,lmoCommonNames:lmoCommonNames_EN_txt,description:summary_EN_t,url_ss',
+				fields:  'recordId:uniqueIdentifier_s,uniqueIdentification_s,identity:identity_s,transformationEvent:transformationEvent_s,lmoScientificName:lmoScientificNames_ss,lmoCommonNames:lmoCommonNames_EN_txt,geneTraits:geneTraits_EN_txt,url_ss',
 				query:  'schema_s:modifiedOrganism',
 				sort:	'uniqueIdentification_s asc, lmoScientificNames_ss asc, transformationEvent_s asc',
 				rowsPerPage: 10000
