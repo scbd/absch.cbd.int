@@ -34,10 +34,10 @@ function (app, _, template) {
 						return thesaurusService.getDomainTerms('legislationAgreementTypes')
 					},
 					subjectAreas : 	function(){
-						return thesaurusService.getDomainTerms('subjectAreas')
+						return thesaurusService.getDomainTerms('subjectAreas', {other:true, otherType:'lstring'})
 					},
 					typeOfOrganisms: 	function(){
-						return thesaurusService.getDomainTerms('typeOfOrganisms')
+						return thesaurusService.getDomainTerms('typeOfOrganisms', {other:true, otherType:'lstring'})
 					},
 				});
 				//==================================
