@@ -38,7 +38,7 @@
 			<div ng-show="document.jurisdiction">
 				<label>Area of jurisdiction</label>
 				<div class="km-value">
-					<span ng-if="!document.jurisdiction.customValue && !document.jurisdictionScope" ng-bind="document.jurisdiction|term:locale"></span>
+					<span ng-if="!document.jurisdiction.customValue" ng-bind="document.jurisdiction|term:locale"></span>
 					<ul ng-if="document.jurisdictionScope" class="list">
 						<li ng-repeat="item in document.jurisdictionScope">
 							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
