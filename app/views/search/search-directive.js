@@ -783,11 +783,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                         var ids = _.map(filter.selectedItems, 'identifier');
                                         if(filter.type == 'freeText'){                                          
                                             ids = _.map(filter.selectedItems,  function(filter){
-                                                return {name:filter.title} 
-                                                // // || _.trim(filter.title).split(' ').length>1
-                                                // if(filter.title.indexOf('-')>0) 
-                                                //     return '"' + solr.escape(_.trim(filter.title)) + '"'; 
-                                                // return solr.escape(_.trim(filter.title))
+                                                return {name:filter.title};
                                             });
                                             subQuery = buildFreeTextQuery('freeText', filter.field, ids);
                                             
