@@ -244,10 +244,17 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     $scope.onEditFreeTextFilterDone = function(filter){
                         // delete $scope.setFilters[filter.id];
+                        var oldKey =  filter.id;
                         filter.edit         =   false;
                         filter.name         = _.clone(filter.editValue);
                         filter.id           = filter.name 
                         filter.editValue    = undefined;
+
+                        $scope.setFilters = _.mapKeys($scope.setFilters, function(value, key) {
+                                                if(key == oldKey)
+                                                    return filter.id;
+                                                return key;
+                                            });
                         updateQueryResult();
                     }
 
@@ -693,7 +700,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var countryQuery        = _.compact([buildFieldQuery('country',  'countryRegions_ss'), buildFieldQuery('country',  'countryRegions_REL_ss')]).join(' OR ');
                         var partyStatusQuery    = buildPartyStatusQuery();
                         var regionQuery         = _.compact([buildFieldQuery('region',   'countryRegions_ss'), buildFieldQuery('region',   'countryRegions_REL_ss')]).join(' OR ');
-                        var textQuery           = buildFieldQuery('freeText', 'text_EN_txt');
+                        var textQuery           = buildFreeTextQuery('freeText', 'text_EN_txt');
                         var rawQuery            = buildRawQuery();
 
                         var dateQuery           = buildDateQuery();
@@ -906,7 +913,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                                 }
                                             }).compact().uniq().value();
 
-                        var excludedVals =  _(filters).map(function(filter){
+                        var excludedValues =  _(filters).map(function(filter){
                                                 if(!filter.disabled && filter.excludeResult){ 
                                                     if(filter.id.indexOf('-')>0) 
                                                         return '"' + solr.escape(_.trim(filter.name)) + '"'; 
