@@ -714,7 +714,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             query              = solr.andOr(queries, 'AND');
                         if(schemaQuery != '(*:*)')
                             tagQueries.schema  =  schemaQuery;
-                        tagQueries.version     =  'NOT version_s:*'
+                        tagQueries.version     =  '(*:* NOT version_s:*)'
                         tagQueries.schemaSub   =  schemaSubQuery.query;
                         tagQueries.schemaType  =  tabQuery;
                         tagQueries.partyStatus =  partyStatusQuery;
@@ -891,8 +891,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var query = '';
                         //for freetext use boosting
                         var boostFields = {
-                            title_EN_t           : 5,
-                            countryRegions_EN_txt: 4,
+                            countryRegions_EN_txt: 5,
+                            title_EN_t           : 4,
                             summary_EN_t         : 3,
                             schema_EN_t          : 2,
                             text_EN_txt          : 1,
@@ -903,7 +903,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         var freeTextVals = _(filters).map(function(filter){
                                                 if(!filter.disabled && !filter.excludeResult){ 
-                                                    if(filter.id.indexOf('-')>0) 
+                                                    if(filter.name.indexOf('-')>0) 
                                                         return '"' + solr.escape(_.trim(filter.name)) + '"'; 
                                                     return solr.escape(_.trim(filter.name))
                                                 }
@@ -911,7 +911,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         var excludedValues =  _(filters).map(function(filter){
                                                 if(!filter.disabled && filter.excludeResult){ 
-                                                    if(filter.id.indexOf('-')>0) 
+                                                    if(filter.name.indexOf('-')>0) 
                                                         return '"' + solr.escape(_.trim(filter.name)) + '"'; 
                                                     return solr.escape(_.trim(filter.name))
                                                 }
@@ -921,7 +921,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             query = buildBoostQuery(boostFields, freeTextVals);
 
                         if(excludedValues.length){
-                            var excludeQuery = '(NOT ' + buildBoostQuery(boostFields, freeTextVals) + ')'
+                            var excludeQuery = '(*:* NOT ' + buildBoostQuery(boostFields, excludedValues) + ')'
                             if(query.length){
                                 query = '(' + query + ' AND ' + excludeQuery + ')'
                             }
@@ -974,7 +974,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             query = field + ':(' + validValues.join(' ') + ')';
 
                         if(excludedValues.length){
-                            var excludeQuery = 'NOT ' + field + ':(' + excludedValues.join(' ') + ')'
+                            var excludeQuery = '*:* NOT ' + field + ':(' + excludedValues.join(' ') + ')'
                             if(query.length){
                                 query = '(' + query + ' AND ' + excludeQuery + ')'
                             }

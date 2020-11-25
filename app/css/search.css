@@ -140,3 +140,7 @@
    position: absolute;
    top: -7px;
 }
+
+.daterangepicker.show-ranges.show-calendar.opensright{
+    z-index: 100000000;
+}
