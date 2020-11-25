@@ -38,7 +38,7 @@
                                         <div class="col-md-1"><strong style="padding-left:50px;">OR</strong></div>
                                         <div class="col-md-6">                                            
                                             <div class="km-control-group" name="organization"
-                                                caption="Relevant Organization(s) " required>
+                                                caption="Relevant organization(s) " required>
                                                 <div document-selector ng-disabled="document.government" question="organization" type="radio"
                                                     query="organizationQuery" ng-change="onNotificationSelected()"
                                                     skip-government="true" ng-model="document.organization" allow-new-schema="organization">
@@ -96,7 +96,7 @@
                                         <div class="col-md-2"><strong style="padding-left:50px;">OR</strong></div>
                                         <div class="col-md-5">
                                             <div class="km-control-group" required="true" name="records"
-                                                caption="Related records(s)">
+                                                caption="Related record(s)">
                                                 <div document-selector ng-model="document.records" question="records"
                                                     filter="true"></div>
                                             </div>
@@ -106,7 +106,7 @@
                                 </section>
 
                                 <section ng-if="isAbs">
-                                    <legend>Thematic areas(s)</legend>
+                                    <legend>Thematic area(s)</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
@@ -119,7 +119,7 @@
                                 </section>
 
                                 <section ng-if="isBch">
-                                    <legend>Thematic areas(s)</legend>
+                                    <legend>Thematic area(s)</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
@@ -162,9 +162,9 @@
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="notes">
                                                 <span class="help-block">
-                                                    The field “Notes” is for personal reference and can be seen only
-                                                    when
-                                                    the record is being edited.
+                                                    The “Notes” field is for your personal use. 
+                                                    It can only be seen when the record is being edited but is not visible when the record is published.
+                                                     This field is not meant to be used for confidential information.
                                                 </span>
                                                 <div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
