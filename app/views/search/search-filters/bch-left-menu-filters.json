@@ -83,7 +83,7 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,rec_title:scientificName_s",
+				"fl": "identifier_s,rec_title:scientificName_s",
 				"q": "schema_s:organism AND scientificName_s:*",
 				"searchField":"scientificName_s"
 			},
@@ -194,7 +194,7 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,rec_title:scientificName_s",
+				"fl": "identifier_s,rec_title:scientificName_s",
 				"q": "schema_s:organism AND scientificName_s:*",
 				"searchField":"scientificName_s"
 			},
@@ -300,7 +300,7 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,rec_title:scientificName_s",
+				"fl": "identifier_s,rec_title:scientificName_s",
 				"q": "schema_s:organism AND scientificName_s:*",
 				"searchField":"scientificName_s"
 			},
@@ -373,7 +373,7 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,rec_title:scientificName_s",
+				"fl": "identifier_s,rec_title:scientificName_s",
 				"q": "schema_s:organism AND scientificName_s:*",
 				"searchField":"scientificName_s"
 			},
@@ -393,7 +393,7 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,rec_title:scientificName_s",
+				"fl": "identifier_s,rec_title:scientificName_s",
 				"q": "schema_s:organism AND scientificName_s:*",
 				"searchField":"scientificName_s"
 			},
@@ -459,7 +459,7 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fl": "identifier:identifier_s,rec_title:scientificName_s",
+				"fl": "identifier_s,rec_title:scientificName_s",
 				"q": "schema_s:organism AND scientificName_s:*",
 				"searchField":"scientificName_s"
 			},
