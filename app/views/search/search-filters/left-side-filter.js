@@ -190,7 +190,10 @@
                             _.each(filter.selectedItems, function(item){
                                 $element.find('#' + item.identifier).tooltip('hide')
                             })
-                        }                            
+                        }
+                        else{
+                            $scope.$broadcast('event:remove-selected-records', {instanceId:filter.$$hashKey});
+                        }
                         filter.selectedItems = {};
                     }
 

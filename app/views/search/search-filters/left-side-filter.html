@@ -1,5 +1,5 @@
 <div>
-    <div ng-if="leftMenuFilters" id="Search-Filter">
+    <div ng-if="leftMenuFilters" id="Search-Filter" class="left-menu-filters">
        <style>
             
        </style>
@@ -82,12 +82,12 @@
                                 <label  class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" ng-value="false"  ng-change="onFilterDateChange(filter)"/> No </label>
                             </div>
                             <div ng-if="filter.type=='solrRecords'">
-                                <div block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">
+                                <div block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">                                    
                                     <div ng-class="{'exclude-filter':filter.excludeResult}">
                                         <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
                                         <div document-selector identifier-without-revision="true" ng-model="filter.selectedItems" question="searchResult" type="checkbox"
                                             query="filter.query.q" display-fields="{{::filter.query.fl}}" free-text-query-field="{{::filter.query.searchField}}"
-                                            lookup-field={{::filter.query.lookupField}} skip-sync-documents="true"
+                                            lookup-field={{::filter.query.lookupField}} skip-sync-documents="true" instance-id="{{filter.$$hashKey}}"
                                             filter="true" ng-change="recordSelected(item, filter)" skip-government="true" list-view="true">
                                             <select-records>
                                                 <div class="color-darkgrey not" style="cursor: pointer;" ng-click="$parent.openAddDialog();">
