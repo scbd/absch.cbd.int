@@ -626,7 +626,7 @@
 				"q": "schema_s:organization"
 			},
 			"title": "Organization(s)",
-			"field": "organization_ss"
+			"field": "organizations_ss"
 		},
 		{
 			"type": "thesaurus",
