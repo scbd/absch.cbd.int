@@ -13,13 +13,9 @@
     $scope.organizationQuery = 'schema_s:organization OR (schema_s:contact AND type_s:organization)' 
     $controller('editController', {$scope: $scope});
 
-    _.extend($scope.options, {  
-        bchThematicAreas: function() {
-            return thesaurusService.getDomainTerms('cpbThematicAreas');
-        },
-        absThematicAreas: function() {
-            return thesaurusService.getDomainTerms('absSubjects');
-        },
+    _.extend($scope.options, { 
+        bchThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'}); },
+        absThematicAreas: function() {return thesaurusService.getDomainTerms('absSubjects');} 
     });
 
     //==================================
