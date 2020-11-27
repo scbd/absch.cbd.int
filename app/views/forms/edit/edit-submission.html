@@ -29,7 +29,7 @@
                                             <div class="km-control-group" required name="government" caption="Country"
                                                 required>
                                                 <div afc-autocomplete required name="government"
-                                                    ng-disabled="document.organization" ng-model="document.government"
+                                                    ng-disabled="document.organizations" ng-model="document.government"
                                                     source="options.countries" filter="genericFilter"
                                                     mapping="genericMapping" selectbox="true"
                                                     placeholder="Please select a country..."></div>
@@ -40,8 +40,8 @@
                                             <div class="km-control-group" name="organization"
                                                 caption="Relevant organization(s) " required>
                                                 <div document-selector ng-disabled="document.government"
-                                                    question="organizations" type="radio" query="organizationQuery"
-                                                    ng-change="onNotificationSelected()" skip-government="true"
+                                                    question="organizations" type="checkbox" query="organizationQuery"
+                                                    skip-government="true"
                                                     ng-model="document.organizations" allow-new-schema="organization">
                                                 </div>
                                             </div>
