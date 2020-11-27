@@ -17,10 +17,10 @@
                     <label>Country</label>
                     <div class="km-value km-pre" ng-bind="document.government | term:lstring:locale"></div>
                 </div>
-                <div ng-if="document.organization">
-                    <label>Organization</label>
+                <div ng-if="document.organizations">
+                    <label>Organization(s)</label>
                     <div class="km-value">
-                        <div view-record-reference ng-model="document.organization" locale="locale"></div>
+                        <div view-record-reference ng-model="document.organizations" locale="locale"></div>
                     </div>
                 </div>
             </div>
