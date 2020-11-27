@@ -39,7 +39,7 @@
       if(!$scope.isOtherSelected(document.resourceTypes))
           document.resourceTypeName = undefined;
 
-      if(document.organizations && document.organizations.length <=0)
+      if(document.organizations && !document.organizations.length)
           document.organizations = undefined;
 
         var documentCopy = _.clone(document);
@@ -50,7 +50,6 @@
     };
 
     $scope.onNotificationSelected = function(){
-        console.log('onnoti')
         if((($scope.document||{}).notifications||[]).length){
             var selected = _.map($scope.document.notifications, 'identifier');
             var query = 'schema_s:notification AND symbol_s:(' + _.map(selected, solr.escape).join(' ') + ')';

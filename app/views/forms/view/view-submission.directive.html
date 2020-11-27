@@ -20,7 +20,11 @@
                 <div ng-if="document.organizations">
                     <label>Organization(s)</label>
                     <div class="km-value">
-                        <div view-record-reference ng-model="document.organizations" locale="locale"></div>
+                        <ul class="list">
+                            <li ng-repeat="item in document.organizations" >
+                                <div view-record-reference ng-model="item.identifier" locale="locale"></div>
+                            </li>
+                        </ul>                        
                     </div>
                 </div>
             </div>
