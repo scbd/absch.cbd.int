@@ -37,7 +37,9 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                         fl    : localizeFields(searchQuery.fields),
                         wt    : 'json',
                         start : searchQuery.start || (searchQuery.currentPage * searchQuery.rowsPerPage),
-                        rows  : searchQuery.rowsPerPage
+                        rows  : searchQuery.rowsPerPage,
+                        // 'debug.explain.structured':true,
+                        // "debugQuery":"on"
                     };
 
                     if(searchQuery.highlight){
@@ -57,7 +59,7 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
 
                     // console.log("list:" + q + searchQuery.query);
 
-                    return $http.get('/api/v2013/index/select', { params: queryListParameters, timeout: queryCanceler })
+                    return $http.post('/api/v2013/index/select', queryListParameters, { timeout: queryCanceler })
                             .then(function(data){
                                 if(searchQuery.facet){ /// Normalize Facets                                   
                                     data.data.facet_counts.facet_fields = facetsToObject(data.data.facet_counts.facet_fields, searchQuery.facetFields)

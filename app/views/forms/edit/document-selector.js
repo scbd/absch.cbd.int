@@ -99,7 +99,8 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
             $scope.clearSelectedDocuments = function(){
                 $scope.tempSelectedDocuments = [];
-                $scope.selectedDocuments = [];
+                $scope.selectedDocuments     = [];
+                $scope.selectedRawDocuments  = [];
                 _.forEach($scope.rawDocuments.docs,function(doc){
                     doc.__checked = false;
                 });
@@ -258,6 +259,27 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
 			};
 
+            $scope.$on('event:remove-selected-record', function (evt, data) {
+
+                if($attr.instanceId){
+                    if(data.instanceId == $attr.instanceId)
+                        $scope.removeDocument(data.document);
+                }
+                else{
+                    console.warn('event:remove-selected-record raised without unique instance id, please set instance-id attribute on the element to process the event')
+                }
+            });
+
+            $scope.$on('event:remove-selected-records', function (evt, data) {
+
+                if($attr.instanceId){
+                    if(data.instanceId == $attr.instanceId)
+                        $scope.clearSelectedDocuments();
+                }
+                else{
+                    console.warn('event:remove-selected-record raised without unique instance id, please set instance-id attribute on the element to process the event')
+                }
+            });
              //==================================
             //
             //==================================
