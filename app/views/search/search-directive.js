@@ -891,6 +891,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var query = '';
                         //for freetext use boosting
                         var boostFields = {
+                            uniqueIdentifier_t   : 6,
                             countryRegions_EN_txt: 5,
                             title_EN_t           : 4,
                             summary_EN_t         : 3,
@@ -918,7 +919,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                             }).compact().uniq().value();
                         
                         if(freeTextVals.length)
-                            query = buildBoostQuery(boostFields, freeTextVals);
+                            query = _.map(freeTextVals, function(val){return buildBoostQuery(boostFields, val)}).join(' AND ');
 
                         if(excludedValues.length){
                             var excludeQuery = '(*:* NOT ' + buildBoostQuery(boostFields, excludedValues) + ')'
@@ -933,12 +934,12 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     }
 
-                    function buildBoostQuery(boostFields, vals){
+                    function buildBoostQuery(boostFields, val){
                         // to avoid solr falling back to default field when 
                         // search has multiple words put text inside ()                            
                         return  '(' + 
                                     _(boostFields).map(function(boost, boostField){
-                                            return '(' + boostField + ':(' + vals.join(')^' + boost + ' AND (' + boostField + ':') + ')^'+ boost + ')';
+                                        return '(' + boostField + ':(' + val + ')^'+ boost + ')';
                                     }).value().join(' OR ') +
                                 ')'
                     }
