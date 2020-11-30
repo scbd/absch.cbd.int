@@ -892,6 +892,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         //for freetext use boosting
                         var boostFields = {
                             uniqueIdentifier_t   : 6,
+                            government_EN_t      : 5.5,
                             countryRegions_EN_txt: 5,
                             title_EN_t           : 4,
                             summary_EN_t         : 3,
