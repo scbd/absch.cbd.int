@@ -1,74 +1,7 @@
 <div>
-    <div ng-if="leftMenuFilters" id="Search-Filter">
+    <div ng-if="leftMenuFilters" id="Search-Filter" class="left-menu-filters">
        <style>
-            #Search-Filter .label-selected-facet {
-                position: relative;
-                display: block;
-                background-color: #12496B;
-                margin: 4px 0;
-                padding-right: 20px;
-                text-align: left;
-                height: 20px;
-                padding-top: 6px;
-                border-radius: 3px;
-            }
-            #Search-Filter .truncate {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            #Search-Filter .truncate span{
-                vertical-align: middle;
-            }
-            #Search-Filter .no-left-right-bottom-border{
-                border-left: none;
-                border-right: none;
-                border-bottom: none;
-            }
-            #Search-Filter .search-filter-settings > li{
-                margin: 5px;
-            }
-            #Search-Filter .search-filter-settings li > a{
-                padding-left: 3px;
-            }
-            #Search-Filter .strikeout{
-                text-decoration: line-through;
-            }
-            #Search-Filter .bring-to-front{
-                z-index: 1000000;
-            }
-            #Search-Filter .bring-to-front1{
-                z-index: 10000001;
-            }
-            .ngdialog-open #Search-Filter .bring-to-front, .ngdialog-open #Search-Filter .bring-to-front1{
-                z-index: 10;
-            }
-            #Search-Filter .exclude-filter{
-                border: 1px solid #d95350;;
-                padding: 5px;
-            }
-            .ngdialog.ngdialog-theme-default .ngdialog-content .modal-body{
-                background:#fff;
-            }
-            .ngdialog.ngdialog-theme-default .ngdialog-content{
-                width:85%!important
-            }
-            #Search-Filter .filter-item{
-                border-right: unset;
-                border-left: unset;
-                padding-left: 5px;
-                padding-right: 13px;
-            }
-            #Search-Filter .filter-item:hover{
-                background:#ddd;
-            }
-
-            @media (max-width: 480px) {
-                .pagination-items-per-page, .pagination-page-count, .pagination-btn-first,
-                .pagination-record-count, .pagination-btn-last{
-                    display: none!important;
-                }
-            }
+            
        </style>
         <div style="border-bottom: 1px solid #eee">
             <h1>Filters</h1>
@@ -149,12 +82,12 @@
                                 <label  class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" ng-value="false"  ng-change="onFilterDateChange(filter)"/> No </label>
                             </div>
                             <div ng-if="filter.type=='solrRecords'">
-                                <div block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">
+                                <div block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">                                    
                                     <div ng-class="{'exclude-filter':filter.excludeResult}">
                                         <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
                                         <div document-selector identifier-without-revision="true" ng-model="filter.selectedItems" question="searchResult" type="checkbox"
                                             query="filter.query.q" display-fields="{{::filter.query.fl}}" free-text-query-field="{{::filter.query.searchField}}"
-                                            lookup-field={{::filter.query.lookupField}} skip-sync-documents="true"
+                                            lookup-field={{::filter.query.lookupField}} skip-sync-documents="true" instance-id="{{filter.$$hashKey}}"
                                             filter="true" ng-change="recordSelected(item, filter)" skip-government="true" list-view="true">
                                             <select-records>
                                                 <div class="color-darkgrey not" style="cursor: pointer;" ng-click="$parent.openAddDialog();">

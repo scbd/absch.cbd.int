@@ -69,7 +69,7 @@ require.config({
         'angular-route'                 : { 'deps': ['angular'] },
         'angular-cookies'               : { 'deps': ['angular'] },
         'angular-sanitize'              : { 'deps': ['angular'] },
-        'bootstrap'                     : { 'deps': ['jquery'] },
+        'bootstrap'                     : { 'deps': ['jquery', 'jquery-ui'] },
         'bootstrap-datepicker'          : { 'deps': ['jquery'] },
         'datepicker-range'              : { 'deps': ['jquery', 'css!'+cdnHost+'daterangepicker@3.0.5/daterangepicker.css'] },   
         'underscore'                    : { 'exports': '_' },
