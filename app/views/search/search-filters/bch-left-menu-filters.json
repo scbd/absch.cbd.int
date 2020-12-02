@@ -334,7 +334,7 @@
 		{
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
-			"title": "Related trait(s) or use(s) in biotechnology",
+			"title": "Modified trait",
 			"field": "trait_ss",
 			"relatedField":"trait_REL_ss"
 		},
