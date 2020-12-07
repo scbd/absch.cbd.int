@@ -1,0 +1,376 @@
+﻿[
+    {
+      "_id": "5aa2db157d20f19bfaf663fd",
+      "hosts": [
+        "absch.cbddev.xyz",
+        "absch.local",
+        "absch.cbd.local"
+      ],
+      "protocol": "Nagoya Protocol",
+      "protocolShortName": "ABSCH",
+      "uIdPrefix": "ABSCH",
+      "realm": "ABS-DEV",
+      "displayName": "Access and Benefit-Sharing Clearing-House-Dev",
+      "email": "absch@cbd.int",
+      "adminRoles": [
+        "AbsDocumentValidationTeamMember-dev"
+      ],
+      "nfpRoles": [
+        "AbsPublishingAuthorities-dev"
+      ],
+      "notificationTemplateFolder": "ABS",
+      "baseURL": "https://absch.cbddev.xyz",
+      "envMsg": "This record is from ABSCH-Dev (test environment)",
+      "roles": {
+        "administrator": [
+          "AbsAdministrator-dev",
+          "Administrator"
+        ],
+        "publishingAuthorities": [
+          "AbsPublishingAuthorities-dev"
+        ],
+        "iac": [
+          "abschiac"
+        ],
+        "nationalAuthorizedUser": [
+          "AbsNationalAuthorizedUser-dev"
+        ],
+        "nationalFocalPoint": [
+          "AbsNationalFocalPoint-dev"
+        ]
+      },
+      "schemas": {
+        "focalPoint": {
+          "type": "national",
+          "title": {
+            "en": "ABS National Focal Point"
+          },
+          "description": {
+            "en": "ABS National Focal Points"
+          },
+          "shortCode": "NFP",
+          "titlePlural": {
+            "en": "ABS National Focal Points"
+          }
+        },
+        "authority": {
+          "type": "national",
+          "title": {
+            "en": "Competent National Authority"
+          },
+          "description": {
+            "en": "Competent National Authorities"
+          },
+          "shortCode": "CNA",
+          "titlePlural": {
+            "en": "Competent National Authorities"
+          },
+          "publishingAuthorities": [
+            "AbsPublishingAuthorities-dev"
+          ],
+          "nationalAuthorizedUser": [
+            "AbsNationalAuthorizedUser-dev"
+          ]
+        },
+        "measure": {
+          "type": "national",
+          "title": {
+            "en": "Legislative, Administrative or Policy Measure"
+          },
+          "description": {
+            "en": "Legislative, Administrative or Policy Measures"
+          },
+          "shortCode": "MSR",
+          "titlePlural": {
+            "en": "Legislative, Administrative or Policy Measures"
+          }
+        },
+        "absProcedure": {
+          "type": "national",
+          "title": {
+            "en": "ABS Procedure"
+          },
+          "description": {
+            "en": "ABS Procedure"
+          },
+          "shortCode": "PRO",
+          "titlePlural": {
+            "en": "ABS Procedures"
+          }
+        },
+        "absNationalModelContractualClause": {
+          "type": "national",
+          "title": {
+            "en": "National Model Contractual Clause"
+          },
+          "description": {
+            "en": "National Model Contractual Clause"
+          },
+          "shortCode": "NMCC",
+          "titlePlural": {
+            "en": "National Model Contractual Clauses"
+          }
+        },
+        "absPermit": {
+          "type": "national",
+          "title": {
+            "en": "Internationally Recognized Certificates of Compliance"
+          },
+          "description": {
+            "en": "Internationally Recognized Certificates of Compliance"
+          },
+          "shortCode": "IRCC",
+          "titlePlural": {
+            "en": "Internationally Recognized Certificates of Compliance"
+          }
+        },
+        "database": {
+          "type": "national",
+          "title": {
+            "en": "National Websites or Databases"
+          },
+          "description": {
+            "en": "National Websites or Databases"
+          },
+          "shortCode": "NDB",
+          "titlePlural": {
+            "en": "National Websites or Databases"
+          }
+        },
+        "absCheckpoint": {
+          "type": "national",
+          "title": {
+            "en": "Checkpoint"
+          },
+          "description": {
+            "en": "Checkpoints"
+          },
+          "shortCode": "CP",
+          "titlePlural": {
+            "en": "Checkpoints"
+          }
+        },
+        "absCheckpointCommunique": {
+          "type": "national",
+          "title": {
+            "en": "Checkpoint Communiqué"
+          },
+          "description": {
+            "en": "Checkpoint Communiqués"
+          },
+          "shortCode": "CPC",
+          "titlePlural": {
+            "en": "Checkpoint Communiqués"
+          }
+        },
+        "absNationalReport": {
+          "type": "national",
+          "title": {
+            "en": "Interim National Reports on the Implementation of the Nagoya Protocol"
+          },
+          "description": {
+            "en": "Interim National Reports on the Implementation of the Nagoya Protocol"
+          },
+          "shortCode": "NR",
+          "titlePlural": {
+            "en": "Interim National Reports on the Implementation of the Nagoya Protocol"
+          }
+        },
+        "resource": {
+          "type": "reference",
+          "publishingAuthorities": [
+            "AbsDocumentValidationTeamMember-dev"
+          ],
+          "title": {
+            "en": "Virtual Library Resource"
+          },
+          "description": {
+            "en": "Virtual Library Resources"
+          },
+          "shortCode": "VLR",
+          "titlePlural": {
+            "en": "Virtual Library Resources"
+          }
+        },
+        "organization": {
+          "type": "reference",
+          "publishingAuthorities": [
+            "AbsDocumentValidationTeamMember-dev"
+          ],
+          "title": {
+            "en": "Organization"
+          },
+          "description": {
+            "en": "Organizations"
+          },
+          "shortCode": "ORG",
+          "titlePlural": {
+            "en": "Organizations"
+          }
+        },
+        "capacityBuildingInitiative": {
+          "type": "reference",
+          "assign": [
+            "AbsPACapacityBuildingInitiative-dev"
+          ],
+          "notify": [
+            "AbsPACapacityBuildingInitiative-dev"
+          ],
+          "title": {
+            "en": "Capacity-building Initiative"
+          },
+          "description": {
+            "en": "Capacity-building Initiatives"
+          },
+          "shortCode": "CBI",
+          "titlePlural": {
+            "en": "Capacity-building Initiatives"
+          }
+        },
+        "capacityBuildingResource": {
+          "type": "reference",
+          "assign": [
+            "AbsPACapacityBuildingResource-dev"
+          ],
+          "notify": [
+            "AbsPACapacityBuildingResource-dev"
+          ],
+          "title": {
+            "en": "Capacity-building Resource"
+          },
+          "description": {
+            "en": "Capacity-building Resources"
+          },
+          "shortCode": "CBR",
+          "titlePlural": {
+            "en": "Capacity-building Resources"
+          }
+        },
+        "modelContractualClause": {
+          "type": "reference",
+          "assign": [
+            "AbsPAModelContractualClause-dev"
+          ],
+          "notify": [
+            "AbsPAModelContractualClause-dev"
+          ],
+          "title": {
+            "en": "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standard"
+          },
+          "description": {
+            "en": "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards"
+          },
+          "shortCode": "A19A20",
+          "titlePlural": {
+            "en": "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards"
+          }
+        },
+        "communityProtocol": {
+          "type": "reference",
+          "assign": [
+            "AbsPACommunityProtocol-dev"
+          ],
+          "notify": [
+            "AbsPACommunityProtocol-dev"
+          ],
+          "title": {
+            "en": "Community Protocols and Procedures and Customary Law"
+          },
+          "description": {
+            "en": "Community Protocols and Procedures and Customary Laws"
+          },
+          "shortCode": "CPP",
+          "titlePlural": {
+            "en": "Community Protocols and Procedures and Customary Laws"
+          }
+        },
+        "contact": {
+          "type": "national",
+          "publishingAuthorities": [
+            "AbsAdministrator-dev",
+            "AbsNationalFocalPoint-dev",
+            "AbsPublishingAuthorities-dev",
+            "AbsNationalAuthorizedUser-dev"
+          ],
+          "title": {
+            "en": "Contact"
+          },
+          "description": {
+            "en": "Contact"
+          },
+          "shortCode": "CON",
+          "titlePlural": {
+            "en": "Contact"
+          }
+        }
+      },
+      "pdf": {
+        "documents": {
+          "path": "database/records/:documentID/:revision?print=true",
+          "fields": [
+            "documentID",
+            "revision"
+          ],
+          "fileName": ":documentID-:revision",
+          "s3": {
+            "bucket": "absch.documents.abs-dev",
+            "folder": "records"
+          },
+          "usePrincePdf": true
+        },
+        "scbd-records": {
+          "path": "database/:schema/:documentID/:revision?print=true",
+          "fields": [
+            "documentID",
+            "revision",
+            "schema"
+          ],
+          "fileName": ":documentID",
+          "s3": {
+            "bucket": "absch.documents.abs-dev",
+            "folder": "records"
+          },
+          "usePrincePdf": true
+        },
+        "country-profile": {},
+        "ircc-certificate": {
+          "path": "pdf-templates/ircc/:documentID-:revision",
+          "fields": [
+            "documentID",
+            "revision"
+          ],
+          "fileName": ":documentID-:revision",
+          "s3": {
+            "bucket": "absch.documents.abs-dev",
+            "folder": "abs-permit"
+          },
+          "usePrincePdf": true
+        },
+        "cpc-certificate": {
+          "path": "pdf-templates/checkpoint-communique/:documentID-:revision",
+          "fields": [
+            "documentID",
+            "revision"
+          ],
+          "fileName": ":documentID-:revision",
+          "s3": {
+            "bucket": "absch.documents.abs-dev",
+            "folder": "abs-checkpoint-communique"
+          },
+          "usePrincePdf": true
+        },
+        "abs-contacts": {
+          "path": "/pdf-templates/contacts/:schema",
+          "fields": [
+            "schema"
+          ],
+          "fileName": "absch-all-:schema",
+          "s3": {
+            "bucket": "absch.documents.abs-dev",
+            "folder": "contacts.pdf"
+          },
+          "usePrincePdf": true
+        }
+      }
+    }
+  ]
