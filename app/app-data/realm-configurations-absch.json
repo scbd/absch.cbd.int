@@ -46,7 +46,7 @@
             "en": "ABS National Focal Point"
           },
           "description": {
-            "en": "ABS National Focal Points"
+            "en": "Nagoya Protocol National Focal Points are designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1)"
           },
           "shortCode": "NFP",
           "titlePlural": {
@@ -59,7 +59,7 @@
             "en": "Competent National Authority"
           },
           "description": {
-            "en": "Competent National Authorities"
+            "en": "Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)"
           },
           "shortCode": "CNA",
           "titlePlural": {
@@ -130,7 +130,7 @@
             "en": "National Websites or Databases"
           },
           "description": {
-            "en": "National Websites or Databases"
+            "en": "National websites and databases related to ABS."
           },
           "shortCode": "NDB",
           "titlePlural": {
@@ -169,7 +169,7 @@
             "en": "Interim National Reports on the Implementation of the Nagoya Protocol"
           },
           "description": {
-            "en": "Interim National Reports on the Implementation of the Nagoya Protocol"
+            "en": "Interim national reports on implementation of the Nagoya Protocol on Access and Benefit-sharing (due 1 November 2017)"
           },
           "shortCode": "NR",
           "titlePlural": {
@@ -185,7 +185,7 @@
             "en": "Virtual Library Resource"
           },
           "description": {
-            "en": "Virtual Library Resources"
+            "en": "An electronic catalogue of ABS-related resources, including literature on ABS, reports and case studies, awareness-raising materials, videos, capacity-building resources, etc."
           },
           "shortCode": "VLR",
           "titlePlural": {
@@ -220,7 +220,7 @@
             "en": "Capacity-building Initiative"
           },
           "description": {
-            "en": "Capacity-building Initiatives"
+            "en": "Information on capacity-building Initiatives at national, regional and international levels, including activities and outcomes."
           },
           "shortCode": "CBI",
           "titlePlural": {
