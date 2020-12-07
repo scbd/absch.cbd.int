@@ -37,14 +37,15 @@ function($scope,searchService,$element, $rootScope) {
 		$scope.export = function () {
 			$scope.readyForExport = true;
 			require(['tableexport'], function () {
-				$element.find('#forExport').tableExport({
+				$element.find('#lmoExport').tableExport({
 					formats: ['xlsx'],
 					filename: 'LMO-registry',
 				});
 				$element.find('.xlsx').click();
+				$element.find('.xlsx').remove();
 				$scope.$applyAsync(function () {
 					$scope.readyForExport = false;
-				})
+				}, 200)
 			});
 		}
 

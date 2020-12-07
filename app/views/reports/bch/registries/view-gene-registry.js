@@ -37,11 +37,12 @@ function($scope,searchService,$element, $rootScope) {
 		$scope.export = function () {
 			$scope.readyForExport = true;
 			require(['tableexport'], function () {
-				$element.find('#forExport').tableExport({
+				$element.find('#geneExport').tableExport({
 					formats: ['xlsx'],
 					filename: 'GENE-registry',
 				});
 				$element.find('.xlsx').click();
+				$element.find('.xlsx').remove();
 				$scope.$applyAsync(function () {
 					$scope.readyForExport = false;
 				}, 200)
