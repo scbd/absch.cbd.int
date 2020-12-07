@@ -211,7 +211,7 @@
                 <button class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
                 <button class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
             </div>
-           <div pagination  class="text-center" ng-if="rawDocuments.pageCount>1" current-page="searchResult.currentPage" 
+           <div pagination class="text-center" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage" 
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
                 num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"
                 max-page-count="4"></div> 
@@ -288,7 +288,7 @@
                 <button class="btn btn-default" data-toggle="tooltip" data-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
                 <button class="btn btn-default" data-toggle="tooltip" data-title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
             </div>
-            <div pagination  class="text-center" ng-if="rawDocuments.pageCount>1" current-page="searchResult.currentPage" 
+            <div pagination class="text-center" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage" 
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
                 num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"
                 max-page-count="4"></div> 
