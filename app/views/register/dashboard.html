@@ -103,35 +103,36 @@
                             <td>
                                 <span class="comma" ng-if="roles.isNationalFocalPoint">
                                     National Focal Point
-                                    <span class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
-                                        data-html="true"
-                                        data-title="The National Focal Point is responsible for liason with the Secretariat as well as to designate themselves or another user as the Publishing Authority (PA)."
-                                        data-container="body"></span>
-                                </span>
-
+                                    <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body"
+                                        data-title="The National Focal Point is responsible for liaison with the Secretariat as well as for designating themselves or another user as a BCH focal point.">
+                                    </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body"
+                                        data-title="The National Focal Point is responsible for liaison with the Secretariat as well as for designating themselves or another user as a Publishing Authority.">
+                                    </span></span>
+                               
                                 <span class="comma" ng-if="roles.isPublishingAuthority">
-                                        Publishing Authority (PA)
-                                        <span class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
-                                            data-html="true"
-                                            data-title="Each country can designate only one Publishing Authority (PA). The PA's job is to make information publically available by verifing and publishing records. A PA can also designate National Authorized Users (NAUs) who are allowed to submit draft records for their country."
-                                            data-container="body"></span></span>
-
+                                    Publishing Authority (PA)                 
+                                    <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" 
+                                        data-title="Each country can designate one BCH focal point whose role it is to publish national records in the BCH. The BCH focal point can create, edit and publish national records. The BCH focal point can also designate National Authorized Users who can prepare draft records for their country and submit them to the BCH focal point to verify and publish.">
+                                    </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" 
+                                        data-title="Each country can designate only one Publishing Authority (PA). The PA’s job is to make information publicly available by verifying and publishing records. A PA can also designate National Authorized Users who can prepare draft records for their country and submit them to the PA.">
+                                    </span></span>
+                               
                                 <span class="comma" ng-if="roles.isNationalAuthorizedUser">
-                                    National Authorized User (NAU)
-                                    <span class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
-                                        data-html="true"
-                                        data-title="National Authorized User (NAUs) can create draft national record  and submit them to the PA for approval."
-                                        data-container="body"></span>
-                                </span>
-
+                                    National Authorized User (NAU) 
+                                    <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" 
+                                        data-title="National Authorized User (NAUs) can create draft national records and submit them to the BCH focal point for approval.">
+                                    </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" 
+                                        data-title="National Authorized User (NAUs) can create draft national records and submit them to the Publishing Authority for approval.">
+                                    </span></span>
+                               
                                 <span class="comma" ng-if="roles.isUser">
-                                    Registered User
-                                    <span class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip"
-                                        data-html="true"
-                                        data-title="Regular users can create draft reference records and request their publication from the SCBD."
-                                        data-container="body"></span>
-                                </span>
-
+                                    Registered User 
+                                    <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" 
+                                        data-title="Regular users can create draft reference records and request their publication from the CBD Secretariat.">
+                                    </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" 
+                                        data-title="Regular users can create draft reference records and request their publication from the CBD Secretariat.">
+                                    </span></span>
+                                
                                 <span class="comma" ng-if="roles.isAdministrator">
                                     <strong class="color-pink">Admin</strong>
                                 </span>
