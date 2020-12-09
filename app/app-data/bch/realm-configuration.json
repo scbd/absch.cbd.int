@@ -196,7 +196,7 @@
             "en": "Contact"
           },
           "description": {
-            "en": "Contact"
+            "en": "Contact details of a person or organization."
           },
           "publishingAuthorities": [
             "BchAuthorizedUser-Dev",
