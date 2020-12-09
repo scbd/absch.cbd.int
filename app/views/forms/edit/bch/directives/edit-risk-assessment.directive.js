@@ -52,6 +52,12 @@ function (app, _, template) {
 						document.codexConduted = undefined;
 						document.forwardToFAO = undefined;
 					}
+
+					if(!document.isForFoodSafety){
+						document.codexConduted = undefined;
+						document.forwardToFAO = undefined;
+					}
+
 					if (/^\s*$/g.test(document.notes))
 						document.notes = undefined;
 
