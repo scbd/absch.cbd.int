@@ -266,7 +266,7 @@
 		{
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
-			"title": "Related trait(s) or use(s) in biotechnology",
+			"title": "Modified traits",
 			"field": "lmoTraits_ss",
 			"relatedField":"lmoTraits_REL_ss"
 		},
@@ -425,7 +425,7 @@
 		{
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
-			"title": "Related trait(s) or use(s) in biotechnology",
+			"title": "Modified traits",
 			"field": "lmoTraits_ss",
 			"relatedField":"lmoTraits_REL_ss"
 		},
