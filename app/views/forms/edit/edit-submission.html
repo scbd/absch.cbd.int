@@ -154,10 +154,19 @@
                             </section>
                             <section>
                                 <div class="well no-shadow bg-white">
-                                    <legend>Additional information</legend>
+                                    <legend>Documents</legend>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="address"
+                                            <div class="km-control-group" name="relevantDocuments" required caption="Documents">
+                                                <div km-link name="relevantDocuments"
+                                                    ng-model="document.relevantDocuments" allow-link="true"
+                                                    allow-file="true" identifier="document.header.identifier"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="km-control-group" name="relevantInformation"
                                                 caption="Any other relevant information">
                                                 <div class="help-block">Please use this field to provide any other
                                                     relevant information that may not have been addressed elsewhere in
@@ -168,22 +177,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <div class="km-control-group" name="relevantDocuments"
-                                                caption="Any other relevant documents">
-                                                <div class="help-block">
-                                                    Please use this field to provide any other relevant website
-                                                    addresses and/or one or more
-                                                    relevant documents that will be stored in the database for users to
-                                                    download.
-                                                </div>
-                                                <div km-link name="relevantDocuments"
-                                                    ng-model="document.relevantDocuments" allow-link="true"
-                                                    allow-file="true" identifier="document.header.identifier"></div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </section>
                             <section>
