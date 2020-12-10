@@ -334,7 +334,7 @@
 		{
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
-			"title": "Modified trait",
+			"title": "Modified traits",
 			"field": "trait_ss",
 			"relatedField":"trait_REL_ss"
 		},
