@@ -2,7 +2,7 @@ define(['app', 'lodash', 'text!./edit-biosafety-decision.directive.html', 'views
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-decision.directive"], 
 function (app, _, template) {
 
-	app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", function($controller, thesaurusService) {
+	app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", function($controller, thesaurusService, $routeParams) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -12,7 +12,7 @@ function (app, _, template) {
 				onPostSubmitFn   : "&onPostSubmit"
 			},
 			link: function($scope, $element, $attr){
-
+                $scope.isEdit = $routeParams.identifier;
 				$scope.scientificNameSynonyms = [{}];
 				$scope.commonNames = [{}];
 				$scope.container        = $attr.container;
@@ -33,14 +33,31 @@ function (app, _, template) {
                             });
                         });
                     },
-                    otherDecisions: function() {
-                        return thesaurusService.getDomainTerms('decisionTypes').then(function(o) {					
-                            return _.filter(o, function(item){
-                                return !_.includes(commonDecisionsIdentifiers, item.identifier) 
+
+                    //test code , not final yet 
+                    otherDecisionsF3: function() {
+                        return thesaurusService.getDomainTerms('decisionTypes').then(function(o) {
+                            return _.filter(o, function(item, i){
+                                if(i>8){
+                                    return;
+                                }
+                                return !_.includes(commonDecisionsIdentifiers, item.identifier)
                                     && _.intersection(commonDecisionsIdentifiers, item.broaderTerms).length ==0
                             });
                         });
                     },
+                    otherDecisionsL4: function() {
+                        return thesaurusService.getDomainTerms('decisionTypes').then(function(o) {
+                            return _.filter(o, function(item, i){
+                                if(i<9){
+                                    return;
+                                }
+                                return !_.includes(commonDecisionsIdentifiers, item.identifier)
+                                    && _.intersection(commonDecisionsIdentifiers, item.broaderTerms).length ==0
+                            });
+                        });
+                    },
+                    // end of test code 
                     intentionDecisions: function() {
                         return thesaurusService.getDomainTerms('decisionTypes').then(function(o) {					
                             return _.filter(o, function(item){
@@ -64,6 +81,22 @@ function (app, _, template) {
                     
                 });
                 
+                $scope.onCountryChange = function(code){
+                   // console.log(code);
+                    if(code==='eu'){
+                        $scope.isEUSelected = true ;
+                        var euCountryCodes = ['EU','AT', 'BE', 'HR', 'BG', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE',
+                        'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'GB'];
+                        $scope.queryEU = {
+                            fields:  '*',
+                            query:  'schema_s:authority',
+                            
+                        };
+                    }
+                    else{
+                        $scope.isEUSelected = false ;   
+                    }
+                }
 
                 $scope.onCommonDecisionChanged = function(){
                     $scope.isLmoDecisionForIntentionalIntroduction	= _($scope.decisions.commonDecisions||[]).map('identifier').includes(commonDecisionsIdentifiers[0]);
@@ -97,6 +130,18 @@ function (app, _, template) {
                         document.decisionTypes = _(decisionTypes).compact().flatten().value();
                     else
                         document.decisionTypes = undefined;
+                    //Information sharing with other databases
+                    if(!document.isForCommercialUse){
+						document.forwardToOECD = undefined;
+						document.isForFoodSafety = undefined;
+						document.codexConduted = undefined;
+						document.forwardToFAO = undefined;
+					}
+
+					if(!document.isForFoodSafety){
+						document.codexConduted = undefined;
+						document.forwardToFAO = undefined;
+					}
 
                     if (/^\s*$/g.test(document.notes))
                         document.notes = undefined;
