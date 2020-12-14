@@ -1,4 +1,4 @@
-define(['app','css!/app/css/registry.css','services/search-service'], function(app) { 'use strict';
+define(['app','lodash', 'css!/app/css/registry.css','services/search-service'], function(app, _) { 'use strict';
 
 return ['$scope','searchService','$element', '$rootScope',
 function($scope,searchService,$element, $rootScope) {  
@@ -21,7 +21,11 @@ function($scope,searchService,$element, $rootScope) {
 				$scope.geneRecords = [];
 				$scope.numFound = 0;
 				if(result.data){
-					$scope.geneRecords = result.data.response.docs;
+					$scope.geneRecords = _.sortBy(result.data.response.docs, function(doc){
+												if(!doc.organismScientificNames)
+													return [ _.trim(doc.name.toLowerCase())];
+												return [ _.trim(doc.name.toLowerCase()), _.trim(doc.organismScientificNames[0]) ];
+											});
 					$scope.numFound = result.data.response.numFound;
 				}
 			  }) 
