@@ -22,7 +22,10 @@ function (app, _, template) {
                 $controller('editController', {
                     $scope: $scope
                 });
-
+                $scope.isEdit = false;
+                if($routeParams.identifier != undefined){
+                    $scope.isEdit = true;
+                }
                 var commonDecisionsIdentifiers = ["E8C5A15C-A736-4fb7-A1B6-192412BE7E45", "BE64016A-C3BD-4C61-9620-C3FEF96B2A24"]
                 _.extend($scope.options, {
 
@@ -82,22 +85,15 @@ function (app, _, template) {
                 });
                 
                 $scope.onCountryChange = function(code){
-                   // console.log(code);
-                    if(code==='eu'){
+                    if(code == 'eu'){
+                        var euCountryCodes = ['eu,at,be,hr,bg,cy,cz,dk,ee,fi,fr,de,gr,hu,ie,it,lv,lt,lu,mt,nl,pl,pt,ro,sk,si,es,se,bg'];
+                        $scope.queryEU = "schema_s:authority AND government_s="+euCountryCodes;
                         $scope.isEUSelected = true ;
-                        var euCountryCodes = ['EU','AT', 'BE', 'HR', 'BG', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE',
-                        'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE', 'GB'];
-                        $scope.queryEU = {
-                            fields:  '*',
-                            query:  'schema_s:authority',
-                            
-                        };
                     }
                     else{
-                        $scope.isEUSelected = false ;   
+                        $scope.isEUSelected = false ;
                     }
                 }
-
                 $scope.onCommonDecisionChanged = function(){
                     $scope.isLmoDecisionForIntentionalIntroduction	= _($scope.decisions.commonDecisions||[]).map('identifier').includes(commonDecisionsIdentifiers[0]);
                     $scope.isLmoDecisionForDirectUse				= _($scope.decisions.commonDecisions||[]).map('identifier').includes(commonDecisionsIdentifiers[1]);
@@ -111,7 +107,13 @@ function (app, _, template) {
 
                     if (!document)
                         return undefined;
-
+                    if(document.government != undefined && document.government.identifier == 'eu'){
+                        $scope.onCountryChange('eu');
+                        $scope.isEUSelected = true ;
+                        }
+                    else{
+                        $scope.isEUSelected = false ;
+                        }
                     //////////////////////////////////
                     /////make decision Types field
                     //////////////////////////////////

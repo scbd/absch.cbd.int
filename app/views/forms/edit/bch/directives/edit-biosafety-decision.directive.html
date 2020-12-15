@@ -26,6 +26,11 @@
 									</div>
 								</div>
 									<div class="row">
+										<div class="col-xs-12" ng-show="isEdit">
+											<div class="km-control-group" name="amendmentsDetails" required caption="Provide reasons for the amendment">
+												<div km-textbox-ml name="amendmentsDetails" required ng-model="document.amendmentsDetails" locales="document.header.languages"></div>
+											</div>
+										</div>
 										<div class="col-sm-12">
 											<div class="km-control-group" name="government" required caption="Country submitting the decision or communication">
 												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
@@ -33,11 +38,6 @@
 											</div>
 										</div>
 										
-										<div class="col-xs-12" ng-show="isEdit != undefined">
-											<div class="km-control-group" name="amendmentsDetails" caption="Provide reasons for the amendment">
-												<div km-textbox-ml name="amendmentsDetails" required ng-model="document.amendmentsDetails" locales="document.header.languages"></div>
-											</div>
-										</div>
 									</div>
 
 									<div class="row">
@@ -49,7 +49,7 @@
 
 											<div ng-show="isEUSelected" class="km-control-group" name="authorities" caption="(EU text to be remove )Competent National Authority(ies) responsible for the decision or communication">											
 												<div document-selector ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
-												skipGovernment="true" query="queryEU" schema="(authority)"></div>			
+												skipGovernment="true" query="queryEU" schema="(authority)"></div>
 											</div>
 										</div>
 									</div>
@@ -110,7 +110,7 @@
 													</div>
 												</div>
 
-												<div class="km-control-group" name="otherDecisionsL4" required caption="Communications, notifications and declarations">
+												<div class="km-control-group" name="otherDecisionsL4" caption="Communications, notifications and declarations">
 													<div km-term-radio required ng-model="decisions.otherDecisions" locales="document.header.languages"
 														 terms="options.otherDecisionsL4()" binding-type="term" show-other="true">
 													</div>
