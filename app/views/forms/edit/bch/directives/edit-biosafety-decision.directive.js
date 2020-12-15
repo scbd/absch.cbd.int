@@ -69,12 +69,12 @@ function (app, _, template) {
                 
                 $scope.onCountryChange = function(code){
                     if(code == 'eu'){
-                        var euCountryCodes = ['eu,at,be,hr,bg,cy,cz,dk,ee,fi,fr,de,gr,hu,ie,it,lv,lt,lu,mt,nl,pl,pt,ro,sk,si,es,se,bg'];
-                        $scope.queryEU = "schema_s:authority AND government_s="+euCountryCodes;
-                        $scope.isEUSelected = true ;
+                        thesaurusService.getTerms('bd12d7fb-91f7-4b2d-996c-e70f18a51f0e','relations').then(function(o) {
+                        $scope.authorityQuery = "schema_s:authority AND government_s="+o.narrowerTerms.join();
+                        });   
                     }
                     else{
-                        $scope.isEUSelected = false ;
+                    $scope.authorityQuery = 'schema_s:authority AND government_s='+code;
                     }
                 }
                 $scope.onCommonDecisionChanged = function(){
@@ -92,11 +92,8 @@ function (app, _, template) {
                         return undefined;
                     if(document.government != undefined && document.government.identifier == 'eu'){
                         $scope.onCountryChange('eu');
-                        $scope.isEUSelected = true ;
-                        }
-                    else{
-                        $scope.isEUSelected = false ;
-                        }
+                    }
+                    
                     //////////////////////////////////
                     /////make decision Types field
                     //////////////////////////////////

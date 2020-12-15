@@ -47,14 +47,9 @@
 
 									<div class="row">
 										<div class="col-xs-12">
-											<div ng-show="!isEUSelected" class="km-control-group" name="authorities" caption="Competent National Authority(ies) responsible for the decision or communication">											
+											<div  class="km-control-group" name="authorities" caption="Competent National Authority(ies) responsible for the decision or communication">											
 												<div document-selector ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
-													government="document.government" schema="(authority)"></div>			
-											</div>
-
-											<div ng-show="isEUSelected" class="km-control-group" name="authorities" caption="(EU text to be remove )Competent National Authority(ies) responsible for the decision or communication">											
-												<div document-selector ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
-												skipGovernment="true" query="queryEU" schema="(authority)"></div>
+													skipGovernment="true" query="authorityQuery" schema="(authority)"></div>			
 											</div>
 										</div>
 									</div>
