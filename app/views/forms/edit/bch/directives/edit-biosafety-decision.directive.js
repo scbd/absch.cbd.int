@@ -36,31 +36,14 @@ function (app, _, template) {
                             });
                         });
                     },
-
-                    //test code , not final yet 
-                    otherDecisionsF3: function() {
-                        return thesaurusService.getDomainTerms('decisionTypes').then(function(o) {
-                            return _.filter(o, function(item, i){
-                                if(i>8){
-                                    return;
-                                }
-                                return !_.includes(commonDecisionsIdentifiers, item.identifier)
+                    otherDecisions: function() {
+                        return thesaurusService.getDomainTerms('decisionTypes').then(function(o) {					
+                            return _.filter(o, function(item){
+                                return !_.includes(commonDecisionsIdentifiers, item.identifier) 
                                     && _.intersection(commonDecisionsIdentifiers, item.broaderTerms).length ==0
                             });
                         });
                     },
-                    otherDecisionsL4: function() {
-                        return thesaurusService.getDomainTerms('decisionTypes').then(function(o) {
-                            return _.filter(o, function(item, i){
-                                if(i<9){
-                                    return;
-                                }
-                                return !_.includes(commonDecisionsIdentifiers, item.identifier)
-                                    && _.intersection(commonDecisionsIdentifiers, item.broaderTerms).length ==0
-                            });
-                        });
-                    },
-                    // end of test code 
                     intentionDecisions: function() {
                         return thesaurusService.getDomainTerms('decisionTypes').then(function(o) {					
                             return _.filter(o, function(item){

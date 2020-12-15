@@ -1,4 +1,9 @@
 <div>
+	<style>
+		.other-decision .list-unstyled li:nth-child(4){
+			margin-bottom: 30px;
+		}
+	</style>
 	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
 
 		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
@@ -102,17 +107,11 @@
 									</div>
 									<div class="col-xs-12">
 										<div block-region activate="decisions.commonDecisions.length > 0" skip-loading-icon="true" block-text=" ">
-											<div block-region activate="decisions.commonDecisions.length > 0" skip-loading-icon="true" block-text=" ">
-												
-												<div class="km-control-group" name="otherDecisionsF3" required caption="Other decisions, notifications and communications">
+											<div block-region activate="decisions.commonDecisions.length > 0" skip-loading-icon="true" block-text=" ">	
+												<div style="margin-top: 110px;position: absolute;">Communications, notifications and declarations</div>
+												<div class="km-control-group other-decision" name="otherDecisions" required caption="Other decisions">
 													<div km-term-radio required ng-model="decisions.otherDecisions" locales="document.header.languages"
-														 terms="options.otherDecisionsF3()" binding-type="term">
-													</div>
-												</div>
-
-												<div class="km-control-group" name="otherDecisionsL4" caption="Communications, notifications and declarations">
-													<div km-term-radio required ng-model="decisions.otherDecisions" locales="document.header.languages"
-														 terms="options.otherDecisionsL4()" binding-type="term" show-other="true">
+														 terms="options.otherDecisions()" binding-type="term" show-other="true">
 													</div>
 												</div>
 											</div>
