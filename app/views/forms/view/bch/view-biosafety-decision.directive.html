@@ -31,7 +31,7 @@
 
 		<div ng-show="document.title">
 			<label>Title / Reference number of the decision or communication</label>
-			<div class="km-value">
+			<div>
 				<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
 		</div>
@@ -59,7 +59,7 @@
 				<km-value-ml value="document.jurisdictionDetails" locales="locale"></km-value-ml>
 			</div>
 		</div>
-		<div ng-if="document.isAmendment">
+		<!-- <div ng-if="document.isAmendment">
 			<div ng-show="document.isAmendment">
 				<label>Is this an amendment to a previous decision / communication?</label>
 				<div  class="km-value">
@@ -75,18 +75,18 @@
 						</li>
 					</ul>						
 				</div>
-			</div>
-			<div ng-show="document.amendmentReason">
+			</div> 
+			<div ng-show="document.amendmentsDetails">
 				<label>Reasons for the amendment</label>
-				<div class="km-value">
-					<km-value-ml value="document.amendmentReason" locales="locale"></km-value-ml>
+				<div>
+					<km-value-ml html value="document.amendmentsDetails" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div>
 				<label>This decision has been amended by following decision</label>
 				<view-record-reference ng-model="document.header.identifier"></view-record-reference>
 			</div>
-		</div>
+		</div> -->
 
 		<legend>Decision or communication details</legend>
 		<div ng-show="document.decisionTypes">
@@ -163,10 +163,9 @@
 		<div ng-show="document.decisionResult">
 			<label>Result of the decision</label>
 			<div class="km-value">
-				<span ng-bind="document.developers|term:locale"></span>
+				<span ng-bind="document.decisionResult|term:locale"></span>
 			</div>
 		</div>
-
 		<div ng-show="document.description">
 			<label>Time extension in days</label>
 			<div class="km-value" ng-bind="document.description | lstring:locale"></div>
