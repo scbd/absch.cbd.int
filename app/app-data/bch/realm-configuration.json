@@ -258,14 +258,14 @@
         "resource": {
           "type": "reference",
           "title": {
-            "en": "Biosafety Information Resource Centre"
+            "en": "Biosafety Virtual Library Resources"
           },
           "description": {
-            "en": "Biosafety Information Resource Centre"
+            "en": "An electronic catalogue of biosafety-related publications and information resources, including literature on biosafety, reports and case studies, awareness-raising materials, videos, capacity-building resources, etc."
           },
-          "shortCode": "BIRC",
+          "shortCode": "BVLR",
           "titlePlural": {
-            "en": ""
+            "en": "Biosafety Virtual Library Resources"
           }
         },
         "organization": {
