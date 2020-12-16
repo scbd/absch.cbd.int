@@ -2,7 +2,7 @@ define(['app', 'lodash', 'text!./edit-biosafety-decision.directive.html', 'views
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-decision.directive"], 
 function (app, _, template) {
 
-	app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", function($controller, thesaurusService, $routeParams) {
+	app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", function($controller, thesaurusService, $routeParams, solr) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -69,12 +69,17 @@ function (app, _, template) {
                 
                 $scope.onCountryChange = function(code){
                     if(code == 'eu'){
-                        thesaurusService.getTerms('bd12d7fb-91f7-4b2d-996c-e70f18a51f0e','relations').then(function(o) {
-                        $scope.authorityQuery = "schema_s:authority AND government_s="+o.narrowerTerms.join();
+                        $scope.waiting = true;
+                        thesaurusService.getTerms(solr.escape(code),{relations:true})
+                        .then(function(o) {
+                            $scope.authorityQuery = "schema_s:authority AND government_s="+ solr.escape(o.narrowerTerms.join());
+                        })
+                        .finally(function(){
+                                $scope.waiting = false;
                         });   
                     }
                     else{
-                    $scope.authorityQuery = 'schema_s:authority AND government_s='+code;
+                         $scope.authorityQuery = 'schema_s:authority AND government_s='+ solr.escape(code);
                     }
                 }
                 $scope.onCommonDecisionChanged = function(){
@@ -90,9 +95,6 @@ function (app, _, template) {
 
                     if (!document)
                         return undefined;
-                    if(document.government != undefined && document.government.identifier == 'eu'){
-                        $scope.onCountryChange('eu');
-                    }
                     
                     //////////////////////////////////
                     /////make decision Types field
@@ -134,6 +136,9 @@ function (app, _, template) {
                 $scope.setDocument({})
                 .then(function(){
                     var document = $scope.document;
+                    if(document.government != undefined){
+                        $scope.onCountryChange(document.government.identifier);
+                    }
                     if(document.decisionTypes && document.decisionTypes.length > 0){
                         $scope.decisions.commonDecisions = [];
                         var decisionTypesIdentifiers = _.map(document.decisionTypes, 'identifier');

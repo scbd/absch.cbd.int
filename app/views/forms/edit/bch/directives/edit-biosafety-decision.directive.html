@@ -49,7 +49,7 @@
 										<div class="col-xs-12">
 											<div  class="km-control-group" name="authorities" caption="Competent National Authority(ies) responsible for the decision or communication">											
 												<div document-selector ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
-													skipGovernment="true" query="authorityQuery" schema="(authority)"></div>			
+													skipGovernment="true" query="authorityQuery" schema="(authority)" ng-disabled="waiting"></div>			
 											</div>
 										</div>
 									</div>
@@ -236,7 +236,7 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="decisionLMOFFPSubject" required caption="Subject of the decision">
 												<div class="km-value">
-															<div km-term-check required ng-model="document.decisionLMOFFPSubject" locales="document.header.languages"
+															<div km-term-check required ng-model="document.uses" locales="document.header.languages"
 													terms="options.decisionLMOFFPSubject()"  binding-type="term[]"></div>
 												</div>
 											</div>
