@@ -373,10 +373,7 @@
           "description": {
             "en": "Information on capacity-building initiatives at national, regional and international levels, including activities and outcomes."
           },
-          "shortCode": "CBA",
-          "titlePlural": {
-            "en": ""
-          }
+          "shortCode": "CBA"
         },
         "biosafetyNews": {
           "type": "reference",
