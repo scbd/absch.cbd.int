@@ -29,19 +29,24 @@
 		</div>
 		<div ng-show="document.identity">
 			<label>Name</label>
-			<km-value-ml value="document.identity" locales="locale"></km-value-ml>
+			<div compare-val>
+				<km-value-ml value="document.identity" locales="locale"></km-value-ml>
+			</div>
 		</div>
 		<div ng-show="document.transformationEvent">
 			<label>Transformation event</label>
-			<div ng-bind="document.transformationEvent" class="km-value"></div>
+			<div compare-val>
+				<div ng-bind="document.transformationEvent" class="km-value"></div>
+			</div>
 		</div>
 		<div ng-show="document.uniqueIdentification">
 			<label>Unique identifier</label>
-			<div ng-bind="document.uniqueIdentification" class="km-value"></div>
+			<div compare-val>
+			<div ng-bind="document.uniqueIdentification" class="km-value"></div></div>
 		</div>
 		<div ng-show="document.developers">
 			<label>Developer(s)	</label>
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.developers" >						
 						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -52,14 +57,15 @@
 		
 		<div ng-show="document.description">
 			<label>Description</label>
-			<km-value-ml html value="document.description" locales="locale"></km-value-ml>
+			<div compare-val>
+			<km-value-ml html value="document.description" locales="locale"></km-value-ml></div>
 		</div>
 
 		<div ng-show="document.recipientOrganisms">
 			<label>Recipient Organism or Parental Organisms</label>
 			<div class="help-info" style="font-size: 10px;">The term “Recipient organism” refers to an organism (either already modified or non-modified) that was subjected to genetic modification, whereas “Parental organisms” refers to those that were involved in cross breeding or cell fusion.
 			</div>
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.recipientOrganisms" >						
 						<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
@@ -69,12 +75,13 @@
 		</div>
 
 		<div ng-show="document.recipientOrganismCollectionPoint">
-			<label>Point of collection or acquisition of the recipient organism or parental organisms</label>			
-			<km-value-ml html value="document.recipientOrganismCollectionPoint" locales="locale"></km-value-ml>
+			<label>Point of collection or acquisition of the recipient organism or parental organisms</label>
+			<div compare-val>			
+			<km-value-ml html value="document.recipientOrganismCollectionPoint" locales="locale"></km-value-ml></div>
 		</div>
 		<div ng-show="document.linkedModifiedOrganisms">
 			<label>Related LMOs</label>	
-			<div class="km-value">	
+			<div class="km-value" compare-val>	
 				<ul class="list">
 					<li ng-repeat="item in document.linkedModifiedOrganisms" >						
 						<view-lmo-reference ng-model='item.identifier' locale="locale"></view-lmo-reference>
@@ -86,12 +93,12 @@
 		<legend>Characteristics of the modification process</legend>
 		
 		<div ng-show="document.vector">
-			<label>Vector</label>
-			<km-value-ml value="document.vector" locales="locale"></km-value-ml>
+			<label>Vector</label><div compare-val>
+			<km-value-ml value="document.vector" locales="locale"></km-value-ml></div>
 		</div>
 		<div ng-show="document.techniqueUsed">
 			<label>Techniques used for the modification</label>
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="use in document.techniqueUsed" ng-bind="use | term:locale"></li>
 				</ul>
@@ -101,7 +108,7 @@
 		<div ng-show="document.geneConstructs">
 			<label>Genetic elements construct</label>
 
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<div ng-repeat="construct in document.geneConstructs" style="margin-bottom:5px;">
 					<view-lmo-gene ng-model="construct"></view-lmo-gene>
 				</div>
@@ -111,7 +118,7 @@
 			<label>Introduced or modified genetic elements</label>
 			<div class="help-info" style="font-size: 10px;">Some of these genetic elements may be present as fragments or truncated 
 					forms. Please see notes below, where applicable.</div>
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.genes" >						
 						<view-record-reference ng-model='item.identifier' locale="locale" hide-schema='true'></view-record-reference>
@@ -122,20 +129,21 @@
 
 		<div ng-show="document.geneNotes">
 			<label>Notes regarding the genetic elements present in this LMO</label>
-			<km-value-ml html value="document.geneNotes" locales="locale"></km-value-ml>
+			<div compare-val>
+			<km-value-ml html value="document.geneNotes" locales="locale"></km-value-ml></div>
 		</div>
 
 
 		<legend>LMO characteristics</legend>		
 		<div ng-show="document.traits">
 			<label>Modified traits</label>
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<view-terms-hierarchy ng-model="document.traits" locale="locale" term-domain="dnaSequenceTraits"></view-terms-hierarchy>
 			</div>
 		</div>
 		<div ng-show="document.affectedGenes">
 			<label>Other gene(s) whose expression was affected by the transformation</label>			
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.affectedGenes" >						
 						<view-record-reference ng-model='item.identifier' locale="locale" hide-schema='true'></view-record-reference>
@@ -145,11 +153,12 @@
 		</div>
 		<div ng-show="document.affectedGeneNotes">
 			<label>How the expression of the gene(s) was affected</label>
-			<km-value-ml value="document.affectedGeneNotes" html locales="locale"></km-value-ml>
+			<div compare-val>
+			<km-value-ml value="document.affectedGeneNotes" html locales="locale"></km-value-ml></div>
 		</div>
 		<div ng-show="document.commonUses">
 			<label>Common use(s)</label>
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="use in document.commonUses" ng-bind="use | term:locale"></li>
 				</ul>
@@ -159,11 +168,13 @@
 			<legend>Detection method(s)</legend>
 			<div ng-show="document.detectionMethodLinks">
 				<label>External link(s)</label>
-				<km-link-list class="km-value" ng-model="document.detectionMethodLinks"></km-link-list>
+				<div compare-val>
+				<km-link-list class="km-value" ng-model="document.detectionMethodLinks"></km-link-list></div>
 			</div>
 			<div ng-show="document.detectionMethod">
 				<label>Additional Information</label>
-				<km-value-ml value="document.detectionMethod" html locales="locale"></km-value-ml>
+				<div compare-val="detectionMethodAddInformation">
+				<km-value-ml value="document.detectionMethod" html locales="locale"></km-value-ml></div>
 			</div>
 		</div>
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
@@ -171,12 +182,13 @@
 
 			<div ng-show="document.relevantInformation">
 				<label>Additional Information</label>
-				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+				<div compare-val>
+				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div></div>
 			</div>
 
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website addresses and/or attached documents</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.relevantDocuments">
 							<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>

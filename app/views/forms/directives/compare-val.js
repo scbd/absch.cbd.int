@@ -3,14 +3,12 @@
         return {
             restrict: 'EA',
             replace: true,
-            scope:{
-                compareClass:'@compareVal'
-            },
+            scope:{ },
             link: function ($scope, $element, $attr) {
-                var compareClass = $element.siblings().filter('label').text();
+
+                var compareClass = $attr.compareVal
+                compareClass     = compareClass || $element.siblings().filter('label').text();
                 compareClass     = compareClass.replace(/[^A-Z0-9]+/ig, '');
-                if(compareClass=='')
-                    compareClass = $scope.compareClass;                
 
                 compareClass = 'compare_' + compareClass;
 

@@ -26,7 +26,8 @@
 				locale: "=?",
 				hide: "@",
 				showDetails: "=",
-				api: '=?'
+				api: '=?',
+				documentInfo: "=?",
 			},
 			link: function ($scope) {
 
@@ -97,10 +98,14 @@
 					$scope.$watch("document", function (_new) {
 						$scope.error = null;
 						if(!_new)return;// due to cache loaddocument calls first before the first watch on documents gets called.
-						$scope.internalDocument = _new;
+						$scope.internalDocument 	= _new;
+						$scope.internalDocumentInfo = $scope.documentInfo || $scope.internalDocumentInfo;
 						if ($scope.internalDocument && ($scope.internalDocument.schema || $scope.internalDocument.header)) {
 							loadViewDirective($scope.internalDocument.schema || $scope.internalDocument.header.schema);
 							checkIfPermitRevoked();
+							loadWorkflowDetails();
+							if($scope.internalDocumentInfo && $scope.internalDocumentInfo.workingDocumentLock)
+								$scope.revisionNo = 'draft'
 						}
 					});
 
@@ -217,24 +222,13 @@
 							$scope.internalDocument = results[0];
 							$scope.internalDocumentInfo = results[1];
 							$scope.internalDocument.info = results[1];
-							checkIfPermitRevoked();
-				
+							
 							if (version)
 								$scope.revisionNo = version
 
 							checkIfPermitRevoked();
-
-							if ($scope.internalDocumentInfo.workingDocumentLock) {
-								IWorkflows.get($scope.internalDocumentInfo.workingDocumentLock.lockID.replace('workflow-', ''))
-									.then(function (workflow) {
-										if (workflow && workflow.type.name == 'delete-record')
-											$scope.workflowRequestType = "deletion";
-										else
-											$scope.workflowRequestType = "publishing";
-									});
-								if($scope.internalDocumentInfo.revision > 1)
-									$scope.showDifferenceButton = true
-							}				
+							loadWorkflowDetails()
+		
 							if (version)
 								$scope.revisionNo = version
 
@@ -305,6 +299,21 @@
 					//==================================
 					//
 					//==================================
+
+					function loadWorkflowDetails(){
+						if ($scope.internalDocumentInfo.workingDocumentLock) {
+							IWorkflows.get($scope.internalDocumentInfo.workingDocumentLock.lockID.replace('workflow-', ''))
+								.then(function (workflow) {
+									if (workflow && workflow.type.name == 'delete-record')
+										$scope.workflowRequestType = "deletion";
+									else
+										$scope.workflowRequestType = "publishing";
+								});
+							if($scope.internalDocumentInfo.revision > 1)
+								$scope.showDifferenceButton = true
+						}		
+					}
+
 					function canEdit() {
 
 						return authentication.getUser()

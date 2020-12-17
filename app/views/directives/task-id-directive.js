@@ -1,4 +1,4 @@
-define(['app', 'underscore','text!views/directives/task-id-directive.html',
+define(['app', 'lodash','text!views/directives/task-id-directive.html',
 	'../forms/view/record-loader.directive', 'toastr', , 'ngDialog',
 	'views/directives/document-reference-history',
 	'services/local-storage-service', './block-region-directive',
@@ -33,9 +33,13 @@ define(['app', 'underscore','text!views/directives/task-id-directive.html',
 
 								$scope.workflow = workflow;
 								if (workflow.data.identifier && !workflow.closedOn) {
-
-									IStorage.drafts.get(workflow.data.identifier).then(function (result) {
-										$scope.document = result.data || result;
+//
+									IStorage.drafts.get(workflow.data.identifier , { info: true, body:true }).then(function (result) {
+										result 				= result.data || result;
+										$scope.document 	= _.cloneDeep(result.workingDocumentBody || result.body);
+										result.body 		= undefined;
+										result.workingDocumentBody = undefined;
+										$scope.documentInfo = result;
 									});
 								}
 								if (!workflow.workflowAge) {
