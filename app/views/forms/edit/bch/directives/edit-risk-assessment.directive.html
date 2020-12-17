@@ -187,8 +187,8 @@
 											<legend>Information sharing with other databases</legend>
 											<div class="row">
 												<div  class="col-xs-12">
-													<div class="km-control-group" name="isForCommercialUse" caption="Is this risk assessment related to an LMO for commercial use?">
-														<div km-yes-no ng-model="document.isForCommercialUse" locales="document.header.languages"></div>
+													<div class="km-control-group" name="isForCommercialUse" caption="Is this risk assessment related to an LMO for commercial use?" required>
+														<div km-yes-no required ng-model="document.isForCommercialUse" locales="document.header.languages"></div>
 														<div ng-if="document.isForCommercialUse" style="padding-left:50px;">
 															<div class="help-block">
 																Should this decision be forwarded to the OECD Secretariat for possible inclusion in the BioTrack Product Database?
@@ -200,7 +200,7 @@
 															<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
 															<div ng-if="document.isForFoodSafety" style="padding-left:57px;">
 																<div class="help-block">
-																	Was it conducted in accordance with the Codex Alimentarius <i>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</i>
+																	Was it conducted in accordance with the Codex Alimentarius Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?
 																</div>															
 																<div class="km-yes-no" name="codexConduted" ng-model="document.codexConduted"></div>
 																<div class="help-block">
