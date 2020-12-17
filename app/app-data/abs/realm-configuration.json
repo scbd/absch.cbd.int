@@ -134,7 +134,7 @@
           },
           "shortCode": "NDB",
           "titlePlural": {
-            "en": "National Biosafety Websites or Databases"
+            "en": "National Websites or Databases"
           }
         },
         "absCheckpoint": {
@@ -205,7 +205,7 @@
           },
           "shortCode": "ORG",
           "titlePlural": {
-            "en": "Biosafety Organizations"
+            "en": "Organizations"
           }
         },
         "capacityBuildingInitiative": {
