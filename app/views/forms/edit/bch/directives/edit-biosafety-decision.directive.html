@@ -1,7 +1,38 @@
 <div>
 	<style>
+		.Communications-label{margin-top: 110px;position: absolute}
 		.other-decision .list-unstyled li:nth-child(4){
 			margin-bottom: 30px;
+		}
+		.decision-condition {margin-bottom: 10px; position: absolute; display: none;}
+		.reasons-condition {margin-bottom: 10px; position: absolute; display: none;}
+		.extensionPeriod-condition {margin-bottom: 10px; position: absolute; display: none;}
+		.decision-result.two .decision-condition {margin-top: 85px; display: block;}
+		.decision-result.two .reasons-condition {margin-top: 125px; display: block;}
+		.decision-result.three .reasons-condition { margin-top: 105px; display: block;}
+		.decision-result.four .reasons-condition {margin-top: 130px; display: block;}
+		.decision-result.five .reasons-condition {margin-top: 200px; display: block;}
+		.decision-result.five .extensionPeriod-condition {margin-top: 160px; display: block;}
+		@media (max-width: 767px){
+			.Communications-label{margin-top: 165px;}
+			.decision-result.two .decision-condition {margin-top: 125px; display: block;}
+			.decision-result.two .reasons-condition {margin-top: 170px; display: block;}
+			.decision-result.three .reasons-condition { margin-top: 165px; display: block;}
+			.decision-result.four .reasons-condition {margin-top: 215px; display: block;}
+			.decision-result.five .reasons-condition {margin-top: 320px; display: block;}
+			.decision-result.five .extensionPeriod-condition {margin-top: 280px; display: block;}
+		}
+		.decision-result.two .list-unstyled li:nth-child(3) {
+			margin-bottom: 90px;
+		}
+		.decision-result.three .list-unstyled li:nth-child(4){
+			margin-bottom: 40px;
+		}
+		.decision-result.four .list-unstyled li:nth-child(5){
+			margin-bottom: 40px;
+		}
+		.decision-result.five .list-unstyled li:nth-child(6){
+			margin-bottom: 80px;
 		}
 	</style>
 	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
@@ -42,7 +73,7 @@
 													filter="genericFilter" mapping="genericMapping" selectbox="true" ng-change="onCountryChange(document.government.identifier)" placeholder="Please select a country..."></div>
 											</div>
 										</div>
-										
+
 									</div>
 
 									<div class="row">
@@ -76,7 +107,7 @@
 											</div>
 										</div>
 									</div>
-									
+
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="jurisdictionsDetails" caption="Jurisdiction(s) details">
@@ -103,7 +134,7 @@
 									<div class="col-xs-12">
 										<div block-region activate="decisions.commonDecisions.length > 0" skip-loading-icon="true" block-text=" ">
 											<div block-region activate="decisions.commonDecisions.length > 0" skip-loading-icon="true" block-text=" ">	
-												<div style="margin-top: 110px;position: absolute;">Communications, notifications and declarations</div>
+												<div class="Communications-label">Communications, notifications and declarations</div>
 												<div class="km-control-group other-decision" name="otherDecisions" required caption="Other decisions">
 													<div km-term-radio required ng-model="decisions.otherDecisions" locales="document.header.languages"
 														 terms="options.otherDecisions()" binding-type="term" show-other="true">
@@ -148,15 +179,15 @@
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="exporters" caption="Please provide Exporter’s contact details">											
+											<div class="km-control-group" name="exporters" caption="Please provide Exporter’s contact details">
 												<div document-selector ng-model="document.exporters" question="exporters"
 													government="document.government" schema="(contact)" allow-new="true" allow-new-schema="contact"></div>			
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="importers" caption="Please provide Importer/Applicant's contact details">											
+											<div class="km-control-group" name="importers" caption="Please provide Importer/Applicant's contact details">
 												<div document-selector ng-model="document.importers" question="importers"
-													government="document.government" schema="(contact)" allow-new="true" allow-new-schema="contact"></div>			
+														 government="document.government" schema="(contact)" allow-new="true" allow-new-schema="contact"></div>
 											</div>
 										</div>
 									</div>
@@ -228,7 +259,7 @@
 									</div>
 								</div>
 							</section>
-										
+
 							<section ng-if="isLmoDecisionForDirectUse">
 								<div class="well no-shadow bg-white">
 									<legend>LMOs for direct use as food or feed, or for processing (LMOs-FFPs)</legend>
@@ -244,7 +275,7 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="appliesToTransboundaryMovement" required 
+											<div class="km-control-group" name="appliesToTransboundaryMovement" required	
 											caption="Has the decision been taken in the absence of a domestic regulatory framework and in accordance with Article 11.6?">
 												<div km-yes-no required ng-model="document.appliesToTransboundaryMovement" locales="document.header.languages"></div>
 											</div>
@@ -253,10 +284,10 @@
 									<div class="row" ng-if="isLmoDecisionForIntentionalIntroduction">
 										<div class="col-xs-12">
 											<div class="alert alert-danger">
-												<strong>Note:</strong> The first two categories in the field Subject of the decision / communication at the top of this page have been selected 
-												indicating that this record refers to a decision addressing LMOs for both Intentional introduction into the environment (Articles 7-10) 
-												AND LMOs-FFPs (Article 11). Accordingly, the fields below, Type of decision and contact details of the importer/exporter or applicant, 
-												are therefore not active because the information has already been provided. Should this not be the case, 
+												<strong>Note:</strong> The first two categories in the field Subject of the decision / communication at the top of this page have been selected	
+												indicating that this record refers to a decision addressing LMOs for both Intentional introduction into the environment (Articles 7-10)	
+												AND LMOs-FFPs (Article 11). Accordingly, the fields below, Type of decision and contact details of the importer/exporter or applicant,	
+												are therefore not active because the information has already been provided. Should this not be the case,	
 												please create two different records, one for intentional introduction into the environment and one for the LMOs-FFPs.
 											</div>
 										</div>
@@ -298,15 +329,105 @@
 								</div>
 							</section>
 							<section ng-if="isLmoDecisionForIntentionalIntroduction">
-								<div class="well no-shadow bg-white">
+								<div class="well no-shadow bg-white decision-result {{decClass}}">
 									<legend>Result of the decision</legend>
 									<div class="row">
-										<div class="col-xs-12" >
-											<div class="km-control-group" name="decisionResult" required caption="Result of the decision">												
+									<div class="col-xs-12">
+											<div class="decision-condition col-xs-8" km-textbox-ml ng-model="document.conditions" rows="1" locales="document.header.languages" placeholder="Specify the conditions"></div>
+										  <div class="reasons-condition col-xs-8" km-textbox-ml ng-model="document.reasons" rows="1" locales="document.header.languages" placeholder="Provide reasons"></div>
+										  <div class="extensionPeriod-condition col-xs-8" km-textbox-ml ng-model="document.extensionPeriod" rows="1" locales="document.header.languages" placeholder="Specify the time extension in days"></div>
+										<div class="km-control-group" name="decisionResult" required caption="Result of the decision">
 												<div km-term-radio required ng-model="document.decisionResult" locales="document.header.languages"
-													terms="options.decisionResult()" binding-type="term"></div>
-											</div>		
-										</div>		
+														 terms="options.decisionResult()" binding-type="term" ng-change="selectDecision(document.decisionResult.identifier);"	show-other="true" ></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Simplified procedure</legend>
+									<div class="row">
+										<div  class="col-xs-12">
+											<div class="km-control-group" name="isForCommercialUse" caption="Does the decision specify cases in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import?*" required>
+												<div km-yes-no required ng-model="document.movementAllowedUnderA131A" locales="document.header.languages"></div>
+												<div ng-if="document.movementAllowedUnderA131A" style="padding-left:50px;">
+													<div class="help-block">
+														Does the decision apply to subsequent similar imports of LMOs?*
+													</div>
+													<div class="km-yes-no" name="exemptedFromAIA" ng-model="document.exemptedFromAIA"></div>
+												</div>
+											</div>
+										</div>
+										<div  class="col-xs-12">
+											<div class="km-control-group" name="appliesToSubsequentImports" caption="Does the decision specify that the import of the LMO is exempt from the Advance Informed Agreement (AIA) procedure?*" required>
+												<div km-yes-no required ng-model="document.appliesToSubsequentImports" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Illegal transboundary movement or unintentional transboundary movement</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="unintentionalTransboundaryMovement"
+													 caption="Has the decision been taken in the absence of a domestic regulatory framework and in accordance with Article 11.6?">
+												<div km-yes-no required ng-model="document.unintentionalTransboundaryMovement" locales="document.header.languages"></div>
+												<div class="row well no-shadow bg-white" ng-if="document.unintentionalTransboundaryMovement" style="margin-left:1%">
+													<div class="col-sm-12">
+														<div class="km-control-group" name="estimatedQuantities" caption="(a)	Available relevant information on the estimated quantities and relevant characteristics and/or traits of the living modified organism">
+															<div km-textbox-ml ng-model="document.estimatedQuantities" rows="1" locales="document.header.languages" placeholder="(a)	Available relevant information on the estimated quantities and relevant characteristics and/or traits of the living modified organism"></div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="km-control-group" name="releaseCurcumstance" caption="(b)	Information on the circumstances of the release">
+															<div km-textbox-ml ng-model="document.releaseCurcumstance" rows="1" locales="document.header.languages" placeholder="(b)	Information on the circumstances of the release"></div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="km-control-group" name="releaseDate"  caption="(c)	Information on the estimated date of the release.">
+															<div km-date placeholder="YYYY-MM-DD" name="releaseDate" required ng-model="document.releaseDate"></div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="km-control-group" name="lmoUseInformation" caption="(d)	Information on the use of the living modified organism in the originating Party">
+															<div km-textbox-ml ng-model="document.lmoUseInformation" rows="1" locales="document.header.languages" placeholder="(d)	Information on the use of the living modified organism in the originating Party"></div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="km-control-group" name="adverseEffectInformation" caption="(e)	Information about the possible adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, as well as available information about possible risk management measures">
+															<div km-textbox-ml ng-model="document.adverseEffectInformation" rows="1" locales="document.header.languages" placeholder="(e)	Information about the possible adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, as well as available information about possible risk management measures"></div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="km-control-group" name="otherInformation" caption="(f)	Any other relevant information">
+															<div km-textbox-ml ng-model="document.otherInformation" rows="1" locales="document.header.languages" placeholder="(f)	Any other relevant information"></div>
+														</div>
+													</div>
+													<div class="col-xs-12">
+														<div class="km-control-group" name="pointOfContact" required caption="(g)	A point of contact for further information">
+															<div document-selector ng-model="document.pointOfContact" question="pointOfContact" allow-new="true" allow-new-schema="contact"
+																	 government="document.government" schema="(contact)"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-xs-12">
+											<div class="km-control-group" name="illegalTransboundaryMovement"
+													 caption="Illegal transboundary movement (Article 25.3) go to question 20">
+												<div km-yes-no required ng-model="document.illegalTransboundaryMovement" locales="document.header.languages"></div>
+												<div class="row well no-shadow bg-white" ng-if="document.illegalTransboundaryMovement" style="margin-left:1%">
+													<div class="col-sm-12">
+														<div class="km-control-group" name="otherInformation" caption="LMO identification:*	<BCH record number> or <Text entry> where it has not been possible to identify the LMO in question">
+															<div km-textbox-ml ng-model="document.otherInformation" rows="1" locales="document.header.languages" placeholder="LMO identification:*	<BCH record number> or <Text entry> where it has not been possible to identify the LMO in question"></div>
+														</div>
+													</div></div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</section>

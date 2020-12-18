@@ -173,14 +173,20 @@
 
 		<div ng-show="document.conditions">
 			<label>Conditions</label>
-			<div class="km-value">
+			<div>
 				<km-value-ml value="document.conditions" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.reasons">
 			<label>Reasons</label>
-			<div class="km-value">
+			<div>
 				<km-value-ml value="document.reasons" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.extensionPeriod">
+			<label>Extension Period</label>
+			<div>
+				<km-value-ml value="document.extensionPeriod" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
@@ -220,6 +226,67 @@
 				<km-value-bool value="document.exemptedFromAIA" locales="locale"></km-value-bool>
 			</div>
 		</div>
+
+		<div ng-show="document.unintentionalTransboundaryMovement!==undefined">
+			<label>Has the decision been taken in the absence of a domestic regulatory framework and in accordance with Article 11.6?</label>
+			<div class="km-value">
+				<km-value-bool value="document.unintentionalTransboundaryMovement" locales="locale"></km-value-bool>
+			</div>
+		</div>
+		<div ng-show="document.estimatedQuantities">
+			<label>Available relevant information on the estimated quantities and relevant characteristics and/or traits of the living modified organism</label>
+			<div>
+				<km-value-ml value="document.estimatedQuantities" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.releaseCurcumstance">
+			<label>Information on the circumstances of the release</label>
+			<div>
+				<km-value-ml value="document.releaseCurcumstance" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.releaseDate">
+			<label>Information on the estimated date of the release</label>
+			<div>
+				<km-value-ml value="document.releaseDate" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.lmoUseInformation">
+			<label>Information on the use of the living modified organism in the originating Party</label>
+			<div>
+				<km-value-ml value="document.lmoUseInformation" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.adverseEffectInformation">
+			<label>Information about the possible adverse effects on the conservation and sustainabl</label>
+			<div>
+				<km-value-ml value="document.adverseEffectInformation" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.otherInformation">
+			<label>Any other relevant information</label>
+			<div>
+				<km-value-ml value="document.otherInformation" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.pointOfContact">
+			<label>A point of contact for further information</label>
+			<div class="km-value">
+				<ul class="list">
+					<li ng-repeat="item in document.pointOfContact" >
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.illegalTransboundaryMovement!==undefined">
+			<label>Illegal transboundary movement (Article 25.3) go to question 20</label>
+			<div class="km-value">
+				<km-value-bool value="document.illegalTransboundaryMovement" locales="locale"></km-value-bool>
+			</div>
+		</div>
+
 		<div ng-show="document.modifiedOrganisms">
 			<label>LMO identification</label>
 			<div  class="km-value">
