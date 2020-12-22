@@ -5,8 +5,8 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
 			restrict: 'EAC',
 			replace:true,
 			template: template,
-            controller: ['$scope', '$filter','commonjs','$element', '$compile', '$timeout', '$route', '$location',
-                function($scope, $filter, commonjs, $element, $compile, $timeout, $route, $location){
+            controller: ['$scope','$rootScope', '$filter','commonjs','$element', '$compile', '$timeout', '$route', '$location',
+                function($scope, $rootScope, $filter, commonjs, $element, $compile, $timeout, $route, $location){
 
 				$scope.getUniqueID = function(document){
 					if(!document)
@@ -47,17 +47,21 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
                 }
 
 				$scope.loadReportRecord = function(schema, identifier){
+                    if ( !$rootScope.user.isAuthenticated ) {
+						$( '#loginDialog' ).modal( "show" );
+                    } 
+                    else {
+                        require(['views/directives/report-record'], function() {
 
-                    require(['views/directives/report-record'], function() {
+                            var directiveHtml = "<div report-record uid='"+ identifier + "' schema='" +  schema + "'></div>";
 
-                        var directiveHtml = "<div report-record uid='"+ identifier + "' schema='" +  schema + "'></div>";
-
-                        $scope.$apply(function() {
-                            $element.find('#divReportRecord')
-                                .empty()
-                                .append($compile(directiveHtml)($scope));
+                            $scope.$apply(function() {
+                                $element.find('#divReportRecord')
+                                    .empty()
+                                    .append($compile(directiveHtml)($scope));
+                            });
                         });
-                    });
+                    }
                 }
                 
                 $scope.showReportedRecord = function(){
