@@ -151,7 +151,7 @@
 										<div class="col-sm-12">
 											<div class="km-control-group" name="unofficialDocuments" caption="Unofficial Documents">
 												<div class="help-block">
-													Unofficial document and / or courtesy translation.
+													Unofficial document and / or courtesy translation
 												</div>
 												<div km-link name="unofficialDocuments" ng-model="document.unofficialDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
@@ -192,7 +192,10 @@
 									<legend>Regulatory contact information</legend>
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="authorities" caption="Competent National Authority(es):" required>	
+											<div class="km-control-group" name="authorities" caption="Competent National Authority(ies):" required>	
+												<div class="help-block">
+													Competent National Authority (CNA) that is responsible for performing the administrative functions required by the Cartagena Protocol.
+												</div>
 												<div document-selector ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
 													government="document.government" schema="(authority supplementaryAuthority)"></div>			
 											</div>
