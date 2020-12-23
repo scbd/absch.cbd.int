@@ -1,4 +1,40 @@
 <div>
+	<style>
+		.Communications-label{margin-top: 110px;position: absolute}
+		.other-decision .list-unstyled li:nth-child(4){
+			margin-bottom: 30px;
+		}
+		.decision-condition {margin-bottom: 10px; position: absolute; display: none;}
+		.reasons-condition {margin-bottom: 10px; position: absolute; display: none;}
+		.extensionPeriod-condition {margin-bottom: 10px; position: absolute; display: none;}
+		.decision-result.two .decision-condition {margin-top: 85px; display: block;}
+		.decision-result.two .reasons-condition {margin-top: 125px; display: block;}
+		.decision-result.three .reasons-condition { margin-top: 105px; display: block;}
+		.decision-result.four .reasons-condition {margin-top: 130px; display: block;}
+		.decision-result.five .reasons-condition {margin-top: 200px; display: block;}
+		.decision-result.five .extensionPeriod-condition {margin-top: 160px; display: block;}
+		@media (max-width: 767px){
+			.Communications-label{margin-top: 165px;}
+			.decision-result.two .decision-condition {margin-top: 125px; display: block;}
+			.decision-result.two .reasons-condition {margin-top: 170px; display: block;}
+			.decision-result.three .reasons-condition { margin-top: 165px; display: block;}
+			.decision-result.four .reasons-condition {margin-top: 215px; display: block;}
+			.decision-result.five .reasons-condition {margin-top: 320px; display: block;}
+			.decision-result.five .extensionPeriod-condition {margin-top: 280px; display: block;}
+		}
+		.decision-result.two .list-unstyled li:nth-child(3) {
+			margin-bottom: 90px;
+		}
+		.decision-result.three .list-unstyled li:nth-child(4){
+			margin-bottom: 40px;
+		}
+		.decision-result.four .list-unstyled li:nth-child(5){
+			margin-bottom: 40px;
+		}
+		.decision-result.five .list-unstyled li:nth-child(6){
+			margin-bottom: 80px;
+		}
+	</style>
 	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
 
 		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
@@ -94,31 +130,30 @@
 
 							<section>
 								<div class="well no-shadow bg-white">
-								<label for="decisionTypes" style="width:0px;height:0px;display:inline">
-									<span style="display:none">
-										Subject of the decision / notification / communication
-									</span>
-								</label>
-								<legend>Subject of the decision / notification / communication</legend>								
-								<div class="row">
-									<div class="col-xs-12">
-										<div block-region activate="decisions.otherDecisions.identifier" skip-loading-icon="true" block-text=" ">
-											<div class="km-control-group" name="commonDecisions" required caption="Common decisions">
-													<div km-term-check required ng-model="decisions.commonDecisions" locales="document.header.languages"
-													terms="options.commonDecisions()"  binding-type="term[]" ng-change="onCommonDecisionChanged()"  ></div>
+									<legend>Subject of the decision, notification, communication or declaration</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div block-region activate="decisions.otherDecisions.identifier" skip-loading-icon="true" block-text=" ">
+												<div class="km-control-group" name="commonDecisions" required caption="Common decisions">
+														<div km-term-check required ng-model="decisions.commonDecisions" locales="document.header.languages"
+														terms="options.commonDecisions()"  binding-type="term[]" ng-change="onCommonDecisionChanged()"  ></div>
+												</div>
 											</div>
 										</div>
-									</div>
-									<div class="col-xs-12">
-										<div block-region activate="decisions.commonDecisions.length > 0" skip-loading-icon="true" block-text=" ">
-											<div class="km-control-group" name="otherDecisions" required caption="Other decisions, notifications and communications">
-												
-												<div km-term-radio required ng-model="decisions.otherDecisions" locales="document.header.languages"
-													terms="options.otherDecisions()" binding-type="term" show-other="true"></div>
+										<div class="col-xs-12">
+											<div block-region activate="decisions.commonDecisions.length > 0" skip-loading-icon="true" block-text=" ">
+												<div block-region activate="decisions.commonDecisions.length > 0" skip-loading-icon="true" block-text=" ">	
+													<div class="Communications-label">Communications, notifications and declarations</div>
+													<div class="km-control-group other-decision" name="otherDecisions" required caption="Other decisions">
+														<div km-term-radio required ng-model="decisions.otherDecisions" locales="document.header.languages"
+															 terms="options.otherDecisions()" binding-type="term" show-other="true">
+														</div>
+													</div>
+												</div>
 											</div>		
-										</div>		
+										</div>
 									</div>
-								</div></div>
+								</div>
 							</section>
 
 							<section ng-if="isLmoDecisionForIntentionalIntroduction">

@@ -66,6 +66,21 @@ function (app, _, template) {
                     }
                     
                 });
+                $scope.selectDecision = function(value){
+                    $scope.decClass = "";
+                    if(value == "3EFF4792-A896-4DC7-9945-04FE9C8B5B4F"){
+                        $scope.decClass = "two";
+                    }
+                    if(value == "6DD1B161-4CDB-4900-BD31-DBB97E86B2AE"){
+                        $scope.decClass = "three";
+                    }
+                    if(value == "8D91ACEE-C6B3-4204-8FE6-00AE424013FF"){
+                        $scope.decClass = "four";
+                    }
+                    if(value == "19F9F13E-195E-45B5-88DD-058A07E0D6F6" ){
+                        $scope.decClass = "five";
+                    }
+                }
                 
                 $scope.onCountryChange = function(code){
                     if(code == 'eu'){
@@ -126,6 +141,9 @@ function (app, _, template) {
                     var document = $scope.document;
                      if(document.government != undefined){
                         $scope.onCountryChange(document.government.identifier);
+                    }
+                    if(document.decisionResult != undefined){
+                        $scope.selectDecision(document.decisionResult.identifier);
                     }
                     if(document.decisionTypes && document.decisionTypes.length > 0){
                         $scope.decisions.commonDecisions = [];
