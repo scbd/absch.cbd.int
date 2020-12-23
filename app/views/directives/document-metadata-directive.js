@@ -47,8 +47,12 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
                 }
 
 				$scope.loadReportRecord = function(schema, identifier){
-                    if ( !$rootScope.user.isAuthenticated ) {
-						$( '#loginDialog' ).modal( "show" );
+                    if ($rootScope.user && !$rootScope.user.isAuthenticated) {
+                        var signInEvent = $scope.$on('signIn', function () {
+                            $scope.loadReportRecord(schema, identifier);
+                            signInEvent();
+                        });
+                        $('#loginDialog').modal("show");
                     } 
                     else {
                         require(['views/directives/report-record'], function() {
