@@ -129,6 +129,10 @@ function (app, _, template) {
                         document.decisionTypes = _(decisionTypes).compact().flatten().value();
                     else
                         document.decisionTypes = undefined;
+                   
+                    if(!document.movementAllowedUnderA131A){
+                        document.exemptedFromAIA = undefined;
+                    }
 
                     if (/^\s*$/g.test(document.notes))
                         document.notes = undefined;
