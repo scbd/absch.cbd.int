@@ -306,15 +306,18 @@
 								</div>
 							</section>
 							<section ng-if="isLmoDecisionForIntentionalIntroduction">
-								<div class="well no-shadow bg-white">
+								<div class="well no-shadow bg-white decision-result {{decClass}}">
 									<legend>Result of the decision</legend>
 									<div class="row">
-										<div class="col-xs-12" >
-											<div class="km-control-group" name="decisionResult" required caption="Result of the decision">												
+									<div class="col-xs-12">
+											<div class="decision-condition col-xs-8" km-textbox-ml ng-model="document.conditions" rows="1" locales="document.header.languages" placeholder="Specify the conditions"></div>
+										  <div class="reasons-condition col-xs-8" km-textbox-ml ng-model="document.reasons" rows="1" locales="document.header.languages" placeholder="Provide reasons"></div>
+										  <div class="extensionPeriod-condition col-xs-8" km-textbox-ml ng-model="document.extensionPeriod" rows="1" locales="document.header.languages" placeholder="Specify the time extension in days"></div>
+										<div class="km-control-group" name="decisionResult" required caption="Result of the decision (select one)">
 												<div km-term-radio required ng-model="document.decisionResult" locales="document.header.languages"
-													terms="options.decisionResult()" binding-type="term"></div>
-											</div>		
-										</div>		
+														 terms="options.decisionResult()" binding-type="term" ng-change="selectDecision(document.decisionResult.identifier);"	show-other="true" ></div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</section>
