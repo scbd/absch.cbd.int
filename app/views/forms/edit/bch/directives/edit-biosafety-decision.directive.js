@@ -129,6 +129,18 @@ function (app, _, template) {
                         document.decisionTypes = _(decisionTypes).compact().flatten().value();
                     else
                         document.decisionTypes = undefined;
+                    //Information sharing with other databases
+                    if(!document.isForCommercialUse){
+                        document.forwardToOECD = undefined;
+                        document.isForFoodSafety = undefined;
+                        document.codexConduted = undefined;
+                        document.forwardToFAO = undefined;
+                    }
+
+                   if(!document.isForFoodSafety){
+                    document.codexConduted = undefined;
+                    document.forwardToFAO = undefined;
+                   }
                    
                     if(!document.movementAllowedUnderA131A){
                         document.exemptedFromAIA = undefined;
