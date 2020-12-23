@@ -344,6 +344,70 @@
 									</div>
 								</div>
 							</section>
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Illegal transboundary movement or unintentional transboundary movement</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="unintentionalTransboundaryMovement"
+													 caption="Unintentional transboundary movement (Article 17.1) go to question 19">
+												<div km-yes-no required ng-model="document.unintentionalTransboundaryMovement" locales="document.header.languages"></div>
+												<div class="row well no-shadow bg-white" ng-if="document.unintentionalTransboundaryMovement" style="margin-left:1%">
+													<div class="col-sm-12">
+														<div class="km-control-group" name="estimatedQuantities" caption="(a)	Available relevant information on the estimated quantities and relevant characteristics and/or traits of the living modified organism">
+															<div km-textbox-ml ng-model="document.estimatedQuantities" rows="1" locales="document.header.languages" placeholder="(a)	Available relevant information on the estimated quantities and relevant characteristics and/or traits of the living modified organism"></div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="km-control-group" name="releaseCurcumstance" caption="(b)	Information on the circumstances of the release">
+															<div km-textbox-ml ng-model="document.releaseCurcumstance" rows="1" locales="document.header.languages" placeholder="(b)	Information on the circumstances of the release"></div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="km-control-group" name="releaseDate"  caption="(c)	Information on the estimated date of the release.">
+															<div km-date placeholder="YYYY-MM-DD" name="releaseDate" required ng-model="document.releaseDate"></div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="km-control-group" name="lmoUseInformation" caption="(d)	Information on the use of the living modified organism in the originating Party">
+															<div km-textbox-ml ng-model="document.lmoUseInformation" rows="1" locales="document.header.languages" placeholder="(d)	Information on the use of the living modified organism in the originating Party"></div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="km-control-group" name="adverseEffectInformation" caption="(e)	Information about the possible adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, as well as available information about possible risk management measures">
+															<div km-textbox-ml ng-model="document.adverseEffectInformation" rows="1" locales="document.header.languages" placeholder="(e)	Information about the possible adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, as well as available information about possible risk management measures"></div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="km-control-group" name="otherInformation" caption="(f)	Any other relevant information">
+															<div km-textbox-ml ng-model="document.otherInformation" rows="1" locales="document.header.languages" placeholder="(f)	Any other relevant information"></div>
+														</div>
+													</div>
+													<div class="col-xs-12">
+														<div class="km-control-group" name="pointOfContact" required caption="(g)	A point of contact for further information">
+															<div document-selector ng-model="document.pointOfContact" question="pointOfContact" allow-new="true" allow-new-schema="contact"
+																	 government="document.government" schema="(contact)"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-xs-12">
+											<div class="km-control-group" name="illegalTransboundaryMovement"
+													 caption="Illegal transboundary movement (Article 25.3) go to question 20">
+												<div km-yes-no required ng-model="document.illegalTransboundaryMovement" locales="document.header.languages"></div>
+												<div class="row well no-shadow bg-white" ng-if="document.illegalTransboundaryMovement" style="margin-left:1%">
+													<div class="col-sm-12">
+														<div class="km-control-group" name="otherInformation" caption="LMO identification:*	<BCH record number> or <Text entry> where it has not been possible to identify the LMO in question">
+															<div km-textbox-ml ng-model="document.otherInformation" rows="1" locales="document.header.languages" placeholder="LMO identification:*	<BCH record number> or <Text entry> where it has not been possible to identify the LMO in question"></div>
+														</div>
+													</div></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
 							<section ng-if="isLmoDecisionForIntentionalIntroduction">
 								<div class="well no-shadow bg-white">
 									<legend>LMO & risk assessment</legend>

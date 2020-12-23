@@ -133,7 +133,17 @@ function (app, _, template) {
                     if(!document.movementAllowedUnderA131A){
                         document.exemptedFromAIA = undefined;
                     }
-
+                    if(!document.unintentionalTransboundaryMovement){
+                        document.estimatedQuantities = undefined;
+                        document.releaseCurcumstance = undefined;
+                        document.releaseDate = undefined;
+                        document.lmoUseInformation = undefined;
+                        document.adverseEffectInformation = undefined;
+                        document.pointOfContact = undefined;
+                    }
+                    if(!document.unintentionalTransboundaryMovement && !document.illegalTransboundaryMovement){
+                        document.otherInformation = undefined;
+                    }
                     if (/^\s*$/g.test(document.notes))
                         document.notes = undefined;
 
