@@ -64,6 +64,7 @@ define(['app', 'services/cache-service'], function (app) {
             }
             var terms = {
                 other: "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                eu   : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e"
             }
 
             var domainTerms = {

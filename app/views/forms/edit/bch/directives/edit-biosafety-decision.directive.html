@@ -35,17 +35,23 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="government" required caption="Country submitting the decision or communication">
+												<div class="help-block">
+													<u><i>Important note for European Union (EU) Members only</i></u>: if the decision applies to <i>all</i> EU Member States, 
+													the record must be published by the EU’s BCH focal point. The EU BCH focal point should select "European Union" 
+													in response to this question and the published record will appear in the country profiles of all EU Member States.
+												</div>
 												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-													filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+													filter="genericFilter" mapping="genericMapping" selectbox="true" ng-change="onCountryChange(document.government.identifier)" placeholder="Please select a country...">
+												</div>
 											</div>
 										</div>
 									</div>
 
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="authorities" caption="Competent National Authority(ies) responsible for the decision or communication">											
-												<div document-selector ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
-													government="document.government" schema="(authority)"></div>			
+											<div  class="km-control-group" name="authorities" caption="Competent National Authority(ies) responsible for the decision or communication" required>											
+												<div document-selector required ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
+													skipGovernment="true" query="authorityQuery" schema="(authority)" ng-disabled="waiting"></div>			
 											</div>
 										</div>
 									</div>

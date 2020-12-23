@@ -67,7 +67,21 @@ function (app, _, template) {
                     
                 });
                 
-
+                $scope.onCountryChange = function(code){
+                    if(code == 'eu'){
+                        $scope.waiting = true;
+                        thesaurusService.getTerms(solr.escape(code),{relations:true})
+                        .then(function(o) {
+                            $scope.authorityQuery = "schema_s:authority AND government_s="+ solr.escape(o.narrowerTerms.join());
+                        })
+                        .finally(function(){
+                                $scope.waiting = false;
+                        });   
+                    }
+                    else{
+                         $scope.authorityQuery = 'schema_s:authority AND government_s='+ solr.escape(code);
+                    }
+                }
                 $scope.onCommonDecisionChanged = function(){
                     $scope.isLmoDecisionForIntentionalIntroduction	= _($scope.decisions.commonDecisions||[]).map('identifier').includes(commonDecisionsIdentifiers[0]);
                     $scope.isLmoDecisionForDirectUse				= _($scope.decisions.commonDecisions||[]).map('identifier').includes(commonDecisionsIdentifiers[1]);
@@ -110,6 +124,9 @@ function (app, _, template) {
                 $scope.setDocument({})
                 .then(function(){
                     var document = $scope.document;
+                     if(document.government != undefined){
+                        $scope.onCountryChange(document.government.identifier);
+                    }
                     if(document.decisionTypes && document.decisionTypes.length > 0){
                         $scope.decisions.commonDecisions = [];
                         var decisionTypesIdentifiers = _.map(document.decisionTypes, 'identifier');
