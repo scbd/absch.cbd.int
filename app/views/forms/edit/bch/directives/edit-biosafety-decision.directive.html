@@ -65,8 +65,8 @@
 
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="date" caption="Date of the decision">
-												<div km-date placeholder="YYYY-MM-DD" name="date" required ng-model="document.date"></div>
+											<div class="km-control-group" required name="date" caption="Date of the decision">
+												<div km-date required placeholder="YYYY-MM-DD" name="date" required ng-model="document.date"></div>
 											</div>
 										</div>
 									</div>
@@ -81,16 +81,11 @@
 									
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="jurisdictions" caption="Jurisdiction(s)">
-												<div class="help-info">Provide the jurisdiction where the law, regulation, guideline or agreement applies if this is different from the country name. Example: Country: Denmark, Jurisdiction: "With territorial exclusion in respect of the Faroe Islands and Greenland".</div>
-												<div km-select multiple name="jurisdictions" ng-model="document.jurisdictions" items="options.countries()"></div>
-											</div>
-										</div>
-									</div>
-									<div class="row" ng-if="document.jurisdictions && document.jurisdictions.length>0">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="jurisdictionsDetails" caption="Jurisdiction(s) details">
-												<div km-textbox-ml ng-model="document.jurisdictionsDetails" rows="1" locales="document.header.languages" placeholder="jurisdiction details"></div>
+											<div class="km-control-group" name="jurisdictionsDetails" caption="Jurisdiction">
+												<div class="help-block">
+													Provide the jurisdiction where the decision applies if this is different from the country name provided in response to question 1.
+												</div>
+												<div km-textbox-ml ng-model="document.jurisdictionsDetails" rows="1" locales="document.header.languages" placeholder="jurisdiction"></div>
 											</div>
 										</div>
 									</div>
