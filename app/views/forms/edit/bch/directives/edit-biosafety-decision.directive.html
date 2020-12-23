@@ -25,6 +25,13 @@
 										</div>
 									</div>
 								</div>
+								<div class="row">
+									<div class="col-xs-12" ng-show="isEdit">
+										<div class="km-control-group" required name="amendmentsDetails" caption="Provide reasons for the amendment">
+											<div km-textbox-ml required name="amendmentsDetails" ng-model="document.amendmentsDetails" locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="government" required caption="Country submitting the decision or communication">
@@ -78,28 +85,6 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="jurisdictionsDetails" caption="Jurisdiction(s) details">
 												<div km-textbox-ml ng-model="document.jurisdictionsDetails" rows="1" locales="document.header.languages" placeholder="jurisdiction details"></div>
-											</div>
-										</div>
-									</div>
-
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="isAmendment" required caption="Is this an amendment to a previous decision / communication?">
-												<div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
-
-									<div class="row" ng-if="document.isAmendment">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="amendedDecision" caption="Indicate the BCH decision amended" required>											
-												<div document-selector ng-model="document.amendedDecisions" question="amendedDecision" allow-new="true" allow-new-schema="biosafetyDecision"
-													government="document.government" schema="(biosafetyDecision)"></div>			
-											</div>
-										</div>
-										<div class="col-xs-12">
-											<div class="km-control-group" required name="amendmentReason" caption="Provide reasons for the amendment">
-												<div km-textbox-ml name="amendmentReason" required ng-model="document.amendmentReason" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>

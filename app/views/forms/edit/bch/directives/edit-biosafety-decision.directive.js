@@ -2,7 +2,7 @@ define(['app', 'lodash', 'text!./edit-biosafety-decision.directive.html', 'views
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-decision.directive"], 
 function (app, _, template) {
 
-	app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", function($controller, thesaurusService) {
+	app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", function($controller, thesaurusService, $routeParams, solr) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -12,7 +12,7 @@ function (app, _, template) {
 				onPostSubmitFn   : "&onPostSubmit"
 			},
 			link: function($scope, $element, $attr){
-
+                $scope.isEdit = $routeParams.identifier;
 				$scope.scientificNameSynonyms = [{}];
 				$scope.commonNames = [{}];
 				$scope.container        = $attr.container;
@@ -22,7 +22,10 @@ function (app, _, template) {
                 $controller('editController', {
                     $scope: $scope
                 });
-
+                $scope.isEdit = false;
+                if($routeParams.identifier != undefined){
+                    $scope.isEdit = true;
+                }
                 var commonDecisionsIdentifiers = ["E8C5A15C-A736-4fb7-A1B6-192412BE7E45", "BE64016A-C3BD-4C61-9620-C3FEF96B2A24"]
                 _.extend($scope.options, {
 
