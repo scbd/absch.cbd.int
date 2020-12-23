@@ -9,7 +9,12 @@
 
 		<document-date></document-date>
 		<legend>General information</legend>
-
+		<div ng-show="document.amendmentsDetails">
+			<label>Reasons for the amendment</label>
+			<div>
+				<km-value-ml value="document.amendmentsDetails" locales="locale"></km-value-ml>
+			</div>
+		</div>
 		<div ng-show="document.government">
 			<label name="country">Country</label>
 			<div class="km-value">
@@ -31,7 +36,7 @@
 
 		<div ng-show="document.title">
 			<label>Title / Reference number of the decision or communication</label>
-			<div class="km-value">
+			<div>
 				<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
 		</div>
@@ -57,34 +62,6 @@
 			<label>Jurisdiction details</label>
 			<div class="km-value">
 				<km-value-ml value="document.jurisdictionDetails" locales="locale"></km-value-ml>
-			</div>
-		</div>
-		<div ng-if="document.isAmendment">
-			<div ng-show="document.isAmendment">
-				<label>Is this an amendment to a previous decision / communication?</label>
-				<div  class="km-value">
-					<km-value-bool value="document.isAmendment" locales="locale"></km-value-bool>
-				</div>
-			</div>
-			<div ng-show="document.amendedDecisions">
-				<label>BCH decision amended</label>
-				<div class="km-value">
-					<ul class="list">
-						<li ng-repeat="item in document.amendedDecisions">
-							<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
-						</li>
-					</ul>						
-				</div>
-			</div>
-			<div ng-show="document.amendmentReason">
-				<label>Reasons for the amendment</label>
-				<div class="km-value">
-					<km-value-ml value="document.amendmentReason" locales="locale"></km-value-ml>
-				</div>
-			</div>
-			<div>
-				<label>This decision has been amended by following decision</label>
-				<view-record-reference ng-model="document.header.identifier"></view-record-reference>
 			</div>
 		</div>
 
@@ -163,7 +140,7 @@
 		<div ng-show="document.decisionResult">
 			<label>Result of the decision</label>
 			<div class="km-value">
-				<span ng-bind="document.developers|term:locale"></span>
+				<span ng-bind="document.decisionResult|term:locale"></span>
 			</div>
 		</div>
 
@@ -174,13 +151,13 @@
 
 		<div ng-show="document.conditions">
 			<label>Conditions</label>
-			<div class="km-value">
+			<div>
 				<km-value-ml value="document.conditions" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.reasons">
 			<label>Reasons</label>
-			<div class="km-value">
+			<div>
 				<km-value-ml value="document.reasons" locales="locale"></km-value-ml>
 			</div>
 		</div>
