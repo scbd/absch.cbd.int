@@ -244,7 +244,7 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="decisionLMOFFPSubject" required caption="Subject of the decision">
 												<div class="km-value">
-															<div km-term-check required ng-model="document.decisionLMOFFPSubject" locales="document.header.languages"
+															<div km-term-check required ng-model="document.uses" locales="document.header.languages"
 													terms="options.decisionLMOFFPSubject()"  binding-type="term[]"></div>
 												</div>
 											</div>
@@ -252,7 +252,7 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="appliesToTransboundaryMovement" required 
+											<div class="km-control-group" name="appliesToTransboundaryMovement" required	
 											caption="Has the decision been taken in the absence of a domestic regulatory framework and in accordance with Article 11.6?">
 												<div km-yes-no required ng-model="document.appliesToTransboundaryMovement" locales="document.header.languages"></div>
 											</div>
@@ -261,10 +261,10 @@
 									<div class="row" ng-if="isLmoDecisionForIntentionalIntroduction">
 										<div class="col-xs-12">
 											<div class="alert alert-danger">
-												<strong>Note:</strong> The first two categories in the field Subject of the decision / communication at the top of this page have been selected 
-												indicating that this record refers to a decision addressing LMOs for both Intentional introduction into the environment (Articles 7-10) 
-												AND LMOs-FFPs (Article 11). Accordingly, the fields below, Type of decision and contact details of the importer/exporter or applicant, 
-												are therefore not active because the information has already been provided. Should this not be the case, 
+												<strong>Note:</strong> The first two categories in the field Subject of the decision / communication at the top of this page have been selected	
+												indicating that this record refers to a decision addressing LMOs for both Intentional introduction into the environment (Articles 7-10)	
+												AND LMOs-FFPs (Article 11). Accordingly, the fields below, Type of decision and contact details of the importer/exporter or applicant,	
+												are therefore not active because the information has already been provided. Should this not be the case,	
 												please create two different records, one for intentional introduction into the environment and one for the LMOs-FFPs.
 											</div>
 										</div>
