@@ -357,6 +357,41 @@
 									</div>
 								</div>
 							</section>
+							<section ng-if="isABS">
+								<div class="well no-shadow bg-white">
+									<legend ng-if="IsCapacityBuilding() || IsLiterature() || isMcc">Keywords for facilitating online searches</legend>
+			
+									<div class="row" ng-if="isMcc">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="mccKeywords" required caption="Please select the relevant keywords for describing the content of  the code of conduct, guidelines and best practices and/or standards being submitted">
+												<div km-term-check name="mccKeywords" required ng-model="document.mccKeywords" terms="options.mccKeywords()"
+												 binding-type="term[]"></div>
+											</div>
+										</div>
+									</div>
+			
+									<div class="row" ng-if="(isResource && IsLiterature() && IsTarget16()) || !isResource">
+										<div class="col-xs-12">
+											<div class="km-control-group" required name="absSubjects" caption="Thematic areas(s)">
+												<div km-term-check name="absSubjects" required ng-model="document.absSubjects" terms="options.absSubjects()"
+												 binding-type="term[]"></div>
+											</div>
+										</div>
+									</div>
+			
+									<div class="row" ng-if="IsCapacityBuilding() && IsTarget16()">
+										<div class="col-md-12">
+											<div class="km-control-group" required name="absKeyAreas" caption="Key areas and strategic measures for capacity-building and development">
+												<div class="help-info">The key areas are identified by the Strategic Framework for capacity-building and
+													development to support the effective
+													implementation of the Nagoya Protocol (decision NP-1/8, annex I).</div>
+												<div km-term-check name="absKeyAreas" ng-model="document.absKeyAreas" terms="options.absKeyAreas()"
+												 binding-type="term[]"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
 								<section>
 									<legend>Attached files, documents, or resources</legend>
 			
