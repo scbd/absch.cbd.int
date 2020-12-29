@@ -40,6 +40,14 @@
 												</div>
 											</div>
 										</div>
+										<div class="row" ng-if="isBCH">
+											<div class="col-md-12">
+											  <div class="km-control-group" required name="projectDocument" caption="2. Website address(es)">
+												<div class="help-info">Please provide the URL of the website (e.g. http://www.cbd.int) and the name of the website (e.g. 'Convention on Biological Diversity').</div>
+												<div km-link name="projectDocument" required ng-model="document.projectDocument" allow-link="true" identifier="document.header.identifier"></div>
+											  </div>
+											</div>
+										  </div>
 				
 										<div class="row">
 											<div class="col-md-12">
