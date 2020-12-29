@@ -84,7 +84,40 @@
 										</div>
                                     </div>
                                 </div>
-                            </section>    			
+							</section>
+							<section ng-if="isBCH">
+                                <div class="well no-shadow bg-white">
+									<legend>Information on Organisms or LMOs</legend>
+									<div class="row">
+										<div  class="col-xs-12">
+											<div class="km-control-group" name="addressLmoCategories" caption="Does this resource address one or more specific categories of organisms or genes or LMOs*?" required>
+												<div km-yes-no required ng-model="document.addressLmoCategories" locales="document.header.languages"></div>
+												<div ng-if="document.addressLmoCategories" style="padding-left:50px;">
+													<div class="col-xs-12">
+														<div class="km-control-group" name="organisms" required caption="Organism(s) identification">
+															<div document-selector ng-model="document.organisms" question="organisms" allow-new="true" allow-new-schema="organisms"
+																	 government="document.government"  schema="(organisms)" skip-government="true">
+															</div>
+														</div>
+													</div>
+													<div class="col-xs-12">
+														<div class="km-control-group" name="genes" required caption="Gene(s)  identification">
+															<div document-selector ng-model="document.genes" allow-new="true" allow-new-schema="dnaSequence"
+																	 government="document.government"  schema="(dnaSequence)" filter="true" skip-government="true"></div>
+														</div>
+													</div>
+													<div class="col-xs-12">
+														<div class="km-control-group" name="modifiedOrganisms" required caption="LMO(s) identification">
+															<div document-selector ng-model="document.modifiedOrganisms" allow-new="true" allow-new-schema="modifiedOrganism"
+																	 government="document.government"  schema="(modifiedOrganism)" filter="true" skip-government="true"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>			
 								<section>
 									<legend>Attached files, documents, or resources</legend>
 			
