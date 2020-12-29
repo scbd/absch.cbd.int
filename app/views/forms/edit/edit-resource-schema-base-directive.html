@@ -10,13 +10,13 @@
 							<div ng-show="tab=='edit'" km-tab="edit">
 			
 								<legend name="formInfo" style="display:none"></legend>
-								<section>
-										
+							<section>
+								<div class="well no-shadow bg-white">
 									<legend>General information</legend>
 			
                                     <div class="row">
                                         <div class="col-xs-12" >
-                                            <div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                            <div class="km-control-group" name="languages" required caption="Please select in which language(s) you wish to submit this record:">
                                                 <div class="indent">
                                                     <div km-form-languages multiple required name="languages" ng-model="document.header.languages"></div>
                                                 </div>
@@ -30,138 +30,41 @@
 											</div>
 										</div>
 									</div>
-			
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
-												<div km-select multiple name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"
-												 show-description="true"></div>
-											</div>
-											<div ng-if="isNationalUser && displayMCCWarning" class="alert alert-info">
-												<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-												<h4><strong>Please note:</strong> If this module contractual clause has been developed by your country, then please submit it under the national record format <a rel="noopener" href="/register/NMCC/new" class="color-blue" >'National Model Contractual Clause'</a> so that will be clearly visible as a national record in the search and country profile. </h4>
-												<a rel="noopener" href="/register/NMCC/new" class="bold">Click here</a> to open the national record submission form.
-											</div>
-										</div>
-										<div class="col-xs-12" ng-show="isOtherSelected(document.resourceTypes)">
-											<div class="km-control-group" required name="resourceTypeName" caption="Name of other type of resource">
-												<div km-textbox-ml required name="resourceTypeName" rows="1" ng-model="document.resourceTypeName" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
-			
-									<div class="row" ng-if="isResource">
-										<div class="col-md-12">
-											<div class="km-control-group" required name="fileFormat" caption="Format/File type">
-												<div km-select name="fileFormat" required ng-model="document.fileFormat" items="options.fileFormats()"></div>
-											</div>
-										</div>
-									</div>
-									<div class="row" ng-if="isResource">
-										<div class="col-md-12">
-											<div class="km-control-group" name="formatDetails" caption="Format details">
-												<div class="help-info">Format details may be used to provide further information relating to the format of the
-													attachments, including its dimensions (e.g. size, number of pages or duration) or the software, hardware, or
-													other equipment needed to display or operate it (e.g. “Requires Acrobat Reader for viewing”).</div>
-												<div km-textbox-ml rows="2" name="formatDetails" ng-model="document.formatDetails" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
-			
-									<div class="row">
-										<div class="col-md-12" ng-if="isResource">
-											<div class="km-control-group" required name="purpose" caption="Please identify the main purpose of the resource">
-												<div km-select multiple required name="purpose" ng-model="document.purpose" items="options.purposes()"
-												 show-description="true"></div>
-											</div>
-										</div>
-									</div>
-			
-									<div class="row" ng-if="isResource && IsCapacityBuilding()">
-										<div class="col-md-12">
-											<div class="km-control-group" required="IsCapacityBuilding()" name="targetGroups" caption="Target group(s)/beneficiary(ies)">
-												<div km-term-check name="targetGroups" required="IsCapacityBuilding()" ng-model="document.targetGroups" terms="options.targetGroups()"
-												 binding-type="term[]"></div>
-											</div>
-										</div>
-									</div>
-			
-									<div class="row" ng-if="isResource && IsCapacityBuilding()">
-										<div class="col-md-12">
-											<div class="km-control-group" name="expertiseLevel" caption="Level of the content or   level of knowledge/expertise of the audience for which the resource is intended">
-												<div km-select name="expertiseLevel" ng-model="document.expertiseLevel" items="options.expertiseLevels()"></div>
-											</div>
-										</div>
-									</div>
-			
-									<!--//Authors or Authoring organization is madatory Error message -->
-									<label for="author_org" style="width:0px;height:0px;display:inline">
-										<span style="display:none">
-											Please enter author(s) details or select authoring organizations
-										</span>
-									</label>
-									<div class="row">
+									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="authors" caption="Author(s)">
-												<div class="help-info">Name of the person who has authored the publication or information resource.</div>
+												<div class="help-info">Name of the person who has authored the publication or information resource. Add his/her affiliation if appropriate.</div>
 												<div km-textbox-ml required ng-model="document.authors" rows="2" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
-			
-									<div class="row">
+									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="organizations" caption="Authoring organization(s) ">
+											<div class="km-control-group" name="organizations" caption="Organization(s) involved in the publication of this resource">
+												<div class="help-block">All BCH common formats are available at http://bch.cbd.int/resources/commonformats.shtml.</div>
 												<organization-selector multiple ng-model="document.organizations" organization-only locales="document.header.languages"
-												 caption="Add organizations »">
+																							 caption="Add organizations »"></organization-selector>
 											</div>
 										</div>
 									</div>
-			
-									<div class="row">
-										<div class="col-xs-12">
+									<div class="row" ng-if="isBCH">
+										<div class="col-xs-6">
 											<div class="km-control-group" required name="publicationYear" caption="Publication year">
-												<select class="form-control" style="width:10%" required name="publicationYear" ng-model="document.publicationYear"
-												 convert-to-number>>
+												<select class="form-control" required name="publicationYear" ng-model="document.publicationYear" convert-to-number>
 													<option ng-repeat="option in years" value="{{option.id}}">{{option.name}}</option>
 												</select>
 											</div>
 										</div>
-									</div>
-			
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="rights" caption="Rights">
-												<div class="help-info">Information about rights held in and over the attached files, such as copyright holder,
-													and availability for reproduction
-													for educational or non-profit purposes.</div>
-												<div km-textbox-ml name="rights" ng-model="document.rights" locales="document.header.languages"></div>
+										<div class="col-xs-6">
+											<div class="km-control-group" required name="publicationMonth" caption="Publication month">
+												<select class="form-control" required name="publicationMonth" ng-model="document.publicationMonth" convert-to-number>
+													<option ng-repeat="option in [1,2,3,4,5,6,7,8,9,10,11,12]" value="{{$index}}">{{$index + 1}}</option>
+												</select>
 											</div>
 										</div>
 									</div>
-			
-									<div class="row" ng-if="isResource">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="source" caption="Source">
-												<div class="help-info">A reference to a document or resource from which the present resource is derived (e.g.
-													an article from a journal). For original
-													documents you may wish to specify "original document".</div>
-												<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
-			
-									<div class="row" ng-if="!isResource">
-										<div class="col-md-12">
-											<div class="km-control-group" name="formatDetails" caption="Format details">
-												<div class="help-info">Format details may be used to provide further information relating to the format of the
-													attachments, including its dimensions (e.g. size, number of pages or duration) or the software, hardware, or
-													other equipment needed to display or operate it (e.g. “Requires Acrobat Reader for viewing”).</div>
-												<div km-textbox-ml rows="2" name="formatDetails" ng-model="document.formatDetails" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
-								</section>
+								</div>
+							</section>
 			
 								<section>
 									<legend>Attached files, documents, or resources</legend>
