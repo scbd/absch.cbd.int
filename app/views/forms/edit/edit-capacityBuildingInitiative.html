@@ -199,7 +199,35 @@
 												</div>
 											</div>
 										</div>
-				
+										<div class="row" ng-if="isBCH">
+											<div class="col-md-12">
+											  <div class="km-control-group" required name="capacityBuildingType" caption="7. Scope of activity">
+												<div style="padding-left:20px" class="well">
+												  <div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="Project/programme?">
+													<div class="help-block">Select this option if the entire project or programme is for building capacity in biosafety</div>
+													<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.capacityBuildingType.isProjectProgramme"></div>
+												  </div>
+												  <div class="km-control-group"  bold="true" required name="isStandaloneProject" caption="Stand-alone activity">
+													<div class="help-block">Select this option if the activity is not part of a project or programme.</div>
+													<div class="km-yes-no" required name="isStandaloneProject" ng-model="document.capacityBuildingType.isStandaloneProject"></div>
+												  </div>
+												 
+												  <div class="km-control-group"  bold="true" required name="isStandaloneProject" caption="Series of activities">
+													<div class="km-yes-no" required name="isStandaloneProject" ng-model="document.capacityBuildingType.isStandaloneProject"></div>
+												  </div>
+												  <div class="km-control-group"  bold="true" required name="isBroaderProjectPart" caption="Part of a larger initiative/project/programme">
+													<div class="help-block">Select this option if the biosafety-related activity/component is part of a broader non-biosafety project (e.g. a project on national biodiversity strategies with a biosafety component or activity) and provide the title and further details about the broader project/initiative.</div>
+													<div class="km-yes-no" required name="isBroaderProjectPart" ng-model="document.capacityBuildingType.isBroaderProjectPart"></div>
+												  </div>
+												  
+												  <div class="km-control-group" name="broaderProjects" caption="Please specify" ng-show="document.capacityBuildingType.isBroaderProjectPart">
+													<div km-textbox-ml required ng-model="document.title" locales="document.header.languages"></div>
+												  </div>
+							
+												</div>
+											  </div>
+											</div>
+										  </div>
 										<div class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" required name="organizations" caption="7. Agency(ies) or organisation(s) implementing and/or executing the initiative">
