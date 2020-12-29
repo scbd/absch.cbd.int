@@ -72,7 +72,7 @@
 				
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" required name="geographicScope" caption="3. Geographic Scope">
+												<div class="km-control-group" required name="geographicScope" caption="{{isBCH ? '4':'3'}}. Geographic Scope">
 													<div km-select name="geographicScope" required ng-model="document.geographicScope.scope"
 													 placeholder="Please select one option" items="options.geographicScope()" ng-change="clearGeographicSelection()"></div>
 												</div>
