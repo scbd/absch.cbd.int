@@ -1,9 +1,11 @@
 define(['app', 'underscore', 'views/forms/edit/edit', '../view/view-capacity-building-initiative.directive',
 './organization-selector'], function (app, _) {
 
-  app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", "underscore", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, Thesaurus, Enumerable, _) {
+    app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", "underscore", "realm", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, Thesaurus, Enumerable, _, realm) {
 
-    $controller('editController', {$scope: $scope});
+        $controller('editController', {$scope: $scope});
+        $scope.isABS = realm.is('ABS');
+        $scope.isBCH = realm.is('BCH');
    
     $scope.path = $location.path();
 
