@@ -332,7 +332,15 @@
 												</div>
 											</div>
 										</div>
-				
+										
+										<legend ng-if="isBCH">Information on the thematic coverage of the initiative</legend>
+										<div class="row" ng-if="isBCH">
+										  <div class="col-md-12">
+											<div class="km-control-group" required name="aichiTargets" caption="12. General thematic area">
+											  <div km-term-check name="aichiTargets" required ng-model="document.aichiTargets" terms="options.aichiTargets()" binding-type="term[]"></div>
+											</div>
+										  </div>
+										</div>
 										<legend>Information on funding</legend>
 				
 										<div class="row">
