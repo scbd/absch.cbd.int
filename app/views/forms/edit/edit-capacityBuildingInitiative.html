@@ -449,28 +449,37 @@
 												</div>
 											</div>
 										</div>
-				
-										<legend>Information on the thematic coverage of the initiative</legend>
-				
-										<div class="row" >
-											<div class="col-md-12">
-												<div class="km-control-group" required name="aichiTargets" caption="19. Related Aichi Biodiversity Target(s)">
-													<div km-term-check name="aichiTargets" required ng-model="document.aichiTargets" terms="options.aichiTargets()" binding-type="term[]"></div>
+									<section ng-if="isABS">
+										<div class="well no-shadow bg-white">
+											<legend>Information on the thematic coverage of the initiative</legend>
+									
+											<div class="row">
+												<div class="col-md-12">
+													<div class="km-control-group" required name="aichiTargets"
+														caption="19. Related Aichi Biodiversity Target(s)">
+														<div km-term-check name="aichiTargets" required ng-model="document.aichiTargets"
+															terms="options.aichiTargets()" binding-type="term[]"></div>
+													</div>
 												</div>
 											</div>
-										</div>
-				
-										<div class="row">
-											<div class="col-md-12">
-											   <div class="km-control-group" name="absKeyAreas" required caption="20. Key areas and strategic measures for capacity-building and development">
-													 <div class="help-info">The key areas have been identified by the Strategic Framework for capacity-building and development to support the effective implementation of the Nagoya Protocol (decision NP-1/8).</div>
-													 <div km-term-check name="absKeyAreas" ng-model="document.absKeyAreas" terms="options.absKeyAreas()" binding-type="term[]"></div>
+									
+											<div class="row">
+												<div class="col-md-12">
+													<div class="km-control-group" name="absKeyAreas" required
+														caption="20. Key areas and strategic measures for capacity-building and development">
+														<div class="help-info">The key areas have been identified by the Strategic Framework for
+															capacity-building and development to support the effective implementation of the Nagoya Protocol
+															(decision NP-1/8).</div>
+														<div km-term-check name="absKeyAreas" ng-model="document.absKeyAreas" terms="options.absKeyAreas()"
+															binding-type="term[]"></div>
+													</div>
 												</div>
 											</div>
+									
+									
+											<a rel="noopener" translation-url name="#AdditionalInformation"></a>
 										</div>
-				
-				
-										<a rel="noopener" translation-url  name="#AdditionalInformation"></a>
+									</section>
 										<legend>21. Additional information</legend>
 				
 										<div class="row">
