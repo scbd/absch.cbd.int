@@ -434,132 +434,22 @@
 									</div>
 								</div>
 							</section>
-								<section>
-									<legend>Attached files, documents, or resources</legend>
-			
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" required name="resourceLinks" caption="Link to the resource(s)">
-												<div class="help-block">Please attach the relevant files so that they will be stored in the database for users
-													to download. When resources
-													are available on the Internet, please also provide a link to them.</div>
-												<div km-link name="resourceLinks" required ng-model="document.resourceLinks" allow-link="true" allow-file="true"
-												 extensions="options.documentLinksExt" identifier="document.header.identifier"></div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="cover" caption="Cover image(s)">
-												<div class="help-block">Only JPEG and PNG formats are supported.</div>
-												<div km-link name="cover" ng-model="document.covers" allow-link="false" allow-file="true" mimeTypes="image/jpeg;image/png"
-												 identifier="document.header.identifier"></div>
-											</div>
-										</div>
-									</div>
-								</section>
-								<section>
-									<legend>Information on the content of attachments</legend>
-			
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="summary" caption="Summary or abstract (max 300 words)">
-												<div km-textbox-ml ng-model="document.summary" rows="4" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="regions" caption="Country(ies), Regional or Economic group(s) related to the resource">
-												<div km-select style="display: inline-block" name="regions" ng-model="document.regions" items="options.countryRegions()"
-												 multiple placeholder="Select a country(ies) and/or region(s)..."></div>
-											</div>
-										</div>
-									</div>
-									<div class="row" ng-if="isResource">
-										<div class="col-md-12">
-											<div class="km-control-group" required name="aichiTargets" caption="Related Aichi Biodiversity Target(s)">
-												<div km-term-check name="aichiTargets" required ng-model="document.aichiTargets" terms="options.aichiTargets()"
-												 binding-type="term[]"></div>
-											</div>
-										</div>
-									</div>
-								</section>
-								<section>
-			
-									<legend ng-if="IsCapacityBuilding() || IsLiterature() || isMcc">Keywords for facilitating online searches</legend>
-			
-									<div class="row" ng-if="isMcc">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="mccKeywords" required caption="Please select the relevant keywords for describing the content of  the code of conduct, guidelines and best practices and/or standards being submitted">
-												<div km-term-check name="mccKeywords" required ng-model="document.mccKeywords" terms="options.mccKeywords()"
-												 binding-type="term[]"></div>
-											</div>
-										</div>
-									</div>
-			
-									<div class="row" ng-if="(isResource && IsLiterature() && IsTarget16()) || !isResource">
-										<div class="col-xs-12">
-											<div class="km-control-group" required name="absSubjects" caption="Thematic areas(s)">
-												<div km-term-check name="absSubjects" required ng-model="document.absSubjects" terms="options.absSubjects()"
-												 binding-type="term[]"></div>
-											</div>
-										</div>
-									</div>
-			
-									<div class="row" ng-if="IsCapacityBuilding() && IsTarget16()">
-										<div class="col-md-12">
-											<div class="km-control-group" required name="absKeyAreas" caption="Key areas and strategic measures for capacity-building and development">
-												<div class="help-info">The key areas are identified by the Strategic Framework for capacity-building and
-													development to support the effective
-													implementation of the Nagoya Protocol (decision NP-1/8, annex I).</div>
-												<div km-term-check name="absKeyAreas" ng-model="document.absKeyAreas" terms="options.absKeyAreas()"
-												 binding-type="term[]"></div>
-											</div>
-										</div>
-									</div>
-								</section>
-			
-			
-			
-								<section>
-			
-									<a rel="noopener" translation-url name="#AdditionalInformation"></a>
-									<legend>Additional information</legend>
-			
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="address" caption="Any other relevant information">
-												<div class="help-block">Please use this field to provide any other relevant information that may not have been
-													addressed elsewhere in the
-													record.</div>
-												<div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
-			
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
-												 identifier="document.header.identifier"></div>
-											</div>
-										</div>
-									</div>
-			
-								</section>
-								<section>
+							<section>
+								<div class="well no-shadow bg-white">
 									<legend>Notes</legend>
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="notes">
-												<div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.
+												<div class="help-block" ng-if="isABS">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.
+												</div>
+												<div class="help-block" ng-if="isBCH">The notes field is for your personal use only: you can see it when you edit the record, but it is not visible through search pages.
 												</div>
 													<div km-notes name="notes" ng-model="document.notes"></div>
 											</div>
 										</div>
 									</div>
-								</section>
+								</div>
+							</section>
 			
 			
 			
