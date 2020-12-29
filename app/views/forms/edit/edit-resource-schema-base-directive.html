@@ -299,7 +299,35 @@
 										</div>
 									</div>
 								</div>
-							</section>			
+							</section>	
+							
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend ng-if="isABS">Attached files, documents, or resources</legend>
+									<legend ng-if="isBCH">Access to the resource</legend>
+			
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" required name="resourceLinks" caption="Link to the resource(s)">
+												<div class="help-block">Please attach the relevant files so that they will be stored in the database for users
+													to download. When resources
+													are available on the Internet, please also provide a link to them.</div>
+												<div km-link name="resourceLinks" required ng-model="document.resourceLinks" allow-link="true" allow-file="true"
+												 extensions="options.documentLinksExt" identifier="document.header.identifier"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row" ng-if="isABS">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="cover" caption="Cover image(s)">
+												<div class="help-block">Only JPEG and PNG formats are supported.</div>
+												<div km-link name="cover" ng-model="document.covers" allow-link="false" allow-file="true" mimeTypes="image/jpeg;image/png"
+												 identifier="document.header.identifier"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
 								<section>
 									<legend>Attached files, documents, or resources</legend>
 			
