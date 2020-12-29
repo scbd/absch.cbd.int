@@ -25,8 +25,8 @@
 											
 										<legend>General information</legend>
 				
-										<div class="row">
-											<div class="row" ng-if="isABS">
+										<div class="row" ng-if="isABS">
+											<div class="col-md-12">
 												<div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
 													<div class="indent">
 														<div km-form-languages multiple required name="languages" ng-model="document.header.languages"></div>
@@ -53,7 +53,7 @@
 				
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
-											  <div class="km-control-group" name="contacts" caption="3. Contact person	">
+											  <div class="km-control-group" name="contacts" caption="3. Contact person">
 													<div class="help-block">All BCH common formats are available on the Dashboard of the Submit page in the BCH</div>
 														<div document-selector ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
 															question="contacts"
