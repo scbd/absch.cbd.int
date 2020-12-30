@@ -38,7 +38,7 @@
                                         <div class="col-md-1"><strong style="padding-left:50px;">OR</strong></div>
                                         <div class="col-md-6">
                                             <div class="km-control-group" name="organization"
-                                                caption="Relevant organization(s) " required>
+                                                caption="Organization(s)" required>
                                                 <div document-selector ng-disabled="document.government"
                                                     question="organizations" type="checkbox" query="organizationQuery"
                                                     skip-government="true"
@@ -74,10 +74,8 @@
                             <section>
                                 <div class="well no-shadow bg-white">
                                     <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="km-control-group" name="notifications"
-                                                caption="Notifications">
-
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="notifications" caption="Related notification(s)">
                                                 <div document-selector identifier-without-revision="true"
                                                     question="notifications" type="checkbox" query="notificationQuery.q"
                                                     display-fields="{{::notificationQuery.fl}}"
@@ -108,22 +106,21 @@
 
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-2"><strong style="padding-left:50px;">OR</strong></div>
-                                        <div class="col-md-5">
-                                            <div class="km-control-group" name="records"
-                                                caption="Related record(s)">
-                                                <div document-selector ng-model="document.records" question="records"
-                                                    filter="true"></div>
+                                        </div>                                                                      
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="records"caption="Related record(s)">
+                                                <div document-selector ng-model="document.records" question="records" filter="true"></div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </section>
-
                             <section ng-if="isAbs">
                                 <div class="well no-shadow bg-white">
-                                    <legend>Thematic area(s)</legend>
+                                    <legend>Thematic areas</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
@@ -139,7 +136,7 @@
 
                             <section ng-if="isBch">
                                 <div class="well no-shadow bg-white">
-                                    <legend>Thematic area(s)</legend>
+                                    <legend>Thematic areas</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
