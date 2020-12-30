@@ -132,7 +132,7 @@
 			</div>
 
 		<div ng-show="document.authorities">
-			<label>Competent National Authority(ies) responsible for the decision or communication</label>
+			<label>Competent National Authority(ies)</label>
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >						
@@ -154,7 +154,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website address or attached documents</label>
+				<label>Other relevant website addresses and/or attached documents</label>
 				<div class="km-value" ng-repeat="item in document.relevantDocuments">
 					<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 				</div>

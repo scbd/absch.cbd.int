@@ -114,7 +114,7 @@
 		{
 			"type": "thesaurus",
 			"term": "legislationAgreementTypes",
-			"title": "Type of document",
+			"title": "Type of Law / Regulation",
 			"field": "type_s"
 		}
 	],
