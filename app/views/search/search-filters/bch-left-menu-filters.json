@@ -631,7 +631,7 @@
 		{
 			"type": "thesaurus",
 			"term": "cpbThematicAreas",
-			"title": "Thematic Area(s)",
+			"title": "Thematic areas",
 			"field": "cpbThematicAreas_ss",
 			"relatedField":"cpbThematicAreas_REL_ss"
 		},
