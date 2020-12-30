@@ -4,7 +4,8 @@
             <hr class="heading"  ng-if="sf_filters.length">
 
         <p class="helpinfo" ng-if="sf_filters.length"><i class="fa fa-info-circle helpicon" ></i> 
-        {{realm.uIdPrefix}} related information from the SCBD</p>
+            Information published by the SCBD. This includes meetings, news stories, notifications and statements.
+        </p>
         
         <div ng-repeat="doc in sf_filters = (sf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])">
                 <a rel="noopener" translation-url  class="filter"  ng-click="saveFilter(doc)" ng-class="{'disabled':!$parent.searchResult.data.facets.schemas[doc.id]}">

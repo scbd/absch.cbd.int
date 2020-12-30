@@ -2,7 +2,7 @@ define(['app', 'lodash', 'text!./edit-law.directive.html', 'views/forms/edit/edi
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-law.directive"], 
 function (app, _, template) {
 
-	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter", function($controller, thesaurusService, $q, $filter) {
+	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter","Enumerable", function($controller, thesaurusService, $q, $filter,Enumerable) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -23,32 +23,23 @@ function (app, _, template) {
 				});
 
 				_.extend($scope.options, {	
-					jurisdiction : 	function(){
-						return $q.all([thesaurusService.getDomainTerms('countries'),
-									thesaurusService.getTerms('other')])
-						.then(function(result){
-							var filtered = $filter('orderBy')(result[0], 'title.en');
-							filtered.push(result[1]);
-							return filtered;
+					lawJurisdictions:  thesaurusService.getDomainTerms('lawJurisdictions', {other:true, otherType:'lstring'}),				 
+					chmregions: function() { return $q.all([thesaurusService.getDomainTerms('countries'), thesaurusService.getDomainTerms('geographicRegions')])
+						.then(function(data) { 
+							return Enumerable.from($filter('orderBy')(data[0], 'title.en')).union(
+							Enumerable.from($filter('orderBy')(data[1], 'title.en'))).toArray();
 						});
 					},
 					legislationAgreementTypes : 	function(){
 						return thesaurusService.getDomainTerms('legislationAgreementTypes')
 					},
 					subjectAreas : 	function(){
-						return thesaurusService.getDomainTerms('subjectAreas')
+						return thesaurusService.getDomainTerms('subjectAreas', {other:true, otherType:'lstring'})
 					},
 					typeOfOrganisms: 	function(){
-						return thesaurusService.getDomainTerms('typeOfOrganisms')
+						return thesaurusService.getDomainTerms('typeOfOrganisms', {other:true, otherType:'lstring'})
 					},
-
 				});
-				
-				$scope.hasOther = function(selectedTerms){
-					return selectedTerms && _(selectedTerms).map('identifier').some('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'); 
-				}
-				//==================================
-				//
 				//==================================
 				$scope.getCleanDocument = function(document) {
 
@@ -67,10 +58,16 @@ function (app, _, template) {
 						else{
 							document.isAmendment = true;
 						}
-					// if(!_.isEmpty($scope.jurisdictionNames))
-					// 	document.jurisdictionNames = _($scope.jurisdictionNames).pluck('value').compact().value();
-					// if(_.isEmpty(document.jurisdictionNames))
-					// 	document.jurisdictionNames = undefined;
+						if(document.jurisdiction){
+							if(document.jurisdiction.identifier !=  "528B1187-F1BD-4479-9FB3-ADBD9076D361") // Regional
+							{
+								document.jurisdictionScope = undefined;
+							}
+							if(!_.includes(["DEBB019D-8647-40EC-8AE5-10CA88572F6E", "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED"], document.jurisdiction.identifier))// sub-national, other
+							{
+								document.jurisdiction.customValue = undefined;
+							}
+						}
 						
 					return $scope.sanitizeDocument(document);
 				};

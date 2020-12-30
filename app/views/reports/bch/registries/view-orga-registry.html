@@ -15,16 +15,17 @@
 								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>Registries</b></li>
 								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry</a></li>
 								<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
-								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">Gene Registry</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">Genetic Element Registry</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-md-10  col-xs-12">
 						<p class="p-borders padding-top-10">
-							The BCH Organisms Registry includes those organisms that have been registered with the BCH as parental, recipient or donor organisms.
-					 Each record provides further information about relevant biological characteristics, including information on taxonomic status, 
-					 common name, origin, centre of origin and centre of genetic diversity. 
-					Links to relevant LMO records are provided at the bottom of each individual record.
+							The Organism Registry includes summary information on those organisms that have been registered in the BCH as parental,
+							 recipient or donor organisms. The registry includes links to the records on each organism where further information 
+							 about relevant biological characteristics, including information on taxonomic classification, common name, origin,
+							  centre of origin and centre of genetic diversity can be found. Links to records that reference
+							   the organism are provided at the bottom of each individual record.
 						</p>
 						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
 						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> Error loading registry records, please try again.</h3></div>
@@ -38,11 +39,11 @@
 							</div>
 						</div>
 						<div>
-							<table class="table" id="forExport">
+							<table class="table" id="orgaExport">
 								<thead>
 									<tr>
 										<th class="display-18">Record ID</th>
-										<th class="display-20">Taxonomic status</th>
+										<th class="display-20">Scientific name</th>
 										<th class="display-17 hidden-xs">Common name</th>
 										<th class="display-45 hidden-xs">Description</th>
 									</tr>

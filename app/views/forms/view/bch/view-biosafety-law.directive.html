@@ -22,30 +22,35 @@
 
 		<div ng-show="document.title">
 			<label>Title</label>
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<strong>{{document.title | lstring:locale}}</strong>
 			</div>
 		</div>
-
-		<div ng-show="document.jurisdictions">
-			<label>Jurisdiction</label>
-			<div class="km-value">
-				<ul class="list">
-					<li ng-repeat="item in document.jurisdictions">
-						<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
-						<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
-					</li>
-				</ul>
-			</div>
-		</div>
-
 		<legend>Legislative details</legend>
 		<div>
 			<div ng-show="document.type">
-				<label>Type of document</label>
+				<label>Type of Law / Regulation</label>
 				<div class="km-value">
 					<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type|term:locale"></span>
 					<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type.customValue|lstring:locale"></span>
+				</div>
+			</div>
+			<div ng-show="document.jurisdiction">
+				<label>Area of jurisdiction</label>
+				<div class="km-value">
+					<span ng-if="document.jurisdiction.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.jurisdiction|term:locale"></span>
+					<span ng-if="document.jurisdiction.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.jurisdiction.customValue|lstring:locale"></span>
+				</div>
+			</div>
+
+			<div ng-show="document.jurisdictionScope">
+				<label>Geographical or political/economic group(s)</label>	
+				<div class="km-value">		
+					<ul ng-if="document.jurisdictionScope" class="list">
+						<li ng-repeat="item in document.jurisdictionScope">
+							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+						</li>
+					</ul>
 				</div>
 			</div>
 
@@ -61,7 +66,7 @@
 				</div>
 			</div>
 			<div ng-show="document.cpbOrganismTypes">
-				<label>Types of LMOs addressed</label>
+				<label>Types of organisms addressed</label>
 				<div class="km-value">
 					<ul class="list">
 						<li ng-repeat="item in document.cpbOrganismTypes">
@@ -127,7 +132,7 @@
 			</div>
 
 		<div ng-show="document.authorities">
-			<label>Competent National Authority(ies) responsible for the decision or communication</label>
+			<label>Competent National Authority(ies)</label>
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >						
@@ -149,7 +154,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website address or attached documents</label>
+				<label>Other relevant website addresses and/or attached documents</label>
 				<div class="km-value" ng-repeat="item in document.relevantDocuments">
 					<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 				</div>

@@ -17,10 +17,14 @@
                     <label>Country</label>
                     <div class="km-value km-pre" ng-bind="document.government | term:lstring:locale"></div>
                 </div>
-                <div ng-if="document.organization">
-                    <label>Organization</label>
+                <div ng-if="document.organizations">
+                    <label>Organization(s)</label>
                     <div class="km-value">
-                        <div view-record-reference ng-model="document.organization" locale="locale"></div>
+                        <ul class="list">
+                            <li ng-repeat="item in document.organizations" >
+                                <div view-record-reference ng-model="item.identifier" locale="locale"></div>
+                            </li>
+                        </ul>                        
                     </div>
                 </div>
             </div>
@@ -46,7 +50,7 @@
                 </div>
             </div>
             <div class="col-md-12" ng-if="document.records">
-                <label>Related records(s)</label>
+                <label>Related record(s)</label>
                 <div class="km-value">
 					<ul class="list">
 						<li ng-repeat="item in document.records" >
@@ -58,7 +62,7 @@
 
             <div class="col-md-12"
                 ng-if="document.cbdThematicAreas || document.absThematicAreas || document.cpbThematicAreas">
-                <legend>Thematic areas(s)</legend>
+                <legend>Thematic areas</legend>
                 <div ng-if="document.cbdThematicAreas">
                     <div class="km-value">
                         <ul  class="list">
@@ -84,10 +88,11 @@
 
             <div class="col-md-12">
                 <div ng-show="document.relevantDocuments">
-                    <label>Documents</label>
+                    <legend>Documents</legend>
                     <div class="km-value" ng-if="document.relevantDocuments" km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>	                    
                 </div>
                 <div ng-show="document.relevantInformation">
+                    <label>Any other relevant information</label>
                     <km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
                 </div>
             </div>

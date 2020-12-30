@@ -46,6 +46,18 @@ function (app, _, template) {
 						document.government = undefined;
 					}
 
+					if(!document.isForCommercialUse){
+						document.forwardToOECD = undefined;
+						document.isForFoodSafety = undefined;
+						document.codexConduted = undefined;
+						document.forwardToFAO = undefined;
+					}
+
+					if(!document.isForFoodSafety){
+						document.codexConduted = undefined;
+						document.forwardToFAO = undefined;
+					}
+
 					if (/^\s*$/g.test(document.notes))
 						document.notes = undefined;
 

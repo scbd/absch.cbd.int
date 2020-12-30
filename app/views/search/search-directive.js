@@ -115,7 +115,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 leftMenuFilters = leftFilters
                             }
                         }
-                        
                         // if(!_.isEmpty($scope.setFilters)){ 
                         //     //if not empty and the default sort is not set by the user then remove sort to default to relevance
                         //     if($scope.searchResult.sortFields.length == 1 && $scope.searchResult.sortFields[0]=='updatedDate_dt')
@@ -138,6 +137,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                            $scope.setFilters[fid] = {'type':'freeText', 'name': text, 'id':fid};
 
                            $scope.searchKeyword = "";
+                          
+                           $scope.searchResult.sortFields = ['relevance asc']
                         }
 
                         updateQueryResult();
@@ -241,6 +242,35 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         }
                     }
 
+                    $scope.onEditFreeTextFilterDone = function(filter){
+                        // delete $scope.setFilters[filter.id];
+                        var oldKey =  filter.id;
+                        filter.edit         =   false;
+                        filter.name         = _.clone(filter.editValue);
+                        filter.id           = filter.name 
+                        filter.editValue    = undefined;
+
+                        $scope.setFilters = _.mapKeys($scope.setFilters, function(value, key) {
+                                                if(key == oldKey)
+                                                    return filter.id;
+                                                return key;
+                                            });
+                        updateQueryResult();
+                    }
+
+                    $scope.onEditFreeTextFilterCanceled = function(filter){
+                        filter.edit=false;
+                        filter.editValue = undefined;
+                    }
+                    $scope.onEditFreeTextFilter = function(filter){
+                        filter.edit=true;
+                        filter.editValue = _.clone(filter.name);
+                    }
+                    $scope.onKeyDown = function($evt, filter){
+                        if($evt.which == 13){
+                            $scope.onEditFreeTextFilterDone(filter)
+                        }
+                    }
                     ////////////////////////////////////////////
                     ////// end $scope functions
                     ////////////////////////////////////////////
@@ -620,11 +650,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             if(($scope.searchResult.sortFields||[]).length > 0)
                                 sortFields = $scope.searchResult.sortFields.join(', ');
                             
-                            if(queryOptions.highlight){ 
-                                //if highlight is enabled that means there is freetext, if the sort is by only lastUpdated use relevance
-                                if(sortFields == 'updatedDate_dt desc')
-                                    sortFields   = ['relevance asc'];
-                            }
+                            // if(queryOptions.highlight){ 
+                            //     //if highlight is enabled that means there is freetext, if the sort is by only lastUpdated use relevance
+                            //     if(sortFields == 'updatedDate_dt desc')
+                            //         sortFields   = ['relevance asc'];
+                            // }
 
                             var viewType = $scope.searchResult.viewType;
                             if(viewType=='default' && $scope.searchResult.currentTab == 'allRecords')
@@ -670,7 +700,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var countryQuery        = _.compact([buildFieldQuery('country',  'countryRegions_ss'), buildFieldQuery('country',  'countryRegions_REL_ss')]).join(' OR ');
                         var partyStatusQuery    = buildPartyStatusQuery();
                         var regionQuery         = _.compact([buildFieldQuery('region',   'countryRegions_ss'), buildFieldQuery('region',   'countryRegions_REL_ss')]).join(' OR ');
-                        var textQuery           = buildFieldQuery('freeText', 'text_EN_txt');
+                        var textQuery           = buildFreeTextQuery('freeText', 'text_EN_txt');
                         var rawQuery            = buildRawQuery();
 
                         var dateQuery           = buildDateQuery();
@@ -684,7 +714,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             query              = solr.andOr(queries, 'AND');
                         if(schemaQuery != '(*:*)')
                             tagQueries.schema  =  schemaQuery;
-                        tagQueries.version     =  'NOT version_s:*'
+                        tagQueries.version     =  '(*:* NOT version_s:*)'
                         tagQueries.schemaSub   =  schemaSubQuery.query;
                         tagQueries.schemaType  =  tabQuery;
                         tagQueries.partyStatus =  partyStatusQuery;
@@ -716,10 +746,11 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var filters = getSelectedFilters('schema')
                         if (!(filters||[]).length){  
                             return "(*:*)";
-                        }
-                        var selectedSchemas = _.map(filters, 'id')
-                        var query = 'schema_s:(' + selectedSchemas.join(' ') + ')'
-                        updateQueryString('schema', selectedSchemas);
+                        }                                            
+                                                
+                        var query = buildAdvanceSettingsQuery(filters, 'schema_s');
+
+                        updateQueryString('schema',  _.map(filters, 'id'));
 
                         return query;
                     }
@@ -731,6 +762,12 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             var schemaQueries = []
                             var freeTexQueries = []    
                             _.each(leftMenuFilters, function(filters, key){
+
+                                // If main filter has been disabled than exclude results
+                                var mainFilter = $scope.setFilters[key]
+                                if(mainFilter.disabled || mainFilter.excludeResult)
+                                    return;
+
                                 var subQueries = [];                            
                                 subQueries.push('schema_s:'+ key)
                                 _.each(filters, function(filter){
@@ -745,13 +782,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                     else if(!_.isEmpty(filter.selectedItems)){
                                         var ids = _.map(filter.selectedItems, 'identifier');
                                         if(filter.type == 'freeText'){                                          
-                                            ids = _.map(filter.selectedItems,  function(filter){ 
-                                                // || _.trim(filter.title).split(' ').length>1
-                                                if(filter.title.indexOf('-')>0) 
-                                                    return '"' + solr.escape(_.trim(filter.title)) + '"'; 
-                                                return solr.escape(_.trim(filter.title))
+                                            ids = _.map(filter.selectedItems,  function(filter){
+                                                return {name:filter.title};
                                             });
-                                            subQuery = '(' + filter.field + ':' + ids.join(' AND ' + filter.field + ':') + ')';
+                                            subQuery = buildFreeTextQuery('freeText', filter.field, ids);
                                             
                                             if(!filter.excludeResult)
                                                 freeTexQueries.push(subQuery)
@@ -843,20 +877,72 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if (!(filters||[]).length){     
                             return;
                         }
-                        if(filterType == 'freeText'){
-                            var freeTextVals = _.map(filters, function(filter){ 
-                                    if(filter.id.indexOf('-')>0) 
-                                        return '"' + _.trim(filter.id) + '"'; 
-                                    // to avoid solr falling back to default field when 
-                                    // search has multiple words put text inside ()
-                                    return _.trim(filter.id)
-                                })
-                            query = '(' + field + ':' + freeTextVals.join(' AND ' + field + ':') + ')';
-                        }
-                        else
-                            query = field + ':(' + _.map(filters, function(filter){ return solr.escape(_.trim(filter.id))}).join(' ') + ')';
-
+                        var query = buildAdvanceSettingsQuery(filters, field);
+                        
                         return query;
+                    }
+
+                    function buildFreeTextQuery(filterType, field, filters) {
+                        
+                        filters = filters || getSelectedFilters(filterType);
+                        if (!(filters||[]).length){     
+                            return;
+                        }
+                        var query = '';
+                        //for freetext use boosting
+                        var boostFields = {
+                            uniqueIdentifier_t   : 6,
+                            government_EN_t      : 5.5,
+                            countryRegions_EN_txt: 5,
+                            title_EN_t           : 4,
+                            summary_EN_t         : 3,
+                            schema_EN_t          : 2,
+                            text_EN_txt          : 1,
+                        };
+
+                        if(!boostFields[field])
+                            boostField[field] = 1;
+
+                        var freeTextVals = _(filters).map(function(filter){
+                                                if(!filter.disabled && !filter.excludeResult){ 
+                                                    if(filter.name.indexOf('-')>0) 
+                                                        return '"' + solr.escape(_.trim(filter.name)) + '"'; 
+                                                    return solr.escape(_.trim(filter.name))
+                                                }
+                                            }).compact().uniq().value();
+
+                        var excludedValues =  _(filters).map(function(filter){
+                                                if(!filter.disabled && filter.excludeResult){ 
+                                                    if(filter.name.indexOf('-')>0) 
+                                                        return '"' + solr.escape(_.trim(filter.name)) + '"'; 
+                                                    return solr.escape(_.trim(filter.name))
+                                                }
+                                            }).compact().uniq().value();
+                        
+                        if(freeTextVals.length)
+                            query = _.map(freeTextVals, function(val){return buildBoostQuery(boostFields, val)}).join(' AND ');
+
+                        if(excludedValues.length){
+                            var excludeQuery = '(*:* NOT ' + buildBoostQuery(boostFields, excludedValues) + ')'
+                            if(query.length){
+                                query = '(' + query + ' AND ' + excludeQuery + ')'
+                            }
+                            else
+                                query = excludeQuery
+                        }
+                        
+                        return query;
+
+                    }
+
+                    function buildBoostQuery(boostFields, val){
+                        // to avoid solr falling back to default field when 
+                        // search has multiple words put text inside ()                            
+                        return  '(' + 
+                                    _(boostFields).map(function(boost, boostField){
+                                        return '(' + boostField + ':(' + val + ')^'+ boost + ')';
+                                    }).value().join(' OR ') +
+                                ')'
                     }
 
                     function buildExpiredPermitQuery(filter){
@@ -872,6 +958,33 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if(countries.length){
                             return 'country_s:(' + solr.escape(countries.join(' ')) + ') AND referencedPermits_ss:*';
                         }
+                    }
+                    function buildAdvanceSettingsQuery(filters, field){
+
+                        var validValues     =   _(filters).map(function(filter){
+                                                    if(!filter.disabled && !filter.excludeResult)
+                                                        return solr.escape(filter.id);                                                        
+                                                }).compact().uniq().value();
+
+                        var excludedValues =   _(filters).map(function(filter){
+                                                    if(!filter.disabled && filter.excludeResult)
+                                                        return solr.escape(filter.id);                                                        
+                                                }).compact().uniq().value();
+
+                        var query = '';
+                        if(validValues.length)
+                            query = field + ':(' + validValues.join(' ') + ')';
+
+                        if(excludedValues.length){
+                            var excludeQuery = '*:* NOT ' + field + ':(' + excludedValues.join(' ') + ')'
+                            if(query.length){
+                                query = '(' + query + ' AND ' + excludeQuery + ')'
+                            }
+                            else
+                                query = excludeQuery
+                        }
+                        
+                        return query;
                     }
 
                     function buildRawQuery(){

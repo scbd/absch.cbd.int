@@ -104,13 +104,13 @@
                 </button>
             </div>
         </div>
-
         <div ng-if="showDifferenceButton" class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;">
             <button ng-disabled="isComparing" class="btn btn-success btn-xs" ng-click="showDifference()">
                 <i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> Show Difference
             </button>
             <!-- for comparing with older versions -->
-            <div ng-if="showDifferenceButton" style="display: none;">
+            <!-- ng-if="showDifferenceButton"  style="display: none;"-->
+            <div ng-if="isComparing">
                 <div id="compareSchemaView"></div>
             </div>
         </div>
