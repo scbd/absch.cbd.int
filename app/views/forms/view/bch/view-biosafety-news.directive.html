@@ -10,37 +10,49 @@
 		<legend>General information</legend>
 		<div ng-if="document.country">
 			<label name="country">Country</label> 
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<a rel="noopener" ng-href="/countries/{{document.country.identifier|uppercase|encodeURIComponent}}"
 					target={{target}}>{{document.country|term:locale}}</a>
 				<span ng-party-status government="document.country" id="government"></span> 
 			</div>
 		</div>
 		<div ng-if="document.title">
-			<label>Title</label> 
+			<label>Title</label>
+			<div compare-val> 
 				<km-value-ml value="document.title" locales="locale"></km-value-ml> 
+			</div>
 		</div>
 		<div ng-if="document.nodeAddress">
 			<label>Relevant link(s)</label>
-			<km-link-list class="km-value"  ng-if="document.nodeAddress" ng-model="document.nodeAddress" style="margin-top: 5px;"></km-link-list>
+			<div compare-val>
+				<km-link-list class="km-value"  ng-if="document.nodeAddress" ng-model="document.nodeAddress" style="margin-top: 5px;"></km-link-list>
+			</div>
 		</div>
 		<div ng-if="document.newsAbstract">
 			<label>Abstract</label>  
-				<km-value-ml value="document.newsAbstract" locales="locale" html></km-value-ml>   
+			<div compare-val>
+				<km-value-ml value="document.newsAbstract" locales="locale" html></km-value-ml> 
+			</div>  
 		</div>
 		<div ng-if="document.newsText">
 			<label>News text</label> 
+			<div compare-val>
 				<km-value-ml value="document.newsText" locales="locale" html></km-value-ml>  
+			</div>
 		</div>
 		<div ng-if="document.relevantInformation||document.relevantDocuments">
 			<div ng-if="document.relevantInformation">
 				<label>Additional information</label>
-				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+				<div compare-val>
+					<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+				</div>
 			</div>
 
 			<div ng-if="document.relevantDocuments">
 				<label>Other relevant website addresses and/or attached documents</label>
-				<km-link-list class="km-value"  ng-if="document.relevantDocuments" ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
+				<div compare-val>
+					<km-link-list class="km-value"  ng-if="document.relevantDocuments" ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
+				</div>
 			</div>
 		</div>
 		<div>
