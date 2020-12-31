@@ -50,7 +50,7 @@
 
 		<div ng-if="document.government">
 			<label name="country">Country</label>
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
 				<span ng-party-status government="document.government" id="government"></span>
 			</div>
@@ -66,14 +66,14 @@
 		<div>
 			<div ng-if="document.type">
 				<label>Type of Law / Regulation</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type|term:locale"></span>
 					<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type.customValue|lstring:locale"></span>
 				</div>
 			</div>
 			<div ng-if="document.jurisdiction">
 				<label>Area of jurisdiction</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<span ng-if="document.jurisdiction.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.jurisdiction|term:locale"></span>
 					<span ng-if="document.jurisdiction.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.jurisdiction.customValue|lstring:locale"></span>
 				</div>
@@ -81,7 +81,7 @@
 
 			<div ng-if="document.jurisdictionScope">
 				<label>Geographical or political/economic group(s)</label>	
-				<div class="km-value">		
+				<div class="km-value" compare-val>
 					<ul ng-if="document.jurisdictionScope" class="list">
 						<li ng-repeat="item in document.jurisdictionScope">
 							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
@@ -92,7 +92,7 @@
 
 			<div ng-if="document.cpbSubjectAreas">
 				<label>Subject areas</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.cpbSubjectAreas">
 							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
@@ -103,7 +103,7 @@
 			</div>
 			<div ng-if="document.cpbOrganismTypes">
 				<label>Types of organisms addressed</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.cpbOrganismTypes">
 							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
