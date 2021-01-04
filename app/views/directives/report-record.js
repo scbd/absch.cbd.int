@@ -15,6 +15,8 @@ define(['app', 'text!views/directives/report-record.html', 'underscore', './bloc
                         , controller: ['$scope','$rootScope', '$q','$element','$http', '$filter', 'toastr', '$timeout', 'realm',
                                 function ($scope, $rootScope, $q, $element, $http, $filter, toastr, $timeout, realm) {
 
+                                $scope.isBCH = realm.is('BCH');
+                                $scope.isABS = realm.is('ABS');
                                 $scope.showReport = true;
                                 function init(){
                                     $scope.report = {};
