@@ -53,6 +53,9 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
                             signInEvent();
                         });
                         $('#loginDialog').modal("show");
+                        $('#loginDialog').on('hidden.bs.modal', function () {
+                             signInEvent();
+                        });
                     } 
                     else {
                         require(['views/directives/report-record'], function() {
