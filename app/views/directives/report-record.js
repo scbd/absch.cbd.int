@@ -12,15 +12,19 @@ define(['app', 'text!views/directives/report-record.html', 'underscore', './bloc
                         link: ['$scope', '$q', '$element', function ($scope, $q, $element) {
 
                         }]
-                        , controller: ['$scope','$rootScope', '$q','$element','$http', '$filter', 'toastr', '$timeout', 'realm',
-                                function ($scope, $rootScope, $q, $element, $http, $filter, toastr, $timeout, realm) {
+                        , controller: ['$scope','ngDialog','$rootScope', '$q','$element','$http', '$filter', 'toastr', '$timeout', 'realm',
+                                function ($scope, ngDialog, $rootScope, $q, $element, $http, $filter, toastr, $timeout, realm) {
 
                                 $scope.isBCH = realm.is('BCH');
                                 $scope.isABS = realm.is('ABS');
-                                $scope.showReport = true;
                                 function init(){
                                     $scope.report = {};
                                     if($rootScope.user)
+                                        ngDialog.open({
+                                            template: 'divReportRecordDiaglog',
+                                            className: 'ngdialog-theme-default',
+                                            scope: $scope
+                                        });
                                         $scope.report.reportedBy = $rootScope.user.email;
                                 }
 
@@ -40,8 +44,7 @@ define(['app', 'text!views/directives/report-record.html', 'underscore', './bloc
                                         },50)
                                         //
 
-                                        init();
-                                        $scope.showReport = false;
+                                        ngDialog.close();
                                         //$scope.showtoast(toast);
                                     })
                                     .finally(function(){
@@ -55,7 +58,9 @@ define(['app', 'text!views/directives/report-record.html', 'underscore', './bloc
                                     //toastr.success('Record submmited')
                                 }
 
-
+                                $scope.cancelReport = function(){
+                                    ngDialog.close();
+                                }
                                 init();
                         }]
                 };

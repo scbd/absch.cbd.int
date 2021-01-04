@@ -1,11 +1,10 @@
-﻿<div class="row" style="padding-left:10px;padding-right:10px;margin-top:20px;">
+﻿<script type="text/ng-template"  trados-translation="true" id="divReportRecordDiaglog">
+<div class="row" class="modal-body" style="padding:30px; margin-top:10px;">
 
     <div class="clearfix"></div>
-    <div class="col-xs-12 "  ng-show="showReport">
+    <div class="col-xs-12 ">
         <div class="alert alert-danger" style="padding:0;" block-region activate=" loading">
-            <h1 style="margin-left:20px">Report this record
-                <i ng-click="showReport = !showReport" aria-label="Close" style="margin-right:20px;cursor:pointer;" class="pull-right fa fa-close"></i>
-            </h1>
+            <h1 style="margin-left:20px">Report this record</h1>
             <p style="margin-left:20px">Please use the form to report a problem with this record and help us to keep the {{isBCH ? 'BCH':'ABSCH'}} up-to-date and correct.</p>
             <div  style="margin:20px;">
                 <form>
@@ -41,7 +40,7 @@
                     <br>
                     <div>
                         <button type="submit" class="btn btn-primary" ng-click="submitReport(report)">Submit</button>
-                        <button ng-click="showReport = !showReport" class="btn btn-warning pull-right">Cancel</button>
+                        <button ng-click="cancelReport()" class="btn btn-warning pull-right">Cancel</button>
 
                         <!-- <button type="submit" class="btn btn-primary" ng-click="showtoast()">show</button> -->
                     </div>
@@ -51,3 +50,4 @@
         </div>
     </div>
 </div>
+</script>
