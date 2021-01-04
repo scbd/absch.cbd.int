@@ -6,7 +6,7 @@
             <h1 style="margin-left:20px">Report this record
                 <i ng-click="showReport = !showReport" aria-label="Close" style="margin-right:20px;cursor:pointer;" class="pull-right fa fa-close"></i>
             </h1>
-            <p style="margin-left:20px">Please use the form to report a problem with this record and help us to keep the ABSCH up-to-date and correct.</p>
+            <p style="margin-left:20px">Please use the form to report a problem with this record and help us to keep the {{isBCH ? 'BCH':'ABSCH'}} up-to-date and correct.</p>
             <div  style="margin:20px;">
                 <form>
                 <div class="form-group">
