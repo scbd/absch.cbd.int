@@ -25,7 +25,7 @@
                     &nbsp; <span style="color:#ddd"> | </span> &nbsp; -->
 
                     <a rel="noopener" ng-if="showReportedRecord()" translation-url  href="#" class="record-link-style color-red"
-                     ng-click="loadReportRecord(document.schema_s||document.header.schema,document.identifier_s||document.header.identifier)" >
+                     ng-click="loadReportRecord(document.schema_s||document.header.schema,document.identifier_s||document.header.identifier, (document.title | lstring:locale))" >
                         <i class="fa fa-exclamation-triangle"></i> Report
                     </a>
 				</span>

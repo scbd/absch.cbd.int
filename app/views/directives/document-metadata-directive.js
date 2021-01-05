@@ -46,11 +46,11 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
                     return  uid;
                 }
 
-				$scope.loadReportRecord = function(schema, identifier){
+				$scope.loadReportRecord = function(schema, identifier,title){
                     
                         require(['views/directives/report-record'], function() {
 
-                            var directiveHtml = "<div report-record uid='"+ identifier + "' schema='" +  schema + "'></div>";
+                            var directiveHtml = "<div report-record uid='"+ identifier + "' schema='" +  schema +  "' title='" +  title + "'></div>";
 
                             $scope.$apply(function() {
                                 $element.find('#divReportRecord')
