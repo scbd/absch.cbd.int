@@ -82,8 +82,24 @@ function (app, _, template) {
                     }
                 }
                 
+                $scope.getCountryTerm = function (code) {
+                  $scope.isEuMember = false;
+                  thesaurusService.getTerms(solr.escape('eu'),{relations:true})
+                  .then(function(o) {
+                    var isExist = _.findIndex(o.narrowerTerms, function(item) {
+                       return item == code;
+                    });
+                  if(isExist>-1){
+                    $scope.isEuMember = true;
+                  } else {
+                    $scope.isEuMember = false;
+                  }
+                  });
+                };
                 $scope.onCountryChange = function(code){
+                  $scope.getCountryTerm(code);
                     if(code == 'eu'){
+                        $scope.isEuMember = true;
                         $scope.waiting = true;
                         thesaurusService.getTerms(solr.escape(code),{relations:true})
                         .then(function(o) {

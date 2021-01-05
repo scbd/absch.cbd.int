@@ -36,7 +36,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="government" required caption="Country submitting the decision or communication">
-												<div class="help-block">
+												<div class="help-block" ng-if="isEuMember">
 													<u><i>Important note for European Union (EU) Members only</i></u>: if the decision applies to <i>all</i> EU Member States, 
 													the record must be published by the EU’s BCH focal point. The EU BCH focal point should select "European Union" 
 													in response to this question and the published record will appear in the country profiles of all EU Member States.
@@ -293,7 +293,7 @@
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="movementAllowedUnderA131A" caption="Does the decision specify cases in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import?" required>
 												<div km-yes-no required ng-model="document.movementAllowedUnderA131A" locales="document.header.languages"></div>
-												<div ng-if="document.movementAllowedUnderA131A" style="padding-left:50px;">
+												<div ng-if="document.movementAllowedUnderA131A" style="padding-left:50px; margin-top:15px;">
 													<div class="help-block">
 														Does the decision apply to subsequent similar imports of LMOs?
 													</div>
@@ -317,7 +317,7 @@
 											<div class="km-control-group" name="unintentionalTransboundaryMovement"
 													 caption="Unintentional transboundary movement (Article 17.1) go to question 19">
 												<div km-yes-no required ng-model="document.unintentionalTransboundaryMovement" locales="document.header.languages"></div>
-												<div class="row well no-shadow bg-white" ng-if="document.unintentionalTransboundaryMovement" style="margin-left:1%">
+												<div class="row" ng-if="document.unintentionalTransboundaryMovement" style="margin-left:1%">
 													<div class="col-sm-12">
 														<div class="km-control-group" name="estimatedQuantities" caption="(a)	Available relevant information on the estimated quantities and relevant characteristics and/or traits of the living modified organism">
 															<div km-textbox-ml ng-model="document.estimatedQuantities" rows="1" locales="document.header.languages" placeholder="(a)	Available relevant information on the estimated quantities and relevant characteristics and/or traits of the living modified organism"></div>
