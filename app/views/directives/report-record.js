@@ -7,7 +7,8 @@ define(['app', 'text!views/directives/report-record.html', './block-region-direc
                         template: template,
                         scope: {
                             uid: '@',
-                            schema: '@'
+                            schema: '@',
+                            title:'@'
                         },
                         link: function ($scope) {
 
