@@ -1,69 +1,71 @@
-define(['app', 'text!views/directives/report-record.html', 'underscore', './block-region-directive' ], function (app, template, _) {
-        app.directive('reportRecord', function () {
+define(['app', 'text!views/directives/report-record.html', './block-region-directive', 'ngDialog' ], function (app, template) {
+        app.directive('reportRecord', ['ngDialog','$rootScope', '$http', 'toastr', 'realm', 
+            function (ngDialog, $rootScope, $http, toastr, realm) {
                 return {
                         restrict: 'EAC',
                         replace: true,
-                        // transclude: true,
                         template: template,
                         scope: {
-                                uid: '@',
-                                schema: '@'
+                            uid: '@',
+                            schema: '@'
                         },
-                        link: ['$scope', '$q', '$element', function ($scope, $q, $element) {
-
-                        }]
-                        , controller: ['$scope','ngDialog','$rootScope', '$q','$element','$http', '$filter', 'toastr', '$timeout', 'realm',
-                                function ($scope, ngDialog, $rootScope, $q, $element, $http, $filter, toastr, $timeout, realm) {
+                        link: function ($scope) {
 
                                 $scope.isBCH = realm.is('BCH');
-                                $scope.isABS = realm.is('ABS');
-                                function init(){
-                                    $scope.report = {};
-                                    if($rootScope.user)
-                                        ngDialog.open({
-                                            template: 'divReportRecordDiaglog',
-                                            className: 'ngdialog-theme-default',
-                                            scope: $scope
-                                        });
-                                        $scope.report.reportedBy = $rootScope.user.email;
-                                }
+                                $scope.isABS = realm.is('ABS');                                
 
                                 $scope.submitReport = function(report){
+                                    $scope.showError = false;
+                                    if(report.incorrect == undefined && report.broken == undefined && report.copyright == undefined && 
+                                        (report.additionalInformation == undefined || report.additionalInformation == '')){
+                                        $scope.showError = true;
+                                        return;
+                                    }
                                     report.schema = $scope.schema;
                                     report.identifier = $scope.uid;
                                     report.realm     = realm.value;
                                     $scope.loading = true;
                                     $http.post('/api/v2015/report-records', report)
                                     .then(function(data){
-                                        $timeout(function(){//dont' know why
-                                            var toast = toastr.success();
-                                            toastr.clear(toast);
-                                            toastr.success('Thank you for reporting on the record, the information was successfully sent to ABS-CH team.');
-                                            console.log(toast);
-                                            toastr.clear(toast);
-                                        },50)
-                                        //
-
+                                        toastr.success('Thank you for reporting on the record, the information was successfully sent to Clearing-House team.');
                                         ngDialog.close();
-                                        //$scope.showtoast(toast);
                                     })
                                     .finally(function(){
                                         $scope.loading = false;
                                     });
                                 }
-                                //
-                                $scope.showtoast = function(toast){
-                                    toastr.clear();
-                                    toastr.success('Thank you for reporting on the record, the information was successfully sent to ABS-CH team.');
-                                    //toastr.success('Record submmited')
-                                }
 
                                 $scope.cancelReport = function(){
                                     ngDialog.close();
                                 }
-                                init();
-                        }]
-                };
 
-        });
+                                $scope.showReportRecordDialog = function(){
+
+                                    if ($rootScope.user && !$rootScope.user.isAuthenticated) {
+                                        var signInEvent = $scope.$on('signIn', function () {
+                                            $scope.showReportRecordDialog();
+                                            signInEvent();
+                                        });
+                                        $('#loginDialog').modal("show");
+                                        $('#loginDialog').on('hidden.bs.modal', function () {
+                                            signInEvent();
+                                        });
+                                    } 
+                                    else{
+                                        $scope.report = {
+                                            reportedBy : $rootScope.user.email
+                                        };
+                                        if($rootScope.user){
+                                            ngDialog.open({
+                                                template: 'divReportRecordDiaglog',
+                                                className: 'ngdialog-theme-default wide',
+                                                scope: $scope
+                                            });
+                                        }
+                                    }
+                                        
+                                }
+                        }
+                };            
+        }]);
 });

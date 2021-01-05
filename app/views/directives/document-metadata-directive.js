@@ -2,7 +2,7 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
     ], function (app, template) {
 	app.directive('documentMetadata', function($http){
 		return{
-			restrict: 'EAC',
+			restrict: 'EA',
 			replace:true,
 			template: template,
             controller: ['$scope','$rootScope', '$filter','commonjs','$element', '$compile', '$timeout', '$route', '$location',
@@ -47,17 +47,7 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
                 }
 
 				$scope.loadReportRecord = function(schema, identifier){
-                    if ($rootScope.user && !$rootScope.user.isAuthenticated) {
-                        var signInEvent = $scope.$on('signIn', function () {
-                            $scope.loadReportRecord(schema, identifier);
-                            signInEvent();
-                        });
-                        $('#loginDialog').modal("show");
-                        $('#loginDialog').on('hidden.bs.modal', function () {
-                             signInEvent();
-                        });
-                    } 
-                    else {
+                    
                         require(['views/directives/report-record'], function() {
 
                             var directiveHtml = "<div report-record uid='"+ identifier + "' schema='" +  schema + "'></div>";
@@ -66,9 +56,9 @@ define(['app','text!views/directives/document-metadata-directive.html', 'js/comm
                                 $element.find('#divReportRecord')
                                     .empty()
                                     .append($compile(directiveHtml)($scope));
+                                $element.find('#reportRecordCtl').click();
                             });
                         });
-                    }
                 }
                 
                 $scope.showReportedRecord = function(){
