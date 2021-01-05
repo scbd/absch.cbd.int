@@ -3,8 +3,8 @@
 			<div class="col-xs-12">
 
                 <a rel="noopener" translation-url  
-                ng-href="/database/{{(document.schema_s||document.header.schema)|urlSchemaShortName|encodeURIComponent}}/{{getUniqueIDForUrl(document)|encodeURIComponent}}" 
-				target="_blank" class="uid">
+                    ng-href="/database/{{(document.schema_s||document.header.schema)|urlSchemaShortName|encodeURIComponent}}/{{getUniqueIDForUrl(document)|encodeURIComponent}}" 
+                    target="_blank" class="uid">
                 <i class="fa fa-external-link-square"></i> {{getUniqueID(document)}} 
                 </a>
                 
@@ -24,9 +24,12 @@
                     </a>
                     &nbsp; <span style="color:#ddd"> | </span> &nbsp; -->
 
-					<a rel="noopener" ng-if="showReportedRecord()" translation-url  href="#" class="record-link-style color-red" ng-click="loadReportRecord(document.schema_s||document.header.schema,document.identifier_s||document.header.identifier)" ><i class="fa fa-exclamation-triangle"></i> Report</a>
+                    <a rel="noopener" ng-if="showReportedRecord()" translation-url  href="#" class="record-link-style color-red"
+                     ng-click="loadReportRecord(document.schema_s||document.header.schema,document.identifier_s||document.header.identifier)" >
+                        <i class="fa fa-exclamation-triangle"></i> Report
+                    </a>
 				</span>
-				<div id="divReportRecord"></div>
+				<div id="divReportRecord" style="display: none;"></div>
 			</div>
 		</div>
 
