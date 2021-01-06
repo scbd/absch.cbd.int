@@ -317,7 +317,7 @@
 											<div class="km-control-group" name="unintentionalTransboundaryMovement"
 													 caption="Unintentional transboundary movement (Article 17.1)">
 												<div km-yes-no required ng-model="document.unintentionalTransboundaryMovement" locales="document.header.languages"></div>
-												<div class="row" ng-if="document.unintentionalTransboundaryMovement" style="margin-left:1%;">
+												<div class="row" ng-if="document.unintentionalTransboundaryMovement" style="margin-left:1%;margin-top: 15px;">
 													<div class="col-sm-12">
 														<div class="km-control-group" name="estimatedQuantities" caption="(a)	Available relevant information on the estimated quantities and relevant characteristics and/or traits of the living modified organism">
 															<div km-textbox-ml ng-model="document.estimatedQuantities" rows="1" locales="document.header.languages"></div>
@@ -362,12 +362,21 @@
 											<div class="km-control-group" name="illegalTransboundaryMovement"
 													 caption="Illegal transboundary movement (Article 25.3)">
 												<div km-yes-no required ng-model="document.illegalTransboundaryMovement" locales="document.header.languages"></div>
-												<div class="row well no-shadow bg-white" ng-if="document.illegalTransboundaryMovement" style="margin-left:1%">
+												<div class="row" ng-if="document.illegalTransboundaryMovement" style="margin-left:1%; margin-top: 15px;">
+													<div class="col-xs-12">
+														<div class="help-block">For an illegal transboundary movement, please provide the following:</div>
+														<div class="km-control-group" name="otherInformation" caption="LMO identification">
+															<div document-selector ng-model="document.otherInformation"  allow-new="true" allow-new-schema="modifiedOrganism"
+																	 government="document.government" schema="(modifiedOrganism)"></div>
+														</div>
+													</div>
 													<div class="col-sm-12">
 														<div class="km-control-group" name="otherInformation" caption="LMO identification:">
 															<div km-textbox-ml ng-model="document.otherInformation" rows="1" locales="document.header.languages"></div>
 														</div>
-													</div></div>
+													</div>
+
+												</div>
 											</div>
 										</div>
 									</div>
