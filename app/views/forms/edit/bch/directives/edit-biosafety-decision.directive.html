@@ -111,7 +111,7 @@
 													<div class="Communications-label">Communications, notifications and declarations</div>
 													<div class="km-control-group other-decision" name="otherDecisions" required caption="Other decisions">
 														<div km-term-radio required ng-model="decisions.otherDecisions" locales="document.header.languages"
-															 terms="options.otherDecisions()" binding-type="term" show-other="true">
+															 terms="options.otherDecisions()" binding-type="term" show-other="true" ng-change="onOtherDecisionChanged(decisions)">
 														</div>
 													</div>
 												</div>
@@ -270,7 +270,7 @@
 									</div>
 								</div>
 							</section>
-							<section ng-if="isLmoDecisionForIntentionalIntroduction">
+							<section ng-if="isLmoDecisionForIntentionalIntroduction || isLmoDecisionForDirectUse">
 								<div class="well no-shadow bg-white decision-result {{decClass}}">
 									<legend>Result of the decision</legend>
 									<div class="row">
@@ -286,7 +286,7 @@
 									</div>
 								</div>
 							</section>
-							<section>
+							<section ng-if="isSimplifiedProcedure">
 								<div class="well no-shadow bg-white">
 									<legend>Simplified procedure</legend>
 									<div class="row">
@@ -309,7 +309,7 @@
 									</div>
 								</div>
 							</section>
-							<section>
+							<section ng-if="isTransboundaryMovement">
 								<div class="well no-shadow bg-white">
 									<legend>Illegal transboundary movement or unintentional transboundary movement</legend>
 									<div class="row">
@@ -373,23 +373,23 @@
 									</div>
 								</div>
 							</section>
-							<section>
+							<section ng-if="isDecisionOnContainedUseOfLMOs">
 								<div class="well no-shadow bg-white">
 									<legend>Information sharing with other databases</legend>
 									<div class="row">
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="isForCommercialUse" caption="Is this risk assessment related to an LMO for commercial use?" required>
 												<div km-yes-no required ng-model="document.isForCommercialUse" locales="document.header.languages"></div>
-												<div ng-if="document.isForCommercialUse" style="padding-left:50px;">
+												<div ng-if="document.isForCommercialUse" style="padding-left:50px; margin-top: 15px;">
 													<div class="help-block">
 														Should this decision be forwarded to the OECD Secretariat for possible inclusion in the BioTrack Product Database?
 													</div>
 													<div class="km-yes-no" name="forwardToOECD" ng-model="document.forwardToOECD"></div>
-													<div class="help-block">
+													<div class="help-block" style="margin-top: 15px;">
 														Is this decision related to food safety?
 													</div>
 													<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
-													<div ng-if="document.isForFoodSafety" style="padding-left:57px;">
+													<div ng-if="document.isForFoodSafety" style="padding-left:57px; margin-top: 15px;">
 														<div class="help-block">
 															Was it conducted in accordance with the Codex Alimentarius Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?
 														</div>
@@ -405,7 +405,7 @@
 									</div>
 								</div>
 							</section>
-							<section ng-if="isLmoDecisionForIntentionalIntroduction">
+							<section ng-if="isDecisionOnTransitOfLMOs">
 								<div class="well no-shadow bg-white">
 									<legend>LMO & risk assessment</legend>
 									<div class="row">
@@ -457,6 +457,19 @@
 								</div>
 							</section>
 	
+							<section ng-if="isShowDecisionDocument">
+								<div class="well no-shadow bg-white">
+									<legend>Decision document</legend>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" Required name="documents" caption="Decision document">
+												<div km-link name="documents" Required ng-model="document.documents" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+
 							<section>
 								<div class="well no-shadow bg-white">
 									<legend>Additional information</legend>
