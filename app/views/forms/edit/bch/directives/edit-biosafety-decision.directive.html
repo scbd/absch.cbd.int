@@ -429,12 +429,12 @@
 									</div>
 								</div>
 							</section>
-							<section ng-if="isLmoDecisionForIntentionalIntroduction || isLmoDecisionForDirectUse">
+							<section ng-if="isShowDecisionDocument || isTransboundaryMovement">
 								<div class="well no-shadow bg-white">
-									<legend>Decision and/or other relevant document(s)</legend>
+									<legend>Decision document</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="documents" required caption="Document (attached file)">
+											<div class="km-control-group" name="documents" required caption="Decision document">
 												<div km-link name="documents" ng-model="document.documents" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
 											</div>
 										</div>
@@ -457,19 +457,6 @@
 								</div>
 							</section>
 	
-							<section ng-if="isShowDecisionDocument">
-								<div class="well no-shadow bg-white">
-									<legend>Decision document</legend>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="km-control-group" Required name="documents" caption="Decision document">
-												<div km-link name="documents" Required ng-model="document.documents" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-
 							<section>
 								<div class="well no-shadow bg-white">
 									<legend>Additional information</legend>
