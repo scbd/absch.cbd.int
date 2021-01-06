@@ -58,10 +58,10 @@
 				</ul>
 			</div>
 		</div>
-		<div ng-show="document.jurisdictionDetails">
-			<label>Jurisdiction details</label>
-			<div class="km-value">
-				<km-value-ml value="document.jurisdictionDetails" locales="locale"></km-value-ml>
+		<div ng-show="document.jurisdictionsDetails">
+			<label>Jurisdictions details</label>
+			<div>
+				<km-value-ml value="document.jurisdictionsDetails" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
@@ -125,22 +125,34 @@
 				</ul>
 			</div>
 		</div>
+
+		<div ng-show="document.directUseDecisions">
+			<legend>Type of decision</legend>
+			<div>
+				<ul class="list">
+					<li ng-repeat="item in document.directUseDecisions">
+						<span ng-bind="item|term:locale"></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+
 		<div ng-show="document.receiptDate">
 			<label>Date on which the notification was received.</label>
-			<div class="km-value" ng-bind="document.receiptDate | formatDate:locale"></div>
+			<div class="km-value" ng-bind-html="document.receiptDate | formatDate"></div>
 		</div>
 		<div ng-show="document.receiptAcknowledgementDate">
 			<label>Date on which acknowledgement of receipt of the notification was sent to the notifier.</label>
-			<div class="km-value" ng-bind="document.receiptAcknowledgementDate | formatDate:locale"></div>
+			<div class="km-value" ng-bind-html="document.receiptAcknowledgementDate | formatDate"></div>
 		</div>
 		<div ng-show="document.communicationDate">
 			<label>Date on which the decision was communicated to the notifier.	</label>
-			<div class="km-value" ng-bind="document.communicationDate | formatDate:locale"></div>
+			<div class="km-value" ng-bind-html="document.communicationDate | formatDate"></div>
 		</div>
 		<div ng-show="document.decisionResult">
 			<label>Result of the decision</label>
 			<div class="km-value">
-				<span ng-bind="document.decisionResult|term:locale"></span>
+				<div class="km-value" ng-bind-html="document.decisionResult | formatDate"></div>
 			</div>
 		</div>
 
@@ -198,6 +210,56 @@
 				<km-value-bool value="document.exemptedFromAIA" locales="locale"></km-value-bool>
 			</div>
 		</div>
+		<div ng-show="document.unintentionalTransboundaryMovement!==undefined">
+			<label>Unintentional transboundary movement (Article 17.1)</label>
+			<div class="km-value">
+				<km-value-bool value="document.unintentionalTransboundaryMovement" locales="locale"></km-value-bool>
+			</div>
+		</div>
+		<div ng-show="document.estimatedQuantities!==undefined">
+			<label>Available relevant information on the estimated quantities and relevant characteristics and/or traits of the living modified organism</label>
+			<div class="km-value">
+				<km-value-bool value="document.estimatedQuantities" locales="locale"></km-value-bool>
+			</div>
+		</div>
+
+		<div ng-show="document.releaseCurcumstance">
+			<label>Information on the circumstances of the release</label>
+			<div class="km-value">
+				<span ng-bind="document.releaseCurcumstance|term:locale"></span>
+			</div>
+		</div>
+		<div ng-show="document.releaseDate">
+			<label>Information on the estimated date of the release</label>
+			<div class="km-value" ng-bind-html="document.releaseDate | formatDate"></div>
+		</div>
+		<div ng-show="document.decisionResult">
+			<label>Result of the decision</label>
+			<div class="km-value">
+				<span ng-bind="document.decisionResult|term:locale"></span>
+			</div>
+		</div>
+
+
+		<div ng-show="document.lmoUseInformation">
+			<label>Information on the use of the living modified organism in the originating Party</label>
+			<div class="km-value">
+				<span ng-bind="document.lmoUseInformation|term:locale"></span>
+			</div>
+		</div>
+		<div ng-show="document.adverseEffectInformation">
+			<label>Information about the possible adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, as well as available information about possible risk management measures</label>
+			<div class="km-value">
+				<span ng-bind="document.adverseEffectInformation|term:locale"></span>
+			</div>
+		</div>
+
+		<div ng-show="document.otherInformation">
+			<label>Any other relevant information</label>
+			<div class="km-value">
+				<span ng-bind="document.otherInformation|term:locale"></span>
+			</div>
+		</div>
 		<div ng-show="document.modifiedOrganisms">
 			<label>LMO identification</label>
 			<div  class="km-value">
@@ -208,6 +270,40 @@
 				</ul>
 			</div>
 		</div>
+		<div ng-show="document.pointOfContact">
+			<label>A point of contact for further information</label>
+			<div  class="km-value">
+				<ul class="list">
+					<li ng-repeat="item in document.pointOfContact">
+						<view-record-reference ng-model="item.identifier"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+
+
+		<div ng-show="document.illegalTransboundaryMovement!==undefined">
+			<label>Illegal transboundary movement (Article 25.3)"</label>
+			<div  class="km-value">
+				<km-value-bool value="document.illegalTransboundaryMovement" locales="locale"></km-value-bool>
+			</div>
+		</div>
+		<div ng-show="document.expires!==undefined">
+			<label>If the answer to this question is "Yes", after two years from the date of submission you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as "Not Confirmed".</label>
+			<div  class="km-value">
+				<km-value-bool value="document.expires" locales="locale"></km-value-bool>
+			</div>
+		</div>
+		<div ng-show="document.isForCommercialUse!==undefined">
+			<label>Should this decision be forwarded to the OECD Secretariat for possible inclusion in the BioTrack Product Database?</label>
+			<div  class="km-value">
+				<km-value-bool value="document.isForCommercialUse" locales="locale"></km-value-bool>
+			</div>
+		</div>
+
+
+
 		<div ng-show="document.riskAssessments">
 			<label>Risk assessment</label>
 			<div  class="km-value">
