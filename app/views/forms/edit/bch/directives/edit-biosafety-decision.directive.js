@@ -82,36 +82,22 @@ function (app, _, template) {
                     }
                 }
                 
-                $scope.getCountryTerm = function (code) {
-                  $scope.isEuMember = false;
-                  thesaurusService.getTerms(solr.escape('eu'),{relations:true})
-                  .then(function(o) {
-                    var isExist = _.findIndex(o.narrowerTerms, function(item) {
-                       return item == code;
-                    });
-                  if(isExist>-1){
-                    $scope.isEuMember = true;
-                  } else {
-                    $scope.isEuMember = false;
-                  }
-                  });
-                };
+               
                 $scope.onCountryChange = function(code){
-                  $scope.getCountryTerm(code);
-                    if(code == 'eu'){
-                        $scope.isEuMember = true;
-                        $scope.waiting = true;
-                        thesaurusService.getTerms(solr.escape(code),{relations:true})
-                        .then(function(o) {
+                    $scope.isEuMember = false;
+                    $scope.waiting = true;
+                    thesaurusService.getTerms(solr.escape('eu'),{relations:true})
+                    .then(function(o) {
+                        $scope.isEuMember = (o.narrowerTerms.indexOf(code) !== -1) ? true : false;
+                        if(code == 'eu'){
+                            $scope.isEuMember = true;
                             $scope.authorityQuery = "schema_s:authority AND government_s="+ solr.escape(o.narrowerTerms.join());
-                        })
-                        .finally(function(){
-                                $scope.waiting = false;
-                        });   
-                    }
-                    else{
-                         $scope.authorityQuery = 'schema_s:authority AND government_s='+ solr.escape(code);
-                    }
+                        }
+                        else{ $scope.authorityQuery = 'schema_s:authority AND government_s='+ solr.escape(code);}
+                    })
+                    .finally(function(){
+                        $scope.waiting = false;
+                    });
                 }
                 $scope.onCommonDecisionChanged = function(){
                     $scope.isLmoDecisionForIntentionalIntroduction	= _($scope.decisions.commonDecisions||[]).map('identifier').includes(commonDecisionsIdentifiers[0]);
