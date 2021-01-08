@@ -45,6 +45,10 @@
 			<label>Publication year</label>
 			<div class="km-value">{{document.publicationYear}}</div>
 		</div>
+		<div ng-show="document.publicationYear">
+			<label>Publication month</label>
+			<km-value-ml value="monthNames[document.publicationMonth-1]" locales="locale"></km-value-ml>
+		</div>
 
 		<div ng-show="organizations && organizations.length>0">
 			<label>Reference to the authoring organisation(s)</label>

@@ -127,11 +127,11 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 					
 				});
 				$scope.years = [];
-				$scope.months = [];
 				var end = new Date().getFullYear();
 				for (var i = end; i > (end-100) ; i--) {
 					$scope.years.push({id:i, name: i});
-                } 
+				} 
+				$scope.monthNames = ['January', 'February', 'March', 'April', 'May','June', 'July', 'August', 'September','October', 'November', 'December'];
 				//============================================================
 				//
 				//============================================================

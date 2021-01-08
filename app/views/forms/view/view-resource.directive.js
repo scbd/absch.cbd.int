@@ -79,6 +79,7 @@ app.directive("viewResource", [function () {
 
 			};
 
+			$scope.monthNames = ['January', 'February', 'March', 'April', 'May','June', 'July', 'August', 'September','October', 'November', 'December'];
 			$scope.getTerm = function(term){
 
 				return {
