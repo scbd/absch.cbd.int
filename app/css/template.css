@@ -2167,3 +2167,7 @@ a.disabled{
 #search-new .searchMatrixContent .inverted.dimmer{
     background-color: #000;
 }
+
+.matrix-export-dialog .modebar{
+    display: none;
+}

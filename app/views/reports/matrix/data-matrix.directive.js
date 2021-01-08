@@ -1,10 +1,10 @@
 define(['app', 'lodash', 'text!./data-matrix.directive.html', 
 'components/scbd-angularjs-services/services/locale','services/search-service',
-'views/directives/block-region-directive', 'services/thesaurus-service'], 
+'views/directives/block-region-directive', 'services/thesaurus-service', 'pivottable', 'ngDialog'], 
 function(app, _, template) { 'use strict';
 
-app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout',
-function ($q, searchService, $http, locale, thesaurusService, realm, $timeout) {
+app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog',
+function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, ngDialog) {
 	
 		return{
 			template:template,
@@ -18,11 +18,14 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout) {
                 
                 require(['pivottable', 'plotly.js', 'plotly-renderers']);
 
-                var defaultMessage      = $element.find('#loadingMessage').text()
-                $scope.matrixProgress   = defaultMessage;
-                var pageSize        = 1000;
-                var queryCanceler   = undefined;
-                var regions         = [];
+                var pivotUIConf;
+                var pivotResult;
+                var defaultMessage        = $element.find('#loadingMessage').text()
+                var exportFileName        = "Matrix-view"
+                    $scope.matrixProgress = defaultMessage;
+                var pageSize              = 1000;
+                var queryCanceler         = undefined;
+                var regions               = [];
                 
                 $scope.api          = {
                     updateResult : updateResult,
@@ -54,19 +57,9 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout) {
                     }
                     return fetchRecords(query, {rows:[], pageNumber:0})
                         .then(function(result){
-                                queryCanceler = null;
-                                console.log(result);
-                                var derivers = $.pivotUtilities.derivers;
-                                var renderers = $.extend($.pivotUtilities.renderers, $.pivotUtilities.plotly_renderers);
-                                $element.find("#output").pivotUI(
-                                    result.rows, 
-                                    {
-                                        renderers: renderers,
-                                        rows: ["Government"],
-                                        cols: ["RecordType"],
-                                        aggregatorName: "Count"
-                                    }
-                                );
+                                queryCanceler   = null;                               
+                                pivotResult     = result;
+                                pivotUI(pivotResult);
 
                                 return result.rows;
 
@@ -153,19 +146,107 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout) {
                 }
 
                 function onExport(){
+
                     if($scope.loading)
                         return;
-                    require(['tableexport'], function(){
-                        var tableExport = $element.find('.pvtTable').tableExport({
-                                                formats: ["xlsx", "xls", "csv"],
-                                                filename: "Matrix-view",
-                                            });
-                        $element.find('.xlsx').click();
-                        tableExport.remove();
-                    });  
+                    var exportData;
+                    var downloadFormat;
+                    var exportType;
+                    if(pivotUIConf && pivotUIConf.rendererName.indexOf('Chart')>0){
+                        exportData = $element.find('.plot-container.plotly').parent().html();
+                        downloadFormat = 'jpeg';
+                        exportType  = 'chart';
+                    }
+                    else{
+                        exportData = $element.find('.pvtRendererArea .pvtTable').parent().html();
+                        downloadFormat = 'xlsx';
+                        exportType = 'excel'
+                    }
+                    ngDialog.open({
+                        name     : 'exportDialog',
+                        className : 'ngdialog-theme-default wide',
+                        template : 'exportDialog',
+                        controller : ['$scope', '$element', '$sce', function($scope, $element, $sce){
+                            $scope.exportData     = $sce.trustAsHtml(exportData);
+                            $scope.downloadFormat = downloadFormat;
+                            $scope.exportType     = exportType;
+                            $scope.fileName       = exportFileName
+                            $scope.downloadData   = function(){
+                                download($scope.downloadFormat, $scope.fileName);
+                            };
+
+                            $scope.closeDialog = function(){
+                                ngDialog.close();                                            
+                            }
+                        }]
+                    })
+                    function download(format, fileName){
+                        if(pivotUIConf && pivotUIConf.rendererName.indexOf('Chart')>0){
+                            pivotUI(pivotResult, format, fileName);
+                            $timeout(function(){
+                                var btn = $element.find('.modebar-container .modebar .modebar-group .modebar-btn:first()')[0]
+                                btn.click()
+                            }, 200);
+                        }
+                        else{
+                            // Excel export
+                            require(['tableexport'], function(){
+                                var tableExport = $element.find('.pvtTable').tableExport({
+                                                        formats: ["xlsx", "xls", "csv"],
+                                                        filename: fileName||exportFileName,
+                                                    });
+                                $element.find('.'+ format).click();
+                                tableExport.remove();
+                            });  
+                        }
+                    }
+                }
+
+                function pivotUI(result, chartExportFormat, fileName){
+
+
+                    chartExportFormat = chartExportFormat || 'jpeg';
+
+                    var derivers = $.pivotUtilities.derivers;
+                    var renderers = $.extend($.pivotUtilities.renderers, $.pivotUtilities.plotly_renderers);
+                    if(!pivotUIConf){
+                        pivotUIConf = {
+                            renderers: renderers,
+                            rows: ["Government"],
+                            cols: ["RecordType"],
+                            aggregatorName: "Count",
+                            rendererOptions: {
+                                plotly:{
+                                    // showlegend: true
+                                },
+                                plotlyConfig : {
+                                    displayModeBar: true,
+                                    toImageButtonOptions: {
+                                        filename : exportFileName,
+                                        format: chartExportFormat, // one of png, svg, jpeg, webp
+                                    }
+                                }
+                            },
+                            onRefresh: function(config){
+                                pivotUIConf = config;
+                            }
+                        }
+                    }
+                    else{
+                        pivotUIConf.rendererOptions.plotlyConfig.toImageButtonOptions.format    = chartExportFormat;
+                        pivotUIConf.rendererOptions.plotlyConfig.toImageButtonOptions.filename  = fileName||exportFileName;
+                    }
+
+                    $element.find("#output").pivotUI(
+                        result.rows, 
+                        pivotUIConf,
+                        true // overwrite prev conf
+                    );
                 }
 
                 init();
+
+                
 			}
 		}
 		
