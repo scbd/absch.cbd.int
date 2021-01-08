@@ -201,6 +201,11 @@ function (app, _, template) {
                             $scope.decisions.commonDecisions.push({identifier:commonDecisionsIdentifiers[1]});
                             $scope.isLmoDecisionForDirectUse = true
                         }
+                        $scope.decisions.otherDecisions = {};
+                        if(!$scope.isLmoDecisionForIntentionalIntroduction && !$scope.isLmoDecisionForDirectUse){
+                            $scope.decisions.otherDecisions = {identifier: decisionTypesIdentifiers.toString()}
+                            $scope.onOtherDecisionChanged($scope.decisions);
+                        }
                         $scope.options.intentionDecisions()
                         .then(function(options){
                             var selectedOption = _.find(options, function(o){
