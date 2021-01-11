@@ -31,8 +31,8 @@ app.directive("viewBiosafetyDecision", [function () {
 					if(identifier == "8979219B-330B-424F-A52C-209D4B4B65C0"){ $scope.document.isSimplifiedProcedure	= true; }
 					if(identifier == "1B6F702C-0C68-4B53-BCA4-1DA4A25E23A8"){ $scope.document.isDecisionOnTransitOfLMOs	= true;}
 					if(identifier == "D698B5F7-A434-49E2-A7FF-FE869AFBEE8D"){ $scope.document.isDecisionOnContainedUseOfLMOs = true;}
-					if(identifier == "E8C5A15C-A736-4fb7-A1B6-192412BE7E45"){$scope.isLmoDecisionForIntentionalIntroduction = true;}
-					if(identifier == "BE64016A-C3BD-4C61-9620-C3FEF96B2A24"){$scope.isLmoDecisionForDirectUse = true;}
+					if(identifier == "E8C5A15C-A736-4fb7-A1B6-192412BE7E45"){$scope.document.isLmoDecisionForIntentionalIntroduction = true;}
+					if(identifier == "BE64016A-C3BD-4C61-9620-C3FEF96B2A24"){$scope.document.isLmoDecisionForDirectUse = true;}
 					if(_.includes(identifiersForSectionI,identifier.toString())){ $scope.document.isShowDecisionDocument = true;}
 					if(_.includes(identifiersForSectionF,identifier.toString())){
 						console.log("here",identifier.toString())

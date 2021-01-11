@@ -65,7 +65,6 @@
 			</div>
 		</div>
 
-		<!-- <legend>Decision or communication details</legend> -->
 		<div ng-show="document.decisionTypes">
 			<label>Subject(s) of the decision</label>
 			<div class="km-value">
@@ -74,7 +73,10 @@
 				</ul>
 			</div>
 		</div>
+		<!-- =============SECTION A END ======================== -->
 
+		<!-- =============SECTION B START======================== -->
+	<div ng-show="document.isLmoDecisionForIntentionalIntroduction">
 		<legend>LMOs for intentional introduction into the environment</legend>
 
 		<div ng-show="document.addressesTransboundaryMovement">
@@ -161,10 +163,11 @@
 			</div>
 		</div>
 
-		<!-- // end of section B -->
+	</div>
+		<!-- =============SECTION B END ======================== -->
 
-		<!-- start section C -->
-		<div ng-show="document.isLmoDecisionForDirectUse">
+		<!-- =============SECTION C START======================== -->
+	<div ng-show="document.isLmoDecisionForDirectUse">
 			<legend>LMOs for direct use as food or feed, or for processing (LMOs-FFPs)</legend>
 			<div ng-show="document.uses">
 				<label>Subject of the decision</label>
@@ -212,15 +215,15 @@
 					</ul>
 				</div>
 			</div>
-		</div>
+	</div>
 
 
-		<!-- end of section C -->
+		<!-- =============SECTION C END ======================== -->
 
-		<!-- Start of Section D  -->
+		<!-- =============SECTION D START======================== -->
 
 
-				<div ng-show="document.isLmoDecisionForIntentionalIntroduction || document.isLmoDecisionForDirectUse">
+	<div ng-show="document.isLmoDecisionForIntentionalIntroduction || document.isLmoDecisionForDirectUse">
 			<legend>Result of the decision</legend>
 			<div ng-show="document.conditions">
 				<label>Conditions</label>
@@ -246,13 +249,13 @@
 				<label>Result of the decision</label>
 				<div class="km-value" ng-bind-html="document.decisionResult | formatDate"></div>
 			</div>
-		</div>
+	</div>
 
-		<!-- end of section D -->
+		<!-- =============SECTION   D END ======================== -->
 
 
 		<!-- =============SECTION E START======================== -->
-		<div ng-show="document.isSimplifiedProcedure">
+	<div ng-show="document.isSimplifiedProcedure">
 			<legend>Simplified procedure</legend>
 			<div ng-show="document.movementAllowedUnderA131A">
 				<label>Does the decision specify cases in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import?</label>
@@ -274,10 +277,11 @@
 				<km-value-bool value="document.appliesToSubsequentImports" locales="locale"></km-value-bool>
 			</div>
 		</div>
-		</div>
+	</div>
+	<!--=============SECTION E END======================== -->
 
-
-		<div ng-show="document.isTransboundaryMovement">
+	<!--=============SECTION F START======================== -->
+	<div ng-show="document.isTransboundaryMovement">
 			<legend>Illegal transboundary movement or unintentional transboundary movement</legend>
 
 		<div ng-show="document.unintentionalTransboundaryMovement">
@@ -343,12 +347,12 @@
 			</div>
 		</div>
 
-		</div>
-<!--		=============SECTION F END========================-->
+	</div>
+<!--=============SECTION F END========================-->
 
-<!--		=============SECTION G START========================-->
+<!--=============SECTION G START========================-->
 
-		<div ng-show="document.isDecisionOnContainedUseOfLMOs">
+	<div ng-show="document.isDecisionOnContainedUseOfLMOs">
 		<legend>Information sharing with other databases</legend>
 		<div ng-show="document.isForCommercialUse">
 			<label>Should this decision be forwarded to the OECD Secretariat for possible inclusion in the BioTrack Product Database?</label>
@@ -356,14 +360,14 @@
 				<km-value-bool value="document.isForCommercialUse" locales="locale"></km-value-bool>
 			</div>
 		</div>
-		</div>
+	</div>
 
 
-<!--		=============SECTION G END ========================-->
+<!--=============SECTION G END ========================-->
 
-<!--		=============SECTION H start ========================-->
+<!--=============SECTION H start ========================-->
 
-		<div ng-show="document.isDecisionOnTransitOfLMOs">
+	<div ng-show="document.isDecisionOnTransitOfLMOs">
 			<legend>LMO & risk assessment</legend>
 			<div ng-show="document.modifiedOrganisms">
 				<label>LMO identification</label>
@@ -386,10 +390,12 @@
 				</ul>
 			</div>
 		</div>
-		</div>
-<!--		=============SECTION H END ========================-->
+	</div>
+<!--=============SECTION H END ========================-->
 
-		<div ng-show="document.isShowDecisionDocument || document.isTransboundaryMovement">
+<!--=============SECTION I Start ========================-->
+
+	<div ng-show="document.isShowDecisionDocument || document.isTransboundaryMovement">
 			<label>Decision document</label>
 		<div ng-show="document.documents">
 			<legend>Decision document</legend>
@@ -401,66 +407,20 @@
 				</ul>
 			</div>
 		</div>
+	</div>
+	<!--=============SECTION I END ========================-->
+	<!--=============SECTION J START ========================-->
+	<div ng-show="document.expires">
+		<legend>Timeframe for confirmation or updating of information</legend>
+		<label>If the answer to this question is "Yes", after two years from the date of submission you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as "Not Confirmed".</label>
+		<div  class="km-value">
+			<km-value-bool value="document.expires" locales="locale"></km-value-bool>
 		</div>
+	</div>
+	<!--=============SECTION J END ========================-->
 
-		<div ng-show="document.isLmoDecisionForIntentionalIntroduction">
-			<legend>LMOs for intentional introduction into the environment</legend>
-			<div ng-show="document.addressesTransboundaryMovement">
-				<label>Was the decision triggered by a request for a transboundary movement of LMOs into the country?</label>
-				<div class="km-value">
-					<km-value-bool value="document.addressesTransboundaryMovement" locales="locale"></km-value-bool>
-				</div>
-			</div>
-
-			<div ng-show="document.intentionDecisions">
-				<label>Was the decision taken in accordance with</label>
-				<view-terms-hierarchy  class="km-value" ng-model="document.intentionDecisions" locale="locale" term-domain="intentionDecisions"></view-terms-hierarchy>
-			</div>
-
-			<div ng-show="document.receiptDate">
-				<label>Date on which the notification was received.</label>
-				<div class="km-value" ng-bind-html="document.receiptDate | formatDate"></div>
-			</div>
-
-			<div ng-show="document.receiptAcknowledgementDate">
-				<label>Date on which acknowledgement of receipt of the notification was sent to the notifier.</label>
-				<div class="km-value" ng-bind-html="document.receiptAcknowledgementDate | formatDate"></div>
-			</div>
-
-			<div ng-show="document.communicationDate">
-				<label>Date on which the decision was communicated to the notifier.	</label>
-				<div class="km-value" ng-bind-html="document.communicationDate | formatDate"></div>
-			</div>
-
-			<div ng-show="document.exporters">
-				<label>Exporter’s contact details</label>
-				<div class="km-value">
-					<ul class="list">
-						<li ng-repeat="item in document.exporters">
-							<view-record-reference ng-model='item' locale="locale"></view-record-reference>
-						</li>
-					</ul>
-				</div>
-			</div>
-			<div ng-show="document.importers">
-				<label>Importer’s or Applicant’s contact details</label>
-				<div class="km-value">
-					<ul class="list">
-						<li ng-repeat="item in document.importers">
-							<view-record-reference ng-model='item' locale="locale"></view-record-reference>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<div ng-show="document.expires">
-				<legend>Timeframe for confirmation or updating of information</legend>
-				<label>If the answer to this question is "Yes", after two years from the date of submission you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as "Not Confirmed".</label>
-				<div  class="km-value">
-					<km-value-bool value="document.expires" locales="locale"></km-value-bool>
-				</div>
-			</div>
-		<div ng-show="document.relevantInformation||document.relevantDocuments">
+	<!--=============SECTION K START ========================-->
+	<div ng-show="document.relevantInformation||document.relevantDocuments">
 			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">
@@ -477,7 +437,8 @@
 					</ul>
 				</div>
 			</div>
-		</div>
+	</div>
+	<!--=============SECTION K END ========================-->
 		<div>
 			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
 		</div>
