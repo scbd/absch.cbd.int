@@ -46,7 +46,7 @@
 											<div class="col-md-12">
 											  <div class="km-control-group" required name="projectDocument" caption="2. Website address(es)">
 												<div class="help-info">Please provide the URL of the website (e.g. http://www.cbd.int) and the name of the website (e.g. 'Convention on Biological Diversity').</div>
-												<div km-link name="projectDocument" required ng-model="document.projectDocument" allow-link="true" identifier="document.header.identifier"></div>
+												<div km-link name="projectDocument" required ng-model="document.projectDocument" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
 											  </div>
 											</div>
 										</div>
@@ -203,33 +203,11 @@
 										</div>
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
-											  <div class="km-control-group" required name="capacityBuildingType" caption="7. Scope of activity">
-												<div style="padding-left:20px" class="well">
-												  <div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="Project/programme?">
-													<div class="help-block">Select this option if the entire project or programme is for building capacity in biosafety</div>
-													<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.capacityBuildingType.isProjectProgramme"></div>
-												  </div>
-												  <div class="km-control-group"  bold="true" required name="isStandaloneProject" caption="Stand-alone activity">
-													<div class="help-block">Select this option if the activity is not part of a project or programme.</div>
-													<div class="km-yes-no" required name="isStandaloneProject" ng-model="document.capacityBuildingType.isStandaloneProject"></div>
-												  </div>
-												 
-												  <div class="km-control-group"  bold="true" required name="isStandaloneProject" caption="Series of activities">
-													<div class="km-yes-no" required name="isStandaloneProject" ng-model="document.capacityBuildingType.isStandaloneProject"></div>
-												  </div>
-												  <div class="km-control-group"  bold="true" required name="isBroaderProjectPart" caption="Part of a larger initiative/project/programme">
-													<div class="help-block">Select this option if the biosafety-related activity/component is part of a broader non-biosafety project (e.g. a project on national biodiversity strategies with a biosafety component or activity) and provide the title and further details about the broader project/initiative.</div>
-													<div class="km-yes-no" required name="isBroaderProjectPart" ng-model="document.capacityBuildingType.isBroaderProjectPart"></div>
-												  </div>
-												  
-												  <div class="km-control-group" name="broaderProjects" caption="Please specify" ng-show="document.capacityBuildingType.isBroaderProjectPart">
-													<div km-textbox-ml required ng-model="document.title" locales="document.header.languages"></div>
-												  </div>
-							
+												<div class="km-control-group" required name="categories" caption="7. Scope of activity">
+												  <div km-term-check show-description="true" name="activityScope" required ng-model="document.categories" terms="options.activityScope()" binding-type="term[]"></div>
 												</div>
-											  </div>
 											</div>
-										  </div>
+										</div>
 										<div class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" required name="organizations" caption="{{isBCH ? '8':'7'}}. Agency(ies) or organisation(s) implementing and/or executing the initiative">
@@ -342,7 +320,7 @@
 										<div class="row" ng-if="isBCH">
 										  <div class="col-md-12">
 											<div class="km-control-group" required name="aichiTargets" caption="12. General thematic area">
-											  <div km-term-check name="aichiTargets" required ng-model="document.aichiTargets" terms="options.aichiTargets()" binding-type="term[]"></div>
+											  <div km-term-check name="cpbThematicAreas" required ng-model="document.cpbThematicAreas" terms="options.cpbThematicAreas()" binding-type="term[]"></div>
 											</div>
 										  </div>
 										</div>

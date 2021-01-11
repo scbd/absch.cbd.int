@@ -1,7 +1,7 @@
 define(['app', 'underscore', 'views/forms/edit/edit', '../view/view-capacity-building-initiative.directive',
-'./organization-selector'], function (app, _) {
+'./organization-selector','services/thesaurus-service'], function (app, _) {
 
-    app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", "underscore", "realm", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, Thesaurus, Enumerable, _, realm) {
+    app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", "underscore", "realm","thesaurusService", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, Thesaurus, Enumerable, _, realm, thesaurusService) {
 
         $controller('editController', {$scope: $scope});
         $scope.isABS = realm.is('ABS');
@@ -74,6 +74,8 @@ define(['app', 'underscore', 'views/forms/edit/edit', '../view/view-capacity-bui
                  return o.data;
              });
          },
+         activityScope: function() {return thesaurusService.getDomainTerms('activityScope');}, 
+         cpbThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas');}
     };
 
     $scope.isGlobalOrRegional = function () {
