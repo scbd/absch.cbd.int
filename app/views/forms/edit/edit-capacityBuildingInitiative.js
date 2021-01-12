@@ -6,78 +6,49 @@ define(['app', 'underscore', 'views/forms/edit/edit', '../view/view-capacity-bui
         $controller('editController', {$scope: $scope});
         $scope.isABS = realm.is('ABS');
         $scope.isBCH = realm.is('BCH');
-   
-    $scope.path = $location.path();
+        $scope.path = $location.path();
 
-    $scope.options  = {
-        libraries     : function() { return $http.get("/api/v2013/thesaurus/domains/cbdLibraries/terms",                         { cache: true }).then(function(o){ return Enumerable.From(o.data).Where("$.identifier!='cbdLibrary:bch'").ToArray();});},
-        languages     : function() { return $http.get("/api/v2013/thesaurus/domains/52AFC0EE-7A02-4EFA-9277-8B6C327CE21F/terms", { cache: true }).then(function(o){ return $filter('orderBy')(o.data, 'name'); }); },
-        cbiTypes      : function() { return $http.get("/api/v2013/thesaurus/domains/D935D0C8-F5A5-43B8-9E06-45A57BF3C731/terms", 	 { cache: true }).then(function(o){ return Thesaurus.buildTree(o.data); }); },
+        _.extend($scope.options, {
+            // activityScope: function() {return thesaurusService.getTerms('activityScope');},
+            cpbThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas');},
+            categories : function() {return thesaurusService.getDomainTerms('cBI_cats');},
+            targetGroups : function() {return thesaurusService.getDomainTerms('cBI_audience');},
+            geographicScope : function() {return thesaurusService.getDomainTerms('jurisdictions');},
+            aichiTargets : function() {return thesaurusService.getDomainTerms('AICHI-TARGETS');},
+            absKeyAreas : function() {return thesaurusService.getDomainTerms('keyAreas');},
+            status : function() {return thesaurusService.getDomainTerms('cBI_status');},
+            cbiTypes : function() {return thesaurusService.getDomainTerms('cBI_types');},
+            languages : thesaurusService.getDomainTerms('unLanguages')
+                .then(function(lang){
+                    return _.sortBy( lang, 'name' );
+                }
+            ),
 
-        chmregions       : function() { return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }),
-                                                    $http.get("/api/v2013/thesaurus/domains/regions/terms",   { cache: true })]).then(function(o) {
-                                                        return Enumerable.from($filter('orderBy')(o[0].data, 'name')).Union(
-                                                               Enumerable.from($filter('orderBy')(o[1].data, 'name'))).ToArray();
-                                                   }); },
-
-        regions: function() {
-           return $q.all([$http.get("/api/v2013/thesaurus/domains/regions/terms", {cache: true})]).then(function(o) {
-               return Enumerable.from($filter("orderBy")(o[0].data, "name")).toArray();
-           });
-        },
-        countries: function() {
-            return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", {cache: true})]).then(function(o) {
-                return Enumerable.from($filter("orderBy")(o[0].data, "name")).toArray();
-            });
-         },
-        status : function () {
-             return $http.get("/api/v2013/thesaurus/domains/4E7731C7-791E-46E9-A579-7272AF261FED/terms", { cache: true })
-             .then(function(o){
-                 return Thesaurus.buildTree(o.data);
-             });
-        },
-        categories : function () {
-            return $http.get("/api/v2013/thesaurus/domains/579F448B-ECA8-4258-B130-3EAA68056D1F/terms", { cache: true })
-            .then(function(o){
-              return Thesaurus.buildTree(o.data);
-            });
-        },
-        fundingSources : function () {
-            return $http.get("/api/v2013/thesaurus/domains/Capacity Building Project Funding Types/terms", { cache: true })
-            .then(function(o){
-              return Thesaurus.buildTree($filter('orderBy')(o.data, 'name'));
-            });
-        },
-        absKeyAreas : function () {
-            return $http.get("/api/v2013/thesaurus/domains/2B2A5166-F949-4B1E-888F-A7976E76320B/terms", { cache: true })
-                .then(function(o){
-                    return o.data;
+            // TODO:need to replace it also
+            chmregions: function() { return $q.all([thesaurusService.getDomainTerms('countries'), thesaurusService.getDomainTerms('geographicRegions')])
+                .then(function(data) {
+                    return Enumerable.from($filter('orderBy')(data[0], 'title.en')).union(
+                        Enumerable.from($filter('orderBy')(data[1], 'title.en'))).toArray();
                 });
-        },
-
-         aichiTargets : function () {
-             return $http.get("/api/v2013/thesaurus/domains/AICHI-TARGETS/terms", { cache: true })
-             .then(function(o){
-                 return Thesaurus.buildTree(o.data);
-             });
-         },
-
-         geographicScope : function () {
-             return $http.get("/api/v2013/thesaurus/domains/4D4413D8-36F9-4CD2-8CC1-4F3C866DDE5A/terms", { cache: true })
-             .then(function(o){
-                 return Thesaurus.buildTree(o.data);
-             });
-         },
-         targetGroups : function () {
-             return $http.get("/api/v2013/thesaurus/domains/AFB155C4-93A6-402C-B812-CFC7488ED651/terms", { cache: true })
-             .then(function(o){
-                 return o.data;
-             });
-         },
-         activityScope: function() {return thesaurusService.getDomainTerms('activityScope');}, 
-         cpbThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas');}
-    };
-
+            },
+            fundingSources : function () {
+                return $http.get("/api/v2013/thesaurus/domains/Capacity Building Project Funding Types/terms", { cache: true })
+                .then(function(o){
+                  return Thesaurus.buildTree($filter('orderBy')(o.data, 'name'));
+                });
+            },
+            libraries     : function() { return $http.get("/api/v2013/thesaurus/domains/cbdLibraries/terms",                         { cache: true }).then(function(o){ return Enumerable.From(o.data).Where("$.identifier!='cbdLibrary:bch'").ToArray();});},
+            regions: function() {
+                return $q.all([$http.get("/api/v2013/thesaurus/domains/regions/terms", {cache: true})]).then(function(o) {
+                    return Enumerable.from($filter("orderBy")(o[0].data, "name")).toArray();
+                });
+            },
+            countries: function() {
+                return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", {cache: true})]).then(function(o) {
+                    return Enumerable.from($filter("orderBy")(o[0].data, "name")).toArray();
+                });
+            },
+        });
     $scope.isGlobalOrRegional = function () {
         if($scope.document && $scope.document.geographicScope && $scope.document.geographicScope.scope){
             return _.contains(['56B8CEB7-56B5-436B-99D9-AA7C4622F326', 'C7D6719B-8AD9-4EB1-A472-B0B858DE0F56'], $scope.document.geographicScope.scope.identifier);
