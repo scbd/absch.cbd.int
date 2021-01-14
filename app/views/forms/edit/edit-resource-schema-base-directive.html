@@ -85,8 +85,8 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="absSubjects" caption="Thematic areas(s)">
-												<div km-term-check name="absSubjects" required ng-model="document.absSubjects" terms="options.absSubjects()"
+											<div class="km-control-group" required name="bchSubjects" caption="Thematic areas(s)">
+												<div km-term-check name="bchSubjects" required ng-model="document.bchSubjects" terms="options.bchSubjects()"
 														 binding-type="term[]"></div>
 											</div>
 										</div>
@@ -187,10 +187,18 @@
 										</div>
 									</div>
 									<div class="row" ng-if="isBCH">
-										<div class="col-xs-12">
-											<div class="km-control-group" required name="keywords" caption="Keywords and any other relevant information">
-												<div class="help-block">Please use this field to provide additional keywords or any other relevant information not contained elsewhere in the record.</div>
-												<div km-textbox-ml name="keywords" ng-model="document.keywords" locales="document.header.languages"></div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="keywords" caption="Keywords and any other relevant information">
+												<div class="help-block">Please use this field to provide additional keywords or any other relevant information 
+													not contained elsewhere in the record.</div>
+												<div ng-repeat="keyword in keywords" style="padding-bottom:5px;" class="input-group">
+													<input type="text" class="form-control" name="keywords{{$index}}" ng-model="keyword.value" />													
+													<span ng-class="{'disable':keywords.length==1}" class="input-group-addon" style="cursor:pointer" 
+													 ng-click="removeItem(keywords, $index)">
+														<i class="fa fa-trash-o icon"></i>
+													</span>
+												</div>
+												<button class="btn btn-primary" ng-click="addItem(keywords)">Add item</button>
 											</div>
 										</div>
 									</div>

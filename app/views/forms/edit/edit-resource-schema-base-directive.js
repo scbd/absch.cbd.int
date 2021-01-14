@@ -1,4 +1,4 @@
-define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-directive.html','services/role-service',
+define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directive.html','services/role-service',
 './organization-selector'
 ], function (app, _, template) {
 	app.directive('convertToNumber', function() {
@@ -27,6 +27,7 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 				$scope.isBCH = realm.is('BCH');
 				$scope.user = $rootScope.user;
 				$scope.isNationalUser = false;
+				$scope.keywords = [{}];
 
 				if ($scope.user.isAuthenticated) {
 					$scope.isNationalUser =  roleService.isNationalUser();
@@ -124,8 +125,8 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 	 			    purposes 	    : function() { return $http.get("/api/v2013/thesaurus/domains/E712C9CD-437E-454F-BA72-E7D20E4C28ED/terms", { cache: true }).then(function(o){ return Thesaurus.buildTree(o.data); }); },
 	 			    targetGroups    : function() { return $http.get("/api/v2013/thesaurus/domains/AFB155C4-93A6-402C-B812-CFC7488ED651/terms", { cache: true }).then(function(o){ return o.data; }); },
 	 			    expertiseLevels : function() { return $http.get("/api/v2013/thesaurus/domains/1B57D9C3-F5F8-4875-94DC-93E427F3BFD8/terms", { cache: true }).then(function(o){ return o.data; }); },
-					 bchSubjects 	: function() { return $http.get("/api/v2013/thesaurus/domains/043C7F0D-2226-4E54-A56F-EE0B74CCC984/terms", { cache: true }).then(function(o){ return o.data; }); },
-					 bchLanguages 	: function() { return $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){ return o.data; }); },
+					bchSubjects 	: function() { return $http.get("/api/v2013/thesaurus/domains/043C7F0D-2226-4E54-A56F-EE0B74CCC984/terms", { cache: true }).then(function(o){ return o.data; }); },
+					bchLanguages 	: function() { return $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){ return o.data; }); },
 					
 				});
 				$scope.years = [];
@@ -175,6 +176,33 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 
 			    };
 
+				//==================================
+				//
+				//==================================
+				$scope.getCleanDocument = function(document) {
+
+					document = document || $scope.document;
+					if (!document)
+						return undefined;
+					if(!_.isEmpty($scope.keywords))
+						document.keywords = _($scope.keywords).pluck('value').compact().value();
+					if(_.isEmpty(document.keywords))
+						document.keywords = undefined;
+					return $scope.sanitizeDocument(document);
+				};
+
+				$scope.addItem = function(type){
+					type.push({})
+				}
+				$scope.removeItem = function(type, $index){
+					if(type.length>1) 
+						type.splice($index, 1)
+				}
+				$q.when($scope.setDocument({}, true))
+				.then(function(doc){
+					if(doc.keywords)
+						$scope.keywords = _.map(doc.keywords, function(t){return { value: t}}).join("");						
+				});
                 //============================================================
 				//
 				//============================================================
