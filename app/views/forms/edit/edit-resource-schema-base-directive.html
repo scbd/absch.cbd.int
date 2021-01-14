@@ -49,6 +49,14 @@
 									</div>
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-6">
+											<div class="km-control-group" required name="languages" caption="languages">
+												<div km-select multiple name="languages" required ng-model="document.languages" items="options.bchLanguages()"></div>
+												<!-- <div km-form-languages required name="languages" ng-model="document.languages" data-multiple="false" require-un-language="false"></div> -->
+											</div>
+										</div>
+                                    </div>
+									<div class="row" ng-if="isBCH">
+										<div class="col-xs-6">
 											<div class="km-control-group" required name="publicationYear" caption="Publication year">
 												<select class="form-control" required name="publicationYear" ng-model="document.publicationYear" convert-to-number>
 													<option ng-repeat="option in years" value="{{option.id}}">{{option.name}}</option>
