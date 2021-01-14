@@ -56,7 +56,7 @@ define(['app', 'text!./km-control-group.html', 'jquery','lodash', './km-info-tip
 				};
 
 				$scope.isRequired = function() {
-					return $scope.required !== undefined && $scope.required!="false";
+					return $scope.required !== undefined && $scope.required.toString()!="false";
 				};
 			}
 		};

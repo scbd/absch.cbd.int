@@ -41,7 +41,8 @@ app.directive("viewBiosafetyDecision", [function () {
 					
 				}
 				$scope.$watch("document", function (oldVal) {
-					onOtherDecisionChanged(oldVal.decisionTypes[0].identifier);
+					if(oldVal)
+						onOtherDecisionChanged(oldVal.decisionTypes[0].identifier);
 
 				})
 			//====================

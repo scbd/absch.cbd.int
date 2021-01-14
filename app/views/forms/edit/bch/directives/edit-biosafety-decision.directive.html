@@ -27,7 +27,7 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-xs-12" ng-show="isEdit">
+									<div class="col-xs-12" ng-show="documentExists">
 										<div class="km-control-group" required name="amendmentsDetails" caption="Provide reasons for the amendment">
 											<div km-textbox-ml required name="amendmentsDetails" ng-model="document.amendmentsDetails" locales="document.header.languages"></div>
 										</div>
@@ -200,15 +200,15 @@
 								</div>
 							</section>
 							<!-- ====================Section B End=================== -->
-							<!-- ====================Section C Strat=================== -->
+							<!-- ====================Section C Start=================== -->
 							<section ng-if="isLmoDecisionForDirectUse">
 								<div class="well no-shadow bg-white">
 									<legend>LMOs for direct use as food or feed, or for processing (LMOs-FFPs)</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="decisionLMOFFPSubject" required caption="Subject of the decision">
+											<div class="km-control-group" name="uses" required caption="Subject of the decision">
 												<div class="km-value">
-															<div km-term-check required ng-model="document.uses" locales="document.header.languages"
+													<div km-term-check required ng-model="document.uses" locales="document.header.languages"
 													terms="options.decisionLMOFFPSubject()"  binding-type="term[]"></div>
 												</div>
 											</div>
@@ -216,15 +216,15 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="appliesToTransboundaryMovement" required	
+											<div class="km-control-group" name="takenInAccordanceWithA116" required	
 											caption="Has the decision been taken in the absence of a domestic regulatory framework and in accordance with Article 11.6?">
-												<div km-yes-no required ng-model="document.appliesToTransboundaryMovement" locales="document.header.languages"></div>
+												<div km-yes-no required ng-model="document.takenInAccordanceWithA116" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
-									<div class="row" ng-if="isLmoDecisionForIntentionalIntroduction">
+									<div class="row" >
 										<div class="col-xs-12">
-											<div class="alert alert-danger">
+											<div class="alert alert-danger" ng-if="isLmoDecisionForIntentionalIntroduction">
 												<strong>Note:</strong> The first two categories in the field Subject of the decision / communication at the top of this page have been selected	
 												indicating that this record refers to a decision addressing LMOs for both Intentional introduction into the environment (Articles 7-10)	
 												AND LMOs-FFPs (Article 11). Accordingly, the fields below, Type of decision and contact details of the importer/exporter or applicant,	
@@ -235,30 +235,30 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div block-region activate="isLmoDecisionForIntentionalIntroduction" skip-loading-icon="true">
+											<div block-region activate="isLmoDecisionForIntentionalIntroduction" skip-loading-icon="true" block-text=" ">
 												<div class="row">
 													<div class="col-xs-12">
 														<div class="km-control-group" name="directUseDecisions" required caption="Type of decision">
 															<div class="km-value">
 																<div km-term-check required ng-model="decisions.directUseDecisions" locales="document.header.languages"
-																terms="options.directUseDecisions()"  binding-type="term[]"></div>
+																terms="options.directUseDecisions()" binding-type="term[]" ng-change="onDirectUseDecisionChange()"></div>
 															</div>
 														</div>											
 													</div>
 												</div>
-												<div class="col-xs-12" ng-if="'0D0BEEF4-54E4-44C1-ABB2-B89DC145E0B3'">
-													<div class="km-control-group" name="exporters"  caption="Please provide Exporter’s contact details">											
+												<div class="col-xs-12 "ng-if="decisions.isDecisionOnLmoImport">
+													<div class="km-control-group" name="exporters" required caption="Please provide Exporter’s contact details">											
 														<div document-selector ng-model="document.exporters" question="exporters"
 															government="document.government" schema="(contact)" allow-new="true" allow-new-schema="contact"></div>			
 													</div>
 												</div>
-												<div class="col-xs-12">
+												<div class="col-xs-12" ng-if="decisions.isDecisionOnLmoImport">
 													<div class="km-control-group" name="importers" required caption="Please provide Importer/Applicant's contact details">											
 														<div document-selector ng-model="document.importers" question="importers"
 															government="document.government" schema="(contact)" allow-new="true" allow-new-schema="contact"></div>			
 													</div>
 												</div>
-												<div class="col-xs-12">
+												<div class="col-xs-12" ng-if="decisions.isDecisionOnLmoDomesticUse && !decisions.isDecisionOnLmoImport">
 													<div class="km-control-group" name="importers" required caption="Please provide Applicant’s contact details">											
 														<div document-selector ng-model="document.importers" question="importers"
 															government="document.government" schema="(contact)" allow-new="true" allow-new-schema="contact"></div>			
@@ -272,17 +272,35 @@
 							<!-- ====================Section C End=================== -->
 							<!-- ====================Section D Strat=================== -->
 							<section ng-if="isLmoDecisionForIntentionalIntroduction || isLmoDecisionForDirectUse">
-								<div class="well no-shadow bg-white decision-result {{decClass}}">
+								<div class="well no-shadow bg-white decision-result">
 									<legend>Result of the decision</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="decision-condition col-xs-8" km-textbox-ml ng-model="document.conditions" rows="1" locales="document.header.languages" placeholder="Specify the conditions"></div>
-											<div class="reasons-condition col-xs-8" km-textbox-ml ng-model="document.reasons" rows="1" locales="document.header.languages" placeholder="Provide reasons"></div>
-											<div class="extensionPeriod-condition col-xs-8" km-textbox-ml ng-model="document.extensionPeriod" rows="1" locales="document.header.languages" placeholder="Specify the time extension in days"></div>
-											<div class="km-control-group" name="decisionResult" required caption="Result of the decision (select one)">
+											<div class="km-control-group" name="decisionResult" required caption="Result of the decision">
 													<div km-term-radio required ng-model="document.decisionResult" locales="document.header.languages"
-														terms="options.decisionResult()" binding-type="term" ng-change="selectDecision(document.decisionResult.identifier);"	show-other="true" >
+														terms="options.decisionResult()" binding-type="term" ng-change="onResultDecisionSelected(document.decisionResult.identifier);"	show-other="true" >
 													</div>
+											</div>
+										</div>
+									</div>
+									<div class="row" ng-if="decisionResult.conditions">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="conditions" caption="Specify the conditions">
+												<div km-textbox-ml name="conditions" required ng-model="document.conditions" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row" ng-if="decisionResult.reasons">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="reasons" caption="Provide reasons">
+												<div km-textbox-ml name="reasons" required ng-model="document.reasons" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row" ng-if="decisionResult.extensionPeriod">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="extensionPeriod" caption="Specify the time extension in days">
+												<div km-textbox-ml name="extensionPeriod" required ng-model="document.extensionPeriod" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
@@ -423,12 +441,16 @@
 							</section>
 							<!-- ====================Section G End=================== -->
 							<!-- ====================Section H Strat=================== -->
-							<section ng-if="isDecisionOnTransitOfLMOs">
+							<section ng-if="isLmoDecisionForIntentionalIntroduction	||  isLmoDecisionForDirectUse ||			
+											isSimplifiedProcedure ||  isDecisionOnTransitOfLMOs || isDecisionOnContainedUseOfLMOs || isImportDomesticRegulationOfLMOs ||
+											isUnintentionalMovementOfLMOs || isIllegalMovementOfLMOs">
+
 								<div class="well no-shadow bg-white">
 									<legend>LMO & risk assessment</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="modifiedOrganisms" required caption="LMO identification">
+											<div class="km-control-group" name="modifiedOrganisms" caption="LMO identification"
+												ng-required="isLmoMandatory()">
                                                 <div class="help-block">Please enter the BCH record number containing this information or attach an "LMO" common format</div>
 												<div document-selector ng-model="document.modifiedOrganisms" question="modifiedOrganisms" allow-new="true" allow-new-schema="modifiedOrganism"
 													government="document.government"  schema="(modifiedOrganism)" skip-government="true"></div>			
@@ -437,11 +459,12 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="riskAssessments" required caption="Risk assessment">	
+											<div class="km-control-group" name="riskAssessments" 
+												ng-required="isRiskAssessmentMandatory()" caption="Risk assessment">	
 												<!-- TODO: fix schema name										 -->
                                                 <div class="help-block">Please enter the BCH record number containing this information or attach a "Risk assessment" common format</div>
 												<div document-selector ng-model="document.riskAssessments" question="riskAssessments" allow-new="true" allow-new-schema="riskAssessment"
-													government="document.government" schema="(riskAssessments)"></div>			
+													government="document.government" schema="(riskAssessment)"></div>			
 											</div>
 										</div>
 									</div>
@@ -449,7 +472,7 @@
 							</section>
 							<!-- ====================Section H End=================== -->
 							<!-- ====================Section I Strat=================== -->
-							<section ng-if="isShowDecisionDocument || isTransboundaryMovement">
+							<section ng-if="decisions && ((decisions.commonDecisions||[]).length || decisions.otherDecisions)">								
 								<div class="well no-shadow bg-white">
 									<legend>Decision document</legend>
 									<div class="row">
