@@ -151,7 +151,7 @@
 										
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" required name="status" caption="5. Status of the document">
+												<div class="km-control-group" required name="status" caption="5. Status {{isBCH ? '':'of the document'}}">
 													<div km-select name="status" required ng-model="document.status" id="documentStatus"
 													placeholder="Please select one option" items="options.status()"  show-description="true"></div>
 												</div>
@@ -164,12 +164,12 @@
 													<div class=" well well-sm">
 														<div class="row">
 															<div class="col-md-3">
-																<div class="km-control-group" name="startDate" caption="Start date">
+																<div class="km-control-group" name="startDate" caption="{{isBCH ? 'Starting':'Start'}} date">
 																	<div km-date name="startDate" ng-model="document.startDate" ng-change="clearDuration()"></div>
 																</div>
 															</div>
 															<div class="col-md-3">
-																<div class="km-control-group" name="endDate" caption="End date">
+																<div class="km-control-group" name="endDate" caption="{{isBCH ? 'Ending':'End'}} date">
 																	<div km-date name="endDate" ng-model="document.endDate" ng-change="clearDuration()"></div>
 																</div>
 															</div>
@@ -203,15 +203,15 @@
 										</div>
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
-												<div class="km-control-group" required name="categories" caption="7. Scope of activity">
-												  <div km-term-check show-description="true" name="activityScope" required ng-model="document.categories" terms="options.activityScope()" binding-type="term[]"></div>
+												<div class="km-control-group" required name="activityScope" caption="7. Scope of activity">
+												  <div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()" description="true" binding-type="term" required></div>
 												</div>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" required name="organizations" caption="{{isBCH ? '8':'7'}}. Agency(ies) or organisation(s) implementing and/or executing the initiative">
-												<div class="help-info">In some instances an agency could play both the implementing and executing roles. In those cases, please select both boxes.</div>
+												<div class="help-info">In some instances, an agency could play both the implementing and executing roles. In those cases, please select both boxes.</div>
 												<div class="checkbox"><label><input type="checkbox" ng-model="document.isImplementedByAgencies">Implementing agency(ies) or organization(s)</label></div>
 				
 												<div class="row" >
@@ -288,7 +288,7 @@
 				
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" required name="description" caption="{{isBCH ? '9':'10'}}. Short description of  the initiative, including its goals and objectives">
+												<div class="km-control-group" required name="description" caption="{{isBCH ? '9':'10'}}. Short description of the initiative, including its goals and objectives (max 150 words)">
 													<div km-textbox-ml required ng-model="document.description" rows="3" locales="document.header.languages"></div>
 												</div>
 											</div>
@@ -296,18 +296,17 @@
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
 											  <div class="km-control-group" required name="categories" caption="10. Category(ies) of capacity-building activities">
-												<div km-term-check show-description="true" name="categories" required ng-model="document.categories" terms="options.categories()" binding-type="term[]"></div>
+												<div km-term-check show-description="true" name="categories" required ng-model="document.categories" terms="options.bchCategories()" binding-type="term[]"></div>
 											  </div>
 											</div>
-										  </div>
+										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" name="audience" caption="11.{{isBCH ? 'Main':''}} Target group(s)/beneficiary(ies)">
-													<div km-term-check name="audience" required ng-model="document.targetGroups" terms="options.targetGroups()" binding-type="term[]"></div>
+												<div class="km-control-group" name="targetGroups" caption="11. {{isBCH ? 'Main':''}} Target group(s)/beneficiary(ies)">
+													<div km-term-check name="targetGroups" required ng-model="document.targetGroups" terms="options.targetGroups()" binding-type="term[]"></div>
 												</div>
 											</div>
 										</div>
-				
 										<div class="row" ng-if="isABS">
 											<div class="col-md-12">
 												<div class="km-control-group" required name="categories" caption="12. Category(ies) of capacity-building activities">
@@ -315,11 +314,11 @@
 												</div>
 											</div>
 										</div>
-										
 										<legend ng-if="isBCH">Information on the thematic coverage of the initiative</legend>
 										<div class="row" ng-if="isBCH">
 										  <div class="col-md-12">
-											<div class="km-control-group" required name="aichiTargets" caption="12. General thematic area">
+											<div class="km-control-group" required name="cpbThematicAreas" caption="12. General thematic area">
+												<div class="help-info">Key areas and strategic measures for capacity-building and development</div>
 											  <div km-term-check name="cpbThematicAreas" required ng-model="document.cpbThematicAreas" terms="options.cpbThematicAreas()" binding-type="term[]"></div>
 											</div>
 										  </div>
@@ -411,7 +410,7 @@
 												<div class="row">
 													<div class="col-md-12">
 														<div class="km-control-group" name="resultsOutputs" caption="Results: Main outputs">
-															<span class="help-info">Please attach/upload a copy of, or provide web link to, the relevant products (e.g. tools and materials) developed by the initiative and/or reports</span>
+															<span class="help-info">Please provide a web link to, or attach a copy of, the relevant products (e.g. tools and materials) developed by the initiative and/or reports</span>
 															<div km-link name="resultsOutputs" ng-model="document.resultsOutputs" allow-link="true" allow-file="true" identifier="document.header.identifier" ></div>
 														</div>
 													</div>
@@ -433,7 +432,7 @@
 				
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" name="bestPractices" caption="{{isBCH ? '19':'18'}}. Best practices and lessons learned">
+												<div class="km-control-group" name="bestPractices" caption="18. Best practices and lessons learned">
 													<span class="help-info">Please provide a short summary of the best practices and lessons learned (max 500 words)</span>
 													<div km-textbox-ml name="bestPractices" ng-model="document.bestPractices" rows="4" locales="document.header.languages"></div>
 												</div>
@@ -472,7 +471,7 @@
 									</section>
 								<section>
 								  <div class="well no-shadow bg-white">
-									<legend>{{isBCH ? '20':'21'}}. Additional information</legend>
+									<legend>{{isBCH ? '19':'21'}}. Additional information</legend>
 				
 										<div class="row">
 											<div class="col-md-12">
@@ -494,7 +493,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" name="notes">
-													<legend>{{isBCH ? '21':'22'}}. Notes</legend>
+													<legend>{{isBCH ? '20':'22'}}. Notes</legend>
 													<span class="help-info">
 														The field “Notes” is for personal reference and can be seen only when the record is being edited.
 													</span>
