@@ -28,10 +28,15 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     if(searchQuery.additionalFields)
                         searchQuery.fields += ',' + searchQuery.additionalFields;                                               
 
-                    // searchQuery.fieldQuery.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
+                    var fieldQueries = [searchQuery.fieldQuery];
+
+                    if(~fieldQueries.indexOf('realm_ss:')){
+                        fieldQueries.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
+                    }
+
                     var queryListParameters = {
                         df    : localizeFields(searchQuery.df||'text_EN_txt'),
-                        fq    : _.union(['realm_ss:' + appConfigService.currentRealm.toLowerCase()], searchQuery.fieldQuery),
+                        fq    : _.flatten(fieldQueries),
                         q     : searchQuery.query,
                         sort  : localizeFields(searchQuery.sort),
                         fl    : localizeFields(searchQuery.fields),

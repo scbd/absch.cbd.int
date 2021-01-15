@@ -8,15 +8,15 @@ define([
     'views/register/directives/register-top-menu',
     'components/scbd-angularjs-services/services/locale',
     'views/directives/workflow-arrow-buttons', 'services/app-config-service',
-    'services/thesaurus-service'
+    'services/thesaurus-service', 'services/solr'
 ], function (app, _, Enumerable) {
   
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "thesaurusService", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
-                                   "breadcrumbs", "appConfigService", "locale", 'ngMeta', "realm",
+                                   "breadcrumbs", "appConfigService", "locale", 'ngMeta', "realm", 'solr',
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurusService, $q, $location, storage,
                                               authentication, editFormUtility, $routeParams, $timeout, $route, 
-                                              breadcrumbs, appConfigService, locale, ngMeta, realm) {
+                                              breadcrumbs, appConfigService, locale, ngMeta, realm, solr) {
 
     $scope.realm = realm;
     //incase if open from dialog use the type passed by the dialog
@@ -443,6 +443,34 @@ define([
         return v === undefined || v === null || (_.isObject(v) && _.isEmpty(v));
       }
     }
+
+    $scope.onBuildDocumentSelectorQuery = function(options){
+      var queries = {
+          fieldQueries : [],
+          query           : '*:*'
+      }
+      if(options.schemas)
+        queries.fieldQueries.push('schema_s:(' + _.map(options.schemas, solr.escape).join(',') + ')')
+      else if(options.schema)
+        queries.fieldQueries.push('realm_ss:'+solr.escape(options.schema))
+
+      if(options.realm)
+          queries.fieldQueries.push('realm_ss:'+solr.escape(options.realm))
+
+      if(options.identifier)
+        queries.fieldQueries.push("NOT identifier_s:" + solr.escape(options.identifier));
+
+      if(options.government)
+        queries.fieldQueries.push('government_s:'+solr.escape(options.government));
+
+      if((options.searchText||'')!='')
+          queries.query   = (options.searchField||'text_EN_txt:') + solr.escape(options.searchText);
+
+      console.log(queries);
+
+      return queries;
+
+    } 
 
     function setMetaTags(){
       ngMeta.resetMeta();   
