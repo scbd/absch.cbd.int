@@ -1,7 +1,7 @@
 ﻿define(['app', 'text!views/search/search-filters/left-side-filter.html', 'lodash', 'ngDialog',
-    'components/scbd-angularjs-services/services/utilities'], function (app, template, _) {
+    'components/scbd-angularjs-services/services/utilities', 'services/solr'], function (app, template, _) {
 
-        app.directive('leftSideFilter', ['ngDialog', 'locale', function (ngDialog, locale) {
+        app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', function (ngDialog, locale, solr, realm) {
             return {
                 restrict: 'EA',
                 replace: true,
@@ -183,6 +183,52 @@
 
                     $scope.hasItems = function(items){
                         return items && _.keys(items).length;
+                    }
+
+                    $scope.onBuildQuery = function(searchText, tab, filter){
+                        console.log((searchText, tab, filter))
+                        var lQueries = [];
+                        var queries = {
+                            fieldQueries : [],
+                            query           : '*:*'
+                        }
+
+                        if(filter.query){
+                            if(filter.query.fl)
+                                queries.fields = filter.query.fl
+
+                            if(filter.query.s)
+                                queries.sort = filter.query.s
+
+                            if(filter.query.fq)
+                                queries.fieldQueries = filter.query.fq;
+
+                            if((filter.query.q||'') != '')
+                                lQueries.push(filter.query.q)
+                        }
+                  
+                        queries.fieldQueries.push('realm_ss:'+solr.escape(realm.value))
+                                    
+                        if((searchText||'')!=''){
+                            var queryText;
+                            var searchFields = filter.query.searchFields||['text_EN_txt'];
+
+                            if(searchText.indexOf('-')>0) 
+                                queryText = '"' + solr.escape(searchText) + '"'; // Add quotes if text contains - especially if search is by uid
+                            else
+                                queryText = '(' + solr.escape(searchText) + ')';
+                              
+                            var freeTextQuery   = _.map(searchFields, function(field, i){
+                                                    return field + ':' + queryText + '^' + ((searchFields.length-i)+1);
+                                                }).join(' OR ');
+
+                            lQueries.push(freeTextQuery);
+                        }
+
+                        if(lQueries.length)
+                            queries.query = solr.andOr(lQueries, 'AND')
+                        
+                        return queries;
                     }
 
                     function clearFilterOptions(filter){

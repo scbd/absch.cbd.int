@@ -463,10 +463,15 @@ define([
       if(options.government)
         queries.fieldQueries.push('government_s:'+solr.escape(options.government));
 
-      if((options.searchText||'')!='')
-          queries.query   = (options.searchField||'text_EN_txt:') + solr.escape(options.searchText);
-
-      console.log(queries);
+      if((options.searchText||'')!=''){
+        var queryText
+          if(options.searchText.indexOf('-')>0) 
+              queryText = '"' + solr.escape(options.searchText) + '"'; // Add quotes if text contains - especially if search is by uid
+          else
+              queryText = '(' + options.searchText + ')';
+              
+          queries.query   = (options.searchField||'text_EN_txt:') + queryText;
+      }
 
       return queries;
 

@@ -28,9 +28,9 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                     if(searchQuery.additionalFields)
                         searchQuery.fields += ',' + searchQuery.additionalFields;                                               
 
-                    var fieldQueries = [searchQuery.fieldQuery];
+                    var fieldQueries = _.flatten([searchQuery.fieldQuery]);
 
-                    if(~fieldQueries.indexOf('realm_ss:')){
+                    if(!_.find(fieldQueries, function(q){ return ~q.indexOf('realm_ss:')})){
                         fieldQueries.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
                     }
 

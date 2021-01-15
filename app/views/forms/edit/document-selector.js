@@ -4,8 +4,8 @@ define(['app',"text!views/forms/edit/document-selector.html",
 'components/scbd-angularjs-controls/form-control-directives/pagination','ngDialog', 'services/solr'
 ], function (app, template, _) { // jshint ignore:line
 
-app.directive("documentSelector", ["$timeout",'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile',
-function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile) {
+app.directive("documentSelector", ["$timeout",'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr',
+function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr) {
 
 	return {
 		restrict   : "EA",
@@ -324,14 +324,14 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     if($scope.search.keyword){
                         var queryText = $scope.search.keyword;
                         if(queryText.indexOf('-')>0) 
-                            queryText = '"' + queryText + '"'; // Add quotes if text contains - especially if search is by uid
+                            queryText = '"' + solr.escape(queryText) + '"'; // Add quotes if text contains - especially if search is by uid
                         else
-                            queryText = '(' + queryText + ')';
+                            queryText = '(' + solr.escape(queryText) + ')';
 
                         if(($attr.freeTextQueryField||'')!='')
-                            query = $attr.freeTextQueryField + ':' + solr.escape(queryText);
+                            query = $attr.freeTextQueryField + ':' + queryText;
                         else
-                            query = 'text_'+(locale||'en').toUpperCase()+'_txt:' + solr.escape(queryText);
+                            query = 'text_'+(locale||'en').toUpperCase()+'_txt:' + queryText;
                             
                         // // Add boost query give more boost to title and summary fields
                         // var boostQuery = 'title_'+(locale||'en').toUpperCase()+'_txt:' + queryText+'*^10';
@@ -358,9 +358,18 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     currentPage   : $scope.searchResult.currentPage-1,
                     rowsPerPage   : $scope.searchResult.rowsPerPage                    
                 };
-                if(!$scope.search.keyword || options.sorting){
-                    var sortExpression   = getSortField()            ||'updatedDate_dt';
-                    sortExpression      += $scope.search.sortSequence||' asc';
+
+                if(!options.sorting && rawQuery.sort)
+                    queryParameters.sort = rawQuery.sort;
+                else if(!$scope.search.keyword || options.sorting){
+                    var sortExpression  = getSortField(rawQuery.fields)
+                    var sortSequence    = $scope.search.sortSequence||' asc';
+
+                    if(!sortExpression)
+                        sortExpression = rawQuery.sort||('updatedDate_dt' + sortSequence);
+                    else
+                        sortExpression+= sortSequence;
+
                     queryParameters.sort = sortExpression;
                 }
 
@@ -407,6 +416,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
 
                     }).catch(function(error) {
+                        toastr.error('Error processing search')
                         console.log('ERROR: ' + error);
                     })
                     .finally(function(){
@@ -516,10 +526,10 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                 });
             }
 
-            function getSortField(){
+            function getSortField(sortFields){
                 //, rec_meta:meta1_EN_txt, rec_meta:meta2_EN_txt, rec_meta:meta3_EN_txt
                 var field  = $scope.search.sort;
-                var fields = $attr.displayFields||'rec_date:updatedDate_dt,uniqueIdentifier_s:uniqueIdentifier_s,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,rec_type:type_EN_t'
+                var fields = sortFields||$attr.displayFields||'rec_date:updatedDate_dt,uniqueIdentifier_s:uniqueIdentifier_s,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,rec_type:type_EN_t'
                 if(~fields.indexOf(field)){
                     var sortField = _(fields.split(',')).map(function(f){
                                         if(~f.indexOf(field))
