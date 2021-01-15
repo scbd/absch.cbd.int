@@ -149,7 +149,7 @@
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="contacts" caption="Contact person">
                                         <div document-selector ng-model="document.contacts" question="contacts"
-                                            government="document.government" schema="(contact {{isAbs ? 'authority':''}})" filter="true" allow-new="true"
+                                            on-build-query="onContactQuery(searchText, tab)" allow-new="true"
                                             allow-new-schema="contact{{isAbs ? ',authority':''}}"></div>
 
                                     </div>
