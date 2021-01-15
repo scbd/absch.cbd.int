@@ -18,7 +18,7 @@
                     <edit-form>
 							<form name="editForm" style="margin-top:10px">
 
-									<!-- <div km-tab="general"> -->
+									
 									<div ng-show="tab=='edit'" km-tab="edit">
 							<section>
 								<div class="well no-shadow bg-white">
@@ -204,7 +204,7 @@
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
 												<div class="km-control-group" required name="activityScope" caption="7. Scope of activity">
-												  <div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()" description="true" binding-type="term" required></div>
+												  <div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()" description="true" binding-type="term" required locales="document.header.languages"></div>
 												</div>
 											</div>
 										</div>
@@ -438,6 +438,8 @@
 												</div>
 											</div>
 										</div>
+										</div>
+									</section>
 									<section ng-if="isABS">
 										<div class="well no-shadow bg-white">
 											<legend>Information on the thematic coverage of the initiative</legend>
@@ -502,9 +504,9 @@
 											</div>
 										</div>
 									</div>
-								</div>
+								
 								</section>
-				
+								</div>
 								</form>
                     </edit-form>
                     <review-form>
