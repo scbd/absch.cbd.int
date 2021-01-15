@@ -221,9 +221,12 @@
 																implementation, monitoring and evaluation, including making funding available, ensuring that fiduciary standards and quality
 																assurance are applied, and preparation of the project completion reports. The implementing agency is ultimately the entity
 																responsible for the completion of the initiative and is accountable to the donor.</div>
+															
+															<div document-selector name="implementingAgencies" ng-model="document.implementingAgencies" question="implementingAgencies" schema="organization"
+																allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
+															</div>
 				
-				
-															<organization-selector multiple ng-model="document.implementingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector>
+															<!-- <organization-selector multiple ng-model="document.implementingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector> -->
 														</div>
 													</div>
 												</div>
@@ -235,8 +238,11 @@
 															<div class="help-info">Executing agency refers to the organisation/institution directly managing the initiative, including the day-to- day planning,
 															coordination and execution of its activities, monitoring and reporting on the progress made, procuring and managing resources
 															(staff, funds, equipment, etc.), and carrying out other project management functions.</div>
-				
-															<organization-selector multiple ng-model="document.executingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector>
+														
+															<div document-selector ng-model="document.executingAgencies" question="executingAgencies" schema="organization"
+																allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
+															</div>
+															<!-- <organization-selector multiple ng-model="document.executingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector> -->
 														</div>
 													</div>
 												</div>
@@ -247,8 +253,11 @@
 														<div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="Please select the collaborating partner(s)">
 															<div class="help-info">Collaborating partners refer to entities or organizations making significant financial or other contribution to the initiative and/or
 																	actively supporting or collaborating in the implementation of the initiative.</div>
-															 
-															<organization-selector multiple ng-model="document.collaboratingPartners" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector>
+																
+																<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners" schema="organization"
+																	allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
+																</div>
+															<!-- <organization-selector multiple ng-model="document.collaboratingPartners" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector> -->
 														</div>
 													</div>
 												</div>
@@ -349,14 +358,10 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" name="corefundingsources" caption="{{isBCH ? '14. Primary funding-source(s)':'14. Core funding-source(s)'}}">
-				
-													  <!-- <div document-selector ng-model="document.coreFundingSources"
-																						question="coreFundingSources"
-																						schema="contact"
-																						government="document.government"
-																						filter="true"
-																						></div> -->
-													<organization-selector multiple ng-model="document.coreFundingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector>
+													<div document-selector ng-model="document.coreFundingSources" question="coreFundingSources" schema="organization"
+														allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
+													</div>
+													<!-- <organization-selector multiple ng-model="document.coreFundingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector> -->
 												</div>
 											</div>
 										</div>
@@ -364,15 +369,10 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" name="cofinancingsources" caption="{{isBCH ? '15.	Co-funding source(s)':'15. Co-financing source(s)'}}">
-				
-													  <!-- <div document-selector ng-model="document.coFinancingSources"
-																						question="coFinancingSources"
-																						schema="contact"
-																						government="document.government"
-																						filter="true"
-																						></div> -->
-				
-													<organization-selector multiple ng-model="document.coFinancingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector>
+													<div document-selector ng-model="document.coFinancingSources" question="coFinancingSources" schema="organization"
+														allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
+													</div>
+													<!-- <organization-selector multiple ng-model="document.coFinancingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector> -->
 												</div>
 											</div>
 										</div>
