@@ -41,9 +41,9 @@
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="organizations" caption="Organization(s) involved in the publication of this resource">
-												<div class="help-block">All BCH common formats are available at http://bch.cbd.int/resources/commonformats.shtml.</div>
-												<organization-selector multiple ng-model="document.organizations" organization-only locales="document.header.languages"
-																							 caption="Add organizations »"></organization-selector>
+												<div document-selector ng-model="document.organizations" question="organizations" type="checkbox" schema="organization" 
+													skip-government="true" allow-new="true" allow-new-schema="organization">
+												</div>
 											</div>
 										</div>
 									</div>
@@ -78,14 +78,16 @@
 									<legend>Subject</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="summary" caption="Summary, abstract or table of contents*">
-												<div km-textbox-ml ng-model="document.summary" rows="4" locales="document.header.languages"></div>
+											<div class="km-control-group" required name="summary" caption="Summary, abstract or table of contents">
+												<div km-textbox-ml required ng-model="document.summary" rows="4" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="bchSubjects" caption="Thematic areas(s)">
+												<div class="help-info">This section provides a broad classification of biosafety thematic areas to assist BCH users 
+													in searching for the record (a full description is provided elsewhere in the record).</div>
 												<div km-term-check name="bchSubjects" required ng-model="document.bchSubjects" terms="options.bchSubjects()"
 														 binding-type="term[]"></div>
 											</div>
@@ -98,26 +100,26 @@
 									<legend>Information on Organisms or LMOs</legend>
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="addressLmoCategories" caption="Does this resource address one or more specific categories of organisms or genes or LMOs*?" required>
+											<div class="km-control-group" name="addressLmoCategories" caption="Does this resource address one or more specific categories of organisms or genes or LMOs?" required>
 												<div km-yes-no required ng-model="document.addressLmoCategories" locales="document.header.languages"></div>
 												<div ng-if="document.addressLmoCategories" style="padding-left:50px;">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="organisms" required caption="Organism(s) identification">
-															<div document-selector ng-model="document.organisms" question="organisms" allow-new="true" allow-new-schema="organisms"
-																	 government="document.government"  schema="(organisms)" skip-government="true">
+														<div class="km-control-group" name="organisms"  caption="Organism(s) identification">
+															<div document-selector ng-model="document.organisms" allow-new="true" allow-new-schema="organisms"
+																schema="(organism)" skip-government="true">
 															</div>
 														</div>
 													</div>
 													<div class="col-xs-12">
-														<div class="km-control-group" name="genes" required caption="Gene(s)  identification">
-															<div document-selector ng-model="document.genes" allow-new="true" allow-new-schema="dnaSequence"
-																	 government="document.government"  schema="(dnaSequence)" filter="true" skip-government="true"></div>
+														<div class="km-control-group" name="genes"  caption="Gene(s)  identification">
+															<div document-selector type="checkbox" ng-model="document.genes" allow-new="true" allow-new-schema="dnaSequence"
+																schema="(dnaSequence)" filter="true" skip-government="true"></div>
 														</div>
 													</div>
 													<div class="col-xs-12">
-														<div class="km-control-group" name="modifiedOrganisms" required caption="LMO(s) identification">
-															<div document-selector ng-model="document.modifiedOrganisms" allow-new="true" allow-new-schema="modifiedOrganism"
-																	 government="document.government"  schema="(modifiedOrganism)" filter="true" skip-government="true"></div>
+														<div class="km-control-group" name="modifiedOrganisms"  caption="LMO(s) identification">
+															<div document-selector type="checkbox" ng-model="document.modifiedOrganisms" allow-new="true" allow-new-schema="modifiedOrganism"
+																schema="(modifiedOrganism)" filter="true" skip-government="true"></div>
 														</div>
 													</div>
 												</div>
@@ -132,7 +134,7 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
-												<div km-select multiple name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"
+												<div km-select multiple type="checkbox" name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"
 												 show-description="true"></div>
 											</div>
 											<div ng-if="isNationalUser && displayMCCWarning" class="alert alert-info">
@@ -155,6 +157,7 @@
 											</div>
 										</div>
 									</div>
+									<!-- TODO: need to change as "Publisher and its location" is missing in schema -->
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="rights" caption="Publisher and its location">
@@ -175,6 +178,7 @@
 											<div class="km-control-group" name="format" caption="Format">
 												<div class="help-block">Format may be used to identify the resource dimensions (e.g. size, number of pages or duration) or the software, hardware, or other equipment needed to display or operate it (e.g. "Requires Acrobat Reader for viewing").</div>
 												<div km-textbox-ml name="format" ng-model="document.format" locales="document.header.languages"></div>
+												<!-- <div km-select name="fileFormat" required ng-model="document.fileFormat" items="options.fileFormats()"></div> -->
 											</div>
 										</div>
 									</div>
@@ -191,9 +195,9 @@
 											<div class="km-control-group" name="keywords" caption="Keywords and any other relevant information">
 												<div class="help-block">Please use this field to provide additional keywords or any other relevant information 
 													not contained elsewhere in the record.</div>
-												<div ng-repeat="keyword in keywords" style="padding-bottom:5px;" class="input-group">
-													<input type="text" class="form-control" name="keywords{{$index}}" ng-model="keyword.value" />													
-													<span ng-class="{'disable':keywords.length==1}" class="input-group-addon" style="cursor:pointer" 
+												<div ng-repeat="keyword in keywords" style="padding-bottom:5px; width: 100%" class="input-group">
+													<div km-textbox-ml name="keywords{{$index}}" ng-model="keyword.value" locales="document.header.languages"></div>
+													<span ng-class="{'disable':keywords.length==1}" class="input-group-addon" style="cursor:pointer"
 													 ng-click="removeItem(keywords, $index)">
 														<i class="fa fa-trash-o icon"></i>
 													</span>
@@ -265,8 +269,9 @@
 									<div class="row" ng-if="isABS">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="organizations" caption="Authoring organization(s)">
-												<organization-selector multiple ng-model="document.organizations" organization-only locales="document.header.languages"
-													caption="Add organizations »"></organization-selector>
+												<div document-selector ng-model="document.organizations" question="organizations" type="checkbox" schema="organization" 
+													skip-government="true" allow-new="true" allow-new-schema="organization">
+												</div>
 											</div>
 										</div>
 									</div>
@@ -324,11 +329,11 @@
 			
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="resourceLinks" caption="Link to the resource(s)">
+											<div class="km-control-group"  name="resourceLinks" caption="Link to the resource(s)">
 												<div class="help-block">Please attach the relevant files so that they will be stored in the database for users
 													to download. When resources
 													are available on the Internet, please also provide a link to them.</div>
-												<div km-link name="resourceLinks" required ng-model="document.resourceLinks" allow-link="true" allow-file="true"
+												<div km-link name="resourceLinks"  ng-model="document.resourceLinks" allow-link="true" allow-file="true"
 												 extensions="options.documentLinksExt" identifier="document.header.identifier"></div>
 											</div>
 										</div>
@@ -442,9 +447,9 @@
 									<legend>How to obtain the resource</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="notes">
+											<div class="km-control-group" name="resourceAccess">
 												<div class="help-block" ng-if="isBCH">Please provide details on how hard copies of the resource(s) can be ordered or otherwise obtained.</div>
-												<div km-notes name="notes" ng-model="document.notes"></div>
+												<div km-textbox-ml ng-model="document.resourceAccess" rows="4" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>

@@ -20,7 +20,7 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 			restrict: 'EAC',
 			template: template ,
 			replace: true,
-			controller: ["$rootScope", "$scope", "$http", "$filter","IStorage", "roleService", "realm", function ($rootScope, $scope, $http, $filter, storage, roleService, realm)
+			controller: ["$rootScope", "$scope", "$http", "$filter","IStorage", "roleService", "realm","thesaurusService", function ($rootScope, $scope, $http, $filter, storage, roleService, realm,thesaurusService)
 			{
 
 				$scope.isABS = realm.is('ABS');
@@ -127,7 +127,8 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 	 			    expertiseLevels : function() { return $http.get("/api/v2013/thesaurus/domains/1B57D9C3-F5F8-4875-94DC-93E427F3BFD8/terms", { cache: true }).then(function(o){ return o.data; }); },
 					bchSubjects 	: function() { return $http.get("/api/v2013/thesaurus/domains/043C7F0D-2226-4E54-A56F-EE0B74CCC984/terms", { cache: true }).then(function(o){ return o.data; }); },
 					bchLanguages 	: function() { return $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){ return o.data; }); },
-					
+					resourceTypes: function() {return thesaurusService.getDomainTerms('resourceTypes')},
+
 				});
 				$scope.years = [];
 				var end = new Date().getFullYear();
@@ -192,7 +193,7 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 				};
 
 				$scope.addItem = function(type){
-					type.push({})
+					type.push({});
 				}
 				$scope.removeItem = function(type, $index){
 					if(type.length>1) 
@@ -201,7 +202,7 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 				$q.when($scope.setDocument({}, true))
 				.then(function(doc){
 					if(doc.keywords)
-						$scope.keywords = _.map(doc.keywords, function(t){return { value: t}}).join("");						
+						$scope.keywords = _.map(doc.keywords, function(t){return { value: t};});
 				});
                 //============================================================
 				//
