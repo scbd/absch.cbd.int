@@ -14,9 +14,10 @@ app.directive("viewResource", [function () {
 			target  : "@linkTarget",
 			hide : "@"
 		},
-		controller : ["$scope", "IStorage", "$http", function ($scope, storage, $http)
+		controller : ["$scope", "IStorage", "$http","realm",function ($scope, storage, $http, realm)
 		{
-			
+			$scope.isABS = realm.is('ABS');
+			$scope.isBCH = realm.is('BCH');
 			
 			
 			//====================
