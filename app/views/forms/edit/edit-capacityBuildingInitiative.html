@@ -44,18 +44,18 @@
 										</div>
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
-											  <div class="km-control-group" required name="projectDocument" caption="2. Website address(es)">
+											  <div class="km-control-group" name="projectDocument" caption="2. Website address(es)">
 												<div class="help-info">Please provide the URL of the website (e.g. http://www.cbd.int) and the name of the website (e.g. 'Convention on Biological Diversity').</div>
-												<div km-link name="projectDocument" required ng-model="document.projectDocument" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
+												<div km-link name="projectDocument" ng-model="document.projectDocument" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
 											  </div>
 											</div>
 										</div>
 				
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
-											  <div class="km-control-group" name="contacts" caption="3. Contact person">
+											  <div class="km-control-group" required name="contacts" caption="3. Contact person">
 													<div class="help-block">All BCH common formats are available on the Dashboard of the Submit page in the BCH</div>
-														<div document-selector ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
+														<div document-selector  ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
 															question="contacts"
 															schema="((schema_s:contact AND type_s:person))"
 															filter="true" skip-government="true">
@@ -304,8 +304,8 @@
 										</div>
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
-											  <div class="km-control-group" required name="categories" caption="10. Category(ies) of capacity-building activities">
-												<div km-term-check show-description="true" name="categories" required ng-model="document.categories" terms="options.bchCategories()" binding-type="term[]"></div>
+											  <div class="km-control-group"  name="categories" caption="10. Category(ies) of capacity-building activities">
+												<div km-term-check show-description="true" name="categories" ng-model="document.categories" terms="options.bchCategories()" binding-type="term[]"></div>
 											  </div>
 											</div>
 										</div>
@@ -326,7 +326,7 @@
 										<legend ng-if="isBCH">Information on the thematic coverage of the initiative</legend>
 										<div class="row" ng-if="isBCH">
 										  <div class="col-md-12">
-											<div class="km-control-group" required name="cpbThematicAreas" caption="12. General thematic area">
+											<div class="km-control-group" required name="cpbThematicAreas" caption="12. General thematic area(s)">
 												<div class="help-info">Key areas and strategic measures for capacity-building and development</div>
 											  <div km-term-check name="cpbThematicAreas" required ng-model="document.cpbThematicAreas" terms="options.cpbThematicAreas()" binding-type="term[]"></div>
 											</div>
@@ -340,8 +340,8 @@
 				
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" required name="fundingSourceTypes" caption="13. Type(s) of funding source">
-													<div km-term-check show-description="true" name="fundingSourceTypes" required ng-model="document.fundingSourceTypes" terms="options.fundingSources()" binding-type="term[]"></div>
+												<div class="km-control-group" name="fundingSourceTypes" caption="13. Type(s) of funding source">
+													<div km-term-check show-description="true" name="fundingSourceTypes" ng-model="document.fundingSourceTypes" terms="options.fundingSources()" binding-type="term[]"></div>
 												</div>
 											</div>
 										</div>
