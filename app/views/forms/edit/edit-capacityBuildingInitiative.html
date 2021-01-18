@@ -25,7 +25,7 @@
 											
 										<legend>General information</legend>
 				
-										<div class="row" ng-if="isABS">
+										<div class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
 													<div class="indent">
@@ -54,7 +54,8 @@
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
 											  <div class="km-control-group" required name="contacts" caption="3. Contact person">
-													<div class="help-block">All BCH common formats are available on the Dashboard of the Submit page in the BCH</div>
+													<!--ToDo need to verify, is this help-block required ? -->
+														<div class="help-block">All BCH common formats are available on the Dashboard of the Submit page in the BCH</div>
 														<div document-selector  ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
 															question="contacts"
 															schema="((schema_s:contact AND type_s:person))"
@@ -204,7 +205,7 @@
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
 												<div class="km-control-group" required name="activityScope" caption="7. Scope of activity">
-												  <div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()" description="true" binding-type="term" required locales="document.header.languages"></div>
+													<div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()" description="true" binding-type="term" show-other="true" required locales="document.header.languages"></div>
 												</div>
 											</div>
 										</div>
@@ -305,14 +306,21 @@
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
 											  <div class="km-control-group"  name="categories" caption="10. Category(ies) of capacity-building activities">
-												<div km-term-check show-description="true" name="categories" ng-model="document.categories" terms="options.bchCategories()" binding-type="term[]"></div>
+												<div km-term-check show-description="true" name="categories" ng-model="document.categories" terms="options.bchCategories()" binding-type="term[]" locales="document.header.languages"></div>
 											  </div>
 											</div>
 										</div>
-										<div class="row">
+										<div class="row" ng-if="isABS">
 											<div class="col-md-12">
-												<div class="km-control-group" name="targetGroups" caption="11. {{isBCH ? 'Main':''}} Target group(s)/beneficiary(ies)">
-													<div km-term-check name="targetGroups" required ng-model="document.targetGroups" terms="options.targetGroups()" binding-type="term[]"></div>
+												<div class="km-control-group" name="targetGroups" caption="11. Target group(s)/beneficiary(ies)">
+													<div km-term-check name="targetGroups" required ng-model="document.targetGroups" terms="options.targetGroups()" binding-type="term[]" locales="document.header.languages"></div>
+												</div>
+											</div>
+										</div>
+										<div class="row" ng-if="isBCH">
+											<div class="col-md-12">
+												<div class="km-control-group" name="targetGroups" caption="11. Main target group(s)/beneficiary(ies)">
+													<div km-term-check name="targetGroups" required ng-model="document.targetGroups" terms="options.bchTargetGroups()" binding-type="term[]" locales="document.header.languages"></div>
 												</div>
 											</div>
 										</div>
@@ -323,12 +331,11 @@
 												</div>
 											</div>
 										</div>
-										<legend ng-if="isBCH">Information on the thematic coverage of the initiative</legend>
 										<div class="row" ng-if="isBCH">
 										  <div class="col-md-12">
 											<div class="km-control-group" required name="cpbThematicAreas" caption="12. General thematic area(s)">
 												<div class="help-info">Key areas and strategic measures for capacity-building and development</div>
-											  <div km-term-check name="cpbThematicAreas" required ng-model="document.cpbThematicAreas" terms="options.cpbThematicAreas()" binding-type="term[]"></div>
+											  <div km-term-check name="cpbThematicAreas" required ng-model="document.cpbThematicAreas" terms="options.cpbThematicAreas()" binding-type="term[]" locales="document.header.languages"></div>
 											</div>
 										  </div>
 										</div>
@@ -340,7 +347,7 @@
 				
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" name="fundingSourceTypes" caption="13. Type(s) of funding source">
+												<div class="km-control-group" name="fundingSourceTypes" caption="13. Type(s) of funding source(s)">
 													<div km-term-check show-description="true" name="fundingSourceTypes" ng-model="document.fundingSourceTypes" terms="options.fundingSources()" binding-type="term[]"></div>
 												</div>
 											</div>
@@ -400,7 +407,7 @@
 											<div class="km-control-group" name="totalBudget" caption="17. Results">
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="resultsAchievements" caption="Results: Main achievements">
+														<div class="km-control-group" name="resultsAchievements" caption="Main achievements">
 															<span class="help-info">Please provide a short summary of the main achievements of the initiative, including those related to advancing gender equality in achieving the objectives of the Convention and its Protocols, if applicable. (max 200 words)</span>
 															<div km-textbox-ml name="resultsAchievements" ng-model="document.resultsAchievements" rows="4" locales="document.header.languages"></div>
 														</div>
@@ -409,7 +416,7 @@
 				
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="resultsOutputs" caption="Results: Main outputs">
+														<div class="km-control-group" name="resultsOutputs" caption="Main outputs">
 															<span class="help-info">Please provide a web link to, or attach a copy of, the relevant products (e.g. tools and materials) developed by the initiative and/or reports</span>
 															<div km-link name="resultsOutputs" ng-model="document.resultsOutputs" allow-link="true" allow-file="true" identifier="document.header.identifier" ></div>
 														</div>

@@ -10,12 +10,12 @@ define(['app', 'underscore', 'views/forms/edit/edit', '../view/view-capacity-bui
 
         _.extend($scope.options, {
            
-            activityScope: function() {return thesaurusService.getDomainTerms('cBI_types1',{other:true});},
-            cpbThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas');},
-           // targetGroups : function() {return thesaurusService.getDomainTerms('cBI_audience');},
-            targetGroups : function() {return thesaurusService.getDomainTerms('maintargetzgroup');},  //need to verify
+            activityScope: function() {return thesaurusService.getDomainTerms('cBI_types1');},
+            cpbThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas', {other:true, otherType:'lstring'});},
+            targetGroups : function() {return thesaurusService.getDomainTerms('cBI_audience');}, // need to verify
+            bchTargetGroups : function() {return thesaurusService.getDomainTerms('maintargetzgroup', {other:true, otherType:'lstring'});},  //need to verify
             categories : function() {return thesaurusService.getDomainTerms('cBI_cats');},
-            bchCategories : function() {return thesaurusService.getDomainTerms('categories');},
+            bchCategories : function() {return thesaurusService.getDomainTerms('categories', {other:true, otherType:'lstring'});},
             geographicScope : function() {return thesaurusService.getDomainTerms('jurisdictions');},
             aichiTargets : function() {return thesaurusService.getDomainTerms('aichiTargets');},
             absKeyAreas : function() {return thesaurusService.getDomainTerms('keyAreas');},
