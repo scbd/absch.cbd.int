@@ -50,8 +50,7 @@
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-6">
 											<div class="km-control-group" required name="languages" caption="languages">
-												<div km-select multiple name="languages" required ng-model="document.languages" items="options.bchLanguages()"></div>
-												<!-- <div km-form-languages required name="languages" ng-model="document.languages" data-multiple="false" require-un-language="false"></div> -->
+												<div km-select multiple name="languages" placeholder="Select languages" required ng-model="document.languages" items="options.bchLanguages()"></div>
 											</div>
 										</div>
                                     </div>
@@ -85,11 +84,11 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="bchSubjects" caption="Thematic areas(s)">
+											<div class="km-control-group" required name="bchSubjects" caption="Thematic areas">
 												<div class="help-info">This section provides a broad classification of biosafety thematic areas to assist BCH users 
 													in searching for the record (a full description is provided elsewhere in the record).</div>
 												<div km-term-check name="bchSubjects" required ng-model="document.bchSubjects" terms="options.bchSubjects()"
-														 binding-type="term[]"></div>
+														 binding-type="term[]" locales="document.header.languages"></div>
 											</div>
 										</div>
                                     </div>
@@ -134,16 +133,20 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
-												<div km-select multiple type="checkbox" name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"
-												 show-description="true"></div>
+												<!-- <div km-select multiple type="checkbox" name="resourceTypes" placeholder="Select Type of resource " required ng-model="document.resourceTypes" items="options.resourceTypes()"
+												 show-description="true" ></div> -->
+
+												 <div km-term-check name="resourceTypes" required ng-model="document.resourceTypes" terms="options.resourceTypes()"
+												 binding-type="term[]" locales="document.header.languages"></div>
 											</div>
-											<div ng-if="isNationalUser && displayMCCWarning" class="alert alert-info">
+											
+											<div ng-if="isNationalUser && displayMCCWarning && isABS" class="alert alert-info">
 												<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 												<h4><strong>Please note:</strong> If this module contractual clause has been developed by your country, then please submit it under the national record format <a rel="noopener" href="/register/NMCC/new" class="color-blue" >'National Model Contractual Clause'</a> so that will be clearly visible as a national record in the search and country profile. </h4>
 												<a rel="noopener" href="/register/NMCC/new" class="bold">Click here</a> to open the national record submission form.
 											</div>
 										</div>
-										<div class="col-xs-12" ng-show="isOtherSelected(document.resourceTypes)">
+										<div ng-if="isABS" class="col-xs-12" ng-show="isOtherSelected(document.resourceTypes)">
 											<div class="km-control-group" required name="resourceTypeName" caption="Name of other type of resource">
 												<div km-textbox-ml required name="resourceTypeName" rows="1" ng-model="document.resourceTypeName" locales="document.header.languages"></div>
 											</div>
