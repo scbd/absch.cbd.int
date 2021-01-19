@@ -17,7 +17,7 @@
 
         <div ng-if="showSummary">
             <div class="document-summary" ng-if="document.workingDocumentSummary||document.summary" 
-                ng-bind="(document.workingDocumentSummary||document.summary)|lstring:locale"></div>
+                ng-bind-html="(document.workingDocumentSummary||document.summary)|lstring:locale"></div>
         </div>
     </div>     
 

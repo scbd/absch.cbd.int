@@ -12,7 +12,10 @@ function (app, _, template) {
 				onPostSubmitFn   : "&onPostSubmit"
 			},
 			link: function($scope, $element, $attr){
-
+				$scope.ctrl = $scope;
+				$scope.regionalMeasuresMapping = {
+					"eu"    : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e"
+				}
 				$scope.scientificNameSynonyms = [{}];
 				$scope.commonNames = [{}];
 				$scope.container        = $attr.container;
@@ -51,12 +54,9 @@ function (app, _, template) {
 					if (/^\s*$/g.test(document.notes))
 						document.notes = undefined;
 
-						if(!document.amendedRecords || document.amendedRecords.length ==0){
+						if (!document.isAmendment) {
 							document.amendedRecords = undefined;
-							document.isAmendment = false;
-						}
-						else{
-							document.isAmendment = true;
+							document.amendmentsDetails = undefined;
 						}
 						if(document.jurisdiction){
 							if(document.jurisdiction.identifier !=  "528B1187-F1BD-4479-9FB3-ADBD9076D361") // Regional
@@ -72,14 +72,39 @@ function (app, _, template) {
 					return $scope.sanitizeDocument(document);
 				};
 
-				// $scope.addSynonymName = function(){
-				// 	if(!$scope.jurisdictionNames)
-				// 		$scope.jurisdictionNames = [];
-				// 	if($scope.jurisdictionNames.length > 0 && _.isEmpty($scope.jurisdictionNames[$scope.jurisdictionNames.length]))
-				// 		return;
-				// 	jurisdictionNames.push({})
-				// }
+				$scope.onJurisdictionChange = function() {
+			  
+					if (!$scope.document)
+					  return false;
+
+					var document = $scope.document;					
+
+					if(document.jurisdiction.identifier == '528B1187-F1BD-4479-9FB3-ADBD9076D361' && $scope.regionalMeasuresMapping[document.government.identifier]){
+					   document.jurisdictionScope = [{"identifier":$scope.regionalMeasuresMapping[document.government.identifier]}];
+					}
+					else
+						document.jurisdictionScope = null;
+			  
+				};
 				
+				$scope.onCountryChange = function(government){
+					var code = (government||{}).identifier;
+					$scope.isEuMember = code == 'eu';
+					
+					if(code && code!= 'eu'){
+
+						$scope.loading = true;
+						thesaurusService.getTerms($scope.regionalMeasuresMapping['eu'], {relations:true})
+						.then(function(o) {
+							$scope.isEuMember = o.narrowerTerms.indexOf(code) >= 0;
+						})
+						.finally(function(){
+							$scope.loading = false;
+						});
+					}
+                }
+
+
 				$scope.setDocument({});
 
 			}
