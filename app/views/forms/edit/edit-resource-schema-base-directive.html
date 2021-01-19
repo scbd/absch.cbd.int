@@ -101,7 +101,7 @@
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="addressLmoCategories" caption="Does this resource address one or more specific categories of organisms or genes or LMOs?" required>
 												<div km-yes-no required ng-model="document.addressLmoCategories" locales="document.header.languages"></div>
-												<div ng-if="document.addressLmoCategories" style="padding-left:50px;">
+												<div ng-if="document.addressLmoCategories" style="padding-left:50px; margin-top: 15px;">
 													<div class="col-xs-12">
 														<div class="km-control-group" name="organisms"  caption="Organism(s) identification">
 															<div document-selector ng-model="document.organisms" allow-new="true" allow-new-schema="organisms"
@@ -156,15 +156,14 @@
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="Identifier" caption="Identifier (ISBN, ISSN, etc.)">
-												<div km-textbox-ml name="Identifier" ng-model="document.Identifier" locales="document.header.languages"></div>
+												<input type="text" class="form-control" style="width:100%" required name="Identifier" ng-model="document.Identifier" />
 											</div>
 										</div>
 									</div>
-									<!-- TODO: need to change as "Publisher and its location" is missing in schema -->
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="rights" caption="Publisher and its location">
-												<div km-textbox-ml name="rights" ng-model="document.rights" locales="document.header.languages"></div>
+												<div km-textbox-ml name="publisher" ng-model="document.publisher" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>

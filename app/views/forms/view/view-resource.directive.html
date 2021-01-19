@@ -149,11 +149,12 @@
 		</div>
 		<div ng-show="document.Identifier && isBCH">
 			<label>Identifier</label>
-			<div class="km-value km-pre">{{document.Identifier | term:locale}}</div>
+			<div class="km-value km-pre">{{document.Identifier | lstring:locale}}</div>
+			
 		</div>
-		<div ng-show="document.rights && isBCH">
-			<label>Publisher and its location (TODO will change schema)</label>
-			<div class="km-value km-pre">{{document.rights | lstring:locale}}</div>
+		<div ng-show="document.publisher && isBCH">
+			<label>Publisher and its location</label>
+			<div class="km-value km-pre">{{document.publisher | lstring:locale}}</div>
 		</div>
 		<div ng-show="document.rights && isBCH">
 			<label>Rights</label>
