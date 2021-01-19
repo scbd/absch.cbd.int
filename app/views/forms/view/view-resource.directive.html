@@ -100,7 +100,7 @@
 		<div ng-show="document.addressLmoCategories && document.addressLmoCategories != undefined && isBCH">
 			<label>Does this resource address one or more specific categories of organisms or genes or LMOs</label>
 			<div class="km-value">
-				<km-value-bool locales="locale">{{document.addressLmoCategories}}</km-value-bool>
+				<div ng-if="document.addressLmoCategories">Yes</div>
 			</div>
 			<div ng-show="document.organisms && document.organisms.length>0 && isBCH">
 				<label>Organism(s) identification</label>

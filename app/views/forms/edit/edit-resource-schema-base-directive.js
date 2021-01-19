@@ -249,6 +249,13 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 					else
 						$scope.displayMCCWarning = false;
 				});
+				$scope.$watch('document.addressLmoCategories',function(value){
+					if(!value){
+						$scope.document.organisms = undefined;
+						$scope.document.genes = undefined;
+						$scope.document.modifiedOrganisms = undefined;
+					}
+				});
 
 
 				//============================================================
