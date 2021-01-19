@@ -35,7 +35,20 @@ app.directive('kmLinkList', ['MimeService', function (MimeService){
                     }
 
                     return 'fa-link'
-                }
+				}
+				
+				$scope.getNameFromUrl = function(url){
+					url = decodeURI(url);
+
+					if(/\/api\/v201/.test(url)){
+						try{
+							return url.substr(url.lastIndexOf('/')+1, url.length);
+						}
+						catch(e){}
+					}
+
+					return url;
+				}
 			}
 		};
 	}]);
