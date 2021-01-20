@@ -57,9 +57,9 @@
 		</div>
 
 		<div ng-if="document.title">
-			<label>Title</label>
-			<div class="km-value" compare-val>
-				<strong>{{document.title | lstring:locale}}</strong>
+			<label>Title</label>			
+			<div compare-val>
+				<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<legend>Legislative details</legend>
@@ -149,7 +149,7 @@
 		<div ng-if="document.relatedRecords || document.relationDetails">
 			<legend>Relationship with other laws/regulations</legend>
 			<div ng-if="document.relatedRecords">
-				<label>BCH decision amended</label>
+				<label>Record(s) containing the related measure(s)</label>
 				<div class="km-value">
 					<ul class="list">
 						<li ng-repeat="item in document.relatedRecords">
@@ -159,9 +159,9 @@
 				</div>
 			</div>
 			<div ng-if="document.relationDetails">
-				<label>Relationship description</label>
+				<label>Description of the relationship between the measures</label>
 				<div class="km-value">
-					<km-value-ml value="document.relationDetails" locales="locale"></km-value-ml>
+					<km-value-ml value="document.relationDetails" html locales="locale"></km-value-ml>
 				</div>
 			</div>
 		</div>
