@@ -1,0 +1,108 @@
+﻿<div >
+
+        <style>
+                .filters1>li {
+                        width: 100%;
+                        padding: 0;
+                        margin: 5px 0;
+                }
+
+                .filters1>li>a {
+                        font-size: 12px;
+                        text-transform: uppercase;
+                        font-weight: bold;
+                        display: block;
+                        padding: 5px;
+                        background-color: #f6f6f6;
+                        border: 1px solid #ddd;
+                }
+        </style>
+
+
+        <p style="text-transform:uppercase;color:#bbb;font-weight:bold; padding-bottom:8px;">
+                search filters</p>
+
+        <ul class="filters1" style="list-style-type: none;padding:0;margin:0;">
+
+                <li id="recordTypesFilterTab">
+                        <a rel="noopener" href="" ng-class="{'active':showFilters=='recordTypesFilter'}"
+                                ng-click="showFilters=(showFilters=='recordTypesFilter' ? false : 'recordTypesFilter')"
+                                class="btn color-grey ">
+
+                                Record types
+                                <div class="pull-right">
+                                        <i ng-if="showFilters=='recordTypesFilter'" class="fa fa-times-circle"></i>
+                                        <i ng-if="!showFilters || showFilters!='recordTypesFilter'"
+                                                class="fa fa-caret-right"></i>
+                                </div>
+                        </a>
+                </li>
+
+
+                <li id="keywordsFilterTab" ng-show="!skipKeywordsFilter"> <a rel="noopener" href=""
+                                ng-class="{'active':showFilters=='keywordsFilter'}"
+                                ng-click="showFilters=(showFilters=='keywordsFilter' ? false : 'keywordsFilter')"
+                                class="btn color-grey">
+                                Keywords
+                                <div class="pull-right">
+                                        <i ng-if="showFilters=='keywordsFilter'" class="fa fa-times-circle"></i>
+                                        <i ng-if="!showFilters || showFilters!='keywordsFilter'"
+                                                class="fa fa-caret-right"></i>
+                                </div>
+                        </a>
+                </li>
+
+                <li id="countryFilterTab"> <a rel="noopener" href="" ng-class="{'active':showFilters=='countryFilter'}"
+                                ng-click="showFilters=(showFilters=='countryFilter' ? false : 'countryFilter')"
+                                class="btn color-grey">
+                                Country
+                                <div class="pull-right">
+                                        <i ng-if="showFilters=='countryFilter'" class="fa fa-times-circle"></i>
+                                        <i ng-if="!showFilters || showFilters!='countryFilter'"
+                                                class="fa fa-caret-right"></i>
+                                </div>
+                        </a> </li>
+
+
+                <li id="regionFilterTab"> <a rel="noopener" href="" ng-class="{'active':showFilters=='regionFilter'}"
+                                ng-click="showFilters=(showFilters=='regionFilter' ? false : 'regionFilter')"
+                                class="btn color-grey">
+                                Regions
+                                <div class="pull-right">
+                                        <i ng-if="showFilters =='regionFilter'" class="fa fa-times-circle"></i>
+                                        <i ng-if="!showFilters || showFilters!='regionFilter'"
+                                                class="fa fa-caret-right"></i>
+                                </div>
+                        </a></li>
+
+
+                <li id="dateFilterTab" ng-show="!skipDateFilter"> <a rel="noopener" href=""
+                                ng-class="{'active':showFilters=='dateFilter'}"
+                                ng-click="showFilters=(showFilters=='dateFilter' ? false : 'dateFilter')"
+                                class="btn color-grey">
+                                Date
+                                <div class="pull-right">
+                                        <i ng-if="showFilters=='dateFilter'" class="fa fa-times-circle"></i>
+                                        <i ng-if="!showFilters || showFilters!='dateFilter'"
+                                                class="fa fa-caret-right"></i>
+                                </div>
+                        </a> </li>
+
+                <li id="searchFilterTab" ng-show="isUserAuthenticated()"> <a rel="noopener" href=""
+                                ng-class="{'active':showFilters=='userSearchFilter'}"
+                                ng-click="showFilters=(showFilters=='userSearchFilter' ? false : 'userSearchFilter')"
+                                class="btn color-green">
+                                My saved searches
+                                <div class="pull-right">
+                                        <i ng-if="showFilters=='userSearchFilter'" class="fa fa-times-circle"></i>
+                                        <i ng-if="!showFilters || showFilters!='userSearchFilter'"
+                                                class="fa fa-caret-right"></i>
+                                </div>
+                        </a> </li>
+
+        </ul>
+
+
+      
+
+</div>
