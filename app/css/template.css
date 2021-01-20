@@ -1507,7 +1507,7 @@ div.recordDefault:hover {
 
 
 #search-new .badge {
-    background-color: #333!important;
+    background-color: #333;
     color: white;
 }
 #search-new .section-title {

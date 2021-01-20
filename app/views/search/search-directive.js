@@ -9,7 +9,14 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 'views/search/directives/result-view-options', 'views/search/search-filters/left-side-filter',
 'views/search/search-results/list-view','views/search/search-results/group-view', 
 'components/scbd-angularjs-controls/form-control-directives/km-date-range', 'services/solr', 'toastr',
-'views/reports/matrix/data-matrix.directive'
+'views/reports/matrix/data-matrix.directive',
+'views/search/directives/search-chips',
+'views/search/directives/search-input',
+'views/search/directives/search-subfilter-options',
+'views/search/directives/search-sort',
+'views/search/directives/search-filters',
+'views/search/directives/search-results',
+
 ], function(app, template, _, scbdSchemas, joyRideText) {
 
     app.directive('searchDirective', function() {
@@ -80,10 +87,18 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             regionsFilter   : {},
                             searchKeyword   : ''
                         }   
+                        $scope.showFilters=false;
+
+                        $scope.getScope = function() {
+                            return $scope;   
+                        }
 
                     ////////////////////////////////////////////
                     ////// scope functions
                     ////////////////////////////////////////////
+                    $scope.isObjectEmpty = function(x){
+                        return Object.keys(x).length === 0;
+                     }
 
                     $scope.saveFilter = function (doc) {
 

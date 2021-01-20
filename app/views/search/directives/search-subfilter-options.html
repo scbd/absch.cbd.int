@@ -1,0 +1,72 @@
+﻿<div>
+
+    <div class="container-fluid" ng-show="showFilters || searchKeyword"
+    style="z-index:10!important;top:-2px;position:relative;">
+
+
+<!-- 
+    <style>
+       .sticky-bar {
+           position: fixed;
+           left: 0;
+           bottom: 0;
+           height:35px;
+           width: 100%;
+           background-color: #333;
+           color: white;
+           text-align: center;
+           opacity:0.9
+       }
+   </style> -->
+
+    <div class="row" style="margin:0;">
+        <div class="col-xs-12 well" style="min-height:100px;margin:0;background-color:#ddd;">
+            <a rel="noopener" translation-url href="#" ng-click="showFilters=false;searchKeyword='';"
+                class="pull-right color-black">
+                <i class="fa fa-2x fa-times-circle" aria-hidden="true"></i> <br>
+            </a>
+
+            <div ng-if="searchKeyword" id="Search-Filter" style="margin-bottom:20px;">
+                <a rel="noopener" translation-url class="filter country-heading" ng-click="saveFreeTextFilter(searchKeyword);">
+                    <i class="fa check"
+                        ng-class="{'fa-check-square':isFilterOn('freeText_'+searchKeyword),'fa-square':!isFilterOn('freeText_'+searchKeyword)}"></i>
+                    Free text search:
+                    <span class="color-blue">"{{searchKeyword}}"</span>
+                </a>
+            </div>
+            <div id="recordTypesFilterTab">
+                <div class="row" ng-if="showFilters==='recordTypesFilter' || (searchKeyword && !showFilters)">
+                    <div class="col-md-12">
+                        <national-filter></national-filter>
+                    </div>
+                    <div class="col-md-12">
+                        <reference-filter></reference-filter>
+                    </div>
+                    <div class="col-md-12">
+                        <scbd-filter></scbd-filter>
+                    </div>
+                </div>
+            </div>
+
+            <keyword-filter
+                ng-if="!skipKeywordsFilter && (showFilters==='keywordsFilter' || (searchKeyword && !showFilters))">
+            </keyword-filter>
+            <country-filter ng-if="showFilters==='countryFilter' || (searchKeyword && !showFilters)">
+            </country-filter>
+            <region-filter ng-if="showFilters==='regionFilter' || (searchKeyword && !showFilters)"></region-filter>
+            <date-filter ng-if="showFilters==='dateFilter' && !skipDateFilter"></date-filter>
+            <div ng-if="showFilters==='userSearchFilter' && !skipSaveFilter">
+                <h4>Your predefined searches <small> - keep up to date when records are published </small></h4>
+                <user-alerts run-query-in-page="true"></user-alerts>
+            </div>
+           <div class="sticky-bar" ng-if="searchResult.loading">
+               <span style="vertical-align:middle"><i class="fa fa-spin fa-spinner"></i>Updating results...</span?>
+           </div>
+
+           <div left-side-filter></div>
+
+        </div>
+    </div>
+</div>
+
+</div>

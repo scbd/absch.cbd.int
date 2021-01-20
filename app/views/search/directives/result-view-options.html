@@ -1,32 +1,63 @@
 ﻿<div>
-    <ul class="pagination" style="margin-bottom:0px">        
+    <style>
+        .sort-options{
+            display: inline-block;
+            margin-top:10px;
+            white-space: nowrap;
+
+        }
+        .sort-options > li{
+            display: inline;
+            margin-left:25px;
+            background-color: #f6f6f6;
+            padding:5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .sort-options > li > a{
+            font-size: 12px;
+            text-transform: uppercase;
+            color:#555;
+            font-weight: bold;
+            
+        }
+    </style>
+
+    <ul class="sort-options" style="margin-bottom:0px">        
         <li>
             <a rel="noopener" href="#" style="max-height:38px;">
-                <i class="fa fa-eye" aria-hidden="true"></i> View Type
-                <select ng-model="viewType" ng-change="viewTypeChange(viewType);">
-                    <option ng-value="'default'">Default</option>
-                    <option ng-value="'list'">List</option>
-                    <option ng-value="'group'">Group</option>
-                    <option ng-value="'matrix'">Matrix</option>
+                <!-- <i class="fa fa-eye" aria-hidden="true"></i>  -->
+                <select style="border:0;background-color: #f6f6f6;" ng-model="viewType" ng-change="viewTypeChange(viewType);">
+                    <option ng-value="'default'">DEFAULT VIEW</option>
+                    <option ng-value="'list'">LIST</option>
+                    <option ng-value="'group'">GROUP</option>
+                    <option ng-value="'matrix'">MATRIX</option>
                 </select>
-                <i class="fa fa-cog" ng-if="viewType=='group'" ng-click="viewTypeChange(viewType);"></i>
+                <!-- <i class="fa fa-cog" ng-if="viewType=='group'" ng-click="viewTypeChange(viewType);"></i> -->
             </a>
         </li>        
         <li>
             <a rel="noopener" href ng-click="showSortDialog()">
-                <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Sort By
+                Sort
+                <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> 
             </a>
         </li>     
         <li>
-            <a rel="noopener" > <i class="fa fa-paper-plane" aria-hidden="true"></i> Send              
+            <a rel="noopener" > 
+                Send 
+                <i class="fa fa-paper-plane" aria-hidden="true"></i> 
             </a>
         </li>     
         <li>
-            <a rel="noopener" > <i class="fa fa-print" aria-hidden="true"></i> Print
+            <a rel="noopener" > 
+                Print
+                <i class="fa fa-print" aria-hidden="true"></i> 
             </a>
         </li>   
         <li>
-            <a rel="noopener" href ng-click="onExportClick()"><i class="fa fa-download" aria-hidden="true"></i> Export
+            <a rel="noopener" href ng-click="onExportClick()">
+                Export
+                <i class="fa fa-download" aria-hidden="true"></i> 
             </a>
         </li>
     </ul>
