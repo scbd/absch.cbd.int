@@ -128,7 +128,7 @@
 		</div>
 
 
-		<div ng-if="document.documents || document.unofficialDocuments">
+		<div ng-if="document.documents || document.unofficialDocuments || document.documentsInfo">
 			<legend>Document details</legend>
 			<div ng-if="document.documents">
 				<label>Document text</label>
@@ -140,6 +140,9 @@
 				<label>Unofficial Documents</label>
 				<div class="km-value" ng-if="document.unofficialDocuments" km-link-list 
 					ng-model="document.unofficialDocuments" style="margin-top: 5px;"></div>				
+			</div>
+			<div ng-if="document.documentsInfo">
+				<km-value-ml value="document.documentsInfo" html locales="locale"></km-value-ml>
 			</div>
 		</div>
 
