@@ -281,6 +281,52 @@ import 'services/main';
                         return queries;
                     }
 
+                    $scope.onBuildQuery = function(searchText, tab, filter){
+                        console.log((searchText, tab, filter))
+                        var lQueries = [];
+                        var queries = {
+                            fieldQueries : [],
+                            query           : '*:*'
+                        }
+
+                        if(filter.query){
+                            if(filter.query.fl)
+                                queries.fields = filter.query.fl
+
+                            if(filter.query.s)
+                                queries.sort = filter.query.s
+
+                            if(filter.query.fq)
+                                queries.fieldQueries = filter.query.fq;
+
+                            if((filter.query.q||'') != '')
+                                lQueries.push(filter.query.q)
+                        }
+                  
+                        queries.fieldQueries.push('realm_ss:'+solr.escape(realm.value))
+                                    
+                        if((searchText||'')!=''){
+                            var queryText;
+                            var searchFields = filter.query.searchFields||['text_EN_txt'];
+
+                            if(searchText.indexOf('-')>0) 
+                                queryText = '"' + solr.escape(searchText) + '"'; // Add quotes if text contains - especially if search is by uid
+                            else
+                                queryText = '(' + solr.escape(searchText) + ')';
+                              
+                            var freeTextQuery   = _.map(searchFields, function(field, i){
+                                                    return field + ':' + queryText + '^' + ((searchFields.length-i)+1);
+                                                }).join(' OR ');
+
+                            lQueries.push(freeTextQuery);
+                        }
+
+                        if(lQueries.length)
+                            queries.query = solr.andOr(lQueries, 'AND')
+                        
+                        return queries;
+                    }
+
                     function clearFilterOptions(filter){
                         if(filter.type!='solrRecords'){
                             _.forEach(filter.selectedItems, function(item){
