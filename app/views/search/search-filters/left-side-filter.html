@@ -78,6 +78,7 @@
                                 ng-click="clearFilterDate(filter)">clear</button>
                             <div km-date-range ng-model="filter.filterValue" ng-change="onFilterDateChange(filter)">
                             </div>
+<<<<<<< HEAD
                         </div>
                         <div ng-if="filter.type=='freeText'">
                             <label ng-bind="filter.title" ng-if="filter.title"
@@ -141,6 +142,20 @@
                                                         <span
                                                             ng-if="(option.rec_title|lstring:locale).length>50">...</span>
                                                     </span>
+=======
+                            <div ng-if="filter.type=='solrRecords'">
+                                <div block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">                                    
+                                    <div ng-class="{'exclude-filter':filter.excludeResult}">
+                                        <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
+                                        <div document-selector identifier-without-revision="true" ng-model="filter.selectedItems" question="searchResult" type="checkbox"
+                                            on-build-query="onBuildQuery(searchText, tab, filter)" 
+                                            lookup-field={{::filter.query.lookupField}} skip-sync-documents="true" instance-id="{{filter.$$hashKey}}"
+                                            filter="true" ng-change="recordSelected(item, filter)" skip-government="true" list-view="true">
+                                            <select-records>
+                                                <div class="color-darkgrey not" style="cursor: pointer;" ng-click="$parent.openAddDialog();">
+                                                    <span ng-bind="filter.title"></span>
+                                                    <span  class="fa fa-chevron-right pull-right"></span> 
+>>>>>>> Document selector
                                                 </div>
 
                                                 <div ng-if="$last" ng-init="ngRepeatFinished()" style="display:none">
