@@ -3,8 +3,8 @@ define(['app', 'lodash', 'text!./edit-authority.directive.html', 'services/searc
 'services/thesaurus-service'], 
 function (app, _, template) {
 
-	app.directive("editAuthority", ["$http", "Thesaurus", "$q", "$controller", "$location", "realm", "commonjs",'thesaurusService',
-    function($http, Thesaurus, $q, $controller, $location, realm, commonjs,thesaurusService) {
+	app.directive("editAuthority", ["$http", "Thesaurus", "$q", "$controller", "$location", "realm", "solr",'thesaurusService',
+    function($http, Thesaurus, $q, $controller, $location, realm, solr,thesaurusService) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -136,6 +136,23 @@ function (app, _, template) {
                     //var jurisdictions = $scope.document.absJurisdiction
                     return _.intersection(_.map($scope.document.absJurisdiction, 'identifier'),
                                         ['DEBB019D-8647-40EC-8AE5-10CA88572F6E', 'DEEEDB35-A34B-4755-BF77-D713017195E3', '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED']).length > 0;
+                }
+
+                $scope.onContactQuery = function(searchText, tab){
+                    var queryOptions = {
+                        realm     : realm.value,
+                        identifier: $scope.document.header.identifier,
+                        government: $scope.document.government.identifier,
+                        searchText: searchText
+                    }
+
+                    if($scope.isAbs)
+                        queryOptions.schemas = ['contact', 'authority']
+                    else
+                        queryOptions.schemas = ['contact']
+
+                    return $scope.onBuildDocumentSelectorQuery(queryOptions);
+
                 }
 
                 function resolveLegacyFields(document){
