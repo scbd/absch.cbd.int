@@ -4,8 +4,8 @@ define(['app',"text!views/forms/edit/document-selector.html",
 'components/scbd-angularjs-controls/form-control-directives/pagination','ngDialog', 'services/solr'
 ], function (app, template, _) { // jshint ignore:line
 
-app.directive("documentSelector", ["$timeout",'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile',
-function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile) {
+app.directive("documentSelector", ["$timeout",'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr',
+function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr) {
 
 	return {
 		restrict   : "EA",
@@ -28,7 +28,8 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
             filter : "@filter",
             hideSelf : "=hideSelf",
             query    : "=",
-            onRecordsFetched    : '&?'
+            onRecordsFetched    : '&?',
+            onBuildQuery        : '&?'
 		},
 		link : function($scope, $element, $attr, ngModelController) {
             var dialogId;
@@ -288,64 +289,87 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
                 var searchOperation;
 				$scope.isLoading = true;
-                var schema = "*";
-                if ($scope.schema)
-                    schema = $scope.schema;
+                var rawQuery = {};
 
-                var fieldQueries = ["schema_s:"+ schema] // cannot escape for backward compatibility
+                if(typeof $scope.onBuildQuery == 'function'){
+                    rawQuery = $scope.onBuildQuery({searchText:$scope.search.keyword, tab:$scope.activeTab});
+                }
+                else{
+                    //TODO: obsolete code, remove after upgrading forms using directive
+                    console.warn('document-selector no longer supports attributed queries, use onBuildQuery to pass query from parent');
+                        rawQuery.fieldQueries = [];
+                    var query                 = '*:*';
+                    var schema                = "*";
+                    rawQuery.fields           = ($attr.displayFields||'')!= '' ? $attr.displayFields : undefined
 
-                if($scope.query){ //if query is mentioned ignore schema field in query
-                    fieldQueries = [$scope.query];
+                    if ($scope.schema)
+                        schema = $scope.schema;
+
+                    rawQuery.fieldQueries.push(["schema_s:"+ schema]); // cannot escape for backward compatibility
+
+                    if($scope.query){ //if query is mentioned ignore schema field in query
+                        rawQuery.fieldQueries = [$scope.query];
+                    }
+
+                    if(!$attr.skipGovernment){
+                        if($scope.government)
+                            rawQuery.fieldQueries.push("government_s:" + solr.escape($scope.government.identifier));
+                        if(!$scope.government &&  $scope.userGov)
+                            rawQuery.fieldQueries.push("government_s:" + solr.escape($scope.userGov));
+                    }
+                    if($scope.hideSelf){
+                        rawQuery.fieldQueries.push("NOT (identifier_s:" + solr.escape($scope.hideSelf) + ")");
+                    }
+                    
+                    if($scope.search.keyword){
+                        var queryText = $scope.search.keyword;
+                        if(queryText.indexOf('-')>0) 
+                            queryText = '"' + solr.escape(queryText) + '"'; // Add quotes if text contains - especially if search is by uid
+                        else
+                            queryText = '(' + solr.escape(queryText) + ')';
+
+                        if(($attr.freeTextQueryField||'')!='')
+                            query = $attr.freeTextQueryField + ':' + queryText;
+                        else
+                            query = 'text_'+(locale||'en').toUpperCase()+'_txt:' + queryText;
+                            
+                        // // Add boost query give more boost to title and summary fields
+                        // var boostQuery = 'title_'+(locale||'en').toUpperCase()+'_txt:' + queryText+'*^10';
+
+                        // query = boostQuery + ' OR ' + query;
+                    }
+                    rawQuery.query = query;
                 }
 
-                if(!$attr.skipGovernment){
-                    if($scope.government)
-                        fieldQueries.push("government_s:" + solr.escape($scope.government.identifier));
-                    if(!$scope.government &&  $scope.userGov)
-                        fieldQueries.push("government_s:" + solr.escape($scope.userGov));
-                }
-
-                if($scope.hideSelf){
-                    fieldQueries.push("NOT (identifier_s:" + solr.escape($scope.hideSelf) + ")");
-                }
-
+                //tabs query
                 if($scope.activeTab == 'myRecords'){
                     var myRecordsQuery = '_contributor_is:' + solr.escape($scope.$root.user.userID);
                     if($scope.userGov)
                         myRecordsQuery += ' OR _ownership_s:'+solr.escape($scope.userGov.toLowerCase());
-                    fieldQueries.push(myRecordsQuery)
+
+                    rawQuery.fieldQueries.push(myRecordsQuery)
                 }
 
-                var query = '*:*';
-                
-                if($scope.search.keyword){
-                    var queryText = $scope.search.keyword;
-                    if(queryText.indexOf('-')>0) 
-                        queryText = '"' + queryText + '"'; // Add quotes if text contains - especially if search is by uid
-                    else
-                        queryText = '(' + queryText + ')';
-
-                    if(($attr.freeTextQueryField||'')!='')
-                        query = $attr.freeTextQueryField + ':' + solr.escape(queryText);
-                    else
-                        query = 'text_'+(locale||'en').toUpperCase()+'_txt:' + solr.escape(queryText);
-                        
-                    // // Add boost query give more boost to title and summary fields
-                    // var boostQuery = 'title_'+(locale||'en').toUpperCase()+'_txt:' + queryText+'*^10';
-
-                    // query = boostQuery + ' OR ' + query;
-                }
 
                 var queryParameters = {
-                    fields          : ($attr.displayFields||'')!= '' ? $attr.displayFields : undefined,
-                    fieldQuery      : fieldQueries,
-                    'query'         : query,
-                    'currentPage'   : $scope.searchResult.currentPage-1,
-                    'rowsPerPage'   : $scope.searchResult.rowsPerPage                    
+                    fields        : rawQuery.fields,
+                    fieldQuery    : rawQuery.fieldQueries,
+                    query         : rawQuery.query,
+                    currentPage   : $scope.searchResult.currentPage-1,
+                    rowsPerPage   : $scope.searchResult.rowsPerPage                    
                 };
-                if(!$scope.search.keyword || options.sorting){
-                    var sortExpression   = getSortField()            ||'updatedDate_dt';
-                    sortExpression      += $scope.search.sortSequence||' asc';
+
+                if(!options.sorting && rawQuery.sort)
+                    queryParameters.sort = rawQuery.sort;
+                else if(!$scope.search.keyword || options.sorting){
+                    var sortExpression  = getSortField(rawQuery.fields)
+                    var sortSequence    = $scope.search.sortSequence||' asc';
+
+                    if(!sortExpression)
+                        sortExpression = rawQuery.sort||('updatedDate_dt' + sortSequence);
+                    else
+                        sortExpression+= sortSequence;
+
                     queryParameters.sort = sortExpression;
                 }
 
@@ -392,6 +416,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
 
                     }).catch(function(error) {
+                        toastr.error('Error processing search')
                         console.log('ERROR: ' + error);
                     })
                     .finally(function(){
@@ -501,10 +526,10 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                 });
             }
 
-            function getSortField(){
+            function getSortField(sortFields){
                 //, rec_meta:meta1_EN_txt, rec_meta:meta2_EN_txt, rec_meta:meta3_EN_txt
                 var field  = $scope.search.sort;
-                var fields = $attr.displayFields||'rec_date:updatedDate_dt,uniqueIdentifier_s:uniqueIdentifier_s,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,rec_type:type_EN_t'
+                var fields = sortFields||$attr.displayFields||'rec_date:updatedDate_dt,uniqueIdentifier_s:uniqueIdentifier_s,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,rec_type:type_EN_t'
                 if(~fields.indexOf(field)){
                     var sortField = _(fields.split(',')).map(function(f){
                                         if(~f.indexOf(field))
