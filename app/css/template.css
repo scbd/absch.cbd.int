@@ -1298,7 +1298,6 @@ div.recordDefault:hover {
 #doc-metadata {
     padding-top: 10px!important;
 }
-
 /*#doc-metadata * {font-size:10px;}*/
 #doc-metadata .table-condensed>tbody>tr>td,
 #doc-metadata .table-condensed>tbody>tr>th,
@@ -2167,4 +2166,8 @@ a.disabled{
 }
 #search-new .searchMatrixContent .inverted.dimmer{
     background-color: #000;
+}
+
+.matrix-export-dialog .modebar{
+    display: none;
 }
