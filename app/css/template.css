@@ -2171,3 +2171,6 @@ a.disabled{
 .matrix-export-dialog .modebar{
     display: none;
 }
+.full-length{
+    display: block;
+}

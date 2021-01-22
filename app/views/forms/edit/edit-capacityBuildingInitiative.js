@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'views/forms/edit/edit', '../view/view-capacity-building-initiative.directive',
+define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-capacity-building-initiative.directive',
 './organization-selector','services/thesaurus-service'], function (app, _) {
 
     app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", "underscore", "realm","thesaurusService", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, Thesaurus, Enumerable, _, realm, thesaurusService) {
@@ -10,10 +10,10 @@ define(['app', 'underscore', 'views/forms/edit/edit', '../view/view-capacity-bui
 
         _.extend($scope.options, {
            
-            activityScope: function() {return thesaurusService.getDomainTerms('cBI_types1');},
+            activityScope: function() {return thesaurusService.getDomainTerms('cbiCpbTypes');},
             cpbThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas', {other:true, otherType:'lstring'});},
             targetGroups : function() {return thesaurusService.getDomainTerms('cBI_audience');}, // need to verify
-            bchTargetGroups : function() {return thesaurusService.getDomainTerms('maintargetzgroup', {other:true, otherType:'lstring'});},  //need to verify
+            bchTargetGroups : function() {return thesaurusService.getDomainTerms('mainTargetGroup', {other:true, otherType:'lstring'});},  //need to verify
             categories : function() {return thesaurusService.getDomainTerms('cBI_cats');},
             bchCategories : function() {return thesaurusService.getDomainTerms('categories', {other:true, otherType:'lstring'});},
             geographicScope : function() {return thesaurusService.getDomainTerms('jurisdictions');},

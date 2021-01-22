@@ -37,16 +37,20 @@
 										<div class="row">
 				
 											<div class="col-md-12">
-												<div class="km-control-group" required name="title" caption="1. Title {{isBCH ? 'of the initiative':''}}">
+												<div class="km-control-group" required name="title" caption="">
+													<label name="title" class="control-label full-length" required for="title">
+														<span ng-if="isABS">1. Title</span>
+														<span ng-if="isBCH">1. Title of the initiative</span>
+													</label>
 													<div km-textbox-ml required ng-model="document.title" locales="document.header.languages"></div>
 												</div>
 											</div>
 										</div>
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
-											  <div class="km-control-group" name="projectDocument" caption="2. Website address(es)">
+											  <div class="km-control-group" required name="projectDocument" caption="2. Website address(es)">
 												<div class="help-info">Please provide the URL of the website (e.g. http://www.cbd.int) and the name of the website (e.g. 'Convention on Biological Diversity').</div>
-												<div km-link name="projectDocument" ng-model="document.projectDocument" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
+												<div km-link name="projectDocument" required ng-model="document.projectDocument" allow-link="true" identifier="document.header.identifier"></div>
 											  </div>
 											</div>
 										</div>
@@ -54,9 +58,7 @@
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
 											  <div class="km-control-group" required name="contacts" caption="3. Contact person">
-													<!--ToDo need to verify, is this help-block required ? -->
-														<div class="help-block">All BCH common formats are available on the Dashboard of the Submit page in the BCH</div>
-														<div document-selector  ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
+													<div document-selector  ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
 															question="contacts"
 															schema="((schema_s:contact AND type_s:person))"
 															filter="true" skip-government="true">
@@ -75,7 +77,11 @@
 				
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" required name="geographicScope" caption="{{isBCH ? '4':'3'}}. Geographic Scope">
+												<div class="km-control-group" required name="geographicScope" caption="">
+													<label name="geographicScope" class="control-label full-length" required for="geographicScope">
+														<span ng-if="isABS">3. Geographic Scope</span>
+														<span ng-if="isBCH">4. Geographic Scope</span>
+													</label>
 													<div km-select name="geographicScope" required ng-model="document.geographicScope.scope"
 													 placeholder="Please select one option" items="options.geographicScope()" ng-change="clearGeographicSelection()"></div>
 												</div>
@@ -152,7 +158,11 @@
 										
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" required name="status" caption="5. Status {{isBCH ? '':'of the document'}}">
+												<div class="km-control-group" required name="status" caption="">
+													<label name="status" class="control-label full-length" required for="status">
+														<span ng-if="isABS">5. Status of the document</span>
+														<span ng-if="isBCH">5. Status</span>
+													</label>
 													<div km-select name="status" required ng-model="document.status" id="documentStatus"
 													placeholder="Please select one option" items="options.status()"  show-description="true"></div>
 												</div>
@@ -165,12 +175,20 @@
 													<div class=" well well-sm">
 														<div class="row">
 															<div class="col-md-3">
-																<div class="km-control-group" name="startDate" caption="{{isBCH ? 'Starting':'Start'}} date">
+																<div class="km-control-group" name="startDate" caption="">
+																	<label name="startDate" class="control-label full-length" for="startDate">
+																		<span ng-if="isABS">Start date</span>
+																		<span ng-if="isBCH">Starting date</span>
+																	</label>
 																	<div km-date name="startDate" ng-model="document.startDate" ng-change="clearDuration()"></div>
 																</div>
 															</div>
 															<div class="col-md-3">
-																<div class="km-control-group" name="endDate" caption="{{isBCH ? 'Ending':'End'}} date">
+																<div class="km-control-group" name="endDate" caption="">
+																	<label name="endDate" class="control-label full-length" for="endDate">
+																		<span ng-if="isABS">End date</span>
+																		<span ng-if="isBCH">Ending date</span>
+																	</label>
 																	<div km-date name="endDate" ng-model="document.endDate" ng-change="clearDuration()"></div>
 																</div>
 															</div>
@@ -211,7 +229,11 @@
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" required name="organizations" caption="{{isBCH ? '8':'7'}}. Agency(ies) or organisation(s) implementing and/or executing the initiative">
+												<div class="km-control-group" required name="organizations" caption="">
+													<label name="organizations" class="control-label full-length" required for="organizations">
+														<span ng-if="isABS">7. Agency(ies) or organisation(s) implementing and/or executing the initiative</span>
+														<span ng-if="isBCH">8. Agency(ies) or organisation(s) implementing and/or executing the initiative</span>
+													</label>
 												<div class="help-info">In some instances, an agency could play both the implementing and executing roles. In those cases, please select both boxes.</div>
 												<div class="checkbox"><label><input type="checkbox" ng-model="document.isImplementedByAgencies">Implementing agency(ies) or organization(s)</label></div>
 				
@@ -226,8 +248,6 @@
 															<div document-selector name="implementingAgencies" ng-model="document.implementingAgencies" question="implementingAgencies" schema="organization"
 																allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
 															</div>
-				
-															<!-- <organization-selector multiple ng-model="document.implementingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector> -->
 														</div>
 													</div>
 												</div>
@@ -243,7 +263,6 @@
 															<div document-selector ng-model="document.executingAgencies" question="executingAgencies" schema="organization"
 																allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
 															</div>
-															<!-- <organization-selector multiple ng-model="document.executingAgencies" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector> -->
 														</div>
 													</div>
 												</div>
@@ -253,12 +272,11 @@
 													<div class="col-md-12">
 														<div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="Please select the collaborating partner(s)">
 															<div class="help-info">Collaborating partners refer to entities or organizations making significant financial or other contribution to the initiative and/or
-																	actively supporting or collaborating in the implementation of the initiative.</div>
-																
-																<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners" schema="organization"
+																	actively supporting or collaborating in the implementation of the initiative.
+															</div>
+															<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners" schema="organization"
 																	allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
-																</div>
-															<!-- <organization-selector multiple ng-model="document.collaboratingPartners" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector> -->
+															</div>
 														</div>
 													</div>
 												</div>
@@ -270,12 +288,11 @@
 										<div class="row" ng-if="isABS">
 											<div class="col-md-12">
 												<div class="km-control-group" name="contacts" caption="8. Contact person(s)">
-				
 													 <div document-selector ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
-																						question="contacts"
-																						schema="((schema_s:contact AND type_s:person))"
-																						filter="true" skip-government="true"></div>
-																						<!-- (focalpoint authority) OR  -->
+														question="contacts"
+														schema="((schema_s:contact AND type_s:person))"
+														filter="true" skip-government="true">
+													</div>
 												</div>
 											</div>
 										</div>
@@ -298,7 +315,11 @@
 				
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" required name="description" caption="{{isBCH ? '9':'10'}}. Short description of the initiative, including its goals and objectives (max 150 words)">
+												<div class="km-control-group" required name="description" caption="">
+													<label name="description" class="control-label full-length" required for="description">
+														<span ng-if="isABS">10. Short description of the initiative, including its goals and objectives (max 150 words)</span>
+														<span ng-if="isBCH">9. Short description of the initiative, including its goals and objectives (max 150 words)</span>
+													</label>
 													<div km-textbox-ml required ng-model="document.description" rows="3" locales="document.header.languages"></div>
 												</div>
 											</div>
@@ -345,10 +366,17 @@
 								<div class="well no-shadow bg-white">
 										<legend>Information on funding</legend>
 				
-										<div class="row">
+										<div ng-if="isBCH" class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" name="fundingSourceTypes" caption="13. Type(s) of funding source(s)">
 													<div km-term-check show-description="true" name="fundingSourceTypes" ng-model="document.fundingSourceTypes" terms="options.fundingSources()" binding-type="term[]"></div>
+												</div>
+											</div>
+										</div>
+										<div ng-if="isABS" class="row">
+											<div class="col-md-12">
+												<div class="km-control-group" required name="fundingSourceTypes" caption="13. Type(s) of funding source">
+													<div km-term-check required show-description="true" name="fundingSourceTypes" ng-model="document.fundingSourceTypes" terms="options.fundingSources()" binding-type="term[]"></div>
 												</div>
 											</div>
 										</div>
@@ -364,22 +392,30 @@
 				
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" name="corefundingsources" caption="{{isBCH ? '14. Primary funding-source(s)':'14. Core funding-source(s)'}}">
+												<div class="km-control-group" name="corefundingsources" caption="">
+													<label name="corefundingsources" class="control-label full-length" for="corefundingsources">
+														<span ng-if="isABS">14. Core funding-source(s)</span>
+														<span ng-if="isBCH">14. Primary funding-source(s)</span>
+													</label>
 													<div document-selector ng-model="document.coreFundingSources" question="coreFundingSources" schema="organization"
 														allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
 													</div>
-													<!-- <organization-selector multiple ng-model="document.coreFundingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector> -->
+													
 												</div>
 											</div>
 										</div>
 				
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" name="cofinancingsources" caption="{{isBCH ? '15.	Co-funding source(s)':'15. Co-financing source(s)'}}">
+												<div class="km-control-group" name="cofinancingsources" caption="">
+													<label name="cofinancingsources" class="control-label full-length" for="cofinancingsources">
+														<span ng-if="isABS">15. Co-financing source(s)</span>
+														<span ng-if="isBCH">15.	Co-funding source(s)</span>
+													</label>
 													<div document-selector ng-model="document.coFinancingSources" question="coFinancingSources" schema="organization"
 														allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
 													</div>
-													<!-- <organization-selector multiple ng-model="document.coFinancingSources" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector> -->
+													
 												</div>
 											</div>
 										</div>
@@ -424,18 +460,6 @@
 												</div>								
 											</div>
 										</div>
-										<!-- <div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" required name="resultsReference" caption="Clearing-house record containing relevant information">
-													<div km-reference multiple name="resultsReference" ng-model="document.resultsReference" loader="loadRecords(identifier, 'organization')">
-														<div>
-															<div><strong>{{reference.title | lstring}}</strong></div>
-															<div>{{reference.summary | lstring}}</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div> -->
 				
 										<div class="row">
 											<div class="col-md-12">
@@ -480,7 +504,7 @@
 									</section>
 								<section>
 								  <div class="well no-shadow bg-white">
-									<legend>{{isBCH ? '19':'21'}}. Additional information</legend>
+									<legend><span ng-if="isBCH">19</span><span ng-if="isABS">21</span>. Additional information</legend>
 				
 										<div class="row">
 											<div class="col-md-12">
@@ -502,7 +526,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" name="notes">
-													<legend>{{isBCH ? '20':'22'}}. Notes</legend>
+													<legend><span ng-if="isBCH">20</span><span ng-if="isABS">22</span>. Notes</legend>
 													<span class="help-info">
 														The field “Notes” is for personal reference and can be seen only when the record is being edited.
 													</span>

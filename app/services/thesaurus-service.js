@@ -100,7 +100,7 @@ define(['app', 'services/cache-service'], function (app) {
                 mCC_keywords     : 'ABS-A1920-Keywords',
                 cBI_cats         : '579F448B-ECA8-4258-B130-3EAA68056D1F',
                 cBI_types        : 'D935D0C8-F5A5-43B8-9E06-45A57BF3C731',
-                cBI_types1       : '5CA7AACE-CB79-4146-BF12-B3B1955AFF17', // used in BCH CBI scope of activity
+                cbiCpbTypes       : '5CA7AACE-CB79-4146-BF12-B3B1955AFF17', // used in BCH CBI scope of activity
                 cBI_trainingTypes: 'D6E6A4AA-8B88-4AE9-AF5C-9CB852FFE4DC',
                 cBI_audience     : 'AFB155C4-93A6-402C-B812-CFC7488ED651',
                 cBI_fundingsrc   : 'Capacity Building Project Funding Types',
@@ -115,7 +115,7 @@ define(['app', 'services/cache-service'], function (app) {
                 aBSkeyareas      : '2B2A5166-F949-4B1E-888F-A7976E76320B',
 
                 cbdSubjects      : 'CBD-SUBJECTS',
-                maintargetzgroup : '2560F889-AB81-40BF-B7C4-97B34A5B8D75',
+                mainTargetGroup  : '2560F889-AB81-40BF-B7C4-97B34A5B8D75',
                 categories       : '7178400C-B8A6-4794-B363-0366FD324DA7',
                 cpbThematicAreas : '785A6900-10E6-4EAB-9A9E-892F9A367A66',
 
