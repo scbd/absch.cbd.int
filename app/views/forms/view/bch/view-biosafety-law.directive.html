@@ -32,12 +32,12 @@
 			</div>
 			<div ng-if="document.amendmentsDetails">
 				<label>Brief summary of the amendment(s)</label>
-				<div class="km-value">
+				<div compare-val>
 					<km-value-ml value="document.amendmentsDetails" html locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-if="amendedByRecords">
-				<label>This decision has been amended by following decision</label>
+				<label>The law/regulation in this record has been amended by the law(s)/regulation(s) in the following record(s)</label>
 				<div class="km-value">
 					<div ng-repeat="referenced in amendedByRecords">
 						<view-record-reference ng-model="referenced"></view-record-reference>
@@ -115,7 +115,7 @@
 
 			<div ng-if="document.description">
 				<label>Brief description of the document including objective and scope</label>
-				<div>
+				<div compare-val>
 					<km-value-ml value="document.description" html locales="locale"></km-value-ml>
 				</div>
 			</div>
@@ -141,7 +141,7 @@
 				<div class="km-value" ng-if="document.unofficialDocuments" km-link-list 
 					ng-model="document.unofficialDocuments" style="margin-top: 5px;"></div>				
 			</div>
-			<div ng-if="document.documentsInfo">
+			<div compare-val ng-if="document.documentsInfo">
 				<km-value-ml value="document.documentsInfo" html locales="locale"></km-value-ml>
 			</div>
 		</div>
@@ -160,7 +160,7 @@
 			</div>
 			<div ng-if="document.relationDetails">
 				<label>Description of the relationship between the measures</label>
-				<div class="km-value">
+				<div compare-val>
 					<km-value-ml value="document.relationDetails" html locales="locale"></km-value-ml>
 				</div>
 			</div>
