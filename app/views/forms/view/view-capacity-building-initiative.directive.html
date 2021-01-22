@@ -11,15 +11,17 @@
 
         
         <div ng-show="document.title">
-			<label>Title {{isBCH ? 'of the initiative':''}}</label>
-			<div class="km-value km-pre">{{document.title | lstring:locale}}</div>
+			<label>
+				<span ng-if="isABS">Title</span>
+				<span ng-if="isBCH">Title of the initiative</span>
+			</label>
+			<div class="km-value km-pre">
+				<span ng-bind="document.title | lstring:locale"></span>
+			</div>
 		</div>
 		<div ng-if="isBCH" ng-show="document.projectDocument">
 			<label>Website address(es)</label>
-			<div class="km-value" ng-repeat="item in document.projectDocument">
-				<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-			</div>
+			<km-link-list class="km-value" ng-model="document.projectDocument"></km-link-list>
 		</div>
 		<div ng-if="isBCH" ng-show="document.contacts">
 			<label>Contact person(s)</label>
@@ -29,32 +31,34 @@
 		</div>
 		<div ng-show="document.projectNumber">
 			<label>Project number or identifier</label>
-			<div class="km-value km-pre">{{document.projectNumber | lstring:locale}}</div>
+			<div class="km-value km-pre">
+				<span ng-bind="document.projectNumber | lstring:locale"></span>
+			</div>
 		</div>
 
 		<div ng-show="document.geographicScope">
 			<label>Geographic Scope</label>
-			<span class="km-value">{{document.geographicScope.scope | term:locale}} </span>
+			<span class="km-value" ng-bind="document.geographicScope.scope | term:locale"></span>
 		</div>
 
 		<div ng-show="document.geographicScope && (document.geographicScope.regions || document.geographicScope.countries)">
 			<label>Geographical or political/economic group(s) and/or country(ies)</label>
 			<div class="km-value">
                 <ul  class="list" ng-show="document.geographicScope.regions || document.geographicScope.countries">
-                    <li ng-repeat="term in document.geographicScope.regions">{{term | term:locale}} </li>
-                    <li ng-repeat="term in document.geographicScope.countries">{{term | term:locale}} </li>
+                    <li ng-repeat="term in document.geographicScope.regions" ng-bind="term | term:locale"></li>
+                    <li ng-repeat="term in document.geographicScope.countries" ng-bind="term | term:locale"></li>
                 </ul>
             </div>
 		</div>
 
 		<div ng-show="document.geographicScope && document.geographicScope.jurisdiction">
 			<label>Jurisdiction</label>
-			<span class="km-value km-pre">{{document.geographicScope.jurisdiction | lstring:locale}} </span>
+			<span class="km-value km-pre" ng-bind="document.geographicScope.jurisdiction | lstring:locale"></span>
 		</div>
 
 		<div ng-show="document.geographicScope && document.geographicScope.community">
 			<label>Community</label>
-			<span class="km-value km-pre">{{document.geographicScope.community | lstring:locale}} </span>
+			<span class="km-value km-pre" ng-bind="document.geographicScope.community | lstring:locale"></span>
 		</div>
 
 		<div ng-if="isABS">
@@ -88,25 +92,30 @@
 			</div>
 		</div>
 		<div ng-show="document.status">
-			<label>Status {{isBCH ? '':'of the document'}}</label>
-			<span class="km-value">{{document.status | term:locale}} </span>
+			<label><span ng-if="isABS">Status of the document</span> <span ng-if="isBCH">Status</span></label>
+			<span class="km-value" ng-bind="document.status | term:locale"></span>
 		</div>
 
 		<div ng-show="(document.startDate && document.endDate) || document.durationPeriod || document.durationText">
 	  			<div class="row" ng-show="document.startDate && document.endDate">
 	  				<div class="col-md-6">
 	  					<label>Start date</label>
-	  					<div class="km-value km-pre">{{document.startDate | date : 'longDate'}}</div>
+	  					<div class="km-value km-pre">
+							  <span ng-bind="document.startDate | date : 'longDate'"></span>
+							</div>
 	  				</div>
 	  				<div class="col-md-6">
 	  					<label>End date</label>
-	  					<div class="km-value km-pre">{{document.endDate | date : 'longDate'}}</div>
+	  					<div class="km-value km-pre">
+							<span ng-bind="document.endDate | date : 'longDate'"></span>
+						</div>
 	  				</div>
 	  			</div>
 
 	  			<div ng-show="document.durationPeriod || document.durationText">
 	  				<label>Duration</label>
-	  				<div class="km-value km-pre">{{document.durationPeriod}} {{document.durationText | lstring:locale}} </div>
+					  <div class="km-value km-pre"> <span ng-bind="document.durationPeriod"></span> <span ng-bind="document.durationText | lstring:locale"></span>
+					</div>
 	  			</div>
 		</div>
 		<div ng-show="document.activityScope">
@@ -147,24 +156,23 @@
 
 		<div ng-if="isABS" ng-show="document.projectDocument">
 			<label>Project document or document describing the initiative</label>
-			<div class="km-value" ng-repeat="item in document.projectDocument">
-				<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-			</div>
+			<km-link-list class="km-value" ng-model="document.projectDocument"></km-link-list>
 		</div>
 
 	  	<legend>Detailed information</legend>
 
 		<div ng-show="document.description">
 			<label>Short description of the initiative, including its goals and objectives</label>
-			<div class="km-value km-pre">{{document.description | lstring:locale}}</div>
+			<div class="km-value km-pre">
+				<span ng-bind="document.description | lstring:locale"></span>
+			</div>
 		</div>
 
 		<div ng-show="document.targetGroups">
-			<label>{{isBCH ? 'Main':''}} Target group(s)/beneficiary(ies)</label>
+			<label><span ng-if="isABS">Target group(s)/beneficiary(ies)</span> <span ng-if="isBCH">Main target group(s)/beneficiary(ies)</span></label>
 			<div class="km-value">
             <ul class="list">
-				<li ng-repeat="term in document.targetGroups">{{term | term:locale}}</li>
+				<li ng-repeat="term in document.targetGroups" ng-bind="term | term:locale"></li>
 			</ul>
             </div>
 		</div>
@@ -173,7 +181,7 @@
 			<label>Category(ies) of capacity-building activities</label>
 			<div class="km-value">
             <ul class="list">
-				<li ng-repeat="term in document.categories">{{term | term:locale}}</li>
+				<li ng-repeat="term in document.categories" ng-bind="term | term:locale"></li>
 			</ul>
             </div>
 		</div>
@@ -181,31 +189,31 @@
 			<label>General thematic area</label>
 			<div class="km-value">
             <ul class="list">
-				<li ng-repeat="term in document.cpbThematicAreas">{{term | term:locale}}</li>
+				<li ng-repeat="term in document.cpbThematicAreas" ng-bind="term | term:locale"></li>
 			</ul>
             </div>
 		</div>
-
+	<div ng-show="document.fundingSourceTypes || document.coreFundingSources || document.coFinancingSources || document.totalBudget">
 		<legend>Information on funding</legend>
 
 		<div ng-show="document.fundingSourceTypes">
 			<label>Type(s) of funding source</label>
 			<div class="km-value">
             <ul class="list">
-				<li ng-repeat="term in document.fundingSourceTypes">{{term | term:locale}}</li>
+				<li ng-repeat="term in document.fundingSourceTypes" ng-bind="term | term:locale"></li>
 			</ul>
             </div>
 		</div>
 
 		<div ng-show="document.coreFundingSources">
-			<label>{{isBCH ? 'Primary funding-source(s)':'Core funding-source(s)'}}</label>
+			<label><span ng-if="isABS">Core funding-source(s)</span> <span ng-if="isBCH">Primary funding-source(s)</span></label>
 			<div class="km-value" ng-repeat="contact in document.coreFundingSources">
 				<div view-record-reference ng-model="contact" locale="locale"></div>
 			</div>
 		</div>
 
 		<div ng-show="document.coFinancingSources">
-			<label>{{isBCH ? 'Co-funding source(s)':'Co-financing source(s)'}}</label>
+			<label><span ng-if="isABS">Co-financing source(s)</span> <span ng-if="isBCH">Co-funding source(s)</span></label>
 			<div class="km-value" ng-repeat="contact in document.coFinancingSources">
 				<div view-record-reference ng-model="contact" locale="locale"></div>
 			</div>
@@ -213,7 +221,7 @@
 
 		<div ng-show="document.totalBudget">
 			<label>Total budget (amount, in US dollars)</label>
-			<div class="km-value km-pre">{{document.totalBudget | currency:"USD$"}}</div>
+			<div class="km-value km-pre"> <span ng-bind="document.totalBudget | currency:'USD$'"></span></div>
 		</div>
 
 
@@ -222,23 +230,20 @@
 
 			<div ng-show="document.resultsAchievements">
 				<label>Results</label>
-				<div class="km-value km-pre">{{document.resultsAchievements | lstring:locale}}</div>
+				<div class="km-value km-pre"> <span ng-bind="document.resultsAchievements | lstring:locale"></span></div>
 			</div>
 
 			<div ng-show="document.resultsOutputs">
 				<label>Main outputs</label>
-				<div class="km-value" ng-repeat="item in document.resultsOutputs">
-					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-				</div>
+				<km-link-list class="km-value" ng-model="document.resultsOutputs"></km-link-list>
 			</div>
 
 			<div ng-show="document.bestPractices">
 				<label>Best practices and lessons learned</label>
-				<div class="km-value km-pre">{{document.bestPractices | lstring:locale}}</div>
+				<div class="km-value km-pre"> <span ng-bind="document.bestPractices | lstring:locale"></span></div>
 			</div>
 		</div>
-
+	</div>
 
 		<div ng-show="document.absKeyAreas">
 			<legend>Access and Benefit Sharing Clearing-House (ABS-CH)</legend>
@@ -246,7 +251,7 @@
 			<label>Key areas and strategic measures for capacity-building and development</label>
 			<div class="km-value">
             <ul class="list">
-				<li ng-repeat="term in document.absKeyAreas">{{term | term:locale}}</li>
+				<li ng-repeat="term in document.absKeyAreas" ng-bind="term | term:locale"></li>
 			</ul>
             </div>
 		</div>
@@ -260,14 +265,7 @@
 
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website address or attached documents</label>
-				<div class="km-value" >
-					<ul class="list">
-						<li ng-repeat="item in document.relevantDocuments">
-							<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-						</li>
-					</ul>
-				</div>
+				<km-link-list class="km-value" ng-model="document.relevantDocuments"></km-link-list>
 			</div>
 		</div>
 		<div>
