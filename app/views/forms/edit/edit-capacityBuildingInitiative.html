@@ -14,12 +14,12 @@
 
             <div class="alert alert-success alert-dismissable" ng-show="msg">
                 <button aria-hidden="true" class="close" data-dismiss="alert" ng-click="msg=''" type="button">&times;</button>
-                <strong>{{msg}}</strong>
+                <strong><span ng-bind="msg"></span></strong>
             </div>
 
             <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
                 languages="document.header.languages" tab="tab">
-                    <!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required -->
+
                     <edit-form>
 							<form name="editForm" style="margin-top:10px">
 
@@ -51,16 +51,16 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="isBCH">
+										<div class="row" ng-show="isBCH">
 											<div class="col-md-12">
 											  <div class="km-control-group" required name="projectDocument" caption="2. Website address(es)">
 												<div class="help-info">Please provide the URL of the website (e.g. http://www.cbd.int) and the name of the website (e.g. 'Convention on Biological Diversity').</div>
-												<div km-link name="projectDocument" required ng-model="document.projectDocument" allow-link="true" identifier="document.header.identifier"></div>
+												<div km-link name="projectDocument" required ng-model="document.projectDocument" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
 											  </div>
 											</div>
 										</div>
 				
-										<div class="row" ng-if="isBCH">
+										<div class="row" ng-show="isBCH">
 											<div class="col-md-12">
 											  <div class="km-control-group" required name="contacts" caption="3. Contact person">
 													<div document-selector  ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
@@ -99,7 +99,7 @@
 												required caption="Geographical or political/economic group(s) or Country(ies)" style="padding:10px;">
 													<div class="row">
 														<div class="col-md-5" ng-show="!isNational()">
-															<!-- document.geographicScope.regionsOrCountries -->
+
 															<div class="km-control-group"  name="regions" 
 															caption="Geographical or political/economic group(s)">
 																<div km-select multiple required name="geographicalRegions" 
@@ -225,10 +225,11 @@
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="isBCH">
+										<div class="row" ng-show="isBCH">
 											<div class="col-md-12">
 												<div class="km-control-group" required name="activityScope" caption="7. Scope of activity">
-													<div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()" description="true" binding-type="term" show-other="true" required locales="document.header.languages"></div>
+													<div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()" 
+														description="true" binding-type="term" show-other="true" required locales="document.header.languages"></div>
 												</div>
 											</div>
 										</div>
@@ -290,7 +291,7 @@
 										</div>
 				
 				
-										<div class="row" ng-if="isABS">
+										<div class="row" ng-show="isABS">
 											<div class="col-md-12">
 												<div class="km-control-group" name="contacts" caption="8. Contact person(s)">
 													 <div document-selector ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
@@ -353,11 +354,11 @@
 										<div class="row" ng-if="isABS">
 											<div class="col-md-12">
 												<div class="km-control-group" required name="categories" caption="12. Category(ies) of capacity-building activities">
-													<div km-term-check show-description="true" name="categories" required ng-model="document.categories" terms="options.categories()" binding-type="term[]"></div>
+													<div km-term-check show-description="true" name="categories" required ng-model="document.categories" terms="options.absCategories()" binding-type="term[]"></div>
 												</div>
 											</div>
 										</div>
-										<div class="row" ng-if="isBCH">
+										<div class="row" ng-show="isBCH">
 										  <div class="col-md-12">
 											<div class="km-control-group" required name="cpbThematicAreas" caption="12. General thematic area(s)">
 												<div class="help-info">Key areas and strategic measures for capacity-building and development</div>

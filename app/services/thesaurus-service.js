@@ -115,7 +115,7 @@ define(['app', 'services/cache-service'], function (app) {
                 aBSkeyareas      : '2B2A5166-F949-4B1E-888F-A7976E76320B',
 
                 cbdSubjects      : 'CBD-SUBJECTS',
-                mainTargetGroup  : '2560F889-AB81-40BF-B7C4-97B34A5B8D75',
+                mainTargetGroups  : '2560F889-AB81-40BF-B7C4-97B34A5B8D75',
                 categories       : '7178400C-B8A6-4794-B363-0366FD324DA7',
                 cpbThematicAreas : '785A6900-10E6-4EAB-9A9E-892F9A367A66',
 

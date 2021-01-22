@@ -1,7 +1,7 @@
 define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-capacity-building-initiative.directive',
 './organization-selector','services/thesaurus-service'], function (app, _) {
 
-    app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", "underscore", "realm","thesaurusService", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, Thesaurus, Enumerable, _, realm, thesaurusService) {
+    app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "realm","thesaurusService", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, realm, thesaurusService) {
 
         $controller('editController', {$scope: $scope});
         $scope.isABS = realm.is('ABS');
@@ -10,51 +10,44 @@ define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-capacity-buildin
 
         _.extend($scope.options, {
            
-            activityScope: function() {return thesaurusService.getDomainTerms('cbiCpbTypes');},
-            cpbThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas', {other:true, otherType:'lstring'});},
-            targetGroups : function() {return thesaurusService.getDomainTerms('cBI_audience');}, // need to verify
-            bchTargetGroups : function() {return thesaurusService.getDomainTerms('mainTargetGroup', {other:true, otherType:'lstring'});},  //need to verify
-            categories : function() {return thesaurusService.getDomainTerms('cBI_cats');},
-            bchCategories : function() {return thesaurusService.getDomainTerms('categories', {other:true, otherType:'lstring'});},
+            activityScope   : function() {return thesaurusService.getDomainTerms('cbiCpbTypes');},
+            targetGroups    : function() {return thesaurusService.getDomainTerms('cBI_audience');}, 
             geographicScope : function() {return thesaurusService.getDomainTerms('jurisdictions');},
-            aichiTargets : function() {return thesaurusService.getDomainTerms('aichiTargets');},
-            absKeyAreas : function() {return thesaurusService.getDomainTerms('keyAreas');},
-            status : function() {return thesaurusService.getDomainTerms('cBI_status');},
-            cbiTypes : function() {return thesaurusService.getDomainTerms('cBI_types');},
-            languages : thesaurusService.getDomainTerms('unLanguages')
-                .then(function(lang){
-                    return _.sortBy( lang, 'name' );
-                }
-            ),
-
-            // TODO:need to replace it also
-            chmregions: function() { return $q.all([thesaurusService.getDomainTerms('countries'), thesaurusService.getDomainTerms('geographicRegions')])
-                .then(function(data) {
-                    return Enumerable.from($filter('orderBy')(data[0], 'title.en')).union(
-                        Enumerable.from($filter('orderBy')(data[1], 'title.en'))).toArray();
+            aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
+            absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');},
+            status          : function() {return thesaurusService.getDomainTerms('cBI_status');},
+            cbiTypes        : function() {return thesaurusService.getDomainTerms('cBI_types');},
+            absCategories   : function() {return thesaurusService.getDomainTerms('cBI_cats');},
+            bchCategories   : function() {return thesaurusService.getDomainTerms('categories', {other:true, otherType:'lstring'});},
+            bchTargetGroups : function() {return thesaurusService.getDomainTerms('mainTargetGroups', {other:true, otherType:'lstring'});},
+            cpbThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas', {other:true, otherType:'lstring'});},
+            regions	        : function() {return thesaurusService.getDomainTerms('regions').then(function(o){return _.sortBy(o, 'name' );})},
+            countries       : function() {return thesaurusService.getDomainTerms('countries').then(function(o){return _.sortBy(o, 'name' );})},
+            fundingSources	: function() {return thesaurusService.getDomainTerms('cBI_fundingsrc').then(function(o){return _.sortBy(o, 'name' );})},
+            libraries       : function() {return thesaurusService.getDomainTerms('cbdLibraries').then(function(o){return _.sortBy(o, 'name' );})},
+            languages       : function() {return thesaurusService.getDomainTerms('unLanguages').then(function(o){return _.sortBy(o, 'name' );})},
+            countryRegions	: function() {
+                return $q.all([
+                  thesaurusService.getDomainTerms('regions'),
+                  thesaurusService.getDomainTerms('countries')
+                ]).then(function(o) {
+                  var regions   = $filter("orderBy")(o[0], "name");
+                  var countries = $filter("orderBy")(o[1], "name");
+                  var countryRegions = _.union(regions, countries);
+                  return countryRegions;
                 });
-            },
-            fundingSources : function () {
-                return $http.get("/api/v2013/thesaurus/domains/Capacity Building Project Funding Types/terms", { cache: true })
-                .then(function(o){
-                  return Thesaurus.buildTree($filter('orderBy')(o.data, 'name'));
-                });
-            },
-            libraries     : function() { return $http.get("/api/v2013/thesaurus/domains/cbdLibraries/terms",                         { cache: true }).then(function(o){ return Enumerable.From(o.data).Where("$.identifier!='cbdLibrary:bch'").ToArray();});},
-            regions: function() {
-                return $q.all([$http.get("/api/v2013/thesaurus/domains/regions/terms", {cache: true})]).then(function(o) {
-                    return Enumerable.from($filter("orderBy")(o[0].data, "name")).toArray();
-                });
-            },
-            countries: function() {
-                return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", {cache: true})]).then(function(o) {
-                    return Enumerable.from($filter("orderBy")(o[0].data, "name")).toArray();
-                });
-            },
+              },           
+            // need to verify, where we are using this or any other future use ?
+            // chmregions: function() { return $q.all([thesaurusService.getDomainTerms('countries'), thesaurusService.getDomainTerms('geographicRegions')])
+            //     .then(function(data) {
+            //         return Enumerable.from($filter('orderBy')(data[0], 'title.en')).union(
+            //             Enumerable.from($filter('orderBy')(data[1], 'title.en'))).toArray();
+            //     });
+            // },
         });
     $scope.isGlobalOrRegional = function () {
         if($scope.document && $scope.document.geographicScope && $scope.document.geographicScope.scope){
-            return _.contains(['56B8CEB7-56B5-436B-99D9-AA7C4622F326', 'C7D6719B-8AD9-4EB1-A472-B0B858DE0F56'], $scope.document.geographicScope.scope.identifier);
+            return _.includes(['56B8CEB7-56B5-436B-99D9-AA7C4622F326', 'C7D6719B-8AD9-4EB1-A472-B0B858DE0F56'], $scope.document.geographicScope.scope.identifier);
         }
         return false;
     };
@@ -110,7 +103,7 @@ define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-capacity-buildin
     $scope.isProposedOrApproved = function(){
 
         if($scope.document && $scope.document.status)
-            return _.contains(['73E2AC27-D964-487C-A4E6-0997BB27AF01','851B10ED-AE62-4F28-B178-6D40389CC8DB'], $scope.document.status.identifier)
+            return _.includes(['73E2AC27-D964-487C-A4E6-0997BB27AF01','851B10ED-AE62-4F28-B178-6D40389CC8DB'], $scope.document.status.identifier)
         return false;
     }
 
@@ -129,7 +122,6 @@ define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-capacity-buildin
     //
     //============================================================
     $scope.clearDuration = function () {
-        console.log('clear duration');
         if($scope.document && $scope.document.duration)
             $scope.document.duration = undefined;
     };
