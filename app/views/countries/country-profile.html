@@ -64,7 +64,10 @@
                         </div>
                             
                 </div>
-                <div class="well bg-white cp-header" ng-if="countryProfile && countryProfile.profile"> 
+            </div>
+            <div class="col-xs-12" ng-if="countryProfile && countryProfile.profile">
+                <div class="well bg-white cp-header"> 
+                    <legend>Additional information for the country profile</legend>
                     <span ng-bind-html="countryProfile.profile|lstring:locale|toTrusted"></span> 
                 </div>
             </div>
