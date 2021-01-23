@@ -501,7 +501,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         promises.push(thesaurusService.getDomainTerms('allKeywords'         ).then(function(keywords){loopKeywords(keywords, 'allKeywords'          )}));
 
 
-                        promises.push(thesaurusService.getDomainTerms('mSR_elements'         ).then(function(keywords){loopKeywords(keywords, 'mSR_elements'          )}));
+                        promises.push(thesaurusService.getDomainTerms('msrElements'         ).then(function(keywords){loopKeywords(keywords, 'msrElements'          )}));
                                                                         
                         return $q.all(promises);
                     
