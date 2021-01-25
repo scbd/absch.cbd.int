@@ -1,4 +1,4 @@
-﻿define(['app', 'text!views/forms/view/record-loader.directive.html', 
+﻿define(['app', 'lodash', 'text!views/forms/view/record-loader.directive.html', 
 	'components/scbd-angularjs-services/services/main', 'ngSmoothScroll',
 	'components/scbd-angularjs-services/filters/scbd-filters',
 	'./view-history-directive',
@@ -13,7 +13,7 @@
 	'components/scbd-angularjs-controls/form-control-directives/km-link-list',
 	'components/scbd-angularjs-controls/form-control-directives/km-value-bool',
 	'views/forms/view/directives/view-reference-records.directive', 'views/forms/directives/compare-val'
-], function (app, template) {
+], function (app, _, template) {
 
 	app.directive('recordLoader', [function () {
 		return {
@@ -165,7 +165,7 @@
 					$scope.loadDocument = function (documentSchema, documentID, documentRevision) {
 
 						if (documentSchema &&
-							_.contains(["MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "ST", "NT", "MT", "PR", "MTD"], documentSchema.toUpperCase())) {
+							_.includes(["MEETING", "NOTIFICATION", "PRESSRELEASE", "STATEMENT", "NEWS", "NEW", "ST", "NT", "MT", "PR", "MTD"], documentSchema.toUpperCase())) {
 							$scope.loading = true;
 							commonjs.getReferenceRecordIndex(documentSchema, documentID)
 								.then(function (data) {
@@ -175,7 +175,7 @@
 							loadViewDirective(documentSchema);
 						}
 						else if (documentID) {
-							// if(_.contains(['FOCALPOINT', 'NFP'], documentSchema.toUpperCase()))
+							// if(_.includes(['FOCALPOINT', 'NFP'], documentSchema.toUpperCase()))
 							// 	documentID = commonjs.integerToHex(documentID);
 
 							$scope.load(documentID, documentRevision);
@@ -360,7 +360,7 @@
 										
 							var view1 = $element.find('#compareSchemaView .compare-diff');
 
-							_.each(view1, function(e, i){
+							_.forEach(view1, function(e, i){
 								var cssClasses = e.className.split(' ')
 								var compareClass = _.find(cssClasses, function(c){
 									if(/^compare_/.test(c))
@@ -385,9 +385,9 @@
 						if (schema.toLowerCase() == 'modelcontractualclause' || schema.toLowerCase() == 'communityprotocol')
 							lschema = 'resource';
 
-						if (_.contains(["NEWS", "NEW",], lschema.toUpperCase()))
+						if (_.includes(["NEWS", "NEW",], lschema.toUpperCase()))
 							lschema = lschema.toLowerCase();
-						else if (_.contains(["NFP", "ST", "NT", "MT", "PR", "MTD"], lschema.toUpperCase()))
+						else if (_.includes(["NFP", "ST", "NT", "MT", "PR", "MTD"], lschema.toUpperCase()))
 							lschema = $filter("mapSchema")(lschema);
 
 						var schemaDetails = schemaMapping[lschema];
