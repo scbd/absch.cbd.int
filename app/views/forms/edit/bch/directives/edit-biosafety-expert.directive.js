@@ -103,7 +103,7 @@ function (app, _, template) {
 
 					var languageRating = []
 					if($scope.languageRating){
-						_.each($scope.languageRating, function(rating){
+						_.forEach($scope.languageRating, function(rating){
 							if(rating.level)
 								languageRating.push({identifier:rating.identifier, level:rating.level})
 						})

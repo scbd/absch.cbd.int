@@ -247,7 +247,7 @@ function (app, _, nr4Data, nr3Data) {
 
                 var mappings = question.validations||[];
                     
-                _.each(mappings, function(mapping){
+                _.forEach(mappings, function(mapping){
 
                     var dataSection = _.find(nr4Data, {key:mapping.key||question.section});
                     if(dataSection){
@@ -374,7 +374,7 @@ function (app, _, nr4Data, nr3Data) {
         $scope.onStepChange = function(tab){
             if(tab == 'review' || tab == 'publish'){
                 //render all tabs so that validation messages can be rendered.
-                _.each($scope.nr4Tabs, function(t){ t.render=true})
+                _.forEach($scope.nr4Tabs, function(t){ t.render=true})
             }
         }
         function is71aOr71b(){
@@ -400,21 +400,21 @@ function (app, _, nr4Data, nr3Data) {
 
         function transformNr4Data(){
 
-            _.each($scope.nr4Tabs, function(tab){
+            _.forEach($scope.nr4Tabs, function(tab){
                 
-                _.each(tab.sections, function(section){
+                _.forEach(tab.sections, function(section){
 
                     var dataSection = _.find(nr4Data, {key:section.key});
                     
                     _.extend(section, dataSection||{})
 
-                    _.each(section.questions, function(question){
+                    _.forEach(section.questions, function(question){
                        
                         if(question.type!='sub-section')
                             transformQuestion(question)
                         else{
                             question.visible    =   true;
-                            _.each(question.questions, function(subQuestion){
+                            _.forEach(question.questions, function(subQuestion){
                                 transformQuestion(subQuestion);//, question.key1
                             })
                         }
@@ -447,7 +447,7 @@ function (app, _, nr4Data, nr3Data) {
                      var prevReportAnswers = result.data[0];
                      var prevReportQuestions = _(nr3Data).pluck('questions').compact().flatten().value();
 
-                     _.each(previousAnswerMapping, function(mapping, key){
+                     _.forEach(previousAnswerMapping, function(mapping, key){
                         
                         var prevQuestion    = _.find(prevReportQuestions, {key:mapping.prevQuestion})
                         if(prevQuestion){
@@ -493,7 +493,7 @@ function (app, _, nr4Data, nr3Data) {
 
             $scope.setDocument({}).then(function(document){
                 if(document && document.header.identifier){
-                    _.each(document, function(element, key){
+                    _.forEach(document, function(element, key){
                         if(/^Q/.test(key) && _.isArray(element)){//only fields starting with Q
                             $scope.multiTermModel[key] = _.map(element, function(e){ return { identifier : e.value, customValue: e.additionalInformation }});
                         }

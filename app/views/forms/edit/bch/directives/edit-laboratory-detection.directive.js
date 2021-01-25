@@ -36,7 +36,7 @@ function (app, _, template) {
 						.then(function(detectionMethods){
 							return thesaurusService.getTerms('other')
 							.then(function(otherTerm){
-								_.each(detectionMethods, function(method){
+								_.forEach(detectionMethods, function(method){
 
 									if(method.narrowerTerms.length){
 										var otherTermCopy = angular.copy(otherTerm);
@@ -76,7 +76,7 @@ function (app, _, template) {
 					
 					if($scope.detectionMethods){
 						document.detectionMethods = [];
-						_.each($scope.detectionMethods, function(method){
+						_.forEach($scope.detectionMethods, function(method){
 							var newMethod = _.extend({}, method);
 							if(newMethod.customValue && newMethod.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
 								newMethod.identifier = newMethod.identifier.replace(/\#.*/, '')
@@ -97,7 +97,7 @@ function (app, _, template) {
 
 					if(doc.detectionMethods){
 						$scope.detectionMethods=[];
-						_.each(doc.detectionMethods, function(method){
+						_.forEach(doc.detectionMethods, function(method){
 							if(method.customValue && method.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'){
 								method.identifier += '#5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'
 							}

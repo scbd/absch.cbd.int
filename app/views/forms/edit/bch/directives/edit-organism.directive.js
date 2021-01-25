@@ -27,7 +27,7 @@ function (app, _, template) {
 					organismType 	: function(){
 						return thesaurusService.getDomainTerms('typeOfOrganisms').then(function(data){
 							var terms = [];
-							_.each(data, function(d){
+							_.forEach(data, function(d){
 								if( _.includes(d.broaderTerms, '8DAB2400-CF00-44B2-ADCF-49AABF66B9B0'))
 									terms.push(d);
 								else{
