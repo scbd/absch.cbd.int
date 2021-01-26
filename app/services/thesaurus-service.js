@@ -69,21 +69,27 @@ define(['app', 'services/cache-service'], function (app) {
 
             var domainTerms = {
                 other                  : "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
-                jurisdiction           : "7A56954F-7430-4B8B-B733-54B8A5E7FF40", //mSR_jurisdictions, lawJurisdictions, jurisdiction
-                lawJurisdictions       : '7A56954F-7430-4B8B-B733-54B8A5E7FF40',
-                cnaJurisdictions       : "D7BD5BDE-A6B9-4261-B788-16839CCC4F7E", //cNA_jurisdictions, cpJurisdictions , cnaJurisdictions
+                jurisdiction           : "7A56954F-7430-4B8B-B733-54B8A5E7FF40",
+                msrJurisdictions       : '7A56954F-7430-4B8B-B733-54B8A5E7FF40',  // was mSR_jurisdictions, used in abs-left-menu-filters.jason replaced with jurisdictions
+                lawJurisdictions       : '7A56954F-7430-4B8B-B733-54B8A5E7FF40', 
                 cpJurisdictions        : "D7BD5BDE-A6B9-4261-B788-16839CCC4F7E",
-                keywords               : "1A22EAAB-9BBC-4543-890E-DEF913F59E98", //cNA_scope, cnaKeywords, keywords
+                cnaJurisdictions       : 'D7BD5BDE-A6B9-4261-B788-16839CCC4F7E',
+                keywords               : "1A22EAAB-9BBC-4543-890E-DEF913F59E98",
                 cnaKeywords            : '1A22EAAB-9BBC-4543-890E-DEF913F59E98',
-                thematicAreas          : 'CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924', //thematicAreas, absSubjects, allKeywords
+                cnaScope               : '1A22EAAB-9BBC-4543-890E-DEF913F59E98',  // was cNA_scope, not used, duplicate of cnaKeywords and keywords
+                thematicAreas          : 'CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924',  // thematicAreas, absSubjects, allKeywords
                 allKeywords            : 'CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924',
                 absSubjects            : "CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924",
-                keyAreas               : '2B2A5166-F949-4B1E-888F-A7976E76320B', //keyAreas, aBSkeyareas
+                keyAreas               : '2B2A5166-F949-4B1E-888F-A7976E76320B', 
                 aBSkeyareas            : '2B2A5166-F949-4B1E-888F-A7976E76320B',
-                status                 : "ED7CDBD8-7762-4A84-82DD-30C01458A799", //mSR_status
-                typeOfDocuments        : "144CF550-7629-43F3-817E-CACDED34837E", //mSR_types
-                mccResourceTypes       : "840427E5-E5AC-4578-B238-C81EAEEDBDD8", //mCC_types
-                cppResourceTypes       : "ED9BE33E-B754-4E31-A513-002316D0D602", //cPP_types
+                status                 : "ED7CDBD8-7762-4A84-82DD-30C01458A799", 
+                msrStatus              : 'ED7CDBD8-7762-4A84-82DD-30C01458A799', // was mSR_status, used in abs-left-filters.jason replaced with status
+                typeOfDocuments        : "144CF550-7629-43F3-817E-CACDED34837E", 
+                msrTypes               : '144CF550-7629-43F3-817E-CACDED34837E', // was mSR_types, not used, duplicate of typeOfDocuments
+                mccResourceTypes       : "840427E5-E5AC-4578-B238-C81EAEEDBDD8", 
+                mccTypes               : '840427E5-E5AC-4578-B238-C81EAEEDBDD8', // was mCC_types, not used, duplicate of mccResourceTypes
+                cppResourceTypes       : "ED9BE33E-B754-4E31-A513-002316D0D602", 
+                cppTypes               : 'ED9BE33E-B754-4E31-A513-002316D0D602', // was cPP_Types, not used, duplicate of cppResourceTypes
                 absGeneticResourceTypes: '20945FA8-C24C-4AF6-B3D9-367592AFDF48',
                 absGeneticResourceAreas: '545CD54C-CFF3-41E8-A003-FDD278426A3A',
                 absFunctions           : '8102E184-E282-47F7-A49F-4C219B0EE235',
@@ -102,14 +108,21 @@ define(['app', 'services/cache-service'], function (app) {
                 cpbThematicAreas       : '043C7F0D-2226-4E54-A56F-EE0B74CCC984',
                 supplementaryProtocolFunctions: 'CD613FCE-7A2A-475C-85A1-C2D1C208EC0C',
 
-                cbiCats                : '579F448B-ECA8-4258-B130-3EAA68056D1F',    // cBI_cats. updated in CBI
-                cbiTypes               : 'D935D0C8-F5A5-43B8-9E06-45A57BF3C731',    // cBI_types, updated in CBI
-                cbiCpbTypes            : '5CA7AACE-CB79-4146-BF12-B3B1955AFF17',    // cBI_types1, used in BCH CBI scope of activity
-                cbiAudience            : 'AFB155C4-93A6-402C-B812-CFC7488ED651',    // cBI_audience, updated in CBI
-                cbiFundingsrc          : 'Capacity Building Project Funding Types', // cBI_fundingsrc, updated in CBI
-                cbiStatus              : '4E7731C7-791E-46E9-A579-7272AF261FED',    // cBI_status, updated in CBI
-                msrElements            : '50616B56-12F3-4C46-BC43-2DFC26679177',    // mSR_elements, used in search-directive.js
-                
+                cbiCats                : '579F448B-ECA8-4258-B130-3EAA68056D1F',    // was cBI_cats. updated in CBI
+                cbiTypes               : 'D935D0C8-F5A5-43B8-9E06-45A57BF3C731',    // was cBI_types, updated in CBI
+                cbiCpbTypes            : '5CA7AACE-CB79-4146-BF12-B3B1955AFF17',    // was cBI_types1, used in BCH CBI scope of activity
+                cbiAudience            : 'AFB155C4-93A6-402C-B812-CFC7488ED651',    // was cBI_audience, updated in CBI
+                cbiFundingsrc          : 'Capacity Building Project Funding Types', // was cBI_fundingsrc, updated in CBI
+                cbiStatus              : '4E7731C7-791E-46E9-A579-7272AF261FED',    // was cBI_status, updated in CBI
+                msrElements            : '50616B56-12F3-4C46-BC43-2DFC26679177',    // was mSR_elements, used in search-directive.js   
+
+                msrModelcontract       : '48D40B9E207B43948D95A0BA8F0D710F',       // was mSR_modelcontract, not used
+                mccKeywords            : 'ABS-A1920-Keywords',                     // was mCC_keywords, not used
+                cbrLevel               : '1B57D9C3-F5F8-4875-94DC-93E427F3BFD8',   // was cBR_level, not used
+                cbrPurpose             : 'E712C9CD-437E-454F-BA72-E7D20E4C28ED',   // was cBR_purpose, not used
+                cbrFormats             : 'D2D97AB3-4D20-41D4-8CBE-B21C33924823',   // was cBR_formats, not used
+                cbiTrainingTypes       : 'D6E6A4AA-8B88-4AE9-AF5C-9CB852FFE4DC',   // was cBI_trainingTypes, not used
+
                 cbdSubjects            : 'CBD-SUBJECTS',
                 decisionTypes          : 'DecisionTypes',
                 decisionLMOFFPSubject  : 'DecisionLMOFFPSubject',
@@ -128,24 +141,27 @@ define(['app', 'services/cache-service'], function (app) {
                 languages              : "ISO639-2",
                 aichiTargets           : 'AICHI-TARGETS',
                 legislationAgreementTypes : 'Legislation And Agreement Types',
-                
+
+
+                //===========================  Terms to be removed  ==========================\\
+
                 //===============Terms used in other files ==============\\ 
-                mSR_status       : 'ED7CDBD8-7762-4A84-82DD-30C01458A799',   // used in abs-left-filters.jason replaced with status
-                mSR_elements     : '50616B56-12F3-4C46-BC43-2DFC26679177',   // used in search-directive.js replaced with msrElement
-                mSR_jurisdictions: '7A56954F-7430-4B8B-B733-54B8A5E7FF40',   // used in abs-left-menu-filters.jason replaced with jurisdictions
+                mSR_status       : 'ED7CDBD8-7762-4A84-82DD-30C01458A799',   // updated to msrStatus, used in abs-left-filters.jason replaced with status
+                mSR_elements     : '50616B56-12F3-4C46-BC43-2DFC26679177',   // updated to msrElement, used in search-directive.js replaced with msrElement
+                mSR_jurisdictions: '7A56954F-7430-4B8B-B733-54B8A5E7FF40',   // updated to msrJurisdictions, used in abs-left-menu-filters.jason replaced with jurisdictions
                 //===============Terms Not used==========================\\
-                mSR_modelcontract: '48D40B9E207B43948D95A0BA8F0D710F',       // not used
-                mCC_keywords     : 'ABS-A1920-Keywords',                     // not used
-                cBR_level        : '1B57D9C3-F5F8-4875-94DC-93E427F3BFD8',   // not used
-                cBR_purpose      : 'E712C9CD-437E-454F-BA72-E7D20E4C28ED',   // not used
-                cBR_formats      : 'D2D97AB3-4D20-41D4-8CBE-B21C33924823',   // not used
-                cBI_trainingTypes: 'D6E6A4AA-8B88-4AE9-AF5C-9CB852FFE4DC',   // not used
+                mSR_modelcontract: '48D40B9E207B43948D95A0BA8F0D710F',       // updated to msrModelcontract, not used
+                mCC_keywords     : 'ABS-A1920-Keywords',                     // updated to mccKeywords, not used
+                cBR_level        : '1B57D9C3-F5F8-4875-94DC-93E427F3BFD8',   // updated to cbrLevel, not used
+                cBR_purpose      : 'E712C9CD-437E-454F-BA72-E7D20E4C28ED',   // updated to cbrPurpose, not used
+                cBR_formats      : 'D2D97AB3-4D20-41D4-8CBE-B21C33924823',   // updated to cbrFormats, not used
+                cBI_trainingTypes: 'D6E6A4AA-8B88-4AE9-AF5C-9CB852FFE4DC',   // updated to cbiTrainingTypes, not used
                 //===============Duplicates=============================\\
-                cPP_types        : 'ED9BE33E-B754-4E31-A513-002316D0D602',   // not used, duplicate of cppResourceTypes
-                mCC_types        : '840427E5-E5AC-4578-B238-C81EAEEDBDD8',   // not used, duplicate of mccResourceTypes
-                cNA_scope        : '1A22EAAB-9BBC-4543-890E-DEF913F59E98',   // not used, duplicate of cnaKeywords and keywords
-                mSR_types        : '144CF550-7629-43F3-817E-CACDED34837E',   // not used, duplicate of typeOfDocuments
-                cNA_jurisdictions: 'D7BD5BDE-A6B9-4261-B788-16839CCC4F7E',   // not used, duplicate of cpJurisdictions, cnaJurisdictions  
+                cPP_types        : 'ED9BE33E-B754-4E31-A513-002316D0D602',   // updated to cppTypes, not used, duplicate of cppResourceTypes
+                mCC_types        : '840427E5-E5AC-4578-B238-C81EAEEDBDD8',   // updated to mccTypes, not used, duplicate of mccResourceTypes
+                cNA_scope        : '1A22EAAB-9BBC-4543-890E-DEF913F59E98',   // updated to cnaScope, not used, duplicate of cnaKeywords and keywords
+                mSR_types        : '144CF550-7629-43F3-817E-CACDED34837E',   // updated to msrTypes, not used, duplicate of typeOfDocuments
+                cNA_jurisdictions: 'D7BD5BDE-A6B9-4261-B788-16839CCC4F7E',   // cnaJurisdictions was already available, not used
                 //===============updated in CBI=========================\\
                 cBI_cats         : '579F448B-ECA8-4258-B130-3EAA68056D1F',
                 cBI_types        : 'D935D0C8-F5A5-43B8-9E06-45A57BF3C731',
