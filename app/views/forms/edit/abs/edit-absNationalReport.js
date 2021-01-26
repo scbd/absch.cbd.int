@@ -532,7 +532,7 @@ define(['app', 'lodash', 'views/forms/edit/edit' , 'views/forms/edit/document-se
                 $scope.recordsCount = {
                     cpc : 0, ircc : 0
                 };
-                var facet = _.findWhere(govFacets, {government : government.identifier});
+                var facet = _.find(govFacets, {government : government.identifier});
 
                 if(facet)
                     $scope.recordsCount = {
