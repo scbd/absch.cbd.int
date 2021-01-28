@@ -8,13 +8,42 @@
 	<div class="record-body panel-body">
 
 		<document-date></document-date>
-		<legend>General information</legend>
-		<div ng-show="document.amendmentsDetails">
-			<label>Reasons for the amendment</label>
-			<div>
-				<km-value-ml value="document.amendmentsDetails" locales="locale"></km-value-ml>
+
+		<div ng-if="document.isAmendment || amendedByRecords || document.amendmentsDetails">
+			<legend>Amendment</legend>
+			<div ng-if="document.isAmendment">
+				<label>Is this an amendment to a decision or communication already published on the BCH?</label>
+				<div  class="km-value">
+					<km-value-bool value="document.isAmendment" locales="locale"></km-value-bool>
+				</div>
 			</div>
-		</div>
+			<div ng-if="document.amendedRecords">
+				<label>Decision(s) or communication(s) amended</label>
+				<div class="km-value">
+					<ul class="list">
+						<li ng-repeat="item in document.amendedRecords">
+							<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
+						</li>
+					</ul>						
+				</div>
+			</div>
+			<div ng-if="document.amendmentsDetails">
+				<label>Brief summary of the amendment(s)</label>
+				<div compare-val>
+					<km-value-ml value="document.amendmentsDetails" locales="locale" html></km-value-ml>
+				</div>
+			</div>
+			<div ng-if="amendedByRecords">
+				<label>This decision has been amended by following decision</label>
+				<div class="km-value">
+					<div ng-repeat="referenced in amendedByRecords">
+						<view-record-reference ng-model="referenced"></view-record-reference>
+					</div>
+				</div>
+			</div>
+        </div>
+
+		<legend>General information</legend>		
 		<div ng-show="document.government">
 			<label name="country">Country</label>
 			<div class="km-value">
@@ -133,7 +162,7 @@
 				<km-value-bool value="document.appliesToTransboundaryMovement" locales="locale"></km-value-bool>
 			</div>
 		</div>
-		<div ng-show="document.importers">
+		<div ng-show="document.importers && !document.addressesTransboundaryMovement">
 			<label>Applicant’s contact details</label>
 			<div class="km-value">
 				<ul class="list">
@@ -224,54 +253,55 @@
 
 
 	<div ng-show="document.isLmoDecisionForIntentionalIntroduction || document.isLmoDecisionForDirectUse">
-			<legend>Result of the decision</legend>
-			<div ng-show="document.conditions">
-				<label>Conditions</label>
-			<div>
+		<legend>Result of the decision</legend>
+		<div ng-show="document.decisionResult">
+			<label>Result of the decision</label>
+			<div compare-val>
+				<div class="km-value" ng-bind="document.decisionResult | term:locale"></div>
+			</div>
+		</div>
+		<div ng-show="document.conditions">
+			<label>Conditions</label>
+			<div compare-val>
 				<km-value-ml value="document.conditions" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.reasons">
 			<label>Reasons</label>
-			<div>
+			<div compare-val>
 				<km-value-ml value="document.reasons" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-show="document.extensionPeriod">
-				<label>Specify the time extension in days</label>
-				<div>
-					<km-value-ml value="document.extensionPeriod" locales="locale"></km-value-ml>
+			<label>Specify the time extension in days</label>
+			<div compare-val>
+				<km-value-ml value="document.extensionPeriod" locales="locale"></km-value-ml>
 			</div>
 		</div>
-
-			<div ng-show="document.decisionResult">
-				<label>Result of the decision</label>
-				<div class="km-value" ng-bind-html="document.decisionResult | formatDate"></div>
-			</div>
 	</div>
 
 		<!-- =============SECTION   D END ======================== -->
 
 
 		<!-- =============SECTION E START======================== -->
-	<div ng-show="document.isSimplifiedProcedure">
-			<legend>Simplified procedure</legend>
-			<div ng-show="document.movementAllowedUnderA131A">
-				<label>Does the decision specify cases in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import?</label>
+	<div ng-if="isSimplifiedProcedure">
+		<legend>Simplified procedure</legend>
+		<div ng-show="document.movementAllowedUnderA131A!=undefined">
+			<label>Does the decision specify cases in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import?</label>
 			<div class="km-value">
 				<km-value-bool value="document.movementAllowedUnderA131A" locales="locale"></km-value-bool>
 			</div>
 		</div>
 
-		<div ng-show="document.exemptedFromAIA">
+		<div ng-show="document.exemptedFromAIA!=undefined">
 			<label>Does the decision specify that the import of the LMO is exempt from the Advance Informed Agreement (AIA) procedure?</label>
 			<div class="km-value">
 				<km-value-bool value="document.exemptedFromAIA" locales="locale"></km-value-bool>
 			</div>
 		</div>
 
-		<div ng-show="document.appliesToSubsequentImports">
+		<div ng-show="document.appliesToSubsequentImports!=undefined">
 			<label>Does the decision apply to subsequent similar imports of LMOs?</label>
 			<div class="km-value">
 				<km-value-bool value="document.appliesToSubsequentImports" locales="locale"></km-value-bool>
@@ -281,28 +311,29 @@
 	<!--=============SECTION E END======================== -->
 
 	<!--=============SECTION F START======================== -->
-	<div ng-show="document.isTransboundaryMovement">
-			<legend>Illegal transboundary movement or unintentional transboundary movement</legend>
+	<div ng-show="isTransboundaryMovement">
+		<legend>Illegal transboundary movement or unintentional transboundary movement</legend>
 
-		<div ng-show="document.unintentionalTransboundaryMovement">
-			<label>Unintentional transboundary movement (Article 17.1)</label>
+		<div ng-show="document.transboundaryMovementType">
+			<label>Type of transboundary movement</label>
 			<div class="km-value">
-				<km-value-bool value="document.unintentionalTransboundaryMovement" locales="locale"></km-value-bool>
+				<span ng-bind="document.transboundaryMovementType|term:locale"></span>
 			</div>
+		</div>
+
+		<div ng-show="document.releaseInformation">
+			<label>Information on the place where the occurrence and/or release occurred</label>
+			<km-value-ml locales="locale" value="document.releaseInformation"></km-value-ml>
 		</div>
 
 		<div ng-show="document.estimatedQuantities">
 			<label>Available relevant information on the estimated quantities and relevant characteristics and/or traits of the living modified organism</label>
-			<div class="km-value">
-				<km-value-bool value="document.estimatedQuantities" locales="locale"></km-value-bool>
-			</div>
+			<km-value-ml locales="locale" value="document.estimatedQuantities"></km-value-ml>
 		</div>
 
-		<div ng-show="document.releaseCurcumstance">
+		<div ng-show="document.releaseCircumstance">
 			<label>Information on the circumstances of the release</label>
-			<div class="km-value">
-				<span ng-bind="document.releaseCurcumstance|term:locale"></span>
-			</div>
+			<km-value-ml locales="locale" value="document.releaseCircumstance"></km-value-ml>
 		</div>
 		<div ng-show="document.releaseDate">
 			<label>Information on the estimated date of the release</label>
@@ -311,22 +342,17 @@
 
 		<div ng-show="document.lmoUseInformation">
 			<label>Information on the use of the living modified organism in the originating Party</label>
-			<div class="km-value">
-				<span ng-bind="document.lmoUseInformation|term:locale"></span>
-			</div>
+			<km-value-ml locales="locale" value="document.lmoUseInformation"></km-value-ml>
 		</div>
 		<div ng-show="document.adverseEffectInformation">
 			<label>Information about the possible adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, as well as available information about possible risk management measures</label>
-			<div class="km-value">
-				<span ng-bind="document.adverseEffectInformation|term:locale"></span>
-			</div>
+			<km-value-ml locales="locale" value="document.adverseEffectInformation"></km-value-ml>
 		</div>
 
-		<div ng-show="document.otherInformation">
-			<label>Any other relevant information</label>
-			<div class="km-value">
-				<span ng-bind="document.otherInformation|term:locale"></span>
-			</div>
+		<div ng-show="document.otherTransboundryInformation">
+			<label ng-if="document.transboundaryMovementType.identifier=='22B915C4-193E-4087-89ED-D104EEEC4330'">Any other relevant information</label>
+			<label ng-if="document.transboundaryMovementType.identifier=='A9A800DC-F313-4F79-B3E4-768E41088D11'">Brief description where it has not been possible to identify the LMO in question</label>
+			<km-value-ml locales="locale" value="document.otherTransboundryInformation"></km-value-ml>
 		</div>
 
 		<div ng-show="document.pointOfContact">
@@ -339,20 +365,12 @@
 				</ul>
 			</div>
 		</div>
-
-		<div ng-show="document.illegalTransboundaryMovement">
-			<label>Illegal transboundary movement (Article 25.3)"</label>
-			<div  class="km-value">
-				<km-value-bool value="document.illegalTransboundaryMovement" locales="locale"></km-value-bool>
-			</div>
-		</div>
-
 	</div>
 <!--=============SECTION F END========================-->
 
 <!--=============SECTION G START========================-->
 
-	<div ng-if="document.isDecisionOnContainedUseOfLMOs">
+	<div ng-if="isDecisionOnContainedUseOfLMOs">
 		<legend>Information sharing with other databases</legend>
 		<div ng-if="document.isForCommercialUse!=undefined">
 			<label>Is this risk assessment related to an LMO for commercial use</label>
@@ -391,20 +409,20 @@
 
 <!--=============SECTION H start ========================-->
 
-	<div ng-show="document.isDecisionOnTransitOfLMOs">
-			<legend>LMO & risk assessment</legend>
-			<div ng-show="document.modifiedOrganisms">
-				<label>LMO identification</label>
-				<div  class="km-value">
-					<ul class="list">
-						<li ng-repeat="item in document.modifiedOrganisms">
-							<view-record-reference ng-model="item.identifier"></view-record-reference>
-						</li>
-					</ul>
-				</div>
+	<div ng-if="document.modifiedOrganisms || document.riskAssessments">
+		<legend>LMO & risk assessment</legend>
+		<div ng-if="document.modifiedOrganisms">
+			<label>LMO identification</label>
+			<div  class="km-value">
+				<ul class="list">
+					<li ng-repeat="item in document.modifiedOrganisms">
+						<view-record-reference ng-model="item.identifier"></view-record-reference>
+					</li>
+				</ul>
 			</div>
+		</div>
 
-		<div ng-show="document.riskAssessments">
+		<div ng-if="document.riskAssessments">
 			<label>Risk assessment</label>
 			<div  class="km-value">
 				<ul class="list">
@@ -419,17 +437,14 @@
 
 <!--=============SECTION I Start ========================-->
 
-	<div ng-show="document.isShowDecisionDocument || document.isTransboundaryMovement">
-			<label>Decision document</label>
-		<div ng-show="document.documents">
-			<legend>Decision document</legend>
-			<div class="km-value">
-				<ul class="list">
-					<li ng-repeat="item in document.documents">
-						<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-					</li>
-				</ul>
-			</div>
+	<div ng-if="document.documents">
+		<legend>Decision document</legend>
+		<div class="km-value">
+			<ul class="list">
+				<li ng-repeat="item in document.documents">
+					<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 	<!--=============SECTION I END ========================-->
@@ -464,9 +479,8 @@
 	</div>
 	<!--=============SECTION K END ========================-->
 		<div>
-			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+			<view-referenced-records ng-model="document.header.identifier" on-data-fetch="onReferencedRecordsDataFetch(data)"></view-referenced-records>
 		</div>
 	</div>
 	<div document-metadata class="panel-footer"></div>
-</div>
 </div>
