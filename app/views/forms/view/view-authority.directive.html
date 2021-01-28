@@ -61,26 +61,17 @@
 			<view-record-reference ng-repeat="contact in document.contacts" ng-model="contact" locale="locale" class="km-value"></view-record-reference>
 		</div>
 
-		<div ng-show="document.policyBasisForCompetency || document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef">
+		<div ng-if="policyBasisForCompetencyRef.length  > 0">
 			<legend ng-if="document.header.schema!='supplementaryAuthority'" >Legislative, administrative or policy basis for the competence of the Competent National Authority</legend>
 			<legend ng-if="document.header.schema=='supplementaryAuthority'" >Legislative, administrative or policy basis for the competence of the Competent Authority</legend>
-			<div ng-if="document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef">
-				<label>Links to relevant legislative, administrative or policy measure(s) </label>
-				<div class="km-value">
-					<ul class="list">
-						<li ng-repeat="item in (document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef)" >
-							<div view-record-reference ng-model="item.identifier" locale="locale"></div>
-						</li>
-					</ul>
-				</div>
+			<label>Links to relevant legislative, administrative or policy measure(s) </label>
+			<div class="km-value">
+				<ul class="list">
+					<li ng-repeat="item in policyBasisForCompetencyRef">
+						<div view-record-reference ng-model="item" locale="locale"></div>
+					</li>
+				</ul>
 			</div>
-			<div ng-show="document.policyBasisForCompetency || document.absPolicyBasisForCompetency">
-				<label ng-if="document.header.schema!='supplementaryAuthority'">Additional information on the legal, administrative or policy basis for the competence of the Competent National Authority</label>
-				<label ng-if="document.header.schema=='supplementaryAuthority'">Additional information on the legal, administrative or policy basis for the competence of the Competent Authority</label>
-				<div class="km-value" ng-bind-html="(document.policyBasisForCompetency || document.absPolicyBasisForCompetency) | lstring:locale">
-				</div>
-			</div>
-            
 		</div>
 
 		<div ng-if="isABS && (document.responsibilities ||document.responsibleForAll ||document.absResponsibleForAll || document.absFunctions|| document.absJurisdiction||document.absGeneticResourceTypes)">
@@ -133,7 +124,7 @@
 				<view-terms-hierarchy class="km-value" ng-model="document.cpbOrganismTypes" locale="locale" 
 				term-domain="typeOfOrganisms"></view-terms-hierarchy>
 			</div>
-			
+   
 			<div ng-show="document.header.schema=='supplementaryAuthority'">
 				<div ng-if="document.responsibleForAll!==undefined">
 					<label>Is this the only designated Competent Authority for the Supplementary Protocol in the country?</label>
