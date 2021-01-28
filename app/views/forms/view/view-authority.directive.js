@@ -28,8 +28,9 @@ define(['app','lodash', "text!views/forms/view/view-authority.directive.html",
 								$scope.policyBasisForCompetencyRef.push({ identifier:record.identifier_s });
 							});
 						}
-					}).catch( function ( error ) {
-						console.log( 'ERROR:', error );
+					})
+					.catch( function ( error ) {
+						throw error;
 					});
 				}
 				if(realm.is('ABS'))		$scope.isABS=true;
