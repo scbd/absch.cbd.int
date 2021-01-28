@@ -235,7 +235,7 @@
         "contact": {
           "type": "national",
           "title": {
-            "en": "Contact"
+            "en": "Contacts"
           },
           "description": {
             "en": "Contact details of a person or organization."
