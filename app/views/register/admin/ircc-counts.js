@@ -91,8 +91,8 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                                     nationalRecords.NumberOfIRCC.commercial         =  countIncludes(data, 'usages_EN_ss', 'Commercial');
                                     nationalRecords.NumberOfIRCC.nonCommercial      =  countIncludes(data, 'usages_EN_ss', 'Non-Commercial');
                                     nationalRecords.NumberOfIRCC.commercialAndNonCommercial = _.filter(data, function(doc){
-                                                            return _.contains(doc.usages_EN_ss, 'Commercial')
-                                                                && _.contains(doc.usages_EN_ss, 'Non-Commercial');
+                                                            return _.includes(doc.usages_EN_ss, 'Commercial')
+                                                                && _.includes(doc.usages_EN_ss, 'Non-Commercial');
                                                         }).length
                                     nationalRecords.NumberOfIRCC.confidential       =  count(data, 'usagesConfidential_b', true);
                                     nationalRecords.NumberOfIRCC.nonConfidential    =  count(data, 'usagesConfidential_b', false);
@@ -101,7 +101,7 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                                     ///////GrantedTo
                                     //////////////////////////////
                                     nationalRecords.GrantedTo.national = _.filter(data, function(doc){
-                                                            return _.contains(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s);
+                                                            return _.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s);
                                                         }).length
                                     nationalRecords.GrantedTo.confidential       =  count(data, 'entitiesToWhomPICGrantedConfidential_b', true);
                                     nationalRecords.GrantedTo.nonConfidential    =  count(data, 'entitiesToWhomPICGrantedConfidential_b', false);
@@ -110,27 +110,27 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                                     ///////UsageAndGranted
                                     //////////////////////////////
                                     nationalRecords.UsageAndGranted.commercialNational = _.filter(data, function(doc){
-                                        return _.contains(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
-                                                && _.contains(doc.usages_EN_ss, 'Commercial');
+                                        return _.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                                && _.includes(doc.usages_EN_ss, 'Commercial');
                                     }).length
                                     nationalRecords.UsageAndGranted.nonCommercialNational = _.filter(data, function(doc){
-                                        return _.contains(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
-                                            && _.contains(doc.usages_EN_ss, 'Non-Commercial');
+                                        return _.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                            && _.includes(doc.usages_EN_ss, 'Non-Commercial');
                                     }).length;            
                                     nationalRecords.UsageAndGranted.commercialForeign = _.filter(data, function(doc){
-                                        return !_.contains(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
-                                                && _.contains(doc.usages_EN_ss, 'Commercial');
+                                        return !_.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                                && _.includes(doc.usages_EN_ss, 'Commercial');
                                     }).length
                                     nationalRecords.UsageAndGranted.nonCommercialForeign = _.filter(data, function(doc){
-                                        return !_.contains(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
-                                            && _.contains(doc.usages_EN_ss, 'Non-Commercial');
+                                        return !_.includes(doc.entitiesToWhomPICGrantedCountry_EN_ss, doc.government_EN_s)
+                                            && _.includes(doc.usages_EN_ss, 'Non-Commercial');
                                     }).length;
                                     
                                     ///////////////////////////
                                     ///////Subject Matter
                                     //////////////////////////
-                                    _.each(data, function(doc){
-                                        _.each(doc.keywords_EN_ss, function(keyword){
+                                    _.forEach(data, function(doc){
+                                        _.forEach(doc.keywords_EN_ss, function(keyword){
                                             if(!nationalRecords.subjectMatter[keyword])
                                                 nationalRecords.subjectMatter[keyword]=0;
                                             nationalRecords.subjectMatter[keyword] +=1;
@@ -139,7 +139,7 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                                     
                                     nationalRecords.userCountries = {};
                                     nationalRecords.GrantedTo.foreign = 0;
-                                    _.each(data, function(doc){
+                                    _.forEach(data, function(doc){
                                             ///////////////////////////
                                             ///////Top Countries
                                             //////////////////////////
@@ -151,7 +151,7 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                                             ///////Top user countries
                                             //////////////////////////
                                             if(doc.entitiesToWhomPICGrantedCountry_EN_ss){
-                                                _.each(doc.entitiesToWhomPICGrantedCountry_EN_ss, function(country){
+                                                _.forEach(doc.entitiesToWhomPICGrantedCountry_EN_ss, function(country){
 
                                                     if( doc.government_EN_s!=country){
                                                         if(!nationalRecords.userCountries[country])
@@ -183,7 +183,7 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
 
                 function countIncludes(data, field, value){
                     return _.filter(data, function(doc){
-                        return _.contains(doc[field], value);
+                        return _.includes(doc[field], value);
                     }).length
                 }
                 function count(data, field, value){
@@ -216,7 +216,7 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                                     return country.isInbetweenParty;
 
                              });
-                            var countryCodes = _.pluck(countries, 'code');
+                            var countryCodes = _.map(countries, 'code');
                             if(countryCodes.length == 0)
                                 countryCodes.push('n-a');
 
@@ -339,7 +339,7 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                     .then(function(results) {
                         var data = { labels: [], data: [] };
                         var facets = searchService.readFacets(results[0].data.facet_counts.facet_ranges[($scope.filters.dateType||'createdDate_dt').replace(':','')].counts)
-                        _.each(facets, function(facet, i) {
+                        _.forEach(facets, function(facet, i) {
                             var label = moment.utc(facet.symbol).format('MMMM YYYY');
                             data.labels.push(label)
                             var prevCount =0;
@@ -349,7 +349,7 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                             data.data.push(facet.count+prevCount);
                             var tableData = options.type == 'national' ? $scope.nationalRecordsTableData : $scope.referenceRecordsTableData;
 
-                            var tableRow = _.findWhere(tableData , { label : label }) || {label : label, new:true};
+                            var tableRow = _.find(tableData , { label : label }) || {label : label, new:true};
                             if(options.schema) 
                                 tableRow[options.schema] = facet.count+prevCount;
                             else

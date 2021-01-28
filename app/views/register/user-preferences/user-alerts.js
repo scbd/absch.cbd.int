@@ -136,7 +136,7 @@ define(['app',
                         return $scope.systemAlertsSubscription &&
                             _.some($scope.systemAlertsSubscription, function (alert) {
                                 return alert.isSystemAlert &&
-                                    _.contains(_.pluck(alert.filters, 'id'), event);
+                                    _.includes(_.map(alert.filters, 'id'), event);
                             });
                     };
 
@@ -202,7 +202,7 @@ define(['app',
                         if ($scope.systemAlertsSubscription) {
                             var event = _.find($scope.systemAlertsSubscription, function (alert) {
                                 return alert.isSystemAlert &&
-                                    _.contains(_.pluck(alert.filters, 'id'), event);
+                                    _.includes(_.map(alert.filters, 'id'), event);
                             })
                             IGenericService.delete('v2016', 'me/subscriptions', event._id)
                                 .then(function (event) {
@@ -292,7 +292,7 @@ define(['app',
                             function updateRecord(document, delay) {
                                 if (!$scope.userFilters)
                                     $scope.userFilters = [];
-                                var existing = _.findWhere($scope.userFilters, {
+                                var existing = _.find($scope.userFilters, {
                                     '_id': document._id
                                 });
                                 if (!existing) {

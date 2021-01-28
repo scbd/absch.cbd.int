@@ -1,6 +1,6 @@
 define(['app', 
 "text!views/measure-matrix/measure-matrix-elements-derective.html",
-'underscore','angular', 'js/common', 
+'lodash','angular', 'js/common',
 'views/directives/block-region-directive'], function(app, template, _, angular) {
 
     app.directive("measureMatrixElements", function() {
@@ -106,7 +106,7 @@ define(['app',
                             other        = data[1].data||data[1];
                             //main other
                             //$scope.terms.push(angular.copy(other));
-                            _.each(elementsForOthers, function(element, key){
+                            _.forEach(elementsForOthers, function(element, key){
 
                                 if(!_.some($scope.terms, {identifier:other.identifier + '#' + key})){
 
@@ -142,7 +142,7 @@ define(['app',
                             if ($scope.binding) {
                                 if(!$scope.binding.geneticResources || !$scope.binding.geneticResources.elements || !$scope.binding.geneticResources.answer){
                                     //delete  from list
-                                   geneticResource = _.findWhere($scope.terms, {identifier : 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'});
+                                   geneticResource = _.find($scope.terms, {identifier : 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'});
                                    if(!geneticResourceTermCopy && geneticResource)//for single MM when amending msr has GR
                                         geneticResourceTermCopy = geneticResource;
 
@@ -191,7 +191,7 @@ define(['app',
                                         if($scope.binding.relevantElements[i].section)
                                             oNewSections[identifier] = $scope.binding.relevantElements[i].section;
 
-                                        var elementTerm = _.findWhere($scope.terms, {identifier:identifier});
+                                        var elementTerm = _.find($scope.terms, {identifier:identifier});
                                         if(elementTerm)
                                             elementTerm.answer = $scope.binding.relevantElements[i].answer;
                                     }
@@ -230,9 +230,9 @@ define(['app',
                                     })
                                     $q.all(measureAmendedBy)
                                       .then(function(data) {
-                                          _.each(data, function(measure){
+                                          _.forEach(data, function(measure){
                                             var measureId;
-                                            measureId = _.findWhere($scope.document.measureAmendedBy, {'identifier_s': measure.data.body.header.identifier});
+                                            measureId = _.find($scope.document.measureAmendedBy, {'identifier_s': measure.data.body.header.identifier});
                                             if(measureId){
                                                 measureId.measure = measure.data.body;
                                                 measureId.measure.documentID = measure.data.documentID;
@@ -252,7 +252,7 @@ define(['app',
                             }
                             else if ($.isArray($scope.document)){
 
-                                _.each($scope.document, function(measure){
+                                _.forEach($scope.document, function(measure){
 
                                     //var
 
@@ -299,25 +299,25 @@ define(['app',
                         if(measure.absMeasures.geneticResources && measure.absMeasures.geneticResources.elements) {                            
                             // var geneticResource = measure.absMeasures.geneticResourcesElements;
                             var identifier = newMeasureElement({identifier:'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', section:{}}, measure);
-                            grElement = _.findWhere($scope.terms, {'identifier': identifier});
+                            grElement = _.find($scope.terms, {'identifier': identifier});
                             grElement.geneticResourcesTerms = measure.absMeasures.geneticResources.elements;
                         };
-                        _.each(measure.absMeasures.relevantElements, function(measureElement) {
+                        _.forEach(measure.absMeasures.relevantElements, function(measureElement) {
                             newMeasureElement(measureElement, measure);
                         });
                     }
                     if($scope.type=='single'){
 
-                        _.each(measure.measureAmendedBy, function(measureElement) {
+                        _.forEach(measure.measureAmendedBy, function(measureElement) {
                             if(measureElement.measure && measureElement.measure.absMeasures){
                                 if(measureElement.measure.absMeasures.geneticResources && measureElement.measure.absMeasures.geneticResources.elements) {    
                                     if(geneticResourceTermCopy)
                                         $scope.terms.push(geneticResourceTermCopy);
                                     var identifier = newMeasureElement({identifier:'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F', section:{}}, measureElement.measure, 'amended', measureElement.measure.header.identifier);
-                                    grElement = _.findWhere($scope.terms, {'identifier': identifier});
+                                    grElement = _.find($scope.terms, {'identifier': identifier});
                                     grElement.geneticResourcesTerms = measureElement.measure.absMeasures.geneticResources.elements;
                                 };
-                                _.each(measureElement.measure.absMeasures.relevantElements, function(element) {
+                                _.forEach(measureElement.measure.absMeasures.relevantElements, function(element) {
                                     newMeasureElement(element, measureElement.measure, 'amended', measure.header.identifier);
                                 });
                             }
@@ -336,7 +336,7 @@ define(['app',
 
                     $scope.terms.push(elementMeasure);
 
-                    var parentElement = _.findWhere($scope.terms, {'identifier': parent});
+                    var parentElement = _.find($scope.terms, {'identifier': parent});
 
                     if(!parentElement.narrowerTerms)
                         parentElement.narrowerTerms = [];
@@ -362,7 +362,7 @@ define(['app',
                             identifier += '#' + measureElement.parent;
                     }
 
-                    var element = _.findWhere($scope.terms, {'identifier': identifier});
+                    var element = _.find($scope.terms, {'identifier': identifier});
 
                     if(!element)
                         return;
@@ -417,9 +417,9 @@ define(['app',
 
                 function updateProperties(terms, level) {
 
-                    _.each(terms, function(term) {
+                    _.forEach(terms, function(term) {
 
-                        var element = _.findWhere($scope.terms, {
+                        var element = _.find($scope.terms, {
                             identifier: term.identifier
                         });
                         term.level = level;
@@ -436,7 +436,7 @@ define(['app',
                                 doc = _.find($scope.document , function(measure){return measure.document && measure.document.header.identifier==element.measureIdentifier;});
                                 if(doc && doc.document.amendedMeasures){
                                     amendedForTitle='';
-                                    _.each(doc.document.amendedMeasures, function(msr){
+                                    _.forEach(doc.document.amendedMeasures, function(msr){
                                         var amendedFor = _.find($scope.document , function(measure){return measure.document.header.identifier== msr.identifier;});
                                         if(amendedFor)
                                             amendedForTitle += amendedFor.rec_title;
@@ -447,7 +447,7 @@ define(['app',
                                 term.createdDate_dt = doc.createdDate_dt;
                             }
                             else{
-                                doc ={document: _.first($scope.document.measureAmendedBy)};
+                                doc ={document: _.head($scope.document.measureAmendedBy)};
                             }
 
                             term.measure = {identifier: doc.document.identifier_s||doc.identifier_s,
@@ -501,7 +501,7 @@ define(['app',
                 };
 
                 $scope.showHideAll = function(collapse){
-                    _.each($scope.rootTerms, function(term){
+                    _.forEach($scope.rootTerms, function(term){
                         term.showUp = collapse;
                         if(collapse)
                             $element.find('#'+term.identifier).hide();
@@ -551,10 +551,10 @@ define(['app',
 
                 function updateABSMeasureHierarchy(data){
 
-                    _.each(data, function(element){
+                    _.forEach(data, function(element){
                         //change hierarchy are required by abs measure matrix
                         if(element.identifier == 'A896179F-833E-4F76-B3F4-81CC95C66592'){// Mutually agreed terms
-                            var benefitSharing = _.findWhere(data, {identifier:'9847FA8A-16C3-4466-A378-F20AF9FF883B'})
+                            var benefitSharing = _.find(data, {identifier:'9847FA8A-16C3-4466-A378-F20AF9FF883B'})
                             if(benefitSharing)
                                 benefitSharing.narrowerTerms = element.narrowerTerms;
                         }
