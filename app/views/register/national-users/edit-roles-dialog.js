@@ -1,4 +1,4 @@
-define([], function() {
+define(['lodash'], function(_) {
 
     return ['$scope', 'user', 'manageableRoles', 'governmentPARole', function ($scope, user, manageableRoles, governmentPARole) {
 
@@ -64,7 +64,7 @@ define([], function() {
             return false;
         }
         _ctrl.updateGovernmentPA = function(role) {
-            if(_.contains(['AbsPublishingAuthorities', 'AbsPublishingAuthorities-dev', 'AbsPublishingAuthorities-trg'],userRole.code)){
+            if(_.includes(['AbsPublishingAuthorities', 'AbsPublishingAuthorities-dev', 'AbsPublishingAuthorities-trg'],userRole.code)){
             // if(_.contains(['AbsNationalAuthorizedUser', 'AbsNationalAuthorizedUser-dev', 'AbsNationalAuthorizedUser-trg'],role.code)){
                 if(_ctrl.selectedRoles[role.roleId])
                     governmentPARole = role;

@@ -180,7 +180,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 $scope.showTexts = function(governments, field, type) {
                     
                     if(!governments)
-                        governments = _.pluck($scope.reports, 'government');
+                        governments = _.map($scope.reports, 'government');
                     
                     governments = _.map(governments, function(g) { return g.identifier || g; } );
 
@@ -313,7 +313,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
 
                     var query = {
                         reportType : previousQuestionsMapping.schema,
-                        regions : _.pluck(reports, 'government'),
+                        regions : _.map(reports, 'government'),
                         questions : [previousQuestionsMapping[question.key]]
                     };
 
@@ -558,7 +558,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                         // console.log(additionalInfo)
                         data.question = key;
                         if(additionalInfo){
-                            _.each(additionalInfo, function(info, key){
+                            _.forEach(additionalInfo, function(info, key){
                                 if(info){
                                     // console.log(additionalInfo[key],info, key);
                                     if(!data['additionalInfo'][key+'_sum'])
@@ -661,7 +661,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                         return;
 
                     var answers = {};
-                    _.each(additionalInfo, function(info){
+                    _.forEach(additionalInfo, function(info){
                         answers[info.field] = report[key][info.field]; 
                     });
                     return answers;
