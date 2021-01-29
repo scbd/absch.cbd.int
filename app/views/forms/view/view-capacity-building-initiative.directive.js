@@ -16,12 +16,11 @@ app.directive("viewCapacityBuildingInitiative", [function () {
 			heading	:	"@",
 			shortHeading : "@"
 		},
-		controller : ["$scope", "IStorage", "$http", function ($scope, storage, $http)
+		controller : ["$scope", "IStorage", "$http","realm", function ($scope, storage, $http, realm)
 		{
 
-			
-			
-
+			$scope.isABS = realm.is('ABS');
+       		$scope.isBCH = realm.is('BCH'); 
             $scope.options  = {
 
     			regions       : function() { return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }),

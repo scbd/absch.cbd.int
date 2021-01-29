@@ -25,7 +25,7 @@
 						</li>
 					</ul>
 					<span ng-if="!error.properties">
-						<a rel="noopener" translation-url href="#" ng-click="jumpTo(error.property)">{{::error.propertyLabel}}</a>
+						<a rel="noopener" translation-url href="#" ng-click="jumpTo(error.property)">{{::error.propertyLabel.trim()}}</a>
 					</span>
 				</li>
 			</ul>

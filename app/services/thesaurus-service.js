@@ -98,13 +98,13 @@ define(['app', 'services/cache-service'], function (app) {
                 cNA_jurisdictions: 'D7BD5BDE-A6B9-4261-B788-16839CCC4F7E',
                 cNA_scope        : '1A22EAAB-9BBC-4543-890E-DEF913F59E98',
                 mCC_keywords     : 'ABS-A1920-Keywords',
-                cBI_cats         : '579F448B-ECA8-4258-B130-3EAA68056D1F',
-                cBI_types        : 'D935D0C8-F5A5-43B8-9E06-45A57BF3C731',
-                cBI_types1       : '5CA7AACE-CB79-4146-BF12-B3B1955AFF17',
+                cbiCats         : '579F448B-ECA8-4258-B130-3EAA68056D1F',
+                cbiTypes        : 'D935D0C8-F5A5-43B8-9E06-45A57BF3C731',
+                cbiCpbTypes       : '5CA7AACE-CB79-4146-BF12-B3B1955AFF17', // used in BCH CBI scope of activity
                 cBI_trainingTypes: 'D6E6A4AA-8B88-4AE9-AF5C-9CB852FFE4DC',
-                cBI_audience     : 'AFB155C4-93A6-402C-B812-CFC7488ED651',
-                cBI_fundingsrc   : 'Capacity Building Project Funding Types',
-                cBI_status       : '4E7731C7-791E-46E9-A579-7272AF261FED',
+                cbiAudience     : 'AFB155C4-93A6-402C-B812-CFC7488ED651',
+                cbiFundingsrc   : 'Capacity Building Project Funding Types',
+                cbiStatus       : '4E7731C7-791E-46E9-A579-7272AF261FED',
                 cBR_level        : '1B57D9C3-F5F8-4875-94DC-93E427F3BFD8',
                 cBR_purpose      : 'E712C9CD-437E-454F-BA72-E7D20E4C28ED',
                 cBR_formats      : 'D2D97AB3-4D20-41D4-8CBE-B21C33924823',
@@ -115,6 +115,9 @@ define(['app', 'services/cache-service'], function (app) {
                 aBSkeyareas      : '2B2A5166-F949-4B1E-888F-A7976E76320B',
 
                 cbdSubjects      : 'CBD-SUBJECTS',
+                mainTargetGroups  : '2560F889-AB81-40BF-B7C4-97B34A5B8D75',
+                categories       : '7178400C-B8A6-4794-B363-0366FD324DA7',
+                cpbThematicAreas : '785A6900-10E6-4EAB-9A9E-892F9A367A66',
 
 
                 decisionTypes                 : 'DecisionTypes',
