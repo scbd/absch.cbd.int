@@ -41,15 +41,11 @@
             will be removed from the DOM when we remove the directive container.
         -->
         <style type="text/css">
-            div.m-app-loading {
-                position: fixed ;
-            }
             div.m-app-loading div.animated-container {
                 background-color: #FFFFFF ;
                 bottom: 0px ;
                 left: 0px ;
                 opacity: 1.0 ;
-                position: fixed ;
                 right: 0px ;
                 top: 0px ;
                 z-index: 999999 ;
@@ -95,11 +91,22 @@
                 </span>
                
                 <h1>
-                 <br>
-                   <span class="color-black">loading the <br>Biosafety Clearing-House   </span>
-                   <br> version <%=appVersion%>
-                   <br> <br>
-                    <i class="fa fa-spin fa-3x fa-circle-o-notch"></i> 
+                    <br/>                  
+                   <div class="color-black" id="appLoadingMessage">
+                        loading the <br/>ABS Clearing-House                        
+                    </div>
+                    version <%=appVersion%>
+                    <div class="color-red" id="appLoadingError" style="display: none;">
+                        <span>Error loading the <br/>ABS Clearing-House   </span>
+                        <br/>
+                        <span>Please contact the Secretariat</span>
+                        <div>
+                            <button type="button" class="btn btn-danger" id="showError">Show detail error</button>
+                            <code style="display: none;word-break: break-all;color: #fff;background-color: #d9534f;border-color: #d43f3a;" id="detailErrorMessage"></code>                            
+                        </div>
+                    </div>
+                    <br/><br/>
+                    <i class="fa fa-spin fa-3x fa-circle-o-notch app-loading-icon"></i> 
                 </h1>
             </div>
         </div>
