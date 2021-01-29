@@ -64,6 +64,7 @@ define(['app', 'services/cache-service'], function (app) {
             }
             var terms = {
                 other: "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                eu   : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e"
             }
 
             var domainTerms = {
@@ -140,7 +141,8 @@ define(['app', 'services/cache-service'], function (app) {
                 genders                       : 'Genders',
                 areasOfExpertise              : 'E4D79BA6-12F8-48D5-B396-25951FA1E07E',
                 cpbThematicAreas              : '043C7F0D-2226-4E54-A56F-EE0B74CCC984',
-                lawJurisdictions              : '5001DC0F-908A-4983-8962-EBF4FC18F245' //contains extra term which is in use for abs, need to removed for bch
+                lawJurisdictions              : '7A56954F-7430-4B8B-B733-54B8A5E7FF40', //contains extra term which is in use for abs, need to removed for bch
+                transboundaryMovementTypes    : 'TransboundaryMovementTypes'
             }
         }
     }]);
