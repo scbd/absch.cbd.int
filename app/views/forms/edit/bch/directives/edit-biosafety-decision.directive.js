@@ -14,8 +14,6 @@ function (app, _, template) {
 			},
 			link: function($scope, $element, $attr){
                 
-				$scope.scientificNameSynonyms = [{}];
-				$scope.commonNames = [{}];
 				$scope.container        = $attr.container;
     			$scope.isDialog         = $attr.isDialog;  
 				$scope.type 			= $attr.documentType; 
@@ -170,10 +168,8 @@ function (app, _, template) {
                         if(decision.identifier == decisionSubjects.DEC_8_5){ $scope.isDecisionOnContainedUseOfLMOs = true;}
                         if(decision.identifier == decisionSubjects.DEC_8_6){ $scope.isUnintentionalTransboundaryMovement = true;}
                         if(decision.identifier == decisionSubjects.DEC_8_7){ $scope.isUnintentionalTransboundaryMovement = true;}
-                        // if(decision.identifier == decisionSubjects.DEC_8_7){ $scope.isUnintentionalMovementOfLMOs = true;}
-                        // if(decision.identifier == decisionSubjects.DEC_8_9){ $scope.isIllegalMovementOfLMOs= true;}
                         if(_.includes(identifiersForSectionI,decision.identifier)){ $scope.isShowDecisionDocument = true;}
-                        // if(_.includes(identifiersForSectionF,decision.identifier)){ $scope.isTransboundaryMovement = true;}
+                        
                     }
 
 
