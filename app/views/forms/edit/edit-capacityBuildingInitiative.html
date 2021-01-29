@@ -1,6 +1,6 @@
 ﻿<style>
-	.full-length{
-    display: block;
+	.km-control-group .control-label{
+		display: block;
 }
 </style>
 <div class="md-whiteframe-z2" ng-controller="editCapacityBuildingInitiative">
@@ -43,7 +43,7 @@
 				
 											<div class="col-md-12">
 												<div class="km-control-group" required name="title" caption="">
-													<label name="title" class="control-label full-length" required for="title">
+													<label name="title" class="control-label" required for="title">
 														<span ng-if="isABS">1. Title</span>
 														<span ng-if="isBCH">1. Title of the initiative</span>
 													</label>
@@ -83,7 +83,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" required name="geographicScope" caption="">
-													<label name="geographicScope" class="control-label full-length" required for="geographicScope">
+													<label name="geographicScope" class="control-label" required for="geographicScope">
 														<span ng-if="isABS">3. Geographic Scope</span>
 														<span ng-if="isBCH">4. Geographic Scope</span>
 													</label>
@@ -95,8 +95,7 @@
 										<div class="row" ng-show="document.geographicScope.scope && (isGlobalOrRegional() || isNational())">
 											
 												<div class="col-md-12">
-												<div class="km-control-group well well-sm" name="regionsOrCountries"
-												required caption="Geographical or political/economic group(s) or Country(ies)" style="padding:10px;">
+												<div class="km-control-group well well-sm" name="regionsOrCountries" required style="padding:10px;">
 													<div class="row">
 														<div class="col-md-5" ng-show="!isNational()">
 
@@ -111,7 +110,7 @@
 															 And / Or
 														</div>
 														<div class="col-md-5">
-															<div class="km-control-group"  name="countries" caption="Country(ies)">
+															<div class="km-control-group" required name="countries" caption="Country(ies)">
 																<div km-select multiple required name="geographicalCountries" ng-model="document.geographicScope.countries" placeholder="Please select one option" items="options.countries()"></div>
 															</div>
 														</div>
@@ -127,6 +126,11 @@
 											</div>
 										</div>
 										<div class="row" ng-show="isCommunity()">
+											<div class="col-md-12">
+												<div class="km-control-group" required name="countries" caption="Country(ies)">
+													<div km-select multiple required name="geographicalCountries" ng-model="document.geographicScope.countries" placeholder="Please select one option" items="options.countries()"></div>
+												</div>
+											</div>
 											<div class="col-md-12">
 												<div class="km-control-group" required="isCommunity()" name="community" caption="Community">
 													<div km-textbox-ml required="isCommunity()" name="community" ng-model="document.geographicScope.community" placeholder="" locales="document.header.languages"></div>
@@ -164,7 +168,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" required name="status" caption="">
-													<label name="status" class="control-label full-length" required for="status">
+													<label name="status" class="control-label" required for="status">
 														<span ng-if="isABS">5. Status of the document</span>
 														<span ng-if="isBCH">5. Status</span>
 													</label>
@@ -181,7 +185,7 @@
 														<div class="row">
 															<div class="col-md-3">
 																<div class="km-control-group" name="startDate" caption="">
-																	<label name="startDate" class="control-label full-length" for="startDate">
+																	<label name="startDate" class="control-label" for="startDate">
 																		<span ng-if="isABS">Start date</span>
 																		<span ng-if="isBCH">Starting date</span>
 																	</label>
@@ -190,7 +194,7 @@
 															</div>
 															<div class="col-md-3">
 																<div class="km-control-group" name="endDate" caption="">
-																	<label name="endDate" class="control-label full-length" for="endDate">
+																	<label name="endDate" class="control-label" for="endDate">
 																		<span ng-if="isABS">End date</span>
 																		<span ng-if="isBCH">Ending date</span>
 																	</label>
@@ -236,7 +240,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" required name="organizations" caption="">
-													<label name="organizations" class="control-label full-length" required for="organizations">
+													<label name="organizations" class="control-label" required for="organizations">
 														<span ng-if="isABS">7. Agency(ies) or organisation(s) implementing and/or executing the initiative</span>
 														<span ng-if="isBCH">8. Agency(ies) or organisation(s) implementing and/or executing the initiative</span>
 													</label>
@@ -322,7 +326,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" required name="description" caption="">
-													<label name="description" class="control-label full-length" required for="description">
+													<label name="description" class="control-label" required for="description">
 														<span ng-if="isABS">10. Short description of the initiative, including its goals and objectives (max 150 words)</span>
 														<span ng-if="isBCH">9. Short description of the initiative, including its goals and objectives (max 150 words)</span>
 													</label>
@@ -333,21 +337,18 @@
 										<div class="row" ng-if="isBCH">
 											<div class="col-md-12">
 											  <div class="km-control-group"  name="categories" caption="10. Category(ies) of capacity-building activities">
-												<div km-term-check show-description="true" name="categories" ng-model="document.categories" terms="options.bchCategories()" binding-type="term[]" locales="document.header.languages"></div>
+												<div km-term-check show-description="true" name="categories" ng-model="document.categories" terms="options.absCategories()" binding-type="term[]" locales="document.header.languages"></div>
 											  </div>
 											</div>
 										</div>
-										<div class="row" ng-if="isABS">
+										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" name="targetGroups" caption="11. Target group(s)/beneficiary(ies)">
+												<div class="km-control-group" name="targetGroups" caption="">
+													<label name="targetGroups" class="control-label" required for="targetGroups">
+														<span ng-if="isABS">11. Target group(s)/beneficiary(ies)</span>
+														<span ng-if="isBCH">11. Main target group(s)/beneficiary(ies)"</span>
+													</label>
 													<div km-term-check name="targetGroups" required ng-model="document.targetGroups" terms="options.targetGroups()" binding-type="term[]" locales="document.header.languages"></div>
-												</div>
-											</div>
-										</div>
-										<div class="row" ng-if="isBCH">
-											<div class="col-md-12">
-												<div class="km-control-group" name="targetGroups" caption="11. Main target group(s)/beneficiary(ies)">
-													<div km-term-check name="targetGroups" required ng-model="document.targetGroups" terms="options.bchTargetGroups()" binding-type="term[]" locales="document.header.languages"></div>
 												</div>
 											</div>
 										</div>
@@ -372,17 +373,10 @@
 								<div class="well no-shadow bg-white">
 										<legend>Information on funding</legend>
 				
-										<div ng-if="isBCH" class="row">
+										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" name="fundingSourceTypes" caption="13. Type(s) of funding source(s)">
+												<div class="km-control-group"  ng-required="isABS" name="fundingSourceTypes" caption="13. Type(s) of funding source(s)">
 													<div km-term-check show-description="true" name="fundingSourceTypes" ng-model="document.fundingSourceTypes" terms="options.fundingSources()" binding-type="term[]"></div>
-												</div>
-											</div>
-										</div>
-										<div ng-if="isABS" class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" required name="fundingSourceTypes" caption="13. Type(s) of funding source">
-													<div km-term-check required show-description="true" name="fundingSourceTypes" ng-model="document.fundingSourceTypes" terms="options.fundingSources()" binding-type="term[]"></div>
 												</div>
 											</div>
 										</div>
@@ -399,7 +393,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="km-control-group" name="corefundingsources" caption="">
-													<label name="corefundingsources" class="control-label full-length" for="corefundingsources">
+													<label name="corefundingsources" class="control-label" for="corefundingsources">
 														<span ng-if="isABS">14. Core funding-source(s)</span>
 														<span ng-if="isBCH">14. Primary funding-source(s)</span>
 													</label>
@@ -413,8 +407,8 @@
 				
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" name="cofinancingsources" caption="">
-													<label name="cofinancingsources" class="control-label full-length" for="cofinancingsources">
+												<div class="km-control-group" name="coFinancingSources" caption="">
+													<label name="coFinancingSources" class="control-label" for="coFinancingSources">
 														<span ng-if="isABS">15. Co-financing source(s)</span>
 														<span ng-if="isBCH">15.	Co-funding source(s)</span>
 													</label>

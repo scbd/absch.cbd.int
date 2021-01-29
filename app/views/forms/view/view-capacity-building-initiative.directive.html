@@ -15,15 +15,13 @@
 				<span ng-if="isABS">Title</span>
 				<span ng-if="isBCH">Title of the initiative</span>
 			</label>
-			<div class="km-value km-pre">
-				<span ng-bind="document.title | lstring:locale"></span>
-			</div>
+			<km-value-ml value="document.title" locales="locale"></km-value-ml>
 		</div>
-		<div ng-if="isBCH" ng-show="document.projectDocument">
+		<div ng-if="isBCH && document.projectDocument">
 			<label>Website address(es)</label>
 			<km-link-list class="km-value" ng-model="document.projectDocument"></km-link-list>
 		</div>
-		<div ng-if="isBCH" ng-show="document.contacts">
+		<div ng-if="isBCH && document.contacts">
 			<label>Contact person(s)</label>
 			<div class="km-value" ng-repeat="contact in document.contacts">
 				<div view-record-reference ng-model="contact" locale="locale"></div>
@@ -31,14 +29,13 @@
 		</div>
 		<div ng-show="document.projectNumber">
 			<label>Project number or identifier</label>
-			<div class="km-value km-pre">
-				<span ng-bind="document.projectNumber | lstring:locale"></span>
-			</div>
+			<km-value-ml value="document.projectNumber" locales="locale"></km-value-ml>
 		</div>
 
 		<div ng-show="document.geographicScope">
 			<label>Geographic Scope</label>
-			<span class="km-value" ng-bind="document.geographicScope.scope | term:locale"></span>
+			<km-value-ml value="document.geographicScope.scope | term:locale" locales="locale"></km-value-ml>
+
 		</div>
 
 		<div ng-show="document.geographicScope && (document.geographicScope.regions || document.geographicScope.countries)">
@@ -53,14 +50,22 @@
 
 		<div ng-show="document.geographicScope && document.geographicScope.jurisdiction">
 			<label>Jurisdiction</label>
-			<span class="km-value km-pre" ng-bind="document.geographicScope.jurisdiction | lstring:locale"></span>
+			<km-value-ml value="document.geographicScope.jurisdiction" locales="locale"></km-value-ml>
 		</div>
 
 		<div ng-show="document.geographicScope && document.geographicScope.community">
 			<label>Community</label>
-			<span class="km-value km-pre" ng-bind="document.geographicScope.community | lstring:locale"></span>
+			<km-value-ml value="document.geographicScope.community" locales="locale"></km-value-ml>
 		</div>
-
+		<!-- Need to verify from backend -->
+		<div ng-show="document.geographicScope.countries && document.geographicScope.community">
+			<label>Countries</label>
+			<div class="km-value">
+				<ul  class="list">
+					<li ng-repeat="term in document.geographicScope.countries" ng-bind="term | term:locale"></li>
+				</ul>
+			</div>
+		</div>
 		<div ng-if="isABS">
 			<label>Type of capacity-building initiative</label>
 			<div style="padding-left:20px" >
@@ -93,34 +98,32 @@
 		</div>
 		<div ng-show="document.status">
 			<label><span ng-if="isABS">Status of the document</span> <span ng-if="isBCH">Status</span></label>
-			<span class="km-value" ng-bind="document.status | term:locale"></span>
+			<km-value-ml value="document.status | term:locale" locales="locale"></km-value-ml>
 		</div>
 
 		<div ng-show="(document.startDate && document.endDate) || document.durationPeriod || document.durationText">
 	  			<div class="row" ng-show="document.startDate && document.endDate">
 	  				<div class="col-md-6">
-	  					<label>Start date</label>
-	  					<div class="km-value km-pre">
-							  <span ng-bind="document.startDate | date : 'longDate'"></span>
-							</div>
+						  <label>Start date</label>
+						  <km-value-ml value="document.startDate | date : 'longDate'" locales="locale"></km-value-ml>
 	  				</div>
 	  				<div class="col-md-6">
-	  					<label>End date</label>
-	  					<div class="km-value km-pre">
-							<span ng-bind="document.endDate | date : 'longDate'"></span>
-						</div>
+						  <label>End date</label>
+						  <km-value-ml value="document.endDate | date : 'longDate'" locales="locale"></km-value-ml>
+	  					
 	  				</div>
 	  			</div>
 
 	  			<div ng-show="document.durationPeriod || document.durationText">
-	  				<label>Duration</label>
-					  <div class="km-value km-pre"> <span ng-bind="document.durationPeriod"></span> <span ng-bind="document.durationText | lstring:locale"></span>
-					</div>
+					  <label>Duration</label>
+					  <km-value-ml value="document.durationPeriod" locales="locale"></km-value-ml>
+					  <km-value-ml value="document.durationText" locales="locale"></km-value-ml>
+					  
 	  			</div>
 		</div>
 		<div ng-show="document.activityScope">
 			<label>Scope of activity</label>
-			<div class="km-value" ng-bind="document.activityScope | term:locale"></div>
+			<km-value-ml value="document.activityScope | term:locale" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.isImplementedByAgencies || document.isExecutededByAgencies || document.isCollaboratededByPartners">
 
@@ -147,14 +150,14 @@
 
 		</div>
 
-		<div ng-if="isABS" ng-show="document.contacts">
+		<div ng-if="isABS && document.contacts">
 			<label>Contact person(s)</label>
 			<div class="km-value" ng-repeat="contact in document.contacts">
 				<div view-record-reference ng-model="contact" locale="locale"></div>
 			</div>
 		</div>
 
-		<div ng-if="isABS" ng-show="document.projectDocument">
+		<div ng-if="isABS && document.projectDocument">
 			<label>Project document or document describing the initiative</label>
 			<km-link-list class="km-value" ng-model="document.projectDocument"></km-link-list>
 		</div>
@@ -163,9 +166,7 @@
 
 		<div ng-show="document.description">
 			<label>Short description of the initiative, including its goals and objectives</label>
-			<div class="km-value km-pre">
-				<span ng-bind="document.description | lstring:locale"></span>
-			</div>
+			<km-value-ml value="document.description" locales="locale" html></km-value-ml>
 		</div>
 
 		<div ng-show="document.targetGroups">
@@ -221,7 +222,7 @@
 
 		<div ng-show="document.totalBudget">
 			<label>Total budget (amount, in US dollars)</label>
-			<div class="km-value km-pre"> <span ng-bind="document.totalBudget | currency:'USD$'"></span></div>
+			<km-value-ml value="document.totalBudget | currency:'USD$'" locales="locale"></km-value-ml>
 		</div>
 
 
@@ -230,7 +231,7 @@
 
 			<div ng-show="document.resultsAchievements">
 				<label>Results</label>
-				<div class="km-value km-pre"> <span ng-bind="document.resultsAchievements | lstring:locale"></span></div>
+				<km-value-ml value="document.resultsAchievements" locales="locale" html></km-value-ml>
 			</div>
 
 			<div ng-show="document.resultsOutputs">
@@ -240,7 +241,7 @@
 
 			<div ng-show="document.bestPractices">
 				<label>Best practices and lessons learned</label>
-				<div class="km-value km-pre"> <span ng-bind="document.bestPractices | lstring:locale"></span></div>
+				<km-value-ml value="document.bestPractices" locales="locale" html></km-value-ml>
 			</div>
 		</div>
 	</div>
@@ -260,7 +261,7 @@
 			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">
-				<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
+				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
 			</div>
 
 			<div ng-show="document.relevantDocuments">

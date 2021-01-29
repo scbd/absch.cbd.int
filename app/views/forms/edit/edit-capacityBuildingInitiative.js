@@ -184,7 +184,7 @@ define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-capacity-buildin
         return $scope.sanitizeDocument(document);
       };
 
-    $scope.setDocument({});
+    $scope.setDocument({}, true);
     if($scope.realm.is('ABS'))
         $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
 
