@@ -181,7 +181,7 @@ define(['app', 'lodash','components/scbd-angularjs-services/services/main', 'com
                     return data;
 
                 for (var i = 0; i < facets.length; i+=2) {
-                   var item =  _.filter(data,{identifier:facets[i]});
+                   var item =  _.find(data,{identifier:facets[i]});
 
                    if(item.length>0){
                        item[0].metadata = {facet : facets[i+1]};

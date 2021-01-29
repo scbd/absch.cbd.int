@@ -1,7 +1,7 @@
 ﻿
-define(["app", 'json!components/scbd-angularjs-services/filters/schema-name.json', 
+define(["app", 'lodash', 'json!app-data/schema-name-plural.json',
 'js/common', 'services/app-config-service'], 
-function (app, scbdSchemas) {
+function (app, _, schemaNamePlural) {
 
 
 	//============================================================
@@ -157,7 +157,7 @@ function (app, scbdSchemas) {
 
             if(angular.isString(unique) && document){
 
-				if(document.header && _.contains(appConfigService.scbdSchemas, document.header.schema))
+				if(document.header && _.includes(appConfigService.scbdSchemas, document.header.schema))
 					return unique;
 
 				return unique.substring(0,unique.lastIndexOf('-'));

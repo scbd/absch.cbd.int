@@ -68,7 +68,7 @@ define(['app', 'text!views/search/search-results/list-view.html','lodash',
                         $scope.searchResult.facets   = searchDirectiveCtrl.sanitizeFacets(result.data.facet_counts);
 
                         if(result.data.highlighting){
-                            _.each($scope.searchResult.docs, function(doc){
+                            _.forEach($scope.searchResult.docs, function(doc){
                                 if(!_.isEmpty(result.data.highlighting[doc.id]))
                                     doc.highlight = result.data.highlighting[doc.id];
                             });
