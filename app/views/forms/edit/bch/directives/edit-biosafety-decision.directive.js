@@ -84,7 +84,7 @@ function (app, _, template) {
                         return thesaurusService.getDomainTerms('decisionResults');
                     },
                     transboundaryMovementType: function(){
-                        return thesaurusService.getDomainTerms('TransboundaryMovementTypes')
+                        return thesaurusService.getDomainTerms('transboundaryMovementTypes')
                     }
                     
                 });
