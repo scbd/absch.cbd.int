@@ -73,7 +73,8 @@
                 whenAsync('/register/ORG/new',           {templateUrl: 'views/forms/edit/edit-organization.html',              label:'New',  param:'true', resolveController: true,documentType :'ORG' , resolve : { securized : securize(null, true, true) }, }).
                 whenAsync('/register/SUB/new',           {templateUrl: 'views/forms/edit/edit-submission.html',                label:'New',  param:'true', resolveController: true,documentType :'SUB' , resolve : { securized : securize(null, true, true) }, }).
                 whenAsync('/register/CBI/new',           {templateUrl: 'views/forms/edit/edit-capacityBuildingInitiative.html',label:'New',  param:'true', resolveController: true,documentType :'CBI' , resolve : { securized : securize(null, true, true) }, }).
-                
+                whenAsync('/register/BCP/new',           {templateUrl: 'views/forms/edit/bch/edit-country-profile.html',       label:'New',  param:'true', resolveController: true,documentType :'BCP',  resolve : { securized : securize(null, true, true) }, }).
+               
                 whenAsync('/register/CNA/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-authority.html',                 label:'Edit',  param:'true', resolveController: true, documentType :'CNA' , resolve : { securized : securize(null,true, true) }, }).
                 whenAsync('/register/CON/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-contact.html',                   label:'Edit',  param:'true', resolveController: true, documentType :'CON' , resolve : { securized : securize(null,true, true) }, }).
                 whenAsync('/register/NDB/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-database.html',                  label:'Edit',  param:'true', resolveController: true, documentType :'NDB' , resolve : { securized : securize(null,true, true) }, }).
@@ -81,7 +82,8 @@
                 whenAsync('/register/VLR/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-resource.html',                  label:'Edit',  param:'true', resolveController: true, documentType :'VLR' , resolve : { securized : securize(null, true, true) }, }).
                 whenAsync('/register/SUB/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-submission.html',                label:'Edit',  param:'true', resolveController: true, documentType :'SUB' , resolve : { securized : securize(null, true, true) }, }).
                 whenAsync('/register/CBI/:identifier/edit',           {templateUrl: 'views/forms/edit/edit-capacityBuildingInitiative.html',label:'Edit',  param:'true', resolveController: true, documentType :'CBI' , resolve : { securized : securize(null, true, true) }, }).
-                
+                whenAsync('/register/BCP/:identifier/edit',           {templateUrl: 'views/forms/edit/bch/edit-country-profile.html',       label:'Edit',  param:'true', resolveController: true, documentType :'BCP' , resolve : { securized : securize(null, true, true) }, }).
+               
                 whenAsync('/register/:document_type/:documentID/view',           {templateUrl: 'views/register/record-details.html',    label:'View',  param:'true', resolveController: true,resolve : { securized : securize(null,true) }}).
 
                 whenAsync('/register/admin/requests',         { templateUrl: 'views/register/requests.html',            label:'Pending Requests',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
