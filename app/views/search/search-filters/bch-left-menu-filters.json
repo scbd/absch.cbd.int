@@ -106,16 +106,22 @@
 		},
 		{
 			"type": "thesaurus",
-			"term": "subjectAreas",
-			"title": "Subject Areas",
-			"field": "cpbSubjectAreas_ss",
-			"relatedField":"cpbSubjectAreas_REL_ss"
-		},
-		{
-			"type": "thesaurus",
 			"term": "legislationAgreementTypes",
 			"title": "Type of Law / Regulation",
 			"field": "type_s"
+		},
+		{
+			"type": "thesaurus",
+			"term": "lawJurisdictions",
+			"title": "Area of jurisdiction",
+			"field": "jurisdiction_s"
+		},
+		{
+			"type": "thesaurus",
+			"term": "subjectAreas",
+			"title": "Subject areas",
+			"field": "cpbSubjectAreas_ss",
+			"relatedField":"cpbSubjectAreas_REL_ss"
 		}
 	],
 	"capacityBuildingActivities": [

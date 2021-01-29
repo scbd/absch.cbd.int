@@ -26,6 +26,14 @@ app.directive("viewBiosafetyLaw", [function () {
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			}
+
+			$scope.onReferencedRecordsDataFetch = function(data){
+				console.log(data)
+				if(data && (data.amendedRecords||{}).docs){
+					if(data.amendedRecords.docs.length)
+						$scope.amendedByRecords = _.map(data.amendedRecords.docs, 'identifier')
+				}
+			}
 		}]
 	};
 }]);

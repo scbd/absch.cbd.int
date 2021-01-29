@@ -11,6 +11,7 @@
 	'views/directives/record-options','components/scbd-angularjs-services/services/locale',
 	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/form-control-directives/km-value-ml',
 	'components/scbd-angularjs-controls/form-control-directives/km-link-list',
+	'components/scbd-angularjs-controls/form-control-directives/km-value-bool',
 	'views/forms/view/directives/view-reference-records.directive', 'views/forms/directives/compare-val'
 ], function (app, template) {
 

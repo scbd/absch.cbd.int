@@ -13,7 +13,44 @@
 				<edit-form>
 					<form class="editForm" name="editForm" style="margin-top:10px">
 						<div>
-
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Amendment</legend>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="isAmendment" required caption="Is this an amendment to a law, regulation, guideline or agreement already published on the BCH?">
+                                                <div class="help-block"></div>
+                                                <div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <!-- IF NO SECTION -->
+                                    <div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}"  style="padding-top:0;padding-bottom:0;">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <h3 ng-show="!document.isAmendment" style="color:black!important;">
+                                                    If no, the following information is not required.
+                                                </h3>
+												<div class="row">
+													<div class="col-xs-12">
+														<div class="km-control-group" name="amendedRecords" caption="Please select the record(s) containing the law/regulation being amended">	
+															<div document-selector ng-model="document.amendedRecords" question="amendedRecords" allow-new="true" allow-new-schema="biosafetyLaw"
+																government="document.government" schema="(biosafetyLaw)" caption="Law, Regulation or Guideline"></div>			
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="km-control-group" name="amendmentsDetails" caption="Please provide a brief summary of the amendment(s)">
+															<div km-rich-textbox ng-model="document.amendmentsDetails" rows="4" placeholder="" locales="document.header.languages"></div>
+														</div>
+													</div>
+												</div>
+    
+                                            </div>
+                                        </div>
+									</div>
+								</div>
+							</section>
 							<section>
 								<div class="well no-shadow bg-white">
 									<legend>General information</legend>
@@ -29,14 +66,15 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="government" required caption="Country submitting the decision or communication">
-												<div class="help-block">
+												<div class="help-block" ng-if="isEuMember">
 													<u><i>Important note for European Union (EU) Members only</i></u>: 
 													if the law, regulation, guideline or agreement applies to <u>all</u> EU Member States, the record must be published by 
 													the EU’s BCH focal point. The EU BCH focal point should select "European Union" in response to this question and the 
 													published record will appear in the country profiles of all EU Member States.
 												</div>
 												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government"
-												 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+												 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" 
+												 placeholder="Please select a country..." ng-change="onCountryChange(document.government)"></div>
 											</div>
 										</div>
 									</div>
@@ -70,18 +108,42 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required caption="Area of jurisdiction">
-												<div km-select name="jurisdiction" locales="document.header.languages" required ng-model="document.jurisdiction" items="options.lawJurisdictions"></div>
+											<div class="km-control-group" name="jurisdiction" required caption="Area of jurisdiction">
+												<div class="help-block">
+													Provide the jurisdiction where the law, regulation, guideline or agreement applies. This field can also be used to indicate territorial exclusions to measures.
+												</div>
+												<div km-select name="jurisdiction" locales="document.header.languages" required ng-model="document.jurisdiction" items="options.lawJurisdictions"
+													ng-change="onJurisdictionChange(document.jurisdiction)"></div>
 											</div>
 											<div  style="padding-top: 5px;;">
-												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" name="jurisdiction.other" caption="Other jurisdiction(specify)">
+												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" name="jurisdiction.other" caption="Other jurisdiction">
 													<div km-textbox-ml name="customValueOther" ng-model="document.jurisdiction.customValue" placeholder="" locales="document.header.languages"></div>
 												</div>
 												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='DEBB019D-8647-40EC-8AE5-10CA88572F6E'" name="jurisdiction.subNational" caption="Name of the sub-national jurisdiction">
 													<div km-textbox-ml name="customValueSubNational" ng-model="document.jurisdiction.customValue" placeholder="Eg. Lower Austria" locales="document.header.languages"></div>
 												</div>
-												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='528B1187-F1BD-4479-9FB3-ADBD9076D361'" name="jurisdictionScope" caption="Geographical or political/economic group(s)">
-													<div km-select multiple required name="geographicalCountries" ng-model="document.jurisdictionScope" placeholder="Please select one option" items="options.chmregions()"></div>
+
+												<div ng-if="document.jurisdiction.identifier=='528B1187-F1BD-4479-9FB3-ADBD9076D361'">
+													<div ng-if="!regionalMeasuresMapping[document.government.identifier]">
+														<div class="alert alert-warning">
+															<h4>
+																<label for="invalidJurisdiction">
+																	Please note that regional or multilateral measures only need to be registered once in the Biosafety Clearing-House and that each of the countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in their country profile. 
+																	It is recommended that one country agrees to register the measure on behalf of the regional organization or the group of countries that share the same measure. 
+																	For assistance, contact the Secretariat at <a class="color-blue" href="mailto:bch@cbd.int">bch@cbd.int</a>.																	
+																</label>
+															</h4>
+														</div>
+													</div>
+			
+													<div ng-if="regionalMeasuresMapping[document.government.identifier]">
+														<div class="help-info"> Please note that regional or multilateral measures only need to be registered once in the Biosafety Clearing-House and that each of the countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in their country profile. 
+															It is recommended that one country agrees to register the measure on behalf of the regional organization or the group of countries that share the same measure. 
+															For assistance, contact the Secretariat at <a href="mailto:bch@cbd.int">bch@cbd.int</a>.</div>
+														<div class="km-control-group" required name="jurisdictionScope" caption="Country name(s) or Geographical or political/economic group(s)">
+															<button type="button" class="btn btn-info" ng-bind="document.jurisdictionScope[0]|term"></button>
+														</div>
+													</div>
 												</div>
 											</div>																			 
 										</div>
@@ -170,17 +232,18 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="amendedRecords" caption="Amendments">	
+											<div class="km-control-group" name="relatedRecords" caption="Relationship with other laws/regulations">	
 												<div class="help-block">
-													Please indicate if any amendments have been adopted to this document. Provide a cross-reference link if the amendments have been registered as a separate record.
+													Please indicate if there is any relationship between this document/measure and other laws, regulations, guidelines or agreements published in the BCH, e.g. a regulation to implement an existing law.
 												</div>										
-												<div document-selector ng-model="document.amendedRecords" question="amendedRecords" allow-new="true" allow-new-schema="biosafetyLaw"
-													government="document.government" schema="(biosafetyLaw)" caption="Law, Regulation or Guideline"></div>			
+												<div document-selector ng-model="document.relatedRecords" question="relatedRecords" allow-new="true" 
+													allow-new-schema="biosafetyLaw" government="document.government" schema="(biosafetyLaw)" 
+													caption="Law, Regulation or Guideline"></div>			
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="amendmentsDetails" caption="">
-												<div km-rich-textbox ng-model="document.amendmentsDetails" rows="4" placeholder="" locales="document.header.languages"></div>
+											<div class="km-control-group" name="relationDetails" caption="Please describe the relationship between the measures">
+												<div km-rich-textbox ng-model="document.relationDetails" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
@@ -192,9 +255,9 @@
 									<legend>Regulatory contact information</legend>
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="authorities" caption="Competent National Authority(ies):" required>	
+											<div class="km-control-group" name="authorities" caption="Competent National Authority(ies) and/or Supplementary Protocol Competent Authority(ies)" required>	
 												<div class="help-block">
-													Competent National Authority (CNA) that is responsible for performing the administrative functions required by the Cartagena Protocol.
+													Competent National Authority (CNA) responsible for performing the administrative functions required by the Cartagena Protocol and/or competent authority (SPCA) under the Nagoya – Kuala Lumpur Supplementary Protocol on Liability and Redress.
 												</div>
 												<div document-selector ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
 													government="document.government" schema="(authority supplementaryAuthority)"></div>			
