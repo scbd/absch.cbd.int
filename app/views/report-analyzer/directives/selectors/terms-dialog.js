@@ -134,7 +134,7 @@ define(['text!./terms-dialog.html', 'app', 'lodash', '../../filters/ascii', 'com
 
                     if($scope.columns) {
 
-                        var updated = _.any($scope.columns, function(column){
+                        var updated = _.some($scope.columns, function(column){
                             return column.selection !== column.selectionBak;
                         });
 
@@ -198,7 +198,7 @@ define(['text!./terms-dialog.html', 'app', 'lodash', '../../filters/ascii', 'com
                     });
 
                     allTerms = terms;
-                    terms = _.where(terms, { parent : null });
+                    terms = _.filter(terms, { parent : null });
 
                     // split by columns
 

@@ -4,7 +4,7 @@ define(['app',
         'views/register/directives/register-top-menu'
   ], function(app) {
     "use strict";
-    app.controller("NotificationsController", ["$rootScope", "$scope", "underscore", "roleService", "IWorkflows", "realm", "$q",
+    app.controller("NotificationsController", ["$rootScope", "$scope", "lodash", "roleService", "IWorkflows", "realm", "$q",
                     "$routeParams", '$location', "$filter", "$http", "$element","$timeout",
         function($rootScope, $scope, _, roleService, workflows, realm, $q, $routeParams, $location, $filter, $http, $element, $timeout) {
 

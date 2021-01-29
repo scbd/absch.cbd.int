@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'views/forms/view/record-loader.directive',
+define(['app', 'lodash', 'views/forms/view/record-loader.directive',
 'views/forms/view/record-loader.directive',
     'js/common', 'services/role-service', 'toastr',
     'views/directives/block-region-directive',
@@ -70,7 +70,7 @@ define(['app', 'underscore', 'views/forms/view/record-loader.directive',
                     roleService.isNationalFocalPoint() ||
                     roleService.isIAC() ||
                     roleService.isAdministrator() ||
-                    _.contains(['resource', 'modelContractualClause', 'communityProtocol', 'capacityBuildingResource', 'capacityBuildingInitiative'], $scope.schema);
+                    _.includes(['resource', 'modelContractualClause', 'communityProtocol', 'capacityBuildingResource', 'capacityBuildingInitiative'], $scope.schema);
 
             }
 

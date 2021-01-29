@@ -1,5 +1,5 @@
 define(['app', 'text!views/mailbox/message-list-directive.html',
-'underscore'], function(app, template, _) {
+'lodash'], function(app, template, _) {
     app.directive('mailboxMessageList', function() {
         return {
             restrict: 'EAC',
@@ -104,11 +104,11 @@ define(['app', 'text!views/mailbox/message-list-directive.html',
 
                         if (confirm('Are you sure you want to delete this mail(s)?')) {
 
-                            var selectedMails = _.where($scope.mails, {
+                            var selectedMails = _.filter($scope.mails, {
                                 mailSelected: true
                             });
 
-                            _.each(selectedMails, function(mail) {
+                            _.forEach(selectedMails, function(mail) {
                                 userNotifications.delete(mail.id)
                                     .then(function() {
 

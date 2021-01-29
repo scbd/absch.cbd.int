@@ -21,7 +21,7 @@
                 };
                 sessionStorage.setItem('nrAnalyzerData', JSON.stringify(data));
 
-                $location.url(_.trimRight($location.path(), '/') + '/analyzer');
+                $location.url(_.forInRight($location.path(), '/') + '/analyzer');
             };
 
 
@@ -53,7 +53,7 @@
                     });      
                 })
                 .then(function(){
-                    _.each($scope.reportData, function(report){
+                    _.forEach($scope.reportData, function(report){
                         if(report.stats && report.stats.regionMapping)
                             report.stats.regionMapping =  _.defaultsDeep({}, report.stats.regionMapping, regionMapping);
                         else
@@ -77,7 +77,7 @@
                 if(activeReport.dataUrl){
                     return $http.get(activeReport.dataUrl, {  params: { q : query, f : fields }, cache : true })
                             .then(function(result){
-                                _.each(activeReport.regionMapping, function(region){
+                                _.forEach(activeReport.regionMapping, function(region){
                                     region.count = 0;
                                     region.reportCountries = [];
                                 });
@@ -85,7 +85,7 @@
                                 var reportCountries = [];
                                 _.map(result.data, function(report) {                  
                                     var region = _.find(_.values(activeReport.regionMapping), function(region){
-                                        return _.contains(region.countries, report.government.identifier);
+                                        return _.includes(region.countries, report.government.identifier);
                                     });
                                     reportCountries.push(report.government.identifier.toUpperCase());
                                     activeReport.regionMapping[region.identifier].count += 1;

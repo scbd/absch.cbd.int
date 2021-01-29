@@ -136,7 +136,7 @@ define(['app', 'text!./tree-selector.html', 'lodash', 'components/scbd-angularjs
                         o.selected = o.selected || false;
                     });
 
-                    _.where(branch, {selected : true}).forEach(function(o) {
+                    _.filter(branch, {selected : true}).forEach(function(o) {
 
                         getParents(o).forEach(function(u){
                             u.selected = null;
