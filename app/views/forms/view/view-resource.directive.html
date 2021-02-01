@@ -13,31 +13,27 @@
 
 		<div ng-show="document.title">
 			<label>Title</label>
-			<div class="km-value">
-				<strong ng-bind="document.title | lstring:locale"></strong>
-			</div>
+			<strong><km-value-ml value="document.title" locales="locale"></km-value-ml></strong>
 		</div>
 		<div ng-show="document.summary && isABS">
 			<label>Summary</label>
-			<div class="km-value km-pre">
-				<span ng-bind="document.summary | lstring:locale"></span>
-			</div>
+			<km-value-ml value="document.summary" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.resourceLinks && isABS">
 			<label>Link to the resource(s)</label>
 			<km-link-list class="km-value"  ng-if="document.resourceLinks" ng-model="document.resourceLinks" style="margin-top: 5px;"></km-link-list>
 		</div>
-		<div ng-show="document.authors && isABS">
+<!--		<div ng-show="document.authors && isABS">-->
+<!--			<label>Author(s)</label>-->
+<!--			<div class="km-value km-pre"><span ng-bind="document.authors | lstring:locale"></span></div>-->
+<!--		</div>-->
+		<div ng-show="document.authors">
 			<label>Author(s)</label>
-			<div class="km-value km-pre"><span ng-bind="document.authors | lstring:locale"></span></div>
-		</div>
-		<div ng-show="document.authors && isBCH">
-			<label>Author(s)</label>
-			<div class="km-value km-pre"><span ng-bind="document.authors | lstring:locale"></span></div>
+			<km-value-ml value="document.authors" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.publicationYear && isABS">
 			<label>Publication year</label>
-			<div class="km-value"><span ng-bind="document.publicationYear | lstring:locale"></span></div>
+			<km-value-ml value="document.publicationYear" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="organizations && organizations.length>0 && isABS">
 			<label>Reference to the authoring organisation(s)</label>
@@ -73,7 +69,7 @@
 		</div>
 		<div ng-show="document.publicationYear && isBCH">
 			<label>Publication year</label>
-			<div class="km-value"><span ng-bind="document.publicationYear | lstring:locale"></span></div>
+			<km-value-ml value="document.publicationYear" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.publicationMonth && isBCH">
 			<label>Publication month</label>
@@ -81,7 +77,7 @@
 		</div>
 		<div ng-show="document.summary && isBCH">
 			<label>Summary, abstract or table of contents</label>
-			<div class="km-value km-pre"><span ng-bind="document.summary | lstring:locale"></span></div>
+			<km-value-ml value="document.summary" locales="locale" html></km-value-ml>
 		</div>
 		<div ng-show="document.bchSubjects && isBCH">
 			<label>Thematic areas(s)</label>
@@ -143,24 +139,23 @@
 		</div>
 		<div ng-show="document.Identifier && isBCH">
 			<label>Identifier</label>
-			<div class="km-value km-pre"><span ng-bind="document.Identifier | lstring:locale"></span></div>
-
+			<km-value-ml value="document.Identifier | lstring" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.publisher && isBCH">
 			<label>Publisher and its location</label>
-			<div class="km-value km-pre"><span ng-bind="document.publisher | lstring:locale"></span></div>
+			 <km-value-ml value="document.publisher" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.rights && isBCH">
 			<label>Rights</label>
-			<div class="km-value km-pre"><span ng-bind="document.rights | lstring:locale"></span></div>
+			 <km-value-ml value="document.rights" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.format && isBCH">
 			<label>Format</label>
-			<div class="km-value km-pre"><span ng-bind="document.format | lstring:locale"></span></div>
+			<km-value-ml value="document.format" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.source && isBCH">
 			<label>Source</label>
-			<div class="km-value km-pre"><span ng-bind="document.source | lstring:locale"></span></div>
+			<km-value-ml value="document.source" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.keywords">
 			<label>Keywords</label>
@@ -177,18 +172,16 @@
 		</div>
 		<div ng-show="document.resourceAccess && isBCH">
 			<label>How to obtain the resource</label>
-			<div class="km-value km-pre"><span ng-bind="document.resourceAccess | lstring:locale"></span></div>
+			<km-value-ml value="document.resourceAccess" locales="locale" html></km-value-ml>
 		</div>
 
 		<div ng-show="document.fileFormat && isABS">
 			<label>Format/File type</label>
-
-			<div class="km-value km-pre"><span ng-bind="document.fileFormat | lstring:locale"></span></div>
+			<km-value-ml value="document.fileFormat | term" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.formatDetails && isABS">
 			<label>Format details</label>
-
-			<div class="km-value km-pre"><span ng-bind="document.formatDetails | lstring:locale"></span></div>
+			<km-value-ml value="document.formatDetails" locales="locale"></km-value-ml>
 		</div>
 
 		<div ng-show="document.purpose && isABS">
@@ -209,16 +202,15 @@
 		</div>
 		<div ng-show="document.expertiseLevel && isABS">
 			<label>Level of the content or   level of knowledge/expertise of the audience for which the resource is intended</label>
-
-			<div class="km-value km-pre"><span ng-bind="document.expertiseLevel | term:locale"></span></div>
+			<km-value-ml value="document.expertiseLevel | term" locales="locale" html></km-value-ml>
 		</div>
 		<div ng-show="document.rights && isABS">
 			<label>Rights</label>
-			<div class="km-value km-pre"><span ng-bind="document.rights | lstring:locale"></span></div>
+			<km-value-ml value="document.rights" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.source && isABS">
 			<label>Source</label>
-			<div class="km-value km-pre"><span ng-bind="document.source | lstring:locale"></span></div>
+			<km-value-ml value="document.source" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.covers && isABS">
 			<label>Cover image(s)</label>
@@ -258,15 +250,15 @@
 				</ul>
 			</div>
 
-			<div ng-show="document.keywords ">
+			<div ng-show="document.keywords">
 				<label>Keywords and any other relevant information</label>
-				<div class="km-value km-pre"><span ng-bind="document.keywords | lstring:locale"></span></div>
+				<km-value-ml value="document.keywords" locales="locale"></km-value-ml>
 			</div>
 
 		</div>
 		<div ng-show="document.format" ng-if="document.header.type=='resource' && isABS">
 			<label>Format</label>
-			<div class="km-value km-pre"><span ng-bind="document.format | lstring:locale"></span></div>
+			<km-value-ml value="document.format" locales="locale"></km-value-ml>
 		</div>
 
 		<div ng-show="document.absKeyAreas && isABS">
@@ -282,12 +274,11 @@
 			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">
-				<div class="km-value" ng-bind="document.relevantInformation | lstring:locale"></div>
+				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
 			</div>
 
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website address or attached documents</label>
-				
 				<km-link-list class="km-value"  ng-if="document.relevantDocuments" ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
 			</div>
 		</div>
