@@ -1,7 +1,7 @@
 ﻿
-define(["app", 'json!app-data/schema-name-plural.json', 
+define(["app", 'json!components/scbd-angularjs-services/filters/schema-name.json', 
 'js/common', 'services/app-config-service'], 
-function (app, schemaNamePlural) {
+function (app, scbdSchemas) {
 
 
 	//============================================================
@@ -221,14 +221,14 @@ function (app, schemaNamePlural) {
 			var pluralTitle;
 			var schema = realm.schemas[schemaName]||{};
 			
+			if(!schema)
+				schema = scbdSchemas[schemaName];
+
 			if(schema.titlePlural)
 				pluralTitle = schema.titlePlural;
 
 			if(!pluralTitle)
 				pluralTitle = schema.title;
-
-			if(!pluralTitle)
-				pluralTitle = schemaNamePlural[schemaName];
 
 			var result = $filter('lstring')(pluralTitle, locale);
 

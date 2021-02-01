@@ -61,7 +61,7 @@
         },
         "shortCode": "ST",
         "titlePlural": {
-            "en": "Statement"
+            "en": "Statements"
         }
     },
     "pressRelease": {
@@ -87,7 +87,7 @@
         },
         "shortCode": "MTD",
         "titlePlural": {
-            "en": "Meeting Document"
+            "en": "Meeting Documents"
         }
     }
 }
