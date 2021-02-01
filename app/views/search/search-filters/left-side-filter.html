@@ -28,7 +28,7 @@
                     </div>
                     <div class="bold color-darkgrey" style="cursor: pointer;padding-left:2px;padding-right:2px;padding-bottom:5px;" 
                     ng-click="state[schema]=!state[schema]">
-                        <span ng-bind="schema | schemaName"></span>
+                        <span ng-bind="schema | schemaNamePlural"></span>
                         <i class="fa pull-right" style="font-size:1.5em; " 
                         ng-class="{'fa-sort-down':state[schema], 'fa-sort-up':!state[schema]}"></i>
                     </div>
@@ -70,7 +70,7 @@
                             <div ng-if="filter.type=='freeText'">
                                     <label ng-bind="filter.title" ng-if="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
                                 <form ng-submit="saveSchemaFreeText(filter, filter.searchKeyword)" class="input-group" >
-                                    <input type="text" ng-model="filter.searchKeyword" class="form-control" placeholder="Search in {{schema | schemaName}}"
+                                    <input type="text" ng-model="filter.searchKeyword" class="form-control" placeholder="Search in {{schema | schemaNamePlural}}"
                                         style="font-weight:bold;" ng-disabled="filter.disabled">
                                     <span type="submit" style="cursor:pointer" ng-click="saveSchemaFreeText(filter, filter.searchKeyword)" class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
                                 </form>

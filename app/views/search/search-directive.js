@@ -407,7 +407,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     function loadSchemaFilters() {
 
                         _.each(realm.schemas, function (schema, key) {                           
-                                addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': schema.title.en, 'id': key, 
+                                addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': (schema.titlePlural||schema.title).en, 'id': key, 
                                         'description': (schema.description || {}).en, otherType:schema.type });
                         })
 
