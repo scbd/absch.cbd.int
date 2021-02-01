@@ -191,7 +191,8 @@
 														<div km-yes-no ng-model="document.isForCommercialUse" locales="document.header.languages"></div>
 														<div ng-if="document.isForCommercialUse" style="padding-left:50px;">
 															<div class="help-block">
-																Should this decision be forwarded to the OECD Secretariat for possible inclusion in the BioTrack Product Database?
+																Should this decision be forwarded to the OECD Secretariat for possible inclusion in the
+																 <a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack Product Database</a>?
 															</div>
 															<div class="km-yes-no" name="forwardToOECD" ng-model="document.forwardToOECD"></div>
 															<div class="help-block">
@@ -204,7 +205,8 @@
 																</div>															
 																<div class="km-yes-no" name="codexConduted" ng-model="document.codexConduted"></div>
 																<div class="help-block">
-																	Should this submission be forwarded to your country's FAO focal point for possible inclusion in the GM Foods Platform?
+																	Should this submission be forwarded to your country's FAO focal point for possible inclusion in the
+																	<a rel="noopener" translation-url href="http://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank">GM Foods Platform</a>?
 																</div>
 																<div class="km-yes-no" name="forwardToFAO" ng-model="document.forwardToFAO"></div>
 															</div>
@@ -219,11 +221,11 @@
 											<legend>Timeframe for confirmation or updating of information</legend>
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group" name="expires"  caption="Should this information be confirmed or updated after two years from the date of submission?">			
+													<div class="km-control-group" required name="expires"  caption="Should this information be confirmed or updated after two years from the date of submission?">			
 														<div class="help-block">If the answer to this question is “Yes”, after two years from the date of submission 
 															you will be asked to confirm or update the record within 3 months. After this period, if no confirmation 
 															has been received, the record will be marked as “Not confirmed”.</div>									
-														<div km-yes-no  ng-model="document.expires" locales="document.header.languages"></div>
+														<div km-yes-no required  ng-model="document.expires" locales="document.header.languages"></div>
 													</div>	
 												</div>
 											</div>
