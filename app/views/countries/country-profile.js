@@ -3,7 +3,7 @@ define(['app',
   'views/directives/block-region-directive',
   'js/common','components/scbd-angularjs-services/services/locale','ng-breadcrumbs',
   'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css',
-  'css!./country-profile', 'components/scbd-angularjs-services/services/storage'
+  'components/scbd-angularjs-services/services/storage'
 ], function(app) {
 
   app.controller("countryProfileController",
