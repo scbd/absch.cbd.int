@@ -311,7 +311,9 @@
                                     <td style="min-width:180px!important;">
                                         <a rel="noopener" translation-url href="#" ng-click="gotoList($event,'contact')"
                                             class="color-darkgrey" style="font-weight:500;">
-                                            Contact (CON)</a>
+                                           <span ng-bind="schemas['contact'].titlePlural|lstring:locale"></span>
+                                            (<span ng-bind="schemas['contact'].shortCode|lstring:locale"></span>)
+                                        </a>
                                             <span ng-if="schemas['contact'].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
                                             data-toggle="tooltip" data-html="true" data-title="{{schemas['contact'].description|lstring:locale}}" data-container="body"></span>
 
