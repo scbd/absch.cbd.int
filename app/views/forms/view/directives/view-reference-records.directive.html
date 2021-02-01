@@ -3,7 +3,7 @@
         Reference records
         <a rel="noopener" target="_blank" ng-href="/search?raw-query={{('referenceRecord_ss:' + model)| encodeURIComponent }}" class="pull-right btn btn-primary btn-xs">Show in search</a>
     </legend>
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="width: 100%;">
         <tr>
             <th></th>
             <th>Schema</th>
@@ -18,7 +18,7 @@
         </tr>
         <tr ng-if="record.showRecords">
             <td colspan="4" style="padding:0px">
-                <table class="table table-bordered">
+                <table class="table table-bordered" style="width: 100%;">
                     <tr ng-repeat="doc in record.docs">
                         <td>
                             <span ng-bind="doc.title"></span>

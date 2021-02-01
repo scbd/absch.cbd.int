@@ -61,7 +61,18 @@
 			<view-record-reference ng-repeat="contact in document.contacts" ng-model="contact" locale="locale" class="km-value"></view-record-reference>
 		</div>
 
-		<div ng-show="document.policyBasisForCompetency || document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef">
+		<div ng-if="isBCH && policyBasisForCompetencyRef">
+			<legend ng-if="document.header.schema!='supplementaryAuthority'" >Legislative, administrative or policy basis for the competence of the Competent National Authority</legend>
+			<legend ng-if="document.header.schema=='supplementaryAuthority'" >Legislative, administrative or policy basis for the competence of the Competent Authority</legend>
+			<label>Links to relevant legislative, administrative or policy measure(s) </label>
+			<div class="km-value">
+				<div ng-repeat="referenced in policyBasisForCompetencyRef">
+					<view-record-reference ng-model="referenced"></view-record-reference>
+				</div>
+			</div>
+		</div>
+		<!-- This section will be remove if this not required for ABS -->
+		<div ng-if="isABS && document.policyBasisForCompetency || document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef">
 			<legend ng-if="document.header.schema!='supplementaryAuthority'" >Legislative, administrative or policy basis for the competence of the Competent National Authority</legend>
 			<legend ng-if="document.header.schema=='supplementaryAuthority'" >Legislative, administrative or policy basis for the competence of the Competent Authority</legend>
 			<div ng-if="document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef">
@@ -133,7 +144,7 @@
 				<view-terms-hierarchy class="km-value" ng-model="document.cpbOrganismTypes" locale="locale" 
 				term-domain="typeOfOrganisms"></view-terms-hierarchy>
 			</div>
-			
+   
 			<div ng-show="document.header.schema=='supplementaryAuthority'">
 				<div ng-if="document.responsibleForAll!==undefined">
 					<label>Is this the only designated Competent Authority for the Supplementary Protocol in the country?</label>
@@ -165,7 +176,7 @@
 			</div>
 		</div>
 		<div>
-			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+			<view-referenced-records ng-model="document.header.identifier" on-data-fetch="onReferencedRecordsDataFetch(data)"></view-referenced-records>
 		</div>
 
 	</div>

@@ -156,8 +156,8 @@
                                 </div>
                             </div>
                             </section>
-
-                            <section>
+                            <!-- This section will be remove if this not required for ABS -->
+                            <section ng-if="isAbs">
                                 <legend name="policyBasis">Legal, administrative or policy basis for the competence
                                     of the Competent <span ng-if="type!='SPCA'">National </span>Authority</legend>
                                 <div class="help-info" ng-if="isAbs">In this section, a reference to the related ABS measure
