@@ -365,15 +365,18 @@
             "BchAuthorizedUser-Dev"
           ]
         },
-        "capacityBuildingActivities": {
-          "type": "reference",
-          "title": {
-            "en": "Capacity Building Activities"
-          },
-          "description": {
-            "en": "Information on capacity-building initiatives at national, regional and international levels, including activities and outcomes."
-          },
-          "shortCode": "CBA"
+        "capacityBuildingInitiative": {
+          "type" : "reference",
+            "title" : {
+                "en" : "Capacity-Building Initiative"
+            },
+            "description" : {
+                "en" : "Information on capacity-building initiatives at national, regional and international levels, including activities and outcomes."
+            },
+            "shortCode" : "CBI",
+            "titlePlural" : {
+                "en" : "Capacity-Building Initiatives"
+            }
         },
         "biosafetyNews": {
           "type": "reference",
