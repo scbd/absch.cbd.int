@@ -26,7 +26,6 @@ define(['app','lodash', "text!views/forms/view/view-authority.directive.html",
 							$scope.policyBasisForCompetencyRef = _.map(data.authorities.docs, 'identifier')
 					}
 				}
-				$scope.contacts = undefined;
 				$scope.display = function(field) {
 
 					if(!$scope.hide) return true; //show all fields

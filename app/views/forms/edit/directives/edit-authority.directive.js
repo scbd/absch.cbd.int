@@ -79,6 +79,10 @@ function (app, _, template) {
 
                     if(!document.hasOwnProperty('responsibleForAll'))
                         document.responsibleForAll       = document.absResponsibleForAll;
+                    
+                    if($scope.isBCH){//no longer required for BCH
+                        document.policyBasisForCompetencyRef = undefined;
+                    }
                     //delete obsolete fields
                     document.absPolicyBasisForCompetencyRef = undefined;
                     document.absPolicyBasisForCompetency = undefined;
@@ -121,10 +125,6 @@ function (app, _, template) {
                 //==================================
                 $scope.setDocument({}).then(function(document){
                     resolveLegacyFields(document)
-                    if($scope.type != 'SPCA')
-                        $scope.cnaNameTitle = $element.find('#titleCNA').text()
-                    else if($scope.type == 'SPCA')
-                        $scope.cnaNameTitle = $element.find('#titleSPCA').text()
                 });
 
                 //==================================
