@@ -42,13 +42,13 @@
 		},
 		{
 			"type": "thesaurus",
-			"term": "mSR_status",
+			"term": "status",
 			"title": "Status",
 			"field": "status_s"
 		},
 		{
 			"type": "thesaurus",
-			"term": "mSR_jurisdictions",
+			"term": "jurisdiction",
 			"title": "Jurisdiction",
 			"field": "jurisdiction_s"
 		},
