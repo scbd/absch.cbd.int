@@ -18,7 +18,7 @@ app.directive("existingPermit", [ function () {
 		link : function($scope, $element, $attrs) {
 
         },
-		controller : ["$scope", "$http", "Thesaurus", "$filter", "underscore", "guid",
+		controller : ["$scope", "$http", "Thesaurus", "$filter", "lodash", "guid",
                     "$timeout", "$q","IStorage","commonjs","realm",
 		 function ($scope, $http, Thesaurus, $filter, _, guid, $timeout, $q,
                 storage,commonjs, realm)
@@ -102,7 +102,7 @@ app.directive("existingPermit", [ function () {
                 };
 
 				function getQuery(collection, fieldName){
-					selectedValues = _.pluck(collection, "identifier");
+					selectedValues = _.map(collection, "identifier");
 					return ' AND ('+ fieldName + ':' + selectedValues.join(' OR ' + fieldName + ':') + ')';
 				}
 				var loaded = false;
@@ -150,7 +150,7 @@ app.directive("existingPermit", [ function () {
 
 					angular.forEach($scope.rawPermitDocs, function(doc){
 						if(doc.__checked){
-							if(_.where($scope.rawPermitSelected, {identifier: doc.identifier_s}).length==0)
+							if(_.filter($scope.rawPermitSelected, {identifier: doc.identifier_s}).length==0)
 								$scope.rawPermitSelected.push(doc);
 								if(!$scope.model)
 									$scope.model = [];
@@ -165,7 +165,7 @@ app.directive("existingPermit", [ function () {
 				$scope.isSelected = function(permit){
 
 					if($scope.rawPermitSelected &&
-						_.where($scope.rawPermitSelected, {identifier_s: permit.identifier_s}).length>0)
+						_.filter($scope.rawPermitSelected, {identifier_s: permit.identifier_s}).length>0)
 						return false;
 
 					return true;
@@ -175,7 +175,7 @@ app.directive("existingPermit", [ function () {
 
 					//angular.forEach($scope.model, function(document){
 					if($scope.model){
-						var q = 'identifier_s :' + _.pluck($scope.model, 'identifier').join(' OR identifier_s:')
+						var q = 'identifier_s :' + _.map($scope.model, 'identifier').join(' OR identifier_s:')
 						var queryParameters = {
                         'q': q,
                         'sort': 'createdDate_dt desc, title_t asc',

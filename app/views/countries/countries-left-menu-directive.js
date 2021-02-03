@@ -1,5 +1,5 @@
 define(['app','text!views/countries/countries-left-menu-directive.html',
-'underscore', 'js/common'], function(app, template, _) {
+'lodash', 'js/common'], function(app, template, _) {
 
     app.directive('countriesLeftMenu', function() {
         return {
@@ -26,9 +26,9 @@ define(['app','text!views/countries/countries-left-menu-directive.html',
 
                         $scope.countries = countries;
 
-                        $scope.npParty = _.where($scope.countries,{isParty:true}).length;
-                        $scope.npSignatory = _.where($scope.countries,{isSignatory:true}).length;
-                        $scope.nonParty = _.where($scope.countries,{isParty:false}).length;
+                        $scope.npParty = _.filter($scope.countries,{isParty:true}).length;
+                        $scope.npSignatory = _.filter($scope.countries,{isSignatory:true}).length;
+                        $scope.nonParty = _.filter($scope.countries,{isParty:false}).length;
 
                     });
 

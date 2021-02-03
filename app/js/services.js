@@ -9,7 +9,7 @@ define(['app', 'lodash', 'linqjs'], function (app, _, Enumerable) {
 		};
 	});
 
-	app.factory('underscore', [function() {
+	app.factory('lodash', [function() {
 		return _;
 	}])
 

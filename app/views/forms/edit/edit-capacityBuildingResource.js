@@ -1,6 +1,6 @@
 define(['app', 'views/forms/edit/edit', '../view/view-capacity-building-resource.directive'], function (app) {
 
-  app.controller("editCapacityBuildingResource", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", "underscore", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, thesaurus, Enumerable, _) {
+  app.controller("editCapacityBuildingResource", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", "lodash", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, thesaurus, Enumerable, _) {
 
     $controller('editController', {$scope: $scope});
 

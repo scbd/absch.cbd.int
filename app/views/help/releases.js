@@ -4,9 +4,9 @@ define(['app'], function (app) {
 //require("app", "dragAndDrop")
 
 app.controller("presentationController",
-	["$rootScope", "$scope", "$q", "underscore",'$http',function ($rootScope, $scope, $q, _, $http) {	
-	
-			
+   ["$rootScope", "$scope", "$q", "lodash",'$http',function ($rootScope, $scope, $q, _, $http) {
+ 
+   
 
    }]);
 });

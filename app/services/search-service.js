@@ -1,4 +1,4 @@
-define(['app', 'underscore', './local-storage-service', './app-config-service',
+define(['app', 'lodash', './local-storage-service', './app-config-service',
 'components/scbd-angularjs-services/services/locale'], function(app, _) {
 
     app.factory('searchService', ['$http', '$q', 'realm', 'localStorageService', 'appConfigService', 'locale',
@@ -198,7 +198,7 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                                     facet.government = data.value;
                                     facet.recordCount = data.count;
                                     facet.schemas = {};
-                                    _.each(data.pivot, function(pivotFacets) {
+                                    _.forEach(data.pivot, function(pivotFacets) {
                                         facet.schemas[pivotFacets.value] = pivotFacets.count;
                                     });
                                     return facet;
@@ -256,7 +256,7 @@ define(['app', 'underscore', './local-storage-service', './app-config-service',
                         facetFields = [facetFields]
                     }
 
-                    _.each(facetFields, function(field){
+                    _.forEach(facetFields, function(field){
                         if (solrArray){
                             var mField = field.replace(/{.*}/, ''); //remove tags(${!ex=xxx}) is specified in field names
                             for (var i = 0; i < solrArray[mField].length; i += 2) {

@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'moment', 'angular', 'toastr', 'bootstrap', 'routes/absch', 'angular-loggly-logger',
+define(['app', 'lodash', 'moment', 'angular', 'toastr', 'bootstrap', 'routes/absch', 'angular-loggly-logger',
 'angular-animate', 'components/scbd-branding/directives/header/xuser-notification-config-service',
 'services/local-storage-service', 'views/directives/route-loading-directive'], 
 function (app, _, moment, angular) {
