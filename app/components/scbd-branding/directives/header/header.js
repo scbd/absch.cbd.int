@@ -40,6 +40,10 @@ import 'components/scbd-angularjs-services/main';
                         connectWithToken();
                     });
 
+                    $scope.openSideBlock = function(type){
+                        $rootScope.$broadcast('event:open-left-side-bar', type)
+                    }
+
                     function connectWithToken(){
                         apiToken.get()
                             .then(function(token){
