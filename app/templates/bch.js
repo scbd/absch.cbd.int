@@ -140,5 +140,19 @@ function (app, angular, footerHtml) { 'use strict';
             }
         }
     );
-    angular.bootstrap(document, [app.name]);
+    
+    try{
+        angular.bootstrap(document, [app.name]);
+    }
+    catch(e){
+        $('#appLoadingMessage').css('display', 'none');
+        $('.app-loading-icon').css('display', 'none');
+        $('#appLoadingError').css('display', 'block');
+        
+        $('#detailErrorMessage').text(e);
+        $('#showError').on('click', function() {
+            $('#detailErrorMessage').show();
+        })
+        console.error(e);
+    }
 });
