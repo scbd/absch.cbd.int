@@ -103,7 +103,7 @@ function(templateHtml, app, _, require) {
 
                     var selection = $scope.selectedRegions;
 
-                    var hasCountry = _.any(selection, function(id) { return id.length<=3; });
+                    var hasCountry = _.some(selection, function(id) { return id.length<=3; });
                     var cbdRegions = selection.length == DefaultRegions.length && _.intersection(selection, DefaultRegions).length == DefaultRegions.length;
 
                          if(hasCountry) $scope.selectedRegionsPreset = "countries";

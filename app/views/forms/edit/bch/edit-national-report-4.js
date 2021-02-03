@@ -445,7 +445,7 @@ function (app, _, nr4Data, nr3Data) {
             $http.get('https://api.cbd.int/api/v2015/national-reports-cpb-3', { params : params} )
                  .then(function(result){
                      var prevReportAnswers = result.data[0];
-                     var prevReportQuestions = _(nr3Data).pluck('questions').compact().flatten().value();
+                     var prevReportQuestions = _(nr3Data).map('questions').compact().flatten().value();
 
                      _.forEach(previousAnswerMapping, function(mapping, key){
                         

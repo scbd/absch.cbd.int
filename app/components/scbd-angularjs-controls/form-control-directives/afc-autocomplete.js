@@ -85,7 +85,7 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
 
                         //if selectbox, first try and match for binding. Ie. non-multiple expects the binding to always be up to date.
                         if ($scope.selectbox) {
-                            _.each(items, function(item) {
+                            _.forEach(items, function(item) {
                                 if (item.__value.toLowerCase() === displayBinding.toLowerCase()) {
                                     binding[bindingKey] = $scope.mapping(item);
                                 }
@@ -363,7 +363,7 @@ define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localiz
 
                 function reverseMap(value, items) {
                     var foundItem = '';
-                    _.each(items, function(item) {
+                    _.forEach(items, function(item) {
                         var mapItem = $scope.mapping(item);
                         if((mapItem && value && mapItem.identifier && value.identifier && mapItem.identifier == value.identifier) || 
                           JSON.stringify(mapItem) == JSON.stringify(value)){

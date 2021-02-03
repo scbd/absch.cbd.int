@@ -70,7 +70,7 @@ function (app, _, template) {
 						document.traits = undefined;
 						
 					if(!_.isEmpty($scope.synonymNames))
-						document.synonymNames = _($scope.synonymNames).pluck('value').compact().value();
+						document.synonymNames = _($scope.synonymNames).map('value').compact().value();
 					if(_.isEmpty(document.synonymNames))
 						document.synonymNames = undefined;		
 					

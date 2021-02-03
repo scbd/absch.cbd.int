@@ -57,13 +57,13 @@ function (app, _, template) {
 						document.notes = undefined;
 
 					if(!_.isEmpty($scope.scientificNameSynonyms))
-						document.scientificNameSynonyms = _($scope.scientificNameSynonyms).pluck('value').compact().value();
+						document.scientificNameSynonyms = _($scope.scientificNameSynonyms).map('value').compact().value();
 					if(_.isEmpty(document.scientificNameSynonyms))
 						document.scientificNameSynonyms = undefined;
 
 
 					if(!_.isEmpty($scope.commonNames))
-						document.commonNames = _($scope.commonNames).pluck('value').compact().value();
+						document.commonNames = _($scope.commonNames).map('value').compact().value();
 					if(_.isEmpty(document.commonNames))
 						document.commonNames = undefined;
 

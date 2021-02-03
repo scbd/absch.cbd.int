@@ -45,7 +45,7 @@
                         sortFields = [sortFields];
 
                     if(sortFields.length <= 1){
-                        var field = _.first(sortFields)
+                        var field = _.head(sortFields)
                         if(!field || field.indexOf('updatedDate_dt')>0){
                             sortFields = groupFieldMapping.sortFields;
                         }                        

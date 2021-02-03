@@ -89,7 +89,7 @@ define(['app', 'lodash', 'angular-joyride'], function (app, _) {
                                                 .then(function (response) {
 
                                                         // $timeout(function(){
-                                                        help = _.first(response.data);
+                                                        help = _.head(response.data);
                                                         if(help){
                                                                 _.forEach(help.fields, function (field, key) {
 

@@ -73,7 +73,7 @@ define(['app', 'text!./tree-selector.html', 'lodash', 'components/scbd-angularjs
                     }
 
                     var oldSelection = $scope.selection||[];
-                    var newSelection = _(allItems).where({ selected : true }).pluck('identifier').value();
+                    var newSelection = _(allItems).filter({ selected : true }).map('identifier').value();
 
                     var updated = oldSelection.length != newSelection.length;
 

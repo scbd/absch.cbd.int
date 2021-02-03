@@ -390,7 +390,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                     // Only allow countries who answered to this question
                     var restrictedCountries = _(reports)
                         .filter(function(r) { return !!r[question.key]; })
-                        .pluck('government')
+                        .map('government')
                         .value();
                     if (previousReports && questionsMapping) {
 
@@ -398,7 +398,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
 
                         var previousCountries = _(previousReports)
                             .filter(function(pr) { return !!pr[questionsMapping[question.key]]; })
-                            .pluck('government')
+                            .map('government')
                             .value();
 
                         restrictedCountries = _.intersection(restrictedCountries, previousCountries);
@@ -569,7 +569,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                                         var column = data.columns[region.identifier];
                                         var cell;
                                         if(!_.isEmpty(data.rows))
-                                            cell   = data.rows[_.first(_.keys(data.rows))].cells  [region.identifier];
+                                            cell   = data.rows[_.head(_.keys(data.rows))].cells  [region.identifier];
                                         if(region.countriesMap[report.government]){
                                             //     region.countriesMap[report.government]
                                             if(!column['additionalInfo'][key+'_sum'])

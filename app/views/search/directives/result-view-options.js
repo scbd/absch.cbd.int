@@ -61,7 +61,7 @@
 
                                 if(field.field == 'relevance'){
                                     $scope.selectedFields = [];
-                                    _.each($scope.sortByFields, function(f){f.selected=f.field == 'relevance'});
+                                    _.forEach($scope.sortByFields, function(f){f.selected=f.field == 'relevance'});
                                 }
                                 else{
                                     var relevance = _.find($scope.selectedFields, {field: 'relevance'})

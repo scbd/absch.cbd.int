@@ -1,4 +1,4 @@
-define(['app', 'services/cache-service'], function (app) {
+define(['app', 'lodash', 'services/cache-service'], function (app,_) {
 
     app.factory('thesaurusService', ['$http', '$q', 'cacheService', function ($http, $q, cacheService) {
         var termsCacheFactory = cacheService.getCacheFactory({name:'terms', storageMode:'localStorage', maxAge:24*60*60*1000})//one day cache for terms
@@ -38,7 +38,7 @@ define(['app', 'services/cache-service'], function (app) {
                                     if(options.narrowerOf){//
                                         var narrowerOf = _.find(data, {identifier:options.narrowerOf})
                                         data = _.filter(data, function(term){
-                                            return _.contains(narrowerOf.narrowerTerms, term.identifier)
+                                            return _.includes(narrowerOf.narrowerTerms, term.identifier)
                                         });
                                     }
 

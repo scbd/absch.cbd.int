@@ -86,7 +86,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                         var previousQuestionsMappings      = _.mapValues(results[3], function(nr) { return _.mapValues(nr, function(v) { return v.question || v }) });
                         var previousQuestionsValueMappings = _.mapValues(results[3], function(nr) { return _.mapValues(nr, function(v) { return v.valueMapping  }) });
 
-                        var reportsCountriesMap = _(reports).pluck('government').sortBy().map(function(id) {
+                        var reportsCountriesMap = _(reports).map('government').sortBy().map(function(id) {
 
                             return $scope.allRegionsMap[id];
 

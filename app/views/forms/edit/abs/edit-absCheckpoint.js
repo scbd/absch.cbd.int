@@ -1,6 +1,6 @@
-define(['app', 'views/forms/edit/edit',
+define(['app', 'lodash', 'views/forms/edit/edit',
     'views/forms/view/abs/view-abs-checkpoint.directive'
-], function(app) {
+], function(app, _) {
 
     app.controller("editAbsCheckpoint", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, $http, $filter, $q, $routeParams, $controller, $location) {
         $controller('editController', {
@@ -23,7 +23,7 @@ define(['app', 'views/forms/edit/edit',
                     var jurisdictions = o[0].data;
                     jurisdictions.push(o[1].data);
 
-                    _.each(jurisdictions, function(element) {
+                    _.forEach(jurisdictions, function(element) {
                         element.__value = element.name;
                     });
 
@@ -34,7 +34,7 @@ define(['app', 'views/forms/edit/edit',
 
         $scope.ac_jurisdictions = function() {
             return $scope.options.jurisdictions().then(function(jurisdictions) {
-                _.each(jurisdictions, function(element) {
+                _.forEach(jurisdictions, function(element) {
                     element.__value = element.name;
                 });
                 return jurisdictions;
