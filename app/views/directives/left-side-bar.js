@@ -18,7 +18,6 @@ define(['app', 'lodash',
 
                         $scope.articles = [];
 
-                        loadArticles();
                         //---------------------------------------------------------------------
                         function loadArticles(queryTags, isRetry){
                             $scope.loading = true;
@@ -107,6 +106,9 @@ define(['app', 'lodash',
                         $scope.closeLeftSideBar = function(){
                             $rootScope.$broadcast('event:open-left-side-bar', $scope.openSideBarType)
                         }
+
+                        if($scope.type)
+                            loadArticles();
 
                 }                
             };
