@@ -247,6 +247,9 @@ export default function bootApp(window, require, defineX) {
             require([window.scbdApp.template], function(){})
         })
     }
+    else{
+        alert('Unable to load files from server: ' + err.requireModules);
+    }
 
     function removeParamFromUrl(url, param) {
         var urlParts = url.split('?'),
