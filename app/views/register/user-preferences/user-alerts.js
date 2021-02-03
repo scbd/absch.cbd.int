@@ -1,6 +1,6 @@
 define(['app',
     "text!views/register/user-preferences/user-alerts.html",
-    'underscore',
+    'lodash',
     'moment',
     'ngDialog',
     'views/search/search-directive',

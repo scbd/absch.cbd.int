@@ -14,7 +14,7 @@ app.directive("viewAbsNationalReport", [function () {
 			target  : "@linkTarget",
 			hide	: "@"
 		},
-		controller : ["$scope", "underscore", "commonjs", "$filter", function ($scope, _, commonjs, $filter)
+		controller : ["$scope", "lodash", "commonjs", "$filter", function ($scope, _, commonjs, $filter)
 		{
 			
 			

@@ -1,6 +1,6 @@
 define(['app', 'text!views/directives/workflow-history-directive.html'], function(app, template) {
 
-    app.directive('workflowHistory', ["$q", "$timeout", "underscore",
+    app.directive('workflowHistory', ["$q", "$timeout", "lodash",
         function($q, $timeout, _) {
 
             return {

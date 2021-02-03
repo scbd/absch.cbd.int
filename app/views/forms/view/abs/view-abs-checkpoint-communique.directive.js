@@ -18,7 +18,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 		{
 			$scope.showPdf = $attr.showPdf === undefined || $attr.showPdf != "false";
 		},
-		controller: ["$scope", "IStorage", "$http", "$q","underscore","realm", function ($scope, storage, $http, $q, _, realm)
+		controller: ["$scope", "IStorage", "$http", "$q","lodash","realm", function ($scope, storage, $http, $q, _, realm)
 		{
 			$scope.contacts = undefined;
 			$scope.gisMapLayers = null;

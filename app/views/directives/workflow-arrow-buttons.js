@@ -1,4 +1,4 @@
-define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore',
+define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'lodash',
         'views/directives/workflow-history-directive', 'js/common', 'ngDialog',
         'toastr', 'services/local-storage-service', 'services/app-config-service', 'services/articles-service',
 ], function (app, template) {
@@ -725,7 +725,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                        else if ($rootScope.next_url) {
                            var url = $rootScope.next_url.replace($location.$$protocol + '://' +
                                $location.$$host + ($location.$$host != 'absch.cbd.int' ? ':' + $location.$$port : '') + '/', '');
-                           _.each(absHosts, function(host) {
+                           _.forEach(absHosts, function(host) {
                                url = url.replace(host, '');
                            });
                            url = url.replace(/^(en|ar|fr|es|ru|zh)\//, '/');
@@ -760,7 +760,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'underscore'
                 //============================================================
                 function documentPublishRequested(documentInfo, workflowId) {
 
-                    if(_.contains(appConfigService.referenceSchemas, documentInfo.header.schema)){
+                    if(_.includes(appConfigService.referenceSchemas, documentInfo.header.schema)){
                         toastr.info('Record saved. A publishing request has been sent to your SCBD.');
                     }
                     else
