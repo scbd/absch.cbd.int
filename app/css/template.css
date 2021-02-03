@@ -2224,3 +2224,47 @@ a.disabled{
 .edit-biosafety-expert-directive .regions-list #select-dropdown .dropdown-toggle {
     white-space: inherit;
 }
+
+.easing {
+    transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+
+#LeftSideBar .news-date{
+    float:unset;
+    font-size: 10px; text-transform: uppercase;             
+}
+#LeftSideBar .noimage{
+    display: table-cell; 
+    vertical-align: middle; 
+    font-size:24px;padding:10px; 
+    top:-20px;position: relative; 
+}
+
+#LeftSideBar .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    background-color: #fff;
+    min-height: 100px;
+}
+
+#LeftSideBar .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+#LeftSideBar .card .header{
+    font-size:14px;
+    font-weight: 500;
+}
+#LeftSideBar .help-header{
+    min-height: 16.43px;
+    padding: 15px;
+    border-bottom: 1px solid #faf9f8;
+    background: #d1d1d1;
+}
+#leftSideBar .footer{
+    position: absolute;
+    bottom: 0px;
+}
+#LeftSideBar .summary, #LeftSideBar .summary h1,h2,h3, h4{
+    font-size: 10px;
+    font-weight: unset;
+}

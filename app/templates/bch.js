@@ -12,6 +12,7 @@ import 'angular-loggly-logger';
 import 'components/scbd-angularjs-services/main';
 import 'views/directives/route-loading-directive';
 import 'services/main'; ;
+import 'views/directives/left-side-bar' 
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
 
@@ -85,6 +86,14 @@ import 'services/main'; ;
                 }
             });
             
+            $rootScope.$on('event:open-left-side-bar', function(evt, type){
+                if($scope.openSideBarType == type)
+                    $scope.openSideBarType = undefined;
+                else    
+                    $scope.openSideBarType = type;
+
+            })
+
             //============================================================
             //
             //
