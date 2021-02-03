@@ -2171,3 +2171,42 @@ a.disabled{
 .matrix-export-dialog .modebar{
     display: none;
 }
+/*Country Profiles*/
+.country-profile h1 {
+    font-size: 55px;
+    font-weight: 600;
+}
+.country-profile-list .link1 .label {
+    font-weight: inherit;
+    color: #555;
+}
+@media (max-width: 767px){
+    .country-profile-list .link1 .label {
+        display: contents;
+    }
+}
+/* ammap */
+.map-disclaimer {
+    position: absolute;
+    font-family: Verdana;
+    font-size: 11px;
+    opacity: .7;
+    display: block;
+    bottom: 30px;
+    right: 0px;
+    cursor: pointer;
+    left: 70%;
+}
+.tag-line {
+    position: relative;
+    font-family: Verdana;
+    font-size: 11px;
+    opacity: 0.7;
+    display: block;
+    float:right;
+    bottom:20px;
+    cursor: pointer;
+}
+.map a {color:white important!;}
+
+.z10{ z-index: 1000 important!;}

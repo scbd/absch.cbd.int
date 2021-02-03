@@ -24,10 +24,10 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
             restrict: 'EAC',
             replace: true,
             template: template, 
-            controller: ['$scope','$q', 'realm', '$element', 'commonjs', 'localStorageService', '$http', 'Thesaurus' ,
+            controller: ['$scope','$q', 'realm', '$element', 'commonjs', 'localStorageService', '$filter', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService','$rootScope',
              'joyrideService', '$timeout', 'locale', 'solr', 'toastr','$log',
-            function($scope, $q, realm, $element, commonjs, localStorageService, $http, thesaurus, 
+            function($scope, $q, realm, $element, commonjs, localStorageService, $filter, thesaurus, 
                     appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, 
                     $timeout, locale, solr, toastr, $log) {
                         var customQueryFn = {
@@ -422,8 +422,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     function loadSchemaFilters() {
 
                         _.each(realm.schemas, function (schema, key) {                           
-                                addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': schema.title.en, 'id': key, 
-                                        'description': (schema.description || {}).en, otherType:schema.type });
+                                addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 
+                                        'description': $filter('lstring')(schema.description || {}), otherType:schema.type });
                         })
 
                         addFilter('partyToProtocol'     , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Protocol'                   , 'id': 'partyToProtocol'     , 'description': '' });
@@ -433,7 +433,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                         //SCBD
                         _.each(scbdSchemas, function (schema, key) {
-                            addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': schema.title, 'id': key, 
+                            addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 
                                     'description': (schema.description || {}), otherType:'scbd' });
                         });
                     };
@@ -557,7 +557,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         // var schemaFieldMap = _.cloneDeep(bchSchemaFieldMapping[schemaFieldKey]);
 
                         var existingFilter = _.find($scope.searchFilters, function(fil){
-                            return fil.name.en == keyword.title.en
+                            return fil.name[locale] == $filter('lstring')(keyword.title)
                         })
                         if(existingFilter){                           
                             // _.each(schemaFieldMap, function(field){
@@ -572,7 +572,6 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         }
 
                     }
-
 
                     function updateQueryString(field, values){
                         if(field!='sort'){

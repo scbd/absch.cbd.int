@@ -131,6 +131,15 @@ require.s.contexts._.nameToUrl = function (moduleName, ext, skipExt) {
     return url;
 }
 
+require.onError = function (err) {
+    console.log(err.requireType);
+    if (err.requireType === 'timeout') {
+        alert('Timeout loading modules: ' + err.requireModules);
+    }
+
+    throw err;
+};
+
 define('plotly.js', [cdnHost + 'plotly.js-basic-dist-min@1.57.1/plotly-basic.min'], function(Plotly){
     return Plotly;
 });

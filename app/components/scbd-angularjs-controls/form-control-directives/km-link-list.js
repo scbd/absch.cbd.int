@@ -49,6 +49,12 @@ app.directive('kmLinkList', ['MimeService', function (MimeService){
 
 					return url;
 				}
+
+				$scope.getNonUNLanguage = function(lang){
+					return {
+						identifier:'lang-'+lang
+					}
+				}
 			}
 		};
 	}]);
