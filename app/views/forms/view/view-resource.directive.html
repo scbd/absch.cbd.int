@@ -23,13 +23,13 @@
 			<label>Link to the resource(s)</label>
 			<km-link-list class="km-value"  ng-if="document.resourceLinks" ng-model="document.resourceLinks" style="margin-top: 5px;"></km-link-list>
 		</div>
-<!--		<div ng-show="document.authors && isABS">-->
-<!--			<label>Author(s)</label>-->
-<!--			<div class="km-value km-pre"><span ng-bind="document.authors | lstring:locale"></span></div>-->
-<!--		</div>-->
 		<div ng-show="document.authors">
 			<label>Author(s)</label>
 			<km-value-ml value="document.authors" locales="locale"></km-value-ml>
+		</div>
+		<div ng-show="document.authorsInfo && isBCH">
+			<label>Authors information</label>
+			<km-value-ml value="document.authorsInfo" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.publicationYear && isABS">
 			<label>Publication year</label>
@@ -67,13 +67,9 @@
 				</ul>
 			</div>
 		</div>
-		<div ng-show="document.publicationYear && isBCH">
-			<label>Publication year</label>
-			<km-value-ml value="document.publicationYear" locales="locale"></km-value-ml>
-		</div>
-		<div ng-show="document.publicationMonth && isBCH">
-			<label>Publication month</label>
-			<km-value-ml value="monthNames[document.publicationMonth-1]" locales="locale"></km-value-ml>
+		<div ng-show="document.publicationYear && document.publicationMonth && isBCH">
+			<label>Publication date</label>
+			<div class="km-value"><span ng-bind="document.publicationYear"></span>-<span ng-bind="monthNames[document.publicationMonth-1]"></span></div>
 		</div>
 		<div ng-show="document.summary && isBCH">
 			<label>Summary, abstract or table of contents</label>
@@ -133,7 +129,7 @@
 			<label>Type of resource</label>
 			<div class="km-value">
 				<ul class="list">
-					<li ng-repeat="term in document.resourceTypes"><span ng-bind="term | term | lstring:locale"></span></li>
+					<li ng-repeat="val in document.resourceTypes"><span ng-bind="val | term | lstring:locale"></span></li>
 				</ul>
 			</div>
 		</div>
@@ -289,12 +285,6 @@
 		<div id="divEndorsement">
 			<span endorsement identifier="document.header.identifier" schema="document.header.schema"></span>
 		</div>
-
-		<!-- <legend>Link to this record</legend>
-		<div class="km-value"><a rel="noopener" translation-url  href="/database/record?documentID={{document.header.identifier}}">
-		http://absch.cbd.int/database/record?documentID={{document.header.identifier}}</a></div> -->
 	</div>
 	<div document-metadata class="panel-footer"></div>
-
-	<!-- <div discussion forum-id="17384" thread-title="{{document.title| lstring:locale}}" thread-message="{{document.summary| lstring:locale}}" example-msg="tryme()" tag-identifier="{{document.header.identifier}}"/> -->
 </div>

@@ -1,7 +1,6 @@
 define(['app',"text!views/forms/view/view-resource.directive.html",
 'views/directives/record-options',
 ], function (app, template) {
-	// ,'views/directives/discussion-directive.html'
 app.directive("viewResource", [function () {
 	return {
 		restrict   : "EAC",
@@ -80,7 +79,6 @@ app.directive("viewResource", [function () {
 
 			};
 
-			$scope.monthNames = ['January', 'February', 'March', 'April', 'May','June', 'July', 'August', 'September','October', 'November', 'December'];
 			$scope.getTerm = function(term){
 
 				return {
