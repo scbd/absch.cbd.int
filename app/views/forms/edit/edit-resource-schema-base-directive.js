@@ -84,22 +84,22 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 						.then(function(o){
 								var subjects = o.data;
 
-								_.each(subjects, function(subject){
+								_.forEach(subjects, function(subject){
 									subject.narrowerTerms = _.without(subject.narrowerTerms, absSubjectsToSkip);
 									subject.broaderTerms  = _.without(subject.broaderTerms, absSubjectsToSkip);
 								});
 
 								subjects = _.filter(subjects, function(subject){
-									return !_.contains(absSubjectsToSkip, subject.identifier);
+									return !_.includes(absSubjectsToSkip, subject.identifier);
 								});
 								if($scope.document_type=="modelContractualClause" || $scope.document_type=="communityProtocol"){
-									_.each(changeParentFor, function(item){
-										var subject = _.findWhere(subjects, {'identifier':item});
+									_.forEach(changeParentFor, function(item){
+										var subject = _.find(subjects, {'identifier':item});
 										if(subject){
 											subject.broaderTerms = [];
 											subject.broaderTerms.push(newParent);
 										}
-										var parent = _.findWhere(subjects, {'identifier':newParent});
+										var parent = _.find(subjects, {'identifier':newParent});
 										parent.narrowerTerms.push(item);
 									});
 								}
@@ -113,7 +113,7 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
                     	mapping: function(item){ return item.identifier;},
 						options: $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
 							$scope.options.documentLinksExt[0].options = $filter("orderBy")(o.data, "name");
-							_.each($scope.options.documentLinksExt[0].options, function(element) {
+							_.forEach($scope.options.documentLinksExt[0].options, function(element) {
 									element.__value = element.name;
 								});
 							return $scope.options.documentLinksExt[0].options;
@@ -134,8 +134,7 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 				var end = new Date().getFullYear();
 				for (var i = end; i > (end-100) ; i--) {
 					$scope.years.push({id:i, name: i});
-				} 
-				$scope.monthNames = ['January', 'February', 'March', 'April', 'May','June', 'July', 'August', 'September','October', 'November', 'December'];
+				}
 				//============================================================
 				//
 				//============================================================
@@ -153,12 +152,12 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 
 			        var purposes = _.map(document.purpose, 'identifier');
 
-			        return _.contains(purposes, 'A5C5ADE8-2061-4AB8-8E2D-1E6CFF5DD793') || // Assessing capacity-building needs
-			               _.contains(purposes, '3813BA1A-2DE7-4DD5-8415-3B2C6737E567') || // Designing capacity building initiatives
-			               _.contains(purposes, '5054AC52-E738-4694-A403-6490FE7D4CF4') || // Monitoring and evaluation of capacity-building initiatives and products
-			               _.contains(purposes, '05FA6F66-F942-4713-BB4C-DA032C111188') || // Providing technical guidance
-			               _.contains(purposes, '9F48AEA0-EE28-4B6F-AB91-E0E088A8C6B7') || // Raising awareness
-			               _.contains(purposes, '5831C357-95CA-4F09-963B-DF9E8AFD8C88');   // Training/learning
+			        return _.includes(purposes, 'A5C5ADE8-2061-4AB8-8E2D-1E6CFF5DD793') || // Assessing capacity-building needs
+			               _.includes(purposes, '3813BA1A-2DE7-4DD5-8415-3B2C6737E567') || // Designing capacity building initiatives
+			               _.includes(purposes, '5054AC52-E738-4694-A403-6490FE7D4CF4') || // Monitoring and evaluation of capacity-building initiatives and products
+			               _.includes(purposes, '05FA6F66-F942-4713-BB4C-DA032C111188') || // Providing technical guidance
+			               _.includes(purposes, '9F48AEA0-EE28-4B6F-AB91-E0E088A8C6B7') || // Raising awareness
+			               _.includes(purposes, '5831C357-95CA-4F09-963B-DF9E8AFD8C88');   // Training/learning
 			    };
 
                 //============================================================
@@ -173,7 +172,7 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 
 			        var purposes = _.map(document.purpose, 'identifier');
 
-			        return _.contains(purposes, 'C1B32F41-89D1-4EDC-8EF2-335362B91F8D'); // Literature
+			        return _.includes(purposes, 'C1B32F41-89D1-4EDC-8EF2-335362B91F8D'); // Literature
 
 			    };
 
@@ -183,12 +182,15 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 				$scope.getCleanDocument = function(document) {
 
 					document = document || $scope.document;
-					if (!document)
+					if ( !document )
 						return undefined;
-					if(!_.isEmpty($scope.keywords))
-						document.keywords = _($scope.keywords).pluck('value').compact().value();
-					if(_.isEmpty(document.keywords))
-						document.keywords = undefined;
+						if ( !_.isEmpty( $scope.keywords )  && !$scope.isABS)
+							document.keywords = _( $scope.keywords ).pluck( 'value' ).compact().value();
+						if ( _.isEmpty( document.keywords )  || $scope.isABS)
+							document.keywords = undefined;
+						if($scope.isBCH) {
+							$scope.onLmoCategoriesChange( document.addressLmoCategories );
+						}
 					return $scope.sanitizeDocument(document);
 				};
 
@@ -216,7 +218,7 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 
 			        var aichiTargets = _.map(document.aichiTargets, 'identifier');
 
-			        return _.contains(aichiTargets, 'AICHI-TARGET-16');
+			        return _.includes(aichiTargets, 'AICHI-TARGET-16');
 
 			    };
 				//============================================================
@@ -249,14 +251,13 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 					else
 						$scope.displayMCCWarning = false;
 				});
-				$scope.$watch('document.addressLmoCategories',function(value){
+				$scope.onLmoCategoriesChange = function(value){
 					if(!value){
 						$scope.document.organisms = undefined;
 						$scope.document.genes = undefined;
 						$scope.document.modifiedOrganisms = undefined;
 					}
-				});
-
+				}
 
 				//============================================================
 				//

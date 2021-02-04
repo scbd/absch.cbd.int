@@ -2,8 +2,6 @@
 	<div class="registerpage-content">
 
 		<div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" tab="tab">
-			<!-- <intro-form></intro-form> -->
-			<!--only use it if default article intro is not required -->
 			<edit-form>
 					<form name="editForm" class="editForm" style="margin-top:10px">
 
@@ -40,6 +38,13 @@
 									</div>
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
+											<div class="km-control-group" name="authorsInfo" caption="Authors information">
+												<div km-textbox-ml name="authorsInfo" ng-model="document.authorsInfo" rows="2" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row" ng-if="isBCH">
+										<div class="col-xs-12">
 											<div class="km-control-group" name="organizations" caption="Organization(s) involved in the publication of this resource">
 												<div document-selector ng-model="document.organizations" question="organizations" type="checkbox" schema="organization" 
 													skip-government="true" allow-new="true" allow-new-schema="organization">
@@ -65,7 +70,18 @@
 										<div class="col-xs-6">
 											<div class="km-control-group" required name="publicationMonth" caption="Publication month">
 												<select class="form-control" required name="publicationMonth" ng-model="document.publicationMonth" convert-to-number>
-													<option ng-repeat="option in monthNames" value="{{$index+1}}">{{option}}</option>
+													 <option value="1">January</option>
+													 <option value="2">February</option>
+													 <option value="3">March</option>
+													 <option value="4">April</option>
+													 <option value="5">May</option>
+													 <option value="6">June</option>
+													 <option value="7">July</option>
+													 <option value="8">August</option>
+													 <option value="9">September</option>
+													 <option value="10">October</option>
+													 <option value="11">November</option>
+													 <option value="12">December</option>
 												</select>
 											</div>
 										</div>
@@ -100,8 +116,8 @@
 									<div class="row">
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="addressLmoCategories" caption="Does this resource address one or more specific categories of organisms or genes or LMOs?" required>
-												<div km-yes-no required ng-model="document.addressLmoCategories" locales="document.header.languages"></div>
-												<div ng-if="document.addressLmoCategories" style="padding-left:50px; margin-top: 15px;">
+												<div km-yes-no required ng-model="document.addressLmoCategories" ng-click="onLmoCategoriesChange(!document.addressLmoCategories)" locales="document.header.languages"></div>
+												<div ng-if="document.addressLmoCategories" style="margin-top: 15px;">
 													<div class="col-xs-12">
 														<div class="km-control-group" name="organisms"  caption="Organism(s) identification">
 															<div document-selector ng-model="document.organisms" allow-new="true" allow-new-schema="organisms"
@@ -180,7 +196,6 @@
 											<div class="km-control-group" name="format" caption="Format">
 												<div class="help-block">Format may be used to identify the resource dimensions (e.g. size, number of pages or duration) or the software, hardware, or other equipment needed to display or operate it (e.g. "Requires Acrobat Reader for viewing").</div>
 												<div km-textbox-ml name="format" ng-model="document.format" locales="document.header.languages"></div>
-												<!-- <div km-select name="fileFormat" required ng-model="document.fileFormat" items="options.fileFormats()"></div> -->
 											</div>
 										</div>
 									</div>
@@ -340,6 +355,14 @@
 											</div>
 										</div>
 									</div>
+									<div class="row" ng-if="isBCH">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="resourceAccess" caption="How to obtain the resource">
+												<div class="help-block" ng-if="isBCH">Please provide details on how hard copies of the resource(s) can be ordered or otherwise obtained.</div>
+												<div km-textbox-ml ng-model="document.resourceAccess" rows="4" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
 									<div class="row" ng-if="isABS">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="cover" caption="Cover image(s)">
@@ -439,19 +462,6 @@
 											<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
 												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</section>
-							<section ng-if="isBCH">
-								<div class="well no-shadow bg-white">
-									<legend>How to obtain the resource</legend>
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="resourceAccess">
-												<div class="help-block" ng-if="isBCH">Please provide details on how hard copies of the resource(s) can be ordered or otherwise obtained.</div>
-												<div km-textbox-ml ng-model="document.resourceAccess" rows="4" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
