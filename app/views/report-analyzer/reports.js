@@ -21,7 +21,7 @@
                 };
                 sessionStorage.setItem('nrAnalyzerData', JSON.stringify(data));
 
-                $location.url(_.forInRight($location.path(), '/') + '/analyzer');
+                $location.url(_.trimEnd($location.path(), '/') + '/analyzer');
             };
 
 
