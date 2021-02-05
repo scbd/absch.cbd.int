@@ -1,7 +1,7 @@
 define(['app', 'lodash',
-'text!views/directives/left-side-bar.html', 'services/articles-service'],
+'text!views/directives/docked-side-bar.html', 'services/articles-service'],
     function(app, _, template) {
-        app.directive('leftSideBar', ['realm','$rootScope', '$route', '$location', 'articlesService',
+        app.directive('dockedSideBar', ['realm','$rootScope', '$route', '$location', 'articlesService',
         function(realm, $rootScope, $route, $location, articlesService) {
             return {
                 restrict: 'AE',

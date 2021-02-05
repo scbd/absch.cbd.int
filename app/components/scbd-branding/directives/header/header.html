@@ -22,7 +22,8 @@
         width: 30px;
         text-align: center;
       }
-      .navbar .right-side-help-menus:hover{
+      .navbar .right-side-help-menus:hover,
+      .navbar .right-side-help-menus.active{
         background: #eee;
       }
     </style>
@@ -41,8 +42,8 @@
         <account-header user="user" style="position:absolute;right:10%;top:7px;"></account-header>
         <xuser-notifications-icon style="position:absolute;right:8%;top:5px;"></xuser-notifications-icon>
         <locale-header style="position:absolute;right:5%;top:-1px;" id="CBD-Branding"></locale-header>
-        <a href="#" class="right-side-help-menus" ng-click="openSideBlock('help')"style="position:absolute;right:3%;top:-1px;"><i class="fa fa-question"></i></a>
-        <a href="#" class="right-side-help-menus" ng-click="openSideBlock('announcements')"style="position:absolute;right:1%;top:-1px;"><i class="fa fa-bullhorn"></i></a>
+        <a href="#" ng-class="{'active':activeHelpMenu=='help'}"class="right-side-help-menus" ng-click="openSideBlock('help')"style="position:absolute;right:3%;top:-1px;"><i class="fa fa-question"></i></a>
+        <a href="#" ng-class="{'active':activeHelpMenu=='announcements'}"class="right-side-help-menus" ng-click="openSideBlock('announcements')"style="position:absolute;right:1%;top:-1px;"><i class="fa fa-bullhorn"></i></a>
       </div>
 
       <ul class="navbar-left navlist hidden-xs hidden-sm"  ng-class="{'arabic-cbd-nav-bar' : locale=='ar'}">
