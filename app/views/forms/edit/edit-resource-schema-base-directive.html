@@ -112,6 +112,38 @@
 							</section>
 							<section ng-if="isBCH">
                                 <div class="well no-shadow bg-white">
+									<legend>Background  material to the “Guidance on risk assessment of living modified organisms”</legend>
+									<div class="row">
+										<div  class="col-xs-12">
+											<div class="km-control-group" name="bchRaRecommend" caption="If “Risk assessment” was indicated as one of the “Thematic areas” in the previous question, please answer to the following question: would you like to recommend 
+												this document as background material for the “Guidance on Risk Assessment of Living Modified Organisms”? ">
+												<div km-yes-no required ng-model="document.bchRaRecommend" ng-click="onRaRecommendChange(!document.bchRaRecommend)"  locales="document.header.languages"></div>
+												<div ng-if="document.bchRaRecommend" style="margin-top: 15px;">
+													<div class="col-xs-12">
+														<div class="km-control-group" name="bchRaAuthorAffiliation"  caption="Author affiliation">
+															<div ng-if="isBCH" km-term-check name="bchRaAuthorAffiliation" ng-model="document.bchRaAuthorAffiliation" terms="options.bchRaAuthorAffiliation()"
+																 binding-type="term[]" locales="document.header.languages">
+															</div>
+														</div>
+													</div>
+
+													<div class="col-xs-12">
+														<div class="km-control-group" name="bchRaSubjects" required  caption="Please indicate to which section(s) of the “Guidance” this background material is relevant: ">
+															<div ng-if="isBCH" km-term-check name="bchRaSubjects" required ng-model="document.bchRaSubjects" terms="options.bchRaSubjects()"
+																 binding-type="term[]" locales="document.header.languages">
+															</div>
+														</div>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+
+							<section ng-if="isBCH">
+                                <div class="well no-shadow bg-white">
 									<legend>Information on Organisms or LMOs</legend>
 									<div class="row">
 										<div  class="col-xs-12">

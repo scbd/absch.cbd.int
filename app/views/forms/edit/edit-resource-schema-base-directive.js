@@ -128,6 +128,8 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 					bchLanguages    : function() {return thesaurusService.getDomainTerms('languages').then(function(o){return _.sortBy(o, 'name' );})},
 					bchSubjects   	: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'})},
 					resourceTypes   : function() {return thesaurusService.getDomainTerms('resourceTypes',{other:true, otherType:'lstring'})},
+					bchRaAuthorAffiliation : function() {return thesaurusService.getDomainTerms('bchRaAuthorAffiliation',{other:true, otherType:'lstring'})},
+					bchRaSubjects	: function() {return thesaurusService.getDomainTerms('bchRaSubjects');},
 
 				});
 				$scope.years = [];
@@ -202,9 +204,16 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 						document.publisher = undefined;
 						document.languages  = undefined;
 						document.resourceAccess = undefined;
+						document.bchRaRecommend = undefined;
+						document.bchRaAuthorAffiliation = undefined;
+						document.bchRaSubjects = undefined;
 					}
 					if($scope.isBCH) {
 						$scope.onLmoCategoriesChange( document.addressLmoCategories );
+					}
+					
+					if($scope.isBCH) {
+						$scope.onRaRecommendChange( document.bchRaRecommend );
 					}
 					if($scope.isABS) {
 						$scope.onResourceTypesChange( document.resourceTypes );
@@ -272,6 +281,13 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 						$scope.document.organisms = undefined;
 						$scope.document.genes = undefined;
 						$scope.document.modifiedOrganisms = undefined;
+					}
+				}
+
+				$scope.onRaRecommendChange = function(value){
+					if(!value){
+						$scope.document.bchRaAuthorAffiliation = undefined;
+						$scope.document.bchRaSubjects = undefined;
 					}
 				}
 
