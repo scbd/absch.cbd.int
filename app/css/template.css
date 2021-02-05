@@ -758,7 +758,7 @@ footer .logo {
 }
 .page-content {
     background-color: #eee;
-    padding: 10px 20px 20px 20px;
+    /* padding: 10px 20px 20px 20px; */
 }
 @media (max-width: 768px) {
     .page-content {
@@ -861,126 +861,9 @@ footer .logo {
 }
 .help-simple-content {}
 
-/*side bar styles*/
-#sidebar-wrapper {
-    position: absolute!important;
-    z-index: 60!important;
-}
 .toolbar-header {
     font-size: 22px;
     padding: 16px;
-}
-
-/*!
- * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
-
-/* Toggle Styles */
-#wrapper {
-    padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-#wrapper.toggled {
-    padding-left: 300px;
-}
-#sidebar-wrapper {
-    z-index: 1000;
-    position: fixed;
-    left: 300px;
-    width: 0;
-    height: 100%;
-    margin-left: -300px;
-    overflow-y: auto;
-    background: #000;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-    min-height: 1000px;
-}
-#wrapper.toggled #sidebar-wrapper {
-    width: 300px;
-}
-#page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 15px;
-}
-#wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right: -300px;
-}
-
-/* Sidebar Styles */
-.sidebar-nav {
-    position: absolute;
-    top: 0;
-    width: 300px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-.sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
-}
-.sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #999999;
-}
-.sidebar-nav li a:hover {
-    text-decoration: none;
-    color: #fff;
-    background: rgba(255, 255, 255, 0.2);
-}
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-    text-decoration: none;
-}
-.sidebar-nav> .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
-}
-.sidebar-nav> .sidebar-brand a {
-    color: #999999;
-}
-.sidebar-nav> .sidebar-brand a:hover {
-    color: #fff;
-    background: none;
-}
-@media(min-width:768px) {
-    #wrapper {
-        padding-left: 300px;
-    }
-    
-    #wrapper.toggled {
-        padding-left: 0;
-    }
-    
-    #sidebar-wrapper {
-        width: 300px;
-    }
-    
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
-    }
-    
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
-    
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
 }
 
 /**************************/
@@ -2155,6 +2038,7 @@ a.disabled{
     color: black;
 }
 
+#wrapper .container-fluid,
 #search-new .container-fluid { 
     padding-left: 0px; 
     padding-right: 0px; 
@@ -2229,42 +2113,135 @@ a.disabled{
     transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
 }
 
-#LeftSideBar .news-date{
+#docketSideBar .news-date{
     float:unset;
     font-size: 10px; text-transform: uppercase;             
 }
-#LeftSideBar .noimage{
+#docketSideBar .noimage{
     display: table-cell; 
     vertical-align: middle; 
     font-size:24px;padding:10px; 
     top:-20px;position: relative; 
 }
 
-#LeftSideBar .card {
+#docketSideBar .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     background-color: #fff;
     min-height: 100px;
 }
 
-#LeftSideBar .card:hover {
+#docketSideBar .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    background: #ddd;
 }
-#LeftSideBar .card .header{
+#docketSideBar .article-open {
+    background: #fff!important;
+}
+
+
+#docketSideBar .card .header{
     font-size:14px;
     font-weight: 500;
 }
-#LeftSideBar .help-header{
+#docketSideBar .help-header{
     min-height: 16.43px;
     padding: 15px;
     border-bottom: 1px solid #faf9f8;
     background: #d1d1d1;
 }
-#leftSideBar .footer{
-    position: absolute;
+#docketSideBar .footer{
     bottom: 0px;
 }
-#LeftSideBar .summary, #LeftSideBar .summary h1,h2,h3, h4{
-    font-size: 10px;
-    font-weight: unset;
+#docketSideBar .summary, #docketSideBar .summary h1, #docketSideBar .summary h2, #docketSideBar .summary h3, #docketSideBar .summary h4{
+    font-size: 11px;
+}
+
+#docketSideBar img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-right: 20%;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    right: 0px;
+    width: 0;
+    height: 100%;
+    margin-right:0px;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 50%); 
+}
+#sidebar-wrapper.activate{
+    padding:10px 
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 20%;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: 0px;
+}
+
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-right: 20%;
+    }
+
+    #wrapper.toggled {
+        padding-right: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 20%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 0px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}
+
+.container-breadcrumbs{
+    padding-left: 10px!important;
+}
+#PreferencesPage .register-content, #RegisterPage .register-content, #SubmitPage .register-content, #searchPage .register-content {
+    margin: 5px;
 }

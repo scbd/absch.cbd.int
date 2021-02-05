@@ -1,0 +1,58 @@
+﻿<div id="docketSideBar">
+    <div class="help-header">
+        <button type="button" class="close pull-right" ng-click="closeLeftSideBar()"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="myModalLabel2" ng-bind="type|uppercase"></h4>
+    </div>
+
+    <div style="display: flex;padding-left: 0px;padding-right: 0px; background-color: #fff;">
+        <div ng-if="loading">
+            <i class="fa fa-spin fa-spinner fa-3x"></i> Loading...
+        </div>
+        <div   ng-if="!loading && type=='announcements'">
+            <div class="row">
+                <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" style="cursor:pointer;padding-top: 15px;;" class="col-xs-12">
+                    <div class="card" style="padding: 2px 16px;" ng-class="{'article-open':showArticle}" >
+                        <div ng-click="showArticle=!showArticle">
+                            <img ng-src="{{getSizedImage(article.coverImage.url, '300x300')}}" style="width:100%;"></img>
+                            <h4 class="header" ng-bind="article.title | lstring:locale"></h4>
+                            <hr/>
+                            <p>
+                                <span class="summary" ng-if="article.summary && !showArticle" ng-bind-html="article.summary | lstring:locale|limitTo:200"></span>
+                                <span class="summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span>
+                                <hr/>
+                            </p>
+                        </div>
+                        <div class="footer">
+                            <span class="news-date" ng-bind="article.meta.createdOn | formatDateWithUtc"></span>
+                            <a rel="noopener" ng-href="/articles/{{article.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
+                        </div>
+                    </div>                           
+                </div>
+            </div>
+        </div>
+
+        <div  ng-if="!loading && type=='help'">
+            <div class="row">
+                <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" style="cursor:pointer;padding-top: 15px;;" class="col-xs-12">
+                    <div class="card" style="padding: 2px 16px;" ng-class="{'article-open':showArticle}" >
+                        <div ng-click="showArticle=!showArticle">
+                            <h4 class="header" ng-bind="article.title | lstring:locale"></h4>
+                            <hr/>
+                            <p>
+                                <span class="summary" ng-if="article.summary && !showArticle" ng-bind-html="article.summary | lstring:locale|limitTo:200"></span>
+                                <span class="summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span>
+                                <hr/>
+                            </p>
+                        </div>
+                        <div class="footer">
+                            <span class="news-date" ng-bind="article.meta.createdOn | formatDateWithUtc"></span>
+                            <a rel="noopener" ng-href="/articles/{{article.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
+                        </div>
+                    </div>                           
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+</div>

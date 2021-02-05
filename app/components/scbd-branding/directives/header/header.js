@@ -41,7 +41,12 @@ import 'components/scbd-angularjs-services/main';
                     });
 
                     $scope.openSideBlock = function(type){
-                        $rootScope.$broadcast('event:open-left-side-bar', type)
+                        if(type==$scope.activeHelpMenu)
+                            $scope.activeHelpMenu = undefined;
+                        else
+                            $scope.activeHelpMenu = type;
+                            
+                        $rootScope.$broadcast('event:open-left-side-bar', $scope.activeHelpMenu)
                     }
 
                     function connectWithToken(){

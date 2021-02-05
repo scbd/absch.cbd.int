@@ -87,12 +87,16 @@ import 'views/directives/left-side-bar'
             });
             
             $rootScope.$on('event:open-left-side-bar', function(evt, type){
-                if($scope.openSideBarType == type)
+                
+                $("#wrapper").addClass("toggled");
+                if($scope.openSideBarType == type || type == undefined){
                     $scope.openSideBarType = undefined;
-                else    
+                }
+                else {
                     $scope.openSideBarType = type;
-
-            })
+                    $("#wrapper").removeClass("toggled");
+                }
+            });
 
             //============================================================
             //
@@ -137,7 +141,13 @@ import 'views/directives/left-side-bar'
                 else
                     $('body#top').removeClass('validate-translation')
             }
-            setupTranslationValidation();
+
+            function init(){
+                setupTranslationValidation();
+                // $("#wrapper").toggleClass("toggled");
+            }
+
+            init();
         }
     ]);
     app.directive("mAppLoading", function ($animate) {
