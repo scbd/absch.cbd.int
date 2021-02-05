@@ -119,21 +119,21 @@
 												<div km-yes-no required ng-model="document.addressLmoCategories" ng-click="onLmoCategoriesChange(!document.addressLmoCategories)" locales="document.header.languages"></div>
 												<div ng-if="document.addressLmoCategories" style="margin-top: 15px;">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="organisms"  caption="Organism(s) identification">
-															<div document-selector ng-model="document.organisms" allow-new="true" allow-new-schema="organisms"
+														<div class="km-control-group" required name="organisms"  caption="Organism(s) identification">
+															<div document-selector required ng-model="document.organisms" allow-new="true" allow-new-schema="organisms"
 																schema="(organism)" skip-government="true">
 															</div>
 														</div>
 													</div>
 													<div class="col-xs-12">
-														<div class="km-control-group" name="genes"  caption="Gene(s)  identification">
-															<div document-selector type="checkbox" ng-model="document.genes" allow-new="true" allow-new-schema="dnaSequence"
+														<div class="km-control-group" required name="genes"  caption="Gene(s)  identification">
+															<div document-selector required type="checkbox" ng-model="document.genes" allow-new="true" allow-new-schema="dnaSequence"
 																schema="(dnaSequence)" filter="true" skip-government="true"></div>
 														</div>
 													</div>
 													<div class="col-xs-12">
-														<div class="km-control-group" name="modifiedOrganisms"  caption="LMO(s) identification">
-															<div document-selector type="checkbox" ng-model="document.modifiedOrganisms" allow-new="true" allow-new-schema="modifiedOrganism"
+														<div class="km-control-group" required name="modifiedOrganisms"  caption="LMO(s) identification">
+															<div document-selector required type="checkbox" ng-model="document.modifiedOrganisms" allow-new="true" allow-new-schema="modifiedOrganism"
 																schema="(modifiedOrganism)" filter="true" skip-government="true"></div>
 														</div>
 													</div>
