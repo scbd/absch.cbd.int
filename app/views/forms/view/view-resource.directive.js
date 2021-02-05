@@ -40,10 +40,6 @@ app.directive("viewResource", [function () {
 					$scope.loadReferences($scope.organizations);
 			});
 
-			$scope.tryme = function(){
-				console.log('tryme');
-			};
-
 			//====================
 			//
 			//====================
