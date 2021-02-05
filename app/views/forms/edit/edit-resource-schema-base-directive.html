@@ -149,10 +149,10 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
-												<div ng-if="isABS" km-select multiple name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"
+												<div ng-if="isABS" km-select multiple name="resourceTypes" required ng-model="document.resourceTypes" ng-change="onResourceTypesChange(document.resourceTypes);" items="options.resourceTypes()"
 												 show-description="true"></div>
 
-												<div ng-if="isBCH" km-term-check name="resourceTypes" required ng-model="document.resourceTypes" terms="options.resourceTypes()"
+												<div ng-if="isBCH" km-term-check name="resourceTypes" required ng-model="document.resourceTypes" ng-change="onResourceTypesChange(document.resourceTypes);" terms="options.resourceTypes()"
 												 binding-type="term[]" locales="document.header.languages"></div>
 											</div>
 											

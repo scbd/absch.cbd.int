@@ -185,12 +185,48 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 					if ( !document )
 						return undefined;
 						if ( !_.isEmpty( $scope.keywords )  && !$scope.isABS)
-							document.keywords = _( $scope.keywords ).pluck( 'value' ).compact().value();
+							document.keywords = _( $scope.keywords ).map( 'value' ).compact().value();
 						if ( _.isEmpty( document.keywords )  || $scope.isABS)
 							document.keywords = undefined;
-						if($scope.isBCH) {
-							$scope.onLmoCategoriesChange( document.addressLmoCategories );
+					//set all bch fields to undefined for eg. addressLmoCategories etc
+					if(!$scope.isBCH){
+						document.addressLmoCategories = undefined;
+						document.keywords = undefined;
+						document.authorsInfo = undefined;
+						document.publicationMonth = undefined;
+						document.bchSubjects = undefined;
+						document.organisms = undefined;
+						document.genes = undefined;
+						document.modifiedOrganisms = undefined;
+						document.Identifier = undefined;
+						document.publisher = undefined;
+						document.languages  = undefined;
+						document.resourceAccess = undefined;
+					}
+					if($scope.isBCH) {
+						$scope.onLmoCategoriesChange( document.addressLmoCategories );
+					}
+					if($scope.isABS) {
+						$scope.onResourceTypesChange( document.resourceTypes );
+					}
+					if(document.header != undefined && document.header.schema != undefined) {
+						if ( document.header.schema == "modelContractualClause" ) {
+							$scope.heading = "Article 19 & 20 tool";
+							$scope.shortHeading = "MCC";
+							$scope.isMcc = true;
+							absSubjectsToSkip = mccToSkip;
+						} else if ( document.header.schema == "resource" ) {
+							$scope.heading = "Virtual Library Record";
+							$scope.shortHeading = "VLR";
+							$scope.isResource = true;
+							absSubjectsToSkip = vlrToSkip;
+						} else if ( document.header.schema == "communityProtocol" ) {
+							$scope.heading = "Community protocols and procedures and customary law";
+							$scope.shortHeading = "CPP";
+							$scope.isCpp = true;
+							absSubjectsToSkip = cppToSkip;
 						}
+					}
 					return $scope.sanitizeDocument(document);
 				};
 
@@ -224,33 +260,13 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 				//============================================================
 				//
 				//============================================================
-				$scope.$watch('document.header.schema',function(newValue) {
 
-					if(newValue=="modelContractualClause"){
-						$scope.heading      = "Article 19 & 20 tool";
-						$scope.shortHeading = "MCC";
-						$scope.isMcc        = true;
-						absSubjectsToSkip   = mccToSkip;
-					}
-					else if(newValue=="resource"){
-						$scope.heading      = "Virtual Library Record";
-						$scope.shortHeading = "VLR";
-						$scope.isResource   = true;
-						absSubjectsToSkip   = vlrToSkip;
-					}
-					else if(newValue=="communityProtocol"){
-						$scope.heading      = "Community protocols and procedures and customary law";
-						$scope.shortHeading = "CPP";
-						$scope.isCpp        = true;
-						absSubjectsToSkip   = cppToSkip;
-					}
-				});
-				$scope.$watch('document.resourceTypes',function(newValue) {
-					if (newValue && _.indexOf((_.map(newValue, "identifier")), '48D40B9E207B43948D95A0BA8F0D710F') >= 0)
+				$scope.onResourceTypesChange = function(value){
+					if (value && _.indexOf((_.map(value, "identifier")), '48D40B9E207B43948D95A0BA8F0D710F') >= 0)
 						$scope.displayMCCWarning = true;
 					else
 						$scope.displayMCCWarning = false;
-				});
+				}
 				$scope.onLmoCategoriesChange = function(value){
 					if(!value){
 						$scope.document.organisms = undefined;
