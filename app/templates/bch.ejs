@@ -115,42 +115,29 @@
     <!-- PAGE -->
     <div class="ng-cloak">
         <scbd-header></scbd-header>
-        
-        <div  ng-class="{'row side-bar-open':openSideBarType}">
-            <style>
-                #PreferencesPage .register-content, #RegisterPage .register-content, #SubmitPage .register-content, #searchPage .register-content {
-                    margin: 5px;
-                }
-                .left-side-bar{
-                    display: flex;
-                    margin-left: 0px;
-                    margin-right: 0px; 
-                    background-color: #fff;
-                    box-shadow: 0 5px 15px rgb(0 0 0 / 50%); 
-                    padding:10px  
-                }
-                .right-side-bar{
-                    padding-right: 0px;
-                }
-                .side-bar-open{
-                    display: flex;
-                }
-            </style>
-
-            <div class="easing" ng-class="{'col-xs-10 right-side-bar':openSideBarType}">
-                <bch-header></bch-header>
-                <div class="container-full page-content" style="    padding: 1px 2px;">
-                    <route-loading></route-loading>
-                    <ng-view autoscroll="true"></ng-view>                
+       
+        <div id="wrapper" class="toggled">
+            <div id="sidebar-wrapper" ng-class="{'activate':openSideBarType}">
+                <div  ng-if="openSideBarType" class="easing" >
+                    <docked-side-bar type="openSideBarType"></docked-side-bar>
                 </div>
             </div>
-            <div ng-if="openSideBarType" class="easing"  ng-class="{'col-xs-2 left-side-bar':openSideBarType}">
-                <left-side-bar type="openSideBarType"></left-side-bar>
-            </div>
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="easing">
+                        <bch-header></bch-header>
+                        <div class="container-full page-content">
+                            <route-loading></route-loading>
+                            <ng-view autoscroll="true"></ng-view>                
+                        </div>
+                    </div>
+                </div>
+            </div>    
         </div>
-        <bch-footer></bch-footer>
 
+        <bch-footer></bch-footer>
         <scbd-footer></scbd-footer>
+
     </div>
         
     <div class="device-size visible-xs" size="xs" style="height:0px;width:0px"></div>
