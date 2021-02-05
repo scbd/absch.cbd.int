@@ -9,9 +9,6 @@ define(['app', 'lodash', 'linqjs'], function (app, _, Enumerable) {
 		};
 	});
 
-	app.factory('lodash', [function() {
-		return _;
-	}])
 
 	app.factory('Enumerable', [function() {
 		return Enumerable;
