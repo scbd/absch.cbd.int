@@ -1,4 +1,4 @@
-define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-directive.html','services/role-service',
+define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directive.html','services/role-service',
 './organization-selector'
 ], function (app, _, template) {
 	app.directive('convertToNumber', function() {
@@ -20,11 +20,14 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 			restrict: 'EAC',
 			template: template ,
 			replace: true,
-			controller: ["$rootScope", "$scope", "$http", "$filter","IStorage", "roleService", function ($rootScope, $scope, $http, $filter, storage, roleService)
+			controller: ["$rootScope", "$scope", "$http", "$filter","IStorage", "roleService", "realm","thesaurusService", function ($rootScope, $scope, $http, $filter, storage, roleService, realm,thesaurusService)
 			{
 
+				$scope.isABS = realm.is('ABS');
+				$scope.isBCH = realm.is('BCH');
 				$scope.user = $rootScope.user;
 				$scope.isNationalUser = false;
+				$scope.keywords = [{}];
 
 				if ($scope.user.isAuthenticated) {
 					$scope.isNationalUser =  roleService.isNationalUser();
@@ -81,22 +84,22 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 						.then(function(o){
 								var subjects = o.data;
 
-								_.each(subjects, function(subject){
+								_.forEach(subjects, function(subject){
 									subject.narrowerTerms = _.without(subject.narrowerTerms, absSubjectsToSkip);
 									subject.broaderTerms  = _.without(subject.broaderTerms, absSubjectsToSkip);
 								});
 
 								subjects = _.filter(subjects, function(subject){
-									return !_.contains(absSubjectsToSkip, subject.identifier);
+									return !_.includes(absSubjectsToSkip, subject.identifier);
 								});
 								if($scope.document_type=="modelContractualClause" || $scope.document_type=="communityProtocol"){
-									_.each(changeParentFor, function(item){
-										var subject = _.findWhere(subjects, {'identifier':item});
+									_.forEach(changeParentFor, function(item){
+										var subject = _.find(subjects, {'identifier':item});
 										if(subject){
 											subject.broaderTerms = [];
 											subject.broaderTerms.push(newParent);
 										}
-										var parent = _.findWhere(subjects, {'identifier':newParent});
+										var parent = _.find(subjects, {'identifier':newParent});
 										parent.narrowerTerms.push(item);
 									});
 								}
@@ -110,25 +113,28 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
                     	mapping: function(item){ return item.identifier;},
 						options: $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
 							$scope.options.documentLinksExt[0].options = $filter("orderBy")(o.data, "name");
-							_.each($scope.options.documentLinksExt[0].options, function(element) {
+							_.forEach($scope.options.documentLinksExt[0].options, function(element) {
 									element.__value = element.name;
 								});
 							return $scope.options.documentLinksExt[0].options;
 						})
 					}],
-					aichiTargets    : function() { return $http.get("/api/v2013/thesaurus/domains/AICHI-TARGETS/terms", 					   { cache: true }).then(function(o){ return o.data; }); },
-					absKeyAreas     : function() { return $http.get("/api/v2013/thesaurus/domains/2B2A5166-F949-4B1E-888F-A7976E76320B/terms", { cache: true }).then(function(o){return o.data;});},
-					fileFormats 	: function() { return $http.get("/api/v2013/thesaurus/domains/D2D97AB3-4D20-41D4-8CBE-B21C33924823/terms", { cache: true }).then(function(o){ return Thesaurus.buildTree(o.data); }); },
-	 			    purposes 	    : function() { return $http.get("/api/v2013/thesaurus/domains/E712C9CD-437E-454F-BA72-E7D20E4C28ED/terms", { cache: true }).then(function(o){ return Thesaurus.buildTree(o.data); }); },
-	 			    targetGroups    : function() { return $http.get("/api/v2013/thesaurus/domains/AFB155C4-93A6-402C-B812-CFC7488ED651/terms", { cache: true }).then(function(o){ return o.data; }); },
-	 			    expertiseLevels : function() { return $http.get("/api/v2013/thesaurus/domains/1B57D9C3-F5F8-4875-94DC-93E427F3BFD8/terms", { cache: true }).then(function(o){ return o.data; }); },					
+					aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
+					absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');},
+					fileFormats     : function() {return thesaurusService.getDomainTerms('cbrFormats');},
+					purposes    	: function() {return thesaurusService.getDomainTerms('cbrPurpose');},
+					targetGroups    : function() {return thesaurusService.getDomainTerms('cbiAudience');},
+					expertiseLevels : function() {return thesaurusService.getDomainTerms('cbrLevel');},
+					bchLanguages    : function() {return thesaurusService.getDomainTerms('languages').then(function(o){return _.sortBy(o, 'name' );})},
+					bchSubjects   	: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'})},
+					resourceTypes   : function() {return thesaurusService.getDomainTerms('resourceTypes',{other:true, otherType:'lstring'})},
 
 				});
 				$scope.years = [];
-				var end = new Date().getFullYear(); 
+				var end = new Date().getFullYear();
 				for (var i = end; i > (end-100) ; i--) {
 					$scope.years.push({id:i, name: i});
-                } 
+				}
 				//============================================================
 				//
 				//============================================================
@@ -146,12 +152,12 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 
 			        var purposes = _.map(document.purpose, 'identifier');
 
-			        return _.contains(purposes, 'A5C5ADE8-2061-4AB8-8E2D-1E6CFF5DD793') || // Assessing capacity-building needs
-			               _.contains(purposes, '3813BA1A-2DE7-4DD5-8415-3B2C6737E567') || // Designing capacity building initiatives
-			               _.contains(purposes, '5054AC52-E738-4694-A403-6490FE7D4CF4') || // Monitoring and evaluation of capacity-building initiatives and products
-			               _.contains(purposes, '05FA6F66-F942-4713-BB4C-DA032C111188') || // Providing technical guidance
-			               _.contains(purposes, '9F48AEA0-EE28-4B6F-AB91-E0E088A8C6B7') || // Raising awareness
-			               _.contains(purposes, '5831C357-95CA-4F09-963B-DF9E8AFD8C88');   // Training/learning
+			        return _.includes(purposes, 'A5C5ADE8-2061-4AB8-8E2D-1E6CFF5DD793') || // Assessing capacity-building needs
+			               _.includes(purposes, '3813BA1A-2DE7-4DD5-8415-3B2C6737E567') || // Designing capacity building initiatives
+			               _.includes(purposes, '5054AC52-E738-4694-A403-6490FE7D4CF4') || // Monitoring and evaluation of capacity-building initiatives and products
+			               _.includes(purposes, '05FA6F66-F942-4713-BB4C-DA032C111188') || // Providing technical guidance
+			               _.includes(purposes, '9F48AEA0-EE28-4B6F-AB91-E0E088A8C6B7') || // Raising awareness
+			               _.includes(purposes, '5831C357-95CA-4F09-963B-DF9E8AFD8C88');   // Training/learning
 			    };
 
                 //============================================================
@@ -166,10 +172,76 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 
 			        var purposes = _.map(document.purpose, 'identifier');
 
-			        return _.contains(purposes, 'C1B32F41-89D1-4EDC-8EF2-335362B91F8D'); // Literature
+			        return _.includes(purposes, 'C1B32F41-89D1-4EDC-8EF2-335362B91F8D'); // Literature
 
 			    };
 
+				//==================================
+				//
+				//==================================
+				$scope.getCleanDocument = function(document) {
+
+					document = document || $scope.document;
+					if ( !document )
+						return undefined;
+						if ( !_.isEmpty( $scope.keywords )  && !$scope.isABS)
+							document.keywords = _( $scope.keywords ).map( 'value' ).compact().value();
+						if ( _.isEmpty( document.keywords )  || $scope.isABS)
+							document.keywords = undefined;
+					//set all bch fields to undefined for eg. addressLmoCategories etc
+					if(!$scope.isBCH){
+						document.addressLmoCategories = undefined;
+						document.keywords = undefined;
+						document.authorsInfo = undefined;
+						document.publicationMonth = undefined;
+						document.bchSubjects = undefined;
+						document.organisms = undefined;
+						document.genes = undefined;
+						document.modifiedOrganisms = undefined;
+						document.Identifier = undefined;
+						document.publisher = undefined;
+						document.languages  = undefined;
+						document.resourceAccess = undefined;
+					}
+					if($scope.isBCH) {
+						$scope.onLmoCategoriesChange( document.addressLmoCategories );
+					}
+					if($scope.isABS) {
+						$scope.onResourceTypesChange( document.resourceTypes );
+					}
+					if(document.header != undefined && document.header.schema != undefined) {
+						if ( document.header.schema == "modelContractualClause" ) {
+							$scope.heading = "Article 19 & 20 tool";
+							$scope.shortHeading = "MCC";
+							$scope.isMcc = true;
+							absSubjectsToSkip = mccToSkip;
+						} else if ( document.header.schema == "resource" ) {
+							$scope.heading = "Virtual Library Record";
+							$scope.shortHeading = "VLR";
+							$scope.isResource = true;
+							absSubjectsToSkip = vlrToSkip;
+						} else if ( document.header.schema == "communityProtocol" ) {
+							$scope.heading = "Community protocols and procedures and customary law";
+							$scope.shortHeading = "CPP";
+							$scope.isCpp = true;
+							absSubjectsToSkip = cppToSkip;
+						}
+					}
+					return $scope.sanitizeDocument(document);
+				};
+
+				$scope.addItem = function(type){
+					type.push({});
+				}
+				$scope.removeItem = function(type, $index){
+					if(type.length>1) 
+						type.splice($index, 1)
+				}
+				$q.when($scope.setDocument({}, true))
+				.then(function(doc){
+					if(doc.keywords)
+						$scope.keywords = _.map(doc.keywords, function(t){return { value: t};});
+				});
                 //============================================================
 				//
 				//============================================================
@@ -182,40 +254,26 @@ define(['app', 'underscore','text!views/forms/edit/edit-resource-schema-base-dir
 
 			        var aichiTargets = _.map(document.aichiTargets, 'identifier');
 
-			        return _.contains(aichiTargets, 'AICHI-TARGET-16');
+			        return _.includes(aichiTargets, 'AICHI-TARGET-16');
 
 			    };
 				//============================================================
 				//
 				//============================================================
-				$scope.$watch('document.header.schema',function(newValue) {
 
-					if(newValue=="modelContractualClause"){
-						$scope.heading      = "Article 19 & 20 tool";
-						$scope.shortHeading = "MCC";
-						$scope.isMcc        = true;
-						absSubjectsToSkip   = mccToSkip;
-					}
-					else if(newValue=="resource"){
-						$scope.heading      = "Virtual Library Record";
-						$scope.shortHeading = "VLR";
-						$scope.isResource   = true;
-						absSubjectsToSkip   = vlrToSkip;
-					}
-					else if(newValue=="communityProtocol"){
-						$scope.heading      = "Community protocols and procedures and customary law";
-						$scope.shortHeading = "CPP";
-						$scope.isCpp        = true;
-						absSubjectsToSkip   = cppToSkip;
-					}
-				});
-				$scope.$watch('document.resourceTypes',function(newValue) {
-					if (newValue && _.indexOf((_.map(newValue, "identifier")), '48D40B9E207B43948D95A0BA8F0D710F') >= 0)
+				$scope.onResourceTypesChange = function(value){
+					if (value && _.indexOf((_.map(value, "identifier")), '48D40B9E207B43948D95A0BA8F0D710F') >= 0)
 						$scope.displayMCCWarning = true;
 					else
 						$scope.displayMCCWarning = false;
-				});
-
+				}
+				$scope.onLmoCategoriesChange = function(value){
+					if(!value){
+						$scope.document.organisms = undefined;
+						$scope.document.genes = undefined;
+						$scope.document.modifiedOrganisms = undefined;
+					}
+				}
 
 				//============================================================
 				//

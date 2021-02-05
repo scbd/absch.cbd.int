@@ -37,9 +37,9 @@ define(['app', 'text!./km-control-group.html', 'jquery','lodash', './km-info-tip
 
 				$scope.hasWarning = function() {  //default behavior
 
-					if($scope.name && $scope.$parent && ($scope.$parent.$parent||{}).validationReport && $scope.$parent.$parent.validationReport.warnings) {
-
-						return !!_.findWhere($scope.$parent.$parent.validationReport.warnings, { property : $scope.name });
+					if($scope.name) {
+						var validationReport = findReportInParent($scope, 0)||{}
+						return !!_.findWhere(validationReport.warnings, { property : $scope.name });
 					}
 
 					return false; //default behavior
@@ -47,9 +47,9 @@ define(['app', 'text!./km-control-group.html', 'jquery','lodash', './km-info-tip
 
 				$scope.hasError = function() {  //default behavior
 
-					if($scope.name && $scope.$parent && ($scope.$parent.$parent||{}).validationReport && $scope.$parent.$parent.validationReport.errors) {
-
-						return !!_.findWhere($scope.$parent.$parent.validationReport.errors, { property : $scope.name });
+					if($scope.name) {
+						var validationReport = findReportInParent($scope, 0)||{}
+						return !!_.findWhere(validationReport.errors, { property : $scope.name });
 					}
 
 					return false;
@@ -58,6 +58,17 @@ define(['app', 'text!./km-control-group.html', 'jquery','lodash', './km-info-tip
 				$scope.isRequired = function() {
 					return $scope.required !== undefined && $scope.required.toString()!="false";
 				};
+	
+				function findReportInParent($scope, level){
+					if(level < 5 && $scope.$parent){
+						if($scope.$parent.validationReport)
+							return $scope.$parent.validationReport
+						
+						return findReportInParent($scope.$parent, level++);
+					}
+	
+					return;
+				}
 			}
 		};
 	}]);

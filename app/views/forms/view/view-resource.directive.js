@@ -1,7 +1,6 @@
 define(['app',"text!views/forms/view/view-resource.directive.html",
 'views/directives/record-options',
 ], function (app, template) {
-	// ,'views/directives/discussion-directive.html'
 app.directive("viewResource", [function () {
 	return {
 		restrict   : "EAC",
@@ -14,9 +13,10 @@ app.directive("viewResource", [function () {
 			target  : "@linkTarget",
 			hide : "@"
 		},
-		controller : ["$scope", "IStorage", "$http", function ($scope, storage, $http)
+		controller : ["$scope", "IStorage", "$http","realm",function ($scope, storage, $http, realm)
 		{
-			
+			$scope.isABS = realm.is('ABS');
+			$scope.isBCH = realm.is('BCH');
 			
 			
 			//====================
@@ -39,10 +39,6 @@ app.directive("viewResource", [function () {
 				if($scope.organizations)
 					$scope.loadReferences($scope.organizations);
 			});
-
-			$scope.tryme = function(){
-				console.log('tryme');
-			};
 
 			//====================
 			//
