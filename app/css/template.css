@@ -2207,9 +2207,10 @@ a.disabled{
 
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
-    margin-right: 0px;
 }
-
+.container-full.page-content{
+    margin: 5px;
+}
 
 @media(min-width:768px) {
     #wrapper {
