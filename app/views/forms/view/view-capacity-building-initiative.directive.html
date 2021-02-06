@@ -38,12 +38,12 @@
 
 		</div>
 
-		<div ng-show="document.geographicScope && (document.geographicScope.regions || document.geographicScope.countries)">
+		<div ng-show="document.geographicScope && (document.geographicScope.regions || document.geographicScope.countries) && !document.geographicScope.community">
 			<label>Geographical or political/economic group(s) and/or country(ies)</label>
 			<div class="km-value">
                 <ul  class="list" ng-show="document.geographicScope.regions || document.geographicScope.countries">
-                    <li ng-repeat="term in document.geographicScope.regions" ng-bind="term | term:locale"></li>
-                    <li ng-repeat="term in document.geographicScope.countries" ng-bind="term | term:locale"></li>
+                    <li ng-repeat="val in document.geographicScope.regions" ng-bind="val | term:locale"></li>
+                    <li ng-repeat="val in document.geographicScope.countries" ng-bind="val | term:locale"></li>
                 </ul>
             </div>
 		</div>
@@ -62,7 +62,7 @@
 			<label>Countries</label>
 			<div class="km-value">
 				<ul  class="list">
-					<li ng-repeat="term in document.geographicScope.countries" ng-bind="term | term:locale"></li>
+					<li ng-repeat="val in document.geographicScope.countries" ng-bind="val | term:locale"></li>
 				</ul>
 			</div>
 		</div>
@@ -173,7 +173,7 @@
 			<label><span ng-if="isABS">Target group(s)/beneficiary(ies)</span> <span ng-if="isBCH">Main target group(s)/beneficiary(ies)</span></label>
 			<div class="km-value">
             <ul class="list">
-				<li ng-repeat="term in document.targetGroups" ng-bind="term | term:locale"></li>
+				<li ng-repeat="val in document.targetGroups" ng-bind="val | term:locale"></li>
 			</ul>
             </div>
 		</div>
@@ -182,7 +182,7 @@
 			<label>Category(ies) of capacity-building activities</label>
 			<div class="km-value">
             <ul class="list">
-				<li ng-repeat="term in document.categories" ng-bind="term | term:locale"></li>
+				<li ng-repeat="val in document.categories" ng-bind="val | term:locale"></li>
 			</ul>
             </div>
 		</div>
@@ -190,7 +190,7 @@
 			<label>General thematic area</label>
 			<div class="km-value">
             <ul class="list">
-				<li ng-repeat="term in document.cpbThematicAreas" ng-bind="term | term:locale"></li>
+				<li ng-repeat="val in document.cpbThematicAreas" ng-bind="val | term:locale"></li>
 			</ul>
             </div>
 		</div>
@@ -201,7 +201,7 @@
 			<label>Type(s) of funding source</label>
 			<div class="km-value">
             <ul class="list">
-				<li ng-repeat="term in document.fundingSourceTypes" ng-bind="term | term:locale"></li>
+				<li ng-repeat="val in document.fundingSourceTypes" ng-bind="val | term:locale"></li>
 			</ul>
             </div>
 		</div>
@@ -252,7 +252,7 @@
 			<label>Key areas and strategic measures for capacity-building and development</label>
 			<div class="km-value">
             <ul class="list">
-				<li ng-repeat="term in document.absKeyAreas" ng-bind="term | term:locale"></li>
+				<li ng-repeat="val in document.absKeyAreas" ng-bind="val | term:locale"></li>
 			</ul>
             </div>
 		</div>
