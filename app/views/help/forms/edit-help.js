@@ -1,8 +1,8 @@
 define(['app', 'lodash', 'ngMaterial', 'ngAria', 'angular-animate', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
 	'/app/js/common'], function (app, _) {
 		app.controller("editHelpController",
-			["$routeParams", "$scope", "$rootScope", "$q", "lodash", '$http',  '$location', 'commonjs', '$mdDialog',
-				function ($routeParams, $scope, $rootScope, $q, _, $http, $location, commonjs, $mdDialog) {
+			["$routeParams", "$scope", "$rootScope", "$q", '$http',  '$location', 'commonjs', '$mdDialog',
+				function ($routeParams, $scope, $rootScope, $q, $http, $location, commonjs, $mdDialog) {
 
 					var url = '/api/v2015/help-forms';
 

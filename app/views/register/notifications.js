@@ -1,12 +1,13 @@
 define(['app',
+        'lodash',    
         'services/role-service',
         'components/scbd-branding/directives/xuser-notifications-panel',
         'views/register/directives/register-top-menu'
-  ], function(app) {
+  ], function(app, _) {
     "use strict";
-    app.controller("NotificationsController", ["$rootScope", "$scope", "lodash", "roleService", "IWorkflows", "realm", "$q",
+    app.controller("NotificationsController", ["$rootScope", "$scope", "roleService", "IWorkflows", "realm", "$q",
                     "$routeParams", '$location', "$filter", "$http", "$element","$timeout",
-        function($rootScope, $scope, _, roleService, workflows, realm, $q, $routeParams, $location, $filter, $http, $element, $timeout) {
+        function($rootScope, $scope, roleService, workflows, realm, $q, $routeParams, $location, $filter, $http, $element, $timeout) {
 
             $timeout(function(){
                 $element.find('[data-toggle="tooltip"]').tooltip();

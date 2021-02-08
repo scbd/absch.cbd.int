@@ -1,7 +1,6 @@
-﻿
-define(["app", 'lodash', 'json!app-data/schema-name-plural.json',
+﻿define(["app", 'lodash', 'json!components/scbd-angularjs-services/filters/schema-name.json', 
 'js/common', 'services/app-config-service'], 
-function (app, _, schemaNamePlural) {
+function (app, _, scbdSchemas) {
 
 
 	//============================================================

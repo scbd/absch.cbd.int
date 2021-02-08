@@ -5,8 +5,8 @@ define(['app','lodash','views/forms/edit/edit',
 ], function(app,_) {
 
     app.controller("editCheckpointCommunique", ["$scope", "$http", "$filter", "$q", "$controller", "IStorage",
-        "lodash", "Thesaurus", "Enumerable", "$location", 'commonjs',
-        function($scope, $http, $filter, $q, $controller, storage, _, Thesaurus, Enumerable, $location, commonjs) {
+         "Thesaurus", "Enumerable", "$location", 'commonjs',
+        function($scope, $http, $filter, $q, $controller, storage, Thesaurus, Enumerable, $location, commonjs) {
             $controller('editController', {
                 $scope: $scope
             });

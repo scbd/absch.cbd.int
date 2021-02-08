@@ -13,8 +13,8 @@ define(['app', 'lodash', "text!views/forms/edit/warning-message-cna.html", 'js/c
            scope: {
                 doc:'='
            },
-           controller: ["$scope", "lodash", "searchService", "solr","$q",
-                function($scope,  _, searchService, solr, $q) {
+           controller: ["$scope", "searchService", "solr","$q",
+                function($scope, searchService, solr, $q) {
 
                  $scope.responsibleCNA = [];
                  $scope.showWarning = false;

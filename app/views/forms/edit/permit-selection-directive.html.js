@@ -1,6 +1,6 @@
-define(['app', 'js/common',"text!views/forms/edit/permit-selection-directive.html",
+define(['app', 'lodash', 'js/common',"text!views/forms/edit/permit-selection-directive.html",
     'views/directives/search-filter-dates.partial'
-	], function (app,commonjs, template) {
+	], function (app, _, commonjs, template) {
 
 app.directive("existingPermit", [ function () {
 
@@ -18,9 +18,9 @@ app.directive("existingPermit", [ function () {
 		link : function($scope, $element, $attrs) {
 
         },
-		controller : ["$scope", "$http", "Thesaurus", "$filter", "lodash", "guid",
+		controller : ["$scope", "$http", "Thesaurus", "$filter", "guid",
                     "$timeout", "$q","IStorage","commonjs","realm",
-		 function ($scope, $http, Thesaurus, $filter, _, guid, $timeout, $q,
+		 function ($scope, $http, Thesaurus, $filter, guid, $timeout, $q,
                 storage,commonjs, realm)
 		{
 	            $scope.options  = {
