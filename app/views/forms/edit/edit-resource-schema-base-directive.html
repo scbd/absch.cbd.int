@@ -103,14 +103,14 @@
 											<div class="km-control-group" required name="bchSubjects" caption="Thematic areas">
 												<div class="help-info">This section provides a broad classification of biosafety thematic areas to assist BCH users 
 													in searching for the record (a full description is provided elsewhere in the record).</div>
-												<div km-term-check name="bchSubjects" required ng-model="document.bchSubjects" terms="options.bchSubjects()"
+												<div km-term-check name="bchSubjects" required ng-model="document.bchSubjects" ng-change="onThematicAreaChange(document.bchSubjects);" terms="options.bchSubjects()"
 														 binding-type="term[]" locales="document.header.languages"></div>
 											</div>
 										</div>
                                     </div>
                                 </div>
 							</section>
-							<section ng-if="isBCH">
+							<section ng-if="isBCH && displayBchRaSubjects">
                                 <div class="well no-shadow bg-white">
 									<legend>Background  material to the “Guidance on risk assessment of living modified organisms”</legend>
 									<div class="row">
@@ -121,7 +121,7 @@
 												<div ng-if="document.bchRaRecommend" style="margin-top: 15px;">
 													<div class="col-xs-12">
 														<div class="km-control-group" name="bchRaAuthorAffiliation"  caption="Author affiliation">
-															<div ng-if="isBCH" km-term-check name="bchRaAuthorAffiliation" ng-model="document.bchRaAuthorAffiliation" terms="options.bchRaAuthorAffiliation()"
+															<div km-term-check name="bchRaAuthorAffiliation" ng-model="document.bchRaAuthorAffiliation" terms="options.bchRaAuthorAffiliation()"
 																 binding-type="term[]" locales="document.header.languages">
 															</div>
 														</div>
@@ -129,7 +129,7 @@
 
 													<div class="col-xs-12">
 														<div class="km-control-group" name="bchRaSubjects" required  caption="Please indicate to which section(s) of the “Guidance” this background material is relevant: ">
-															<div ng-if="isBCH" km-term-check name="bchRaSubjects" required ng-model="document.bchRaSubjects" terms="options.bchRaSubjects()"
+															<div km-term-check name="bchRaSubjects" required ng-model="document.bchRaSubjects" terms="options.bchRaSubjects()"
 																 binding-type="term[]" locales="document.header.languages">
 															</div>
 														</div>
