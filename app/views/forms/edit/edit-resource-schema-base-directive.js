@@ -28,6 +28,7 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 				$scope.user = $rootScope.user;
 				$scope.isNationalUser = false;
 				$scope.keywords = [{}];
+				$scope.displayBchRaSubjects = false;
 
 				if ($scope.user.isAuthenticated) {
 					$scope.isNationalUser =  roleService.isNationalUser();
@@ -289,6 +290,14 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 						$scope.document.bchRaAuthorAffiliation = undefined;
 						$scope.document.bchRaSubjects = undefined;
 					}
+				}
+
+				$scope.onThematicAreaChange = function(value){
+					if (value && _.indexOf((_.map(value, "identifier")), 'FBAF958B-14BF-45DD-BC6D-D34A9953BCEF') >= 0){
+						$scope.displayBchRaSubjects = true;
+					}
+					else
+						$scope.displayBchRaSubjects = false;
 				}
 
 				//============================================================
