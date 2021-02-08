@@ -21,7 +21,6 @@
   ],
   "dependencies": {
      "angularjs"        : "1.5.6",
-     "linqjs"           : "3.0.5",
-     "underscore"       : "1.7.0"
+     "linqjs"           : "3.0.5"
   }
 }
