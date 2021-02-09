@@ -57,6 +57,10 @@ require.config({
         'pivottable'                : cdnHost + 'pivottable@2.23.0/dist/pivot.min',
         'plotly-renderers'          : cdnHost + 'pivottable@2.23.0/dist/plotly_renderers',
 
+
+        'angular-vue'               : cdnHost + '@scbd/angular-vue@2.0.0/dist/angular-vue.min',
+        'ky'                        :           'libs/globals/ky',
+
         'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min',
         'cbd-forums'                :           'libs/cbd-forums/cbd-forums',
         'shim'                      :           'libs/require-shim/src/shim',
@@ -80,6 +84,7 @@ require.config({
         'ng-breadcrumbs'                : { 'deps': ['angular'] },
         'ngSmoothScroll'                : { 'deps': ['angular'] },
         'angular-flex'                  : { 'deps': ['angular'] },
+        'angular-vue'                   : { 'deps': ['angular-flex', 'vue'] },
         'angular-joyride'               : { 'deps': ['angular', 'angular-animate', 'css!'+cdnHost+'angular-joyride@1.0.2/dist/joyride.css'] },
         'cbd-forums'                    : { 'deps': ['angular', 'bootstrap']},
         'scbd-angularjs-services'       : { 'deps': ['angular']},
@@ -143,6 +148,12 @@ require.onError = function (err) {
 define('plotly.js', [cdnHost + 'plotly.js-basic-dist-min@1.57.1/plotly-basic.min'], function(Plotly){
     return Plotly;
 });
+
+define('vue', ['Vue'],                              function(Vue){ return Vue; });
+define('Vue', ['https://cdn.cbd.int/vue@2.6.12/dist/vue'], function(Vue){
+    window.Vue = Vue;
+    return Vue;
+})
 
 if(window.scbdApp.template)
     require([window.scbdApp.template])
