@@ -44,7 +44,7 @@
 		</div>
 
 		<div ng-show="document.scientificNameSynonyms">
-				<label>Scientific name synonyms(s)</label>
+				<label>Alternate scientific name(s) (synonym(s))</label>
 				<div class="km-value"> 
 					<ul class="list">
 						<li ng-repeat="name in document.scientificNameSynonyms" ng-bind="name"></li>
@@ -63,7 +63,7 @@
 			</div>
 		</div>
 
-		<label>Additional Classification</label>
+		<label>Additional classification</label>
 		
 		<div ng-show="document.plantCultivar">
 				<label>Cultivar / variety (plants)</label>
@@ -85,7 +85,7 @@
 		</div>
 
 		<div ng-show="document.organismType">
-			<label>Type of organism(s)</label>
+			<label>Type of organism</label>
 			<view-terms-hierarchy  class="km-value" ng-model="document.organismType" locale="locale" term-domain="typeOfOrganisms"></view-terms-hierarchy>
 		</div>
 
