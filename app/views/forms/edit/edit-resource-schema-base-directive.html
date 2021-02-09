@@ -30,23 +30,8 @@
 									</div>
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="authors" caption="Author(s)">
-												<div class="help-info">Name of the person who has authored the publication or information resource. Add his/her affiliation if appropriate.</div>
-												<div km-textbox-ml required ng-model="document.authors" rows="2" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
-									<div class="row" ng-if="isBCH">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="authorsInfo" caption="Authors information">
-												<div km-textbox-ml name="authorsInfo" ng-model="document.authorsInfo" rows="2" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
-									<div class="row" ng-if="isBCH">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="authorsContact" caption="Authors contact">
-												<div document-selector type="radio" ng-model="document.authorsContact" contact-type='person' allow-new="true" allow-new-schema="contact"
+											<div class="km-control-group" required name="authorsContact" caption="Author">
+												<div document-selector required type="radio" ng-model="document.authorsContact" contact-type='person' allow-new="true" allow-new-schema="contact"
 													question="authorsContact"
 													schema="((schema_s:contact AND type_s:person))"
 													filter="true" skip-government="true">
@@ -54,6 +39,15 @@
 											</div>
 										</div>
 									</div>
+
+									<div class="row" ng-if="isBCH">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="authors" caption="Authors information">
+												<div km-textbox-ml  ng-model="document.authors" rows="2" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="organizations" caption="Organization(s) involved in the publication of this resource">

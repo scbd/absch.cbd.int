@@ -23,21 +23,18 @@
 			<label>Link to the resource(s)</label>
 			<km-link-list class="km-value"  ng-if="document.resourceLinks" ng-model="document.resourceLinks" style="margin-top: 5px;"></km-link-list>
 		</div>
-		<div ng-show="document.authors">
-			<label>Author(s)</label>
-			<km-value-ml value="document.authors" locales="locale"></km-value-ml>
-		</div>
-		<div ng-show="document.authorsInfo && isBCH">
-			<label>Authors information</label>
-			<km-value-ml value="document.authorsInfo" locales="locale"></km-value-ml>
-		</div>
 		<div ng-show="document.authorsContact && isBCH">
-			<label>Authors contact</label>
+			<label>Author</label>
 			<div class="km-value">
 				<div view-record-reference ng-model="document.authorsContact" locale="locale"></div>
 			</div>
 			
 		</div>
+		<div ng-show="document.authors">
+			<label>Authors information</label>
+			<km-value-ml value="document.authors" locales="locale"></km-value-ml>
+		</div>
+		
 		<div ng-show="organizations && organizations.length>0 && isABS">
 			<label>Reference to the authoring organisation(s)</label>
 			<div >
