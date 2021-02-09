@@ -14,6 +14,8 @@ WORKDIR /usr/src/app
 COPY package.json .npmrc ./
 COPY ./scripts ./scripts
 
+RUN yarn run build -p
+
 RUN yarn install --production && \
     echo 'running on branch ' $VERSION
 
