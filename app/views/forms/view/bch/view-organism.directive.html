@@ -84,6 +84,10 @@
 				<div class="km-value" ng-bind="document.virusGroup"> </div>
 		</div>
 
+		<div ng-show="document.taxonomicClassification">
+			<label>Additional taxonomic classification information</label>
+			<km-link-list class="km-value" ng-model="document.taxonomicClassification"></km-link-list>
+		</div>
 		<div ng-show="document.organismType">
 			<label>Type of organism</label>
 			<view-terms-hierarchy  class="km-value" ng-model="document.organismType" locale="locale" term-domain="typeOfOrganisms"></view-terms-hierarchy>

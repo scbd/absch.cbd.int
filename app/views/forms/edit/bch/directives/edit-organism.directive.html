@@ -157,6 +157,14 @@
 														<input type="text" class="form-control" name="virusGroup" ng-model="document.virusGroup" />
 													</div>
 												</div>
+												<div class="col-sm-12">
+													<div class="km-control-group" name="taxonomicClassification" caption="Additional taxonomic classification information">
+														<div class="help-block">Please provide a link to a record in a taxonomy database, e.g. GBIF, Catalogue of Life</div>
+														<div km-link name="taxonomicClassification" ng-model="document.taxonomicClassification" allow-link="true" allow-file="false"
+															identifier="document.header.identifier">
+														</div>
+													</div>
+												</div>
 												<div class="col-xs-12">
 													<div class="km-control-group" name="organismType"  caption="Type of organism">
 														<div km-term-radio  ng-model="document.organismType" locales="document.header.languages"
