@@ -14,8 +14,6 @@ WORKDIR /usr/src/app
 COPY package.json .npmrc ./
 COPY ./scripts ./scripts
 
-RUN yarn run build -p
-
 RUN yarn install --production && \
     echo 'running on branch ' $VERSION
 
@@ -47,6 +45,8 @@ RUN rm -rf /usr/tmp/i18n/en/.git \
     && cp -r  /usr/tmp/i18n/en/* ./ \
     && rm -rf /usr/tmp/i18n/en
 
+# run rollup script for vue file compilation
+RUN yarn run build -p
 
 #copy touched files from Other UN lang version and REMOVE CACHE files
 RUN mkdir ./i18n && mv /usr/tmp/i18n/others/zh ./i18n && \
