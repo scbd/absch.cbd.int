@@ -45,6 +45,17 @@
 									</div>
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
+											<div class="km-control-group" name="authorsContact" caption="Authors contact">
+												<div document-selector type="radio" ng-model="document.authorsContact" contact-type='person' allow-new="true" allow-new-schema="contact"
+													question="authorsContact"
+													schema="((schema_s:contact AND type_s:person))"
+													filter="true" skip-government="true">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row" ng-if="isBCH">
+										<div class="col-xs-12">
 											<div class="km-control-group" name="organizations" caption="Organization(s) involved in the publication of this resource">
 												<div document-selector ng-model="document.organizations" question="organizations" type="checkbox" schema="organization" 
 													skip-government="true" allow-new="true" allow-new-schema="organization">
