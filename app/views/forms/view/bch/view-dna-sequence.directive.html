@@ -52,7 +52,11 @@
 		<div ng-show="document.donorOrganism">
 			<label>Donor organism(s)</label>
 			<div class="km-value">
-				<view-record-reference ng-model="document.donorOrganism.identifier" locale="locale" target="target"></view-record-reference>
+				<ul class="list">
+					<li ng-repeat="item in document.donorOrganism">
+						<view-record-reference ng-model="item.identifier" locale="locale" target="target"></view-record-reference>
+					</li>
+				</ul>						
 			</div>
 		</div>
 
