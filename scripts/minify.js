@@ -41,7 +41,7 @@ async function minifyFile(file, options){
             throw error;
         }
 
-        if(options.js.sourceMap){
+        if(options.js.sourceMap && map){
             try {
                 await createDir(options.js.sourceMap.filename)
                 await writeFile(options.js.sourceMap.filename, map, 'utf8')
