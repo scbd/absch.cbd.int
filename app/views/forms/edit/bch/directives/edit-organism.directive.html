@@ -105,7 +105,7 @@
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="scientificNameSynonyms" caption="Alternate scientific name (synonyms)">
+											<div class="km-control-group" name="scientificNameSynonyms" caption="Alternate scientific name(s) (synonym(s))">
 												<div ng-repeat="synonym in scientificNameSynonyms" style="padding-bottom:5px;" class="input-group">
 													<input type="text" class="form-control" name="scientificNameSynonyms{{$index}}" ng-model="synonym.value" />													
 													<span ng-class="{'disable':scientificNameSynonyms.length==1}" class="input-group-addon" style="cursor:pointer" 
@@ -134,7 +134,7 @@
 
 									<section>
 										<div class="well no-shadow bg-white">
-											<label>Additional Classification</label>
+											<label>Additional classification</label>
 											<hr/>
 											<div class="row">
 												<div class="col-sm-12">
@@ -157,8 +157,16 @@
 														<input type="text" class="form-control" name="virusGroup" ng-model="document.virusGroup" />
 													</div>
 												</div>
+												<div class="col-sm-12">
+													<div class="km-control-group" name="taxonomicClassification" caption="Additional taxonomic classification information">
+														<div class="help-block">Please provide a link to a record in a taxonomy database, e.g. GBIF, Catalogue of Life</div>
+														<div km-link name="taxonomicClassification" ng-model="document.taxonomicClassification" allow-link="true" allow-file="false"
+															identifier="document.header.identifier">
+														</div>
+													</div>
+												</div>
 												<div class="col-xs-12">
-													<div class="km-control-group" name="organismType"  caption="Type of organism(s)">
+													<div class="km-control-group" name="organismType"  caption="Type of organism">
 														<div km-term-radio  ng-model="document.organismType" locales="document.header.languages"
 															terms="options.organismType()" binding-type="term" show-other="true" show-description="false"></div>
 													</div>	

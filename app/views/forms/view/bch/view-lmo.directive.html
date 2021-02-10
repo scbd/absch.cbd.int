@@ -80,7 +80,7 @@
 			<km-value-ml html value="document.recipientOrganismCollectionPoint" locales="locale"></km-value-ml></div>
 		</div>
 		<div ng-show="document.linkedModifiedOrganisms">
-			<label>Related LMOs</label>	
+			<label>Related LMO(s)</label>	
 			<div class="km-value" compare-val>	
 				<ul class="list">
 					<li ng-repeat="item in document.linkedModifiedOrganisms" >						
@@ -115,7 +115,7 @@
 			</div>
 		</div>
 		<div ng-show="document.genes">
-			<label>Introduced or modified genetic elements</label>
+			<label>Introduced or modified genetic element(s)</label>
 			<div class="help-info" style="font-size: 10px;">Some of these genetic elements may be present as fragments or truncated 
 					forms. Please see notes below, where applicable.</div>
 			<div class="km-value" compare-val>
@@ -157,7 +157,7 @@
 			<km-value-ml value="document.affectedGeneNotes" html locales="locale"></km-value-ml></div>
 		</div>
 		<div ng-show="document.commonUses">
-			<label>Common use(s)</label>
+			<label>Common use(s) of the LMO</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="use in document.commonUses" ng-bind="use | term:locale"></li>
