@@ -36,15 +36,17 @@ async function minifyFile(file, options){
 
         const { error, code, map } = terser.minify(data, options.js);
         
-        if (error)
+        if (error){
+            console.log('Error minifying file', file)
             throw error;
+        }
 
         if(options.js.sourceMap){
             try {
                 await createDir(options.js.sourceMap.filename)
                 await writeFile(options.js.sourceMap.filename, map, 'utf8')
             } catch (error) {
-                console.log('error writin js map file', error)
+                console.log('error writing js map file', error)
             }
         }
 
