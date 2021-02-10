@@ -34,8 +34,8 @@ async function minifyFile(file, options){
         //minfy and generate map file locally
         const data = await readFile(file, 'utf8');
 
-        const { error, code, map } = terser.minify(data, options.js);
-        
+        const { error, code, map } = await terser.minify(data, options.js);
+
         if (error){
             console.log('Error minifying file', file)
             throw error;
@@ -60,7 +60,7 @@ async function minifyFile(file, options){
 
 function addLanguageAttribute(content, filePath){
     
-    if(/\.html$/.test(filePath)){
+    if(content && /\.html$/.test(filePath)){
 
         const $html = cheerio.load(`<div class="my-lang-selector">${content}</div>`, {decodeEntities: false});
         let contentHtml = $html('.my-lang-selector').children()
