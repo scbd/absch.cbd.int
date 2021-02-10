@@ -3,7 +3,7 @@ import { terser } from 'rollup-plugin-terser';
 import path from 'path'
 import vue  from 'rollup-plugin-vue'
 import nodeResolve from '@rollup/plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs';
+import commonjs from '@rollup/plugin-commonjs';
 import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 
 const outputDir = 'dist';
