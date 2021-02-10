@@ -2210,3 +2210,8 @@ a.disabled{
 .map a {color:white important!;}
 
 .z10{ z-index: 1000 important!;}
+
+.terms-check .col-xs-12,
+.terms-radio .col-xs-12{
+    padding-left: 0px;
+}

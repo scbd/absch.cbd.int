@@ -44,7 +44,7 @@
 							ng-required="IsRequired()" value="{{term.identifier}}" id="chk_{{term.identifier}}"/> 
 							{{term.title||term.name | lstring:locale}}
 					</label>
-					<div ng-if="!term.multiple && selectedItems[term.identifier].selected">
+					<div ng-if="otherTermIdentifier==term.identifier && !term.multiple && selectedItems[term.identifier].selected">
 						<input ng-if="term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"
 						ng-model="selectedItems[term.identifier].customValue" class="km-terms-check-add-input-int" ng-change="save()" />
 						<div ng-if="term.type=='lstring'" style="padding-left:50px;"> 
@@ -53,7 +53,7 @@
 								required ng-model="selectedItems[term.identifier].customValue" locales="locales"  ng-change="save()"></div>
 						</div>
 					</div>
-					<span ng-if="term.multiple && selectedItems[term.identifier].selected">
+					<span ng-if="otherTermIdentifier==term.identifier && term.multiple && selectedItems[term.identifier].selected">
 						<table class="table table-hover others" style="padding:0;margin:0;width:100%;">
 							<tr ng-repeat="element in otherElements[term.identifier]">
 								<td ng-show="otherElements[term.identifier].length > 1" class="text-center" style="vertical-align:middle;width:30px;">
@@ -73,7 +73,7 @@
 					</ul>
 				</script>
 
-				<li ng:repeat="term in rootTerms" ng-class="{'unique-other': ((term.title||term.name | lstring:locale) == 'Other')}" ng-include="'term-check-tree-renderer.html'"></li>
+				<li ng:repeat="term in rootTerms" ng-class="{'other-term': otherTermIdentifier==term.identifier}" ng-include="'term-check-tree-renderer.html'"></li>
 
 				<li ng-show="error">
 					<div class="alert">
@@ -98,4 +98,4 @@
 		</div>
 	</div>
 		
-	</div>
+</div>
