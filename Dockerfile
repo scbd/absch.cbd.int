@@ -17,6 +17,7 @@ COPY ./scripts ./scripts
 RUN yarn install --production && \
     echo 'running on branch ' $VERSION
 
+COPY ./vue ./vue
 # run rollup script for vue file compilation
 RUN yarn run build
 
