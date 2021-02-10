@@ -20,11 +20,11 @@
 		</div>
 
 		<div ng-show="document.name">
-			<label>Name</label>
+			<label>Name of genetic element</label>
 			<km-value-ml value="document.name" locales="locale"></km-value-ml>
 		</div>
 		<div ng-show="document.synonymNames">
-			<label>Alternate genetic element name (synonyms)</label>
+			<label> Alternate genetic element name(s) (synonym(s))</label>
 			<ul class="list" style="padding-left:0px">
 				<li ng-repeat="synonym in document.synonymNames" style="padding-bottom:5px;">
 					<km-value-ml value="synonym" locales="locale"></km-value-ml>
@@ -49,10 +49,14 @@
 	
 		<legend>Donor organism</legend>
 
-		<div ng-show="document.donorOrganism">
-			<label>Donor organism</label>
+		<div ng-show="document.donorOrganisms">
+			<label>Donor organism(s)</label>
 			<div class="km-value">
-				<view-record-reference ng-model="document.donorOrganism.identifier" locale="locale" target="target"></view-record-reference>
+				<ul class="list">
+					<li ng-repeat="item in document.donorOrganisms">
+						<view-record-reference ng-model="item.identifier" locale="locale" target="target"></view-record-reference>
+					</li>
+				</ul>						
 			</div>
 		</div>
 

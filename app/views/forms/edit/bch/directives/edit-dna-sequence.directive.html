@@ -29,14 +29,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" required name="name" caption="Name">
+                                                <div class="km-control-group" required name="name" caption="Name of genetic element">
                                                     <div km-textbox-ml name="name" ng-model="document.name" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" name="synonymNames" caption="Alternate genetic element name (synonyms)">
+                                                <div class="km-control-group" name="synonymNames" caption="Alternate genetic element name(s) (synonym(s))">
                                                     <div ng-repeat="synonym in synonymNames" style="padding-bottom:5px;"  class="input-group">
                                                         <div km-textbox-ml name="synonymNames_{{$index}}" class="synonym-name-input" ng-model="synonym.value" locales="document.header.languages"></div>
                                                         <span ng-class="{'disable':synonymNames.length==1}" class="input-group-addon" style="cursor:pointer" 
@@ -78,8 +78,8 @@
                                         <legend>Donor organism</legend>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" required="{{!document.isSynthetic}}" name="donorOrganism" caption="Donor organism">											
-                                                    <div document-selector ng-model="document.donorOrganism" question="donorOrganism" type="radio"
+                                                <div class="km-control-group" required="{{!document.isSynthetic}}" name="donorOrganisms" caption="Donor organism(s)">											
+                                                    <div document-selector ng-model="document.donorOrganisms" question="donorOrganisms" type="checkbox"
                                                         schema="(organism)" allow-new="true" allow-new-schema="organism" skip-government="true"></div>			
                                                 </div>
                                             </div>
