@@ -36,7 +36,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" name="synonymNames" caption=" Alternate genetic element name(s) (synonym(s))">
+                                                <div class="km-control-group" name="synonymNames" caption="Alternate genetic element name(s) (synonym(s))">
                                                     <div ng-repeat="synonym in synonymNames" style="padding-bottom:5px;"  class="input-group">
                                                         <div km-textbox-ml name="synonymNames_{{$index}}" class="synonym-name-input" ng-model="synonym.value" locales="document.header.languages"></div>
                                                         <span ng-class="{'disable':synonymNames.length==1}" class="input-group-addon" style="cursor:pointer" 
