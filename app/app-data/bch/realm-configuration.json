@@ -238,7 +238,7 @@
             "en": "Contacts"
           },
           "description": {
-            "en": "Contact details of a person or organization."
+            "en": "Additional information that appears as part of the country profile"
           },
           "publishingAuthorities": [
             "BchAuthorizedUser-Dev",
