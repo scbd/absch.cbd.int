@@ -45,7 +45,7 @@ define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','compon
 
                 if (!$attr["class"])
                     $element.find('ul:first').addClass("list-unstyled");
-                
+                $element.addClass('terms-radio');
                 //==============================
                 //
                 //==============================

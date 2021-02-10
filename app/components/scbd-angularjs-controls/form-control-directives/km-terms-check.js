@@ -24,6 +24,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
             link: function($scope, $element, $attr, ngModelController) {
 
                 var hasNarrowerTerms = false;
+                $scope.otherTermIdentifier = '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED';
                 $scope.selectedItems = null;
 				$scope.showDescription = $attr.showDescription == 'true';
                 $scope.identifiers = null;
@@ -52,6 +53,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
 
                 if (!$attr["class"])
                     $element.find('ul:first').addClass("list-unstyled");
+                $element.addClass('terms-check');
            
                 $scope.enableSearch = $attr.enableSearch;
                 //==============================   
@@ -105,7 +107,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
 
                                 if($scope.terms){
                                     var term = _.find($scope.terms, {identifier:$scope.binding[i].identifier})
-                                    if(term && term.multiple && (term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' || term.identifier.indexOf('#5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'))){
+                                    if(term && term.multiple && (term.identifier==$scope.otherTermIdentifier || term.identifier.indexOf('#'+$scope.otherTermIdentifier))){
                                         if(!oNewOthers[term.identifier])
                                             oNewOthers[term.identifier] = [];
 
@@ -165,7 +167,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                                 oNewBinding.push(term.identifier);
                             else if ($scope.bindingType == "term[]"){
                                 
-                                if(term.multiple && (term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' || term.identifier.indexOf('#5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'))){
+                                if(term.multiple && (term.identifier==$scope.otherTermIdentifier || term.identifier.indexOf('#'+$scope.otherTermIdentifier))){
                                     if(!onOtherElementsChange)
                                         initializeOther(term.identifier)
                                     _.each($scope.otherElements[term.identifier], function(elm){
