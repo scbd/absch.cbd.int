@@ -59,9 +59,10 @@ async function processFiles() {
                                 }                                
                             }
                             let minifiedResult = await minification.minifyFile(file, options);
-                            minifiedResult     = minification.addLanguageAttribute(minifiedResult, file)
-                            await writeFile(file, minifiedResult);
-
+                            if(minifiedResult){
+                                minifiedResult     = minification.addLanguageAttribute(minifiedResult, file)
+                                await writeFile(file, minifiedResult);
+                            }
                         }
                         else{
                             console.log('Ignoring file', file)
