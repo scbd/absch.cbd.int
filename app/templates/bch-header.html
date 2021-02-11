@@ -40,16 +40,26 @@
             color: #333;
             white-space: nowrap;
         }
+        
         @media (max-width: 767px){
             .xs-padding {
                 padding-right: 5px!important;
             }
+            .help.dropdown-menu,
             .search.dropdown-menu {
                 margin-top: 5px !important;
                 position: absolute !important;
                 background-color: #ffff !important;
             }
-            .search.dropdown-menu li{ color: #333 !important;}
+            .help.dropdown-menu li,
+            .search.dropdown-menu li{ 
+                color: #333 !important;
+            }
+        }
+        .help.dropdown-menu li,
+        .search.dropdown-menu li{ 
+            padding-top: 5px;
+            padding-bottom: 5px;
         }
     </style>
     <nav class="navbar navbar-links navbar-default navbar-static-top" style="margin-bottom:0px;">
@@ -70,6 +80,26 @@
                             <span class="hidden-xs "> About</span>
                         </a>
                     </li>
+                    <li hover-effect=".dropdown-menu">                        
+                            <a rel="noopener" href="/kb" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                            ng-click="activeMenu='help'" ng-class="{'active-menu' : activeMenu == 'help'}" class="xs-padding">
+                              <i class="icon fa fa-book visible-xs "></i><span class="hidden-xs ">Help <span class="caret"></span></span>
+                            </a>
+                            <ul class="help dropdown-menu"  style="border:0;margin-top:5px;">
+                                <li>
+                                    <a rel="noopener" translation-url  href="/kb">
+                                      <i class="fa fa-book" style="font-size:15px"></i>&nbsp;Knowledge base</a>
+                                </li>
+                                <li>
+                                    <a rel="noopener" translation-url  href="/kb/faqs">
+                                      <i class="fa fa-lightbulb-o" style="font-size:15px"></i>&nbsp;FAQs</a>
+                                </li>
+                                <li>
+                                    <a rel="noopener" translation-url  href="/kb/articles">
+                                      <i class="fa fa-file-text-o" style="font-size:15px"></i>&nbsp;Articles</a>
+                                </li>
+                            </ul>
+                    </li>
                     <li>
                         <a rel="noopener"  translation-url href="https://bch.cbd.int/protocol" ng-click="activeMenu='protocol'"
                         ng-class="{'active-menu' : activeMenu == 'protocol'}" class="xs-padding">
@@ -85,19 +115,13 @@
                               <li><a rel="noopener" translation-url ng-href="search" ng-click="activeMenu='search'"> Search </a></li>
                               <li> <a rel="noopener" translation-url ng-href="/registries">Registries</a></li>
                           </ul>
-                      </li>
+                    </li>
                     <li>
                         <a rel="noopener" translation-url  ng-href="register"  ng-click="activeMenu='submit'"
                          ng-class="{'active-menu' : activeMenu == 'submit'}" class="xs-padding"> <i class="icon fa fa-edit visible-xs"></i>
                          <span class="hidden-xs "> Submit</span>
                         </a>
                     </li>
-                    <!-- <li>
-                        <a rel="noopener" translation-url  ng-href="register" ng-click="activeMenu='manage'"
-                        ng-class="{'active-menu' : activeMenu == 'manage'}" class="xs-padding"> <i class="icon fa fa-list-alt visible-xs"></i>
-                            <span class="hidden-xs "><i class="icon fa fa-lock"></i> Manage </span>
-                        </a>
-                    </li> -->
                     <li hover-effect=".dropdown-menu" class="country-dropdown">
                         <a rel="noopener" href="#" class="hidden-xs dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
                         ng-class="{'active-menu' : activeMenu == 'countryProfile'}" ng-click="activeMenu='countryProfile';countrySearchQuery=''" class="xs-padding">
@@ -172,6 +196,6 @@
                         </span>
                 </div>
             </div>
-        </nav>
+    </nav>
 </div>
     
