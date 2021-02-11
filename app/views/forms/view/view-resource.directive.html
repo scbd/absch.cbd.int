@@ -6,7 +6,7 @@
 		</h4>
 
 	</div>
-	<div class="record-body panel-body" ng-init="updatedOrganizations(document.organizations)">
+	<div class="record-body panel-body">
 
 
 		<document-date></document-date> <br>
@@ -115,15 +115,15 @@
 		</div>
 
 
-		<div ng-show="document.bchRaRecommend && document.bchRaRecommend != undefined && isBCH">
-			
-			<label>If “Risk assessment” was indicated as one of the “Thematic areas” in the previous question, please answer to the following question: would you like to recommend 
-				this document as background material for the “Guidance on Risk Assessment of Living Modified Organisms”? </label>
+		<div ng-show="document.bchRaRecommend != undefined && isBCH">
+
+			<label>Would you like to recommend</label>
 			<div class="km-value">
 				<div ng-if="document.bchRaRecommend">Yes</div>
+				<div ng-if="!document.bchRaRecommend">No</div>
 			</div>
-			
-			<div ng-show="document.bchRaAuthorAffiliation">
+
+			<div ng-show="document.bchRaAuthorAffiliation && document.bchRaRecommend">
 				<label>Author affiliation</label>
 				<div class="km-value">
 					<ul class="list">
@@ -132,8 +132,8 @@
 				</div>
 			</div>
 
-			<div ng-show="document.bchRaSubjects">
-				<label>Which section(s) of the “Guidance” this background material is relevant: </label>
+			<div ng-show="document.bchRaSubjects && document.bchRaRecommend">
+				<label>Which section(s) of the “Guidance” this background material is relevant </label>
 				<div class="km-value">
 					<ul class="list">
 					<li ng-repeat="val in document.bchRaSubjects"><span ng-bind="val | term | lstring:locale"></span></li>
@@ -255,8 +255,8 @@
 		<div ng-show="document.regions && isABS">
 			<label>Country(ies), Regional or Economic group(s) related to the resource</label>
 			<div class="km-value">
-				<ul ng-repeat="val in document.regions" class="list">
-					<li><span ng-bind="val | term | lstring:locale"></span></li>
+				<ul class="list">
+					<li ng-repeat="val in document.regions"><span ng-bind="val | term | lstring:locale"></span></li>
 				</ul>
 			</div>
 		</div>

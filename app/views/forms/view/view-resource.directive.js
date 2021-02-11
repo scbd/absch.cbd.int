@@ -32,13 +32,13 @@ app.directive("viewResource", [function () {
 			//====================
 			//
 			//====================
-			$scope.updatedOrganizations = function(value)
+			$scope.$watch("document.organizations", function(_new)
 			{
-				$scope.organizations = angular.fromJson(angular.toJson(value||[]));
+				$scope.organizations = angular.fromJson(angular.toJson(_new||[]));
 
 				if($scope.organizations)
 					$scope.loadReferences($scope.organizations);
-			}
+			});
 
 			//====================
 			//
