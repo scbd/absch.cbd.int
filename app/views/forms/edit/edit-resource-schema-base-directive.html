@@ -33,7 +33,7 @@
 											<div class="km-control-group" required name="authorsContact" caption="Author">
 												<div document-selector required type="radio" ng-model="document.authorsContact" contact-type='person' allow-new="true" allow-new-schema="contact"
 													question="authorsContact"
-													schema="((schema_s:contact AND type_s:person))"
+													schema="contact"
 													filter="true" skip-government="true">
 												</div>
 											</div>
@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
 							</section>
-							<section ng-if="isBCH && displayBchRaSubjects">
+							<section ng-if="isBCH && hasRiskAssessmentSubject">
                                 <div class="well no-shadow bg-white">
 									<legend>Background  material to the “Guidance on risk assessment of living modified organisms”</legend>
 									<div class="row">

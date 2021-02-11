@@ -28,7 +28,7 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 				$scope.user = $rootScope.user;
 				$scope.isNationalUser = false;
 				$scope.keywords = [{}];
-				$scope.displayBchRaSubjects = false;
+				$scope.hasRiskAssessmentSubject = false;
 
 				if ($scope.user.isAuthenticated) {
 					$scope.isNationalUser =  roleService.isNationalUser();
@@ -211,10 +211,9 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 					}
 					if($scope.isBCH) {
 						$scope.onLmoCategoriesChange( document.addressLmoCategories );
-					}
-					
-					if($scope.isBCH) {
 						$scope.onRaRecommendChange( document.bchRaRecommend );
+						$scope.onThematicAreaChange(document.bchSubjects);
+						$scope.onRaRecommendChange(document.bchRaRecommend);
 					}
 					if($scope.isABS) {
 						$scope.onResourceTypesChange( document.resourceTypes );
@@ -293,11 +292,8 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 				}
 
 				$scope.onThematicAreaChange = function(value){
-					if (value && _.indexOf((_.map(value, "identifier")), 'FBAF958B-14BF-45DD-BC6D-D34A9953BCEF') >= 0){
-						$scope.displayBchRaSubjects = true;
-					}
-					else
-						$scope.displayBchRaSubjects = false;
+					$scope.hasRiskAssessmentSubject = _.some(value||[], {identifier: "FBAF958B-14BF-45DD-BC6D-D34A9953BCEF"});
+					
 				}
 
 				//============================================================
