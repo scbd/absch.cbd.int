@@ -94,9 +94,10 @@
 
                 whenAsync('/register/admin/common-issues',         { templateUrl: 'views/register/admin/common-issues.html',   label:'Common issues',  param:'true', resolveController: true,resolve : { securized : securize(['Administrator']) }}).
 
-
-                whenAsync('/reports/matrix',         { templateUrl: 'views/reports/matrix/index.html',   label:'Matrix',  param:'true', resolveController: true,resolve : { }}).
+                whenAsync('/reports/matrix',         { templateUrl: 'views/reports/matrix/index.html',  label:'Matrix',  param:'true', resolveController: true,resolve : { }}).
     
+                whenAsync('/kb',                     { templateUrl: 'views/help/kb/index.html',     label:'KB',  param:'true', resolveController: true,resolve : { }}).
+
                 whenAsync('/oauth2/callback',             { templateUrl: 'views/oauth2/callback.html',          resolveController: true, resolveUser: true})
            
     }]);

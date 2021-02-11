@@ -148,9 +148,13 @@ define('plotly.js', [cdnHost + 'plotly.js-basic-dist-min@1.57.1/plotly-basic.min
     return Plotly;
 });
 
-define('vue', ['Vue'],                              function(Vue){ return Vue; });
-define('Vue', ['https://cdn.cbd.int/vue@2.6.12/dist/vue'], function(Vue){
+define('vue', ['Vue'], function(Vue){ return Vue; });
+define('Vue', ['https://cdn.cbd.int/vue@2.6.12/dist/vue', cdnHost +'vue-i18n@8.21.1/dist/vue-i18n.min'], function(Vue, i18n){
     window.Vue = Vue;
+    window.VueI18n = i18n;
+
+    window.Vue.use(window.VueI18n);
+
     return Vue;
 })
 

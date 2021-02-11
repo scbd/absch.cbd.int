@@ -17,22 +17,27 @@ const globals = {
 
 export default [
   exposeGlobal('node_modules/ky/index.js', 'ky'),
-  exposeVueComponent('test')
+  
+  exposeVueComponent('kb/auto-complete-search'),
+  exposeVueComponent('kb/categories-group'),
+  exposeVueComponent('kb/right-menu'),
+
+  exposeVueComponent('kb/home', 'views'),
 ];
 
 
 //Transpile and Expose Vue component to angularJS as AMD module
-function exposeVueComponent(relativePath) {
+function exposeVueComponent(relativePath, vueSourceDir) {
 
-    const vueSourceDir = 'vue/components';
-
+    vueSourceDir = `${(vueSourceDir || 'components')}`;
+    
     return {
-      input : path.join(vueSourceDir, relativePath+'.vue'),
+      input : path.join(`vue/${(vueSourceDir || 'components')}`, relativePath+'.vue'),
       output: [{
         format   : 'umd',
         sourcemap: true,
         globals,
-        file : path.join(outputDir, 'components', relativePath+'.js'),
+        file : path.join(outputDir, vueSourceDir, relativePath+'.js'),
         name : relativePath.replace(/[^a-z0-9]/ig, "_"),
       }],
       external: [ ...Object.keys(globals) ],
