@@ -3,8 +3,8 @@ define(['app', 'lodash', 'text!./edit-biosafety-expert.directive.html', 'views/f
 	'components/scbd-angularjs-controls/form-control-directives/km-inputtext-ac.html', 'services/solr'], 
 function (app, _, template) {
 
-	app.directive("editBiosafetyExpert", ["locale", "$filter", "searchService", "$q", "$controller", "thesaurusService", 'solr',
-	function(appLocale, $filter, searchService, $q, $controller, thesaurusService, solr) {
+	app.directive("editBiosafetyExpert", ["locale", "$filter", "searchService", "$q", "$controller", "thesaurusService", 'solr', 'Thesaurus',
+	function(appLocale, $filter, searchService, $q, $controller, thesaurusService, solr, thesaurus) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -22,6 +22,7 @@ function (app, _, template) {
 					},
 					value	: undefined
 				}
+				$scope.countryRegionsWorkedIn		= {countries:[], regions:[]};
 				$scope.scientificNameSynonyms = [{}];
 				$scope.commonNames = [{}];
 				$scope.container        = $attr.container;
@@ -33,7 +34,13 @@ function (app, _, template) {
 					$scope: $scope
 				});
 
-				_.extend($scope.options, {	
+				_.extend($scope.options, { 
+					countries : function() {return thesaurusService.getDomainTerms('countries').then(function(o){return _.sortBy(o, 'name' );})},
+					regions	: function() {return thesaurusService.getDomainTerms('regions')
+						.then(function(o){
+							return thesaurus.buildTree(o);
+							});
+					},		
 					organizationTypes: function() { 
 						return thesaurusService.getDomainTerms('organizationTypes', {other:true})
 								.then(function(types){ 
@@ -109,6 +116,17 @@ function (app, _, template) {
 						})
 					};
 					document.languageRating = languageRating;
+					var countryRegionsWorkedIn = []
+					if($scope.countryRegionsWorkedIn){
+
+						if(($scope.countryRegionsWorkedIn.countries||[]).length){
+							countryRegionsWorkedIn = $scope.countryRegionsWorkedIn.countries
+						}
+						if(($scope.countryRegionsWorkedIn.regions||[]).length){
+							countryRegionsWorkedIn = _.union(countryRegionsWorkedIn, $scope.countryRegionsWorkedIn.regions)
+						}
+					}
+					document.countryRegionsWorkedIn = countryRegionsWorkedIn;
 
 					var d = $scope.sanitizeDocument(document);
 					
@@ -165,6 +183,13 @@ function (app, _, template) {
 						});
 						$scope.motherTongue.otherLanguages = _.filter(doc.motherTongue, function(lang){
 							return !_.find(languages, {identifier:lang.identifier});
+						});
+
+						$scope.countryRegionsWorkedIn.countries = _.filter(doc.countryRegionsWorkedIn, function(country){
+							return _.find(country, {identifier:country.identifier});
+						});
+						$scope.countryRegionsWorkedIn.regions = _.filter(doc.countryRegionsWorkedIn, function(region){
+							return !_.find(region, {identifier:region.identifier});
 						});
 
 						var unLanguages = _.map(languages, function(lang){

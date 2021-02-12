@@ -26,52 +26,16 @@
 		</div>
 
 		<section>
-			<legend>Basic personal information</legend>
-			
-			<div class="padding-top-10">
-				<label>Coordinates</label>
+			<legend>Profile of the expert</legend>
+			<div ng-if="document.contact">
+				<label>Contact details</label>
 				<div class="km-value">
-					<div>
-						<strong>
-							<span ng-bind="document.prefix | lstring:locale" ng-if="document.prefix"></span>
-							<span ng-bind="document.firstName | lstring:locale" ng-if="document.firstName"></span>
-							<span ng-bind="document.lastName | lstring:locale" ng-if="document.lastName"></span>
-						</strong>
-					</div>
-					<div ng-show="document.address" ng-bind="document.address | lstring:locale"></div>
-					<div ng-show="document.city" ng-bind="document.city | lstring:locale"><span ng-show="document.city">, </span></div>
-					<div ng-show="document.state" ng-bind="document.state | lstring:locale"><br ng-show="document.city || document.state" /></div>
-					<div ng-show="document.postalCode" ng-bind="document.postalCode | lstring:locale"><span ng-show="document.postalCode">, </span></div>
-					<div ng-show="document.country" ng-bind="document.country|term"></div>
+					<view-record-reference ng-model="document.contact" locale="locale"></view-record-reference>
 				</div>
 			</div>
 
-			<div ng-show="document.phones"   class="padding-top-10">
-				<label>Phone number(s)</label>
-				<div class="km-value">
-					<ul class="list">
-						<li ng-repeat="item in document.phones">{{item}}</li>
-					</ul>
-				</div>
-			</div>
+			<div class="row" ng-if="document.birthYear" class="padding-top-10">
 
-			<div ng-if="document.emails"  class="padding-top-10">
-				<label>Email(s)</label>
-				<div class="km-value">
-					<ul class="list">
-						<li ng-repeat="item in document.emails">
-							<a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}">{{item}}</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="row" ng-if="document.birthYear || document.gender" class="padding-top-10">
-				<div ng-if="document.gender" class="col-md-6">
-					<label>Gender</label>
-					<div class="km-value">
-						<span ng-if="document.gender.identifier=='0999095A-13E0-46F0-A928-613B9AF32AAE'">Male</span>
-						<span ng-if="document.gender.identifier=='7CC8AFB1-36E0-4583-AE4E-DB928E60A3B3'">Female</span>
-					</div>
-				</div>
 				<div ng-if="document.birthYear" class="col-md-6">
 					<label>Year of birth</label>
 					<div class="km-value">
@@ -132,12 +96,18 @@
 				<km-value-ml value="document.currentEmployment.responsibilities" html locales="locale"></km-value-ml>
 			</div>
 		</section>
-		<section ng-if="document.previousEmployment || document.countriesWorkedIn">
+		<section ng-if="document.previousEmployment || document.countryRegionsWorkedIn">
 			<legend>Employment history</legend>
 			
-			<div ng-if="document.countriesWorkedIn"  class="padding-top-10">
+			<div ng-if="document.countryRegionsWorkedIn"  class="padding-top-10">
 				<label>Countries or regions where you have worked</label>
-				<km-value-ml value="document.countriesWorkedIn" locales="locale"></km-value-ml>
+				<div class="km-value">
+					<ul class="list">
+						<li ng-repeat="item in document.countryRegionsWorkedIn">
+							<span ng-bind="item|term:locale"></span>							
+						</li>
+					</ul>
+				</div>
 			</div>
 			<div ng-if="document.previousEmployment.name"  class="padding-top-10">
 				<label>Name of Previous Employer / Organization / Company</label>
