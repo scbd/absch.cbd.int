@@ -184,14 +184,6 @@ function (app, _, template) {
 						$scope.motherTongue.otherLanguages = _.filter(doc.motherTongue, function(lang){
 							return !_.find(languages, {identifier:lang.identifier});
 						});
-
-						$scope.countryRegionsWorkedIn.countries = _.filter(doc.countryRegionsWorkedIn, function(country){
-							return _.find(country, {identifier:country.identifier});
-						});
-						$scope.countryRegionsWorkedIn.regions = _.filter(doc.countryRegionsWorkedIn, function(region){
-							return !_.find(region, {identifier:region.identifier});
-						});
-
 						var unLanguages = _.map(languages, function(lang){
 							var langRating = _.find(doc.languageRating, {identifier:lang.identifier});
 							return _.extend(lang, {level:(langRating||{}).level, isUNLanguage:true});
@@ -200,6 +192,15 @@ function (app, _, template) {
 							return !_.find(languages, {identifier:lang.identifier});
 						});
 						$scope.languageRating = _.union(unLanguages, otherLanguages)
+					});
+
+					$q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
+						$scope.countryRegionsWorkedIn.countries = _.filter(doc.countryRegionsWorkedIn, function(country){
+							return _.find(countries, {identifier:country.identifier});
+						});
+						$scope.countryRegionsWorkedIn.regions = _.filter(doc.countryRegionsWorkedIn, function(region){
+							return !_.find(countries, {identifier:region.identifier});
+						});
 					});
 				});
 
