@@ -559,7 +559,7 @@
 			"type": "thesaurus",
 			"term": "detectionMethods",
 			"otherTerm":true,
-			"title": "Type of detection/ identification method(s) available for use in the laboratory",
+			"title": "Types of detection/identification method(s) available for use in the laboratory",
 			"field": "detectionMethods_ss"
 		},
 		{
