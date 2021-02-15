@@ -125,8 +125,8 @@ function (app, _, template) {
 						if(($scope.countryRegionsWorkedIn.regions||[]).length){
 							countryRegionsWorkedIn = _.union(countryRegionsWorkedIn, $scope.countryRegionsWorkedIn.regions)
 						}
+						document.countryRegionsWorkedIn = countryRegionsWorkedIn;
 					}
-					document.countryRegionsWorkedIn = countryRegionsWorkedIn;
 
 					var d = $scope.sanitizeDocument(document);
 					
@@ -194,14 +194,16 @@ function (app, _, template) {
 						$scope.languageRating = _.union(unLanguages, otherLanguages)
 					});
 
-					$q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
-						$scope.countryRegionsWorkedIn.countries = _.filter(doc.countryRegionsWorkedIn, function(country){
-							return _.find(countries, {identifier:country.identifier});
+					if((doc.countryRegionsWorkedIn||[]).length){
+						$q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
+							$scope.countryRegionsWorkedIn.countries = _.filter(doc.countryRegionsWorkedIn, function(country){
+								return _.find(countries, {identifier:country.identifier});
+							});
+							$scope.countryRegionsWorkedIn.regions = _.filter(doc.countryRegionsWorkedIn, function(region){
+								return !_.find(countries, {identifier:region.identifier});
+							});
 						});
-						$scope.countryRegionsWorkedIn.regions = _.filter(doc.countryRegionsWorkedIn, function(region){
-							return !_.find(countries, {identifier:region.identifier});
-						});
-					});
+					}
 				});
 
 			}
