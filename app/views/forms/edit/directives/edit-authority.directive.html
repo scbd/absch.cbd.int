@@ -1,6 +1,6 @@
 <div>
-
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+  
+    <div class="edit-authority-directive" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
         <div class="registerpage-content">
 
             <warning-message-cna doc="document"></warning-message-cna>
@@ -315,7 +315,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div  ng-if="type!='SPCA'" class="km-control-group" name="functions" caption="Administrative functions" required>
+                                        <div  ng-if="type!='SPCA'" class="km-control-group functions" name="functions" caption="Administrative functions" required>
                                             <div class="help-info">
                                                 <span ng-if="type=='CNA'">
                                                     If there is more than one competent national authority, please complete a different common format for each authority.
@@ -325,7 +325,7 @@
                                             <div km-term-check name="functions" required ng-model="document.functions" locales="document.header.languages"
                                             terms="options.functions()" binding-type="term[]" show-description="true"></div>
                                         </div>
-                                        <div ng-if="type=='CNA'" class="km-control-group" name="cpbOrganismTypes" caption="Types of organism(s) under its responsibility" required>
+                                        <div ng-if="type=='CNA'" class="km-control-group type-of-organism" name="cpbOrganismTypes" caption="Types of organism(s) under its responsibility" required>
                                             <div class="help-info">If there is only one Authority responsible for all functions required by the Protocol, please select "All types of organisms".</div>
                                             <div km-term-check name="cpbOrganismTypes" required ng-model="document.cpbOrganismTypes" locales="document.header.languages"
                                             terms="options.bchOrganismTypes()" binding-type="term[]"></div>

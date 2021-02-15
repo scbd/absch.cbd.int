@@ -154,7 +154,7 @@ define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-capacity-buildin
             document.geographicScope = {};
         if(!$scope.isGlobalOrRegional())
             delete document.geographicScope.regions;
-        if(!$scope.isGlobalOrRegional() && !$scope.isNational())
+        if(!$scope.isGlobalOrRegional() && !$scope.isNational() && !$scope.isCommunity())
             delete document.geographicScope.countries;
 
         if(_.isEmpty(document.geographicScope))

@@ -1,6 +1,6 @@
 <div>
 
-	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+	<div class="edit-biosafety-expert-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
 
 		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
 		<div class="registerpage-content">
@@ -66,111 +66,37 @@
                                     <div class="tab-pane" id="part2">
 
 										<div class="well no-shadow bg-white">
-											<legend>Basic personal information</legend>
+											<legend>Profile of the expert</legend>
 
 											<div class="row">
 				
-												<div class="col-md-2 col-sm-2 col-xs-12">
-													<div class="km-control-group" name="prefix" caption="Title">
-														<div km-textbox-ml name="prefix" ng-model="document.prefix" locales="document.header.languages"></div>
+												<div class="col-xs-12">
+													<div class="km-control-group" name="contact" caption="Contact details">
+														<div document-selector type="radio" ng-model="document.contact" contact-type='person' allow-new="true" allow-new-schema="contact"
+															 question="contact"
+															 schema="contact"
+															 filter="true" skip-government="true">
+														</div>
 													</div>
 												</div>
-			
-												<div class="col-md-5 col-sm-5 col-xs-12">
-													<div class="km-control-group" name="firstName" required caption="First name" required>
-														<div km-textbox-ml  name="firstName" ng-model="document.firstName" locales="document.header.languages"></div>
-													</div>
-												</div>
-			
-												<div class="col-md-5 col-sm-5 col-xs-12">
-													<div class="km-control-group" name="lastName" required caption="Last name" required>
-														<div km-textbox-ml name="lastName" ng-model="document.lastName" locales="document.header.languages"></div>
-													</div>
-												</div>
-												
+
 											</div>
 
 											<div class="row">
-												<div class="col-md-12">
-													<div class="km-control-group" required name="address" caption="Street address">
-														<div km-textbox-ml name="address" required ng-model="document.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800" locales="document.header.languages"></div>
-													</div>
-												</div>
-											</div>
 
-											<div class="row">
-												<div class="col-xs-6">
-													<div class="km-control-group" name="city" required caption="City">
-														<div km-textbox-ml name="city" ng-model="document.city" required
-															locales="document.header.languages" placeholder="example: Montreal"></div>
-													</div>
-												</div>
-			
-												<div class="col-xs-6">
-													<div class="km-control-group" name="state" caption="State or Province">
-														<div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
-															placeholder="example: Quebec"></div>
-													</div>
-												</div>
-											</div>
-			
-											<div class="row">
-			
-												<div class="col-xs-6">
-													<div class="km-control-group" name="postalCode" caption="Postal Code or Zip">
-														<div km-textbox-ml name="postalCode" ng-model="document.postalCode"
-															locales="document.header.languages" placeholder="example: H2Y 1N9"></div>
-													</div>
-												</div>
-			
-												<div class="col-xs-6" ng-if="options.countries">
-													<div class="km-control-group" name="country" required caption="Country of Contact">
-														<div afc-autocomplete name="country" ng-model="document.country" source="options.countries"
-															mapping="genericMapping" selectbox="true" placeholder="Please select a country..."
-															required filter="startsWithFilter" maxmatches="50"></div>
-													</div>
-												</div>
-											</div>
-											
-											<div class="row">
-												<div class="col-md-6 col-xs-12">
-													<div class="km-control-group" required name="phones" caption="Phone number(s)">
-														<div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
-														<div km-inputtext-list required name="phones" ng-model="document.phones" placeholder="example: +1 514.288.2220"></div>
-													</div>
-												</div>			
-												<div class="col-md-6 col-xs-12">
-													<div class="km-control-group" required name="emails" caption="Email(s)">
-														<div class="help-info">Please enter each email in new text box.</div>
-														<div km-inputtext-list required name="emails" ng-model="document.emails" placeholder="example: johnsmith@cbd.int"></div>
-													</div>
-												</div>
-											</div>
-
-											<div class="row">
-												<div class="col-xs-6">
-													<div class="km-control-group" name="gender" caption="Gender">	
-														<label class="radio-inline">
-															<input type="radio" ng-model="gender.value" ng-value="gender.options.male" name="gender" />Male</label>
-														<label class="radio-inline">
-															<input type="radio" ng-model="gender.value" ng-value="gender.options.female" name="gender" />Female</label>
-													</div>
-												</div>
-												<div class="col-md-6">
+												<div class="col-md-4">
 													<div class="km-control-group" name="birthYear" caption="Year of birth">
 														<input type="number" class="form-control" name="birthYear" ng-model="document.birthYear" min="1950" />
 													</div>
 												</div>
-											</div>
 
-											<div class="row">
-												<div class="col-md-6">
+												<div class="col-md-4">
 													<div class="km-control-group" name="birthCountry" caption="Country of birth">
 														<div km-select name="birthCountry" ng-model="document.birthCountry" 
 														items="options.countries()" filter-type="startsWith"></div>
 													</div>
 												</div>
-												<div class="col-md-6">
+												<div class="col-md-4">
 													<div class="km-control-group" name="nationalities"  caption="Nationality(ies)">
 														<div km-select multiple name="nationalities" ng-model="document.nationalities" 
 														filter-type="startsWith" items="options.nationalities()"></div>
@@ -250,21 +176,37 @@
 												<div class="help-block">
 													Please give details of relevant previous employment.
 												</div>
+												
                                                 <div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="countriesWorkedIn" caption="Countries or regions where you have worked">
-															<div km-textbox-ml name="countriesWorkedIn" required ng-model="document.countriesWorkedIn" locales="document.header.languages"
-															placeholder="example: Canada, Austria" ></div>
+														<label>Countries or regions where you have worked</label>
+													</div>
+	
+													<div class="col-md-5">
+														
+														<div class="km-control-group small"  name="countryRegionsWorkedIn.countries" caption="Countries">
+															<div km-select multiple name="countryRegionsWorkedIn.countries" 
+															ng-model="countryRegionsWorkedIn.countries" placeholder="Please select a country..." items="options.countries()"></div>
 														</div>
 													</div>
+													<div class="col-md-1 small">and/or</div>
+
+													 <div class="col-md-6">
+														<div class="km-control-group small regions-list"  name="countryRegionsWorkedIn.regions" caption="Geographical or political/economic group(s)">
+															<div km-select multiple name="countryRegionsWorkedIn.regions"
+																 ng-model="countryRegionsWorkedIn.regions" placeholder="Please select one option"
+																 items="options.regions()"></div>
+														</div>
+													</div>
+													
 													<div class="col-xs-12">
 														<div class="help-block">
 															Most recent previous professional experience<hr/>
 														</div>
 													</div>
 													<div class="col-xs-6">
-														<div class="km-control-group" required name="previousEmployment.name" caption="Name of Previous Employer / Organization / Company">
-															<div km-textbox-ac name="previousEmployment.name" required ng-model="document.previousEmployment.name" locales="document.header.languages"
+														<div class="km-control-group" name="previousEmployment.name" caption="Name of Previous Employer / Organization / Company">
+															<div km-textbox-ac name="previousEmployment.name" ng-model="document.previousEmployment.name" locales="document.header.languages"
 															placeholder="example: University of Montreal" pause="400" 
 															on-search="onSearchOrganizations(text, locale)" 
 															data-field="suggestions" title-field="title" description-field="summary" 
@@ -272,8 +214,8 @@
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group" required name="previousEmployment.department" caption="Department / Division / Unit">
-															<div km-textbox-ml required name="previousEmployment.department" ng-model="document.previousEmployment.department" locales="document.header.languages"></div>
+														<div class="km-control-group" name="previousEmployment.department" caption="Department / Division / Unit">
+															<div km-textbox-ml name="previousEmployment.department" ng-model="document.previousEmployment.department" locales="document.header.languages"></div>
 														</div>
 													</div>
 												</div>
@@ -282,7 +224,7 @@
 													<div class="col-md-6">
 														<div class="km-control-group" name="previousEmployment.startDate" caption="Start date"
 														help-content="<img src='/app/img/help-images/Datetime_control_gif.gif' />"  help-title="Help: Biosafety Expert">
-															<div km-date placeholder="YYYY-MM" name="previousEmployment.startDate" required 
+															<div km-date placeholder="YYYY-MM" name="previousEmployment.startDate" 
 															format="yyyy-mm" start-view="months" min-view-mode="months"
 															ng-model="document.previousEmployment.startDate"></div>
 														</div>
@@ -292,19 +234,19 @@
 														help-content="<img src='/app/img/help-images/Datetime_control_gif.gif' />"  help-title="Help: Biosafety Expert">
 															<div km-date placeholder="YYYY-MM" name="previousEmployment.endDate" 
 															format="yyyy-mm" start-view="months" min-view-mode="months"
-															required ng-model="document.previousEmployment.endDate"></div>
+															ng-model="document.previousEmployment.endDate"></div>
 														</div>
 													</div>
 												</div>
 			
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" required  name="previousEmployment.organizationType" caption="Type of organization">
-															<div km-select name="previousEmployment.organizationType" required ng-model="document.previousEmployment.organizationType"
+														<div class="km-control-group" name="previousEmployment.organizationType" caption="Type of organization">
+															<div km-select name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType"
 																items="options.organizationTypes()"></div>
 														</div>
 														<div  ng-show="document.previousEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-															<div class="km-control-group" required name="previousEmployment.organizationTypeOther" caption="Other type of organization">
+															<div class="km-control-group" name="previousEmployment.organizationTypeOther" caption="Other type of organization">
 																<div km-textbox-ml name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType.customValue" placeholder="example: SCBD" locales="document.header.languages"></div>
 															</div>
 														</div>

@@ -2210,3 +2210,17 @@ a.disabled{
 .map a {color:white important!;}
 
 .z10{ z-index: 1000 important!;}
+
+.terms-check .col-xs-12,
+.terms-radio .col-xs-12{
+    padding-left: 0px;
+}
+.edit-authority-directive .functions .terms-check .other-term,
+.edit-authority-directive .type-of-organism .terms-check .other-term,
+.edit-law-directive .subject-areas .terms-check .other-term,
+.edit-law-directive .type-of-organism .terms-check .other-term {
+    margin-left:40px;
+}
+.edit-biosafety-expert-directive .regions-list #select-dropdown .dropdown-toggle {
+    white-space: inherit;
+}
