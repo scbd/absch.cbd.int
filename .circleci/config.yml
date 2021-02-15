@@ -49,6 +49,8 @@ jobs:
 
   build_and_deploy_releases:
     <<: *defaults
+    environment:
+      NODE_ENV: production
     steps:
       - checkout
       - run: *buildDocker
@@ -62,6 +64,8 @@ jobs:
 
   build_and_deploy_tags:
     <<: *defaults
+    environment:
+      NODE_ENV: production
     steps:
       - checkout
       - run: *buildDocker

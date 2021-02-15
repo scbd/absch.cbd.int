@@ -1,4 +1,4 @@
-FROM node:12.0-alpine
+FROM node:14.0-alpine
 
 RUN apk update  -q && \
     apk upgrade -q && \
@@ -11,11 +11,15 @@ ARG VERSION
 ENV VERSION $VERSION
 
 WORKDIR /usr/src/app
-COPY package.json .npmrc ./
+COPY package.json .npmrc rollup.config.js ./
 COPY ./scripts ./scripts
 
 RUN yarn install --production && \
     echo 'running on branch ' $VERSION
+
+COPY ./vue ./vue
+# run rollup script for vue file compilation
+RUN yarn run build
 
 WORKDIR /usr/tmp/i18n
 
@@ -44,7 +48,6 @@ WORKDIR /usr/src/app
 RUN rm -rf /usr/tmp/i18n/en/.git \
     && cp -r  /usr/tmp/i18n/en/* ./ \
     && rm -rf /usr/tmp/i18n/en
-
 
 #copy touched files from Other UN lang version and REMOVE CACHE files
 RUN mkdir ./i18n && mv /usr/tmp/i18n/others/zh ./i18n && \
