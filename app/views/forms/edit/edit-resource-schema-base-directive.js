@@ -28,6 +28,7 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 				$scope.user = $rootScope.user;
 				$scope.isNationalUser = false;
 				$scope.keywords = [{}];
+				$scope.hasRiskAssessmentSubject = false;
 
 				if ($scope.user.isAuthenticated) {
 					$scope.isNationalUser =  roleService.isNationalUser();
@@ -128,6 +129,8 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 					bchLanguages    : function() {return thesaurusService.getDomainTerms('languages').then(function(o){return _.sortBy(o, 'name' );})},
 					bchSubjects   	: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'})},
 					resourceTypes   : function() {return thesaurusService.getDomainTerms('resourceTypes',{other:true, otherType:'lstring'})},
+					bchRaAuthorAffiliation : function() {return thesaurusService.getDomainTerms('bchRaAuthorAffiliation',{other:true, otherType:'lstring'})},
+					bchRaSubjects	: function() {return thesaurusService.getDomainTerms('bchRaSubjects');},
 
 				});
 				$scope.years = [];
@@ -202,9 +205,15 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 						document.publisher = undefined;
 						document.languages  = undefined;
 						document.resourceAccess = undefined;
+						document.bchRaRecommend = undefined;
+						document.bchRaAuthorAffiliation = undefined;
+						document.bchRaSubjects = undefined;
 					}
 					if($scope.isBCH) {
 						$scope.onLmoCategoriesChange( document.addressLmoCategories );
+						$scope.onRaRecommendChange( document.bchRaRecommend );
+						$scope.onThematicAreaChange(document.bchSubjects);
+						$scope.onRaRecommendChange(document.bchRaRecommend);
 					}
 					if($scope.isABS) {
 						$scope.onResourceTypesChange( document.resourceTypes );
@@ -273,6 +282,18 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 						$scope.document.genes = undefined;
 						$scope.document.modifiedOrganisms = undefined;
 					}
+				}
+
+				$scope.onRaRecommendChange = function(value){
+					if(!value){
+						$scope.document.bchRaAuthorAffiliation = undefined;
+						$scope.document.bchRaSubjects = undefined;
+					}
+				}
+
+				$scope.onThematicAreaChange = function(value){
+					$scope.hasRiskAssessmentSubject = _.some(value||[], {identifier: "FBAF958B-14BF-45DD-BC6D-D34A9953BCEF"});
+					
 				}
 
 				//============================================================

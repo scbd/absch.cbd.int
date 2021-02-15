@@ -122,6 +122,7 @@ define(['app', 'services/cache-service'], function (app) {
                 cbrPurpose             : 'E712C9CD-437E-454F-BA72-E7D20E4C28ED',   // was cBR_purpose, not used
                 cbrFormats             : 'D2D97AB3-4D20-41D4-8CBE-B21C33924823',   // was cBR_formats, not used
                 cbiTrainingTypes       : 'D6E6A4AA-8B88-4AE9-AF5C-9CB852FFE4DC',   // was cBI_trainingTypes, not used
+                bchRaSubjects          : '69B43BB5-693B-4ED9-8FE0-95895E144142',
 
                 cbdSubjects            : 'CBD-SUBJECTS',
                 decisionTypes          : 'DecisionTypes',
@@ -141,6 +142,7 @@ define(['app', 'services/cache-service'], function (app) {
                 languages              : "ISO639-2",
                 aichiTargets           : 'AICHI-TARGETS',
                 legislationAgreementTypes : 'Legislation And Agreement Types',
+                bchRaAuthorAffiliation  :   'Organization Types',
 
 
                 //===========================  Terms to be removed  ==========================\\

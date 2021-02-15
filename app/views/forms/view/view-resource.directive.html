@@ -23,14 +23,18 @@
 			<label>Link to the resource(s)</label>
 			<km-link-list class="km-value"  ng-if="document.resourceLinks" ng-model="document.resourceLinks" style="margin-top: 5px;"></km-link-list>
 		</div>
+		<div ng-show="document.authorsContact && isBCH">
+			<label>Author</label>
+			<div class="km-value">
+				<div view-record-reference ng-model="document.authorsContact" locale="locale"></div>
+			</div>
+			
+		</div>
 		<div ng-show="document.authors">
-			<label>Author(s)</label>
+			<label>Authors information</label>
 			<km-value-ml value="document.authors" locales="locale"></km-value-ml>
 		</div>
-		<div ng-show="document.authorsInfo && isBCH">
-			<label>Authors information</label>
-			<km-value-ml value="document.authorsInfo" locales="locale"></km-value-ml>
-		</div>
+		
 		<div ng-show="organizations && organizations.length>0 && isABS">
 			<label>Reference to the authoring organisation(s)</label>
 			<div >
@@ -59,7 +63,7 @@
 			<label>Language(s)</label>
 			<div class="km-value">
 				<ul class="list">
-				<li ng-repeat="term in document.languages"><span ng-bind="term | term | lstring:locale"></span></li>
+				<li ng-repeat="val in document.languages"><span ng-bind="val | term | lstring:locale"></span></li>
 				</ul>
 			</div>
 		</div>
@@ -75,7 +79,7 @@
 			<label>Thematic areas(s)</label>
 			<div class="km-value">
 				<ul class="list">
-					<li ng-repeat="term in document.bchSubjects"><span ng-bind="term|term"></span></li>
+					<li ng-repeat="val in document.bchSubjects"><span ng-bind="val|term"></span></li>
 				</ul>
 			</div>
 		</div>
@@ -109,6 +113,38 @@
 				</div>
 			</div>
 		</div>
+
+
+		<div ng-show="document.bchRaRecommend != undefined && isBCH">
+
+			<label>Would you like to recommend this document as background material for the “Guidance on Risk Assessment of Living Modified Organisms”?</label>
+			<div class="km-value">
+				<div ng-if="document.bchRaRecommend">Yes</div>
+				<div ng-if="!document.bchRaRecommend">No</div>
+			</div>
+
+			<div ng-show="document.bchRaAuthorAffiliation && document.bchRaRecommend">
+				<label>Author affiliation</label>
+				<div class="km-value">
+					<ul class="list">
+					<li ng-repeat="val in document.bchRaAuthorAffiliation"><span ng-bind="val | term | lstring:locale"></span></li>
+					</ul>
+				</div>
+			</div>
+
+			<div ng-show="document.bchRaSubjects && document.bchRaRecommend">
+				<label>Which section(s) of the “Guidance” this background material is relevant </label>
+				<div class="km-value">
+					<ul class="list">
+					<li ng-repeat="val in document.bchRaSubjects"><span ng-bind="val | term | lstring:locale"></span></li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+
+
+
 		<div ng-show="document.modifiedOrganisms && document.modifiedOrganisms.length>0 && isBCH">
 			<label>LMO(s) identification</label>
 			<div >
@@ -153,7 +189,7 @@
 			<label>Keywords</label>
 			<div class="km-value" >
 				<ul class="list">
-					<li ng-repeat="term in document.keywords"><span ng-bind="term | lstring:locale"></span></li>
+					<li ng-repeat="val in document.keywords"><span ng-bind="val | lstring:locale"></span></li>
 				</ul>
 			</div>
 		</div>
@@ -219,8 +255,8 @@
 		<div ng-show="document.regions && isABS">
 			<label>Country(ies), Regional or Economic group(s) related to the resource</label>
 			<div class="km-value">
-				<ul ng-repeat="term in document.regions" class="list">
-					<li><span ng-bind="term | term | lstring:locale"></span></li>
+				<ul class="list">
+					<li ng-repeat="val in document.regions"><span ng-bind="val | term | lstring:locale"></span></li>
 				</ul>
 			</div>
 		</div>
@@ -228,7 +264,7 @@
 			<label>Related Aichi target(s)</label>
 			<div class="km-value">
 				<ul  class="list">
-					<li ng-repeat="term in document.aichiTargets"><span ng-bind="term | term:locale"></span></li>
+					<li ng-repeat="val in document.aichiTargets"><span ng-bind="val | term:locale"></span></li>
 				</ul>
 			</div>
 		</div>
@@ -237,8 +273,8 @@
 			<label> Thematic areas(s) and keywords for facilitating online searches</label>
 			<div class="km-value" ng-show="document.absSubjects || document.mccKeywords">
 				<ul class="list">
-					<li ng-repeat="term in document.absSubjects"><span ng-bind="term | term:locale"></span></li>
-					<li ng-repeat="term in document.mccKeywords"><span ng-bind="term | term:locale"></span></li>
+					<li ng-repeat="val in document.absSubjects"><span ng-bind="val | term:locale"></span></li>
+					<li ng-repeat="val in document.mccKeywords"><span ng-bind="val | term:locale"></span></li>
 				</ul>
 			</div>
 
@@ -257,7 +293,7 @@
 			<label>Key areas and strategic measures for capacity-building and development</label>
 			<div class="km-value">
 				<ul  class="list">
-					<li ng-repeat="term in document.absKeyAreas"><span ng-bind="term | term:locale"></span></li>
+					<li ng-repeat="val in document.absKeyAreas"><span ng-bind="val | term:locale"></span></li>
 				</ul>
 			</div>
 		</div>
