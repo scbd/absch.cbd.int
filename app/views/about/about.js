@@ -1,4 +1,4 @@
-define(['app','underscore',
+define(['app','lodash',
   'components/scbd-angularjs-services/services/locale',
   './article-search.directive',
   './article-guides.directive',

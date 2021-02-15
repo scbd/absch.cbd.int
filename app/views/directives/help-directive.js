@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'angular-joyride'], function (app, _) {
+define(['app', 'lodash', 'angular-joyride'], function (app, _) {
         app.directive('help', function ($http) {
                 return {
                         restrict: 'EAC',
@@ -89,9 +89,9 @@ define(['app', 'underscore', 'angular-joyride'], function (app, _) {
                                                 .then(function (response) {
 
                                                         // $timeout(function(){
-                                                        help = _.first(response.data);
+                                                        help = _.head(response.data);
                                                         if(help){
-                                                                _.each(help.fields, function (field, key) {
+                                                                _.forEach(help.fields, function (field, key) {
 
                                                                         var templateToUse = controlTemplate//;
                                                                         var children = $element.find('div.km-control-group[name="' + field.name + '"] label:first');
@@ -166,7 +166,7 @@ define(['app', 'underscore', 'angular-joyride'], function (app, _) {
 
                                                         var joyRideTemplate = '<div id="joyrideSection" style="display:none"><ol id="helpElement" class="jouride-list" data-joyride>';
                                                         var index = 1;
-                                                        _.each(_.sortBy(help.fields,'sequence'), function (field, key, list) {
+                                                        _.forEach(_.sortBy(help.fields,'sequence'), function (field, key, list) {
                                                                 if (field.fieldType == 'form')
                                                                         return;
 
@@ -222,8 +222,8 @@ define(['app', 'underscore', 'angular-joyride'], function (app, _) {
                                         function repalceGlossaryTerms() {
                                                         $q.when($http.get('/api/v2015/help-glossarys/'))
                                                                 .then(function (response) {
-                                                                        _.each(response.data, function (field, key) {
-                                                                                _.each(field.referenceTerm, function (term) {
+                                                                        _.forEach(response.data, function (field, key) {
+                                                                                _.forEach(field.referenceTerm, function (term) {
                                                                                         replacetext(term, "<a rel="noopener" translation-url  ng-if='showHelp.glossary' href='/help/glossary/" + field._id + "'>$&</a>")
                                                                                 });
                                                                         });

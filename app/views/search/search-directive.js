@@ -175,7 +175,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         }
                         //remove children
                         var dels = {};
-                        var toDelete = _.each($scope.setFilters, function (filter) {
+                        var toDelete = _.forEach($scope.setFilters, function (filter) {
                             if (filter.broader === filterID) {
                                 $scope.removeFilter(filter);
                             }
@@ -358,7 +358,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                     if(!_.isArray(query.schema))
                                         query.schema = [query.schema];
 
-                                    _.each(query.schema, function(s){
+                                    _.forEach(query.schema, function(s){
                                         var sch = _.find(schemaFilters, {id:s});
                                         $scope.saveFilter(sch)
                                     })
@@ -406,9 +406,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     function loadSchemaFilters() {
 
-                        _.each(realm.schemas, function (schema, key) {                           
-                                addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 
-                                        'description': $filter('lstring')(schema.description || {}), otherType:schema.type });
+                        _.forEach(realm.schemas, function (schema, key) {
+                                addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': schema.title.en, 'id': key, 
+                                        'description': (schema.description || {}).en, otherType:schema.type });
                         })
 
                         addFilter('partyToProtocol'     , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Protocol'                   , 'id': 'partyToProtocol'     , 'description': '' });
@@ -417,8 +417,8 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         addFilter('signatoryToProtocol' , { 'sort': 4, 'type': 'partyStatus', 'name': 'Signatory to the Protocol'               , 'id': 'signatoryToProtocol' , 'description': '' });
 
                         //SCBD
-                        _.each(scbdSchemas, function (schema, key) {
-                            addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 
+                        _.forEach(scbdSchemas, function (schema, key) {
+                            addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': schema.title, 'id': key, 
                                     'description': (schema.description || {}), otherType:'scbd' });
                         });
                     };
@@ -428,7 +428,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         return $q.when(commonjs.getCountries(), function (data) {
                             var countries = data;
 
-                            _.each(countries, function (country, index) {
+                            _.forEach(countries, function (country, index) {
                                 addFilter(country.code.toLowerCase(), { 'sort': index, 'type': 'country', 'name': country.name, 
                                 'id': country.code.toLowerCase(), 'description': '', "isCBDParty": country.isCBDParty, "isParty": country.isParty, 
                                 "isParty": country.isParty, "isSignatory": country.isSignatory, "isRatified": country.isRatified, 
@@ -440,7 +440,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     function loadRegionsFilters() {
 
                         return $q.when(commonjs.getRegions(), function (regions) {
-                            _.each(regions, function (region, index) {
+                            _.forEach(regions, function (region, index) {
                                 addRegionFilter(region);
                             });
                         });
@@ -451,7 +451,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         addFilter(region.identifier, { 'type': 'region', 'name': region.title, 'id': region.identifier, 
                         'description': '', 'parent': parent });
 
-                        _.each(region.narrowerTerms, function (narrower) {
+                        _.forEach(region.narrowerTerms, function (narrower) {
                             addRegionFilter(narrower, region.identifier);
                         });
                     }
@@ -529,7 +529,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     function loopKeywords(keywords, schemaFieldKey){
                         if((keywords||[]).length){
-                            _.each(keywords, function (keyword, index) {
+                            _.forEach(keywords, function (keyword, index) {
                                 addKeywordFilter(keyword, schemaFieldKey, keyword.broader||keyword.broaderTerms);
                             });
                         }
@@ -575,7 +575,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var combinations = []
                         mappings = mappings || groupFieldMapping;
 
-                        _.each(mappings, function(group){                            
+                        _.forEach(mappings, function(group){
                             var groupField = group.field
                             var others = _.without(mappings, group)
 
@@ -601,7 +601,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             groupField : fields.join('_') + '_s',
                             sortFields:[]
                         };
-                        _.each(fields, function(field){
+                        _.forEach(fields, function(field){
                             var group = _.find(groupFieldMapping, {field:field})
                             map.sortFields.push(group.sortFields)
                         })
@@ -611,7 +611,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                     function sanitizeFacets(facets){
                         var schemaTypes = {all:0}
-                        _.each((facets.facet_fields['schemaType_s']||[]), function(facet, key){
+                        _.forEach((facets.facet_fields['schemaType_s']||[]), function(facet, key){
                             schemaTypes[key] = facet;
                             schemaTypes.all = schemaTypes.all + (schemaTypes[key]||0);
                         });
@@ -625,13 +625,13 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         //combine regions and countries facets to match the count.
                         // if any fields has regions than selecting any country from that region should return result
                         if(facets.regions){
-                            _.each(facets.countries, function(con, key){
+                            _.forEach(facets.countries, function(con, key){
                                 if(facets.regions[key])
                                     facets.countries[key] = (facets.countries[key]||0) + facets.regions[key];
                             })
                         }
                         if(facets.countries){
-                            _.each(facets.regions, function(reg, key){
+                            _.forEach(facets.regions, function(reg, key){
                                 if(facets.countries[key])
                                     facets.regions[key] = (facets.regions[key]||0) + facets.countries[key];
                             })
@@ -760,7 +760,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         if(!_.isEmpty(leftMenuFilters)){
                             var schemaQueries = []
                             var freeTexQueries = []    
-                            _.each(leftMenuFilters, function(filters, key){
+                            _.forEach(leftMenuFilters, function(filters, key){
 
                                 // If main filter has been disabled than exclude results
                                 var mainFilter = $scope.setFilters[key]
@@ -769,7 +769,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
 
                                 var subQueries = [];                            
                                 subQueries.push('schema_s:'+ key)
-                                _.each(filters, function(filter){
+                                _.forEach(filters, function(filter){
                                     var subQuery;
                                     if(filter.disabled)
                                         return;
@@ -838,7 +838,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             return;
                         }
                         var values = [];
-                        _.each(filters, function (item) {
+                        _.forEach(filters, function (item) {
                             values.push(item.dateField+':' + item.query)
                         });
                         if(values.length)
@@ -863,7 +863,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         }
                         var values;
                         var countries = getSearchFilters('country')
-                        _.each(filters, function (item) {
+                        _.forEach(filters, function (item) {
                             values = (values||'') + " " + getCountryList(item.id, countries);
                         });
                         if(values)
@@ -1004,7 +1004,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                                 return item;
                         });
 
-                        var govs = _.pluck(templist, 'id');
+                        var govs = _.map(templist, 'id');
 
                         return govs.join(" ");
                     }

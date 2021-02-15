@@ -22,7 +22,7 @@ app.directive("lmoDecisions", [ '$http', 'solr', '$cookies', 'searchService', 'c
 				//============================================================
 				$q.when(commonjs.getCountries()).then(function(data) {
 
-					_.each(data, function(c) { countries[c.code.toLowerCase()] = c.name.en; });
+					_.forEach(data, function(c) { countries[c.code.toLowerCase()] = c.name.en; });
 
 					countries.eur = countries.eur || countries.eu;
 

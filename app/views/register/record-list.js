@@ -108,7 +108,7 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/services/main', 'co
                             identifier : record.identifier, type: $scope.security.canDelete ? 'delete' : 'request',
                             workflowId : workflowInfo._id
                         });
-                         var currentDocument = _.findWhere($scope.records, {identifier: record.identifier})
+                         var currentDocument = _.find($scope.records, {identifier: record.identifier})
                          currentDocument.workflowActivityStatus = 'pending';
 
                         $scope.recordToDelete = null;
@@ -139,7 +139,7 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/services/main', 'co
                                     identifier : record.identifier, type:'revoke',
                                     workflowId : document._id
                                 });
-                                var currentDocument = _.findWhere($scope.records, {identifier: record.identifier})
+                                var currentDocument = _.find($scope.records, {identifier: record.identifier})
                                 currentDocument.workflowActivityStatus =  'pending';
                                 $scope.closeDialog();
                             }).finally(function () {
@@ -326,14 +326,14 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/services/main', 'co
                     if((data.type == 'workflowActivityStatus' || data.type == 'userNotification') &&
                       data.data && data.data.identifier){
                           
-                        var document = _.findWhere($scope.records, {identifier: data.data.identifier})
+                        var document = _.find($scope.records, {identifier: data.data.identifier})
                         var updateDocument = true;
                         if(localStorageService.get('workflow-activity-status')){
                             
                             var localStorageDocument = localStorageService.get('workflow-activity-status');
                             if(localStorageDocument.identifier == data.data.identifier){ 
-                                if( (data.data.workflowActivity == 'document-lock' && _.contains(['revoke', 'request'], localStorageDocument.type)) || 
-                                    (data.data.workflowActivity == 'create-revision-from-draft' && _.contains(['revoke', 'publish'], localStorageDocument.type)) || 
+                                if( (data.data.workflowActivity == 'document-lock' && _.includes(['revoke', 'request'], localStorageDocument.type)) ||
+                                    (data.data.workflowActivity == 'create-revision-from-draft' && _.includes(['revoke', 'publish'], localStorageDocument.type)) ||
                                     (data.data.workflowActivity == 'document-deleted' && 'delete'==localStorageDocument.type)){
 
                                     if(document && localStorageDocument.type == 'revoke' && data.data.workflowActivity == 'create-revision-from-draft')
@@ -457,7 +457,7 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/services/main', 'co
 
                         myTasks.forEach(function(workflow) { //tweaks
                             
-                            if(workflow.data && !_.findWhere($scope.records, {identifier: workflow.data.identifier})){
+                            if(workflow.data && !_.find($scope.records, {identifier: workflow.data.identifier})){
                                 $scope.records.push({
                                     identifier  : workflow.data.identifier,
                                     title       : workflow.data.title,
@@ -517,7 +517,7 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/services/main', 'co
 
                     IWorkflows.get(workflowId)
                     .then(function(workflow){
-                        var activity = _.first(workflow.activities)                        
+                        var activity = _.head(workflow.activities)
                         if((activity && activity.completedBy) || !activity && workflow.state=="completed"){
                             localStorageService.remove('workflow-activity-status');
                         }
@@ -534,7 +534,7 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/services/main', 'co
                   return $q.when(docQuery)
                         .then(function (data) {
 
-                            var currentDocument = _.findWhere($scope.records, {identifier: identifier})
+                            var currentDocument = _.find($scope.records, {identifier: identifier})
                             
                             if(data.data.deletedOn){
                                 $scope.records.splice($scope.records.indexOf(currentDocument), 1);
@@ -579,7 +579,7 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/services/main', 'co
 
                 function loadmyTasks(schema){
 
-                    if(!_.contains(realm.referenceSchemas, schema)){
+                    if(!_.includes(realm.referenceSchemas, schema)){
 
                         var defer = $q.defer();
                         defer.resolve([]);

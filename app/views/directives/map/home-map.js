@@ -35,12 +35,12 @@ define(['text!./home-map.html','app', 'lodash', 'services/search-service',
             $q.when(commonjs.getCountries(), function(countries) {
 
               if($scope.options.isBch){
-                  $scope.numRatified  = _.where(countries, {isInbetweenParty:  true}).length;
-                  $scope.numParty     = _.where(countries, {isParty:     true}).length;
+                  $scope.numRatified  = _.filter(countries, {isInbetweenParty:  true}).length;
+                  $scope.numParty     = _.filter(countries, {isParty:     true}).length;
               }
               else {                
-                  $scope.numRatified  = _.where(countries, {isInbetweenParty:  true}).length;
-                  $scope.numParty     = _.where(countries, {isParty:     true}).length;
+                  $scope.numRatified  = _.filter(countries, {isInbetweenParty:  true}).length;
+                  $scope.numParty     = _.filter(countries, {isParty:     true}).length;
               }
               $scope.numNonParty  = countries.length -  $scope.numParty;
                 

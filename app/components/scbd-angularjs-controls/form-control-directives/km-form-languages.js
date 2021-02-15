@@ -27,10 +27,10 @@ define(['app', 'text!./km-form-languages.html', 'lodash', './km-select', 'servic
                     })
                 },
                 otherLocales : function(){
-                    return thesaurusService.getDomainTerms('languages').then(formatLocales).then(function(locales){                        
+                    return thesaurusService.getDomainTerms('languages').then(formatLocales).then(function(locales){                      
                         if($scope.locales) unLanguages = _.map($scope.locales, 'identifier');
                         return _(locales).map(function(lang){
-                            if(!_.contains(unLanguages, lang.identifier))return lang;
+                            if(!_.includes(unLanguages, lang.identifier))return lang;
                         }).compact().value()
                     })
                 }

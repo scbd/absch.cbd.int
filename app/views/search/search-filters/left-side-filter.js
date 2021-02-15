@@ -45,7 +45,7 @@
                                 $scope.facets = facets;
                                 $scope.searchRelated = filter.searchRelated;
                                 var options;
-                                _.each(filter.selectedItems, function (option) {
+                                _.forEach(filter.selectedItems, function (option) {
                                     if (filter.type == 'thesaurus' || filter.type == 'solr' || filter.type == 'customListFn')
                                         $scope.treeViewSelected.push({ identifier: option.identifier });
                                 });
@@ -80,7 +80,7 @@
                                 $scope.applyFilter = function () {
 
                                     var selectedItems = {};
-                                    _.each($scope.treeViewSelected, function (item) {
+                                    _.forEach($scope.treeViewSelected, function (item) {
                                         selectedItems[item.identifier] = _.find(options, { identifier: item.identifier });
                                     })
                                     updateBaseFilter(selectedItems, schema, filter, $scope.searchRelated);
@@ -154,7 +154,7 @@
                         }
                         else{
                             var filters = $scope.leftMenuFilters[schema]
-                            _.each(filters, clearFilterOptions);
+                            _.forEach(filters, clearFilterOptions);
                         }
                         searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters);
                     }
@@ -182,7 +182,7 @@
                     }
 
                     $scope.hasItems = function(items){
-                        return items && _.keys(items).length;
+                            return items && _.keys(items).length;
                     }
 
                     $scope.onBuildQuery = function(searchText, tab, filter){
@@ -233,7 +233,7 @@
 
                     function clearFilterOptions(filter){
                         if(filter.type!='solrRecords'){
-                            _.each(filter.selectedItems, function(item){
+                            _.forEach(filter.selectedItems, function(item){
                                 $element.find('#' + item.identifier).tooltip('hide')
                             })
                         }

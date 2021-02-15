@@ -125,7 +125,7 @@ define(['app', 'lodash','text!views/directives/task-id-directive.html',
 					//
 					//==================================================
 					$scope.isAssignedToMe = function (activity) {
-						return activity && _.contains(activity.assignedTo || [], $scope.$root.user.userID || -1);
+						return activity && _.includes(activity.assignedTo || [], $scope.$root.user.userID || -1);
 					};
 					//==================================================
 					//

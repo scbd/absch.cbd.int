@@ -5,7 +5,6 @@
 		<script src="../bower_components/angular/angular.js"></script>
 		<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
 		<script src="../bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-		<script src="../bower_components/underscore/underscore.js"></script>
 		<script src="../scbd-controls.js"></script>
 		<script src="../bower_components/ng-tags-input/ng-tags-input.js"></script>
 		<script src="../bower_components/leaflet-0.7.2/leaflet.js"></script>
@@ -29,7 +28,7 @@
 		<div id="notFooter" style="margin-bottom: 250px;">
 			<form novalidate>
 				<h1>{{demoTitle}}</h1>
-				<h3>Requirements: Angular, underscore</h3>
+				<h3>Requirements: Angular, lodash</h3>
 
 				<h4>autocomplete</h4>
 				<!--

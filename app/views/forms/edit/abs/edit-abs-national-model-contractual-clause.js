@@ -1,6 +1,6 @@
-﻿define(['app', 'views/forms/edit/edit',
+﻿define(['app', 'lodash', 'views/forms/edit/edit',
     'views/forms/view/abs/view-abs-national-model-contractual-clause.directive'
-], function(app) {
+], function(app,_) {
 
     app.controller("editAbsNationalModelContractualClause", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, $http, $filter, $q, $routeParams, $controller, $location) {
         $controller('editController', {
@@ -23,7 +23,7 @@
                     var jurisdictions = o[0].data;
                     jurisdictions.push(o[1].data);
 
-                    _.each(jurisdictions, function(element) {
+                    _.forEach(jurisdictions, function(element) {
                         element.__value = element.name;
                     });
 
@@ -40,7 +40,7 @@
 
         $scope.ac_jurisdictions = function() {
             return $scope.options.jurisdictions().then(function(jurisdictions) {
-                _.each(jurisdictions, function(element) {
+                _.forEach(jurisdictions, function(element) {
                     element.__value = element.name;
                 });
                 return jurisdictions;

@@ -1,4 +1,4 @@
-define(['app', 'text!views/directives/discussion-directive.html', 'cbd-forums'], function(app, template) {
+define(['app', 'lodash','text!views/directives/discussion-directive.html', 'cbd-forums'], function(app, _, template) {
 
     app.directive('discussion', function() {
         return {
@@ -65,7 +65,7 @@ define(['app', 'text!views/directives/discussion-directive.html', 'cbd-forums'],
                         .then(function(result) {
                             if (result.data.length > 0) {
                                 console.log(result.data);
-                                $scope.threadId = _.first(result.data).threadId;
+                                $scope.threadId = _.head(result.data).threadId;
 
                                 $scope.forumWatch = null;
                                 var forumWatchQuery = $http.get('/api/v2014/discussions/forums/' + $scope.forumId + '/watch');

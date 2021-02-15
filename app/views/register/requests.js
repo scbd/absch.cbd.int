@@ -1,5 +1,5 @@
 define(['app', 
-'underscore', 
+'lodash',
 'js/common',  
 'moment', 
 'components/scbd-angularjs-controls/form-control-directives/all-controls',
@@ -8,7 +8,7 @@ define(['app',
 'views/directives/task-id-directive',
 'components/scbd-angularjs-controls/form-control-directives/pagination',
 'components/scbd-angularjs-services/services/locale',
-'views/forms/view/record-loader.directive'], function (app) {
+'views/forms/view/record-loader.directive'], function (app, _) {
 
         "use strict";
         app.controller("requestsController", ["$scope", "IWorkflows", "realm", '$rootScope', 'roleService', "$q", "locale",

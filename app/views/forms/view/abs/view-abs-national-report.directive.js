@@ -1,6 +1,6 @@
-define(['app', "text!views/forms/view/abs/view-abs-national-report.directive.html", 
+define(['app', 'lodash', "text!views/forms/view/abs/view-abs-national-report.directive.html", 
 'views/directives/record-options',
-], function (app, template) {
+], function (app, _, template) {
 
 app.directive("viewAbsNationalReport", [function () {
 	return {
@@ -14,7 +14,7 @@ app.directive("viewAbsNationalReport", [function () {
 			target  : "@linkTarget",
 			hide	: "@"
 		},
-		controller : ["$scope", "underscore", "commonjs", "$filter", function ($scope, _, commonjs, $filter)
+		controller : ["$scope", "commonjs", "$filter", function ($scope, commonjs, $filter)
 		{
 			
 			
@@ -147,6 +147,3 @@ app.directive("viewAbsNationalReport", [function () {
 }]);
 
 });
-
-
-_.isEmpty

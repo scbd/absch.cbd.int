@@ -1,7 +1,7 @@
-define(['app', 'text!views/directives/workflow-history-directive.html'], function(app, template) {
+define(['app', 'lodash', 'text!views/directives/workflow-history-directive.html'], function(app, _, template) {
 
-    app.directive('workflowHistory', ["$q", "$timeout", "underscore",
-        function($q, $timeout, _) {
+    app.directive('workflowHistory', ["$q", "$timeout",
+        function($q, $timeout) {
 
             return {
                 restrict: 'EAC',

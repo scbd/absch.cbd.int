@@ -169,13 +169,13 @@ define(['app',
                             }
                             else if (data.type == 'notificationStatus') {
                                  if(data.message == 'markAllRead'){
-                                    _.each($scope.notifications, function(notification){
+                                    _.forEach($scope.notifications, function(notification){
                                         notification.state = 'read';
                                     });
                                     $scope.notificationUnreadCount = 0;
                                 }
                                 else {
-                                    var notification = _.findWhere($scope.notifications, { id: data.data.id });
+                                    var notification = _.find($scope.notifications, { id: data.data.id });
                                     if (notification) {
                                         $timeout(function () {
                                             notification.state = data.data.state;
@@ -200,7 +200,7 @@ define(['app',
 
                         $rootScope.$on('onNotificationStatusChanged', function (evt, data) {
                             // console.log('onNotificationStatusChanged',data)
-                            var notification = _.first(_.where($scope.notifications, { id: data.id }));
+                            var notification = _.head(_.filter($scope.notifications, { id: data.id }));
 
                             if (notification) {
                                 notification.state = 'read';
@@ -212,8 +212,8 @@ define(['app',
                             var localNotifications;
                             if ($scope.notifications) {
                                 localNotifications = _.clone($scope.notifications);
-                                _.each(data, function (message) {
-                                    var exists = _.findWhere(localNotifications, { 'id': message.id });
+                                _.forEach(data, function (message) {
+                                    var exists = _.forEach(localNotifications, { 'id': message.id });
                                     if (!exists)
                                         localNotifications.push(message);
                                 });
@@ -243,7 +243,7 @@ define(['app',
                             evt.stopPropagation()
                             userNotifications.markAllRead(realmsForQuery)
                                 .then(function() {
-                                    _.each($scope.notifications, function(notification){
+                                    _.forEach($scope.notifications, function(notification){
                                         notification.state = 'read';
                                     });
                                 });

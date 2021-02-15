@@ -55,9 +55,9 @@ define(['app','text!views/directives/home-country-dashboard-directive.html', 'lo
                                         return {schema:key, countryCount :0, recordCount : 0, title : schema.title, shortCode : schema.shortCode };
                                     }
                                 }).compact().value();
-								_.each(results[0], function(country){
+								_.forEach(results[0], function(country){
 
-                                    _.each(nationalRecords, function(schema){
+                                    _.forEach(nationalRecords, function(schema){
                                         schema.recordCount  += country.schemas[schema.schema]||0;
                                         schema.countryCount += (country.schemas[schema.schema] ? 1 : 0);
                                     })
@@ -98,7 +98,7 @@ define(['app','text!views/directives/home-country-dashboard-directive.html', 'lo
 
                         searchService.group(referenceRecordsQuery)
                             .then(function(data) {
-                                _.each(data.data.grouped.schema_s.groups, function(group){
+                                _.forEach(data.data.grouped.schema_s.groups, function(group){
                                     var refRecords = _.find(referenceRecords, {schema:group.groupValue});
                                     if(refRecords){
                                         refRecords.recordCount = group.doclist.numFound;

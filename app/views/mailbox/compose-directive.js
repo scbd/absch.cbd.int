@@ -1,5 +1,5 @@
 define(['app','text!views/mailbox/compose-directive.html',
-'underscore'], function(app, template,_) {
+'lodash'], function(app, template,_) {
     app.directive('mailboxCompose', function() {
         return {
             restrict: 'EAC',

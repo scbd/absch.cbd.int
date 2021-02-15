@@ -52,7 +52,7 @@ define(['lodash'], function(_) {
                     transactions.push({
                         type : "grantRole",
                         roleId : roleId,
-                        role : _.findWhere(roles, {roleId : roleId}),
+                        role : _.find(roles, {roleId : roleId}),
                         action : action_grantRole,
                     });
                 });
@@ -61,7 +61,7 @@ define(['lodash'], function(_) {
                     transactions.push({
                         type : "revokeRoles",
                         roleId : roleId,
-                        role : _.findWhere(roles, {roleId : roleId}),
+                        role : _.find(roles, {roleId : roleId}),
                         action : action_revokeRole,
                     });
                 });

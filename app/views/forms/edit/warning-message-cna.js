@@ -1,5 +1,5 @@
 
-define(['app', 'underscore', "text!views/forms/edit/warning-message-cna.html", 'js/common',
+define(['app', 'lodash', "text!views/forms/edit/warning-message-cna.html", 'js/common',
 'views/search/search-results/result-default', 
 'services/search-service',
 'services/app-config-service', 'services/solr'
@@ -13,8 +13,8 @@ define(['app', 'underscore', "text!views/forms/edit/warning-message-cna.html", '
            scope: {
                 doc:'='
            },
-           controller: ["$scope", "underscore", "searchService", "solr","$q",
-                function($scope,  _, searchService, solr, $q) {
+           controller: ["$scope", "searchService", "solr","$q",
+                function($scope, searchService, solr, $q) {
 
                  $scope.responsibleCNA = [];
                  $scope.showWarning = false;

@@ -141,7 +141,7 @@ define(['app', 'lodash', 'chart-js', 'components/scbd-angularjs-services/service
                             console.log(data.data);
                             if(data.data && data.data.response.numFound > 0){
                                 var countryDocuments = data.data.response.docs;
-                                var uniqueIdentifiers = _.uniq(_.flatten(_.pluck(data.data.response.docs, "uniqueIdentifierRevisions_ss")));
+                                var uniqueIdentifiers = _.uniq(_.flatten(_.map(data.data.response.docs, "uniqueIdentifierRevisions_ss")));
                                 var documentNumbers = _.map(uniqueIdentifiers, function(identifier){
                                                         var documentIdRevision  = identifier.replace(/((^([a-z]|[A-Z]){1,8})[\-]([a-z]|[A-Z]){1,4}[\-]([a-z]|[A-Z]){1,2}[\-])+/,'')
                                                         var documentId          = documentIdRevision.replace(/([\-][0-9]{1,2})/, '');
@@ -149,7 +149,7 @@ define(['app', 'lodash', 'chart-js', 'components/scbd-angularjs-services/service
                                                         return {identifier:identifier, documentId: documentId, solrId: commonjs.integerToHex(documentId, "nationalRecord"), revision: documentRevision };
                                                     });
 
-                                var solrIds = _.uniq((_.pluck(documentNumbers, "solrId")));
+                                var solrIds = _.uniq((_.map(documentNumbers, "solrId")));
                                 if(solrIds.length > 0){
                                     searchQuery.query = "id:(" + _.map(solrIds, solr.escape).join(' ') + ') AND NOT virtual_b';
                                     searchService.list(searchQuery)
@@ -159,10 +159,10 @@ define(['app', 'lodash', 'chart-js', 'components/scbd-angularjs-services/service
                                         _.forEach(countryDocuments, function(document){
                                             if(document.uniqueIdentifierRevisions_ss){
                                                 _.forEach(document.uniqueIdentifierRevisions_ss, function(uid){
-                                                    var documentNumber = _.findWhere(documentNumbers, {identifier:uid});
-                                                    var refRecord = _.findWhere(referenceRecords.data.response.docs, {id:documentNumber.solrId});
+                                                    var documentNumber = _.find(documentNumbers, {identifier:uid});
+                                                    var refRecord = _.find(referenceRecords.data.response.docs, {id:documentNumber.solrId});
                                                     if(refRecord && refRecord._revision_i > Number(documentNumber.revision)){
-                                                       var docForUpdate = _.findWhere(documentsForUpdate, {id: document.id})
+                                                       var docForUpdate = _.find(documentsForUpdate, {id: document.id})
                                                        var idForUpdate = {
                                                                     uid : documentNumber.identifier, currentVersion : Number(documentNumber.revision),
                                                                     newVersion : refRecord._revision_i

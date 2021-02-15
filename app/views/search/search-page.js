@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'components/scbd-angularjs-services/services/locale', 'views/search/search-directive',
+define(['app', 'lodash', 'components/scbd-angularjs-services/services/locale', 'views/search/search-directive',
 'css!/app/css/search.css'], function(app, exportExcel) {
     "use strict";
     app.controller("SearchPageController", ["$scope", '$sce', 'ngMeta', 'realm', 'locale', function($scope, $sce, ngMeta, realm, locale) {

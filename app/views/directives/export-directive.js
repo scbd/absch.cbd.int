@@ -1,4 +1,4 @@
-define(['app','text!views/directives/export-directive.html', 'underscore',
+define(['app','text!views/directives/export-directive.html', 'lodash',
 'services/search-service', 'ngDialog', 'services/role-service', 'services/solr'
 ], function (app, template, _) {
     app.directive('export', function () {
@@ -99,12 +99,12 @@ define(['app','text!views/directives/export-directive.html', 'underscore',
                                                                 .then(function(partyStatusData){
                                                                     console.log(partyStatusData);
                                                                     $scope.downloadDocs = data.data.response.docs;
-                                                                    _.each($scope.downloadDocs, function(document){
-                                                                        _.each($scope.customFieldList, function(field){
+                                                                    _.forEach($scope.downloadDocs, function(document){
+                                                                        _.forEach($scope.customFieldList, function(field){
                                                                             if(field == 'thematicAreas_ss')
                                                                                 document[field] = document[field] && document[field].length > 0
                                                                             else if(field == 'partyStatus'){
-                                                                                var status = _.findWhere(partyStatusData, {code: document.government_s.toUpperCase()})
+                                                                                var status = _.find(partyStatusData, {code: document.government_s.toUpperCase()})
                                                                                 if(status.isParty)
                                                                                     document[field] =  'Party';
                                                                                 else
@@ -150,7 +150,7 @@ define(['app','text!views/directives/export-directive.html', 'underscore',
                                                     }
 
                                                     $scope.done = function(){
-                                                        customFields = _.pluck(_.filter($scope.fields, function(field){return field.selected}), 'field');
+                                                        customFields = _.map(_.filter($scope.fields, function(field){return field.selected}), 'field');
                                                         $scope.closeDialog();
                                                         $element.find('.'+downloadFormat).remove();
                                                         
@@ -164,7 +164,7 @@ define(['app','text!views/directives/export-directive.html', 'underscore',
                                                                         }));
                                                             if(customFields && customFields.length > 0){
                                                                 customFields.forEach(function(f){
-                                                                    var field = _.findWhere($scope.fields, {'field':f})
+                                                                    var field = _.find($scope.fields, {'field':f})
                                                                     if(field)
                                                                         field.selected = true;
                                                                 })

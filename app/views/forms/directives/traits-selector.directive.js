@@ -44,7 +44,7 @@
                         return $q.all([thesaurusService.getDomainTerms('dnaSequenceTraits'),thesaurusService.getDomainTerms('other')])
                         .then(function(data){	
                             var terms = [];
-                            _.each(data[0], function(d){
+                            _.forEach(data[0], function(d){
                                  if( _.includes(d.broaderTerms, parent))
                                      terms.push(d);
                                 else{
@@ -78,7 +78,7 @@
 
                 $scope.onRootTraitsChange = function(){
                     var rootTraits = _.map($scope.rootTraits, 'identifier');
-                    _.each($scope.traits, function(trait, key){
+                    _.forEach($scope.traits, function(trait, key){
                         if(_.includes(rootTraits, key))
                             trait.selected = true;
                         else{
@@ -91,16 +91,16 @@
                 $scope.onTraitsChange = function(){
                     var newBinding = [];
                     //other from root traits
-                    _.each($scope.rootTraits, function(t){
+                    _.forEach($scope.rootTraits, function(t){
                         if(t.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' && t.customValue)
                             newBinding.push({ identifier: t.identifier, customValue:t.customValue })
                     });
 
-                    _.each($scope.traits, function(trait, key){
+                    _.forEach($scope.traits, function(trait, key){
                         if(trait.selected)
                             newBinding.push({identifier: key});
                         if((trait.items||[]).length){
-                            _.each(trait.items, function(t){
+                            _.forEach(trait.items, function(t){
                                 
                                 if(t.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')
                                     newBinding.push(t)
@@ -128,7 +128,7 @@
                     var traitsIds = _.map($scope.binding, 'identifier');
                     // if(traitsIds.length)
                     //     bindingWatcher();
-                    _.each($scope.traits, function(trait, key){
+                    _.forEach($scope.traits, function(trait, key){
                         var items = []
                         // if(trait.selected){
 

@@ -1,5 +1,5 @@
-define(['app', "text!views/forms/view/abs/view-abs-permit.directive.html", 'views/directives/record-options',
-'views/forms/view/directives/view-reference-records.directive'], function (app, template) {
+define(['app', 'lodash', "text!views/forms/view/abs/view-abs-permit.directive.html", 'views/directives/record-options',
+'views/forms/view/directives/view-reference-records.directive'], function (app, _, template) {
 //,'views/forms/view/view-releated-checkpoint-communique-directive.html'
 app.directive("viewAbsPermit", [function () {
 
@@ -21,7 +21,7 @@ app.directive("viewAbsPermit", [function () {
 			$scope.contacts = undefined;
 			$scope.showPdf = $attr.showPdf === undefined || $attr.showPdf != "false";
 		},
-		controller: ["$scope", "IStorage", "$http", "$q","underscore", function ($scope, storage, $http, $q, _)
+		controller: ["$scope", "IStorage", "$http", "$q", function ($scope, storage, $http, $q)
 		{
 
 			$scope.gisMapLayers = null;

@@ -218,7 +218,7 @@ function(require, template, app, _, ammap, worldEUHigh) {
 
         function addExceptionRegionsImage(country){
 
-          _.each(exceptionRegionMapping, function(code, exceptionRegion) {
+          _.forEach(exceptionRegionMapping, function(code, exceptionRegion) {
               if(code == country.code){
                 var exceptionCountryData = angular.copy(country);
                 exceptionCountryData.code = exceptionRegion;
@@ -245,7 +245,7 @@ function(require, template, app, _, ammap, worldEUHigh) {
 
         function normalizeFacets(country, nationalSchemas){
 
-          _.each(nationalSchemas, function(schema){
+          _.forEach(nationalSchemas, function(schema){
             if(!country[schema.shortCode])
               country[schema.shortCode] = 0;
           })          
@@ -289,7 +289,7 @@ function(require, template, app, _, ammap, worldEUHigh) {
         }
 
         function getMapObject(id) {
-          return _.findWhere(map.dataProvider.areas, {id: id.toUpperCase()});
+          return _.find(map.dataProvider.areas, {id: id.toUpperCase()});
         }
         function showCountryDetails(event) {
 
@@ -344,7 +344,7 @@ function(require, template, app, _, ammap, worldEUHigh) {
 
                     //loop array for global facets
                     var facets = {};
-                    _.each(countryFacets, function(countrySchema){
+                    _.forEach(countryFacets, function(countrySchema){
                         normalizeFacets(((countrySchema||{}).schemas||{}), facets)
                     })
                     return facets;
@@ -355,7 +355,7 @@ function(require, template, app, _, ammap, worldEUHigh) {
           if(!facets)
             facets = {};
 
-          _.each(realm.schemas, function(schema, key){
+          _.forEach(realm.schemas, function(schema, key){
             if(schema.type=='national' && key!=='contact'){
 
             var prevCount = (facets[schema.shortCode]||{}).count||0;
@@ -428,7 +428,7 @@ function(require, template, app, _, ammap, worldEUHigh) {
               var prevSelTerritories = _(exceptionRegionMapping).keys().filter(function(k){return exceptionRegionMapping[k] == prevCountryColor[type].code}).value();
               if(prevSelTerritories.length){
                 changeSelectedColor(prevCountryColor[type].code, prevCountryColor[type].colorReal);
-                _.each(prevSelTerritories, function(territory){
+                _.forEach(prevSelTerritories, function(territory){
                   changeSelectedColor(territory,  prevCountryColor[type].colorReal)
                 })
               }
@@ -442,7 +442,7 @@ function(require, template, app, _, ammap, worldEUHigh) {
               changeSelectedColor(code, color);
             }
 
-            _.each(otherTerritories, function(territory){
+            _.forEach(otherTerritories, function(territory){
               changeSelectedColor(territory, color)
             })
           }
@@ -454,11 +454,11 @@ function(require, template, app, _, ammap, worldEUHigh) {
           var images = {};
           var areas = {}
           initLangLat();
-          _.each(lmoDecisions, function(decision){
+          _.forEach(lmoDecisions, function(decision){
 
             if(decision && decision.countries){  
 
-              _.each(decision.countries, function(country){
+              _.forEach(decision.countries, function(country){
 
                 country.country = country.country.replace(/^eur$/, 'eu');                
                 var decisions = country.bch;
@@ -470,7 +470,7 @@ function(require, template, app, _, ammap, worldEUHigh) {
 
                     if(!latlong[country.country.toUpperCase()]){    
 
-                      var mapArea = _.findWhere(map.dataProvider.areas, {id: country.country.toUpperCase()})
+                      var mapArea = _.find(map.dataProvider.areas, {id: country.country.toUpperCase()})
                       latlong[country.country.toUpperCase()].latitude = map.getAreaCenterLatitude(mapArea)
                       latlong[country.country.toUpperCase()].longitude = map.getAreaCenterLongitude(mapArea)
                     }

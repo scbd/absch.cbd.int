@@ -45,7 +45,7 @@
                         sortFields = [sortFields];
 
                     if(sortFields.length <= 1){
-                        var field = _.first(sortFields)
+                        var field = _.head(sortFields)
                         if(!field || field.indexOf('updatedDate_dt')>0){
                             sortFields = groupFieldMapping.sortFields;
                         }                        
@@ -72,7 +72,7 @@
                         highlightFields     : options.highlightFields
                     }
 
-                    if(sortFields && !_.contains(sortFields, 'relevance asc')){
+                    if(sortFields && !_.includes(sortFields, 'relevance asc')){
                         lQuery.sort         = sortFields.join(', ');
                         lQuery.groupSort    = sortFields.join(', ');
                     }
@@ -87,7 +87,7 @@
     
                             var countryRecords = {}
                             
-                            _.each(result.data.grouped[groupField].groups, function (record) {
+                            _.forEach(result.data.grouped[groupField].groups, function (record) {
                                 // if(groupField == 'government_schema_s'){
                                     var gpDetails = (record.groupValue || 'other').split('_');
                                     if (!gpDetails.length)
@@ -110,7 +110,7 @@
                                         if(gpDetails.length-1 == i){ //add docs to the last group field
                                             group[groupValue] = _.extend(group[groupValue], record.doclist);
                                             if(result.data.highlighting){
-                                                _.each(group[groupValue].docs, function(doc){
+                                                _.forEach(group[groupValue].docs, function(doc){
                                                     if(!_.isEmpty(result.data.highlighting[doc.id]))
                                                         doc.highlight = result.data.highlighting[doc.id];
                                                 });
@@ -219,7 +219,7 @@
                         group.start = query.currentPage*10;
 
                         if(result.data.highlighting){
-                            _.each(result.data.response.docs, function(doc){
+                            _.forEach(result.data.response.docs, function(doc){
                                 if(!_.isEmpty(result.data.highlighting[doc.id]))
                                     doc.highlight = result.data.highlighting[doc.id];
                             });
@@ -249,7 +249,7 @@
                     var fieldMapping = [];
                     var groupFields = groupField.replace(/_s$/, '').split('_')
                     groupFieldMapping = searchDirectiveCtrl.groupByFields();
-                    _.each(groupFields, function(f){
+                    _.forEach(groupFields, function(f){
                         field = _.find(groupFieldMapping, {field:f})
                         if(field)
                             fieldMapping.push(field);
