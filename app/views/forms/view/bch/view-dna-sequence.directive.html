@@ -67,6 +67,10 @@
 			</div>
 		</div>
 
+		<div ng-if="document.gisFiles">
+			<label>Geographic coordinates</label>
+			<km-link-list class="km-value" ng-model="document.gisFiles"></km-link-list>
+		</div>
 
 		<legend>Characteristics of the protein coding sequence</legend>
 
