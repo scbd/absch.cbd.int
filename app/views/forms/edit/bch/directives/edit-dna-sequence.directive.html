@@ -91,7 +91,21 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="row">
+                                            <div class="col-xs-12" style="text-align: center;">
+                                                <span>and/or</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" caption="Geographic coordinates">
+                                                    <div class="help-block">
+                                                        Limited to .geojson files (<a rel="noopener" translation-url href="http://www.geojson.org/" target="_blank">http://www.geojson.org/</a>)
+                                                    </div>
+                                                    <div km-link name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                 </section>
 
                                 <section ng-if="document.family.identifier=='1ECB698D-3F3D-41BC-BEBD-DD5C734BCDCF'">

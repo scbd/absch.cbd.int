@@ -225,7 +225,7 @@
             "en": "Country Profile for Biosafety Clearing-House"
           },
           "description": {
-            "en": "Country Profile for Biosafety Clearing-House"
+            "en": "Additional information that appears as part of the country profile"
           },
           "shortCode": "BCP",
           "titlePlural": {
@@ -238,7 +238,7 @@
             "en": "Contacts"
           },
           "description": {
-            "en": "Additional information that appears as part of the country profile"
+            "en": "Contact details of a person or organization."
           },
           "publishingAuthorities": [
             "BchAuthorizedUser-Dev",
