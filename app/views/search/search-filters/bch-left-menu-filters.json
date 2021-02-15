@@ -328,7 +328,7 @@
 		{
 			"type": "thesaurus",
 			"term": "OrganismCommonUses",
-			"title": "Common use(s)",
+			"title": "Common use(s) of the LMO",
 			"field": "commonUses_ss"
 		},
 		{
