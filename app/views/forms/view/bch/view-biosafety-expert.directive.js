@@ -1,6 +1,6 @@
 define(['app', "text!views/forms/view/bch/view-biosafety-expert.directive.html", 	'views/directives/record-options'], function (app, template) {
 
-app.directive("viewBiosafetyExpert", [function () {
+	app.directive("viewBiosafetyExpert", [function () {
 	return {
 		restrict   : "EAC",
 		template: template ,
@@ -13,10 +13,7 @@ app.directive("viewBiosafetyExpert", [function () {
 			hide	: "@"
 		},
 		controller : ["$scope", function ($scope)
-		{
-			
-			
-			
+			{		
 			//====================
 			//
 			//====================
