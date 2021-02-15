@@ -30,19 +30,24 @@
 									</div>
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="authors" caption="Author(s)">
-												<div class="help-info">Name of the person who has authored the publication or information resource. Add his/her affiliation if appropriate.</div>
-												<div km-textbox-ml required ng-model="document.authors" rows="2" locales="document.header.languages"></div>
+											<div class="km-control-group" required name="authorsContact" caption="Author">
+												<div document-selector required type="radio" ng-model="document.authorsContact" contact-type='person' allow-new="true" allow-new-schema="contact"
+													question="authorsContact"
+													schema="contact"
+													filter="true" skip-government="true">
+												</div>
 											</div>
 										</div>
 									</div>
+
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="authorsInfo" caption="Authors information">
-												<div km-textbox-ml name="authorsInfo" ng-model="document.authorsInfo" rows="2" locales="document.header.languages"></div>
+											<div class="km-control-group" name="authors" caption="Authors information">
+												<div km-textbox-ml  ng-model="document.authors" rows="2" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
+									
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="organizations" caption="Organization(s) involved in the publication of this resource">
@@ -103,13 +108,45 @@
 											<div class="km-control-group" required name="bchSubjects" caption="Thematic areas">
 												<div class="help-info">This section provides a broad classification of biosafety thematic areas to assist BCH users 
 													in searching for the record (a full description is provided elsewhere in the record).</div>
-												<div km-term-check name="bchSubjects" required ng-model="document.bchSubjects" terms="options.bchSubjects()"
+												<div km-term-check name="bchSubjects" required ng-model="document.bchSubjects" ng-change="onThematicAreaChange(document.bchSubjects);" terms="options.bchSubjects()"
 														 binding-type="term[]" locales="document.header.languages"></div>
 											</div>
 										</div>
                                     </div>
                                 </div>
 							</section>
+							<section ng-if="isBCH && hasRiskAssessmentSubject">
+                                <div class="well no-shadow bg-white">
+									<legend>Background  material to the “Guidance on risk assessment of living modified organisms”</legend>
+									<div class="row">
+										<div  class="col-xs-12">
+											<div class="km-control-group" name="bchRaRecommend" caption="If “Risk assessment” was indicated as one of the “Thematic areas” in the previous question, please answer to the following question: would you like to recommend 
+												this document as background material for the “Guidance on Risk Assessment of Living Modified Organisms”? ">
+												<div km-yes-no required ng-model="document.bchRaRecommend" ng-click="onRaRecommendChange(!document.bchRaRecommend)"  locales="document.header.languages"></div>
+												<div ng-if="document.bchRaRecommend" style="margin-top: 15px;">
+													<div class="col-xs-12">
+														<div class="km-control-group" name="bchRaAuthorAffiliation"  caption="Author affiliation">
+															<div km-term-check name="bchRaAuthorAffiliation" ng-model="document.bchRaAuthorAffiliation" terms="options.bchRaAuthorAffiliation()"
+																 binding-type="term[]" locales="document.header.languages">
+															</div>
+														</div>
+													</div>
+
+													<div class="col-xs-12">
+														<div class="km-control-group" name="bchRaSubjects" required  caption="Please indicate to which section(s) of the “Guidance” this background material is relevant">
+															<div km-term-check name="bchRaSubjects" required ng-model="document.bchRaSubjects" terms="options.bchRaSubjects()"
+																 binding-type="term[]" locales="document.header.languages">
+															</div>
+														</div>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+
 							<section ng-if="isBCH">
                                 <div class="well no-shadow bg-white">
 									<legend>Information on Organisms or LMOs</legend>
