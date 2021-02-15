@@ -1,4 +1,4 @@
-define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-directive.html", 
+define(['app', 'lodash', "text!views/forms/edit/abs/edit-measure-matrix-directive.html",
 'json!app-data/measure-matrix-updated-title.json', 'json!app-data/measure-matrix-other-elements.json',
 'views/directives/block-region-directive', 'components/scbd-angularjs-services/services/locale'
 ], function (app, _, template, measureMatrixUpdatedTitles, elementsForOthers) {
@@ -98,18 +98,18 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
                 $scope.options = {
                     grTypes: function () {
 
-                        var scopeElement = _.findWhere($scope.rootTerms, { identifier: '24E809DA-20F4-4457-9A8A-87C08DF81E8A' });
+                        var scopeElement = _.find($scope.rootTerms, { identifier: '24E809DA-20F4-4457-9A8A-87C08DF81E8A' });
 
-                        var elements = _.findWhere(scopeElement.narrowerTerms, { identifier: 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F' });
+                        var elements = _.find(scopeElement.narrowerTerms, { identifier: 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F' });
                         var grTypes = [];
-                        var all = _.findWhere($scope.terms, { identifier: '4E2974DF-216E-46C8-8797-8E3A33D6A048' });
+                        var all = _.find($scope.terms, { identifier: '4E2974DF-216E-46C8-8797-8E3A33D6A048' });
                         grTypes.push(all);
                         grTypes = _.union(grTypes, angular.copy(elements.narrowerTerms[0].narrowerTerms));
                         return grTypes;
                     },
                     grAreas: function () {
-                        var scopeElement = _.findWhere($scope.rootTerms, { identifier: '24E809DA-20F4-4457-9A8A-87C08DF81E8A' });
-                        var elements = _.findWhere(scopeElement.narrowerTerms, { identifier: 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F' });
+                        var scopeElement = _.find($scope.rootTerms, { identifier: '24E809DA-20F4-4457-9A8A-87C08DF81E8A' });
+                        var elements = _.find(scopeElement.narrowerTerms, { identifier: 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F' });
                         return elements.narrowerTerms[1].narrowerTerms;
                     },
                     absMeasures: function() {
@@ -271,7 +271,7 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
                             oNewBinding.push(oTerm);
 
                             if ($scope.otherTerms && $scope.otherTerms[term.identifier]) {
-                                _.each($scope.otherTerms[term.identifier], function (otherTerm) {
+                                _.forEach($scope.otherTerms[term.identifier], function (otherTerm) {
                                     if (otherTerm.name != '') {
                                         var lOtherTerm = {
                                             identifier: '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED',
@@ -305,8 +305,8 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
                             removeSelectedChildren(term.identifier);
                         }
                         else {
-                            _.each(term.narrowerTerms, function (term) {
-                                var lterm = _.findWhere($scope.terms, { identifier: term.identifier });
+                            _.forEach(term.narrowerTerms, function (term) {
+                                var lterm = _.find($scope.terms, { identifier: term.identifier });
                                 lterm.showElement = true;
                             });
                         }
@@ -321,10 +321,10 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
                 }
 
                 function removeSelectedChildren(identifier) {
-                    var term = _.findWhere($scope.terms, { identifier: identifier });
+                    var term = _.find($scope.terms, { identifier: identifier });
 
-                    _.each(term.narrowerTerms, function (narrowerIdentifier) {
-                        var narrowerTerm = _.findWhere($scope.terms, { identifier: narrowerIdentifier });
+                    _.forEach(term.narrowerTerms, function (narrowerIdentifier) {
+                        var narrowerTerm = _.find($scope.terms, { identifier: narrowerIdentifier });
                         narrowerTerm.showElement = false;
 
                         if ($scope.identifiers[narrowerIdentifier] != undefined) {
@@ -339,11 +339,11 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
                 }
 
                 function setChildrenSelected(identifier, skipRecurvsive) {
-                    var term = _.findWhere($scope.terms, { identifier: identifier });
+                    var term = _.find($scope.terms, { identifier: identifier });
                     if(term){
                         term.showElement = true;
-                        _.each(term.narrowerTerms, function (narrowerIdentifier) {
-                            var narrowerTerm = _.findWhere($scope.terms, { identifier: narrowerIdentifier });
+                        _.forEach(term.narrowerTerms, function (narrowerIdentifier) {
+                            var narrowerTerm = _.find($scope.terms, { identifier: narrowerIdentifier });
                             narrowerTerm.showElement = true;
 
                             if (!skipRecurvsive && narrowerTerm.narrowerTerms && narrowerTerm.narrowerTerms.length > 0)
@@ -414,7 +414,7 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
 
                 $scope.isParentSelected = function (identifier, level) {
 
-                    var term = _.findWhere($scope.terms, { identifier: identifier });
+                    var term = _.find($scope.terms, { identifier: identifier });
 
                     return term && term.showElement;
                 };
@@ -423,7 +423,7 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
                     // console.log(term.broaderTerms);
                     // if(term.identifier == 'BE944E70-2098-45AC-891B-D5E94AFECB99'){
                         
-                        var result =  term.broaderTerms && _.contains(_.pluck(term.broaderTerms, 'identifier'), 'BE944E70-2098-45AC-891B-D5E94AFECB99');
+                        var result =  term.broaderTerms && _.includes(_.map(term.broaderTerms, 'identifier'), 'BE944E70-2098-45AC-891B-D5E94AFECB99');
                         if(result && $scope.identifiers && $scope.identifiers['BE944E70-2098-45AC-891B-D5E94AFECB99']!=undefined)
                             return $scope.identifiers['BE944E70-2098-45AC-891B-D5E94AFECB99'];
 
@@ -433,15 +433,15 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
                 $scope.$watch('geneticResource.types', function(newVal, oldVal){
                     if(newVal && $scope.geneticResource.grTypesApi){
                         
-                        var newElementIdentifiers = _.pluck(newVal, "identifier");
-                        var oldElementIdentifiers = _.pluck(oldVal, "identifier");
+                        var newElementIdentifiers = _.map(newVal, "identifier");
+                        var oldElementIdentifiers = _.map(oldVal, "identifier");
                         var allTypeIdentifier = "4E2974DF-216E-46C8-8797-8E3A33D6A048";
 
-                        if(_.contains(newElementIdentifiers, allTypeIdentifier)){
+                        if(_.includes(newElementIdentifiers, allTypeIdentifier)){
 
                             var newElements = _.difference(newElementIdentifiers, oldElementIdentifiers);
 
-                            if(_.contains(newElements, allTypeIdentifier))
+                            if(_.includes(newElements, allTypeIdentifier))
                                 $scope.geneticResource.grTypesApi.selectAll();
                             else if(oldVal.length > newVal.length)
                                 $scope.geneticResource.grTypesApi.unSelectItem({identifier:allTypeIdentifier});
@@ -451,14 +451,14 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
                 $scope.$watch('geneticResource.areas', function(newVal, oldVal){
                     if(newVal && $scope.geneticResource.grAreasApi){
                         var source = $scope.options.grAreas();
-                        var newElementIdentifiers = _.pluck(newVal, "identifier");
-                        var oldElementIdentifiers = _.pluck(oldVal, "identifier");
+                            var newElementIdentifiers = _.map(newVal, "identifier");
+                        var oldElementIdentifiers = _.map(oldVal, "identifier");
 
                         var newElements = _.difference(newElementIdentifiers, oldElementIdentifiers);
                         if(newElements.length){
                             var element = $scope.geneticResource.grAreasApi.getItem(newElements[0]);
                             if(element && element.children){
-                                _.each(element.children,  $scope.geneticResource.grAreasApi.selectItem)
+                                _.forEach(element.children,  $scope.geneticResource.grAreasApi.selectItem)
                             }
                         }
                         else{ //element was unchecked
@@ -474,7 +474,7 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
                 });
 
                 $scope.hasIdentifier = function(identifier, list){
-                    return _.findWhere(list, {identifier: identifier});
+                    return _.find(list, {identifier: identifier});
                 }
 
                 $scope.addGRRecord = function (geneticResource, grTypesApi, grAreasApi) {
@@ -552,14 +552,14 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
 
 
                 function appendOthers(elementMeasures, other) {
-                    _.each(elementsForOthers, function(element, key) {
+                    _.forEach(elementsForOthers, function(element, key) {
                         var otherElement = angular.copy(other);
                         // if(otherElement.identifier.indexOf('#')>0)
                         //     otherElement.identifier = otherElement.identifier;
                         // else
                             otherElement.identifier = otherElement.identifier + '#' + key;
                         otherElement.broaderTerms.push(key);
-                        var el = _.findWhere(elementMeasures, {identifier:key});
+                        var el = _.find(elementMeasures, {identifier:key});
                         otherElement.title.en = element.title;
                         otherElement.description = element.description;
                         elementMeasures.push(otherElement);
@@ -577,13 +577,13 @@ define(['app', 'underscore', "text!views/forms/edit/abs/edit-measure-matrix-dire
                 
                 function updateABSMeasureText(data){
 
-                    _.each(data, function(element){
+                    _.forEach(data, function(element){
                         if(measureMatrixUpdatedTitles[element.identifier]){
                             element.title = measureMatrixUpdatedTitles[element.identifier];
                         }
                         //change hierarchy are required by abs measure matrix
                         if(element.identifier == 'A896179F-833E-4F76-B3F4-81CC95C66592'){// Mutually agreed terms
-                            var benefitSharing = _.findWhere(data, {identifier:'9847FA8A-16C3-4466-A378-F20AF9FF883B'})
+                            var benefitSharing = _.find(data, {identifier:'9847FA8A-16C3-4466-A378-F20AF9FF883B'})
                             benefitSharing.narrowerTerms = element.narrowerTerms;
                         }
                     });

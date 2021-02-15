@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'views/forms/edit/edit','views/forms/edit/edit-resource-schema-base-directive',
+define(['app', 'lodash', 'views/forms/edit/edit','views/forms/edit/edit-resource-schema-base-directive',
         '../view/view-resource.directive'], function (app, _) {
 
   app.controller("editResource", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
@@ -32,7 +32,7 @@ define(['app', 'underscore', 'views/forms/edit/edit','views/forms/edit/edit-reso
             return undefined;
 
         if(document.aichiTargets){
-            var hasTarget16 = _.findWhere(document.aichiTargets, { "identifier": "AICHI-TARGET-16"});
+            var hasTarget16 = _.find(document.aichiTargets, { "identifier": "AICHI-TARGET-16"});
 
             if(!hasTarget16)
                 document.aichiTargets.push({identifier: "AICHI-TARGET-16"});

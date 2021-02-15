@@ -71,7 +71,7 @@
     }
 
     function formatRecords(docs){
-        _.each(docs, function(row){
+        _.forEach(docs, function(row){
             row.rec_summary  = row.rec_title;
 			row.rec_title 	 = (row.reference_s||'') + ' (' + (row.symbol_s||'') + ')';
         });

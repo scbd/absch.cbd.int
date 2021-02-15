@@ -1,5 +1,5 @@
-define(['app', 'services/app-config-service', './ircc-directive',
-'css!/app/css/print-friendly.css', 'css!/app/css/pdf-communique.css'], function (app) {
+define(['app','lodash', 'services/app-config-service', './ircc-directive',
+'css!/app/css/print-friendly.css', 'css!/app/css/pdf-communique.css'], function (app,_) {
 
 	app.controller('cpcPdfView', ['$scope','$http','$sce','$filter','$q', '$routeParams', 'realm',
 	 function($scope,$http, $sce, $filter, $q, $routeParams, realm) {
@@ -51,7 +51,7 @@ define(['app', 'services/app-config-service', './ircc-directive',
 					});
 					$q.all(permits)
 					.then(function(results){
-						_.each(results, function(result){
+						_.forEach(results, function(result){
 							if(result.data.absCNA && !_.some($scope.emailList, {identifier:result.data.absCNA.identifier}))
 								$scope.emailList.push({identifier:result.data.absCNA.identifier})
 						});
@@ -109,8 +109,8 @@ define(['app', 'services/app-config-service', './ircc-directive',
 				});
 				$q.all(checkpoints)
 				.then(function(results){
-					_.each(results, function(result){
-						_.each(result.data.contactsToInform, function(contacts){
+					_.forEach(results, function(result){
+						_.forEach(result.data.contactsToInform, function(contacts){
 							if(!_.some($scope.emailList, {identifier:contacts.identifier}))
 									$scope.emailList.push({identifier:contacts.identifier})
 						});

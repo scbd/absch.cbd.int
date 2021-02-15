@@ -47,7 +47,7 @@ define([
       countries		: function() {
         return thesaurusService.getDomainTerms('countries').then(function(o){
           var countries = $filter("orderBy")(o, "name");
-          _.each(countries, function(element) {
+          _.forEach(countries, function(element) {
             element.__value = $filter('lstring')(element.title, locale);
           });
           return countries;
@@ -411,7 +411,7 @@ define([
       return document;
 
       function sanitize(doc){
-        _.each(doc, function(fieldValue, key){
+        _.forEach(doc, function(fieldValue, key){
           
           if(_.isString(fieldValue) && _.trim(fieldValue||'') == ''){
             fieldValue = undefined;

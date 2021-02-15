@@ -180,7 +180,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                 $scope.showTexts = function(governments, field, type) {
                     
                     if(!governments)
-                        governments = _.pluck($scope.reports, 'government');
+                        governments = _.map($scope.reports, 'government');
                     
                     governments = _.map(governments, function(g) { return g.identifier || g; } );
 
@@ -313,7 +313,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
 
                     var query = {
                         reportType : previousQuestionsMapping.schema,
-                        regions : _.pluck(reports, 'government'),
+                        regions : _.map(reports, 'government'),
                         questions : [previousQuestionsMapping[question.key]]
                     };
 
@@ -390,7 +390,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                     // Only allow countries who answered to this question
                     var restrictedCountries = _(reports)
                         .filter(function(r) { return !!r[question.key]; })
-                        .pluck('government')
+                        .map('government')
                         .value();
                     if (previousReports && questionsMapping) {
 
@@ -398,7 +398,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
 
                         var previousCountries = _(previousReports)
                             .filter(function(pr) { return !!pr[questionsMapping[question.key]]; })
-                            .pluck('government')
+                            .map('government')
                             .value();
 
                         restrictedCountries = _.intersection(restrictedCountries, previousCountries);
@@ -558,7 +558,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                         // console.log(additionalInfo)
                         data.question = key;
                         if(additionalInfo){
-                            _.each(additionalInfo, function(info, key){
+                            _.forEach(additionalInfo, function(info, key){
                                 if(info){
                                     // console.log(additionalInfo[key],info, key);
                                     if(!data['additionalInfo'][key+'_sum'])
@@ -569,7 +569,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                                         var column = data.columns[region.identifier];
                                         var cell;
                                         if(!_.isEmpty(data.rows))
-                                            cell   = data.rows[_.first(_.keys(data.rows))].cells  [region.identifier];
+                                            cell   = data.rows[_.head(_.keys(data.rows))].cells  [region.identifier];
                                         if(region.countriesMap[report.government]){
                                             //     region.countriesMap[report.government]
                                             if(!column['additionalInfo'][key+'_sum'])
@@ -661,7 +661,7 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
                         return;
 
                     var answers = {};
-                    _.each(additionalInfo, function(info){
+                    _.forEach(additionalInfo, function(info){
                         answers[info.field] = report[key][info.field]; 
                     });
                     return answers;

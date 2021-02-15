@@ -41,7 +41,7 @@
                                 {field:'government_EN_s'.replace('EN', locale.toUpperCase()), title: 'Country'         ,direction: 'asc'}
                             ]
 
-                            _.each(selectedFields, function(field){
+                            _.forEach(selectedFields, function(field){
                                 var splitField = field.split(' ')
                                 var existing = _.find($scope.sortByFields, {field: splitField[0]})
                                 if(existing){
@@ -61,7 +61,7 @@
 
                                 if(field.field == 'relevance'){
                                     $scope.selectedFields = [];
-                                    _.each($scope.sortByFields, function(f){f.selected=f.field == 'relevance'});
+                                    _.forEach($scope.sortByFields, function(f){f.selected=f.field == 'relevance'});
                                 }
                                 else{
                                     var relevance = _.find($scope.selectedFields, {field: 'relevance'})
@@ -125,7 +125,7 @@
                         controller: ['$scope', function($scope){
                             $scope.groupByFields = searchDirectiveCtrl.groupByFields();
 
-                            _.each(selectedFields, function(field){
+                            _.forEach(selectedFields, function(field){
                                 var existing = _.find($scope.groupByFields, {field: field})
                                 if(existing){
                                     existing.selected = true;

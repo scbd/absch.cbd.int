@@ -1,4 +1,4 @@
-﻿define(['app', 'underscore','ng-breadcrumbs', 'cbd-forums',
+﻿define(['app', 'lodash','ng-breadcrumbs', 'cbd-forums',
         'js/common'], function(app, _) {
 
     return ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$rootScope",'$route','$location',

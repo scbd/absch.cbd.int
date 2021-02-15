@@ -1,12 +1,12 @@
-define(['app'], function (app) {
+define(['app', 'lodash'], function (app, _) {
 
 "use strict";
 //require("app", "dragAndDrop")
 
 app.controller("presentationController",
-	["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage", "underscore",
+	["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage",
 	 "$compile", "$timeout","lstringFilter", "$routeParams",
-	 function ($rootScope, $location, $scope, $q, $window, storage, _,
+	 function ($rootScope, $location, $scope, $q, $window, storage,
 	  $compile,$timeout,lstringFilter, $routeParams) {
 
 		$scope.slide = $scope.subTemplateUrl.replace('.html','');

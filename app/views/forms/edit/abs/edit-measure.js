@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'angular', 'views/forms/edit/edit', 'js/common', 'views/forms/edit/document-selector',
+define(['app', 'lodash', 'angular', 'views/forms/edit/edit', 'js/common', 'views/forms/edit/document-selector',
     'views/forms/view/abs/view-measure.directive', 'views/forms/edit/abs/edit-measure-matrix-directive'
 ], function(app, _, angular) {
 
@@ -50,7 +50,7 @@ define(['app', 'underscore', 'angular', 'views/forms/edit/edit', 'js/common', 'v
                         var jurisdictions = o[0].data;
                         jurisdictions.push(o[1].data)
 
-                        _.each(jurisdictions, function(element) {
+                        _.forEach(jurisdictions, function(element) {
                             element.__value = element.name;
                         });
 
@@ -62,7 +62,7 @@ define(['app', 'underscore', 'angular', 'views/forms/edit/edit', 'js/common', 'v
                         cache: true
                     }).then(function(o) {
                         var statuses = o.data;
-                        _.each(statuses, function(element) {
+                        _.forEach(statuses, function(element) {
                             element.__value = element.name;
                         });
                         return statuses;
@@ -83,7 +83,7 @@ define(['app', 'underscore', 'angular', 'views/forms/edit/edit', 'js/common', 'v
                             }
                         ).then(function(o) {
                             $scope.options.documentLinksExt[0].options = $filter("orderBy")(o.data, "name");
-                            _.each($scope.options.documentLinksExt[0].options, function(element) {
+                            _.forEach($scope.options.documentLinksExt[0].options, function(element) {
                                 element.__value = element.name;
                             });
 
@@ -101,7 +101,7 @@ define(['app', 'underscore', 'angular', 'views/forms/edit/edit', 'js/common', 'v
                                 cache: true
                             }).then(function(o) {
                                 $scope.options.documentTranslationsExt[0].options = $filter("orderBy")(o.data, "name");
-                                _.each($scope.options.documentTranslationsExt[0].options, function(element) {
+                                _.forEach($scope.options.documentTranslationsExt[0].options, function(element) {
                                     element.__value = element.name;
                                 });
 
@@ -119,7 +119,7 @@ define(['app', 'underscore', 'angular', 'views/forms/edit/edit', 'js/common', 'v
                             }).then(function(o) {
 
                                 $scope.options.documentTranslationsExt[1].options = $filter("orderBy")(o.data, "name");
-                                _.each($scope.options.documentTranslationsExt[1].options, function(element) {
+                                _.forEach($scope.options.documentTranslationsExt[1].options, function(element) {
                                     element.__value = element.name;
                                 });
                                 return $scope.options.documentTranslationsExt[1].options;
@@ -192,7 +192,7 @@ define(['app', 'underscore', 'angular', 'views/forms/edit/edit', 'js/common', 'v
                 if(!document.isModelContractualClause)
                     document.modelContractualClauseDescription = undefined;
 
-                if (document.absMeasures && !_.findWhere(document.absMeasures, {
+                if (document.absMeasures && !_.find(document.absMeasures, {
                         identifier: '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'
                     }))
                     document.otherAbsMeasure = undefined;
@@ -204,7 +204,7 @@ define(['app', 'underscore', 'angular', 'views/forms/edit/edit', 'js/common', 'v
                     document.absMeasures = undefined;
                 
                 if(document.absMeasures){
-                    _.each(document.absMeasures.relevantElements, function (element) {
+                    _.forEach(document.absMeasures.relevantElements, function (element) {
                         if(element && element.identifier == '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' && 
                            element.parent.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#')>=0){
                                 

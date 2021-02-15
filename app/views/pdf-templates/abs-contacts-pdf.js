@@ -1,4 +1,4 @@
-define(['app', 'services/app-config-service', 'css!/app/css/print-friendly.css','css!/app/css/pdf-permit.css'], function (app) {
+define(['app', 'lodash', 'services/app-config-service', 'css!/app/css/print-friendly.css','css!/app/css/pdf-permit.css'], function (app,_) {
 
     app.controller('contactPdfView', ['$scope', '$http', '$location', '$routeParams', '$filter', '$q', 'realm',
     function($scope, $http, $location, $routeParams, $filter, $q, realm) {
@@ -34,7 +34,7 @@ define(['app', 'services/app-config-service', 'css!/app/css/print-friendly.css',
 
         queryProfile.then(function(results) {
                 $scope.absch_nfp = results.data.response.docs;                
-                $scope.countries = _.sortBy(_.uniq(_.pluck($scope.absch_nfp,'government_EN_t'), false));
+                $scope.countries = _.sortBy(_.uniq(_.map($scope.absch_nfp,'government_EN_t'), false));
                 
                 $scope.absch_nfp.forEach(function(document){
                     document.identifier = document.identifier_s
@@ -81,9 +81,9 @@ define(['app', 'services/app-config-service', 'css!/app/css/print-friendly.css',
         $scope.getTitle = function(schema, type, schemaFull) {
             if (schema == 'focalPoint') {
 
-                if (_.contains(type, 'NP-FP') || _.contains(type, 'ABS-FP'))
+                if (_.includes(type, 'NP-FP') || _.includes(type, 'ABS-FP'))
                     return 'ABS National Focal Point';
-                else if (_.contains(type, 'CBD-FP1') || _.contains(type, 'CBD-FP2'))
+                else if (_.includes(type, 'CBD-FP1') || _.includes(type, 'CBD-FP2'))
                     return 'CBD National Focal Point';
                 else
                     return 'National Focal Point';

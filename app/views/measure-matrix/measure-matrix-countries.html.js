@@ -1,4 +1,4 @@
-define(['app', 'underscore','components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
+define(['app', 'lodash','components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
         'views/measure-matrix/measure-matrix-elements-derective',
         'views/forms/view/record-loader.directive'], function(app, _) {
 
@@ -181,7 +181,7 @@ define(['app', 'underscore','components/scbd-angularjs-services/services/main', 
                     return data;
 
                 for (var i = 0; i < facets.length; i+=2) {
-                   var item =  _.where(data,{identifier:facets[i]});
+                   var item =  _.find(data,{identifier:facets[i]});
 
                    if(item.length>0){
                        item[0].metadata = {facet : facets[i+1]};

@@ -1,5 +1,4 @@
-define(['app', 
-"text!views/forms/view/abs/view-abs-checkpoint-communique.directive.html", 'views/directives/record-options'], function (app, template) {
+define(['app', 'lodash', "text!views/forms/view/abs/view-abs-checkpoint-communique.directive.html", 'views/directives/record-options'], function (app, _, template) {
 
 app.directive("viewAbsCheckpointCommunique", [function () {
 
@@ -19,7 +18,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 		{
 			$scope.showPdf = $attr.showPdf === undefined || $attr.showPdf != "false";
 		},
-		controller: ["$scope", "IStorage", "$http", "$q","underscore","realm", function ($scope, storage, $http, $q, _, realm)
+		controller: ["$scope", "IStorage", "$http", "$q","realm", function ($scope, storage, $http, $q, realm)
 		{
 			$scope.contacts = undefined;
 			$scope.gisMapLayers = null;

@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/view-history-directive.html"], function(app, template) {
+define(['app', 'lodash', "text!views/forms/view/view-history-directive.html"], function(app, _, template) {
 
     app.directive("viewHistory", [function() {
         return {

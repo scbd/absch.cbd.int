@@ -1,4 +1,4 @@
-define(['app','underscore',
+define(['app','lodash',
         'views/measure-matrix/measure-matrix-elements-derective']
     , function (app, _) {
 
@@ -60,7 +60,7 @@ define(['app','underscore',
                      return $q.all(amendedMeasuresQuery)
                          .then(function(amendedMeasures) {
                              amendedMeasures.forEach(function(amendedMeasureData) {
-                                 var amended = _.findWhere(document.data.amendedMeasures, {
+                                 var amended = _.find(document.data.amendedMeasures, {
                                      identifier: amendedMeasureData.data.header.identifier
                                  });
                                  amended.measure = amendedMeasureData.data;
@@ -191,7 +191,7 @@ define(['app','underscore',
 
             _.forEach(measure.scopeOfElements, function(parentElement){
                 _.forEach(parentElement.elements, function(measureElement){
-                    var element = _.findWhere(searchMeasure.absMeasures, {'identifier':measureElement.identifier});
+                    var element = _.find(searchMeasure.absMeasures, {'identifier':measureElement.identifier});
                     if(element){
 
                         if(!measureElement.relatedElements)

@@ -123,7 +123,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 						docs.push(IStorage.documents.get($scope.model.identifier, undefined, config));
 					}
 					else{
-	                    _.each($scope.model, function (mod) {
+	                    _.forEach($scope.model, function (mod) {
 							if(mod.identifier){
                                 var config;
                                 if(focalPointRegex.test(mod.identifier))
@@ -143,7 +143,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                                 return _.contains(selectedDocuments, doc.identifier_s);
                             });
                             //possible that the existing raw doc is not in rawDocuments.doc since it might be from difference page/search query just append
-                            _.each($scope.selectedRawDocuments, function(doc){
+                            _.forEach($scope.selectedRawDocuments, function(doc){
                                 var identifier =  removeRevisionNumber(doc.identifier_s||doc.identifier);
                                 var rawDocument = _.find(selectedRawDocuments, function(d){return removeRevisionNumber(d.identifier||d.identifier_s)==identifier})
                                 if(rawDocument)
@@ -384,7 +384,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
                        $scope.rawDocuments.pageCount = Math.ceil($scope.rawDocuments.numFound / $scope.searchResult.rowsPerPage)
                        
-                       _.each($scope.rawDocuments.docs, function(doc){
+                       _.forEach($scope.rawDocuments.docs, function(doc){
                            //convert meta fields to [] if it is of type string
                             
                            if(doc.rec_meta1 || doc.rec_meta2 || doc.rec_meta3){
@@ -397,7 +397,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                            }
                            else{
                                 //incase if the directive receives fl list from view, convert _txt to string 
-                                _.each(doc, function(val, key){
+                                _.forEach(doc, function(val, key){
                                     if(_.isArray(val)) 
                                         doc[key] = val.join(', ');
                                 })
@@ -408,7 +408,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                        var selectedRecords = _($scope.tempSelectedDocuments||[])
                             .map(function(doc){ return doc.header && doc.header.identifier || doc.identifier || doc.identifier_s }).value();
    
-                        _.each(selectedRecords, function(identifier){
+                        _.forEach(selectedRecords, function(identifier){
                             var newDocument = _.find($scope.rawDocuments.docs, {identifier_s:removeRevisionNumber(identifier)});
                             if(newDocument)
                                 newDocument.__checked = true
@@ -455,7 +455,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
             $scope.onSelectAction = function(doc, action){
                 // console.log(doc)
                 if($scope.type == "radio"){
-                    _.each($scope.rawDocuments.docs, function(d){
+                    _.forEach($scope.rawDocuments.docs, function(d){
                         if(d.identifier_s!=doc.identifier_s && d.__checked)
                             d.__checked = false;
                         // if(d.identifier_s==doc.identifier_s){

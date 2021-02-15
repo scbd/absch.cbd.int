@@ -31,7 +31,7 @@ app.directive("viewLmoGene", [function () {
 					$scope.dnaDetails = {};
 					$q.when(searchService.list(searchQuery))
 					.then(function(data) {
-						_.each(data.data.response.docs, function(record){
+						_.forEach(data.data.response.docs, function(record){
 							$scope.dnaDetails[record.identifier_s] = record;
 						})
 					});

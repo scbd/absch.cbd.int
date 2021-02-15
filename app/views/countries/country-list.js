@@ -43,12 +43,12 @@
                     var countries = results[0];
                     var countryFacets = results[1];
                     $scope.countries = _.map(countries, function (country) {
-                        var facets = _.findWhere(countryFacets, { government: country.code.toLowerCase() });
+                        var facets = _.find(countryFacets, { government: country.code.toLowerCase() });
                         if (!facets)
                             facets = {};
 
                         country.schemas = {};
-                        _.each(headerCount, function(headerSchema){
+                        _.forEach(headerCount, function(headerSchema){
                             var count = (facets.schemas||{})[headerSchema.schema]||0;
                             headerSchema.count += count;
                             country.schemas[headerSchema.schema] = {
@@ -103,8 +103,8 @@
             
             $scope.$watch('regions', function(newVal, oldVal){
                 if(newVal){
-                    var diff = _.difference(_.pluck(newVal, "identifier"), _.pluck(oldVal, "identifier"));
-                    _.each(diff, $scope.filterRegion)
+                    var diff = _.difference(_.map(newVal, "identifier"), _.map(oldVal, "identifier"));
+                    _.forEach(diff, $scope.filterRegion)
                 }
             })   
            
@@ -113,7 +113,7 @@
                     if(_.some($scope.regions, function(region){
                         if(regionRelations[region.identifier]){
                             var regionRels =  regionRelations[region.identifier].expandedRelatedTerms;
-                            if(_.contains(regionRels, country.code.toLowerCase()))
+                            if(_.includes(regionRels, country.code.toLowerCase()))
                                 return true;
                         }
                     })){
@@ -127,7 +127,7 @@
 
             $scope.hasCountries = function(country){
                 if(country && $scope.countryFilter){
-                    return _.contains(_.map($scope.countryFilter, 'identifier'), country.code);
+                    return _.includes(_.map($scope.countryFilter, 'identifier'), country.code);
                 }
 
                 return true;
@@ -135,9 +135,9 @@
 
             $scope.getRegions = function(code){
                 var countryReg = _.filter(regionRelations, function(region){
-                    if(_.contains(_.map($scope.regions, 'identifier'), region.identifier)){                   
+                    if(_.includes(_.map($scope.regions, 'identifier'), region.identifier)){
                         var regionRels =  regionRelations[region.identifier].expandedRelatedTerms;
-                        return _.contains(regionRels, code.toLowerCase())
+                        return _.includes(regionRels, code.toLowerCase())
                     }
                 });
                 if(countryReg)
@@ -168,13 +168,13 @@
                     var total = {};
                     angular.forEach($scope.list, function(country){
                         if(country.schemas){
-                            _.each($scope.headerCount,function(counter){
+                            _.forEach($scope.headerCount,function(counter){
                                 total[counter.schema] = (total[counter.schema]||0) + (country.schemas[counter.schema].count||0);
                             });
                         }
 
                     });
-                    _.each($scope.headerCount,function(counter){
+                    _.forEach($scope.headerCount,function(counter){
                         counter.count = total[counter.schema]||0;
                     });
 

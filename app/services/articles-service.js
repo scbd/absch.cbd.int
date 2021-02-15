@@ -1,4 +1,4 @@
-define(['app', 'underscore', './app-config-service'], function(app, _) {
+define(['app', 'lodash', './app-config-service'], function(app, _) {
 
     app.factory('articlesService', ['$http',
         function($http) {

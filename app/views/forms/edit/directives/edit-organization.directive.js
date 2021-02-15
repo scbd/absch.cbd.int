@@ -47,7 +47,7 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
                     document.notes = undefined;
 
                 if(!_.isEmpty($scope.areasOfWork))
-                    document.areasOfWork = _($scope.areasOfWork).pluck('value').compact().value();
+                    document.areasOfWork = _($scope.areasOfWork).map('value').compact().value();
                 if(_.isEmpty(document.areasOfWork))
                     document.areasOfWork = undefined;
                     

@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'views/forms/edit/edit','views/forms/edit/edit-resource-schema-base-directive',
+define(['app', 'lodash', 'views/forms/edit/edit','views/forms/edit/edit-resource-schema-base-directive',
         '../view/view-resource.directive'
        ], function (app, _) {
 

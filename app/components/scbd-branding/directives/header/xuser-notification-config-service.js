@@ -93,7 +93,7 @@ define(['app', 'lodash', 'moment'],
                     url = '';
 
                 var path;
-                if (_.contains(['ABS', 'ABS-DEV', 'ABS-TRG', 'BCH-TRG', 'BCH-DEV', 'BCH'], notification.data.documentInfo.realm.toUpperCase())) {
+                if (_.includes(['ABS', 'ABS-DEV', 'ABS-TRG', 'BCH-TRG', 'BCH-DEV', 'BCH'], notification.data.documentInfo.realm.toUpperCase())) {
                     if(notification.type == 'documentNotification')
                         path = "/register/" + $filter("urlSchemaShortName")(notification.data.documentInfo.metadata.schema) + "/" + notification.data.documentInfo.identifier + "/view";
                     else

@@ -127,7 +127,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                         $scope.selectedItems = oNewIdentifiers;
                     }
                     
-                    _.each(oNewOthers, function(customValues, key){
+                    _.forEach(oNewOthers, function(customValues, key){
                         var lOtherElements = _.filter($scope.otherElements[key], function(term){return term.customValue});
                         if (!angular.equals(customValues, lOtherElements))
                             $scope.otherElements[key] = customValues;
@@ -170,7 +170,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                                 if(term.multiple && (term.identifier==$scope.otherTermIdentifier || term.identifier.indexOf('#'+$scope.otherTermIdentifier))){
                                     if(!onOtherElementsChange)
                                         initializeOther(term.identifier)
-                                    _.each($scope.otherElements[term.identifier], function(elm){
+                                    _.forEach($scope.otherElements[term.identifier], function(elm){
                                         if(elm.customValue)
                                             oNewBinding.push({ identifier: term.identifier, customValue : elm.customValue });
                                     })
@@ -207,7 +207,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     if(!terms.length)
                         return;
 
-                    _.each(terms, function(identifier){
+                    _.forEach(terms, function(identifier){
                             var term = _.find($scope.terms, {identifier:identifier});
                             if(term){
                                 if(!$scope.selectedItems[identifier])
@@ -237,7 +237,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     if(!terms.length)
                         return;
 
-                    _.each(terms, function(identifier){
+                    _.forEach(terms, function(identifier){
                             var term = _.find($scope.terms, {identifier:identifier});
                             if(term && !($scope.selectedItems[identifier]||{}).selected){
                                 var hasChildSelected = isSelectedOrIndertiminante(term.narrowerTerms);
@@ -315,7 +315,7 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
                     $scope.searchList = searchList = searchList || $scope.searchList||[];
 
 
-                    _.each(rootTerms, function(term){
+                    _.forEach(rootTerms, function(term){
                         searchList.push({
                             identifier: term.identifier, searchTitle: term.title,
                             displayTitle: buildDisplayTitle(term, 1)

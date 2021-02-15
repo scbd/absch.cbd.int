@@ -24,7 +24,7 @@ define(['app', 'lodash', 'text!./view-terms-hierarchy.html',
 						thesaurusService.getDomainTerms($scope.termDomain, {other:true})
 						.then(function(terms){
                             var OtherTerm = angular.copy(_.find(terms, {identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'}))
-							_.each(_.compact(newTerms), function(term, index){
+							_.forEach(_.compact(newTerms), function(term, index){
 								if(term.customValue){
 									var otherTerm = angular.copy(OtherTerm);
 									var parentTerm = _.find(terms, {identifier:term.identifier});
@@ -53,7 +53,7 @@ define(['app', 'lodash', 'text!./view-terms-hierarchy.html',
 				var traitTerm = _.find(terms, {identifier:term})
 				if(traitTerm){
 					traitTerm.showTerm = true;					
-					_.each(traitTerm.broaderTerms||[], function(broaderTerm){
+					_.forEach(traitTerm.broaderTerms||[], function(broaderTerm){
 						findTerm(broaderTerm, terms);
 					})
 				}

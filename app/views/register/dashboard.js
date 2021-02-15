@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'angular', 'services/articles-service', 
+define(['app', 'lodash', 'angular', 'services/articles-service',
  'services/role-service', 'services/app-config-service', 'js/common',
  'views/register/directives/register-top-menu', 'toastr','components/scbd-angularjs-services/services/main', 
  'views/register/directives/top-records', 'views/register/directives/top-requests', 'ngDialog'],
@@ -125,8 +125,8 @@ function(app, _, ng) {
                 $q.all(_.flatten(queries)).then(function(results) {
 
                     var index = 0;
-                    _.each(results, function(facets) {
-                        _.each(facets.data, function(count, format) {
+                    _.forEach(results, function(facets) {
+                        _.forEach(facets.data, function(count, format) {
 
                             if (!schemaFacets[format])
                                 schemaFacets[format] = {};
@@ -158,7 +158,7 @@ function(app, _, ng) {
                             "modelContractualClause"    :  ["AbsPAModelContractualClause", "AbsPAModelContractualClause-dev", "AbsPAModelContractualClause-trg"],
                             "communityProtocol"         :  ["AbsPACommunityProtocol", "AbsPACommunityProtocol-trg", "AbsPACommunityProtocol-dev"]};
                             
-                    _.each(referenceApproverRoles, function(roles, schema){
+                    _.forEach(referenceApproverRoles, function(roles, schema){
 
                         if(roleService.isUserInRoles(roles)){
                         

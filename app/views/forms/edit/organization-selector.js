@@ -1,8 +1,8 @@
-﻿define(['app', "text!views/forms/edit/organization-selector.html", 'js/common', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
+﻿define(['app', 'lodash', "text!views/forms/edit/organization-selector.html", 'js/common', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
 'views/forms/view/directives/view-record-reference.directive', 'ngDialog',
 'services/search-service','ngInfiniteScroll'
 ],
-function(app, template) {
+function(app, _, template) {
     
     app.directive("organizationSelector", [function() {
 
@@ -158,7 +158,7 @@ function(app, template) {
                             queryCanceler = null;
                             if(!$scope.existingOrganizations || currentPage == 0){
                                 var docs = data.data.response.docs;
-                                    _.each(docs, function(record){
+                                    _.forEach(docs, function(record){
                                     formatOrganization(record);
                                 });
                                 $scope.existingOrganizations = docs;
@@ -166,7 +166,7 @@ function(app, template) {
                                 
                             }
                             else {
-                                _.each(data.data.response.docs, function(record){
+                                _.forEach(data.data.response.docs, function(record){
                                     $scope.existingOrganizations.push(formatOrganization(record));
                                 });
                             }

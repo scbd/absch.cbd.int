@@ -1,7 +1,7 @@
 define(['app', 'json!/api/v2018/realm-configurations/'+(window.scbdApp.host||''),
 		'lodash', 'json!components/scbd-angularjs-services/filters/schema-name.json'], function (app, realmConfigurations, _, scbdJSonSchemas) { 'use strict';
     
-	var realmConfig = _.findWhere(realmConfigurations,{ host : window.location.host}) || _.head(realmConfigurations);
+	var realmConfig = _.find(realmConfigurations,{ host : window.location.host}) || _.head(realmConfigurations);
     
     if(!realmConfig)
         throw new Error("Unknow realm for host: "+window.location.host + ' clearingHouseHost: ' + window.scbdApp.host);
@@ -73,7 +73,7 @@ define(['app', 'json!/api/v2018/realm-configurations/'+(window.scbdApp.host||'')
                 nationalRoles : function(schema) {
                     var nationalfallbackRoles = _(realmConfig.roles)
                                                 .map(function(roles, key){
-                                                    if(_.contains(['publishingAuthorities','nationalAuthorizedUser','nationalFocalPoint'], key))
+                                                    if(_.includes(['publishingAuthorities','nationalAuthorizedUser','nationalFocalPoint'], key))
                                                         return roles;
                                                 }).flatten().compact().uniq().value();
                     

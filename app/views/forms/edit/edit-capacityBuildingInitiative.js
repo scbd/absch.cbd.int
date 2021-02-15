@@ -95,7 +95,7 @@ define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-capacity-buildin
     //============================================================
     $scope.isSelfFunding = function () {
         if($scope.document && $scope.document.fundingSourceTypes){
-            return !_.isEmpty(_.where($scope.document.fundingSourceTypes, { identifier: "AFDE8912-E398-4194-95BA-FE488DCC891A"}));
+            return !_.isEmpty(_.filter($scope.document.fundingSourceTypes, { identifier: "AFDE8912-E398-4194-95BA-FE488DCC891A"}));
         }
         return false;
     };

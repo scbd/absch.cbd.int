@@ -1,4 +1,4 @@
-define(['app', 'underscore', 'js/common', 'moment', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'components/scbd-angularjs-services/services/main', 
+define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'components/scbd-angularjs-services/services/main',
     'views/register/directives/register-top-menu','chart-js',
     'services/search-service','services/app-config-service', 'services/solr'
 ], function (app) {
@@ -113,7 +113,7 @@ define(['app', 'underscore', 'js/common', 'moment', 'components/scbd-angularjs-c
                                                             absNationalReport:       { countryCount :0, recordCount : 0, color: '#000080' }
                                                         };
 
-                                    _.each(results[0], function(country){
+                                    _.forEach(results[0], function(country){
                                         nationalRecords.absCheckpoint.recordCount           += country.schemas.absCheckpoint||0;
                                         nationalRecords.absCheckpointCommunique.recordCount += country.schemas.absCheckpointCommunique||0;
                                         nationalRecords.absPermit.recordCount               += country.schemas.absPermit||0;
@@ -162,7 +162,7 @@ define(['app', 'underscore', 'js/common', 'moment', 'components/scbd-angularjs-c
                                                             capacityBuildingInitiative  : { recordCount : 0, color: '#808000' },
                                                           };
 
-                                    _.each(results[2], function(schema){
+                                    _.forEach(results[2], function(schema){
                                         if(!referenceRecords[schema.symbol])
                                             referenceRecords[schema.symbol] = {}
                                         referenceRecords[schema.symbol].recordCount = schema.count||0;                                        
@@ -230,7 +230,7 @@ define(['app', 'underscore', 'js/common', 'moment', 'components/scbd-angularjs-c
                                     return country.isInbetweenParty;
 
                              });
-                            var countryCodes = _.pluck(countries, 'code');
+                            var countryCodes = _.map(countries, 'code');
                             if(countryCodes.length == 0)
                                 countryCodes.push('n-a');
 
@@ -353,7 +353,7 @@ define(['app', 'underscore', 'js/common', 'moment', 'components/scbd-angularjs-c
                     .then(function(results) {
                         var data = { labels: [], data: [] };
                         var facets = searchService.readFacets(results[0].data.facet_counts.facet_ranges[($scope.filters.dateType||'createdDate_dt').replace(':','')].counts)
-                        _.each(facets, function(facet, i) {
+                        _.forEach(facets, function(facet, i) {
                             var label = moment.utc(facet.symbol).format('MMMM YYYY');
                             data.labels.push(label)
                             var prevCount =0;
@@ -363,7 +363,7 @@ define(['app', 'underscore', 'js/common', 'moment', 'components/scbd-angularjs-c
                             data.data.push(facet.count+prevCount);
                             var tableData = options.type == 'national' ? $scope.nationalRecordsTableData : $scope.referenceRecordsTableData;
 
-                            var tableRow = _.findWhere(tableData , { label : label }) || {label : label, new:true};
+                            var tableRow = _.find(tableData , { label : label }) || {label : label, new:true};
                             if(options.schema) 
                                 tableRow[options.schema] = facet.count+prevCount;
                             else

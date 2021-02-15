@@ -268,7 +268,7 @@ define(['app', 'angular','lodash', 'jquery', 'text!./km-reference.html','angular
                 //
                 //====================
                 $scope.editor.filterExcludeSelected = function(ref) {
-                    return !_.findWhere($scope.references, {
+                    return !_.find($scope.references, {
                         identifier: ref.identifier
                     });
                 };

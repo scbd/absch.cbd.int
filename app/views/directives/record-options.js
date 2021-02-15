@@ -1,4 +1,4 @@
-define(['app', 'text!views/directives/record-options.html', 'underscore', 'components/scbd-angularjs-services/services/locale',
+define(['app', 'text!views/directives/record-options.html', 'lodash', 'components/scbd-angularjs-services/services/locale',
 'services/app-config-service', 'js/common'], function (app, template, _) {
 
 app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$window', 'commonjs', '$timeout',
@@ -16,22 +16,22 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                 $scope.$watch('::internalDocument', function(newVal){
                     if(!newVal)
                         return;
-                    _.each($scope.internalDocument.header.languages, function(l){
+                    _.forEach($scope.internalDocument.header.languages, function(l){
                         $scope.termLocales[l] =  { identifier:'lang-'+l };
                     })
                     //if document does not contain application selected locale, then select one 
-                    if(!_.contains($scope.internalDocument.header.languages, appLocale)){
+                    if(!_.includes($scope.internalDocument.header.languages, appLocale)){
 
-                             if(_.contains($scope.internalDocument.header.languages, 'en')) $scope.currentLocale = 'en';                
-                        else if(_.contains($scope.internalDocument.header.languages, 'fr')) $scope.currentLocale = 'fr';
-                        else if(_.contains($scope.internalDocument.header.languages, 'es')) $scope.currentLocale = 'es';
-                        else if(_.contains($scope.internalDocument.header.languages, 'ru')) $scope.currentLocale = 'ru';
-                        else if(_.contains($scope.internalDocument.header.languages, 'ar')) $scope.currentLocale = 'ar';
-                        else if(_.contains($scope.internalDocument.header.languages, 'zh')) $scope.currentLocale = 'zh';
+                             if(_.includes($scope.internalDocument.header.languages, 'en')) $scope.currentLocale = 'en';
+                        else if(_.includes($scope.internalDocument.header.languages, 'fr')) $scope.currentLocale = 'fr';
+                        else if(_.includes($scope.internalDocument.header.languages, 'es')) $scope.currentLocale = 'es';
+                        else if(_.includes($scope.internalDocument.header.languages, 'ru')) $scope.currentLocale = 'ru';
+                        else if(_.includes($scope.internalDocument.header.languages, 'ar')) $scope.currentLocale = 'ar';
+                        else if(_.includes($scope.internalDocument.header.languages, 'zh')) $scope.currentLocale = 'zh';
                     }
                     if($scope.internalDocumentInfo && $scope.internalDocumentInfo.documentID === undefined && !$scope.internalDocumentInfo.id)
                         $scope.hidePdf = true;
-                    if(_.contains(['absPermit', 'absCheckpointCommunique'], $scope.internalDocument.header.schema)){                        
+                    if(_.includes(['absPermit', 'absCheckpointCommunique'], $scope.internalDocument.header.schema)){
                         if($scope.internalDocumentInfo && $scope.internalDocumentInfo && 
                            $scope.internalDocumentInfo.revision < $scope.internalDocumentInfo.latestRevision)
                             $scope.hidePdf = true;
@@ -77,7 +77,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                         pdfType = 'ircc-certificate';
                     else if('absCheckpointCommunique' == $scope.internalDocument.header.schema)
                         pdfType = 'cpc-certificate';
-                    else if(_.contains(appConfigService.scbdSchemas, $scope.internalDocument.header.schema))
+                    else if(_.includes(appConfigService.scbdSchemas, $scope.internalDocument.header.schema))
                         pdfType = 'scbd-records'
 
                     var pdfDownloadUrl  =  '/pdf/:type/:schema/:documentId/:revision';

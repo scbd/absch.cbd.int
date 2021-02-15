@@ -103,7 +103,7 @@ function(templateHtml, app, _, require) {
 
                     var selection = $scope.selectedRegions;
 
-                    var hasCountry = _.any(selection, function(id) { return id.length<=3; });
+                    var hasCountry = _.some(selection, function(id) { return id.length<=3; });
                     var cbdRegions = selection.length == DefaultRegions.length && _.intersection(selection, DefaultRegions).length == DefaultRegions.length;
 
                          if(hasCountry) $scope.selectedRegionsPreset = "countries";
@@ -135,13 +135,13 @@ function(templateHtml, app, _, require) {
                     if(preset=="countries")  { $scope.selectedRegions = []; $scope.showCountries = true; }
                     if(preset=="regions")    { $scope.selectedRegions = []; $scope.showRegions = true; }
                     if(preset=="protocolParties")  { 
-                        _.each(_.sortBy(_.values($scope.protocolCountries), "title."+locale), function(country){
+                        _.forEach(_.sortBy(_.values($scope.protocolCountries), "title."+locale), function(country){
                             if(country.isProtocolParty)
                                 $scope.selectedRegionsPresetFilter.push(country.code)
                         }); 
                     }
                     if(preset=="protocolNonParties")  { 
-                        _.each(_.sortBy(_.values($scope.protocolCountries), "title."+locale), function(country){
+                        _.forEach(_.sortBy(_.values($scope.protocolCountries), "title."+locale), function(country){
                             if(!country.isProtocolParty)
                                 $scope.selectedRegionsPresetFilter.push(country.code)
                         }); 
@@ -211,7 +211,7 @@ function(templateHtml, app, _, require) {
                    $q.when(commonjs.getCountries())
                    .then(function(data){
                        $scope.protocolCountries = [];
-                       _.each(data, function(country){
+                       _.forEach(data, function(country){
                             $scope.protocolCountries[country.code.toLowerCase()] = {
                                 title : country.name, isProtocolParty : country.isParty, code : country.code.toLowerCase()
                             }

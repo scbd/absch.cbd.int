@@ -1,4 +1,4 @@
-define(['app', 'jquery', 'underscore', 'toastr', 'ngStorage'],
+define(['app', 'jquery', 'lodash', 'toastr', 'ngStorage'],
  function (app, $, _) { 'use strict';
 
 	app.factory('localStorageService',  ["$http","$location", "$rootScope","toastr",

@@ -33,10 +33,10 @@ app.directive("viewReferencedRecords", [function () {
 					.then(function(data) {
 
 						if(data.data.response.docs.length > 0){							
-							_.each(data.data.response.docs, function(record){
-								_.each(record.referenceRecord_info_ss, function(info){
+							_.forEach(data.data.response.docs, function(record){
+								_.forEach(record.referenceRecord_info_ss, function(info){
 									info = JSON.parse(info);
-									_.each(info.identifiers, function(identifier){
+									_.forEach(info.identifiers, function(identifier){
 										if(removeRevisonNumber(identifier) == $scope.model){
 											if(record.schemaCode=='modifiedOrganism' || record.schemaCode=='nationalRiskAssessment' || record.schemaCode=='independentRiskAssessment')
 												record.showIcons = true;

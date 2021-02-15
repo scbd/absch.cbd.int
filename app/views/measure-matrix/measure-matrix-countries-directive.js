@@ -1,5 +1,5 @@
 define(['app', "text!views/measure-matrix/measure-matrix-countries-directive.html",
-        'underscore','components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
+        'lodash','components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
         'views/measure-matrix/measure-matrix-elements-derective',
         'views/forms/view/record-loader.directive'], function(app, template, _) {
 
@@ -35,7 +35,7 @@ define(['app', "text!views/measure-matrix/measure-matrix-countries-directive.htm
                                 });
                     }
                     else{
-                        $scope.measures = _.where(docs, {measureMatrix:true});
+                        $scope.measures = _.filter(docs, {measureMatrix:true});
                         $scope.apiMeasure.reloadMatrix();
                     }
                 }
@@ -57,7 +57,7 @@ define(['app', "text!views/measure-matrix/measure-matrix-countries-directive.htm
                     });
             };
             function sortRecords(sortBase){
-                _.each(sortBase, function(item, index){                          
+                _.forEach(sortBase, function(item, index){
                     var groupedItem = _.find($scope.groupedMeasures, {jurisdiction : item.identifier});
                     if(groupedItem)
                     groupedItem.index = index;

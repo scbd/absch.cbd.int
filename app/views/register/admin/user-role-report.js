@@ -1,4 +1,4 @@
-﻿define(['app', 'underscore', 'js/common', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'components/scbd-angularjs-services/services/main', 
+﻿define(['app', 'lodash', 'js/common', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'components/scbd-angularjs-services/services/main',
 'views/register/directives/register-top-menu', 'services/app-config-service',
 ], function (app, _) {
 
@@ -59,7 +59,7 @@
                 $q.when(commonjs.getCountries())
                 .then(function(data){
                     $scope.countries = data;
-                    var eu = _.findWhere($scope.countries, {code: 'EU'});
+                    var eu = _.find($scope.countries, {code: 'EU'});
                     if(eu)
                         eu.code = 'EUR';
                 })
@@ -73,7 +73,7 @@
                         "0EC2E5AE-25F3-4D3A-B71F-8019BB62ED4B"  // CBD Regional Groups - Western Europe and Others
                     ];
                     regions = _.map(cbdRegions, function(region){
-                        return _.findWhere(response.data, {identifier: region});
+                        return _.find(response.data, {identifier: region});
                     })
                 })
             }
@@ -91,9 +91,9 @@
                         var countries = [];
 
                         if($scope.filters.partyStatus == 'party')
-                            countries = _.map(_.where($scope.countries, {isParty:true}), function(country){return country.code.toLowerCase()})
+                            countries = _.map(_.filter($scope.countries, {isParty:true}), function(country){return country.code.toLowerCase()})
                         else if($scope.filters.partyStatus == 'nonparty')
-                            countries = _.map(_.where($scope.countries, {isParty:false}), function(country){return country.code.toLowerCase()})
+                            countries = _.map(_.filter($scope.countries, {isParty:false}), function(country){return country.code.toLowerCase()})
                         else 
                             countries = _.map($scope.countries, function(country){return country.code.toLowerCase()})
 
@@ -115,14 +115,14 @@
             function mapCountries(countriesToShow){
                 $scope.totalCount = 0;
                 _.map(countriesToShow, function(code){
-                    var countryUsers = _.where($scope.userData, {government:code})
+                    var countryUsers = _.filter($scope.userData, {government:code})
                     if($scope.filters.filterType == 'morethenone' && countryUsers.length < 2)
                         return;
                     // if(countryUsers.length > 0){
                          $scope.totalCount += countryUsers.length;
-                         var country = _.findWhere($scope.countries, {code:code.toUpperCase()})
+                         var country = _.find($scope.countries, {code:code.toUpperCase()})
                          var region = _.find(regions, function(region){
-                             return _.contains(region.narrowerTerms, code)
+                             return _.includes(region.narrowerTerms, code)
                             })
                          $scope.countriesToShow.push({code:code, name: country.name, count:countryUsers.length, 
                                                         users : countryUsers, region: ((region||{}).title||{}).en,
@@ -135,14 +135,14 @@
                  })   
             }
             $scope.getCountry = function(code){
-                return _.findWhere($scope.countries, {code: code.toUpperCase()})
+                return _.find($scope.countries, {code: code.toUpperCase()})
             }
 
             $scope.export = function(){
                 var users = [];
                 $scope.usersToExport = [];
-                _.each($scope.countriesToShow, function(country){
-                    _.each(country.users, function(user){
+                _.forEach($scope.countriesToShow, function(country){
+                    _.forEach(country.users, function(user){
                         users.push({country: country.name, userName :user.firstName + ' ' + user.lastName, userEmail : user.email })
                     });
                 })

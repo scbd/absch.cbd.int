@@ -109,10 +109,10 @@ function(app, angular, $, _, template) {
           });
 
           if ($scope.bindingType == "string" || $scope.bindingType == "string[]")
-            oBindings = _.pluck(oBindings, 'identifier');
+            oBindings = _.map(oBindings, 'identifier');
 
           if (!$scope.multiple)
-            oBindings = _.first(oBindings);
+            oBindings = _.head(oBindings);
 
           if ($.isEmptyObject(oBindings))
             oBindings = undefined;
@@ -151,7 +151,7 @@ function(app, angular, $, _, template) {
         }
 
         function onSelectAll() {
-          _.each($scope.allItems || [], function(item) {
+          _.forEach($scope.allItems || [], function(item) {
             item.selected = true;
           });
           $scope.save();
@@ -160,7 +160,7 @@ function(app, angular, $, _, template) {
         function onSelectItem(item) {
 
           if (item.identifier) {
-            var element = _.findWhere($scope.allItems || [], {identifier: item.identifier})
+            var element = _.find($scope.allItems || [], {identifier: item.identifier})
             if(element){
               element.selected = true;
               $scope.save();
@@ -201,7 +201,7 @@ function(app, angular, $, _, template) {
         function flaten(subTree, parent) {
           var oResult = [];
 
-          _.each(subTree, function(o) {
+          _.forEach(subTree, function(o) {
             oResult.push(o);
             if(parent)
               o.parent = parent;
@@ -320,14 +320,14 @@ function(app, angular, $, _, template) {
           if($scope.secondarySource)
             mainSource = _.union(mainSource, $scope.secondarySource);
 
-          return _.where(mainSource, { selected: true });
+          return _.filter(mainSource, { selected: true });
         };
 
         //==============================
         //
         //==============================
         $scope.hasSelectedItems = function(subItems) {
-          return _.findWhere($scope.allItems || [], {
+          return _.find($scope.allItems || [], {
             selected: true
           }) !== undefined;
         };
@@ -341,7 +341,7 @@ function(app, angular, $, _, template) {
 
           var oBinding = $scope.binding || [];
 
-          if (!_.isArray(oBinding) && (_.isString(oBinding) || _.isObject(oBinding)))
+            if (!_.isArray(oBinding) && (_.isString(oBinding) || _.isObject(oBinding)))
             oBinding = [oBinding];
 
           if (!_.isArray(oBinding))
@@ -396,7 +396,7 @@ function(app, angular, $, _, template) {
         //==============================
         $scope.clearSelection = function(identifier) {
           if (!identifier) {
-            _.each($scope.allItems || [], function(item) {
+            _.forEach($scope.allItems || [], function(item) {
               item.selected = false;
             });
           } else {
@@ -438,8 +438,8 @@ function(app, angular, $, _, template) {
 
           if (!$scope.multiple || !clickedItem) {
             var source = $scope.allItems;
-            var source = _.union(source, $scope.secondarySource||[]);
-            _.each(source||[], function(item) {
+              var source = _.union(source, $scope.secondarySource||[]);
+            _.forEach(source||[], function(item) {
               item.selected = (item == clickedItem);
             });
           }
@@ -456,7 +456,7 @@ function(app, angular, $, _, template) {
             if($scope.filterType == 'startsWith')
               return _.startsWith(title.toLowerCase(), $scope.filterText.toLowerCase());
 
-            return _.contains(title.toLowerCase(), $scope.filterText.toLowerCase())
+            return _.includes(title.toLowerCase(), $scope.filterText.toLowerCase())
             
           }
           return true;
@@ -481,7 +481,7 @@ function(app, angular, $, _, template) {
           $scope.loadingOtherSource = true
           $scope.showOthersFn().then(function(data){
             $scope.secondarySource = _.filter(data, function(d){
-              if(_.contains($scope.binding, d.identifier))
+              if(_.includes($scope.binding, d.identifier))
                 d.selected = true
               return !_.find($scope.allItems, {identifier:d.identifier})
             });

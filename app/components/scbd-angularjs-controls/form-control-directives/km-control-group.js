@@ -39,7 +39,7 @@ define(['app', 'text!./km-control-group.html', 'jquery','lodash', './km-info-tip
 
 					if($scope.name) {
 						var validationReport = findReportInParent($scope, 0)||{}
-						return !!_.findWhere(validationReport.warnings, { property : $scope.name });
+						return !!_.find(validationReport.warnings, { property : $scope.name });
 					}
 
 					return false; //default behavior
@@ -49,7 +49,7 @@ define(['app', 'text!./km-control-group.html', 'jquery','lodash', './km-info-tip
 
 					if($scope.name) {
 						var validationReport = findReportInParent($scope, 0)||{}
-						return !!_.findWhere(validationReport.errors, { property : $scope.name });
+						return !!_.find(validationReport.errors, { property : $scope.name });
 					}
 
 					return false;

@@ -69,7 +69,7 @@
                         var countryResult   = result.data.grouped.government_schema_s;
                         totalCount          = countryResult.ngroups;
 
-                        _.each(countryResult.groups, function(group){
+                        _.forEach(countryResult.groups, function(group){
 
                             var gpDetails = (group.groupValue||'').split('_');
                             if(!gpDetails.length)
@@ -123,7 +123,7 @@
                 }
 
                 function formatting(docs){
-                    _.each(docs, function(document){
+                    _.forEach(docs, function(document){
                         if(!document.retired_dt || moment.utc() <= moment.utc(document.retired_dt)){
                             document.measureMatrix = true;
                         }

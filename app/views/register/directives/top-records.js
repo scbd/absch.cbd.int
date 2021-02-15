@@ -38,8 +38,8 @@
                         var qRecords = storage.documents.query(["(type eq '" + $scope.schema + "')"], 'my', {$top:remainingCount});                        
                         return $q.when(qRecords)
                                     .then(function(result){
-                                        _.each(result.data.Items, function(item){
-                                            if(!_.findWhere(records.Items, {identifier: item.identifier}))
+                                        _.forEach(result.data.Items, function(item){
+                                            if(!_.find(records.Items, {identifier: item.identifier}))
                                                 records.Items.push(item);
                                         });
                                         records.Count += result.data.Count

@@ -38,9 +38,9 @@ app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog
                     u.canBeDropped = canDropUser(u);
                     u.showExtraRoles = true;
 
-                    var userRoles = _.each(u.roles, function(rid){
+                    var userRoles = _.forEach(u.roles, function(rid){
                         var userRole = $scope.roles[rid];
-                        if(_.contains(['AbsPublishingAuthorities', 'AbsPublishingAuthorities-dev', 'AbsPublishingAuthorities-trg'],userRole.code)){
+                        if(_.includes(['AbsPublishingAuthorities', 'AbsPublishingAuthorities-dev', 'AbsPublishingAuthorities-trg'],userRole.code)){
                         // if(_.contains(['AbsNationalAuthorizedUser', 'AbsNationalAuthorizedUser-dev', 'AbsNationalAuthorizedUser-trg'],userRole.code)){
                             governmentPARole = userRole;
                         }

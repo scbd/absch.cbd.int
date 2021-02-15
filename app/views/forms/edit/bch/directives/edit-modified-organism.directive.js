@@ -67,7 +67,7 @@ function (app, _, template) {
 							if(newTraits.length){
 
 								var newDocumentTraits = angular.copy($scope.document.traits||[]);
-								_.each(newTraits, function(trait){
+								_.forEach(newTraits, function(trait){
 									if(trait.customValue || !_.find(newDocumentTraits, trait)){
 										newDocumentTraits.push(trait);
 									}
@@ -88,7 +88,7 @@ function (app, _, template) {
 					if(constructIds.length>0 && !$scope.document.genes)
 						$scope.document.genes = [];
 					
-					_.each(constructIds, function(cons){
+					_.forEach(constructIds, function(cons){
 						if(cons.identifier && !_.find($scope.document.genes, {identifier: cons.identifier}))
 							$scope.document.genes.push({ identifier:cons.identifier })
 					});

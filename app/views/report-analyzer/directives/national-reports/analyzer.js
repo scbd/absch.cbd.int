@@ -86,7 +86,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                         var previousQuestionsMappings      = _.mapValues(results[3], function(nr) { return _.mapValues(nr, function(v) { return v.question || v }) });
                         var previousQuestionsValueMappings = _.mapValues(results[3], function(nr) { return _.mapValues(nr, function(v) { return v.valueMapping  }) });
 
-                        var reportsCountriesMap = _(reports).pluck('government').sortBy().map(function(id) {
+                        var reportsCountriesMap = _(reports).map('government').sortBy().map(function(id) {
 
                             return $scope.allRegionsMap[id];
 
@@ -164,7 +164,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                     var fileQuery = _.map($scope.activeReport.compare, function(file){return loadJsonFile(file.url);})
                     return $q.all(fileQuery).then(function(response){                        
                         var mappings = {};
-                        _.each(response, function(res, index){                            
+                        _.forEach(response, function(res, index){
                             var mapping = _.extend({}, $scope.activeReport.compare[index], res)
                             mappings[res.schema] = mapping;
                         });
@@ -281,7 +281,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                 $scope.print = function(sectionToPrint) {
                     $scope.printing = true;
                     if(sectionToPrint =='#secNrAnalyzer' && _.some($scope.sections, function(section){return !section.expanded})){
-                        _.each($scope.sections, function(section){
+                        _.forEach($scope.sections, function(section){
                             if(!section.expanded){
                                 $timeout(function() {
                                     $element.find('#qt_'+section.key).click();
@@ -448,7 +448,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                 //====================================
                 nrAnalyzer.toggleSection = function(sectionName, expanded) {
 
-                    var section = _.findWhere($scope.sections||[], { key : sectionName });
+                    var section = _.find($scope.sections||[], { key : sectionName });
 
                     if(!section)
                         return;
@@ -468,7 +468,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
 
                     return nrAnalyzer.loadReports({
 
-                        questions : _.pluck(section.questions, 'key').concat(['documentId'])
+                        questions : _.map(section.questions, 'key').concat(['documentId'])
 
                     }).then(function(reports){
 

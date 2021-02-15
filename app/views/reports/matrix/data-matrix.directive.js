@@ -87,7 +87,7 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, n
                             var region;
                             if(row.government_s){
                                 region = _.find(regions, function(reg){
-                                    return _.contains(reg.narrowerTerms, row.government_s)
+                                    return _.includes(reg.narrowerTerms, row.government_s)
                                 });
                             }
 

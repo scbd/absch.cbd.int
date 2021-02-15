@@ -1,12 +1,12 @@
-define(['app', 'views/forms/edit/edit',
+define(['app','lodash','views/forms/edit/edit',
     'views/forms/view/abs/view-abs-checkpoint-communique.directive',
     'views/forms/edit/permit-selection-directive',
     'js/common'
-], function(app) {
+], function(app,_) {
 
     app.controller("editCheckpointCommunique", ["$scope", "$http", "$filter", "$q", "$controller", "IStorage",
-        "underscore", "Thesaurus", "Enumerable", "$location", 'commonjs',
-        function($scope, $http, $filter, $q, $controller, storage, _, Thesaurus, Enumerable, $location, commonjs) {
+         "Thesaurus", "Enumerable", "$location", 'commonjs',
+        function($scope, $http, $filter, $q, $controller, storage, Thesaurus, Enumerable, $location, commonjs) {
             $controller('editController', {
                 $scope: $scope
             });
