@@ -98,22 +98,11 @@
 		</section>
 		<section ng-if="document.previousEmployment || document.countryRegionsWorkedIn">
 			<legend>Employment history</legend>
-			<div ng-if="document.countriesWorkedIn"  class="padding-top-10">
-				<label>Countries where you have worked</label>
+			<div ng-if="document.countryRegionsWorkedIn"  class="padding-top-10">
+				<label>Countries or regions worked in</label>
 				<div class="km-value">
 					<ul class="list">
-						<li ng-repeat="item in document.countriesWorkedIn">
-							<span ng-bind="item|term:locale"></span>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<div ng-if="document.regionsWorkedIn"  class="padding-top-10">
-				<label>Regions where you have worked</label>
-				<div class="km-value">
-					<ul class="list">
-						<li ng-repeat="item in document.regionsWorkedIn">
+						<li ng-repeat="item in document.countryRegionsWorkedIn">
 							<span ng-bind="item|term:locale"></span>
 						</li>
 					</ul>
