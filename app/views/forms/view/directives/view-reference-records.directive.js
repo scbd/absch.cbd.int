@@ -42,10 +42,17 @@ app.directive("viewReferencedRecords", [function () {
 												record.showIcons = true;
 											if(!$scope.referenceRecords)
 												$scope.referenceRecords = {};
-											$scope.referenceRecords[info.field] = $scope.referenceRecords[info.field] || {count:0, docs:[], schema:record.schema}
+
+											if(!$scope.referenceRecords[record.schemaCode])
+												$scope.referenceRecords[record.schemaCode] = {
+													schema:record.schema,
+													fields : {}
+												};
+
+											$scope.referenceRecords[record.schemaCode].fields[info.field] = $scope.referenceRecords[record.schemaCode].fields[info.field] || {count:0, docs:[], schema:record.schema}
 											
-											$scope.referenceRecords[info.field].count += 1;
-											$scope.referenceRecords[info.field].docs.push(record)
+											$scope.referenceRecords[record.schemaCode].fields[info.field].count += 1;
+											$scope.referenceRecords[record.schemaCode].fields[info.field].docs.push(record)
 										}
 									})
 								});								
@@ -53,6 +60,7 @@ app.directive("viewReferencedRecords", [function () {
 							if(typeof $scope.onDataFetch == 'function'){
 								$scope.onDataFetch({data:$scope.referenceRecords})
 							}
+							console.log($scope.referenceRecords)
 						}
 					});
 
