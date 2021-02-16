@@ -5,11 +5,11 @@
     </legend>
     <table class="table table-bordered" style="width: 100%;">
         <tr>
-            <th style="width: 20%;"></th>
+            <th width="20%"></th>
             
-            <th style="width: 50%;">Schema</th>
-            <th style="width: 15%;">Field</th>
-            <th style="width: 15%;">Count</th>
+            <th width="50%">Schema</th>
+            <th width="15%">Field</th>
+            <th width="15%">Count</th>
         </tr>
         <tr ng-repeat-start="(key, record) in referenceRecords">
             <td><button class="btn btn-primary btn-xs" ng-click="record.showRecords=!record.showRecords">Show records</button></td>
@@ -21,11 +21,11 @@
             <td colspan="4" style="padding:0px">
                 <table class="table table-bordered" style="width: 100%;">
                     <tr ng-repeat="doc in record.docs">
-                        <td style="width: 20%;">
+                        <td width="20%">
                             <span ng-bind="doc.title"></span>
                             <div class="pull-right" ng-if="doc.showIcons" ng-include="'/app/views/forms/view/bch/icons.html'"></div>
                         </td>
-                        <td style="width: 50%;" ng-bind="doc.schema">
+                        <td width="50%" ng-bind="doc.schema">
                             
                         </td>
                         <td  width="30%">
