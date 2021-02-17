@@ -1,8 +1,8 @@
 define(['app', 'lodash', 'services/local-storage-service', 'components/scbd-angularjs-services/services/storage', './filters'], function(app, _) {
 
     app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 
-    'localStorageService', 'Thesaurus', 'realm',
-        function($http, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus, realm) {
+    'localStorageService', 'Thesaurus',
+        function($http, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus) {
             return new function() {
 
                 var appName = realm.value.replace(/-.*/,'').toLowerCase();

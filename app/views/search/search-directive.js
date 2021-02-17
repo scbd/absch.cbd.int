@@ -18,16 +18,16 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
             replace: true,
             template: template, 
             controller: ['$scope','$q', 'realm', '$element', 'commonjs', 'localStorageService', '$filter', 'Thesaurus' ,
-             'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService','$rootScope',
+             'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService',
              'joyrideService', '$timeout', 'locale', 'solr', 'toastr','$log',
             function($scope, $q, realm, $element, commonjs, localStorageService, $filter, thesaurus, 
-                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, $rootScope, joyrideService, 
+                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, joyrideService, 
                     $timeout, locale, solr, toastr, $log) {
                         var customQueryFn = {
                             buildExpiredPermitQuery : buildExpiredPermitQuery,
                             buildContactsUserCountryfn : buildContactsUserCountryfn
                         }
-                        var lefteMenuSchemaFieldMapping;
+                        var leftMenuSchemaFieldMapping;
                         var activeFilter;
                         var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
                         var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,summary_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
@@ -56,7 +56,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                         var queryCanceler = null;                        
                         var isABS = realm.is('ABS');
                         var isBCH = realm.is('BCH');   
-                        leftMenuFilters      = [];
+                        var leftMenuFilters  = [];
                         $scope.realm         = realm
                         $scope.searchFilters = {};
                         $scope.setFilters    = {};
@@ -1010,7 +1010,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
 
                     function getSchemaFieldMapping(schema){
-                        return lefteMenuSchemaFieldMapping[schema];
+                        return leftMenuSchemaFieldMapping[schema];
                     }
 
                     function onLeftFilterUpdate(filters){
@@ -1024,7 +1024,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                             file = 'views/search/search-filters/abs-left-menu-filters.json';
 
                         $q.when(loadJsonFile(file)).then(function(mapping){
-                            lefteMenuSchemaFieldMapping = mapping;
+                            leftMenuSchemaFieldMapping = mapping;
                         })
                     }
 

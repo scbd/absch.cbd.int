@@ -1,8 +1,8 @@
 define(['app', 'lodash','ng-breadcrumbs', 'cbd-forums',
         'js/common'], function(app, _) {
 
-    return ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$rootScope",'$route','breadcrumbs',
-     function($scope, $http, $q, $route, $routeParams, commonjs, $rootScope, $route, breadcrumbs) {
+    return ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$rootScope",'breadcrumbs',
+     function($scope, $http, $q, $route, $routeParams, commonjs, $rootScope, breadcrumbs) {
 
         if (!$route.current.$$route.forumListUrl) {
             throw 'Forum list URL not specified in route, please forumListUrl attribute in routes'

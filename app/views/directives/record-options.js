@@ -1,8 +1,8 @@
 define(['app', 'text!views/directives/record-options.html', 'lodash', 'components/scbd-angularjs-services/services/locale',
 'services/app-config-service', 'js/common'], function (app, template, _) {
 
-app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$window', 'commonjs', '$timeout',
-    function (appLocale, $route, $timeout, appConfigService, $filter, $window, commonjs, $timeout) {
+app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$window', 'commonjs',
+    function (appLocale, $route, $timeout, appConfigService, $filter, $window, commonjs) {
         return {
             restrict: 'EAC',
             template : template,
