@@ -52,6 +52,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 		<div ng-show="organizations && organizations.length>0 && isBCH">
 			<label>Organization(s) involved in the publication of this resource</label>
 				<div class="row">
@@ -196,7 +197,7 @@
 		</div>
 		<div ng-show="document.source && isBCH">
 			<label>Source</label>
-			<div compare-val>
+			<div compare-val="source">
 			<km-value-ml value="document.source" locales="locale"></km-value-ml>
 			</div>
 		</div>
@@ -257,7 +258,7 @@
 		</div>
 		<div ng-show="document.rights && isABS">
 			<label>Rights</label>
-			<div compare-val>
+			<div compare-val="rights">
 			<km-value-ml value="document.rights" locales="locale"></km-value-ml>
 			</div>
 		</div>
@@ -334,7 +335,9 @@
 			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">
+				<div compare-val="relevantInformation">
 				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+				</div>
 			</div>
 
 			<div ng-show="document.relevantDocuments">
