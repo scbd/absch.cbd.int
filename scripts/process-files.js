@@ -10,7 +10,7 @@ const readDir   = util.promisify(fs.readdir);
 const stat      = util.promisify(fs.stat);
 const mkdir     = util.promisify(fs.mkdir);
 const _         = require('lodash');
-const minification = require('./minify')
+const {transformAndMinifyFile, addLanguageAttribute} = require('./minify')
 
 const log = function(...args) {
     console.log(...args);
@@ -60,9 +60,9 @@ async function processFiles() {
                                     }
                                 }                                
                             }
-                            let minifiedResult = await minification.minifyFile(file, options);
+                            let minifiedResult = await transformAndMinifyFile(file, options);
                             if(minifiedResult){
-                                minifiedResult     = minification.addLanguageAttribute(minifiedResult, file)
+                                minifiedResult     = addLanguageAttribute(minifiedResult, file)
                                 
                                 const distFile  = file.replace(folder[0], distFolder);
                                 const dirname   = path.dirname(distFile);

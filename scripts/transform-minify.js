@@ -8,6 +8,7 @@ const {readFile, writeFile, mkdir} = require('fs').promises;
 const path = require('path');
 const babel = require("@babel/core");
 
+const skipMinify = true; // just if minify needs to be skipped temporarily.
 const minifyOptions = {
     html: {
         removeAttributeQuotes: false,
@@ -26,7 +27,7 @@ const minifyOptions = {
     }
 }
 
-async function minifyFile(file, options){
+async function transformAndMinifyFile(file, options){
     options = options || {};
     let newOptions = _.defaultsDeep({...options}, minifyOptions)
 
@@ -36,6 +37,9 @@ async function minifyFile(file, options){
         let data = await readFile(file, 'utf8');
 
         data = await babelTransform(data);
+
+        if(skipMinify)
+            return data;
 
         const { error, code, map } = await terser.minify(data, options.js);
         
@@ -96,4 +100,4 @@ const babelTransform = async (code)=>{
     return transformedCode.code;
 
 }
-module.exports = { minifyFile, addLanguageAttribute }
+module.exports = { transformAndMinifyFile, addLanguageAttribute }
