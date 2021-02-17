@@ -6,9 +6,7 @@
 export default {
     data:  () => {
         return {
-            count: 0,
-            ddsf:'sadsa'
-
+            count: 0
         }
     }
 }
