@@ -71,7 +71,7 @@
 				</div>
 			</div>
 		</div>
-		<div ng-if="isABS && document.policyBasisForCompetency || document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef">
+		<div ng-if="isABS && (document.policyBasisForCompetency || document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef)">
 			<legend>Legislative, administrative or policy basis for the competence of the Competent National Authority</legend>
 			<div ng-if="document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef">
 				<label>Links to relevant legislative, administrative or policy measure(s) </label>
