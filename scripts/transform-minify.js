@@ -6,7 +6,6 @@ const _         = require('lodash');
 const terser = require('terser');
 const {readFile, writeFile, mkdir} = require('fs').promises;
 const path = require('path');
-const babel = require("@babel/core");
 
 const skipMinify = true; // just if minify needs to be skipped temporarily.
 const minifyOptions = {
@@ -32,6 +31,9 @@ async function transformAndMinifyFile(file, options){
     let newOptions = _.defaultsDeep({...options}, minifyOptions)
 
     if(/\.js/.test(file)){
+        // To avoid production req dev dependency
+        const babel = require("@babel/core");
+
         //special case for JS, since the lib does not generate map files (even not return the map data)
         //minfy and generate map file locally
         let data = await readFile(file, 'utf8');
