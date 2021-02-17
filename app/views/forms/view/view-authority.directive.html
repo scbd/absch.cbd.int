@@ -67,7 +67,7 @@
 			<legend ng-if="document.header.schema!='supplementaryAuthority'" >Legislative, administrative or policy basis for the competence of the Competent National Authority</legend>
 			<legend ng-if="document.header.schema=='supplementaryAuthority'" >Legislative, administrative or policy basis for the competence of the Competent Authority</legend>
 			<label>Links to relevant legislative, administrative or policy measure(s) </label>
-			<div class="km-value">
+			<div class="km-value" compare-val="policyBasisForCompetencyRef">
 				<div ng-repeat="referenced in policyBasisForCompetencyRef">
 					<view-record-reference ng-model="referenced"></view-record-reference>
 				</div>
@@ -87,11 +87,12 @@
 			</div>
 			<div ng-show="document.policyBasisForCompetency || document.absPolicyBasisForCompetency">
 				<label>Additional information on the legal, administrative or policy basis for the competence of the Competent National Authority</label>
-				<div class="km-value" compare-val ng-bind-html="(document.policyBasisForCompetency || document.absPolicyBasisForCompetency) | lstring:locale">
+				<div compare-val>
+				<div class="km-value" ng-bind-html="(document.policyBasisForCompetency || document.absPolicyBasisForCompetency) | lstring:locale">
 				</div>
 				</div>
 			</div>
-            
+												
 		</div>
 
 		<div ng-if="isABS && (document.responsibilities ||document.responsibleForAll ||document.absResponsibleForAll || document.absFunctions|| document.absJurisdiction||document.absGeneticResourceTypes)">
@@ -118,16 +119,17 @@
 
 			<div ng-show="document.absJurisdiction">
 				<label>Jurisdiction(s) covered by this CNA</label>
-				<div class="km-value" ng-if="document.absJurisdiction" compare-val>
+				<div class="km-value" compare-val="absJurisdiction">
+				<div ng-if="document.absJurisdiction" >
 					<span ng-repeat="jur in document.absJurisdiction">{{jur|term}}{{$last ? '' : ', '}} </span>
 					<span ng-if="document.absJurisdictionName ">({{document.absJurisdictionName | lstring:locale}})</span>
 				</div>
-
+				</div>
 			</div>
 
 			<div ng-show="document.absGeneticResourceTypes ">
 				<label>Keywords to help describe the responsibilities of the competent national authority</label>
-				<div class="km-value" compare-val>
+				<div class="km-value" compare-val="absGeneticResourceTypes">
 					<ul class="list">
 						<li ng-repeat="term in document.absGeneticResourceTypes">{{term|term}} </li>
 					</ul>
@@ -187,8 +189,8 @@
 
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website addresses and/or attached documents</label>
-			<div compare-val>
-				<div class="km-value" ng-repeat="item in document.relevantDocuments">
+			<div class="km-value" compare-val="relevantDocuments">
+				<div ng-repeat="item in document.relevantDocuments">
 					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
 				</div>
 			</div>
