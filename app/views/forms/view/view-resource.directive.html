@@ -82,8 +82,8 @@
 			</div>
 		</div>
 		<div ng-show="document.bchSubjects && isBCH">
-			<label>Thematic areas(s)</label>
-			<div class="km-value" compare-val="bchSubjects">
+			<label>Thematic areas</label>
+			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="val in document.bchSubjects"><span ng-bind="val|term"></span></li>
 				</ul>
@@ -202,8 +202,8 @@
 			</div>
 		</div>
 		<div ng-show="document.keywords">
-			<label>Keywords</label>
-			<div class="km-value" compare-val="keywords">
+			<label>Keywords and any other relevant information</label>
+			<div class="km-value" >
 				<ul class="list">
 					<li ng-repeat="val in document.keywords"><span ng-bind="val | lstring:locale"></span></li>
 				</ul>
