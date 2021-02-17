@@ -22,7 +22,7 @@
 			</div>
 			<div ng-if="document.amendedRecords">
 				<label>Law(s)/regulation(s) amended</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.amendedRecords">
 							<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
@@ -38,7 +38,7 @@
 			</div>
 			<div ng-if="amendedByRecords">
 				<label>The law/regulation in this record has been amended by the law(s)/regulation(s) in the following record(s)</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<div ng-repeat="referenced in amendedByRecords">
 						<view-record-reference ng-model="referenced"></view-record-reference>
 					</div>
@@ -121,7 +121,7 @@
 			</div>
 			<div ng-if="document.entryIntoForce">
 				<label>Date of entry into force</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<span ng-bind="document.entryIntoForce|formatDate"></span>
 				</div>
 			</div>
@@ -132,13 +132,13 @@
 			<legend>Document details</legend>
 			<div ng-if="document.documents">
 				<label>Document text</label>
-				<div class="km-value" ng-if="document.documents" km-link-list 
+				<div class="km-value" compare-val ng-if="document.documents" km-link-list 
 					ng-model="document.documents" style="margin-top: 5px;"></div>
 			</div>
 
 			<div ng-if="document.unofficialDocuments">
 				<label>Unofficial Documents</label>
-				<div class="km-value" ng-if="document.unofficialDocuments" km-link-list 
+				<div class="km-value" compare-val ng-if="document.unofficialDocuments" km-link-list 
 					ng-model="document.unofficialDocuments" style="margin-top: 5px;"></div>				
 			</div>
 			<div compare-val ng-if="document.documentsInfo">
@@ -150,7 +150,7 @@
 			<legend>Relationship with other laws/regulations</legend>
 			<div ng-if="document.relatedRecords">
 				<label>Record(s) containing the related measure(s)</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.relatedRecords">
 							<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
@@ -170,7 +170,7 @@
 		<div ng-if="document.authorities">
 			<legend>Regulatory contact information</legend>
 			<label>Competent National Authority(ies) and/or Supplementary Protocol Competent Authority(ies)</label>
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >						
 						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -183,12 +183,12 @@
 			<legend>Additional Information</legend>
 
 			<div ng-if="document.relevantInformation">
-				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+				<div class="km-value" compare-val ng-bind-html="document.relevantInformation | lstring:locale"></div>
 			</div>
 
 			<div ng-if="document.relevantDocuments">
 				<label>Other relevant website addresses and/or attached documents</label>
-				<div class="km-value" ng-if="document.relevantDocuments" km-link-list 
+				<div class="km-value" compare-val ng-if="document.relevantDocuments" km-link-list 
 					ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>	
 			</div>
 		</div>
