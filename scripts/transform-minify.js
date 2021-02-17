@@ -31,9 +31,6 @@ async function transformAndMinifyFile(file, options){
     let newOptions = _.defaultsDeep({...options}, minifyOptions)
 
     if(/\.js/.test(file)){
-        // To avoid production req dev dependency
-        const babel = require("@babel/core");
-
         //special case for JS, since the lib does not generate map files (even not return the map data)
         //minfy and generate map file locally
         let data = await readFile(file, 'utf8');
@@ -97,6 +94,9 @@ const createDir = async (filePath)=>{
 
 const babelTransform = async (code)=>{
 
+    // To avoid production req dev dependency
+    const babel = require("@babel/core");
+    
     const transformedCode = await babel.transformAsync(code, {});
 
     return transformedCode.code;

@@ -10,7 +10,7 @@ const readDir   = util.promisify(fs.readdir);
 const stat      = util.promisify(fs.stat);
 const mkdir     = util.promisify(fs.mkdir);
 const _         = require('lodash');
-const {transformAndMinifyFile, addLanguageAttribute} = require('./minify')
+const {transformAndMinifyFile, addLanguageAttribute} = require('./transform-minify.js')
 
 const log = function(...args) {
     console.log(...args);
