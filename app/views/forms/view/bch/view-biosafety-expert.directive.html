@@ -20,13 +20,12 @@
 			</div>
 		</div>
 
-		<div ng-if="document.profile" class="padding-top-10">
-			<label>Brief profile</label>
-			<km-value-ml value="document.profile" locales="locale" html></km-value-ml>
-		</div>
-
 		<section>
 			<legend>Profile of the expert</legend>
+			<div ng-if="document.profile" class="padding-top-10">
+				<label>Brief profile</label>
+				<km-value-ml value="document.profile" locales="locale" html></km-value-ml>
+			</div>
 			<div ng-if="document.contact">
 				<label>Contact details</label>
 				<div class="km-value">

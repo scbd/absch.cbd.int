@@ -35,7 +35,6 @@ function (app, _, template) {
 				});
 
 				_.extend($scope.options, { 
-					countries : function() {return thesaurusService.getDomainTerms('countries').then(function(o){return _.sortBy(o, 'name' );})},
 					regions	: function() {return thesaurusService.getDomainTerms('regions')
 						.then(function(o){
 							return thesaurus.buildTree(o);

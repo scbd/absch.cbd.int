@@ -47,18 +47,10 @@
 													<div class="col-sm-12">
 														<div class="km-control-group" name="government" required caption="Country">
 															<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..." ng-change="onGovChange()"></div>
+																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
 														</div>
 													</div>
 												</div>
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <div class="km-control-group" required name="profile" caption="Brief profile">
-															<div class="help-block">Briefly describe the relevant experience of the expert (150 words).</div>
-                                                            <div km-rich-textbox name="profile" required ng-model="document.profile" locales="document.header.languages"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </section>
 
@@ -67,12 +59,19 @@
 
 										<div class="well no-shadow bg-white">
 											<legend>Profile of the expert</legend>
-
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="km-control-group" required name="profile" caption="Brief profile">
+														<div class="help-block">Briefly describe the relevant experience of the expert (150 words).</div>
+														<div km-rich-textbox name="profile" required ng-model="document.profile" locales="document.header.languages"></div>
+													</div>
+												</div>
+											</div>
 											<div class="row">
 				
 												<div class="col-xs-12">
-													<div class="km-control-group" name="contact" caption="Contact details">
-														<div document-selector type="radio" ng-model="document.contact" contact-type='person' allow-new="true" allow-new-schema="contact"
+													<div class="km-control-group" required name="contact" caption="Contact details">
+														<div document-selector required type="radio" ng-model="document.contact" contact-type='person' allow-new="true" allow-new-schema="contact"
 															 question="contact"
 															 schema="contact"
 															 filter="true" skip-government="true">
@@ -84,19 +83,19 @@
 
 											<div class="row">
 
-												<div class="col-md-4">
+												<div class="col-md-2">
 													<div class="km-control-group" name="birthYear" caption="Year of birth">
 														<input type="number" class="form-control" name="birthYear" ng-model="document.birthYear" min="1950" />
 													</div>
 												</div>
 
-												<div class="col-md-4">
+												<div class="col-md-2">
 													<div class="km-control-group" name="birthCountry" caption="Country of birth">
 														<div km-select name="birthCountry" ng-model="document.birthCountry" 
 														items="options.countries()" filter-type="startsWith"></div>
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-8">
 													<div class="km-control-group" name="nationalities"  caption="Nationality(ies)">
 														<div km-select multiple name="nationalities" ng-model="document.nationalities" 
 														filter-type="startsWith" items="options.nationalities()"></div>

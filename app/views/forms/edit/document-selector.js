@@ -140,7 +140,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                                                         });
                             var selectedDocuments = _.map($scope.model, function(d){return removeRevisionNumber(d.identifier)});
                             var selectedRawDocuments = _.filter($scope.rawDocuments.docs, function(doc){
-                                return _.contains(selectedDocuments, doc.identifier_s);
+                                return _.includes(selectedDocuments, doc.identifier_s);
                             });
                             //possible that the existing raw doc is not in rawDocuments.doc since it might be from difference page/search query just append
                             _.forEach($scope.selectedRawDocuments, function(doc){
