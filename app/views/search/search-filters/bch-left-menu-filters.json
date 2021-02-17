@@ -600,8 +600,8 @@
 		},
 		{
 			"type": "thesaurus",
-			"term": "thematicArea",
-			"title": "Thematic Area",
+			"term": "thematicAreas",
+			"title": "Thematic area",
 			"field": "bchSubjects_ss",
 			"relatedField":"bchSubjects_REL_ss"
 		},
