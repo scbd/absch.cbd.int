@@ -6,6 +6,7 @@ const _         = require('lodash');
 const terser = require('terser');
 const {readFile, writeFile, mkdir} = require('fs').promises;
 const path = require('path');
+const babel = require("@babel/core");
 
 const minifyOptions = {
     html: {
@@ -32,10 +33,12 @@ async function minifyFile(file, options){
     if(/\.js/.test(file)){
         //special case for JS, since the lib does not generate map files (even not return the map data)
         //minfy and generate map file locally
-        const data = await readFile(file, 'utf8');
+        let data = await readFile(file, 'utf8');
+
+        data = await babelTransform(data);
 
         const { error, code, map } = await terser.minify(data, options.js);
-
+        
         if (error){
             console.log('Error minifying file', file)
             throw error;
@@ -84,5 +87,13 @@ function addLanguageAttribute(content, filePath){
 const createDir = async (filePath)=>{
     const dirName = path.dirname(filePath);
     await mkdir(dirName, {recursive:true});   
+}
+
+const babelTransform = async (code)=>{
+
+    const transformedCode = await babel.transformAsync(code, {});
+
+    return transformedCode.code;
+
 }
 module.exports = { minifyFile, addLanguageAttribute }

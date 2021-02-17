@@ -41,13 +41,13 @@ if(process.env.COMPRESS=='true'){
 }
 
 // app.use(require('./middlewares/local-minification')());
-const localMinify = require('./middlewares/local-minification');
+const localTransformMinify = require('./middlewares/local-minification');
 // Set routes
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: cacheControl.setCustomCacheControl}) );
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
 
-app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          express.static(__dirname + '/dist', { setHeaders: cacheControl.setCustomCacheControl }));
-app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          translation.renderLanguageFile, localMinify(), express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          express.static(__dirname + '/dist/vue', { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          translation.renderLanguageFile, localTransformMinify(), express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
 
 app.use('/sourceMap/app',                            express.static(__dirname + '/dist'));
 app.use('/sourceMap/app',                            express.static(__dirname + '/sourceMap/app'));
@@ -61,7 +61,6 @@ app.all('/sitemap(:num([0-9]{1,3})?).xml', require('./middlewares/sitemap'));
 app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
 app.post('/error-logs', require('./middlewares/error-logs')(proxy, {apiUrl:apiUrl, appVersion:appVersion}));
-
 
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
 app.all('/api/*', (req, res) => proxy.web(req, res, { target: apiUrl, changeOrigin: true, secure:false }));

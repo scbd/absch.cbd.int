@@ -14,7 +14,7 @@ WORKDIR /usr/src/app
 COPY package.json .npmrc rollup.config.js ./
 COPY ./scripts ./scripts
 
-RUN yarn install --production && \
+RUN yarn install && \
     echo 'running on branch ' $VERSION
 
 COPY ./vue ./vue
@@ -52,7 +52,11 @@ RUN rm -rf /usr/tmp/i18n/en/.git \
 #copy touched files from Other UN lang version and REMOVE CACHE files
 RUN mkdir ./i18n && mv /usr/tmp/i18n/others/zh ./i18n && \
     mv /usr/tmp/i18n/others/ar ./i18n && mv /usr/tmp/i18n/others/fr ./i18n && \
-    mv /usr/tmp/i18n/others/es ./i18n && mv /usr/tmp/i18n/others/ru ./i18n && \
+    mv /usr/tmp/i18n/others/es ./i18n && mv /usr/tmp/i18n/others/ru ./i18n
+
+
+RUN yarn install --production --ignore-scripts --prefer-offline && \
+    yarn cache clean && \
     rm -fr /usr/tmp/i18n && rm -fr /usr/share/doc && rm -fr /usr/share/locale && \
     rm -fr /usr/local/share/.cache/yarn && rm -rf /var/cache/apk/* && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
