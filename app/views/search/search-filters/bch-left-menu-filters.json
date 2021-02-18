@@ -600,7 +600,7 @@
 		},
 		{
 			"type": "thesaurus",
-			"term": "thematicAreas",
+			"term": "cpbThematicAreas",
 			"title": "Thematic area",
 			"field": "bchSubjects_ss",
 			"relatedField":"bchSubjects_REL_ss"
