@@ -11,7 +11,7 @@ function localMinify(options){
 
     return async function localMinify(req, res, next){
 
-        if(req.host == 'localhost'){
+        if(['localhost'].includes(req.host)){
             let requestedUrl = url.parse(req.url).pathname;
             let path = `/app${requestedUrl}`;   
 

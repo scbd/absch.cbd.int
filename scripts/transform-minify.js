@@ -95,7 +95,10 @@ const createDir = async (filePath)=>{
 const babelTransform = async (code)=>{
 
     // To avoid production req dev dependency
+    require("core-js/stable");
+    require("regenerator-runtime/runtime");
     let babel = require("@babel/core");
+    
     const transformedCode = await babel.transformAsync(code);
     return transformedCode.code;    
 

@@ -6,7 +6,7 @@ import nodeResolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs';
 import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 
-const outputDir = 'dist';
+const outputDir = 'dist/vue';
 
 const globals = {
   lodash : '_',
