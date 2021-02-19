@@ -39,7 +39,7 @@ async function processFiles() {
         return 'Missing file name';
 
     const minifyRegex   =   /\.(js|html|css)$/    
-    const validFolder   =   /app/    
+    const validFolder   =   /\/usr\/tmp\/i18n\/(en|(others\/(ar|es|fr|ru|zh)))\/app/;    
     const folderFiles   =   await getAllDirectoryFiles(folder[0], {minifyRegex, validFolder}, true)
     const distFolder    =   folder[1]||folder[0]; //folder[1] if the dist path is provided else copy to self.
 

@@ -1,7 +1,7 @@
-let fs      = require('fs').promises;
-let _       = require('lodash');
-let url     = require('url'); 
-var mime = require('mime');
+const fs      = require('fs').promises;
+const _       = require('lodash');
+const url     = require('url'); 
+const mime = require('mime');
 const {transformAndMinifyFile} = require('../scripts/transform-minify')  
 
 
