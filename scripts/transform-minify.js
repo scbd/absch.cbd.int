@@ -7,7 +7,7 @@ const terser = require('terser');
 const {readFile, writeFile, mkdir} = require('fs').promises;
 const path = require('path');
 
-const skipMinify = true; // just if minify needs to be skipped temporarily.
+const skipMinify = false; // just if minify needs to be skipped temporarily.
 const minifyOptions = {
     html: {
         removeAttributeQuotes: false,
@@ -95,11 +95,9 @@ const createDir = async (filePath)=>{
 const babelTransform = async (code)=>{
 
     // To avoid production req dev dependency
-    const babel = require("@babel/core");
-    
-    const transformedCode = await babel.transformAsync(code, {});
-
-    return transformedCode.code;
+    let babel = require("@babel/core");
+    const transformedCode = await babel.transformAsync(code);
+    return transformedCode.code;    
 
 }
 module.exports = { transformAndMinifyFile, addLanguageAttribute }
