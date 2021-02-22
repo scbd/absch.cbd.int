@@ -24,7 +24,7 @@ app.directive("viewReferencedRecords", [function () {
 					var searchQuery = {
 						rowsPerPage:5000,
 						query 	: "referenceRecord_ss:" + solr.escape($scope.model),
-						fields	: 'title:title_EN_t, referenceRecord_ss, referenceRecord_info_ss,schemaCode:schema_s,schema:schema_EN_s, identifier:identifier_s, uniqueId:uniqueIdentifier_s,'
+						fields	: 'title:title_EN_t, referenceRecord_ss, referenceRecord_info_ss,schemaCode:schema_s,schema:schema_EN_s, identifier:identifier_s, uniqueId:uniqueIdentifier_s, government_s,government:government_EN_s,'
 					}
 					if(realm.is('BCH')){
 						searchQuery.fields += 'scopeRelease_b,scopeConfined_b,scopeFood_b,scopeFeed_b,scopeProcessing _b,scopeOther_b,traitDiseasesResistance_b,traitHerbicidesResistance_b,traitPhysiologyChanges_b,traitQualityChanges_b,traitMedicalProduction_b,traitOther_b'
@@ -42,10 +42,17 @@ app.directive("viewReferencedRecords", [function () {
 												record.showIcons = true;
 											if(!$scope.referenceRecords)
 												$scope.referenceRecords = {};
-											$scope.referenceRecords[info.field] = $scope.referenceRecords[info.field] || {count:0, docs:[], schema:record.schema}
+
+											if(!$scope.referenceRecords[record.schemaCode])
+												$scope.referenceRecords[record.schemaCode] = {
+													schema:record.schema,
+													fields : {}
+												};
+
+											$scope.referenceRecords[record.schemaCode].fields[info.field] = $scope.referenceRecords[record.schemaCode].fields[info.field] || {count:0, docs:[], schema:record.schema}
 											
-											$scope.referenceRecords[info.field].count += 1;
-											$scope.referenceRecords[info.field].docs.push(record)
+											$scope.referenceRecords[record.schemaCode].fields[info.field].count += 1;
+											$scope.referenceRecords[record.schemaCode].fields[info.field].docs.push(record)
 										}
 									})
 								});								
