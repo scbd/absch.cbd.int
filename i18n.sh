@@ -87,7 +87,7 @@ echo 'Reading last modified date'
 for file in $(git ls-files)
 do
 	minifyRegex="\.(js|html|css)$"
-	ignorePaths="^(\/app\/server\.js|\/app\/middlewares|\/app\/scripts)"
+	ignorePaths="^(\/app\/server\.js|\/app\/middlewares|\/app\/scripts|node_modules)"
 	if [[ ${file} =~ $minifyRegex ]]; then 
 		if [[ ! ${file} =~ $ignorePaths ]]; then
 			

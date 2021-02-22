@@ -1,8 +1,8 @@
-let fs      = require('fs').promises;
-let _       = require('lodash');
-let url     = require('url');
-const minify = require('../scripts/minify')   
-var mime = require('mime')
+const fs      = require('fs').promises;
+const _       = require('lodash');
+const url     = require('url'); 
+const mime = require('mime');
+const {transformAndMinifyFile} = require('../scripts/transform-minify')  
 
 
 function localMinify(options){
@@ -11,7 +11,7 @@ function localMinify(options){
 
     return async function localMinify(req, res, next){
 
-        if(req.host == 'localhost'){
+        if(['localhost'].includes(req.host)){
             let requestedUrl = url.parse(req.url).pathname;
             let path = `/app${requestedUrl}`;   
 
@@ -28,7 +28,7 @@ function localMinify(options){
                         }
                     }
                 }
-                const result = await minify.minifyFile(filePath, options)
+                const result = await transformAndMinifyFile(filePath, options)
 
                 var type = mime.lookup(path)             
                 var charset = mime.charsets.lookup(type)

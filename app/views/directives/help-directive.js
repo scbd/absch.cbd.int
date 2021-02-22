@@ -224,7 +224,7 @@ define(['app', 'lodash', 'angular-joyride'], function (app, _) {
                                                                 .then(function (response) {
                                                                         _.forEach(response.data, function (field, key) {
                                                                                 _.forEach(field.referenceTerm, function (term) {
-                                                                                        replacetext(term, "<a rel="noopener" translation-url  ng-if='showHelp.glossary' href='/help/glossary/" + field._id + "'>$&</a>")
+                                                                                        replacetext(term, "<a rel=\"noopener\" translation-url  ng-if='showHelp.glossary' href='/help/glossary/" + field._id + "'>$&</a>")
                                                                                 });
                                                                         });
                                                                 })

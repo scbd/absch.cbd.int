@@ -63,8 +63,9 @@ define(['app',
                         //============================================================
                         //
                         //
-                        //============================================================
-                        getNotification = function (count, type) {
+                        //============================================================                      
+
+                        var getNotification = function (count, type) {
                             if ($rootScope.user && $rootScope.user.isAuthenticated) {
                                 var queryMyNotifications;
                                 queryMyNotifications = {

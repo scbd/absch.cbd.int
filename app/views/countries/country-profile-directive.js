@@ -67,7 +67,7 @@
                     .then(function(result){
 
                         var countryResult   = result.data.grouped.government_schema_s;
-                        totalCount          = countryResult.ngroups;
+                        var totalCount      = countryResult.ngroups;
 
                         _.forEach(countryResult.groups, function(group){
 

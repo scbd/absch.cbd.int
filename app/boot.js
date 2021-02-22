@@ -65,7 +65,9 @@ require.config({
         'shim'                      :           'libs/require-shim/src/shim',
         'angular-localizer'         :           'libs/angular-localizer/localizer',
         'view-abs-checkpoint'       :           'views/forms/view/abs/view-abs-checkpoint.directive', 
-        'angular-flex'              :           'libs/angular-flex/angular-flex'            
+        'angular-flex'              :           'libs/angular-flex/angular-flex',
+        
+        'babel-polyfill'            : cdnHost + 'babel-polyfill@6.26.0/dist/polyfill.min'
     },
     'shim': {
         'angular'                       : { 'deps': ['jquery'], 'exports': 'angular' },
@@ -130,7 +132,6 @@ require.s.contexts._.nameToUrl = function (moduleName, ext, skipExt) {
     if(/^\//.test(url) && (url.indexOf('.html')>0 || url.indexOf('.json')>0)) {
             url = '/'+window.scbdApp.lang + url;
     }
-
     return url;
 }
 
