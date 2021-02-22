@@ -107,7 +107,7 @@ function(app, template,_,moment) {
                     //
                     //
                     //============================================================
-                    getNotification = function(count) {
+                    var getNotification = function(count) {
                         if ($rootScope.user && $rootScope.user.isAuthenticated) {
                             $scope.loading = true;
                             

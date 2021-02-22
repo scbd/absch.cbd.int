@@ -8,8 +8,9 @@ const util      = require("util");
 const writeFile = util.promisify(fs.writeFile);
 const readDir   = util.promisify(fs.readdir);
 const stat      = util.promisify(fs.stat);
+const mkdir     = util.promisify(fs.mkdir);
 const _         = require('lodash');
-const minification = require('./minify')
+const {transformAndMinifyFile, addLanguageAttribute} = require('./transform-minify.js')
 
 const log = function(...args) {
     console.log(...args);
@@ -20,8 +21,8 @@ const Argv = process.argv;
 const folder = Argv.slice(2);
 const [In] = folder;
 
-log.error = (e) => {
-    console.error(e);
+log.error = (e, ...args) => {
+    console.error(e, args);
     process.stdin.pause();
 };
 
@@ -38,9 +39,10 @@ async function processFiles() {
         return 'Missing file name';
 
     const minifyRegex   =   /\.(js|html|css)$/    
-    const validFolder   =   /\/usr\/tmp\/i18n\/(en|(others\/(ar|es|fr|ru|zh)))\/app/    
+    const validFolder   =   /\/usr\/tmp\/i18n\/(en|(others\/(ar|es|fr|ru|zh)))\/app/;    
     const folderFiles   =   await getAllDirectoryFiles(folder[0], {minifyRegex, validFolder}, true)
-   
+    const distFolder    =   folder[1]||folder[0]; //folder[1] if the dist path is provided else copy to self.
+
     const tasks = folderFiles.map(async (file) => {
                     try{
                         
@@ -58,10 +60,21 @@ async function processFiles() {
                                     }
                                 }                                
                             }
-                            let minifiedResult = await minification.minifyFile(file, options);
+                            let minifiedResult = await transformAndMinifyFile(file, options);
                             if(minifiedResult){
-                                minifiedResult     = minification.addLanguageAttribute(minifiedResult, file)
-                                await writeFile(file, minifiedResult);
+                                minifiedResult     = addLanguageAttribute(minifiedResult, file)
+                                
+                                const distFile  = file.replace(folder[0], distFolder);
+                                const dirname   = path.dirname(distFile);
+
+                                try{
+                                    await stat(dirname)
+                                }
+                                catch(e){
+                                    await mkdir(dirname, {recursive: true});
+                                }
+
+                                await writeFile(distFile, minifiedResult);
                             }
                         }
                         else{
@@ -69,7 +82,7 @@ async function processFiles() {
                         }
                     }
                     catch(e){
-                        log.error(e)
+                        log.error(file, e)
                     }
                 });
 

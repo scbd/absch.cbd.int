@@ -8,8 +8,8 @@ define(['app','lodash',
 ], function(app, _) {
 
   app.controller("newAbout",
-  ["$scope","$route", "$location", "locale", 'breadcrumbs', '$location', 'articlesService', 'ngMeta', 'realm',
-    function($scope,$route, $location, locale, breadcrumbs,  $location, articlesService, ngMeta, realm) {
+  ["$scope","$route", "$location", "locale", 'breadcrumbs', 'articlesService', 'ngMeta', 'realm',
+    function($scope,$route, $location, locale, breadcrumbs,  articlesService, ngMeta, realm) {
       
       $scope.status   = "loading";
       $scope.error    = null;

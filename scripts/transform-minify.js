@@ -7,6 +7,7 @@ const terser = require('terser');
 const {readFile, writeFile, mkdir} = require('fs').promises;
 const path = require('path');
 
+const skipMinify = false; // just if minify needs to be skipped temporarily.
 const minifyOptions = {
     html: {
         removeAttributeQuotes: false,
@@ -25,17 +26,22 @@ const minifyOptions = {
     }
 }
 
-async function minifyFile(file, options){
+async function transformAndMinifyFile(file, options){
     options = options || {};
     let newOptions = _.defaultsDeep({...options}, minifyOptions)
 
     if(/\.js/.test(file)){
         //special case for JS, since the lib does not generate map files (even not return the map data)
         //minfy and generate map file locally
-        const data = await readFile(file, 'utf8');
+        let data = await readFile(file, 'utf8');
+
+        data = await babelTransform(data);
+
+        if(skipMinify)
+            return data;
 
         const { error, code, map } = await terser.minify(data, options.js);
-
+        
         if (error){
             console.log('Error minifying file', file)
             throw error;
@@ -85,4 +91,16 @@ const createDir = async (filePath)=>{
     const dirName = path.dirname(filePath);
     await mkdir(dirName, {recursive:true});   
 }
-module.exports = { minifyFile, addLanguageAttribute }
+
+const babelTransform = async (code)=>{
+
+    // To avoid production req dev dependency
+    require("core-js/stable");
+    require("regenerator-runtime/runtime");
+    let babel = require("@babel/core");
+    
+    const transformedCode = await babel.transformAsync(code);
+    return transformedCode.code;    
+
+}
+module.exports = { transformAndMinifyFile, addLanguageAttribute }
