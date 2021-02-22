@@ -588,7 +588,7 @@
 		{
 			"type": "thesaurus",
 			"term": "resourceTypes",
-			"title": "Type of resource",
+			"title": "Type(s) of resource",
 			"field": "resourceTypes_ss",
 			"relatedField":"resourceTypes_REL_ss"
 		},

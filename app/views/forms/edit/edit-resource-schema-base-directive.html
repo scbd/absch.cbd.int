@@ -185,7 +185,7 @@
 									<legend ng-if="isBCH">Additional information</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
+											<div class="km-control-group" required name="resourceTypes" caption="Type(s) of resource">
 												<div ng-if="isABS" km-select multiple name="resourceTypes" required ng-model="document.resourceTypes" ng-change="onResourceTypesChange(document.resourceTypes);" items="options.resourceTypes()"
 												 show-description="true"></div>
 
