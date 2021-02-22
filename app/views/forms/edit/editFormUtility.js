@@ -207,7 +207,7 @@ app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonj
 
 	function createWorkflow(draftInfo, additionalInfo, type){
 
-		schema = realm.schemas[draftInfo.type]
+		var schema = realm.schemas[draftInfo.type]
 
 		if(!type)
 		 	type = schemasWorkflowTypes[schema.type];
