@@ -22,7 +22,7 @@
 			</div>
 			<div ng-if="document.amendedRecords">
 				<label>Law(s)/regulation(s) amended</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.amendedRecords">
 							<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
@@ -38,7 +38,7 @@
 			</div>
 			<div ng-if="amendedByRecords">
 				<label>The law/regulation in this record has been amended by the law(s)/regulation(s) in the following record(s)</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<div ng-repeat="referenced in amendedByRecords">
 						<view-record-reference ng-model="referenced"></view-record-reference>
 					</div>
@@ -50,7 +50,7 @@
 
 		<div ng-if="document.government">
 			<label name="country">Country</label>
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
 				<span ng-party-status government="document.government" id="government"></span>
 			</div>
@@ -66,14 +66,14 @@
 		<div>
 			<div ng-if="document.type">
 				<label>Type of Law / Regulation</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type|term:locale"></span>
 					<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type.customValue|lstring:locale"></span>
 				</div>
 			</div>
 			<div ng-if="document.jurisdiction">
 				<label>Area of jurisdiction</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<span ng-if="document.jurisdiction.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.jurisdiction|term:locale"></span>
 					<span ng-if="document.jurisdiction.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.jurisdiction.customValue|lstring:locale"></span>
 				</div>
@@ -81,7 +81,7 @@
 
 			<div ng-if="document.jurisdictionScope">
 				<label>Geographical or political/economic group(s)</label>	
-				<div class="km-value">		
+				<div class="km-value" compare-val>
 					<ul ng-if="document.jurisdictionScope" class="list">
 						<li ng-repeat="item in document.jurisdictionScope">
 							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
@@ -92,7 +92,7 @@
 
 			<div ng-if="document.cpbSubjectAreas">
 				<label>Subject areas</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.cpbSubjectAreas">
 							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
@@ -103,7 +103,7 @@
 			</div>
 			<div ng-if="document.cpbOrganismTypes">
 				<label>Types of organisms addressed</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.cpbOrganismTypes">
 							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
@@ -121,7 +121,7 @@
 			</div>
 			<div ng-if="document.entryIntoForce">
 				<label>Date of entry into force</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<span ng-bind="document.entryIntoForce|formatDate"></span>
 				</div>
 			</div>
@@ -132,13 +132,13 @@
 			<legend>Document details</legend>
 			<div ng-if="document.documents">
 				<label>Document text</label>
-				<div class="km-value" ng-if="document.documents" km-link-list 
+				<div class="km-value" compare-val ng-if="document.documents" km-link-list 
 					ng-model="document.documents" style="margin-top: 5px;"></div>
 			</div>
 
 			<div ng-if="document.unofficialDocuments">
 				<label>Unofficial Documents</label>
-				<div class="km-value" ng-if="document.unofficialDocuments" km-link-list 
+				<div class="km-value" compare-val ng-if="document.unofficialDocuments" km-link-list 
 					ng-model="document.unofficialDocuments" style="margin-top: 5px;"></div>				
 			</div>
 			<div compare-val ng-if="document.documentsInfo">
@@ -150,7 +150,7 @@
 			<legend>Relationship with other laws/regulations</legend>
 			<div ng-if="document.relatedRecords">
 				<label>Record(s) containing the related measure(s)</label>
-				<div class="km-value">
+				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.relatedRecords">
 							<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
@@ -170,7 +170,7 @@
 		<div ng-if="document.authorities">
 			<legend>Regulatory contact information</legend>
 			<label>Competent National Authority(ies) and/or Supplementary Protocol Competent Authority(ies)</label>
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >						
 						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
@@ -183,12 +183,12 @@
 			<legend>Additional Information</legend>
 
 			<div ng-if="document.relevantInformation">
-				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+				<div class="km-value" compare-val ng-bind-html="document.relevantInformation | lstring:locale"></div>
 			</div>
 
 			<div ng-if="document.relevantDocuments">
 				<label>Other relevant website addresses and/or attached documents</label>
-				<div class="km-value" ng-if="document.relevantDocuments" km-link-list 
+				<div class="km-value" compare-val ng-if="document.relevantDocuments" km-link-list 
 					ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>	
 			</div>
 		</div>
