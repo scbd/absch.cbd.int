@@ -9,7 +9,7 @@ import './app-config-service';
                 //================================================================================================================
                 this.getArticles = function(qs, openInNew) {
                       
-                        return $http.get('https://api.cbd.int/api/v2017/articles', {params: qs})
+                        return $http.get('/api/v2017/articles', {params: qs})
                           .then(function(results){
                                 if((results||{}).data && results.data.length > 0)
                                 {    
@@ -28,7 +28,7 @@ import './app-config-service';
                 //================================================================================================================
                 this.getArticle = function(id,openInNew) {
                       
-                    return $http.get('https://api.cbd.int/api/v2017/articles/' + id)
+                    return $http.get('/api/v2017/articles/' + id)
                       .then(function(results){
                             if(results.data)
                             {    
