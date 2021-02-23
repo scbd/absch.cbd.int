@@ -10,7 +10,7 @@
 		<legend>General information</legend>
 		<div ng-if="document.government">
 			<label name="government">Country</label> 
-			<div class="km-value">
+			<div class="km-value" compare-val>
 				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>
 					<span ng-bind="document.government|term:locale"></span>
 				</a>
