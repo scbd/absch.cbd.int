@@ -29,33 +29,32 @@ define(['app', 'lodash',
                             
                             if(queryTags)
                                 tags = _(queryTags.split(',')).compact().map(function(tag){
-                                            return {"adminTags.title.en":encodeURIComponent(_.trim(tag))}
+                                            return {"adminTags":encodeURIComponent(_.trim(tag))}
                                         }).value();
                             else{
                                 if(realm.is('ABS')){
-                                    tags =  [{"adminTags.title.en":encodeURIComponent("ABSCH-Announcement")}]
+                                    tags =  [{"adminTags":encodeURIComponent("absch-announcement")}]
                                 }
                                 else if(realm.is('BCH')){
                                     if($scope.type == 'announcements')
-                                        tags =  [{"adminTags.title.en":encodeURIComponent("BCH-Announcement")}];
+                                        tags =  [{"adminTags":encodeURIComponent("bch-announcement")}];
                                     else{
                                         var paths = $location.path().split('/')
                                         if($location.path() == '/')
                                             paths = ['Home'];
                                         
-                                        paths = _.union(paths, ['guides']);
+                                        paths = _.union(paths, ['guide1']);
 
                                         if(paths){
                                             tags =  _(paths).compact().map(function(path){
-                                                return {"adminTags.title.en":encodeURIComponent(_.trim(path))}
+                                                return {"adminTags":encodeURIComponent(_.trim(path))}
                                             }).value();
                                         }
                                     }
                                 }
                             }
 
-                            // TODO: add realm flter
-                            // tags.push({"adminTags.title.en":encodeURIComponent(realm.value.replace(/-.*/,''))});
+                            // tags.push({"adminTags":encodeURIComponent(realm.value.toLowerCase().replace(/-.*/,''))});
 
                             if(tags.length)
                                 ag.push({"$match":{"$and":tags}});
@@ -76,7 +75,7 @@ define(['app', 'lodash',
                                 if((data||[]).length)
                                     $scope.articles = data;
                                 else if(!isRetry){
-                                    return loadArticles('Guide', true);
+                                    return loadArticles('guide', true);
                                 }
                             })
                             .finally(function(){
@@ -109,6 +108,8 @@ define(['app', 'lodash',
 
                         if($scope.type)
                             loadArticles();
+
+                            $('.help-header').affix({})
 
                 }                
             };
