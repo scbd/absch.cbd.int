@@ -11,7 +11,7 @@ define(['app', 'lodash',
                     tags: '@?',
                     type: '='
                 },
-                link: function($scope){
+                link: function($scope, $element){
                     
                         $scope.status   = "loading";
                         $scope.error    = null;
@@ -41,9 +41,9 @@ define(['app', 'lodash',
                                     else{
                                         var paths = $location.path().split('/')
                                         if($location.path() == '/')
-                                            paths = ['Home'];
+                                            paths = ['home'];
                                         
-                                        paths = _.union(paths, ['guide1']);
+                                        paths = _.union(paths, ['context-help']);
 
                                         if(paths){
                                             tags =  _(paths).compact().map(function(path){
@@ -54,7 +54,7 @@ define(['app', 'lodash',
                                 }
                             }
 
-                            // tags.push({"adminTags":encodeURIComponent(realm.value.toLowerCase().replace(/-.*/,''))});
+                            tags.push({"adminTags":encodeURIComponent(realm.value.toLowerCase().replace(/-.*/,''))});
 
                             if(tags.length)
                                 ag.push({"$match":{"$and":tags}});
@@ -75,7 +75,7 @@ define(['app', 'lodash',
                                 if((data||[]).length)
                                     $scope.articles = data;
                                 else if(!isRetry){
-                                    return loadArticles('guide', true);
+                                    return loadArticles('context-help', true);
                                 }
                             })
                             .finally(function(){
@@ -88,8 +88,18 @@ define(['app', 'lodash',
                                 loadArticles();
                         });
 
+                        var scrollHandlerfn = function() {                               
+                            if ($(this).scrollTop() > 0){
+                                $('#sidebar-wrapper').css('top', '0px')
+                            }
+                            else{
+                                $('#sidebar-wrapper').css('top', 'unset')
+                            }
+                        }
+                        $(window).scroll(scrollHandlerfn);
                         $scope.$on('$destroy', function(){
                             evtRouteChangeSuccess();
+                            $(window).off('scroll', scrollHandlerfn)
                         });
 
                         //---------------------------------------------------------------------
@@ -108,8 +118,6 @@ define(['app', 'lodash',
 
                         if($scope.type)
                             loadArticles();
-
-                            $('.help-header').affix({})
 
                 }                
             };

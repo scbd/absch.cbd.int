@@ -2190,10 +2190,11 @@ a.disabled{
     transition: all 0.5s ease;
     background-color: #fff;
     box-shadow: 0 5px 15px rgb(0 0 0 / 50%); 
+    padding: 0px 0px 0px 0px;
 }
-#sidebar-wrapper.activate{
+/* #sidebar-wrapper.activate{
     padding:10px 
-}
+} */
 
 #wrapper.toggled #sidebar-wrapper {
     width: 20%;
