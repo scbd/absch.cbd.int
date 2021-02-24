@@ -450,7 +450,7 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
           query           : '*:*'
       }
       if(options.schemas)
-        queries.fieldQueries.push('schema_s:(' + _.map(options.schemas, solr.escape).join(',') + ')')
+        queries.fieldQueries.push('schema_s:(' + _.map(options.schemas, solr.escape).join(' ') + ')')
       else if(options.schema)
         queries.fieldQueries.push('realm_ss:'+solr.escape(options.schema))
 
@@ -463,6 +463,9 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
       if(options.government)
         queries.fieldQueries.push('government_s:'+solr.escape(options.government));
 
+        if(options.contactType)
+        queries.fieldQueries.push("type_s:" + solr.escape(options.contactType));
+        
       if((options.searchText||'')!=''){
         var queryText
           if(options.searchText.indexOf('-')>0) 
