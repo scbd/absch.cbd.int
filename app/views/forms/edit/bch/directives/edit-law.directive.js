@@ -107,9 +107,9 @@ import "views/forms/view/bch/view-biosafety-law.directive";
 						});
 					}
                 }
-				$scope.onAmendedRecordsQuery = function(searchText, tab){
+				$scope.onBuildQuery = function(searchText, schemasVal){
                     var queryOptions = {
-						schemas	  : ['biosafetyLaw'],
+						schemas	  : [schemasVal],
                         searchText: searchText
                     }
 					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
@@ -122,23 +122,6 @@ import "views/forms/view/bch/view-biosafety-law.directive";
 					
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }
-
-				$scope.onAuthorityQuery = function(searchText, tab){
-                    var queryOptions = {
-						schemas	  : ['authority supplementaryAuthority'],
-                        searchText: searchText
-                    }
-					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
-                        queryOptions.government = $scope.document.government.identifier;
-                    }
-
-                    if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-                        queryOptions.identifier = $scope.document.header.identifier;
-                    }
-					return $scope.onBuildDocumentSelectorQuery(queryOptions);
-                }
-
-				
 
 				$scope.setDocument({});
 
