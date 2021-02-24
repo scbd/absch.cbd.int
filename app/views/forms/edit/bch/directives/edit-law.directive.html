@@ -37,7 +37,7 @@
 														<div class="km-control-group" name="amendedRecords" caption="Please select the record(s) containing the law/regulation being amended">	
 
 																<div document-selector ng-model="document.amendedRecords" question="amendedRecords" caption="Law, Regulation or Guideline"
-																on-build-query="onBuildQuery(searchText,'biosafetyLaw')" allow-new="true"
+																on-build-query="onBuildLawQuery(searchText)" allow-new="true"
 																allow-new-schema="biosafetyLaw"></div>
 														</div>
 													</div>
@@ -240,7 +240,7 @@
 												</div>										
 													
 													<div document-selector ng-model="document.relatedRecords" question="relatedRecords" caption="Law, Regulation or Guideline"
-													on-build-query="onBuildQuery(searchText,'biosafetyLaw')"  allow-new="true"
+													on-build-query="onBuildLawQuery(searchText)"  allow-new="true"
 																allow-new-schema="biosafetyLaw">
 													</div>
 											</div>
@@ -265,7 +265,7 @@
 												</div>
 												 	
 													<div document-selector ng-model="document.authorities" question="authorities" 
-																on-build-query="onBuildQuery(searchText,'authority supplementaryAuthority')" allow-new="true"
+																on-build-query="onBuildAuthoritiesQuery(searchText)" allow-new="true"
 																allow-new-schema="authority"></div>
 											</div>
 										</div>
