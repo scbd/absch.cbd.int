@@ -1,4 +1,4 @@
-define(['app', 'text!views/directives/document-reference-history.html','services/search-service',
+define(['app', 'text!./document-reference-history.html','services/search-service',
 'views/search/search-results/result-default', 'services/solr'
 ], function (app, template) {
     app.directive('documentReferenceHistory', function ($http) {

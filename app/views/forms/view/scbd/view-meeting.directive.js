@@ -1,4 +1,4 @@
-define(['app', 'text!views/forms/view/scbd/view-meeting.directive.html',
+define(['app', 'text!./view-meeting.directive.html',
 'views/directives/record-options'], function (app, template) {
 
 app.directive('viewMeeting', [function() {

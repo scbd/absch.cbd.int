@@ -1,4 +1,4 @@
-define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/km-document-validation.html','jquery',
+define(['app', 'text!./km-document-validation.html','jquery',
 'app-data/validation-errors'], function(app, template,$, messages) { ;
 
     //============================================================

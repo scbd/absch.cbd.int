@@ -1,4 +1,4 @@
-define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/text.html', 'jquery', 'angular-localizer','angular-sanitize'], function(app, template, $) {
+define(['app', 'text!./text.html', 'jquery', 'angular-localizer','angular-sanitize'], function(app, template, $) {
   ;
   app.directive('afcText', function() {
     return {

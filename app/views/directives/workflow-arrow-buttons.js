@@ -1,4 +1,4 @@
-define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'lodash',
+define(['app', 'text!./workflow-arrow-buttons.html', 'lodash',
         'views/directives/workflow-history-directive', 'js/common', 'ngDialog',
         'toastr', 'services/local-storage-service', 'services/app-config-service', 'services/articles-service',
 ], function (app, template) {

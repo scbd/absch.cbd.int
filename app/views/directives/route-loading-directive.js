@@ -1,4 +1,4 @@
-define(['app', 'text!views/directives/route-loading-directive.html', 'views/directives/block-region-directive'], 
+define(['app', 'text!./route-loading-directive.html', 'views/directives/block-region-directive'], 
 function(app, template){
 
     app.directive('routeLoading', ['$rootScope', function($rootScope){

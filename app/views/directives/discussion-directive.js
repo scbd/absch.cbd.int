@@ -1,4 +1,4 @@
-define(['app', 'lodash','text!views/directives/discussion-directive.html', 'cbd-forums'], function(app, _, template) {
+define(['app', 'lodash','text!./discussion-directive.html', 'cbd-forums'], function(app, _, template) {
 
     app.directive('discussion', function() {
         return {

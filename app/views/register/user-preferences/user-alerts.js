@@ -1,5 +1,5 @@
 define(['app',
-    "text!views/register/user-preferences/user-alerts.html",
+    "text!./user-alerts.html",
     'lodash',
     'moment',
     'ngDialog',

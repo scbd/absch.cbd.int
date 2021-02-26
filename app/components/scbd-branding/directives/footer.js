@@ -1,5 +1,5 @@
 define(['app',
- 'text!components/scbd-branding/directives/footer.html',
+ 'text!./footer.html',
   'css!components/scbd-branding/directives/footer',
 ],
 function(app, template, $) {

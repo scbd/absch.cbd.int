@@ -1,4 +1,4 @@
-﻿define(['app', 'text!views/search/search-filters/left-side-filter.html', 'lodash', 'ngDialog',
+﻿define(['app', 'text!./left-side-filter.html', 'lodash', 'ngDialog',
     'components/scbd-angularjs-services/services/utilities', 'services/solr'], function (app, template, _) {
 
         app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', function (ngDialog, locale, solr, realm) {

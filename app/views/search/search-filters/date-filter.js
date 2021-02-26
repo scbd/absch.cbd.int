@@ -1,4 +1,4 @@
-define(['app', 'text!views/search/search-filters/date-filter.html','lodash', 'js/common', 
+define(['app', 'text!./date-filter.html','lodash', 'js/common', 
 'components/scbd-angularjs-controls/form-control-directives/all-controls','bootstrap-datepicker', 'services/solr'
 ], function(app, template, _) {
 

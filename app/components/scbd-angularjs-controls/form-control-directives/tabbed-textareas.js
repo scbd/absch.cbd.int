@@ -1,4 +1,4 @@
-define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/tabbed-textareas.html','jquery','angular-localizer','angular-sanitize'], function(app, template,$) { ;
+define(['app', 'text!./tabbed-textareas.html','jquery','angular-localizer','angular-sanitize'], function(app, template,$) { ;
         //TODO: switch binding to ngModel... because it's dumb to use another name
     app.directive('tabbedTextareas', function($timeout) {
         return {

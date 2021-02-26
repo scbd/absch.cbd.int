@@ -1,5 +1,5 @@
 define(['app', 
-"text!views/measure-matrix/measure-matrix-elements-derective.html",
+"text!./measure-matrix-elements-derective.html",
 'lodash','angular', 'js/common',
 'views/directives/block-region-directive'], function(app, template, _, angular) {
 

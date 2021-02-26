@@ -1,4 +1,4 @@
-﻿define(['app', 'text!views/search/search-results/group-view.html','lodash',
+﻿define(['app', 'text!./group-view.html','lodash',
 'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status',
 'views/search/search-results/result-default', 'services/solr'
 ], function(app, template, _) {

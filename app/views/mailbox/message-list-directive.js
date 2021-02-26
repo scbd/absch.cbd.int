@@ -1,4 +1,4 @@
-define(['app', 'text!views/mailbox/message-list-directive.html',
+define(['app', 'text!./message-list-directive.html',
 'lodash'], function(app, template, _) {
     app.directive('mailboxMessageList', function() {
         return {

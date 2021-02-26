@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/bch/view-risk-assessment.directive.html", 	
+define(['app', "text!./view-risk-assessment.directive.html", 	
 'views/directives/record-options', 'views/forms/view/bch/view-lmo-reference.directive',
 'views/forms/view/directives/view-record-reference.directive', 'views/forms/directives/view-terms-hierarchy'], function (app, template) {
 

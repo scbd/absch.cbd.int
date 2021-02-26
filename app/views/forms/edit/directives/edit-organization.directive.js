@@ -1,4 +1,4 @@
-define(['app',"text!views/forms/edit/directives/edit-organization.directive.html", 'lodash', 'views/directives/workflow-arrow-buttons', 
+define(['app',"text!./edit-organization.directive.html", 'lodash', 'views/directives/workflow-arrow-buttons', 
 "views/forms/view/view-organization.directive", 'services/role-service',
 'components/scbd-angularjs-services/services/locale', 'views/forms/edit/editFormUtility'],
 function (app, template, _) {

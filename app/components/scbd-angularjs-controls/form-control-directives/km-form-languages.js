@@ -1,4 +1,4 @@
-define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/km-form-languages.html', 'lodash', 'components/scbd-angularjs-controls/form-control-directives/km-select', 'services/thesaurus-service'], function(app, template, _) {
+define(['app', 'text!./km-form-languages.html', 'lodash', 'components/scbd-angularjs-controls/form-control-directives/km-select', 'services/thesaurus-service'], function(app, template, _) {
   ;
   //============================================================
   //

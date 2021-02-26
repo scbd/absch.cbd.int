@@ -1,4 +1,4 @@
-define(['app',"text!views/forms/edit/document-selector.html",
+define(['app',"text!./document-selector.html",
 'lodash', 'views/directives/search-filter-dates.partial',
 'views/search/search-results/result-default', 'services/search-service','services/app-config-service', 
 'components/scbd-angularjs-controls/form-control-directives/pagination','ngDialog', 'services/solr'

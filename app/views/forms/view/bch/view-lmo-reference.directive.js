@@ -1,4 +1,4 @@
-define(['app','lodash', "text!views/forms/view/bch/view-lmo-reference.directive.html", 
+define(['app','lodash', "text!./view-lmo-reference.directive.html", 
 'components/scbd-angularjs-services/services/storage'], function (app, _, template) {
 
 app.directive("viewLmoReference", [function () {

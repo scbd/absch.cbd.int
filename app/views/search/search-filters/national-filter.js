@@ -1,5 +1,5 @@
 define(['app',
-'text!views/search/search-filters/national-filter.html',], function(app, template) {
+'text!./national-filter.html',], function(app, template) {
 
     app.directive('nationalFilter', function($timeout) {
         return {

@@ -1,4 +1,4 @@
-define(['app', 'lodash','text!views/directives/task-id-directive.html',
+define(['app', 'lodash','text!./task-id-directive.html',
 	'.views/directives/forms/view/record-loader.directive', 'toastr', 'ngDialog',
 	'views/directives/document-reference-history',
 	'services/local-storage-service', 'views/directives/block-region-directive',

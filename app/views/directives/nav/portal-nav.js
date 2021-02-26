@@ -1,4 +1,4 @@
-define(['app', 'text!views/directives/nav/portal-nav.html', 'ng-breadcrumbs',
+define(['app', 'text!./portal-nav.html', 'ng-breadcrumbs',
 'services/help-service', 'js/common', 'components/scbd-angularjs-services/services/locale'],
  function (app, template) {
 

@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/view-database.directive.html", 	'views/directives/record-options'], function (app, template) {
+define(['app', "text!./view-database.directive.html", 	'views/directives/record-options'], function (app, template) {
 
 app.directive("viewDatabase", [function () {
 	return {

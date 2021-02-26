@@ -1,4 +1,4 @@
-﻿define(['app', 'text!views/forms/directives/nr-yes-no.html'], function (app, nrYesNoTemplate) {
+﻿define(['app', 'text!./nr-yes-no.html'], function (app, nrYesNoTemplate) {
 
     app.directive('nrMulti', function () {
         return {

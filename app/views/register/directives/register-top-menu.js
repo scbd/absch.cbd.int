@@ -1,4 +1,4 @@
-define(['app', "text!views/register/directives/register-top-menu.html",
+define(['app', "text!./register-top-menu.html",
 'lodash', 'services/role-service', 'moment','js/common'], function(app, template, _) {
 
     app.directive("registerTopMenu", ['roleService',"IWorkflows", '$rootScope', '$location', 'realm', function(roleService, IWorkflows,  $rootScope, $location, realm) {

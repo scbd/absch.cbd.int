@@ -1,4 +1,4 @@
-define(['app', 'text!views/forms/view/scbd/view-new.directive.html',
+define(['app', 'text!./view-new.directive.html',
 'views/directives/record-options'], function (app, template) {
 
 app.directive('viewNew', [function() {

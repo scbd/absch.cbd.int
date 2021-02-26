@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/abs/view-releated-checkpoint-communique-directive.html",], function (app, template) {
+define(['app', "text!./view-releated-checkpoint-communique-directive.html",], function (app, template) {
 
 app.directive("viewRelatedCheckpointCommunique", [function () {
   return {

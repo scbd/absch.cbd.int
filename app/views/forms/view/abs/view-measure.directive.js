@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/abs/view-measure.directive.html",
+define(['app', "text!./view-measure.directive.html",
         'views/measure-matrix/measure-matrix-elements-derective',
         'services/search-service', 'services/app-config-service','views/directives/party-status',
 	'views/forms/view/directives/view-record-reference.directive',

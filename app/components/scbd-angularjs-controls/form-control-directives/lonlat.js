@@ -1,4 +1,4 @@
-define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/lonlat.html', 'jquery','angular-localizer'], function(app, template, $) {
+define(['app', 'text!./lonlat.html', 'jquery','angular-localizer'], function(app, template, $) {
   ;
   app.directive('lonlatInput', function() {
     return {

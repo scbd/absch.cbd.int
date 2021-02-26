@@ -1,5 +1,5 @@
 define(['app',
-        'text!components/scbd-branding/directives/header/header.html',
+        'text!./header.html',
         'jquery',
         'css!components/scbd-branding/css/colors',
         'css!components/scbd-branding/directives/header/header',

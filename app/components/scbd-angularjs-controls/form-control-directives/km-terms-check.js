@@ -1,4 +1,4 @@
-define(['app', 'angular', 'jquery', 'text!components/scbd-angularjs-controls/form-control-directives/km-terms-check.html', 'linqjs', 'lodash',
+define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lodash',
 'components/scbd-angularjs-services/services/locale'], function(app, angular, $, template, Enumerable, _) { ;
 
     //============================================================

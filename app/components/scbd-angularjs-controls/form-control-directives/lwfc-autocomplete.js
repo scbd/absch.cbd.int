@@ -1,4 +1,4 @@
-define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/lwfc-autocomplete.html','angular-localizer'], function(app, template) {
+define(['app', 'text!./lwfc-autocomplete.html','angular-localizer'], function(app, template) {
   app.directive('lwfcAutocomplete', function() {
       return {
           restrict: 'AEC',

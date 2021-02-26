@@ -1,4 +1,4 @@
-define(['app','text!components/scbd-angularjs-controls/form-control-directives/km-toggle.html'], function(app,template) {
+define(['app','text!./km-toggle.html'], function(app,template) {
 //============================================================
 //
 //

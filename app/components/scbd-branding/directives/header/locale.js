@@ -1,5 +1,5 @@
 define(['app',
- 'text!components/scbd-branding/directives/header/locale.html',
+ 'text!./locale.html',
   'css!components/scbd-branding/directives/header/locale',
   'components/scbd-angularjs-services/services/locale',
   'components/scbd-angularjs-services/services/authentication',

@@ -1,5 +1,5 @@
 define(['app',
-'text!views/directives/home-articles-small.html', 'services/articles-service'],
+'text!./home-articles-small.html', 'services/articles-service'],
     function(app, template, _) {
         app.directive('homeArticlesSmall', function($http) {
             return {

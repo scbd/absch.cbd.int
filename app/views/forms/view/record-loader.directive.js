@@ -1,4 +1,4 @@
-﻿define(['app', 'lodash', 'text!views/forms/view/record-loader.directive.html', 
+﻿define(['app', 'lodash', 'text!./record-loader.directive.html', 
 	'components/scbd-angularjs-services/services/main', 'ngSmoothScroll',
 	'components/scbd-angularjs-services/filters/scbd-filters',
 	'views/forms/view/view-history-directive',

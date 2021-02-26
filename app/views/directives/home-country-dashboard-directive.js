@@ -1,4 +1,4 @@
-define(['app','text!views/directives/home-country-dashboard-directive.html', 'lodash', 'services/search-service', 'services/app-config-service', 'services/help-service',
+define(['app','text!./home-country-dashboard-directive.html', 'lodash', 'services/search-service', 'services/app-config-service', 'services/help-service',
 'js/common', 'views/directives/block-region-directive'],
     function(app, template, _) {
         app.directive('homeCountryDashboard', function($http) {

@@ -1,4 +1,4 @@
-define(['app','lodash', "text!views/forms/view/bch/view-lmo-gene.directive.html", 'css!/app/css/bch/lmo-construct.css', 
+define(['app','lodash', "text!./view-lmo-gene.directive.html", 'css!/app/css/bch/lmo-construct.css', 
 'components/scbd-angularjs-services/services/storage', 'services/search-service', 'services/solr'], function (app, _, template) {
 
 app.directive("viewLmoGene", [function () {

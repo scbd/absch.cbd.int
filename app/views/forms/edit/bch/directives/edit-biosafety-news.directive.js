@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'text!views/forms/edit/bch/directives/edit-biosafety-news.directive.html', 'views/forms/edit/edit',
+define(['app', 'lodash', 'text!./edit-biosafety-news.directive.html', 'views/forms/edit/edit',
 	"views/forms/view/bch/view-biosafety-news.directive"], 
 function (app, _, template) { 
 	app.directive("editBiosafetyNews", ["$controller", function($controller) {

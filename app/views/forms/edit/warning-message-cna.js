@@ -1,5 +1,5 @@
 
-define(['app', 'lodash', "text!views/forms/edit/warning-message-cna.html", 'js/common',
+define(['app', 'lodash', "text!./warning-message-cna.html", 'js/common',
 'views/search/search-results/result-default', 
 'services/search-service',
 'services/app-config-service', 'services/solr'

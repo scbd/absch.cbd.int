@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'text!views/forms/edit/bch/directives/edit-organism.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
+define(['app', 'lodash', 'text!./edit-organism.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-organism.directive"], 
 function (app, _, template) {
 

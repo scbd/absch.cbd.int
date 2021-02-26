@@ -1,4 +1,4 @@
-define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/km-link-list.html','lodash', 'components/scbd-angularjs-services/services/mime.type.service'], function(app, template,_) { ;
+define(['app', 'text!./km-link-list.html','lodash', 'components/scbd-angularjs-services/services/mime.type.service'], function(app, template,_) { ;
 //============================================================
 //
 //

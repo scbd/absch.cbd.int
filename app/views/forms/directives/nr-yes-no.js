@@ -1,4 +1,4 @@
-﻿define(['app', 'text!views/forms/directives/nr-yes-no.html', 'lodash'], function (app, nrYesNoTemplate, _) {
+﻿define(['app', 'text!./nr-yes-no.html', 'lodash'], function (app, nrYesNoTemplate, _) {
 
     app.directive('nrYesNo', ['$timeout', function ($timeout) {
         return {

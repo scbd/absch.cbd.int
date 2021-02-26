@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/bch/view-lmo.directive.html", 
+define(['app', "text!./view-lmo.directive.html", 
 'views/directives/record-options', 'views/forms/view/bch/view-lmo-reference.directive', 'views/forms/view/bch/view-lmo-gene.directive',
 'views/forms/view/directives/view-record-reference.directive', 'views/forms/directives/view-terms-hierarchy'
 ], function (app, template) {

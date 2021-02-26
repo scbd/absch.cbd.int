@@ -1,5 +1,5 @@
 define(['app',
-'text!views/search/search-filters/reference-filter.html'], function(app, template) {
+'text!./reference-filter.html'], function(app, template) {
 
     app.directive('referenceFilter', function($timeout) {
         return {

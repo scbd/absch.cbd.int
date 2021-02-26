@@ -1,4 +1,4 @@
-define(['app','text!views/search/search-filters/keyword-filter.html', 'lodash'],  function(app, template, _) {
+define(['app','text!./keyword-filter.html', 'lodash'],  function(app, template, _) {
 
     app.directive('keywordFilter', function() {
         return {

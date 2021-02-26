@@ -1,4 +1,4 @@
-define(['app', 'lodash', "text!views/forms/view/abs/view-abs-permit.directive.html", 'views/directives/record-options',
+define(['app', 'lodash', "text!./view-abs-permit.directive.html", 'views/directives/record-options',
 'views/forms/view/directives/view-reference-records.directive'], function (app, _, template) {
 //,'views/forms/view/view-releated-checkpoint-communique-directive.html'
 app.directive("viewAbsPermit", [function () {

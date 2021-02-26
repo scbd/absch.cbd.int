@@ -1,4 +1,4 @@
-﻿define(['app', 'lodash', "text!views/forms/view/view-submission.directive.html", 	'views/directives/record-options', 'services/solr', 'services/search-service'
+﻿define(['app', 'lodash', "text!./view-submission.directive.html", 	'views/directives/record-options', 'services/solr', 'services/search-service'
 ], function (app, _, template) {
 
     app.directive("viewSubmission", ['searchService', 'solr', function (searchService, solr) {

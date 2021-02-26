@@ -1,5 +1,5 @@
 define(['app',
-'text!views/forms/view/scbd/view-statement.directive.html',
+'text!./view-statement.directive.html',
 'views/directives/record-options'], function (app, template) {
 
 app.directive('viewStatement', [function() {

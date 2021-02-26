@@ -1,4 +1,4 @@
-define(['app', 'text!views/directives/user-details-directive.html'], function (app, template) {
+define(['app', 'text!./user-details-directive.html'], function (app, template) {
 
 app.directive('userDetails', function($http){
 

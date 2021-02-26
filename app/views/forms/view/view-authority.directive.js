@@ -1,4 +1,4 @@
-define(['app','lodash', "text!views/forms/view/view-authority.directive.html",
+define(['app','lodash', "text!./view-authority.directive.html",
 'views/directives/record-options','views/directives/party-status', 'services/app-config-service',
 'views/forms/view/directives/view-reference-records.directive', 'views/forms/directives/view-terms-hierarchy'], function (app, _, template) {
 

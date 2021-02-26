@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/bch/view-dna-sequence.directive.html", 'views/forms/directives/view-terms-hierarchy',
+define(['app', "text!./view-dna-sequence.directive.html", 'views/forms/directives/view-terms-hierarchy',
  	'views/directives/record-options'], function (app, template) {
 
 app.directive("viewDnaSequence", [function () {

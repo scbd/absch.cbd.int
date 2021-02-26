@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/bch/view-expert-assignment.directive.html", 	'views/directives/record-options'], function (app, template) {
+define(['app', "text!./view-expert-assignment.directive.html", 	'views/directives/record-options'], function (app, template) {
 
 app.directive("viewExpertAssignment", [function () {
 	return {

@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/bch/view-organism.directive.html", 'views/forms/directives/view-terms-hierarchy',
+define(['app', "text!./view-organism.directive.html", 'views/forms/directives/view-terms-hierarchy',
 		'views/directives/record-options'], function (app, template) {
 
 app.directive("viewOrganism", [function () {

@@ -292,7 +292,7 @@ function(templateHtml, app, _, require, $) { ;
                     }
                     else{
                         
-                        require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html'],
+                        require(['printThis', 'text!./print-footer.html'],
                          function(printObj, header, footer){						
                             var printObject = $element.parent().parent().parent().find('#secNrAnalyzer');
                             if(sectionToPrint !='#secNrAnalyzer' && sectionToPrint)

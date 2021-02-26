@@ -1,4 +1,4 @@
-define(['app', 'text!views/search/search-results/national-records-country.html','lodash',
+define(['app', 'text!./national-records-country.html','lodash',
 'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status', 'services/solr',
 ], function(app, template, _) {
 

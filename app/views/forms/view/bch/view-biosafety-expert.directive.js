@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/bch/view-biosafety-expert.directive.html", 	'views/directives/record-options'], function (app, template) {
+define(['app', "text!./view-biosafety-expert.directive.html", 	'views/directives/record-options'], function (app, template) {
 
 	app.directive("viewBiosafetyExpert", [function () {
 	return {

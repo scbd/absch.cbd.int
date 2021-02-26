@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'text!views/directives/workflow-history-directive.html'], function(app, _, template) {
+define(['app', 'lodash', 'text!./workflow-history-directive.html'], function(app, _, template) {
 
     app.directive('workflowHistory', ["$q", "$timeout",
         function($q, $timeout) {

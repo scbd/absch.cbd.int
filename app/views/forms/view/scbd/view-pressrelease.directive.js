@@ -1,4 +1,4 @@
-define(['app', 'text!views/forms/view/scbd/view-pressrelease.directive.html',
+define(['app', 'text!./view-pressrelease.directive.html',
 'views/directives/record-options',
 ], function (app, template) {
 

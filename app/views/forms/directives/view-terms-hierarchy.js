@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'text!views/forms/directives/view-terms-hierarchy.html', 
+define(['app', 'lodash', 'text!./view-terms-hierarchy.html', 
 'components/scbd-angularjs-services/services/utilities', 'services/thesaurus-service'], function (app, _, template) {
 
     app.directive('viewTermsHierarchy', ["thesaurusService", 'Thesaurus', 

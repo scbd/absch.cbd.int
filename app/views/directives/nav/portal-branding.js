@@ -1,4 +1,4 @@
-define(['app', 'text!views/directives/nav/portal-branding.html', 'lodash', ], function(app,template,  _) {
+define(['app', 'text!./portal-branding.html', 'lodash', ], function(app,template,  _) {
     app.directive('portalBranding', function() {
         return {
             restrict: 'EAC',

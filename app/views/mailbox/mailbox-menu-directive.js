@@ -1,4 +1,4 @@
-define(['app','text!views/mailbox/mailbox-menu-directive.html',
+define(['app','text!./mailbox-menu-directive.html',
 'lodash'], function(app, template,_) {
     app.directive('mailboxMenu', function() {
         return {

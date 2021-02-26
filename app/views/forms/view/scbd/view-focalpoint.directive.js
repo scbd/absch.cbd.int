@@ -1,4 +1,4 @@
-define(['app', 'text!views/forms/view/scbd/view-focalpoint.directive.html', 
+define(['app', 'text!./view-focalpoint.directive.html', 
 'views/directives/record-options',
 ], function (app, template) {
 

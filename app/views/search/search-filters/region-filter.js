@@ -1,4 +1,4 @@
-define(['app', 'text!views/search/search-filters/region-filter.html','lodash', 'js/common',
+define(['app', 'text!./region-filter.html','lodash', 'js/common',
 ], function(app, template, _) {
 
     app.directive('regionFilter', ['locale', function(locale) {

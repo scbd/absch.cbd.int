@@ -1,4 +1,4 @@
-define(['app','text!views/mailbox/compose-directive.html',
+define(['app','text!./compose-directive.html',
 'lodash'], function(app, template,_) {
     app.directive('mailboxCompose', function() {
         return {

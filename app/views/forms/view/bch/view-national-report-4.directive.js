@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/bch/view-national-report-4.directive.html", 
+define(['app', "text!./view-national-report-4.directive.html", 
 'lodash', 'app-data/bch/report-analyzer/cpbNationalReport4', 'views/forms/view/bch/view-national-report.directive',
  	'views/directives/record-options'], function (app, template, _, nr4Data) {
 

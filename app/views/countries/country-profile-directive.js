@@ -1,4 +1,4 @@
- define(['app', 'text!views/countries/country-profile-directive.html', 'lodash', 
+ define(['app', 'text!./country-profile-directive.html', 'lodash', 
    'views/measure-matrix/measure-matrix-countries-directive',
    'js/common', 'services/solr',
    'views/search/search-results/result-grouped-national-record',

@@ -1,4 +1,4 @@
-define(['app','text!components/scbd-angularjs-controls/form-control-directives/km-inputtext-ac.html','angular', 'angucomplete-alt','css!components/scbd-angularjs-controls/form-control-directives/km-control.css'], function(app,template,angular) {
+define(['app','text!./km-inputtext-ac.html','angular', 'angucomplete-alt','css!components/scbd-angularjs-controls/form-control-directives/km-control.css'], function(app,template,angular) {
   //============================================================
   //
   //

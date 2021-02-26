@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/view-supplementary-authority.directive.html",
+define(['app', "text!./view-supplementary-authority.directive.html",
 "views/forms/view/view-authority.directive"], function (app, template) {
 
 	app.directive("viewSupplementaryAuthority", [function () {

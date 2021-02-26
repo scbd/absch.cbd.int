@@ -1,4 +1,4 @@
-﻿define(['app','text!components/scbd-angularjs-controls/form-control-directives/km-rich-textbox.html','angular','angular-trix','css!components/scbd-angularjs-controls/form-control-directives/km-control.css'], function(app,template,angular) {
+﻿define(['app','text!./km-rich-textbox.html','angular','angular-trix','css!components/scbd-angularjs-controls/form-control-directives/km-control.css'], function(app,template,angular) {
 
 	app.directive('kmRichTextbox', ['$filter', '$timeout', function($filter, $timeout) {
 			return {

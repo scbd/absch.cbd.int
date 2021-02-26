@@ -1,4 +1,4 @@
-define(['app', 'angular', 'text!components/scbd-angularjs-controls/form-control-directives/km-form-std-buttons.html', 'jquery'], function(app, angular, template,$) {
+define(['app', 'angular', 'text!./km-form-std-buttons.html', 'jquery'], function(app, angular, template,$) {
   ;
   //============================================================
   //

@@ -1,4 +1,4 @@
-define(['jquery', 'text!./404.html', 'text!./403.html', 'app'], function($, html404, html403) { "use strict";
+define(['jquery', 'text!./403.html', 'app'], function($, html404, html403) { "use strict";
 
     function escapeRegExp(str) {
       return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");

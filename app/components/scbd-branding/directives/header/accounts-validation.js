@@ -1,5 +1,5 @@
 define(['app',
-  'text!components/scbd-branding/directives/header/accounts-validation.html',
+  'text!./accounts-validation.html',
   'components/scbd-angularjs-services/services/authentication',
 ],
 function(app, template) {

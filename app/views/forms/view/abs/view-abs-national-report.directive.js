@@ -1,4 +1,4 @@
-define(['app', 'lodash', "text!views/forms/view/abs/view-abs-national-report.directive.html", 
+define(['app', 'lodash', "text!./view-abs-national-report.directive.html", 
 'views/directives/record-options',
 ], function (app, _, template) {
 

@@ -1,4 +1,4 @@
-define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/afc-autocomplete.html','jquery','lodash','angular-localizer', 'components/scbd-angularjs-services/services/locale'], function(app,template,$,_) { ;
+define(['app', 'text!./afc-autocomplete.html','jquery','lodash','angular-localizer', 'components/scbd-angularjs-services/services/locale'], function(app,template,$,_) { ;
     app.directive('afcAutocomplete', ['$compile', '$timeout', '$q', 'locale', '$filter', function($compile, $timeout, $q, locale, $filter) {
         return {
             restrict: 'AEC',

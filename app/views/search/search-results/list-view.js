@@ -1,4 +1,4 @@
-define(['app', 'text!views/search/search-results/list-view.html','lodash',
+define(['app', 'text!./list-view.html','lodash',
 'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status',
 'views/search/search-results/result-default'
 ], function(app, template, _) {

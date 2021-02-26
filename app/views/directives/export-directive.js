@@ -1,4 +1,4 @@
-define(['app','text!views/directives/export-directive.html', 'lodash',
+define(['app','text!./export-directive.html', 'lodash',
 'services/search-service', 'ngDialog', 'services/role-service', 'services/solr'
 ], function (app, template, _) {
     app.directive('export', function () {

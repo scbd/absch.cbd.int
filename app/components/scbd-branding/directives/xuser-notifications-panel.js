@@ -1,5 +1,5 @@
 define(['app',
-  'text!components/scbd-branding/directives/xuser-notifications-panel.html','lodash','moment',
+  'text!./xuser-notifications-panel.html','lodash','moment',
   'css!components/scbd-branding/directives/xuser-notifications-panel',
   'components/scbd-angularjs-services/filters/scbd-filters',
   'components/scbd-angularjs-services/services/user-notifications', 'ngInfiniteScroll', 'components/scbd-branding/directives/header/xuser-notification-config-service'],

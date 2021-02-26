@@ -1,4 +1,4 @@
-define(['text!views/directives/map/party-status.html',
+define(['text!./party-status.html',
   'app',
 ], function(template, app, _) {
   ;

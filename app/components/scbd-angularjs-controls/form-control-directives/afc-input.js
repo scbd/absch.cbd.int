@@ -1,4 +1,4 @@
-define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/string.html','jquery'], function(app, template,$) { ;
+define(['app', 'text!./string.html','jquery'], function(app, template,$) { ;
 app.directive('afcInput', function() {
 		return {
 				restrict: 'EAC',

@@ -1,4 +1,4 @@
-define(['app', 'text!views/search/search-directive.html','lodash', 'components/scbd-angularjs-services/filters/schema-name', 
+define(['app', 'text!./search-directive.html','lodash', 'components/scbd-angularjs-services/filters/schema-name', 
 'app-data/search-tour','js/common','services/search-service','views/search/search-filters/keyword-filter',
 'views/search/search-filters/national-filter','views/search/search-filters/reference-filter','views/search/search-filters/scbd-filter',
 'views/search/search-filters/country-filter','views/search/search-filters/region-filter','views/search/search-filters/date-filter',

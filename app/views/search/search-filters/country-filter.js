@@ -1,4 +1,4 @@
-define(['app', 'text!views/search/search-filters/country-filter.html','lodash', 'js/common',
+define(['app', 'text!./country-filter.html','lodash', 'js/common',
 ], function(app, template, _) {
 
     app.directive('countryFilter', ['locale', function(locale) {

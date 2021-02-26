@@ -1,4 +1,4 @@
-define(['app', "text!views/forms/view/bch/view-laboratory-detection.directive.html", 	'views/directives/record-options',
+define(['app', "text!./view-laboratory-detection.directive.html", 	'views/directives/record-options',
 'views/forms/view/directives/view-record-reference.directive', 'views/forms/view/bch/view-lmo.directive'], function (app, template) {
     
     app.directive("viewLaboratoryDetection", [function () {
