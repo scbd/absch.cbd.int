@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'services/local-storage-service', 'components/scbd-angularjs-services/services/storage', './filters'], function(app, _) {
+define(['app', 'lodash', 'services/local-storage-service', 'components/scbd-angularjs-services/services/storage', 'js/filters'], function(app, _) {
 
     app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 
     'localStorageService', 'Thesaurus',
@@ -26,7 +26,7 @@ define(['app', 'lodash', 'services/local-storage-service', 'components/scbd-angu
                         queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
                     } else if (schema.toUpperCase() == "NOTIFICATION" || schema.toUpperCase() == "NT") {
                         queryFields += 'date_s,deadline_s,symbol_s,reference_s,sender_s,schema_CEN_s,title_EN_t,description_EN_t,recipient_ss,url_ss,text_EN_txt';
-                    } else if (_.includes(["pressrelease", "statement", "news", "new", "pr", "st", "news", "new"], schema.toLowerCase())) {
+                    } else if (_.contains(["pressrelease", "statement", "news", "new", "pr", "st", "news", "new"], schema.toLowerCase())) {
                         queryFields += 'date_s,symbol_s,schema_CEN_s,title_EN_t,description_EN_t,themes_CEN_ss,url_ss,thematicAreas_CEN_ss,text_EN_txt';
                     }
 
@@ -139,7 +139,7 @@ define(['app', 'lodash', 'services/local-storage-service', 'components/scbd-angu
                         return d;
 
                     var schemaCode = '';
-                    if (_.includes(["pressrelease", "statement", "news", "new", "pr", "st", "news", "new"], schema.toLowerCase()))
+                    if (_.contains(["pressrelease", "statement", "news", "new", "pr", "st", "news", "new"], schema.toLowerCase()))
                         schemaCode = "52000000cbd0180000000000";
                     else if (schema.toLowerCase() == "notification" || schema.toLowerCase() == "nt")
                         schemaCode = "52000000cbd0120000000000";
@@ -209,8 +209,8 @@ define(['app', 'lodash', 'services/local-storage-service', 'components/scbd-angu
                     if (!facets)
                         return data;
 
-                    _.forEach(facets, function(facet) {
-                        var item = _.filter(data, {
+                    _.each(facets, function(facet) {
+                        var item = _.where(data, {
                             identifier: facet.symbol
                         });
                         if (item.length > 0) {
@@ -514,7 +514,7 @@ define(['app', 'lodash', 'services/local-storage-service', 'components/scbd-angu
                 this.loadJsonFile = function(filePath){
                     var deferred = $q.defer();  
 
-                    require(['json!'+filePath], function(res){
+                    require([filePath], function(res){
 
                         deferred.resolve(res);
 

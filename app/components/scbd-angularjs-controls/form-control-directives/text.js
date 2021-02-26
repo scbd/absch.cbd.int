@@ -1,5 +1,5 @@
-define(['app', 'text!./text.html', 'jquery', 'angular-localizer','angular-sanitize'], function(app, template, $) {
-  'use strict';
+define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/text.html', 'jquery', 'angular-localizer','angular-sanitize'], function(app, template, $) {
+  ;
   app.directive('afcText', function() {
     return {
       restrict: 'EAC',

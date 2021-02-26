@@ -1,5 +1,5 @@
 define(['app', 'lodash'], function(app, _) {
-    'use strict';
+    ;
 
     app.filter("kebabcase", [function() {
         return function(text) {

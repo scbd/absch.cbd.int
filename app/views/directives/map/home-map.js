@@ -1,7 +1,7 @@
-define(['text!./home-map.html','app', 'lodash', 'services/search-service',
+define(['text!views/directives/map/home-map.html','app', 'lodash', 'services/search-service',
   'views/directives/block-region-directive', 'js/common'
 ], function(template, app, _, popoverTemplate) {
-  'use strict';
+  ;
 
   app.directive('homeMap', [function() {
     return {

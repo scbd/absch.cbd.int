@@ -2,19 +2,18 @@ define(['app', 'lodash', 'moment', 'angular', 'toastr', 'bootstrap', 'routes/abs
 'angular-animate', 'components/scbd-branding/directives/header/xuser-notification-config-service',
 'services/local-storage-service', 'views/directives/route-loading-directive'], 
 function (app, _, moment, angular) {
-    'use strict';
 
     app.config(["toastrConfig", function(toastrConfig) {
         angular.extend(toastrConfig, {
-            autoDismiss: true,
-            containerId: 'toast-container',
-            maxOpened: 1,
-            newestOnTop: true,
+            autoDismiss:true,
+            containerId:'toast-container',
+            maxOpened:1,
+            newestOnTop:true,
             positionClass: 'toast-top-right',
-            preventDuplicates: true,
+            preventDuplicates:true,
             preventOpenDuplicates:false,
-            target: 'body',
-            timeOut: 2000,
+            target:'body',
+            timeOut:2000,
             });
         }]);
 
@@ -179,10 +178,10 @@ function (app, _, moment, angular) {
                 moment.locale(lang);
 
                 if (lang != 'en')
-                    require(['css!/app/css/translation.css']);
+                    require(['css!/app/css/translation.css'], function(){});
 
                 if (lang == 'ar') {
-                    require(['css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-flipped.min.css']);
+                    require(['css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-flipped.min.css'], function(){});
                 }
             }
 

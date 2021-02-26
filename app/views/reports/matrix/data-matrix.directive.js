@@ -1,7 +1,7 @@
-define(['app', 'lodash', 'text!./data-matrix.directive.html', 
+define(['app', 'lodash', 'text!views/reports/matrix/data-matrix.directive.html', 
 'components/scbd-angularjs-services/services/locale','services/search-service',
 'views/directives/block-region-directive', 'services/thesaurus-service', 'pivottable', 'ngDialog'], 
-function(app, _, template) { 'use strict';
+function(app, _, template) { ;
 
 app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog',
 function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, ngDialog) {
@@ -16,7 +16,7 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, n
             },
 			link($scope, $element){
                 
-                require(['pivottable', 'plotly.js', 'plotly-renderers']);
+                require(['pivottable', 'plotly.js', 'plotly-renderers'], function(){});
 
                 var pivotUIConf;
                 var pivotResult;

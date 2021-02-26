@@ -1,4 +1,4 @@
-define(['app', 'angular', 'jquery', 'lodash', 'text!./km-value-bool.html'], function(app, ng, $, _, template) { 'use strict';
+define(['app', 'angular', 'jquery', 'lodash', 'text!components/scbd-angularjs-controls/form-control-directives/km-value-bool.html'], function(app, ng, $, _, template) { ;
 
 	app.directive('kmValueBool', [function ()
 	{

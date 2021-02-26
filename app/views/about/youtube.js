@@ -1,7 +1,7 @@
 ﻿define(['app'],function(app) {
 
 // (function() {
-    'use strict';
+    ;
 
     // ng-youtube-embed main module
     // var ngYoutubeEmbed = angular.module('ngYoutubeEmbed', []);

@@ -1,4 +1,4 @@
-define(['app', 'text!views/directives/report-record.html', './block-region-directive', 'ngDialog' ], function (app, template) {
+define(['app', 'text!views/directives/report-record.html', 'views/directives/block-region-directive', 'ngDialog' ], function (app, template) {
         app.directive('reportRecord', ['ngDialog','$rootScope', '$http', 'toastr', 'realm', 
             function (ngDialog, $rootScope, $http, toastr, realm) {
                 return {

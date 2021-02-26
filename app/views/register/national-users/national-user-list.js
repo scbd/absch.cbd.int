@@ -1,5 +1,5 @@
 define(['angular', 'lodash', 'require','app', 'ngDialog', 'services/app-config-service', 
- 'views/register/directives/register-top-menu'], function(ng, _, require, app) { 'use strict';
+ 'views/register/directives/register-top-menu'], function(ng, _, require, app) { ;
 
 app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'appConfigService',
     function($scope, $http, $q, ngDialog, $rootScope, realm, appConfigService) {
@@ -118,7 +118,7 @@ app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog
         //===========================
         function search() {
 
-            return openDialog('./search-user-dialog', {
+            return openDialog('views/register/national-users/search-user-dialog', {
 
                 className : 'ngdialog-theme-default wide',
                 resolve : { government : _literal(authenticatedUser.government) }
@@ -132,7 +132,7 @@ app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog
                 if(!user) throw "$BREAK";
 
                 if(!user.userID) {
-                    return openDialog('./edit-user-dialog', {
+                    return openDialog('views/register/national-users/edit-user-dialog', {
                         resolve : { user : _literal(user) }
                     }).then(function(dialog) {
                         return dialog.closePromise.then(function (r) { return r.value; });
@@ -163,7 +163,7 @@ app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog
 
             var user = ng.fromJson(ng.toJson(editedUser||{})); // clean & clone object
 
-            return openDialog('./edit-roles-dialog', {
+            return openDialog('views/register/national-users/edit-roles-dialog', {
 
                 className : 'ngdialog-theme-default wide',
                 resolve : {
@@ -183,7 +183,7 @@ app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog
                 var rolesToGrant  = _.difference(user.roles, editedUser.roles);
                 var rolesToRevoke = _.difference(editedUser.roles, user.roles);
 
-                return openDialog('./commit-dialog', {
+                return openDialog('views/register/national-users/commit-dialog', {
                     className : 'ngdialog-theme-default wide',
                     resolve : {
                         user : _literal(user),
@@ -234,7 +234,7 @@ app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog
 
             // Show transaction
 
-            return openDialog('./commit-dialog', {
+            return openDialog('views/register/national-users/commit-dialog', {
                 className : 'ngdialog-theme-default wide',
                 resolve : {
                     user : _literal(user),

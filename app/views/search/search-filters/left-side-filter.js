@@ -244,7 +244,7 @@
                     }
 
                     //load dependant directive
-                    require(['views/forms/edit/document-selector'])
+                    require(['views/forms/edit/document-selector'], function(){})
                 }
             };
         }]);

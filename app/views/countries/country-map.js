@@ -4,7 +4,7 @@ define(['require', 'text!./country-map.html', 'app', 'lodash',  'libs/ammap3/amm
 'js/common', 'services/search-service', 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css',
 'components/scbd-angularjs-services/services/locale'], 
 function(require, template, app, _, ammap, worldEUHigh) {
-  'use strict';
+  ;
 
 
   app.directive('countryMap', ['$timeout', function($timeout) {

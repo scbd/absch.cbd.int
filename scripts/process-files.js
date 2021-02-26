@@ -84,6 +84,7 @@ async function processFiles() {
                     catch(e){
                         log.error(file, e)
                     }
+                    
                 });
 
     await Promise.all(tasks);

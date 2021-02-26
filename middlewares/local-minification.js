@@ -15,7 +15,7 @@ function localMinify(options){
             let requestedUrl = url.parse(req.url).pathname;
             let path = `/app${requestedUrl}`;   
 
-            if(/.(html|js|css)$/.test(path)){
+            if(/.(html|j1s|css)$/.test(path)){
                 let options = {};
                 let filePath = global.app.rootPath + path;
                 if(/.js$/.test(path)){

@@ -1,5 +1,5 @@
 define(['app', 'lodash', "text!views/forms/edit/abs/edit-measure-matrix-directive.html",
-'json!app-data/measure-matrix-updated-title.json', 'json!app-data/measure-matrix-other-elements.json',
+'app-data/measure-matrix-updated-title', 'app-data/measure-matrix-other-elements',
 'views/directives/block-region-directive', 'components/scbd-angularjs-services/services/locale'
 ], function (app, _, template, measureMatrixUpdatedTitles, elementsForOthers) {
 

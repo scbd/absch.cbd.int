@@ -602,7 +602,7 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/services/main', 'co
 
                 function loadOfflineFormatDetails(){
                     if(realm.is('BCH')){
-                        commonjs.loadJsonFile('/app/app-data/bch/offline-formats.json')
+                        commonjs.loadJsonFile('app-data/bch/offline-formats')
                         .then(function(data){
                             $scope.offlineFormats = data;
                             $timeout(function(){

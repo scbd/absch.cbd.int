@@ -1,5 +1,5 @@
-define(['app', 'text!views/search/search-directive.html','lodash', 'json!components/scbd-angularjs-services/filters/schema-name.json', 
-'json!app-data/search-tour.json','js/common','services/search-service','views/search/search-filters/keyword-filter',
+define(['app', 'text!views/search/search-directive.html','lodash', 'components/scbd-angularjs-services/filters/schema-name', 
+'app-data/search-tour','js/common','services/search-service','views/search/search-filters/keyword-filter',
 'views/search/search-filters/national-filter','views/search/search-filters/reference-filter','views/search/search-filters/scbd-filter',
 'views/search/search-filters/country-filter','views/search/search-filters/region-filter','views/search/search-filters/date-filter',
 'views/search/search-results/result-default','views/search/search-results/national-records-country','services/app-config-service',
@@ -508,7 +508,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
 
                     function focalPointTypes(){
-                        return loadJsonFile('/app/app-data/bch/focalpoint-category.json')
+                        return loadJsonFile('app-data/bch/focalpoint-category')
                                 .then(function(keywords){
                                     return _.map(keywords, function (title, key) {
                                         var keyword = { identifier:key };
@@ -520,7 +520,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
                     function loadJsonFile(filePath){
                         var deferred = $q.defer();                        
-                        require(['json!'+filePath], function(res){
+                        require([filePath], function(res){
                             deferred.resolve(res);
                         });
 
@@ -1019,9 +1019,9 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!compone
                     }
 
                     function loadleftMenuFieldMapping(){
-                        var file = 'views/search/search-filters/bch-left-menu-filters.json';
+                        var file = 'views/search/search-filters/bch-left-menu-filters';
                         if(isABS)
-                            file = 'views/search/search-filters/abs-left-menu-filters.json';
+                            file = 'views/search/search-filters/abs-left-menu-filters';
 
                         $q.when(loadJsonFile(file)).then(function(mapping){
                             leftMenuSchemaFieldMapping = mapping;

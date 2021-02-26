@@ -1,5 +1,5 @@
-define(['app', 'text!./km-info-tip.html', 'webui-popover'], function(app, template) {
-    'use strict';
+define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/km-info-tip.html', 'webui-popover'], function(app, template) {
+    ;
     app.directive('kmInfoTip', [function() {
         return {
             restrict: 'EA',

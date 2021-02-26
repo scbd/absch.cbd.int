@@ -1,5 +1,5 @@
 define(['app', "text!views/forms/view/view-capacity-building-initiative.directive.html",
-'views/directives/record-options', './directives/view-record-reference.directive'
+'views/directives/record-options', 'views/forms/view/directives/view-record-reference.directive'
 ], function (app, template) {
 
 app.directive("viewCapacityBuildingInitiative", [function () {

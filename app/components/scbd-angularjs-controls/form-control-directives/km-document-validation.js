@@ -1,5 +1,5 @@
-define(['app', 'text!./km-document-validation.html','jquery',
-'json!app-data/validation-errors.json'], function(app, template,$, messages) { 'use strict';
+define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/km-document-validation.html','jquery',
+'app-data/validation-errors'], function(app, template,$, messages) { ;
 
     //============================================================
     //

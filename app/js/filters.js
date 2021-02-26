@@ -1,4 +1,4 @@
-﻿define(["app", 'lodash', 'json!components/scbd-angularjs-services/filters/schema-name.json', 
+﻿define(["app", 'lodash', 'components/scbd-angularjs-services/filters/schema-name', 
 'js/common', 'services/app-config-service'], 
 function (app, _, scbdSchemas) {
 

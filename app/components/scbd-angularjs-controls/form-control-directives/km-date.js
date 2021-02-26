@@ -1,5 +1,5 @@
-define(['app', 'text!./km-date.html', 'bootstrap-datepicker'], function(app, template) {
-  'use strict';
+define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/km-date.html', 'bootstrap-datepicker'], function(app, template) {
+  ;
   //============================================================
   //
   //

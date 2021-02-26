@@ -1,4 +1,4 @@
-define(['require', 'app', 'angular', 'angular-route'], function(require, app, angular) { 'use strict';
+define(['require', 'app', 'angular', 'angular-route'], function(require, app, angular) { ;
 
    var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 

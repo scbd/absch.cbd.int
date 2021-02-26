@@ -1,5 +1,5 @@
-define(['app', 'angular', 'jquery', 'text!./km-link.html', 'lodash', './km-form-languages'], 
-function(app, angular, $, template,_) { 'use strict';
+define(['app', 'angular', 'jquery', 'text!components/scbd-angularjs-controls/form-control-directives/km-link.html', 'lodash', 'components/scbd-angularjs-controls/form-control-directives/km-form-languages'], 
+function(app, angular, $, template,_) { ;
 
 //============================================================
 //

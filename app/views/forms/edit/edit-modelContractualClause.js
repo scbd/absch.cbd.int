@@ -1,5 +1,5 @@
 define(['app', 'lodash', 'views/forms/edit/edit','views/forms/edit/edit-resource-schema-base-directive',
-        '../view/view-resource.directive'
+        '.views/forms/edit/view/view-resource.directive'
        ], function (app, _) {
 
   app.controller("editModelContractualClause", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",

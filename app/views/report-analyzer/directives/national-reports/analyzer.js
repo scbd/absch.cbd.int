@@ -1,7 +1,7 @@
 define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 'components/scbd-angularjs-services/filters/scbd-filters', 
 '../../filters/cases', 'components/scbd-angularjs-services/services/locale', 'views/directives/view-reference-document', 'components/scbd-angularjs-services/services/authentication',
 'views/report-analyzer/reportAnalyzerService'],
-function(templateHtml, app, _, require, $) { 'use strict';
+function(templateHtml, app, _, require, $) { ;
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
@@ -199,7 +199,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
                     
-                    require(['json!'+baseUrl+$scope.activeReport.questionsUrl], function(res){
+                    require([baseUrl+$scope.activeReport.questionsUrl], function(res){
 
                         res = reportAnalyzerService.flattenQuestions(res);
                         var selection = _($scope.selectedQuestions).reduce(mapReduce(), {});

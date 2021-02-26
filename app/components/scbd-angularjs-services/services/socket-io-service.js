@@ -1,4 +1,4 @@
-define(['app', 'socket.io', 'lodash', './authentication', './apiUrl', './utilities'], function (app, io, _) {
+define(['app', 'socket.io', 'lodash', 'components/scbd-angularjs-services/services/authentication', 'components/scbd-angularjs-services/services/apiUrl', 'components/scbd-angularjs-services/services/utilities'], function (app, io, _) {
 
     app.factory('socketioService', ['$rootScope', '$http', '$q', 'realm', "authentication", "apiUrl", 'realmService',
     function ($rootScope, $http, $q, realm, authentication, apiUrl, realmService) {

@@ -1,6 +1,6 @@
 define(['app', 'lodash', 'text!./lmo-decisions.html', 'angular-cookies','views/forms/view/bch/view-lmo-reference.directive',
 'angucomplete-alt','views/directives/block-region-directive', 'services/search-service', 'js/common', 'services/solr'], 
-function(app, _, template) { 'use strict';
+function(app, _, template) { ;
 
 app.directive("lmoDecisions", [ '$http', 'solr', '$cookies', 'searchService', 'commonjs', '$q',
 	function($http, solr, $cookies, searchService, commonjs, $q) {

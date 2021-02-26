@@ -1,4 +1,4 @@
-define(['app', 'lodash', './directives/edit-law.directive'], 
+define(['app', 'lodash', 'views/forms/edit/bch/directives/edit-law.directive'], 
 function (app, _) {
 
 	app.controller("editLawController", ["$scope", "$controller", function($scope, $controller) {

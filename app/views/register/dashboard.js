@@ -100,7 +100,7 @@ function(app, _, ng) {
             function init(){                      
                 loadFacets();
                 if($scope.isBch){
-                    commonjs.loadJsonFile('/app/app-data/bch/offline-formats.json')
+                    commonjs.loadJsonFile('app-data/bch/offline-formats')
                     .then(function(data){
                         $scope.offlineFormats = data;
                     })

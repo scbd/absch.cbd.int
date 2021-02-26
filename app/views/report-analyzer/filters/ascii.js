@@ -1,4 +1,4 @@
-define(['app', 'diacritics'], function(app, diacritics) { 'use strict';
+define(['app', 'diacritics'], function(app, diacritics) { ;
 
     app.filter("ascii", [function() {
     	return function(text) {

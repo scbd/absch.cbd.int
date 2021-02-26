@@ -1,0 +1,20 @@
+define(function () { 'use strict';
+
+    var measureMatrixUpdatedTitle = {
+    	"08B2CDEC-786F-4977-AD0A-6A709695528D": "Does the measure cover access?",
+    	"1E824A31-BDFB-4C47-9593-8006B5FC7D60": "Does it cover access to genetic resources?",
+    	"5427EB8F-5532-4AE2-88EE-5B9619917480": "Does it cover access to traditional knowledge associated with genetic resources?",
+    	"9AE45FB8-7788-4D26-B8E9-6B1647055519": "Does the measure provides for the issuance of a permit of its equivalent at the time of access for constituting an internationally recognized certificate of compliance (IRCC)?",
+    	"8FA89F2D-3D6B-46A2-93BC-8B157054D726": "Does the measure establish rules and procedures for mutually agreed terms(MAT)?",
+    	"9847FA8A-16C3-4466-A378-F20AF9FF883B": "Does the measure cover benefit-sharing?",
+    	"E3E5D8F1-F25C-49AA-89D2-FF8F8974CD63": "Does the measure cover compliance?",
+    	"F2E6038A-6E99-4BCE-9582-155B72CC7730": "Does it cover compliance with domestic legislation or regulatory requirements of the other Party (Article 15 and 16)?",
+    	"4C57FDB4-3B92-46DD-B4C2-BB93D3B2167C": "Does it cover issues related to monitoring the utilization of genetic resources (Article 17)?",
+    	"1FCC6CA9-022F-42FD-BD02-43AE674FEB56": "Does it cover compliance with mutually agreed terms (Article 18)?",
+    	"01DA2D8E-F2BB-4E85-A17E-AB0219194A17": "Does this measure include provisions on how its application relates to other international instruments?",
+    	"BE944E70-2098-45AC-891B-D5E94AFECB99": "Does this measure include any other relevant elements?"
+    };
+
+    return measureMatrixUpdatedTitle;
+
+});

@@ -1,5 +1,5 @@
 define(['app','components/scbd-angularjs-services/services/locale',
-    './record-loader.directive', 'services/search-service', 'services/solr'], function (app) {
+    'views/forms/view/record-loader.directive', 'services/search-service', 'services/solr'], function (app) {
 
     app.controller("recordsViewController", ['$scope', "$sce", "solr", "$timeout", "$filter", 
         "realm", 'searchService', 'ngMeta', 'locale',

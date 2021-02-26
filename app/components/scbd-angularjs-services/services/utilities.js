@@ -1,5 +1,5 @@
 define(['app', 'lodash', 'linqjs'], function(app, _, Enumerable) {
-    'use strict';
+    ;
 
     app.factory('Thesaurus', [function() {
         return {

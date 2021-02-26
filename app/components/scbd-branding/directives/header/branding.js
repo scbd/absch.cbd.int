@@ -1,7 +1,7 @@
 define(['app',
- 'text!./account.html',
+ 'text!components/scbd-branding/directives/header/account.html',
   'jquery',
-  'css!./account',
+  'css!components/scbd-branding/directives/header/account',
   'components/scbd-angularjs-services/services/authentication',
 ],
 function(app, template, $) {

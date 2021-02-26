@@ -1,7 +1,7 @@
-define(['text!./party-status.html',
+define(['text!views/directives/map/party-status.html',
   'app',
 ], function(template, app, _) {
-  'use strict';
+  ;
 
   app.directive('partyStatus', function() {
     return {

@@ -1,4 +1,4 @@
-'use strict';
+;
 
 var app = angular.module('AngularFormControls',
  ['scbdControls', 'ngTagsInput', 'ngCookies', 'ngLocalizer', 'scbdServices', 'scbdFilters']);

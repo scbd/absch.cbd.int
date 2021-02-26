@@ -1,4 +1,4 @@
-define(['app', 'lodash', './app-config-service'], function (app, _) { 'use strict';
+define(['app', 'lodash', './app-config-service'], function (app, _) { ;
 
 	app.factory('roleService',  ["$http","$location", "$rootScope", "realm",
 	 function($http,$location, $rootScope, realm) {

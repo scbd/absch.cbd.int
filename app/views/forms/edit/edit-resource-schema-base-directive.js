@@ -1,5 +1,5 @@
 define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directive.html','services/role-service',
-'./organization-selector'
+'views/forms/edit/organization-selector'
 ], function (app, _, template) {
 	app.directive('convertToNumber', function() {
 		return {

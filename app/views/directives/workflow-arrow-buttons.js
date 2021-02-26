@@ -873,7 +873,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'lodash',
 
                 function loadOfflineFormatDetails(){
                     if(realm.is('BCH')){
-                        commonjs.loadJsonFile('/app/app-data/bch/offline-formats.json')
+                        commonjs.loadJsonFile('app-data/bch/offline-formats')
                         .then(function(data){
                             $scope.offlineFormats = data;
                             $timeout(function(){

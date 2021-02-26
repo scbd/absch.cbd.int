@@ -1,4 +1,4 @@
-define(['text!./analyzer-section.html', 'app', './analyzer-question'], function(templateHtml, app) { 'use strict';
+define(['text!./analyzer-section.html', 'app', './analyzer-question'], function(templateHtml, app) { ;
 
     //==============================================
     //

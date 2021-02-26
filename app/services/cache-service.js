@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'angular-cache'], function(app, _) {  'use strict';
+define(['app', 'lodash', 'angular-cache'], function(app, _) {  ;
     
     app.factory('cacheService', ['CacheFactory', function(CacheFactory){
         return {

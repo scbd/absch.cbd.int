@@ -248,9 +248,9 @@
                 function groupFieldMappings(groupField){
                     var fieldMapping = [];
                     var groupFields = groupField.replace(/_s$/, '').split('_')
-                    groupFieldMapping = searchDirectiveCtrl.groupByFields();
+                    var groupFieldMapping = searchDirectiveCtrl.groupByFields();
                     _.forEach(groupFields, function(f){
-                        field = _.find(groupFieldMapping, {field:f})
+                        var field = _.find(groupFieldMapping, {field:f})
                         if(field)
                             fieldMapping.push(field);
                     })

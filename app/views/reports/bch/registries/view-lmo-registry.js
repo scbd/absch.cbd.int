@@ -1,4 +1,4 @@
-define(['app','css!/app/css/registry.css','services/search-service'], function(app) { 'use strict';
+define(['app','css!/app/css/registry.css','services/search-service'], function(app) { ;
 
 return ['$scope','searchService','$element', '$rootScope',
 function($scope,searchService,$element, $rootScope) { 

@@ -1,5 +1,5 @@
 ﻿define(['text!./result-view-options.html', 'app', 'lodash', 'ngDialog'], function (template, app, _) {
-    'use strict';
+    ;
 
     app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', function ($location, ngDialog, locale) {
         return {

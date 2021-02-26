@@ -1,4 +1,4 @@
-define(['app', 'lodash', './directives/edit-risk-assessment.directive'], 
+define(['app', 'lodash', 'views/forms/edit/bch/directives/edit-risk-assessment.directive'], 
 function (app, _) {
 
 	app.controller("editRiskAssessmentController", ["$scope", "$controller", function($scope, $controller) {

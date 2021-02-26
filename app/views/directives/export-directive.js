@@ -156,7 +156,7 @@ define(['app','text!views/directives/export-directive.html', 'lodash',
                                                         
                                                     }
                                                     
-                                                    require(['json!./views/directives/field-list.json'], function(data){
+                                                    require(['views/directives/field-list'], function(data){
                                                         var fields = ((data||{}).fields||{}).split(',')
                                                         $timeout(function(){
                                                             $scope.fields = _.union($scope.fields, _.map(fields, function(field){

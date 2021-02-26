@@ -1,4 +1,4 @@
-define(['app', './common-routes', 'angular-route'], function (app,commonRoutes) { 'use strict';
+define(['app', './common-routes', 'angular-route'], function (app,commonRoutes) { ;
 
     app.config(['$routeProvider', function ($routeProvider) {
                

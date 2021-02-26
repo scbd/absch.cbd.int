@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'text!./edit-authority.directive.html', 'services/search-service', 'views/forms/edit/edit', 'js/common',
+define(['app', 'lodash', 'text!views/forms/edit/directives/edit-authority.directive.html', 'services/search-service', 'views/forms/edit/edit', 'js/common',
 'views/forms/edit/document-selector', 'views/forms/edit/warning-message-cna', 'views/forms/view/view-authority.directive',
 'services/thesaurus-service'], 
 function (app, _, template) {

@@ -1,4 +1,4 @@
-define(['app', 'angular','lodash', 'jquery', 'text!./km-reference.html','angular-sanitize'], function(app, angular, _, $, template) { 'use strict';
+define(['app', 'angular','lodash', 'jquery', 'text!components/scbd-angularjs-controls/form-control-directives/km-reference.html','angular-sanitize'], function(app, angular, _, $, template) { ;
     //============================================================
     //
     //

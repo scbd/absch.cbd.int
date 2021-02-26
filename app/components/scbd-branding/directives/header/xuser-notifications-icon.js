@@ -1,5 +1,5 @@
-define(['app','text!./xuser-notifications-icon.html','css!./xuser-notifications-icon',
-        'components/scbd-angularjs-services/services/user-notifications','./xuser-notifications'],
+define(['app','text!components/scbd-branding/directives/header/xuser-notifications-icon.html','css!components/scbd-branding/directives/header/xuser-notifications-icon',
+        'components/scbd-angularjs-services/services/user-notifications','components/scbd-branding/directives/header/xuser-notifications'],
 function(app,template) {
     app.directive('xuserNotificationsIcon', function() {
         return {

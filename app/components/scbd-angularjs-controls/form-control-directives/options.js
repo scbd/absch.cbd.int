@@ -1,4 +1,4 @@
-define(['app', 'text!./options.html','jquery','angular-localizer'], function(app, template,$) { 'use strict';
+define(['app', 'text!components/scbd-angularjs-controls/form-control-directives/options.html','jquery','angular-localizer'], function(app, template,$) { ;
 app.directive('afcOptions', function() {
 				return {
 						restrict: 'AEC',

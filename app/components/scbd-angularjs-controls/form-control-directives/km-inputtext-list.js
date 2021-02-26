@@ -1,4 +1,4 @@
-﻿define(['app','text!./km-inputtext-list.html','angular'], function(app,template,angular) {
+﻿define(['app','text!components/scbd-angularjs-controls/form-control-directives/km-inputtext-list.html','angular'], function(app,template,angular) {
 	//============================================================
 	//
 	//

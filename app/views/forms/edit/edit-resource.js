@@ -1,5 +1,5 @@
 define(['app', 'lodash', 'views/forms/edit/edit','views/forms/edit/edit-resource-schema-base-directive',
-        '../view/view-resource.directive'], function (app, _) {
+        '.views/forms/edit/view/view-resource.directive'], function (app, _) {
 
   app.controller("editResource", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
                 function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller, storage, $location) {

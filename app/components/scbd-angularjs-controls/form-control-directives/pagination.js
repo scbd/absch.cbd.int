@@ -1,5 +1,5 @@
-﻿define(['text!./pagination.html', 'app'], function (template, app) {
-    'use strict';
+﻿define(['text!components/scbd-angularjs-controls/form-control-directives/pagination.html', 'app'], function (template, app) {
+    ;
 
     app.directive('pagination', ['$location', function ($location) {
         return {

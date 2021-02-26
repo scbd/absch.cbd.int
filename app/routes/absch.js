@@ -1,4 +1,4 @@
-define(['app', './common-routes'], function (app, commonRoutes) { 'use strict';
+define(['app', './common-routes'], function (app, commonRoutes) { ;
 
     app.value("showHelp", { value : false });
 

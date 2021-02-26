@@ -1,4 +1,4 @@
-define(['app', 'angular-cookies'], function(app) { 'use strict';
+define(['app', 'angular-cookies'], function(app) { ;
 
     var urlLangRegex       = /^\/(en|ar|fr|es|ru|zh)(\/|$)/;
     app.provider('locale', [function() {

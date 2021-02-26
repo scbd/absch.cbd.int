@@ -1,6 +1,6 @@
 define(['app',
- 'text!./footer.html',
-  'css!./footer',
+ 'text!components/scbd-branding/directives/footer.html',
+  'css!components/scbd-branding/directives/footer',
 ],
 function(app, template, $) {
      app.directive('scbdFooter', function() {

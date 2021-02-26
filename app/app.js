@@ -1,5 +1,5 @@
 define(['angular-flex', 'angular-animate', 'angular-sanitize', 'angular-loggly-logger', 'angular-joyride', 'ngMeta'],
-    function(angular) { 'use strict';
+    function(angular) { ;
 
         var app = angular.module('app', angular.defineModules([
             'ngAnimate', 'ngSanitize', 'ngRoute', 'ngCookies', 'chieffancypants.loadingBar', 'toastr',

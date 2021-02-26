@@ -1,4 +1,4 @@
-﻿define(['app', 'lodash'], function(app, _) { 'use strict';
+﻿define(['app', 'lodash'], function(app, _) { ;
 
 app.factory('solr', [function() {
 

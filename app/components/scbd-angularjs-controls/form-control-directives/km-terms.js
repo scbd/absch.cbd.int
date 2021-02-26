@@ -1,4 +1,4 @@
-define(['app','lodash','angular','text!./km-terms.html'], function(app,_,angular,template) {
+define(['app','lodash','angular','text!components/scbd-angularjs-controls/form-control-directives/km-terms.html'], function(app,_,angular,template) {
 
 	    //============================================================
 	    //

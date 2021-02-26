@@ -1,3 +1,3 @@
 define([
-	'./scbd-filters'
-], {});
+	'components/scbd-angularjs-services/filters/scbd-filters'
+], function(){});

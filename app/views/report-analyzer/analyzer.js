@@ -1,4 +1,4 @@
-define(['./directives/national-reports/questions-selector', './directives/national-reports/analyzer'], function() { 'use strict';
+define(['./directives/national-reports/questions-selector', './directives/national-reports/analyzer'], function() { ;
 
     return ['$scope', '$location', 'realm', '$timeout',
      function($scope, $location, realm, $timeout) {
@@ -6,7 +6,7 @@ define(['./directives/national-reports/questions-selector', './directives/nation
         var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
         $scope.showAnalyzer = false;
         $scope.self = $scope;
-        require(['json!'+baseUrl+'app-data/report-analyzer-mapping.json'], function(res){
+        require([baseUrl+'app-data/report-analyzer-mapping'], function(res){
             var appName = realm.value.replace(/-.*/,'').toLowerCase();
             
             $scope.reportData = res[appName];

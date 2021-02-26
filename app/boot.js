@@ -1,5 +1,4 @@
-﻿'use strict';
-
+﻿
 if(/Safari/.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)) { console.log = function(){}; }
 var cdnHost = 'https://cdn.cbd.int/';
 var nameToUrl = require.s.contexts._.nameToUrl;
@@ -129,6 +128,15 @@ require.config({
 require.s.contexts._.nameToUrl = function (moduleName, ext, skipExt) {
 
     var url = nameToUrl(moduleName, ext, skipExt);
+    // console.log(window.hashUrlsMapping, url);
+    if(window.hashUrlsMapping){
+        var hashUrl = url.replace('/app/', '');
+        var hashFileName = window.hashUrlsMapping[hashUrl];
+        if(hashFileName){
+            var replaceName = hashFileName.replace(/\.[a-z0-9]+\.(js|html|html\.js|json)$/, '.$1')
+            url = url.replace(replaceName, hashFileName)
+        }
+    }
     if(/^\//.test(url) && (url.indexOf('.html')>0 || url.indexOf('.json')>0)) {
             url = '/'+window.scbdApp.lang + url;
     }
@@ -158,5 +166,13 @@ define('Vue', ['https://cdn.cbd.int/vue@2.6.12/dist/vue', cdnHost +'vue-i18n@8.2
     return Vue;
 })
 
+define('realmConf', [`json!/api/v2018/realm-configurations/${(window.scbdApp.host||'')}`], function(realmConf){
+    return realmConf;
+})
+
 if(window.scbdApp.template)
-    require([window.scbdApp.template])
+    require(['hash-file-mapping'], function(hashMapping){
+        // console.log(jsd)
+        window.hashUrlsMapping = hashMapping
+        require([window.scbdApp.template], function(){})
+    })

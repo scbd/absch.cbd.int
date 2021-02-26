@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-database.directive'], function (app, _) {
+define(['app', 'lodash', 'views/forms/edit/edit', '.views/forms/edit/view/view-database.directive'], function (app, _) {
 
   app.controller("editDatabase", ["$scope", "$http", "$filter", "$controller", "$location", function ($scope, $http, $filter, $controller,$location) {
     $controller('editController', {$scope: $scope});

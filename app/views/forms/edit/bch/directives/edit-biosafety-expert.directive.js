@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'text!./edit-biosafety-expert.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
+define(['app', 'lodash', 'text!views/forms/edit/bch/directives/edit-biosafety-expert.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-expert.directive", 'services/search-service',
 	'components/scbd-angularjs-controls/form-control-directives/km-inputtext-ac.html', 'services/solr'], 
 function (app, _, template) {

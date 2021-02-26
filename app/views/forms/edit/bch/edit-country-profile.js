@@ -1,4 +1,4 @@
-define(['app',  './directives/edit-country-profile.directive' ], 
+define(['app',  'views/forms/edit/bch/directives/edit-country-profile.directive' ], 
 function (app, _) {
 	app.controller("editCountryProfileController", ["$scope",   "$controller",
 	function($scope,  $controller,  IStorage, $routeParams, ngDialog,searchService) {

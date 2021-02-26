@@ -1,4 +1,4 @@
-﻿define(['app', 'lodash', 'text!./traits-selector.directive.html'], function (app, _, template) {
+﻿define(['app', 'lodash', 'text!views/forms/directives/traits-selector.directive.html'], function (app, _, template) {
 
     app.directive('traitsSelector', ["thesaurusService", "$q", function (thesaurusService, $q) {
         return {

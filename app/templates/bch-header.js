@@ -1,4 +1,4 @@
-define(['app', 'text!./bch-header.html','lodash', 'ng-breadcrumbs', 'js/common', 'components/scbd-angularjs-services/services/locale','components/scbd-angularjs-controls/form-control-directives/hover-effect'], function (app, html, _) { 'use strict';
+define(['app', 'text!./bch-header.html','lodash', 'ng-breadcrumbs', 'js/common', 'components/scbd-angularjs-services/services/locale','components/scbd-angularjs-controls/form-control-directives/hover-effect'], function (app, html, _) { ;
 
     app.directive('bchHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q',  function (locale, $location, breadcrumbs, commonjs, $q) {
         return {

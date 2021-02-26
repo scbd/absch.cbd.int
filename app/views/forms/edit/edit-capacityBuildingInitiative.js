@@ -1,5 +1,5 @@
-define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-capacity-building-initiative.directive',
-'./organization-selector','services/thesaurus-service'], function (app, _) {
+define(['app', 'lodash', 'views/forms/edit/edit', '.views/forms/edit/view/view-capacity-building-initiative.directive',
+'views/forms/edit/organization-selector','services/thesaurus-service'], function (app, _) {
 
     app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "realm","thesaurusService", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, realm, thesaurusService) {
 

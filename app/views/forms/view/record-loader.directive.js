@@ -1,7 +1,7 @@
 ﻿define(['app', 'lodash', 'text!views/forms/view/record-loader.directive.html', 
 	'components/scbd-angularjs-services/services/main', 'ngSmoothScroll',
 	'components/scbd-angularjs-services/filters/scbd-filters',
-	'./view-history-directive',
+	'views/forms/view/view-history-directive',
     'js/common',
     'views/directives/document-metadata-directive',
     'views/directives/party-status',
@@ -438,7 +438,7 @@
 					var queryString = $location.search();
 					if(queryString && queryString.print){
 						$scope.printMode = true;
-						require(['css!/app/css/print-friendly'])
+						require(['css!/app/css/print-friendly'], function(){})
 					}
 				}]
 		}

@@ -1,4 +1,4 @@
-define(['app','lodash', 'css!/app/css/registry.css','services/search-service'], function(app, _) { 'use strict';
+define(['app','lodash', 'css!/app/css/registry.css','services/search-service'], function(app, _) { ;
 
 return ['$scope','searchService','$element', '$rootScope',
 function($scope,searchService,$element, $rootScope) {  

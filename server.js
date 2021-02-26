@@ -40,14 +40,14 @@ if(process.env.COMPRESS=='true'){
     }
 }
 
-// app.use(require('./middlewares/local-minification')());
+// app.use(require('./middlewares/local-minification')());localTransformAndMinify(),
 const localTransformAndMinify = require('./middlewares/local-minification');
 // Set routes
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: cacheControl.setCustomCacheControl}) );
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
 
-app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          express.static(__dirname + '/dist/vue', { setHeaders: cacheControl.setCustomCacheControl }));
-app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          translation.renderLanguageFile, localTransformAndMinify(), express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          express.static(__dirname + '/dist', { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          translation.renderLanguageFile,  express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
 
 app.use('/sourceMap/app',                            express.static(__dirname + '/dist'));
 app.use('/sourceMap/app',                            express.static(__dirname + '/sourceMap/app'));

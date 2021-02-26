@@ -1,4 +1,4 @@
-﻿define(['app','text!./search-content.html', 'lunr', 'jquery-highlight'], function(app, template, lunr){
+﻿define(['app','text!views/about/search-content.html', 'lunr', 'jquery-highlight'], function(app, template, lunr){
 
     app.directive("searchContent", function(){
       return {

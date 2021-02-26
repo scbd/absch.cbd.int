@@ -1,5 +1,5 @@
 define(['app', 'lodash', 'css!/app/css/registry.css', 'services/search-service', 'js/common', 'services/solr',
-		'./index'], function(app, _) { 'use strict';
+		'views/reports/bch/registries/index'], function(app, _) { ;
 
 	return ['$scope', 'searchService', 'toastr', '$log', 'solr',
 			function ($scope, searchService, toastr, $log, solr) {

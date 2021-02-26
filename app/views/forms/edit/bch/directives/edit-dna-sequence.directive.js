@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'text!./edit-dna-sequence.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
+define(['app', 'lodash', 'text!views/forms/edit/bch/directives/edit-dna-sequence.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-dna-sequence.directive", 'views/forms/directives/traits-selector.directive'], 
 function (app, _, template) {
 

@@ -1,4 +1,4 @@
-define(['app','lodash','views/forms/edit/edit', '../view/view-capacity-building-resource.directive'], function (app,_) {
+define(['app','lodash','views/forms/edit/edit', '.views/forms/edit/view/view-capacity-building-resource.directive'], function (app,_) {
 
   app.controller("editCapacityBuildingResource", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, thesaurus, Enumerable) {
 

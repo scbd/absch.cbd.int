@@ -1,4 +1,4 @@
-﻿define(['app','lodash', 'json!app-data/help-videos.json', './youtube', 'ngDialog',], function (app, _, videosData) {
+﻿define(['app','lodash', 'app-data/help-videos', 'views/about/youtube', 'ngDialog',], function (app, _, videosData) {
 app.controller("videosController",
         ["$rootScope", "$scope", "$q", '$element', '$route', 'ngDialog', function ($rootScope, $scope, $q, $element, $route, ngDialog) {
 

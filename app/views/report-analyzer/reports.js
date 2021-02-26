@@ -1,5 +1,5 @@
 ﻿define(['lodash', 'moment', 'views/report-analyzer/directives/national-reports/questions-selector'], function (_, moment) {
-    'use strict';
+    ;
     
     return ['$scope', '$location', 'commonjs', '$q', '$http', 'realm',
     function($scope, $location, commonjs, $q, $http, realm) {
@@ -35,7 +35,7 @@
             // $scope.regionMapping = {};
             
 
-            require(['json!'+baseUrl+'app-data/report-analyzer-mapping.json'], function(res){
+            require([baseUrl+'app-data/report-analyzer-mapping'], function(res){
                 var appName = realm.value.replace(/-.*/,'').toLowerCase();
                 
                 $scope.reportData = res[appName];

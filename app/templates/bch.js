@@ -4,7 +4,7 @@ define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
         'components/scbd-branding/directives/footer','angular-loggly-logger',
         'components/scbd-angularjs-services/services/locale', 'views/directives/route-loading-directive',
         'services/local-storage-service', 'services/app-config-service'], 
-function (app, angular, footerHtml) { 'use strict';
+function (app, angular, footerHtml) { ;
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
 
@@ -45,11 +45,11 @@ function (app, angular, footerHtml) { 'use strict';
                 lang = 'zh-cn'; //moment has two ZH, use ZH-CN
             moment.locale(lang);
             if (lang != 'en')
-                require(['css!/app/css/translation.css']);
+                require(['css!/app/css/translation.css'], function(){});
             if (lang == 'ar') {
                 require(['css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-flipped.min.css',
                 'css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-rtl.min.css',
-                ]);
+                ], function(){});
             }
 
             var basePath = (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
