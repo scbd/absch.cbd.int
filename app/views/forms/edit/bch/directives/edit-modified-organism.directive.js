@@ -36,7 +36,58 @@ import 'views/forms/directives/view-terms-hierarchy';
 					techniqueUsed	: thesaurusService.getDomainTerms('techniqueUsed', 		{other:true, otherType:'lstring', multiple:true}),
 					commonUses 		: thesaurusService.getDomainTerms('OrganismCommonUses', {other:true, otherType:'lstring', multiple:true})			
 				});
-				
+
+				$scope.onContactQuery = function(searchText, tab){
+
+					var queryOptions = {
+						schemas	  : ['contact'],
+						contactType: 'person',
+						searchText: searchText
+					}
+					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+						queryOptions.government = $scope.document.government.identifier;
+					}
+
+					if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
+						queryOptions.identifier = $scope.document.header.identifier;
+					}
+
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
+
+				$scope.onRrecipientOrganismsQuery = function(searchText, tab){
+
+					var queryOptions = {
+						schemas	  : ['organism', 'modifiedOrganism'],
+						searchText: searchText
+					}
+					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+						queryOptions.government = $scope.document.government.identifier;
+					}
+
+					if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
+						queryOptions.identifier = $scope.document.header.identifier;
+					}
+
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
+
+				$scope.onBuildQuery = function(searchText, schemasVal){
+
+					var queryOptions = {
+						schemas	  : [schemasVal],
+						searchText: searchText
+					}
+					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+						queryOptions.government = $scope.document.government.identifier;
+					}
+
+					if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
+						queryOptions.identifier = $scope.document.header.identifier;
+					}
+
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
 				//==================================
 				//
 				//==================================
