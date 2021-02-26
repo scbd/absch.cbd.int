@@ -33,8 +33,43 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
                     .then(function(types){ return _.filter(types, function(type){return type.identifier!='B3699A74-EF2E-467A-A82F-EF2149A2EFC5'}); }) },
                 cpbThematicAreas   : function() { return thesaurusService.getDomainTerms('cbdSubjects') },
                 geographicRegions  : function() { return thesaurusService.getDomainTerms('regions', {other:true}) }
-            });           
-            
+            });
+
+
+            $scope.onBuildQuery = function(searchText, tab){
+
+                var queryOptions = {
+                    schemas	  : ['organization'],
+                    searchText: searchText
+                }
+                if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+                    queryOptions.government = $scope.document.government.identifier;
+                }
+
+                if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
+                    queryOptions.identifier = $scope.document.header.identifier;
+                }
+
+                return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
+            $scope.onContactQuery = function(searchText, tab){
+
+                var queryOptions = {
+                    schemas	  : ['contact'],
+                    contactType: 'person',
+                    searchText: searchText
+                }
+                if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+                    queryOptions.government = $scope.document.government.identifier;
+                }
+
+                if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
+                    queryOptions.identifier = $scope.document.header.identifier;
+                }
+
+                return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
+
             //==================================
             //
             //==================================
