@@ -1,4 +1,4 @@
-define(['app', 'text!./km-control-group.html', 'jquery','lodash', 'components/scbd-angularjs-controls/form-control-directives/km-info-tip'], function(app, template,$, _) { ;
+define(['app', 'text!./km-control-group.html', 'jquery','lodash', './km-info-tip'], function(app, template,$, _) { ;
 
 	app.directive('kmControlGroup', [function ()
 	{

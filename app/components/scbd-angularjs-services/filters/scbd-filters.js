@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'moment', 'components/scbd-angularjs-services/filters/schema-name', 'components/scbd-angularjs-services/services/locale','services/cache-service'], 
+define(['app', 'lodash', 'moment', './schema-name', '../services/locale','services/cache-service'], 
 function (app, _, moment, scbdSchemaDetails) {
     
   app.directive("translationUrl", ['$browser', function($browser){

@@ -1,3 +1,30 @@
-define([], function(){
+define(['app',
+    './directives/footer',
+    './directives/xuser-notifications-panel',
+    // './directives/header/account.css',
+    './directives/header/branding.html',
+    // './directives/header/locale.css',
+    './directives/header/login.js',
+    // './directives/header/xuser-notifications.css',
+    './directives/header/account.html',
+    './directives/header/branding.js',
+    './directives/header/locale.html',
+    './directives/header/xuser-notification-config-service.js',
+    './directives/header/xuser-notifications.html',
+    './directives/header/account.js',
+    // './directives/header/header.css',
+    './directives/header/locale.js',
+    // './directives/header/xuser-notifications-icon.css',
+    './directives/header/xuser-notifications.js',
+    './directives/header/accounts-validation.html',
+    './directives/header/header.html',
+    // './directives/header/login.css',
+    './directives/header/xuser-notifications-icon.html',
+    './directives/header/accounts-validation.js',
+    './directives/header/header.js',
+    './directives/header/login.html',
+    './directives/header/xuser-notifications-icon.js',
+
+], function(){
     return null;
 });

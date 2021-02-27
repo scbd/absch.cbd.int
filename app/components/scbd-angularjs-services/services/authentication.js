@@ -1,4 +1,4 @@
-define(['app', 'components/scbd-angularjs-services/services/apiUrl'], function(app) {
+define(['app', './apiUrl'], function(app) {
     var ACCOUNTS_URL = (function(){
 
         var domainRegex = /(?:.*\.)?([a-z]+\.[a-z]+)/;
