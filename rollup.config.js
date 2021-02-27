@@ -85,7 +85,7 @@ function bundle(relativePath, baseDir='app') {
         ] 
       }), 
       amd({ include: 'app/**/*.js', exclude:['app/boot.js']}),
-      removeLineFeeds(),     
+      sanitizeString(),     
       json({namedExports:false}),  
       string({
         include: "**/*.html", 
@@ -129,7 +129,7 @@ function saveHashFileNames(){
 }
 
 
-function removeLineFeeds(options){
+function sanitizeString(options){
 
     if ( options === void 0 ) options = {};
 
@@ -138,23 +138,38 @@ function removeLineFeeds(options){
 
       // eslint-disable-next-line no-shadow
       transform: function(text, id) {
-        
-        if (id.slice(-5) !== '.json') { 
-          return null; 
+
+        if (id.slice(-5) == '.html') { 
+          try{
+              return {
+                        code: text.replace(/^\uFEFF/gm, "").replace(/^\u00BB\u00BF/gm,""),
+                        map: { mappings: '' }
+                    };
+          }
+          catch (err) {
+            var message = 'Failed to remove bom chars from html string';
+            var position = parseInt(/[\d]/.exec(err.message)[0], 10);
+            this.warn({ message: message, id: id, position: position });
+            return null;
+          }
         }
-        try {
-          const data = {
-              code: text.replace(/\s(?=(?:"[^"]*"|[^"])*$)/g, ''),
-              map: { mappings: '' }
-          };
-              
-          return data;
-        } catch (err) {
-          var message = 'Failed to remove line feed';
-          var position = parseInt(/[\d]/.exec(err.message)[0], 10);
-          this.warn({ message: message, id: id, position: position });
-          return null;
+        else if (id.slice(-5) == '.json') {             
+          try {
+            const data = {
+                code: text.replace(/\s(?=(?:"[^"]*"|[^"])*$)/g, ''),
+                map: { mappings: '' }
+            };
+                
+            return data;
+          } catch (err) {
+            var message = 'Failed to remove line feed';
+            var position = parseInt(/[\d]/.exec(err.message)[0], 10);
+            this.warn({ message: message, id: id, position: position });
+            return null;
+          }
         }
+
+        return null; 
       }
     };
 }
