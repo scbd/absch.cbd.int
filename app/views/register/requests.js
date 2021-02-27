@@ -2,11 +2,10 @@ define(['app',
 'lodash',
 'js/common',  
 'moment', 
-'components/scbd-angularjs-controls/form-control-directives/all-controls',
+'components/scbd-angularjs-controls/main',
 'views/register/directives/register-top-menu', 
 'services/role-service',
 'views/directives/task-id-directive',
-'components/scbd-angularjs-controls/form-control-directives/pagination',
 'components/scbd-angularjs-services/services/locale',
 'views/forms/view/record-loader.directive'], function (app, _) {
 

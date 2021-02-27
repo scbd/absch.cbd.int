@@ -1,5 +1,5 @@
 define(['app','lodash', "text!./view-record-reference.directive.html", 
-'components/scbd-angularjs-services/services/main'], function (app, _, template) {
+'components/scbd-angularjs-services/main'], function (app, _, template) {
 
 app.directive("viewRecordReference", ["IStorage", '$timeout', function (storage, $timeout) {
 	return {

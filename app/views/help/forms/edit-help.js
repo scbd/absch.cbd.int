@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'ngMaterial', 'ngAria', 'angular-animate', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
+define(['app', 'lodash', 'ngMaterial', 'ngAria', 'angular-animate', 'components/scbd-angularjs-services/main', 'components/scbd-angularjs-controls/main',
 	'/app/js/common'], function (app, _) {
 		app.controller("editHelpController",
 			["$routeParams", "$scope", "$rootScope", "$q", '$http',  '$location', 'commonjs', '$mdDialog',

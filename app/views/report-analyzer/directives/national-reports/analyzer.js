@@ -1,4 +1,4 @@
-define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 'components/scbd-angularjs-services/filters/scbd-filters', 
+define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 'components/scbd-angularjs-services/main', 
 '../../filters/cases', 'components/scbd-angularjs-services/services/locale', 'views/directives/view-reference-document', 'components/scbd-angularjs-services/services/authentication',
 'views/report-analyzer/reportAnalyzerService'],
 function(templateHtml, app, _, require, $) { ;

@@ -3,7 +3,7 @@ define(['app','lodash',
   'components/scbd-angularjs-services/services/locale',
   'services/articles-service',
   'ng-breadcrumbs',
-  'components/scbd-angularjs-controls/form-control-directives/pagination'
+  'components/scbd-angularjs-controls/main'
 ], function(app, _) {
 
   app.controller("viewArticles",

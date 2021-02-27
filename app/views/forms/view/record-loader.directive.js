@@ -1,6 +1,5 @@
 ﻿define(['app', 'lodash', 'text!./record-loader.directive.html', 
-	'components/scbd-angularjs-services/services/main', 'ngSmoothScroll',
-	'components/scbd-angularjs-services/filters/scbd-filters',
+	'components/scbd-angularjs-services/main', 'ngSmoothScroll',
 	'views/forms/view/view-history-directive',
     'js/common',
     'views/directives/document-metadata-directive',
@@ -9,9 +8,7 @@
 	'services/search-service',
 	'views/directives/block-region-directive',
 	'views/directives/record-options','components/scbd-angularjs-services/services/locale',
-	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/form-control-directives/km-value-ml',
-	'components/scbd-angularjs-controls/form-control-directives/km-link-list',
-	'components/scbd-angularjs-controls/form-control-directives/km-value-bool',
+	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/main',
 	'views/forms/view/directives/view-reference-records.directive', 'views/forms/directives/compare-val'
 ], function (app, _, template) {
 

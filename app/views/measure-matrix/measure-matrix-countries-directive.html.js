@@ -1,5 +1,5 @@
 define(['app', "text!./measure-matrix-countries-directive.html",
-        'lodash','components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
+        'lodash','components/scbd-angularjs-services/main', 'components/scbd-angularjs-controls/main',
         'views/measure-matrix/measure-matrix-elements-derective',
         'views/forms/view/record-loader.directive'], function(app, template, _) {
 

@@ -1,10 +1,10 @@
 ﻿define(['app', 'lodash',
     'js/common',
-    'components/scbd-angularjs-services/filters/scbd-filters',
+    'components/scbd-angularjs-services/main',
     'services/search-service',
     'views/directives/block-region-directive',
     'components/scbd-angularjs-services/services/locale',
-    'components/scbd-angularjs-controls/form-control-directives/km-select'
+    'components/scbd-angularjs-controls/main'
 ], function (app, _) {
 
     app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$sce', 

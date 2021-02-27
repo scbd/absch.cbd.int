@@ -1,4 +1,4 @@
-define(['text!./terms-dialog.html', 'app', 'lodash', '../../filters/ascii', 'components/scbd-angularjs-services/filters/scbd-filters', './tree-selector'], function(templateHtml, app, _) {
+define(['text!./terms-dialog.html', 'app', 'lodash', '../../filters/ascii', 'components/scbd-angularjs-services/main', './tree-selector'], function(templateHtml, app, _) {
 
     //==============================================
     //

@@ -1,5 +1,5 @@
-define(['app', 'lodash', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'js/common', 'js/filters',
-    'services/search-service', 'services/role-service','components/scbd-angularjs-controls/form-control-directives/all-controls',
+define(['app', 'lodash', 'components/scbd-angularjs-services/main', 'js/common', 'js/filters',
+    'services/search-service', 'services/role-service','components/scbd-angularjs-controls/main',
     'views/register/directives/register-top-menu', 'views/directives/block-region-directive',
 	'views/forms/edit/editFormUtility', 
     'services/local-storage-service', 'ngDialog', 'services/app-config-service', 'services/solr'

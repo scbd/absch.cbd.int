@@ -1,5 +1,5 @@
 define(['app','lodash', "text!./view-biosafety-decision.directive.html", 	'views/directives/record-options',
-	'components/scbd-angularjs-controls/form-control-directives/km-value-bool'
+	'components/scbd-angularjs-controls/main'
 ], function (app, _, template) {
 
 app.directive("viewBiosafetyDecision", [function () {

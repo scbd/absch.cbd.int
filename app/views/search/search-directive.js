@@ -5,10 +5,10 @@ define(['app', 'text!./search-directive.html','lodash', 'components/scbd-angular
 'views/search/search-results/result-default','views/search/search-results/national-records-country','services/app-config-service',
 'ngDialog','views/register/user-preferences/user-alerts','views/directives/export-directive','services/thesaurus-service', 'angular-animate', 
 'angular-joyride','components/scbd-angularjs-services/services/locale',
-'components/scbd-angularjs-controls/form-control-directives/pagination',
+'components/scbd-angularjs-controls/main',
 'views/search/directives/result-view-options', 'views/search/search-filters/left-side-filter',
 'views/search/search-results/list-view','views/search/search-results/group-view', 
-'components/scbd-angularjs-controls/form-control-directives/km-date-range', 'services/solr', 'toastr',
+'services/solr', 'toastr',
 'views/reports/matrix/data-matrix.directive'
 ], function(app, template, _, scbdSchemas, joyRideText) {
 

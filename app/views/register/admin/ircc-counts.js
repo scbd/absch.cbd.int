@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'components/scbd-angularjs-services/services/main',
+define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-controls/main',
     'views/register/directives/register-top-menu','chart-js',
     'services/search-service','services/app-config-service', 'services/solr'
 ], function (app, _) {

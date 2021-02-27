@@ -1,4 +1,4 @@
-define(['app','lodash','ngMaterial','ngAria','angular-animate','components/scbd-angularjs-services/services/main','components/scbd-angularjs-services/filters/scbd-filters','components/scbd-angularjs-controls/form-control-directives/all-controls'], function (app, _) {
+define(['app','lodash','ngMaterial','ngAria','angular-animate','components/scbd-angularjs-services/main','components/scbd-angularjs-controls/main'], function (app, _) {
 
 app.controller("glossaryController",
 	["$rootScope", "$scope", "$q", "$timeout",'$http', '$element', function ($rootScope, $scope, $q, $timeout, $http, $element) {	

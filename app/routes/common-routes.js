@@ -1,7 +1,6 @@
 ﻿define(['require', 'app', 'lodash', 'angular-route', 
 'services/app-config-service', 'js/services', 'js/filters',
-'components/scbd-angularjs-services/filters/scbd-filters', 
-'components/scbd-angularjs-services/services/main'], function (require, app, _) { ;
+'components/scbd-angularjs-services/main'], function (require, app, _) { ;
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
     var lang    = window.scbdApp.lang;

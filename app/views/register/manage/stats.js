@@ -1,5 +1,5 @@
 define(['app', 'lodash', 'chart-js', 'components/scbd-angularjs-services/services/generic-service', 'js/common', 'moment',
-    'views/register/directives/register-top-menu', 'services/search-service', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'services/app-config-service',
+    'views/register/directives/register-top-menu', 'services/search-service', 'components/scbd-angularjs-controls/main', 'services/app-config-service',
     'components/scbd-angularjs-services/services/storage', 'services/solr'
     ], function (app, _) {
 

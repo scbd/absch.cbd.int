@@ -2,7 +2,7 @@ define(['app','lodash',
   'components/scbd-angularjs-services/services/locale',
   'views/about/article-search.directive',
   'views/about/article-guides.directive',
-  'components/scbd-angularjs-services/filters/scbd-filters',
+  'components/scbd-angularjs-services/main',
   'services/articles-service',
   'ng-breadcrumbs',
 ], function(app, _) {

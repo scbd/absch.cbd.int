@@ -1,6 +1,6 @@
 define(['app', 'lodash', 'text!./edit-biosafety-expert.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-expert.directive", 'services/search-service',
-	'components/scbd-angularjs-controls/form-control-directives/km-inputtext-ac.html', 'services/solr'], 
+	'components/scbd-angularjs-controls/main', 'services/solr'], 
 function (app, _, template) {
 
 	app.directive("editBiosafetyExpert", ["locale", "$filter", "searchService", "$q", "$controller", "thesaurusService", 'solr', 'Thesaurus',

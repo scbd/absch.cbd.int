@@ -1,4 +1,4 @@
-﻿define(['app', 'lodash', 'js/common', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'components/scbd-angularjs-services/services/main',
+﻿define(['app', 'lodash', 'js/common', 'components/scbd-angularjs-controls/main', 
 'views/register/directives/register-top-menu', 'services/app-config-service',
 ], function (app, _) {
 

@@ -1,7 +1,7 @@
 define(['app',"text!./document-selector.html",
 'lodash', 'views/directives/search-filter-dates.partial',
 'views/search/search-results/result-default', 'services/search-service','services/app-config-service', 
-'components/scbd-angularjs-controls/form-control-directives/pagination','ngDialog', 'services/solr'
+'components/scbd-angularjs-controls/main','ngDialog', 'services/solr'
 ], function (app, template, _) { // jshint ignore:line
 
 app.directive("documentSelector", ["$timeout",'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr',
