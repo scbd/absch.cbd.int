@@ -1,5 +1,5 @@
 define(['app','lodash',
-  'components/scbd-angularjs-services/services/locale',
+  'components/scbd-angularjs-services/main',
   'services/articles-service',
 ], function(app, _) {
 

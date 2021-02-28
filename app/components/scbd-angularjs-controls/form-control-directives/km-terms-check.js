@@ -1,5 +1,5 @@
 define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lodash',
-'components/scbd-angularjs-services/services/locale'], function(app, angular, $, template, Enumerable, _) { ;
+'components/scbd-angularjs-services/main'], function(app, angular, $, template, Enumerable, _) { ;
 
     //============================================================
     //

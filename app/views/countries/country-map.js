@@ -2,7 +2,7 @@ define(['require', 'text!./country-map.html', 'app', 'lodash',  'libs/ammap3/amm
 'shim!/app/views/countries/worldEUHigh[libs/ammap3/ammap/ammap].js?v=1',//using absolute url, spl case for this file as its too big to load
 'shim!libs/ammap3/ammap/themes/light[libs/ammap3/ammap/ammap]',
 'js/common', 'services/search-service', 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css',
-'components/scbd-angularjs-services/services/locale'], 
+'components/scbd-angularjs-services/main'], 
 function(require, template, app, _, ammap, worldEUHigh) {
   ;
 
@@ -155,7 +155,6 @@ function(require, template, app, _, ammap, worldEUHigh) {
 
         /////////////////////local function////////////////
         function loadCountries(){
-          var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
             return $q.when(commonjs.getCountries()).then(function(lcountries) {                  
 

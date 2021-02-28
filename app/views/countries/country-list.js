@@ -3,7 +3,6 @@
     'components/scbd-angularjs-services/main',
     'services/search-service',
     'views/directives/block-region-directive',
-    'components/scbd-angularjs-services/services/locale',
     'components/scbd-angularjs-controls/main'
 ], function (app, _) {
 

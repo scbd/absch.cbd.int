@@ -1,4 +1,4 @@
-define(['app','components/scbd-angularjs-services/services/locale',
+define(['app','components/scbd-angularjs-services/main',
     'views/forms/view/record-loader.directive', 'services/search-service', 'services/solr'], function (app) {
 
     app.controller("recordsViewController", ['$scope', "$sce", "solr", "$timeout", "$filter", 

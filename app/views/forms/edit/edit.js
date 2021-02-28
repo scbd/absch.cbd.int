@@ -6,7 +6,7 @@ define([
     'views/forms/view/view-history-directive',
     'views/forms/edit/document-selector',
     'views/register/directives/register-top-menu',
-    'components/scbd-angularjs-services/services/locale',
+    'components/scbd-angularjs-services/main',
     'views/directives/workflow-arrow-buttons', 'services/app-config-service',
     'services/thesaurus-service', 'services/solr'
 ], function (app, _, Enumerable) {

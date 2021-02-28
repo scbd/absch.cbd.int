@@ -1,4 +1,4 @@
-﻿define(['app', 'text!./view-reference-document.html', 'components/scbd-angularjs-services/services/storage',
+﻿define(['app', 'text!./view-reference-document.html', 'components/scbd-angularjs-services/main',
  'views/search/search-results/result-default', 'views/forms/view/record-loader.directive'],
  function(app, template) {
 

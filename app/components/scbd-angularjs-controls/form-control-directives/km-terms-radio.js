@@ -1,4 +1,4 @@
-define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','components/scbd-angularjs-services/services/utilities'], function(app,  angular, $, template,Enumerable) { ;
+define(['app', 'angular', 'jquery','text!./km-terms-radio.html','linqjs','components/scbd-angularjs-services/main'], function(app,  angular, $, template,Enumerable) { ;
 //need Enumerable
     //============================================================
     //

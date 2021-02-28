@@ -6,7 +6,7 @@ define(['app',
 'views/register/directives/register-top-menu', 
 'services/role-service',
 'views/directives/task-id-directive',
-'components/scbd-angularjs-services/services/locale',
+'components/scbd-angularjs-services/main',
 'views/forms/view/record-loader.directive'], function (app, _) {
 
         "use strict";

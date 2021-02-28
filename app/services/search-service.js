@@ -1,5 +1,5 @@
 define(['app', 'lodash', './local-storage-service', './app-config-service',
-'components/scbd-angularjs-services/services/locale'], function(app, _) {
+'components/scbd-angularjs-services/main'], function(app, _) {
 
     app.factory('searchService', ['$http', '$q', 'realm', 'localStorageService', 'appConfigService', 'locale',
         function($http, $q, realm, localStorageService, appConfigService, locale) {

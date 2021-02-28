@@ -9,7 +9,7 @@ define(['app',
     'ngDialog',
     'views/register/user-preferences/user-alerts',
     'services/local-storage-service',
-    'components/scbd-angularjs-services/services/generic-service',
+    'components/scbd-angularjs-services/main',
     'services/role-service'
 ], function (app, template, _, moment) {
 

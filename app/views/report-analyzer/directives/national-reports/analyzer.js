@@ -1,5 +1,5 @@
-define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 'components/scbd-angularjs-services/main', 
-'../../filters/cases', 'components/scbd-angularjs-services/services/locale', 'views/directives/view-reference-document', 'components/scbd-angularjs-services/services/authentication',
+define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 
+'../../filters/cases', 'components/scbd-angularjs-services/main', 'views/directives/view-reference-document',
 'views/report-analyzer/reportAnalyzerService'],
 function(templateHtml, app, _, require, $) { ;
 
@@ -199,7 +199,7 @@ function(templateHtml, app, _, require, $) { ;
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
                     
-                    require([baseUrl+$scope.activeReport.questionsUrl], function(res){
+                    require([$scope.activeReport.questionsUrl], function(res){
 
                         res = reportAnalyzerService.flattenQuestions(res);
                         var selection = _($scope.selectedQuestions).reduce(mapReduce(), {});

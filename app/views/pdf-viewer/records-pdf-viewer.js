@@ -1,4 +1,4 @@
-﻿define(['app', 'pdf-object', 'components/scbd-angularjs-services/services/locale'], function (app, pdfObject) {
+﻿define(['app', 'pdf-object', 'components/scbd-angularjs-services/main'], function (app, pdfObject) {
     app
     .directive( 'elemReady', function( $parse ) {
         return {

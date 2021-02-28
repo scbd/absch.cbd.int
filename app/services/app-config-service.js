@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'components/scbd-angularjs-services/filters/schema-name', 'realmConf'], 
+define(['app', 'lodash', 'components/scbd-angularjs-services/main', 'realmConf'], 
 function (app, _, scbdJSonSchemas, realmConfigurations) {
     
         // var realmConfigurations = {};        

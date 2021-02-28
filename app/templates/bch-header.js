@@ -1,4 +1,4 @@
-define(['app', 'text!./bch-header.html','lodash', 'ng-breadcrumbs', 'js/common', 'components/scbd-angularjs-services/services/locale','components/scbd-angularjs-controls/main'], function (app, html, _) { ;
+define(['app', 'text!./bch-header.html','lodash', 'ng-breadcrumbs', 'js/common', 'components/scbd-angularjs-services/main','components/scbd-angularjs-controls/main'], function (app, html, _) { ;
 
     app.directive('bchHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q',  function (locale, $location, breadcrumbs, commonjs, $q) {
         return {

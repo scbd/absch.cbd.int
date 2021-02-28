@@ -1,4 +1,4 @@
-define(['app','text!./km-notes.html','angular', 'components/scbd-angularjs-services/services/authentication'], function(app,template,angular) {
+define(['app','text!./km-notes.html','angular', 'components/scbd-angularjs-services/main'], function(app,template,angular) {
 
     app.directive('kmNotes',  ["$http", "$filter", "authentication", function ($http, $filter, authentication) {
 	    return {

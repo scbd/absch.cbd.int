@@ -1,4 +1,4 @@
-﻿define(['app', 'text!./top-records.html', 'lodash','components/scbd-angularjs-services/services/storage'], function(app, template, _) {
+﻿define(['app', 'text!./top-records.html', 'lodash','components/scbd-angularjs-services/main'], function(app, template, _) {
 
     app.directive("topRecords", ['IStorage', '$q', function(storage, $q) {
 

@@ -1,5 +1,5 @@
 ﻿define(['app', 'lodash', 'text!./lmo-construct.html', 'drag-and-drop', 'css!/app/css/bch/lmo-construct.css', 'ngDialog',
-'views/forms/edit/document-selector', 'components/scbd-angularjs-services/services/storage','views/forms/view/bch/view-lmo-gene.directive', 
+'views/forms/edit/document-selector', 'components/scbd-angularjs-services/main','views/forms/view/bch/view-lmo-gene.directive', 
 'views/forms/view/bch/view-lmo-gene.directive'], function (app, _, lmoConstructTemplate) {
 
     app.directive('lmoConstruct', ['IStorage', 'ngDialog', function (storage, ngDialog) {

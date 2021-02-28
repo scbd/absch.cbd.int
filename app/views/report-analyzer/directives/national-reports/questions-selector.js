@@ -1,5 +1,5 @@
 define(['text!./questions-selector.html', 'app', 'lodash', 'require', '../selectors/terms-dialog', '../intermediate', 
-'components/scbd-angularjs-services/services/locale', 'js/common', 'views/report-analyzer/reportAnalyzerService'], 
+'components/scbd-angularjs-services/main', 'js/common', 'views/report-analyzer/reportAnalyzerService'], 
 function(templateHtml, app, _, require) {
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
@@ -67,7 +67,7 @@ function(templateHtml, app, _, require) {
                         return;
                     
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
-                    require(['json!'+baseUrl+reportTypeDetails.questionsUrl], function(res){
+                    require([reportTypeDetails.questionsUrl], function(res){
                         
                         $timeout(function(){
                             $scope.sections = reportAnalyzerService.flattenQuestions(res);

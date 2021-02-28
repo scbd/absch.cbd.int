@@ -3,13 +3,12 @@ define(['app',
         'jquery',
         'css!components/scbd-branding/css/colors',
         'css!components/scbd-branding/directives/header/header',
-        'components/scbd-angularjs-services/services/authentication',
         'components/scbd-branding/directives/header/account',
         'components/scbd-branding/directives/header/locale',
         'components/scbd-branding/directives/header/accounts-validation',
         'components/scbd-branding/directives/header/login',
         'components/scbd-branding/directives/header/xuser-notifications-icon',
-        'components/scbd-angularjs-services/services/socket-io-service'
+        'components/scbd-angularjs-services/main'
 ],
 function(app, template, $) {
     app.directive('scbdHeader', function() {

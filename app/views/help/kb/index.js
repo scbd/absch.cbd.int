@@ -1,5 +1,4 @@
-define(['app', 'views/kb/home', 'angular-vue', 'components/scbd-angularjs-services/services/locale', 
-'components/scbd-angularjs-services/services/authentication'], function (app, kbHome) {
+define(['app', 'views/kb/home', 'angular-vue', 'components/scbd-angularjs-services/main'], function (app, kbHome) {
 
 	return ['$scope', '$rootScope','$routeParams', 'locale', 'apiToken', function ($scope, $rootScope, $routeParams, locale, apiToken) {
 

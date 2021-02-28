@@ -1,7 +1,7 @@
 define(['app',
  'text!./account.html',
   'css!components/scbd-branding/directives/header/account',
-  'components/scbd-angularjs-services/services/authentication',
+  'components/scbd-angularjs-services/main',
 ],
 function(app, template) {
      app.directive('accountHeader', function() { // parent directive header

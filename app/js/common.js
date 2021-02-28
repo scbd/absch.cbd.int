@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'services/local-storage-service', 'components/scbd-angularjs-services/services/storage', 'js/filters'], function(app, _) {
+define(['app', 'lodash', 'services/local-storage-service', 'components/scbd-angularjs-services/main', 'js/filters'], function(app, _) {
 
     app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 
     'localStorageService', 'Thesaurus',

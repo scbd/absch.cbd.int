@@ -35,7 +35,7 @@
             // $scope.regionMapping = {};
             
 
-            require([baseUrl+'app-data/report-analyzer-mapping'], function(res){
+            require(['app-data/report-analyzer-mapping'], function(res){
                 var appName = realm.value.replace(/-.*/,'').toLowerCase();
                 
                 $scope.reportData = res[appName];

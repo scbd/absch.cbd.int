@@ -2,7 +2,7 @@ define(['app',
     'text!./login.html',
     'jquery',
     'css!components/scbd-branding/directives/header/login',
-    'components/scbd-angularjs-services/services/authentication',
+    'components/scbd-angularjs-services/main',
 ], function (app,template,$) {
 
 app.directive('loginAccount', [function() {

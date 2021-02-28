@@ -1,5 +1,5 @@
 define(['app','lodash', "text!./view-lmo-reference.directive.html", 
-'components/scbd-angularjs-services/services/storage'], function (app, _, template) {
+'components/scbd-angularjs-services/main'], function (app, _, template) {
 
 app.directive("viewLmoReference", [function () {
 	return {

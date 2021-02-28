@@ -2,7 +2,7 @@
     'app-data/bch/report-analyzer/cpbNationalReport3',
     'views/forms/edit/edit', 'services/thesaurus-service', 'views/forms/directives/nr-yes-no',
 	'views/forms/edit/document-selector', 'js/common', 'views/directives/block-region-directive',
-    'views/forms/view/bch/view-national-report-4.directive', 'components/scbd-angularjs-services/services/storage',
+    'views/forms/view/bch/view-national-report-4.directive', 'components/scbd-angularjs-services/main',
     'ngDialog'], 
 function (app, _, nr4Data, nr3Data) {
     

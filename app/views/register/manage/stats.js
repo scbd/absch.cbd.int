@@ -1,6 +1,6 @@
-define(['app', 'lodash', 'chart-js', 'components/scbd-angularjs-services/services/generic-service', 'js/common', 'moment',
+define(['app', 'lodash', 'chart-js', 'components/scbd-angularjs-services/main', 'js/common', 'moment',
     'views/register/directives/register-top-menu', 'services/search-service', 'components/scbd-angularjs-controls/main', 'services/app-config-service',
-    'components/scbd-angularjs-services/services/storage', 'services/solr'
+    'services/solr'
     ], function (app, _) {
 
         "use strict";

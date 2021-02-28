@@ -1,5 +1,5 @@
 define(['app', 'lodash', 'text!./data-matrix.directive.html', 
-'components/scbd-angularjs-services/services/locale','services/search-service',
+'components/scbd-angularjs-services/main','services/search-service',
 'views/directives/block-region-directive', 'services/thesaurus-service', 'pivottable', 'ngDialog'], 
 function(app, _, template) { ;
 

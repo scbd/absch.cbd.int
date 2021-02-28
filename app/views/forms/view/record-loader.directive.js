@@ -7,7 +7,7 @@
     'views/forms/view/directives/view-record-reference.directive',
 	'services/search-service',
 	'views/directives/block-region-directive',
-	'views/directives/record-options','components/scbd-angularjs-services/services/locale',
+	'views/directives/record-options','components/scbd-angularjs-services/main',
 	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/main',
 	'views/forms/view/directives/view-reference-records.directive', 'views/forms/directives/compare-val'
 ], function (app, _, template) {
