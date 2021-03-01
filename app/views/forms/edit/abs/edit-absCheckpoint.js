@@ -41,6 +41,22 @@ define(['app', 'lodash', 'views/forms/edit/edit',
             });
         };
 
+        $scope.onContactQuery = function(searchText, tab){
+            var queryOptions = {
+                schemas	  : ['contact', 'authority'],
+                searchText: searchText
+            }
+            if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+                queryOptions.government = $scope.document.government.identifier;
+            }
+
+            if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
+                queryOptions.identifier = $scope.document.header.identifier;
+            }
+
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+        }
+
         //==================================
         //
         //==================================
