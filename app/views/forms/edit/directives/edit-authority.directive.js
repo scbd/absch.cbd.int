@@ -144,6 +144,7 @@ import 'views/forms/view/view-authority.directive';
 
                 $scope.onContactQuery = function(searchText, tab){
                     var queryOptions = {
+                        fieldQueries: ['type_s: person'],
                         realm     : realm.value,
                         searchText: searchText
                     }
