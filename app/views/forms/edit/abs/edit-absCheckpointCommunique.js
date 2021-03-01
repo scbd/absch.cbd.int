@@ -5,7 +5,7 @@ define(['app','lodash','views/forms/edit/edit',
 ], function(app,_) {
 
     app.controller("editCheckpointCommunique", ["$scope", "$http", "$filter", "$q", "$controller", "IStorage",
-         "Thesaurus", "Enumerable", "$location", 'commonjs',
+        "Thesaurus", "Enumerable", "$location", 'commonjs',
         function($scope, $http, $filter, $q, $controller, storage, Thesaurus, Enumerable, $location, commonjs) {
             $controller('editController', {
                 $scope: $scope
@@ -20,12 +20,12 @@ define(['app','lodash','views/forms/edit/edit',
                 },
                 keywords: function() {
                     return $q.all([$http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", {
-                                cache: true
-                            }),
-                            $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED", {
-                                cache: true
-                            })
-                        ])
+                        cache: true
+                    }),
+                        $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED", {
+                            cache: true
+                        })
+                    ])
                         .then(function(o) {
                             var data = o[0].data;
                             data.push(o[1].data)
@@ -40,6 +40,52 @@ define(['app','lodash','views/forms/edit/edit',
                         });
                 }
             });
+
+            $scope.onBuildQuery = function(searchText, tab){
+                var queryOptions = {
+                    schemas	  : ['absCheckpoint'],
+                    searchText: searchText
+                }
+                if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+                    queryOptions.government = $scope.document.government.identifier;
+                }
+
+                if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
+                    queryOptions.identifier = $scope.document.header.identifier;
+                }
+
+                return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
+
+            $scope.onBuildIRCCsQuery = function(searchText, tab){
+                var queryOptions = {
+                    schemas	  : ['absPermit'],
+                    government: ["*"],
+                    searchText: searchText
+                }
+
+                if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
+                    queryOptions.identifier = $scope.document.header.identifier;
+                }
+
+                return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
+
+            $scope.onContactQuery = function(searchText, tab){
+                var queryOptions = {
+                    schemas	  : ['contact', 'authority'],
+                    searchText: searchText
+                }
+                if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+                    queryOptions.government = $scope.document.government.identifier;
+                }
+
+                if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
+                    queryOptions.identifier = $scope.document.header.identifier;
+                }
+
+                return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
 
             //==================================
             //
