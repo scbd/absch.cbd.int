@@ -94,8 +94,8 @@
                                         <div class="km-control-group" required name="contactsOrLinks" caption="4. Where should applications for access be made?">
                                             <div class="indent help-info"> Please provide relevant contacts or links. </div>
                                             <div class="indent">
-                                                <div document-selector ng-model="document.contacts" question="contacts" government="document.government" 
-                                                allow-new="true" allow-new-schema="contact" schema="(authority contact)" locales="document.header.languages"></div>
+                                               <div document-selector on-build-query="onContactQuery(searchText, tab)" ng-model="document.contacts" question="contacts"
+                                                            allow-new="true" allow-new-schema="contact" locales="document.header.languages"></div>
                                                 <br/>
                                                 <div km-link name="links" ng-model="document.links" identifier="document.header.identifier"></div>
 
@@ -142,8 +142,8 @@
                                                 <div km-link name="applicationLinks" ng-model="document.applicationLinks" identifier="document.header.identifier"></div>
                                                 <br>
                                                 <div class=" help-info"> Please provide information on whom the application should be sent to:</div>
-                                                <div document-selector ng-model="document.applicationContacts" question="applicationContacts" government="document.government" 
-                                                allow-new="true" allow-new-schema="contact" schema="(authority contact)"></div>
+                                                <div document-selector on-build-query="onContactQuery(searchText, tab)" ng-model="document.applicationContacts" question="applicationContacts"
+                                                         allow-new="true" allow-new-schema="contact"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -186,8 +186,7 @@
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="relevantMeasures" caption="10. Relevant ABS measure(s):">
                                             <div class="indent">
-                                                <div document-selector ng-model="document.relevantMeasures" question="relevantMeasures" government="document.government"
-                                                    schema="(measure)"></div>
+                                                <div document-selector on-build-query="onMeaureQuery(searchText, tab)" ng-model="document.relevantMeasures" question="relevantMeasures"></div>
                                             </div>
                                         </div>
                                     </div>
