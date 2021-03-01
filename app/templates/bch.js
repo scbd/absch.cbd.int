@@ -1,7 +1,7 @@
 define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
         'bootstrap', 'routes/bch', 'ng-breadcrumbs','toastr','angular-animate', 
-        'components/scbd-branding/directives/header/header',
-        'components/scbd-branding/directives/footer','angular-loggly-logger',
+        'components/scbd-branding/main',
+        'angular-loggly-logger',
         'components/scbd-angularjs-services/main', 'views/directives/route-loading-directive',
         'services/local-storage-service', 'services/app-config-service'], 
 function (app, angular, footerHtml) { ;

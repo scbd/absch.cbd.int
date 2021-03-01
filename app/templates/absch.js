@@ -1,5 +1,5 @@
 define(['app', 'lodash', 'moment', 'angular', 'toastr', 'bootstrap', 'routes/absch', 'angular-loggly-logger',
-'angular-animate', 'components/scbd-branding/directives/header/xuser-notification-config-service',
+'angular-animate', 'components/scbd-branding/main',
 'services/local-storage-service', 'views/directives/route-loading-directive'], 
 function (app, _, moment, angular) {
 
@@ -158,8 +158,8 @@ function (app, _, moment, angular) {
             function loadDepencies(){
 
                 require(['angular-animate', 'components/scbd-angularjs-services/main',
-                'angular-localizer', 'angular-animate', 'components/scbd-branding/directives/footer',
-                'views/directives/nav/portal-branding', 'components/scbd-branding/directives/header/header', 'views/directives/nav/portal-nav'], 
+                'angular-localizer', 'angular-animate', 'components/scbd-branding/main',
+                'views/directives/nav/portal-branding', 'views/directives/nav/portal-nav'], 
                     function () {
 
                             $('#divHeader').append('<scbd-header></scbd-header><portal-branding></portal-branding><portal-nav></portal-nav>');

@@ -1,4 +1,4 @@
-define(['jquery', 'components/scbd-branding/directives/header/login'
+define(['jquery', 'components/scbd-branding/main'
 ], function ($) {
 
     return ["$scope", "$location", "authentication", function ($scope, $location, authentication){

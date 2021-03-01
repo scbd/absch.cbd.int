@@ -1,7 +1,7 @@
 define(['app',
         'lodash',    
         'services/role-service',
-        'components/scbd-branding/directives/xuser-notifications-panel',
+        'components/scbd-branding/main',
         'views/register/directives/register-top-menu'
   ], function(app, _) {
     "use strict";
