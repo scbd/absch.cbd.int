@@ -450,7 +450,7 @@ define([
           query           : '*:*'
       }
       if(options.schemas)
-        queries.fieldQueries.push('schema_s:(' + _.map(options.schemas, solr.escape).join(',') + ')')
+        queries.fieldQueries.push('schema_s:(' + _.map(options.schemas, solr.escape).join(' ') + ')')
       else if(options.schema)
         queries.fieldQueries.push('realm_ss:'+solr.escape(options.schema))
 
