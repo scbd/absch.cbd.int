@@ -1,4 +1,4 @@
-define(['app', 'lodash','text!./edit-resource-schema-base-directive.html','services/role-service',
+define(['app', 'lodash','text!./edit-resource-schema-base-directive.html','services/main',
 'views/forms/edit/organization-selector'
 ], function (app, _, template) {
 	app.directive('convertToNumber', function() {

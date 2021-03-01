@@ -1,5 +1,5 @@
 define(['app','lodash', "text!./view-lmo-gene.directive.html", 'css!/app/css/bch/lmo-construct.css', 
-'components/scbd-angularjs-services/main', 'services/search-service', 'services/solr'], function (app, _, template) {
+'components/scbd-angularjs-services/main', 'services/main'], function (app, _, template) {
 
 app.directive("viewLmoGene", [function () {
 	return {

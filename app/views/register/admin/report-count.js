@@ -1,6 +1,5 @@
-define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-controls/main', 
+define(['app', 'lodash', 'services/main', 'moment', 'components/scbd-angularjs-controls/main', 
     'views/register/directives/register-top-menu','chart-js',
-    'services/search-service','services/app-config-service', 'services/solr'
 ], function (app) {
 
         "use strict";

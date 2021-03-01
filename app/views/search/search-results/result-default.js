@@ -1,4 +1,4 @@
-define(['app', 'text!./result-default.html','lodash', 'js/common',
+define(['app', 'text!./result-default.html','lodash', 'services/main',
 'views/forms/view/record-loader.directive'
 ], function(app, template, _) {
 

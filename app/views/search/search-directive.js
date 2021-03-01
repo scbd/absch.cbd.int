@@ -1,14 +1,14 @@
 define(['app', 'text!./search-directive.html','lodash',
-'app-data/search-tour','js/common','services/search-service','views/search/search-filters/keyword-filter',
+'app-data/search-tour','services/main','views/search/search-filters/keyword-filter',
 'views/search/search-filters/national-filter','views/search/search-filters/reference-filter','views/search/search-filters/scbd-filter',
 'views/search/search-filters/country-filter','views/search/search-filters/region-filter','views/search/search-filters/date-filter',
-'views/search/search-results/result-default','views/search/search-results/national-records-country','services/app-config-service',
-'ngDialog','views/register/user-preferences/user-alerts','views/directives/export-directive','services/thesaurus-service', 'angular-animate', 
+'views/search/search-results/result-default','views/search/search-results/national-records-country',
+'ngDialog','views/register/user-preferences/user-alerts','views/directives/export-directive', 'angular-animate', 
 'angular-joyride','components/scbd-angularjs-services/main',
 'components/scbd-angularjs-controls/main',
 'views/search/directives/result-view-options', 'views/search/search-filters/left-side-filter',
 'views/search/search-results/list-view','views/search/search-results/group-view', 
-'services/solr', 'toastr',
+'toastr',
 'views/reports/matrix/data-matrix.directive'
 ], function(app, template, _, scbdSchemas, joyRideText) {
 

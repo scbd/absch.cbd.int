@@ -1,5 +1,5 @@
 define(['app','text!./export-directive.html', 'lodash',
-'services/search-service', 'ngDialog', 'services/role-service', 'services/solr'
+'services/main', 'ngDialog',
 ], function (app, template, _) {
     app.directive('export', function () {
         return {

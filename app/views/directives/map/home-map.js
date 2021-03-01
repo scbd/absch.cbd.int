@@ -1,5 +1,4 @@
-define(['text!./home-map.html','app', 'lodash', 'services/search-service',
-  'views/directives/block-region-directive', 'js/common'
+define(['text!./home-map.html','app', 'lodash', 'views/directives/block-region-directive', 'services/main'
 ], function(template, app, _, popoverTemplate) {
   ;
 

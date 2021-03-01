@@ -1,5 +1,5 @@
 define(['app', 'text!./national-records-country.html','lodash',
-'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status', 'services/solr',
+'views/search/search-results/result-grouped-national-record','services/main','views/directives/party-status',
 ], function(app, template, _) {
 
     app.directive('nationalRecordsCountry', ['searchService', 'solr', function(searchService, solr) {

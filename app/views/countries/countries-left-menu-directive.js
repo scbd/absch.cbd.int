@@ -1,5 +1,5 @@
 define(['app','text!./countries-left-menu-directive.html',
-'lodash', 'js/common'], function(app, template, _) {
+'lodash', 'services/main'], function(app, template, _) {
 
     app.directive('countriesLeftMenu', function() {
         return {

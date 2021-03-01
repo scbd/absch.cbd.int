@@ -1,4 +1,4 @@
-define(['app','lodash', 'views/forms/edit/edit', 'js/common',
+define(['app','lodash', 'views/forms/edit/edit', 'services/main',
         'views/forms/view/abs/view-abs-permit.directive'], function (app,_) {
 
   app.controller("editAbsPermit", ["$scope", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable",

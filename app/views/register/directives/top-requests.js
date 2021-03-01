@@ -1,8 +1,7 @@
 ﻿define(['app', 
 'text!./top-requests.html', 
 'lodash',
-'js/common',  
-'services/role-service'], function(app, template, _) {
+'services/main'], function(app, template, _) {
 
     app.directive("topRequests", ['$q', "IWorkflows", "realm", '$rootScope', 'roleService', "$location", "$filter",
     function($q, IWorkflows, realm, $rootScope, roleService, $location, $filter) {

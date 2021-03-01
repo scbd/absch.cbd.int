@@ -1,5 +1,5 @@
 define(['app', 'cbd-forums',
-	'js/common', 'services/role-service'], function(app) {
+	'services/main', 'services/main'], function(app) {
 
 
     return ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route","commonjs","$rootScope", "roleService",

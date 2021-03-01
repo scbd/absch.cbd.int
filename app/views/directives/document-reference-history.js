@@ -1,5 +1,5 @@
-define(['app', 'text!./document-reference-history.html','services/search-service',
-'views/search/search-results/result-default', 'services/solr'
+define(['app', 'text!./document-reference-history.html',
+'views/search/search-results/result-default', 'services/main'
 ], function (app, template) {
     app.directive('documentReferenceHistory', function ($http) {
         return {

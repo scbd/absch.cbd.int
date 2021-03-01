@@ -1,5 +1,5 @@
-﻿define(['app', 'lodash', 'js/common', 'components/scbd-angularjs-controls/main', 
-'views/register/directives/register-top-menu', 'services/app-config-service',
+﻿define(['app', 'lodash', 'services/main', 'components/scbd-angularjs-controls/main', 
+'views/register/directives/register-top-menu'
 ], function (app, _) {
 
     "use strict";

@@ -1,4 +1,4 @@
-define(['angular', 'lodash', 'require','app', 'ngDialog', 'services/app-config-service', 
+define(['angular', 'lodash', 'require','app', 'ngDialog', 'services/main', 
  'views/register/directives/register-top-menu'], function(ng, _, require, app) { ;
 
 app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'appConfigService',

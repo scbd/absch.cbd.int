@@ -1,5 +1,5 @@
 define(['app', 'text!./search-filter-dates.partial.html', 'components/scbd-angularjs-controls/main',
-'bootstrap-datepicker', 'services/solr'], function (app, template) {
+'bootstrap-datepicker', 'services/main'], function (app, template) {
 
 app.directive('searchFilterDates', function ($http) {
     return {

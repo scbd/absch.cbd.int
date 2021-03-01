@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'css!/app/css/registry.css', 'services/search-service', 'js/common', 'services/solr',
+define(['app', 'lodash', 'css!/app/css/registry.css', 'services/main',
 		'views/reports/bch/registries/index'], function(app, _) { ;
 
 	return ['$scope', 'searchService', 'toastr', '$log', 'solr',

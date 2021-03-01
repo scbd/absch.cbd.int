@@ -1,4 +1,20 @@
-define(['app', 'lodash', 'services/local-storage-service', 'components/scbd-angularjs-services/main', 'js/filters'], function(app, _) {
+define(['app', 'lodash', 'services/main', 'components/scbd-angularjs-services/main'], function(app, _) {
+
+    app.factory("htmlUtility", function() {
+		return {
+			encode: function(srcText) {
+				return $('<div/>').text(srcText).html();
+			}
+		};
+	});
+
+	app.factory('Enumerable', [function() {
+		return Enumerable;
+	}])
+
+	app.factory('linqjs', [function() {
+		return Enumerable;
+	}])
 
     app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 
     'localStorageService', 'Thesaurus',

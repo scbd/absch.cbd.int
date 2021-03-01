@@ -1,5 +1,5 @@
 define(['app', 
- 'services/role-service', 'services/local-storage-service',
+ 'services/main', 'services/main',
  'views/register/directives/register-top-menu'], function(app) {
  "use strict";
     app.controller("AdminController", ["$rootScope", "$scope", "roleService", 'localStorageService',

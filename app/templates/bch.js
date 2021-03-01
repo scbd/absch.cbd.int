@@ -2,8 +2,7 @@ define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
         'bootstrap', 'routes/bch', 'ng-breadcrumbs','toastr','angular-animate', 
         'components/scbd-branding/main',
         'angular-loggly-logger',
-        'components/scbd-angularjs-services/main', 'views/directives/route-loading-directive',
-        'services/local-storage-service', 'services/app-config-service'], 
+        'components/scbd-angularjs-services/main', 'views/directives/route-loading-directive', 'services/main'], 
 function (app, angular, footerHtml) { ;
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);

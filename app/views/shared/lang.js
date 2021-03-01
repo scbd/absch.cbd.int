@@ -1,5 +1,5 @@
 define(['app', 'angular-cookies',
-		'components/scbd-angularjs-services/main', 'services/local-storage-service'
+		'components/scbd-angularjs-services/main', 'services/main'
         ], function (app, moment) {
     return ["$scope", "$location", "locale","$timeout", "$window", "$routeParams", "$cookies", 'localStorageService',
 		function ($scope, $location, locale, $timeout, $window, $routeParams, $cookies, localStorageService){

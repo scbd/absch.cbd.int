@@ -1,5 +1,5 @@
 define(['angular', 'app', 'lodash', 'ngMaterial', 'ngAria', 'angular-animate',
-        '/app/js/common', 'components/scbd-angularjs-services/main',  'components/scbd-angularjs-controls/main',],
+        'services/main', 'components/scbd-angularjs-services/main',  'components/scbd-angularjs-controls/main',],
   function (angular, app, _) {
 
     app.controller("glossaryTermController",

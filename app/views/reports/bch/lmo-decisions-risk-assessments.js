@@ -1,5 +1,5 @@
-define(['app', 'lodash', 'views/forms/view/bch/view-lmo-reference.directive', 'services/solr',
-'angucomplete-alt','views/directives/block-region-directive', 'services/search-service', 'js/common',
+define(['app', 'lodash', 'views/forms/view/bch/view-lmo-reference.directive', 'services/main',
+'angucomplete-alt','views/directives/block-region-directive',
 'views/reports/bch/lmo-decisions', 'views/reports/bch/risk-assessments', 'views/forms/view/record-loader.directive'], function(app, _) { ;
 
 app.controller("LmoReportController", ['$scope', '$routeParams', '$route', 'solr', 'searchService', '$timeout',

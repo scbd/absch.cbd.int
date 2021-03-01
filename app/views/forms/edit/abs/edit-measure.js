@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'angular', 'views/forms/edit/edit', 'js/common', 'views/forms/edit/document-selector',
+define(['app', 'lodash', 'angular', 'views/forms/edit/edit', 'services/main', 'views/forms/edit/document-selector',
     'views/forms/view/abs/view-measure.directive', 'views/forms/edit/abs/edit-measure-matrix-directive'
 ], function(app, _, angular) {
 

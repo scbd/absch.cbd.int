@@ -1,5 +1,5 @@
 define(['app', 'text!./portal-nav.html', 'ng-breadcrumbs',
-'services/help-service', 'js/common', 'components/scbd-angularjs-services/main'],
+'services/main', 'components/scbd-angularjs-services/main'],
  function (app, template) {
 
 app.directive('portalNav', ['locale', '$q','breadcrumbs', 'helpService', 'commonjs',

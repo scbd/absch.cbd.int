@@ -1,4 +1,4 @@
-﻿define(['app','js/common', 'services/role-service'], function (app) {
+﻿define(['app','services/main'], function (app) {
 
 app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonjs", "roleService",
  function(storage, workflows, $q, realm, commonjs, roleService) {

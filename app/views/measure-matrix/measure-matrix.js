@@ -1,5 +1,5 @@
 define(['app','lodash',
-        'views/measure-matrix/measure-matrix-elements-derective']
+        'views/measure-matrix/measure-matrix-elements-directive']
     , function (app, _) {
 
     app.controller('matrixController', ['$scope', '$http','realm','$q','$filter','$routeParams','Thesaurus','$timeout',

@@ -1,6 +1,6 @@
 define(['app','lodash',
   'components/scbd-angularjs-services/main',
-  'services/articles-service',
+  'services/main',
 ], function(app, _) {
 
   app.controller("commonIssues",

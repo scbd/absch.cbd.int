@@ -1,8 +1,8 @@
 define(['app', 'lodash','text!./task-id-directive.html',
 	'.views/directives/forms/view/record-loader.directive', 'toastr', 'ngDialog',
 	'views/directives/document-reference-history',
-	'services/local-storage-service', 'views/directives/block-region-directive',
-	'.views/directives/forms/view/record-loader.directive','services/role-service',
+	'services/main', 'views/directives/block-region-directive',
+	'.views/directives/forms/view/record-loader.directive','services/main',
 ], function (app, _, template) {
 
 	app.directive('taskId', function () {

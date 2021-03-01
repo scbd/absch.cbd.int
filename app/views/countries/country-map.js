@@ -1,7 +1,6 @@
 define(['require', 'text!./country-map.html', 'app', 'lodash',  'libs/ammap3/ammap/ammap', 
-'shim!/app/views/countries/worldEUHigh[libs/ammap3/ammap/ammap].js?v=1',//using absolute url, spl case for this file as its too big to load
-'shim!libs/ammap3/ammap/themes/light[libs/ammap3/ammap/ammap]',
-'js/common', 'services/search-service', 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css',
+'views/countries/worldEUHigh',
+'shim!libs/ammap3/ammap/themes/light[libs/ammap3/ammap/ammap]', 'services/main', 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css',
 'components/scbd-angularjs-services/main'], 
 function(require, template, app, _, ammap, worldEUHigh) {
   ;

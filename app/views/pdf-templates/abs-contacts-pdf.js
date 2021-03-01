@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'services/app-config-service', 'css!/app/css/print-friendly.css','css!/app/css/pdf-permit.css'], function (app,_) {
+define(['app', 'lodash', 'services/main', 'css!/app/css/print-friendly.css','css!/app/css/pdf-permit.css'], function (app,_) {
 
     app.controller('contactPdfView', ['$scope', '$http', '$location', '$routeParams', '$filter', '$q', 'realm',
     function($scope, $http, $location, $routeParams, $filter, $q, realm) {

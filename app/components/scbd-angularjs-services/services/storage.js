@@ -1,4 +1,4 @@
-﻿define(['app', 'lodash','services/cache-service'], function(app, _) {
+﻿define(['app', 'lodash','services/main'], function(app, _) {
     ;
 
     app.factory("IStorage", ["$http", "$q", "authentication", "realm", 'cacheService', function($http, $q, authentication, defaultRealm, cacheService) {

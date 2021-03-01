@@ -1,5 +1,4 @@
-﻿define(['require', 'app', 'lodash', 'angular-route', 
-'services/app-config-service', 'js/services', 'js/filters',
+﻿define(['require', 'app', 'lodash', 'angular-route', 'services/main',
 'components/scbd-angularjs-services/main'], function (require, app, _) { ;
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');

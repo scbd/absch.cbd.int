@@ -10,5 +10,7 @@ define([
     './solr',
     './thesaurus-service',
     './user-profile-service',
+    './filters',
+    './common'
 ], function() {});
 

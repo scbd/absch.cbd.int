@@ -1,5 +1,5 @@
 ﻿define(["app", 'lodash', 'components/scbd-angularjs-services/main', 
-'js/common', 'services/app-config-service'], 
+'./common', 'services/main'], 
 function (app, _, scbdSchemas) {
 
 

@@ -1,6 +1,6 @@
 define(['app',
         'lodash',    
-        'services/role-service',
+        'services/main',
         'components/scbd-branding/main',
         'views/register/directives/register-top-menu'
   ], function(app, _) {

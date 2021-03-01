@@ -1,5 +1,4 @@
-define(['app','text!./endorsement-directive.html', 'services/search-service', 'services/solr'
-    ], function (app, template) {
+define(['app','text!./endorsement-directive.html', 'services/main' ], function (app, template) {
 	app.directive('endorsement', function($http){
 		return{
 			restrict: 'EAC',

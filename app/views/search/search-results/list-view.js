@@ -1,5 +1,5 @@
 define(['app', 'text!./list-view.html','lodash',
-'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status',
+'views/search/search-results/result-grouped-national-record','services/main','views/directives/party-status',
 'views/search/search-results/result-default'
 ], function(app, template, _) {
 

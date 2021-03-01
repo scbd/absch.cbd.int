@@ -1,6 +1,6 @@
 define(['app', 'lodash', 'views/forms/edit/edit' , 'views/forms/edit/document-selector',
         'views/forms/view/abs/view-abs-national-report.directive',
-        'services/search-service','services/app-config-service', 'services/solr'
+        'services/main',
 ], function (app, _) {
 
   app.controller("editAbsNationalReport",

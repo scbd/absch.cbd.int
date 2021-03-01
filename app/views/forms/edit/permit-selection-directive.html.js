@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'js/common',"text!./permit-selection-directive.html",
+define(['app', 'lodash', 'services/main',"text!./permit-selection-directive.html",
     'views/directives/search-filter-dates.partial'
 	], function (app, _, commonjs, template) {
 

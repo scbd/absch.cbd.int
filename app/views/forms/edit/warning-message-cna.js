@@ -1,8 +1,6 @@
 
-define(['app', 'lodash', "text!./warning-message-cna.html", 'js/common',
+define(['app', 'lodash', "text!./warning-message-cna.html", 'services/main',
 'views/search/search-results/result-default', 
-'services/search-service',
-'services/app-config-service', 'services/solr'
 ], function(app, _, template) {
 
     app.directive('warningMessageCna', function() {

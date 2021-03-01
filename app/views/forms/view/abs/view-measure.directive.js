@@ -1,8 +1,8 @@
 define(['app', "text!./view-measure.directive.html",
-        'views/measure-matrix/measure-matrix-elements-derective',
-        'services/search-service', 'services/app-config-service','views/directives/party-status',
+        'views/measure-matrix/measure-matrix-elements-directive',
+        'services/main','views/directives/party-status',
 	'views/forms/view/directives/view-record-reference.directive',
-	'views/directives/record-options', 'services/solr'
+	'views/directives/record-options'
     ], function (app, template) {
 
 app.directive("viewMeasure", [function () {

@@ -1,10 +1,9 @@
 define(['app', 
 'lodash',
-'js/common',  
+'services/main',  
 'moment', 
 'components/scbd-angularjs-controls/main',
 'views/register/directives/register-top-menu', 
-'services/role-service',
 'views/directives/task-id-directive',
 'components/scbd-angularjs-services/main',
 'views/forms/view/record-loader.directive'], function (app, _) {

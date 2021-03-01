@@ -1,5 +1,5 @@
 define(['text!./questions-selector.html', 'app', 'lodash', 'require', '../selectors/terms-dialog', '../intermediate', 
-'components/scbd-angularjs-services/main', 'js/common', 'views/report-analyzer/reportAnalyzerService'], 
+'components/scbd-angularjs-services/main', 'services/main', 'views/report-analyzer/reportAnalyzerService'], 
 function(templateHtml, app, _, require) {
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');

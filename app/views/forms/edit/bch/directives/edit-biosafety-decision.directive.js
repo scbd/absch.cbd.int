@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'text!./edit-biosafety-decision.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
+define(['app', 'lodash', 'text!./edit-biosafety-decision.directive.html', 'views/forms/edit/edit', 'services/main',
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-decision.directive"], 
 function (app, _, template) {
 

@@ -1,11 +1,10 @@
 ﻿define(['app', 'lodash', 'text!./record-loader.directive.html', 
 	'components/scbd-angularjs-services/main', 'ngSmoothScroll',
 	'views/forms/view/view-history-directive',
-    'js/common',
+    'services/main',
     'views/directives/document-metadata-directive',
     'views/directives/party-status',
     'views/forms/view/directives/view-record-reference.directive',
-	'services/search-service',
 	'views/directives/block-region-directive',
 	'views/directives/record-options','components/scbd-angularjs-services/main',
 	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/main',
@@ -270,7 +269,7 @@
 						if(!$scope.showDifferenceOn){
 							$scope.isComparing = true;							
 							$scope.showDifferenceOn = true;
-							require(['js/html-difference'], function(diffParser){
+							require(['services/html-difference'], function(diffParser){
 								htmlDiff = diffParser;
 								loadViewDirective($scope.internalDocumentInfo.type, function(directiveHtml){
 									return  { 

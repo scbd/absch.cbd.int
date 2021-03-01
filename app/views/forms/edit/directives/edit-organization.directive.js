@@ -1,5 +1,5 @@
 define(['app',"text!./edit-organization.directive.html", 'lodash', 'views/directives/workflow-arrow-buttons', 
-"views/forms/view/view-organization.directive", 'services/role-service',
+"views/forms/view/view-organization.directive", 'services/main',
 'components/scbd-angularjs-services/main', 'views/forms/edit/editFormUtility'],
 function (app, template, _) {
 

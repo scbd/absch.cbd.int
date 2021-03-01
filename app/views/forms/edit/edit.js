@@ -1,14 +1,13 @@
 //fixed a bug with the comment up here ;)
 define([
-    'app', 'lodash', 'linqjs', 'js/services', 'services/app-config-service',
+    'app', 'lodash', 'linqjs', 'services/main',
     'views/forms/edit/editFormUtility',
     'views/forms/view/record-loader.directive',
     'views/forms/view/view-history-directive',
     'views/forms/edit/document-selector',
     'views/register/directives/register-top-menu',
     'components/scbd-angularjs-services/main',
-    'views/directives/workflow-arrow-buttons', 'services/app-config-service',
-    'services/thesaurus-service', 'services/solr'
+    'views/directives/workflow-arrow-buttons', 
 ], function (app, _, Enumerable) {
   
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "thesaurusService", "$q", "$location", "IStorage",

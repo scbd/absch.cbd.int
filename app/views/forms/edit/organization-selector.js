@@ -1,6 +1,6 @@
-﻿define(['app', 'lodash', "text!./organization-selector.html", 'js/common', 'components/scbd-angularjs-services/main', 'components/scbd-angularjs-controls/main',
+﻿define(['app', 'lodash', "text!./organization-selector.html", 'services/main', 'components/scbd-angularjs-services/main', 'components/scbd-angularjs-controls/main',
 'views/forms/view/directives/view-record-reference.directive', 'ngDialog',
-'services/search-service','ngInfiniteScroll'
+'ngInfiniteScroll'
 ],
 function(app, _, template) {
     

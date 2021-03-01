@@ -37,4 +37,5 @@ define(['app',
 	'./form-control-directives/string',
 	'./form-control-directives/tabbed-textareas',
 	'./form-control-directives/text',
+	'./form-control-directives/angucomplete-extended'
 ], function(){});

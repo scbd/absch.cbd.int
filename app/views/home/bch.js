@@ -1,4 +1,4 @@
-define(['app', 'services/articles-service',
+define(['app', 'services/main',
     'views/directives/map/home-map',
 'views/directives/home-articles'], function (app) {
     return ['$scope', 'articlesService', function ($scope, articlesService) {

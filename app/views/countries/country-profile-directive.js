@@ -1,8 +1,6 @@
  define(['app', 'text!./country-profile-directive.html', 'lodash', 
    'views/measure-matrix/measure-matrix-countries-directive',
-   'js/common', 'services/solr',
-   'views/search/search-results/result-grouped-national-record',
-   'services/search-service', 'services/app-config-service',
+   'views/search/search-results/result-grouped-national-record', 'services/main',
     'views/directives/export-directive'
  ], function(app, template, _) {
 

@@ -1,5 +1,5 @@
 define(['app','lodash', "text!./view-reference-records.directive.html", 
-'components/scbd-angularjs-services/main', 'services/search-service', 'services/solr'], function (app, _, template) {
+'components/scbd-angularjs-services/main', 'services/main'], function (app, _, template) {
 
 app.directive("viewReferencedRecords", [function () {
 	return {

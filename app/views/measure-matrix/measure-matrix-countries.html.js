@@ -1,5 +1,5 @@
 define(['app', 'lodash','components/scbd-angularjs-services/main', 'components/scbd-angularjs-controls/main',
-        'views/measure-matrix/measure-matrix-elements-derective',
+        'views/measure-matrix/measure-matrix-elements-directive',
         'views/forms/view/record-loader.directive'], function(app, _) {
 
     app.controller('countryMatrixController', ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$element',

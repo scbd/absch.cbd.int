@@ -1,7 +1,7 @@
 define(['app',
   'views/countries/country-profile-directive',
   'views/directives/block-region-directive',
-  'js/common','components/scbd-angularjs-services/main','ng-breadcrumbs',
+  'services/main','components/scbd-angularjs-services/main','ng-breadcrumbs',
   'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css'
 ], function(app) {
 

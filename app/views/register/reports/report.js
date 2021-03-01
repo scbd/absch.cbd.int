@@ -1,5 +1,5 @@
 define(['app', 
- 'services/role-service', 
+ 'services/main', 
  'views/register/directives/register-top-menu'], function(app) {
  "use strict";
     app.controller("ReportController", ["$rootScope", "$scope", "roleService",  "$sce",

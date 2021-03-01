@@ -1,4 +1,4 @@
-﻿define(['app',"text!./article-search.directive.html", 'services/articles-service'],
+﻿define(['app',"text!./article-search.directive.html", 'services/main'],
 function (app, template) {
 
 app.directive("articleSearch", [ function () {

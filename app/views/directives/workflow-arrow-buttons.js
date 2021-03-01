@@ -1,6 +1,6 @@
 define(['app', 'text!./workflow-arrow-buttons.html', 'lodash',
-        'views/directives/workflow-history-directive', 'js/common', 'ngDialog',
-        'toastr', 'services/local-storage-service', 'services/app-config-service', 'services/articles-service',
+        'views/directives/workflow-history-directive', 'services/main', 'ngDialog',
+        'toastr',
 ], function (app, template) {
     
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",

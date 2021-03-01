@@ -1,5 +1,5 @@
 ﻿define(['app', 'lodash', 'views/forms/edit/edit', '.views/forms/edit/view/view-submission.directive',
-        'views/forms/edit/organization-selector', 'services/solr', 'services/search-service', 'services/thesaurus-service'], function (app, _) {
+        'views/forms/edit/organization-selector', 'services/main'], function (app, _) {
 
   app.controller("editSubmission", ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService',
    function ($scope, $http, $controller, realm, searchService, solr, thesaurusService) {

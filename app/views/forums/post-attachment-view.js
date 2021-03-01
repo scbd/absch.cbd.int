@@ -1,5 +1,5 @@
 ﻿define(['app', 'lodash','ng-breadcrumbs', 'cbd-forums',
-        'js/common'], function(app, _) {
+        'services/main'], function(app, _) {
 
     return ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$rootScope",'$location',
      function($scope, $http, $q, $route, $routeParams, commonjs, $rootScope, $location) {

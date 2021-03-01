@@ -1,5 +1,4 @@
-define(['app', 'lodash', 'angular', 'services/articles-service',
- 'services/role-service', 'services/app-config-service', 'js/common',
+define(['app', 'lodash', 'angular', 'services/main',
  'views/register/directives/register-top-menu', 'toastr','components/scbd-angularjs-services/main', 
  'views/register/directives/top-records', 'views/register/directives/top-requests', 'ngDialog'],
 function(app, _, ng) {

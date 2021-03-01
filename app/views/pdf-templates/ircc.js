@@ -1,4 +1,4 @@
-﻿define(['app', 'services/app-config-service', './ircc-directive',
+﻿define(['app', 'services/main', './ircc-directive',
 'css!/app/css/print-friendly.css', 'css!/app/css/pdf-ircc.css'], function (app) {
 
 	app.controller('irccPdfView', ['$scope','$routeParams','$location','$filter',

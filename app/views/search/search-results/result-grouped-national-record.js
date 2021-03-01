@@ -1,4 +1,4 @@
-define(['app', 'text!./result-grouped-national-record.html','lodash', 'moment', 'js/common',
+define(['app', 'text!./result-grouped-national-record.html','lodash', 'moment', 'services/main',
 'views/forms/view/record-loader.directive'
 ], function(app, template, _, moment) {
 

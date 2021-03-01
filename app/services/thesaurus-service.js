@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'services/cache-service'], function (app,_) {
+define(['app', 'lodash', 'services/main'], function (app,_) {
 
     app.factory('thesaurusService', ['$http', '$q', 'cacheService', function ($http, $q, cacheService) {
         var termsCacheFactory = cacheService.getCacheFactory({name:'terms', storageMode:'localStorage', maxAge:24*60*60*1000})//one day cache for terms

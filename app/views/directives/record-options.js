@@ -1,5 +1,5 @@
 define(['app', 'text!./record-options.html', 'lodash', 'components/scbd-angularjs-services/main',
-'services/app-config-service', 'js/common'], function (app, template, _) {
+'services/main'], function (app, template, _) {
 
 app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$window', 'commonjs',
     function (appLocale, $route, $timeout, appConfigService, $filter, $window, commonjs) {

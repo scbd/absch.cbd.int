@@ -1,7 +1,7 @@
 define(['app','lodash','views/forms/edit/edit',
     'views/forms/view/abs/view-abs-checkpoint-communique.directive',
     'views/forms/edit/permit-selection-directive',
-    'js/common'
+    'services/main'
 ], function(app,_) {
 
     app.controller("editCheckpointCommunique", ["$scope", "$http", "$filter", "$q", "$controller", "IStorage",

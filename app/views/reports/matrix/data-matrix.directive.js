@@ -1,6 +1,6 @@
 define(['app', 'lodash', 'text!./data-matrix.directive.html', 
-'components/scbd-angularjs-services/main','services/search-service',
-'views/directives/block-region-directive', 'services/thesaurus-service', 'pivottable', 'ngDialog'], 
+'components/scbd-angularjs-services/main','services/main',
+'views/directives/block-region-directive', 'pivottable', 'ngDialog'], 
 function(app, _, template) { ;
 
 app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog',

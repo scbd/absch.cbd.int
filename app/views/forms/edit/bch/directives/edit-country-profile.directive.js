@@ -1,5 +1,5 @@
 define(['app', 'lodash', 'text!./edit-country-profile.directive.html', 'views/forms/edit/edit',
-	"views/forms/view/bch/view-country-profile.directive",'services/solr'], 
+	"views/forms/view/bch/view-country-profile.directive",'services/main'], 
 function (app, _, template) { 
 	app.directive("editCountryProfile", ["$controller", '$routeParams', 'ngDialog',"searchService", 'solr', function($controller, $routeParams, ngDialog,searchService,solr) {
 		return {

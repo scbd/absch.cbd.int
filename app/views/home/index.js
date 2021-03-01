@@ -1,4 +1,4 @@
-define(['app','moment','js/common',
+define(['app','moment','services/main',
     'views/directives/home-country-dashboard-directive',
     'views/directives/map/home-map',
     'views/directives/home-articles-small',

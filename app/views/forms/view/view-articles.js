@@ -1,7 +1,7 @@
 define(['app','lodash',
   'views/forms/view/view-articles',
   'components/scbd-angularjs-services/main',
-  'services/articles-service',
+  'services/main',
   'ng-breadcrumbs',
   'components/scbd-angularjs-controls/main'
 ], function(app, _) {

@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'text!./edit-modified-organism.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service','views/forms/edit/bch/directives/lmo-construct',
+define(['app', 'lodash', 'text!./edit-modified-organism.directive.html', 'views/forms/edit/edit', 'services/main','views/forms/edit/bch/directives/lmo-construct',
 	'views/forms/edit/document-selector', "views/forms/view/bch/view-lmo.directive", 'views/forms/directives/traits-selector.directive',
 	'views/forms/directives/view-terms-hierarchy'], 
 function (app, _, template) {

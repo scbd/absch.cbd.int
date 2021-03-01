@@ -1,6 +1,6 @@
 define(['app', 'lodash', 'moment', 'angular', 'toastr', 'bootstrap', 'routes/absch', 'angular-loggly-logger',
 'angular-animate', 'components/scbd-branding/main',
-'services/local-storage-service', 'views/directives/route-loading-directive'], 
+'services/main', 'views/directives/route-loading-directive'], 
 function (app, _, moment, angular) {
 
     app.config(["toastrConfig", function(toastrConfig) {

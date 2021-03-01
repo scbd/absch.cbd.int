@@ -4,13 +4,11 @@ define(['app',
     'moment',
     'ngDialog',
     'views/search/search-directive',
-    'js/common',
+    'services/main',
     'views/register/directives/register-top-menu',
     'ngDialog',
     'views/register/user-preferences/user-alerts',
-    'services/local-storage-service',
-    'components/scbd-angularjs-services/main',
-    'services/role-service'
+    'components/scbd-angularjs-services/main'
 ], function (app, template, _, moment) {
 
     app.directive("userAlerts", ['$rootScope', 'ngDialog', function ($rootScope, ngDialog) {

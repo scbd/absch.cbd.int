@@ -1,4 +1,4 @@
-define(['app', 'js/common',
+define(['app', 'services/main',
     'views/forms/view/record-loader.directive',
     'views/register/directives/register-top-menu', 'ngDialog'
     , 'components/scbd-angularjs-services/main'

@@ -1,6 +1,5 @@
-define(['app', 'lodash', 'text!./edit-authority.directive.html', 'services/search-service', 'views/forms/edit/edit', 'js/common',
-'views/forms/edit/document-selector', 'views/forms/edit/warning-message-cna', 'views/forms/view/view-authority.directive',
-'services/thesaurus-service'], 
+define(['app', 'lodash', 'text!./edit-authority.directive.html', 'services/main', 'views/forms/edit/edit', 
+'views/forms/edit/document-selector', 'views/forms/edit/warning-message-cna', 'views/forms/view/view-authority.directive'], 
 function (app, _, template) {
 
 	app.directive("editAuthority", ["$http", "Thesaurus", "$q", "$controller", "$location", "realm", "solr",'thesaurusService',

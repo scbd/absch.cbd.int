@@ -1,6 +1,5 @@
 define(['app', 'lodash', 'views/forms/view/record-loader.directive',
-'views/forms/view/record-loader.directive',
-    'js/common', 'services/role-service', 'toastr',
+'views/forms/view/record-loader.directive', 'services/main', 'toastr',
     'views/directives/block-region-directive',
     'views/register/directives/register-top-menu',
     'views/directives/task-id-directive'

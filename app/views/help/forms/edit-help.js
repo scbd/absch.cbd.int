@@ -1,5 +1,5 @@
 define(['app', 'lodash', 'ngMaterial', 'ngAria', 'angular-animate', 'components/scbd-angularjs-services/main', 'components/scbd-angularjs-controls/main',
-	'/app/js/common'], function (app, _) {
+	'services/main'], function (app, _) {
 		app.controller("editHelpController",
 			["$routeParams", "$scope", "$rootScope", "$q", '$http',  '$location', 'commonjs', '$mdDialog',
 				function ($routeParams, $scope, $rootScope, $q, $http, $location, commonjs, $mdDialog) {
