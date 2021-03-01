@@ -24,6 +24,40 @@ import 'services/main';
         absThematicAreas: function() {return thesaurusService.getDomainTerms('absSubjects');} 
     });
 
+     $scope.onNotificationQuery = function(searchText, tab){
+       var queryOptions = {
+         schemas	  : ['notification'],
+         searchText: searchText
+       }
+       if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+         queryOptions.government = $scope.document.government.identifier;
+       }
+
+       if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
+         queryOptions.identifier = $scope.document.header.identifier;
+       }
+
+       return $scope.onBuildDocumentSelectorQuery(queryOptions);
+     }
+
+    //need to verify
+    //$scope.organizationQuery = 'schema_s:organization OR (schema_s:contact AND type_s:organization)' 
+     $scope.onContactQuery = function(searchText, tab){
+       var queryOptions = {
+         schemas	  : ['contact', 'organization'],
+         contactType: 'organization',
+         searchText: searchText
+       }
+       if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+         queryOptions.government = $scope.document.government.identifier;
+       }
+
+       if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
+         queryOptions.identifier = $scope.document.header.identifier;
+       }
+
+       return $scope.onBuildDocumentSelectorQuery(queryOptions);
+     }
     //==================================
     //
     //==================================
