@@ -2,8 +2,8 @@ define(['app', 'lodash', 'angular', 'views/forms/edit/edit', 'js/common', 'views
     'views/forms/view/abs/view-measure.directive', 'views/forms/edit/abs/edit-measure-matrix-directive'
 ], function(app, _, angular) {
 
-    app.controller("editMeasure", ["$scope", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs',
-        function($scope, $http, $filter, $q, Enumerable, $controller, $location, commonjs) {
+    app.controller("editMeasure", ["$scope", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs', 'realm',
+        function($scope, $http, $filter, $q, Enumerable, $controller, $location, commonjs, realm) {
             $controller('editController', {
                 $scope: $scope
             });
@@ -226,34 +226,28 @@ define(['app', 'lodash', 'angular', 'views/forms/edit/edit', 'js/common', 'views
 
             $scope.setDocument({});
 
-            $scope.onContactQuery = function(searchText, tab){
+            $scope.onContactQuery = function(searchText){
                 var queryOptions = {
                     schemas	  : ['authority', 'contact'],
+                    realm     : realm.value,
                     searchText: searchText
                 }
                 if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
                     queryOptions.government = $scope.document.government.identifier;
-                }
-
-                if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-                    queryOptions.identifier = $scope.document.header.identifier;
                 }
 
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
-            $scope.onMeaureQuery = function(searchText, tab){
+
+            $scope.onMeaureQuery = function(searchText){
                 var queryOptions = {
                     schemas	  : ['measure'],
+                    realm     : realm.value,
                     searchText: searchText
                 }
                 if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
                     queryOptions.government = $scope.document.government.identifier;
                 }
-
-                if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-                    queryOptions.identifier = $scope.document.header.identifier;
-                }
-
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
             //==================================

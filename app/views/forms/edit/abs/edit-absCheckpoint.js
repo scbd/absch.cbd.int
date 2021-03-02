@@ -2,7 +2,7 @@ define(['app', 'lodash', 'views/forms/edit/edit',
     'views/forms/view/abs/view-abs-checkpoint.directive'
 ], function(app, _) {
 
-    app.controller("editAbsCheckpoint", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, $http, $filter, $q, $routeParams, $controller, $location) {
+    app.controller("editAbsCheckpoint", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", "realm", function($scope, $http, $filter, $q, $routeParams, $controller, $location, realm) {
         $controller('editController', {
             $scope: $scope
         });
@@ -41,19 +41,15 @@ define(['app', 'lodash', 'views/forms/edit/edit',
             });
         };
 
-        $scope.onContactQuery = function(searchText, tab){
+        $scope.onContactQuery = function(searchText){
             var queryOptions = {
                 schemas	  : ['contact', 'authority'],
+                realm     : realm.value,
                 searchText: searchText
             }
             if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
                 queryOptions.government = $scope.document.government.identifier;
             }
-
-            if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-                queryOptions.identifier = $scope.document.header.identifier;
-            }
-
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
         }
 

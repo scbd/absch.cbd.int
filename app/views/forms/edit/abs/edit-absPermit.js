@@ -2,8 +2,8 @@ define(['app','lodash', 'views/forms/edit/edit', 'js/common',
         'views/forms/view/abs/view-abs-permit.directive'], function (app,_) {
 
   app.controller("editAbsPermit", ["$scope", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable",
-                                    "editFormUtility", "$controller","IStorage","$location", "commonjs",
-   function ($scope, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage, $location, commonjs) {
+                                    "editFormUtility", "$controller","IStorage","$location", "commonjs", "realm",
+   function ($scope, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage, $location, commonjs, realm) {
     $controller('editController', {$scope: $scope});
 
     $scope.path= $location.path();
@@ -45,17 +45,14 @@ define(['app','lodash', 'views/forms/edit/edit', 'js/common',
       });
     });
 
-       $scope.onContactQuery = function(searchText, tab){
+       $scope.onContactQuery = function(searchText){
            var queryOptions = {
                schemas	  : ['authority', 'contact'],
+               realm     : realm.value,
                searchText: searchText
            }
            if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
                queryOptions.government = $scope.document.government.identifier;
-           }
-
-           if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-               queryOptions.identifier = $scope.document.header.identifier;
            }
 
            return $scope.onBuildDocumentSelectorQuery(queryOptions);
@@ -64,14 +61,11 @@ define(['app','lodash', 'views/forms/edit/edit', 'js/common',
        $scope.onBuildQuery = function(searchText, schema){
            var queryOptions = {
                schemas	  : [schema],
+               realm     : realm.value,
                searchText: searchText
            }
            if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
                queryOptions.government = $scope.document.government.identifier;
-           }
-
-           if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-               queryOptions.identifier = $scope.document.header.identifier;
            }
 
            return $scope.onBuildDocumentSelectorQuery(queryOptions);
