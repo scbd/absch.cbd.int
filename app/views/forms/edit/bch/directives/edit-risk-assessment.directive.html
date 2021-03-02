@@ -63,7 +63,7 @@
 												<div class="col-xs-12">
 													<div class="km-control-group" name="authorities" required caption="Competent National Authority(ies) responsible for the risk assessment">											
 														<div document-selector ng-model="document.authorities" question="authorities"
-																on-build-query="onBuildQuery(searchText,'authority')" allow-new-schema="authority" allow-new="true"></div>
+																on-build-query="onBuildAuthorityQuery(searchText, tab)" allow-new-schema="authority" allow-new="true"></div>
 
 													</div>
 												</div>
@@ -73,7 +73,7 @@
 												<div class="col-xs-12">
 													<div class="km-control-group" name="contacts" caption="Contact details of the main responsible risk assessor">											
 														<div document-selector ng-model="document.contacts" question="contacts"  skip-government="{{isNational? 'false':'true'}}"
-																on-build-query="onBuildQuery(searchText,'contact')" allow-new-schema="contact" allow-new="true"></div>
+																on-build-query="onBuildContactQuery(searchText, tab)" allow-new-schema="contact" allow-new="true"></div>
 
 													</div>
 												</div>

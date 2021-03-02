@@ -9,8 +9,8 @@ import "views/forms/view/bch/view-lmo.directive";
 import 'views/forms/directives/traits-selector.directive';
 import 'views/forms/directives/view-terms-hierarchy';
 
-	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q',
-		 function($http, $controller, thesaurusService, storage, $q) {
+	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q', 'realm',
+		 function($http, $controller, thesaurusService, storage, $q, realm) {
 		
 		return {
 			restrict   : "EA",
@@ -40,16 +40,10 @@ import 'views/forms/directives/view-terms-hierarchy';
 				$scope.onContactQuery = function(searchText, tab){
 
 					var queryOptions = {
+						realm     : realm.value,
 						schemas	  : ['contact'],
-						contactType: 'person',
+						fieldQueries: ['type_s: person'],
 						searchText: searchText
-					}
-					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
-						queryOptions.government = $scope.document.government.identifier;
-					}
-
-					if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-						queryOptions.identifier = $scope.document.header.identifier;
 					}
 
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
@@ -58,34 +52,20 @@ import 'views/forms/directives/view-terms-hierarchy';
 				$scope.onRrecipientOrganismsQuery = function(searchText, tab){
 
 					var queryOptions = {
+						realm     : realm.value,
 						schemas	  : ['organism', 'modifiedOrganism'],
 						searchText: searchText
 					}
-					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
-						queryOptions.government = $scope.document.government.identifier;
-					}
-
-					if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-						queryOptions.identifier = $scope.document.header.identifier;
-					}
-
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 
 				$scope.onBuildQuery = function(searchText, schemasVal){
 
 					var queryOptions = {
+						realm     : realm.value,
 						schemas	  : [schemasVal],
 						searchText: searchText
 					}
-					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
-						queryOptions.government = $scope.document.government.identifier;
-					}
-
-					if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-						queryOptions.identifier = $scope.document.header.identifier;
-					}
-
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 				//==================================

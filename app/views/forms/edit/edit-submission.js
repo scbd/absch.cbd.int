@@ -41,14 +41,14 @@ import 'services/main';
      }
 
      $scope.onContactQuery = function(searchText, tab){
-    if(!$scope.document){
-        return
-      }
        var queryOptions = {
          realm       : realm.value,
          fieldQueries:['schema_s:organization OR (schema_s:contact AND type_s:organization)' ],
          searchText  : searchText
        }
+       if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+        queryOptions.government = $scope.document.government.identifier;
+    }
       return  $scope.onBuildDocumentSelectorQuery(queryOptions);
      } 
     //==================================

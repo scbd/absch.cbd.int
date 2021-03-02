@@ -6,7 +6,7 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import "views/forms/view/bch/view-risk-assessment.directive";
 
-	var riskAssessmentDirective = ["$controller", "thesaurusService", "$routeParams", function($controller, thesaurusService, $routeParams) {
+	var riskAssessmentDirective = ["$controller", "thesaurusService", "$routeParams", "realm", function($controller, thesaurusService, $routeParams, realm) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -38,6 +38,7 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 
 				$scope.onBuildQuery = function(searchText, schema){
 					var queryOptions = {
+						realm     : realm.value,
 						schemas	  : [schema],
 						searchText: searchText
 					}
@@ -49,6 +50,32 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 						queryOptions.identifier = $scope.document.header.identifier;
 					}
 
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
+
+
+				$scope.onBuildAuthorityQuery = function(searchText, tab){
+					var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['authority'],
+						searchText: searchText
+					}
+					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+						queryOptions.government = $scope.document.government.identifier;
+					}
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
+
+
+				$scope.onBuildContactQuery = function(searchText, tab){
+					var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['contact'],
+						searchText: searchText
+					}
+					if($scope.isNational){
+						queryOptions.government = $scope.document.government.identifier;
+					}
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 
