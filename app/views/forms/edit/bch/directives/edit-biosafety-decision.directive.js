@@ -6,8 +6,8 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import "views/forms/view/bch/view-biosafety-decision.directive";
 
-    app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 
-        function($controller, thesaurusService, $routeParams, solr, editFormUtility) {
+    app.directive("editBiosafetyDecision", "$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 'realm',
+        function($controller, thesaurusService, $routeParams, solr, editFormUtility, realm) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -245,17 +245,10 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 
                 $scope.onContactQuery = function(searchText, tab){
 					var queryOptions = {
+                        realm     : realm.value,
 						schemas	  : ['contact'],
-						contactType: 'person',
+                        fieldQueries: ['type_s: person'],
 						searchText: searchText
-					}
-		
-					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
-						queryOptions.government = $scope.document.government.identifier;
-					}
-		
-					if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-						queryOptions.identifier = $scope.document.header.identifier;
 					}
 		
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
@@ -265,19 +258,27 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                 $scope.onBuildQuery = function(searchText, tab, schemasVal){
 					
                     var queryOptions = {
+                        realm     : realm.value,
 						schemas	  : [schemasVal],
                         searchText: searchText
                     }
 					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
                         queryOptions.government = $scope.document.government.identifier;
                     }
-
-                    if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-                        queryOptions.identifier = $scope.document.header.identifier;
-                    }
-					
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }
+
+                $scope.onBuildSkipGovernmentQuery = function(searchText, tab, schemasVal){
+					
+                    var queryOptions = {
+                        realm     : realm.value,
+						schemas	  : [schemasVal],
+                        searchText: searchText
+                    }
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                }
+
+
                 $scope.getCleanDocument = function(document) {
 
                     document = document || $scope.document;

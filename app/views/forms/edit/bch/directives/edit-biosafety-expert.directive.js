@@ -7,8 +7,8 @@ import "views/forms/view/bch/view-biosafety-expert.directive";
 import 'components/scbd-angularjs-controls/main';
 import 'services/main';
 
-	app.directive("editBiosafetyExpert", ["locale", "$filter", "searchService", "$q", "$controller", "thesaurusService", 'solr', 'Thesaurus',
-	function(appLocale, $filter, searchService, $q, $controller, thesaurusService, solr, thesaurus) {
+	app.directive("editBiosafetyExpert", ["locale", "$filter", "searchService", "$q", "$controller", "thesaurusService", 'solr', 'Thesaurus', 'realm',
+	function(appLocale, $filter, searchService, $q, $controller, thesaurusService, solr, thesaurus, realm) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -72,19 +72,11 @@ import 'services/main';
 				});
                 $scope.onContactQuery = function(searchText, tab){
 					var queryOptions = {
+						realm     : realm.value,
 						schemas	  : ['contact'],
-						contactType: 'person',
+						fieldQueries: ['type_s: person'],
 						searchText: searchText
-					}
-		
-					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
-						queryOptions.government = $scope.document.government.identifier;
-					}
-		
-					if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-						queryOptions.identifier = $scope.document.header.identifier;
-					}
-		
+					}		
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 		
 				}

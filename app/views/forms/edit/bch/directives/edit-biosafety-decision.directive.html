@@ -436,7 +436,7 @@
 														<div class="col-xs-12">														
 															<div class="km-control-group" required name="modifiedOrganisms" caption="LMO identification">
 																<div document-selector ng-model="document.modifiedOrganisms"  allow-new="true" allow-new-schema="modifiedOrganism"
-																	skip-government="true" on-build-query="onBuildQuery(searchText, tab, 'modifiedOrganism')"></div>
+																	skip-government="true" on-build-query="onBuildSkipGovernmentQuery(searchText, tab, 'modifiedOrganism')"></div>
 															</div>
 														</div>
 														<div class="col-sm-12">
@@ -499,7 +499,7 @@
 											<div class="km-control-group" name="modifiedOrganisms" caption="LMO identification"
 												ng-required="isLmoMandatory()">
                                                 <div document-selector ng-model="document.modifiedOrganisms" question="modifiedOrganisms" allow-new="true" allow-new-schema="modifiedOrganism"
-												on-build-query="onBuildQuery(searchText, tab, 'modifiedOrganism')" skip-government="true"></div>			
+												on-build-query="onBuildSkipGovernmentQuery(searchText, tab, 'modifiedOrganism')" skip-government="true"></div>			
 											</div>
 										</div>
 									</div>

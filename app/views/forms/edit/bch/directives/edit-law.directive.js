@@ -6,7 +6,7 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import "views/forms/view/bch/view-biosafety-law.directive";
 
-	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter","Enumerable", function($controller, thesaurusService, $q, $filter,Enumerable) {
+	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter","Enumerable", "realm", function($controller, thesaurusService, $q, $filter,Enumerable, realm) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -110,15 +110,12 @@ import "views/forms/view/bch/view-biosafety-law.directive";
 				$scope.onBuildLawQuery = function(searchText){
 					
                     var queryOptions = {
+						realm     : realm.value,
 						schemas	  : ['biosafetyLaw'],
                         searchText: searchText
                     }
 					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
                         queryOptions.government = $scope.document.government.identifier;
-                    }
-
-                    if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-                        queryOptions.identifier = $scope.document.header.identifier;
                     }
 					
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
@@ -126,15 +123,12 @@ import "views/forms/view/bch/view-biosafety-law.directive";
 				$scope.onBuildAuthoritiesQuery = function(searchText){
 					
                     var queryOptions = {
+						realm     : realm.value,
 						schemas	  : ['authority', 'supplementaryAuthority'],
                         searchText: searchText
                     }
 					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
                         queryOptions.government = $scope.document.government.identifier;
-                    }
-
-                    if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-                        queryOptions.identifier = $scope.document.header.identifier;
                     }
 					
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
