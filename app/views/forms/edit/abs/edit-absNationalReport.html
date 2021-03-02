@@ -183,7 +183,7 @@
                                                         caption="2. Contact person">
                                                        <div document-selector ng-model="document.contact"
                                                                ng-disabled="!document.government" question="contact"
-                                                               on-build-query="oncontactQuery(searchText, tab)" filter="true" type="radio" allow-new="true" allow-new-schema="contact"></div>
+                                                               on-build-query="oncontactQuery(searchText)" filter="true" type="radio" allow-new="true" allow-new-schema="contact"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -241,7 +241,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question4.documentReferenceIDs"
                                                             ng-disabled="!document.government" question="question4"
-                                                             on-build-query="onRecordQuery(searchText, tab)" filter="true">
+                                                             on-build-query="onRecordQuery(searchText)" filter="true">
                                                         </div>
                                                     </div>
     
@@ -269,7 +269,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question5.documentReferenceIDs"
                                                              ng-disabled="!document.government" question="question5"
-                                                             on-build-query="onRecordQuery(searchText, tab)" filter="true">
+                                                             on-build-query="onRecordQuery(searchText)" filter="true">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -295,7 +295,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question6.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question6"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true">
+                                                               on-build-query="onRecordQuery(searchText)" filter="true">
                                                     </div>
                                                     </div>
                                                 </div>
@@ -330,7 +330,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question7.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question7"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -356,7 +356,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question8.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question8"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true">
+                                                               on-build-query="onRecordQuery(searchText)" filter="true">
                                                     </div>
                                                     </div>
                                                 </div>
@@ -384,7 +384,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question9.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question9"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true">
+                                                               on-build-query="onRecordQuery(searchText)" filter="true">
                                                     </div>
                                                 </div>
                                             </div>
@@ -402,7 +402,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question10.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question10"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true">
+                                                               on-build-query="onRecordQuery(searchText)" filter="true">
                                                     </div>
                                                     <div class="km-control-group" name="question10RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -445,7 +445,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                       <div document-selector ng-model="document.question11.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question11"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div ng-hide="document.question11.answer || document.question11.answer===undefined"
                                                         ng-class="{'confidential-text': !document.question11.answer}">
@@ -477,7 +477,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question12.documentReferenceIDs"
                                                                ng-disabled="!document.government || !document.question11.answer" question="question12"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -500,7 +500,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question13.documentReferenceIDs"
                                                                ng-disabled="!document.government || !document.question11.answer" question="question13"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -523,7 +523,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question14.documentReferenceIDs"
                                                                ng-disabled="!document.government || !document.question11.answer" question="question14"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -546,7 +546,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question15.documentReferenceIDs"
                                                                ng-disabled="!document.government || !document.question11.answer" question="question15"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -580,7 +580,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question16.documentReferenceIDs"
                                                                ng-disabled="!document.government || !document.question11.answer" question="question16"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -603,7 +603,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question17.documentReferenceIDs"
                                                                ng-disabled="!document.government || !document.question11.answer" question="question17"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -671,7 +671,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question18.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question18"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -688,7 +688,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question19.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question19"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question19RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -717,7 +717,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question20.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question20"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -738,7 +738,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question21.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question21"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -759,7 +759,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question22.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question22"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -777,7 +777,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question23.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question23"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question23RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -852,7 +852,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question24.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question24"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -893,7 +893,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question25.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question25"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -937,7 +937,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question26.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question26"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1006,7 +1006,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question28.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question28"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1037,7 +1037,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question29.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question29"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1055,7 +1055,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question30.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question30"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question30RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -1092,7 +1092,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question31.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question31"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1113,7 +1113,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question32.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question32"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1150,7 +1150,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question33.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question33"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1167,7 +1167,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question34.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question34"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
     
                                                     <div class="km-control-group" name="question34RelevantDocuments"
@@ -1202,7 +1202,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question35.research.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question35Research"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
     
                                                     <div class="km-control-group" required name="question35_emergencies"
@@ -1221,7 +1221,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question35.emergencies.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question35Emergencies"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
     
                                                     <div class="km-control-group" required name="question35_access" caption="Taken into consideration the need for expeditious access to genetic resources and expeditious fair and equitable sharing of benefits arising out of the use of such genetic resources, including access to affordable treatments by those in need, especially, in developing countries as provided in Article 8(b)?">
@@ -1238,7 +1238,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question35.access.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question35Access"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
     
                                                     <div class="km-control-group" required name="question35_importance"
@@ -1259,7 +1259,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question35.importance.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question35Importance"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
     
     
@@ -1287,7 +1287,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question36.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question36"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question36RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -1318,13 +1318,16 @@
                                                         caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question37.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question37"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div ng-hide="document.question37.answer || document.question37.answer===undefined"
                                                         ng-class="{'confidential-text': !document.question37.answer}">
                                                         Please skip Question 38 to 44. <br /> <br />
                                                     </div>
-    
+
+
+
+
                                                     <div ng-show="document.question37.answer===undefined" ng-class="{'confidential-text': document.question37.answer===undefined}">
                                                         Please answer Question 37 to know if it is required to answer
                                                         Question 38 to 44. <br /> <br />
@@ -1354,7 +1357,7 @@
                                                                     name="q38LawDocRefs" caption="Please select the relevant ABSCH records">
                                                                   <div document-selector ng-model="document.question38.law.documentReferenceIDs"
                                                                            ng-disabled="!document.government" question="question38Law"
-                                                                           on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                                           on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                                 </div>
     
                                                                 <div class="km-control-group" ng-required="document.question38.answer"
@@ -1399,7 +1402,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question38.documentReferenceIDs"
                                                                ng-disabled="!document.government || !Q37IsYes()" question="question38"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1422,7 +1425,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                       <div document-selector ng-model="document.question39.documentReferenceIDs"
                                                                ng-disabled="!document.government || !Q37IsYes()" question="question39"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1445,7 +1448,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question40.documentReferenceIDs"
                                                                ng-disabled="!document.government || !Q37IsYes()" question="question40"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1468,7 +1471,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question41.documentReferenceIDs"
                                                                ng-disabled="!document.government || !Q37IsYes()" question="question41"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1498,7 +1501,7 @@
                                                                     name="q42DocRefsCommunity" caption="Please select the relevant ABSCH records">
                                                                     <div document-selector ng-model="document.question42.community.documentReferenceIDs"
                                                                            ng-disabled="!document.government || !Q37IsYes()" question="question42community"
-                                                                           on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                                           on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                                 </div>
                                                             </div>
     
@@ -1525,7 +1528,7 @@
                                                                     name="q42DocRefsMat" caption="Please select the relevant ABSCH records">
                                                                     <div document-selector ng-model="document.question42.mat.documentReferenceIDs"
                                                                            ng-disabled="!document.government || !Q37IsYes()" question="question42mat"
-                                                                           on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                                           on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1549,7 +1552,7 @@
                                                                     name="q42DocRefsmcc" caption="Please select the relevant ABSCH records">
                                                                    <div document-selector ng-model="document.question42.mcc.documentReferenceIDs"
                                                                            ng-disabled="!document.government || !Q37IsYes()" question="question42mcc"
-                                                                           on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                                           on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1576,7 +1579,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question43.documentReferenceIDs"
                                                                ng-disabled="!document.government || !Q37IsYes()" question="question43"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1596,7 +1599,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question44.documentReferenceIDs"
                                                                ng-disabled="!document.government || !Q37IsYes()" question="question44"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div ng-show="document.question37.answer" class="km-control-group" name="question44RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -1627,7 +1630,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question45.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question45"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1643,7 +1646,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question46.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question46"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1660,7 +1663,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                       <div document-selector ng-model="document.question47.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question47"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question47RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -1698,7 +1701,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question48.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question48"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1724,7 +1727,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question49.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question49"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1741,7 +1744,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question50.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question50"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question50RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -1773,7 +1776,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question51.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question51"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1794,7 +1797,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question52.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question52"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1811,7 +1814,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question53.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question53"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question53RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -1852,7 +1855,7 @@
                                                                 style="margin-bottom:20px;" name="q54DocRefs" caption="Please select the relevant ABSCH records">
                                                                <div document-selector ng-model="document.question54.measures.documentReferenceIDs"
                                                                        ng-disabled="!document.government" question="question54measures"
-                                                                       on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                                       on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1866,7 +1869,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question54.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question54"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1898,7 +1901,7 @@
                                                                 style="margin-bottom:20px;" name="q55DocRefs" caption="Please select the relevant ABSCH records">
                                                                <div document-selector ng-model="document.question55.measures.documentReferenceIDs"
                                                                        ng-disabled="!document.government" question="question55measures"
-                                                                       on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                                       on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                             </div>
     
                                                         </div>
@@ -1913,7 +1916,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question55.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question55"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1933,7 +1936,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question56.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question56"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1953,7 +1956,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question57.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question57"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1970,7 +1973,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question58.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question58"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question58RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -2007,7 +2010,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question59.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question59"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2027,7 +2030,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question60.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question60"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2059,7 +2062,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question61.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question61"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2139,7 +2142,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question62.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question62"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2210,7 +2213,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question63.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question63"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2227,7 +2230,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                     <div document-selector ng-model="document.question64.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question64"
-                                                               on-build-query="onRecordQuery(searchText, tab)" filter="true"></div>
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
     
                                                     <div class="km-control-group" name="question64RelevantDocuments"

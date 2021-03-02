@@ -5,8 +5,8 @@ define(['app','lodash','views/forms/edit/edit',
 ], function(app,_) {
 
     app.controller("editCheckpointCommunique", ["$scope", "$http", "$filter", "$q", "$controller", "IStorage",
-        "Thesaurus", "Enumerable", "$location", 'commonjs',
-        function($scope, $http, $filter, $q, $controller, storage, Thesaurus, Enumerable, $location, commonjs) {
+         "Thesaurus", "Enumerable", "$location", 'commonjs', 'realm',
+        function($scope, $http, $filter, $q, $controller, storage, Thesaurus, Enumerable, $location, commonjs, realm) {
             $controller('editController', {
                 $scope: $scope
             });
@@ -41,7 +41,7 @@ define(['app','lodash','views/forms/edit/edit',
                 }
             });
 
-            $scope.onBuildQuery = function(searchText, tab){
+            $scope.onBuildQuery = function(searchText){
                 var queryOptions = {
                     schemas	  : ['absCheckpoint'],
                     searchText: searchText
@@ -49,39 +49,38 @@ define(['app','lodash','views/forms/edit/edit',
                 if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
                     queryOptions.government = $scope.document.government.identifier;
                 }
-
-                if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-                    queryOptions.identifier = $scope.document.header.identifier;
-                }
-
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
 
-            $scope.onBuildIRCCsQuery = function(searchText, tab){
+            $scope.onBuildIRCCsQuery = function(searchText){
                 var queryOptions = {
                     schemas	  : ['absPermit'],
                     government: ["*"],
+                    realm     : realm.value,
                     searchText: searchText
-                }
-
-                if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-                    queryOptions.identifier = $scope.document.header.identifier;
                 }
 
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
 
-            $scope.onContactQuery = function(searchText, tab){
+            $scope.onContactQuery = function(searchText){
                 var queryOptions = {
                     schemas	  : ['contact', 'authority'],
+                    realm     : realm.value,
                     searchText: searchText
                 }
                 if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
                     queryOptions.government = $scope.document.government.identifier;
                 }
 
-                if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-                    queryOptions.identifier = $scope.document.header.identifier;
+                return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
+
+            $scope.onContactSkipGovernmentQuery = function(searchText){
+                var queryOptions = {
+                    schemas	  : ['contact', 'authority'],
+                    realm     : realm.value,
+                    searchText: searchText
                 }
 
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);

@@ -2,7 +2,7 @@
     'views/forms/view/abs/view-abs-national-model-contractual-clause.directive'
 ], function(app,_) {
 
-    app.controller("editAbsNationalModelContractualClause", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, $http, $filter, $q, $routeParams, $controller, $location) {
+    app.controller("editAbsNationalModelContractualClause", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", "realm", function($scope, $http, $filter, $q, $routeParams, $controller, $location, realm) {
         $controller('editController', {
             $scope: $scope
         });
@@ -46,6 +46,19 @@
                 return jurisdictions;
             });
         };
+
+        $scope.onBuildQuery = function(searchText){
+            var queryOptions = {
+                schemas	  : ['measure'],
+                realm     : realm.value,
+                searchText: searchText
+            }
+            if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+                queryOptions.government = $scope.document.government.identifier;
+            }
+
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+        }
 
         //==================================
         //
