@@ -41,8 +41,7 @@ import 'views/forms/directives/view-terms-hierarchy';
 
 					var queryOptions = {
 						realm     : realm.value,
-						schemas	  : ['contact'],
-						fieldQueries: ['type_s: person'],
+						fieldQueries: ['schema_s:contact AND type_s:person'],
 						searchText: searchText
 					}
 

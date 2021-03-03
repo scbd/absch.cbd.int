@@ -63,7 +63,6 @@ import 'services/main';
             $scope.onBuildIRCCsQuery = function(searchText, tab){
                 var queryOptions = {
                     schemas	  : ['absPermit'],
-                    government: ["*"],
                     searchText: searchText
                 }
 

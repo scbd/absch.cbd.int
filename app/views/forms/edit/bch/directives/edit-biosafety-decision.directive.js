@@ -6,7 +6,7 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import "views/forms/view/bch/view-biosafety-decision.directive";
 
-    app.directive("editBiosafetyDecision", "$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 'realm',
+    app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 'realm',
         function($controller, thesaurusService, $routeParams, solr, editFormUtility, realm) {
 		return {
 			restrict   : "EA",
@@ -244,38 +244,37 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                 //==================================
 
                 $scope.onContactQuery = function(searchText, tab){
-					var queryOptions = {
-                        realm     : realm.value,
-						schemas	  : ['contact'],
-                        fieldQueries: ['type_s: person'],
-						searchText: searchText
-					}
-		
-					return $scope.onBuildDocumentSelectorQuery(queryOptions);
-		
-				}
+                  var queryOptions = {
+                       realm     : realm.value,
+                       fieldQueries: ['schema_s:contact AND type_s:person'],
+                       searchText: searchText
+                  }
+
+                  return $scope.onBuildDocumentSelectorQuery(queryOptions);
+
+                }
 
                 $scope.onBuildQuery = function(searchText, tab, schemasVal){
 					
                     var queryOptions = {
                         realm     : realm.value,
-						schemas	  : [schemasVal],
+				        schemas	  : [schemasVal],
                         searchText: searchText
                     }
-					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
-                        queryOptions.government = $scope.document.government.identifier;
-                    }
-					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				    //will handle console error for this
+                         queryOptions.government = $scope.document.government.identifier;
+                   
+				      	return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }
 
                 $scope.onBuildSkipGovernmentQuery = function(searchText, tab, schemasVal){
-					
+
                     var queryOptions = {
                         realm     : realm.value,
-						schemas	  : [schemasVal],
+                        schemas	  : [schemasVal],
                         searchText: searchText
                     }
-					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                      return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }
 
 
