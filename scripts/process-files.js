@@ -54,7 +54,11 @@ async function processFiles() {
     ///////////////////////////////////////////////////
     ///     copy files to en folder i18n
     ///////////////////////////////////////////////////
-    await copyFiles(baseDir, appDir, ['en'], i18nDir, '**/*.{html}');
+    await copyFiles(baseDir, appDir, ['en'], i18nDir, '**/*.{html,json}');
+
+    //replace .json file extension  with .json.js
+    await changeJsonToJsExt(baseDir, i18nDir);
+
 
     ///////////////////////////////////////////////////
     ///     touch en
@@ -65,6 +69,11 @@ async function processFiles() {
         const modifiedEpoch = await git.getModifiedDate(`app/${file}`, {dst:baseDir});
         const modifiedDate = new Date(Number(modifiedEpoch)* 1000)
         await touch(`${baseDir}/${i18nDir}/en/app/${file}`,  { time : modifiedDate });
+
+        //if json files than update .json.js with same timestamp
+        if(/\.json$/.test(file)){
+            await touch(`${baseDir}/${i18nDir}/en/app/${file}.js`,  { time : modifiedDate });
+        }
     });
     await Promise.all(enTouchPromise);
 
@@ -74,6 +83,16 @@ async function processFiles() {
 
     return;    
 
+}
+
+async function changeJsonToJsExt(baseDir, i18nDir) {
+    const allApplicationJsonFiles = (await asyncGlob('**/*.json', { cwd: i18nDir }));
+
+    const jsonToJsPromise = allApplicationJsonFiles.map(async (file) => {
+        const copyToDir = `${baseDir}/${i18nDir}/${path.dirname(file)}`;        
+        await copyFile(`${baseDir}/${i18nDir}/${file}`, `${copyToDir}/${path.basename(file)}.js`);
+    });
+    await Promise.all(jsonToJsPromise);
 }
 
 async function copyFiles(baseDir, appDir, languages, i18nDir, globPattern) {

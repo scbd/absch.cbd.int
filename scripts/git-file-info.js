@@ -8,7 +8,7 @@ const executeCommand = async (command, options) => {
 
         const output = await execPromise(command, {cwd: dst})
         if (output.stdout === '') {
-            return reject('this does not look like a git repo')
+            return reject(`this does not look like a git repo\n ${command}`)
         }
         if(output.stderr)
             throw output.stderr;
