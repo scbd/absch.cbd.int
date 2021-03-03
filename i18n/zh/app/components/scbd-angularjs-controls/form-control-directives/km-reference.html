@@ -1,0 +1,90 @@
+﻿<div>
+	<div class="reference-select">
+		<table class="table table-hover table-striped">
+			<tr ng-repeat="reference in references" >
+				<td>
+					<div ng-show="!reference.__loading && !reference.__errorCode">
+						<div><strong>{{reference.title | lstring}}</strong>
+							<div ng-bind-html="reference.summary | lstring"></div>
+					</div>
+
+					<div ng-show="reference.__loading">
+						<i class="fa fa-spinner fa-spin"></i> Loading...
+					</div>
+
+					<div ng-show="reference.__errorCode">
+						<div ng-switch="reference.__errorCode">
+							<div ng-switch-when="404" class="alert alert-warning">
+								<strong>Record not found</strong>
+								{{reference.identifier}}
+							</div>
+							<div ng-switch-default class="alert alert-danger">
+								<strong>Error loading record</strong>
+								{{reference.identifier}}
+								<div>{{reference.__error}}<div>
+							</div>
+						</div>
+					</div>
+				</td>
+				<td style="text-align:end">
+					<button type="button" title="Remove" class="btn btn-default" ng-click="remove(reference)"><i class="glyphicon glyphicon-trash"></i></button>
+				</td>
+			</tr>
+		</table>
+		</div>
+
+		<button type="button" class="btn btn-default" ng-show="multiple" ng-click="addReference()">Add a reference</button>
+		<button type="button" class="km-reference-select btn btn-default" ng-hide="multiple" ng-click="addReference()">Select a reference...</button>
+	</div>
+
+    <!--Reference Editor-->
+	<div id="editReference" class="modal fade" data-backdrop="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3>Select a reference</h3>
+					<h5>Type to filter, click or use arrow keys and spacebar to select, then click save or hit enter to save your changes.</h5>
+				</div>
+				<div class="modal-body" style="max-height:400px;overflow-y:auto">
+
+					<table class="table table-hover">
+						<tr ng-repeat="reference in filteredReferences = (editor.references | filter:editor.search | filter:editor.filterExcludeSelected | orderBy:editor.sortReference)" class="acOption{{$index}}">
+							<td>
+								<input ng-keydown="keydown($event)" type="checkbox" ng-model="reference.__checked"/>
+							</td>
+							<td class="reference-summary-cell">
+								<div><strong>{{reference.title | lstring}}</strong>
+									<div ng-bind-html="reference.summary | lstring"></div>
+							</td>
+						</tr>
+
+						<tr ng-show="editor.references.length==0">
+							<td colspan="2">No record.</td>
+						</tr>
+
+						<tr ng-show="isLoading">
+							<td colspan="2">
+								Loading...
+							</td>
+						</tr>
+					</table>
+
+				</div>
+				<div class="modal-footer">
+
+					<div class="row">
+
+					<div class="col-sm-8">
+						<input ng-keydown="keydown($event)" class="km-reference-search form-control" type="text" ng-model="editor.search" placeholder="search" />
+					</div>
+
+					<div class="col-sm-4" style="text-align:right">
+						<button type="button"  class="btn btn-default" ng-click="editor.close()">Cancel</button>
+						<button type="button"  class="btn btn-primary" ng-click="editor.save()" >Save</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

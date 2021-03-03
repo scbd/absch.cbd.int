@@ -1,0 +1,52 @@
+﻿<div id="printContentHeader">
+    <style>
+        .unep-logo {
+            padding-top: 10px;
+            height: 80px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .cbd-logo {
+            height: 70px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .un-logo {
+            height: 80px;
+            padding-top: 10px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        @media print {
+            .unep-logo {
+                height: 60px;
+            }
+            .cbd-logo {
+                height: 50px;
+            }
+            .un-logo {
+                height: 60px;
+            }
+        }
+    </style>
+    <div class="row" style="padding-bottom:10px;border-bottom:1px solid #ddd">
+        <div class="col-xs-4">
+            <img class="unep-logo" src="/app/img/UNEP_logo.svg" />
+        </div>
+        <div class="col-xs-4" style="padding-top:10px;">
+            <img src="/app/img/cbd-logo-black-en.svg" class="cbd-logo" />
+        </div>
+        <div class="col-xs-4">
+            <img class="un-logo" src="/app/img/Emblem_of_the_United_Nations.svg" />
+        </div>
+        <div class="row" >
+           <strong> 
+                <span class="col-xs-12" style="margin-top:20px;text-align:center;">{{realm.chLongName}} ({{realm.chShortName}})</span>
+           </strong>
+        </div>
+    </div>
+    <br/>
+</div>

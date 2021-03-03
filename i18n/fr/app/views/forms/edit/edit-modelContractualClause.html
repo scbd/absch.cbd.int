@@ -1,0 +1,11 @@
+﻿<div ng-controller="editModelContractualClause">
+
+    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+
+    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+
+         <span block-region activate="isLoading()" ng-if="isLoading()"></span>
+        <div edit-schema-resource-base get-document-fn="getCleanDocument()" document="document" options="options"></div>
+
+    </div>
+</div>

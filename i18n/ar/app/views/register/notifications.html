@@ -1,0 +1,32 @@
+﻿<div ng-controller="NotificationsController" id="RegisterPage">
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet">
+
+    <div smooth-scroll duration="100" offset="200"></div>
+    <span register-top-menu></span>
+
+    <div class="register-content card card-1-notrans">
+
+        <div class="register-content-header bg-darkgrey color-white">
+            <div style="padding:10px 10px;">
+                <h3>Notifications 
+            <span class="helpinfoInline">
+                <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i> 
+            </span>
+        </h3>
+
+                <!--help info---------------------------->
+                <div ng-if="showInfo" class="well well-help">
+                    In this page you will find all notifications coming from all clearing-house platforms (CBD CH, BCH and ABS-CH). The clearing-house has a system of internal notifications to deal with requests for publications, reminders to update records, or notifying
+                    that certain records might be expiring. This page will allow you to follow up on the status of your records and find what the pending requests for publications are, or when a request has been approved, recalled, or rejected in any
+                    of the clearing-house platforms.
+                </div>
+
+            </div>
+        </div>
+        <div class="register-content-content">
+            <xuser-notifications-panel></xuser-notifications-panel>
+        </div>
+    </div>
+</div>
+<!-- controller -->

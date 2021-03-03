@@ -1,0 +1,135 @@
+﻿<div>
+
+    <div class="row">
+            <div class="col-lg-12" >
+                <table class="table table-hover"  style="padding-bottom:3px;background-color:#fff">
+    				<tr ng-repeat="doc in rawPermitSelected">{{doc}}
+    					<td>
+    						<span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
+                            <span class="latest-country"> {{doc.government | term:locale}} </span> |
+                            <span>{{doc | uniqueID}}</span>
+                            <div class="latest-title">{{doc.title_t}} </div>
+    					</td>
+                        <td>
+                            <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
+                                <a rel="noopener" translation-url  ng-click="removePermit(doc)" class="btn btn-warning">
+                                    <span class="glyphicon glyphicon-remove"></span>&nbsp;remove</a>
+                            </span>
+                        </td>
+    				</tr>
+    			</table>
+            </div>
+    </div>
+
+
+<style media="screen">
+    .dateBox{padding:0px;background-color:#fff;}
+    .dateBox li, .uniqueId{
+        border: 1px solid transparent;
+        border-radius: 4px;
+        border-color: #ccc;
+    }
+    .datepicker{z-index:1151 !important;}
+
+</style>
+
+
+
+    <button class="btn btn-default" ng-click="openDialog();" ng-disabled="disabled" >
+	  {{caption||'Add link to existing IRCCs »'}}
+	</button>
+
+    <!-- Modal -->
+    <div class="modal fade rounded" id="existingPermits" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-grey">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h1>Published Internationally Recognized Certificate of Compliance (IRCC)</h1>
+
+                    <div>
+                            <div km-select multiple required name="queryGovernment" ng-model="queryGovernment" items="options.government()" placeholder="Government"></div>
+                            <div km-select multiple required name="permitusage" ng-model="permitusage" items="options.usage()" placeholder="Intent"></div>
+                            <div km-select multiple required name="permitkeywords" ng-model="permitkeywords" items="options.keywords()" placeholder="Keywords"></div>
+
+                            <span  class="dateBox" search-filter-dates title='Date of issuance of the permit' query='permitIssuanceDate' field="expiration_s"></span>
+
+                            <div class="btn-group" >
+                                <button style="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
+                                    <span>Amendments</span>
+                                    <span ng-show="amendmentIntent==0"  style="color:#428BCA">: Amended </span>
+                                    <span ng-show="amendmentIntent==1"  style="color:#428BCA">: Revoked </span>
+                                    <span ng-show="amendmentIntent==-1" style="color:#428BCA">: None </span>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
+                                <li >
+                                    <a rel="noopener" translation-url  style="color:#999;" href ng-click="amendmentIntent=-2;" value="undefined"  ng-model="amendmentIntent" name="amendmentIntent">clear selection</a>
+                                </li>
+                                <li>
+                                    <a rel="noopener" translation-url  href ng-click="amendmentIntent=-1;" value="-1"  ng-model="amendmentIntent" name="amendmentIntent">
+                                    <span ng-show="amendmentIntent==-1" class="glyphicon glyphicon-ok"></span> none</a>
+                                </li>
+                                <li>
+                                    <a rel="noopener" translation-url  href ng-click="amendmentIntent=0;" value="0"  ng-model="amendmentIntent" name="amendmentIntent">
+                                    <span ng-show="amendmentIntent==0" class="glyphicon glyphicon-ok"></span> amended</a>
+                                </li>
+                                <li >
+                                    <a rel="noopener" translation-url  href ng-click="amendmentIntent=1;" value="1"  ng-model="amendmentIntent" name="amendmentIntent">
+                                    <span ng-show="amendmentIntent==1" class="glyphicon glyphicon-ok"></span> revoked</a>
+                                </li>
+
+                            </ul>
+                            </div>
+                            <div class="btn-group uniqueId">
+                                <input type="textbox" ng-model="uniqueId" placeholder="Unique Id"  class="form-control" >
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-body">
+
+                        <div   style="max-height:400px;overflow-y:auto">
+                            	<table class="table table-hover" style="padding:0;margin:0">
+            						<tr ng-show="!isLoading" ng-repeat="doc in rawPermitDocs | filter:isSelected">
+            							<td>
+            								<input type="checkbox" ng-model="doc.__checked"/>
+            							</td>
+            							<td>
+
+            								<span class="latest-date"> {{doc.createdDate_dt | formatDate}} </span> |
+                                            <span class="latest-country"> {{doc.government | term:locale}} </span> |
+                                            <span>{{doc | uniqueID}}</span>
+                                            <!-- <span class="latest-schema"> {{doc.schema_EN_t | schemaName}} </span> -->
+                                            <div class="latest-title">{{doc.title_t}} </div>
+            							</td>
+                                        <td>
+                                            <a rel="noopener" translation-url  target="_blank" href="/database/record?documentID={{doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}">
+                                                <i class="glyphicon glyphicon-new-window" id="help-record-newwindow"></i>
+                                            </a>
+                                        </td>
+            						</tr>
+
+            						<tr ng-show="rawPermitDocs.length==0">
+            							<td colspan="3">No records.</td>
+            						</tr>
+
+            						<tr ng-show="isLoading">
+            							<td colspan="3">
+            								Loading...
+            							</td>
+            						</tr>
+            					</table>
+                        </div>
+
+                </div>
+                <div class="modal-footer bg-grey">
+                    <div class="row">
+                        <a rel="noopener" translation-url  type="button" class="btn btn-primary" ng-click="savePermits()">Save</a>
+                        <a rel="noopener" translation-url  type="button" class="btn btn-default" data-dismiss="modal">Close</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

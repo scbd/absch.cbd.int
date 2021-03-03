@@ -1,0 +1,201 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-blue">
+		<h4>
+			<span ng-bind="::document.header.schema|schemaName"></span>
+			<span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span>
+		</h4>
+	</div>
+	<div class="record-body panel-body">
+
+
+
+		<document-date></document-date>
+
+
+		<div ng-if="document.isAmendment || amendedByRecords">
+			<legend>Amendment</legend>
+			<div ng-if="document.isAmendment">
+				<label>Is this an amendment to a law, regulation, guideline or agreement already published on the BCH?</label>
+				<div  class="km-value">
+					<km-value-bool value="document.isAmendment" locales="locale"></km-value-bool>
+				</div>
+			</div>
+			<div ng-if="document.amendedRecords">
+				<label>Law(s)/regulation(s) amended</label>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.amendedRecords">
+							<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
+						</li>
+					</ul>						
+				</div>
+			</div>
+			<div ng-if="document.amendmentsDetails">
+				<label>Brief summary of the amendment(s)</label>
+				<div compare-val>
+					<km-value-ml value="document.amendmentsDetails" html locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-if="amendedByRecords">
+				<label>The law/regulation in this record has been amended by the law(s)/regulation(s) in the following record(s)</label>
+				<div class="km-value" compare-val>
+					<div ng-repeat="referenced in amendedByRecords">
+						<view-record-reference ng-model="referenced"></view-record-reference>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<legend>General information</legend>
+
+		<div ng-if="document.government">
+			<label name="country">Country</label>
+			<div class="km-value" compare-val>
+				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
+				<span ng-party-status government="document.government" id="government"></span>
+			</div>
+		</div>
+
+		<div ng-if="document.title">
+			<label>Title</label>			
+			<div compare-val>
+				<km-value-ml value="document.title" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<legend>Legislative details</legend>
+		<div>
+			<div ng-if="document.type">
+				<label>Type of Law / Regulation</label>
+				<div class="km-value" compare-val>
+					<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type|term:locale"></span>
+					<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type.customValue|lstring:locale"></span>
+				</div>
+			</div>
+			<div ng-if="document.jurisdiction">
+				<label>Area of jurisdiction</label>
+				<div class="km-value" compare-val>
+					<span ng-if="document.jurisdiction.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.jurisdiction|term:locale"></span>
+					<span ng-if="document.jurisdiction.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.jurisdiction.customValue|lstring:locale"></span>
+				</div>
+			</div>
+
+			<div ng-if="document.jurisdictionScope">
+				<label>Geographical or political/economic group(s)</label>	
+				<div class="km-value" compare-val>
+					<ul ng-if="document.jurisdictionScope" class="list">
+						<li ng-repeat="item in document.jurisdictionScope">
+							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div ng-if="document.cpbSubjectAreas">
+				<label>Subject areas</label>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.cpbSubjectAreas">
+							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+							<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div ng-if="document.cpbOrganismTypes">
+				<label>Types of organisms addressed</label>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.cpbOrganismTypes">
+							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+							<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div ng-if="document.description">
+				<label>Brief description of the document including objective and scope</label>
+				<div compare-val>
+					<km-value-ml value="document.description" html locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-if="document.entryIntoForce">
+				<label>Date of entry into force</label>
+				<div class="km-value" compare-val>
+					<span ng-bind="document.entryIntoForce|formatDate"></span>
+				</div>
+			</div>
+		</div>
+
+
+		<div ng-if="document.documents || document.unofficialDocuments || document.documentsInfo">
+			<legend>Document details</legend>
+			<div ng-if="document.documents">
+				<label>Document text</label>
+				<div class="km-value" compare-val ng-if="document.documents" km-link-list 
+					ng-model="document.documents" style="margin-top: 5px;"></div>
+			</div>
+
+			<div ng-if="document.unofficialDocuments">
+				<label>Unofficial Documents</label>
+				<div class="km-value" compare-val ng-if="document.unofficialDocuments" km-link-list 
+					ng-model="document.unofficialDocuments" style="margin-top: 5px;"></div>				
+			</div>
+			<div compare-val ng-if="document.documentsInfo">
+				<km-value-ml value="document.documentsInfo" html locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.relatedRecords || document.relationDetails">
+			<legend>Relationship with other laws/regulations</legend>
+			<div ng-if="document.relatedRecords">
+				<label>Record(s) containing the related measure(s)</label>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.relatedRecords">
+							<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
+						</li>
+					</ul>						
+				</div>
+			</div>
+			<div ng-if="document.relationDetails">
+				<label>Description of the relationship between the measures</label>
+				<div compare-val>
+					<km-value-ml value="document.relationDetails" html locales="locale"></km-value-ml>
+				</div>
+			</div>
+		</div>
+
+
+		<div ng-if="document.authorities">
+			<legend>Regulatory contact information</legend>
+			<label>Competent National Authority(ies) and/or Supplementary Protocol Competent Authority(ies)</label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.authorities" >						
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-if="document.relevantInformation||document.relevantDocuments">
+			<legend>Additional Information</legend>
+
+			<div ng-if="document.relevantInformation">
+				<div class="km-value" compare-val ng-bind-html="document.relevantInformation | lstring:locale"></div>
+			</div>
+
+			<div ng-if="document.relevantDocuments">
+				<label>Other relevant website addresses and/or attached documents</label>
+				<div class="km-value" compare-val ng-if="document.relevantDocuments" km-link-list 
+					ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>	
+			</div>
+		</div>
+		
+		<div>
+			<view-referenced-records ng-model="document.header.identifier" on-data-fetch="onReferencedRecordsDataFetch(data)"></view-referenced-records>
+		</div>
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>

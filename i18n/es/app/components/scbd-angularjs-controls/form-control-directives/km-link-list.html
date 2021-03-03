@@ -1,0 +1,16 @@
+<div>
+    <ul ng-if="ngModel" class="list">
+        <li ng-repeat="item in ::ngModel" style="padding-bottom: 5px;">
+            <i class="fa {{::getIcon(item)}}" style="font-size: 1.5em!important;"></i>
+            <a rel="noopener" translation-url target="{{::target}}" ng-href="{{::item.url}}">
+                <span ng-bind="::(item.name||getNameFromUrl(item.url))"></span>
+            </a>
+            <i ng-if="::item.language">
+                (
+                    <span ng-if="::(locales[item.language]||locales['lang-'+item.language])"  ng-bind="::locales[item.language]||locales['lang-'+item.language]"></span>
+                    <span ng-if="::!(locales[item.language]||locales['lang-'+item.language])" ng-bind="::getNonUNLanguage(item.language)|term:locale"></span>
+                )
+            </i>
+        </li>
+    </ul>
+</div>

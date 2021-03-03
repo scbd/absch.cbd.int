@@ -1,0 +1,36 @@
+﻿<div id="doc-metadata" class="record-metadata">
+		<div class="row">
+			<div class="col-xs-12">
+
+                <a rel="noopener" translation-url  
+                    ng-href="/database/{{(document.schema_s||document.header.schema)|urlSchemaShortName|encodeURIComponent}}/{{getUniqueIDForUrl(document)|encodeURIComponent}}" 
+                    target="_blank" class="uid">
+                <i class="fa fa-external-link-square"></i> {{getUniqueID(document)}} 
+                </a>
+                
+				<span class="pull-right  hidden-print" >
+
+                    <!-- <a rel="noopener" href="#"  ng-click="pfd()" class="record-link-style">
+                            <i class="fa fa-spin fa-spinner" ng-if="" ></i> 
+                            <i class="fa fa-file-pdf-o" aria-hidden="true" ></i>
+                            PDF 
+                        </a>
+                    &nbsp; <span style="color:#ddd"> | </span> &nbsp;
+
+                    <a rel="noopener" href="#"  ng-click="print()" class="record-link-style">
+                        <i class="fa fa-spin fa-spinner" ng-if="printing" ></i> 
+                        <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
+                        Print 
+                    </a>
+                    &nbsp; <span style="color:#ddd"> | </span> &nbsp; -->
+
+                    <a rel="noopener" ng-if="showReportedRecord()" translation-url  href="#" class="record-link-style color-red"
+                     ng-click="loadReportRecord(document.schema_s||document.header.schema,document.identifier_s||document.header.identifier, (document.title | lstring:locale))" >
+                        <i class="fa fa-exclamation-triangle"></i> Report
+                    </a>
+				</span>
+				<div id="divReportRecord" style="display: none;"></div>
+			</div>
+		</div>
+
+</div>
