@@ -114,7 +114,7 @@ import "views/forms/view/bch/view-biosafety-law.directive";
 						schemas	  : ['biosafetyLaw'],
                         searchText: searchText
                     }
-					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+					if($scope.isGovernmentRequired($scope.document)){
                         queryOptions.government = $scope.document.government.identifier;
                     }
 					
@@ -127,7 +127,7 @@ import "views/forms/view/bch/view-biosafety-law.directive";
 						schemas	  : ['authority', 'supplementaryAuthority'],
                         searchText: searchText
                     }
-					if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+					if($scope.isGovernmentRequired($scope.document)){
                         queryOptions.government = $scope.document.government.identifier;
                     }
 					

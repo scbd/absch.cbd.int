@@ -261,8 +261,9 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 				        schemas	  : [schemasVal],
                         searchText: searchText
                     }
-				    //will handle console error for this
-                         queryOptions.government = $scope.document.government.identifier;
+				    if($scope.isGovernmentRequired($scope.document)){
+                        queryOptions.government = $scope.document.government.identifier;
+                    }
                    
 				      	return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }

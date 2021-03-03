@@ -443,6 +443,10 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
         return v === undefined || v === null || (_.isObject(v) && _.isEmpty(v));
       }
     }
+    //to handle console errors
+    $scope.isGovernmentRequired = function(value){
+      return (value != undefined && value.government != undefined && value.government.identifier != undefined);
+    }
 
     $scope.onBuildDocumentSelectorQuery = function(options){
       var queries = {
