@@ -13,7 +13,7 @@ ARG VERSION
 ENV VERSION $VERSION
 
 WORKDIR /usr/src/app
-COPY package.json .npmrc rollup.config.js  babel.config.json ./
+COPY package.json .npmrc rollup.config.js ./
 COPY ./scripts ./scripts
 
 RUN yarn install && \
@@ -30,10 +30,6 @@ RUN git clone -n https://github.com/scbd/absch.cbd.int.git /usr/tmp/i18n/en
 
 WORKDIR /usr/tmp/i18n/en
 RUN git -c advice.detachedHead=false checkout $VERSION
-
-#since babel is unable to resolve its plugin installed in /usr/src/app/node_modules TODO: explore cwd options
-RUN mkdir ./node_modules \
-    && cp -r /usr/src/app/node_modules/* ./node_modules/
 
 COPY i18n.sh ./
 RUN chmod 700 i18n.sh && \
@@ -52,7 +48,6 @@ WORKDIR /usr/src/app
 
 #copy touched files from EN version
 RUN rm -rf /usr/tmp/i18n/en/.git \
-    rm -rf /usr/tmp/i18n/en/node_modules \
     && cp -r  /usr/tmp/i18n/en/* ./ \
     && rm -rf /usr/tmp/i18n/en
 
