@@ -243,8 +243,13 @@ define(['app', 'lodash', 'angular', 'views/forms/edit/edit', 'js/common', 'views
                 var queryOptions = {
                     schemas	  : ['measure'],
                     realm     : realm.value,
+                    fieldQueries : [],
                     searchText: searchText
                 }
+                if($scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
+                      queryOptions.fieldQueries.push("NOT identifier_s:" + $scope.document.header.identifier);
+                }
+
                 if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
                     queryOptions.government = $scope.document.government.identifier;
                 }
