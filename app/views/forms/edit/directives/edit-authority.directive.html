@@ -148,7 +148,7 @@
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="contacts" caption="Contact person">
                                         <div document-selector ng-model="document.contacts" question="contacts"
-                                            on-build-query="onContactQuery(searchText, tab)" allow-new="true"
+                                            on-build-query="onContactQuery(searchText)" allow-new="true"
                                             allow-new-schema="contact{{isAbs ? ',authority':''}}"></div>
 
                                     </div>
@@ -170,7 +170,7 @@
                                         <div class="km-control-group" name="policyBasisForCompetencyRef" caption="Provide a link to any relevant legal, administrative or policy measures.">
                                             <div document-selector ng-model="document.policyBasisForCompetencyRef"
                                                 question="policyBasisForCompetencyRef"
-                                                on-build-query="onMeasureQuery(searchText, tab)" filter="true"
+                                                on-build-query="onMeasureQuery(searchText)" filter="true"
                                                 allow-new="true" allow-new-schema="measure"></div>
                                         </div>
                                     </div>

@@ -36,9 +36,10 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
             });
 
 
-            $scope.onBuildQuery = function(searchText, tab){
+            $scope.onBuildQuery = function(searchText){
 
                 var queryOptions = {
+                    realm     : realm.value,
                     schemas	  : ['organization'],
                     searchText: searchText
                 }
@@ -52,11 +53,11 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
 
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
-            $scope.onContactQuery = function(searchText, tab){
+            $scope.onContactQuery = function(searchText){
 
                 var queryOptions = {
-                    schemas	  : ['contact'],
-                    contactType: 'person',
+                    realm     : realm.value,
+                    fieldQueries: ['schema_s:contact AND type_s:person'],
                     searchText: searchText
                 }
                 if($scope.isGovernmentRequired($scope.document)){

@@ -142,7 +142,7 @@ import 'views/forms/view/view-authority.directive';
                                         ['DEBB019D-8647-40EC-8AE5-10CA88572F6E', 'DEEEDB35-A34B-4755-BF77-D713017195E3', '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED']).length > 0;
                 }
 
-                $scope.onContactQuery = function(searchText, tab){
+                $scope.onContactQuery = function(searchText){
                     var queryOptions = {
                         realm     : realm.value,
                         fieldQueries: ['type_s: person'],
@@ -161,8 +161,9 @@ import 'views/forms/view/view-authority.directive';
                 }
 
 
-                $scope.onMeasureQuery = function(searchText, tab){
+                $scope.onMeasureQuery = function(searchText){
                     var queryOptions = {
+                        realm     : realm.value,
                         schemas     : ['measure'],
                         searchText  : searchText
                     }

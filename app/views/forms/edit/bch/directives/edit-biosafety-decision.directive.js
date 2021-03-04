@@ -243,7 +243,7 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                 //
                 //==================================
 
-                $scope.onContactQuery = function(searchText, tab){
+                $scope.onContactQuery = function(searchText){
                   var queryOptions = {
                        realm     : realm.value,
                        fieldQueries: ['schema_s:contact AND type_s:person'],
@@ -254,7 +254,7 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 
                 }
 
-                $scope.onBuildQuery = function(searchText, tab, schemasVal){
+                $scope.onBuildQuery = function(searchText,schemasVal){
 					
                     var queryOptions = {
                         realm     : realm.value,
@@ -268,7 +268,7 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 				      	return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }
 
-                $scope.onBuildSkipGovernmentQuery = function(searchText, tab, schemasVal){
+                $scope.onBuildSkipGovernmentQuery = function(searchText,schemasVal){
 
                     var queryOptions = {
                         realm     : realm.value,

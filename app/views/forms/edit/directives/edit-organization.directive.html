@@ -43,7 +43,7 @@
                                 <div class="km-control-group" name="contacts" caption="Contact person(s)">
                                     <div document-selector ng-model="document.contacts" allow-new="true" allow-new-schema="contact"
                                          question="contacts"
-                                         on-build-query="onContactQuery(searchText, tab)"
+                                         on-build-query="onContactQuery(searchText)"
                                          filter="true">
                                     </div>
 
@@ -203,8 +203,8 @@
                                         <div class="help-block">Please use this field to link to any other related organizations that may be in the database (e.g. GEF and UNEP-GEF).</div>
                                         <div document-selector ng-model="document.linkedOrganizations" allow-new="true" allow-new-schema="organization"
                                              question="linkedOrganizations"
-                                             on-build-query="onBuildQuery(searchText, tab)"
-                                             filter="true" hide-self="true"></div>
+                                             on-build-query="onBuildQuery(searchText)"
+                                             filter="true"></div>
                                     </div>
                                 </div>
                             </div>

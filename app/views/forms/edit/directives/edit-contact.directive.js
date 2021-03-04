@@ -40,7 +40,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, thesau
             //==================================
             //
             //==================================
-            $scope.onContactQuery = function(searchText, tab){
+            $scope.onContactQuery = function(searchText){
                 var queryOptions = {
                     fieldQueries: ['schema_s:contact AND type_s:organization'],
                     searchText: searchText
