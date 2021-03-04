@@ -32,13 +32,12 @@ import 'services/main';
 
       var queryOptions = {
         schemas	  : ['absPermit', 'absCheckpoint', 'absCheckpointCommunique', 'authority', 'measure', 'database', 'focalPoint'],
+        realm     : realm.value,
         searchText: searchText
       }
       if($scope.isGovernmentRequired($scope.document)){
         queryOptions.government = $scope.document.government.identifier;
     }
-
-      
 
       return $scope.onBuildDocumentSelectorQuery(queryOptions);
     }
@@ -46,13 +45,12 @@ import 'services/main';
 
       var queryOptions = {
         schemas	  : ['contact', 'authority', 'focalPoint'],
+        realm     : realm.value,
         searchText: searchText
       }
       if($scope.isGovernmentRequired($scope.document)){
         queryOptions.government = $scope.document.government.identifier;
     }
-
-      
 
       return $scope.onBuildDocumentSelectorQuery(queryOptions);
     }
