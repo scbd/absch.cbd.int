@@ -50,9 +50,10 @@ import 'views/forms/view/abs/view-abs-national-model-contractual-clause.directiv
             });
         };
 
-        $scope.onBuildQuery = function(searchText, tab){
+        $scope.onBuildQuery = function(searchText){
             var queryOptions = {
                 schemas	  : ['measure'],
+                realm     : realm.value,
                 searchText: searchText
             }
             if($scope.isGovernmentRequired($scope.document)){
