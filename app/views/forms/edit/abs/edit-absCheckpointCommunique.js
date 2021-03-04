@@ -23,12 +23,12 @@ import 'services/main';
                 },
                 keywords: function() {
                     return $q.all([$http.get("/api/v2013/thesaurus/domains/1A22EAAB-9BBC-4543-890E-DEF913F59E98/terms", {
-                                cache: true
-                            }),
-                            $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED", {
-                                cache: true
-                            })
-                        ])
+                        cache: true
+                    }),
+                        $http.get("/api/v2013/thesaurus/terms/5B6177DD-5E5E-434E-8CB7-D63D67D5EBED", {
+                            cache: true
+                        })
+                    ])
                         .then(function(o) {
                             var data = o[0].data;
                             data.push(o[1].data)
@@ -44,7 +44,7 @@ import 'services/main';
                 }
             });
 
-            $scope.onBuildQuery = function(searchText, tab){
+            $scope.onBuildQuery = function(searchText){
                 var queryOptions = {
                     schemas	  : ['absCheckpoint'],
                     searchText: searchText
@@ -52,12 +52,10 @@ import 'services/main';
                 if($scope.isGovernmentRequired($scope.document)){
                     queryOptions.government = $scope.document.government.identifier;
                 }
-
-
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
 
-            $scope.onBuildIRCCsQuery = function(searchText, tab){
+            $scope.onBuildIRCCsQuery = function(searchText){
                 var queryOptions = {
                     schemas	  : ['absPermit'],
                     searchText: searchText
@@ -67,13 +65,24 @@ import 'services/main';
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
 
-            $scope.onContactQuery = function(searchText, tab){
+            $scope.onContactQuery = function(searchText){
                 var queryOptions = {
                     schemas	  : ['contact', 'authority'],
+                    realm     : realm.value,
                     searchText: searchText
                 }
                 if($scope.isGovernmentRequired($scope.document)){
                     queryOptions.government = $scope.document.government.identifier;
+                }
+
+                return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
+
+            $scope.onContactSkipGovernmentQuery = function(searchText){
+                var queryOptions = {
+                    schemas	  : ['contact', 'authority'],
+                    realm     : realm.value,
+                    searchText: searchText
                 }
 
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
