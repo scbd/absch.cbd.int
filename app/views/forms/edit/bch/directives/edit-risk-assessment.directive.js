@@ -37,14 +37,14 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 				});
 
 				$scope.onBuildQuery = function(searchText, schema){
+					if (!$scope.document || !$scope.document.government)
+        				return;
 					var queryOptions = {
 						realm     : realm.value,
 						schemas	  : [schema],
 						searchText: searchText
 					}
-					if($scope.isGovernmentRequired($scope.document)){
-                        queryOptions.government = $scope.document.government.identifier;
-                    }
+					queryOptions.government = $scope.document.government.identifier;
 
 					
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
@@ -52,14 +52,14 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 
 
 				$scope.onBuildAuthorityQuery = function(searchText){
+					if (!$scope.document || !$scope.document.government)
+        				return;
 					var queryOptions = {
 						realm     : realm.value,
 						schemas	  : ['authority'],
 						searchText: searchText
 					}
-					if($scope.isGovernmentRequired($scope.document)){
-                        queryOptions.government = $scope.document.government.identifier;
-                    }
+					queryOptions.government = $scope.document.government.identifier;
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 

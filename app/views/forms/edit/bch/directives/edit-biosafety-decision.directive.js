@@ -255,15 +255,15 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                 }
 
                 $scope.onBuildQuery = function(searchText,schemasVal){
+                    if (!$scope.document || !$scope.document.government)
+                         return;
 					
                     var queryOptions = {
                         realm     : realm.value,
 				        schemas	  : [schemasVal],
                         searchText: searchText
                     }
-				    if($scope.isGovernmentRequired($scope.document)){
-                        queryOptions.government = $scope.document.government.identifier;
-                    }
+				    queryOptions.government = $scope.document.government.identifier;
                    
 				      	return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }

@@ -45,14 +45,15 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
         };
 
         $scope.onContactQuery = function(searchText){
+            if (!$scope.document || !$scope.document.government)
+             return;
+
             var queryOptions = {
                 schemas	  : ['contact', 'authority'],
                 realm     : realm.value,
                 searchText: searchText
             }
-            if($scope.isGovernmentRequired($scope.document)){
-                queryOptions.government = $scope.document.government.identifier;
-            }
+            iqueryOptions.government = $scope.document.government.identifier;
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
         }
 
