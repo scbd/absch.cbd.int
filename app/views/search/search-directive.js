@@ -1,5 +1,5 @@
 define(['app', 'text!./search-directive.html','lodash',
-'app-data/search-tour','services/main','views/search/search-filters/keyword-filter',
+'app-data/search-tour.json','services/main','views/search/search-filters/keyword-filter',
 'views/search/search-filters/national-filter','views/search/search-filters/reference-filter','views/search/search-filters/scbd-filter',
 'views/search/search-filters/country-filter','views/search/search-filters/region-filter','views/search/search-filters/date-filter',
 'views/search/search-results/result-default','views/search/search-results/national-records-country',
@@ -508,7 +508,7 @@ define(['app', 'text!./search-directive.html','lodash',
                     }
 
                     function focalPointTypes(){
-                        return loadJsonFile('app-data/bch/focalpoint-category')
+                        return loadJsonFile('app-data/bch/focalpoint-category.json')
                                 .then(function(keywords){
                                     return _.map(keywords, function (title, key) {
                                         var keyword = { identifier:key };
@@ -1019,9 +1019,9 @@ define(['app', 'text!./search-directive.html','lodash',
                     }
 
                     function loadleftMenuFieldMapping(){
-                        var file = 'views/search/search-filters/bch-left-menu-filters';
+                        var file = 'views/search/search-filters/bch-left-menu-filters.json';
                         if(isABS)
-                            file = 'views/search/search-filters/abs-left-menu-filters';
+                            file = 'views/search/search-filters/abs-left-menu-filters.json';
 
                         $q.when(loadJsonFile(file)).then(function(mapping){
                             leftMenuSchemaFieldMapping = mapping;

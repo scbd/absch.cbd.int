@@ -1,5 +1,5 @@
 define(['app', "text!./view-national-report-3.directive.html", 
-'lodash', 'app-data/bch/report-analyzer/cpbNationalReport3', 'views/forms/view/bch/view-national-report.directive',
+'lodash', 'app-data/bch/report-analyzer/cpbNationalReport3.json', 'views/forms/view/bch/view-national-report.directive',
  	'views/directives/record-options'], function (app, template, _, nr3Data) {
 
 	app.directive("viewCpbNationalReport3", [function () {

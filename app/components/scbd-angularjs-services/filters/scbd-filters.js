@@ -1,4 +1,4 @@
-define(['app', 'lodash', 'moment', './schema-name', '../services/locale','services/main'], 
+define(['app', 'lodash', 'moment', './schema-name.json', '../services/locale','services/main'], 
 function (app, _, moment, scbdSchemaDetails) {
     
   app.directive("translationUrl", ['$browser', function($browser){

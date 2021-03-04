@@ -1,5 +1,5 @@
-﻿define(['app', 'lodash', 'app-data/bch/report-analyzer/cpbNationalReport4', 
-    'app-data/bch/report-analyzer/cpbNationalReport3',
+﻿define(['app', 'lodash', 'app-data/bch/report-analyzer/cpbNationalReport4.json', 
+    'app-data/bch/report-analyzer/cpbNationalReport3.json',
     'views/forms/edit/edit', 'services/main', 'views/forms/directives/nr-yes-no',
 	'views/forms/edit/document-selector', 'views/directives/block-region-directive',
     'views/forms/view/bch/view-national-report-4.directive', 'components/scbd-angularjs-services/main',

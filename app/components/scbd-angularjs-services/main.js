@@ -1,5 +1,4 @@
 define(['app',
-    './filters/schema-name',
     './filters/scbd-filters',
     './services/workflows',
     './services/user-notifications',

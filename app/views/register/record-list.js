@@ -600,7 +600,7 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/main', 'services/ma
 
                 function loadOfflineFormatDetails(){
                     if(realm.is('BCH')){
-                        commonjs.loadJsonFile('app-data/bch/offline-formats')
+                        commonjs.loadJsonFile('app-data/bch/offline-formats.json')
                         .then(function(data){
                             $scope.offlineFormats = data;
                             $timeout(function(){

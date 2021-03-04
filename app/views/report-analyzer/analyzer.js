@@ -5,7 +5,7 @@ define(['./directives/national-reports/questions-selector', './directives/nation
         
         $scope.showAnalyzer = false;
         $scope.self = $scope;
-        require(['app-data/report-analyzer-mapping'], function(res){
+        require(['app-data/report-analyzer-mapping.json'], function(res){
             var appName = realm.value.replace(/-.*/,'').toLowerCase();
             
             $scope.reportData = res[appName];

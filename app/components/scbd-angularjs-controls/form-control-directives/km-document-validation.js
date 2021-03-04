@@ -1,5 +1,5 @@
 define(['app', 'text!./km-document-validation.html','jquery',
-'app-data/validation-errors'], function(app, template,$, messages) { ;
+'app-data/validation-errors.json'], function(app, template,$, messages) { ;
 
     //============================================================
     //
