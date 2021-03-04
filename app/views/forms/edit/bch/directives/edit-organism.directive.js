@@ -46,7 +46,7 @@ import "views/forms/view/bch/view-organism.directive";
 					domestication 	: thesaurusService.getDomainTerms('domestication'),	
 					commonUses 		: thesaurusService.getDomainTerms('OrganismCommonUses', {other:true, otherType:'lstring', multiple:true}),	
 				});
-				$scope.onOrganismQuery = function(searchText, tab){
+				$scope.onOrganismQuery = function(searchTextb){
 
 					var queryOptions = {
 						realm     : realm.value,

@@ -58,7 +58,7 @@ import 'views/forms/directives/traits-selector.directive';
 						
 					return $scope.sanitizeDocument(document);
 				};
-				$scope.onBuildOrganismQuery = function(searchText, tab){
+				$scope.onBuildOrganismQuery = function(searchText){
 					
                     var queryOptions = {
 						realm     : realm.value,

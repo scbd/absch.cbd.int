@@ -62,7 +62,7 @@ import 'views/forms/directives/view-terms-hierarchy';
 				//==================================
 
 
-				$scope.onBuildQuery = function(searchText, tab, schemaVal){
+				$scope.onBuildQuery = function(searchText, schemaVal){
 					
                     var queryOptions = {
 						realm     : realm.value,

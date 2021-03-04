@@ -24,14 +24,15 @@ import 'services/main';
         absThematicAreas: function() {return thesaurusService.getDomainTerms('absSubjects');} 
     });
 
-     $scope.onNotificationQuery = function(searchText, tab){
+     $scope.onNotificationQuery = function(searchText){
        var queryOptions = {
+        realm       : realm.value,
          schemas	  : ['notification'],
          searchText: searchText
        }
-       if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
-         queryOptions.government = $scope.document.government.identifier;
-       }
+       if($scope.isGovernmentRequired($scope.document)){
+        queryOptions.government = $scope.document.government.identifier;
+        }
 
        if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
          queryOptions.identifier = $scope.document.header.identifier;
@@ -40,15 +41,15 @@ import 'services/main';
        return $scope.onBuildDocumentSelectorQuery(queryOptions);
      }
 
-     $scope.onContactQuery = function(searchText, tab){
+     $scope.onContactQuery = function(searchText){
        var queryOptions = {
          realm       : realm.value,
          fieldQueries:['schema_s:organization OR (schema_s:contact AND type_s:organization)' ],
          searchText  : searchText
        }
-       if($scope.document != undefined && $scope.document.government != undefined && $scope.document.government.identifier != undefined){
+       if($scope.isGovernmentRequired($scope.document)){
         queryOptions.government = $scope.document.government.identifier;
-    }
+      }
       return  $scope.onBuildDocumentSelectorQuery(queryOptions);
      } 
     //==================================

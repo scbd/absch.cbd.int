@@ -31,8 +31,8 @@
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="authorsContact" caption="Author">
-												<div document-selector required type="radio" ng-model="document.authorsContact" question="authorsContact" skip-government="true"
-													 on-build-query="onContactQuery(searchText, tab)" allow-new="true" filter="true" question="authorsContact"
+												<div document-selector required type="radio" ng-model="document.authorsContact" question="authorsContact"
+													 on-build-query="onContactQuery(searchText)" allow-new="true" filter="true" question="authorsContact"
 													 allow-new-schema="contact"></div>
 											</div>
 										</div>
@@ -49,7 +49,7 @@
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="organizations" caption="Organization(s) involved in the publication of this resource">
-												<div document-selector ng-model="document.organizations" type="checkbox" question="organizations" skip-government="true"
+												<div document-selector ng-model="document.organizations" type="checkbox" question="organizations"
 													   on-build-query="onBuildQuery(searchText, 'organization')" allow-new="true"
 													   allow-new-schema="organization"></div>
 											</div>
@@ -155,21 +155,21 @@
 												<div ng-if="document.addressLmoCategories" style="margin-top: 15px;">
 													<div class="col-xs-12">
 														<div class="km-control-group" required name="organisms"  caption="Organism(s) identification">
-															<div document-selector required ng-model="document.organisms" skip-government="true"
+															<div document-selector required ng-model="document.organisms"
 																 on-build-query="onBuildQuery(searchText, 'organism')" allow-new="true"
 																 allow-new-schema="organisms"></div>
 														</div>
 													</div>
 													<div class="col-xs-12">
 														<div class="km-control-group" required name="genes"  caption="Gene(s)  identification">
-															<div document-selector required type="checkbox"  ng-model="document.genes" skip-government="true"
+															<div document-selector required type="checkbox"  ng-model="document.genes"
 																   on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true"  filter="true"
 																   allow-new-schema="dnaSequence"></div>
 														</div>
 													</div>
 													<div class="col-xs-12">
 														<div class="km-control-group" required name="modifiedOrganisms"  caption="LMO(s) identification">
-															<div document-selector required type="checkbox"  ng-model="document.modifiedOrganisms" skip-government="true"
+															<div document-selector required type="checkbox"  ng-model="document.modifiedOrganisms"
 															   on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" allow-new="true"  filter="true"
 															   allow-new-schema="modifiedOrganism"></div>
 													</div>
@@ -322,7 +322,7 @@
 									<div class="row" ng-if="isABS">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="organizations" caption="Authoring organization(s)">
-												<div document-selector type="checkbox" ng-model="document.organizations" question="organizations" skip-government="true"
+												<div document-selector type="checkbox" ng-model="document.organizations" question="organizations"
 													   on-build-query="onBuildQuery(searchText, 'organization')" allow-new="true"
 													   allow-new-schema="organization"></div>
 											</div>

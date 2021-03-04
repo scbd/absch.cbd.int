@@ -51,7 +51,7 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 				}
 
 
-				$scope.onBuildAuthorityQuery = function(searchText, tab){
+				$scope.onBuildAuthorityQuery = function(searchText){
 					var queryOptions = {
 						realm     : realm.value,
 						schemas	  : ['authority'],
@@ -64,7 +64,7 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 				}
 
 
-				$scope.onBuildContactQuery = function(searchText, tab){
+				$scope.onBuildContactQuery = function(searchText){
 					var queryOptions = {
 						realm     : realm.value,
 						schemas	  : ['contact'],

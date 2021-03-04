@@ -26,7 +26,7 @@
                                 <div class="km-control-group" required name="organization" caption="Laboratory name and coordinates">
                                     <!-- <div class="help-block">Lab information...</div> -->
                                     <div document-selector required ng-model="document.organization" allow-new="true" allow-new-schema="organization"
-                                        type="radio" question="organization" on-build-query="onBuildQuery(searchText, tab, 'organization')"  filter="true" skip-government="true"></div>
+                                        type="radio" question="organization" on-build-query="onBuildQuery(searchText, 'organization')"  filter="true"></div>
                             </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                 <div class="km-control-group" name="relatedOrganization" caption="Related Organization">
                                     <div class="help-block">Please use this field to link to any other related organizations that may be in the database (e.g. parent organization).</div>
                                    <div document-selector required ng-model="document.organization" allow-new="true" allow-new-schema="organization"
-                                        type="radio" question="organization" on-build-query="onBuildQuery(searchText, tab, 'organization')"  filter="true" skip-government="true"></div>
+                                        type="radio" question="organization" on-build-query="onBuildQuery(searchText, 'organization')"  filter="true"></div>
                             </div>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                             <div class="col-md-12">
                                <div class="km-control-group" name="detectableLmos" caption="LMO(s) detectable by the laboratory">
                                     <div document-selector ng-model="document.detectableLmos" allow-new="true" allow-new-schema="modifiedOrganism"
-                                        question="detectableLmos" on-build-query="onBuildQuery(searchText, tab, 'modifiedOrganism')" filter="true" skip-government="true">
+                                        question="detectableLmos" on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" filter="true">
                                         
                                         <selected-records>
                                             <table class="table" style="padding-bottom:3px;width:100%;">
@@ -115,7 +115,7 @@
                             <div class="col-md-12">
                                 <div class="km-control-group" name="detectableGenes" required caption="Genetic element(s) detectable by the laboratory">
                                     <div document-selector ng-model="document.detectableGenes" required allow-new="true" allow-new-schema="dnaSequence"
-                                        question="detectableGenes" on-build-query="onBuildQuery(searchText, tab, 'dnaSequence')" filter="true" skip-government="true"></div>
+                                        question="detectableGenes" on-build-query="onBuildQuery(searchText,'dnaSequence')" filter="true"></div>
                                 </div>
                             </div>
                         </div>

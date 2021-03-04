@@ -37,7 +37,7 @@ import 'views/forms/directives/view-terms-hierarchy';
 					commonUses 		: thesaurusService.getDomainTerms('OrganismCommonUses', {other:true, otherType:'lstring', multiple:true})			
 				});
 
-				$scope.onContactQuery = function(searchText, tab){
+				$scope.onContactQuery = function(searchText){
 
 					var queryOptions = {
 						realm     : realm.value,
@@ -48,7 +48,7 @@ import 'views/forms/directives/view-terms-hierarchy';
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 
-				$scope.onRrecipientOrganismsQuery = function(searchText, tab){
+				$scope.onRrecipientOrganismsQuery = function(searchText){
 
 					var queryOptions = {
 						realm     : realm.value,
