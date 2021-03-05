@@ -107,6 +107,16 @@ import "views/forms/view/bch/view-biosafety-law.directive";
 						});
 					}
                 }
+				$scope.onBuildAmendedLawQuery = function(searchText){
+									
+                    var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['biosafetyLaw'],
+                        searchText: searchText
+                    }					
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                }
+
 				$scope.onBuildLawQuery = function(searchText){
 					if (!$scope.document || !$scope.document.government)
        					 return;

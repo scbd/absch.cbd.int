@@ -37,33 +37,21 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
 
 
             $scope.onBuildQuery = function(searchText){
-                if (!$scope.document || !$scope.document.government)
-                     return;
-
                 var queryOptions = {
                     realm     : realm.value,
                     schemas	  : ['organization'],
                     searchText: searchText
                 }
-                queryOptions.government = $scope.document.government.identifier;
-
-                if( $scope.document != undefined && $scope.document.header != undefined && $scope.document.header.identifier != undefined){
-                    queryOptions.identifier = $scope.document.header.identifier;
-                }
 
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
             $scope.onContactQuery = function(searchText){
-                if (!$scope.document || !$scope.document.government)
-                    return;
-
+                
                 var queryOptions = {
                     realm     : realm.value,
                     fieldQueries: ['schema_s:contact AND type_s:person'],
                     searchText: searchText
                 }
-                queryOptions.government = $scope.document.government.identifier;
-
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
 

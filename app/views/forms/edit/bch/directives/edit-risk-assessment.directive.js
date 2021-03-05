@@ -35,22 +35,35 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 					}
 					
 				});
-
-				$scope.onBuildQuery = function(searchText, schema){
-					if (!$scope.document || !$scope.document.government)
-        				return;
-					var queryOptions = {
+				//use for IRA only
+				$scope.onBuildOrganizationQuery = function(searchText){
+						var queryOptions = {
 						realm     : realm.value,
-						schemas	  : [schema],
+						schemas	  : ['organization'],
+						searchText: searchText
+					}					
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
+				//use for RA and IRA
+				$scope.onBuildModifiedOrganismQuery = function(searchText){
+					//incase of RA, government is required
+					if($scope.isNational && (!$scope.document || !$scope.document.government)){
+						return;
+					}
+						var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['modifiedOrganism'],
 						searchText: searchText
 					}
-					queryOptions.government = $scope.document.government.identifier;
-
+					//incase of RA
+					if($scope.isNational && ($scope.document || $scope.document.government)){
+						queryOptions.government = $scope.document.government.identifier;
+					}
 					
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 
-
+				//use for RA only 
 				$scope.onBuildAuthorityQuery = function(searchText){
 					if (!$scope.document || !$scope.document.government)
         				return;
@@ -63,14 +76,19 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 
-
+				//use for RA and IRA, 
 				$scope.onBuildContactQuery = function(searchText){
+					//incase of RA, government is required
+					if($scope.isNational && (!$scope.document || !$scope.document.government)){
+						return;
+					}
 					var queryOptions = {
 						realm     : realm.value,
 						schemas	  : ['contact'],
 						searchText: searchText
 					}
-					if($scope.isNational && $scope.isGovernmentRequired($scope.document)){
+					//incase of RA
+					if($scope.isNational && ($scope.document || $scope.document.government)){
 						queryOptions.government = $scope.document.government.identifier;
 					}
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);

@@ -247,6 +247,17 @@ import 'views/forms/edit/abs/edit-measure-matrix-directive';
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
 
+            
+            $scope.onAmendedMeasuresQuery = function(searchText){
+                var queryOptions = {
+                schemas	  : ['measure'],
+                realm     : realm.value,
+                fieldQueries : [],
+                searchText: searchText
+                }
+                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
+
             $scope.onMeaureQuery = function(searchText){
                 
                 if (!$scope.document || !$scope.document.government)

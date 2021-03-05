@@ -43,7 +43,7 @@
                                                 <div class="km-control-group">
                                                     <div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
                                                         <div class="help-info">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
-                                                      <div document-selector on-build-query="onMeaureQuery(searchText)" ng-model="document.amendedMeasures" question="amendedMeasures"></div>
+                                                      <div document-selector on-build-query="onAmendedMeasuresQuery(searchText)" ng-model="document.amendedMeasures" question="amendedMeasures"></div>
                                                         <!--<div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
                                                     </div>
                                                 </div>
@@ -245,7 +245,7 @@
                                                     if the measure being submitted is implementing an existing law. The two measures will then be displayed together.
                                                 </div>
                                                 <!--<div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
-                                                <div document-selector on-build-query="onMeaureQuery(searchText, tab)" ng-model="document.linkedMeasures" question="linkedMeasures"></div>
+                                                <div document-selector on-build-query="onMeaureQuery(searchText)" ng-model="document.linkedMeasures" question="linkedMeasures"></div>
     
                                             </div>
                                         </div>

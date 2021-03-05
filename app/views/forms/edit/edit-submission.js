@@ -24,33 +24,33 @@ import 'services/main';
         absThematicAreas: function() {return thesaurusService.getDomainTerms('absSubjects');} 
     });
 
+    $scope.onContactQuery = function(searchText){
+      
+      var queryOptions = {
+        realm       : realm.value,
+        fieldQueries:['schema_s:organization OR (schema_s:contact AND type_s:organization)' ],
+        searchText  : searchText
+      }
+      
+     return  $scope.onBuildDocumentSelectorQuery(queryOptions);
+    } 
+
      $scope.onNotificationQuery = function(searchText){
-      if (!$scope.document || !$scope.document.government)
+      if (!$scope.document.organizations && !$scope.document.government)
         return;
        var queryOptions = {
         realm       : realm.value,
          schemas	  : ['notification'],
          searchText: searchText
        }
-       queryOptions.government = $scope.document.government.identifier;
+       if ($scope.document.government)
+           queryOptions.government = $scope.document.government.identifier;
       
        //queryOptions.identifier = (($scope.document||{​​​​​}​​​​​).header||{​​​​​}​​​​​).identifier
 
        return $scope.onBuildDocumentSelectorQuery(queryOptions);
      }
 
-     $scope.onContactQuery = function(searchText){
-      if (!$scope.document || !$scope.document.government)
-        return;
-       var queryOptions = {
-         realm       : realm.value,
-         fieldQueries:['schema_s:organization OR (schema_s:contact AND type_s:organization)' ],
-         searchText  : searchText
-       }
-       queryOptions.government = $scope.document.government.identifier;
-      
-      return  $scope.onBuildDocumentSelectorQuery(queryOptions);
-     } 
     //==================================
     //
     //==================================
