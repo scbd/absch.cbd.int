@@ -21,6 +21,7 @@
     "lodash": "4.17.15",
     "mime": "1.4.1",
     "minify": "7.0.0",
+    "rollup-plugin-ejs": "^2.2.0",
     "superagent": "5.0.8",
     "touch": "^3.1.0"
   },
@@ -106,7 +107,7 @@
     "start": "node server.js",
     "build": "rm -rf ./dist/vue && npx rollup -c",
     "build-babel": "rm -rf ./dist/vue && npx rollup -c && babel ./app -out-dir dist/ng",
-    "dev": "rm -rf ./dist && npx rollup -c --watch",
+    "dev": "rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c --watch",
     "eslint": "npx eslint . --fix",
     "clean-reinstall": "rm -rf ./node_modules && rm -rf ./package-lock.json && yarn install"
   },

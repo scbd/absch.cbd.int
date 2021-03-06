@@ -171,7 +171,7 @@ define('realmConf', [`json!/api/v2018/realm-configurations/${(window.scbdApp.hos
 })
 
 if(window.scbdApp.template)
-    require(['hash-file-mapping'], function(hashMapping){
+    require(['/'+window.scbdApp.lang+'/app/hash-file-mapping.js'], function(hashMapping){
         // console.log(jsd)
         window.hashUrlsMapping = hashMapping
         require([window.scbdApp.template], function(){})

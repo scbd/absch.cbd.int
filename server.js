@@ -46,11 +46,17 @@ const localTransformAndMinify = require('./middlewares/local-minification');
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: cacheControl.setCustomCacheControl}) );
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
 
-app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          express.static(__dirname + '/dist', { setHeaders: cacheControl.setCustomCacheControl }));
-app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          translation.renderLanguageFile,  express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('(/ar)?/app',           express.static(`${__dirname}/dist/ar/app`, { setHeaders: cacheControl.setCustomCacheControl }))
+app.use('(/en)?/app',           express.static(`${__dirname}/dist/en/app`, { setHeaders: cacheControl.setCustomCacheControl }))
+app.use('(/es)?/app',           express.static(`${__dirname}/dist/es/app`, { setHeaders: cacheControl.setCustomCacheControl }))
+app.use('(/fr)?/app',           express.static(`${__dirname}/dist/fr/app`, { setHeaders: cacheControl.setCustomCacheControl }))
+app.use('(/ru)?/app',           express.static(`${__dirname}/dist/ru/app`, { setHeaders: cacheControl.setCustomCacheControl }))
+app.use('(/zh)?/app',           express.static(`${__dirname}/dist/zh/app`, { setHeaders: cacheControl.setCustomCacheControl }))
 
-app.use('/sourceMap/app',                            express.static(__dirname + '/dist'));
-app.use('/sourceMap/app',                            express.static(__dirname + '/sourceMap/app'));
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',        express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
+// removeHashFromName
+// app.use('/sourceMap/app',                            express.static(__dirname + '/dist'));
+// app.use('/sourceMap/app',                            express.static(__dirname + '/sourceMap/app'));
 
 app.use('/cbd-forums',      express.static(__dirname + '/node_modules/@bower_components/cbd-forums', { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: cacheControl.setCustomCacheControl}));

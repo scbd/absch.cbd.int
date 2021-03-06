@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 
 'use strict';
 
@@ -8,12 +7,10 @@ const path      = require("path");
 const util      = require("util");
 const writeFile = util.promisify(fs.writeFile);
 const readDir   = util.promisify(fs.readdir);
-const stat      = util.promisify(fs.stat);
 const asyncGlob = util.promisify(glob)
 const _         = require('lodash');
-const {transformAndMinifyFile, addLanguageAttribute} = require('./transform-minify.js')
-const { open, utimes, copyFile, mkdir } = require('fs').promises;
-    const git = require('./git-file-info');
+const { rename, copyFile, mkdir, stat } = require('fs').promises;
+    const git = require('./scripts/git-file-info');
 const { parse } = require('path');
 const touch = require("touch")
 
@@ -36,47 +33,103 @@ process.on('uncaughtException', (error) => {
         log(error);
 });
 
-processFiles();
+// processFiles();
 
-async function processFiles() {
-
+export const processFiles = async () =>{
+    const baseDir   = path.resolve('./');
     const languages = ['ar', 'en', 'fr', 'es', 'ru', 'zh'];
-    const appDir = 'app';
-    const i18nDir = 'i18n'
-    const baseDir = path.resolve('./');
+    const enDir     = 'app';
+    const i18nDir   = 'i18n';
+    const buildDir  = 'i18n-build';
 
+    ///////////////////////////////////////////////////
+    ///     copy i18n files to build dir
+    ///////////////////////////////////////////////////
+    const langCopyPromise = languages.map(lang=>{
+        return copyFiles(baseDir, `${i18nDir}/${lang}/app`, [lang], buildDir, '**/*.{html,json}');
+    });
+    await Promise.all(langCopyPromise);
 
     ///////////////////////////////////////////////////
     ///     copy js files to all language folder i18n
     ///////////////////////////////////////////////////
-    await copyFiles(baseDir, appDir, languages, i18nDir, '**/*.js');
+    await copyFiles(baseDir, enDir, languages, buildDir, '**/*.js');
 
     ///////////////////////////////////////////////////
     ///     copy files to en folder i18n
     ///////////////////////////////////////////////////
-    await copyFiles(baseDir, appDir, ['en'], i18nDir, '**/*.{html,json}');
+    await copyFiles(baseDir, enDir, ['en'], buildDir, '**/*.{html,json,ejs}');
 
     //replace .json file extension  with .json.js
-    await changeJsonToJsExt(baseDir, i18nDir);
-
+    // await changeJsonToJsExt(baseDir, buildDir);
 
     ///////////////////////////////////////////////////
     ///     touch en
     ///////////////////////////////////////////////////
 
-    const allApplicationFiles = (await asyncGlob('**/*.{js,html,json}', { cwd: path.join(baseDir, appDir) }));
+    var fileModifiedDates = {};
+    languages.forEach(e=>{fileModifiedDates[e]={};})
+    const allApplicationFiles = (await asyncGlob('**/*.{html,json,ejs}', { cwd: path.join(baseDir, buildDir) }))
+    .map(f=>{
+        return f.replace(/^(ar|fr|es|ru|zh)\//, `${i18nDir}/$1/`)
+        .replace(/^en\//, '')
+    });
+    // console.log(allApplicationFiles);
     const enTouchPromise = allApplicationFiles.map(async file=>{
-        const modifiedEpoch = await git.getModifiedDate(`app/${file}`, {dst:baseDir});
-        const modifiedDate = new Date(Number(modifiedEpoch)* 1000)
-        await touch(`${baseDir}/${i18nDir}/en/app/${file}`,  { time : modifiedDate });
+        const modifiedEpoch = await git.getModifiedDate(`${file}`, {dst:baseDir});
+        const modifiedDate = new Date(Number(modifiedEpoch)* 1000);
+        const filePath = `${baseDir}/${buildDir}/${file.replace(/i18n\//, '').replace(/^app\//, 'en/app/')}`;
+        const langRegex = /\/(ar|en|fr|es|ru|zh)\//;
+        const langMatch = filePath.match(langRegex);
+        let lang = langMatch[1];
 
+        fileModifiedDates[lang][filePath] = modifiedDate
+        await touch(filePath,  { time : modifiedDate });
         //if json files than update .json.js with same timestamp
-        if(/\.json$/.test(file)){
-            await touch(`${baseDir}/${i18nDir}/en/app/${file}.js`,  { time : modifiedDate });
-        }
+        // if(/\.json$/.test(filePath)){
+        //     await touch(`${filePath}.js`,  { time : modifiedDate });
+        // }
     });
     await Promise.all(enTouchPromise);
 
+    const enFileOverridePromises=[];
+    languages.filter(e=>e!='en').forEach(async lang=>{
+        Object.keys(fileModifiedDates[lang]).forEach(async file=>{
+            const enFilePath = file.replace(/\/(ar|en|fr|es|ru|zh)\//, '/en/')
+            if(fileModifiedDates['en'][enFilePath] > fileModifiedDates[lang][file]){
+                enFileOverridePromises.push(copyFile(enFilePath, file));
+            }
+        })
+    });
+
+    //if new files are added to en and if translation is not done yet for those files than copy those files over
+    Object.keys(fileModifiedDates['en']).forEach(async file=>{
+       
+        languages.filter(e=>e!='en').forEach(async lang=>{
+            const langFile = file.replace('/en/', `/${lang}/`);
+            const copyPromise = stat(langFile).catch(async e=>{
+                                    return mkdir(path.dirname(langFile), { recursive: true })
+                                        .then(e=>copyFile(file, langFile))
+                                });
+
+            enFileOverridePromises.push(copyPromise);
+        })
+    });
+
+    await Promise.all(enFileOverridePromises);
+
+
+    ///////////////////////////////////////////////////
+    ///     copy .ejs files to dist folder
+    ///////////////////////////////////////////////////
+    console.debug('Copying ejs files')
+    const ejsCopyPromise = languages.map(lang=>{
+        return copyFiles(baseDir, `${buildDir}/${lang}/app`, [lang], 'dist', '**/*.ejs');
+    });
+    await Promise.all(ejsCopyPromise);
+    console.debug('Copying ejs files done!')
+
+    console.log('*********FINISH**********')
     // const filePath = 'i18n-new/fr/app/views/about/about.html'
     // const date = await git.getModifiedDate(filePath, {dst:baseDir});
     // await touch(filePath, date);
@@ -85,27 +138,27 @@ async function processFiles() {
 
 }
 
-async function changeJsonToJsExt(baseDir, i18nDir) {
-    const allApplicationJsonFiles = (await asyncGlob('**/*.json', { cwd: i18nDir }));
+async function changeJsonToJsExt(baseDir, buildDir) {
+    const allApplicationJsonFiles = (await asyncGlob('**/*.json', { cwd: buildDir }));
 
     const jsonToJsPromise = allApplicationJsonFiles.map(async (file) => {
-        const copyToDir = `${baseDir}/${i18nDir}/${path.dirname(file)}`;        
-        await copyFile(`${baseDir}/${i18nDir}/${file}`, `${copyToDir}/${path.basename(file)}.js`);
+        const copyToDir = `${baseDir}/${buildDir}/${path.dirname(file)}`;      
+        await rename(`${baseDir}/${buildDir}/${file}`, `${copyToDir}/${path.basename(file)}.js`);
     });
     await Promise.all(jsonToJsPromise);
 }
 
-async function copyFiles(baseDir, appDir, languages, i18nDir, globPattern) {
+async function copyFiles(baseDir, i18nDir, languages, buildDir, globPattern) {
 
-    const allApplicationFiles = (await asyncGlob(globPattern, { cwd: path.join(baseDir, appDir) }));
+    const allApplicationFiles = (await asyncGlob(globPattern, { cwd: path.join(baseDir, i18nDir) }));
 
     let copyPromise = [];
     languages.forEach(lang => {
 
         const langPromises = allApplicationFiles.map(async (file) => {
-            const copyToDir = `${baseDir}/${i18nDir}/${lang}/app/${path.dirname(file)}`;
+            const copyToDir = `${baseDir}/${buildDir}/${lang}/app/${path.dirname(file)}`;
             await mkdir(copyToDir, { recursive: true });
-            await copyFile(`${baseDir}/${appDir}/${file}`, `${copyToDir}/${path.basename(file)}`);
+            await copyFile(`${baseDir}/${i18nDir}/${file}`, `${copyToDir}/${path.basename(file)}`);
         });
         copyPromise = copyPromise.concat(langPromises);
     });
@@ -138,6 +191,7 @@ async function getAllDirectoryFiles(dir, options){
 
 }
 
+// module.exports = {processFiles}
 
 // function t (){
 //     if (!In)
@@ -196,4 +250,3 @@ async function getAllDirectoryFiles(dir, options){
 
 //     console.log('Finished processing files');
 //     return;
-// }

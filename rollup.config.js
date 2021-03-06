@@ -7,14 +7,16 @@ import commonjs                 from '@rollup/plugin-commonjs';
 import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import alias                    from '@rollup/plugin-alias';
 import json                     from '@rollup/plugin-json';
-import amd from 'rollup-plugin-amd';
+// import ejs                      from 'rollup-plugin-ejs';
+import amd                      from 'rollup-plugin-amd';
 // const html = require('@rollup/plugin-html'); 
 import { string } from "rollup-plugin-string";
 import { readFileSync, writeFileSync, mkdirSync } from 'fs'
 import glob from 'glob';
 import util from 'util';
-import { map } from 'core-js/fn/array';
+import  { processFiles } from './scripts/process-files';
 
+const cheerio   = require('cheerio');
 
 const isWatchOn = process.argv.includes('--watch');
 const asyncGlob = util.promisify(glob)
@@ -29,48 +31,66 @@ const externals = [ '_', 'Vue', 'Vue', 'ky', 'angular', 'angular-route', 'angula
 'cbd-forums', 'shim', 'angular-localizer', 'view-abs-checkpoint', 'angular-flex', 'babel-polyfill', 'realmConf',
 'css!components/scbd-branding/directives/footer'
 ];  
-const bundleFiles = [
-    // bundle('views/shared/404.html'),
-    // bundle('views/shared/403.html') ,
-    // bundle('app-data/search-tour.json') ,
-    // // bundle('boot.js') ,
-    // // bundle('app.js') ,
-    // bundle('js/common.js'),
-    // testStage(),
-    // transform(`hash-file-mapping.json`, outputDir)
-  ];
+const bundleFiles = [ ];
+const langRegex = /\/(ar|en|fr|es|ru|zh)\//;
+
 export default async function() {
-// ,2html,1json|*(*.)json|*(*.)html1
-  
-  const allApplicationFiles = (await  asyncGlob('**/*.{js,html,json}', { 
-                              cwd: path.join(process.cwd(), 'app'),
-                              ignore:['hash-file-mapping.js']
-                            }))
- 
-  allApplicationFiles.forEach(m=>{
-    // if(/\.js$/.test(m))
-      externals.push(m)
-    bundleFiles.push(bundle(m))
-  });
 
-  //replace this  
+  const languages = ['ar', 'en', 'fr', 'es', 'ru', 'zh'];
+  const appDir = 'i18n';
+  const i18nDir = 'i18n-build'  
+  let allApplicationFiles = [];
 
+  //don't process i18n files when running locally
+  if(!isWatchOn){
+    await processFiles();
+    const i18nFiles = (await  asyncGlob('**/*.{js,html,json}', { 
+                    cwd: path.join(process.cwd(), i18nDir),
+                    ignore:['hash-file-mapping.js']
+                  }))
+    i18nFiles.forEach(m=>{
+      externals.push(m);
+      bundleFiles.push(bundle(m)); 
+    }); 
+  }
+  else{
+
+    const enFiles = (await  asyncGlob('**/*.{js,html,json}', { 
+                      cwd: path.join(process.cwd(), 'app'),
+                      ignore:['hash-file-mapping.js']
+                    }));
+    enFiles.forEach(m=>{
+          externals.push(m);
+          bundleFiles.push(bundle(m, 'app')); 
+      });
+  }
 
   return bundleFiles;
 }
 
-function bundle(relativePath, baseDir='app') {
-
+function bundle(relativePath, baseDir='i18n-build') {
+ 
+  let requireSourcemap = true;
   const extension = path.extname(relativePath);
   let outputFileExt = extension;  
-  if(extension=='.json')outputFileExt = '.js'
-  if(extension=='.html')outputFileExt = '.html.js'
+  // console.log(outputFileExt, relativePath);
+  if(extension=='.json')outputFileExt = '.json.js'; 
+  if(extension=='.html')outputFileExt = '.html.js';
+
+  if(/\.json\.js/.test(extension) || /\.json/.test(extension))
+    requireSourcemap=false;
+
+  //when running for local development add en folder path else the i18n-build has good path so need for adjustments
+  let enFolder='en/app'; 
+  if(!isWatchOn)
+    enFolder = '';
+
   return {
     input : path.join(baseDir||'', relativePath),
     output: [{
       format   : 'amd',
-      sourcemap: true,
-      dir : path.join(outputDir, path.dirname(relativePath)),
+      sourcemap: requireSourcemap,
+      dir : path.join(outputDir, enFolder, path.dirname(relativePath)),
       name : `${relativePath.replace(/[^a-z0-9]/ig, "_")}${extension}`,
       entryFileNames: `[name].[hash]${outputFileExt}`,
       chunkFileNames: `[name].[hash]${outputFileExt}`,      
@@ -78,28 +98,29 @@ function bundle(relativePath, baseDir='app') {
 
     external: externals,
     plugins : [
+      // watchAppFolder(),
       alias({ entries : [
           { find: /^~\/(.*)/, replacement:`${process.cwd()}/app/$1` },
           { find: /^json!(.*)/, replacement:`$1` },
           { find: /^text!(.*)/, replacement:`$1` },
         ] 
       }), 
-      amd({ include: 'app/**/*.js', exclude:['app/boot.js']}),
-      sanitizeString(),     
+      sanitizeString(),
+      addLanguageAttribute(),     
       json({namedExports:false}),  
-      string({
-        include: "**/*.html", 
-      }),
-      // commonjs(),
+      string({ include: "**/*.html"}),
+      // ejs(),
+      amd({ include: `**/*.js`, exclude:['**/boot.js']}),
       vue(),
       isWatchOn ? null : getBabelOutputPlugin({
                           presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
                           allowAllFormats: true,
-                          exclude: [ /* '*.json' */],
+                          exclude: [ '*.json' ],
                         }),
       isWatchOn ? null : terser(),
       saveHashFileNames(),
       // beforeFinish()
+
     ], 
   }
 }
@@ -111,18 +132,27 @@ function saveHashFileNames(){
   return {
     name:'saveHashFileNames',
     generateBundle: async function(OutputOptions, bundle){
-      const hashMapFileName = `${outputDir}/hash-file-mapping.js`;
+      const langRegex = /\/(ar|en|fr|es|ru|zh)\//;
       const hashFileName = Object.keys(bundle)[0]; 
       const fileName     = bundle[hashFileName].facadeModuleId.replace(/.*app\//, '').replace(/\.html$/, '.html.js');
+      const langMatch    = OutputOptions.dir.match(langRegex); 
+      let lang           = 'en'
+      if(langMatch)
+        lang = langMatch[1];
+
+      const hashMapFileName = `${process.cwd()}/${outputDir}/${lang}/app/hash-file-mapping.js`;
+      // console.log(fileName, langMatch, OutputOptions);
       
-      
-      globalHashMapping[fileName] = hashFileName;
+      if(!globalHashMapping[lang])
+        globalHashMapping[lang] = {};
+
+      globalHashMapping[lang][fileName] = hashFileName;
       const defineSyntax = `define(function () {
-                                return ${JSON.stringify(globalHashMapping)};
+                                return ${JSON.stringify(globalHashMapping[lang])};
                             });`
-      mkdirSync(outputDir, {recursive:true});
+      mkdirSync(`${process.cwd()}/${outputDir}/${lang}/app`, {recursive:true});
       writeFileSync(hashMapFileName, defineSyntax);
-      writeFileSync(`${hashMapFileName}.json`, JSON.stringify(globalHashMapping, null, 4));
+      writeFileSync(`${hashMapFileName}.json`, JSON.stringify(globalHashMapping[lang], null, 4));
     }
   }
 
@@ -134,7 +164,7 @@ function sanitizeString(options){
     if ( options === void 0 ) options = {};
 
     return {
-      name: 'lineFeed',
+      name: 'sanitizeString',
 
       // eslint-disable-next-line no-shadow
       transform: function(text, id) {
@@ -153,13 +183,13 @@ function sanitizeString(options){
             return null;
           }
         }
-        else if (id.slice(-5) == '.json') {             
-          try {
+        else if (/\.json\.js$/.test(id) || /\.json$/.test(id)) {  
+              
+          try { 
             const data = {
                 code: text.replace(/\s(?=(?:"[^"]*"|[^"])*$)/g, ''),
                 map: { mappings: '' }
             };
-                
             return data;
           } catch (err) {
             var message = 'Failed to remove line feed';
@@ -172,6 +202,18 @@ function sanitizeString(options){
         return null; 
       }
     };
+}
+
+function watchAppFolder(){
+  return {
+    name: 'watch-app-folder',
+    async buildStart(){
+        const files = await asyncGlob('app/**/*.{js,html,json,ejs}');
+        for(let file of files){
+            this.addWatchFile(file);
+        }
+    }
+  } 
 }
 
 function beforeFinish(options){
@@ -195,6 +237,40 @@ function beforeFinish(options){
       console.log('renderError')
     }
   };
+}
+
+
+
+function addLanguageAttribute(){
+
+  return {
+    name: 'languageAttribute',
+
+    // eslint-disable-next-line no-shadow
+    transform: function(content, filePath) {  
+      if(content && /\.html$/.test(filePath)){
+
+          const $html = cheerio.load(`<div class="my-lang-selector">${content}</div>`, {decodeEntities: false});
+          let contentHtml = $html('.my-lang-selector').children()
+          if(!contentHtml.attr('lang')){
+
+              let lang = 'en'
+              const match = filePath.match(/(?:^|\/)(ar|en|es|fr|ru|zh)\/.*/);
+              if(match && match.length > 1)
+                  lang = match[1];
+                  
+              contentHtml.attr('lang', lang);
+          }
+
+          return {
+            code : $html('.my-lang-selector').html(),
+            map  : { mappings: '' }
+          };
+      }
+
+      return content;
+    }
+  }
 }
 
 
