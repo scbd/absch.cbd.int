@@ -420,7 +420,7 @@ define(['app', './apiUrl'], function(app) {
                     if(/^\/app/.test(config.url) && (config.url.indexOf('.html')>0 || config.url.indexOf('.json')>0)){                          
                         var url = config.url;     
                         if(url.indexOf('v=')<0){    
-                            url += (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + $window.scbdApp.version;
+                            // url += (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + $window.scbdApp.version;
                             if(!/^\/?(en|ar|es|fr|ru|zh)\//.test(url))
                                 url = '/'+ $window.scbdApp.lang + url;
                         }

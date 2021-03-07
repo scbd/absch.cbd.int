@@ -148,7 +148,7 @@ async function changeJsonToJsExt(baseDir, buildDir) {
     await Promise.all(jsonToJsPromise);
 }
 
-async function copyFiles(baseDir, i18nDir, languages, buildDir, globPattern) {
+export async function copyFiles(baseDir, i18nDir, languages, buildDir, globPattern) {
 
     const allApplicationFiles = (await asyncGlob(globPattern, { cwd: path.join(baseDir, i18nDir) }));
 

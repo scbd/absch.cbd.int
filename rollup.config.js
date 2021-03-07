@@ -14,7 +14,7 @@ import { string } from "rollup-plugin-string";
 import { readFileSync, writeFileSync, mkdirSync } from 'fs'
 import glob from 'glob';
 import util from 'util';
-import  { processFiles } from './scripts/process-files';
+import  { processFiles, copyFiles } from './scripts/process-files';
 
 const cheerio   = require('cheerio');
 
@@ -54,7 +54,8 @@ export default async function() {
     }); 
   }
   else{
-
+    //copy ejs files to dist folder
+    await copyFiles(process.cwd(), 'app', ['en'], 'dist', '**/*.ejs');
     const enFiles = (await  asyncGlob('**/*.{js,html,json}', { 
                       cwd: path.join(process.cwd(), 'app'),
                       ignore:['hash-file-mapping.js']

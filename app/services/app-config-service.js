@@ -7,27 +7,19 @@ function (app, _, scbdJSonSchemas, realmConfigurations) {
         var referenceSchemas    = {};
         var scbdSchemas         = {};
 
-        // require([`json!/api/v2018/realm-configurations/${(window.scbdApp.host||'')}`], function(conf){
-        //     console.log(conf, scbdJSonSchemas);
-
-            // realmConfigurations = realmConfigurations;
-            realmConfig         = _.find(realmConfigurations,{ host : window.location.host}) || _.head(realmConfigurations);
-            
-            if(!realmConfig)
-                throw new Error("Unknow realm for host: "+window.location.host + ' clearingHouseHost: ' + window.scbdApp.host);
-
-            nationalSchemas  = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='national'  ? key : undefined; }));
-            referenceSchemas = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='reference' ? key : undefined; }));
-            scbdSchemas      = _.compact(_.map(scbdJSonSchemas, function(schema, key){ 
-                realmConfig.schemas[key] = schema;
-                return key; 
-            }));
-
-            console.log("Realm:", (realmConfig||{}).realm || 'NOT_FOUND');
-        // });
+        realmConfig         = _.find(realmConfigurations,{ host : window.location.host}) || _.head(realmConfigurations);
         
-        
+        if(!realmConfig)
+            throw new Error("Unknow realm for host: "+window.location.host + ' clearingHouseHost: ' + window.scbdApp.host);
 
+        nationalSchemas  = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='national'  ? key : undefined; }));
+        referenceSchemas = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='reference' ? key : undefined; }));
+        scbdSchemas      = _.compact(_.map(scbdJSonSchemas, function(schema, key){ 
+            realmConfig.schemas[key] = schema;
+            return key; 
+        }));
+
+        console.log("Realm:", (realmConfig||{}).realm || 'NOT_FOUND');     
         
         app.provider("realm", function() {
             

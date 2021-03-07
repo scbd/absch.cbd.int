@@ -173,7 +173,7 @@ function(templateHtml, app, _, require, $) { ;
 
                     var deferred = $q.defer();
                     
-                    require(['json!'+baseUrl+$scope.activeReport.compare[0].url], function(res){
+                    require([baseUrl+$scope.activeReport.compare[0].url], function(res){
                         deferred.resolve(res);
                     });
 
@@ -183,7 +183,7 @@ function(templateHtml, app, _, require, $) { ;
                 function loadJsonFile(path){
                     var deferred = $q.defer();
                     
-                    require(['json!'+path], function(res){
+                    require([path], function(res){
                         deferred.resolve(res);
                     });
 

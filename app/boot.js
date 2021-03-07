@@ -3,6 +3,25 @@ if(/Safari/.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)) {
 var cdnHost = 'https://cdn.cbd.int/';
 var nameToUrl = require.s.contexts._.nameToUrl;
 
+
+window.getHashFileName = function(url){
+    if(window.hashUrlsMapping && !/^http/.test(url)){
+        var hashUrl = url.replace(/^\/(ar|en|es|fr|ru|zh)\/app\//, '')
+                         .replace('/app/', '')
+                         .replace(/\.json\.js$/, '.json')
+                         .replace(/\?.*/, '')
+                        //  .replace(/\.html\.js$/, '.html');
+        var hashFileName = window.hashUrlsMapping[hashUrl];
+        // console.log(hashFileName, url);
+        if(hashFileName){
+            var replaceName = hashFileName.replace(/\.[a-z0-9]+\.(js|html|html\.js|json|json\.js)$/i, '.$1')
+            return url.replace(replaceName, hashFileName)
+        }
+    }
+
+    return url;
+}
+
 require.config({
     waitSeconds: 120,
     baseUrl : '/app/',
@@ -118,8 +137,8 @@ require.config({
         if(url.indexOf('worldEUHigh.js')>0)
             return '';
             
-        if(/^\//.test(url))            
-            return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version;
+        // if(/^\//.test(url))            
+        //     return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version;
 
         return '';
     }
@@ -128,16 +147,9 @@ require.config({
 require.s.contexts._.nameToUrl = function (moduleName, ext, skipExt) {
 
     var url = nameToUrl(moduleName, ext, skipExt);
-    // console.log(window.hashUrlsMapping, url);
-    if(window.hashUrlsMapping){
-        var hashUrl = url.replace('/app/', '');
-        var hashFileName = window.hashUrlsMapping[hashUrl];
-        if(hashFileName){
-            var replaceName = hashFileName.replace(/\.[a-z0-9]+\.(js|html|html\.js|json)$/, '.$1')
-            url = url.replace(replaceName, hashFileName)
-        }
-    }
-    if(/^\//.test(url) && (url.indexOf('.html')>0 || url.indexOf('.json')>0)) {
+    url = window.getHashFileName(url);
+    
+    if(/^\//.test(url) && !/^\/(ar|en|es|fr|ru|zh)\//.test(url) && !/^\/api\//.test(url)) {
             url = '/'+window.scbdApp.lang + url;
     }
     return url;
@@ -170,9 +182,10 @@ define('realmConf', [`json!/api/v2018/realm-configurations/${(window.scbdApp.hos
     return realmConf;
 })
 
-if(window.scbdApp.template)
+if(window.scbdApp.template){
     require(['/'+window.scbdApp.lang+'/app/hash-file-mapping.js'], function(hashMapping){
         // console.log(jsd)
         window.hashUrlsMapping = hashMapping
         require([window.scbdApp.template], function(){})
     })
+}
