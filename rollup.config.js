@@ -74,6 +74,10 @@ function bundle(relativePath, baseDir='i18n-build') {
   if(extension=='.json')outputFileExt = '.json.js'; 
   if(extension=='.html')outputFileExt = '.html.js';
 
+  let outputFileName   = `[name].[hash]${outputFileExt}`;
+  if(isWatchOn)
+    outputFileName     = `[name].fakehash${outputFileExt}`;
+
   if(/\.json\.js/.test(extension) || /\.json/.test(extension))
     requireSourcemap=false;
 
@@ -89,8 +93,8 @@ function bundle(relativePath, baseDir='i18n-build') {
       sourcemap: requireSourcemap,
       dir : path.join(outputDir, enFolder, path.dirname(relativePath)),
       name : `${relativePath.replace(/[^a-z0-9]/ig, "_")}${extension}`,
-      entryFileNames: `[name].[hash]${outputFileExt}`,
-      chunkFileNames: `[name].[hash]${outputFileExt}`,      
+      entryFileNames: outputFileName,
+      chunkFileNames: outputFileName,      
     }],
 
     external: externals,
