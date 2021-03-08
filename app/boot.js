@@ -22,6 +22,23 @@ window.getHashFileName = function(url){
     return url;
 }
 
+window.hasHashUrl = (url)=>{
+    let hashFileRegex  = /\.[a-z0-9]{8}\./i
+
+    return hashFileRegex.test(url);
+}
+
+window.addAppVersionToUrl = (url, force)=>{
+
+    if(!force && window.hasHashUrl(url))
+        return url;
+
+    if(/^\//.test(url))            
+        return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version;
+        
+    return url;
+}
+
 require.config({
     waitSeconds: 120,
     baseUrl : '/app/',
@@ -133,12 +150,9 @@ require.config({
         
         if(!window.scbdApp.version || window.scbdApp.version === '-')
             return '';
-
-        if(url.indexOf('worldEUHigh.js')>0)
-            return '';
             
-        // if(/^\//.test(url))            
-        //     return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version;
+        if(/^\//.test(url))            
+            return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version;
 
         return '';
     }

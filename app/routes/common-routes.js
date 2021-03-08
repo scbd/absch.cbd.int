@@ -4,6 +4,28 @@
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
     var lang    = window.scbdApp.lang;
 
+    app.config(['$provide', ($provide) => {
+        $provide.decorator('$templateCache',
+            ['$delegate', ($delegate) => {
+                let templateCache = $delegate;
+                let localGet = templateCache.get;
+                let localPut = templateCache.put;
+                // templateCache.get = (key) => { 
+                //     return localGet(key.toLowerCase()); 
+                // };
+                templateCache.put = (key, value) => { 
+                    //TODO: maybe better way to extract the template
+                    if(typeof value == 'string' && value.indexOf("define(function () { 'use strict';")>=0){                            
+                        var amdTemplate = value.match(/=\s"(.*)"/)
+                        if(amdTemplate)
+                            value = amdTemplate[1].replace(/\\n|\\t/g, '').replace(/\\/g, '');
+                    }
+                    return localPut(key.toLowerCase(), value); 
+                };
+                return $delegate;
+            }]);
+    }]);
+
     app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         
         $locationProvider.html5Mode(true);
@@ -215,6 +237,7 @@
         return importFn;
     }
     
+    
     //============================================================
     //
     //
@@ -222,14 +245,15 @@
     function whenAsync(path, route) {
 
         route = route || {};
-        var localBaseUrl = '/' + lang + baseUrl;
+        var localBaseUrl =  baseUrl;
 
         if(route.templateUrl && !/^\//.test(route.templateUrl)) {
-            route.templateUrl = localBaseUrl+route.templateUrl;
+            route.templateUrl = localBaseUrl+window.getHashFileName(route.templateUrl+'.js');
         }
-        
-        if(!route.controller && route.resolveController) { // Legacy
-            var module = route.templateUrl.replace(new RegExp('^'+escapeRegExp(localBaseUrl)), '').replace(/\.html$/, '');
+        if(!route.controller && route.resolveController) { 
+            // Legacy
+            var module = route.templateUrl.replace(new RegExp('^'+escapeRegExp(localBaseUrl)), '').replace(/(\.[a-z0-9]{8})?\.html(\.js)?/i, '');
+            module = window.getHashFileName(module+'.js').replace(/\.js$/, '');
             route.controller = importQ(module);
         }
         
@@ -273,7 +297,7 @@
         }
 
         if((route.templateUrl||'').length > 0 && window.scbdApp.version){
-            route.templateUrl += (route.templateUrl.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version;
+            route.templateUrl = window.addAppVersionToUrl(route.templateUrl);
         }
 
         this.when(path, route);
