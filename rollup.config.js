@@ -112,7 +112,10 @@ function bundle(relativePath, baseDir='i18n-build') {
                           allowAllFormats: true,
                           exclude: [ '*.json' ],
                         }),
-      isWatchOn ? null : terser(),
+      isWatchOn ? null : terser({
+        ecma: 5,
+        mangle:false
+      }),
       saveHashFileNames(),
     ], 
   }
