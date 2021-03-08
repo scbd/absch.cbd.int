@@ -1,22 +1,19 @@
 // rollup.config.js (building more than one bundle)
-import { terser } from 'rollup-plugin-terser';
-import path from 'path'
-import vue  from 'rollup-plugin-vue'
-import nodeResolve              from '@rollup/plugin-node-resolve'
-import commonjs                 from '@rollup/plugin-commonjs';
-import { getBabelOutputPlugin } from '@rollup/plugin-babel';
-import alias                    from '@rollup/plugin-alias';
-import json                     from '@rollup/plugin-json';
-// import ejs                      from 'rollup-plugin-ejs';
-import amd                      from 'rollup-plugin-amd';
-// const html = require('@rollup/plugin-html'); 
-import { string } from "rollup-plugin-string";
+import path                                       from 'path'
+import vue                                        from 'rollup-plugin-vue'
+import nodeResolve                                from '@rollup/plugin-node-resolve'
+import commonjs                                   from '@rollup/plugin-commonjs';
+import alias                                      from '@rollup/plugin-alias';
+import json                                       from '@rollup/plugin-json';
+import amd                                        from 'rollup-plugin-amd';
+import glob                                       from 'glob';
+import util                                       from 'util';
+import cheerio                                    from 'cheerio';
+import { processFiles, copyFiles                } from './scripts/pre-build-process';
+import { terser                                 } from 'rollup-plugin-terser';
+import { string                                 } from "rollup-plugin-string";
+import { getBabelOutputPlugin                   } from '@rollup/plugin-babel';
 import { readFileSync, writeFileSync, mkdirSync } from 'fs'
-import glob from 'glob';
-import util from 'util';
-import  { processFiles, copyFiles } from './scripts/process-files';
-
-const cheerio   = require('cheerio');
 
 const isWatchOn = process.argv.includes('--watch');
 const asyncGlob = util.promisify(glob)
@@ -74,7 +71,6 @@ function bundle(relativePath, baseDir='i18n-build') {
   let requireSourcemap = true;
   const extension = path.extname(relativePath);
   let outputFileExt = extension;  
-  // console.log(outputFileExt, relativePath);
   if(extension=='.json')outputFileExt = '.json.js'; 
   if(extension=='.html')outputFileExt = '.html.js';
 
@@ -99,7 +95,6 @@ function bundle(relativePath, baseDir='i18n-build') {
 
     external: externals,
     plugins : [
-      // watchAppFolder(),
       alias({ entries : [
           { find: /^~\/(.*)/, replacement:`${process.cwd()}/app/$1` },
           { find: /^json!(.*)/, replacement:`$1` },
@@ -110,7 +105,6 @@ function bundle(relativePath, baseDir='i18n-build') {
       addLanguageAttribute(),     
       json({namedExports:false}),  
       string({ include: "**/*.html"}),
-      // ejs(),
       amd({ include: `**/*.js`, exclude:['**/boot.js']}),
       vue(),
       isWatchOn ? null : getBabelOutputPlugin({
@@ -120,8 +114,6 @@ function bundle(relativePath, baseDir='i18n-build') {
                         }),
       isWatchOn ? null : terser(),
       saveHashFileNames(),
-      // beforeFinish()
-
     ], 
   }
 }
@@ -205,43 +197,6 @@ function sanitizeString(options){
     };
 }
 
-function watchAppFolder(){
-  return {
-    name: 'watch-app-folder',
-    async buildStart(){
-        const files = await asyncGlob('app/**/*.{js,html,json,ejs}');
-        for(let file of files){
-            this.addWatchFile(file);
-        }
-    }
-  } 
-}
-
-function beforeFinish(options){
-
-  if ( options === void 0 ) options = {};
-
-  return {
-    name: 'beforeFinish',
-
-    // eslint-disable-next-line no-shadow
-    transform: async function (text, id) {
-      console.log('transform')      
-    },
-    buildEnd: function (text, id) {
-      console.log('buildEnd')      
-    },
-    writeBundle: async function (text, id) {
-      console.log('writeBundle')      
-    },
-    renderError:()=>{
-      console.log('renderError')
-    }
-  };
-}
-
-
-
 function addLanguageAttribute(){
 
   return {
@@ -271,55 +226,5 @@ function addLanguageAttribute(){
 
       return content;
     }
-  }
-}
-
-
-
-//Transpile and Expose Vue component to angularJS as AMD module
-function exposeVueComponent(relativePath, vueSourceDir) {
-
-    vueSourceDir = `${(vueSourceDir || 'components')}`;
-    
-    return {
-        
-      input : path.join(`vue/${(vueSourceDir || 'components')}`, relativePath),
-      output: [{
-        format   : 'amd', 
-        sourcemap: true,
-        // file : path.join(outputDir, vueSourceDir, relativePath+'.[hash].js'),
-        dir : path.join(outputDir, vueSourceDir, path.dirname(relativePath)),
-        name : `${relativePath.replace(/[^a-z0-9]/ig, "_")}.[hash].js`,
-        entryFileNames: '[name].[hash].js',
-        chunkFileNames: '[name].[hash].js',
-      }],
-      external: externals,
-      plugins : [
-        vue(),  
-        commonjs(),  
-        nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ] }),
-        terser(),
-        // hash({  dest: `${relativePath.replace(/[^a-z0-9]/ig, "_")}.[hash].js`	})
-      ],
-    }
-}
-
-//Transpile and Expose as UMD non-umd library.
-function exposeGlobal(source, name) {
-
-  return {
-    input: source,
-    output: [{
-      file: path.join(outputDir, 'libs/globals', `${name}.js`),
-      format : 'umd',
-      name: name,
-      plugins : [
-        getBabelOutputPlugin({
-          presets: ['@babel/preset-env'],
-          allowAllFormats: true
-        }),
-        terser()
-      ]
-    }],
   }
 }
