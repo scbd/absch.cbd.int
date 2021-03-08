@@ -116,7 +116,7 @@ function bundle(relativePath, baseDir='i18n-build') {
                           allowAllFormats: true,
                           exclude: [ '*.json' ],
                         }),
-      isWatchOn ? null : terser({
+      (isWatchOn||1==1) ? null : terser({
         ecma: 5,
         mangle:false
       }),
