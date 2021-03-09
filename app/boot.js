@@ -8,8 +8,8 @@ window.getHashFileName = function(url){
     if(window.hashUrlsMapping && !/^http/.test(url)){
         var hashUrl = url.replace(/^\/(ar|en|es|fr|ru|zh)\/app\//, '')
                          .replace('/app/', '')
-                         .replace(/\.json\.js$/, '.json')
                          .replace(/\?.*/, '')
+                         .replace(/\.json\.js$/, '.json')
                         //  .replace(/\.html\.js$/, '.html');
         var hashFileName = window.hashUrlsMapping[hashUrl];
         // console.log(hashFileName, url);
@@ -163,9 +163,14 @@ require.s.contexts._.nameToUrl = function (moduleName, ext, skipExt) {
     var url = nameToUrl(moduleName, ext, skipExt);
     url = window.getHashFileName(url);
     
-    if(/^\//.test(url) && !/^\/(ar|en|es|fr|ru|zh)\//.test(url) && !/^\/api\//.test(url)) {
-            url = '/'+window.scbdApp.lang + url;
+    var isHashUrl = window.hasHashUrl(url);
+    if(isHashUrl){//remove version param from url since its a hash url
+        url = removeParamFromUrl(url, 'v')
     }
+    else if(/^\//.test(url) && !/^\/(ar|en|es|fr|ru|zh)\//.test(url) && !/^\/api\//.test(url)) {
+        url = '/'+window.scbdApp.lang + url;
+    }
+    
     return url;
 }
 
@@ -202,4 +207,20 @@ if(window.scbdApp.template){
         window.hashUrlsMapping = hashMapping
         require([window.scbdApp.template], function(){})
     })
+}
+
+function removeParamFromUrl(url, param) {
+    var urlParts = url.split('?'),
+        preservedQueryParams = '';
+
+    if (urlParts.length === 2) {
+        preservedQueryParams = urlParts[1]
+        .split('&')
+        .filter(function(queryParam) {
+            return !(queryParam === param || queryParam.indexOf(param + '=') === 0)
+        })
+        .join('&');
+    }
+
+    return urlParts[0] +  (preservedQueryParams && '?' + preservedQueryParams); 
 }

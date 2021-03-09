@@ -111,12 +111,12 @@ function bundle(relativePath, baseDir='i18n-build') {
       string({ include: "**/*.html"}),
       amd({ include: `**/*.js`, exclude:['**/boot.js']}),
       vue(),
-      isWatchOn && getBabelOutputPlugin({
-        presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
-        allowAllFormats: true,
-        exclude: [ '*.json' ],
-      }),
-      isWatchOn && terser({
+      isWatchOn ? null : getBabelOutputPlugin({
+                          presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
+                          allowAllFormats: true,
+                          exclude: [ '*.json' ],
+                        }),
+      (isWatchOn) ? null : terser({
         ecma: 5,
         mangle:false
       }),
