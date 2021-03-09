@@ -15,7 +15,7 @@
                 // };
                 templateCache.put = (key, value) => { 
                     //TODO: maybe better way to extract the template
-                    if(typeof value == 'string' && value.indexOf("define(function () { 'use strict';")>=0){                            
+                    if(typeof value == 'string' && value.indexOf("define(function")>=0){                            
                         var amdTemplate = value.match(/=\s"(.*)"/)
                         if(amdTemplate)
                             value = amdTemplate[1].replace(/\\n|\\t/g, '').replace(/\\/g, '');
