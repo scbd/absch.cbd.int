@@ -37,14 +37,17 @@ export default async function() {
   const appDir = 'i18n';
   const i18nDir = 'i18n-build'  
   let allApplicationFiles = [];
-
+  const globOptions = {
+    pattern: '**/*.{js,html,json}',
+    ignore : ['hash-file-mapping.js', '**/views/pdf-viewer/pdfjs/**'],
+  }
   //don't process i18n files when running locally
   if(!isLocalDev){
     await processFiles();
-    const i18nFiles = (await  asyncGlob('**/*.{js,html,json}', { 
-                    cwd: path.join(process.cwd(), i18nDir),
-                    ignore:['hash-file-mapping.js']
-                  }))
+    const i18nFiles = (await  asyncGlob(globOptions.pattern, { 
+                        cwd: path.join(process.cwd(), i18nDir),
+                        ignore:globOptions.ignore
+                      }));
     i18nFiles.forEach(m=>{
       externals.push(m);
       bundleFiles.push(bundle(m)); 
@@ -53,9 +56,12 @@ export default async function() {
   else{ //en files only
     //copy ejs files to dist folder
     await copyFiles(process.cwd(), 'app', ['en'], 'dist', '**/*.ejs');
-    const enFiles = (await  asyncGlob('**/*.{js,html,json}', { 
+     
+    //copy pdfviewer files //TODO: find best way, for now it can be in /app to avoid duplication
+    // await copyFiles(process.cwd(), 'app', languages, 'dist', '**/views/pdf-viewer/pdfjs/**');
+    const enFiles = (await  asyncGlob(globOptions.pattern, { 
                       cwd: path.join(process.cwd(), 'app'),
-                      ignore:['hash-file-mapping.js']
+                      ignore: globOptions.ignore
                     }));
     enFiles.forEach(m=>{
           externals.push(m);

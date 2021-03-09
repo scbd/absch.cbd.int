@@ -50,7 +50,7 @@
                     page: 1
                 },
                 forcePDFJS: true,
-                PDFJS_URL: "/app/views/pdf-viewer/pdfjs/web/viewer.html"
+                PDFJS_URL: "/app/views/pdf-viewer/pdfjs/web/viewer.b10e641f.html"
             };
             pdfObject.embed($scope.pdf.src, '#viewPdf', options)
             

@@ -149,7 +149,10 @@ export async function copyFiles(baseDir, i18nDir, languages, buildDir, globPatte
         const langPromises = allApplicationFiles.map(async (file) => {
             const copyToDir = `${baseDir}/${buildDir}/${lang}/app/${path.dirname(file)}`;
             await mkdir(copyToDir, { recursive: true });
-            await copyFile(`${baseDir}/${i18nDir}/${file}`, `${copyToDir}/${path.basename(file)}`);
+
+            const info = await stat(path.join(baseDir, i18nDir, file))
+            if(!info.isDirectory())
+                await copyFile(`${baseDir}/${i18nDir}/${file}`, `${copyToDir}/${path.basename(file)}`);
         });
         copyPromise = copyPromise.concat(langPromises);
     });
