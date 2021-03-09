@@ -15,7 +15,7 @@ import { string                                 } from "rollup-plugin-string";
 import { getBabelOutputPlugin                   } from '@rollup/plugin-babel';
 import { readFileSync, writeFileSync, mkdirSync } from 'fs'
 
-const isWatchOn = process.argv.includes('--watch');
+const isLocalDev = process.argv.includes('--watch');
 const asyncGlob = util.promisify(glob)
 const outputDir = 'dist';
 let globalHashMapping = {};
@@ -39,7 +39,7 @@ export default async function() {
   let allApplicationFiles = [];
 
   //don't process i18n files when running locally
-  if(!isWatchOn){
+  if(!isLocalDev){
     await processFiles();
     const i18nFiles = (await  asyncGlob('**/*.{js,html,json}', { 
                     cwd: path.join(process.cwd(), i18nDir),
@@ -50,7 +50,7 @@ export default async function() {
       bundleFiles.push(bundle(m)); 
     }); 
   }
-  else{
+  else{ //en files only
     //copy ejs files to dist folder
     await copyFiles(process.cwd(), 'app', ['en'], 'dist', '**/*.ejs');
     const enFiles = (await  asyncGlob('**/*.{js,html,json}', { 
@@ -75,7 +75,7 @@ function bundle(relativePath, baseDir='i18n-build') {
   if(extension=='.html')outputFileExt = '.html.js';
 
   let outputFileName   = `[name].[hash]${outputFileExt}`;
-  if(isWatchOn)
+  if(isLocalDev)
     outputFileName     = `[name].fakehash${outputFileExt}`;
 
   if(/\.json\.js/.test(extension) || /\.json/.test(extension))
@@ -83,7 +83,7 @@ function bundle(relativePath, baseDir='i18n-build') {
 
   //when running for local development add en folder path else the i18n-build has good path so need for adjustments
   let enFolder='en/app'; 
-  if(!isWatchOn)
+  if(!isLocalDev)
     enFolder = '';
 
   return {
@@ -111,12 +111,12 @@ function bundle(relativePath, baseDir='i18n-build') {
       string({ include: "**/*.html"}),
       amd({ include: `**/*.js`, exclude:['**/boot.js']}),
       vue(),
-      isWatchOn ? null : getBabelOutputPlugin({
+      isLocalDev ? null : getBabelOutputPlugin({
                           presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
                           allowAllFormats: true,
                           exclude: [ '*.json' ],
                         }),
-      (isWatchOn) ? null : terser({
+      (isLocalDev || 1==1) ? null : terser({
         ecma: 5,
         mangle:false
       }),
