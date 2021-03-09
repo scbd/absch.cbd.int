@@ -68,7 +68,7 @@ export default async function() {
 
 function bundle(relativePath, baseDir='i18n-build') {
  
-  let requireSourcemap = true;
+  let requireSourcemap = false;
   const extension = path.extname(relativePath);
   let outputFileExt = extension;  
   if(extension=='.json')outputFileExt = '.json.js'; 
@@ -111,12 +111,12 @@ function bundle(relativePath, baseDir='i18n-build') {
       string({ include: "**/*.html"}),
       amd({ include: `**/*.js`, exclude:['**/boot.js']}),
       vue(),
-      isWatchOn ? null : getBabelOutputPlugin({
-                          presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
-                          allowAllFormats: true,
-                          exclude: [ '*.json' ],
-                        }),
-      (isWatchOn||1==1) ? null : terser({
+      isWatchOn && getBabelOutputPlugin({
+        presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
+        allowAllFormats: true,
+        exclude: [ '*.json' ],
+      }),
+      isWatchOn && terser({
         ecma: 5,
         mangle:false
       }),
