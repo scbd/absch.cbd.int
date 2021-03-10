@@ -1,8 +1,10 @@
 define(['app', 'lodash', 'components/scbd-angularjs-services/main', 'views/search/search-directive',
 'css!/app/css/search.css'], function(app, exportExcel) {
     "use strict";
-    app.controller("SearchPageController", ["$scope", '$sce', 'ngMeta', 'realm', 'locale', function($scope, $sce, ngMeta, realm, locale) {
+    return ["$scope", '$sce', 'ngMeta', 'realm', 'locale', 'testResolve',
+     function($scope, $sce, ngMeta, realm, locale, testResolve) {
 
+        console.log(testResolve)
             
             $('[role="tooltip"]').hide();
             
@@ -11,5 +13,5 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/main', 'views/searc
             ngMeta.setTitle('Search')
             ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
         }
-    ]);
+    ];
 });

@@ -15,7 +15,8 @@ import { string                                 } from "rollup-plugin-string";
 import { getBabelOutputPlugin                   } from '@rollup/plugin-babel';
 import { readFileSync, writeFileSync, mkdirSync } from 'fs'
 
-const isLocalDev = process.argv.includes('--watch');
+const isLocalDev = process.argv.includes('--watch');// || true;
+
 const asyncGlob = util.promisify(glob)
 const outputDir = 'dist';
 let globalHashMapping = {};

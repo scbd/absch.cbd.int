@@ -15,9 +15,12 @@ ENV VERSION $VERSION
 WORKDIR /usr/src/app
 
 # clone primary repo
+# ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN git clone -n https://github.com/scbd/absch.cbd.int.git /usr/src/app
 
 RUN git -c advice.detachedHead=false checkout $VERSION
+
+COPY rollup.config.js ./
 
 RUN yarn install && \
     echo 'running on branch ' $VERSION

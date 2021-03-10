@@ -1,4 +1,6 @@
-﻿define(['require', 'app', 'lodash', 'angular-route', 'services/main',
+﻿import { reject } from "lodash";
+
+define(['require', 'app', 'lodash', 'angular-route', 'services/main',
 'components/scbd-angularjs-services/main'], function (require, app, _) { ;
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
@@ -38,14 +40,16 @@
                 whenAsync('/verify-email',    {templateUrl: 'views/shared/verify-email.html', label:'Email Verification Pending'}).
                 whenAsync('/help/403',        {templateUrl: 'views/shared/403.html', label:'403 Error'}).
                 
+                whenAsync('/fake-me',                        { templateUrl: 'views/fake/fake.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize(), loadRealController:loadRealController('views/search/search-page.html', {}) } }).
+                
                 
                 whenAsync('/mailbox',                        { templateUrl: 'views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
                 whenAsync('/mailbox/:mailId',                { templateUrl: 'views/mailbox/inbox.html',         label:'Mailbox',       resolveController: true, resolve : { securized : securize() } }).
 
                 whenAsync('/search/countries/:countryCode?',                        { redirectTo:'/countries/:countryCode' }).
                 whenAsync('/search/countries/:countryCode/:documentType',           { redirectTo:'/countries/:countryCode/:documentType' }).
-                whenAsync('/search/:recordType',                     { templateUrl: 'views/search/search-page.html',   label:'SEARCH',         resolveController: true, reloadOnSearch:false}).
-                whenAsync('/search',                                 { templateUrl: 'views/search/search-page.html',   label:'SEARCH',         resolveController: true, reloadOnSearch:false}).
+                whenAsync('/search/:recordType',                     { templateUrl: 'views/search/search-page.html',   label:'SEARCH',         resolveController: true, reloadOnSearch:false, resolve:{testResolve:function(){return 'tet'}}}).
+                whenAsync('/search',                                 { templateUrl: 'views/search/search-page.html',   label:'SEARCH',         resolveController: true, reloadOnSearch:false, resolve:{testResolve:function(){return 'tet'}}}).
                 whenAsync('/search/national-records/:documentSchema?',              { redirectTo:'/search' }).
                 whenAsync('/search/reference-records/:documentSchema?',             { redirectTo:'/search' }).
 
@@ -237,6 +241,32 @@
         return importFn;
     }
     
+    function loadRealController(module){
+
+        var localBaseUrl =  baseUrl;
+        let templateUrl = module;
+
+        if(templateUrl && !/^\//.test(templateUrl)) {
+            templateUrl = localBaseUrl+window.getHashFileName(templateUrl+'.js');
+        }
+        var controllerUrl = templateUrl.replace(new RegExp('^'+escapeRegExp(localBaseUrl)), '').replace(/(\.[a-z0-9]{8})?\.html(\.js)?/i, '');
+        controllerUrl = window.getHashFileName(controllerUrl+'.js').replace(/\.js$/, '');
+        
+        var importFn = function($q) {
+            return $q((resolve, reject) => {
+                require([templateUrl, controllerUrl], (template, controllerCtr)=>{         
+                    console.log(template, controllerCtr)            
+                    resolve(template, controllerCtr);
+                }, (e)=>{
+                    console.error(e);
+                    reject(e);
+                });
+            });
+        };
+        importFn.$inject = ['$q'];
+
+        return importFn;
+    }
     
     //============================================================
     //
