@@ -57,7 +57,7 @@ export default async function() {
   else{ //en files only
     //copy ejs files to dist folder
     await copyFiles(process.cwd(), 'app', ['en'], 'dist', '**/*.ejs');
-     
+      
     //copy pdfviewer files //TODO: find best way, for now it can be in /app to avoid duplication
     // await copyFiles(process.cwd(), 'app', languages, 'dist', '**/views/pdf-viewer/pdfjs/**');
     const enFiles = (await  asyncGlob(globOptions.pattern, { 
