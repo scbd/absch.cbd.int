@@ -30,7 +30,7 @@
     <span register-top-menu></span>
     <div class="register-content card card-1-notrans">
 
-        <div ng-if="isBch" style="margin:10px;">
+        <div ng-if="isBch && betaArticle" style="margin:10px;">
             <h1 class="color-green bold" style="margin-bottom:30px;padding-top:15px;"
                 ng-bind-html="betaArticle.title | lstring:locale"></h1>
             <div ng-bind-html="betaArticle.content | lstring:locale | toTrusted"></div>

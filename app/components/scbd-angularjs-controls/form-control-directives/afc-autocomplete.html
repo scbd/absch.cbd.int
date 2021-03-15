@@ -14,7 +14,7 @@
 			<a rel="noopener" ng-click="removeSpan(i)" class="glyphicon glyphicon-remove"></a>
 		</span>
 		<input {{required}} type="{{type||'text'}}" class="form-control" id="{{title}}"
-			placeholder="{{placeholder | localize}}" autocomplete="off" ng-model="bindingDisplay"
+			placeholder="{{placeholder}}" autocomplete="off" ng-model="bindingDisplay"
 			ng-keydown="keydown($event)" ng-keyup="keyup(bindingDisplay, $event)" ng-focus="keydown($event)"
 			select-all-on-click ng-blur="updateHideOptions()" ng-click="toggleAllOptions(true)"
 			ng-class="{disabled:ngDisabledFn()}" ng-disabled="ngDisabledFn()">
