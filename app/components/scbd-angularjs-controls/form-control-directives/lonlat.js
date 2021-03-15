@@ -1,7 +1,6 @@
 import app from 'app';
 import template from 'text!./lonlat.html';
 import $ from 'jquery';
-import 'angular-localizer';
   ;
   app.directive('lonlatInput', function() {
     return {

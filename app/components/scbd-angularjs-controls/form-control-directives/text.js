@@ -1,7 +1,6 @@
 import app from 'app';
 import template from 'text!./text.html';
 import $ from 'jquery';
-import 'angular-localizer';
 import 'angular-sanitize';
   ;
   app.directive('afcText', function() {

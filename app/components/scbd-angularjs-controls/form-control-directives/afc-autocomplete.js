@@ -2,7 +2,6 @@ import app from 'app';
 import template from 'text!./afc-autocomplete.html';
 import $ from 'jquery';
 import _ from 'lodash';
-import 'angular-localizer';
 import 'components/scbd-angularjs-services/main'; ;
     app.directive('afcAutocomplete', ['$compile', '$timeout', '$q', 'locale', '$filter', function($compile, $timeout, $q, locale, $filter) {
         return {

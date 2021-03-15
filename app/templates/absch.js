@@ -158,7 +158,7 @@ function (app, _, moment, angular) {
             function loadDepencies(){
 
                 require(['angular-animate', 'components/scbd-angularjs-services/main',
-                'angular-localizer', 'angular-animate', 'components/scbd-branding/main',
+                'angular-animate', 'components/scbd-branding/main',
                 'views/directives/nav/portal-branding', 'views/directives/nav/portal-nav'], 
                     function () {
 
