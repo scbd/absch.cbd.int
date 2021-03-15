@@ -26,7 +26,7 @@ const externals = [ '_', 'Vue', 'Vue', 'ky', 'angular', 'angular-route', 'angula
 'ng-breadcrumbs', 'ngSmoothScroll', 'angular-joyride', 'toastr', 'ngStorage', 'ngDialog', 'ngInfiniteScroll', 'tableexport', 'blobjs', 'file-saverjs', 'xlsx', 'jszip', 
 'webui-popover', 'chart-js', 'printThis', 'diacritics', 'pdfjs-dist/build/pdf', 'pdfjs-dist/build/pdf.worker', 'pdf-object', 'angular-trix', 'trix', 'ngMeta', 
 'angular-loggly-logger', 'drag-and-drop', 'angucomplete-alt', 'angular-cache', 'jquery-ui', 'pivottable', 'plotly-renderers', 'angular-vue', 'ky', 'socket.io', 
-'cbd-forums', 'shim', 'angular-localizer', 'view-abs-checkpoint', 'angular-flex', 'babel-polyfill', 'realmConf',
+'cbd-forums', 'shim', 'view-abs-checkpoint', 'angular-flex', 'babel-polyfill', 'realmConf',
 'css!components/scbd-branding/directives/footer'
 ];  
 const bundleFiles = [ ];
@@ -82,12 +82,14 @@ function bundle(relativePath, baseDir='i18n-build') {
   if(extension=='.html')outputFileExt = '.html.js';
 
   let outputFileName   = `[name].[hash]${outputFileExt}`;
-  if(isLocalDev)
-    outputFileName     = `[name].fakehash${outputFileExt}`;
+  // if(isLocalDev)
+  //   outputFileName     = `[name].fakehash${outputFileExt}`;
+  if(isLocalDev && relativePath.indexOf('boot.js')>=0)
+    outputFileName     = `[name]${outputFileExt}`;  
 
   if(/\.json\.js/.test(extension) || /\.json/.test(extension))
     requireSourcemap=false;
-
+ 
   //when running for local development add en folder path else the i18n-build has good path so need for adjustments
   let enFolder='en/app'; 
   if(!isLocalDev)
@@ -99,7 +101,7 @@ function bundle(relativePath, baseDir='i18n-build') {
       format   : 'amd',
       sourcemap: requireSourcemap,
       dir : path.join(outputDir, enFolder, path.dirname(relativePath)),
-      name : `${relativePath.replace(/[^a-z0-9]/ig, "_")}${extension}`,
+      name : `${relativePath.replace(/[^a-z0-9]/ig, "_")}`,
       entryFileNames: outputFileName,
       chunkFileNames: outputFileName,      
     }],
@@ -116,13 +118,13 @@ function bundle(relativePath, baseDir='i18n-build') {
       addLanguageAttribute(),     
       json({namedExports:false}),  
       string({ include: "**/*.html"}),
-      amd({ include: `**/*.js`, exclude:['**/boot.js']}),
+      amd({ include: `**/*.js`, }),
       vue(),
-      isLocalDev ? null : getBabelOutputPlugin({
-                          presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
-                          allowAllFormats: true,
-                          exclude: [ '*.json' ],
-                        }),
+      getBabelOutputPlugin({
+        presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
+        allowAllFormats: true,
+        exclude: [ '*.json' ],
+      }),
       (isLocalDev || 1==1) ? null : terser({
         ecma: 5,
         mangle:false

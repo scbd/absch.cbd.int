@@ -1,4 +1,5 @@
 'use strict'; // jshint browser: false, node: true, esnext: true
+require           = require("esm")(module)
 
 process.env.CLEARINGHOUSE = process.env.CLEARINGHOUSE || 'ABS';
 
@@ -12,10 +13,12 @@ var translation  = require('./middlewares/translation');
 let cacheControl = require('./middlewares/cache-control')
 
 // Initialize constants
-var appVersion          = process.env.TAG;
-let apiUrl              = process.env.API_URL||'https://api.cbddev.xyz';
+var appVersion          =  process.env.TAG;
+let apiUrl              =  process.env.API_URL || 'https://api.cbddev.xyz';
+let cdnUrl              = (process.env.CDN_URL || 'https://cdn.jsdelivr.net/').replace(/\/+$/, '')+'/';
     global.app          = _.extend((global.app||{}), {});
     global.app.rootPath = __dirname; //to use in subfolders
+    global.app.cdnUrl   = cdnUrl;
 
 if(!appVersion || appVersion.trim()==''){
     appVersion =  ((process.env.BRANCH||'') + '-'+ (process.env.VERSION ||''))||process.env.COMMIT;
@@ -78,6 +81,7 @@ app.listen(process.env.PORT || 2010, '0.0.0.0',function () {
     console.log('Server listening on ', this.address());
     console.log(`               VERSION: ${appVersion}`);
     console.log(`               API Url: ${apiUrl}`);
+    console.info(`              CDN Url: ${cdnUrl}`);
     console.log(`      Node environment: ${process.env.NODE_ENV||'-'}`);
     console.log();
 });

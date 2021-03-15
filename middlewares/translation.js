@@ -6,6 +6,8 @@ let url     = require('url');
 
 let cacheControl = require('./cache-control')
 
+const { bundleUrls } = require('../app/boot.js');
+
 async function renderLanguageFile(req, res, next) {
    
          let langFilepath = await getLanguageFile(req);
@@ -63,7 +65,10 @@ async function renderLanguageFile(req, res, next) {
                     appVersion         : global.app.version,
                     clearingHouseHost  : process.env.CLEARINGHOUSE_HOST,
                     preferredLanguage  : preferredLang||'en',
-                    googleAnalyticsCode: process.env.GOOGLE_ANALYTICS_CODE
+                    googleAnalyticsCode: process.env.GOOGLE_ANALYTICS_CODE,
+                    cdnUrl             : global.app.cdnUrl,
+                    angularBundle      : bundleUrls.angularBundle,
+                    initialCss          : bundleUrls.initialCss
                 };
     if(langFilepath){
         return res.render(langFilepath, options);
