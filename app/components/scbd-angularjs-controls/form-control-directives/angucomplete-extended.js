@@ -4,7 +4,7 @@
  * By Daryl Rowland
  */
 
-define(['app', ],function(app) {
+import app from 'app';
 
 app.directive('angucomplete', function ($parse, $http, $sce, $timeout) {
     return {
@@ -241,5 +241,4 @@ app.directive('angucomplete', function ($parse, $http, $sce, $timeout) {
     };
     
 
-});
 });

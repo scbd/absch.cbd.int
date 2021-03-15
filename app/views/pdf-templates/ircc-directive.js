@@ -1,5 +1,7 @@
-﻿define(['app', 'text!./ircc-directive.html', 'css!/app/css/pdf-ircc.css',
-'views/forms/view/directives/view-record-reference.directive'], function (app, template) {
+﻿import app from 'app';
+import template from 'text!./ircc-directive.html';
+import 'css!/app/css/pdf-ircc.css';
+import 'views/forms/view/directives/view-record-reference.directive';
 
     app.directive("pdfIrccPartialView", [function() {
         return {
@@ -66,4 +68,4 @@
                 }]
         };
     }]);
-});
+

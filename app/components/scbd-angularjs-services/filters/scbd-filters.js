@@ -1,5 +1,9 @@
-define(['app', 'lodash', 'moment', './schema-name.json', '../services/locale','services/main'], 
-function (app, _, moment, scbdSchemaDetails) {
+import app from 'app';
+import _ from 'lodash';
+import moment from 'moment';
+import scbdSchemaDetails from './schema-name.json';
+import '../services/locale';
+import 'services/main';
     
   app.directive("translationUrl", ['$browser', function($browser){
     return {
@@ -484,4 +488,4 @@ function (app, _, moment, scbdSchemaDetails) {
 
     return entry;
   }
-});
+

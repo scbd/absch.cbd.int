@@ -1,16 +1,14 @@
-define(['app',
-        'text!./header.html',
-        'jquery',
-        'css!components/scbd-branding/css/colors',
-        'css!components/scbd-branding/directives/header/header',
-        './account',
-        './locale',
-        './accounts-validation',
-        './login',
-        './xuser-notifications-icon',
-        'components/scbd-angularjs-services/main'
-],
-function(app, template, $) {
+import app from 'app';
+import template from 'text!./header.html';
+import $ from 'jquery';
+import 'css!components/scbd-branding/css/colors';
+import 'css!components/scbd-branding/directives/header/header';
+import './account';
+import './locale';
+import './accounts-validation';
+import './login';
+import './xuser-notifications-icon';
+import 'components/scbd-angularjs-services/main';
     app.directive('scbdHeader', function() {
         return {
             restrict: 'E',
@@ -52,4 +50,4 @@ function(app, template, $) {
             ], //controller
         }; //return
     }); //directive
-});
+

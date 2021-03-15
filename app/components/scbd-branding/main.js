@@ -1,30 +1,22 @@
-define(['app',
-    './directives/footer',
-    './directives/xuser-notifications-panel',
-    // './directives/header/account.css',
-    './directives/header/branding.html',
-    // './directives/header/locale.css',
-    './directives/header/login.js',
-    // './directives/header/xuser-notifications.css',
-    './directives/header/account.html',
-    './directives/header/branding.js',
-    './directives/header/locale.html',
-    './directives/header/xuser-notification-config-service.js',
-    './directives/header/xuser-notifications.html',
-    './directives/header/account.js',
-    // './directives/header/header.css',
-    './directives/header/locale.js',
-    // './directives/header/xuser-notifications-icon.css',
-    './directives/header/xuser-notifications.js',
-    './directives/header/accounts-validation.html',
-    './directives/header/header.html',
-    // './directives/header/login.css',
-    './directives/header/xuser-notifications-icon.html',
-    './directives/header/accounts-validation.js',
-    './directives/header/header.js',
-    './directives/header/login.html',
-    './directives/header/xuser-notifications-icon.js',
+import 'app';
+import './directives/footer';
+import './directives/xuser-notifications-panel';
+import './directives/header/branding.html';
+import './directives/header/login.js';
+import './directives/header/account.html';
+import './directives/header/branding.js';
+import './directives/header/locale.html';
+import './directives/header/xuser-notification-config-service.js';
+import './directives/header/xuser-notifications.html';
+import './directives/header/account.js';
+import './directives/header/locale.js';
+import './directives/header/xuser-notifications.js';
+import './directives/header/accounts-validation.html';
+import './directives/header/header.html';
+import './directives/header/xuser-notifications-icon.html';
+import './directives/header/accounts-validation.js';
+import './directives/header/header.js';
+import './directives/header/login.html';
+import './directives/header/xuser-notifications-icon.js';
+    export default null;
 
-], function(){
-    return null;
-});

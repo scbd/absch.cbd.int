@@ -1,7 +1,10 @@
-﻿define(['app', 'text!./group-view.html','lodash',
-'views/search/search-results/result-grouped-national-record','services/main','views/directives/party-status',
-'views/search/search-results/result-default'
-], function(app, template, _) {
+﻿import app from 'app';
+import template from 'text!./group-view.html';
+import _ from 'lodash';
+import 'views/search/search-results/result-grouped-national-record';
+import 'services/main';
+import 'views/directives/party-status';
+import 'views/search/search-results/result-default';
 
     app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$location', '$q', 'solr', 
     function(searchService, realm, $timeout, $location, $q, solr) {
@@ -261,4 +264,4 @@
             }
         };
     }]);
-});
+

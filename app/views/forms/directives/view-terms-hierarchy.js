@@ -1,5 +1,8 @@
-define(['app', 'lodash', 'text!./view-terms-hierarchy.html', 
-'components/scbd-angularjs-services/main', 'services/main'], function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./view-terms-hierarchy.html';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
 
     app.directive('viewTermsHierarchy', ["thesaurusService", 'Thesaurus', 
     function (thesaurusService, thesaurus) {
@@ -62,4 +65,3 @@ define(['app', 'lodash', 'text!./view-terms-hierarchy.html',
         }
     }])
 
-});

@@ -1,6 +1,11 @@
-define(['app', 'lodash', 'text!./lmo-decisions.html', 'angular-cookies','views/forms/view/bch/view-lmo-reference.directive',
-'angucomplete-alt','views/directives/block-region-directive', 'services/main'], 
-function(app, _, template) { ;
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./lmo-decisions.html';
+import 'angular-cookies';
+import 'views/forms/view/bch/view-lmo-reference.directive';
+import 'angucomplete-alt';
+import 'views/directives/block-region-directive';
+import 'services/main'; ;
 
 app.directive("lmoDecisions", [ '$http', 'solr', '$cookies', 'searchService', 'commonjs', '$q',
 	function($http, solr, $cookies, searchService, commonjs, $q) {
@@ -85,4 +90,4 @@ app.directive("lmoDecisions", [ '$http', 'solr', '$cookies', 'searchService', 'c
 		
 	}]);
 	
-});
+

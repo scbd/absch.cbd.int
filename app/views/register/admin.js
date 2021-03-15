@@ -1,7 +1,7 @@
-define(['app', 
- 'services/main', 'services/main',
- 'views/register/directives/register-top-menu'], function(app) {
- "use strict";
+import app from 'app';
+import 'services/main';
+import 'views/register/directives/register-top-menu';
+ 
     app.controller("AdminController", ["$rootScope", "$scope", "roleService", 'localStorageService',
         function($rootScope, $scope, roleService, localStorageService) {
 
@@ -24,4 +24,4 @@ define(['app',
             }
         }
     ]);
-});
+

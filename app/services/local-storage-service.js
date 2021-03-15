@@ -1,5 +1,8 @@
-define(['app', 'jquery', 'lodash', 'toastr', 'ngStorage'],
- function (app, $, _) { ;
+import app from 'app';
+import $ from 'jquery';
+import _ from 'lodash';
+import 'toastr';
+import 'ngStorage'; ;
 
 	app.factory('localStorageService',  ["$http","$location", "$rootScope","toastr",
     "$sessionStorage", 'realm',//"$localStorage",
@@ -64,4 +67,4 @@ define(['app', 'jquery', 'lodash', 'toastr', 'ngStorage'],
 		};
 
     }]);
-});
+

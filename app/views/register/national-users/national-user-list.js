@@ -1,5 +1,10 @@
-define(['angular', 'lodash', 'require','app', 'ngDialog', 'services/main', 
- 'views/register/directives/register-top-menu'], function(ng, _, require, app) { ;
+import ng from 'angular';
+import _ from 'lodash';
+import require from 'require';
+import app from 'app';
+import 'ngDialog';
+import 'services/main';
+import 'views/register/directives/register-top-menu'; ;
 
 app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'appConfigService',
     function($scope, $http, $q, ngDialog, $rootScope, realm, appConfigService) {
@@ -377,4 +382,4 @@ app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog
             });
         }
     }]);
-});
+

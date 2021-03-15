@@ -1,8 +1,11 @@
-define(['app',
-    'text!./xuser-notifications.html', 'lodash', 'moment',
-    'css!components/scbd-branding/directives/header/xuser-notifications',
-    'components/scbd-angularjs-services/main', 'ngInfiniteScroll', './xuser-notification-config-service'],
-    function (app, template, _, moment) {
+import app from 'app';
+import template from 'text!./xuser-notifications.html';
+import _ from 'lodash';
+import moment from 'moment';
+import 'css!components/scbd-branding/directives/header/xuser-notifications';
+import 'components/scbd-angularjs-services/main';
+import 'ngInfiniteScroll';
+import './xuser-notification-config-service';
         
         app.directive('xuserNotifications', function () {
             return {
@@ -261,4 +264,4 @@ define(['app',
             };
         });
 
-    });
+    

@@ -1,7 +1,6 @@
-define(['app',
-'views/register/directives/register-top-menu', 
-'views/register/user-preferences/user-alerts',
-], function (app) {
+import app from 'app';
+import 'views/register/directives/register-top-menu';
+import 'views/register/user-preferences/user-alerts';
     app.controller('userPreferencesCtrl', ['$scope',
     function ($scope) {
             
@@ -11,4 +10,4 @@ define(['app',
         }]
     );
 
-});
+

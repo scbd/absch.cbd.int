@@ -1,5 +1,9 @@
-define(['app', 'angular', 'jquery', 'text!./km-link.html', 'lodash', './km-form-languages'], 
-function(app, angular, $, template,_) { ;
+import app from 'app';
+import angular from 'angular';
+import $ from 'jquery';
+import template from 'text!./km-link.html';
+import _ from 'lodash';
+import './km-form-languages'; ;
 
 //============================================================
 //
@@ -401,4 +405,3 @@ app.directive('kmLink', ['IStorage', function (storage)
 		};
 	}]);
 
-});

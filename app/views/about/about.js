@@ -1,10 +1,10 @@
-define(['app','lodash',
-  'components/scbd-angularjs-services/main',
-  'views/about/article-search.directive',
-  'views/about/article-guides.directive',
-  'services/main',
-  'ng-breadcrumbs',
-], function(app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'views/about/article-search.directive';
+import 'views/about/article-guides.directive';
+import 'services/main';
+import 'ng-breadcrumbs';
 
   app.controller("newAbout",
   ["$scope","$route", "$location", "locale", 'breadcrumbs', 'articlesService', 'ngMeta', 'realm',
@@ -138,4 +138,4 @@ define(['app','lodash',
     }
   ]);
 
-});
+

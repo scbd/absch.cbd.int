@@ -1,4 +1,7 @@
-define(['app', 'text!./report-record.html', 'views/directives/block-region-directive', 'ngDialog' ], function (app, template) {
+import app from 'app';
+import template from 'text!./report-record.html';
+import 'views/directives/block-region-directive';
+import 'ngDialog';
         app.directive('reportRecord', ['ngDialog','$rootScope', '$http', 'toastr', 'realm', 
             function (ngDialog, $rootScope, $http, toastr, realm) {
                 return {
@@ -69,4 +72,4 @@ define(['app', 'text!./report-record.html', 'views/directives/block-region-direc
                         }
                 };            
         }]);
-});
+

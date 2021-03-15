@@ -1,6 +1,9 @@
-define(['app', 'text!./national-records-country.html','lodash',
-'views/search/search-results/result-grouped-national-record','services/main','views/directives/party-status',
-], function(app, template, _) {
+import app from 'app';
+import template from 'text!./national-records-country.html';
+import _ from 'lodash';
+import 'views/search/search-results/result-grouped-national-record';
+import 'services/main';
+import 'views/directives/party-status';
 
     app.directive('nationalRecordsCountry', ['searchService', 'solr', function(searchService, solr) {
         return {
@@ -47,4 +50,4 @@ define(['app', 'text!./national-records-country.html','lodash',
             },
         };
     }]);
-});
+

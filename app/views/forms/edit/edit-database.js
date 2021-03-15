@@ -1,4 +1,7 @@
-define(['app', 'lodash', 'views/forms/edit/edit', '.views/forms/edit/view/view-database.directive'], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import '.views/forms/edit/view/view-database.directive';
 
   app.controller("editDatabase", ["$scope", "$http", "$filter", "$controller", "$location", function ($scope, $http, $filter, $controller,$location) {
     $controller('editController', {$scope: $scope});
@@ -35,4 +38,4 @@ define(['app', 'lodash', 'views/forms/edit/edit', '.views/forms/edit/view/view-d
       }
     });
   }]);
-});
+

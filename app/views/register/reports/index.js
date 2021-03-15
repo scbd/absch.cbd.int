@@ -1,7 +1,7 @@
-define(['app', 
- 'services/main', 
- 'views/register/directives/register-top-menu'], function(app) {
- "use strict";
+import app from 'app';
+import 'services/main';
+import 'views/register/directives/register-top-menu';
+ 
     app.controller("ReportsController", ["$rootScope", "$scope", "roleService", 
         function($rootScope, $scope, roleService) {
 
@@ -13,4 +13,4 @@ define(['app',
             // }
         }
     ]);
-});
+

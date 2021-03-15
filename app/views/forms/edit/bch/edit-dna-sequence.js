@@ -1,5 +1,7 @@
-define(['app', 'lodash', 'views/forms/edit/edit', 'views/forms/edit/bch/directives/edit-dna-sequence.directive'], 
-function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import 'views/forms/edit/bch/directives/edit-dna-sequence.directive';
 
 	app.controller("editDnaSequenceController", ["$scope", "$controller", function($scope, $controller) {
 		
@@ -10,4 +12,4 @@ function (app, _) {
 
    }]);
 
-});
+

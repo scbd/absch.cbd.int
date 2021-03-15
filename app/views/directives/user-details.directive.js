@@ -1,4 +1,5 @@
-define(['app', 'text!./user-details-directive.html'], function (app, template) {
+import app from 'app';
+import template from 'text!./user-details-directive.html';
 
 app.directive('userDetails', function($http){
 
@@ -43,4 +44,4 @@ app.directive('userDetails', function($http){
 	};
 
 });
-});
+

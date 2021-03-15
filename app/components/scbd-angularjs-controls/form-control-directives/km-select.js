@@ -1,5 +1,9 @@
-define(['app', 'angular', 'jquery', 'lodash', 'text!./km-select.html','components/scbd-angularjs-services/main'], 
-function(app, angular, $, _, template) {
+import app from 'app';
+import angular from 'angular';
+import $ from 'jquery';
+import _ from 'lodash';
+import template from 'text!./km-select.html';
+import 'components/scbd-angularjs-services/main';
   //============================================================
   //
   //
@@ -492,4 +496,4 @@ function(app, angular, $, _, template) {
       }]
     };
   });
-});
+

@@ -1,6 +1,6 @@
-define(['app', 'text!./view-focalpoint.directive.html', 
-'views/directives/record-options',
-], function (app, template) {
+import app from 'app';
+import template from 'text!./view-focalpoint.directive.html';
+import 'views/directives/record-options';
 
 app.directive('viewFocalPoint', [function() {
 	return {
@@ -33,4 +33,4 @@ app.directive('viewFocalPoint', [function() {
 		}]
 	}
 }]);
-});
+

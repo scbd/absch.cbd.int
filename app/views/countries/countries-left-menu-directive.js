@@ -1,5 +1,7 @@
-define(['app','text!./countries-left-menu-directive.html',
-'lodash', 'services/main'], function(app, template, _) {
+import app from 'app';
+import template from 'text!./countries-left-menu-directive.html';
+import _ from 'lodash';
+import 'services/main';
 
     app.directive('countriesLeftMenu', function() {
         return {
@@ -62,4 +64,4 @@ define(['app','text!./countries-left-menu-directive.html',
 
         };
     });
-});
+

@@ -1,5 +1,7 @@
-define(['app','components/scbd-angularjs-services/main',
-    'views/forms/view/record-loader.directive', 'services/main'], function (app) {
+import app from 'app';
+import 'components/scbd-angularjs-services/main';
+import 'views/forms/view/record-loader.directive';
+import 'services/main';
 
     app.controller("recordsViewController", ['$scope', "$sce", "solr", "$timeout", "$filter", 
         "realm", 'searchService', 'ngMeta', 'locale',
@@ -58,4 +60,4 @@ define(['app','components/scbd-angularjs-services/main',
 
         setMetaTags();
     }])
-});
+

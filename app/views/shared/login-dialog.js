@@ -1,7 +1,7 @@
-define(['jquery', 'components/scbd-branding/main'
-], function ($) {
+import $ from 'jquery';
+import 'components/scbd-branding/main';
 
-    return ["$scope", "$location", "authentication", function ($scope, $location, authentication){
+    export default ["$scope", "$location", "authentication", function ($scope, $location, authentication){
 
 				$scope.$on('signIn', function(evt, data){
 					redirectUser();
@@ -20,4 +20,4 @@ define(['jquery', 'components/scbd-branding/main'
 						$location.url('/register');
 				}
 		}];
-});
+

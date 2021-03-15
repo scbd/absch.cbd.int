@@ -1,6 +1,11 @@
-define(['app', 'lodash', 'text!./edit-dna-sequence.directive.html', 'views/forms/edit/edit', 'services/main',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-dna-sequence.directive", 'views/forms/directives/traits-selector.directive'], 
-function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./edit-dna-sequence.directive.html';
+import 'views/forms/edit/edit';
+import 'services/main';
+import 'views/forms/edit/document-selector';
+import "views/forms/view/bch/view-dna-sequence.directive";
+import 'views/forms/directives/traits-selector.directive';
 
 	app.directive("editDnaSequence", ["$controller", "thesaurusService", function($controller, thesaurusService) {
 		return {
@@ -75,4 +80,4 @@ function (app, _, template) {
 
    }]);
 
-});
+

@@ -1,6 +1,7 @@
-﻿define(['app', 'lodash', 'views/forms/edit/edit',
-    'views/forms/view/abs/view-abs-national-model-contractual-clause.directive'
-], function(app,_) {
+﻿import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import 'views/forms/view/abs/view-abs-national-model-contractual-clause.directive';
 
     app.controller("editAbsNationalModelContractualClause", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, $http, $filter, $q, $routeParams, $controller, $location) {
         $controller('editController', {
@@ -106,4 +107,4 @@
 
         $scope.setDocument();
     }]);
-});
+

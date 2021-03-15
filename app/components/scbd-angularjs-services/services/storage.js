@@ -1,4 +1,6 @@
-﻿define(['app', 'lodash','services/main'], function(app, _) {
+﻿import app from 'app';
+import _ from 'lodash';
+import 'services/main';
     ;
 
     app.factory("IStorage", ["$http", "$q", "authentication", "realm", 'cacheService', function($http, $q, authentication, defaultRealm, cacheService) {
@@ -643,4 +645,4 @@
         //		}();
     }]);
 
-});
+

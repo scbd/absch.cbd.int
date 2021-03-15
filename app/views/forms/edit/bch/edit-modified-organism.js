@@ -1,5 +1,6 @@
-define(['app', 'lodash', 'views/forms/edit/bch/directives/edit-modified-organism.directive'], 
-function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/bch/directives/edit-modified-organism.directive';
 
 	app.controller("editModifiedOrganismController", ["$scope", "$controller", function($scope, $controller) {
 		$controller('editController', {
@@ -9,4 +10,4 @@ function (app, _) {
 
    }]);
 
-});
+

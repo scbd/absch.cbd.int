@@ -1,8 +1,12 @@
-define(['app', 'lodash', 'services/main', 'moment', 'components/scbd-angularjs-controls/main',
-    'views/register/directives/register-top-menu','chart-js'
-], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'services/main';
+import 'moment';
+import 'components/scbd-angularjs-controls/main';
+import 'views/register/directives/register-top-menu';
+import 'chart-js';
 
-        "use strict";
+        
         app.controller("adminIrccCountController", ["$scope", "solr", "searchService", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter",
             function ($scope, solr, searchService, realm, commonjs, $q, appConfigService, $http, $filter) {
                 
@@ -419,4 +423,4 @@ define(['app', 'lodash', 'services/main', 'moment', 'components/scbd-angularjs-c
                 }
 
             }]);
-    });
+    

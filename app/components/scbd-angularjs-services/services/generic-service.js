@@ -1,4 +1,4 @@
-define(['app'], function(app) {
+import app from 'app';
     ;
 
     app.factory("IGenericService", ["$http", function($http) {
@@ -81,4 +81,4 @@ define(['app'], function(app) {
         };
     }]);
 
-});
+

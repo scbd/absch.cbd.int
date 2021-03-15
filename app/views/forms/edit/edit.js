@@ -1,14 +1,15 @@
 //fixed a bug with the comment up here ;)
-define([
-    'app', 'lodash', 'linqjs', 'services/main',
-    'views/forms/edit/editFormUtility',
-    'views/forms/view/record-loader.directive',
-    'views/forms/view/view-history-directive',
-    'views/forms/edit/document-selector',
-    'views/register/directives/register-top-menu',
-    'components/scbd-angularjs-services/main',
-    'views/directives/workflow-arrow-buttons', 
-], function (app, _, Enumerable) {
+import app from 'app';
+import _ from 'lodash';
+import Enumerable from 'linqjs';
+import 'services/main';
+import 'views/forms/edit/editFormUtility';
+import 'views/forms/view/record-loader.directive';
+import 'views/forms/view/view-history-directive';
+import 'views/forms/edit/document-selector';
+import 'views/register/directives/register-top-menu';
+import 'components/scbd-angularjs-services/main';
+import 'views/directives/workflow-arrow-buttons';
   
   app.controller("editController", ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "thesaurusService", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
@@ -488,4 +489,4 @@ define([
     setMetaTags();
 
   }]);
-});
+

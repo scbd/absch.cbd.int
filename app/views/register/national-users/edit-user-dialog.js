@@ -1,6 +1,6 @@
-define([], function() {
 
-    return ['$scope', 'user', function ($scope, user) {
+
+    export default ['$scope', 'user', function ($scope, user) {
 
         var _ctrl = this;
 
@@ -10,4 +10,4 @@ define([], function() {
             $scope.closeThisDialog(_ctrl.user);
         };
 	}];
-});
+

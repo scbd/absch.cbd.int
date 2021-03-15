@@ -1,4 +1,7 @@
-define(['app', 'text!./km-date-range.html', 'moment', 'datepicker-range'], function(app, template) {
+import app from 'app';
+import template from 'text!./km-date-range.html';
+import 'moment';
+import 'datepicker-range';
   ;
   //============================================================
   //
@@ -54,4 +57,4 @@ define(['app', 'text!./km-date-range.html', 'moment', 'datepicker-range'], funct
       }
     };
   }]);
-});
+

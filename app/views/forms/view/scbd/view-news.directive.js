@@ -1,5 +1,6 @@
-define(['app', 'text!./view-news.directive.html',
-'views/directives/record-options'], function (app, template) {
+import app from 'app';
+import template from 'text!./view-news.directive.html';
+import 'views/directives/record-options';
 
 app.directive('viewNews', [function() {
 	return {
@@ -18,4 +19,4 @@ app.directive('viewNews', [function() {
 		}]
 	}
 }]);
-});
+

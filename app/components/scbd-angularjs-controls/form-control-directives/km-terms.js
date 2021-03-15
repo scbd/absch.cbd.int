@@ -1,4 +1,7 @@
-define(['app','lodash','angular','text!./km-terms.html'], function(app,_,angular,template) {
+import app from 'app';
+import _ from 'lodash';
+import angular from 'angular';
+import template from 'text!./km-terms.html';
 
 	    //============================================================
 	    //
@@ -65,4 +68,3 @@ define(['app','lodash','angular','text!./km-terms.html'], function(app,_,angular
 	            }]
 	        };
 	    });
-});

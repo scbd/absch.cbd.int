@@ -1,6 +1,6 @@
-define(['app'], function () { "use strict";
+import 'app'; 
 
-    return ["$scope", "$http", function ($scope, $http, user) {
+    export default ["$scope", "$http", function ($scope, $http, user) {
         
         var _ctrl = this;
 
@@ -80,4 +80,4 @@ define(['app'], function () { "use strict";
 
     }];
 
-});
+

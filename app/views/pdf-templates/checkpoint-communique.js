@@ -1,5 +1,9 @@
-define(['app','lodash', 'services/main', './ircc-directive',
-'css!/app/css/print-friendly.css', 'css!/app/css/pdf-communique.css'], function (app,_) {
+import app from 'app';
+import _ from 'lodash';
+import 'services/main';
+import './ircc-directive';
+import 'css!/app/css/print-friendly.css';
+import 'css!/app/css/pdf-communique.css';
 
 	app.controller('cpcPdfView', ['$scope','$http','$sce','$filter','$q', '$routeParams', 'realm',
 	 function($scope,$http, $sce, $filter, $q, $routeParams, realm) {
@@ -123,4 +127,4 @@ define(['app','lodash', 'services/main', './ircc-directive',
 	}]);
 
 
-});
+

@@ -1,8 +1,8 @@
-define(function () { 'use strict';
+ 
 
 	var help = {
 	};
 
-	return help;
+	export default help;
 
-});
+

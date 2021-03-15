@@ -1,7 +1,10 @@
-define(['app', 'lodash', 'components/scbd-angularjs-services/main', 'views/search/search-directive',
-'css!/app/css/search.css'], function(app, exportExcel) {
-    "use strict";
-    return ["$scope", '$sce', 'ngMeta', 'realm', 'locale', 'testResolve',
+import app from 'app';
+import exportExcel from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'views/search/search-directive';
+import 'css!/app/css/search.css';
+    
+    export default ["$scope", '$sce', 'ngMeta', 'realm', 'locale', 'testResolve',
      function($scope, $sce, ngMeta, realm, locale, testResolve) {
 
         console.log(testResolve)
@@ -14,4 +17,4 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/main', 'views/searc
             ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
         }
     ];
-});
+

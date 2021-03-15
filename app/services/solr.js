@@ -1,4 +1,5 @@
-﻿define(['app', 'lodash'], function(app, _) { ;
+﻿import app from 'app';
+import _ from 'lodash'; ;
 
 app.factory('solr', [function() {
 
@@ -64,4 +65,4 @@ app.factory('solr', [function() {
 	}
 
 }]);
-});
+

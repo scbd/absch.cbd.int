@@ -1,6 +1,10 @@
-define(['app', 'lodash', 'text!./edit-risk-assessment.directive.html', 'views/forms/edit/edit', 'services/main',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-risk-assessment.directive"], 
-function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./edit-risk-assessment.directive.html';
+import 'views/forms/edit/edit';
+import 'services/main';
+import 'views/forms/edit/document-selector';
+import "views/forms/view/bch/view-risk-assessment.directive";
 
 	var riskAssessmentDirective = ["$controller", "thesaurusService", "$routeParams", function($controller, thesaurusService, $routeParams) {
 		return {
@@ -74,4 +78,4 @@ function (app, _, template) {
 	app.directive("editRiskAssessment", 			riskAssessmentDirective);
 	app.directive("editNationalRiskAssessment", 	riskAssessmentDirective);
 	app.directive("editIndependentRiskAssessment", 	riskAssessmentDirective);
-});
+

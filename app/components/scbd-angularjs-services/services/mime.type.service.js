@@ -1,5 +1,6 @@
 
-define(['app', 'lodash'], function(app, _) {
+import app from 'app';
+import _ from 'lodash';
     
     const mimedb = {
     "application/1d-interleaved-parityfec": {
@@ -8269,4 +8270,4 @@ define(['app', 'lodash'], function(app, _) {
         };
     }]);
 
-});
+

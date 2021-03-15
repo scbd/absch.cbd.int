@@ -1,5 +1,8 @@
-﻿define(['app', 'lodash', "text!./view-submission.directive.html", 	'views/directives/record-options', 'services/main'
-], function (app, _, template) {
+﻿import app from 'app';
+import _ from 'lodash';
+import template from "text!./view-submission.directive.html";
+import 'views/directives/record-options';
+import 'services/main';
 
     app.directive("viewSubmission", ['searchService', 'solr', function (searchService, solr) {
         return {
@@ -34,5 +37,5 @@
         };
     }]);
     
-    });
+    
     

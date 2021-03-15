@@ -1,7 +1,13 @@
-define(['app', 'lodash', 'text!./edit-modified-organism.directive.html', 'views/forms/edit/edit', 'services/main','views/forms/edit/bch/directives/lmo-construct',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-lmo.directive", 'views/forms/directives/traits-selector.directive',
-	'views/forms/directives/view-terms-hierarchy'], 
-function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./edit-modified-organism.directive.html';
+import 'views/forms/edit/edit';
+import 'services/main';
+import 'views/forms/edit/bch/directives/lmo-construct';
+import 'views/forms/edit/document-selector';
+import "views/forms/view/bch/view-lmo.directive";
+import 'views/forms/directives/traits-selector.directive';
+import 'views/forms/directives/view-terms-hierarchy';
 
 	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q',
 		 function($http, $controller, thesaurusService, storage, $q) {
@@ -141,4 +147,4 @@ function (app, _, template) {
 
    }]);
 
-});
+

@@ -1,6 +1,9 @@
-define(['app', 'lodash', 'text!./edit-country-profile.directive.html', 'views/forms/edit/edit',
-	"views/forms/view/bch/view-country-profile.directive",'services/main'], 
-function (app, _, template) { 
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./edit-country-profile.directive.html';
+import 'views/forms/edit/edit';
+import "views/forms/view/bch/view-country-profile.directive";
+import 'services/main'; 
 	app.directive("editCountryProfile", ["$controller", '$routeParams', 'ngDialog',"searchService", 'solr', function($controller, $routeParams, ngDialog,searchService,solr) {
 		return {
 			restrict   : "EA",
@@ -90,4 +93,4 @@ function (app, _, template) {
 	 
    }]);
 
-});
+

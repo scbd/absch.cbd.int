@@ -1,14 +1,14 @@
-define(['app', 
-'lodash',
-'services/main',  
-'moment', 
-'components/scbd-angularjs-controls/main',
-'views/register/directives/register-top-menu', 
-'views/directives/task-id-directive',
-'components/scbd-angularjs-services/main',
-'views/forms/view/record-loader.directive'], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'services/main';
+import 'moment';
+import 'components/scbd-angularjs-controls/main';
+import 'views/register/directives/register-top-menu';
+import 'views/directives/task-id-directive';
+import 'components/scbd-angularjs-services/main';
+import 'views/forms/view/record-loader.directive';
 
-        "use strict";
+        
         app.controller("requestsController", ["$scope", "IWorkflows", "realm", '$rootScope', 'roleService', "$q", "locale",
             function ($scope, IWorkflows, realm, $rootScope, roleService, $q, locale) {
 
@@ -212,4 +212,4 @@ define(['app',
                 load(null, 0)
 
             }]);
-    });
+    

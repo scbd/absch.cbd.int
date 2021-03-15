@@ -1,4 +1,7 @@
-define(['app', 'lodash','text!./discussion-directive.html', 'cbd-forums'], function(app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./discussion-directive.html';
+import 'cbd-forums';
 
     app.directive('discussion', function() {
         return {
@@ -156,4 +159,4 @@ define(['app', 'lodash','text!./discussion-directive.html', 'cbd-forums'], funct
         }
     });
 
-});
+

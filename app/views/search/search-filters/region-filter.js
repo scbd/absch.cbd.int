@@ -1,5 +1,7 @@
-define(['app', 'text!./region-filter.html','lodash', 'services/main',
-], function(app, template, _) {
+import app from 'app';
+import template from 'text!./region-filter.html';
+import _ from 'lodash';
+import 'services/main';
 
     app.directive('regionFilter', ['locale', function(locale) {
         return {
@@ -43,4 +45,4 @@ define(['app', 'text!./region-filter.html','lodash', 'services/main',
             }//link
         };
     }]);
-});
+

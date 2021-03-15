@@ -1,6 +1,11 @@
-define(['app', 'lodash', 'text!./edit-authority.directive.html', 'services/main', 'views/forms/edit/edit', 
-'views/forms/edit/document-selector', 'views/forms/edit/warning-message-cna', 'views/forms/view/view-authority.directive'], 
-function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./edit-authority.directive.html';
+import 'services/main';
+import 'views/forms/edit/edit';
+import 'views/forms/edit/document-selector';
+import 'views/forms/edit/warning-message-cna';
+import 'views/forms/view/view-authority.directive';
 
 	app.directive("editAuthority", ["$http", "Thesaurus", "$q", "$controller", "$location", "realm", "solr",'thesaurusService',
     function($http, Thesaurus, $q, $controller, $location, realm, solr,thesaurusService) {
@@ -170,4 +175,4 @@ function (app, _, template) {
 
    }]);
 
-});
+

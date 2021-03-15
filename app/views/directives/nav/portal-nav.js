@@ -1,6 +1,8 @@
-define(['app', 'text!./portal-nav.html', 'ng-breadcrumbs',
-'services/main', 'components/scbd-angularjs-services/main'],
- function (app, template) {
+import app from 'app';
+import template from 'text!./portal-nav.html';
+import 'ng-breadcrumbs';
+import 'services/main';
+import 'components/scbd-angularjs-services/main';
 
 app.directive('portalNav', ['locale', '$q','breadcrumbs', 'helpService', 'commonjs',
 function (locale, $q, breadcrumbs, helpService, commonjs) {
@@ -38,4 +40,4 @@ function (locale, $q, breadcrumbs, helpService, commonjs) {
         }
     }
   }]);
-});
+

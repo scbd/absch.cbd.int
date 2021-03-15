@@ -1,6 +1,7 @@
-define(['app', 'lodash', "text!./view-abs-national-report.directive.html", 
-'views/directives/record-options',
-], function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from "text!./view-abs-national-report.directive.html";
+import 'views/directives/record-options';
 
 app.directive("viewAbsNationalReport", [function () {
 	return {
@@ -146,4 +147,4 @@ app.directive("viewAbsNationalReport", [function () {
 	};
 }]);
 
-});
+

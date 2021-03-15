@@ -1,6 +1,8 @@
-define(['app','text!./xuser-notifications-icon.html','css!components/scbd-branding/directives/header/xuser-notifications-icon',
-        'components/scbd-angularjs-services/main','./xuser-notifications'],
-function(app,template) {
+import app from 'app';
+import template from 'text!./xuser-notifications-icon.html';
+import 'css!components/scbd-branding/directives/header/xuser-notifications-icon';
+import 'components/scbd-angularjs-services/main';
+import './xuser-notifications';
     app.directive('xuserNotificationsIcon', function() {
         return {
             restrict: 'E',
@@ -18,4 +20,4 @@ function(app,template) {
                     $scope.viewAllUrl = cfgUserNotification.notificationUrls.viewAllNotificationUrl;
                 }]};
     });
-});
+

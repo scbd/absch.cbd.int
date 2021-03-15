@@ -1,7 +1,7 @@
-﻿define(['app', 
-'text!./top-requests.html', 
-'lodash',
-'services/main'], function(app, template, _) {
+﻿import app from 'app';
+import template from 'text!./top-requests.html';
+import _ from 'lodash';
+import 'services/main';
 
     app.directive("topRequests", ['$q', "IWorkflows", "realm", '$rootScope', 'roleService', "$location", "$filter",
     function($q, IWorkflows, realm, $rootScope, roleService, $location, $filter) {
@@ -120,4 +120,4 @@
             }
         };
     }]);
-});
+

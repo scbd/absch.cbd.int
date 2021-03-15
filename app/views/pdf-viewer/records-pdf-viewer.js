@@ -1,4 +1,6 @@
-﻿define(['app', 'pdf-object', 'components/scbd-angularjs-services/main'], function (app, pdfObject) {
+﻿import app from 'app';
+import pdfObject from 'pdf-object';
+import 'components/scbd-angularjs-services/main';
     app
     .directive( 'elemReady', function( $parse ) {
         return {
@@ -82,4 +84,4 @@
         $scope.loadLangPdf(locale||'en')
     }])
 
-})
+

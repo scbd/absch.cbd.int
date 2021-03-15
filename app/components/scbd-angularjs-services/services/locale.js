@@ -1,4 +1,5 @@
-define(['app', 'angular-cookies'], function(app) { ;
+import app from 'app';
+import 'angular-cookies'; ;
 
     var urlLangRegex       = /^\/(en|ar|fr|es|ru|zh)(\/|$)/;
     app.provider('locale', [function() {
@@ -74,4 +75,4 @@ define(['app', 'angular-cookies'], function(app) { ;
             return (locale||defaultLocale) == 'ar' ? 'rtl' : 'ltr';
         };
     }]);
-});
+

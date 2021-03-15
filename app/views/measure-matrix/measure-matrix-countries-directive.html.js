@@ -1,7 +1,10 @@
-define(['app', "text!./measure-matrix-countries-directive.html",
-        'lodash','components/scbd-angularjs-services/main', 'components/scbd-angularjs-controls/main',
-        'views/measure-matrix/measure-matrix-elements-directive',
-        'views/forms/view/record-loader.directive'], function(app, template, _) {
+import app from 'app';
+import template from "text!./measure-matrix-countries-directive.html";
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'components/scbd-angularjs-controls/main';
+import 'views/measure-matrix/measure-matrix-elements-directive';
+import 'views/forms/view/record-loader.directive';
 
     app.directive("measureMatrixCountriesDirective", function() {
         return {
@@ -74,4 +77,4 @@ define(['app', "text!./measure-matrix-countries-directive.html",
     });
 
 
-});
+

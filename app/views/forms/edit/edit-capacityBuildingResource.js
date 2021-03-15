@@ -1,4 +1,7 @@
-define(['app','lodash','views/forms/edit/edit', '.views/forms/edit/view/view-capacity-building-resource.directive'], function (app,_) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import '.views/forms/edit/view/view-capacity-building-resource.directive';
 
   app.controller("editCapacityBuildingResource", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, thesaurus, Enumerable) {
 
@@ -66,4 +69,4 @@ define(['app','lodash','views/forms/edit/edit', '.views/forms/edit/view/view-cap
 
     $scope.setDocument({});
   }]);
-});
+

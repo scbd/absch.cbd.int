@@ -1,6 +1,8 @@
-define(['app', 'text!./result-default.html','lodash', 'services/main',
-'views/forms/view/record-loader.directive'
-], function(app, template, _) {
+import app from 'app';
+import template from 'text!./result-default.html';
+import _ from 'lodash';
+import 'services/main';
+import 'views/forms/view/record-loader.directive';
 
     app.directive('resultDefault', ["$timeout", function($timeout) {
         return {
@@ -31,4 +33,4 @@ define(['app', 'text!./result-default.html','lodash', 'services/main',
             },
         };
     }]);
-});
+

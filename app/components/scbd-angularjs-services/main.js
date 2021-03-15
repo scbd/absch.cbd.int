@@ -1,14 +1,13 @@
-define(['app',
-    './filters/scbd-filters',
-    './services/workflows',
-    './services/user-notifications',
-    './services/socket-io-service',
-    './services/generic-service',
-    './services/authentication',
-    './services/utilities',
-    './services/storage',
-    './services/mime.type.service',
-    './services/locale',
-    './services/extended-route',
-    './services/apiUrl',
-], function() {});
+import 'app';
+import './filters/scbd-filters';
+import './services/workflows';
+import './services/user-notifications';
+import './services/socket-io-service';
+import './services/generic-service';
+import './services/authentication';
+import './services/utilities';
+import './services/storage';
+import './services/mime.type.service';
+import './services/locale';
+import './services/extended-route';
+import './services/apiUrl';

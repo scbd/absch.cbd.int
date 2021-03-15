@@ -1,8 +1,6 @@
-define(['app',
-  'text!./accounts-validation.html',
-  'components/scbd-angularjs-services/main',
-],
-function(app, template) {
+import app from 'app';
+import template from 'text!./accounts-validation.html';
+import 'components/scbd-angularjs-services/main';
      app.directive('accountsValidationHeader', function() {
          return { restrict: 'E' ,
                   scope: {
@@ -31,4 +29,4 @@ function(app, template) {
                   }],//controller
         };//return
      });//directive
-});
+

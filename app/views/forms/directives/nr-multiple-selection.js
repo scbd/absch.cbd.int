@@ -1,4 +1,5 @@
-﻿define(['app', 'text!./nr-yes-no.html'], function (app, nrYesNoTemplate) {
+﻿import app from 'app';
+import nrYesNoTemplate from 'text!./nr-yes-no.html';
 
     app.directive('nrMulti', function () {
         return {
@@ -25,4 +26,4 @@
         }
     })
 
-});
+

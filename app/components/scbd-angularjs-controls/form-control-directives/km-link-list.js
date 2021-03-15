@@ -1,4 +1,7 @@
-define(['app', 'text!./km-link-list.html','lodash', 'components/scbd-angularjs-services/main'], function(app, template,_) { ;
+import app from 'app';
+import template from 'text!./km-link-list.html';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main'; ;
 //============================================================
 //
 //
@@ -59,4 +62,3 @@ app.directive('kmLinkList', ['MimeService', function (MimeService){
 		};
 	}]);
 
-});

@@ -1,9 +1,10 @@
-define(['app','moment','services/main',
-    'views/directives/home-country-dashboard-directive',
-    'views/directives/map/home-map',
-    'views/directives/home-articles-small',
-    'angular-cookies'
-], function (app, moment) {
+import app from 'app';
+import moment from 'moment';
+import 'services/main';
+import 'views/directives/home-country-dashboard-directive';
+import 'views/directives/map/home-map';
+import 'views/directives/home-articles-small';
+import 'angular-cookies';
     app.controller('IndexController', ['$scope',
     function ($scope) {
 
@@ -47,4 +48,4 @@ define(['app','moment','services/main',
                 // });
         // });
     }]);
-});
+

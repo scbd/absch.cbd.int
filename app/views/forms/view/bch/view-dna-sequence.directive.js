@@ -1,5 +1,7 @@
-define(['app', "text!./view-dna-sequence.directive.html", 'views/forms/directives/view-terms-hierarchy',
- 	'views/directives/record-options'], function (app, template) {
+import app from 'app';
+import template from "text!./view-dna-sequence.directive.html";
+import 'views/forms/directives/view-terms-hierarchy';
+import 'views/directives/record-options';
 
 app.directive("viewDnaSequence", [function () {
 	return {
@@ -31,4 +33,4 @@ app.directive("viewDnaSequence", [function () {
 	};
 }]);
 
-});
+

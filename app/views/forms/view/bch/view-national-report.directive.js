@@ -1,6 +1,6 @@
-define(['app', "text!./view-national-report.directive.html", 
-'views/forms/view/directives/view-record-reference.directive'
-], function (app, template) {
+import app from 'app';
+import template from "text!./view-national-report.directive.html";
+import 'views/forms/view/directives/view-record-reference.directive';
 
 app.directive("viewNationalReport", [function () {
 	return {
@@ -42,4 +42,4 @@ app.directive("viewNationalReport", [function () {
 	};
 }]);
 
-});
+

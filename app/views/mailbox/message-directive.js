@@ -1,5 +1,6 @@
-define(['app',
-'text!./message-directive.html','lodash'], function(app, template, _) {
+import app from 'app';
+import template from 'text!./message-directive.html';
+import _ from 'lodash';
     app.directive('mailboxMessage', function() {
         return {
             restrict: 'EAC',
@@ -71,4 +72,4 @@ define(['app',
 
         };
     });
-});
+

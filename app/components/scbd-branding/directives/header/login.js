@@ -1,9 +1,8 @@
-define(['app',
-    'text!./login.html',
-    'jquery',
-    'css!components/scbd-branding/directives/header/login',
-    'components/scbd-angularjs-services/main',
-], function (app,template,$) {
+import app from 'app';
+import template from 'text!./login.html';
+import $ from 'jquery';
+import 'css!components/scbd-branding/directives/header/login';
+import 'components/scbd-angularjs-services/main';
 
 app.directive('loginAccount', [function() {
         return {
@@ -66,4 +65,4 @@ app.directive('loginAccount', [function() {
 
         };
     }]);
-});
+

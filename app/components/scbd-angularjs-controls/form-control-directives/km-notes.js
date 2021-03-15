@@ -1,4 +1,7 @@
-define(['app','text!./km-notes.html','angular', 'components/scbd-angularjs-services/main'], function(app,template,angular) {
+import app from 'app';
+import template from 'text!./km-notes.html';
+import angular from 'angular';
+import 'components/scbd-angularjs-services/main';
 
     app.directive('kmNotes',  ["$http", "$filter", "authentication", function ($http, $filter, authentication) {
 	    return {
@@ -89,4 +92,4 @@ define(['app','text!./km-notes.html','angular', 'components/scbd-angularjs-servi
             }
         };
     }]);
-});
+

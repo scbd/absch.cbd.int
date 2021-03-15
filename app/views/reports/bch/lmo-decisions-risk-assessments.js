@@ -1,6 +1,12 @@
-define(['app', 'lodash', 'views/forms/view/bch/view-lmo-reference.directive', 'services/main',
-'angucomplete-alt','views/directives/block-region-directive',
-'views/reports/bch/lmo-decisions', 'views/reports/bch/risk-assessments', 'views/forms/view/record-loader.directive'], function(app, _) { ;
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/view/bch/view-lmo-reference.directive';
+import 'services/main';
+import 'angucomplete-alt';
+import 'views/directives/block-region-directive';
+import 'views/reports/bch/lmo-decisions';
+import 'views/reports/bch/risk-assessments';
+import 'views/forms/view/record-loader.directive'; ;
 
 app.controller("LmoReportController", ['$scope', '$routeParams', '$route', 'solr', 'searchService', '$timeout',
 	function($scope, $routeParams, $route, solr, searchService, $timeout) {
@@ -42,4 +48,4 @@ app.controller("LmoReportController", ['$scope', '$routeParams', '$route', 'solr
 
 	}]);
 	
-});
+

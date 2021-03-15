@@ -1,6 +1,12 @@
-define(['angular', 'app', 'lodash', 'ngMaterial', 'ngAria', 'angular-animate',
-        'services/main', 'components/scbd-angularjs-services/main',  'components/scbd-angularjs-controls/main',],
-  function (angular, app, _) {
+import angular from 'angular';
+import app from 'app';
+import _ from 'lodash';
+import 'ngMaterial';
+import 'ngAria';
+import 'angular-animate';
+import 'services/main';
+import 'components/scbd-angularjs-services/main';
+import 'components/scbd-angularjs-controls/main';
 
     app.controller("glossaryTermController",
       ["$routeParams", "$scope","$rootScope", "$q", "$timeout", '$http', '$element',  '$route', 'commonjs', 'breadcrumbs', '$mdDialog',
@@ -179,4 +185,4 @@ define(['angular', 'app', 'lodash', 'ngMaterial', 'ngAria', 'angular-animate',
 
 
         }]);
-  });
+  

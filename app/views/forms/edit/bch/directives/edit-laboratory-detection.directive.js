@@ -1,7 +1,11 @@
-define(['app', 'lodash', 'text!./edit-laboratory-detection.directive.html', 'views/forms/edit/edit', 'services/main',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-laboratory-detection.directive",
-	'views/forms/directives/view-terms-hierarchy'], 
-function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./edit-laboratory-detection.directive.html';
+import 'views/forms/edit/edit';
+import 'services/main';
+import 'views/forms/edit/document-selector';
+import "views/forms/view/bch/view-laboratory-detection.directive";
+import 'views/forms/directives/view-terms-hierarchy';
 
 	app.directive("editLaboratoryDetection", ["$controller", "thesaurusService", function($controller, thesaurusService) {
 		return {
@@ -120,4 +124,4 @@ function (app, _, template) {
 
    }]);
 
-});
+

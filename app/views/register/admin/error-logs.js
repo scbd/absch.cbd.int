@@ -1,8 +1,13 @@
-define(['app', 'lodash', 'components/scbd-angularjs-services/main', 'services/main', 'ngInfiniteScroll', 'moment', 'components/scbd-angularjs-controls/main',
-    'views/register/directives/register-top-menu',
-    ], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
+import 'ngInfiniteScroll';
+import 'moment';
+import 'components/scbd-angularjs-controls/main';
+import 'views/register/directives/register-top-menu';
 
-        "use strict";
+        
         app.controller("adminErrorLogsCotroller", ["$scope", "$timeout", "IGenericService", "realm", "commonjs",
             function ($scope, $timeout, IGenericService, realm, commonjs) {
                 $scope.filters = {};
@@ -69,4 +74,4 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/main', 'services/ma
                     return appVersion;
                 }
             }]);
-    });
+    

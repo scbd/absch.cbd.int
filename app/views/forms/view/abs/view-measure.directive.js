@@ -1,9 +1,10 @@
-define(['app', "text!./view-measure.directive.html",
-        'views/measure-matrix/measure-matrix-elements-directive',
-        'services/main','views/directives/party-status',
-	'views/forms/view/directives/view-record-reference.directive',
-	'views/directives/record-options'
-    ], function (app, template) {
+import app from 'app';
+import template from "text!./view-measure.directive.html";
+import 'views/measure-matrix/measure-matrix-elements-directive';
+import 'services/main';
+import 'views/directives/party-status';
+import 'views/forms/view/directives/view-record-reference.directive';
+import 'views/directives/record-options';
 
 app.directive("viewMeasure", [function () {
 	return {
@@ -82,4 +83,4 @@ app.directive("viewMeasure", [function () {
 	};
 }]);
 
-});
+

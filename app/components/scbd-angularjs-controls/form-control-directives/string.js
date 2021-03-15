@@ -1,4 +1,7 @@
-define(['app', 'text!./string.html', 'jquery', 'angular-localizer'], function(app, template, $) {
+import app from 'app';
+import template from 'text!./string.html';
+import $ from 'jquery';
+import 'angular-localizer';
   ;
   app.directive('afcInput', function() {
     return {
@@ -21,4 +24,3 @@ define(['app', 'text!./string.html', 'jquery', 'angular-localizer'], function(ap
       },
     };
   });
-});

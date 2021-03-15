@@ -1,4 +1,8 @@
-define(['app', 'text!./tabbed-textareas.html','jquery','angular-localizer','angular-sanitize'], function(app, template,$) { ;
+import app from 'app';
+import template from 'text!./tabbed-textareas.html';
+import $ from 'jquery';
+import 'angular-localizer';
+import 'angular-sanitize'; ;
         //TODO: switch binding to ngModel... because it's dumb to use another name
     app.directive('tabbedTextareas', function($timeout) {
         return {
@@ -69,4 +73,4 @@ define(['app', 'text!./tabbed-textareas.html','jquery','angular-localizer','angu
             },
         };
     });
-	});
+	

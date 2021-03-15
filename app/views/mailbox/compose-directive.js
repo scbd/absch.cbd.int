@@ -1,5 +1,6 @@
-define(['app','text!./compose-directive.html',
-'lodash'], function(app, template,_) {
+import app from 'app';
+import template from 'text!./compose-directive.html';
+import _ from 'lodash';
     app.directive('mailboxCompose', function() {
         return {
             restrict: 'EAC',
@@ -63,4 +64,4 @@ define(['app','text!./compose-directive.html',
 
         };
     });
-});
+

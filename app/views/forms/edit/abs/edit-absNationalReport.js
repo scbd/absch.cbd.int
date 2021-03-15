@@ -1,7 +1,9 @@
-define(['app', 'lodash', 'views/forms/edit/edit' , 'views/forms/edit/document-selector',
-        'views/forms/view/abs/view-abs-national-report.directive',
-        'services/main',
-], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import 'views/forms/edit/document-selector';
+import 'views/forms/view/abs/view-abs-national-report.directive';
+import 'services/main';
 
   app.controller("editAbsNationalReport",
   ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "searchService","appConfigService", 'solr',
@@ -582,4 +584,4 @@ define(['app', 'lodash', 'views/forms/edit/edit' , 'views/forms/edit/document-se
     }
 
   }]);
-});
+

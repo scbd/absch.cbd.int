@@ -1,4 +1,6 @@
-define(['app', 'text!./km-info-tip.html', 'webui-popover'], function(app, template) {
+import app from 'app';
+import template from 'text!./km-info-tip.html';
+import 'webui-popover';
     ;
     app.directive('kmInfoTip', [function() {
         return {
@@ -33,4 +35,4 @@ define(['app', 'text!./km-info-tip.html', 'webui-popover'], function(app, templa
             }
         }
     }]);
-});
+

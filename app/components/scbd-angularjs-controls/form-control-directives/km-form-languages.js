@@ -1,4 +1,8 @@
-define(['app', 'text!./km-form-languages.html', 'lodash', './km-select', 'services/main'], function(app, template, _) {
+import app from 'app';
+import template from 'text!./km-form-languages.html';
+import _ from 'lodash';
+import './km-select';
+import 'services/main';
   ;
   //============================================================
   //
@@ -85,4 +89,3 @@ define(['app', 'text!./km-form-languages.html', 'lodash', './km-select', 'servic
           }
       };
   }]);
-});

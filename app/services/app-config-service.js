@@ -1,5 +1,7 @@
-define(['app', 'lodash', 'components/scbd-angularjs-services/main', 'realmConf'], 
-function (app, _, scbdJSonSchemas, realmConfigurations) {
+import app from 'app';
+import _ from 'lodash';
+import scbdJSonSchemas from 'components/scbd-angularjs-services/main';
+import realmConfigurations from 'realmConf';
     
         // var realmConfigurations = {};        
         var realmConfig         = {};
@@ -215,4 +217,4 @@ function (app, _, scbdJSonSchemas, realmConfigurations) {
             return roleName;
         }
     // }); 
-});
+

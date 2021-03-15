@@ -1,9 +1,9 @@
-define(['app',
-'views/mailbox/message-directive',
-'views/mailbox/compose-directive',
-'views/mailbox/mailbox-menu-directive',
-'views/mailbox/message-list-directive',], function(app) {
-    return["$scope", "$rootScope",
+import app from 'app';
+import 'views/mailbox/message-directive';
+import 'views/mailbox/compose-directive';
+import 'views/mailbox/mailbox-menu-directive';
+import 'views/mailbox/message-list-directive';
+    export default["$scope", "$rootScope",
         function($scope, $rootScope) {
 
 
@@ -62,4 +62,4 @@ define(['app',
            }
 
         }];
-});
+

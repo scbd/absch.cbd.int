@@ -1,7 +1,10 @@
-define(['app', 'lodash','ng-breadcrumbs', 'cbd-forums',
-        'services/main'], function(app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'ng-breadcrumbs';
+import 'cbd-forums';
+import 'services/main';
 
-    return ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$rootScope",'breadcrumbs',
+    export default ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$rootScope",'breadcrumbs',
      function($scope, $http, $q, $route, $routeParams, commonjs, $rootScope, breadcrumbs) {
 
         if (!$route.current.$$route.forumListUrl) {
@@ -35,4 +38,4 @@ define(['app', 'lodash','ng-breadcrumbs', 'cbd-forums',
         });
 
     }];
-});
+

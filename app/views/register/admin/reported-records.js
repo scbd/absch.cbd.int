@@ -1,8 +1,9 @@
-define(['app', 'services/main',
-    'views/forms/view/record-loader.directive',
-    'views/register/directives/register-top-menu', 'ngDialog'
-    , 'components/scbd-angularjs-services/main'
-], function (app) {
+import app from 'app';
+import 'services/main';
+import 'views/forms/view/record-loader.directive';
+import 'views/register/directives/register-top-menu';
+import 'ngDialog';
+import 'components/scbd-angularjs-services/main';
     app.controller('adminReportedRecordsCtrl', ['$scope', '$http', '$timeout', '$element', 'ngDialog', '$routeParams', 'IGenericService','realm', '$q',
         function ($scope, $http, $timeout, $element, ngDialog, $routeParams, IGenericService, realm, $q) {
             
@@ -108,4 +109,4 @@ define(['app', 'services/main',
         }]
     );
 
-});
+

@@ -1,4 +1,5 @@
-define(['app', './apiUrl'], function(app) {
+import app from 'app';
+import './apiUrl';
     var ACCOUNTS_URL = (function(){
 
         var domainRegex = /(?:.*\.)?([a-z]+\.[a-z]+)/;
@@ -484,4 +485,4 @@ define(['app', './apiUrl'], function(app) {
         $httpProvider.interceptors.push('apiRebase');
     }]);
 
-});
+

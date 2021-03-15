@@ -1,4 +1,8 @@
-define(['app', 'text!./text.html', 'jquery', 'angular-localizer','angular-sanitize'], function(app, template, $) {
+import app from 'app';
+import template from 'text!./text.html';
+import $ from 'jquery';
+import 'angular-localizer';
+import 'angular-sanitize';
   ;
   app.directive('afcText', function() {
     return {
@@ -22,4 +26,4 @@ define(['app', 'text!./text.html', 'jquery', 'angular-localizer','angular-saniti
       },
     };
   });
-});
+

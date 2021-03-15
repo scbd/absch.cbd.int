@@ -1,5 +1,7 @@
-define(['app', "text!./view-organism.directive.html", 'views/forms/directives/view-terms-hierarchy',
-		'views/directives/record-options'], function (app, template) {
+import app from 'app';
+import template from "text!./view-organism.directive.html";
+import 'views/forms/directives/view-terms-hierarchy';
+import 'views/directives/record-options';
 
 app.directive("viewOrganism", [function () {
 	return {
@@ -53,4 +55,4 @@ app.directive("viewOrganism", [function () {
 	};
 }]);
 
-});
+

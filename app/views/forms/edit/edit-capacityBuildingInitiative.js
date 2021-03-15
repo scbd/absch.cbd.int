@@ -1,5 +1,9 @@
-define(['app', 'lodash', 'views/forms/edit/edit', '.views/forms/edit/view/view-capacity-building-initiative.directive',
-'views/forms/edit/organization-selector','services/main'], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import '.views/forms/edit/view/view-capacity-building-initiative.directive';
+import 'views/forms/edit/organization-selector';
+import 'services/main';
 
     app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "realm","thesaurusService", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, realm, thesaurusService) {
 
@@ -189,4 +193,4 @@ define(['app', 'lodash', 'views/forms/edit/edit', '.views/forms/edit/view/view-c
         $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
 
   }]);
-});
+

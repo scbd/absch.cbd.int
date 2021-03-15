@@ -1,10 +1,10 @@
-define(['app','lodash',
-  'views/forms/view/view-articles',
-  'components/scbd-angularjs-services/main',
-  'services/main',
-  'ng-breadcrumbs',
-  'components/scbd-angularjs-controls/main'
-], function(app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/view/view-articles';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
+import 'ng-breadcrumbs';
+import 'components/scbd-angularjs-controls/main';
 
   app.controller("viewArticles",
   ["$scope","$route", "$http", "$location", "locale", '$q', 'breadcrumbs','articlesService',
@@ -110,4 +110,4 @@ define(['app','lodash',
     }
   ]);
 
-});
+

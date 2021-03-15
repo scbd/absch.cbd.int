@@ -1,4 +1,7 @@
-﻿define(['text!./result-view-options.html', 'app', 'lodash', 'ngDialog'], function (template, app, _) {
+﻿import template from 'text!./result-view-options.html';
+import app from 'app';
+import _ from 'lodash';
+import 'ngDialog';
     ;
 
     app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', function ($location, ngDialog, locale) {
@@ -172,4 +175,4 @@
         }
     }])
 
-});
+

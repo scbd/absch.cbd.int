@@ -1,6 +1,10 @@
-define(['app', 'lodash', 'text!./edit-law.directive.html', 'views/forms/edit/edit', 'services/main',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-law.directive"], 
-function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./edit-law.directive.html';
+import 'views/forms/edit/edit';
+import 'services/main';
+import 'views/forms/edit/document-selector';
+import "views/forms/view/bch/view-biosafety-law.directive";
 
 	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter","Enumerable", function($controller, thesaurusService, $q, $filter,Enumerable) {
 		return {
@@ -112,4 +116,3 @@ function (app, _, template) {
 
    }]);
 
-});

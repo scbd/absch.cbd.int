@@ -1,5 +1,11 @@
-define(['app', 'lodash', 'ngMaterial', 'ngAria', 'angular-animate', 'components/scbd-angularjs-services/main', 'components/scbd-angularjs-controls/main',
-	'services/main'], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'ngMaterial';
+import 'ngAria';
+import 'angular-animate';
+import 'components/scbd-angularjs-services/main';
+import 'components/scbd-angularjs-controls/main';
+import 'services/main';
 		app.controller("editHelpController",
 			["$routeParams", "$scope", "$rootScope", "$q", '$http',  '$location', 'commonjs', '$mdDialog',
 				function ($routeParams, $scope, $rootScope, $q, $http, $location, commonjs, $mdDialog) {
@@ -156,4 +162,4 @@ define(['app', 'lodash', 'ngMaterial', 'ngAria', 'angular-animate', 'components/
 					$scope.loadSchemas();
 					fieldTypes();
 				}]);
-	});
+	

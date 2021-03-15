@@ -1,4 +1,7 @@
-﻿define(['app', 'text!./top-records.html', 'lodash','components/scbd-angularjs-services/main'], function(app, template, _) {
+﻿import app from 'app';
+import template from 'text!./top-records.html';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
 
     app.directive("topRecords", ['IStorage', '$q', function(storage, $q) {
 
@@ -55,4 +58,4 @@
             }
         };
     }]);
-});
+

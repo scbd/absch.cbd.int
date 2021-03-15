@@ -1,6 +1,7 @@
-define(['app','views/directives/help-directive'], function (app) {
+import app from 'app';
+import 'views/directives/help-directive';
 
 app.controller("presentationsController",["$rootScope",  "$scope", function ($rootScope, $scope) {
 
    }]);
-});
+

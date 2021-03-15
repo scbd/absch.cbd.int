@@ -1,6 +1,9 @@
-define(['app', "text!./view-risk-assessment.directive.html", 	
-'views/directives/record-options', 'views/forms/view/bch/view-lmo-reference.directive',
-'views/forms/view/directives/view-record-reference.directive', 'views/forms/directives/view-terms-hierarchy'], function (app, template) {
+import app from 'app';
+import template from "text!./view-risk-assessment.directive.html";
+import 'views/directives/record-options';
+import 'views/forms/view/bch/view-lmo-reference.directive';
+import 'views/forms/view/directives/view-record-reference.directive';
+import 'views/forms/directives/view-terms-hierarchy';
 
 app.directive("viewNationalRiskAssessment", viewRiskAssessment);
 app.directive("viewIndependentRiskAssessment", viewRiskAssessment);
@@ -20,4 +23,4 @@ function viewRiskAssessment() {
 	};
 }
 
-});
+

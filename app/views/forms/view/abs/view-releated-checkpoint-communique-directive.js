@@ -1,4 +1,5 @@
-define(['app', "text!./view-releated-checkpoint-communique-directive.html",], function (app, template) {
+import app from 'app';
+import template from "text!./view-releated-checkpoint-communique-directive.html";
 
 app.directive("viewRelatedCheckpointCommunique", [function () {
   return {
@@ -57,4 +58,4 @@ app.directive("viewRelatedCheckpointCommunique", [function () {
     }]
   };
 }]);
-});
+

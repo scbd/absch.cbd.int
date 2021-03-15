@@ -1,6 +1,6 @@
-define(['app'], function (app) {
+import app from 'app';
 
-"use strict";
+
 //require("app", "dragAndDrop")
 
 app.controller("presentationController",
@@ -371,4 +371,4 @@ app.controller("presentationController",
 
 
    }]);
-});
+

@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+import app from 'app';
 	app.directive('ngxLazy', function ($http, $compile, $timeout) {
 	    return {
 	        restrict: 'E',
@@ -14,4 +14,3 @@ define(['app'], function (app) {
 	    	}
 	    }
 	})
-});

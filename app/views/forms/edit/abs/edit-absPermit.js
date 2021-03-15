@@ -1,5 +1,8 @@
-define(['app','lodash', 'views/forms/edit/edit', 'services/main',
-        'views/forms/view/abs/view-abs-permit.directive'], function (app,_) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import 'services/main';
+import 'views/forms/view/abs/view-abs-permit.directive';
 
   app.controller("editAbsPermit", ["$scope", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable",
                                     "editFormUtility", "$controller","IStorage","$location", "commonjs",
@@ -191,4 +194,4 @@ define(['app','lodash', 'views/forms/edit/edit', 'services/main',
 
     $scope.setDocument();
   }]);
-});
+

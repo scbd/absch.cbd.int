@@ -1,10 +1,9 @@
-define(['app',
-        'lodash',    
-        'services/main',
-        'components/scbd-branding/main',
-        'views/register/directives/register-top-menu'
-  ], function(app, _) {
-    "use strict";
+import app from 'app';
+import _ from 'lodash';
+import 'services/main';
+import 'components/scbd-branding/main';
+import 'views/register/directives/register-top-menu';
+    
     app.controller("NotificationsController", ["$rootScope", "$scope", "roleService", "IWorkflows", "realm", "$q",
                     "$routeParams", '$location', "$filter", "$http", "$element","$timeout",
         function($rootScope, $scope, roleService, workflows, realm, $q, $routeParams, $location, $filter, $http, $element, $timeout) {
@@ -32,4 +31,4 @@ define(['app',
             $scope.realm = realm.value;
         }
     ]);
-});
+

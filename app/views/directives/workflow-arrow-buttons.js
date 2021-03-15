@@ -1,7 +1,10 @@
-define(['app', 'text!./workflow-arrow-buttons.html', 'lodash',
-        'views/directives/workflow-history-directive', 'services/main', 'ngDialog',
-        'toastr',
-], function (app, template) {
+import app from 'app';
+import template from 'text!./workflow-arrow-buttons.html';
+import 'lodash';
+import 'views/directives/workflow-history-directive';
+import 'services/main';
+import 'ngDialog';
+import 'toastr';
     
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
@@ -997,4 +1000,4 @@ define(['app', 'text!./workflow-arrow-buttons.html', 'lodash',
     	};
 
     }]);
-});
+

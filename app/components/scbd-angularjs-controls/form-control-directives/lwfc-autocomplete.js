@@ -1,4 +1,6 @@
-define(['app', 'text!./lwfc-autocomplete.html','angular-localizer'], function(app, template) {
+import app from 'app';
+import template from 'text!./lwfc-autocomplete.html';
+import 'angular-localizer';
   app.directive('lwfcAutocomplete', function() {
       return {
           restrict: 'AEC',
@@ -16,4 +18,3 @@ define(['app', 'text!./lwfc-autocomplete.html','angular-localizer'], function(ap
           template: template,
       };
   });
-});

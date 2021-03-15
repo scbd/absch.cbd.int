@@ -1,4 +1,6 @@
-define(['app', 'lodash', 'angular-cache'], function(app, _) {  ;
+import app from 'app';
+import _ from 'lodash';
+import 'angular-cache';  ;
     
     app.factory('cacheService', ['CacheFactory', function(CacheFactory){
         return {
@@ -32,4 +34,3 @@ define(['app', 'lodash', 'angular-cache'], function(app, _) {  ;
         }
     }]);
 
-});

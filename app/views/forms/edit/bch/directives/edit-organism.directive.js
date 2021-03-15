@@ -1,6 +1,10 @@
-define(['app', 'lodash', 'text!./edit-organism.directive.html', 'views/forms/edit/edit', 'services/main',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-organism.directive"], 
-function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./edit-organism.directive.html';
+import 'views/forms/edit/edit';
+import 'services/main';
+import 'views/forms/edit/document-selector';
+import "views/forms/view/bch/view-organism.directive";
 
 	app.directive("editOrganism", ["$routeParams", "$route", "Thesaurus", "$q", "$controller", "thesaurusService",
 	function($routeParams, $route, Thesaurus, $q, $controller, thesaurusService) {
@@ -92,4 +96,4 @@ function (app, _, template) {
 
    }]);
 
-});
+

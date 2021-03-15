@@ -1,4 +1,6 @@
-define(['app', 'views/forms/edit/edit', 'views/forms/edit/directives/edit-organization.directive'], function(app) {
+import app from 'app';
+import 'views/forms/edit/edit';
+import 'views/forms/edit/directives/edit-organization.directive';
     
 
     app.controller("editOrganization", ["$scope", '$routeParams', '$controller', function($scope, $routeParams, $controller) {
@@ -10,4 +12,4 @@ define(['app', 'views/forms/edit/edit', 'views/forms/edit/directives/edit-organi
 
      }]);
      
-});
+

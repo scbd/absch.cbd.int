@@ -1,4 +1,4 @@
-define(['app'], function(app) {
+import app from 'app';
     ;
 
     app.factory("IWorkflows", ["$http", function($http) {
@@ -85,4 +85,4 @@ define(['app'], function(app) {
         };
     }]);
 
-});
+

@@ -1,10 +1,8 @@
-define(['app',
- 'text!./account.html',
-  'jquery',
-  'css!components/scbd-branding/directives/header/account',
-  'components/scbd-angularjs-services/main',
-],
-function(app, template, $) {
+import app from 'app';
+import template from 'text!./account.html';
+import $ from 'jquery';
+import 'css!components/scbd-branding/directives/header/account';
+import 'components/scbd-angularjs-services/main';
      app.directive('scbdHeaderAccount', function() {
          return { restrict: 'E' ,
                   scope: {
@@ -56,4 +54,4 @@ function(app, template, $) {
                   }],//controller
         };//return
      });//directive
-});
+

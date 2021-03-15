@@ -1,4 +1,7 @@
-define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], function(templateHtml, app, _) {
+import templateHtml from 'text!./analyzer-question.html';
+import app from 'app';
+import _ from 'lodash';
+import 'angular-sanitize';
 
     var WHITE      = { R:255, G:255, B:255 };
     var SHADE_BASE = { R: 70, G:163, B:230 };
@@ -712,4 +715,4 @@ define(['text!./analyzer-question.html', 'app', 'lodash', 'angular-sanitize'], f
 
         return sign * Math.round(Math.abs(v));
     }
-});
+

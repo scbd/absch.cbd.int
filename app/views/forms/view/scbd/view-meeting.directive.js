@@ -1,5 +1,6 @@
-define(['app', 'text!./view-meeting.directive.html',
-'views/directives/record-options'], function (app, template) {
+import app from 'app';
+import template from 'text!./view-meeting.directive.html';
+import 'views/directives/record-options';
 
 app.directive('viewMeeting', [function() {
 	return {
@@ -18,4 +19,4 @@ app.directive('viewMeeting', [function() {
 		}]
 	}
 }]);
-});
+

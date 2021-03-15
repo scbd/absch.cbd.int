@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+import app from 'app';
 
 app.controller("LacController", ["$scope", "$http", function ($scope, $http) {
 
@@ -9,4 +9,3 @@ $scope.photos24_part2 = [{'id':'4'},{'id':'20'},{'id':'22'},{'id':'614'},{'id':'
 
 }]);
 
-});

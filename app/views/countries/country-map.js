@@ -1,8 +1,13 @@
-define(['require', 'text!./country-map.html', 'app', 'lodash',  'libs/ammap3/ammap/ammap', 
-'views/countries/worldEUHigh',
-'shim!libs/ammap3/ammap/themes/light[libs/ammap3/ammap/ammap]', 'services/main', 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css',
-'components/scbd-angularjs-services/main'], 
-function(require, template, app, _, ammap, worldEUHigh) {
+import require from 'require';
+import template from 'text!./country-map.html';
+import app from 'app';
+import _ from 'lodash';
+import ammap from 'libs/ammap3/ammap/ammap';
+import worldEUHigh from 'views/countries/worldEUHigh';
+import 'shim!libs/ammap3/ammap/themes/light[libs/ammap3/ammap/ammap]';
+import 'services/main';
+import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
+import 'components/scbd-angularjs-services/main';
   ;
 
 
@@ -557,4 +562,4 @@ function(require, template, app, _, ammap, worldEUHigh) {
       }],
     }; // return
   }]); //app.directive('searchFilterCountries
-}); // define
+ // define

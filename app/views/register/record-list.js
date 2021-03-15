@@ -1,9 +1,13 @@
-define(['app', 'lodash', 'components/scbd-angularjs-services/main', 'services/main', 'components/scbd-angularjs-controls/main',
-    'views/register/directives/register-top-menu', 'views/directives/block-region-directive',
-	'views/forms/edit/editFormUtility', 'ngDialog'
-],
-    function (app, _) {
-        "use strict";
+import app from 'app';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
+import 'components/scbd-angularjs-controls/main';
+import 'views/register/directives/register-top-menu';
+import 'views/directives/block-region-directive';
+import 'views/forms/edit/editFormUtility';
+import 'ngDialog';
+        
 
         app.controller("registerRecordList", ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
             'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", 
@@ -616,4 +620,4 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/main', 'services/ma
 
             }]);
 
-    });
+    

@@ -1,4 +1,4 @@
-define(['app'], function (app) {
+import app from 'app';
 
 	app.controller('FormHelpController', ['$scope', '$rootScope','$routeParams','$location', function ($scope, $rootScope, $routeParams, $location) {
 
@@ -8,4 +8,4 @@ define(['app'], function (app) {
 
 
 		}]);
-});
+

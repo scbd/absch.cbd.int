@@ -1,8 +1,11 @@
-define(['app',
-  'text!./xuser-notifications-panel.html','lodash','moment',
-  'css!components/scbd-branding/directives/xuser-notifications-panel',
-  'components/scbd-angularjs-services/main', 'ngInfiniteScroll', './header/xuser-notification-config-service'],
-function(app, template,_,moment) {
+import app from 'app';
+import template from 'text!./xuser-notifications-panel.html';
+import _ from 'lodash';
+import moment from 'moment';
+import 'css!components/scbd-branding/directives/xuser-notifications-panel';
+import 'components/scbd-angularjs-services/main';
+import 'ngInfiniteScroll';
+import './header/xuser-notification-config-service';
     
     app.directive('xuserNotificationsPanel', function() {
         return {
@@ -276,4 +279,4 @@ function(app, template,_,moment) {
         };
     });
 
-});
+

@@ -1,7 +1,9 @@
-define(['app', 
-"text!./measure-matrix-elements-directive.html",
-'lodash','angular', 'services/main',
-'views/directives/block-region-directive'], function(app, template, _, angular) {
+import app from 'app';
+import template from "text!./measure-matrix-elements-directive.html";
+import _ from 'lodash';
+import angular from 'angular';
+import 'services/main';
+import 'views/directives/block-region-directive';
 
     app.directive("measureMatrixElements", function() {
         return {
@@ -574,4 +576,4 @@ define(['app',
     });
 
 
-});
+

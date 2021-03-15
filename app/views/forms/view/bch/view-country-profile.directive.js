@@ -1,6 +1,6 @@
-define(['app', "text!./view-country-profile.directive.html", 
-	'views/directives/record-options'
-], function (app, template) {
+import app from 'app';
+import template from "text!./view-country-profile.directive.html";
+import 'views/directives/record-options';
 app.directive("viewCountryProfile", [function () {
 	return {
 		restrict   : "EA",
@@ -15,4 +15,4 @@ app.directive("viewCountryProfile", [function () {
 	};
 }]);
 
-});
+

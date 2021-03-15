@@ -1,4 +1,6 @@
-define(['text!./analyzer-section.html', 'app', './analyzer-question'], function(templateHtml, app) { ;
+import templateHtml from 'text!./analyzer-section.html';
+import app from 'app';
+import './analyzer-question'; ;
 
     //==============================================
     //
@@ -34,4 +36,4 @@ define(['text!./analyzer-section.html', 'app', './analyzer-question'], function(
             }
         };
     }]);
-});
+

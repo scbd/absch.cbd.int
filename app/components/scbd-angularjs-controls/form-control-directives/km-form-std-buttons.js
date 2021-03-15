@@ -1,4 +1,7 @@
-define(['app', 'angular', 'text!./km-form-std-buttons.html', 'jquery'], function(app, angular, template,$) {
+import app from 'app';
+import angular from 'angular';
+import template from 'text!./km-form-std-buttons.html';
+import $ from 'jquery';
   ;
   //============================================================
   //
@@ -385,4 +388,4 @@ define(['app', 'angular', 'text!./km-form-std-buttons.html', 'jquery'], function
       }]
     };
   }]);
-});
+

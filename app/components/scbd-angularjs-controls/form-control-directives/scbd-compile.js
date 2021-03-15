@@ -1,4 +1,4 @@
-define(['app'], function(app) {
+import app from 'app';
 
   var directiveFn = function($compile) {
       // directive factory creates a link function
@@ -26,4 +26,3 @@ define(['app'], function(app) {
   };
   app.directive('scbdCompile', directiveFn);
   app.directive('compile', directiveFn);
-});

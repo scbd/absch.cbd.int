@@ -1,8 +1,9 @@
-define(['app','lodash','views/forms/edit/edit',
-    'views/forms/view/abs/view-abs-checkpoint-communique.directive',
-    'views/forms/edit/permit-selection-directive',
-    'services/main'
-], function(app,_) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import 'views/forms/view/abs/view-abs-checkpoint-communique.directive';
+import 'views/forms/edit/permit-selection-directive';
+import 'services/main';
 
     app.controller("editCheckpointCommunique", ["$scope", "$http", "$filter", "$q", "$controller", "IStorage",
          "Thesaurus", "Enumerable", "$location", 'commonjs',
@@ -141,4 +142,4 @@ define(['app','lodash','views/forms/edit/edit',
             $scope.setDocument();
         }
     ]);
-});
+

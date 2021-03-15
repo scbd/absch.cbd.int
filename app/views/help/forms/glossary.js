@@ -1,4 +1,10 @@
-define(['app','lodash','ngMaterial','ngAria','angular-animate','components/scbd-angularjs-services/main','components/scbd-angularjs-controls/main'], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'ngMaterial';
+import 'ngAria';
+import 'angular-animate';
+import 'components/scbd-angularjs-services/main';
+import 'components/scbd-angularjs-controls/main';
 
 app.controller("glossaryController",
 	["$rootScope", "$scope", "$q", "$timeout",'$http', '$element', function ($rootScope, $scope, $q, $timeout, $http, $element) {	
@@ -23,4 +29,4 @@ app.controller("glossaryController",
             loadGlossarys();
             
    }]);
-});
+

@@ -1,7 +1,7 @@
-define(['app','lodash',
-  'components/scbd-angularjs-services/main',
-  'services/main',
-], function(app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
 
   app.controller("commonIssues",
   ["$scope", "locale", 'articlesService',
@@ -53,4 +53,4 @@ define(['app','lodash',
     }
   ]);
 
-});
+

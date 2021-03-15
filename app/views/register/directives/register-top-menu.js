@@ -1,5 +1,8 @@
-define(['app', "text!./register-top-menu.html",
-'lodash', 'services/main', 'moment'], function(app, template, _) {
+import app from 'app';
+import template from "text!./register-top-menu.html";
+import _ from 'lodash';
+import 'services/main';
+import 'moment';
 
     app.directive("registerTopMenu", ['roleService',"IWorkflows", '$rootScope', '$location', 'realm', function(roleService, IWorkflows,  $rootScope, $location, realm) {
 
@@ -39,4 +42,4 @@ define(['app', "text!./register-top-menu.html",
                }
             };
     }]);
-});
+

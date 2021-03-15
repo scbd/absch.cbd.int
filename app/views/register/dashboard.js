@@ -1,9 +1,15 @@
-define(['app', 'lodash', 'angular', 'services/main',
- 'views/register/directives/register-top-menu', 'toastr','components/scbd-angularjs-services/main', 
- 'views/register/directives/top-records', 'views/register/directives/top-requests', 'ngDialog'],
-function(app, _, ng) {
-    "use strict";
-    return ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
+import app from 'app';
+import _ from 'lodash';
+import ng from 'angular';
+import 'services/main';
+import 'views/register/directives/register-top-menu';
+import 'toastr';
+import 'components/scbd-angularjs-services/main';
+import 'views/register/directives/top-records';
+import 'views/register/directives/top-requests';
+import 'ngDialog';
+    
+    export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
                     "$routeParams", '$location', "$filter", "ngDialog", "$timeout", 'toastr',
                     'IWorkflows', 'commonjs',
         function($rootScope, $scope, storage, roleService, articlesService, realm, $q, $routeParams, 
@@ -197,4 +203,4 @@ function(app, _, ng) {
             },100);
         }
     ];
-});
+

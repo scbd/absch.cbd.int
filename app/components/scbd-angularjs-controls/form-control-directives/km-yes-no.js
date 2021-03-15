@@ -1,4 +1,6 @@
-define(['app', 'text!./km-yes-no.html','jquery'], function(app, template,$) { ;
+import app from 'app';
+import template from 'text!./km-yes-no.html';
+import $ from 'jquery'; ;
 		//============================================================
 		//
 		//
@@ -25,4 +27,3 @@ define(['app', 'text!./km-yes-no.html','jquery'], function(app, template,$) { ;
 						}]
 				};
 		}]);
-});

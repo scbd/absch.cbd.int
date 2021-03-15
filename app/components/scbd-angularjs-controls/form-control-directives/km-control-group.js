@@ -1,4 +1,8 @@
-define(['app', 'text!./km-control-group.html', 'jquery','lodash', './km-info-tip'], function(app, template,$, _) { ;
+import app from 'app';
+import template from 'text!./km-control-group.html';
+import $ from 'jquery';
+import _ from 'lodash';
+import './km-info-tip'; ;
 
 	app.directive('kmControlGroup', [function ()
 	{
@@ -72,5 +76,5 @@ define(['app', 'text!./km-control-group.html', 'jquery','lodash', './km-info-tip
 			}
 		};
 	}]);
-});
+
 

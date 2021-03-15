@@ -1,6 +1,9 @@
-define(['app', 'text!./date-filter.html','lodash', 'services/main', 
-'components/scbd-angularjs-controls/main','bootstrap-datepicker',
-], function(app, template, _) {
+import app from 'app';
+import template from 'text!./date-filter.html';
+import _ from 'lodash';
+import 'services/main';
+import 'components/scbd-angularjs-controls/main';
+import 'bootstrap-datepicker';
 
     app.directive('dateFilter', ['solr', function(solr) {
         return {
@@ -37,4 +40,4 @@ define(['app', 'text!./date-filter.html','lodash', 'services/main',
             }
         };
     }]);
-});
+

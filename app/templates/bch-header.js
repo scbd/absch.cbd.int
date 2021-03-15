@@ -1,4 +1,10 @@
-define(['app', 'text!./bch-header.html','lodash', 'ng-breadcrumbs', 'services/main', 'components/scbd-angularjs-services/main','components/scbd-angularjs-controls/main'], function (app, html, _) { ;
+import app from 'app';
+import html from 'text!./bch-header.html';
+import _ from 'lodash';
+import 'ng-breadcrumbs';
+import 'services/main';
+import 'components/scbd-angularjs-services/main';
+import 'components/scbd-angularjs-controls/main'; ;
 
     app.directive('bchHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q',  function (locale, $location, breadcrumbs, commonjs, $q) {
         return {
@@ -32,4 +38,4 @@ define(['app', 'text!./bch-header.html','lodash', 'ng-breadcrumbs', 'services/ma
             }
         };
     }]);
-});
+

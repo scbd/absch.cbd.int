@@ -1,7 +1,7 @@
-define(['app', 
- 'services/main', 
- 'views/register/directives/register-top-menu'], function(app) {
- "use strict";
+import app from 'app';
+import 'services/main';
+import 'views/register/directives/register-top-menu';
+ 
     app.controller("ReportController", ["$rootScope", "$scope", "roleService",  "$sce",
         function($rootScope, $scope, roleService, $sce) {
 
@@ -22,4 +22,4 @@ define(['app',
             $scope.frameUrl = $sce.trustAsResourceUrl(url.replace(/{{country}}/g, country[Math.floor(Math.random() * Math.floor(4))]))
         }
     ]);
-});
+

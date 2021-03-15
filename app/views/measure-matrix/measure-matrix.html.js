@@ -1,6 +1,6 @@
-define(['app','lodash',
-        'views/measure-matrix/measure-matrix-elements-directive']
-    , function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/measure-matrix/measure-matrix-elements-directive';
 
     app.controller('matrixController', ['$scope', '$http','realm','$q','$filter','$routeParams','Thesaurus','$timeout',
         function ($scope, $http, realm, $q, $filter, $routeParams, thesaurus, $timeout) {
@@ -213,4 +213,4 @@ define(['app','lodash',
 // console.log(JSON.stringify(thesaurus.buildTree(measureElements)))
 
     	}]);
-});
+

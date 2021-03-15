@@ -1,6 +1,7 @@
-define(['app', 'lodash', 'views/forms/edit/edit',
-    'views/forms/view/abs/view-abs-checkpoint.directive'
-], function(app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import 'views/forms/view/abs/view-abs-checkpoint.directive';
 
     app.controller("editAbsCheckpoint", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, $http, $filter, $q, $routeParams, $controller, $location) {
         $controller('editController', {
@@ -100,4 +101,4 @@ define(['app', 'lodash', 'views/forms/edit/edit',
 
         $scope.setDocument();
     }]);
-});
+

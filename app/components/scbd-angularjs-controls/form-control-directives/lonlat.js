@@ -1,4 +1,7 @@
-define(['app', 'text!./lonlat.html', 'jquery','angular-localizer'], function(app, template, $) {
+import app from 'app';
+import template from 'text!./lonlat.html';
+import $ from 'jquery';
+import 'angular-localizer';
   ;
   app.directive('lonlatInput', function() {
     return {
@@ -71,4 +74,3 @@ define(['app', 'text!./lonlat.html', 'jquery','angular-localizer'], function(app
       },
     };
   });
-});
