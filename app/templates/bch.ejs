@@ -12,14 +12,13 @@
     <link rel="shortcut icon" href="/app/img/favicon.png">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.cbd.int/bootstrap@3.3.0/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" type="text/css" href="https://cdn.cbd.int/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.cbd.int/bootstrap-datepicker@1.8.0/dist/css/bootstrap-datepicker.min.css" >
-    <link rel="stylesheet" type="text/css" href="https://cdn.cbd.int/angular-toastr@1.5.0/dist/angular-toastr.min.css" />
+    <link rel="stylesheet" type="text/css" href="<%=cdnUrl%>npm/bootstrap@3.3.0/dist/css/bootstrap.min.css">   
+    <link rel="stylesheet" type="text/css" href="<%=cdnUrl%>npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="<%=cdnUrl%>combine/<%=initialCss%>" />
     <link rel="stylesheet" type="text/css" href="/app/css/km.css?v=<%=appVersion%>">
     <link rel="stylesheet" type="text/css" href="/app/css/template.css?v=<%=appVersion%>">
-    <link rel="stylesheet" type="text/css" href="/app/css/colors.css?v=<%=appVersion%>" >
+    <link rel="stylesheet" type="text/css" href="/app/css/colors.css?v=<%=appVersion%>">
     <link rel="stylesheet" type="text/css" href="/app/css/bch/template.css?v=<%=appVersion%>">
 
 
@@ -31,7 +30,7 @@
     <![endif]-->
 
 </head>
-<body ng-controller="BchTemplateController" id="top" lang="<%=preferredLanguage||'en'%>">
+<body  id="top" lang="<%=preferredLanguage||'en'%>">
     
     <span style='display:none' id="appTitle">Biosafety Clearing-House</span>
     <span style='display:none' id="appDescription">The Biosafety Clearing-House</span>
@@ -138,6 +137,7 @@
         // In IE boot.js is executing before this script was executed so move it before boot.js       
         
         window.scbdApp = {
+            template         : 'templates/bch',
             host             : '<%=clearingHouseHost%>',
             version          : '<%=appVersion%>',
             lang             : '<%=preferredLanguage%>',
@@ -146,13 +146,19 @@
             analytics        : '<%=googleAnalyticsCode%>'
         }        
     </script>
-    <script src="https://cdn.cbd.int/requirejs@2.2.0/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>
+    <script src="<%=com%>npm/regenerator-runtime@0.13.7/runtime.js"></script>
+    <script src="<%=cdnUrl%>combine/<%=angularBundle%>"></script>
+    <script>
+        require(["app/boot.js?v=<%=appVersion%>"], function(boot){
+            var bootFn = boot.default || boot;
+            bootFn(window, require, define);
+        });
+    </script>
     
     
     <script async src='https://www.google-analytics.com/analytics.js'></script>
     <script>
-        window.scbdApp.template = 'templates/bch'
-        function addLoadEvent(func) {
+       function addLoadEvent(func) {
             var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } 
         }
         addLoadEvent(function() {
