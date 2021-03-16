@@ -1,5 +1,9 @@
-﻿define(['app', 'text!./left-side-filter.html', 'lodash', 'ngDialog',
-    'components/scbd-angularjs-services/main', 'services/main'], function (app, template, _) {
+﻿import app from 'app';
+import template from 'text!./left-side-filter.html';
+import _ from 'lodash';
+import 'ngDialog';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
 
         app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', function (ngDialog, locale, solr, realm) {
             return {
@@ -248,4 +252,4 @@
                 }
             };
         }]);
-    });
+    

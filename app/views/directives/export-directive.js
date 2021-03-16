@@ -1,6 +1,8 @@
-define(['app','text!./export-directive.html', 'lodash',
-'services/main', 'ngDialog',
-], function (app, template, _) {
+import app from 'app';
+import template from 'text!./export-directive.html';
+import _ from 'lodash';
+import 'services/main';
+import 'ngDialog';
     app.directive('export', function () {
         return {
             restrict: 'EAC',
@@ -193,5 +195,5 @@ define(['app','text!./export-directive.html', 'lodash',
             ]
         };
     });
-});
+
 

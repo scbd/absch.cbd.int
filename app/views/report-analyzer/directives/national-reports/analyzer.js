@@ -1,7 +1,13 @@
-define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 
-'../../filters/cases', 'components/scbd-angularjs-services/main', 'views/directives/view-reference-document',
-'views/report-analyzer/reportAnalyzerService'],
-function(templateHtml, app, _, require, $) { ;
+import templateHtml from 'text!./analyzer.html';
+import app from 'app';
+import _ from 'lodash';
+import require from 'require';
+import $ from 'jquery';
+import './analyzer-section';
+import '../../filters/cases';
+import 'components/scbd-angularjs-services/main';
+import 'views/directives/view-reference-document';
+import 'views/report-analyzer/reportAnalyzerService'; ;
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
@@ -556,4 +562,4 @@ function(templateHtml, app, _, require, $) { ;
             }]
         };
     }]);
-});
+

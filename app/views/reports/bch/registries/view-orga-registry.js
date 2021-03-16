@@ -1,6 +1,8 @@
-define(['app','css!/app/css/registry.css','services/main'], function(app) { ;
+import app from 'app';
+import 'css!/app/css/registry.css';
+import 'services/main'; ;
 
-return ['$scope','searchService','$element', '$rootScope',
+export default ['$scope','searchService','$element', '$rootScope',
 function($scope,searchService,$element, $rootScope) { 
 		$scope.isLoading = false;
 		$scope.isError = false;
@@ -52,4 +54,4 @@ function($scope,searchService,$element, $rootScope) {
 		loadRecords();
 }];
 
-});
+

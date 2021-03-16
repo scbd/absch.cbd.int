@@ -1,6 +1,12 @@
-define(['text!./questions-selector.html', 'app', 'lodash', 'require', '../selectors/terms-dialog', '../intermediate', 
-'components/scbd-angularjs-services/main', 'services/main', 'views/report-analyzer/reportAnalyzerService'], 
-function(templateHtml, app, _, require) {
+import templateHtml from 'text!./questions-selector.html';
+import app from 'app';
+import _ from 'lodash';
+import require from 'require';
+import '../selectors/terms-dialog';
+import '../intermediate';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
+import 'views/report-analyzer/reportAnalyzerService';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
@@ -347,4 +353,4 @@ function(templateHtml, app, _, require) {
             }
         };
     }]);
-});
+

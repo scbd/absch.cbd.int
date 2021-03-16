@@ -1,9 +1,9 @@
-﻿define(['app', 'lodash',
-    'services/main',
-    'components/scbd-angularjs-services/main',
-    'views/directives/block-region-directive',
-    'components/scbd-angularjs-controls/main'
-], function (app, _) {
+﻿import app from 'app';
+import _ from 'lodash';
+import 'services/main';
+import 'components/scbd-angularjs-services/main';
+import 'views/directives/block-region-directive';
+import 'components/scbd-angularjs-controls/main';
 
     export { default as template } from './country-list.html';
 
@@ -274,4 +274,4 @@
         }
     ];
 
-});
+

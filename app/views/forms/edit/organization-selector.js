@@ -1,8 +1,12 @@
-﻿define(['app', 'lodash', "text!./organization-selector.html", 'services/main', 'components/scbd-angularjs-services/main', 'components/scbd-angularjs-controls/main',
-'views/forms/view/directives/view-record-reference.directive', 'ngDialog',
-'ngInfiniteScroll'
-],
-function(app, _, template) {
+﻿import app from 'app';
+import _ from 'lodash';
+import template from "text!./organization-selector.html";
+import 'services/main';
+import 'components/scbd-angularjs-services/main';
+import 'components/scbd-angularjs-controls/main';
+import 'views/forms/view/directives/view-record-reference.directive';
+import 'ngDialog';
+import 'ngInfiniteScroll';
     
     app.directive("organizationSelector", [function() {
 
@@ -270,4 +274,4 @@ function(app, _, template) {
         };
     }]);
 
-});
+

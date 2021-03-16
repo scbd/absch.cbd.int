@@ -1,7 +1,11 @@
-define(['app', 'lodash', 'text!./data-matrix.directive.html', 
-'components/scbd-angularjs-services/main','services/main',
-'views/directives/block-region-directive', 'pivottable', 'ngDialog'], 
-function(app, _, template) { ;
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./data-matrix.directive.html';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
+import 'views/directives/block-region-directive';
+import 'pivottable';
+import 'ngDialog'; ;
 
 app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog',
 function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, ngDialog) {
@@ -252,4 +256,3 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, n
 		
     }]);
 
-});

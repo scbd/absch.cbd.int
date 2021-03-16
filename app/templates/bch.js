@@ -1,9 +1,17 @@
-define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
-        'bootstrap', 'routes/bch', 'ng-breadcrumbs','toastr','angular-animate', 
-        'components/scbd-branding/main',
-        'angular-loggly-logger',
-        'components/scbd-angularjs-services/main', 'views/directives/route-loading-directive', 'services/main'], 
-function (app, angular, footerHtml) { ;
+import app from 'app';
+import angular from 'angular';
+import footerHtml from 'text!./bch-footer.html';
+import './bch-header';
+import 'bootstrap';
+import 'routes/bch';
+import 'ng-breadcrumbs';
+import 'toastr';
+import 'angular-animate';
+import 'components/scbd-branding/main';
+import 'angular-loggly-logger';
+import 'components/scbd-angularjs-services/main';
+import 'views/directives/route-loading-directive';
+import 'services/main'; ;
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
 
@@ -154,4 +162,4 @@ function (app, angular, footerHtml) { ;
         })
         console.error(e);
     }
-});
+

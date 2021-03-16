@@ -1,6 +1,8 @@
-﻿define(['app', 'lodash', 'services/main', 'components/scbd-angularjs-controls/main', 
-'views/register/directives/register-top-menu'
-], function (app, _) {
+﻿import app from 'app';
+import _ from 'lodash';
+import 'services/main';
+import 'components/scbd-angularjs-controls/main';
+import 'views/register/directives/register-top-menu';
 
     "use strict";
     export { default as template } from './user-role-report.html';
@@ -165,4 +167,4 @@
 
             loadCountryAndRegions();
         }];
-});
+

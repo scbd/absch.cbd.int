@@ -1,7 +1,9 @@
-﻿define(['lodash', 'moment', 'views/report-analyzer/directives/national-reports/questions-selector'], function (_, moment) {
-    ;
-    
-    return ['$scope', '$location', 'commonjs', '$q', '$http', 'realm',
+﻿import _ from 'lodash';
+import moment from 'moment';
+import 'views/report-analyzer/directives/national-reports/questions-selector';
+;
+    export { default as template } from './reports.html'
+    export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm',
     function($scope, $location, commonjs, $q, $http, realm) {
 
         var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
@@ -130,4 +132,4 @@
             }
         }
     ];
-});
+

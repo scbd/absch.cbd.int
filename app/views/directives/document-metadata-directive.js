@@ -1,5 +1,6 @@
-define(['app','text!./document-metadata-directive.html', 'services/main'
-    ], function (app, template) {
+import app from 'app';
+import template from 'text!./document-metadata-directive.html';
+import 'services/main';
 	app.directive('documentMetadata', function($http){
 		return{
 			restrict: 'EA',
@@ -69,4 +70,4 @@ define(['app','text!./document-metadata-directive.html', 'services/main'
 		};
 
 	});
-});
+

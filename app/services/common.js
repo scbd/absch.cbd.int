@@ -1,20 +1,23 @@
-define(['app', 'lodash', 'services/main', 'components/scbd-angularjs-services/main'], function(app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'services/main';
+import 'components/scbd-angularjs-services/main';
 
     app.factory("htmlUtility", function() {
-		return {
-			encode: function(srcText) {
-				return $('<div/>').text(srcText).html();
-			}
-		};
-	});
+      return {
+        encode: function(srcText) {
+          return $('<div/>').text(srcText).html();
+        }
+      };
+    });
 
-	app.factory('Enumerable', [function() {
-		return Enumerable;
-	}])
+        app.factory('Enumerable', [function() {
+             return Enumerable;
+        }])
 
-	app.factory('linqjs', [function() {
-		return Enumerable;
-	}])
+        app.factory('linqjs', [function() {
+             return Enumerable;
+        }])
 
     app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 
     'localStorageService', 'Thesaurus',
@@ -650,4 +653,3 @@ define(['app', 'lodash', 'services/main', 'components/scbd-angularjs-services/ma
             }
         }
     ]);
-});

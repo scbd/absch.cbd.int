@@ -1,5 +1,8 @@
-define(['app', 'text!./record-options.html', 'lodash', 'components/scbd-angularjs-services/main',
-'services/main'], function (app, template, _) {
+import app from 'app';
+import template from 'text!./record-options.html';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
 
 app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$window', 'commonjs',
     function (appLocale, $route, $timeout, appConfigService, $filter, $window, commonjs) {
@@ -91,4 +94,4 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
             }
         };
     }]);
-});
+

@@ -1,9 +1,10 @@
-define(['app',
-  'views/countries/country-profile-directive',
-  'views/directives/block-region-directive',
-  'services/main','components/scbd-angularjs-services/main','ng-breadcrumbs',
-  'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css'
-], function(app) {
+import app from 'app';
+import 'views/countries/country-profile-directive';
+import 'views/directives/block-region-directive';
+import 'services/main';
+import 'components/scbd-angularjs-services/main';
+import 'ng-breadcrumbs';
+import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
 
   export { default as template } from './country-profile.html';
 
@@ -69,4 +70,3 @@ define(['app',
     }
   ];
 
-});

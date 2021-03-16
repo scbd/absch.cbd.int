@@ -1,6 +1,7 @@
-define(['./directives/national-reports/questions-selector', './directives/national-reports/analyzer'], function() { ;
+import './directives/national-reports/questions-selector';
+import './directives/national-reports/analyzer'; ;
 
-    return ['$scope', '$location', 'realm', '$timeout',
+    export default ['$scope', '$location', 'realm', '$timeout',
      function($scope, $location, realm, $timeout) {
         
         $scope.showAnalyzer = false;
@@ -111,4 +112,4 @@ define(['./directives/national-reports/questions-selector', './directives/nation
             analyze(false);            
         });
     }];
-});
+

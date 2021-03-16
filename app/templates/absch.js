@@ -1,7 +1,15 @@
-define(['app', 'lodash', 'moment', 'angular', 'toastr', 'bootstrap', 'routes/absch', 'angular-loggly-logger',
-'angular-animate', 'components/scbd-branding/main',
-'services/main', 'views/directives/route-loading-directive'], 
-function (app, _, moment, angular) {
+import app from 'app';
+import _ from 'lodash';
+import moment from 'moment';
+import angular from 'angular';
+import 'toastr';
+import 'bootstrap';
+import 'routes/absch';
+import 'angular-loggly-logger';
+import 'angular-animate';
+import 'components/scbd-branding/main';
+import 'services/main';
+import 'views/directives/route-loading-directive';
 
     app.config(["toastrConfig", function(toastrConfig) {
         angular.extend(toastrConfig, {
@@ -246,4 +254,4 @@ function (app, _, moment, angular) {
         })
         console.error(e);
     }
-});
+

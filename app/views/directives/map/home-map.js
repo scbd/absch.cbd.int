@@ -1,5 +1,8 @@
-define(['text!./home-map.html','app', 'lodash', 'views/directives/block-region-directive', 'services/main'
-], function(template, app, _, popoverTemplate) {
+import template from 'text!./home-map.html';
+import app from 'app';
+import _ from 'lodash';
+import popoverTemplate from 'views/directives/block-region-directive';
+import 'services/main';
   ;
 
   app.directive('homeMap', [function() {
@@ -72,4 +75,4 @@ define(['text!./home-map.html','app', 'lodash', 'views/directives/block-region-d
         }] //controlerr
     }; //return
   }]); //directive
-}); //define
+

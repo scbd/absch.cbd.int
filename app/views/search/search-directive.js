@@ -1,16 +1,30 @@
-define(['app', 'text!./search-directive.html','lodash',
-'app-data/search-tour.json','services/main','views/search/search-filters/keyword-filter',
-'views/search/search-filters/national-filter','views/search/search-filters/reference-filter','views/search/search-filters/scbd-filter',
-'views/search/search-filters/country-filter','views/search/search-filters/region-filter','views/search/search-filters/date-filter',
-'views/search/search-results/result-default','views/search/search-results/national-records-country',
-'ngDialog','views/register/user-preferences/user-alerts','views/directives/export-directive', 'angular-animate', 
-'angular-joyride','components/scbd-angularjs-services/main',
-'components/scbd-angularjs-controls/main',
-'views/search/directives/result-view-options', 'views/search/search-filters/left-side-filter',
-'views/search/search-results/list-view','views/search/search-results/group-view', 
-'toastr',
-'views/reports/matrix/data-matrix.directive'
-], function(app, template, _, scbdSchemas, joyRideText) {
+import app from 'app';
+import template from 'text!./search-directive.html';
+import _ from 'lodash';
+import scbdSchemas from 'app-data/search-tour.json';
+import joyRideText from 'services/main';
+import 'views/search/search-filters/keyword-filter';
+import 'views/search/search-filters/national-filter';
+import 'views/search/search-filters/reference-filter';
+import 'views/search/search-filters/scbd-filter';
+import 'views/search/search-filters/country-filter';
+import 'views/search/search-filters/region-filter';
+import 'views/search/search-filters/date-filter';
+import 'views/search/search-results/result-default';
+import 'views/search/search-results/national-records-country';
+import 'ngDialog';
+import 'views/register/user-preferences/user-alerts';
+import 'views/directives/export-directive';
+import 'angular-animate';
+import 'angular-joyride';
+import 'components/scbd-angularjs-services/main';
+import 'components/scbd-angularjs-controls/main';
+import 'views/search/directives/result-view-options';
+import 'views/search/search-filters/left-side-filter';
+import 'views/search/search-results/list-view';
+import 'views/search/search-results/group-view';
+import 'toastr';
+import 'views/reports/matrix/data-matrix.directive';
 
     app.directive('searchDirective', function() {
         return {
@@ -1046,4 +1060,4 @@ define(['app', 'text!./search-directive.html','lodash',
             }]//controller
         };
     });
-});
+

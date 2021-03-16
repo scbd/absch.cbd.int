@@ -1,8 +1,11 @@
-define(['app',"text!./document-selector.html",
-'lodash', 'views/directives/search-filter-dates.partial',
-'views/search/search-results/result-default', 
-'components/scbd-angularjs-controls/main','ngDialog', 'services/main'
-], function (app, template, _) { // jshint ignore:line
+import app from 'app';
+import template from "text!./document-selector.html";
+import _ from 'lodash';
+import 'views/directives/search-filter-dates.partial';
+import 'views/search/search-results/result-default';
+import 'components/scbd-angularjs-controls/main';
+import 'ngDialog';
+import 'services/main'; // jshint ignore:line
 
 app.directive("documentSelector", ["$timeout",'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr',
 function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr) {
@@ -722,4 +725,4 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 	};
 }]);
 
-});
+
