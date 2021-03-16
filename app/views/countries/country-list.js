@@ -5,7 +5,9 @@
     'components/scbd-angularjs-controls/main'
 ], function (app, _) {
 
-    app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$sce', 
+    export { default as template } from './country-list.html';
+
+  export default ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$sce', 
     '$routeParams', '$compile', '$timeout', 'locale', 'realm', 'ngMeta',
         function ($http, $scope, $element, $location, commonjs, $q, searchService, $sce, $routeParams, $compile, 
             $timeout, locale, realm, ngMeta) {
@@ -270,6 +272,6 @@
                 });  
             }
         }
-    ]);
+    ];
 
 });

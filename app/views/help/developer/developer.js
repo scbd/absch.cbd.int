@@ -1,5 +1,7 @@
 ﻿import app from 'app';
-    app.controller("developerController", ["$scope", function ($scope) {
+    export { default as template } from './developer.html';
+
+  export default ["$scope", function ($scope) {
         
-    }]);
+    }];
 

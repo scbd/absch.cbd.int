@@ -7,7 +7,9 @@ import 'views/forms/edit/document-selector';
 import 'views/forms/view/abs/view-measure.directive';
 import 'views/forms/edit/abs/edit-measure-matrix-directive';
 
-    app.controller("editMeasure", ["$scope", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs',
+    export { default as template } from './edit-measure.html';
+
+  export default ["$scope", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs',
         function($scope, $http, $filter, $q, Enumerable, $controller, $location, commonjs) {
             $controller('editController', {
                 $scope: $scope
@@ -255,7 +257,7 @@ import 'views/forms/edit/abs/edit-measure-matrix-directive';
             
 
         }
-    ]);
+    ];
  
 
 

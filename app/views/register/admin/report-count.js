@@ -7,7 +7,9 @@ import 'views/register/directives/register-top-menu';
 import 'chart-js';
 
         
-        app.controller("adminReportCountController", ["$scope", "solr", "searchService", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter",
+        export { default as template } from './report-count.html';
+
+  export default ["$scope", "solr", "searchService", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter",
             function ($scope, solr, searchService, realm, commonjs, $q, appConfigService, $http, $filter) {
                 
                 var chartObjects = {};
@@ -436,5 +438,5 @@ import 'chart-js';
                     })
                 }
 
-            }]);
+            }];
     

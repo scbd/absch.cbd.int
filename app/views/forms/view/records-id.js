@@ -3,7 +3,9 @@ import 'components/scbd-angularjs-services/main';
 import 'views/forms/view/record-loader.directive';
 import 'services/main';
 
-    app.controller("recordsViewController", ['$scope', "$sce", "solr", "$timeout", "$filter", 
+    export { default as template } from './records-id.html';
+
+  export default ['$scope', "$sce", "solr", "$timeout", "$filter", 
         "realm", 'searchService', 'ngMeta', 'locale',
     function ($scope, $sce, solr, $timeout, $filter, realm, searchService, ngMeta, locale){
 
@@ -59,5 +61,4 @@ import 'services/main';
         }
 
         setMetaTags();
-    }])
-
+    }]

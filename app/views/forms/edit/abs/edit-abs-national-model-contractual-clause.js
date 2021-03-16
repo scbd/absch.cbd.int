@@ -3,7 +3,9 @@ import _ from 'lodash';
 import 'views/forms/edit/edit';
 import 'views/forms/view/abs/view-abs-national-model-contractual-clause.directive';
 
-    app.controller("editAbsNationalModelContractualClause", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, $http, $filter, $q, $routeParams, $controller, $location) {
+    export { default as template } from './edit-abs-national-model-contractual-clause.html';
+
+  export default ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, $http, $filter, $q, $routeParams, $controller, $location) {
         $controller('editController', {
             $scope: $scope
         });
@@ -106,5 +108,5 @@ import 'views/forms/view/abs/view-abs-national-model-contractual-clause.directiv
         };
 
         $scope.setDocument();
-    }]);
+    }];
 

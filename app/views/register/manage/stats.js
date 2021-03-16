@@ -8,7 +8,9 @@ import 'views/register/directives/register-top-menu';
 import 'components/scbd-angularjs-controls/main';
 
         
-        app.controller("statsController", ["$scope", "$timeout", "IGenericService", "solr", "commonjs", "searchService", "$rootScope", 
+        export { default as template } from './stats.html';
+
+        export default ["$scope", "$timeout", "IGenericService", "solr", "commonjs", "searchService", "$rootScope", 
         "$q", "$filter", "appConfigService", "IStorage",
             function ($scope, $timeout, IGenericService, solr, commonjs, searchService, $rootScope,
              $q, $filter, appConfigService, storage) {
@@ -261,5 +263,5 @@ import 'components/scbd-angularjs-controls/main';
 
                     if($rootScope.user && $rootScope.user.government)
                         loadGovernmentStats($rootScope.user.government);
-            }]);
+            }];
     

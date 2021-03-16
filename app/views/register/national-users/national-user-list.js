@@ -6,7 +6,9 @@ import 'ngDialog';
 import 'services/main';
 import 'views/register/directives/register-top-menu'; ;
 
-app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'appConfigService',
+export { default as template } from './national-user-list.html';
+
+export default ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'appConfigService',
     function($scope, $http, $q, ngDialog, $rootScope, realm, appConfigService) {
         var users;
         var roles = {};
@@ -381,5 +383,5 @@ app.controller("nationalUserListController", ['$scope', '$http', '$q', 'ngDialog
                 }, reject);
             });
         }
-    }]);
+    }];
 

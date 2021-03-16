@@ -5,7 +5,9 @@ import '.views/forms/edit/view/view-capacity-building-initiative.directive';
 import 'views/forms/edit/organization-selector';
 import 'services/main';
 
-    app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "realm","thesaurusService", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, realm, thesaurusService) {
+    export { default as template } from './edit-capacityBuildingInitiative.html';
+
+  export default ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "realm","thesaurusService", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, realm, thesaurusService) {
 
         $controller('editController', {$scope: $scope});
         $scope.isABS = realm.is('ABS');
@@ -192,5 +194,5 @@ import 'services/main';
     if($scope.realm.is('ABS'))
         $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
 
-  }]);
+  }];
 

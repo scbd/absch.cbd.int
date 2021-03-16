@@ -4,7 +4,9 @@ import 'views/forms/edit/edit';
 import 'views/forms/edit/edit-resource-schema-base-directive';
 import '.views/forms/edit/view/view-resource.directive';
 
-  app.controller("editModelContractualClause", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
+  export { default as template } from './edit-modelContractualClause.html';
+
+  export default ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
                 function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller, storage, $location) {
 
 
@@ -61,5 +63,5 @@ import '.views/forms/edit/view/view-resource.directive';
 
 
 
-  }]);
+  }];
 

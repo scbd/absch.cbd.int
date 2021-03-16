@@ -4,7 +4,9 @@ import 'services/main';
 import 'components/scbd-branding/main';
 import 'views/register/directives/register-top-menu';
     
-    app.controller("NotificationsController", ["$rootScope", "$scope", "roleService", "IWorkflows", "realm", "$q",
+    export { default as template } from './notifications.html';
+
+    export default ["$rootScope", "$scope", "roleService", "IWorkflows", "realm", "$q",
                     "$routeParams", '$location', "$filter", "$http", "$element","$timeout",
         function($rootScope, $scope, roleService, workflows, realm, $q, $routeParams, $location, $filter, $http, $element, $timeout) {
 
@@ -30,5 +32,5 @@ import 'views/register/directives/register-top-menu';
             
             $scope.realm = realm.value;
         }
-    ]);
+    ];
 

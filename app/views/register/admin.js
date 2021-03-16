@@ -2,7 +2,9 @@ import app from 'app';
 import 'services/main';
 import 'views/register/directives/register-top-menu';
  
-    app.controller("AdminController", ["$rootScope", "$scope", "roleService", 'localStorageService',
+    export { default as template } from './admin.html';
+
+  export default ["$rootScope", "$scope", "roleService", 'localStorageService',
         function($rootScope, $scope, roleService, localStorageService) {
 
             if ($rootScope.user.isAuthenticated) {
@@ -23,5 +25,5 @@ import 'views/register/directives/register-top-menu';
                 }
             }
         }
-    ]);
+    ];
 

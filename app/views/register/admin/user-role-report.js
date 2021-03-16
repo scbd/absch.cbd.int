@@ -3,7 +3,9 @@
 ], function (app, _) {
 
     "use strict";
-    app.controller("adminUserRolesReportController", ["$scope", "$timeout", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter", "$element",
+    export { default as template } from './user-role-report.html';
+
+  export default ["$scope", "$timeout", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter", "$element",
         function ($scope, $timeout, realm, commonjs, $q, appConfigService, $http, $filter, $element) {
             $scope.sortByField = 'name.en'
             $scope.reverse = false;
@@ -162,5 +164,5 @@
 
 
             loadCountryAndRegions();
-        }]);
+        }];
 });

@@ -6,8 +6,9 @@ import 'angular-animate';
 import 'components/scbd-angularjs-services/main';
 import 'components/scbd-angularjs-controls/main';
 
-app.controller("glossaryController",
-	["$rootScope", "$scope", "$q", "$timeout",'$http', '$element', function ($rootScope, $scope, $q, $timeout, $http, $element) {	
+export { default as template } from './glossary.html';
+
+  export default ["$rootScope", "$scope", "$q", "$timeout",'$http', '$element', function ($rootScope, $scope, $q, $timeout, $http, $element) {	
 		
             $scope.alphabet = ['All', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
                                 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -28,5 +29,5 @@ app.controller("glossaryController",
             }      
             loadGlossarys();
             
-   }]);
+   }];
 

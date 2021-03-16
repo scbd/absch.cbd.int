@@ -8,8 +8,9 @@ import 'services/main';
 import 'components/scbd-angularjs-services/main';
 import 'components/scbd-angularjs-controls/main';
 
-    app.controller("glossaryTermController",
-      ["$routeParams", "$scope","$rootScope", "$q", "$timeout", '$http', '$element',  '$route', 'commonjs', 'breadcrumbs', '$mdDialog',
+    export { default as template } from './glossary-term.html';
+
+  export default ["$routeParams", "$scope","$rootScope", "$q", "$timeout", '$http', '$element',  '$route', 'commonjs', 'breadcrumbs', '$mdDialog',
         function ($routeParams, $scope, $rootScope, $q, $timeout, $http, $element,  $route, commonjs, breadcrumbs, $mdDialog) {
 
           $scope.languages = ['en'];
@@ -184,5 +185,5 @@ import 'components/scbd-angularjs-controls/main';
 
 
 
-        }]);
+        }];
   

@@ -8,7 +8,9 @@ import 'components/scbd-angularjs-controls/main';
 import 'views/register/directives/register-top-menu';
 
         
-        app.controller("subscriptionsCotroller", ["$scope", "$timeout", "IGenericService", "realm", "commonjs",
+        export { default as template } from './subscriptions.html';
+
+  export default ["$scope", "$timeout", "IGenericService", "realm", "commonjs",
             function ($scope, $timeout, IGenericService, realm, commonjs) {
                 $scope.filters = {systemAlert:false};
                 var filterQuery = {             
@@ -66,5 +68,5 @@ import 'views/register/directives/register-top-menu';
                 
                 $scope.loadSubscriptions(true);
                 
-            }]);
+            }];
     

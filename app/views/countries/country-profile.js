@@ -5,8 +5,9 @@ define(['app',
   'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css'
 ], function(app) {
 
-  app.controller("countryProfileController",
-  ["$scope","$route", "$sce", "$timeout", "IStorage","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm', 'ngMeta','searchService',
+  export { default as template } from './country-profile.html';
+
+  export default ["$scope","$route", "$sce", "$timeout", "IStorage","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm', 'ngMeta','searchService',
     function($scope,$route, $sce, $timeout, IStorage, locale, commonjs, $q, breadcrumbs, $element, $compile, realm, ngMeta,searchService) {
       $scope.code      = $route.current.params.code;
       $scope.isBCH     = realm.is('BCH');
@@ -66,6 +67,6 @@ define(['app',
       }
 
     }
-  ]);
+  ];
 
 });

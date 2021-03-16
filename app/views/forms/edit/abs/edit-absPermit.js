@@ -4,7 +4,9 @@ import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/view/abs/view-abs-permit.directive';
 
-  app.controller("editAbsPermit", ["$scope", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable",
+  export { default as template } from './edit-absPermit.html';
+
+  export default ["$scope", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable",
                                     "editFormUtility", "$controller","IStorage","$location", "commonjs",
    function ($scope, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage, $location, commonjs) {
     $controller('editController', {$scope: $scope});
@@ -193,5 +195,5 @@ import 'views/forms/view/abs/view-abs-permit.directive';
     };
 
     $scope.setDocument();
-  }]);
+  }];
 

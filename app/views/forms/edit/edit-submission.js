@@ -5,7 +5,9 @@ import '.views/forms/edit/view/view-submission.directive';
 import 'views/forms/edit/organization-selector';
 import 'services/main';
 
-  app.controller("editSubmission", ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService',
+  export { default as template } from './edit-submission.html';
+
+  export default ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService',
    function ($scope, $http, $controller, realm, searchService, solr, thesaurusService) {
 
     $scope.isBch = realm.is('BCH');
@@ -86,5 +88,5 @@ import 'services/main';
         $scope.onNotificationSelected();
     });
 
-  }]);
+  }];
 

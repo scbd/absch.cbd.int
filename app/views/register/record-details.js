@@ -7,7 +7,9 @@ import 'views/directives/block-region-directive';
 import 'views/register/directives/register-top-menu';
 import 'views/directives/task-id-directive';
     
-    app.controller("recordDetailsController", ["$rootScope", "$scope", "$filter", "$routeParams", "IStorage", "$q",
+    export { default as template } from './record-details.html';
+
+    export default ["$rootScope", "$scope", "$filter", "$routeParams", "IStorage", "$q",
         "IWorkflows", "IUserNotifications", "commonjs", "$element", "$timeout", "roleService", "toastr", "$location", "breadcrumbs",
         function ($rootScope, $scope, $filter, $routeParams, IStorage, $q, IWorkflows, IUserNotifications, commonjs, $element, $timeout, 
         roleService, toastr, $location, breadcrumbs) {
@@ -184,5 +186,4 @@ import 'views/directives/task-id-directive';
             });
 
         }
-    ]);
-
+    ];

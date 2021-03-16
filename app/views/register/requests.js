@@ -9,7 +9,9 @@ import 'components/scbd-angularjs-services/main';
 import 'views/forms/view/record-loader.directive';
 
         
-        app.controller("requestsController", ["$scope", "IWorkflows", "realm", '$rootScope', 'roleService', "$q", "locale",
+        export { default as template } from './requests.html';
+
+        export default ["$scope", "IWorkflows", "realm", '$rootScope', 'roleService', "$q", "locale",
             function ($scope, IWorkflows, realm, $rootScope, roleService, $q, locale) {
 
                 $scope.sortTerm = 'createdOn';
@@ -211,5 +213,5 @@ import 'views/forms/view/record-loader.directive';
         
                 load(null, 0)
 
-            }]);
+            }];
     

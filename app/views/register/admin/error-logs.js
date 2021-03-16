@@ -8,7 +8,9 @@ import 'components/scbd-angularjs-controls/main';
 import 'views/register/directives/register-top-menu';
 
         
-        app.controller("adminErrorLogsCotroller", ["$scope", "$timeout", "IGenericService", "realm", "commonjs",
+        export { default as template } from './error-logs.html';
+
+  export default ["$scope", "$timeout", "IGenericService", "realm", "commonjs",
             function ($scope, $timeout, IGenericService, realm, commonjs) {
                 $scope.filters = {};
                 var filterQuery = {
@@ -73,5 +75,5 @@ import 'views/register/directives/register-top-menu';
                     
                     return appVersion;
                 }
-            }]);
+            }];
     

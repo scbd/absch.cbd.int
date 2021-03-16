@@ -6,8 +6,9 @@ import 'services/main';
 import 'ng-breadcrumbs';
 import 'components/scbd-angularjs-controls/main';
 
-  app.controller("viewArticles",
-  ["$scope","$route", "$http", "$location", "locale", '$q', 'breadcrumbs','articlesService',
+  export { default as template } from './view-articles.html';
+
+  export default ["$scope","$route", "$http", "$location", "locale", '$q', 'breadcrumbs','articlesService',
     function($scope,$route, $http,  $location, locale, $q, breadcrumbs, articlesService) {
       
       $scope.currentPage=0;
@@ -108,6 +109,6 @@ import 'components/scbd-angularjs-controls/main';
    
 
     }
-  ]);
+  ];
 
 

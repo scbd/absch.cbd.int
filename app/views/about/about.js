@@ -6,8 +6,9 @@ import 'views/about/article-guides.directive';
 import 'services/main';
 import 'ng-breadcrumbs';
 
-  app.controller("newAbout",
-  ["$scope","$route", "$location", "locale", 'breadcrumbs', 'articlesService', 'ngMeta', 'realm',
+  export { default as template } from './about.html';
+
+  export default ["$scope","$route", "$location", "locale", 'breadcrumbs', 'articlesService', 'ngMeta', 'realm',
     function($scope,$route, $location, locale, breadcrumbs,  articlesService, ngMeta, realm) {
       
       $scope.status   = "loading";
@@ -136,6 +137,6 @@ import 'ng-breadcrumbs';
 
       init();
     }
-  ]);
+  ];
 
 

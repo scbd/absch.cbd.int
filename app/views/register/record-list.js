@@ -9,7 +9,9 @@ import 'views/forms/edit/editFormUtility';
 import 'ngDialog';
         
 
-        app.controller("registerRecordList", ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
+        export { default as template } from './record-list.html';
+
+        export default ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
             'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", 
             "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm', 'ngMeta', 'solr',
             function ($timeout, commonjs, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
@@ -618,6 +620,4 @@ import 'ngDialog';
                 loadRecords();
                 loadOfflineFormatDetails();
 
-            }]);
-
-    
+            }];

@@ -11,7 +11,9 @@ import 'views/forms/view/bch/view-national-report-4.directive';
 import 'components/scbd-angularjs-services/main';
 import 'ngDialog';
     
-    app.controller("editBchNationalReport4Controller", ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 
+    export { default as template } from './edit-national-report-4.html';
+
+  export default ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 
     'commonjs', 'IStorage', '$routeParams', 'ngDialog',
 	function($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog) {
         
@@ -565,7 +567,7 @@ import 'ngDialog';
         }
 
         init();
-   }]);
+   }];
 
 
    

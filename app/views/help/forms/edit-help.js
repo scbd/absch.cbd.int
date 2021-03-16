@@ -6,8 +6,9 @@ import 'angular-animate';
 import 'components/scbd-angularjs-services/main';
 import 'components/scbd-angularjs-controls/main';
 import 'services/main';
-		app.controller("editHelpController",
-			["$routeParams", "$scope", "$rootScope", "$q", '$http',  '$location', 'commonjs', '$mdDialog',
+		export { default as template } from './edit-help.html';
+
+  export default ["$routeParams", "$scope", "$rootScope", "$q", '$http',  '$location', 'commonjs', '$mdDialog',
 				function ($routeParams, $scope, $rootScope, $q, $http, $location, commonjs, $mdDialog) {
 
 					var url = '/api/v2015/help-forms';
@@ -161,5 +162,5 @@ import 'services/main';
 					}
 					$scope.loadSchemas();
 					fieldTypes();
-				}]);
+				}];
 	

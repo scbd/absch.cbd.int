@@ -5,8 +5,9 @@ import 'views/forms/edit/document-selector';
 import 'views/forms/view/abs/view-abs-national-report.directive';
 import 'services/main';
 
-  app.controller("editAbsNationalReport",
-  ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "searchService","appConfigService", 'solr',
+  export { default as template } from './edit-absNationalReport.html';
+
+  export default ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "searchService","appConfigService", 'solr',
   function ($scope, $http, $filter, $controller,$location, $q, realm, searchService, appConfigService, solr) {
 
     $controller('editController', {$scope: $scope});
@@ -583,5 +584,5 @@ import 'services/main';
         return deferred.promise;
     }
 
-  }]);
+  }];
 

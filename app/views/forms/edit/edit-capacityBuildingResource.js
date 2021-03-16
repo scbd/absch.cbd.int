@@ -3,7 +3,9 @@ import _ from 'lodash';
 import 'views/forms/edit/edit';
 import '.views/forms/edit/view/view-capacity-building-resource.directive';
 
-  app.controller("editCapacityBuildingResource", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, thesaurus, Enumerable) {
+  export { default as template } from './edit-capacityBuildingResource.html';
+
+  export default ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "Thesaurus", "Enumerable", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, thesaurus, Enumerable) {
 
     $controller('editController', {$scope: $scope});
 
@@ -68,5 +70,5 @@ import '.views/forms/edit/view/view-capacity-building-resource.directive';
       };
 
     $scope.setDocument({});
-  }]);
+  }];
 

@@ -3,8 +3,9 @@ import _ from 'lodash';
 import videosData from 'app-data/help-videos.json';
 import 'views/about/youtube';
 import 'ngDialog';
-app.controller("videosController",
-        ["$rootScope", "$scope", "$q", '$element', '$route', 'ngDialog', function ($rootScope, $scope, $q, $element, $route, ngDialog) {
+export { default as template } from './videos.html';
+
+  export default ["$rootScope", "$scope", "$q", '$element', '$route', 'ngDialog', function ($rootScope, $scope, $q, $element, $route, ngDialog) {
 
         $scope.videos = videosData;
 
@@ -24,5 +25,5 @@ app.controller("videosController",
 
 
         
-   }]);
+   }];
 

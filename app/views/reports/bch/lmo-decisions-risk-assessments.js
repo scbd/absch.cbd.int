@@ -8,7 +8,9 @@ import 'views/reports/bch/lmo-decisions';
 import 'views/reports/bch/risk-assessments';
 import 'views/forms/view/record-loader.directive'; ;
 
-app.controller("LmoReportController", ['$scope', '$routeParams', '$route', 'solr', 'searchService', '$timeout',
+export { default as template } from './lmo-decisions-risk-assessments.html';
+
+export default ['$scope', '$routeParams', '$route', 'solr', 'searchService', '$timeout',
 	function($scope, $routeParams, $route, solr, searchService, $timeout) {
 
         $scope.tab = $routeParams.tab;
@@ -46,6 +48,6 @@ app.controller("LmoReportController", ['$scope', '$routeParams', '$route', 'solr
             $route.updateParams({tab:tab});
         }
 
-	}]);
+	}];
 	
 

@@ -5,7 +5,9 @@ import 'views/forms/view/abs/view-abs-checkpoint-communique.directive';
 import 'views/forms/edit/permit-selection-directive';
 import 'services/main';
 
-    app.controller("editCheckpointCommunique", ["$scope", "$http", "$filter", "$q", "$controller", "IStorage",
+    export { default as template } from './edit-absCheckpointCommunique.html';
+
+  export default ["$scope", "$http", "$filter", "$q", "$controller", "IStorage",
          "Thesaurus", "Enumerable", "$location", 'commonjs',
         function($scope, $http, $filter, $q, $controller, storage, Thesaurus, Enumerable, $location, commonjs) {
             $controller('editController', {
@@ -141,5 +143,5 @@ import 'services/main';
 
             $scope.setDocument();
         }
-    ]);
+    ];
 
