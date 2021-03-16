@@ -1,8 +1,9 @@
-define(['app'], function (app) {
+import app from 'app';
 
-	app.controller('AccountsController', ['$scope', '$rootScope','$routeParams', function ($scope, $rootScope, $routeParams) {
+	export { default as template } from './accounts.html';
+export default ['$scope', '$rootScope','$routeParams', function ($scope, $rootScope, $routeParams) {
 
         $scope.question = $routeParams.question;
 
-		}]);
-});
+		}];
+

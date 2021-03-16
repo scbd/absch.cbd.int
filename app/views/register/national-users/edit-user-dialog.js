@@ -1,6 +1,7 @@
-define([], function() {
 
-    return ['$scope', 'user', function ($scope, user) {
+
+    export { default as template } from './edit-user-dialog.html';
+export default ['$scope', 'user', function ($scope, user) {
 
         var _ctrl = this;
 
@@ -10,4 +11,4 @@ define([], function() {
             $scope.closeThisDialog(_ctrl.user);
         };
 	}];
-});
+

@@ -1,5 +1,6 @@
-define(['app', 'text!./route-loading-directive.html', 'views/directives/block-region-directive'], 
-function(app, template){
+import app from 'app';
+import template from 'text!./route-loading-directive.html';
+import 'views/directives/block-region-directive';
 
     app.directive('routeLoading', ['$rootScope', function($rootScope){
         return {
@@ -31,5 +32,5 @@ function(app, template){
             }
         };
     }])
-})
+
 

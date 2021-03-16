@@ -1,5 +1,5 @@
-define(['app',
-'text!views/search/search-filters/national-filter.html',], function(app, template) {
+import app from 'app';
+import template from 'text!./national-filter.html';
 
     app.directive('nationalFilter', function($timeout) {
         return {
@@ -24,4 +24,4 @@ define(['app',
             }//link
         };
     });
-});
+

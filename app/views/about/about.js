@@ -1,14 +1,14 @@
-define(['app','lodash',
-  'components/scbd-angularjs-services/services/locale',
-  './article-search.directive',
-  './article-guides.directive',
-  'components/scbd-angularjs-services/filters/scbd-filters',
-  'services/articles-service',
-  'ng-breadcrumbs',
-], function(app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'views/about/article-search.directive';
+import 'views/about/article-guides.directive';
+import 'services/main';
+import 'ng-breadcrumbs';
 
-  app.controller("newAbout",
-  ["$scope","$route", "$location", "locale", 'breadcrumbs', 'articlesService', 'ngMeta', 'realm',
+  export { default as template } from './about.html';
+
+  export default ["$scope","$route", "$location", "locale", 'breadcrumbs', 'articlesService', 'ngMeta', 'realm',
     function($scope,$route, $location, locale, breadcrumbs,  articlesService, ngMeta, realm) {
       
       $scope.status   = "loading";
@@ -137,6 +137,6 @@ define(['app','lodash',
 
       init();
     }
-  ]);
+  ];
 
-});
+

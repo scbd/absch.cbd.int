@@ -1,8 +1,10 @@
-define(['app', 'cbd-forums',
-	'js/common', 'services/role-service'], function(app) {
+import app from 'app';
+import 'cbd-forums';
+import 'services/main';
 
 
-    return ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route","commonjs","$rootScope", "roleService",
+    export { default as template } from './thread-list-view.html';
+export default ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route","commonjs","$rootScope", "roleService",
         function($scope, $http, $q, $filter, $timeout, $location, $route, commonjs, $rootScope, roleService) {
 
             //$scope.forumId = 17384;
@@ -34,4 +36,4 @@ define(['app', 'cbd-forums',
 
         }
     ];
-});
+

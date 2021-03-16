@@ -1,7 +1,7 @@
-﻿define(['app'],function(app) {
+﻿import app from 'app';
 
 // (function() {
-    'use strict';
+    ;
 
     // ng-youtube-embed main module
     // var ngYoutubeEmbed = angular.module('ngYoutubeEmbed', []);
@@ -246,4 +246,4 @@
     }]);
 // })();
 
-});
+

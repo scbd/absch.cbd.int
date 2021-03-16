@@ -1,4 +1,6 @@
- define(["app", "text!views/forms/view/abs/view-abs-checkpoint.directive.html", 'views/directives/record-options',], function(app, template){
+ import app from "app";
+import template from "text!./view-abs-checkpoint.directive.html";
+import 'views/directives/record-options';
 
 	// });
 //	 require("app")
@@ -132,5 +134,4 @@
 				};
 			}]);
 		//}
- 	}
- );
+ 	

@@ -1,6 +1,8 @@
-﻿define(["app", 'lodash', 'json!components/scbd-angularjs-services/filters/schema-name.json', 
-'js/common', 'services/app-config-service'], 
-function (app, _, scbdSchemas) {
+﻿import app from "app";
+import _ from 'lodash';
+import scbdSchemas from 'components/scbd-angularjs-services/main';
+import './common';
+import 'services/main';
 
 
 	//============================================================
@@ -304,4 +306,3 @@ function (app, _, scbdSchemas) {
 		    return "" + number + end;
 		};
 	});
-});

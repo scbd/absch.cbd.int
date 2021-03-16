@@ -1,6 +1,8 @@
-﻿define(['app', 'text!views/directives/view-reference-document.html', 'components/scbd-angularjs-services/services/storage',
- 'views/search/search-results/result-default', 'views/forms/view/record-loader.directive'],
- function(app, template) {
+﻿import app from 'app';
+import template from 'text!./view-reference-document.html';
+import 'components/scbd-angularjs-services/main';
+import 'views/search/search-results/result-default';
+import 'views/forms/view/record-loader.directive';
 
     app.directive('viewReferenceDocument', ['IStorage', '$q', function(storageService, $q) {
 
@@ -32,4 +34,4 @@
 
         }
     ]);
-});
+

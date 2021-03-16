@@ -1,5 +1,10 @@
-define(['app', 'lodash', 'text!./risk-assessments.html', 'services/search-service','views/forms/view/bch/view-lmo-reference.directive',
-'angucomplete-alt','views/directives/block-region-directive', 'services/solr'], function(app, _, template) { 'use strict';
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./risk-assessments.html';
+import 'services/main';
+import 'views/forms/view/bch/view-lmo-reference.directive';
+import 'angucomplete-alt';
+import 'views/directives/block-region-directive'; ;
 
 app.directive("lmoRiskAssessments", ['searchService', 'solr', function(searchService, solr) {
 	return{
@@ -32,5 +37,5 @@ app.directive("lmoRiskAssessments", ['searchService', 'solr', function(searchSer
 
 	}]);
 	
-});
+
 

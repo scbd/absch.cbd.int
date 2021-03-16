@@ -1,7 +1,10 @@
-﻿define(['app', 'text!views/search/search-results/group-view.html','lodash',
-'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status',
-'views/search/search-results/result-default', 'services/solr'
-], function(app, template, _) {
+﻿import app from 'app';
+import template from 'text!./group-view.html';
+import _ from 'lodash';
+import 'views/search/search-results/result-grouped-national-record';
+import 'services/main';
+import 'views/directives/party-status';
+import 'views/search/search-results/result-default';
 
     app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$location', '$q', 'solr', 
     function(searchService, realm, $timeout, $location, $q, solr) {
@@ -248,9 +251,9 @@
                 function groupFieldMappings(groupField){
                     var fieldMapping = [];
                     var groupFields = groupField.replace(/_s$/, '').split('_')
-                    groupFieldMapping = searchDirectiveCtrl.groupByFields();
+                    var groupFieldMapping = searchDirectiveCtrl.groupByFields();
                     _.forEach(groupFields, function(f){
-                        field = _.find(groupFieldMapping, {field:f})
+                        var field = _.find(groupFieldMapping, {field:f})
                         if(field)
                             fieldMapping.push(field);
                     })
@@ -261,4 +264,4 @@
             }
         };
     }]);
-});
+

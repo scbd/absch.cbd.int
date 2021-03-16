@@ -1,7 +1,10 @@
-define(['app', 'lodash', 'css!/app/css/registry.css', 'services/search-service', 'js/common', 'services/solr',
-		'./index'], function(app, _) { 'use strict';
+import app from 'app';
+import _ from 'lodash';
+import 'css!/app/css/registry.css';
+import 'services/main'; ;
 
-	return ['$scope', 'searchService', 'toastr', '$log', 'solr',
+	export { default as template } from './index.html';
+export default ['$scope', 'searchService', 'toastr', '$log', 'solr',
 			function ($scope, searchService, toastr, $log, solr) {
 				var schemas = ["organism", "modifiedOrganism", "dnaSequence"];
 				
@@ -23,4 +26,4 @@ define(['app', 'lodash', 'css!/app/css/registry.css', 'services/search-service',
 				}
 		}];
 
-	});
+	

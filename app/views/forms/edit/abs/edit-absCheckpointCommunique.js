@@ -1,10 +1,13 @@
-define(['app','lodash','views/forms/edit/edit',
-    'views/forms/view/abs/view-abs-checkpoint-communique.directive',
-    'views/forms/edit/permit-selection-directive',
-    'js/common'
-], function(app,_) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import 'views/forms/view/abs/view-abs-checkpoint-communique.directive';
+import 'views/forms/edit/permit-selection-directive';
+import 'services/main';
 
-    app.controller("editCheckpointCommunique", ["$scope", "$http", "$filter", "$q", "$controller", "IStorage",
+    export { default as template } from './edit-absCheckpointCommunique.html';
+
+  export default ["$scope", "$http", "$filter", "$q", "$controller", "IStorage",
          "Thesaurus", "Enumerable", "$location", 'commonjs',
         function($scope, $http, $filter, $q, $controller, storage, Thesaurus, Enumerable, $location, commonjs) {
             $controller('editController', {
@@ -140,5 +143,5 @@ define(['app','lodash','views/forms/edit/edit',
 
             $scope.setDocument();
         }
-    ]);
-});
+    ];
+

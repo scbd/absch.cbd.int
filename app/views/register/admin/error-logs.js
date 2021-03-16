@@ -1,9 +1,16 @@
-define(['app', 'lodash', 'components/scbd-angularjs-services/services/generic-service', 'js/common', 'ngInfiniteScroll', 'moment', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
-    'views/register/directives/register-top-menu',
-    ], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
+import 'ngInfiniteScroll';
+import 'moment';
+import 'components/scbd-angularjs-controls/main';
+import 'views/register/directives/register-top-menu';
 
-        "use strict";
-        app.controller("adminErrorLogsCotroller", ["$scope", "$timeout", "IGenericService", "realm", "commonjs",
+        
+        export { default as template } from './error-logs.html';
+
+  export default ["$scope", "$timeout", "IGenericService", "realm", "commonjs",
             function ($scope, $timeout, IGenericService, realm, commonjs) {
                 $scope.filters = {};
                 var filterQuery = {
@@ -68,5 +75,5 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/services/generic-se
                     
                     return appVersion;
                 }
-            }]);
-    });
+            }];
+    

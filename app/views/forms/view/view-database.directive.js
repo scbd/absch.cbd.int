@@ -1,4 +1,6 @@
-define(['app', "text!views/forms/view/view-database.directive.html", 	'views/directives/record-options'], function (app, template) {
+import app from 'app';
+import template from "text!./view-database.directive.html";
+import 'views/directives/record-options';
 
 app.directive("viewDatabase", [function () {
 	return {
@@ -30,4 +32,4 @@ app.directive("viewDatabase", [function () {
 	};
 }]);
 
-});
+

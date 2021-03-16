@@ -1,17 +1,13 @@
-define(['app',
-    "text!views/register/user-preferences/user-alerts.html",
-    'lodash',
-    'moment',
-    'ngDialog',
-    'views/search/search-directive',
-    'js/common',
-    'views/register/directives/register-top-menu',
-    'ngDialog',
-    'views/register/user-preferences/user-alerts',
-    'services/local-storage-service',
-    'components/scbd-angularjs-services/services/generic-service',
-    'services/role-service'
-], function (app, template, _, moment) {
+import app from 'app';
+import template from "text!./user-alerts.html";
+import _ from 'lodash';
+import moment from 'moment';
+import 'ngDialog';
+import 'views/search/search-directive';
+import 'services/main';
+import 'views/register/directives/register-top-menu';
+import 'views/register/user-preferences/user-alerts';
+import 'components/scbd-angularjs-services/main';
 
     app.directive("userAlerts", ['$rootScope', 'ngDialog', function ($rootScope, ngDialog) {
 
@@ -321,4 +317,4 @@ define(['app',
             ]
         };
     }]);
-});
+

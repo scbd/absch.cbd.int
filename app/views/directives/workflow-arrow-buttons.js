@@ -1,7 +1,10 @@
-define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'lodash',
-        'views/directives/workflow-history-directive', 'js/common', 'ngDialog',
-        'toastr', 'services/local-storage-service', 'services/app-config-service', 'services/articles-service',
-], function (app, template) {
+import app from 'app';
+import template from 'text!./workflow-arrow-buttons.html';
+import 'lodash';
+import 'views/directives/workflow-history-directive';
+import 'services/main';
+import 'ngDialog';
+import 'toastr';
     
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
@@ -873,7 +876,7 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'lodash',
 
                 function loadOfflineFormatDetails(){
                     if(realm.is('BCH')){
-                        commonjs.loadJsonFile('/app/app-data/bch/offline-formats.json')
+                        commonjs.loadJsonFile('app-data/bch/offline-formats.json')
                         .then(function(data){
                             $scope.offlineFormats = data;
                             $timeout(function(){
@@ -997,4 +1000,4 @@ define(['app', 'text!views/directives/workflow-arrow-buttons.html', 'lodash',
     	};
 
     }]);
-});
+

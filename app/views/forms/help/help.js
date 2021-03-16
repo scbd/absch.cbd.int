@@ -1,11 +1,12 @@
-define(['app'], function (app) {
+import app from 'app';
 
-	app.controller('FormHelpController', ['$scope', '$rootScope','$routeParams','$location', function ($scope, $rootScope, $routeParams, $location) {
+	export { default as template } from './help.html';
+export default ['$scope', '$rootScope','$routeParams','$location', function ($scope, $rootScope, $routeParams, $location) {
 
 
 		$scope.path=$location.path();
 
 
 
-		}]);
-});
+		}];
+

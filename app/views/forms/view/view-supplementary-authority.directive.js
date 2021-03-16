@@ -1,5 +1,6 @@
-define(['app', "text!views/forms/view/view-supplementary-authority.directive.html",
-"views/forms/view/view-authority.directive"], function (app, template) {
+import app from 'app';
+import template from "text!./view-supplementary-authority.directive.html";
+import "views/forms/view/view-authority.directive";
 
 	app.directive("viewSupplementaryAuthority", [function () {
 		return {
@@ -17,4 +18,3 @@ define(['app', "text!views/forms/view/view-supplementary-authority.directive.htm
 			link : function ($scope){ }
 		};
 	}]);
-});

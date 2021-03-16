@@ -1,6 +1,10 @@
-define(['app', './directives/edit-authority.directive'], function(app) {
+import app from 'app';
+import 'views/forms/edit/directives/edit-authority.directive';
+import 'views/forms/edit/edit';
 // ,'components/test'// , 'angular-vue', testVue
-    app.controller("editAuthorityController", ["$scope", "$controller", function($scope, $controller) {
+    export { default as template } from './edit-authority.html';
+
+  export default ["$scope", "$controller", function($scope, $controller) {
 
         $controller('editController', {
             $scope: $scope
@@ -10,5 +14,5 @@ define(['app', './directives/edit-authority.directive'], function(app) {
         //     components: { testvue: testVue }
         //   };
 
-    }]);
-});
+    }];
+

@@ -1,5 +1,6 @@
-﻿define(['text!./pagination.html', 'app'], function (template, app) {
-    'use strict';
+﻿import template from 'text!./pagination.html';
+import app from 'app';
+    ;
 
     app.directive('pagination', ['$location', function ($location) {
         return {
@@ -54,4 +55,4 @@
         }
     }])
 
-});
+

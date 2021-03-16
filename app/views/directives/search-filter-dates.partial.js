@@ -1,5 +1,8 @@
-define(['app', 'text!views/directives/search-filter-dates.partial.html', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
-'bootstrap-datepicker', 'services/solr'], function (app, template) {
+import app from 'app';
+import template from 'text!./search-filter-dates.partial.html';
+import 'components/scbd-angularjs-controls/main';
+import 'bootstrap-datepicker';
+import 'services/main';
 
 app.directive('searchFilterDates', function ($http) {
     return {
@@ -99,4 +102,4 @@ app.directive('searchFilterDates', function ($http) {
     }
 })
 
-});
+

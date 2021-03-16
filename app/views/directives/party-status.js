@@ -1,4 +1,6 @@
-define(['app', 'text!views/directives/party-status.html', 'js/common'], function (app, template) {
+import app from 'app';
+import template from 'text!./party-status.html';
+import 'services/main';
 app.directive('ngPartyStatus', function () {
         return {
             restrict: 'EAC',
@@ -47,5 +49,5 @@ app.directive('ngPartyStatus', function () {
             }]
         };
     });
-});
+
 

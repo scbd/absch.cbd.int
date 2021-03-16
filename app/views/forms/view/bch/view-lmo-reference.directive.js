@@ -1,5 +1,7 @@
-define(['app','lodash', "text!views/forms/view/bch/view-lmo-reference.directive.html", 
-'components/scbd-angularjs-services/services/storage'], function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from "text!./view-lmo-reference.directive.html";
+import 'components/scbd-angularjs-services/main';
 
 app.directive("viewLmoReference", [function () {
 	return {
@@ -55,4 +57,4 @@ app.directive("viewLmoReference", [function () {
 		 }] //controller
 	};
 }]);
-});
+

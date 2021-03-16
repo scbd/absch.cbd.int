@@ -1,9 +1,11 @@
-define(['app', 'js/common',
-    'views/forms/view/record-loader.directive',
-    'views/register/directives/register-top-menu', 'ngDialog'
-    , 'components/scbd-angularjs-services/services/generic-service'
-], function (app) {
-    app.controller('adminReportedRecordsCtrl', ['$scope', '$http', '$timeout', '$element', 'ngDialog', '$routeParams', 'IGenericService','realm', '$q',
+import app from 'app';
+import 'services/main';
+import 'views/forms/view/record-loader.directive';
+import 'views/register/directives/register-top-menu';
+import 'ngDialog';
+import 'components/scbd-angularjs-services/main';
+    export { default as template } from './reported-records.html';
+export default ['$scope', '$http', '$timeout', '$element', 'ngDialog', '$routeParams', 'IGenericService','realm', '$q',
         function ($scope, $http, $timeout, $element, ngDialog, $routeParams, IGenericService, realm, $q) {
             
             $scope.api = {};
@@ -105,7 +107,6 @@ define(['app', 'js/common',
                     $scope.reportRecords.splice($scope.reportRecords.indexOf(record), 1);;
                 }
             }
-        }]
-    );
+        }];
 
-});
+

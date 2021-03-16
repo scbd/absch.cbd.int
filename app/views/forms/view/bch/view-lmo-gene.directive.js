@@ -1,5 +1,9 @@
-define(['app','lodash', "text!views/forms/view/bch/view-lmo-gene.directive.html", 'css!/app/css/bch/lmo-construct.css', 
-'components/scbd-angularjs-services/services/storage', 'services/search-service', 'services/solr'], function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from "text!./view-lmo-gene.directive.html";
+import 'css!/app/css/bch/lmo-construct.css';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
 
 app.directive("viewLmoGene", [function () {
 	return {
@@ -51,4 +55,4 @@ app.directive("viewLmoGene", [function () {
 		 }] //controller
 	};
 }]);
-});
+

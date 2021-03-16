@@ -1,10 +1,12 @@
-define(['app', 'views/forms/edit/bch/directives/edit-organism.directive'], 
-function (app) {
+import app from 'app';
+import 'views/forms/edit/bch/directives/edit-organism.directive';
 
-	app.controller("editOrganismController", ["$scope", "$controller", function($scope, $controller) {
+	export { default as template } from './edit-organism.html';
+
+  export default ["$scope", "$controller", function($scope, $controller) {
 		$controller('editController', {
 			$scope: $scope
 		});
-   }]);
+   }];
 
-});
+

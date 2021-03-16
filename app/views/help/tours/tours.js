@@ -1,8 +1,9 @@
-define(['app'], function (app) {
+import app from 'app';
 
-	app.controller('ToursController', ['$scope', '$rootScope','$routeParams', function ($scope, $rootScope, $routeParams) {
+	export { default as template } from './tours.html';
+export default ['$scope', '$rootScope','$routeParams', function ($scope, $rootScope, $routeParams) {
 
         $scope.question = $routeParams.question;
 
-		}]);
-});
+		}];
+

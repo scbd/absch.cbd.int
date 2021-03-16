@@ -1,10 +1,13 @@
-define(['require', 'text!./country-map.html', 'app', 'lodash',  'libs/ammap3/ammap/ammap', 
-'shim!/app/views/countries/worldEUHigh[libs/ammap3/ammap/ammap].js?v=1',//using absolute url, spl case for this file as its too big to load
-'shim!libs/ammap3/ammap/themes/light[libs/ammap3/ammap/ammap]',
-'js/common', 'services/search-service', 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css',
-'components/scbd-angularjs-services/services/locale'], 
-function(require, template, app, _, ammap, worldEUHigh) {
-  'use strict';
+import template from 'text!./country-map.html';
+import app from 'app';
+import _ from 'lodash';
+import ammap from 'libs/ammap3/ammap/ammap';
+import worldEUHigh from 'views/countries/worldEUHigh';
+import 'shim!libs/ammap3/ammap/themes/light[libs/ammap3/ammap/ammap]';
+import 'services/main';
+import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
+import 'components/scbd-angularjs-services/main';
+  ;
 
 
   app.directive('countryMap', ['$timeout', function($timeout) {
@@ -155,7 +158,6 @@ function(require, template, app, _, ammap, worldEUHigh) {
 
         /////////////////////local function////////////////
         function loadCountries(){
-          var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
             return $q.when(commonjs.getCountries()).then(function(lcountries) {                  
 
@@ -559,4 +561,4 @@ function(require, template, app, _, ammap, worldEUHigh) {
       }],
     }; // return
   }]); //app.directive('searchFilterCountries
-}); // define
+ // define

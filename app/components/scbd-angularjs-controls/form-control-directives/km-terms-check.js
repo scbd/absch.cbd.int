@@ -1,5 +1,10 @@
-define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lodash',
-'components/scbd-angularjs-services/services/locale'], function(app, angular, $, template, Enumerable, _) { 'use strict';
+import app from 'app';
+import angular from 'angular';
+import $ from 'jquery';
+import template from 'text!./km-terms-check.html';
+import Enumerable from 'linqjs';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main'; ;
 
     //============================================================
     //
@@ -402,4 +407,4 @@ define(['app', 'angular', 'jquery', 'text!./km-terms-check.html', 'linqjs', 'lod
             }
         };
     }]);
-});
+

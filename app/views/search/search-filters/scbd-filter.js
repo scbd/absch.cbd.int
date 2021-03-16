@@ -1,5 +1,5 @@
-define(['app','text!views/search/search-filters/scbd-filter.html'
-], function(app, template) {
+import app from 'app';
+import template from 'text!./scbd-filter.html';
 
     app.directive('scbdFilter', function() {
         return {
@@ -16,4 +16,4 @@ define(['app','text!views/search/search-filters/scbd-filter.html'
             }//link
         };
     });
-});
+

@@ -1,6 +1,6 @@
-define(['lodash'], function(_) {
+import _ from 'lodash';
 
-    return  ['$scope', '$http', '$q', 'user',       'government',     'grantRoles',   'revokeRoles',
+    export default  ['$scope', '$http', '$q', 'user',       'government',     'grantRoles',   'revokeRoles',
     function ($scope,   $http,   $q,   targetUser,   targetGovernment, rolesToGrant,   rolesToRevoke) {
 
         var _ctrl = this;
@@ -213,4 +213,4 @@ define(['lodash'], function(_) {
         function res_data(res) { return res.data; }
 
 	}];
-});
+

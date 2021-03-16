@@ -1,7 +1,10 @@
-define(['app', 'views/kb/home', 'angular-vue', 'components/scbd-angularjs-services/services/locale', 
-'components/scbd-angularjs-services/services/authentication'], function (app, kbHome) {
+import app from 'app';
+import kbHome from 'views/kb/home';
+import 'angular-vue';
+import 'components/scbd-angularjs-services/main';
 
-	return ['$scope', '$rootScope','$routeParams', 'locale', 'apiToken', function ($scope, $rootScope, $routeParams, locale, apiToken) {
+	export { default as template } from './index.html';
+export default ['$scope', '$rootScope','$routeParams', 'locale', 'apiToken', function ($scope, $rootScope, $routeParams, locale, apiToken) {
 
         $scope.tokenReader = function(){ return apiToken.get()}
         // $scope.question = $routeParams.question;
@@ -10,4 +13,4 @@ define(['app', 'views/kb/home', 'angular-vue', 'components/scbd-angularjs-servic
 			i18n: new VueI18n({ locale: locale, fallbackLocale: 'en', })
 		};
 	}];
-});
+

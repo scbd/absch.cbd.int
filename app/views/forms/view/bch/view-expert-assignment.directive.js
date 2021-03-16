@@ -1,4 +1,6 @@
-define(['app', "text!views/forms/view/bch/view-expert-assignment.directive.html", 	'views/directives/record-options'], function (app, template) {
+import app from 'app';
+import template from "text!./view-expert-assignment.directive.html";
+import 'views/directives/record-options';
 
 app.directive("viewExpertAssignment", [function () {
 	return {
@@ -30,4 +32,4 @@ app.directive("viewExpertAssignment", [function () {
 	};
 }]);
 
-});
+

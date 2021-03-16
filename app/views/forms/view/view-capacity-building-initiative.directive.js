@@ -1,6 +1,7 @@
-define(['app', "text!views/forms/view/view-capacity-building-initiative.directive.html",
-'views/directives/record-options', './directives/view-record-reference.directive'
-], function (app, template) {
+import app from 'app';
+import template from "text!./view-capacity-building-initiative.directive.html";
+import 'views/directives/record-options';
+import 'views/forms/view/directives/view-record-reference.directive';
 
 app.directive("viewCapacityBuildingInitiative", [function () {
 	return {
@@ -44,4 +45,4 @@ app.directive("viewCapacityBuildingInitiative", [function () {
 	};
 }]);
 
-});
+

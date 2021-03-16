@@ -1,6 +1,6 @@
-define(['app',
-'text!views/forms/view/scbd/view-statement.directive.html',
-'views/directives/record-options'], function (app, template) {
+import app from 'app';
+import template from 'text!./view-statement.directive.html';
+import 'views/directives/record-options';
 
 app.directive('viewStatement', [function() {
 	return {
@@ -21,4 +21,4 @@ app.directive('viewStatement', [function() {
 		}]
 	}
 }]);
-});
+

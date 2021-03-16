@@ -1,10 +1,11 @@
-define(['app','lodash',
-  'components/scbd-angularjs-services/services/locale',
-  'services/articles-service',
-], function(app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
 
-  app.controller("commonIssues",
-  ["$scope", "locale", 'articlesService',
+  export { default as template } from './common-issues.html';
+
+  export default ["$scope", "locale", 'articlesService',
     function($scope,locale, articlesService) {
       
       $scope.articles = "loading...";
@@ -51,6 +52,6 @@ define(['app','lodash',
 
 
     }
-  ]);
+  ];
 
-});
+

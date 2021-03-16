@@ -1,13 +1,14 @@
-define(['app',
-  'views/countries/country-profile-directive',
-  'views/directives/block-region-directive',
-  'js/common','components/scbd-angularjs-services/services/locale','ng-breadcrumbs',
-  'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css',
-  'components/scbd-angularjs-services/services/storage'
-], function(app) {
+import app from 'app';
+import 'views/countries/country-profile-directive';
+import 'views/directives/block-region-directive';
+import 'services/main';
+import 'components/scbd-angularjs-services/main';
+import 'ng-breadcrumbs';
+import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
 
-  app.controller("countryProfileController",
-  ["$scope","$route", "$sce", "$timeout", "IStorage","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm', 'ngMeta','searchService',
+  export { default as template } from './country-profile.html';
+
+  export default ["$scope","$route", "$sce", "$timeout", "IStorage","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm', 'ngMeta','searchService',
     function($scope,$route, $sce, $timeout, IStorage, locale, commonjs, $q, breadcrumbs, $element, $compile, realm, ngMeta,searchService) {
       $scope.code      = $route.current.params.code;
       $scope.isBCH     = realm.is('BCH');
@@ -67,6 +68,5 @@ define(['app',
       }
 
     }
-  ]);
+  ];
 
-});

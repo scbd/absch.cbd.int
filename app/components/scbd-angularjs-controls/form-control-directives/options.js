@@ -1,4 +1,6 @@
-define(['app', 'text!./options.html','jquery','angular-localizer'], function(app, template,$) { 'use strict';
+import app from 'app';
+import template from 'text!./options.html';
+import $ from 'jquery'; ;
 app.directive('afcOptions', function() {
 				return {
 						restrict: 'AEC',
@@ -23,4 +25,3 @@ app.directive('afcOptions', function() {
 						},
 				};
 		});
-});

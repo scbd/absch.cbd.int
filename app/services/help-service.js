@@ -1,4 +1,7 @@
-define(['app', 'jquery', 'toastr', 'ngStorage'], function (app, $) { 'use strict';
+import app from 'app';
+import $ from 'jquery';
+import 'toastr';
+import 'ngStorage'; ;
 
 	app.factory('helpService',  ["$http","$location", "$rootScope","toastr", "$localStorage",
 	 function($http,$location, $rootScope, toastr, $localStorage) {
@@ -102,4 +105,4 @@ define(['app', 'jquery', 'toastr', 'ngStorage'], function (app, $) { 'use strict
 		}
 
     }]);
-});
+

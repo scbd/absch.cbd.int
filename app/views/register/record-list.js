@@ -1,13 +1,17 @@
-define(['app', 'lodash', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'js/common', 'js/filters',
-    'services/search-service', 'services/role-service','components/scbd-angularjs-controls/form-control-directives/all-controls',
-    'views/register/directives/register-top-menu', 'views/directives/block-region-directive',
-	'views/forms/edit/editFormUtility', 
-    'services/local-storage-service', 'ngDialog', 'services/app-config-service', 'services/solr'
-],
-    function (app, _) {
-        "use strict";
+import app from 'app';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
+import 'components/scbd-angularjs-controls/main';
+import 'views/register/directives/register-top-menu';
+import 'views/directives/block-region-directive';
+import 'views/forms/edit/editFormUtility';
+import 'ngDialog';
+        
 
-        app.controller("registerRecordList", ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
+        export { default as template } from './record-list.html';
+
+        export default ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
             'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", 
             "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm', 'ngMeta', 'solr',
             function ($timeout, commonjs, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
@@ -602,7 +606,7 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/services/main', 'co
 
                 function loadOfflineFormatDetails(){
                     if(realm.is('BCH')){
-                        commonjs.loadJsonFile('/app/app-data/bch/offline-formats.json')
+                        commonjs.loadJsonFile('app-data/bch/offline-formats.json')
                         .then(function(data){
                             $scope.offlineFormats = data;
                             $timeout(function(){
@@ -616,6 +620,4 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/services/main', 'co
                 loadRecords();
                 loadOfflineFormatDetails();
 
-            }]);
-
-    });
+            }];

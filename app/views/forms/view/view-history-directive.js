@@ -1,4 +1,6 @@
-define(['app', 'lodash', "text!views/forms/view/view-history-directive.html"], function(app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from "text!./view-history-directive.html";
 
     app.directive("viewHistory", [function() {
         return {
@@ -98,4 +100,4 @@ define(['app', 'lodash', "text!views/forms/view/view-history-directive.html"], f
             ]
         };
     }]);
-});
+

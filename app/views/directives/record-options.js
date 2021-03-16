@@ -1,5 +1,8 @@
-define(['app', 'text!views/directives/record-options.html', 'lodash', 'components/scbd-angularjs-services/services/locale',
-'services/app-config-service', 'js/common'], function (app, template, _) {
+import app from 'app';
+import template from 'text!./record-options.html';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
 
 app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$window', 'commonjs',
     function (appLocale, $route, $timeout, appConfigService, $filter, $window, commonjs) {
@@ -52,7 +55,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
 
                 $scope.print = function(){
                     $scope.printing = true;
-                    require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html'], function(printObj, header, footer){						
+                    require(['printThis', 'text!./print-footer.html'], function(printObj, header, footer){						
                         $element.parent().parent().parent().find('#schemaView').printThis({
                             debug:false,
                             printContainer:true,
@@ -91,4 +94,4 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
             }
         };
     }]);
-});
+

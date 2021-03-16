@@ -1,10 +1,16 @@
-define(['app', 'lodash', 'chart-js', 'components/scbd-angularjs-services/services/generic-service', 'js/common', 'moment',
-    'views/register/directives/register-top-menu', 'services/search-service', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'services/app-config-service',
-    'components/scbd-angularjs-services/services/storage', 'services/solr'
-    ], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'chart-js';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
+import 'moment';
+import 'views/register/directives/register-top-menu';
+import 'components/scbd-angularjs-controls/main';
 
-        "use strict";
-        app.controller("statsController", ["$scope", "$timeout", "IGenericService", "solr", "commonjs", "searchService", "$rootScope", 
+        
+        export { default as template } from './stats.html';
+
+        export default ["$scope", "$timeout", "IGenericService", "solr", "commonjs", "searchService", "$rootScope", 
         "$q", "$filter", "appConfigService", "IStorage",
             function ($scope, $timeout, IGenericService, solr, commonjs, searchService, $rootScope,
              $q, $filter, appConfigService, storage) {
@@ -257,5 +263,5 @@ define(['app', 'lodash', 'chart-js', 'components/scbd-angularjs-services/service
 
                     if($rootScope.user && $rootScope.user.government)
                         loadGovernmentStats($rootScope.user.government);
-            }]);
-    });
+            }];
+    

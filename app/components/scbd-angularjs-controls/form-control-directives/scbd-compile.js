@@ -1,8 +1,6 @@
-define(['app'], function(app) {
-  app.directive('scbdCompile', directive);
-  app.directive('compile', directive);
+import app from 'app';
 
-  var directive = function($compile) {
+  var directiveFn = function($compile) {
       // directive factory creates a link function
       return {
           restrict: 'A',
@@ -13,8 +11,7 @@ define(['app'], function(app) {
                       return $scope.$eval($attrs.compile);
                   },
                   function(value) {
-                      // when the 'compile' expression changes
-                      // assign it into the current DOM
+                      // when the 'compile' expression changes assign it into the current DOM
                       $element.html(value);
 
                       // compile the new DOM and link it to the current
@@ -27,4 +24,5 @@ define(['app'], function(app) {
           },
       };
   };
-});
+  app.directive('scbdCompile', directiveFn);
+  app.directive('compile', directiveFn);

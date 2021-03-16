@@ -1,4 +1,5 @@
-define(['app', './apiUrl'], function(app) {
+import app from 'app';
+import './apiUrl';
     var ACCOUNTS_URL = (function(){
 
         var domainRegex = /(?:.*\.)?([a-z]+\.[a-z]+)/;
@@ -417,12 +418,18 @@ define(['app', './apiUrl'], function(app) {
                     }
 
                     //Special case for url that are in ng-include need to burst the cache for version change.
-                    if(/^\/app/.test(config.url) && (config.url.indexOf('.html')>0 || config.url.indexOf('.json')>0)){                          
-                        var url = config.url;     
-                        if(url.indexOf('v=')<0){    
-                            url += (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + $window.scbdApp.version;
-                            if(!/^\/?(en|ar|es|fr|ru|zh)\//.test(url))
-                                url = '/'+ $window.scbdApp.lang + url;
+                    if ((/^\/app/).test(config.url) && (config.url.indexOf(".html") > 0 || config.url.indexOf(".json") > 0)) {
+                        var url = config.url;
+                        
+                        if(!window.hasHashUrl(url)){
+                          var parseUrl = config.url 
+                          if(!/\.js$/.test(parseUrl))
+                            parseUrl += ".js";
+                          url = window.getHashFileName(parseUrl);
+                        }
+                        console.log(url);
+                        if (url.indexOf("v=") < 0 && !window.hasHashUrl(url)) {
+                          url = window.addAppVersionToUrl(url);
                         }
                         config.url = url;
                     }
@@ -483,4 +490,4 @@ define(['app', './apiUrl'], function(app) {
         $httpProvider.interceptors.push('apiRebase');
     }]);
 
-});
+

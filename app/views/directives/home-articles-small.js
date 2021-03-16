@@ -1,6 +1,6 @@
-define(['app',
-'text!views/directives/home-articles-small.html', 'services/articles-service'],
-    function(app, template, _) {
+import app from 'app';
+import template from 'text!./home-articles-small.html';
+import _ from 'services/main';
         app.directive('homeArticlesSmall', function($http) {
             return {
                 restrict: 'EAC',
@@ -65,4 +65,4 @@ define(['app',
             };
 
         });
-    });
+    

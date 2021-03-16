@@ -1,5 +1,7 @@
-define(['app','lodash', "text!views/forms/view/directives/view-record-reference.directive.html", 
-'components/scbd-angularjs-services/services/main'], function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from "text!./view-record-reference.directive.html";
+import 'components/scbd-angularjs-services/main';
 
 app.directive("viewRecordReference", ["IStorage", '$timeout', function (storage, $timeout) {
 	return {
@@ -130,4 +132,4 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', function (storage,
 		 }
 	};
 }]);
-});
+

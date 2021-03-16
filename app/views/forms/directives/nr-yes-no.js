@@ -1,4 +1,6 @@
-﻿define(['app', 'text!./nr-yes-no.html', 'lodash'], function (app, nrYesNoTemplate, _) {
+﻿import app from 'app';
+import nrYesNoTemplate from 'text!./nr-yes-no.html';
+import _ from 'lodash';
 
     app.directive('nrYesNo', ['$timeout', function ($timeout) {
         return {
@@ -49,4 +51,4 @@
         }
     }])
 
-});
+

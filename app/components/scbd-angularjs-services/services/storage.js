@@ -1,5 +1,7 @@
-﻿define(['app', 'lodash','services/cache-service'], function(app, _) {
-    'use strict';
+﻿import app from 'app';
+import _ from 'lodash';
+import 'services/main';
+    ;
 
     app.factory("IStorage", ["$http", "$q", "authentication", "realm", 'cacheService', function($http, $q, authentication, defaultRealm, cacheService) {
         //		return new function()
@@ -643,4 +645,4 @@
         //		}();
     }]);
 
-});
+

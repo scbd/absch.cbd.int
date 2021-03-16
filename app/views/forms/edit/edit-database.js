@@ -1,6 +1,11 @@
-define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-database.directive'], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import '.views/forms/edit/view/view-database.directive';
 
-  app.controller("editDatabase", ["$scope", "$http", "$filter", "$controller", "$location", function ($scope, $http, $filter, $controller,$location) {
+  export { default as template } from './edit-database.html';
+
+  export default ["$scope", "$http", "$filter", "$controller", "$location", function ($scope, $http, $filter, $controller,$location) {
     $controller('editController', {$scope: $scope});
     $scope.formFields = {};
     //==================================
@@ -34,5 +39,5 @@ define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-database.directi
         $scope.formFields.websites = _.map(document.websites, 'url');
       }
     });
-  }]);
-});
+  }];
+

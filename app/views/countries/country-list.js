@@ -1,13 +1,13 @@
-﻿define(['app', 'lodash',
-    'js/common',
-    'components/scbd-angularjs-services/filters/scbd-filters',
-    'services/search-service',
-    'views/directives/block-region-directive',
-    'components/scbd-angularjs-services/services/locale',
-    'components/scbd-angularjs-controls/form-control-directives/km-select'
-], function (app, _) {
+﻿import app from 'app';
+import _ from 'lodash';
+import 'services/main';
+import 'components/scbd-angularjs-services/main';
+import 'views/directives/block-region-directive';
+import 'components/scbd-angularjs-controls/main';
 
-    app.controller("CountryListController", ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$sce', 
+    export { default as template } from './country-list.html';
+
+  export default ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$sce', 
     '$routeParams', '$compile', '$timeout', 'locale', 'realm', 'ngMeta',
         function ($http, $scope, $element, $location, commonjs, $q, searchService, $sce, $routeParams, $compile, 
             $timeout, locale, realm, ngMeta) {
@@ -272,6 +272,6 @@
                 });  
             }
         }
-    ]);
+    ];
 
-});
+

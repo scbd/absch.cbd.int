@@ -1,7 +1,6 @@
-define(['text!./party-status.html',
-  'app',
-], function(template, app, _) {
-  'use strict';
+import template from 'text!./party-status.html';
+import app from 'app';
+  ;
 
   app.directive('partyStatus', function() {
     return {
@@ -17,4 +16,4 @@ define(['text!./party-status.html',
         } //link
     };
   });
-});
+

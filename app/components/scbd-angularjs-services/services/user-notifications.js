@@ -1,5 +1,5 @@
-define(['app'], function(app) {
-    'use strict';
+import app from 'app';
+    ;
 
     app.factory("IUserNotifications", ["$http", function($http) {
 
@@ -89,4 +89,4 @@ define(['app'], function(app) {
         };
     }]);
 
-});
+

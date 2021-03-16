@@ -1,4 +1,6 @@
-define(['app', "text!views/forms/view/bch/view-biosafety-expert.directive.html", 	'views/directives/record-options'], function (app, template) {
+import app from 'app';
+import template from "text!./view-biosafety-expert.directive.html";
+import 'views/directives/record-options';
 
 	app.directive("viewBiosafetyExpert", [function () {
 	return {
@@ -27,4 +29,4 @@ define(['app', "text!views/forms/view/bch/view-biosafety-expert.directive.html",
 	};
 }]);
 
-});
+

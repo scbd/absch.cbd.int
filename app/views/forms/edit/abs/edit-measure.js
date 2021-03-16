@@ -1,8 +1,15 @@
-define(['app', 'lodash', 'angular', 'views/forms/edit/edit', 'js/common', 'views/forms/edit/document-selector',
-    'views/forms/view/abs/view-measure.directive', 'views/forms/edit/abs/edit-measure-matrix-directive'
-], function(app, _, angular) {
+import app from 'app';
+import _ from 'lodash';
+import angular from 'angular';
+import 'views/forms/edit/edit';
+import 'services/main';
+import 'views/forms/edit/document-selector';
+import 'views/forms/view/abs/view-measure.directive';
+import 'views/forms/edit/abs/edit-measure-matrix-directive';
 
-    app.controller("editMeasure", ["$scope", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs',
+    export { default as template } from './edit-measure.html';
+
+  export default ["$scope", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs',
         function($scope, $http, $filter, $q, Enumerable, $controller, $location, commonjs) {
             $controller('editController', {
                 $scope: $scope
@@ -250,7 +257,7 @@ define(['app', 'lodash', 'angular', 'views/forms/edit/edit', 'js/common', 'views
             
 
         }
-    ]);
+    ];
  
 
-});
+

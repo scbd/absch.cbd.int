@@ -1,4 +1,8 @@
-define(['app', 'text!./tree-selector.html', 'lodash', 'components/scbd-angularjs-services/filters/scbd-filters', '../intermediate'], function(app, templateHtml, _) {
+import app from 'app';
+import templateHtml from 'text!./tree-selector.html';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import '../intermediate';
 
     //==============================================
     //
@@ -187,4 +191,4 @@ define(['app', 'text!./tree-selector.html', 'lodash', 'components/scbd-angularjs
             }
         };
     }]);
-});
+

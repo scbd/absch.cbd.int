@@ -1,10 +1,10 @@
- define(['app', 'text!views/countries/country-profile-directive.html', 'lodash', 
-   'views/measure-matrix/measure-matrix-countries-directive',
-   'js/common', 'services/solr',
-   'views/search/search-results/result-grouped-national-record',
-   'services/search-service', 'services/app-config-service',
-    'views/directives/export-directive'
- ], function(app, template, _) {
+ import app from 'app';
+import template from 'text!./country-profile-directive.html';
+import _ from 'lodash';
+import 'views/measure-matrix/measure-matrix-countries-directive';
+import 'views/search/search-results/result-grouped-national-record';
+import 'services/main';
+import 'views/directives/export-directive';
 
     app.directive('countryProfile', function() {
         return {
@@ -135,4 +135,4 @@
 
         };
     });
-});
+

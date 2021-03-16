@@ -1,9 +1,9 @@
 
-define(['app', 'lodash', "text!views/forms/edit/warning-message-cna.html", 'js/common',
-'views/search/search-results/result-default', 
-'services/search-service',
-'services/app-config-service', 'services/solr'
-], function(app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from "text!./warning-message-cna.html";
+import 'services/main';
+import 'views/search/search-results/result-default';
 
     app.directive('warningMessageCna', function() {
         return {
@@ -76,6 +76,6 @@ define(['app', 'lodash', "text!views/forms/edit/warning-message-cna.html", 'js/c
             }],
         };
     });
-});
+
 
 

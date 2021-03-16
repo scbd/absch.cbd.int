@@ -1,6 +1,11 @@
-define(['app','lodash', "text!views/forms/view/view-authority.directive.html",
-'views/directives/record-options','views/directives/party-status', 'services/app-config-service',
-'views/forms/view/directives/view-reference-records.directive', 'views/forms/directives/view-terms-hierarchy'], function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from "text!./view-authority.directive.html";
+import 'views/directives/record-options';
+import 'views/directives/party-status';
+import 'services/main';
+import 'views/forms/view/directives/view-reference-records.directive';
+import 'views/forms/directives/view-terms-hierarchy';
 
 	app.directive("viewAuthority", ["IStorage", "realm", function (storage, realm) {
 		return {
@@ -36,4 +41,4 @@ define(['app','lodash', "text!views/forms/view/view-authority.directive.html",
 			}
 		};
 	}]);
-});
+

@@ -1,6 +1,10 @@
-define(['app','lodash', 'css!/app/css/registry.css','services/search-service'], function(app, _) { 'use strict';
+import app from 'app';
+import _ from 'lodash';
+import 'css!/app/css/registry.css';
+import 'services/main'; ;
 
-return ['$scope','searchService','$element', '$rootScope',
+export { default as template } from './view-gene-registry.html';
+export default ['$scope','searchService','$element', '$rootScope',
 function($scope,searchService,$element, $rootScope) {  
 		$scope.isLoading = false;
 		$scope.isError = false;
@@ -56,4 +60,4 @@ function($scope,searchService,$element, $rootScope) {
 		loadRecords();
 }];
 
-});
+

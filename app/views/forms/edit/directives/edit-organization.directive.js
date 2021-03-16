@@ -1,7 +1,11 @@
-define(['app',"text!./edit-organization.directive.html", 'lodash', 'views/directives/workflow-arrow-buttons', 
-"views/forms/view/view-organization.directive", 'services/role-service',
-'components/scbd-angularjs-services/services/locale', 'views/forms/edit/editFormUtility'],
-function (app, template, _) {
+import app from 'app';
+import template from "text!./edit-organization.directive.html";
+import _ from 'lodash';
+import 'views/directives/workflow-arrow-buttons';
+import "views/forms/view/view-organization.directive";
+import 'services/main';
+import 'components/scbd-angularjs-services/main';
+import 'views/forms/edit/editFormUtility';
 
 app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'editFormUtility', 'locale', 'thesaurusService', 'realm',
                 function($controller, $filter, $q, guid, editFormUtility, locale, thesaurusService, realm) {
@@ -83,4 +87,4 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
 	};
 }]);
 
-});
+

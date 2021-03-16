@@ -1,4 +1,6 @@
-define(['app', 'text!views/directives/nav/portal-branding.html', 'lodash', ], function(app,template,  _) {
+import app from 'app';
+import template from 'text!./portal-branding.html';
+import _ from 'lodash';
     app.directive('portalBranding', function() {
         return {
             restrict: 'EAC',
@@ -41,4 +43,4 @@ define(['app', 'text!views/directives/nav/portal-branding.html', 'lodash', ], fu
         };
 
     });
-});
+

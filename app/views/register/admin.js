@@ -1,8 +1,10 @@
-define(['app', 
- 'services/role-service', 'services/local-storage-service',
- 'views/register/directives/register-top-menu'], function(app) {
- "use strict";
-    app.controller("AdminController", ["$rootScope", "$scope", "roleService", 'localStorageService',
+import app from 'app';
+import 'services/main';
+import 'views/register/directives/register-top-menu';
+ 
+    export { default as template } from './admin.html';
+
+  export default ["$rootScope", "$scope", "roleService", 'localStorageService',
         function($rootScope, $scope, roleService, localStorageService) {
 
             if ($rootScope.user.isAuthenticated) {
@@ -23,5 +25,5 @@ define(['app',
                 }
             }
         }
-    ]);
-});
+    ];
+

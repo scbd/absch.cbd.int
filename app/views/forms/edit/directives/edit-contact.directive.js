@@ -1,7 +1,11 @@
-﻿define(['app',"text!./edit-contact.directive.html", 'lodash', 'views/directives/workflow-arrow-buttons', 
-"views/forms/view/view-contact.directive", 'services/role-service',
-'components/scbd-angularjs-services/services/locale', 'views/forms/edit/editFormUtility'],
-function (app, template, _) {
+﻿import app from 'app';
+import template from "text!./edit-contact.directive.html";
+import _ from 'lodash';
+import 'views/directives/workflow-arrow-buttons';
+import "views/forms/view/view-contact.directive";
+import 'services/main';
+import 'components/scbd-angularjs-services/main';
+import 'views/forms/edit/editFormUtility';
 
 app.directive("editContact", [ "$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'thesaurusService', 'editFormUtility', 'locale', '$controller',
 function($http, $filter, $rootScope, $location, $q, storage, roleService, thesaurusService, editFormUtility, locale, $controller){
@@ -154,4 +158,4 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, thesau
 	};
 }]);
 
-});
+

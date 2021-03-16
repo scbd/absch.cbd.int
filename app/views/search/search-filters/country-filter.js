@@ -1,5 +1,7 @@
-define(['app', 'text!views/search/search-filters/country-filter.html','lodash', 'js/common',
-], function(app, template, _) {
+import app from 'app';
+import template from 'text!./country-filter.html';
+import _ from 'lodash';
+import 'services/main';
 
     app.directive('countryFilter', ['locale', function(locale) {
         return {
@@ -63,4 +65,4 @@ define(['app', 'text!views/search/search-filters/country-filter.html','lodash', 
             }//link
         };
     }]);
-});
+

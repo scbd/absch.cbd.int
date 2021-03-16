@@ -1,9 +1,7 @@
-define(['app',
- 'text!./account.html',
-  'css!./account',
-  'components/scbd-angularjs-services/services/authentication',
-],
-function(app, template) {
+import app from 'app';
+import template from 'text!./account.html';
+import 'css!components/scbd-branding/directives/header/account';
+import 'components/scbd-angularjs-services/main';
      app.directive('accountHeader', function() { // parent directive header
 
          return { restrict: 'E' ,
@@ -66,4 +64,4 @@ function(app, template) {
                   }],//controller
         };//return
      });//directive
-});
+

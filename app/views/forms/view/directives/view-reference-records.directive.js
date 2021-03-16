@@ -1,5 +1,8 @@
-define(['app','lodash', "text!views/forms/view/directives/view-reference-records.directive.html", 
-'components/scbd-angularjs-services/services/storage', 'services/search-service', 'services/solr'], function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from "text!./view-reference-records.directive.html";
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
 
 app.directive("viewReferencedRecords", [function () {
 	return {
@@ -77,4 +80,4 @@ app.directive("viewReferencedRecords", [function () {
 		 }] //controller
 	};
 }]);
-});
+

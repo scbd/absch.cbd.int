@@ -1,4 +1,6 @@
-define(['app','text!views/search/search-filters/keyword-filter.html', 'lodash'],  function(app, template, _) {
+import app from 'app';
+import template from 'text!./keyword-filter.html';
+import _ from 'lodash';
 
     app.directive('keywordFilter', function() {
         return {
@@ -24,4 +26,4 @@ define(['app','text!views/search/search-filters/keyword-filter.html', 'lodash'],
             }
         };
     });
-});
+

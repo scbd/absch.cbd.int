@@ -1,7 +1,13 @@
-define(['text!./analyzer.html', 'app', 'lodash', 'require', 'jquery', './analyzer-section', 'components/scbd-angularjs-services/filters/scbd-filters', 
-'../../filters/cases', 'components/scbd-angularjs-services/services/locale', 'views/directives/view-reference-document', 'components/scbd-angularjs-services/services/authentication',
-'views/report-analyzer/reportAnalyzerService'],
-function(templateHtml, app, _, require, $) { 'use strict';
+import templateHtml from 'text!./analyzer.html';
+import app from 'app';
+import _ from 'lodash';
+import require from 'require';
+import $ from 'jquery';
+import './analyzer-section';
+import '../../filters/cases';
+import 'components/scbd-angularjs-services/main';
+import 'views/directives/view-reference-document';
+import 'views/report-analyzer/reportAnalyzerService'; ;
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
@@ -173,7 +179,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
 
                     var deferred = $q.defer();
                     
-                    require(['json!'+baseUrl+$scope.activeReport.compare[0].url], function(res){
+                    require([baseUrl+$scope.activeReport.compare[0].url], function(res){
                         deferred.resolve(res);
                     });
 
@@ -183,7 +189,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                 function loadJsonFile(path){
                     var deferred = $q.defer();
                     
-                    require(['json!'+path], function(res){
+                    require([path], function(res){
                         deferred.resolve(res);
                     });
 
@@ -199,7 +205,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
                     
-                    require(['json!'+baseUrl+$scope.activeReport.questionsUrl], function(res){
+                    require([$scope.activeReport.questionsUrl], function(res){
 
                         res = reportAnalyzerService.flattenQuestions(res);
                         var selection = _($scope.selectedQuestions).reduce(mapReduce(), {});
@@ -292,7 +298,7 @@ function(templateHtml, app, _, require, $) { 'use strict';
                     }
                     else{
                         
-                        require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html'],
+                        require(['printThis', 'text!./print-footer.html'],
                          function(printObj, header, footer){						
                             var printObject = $element.parent().parent().parent().find('#secNrAnalyzer');
                             if(sectionToPrint !='#secNrAnalyzer' && sectionToPrint)
@@ -556,4 +562,4 @@ function(templateHtml, app, _, require, $) { 'use strict';
             }]
         };
     }]);
-});
+

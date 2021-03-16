@@ -1,12 +1,16 @@
-define(['app', 'lodash', 'views/forms/edit/edit', './directives/edit-biosafety-expert.directive'], 
-function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import 'views/forms/edit/bch/directives/edit-biosafety-expert.directive';
 
-	app.controller("editBiosafetyExpertController", ["$scope", "$controller", function($scope, $controller) {
+	export { default as template } from './edit-biosafety-expert.html';
+
+  export default ["$scope", "$controller", function($scope, $controller) {
 	   	
 		$controller('editController', {
 			$scope: $scope
 		});
 
-   }]);
+   }];
 
-});
+

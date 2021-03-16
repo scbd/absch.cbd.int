@@ -1,8 +1,12 @@
-define(['app', 'lodash','components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
-        'views/measure-matrix/measure-matrix-elements-derective',
-        'views/forms/view/record-loader.directive'], function(app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'components/scbd-angularjs-controls/main';
+import 'views/measure-matrix/measure-matrix-elements-directive';
+import 'views/forms/view/record-loader.directive';
 
-    app.controller('countryMatrixController', ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$element',
+    export { default as template } from './measure-matrix-countries.html';
+export default ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$element',
         function($scope, $http, realm, $q, $filter, $routeParams, $element) {
 
             $scope.options  = {
@@ -218,9 +222,9 @@ define(['app', 'lodash','components/scbd-angularjs-services/services/main', 'com
             }
 
         }
-    ]);
+    ];
 
-});
+
 
 // var linkedMeasuresQuery = _.map(data.linkedMeasures, function(linked) {
 //     return $http.get('/api/v2013/documents/' + linked.identifier,{cache:true});

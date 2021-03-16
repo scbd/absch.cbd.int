@@ -1,5 +1,7 @@
-define(['app', 'text!./km-document-validation.html','jquery',
-'json!app-data/validation-errors.json'], function(app, template,$, messages) { 'use strict';
+import app from 'app';
+import template from 'text!./km-document-validation.html';
+import $ from 'jquery';
+import messages from 'app-data/validation-errors.json'; ;
 
     //============================================================
     //
@@ -157,4 +159,4 @@ define(['app', 'text!./km-document-validation.html','jquery',
             }]
         };
     }]);
-	});
+	

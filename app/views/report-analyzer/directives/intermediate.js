@@ -1,4 +1,4 @@
-define(['app'], function(app) {
+import app from 'app';
 
     app.directive('indeterminate', [function() {
 
@@ -17,4 +17,4 @@ define(['app'], function(app) {
             }
         };
     }]);
-});
+

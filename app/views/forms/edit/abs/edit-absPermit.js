@@ -1,7 +1,12 @@
-define(['app','lodash', 'views/forms/edit/edit', 'js/common',
-        'views/forms/view/abs/view-abs-permit.directive'], function (app,_) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import 'services/main';
+import 'views/forms/view/abs/view-abs-permit.directive';
 
-  app.controller("editAbsPermit", ["$scope", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable",
+  export { default as template } from './edit-absPermit.html';
+
+  export default ["$scope", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable",
                                     "editFormUtility", "$controller","IStorage","$location", "commonjs",
    function ($scope, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage, $location, commonjs) {
     $controller('editController', {$scope: $scope});
@@ -190,5 +195,5 @@ define(['app','lodash', 'views/forms/edit/edit', 'js/common',
     };
 
     $scope.setDocument();
-  }]);
-});
+  }];
+

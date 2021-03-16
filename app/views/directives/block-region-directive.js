@@ -1,4 +1,4 @@
-define(['app'], function(app) {
+import app from 'app';
 
     app.directive('blockRegion', ['$compile', function($compile) {
         return {
@@ -55,4 +55,4 @@ define(['app'], function(app) {
         }
     }]);
 
-});
+

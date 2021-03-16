@@ -1,7 +1,10 @@
-define(['app', 'text!views/search/search-results/list-view.html','lodash',
-'views/search/search-results/result-grouped-national-record','services/search-service','views/directives/party-status',
-'views/search/search-results/result-default'
-], function(app, template, _) {
+import app from 'app';
+import template from 'text!./list-view.html';
+import _ from 'lodash';
+import 'views/search/search-results/result-grouped-national-record';
+import 'services/main';
+import 'views/directives/party-status';
+import 'views/search/search-results/result-default';
 
     app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$location', function(searchService, realm, $timeout, $location) {
         return {
@@ -109,4 +112,4 @@ define(['app', 'text!views/search/search-results/list-view.html','lodash',
             },
         };
     }]);
-});
+

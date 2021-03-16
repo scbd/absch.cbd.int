@@ -1,8 +1,12 @@
-define(['app', 'lodash', 'views/forms/edit/edit','views/forms/edit/edit-resource-schema-base-directive',
-        '../view/view-resource.directive'
-       ], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import 'views/forms/edit/edit-resource-schema-base-directive';
+import '.views/forms/edit/view/view-resource.directive';
 
-  app.controller("editCommunityProtocol", ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
+  export { default as template } from './edit-communityProtocol.html';
+
+  export default ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
                 function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller, storage, $location) {
 
 
@@ -55,5 +59,5 @@ define(['app', 'lodash', 'views/forms/edit/edit','views/forms/edit/edit-resource
 
 
 
-  }]);
-});
+  }];
+

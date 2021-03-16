@@ -1,5 +1,5 @@
-define(['app'], function(app) {
-    'use strict';
+import app from 'app';
+    ;
 
     app.factory("IWorkflows", ["$http", function($http) {
 
@@ -85,4 +85,4 @@ define(['app'], function(app) {
         };
     }]);
 
-});
+

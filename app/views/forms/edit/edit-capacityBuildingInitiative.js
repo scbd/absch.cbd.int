@@ -1,7 +1,13 @@
-define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-capacity-building-initiative.directive',
-'./organization-selector','services/thesaurus-service'], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import '.views/forms/edit/view/view-capacity-building-initiative.directive';
+import 'views/forms/edit/organization-selector';
+import 'services/main';
 
-    app.controller("editCapacityBuildingInitiative", ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "realm","thesaurusService", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, realm, thesaurusService) {
+    export { default as template } from './edit-capacityBuildingInitiative.html';
+
+  export default ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller","$location", "realm","thesaurusService", function ($scope, $http, $filter, $q, $routeParams, $controller,$location, realm, thesaurusService) {
 
         $controller('editController', {$scope: $scope});
         $scope.isABS = realm.is('ABS');
@@ -188,5 +194,5 @@ define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-capacity-buildin
     if($scope.realm.is('ABS'))
         $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
 
-  }]);
-});
+  }];
+

@@ -1,4 +1,8 @@
-define(['app', 'angular', 'jquery', 'lodash', 'text!./km-value-bool.html'], function(app, ng, $, _, template) { 'use strict';
+import app from 'app';
+import ng from 'angular';
+import $ from 'jquery';
+import _ from 'lodash';
+import template from 'text!./km-value-bool.html'; ;
 
 	app.directive('kmValueBool', [function ()
 	{
@@ -15,4 +19,4 @@ define(['app', 'angular', 'jquery', 'lodash', 'text!./km-value-bool.html'], func
 			}
 		};
 	}]);
-});
+

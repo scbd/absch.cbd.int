@@ -1,5 +1,7 @@
-define(['app', 'lodash', 'linqjs'], function(app, _, Enumerable) {
-    'use strict';
+import app from 'app';
+import _ from 'lodash';
+import Enumerable from 'linqjs';
+    ;
 
     app.factory('Thesaurus', [function() {
         return {
@@ -106,4 +108,4 @@ define(['app', 'lodash', 'linqjs'], function(app, _, Enumerable) {
                 envRealms : envRealms
             }
     }])
-});
+

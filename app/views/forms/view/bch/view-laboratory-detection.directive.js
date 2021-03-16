@@ -1,5 +1,8 @@
-define(['app', "text!views/forms/view/bch/view-laboratory-detection.directive.html", 	'views/directives/record-options',
-'views/forms/view/directives/view-record-reference.directive', './view-lmo.directive'], function (app, template) {
+import app from 'app';
+import template from "text!./view-laboratory-detection.directive.html";
+import 'views/directives/record-options';
+import 'views/forms/view/directives/view-record-reference.directive';
+import 'views/forms/view/bch/view-lmo.directive';
     
     app.directive("viewLaboratoryDetection", [function () {
         return {
@@ -31,5 +34,5 @@ define(['app', "text!views/forms/view/bch/view-laboratory-detection.directive.ht
         };
     }]);
     
-    });
+    
     

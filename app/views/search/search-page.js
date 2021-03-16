@@ -1,8 +1,12 @@
-define(['app', 'lodash', 'components/scbd-angularjs-services/services/locale', 'views/search/search-directive',
-'css!/app/css/search.css'], function(app, exportExcel) {
-    "use strict";
-    app.controller("SearchPageController", ["$scope", '$sce', 'ngMeta', 'realm', 'locale', function($scope, $sce, ngMeta, realm, locale) {
-
+import app from 'app';
+import exportExcel from 'lodash';
+import 'components/scbd-angularjs-services/main';
+import 'views/search/search-directive';
+import 'css!/app/css/search.css';
+    
+    export { default as template } from './search-page.html';
+export default ["$scope", '$sce', 'ngMeta', 'realm', 'locale',
+     function($scope, $sce, ngMeta, realm, locale) {
             
             $('[role="tooltip"]').hide();
             
@@ -11,5 +15,5 @@ define(['app', 'lodash', 'components/scbd-angularjs-services/services/locale', '
             ngMeta.setTitle('Search')
             ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
         }
-    ]);
-});
+    ];
+

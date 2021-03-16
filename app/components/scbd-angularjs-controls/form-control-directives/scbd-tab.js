@@ -1,4 +1,4 @@
-define(['app'], function(app) { 'use strict';
+import app from 'app'; ;
 
       //============================================================
       //
@@ -41,4 +41,4 @@ define(['app'], function(app) { 'use strict';
 
       app.directive('kmTab', ["$timeout", tabDirective ]);
       app.directive('scbdTab', ["$timeout", tabDirective ]);
-});
+

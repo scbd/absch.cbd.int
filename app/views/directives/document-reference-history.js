@@ -1,6 +1,7 @@
-define(['app', 'text!views/directives/document-reference-history.html',,'services/search-service',
-'views/search/search-results/result-default', 'services/solr'
-], function (app, template) {
+import app from 'app';
+import template from 'text!./document-reference-history.html';
+import 'views/search/search-results/result-default';
+import 'services/main';
     app.directive('documentReferenceHistory', function ($http) {
         return {
             restrict: 'EAC',
@@ -55,4 +56,4 @@ define(['app', 'text!views/directives/document-reference-history.html',,'service
         };
 
     });
-});
+

@@ -1,10 +1,7 @@
-define(['app',
- 'text!./locale.html',
-  'css!./locale',
-  'components/scbd-angularjs-services/services/locale',
-  'components/scbd-angularjs-services/services/authentication',
-],
-function(app, template, $) {
+import app from 'app';
+import template from 'text!./locale.html';
+import $ from 'css!components/scbd-branding/directives/header/locale';
+import 'components/scbd-angularjs-services/main';
      app.directive('localeHeader', function() {
          return { restrict: 'ECA' ,
                   priority: 0,// child of header
@@ -32,4 +29,4 @@ function(app, template, $) {
                   }],//controller
         };//return
      });//directive
-});
+

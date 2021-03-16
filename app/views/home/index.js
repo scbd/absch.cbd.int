@@ -1,10 +1,12 @@
-define(['app','moment','js/common',
-    'views/directives/home-country-dashboard-directive',
-    'views/directives/map/home-map',
-    'views/directives/home-articles-small',
-    'angular-cookies'
-], function (app, moment) {
-    app.controller('IndexController', ['$scope',
+import app from 'app';
+import moment from 'moment';
+import 'services/main';
+import 'views/directives/home-country-dashboard-directive';
+import 'views/directives/map/home-map';
+import 'views/directives/home-articles-small';
+import 'angular-cookies';
+    export { default as template } from './index.html';
+export default ['$scope',
     function ($scope) {
 
         $scope.locale = 'en';
@@ -46,5 +48,5 @@ define(['app','moment','js/common',
                 //     });
                 // });
         // });
-    }]);
-});
+    }];
+

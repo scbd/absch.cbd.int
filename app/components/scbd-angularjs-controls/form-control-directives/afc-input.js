@@ -1,4 +1,6 @@
-define(['app', 'text!./string.html','jquery'], function(app, template,$) { 'use strict';
+import app from 'app';
+import template from 'text!./string.html';
+import $ from 'jquery'; ;
 app.directive('afcInput', function() {
 		return {
 				restrict: 'EAC',
@@ -20,4 +22,4 @@ app.directive('afcInput', function() {
 				},
 		};
 });
-});
+

@@ -1,4 +1,8 @@
-define(['app','text!./km-inputtext-ac.html','angular', 'angucomplete-alt','css!./km-control.css'], function(app,template,angular) {
+import app from 'app';
+import template from 'text!./km-inputtext-ac.html';
+import angular from 'angular';
+import 'angucomplete-alt';
+import 'css!components/scbd-angularjs-controls/form-control-directives/km-control.css';
   //============================================================
   //
   //
@@ -120,4 +124,3 @@ define(['app','text!./km-inputtext-ac.html','angular', 'angucomplete-alt','css!.
       }      
     };
   }]);
-});

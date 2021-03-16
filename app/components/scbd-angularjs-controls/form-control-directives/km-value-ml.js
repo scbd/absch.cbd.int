@@ -1,4 +1,8 @@
-define(['app', 'angular', 'jquery', 'lodash', 'text!./km-value-ml.html'], function(app, ng, $, _, template) { 'use strict';
+import app from 'app';
+import ng from 'angular';
+import $ from 'jquery';
+import _ from 'lodash';
+import template from 'text!./km-value-ml.html'; ;
 
 	app.directive('kmValueMl', [function ()
 	{
@@ -47,4 +51,4 @@ define(['app', 'angular', 'jquery', 'lodash', 'text!./km-value-ml.html'], functi
 		}
 
 	})
-});
+
