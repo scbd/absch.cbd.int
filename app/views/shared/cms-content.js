@@ -6,7 +6,8 @@ import html403 from 'app';
       return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     }
     
-    export default ["$rootScope", "$route", '$http', function($rootScope, $route, $http) {
+    export { default as template } from './cms-content.html';
+export default ["$rootScope", "$route", '$http', function($rootScope, $route, $http) {
         
         var url =  $route.current.$$route.target;
         var params = {};

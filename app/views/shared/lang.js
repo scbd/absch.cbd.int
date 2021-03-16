@@ -2,7 +2,8 @@ import app from 'app';
 import moment from 'angular-cookies';
 import 'components/scbd-angularjs-services/main';
 import 'services/main';
-    export default ["$scope", "$location", "locale","$timeout", "$window", "$routeParams", "$cookies", 'localStorageService',
+    export { default as template } from './lang.html';
+export default ["$scope", "$location", "locale","$timeout", "$window", "$routeParams", "$cookies", 'localStorageService',
 		function ($scope, $location, locale, $timeout, $window, $routeParams, $cookies, localStorageService){
 			    var lang = 'en';
 				if($routeParams.langCode)

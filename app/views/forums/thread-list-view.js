@@ -3,7 +3,8 @@ import 'cbd-forums';
 import 'services/main';
 
 
-    export default ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route","commonjs","$rootScope", "roleService",
+    export { default as template } from './thread-list-view.html';
+export default ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route","commonjs","$rootScope", "roleService",
         function($scope, $http, $q, $filter, $timeout, $location, $route, commonjs, $rootScope, roleService) {
 
             //$scope.forumId = 17384;

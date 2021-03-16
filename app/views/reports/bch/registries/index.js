@@ -3,7 +3,8 @@ import _ from 'lodash';
 import 'css!/app/css/registry.css';
 import 'services/main'; ;
 
-	export default ['$scope', 'searchService', 'toastr', '$log', 'solr',
+	export { default as template } from './index.html';
+export default ['$scope', 'searchService', 'toastr', '$log', 'solr',
 			function ($scope, searchService, toastr, $log, solr) {
 				var schemas = ["organism", "modifiedOrganism", "dnaSequence"];
 				

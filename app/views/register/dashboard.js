@@ -9,7 +9,8 @@ import 'views/register/directives/top-records';
 import 'views/register/directives/top-requests';
 import 'ngDialog';
     
-    export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
+    export { default as template } from './dashboard.html';
+export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
                     "$routeParams", '$location', "$filter", "ngDialog", "$timeout", 'toastr',
                     'IWorkflows', 'commonjs',
         function($rootScope, $scope, storage, roleService, articlesService, realm, $q, $routeParams, 

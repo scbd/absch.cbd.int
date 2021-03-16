@@ -1,5 +1,6 @@
 import app from 'app';
 import 'views/forms/edit/directives/edit-authority.directive';
+import 'views/forms/edit/edit';
 // ,'components/test'// , 'angular-vue', testVue
     export { default as template } from './edit-authority.html';
 

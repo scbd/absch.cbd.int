@@ -11,7 +11,7 @@ import 'views/register/directives/register-top-menu';
 import 'components/scbd-angularjs-services/main';
 import 'views/directives/workflow-arrow-buttons';
   
-  export default ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "thesaurusService", "$q", "$location", "IStorage",
+app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "thesaurusService", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
                                    "breadcrumbs", "appConfigService", "locale", 'ngMeta', "realm", 'solr',
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurusService, $q, $location, storage,
@@ -488,5 +488,5 @@ import 'views/directives/workflow-arrow-buttons';
     
     setMetaTags();
 
-  }];
+}]);
 

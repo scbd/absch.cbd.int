@@ -14,10 +14,11 @@ const update = async () => {
         const filePath = `${process.cwd()}/app/${files[i]}`;
         let fileData = await fs.readFile(filePath, {encoding:"utf8"});
 
-        if(fileData.indexOf("export { default as template } from './dashboard.html';")>0){
+        if(fileData.indexOf("export { default as template } from")<0 &&
+            fileData.indexOf('export default [')>=0){
             const name = path.basename(filePath);
-            fileData   = fileData.replace("export { default as template } from './dashboard.html';", 
-                         `export { default as template } from './${name.replace(/\.js$/, '.html')}.html';`)
+            fileData   = fileData.replace("export default [", 
+                         `export { default as template } from './${name.replace(/\.js$/, '.html')}.html';\nexport default [`)
             console.log(filePath);
 
             await fs.writeFile(filePath, fileData, {encoding:"utf8"})
@@ -27,4 +28,4 @@ const update = async () => {
 
 }
 
-// update();
+update();

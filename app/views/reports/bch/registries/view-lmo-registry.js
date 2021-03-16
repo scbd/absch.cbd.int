@@ -2,6 +2,7 @@ import app from 'app';
 import 'css!/app/css/registry.css';
 import 'services/main'; ;
 
+export { default as template } from './view-lmo-registry.html';
 export default ['$scope','searchService','$element', '$rootScope',
 function($scope,searchService,$element, $rootScope) { 
 		$scope.isLoading = false;

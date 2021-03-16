@@ -4,7 +4,8 @@ import 'ng-breadcrumbs';
 import 'cbd-forums';
 import 'services/main';
 
-    export default ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$rootScope",'breadcrumbs',
+    export { default as template } from './post-list-view.html';
+export default ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$rootScope",'breadcrumbs',
      function($scope, $http, $q, $route, $routeParams, commonjs, $rootScope, breadcrumbs) {
 
         if (!$route.current.$$route.forumListUrl) {

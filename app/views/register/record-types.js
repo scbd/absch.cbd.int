@@ -1,6 +1,7 @@
 import 'app'; 
 
-    export default ["$scope", "$http", function ($scope, $http, user) {
+    export { default as template } from './record-types.html';
+export default ["$scope", "$http", function ($scope, $http, user) {
         
         var _ctrl = this;
 

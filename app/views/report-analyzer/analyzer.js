@@ -1,7 +1,8 @@
 import './directives/national-reports/questions-selector';
 import './directives/national-reports/analyzer'; ;
 
-    export default ['$scope', '$location', 'realm', '$timeout',
+    export { default as template } from './analyzer.html';
+export default ['$scope', '$location', 'realm', '$timeout',
      function($scope, $location, realm, $timeout) {
         
         $scope.showAnalyzer = false;

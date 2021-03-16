@@ -1,7 +1,8 @@
 import $ from 'jquery';
 import 'components/scbd-branding/main';
 
-    export default ["$scope", "$location", "authentication", function ($scope, $location, authentication){
+    export { default as template } from './login-dialog.html';
+export default ["$scope", "$location", "authentication", function ($scope, $location, authentication){
 
 				$scope.$on('signIn', function(evt, data){
 					redirectUser();

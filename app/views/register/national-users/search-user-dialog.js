@@ -1,6 +1,7 @@
 
 
-    export default ['$scope', '$http', 'government', '$q', function ($scope, $http, government, $q) {
+    export { default as template } from './search-user-dialog.html';
+export default ['$scope', '$http', 'government', '$q', function ($scope, $http, government, $q) {
 
         var _ctrl = this;
 

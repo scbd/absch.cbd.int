@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
-    export default ['$scope', 'user', 'manageableRoles', 'governmentPARole', function ($scope, user, manageableRoles, governmentPARole) {
+    export { default as template } from './edit-roles-dialog.html';
+export default ['$scope', 'user', 'manageableRoles', 'governmentPARole', function ($scope, user, manageableRoles, governmentPARole) {
 
         var _ctrl = this;
 
