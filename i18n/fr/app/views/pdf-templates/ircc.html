@@ -1,0 +1,30 @@
+﻿<div ng-controller="irccPdfView">
+    
+    <style type="text/css">
+       
+        #watermark {
+            color: black;
+            padding-left: 250px;
+        }
+        #watermark p {
+            color: black;
+            font-weight: bolder;
+            font-size: xx-large;
+        }
+        a[href]:after {
+            content: '';
+        }
+
+        .watermark{
+        background-image: url(../img/testwatermark.png);
+        background-repeat: repeat;
+        background-attachment: fixed;
+        background-size: 150px;
+        }
+    </style>
+
+    <div ng-app="ngapp" class="main-nav">
+		<div pdf-ircc-partial-view document-id="identifier"></div>
+    </div>
+
+</div>

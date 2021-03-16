@@ -1,0 +1,49 @@
+<div ng-controller="LmoReportController">
+	
+	<div class="register-content card card-1-notrans bg-white">
+
+		<div class="register-content-header bg-darkgrey color-white">
+			<div style="padding:10px 10px;">
+				<h3>LMO</h3>
+			</div>
+		</div>
+		<div class="register-content-content " style="margin: 10px;">
+			<div style="border: 1px solid #eee;padding: 15px;">
+                <strong>Search LMO</strong>
+                <angucomplete-alt id="lmos" placeholder="Search LMOs" pause="400" selected-object="newLmo" remote-api-handler="loadLMos" 
+                    data-field="suggestions" title-field="title" description-field="summary" 
+                    input-class="form-control form-control-small"></angucomplete-alt>
+            </div>
+            <br/>
+            <div  block-region activate="loading">
+                <div style="border: 1px solid #eee;padding: 15px;">
+                        <view-lmo-reference ng-model="identifier" taret="_blank"></view-lmo-reference>
+                </div>
+
+                <ul class="nav nav-tabs">
+                    <li role="presentation" ng-class="{'active' : tab=='lmo'}">
+                        <a rel="noopener" data-toggle="tab" href="#lmo" ng-click="changeTab('lmo')">LMO Information</a>
+                    </li>
+                    <li role="presentation" ng-class="{'active' : tab=='decisions'}">
+                        <a rel="noopener" data-toggle="tab" href="#decisions" ng-click="changeTab('decisions')">Decisions on the LMO</a>
+                    </li>
+                    <li role="presentation" ng-class="{'active' : tab=='risk-assessments'}">
+                        <a rel="noopener" data-toggle="tab" href="#risk-assessments" ng-click="changeTab('risk-assessments')">Risk Assessments</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="lmo" class="tab-pane fade bg-white"  ng-class="{'in active' : tab=='lmo'}" ng-if="tab=='lmo'">
+                        <div record-loader api="recordApi"></div>
+                    </div>
+                    <div id="decisions" class="tab-pane fade bg-white"  ng-class="{'in active' : tab=='decisions'}" ng-if="tab=='decisions'">
+                        <lmo-decisions identifier="{{identifier}}"></lmo-decisions>
+                    </div>
+                    <div id="risk-assessments" class="tab-pane fade bg-white"  ng-class="{'in active' : tab=='risk-assessments'}" ng-if="tab=='risk-assessments'">
+                        <lmo-risk-assessments identifier="{{identifier}}"></lmo-risk-assessments>
+                    </div>
+                </div>
+				<br/><br/>
+			</div>
+		</div>
+	</div>
+</div>

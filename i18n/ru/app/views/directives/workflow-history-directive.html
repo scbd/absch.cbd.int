@@ -1,0 +1,44 @@
+﻿<div class="row">
+    <div class="col-lg12 col-sm-12 col-md-12">
+        <a rel="noopener" translation-url  ng-href="#" ng-click="showHistory = !showHistory" class="pull-right">
+            <div ng-click="showPreviousHistory()"  ng-show="!showHistory" class="label label-default bg-green" style="width:100%;padding:3px;font-size:12px;"><i class="fa fa-chevron-circle-up"></i> VIEW WORKFLOW HISTORY</div>
+            <div ng-show="showHistory" class="label label-default bg-green" style="width:100%;padding:3px;font-size:12px;"><i class="fa fa-chevron-circle-down"></i> HIDE WORKFLOW HISTORY</div>
+        </a>
+        <div ng-show="showHistory">
+            <span ng-show="loading">loading <i class="fa fa-spin"></i></span>
+            <table class="table table-striped" ng-show="workflowHistory">
+                <thead>
+                    <td>ID</td>
+                    <td>Requested By</td>
+                    <td>Status</td>
+                </thead>
+                <tr ng-repeat="workflow in workflowHistory">
+                    <td>
+                        <span ng-show="workflow.result.documentID||workflow.data.documentID">{{workflow.result.documentID||workflow.data.documentID}}</span>
+                        <span ng-hide="workflow.result.documentID||workflow.data.documentID">[new]</span>
+                        <span ng-show="workflow.result.revision">(rev. {{workflow.result.revision}})</span>
+                    </td>
+                    <td>{{workflow.createdBy_info.firstName}} {{workflow.createdBy_info.lastName}} ({{workflow.createdOn|date:'short'}})
+                        {{workflow.data.additionalInfo}}
+                    </td>
+                    <td>
+                        <span ng-switch="workflow.state">
+                            <span ng-switch-when="running"><i class="glyphicon glyphicon-cog"></i> Pending</span>
+                            <span ng-switch-when="completed">
+                                <span ng-repeat="activity in workflow.activities">
+                                        {{activity.result.action=='reject' ? 'Rejected':'Approved'}} by
+                                        {{activity.completedBy_info.firstName}} {{activity.completedBy_info.lastName}} ({{activity.completedOn|date:'short'}})
+                                        {{activity.result.reason}}
+                                <span>
+                            </span>
+                            <span ng-switch-when="canceled"><i class="glyphicon glyphicon-remove-circle"></i> Canceled on {{workflow.closedOn|date:'short'}}</span>
+                            <span ng-switch-when=""><i class="glyphicon glyphicon-exclamation-sign"></i> Failed on {{workflow.closedOn|date:'short'}}</span>
+                            <span ng-switch-default>*{{workflow.state|uppercase}}</span>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div>

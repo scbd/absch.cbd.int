@@ -1,0 +1,98 @@
+<div class="nr-selector">
+
+    <style>
+        .nr-selector td[ng-click],
+        .nr-selector th[ng-click] { cursor:pointer; }
+        .modal-open {
+            overflow: scroll;
+        }
+    </style>
+
+    <table class="table table-hover" style="margin-bottom:0px">
+        <tr>
+            <th style="width:200px">National Report</th>
+            <td>
+                <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged()"  class="form-control">
+                    <option ng-repeat="report in (reportData|filter:hasAnalyzer)" value="{{report.type}}" >
+                        {{report.title}}
+                    </option>
+                    
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Geographical areas</th>
+            <td>
+                <select style="width: 100%;" ng-model="selectedRegionsPreset" ng-change="regionsPresetChanged()" class="form-control">
+                    <option value="cbdRegions">Breakdown by CBD regions</option>
+                    <option value="countries">Select countries</option>
+                    <option value="regions">Select regions</option>
+                    <option value="protocolParties">Breakdown by Parties</option>
+                    <option value="protocolNonParties">Breakdown by Protocol Non-Parties</option>
+                </select>
+            </td>
+        </tr>
+        <tr ng-if="selectedRegionsPreset!='cbdRegions'">
+            <td class="text-center">
+                <button type="button" class="btn btn-default btn-sm" ng-click="$parent.showCountries=true;" ng-show="selectedRegionsPreset=='countries'">Select countries</button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="$parent.showRegions=true;"   ng-show="selectedRegionsPreset=='regions'">Select regions</button>
+            </td>
+            <td>
+
+                <div ng-hide="selectedRegions.length || showCountries || showRegions" class="alert alert-warning" role="alert" style="margin-bottom:0px">
+                    No countries or regions selected
+                </div>
+
+                <ul ng-if="selectedRegions.length" class="list-unstyled">
+                    <li ng-repeat="c in selectedRegions">
+                        <span ng-if="selectedRegionsPreset!='protocolParties' && selectedRegionsPreset!='protocolNonParties'">
+                            <i class="fa fa-times" ng-click="removeRegions(c)" ng-show="selectedRegionsPreset!='cbdRegions'"></i>
+                            {{regionsMap[c].title|lstring}}
+                        </span>
+                        <span ng-if="selectedRegionsPreset!='protocolParties' || selectedRegionsPreset!='protocolNonParties'">                            
+                            {{npCountries[c].title|lstring}}
+                        </span>
+                    </li>
+                </ul>
+            </td>
+    </table>
+    <table class="table table-hover">
+        <tr>
+            <td>
+                <input type="checkbox"  ng-model="allSelected" indeterminate="allSelected===null" ng-change="allSectionsClicked()" >
+            </td>
+            <th class="Title" colspan="4" ng-click="allSelected=!allSelected; allSectionsClicked();">
+                All questions and/or sections of the report
+            </th>
+        </tr>
+
+        <tr ng-repeat-start="section in sections">
+            <td><input type="checkbox" ng-model="section.selected" ng-change="sectionClicked(section)" indeterminate="section.selected===null"></td>
+            <th ng-click="section.expanded=!section.expanded" colspan="3" ng-bind-html="::section.title"></th>
+            <th ng-click="section.expanded=!section.expanded">
+                <i class="fa" ng-class="{ 'fa-caret-up' : section.expanded, 'fa-caret-down' : !section.expanded }"></i>
+            </th>
+        </tr>
+
+        <tr ng-if="section.expanded" ng-repeat="question in ::section.questions">
+            <td></td>
+            <td><input type="checkbox" ng-model="question.selected" ng-change="questionClicked(question)"></td>
+            <td ng-click="question.selected=!question.selected; questionClicked(question)" class="text-nowrap">
+                <span ng-switch="question.key[0]">
+                    <span ng-switch-when="S">Survey Question {{::question.number}}.</span>
+                    <span ng-switch-default>Question {{::question.number}}.</span>
+                </span>
+
+            </td>
+            <td ng-click="question.selected=!question.selected; questionClicked(question)" ng-bind-html="::question.title"></td>
+            <td></td>
+        </tr>
+
+        <tr ng-repeat-end ng-show="::false"></tr>
+
+    </table>
+
+    <terms-dialog title="Countries" visible="showCountries" selection="selectedRegions" terms="getCountries()" columns="2"></terms-dialog>
+    <terms-dialog title="Regions"   visible="showRegions"   selection="selectedRegions" terms="getRegions()"></terms-dialog>
+
+</div>

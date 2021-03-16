@@ -1,0 +1,92 @@
+﻿<div ng-controller="AdminController" id="RegisterPage">
+
+  <link href="/app/css/register.css" rel="stylesheet">
+  <link href="/app/css/record.css" rel="stylesheet">
+
+  <span register-top-menu></span>
+
+  <div class="register-content card card-1-notrans">
+    <div class="register-content-header bg-pink color-white">
+      <div style="padding:1px 10px;">
+        <h3>ABSCH Admin </h3>
+      </div>
+    </div>
+    <div class="register-content-content" ng-if="roles.isAdministrator">
+      <div class="row" style="padding:0;margin:0 0 30px 0;">
+        <div class="col-md-12 cp-header">
+          <table style="width:100%;">            
+            <tr>
+              <td></td>
+              <td>
+                <table class="table table-striped" style="width:100%">
+                  <tbody>
+
+                    <tr>
+                      <td>View list of records reported by users </td>
+                      <td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/reported-records">Manage Reported Records</a></td>
+                    </tr>
+                    <tr>
+                        <td>Common ABSCH Issues</td>
+                        <td>
+                          <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/common-issues">Common issues</a></td>
+                      </tr>
+                    <tr>
+                      <td>View ABSCH records workflow status</td>
+                      <td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/requests">Manage Workflow Records</a></td>
+                    </tr>
+                    <tr>
+                      <td>View ABSCH counts with graph option and mutiple filters</td>
+                      <td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/report-counts">Report counts</a></td>
+
+                    </tr>
+                    <tr>
+                      <td>View IRCC count</td>
+                      <td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/ircc-counts">IRCC counts</a></td>
+
+                    </tr>
+                    <tr>
+                      <td>View countries with/without ABSCH roles</td>
+                      <td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/user-role-report">User Role Report</a></td>
+                    </tr>
+                    <tr>
+                      <td>View list of users using the email subscription.</td>
+                      <td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/subscriptions">Subscriptions</a></td>
+                    </tr>
+                    <tr>
+                      <td>View client side errors</td>
+                      <td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/error-logs">Error Logs</a></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Validate translation
+                      </td>
+                      <td>
+                        <button class="btn btn-primary" ng-click="validateTranslation(!isValidatingTranslation)">
+                          <span ng-if="!isValidatingTranslation">Enable</span><span ng-if="isValidatingTranslation">Disable</span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- controller -->

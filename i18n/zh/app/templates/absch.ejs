@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="<%=preferredLanguage||'en'%>" app-version="<%=appVersion%>">
+
+<head>
+    <base href="<%=baseUrl%>">
+    <meta charset="utf-8">
+    <title ng-bind="ngMeta.title"></title>
+    <meta name="description" content="{{ngMeta.description}}">
+    <link name="canonical" rel="canonical" href="{{ngMeta.canonical}}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/app/img/favicon.png">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.cbd.int/bootstrap@3.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="/app/css/template.css?v=<%=appVersion%>">
+
+
+    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body ng-controller="TemplateController" id="top" lang="<%=preferredLanguage||'en'%>">
+    <span style='display:none' id="appTitle">Access and Benefit-Sharing Clearing-House</span>
+    <span style='display:none' id="appDescription">Access and Benefit-Sharing Clearing-House</span>
+    <span id="appBaseUrl" style="display:none"><%=baseUrl%></span>
+    <div class="m-app-loading" ng-animate-children>
+        <!--
+            HACKY CODE WARNING: I'm putting Style block inside directive so that it
+            will be removed from the DOM when we remove the directive container.
+        -->
+        <style type="text/css">
+            div.m-app-loading div.animated-container {
+                background-color: #FFFFFF ;
+                bottom: 0px ;
+                left: 0px ;
+                opacity: 1.0 ;
+                right: 0px ;
+                top: 0px ;
+                z-index: 999999 ;
+            }
+            /* Used to initialize the ng-leave animation state. */
+            div.m-app-loading div.animated-container.ng-leave {
+                opacity: 1.0 ;
+                transition: all linear 200ms ;
+                    -webkit-transition: all linear 200ms ;
+            }
+            /* Used to set the end properties of the ng-leave animation state. */
+            div.m-app-loading div.animated-container.ng-leave-active {
+                opacity: 0 ;
+            }
+            div.m-app-loading div.messaging {
+                color: #1FA65D ;
+                font-family: monospace ;
+                left: 0px ;
+                margin-top: -37px ;
+                position: absolute ;
+                right: 0px ;
+                text-align: center ;
+                top: 30% ;
+            }
+            div.m-app-loading h1 {
+                font-size: 26px ;
+                line-height: 35px ;
+                margin: 0px 0px 20px 0px ;
+            }
+            div.m-app-loading p {
+                font-size: 18px ;
+                line-height: 14px ;
+                margin: 0px 0px 0px 0px ;
+            }
+        </style>
+
+
+        <!-- BEGIN: Actual animated container. -->
+        <div class="animated-container">
+            <div class="messaging">
+                <span class="color-orange ng-scope" ng-if="development_env" style="font-size:48px;font-weight:bold;"> 
+                    <img src="https://absch.cbd.int/app/img/cbd-logo-green-en.svg" style="height:80px;">
+                </span>
+               
+                <h1>
+                    <br/>                  
+                   <div class="color-black" id="appLoadingMessage">
+                        loading the <br/>ABS Clearing-House                        
+                    </div>
+                    version <%=appVersion%>
+                    <div class="color-red" id="appLoadingError" style="display: none;">
+                        <span>Error loading the <br/>ABS Clearing-House   </span>
+                        <br/>
+                        <span>Please contact the Secretariat</span>
+                        <div>
+                            <button type="button" class="btn btn-danger" id="showError">Show detail error</button>
+                            <code style="display: none;word-break: break-all;color: #fff;background-color: #d9534f;border-color: #d43f3a;" id="detailErrorMessage"></code>                            
+                        </div>
+                    </div>
+                    <br/><br/>
+                    <i class="fa fa-spin fa-3x fa-circle-o-notch app-loading-icon"></i> 
+                </h1>
+            </div>
+        </div>
+        <!-- END: Actual animated container. -->
+
+    </div>
+    <div class="alert alert-info alert-dismissible lang-alert" ng-if="'<%=preferredLanguage%>'!='en'" style="margin-bottom:1px">
+        <a rel="noopener" href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+         <strong>Please note that the translation of the ABS Clearing-House is in progress.</strong>
+    </div>
+
+    <div class="device-size visible-xs" size="xs" style="height:0px;width:0px"></div>
+    <div class="device-size visible-sm" size="sm" style="height:0px;width:0px"></div>
+    <div class="device-size visible-md" size="md" style="height:0px;width:0px"></div>
+    <div class="device-size visible-lg" size="lg" style="height:0px;width:0px"></div>
+    <div id="divHeader"></div>
+
+    <div class="container-full page-content" style="min-height:650px;" 
+    ng-class="{'training-bg':!production_env}">
+        <route-loading></route-loading>
+        <ng-view autoscroll="true"></ng-view>
+    </div>
+
+    <div class="footer">
+            <div class="footer-page" >
+                <div class="container-fluid footer-page-container">
+                  <a rel="noopener" translation-url  href="#"  ng-click="scrollToTop()" class="pull-right color-darkgrey"><i class="fa fa-arrow-circle-up"></i> back to top</a>
+                </div>
+            </div>
+    </div>
+    <div id="divFooter"></div>
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script>
+        // In IE boot.js is executing before this script was executed so move it before boot.js
+        window.scbdApp = {
+            host             : '<%=clearingHouseHost%>',
+            version          : '<%=appVersion%>',
+            lang             : '<%=preferredLanguage%>',
+            title            : document.getElementById('appTitle').innerText,
+            description      : document.getElementById('appDescription').innerText,
+            analytics        : '<%=googleAnalyticsCode%>'
+        }
+    </script>
+    <script src="https://cdn.cbd.int/requirejs@2.2.0/require.js" data-main="/app/boot.js?v=<%=appVersion%>"></script>    
+    <script>window.scbdApp.template = 'templates/absch'</script>
+    <script src="https://cdn.cbd.int/outdated-browser@1.0.2/outdatedbrowser/outdatedbrowser.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.cbd.int/outdated-browser@1.0.2/outdatedbrowser/outdatedbrowser.min.css">
+    <div id="outdated"></div>
+
+    <link rel="stylesheet" href="/app/css/help-controls.css?v=<%=appVersion%>">
+    <link rel="stylesheet" type="text/css" href="/app/css/chm.css?v=<%=appVersion%>" >
+    <link rel="stylesheet" type="text/css" href="/app/css/colors.css?v=<%=appVersion%>" >
+    <link rel="stylesheet" type="text/css" href="https://cdn.cbd.int/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.cbd.int/bootstrap-datepicker@1.8.0/dist/css/bootstrap-datepicker.min.css" >
+    <link rel="stylesheet" type="text/css" href="https://cdn.cbd.int/angular-toastr@1.5.0/dist/angular-toastr.min.css" />
+    <link rel="stylesheet" type="text/css" href="/app/css/km.css?v=<%=appVersion%>">
+    
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script>
+        /**************************
+          For outdate browser check
+        **************************/
+        function addLoadEvent(func) {
+        var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } }
+        addLoadEvent(function() { outdatedBrowser( { bgColor: '#f25648', color: '#ffffff', lowerThan: 'boxShadow', languagePath: 'app/libs/outdated-browser/outdatedbrowser/lang/en.html' }) });
+        addLoadEvent(function() {
+            var langARRegex = /^\/ar\//;
+            var location = window.location;
+            if(langARRegex.test(location.pathname)){
+             document.getElementsByTagName("body")[0].setAttribute("dir", "rtl");   
+            }
+
+        });
+        if('<%=googleAnalyticsCode%>'!=''){
+            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+            ga('create', '<%=googleAnalyticsCode%>', 'auto');
+            ga('set',    'hostname', window.location.hostname);
+            ga('set',    'location', undefined);
+        }
+
+    </script>
+
+</body>
+
+</html>

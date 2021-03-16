@@ -1,0 +1,173 @@
+<div class="question" style="margin-bottom:10px;overflow-y:scroll" ng-class="{ highlight : previousReports }" 
+    ng-disabled="realm!= 'ABS' && !fullSum && question.type!='header'">
+
+    <span class="pull-right"  ng-if="::previousQuestionsMapping[selectedMapping][question.key]">
+        <div class="btn-group">
+            
+            <button type="button" class="btn btn-default" ng-if="previousReports" ng-click="removeCompare()">
+                <i class="fa fa-close"></i>
+            </button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="/app/views/report-analyzer/resources/compare-off.png" class="prev-question-compare"></img> 
+                <span ng-if="!previousReports">Compare with previous report(s)</span>
+                <span ng-if="previousReports" ng-switch="previousQuestionsMapping[selectedMapping][question.key][0]">
+                    <span ng-switch-when="S">
+                        Compare with Survey on indicators of the Strategic Plan (2014) Question <span ng-bind="::cleanupQuestionNumber(previousQuestionsMapping[selectedMapping][question.key])"></span>
+                    </span>
+                    <span ng-switch-default  ng-bind="(previousQuestionsMapping[selectedMapping].title + ' ' + cleanupQuestionNumber(previousQuestionsMapping[selectedMapping][question.key]))"></span>
+                </span>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li ng-repeat="compare in ::previousQuestionsMapping" style="padding:5px" ng-if="::compare[question.key]">
+                    <img src="/app/views/report-analyzer/resources/compare-off.png"  class="prev-question-compare"></img>
+                    <span ng-switch="::compare[question.key][0]">
+                        <a rel="noopener" ng-switch-when="S" href="#" ng-click="toggleCompare(compare)">
+                            Compare with Survey on indicators of the Strategic Plan (2014) Question <span ng-bind="::cleanupQuestionNumber(compare[question.key])"></span>
+                        </a>
+                        <a rel="noopener" ng-switch-default href="#" ng-click="toggleCompare(compare)" 
+                            ng-bind="::(compare.title + ' ' + cleanupQuestionNumber(compare[question.key]))"></a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </span>
+
+    <span ng-switch="::question.key[0]">
+        <b ng-switch-when="S">Survey Question {{::cleanupQuestionNumber(question.number)}}</b>
+        <b ng-switch-default> Question {{::cleanupQuestionNumber(question.number)}}</b>
+    </span>
+
+    <div><b style="white-space:pre-line" ng-bind-html="::question.title"></b></div>
+
+    <table class="table table-hover" ng-if="::question.type!='header'">
+        <tr>
+            <th style="width:22px"></th>
+            <th class="text-right">&nbsp;</th>
+            <th style="width:30px" class="text-center text-nowrap">Total</th>
+            <th style="width:60px" class="text-center text-nowrap"><span ng-if="::question.type!='text'" style="cursor:pointer" ng-click="incrementDigits()">%</span></th>
+            <th style="width:50px" class="text-center" ng-click="toggleRegion(region)" ng-repeat-start="region in ::regions track by region.identifier">
+                <div data-toggle="tooltip" data-original-title="{{::(region.title|lstring)}}" class="text-nowrap">
+                    <span ng-bind="::region.htmlTitle.replace('CBD <br>', '')"></span>
+                    <i class="fa" ng-class="{ 'fa-caret-left': expanded[region.identifier] , 'fa-caret-right': !expanded[region.identifier] }"></i>
+                </div>
+            </th>
+            <!-- show countries if expanded[region.identifier] -->
+            <th style="width:25px" ng-if="expanded[region.identifier]" ng-repeat="country in region.countries|filter:{visible:true} track by country.identifier">
+                <a rel="noopener" href="/database/records/{{::reportsMap[country.identifier].documentId}}" target="_report" data-toggle="tooltip" data-original-title="{{::country.title|lstring}}">{{::(country.identifier|uppercase)}}</a>
+            </th>
+            <th ng-repeat-end ng-show="::false"></th>
+            <th style="width:10px;background-color:white"></th>
+        </tr>
+
+        <!-- OPTIONS + TERMS -->
+        <tr ng-if="::question.type!='text' && question.type!='lstring' && question.type!='number'" class="option {{sumType}}" ng-repeat="row in rows" ng-class="{ 'first': $first, 'last' : $last, 'info': row.filterOn, 'filter-on': row.filterOn, 'filter': filter }">
+            <td class="filter">
+                <i ng-if="::row.fullSum"  class="fa fa-filter fa-lg" style="cursor:pointer" ng-click="toggleFilter(row)" data-toggle="popover" data-placement="top" data-content="Filter: Include only reports which have this answer selected."></i>
+                <i ng-if="::!row.fullSum" class="fa fa-filter fa-lg" disabled title="This filter is disabled"></i>
+            </td>
+            <td>{{::row.title}}</td>
+            <td class="text-center" >
+                <span>{{row.sum}}</span>
+                <div ng-if="row.previous">
+                    <span class="cell-delta value"  ng-class="{ 'inc' : row.previous.sum.delta>0, 'dec' : row.previous.sum.delta<0, 'stable' : row.previous.sum.delta==0 }" data-toggle="tooltip" data-original-title="{{row.previous.sum.value}}">{{row.previous.sum.delta}}</span>
+                </div>
+            </td>
+            <td class="text-center">
+                <span class="cell-percent">{{row.percent}}</span>
+                <div ng-if="row.previous">
+                    <span class="cell-delta percent"  ng-class="{ 'inc' : row.previous.percent.delta>0, 'dec' : row.previous.percent.delta<0, 'stable' : row.previous.percent.delta==0 }" data-toggle="tooltip" data-original-title="{{row.previous.percent.value}}%">{{row.previous.percent.delta | number : digits}}</span>
+                </div>
+            </td>
+            <td class="text-center region" ng-class="{ first: $first, last: $last, expanded: expanded[cell.identifier] }" ng-style="  { 'background-color': cell.backgroundColor[sumType], 'color' : cell.textColor[sumType] }" ng-repeat-start="cell in ::row.cells" >
+                <span class="cell-value">{{cell[sumType] | number : sumType=='sum'? 0 : digits}}</span>
+                <div ng-if="cell.previous">
+                    <span class="cell-delta" ng-class="{ 'inc' : cell.previous[sumType].delta>0, 'dec' : cell.previous[sumType].delta<0, 'stable' : cell.previous[sumType].delta==0 }" data-toggle="tooltip" data-original-title="{{cell.previous[sumType].value}}{{sumType!='sum'?'%':''}}">{{cell.previous[sumType].delta  | number : sumType=='sum'? 0 : digits}}</span>
+                </div>
+            </td>
+            <!-- show countries if expanded[region.identifier] -->
+            <td class="text-center country"  ng-class="{ 'first': $first, 'last' : $last }" ng-if="expanded[cell.identifier]" ng-repeat="country in regionsMap[cell.identifier].countries|filter:{visible:true} track by country.identifier">
+                <div style="font-size:18px;line-height:inherit" ng-if="::testAnswer(reportsMap[country.identifier][question.key], row.value)">
+                    &#x25CF;
+                    <img ng-if="::hasCustomText(reportsMap[country.identifier][question.key], row.value)" src="/app/views/report-analyzer/resources/nr-document.png" 
+                    ng-click="showCustomText(country.identifier, reportsMap[country.identifier][question.key], row.value)" style="cursor:pointer">
+                </div>
+                <div style="font-size:18px;line-height:inherit" ng-if="previousReports && testAnswer(previousReportsMap[country.identifier][previousQuestionsMapping[selectedMapping][question.key]], row.value, previousQuestionsValueMapping[selectedMapping][question.key])">
+                    &#x25CB;
+                    <img ng-if="::previousReportsMap[country.identifier][previousQuestionsMapping[selectedMapping][question.key]].details" src="/app/views/report-analyzer/resources/nr-document.png" ng-click="showText(country.identifier, previousReportsMap[country.identifier][previousQuestionsMapping[selectedMapping][question.key]].details)" style="cursor:pointer">
+                </div>
+            </td>
+            <td ng-repeat-end ng-show="::false"></th>
+            <td class="bordered" style="padding:0px;background-color:white"></td>
+        </tr>
+
+        <!-- FREE TEXT -->
+        <tr ng-if="::question.type=='text' || question.type=='lstring' ||question.type=='number'">
+            <td class="filter">
+                <i class="fa fa-filter fa-lg" disabled title="This filter is disabled"></i>
+            </td>
+            <td>{{question.subTitle||'Free text'}}</td>
+            <td class="text-center">{{question.options[0].sum||rows[0].sum}}</td>
+            <td class="text-center"><img ng-if="::question.options[0].sum||rows[0].sum" src="/app/views/report-analyzer/resources/nr-documents.png" 
+                ng-click="showTexts(undefined, question.field, question.type)" style="cursor:pointer"></td>
+            <td class="text-center text-nowrap region" class="bchCellGroup text-nowrap" ng-repeat-start="region in ::regions track by region.identifier">
+                {{rows[0].cells[region.identifier].sum}}
+                <img ng-if="rows[0].cells[region.identifier].sum"  ng-click="showTexts(region.countries, question.field, question.type)" src="/app/views/report-analyzer/resources/nr-documents.png" style="cursor:pointer">
+            </td>
+            <!-- show countries if expanded[region.identifier] -->
+            <td class="text-center text-nowrap country country"ng-if="expanded[region.identifier]" ng-repeat="country in region.countries|filter:{visible:true} track by country.identifier">
+                <img ng-if="hasText(country.identifier, reportsMap[country.identifier][question.key], question.field, question.type)" src="/app/views/report-analyzer/resources/nr-document.png" ng-click="showText(country.identifier, reportsMap[country.identifier][question.key], question.field, question.type)" style="cursor:pointer">
+            </td>
+            <td ng-repeat-end ng-show="::false"></th>
+            <td style="padding:0px;background-color:white"></td>
+        </tr>
+        <tr ng-if="::question.additionalInfo">
+            <td colspan="8"></td>
+        </tr>
+        <tr ng-if="::question.additionalInfo" ng-repeat="info in question.additionalInfo">
+            <td class="filter">
+                <!-- <i class="fa fa-filter fa-lg" disabled title="This filter is disabled"></i> -->
+            </td>
+            <td>{{info.title}}
+            </td>
+            <td class="text-center">{{additionalInfo[info.field+'_sum']}}</td>
+            <td class="text-center"><img ng-if="::additionalInfo[info.field+'_sum']" src="/app/views/report-analyzer/resources/nr-documents.png" 
+                ng-click="showTexts(undefined, info.field, info.type)" style="cursor:pointer"></td>
+            <td class="text-center text-nowrap region" class="bchCellGroup text-nowrap" ng-repeat-start="region in ::regions track by region.identifier">
+                {{rows[0].cells[region.identifier]['additionalInfo'][info.field+'_sum']}}
+                <img ng-if="rows[0].cells[region.identifier]['additionalInfo'][info.field+'_sum']"  ng-click="showTexts(region.countries, info.field, info.type)" 
+                src="/app/views/report-analyzer/resources/nr-documents.png" style="cursor:pointer">
+            </td>
+            <!-- show countries if expanded[region.identifier] -->
+            <td class="text-center text-nowrap country country"ng-if="expanded[region.identifier]" 
+                ng-repeat="country in region.countries|filter:{visible:true} track by country.identifier">
+                <img ng-if="reportsMap[country.identifier][question.key][info.field]" src="/app/views/report-analyzer/resources/nr-document.png" 
+                ng-click="showText(country.identifier, reportsMap[country.identifier][question.key], info.field, info.type)" style="cursor:pointer">
+            </td>
+            <td ng-repeat-end ng-show="::false"></th>
+            <td style="padding:0px;background-color:white"></td>
+        </tr>
+    </table>
+
+    <div ng-if="previousReports" style="margin-top:-15px">
+
+        <div ng-show="expanded" class="pull-right" style="margin-right:18px;margin-left:18px;">
+            <span style="font-size:18px;line-height:inherit">&#x25CF;</span> <span ng-switch="::getReportType()">
+                <span ng-switch-when="cpbNationalReport1"> 1st NR</span>
+                <span ng-switch-when="cpbNationalReport2"> 2nd NR</span>
+                <span ng-switch-when="cpbNationalReport3"> 3rd NR</span>
+                <span ng-switch-when="cpbNationalReport4"> 4th NR</span>
+            </span>
+            &nbsp; &nbsp;
+            <span style="font-size:18px;line-height:inherit">&#x25CB;</span>  <span ng-switch="selectedMapping">
+                <span ng-switch-when="cpbNationalReport1"> 1st NR</span>
+                <span ng-switch-when="cpbNationalReport2"> 2nd NR</span>
+                <span ng-switch-when="cpbNationalReport3"> 3rd NR</span>
+                <span ng-switch-when="cpbNationalReport4"> 4th NR</span>
+            </span>
+        </div>
+
+        <b>Note:</b> The comparison tool only includes those countries that have answered this question in both National Reports. Accordingly, the total counts and percentages may change when applying the comparison tool.
+
+    </div>
+</div>

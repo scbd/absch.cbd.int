@@ -1,0 +1,212 @@
+﻿<div ng-controller="editSubmission">
+    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+        <div class="registerpage-content">
+
+            <warning-message-cna doc="document"></warning-message-cna>
+
+            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)"
+                document="getCleanDocument()" languages="document.header.languages" tab="tab">
+                <edit-form>
+                    <form class="editForm" name="editForm">
+
+                        <div ng-show="tab=='edit'" km-tab="edit">
+                            <section>
+                                <div class="well no-shadow bg-white">
+                                    <legend>General Information</legend>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="languages" required
+                                                caption=" Please select in which language(s) you wish to submit this record:">
+                                                <div class="indent">
+                                                    <div km-form-languages multiple required name="languages"
+                                                        ng-model="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="km-control-group" required name="government" caption="Country"
+                                                required>
+                                                <div afc-autocomplete required name="government"
+                                                    ng-disabled="document.organizations" ng-model="document.government"
+                                                    source="options.countries" filter="genericFilter"
+                                                    mapping="genericMapping" selectbox="true"
+                                                    placeholder="Please select a country..."></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1"><strong style="padding-left:50px;">OR</strong></div>
+                                        <div class="col-md-6">
+                                            <div class="km-control-group" name="organization"
+                                                caption="Organization(s)" required>
+                                                <div document-selector ng-disabled="document.government"
+                                                    question="organizations" type="checkbox" query="organizationQuery"
+                                                    skip-government="true"
+                                                    ng-model="document.organizations" allow-new-schema="organization">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section>
+                                <div class="well no-shadow bg-white">
+                                    <legend>Submission Information</legend>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" required name="title"
+                                                caption="Title of the submission">
+                                                <div km-textbox-ml ng-model="document.title" placeholder=""
+                                                    locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" required name="date"
+                                                caption="Date of submission">
+                                                <div km-date name="date" ng-model="document.date"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="well no-shadow bg-white">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="notifications" caption="Related notification(s)">
+                                                <div document-selector identifier-without-revision="true"
+                                                    question="notifications" type="checkbox" query="notificationQuery.q"
+                                                    display-fields="{{::notificationQuery.fl}}"
+                                                    free-text-query-field="symbol_s" lookup-field="symbol_s"
+                                                    skip-sync-documents="true" ng-change="onNotificationSelected()"
+                                                    filter="true" ng-change="recordSelected(item, filter)"
+                                                    skip-government="true" ng-model="document.notifications"
+                                                    on-records-fetched="onRecordsFetched(data)" list-view="view">
+
+                                                    <selected-records>
+                                                        <table class="table" id="search-new"
+                                                            style="padding-bottom:3px;width:100%;padding-top: 5ps;">
+                                                            <tr ng-repeat="doc in notifications">
+                                                                <td style="margin-bottom:15px;width:15px;">
+                                                                    <a rel="noopener" translation-url
+                                                                        class="btn btn-default"
+                                                                        ng-click="$parent.$parent.removeDocument(doc)"
+                                                                        class="link color-red">
+                                                                        <i class="fa fa-times"></i></a>
+                                                                </td>
+                                                                <td style="margin-bottom:20px;">
+                                                                    <span ng-bind="doc.rec_title"></span>
+                                                                    <div ng-bind="doc.rec_summary"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </selected-records>
+
+                                                </div>
+                                            </div>
+                                        </div>                                                                      
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="records"caption="Related record(s)">
+                                                <div document-selector ng-model="document.records" question="records" filter="true"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </section>
+                            <section ng-if="isAbs">
+                                <div class="well no-shadow bg-white">
+                                    <legend>Thematic areas</legend>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="absThematicAreas">
+                                                <div km-term-check name="absThematicAreas"
+                                                    ng-model="document.absThematicAreas"
+                                                    terms="options.absThematicAreas()" binding-type="term[]"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section ng-if="isBch">
+                                <div class="well no-shadow bg-white">
+                                    <legend>Thematic areas</legend>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="cpbThematicAreas" caption="">
+                                                <div km-term-check name="cpbThematicAreas"
+                                                    ng-model="document.cpbThematicAreas"
+                                                    terms="options.bchThematicAreas()" binding-type="term[]" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="well no-shadow bg-white">
+                                    <legend>Documents</legend>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="km-control-group" name="relevantDocuments" required caption="Documents">
+                                                <div km-link name="relevantDocuments"
+                                                    ng-model="document.relevantDocuments" allow-link="true"
+                                                    allow-file="true" identifier="document.header.identifier"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="km-control-group" name="relevantInformation"
+                                                caption="Any other relevant information">
+                                                <div class="help-block">Please use this field to provide any other
+                                                    relevant information that may not have been addressed elsewhere in
+                                                    the record.</div>
+                                                <div km-rich-textbox ng-model="document.relevantInformation" rows="4"
+                                                    placeholder="" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </section>
+                            <section>
+                                <div class="well no-shadow bg-white">
+                                    <legend>Notes</legend>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" name="notes">
+                                                <span class="help-block">
+                                                    The “Notes” field is for your personal use.
+                                                    It can only be seen when the record is being edited but is not
+                                                    visible
+                                                    when the record is published.
+                                                    This field is not meant to be used for confidential information.
+                                                </span>
+                                                <div km-notes name="notes" ng-model="document.notes"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                        </div>
+                    </form>
+                </edit-form>
+                <review-form>
+                    <view-submission ng-model="review.document" locale="review.locale" allow-drafts="true">
+                    </view-submission>
+                </review-form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
