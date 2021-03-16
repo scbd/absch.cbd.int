@@ -4,7 +4,8 @@ import 'views/forms/view/record-loader.directive';
 import 'views/register/directives/register-top-menu';
 import 'ngDialog';
 import 'components/scbd-angularjs-services/main';
-    app.controller('adminReportedRecordsCtrl', ['$scope', '$http', '$timeout', '$element', 'ngDialog', '$routeParams', 'IGenericService','realm', '$q',
+    export { default as template } from './reported-records.html';
+export default ['$scope', '$http', '$timeout', '$element', 'ngDialog', '$routeParams', 'IGenericService','realm', '$q',
         function ($scope, $http, $timeout, $element, ngDialog, $routeParams, IGenericService, realm, $q) {
             
             $scope.api = {};
@@ -106,7 +107,6 @@ import 'components/scbd-angularjs-services/main';
                     $scope.reportRecords.splice($scope.reportRecords.indexOf(record), 1);;
                 }
             }
-        }]
-    );
+        }];
 
 

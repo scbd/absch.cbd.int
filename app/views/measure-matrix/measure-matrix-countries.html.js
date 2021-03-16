@@ -5,7 +5,8 @@ import 'components/scbd-angularjs-controls/main';
 import 'views/measure-matrix/measure-matrix-elements-directive';
 import 'views/forms/view/record-loader.directive';
 
-    app.controller('countryMatrixController', ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$element',
+    export { default as template } from './measure-matrix-countries.html';
+export default ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$element',
         function($scope, $http, realm, $q, $filter, $routeParams, $element) {
 
             $scope.options  = {
@@ -221,7 +222,7 @@ import 'views/forms/view/record-loader.directive';
             }
 
         }
-    ]);
+    ];
 
 
 

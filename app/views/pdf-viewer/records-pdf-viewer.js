@@ -18,8 +18,8 @@ import 'components/scbd-angularjs-services/main';
          }
      })
     
-    export {default as template } from './records-pdf-viewer.html';
-    export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout',
+    export { default as template } from './records-pdf-viewer.html';
+export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout',
     function ($scope, $http, $q, $location, $sce, locale, $route, realm, $timeout) {
 
         $scope.pdfLocale = locale;

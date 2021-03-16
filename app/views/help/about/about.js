@@ -1,8 +1,9 @@
 import app from 'app';
 
-	app.controller('AboutController', ['$scope', '$rootScope','$routeParams', function ($scope, $rootScope, $routeParams) {
+	export { default as template } from './about.html';
+export default ['$scope', '$rootScope','$routeParams', function ($scope, $rootScope, $routeParams) {
 
         $scope.question = $routeParams.question;
 
-		}]);
+		}];
 

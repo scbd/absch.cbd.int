@@ -5,7 +5,8 @@ import './ircc-directive';
 import 'css!/app/css/print-friendly.css';
 import 'css!/app/css/pdf-communique.css';
 
-	app.controller('cpcPdfView', ['$scope','$http','$sce','$filter','$q', '$routeParams', 'realm',
+	export { default as template } from './checkpoint-communique.html';
+export default ['$scope','$http','$sce','$filter','$q', '$routeParams', 'realm',
 	 function($scope,$http, $sce, $filter, $q, $routeParams, realm) {
 
 		var sLocale      = "en";
@@ -124,7 +125,7 @@ import 'css!/app/css/pdf-communique.css';
 			
 		}
 
-	}]);
+	}];
 
 
 

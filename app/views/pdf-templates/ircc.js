@@ -1,10 +1,11 @@
-﻿import app from 'app';
+import app from 'app';
 import 'services/main';
 import './ircc-directive';
 import 'css!/app/css/print-friendly.css';
 import 'css!/app/css/pdf-ircc.css';
 
-	app.controller('irccPdfView', ['$scope','$routeParams','$location','$filter',
+	export { default as template } from './ircc.html';
+export default ['$scope','$routeParams','$location','$filter',
 		function($scope,$routeParams,$location, $filter) {
 		
 		var documentId = $routeParams.documentId;
@@ -17,6 +18,6 @@ import 'css!/app/css/pdf-ircc.css';
 		}
 		$scope.identifier = documentId;
 
-	}]);
+	}];
 
 

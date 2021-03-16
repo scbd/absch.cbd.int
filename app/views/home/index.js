@@ -5,7 +5,8 @@ import 'views/directives/home-country-dashboard-directive';
 import 'views/directives/map/home-map';
 import 'views/directives/home-articles-small';
 import 'angular-cookies';
-    app.controller('IndexController', ['$scope',
+    export { default as template } from './index.html';
+export default ['$scope',
     function ($scope) {
 
         $scope.locale = 'en';
@@ -47,5 +48,5 @@ import 'angular-cookies';
                 //     });
                 // });
         // });
-    }]);
+    }];
 
