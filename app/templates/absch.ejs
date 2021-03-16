@@ -160,7 +160,7 @@
     <script src="<%=cdnUrl%>npm/regenerator-runtime@0.13.7/runtime.js"></script>
     <script src="<%=cdnUrl%>combine/<%=angularBundle%>"></script>
     <script>
-        require(["app/boot.js?v=<%=appVersion%>"], function(boot){
+        require(["app/<%=bootFile%>"], function(boot){
             var bootFn = boot.default || boot;
             bootFn(window, require, define);
         });

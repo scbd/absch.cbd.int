@@ -84,8 +84,8 @@ function bundle(relativePath, baseDir='i18n-build') {
   let outputFileName   = `[name].[hash]${outputFileExt}`;
   // if(isLocalDev)
   //   outputFileName     = `[name].fakehash${outputFileExt}`;
-  if(isLocalDev && relativePath.indexOf('boot.js')>=0)
-    outputFileName     = `[name]${outputFileExt}`;  
+  // if(isLocalDev && relativePath.indexOf('boot.js')>=0)
+  //   outputFileName     = `[name]${outputFileExt}`;  
 
   if(/\.json\.js/.test(extension) || /\.json/.test(extension))
     requireSourcemap=false;
