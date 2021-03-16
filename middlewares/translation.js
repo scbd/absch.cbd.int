@@ -48,9 +48,11 @@ async function renderLanguageFile(req, res, next) {
  }
 
  async function renderApplicationTemplate(req, res){
+
     let urlPreferredLang;
     let preferredLang = getPreferredLanguage(req);
-
+    let hashMapping   = require(`${global.app.rootPath}/dist/${preferredLang}/app/hash-file-mapping.js.json`);
+    
     if(req.params.lang)
       urlPreferredLang = req.params.lang;
    
@@ -68,7 +70,8 @@ async function renderLanguageFile(req, res, next) {
                     googleAnalyticsCode: process.env.GOOGLE_ANALYTICS_CODE,
                     cdnUrl             : global.app.cdnUrl,
                     angularBundle      : bundleUrls.angularBundle,
-                    initialCss          : bundleUrls.initialCss
+                    initialCss         : bundleUrls.initialCss,
+                    bootFile           : hashMapping['boot.js']
                 };
     if(langFilepath){
         return res.render(langFilepath, options);
