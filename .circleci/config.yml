@@ -24,7 +24,7 @@ _run:
     name: Test docker image 
     command:  |
       docker run --name absch -e "CLEARINGHOUSE=absch" -e "CLEARINGHOUSE_HOST=absch.local" -d -p 8000:8000 output;sleep 10;
-      docker exec absch curl --retry 10 --retry-delay 5 -v http://localhost:8000/
+      docker exec absch curl --retry 10 --retry-delay 5 -v http://localhost:8000/en
 
 jobs:
   build:
