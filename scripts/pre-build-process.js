@@ -26,7 +26,7 @@ process.on('uncaughtException', (error) => {
 
 export const processFiles = async () =>{
     const baseDir   = path.resolve('./');
-    const languages = ['ar', 'en', 'fr', 'es', 'ru', 'zh'];
+    const languages = ['en'];//['ar', 'en', 'fr', 'es', 'ru', 'zh'];
     const enDir     = 'app';
     const i18nDir   = 'i18n';
     const buildDir  = 'i18n-build';
