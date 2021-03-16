@@ -1,8 +1,7 @@
 ﻿import app from 'app';
 import pdfObject from 'pdf-object';
 import 'components/scbd-angularjs-services/main';
-    app
-    .directive( 'elemReady', function( $parse ) {
+    app.directive( 'elemReady', function( $parse ) {
         return {
             restrict: 'A',
             link: function( $scope, elem, attrs ) { 
@@ -18,7 +17,9 @@ import 'components/scbd-angularjs-services/main';
             }
          }
      })
-    .controller("pdfViewer", ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout',
+    
+    export {default as template } from './records-pdf-viewer.html';
+    export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout',
     function ($scope, $http, $q, $location, $sce, locale, $route, realm, $timeout) {
 
         $scope.pdfLocale = locale;
@@ -82,6 +83,6 @@ import 'components/scbd-angularjs-services/main';
                                  .replace("{{schema}}", $route.current.params.schema);
         }
         $scope.loadLangPdf(locale||'en')
-    }])
+    }];
 
 

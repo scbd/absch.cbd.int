@@ -1,4 +1,3 @@
-import require from 'require';
 import template from 'text!./country-map.html';
 import app from 'app';
 import _ from 'lodash';

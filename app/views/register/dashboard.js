@@ -156,14 +156,17 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             }
             
             function loadmyTaskFacets(){
-                   var taskQuery = [];
-                   var referenceApproverRoles =
-                            {"resource"                 : ["AbsRequestApprovalNotification", "AbsRequestApprovalNotification-trg", "AbsRequestApprovalNotification-dev"],
-                            "capacityBuildingInitiative": ["AbsPACapacityBuildingInitiative", "AbsPACapacityBuildingInitiative-trg", "AbsPACapacityBuildingInitiative-dev"],
-                            "capacityBuildingResource"  : ["AbsPACapacityBuildingResource", "AbsPACapacityBuildingResource-trg", "AbsPACapacityBuildingResource-dev"],
-                            "modelContractualClause"    :  ["AbsPAModelContractualClause", "AbsPAModelContractualClause-dev", "AbsPAModelContractualClause-trg"],
-                            "communityProtocol"         :  ["AbsPACommunityProtocol", "AbsPACommunityProtocol-trg", "AbsPACommunityProtocol-dev"]};
-                            
+                    // TODO: can be just one query instead of 5!!!!
+                    var taskQuery = [];
+                    var referenceApproverRoles = {
+                        "resource"                  : realm.schemaRoles("resource"),
+                        "capacityBuildingInitiative": realm.schemaRoles("capacityBuildingInitiative")
+                    };
+                    if(realm.is('ABS', true)){
+                        referenceApproverRoles["capacityBuildingResource"]  = realm.schemaRoles("capacityBuildingResource"  )
+                        referenceApproverRoles["modelContractualClause"  ]  = realm.schemaRoles("modelContractualClause"    )
+                        referenceApproverRoles["communityProtocol"       ]  = realm.schemaRoles("communityProtocol"         )
+                    }
                     _.forEach(referenceApproverRoles, function(roles, schema){
 
                         if(roleService.isUserInRoles(roles)){
@@ -191,10 +194,12 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             }
             
             function loadArticle(){
-                articlesService.getArticle('5ce467f7452a5c00015e3406')
-                .then(function(article){
-                    $scope.betaArticle = article;
-                })
+                if(realm.is('BCH', true)){
+                    articlesService.getArticle('5ce467f7452a5c00015e3406')
+                    .then(function(article){
+                        $scope.betaArticle = article;
+                    });
+                }
             }
 
             init();

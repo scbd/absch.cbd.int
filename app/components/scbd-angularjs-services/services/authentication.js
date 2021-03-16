@@ -418,14 +418,19 @@ import './apiUrl';
                     }
 
                     //Special case for url that are in ng-include need to burst the cache for version change.
-                    if(/^\/app/.test(config.url) && (config.url.indexOf('.html')>0 || config.url.indexOf('.json')>0)){                          
-                        var url = window.getHashFileName(config.url+'.js');
-                        console.log(url)
-                        if(url.indexOf('v=')<0){    
-                            url = window.addAppVersionToUrl(url);                                
+                    if ((/^\/app/).test(config.url) && (config.url.indexOf(".html") > 0 || config.url.indexOf(".json") > 0)) {
+                        var url = config.url;
+                        
+                        if(!window.hasHashUrl(url)){
+                          var parseUrl = config.url 
+                          if(!/\.js$/.test(parseUrl))
+                            parseUrl += ".js";
+                          url = window.getHashFileName(parseUrl);
                         }
-                        // if(!/^\/?(en|ar|es|fr|ru|zh)\//.test(url))
-                        //     url = '/'+ $window.scbdApp.lang + url;
+                        console.log(url);
+                        if (url.indexOf("v=") < 0 && !window.hasHashUrl(url)) {
+                          url = window.addAppVersionToUrl(url);
+                        }
                         config.url = url;
                     }
 
