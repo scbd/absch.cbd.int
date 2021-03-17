@@ -1,4 +1,9 @@
-define(['text!./terms-dialog.html', 'app', 'lodash', '../../filters/ascii', 'components/scbd-angularjs-services/filters/scbd-filters', './tree-selector'], function(templateHtml, app, _) {
+import templateHtml from 'text!./terms-dialog.html';
+import app from 'app';
+import _ from 'lodash';
+import '../../filters/ascii';
+import 'components/scbd-angularjs-services/main';
+import './tree-selector';
 
     //==============================================
     //
@@ -262,4 +267,4 @@ define(['text!./terms-dialog.html', 'app', 'lodash', '../../filters/ascii', 'com
             }
         };
     }]);
-});
+

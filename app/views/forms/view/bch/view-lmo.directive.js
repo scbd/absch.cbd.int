@@ -1,7 +1,10 @@
-define(['app', "text!views/forms/view/bch/view-lmo.directive.html", 
-'views/directives/record-options', './view-lmo-reference.directive', './view-lmo-gene.directive',
-'views/forms/view/directives/view-record-reference.directive', 'views/forms/directives/view-terms-hierarchy'
-], function (app, template) {
+import app from 'app';
+import template from "text!./view-lmo.directive.html";
+import 'views/directives/record-options';
+import 'views/forms/view/bch/view-lmo-reference.directive';
+import 'views/forms/view/bch/view-lmo-gene.directive';
+import 'views/forms/view/directives/view-record-reference.directive';
+import 'views/forms/directives/view-terms-hierarchy';
 
 app.directive("viewModifiedOrganism", [function () {
 	return {
@@ -34,4 +37,4 @@ app.directive("viewModifiedOrganism", [function () {
 	};
 }]);
 
-});
+

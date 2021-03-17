@@ -1,8 +1,6 @@
-define(['app',
- 'text!./footer.html',
-  'css!./footer',
-],
-function(app, template, $) {
+import app from 'app';
+import template from 'text!./footer.html';
+import $ from 'css!components/scbd-branding/directives/footer';
      app.directive('scbdFooter', function() {
          return { restrict: 'E' ,
                   priority: 0,// child of header
@@ -18,4 +16,4 @@ function(app, template, $) {
                   }],//controller
         };//return
      });//directive
-});
+

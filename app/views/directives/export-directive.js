@@ -1,6 +1,8 @@
-define(['app','text!views/directives/export-directive.html', 'lodash',
-'services/search-service', 'ngDialog', 'services/role-service', 'services/solr'
-], function (app, template, _) {
+import app from 'app';
+import template from 'text!./export-directive.html';
+import _ from 'lodash';
+import 'services/main';
+import 'ngDialog';
     app.directive('export', function () {
         return {
             restrict: 'EAC',
@@ -156,7 +158,7 @@ define(['app','text!views/directives/export-directive.html', 'lodash',
                                                         
                                                     }
                                                     
-                                                    require(['json!./views/directives/field-list.json'], function(data){
+                                                    require(['views/directives/field-list'], function(data){
                                                         var fields = ((data||{}).fields||{}).split(',')
                                                         $timeout(function(){
                                                             $scope.fields = _.union($scope.fields, _.map(fields, function(field){
@@ -193,5 +195,5 @@ define(['app','text!views/directives/export-directive.html', 'lodash',
             ]
         };
     });
-});
+
 

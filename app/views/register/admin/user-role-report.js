@@ -1,9 +1,13 @@
-﻿define(['app', 'lodash', 'js/common', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'components/scbd-angularjs-services/services/main',
-'views/register/directives/register-top-menu', 'services/app-config-service',
-], function (app, _) {
+﻿import app from 'app';
+import _ from 'lodash';
+import 'services/main';
+import 'components/scbd-angularjs-controls/main';
+import 'views/register/directives/register-top-menu';
 
     "use strict";
-    app.controller("adminUserRolesReportController", ["$scope", "$timeout", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter", "$element",
+    export { default as template } from './user-role-report.html';
+
+  export default ["$scope", "$timeout", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter", "$element",
         function ($scope, $timeout, realm, commonjs, $q, appConfigService, $http, $filter, $element) {
             $scope.sortByField = 'name.en'
             $scope.reverse = false;
@@ -162,5 +166,5 @@
 
 
             loadCountryAndRegions();
-        }]);
-});
+        }];
+

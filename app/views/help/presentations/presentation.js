@@ -1,10 +1,12 @@
-define(['app', 'lodash'], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
 
-"use strict";
+
 //require("app", "dragAndDrop")
 
-app.controller("presentationController",
-	["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage",
+export { default as template } from './presentation.html';
+
+  export default ["$rootScope", "$location" , "$scope", "$q", "$window", "IStorage",
 	 "$compile", "$timeout","lstringFilter", "$routeParams",
 	 function ($rootScope, $location, $scope, $q, $window, storage,
 	  $compile,$timeout,lstringFilter, $routeParams) {
@@ -507,5 +509,5 @@ app.controller("presentationController",
        	 }
 
 
-   }]);
-});
+   }];
+

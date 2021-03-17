@@ -1,4 +1,9 @@
-define(['app', 'socket.io', 'lodash', './authentication', './apiUrl', './utilities'], function (app, io, _) {
+import app from 'app';
+import io from 'socket.io';
+import _ from 'lodash';
+import './authentication';
+import './apiUrl';
+import './utilities';
 
     app.factory('socketioService', ['$rootScope', '$http', '$q', 'realm', "authentication", "apiUrl", 'realmService',
     function ($rootScope, $http, $q, realm, authentication, apiUrl, realmService) {
@@ -80,4 +85,4 @@ define(['app', 'socket.io', 'lodash', './authentication', './apiUrl', './utiliti
             }
         }
     }]);
-});
+

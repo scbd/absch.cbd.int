@@ -1,10 +1,15 @@
-define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-controls/form-control-directives/all-controls', 'components/scbd-angularjs-services/services/main',
-    'views/register/directives/register-top-menu','chart-js',
-    'services/search-service','services/app-config-service', 'services/solr'
-], function (app) {
+import app from 'app';
+import 'lodash';
+import 'services/main';
+import 'moment';
+import 'components/scbd-angularjs-controls/main';
+import 'views/register/directives/register-top-menu';
+import 'chart-js';
 
-        "use strict";
-        app.controller("adminReportCountController", ["$scope", "solr", "searchService", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter",
+        
+        export { default as template } from './report-count.html';
+
+  export default ["$scope", "solr", "searchService", "realm", "commonjs", "$q", "appConfigService", "$http", "$filter",
             function ($scope, solr, searchService, realm, commonjs, $q, appConfigService, $http, $filter) {
                 
                 var chartObjects = {};
@@ -433,5 +438,5 @@ define(['app', 'lodash', 'js/common', 'moment', 'components/scbd-angularjs-contr
                     })
                 }
 
-            }]);
-    });
+            }];
+    

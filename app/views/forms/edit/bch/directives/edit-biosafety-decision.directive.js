@@ -1,6 +1,10 @@
-define(['app', 'lodash', 'text!./edit-biosafety-decision.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-decision.directive"], 
-function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./edit-biosafety-decision.directive.html';
+import 'views/forms/edit/edit';
+import 'services/main';
+import 'views/forms/edit/document-selector';
+import "views/forms/view/bch/view-biosafety-decision.directive";
 
     app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 
         function($controller, thesaurusService, $routeParams, solr, editFormUtility) {
@@ -400,4 +404,4 @@ function (app, _, template) {
 
    }]);
 
-});
+

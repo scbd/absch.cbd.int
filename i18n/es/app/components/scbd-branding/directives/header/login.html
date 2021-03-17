@@ -1,0 +1,74 @@
+﻿<div id="CBD-Branding">
+<div class="modal fade login" tabindex="-1" role="dialog" aria-hidden="true" id="loginDialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <img src="/app/components/scbd-branding/images/cbd-logo-green-en.svg" style="max-height:70px;"></img>
+      </div>
+      <div class="modal-body  dropshadow" style="">
+        <div class="row" ng-show="!user.isAuthenticated">
+          <div class="col-xs-12">
+            <div>
+                
+              <div class="alert alert-info" ng-show="sessionExpiredAlert">
+                  <strong>Session Expired.</strong> Your session has expired, please log-in to continue.
+              </div>
+              <div class="alert alert-danger" ng-show="errorInvalid">
+                <strong>Login failed.</strong> The email address and password combination you entered is incorrect.
+              </div>
+
+              <div class="alert alert-danger" ng-show="errorTimeout">
+                <strong>Operation failed.</strong> The service is not available. Please try again later.
+              </div>
+              <form name="form" ng-submit="doSignIn()" class="ng-pristine ng-invalid ng-invalid-required">
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                    <input type="text" ng-disabled="waiting" class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputEmail" name="email" ng-model="email" placeholder="registered email address" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock" style="width:14px;height:10px;"></i></span>
+                    <input type="password" ng-disabled="waiting" class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputPassword" name="password" ng-model="password" placeholder="password" required>
+                  </div>
+                </div>
+                <div class="form-group ">
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary " ng-disabled="waiting">
+                      <i class="fa fa-spin fa-spinner" ng-if="waiting"></i> Sign in to your account
+                    </button>
+                    <div class="spinner ng-hide" ng-show="waiting">
+                      <div class="bounce1"></div>
+                      <div class="bounce2"></div>
+                      <div class="bounce3"></div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+
+          </div>
+          <div class="col-xs-12">
+            <span class="pull-left">
+              <a rel="noopener" href="https://accounts.cbd.int/password/reset" style="text-decoration:none;" class="color-white" target="_blank">Forgot password?</a>
+
+            </span>
+            <span class="pull-right">
+              <a rel="noopener" href="https://accounts.cbd.int/signup" style="text-decoration:none;" class="color-white" target="_blank">Create an account</a>
+            </span>
+          </div>
+          <!-- <div class="col-xs-5" style="border-left:5px solid #ccc;height:250px;margin-top:5px;">
+                      <div style="padding:1px 10px 15px 10px; margin:0;">
+                      <h1>No account? <h2>Get started. Create your CBD account by signing up with <span class="color-white">accounts.cbd.int</span>.</h2>
+                      <a rel="noopener" href="#" style="width:100px;" ng-click="actionSignup()" class="btn btn-primary" ng-disabled="waiting" >Sign up</a></h1>
+
+                  </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

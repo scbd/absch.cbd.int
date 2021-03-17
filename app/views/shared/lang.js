@@ -1,7 +1,9 @@
-define(['app', 'angular-cookies',
-		'components/scbd-angularjs-services/services/locale', 'services/local-storage-service'
-        ], function (app, moment) {
-    return ["$scope", "$location", "locale","$timeout", "$window", "$routeParams", "$cookies", 'localStorageService',
+import app from 'app';
+import moment from 'angular-cookies';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
+    export { default as template } from './lang.html';
+export default ["$scope", "$location", "locale","$timeout", "$window", "$routeParams", "$cookies", 'localStorageService',
 		function ($scope, $location, locale, $timeout, $window, $routeParams, $cookies, localStorageService){
 			    var lang = 'en';
 				if($routeParams.langCode)
@@ -20,4 +22,4 @@ define(['app', 'angular-cookies',
 					$window.location.href = returnUrl;
 				}, 1000);
 		}];
-});
+

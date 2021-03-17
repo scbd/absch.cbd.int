@@ -1,11 +1,12 @@
-define(['app',
-        'lodash',    
-        'services/role-service',
-        'components/scbd-branding/directives/xuser-notifications-panel',
-        'views/register/directives/register-top-menu'
-  ], function(app, _) {
-    "use strict";
-    app.controller("NotificationsController", ["$rootScope", "$scope", "roleService", "IWorkflows", "realm", "$q",
+import app from 'app';
+import _ from 'lodash';
+import 'services/main';
+import 'components/scbd-branding/main';
+import 'views/register/directives/register-top-menu';
+    
+    export { default as template } from './notifications.html';
+
+    export default ["$rootScope", "$scope", "roleService", "IWorkflows", "realm", "$q",
                     "$routeParams", '$location', "$filter", "$http", "$element","$timeout",
         function($rootScope, $scope, roleService, workflows, realm, $q, $routeParams, $location, $filter, $http, $element, $timeout) {
 
@@ -31,5 +32,5 @@ define(['app',
             
             $scope.realm = realm.value;
         }
-    ]);
-});
+    ];
+

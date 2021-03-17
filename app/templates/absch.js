@@ -1,20 +1,27 @@
-define(['app', 'lodash', 'moment', 'angular', 'toastr', 'bootstrap', 'routes/absch', 'angular-loggly-logger',
-'angular-animate', 'components/scbd-branding/directives/header/xuser-notification-config-service',
-'services/local-storage-service', 'views/directives/route-loading-directive'], 
-function (app, _, moment, angular) {
-    'use strict';
+import app from 'app';
+import _ from 'lodash';
+import moment from 'moment';
+import angular from 'angular';
+import 'toastr';
+import 'bootstrap';
+import 'routes/absch';
+import 'angular-loggly-logger';
+import 'angular-animate';
+import 'components/scbd-branding/main';
+import 'services/main';
+import 'views/directives/route-loading-directive';
 
     app.config(["toastrConfig", function(toastrConfig) {
         angular.extend(toastrConfig, {
-            autoDismiss: true,
-            containerId: 'toast-container',
-            maxOpened: 1,
-            newestOnTop: true,
+            autoDismiss:true,
+            containerId:'toast-container',
+            maxOpened:1,
+            newestOnTop:true,
             positionClass: 'toast-top-right',
-            preventDuplicates: true,
+            preventDuplicates:true,
             preventOpenDuplicates:false,
-            target: 'body',
-            timeOut: 2000,
+            target:'body',
+            timeOut:2000,
             });
         }]);
 
@@ -158,9 +165,9 @@ function (app, _, moment, angular) {
 
             function loadDepencies(){
 
-                require(['angular-animate', 'components/scbd-angularjs-services/filters/scbd-filters','components/scbd-angularjs-services/services/main',
-                'angular-localizer', 'angular-animate', 'components/scbd-branding/directives/footer',
-                'views/directives/nav/portal-branding', 'components/scbd-branding/directives/header/header', 'views/directives/nav/portal-nav'], 
+                require(['angular-animate', 'components/scbd-angularjs-services/main',
+                'angular-animate', 'components/scbd-branding/main',
+                'views/directives/nav/portal-branding', 'views/directives/nav/portal-nav'], 
                     function () {
 
                             $('#divHeader').append('<scbd-header></scbd-header><portal-branding></portal-branding><portal-nav></portal-nav>');
@@ -179,10 +186,10 @@ function (app, _, moment, angular) {
                 moment.locale(lang);
 
                 if (lang != 'en')
-                    require(['css!/app/css/translation.css']);
+                    require(['css!/app/css/translation.css'], function(){});
 
                 if (lang == 'ar') {
-                    require(['css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-flipped.min.css']);
+                    require(['css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-flipped.min.css'], function(){});
                 }
             }
 
@@ -247,4 +254,4 @@ function (app, _, moment, angular) {
         })
         console.error(e);
     }
-});
+

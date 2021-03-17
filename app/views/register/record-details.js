@@ -1,12 +1,15 @@
-define(['app', 'lodash', 'views/forms/view/record-loader.directive',
-'views/forms/view/record-loader.directive',
-    'js/common', 'services/role-service', 'toastr',
-    'views/directives/block-region-directive',
-    'views/register/directives/register-top-menu',
-    'views/directives/task-id-directive'
-], function (app, _) {
-    "use strict";
-    app.controller("recordDetailsController", ["$rootScope", "$scope", "$filter", "$routeParams", "IStorage", "$q",
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/view/record-loader.directive';
+import 'services/main';
+import 'toastr';
+import 'views/directives/block-region-directive';
+import 'views/register/directives/register-top-menu';
+import 'views/directives/task-id-directive';
+    
+    export { default as template } from './record-details.html';
+
+    export default ["$rootScope", "$scope", "$filter", "$routeParams", "IStorage", "$q",
         "IWorkflows", "IUserNotifications", "commonjs", "$element", "$timeout", "roleService", "toastr", "$location", "breadcrumbs",
         function ($rootScope, $scope, $filter, $routeParams, IStorage, $q, IWorkflows, IUserNotifications, commonjs, $element, $timeout, 
         roleService, toastr, $location, breadcrumbs) {
@@ -183,5 +186,4 @@ define(['app', 'lodash', 'views/forms/view/record-loader.directive',
             });
 
         }
-    ]);
-});
+    ];

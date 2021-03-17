@@ -1,12 +1,13 @@
-define(['./directives/national-reports/questions-selector', './directives/national-reports/analyzer'], function() { 'use strict';
+import './directives/national-reports/questions-selector';
+import './directives/national-reports/analyzer'; ;
 
-    return ['$scope', '$location', 'realm', '$timeout',
+    export { default as template } from './analyzer.html';
+export default ['$scope', '$location', 'realm', '$timeout',
      function($scope, $location, realm, $timeout) {
         
-        var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
         $scope.showAnalyzer = false;
         $scope.self = $scope;
-        require(['json!'+baseUrl+'app-data/report-analyzer-mapping.json'], function(res){
+        require(['app-data/report-analyzer-mapping.json'], function(res){
             var appName = realm.value.replace(/-.*/,'').toLowerCase();
             
             $scope.reportData = res[appName];
@@ -112,4 +113,4 @@ define(['./directives/national-reports/questions-selector', './directives/nation
             analyze(false);            
         });
     }];
-});
+

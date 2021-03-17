@@ -1,6 +1,7 @@
-define(['app' , 'text!views/directives/internal-record-details.html', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 	'views/forms/view/view-history-directive',
-
-    ], function (app, template) {
+import app from 'app';
+import template from 'text!./OLD-internal-record-details.html';
+import 'components/scbd-angularjs-services/main';
+import 'views/forms/view/view-history-directive';
 	app.directive('internalRecordDetails', function($http){
 		return{
 			restrict: 'EAC',
@@ -22,4 +23,4 @@ define(['app' , 'text!views/directives/internal-record-details.html', 'component
 		};
 
 	});
-});
+

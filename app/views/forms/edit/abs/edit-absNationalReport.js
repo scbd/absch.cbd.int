@@ -1,10 +1,13 @@
-define(['app', 'lodash', 'views/forms/edit/edit' , 'views/forms/edit/document-selector',
-        'views/forms/view/abs/view-abs-national-report.directive',
-        'services/search-service','services/app-config-service', 'services/solr'
-], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import 'views/forms/edit/document-selector';
+import 'views/forms/view/abs/view-abs-national-report.directive';
+import 'services/main';
 
-  app.controller("editAbsNationalReport",
-  ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "searchService","appConfigService", 'solr',
+  export { default as template } from './edit-absNationalReport.html';
+
+  export default ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "searchService","appConfigService", 'solr',
   function ($scope, $http, $filter, $controller,$location, $q, realm, searchService, appConfigService, solr) {
 
     $controller('editController', {$scope: $scope});
@@ -581,5 +584,5 @@ define(['app', 'lodash', 'views/forms/edit/edit' , 'views/forms/edit/document-se
         return deferred.promise;
     }
 
-  }]);
-});
+  }];
+

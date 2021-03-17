@@ -1,12 +1,19 @@
-﻿define(['app', 'lodash', 'json!app-data/bch/report-analyzer/cpbNationalReport4.json', 
-    'json!app-data/bch/report-analyzer/cpbNationalReport3.json',
-    'views/forms/edit/edit', 'services/thesaurus-service', 'views/forms/directives/nr-yes-no',
-	'views/forms/edit/document-selector', 'js/common', 'views/directives/block-region-directive',
-    'views/forms/view/bch/view-national-report-4.directive', 'components/scbd-angularjs-services/services/storage',
-    'ngDialog'], 
-function (app, _, nr4Data, nr3Data) {
+﻿import app from 'app';
+import _ from 'lodash';
+import nr4Data from 'app-data/bch/report-analyzer/cpbNationalReport4.json';
+import nr3Data from 'app-data/bch/report-analyzer/cpbNationalReport3.json';
+import 'views/forms/edit/edit';
+import 'services/main';
+import 'views/forms/directives/nr-yes-no';
+import 'views/forms/edit/document-selector';
+import 'views/directives/block-region-directive';
+import 'views/forms/view/bch/view-national-report-4.directive';
+import 'components/scbd-angularjs-services/main';
+import 'ngDialog';
     
-    app.controller("editBchNationalReport4Controller", ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 
+    export { default as template } from './edit-national-report-4.html';
+
+  export default ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 
     'commonjs', 'IStorage', '$routeParams', 'ngDialog',
 	function($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog) {
         
@@ -560,8 +567,8 @@ function (app, _, nr4Data, nr3Data) {
         }
 
         init();
-   }]);
+   }];
 
 
    
-});
+

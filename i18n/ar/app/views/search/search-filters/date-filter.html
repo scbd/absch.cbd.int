@@ -1,0 +1,25 @@
+﻿<div id="Search-Filter"  style="margin-bottom:30px;" >
+     <div>
+        <span class="country-heading">Date</span>
+        <hr class="heading" />
+         <p class="helpinfo"><i class="fa fa-info-circle helpicon"></i> Filter for record published/updated within a date range</p>
+        
+    </div>
+    <div style="max-height:400px;">
+            <div class="filter col-lg-3">
+                
+                <div class="row" style="margin-top:6px">
+                    <div class="col-md-4">
+                        <select class="form-control" ng-model="dateFilter.field" ng-change="onFiedlChange()">
+                            <option value="updatedDate_dt" selected="selected">Published on</option>
+                            <option value="createdDate_dt">Created on</option>
+                        </select>
+                    </div>
+                    <div class="col-md-8 pull-right">
+                        <div km-date-range ng-model="dateFilter.value" ng-change="onChange()"></div>
+                    </div>
+                </div>
+               
+            </div>
+    </div>
+</div>

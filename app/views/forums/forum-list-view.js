@@ -1,5 +1,7 @@
-define(['app', 'cbd-forums'], function (app) {
-    return ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route",
+import app from 'app';
+import 'cbd-forums';
+    export { default as template } from './forum-list-view.html';
+export default ["$scope", "$http", "$q", "$filter", "$timeout", "$location", "$route",
         function ($scope, $http, $q, $filter, $timeout, $location, $route) {
 
             //TODO : need a API to get facets
@@ -45,4 +47,4 @@ define(['app', 'cbd-forums'], function (app) {
                 });
 
         }];
-});
+

@@ -1,7 +1,13 @@
-﻿define(['app', 'lodash', 'views/forms/edit/edit', '../view/view-submission.directive',
-        'views/forms/edit/organization-selector', 'services/solr', 'services/search-service', 'services/thesaurus-service'], function (app, _) {
+﻿import app from 'app';
+import _ from 'lodash';
+import 'views/forms/edit/edit';
+import '.views/forms/edit/view/view-submission.directive';
+import 'views/forms/edit/organization-selector';
+import 'services/main';
 
-  app.controller("editSubmission", ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService',
+  export { default as template } from './edit-submission.html';
+
+  export default ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService',
    function ($scope, $http, $controller, realm, searchService, solr, thesaurusService) {
 
     $scope.isBch = realm.is('BCH');
@@ -82,5 +88,5 @@
         $scope.onNotificationSelected();
     });
 
-  }]);
-});
+  }];
+

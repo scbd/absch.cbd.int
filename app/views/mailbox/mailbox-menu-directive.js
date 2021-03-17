@@ -1,5 +1,6 @@
-define(['app','text!views/mailbox/mailbox-menu-directive.html',
-'lodash'], function(app, template,_) {
+import app from 'app';
+import template from 'text!./mailbox-menu-directive.html';
+import _ from 'lodash';
     app.directive('mailboxMenu', function() {
         return {
             restrict: 'EAC',
@@ -59,4 +60,4 @@ define(['app','text!views/mailbox/mailbox-menu-directive.html',
 
         };
     });
-});
+

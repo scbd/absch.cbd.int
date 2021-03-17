@@ -1,4 +1,7 @@
-﻿define(['app','text!./search-content.html', 'lunr', 'jquery-highlight'], function(app, template, lunr){
+﻿import app from 'app';
+import template from 'text!./search-content.html';
+import lunr from 'lunr';
+import 'jquery-highlight';
 
     app.directive("searchContent", function(){
       return {
@@ -96,4 +99,4 @@
       }  
     })
     
-})
+

@@ -1,8 +1,10 @@
-define(['app', 
- 'services/role-service', 
- 'views/register/directives/register-top-menu'], function(app) {
- "use strict";
-    app.controller("ReportsController", ["$rootScope", "$scope", "roleService", 
+import app from 'app';
+import 'services/main';
+import 'views/register/directives/register-top-menu';
+ 
+    export { default as template } from './index.html';
+
+    export default ["$rootScope", "$scope", "roleService", 
         function($rootScope, $scope, roleService) {
 
             // if ($rootScope.user.isAuthenticated) {
@@ -12,5 +14,5 @@ define(['app',
                
             // }
         }
-    ]);
-});
+    ];
+

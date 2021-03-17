@@ -1,6 +1,7 @@
-define(['lodash'], function(_) {
+import _ from 'lodash';
 
-    return ['$scope', 'user', 'manageableRoles', 'governmentPARole', function ($scope, user, manageableRoles, governmentPARole) {
+    export { default as template } from './edit-roles-dialog.html';
+export default ['$scope', 'user', 'manageableRoles', 'governmentPARole', function ($scope, user, manageableRoles, governmentPARole) {
 
         var _ctrl = this;
 
@@ -83,4 +84,4 @@ define(['lodash'], function(_) {
         }
 
 	}];
-});
+

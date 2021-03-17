@@ -1,9 +1,12 @@
-define(['app', 'lodash','text!views/directives/task-id-directive.html',
-	'../forms/view/record-loader.directive', 'toastr', , 'ngDialog',
-	'views/directives/document-reference-history',
-	'services/local-storage-service', './block-region-directive',
-	'../forms/view/record-loader.directive','services/role-service',
-], function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./task-id-directive.html';
+import '.views/directives/forms/view/record-loader.directive';
+import 'toastr';
+import 'ngDialog';
+import 'views/directives/document-reference-history';
+import 'services/main';
+import 'views/directives/block-region-directive';
 
 	app.directive('taskId', function () {
         return {
@@ -245,4 +248,4 @@ define(['app', 'lodash','text!views/directives/task-id-directive.html',
 
 			};
 		});
-	});
+	

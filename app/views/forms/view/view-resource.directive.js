@@ -1,6 +1,6 @@
-define(['app',"text!views/forms/view/view-resource.directive.html",
-'views/directives/record-options',
-], function (app, template) {
+import app from 'app';
+import template from "text!./view-resource.directive.html";
+import 'views/directives/record-options';
 app.directive("viewResource", [function () {
 	return {
 		restrict   : "EAC",
@@ -86,4 +86,4 @@ app.directive("viewResource", [function () {
 	};
 }]);
 
-});
+

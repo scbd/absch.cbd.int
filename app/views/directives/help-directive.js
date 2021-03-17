@@ -1,4 +1,6 @@
-define(['app', 'lodash', 'angular-joyride'], function (app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'angular-joyride';
         app.directive('help', function ($http) {
                 return {
                         restrict: 'EAC',
@@ -270,4 +272,4 @@ define(['app', 'lodash', 'angular-joyride'], function (app, _) {
                 };
 
         });
-});
+

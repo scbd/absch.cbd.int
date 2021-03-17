@@ -1,6 +1,9 @@
-define(['app', 'text!views/search/search-results/result-grouped-national-record.html','lodash', 'moment', 'js/common',
-'views/forms/view/record-loader.directive'
-], function(app, template, _, moment) {
+import app from 'app';
+import template from 'text!./result-grouped-national-record.html';
+import _ from 'lodash';
+import moment from 'moment';
+import 'services/main';
+import 'views/forms/view/record-loader.directive';
 
     app.directive('resultGroupedNationalRecord', ["$timeout", function($timeout) {
         return {
@@ -27,4 +30,4 @@ define(['app', 'text!views/search/search-results/result-grouped-national-record.
             },
         };
     }]);
-});
+

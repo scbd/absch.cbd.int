@@ -1,6 +1,7 @@
-define(['app', "text!views/forms/view/view-contact.directive.html","views/forms/view/directives/view-record-reference.directive",
-'views/directives/party-status'], 
-function(app, template) {
+import app from 'app';
+import template from "text!./view-contact.directive.html";
+import "views/forms/view/directives/view-record-reference.directive";
+import 'views/directives/party-status';
 
     app.directive("viewContact", [function() {
         return {
@@ -16,4 +17,4 @@ function(app, template) {
             controller: ["$scope", function ($scope){}]
         };
     }]);
-});
+

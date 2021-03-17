@@ -1,5 +1,7 @@
- define(["app", "text!views/forms/view/abs/view-abs-procedure.directive.html", 
- 	'views/directives/record-options', 'views/forms/view/directives/view-record-reference.directive'], function(app, template){
+ import app from "app";
+import template from "text!./view-abs-procedure.directive.html";
+import 'views/directives/record-options';
+import 'views/forms/view/directives/view-record-reference.directive';
 
 			app.directive("viewAbsProcedure", [function () {
 					
@@ -36,5 +38,4 @@
 				};
 			}]);
 			
- 	}
- );
+ 	

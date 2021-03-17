@@ -1,0 +1,377 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-blue">
+		<h4>
+			<span ng-bind="::document.header.schema|schemaName"></span>
+			<span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span>
+		</h4>
+	</div>
+	<div class="record-body panel-body">
+
+
+
+		<document-date></document-date>
+		<legend>General information</legend>
+
+		<div ng-show="document.government" class="padding-top-10">
+			<label name="country">Country</label>
+			<div class="km-value" compare-val>
+				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
+				<span ng-party-status government="document.government" id="government"></span>
+			</div>
+		</div>
+
+		<section>
+			<legend>Profile of the expert</legend>
+			<div ng-if="document.profile" class="padding-top-10">
+				<label>Brief profile</label>
+				<div compare-val>
+				<km-value-ml value="document.profile" locales="locale" html></km-value-ml>
+				</div>
+			</div>
+			<div ng-if="document.contact">
+				<label>Contact details</label>
+				<div class="km-value" compare-val>
+					<view-record-reference ng-model="document.contact" locale="locale"></view-record-reference>
+				</div>
+			</div>
+
+			<div class="row" ng-if="document.birthYear" class="padding-top-10">
+
+				<div ng-if="document.birthYear" class="col-md-6">
+					<label>Year of birth</label>
+					<div class="km-value" compare-val>
+						<span ng-bind="document.birthYear"></span>
+					</div>
+				</div>
+			</div>
+			<div ng-show="document.birthCountry"   class="padding-top-10">
+				<label>Country of birth</label>
+				<div class="km-value" compare-val>
+					<span ng-bind="document.birthCountry|term:locale"></span>
+				</div>
+			</div>
+
+			<div ng-if="document.nationalities"  class="padding-top-10">
+				<label>Nationality(ies)</label>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.nationalities">
+							<span ng-bind="item|term:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section ng-if="document.currentEmployment">
+			<legend>Details of current employment</legend>
+			
+			<div ng-if="document.currentEmployment.name" class="padding-top-10" >
+				<label>Name of Employer / Organization / Company</label>
+				<div compare-val>
+				<km-value-ml value="document.currentEmployment.name" locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-if="document.currentEmployment.title"  class="padding-top-10">
+				<label>Job title</label>
+				<div compare-val>
+				<km-value-ml value="document.currentEmployment.title" locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-if="document.currentEmployment.department"  class="padding-top-10">
+				<label>Department / Division / Unit</label>
+				<div compare-val>
+				<km-value-ml value="document.currentEmployment.department" locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div  class="padding-top-10 row"  ng-if="document.currentEmployment.startDate || document.currentEmployment.endDate">
+				<div class="col-md-6" ng-if="document.currentEmployment.startDate">
+					<label>Start Date</label>
+					<div comprae-val>
+					<span class="km-value" ng-bind="document.currentEmployment.startDate"></span>
+					</div>
+				</div>
+
+				<div class="col-md-6" ng-if="document.currentEmployment.organizationType" >
+					<label>Type of organization</label>
+					<div compare-val>
+					<span class="km-value" ng-if="document.currentEmployment.organizationType.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" 
+						ng-bind="document.currentEmployment.organizationType|term:locale"></span>
+						<span class="km-value" ng-if="document.currentEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" 
+						ng-bind="document.currentEmployment.organizationType.customValue|lstring:locale"></span>
+					</div>
+				</div>
+			</div>
+			
+			<div ng-if="document.currentEmployment.responsibilities"  class="padding-top-10">
+				<label>Main Areas of Responsibility</label>
+				<div compare-val>
+				<km-value-ml value="document.currentEmployment.responsibilities" html locales="locale"></km-value-ml>
+				</div>
+			</div>
+		</section>
+		<section ng-if="document.previousEmployment || document.countryRegionsWorkedIn">
+			<legend>Employment history</legend>
+			<div ng-if="document.countryRegionsWorkedIn"  class="padding-top-10">
+				<label>Countries or regions worked in</label>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.countryRegionsWorkedIn">
+							<span ng-bind="item|term:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div ng-if="document.previousEmployment.name"  class="padding-top-10">
+				<label>Name of Previous Employer / Organization / Company</label>
+				<div compare-val>
+				<km-value-ml value="document.previousEmployment.name" locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-if="document.previousEmployment.department"  class="padding-top-10">
+				<label>Department / Division / Unit</label>
+				<div compare-val>
+				<km-value-ml value="document.previousEmployment.department" locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div class="row padding-top-10"  ng-if="document.previousEmployment.startDate || document.previousEmployment.endDate">
+				<div class="col-md-6" ng-if="document.previousEmployment.startDate">
+					<label>Start Date</label>
+					<div compare-val>
+					<span class="km-value" ng-bind="document.previousEmployment.startDate"></span>
+					</div>
+				</div>
+
+				<div class="col-md-6" ng-if="document.previousEmployment.endDate">
+					<label>End Date</label>
+					<div compare-val>
+					<span class="km-value" ng-bind="document.previousEmployment.endDate"></span>
+					</div>
+				</div>
+			</div>
+
+			<div ng-if="document.previousEmployment.organizationType"  class="padding-top-10">
+				<label>Type of organization</label>
+				<div compare-val>
+				<span class="km-value" ng-if="document.previousEmployment.organizationType.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" 
+					ng-bind="document.previousEmployment.organizationType|term:locale"></span>
+					<span class="km-value" ng-if="document.previousEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" 
+					ng-bind="document.previousEmployment.organizationType.customValue|lstring:locale"></span>
+				</div>
+			</div>
+			<div ng-if="document.previousEmployment.responsibilities"  class="padding-top-10">
+				<label>Main Areas of Responsibility</label>
+				<div compare-val>
+				<km-value-ml value="document.previousEmployment.responsibilities" html locales="locale"></km-value-ml>
+				</div>
+			</div>
+		</section>
+		<section>
+			<legend>Post-secondary education</legend>
+			<h3 style="padding-bottom: 10px;">Formal education</h3>
+			<section ng-if="document.primaryEducation" style="padding-top: 20px;">
+				<h3 style="padding-bottom: 5px; border-bottom: 1px solid #eee;">First Degree</h3>
+				<div ng-if="document.primaryEducation.title"  class="padding-top-10">
+					<label>Title of the Degree or other academic distinction and subject</label>
+					<div compare-val>
+					<km-value-ml value="document.primaryEducation.title" locales="locale"></km-value-ml>
+					</div>
+				</div>
+				<div ng-if="document.primaryEducation.institution"  class="padding-top-10">
+					<label>Name of academic institution</label>
+					<div compare-val>
+					<km-value-ml value="document.primaryEducation.institution" locales="locale"></km-value-ml>
+					</div>
+				</div>
+				<div class="row padding-top-10"  ng-if="document.primaryEducation.startDate || document.primaryEducation.endDate">
+					<div class="col-md-6" ng-if="document.primaryEducation.startDate">
+						<label>Start Date</label>
+						<div compare-val>
+						<span class="km-value" ng-bind="document.primaryEducation.startDate"></span>
+						</div>
+					</div>
+
+					<div class="col-md-6" ng-if="document.primaryEducation.endDate">
+						<label>End Date</label>
+						<div compare-val>
+						<span class="km-value" ng-bind="document.primaryEducation.endDate"></span>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section ng-if="document.secondaryEducation" style="padding-top: 20px;">
+				<h3 style="padding-bottom: 5px; border-bottom: 1px solid #eee;">Second Degree</h3>
+				<div ng-if="document.secondaryEducation.title"  class="padding-top-10">
+					<label>Title of the Degree or other academic distinction and subject</label>
+					<div compare-val>
+					<km-value-ml value="document.secondaryEducation.title" locales="locale"></km-value-ml>
+					</div>
+				</div>
+				<div ng-if="document.secondaryEducation.institution"  class="padding-top-10">
+					<label>Name of academic institution</label>
+					<div compare-val>
+					<km-value-ml value="document.secondaryEducation.institution" locales="locale"></km-value-ml>
+					</div>
+				</div>
+				<div class="row padding-top-10"  ng-if="document.secondaryEducation.startDate || document.secondaryEducation.endDate">
+					<div class="col-md-6" ng-if="document.secondaryEducation.startDate">
+						<label>Start Date</label>
+						<div compare-val>
+						<span class="km-value" ng-bind="document.secondaryEducation.startDate"></span>
+						</div>
+					</div>
+
+					<div class="col-md-6" ng-if="document.secondaryEducation.endDate">
+						<label>End Date</label>
+						<div compare-val>
+						<span class="km-value" ng-bind="document.secondaryEducation.endDate"></span>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section ng-if="document.thirdEducation" style="padding-top: 20px;">
+				<h3 style="padding-bottom: 5px; border-bottom: 1px solid #eee;">Third Degree</h3>
+				<div ng-if="document.thirdEducation.title"  class="padding-top-10">
+					<label>Title of the Degree or other academic distinction and subject</label>
+					<div compare-val>
+					<km-value-ml value="document.thirdEducation.title" locales="locale"></km-value-ml>
+					</div>
+				</div>
+				<div ng-if="document.thirdEducation.institution"  class="padding-top-10">
+					<label>Name of academic institution</label>
+					<div compare-val>
+					<km-value-ml value="document.thirdEducation.institution" locales="locale"></km-value-ml>
+					</div>
+				</div>
+				<div class="row padding-top-10"  ng-if="document.thirdEducation.startDate || document.thirdEducation.endDate">
+					<div class="col-md-6" ng-if="document.thirdEducation.startDate">
+						<label>Start Date</label>
+						<div compare-val>
+						<span class="km-value" ng-bind="document.thirdEducation.startDate"></span>
+						</div>
+					</div>
+
+					<div class="col-md-6" ng-if="document.thirdEducation.endDate">
+						<label>End Date</label>
+						<div compare-val>
+						<span class="km-value" ng-bind="document.thirdEducation.endDate"></span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<div ng-if="document.professionalQualification" class="padding-top-10">
+				<h3>Other professional qualifications</h3>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.professionalQualification">
+							<span ng-bind-html="item|lstring:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section>
+			<div ng-if="document.expertise">
+				<legend>Areas of expertise</legend>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.expertise">
+							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+							<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div ng-if="document.relevantPublication">
+				<legend>Publications</legend>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.relevantPublication">
+							<span ng-bind-html="item|lstring:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div ng-if="document.professionalMemberships">
+				<legend>Professional memberships</legend>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.professionalMemberships">
+							<span ng-bind-html="item|lstring:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div ng-if="document.panelServed">
+				<legend>Technical committees, expert panels or advisory bodies served</legend>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.panelServed">
+							<span ng-bind-html="item|lstring:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<legend>Language proficiency</legend>
+			<div ng-if="document.motherTongue" class="padding-top-10">
+				<label>Mother tongue</label>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.motherTongue">
+							<span ng-bind="item|term:locale"></span>							
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div ng-if="document.languageRating" class="padding-top-10">
+				<label>Other languages</label>
+				<div class="km-value1" compare-val>
+					<table class="table table-bordered">
+						<tr>
+							<th style="width: 10%;">Language</th>
+							<th>Level</th>
+						</tr>
+						<tr ng-repeat="item in document.languageRating" style="padding-top: 5px;">
+							<td>
+								<span ng-bind="item|term:locale"></span> 
+							</td>
+							<td>
+								<span ng-bind="item.level"></span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+		</section>
+
+		<div ng-if="document.additionalInformation||document.additionalDocuments">
+			<legend>Any other relevant information</legend>
+
+			<div ng-if="document.additionalInformation" class="padding-top-10">
+				<div compare-val>
+				<km-value-ml value="document.additionalInformation" locales="locale" html></km-value-ml>
+				</div>
+			</div>
+
+			<div ng-if="document.additionalDocuments" class="padding-top-10">
+				<label>Other relevant website addresses and/or attached documents</label>
+				<div compare-val>
+				<div class="km-value" ng-if="document.additionalDocuments" km-link-list 
+					ng-model="document.additionalDocuments" style="margin-top: 5px;"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>

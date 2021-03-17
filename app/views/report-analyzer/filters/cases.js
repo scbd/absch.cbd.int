@@ -1,5 +1,6 @@
-define(['app', 'lodash'], function(app, _) {
-    'use strict';
+import app from 'app';
+import _ from 'lodash';
+    ;
 
     app.filter("kebabcase", [function() {
         return function(text) {
@@ -18,4 +19,4 @@ define(['app', 'lodash'], function(app, _) {
             return text ? _.snakeCase(text) : text;
         };
     }]);
-});
+

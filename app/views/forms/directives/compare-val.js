@@ -1,4 +1,4 @@
-﻿define(['app'], function (app) {
+﻿import app from 'app';
     app.directive('compareVal', function () {
         return {
             restrict: 'EA',
@@ -18,4 +18,4 @@
             }
         }
     })
-})
+

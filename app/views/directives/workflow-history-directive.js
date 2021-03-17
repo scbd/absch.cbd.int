@@ -1,4 +1,6 @@
-define(['app', 'lodash', 'text!views/directives/workflow-history-directive.html'], function(app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./workflow-history-directive.html';
 
     app.directive('workflowHistory', ["$q", "$timeout",
         function($q, $timeout) {
@@ -42,4 +44,4 @@ define(['app', 'lodash', 'text!views/directives/workflow-history-directive.html'
 
         }
     ]);
-});
+

@@ -1,4 +1,5 @@
-define(['app', "text!views/forms/view/view-capacity-building-resource.directive.html"], function (app, template) {
+import app from 'app';
+import template from "text!./view-capacity-building-resource.directive.html";
 
 app.directive("viewCapacityBuildingResource", [function () {
 	return {
@@ -69,4 +70,4 @@ app.directive("viewCapacityBuildingResource", [function () {
 	};
 }]);
 
-});
+

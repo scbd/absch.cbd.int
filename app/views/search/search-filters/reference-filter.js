@@ -1,5 +1,5 @@
-define(['app',
-'text!views/search/search-filters/reference-filter.html'], function(app, template) {
+import app from 'app';
+import template from 'text!./reference-filter.html';
 
     app.directive('referenceFilter', function($timeout) {
         return {
@@ -22,4 +22,4 @@ define(['app',
             }//link
         };
     });
-});
+

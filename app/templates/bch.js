@@ -1,10 +1,17 @@
-define(['app', 'angular', 'text!./bch-footer.html', './bch-header',
-        'bootstrap', 'routes/bch', 'ng-breadcrumbs','toastr','angular-animate', 
-        'components/scbd-branding/directives/header/header',
-        'components/scbd-branding/directives/footer','angular-loggly-logger',
-        'components/scbd-angularjs-services/services/locale', 'views/directives/route-loading-directive',
-        'services/local-storage-service', 'services/app-config-service'], 
-function (app, angular, footerHtml) { 'use strict';
+import app from 'app';
+import angular from 'angular';
+import footerHtml from 'text!./bch-footer.html';
+import './bch-header';
+import 'bootstrap';
+import 'routes/bch';
+import 'ng-breadcrumbs';
+import 'toastr';
+import 'angular-animate';
+import 'components/scbd-branding/main';
+import 'angular-loggly-logger';
+import 'components/scbd-angularjs-services/main';
+import 'views/directives/route-loading-directive';
+import 'services/main'; ;
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
 
@@ -45,11 +52,11 @@ function (app, angular, footerHtml) { 'use strict';
                 lang = 'zh-cn'; //moment has two ZH, use ZH-CN
             moment.locale(lang);
             if (lang != 'en')
-                require(['css!/app/css/translation.css']);
+                require(['css!/app/css/translation.css'], function(){});
             if (lang == 'ar') {
                 require(['css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-flipped.min.css',
                 'css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-rtl.min.css',
-                ]);
+                ], function(){});
             }
 
             var basePath = (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
@@ -155,4 +162,4 @@ function (app, angular, footerHtml) { 'use strict';
         })
         console.error(e);
     }
-});
+

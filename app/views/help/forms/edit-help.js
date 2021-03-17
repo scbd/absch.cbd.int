@@ -1,7 +1,14 @@
-define(['app', 'lodash', 'ngMaterial', 'ngAria', 'angular-animate', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'components/scbd-angularjs-controls/form-control-directives/all-controls',
-	'/app/js/common'], function (app, _) {
-		app.controller("editHelpController",
-			["$routeParams", "$scope", "$rootScope", "$q", '$http',  '$location', 'commonjs', '$mdDialog',
+import app from 'app';
+import _ from 'lodash';
+import 'ngMaterial';
+import 'ngAria';
+import 'angular-animate';
+import 'components/scbd-angularjs-services/main';
+import 'components/scbd-angularjs-controls/main';
+import 'services/main';
+		export { default as template } from './edit-help.html';
+
+  export default ["$routeParams", "$scope", "$rootScope", "$q", '$http',  '$location', 'commonjs', '$mdDialog',
 				function ($routeParams, $scope, $rootScope, $q, $http, $location, commonjs, $mdDialog) {
 
 					var url = '/api/v2015/help-forms';
@@ -155,5 +162,5 @@ define(['app', 'lodash', 'ngMaterial', 'ngAria', 'angular-animate', 'components/
 					}
 					$scope.loadSchemas();
 					fieldTypes();
-				}]);
-	});
+				}];
+	

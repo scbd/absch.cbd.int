@@ -1,4 +1,5 @@
-define(['app','text!./km-toggle.html'], function(app,template) {
+import app from 'app';
+import template from 'text!./km-toggle.html';
 //============================================================
 //
 //
@@ -27,5 +28,4 @@ app.directive('kmToggle', function() {
 				}]
 
 		};
-});
 });

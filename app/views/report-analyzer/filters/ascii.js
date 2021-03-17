@@ -1,4 +1,5 @@
-define(['app', 'diacritics'], function(app, diacritics) { 'use strict';
+import app from 'app';
+import diacritics from 'diacritics'; ;
 
     app.filter("ascii", [function() {
     	return function(text) {
@@ -12,4 +13,4 @@ define(['app', 'diacritics'], function(app, diacritics) { 'use strict';
             return diacritics.clean(text);
     	};
     }]);
-});
+

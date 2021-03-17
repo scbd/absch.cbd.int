@@ -1,19 +1,19 @@
-﻿define(['app', 'lodash', 'text!views/forms/view/record-loader.directive.html', 
-	'components/scbd-angularjs-services/services/main', 'ngSmoothScroll',
-	'components/scbd-angularjs-services/filters/scbd-filters',
-	'./view-history-directive',
-    'js/common',
-    'views/directives/document-metadata-directive',
-    'views/directives/party-status',
-    'views/forms/view/directives/view-record-reference.directive',
-	'services/search-service',
-	'views/directives/block-region-directive',
-	'views/directives/record-options','components/scbd-angularjs-services/services/locale',
-	'views/forms/directives/document-date', 'components/scbd-angularjs-controls/form-control-directives/km-value-ml',
-	'components/scbd-angularjs-controls/form-control-directives/km-link-list',
-	'components/scbd-angularjs-controls/form-control-directives/km-value-bool',
-	'views/forms/view/directives/view-reference-records.directive', 'views/forms/directives/compare-val'
-], function (app, _, template) {
+﻿import app from 'app';
+import _ from 'lodash';
+import template from 'text!./record-loader.directive.html';
+import 'components/scbd-angularjs-services/main';
+import 'ngSmoothScroll';
+import 'views/forms/view/view-history-directive';
+import 'services/main';
+import 'views/directives/document-metadata-directive';
+import 'views/directives/party-status';
+import 'views/forms/view/directives/view-record-reference.directive';
+import 'views/directives/block-region-directive';
+import 'views/directives/record-options';
+import 'views/forms/directives/document-date';
+import 'components/scbd-angularjs-controls/main';
+import 'views/forms/view/directives/view-reference-records.directive';
+import 'views/forms/directives/compare-val';
 
 	app.directive('recordLoader', [function () {
 		return {
@@ -273,7 +273,7 @@
 						if(!$scope.showDifferenceOn){
 							$scope.isComparing = true;							
 							$scope.showDifferenceOn = true;
-							require(['js/html-difference'], function(diffParser){
+							require(['services/html-difference'], function(diffParser){
 								htmlDiff = diffParser;
 								loadViewDirective($scope.internalDocumentInfo.type, function(directiveHtml){
 									return  { 
@@ -438,9 +438,9 @@
 					var queryString = $location.search();
 					if(queryString && queryString.print){
 						$scope.printMode = true;
-						require(['css!/app/css/print-friendly'])
+						require(['css!/app/css/print-friendly'], function(){})
 					}
 				}]
 		}
 	}]);
-});
+

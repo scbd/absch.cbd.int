@@ -1,4 +1,6 @@
-define(['app', 'lodash', './app-config-service'], function (app, _) { 'use strict';
+import app from 'app';
+import _ from 'lodash';
+import './app-config-service'; ;
 
 	app.factory('roleService',  ["$http","$location", "$rootScope", "realm",
 	 function($http,$location, $rootScope, realm) {
@@ -83,4 +85,4 @@ define(['app', 'lodash', './app-config-service'], function (app, _) { 'use stric
 		}
 
     }]);
-});
+

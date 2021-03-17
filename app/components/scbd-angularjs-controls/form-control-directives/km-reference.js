@@ -1,4 +1,9 @@
-define(['app', 'angular','lodash', 'jquery', 'text!./km-reference.html','angular-sanitize'], function(app, angular, _, $, template) { 'use strict';
+import app from 'app';
+import angular from 'angular';
+import _ from 'lodash';
+import $ from 'jquery';
+import template from 'text!./km-reference.html';
+import 'angular-sanitize'; ;
     //============================================================
     //
     //
@@ -288,4 +293,4 @@ define(['app', 'angular','lodash', 'jquery', 'text!./km-reference.html','angular
             }]
         };
     });
-});
+

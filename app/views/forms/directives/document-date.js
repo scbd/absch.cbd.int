@@ -1,4 +1,6 @@
-﻿define(['app', 'text!views/forms/directives/document-date.html', 'moment'], function (app, template, moment) {
+﻿import app from 'app';
+import template from 'text!./document-date.html';
+import moment from 'moment';
     app.directive('documentDate', function () {
         return {
             restrict: 'EAC',
@@ -21,4 +23,4 @@
             }
         }
     })
-})
+

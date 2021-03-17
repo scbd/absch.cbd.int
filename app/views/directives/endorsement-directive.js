@@ -1,5 +1,6 @@
-define(['app','text!views/directives/endorsement-directive.html', 'services/search-service', 'services/solr'
-    ], function (app, template) {
+import app from 'app';
+import template from 'text!./endorsement-directive.html';
+import 'services/main';
 	app.directive('endorsement', function($http){
 		return{
 			restrict: 'EAC',
@@ -31,4 +32,4 @@ define(['app','text!views/directives/endorsement-directive.html', 'services/sear
 		};
 
 	});
-});
+

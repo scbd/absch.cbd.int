@@ -1,5 +1,6 @@
-﻿define(['app',"text!./article-search.directive.html", 'services/articles-service'],
-function (app, template) {
+﻿import app from 'app';
+import template from "text!./article-search.directive.html";
+import 'services/main';
 
 app.directive("articleSearch", [ function () {
 
@@ -82,4 +83,4 @@ app.directive("articleSearch", [ function () {
 	};
 }]);
 
-});
+

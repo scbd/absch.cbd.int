@@ -1,4 +1,4 @@
-define(['app'], function(app) {
+import app from 'app';
   var directive = function() {
       return function($scope, $element) {
           $element.bind('focus', function() {
@@ -16,4 +16,3 @@ define(['app'], function(app) {
   };
   app.directive('expandableText', directive);
   app.directive('scbdExpandableText', directive);
-});

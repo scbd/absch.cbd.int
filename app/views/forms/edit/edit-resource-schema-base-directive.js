@@ -1,6 +1,8 @@
-define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directive.html','services/role-service',
-'./organization-selector'
-], function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./edit-resource-schema-base-directive.html';
+import 'services/main';
+import 'views/forms/edit/organization-selector';
 	app.directive('convertToNumber', function() {
 		return {
 			require: 'ngModel',
@@ -332,4 +334,4 @@ define(['app', 'lodash','text!views/forms/edit/edit-resource-schema-base-directi
 		};
 	}]);
 
-});
+

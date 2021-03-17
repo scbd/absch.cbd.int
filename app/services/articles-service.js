@@ -1,4 +1,6 @@
-define(['app', 'lodash', './app-config-service'], function(app, _) {
+import app from 'app';
+import _ from 'lodash';
+import './app-config-service';
 
     app.factory('articlesService', ['$http',
         function($http) {
@@ -66,4 +68,4 @@ define(['app', 'lodash', './app-config-service'], function(app, _) {
             }
         }
     ]);
-});
+

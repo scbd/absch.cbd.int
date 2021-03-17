@@ -1,4 +1,6 @@
-define(['app','lodash','angular'], function(app,_,angular) {
+import app from 'app';
+import _ from 'lodash';
+import angular from 'angular';
     app.directive('hoverEffect',['$timeout', function ($timeout  ) {
     return {
         scope: {
@@ -23,4 +25,4 @@ define(['app','lodash','angular'], function(app,_,angular) {
         }
     };
 }]);
-});
+

@@ -1,5 +1,8 @@
-define(['app', 'text!./text.html', 'jquery', 'angular-localizer','angular-sanitize'], function(app, template, $) {
-  'use strict';
+import app from 'app';
+import template from 'text!./text.html';
+import $ from 'jquery';
+import 'angular-sanitize';
+  ;
   app.directive('afcText', function() {
     return {
       restrict: 'EAC',
@@ -22,4 +25,4 @@ define(['app', 'text!./text.html', 'jquery', 'angular-localizer','angular-saniti
       },
     };
   });
-});
+

@@ -1,5 +1,7 @@
-define(['app', "text!views/forms/view/view-organization.directive.html", './directives/view-record-reference.directive',
-'views/directives/record-options'], function (app, template) {
+import app from 'app';
+import template from "text!./view-organization.directive.html";
+import 'views/forms/view/directives/view-record-reference.directive';
+import 'views/directives/record-options';
 
 app.directive("viewOrganization", [function () {
 	return {
@@ -20,4 +22,4 @@ app.directive("viewOrganization", [function () {
 	};
 }]);
 
-});
+

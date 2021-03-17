@@ -1,4 +1,6 @@
-﻿define(['app', 'lodash', 'text!./traits-selector.directive.html'], function (app, _, template) {
+﻿import app from 'app';
+import _ from 'lodash';
+import template from 'text!./traits-selector.directive.html';
 
     app.directive('traitsSelector', ["thesaurusService", "$q", function (thesaurusService, $q) {
         return {
@@ -164,4 +166,3 @@
         }
     }])
 
-});

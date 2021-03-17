@@ -1,13 +1,14 @@
-define(['app','lodash',
-  './view-articles',
-  'components/scbd-angularjs-services/services/locale',
-  'services/articles-service',
-  'ng-breadcrumbs',
-  'components/scbd-angularjs-controls/form-control-directives/pagination'
-], function(app, _) {
+import app from 'app';
+import _ from 'lodash';
+import 'views/forms/view/view-articles';
+import 'components/scbd-angularjs-services/main';
+import 'services/main';
+import 'ng-breadcrumbs';
+import 'components/scbd-angularjs-controls/main';
 
-  app.controller("viewArticles",
-  ["$scope","$route", "$http", "$location", "locale", '$q', 'breadcrumbs','articlesService',
+  export { default as template } from './view-articles.html';
+
+  export default ["$scope","$route", "$http", "$location", "locale", '$q', 'breadcrumbs','articlesService',
     function($scope,$route, $http,  $location, locale, $q, breadcrumbs, articlesService) {
       
       $scope.currentPage=0;
@@ -108,6 +109,6 @@ define(['app','lodash',
    
 
     }
-  ]);
+  ];
 
-});
+

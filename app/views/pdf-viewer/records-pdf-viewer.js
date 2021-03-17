@@ -1,6 +1,7 @@
-﻿define(['app', 'pdf-object', 'components/scbd-angularjs-services/services/locale'], function (app, pdfObject) {
-    app
-    .directive( 'elemReady', function( $parse ) {
+﻿import app from 'app';
+import pdfObject from 'pdf-object';
+import 'components/scbd-angularjs-services/main';
+    app.directive( 'elemReady', function( $parse ) {
         return {
             restrict: 'A',
             link: function( $scope, elem, attrs ) { 
@@ -16,7 +17,9 @@
             }
          }
      })
-    .controller("pdfViewer", ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout',
+    
+    export { default as template } from './records-pdf-viewer.html';
+export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout',
     function ($scope, $http, $q, $location, $sce, locale, $route, realm, $timeout) {
 
         $scope.pdfLocale = locale;
@@ -50,7 +53,7 @@
                     page: 1
                 },
                 forcePDFJS: true,
-                PDFJS_URL: "/app/views/pdf-viewer/pdfjs/web/viewer.html"
+                PDFJS_URL: "/app/views/pdf-viewer/pdfjs/web/viewer.b10e641f.html"
             };
             pdfObject.embed($scope.pdf.src, '#viewPdf', options)
             
@@ -80,6 +83,6 @@
                                  .replace("{{schema}}", $route.current.params.schema);
         }
         $scope.loadLangPdf(locale||'en')
-    }])
+    }];
 
-})
+

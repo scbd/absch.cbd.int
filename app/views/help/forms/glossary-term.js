@@ -1,9 +1,16 @@
-define(['angular', 'app', 'lodash', 'ngMaterial', 'ngAria', 'angular-animate',
-        '/app/js/common', 'components/scbd-angularjs-services/services/main', 'components/scbd-angularjs-services/filters/scbd-filters', 'components/scbd-angularjs-controls/form-control-directives/all-controls',],
-  function (angular, app, _) {
+import angular from 'angular';
+import app from 'app';
+import _ from 'lodash';
+import 'ngMaterial';
+import 'ngAria';
+import 'angular-animate';
+import 'services/main';
+import 'components/scbd-angularjs-services/main';
+import 'components/scbd-angularjs-controls/main';
 
-    app.controller("glossaryTermController",
-      ["$routeParams", "$scope","$rootScope", "$q", "$timeout", '$http', '$element',  '$route', 'commonjs', 'breadcrumbs', '$mdDialog',
+    export { default as template } from './glossary-term.html';
+
+  export default ["$routeParams", "$scope","$rootScope", "$q", "$timeout", '$http', '$element',  '$route', 'commonjs', 'breadcrumbs', '$mdDialog',
         function ($routeParams, $scope, $rootScope, $q, $timeout, $http, $element,  $route, commonjs, breadcrumbs, $mdDialog) {
 
           $scope.languages = ['en'];
@@ -178,5 +185,5 @@ define(['angular', 'app', 'lodash', 'ngMaterial', 'ngAria', 'angular-animate',
 
 
 
-        }]);
-  });
+        }];
+  

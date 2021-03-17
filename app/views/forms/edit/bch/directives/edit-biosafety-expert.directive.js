@@ -1,7 +1,11 @@
-define(['app', 'lodash', 'text!./edit-biosafety-expert.directive.html', 'views/forms/edit/edit', 'services/thesaurus-service',
-	'views/forms/edit/document-selector', "views/forms/view/bch/view-biosafety-expert.directive", 'services/search-service',
-	'components/scbd-angularjs-controls/form-control-directives/km-inputtext-ac.html', 'services/solr'], 
-function (app, _, template) {
+import app from 'app';
+import _ from 'lodash';
+import template from 'text!./edit-biosafety-expert.directive.html';
+import 'views/forms/edit/edit';
+import 'views/forms/edit/document-selector';
+import "views/forms/view/bch/view-biosafety-expert.directive";
+import 'components/scbd-angularjs-controls/main';
+import 'services/main';
 
 	app.directive("editBiosafetyExpert", ["locale", "$filter", "searchService", "$q", "$controller", "thesaurusService", 'solr', 'Thesaurus',
 	function(appLocale, $filter, searchService, $q, $controller, thesaurusService, solr, thesaurus) {
@@ -210,4 +214,4 @@ function (app, _, template) {
 
    }]);
 
-});
+

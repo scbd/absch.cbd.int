@@ -1,4 +1,5 @@
 'use strict'; // jshint browser: false, node: true, esnext: true
+require           = require("esm")(module)
 
 process.env.CLEARINGHOUSE = process.env.CLEARINGHOUSE || 'ABS';
 
@@ -12,10 +13,12 @@ var translation  = require('./middlewares/translation');
 let cacheControl = require('./middlewares/cache-control')
 
 // Initialize constants
-var appVersion          = process.env.TAG;
-let apiUrl              = process.env.API_URL||'https://api.cbddev.xyz';
+var appVersion          =  process.env.TAG;
+let apiUrl              =  process.env.API_URL || 'https://api.cbddev.xyz';
+let cdnUrl              = (process.env.CDN_URL || 'https://cdn.jsdelivr.net/').replace(/\/+$/, '')+'/';
     global.app          = _.extend((global.app||{}), {});
     global.app.rootPath = __dirname; //to use in subfolders
+    global.app.cdnUrl   = cdnUrl;
 
 if(!appVersion || appVersion.trim()==''){
     appVersion =  ((process.env.BRANCH||'') + '-'+ (process.env.VERSION ||''))||process.env.COMMIT;
@@ -40,17 +43,15 @@ if(process.env.COMPRESS=='true'){
     }
 }
 
-// app.use(require('./middlewares/local-minification')());
-const localTransformAndMinify = require('./middlewares/local-minification');
 // Set routes
-app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/views/countries/worldEUHigh.js', express.static(__dirname + '/app/views/countries/worldEUHigh.js', { setHeaders: cacheControl.setCustomCacheControl}) );
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
-
-app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          express.static(__dirname + '/dist/vue', { setHeaders: cacheControl.setCustomCacheControl }));
-app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          translation.renderLanguageFile, localTransformAndMinify(), express.static(__dirname + '/app', { setHeaders: cacheControl.setCustomCacheControl }));
-
-app.use('/sourceMap/app',                            express.static(__dirname + '/dist'));
-app.use('/sourceMap/app',                            express.static(__dirname + '/sourceMap/app'));
+app.use('(/en)?/app',                                express.static(`${__dirname}/dist/en/app`, { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/ar/app',                                   express.static(`${__dirname}/dist/ar/app`, { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/es/app',                                   express.static(`${__dirname}/dist/es/app`, { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/fr/app',                                   express.static(`${__dirname}/dist/fr/app`, { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/ru/app',                                   express.static(`${__dirname}/dist/ru/app`, { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/zh/app',                                   express.static(`${__dirname}/dist/zh/app`, { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          express.static(__dirname + '/app',         { setHeaders: cacheControl.setCustomCacheControl }));
 
 app.use('/cbd-forums',      express.static(__dirname + '/node_modules/@bower_components/cbd-forums', { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('/favicon.ico',     express.static(__dirname + '/favicon.ico', { setHeaders: cacheControl.setCustomCacheControl}));
@@ -80,6 +81,7 @@ app.listen(process.env.PORT || 2010, '0.0.0.0',function () {
     console.log('Server listening on ', this.address());
     console.log(`               VERSION: ${appVersion}`);
     console.log(`               API Url: ${apiUrl}`);
+    console.info(`              CDN Url: ${cdnUrl}`);
     console.log(`      Node environment: ${process.env.NODE_ENV||'-'}`);
     console.log();
 });

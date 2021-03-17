@@ -1,7 +1,10 @@
-define(['app', 'lodash', "text!views/forms/edit/abs/edit-measure-matrix-directive.html",
-'json!app-data/measure-matrix-updated-title.json', 'json!app-data/measure-matrix-other-elements.json',
-'views/directives/block-region-directive', 'components/scbd-angularjs-services/services/locale'
-], function (app, _, template, measureMatrixUpdatedTitles, elementsForOthers) {
+import app from 'app';
+import _ from 'lodash';
+import template from "text!./edit-measure-matrix-directive.html";
+import measureMatrixUpdatedTitles from 'app-data/measure-matrix-updated-title.json';
+import elementsForOthers from 'app-data/measure-matrix-other-elements.json';
+import 'views/directives/block-region-directive';
+import 'components/scbd-angularjs-services/main';
 
 
     app.directive("editMeasureMatrix", function () {
@@ -630,4 +633,4 @@ define(['app', 'lodash', "text!views/forms/edit/abs/edit-measure-matrix-directiv
             }]
         }
     });
-});
+

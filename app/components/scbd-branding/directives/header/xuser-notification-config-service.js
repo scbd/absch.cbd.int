@@ -1,5 +1,6 @@
-define(['app', 'lodash', 'moment'],
-    function (app, _, moment) {
+import app from 'app';
+import _ from 'lodash';
+import moment from 'moment';
 
         app.service("cfgUserNotification", ['$location', '$window', '$filter', function ($location, $window, $filter) {
 
@@ -132,4 +133,4 @@ define(['app', 'lodash', 'moment'],
             };
         }]);
 
-    });
+    
