@@ -778,7 +778,7 @@ import 'views/reports/matrix/data-matrix.directive';
 
                                 // If main filter has been disabled than exclude results
                                 var mainFilter = $scope.setFilters[key]
-                                if(mainFilter.disabled || mainFilter.excludeResult)
+                                if(!mainFilter || mainFilter.disabled || mainFilter.excludeResult)
                                     return;
 
                                 var subQueries = [];                            
