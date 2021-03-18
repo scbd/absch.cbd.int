@@ -368,7 +368,7 @@ import 'views/reports/matrix/data-matrix.directive';
                             .then(function(){
                                 var query =  $location.search();
                                 if(query.schema){
-                                    schemaFilters = getSearchFilters('schema')
+                                    var schemaFilters = getSearchFilters('schema')
                                     if(!_.isArray(query.schema))
                                         query.schema = [query.schema];
 

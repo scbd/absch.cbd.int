@@ -229,11 +229,7 @@ export default function bootApp(window, require, defineX) {
     defineX('trix'            , ['angular-dependencies'], ()=>{ warnImport(); });
    
     defineX('angular-joyride'            , ['angular-dependencies', 'externalCss'], ()=>{ warnImport(); });
-    defineX(''            , ['angular-dependencies'], ()=>{ warnImport(); });
-    defineX(''            , ['angular-dependencies'], ()=>{ warnImport(); });
-    defineX(''            , ['angular-dependencies'], ()=>{ warnImport(); });
-    defineX(''            , ['angular-dependencies'], ()=>{ warnImport(); }); 
-             
+                
     
     defineX('lodash',   [], ()=>window._);
     defineX('bootstrap',[],noop);
