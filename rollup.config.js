@@ -143,7 +143,7 @@ function saveHashFileNames(){
     generateBundle: async function(OutputOptions, bundle){
       const langRegex = /\/(ar|en|fr|es|ru|zh)\//;
       const hashFileName = Object.keys(bundle)[0]; 
-      const fileName     = bundle[hashFileName].facadeModuleId.replace(/\\/g,'/').replace(/.*app\//, '').replace(/\.html$/, '.html.js');
+      const fileName     = bundle[hashFileName].facadeModuleId.replace(/\\/g, '/').replace(/.*app\//, '').replace(/\.html$/, '.html.js');
       const langMatch    = OutputOptions.dir.match(langRegex); 
       let lang           = 'en'
       if(langMatch)
