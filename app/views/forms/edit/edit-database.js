@@ -1,7 +1,7 @@
 import app from 'app';
 import _ from 'lodash';
 import 'views/forms/edit/edit';
-import '.views/forms/edit/view/view-database.directive';
+import 'views/forms/view/view-database.directive';
 
   export { default as template } from './edit-database.html';
 

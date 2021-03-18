@@ -2,7 +2,7 @@ import app from 'app';
 import _ from 'lodash';
 import 'views/forms/edit/edit';
 import 'views/forms/edit/edit-resource-schema-base-directive';
-import '.views/forms/edit/view/view-resource.directive';
+import 'views/forms/view/view-resource.directive';
 
   export { default as template } from './edit-communityProtocol.html';
 
