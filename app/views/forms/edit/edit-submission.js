@@ -1,7 +1,7 @@
 ﻿import app from 'app';
 import _ from 'lodash';
 import 'views/forms/edit/edit';
-import '.views/forms/edit/view/view-submission.directive';
+import 'views/forms/view/view-submission.directive';
 import 'views/forms/edit/organization-selector';
 import 'services/main';
 
