@@ -48,7 +48,6 @@ export default ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'app
                     var userRoles = _.forEach(u.roles, function(rid){
                         var userRole = $scope.roles[rid];
                         if(_.includes(['AbsPublishingAuthorities', 'AbsPublishingAuthorities-dev', 'AbsPublishingAuthorities-trg'],userRole.code)){
-                        // if(_.contains(['AbsNationalAuthorizedUser', 'AbsNationalAuthorizedUser-dev', 'AbsNationalAuthorizedUser-trg'],userRole.code)){
                             governmentPARole = userRole;
                         }
                         return
