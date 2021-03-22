@@ -116,7 +116,7 @@ import template from 'text!./traits-selector.directive.html';
                             })
                         }
                     })
-                    traits = _.flatten(newBinding)
+                    var traits = _.flatten(newBinding)
                     if(!angular.equals(newBinding, $scope.binding)){
                         $scope.binding = newBinding;
                         ngModelController.$setViewValue($scope.binding);
