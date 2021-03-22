@@ -45,7 +45,7 @@ import 'components/scbd-angularjs-services/main';
                         queryFields += 'symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,text_EN_txt,themes_CEN_ss,thematicAreas_CEN_ss,thematicAreas_ss';
                     } else if (schema.toUpperCase() == "NOTIFICATION" || schema.toUpperCase() == "NT") {
                         queryFields += 'date_s,deadline_s,symbol_s,reference_s,sender_s,schema_CEN_s,title_EN_t,description_EN_t,recipient_ss,url_ss,text_EN_txt';
-                    } else if (_.contains(["pressrelease", "statement", "news", "new", "pr", "st", "news", "new"], schema.toLowerCase())) {
+                    } else if (_.includes(["pressrelease", "statement", "news", "new", "pr", "st", "news", "new"], schema.toLowerCase())) {
                         queryFields += 'date_s,symbol_s,schema_CEN_s,title_EN_t,description_EN_t,themes_CEN_ss,url_ss,thematicAreas_CEN_ss,text_EN_txt';
                     }
 
@@ -158,7 +158,7 @@ import 'components/scbd-angularjs-services/main';
                         return d;
 
                     var schemaCode = '';
-                    if (_.contains(["pressrelease", "statement", "news", "new", "pr", "st", "news", "new"], schema.toLowerCase()))
+                    if (_.includes(["pressrelease", "statement", "news", "new", "pr", "st", "news", "new"], schema.toLowerCase()))
                         schemaCode = "52000000cbd0180000000000";
                     else if (schema.toLowerCase() == "notification" || schema.toLowerCase() == "nt")
                         schemaCode = "52000000cbd0120000000000";
