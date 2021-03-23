@@ -53,7 +53,7 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
                 realm     : realm.value,
                 searchText: searchText
             }
-            iqueryOptions.government = $scope.document.government.identifier;
+            queryOptions.government = $scope.document.government.identifier;
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
         }
 
@@ -116,4 +116,3 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
 
         $scope.setDocument();
     }];
-
