@@ -181,10 +181,9 @@
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required name="contact" bold="true"
                                                         caption="2. Contact person">
-                                                        <div document-selector ng-model="document.contact" ng-disabled="!document.government"
-                                                            question="contact" government="document.government" schema="(contact authority focalPoint)"
-                                                            filter="true" type="radio" allow-new="true" allow-new-schema="contact">
-                                                        </div>
+                                                       <div document-selector ng-model="document.contact"
+                                                               ng-disabled="!document.government" question="contact"
+                                                               on-build-query="oncontactQuery(searchText)" filter="true" type="radio" allow-new="true" allow-new-schema="contact"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -236,13 +235,13 @@
                                                         <div km-textbox-ml rows=4 name="question4.AdditionalInfo" ng-model="document.question4.additionalInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
-    
+
+
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q4DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question4.documentReferenceIDs"
                                                             ng-disabled="!document.government" question="question4"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
+                                                             on-build-query="onRecordQuery(searchText)" filter="true">
                                                         </div>
                                                     </div>
     
@@ -269,9 +268,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q5DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question5.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question5"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
+                                                             ng-disabled="!document.government" question="question5"
+                                                             on-build-query="onRecordQuery(searchText)" filter="true">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -296,10 +294,9 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q6DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question6.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question6"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question6"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true">
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -332,10 +329,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q7DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question7.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question7"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question7"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -360,10 +355,9 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q8DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question8.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question8"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question8"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true">
+                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -389,12 +383,11 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q9DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question9.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question9"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question9"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true">
                                                     </div>
                                                 </div>
+                                            </div>
                                             </div>
     
                                             <div class="row">
@@ -408,10 +401,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q10DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question10.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question10"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question10"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true">
                                                     </div>
                                                     <div class="km-control-group" name="question10RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -452,11 +443,9 @@
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q11DocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question11.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question11"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                      <div document-selector ng-model="document.question11.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question11"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div ng-hide="document.question11.answer || document.question11.answer===undefined"
                                                         ng-class="{'confidential-text': !document.question11.answer}">
@@ -487,10 +476,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q12DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question12.documentReferenceIDs"
-                                                            ng-disabled="!document.government || !document.question11.answer"
-                                                            question="question12" government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government || !document.question11.answer" question="question12"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -512,10 +499,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q13DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question13.documentReferenceIDs"
-                                                            ng-disabled="!document.government || !document.question11.answer"
-                                                            question="question13" government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government || !document.question11.answer" question="question13"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -536,11 +521,9 @@
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q14DocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question14.documentReferenceIDs"
-                                                            ng-disabled="!document.government || !document.question11.answer"
-                                                            question="question14" government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                       <div document-selector ng-model="document.question14.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !document.question11.answer" question="question14"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -562,10 +545,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q15DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question15.documentReferenceIDs"
-                                                            ng-disabled="!document.government || !document.question11.answer"
-                                                            question="question15" government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government || !document.question11.answer" question="question15"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -598,10 +579,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q16DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question16.documentReferenceIDs"
-                                                            ng-disabled="!document.government || !document.question11.answer"
-                                                            question="question16" government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government || !document.question11.answer" question="question16"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -622,11 +601,9 @@
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q17DocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question17.documentReferenceIDs"
-                                                            ng-disabled="!document.government || !document.question11.answer"
-                                                            question="question17" government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                       <div document-selector ng-model="document.question17.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !document.question11.answer" question="question17"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -693,10 +670,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q18DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question18.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question18"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question18"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -712,10 +687,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q19DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question19.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question19"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question19"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question19RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -743,10 +716,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q20DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question20.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question20"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question20"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -766,10 +737,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q21DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question21.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question21"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question21"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -789,10 +758,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q22DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question22.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question22"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question22"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -809,10 +776,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q23DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question23.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question23"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question23"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question23RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -886,10 +851,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q24DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question24.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question24"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question24"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -928,11 +891,9 @@
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q25DocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question25.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question25"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                       <div document-selector ng-model="document.question25.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question25"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -974,11 +935,9 @@
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q26DocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question26.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question26"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                       <div document-selector ng-model="document.question26.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question26"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1045,11 +1004,9 @@
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q28DocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question28.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question28"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                       <div document-selector ng-model="document.question28.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question28"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1079,10 +1036,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q29DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question29.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question29"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question29"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1099,10 +1054,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q30DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question30.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question30"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question30"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question30RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -1137,11 +1090,9 @@
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q31DocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question31.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question31"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                       <div document-selector ng-model="document.question31.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question31"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1161,10 +1112,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q32DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question32.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question32"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question32"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1200,10 +1149,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q33DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question33.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question33"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question33"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1219,10 +1166,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q34DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question34.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question34"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question34"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
     
                                                     <div class="km-control-group" name="question34RelevantDocuments"
@@ -1256,10 +1201,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q35ResearchDocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question35.research.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question35Research"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question35Research"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
     
                                                     <div class="km-control-group" required name="question35_emergencies"
@@ -1277,10 +1220,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q35EmergenciesDocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question35.emergencies.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question35Emergencies"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question35Emergencies"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
     
                                                     <div class="km-control-group" required name="question35_access" caption="Taken into consideration the need for expeditious access to genetic resources and expeditious fair and equitable sharing of benefits arising out of the use of such genetic resources, including access to affordable treatments by those in need, especially, in developing countries as provided in Article 8(b)?">
@@ -1295,11 +1236,9 @@
                                                     </div>
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q35AccessDocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question35.access.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question35Access"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                       <div document-selector ng-model="document.question35.access.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question35Access"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
     
                                                     <div class="km-control-group" required name="question35_importance"
@@ -1319,10 +1258,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q35ImportanceDocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question35.importance.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question35Importance"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question35Importance"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
     
     
@@ -1349,10 +1286,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q36DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question36.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question36"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question36"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question36RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -1381,11 +1316,9 @@
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q37DocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question37.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question37"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                       <div document-selector ng-model="document.question37.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question37"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div ng-hide="document.question37.answer || document.question37.answer===undefined"
                                                         ng-class="{'confidential-text': !document.question37.answer}">
@@ -1419,11 +1352,9 @@
     
                                                                 <div class="km-control-group" style="margin-bottom:20px;"
                                                                     name="q38LawDocRefs" caption="Please select the relevant ABSCH records">
-                                                                    <div document-selector ng-model="document.question38.law.documentReferenceIDs"
-                                                                        ng-disabled="!document.government" question="question38Law"
-                                                                        government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                                        filter="true">
-                                                                    </div>
+                                                                  <div document-selector ng-model="document.question38.law.documentReferenceIDs"
+                                                                           ng-disabled="!document.government" question="question38Law"
+                                                                           on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                                 </div>
     
                                                                 <div class="km-control-group" ng-required="document.question38.answer"
@@ -1467,10 +1398,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q38DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question38.documentReferenceIDs"
-                                                            ng-disabled="!document.government || !Q37IsYes()" question="question38"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government || !Q37IsYes()" question="question38"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1491,11 +1420,9 @@
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q39DocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question39.documentReferenceIDs"
-                                                            ng-disabled="!document.government || !Q37IsYes()" question="question39"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                      <div document-selector ng-model="document.question39.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !Q37IsYes()" question="question39"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1516,11 +1443,9 @@
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q40DocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question40.documentReferenceIDs"
-                                                            ng-disabled="!document.government || !Q37IsYes()" question="question40"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                       <div document-selector ng-model="document.question40.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !Q37IsYes()" question="question40"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1542,10 +1467,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q41DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question41.documentReferenceIDs"
-                                                            ng-disabled="!document.government || !Q37IsYes()" question="question41"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government || !Q37IsYes()" question="question41"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1574,11 +1497,8 @@
                                                                 <div class="km-control-group" style="margin-bottom:20px;"
                                                                     name="q42DocRefsCommunity" caption="Please select the relevant ABSCH records">
                                                                     <div document-selector ng-model="document.question42.community.documentReferenceIDs"
-                                                                        ng-disabled="!document.government || !Q37IsYes()"
-                                                                        question="question42community" government="document.government"
-                                                                        schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                                        filter="true">
-                                                                    </div>
+                                                                           ng-disabled="!document.government || !Q37IsYes()" question="question42community"
+                                                                           on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                                 </div>
                                                             </div>
     
@@ -1604,11 +1524,8 @@
                                                                 <div class="km-control-group" style="margin-bottom:20px;"
                                                                     name="q42DocRefsMat" caption="Please select the relevant ABSCH records">
                                                                     <div document-selector ng-model="document.question42.mat.documentReferenceIDs"
-                                                                        ng-disabled="!document.government || !Q37IsYes()"
-                                                                        question="question42mat" government="document.government"
-                                                                        schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                                        filter="true">
-                                                                    </div>
+                                                                           ng-disabled="!document.government || !Q37IsYes()" question="question42mat"
+                                                                           on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1630,12 +1547,9 @@
     
                                                                 <div class="km-control-group" style="margin-bottom:20px;"
                                                                     name="q42DocRefsmcc" caption="Please select the relevant ABSCH records">
-                                                                    <div document-selector ng-model="document.question42.mcc.documentReferenceIDs"
-                                                                        ng-disabled="!document.government || !Q37IsYes()"
-                                                                        question="question42mcc" government="document.government"
-                                                                        schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                                        filter="true">
-                                                                    </div>
+                                                                   <div document-selector ng-model="document.question42.mcc.documentReferenceIDs"
+                                                                           ng-disabled="!document.government || !Q37IsYes()" question="question42mcc"
+                                                                           on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1661,10 +1575,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q43DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question43.documentReferenceIDs"
-                                                            ng-disabled="!document.government || !Q37IsYes()" question="question43"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government || !Q37IsYes()" question="question43"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1683,10 +1595,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q44DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question44.documentReferenceIDs"
-                                                            ng-disabled="!document.government || !Q37IsYes()" question="question44"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government || !Q37IsYes()" question="question44"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div ng-show="document.question37.answer" class="km-control-group" name="question44RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -1716,10 +1626,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q45DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question45.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question45"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question45"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1734,10 +1642,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q46DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question46.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question46"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question46"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1752,11 +1658,9 @@
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q47DocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question47.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question47"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                      <div document-selector ng-model="document.question47.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question47"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question47RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -1793,10 +1697,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q48DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question48.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question48"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question48"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1821,10 +1723,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q49DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question49.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question49"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question49"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1840,10 +1740,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q50DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question50.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question50"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question50"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question50RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -1874,10 +1772,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q51DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question51.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question51"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question51"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1897,10 +1793,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q52DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question52.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question52"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question52"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1916,10 +1810,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q53DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question53.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question53"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question53"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question53RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -1958,11 +1850,9 @@
     
                                                             <div ng-show="document.question54.measures.answer" class="km-control-group"
                                                                 style="margin-bottom:20px;" name="q54DocRefs" caption="Please select the relevant ABSCH records">
-                                                                <div document-selector ng-model="document.question54.measures.documentReferenceIDs"
-                                                                    ng-disabled="!document.government" question="question54measures"
-                                                                    government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                                    filter="true">
-                                                                </div>
+                                                               <div document-selector ng-model="document.question54.measures.documentReferenceIDs"
+                                                                       ng-disabled="!document.government" question="question54measures"
+                                                                       on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1975,10 +1865,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q54DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question54.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question54"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question54"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2008,11 +1896,9 @@
     
                                                             <div ng-show="document.question55.measures.answer" class="km-control-group"
                                                                 style="margin-bottom:20px;" name="q55DocRefs" caption="Please select the relevant ABSCH records">
-                                                                <div document-selector ng-model="document.question55.measures.documentReferenceIDs"
-                                                                    ng-disabled="!document.government" question="question55measures"
-                                                                    government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                                    filter="true">
-                                                                </div>
+                                                               <div document-selector ng-model="document.question55.measures.documentReferenceIDs"
+                                                                       ng-disabled="!document.government" question="question55measures"
+                                                                       on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                             </div>
     
                                                         </div>
@@ -2026,10 +1912,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q55DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question55.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question55"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question55"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2048,10 +1932,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q56DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question56.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question56"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question56"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2070,10 +1952,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q57DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question57.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question57"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question57"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2088,11 +1968,9 @@
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q58DocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question58.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question58"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                       <div document-selector ng-model="document.question58.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question58"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question58RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -2128,10 +2006,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q59DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question59.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question59"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question59"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2150,10 +2026,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q60DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question60.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question60"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question60"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2184,10 +2058,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q61DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question61.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question61"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question61"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2266,10 +2138,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q62DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question62.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question62"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question62"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2339,10 +2209,8 @@
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q63DocRefs"
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question63.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question63"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                               ng-disabled="!document.government" question="question63"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2357,11 +2225,9 @@
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q64DocRefs"
                                                         caption="Please select the relevant ABSCH records">
-                                                        <div document-selector ng-model="document.question64.documentReferenceIDs"
-                                                            ng-disabled="!document.government" question="question64"
-                                                            government="document.government" schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"
-                                                            filter="true">
-                                                        </div>
+                                                    <div document-selector ng-model="document.question64.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question64"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
     
                                                     <div class="km-control-group" name="question64RelevantDocuments"

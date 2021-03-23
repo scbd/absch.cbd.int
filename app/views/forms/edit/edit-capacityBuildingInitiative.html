@@ -63,11 +63,9 @@
 										<div class="row" ng-show="isBCH">
 											<div class="col-md-12">
 											  <div class="km-control-group" required name="contacts" caption="3. Contact person">
-													<div document-selector  ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
-															question="contacts"
-															schema="((schema_s:contact AND type_s:person))"
-															filter="true" skip-government="true">
-														</div>
+												<div document-selector ng-model="document.contacts" question="contacts" 
+														on-build-query="onContactQuery(searchText)" allow-new="true" filter="true"
+														allow-new-schema="contact"></div>
 												</div>
 											</div>
 										</div>
@@ -152,11 +150,13 @@
 															<div class="km-yes-no" required name="isBroaderProjectPart" ng-model="document.capacityBuildingType.isBroaderProjectPart"></div>
 														</div>
 														<div class="km-control-group" name="broaderProjects" caption="Please identify the broader project" ng-show="document.capacityBuildingType.isBroaderProjectPart">
-																
 															<div document-selector ng-model="document.capacityBuildingType.broaderProjects"
-																							question="capacityBuildingInitiative"
-																							schema="capacityBuildingInitiative" filter="true" skip-government="true"></div>
+																question="capacityBuildingInitiative"
+																on-build-query="onBuildQuery(searchText,'capacityBuildingInitiative')" filter="true">
+															</div>
 														</div>
+
+
 														<div class="km-control-group"  bold="true" required name="isStandaloneProject" caption="c. Is this a stand-alone ABS activity that is not part of a broader capacity-building project or programme? ">
 															<div class="km-yes-no" required name="isStandaloneProject" ng-model="document.capacityBuildingType.isStandaloneProject"></div>
 														</div>
@@ -254,10 +254,9 @@
 																implementation, monitoring and evaluation, including making funding available, ensuring that fiduciary standards and quality
 																assurance are applied, and preparation of the project completion reports. The implementing agency is ultimately the entity
 																responsible for the completion of the initiative and is accountable to the donor.</div>
-															
-															<div document-selector name="implementingAgencies" ng-model="document.implementingAgencies" question="implementingAgencies" schema="organization"
-																allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
-															</div>
+
+															<div document-selector name="implementingAgencies" ng-model="document.implementingAgencies" question="implementingAgencies"
+															on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
 														</div>
 													</div>
 												</div>
@@ -269,10 +268,8 @@
 															<div class="help-info">Executing agency refers to the organisation/institution directly managing the initiative, including the day-to- day planning,
 															coordination and execution of its activities, monitoring and reporting on the progress made, procuring and managing resources
 															(staff, funds, equipment, etc.), and carrying out other project management functions.</div>
-														
-															<div document-selector ng-model="document.executingAgencies" question="executingAgencies" schema="organization"
-																allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
-															</div>
+															<div document-selector ng-model="document.executingAgencies" question="executingAgencies"
+															on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
 														</div>
 													</div>
 												</div>
@@ -284,9 +281,9 @@
 															<div class="help-info">Collaborating partners refer to entities or organizations making significant financial or other contribution to the initiative and/or
 																	actively supporting or collaborating in the implementation of the initiative.
 															</div>
-															<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners" schema="organization"
-																	allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
-															</div>
+															<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners"
+															on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
+
 														</div>
 													</div>
 												</div>
@@ -294,15 +291,13 @@
 											</div>
 										</div>
 				
-				
+
 										<div class="row" ng-show="isABS">
 											<div class="col-md-12">
 												<div class="km-control-group" name="contacts" caption="8. Contact person(s)">
-													 <div document-selector ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
-														question="contacts"
-														schema="((schema_s:contact AND type_s:person))"
-														filter="true" skip-government="true">
-													</div>
+													<div document-selector ng-model="document.contacts" question="contacts"
+														 on-build-query="onContactQuery(searchText)" filter="true" allow-new="true"
+														 allow-new-schema="contact"></div>
 												</div>
 											</div>
 										</div>
@@ -397,10 +392,9 @@
 														<span ng-if="isABS">14. Core funding-source(s)</span>
 														<span ng-if="isBCH">14. Primary funding-source(s)</span>
 													</label>
-													<div document-selector ng-model="document.coreFundingSources" question="coreFundingSources" schema="organization"
-														allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
-													</div>
-													
+													<div document-selector ng-model="document.coreFundingSources" question="coreFundingSources"
+													on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
+
 												</div>
 											</div>
 										</div>
@@ -412,10 +406,9 @@
 														<span ng-if="isABS">15. Co-financing source(s)</span>
 														<span ng-if="isBCH">15.	Co-funding source(s)</span>
 													</label>
-													<div document-selector ng-model="document.coFinancingSources" question="coFinancingSources" schema="organization"
-														allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
-													</div>
-													
+													<div document-selector ng-model="document.coFinancingSources" question="coFinancingSources"
+													on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
+
 												</div>
 											</div>
 										</div>
@@ -514,6 +507,7 @@
 												</div>
 											</div>
 										</div>
+				
 				
 										<div class="row">
 											<div class="col-md-12">

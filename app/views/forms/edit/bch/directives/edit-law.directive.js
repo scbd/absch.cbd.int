@@ -6,7 +6,7 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import "views/forms/view/bch/view-biosafety-law.directive";
 
-	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter","Enumerable", function($controller, thesaurusService, $q, $filter,Enumerable) {
+	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter","Enumerable", "realm", function($controller, thesaurusService, $q, $filter,Enumerable, realm) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -107,7 +107,42 @@ import "views/forms/view/bch/view-biosafety-law.directive";
 						});
 					}
                 }
+				$scope.onBuildAmendedLawQuery = function(searchText){
+									
+                    var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['biosafetyLaw'],
+                        searchText: searchText
+                    }					
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                }
 
+				$scope.onBuildLawQuery = function(searchText){
+					if (!$scope.document || !$scope.document.government)
+       					 return;
+					
+                    var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['biosafetyLaw'],
+                        searchText: searchText
+                    }
+					queryOptions.government = $scope.document.government.identifier;
+					
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                }
+				$scope.onBuildAuthoritiesQuery = function(searchText){
+					if (!$scope.document || !$scope.document.government)
+        				return;
+					
+                    var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['authority', 'supplementaryAuthority'],
+                        searchText: searchText
+                    }
+					queryOptions.government = $scope.document.government.identifier;
+					
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                }
 
 				$scope.setDocument({});
 

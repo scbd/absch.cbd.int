@@ -7,7 +7,7 @@ import 'views/forms/edit/document-selector';
 import "views/forms/view/bch/view-dna-sequence.directive";
 import 'views/forms/directives/traits-selector.directive';
 
-	app.directive("editDnaSequence", ["$controller", "thesaurusService", function($controller, thesaurusService) {
+	app.directive("editDnaSequence", ["$controller", "thesaurusService", "realm", function($controller, thesaurusService, realm) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -58,7 +58,16 @@ import 'views/forms/directives/traits-selector.directive';
 						
 					return $scope.sanitizeDocument(document);
 				};
-
+				$scope.onBuildOrganismQuery = function(searchText){
+					
+                    var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['organism'],
+                        searchText: searchText
+                    }
+					
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                }
 				$scope.setDocument({}, true)
 				.then(function(doc){
 					

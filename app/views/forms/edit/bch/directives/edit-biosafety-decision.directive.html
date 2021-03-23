@@ -58,7 +58,7 @@
 																Please select a government.
 															</div>	
 															<div document-selector ng-model="document.amendedRecords" question="amendedRecords" allow-new="true" allow-new-schema="biosafetyDecision"
-																government="document.government" schema="(biosafetyDecision)" caption="Country's Decision or any other Communication"
+																 on-build-query="onBuildQuery(searchText, 'biosafetyDecision')"  caption="Country's Decision or any other Communication"
 																ng-disabled="!document.government.identifier"></div>			
 														</div>
 													</div>
@@ -80,7 +80,7 @@
 										<div class="col-xs-12">
 											<div  class="km-control-group" name="authorities" caption="Competent National Authority(ies) responsible for the decision or communication" required>											
 												<div document-selector required ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
-												government="document.government" query="authorityQuery" schema="(authority)" ng-disabled="waiting"></div>			
+												 query="authorityQuery" on-build-query="onBuildQuery(searchText, 'authority')" ng-disabled="waiting"></div>			
 											</div>
 										</div>
 									</div>
@@ -192,13 +192,13 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="exporters" caption="Please provide Exporter’s contact details">
 												<div document-selector required ng-model="document.exporters" question="exporters"
-												skip-government="true" schema="(contact)" allow-new="true" allow-new-schema="contact"></div>			
+												on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group"required name="importers" caption="Please provide Importer’s contact details">
 												<div document-selector required ng-model="document.importers" question="importers"
-												skip-government="true" schema="(contact)" allow-new="true" allow-new-schema="contact"></div>
+												on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 											</div>
 										</div>
 									</div>
@@ -211,7 +211,7 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="importers" required caption="Please provide Applicant’s contact details">											
 												<div document-selector ng-model="document.importers" question="importers"
-												skip-government="true" schema="(contact)" allow-new="true" allow-new-schema="contact"></div>			
+												on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 											</div>
 										</div>
 									</div>
@@ -284,19 +284,19 @@
 												<div class="col-xs-12 "ng-if="decisions.isDecisionOnLmoImport">
 													<div class="km-control-group" name="exporters" required caption="Please provide Exporter’s contact details">											
 														<div document-selector ng-model="document.exporters" question="exporters"
-														skip-government="true" schema="(contact)" allow-new="true" allow-new-schema="contact"></div>			
+														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 													</div>
 												</div>
 												<div class="col-xs-12" ng-if="decisions.isDecisionOnLmoImport">
 													<div class="km-control-group" name="importers" required caption="Please provide Importer/Applicant's contact details">											
 														<div document-selector ng-model="document.importers" question="importers"
-														skip-government="true" schema="(contact)" allow-new="true" allow-new-schema="contact"></div>			
+														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 													</div>
 												</div>
 												<div class="col-xs-12" ng-if="decisions.isDecisionOnLmoDomesticUse && !decisions.isDecisionOnLmoImport">
 													<div class="km-control-group" name="importers" required caption="Please provide Applicant’s contact details">											
 														<div document-selector ng-model="document.importers" question="importers"
-														skip-government="true" schema="(contact)" allow-new="true" allow-new-schema="contact"></div>			
+														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 													</div>
 												</div>
 											</div>
@@ -423,7 +423,7 @@
 												<div class="col-xs-12">
 													<div class="km-control-group" name="pointOfContact" caption="A point of contact for further information">
 														<div document-selector ng-model="document.pointOfContact" question="pointOfContact" allow-new="true" allow-new-schema="contact"
-															skip-government="true" schema="(contact)"></div>
+															on-build-query="onContactQuery(searchText)"></div>
 													</div>
 												</div>
 											</div>											
@@ -436,7 +436,7 @@
 														<div class="col-xs-12">														
 															<div class="km-control-group" required name="modifiedOrganisms" caption="LMO identification">
 																<div document-selector ng-model="document.modifiedOrganisms"  allow-new="true" allow-new-schema="modifiedOrganism"
-																	skip-government="true" schema="(modifiedOrganism)"></div>
+																	on-build-query="onBuildSkipGovernmentQuery(searchText, 'modifiedOrganism')"></div>
 															</div>
 														</div>
 														<div class="col-sm-12">
@@ -498,8 +498,8 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="modifiedOrganisms" caption="LMO identification"
 												ng-required="isLmoMandatory()">
-                                                <div document-selector ng-model="document.modifiedOrganisms" question="modifiedOrganisms" allow-new="true" allow-new-schema="modifiedOrganism"
-													 schema="(modifiedOrganism)" skip-government="true"></div>			
+                        <div document-selector ng-model="document.modifiedOrganisms" question="modifiedOrganisms" allow-new="true" allow-new-schema="modifiedOrganism"
+												on-build-query="onBuildSkipGovernmentQuery(searchText,'modifiedOrganism')"></div>
 											</div>
 										</div>
 									</div>
@@ -508,7 +508,7 @@
 											<div class="km-control-group" name="riskAssessments" 
 												ng-required="isRiskAssessmentMandatory()" caption="Risk assessment">	
 												<div document-selector ng-model="document.riskAssessments" question="nationalRiskAssessment" allow-new="true" allow-new-schema="nationalRiskAssessment"
-													government="document.government" schema="(nationalRiskAssessment)"></div>			
+													on-build-query="onBuildQuery(searchText,'nationalRiskAssessment')"></div>			
 											</div>
 										</div>
 									</div>

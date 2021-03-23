@@ -33,8 +33,28 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
                     .then(function(types){ return _.filter(types, function(type){return type.identifier!='B3699A74-EF2E-467A-A82F-EF2149A2EFC5'}); }) },
                 cpbThematicAreas   : function() { return thesaurusService.getDomainTerms('cbdSubjects') },
                 geographicRegions  : function() { return thesaurusService.getDomainTerms('regions', {other:true}) }
-            });           
-            
+            });
+
+
+            $scope.onBuildQuery = function(searchText){
+                var queryOptions = {
+                    realm     : realm.value,
+                    schemas	  : ['organization'],
+                    searchText: searchText
+                }
+
+                return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
+            $scope.onContactQuery = function(searchText){
+                
+                var queryOptions = {
+                    realm     : realm.value,
+                    fieldQueries: ['schema_s:contact AND type_s:person'],
+                    searchText: searchText
+                }
+                return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
+
             //==================================
             //
             //==================================

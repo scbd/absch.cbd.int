@@ -70,7 +70,7 @@
                                                     </h3></div>
                                                 <div class="km-control-group">
                                                     <div class="km-control-group" name="amendmentDescription" required caption="Provide a summary of the reason for the update of the record">
-                                                        <div km-rich-textbox ng-model="document.amendmentDescription" rows="3" placeholder="" locales="document.header.languages" />
+                                                        <div km-rich-textbox ng-model="document.amendmentDescription" rows="3" placeholder="" locales="document.header.languages"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -103,8 +103,7 @@
                                                         <div class="help-info">Sometimes a permit can be related to other previously issued permits, for instance to a permit for accessing a soil sample. Depending on the MAT, it is possible that some countries decide to issue specific permits
                                                             for subsequently identified genetic resources from the taken soil sample. For such cases, the ABS Clearing-House offers the possibility to link different IRCCs together. IRCCs linked through this mechanism
                                                             will be displayed together and thus facilitate tracking of the IRCCs. </div>
-                                                        <div document-selector ng-model="document.relatedIRCCs" question="relatedIRCCs" government="document.government" schema="absPermit" hide-self="document.header.identifier"></div>
-            
+                                                            <div document-selector on-build-query="onBuildHideSelfQuery(searchText)" ng-model="document.relatedIRCCs" question="relatedIRCCs"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,9 +115,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="absCNA" required caption="Competent national authority (CNA) responsible for issuing this permit or its equivalent">
-            
-                                                    <div document-selector ng-model="document.absCNA" question="absCNA" government="document.government" schema="authority" type="radio"></div>
-            
+                                                    <div document-selector on-build-query="onBuildQuery(searchText, 'authority')" ng-model="document.absCNA" question="absCNA" type="radio"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -133,7 +130,7 @@
                                                     <div class="km-control-group" name="title" required caption="Reference number of the permit or its equivalent">
                                                         <span class="help-info">This field will also appear as the title of this record.
                                                         </span>
-                                                        <div km-textbox-ml ng-model="document.title" rows="1" placeholder="" locales="document.header.languages" />
+                                                        <div km-textbox-ml ng-model="document.title" rows="1" placeholder="" locales="document.header.languages"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -143,7 +140,7 @@
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="referenceToNationalPermit" caption="Additional national references or identifiers">
                                                     <span class="help-info">Please provide information on any national identifiers that may aid users to search and retrieve information related to the permit or its equivalent.</span>
-                                                    <div km-rich-textbox ng-model="document.referenceToNationalPermit" rows="6" placeholder="" locales="document.header.languages" />
+                                                    <div km-rich-textbox ng-model="document.referenceToNationalPermit" rows="6" placeholder="" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -181,8 +178,8 @@
                                                         <div class="km-control-group " name="providers" required caption="The provider" style="margin-top:0;">
                                                             <span class="help-info">Please provide the name and contact details of the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
                                                             <div ng-show="!document.providersConfidential">
-                                                                <div document-selector ng-model="document.providers" question="providers" government="document.government"
-                                                                allow-new="true" allow-new-schema="contact" schema="(contact authority)"></div>
+                                                                <div document-selector on-build-query="onContactQuery(searchText)" ng-model="document.providers" question="providers"
+                                                                           allow-new="true" allow-new-schema="contact"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -234,8 +231,8 @@
                                                             <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
                                                                 <div class="help-info">Please provide the name and contact details of the person or entity to whom prior informed consent was granted. If the information is marked as confidential that person will not be able to receive the
                                                                     courtesy copy of the IRCC or the CPC. </div>
-                                                                <div document-selector ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted" 
-                                                                allow-new="true" allow-new-schema="contact" government="document.government" schema="(contact authority)"></div>
+                                                               <div document-selector on-build-query="onContactQuery(searchText)" ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted"
+                                                                     allow-new="true" allow-new-schema="contact"></div>
                                                             </div>
                                                         </div>
                                                     </div>

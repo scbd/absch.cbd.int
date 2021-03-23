@@ -181,6 +181,25 @@ import 'views/forms/edit/organization-selector';
 
 			    };
 
+				$scope.onBuildQuery = function(searchText, schema){
+					var queryOptions = {
+						realm     : realm.value,
+						schemas	  : [schema],
+						searchText: searchText
+					}
+
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
+
+				$scope.onContactQuery = function(searchText){
+					var queryOptions = {
+						realm     : realm.value,
+						fieldQueries: ['schema_s:contact AND type_s:person'],
+						searchText: searchText
+					}
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
+
 				//==================================
 				//
 				//==================================

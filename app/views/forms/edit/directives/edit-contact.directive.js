@@ -40,6 +40,18 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, thesau
             //==================================
             //
             //==================================
+            $scope.onContactQuery = function(searchText){
+                
+                var queryOptions = {
+                    fieldQueries: ['schema_s:contact AND type_s:organization'],
+                    searchText: searchText
+                }
+                if (!$scope.isNational) 
+                queryOptions.government = $scope.document.government.identifier;
+    
+                return $scope.onBuildDocumentSelectorQuery(queryOptions);
+    
+            }
             $scope.getCleanDocument = function(document) {
 
                 document = document || $scope.document;

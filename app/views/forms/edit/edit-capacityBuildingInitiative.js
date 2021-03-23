@@ -132,17 +132,26 @@ import 'services/main';
             $scope.document.duration = undefined;
     };
 
-    // $scope.$watch('document.geographicScope.scope', function(newVal){
-    //     if(!$scope.document)
-    //         return;
-    //     if($scope.isGlobalOrRegional() && $scope.isNational())
-    //         return;
-    //     if(!$scope.isGlobalOrRegional())
-    //         $scope.geographicalRegions = undefined;
-    //     if(!$scope.isNational())
-    //         $scope.geographicalCountries = undefined;
-    // })
+        $scope.onBuildQuery = function(searchText, schema){
+            var queryOptions = {
+                realm     : realm.value,
+                schemas	  : [schema],
+                searchText: searchText
+            }
 
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+        }
+
+        $scope.onContactQuery = function(searchText){
+            var queryOptions = {
+                realm     : realm.value,
+                fieldQueries: ['schema_s:contact AND type_s:person'],
+                searchText: searchText
+            }
+
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+
+        }
     //==================================
     //
     //==================================

@@ -47,6 +47,31 @@ import 'views/forms/view/abs/view-abs-procedure.directive';
             });
         };
 
+        $scope.onContactQuery = function(searchText){
+            if (!$scope.document || !$scope.document.government)
+                 return;
+            var queryOptions = {
+                schemas	  : ['authority', 'contact'],
+                realm     : realm.value,
+                searchText: searchText
+            }
+            queryOptions.government = $scope.document.government.identifier;
+
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+        }
+
+        $scope.onMeaureQuery = function(searchText){
+            if (!$scope.document || !$scope.document.government)
+             return;
+            var queryOptions = {
+                schemas	  : ['measure'],
+                realm     : realm.value,
+                searchText: searchText
+            }
+            queryOptions.government = $scope.document.government.identifier;
+
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+        }
         //==================================
         //
         //==================================

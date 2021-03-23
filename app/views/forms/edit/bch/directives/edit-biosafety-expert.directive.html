@@ -71,10 +71,10 @@
 				
 												<div class="col-xs-12">
 													<div class="km-control-group" required name="contact" caption="Contact details">
-														<div document-selector required type="radio" ng-model="document.contact" contact-type='person' allow-new="true" allow-new-schema="contact"
-															 question="contact"
-															 schema="contact"
-															 filter="true" skip-government="true">
+														<div document-selector required type="radio" ng-model="document.contact" allow-new="true" allow-new-schema="contact"
+															question="contact"
+															on-build-query="onContactQuery(searchText)"
+															filter="true">
 														</div>
 													</div>
 												</div>

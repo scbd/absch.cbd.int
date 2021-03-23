@@ -6,8 +6,8 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import "views/forms/view/bch/view-organism.directive";
 
-	app.directive("editOrganism", ["$routeParams", "$route", "Thesaurus", "$q", "$controller", "thesaurusService",
-	function($routeParams, $route, Thesaurus, $q, $controller, thesaurusService) {
+	app.directive("editOrganism", ["$routeParams", "$route", "Thesaurus", "$q", "$controller", "thesaurusService", "realm",
+	function($routeParams, $route, Thesaurus, $q, $controller, thesaurusService, realm) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -46,7 +46,15 @@ import "views/forms/view/bch/view-organism.directive";
 					domestication 	: thesaurusService.getDomainTerms('domestication'),	
 					commonUses 		: thesaurusService.getDomainTerms('OrganismCommonUses', {other:true, otherType:'lstring', multiple:true}),	
 				});
-				
+				$scope.onOrganismQuery = function(searchText){
+
+					var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['organism'],
+						searchText: searchText
+					}
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
 				//==================================
 				//
 				//==================================

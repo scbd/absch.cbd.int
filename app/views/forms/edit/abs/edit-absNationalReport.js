@@ -28,7 +28,32 @@ import 'services/main';
     });
 
 
+    $scope.onRecordQuery = function(searchText){
+        if (!$scope.document || !$scope.document.government)
+        return;
 
+      var queryOptions = {
+        schemas	  : ['absPermit', 'absCheckpoint', 'absCheckpointCommunique', 'authority', 'measure', 'database', 'focalPoint'],
+        realm     : realm.value,
+        searchText: searchText
+      }
+      queryOptions.government = $scope.document.government.identifier;
+
+      return $scope.onBuildDocumentSelectorQuery(queryOptions);
+    }
+    $scope.oncontactQuery = function(searchText){
+        if (!$scope.document || !$scope.document.government)
+        return;
+
+      var queryOptions = {
+        schemas	  : ['contact', 'authority', 'focalPoint'],
+        realm     : realm.value,
+        searchText: searchText
+      }
+      queryOptions.government = $scope.document.government.identifier;
+
+      return $scope.onBuildDocumentSelectorQuery(queryOptions);
+    }
     //==================================
     //
     //==================================
